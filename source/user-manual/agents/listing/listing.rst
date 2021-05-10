@@ -1,11 +1,11 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _restful-api-listing:
 
 Listing agents using the Wazuh API
 ----------------------------------
 
-The request :api-ref:`GET /agents <operation/api.controllers.agents_controller.get_agents>` returns the list of available agents.
+The request :api-ref:`GET /agents <operation/api.controllers.agent_controller.get_agents>` returns the list of available agents.
 
 .. code-block:: console
 

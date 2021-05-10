@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _virtual_machine:
 
@@ -9,9 +9,9 @@ Wazuh provides a pre-built virtual machine image (OVA) that you can directly imp
 
 .. note::
 
-  This VM only runs on 64-bit systems and is not recommended for use in production environments. It can be a useful tool for proofs of concept and labs. Multitier server and multi-node clusters are usually a better fit for production environments where higher performance is required.
+  This VM only runs on 64-bit systems and is not recommended for use in production environments. It is a useful tool for proof-of-concepts and labs. Multi-tier servers and multi-node clusters are generally more suitable for production environments where higher performance is required.
 
-This virtual appliance, available `here <https://packages.wazuh.com/|CURRENT_MAJOR|/vm/wazuh-|WAZUH_LATEST_OVA|_|OPEN_DISTRO_LATEST|.ova>`_, contains the following components:
+This virtual appliance, available `in this link <https://packages.wazuh.com/|CURRENT_MAJOR|/vm/wazuh-|WAZUH_LATEST_OVA|_|OPEN_DISTRO_LATEST|.ova>`_, contains the following components:
 
     - CentOS 7
     - Wazuh manager: |WAZUH_LATEST_OVA|
@@ -20,7 +20,7 @@ This virtual appliance, available `here <https://packages.wazuh.com/|CURRENT_MAJ
     - Kibana: |ELASTICSEARCH_LATEST_OVA|
     - Wazuh Kibana plugin: |WAZUH_LATEST_OVA|-|ELASTICSEARCH_LATEST_OVA|
 
-First, import the OVA in the virtualization platform and run the virtual machine. The user ``root`` password is ``wazuh`` and the username/password for the Wazuh API is ``wazuh-wui/wazuh-wui``. The `following video <https://www.youtube.com/watch?v=uijZuneDPPk>`_ explains how to import and run the virtual machine.
+First, import the OVA in the virtualization platform and run the virtual machine. The password of the user ``root`` is ``wazuh`` and the username and password for the Wazuh API are ``wazuh-wui/wazuh-wui``. The `following video <https://www.youtube.com/watch?v=uijZuneDPPk>`_ explains how to import and run the virtual machine.
 
 To access the web interface: 
 
@@ -30,20 +30,20 @@ To access the web interface:
       user: admin
       password: admin
 
-All the components included in this virtual image are configured to work out of the box without modifying any settings. Nevertheless, all the components can be fully customized. These are the configuration files locations:
+All components included in this virtual image are configured to work out-of-the-box without the need to modify any settings. However, all components can be fully customized. These are the configuration files locations:
 
   - Wazuh manager: ``/var/ossec/etc/ossec.conf``
   - Open Distro for Elasticsearch: ``/etc/elasticsearch/elasticsearch.yml``
   - Filebeat-OSS: ``/etc/filebeat/filebeat.yml``
   - Kibana: ``/etc/kibana/kibana.yml``
 
-In case of using VirtualBox, once the virtual machine is imported it may run into issues caused by time skew when VirtualBox synchronizes the time of the guest machine. To prevent this situation it is recommended to enable the ``Hardware Clock in UTC Time`` option on the ``System`` tab of the virtual machine's settings.
+In case of using VirtualBox, once the virtual machine is imported it may run into issues caused by time skew when VirtualBox synchronizes the time of the guest machine. To avoid this situation, enable the ``Hardware Clock in UTC Time`` option in the ``System`` tab of the virtual machine configuration.
 
 .. note::
-  By default the type of the network interface is bridge. The VM will try to get an IP address from the network's DHCP server. Alternatively, a static IP address can be set by configuring the proper network files on the CentOS operating system that the virtual machine is based on.
+  By default, the network interface type is bridge. The VM will attempt to obtain an IP address from the network DHCP server. Alternatively, a static IP address can be set by configuring the appropriate network files in the CentOS operating system on which the VM is based.
 
 
-Once the virtual machine is imported and running, the next step consists on :ref:`deploying the Wazuh agents <installation_agents>` on the systems to be monitored.
+Once the virtual machine is imported and running, the next step is to :ref:`deploy the Wazuh agents <installation_agents>` on the systems to be monitored.
 
 Upgrading the VM
 ----------------

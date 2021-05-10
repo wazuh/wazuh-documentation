@@ -1,9 +1,11 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _ossec-logtest:
 
 ossec-logtest
 =============
+
+.. deprecated:: 4.1.0
 
 The ossec-logtest program is a useful tool when working with Wazuh rules.  This tool allows the testing and verification of rules against provided log examples in a way that simulates the action of ossec-analysisd. This can also assist with writing and debugging custom rules and troubleshooting false positives and negatives.
 

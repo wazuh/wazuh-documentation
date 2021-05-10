@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _capabilities:
 
@@ -8,18 +8,18 @@ Capabilities
 .. meta::
   :description: Find here a deeper explanation of how each Wazuh capability works, configuration options for each one, frequently asked questions and some practical examples.
 
-In this section, you will find:
+In this section you will find:
 
-- A deeper explanation of how each capability works.
+- A detailed explanation of how each capability works.
 
-- Configuration options for specific capabilities.
+- The configuration options for specific capabilities.
 
 - Frequently asked questions.
 
 - Some practical examples.
 
 
-If you find a problem, error or if you want to ask related questions, please contact us through our `mailing list <https://groups.google.com/d/forum/wazuh>`_.
+If you find a problem, an error, or you want to ask related questions, please do not hesitate to contact us through our `mailing list <https://groups.google.com/d/forum/wazuh>`_.
 
 .. toctree::
     :maxdepth: 2
@@ -42,3 +42,4 @@ If you find a problem, error or if you want to ask related questions, please con
     osquery
     agent-key-polling
     fluent-forwarder
+    wazuh-logtest/index

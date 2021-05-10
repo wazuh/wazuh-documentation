@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _reference_ossec_localfile:
 
@@ -87,7 +87,9 @@ Below we have some Windows wildcard examples.
   * ``strftime`` format strings and wildcards cannot be used on the same entry.
 
   * On Windows systems, only character ``*`` is supported as a wildcard. For instance ``*ANY_STRING*``, will match all files that have ``ANY_STRING`` inside its name, another example is ``*.log`` this will match any log file.
-  * The maximum amount of files monitored at same time is limited to 200.
+  * The maximum amount of files monitored at same time is limited to 1000.
+
+.. _command:
 
 command
 ^^^^^^^

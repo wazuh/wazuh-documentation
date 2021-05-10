@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _wazuh_puppet_module:
 
@@ -24,14 +24,14 @@ Download and install the Wazuh module from Puppet Forge:
     Notice: Installing -- do not interrupt ...
     /etc/puppet/modules
     └─┬ wazuh-wazuh (v|WAZUH_LATEST_PUPPET|)
-      ├── puppet-nodejs (v7.0.0)
-      ├── puppet-selinux (v1.6.1)
-      ├── puppetlabs-apt (v6.3.0)
-      ├─┬ puppetlabs-concat (v5.3.0)
-      │ └── puppetlabs-translate (v1.2.0)
-      ├── puppetlabs-firewall (v1.15.1)
-      ├── puppetlabs-stdlib (v5.2.0)
-      └── stahnma-epel (v1.3.1)
+      ├── puppet-nodejs (v7.0.1)
+      ├── puppet-selinux (v3.2.0)
+      ├── puppetlabs-apt (v7.7.0)
+      ├── puppetlabs-concat (v6.3.0)
+      ├── puppetlabs-firewall (v2.7.0)
+      ├── puppetlabs-powershell (v2.3.0)
+      └── puppetlabs-stdlib (v6.5.0)
+
 
 This module installs and configures Wazuh agent and manager.
 

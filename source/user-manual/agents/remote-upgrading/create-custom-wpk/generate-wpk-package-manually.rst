@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _create-custom-wpk-manually:
 
@@ -59,7 +59,7 @@ Compile the project from the ``src`` folder:
 .. code-block:: console
 
   # cd wazuh-|WAZUH_LATEST|/src
-  # make deps
+  # make deps TARGET=agent
   # make TARGET=agent
 
 Delete the files that are no longer needed, this step can be skipped but the size of the WPK will be considerably larger:

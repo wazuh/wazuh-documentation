@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _reference_ossec_remote:
 
@@ -25,6 +25,7 @@ Options
 - `local_ip`_
 - `ipv6`_
 - `queue_size`_
+- `rids_closing_time`_
 
 connection
 ^^^^^^^^^^^
@@ -132,6 +133,18 @@ Sets the capacity of the remote daemon queue in number of agent events.
 .. note::
   The remote queue is only available for agent events, not *syslog* events. This option only works when the **connection** is set to ``secure``.
 
+rids_closing_time
+^^^^^^^^^^^^^^^^^^
+
+Sets the time to close the RIDS files for agents that don't report new events in that time interval.
+
++--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
+| **Default value**  | 5m                                                                                                                                       |
++--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
+| **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days). |
++--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
+
+
 Example of configuration
 ------------------------
 
@@ -150,4 +163,5 @@ Example of configuration
       <port>1514</port>
       <protocol>tcp</protocol>
       <queue_size>16384</queue_size>
+      <rids_closing_time>5m</rids_closing_time>
     </remote>

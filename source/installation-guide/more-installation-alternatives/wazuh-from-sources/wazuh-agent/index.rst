@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta:: :description: Wazuh agent sources installation
 
@@ -167,7 +167,7 @@ Installing Wazuh agent from sources
 
      .. code-block:: console
 
-      # make deps
+      # make deps TARGET=winagent
       # make TARGET=winagent
 
      The following output will appear at the end of the building process:
@@ -218,6 +218,10 @@ Installing Wazuh agent from sources
       .. code-block:: console
 
        $ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+      .. code-block:: console
+
+       $ brew install automake autoconf libtool
 
     2. Download and extract the latest version:
 
@@ -478,7 +482,7 @@ Installing Wazuh agent from sources
      .. code-block:: console
 
         # cd wazuh-*
-        # /usr/local/bin/gmake -C src deps RESOURCES_URL=https://packages.wazuh.com/deps/4.0/
+        # /usr/local/bin/gmake -C src deps RESOURCES_URL=https://packages.wazuh.com/deps/|WAZUH_LATEST_MINOR|/
         # /usr/local/bin/gmake -C src TARGET=agent USE_SELINUX=no DISABLE_SHARED=yes
 
     4. Run the ``install.sh`` script. This will run a wizard that will guide you through the installation process using the Wazuh sources:

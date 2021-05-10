@@ -1,7 +1,7 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. code-block:: console
 
-  # apt-get install elasticsearch=7.9.3
+  # apt-get install elasticsearch=7.10.2
 
 .. End of include file

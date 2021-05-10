@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _elastic_tuning:
 
@@ -22,46 +22,88 @@ In order to improve security, it is highly recommended to change Elasticsearch's
 
   .. group-tab:: Open Distro for Elasticsearch
 
-    All the initial users and roles for Open Distro for Elasticsearch are located in the file ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml``. We will create a backup of the security configuration and modify the resulting ``internal_users.yml`` file to avoid losing custom security configurations.  
+    The following script allows changing the password for a given user. In this example it is used the user ``admin``:
 
-    #. Make a backup of your security configuration using the ``securityadmin`` script placed at ``/usr/share/elasticsearch/plugins/opendistro_security/tools``. Replace ``<elasticsearch_ip>``  and  ``<backup-directory>``  and execute the following commands:
-
-        .. code-block:: console
-
-          # cd /usr/share/elasticsearch/plugins/opendistro_security/tools/
-          # ./securityadmin.sh -backup <backup-directory> -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key -icl -h <elasticsearch_ip>
-
+    - Download the script:
     
-    #. To generate a new password hash, Open Distro for Elasticsearch offers an utility called ``hash.sh`` located at ``/usr/share/elasticsearch/plugins/opendistro_security/tools``. Replace ``<new-password>`` with the chosen new password and generate a hash for it using the ``hash.sh`` utility:
+      .. code-block:: console
+      
+        # curl -so wazuh-passwords-tool.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/tools/wazuh-passwords-tool.sh
 
-        .. code-block:: console
+    - Run the script:
 
-          # bash /usr/share/elasticsearch/plugins/opendistro_security/tools/hash.sh -p <new-password>
+      .. code-block:: console
+      
+        # bash wazuh-passwords-tool.sh -u admin -p mypassword
 
-    
-    #. The generated hash must be placed on the hash section for the user whose password you want to change, for example ``admin``,  in ``<backup-directory>/internal_users.yml``: 
+    This is the output of the script:
 
-        .. code-block:: yaml
-          :emphasize-lines: 2
+      .. code-block:: none
+        :class: output 
 
-          admin:
-            hash: "<newly_generated_hash>"
-            reserved: true
-            backend_roles:
-            - "admin"
-            description: "Demo admin user"
+        Creating backup...
+        Backup created
+        Generating hash
+        Hash generated
+        Loading changes...
+        Done
+        Password changed. Remember to update the password in /etc/filebeat/filebeat.yml and /etc/kibana/kibana.yml if necessary and restart the services.
 
 
-    #. In order to load the changes made, it is necessary to execute the ``securityadmin`` script to push the modified ``internal_users.yml`` file. Replace ``<elasticsearch_ip>`` and ``<backup-directory>`` and execute the following commands: 
+    The script allows changing the password for either a single user or all the users present on the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. All the available options to run the script are:
 
-        .. code-block:: console
+    +-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
+    | Options                     | Purpose                                                                                                                      |
+    +=============================+==============================================================================================================================+
+    | -a / --change-all           | Generates random passwords, changes all the Open Distro user passwords and prints them on screen                             |
+    +-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
+    | -p / --password <password>  | Indicates the new password, must be used with option ``-u``                                                                  |
+    +-----------------------------+------------------------------------------------------------------------------------------------------------------------------+    
+    | -u / --user <user>          | Indicates the name of the user whose password will be changed. If no password specified it will generate a random one        |
+    +-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
+    | -v / --verbose              | Shows the complete script execution output                                                                                   |
+    +-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
+    | -h / --help                 | Shows help                                                                                                                   |
+    +-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
 
-          # cd /usr/share/elasticsearch/plugins/opendistro_security/tools/
-          # ./securityadmin.sh -f <backup-directory>/internal_users.yml -t internalusers -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key -icl -h <elasticsearch_ip>
+    To generate and change passwords for all users, run the script with the ``-a`` option:
 
-    #. Remove files from your ``<backup-directory>``.
+    - Run the script:
 
-    .. note:: The password may need to be updated in ``/etc/filebeat/filebeat.yml`` and ``/etc/kibana/kibana.yml``      
+      .. code-block:: console
+      
+        # bash wazuh-passwords-tool.sh -a
+
+    This is the output of the script:
+
+      .. code-block:: none
+        :class: output 
+
+        Generating random passwords
+        Done
+        Creating backup...
+        Backup created
+        Generating hashes
+        Hashes generated
+        Loading changes...
+        Done
+
+        The password for admin is Re6dEMVUcB_c6rEDf_C_nkBCZkwFKtZL
+
+        The password for kibanaserver is 4KLxLHor69cq2i1jFXmSUjBTVjG2yhU9
+
+        The password for kibanaro is zCd-SrihVwzfRxj5qPrwlSgmZJP9RsMA
+
+        The password for logstash is OmbPImuV5fv11R6XYAG92cUjaDy9PkdH
+
+        The password for readall is F2vglVGFJHXohwqEW5G4Tfjsiz-qqkTU
+
+        The password for snapshotrestore is rd35bCchP3Uf-0w77VCEJzHF7WEP3fNw
+
+        Passwords changed. Remember to update the password in /etc/filebeat/filebeat.yml and /etc/kibana/kibana.yml if necessary and restart the services.
+  
+
+    .. note:: The password may need to be updated in both ``/etc/filebeat/filebeat.yml`` and ``/etc/kibana/kibana.yml``. After changing the configuration files, remember to restart the corresponding services.
 
   
 

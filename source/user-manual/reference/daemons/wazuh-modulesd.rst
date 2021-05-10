@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _wazuh-modulesd:
 
@@ -49,6 +49,14 @@ The wazuh-modulesd program manages the Wazuh modules described below.
 .. topic:: SCA module
 
   The :ref:`SCA module <manual_sec_config_assessment>` allows users to check the system configuration against policy files to determine vulnerabilities and misconfigurations.
+
+.. topic:: Agent upgrade module
+
+  The agent upgrade module manages, validates, executes and checks the result of all the agent upgrade requests. It uses the WPK files.
+
+.. topic:: Task manager module
+
+  The task manager module creates, updates and manages all the tasks performed on the agents.
 
 wazuh-modulesd options
 ----------------------

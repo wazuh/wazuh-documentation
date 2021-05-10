@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _reference_ossec_conf:
 
@@ -31,6 +31,8 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 | :doc:`active-response <active-response>`                            | manager, agent         |
 +---------------------------------------------------------------------+------------------------+
 | :doc:`agentless <agentless>`                                        | manager                |
++---------------------------------------------------------------------+------------------------+
+| :doc:`agent-upgrade <agent-upgrade>`                                | manager, agent         |
 +---------------------------------------------------------------------+------------------------+
 | :doc:`alerts <alerts>`                                              | manager                |
 +---------------------------------------------------------------------+------------------------+
@@ -66,6 +68,8 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +---------------------------------------------------------------------+------------------------+
 | :doc:`rootcheck <rootcheck>`                                        | manager, agent         |
 +---------------------------------------------------------------------+------------------------+
+| :doc:`rule_test <rule_test>`                                        | manager                |
++---------------------------------------------------------------------+------------------------+
 | :doc:`ruleset <ruleset>`                                            | manager                |
 +---------------------------------------------------------------------+------------------------+
 | :doc:`sca <sca>`                                                    | manager, agent         |
@@ -75,6 +79,8 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 | :doc:`syscheck <syscheck>`                                          | manager, agent         |
 +---------------------------------------------------------------------+------------------------+
 | :doc:`syslog_output <syslog-output>`                                | manager                |
++---------------------------------------------------------------------+------------------------+
+| :doc:`task-manager <task-manager>`                                  | manager                |
 +---------------------------------------------------------------------+------------------------+
 | :doc:`vulnerability-detector <vuln-detector>`                       | manager                |
 +---------------------------------------------------------------------+------------------------+
@@ -109,6 +115,7 @@ All of the above sections must be located within the top-level ``<ossec_config>`
 
    active-response
    agentless
+   agent-upgrade
    alerts
    auth
    client
@@ -126,10 +133,12 @@ All of the above sections must be located within the top-level ``<ossec_config>`
    reports
    rootcheck
    sca
+   rule_test
    ruleset
    socket
    syscheck
    syslog-output
+   task-manager
    fluent-forward
    gcp-pubsub
    wodle-openscap

@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _tools:
 
@@ -21,6 +21,10 @@ Tools
 |                                                   | keys for  agents                                                           |                             |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`ossec-logtest <ossec-logtest>`              | Allows testing and verification of rules against provided log records      | manager                     |
+|                                                   |                                                                            |                             |
+|                                                   | .. deprecated:: 4.1.0                                                      |                             |
++---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
+| :doc:`wazuh-logtest <wazuh-logtest>`              | Allows testing and verification of rules against provided log records      | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`ossec-makelists <ossec-makelists>`          | Compiles cdb databases                                                     | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
@@ -48,7 +52,7 @@ Tools
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`agent_groups <agent_groups>`                | Manages and assigns groups                                                 | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :doc:`agent_upgrade <agent_upgrade>`              | List outdated agent and upgrade them                                       | manager                     |
+| :doc:`agent_upgrade <agent_upgrade>`              | List outdated agents and upgrade them                                      | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`cluster_control <cluster_control>`          | Manages and retrieves cluster information                                  | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
@@ -66,6 +70,7 @@ Tools
     manage_agents
     ossec-control
     ossec-logtest
+    wazuh-logtest
     ossec-makelists
     rootcheck_control
     syscheck_control

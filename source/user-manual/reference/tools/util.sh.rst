@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _util.sh:
 
@@ -11,7 +11,7 @@ A `blogpost <http://dcid.me/blog/2011/10/3woo-alerting-on-dns-ip-address-changes
 
 
 +-----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
-| **addfile <filename> [<format>]** | Add a log file to be monitored by :doc:`ossec-logtest <ossec-logtest>`                                                            |
+| **addfile <filename> [<format>]** | Add a log file to be monitored by :ref:`ossec-logcollector <ossec-logcollector>`                                                  |
 |                                   |                                                                                                                                   |
 |                                   | A local file will be added to the :ref:`ossec.conf <reference_ossec_conf>`                                                        |
 +-----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------+

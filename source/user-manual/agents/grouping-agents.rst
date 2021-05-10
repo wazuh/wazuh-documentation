@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _grouping-agents:
 
@@ -30,7 +30,7 @@ Below are the steps to assign agents to a group with a specific configuration:
 
       # /var/ossec/bin/agent_groups -a -i 002 -g dbms
 
-   Using the **Wazuh API** endpoint :api-ref:`PUT /agents/{agent_id}/group/{group_id} <operation/api.controllers.agents_controller.put_agent_single_group>`:
+   Using the **Wazuh API** endpoint :api-ref:`PUT /agents/{agent_id}/group/{group_id} <operation/api.controllers.agent_controller.put_agent_single_group>`:
 
    .. code-block:: console
 
@@ -68,7 +68,7 @@ Below are the steps to assign agents to a group with a specific configuration:
           ID: 005  Name: agent-dbms-a2.
           ID: 006  Name: agent-dbms-a3.
 
-   Using the **Wazuh API** endpoint :api-ref:`GET /groups/{group_id}/agents <operation/api.controllers.agents_controller.get_agents_in_group>`:
+   Using the **Wazuh API** endpoint :api-ref:`GET /groups/{group_id}/agents <operation/api.controllers.agent_controller.get_agents_in_group>`:
 
    .. code-block:: console
 
@@ -127,7 +127,7 @@ Assigning multiple groups to an agent
 
 Setting multiple groups to an agent is simple, there are three different ways to assign an agent to one or more groups: Registration, CLI and API.
 
-In this example, the agent 001 has been added to `webserver` and `apache` groups. First of all, using the **Wazuh API** endpoint :api-ref:`PUT /agents/{agent_id}/group/{group_id} <operation/api.controllers.agents_controller.put_agent_single_group>`:
+In this example, the agent 001 has been added to `webserver` and `apache` groups. First of all, using the **Wazuh API** endpoint :api-ref:`PUT /agents/{agent_id}/group/{group_id} <operation/api.controllers.agent_controller.put_agent_single_group>`:
 
     .. code-block:: console
 
@@ -165,7 +165,7 @@ In this example, the agent 001 has been added to `webserver` and `apache` groups
             "error": 0,
         }
 
-After that, we can ask about groups which an agent belongs using the **Wazuh API** endpoint :api-ref:`GET /agents <operation/api.controllers.agents_controller.get_agents>`:
+After that, we can ask about groups which an agent belongs using the **Wazuh API** endpoint :api-ref:`GET /agents <operation/api.controllers.agent_controller.get_agents>`:
 
     .. code-block:: console
 
@@ -304,7 +304,7 @@ It is also possible to switch between groups overwriting the existing assignment
 
 The ``-f`` parameter resets groups assigned to the agent and forces it to only belong to the new group.
 
-Finally, to check the synchronization status of the group configuration for a single agent, both following methods are available, **agent_groups** and **Wazuh API** endpoint :api-ref:`GET /agents/{agent_id}/group/is_sync <operation/api.controllers.agents_controller.get_sync_agent>`:
+Finally, to check the synchronization status of the group configuration for a single agent, both following methods are available, **agent_groups** and **Wazuh API** endpoint :api-ref:`GET /agents/{agent_id}/group/is_sync <operation/api.controllers.agent_controller.get_sync_agent>`:
 
     .. code-block:: console
 

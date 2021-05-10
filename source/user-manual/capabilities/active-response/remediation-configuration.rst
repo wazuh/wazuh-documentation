@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _remediation-examples:
 
@@ -92,7 +92,7 @@ In this example, the ``firewall-drop`` command is configured to use the ``firewa
 Command::
 
   <command>
-    <name>firewall-drop</command>
+    <name>firewall-drop</name>
     <executable>firewall-drop.sh</executable>
     <expect>srcip</expect>
   </command>

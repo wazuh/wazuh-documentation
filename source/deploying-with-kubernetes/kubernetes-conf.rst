@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _kubernetes_conf:
 
@@ -49,7 +49,7 @@ This pod contains the master node of the Wazuh cluster. The master node centrali
 +-------------------------------+-------------+
 | Image                         | Controller  |
 +===============================+=============+
-| wazuh/wazuh-odfe:|WAZUH_LATEST_KUBERNETES|_|OPENDISTRO_LATEST_KUBERNETES| | StatefulSet |
+| wazuh/wazuh-odfe:|WAZUH_LATEST_KUBERNETES|        | StatefulSet |
 +-------------------------------+-------------+
 
 **Wazuh worker 0 / 1**
@@ -59,7 +59,7 @@ These pods contain a worker node of the Wazuh cluster. They will receive the age
 +-------------------------------+-------------+
 | Image                         | Controller  |
 +===============================+=============+
-| wazuh/wazuh-odfe:|WAZUH_LATEST_KUBERNETES|_|OPENDISTRO_LATEST_KUBERNETES| | StatefulSet |
+| wazuh/wazuh-odfe:|WAZUH_LATEST_KUBERNETES|        | StatefulSet |
 +-------------------------------+-------------+
 
 **Elasticsearch**
@@ -79,7 +79,7 @@ Kibana pod, the frontend for Elasticsearch, it also includes the Wazuh app.
 +--------------------------------------+-------------+
 | Image                                | Controller  |
 +======================================+=============+
-| wazuh/wazuh-kibana-odfe:|WAZUH_LATEST_KUBERNETES|_|OPENDISTRO_LATEST_KUBERNETES| | Deployment  |
+| wazuh/wazuh-kibana-odfe:|WAZUH_LATEST_KUBERNETES|        | Deployment  |
 +--------------------------------------+-------------+
 
 Services
@@ -117,7 +117,7 @@ Deploy
 1. Deploy Kubernetes
 
     Follow the `Official guide <https://kubernetes.io/docs/tutorials/kubernetes-basics/create-cluster/cluster-intro/>`_ to deploy a Kubernetes Cluster.
-    This repository focuses on `AWS <https://aws.amazon.com/es/>`_ but it should be easy to adapt it to another Cloud provider. In case you are using AWS, we recommend `EKS <https://docs.aws.amazon.com/en_us/eks/latest/userguide/getting-started.html>`_.
+    Our Kubernetes repository focuses on `AWS <https://aws.amazon.com/es/>`_ but it should be easy to adapt it to another Cloud provider. In case you are using AWS, we recommend `EKS <https://docs.aws.amazon.com/en_us/eks/latest/userguide/getting-started.html>`_.
 
 2. Create domains to access the services
 
@@ -136,7 +136,7 @@ Deploy
 
     .. code-block:: console
 
-        $ git clone https://github.com/wazuh/wazuh-kubernetes.git
+        $ git clone https://github.com/wazuh/wazuh-kubernetes.git -b v|WAZUH_LATEST_KUBERNETES| --depth=1
         $ cd wazuh-kubernetes
 
     3.1. Setup SSL certificates
@@ -172,11 +172,15 @@ Deploy
 
     3.2. Apply all manifests using kustomize
 
-        By using the kustomization.yml we can now deploy the whole cluster in a single command.
+        We are using the overlay feature of `Kustomize <https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization/>`_ to create two variants: ``eks`` and ``local-env``, in this guide we're using ``eks``. (For a deployment on a local environment check the guide :ref:`Deployment on local environment <kubernetes_local_env>`)
+
+        You can adjust resources for the cluster on ``envs/eks/``, you can tune cpu, memory as well as storage for persistent volumes of each of the cluster objects.
+
+        By using the kustomization file on the ``eks`` variant we can now deploy the whole cluster with a single command:
 
         .. code-block:: console
 
-            $ kubectl apply -k .
+            $ kubectl apply -k envs/eks/
 
 
 Verifying the deployment

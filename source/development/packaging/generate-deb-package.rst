@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _create-deb:
 
@@ -32,18 +32,19 @@ Execute the ``generate_debian_package.sh`` script, with the different options yo
 
   Usage: ./generate_debian_package.sh [OPTIONS]
   
-      -b, --branch <branch>     [Required] Select Git branch []. By default: master.
-      -t, --target <target>     [Required] Target package to build: manager, api or agent.
-      -a, --architecture <arch> [Optional] Target architecture of the package [amd64/i386/ppc64le/arm64/armhf].
-      -j, --jobs <number>       [Optional] Change number of parallel jobs when compiling the manager or agent. By default: 2.
-      -r, --revision <rev>      [Optional] Package revision. By default: 1.
-      -s, --store <path>        [Optional] Set the destination path of package. By default, an output folder will be created.
-      -p, --path <path>         [Optional] Installation path for the package. By default: /var/ossec.
-      -d, --debug               [Optional] Build the binaries with debug symbols. By default: no.
-      -c, --checksum <path>     [Optional] Generate checksum on the desired path (by default, if no path is specified it will be generated on the same directory than the package).
-      --dont-build-docker   [Optional] Locally built docker image will be used instead of generating a new one.
-      --sources <path>          [Optional] Absolute path containing wazuh source code. This option will use local source code instead of downloading it from GitHub.
-      --dev                     [Optional] Use the SPECS files stored in the host instead of downloading them from GitHub.
+      -b, --branch <branch>      [Required] Select Git branch []. By default: master.
+      -t, --target <target>      [Required] Target package to build: manager or agent.
+      -a, --architecture <arch>  [Optional] Target architecture of the package [amd64/i386/ppc64le/arm64/armhf].
+      -j, --jobs <number>        [Optional] Change number of parallel jobs when compiling the manager or agent. By default: 2.
+      -r, --revision <rev>       [Optional] Package revision. By default: 1.
+      -s, --store <path>         [Optional] Set the destination path of package. By default, an output folder will be created.
+      -p, --path <path>          [Optional] Installation path for the package. By default: /var/ossec.
+      -d, --debug                [Optional] Build the binaries with debug symbols. By default: no.
+      -c, --checksum <path>      [Optional] Generate checksum on the desired path (by default, if no path is specified it will be generated on the same directory than the package).
+      --dont-build-docker        [Optional] Locally built docker image will be used instead of generating a new one.
+      --sources <path>           [Optional] Absolute path containing Wazuh source code. This option will use local source code instead of downloading it from GitHub.
+      --packages-branch <branch> [Optional] Select Git branch or tag from wazuh-packages repository. e.g master.
+      --dev                      [Optional] Use the SPECS files stored in the host instead of downloading them from GitHub.
       -h, --help                Show this help.
 
 Below, you will find some examples of how to build a DEB package.

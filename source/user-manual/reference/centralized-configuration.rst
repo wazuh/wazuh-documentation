@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _reference_agent_conf:
 
@@ -188,13 +188,13 @@ The following is an example of how a centralized configuration can be done.
 
 3. Push the configuration to the agents:
 
-    With every agent keepalive (10 seconds default), the manager looks to see if a new version of ``agent.conf`` is available. When a new version is available, it automatically pulls the new file. However, the new ``agent.conf`` is not used by the agent until the next time the agent is restarted, as in step 5.
+    With every agent keepalive (10 seconds default), the agent sends to the manager the checksum of its merge.md file and the manager compares it with the current one. If the received checksum differs from the available one, the Wazuh manager pushes the new file to the agent. The agent will start using the new configuration after being restarted.
 
     .. note:: Restarting the manager will make the new ``agent.conf`` file available to the agents more quickly.
 
 4. Confirm that the agent received the configuration:
 
-    The ``agent_groups`` tool or the Wazuh API endpoint :api-ref:`GET /agents/{agent_id}/group/is_sync <operation/api.controllers.agents_controller.get_sync_agent>` can show whether the group is synchronized in the agent:
+    The ``agent_groups`` tool or the Wazuh API endpoint :api-ref:`GET /agents/{agent_id}/group/is_sync <operation/api.controllers.agent_controller.get_sync_agent>` can show whether the group is synchronized in the agent:
 
     .. code-block:: console
 

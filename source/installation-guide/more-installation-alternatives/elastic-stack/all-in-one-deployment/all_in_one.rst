@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta:: :description: Learn how to install Wazuh and Elastic Stack on a single host
 
@@ -87,7 +87,7 @@ Certificates creation and deployment
 
     .. code-block:: console
 
-        # curl -so /usr/share/elasticsearch/instances.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/instances_aio.yml
+        # curl -so /usr/share/elasticsearch/instances.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/|WAZUH_LATEST_MINOR|/resources/elastic-stack/instances_aio.yml
     
     
     In the following steps, a file that contains a folder named after the instance defined here will be created. This folder will contain the certificates and the keys necessary to communicate with the Elasticsearch node using SSL.
@@ -134,23 +134,25 @@ This command should have an output like this:
 .. code-block:: console
   :class: output
 
-  # {
+  {
     "name" : "elasticsearch",
     "cluster_name" : "elasticsearch",
-    "cluster_uuid" : "J4wjlf1USzKDMRmxnliFPw",
+    "cluster_uuid" : "LTTJx4wGTmONK4pkD0IclA",
     "version" : {
-      "number" : "7.8.0",
+    "number" : "7.10.0",
       "build_flavor" : "default",
       "build_type" : "rpm",
-      "build_hash" : "757314695644ea9a1dc2fecd26d1a43856725e65",
-      "build_date" : "2020-06-14T19:35:50.234439Z",
+      "build_hash" : "51e9d6f22758d0374a0f3f5c6e8f3a7997850f96",
+      "build_date" : "2020-11-09T21:30:33.964949Z",
       "build_snapshot" : false,
-      "lucene_version" : "8.5.1",
+      "lucene_version" : "8.7.0",
       "minimum_wire_compatibility_version" : "6.8.0",
       "minimum_index_compatibility_version" : "6.0.0-beta1"
     },
     "tagline" : "You Know, for Search"
   }
+
+
 
 .. _basic_all_in_one_wazuh:
 
@@ -263,13 +265,13 @@ Filebeat installation and configuration
 
     .. code-block:: console
 
-      # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/filebeat/7.x/filebeat_all_in_one.yml
+      # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/|WAZUH_LATEST_MINOR|/resources/elastic-stack/filebeat/7.x/filebeat_all_in_one.yml
 
 #. Download the alerts template for Elasticsearch:
 
     .. code-block:: console
 
-      # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/4.0/extensions/elasticsearch/7.x/wazuh-template.json
+      # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/|WAZUH_LATEST_MINOR|/extensions/elasticsearch/7.x/wazuh-template.json
       # chmod go+r /etc/filebeat/wazuh-template.json
 
 #. Download the Wazuh module for Filebeat:
@@ -320,7 +322,7 @@ An example response should look as follows:
       TLS version: TLSv1.3
       dial up... OK
     talk to server... OK
-    version: 7.8.0
+    version: 7.10.0
    
 
 
@@ -360,19 +362,19 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
     .. include:: ../../../../_templates/installations/basic/elastic/common/configure_kibana_all_in_one.rst
 
-#. Update the ``optimize`` and ``plugins`` directories permissions:
+#. Create the ``/usr/share/kibana/data`` directory:
 
     .. code-block:: console
     
-      # chown -R kibana:kibana /usr/share/kibana/optimize
-      # chown -R kibana:kibana /usr/share/kibana/plugins
+      # mkdir /usr/share/kibana/data
+      # chown -R kibana:kibana /usr/share/kibana
 
 #. Install the Wazuh Kibana plugin. The installation of the plugin must be done from the Kibana home directory as follows:
 
     .. code-block:: console
 
         # cd /usr/share/kibana
-        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.3_7.9.3-1.zip
+        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.1.5_7.10.2-1.zip
 
 #. Link Kibana's socket to privileged port 443:
 

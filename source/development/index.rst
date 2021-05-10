@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _development:
 
@@ -20,3 +20,4 @@ This section contains technical documentation for developers.
         makefile
         wazuh-cluster
         packaging/index
+        wazuh-logtest

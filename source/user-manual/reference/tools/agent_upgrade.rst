@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _agent_upgrade:
 
@@ -11,14 +11,14 @@ The agent_upgrade program allows you to list outdated agents and upgrade them.
 
 .. note:: In case of having a multi-node Wazuh cluster, agent_upgrade must be executed on the node where the agent is connected.
 
+.. note:: Since v4.1.0, the upgrade procedure is performed by the :ref:`Agent upgrade module<agent-upgrade-module>` and the agent_upgrade script can be executed on any node.
+
 +--------------------------------------------+---------------------------------------------------------+
 | ``-h, --help``                             | Display the help message.                               |
 +--------------------------------------------+---------------------------------------------------------+
 | ``-l, --list_outdated``                    | Generates a list with all outdated agents.              |
 +--------------------------------------------+---------------------------------------------------------+
-| ``-a AGENT_ID, --agent AGENT_ID``          | Agent ID to upgrade.                                    |
-+--------------------------------------------+---------------------------------------------------------+
-| ``-d, --debug``                            | Debug mode.                                             |
+| ``-a AGENT_IDs, --agents AGENT_IDs``       | Agent IDs to upgrade.                                   |
 +--------------------------------------------+---------------------------------------------------------+
 | ``-F, --force``                            | Allows reinstall same version and downgrade version.    |
 +--------------------------------------------+---------------------------------------------------------+
@@ -32,10 +32,6 @@ The agent_upgrade program allows you to list outdated agents and upgrade them.
 +--------------------------------------------+---------------------------------------------------------+
 | ``-x EXECUTE, --execute EXECUTE``          | Executable filename in the WPK custom file.             |
 |                                            | By default it will try to launch upgrade.sh.            |
-+--------------------------------------------+---------------------------------------------------------+
-| ``-t TIMEOUT, --timeout TIMEOUT``          | Timeout where the agent cannot restart while updating.  |
-+--------------------------------------------+---------------------------------------------------------+
-| ``-c CHUNK_SIZE, --chunk_size CHUNK_SIZE`` | Chunk size sending WPK file. Allowed values: [1 - 64000]|
 +--------------------------------------------+---------------------------------------------------------+
 
 .. note:: By default, the timeout will be the maximum allowed by the agent with the ``execd.max_restart_lock`` option in :doc:`internal_options.conf<../internal-options>`.
@@ -53,9 +49,9 @@ Examples
     :class: output
 
     ID    Name                               Version
-    002   VM_Debian9                         Wazuh v3.0.0
-    003   VM_Debian8                         Wazuh v3.0.0
-    009   VM_WinServ2016                     Wazuh v3.0.0
+    002   VM_Debian9                         Wazuh v3.13.2
+    003   VM_Debian8                         Wazuh v3.13.2
+    009   VM_WinServ2016                     Wazuh v3.10.1
 
     Total outdated agents: 3
 
@@ -69,42 +65,25 @@ Examples
 .. code-block:: none
     :class: output
 
-    Sending WPK: [=========================] 100%
-    Upgrade procedure started... Please wait.
-    Agent upgraded: Wazuh v3.0.0 -> Wazuh v3.1.0
+    Upgrading...
+
+    Upgraded agents:
+        Agent 002 upgraded: Wazuh v3.13.2 -> 4.0.0
 
 
 * Downgrade agent using a custom repository:
 
 .. code-block:: console
 
-    # agent_upgrade -a 002 -dF -v v3.0.0 -r http://mycompany.wpkrepo.com/ -t 500
+    # agent_upgrade -a 002 -dF -v v4.0.0 -r http://mycompany.wpkrepo.com/
 
 .. code-block:: none
     :class: output
 
-    Manager version: v3.1.0
-    Agent version: v3.1.0
-    Agent new version: v3.0.0
-    Downloading WPK file from: http://mycompany.wpkrepo.com/debian/9/x86_64/wazuh_agent_v3.0.0_debian_9_x86_64.wpk
-    WPK file downloaded: /var/ossec/var/upgrade/wazuh_agent_v3.0.0_debian_9_x86_64.wpk - SHA1SUM: d6f6855b65839d8ce75cc6977ab8b492174699f6
-    Upgrade PKG: wazuh_agent_v3.0.0_debian_9_x86_64.wpk (4151 KB)
-    MSG SENT: 002 com open wb wazuh_agent_v3.0.0_debian_9_x86_64.wpk
-    RESPONSE: ok
-    MSG SENT: 002 com lock_restart 500
-    RESPONSE: ok
-    Sending: /var/ossec/var/upgrade/wazuh_agent_v3.0.0_debian_9_x86_64.wpk
-    MSG SENT: 002 com close wazuh_agent_v3.0.0_debian_9_x86_64.wpk
-    RESPONSE: ok
-    MSG SENT: 002 com sha1 wazuh_agent_v3.0.0_debian_9_x86_64.wpk
-    RESPONSE: ok d6f6855b65839d8ce75cc6977ab8b492174699f6
-    WPK file sent
-    MSG SENT: 002 com upgrade wazuh_agent_v3.0.0_debian_9_x86_64.wpk upgrade.sh
-    RESPONSE: ok 0
-    Upgrade procedure started
-    MSG SENT: 002 com upgrade_result
-    RESPONSE: ok 0
-    Agent upgraded successfully
+    Upgrading...
+
+    Upgraded agents:
+        Agent 002 upgraded: Wazuh v3.13.2 -> 4.0.0
 
 
 * Install custom WPK file:
@@ -116,23 +95,10 @@ Examples
 .. code-block:: none
     :class: output
 
-    Custom WPK file: upgrade_openscap_debian.wpk (852 KB)
-    MSG SENT: 002 com open w upgrade_openscap_debian.wpk
-    RESPONSE: ok
-    MSG SENT: 002 com lock_restart -1
-    RESPONSE: ok
-    FILE SHA1: b47bb9807a1bb4ffea8d0528c81ff8fa64fa6355
-    MSG SENT: 002 com close upgrade_openscap_debian.wpk
-    RESPONSE: ok
-    MSG SENT: 002 com sha1 upgrade_openscap_debian.wpk
-    RESPONSE: ok b47bb9807a1bb4ffea8d0528c81ff8fa64fa6355
-    WPK file sent
-    MSG SENT: 002 com upgrade upgrade_openscap_debian.wpk install.sh
-    RESPONSE: ok 0
-    Installation started
-    MSG SENT: 002 com upgrade_result
-    RESPONSE: ok 0
-    Agent upgraded successfully
+    Upgrading...
+
+    Upgraded agents:
+        Agent 002 upgraded: Wazuh v3.13.2 -> 4.0.0
 
 
 .. note:: When the agent finishes updating, it is automatically restarted to apply the new configuration.

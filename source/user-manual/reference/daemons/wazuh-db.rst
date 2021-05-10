@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _wazuh-db:
 
@@ -29,12 +29,20 @@ wazuh-db options
 Tables available for wazuh-db
 =============================
 
+Agent tables
+------------
+
 - `fim_entry`_
 - `sync_info`_
 - `scan_info`_
 - `metadata`_
 - `Syscollector tables`_
 - `CIS-CAT table`_
+
+Task tables
+-----------
+- `tasks`_
+
 
 fim_entry
 ---------
@@ -220,3 +228,48 @@ Results of a CIS-CAT scan of an agent
 +-----------------+------------------------------------+---------------------------------------------------------------+
 | **score**       | Final score                        | 53%                                                           |
 +-----------------+------------------------------------+---------------------------------------------------------------+
+
+
+tasks
+-----
+
+Tasks executed on the agents
+
++-----------------------+------------------------------------+---------------------------------------------------------------+
+| Field                 | Description                        | Example                                                       |
++=======================+====================================+===============================================================+
+| **task_id**           | Task unique identifier             | 14                                                            |
++-----------------------+------------------------------------+---------------------------------------------------------------+
+| **agent_id**          | Agent identifier                   | 5                                                             |
++-----------------------+------------------------------------+---------------------------------------------------------------+
+| **node**              | Node that executed the task        | node01                                                        |
++-----------------------+------------------------------------+---------------------------------------------------------------+
+| **module**            | Module that requested the task     | upgrade_module                                                |
++-----------------------+------------------------------------+---------------------------------------------------------------+
+| **command**           | Command executed                   | upgrade                                                       |
++-----------------------+------------------------------------+---------------------------------------------------------------+
+| **create_time**       | Timestamp of the task creation     | 1599147413                                                    |
++-----------------------+------------------------------------+---------------------------------------------------------------+
+| **last_update_time**  | Timestamp of the last change       | 1599147657                                                    |
++-----------------------+------------------------------------+---------------------------------------------------------------+
+| **status**            | Current status of the task         | Failed                                                        |
++-----------------------+------------------------------------+---------------------------------------------------------------+
+| **error_message**     | Optional when the task failed      | Upgrade procedure exited with error code                      |
++-----------------------+------------------------------------+---------------------------------------------------------------+
+
+
+The possible statuses of a task are the following:
+
+- **Pending**: The task was created but it is not running yet.
+
+- **In progress**: The task is running.
+
+- **Done**: The execution of the task finished successfully.
+
+- **Failed**: The execution of the task finished with error. It should have an error message with more information.
+
+- **Cancelled**: The task was canceled and will not run.
+
+- **Timeout**: The task ran for a long period of time (configurable) and no final result was obtained.
+
+- **Legacy**: The result of the task cannot be known and must be checked manually.

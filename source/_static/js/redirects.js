@@ -34,11 +34,36 @@ removedUrls['x.y'] = [
 ];
 */
 
+/* *** RELEASE 4.1 ****/
+
+/* Pages added in 4.1 */
+
+newUrls['4.1'] = [
+  '/release-notes/release_4_1_5.html',
+  '/release-notes/release_4_1_4.html',
+  '/release-notes/release_4_1_3.html',
+  '/release-notes/release_4_1_2.html',
+  '/release-notes/release_4_1_1.html',
+  '/release-notes/release_4_1_0.html',
+  '/user-manual/reference/ossec-conf/agent-upgrade.html',
+  '/user-manual/reference/ossec-conf/task-manager.html',
+  '/user-manual/agents/remote-upgrading/agent-upgrade-module.html',
+  '/user-manual/reference/tools/wazuh-logtest.html',
+  '/user-manual/reference/ossec-conf/rule_test.html',
+  '/development/wazuh-logtest.html',
+  '/user-manual/capabilities/wazuh-logtest/index.html',
+  '/user-manual/capabilities/wazuh-logtest/how-it-works.html',
+  '/user-manual/capabilities/wazuh-logtest/logtest-configuration.html',
+  '/user-manual/capabilities/wazuh-logtest/logtest-faq.html',
+  '/user-manual/ruleset/ruleset-xml-syntax/pcre2.html'
+];
+
 /* *** RELEASE 4.0 ****/
 
 /* Pages added in 4.0 */
 
 newUrls['4.0'] = [
+  '/release-notes/release_4_0_4.html',
   '/release-notes/release_4_0_3.html',
   '/release-notes/release_4_0_2.html',
   '/release-notes/release_4_0_1.html',
@@ -491,7 +516,7 @@ redirections.push(
       'target': ['3.13=>4.0', '4.0=>3.13'],
       '3.13': '/installation-guide/installing-wazuh-agent/linux/debian7-or-greater/wazuh_agent_sources_debian7_or_greater.html',
       '4.0':  '/installation-guide/more-installation-alternatives/wazuh-from-sources/wazuh-agent/index.html',
-    },                                                                                                                                                                  
+    },
     {
       'target': ['3.13=>4.0', '4.0=>3.13'],
       '3.13': '/installation-guide/installing-wazuh-agent/linux/fedora22-or-greater/index.html',
@@ -912,6 +937,11 @@ redirections.push(
       '3.13': '/upgrade-guide/upgrading-elastic-stack/index.html',
       '4.0':  '/upgrade-guide/elasticsearch-kibana-filebeat/upgrading-elastic-stack.html',
     },
+    {
+      'target': ['3.13=>4.0'],
+      '3.13': '/installation-guide/installing-wazuh-agent/linux/oracle5/wazuh_agent_package_oracle5.html',
+      '4.0':  '/installation-guide/wazuh-agent/index.html',
+    },
 ); 
 
 /* *** RELEASE 3.13 ****/
@@ -926,10 +956,11 @@ redirections.push(
     'target': ['3.12=>3.13', '3.13=>3.12'],
     '3.12': '/getting-started/use-cases.html',
     '3.13': '/getting-started/use_cases/index.html',
-  }  
+  }
 );
 
 newUrls['3.13'] = [
+  '/release-notes/release_3_13_3.html',
   '/release-notes/release_3_13_2.html',
   '/getting-started/use_cases/index.html',
   '/getting-started/components/index.html',
@@ -1118,6 +1149,16 @@ redirections.push(
       'target': ['3.11=>3.12', '3.12=>3.11'],
       '3.11': '/azure/monitoring services.html',
       '3.12': '/azure/monitoring-services.html',
+    },
+    {
+      'target': ['3.11=>3.12'],
+      '3.11': '/user-manual/capabilities/file-integrity/fim-faq.html',
+      '3.12': '/user-manual/capabilities/file-integrity/index.html',
+    },
+    {
+      'target': ['3.11=>3.12'],
+      '3.11': '/installation-guide/installing-elastic-stack/automatic_api.html',
+      '3.12': '/installation-guide/index.html',
     }
 );
 
@@ -2201,7 +2242,22 @@ redirections.push(
       'target': ['3.9=>3.8'],
       '3.8': '/user-manual/registering/use-registration-service.html#password-authorization',
       '3.9': '/user-manual/registering/password/windows-password-registration.html',
-    }
+    },
+    {
+      'target': ['3.8=>3.9'],
+      '3.8': '/installation-guide/upgrading/same_major.html',
+      '3.9': '/upgrade-guide/index.html',
+    },
+    {
+      'target': ['3.8=>3.9'],
+      '3.8': '/deploying-with-ansible/roles/wazuh-logstash.html',
+      '3.9': '/deploying-with-ansible/index.html',
+    },
+    {
+      'target': ['3.8=>3.9'],
+      '3.8': '/installation-guide/installing-elastic-stack/elastic_ssl.html',
+      '3.9': '/installation-guide/index.html',
+    },
 );
 
 /* Pages added in 3.9 */
@@ -2523,6 +2579,11 @@ redirections.push(
       'target': ['3.7=>3.8', '3.8=>3.7'],
       '3.7': '/installation-guide/optional-configurations/securing-api.html',
       '3.8': '/installation-guide/installing-wazuh-server/securing_api.html',
+    },
+    {
+      'target': ['3.7=>3.8'],
+      '3.7': '/amazon/use-cases/s3.html',
+      '3.8': '/amazon/index.html',
     }
 );
 
@@ -2778,6 +2839,11 @@ redirections.push(
       'target': ['3.4=>3.5', '3.5=>3.4'],
       '3.4': '/migrating-from-ossec/ossec-packages-manager.html',
       '3.5': '/migrating-from-ossec/ossec-server.html',
+    },
+    {
+      'target': ['3.4=>3.5'],
+      '3.4': '/user-manual/capabilities/vuls.html',
+      '3.5': '/user-manual/capabilities/vulnerability-detection/index.html ',
     }
 );
 

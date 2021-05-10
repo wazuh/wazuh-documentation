@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _api_getting_started:
 
@@ -446,7 +446,9 @@ Often when an alert fires, it is helpful to know details about the rule itself. 
                 "level": 2,
                 "status": "enabled",
                 "details": {
-                   "match": "core_dumped|failure|error|attack| bad |illegal |denied|refused|unauthorized|fatal|failed|Segmentation Fault|Corrupted"
+                   "match": { 
+                      "pattern": "core_dumped|failure|error|attack| bad |illegal |denied|refused|unauthorized|fatal|failed|Segmentation Fault|Corrupted"
+                    }
                 },
                 "pci_dss": [],
                 "gpg13": [
@@ -536,6 +538,69 @@ It can also be helpful to know which rules matching a specific criteria are avai
       },
       "message": "All selected rules were returned",
       "error": 0
+    }
+
+
+
+Testing rules and decoders
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+With the Wazuh API, it is possible to start a **wazuh-logtest** session or use an already started session to test and verify custom or default rules and decoders. With the following request, a logtest session is created and the rules and decoders that match with the given log are shown. The predecoding phase is also shown, among other information.
+
+.. code-block:: console
+
+    # curl -k -X PUT "https://localhost:55000/logtest" -H  "Authorization: Bearer $TOKEN" -H  "Content-Type: application/json" -d "{\"event\":\"Jun 29 15:54:13 focal multipathd[557]: sdb: failed to get sysfs uid: No data available\",\"log_format\":\"syslog\",\"location\":\"user->/var/log/syslog\"}"
+
+
+.. code-block:: json
+    :class: output
+
+    {
+      "error": 0,
+      "data": {
+        "token": "bc3ca27a",
+        "messages": [
+          "WARNING: (7309): 'null' is not a valid token",
+          "INFO: (7202): Session initialized with token 'bc3ca27a'"
+        ],
+        "output": {
+          "timestamp": "2020-10-15T09:40:53.630+0000",
+          "rule": {
+            "level": 0,
+            "description": "FreeIPA messages grouped",
+            "id": "82202",
+            "firedtimes": 1,
+            "mail": false,
+            "groups": [
+              "freeipa"
+            ]
+          },
+          "agent": {
+            "id": "000",
+            "name": "wazuh-master"
+          },
+          "manager": {
+            "name": "wazuh-master"
+          },
+          "id": "1602754853.1000774",
+          "cluster": {
+            "name": "wazuh",
+            "node": "master-node"
+          },
+          "full_log": "Jun 29 15:54:13 focal multipathd[557]: sdb: failed to get sysfs uid: No data available",
+          "predecoder": {
+            "program_name": "multipathd",
+            "timestamp": "Jun 29 15:54:13",
+            "hostname": "focal"
+          },
+          "decoder": {
+            "name": "freeipa"
+          },
+          "location": "user->/var/log/syslog"
+        },
+        "alert": false,
+        "codemsg": 1
+      }
     }
 
 
@@ -822,4 +887,3 @@ Adding an agent is now easier than ever. Simply send a request with the agent na
 Conclusion
 ^^^^^^^^^^
 The provided examples should help appreciate the potential of the Wazuh API. Remember to check out the :ref:`reference <api_reference>` document to discover all the available API requests.
-

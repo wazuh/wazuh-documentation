@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _compatibility_matrix:
 
@@ -6,9 +6,7 @@ Compatibility matrix
 ====================
 
 
-.. Wazuh software can be installed in many operating systems, you can check the compatibility matrix, which indicates what OS and Wazuh versions are compatible with your systems.
-
-Wazuh software can be installed in many operating systems. Moreover, there is also specific compatibility requirements between different Wazuh components. For more information, check the following compatibility matrix.
+.. Wazuh software can be installed on many operating systems. In addition, there are also specific compatibility requirements between the different components of Wazuh. For more information, check the compatibility matrix below.
 
 - `Operating system compatibility`_
 - `Components compatibility`_
@@ -103,18 +101,17 @@ In this table, you can check our supported OS list where the Wazuh agent can be 
 Components compatibility
 ------------------------
 
-When using the full stack of Wazuh software (that means, ``wazuh-manager``, ``wazuh-agent`` and ``wazuh-app``), there are different compatibility requirements in order to make everything work properly.
+When using the full stack of Wazuh software (that means, ``wazuh-manager``, ``wazuh-agent`` and ``wazuh-wui``), there are different compatibility requirements in order to make everything work properly.
 
 Manager and agents
 ^^^^^^^^^^^^^^^^^^
 
-The compatibility between Wazuh agent and Wazuh manager is guaranteed when the Wazuh manager has a **newer or equal** version than the Wazuh agent.
+The compatibility between the Wazuh agent and the Wazuh manager is guaranteed when the Wazuh manager has a **newer or equal** version than the Wazuh agent.
 
 
 .. note::
 
-    The Wazuh manager is also compatible with **OSSEC agents**, but keep in mind that not all the capabilities will be available for them.
-
+    The Wazuh manager is also compatible with **OSSEC agents**, however, not all capabilities will be available for them. 
 
 Wazuh and Wazuh Kibana plugin
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -122,16 +119,16 @@ Wazuh and Wazuh Kibana plugin
 The Wazuh app for Kibana requires compatibility between two different components:
 
   - With the **Wazuh manager**, it requires the same ``major.minor`` version.
-  - With the **Elastic Stack**, it's only compatible with the exact same version.
+  - With the **Elastic Stack**, it is only compatible with the exact same version.
 
 +-----------------------------------+------------------------------------+---------------------------+
 |                                   |                                    |                           |
 +   **Wazuh version**               +     **Elastic Stack version**      +  **Open Distro version**  +
 |                                   |                                    |                           |
 +-----------------------------------+------------------------------------+---------------------------+
-|              |WAZUH_LATEST|                | |ELASTICSEARCH_LATEST|                              | |OPEN_DISTRO_LATEST|                    |
+|              |WAZUH_LATEST|                | |ELASTICSEARCH_LATEST|                             | |OPEN_DISTRO_LATEST|                    |
 +-----------------------------------+------------------------------------+---------------------------+
-|              |WAZUH_LATEST|                | |ELASTICSEARCH_ELK_LATEST|                              |                           |
+|              |WAZUH_LATEST|                | |ELASTICSEARCH_ELK_LATEST|                             |                           |
 +-----------------------------------+------------------------------------+---------------------------+
 
 You can find more information on the `Wazuh app for Kibana repository <https://github.com/wazuh/wazuh-kibana-app#installation>`_, where you can check a more detailed compatibility matrix between the Wazuh app and Elastic Stack versions.
@@ -142,19 +139,14 @@ Wazuh and Splunk app
 The Splunk app for Wazuh requires compatibility between two different components:
 
   - With the **Wazuh manager**, it requires the same ``major.minor`` version.
-  - With **Splunk**, it's only compatible with the exact same version.
+  - With **Splunk**, it is only compatible with the exact same version.
 
 +---------------------------------+---------------------------+
 |                                 |                           |
-+ **API and Splunk App version**  +    **Splunk version**     +
++ **Splunk App version**          +    **Splunk version**     +
 |                                 |                           |
 +---------------------------------+---------------------------+
-|              3.13.2             |     7.3.5, |SPLUNK_LATEST|          |
+|              4.1.5              |     8.0.4, |SPLUNK_LATEST|          |
 +---------------------------------+---------------------------+
-|              3.13.1             |     7.3.5, |SPLUNK_LATEST|          |
-+---------------------------------+---------------------------+
-|              3.13.0             |     7.3.5, 8.0.2          |
-+---------------------------------+---------------------------+
-
 
 You can find more information on the `Wazuh app repository <https://github.com/wazuh/wazuh-splunk#installation>`_, where you can check a more detailed compatibility matrix between the Wazuh app for Splunk and Splunk versions.

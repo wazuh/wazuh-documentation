@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _ansible-wazuh-manager:
 
@@ -7,11 +7,12 @@ Wazuh Manager
 
 This role will install and configure Wazuh Manager and Wazuh API, there are several variables you can use to customize the installation or configuration, for example:
 
-- **json_output:** enabling or not JSON output (default: ``yes``)
-- **email_notification:** enabling email notifications (default: ``no``)
-- **mail_to:** email notifications recipients (array, defaults: ``admin@example.net``)
-- **mail_smtp_server:** SMTP server to be used by email notifications ( defaults: ``localhost``)
-- **mail_from:** email notification sender ( defaults: ``ossec@example.com``)
+- **wazuh_manager_config_overlay:** enables configuring the manager by overlaying sections of configs on top of defaults (default: ``true``)
+- **wazuh_manager_json_output:** enabling or not JSON output (default: ``yes``)
+- **wazuh_manager_email_notification:** enabling email notifications (default: ``no``)
+- **wazuh_manager_mailto:** email notifications recipients (array, defaults: ``admin@example.net``)
+- **wazuh_manager_email_smtp_server:** SMTP server to be used by email notifications ( defaults: ``localhost``)
+- **wazuh_manager_email_from:** email notification sender ( defaults: ``ossec@example.com``)
 
 By creating a YAML file ``wazuh-manager.yml`` you can specify the usage of this role:
 
@@ -30,28 +31,30 @@ Setting the variables in a separate YAML file is recommended when configuring th
 
   wazuh_manager_fqdn: "wazuh-manager"
 
-  wazuh_manager_config:
-    json_output: 'yes'
-    alerts_log: 'yes'
-    logall: 'no'
-    log_format: 'plain'
-    connection:
-      - type: 'secure'
-        port: '1514'
-        protocol: 'tcp'
-    authd:
-      enable: true
-      port: 1515
-      use_source_ip: 'no'
-      force_insert: 'no'
-      force_time: 0
-      purge: 'no'
-      use_password: 'no'
-      ssl_agent_ca: null
-      ssl_verify_host: 'no'
-      ssl_manager_cert: null
-      ssl_manager_key: null
-      ssl_auto_negotiate: 'no'
+  wazuh_manager_config_overlay: true
+  wazuh_manager_json_output: 'yes'
+  wazuh_manager_alerts_log: 'yes'
+  wazuh_manager_logall: 'no'
+  wazuh_manager_log_format: 'plain'
+
+  wazuh_manager_connection:
+    - type: 'secure'
+      port: '1514'
+      protocol: 'tcp'
+
+  wazuh_manager_authd:
+    enable: true
+    port: 1515
+    use_source_ip: 'no'
+    force_insert: 'no'
+    force_time: 0
+    purge: 'no'
+    use_password: 'no'
+    ssl_agent_ca: null
+    ssl_verify_host: 'no'
+    ssl_manager_cert: null
+    ssl_manager_key: null
+    ssl_auto_negotiate: 'no'
 
 You can configure **Wazuh API** user credentials by including them in ``htpasswd`` format in the file ``ansible-wazuh-manager/vars/wazuh_api_creds.yml`` located on your Ansible control server:
 

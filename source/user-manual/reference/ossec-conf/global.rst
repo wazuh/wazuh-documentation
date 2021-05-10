@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _reference_ossec_global:
 
@@ -43,6 +43,8 @@ Options
 - `geoipdb`_
 - `rotate_interval`_
 - `max_output_size`_
+- `agents_disconnection_time`_
+- `agents_disconnection_alert_time`_
 
 alerts_log
 ^^^^^^^^^^
@@ -390,7 +392,7 @@ This option sets the interval between file rotation. The range of possible value
 +-------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**       | 0 (disabled)                                                                                                                      |
 +-------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values**      | A positive number that should ends with character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days). |
+| **Allowed values**      | A positive number that should end with a character indicating a time unit, such as: s (seconds), m (minutes), h (hours), d (days) |
 +-------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
 
 .. note::
@@ -441,6 +443,49 @@ Example:
 
   <queue_size>16384</queue_size>
 
+.. _reference_agents_disconnection_time:
+
+agents_disconnection_time
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. versionadded:: 4.1.0
+
+This sets the time after which the manager considers an agent as disconnected since its last keepalive.
+
++-------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Default value**       | 10m                                                                                                                                                           |
++-------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Allowed values**      | A positive number that should end with a character indicating a time unit, such as: s (seconds), m (minutes), h (hours), d (days). The minimum allowed is 1s. |
++-------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+Example:
+
+.. code-block:: xml
+
+  <agents_disconnection_time>1m</agents_disconnection_time>
+
+.. _reference_agents_disconnection_alert_time:
+
+agents_disconnection_alert_time
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. versionadded:: 4.1.0
+
+This sets the time after which an alert is generated since an agent was considered as disconnected.
+As this is a time-lapse after an agent is considered as disconnected because of the :ref:`disconnection time<reference_agents_disconnection_time>`, the minimum time frame to produce an alert taking the default values is 2m and 20s.
+
++-------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Default value**       | 0s                                                                                                                                                                                                                                            |
++-------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Allowed values**      | A positive number that should end with a character indicating a time unit, such as: s (seconds), m (minutes), h (hours), d (days). The minimum allowed is 0s in order to generate an alert as soon as an agent is considered as disconnected. |
++-------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+Example:
+
+.. code-block:: xml
+
+  <agents_disconnection_alert_time>1h</agents_disconnection_alert_time>
+
 Default configuration
 ---------------------
 
@@ -456,4 +501,6 @@ Default configuration
       <email_from>ossecm@example.wazuh.com</email_from>
       <email_to>recipient@example.wazuh.com</email_to>
       <email_maxperhour>12</email_maxperhour>
+      <agents_disconnection_time>10m</agents_disconnection_time>
+      <agents_disconnection_alert_time>0</agents_disconnection_alert_time>
     </global>

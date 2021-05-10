@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta:: :description: Learn how to install the Wazuh agent on Debian
 
@@ -9,7 +9,7 @@ Linux
 
 This document will guide you to install or deploy the Wazuh agent.
 
-.. note:: All the commands described below need to be executed with root user privileges.
+.. note:: To execute the commands described below, root privileges are required.
 
 Adding the Wazuh repository
 ---------------------------
@@ -40,7 +40,7 @@ Adding the Wazuh repository
 Installing Wazuh agent
 ----------------------
 
-#. On your terminal, install the Wazuh agent. You can choose between installation or deployment:
+#. Install the Wazuh agent on your terminal. You can choose between installation or deployment:
 
     a) Installation:
 
@@ -67,12 +67,12 @@ Installing Wazuh agent
           .. include:: ../../_templates/installations/wazuh/zypp/install_wazuh_agent.rst
 
 
-      Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :ref:`user manual<register_agents>`.
+      Once the agent is installed, the next step is to register it and configure it to communicate with the manager. For more information on this process, visit the :ref:`user manual<register_agents>` section.
 
     b) Deployment:
 
-      You can automate the agent registration and configuration using variables. It is necessary to define at least the variable ``WAZUH_MANAGER``. The agent will use this value to register and this will be the assigned manager for forwarding events.
-
+      The registration and configuration of the agent can be automated using variables. It is necessary to define, at least, the variable ``WAZUH_MANAGER``. The agent will use this value to register and this will be the assigned manager for forwarding events. 
+      
       .. tabs::
 
 
@@ -102,9 +102,9 @@ Installing Wazuh agent
 
   .. include:: ../../_templates/installations/wazuh/common/enable_wazuh_agent_service.rst
 
-**(Optional)** Disable the Wazuh updates:
+**(Optional)** Disable Wazuh updates:
 
-    We recommend maintaining the Wazuh manager version greater or equal to the Wazuh agents'. As a result, we recommended disabling the Wazuh repository in order to prevent accidental upgrades. To do this, use the following command:
+The version of the Wazuh manager is recommended to be greater than or equal to that of the Wazuh agents. Therefore, we recommend disabling the Wazuh repository to prevent accidental upgrades. To do so, use the following command:
 
     .. tabs::
 
@@ -129,7 +129,7 @@ Installing Wazuh agent
 
 
 
-Alternatively, if you want to download the wazuh-agent package directly, or check the compatible versions, you can do it from :ref:`here <packages>`.
+Visit our :ref:`packages list <packages>` section to download the Wazuh agent package directly or to check the compatible versions. 
 
 
 Uninstall

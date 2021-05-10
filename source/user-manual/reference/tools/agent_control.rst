@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _agent_control:
 
@@ -48,8 +48,6 @@ agent_control options for Active Response
 | **-f <ar>**       | Used with -b, specifies which response to run.          |
 +-------------------+---------------------------------------------------------+
 | **-L**            | List available active responses.                        |
-+-------------------+---------------------------------------------------------+
-| **-m**            | Show the limit of agents that can be added.             |
 +-------------------+---------------------------------------------------------+
 | **-s**            | Change the output to CSV format (comma delimited).      |
 +-------------------+---------------------------------------------------------+

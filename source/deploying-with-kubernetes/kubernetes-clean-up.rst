@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _kubernetes_clean_up:
 
@@ -15,7 +15,7 @@ To delete your Wazuh cluster just use execute the following command from this re
 
     .. code-block:: console
 
-        $ kubectl delete -k .
+        $ kubectl delete -k envs/eks/
 
 This will remove every resource defined on the ``kustomization.yml`` file.
 

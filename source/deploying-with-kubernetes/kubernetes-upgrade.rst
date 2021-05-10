@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _kubernetes_upgrade:
 
@@ -42,7 +42,7 @@ For example:
 
     containers:
     - name: wazuh-manager
-      image: 'wazuh/wazuh:|WAZUH_LATEST_KUBERNETES|_|OPENDISTRO_LATEST_KUBERNETES|'
+      image: 'wazuh/wazuh:|WAZUH_LATEST_KUBERNETES|'
 
 
 Apply the new configuration
@@ -52,7 +52,7 @@ The last step is to apply the new configuration:
 
 .. code-block:: console
 
-    $ kubectl apply -k .
+    $ kubectl apply -k envs/eks/
 
 .. code-block:: none
     :class: output

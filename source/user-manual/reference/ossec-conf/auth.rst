@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _reference_ossec_auth:
 
@@ -33,7 +33,6 @@ Options
 - `ssl_manager_key`_
 - `ssl_auto_negotiate`_
 - `ciphers`_
-- `limit_maxagents`_
 
 disabled
 ^^^^^^^^
@@ -193,21 +192,6 @@ The format of this parameter is described in `SSL ciphers <https://www.openssl.o
 
 .. versionadded:: 3.0.0
 
-limit_maxagents
-^^^^^^^^^^^^^^^
-
-Toggles whether or not to operate based on the maximum number of agents.
-
-When set to ``no``, the maximum limit of agents that can be added is ignored.
-
-+--------------------+---------------------+
-| **Default value**  | yes                 |
-+--------------------+---------------------+
-| **Allowed values** | yes, no             |
-+--------------------+---------------------+
-
-.. versionadded:: 3.0.0
-
 Default configuration
 ---------------------
 
@@ -221,7 +205,6 @@ Default configuration
     <force_time>0</force_time>
     <purge>yes</purge>
     <use_password>no</use_password>
-    <limit_maxagents>yes</limit_maxagents>
     <ciphers>HIGH:!ADH:!EXP:!MD5:!RC4:!3DES:!CAMELLIA:@STRENGTH</ciphers>
     <!-- <ssl_agent_ca></ssl_agent_ca> -->
     <ssl_verify_host>no</ssl_verify_host>

@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 Checking services and certificates
 ----------------------------------
@@ -7,7 +7,7 @@ Check the certificates:
 
 .. code-block:: console
 
-  # curl -sL  https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/certificate_checker.sh | bash -
+  # curl -sL  https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/certificate_checker.sh | bash -
 
 Check the Wazuh manager service:
 

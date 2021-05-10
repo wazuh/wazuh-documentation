@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta:: :description: Learn how to install Elastic Stack for using Wazuh on Debian
 
@@ -80,12 +80,12 @@ Kibana installation and configuration
     .. include:: ../../../../../_templates/installations/elastic/common/configure_kibana.rst
 
 
-#. Update the ``optimize`` and ``plugins`` directories permissions:
+#. Create the ``/usr/share/kibana/data`` directory:
 
     .. code-block:: console
     
-      # chown -R kibana:kibana /usr/share/kibana/optimize
-      # chown -R kibana:kibana /usr/share/kibana/plugins    
+      # mkdir /usr/share/kibana/data
+      # chown -R kibana:kibana /usr/share/kibana/data
 
 
 #. Install the Wazuh Kibana plugin:
@@ -95,7 +95,8 @@ Kibana installation and configuration
     .. code-block:: console
 
         # cd /usr/share/kibana
-        # sudo -u kibana bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.3_7.9.1-1.zip
+        # sudo -u kibana bin/kibana-plugin install https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|-1.zip
+        
 
 #. The next step involves the certificates placement. This guide assumes that a copy of ``certs.tar`` is placed in the root home folder (~/):
 
@@ -127,7 +128,7 @@ Upon the first access to Kibana, the browser shows a warning message stating tha
 
 It is highly recommended to change Elasticsearch’s default passwords for the users found at the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. More information about this process can be found :ref:`here <change_elastic_pass>`.
 
-With the first access attempt, the Wazuh Kibana plugin may prompt a message that indicates that it cannot communicate with the Wazuh API. To solve this issue edit the file ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml`` and replace the ``url`` by the Wazuh server's address: 
+With the first access attempt, the Wazuh Kibana plugin may prompt a message that indicates that it cannot communicate with the Wazuh API. To solve this issue edit the file ``/usr/share/kibana/data/wazuh/config/wazuh.yml`` and replace the ``url`` by the Wazuh server's address: 
 
 .. code-block:: yaml
 
@@ -135,8 +136,9 @@ With the first access attempt, the Wazuh Kibana plugin may prompt a message that
     - default:
        url: https://localhost
        port: 55000
-       username: wazuh
-       password: wazuh
+       username: wazuh-wui
+       password: wazuh-wui
+       run_as: false
 
 Once Kibana is running it is necessary to assign each user its corresponding role. To learn more visit the :ref:`Setting up the Wazuh Kibana plugin <connect_kibana_app>` section. 
 

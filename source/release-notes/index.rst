@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _release_notes:
 
@@ -15,10 +15,18 @@ This section summarizes the most important features of each Wazuh release.
     .. toctree::
         :maxdepth: 2
         
+        release_4_1_5
+        release_4_1_4
+        release_4_1_3
+        release_4_1_2
+        release_4_1_1
+        release_4_1_0
+        release_4_0_4
         release_4_0_3 
         release_4_0_2
         release_4_0_1
         release_4_0_0
+        release_3_13_3
         release_3_13_2
         release_3_13_1
         release_3_13_0

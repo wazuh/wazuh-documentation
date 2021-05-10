@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _build_lab_access_ec2_instances:
 
@@ -60,7 +60,7 @@ if the above does not work for you.
 SSH access to Linux instances via Windows Putty client
 ------------------------------------------------------
 
-Putty is a popular Windows SSH client.  Download and run the MSI installer for Putty `here <https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html>`_.
+Putty is a popular Windows SSH client.  Download and run the MSI installer for `Putty <https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html>`_.
 
 Use PuTTYgen to convert your key file into a form Putty can authenticate with
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::

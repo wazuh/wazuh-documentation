@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _reference_wazuh_manager_class:
 
@@ -69,11 +69,6 @@ $ossec_auth_use_password
   Toggles shared password authentication on or off.
 
   `Default no`
-
-$ossec_auth_limit_maxagents
-  Toggles whether or not to operate based on the maximum number of agents.
-
-  `Default yes`
 
 $ossec_auth_ciphers
   Sets the list of ciphers for network communication using SSL.

@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _upgrading_elastic_stack:
 
@@ -219,34 +219,46 @@ Upgrading Kibana
 ----------------
 
 .. warning::
-  Since Wazuh 3.12.0 release, regardless of the Elastic Stack version, the location of the Wazuh Kibana plugin configuration file has been moved from ``/usr/share/kibana/plugins/wazuh/wazuh.yml``, for the version 3.11.x, and from ``/usr/share/kibana/plugins/wazuh/config.yml``, for the version 3.10.x or older, to ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml``.
+  The location of the Wazuh Kibana plugin configuration file has been moved to ``/usr/share/kibana/data/wazuh/config/wazuh.yml``
 
-Copy the Wazuh Kibana plugin configuration file to its new location. This step is not needed for upgrades from 3.12.x to latest:
+
+#. Copy the Wazuh Kibana plugin configuration file to its new location:
 
       .. tabs::
 
-          .. group-tab:: For upgrades from 3.11.x to latest
+          
+          .. group-tab:: For upgrades from 3.12.x or newer
+
+              Create the new directory and copy the Wazuh Kibana plugin configuration file.
+
+                .. code-block:: console
+
+                  # mkdir -p /usr/share/kibana/data/wazuh/config/
+                  # cp /usr/share/kibana/optimize/wazuh/config/wazuh.yml /usr/share/kibana/data/wazuh/config/wazuh.yml
+
+
+          .. group-tab:: For upgrades from 3.11.x
 
               Create the new directory and copy the Wazuh Kibana plugin configuration file:
 
                 .. code-block:: console
 
-                  # mkdir -p /usr/share/kibana/optimize/wazuh/config
-                  # cp /usr/share/kibana/plugins/wazuh/wazuh.yml /usr/share/kibana/optimize/wazuh/config/wazuh.yml
+                  # mkdir -p /usr/share/kibana/data/wazuh/config/
+                  # cp /usr/share/kibana/plugins/wazuh/wazuh.yml /usr/share/kibana/data/wazuh/config/wazuh.yml
 
 
-          .. group-tab:: For upgrades from 3.10.x or older to latest
+          .. group-tab:: For upgrades from 3.10.x or older
 
 
               Create the new directory and copy the Wazuh Kibana plugin configuration file:
 
                     .. code-block:: console
 
-                      # mkdir -p /usr/share/kibana/optimize/wazuh/config
-                      # cp /usr/share/kibana/plugins/wazuh/config.yml /usr/share/kibana/optimize/wazuh/config/wazuh.yml
+                      # mkdir -p /usr/share/kibana/data/wazuh/config/
+                      # cp /usr/share/kibana/plugins/wazuh/config.yml /usr/share/kibana/data/wazuh/config/wazuh.yml
 
 
-              Edit the ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml`` configuration file and add to the end of the file the following default structure to define an Wazuh API entry:
+              Edit the ``/usr/share/kibana/data/wazuh/config/wazuh.yml`` configuration file and add to the end of the file the following default structure to define an Wazuh API entry:
 
                     .. code-block:: yaml
 
@@ -254,8 +266,9 @@ Copy the Wazuh Kibana plugin configuration file to its new location. This step i
                         - <id>:
                            url: http(s)://<api_url>
                            port: <api_port>
-                           user: <api_user>
+                           username: <api_user>
                            password: <api_password>
+                           run_as: false
 
                     The following values need to be replaced:
 
@@ -271,8 +284,9 @@ Copy the Wazuh Kibana plugin configuration file to its new location. This step i
 
                     In case of having more Wazuh API entries, each of them must be added manually.
 
+
  
-#. Replace the value ``user`` by ``username`` and set the username and password as ``wazuh`` in the file ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml``: 
+#. **(For upgrades from 3.x versions)** Replace the value ``user`` by ``username`` and set the username and password as ``wazuh-wui`` in the file ``/usr/share/kibana/data/wazuh/config/wazuh.yml``: 
 
     .. code-block:: yaml
       :emphasize-lines: 5, 6
@@ -281,8 +295,9 @@ Copy the Wazuh Kibana plugin configuration file to its new location. This step i
         - default:
             url: https://localhost
             port: 55000
-            username: wazuh
-            password: wazuh
+            username: wazuh-wui
+            password: wazuh-wui
+            run_as: false
 
 #. Remove the Wazuh Kibana plugin:
 
@@ -324,7 +339,7 @@ Copy the Wazuh Kibana plugin configuration file to its new location. This step i
 
     .. code-block:: console
 
-      # chown -R kibana:kibana /usr/share/kibana/optimize
+      # chown -R kibana:kibana /usr/share/kibana
       # chown -R kibana:kibana /usr/share/kibana/plugins
 
 #. Install the Wazuh Kibana plugin:
@@ -332,15 +347,15 @@ Copy the Wazuh Kibana plugin configuration file to its new location. This step i
     .. code-block:: console
 
       # cd /usr/share/kibana/
-      # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.3_7.9.3-1.zip
+      # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_ELK_LATEST|-1.zip
 
 
 #. Update configuration file permissions:
 
     .. code-block:: console
 
-      # sudo chown kibana:kibana /usr/share/kibana/optimize/wazuh/config/wazuh.yml
-      # sudo chmod 600 /usr/share/kibana/optimize/wazuh/config/wazuh.yml
+      # sudo chown kibana:kibana /usr/share/kibana/data/wazuh/config/wazuh.yml
+      # sudo chmod 600 /usr/share/kibana/data/wazuh/config/wazuh.yml
 
 #. For installations on Kibana 7.6.x version and higher, it is recommended to increase the heap size of Kibana to ensure the Kibana's plugins installation:
 
@@ -363,7 +378,7 @@ Copy the Wazuh Kibana plugin configuration file to its new location. This step i
     .. include:: ../../_templates/installations/basic/elastic/common/enable_kibana.rst
 
 
-#. Once Kibana is accesible, remove the ``wazuh-alerts-3.x-*`` index pattern. Since Wazuh 4.0 it has been replaced by ``wazuh-alerts-*`` , it is necessary to remove the old pattern in order for the new one to take its place.
+#. **(For upgrades from 3.x versions)** Once Kibana is accesible, remove the ``wazuh-alerts-3.x-*`` index pattern. Since Wazuh 4.0 it has been replaced by ``wazuh-alerts-*`` , it is necessary to remove the old pattern in order for the new one to take its place.
 
     .. code-block:: console
 

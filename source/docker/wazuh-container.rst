@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _wazuh-container:
 
@@ -103,7 +103,7 @@ This configuration is provided as-is for testing purposes only, it is designed f
 
   .. code-block:: console
 
-    $ git clone https://github.com/wazuh/wazuh-docker.git -b v|WAZUH_LATEST_DOCKER|_|OPENDISTRO_LATEST_DOCKER| --depth=1
+    $ git clone https://github.com/wazuh/wazuh-docker.git -b v|WAZUH_LATEST_DOCKER| --depth=1
 
 2. Start Wazuh and Elastic Stack using `docker-compose`. From the directory where you have the ``docker-compose.yml`` file:
 
@@ -129,7 +129,7 @@ These are the steps to deploy a production grade Wazuh cluster using the "Open D
 
   .. code-block:: console
 
-    $ git clone https://github.com/wazuh/wazuh-docker.git -b v|WAZUH_LATEST_DOCKER|_|OPENDISTRO_LATEST_DOCKER| --depth=1
+    $ git clone https://github.com/wazuh/wazuh-docker.git -b v|WAZUH_LATEST_DOCKER| --depth=1
 
   We'll use ``production-cluster.yml`` as base for this deployment, all code snippets on this section come from this file.
 

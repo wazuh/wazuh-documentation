@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 * Move to the installation location and create the certificates directory:
 
@@ -23,9 +23,9 @@
 
   .. code-block:: console
 
-      # curl -so ~/searchguard/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/searchguard/search-guard-aio.yml
+      # curl -so ~/searchguard/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/searchguard/search-guard-aio.yml
 
-* Run the Search Guard's script to create the certificates:
+* Run the Search Guard script to create the certificates:
 
   .. code-block:: console
 

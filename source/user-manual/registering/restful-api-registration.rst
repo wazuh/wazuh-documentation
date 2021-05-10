@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _restful-api-registration:
 
@@ -17,7 +17,7 @@ Choose the tab corresponding to the Wazuh agent host operating system:
   .. group-tab:: Linux/Unix host
 
 
-    #. Open a terminal in the Wazuh agent's host as a ``root`` user. To add the Wazuh agent to the Wazuh manager and extract the registration key execute the following Wazuh API request :api-ref:`POST /agents <operation/api.controllers.agents_controller.add_agent>` and replacing the values in the angle brackets:
+    #. Open a terminal in the Wazuh agent's host as a ``root`` user. To add the Wazuh agent to the Wazuh manager and extract the registration key execute the following Wazuh API request :api-ref:`POST /agents <operation/api.controllers.agent_controller.add_agent>` and replacing the values in the angle brackets:
 
          .. code-block:: console
 
@@ -167,7 +167,7 @@ Choose the tab corresponding to the Wazuh agent host operating system:
   .. group-tab:: MacOS X host
 
 
-    #. Open a terminal in the Wazuh agent's host as a ``root`` user. To add the Wazuh agent to the Wazuh manager and extract the registration key execute the following Wazuh API request :api-ref:`POST /agents <operation/api.controllers.agents_controller.add_agent>` and replacing the values in the angle brackets:
+    #. Open a terminal in the Wazuh agent's host as a ``root`` user. To add the Wazuh agent to the Wazuh manager and extract the registration key execute the following Wazuh API request :api-ref:`POST /agents <operation/api.controllers.agent_controller.add_agent>` and replacing the values in the angle brackets:
 
          .. code-block:: console
 
