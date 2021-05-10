@@ -17,7 +17,7 @@ To gather the logs, Wazuh uses the CLI `log` tool which provides an interesting 
 Monitor the macOS ULS Logs with Wazuh
 -------------------------------------
 
-Wazuh interfaces with the ``log stream`` tool to acquire the logs from the macOS Unified Logging System (**ULS**).
+Wazuh interfaces with the ``log`` CLI tool to acquire the logs from the macOS Unified Logging System (**ULS**).
 
   .. code-block:: xml
 
@@ -30,15 +30,15 @@ Wazuh interfaces with the ``log stream`` tool to acquire the logs from the macOS
 To filter the system logs, it is necessary, but not mandatory, to use the ``query`` label. This label allows setting different filtering aspects such as:
 
 - ``type`` : Limits the type of logs that are intended to be acquired (``activity`` ; ``log`` **and/or** ``trace``). Multiple values are allowed.
-- ``level`` : Indicates the level of verbosity. Includes events at, and below, the given level value (``default`` ; ``info`` **or** ``debug``). For more information about the levels, see `ULS Logs Levels`_.
-- ``<query>process == "sshd" OR message CONTAINS "invalid"</query>`` : The query is used directly as the ULS predicate, which is used to filter the logs. For more information about the predicates, see `ULS Predicates`_.
+- ``level`` : Indicates the level of verbosity. Includes events at, and below, the given level value (``default`` ; ``info`` **or** ``debug``). For more information about the levels, see `macOS ULS Logs Levels`_.
+- ``<query>process == "sshd" OR message CONTAINS "invalid"</query>`` : The query is used directly as the ULS predicate, which is used to filter the logs. For more information about the predicates, see `macOS ULS Predicates`_.
 
 .. warning::
     Be sure to be as restrictive as possible when filtering the logs. MacOS ULS produces a lot of data that might result overwhelming and some logs of interest could be lost.
 
 
-ULS Logs Levels
----------------
+macOS ULS Logs Levels
+---------------------
 
 Any log in the ULS is tagged with one of the following levels:
 
@@ -51,8 +51,8 @@ Any log in the ULS is tagged with one of the following levels:
 When filtering with the ``level`` label, **only one** of the options (``default`` ; ``info`` **or** ``debug``) can be set. If this option is omitted, then the ``default`` value is used.
 
 
-ULS Predicates
---------------
+macOS ULS Predicates
+--------------------
 
 Using predicate-based filters allows users to focus on messages based on the provided filter criteria.  The filter argument defines one or more pattern clauses following NSPredicate rules.
 

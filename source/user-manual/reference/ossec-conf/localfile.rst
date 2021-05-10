@@ -173,6 +173,9 @@ The attributes below are optional.
 |             | .. versionadded:: 4.2.0               |              |               |
 +-------------+---------------------------------------+--------------+---------------+
 
+.. warning::
+  If collecting logs with ``<log_format>`` set as ``macos``, then ``max-size`` is ignored. 
+
 .. note::
   If the log rotates while ``wazuh-logcollector`` is stopped and ``only-future-events`` is set to ``no``, it will start reading from the beginning of the log. 
 
@@ -209,7 +212,7 @@ Example:
 +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | n/a                                                                                                                                                       |
 +--------------------+----------------------+------------------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values** | Windows eventchannel | XPATH query format, follows the `event schema <https://msdn.microsoft.com/en-us/library/windows/desktop/aa385201(v=vs.85).aspx>`_  |
+| **Allowed values** | Windows Eventchannel | XPATH query format, follows the `event schema <https://msdn.microsoft.com/en-us/library/windows/desktop/aa385201(v=vs.85).aspx>`_  |
 |                    +----------------------+------------------------------------------------------------------------------------------------------------------------------------+
 |                    | macOS ULS            | Predicate query format, see :ref:`How to collect macOS ULS logs <how-to-collect-macoslogs>`                                        |
 +--------------------+----------------------+------------------------------------------------------------------------------------------------------------------------------------+
@@ -226,8 +229,8 @@ The attributes below are optional and only valid for macOS ULS (``macos``).
 |             |                                       |   debug      |                |
 +-------------+---------------------------------------+--------------+----------------+
 |  **type**   | Limits the type of logs that are      |  activity    |    all         |
-|             | intended to be acquired.              +--------------+                |
-|             |                                       |   log        |                |
+|             | intended to be acquired to the ones   +--------------+                |
+|             | listed and sepparated by commas.      |   log        |                |
 |             |                                       +--------------+                |
 |             |                                       |   trace      |                |
 +-------------+---------------------------------------+--------------+----------------+
