@@ -54,7 +54,7 @@ To enable multi-factor authentication:
 3. Under Multi-factor authentication, click **Add MFA** and follow the steps described in the Set up virtual MFA device pane.
 4. Click **Enable MFA** to complete the process.
 
-  If your device is lost or stolen, contact support.
+  If your device is lost or stolen, contact support through the **Help** section of the Wazuh Cloud Console..
 
 Configure your login method
 ---------------------------
