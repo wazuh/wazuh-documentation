@@ -1,4 +1,6 @@
 .. Copyright (C) 2021 Wazuh, Inc.
+.. meta::
+  :description: Learn more about the rootcheck_control tool in this section.
 
 .. _rootcheck_control:
 
