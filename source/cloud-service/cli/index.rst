@@ -13,7 +13,7 @@ The Wazuh Cloud Command Line Interface (``wcloud-cli``) is a tool that enables y
 Requirements
 ------------
 
-In order to use ``wcloud-cli``, you will need to install the following components:
+To use ``wcloud-cli``, you need to install the following components:
 
 - Python 3.x
 - ``boto3`` Python package
@@ -22,62 +22,62 @@ In order to use ``wcloud-cli``, you will need to install the following component
 Installation
 ------------
 
-Use the following command to download the tool:
+1. Use the following command to download the CLI tool.
 
-.. code-block:: console
+  .. code-block:: console
 
-  # curl -so ~/wcloud-cli https://pending.cloud.wazuh.com/wcloud-cli && chmod 500  ~/wcloud-cli 
+    # curl -so ~/wcloud-cli https://pending.cloud.wazuh.com/wcloud-cli && chmod 500  ~/wcloud-cli 
 
+2. Run it with the version argument to confirm that the installation was successful.
 
-Run it with the version argument to confirm that the installation was successful.
+  .. code-block:: console
 
-.. code-block:: console
+    # wcloud-cli version
 
-  # wcloud-cli version
+  .. code-block:: none
+    :class: output
 
-.. code-block:: none
-  :class: output
-
-  Wazuh Cloud CLI - "version": "1.0.0"
+    Wazuh Cloud CLI - "version": "1.0.0"
 
 
 Configuration
 -------------
 
-This section explains how to configure the settings that the Wazuh Cloud CLI (``wcloud-cli``) uses to interact with Wazuh Cloud.
+You can configure the settings that the Wazuh Cloud CLI (``wcloud-cli``) uses to interact with Wazuh Cloud.
 
-By default, the Wazuh Cloud CLI reads the credential information from a local file named `credentials`, in a folder named `.wazuh-cloud` in your home directory. Where you find your home directory location varies based on the operating system, but is referred to using the environment variables `%UserProfile%` in Windows and `$HOME` or `~ (tilde)` in Unix-based systems. You can specify a non-default location for the config file by setting the WAZUH_CLOUD_CREDENTIALS_FILE environment variable to another local path.
+By default, the Wazuh Cloud CLI reads the credential information from a local file named `credentials`, located in the `.wazuh-cloud` folder of your home directory. The location of your home directory varies based on the operating system, but you can find it using the environment variables `%UserProfile%` in Windows, and `$HOME` or `~ (tilde)` in Unix-based systems. 
+
+A non-default location can be specified for the config file by setting the `WAZUH_CLOUD_CREDENTIALS_FILE` environment variable to another local path.
 
 1. Create the credentials file and add your :ref:`API key <cloud_apis_auth>`.
 
-``~/.wazuh-cloud/credentials``
+  ``~/.wazuh-cloud/credentials``
 
-.. code-block:: none
+  .. code-block:: none
 
-  [default]
-  wazuh_cloud_api_key_name = Test
-  wazuh_cloud_api_key_secret = MDAwMDAwMDQ2T047Q4JVY1Sm5dDOqpDtkCQiY89fHjuZT3c90zs2
+    [default]
+    wazuh_cloud_api_key_name = Test
+    wazuh_cloud_api_key_secret = MDAwMDAwMDQ2T047Q4JVY1Sm5dDOqpDtkCQiY89fHjuZT3c90zs2
 
-The file is organzied in profiles (a collection of credentials). When you specify a profile to run a command, the credentials are used to run that command. You can specify one default profile that is used when no profile is explicitly referenced. 
+  The file is organized in profiles, a collection of credentials. When you specify a profile to run a command, the credentials are used to run that command. You can specify one default profile that is used when no profile is explicitly referenced. 
 
-2. Use the following command to test your credentials. Optionaly, you can specify the profile.
+2. Use the following command to test your credentials. Optionally, you can specify the profile.
 
+  .. code-block:: console
 
-.. code-block:: console
+    # wcloud-cli test-credentials --profile <profile-name>
 
-  # wcloud-cli test-credentials --profile <profile-name>
+  .. code-block:: none
+    :class: output
 
-.. code-block:: none
-  :class: output
-
-  The API key 'Test' in the profile 'default' is valid.
+    The API key 'Test' in the profile 'default' is valid.
 
 
 Examples
 --------
 
-Get S3 token for Cold storage
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Getting S3 token for Cold storage
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: console
 
