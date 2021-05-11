@@ -266,7 +266,8 @@ What's new
 - `#3061 <https://github.com/wazuh/wazuh-kibana-app/issues/3061>`_ The API Console feature of the Tools menu now includes a logtest ``PUT`` sample for you to have as a reference.
 - `#3109 <https://github.com/wazuh/wazuh-kibana-app/pull/3109>`_ A new button is added for you to recheck API connection during a health check.
 - `#3111 <https://github.com/wazuh/wazuh-kibana-app/pull/3111>`_ Wazuh adds a new ``wazuh-statistics`` template and new mapping for the indices.
-- `#3126 <https://github.com/wazuh/wazuh-kibana-app/pull/3126>`_ When you deploy a new agent, a new link to the Wazuh documentation is added under the **Start the agent** step of the process for you to check if the connection to the manager is successful after adding a new agent. 
+- `#3126 <https://github.com/wazuh/wazuh-kibana-app/pull/3126>`_ When you deploy a new agent, a new link to the Wazuh documentation is added under the *Start the agent* step of the process for you to check if the connection to the manager is successful after adding a new agent. 
+- `#3238 <https://github.com/wazuh/wazuh-kibana-app/pull/3238>`_ When you deploy a new agent, a warning message is shown under the *Install and enroll the agent* step of the process to warn you about running the command on a host with an agent already installed. This action causes the agent package to be upgraded without enrolling the agent.
 - `#2892 <https://github.com/wazuh/wazuh-kibana-app/issues/2892>`_ In the Integrity monitoring module, the Top 5 users result table is now changed to improve user experience.
 - `#3080 <https://github.com/wazuh/wazuh-kibana-app/pull/3080>`_ The editing process of the  ``allow_run_as`` user property is now adapted to the new ``PUT /security/users/{user_id}/run_as`` endpoint.
 - `#3046 <https://github.com/wazuh/wazuh-kibana-app/pull/3046>`_ Some ossec references are now renamed to follow Wazuh unified standard.
