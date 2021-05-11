@@ -9,4 +9,4 @@ server.ssl.enabled: true
 server.ssl.key: "/etc/kibana/certs/kibana.key"
 server.ssl.certificate: "/etc/kibana/certs/kibana.pem"
 elasticsearch.ssl.certificateAuthorities: ["/etc/kibana/certs/root-ca.pem"]
-server.defaultRoute: /app/wazuh
+server.defaultRoute: /app/wazuh?security_tenant=global
