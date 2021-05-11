@@ -4,7 +4,7 @@
 
         .. group-tab:: Yum
 
-            Install all the necessary packages for the installation:
+            Run the following command to install all the necessary packages for the installation:
                 
                 .. code-block:: console
 
@@ -16,7 +16,7 @@
 
         .. group-tab:: APT
 
-                Install all the necessary packages for the installation:
+                Run the following command to install all the necessary packages for the installation:
 
                     .. code-block:: console
 
@@ -32,7 +32,7 @@
                             # echo 'deb http://deb.debian.org/debian stretch-backports main' > /etc/apt/sources.list.d/backports.list
 
 
-                    * For Ubuntu and other Debian based OS:
+                    * For Ubuntu and other Debian based operating systems:
 
                             .. code-block:: console
 
@@ -54,7 +54,7 @@
 
         .. group-tab:: ZYpp
 
-            Install all the necessary packages for the installation:
+            Run the following command to install all the necessary packages for the installation:
                 
                 .. code-block:: console
 

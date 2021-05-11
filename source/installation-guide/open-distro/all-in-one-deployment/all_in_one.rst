@@ -7,18 +7,18 @@
 Step-by-step installation
 =========================
 
-This document guides through the installation of the Wazuh and Open Distro for Elasticsearch components in an all-in-one deployment. This type of deployment is appropriate for testing and small working environments.  
+Install Wazuh and Open Distro for Elasticsearch components in an all-in-one deployment. This type of deployment is appropriate for testing and small working environments.  
 
-This guide provides instructions for configuring the official repositories to perform installations. As an alternative, the installation can also be done using packages. Check out the list of available packages :ref:`in our packages list <packages>`. 
+Follow the instructions to configure the official repositories to perform installations. As an alternative, the installation can also be done using packages. Check out the list of available packages in the :ref:`Packages list <packages>` section. 
 
-.. note:: To execute the commands described below, root privileges are required.
+.. note:: Root privileges are required to execute all the commands.
 
 .. _all_in_one_elastic:
 
 Prerequisites
 -------------
 
-Open Distro for Elasticsearch requires the Java Development Kit as well as the installation of other packages such as ``wget``, ``curl``, ``unzip``, and ``libcap`` that will be used in further steps:
+Java Development Kit is installed as it is required by Open Distro for Elasticsearch.  To perform the following tasks, install ``wget``, ``curl``, ``unzip``, and ``libcap`` packages:
 
 .. include:: ../../../_templates/installations/before_installation_all_in_one.rst
 
@@ -30,7 +30,7 @@ Installing Wazuh
 
 The Wazuh server collects and analyzes data from the deployed Wazuh agents. It runs the Wazuh manager, the Wazuh API and Filebeat. 
 
-The first step to set up Wazuh is to add the Wazuh repository to the server.
+To start setting up Wazuh, add the Wazuh repository to the server.
 
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -108,10 +108,12 @@ Configuring Elasticsearch
 
 .. include:: ../../../_templates/installations/elastic/common/elastic-single-node/configure_elasticsearch_all_in_one.rst
 
-Elasticsearch roles and users
+Elasticsearch users and roles
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In order to use the Wazuh Kibana plugin properly, it is necessary to add the extra roles and users:
+You need to add users and roles in order to use the Wazuh Kibana properly.
+
+Run the following commands to add the Wazuh users and additional roles in Kibana:
 
 .. include:: ../../../_templates/installations/elastic/common/add_roles_and_users.rst
 
@@ -131,13 +133,13 @@ Certificates creation
 
     .. include:: ../../../_templates/installations/elastic/common/enable_elasticsearch.rst
 
-#. Run the Elasticsearch's ``securityadmin`` script to load the new certificates information and start the cluster:
+#. Run the Elasticsearch ``securityadmin`` script to load the new certificates information and start the cluster:
 
   .. code-block:: console
 
     # /usr/share/elasticsearch/plugins/opendistro_security/tools/securityadmin.sh -cd /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/ -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key
 
-Run the following command to ensure that the installation has been successful:
+Run the following command to ensure that the installation is successful:
 
 .. code-block:: console
 
@@ -201,7 +203,7 @@ Filebeat is the tool on the Wazuh server that securely forwards alerts and archi
 
 
 
-#. Download the pre-configured Filebeat configuration file used to forward the Wazuh alerts to Elasticsearch:
+#. Download the preconfigured Filebeat configuration file used to forward the Wazuh alerts to Elasticsearch:
 
     .. code-block:: console
 
@@ -231,7 +233,7 @@ Filebeat is the tool on the Wazuh server that securely forwards alerts and archi
     .. include:: ../../../_templates/installations/elastic/common/enable_filebeat.rst
 
 
-To ensure that Filebeat has been successfully installed, run the following command:
+To ensure that Filebeat is successfully installed, run the following command:
 
     .. code-block:: console
 
@@ -335,13 +337,13 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
 Upon the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or,  for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser.  Alternatively, a certificate from a trusted authority can be configured. 
 
-It is highly recommended to change Elasticsearch’s default passwords for the users found at the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. More information about this process can be found at our :ref:`user manual <change_elastic_pass>`. It is also recommended to customize the file ``/etc/elasticsearch/jvm.options`` to improve the performance of Elasticsearch. Learn more about this process in the :ref:`Elasticsearch tuning <elastic_tuning>` section.
+It is highly recommended to change Elasticsearch default passwords for the users' found at the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. More information about this process can be found in the :ref:`user manual <change_elastic_pass>`. It is also recommended to customize the file ``/etc/elasticsearch/jvm.options`` to improve the performance of Elasticsearch. Learn more about this process in the :ref:`Elasticsearch tuning <elastic_tuning>` section.
 
-Once Kibana is running it is necessary to assign each user its corresponding role. To learn more visit the :ref:`setting up the Wazuh Kibana plugin <connect_kibana_app>` section. 
+Once Kibana is running, it is necessary to assign each user its corresponding role. To learn more, see the :ref:`setting up the Wazuh Kibana plugin <connect_kibana_app>` section. 
 
-To uninstall all the components of the all in one installation, visit the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_open_distro>`.
+To uninstall all the components of the all-in-one installation, see the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_open_distro>`.
 
 Next steps
 ----------
 
-Once the Wazuh environment is ready, a Wazuh agent can be installed in every endpoint to be monitored. The Wazuh agent installation guide is available for most operating systems and can be found :ref:`at our installation guide<installation_agents>`.
+Once the Wazuh environment is ready, a Wazuh agent can be installed in every endpoint to be monitored. To install the Wazuh agents and start monitoring the endpoints, see the :ref:`Wazuh agent<installation_agents>` section.
