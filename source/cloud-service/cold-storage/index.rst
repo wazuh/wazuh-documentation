@@ -107,27 +107,40 @@ Access
 To access your cold storage you need an AWS token that grants permission on the AWS S3 bucket of your environment. This token can be generated using the Wazuh Cloud API.
 
 .. note::
-   See the :ref:`Tools <cloud_cold_storage_tools>` section to learn how to list and download your cold storage automatically.
+   See the :ref:`Wazuh Cloud CLI <cloud_wazuh_cloud_cli>` section to learn how to list and download your cold storage automatically.
 
 Follow these steps to get access to your cold storage:
 
-1. Before your start using the Wazuh Cloud API, you need an API key. To generate your API key, see the :ref:`Authentication <cloud_apis_auth>` section. .
+1. Before your start using the Wazuh Cloud API, you need an API key. To generate your API key, see the :ref:`Authentication <cloud_apis_auth>` section.
 
-2. Use the ``POST /storage/token`` endpoint of the :cloud-api-ref:`Wazuh Cloud API <tag/storage>` to get the AWS token. This is an example of a response:
+2. Use the ``POST /storage/token`` endpoint of the :cloud-api-ref:`Wazuh Cloud API <tag/storage>` to get the AWS token to access the cold storage of a specific environment. In this example, we generate an AWS token valid for 3600 seconds for the environment `0123456789ab`.
 
-   .. code-block:: console
+.. code-block::
 
-      {
-      "environment_id": "0123456789ab",
-      "credentials": {
-         "access_key_id": "mUdT2dBjlHd...Gh7Ni1yZKR5If",
-         "secret_access_key": "qEzCk63a224...5aB+e4fC1BR0G",
-         "session_token": "MRg3t7HIuoA...4o4BXSAcPfUD8",
-         "expires_in": 3600
+   curl -XPOST https://pending.cloud.wazuh.com/api/storage/token -H "x-api-key: <your_api_key>" -H "Content-Type: application/json" --data '
+   {
+      "environment_cloud_id": "0123456789ab",
+      "token_expiration": "3600"
+   }'
+
+.. code-block:: console
+   :class: output
+
+   {
+      "environment_cloud_id": "0123456789ab",
+      "aws": {
+         "s3_path": "wazuh-cloud-cold-us-east-1/0123456789ab",
+         "region": "us-east-1",
+         "credentials": {
+            "access_key_id": "mUdT2dBjlHd...Gh7Ni1yZKR5If",
+            "secret_access_key": "qEzCk63a224...5aB+e4fC1BR0G",
+            "session_token": "MRg3t7HIuoA...4o4BXSAcPfUD8",
+            "expires_in": 3600
+         }
       }
-      }
+   }
 
-3.  Add the token to the AWS credentials file ``~/.aws/credentials``:
+3. Now, we use the AWS-CLI tool to list the files. First, add the token to the AWS credentials file ``~/.aws/credentials``:
 
    .. code-block:: console
       
@@ -136,13 +149,11 @@ Follow these steps to get access to your cold storage:
       aws_secret_access_key = qEzCk63a224...5aB+e4fC1BR0G
       aws_session_token = MRg3t7HIuoA...4o4BXSAcPfUD8
 
-   In this example, the AWS-CLI tool is used.
-
-4. Replace ``<cloud_id>`` and ``<region>`` with your Cloud ID and region in the following command to list your files.
+4. Finally, run the following command to list your files.
 
    .. code-block:: console
       
-      $ aws --profile wazuh_cloud_storage --region <region> s3 ls cloud-cold-<region>/<cloud_id>/
+      $ aws --profile wazuh_cloud_storage --region us-east-1 s3 ls wazuh-cloud-cold-us-east-1/0123456789ab
 
 You now have access to your cold storage.
 
@@ -151,21 +162,6 @@ You now have access to your cold storage.
 .. meta::
   :description: Learn about cold storage
 
-Tools
------
-
-The `wcloud-cold-storage.py` tool allows you to download the cold storage of your environment, creating and refreshing the token to access the cold storage automatically.
-
-1. Download the `wcloud-cold-storage.py <https://wazuh-cloud-tools.s3-us-west-1.amazonaws.com/examples/wcloud-cold-storage.py>`_ tool.
-
-2. Run the following command and specify your Cloud ID and region:
-
-.. code-block::
-
-   $ wcloud-cold-storage.py --cloud-id <cloud_id> --api-key <file_path> --output_path /home/cloud/data --region <region> --start_date 2021-01-01 --end_date 2020-04-27
-
-You can now download the cold storage of your environment automatically.
-
 .. toctree::
   :hidden:
   :maxdepth: 1
@@ -173,4 +169,3 @@ You can now download the cold storage of your environment automatically.
   Configuration <https://documentation.wazuh.com/current/cloud-service/cold-storage/index.html#configuration>
   Filename format <https://documentation.wazuh.com/current/cloud-service/cold-storage/index.html#filename-format>
   Access <https://documentation.wazuh.com/current/cloud-service/cold-storage/index.html#access>
-  Tools <https://documentation.wazuh.com/current/cloud-service/cold-storage/index.html#tools>

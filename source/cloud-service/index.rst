@@ -30,4 +30,5 @@ Learn more about Wazuh Cloud in the below sections.
    account-billing/index
    cold-storage/index
    apis/index
+   cli/index
    glossary
