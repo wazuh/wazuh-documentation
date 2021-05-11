@@ -387,7 +387,7 @@ Upgrading Kibana
             # zypper update opendistroforelasticsearch-kibana-|OPEN_DISTRO_LATEST|
 
 
-#. Remove generated bundles and the ``wazuh-registry.json`` file:
+#. **(For upgrades from 3.x versions)** Remove generated bundles and the ``wazuh-registry.json`` file:
 
     .. code-block:: console
 
