@@ -5,13 +5,14 @@
 Configuration file
 ==================
 
-The Wazuh Kibana plugin includes a configuration file (located at ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml``) where you can define custom values for several options. This section describes all the settings available in this file.
+The Wazuh Kibana plugin includes a configuration file (located at ``/usr/share/kibana/data/wazuh/config/wazuh.yml``) where you can define custom values for several options. This section describes all the settings available in this file.
 
 The configuration file shows the default values for all of the possible options. You can edit the file, uncomment any of them and apply the desired values. You can also edit these settings from the Wazuh Kibana plugin in *Settings > Configuration*.
 
 The configuration file reference is organized by sections:
 
 `Basic options`_
+    - `hosts`_
     - `pattern`_
     - `timeout`_
     - `ip.selector`_
@@ -52,6 +53,40 @@ The configuration file reference is organized by sections:
 
 Basic options
 -------------
+
+hosts
+^^^^^
+
+Defines the list of APIs to connect with your Wazuh managers.
+
+.. code-block:: yaml
+
+    hosts:
+        - <id>:
+            url: http(s)://<url>
+            port: <port>
+            user: <username>
+            password: <password>
+
+.. note::
+
+    It is required to specify at least one host.
+
+This is an example of a multi-host configuration:
+
+.. code-block:: yaml
+
+    hosts:
+        - wazuh_prod:
+            url: https://wazuh.com
+            port: 55000
+            user: foo
+            password: secret_password
+        - wazuh_test:
+            url: https://localhost
+            port: 55000
+            user: foo
+            password: bar
 
 pattern
 ^^^^^^^

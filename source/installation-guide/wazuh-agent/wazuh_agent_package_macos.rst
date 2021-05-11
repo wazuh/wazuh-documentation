@@ -7,7 +7,7 @@
 macOS
 =====
 
-The package for macOS is suitable for macOS Sierra or greater. The macOS agent can be downloaded from :ref:`packages list<packages>` or directly from `here <https://packages.wazuh.com/|CURRENT_MAJOR|/macos/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_OSX|.pkg>`_. You can install it using the command line or following the GUI steps:
+The package for macOS is suitable for macOS Sierra or greater. The macOS agent can be downloaded from :ref:`packages list<packages>` or directly from `this link <https://packages.wazuh.com/|CURRENT_MAJOR|/macos/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_OSX|.pkg>`_. You can install it using the command line or following the GUI steps:
 
   a) Using the command line, you can choose between installation or deployment:
 

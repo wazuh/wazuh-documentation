@@ -104,7 +104,7 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
 
 
 
-#. (Optional) If you want to use the new index pattern by default, open the Wazuh Kibana app configuration file (``/usr/share/kibana/optimize/wazuh/config/wazuh.yml``) and modify the ``pattern`` setting with the new one. It should be like this:
+#. (Optional) If you want to use the new index pattern by default, open the Wazuh Kibana app configuration file (``/usr/share/kibana/data/wazuh/config/wazuh.yml``) and modify the ``pattern`` setting with the new one. It should be like this:
 
     .. code-block:: yaml
 
