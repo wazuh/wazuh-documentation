@@ -115,30 +115,30 @@ Follow these steps to get access to your cold storage:
 
 2. Use the ``POST /storage/token`` endpoint of the :cloud-api-ref:`Wazuh Cloud API <tag/storage>` to get the AWS token to access the cold storage of a specific environment. In this example, we generate an AWS token valid for 3600 seconds for the environment `0123456789ab`.
 
-.. code-block::
+   .. code-block::
 
-   curl -XPOST https://pending.cloud.wazuh.com/api/storage/token -H "x-api-key: <your_api_key>" -H "Content-Type: application/json" --data '
-   {
-      "environment_cloud_id": "0123456789ab",
-      "token_expiration": "3600"
-   }'
+      curl -XPOST https://pending.cloud.wazuh.com/api/storage/token -H "x-api-key: <your_api_key>" -H "Content-Type: application/json" --data '
+      {
+         "environment_cloud_id": "0123456789ab",
+         "token_expiration": "3600"
+      }'
 
-.. code-block:: console
-   :class: output
+   .. code-block:: console
+      :class: output
 
-   {
-      "environment_cloud_id": "0123456789ab",
-      "aws": {
-         "s3_path": "wazuh-cloud-cold-us-east-1/0123456789ab",
-         "region": "us-east-1",
-         "credentials": {
-            "access_key_id": "mUdT2dBjlHd...Gh7Ni1yZKR5If",
-            "secret_access_key": "qEzCk63a224...5aB+e4fC1BR0G",
-            "session_token": "MRg3t7HIuoA...4o4BXSAcPfUD8",
-            "expires_in": 3600
+      {
+         "environment_cloud_id": "0123456789ab",
+         "aws": {
+            "s3_path": "wazuh-cloud-cold-us-east-1/0123456789ab",
+            "region": "us-east-1",
+            "credentials": {
+               "access_key_id": "mUdT2dBjlHd...Gh7Ni1yZKR5If",
+               "secret_access_key": "qEzCk63a224...5aB+e4fC1BR0G",
+               "session_token": "MRg3t7HIuoA...4o4BXSAcPfUD8",
+               "expires_in": 3600
+            }
          }
       }
-   }
 
 3. Now, we use the AWS-CLI tool to list the files. First, add the token to the AWS credentials file ``~/.aws/credentials``:
 
