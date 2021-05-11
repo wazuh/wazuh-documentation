@@ -24,6 +24,8 @@ Here is a list of terms related to Wazuh Cloud.
   
 - `Tier`_
 
+- `CLI`_
+
 Cloud Console
 --------------
 
@@ -90,3 +92,7 @@ Tier
 ----
 
 The tier is the size limitation, in bytes, of the hot storage. When the tier is reached, the oldest events are removed from your index. Events removed from your index are still available in cold storage. You can use this `estimation tool <https://wazuh.com/cloud/#pricing>`_ to calculate the Wazuh Cloud data tier. 
+
+CLI
+---
+The Wazuh Cloud Command Line Interface is a tool that enables you to interact with Wazuh Cloud using commands in your command-line shell. 
