@@ -12,7 +12,7 @@ $(function() {
   if ( useApiRedoc ) {
     /* Change DOMAIN in href */
     const domainReplacePattern = 'https://DOMAIN';
-    const urlRoot = DOCUMENTATION_OPTIONS.VERSION;
+    const urlRoot = $('[data-url_root]').length == 0 ? '/' : $('[data-url_root]').data('url_root');
     $('[href^="'+domainReplacePattern+'/"]').each(function() {
       const oldHref = $(this).attr('href');
       $(this).attr('href', oldHref.replace(domainReplacePattern+'/', urlRoot));
