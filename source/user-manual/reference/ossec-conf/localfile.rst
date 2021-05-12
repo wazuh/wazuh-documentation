@@ -546,9 +546,9 @@ For example, we may want to read a Python Traceback output as one single log, re
 .. code-block:: xml
 
   <localfile>
-      <log_format>syslog</log_format>
+      <log_format>multi-line-regex</log_format>
       <location>/var/logs/my_python_app.log</location>
-      <multiline replace="wspace">^Traceback</multiline>
+      <multiline_regex replace="wspace">^Traceback</multiline_regex>
    </localfile>
 
 
