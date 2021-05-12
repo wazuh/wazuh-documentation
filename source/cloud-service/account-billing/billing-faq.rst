@@ -39,7 +39,7 @@ Your credit card information is sent securely to our billing provider, `Stripe <
 Where can I see the next payment for an environment?
 ----------------------------------------------------
 
-See the :ref:`See your billing cycle and history <cloud_billing_history>` section to get details about the next billing of the current environments.
+See the :ref:`See your billing cycle and history <cloud_billing_history>` section to learn how to get details about the next billing of the current environments.
 
 How do I view previous receipts and billing history?
 ----------------------------------------------------
@@ -49,7 +49,7 @@ See the :ref:`See your billing cycle and history <cloud_billing_history>` sectio
 How can I configure who receives receipts and billing notifications?
 --------------------------------------------------------------------
 
-See the :ref:`Update billing and operational contacts <cloud_account_billing_update_billing>` section to learn how to configure who receives receipts and billing notifications .
+See the :ref:`Update billing and operational contacts <cloud_account_billing_update_billing>` section to learn how to configure who receives receipts and billing notifications.
 
 
 What are the available payment methods on Wazuh Cloud?
