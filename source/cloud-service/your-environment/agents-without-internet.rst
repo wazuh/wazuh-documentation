@@ -68,7 +68,7 @@ To achieve this configuration, follow these steps:
 	
    #. Restart NGINX with ``systemctl restart nginx``.
 
-   #. Register your agent but replace the *WAZUH_MANAGER_IP* value, ``nginx_ip``, with the NGINX instance IP. To learn more on how to register agents, see the :ref:`Register agents <cloud_getting_started_register_agents>` section.
+   #. Register your agent but replace the *WAZUH_MANAGER_IP* value (``nginx_ip``) with the NGINX instance IP. To learn more on how to register agents, see the :ref:`Register agents <cloud_getting_started_register_agents>` section.
 
       Example:
 
@@ -83,7 +83,7 @@ To achieve this configuration, follow these steps:
 Using AWS Private Link
 ----------------------
 
-In case your agents are located in AWS, you can access to our cloud service securely by keeping your network traffic within the AWS network. For that purpose, we use AWS Private Link.
+In case your agents are located in AWS, you can access our cloud service securely by keeping your network traffic within the AWS network. For that purpose, we use AWS Private Link.
 
 
 1. On your Wazuh Cloud Console **Help** section, contact the Wazuh team requesting your VPC endpoint service name. It has this format:
@@ -98,11 +98,11 @@ In case your agents are located in AWS, you can access to our cloud service secu
 
    3. Select **Endpoints**.
 
-3. Create a new endpoint pointing to the endpoint service you requested to the Wazuh team. Keep in mind that the endpoint must be located in the same AWS Region as the endpoint service. For more information on AWS PrivateLink and VPC endpoints, see the  `AWS documentation <https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html#create-interface-endpoint>`_ .
+3. Create a new endpoint pointing to the endpoint service you requested from the Wazuh team. Keep in mind that the endpoint must be located in the same AWS Region as the endpoint service. For more information on AWS PrivateLink and VPC endpoints, see the  `AWS documentation <https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html#create-interface-endpoint>`_ .
 
 4. After the endpoint is created, Wazuh approves the connection and sends a notification when it is ready to use.
 
-5. You can now register your agent but replace the *WAZUH_MANAGER_IP* value, ``vpce-<aws-endpoint-id>.vpce-svc-<aws-service-id>.<region>.vpce.amazonaws.com``, with the endpoint's DNS.
+5. You can now register your agent but replace the *WAZUH_MANAGER_IP* value (``vpce-<aws-endpoint-id>.vpce-svc-<aws-service-id>.<region>.vpce.amazonaws.com``) with the endpoint's DNS.
 
    If the agents are located in a different region than your endpoint, use VPC Peerings to connect them to the endpoint service.
 
