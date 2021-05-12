@@ -76,10 +76,10 @@ A non-default location can be specified for the config file by setting the `WAZU
 Examples
 --------
 
-Getting S3 token for Cold storage
+Getting S3 token for cold storage
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This command generates an AWS token to access the cold storage of the environment with cloud ID `012345678ab`:
+This command generates an AWS token to access the cold storage of the environment with cloud ID `012345678ab`.
 
 .. code-block:: console
 
@@ -94,10 +94,10 @@ This command generates an AWS token to access the cold storage of the environmen
   aws_secret_access_key = A...E
   aws_session_token = F...Q==
 
-Listing Cold storage
+Listing cold storage
 ^^^^^^^^^^^^^^^^^^^^
 
-This commands lists the cold storage files of the environment `012345678ab` between the specified dates:
+This command lists the cold storage files of the environment `012345678ab` between the specified dates.
 
 .. code-block:: console
 
@@ -110,10 +110,10 @@ This commands lists the cold storage files of the environment `012345678ab` betw
   012345678ab/output/alerts/2021/05/07/012345678ab_output_alerts_20210507T1040_mXSoDTf5Pgyr8b8D.json.gz
   012345678ab/config/2021/05/07/012345678ab_config_20210507T1021_TzLKCLZp4E8BUmPV.tar.gz
 
-Downloading Cold storage
+Downloading cold storage
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-This command downloads in the `/home/test` directory the cold storage files of the environment `012345678ab` between the specified dates:
+This command downloads in the `/home/test` directory the cold storage files of the environment `012345678ab` between the specified dates.
 
 .. code-block:: console
 
