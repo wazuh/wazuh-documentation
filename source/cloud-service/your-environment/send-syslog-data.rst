@@ -83,7 +83,7 @@ Use Logstash on a Windows host with a Wazuh agent to receive syslog, log to a fi
 
 2. Install Logstash.
 
-   #. Download the Logstash ZIP package from https://www.elastic.co/downloads/logstash.
+   #. `Download the Logstash <https://www.elastic.co/downloads/logstash>`_ ZIP package.
    #. Extract the ZIP contents into a local folder. For example, to ``C:\logstash\``.
 
 3. Install ``logstash-input-syslog`` and ``logstash-output-file`` plugins.
@@ -123,7 +123,7 @@ To perform the following steps, make sure to replace ``<file_name.log>`` with th
    
 6. Configure the agent to read the Logstash output file.
 
-   Edit ``C:\Program Files (x86)\ossec-agent\ossec.conf`` to add the following:
+   Edit ``C:\Program Files (x86)\ossec-agent\ossec.conf`` adding the following:
 
    .. code-block:: XML
 
@@ -134,7 +134,7 @@ To perform the following steps, make sure to replace ``<file_name.log>`` with th
       </localfile>
       </ossec_config>
 
-8. Restart Logstash.
+7. Restart Logstash.
 
    #. Run Logstash from the command line:
 
@@ -144,7 +144,7 @@ To perform the following steps, make sure to replace ``<file_name.log>`` with th
    
    #. `install Logstash as a Windows Service <https://www.elastic.co/guide/en/logstash/current/running-logstash-windows.html#running-logstash-windows>`_ either using `NSSM <https://www.elastic.co/guide/en/logstash/current/running-logstash-windows.html#running-logstash-windows-nssm>`_ or `Windows Task Scheduler <https://www.elastic.co/guide/en/logstash/current/running-logstash-windows.html#running-logstash-windows-scheduledtask>`_.
 
-9. Restart Wazuh Agent. If you are running PowerShell, use the following command:
+8. Restart Wazuh Agent. If you are running PowerShell, use the following command:
 
    .. code-block:: console
       
