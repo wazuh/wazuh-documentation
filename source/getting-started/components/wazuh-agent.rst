@@ -5,7 +5,7 @@
 Wazuh agent
 ===========
 
-The Wazuh agent runs on Linux, Windows, macOS, Solaris, AIX, and other operating systems. It can be deployed to laptops, desktops, servers, cloud instances, containers, or virtual machines. It provides threats prevention, detection, and response capabilities. It is also used to collect different types of system and application data, that it forwards to the :ref:`Wazuh server <wazuh_server>` through an encrypted and authenticated channel.
+The Wazuh agent runs on Linux, Windows, macOS, Solaris, AIX, and other operating systems. It can be deployed to laptops, desktops, servers, cloud instances, containers, or virtual machines. It provides threats prevention, detection, and response capabilities. It is also used to collect different types of system and application data, that it forwards to the :ref:`Wazuh manager <wazuh_manager>` through an encrypted and authenticated channel.
 
 Agent architecture
 ------------------
@@ -26,7 +26,7 @@ All agent modules have different purposes and settings. Here is a brief descript
 
 - **Log collector:** This agent component can read flat log files and Windows events, collecting operating system and application log messages. It does support XPath filters for Windows events and recognizes multi-line formats (e.g. Linux Audit logs). It can also enrich JSON events with additional metadata.
 
-- **Command execution:** Agents can run authorized commands periodically, collecting their output and reporting it back to the Wazuh server for further analysis. This module can be used to meet different purposes (e.g. monitoring hard disk space left, getting a list of last logged in users, etc.).
+- **Command execution:** Agents can run authorized commands periodically, collecting their output and reporting it back to the Wazuh manager for further analysis. This module can be used to meet different purposes (e.g. monitoring hard disk space left, getting a list of last logged in users, etc.).
 
 - **File integrity monitoring (FIM):** This module monitors the file system, reporting when files are created, deleted, or modified. It keeps track of file attributes, permissions, ownership, and content. When an event occurs, it captures *who*, *what*, and *when* details in real time. Additionally, this module builds and maintains a database with the state of the monitored files, allowing queries to be run remotely.
 
@@ -42,11 +42,11 @@ All agent modules have different purposes and settings. Here is a brief descript
 
 - **Cloud security monitoring:** This component monitors cloud providers such as Amazon AWS, Microsoft Azure, or Google GCP. It natively communicates with their APIs. It is capable of detecting changes to the cloud infrastructure (e.g. a new user is created, a security group is modified, a cloud instance is stopped, etc.), and collecting cloud services log data (e.g. AWS Cloudtrail, AWS Macie, AWS GuardDuty, Azure Active Directory, etc.)
 
-Communication with Wazuh server
--------------------------------
+Communication with the Wazuh manager
+------------------------------------
 
-The Wazuh agent communicates with the :ref:`Wazuh server <wazuh_server>` in order to ship collected data and security-related events. Besides, the agent sends operational data, reporting its configuration and status. Once connected, the agent can be upgraded, monitored, and configured remotely from the Wazuh server.
+The Wazuh agent communicates with the :ref:`Wazuh manager <wazuh_manager>` in order to ship collected data and security-related events. Besides, the agent sends operational data, reporting its configuration and status. Once connected, the agent can be upgraded, monitored, and configured remotely from the Wazuh manager.
 
-The Wazuh agent communication with the server takes place through a secure channel (TCP or UDP), providing data encryption and compression in real time. Additionally, it includes flow control mechanisms to avoid flooding, queueing events when necessary and protecting the network bandwidth.
+The Wazuh agent communication with the manager takes place through a secure channel (TCP or UDP), providing data encryption and compression in real time. Additionally, it includes flow control mechanisms to avoid flooding, queueing events when necessary and protecting the network bandwidth.
 
-The registration of the Wazuh agent is necessary prior to connecting it to the server for the first time. This process provisions the agent with a unique pre-shared key that is used for authentication and data encryption. 
+The registration of the Wazuh agent is necessary prior to connecting it to the manager for the first time. This process provisions the agent with a unique pre-shared key that is used for authentication and data encryption. 

@@ -11,7 +11,7 @@ A Wazuh indexer cluster is a collection of one or more nodes that communicate wi
 
 For production environments it is recommended to deploy the Wazuh server and Wazuh indexer to different hosts. In this scenario, Wazuh forwarder is used to securely forward Wazuh alerts and/or archived events to the Wazuh indexer cluster (single-node or multi-node) using TLS encryption.
 
-The diagram below represents a Wazuh deployment architecture. It shows the solution components and how the :ref:`Wazuh manager <wazuh_server>` and :ref:`Wazuh indexer <elastic_stack>` can be configured as a cluster, providing load balancing and high-availability.
+The diagram below represents a Wazuh deployment architecture. It shows the solution components and how the :ref:`Wazuh manager <wazuh_manager>` and :ref:`Wazuh indexer <wazuh_indexer>` can be configured as a cluster, providing load balancing and high-availability.
 
 .. image:: ../images/getting_started/deployment.png
     :alt: Wazuh deployment
@@ -21,7 +21,7 @@ The diagram below represents a Wazuh deployment architecture. It shows the solut
 Wazuh agent - Wazuh manager communication
 -----------------------------------------
 
-:ref:`Wazuh agent <wazuh_agent>` continuously sends events to the :ref:`Wazuh manager <wazuh_server>` for analysis and threat detection. In order to start shipping them, the agent establishes a connection with the server service for agents connection, which listens on port 1514 (this is configurable). The Wazuh manager then decodes and rule-checks the received events, utilizing the analysis engine. Events that trip a rule are augmented with alert data such as rule id and rule name. Events can be spooled to one or both of the following files, depending on whether or not a rule is tripped:
+:ref:`Wazuh agent <wazuh_agent>` continuously sends events to the :ref:`Wazuh manager <wazuh_manager>` for analysis and threat detection. In order to start shipping them, the agent establishes a connection with the server service for agents connection, which listens on port 1514 (this is configurable). The Wazuh manager then decodes and rule-checks the received events, utilizing the analysis engine. Events that trip a rule are augmented with alert data such as rule id and rule name. Events can be spooled to one or both of the following files, depending on whether or not a rule is tripped:
 
 - The file ``/var/ossec/logs/archives/archives.json`` contains all events whether they tripped a rule or not.
 - The file ``/var/ossec/logs/alerts/alerts.json`` contains only events that tripped a rule with high enough priority (the threshold is configurable).
@@ -35,7 +35,7 @@ Wazuh manager - Wazuh indexer communication
 
 Wazuh server uses Wazuh forwarder to send alert and event data to the Wazuh indexer server, using TLS encryption. Wazuh forwarder reads the Wazuh manager output data and sends it to the Wazuh indexer (by default listening on port 9200/TCP). Once the data is indexed by the Wazuh indexer, the Wazuh WUI is used to mine and visualize the information.
 
-The Wazuh web user interface queries the Wazuh RESTful API (by default listening on port 55000/TCP on the Wazuh server) in order to display configuration and status-related information of the :ref:`Wazuh manager <wazuh_server>` and :ref:`agents <wazuh_agent>`. It can also modify, through API calls, agents or server configuration settings when desired. This communication is encrypted with TLS and authenticated with username and password.
+The Wazuh web user interface queries the Wazuh RESTful API (by default listening on port 55000/TCP on the Wazuh server) in order to display configuration and status-related information of the :ref:`Wazuh manager <wazuh_manager>` and :ref:`agents <wazuh_agent>`. It can also modify, through API calls, agents or server configuration settings when desired. This communication is encrypted with TLS and authenticated with username and password.
 
 Required ports
 --------------
@@ -88,6 +88,6 @@ Both alerts and non-alert events are stored in files on the Wazuh server, in add
   -rw-r----- 1 wazuh wazuh 156296 Jan  2 00:00 ossec-archive-03.log.gz
   -rw-r----- 1 wazuh wazuh    346 Jan  2 00:00 ossec-archive-03.log.sum
 
-Rotation and backups of archive files are recommended according to the storage capacity of the :ref:`Wazuh manager <wazuh_server>`. By using *cron* jobs, you could easily arrange to keep only a certain time window of archive files locally on the server (e.g., last year or last three months).
+Rotation and backups of archive files are recommended according to the storage capacity of the :ref:`Wazuh manager <wazuh_manager>`. By using *cron* jobs, you could easily arrange to keep only a certain time window of archive files locally on the server (e.g., last year or last three months).
 
 On the other hand, you may choose to dispense with storing archive files at all and simply rely on the Wazuh indexer for archive storage, especially if you are running periodic Wazuh indexer snapshot backups and/or a multi-node Wazuh indexer cluster with shard replicas for high availability. You could even use a *cron* job to move snapshotted indexes to a final data storage server, and sign them using MD5, SHA1, and SHA256 hashing algorithms.

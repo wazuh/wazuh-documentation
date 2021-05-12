@@ -14,7 +14,7 @@ The Wazuh security platform provides threat detection, configuration compliance,
 Amazon Web Services
 -------------------
 
-The :ref:`Wazuh agent <wazuh_agent>` also provides a module to monitor and secure your AWS cloud infrastructure. This module collects AWS services log data from S3 buckets, and forwards collected log messages to the :ref:`Wazuh server <wazuh_server>`, where events are analyzed using out-of-the-box Wazuh rules for AWS. 
+The :ref:`Wazuh agent <wazuh_agent>` also provides a module to monitor and secure your AWS cloud infrastructure. This module collects AWS services log data from S3 buckets, and forwards collected log messages to the :ref:`Wazuh server <wazuh_manager>`, where events are analyzed using out-of-the-box Wazuh rules for AWS. 
 
 The following list describes the AWS services that Wazuh is capable of monitoring:
 
