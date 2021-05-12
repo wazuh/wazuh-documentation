@@ -42,12 +42,10 @@ Can I try it for free?
 
 Yes. Wazuh provides a free trial for you to create a cloud environment and access the Wazuh solution and its capabilities. You can :ref:`sign up for a 14-day free trial <cloud_getting_started_sign_up>` and no credit card information is required to complete this process.
 
-
 Will I be charged when my trial is over?
 ----------------------------------------
 
 No. Wazuh does not request credit card information to start your trial. Charges are only applied if you decide to keep using the service beyond the trial period.
-
 
 Is it PCI DDS compliant?
 ------------------------
@@ -60,7 +58,6 @@ How can I get support?
 ----------------------
 
 Every environment includes support after the first payment.
-
 
 Where is Wazuh Cloud hosted?
 ----------------------------
@@ -75,7 +72,7 @@ See :ref:`tier <cloud_glossary_tier>` in the Glossary section.
 What happens if the tier limit is reached?
 ------------------------------------------
 
-When the tier limit is reached, the oldest events are removed from your index and placed in cold storage for you to access them. To learn more about data logging and storage, see the :ref:`cold storage <cloud_your_environment_accessing_cold_storage>` section.
+When the tier limit is reached, the oldest events are removed from your index and placed in cold storage for you to access them. To learn more about data logging and storage, see the :ref:`Cold storage <cloud_your_environment_accessing_cold_storage>` section.
 
 Can I cancel at any time?
 -------------------------
