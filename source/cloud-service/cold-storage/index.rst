@@ -15,12 +15,10 @@ Wazuh ingests and indexes the events sent by the agents, making the data searcha
 At the same time, data is sent to cold storage, with a delay of a maximum of 30 minutes since it is first processed by Wazuh. The cold storage is an AWS S3 bucket to store your logs for longer periods of time and meet compliance requirements. Also, you can reindex the data to other environments for investigations.
 
 
-- This is an example of how Wazuh manages storing data:
+- This is an example of how Wazuh manages the storing of data:
 
   An environment with a tier of 100GB has 50 agents connected, and each one of them generates 100MB per day. Wazuh ingests 5GB per day (50 agents x 100MB/day = 5000MB = 5GB).
-  Assuming that 20% of the events generate an alert, Wazuh indexes 1GB per day (20% 5GB = 1GB). In this scenario, the hot storage contains 100 days (100GB / 1GB/day = 100 days).
-
-  When those 100GB of data are exceeded, the oldest data is rotated and sent to cold storage where the information remains accessible, keeping 100GB of total data in the hot storage.
+  Assuming that 20% of the events generate an alert, Wazuh indexes 1GB per day (20% 5GB = 1GB). In this scenario, the hot storage contains 100 days (100GB / 1GB/day = 100 days). When those 100GB of data are exceeded, the oldest data is rotated and sent to cold storage where the information remains accessible, keeping 100GB of total data in the hot storage.
 
 .. _cloud_cold_storage_configuration:
 
@@ -104,18 +102,18 @@ The files include the following fields:
 Access
 ------
 
-To access your cold storage you need an AWS token that grants permission on the AWS S3 bucket of your environment. This token can be generated using the Wazuh Cloud API.
+To access your cold storage, you need an AWS token that grants permission on the AWS S3 bucket of your environment. This token can be generated using the Wazuh Cloud API.
 
 .. note::
    See the :ref:`Wazuh Cloud CLI <cloud_wazuh_cloud_cli>` section to learn how to list and download your cold storage automatically.
 
 
-As an example, we describe below the steps to follow in order to list the files of your cold storage:
+The following example describes the steps to follow to list the files of your cold storage:
 
 
 1. Before your start using the Wazuh Cloud API, you need an API key. To generate your API key, see the :ref:`Authentication <cloud_apis_auth>` section.
 
-2. Use the ``POST /storage/token`` endpoint of the :cloud-api-ref:`Wazuh Cloud API <tag/storage>` to get the AWS token to access the cold storage of a specific environment. In this example, we generate an AWS token valid for 3600 seconds for the environment `0123456789ab`.
+2. Use the ``POST /storage/token`` endpoint of the :cloud-api-ref:`Wazuh Cloud API <tag/storage>` to get the AWS token and access the cold storage of a specific environment. In this example, we generate an AWS token valid for 3600 seconds for the environment `0123456789ab`.
 
    .. code-block::
 
@@ -142,7 +140,7 @@ As an example, we describe below the steps to follow in order to list the files 
          }
       }
 
-3. Now, we use the AWS-CLI tool to list the files. First, add the token to the AWS credentials file ``~/.aws/credentials``:
+3. Using the AWS-CLI tool to list the files, add the token to the AWS credentials file ``~/.aws/credentials``.
 
    .. code-block:: console
       
@@ -151,7 +149,7 @@ As an example, we describe below the steps to follow in order to list the files 
       aws_secret_access_key = qEzCk63a224...5aB+e4fC1BR0G
       aws_session_token = MRg3t7HIuoA...4o4BXSAcPfUD8
 
-4. Finally, run the following command to list your files.
+4. Run the following command to list your files.
 
    .. code-block:: console
       
