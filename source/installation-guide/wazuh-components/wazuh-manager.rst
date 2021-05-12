@@ -2,7 +2,7 @@
 
 .. meta:: :description: Learn how to install Elastic Stack for using Wazuh on Debian
 
-.. _wazuh_manager:
+.. _installation_wazuh_manager:
 
 
 Wazuh manager

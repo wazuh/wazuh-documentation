@@ -2,7 +2,7 @@
 
 .. meta:: :description: Learn how to install Opendistro for using Wazuh
 
-.. _wazuh_indexer:
+.. _installation_wazuh_indexer:
 
 
 Wazuh indexer
