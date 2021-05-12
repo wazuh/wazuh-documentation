@@ -79,35 +79,51 @@ Examples
 Getting S3 token for Cold storage
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+This command generates an AWS token to access the cold storage of the environment with cloud ID `012345678ab`:
+
 .. code-block:: console
 
-  # wcloud-cli cold-storage get-aws-s3-token <cloud-id>
+  # wcloud-cli cold-storage get-aws-s3-token 012345678ab
 
 .. code-block:: none
   :class: output
 
-  Pending
+  The following AWS credentials will be valid until 2021-05-07 13:45:24:
+  [wazuh_cloud_storage]
+  aws_access_key_id = A...Q
+  aws_secret_access_key = A...E
+  aws_session_token = F...Q==
 
 Listing Cold storage
 ^^^^^^^^^^^^^^^^^^^^
 
+This commands lists the cold storage files of the environment `012345678ab` between the specified dates:
+
 .. code-block:: console
 
-  # wcloud-cli cold-storage list <cloud-id> --start <YYYY-MM-DD> --end <YYYY-MM-DD>
+  # wcloud-cli cold-storage list 012345678ab --start 2021-05-07 --end 2021-05-07
 
 .. code-block:: none
   :class: output
 
-  Pending
+  Environment '012345678ab' files from 2021-05-07 to 2021-05-07:
+  012345678ab/output/alerts/2021/05/07/012345678ab_output_alerts_20210507T1040_mXSoDTf5Pgyr8b8D.json.gz
+  012345678ab/config/2021/05/07/012345678ab_config_20210507T1021_TzLKCLZp4E8BUmPV.tar.gz
 
 Downloading Cold storage
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
+This command downloads in the `/home/test` directory the cold storage files of the environment `012345678ab` between the specified dates:
+
 .. code-block:: console
 
-  # wcloud-cli cold-storage download <cloud-id> <output-path> --start <YYYY-MM-DD> --end <YYYY-MM-DD>
+  # wcloud-cli cold-storage download 012345678ab /home/test --start 2021-05-07 --end 2021-05-07
 
 .. code-block:: none
   :class: output
 
-  Pending
+  Environment '012345678ab' files from 2021-05-07 to 2021-05-07:
+  Downloading object 012345678ab/output/alerts/2021/05/07/012345678ab_output_alerts_20210507T1040_mXSoDTf5Pgyr8b8D.json.gz
+  Downloaded object 012345678ab/output/alerts/2021/05/07/012345678ab_output_alerts_20210507T1040_mXSoDTf5Pgyr8b8D.json.gz
+  Downloading object 012345678ab/config/2021/05/07/012345678ab_config_20210507T1021_TzLKCLZp4E8BUmPV.tar.gz
+  Downloaded object 012345678ab/config/2021/05/07/012345678ab_config_20210507T1021_TzLKCLZp4E8BUmPV.tar.gz

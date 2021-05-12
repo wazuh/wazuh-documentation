@@ -109,7 +109,9 @@ To access your cold storage you need an AWS token that grants permission on the 
 .. note::
    See the :ref:`Wazuh Cloud CLI <cloud_wazuh_cloud_cli>` section to learn how to list and download your cold storage automatically.
 
-Follow these steps to get access to your cold storage:
+
+As an example, we describe below the steps to follow in order to list the files of your cold storage:
+
 
 1. Before your start using the Wazuh Cloud API, you need an API key. To generate your API key, see the :ref:`Authentication <cloud_apis_auth>` section.
 
