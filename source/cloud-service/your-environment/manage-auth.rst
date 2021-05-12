@@ -28,7 +28,7 @@ Follow these steps to create an internal user with read access as an example:
 
 3. Click **Create internal user**, complete the empty fields with the requested information, and click **Create** to create a user.
 
-4. Go to the **Security** > **Roles** page.
+4. Go to **Security** and select **Roles** to open the page.
 
 5. Click **Create role**, complete the empty fields, and then click **Create** to complete the task. 
    
@@ -46,7 +46,7 @@ Follow these steps to create an internal user with read access as an example:
 
 6. To map the role to the appropriate user, follow these steps:
    
-   #. Go to the **Security** > **Roles** page and click the name of the role selected to open the window.
+   #. Go to **Security**, select **Roles** to open the page, and click the name of the role selected to open the window.
    #. Select the **Mapped users** tab and click **Manage mapping**.
    #. Add the user you created in the previous steps and click **Map** to confirm the action.
 
@@ -66,4 +66,4 @@ Now, your new user is able to access the Wazuh WUI as read-only user. To add mor
 Integrating with external user management systems
 -------------------------------------------------
 
-You can configure Wazuh to communicate with an external user management system such as LDAP to authenticate users. Open a support ticket to perform this integration.
+You can configure Wazuh to communicate with an external user management system such as LDAP to authenticate users. Open a support ticket through the **Help** section on your Wazuh Cloud Console to perform this integration.
