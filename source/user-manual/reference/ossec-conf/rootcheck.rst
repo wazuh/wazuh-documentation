@@ -50,7 +50,7 @@ The base directory that will be prefixed to the following options:
 - Check rootkits
 - Check trojans
 - Scan the ``/dev`` directory
-- Check de hidden files using system calls
+- Check the hidden files using system calls
 
 +-----------------------------+---------------------+
 | **Default value (UNIX)**    | /                   |
