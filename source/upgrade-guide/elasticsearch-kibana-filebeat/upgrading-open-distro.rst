@@ -442,6 +442,12 @@ Upgrading Kibana
 
       # setcap 'cap_net_bind_service=+ep' /usr/share/kibana/node/bin/node
 
+#. **(Recommended)** Enable multitenancy in the ``/etc/kibana/kibana.yml`` configuration file:
+
+   .. code-block:: console
+
+      opendistro_security.multitenancy.enabled: true
+
 #. Restart Kibana:
 
     .. include:: ../../_templates/installations/basic/elastic/common/enable_kibana.rst
