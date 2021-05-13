@@ -323,7 +323,7 @@ An example response should look as follows:
       TLS version: TLSv1.3
       dial up... OK
     talk to server... OK
-    version: 7.10.2
+    version: 7.11.2
    
 
 
