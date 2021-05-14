@@ -14,5 +14,5 @@ To see your environment usage:
 2. Go to **Environments** and select your environment.
 3. Click on **Metrics**.
    
-  Metrics and environment usage data are displayed on the Metrics tab.
+Metrics and environment usage data are displayed on the Metrics tab.
 
