@@ -18,13 +18,13 @@ You can use the native support for managing and authenticating users, or integra
 Native support for users and roles
 ----------------------------------
 
-The cloud-delivered visualization WUI allows you to add users, create roles, and mapping roles to users.
+The Wazuh WUI allows you to add users, create roles, and mapping roles to users.
 
 Follow these steps to create an internal user with read access as an example:
 
 1. :ref:`Log into your WUI<cloud_getting_started_wui_access>` as administrator.
 
-2. Click the Kibana menu icon to open the options, select **Security** and then **Internal users** to open the internal users page.
+2. Click the upper-left menu icon to open the options, select **Security** and then **Internal users** to open the internal users page.
 
 3. Click **Create internal user**, complete the empty fields with the requested information, and click **Create** to create a user.
 
