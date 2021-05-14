@@ -8,7 +8,7 @@
 Getting started
 ===============
 
-To get started with Wazuh Cloud, you need to create a Wazuh Cloud account and set up the environment, a deployment that contains all the Wazuh components ready to be used. Creating an environment is streamlined for you. Installing the Wazuh components, defining scalability, and updating the solution is all handled by Wazuh. To start using Wazuh Cloud, you need to access the Wazuh WUI and simply deploy the Wazuh agent to your endpoints. 
+To get started with Wazuh Cloud, you need to create a Wazuh Cloud account and set up your environment, a deployment that contains all the Wazuh components ready to be used. Creating an environment is streamlined for you. Installing and updating the Wazuh components, and defining scalability, is all handled by Wazuh Cloud. Once your environment is ready, you need to access the Wazuh WUI and simply deploy the Wazuh agent to your endpoints. 
 
 
 .. _cloud_getting_started_sign_up:
@@ -19,7 +19,7 @@ Sign up for a trial
 .. meta::
   :description: Learn about signing up for a trial. 
 
-Wazuh provides a free trial for you to create a cloud environment and access the Wazuh solution and its capabilities.
+Wazuh provides a free trial for you to create a Cloud environment and explore the Wazuh Cloud service. 
 
 Follow the next steps to create your trial environment.
 
@@ -79,7 +79,7 @@ Follow these steps to access Wazuh WUI:
 
 It is highly recommended for security reasons to change the default password and create your own users. 
 
-.. note:: You can access the Wazuh WUI directly using the URL ``https://<cloud_id>.cloud.wazuh.com``, where ``<cloud_id>`` is your Cloud ID.
+.. note:: You can access the Wazuh WUI directly using the URL ``https://<cloud_id>.cloud.wazuh.com``, where ``<cloud_id>`` is the Cloud ID of your environment.
 
 .. _cloud_getting_started_register_agents:
 
