@@ -9,14 +9,11 @@
 Cloud service
 =============
   
-Wazuh Cloud hosts and manages all the Wazuh components in one integrated platform, allowing you to capitalize on the Wazuh capabilities and features. It provides cloud-delivered protection with *Security Information and Event Management* (SIEM) and *Endpoint Detection and Response* (EDR).
+Wazuh Cloud hosts and manages all the Wazuh components in one integrated platform. You can create and tailor your Cloud environment to meet specific needs and upgrade it to the most appropriate tier. The setting up of a Wazuh Cloud environment is streamlined: installing and updating the Wazuh components, and defining scalability is all handled by Wazuh Cloud.
 
-The cloud solution offers scalability with its flexible infrastructure. You can tailor the cloud solution to meet specific needs and upgrade it to the most appropriate tier. 
+Wazuh protects your enterprise with *Security Information and Event Management* (SIEM) and *Endpoint Detection and Response* (EDR), and Wazuh Cloud single-tennancy isolates your data, providing another layer of security.
 
-Also, data in single-tenant cloud environments is completely isolated. That means that your account is the only one with access to the environment and the Wazuh components, providing another layer of security.
-
-The setting up of a Wazuh Cloud environment is streamlined. Installing the Wazuh components, defining scalability, and updating the solution is all handled by Wazuh.
-We provide a free trial for you to create a cloud environment and access the Wazuh solution and its capabilities.  
+We provide a free trial for you to create a Cloud environment and explore the Wazuh Cloud service. 
 
 Learn more about Wazuh Cloud in the below sections.
 
