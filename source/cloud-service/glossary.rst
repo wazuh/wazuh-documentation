@@ -86,7 +86,7 @@ Available regions:
 Wazuh Cloud API
 ---------------
 
-A RESTful API is an application programming interface used to interact with Wazuh Cloud. The RESTful API is used, for example, to provide access to an environment's cold storage.
+The Wazuh Cloud API is an application programming interface used to interact with Wazuh Cloud. The Wazuh Cloud API is used, for example, to provide access to an environment's cold storage.
 
 .. _cloud_glossary_wazuh_cloud_cli:
 
