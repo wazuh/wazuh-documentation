@@ -23,7 +23,7 @@ An example output of the command looks as follows:
 .. code-block:: console
   :class: output
 
-  "version": "7.10.0",
+  "version": "7.10.2",
 
 
 The Wazuh version can be checked by executing the following command:
@@ -59,7 +59,7 @@ If this error occurs after an **upgrade from a 3.x version** the solution is to 
 
 .. code-block:: console
    
-   # curl 'https://<kibana_ip>:<kibana_port>/api/saved_objects/index-pattern/wazuh-alerts-3.x-*' -X DELETE  -H 'Content-Type: application/json' -H 'kbn-version: 7.10.0' -k -u <elasticsearch_user>:<elasticsearch_password>
+   # curl 'https://<kibana_ip>:<kibana_port>/api/saved_objects/index-pattern/wazuh-alerts-3.x-*' -X DELETE  -H 'Content-Type: application/json' -H 'kbn-version: 7.10.2' -k -u <elasticsearch_user>:<elasticsearch_password>
 
 
 If you have a custom index pattern, make sure to replace it accordingly.
@@ -145,7 +145,7 @@ To ensure that Filebeat is correctly configured, run the following command:
               TLS version: TLSv1.3
               dial up... OK
             talk to server... OK
-            version: 7.10.0
+            version: 7.10.2
 
 
 
