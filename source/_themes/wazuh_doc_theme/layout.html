@@ -37,6 +37,10 @@
   {%- set pagetitle = title|striptags + dash_separator + parents[-1].title|striptags %}
 {%- endif %}
 
+{%- if (pagetitle + titlesuffix)|length > 70 %}
+  {%- set titlesuffix = "" %}
+{%- endif %}
+
 <!DOCTYPE html>
 <html lang="{{ language }}">
 {% block head %}
