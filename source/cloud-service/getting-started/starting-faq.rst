@@ -33,7 +33,7 @@ Cloud service FAQ
 What is Wazuh Cloud?
 --------------------
 
-Wazuh Cloud hosts and manages all the Wazuh components in one integrated platform, allowing you to capitalize on the Wazuh capabilities and features. It provides cloud-delivered protection with *Security Information and Event Management* (SIEM) and *Endpoint Detection and Response* (EDR).
+Wazuh Cloud hosts and manages all the Wazuh components in one integrated platform, you simply need to access your environment and deploy the Wazuh agent to your endpoints. Wazuh provides protection with *Security Information and Event Management* (SIEM) and *Endpoint Detection and Response* (EDR).
 
 The setting up of a Wazuh cloud environment is streamlined and no manual configuration is required.
 
@@ -72,12 +72,12 @@ See :ref:`tier <cloud_glossary_tier>` in the Glossary section.
 What happens if the tier limit is reached?
 ------------------------------------------
 
-When the tier limit is reached, the oldest events are removed from your index and placed in cold storage for you to access them. To learn more about data logging and storage, see the :ref:`Cold storage <cloud_your_environment_accessing_cold_storage>` section.
+When the tier limit is reached, the oldest events are removed from your index. These data is available in cold storage for you to access them. To learn more about data logging and storage, see the :ref:`Cold storage <cloud_your_environment_accessing_cold_storage>` section.
 
 Can I cancel at any time?
 -------------------------
 
-Yes, you can cancel at any time with no penalty. You can keep using your environment until the end of the current period free of charge.
+Yes, you can cancel at any time with no penalty. You can keep using your environment until the end of your :ref:`current billing cycle <cloud_billing_history>` and no future charges are incurred after this period.
 
 How can I get help?
 -------------------
