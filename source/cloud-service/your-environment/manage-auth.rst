@@ -24,7 +24,7 @@ Follow these steps to create an internal user with read access as an example:
 
 1. :ref:`Log into your WUI<cloud_getting_started_wui_access>` as administrator.
 
-2. Click the Kibaba menu icon to open the options, select **Security** and then **Internal users** to open the internal users page.
+2. Click the Kibana menu icon to open the options, select **Security** and then **Internal users** to open the internal users page.
 
 3. Click **Create internal user**, complete the empty fields with the requested information, and click **Create** to create a user.
 
