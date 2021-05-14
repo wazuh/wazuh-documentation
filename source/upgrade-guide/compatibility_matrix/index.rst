@@ -126,6 +126,8 @@ The Wazuh app for Kibana requires compatibility between two different components
 +-----------------------------------+------------------------------------+---------------------------+
 |              |WAZUH_LATEST|                | |ELASTICSEARCH_LATEST|                             | |OPEN_DISTRO_LATEST|                    |
 +-----------------------------------+------------------------------------+---------------------------+
+|              |WAZUH_LATEST|                | |ELASTICSEARCH_ELK_LATEST|                             |                           |
++-----------------------------------+------------------------------------+---------------------------+
 
 
 You can find more information on the `Wazuh app for Kibana repository <https://github.com/wazuh/wazuh-kibana-app#installation>`_, where you can check a more detailed compatibility matrix between the Wazuh app and Elastic Stack versions.
