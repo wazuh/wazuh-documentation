@@ -25,7 +25,7 @@ The ``agent-auth`` program is the client application used along with :ref:`wazuh
 +---------------------+-------------+-----------------------------------------------------------------+
 | **-c <ciphers>**    | SSL cipher list. The format of this parameter is described in `SSL ciphers`_. |
 +                     +-------------+-----------------------------------------------------------------+
-|                     | **Default** | HIGH:!ADH:!EXP:!MD5:!RC4:!3DES:!CAMELLIA:@STRENGTH              |
+|                     | **Default** | ECDHE+AESGCM:!ECDSA                                             |
 +---------------------+-------------+-----------------------------------------------------------------+
 | **-D**              | Directory where Wazuh is installed.                                           |
 +                     +---------------------------------------+---------------------------------------+

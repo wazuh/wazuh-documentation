@@ -715,7 +715,7 @@ Wazuh Manager
       purge: 'yes'
       use_password: 'no'
       limit_maxagents: 'yes'
-      ciphers: 'HIGH:!ADH:!EXP:!MD5:!RC4:!3DES:!CAMELLIA:@STRENGTH'
+      ciphers: 'ECDHE+AESGCM:!ECDSA'
       ssl_agent_ca: null
       ssl_verify_host: 'no'
       ssl_manager_cert: 'sslmanager.cert'
@@ -1185,7 +1185,7 @@ Wazuh Agent
       agent_name: 'testname'
       groups: ''
       agent_address: ''
-      ssl_cipher: HIGH:!ADH:!EXP:!MD5:!RC4:!3DES:!CAMELLIA:@STRENGTH
+      ssl_cipher: HECDHE+AESGCM:!ECDSA
       server_ca_path: ''
       agent_certificate_path: ''
       agent_key_path: ''

@@ -185,7 +185,7 @@ ciphers
 Sets the list of ciphers for network communication using SSL.
 
 +--------------------+----------------------------------------------------+
-| **Default value**  | HIGH:!ADH:!EXP:!MD5:!RC4:!3DES:!CAMELLIA:@STRENGTH |
+| **Default value**  | ECDHE+AESGCM:!ECDSA                                |
 +--------------------+----------------------------------------------------+
 
 The format of this parameter is described in `SSL ciphers <https://www.openssl.org/docs/man1.1.0/apps/ciphers.html>`_.
@@ -205,7 +205,7 @@ Default configuration
     <force_time>0</force_time>
     <purge>yes</purge>
     <use_password>no</use_password>
-    <ciphers>HIGH:!ADH:!EXP:!MD5:!RC4:!3DES:!CAMELLIA:@STRENGTH</ciphers>
+    <ciphers>ECDHE+AESGCM:!ECDSA</ciphers>
     <!-- <ssl_agent_ca></ssl_agent_ca> -->
     <ssl_verify_host>no</ssl_verify_host>
     <ssl_manager_cert>etc/sslmanager.cert</ssl_manager_cert>
