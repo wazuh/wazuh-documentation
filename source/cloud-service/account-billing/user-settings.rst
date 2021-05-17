@@ -16,7 +16,7 @@ Update your email address
 
 Each Wazuh Cloud account has a primary email associated with it. If needed, you can change this primary email address.
 
-1. Log in to the Wazuh Cloud Console and click the upper-right user icon to open the menu.
+1. Log in to the `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_ and click the upper-right user icon to open the menu.
 2. Go to **User settings**.
 3. Click **Email address**.
 4. Enter a new email address and your current password, then click **Save** to confirm the action.
@@ -30,7 +30,7 @@ When you signed up for a Wazuh Cloud account with your email address, you select
 
 If you know your current password:
 
-1. Log in to the Wazuh Cloud Console and click the upper-right user icon to open the menu.
+1. Log in to the `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_ and click the upper-right user icon to open the menu.
 2. Go to **User settings**.
 3. In **Change password**, enter the current password and provide the new password that you want to use.
 4. Click **Save** to confirm the action.
@@ -49,7 +49,7 @@ To add an extra layer of security to your Wazuh Cloud account, you can set up a 
 
 To enable multi-factor authentication:
 
-1. Log in to the Wazuh Cloud Console and click the upper-right user icon to open the menu.
+1. Log in to the `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_ and click the upper-right user icon to open the menu.
 2. Go to **User settings**.
 3. Under Multi-factor authentication, click **Add MFA** and follow the steps described in the Set up virtual MFA device pane.
 4. Click **Enable MFA** to complete the process.
@@ -59,7 +59,7 @@ To enable multi-factor authentication:
 Configure your login method
 ---------------------------
 
-You can log in to your Wazuh Cloud Console using password-based login or Google Sign-In.
+You can log in to your `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_ using password-based login or Google Sign-In.
 
 - If you signed up for a Wazuh Cloud account using the password-based login, you can still log in with your Google account. You then have access to the Wazuh Cloud Console with both methods. To perform this action, click **Log in with Google** on the log in page of the Wazuh Cloud Console.   
 
