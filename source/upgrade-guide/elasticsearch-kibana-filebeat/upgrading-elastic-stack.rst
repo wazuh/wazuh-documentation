@@ -365,6 +365,37 @@ Upgrading Kibana
       NODE_OPTIONS="--max_old_space_size=2048"
       EOF
 
+#. Edit the ``/etc/kibana/kibana.yml`` configuration file: 
+
+
+   .. code-block:: none
+      :emphasize-lines: 3,20,21
+
+      server.host: <kibana_ip>
+      server.port: 443
+      elasticsearch.hosts: https://<elasticsearch_DN>:9200
+      elasticsearch.password: <elasticsearch_password>
+
+      # Elasticsearch from/to Kibana
+
+      elasticsearch.ssl.certificateAuthorities: /etc/kibana/certs/ca/ca.crt
+      elasticsearch.ssl.certificate: /etc/kibana/certs/kibana.crt
+      elasticsearch.ssl.key: /etc/kibana/certs/kibana.key
+
+      # Browser from/to Kibana
+      server.ssl.enabled: true
+      server.ssl.certificate: /etc/kibana/certs/kibana.crt
+      server.ssl.key: /etc/kibana/certs/kibana.key
+
+      # Elasticsearch authentication
+      xpack.security.enabled: true
+      elasticsearch.username: elastic
+      uiSettings.overrides.defaultRoute: "/app/wazuh"
+      elasticsearch.ssl.verificationMode: certificate
+
+   - ``elasticsearch.hosts:`` In case of having an IP, replace it with a DNS (Starting Elasticsearch 7.11.0, IPs are not allowed). For example, ``https://localhost:9200``
+   - Replace ``server.defaultRoute: /app/wazuh`` with ``uiSettings.overrides.defaultRoute: "/app/wazuh"``
+   - Add the following line to select ``certificate`` as verification mode: ``elasticsearch.ssl.verificationMode: certificate``
 
 #. Link Kibana’s socket to privileged port 443:
 
