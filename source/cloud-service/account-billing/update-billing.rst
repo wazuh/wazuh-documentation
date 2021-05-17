@@ -16,9 +16,9 @@ You can specify billing and operational contacts in addition to the primary emai
 
 To update billing and operational contacts:
 
-1. Go to the **Account** section of the Wazuh Cloud Console page.
+1. Log in to the `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_.
 
-2. Select **Contacts**.
+2. Go to the **Account** section and select **Contacts**.
 
 3. Add or remove contacts from the desired category.
 
