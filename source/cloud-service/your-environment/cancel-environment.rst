@@ -10,7 +10,7 @@ Cancellation
 
 To cancel your environment:
 
-  1. Log in to the Wazuh Cloud Console.
+  1. Log in to the `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_.
   2. Go to **Environments** and select your environment.
   3. Click on **Cancel environment** to confirm this action.
    
