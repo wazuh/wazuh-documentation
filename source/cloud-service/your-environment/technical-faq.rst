@@ -52,7 +52,7 @@ It is possible to get a new URL by opening a support ticket through the **Help**
 What happens if the tier limit is reached?
 ------------------------------------------
 
-When the tier limit is reached, the oldest events are removed from your index and placed in cold storage for you to access them. To learn more about data logging and storage, see the :ref:`Cold storage <cloud_your_environment_accessing_cold_storage>` section.
+When the tier limit is reached, the oldest events are removed from your index. These data is available in cold storage for you to access them. To learn more about data logging and storage, see the :ref:`Cold storage <cloud_your_environment_accessing_cold_storage>` section.
 
 Can I move data from cold to hot storage?
 -----------------------------------------
@@ -62,7 +62,7 @@ It is possible to download the data from the cold storage and reindex it into yo
 What if I need to change the size of my tier?
 ---------------------------------------------
 
-You can upgrade or downgrade the tier by contacting the Wazuh team on the **Help** section of your Wazuh Cloud Console.
+You can upgrade or downgrade the tier by contacting the Wazuh team through the **Help** section of your Wazuh Cloud Console.
 
 How do I get SSH access to my environment?
 ------------------------------------------
@@ -110,7 +110,7 @@ You can download your data from cold storage. Then, you can push it to other sol
 Is my environment shared with other customers?
 ----------------------------------------------
 
-No, your environment is isolated from other customers. That means that your account is the only one with access to the environment and the Wazuh components.
+No, your environment is isolated from other customers. That means that your account is the only one with access to your environment.
 
 What are the available regions?
 -------------------------------
