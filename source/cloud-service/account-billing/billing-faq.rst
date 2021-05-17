@@ -34,12 +34,12 @@ Each environment is charged monthly, according to the environment's beginning da
 Is my credit card information safe?
 -----------------------------------
 
-Your credit card information is sent securely to our billing provider, `Stripe <https://stripe.com>`_,  for safe storage.
+Your credit card information is sent securely to our billing provider, `Stripe <https://stripe.com>`_, and stored with them.
 
 Where can I see the next payment for an environment?
 ----------------------------------------------------
 
-See the :ref:`See your billing cycle and history <cloud_billing_history>` section to learn how to get details about the next billing of the current environments.
+See the :ref:`See your billing cycle and history <cloud_billing_history>` section to learn how to view the billing details of your environments.
 
 How do I view previous receipts and billing history?
 ----------------------------------------------------
