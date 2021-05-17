@@ -14,7 +14,7 @@ Wazuh Cloud supports only API key-based authentication.
 
 To obtain an API key:
 
-1. Log in to the Wazuh Cloud Console.
+1. Log in to the `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_.
 
 2. Go to the **Account** section and select **API Keys**.
   
@@ -30,7 +30,7 @@ To obtain an API key:
 
 To revoke an API key:
 
-1. Log in to the Wazuh Cloud Console.
+1. Log in to the `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_.
 
 2. Go to the **Account** section and select **API Keys**.
 
