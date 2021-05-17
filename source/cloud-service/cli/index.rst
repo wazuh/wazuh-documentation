@@ -79,7 +79,7 @@ Examples
 Getting S3 token for cold storage
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This command generates an AWS token to access the cold storage of the environment with cloud ID `012345678ab`.
+This command generates an AWS token to access the cold storage of the environment with Cloud ID `012345678ab`.
 
 .. code-block:: console
 
