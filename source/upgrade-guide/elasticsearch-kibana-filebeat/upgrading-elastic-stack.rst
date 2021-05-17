@@ -349,12 +349,15 @@ Upgrading Kibana
       # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_ELK_LATEST|-1.zip
 
 
-#. Update configuration file permissions:
+#. Update configuration file and certificates permissions:
 
     .. code-block:: console
 
-      # sudo chown kibana:kibana /usr/share/kibana/data/wazuh/config/wazuh.yml
-      # sudo chmod 600 /usr/share/kibana/data/wazuh/config/wazuh.yml
+      # chown kibana:kibana /usr/share/kibana/data/wazuh/config/wazuh.yml
+      # chmod 600 /usr/share/kibana/data/wazuh/config/wazuh.yml
+      # chown -R kibana: /etc/kibana/certs
+      # chmod -R 500 /etc/kibana/certs
+      # chmod 400 /etc/kibana/certs/ca/ca.* /etc/kibana/certs/kibana.*
 
 #. For installations on Kibana 7.6.x version and higher, it is recommended to increase the heap size of Kibana to ensure the Kibana's plugins installation:
 
