@@ -19,7 +19,7 @@ Sign up for a trial
 .. meta::
   :description: Learn about signing up for a trial. 
 
-Wazuh provides a free trial for you to create a Cloud environment and explore the Wazuh Cloud service. 
+Wazuh provides a free trial for you to create a cloud environment and explore the Wazuh Cloud service. 
 
 Follow the next steps to create your trial environment.
 
