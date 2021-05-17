@@ -340,8 +340,7 @@ Upgrading Kibana
     .. code-block:: console
 
       # chown -R kibana:kibana /usr/share/kibana
-      # chown -R kibana:kibana /usr/share/kibana/plugins
-
+    
 #. Install the Wazuh Kibana plugin:
 
     .. code-block:: console
