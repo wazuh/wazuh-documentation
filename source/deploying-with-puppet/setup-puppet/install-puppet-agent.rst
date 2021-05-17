@@ -22,13 +22,16 @@ Install the Puppet yum repository and then the "puppet-agent" package. See this 
 Installation on Debian/Ubuntu
 -----------------------------
 
-+----------------------------------------------------------------------------+
-| The releases supported by the manifest to install Wazuh are as follows:    |
-+------------+---------+--------+---------+------+--------+---------+--------+
-| **Ubuntu** | precise | trusty | vivid   | wily | xenial | yakketi | bionic |
-+------------+---------+--------+---------+------+--------+---------+--------+
-| **Debian** | jessie  | wheezy | stretch | sid                              |
-+------------+---------+--------+---------+----------------------------------+
++----------------------------------------------------------------------------+-------------+
+| The releases supported by the manifest to install Wazuh are as follows:                  |
++------------+---------+--------+---------+------+--------+---------+--------+-------------+
+| **Ubuntu** | precise | trusty | vivid   | wily | xenial | yakketi | bionic | Focal Fossa |
++------------+---------+--------+---------+------+--------+---------+--------+-------------+
+| **Debian** | jessie  | wheezy | stretch | sid                                            |
++------------+---------+--------+---------+----------------------------------+-------------+
+
+.. note::
+  ``Ubuntu Focal Fossa`` is supported since version 4.0.4
 
 Install ``curl``, ``apt-transport-https`` and ``lsb-release``:
 
