@@ -114,6 +114,8 @@ In the commands below ``127.0.0.1`` IP address is used. If Elasticsearch is boun
           .. code-block:: console
 
             # apt-get install elasticsearch=|ELASTICSEARCH_ELK_LATEST|
+          
+          It's recommended to keep your currently installed version of the configuration file (option N or O if prompted).  
 
         .. group-tab:: ZYpp
 
@@ -174,6 +176,8 @@ The following steps needs to be run in the Wazuh server or servers in case of Wa
         .. code-block:: console
 
           # apt-get install filebeat=|ELASTICSEARCH_ELK_LATEST|
+        
+        It's recommended to keep your currently installed version of the configuration file (option N or O if prompted).  
 
       .. group-tab:: ZYpp
 
@@ -321,6 +325,8 @@ Upgrading Kibana
           .. code-block:: console
 
             # apt-get install kibana=|ELASTICSEARCH_ELK_LATEST|
+
+          It's recommended to keep your currently installed version of the configuration file (option N or O if prompted).
 
         .. group-tab:: ZYpp
 
