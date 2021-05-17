@@ -60,7 +60,7 @@ To perform the following steps, make sure to replace ``<file_name.log>`` with th
       <location>/var/log/<file_name.log></location>
       </localfile>
 
-5. Restart rsyslog and wazuh agent.
+5. Restart rsyslog and the Wazuh agent.
 
    .. code-block:: console
 
@@ -123,7 +123,7 @@ To perform the following steps, make sure to replace ``<file_name.log>`` with th
    
 6. Configure the agent to read the Logstash output file.
 
-   Edit ``C:\Program Files (x86)\ossec-agent\ossec.conf`` adding the following:
+   Edit ``C:\Program Files (x86)\ossec-agent\ossec.conf`` by adding the following:
 
    .. code-block:: XML
 
@@ -142,9 +142,9 @@ To perform the following steps, make sure to replace ``<file_name.log>`` with th
    
          C:\logstash\bin\logstash.bat -f C:\logstash\config\logstash.conf
    
-   #. `install Logstash as a Windows Service <https://www.elastic.co/guide/en/logstash/current/running-logstash-windows.html#running-logstash-windows>`_ either using `NSSM <https://www.elastic.co/guide/en/logstash/current/running-logstash-windows.html#running-logstash-windows-nssm>`_ or `Windows Task Scheduler <https://www.elastic.co/guide/en/logstash/current/running-logstash-windows.html#running-logstash-windows-scheduledtask>`_.
+   #. `Install Logstash as a Windows Service <https://www.elastic.co/guide/en/logstash/current/running-logstash-windows.html#running-logstash-windows>`_ either using `NSSM <https://www.elastic.co/guide/en/logstash/current/running-logstash-windows.html#running-logstash-windows-nssm>`_ or `Windows Task Scheduler <https://www.elastic.co/guide/en/logstash/current/running-logstash-windows.html#running-logstash-windows-scheduledtask>`_.
 
-8. Restart Wazuh Agent. If you are running PowerShell, use the following command:
+8. Restart the Wazuh agent. If you are running PowerShell, use the following command:
 
    .. code-block:: console
       
