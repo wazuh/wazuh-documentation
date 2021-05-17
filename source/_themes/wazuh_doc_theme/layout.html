@@ -31,10 +31,12 @@
   {% endfor %}
 {%- endmacro %}
 
-{%- if not parents[-1] %}
-  {%- set pagetitle = title|striptags %}
-{%- else %}
-  {%- set pagetitle = title|striptags + dash_separator + parents[-1].title|striptags %}
+{%- set pagetitle = title|striptags %}
+{%- if parents[-1] %}
+  {%- set pagetitleparent = pagetitle + dash_separator + parents[-1].title|striptags %}
+  {%- if (pagetitleparent)|length <= 70 %}
+    {%- set pagetitle = pagetitleparent %}
+  {%- endif %}
 {%- endif %}
 
 {%- if (pagetitle + titlesuffix)|length > 70 %}
