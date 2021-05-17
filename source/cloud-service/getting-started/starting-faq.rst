@@ -35,22 +35,21 @@ What is Wazuh Cloud?
 
 Wazuh Cloud hosts and manages all the Wazuh components in one integrated platform, you simply need to access your environment and deploy the Wazuh agent to your endpoints. Wazuh provides protection with *Security Information and Event Management* (SIEM) and *Endpoint Detection and Response* (EDR).
 
-The setting up of a Wazuh cloud environment is streamlined and no manual configuration is required.
 
 Can I try it for free?
 ----------------------
 
-Yes. Wazuh provides a free trial for you to create a cloud environment and access the Wazuh solution and its capabilities. You can :ref:`sign up for a 14-day free trial <cloud_getting_started_sign_up>` and no credit card information is required to complete this process.
+Yes, Wazuh provides a free trial for you to create a cloud environment and access the Wazuh Cloud. You can :ref:`sign up for a 14-day free trial <cloud_getting_started_sign_up>` and no credit card information is required to complete this process.
 
 Will I be charged when my trial is over?
 ----------------------------------------
 
-No. Wazuh does not request credit card information to start your trial. Charges are only applied if you decide to keep using the service beyond the trial period.
+No, Wazuh does not request credit card information to start your trial. Charges are only applied if you decide to keep using the service beyond the trial period.
 
 Is it PCI DDS compliant?
 ------------------------
 
-Yes. The Wazuh Cloud platform is validated as PCI DSS Level 1 Service Provider compliant.
+Yes, the Wazuh Cloud platform is validated as PCI DSS Level 1 Service Provider compliant.
 
 .. _cloud_getting_started_support:
 
