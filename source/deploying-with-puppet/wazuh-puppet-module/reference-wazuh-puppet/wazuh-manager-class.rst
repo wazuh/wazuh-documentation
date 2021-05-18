@@ -70,6 +70,11 @@ $ossec_auth_use_password
 
   `Default no`
 
+$ossec_auth_protocol
+  Set the TLS protocol for network communication using SSL.
+
+  `Default 'TLSv1.2'`
+
 $ossec_auth_ciphers
   Sets the list of ciphers for network communication using SSL.
 

@@ -715,7 +715,8 @@ Wazuh Manager
       purge: 'yes'
       use_password: 'no'
       limit_maxagents: 'yes'
-      ciphers: 'ECDHE+AESGCM:!ECDSA'
+      ssl_protocol: 'TLSv1.2'
+      ssl_ciphers: 'ECDHE+AESzGCM:!ECDSA'
       ssl_agent_ca: null
       ssl_verify_host: 'no'
       ssl_manager_cert: 'sslmanager.cert'

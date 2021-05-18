@@ -32,6 +32,7 @@ Options
 - `ssl_manager_cert`_
 - `ssl_manager_key`_
 - `ssl_auto_negotiate`_
+- `ssl_protocol`_
 - `ciphers`_
 
 disabled
@@ -179,6 +180,17 @@ By default only TLS v1.2 is allowed. When set to ``yes`` the system will negotia
 
 In older systems, where the **manager does not support TLS v1.2**, this option will be enabled automatically.
 
+ssl_protocol
+^^^^^^^^^^^^
+
+Sets the version of the TLS protocol for network communication using SSL.
+
++--------------------+-------------------------------+
+| **Default value**  | TLSv1.2                       |
++--------------------+-------------------------------+
+| **Allowed values** | TLS, TLSv1, TLSv1.1, TLSv1,2  |
++--------------------+-------------------------------+
+
 ciphers
 ^^^^^^^
 
@@ -205,6 +217,7 @@ Default configuration
     <force_time>0</force_time>
     <purge>yes</purge>
     <use_password>no</use_password>
+    <ssl_protocol>TLSv1.2</ssl_protocol>
     <ciphers>ECDHE+AESGCM:!ECDSA</ciphers>
     <!-- <ssl_agent_ca></ssl_agent_ca> -->
     <ssl_verify_host>no</ssl_verify_host>
