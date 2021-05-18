@@ -1,4 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
+.. meta::
+  :description: Find out more about how to configure the ossec-agentd daemon with Wazuh.
+
+
 
 .. _ossec-agentd:
 
