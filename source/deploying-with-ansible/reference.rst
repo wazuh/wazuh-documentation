@@ -1185,7 +1185,7 @@ Wazuh Agent
       agent_name: 'testname'
       groups: ''
       agent_address: ''
-      ssl_cipher: HECDHE+AESGCM:!ECDSA
+      ssl_cipher: ECDHE+AESGCM:!ECDSA
       server_ca_path: ''
       agent_certificate_path: ''
       agent_key_path: ''
