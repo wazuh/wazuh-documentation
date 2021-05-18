@@ -66,7 +66,7 @@ Wazuh Cloud is hosted on Amazon Web Services (AWS).
 What is a tier?
 ---------------
 
-See :ref:`tier <cloud_glossary_tier>` in the Glossary section.
+The tier is the size limitation, in bytes, of the hot storage.
 
 What happens if the tier limit is reached?
 ------------------------------------------
