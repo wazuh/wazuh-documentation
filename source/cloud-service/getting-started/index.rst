@@ -31,7 +31,7 @@ To sign up, all you need is an email address:
 #. Go to our `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_ page.
 #. Enter your email address and password, or sign up with a Google account.
 
-You are ready to create your first :ref:`environment <cloud_glossary_environment>`.
+Now you are ready to create your first :ref:`environment <cloud_glossary_environment>`.
 
 Create environment
 ^^^^^^^^^^^^^^^^^^
@@ -46,7 +46,7 @@ Follow these steps to quickly set up and run your environment:
 
    2. Choose a :ref:`tier <cloud_glossary_tier>` to define the size in bytes of the indexed events. You can use this `estimation tool <https://wazuh.com/cloud/#pricing>`_ to calculate the Wazuh Cloud data tier.
    
-   .. note:: During the 14-day trial period, the tier limit is 100GB. Then, after your first payment, the full tier becomes unlocked. If all you want to do is try out Wazuh, the trial includes more than enough to get you started.
+   .. note:: During the 14-day trial period, the tier limit is 100GB. Then, after your first payment, the full tier becomes unlocked. For testing purposes, 100 GB is more than enough to get an insight into Wazuh Cloud.
 
    1. Select the :ref:`region <cloud_glossary_region>` where your environment gets hosted. If you are not sure what to pick, select one that is the closest to your location since this typically reduces latency for indexing and search requests.
 
@@ -70,12 +70,12 @@ Follow these steps to access Wazuh WUI:
 
 #. Log in to the `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_.
 #. On the **Environments** page, select the environment you want to access.
-#. Click **Open Wazuh** to open Wazuh WUI:
+#. Click **Open Wazuh** to open Wazuh WUI.
 #. Choose from one of these methods to log in:
   
   - Log in with the default credentials. You can download them by clicking **Default credentials** on the Environments page. Then, use the `Wazuh WUI - Username` and `Wazuh WUI - Password` to log in.
   - If Single sign-on (SSO) is enabled, use your own account.
-  - You can also log in with any user you already created in Wazuh WUI already.
+  - You can also log in with any user you already created in Wazuh WUI.
 
 It is highly recommended for security reasons to change the default password and create your own users. 
 
