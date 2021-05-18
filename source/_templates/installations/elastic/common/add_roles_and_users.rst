@@ -22,6 +22,6 @@ Wazuh additional roles added in Kibana to give the appropriate permissions to us
 | wazuh_ui_admin                      | It allows ``wazuh_admin`` to perform reading, writing, management, and indexing tasks on the Wazuh indices.                                                                                                                                                                              |
 +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-These users and roles are designed to operate along with the Wazuh Kibana plugin and they are protected so they cannot be modified from the Kibana’s interface. To modify them or add new users or roles, the ``securityadmin`` script has to be run.
+These users and roles are designed to operate along with the Wazuh Kibana plugin, but they are protected and cannot be modified from the Kibana interface. To modify them or add new users or roles, the ``securityadmin`` script has to be run.
 
 .. End of include file
