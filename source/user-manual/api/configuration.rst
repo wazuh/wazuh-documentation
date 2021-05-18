@@ -197,9 +197,9 @@ https
 +--------------+------------------------------+----------------------------------+-------------------------------------------------------------------+
 | ca           | Any text string              | api/configuration/ssl/ca.crt     | Path to the certificate of the Certificate Authority (CA).        |
 +--------------+------------------------------+----------------------------------+-------------------------------------------------------------------+
-| ssl_protocol | TLS, TLSv1, TLSv1.1, TLSv1.2 | TLSv1.2                          | SSL protocol to allow. Its value is not case sensitive.           |
+| ssl_protocol | TLS, TLSv1, TLSv1.1, TLSv1.2 | TLSv1.2                          | SSL protocol to be used. Its value is not case sensitive.         |
 +--------------+------------------------------+----------------------------------+-------------------------------------------------------------------+
-| ssl_cipher   | Any ssl cipher               | ECDHE+AESGCM:!ECDSA              | SSL cipher to allow. Its value is not case sensitive.             |
+| ssl_cipher   | Any ssl cipher               | ECDHE+AESGCM:!ECDSA              | SSL cipher to be used. Its value is not case sensitive.           |
 +--------------+------------------------------+----------------------------------+-------------------------------------------------------------------+
 
 logs

@@ -443,7 +443,7 @@ Override SSL used ciphers.
 +--------------------+----------------------------------------------------+
 | **Default value**  | ECDHE+AESGCM:!ECDSA                                |
 +--------------------+----------------------------------------------------+
-| **Allowed values** | valid ssl ciphers.                                 |
+| **Allowed values** | Any valid ssl cipher.                             |
 +--------------------+----------------------------------------------------+
 
 server_ca_path
