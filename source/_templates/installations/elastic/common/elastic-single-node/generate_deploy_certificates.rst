@@ -19,7 +19,7 @@
 
     # unzip ~/search-guard-tlstool-1.8.zip -d ~/searchguard
 
-* Download the ``search-guard.yml`` configuration file. Choose either ``Wazuh single-node cluster`` if there is only one Wazuh server or ``Wazuh multi-node cluster`` in case of having more than one Wazuh server:
+* Download the ``search-guard.yml`` configuration file. Choose either the Wazuh single-node cluster tab if there is only one Wazuh server or the Wazuh multi-node cluster tab in case of having more than one Wazuh server, and follow the steps:
 
   .. tabs::
 
