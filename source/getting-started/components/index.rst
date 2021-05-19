@@ -5,7 +5,7 @@
 Components
 ==========
 
-The Wazuh platform provides features to protect your cloud, container, and server workloads. These include log data analysis, intrusions and malware detection, file integrity monitoring, configuration assessment, vulnerability detection, and support for regulatory compliance. The Wazuh solution is based on the following three components:
+The Wazuh platform provides features to protect your cloud, container, and server workloads. These include log data analysis, intrusions and malware detection, file integrity monitoring, configuration assessment, vulnerability detection, and support for regulatory compliance. The Wazuh solution is based on the following four components:
 
 - :ref:`Wazuh agent <wazuh_agent>`: Installed on endpoints such as laptops, desktops, servers, cloud instances or virtual machines, it provides prevention, detection and response capabilities. It supports Windows, Linux, MacOS, HP-UX, Solaris and AIX platforms.
 
