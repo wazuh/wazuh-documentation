@@ -14,7 +14,7 @@ Wazuh ingests and indexes the events sent by the agents, making the data searcha
 
 This is an example of how Wazuh manages the storing of data:
 
-An environment with a tier of 100GB has 50 agents connected. Assuming that 20% of events generate an alert, Wazuh ingests 5GB and indexes 1GB, per day. In this scenario, the hot storage contains 100 days of alerts (1 GB per day). When that 100 GB of data is exceeded, the oldest data is rotated. All information is still accessible in cold storage.
+Let's suppose that an environment with a tier of 100GB has 50 agents connected. Wazuh ingests 5GB on a daily basis, and assuming that 20% of events generate an alert, indexes 1GB per day. In this scenario, the hot storage contains 100 days of alerts (1 GB per day). When that 100 GB of data is exceeded, the oldest data is rotated. All information is still accessible in cold storage.
 
 .. _cloud_cold_storage_configuration:
 
