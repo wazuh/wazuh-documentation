@@ -12,7 +12,7 @@ If you want to continue using your environment beyond the trial period, you need
 
 .. note::
 
-  A trial environment is converted to a paid environment when the trial expires. If you do not add your credit card information before the expiration date, your environment is deleted all data is completely lost. Make sure to add your credit card before the end of the trial period.
+  A trial environment is converted to a paid environment when the trial expires. If you do not add your credit card information before the expiration date, your environment is deleted and all data is permantly erased. Make sure to add your credit card before the end of the trial period.
 
 To add the billing details:
 
