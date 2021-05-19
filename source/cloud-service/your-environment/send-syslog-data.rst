@@ -123,7 +123,7 @@ To perform the following steps, make sure to replace ``<file_name.log>`` with th
    
 6. Configure the agent to read the Logstash output file.
 
-   Edit ``C:\Program Files (x86)\ossec-agent\ossec.conf`` by adding the following:
+   Edit ``C:\Program Files (x86)\ossec-agent\ossec.conf`` by adding the following configuration:
 
    .. code-block:: XML
 
