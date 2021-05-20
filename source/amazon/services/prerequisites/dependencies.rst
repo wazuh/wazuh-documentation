@@ -14,6 +14,25 @@ Installing dependencies
 .. warning::
   The Wazuh manager includes all dependencies installed, **these steps are only necessary** when configuring the integration **in a Wazuh agent**.
 
+
+Python
+------
+
+The AWS S3 integration requires python 3. It is compatible with python versions from `3.6.0` to `3.9.5`.  Future python releases should maintain compatibility although it cannot be guaranteed.
+
+a) For **CentOS/RHEL/Fedora** systems:
+
+.. code-block:: console
+
+  # yum update && yum install python3
+
+b) For **Debian/Ubuntu** systems:
+
+.. code-block:: console
+
+  # apt-get update && apt-get install python3
+
+
 Pip
 ---
 
@@ -23,26 +42,29 @@ a) For **CentOS/RHEL/Fedora** systems:
 
 .. code-block:: console
 
-  # yum install python-pip
+  # yum update && yum install python3-pip
 
 b) For **Debian/Ubuntu** systems:
 
 .. code-block:: console
 
-  # apt-get update && apt-get install python-pip
+  # apt-get update && apt-get install python3-pip
 
 c) From sources:
 
 .. code-block:: console
 
   # curl -O https://bootstrap.pypa.io/get-pip.py
-  # python get-pip.py
+  # python3 get-pip.py
+
 
 Boto3
 -----
 
-`Boto3 <https://boto3.readthedocs.io/>`_ is the official package supported by Amazon to manage AWS resources. It will be used to download the log messages from the S3 Bucket or the log groups for the CloudWatch Logs service integration. To install this package, execute the following command:
+`Boto3 <https://boto3.readthedocs.io/>`_ is the official package supported by Amazon to manage AWS resources. It will be used to download the log messages from the S3 Bucket or the log groups for the CloudWatch Logs service integration. The module is compatible with boto3 from ``1.13.1`` to ``1.17.76``. Future boto3 releases should maintain compatibility although it cannot be guaranteed.
+
+To install boto3, execute the following command:
 
 .. code-block:: console
 
-  # pip install boto3
+  # pip3 install boto3==1.17.76
