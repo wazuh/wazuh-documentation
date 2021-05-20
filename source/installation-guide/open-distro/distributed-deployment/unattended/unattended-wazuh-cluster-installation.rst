@@ -89,4 +89,4 @@ Choose the cluster mode between single-node or multi-node:
     #. .. include:: ../../../../_templates/installations/wazuh/common/check_wazuh_cluster.rst 
 
 
-To uninstall Wazuh and Filebeat, see the :ref:`uninstalling <user_manual_uninstall_wazuh_installation_open_distro>` section.
+To uninstall Wazuh and Filebeat, see the :ref:`Uninstalling <user_manual_uninstall_wazuh_installation_open_distro>` section.
