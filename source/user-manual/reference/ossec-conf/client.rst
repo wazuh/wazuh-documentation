@@ -441,9 +441,9 @@ ssl_cipher
 Override SSL used ciphers.
 
 +--------------------+----------------------------------------------------+
-| **Default value**  | ECDHE+AESGCM:!ECDSA                                |
+| **Default value**  | HIGH:!ADH:!EXP:!MD5:!RC4:!3DES:!CAMELLIA:@STRENGTH |
 +--------------------+----------------------------------------------------+
-| **Allowed values** | Any valid ssl cipher.                             |
+| **Allowed values** | Any valid ssl cipher.                              |
 +--------------------+----------------------------------------------------+
 
 server_ca_path
@@ -540,7 +540,7 @@ Sample configuration
         <agent_name>agent</agent_name>
         <groups>Group1</groups>
         <agent_address>192.168.0.110</agent_address>
-        <ssl_cipher>ECDHE+AESGCM:!ECDSA</ssl_cipher>
+        <ssl_cipher>HIGH:!ADH:!EXP:!MD5:!RC4:!3DES:!CAMELLIA:@STRENGTH</ssl_cipher>
         <server_ca_path>/path/to/server_ca</server_ca_path>
         <agent_certificate_path>/path/to/agent.cert</agent_certificate_path>
         <agent_key_path>/path/to/agent.key</agent_key_path>

@@ -33,7 +33,7 @@ Here are all the available settings for the ``api.yaml`` configuration file. For
         use_ca: False
         ca: "api/configuration/ssl/ca.crt"
         ssl_protocol: "TLSv1.2"
-        ssl_ciphers: "ECDHE+AESGCM:!ECDSA"
+        ssl_ciphers: "HIGH:!ADH:!EXP:!MD5:!RC4:!3DES:!CAMELLIA:@STRENGTH"
 
      logs:
         level: "info"
@@ -184,23 +184,23 @@ experimental_features
 
 https
 ^^^^^^^^^^^^^^^^^^^^^^
-+--------------+------------------------------+----------------------------------+-------------------------------------------------------------------+
-| Sub-fields   | Allowed values               | Default value                    | Description                                                       |
-+==============+==============================+==================================+===================================================================+
-| enabled      | yes, true, no, false         | true                             | Enable or disable SSL (https) in the Wazuh API.                   |
-+--------------+------------------------------+----------------------------------+-------------------------------------------------------------------+
-| key          | Any text string              | api/configuration/ssl/server.key | Path of the file with the private key.                            |
-+--------------+------------------------------+----------------------------------+-------------------------------------------------------------------+
-| cert         | Any text string              | api/configuration/ssl/server.crt | Path to the file with the certificate.                            |
-+--------------+------------------------------+----------------------------------+-------------------------------------------------------------------+
-| use_ca       | yes, true, no, false         | false                            | Whether to use a certificate from a Certificate Authority or not. |
-+--------------+------------------------------+----------------------------------+-------------------------------------------------------------------+
-| ca           | Any text string              | api/configuration/ssl/ca.crt     | Path to the certificate of the Certificate Authority (CA).        |
-+--------------+------------------------------+----------------------------------+-------------------------------------------------------------------+
-| ssl_protocol | TLS, TLSv1, TLSv1.1, TLSv1.2 | TLSv1.2                          | SSL protocol to be used. Its value is not case sensitive.         |
-+--------------+------------------------------+----------------------------------+-------------------------------------------------------------------+
-| ssl_cipher   | Any ssl cipher               | ECDHE+AESGCM:!ECDSA              | SSL cipher to be used. Its value is not case sensitive.           |
-+--------------+------------------------------+----------------------------------+-------------------------------------------------------------------+
++--------------+------------------------------+----------------------------------------------------+-------------------------------------------------------------------+
+| Sub-fields   | Allowed values               | Default value                                      | Description                                                       |
++==============+==============================+====================================================+===================================================================+
+| enabled      | yes, true, no, false         | true                                               | Enable or disable SSL (https) in the Wazuh API.                   |
++--------------+------------------------------+----------------------------------------------------+-------------------------------------------------------------------+
+| key          | Any text string              | api/configuration/ssl/server.key                   | Path of the file with the private key.                            |
++--------------+------------------------------+----------------------------------------------------+-------------------------------------------------------------------+
+| cert         | Any text string              | api/configuration/ssl/server.crt                   | Path to the file with the certificate.                            |
++--------------+------------------------------+----------------------------------------------------+-------------------------------------------------------------------+
+| use_ca       | yes, true, no, false         | false                                              | Whether to use a certificate from a Certificate Authority or not. |
++--------------+------------------------------+----------------------------------------------------+-------------------------------------------------------------------+
+| ca           | Any text string              | api/configuration/ssl/ca.crt                       | Path to the certificate of the Certificate Authority (CA).        |
++--------------+------------------------------+----------------------------------------------------+-------------------------------------------------------------------+
+| ssl_protocol | TLS, TLSv1, TLSv1.1, TLSv1.2 | TLSv1.2                                            | SSL protocol to be used. Its value is not case sensitive.         |
++--------------+------------------------------+----------------------------------------------------+-------------------------------------------------------------------+
+| ssl_cipher   | Any ssl cipher               | HIGH:!ADH:!EXP:!MD5:!RC4:!3DES:!CAMELLIA:@STRENGTH | SSL cipher to be used. Its value is not case sensitive.           |
++--------------+------------------------------+----------------------------------------------------+-------------------------------------------------------------------+
 
 logs
 ^^^^^^^^^^^^^^^^^^^^^^

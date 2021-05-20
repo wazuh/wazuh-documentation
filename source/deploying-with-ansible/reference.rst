@@ -716,7 +716,7 @@ Wazuh Manager
       use_password: 'no'
       limit_maxagents: 'yes'
       ssl_protocol: 'TLSv1.2'
-      ssl_ciphers: 'ECDHE+AESzGCM:!ECDSA'
+      ssl_ciphers: 'HIGH:!ADH:!EXP:!MD5:!RC4:!3DES:!CAMELLIA:@STRENGTH'
       ssl_agent_ca: null
       ssl_verify_host: 'no'
       ssl_manager_cert: 'sslmanager.cert'
@@ -1186,7 +1186,7 @@ Wazuh Agent
       agent_name: 'testname'
       groups: ''
       agent_address: ''
-      ssl_cipher: ECDHE+AESGCM:!ECDSA
+      ssl_cipher: HIGH:!ADH:!EXP:!MD5:!RC4:!3DES:!CAMELLIA:@STRENGTH
       server_ca_path: ''
       agent_certificate_path: ''
       agent_key_path: ''

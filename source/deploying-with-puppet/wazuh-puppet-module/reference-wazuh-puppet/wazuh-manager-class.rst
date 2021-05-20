@@ -78,7 +78,7 @@ $ossec_auth_protocol
 $ossec_auth_ciphers
   Sets the list of ciphers for network communication using SSL.
 
-  `Default 'ECDHE+AESGCM:!ECDSA'`
+  `Default 'HIGH:!ADH:!EXP:!MD5:!RC4:!3DES:!CAMELLIA:@STRENGTH'`
 
 $ossec_auth_ssl_verify_host
   Toggles source host verification on and off when a CA certificate is specified. This means that the client source IP address will be validated using the Common Name field.

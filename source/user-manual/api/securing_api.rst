@@ -35,7 +35,7 @@ Recommended changes to securize Wazuh API
         use_ca: False
         ca: "api/configuration/ssl/ca.crt"
         ssl_protocol: "TLSv1.2"
-        ssl_ciphers: "ECDHE+AESGCM:!ECDSA"
+        ssl_ciphers: "HIGH:!ADH:!EXP:!MD5:!RC4:!3DES:!CAMELLIA:@STRENGTH"
 
     After setting these parameters, it will be necessary to restart the Wazuh API using the ``wazuh-manager`` service:
 
