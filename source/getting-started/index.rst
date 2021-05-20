@@ -2,8 +2,8 @@
 
 .. _getting_started:
 
-Getting started
-===============
+Overview
+========
 
 .. meta::
   :description: Get started with the Wazuh open source security platform. 
