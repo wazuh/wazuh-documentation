@@ -25,13 +25,13 @@ As shown in the example above, the following parameters have to be edited:
 +-------------------------------------+----------------------------------------------------------------------------------------------+
 | :ref:`node_name <cluster_node_name>`| Each node of the cluster must have a unique name.                                            |
 +-------------------------------------+----------------------------------------------------------------------------------------------+
-| :ref:`node_type <cluster_node_type>`| Has to be set as ``worker``.                                                                 |
+| :ref:`node_type <cluster_node_type>`| It has to be set as ``worker``.                                                              |
 +-------------------------------------+----------------------------------------------------------------------------------------------+
 | :ref:`key <cluster_key>`            | The key created previously for the ``master`` node. It has to be the same for all the nodes. |
 +-------------------------------------+----------------------------------------------------------------------------------------------+
-| :ref:`nodes <cluster_nodes>`        | Has to contain the address of the master (it can be either an IP or a DNS).                  |
+| :ref:`nodes <cluster_nodes>`        | It has to contain the address of the master (it can be either an IP or a DNS).               |
 +-------------------------------------+----------------------------------------------------------------------------------------------+
-| :ref:`disabled <cluster_disabled>`  | Has to be set to ``no``.                                                                     |
+| :ref:`disabled <cluster_disabled>`  | It has to be set to ``no``.                                                                  |
 +-------------------------------------+----------------------------------------------------------------------------------------------+
 
 .. End of include file

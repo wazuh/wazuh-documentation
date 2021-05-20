@@ -107,7 +107,7 @@ An example response should look as follows:
     {
       "name" : "node-1",
       "cluster_name" : "elasticsearch",
-      "cluster_uuid" : "7QEblHhaQqWmVZXkGmrvzg",
+      "cluster_uuid" : "tWYgqpgdRz6fGN8gH11flw",
       "version" : {
         "number" : "7.10.2",
         "build_flavor" : "oss",

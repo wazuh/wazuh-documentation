@@ -387,7 +387,7 @@ Upgrading Kibana
             # zypper update opendistroforelasticsearch-kibana-|OPEN_DISTRO_LATEST|
 
 
-#. Remove generated bundles and the ``wazuh-registry.json`` file:
+#. **(For upgrades from 3.x versions)** Remove generated bundles and the ``wazuh-registry.json`` file:
 
     .. code-block:: console
 
@@ -441,6 +441,12 @@ Upgrading Kibana
     .. code-block:: console
 
       # setcap 'cap_net_bind_service=+ep' /usr/share/kibana/node/bin/node
+
+#. **(Recommended)** Enable multitenancy in the ``/etc/kibana/kibana.yml`` configuration file:
+
+   .. code-block:: console
+
+      opendistro_security.multitenancy.enabled: true
 
 #. Restart Kibana:
 

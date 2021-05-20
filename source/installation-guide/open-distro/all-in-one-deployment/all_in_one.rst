@@ -153,7 +153,7 @@ An example response should look as follows:
     {
       "name" : "node-1",
       "cluster_name" : "elasticsearch",
-      "cluster_uuid" : "7QEblHhaQqWmVZXkGmrvzg",
+      "cluster_uuid" : "tWYgqpgdRz6fGN8gH11flw",
       "version" : {
         "number" : "7.10.2",
         "build_flavor" : "oss",
@@ -167,10 +167,8 @@ An example response should look as follows:
       },
       "tagline" : "You Know, for Search"
     }
-  
-
-  
-.. note:: The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it with the following command ``/usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro_performance_analyzer``. Make sure to restart the Elasticsearch service afterward. 
+              
+.. note:: The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it with the following command ``/usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer``. Please be sure to restart the Elasticsearch service afterwards. 
 
 .. _wazuh_server_packages_filebeat:
 

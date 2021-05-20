@@ -478,7 +478,7 @@ custom_replacements = {
     "|WAZUH_REVISION_DEB_MANAGER_ARMHF|" : "1",
     "|WAZUH_REVISION_DEB_API_ARMHF|" : "1",
     "|WAZUH_REVISION_HPUX|" : "1",
-    "|WAZUH_REVISION_OSX|" : "1",
+    "|WAZUH_REVISION_OSX|" : "2",
     "|WAZUH_REVISION_WINDOWS|" : "1",
     "|WAZUH_REVISION_AIX|" : "1",
     "|CHECKSUMS_URL|" : "https://packages.wazuh.com/4.x/checksums/wazuh/",
@@ -488,7 +488,7 @@ custom_replacements = {
     "|DEB_MANAGER|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-manager/wazuh-manager",
     "|DEB_API|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-api/wazuh-api",
     # Variables for Elastic's Elasticsearch
-    "|ELASTICSEARCH_ELK_LATEST|" : "7.10.2",
+    "|ELASTICSEARCH_ELK_LATEST|" : "7.11.2",
     "|ELASTICSEARCH_ELK_LATEST_ANSIBLE|" : "7.10.0",
     "|ELASTICSEARCH_ELK_LATEST_KUBERNETES|" : "7.8.0",
     "|ELASTICSEARCH_ELK_LATEST_PUPPET|" : "7.8.0",
