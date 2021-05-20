@@ -68,7 +68,7 @@ Elasticsearch configuration
 Elasticsearch roles and users
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You need to add users and roles in order to use the Wazuh Kibana properly.
+You need to add users and roles in order to use the Wazuh Kibana plugin properly.
 
 .. include:: ../../../../../_templates/installations/elastic/common/add_roles_and_users.rst
 
