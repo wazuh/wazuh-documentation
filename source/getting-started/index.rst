@@ -1,6 +1,6 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. _getting_started:
+.. _overview:
 
 Overview
 ========
