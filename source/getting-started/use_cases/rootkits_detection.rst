@@ -1,6 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 .. meta::
-  :description: Wazuh 3.0.0 has been released. Check out our release notes to discover the changes and additions of this release.
+  :description: The Wazuh agent periodically scans the monitored system to detect rootkits both at the kernel and the user space level.
+
   
 .. _rootkits_detection:
 
