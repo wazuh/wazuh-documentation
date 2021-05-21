@@ -12,38 +12,16 @@ Wazuh is a free and open source platform used for threat prevention, detection, 
 
 Wazuh solution consists of an :ref:`endpoint security agent <wazuh_agent>`, deployed to the monitored systems, and a :ref:`management server <wazuh_manager>`, which collects and analyzes data gathered by the agents. Besides, Wazuh provides a search engine and data visualization tool that allows users to navigate through their security alerts.
 
+.. thumbnail:: ../images/getting_started/security_events.png
+   :align: center
+   :width: 100%
+
+
 Community and support
 ---------------------
 
 .. include:: ../_templates/community.rst
 
-Screenshots
------------
-
-.. list-table::
-   :width: 100%
-   :widths: 50 50
-
-   * - .. thumbnail:: ../images/getting_started/screenshot_01_security_analytics.png
-          :title: Security analytics
-     - .. thumbnail:: ../images/getting_started/screenshot_02_intrusion_detection.png
-          :title: Intrusion detection
-   * - .. thumbnail:: ../images/getting_started/screenshot_03_log_data_analysis.png
-          :title: Log data analysis
-     - .. thumbnail:: ../images/getting_started/screenshot_04_file_integrity_monitoring.png
-          :title: File integrity monitoring
-   * - .. thumbnail:: ../images/getting_started/screenshot_05_vulnerability_detection.png
-          :title: Vulnerability detection
-     - .. thumbnail:: ../images/getting_started/screenshot_06_configuration_assessment.png
-          :title: Configuration assessment
-   * - .. thumbnail:: ../images/getting_started/screenshot_07_incident_response.png
-          :title: Incident response
-     - .. thumbnail:: ../images/getting_started/screenshot_08_regulatory_compliance.png
-          :title: Regulatory compliance
-   * - .. thumbnail:: ../images/getting_started/screenshot_09_cloud_security.png
-          :title: Cloud security
-     - .. thumbnail:: ../images/getting_started/screenshot_10_containers_security.png
-          :title: Containers security
 
 Table of contents
 -----------------
