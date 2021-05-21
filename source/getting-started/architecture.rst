@@ -63,7 +63,7 @@ For the communication of Wazuh components several services are used. Below is th
 + Wazuh indexer +-----------+---------------+----------------------------------------------+
 |               | 9300-9400 | TCP           | Wazuh indexer cluster communication          |
 +---------------+-----------+---------------+----------------------------------------------+
-| Wazuh WUI     | 443       | TCP           | Wazuh web interface                          |
+| Wazuh Web UI  | 443       | TCP           | Wazuh web user interface                     |
 +---------------+-----------+---------------+----------------------------------------------+
 
 Archival data storage

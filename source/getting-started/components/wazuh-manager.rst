@@ -29,7 +29,7 @@ The manager usually runs on a stand-alone physical machine, virtual machine, doc
 
 - **Analysis engine:** This is the process that performs the data analysis. It utilizes *decoders* to identify the type of information being processed (e.g. Windows events, SSHD logs, web server logs, etc.) and to extract relevant data elements from the log messages (e.g. source IP address, event ID, username, etc.). Next, by using *rules*, it identifies specific patterns in the decoded events which could trigger alerts and possibly even call for automated countermeasures (e.g. an IP ban on the firewall).
 
-- **Wazuh RESTful API:** This service provides an interface to interact with the Wazuh infrastructure. It is used to manage agents and managers configuration settings, to monitor the infrastructure status and overall health, to manage and edit Wazuh decoders and rules, and to query about the state of the monitored endpoints. It is also used by the Wazuh web user interface, which is the Kibana app.
+- **Wazuh RESTful API:** This service provides an interface to interact with the Wazuh infrastructure. It is used to manage agents and managers configuration settings, to monitor the infrastructure status and overall health, to manage and edit Wazuh decoders and rules, and to query about the state of the monitored endpoints. It is also used by the Wazuh Web user interface.
 
 - **Wazuh cluster daemon:** This service is used to scale Wazuh managers horizontally, deploying them as a cluster. This kind of configuration, in combination with a network load balancer, provides high-availability and load balancing. The Wazuh cluster daemon is what Wazuh managers use to communicate with each other and to keep synchronized.
 

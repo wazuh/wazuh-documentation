@@ -117,7 +117,7 @@ Example of alert when a command is executed inside a container:
 Container level
 ---------------
 
-In order to get visibility at a container level, you can deploy the :ref:`Wazuh agent <wazuh_agent>` to a Kubernetes DaemonSet container. This kind of deployment ensures that the Wazuh agent will run in all nodes of your Kubernetes cluster. Besides, other Kubernetes Pods will be able to send data (e.g. application log messages) to the DaemonSet container, so the agent can process it and forward it to the :ref:`Wazuh server <wazuh_manager>` for security analysis.
+In order to get visibility at a container level, you can deploy the :ref:`Wazuh agent <wazuh_agent>` to a Kubernetes DaemonSet container. This kind of deployment ensures that the Wazuh agent will run in all nodes of your Kubernetes cluster. Besides, other Kubernetes Pods will be able to send data (e.g. application log messages) to the DaemonSet container, so the agent can process it and forward it to the :ref:`Wazuh manager <wazuh_manager>` for security analysis.
 
 Example of security alerts at a container level:
 

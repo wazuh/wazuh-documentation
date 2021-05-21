@@ -7,7 +7,7 @@ Log data analysis
 
 Automated log management and analysis accelerate threat detection. In many cases, evidence of an attack can be found in the log messages of devices, systems and applications. Wazuh can be used to automatically aggregate and analyze log data.
 
-The :ref:`Wazuh agent <wazuh_agent>`, running on the monitored endpoint, is usually the one in charge of reading operating system and application log messages, forwarding those to the :ref:`Wazuh server <wazuh_manager>`, where the analysis takes place. When no agent is deployed, the server can also receive data via syslog from network devices or applications.
+The :ref:`Wazuh agent <wazuh_agent>`, running on the monitored endpoint, is usually the one in charge of reading operating system and application log messages, forwarding those to the :ref:`Wazuh manager <wazuh_manager>`, where the analysis takes place. When no agent is deployed, the server can also receive data via syslog from network devices or applications.
 
 Wazuh uses *decoders* to identify the source application of the log message. Then, it analyzes the data using application-specific *rules*. This is an example of a rule used to detect SSH authentication failure events:
 
