@@ -1,6 +1,6 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 .. meta::
-  :description: The Wazuh-Logtest solution is distributed by different components of the Wazuh environment. Learn more about it in this section.
+  :description: Wazuh-Logtest allows the testing and verification of rules and decoders. Learn more about it in this section.
 
 .. _dev-wazuh-logtest:
 
