@@ -1,6 +1,6 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 .. meta::
-  :description: Get to know the process of creating a set of custom visualizations using Kibana in Wazuh.
+  :description: Get to know the process of creating custom visualizations and dashboards using Kibana.
 
 .. _kibana_custom_dashboard:
 
