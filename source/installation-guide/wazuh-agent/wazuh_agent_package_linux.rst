@@ -1,6 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. meta:: :description: Learn how to install the Wazuh agent on Debian
+.. meta::
+  :description: Visit the installation guide of the Wazuh agent for Linux in this section of our documentation.
 
 .. _wazuh_agent_package_linux:
 
