@@ -1,5 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
-
+.. meta::
+  :description: Looking for how to get started with Wazuh? In our documentation you will find everything related to deployment, requirements and more about 
+  
 .. _getting_started:
 
 Getting started
