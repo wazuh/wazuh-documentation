@@ -33,7 +33,7 @@ Data flow
 
 The data flow between the Wazuh module and Cloud Pub/Sub looks as follows:
 
-#. A publisher application creates a topic in the Cloud Pub/Sub service and sends messages to the topic. For this blog post, the publisher applications will be sending Activity logs and Cloud DNS events.
+#. A publisher application creates a topic in the Cloud Pub/Sub service and sends messages to the topic. In this example, the publisher applications will be sending Activity logs and Cloud DNS events.
 
 #. Each published message is retained until it is acknowledged by the Wazuh module consuming messages from that subscription.
 
