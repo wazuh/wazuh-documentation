@@ -1,5 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
-
+.. meta::
+  :description: See details about Wazuh distributed deployment. In this type of deployment, the components are installed on separate hosts. See more in this section.
+  
 .. _distributed_index:
 
 Distributed deployment
