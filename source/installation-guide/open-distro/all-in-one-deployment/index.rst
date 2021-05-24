@@ -1,5 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
-
+.. meta::
+  :description: Find out how to install Wazuh and OpenDistro components for Elasticsearch in an all-in-one deployment, appropriate for testing and small working environments.
+  
 .. _all_in_one_index:
 
 All-in-one deployment
