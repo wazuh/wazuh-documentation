@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 .. meta::
-  :description: See details about Wazuh distributed deployment. In this type of deployment, the components are installed on separate hosts. See more in this section.
-  
+  :description: Learn more about how to install and configure the Wazuh server and Elastic Stack by following a step-by-step deployment process. 
+
 .. _distributed_index:
 
 Distributed deployment
