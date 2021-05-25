@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: The Wazuh Virtual Machine OVA allows you to run a full Wazuh Manager and test all Wazuh capabilities without any time limit in your environment
+  :description: The pre-built Wazuh Virtual Machine includes all Wazuh components ready-to-use. Test all Wazuh capabilities with our OVA.  
 
 .. _virtual_machine:
 
