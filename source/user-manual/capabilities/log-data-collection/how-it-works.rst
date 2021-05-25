@@ -1,4 +1,6 @@
 .. Copyright (C) 2021 Wazuh, Inc.
+.. meta::
+  :description: Learn more about how the Log Data Collection capability of Wazuh works.
 
 How it works
 ============
