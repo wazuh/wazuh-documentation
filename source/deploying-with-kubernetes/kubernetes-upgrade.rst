@@ -1,6 +1,6 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 .. meta::
-  :description: Check out more information on how to upgrade Wazuh installed in Kubernetes
+  :description: Check out more information on how to upgrade Wazuh installed in Kubernetes.
 
 .. _kubernetes_upgrade:
 
