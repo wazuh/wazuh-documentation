@@ -1,6 +1,6 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 .. meta::
-  :description: Find out more about the socket configuration in this section of the Wazuh documentation.
+  :description: Find out more about the output socket configuration in this section of the Wazuh documentation.
 
 .. _reference_ossec_socket:
 
