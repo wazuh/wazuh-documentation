@@ -1,6 +1,6 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 .. meta::
-  :description: Check out some case uses of the Wazuh Security Configuration Assessment capability.
+  :description: Check out some use cases of the Wazuh Security Configuration Assessment capability.
 
 
 .. _configuration_assessment:
