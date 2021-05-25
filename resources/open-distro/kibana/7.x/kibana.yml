@@ -5,12 +5,11 @@ elasticsearch.ssl.verificationMode: certificate
 elasticsearch.username: wazuh
 elasticsearch.password: wazuh
 elasticsearch.requestHeadersWhitelist: ["securitytenant","Authorization"]
-opendistro_security.multitenancy.enabled: false
+opendistro_security.multitenancy.enabled: true
 opendistro_security.readonly_mode.roles: ["kibana_read_only"]
 server.ssl.enabled: true
 server.ssl.key: "/etc/kibana/certs/kibana-key.pem"
 server.ssl.certificate: "/etc/kibana/certs/kibana.pem"
 elasticsearch.ssl.certificateAuthorities: ["/etc/kibana/certs/root-ca.pem"]
-
-server.defaultRoute: /app/wazuh
+server.defaultRoute: /app/wazuh?security_tenant=global
 

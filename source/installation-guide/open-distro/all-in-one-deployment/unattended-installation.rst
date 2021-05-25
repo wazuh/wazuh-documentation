@@ -74,7 +74,7 @@ The Kibana configuration found at the ``/etc/kibana/kibana.yml`` file has the ``
 
 It is highly recommended to change Elasticsearch default passwords for the users' found at the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. For more information on Elasticsearch configuration and passwords, check the :ref:`Elasticsearch tuning <change_elastic_pass>` section.
 
-To uninstall all the components of the all-in-one installation, see the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_open_distro>`.
+To uninstall all the components of the all-in-one installation, see the :ref:`Uninstalling section <user_manual_uninstall_wazuh_installation_open_distro>`.
  
 Next steps
 ----------

@@ -19,7 +19,7 @@
 
     # unzip ~/search-guard-tlstool-1.8.zip -d ~/searchguard
 
-* Download the ``search-guard.yml`` configuration file. Choose either ``Wazuh single-node cluster`` if there is only one Wazuh server, or ``Wazuh multi-node cluster`` in case of having more than one Wazuh servers:
+* Download the ``search-guard.yml`` configuration file. Choose either the Wazuh single-node cluster tab if there is only one Wazuh server or the Wazuh multi-node cluster tab in case of having more than one Wazuh server, and follow the steps:
 
   .. tabs::
 
@@ -77,16 +77,16 @@
             dn: CN=filebeat-2,OU=Docu,O=Wazuh,L=California,C=US
  
   
-  To learn more about how to create and configure the certificates visit the :ref:`Certificates deployment section <user_manual_certificates>`.
+  To learn more about how to create and configure the certificates, see the :ref:`Certificates deployment <user_manual_certificates>` section.
 
-* Run the Search Guard's script to create the certificates:
+* Run the Search Guard script to create the certificates:
 
   .. code-block:: console
 
     # ~/searchguard/tools/sgtlstool.sh -c ~/searchguard/search-guard.yml -ca -crt -t /etc/elasticsearch/certs/
 
 
-  In case of further certificates deployments, it is highly recommended to keep Search Guard's TLS offline tool and its configuration file ``search-guard.yml`` on the master node.
+  In case of further certificates deployments, it is highly recommended to keep Search Guard TLS offline tool and its configuration file ``search-guard.yml`` on the master node.
 
 * Compress all the necessary files to be sent to the all the instances:
 
@@ -102,6 +102,6 @@
 
     # rm /etc/elasticsearch/certs/client-certificates.readme /etc/elasticsearch/certs/elasticsearch_elasticsearch_config_snippet.yml search-guard-tlstool-1.7.zip filebeat* -f
 
-* If Kibana will be installed in this node, keep the certificates file. Otherwise, if the file has been already copied to all the instances of the distributed deployment, remove it to increase security  ``rm -f certs.tar``.
+* If Kibana will be installed on this node, keep the certificates file. Otherwise, if the file is already copied to all the instances of the distributed deployment, remove it to increase security  ``rm -f certs.tar``.
 
 .. End of include file

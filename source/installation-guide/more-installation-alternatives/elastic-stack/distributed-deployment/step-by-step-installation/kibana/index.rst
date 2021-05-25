@@ -81,7 +81,11 @@ Kibana installation and configuration
 
 #. Download the Kibana configuration file:
 
-    .. include:: ../../../../../../_templates/installations/basic/elastic/common/configure_kibana.rst
+   .. Note::
+
+     Starting Elasticsearch 7.11.0, a DNS must be specified in the ``elasticsearch.hosts`` field since IPs are no longer allowed. 
+
+   .. include:: ../../../../../../_templates/installations/basic/elastic/common/configure_kibana.rst
 
 
 #. Create the ``/usr/share/kibana/data`` directory:
@@ -99,7 +103,7 @@ Kibana installation and configuration
     .. code-block:: console
 
         # cd /usr/share/kibana
-        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.1.5_7.10.2-1.zip
+        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.1.5_7.11.2-1.zip
 
 #. Link Kibana's socket to privileged port 443:
 
