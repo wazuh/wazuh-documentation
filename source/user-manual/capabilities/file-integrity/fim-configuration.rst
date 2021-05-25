@@ -1,5 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
-
+.. meta::
+  :description: Learn more about File Integrity Monitoring, one of the Wazuh capabilities. We show you some configuration examples to get the best out of Wazuh.
+  
 .. _fim-examples:
 
 Configuration
