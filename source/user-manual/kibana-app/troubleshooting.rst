@@ -1,5 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
-
+.. meta::
+  :description: This section of the Wazuh documentation lists the common installation or usage issues with the Wazuh Kibana plugin and how to resolve them. 
+  
 .. _kibana_troubleshooting:
 
 Troubleshooting
