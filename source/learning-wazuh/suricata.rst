@@ -1,5 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
-
+.. meta::
+  :description: Suricata integrates with Wazuh. Learn more about how to set up Suricata, how Wazuh decodes Suricata events, and more in this section.
+  
 .. _learning_wazuh_suricata:
 
 Catch suspicious network traffic
