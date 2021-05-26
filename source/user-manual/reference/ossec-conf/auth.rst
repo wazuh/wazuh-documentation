@@ -32,7 +32,6 @@ Options
 - `ssl_manager_cert`_
 - `ssl_manager_key`_
 - `ssl_auto_negotiate`_
-- `ssl_protocol`_
 - `ciphers`_
 
 disabled
