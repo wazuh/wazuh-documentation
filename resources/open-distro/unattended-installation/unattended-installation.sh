@@ -13,8 +13,8 @@ char="."
 debug='>> /var/log/wazuh-unattended-installation.log 2>&1'
 WAZUH_VER="4.1.5"
 WAZUH_REV="1"
-ELK_VER="7.10.0"
-OD_VER="1.12.0"
+ELK_VER="7.10.2"
+OD_VER="1.13.2"
 OD_REV="1"
 ow=""
 if [ -n "$(command -v yum)" ]; then
@@ -319,7 +319,7 @@ installElasticsearch() {
         eval "sed -i "s/-Xms1g/-Xms${ram}g/" /etc/elasticsearch/jvm.options ${debug}"
         eval "sed -i "s/-Xmx1g/-Xmx${ram}g/" /etc/elasticsearch/jvm.options ${debug}"
      
-        eval "/usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro_performance_analyzer ${debug}"
+        eval "/usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer ${debug}"
         # Start Elasticsearch
         startService "elasticsearch"
         echo "Initializing Elasticsearch..."
