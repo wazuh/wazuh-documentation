@@ -1,5 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
-
+.. meta::
+  :description: Check out how to install Open Distro for Elasticsearch and Open Distro for Kibana using an automated script. 
+  
 .. _unattended_distributed_elasticsearch:
 
 Elasticsearch & Kibana unattended installation
