@@ -1,6 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. meta:: :description: Learn how to install Elastic Stack for using Wazuh on Debian
+.. meta::
+  :description: Looking for How to install Wazuh and Filebeat server components in a single node Wazuh cluster?Check out this section and learn how.
 
 .. _wazuh_single_node_cluster:
 
