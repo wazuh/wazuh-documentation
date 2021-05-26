@@ -1,6 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. meta:: :description: Learn how to install Elastic Stack for using Wazuh on Debian
+.. meta::
+  :description: Learn more about how to install Elasticsearch in a multi-node cluster for Wazuh in this step-by-step guide. 
 
 .. _elasticsearch_multi_node_cluster:
 
