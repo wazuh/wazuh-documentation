@@ -715,7 +715,6 @@ Wazuh Manager
       purge: 'yes'
       use_password: 'no'
       limit_maxagents: 'yes'
-      ssl_protocol: 'TLSv1.2'
       ssl_ciphers: 'HIGH:!ADH:!EXP:!MD5:!RC4:!3DES:!CAMELLIA:@STRENGTH'
       ssl_agent_ca: null
       ssl_verify_host: 'no'
