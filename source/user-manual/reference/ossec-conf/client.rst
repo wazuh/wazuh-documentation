@@ -1,5 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
-
+.. meta::
+  :description: Learn more about the client configuration section and its options in this section of the Wazuh user manual. 
+  
 .. _reference_ossec_client:
 
 client
