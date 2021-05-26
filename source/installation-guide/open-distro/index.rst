@@ -1,5 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
-
+.. meta::
+  :description: Visit our installation guide to get started with Wazuh. In this section, you can learn how to install the Wazuh server. 
+  
 .. _od_installation_guide:
 
 Wazuh server
