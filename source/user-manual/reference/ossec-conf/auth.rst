@@ -197,7 +197,7 @@ ciphers
 Sets the list of ciphers for network communication using SSL.
 
 +--------------------+----------------------------------------------------+
-| **Default value**  | HIGH:!ADH:!EXP:!MD5:!RC4:!3DES:!CAMELLIA:@STRENGTH |
+| **Default value**  |  SSL protocol default ciphers                      |
 +--------------------+----------------------------------------------------+
 
 The format of this parameter is described in `SSL ciphers <https://www.openssl.org/docs/man1.1.0/apps/ciphers.html>`_.
