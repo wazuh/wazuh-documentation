@@ -120,7 +120,7 @@ checkUser() {
 
 }
 
-## Creates a backup of the existing insternal_users.yml
+## Creates a backup of the existing internal_users.yml
 
 createBackUp() {
     
