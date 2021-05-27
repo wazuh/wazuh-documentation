@@ -18,11 +18,11 @@ Requirements
 
 If ``Packages`` and ``Brew`` are not already installed in your system, they can be installed using the generate_wazuh_packages.sh script
 
-Download our wazuh-packages repository from GitHub and go to the macos directory.
+Download our wazuh-packages repository from GitHub and go to the macos directory of the 4.0 branch.
 
 .. code-block:: console
 
-  $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/macos
+  $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/macos && git checkout 4.0
 
 Execute the ``generate_wazuh_packages.sh`` script, with the different options you desire.
 

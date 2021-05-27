@@ -17,11 +17,11 @@ Requirements
  * Docker
  * Git
 
-Download our wazuh-packages repository from GitHub and go to the wpk directory.
+Download our wazuh-packages repository from GitHub and go to the wpk directory of the 4.0 branch.
 
 .. code-block:: console
 
- $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/wpk
+ $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/wpk && git checkout 4.0
 
 Execute the ``generate_wpk_package.sh`` script, with the different options you desire. This script will build a Docker image with all the necessary tools to create the WPK and run a container that will build it:
 
@@ -34,17 +34,22 @@ Execute the ``generate_wpk_package.sh`` script, with the different options you d
 
   Usage: ./generate_wpk_package.sh [OPTIONS]
   
-      -t,   --target-system <target>              [Required] Select target wpk to build [linux/windows]
-      -b,   --branch <branch>                     [Required] Select Git branch or tag e.g. 
-      -d,   --destination <path>                  [Required] Set the destination path of package.
-      -k,   --key-dir <arch>                      [Required] Set the WPK key path to sign package.
-      -a,   --architecture <arch>                 [Optional] Target architecture of the package [x86_64].
-      -j,   --jobs <number>                       [Optional] Number of parallel jobs when compiling.
-      -pd,  --package-directory <directory>       [Required for windows] Package name to pack on wpk.
-      -p,   --path <path>                         [Optional] Installation path for the package. By default: /var.
-      -o,   --output <name>                       [Required] Name to the output package.
-      -c,   --checksum                            [Optional] Generate checksum
-      -h,   --help                                Show this help.
+    It is required to use -k or --aws-wpk-key, --aws-wpk-cert parameters
+
+    -t,   --target-system <target> [Required] Select target wpk to build [linux/windows]
+    -b,   --branch <branch>        [Required] Select Git branch or tag
+    -d,   --destination <path>     [Required] Set the destination path of package.
+    -pn,  --package-name <name>    [Required for windows] Package name to pack on wpk.
+    -o,   --output <name>          [Required] Name to the output package.
+    -k,   --key-dir <path>         [Optional] Set the WPK key path to sign package.
+    --aws-wpk-key                  [Optional] AWS Secrets manager Name/ARN to get WPK private key.
+    --aws-wpk-cert                 [Optional] AWS secrets manager Name/ARN to get WPK certificate.
+    --aws-wpk-key-region           [Optional] AWS Region where secrets are stored.
+    -a,   --architecture <arch>    [Optional] Target architecture of the package [x86_64].
+    -j,   --jobs <number>          [Optional] Number of parallel jobs when compiling.
+    -p,   --path <path>            [Optional] Installation path for the package. By default: /var/ossec.
+    -c,   --checksum <path>        [Optional] Generate checksum on the desired path.
+    -h,   --help                   Show this help.
 
 To use this tool, the previously required :ref:`certificate <create-wpk-key>` and the key must be in the same directory.
 
