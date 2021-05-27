@@ -56,7 +56,6 @@ Execute the ``generate_debian_package.sh`` script, with the different options yo
       -c, --checksum <path>      [Optional] Generate checksum on the desired path (by default, if no path is specified it will be generated on the same directory than the package).
       --dont-build-docker        [Optional] Locally built docker image will be used instead of generating a new one.
       --sources <path>           [Optional] Absolute path containing Wazuh source code. This option will use local source code instead of downloading it from GitHub.
-      --packages-branch <branch> [Optional] Select Git branch or tag from wazuh-packages repository.
       --dev                      [Optional] Use the SPECS files stored in the host instead of downloading them from GitHub.
       -h, --help                Show this help.
 
