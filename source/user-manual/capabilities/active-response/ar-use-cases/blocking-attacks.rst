@@ -16,7 +16,7 @@ First of all, we need to know when to execute the response. We can use one of t
 - Rule group: The response will be executed on any event in the defined group.
 - Level: The response will be executed on any event with this level or higher.
 
-In our case, we want to prevent ``SSH brute force attacks`` so when the rule ``5712 - SSHD brute force trying to get access to the system.`` is triggered, it will execute the proper active response to block the IP of the attacker.
+In our case, we want to prevent ``SSH brute force attacks`` so when the rule ``5712 - SSHD brute force trying to get access to the system`` is triggered, it will execute the proper active response to block the IP of the attacker.
 
 Defining the command
 --------------------
@@ -123,29 +123,18 @@ Active response has blocked the IP so it is working properly.
 Generating an alert when an active response is fired
 ----------------------------------------------------
 
-Every agent has a log file where the active response activities are registered:
+Every agent has a log file at ``/var/ossec/logs/active-responses.log`` where the active response activities are registered. By default, this file is being monitored. 
 
 .. code-block:: none
 
-  $ tail -f /var/ossec/logs/active-responses.log
-  Thu Apr 21 17:09:51 UTC 2016 /var/ossec/active-response/bin/firewall-drop.sh add - 10.0.0.6 1461258591.68247 5712
-
-
-The manager does not realize if an active response was fired or not, so we should configure OSSEC to read ``active-responses.log``. In order to do it, we edit ``/var/ossec/etc/shared/agent.conf`` in the manager to centralize the configuration of all agents:
-
-.. code-block:: none
-
-  <agent_config>
+  <ossec_config>
     <localfile>
         <log_format>syslog</log_format>
         <location>/var/ossec/logs/active-responses.log</location>
     </localfile>
-  </agent_config>
+  </ossec_config>
 
-
-Likely the file ``active-responses.log`` does not exist by default when OSSEC is installed, so it will not read it. You must create the file ``active-responses.log`` at ``/var/ossec/logs/`` folder in each agent. Then, restart the Manager and all the agents to apply the changes.
-
-Now, if you reproduce the previous proof of concept simulation, you will see the following alert in the manager:
+When the active response is triggered we can see the corresponding alert: 
 
 .. thumbnail:: ../../../../images/manual/automatic-remediation/561_host_blocked_by_firewall_drop.png
   :title: Rule 561 - host blocked by firewall drop 
