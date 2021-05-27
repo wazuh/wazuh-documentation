@@ -5,6 +5,9 @@
 How to integrate Wazuh with YARA
 ================================
 
+.. meta::
+  :description: Learn how to integrate Wazuh with YARA, a versatile Open Source pattern-matching tool aimed to detect malware samples based on rule descriptions.
+
 Wazuh can integrate with YARA in different ways. YARA is a versatile Open Source pattern-matching tool aimed to detect malware samples based on rule descriptions, although it is not limited to that use case alone.
 
 This use case focuses on automatically executing YARA scans by using the ``active response`` module when a Wazuh FIM alert is triggered. This is an interesting way of using YARA as it concentrates the scans on new files or files that change in your environment, thus optimizing resource consumption on the monitored endpoints.
