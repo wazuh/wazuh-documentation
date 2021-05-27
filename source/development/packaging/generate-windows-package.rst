@@ -42,7 +42,7 @@ image with all the necessary tools to compile and obtain the Windows agent compi
 
   Usage: ./generate_compiled_windows_agent.sh [OPTIONS]
   
-      -b, --branch <branch>     [Required] Select Git branch [master].
+      -b, --branch <branch>     [Required] Select Git branch.
       -j, --jobs <number>       [Optional] Change number of parallel jobs when compiling the Windows agent. By default: 4.
       -r, --revision <rev>      [Optional] Package revision. By default: 1.
       -s, --store <path>        [Optional] Set the directory where the package will be stored. By default the current path.

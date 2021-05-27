@@ -32,7 +32,7 @@ Execute the ``generate_wazuh_splunk_app.sh`` script, with the different options 
 
   Usage: ./generate_wazuh_splunk_app.sh [OPTIONS]
   
-      -b, --branch <branch>     [Required] Select Git tag
+      -b, --branch <branch>     [Required] Select Git branch or tag.
       -s, --store <directory>   [Optional] Destination directory by default /home/vagrant/wazuh-wazuh-packages-26460eb/splunkapp/output
       -r, --revision            [Optional] Package revision that append to version e.g. x.x.x-y.y.y_rev
       -c, --checksum <path>     [Optional] Generate checksum
