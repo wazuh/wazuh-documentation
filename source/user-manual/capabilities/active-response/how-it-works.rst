@@ -12,12 +12,25 @@ How it works
 When is an active response triggered?
 -------------------------------------
 
-An **active response** is a script that is configured to execute when a specific alert, alert level or rule group has been triggered.  Active responses are either stateful or stateless responses.  Stateful responses are configured to undo the action after a specified period of time while stateless responses are configured as one-time actions.
+An **active response** is a script that is configured to execute when a specific alert, alert level or rule group has been triggered.  Active responses are either stateful or stateless responses. 
+
+- ``Stateful``. Are configured to undo the action after a specified period of time. 
+
+- ``Stateless``.  Are configured as one-time actions without an event to revert the original effect.
 
 Where are active response actions executed?
 -------------------------------------------
 
-Each active response specifies where its associated command will be executed: on the agent that triggered the alert, on the manager, on another specified agent or on all agents, which also includes the manager(s).
+Each active response specifies where its associated command will be executed: on the agent that triggered the alert, on the manager, on another specified agent or on all agents, which also includes the manager(s). The ``location`` options are: 
+
+- ``Local``. It runs the script on the agent that generated the alert.
+
+- ``Server``. It runs the script on the Wazuh manager.
+
+- ``Defined agent``. It specifies the IDs of the agents that run the script regardless of where the event has been observed.
+
+- ``All``. Every agent in the environment will run the script. Use with caution.
+
 
 Active response configuration
 -----------------------------
@@ -59,7 +72,7 @@ Active responses are configured in the manager by modifying the :ref:`ossec.conf
 	In this example, the active response is configured to execute the command that was defined in the previous step. The *where* of the action is defined as the local host and the *when* is defined as any time the rule has a level higher than 6.  The timeout that was allowed in the command configuration is also defined in the above example.
 
 .. note::
-	More information about active response options: :ref:`Active response <reference_ossec_active_response>`
+	More information about active response configuration: :ref:`Active response <reference_ossec_active_response>`
 
 
 The active response log can be viewed at ``/var/ossec/logs/active-responses.log``.
