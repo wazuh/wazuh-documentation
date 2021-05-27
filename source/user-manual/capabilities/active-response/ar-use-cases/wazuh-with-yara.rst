@@ -19,26 +19,6 @@ The next diagram illustrates the flow of events between the different components
   :align: center
   :width: 100%
 
-Wazuh active response
-----------------------
-
-An active response can execute a script when a specific alert, alert level, or rule group is triggered in your Wazuh system. There are two types:
-
-- ``Stateful``. It can undo the action after a specified period of time.
-
-- ``Stateless``. It represents a single execution without an event to revert the original effect.
-
-You can also decide where the action will take place:
-
-- ``Local``. It runs the script on the agent that generated the alert.
-
-- ``Server``. It runs the script on the Wazuh manager.
-
-- ``Defined agent``. It specifies the IDs of the agents that run the script regardless of where the event has been observed.
-
-- ``All``. Every agent in the environment will run the script. Use with caution.
-
-In this use case, you will define a stateless type of active response that will be executed locally on the agent that generated the alert.
 
 Wazuh manager configuration
 ---------------------------
