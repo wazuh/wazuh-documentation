@@ -18,7 +18,7 @@ Download our wazuh-packages repository from GitHub and go to the aix directory.
 
 .. code-block:: console
 
- $ curl -L https://github.com/wazuh/wazuh-packages/tarball/master | tar zx
+ $ curl -L https://github.com/wazuh/wazuh-packages/tarball/4.1 | tar zx
  $ cd wazuh-wazuh-packages-*
  $ cd aix
 

@@ -14,11 +14,11 @@ Requirements
 
  * Git
 
-Download our wazuh-packages repository from GitHub and go to the ``solaris`` directory.
+Download our wazuh-packages repository from GitHub and go to the ``solaris`` directory of the 4.1 branch.
 
 .. code-block:: console
 
-  $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/solaris
+  $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/solaris && git checkout 4.1
 
 Choose the version of solaris you want to build the package for and go to that directory.
 
@@ -33,7 +33,7 @@ Execute the ``generate_wazuh_packages.sh`` script to build the package. Here you
 
  Usage: ./generate_wazuh_packages.sh [OPTIONS]
  
-     -b, --branch <branch>               Select Git branch or tag e.g. master.
+     -b, --branch <branch>               Select Git branch or tag.
      -e, --environment                   Install all the packages necessaries to build the pkg package.
      -s, --store  <pkg_directory>        Directory to store the resulting pkg package. By default, an output folder will be created.
      -p, --install-path <pkg_home>       Installation path for the package. By default: /var.

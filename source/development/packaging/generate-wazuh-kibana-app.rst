@@ -21,6 +21,18 @@ Download our wazuh-packages repository from GitHub and go to the wazuhapp direct
 
   $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/wazuhapp
 
+If you want to build a version later or equal to 4.1.4, you much change to 4.1 branch.
+
+.. code-block:: console
+
+ $ git checkout 4.1
+
+If you want to build a version prior to 4.1.4, you must change to the corresponding tag {v4.1.0, v4.1.1, v4.1.2, v4.1.3}
+
+.. code-block:: console
+
+ $ git checkout v4.1.2
+
 Execute the ``generate_wazuh_app.sh`` script, with the different options you desire. This script will build a Docker image with all the necessary tools to create the Wazuh Kibana plugin package and run a container that will build it:
 
 .. code-block:: console
@@ -32,7 +44,7 @@ Execute the ``generate_wazuh_app.sh`` script, with the different options you des
 
   Usage: ./generate_wazuh_app.sh [OPTIONS]
   
-      -b, --branch <branch>     [Required] Select Git branch or tag e.g. 3.8-6.7 or v3.7.2-6.5.4
+      -b, --branch <branch>     [Required] Select Git branch or tag.
       -s, --store <path>        [Optional] Set the destination path of package, by defauly /tmp/wazuh-app.
       -r, --revision <rev>      [Optional] Package revision that append to version e.g. x.x.x-rev
       -c, --checksum <path>     [Optional] Generate checksum

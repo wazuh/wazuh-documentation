@@ -19,7 +19,7 @@ Download our wazuh-packages repository from GitHub and go to the ``hpux`` direct
 
 .. code-block:: console
 
- $ curl -L https://github.com/wazuh/wazuh-packages/tarball/master | tar zx
+ $ curl -L https://github.com/wazuh/wazuh-packages/tarball/4.1 | tar zx
  $ cd wazuh-wazuh-packages-*
  $ cd hp-ux
 
@@ -35,7 +35,7 @@ Execute the ``generate_wazuh_packages.sh`` script, with the different options yo
   Usage: ./generate_wazuh_packages.sh [OPTIONS]
 
       -e Install all the packages necessaries to build the TAR package
-      -b <branch> Select Git branch. Example v3.5.0
+      -b <branch> Select Git branch. Example v4.1.5
       -s <tar_directory> Directory to store the resulting tar package. By default, an output folder will be created.
       -p <tar_home> Installation path for the package. By default: /var
       -c, --checksum Compute the SHA512 checksum of the TAR package.

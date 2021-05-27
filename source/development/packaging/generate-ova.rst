@@ -17,11 +17,11 @@ Requirements
  * `Git <https://git-scm.com/book/en/v2/Getting-Started-Installing-Git>`_
  * `Python <https://www.python.org/download/releases/2.7/>`_
 
-Download our wazuh-packages repository from GitHub and go to the ova directory.
+Download our wazuh-packages repository from GitHub and go to the ova directory of the 4.1 branch.
 
 .. code-block:: console
 
- $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/ova
+ $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/ova && git checkout 4.1
 
 Execute the ``generate_ova.sh`` script, with the different options you desire.
 

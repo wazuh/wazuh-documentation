@@ -30,6 +30,18 @@ Download our wazuh-packages repository from GitHub and go to the ``windows`` dir
 
     $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/windows
 
+If you want to build a version later or equal to 4.1.4, you much change to 4.1 branch.
+
+.. code-block:: console
+
+ $ git checkout 4.1
+
+If you want to build a version prior to 4.1.4, you must change to the corresponding tag {v4.1.0, v4.1.1, v4.1.2, v4.1.3}
+
+.. code-block:: console
+
+ $ git checkout v4.1.2
+
 Execute the ``generate_compiled_windows_agent.sh`` script, with the different options you desire. This script will build a Docker
 image with all the necessary tools to compile and obtain the Windows agent compiled in a zip file :
 
@@ -42,7 +54,7 @@ image with all the necessary tools to compile and obtain the Windows agent compi
 
   Usage: ./generate_compiled_windows_agent.sh [OPTIONS]
   
-      -b, --branch <branch>     [Required] Select Git branch [master]. By default: master.
+      -b, --branch <branch>     [Required] Select Git branch.
       -j, --jobs <number>       [Optional] Change number of parallel jobs when compiling the Windows agent. By default: 4.
       -r, --revision <rev>      [Optional] Package revision. By default: 1.
       -s, --store <path>        [Optional] Set the directory where the package will be stored. By default the current path.
@@ -53,7 +65,7 @@ Below, you will find an example of how to build a compiled Windows agent.
 
 .. code-block:: console
 
-  # ./generate_compiled_windows_agent.sh -b v3.11.0 -s /tmp -r myrevision
+  # ./generate_compiled_windows_agent.sh -b v4.1.5 -s /tmp -r myrevision
 
 .. note::
     The ``-s`` parameter needs an absolute path. In this path you will get the zip with the compiled agent
