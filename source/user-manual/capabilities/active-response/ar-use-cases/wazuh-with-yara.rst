@@ -128,6 +128,8 @@ Similarly create a rule file, ``/var/ossec/etc/rules/yara_rules.xml``, with the 
       </rule>
   </group>
 
+Restart the Wazuh manager for the changes to take effect. 
+
 Wazuh agent configuration
 -------------------------
 
