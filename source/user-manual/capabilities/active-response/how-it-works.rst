@@ -4,7 +4,7 @@ How it works
 ============
 
 .. thumbnail:: ../../../images/manual/automatic-remediation/automatic-remediation.png
-  :title: Command monitoring
+  :title: Active response workflow 
   :align: center
   :width: 100%
 
