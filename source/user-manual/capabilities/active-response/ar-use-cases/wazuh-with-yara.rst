@@ -146,9 +146,11 @@ Similarly create a rule file, ``/var/ossec/etc/rules/yara_rules.xml``, with the 
   </group>
 
 Wazuh agent configuration
-^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------
 
-The following section assumes YARA is already installed on the monitored endpoint.  If you need to install it, you can do it following the `official YARA installation guide <https://yara.readthedocs.io/en/stable/gettingstarted.html#compiling-and-installing-yara>`_. The script configured to run as part of the active response settings defined on the Wazuh manager, ``yara.sh``, needs to be placed under ``/var/ossec/active-response/bin`` on the Wazuh agent side. Add the following content to it:
+The following section assumes YARA is already installed on the monitored endpoint.  If you need to install it, you can do it following the `official YARA installation guide <https://yara.readthedocs.io/en/stable/gettingstarted.html#compiling-and-installing-yara>`_. 
+
+The script configured to run as part of the active response settings defined on the Wazuh manager, ``yara.sh``, needs to be placed under ``/var/ossec/active-response/bin`` on the Wazuh agent side. Add the following content to it:
   
 .. code-block:: none
   
