@@ -13,3 +13,4 @@ Monitoring with Wazuh
    github/index
    docker-monitor/index
    gcp/index
+   office365/index

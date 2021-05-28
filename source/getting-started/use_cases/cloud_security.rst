@@ -9,7 +9,7 @@ The Wazuh security platform provides threat detection, configuration compliance,
 
 - **Endpoint level**: monitoring cloud instances or virtual machines using the lightweight :ref:`Wazuh security agent <wazuh_agent>`.
 
-- **Cloud infrastructure level**: monitoring cloud services and activity by collecting and analyzing data from the provider API. Amazon AWS, Microsoft Azure, Google Cloud Platform and GitHub are supported.
+- **Cloud infrastructure level**: monitoring cloud services and activity by collecting and analyzing data from the provider API. Amazon AWS, Microsoft Azure, Office 365, Google Cloud Platform and GitHub are supported.
 
 Amazon Web Services
 -------------------
@@ -154,6 +154,65 @@ Here is an example of a rule that Azure alerts.
   }
 
 More information about how to use Wazuh to monitor Microsoft Azure can be found at our :ref:`documentation <azure>`.
+
+Office 365
+----------
+
+Wazuh monitors Office 365 by extracting events from audit logs, which is used as a middleware for event ingestion and delivery. This integration helps detect threats targeting your Office 365 organizations.
+
+The following example shows an alert when a new mailbox is created:
+
+.. code-block:: json
+  :emphasize-lines: 13,40
+  :class: output
+
+  {
+    "agent": {
+        "name": "agent01",
+        "id": "001"
+    },
+    "manager": {
+        "name": "manager01"
+    },
+    "data": {
+        "office_365": {
+            "CreationTime": "2021-05-19T21:30:51",
+            "Id": "xxxx-xxxx-xxxx-xxxx-xxxx",
+            "Operation": "New-Mailbox",
+            "OrganizationId": "xxxx-xxxx-xxxx-xxxx-xxxx",
+            "RecordType": 1,
+            "ResultStatus": "True",
+            "UserKey": "NT AUTHORITY\\SYSTEM (w3wp)",
+            "UserType": 3,
+            "Version": 1,
+            "Workload": "Exchange",
+            "ClientIP": "[aaa:bbb:ccc:aa:aa::aa]:32132",
+            "ObjectId": "xxxx.prod.outlook.com/Microsoft Exchange Hosted Organizations/org_name.onmicrosoft.com/CompliancePolicyCacheCustomTag",
+            "UserId": "NT AUTHORITY\\SYSTEM (w3wp)",
+            "AppId": "xxx-xxx-xxx-xxx-xxxx",
+            "ClientAppId": "xxx-xxx-xxx-xxx-xxx",
+            "ExternalAccess": true,
+            "OrganizationName": "org_name.onmicrosoft.com",
+            "OriginatingServer": "...",
+            "SessionId": ""
+        }
+    },
+    "rule": {
+        "firedtimes": 26,
+        "mail": false,
+        "level": 3,
+        "description": "Office 365: Events from the Exchange admin audit log.",
+        "groups":["office_365"],
+        "id": "91533"
+    },
+    "location": "office_365",
+    "decoder": {
+        "name": "json"
+    },
+    "timestamp": "2020-03-20T12:19:08.694+0000"
+  }
+
+More information on how to use Wazuh to monitor GitHub can be found in our :ref:`documentation <office365>`.
 
 Google Cloud Platform
 ---------------------

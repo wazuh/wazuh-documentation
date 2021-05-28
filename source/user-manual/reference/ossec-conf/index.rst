@@ -64,6 +64,8 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +---------------------------------------------------------------------+------------------------+
 | :doc:`logging <logging>`                                            | manager, agent         |
 +---------------------------------------------------------------------+------------------------+
+| :doc:`office365 <office365-module>`                                 | manager, agent         |
++---------------------------------------------------------------------+------------------------+
 | :doc:`remote <remote>`                                              | manager                |
 +---------------------------------------------------------------------+------------------------+
 | :doc:`reports <reports>`                                            | manager                |
@@ -132,6 +134,7 @@ All of the above sections must be located within the top-level ``<ossec_config>`
    labels
    localfile
    logging
+   office365-module
    remote
    reports
    rootcheck

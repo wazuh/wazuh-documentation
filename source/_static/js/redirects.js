@@ -34,6 +34,14 @@ removedUrls['x.y'] = [
 ];
 */
 
+/* Pages added in 4.4 */
+
+newUrls['4.4'] = [
+  '/office365/index.html',
+  '/office365/monitoring-office365-activity.html',
+  '/user-manual/reference/ossec-conf/office365-module.html',
+];
+
 /* Pages added in 4.3 */
 
 newUrls['4.3'] = [
