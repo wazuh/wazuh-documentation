@@ -15,11 +15,11 @@ Requirements
  * Docker
  * Git
 
-Download our wazuh-packages repository from GitHub and go to the debs directory.
+Download our wazuh-packages repository from GitHub and go to the debs directory of the |WAZUH_PACKAGES_BRANCH| branch.
 
 .. code-block:: console
 
- $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/debs
+ $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/debs && git checkout |WAZUH_PACKAGES_BRANCH|
 
 Execute the ``generate_debian_package.sh`` script, with the different options you desire. This script will build a Docker image with all the necessary tools to create the DEB and run a container that will build it:
 
@@ -32,8 +32,9 @@ Execute the ``generate_debian_package.sh`` script, with the different options yo
 
   Usage: ./generate_debian_package.sh [OPTIONS]
   
-      -b, --branch <branch>     [Required] Select Git branch []. By default: master.
+      -b, --branch <branch>     [Required] Select Git branch.
       -t, --target <target>     [Required] Target package to build: manager, api or agent.
+      --packages-branch         [Required] Branch of the wazuh packages repository.
       -a, --architecture <arch> [Optional] Target architecture of the package [amd64/i386/ppc64le/arm64/armhf].
       -j, --jobs <number>       [Optional] Change number of parallel jobs when compiling the manager or agent. By default: 2.
       -r, --revision <rev>      [Optional] Package revision. By default: 1.
@@ -50,18 +51,18 @@ Below, you will find some examples of how to build a DEB package.
 
 .. code-block:: console
 
-  # ./generate_debian_package.sh -b v|WAZUH_LATEST| -s /tmp -t manager -a amd64 -r my_rev.
+  # ./generate_debian_package.sh -b v|WAZUH_LATEST| --packages-branch |WAZUH_PACKAGES_BRANCH| -s /tmp -t manager -a amd64 -r my_rev.
 
 This will generate a |WAZUH_LATEST| Wazuh manager package DEB with revision ``my_rev`` for ``amd64`` systems.
 
 .. code-block:: console
 
-  # ./generate_debian_package.sh -b v|WAZUH_LATEST| -s /tmp -t api -a i386 -r my_rev
+  # ./generate_debian_package.sh -b v|WAZUH_LATEST| --packages-branch |WAZUH_PACKAGES_BRANCH| -s /tmp -t api -a i386 -r my_rev
 
 This will generate a |WAZUH_LATEST| Wazuh api package DEB with revision ``my_rev`` for ``i386`` systems and store it in ``/tmp``.
 
 .. code-block:: console
 
-  # ./generate_debian_package.sh -b v|WAZUH_LATEST| -t agent -a amd64 -p /opt
+  # ./generate_debian_package.sh -b v|WAZUH_LATEST| --packages-branch |WAZUH_PACKAGES_BRANCH| -t agent -a amd64 -p /opt
 
 This will generate a |WAZUH_LATEST| Wazuh agent DEB package with ``/opt`` as installation directory for ``amd64`` systems.
