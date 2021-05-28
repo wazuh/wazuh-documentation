@@ -21,11 +21,11 @@ Download our wazuh-packages repository from GitHub and go to the debs directory.
 
  $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/debs
 
-If you want to build a version later or equal to |WAZUH_GCC_CHANGE|, you much change to |WAZUH_LATEST_MINOR| branch.
+If you want to build a version later or equal to |WAZUH_GCC_CHANGE|, you must change to |WAZUH_PACKAGES_BRANCH| branch.
 
 .. code-block:: console
 
- $ git checkout |WAZUH_LATEST_MINOR|
+ $ git checkout |WAZUH_PACKAGES_BRANCH|
 
 If you want to build a version prior to |WAZUH_GCC_CHANGE|, you must change to the corresponding tag, e.g. v|WAZUH_PREGCC_CHANGE|
 
@@ -63,18 +63,18 @@ Below, you will find some examples of how to build a DEB package.
 
 .. code-block:: console
 
-  # ./generate_debian_package.sh -b v|WAZUH_LATEST| --packages-branch |WAZUH_LATEST_MINOR| -s /tmp -t manager -a amd64 -r my_rev.
+  # ./generate_debian_package.sh -b v|WAZUH_LATEST| --packages-branch |WAZUH_PACKAGES_BRANCH| -s /tmp -t manager -a amd64 -r my_rev.
 
 This will generate a |WAZUH_LATEST| Wazuh manager package DEB with revision ``my_rev`` for ``amd64`` systems.
 
 .. code-block:: console
 
-  # ./generate_debian_package.sh -b v|WAZUH_LATEST| --packages-branch |WAZUH_LATEST_MINOR| -s /tmp -t api -a i386 -r my_rev
+  # ./generate_debian_package.sh -b v|WAZUH_LATEST| --packages-branch |WAZUH_PACKAGES_BRANCH| -s /tmp -t api -a i386 -r my_rev
 
 This will generate a |WAZUH_LATEST| Wazuh api package DEB with revision ``my_rev`` for ``i386`` systems and store it in ``/tmp``.
 
 .. code-block:: console
 
-  # ./generate_debian_package.sh -b v|WAZUH_LATEST| --packages-branch |WAZUH_LATEST_MINOR| -t agent -a amd64 -p /opt
+  # ./generate_debian_package.sh -b v|WAZUH_LATEST| --packages-branch |WAZUH_PACKAGES_BRANCH| -t agent -a amd64 -p /opt
 
 This will generate a |WAZUH_LATEST| Wazuh agent DEB package with ``/opt`` as installation directory for ``amd64`` systems.

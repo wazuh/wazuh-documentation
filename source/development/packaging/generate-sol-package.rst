@@ -14,11 +14,11 @@ Requirements
 
  * Git
 
-Download our wazuh-packages repository from GitHub and go to the ``solaris`` directory of the |WAZUH_LATEST_MINOR| branch.
+Download our wazuh-packages repository from GitHub and go to the ``solaris`` directory of the |WAZUH_PACKAGES_BRANCH| branch.
 
 .. code-block:: console
 
-  $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/solaris && git checkout |WAZUH_LATEST_MINOR|
+  $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/solaris && git checkout |WAZUH_PACKAGES_BRANCH|
 
 Choose the version of solaris you want to build the package for and go to that directory.
 
