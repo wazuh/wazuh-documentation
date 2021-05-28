@@ -25,7 +25,6 @@ Options
 -------
 
 - `enabled`_
-- `run_on_start`_
 - `only_future_events`_
 - `interval`_
 - `time_delay`_
@@ -39,8 +38,6 @@ Options
 | Options                                | Allowed values                               |
 +========================================+==============================================+
 | `enabled`_                             | yes, no                                      |
-+----------------------------------------+----------------------------------------------+
-| `run_on_start`_                        | yes, no                                      |
 +----------------------------------------+----------------------------------------------+
 | `only_future_events`_                  | yes, no                                      |
 +----------------------------------------+----------------------------------------------+
@@ -69,17 +66,6 @@ Enabled the GitHub wodle.
 +--------------------+-----------------------------+
 | **Allowed values** | yes, no                     |
 +--------------------+-----------------------------+
-
-run_on_start
-^^^^^^^^^^^^
-
-Run evaluation immediately when service is started.
-
-+--------------------+---------+
-| **Default value**  | yes     |
-+--------------------+---------+
-| **Allowed values** | yes, no |
-+--------------------+---------+
 
 only_future_events
 ^^^^^^^^^^^^^^^^^^
@@ -193,7 +179,6 @@ Example of configuration
 
     <github>
         <enabled>no</enabled>
-        <run_on_start>yes</run_on_start>
         <interval>10m</interval>
         <time_delay>1s</time_delay>
         <only_future_events>yes</only_future_events>
@@ -213,7 +198,6 @@ Example of multiple organizations
 
     <github>
         <enabled>no</enabled>
-        <run_on_start>yes</run_on_start>
         <interval>1h</interval>
         <time_delay>10s</time_delay>
         <only_future_events>no</only_future_events>
