@@ -112,6 +112,9 @@
   height: auto;
   margin: 0 auto;
   display: block;
+  background: white;
+  min-width: 50px;
+  min-height: 50px;
 }
 
 #wazuh-light-box .wlb-data-container {
