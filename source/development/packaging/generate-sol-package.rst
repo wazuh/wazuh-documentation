@@ -14,11 +14,11 @@ Requirements
 
  * Git
 
-Download our wazuh-packages repository from GitHub and go to the ``solaris`` directory of the 4.1 branch.
+Download our wazuh-packages repository from GitHub and go to the ``solaris`` directory of the |WAZUH_LATEST_MINOR| branch.
 
 .. code-block:: console
 
-  $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/solaris && git checkout 4.1
+  $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/solaris && git checkout |WAZUH_LATEST_MINOR|
 
 Choose the version of solaris you want to build the package for and go to that directory.
 
@@ -56,7 +56,7 @@ Download and build the sources:
 
 To build a SPARC package you just need to run the same script in a SPARC system.
 
-We also provide an automated way of building packages for i386 Solaris systems using vagrant, to use this download our wazuh-packages repository from GitHub and go to the ``solaris/package_generation`` directory.
+We also provide an automated way of building packages for i386 Solaris systems using vagrant, to use this download our wazuh-packages repository from GitHub, change to the desired branch or tag depending on the version you want to build  and go to the ``solaris/package_generation`` directory.
 
 Requirements
 ^^^^^^^^^^^^^
