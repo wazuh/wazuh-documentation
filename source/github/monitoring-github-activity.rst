@@ -44,7 +44,6 @@ Proceed to configure the ``github`` module in the Wazuh manager. We will use the
 
     <github>
         <enabled>yes</enabled>
-        <run_on_start>yes</run_on_start>
         <interval>10m</interval>
         <time_delay>1s</time_delay>
         <only_future_events>yes</only_future_events>
