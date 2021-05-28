@@ -86,9 +86,9 @@
     # ~/searchguard/tools/sgtlstool.sh -c ~/searchguard/search-guard.yml -ca -crt -t /etc/elasticsearch/certs/
 
 
-  In case of further certificates deployments, it is highly recommended to keep Search Guard TLS offline tool and its configuration file ``search-guard.yml`` on the master node.
+  In case of further certificates deployment, it is highly recommended to keep Search Guard TLS offline tool and its configuration file ``search-guard.yml`` on the master node.
 
-* Compress all the necessary files to be sent to the all the instances:
+* Compress all the necessary files to be sent to all the instances:
 
   .. code-block:: console
 
