@@ -24,8 +24,8 @@ The installation process for a multi-node cluster is performed in three stages.
 #. Subsequent nodes configuration
 #. Initializing the Elasticsearch cluster
 
-**1. Initial node configuration**
-*********************************
+1. Initial node configuration
+---------------------------------
 
 The first stage of the process for installing a multi-node cluster is performed on the first Elasticsearch node to be configured. The SSL certificates generated in this stage are to later be deployed to the subsequent nodes.
 
@@ -103,8 +103,8 @@ Certificates creation and deployment
 .. note:: The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it with the following command ``/usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer``. Make sure to restart the Elasticsearch service afterwards. 
  
 
-**2. Subsequent nodes configuration**
-*************************************
+2. Subsequent nodes configuration
+---------------------------------
 
 The second stage of the process for installing a multi-node cluster is performed on the subsequent nodes of the Elasticsearch cluster. 
 
@@ -179,8 +179,8 @@ Certificates deployment
 .. note:: The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it with the following command ``/usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer``. Make sure to restart the Elasticsearch service afterward. 
 
 
-**3. Initializing the cluster**
-*******************************
+3. Initializing the cluster
+---------------------------
 
 the final stage of the process for installing a multi-node cluster is performed on the initial node and consists in running the security admin script. 
 
