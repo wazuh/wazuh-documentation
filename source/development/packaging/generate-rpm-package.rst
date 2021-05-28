@@ -15,11 +15,11 @@ Requirements
  * Docker
  * Git
 
-Download our wazuh-packages repository from GitHub and go to the rpms directory of the 4.0 branch.
+Download our wazuh-packages repository from GitHub and go to the rpms directory of the |WAZUH_LATEST_MINOR| branch.
 
 .. code-block:: console
 
- $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/rpms && git checkout 4.0
+ $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/rpms && git checkout |WAZUH_LATEST_MINOR|
 
 Execute the ``generate_rpm_package.sh`` script, with the different options you desire. This script will build a Docker image with all the necessary tools to create the RPM and run a container that will build it:
 
@@ -54,18 +54,18 @@ Below, you will find some examples of how to build an RPM package.
 
 .. code-block:: console
 
-  # ./generate_rpm_package.sh -b v|WAZUH_LATEST| --packages-branch 4.0 -s /tmp -t manager -a x86_64 -r my_rev.
+  # ./generate_rpm_package.sh -b v|WAZUH_LATEST| --packages-branch |WAZUH_LATEST_MINOR| -s /tmp -t manager -a x86_64 -r my_rev.
 
 This will generate a |WAZUH_LATEST| Wazuh manager RPM package with revision ``my_rev`` for ``x86_64`` systems.
 
 .. code-block:: console
 
-  # ./generate_rpm_package.sh -b v|WAZUH_LATEST| --packages-branch 4.0 -s /tmp -t api -a i386 -r my_rev
+  # ./generate_rpm_package.sh -b v|WAZUH_LATEST| --packages-branch |WAZUH_LATEST_MINOR| -s /tmp -t api -a i386 -r my_rev
 
 This will generate a |WAZUH_LATEST| Wazuh api RPM package with revision ``my_rev`` for ``i386`` systems and store it in ``/tmp``.
 
 .. code-block:: console
 
-  # ./generate_rpm_package.sh -b v|WAZUH_LATEST| --packages-branch 4.0 -t agent -a x86_64 -p /opt
+  # ./generate_rpm_package.sh -b v|WAZUH_LATEST| --packages-branch |WAZUH_LATEST_MINOR| -t agent -a x86_64 -p /opt
 
 This will generate a |WAZUH_LATEST| Wazuh agent RPM package with ``/opt`` as installation directory for ``x86_64`` systems.

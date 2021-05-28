@@ -15,11 +15,11 @@ Requirements
  * Docker
  * Git
 
-Download our wazuh-packages repository from GitHub and go to the debs directory of the 4.0 branch.
+Download our wazuh-packages repository from GitHub and go to the debs directory of the |WAZUH_LATEST_MINOR| branch.
 
 .. code-block:: console
 
- $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/debs && git checkout 4.0
+ $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/debs && git checkout |WAZUH_LATEST_MINOR|
 
 Execute the ``generate_debian_package.sh`` script, with the different options you desire. This script will build a Docker image with all the necessary tools to create the DEB and run a container that will build it:
 
@@ -52,18 +52,18 @@ Below, you will find some examples of how to build a DEB package.
 
 .. code-block:: console
 
-  # ./generate_debian_package.sh -b v|WAZUH_LATEST| --packages-branch 4.0 -s /tmp -t manager -a amd64 -r my_rev.
+  # ./generate_debian_package.sh -b v|WAZUH_LATEST| --packages-branch |WAZUH_LATEST_MINOR| -s /tmp -t manager -a amd64 -r my_rev.
 
 This will generate a |WAZUH_LATEST| Wazuh manager package DEB with revision ``my_rev`` for ``amd64`` systems.
 
 .. code-block:: console
 
-  # ./generate_debian_package.sh -b v|WAZUH_LATEST| --packages-branch 4.0 -s /tmp -t api -a i386 -r my_rev
+  # ./generate_debian_package.sh -b v|WAZUH_LATEST| --packages-branch |WAZUH_LATEST_MINOR| -s /tmp -t api -a i386 -r my_rev
 
 This will generate a |WAZUH_LATEST| Wazuh api package DEB with revision ``my_rev`` for ``i386`` systems and store it in ``/tmp``.
 
 .. code-block:: console
 
-  # ./generate_debian_package.sh -b v|WAZUH_LATEST| --packages-branch 4.0 -t agent -a amd64 -p /opt
+  # ./generate_debian_package.sh -b v|WAZUH_LATEST| --packages-branch |WAZUH_LATEST_MINOR| -t agent -a amd64 -p /opt
 
 This will generate a |WAZUH_LATEST| Wazuh agent DEB package with ``/opt`` as installation directory for ``amd64`` systems.

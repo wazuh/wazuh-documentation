@@ -24,11 +24,11 @@ To be able to generate the windows msi package, it is necessary to perform two s
 Compiling windows agent
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Download our wazuh-packages repository from GitHub and go to the ``windows`` directory of the 4.0 branch.
+Download our wazuh-packages repository from GitHub and go to the ``windows`` directory of the |WAZUH_LATEST_MINOR| branch.
 
 .. code-block:: console
 
-    $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/windows && git checkout 4.0
+    $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/windows && git checkout |WAZUH_LATEST_MINOR|
 
 Execute the ``generate_compiled_windows_agent.sh`` script, with the different options you desire. This script will build a Docker
 image with all the necessary tools to compile and obtain the Windows agent compiled in a zip file :
@@ -53,7 +53,7 @@ Below, you will find an example of how to build a compiled Windows agent.
 
 .. code-block:: console
 
-  # ./generate_compiled_windows_agent.sh -b v4.0.4 -s /tmp -r myrevision
+  # ./generate_compiled_windows_agent.sh -b v|WAZUH_LATEST| -s /tmp -r myrevision
 
 .. note::
     The ``-s`` parameter needs an absolute path. In this path you will get the zip with the compiled agent

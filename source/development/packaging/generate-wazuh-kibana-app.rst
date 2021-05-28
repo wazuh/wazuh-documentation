@@ -15,11 +15,11 @@ Requirements
  * Docker
  * Git
 
-Download our wazuh-packages repository from GitHub and go to the wazuhapp directory of the 4.0 branch.
+Download our wazuh-packages repository from GitHub and go to the wazuhapp directory of the |WAZUH_LATEST_MINOR| branch.
 
 .. code-block:: console
 
-  $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/wazuhapp && git checkout 4.0
+  $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/wazuhapp && git checkout |WAZUH_LATEST_MINOR|
 
 Execute the ``generate_wazuh_app.sh`` script, with the different options you desire. This script will build a Docker image with all the necessary tools to create the Wazuh Kibana plugin package and run a container that will build it:
 
