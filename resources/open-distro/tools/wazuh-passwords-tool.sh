@@ -194,7 +194,9 @@ changePassword() {
 
             if [ "${USERS[i]}" == "wazuh" ]; then
                 wazuhpass=${PASSWORDS[i]}
-            fi
+            elif [ "${USERS[i]}" == "kibanaserver" ]; then
+                kibpass=${PASSWORDS[i]}
+            fi  
 
         done
     else
@@ -202,7 +204,7 @@ changePassword() {
 
         if [ "${NUSER}" == "wazuh" ]; then
             wazuhpass=${PASSWORD}
-        elif [ "${NUSER}" == "kibanaserver" ]; then
+        elif [ "${USERS[i]}" == "kibanaserver" ]; then
             kibpass=${PASSWORD}
         fi        
 
