@@ -7,7 +7,7 @@ FAQ
 
 #. `Is it possible to monitor the output of a command on a remote device?`_
 #. `Can I monitor directories on a remote system?`_
-#. `How can I remove Agentless monitoring configuration?`_
+#. `How can I remove the Agentless monitoring configuration?`_
 
 Is it possible to monitor the output of a command on a remote device?
 ---------------------------------------------------------------------
@@ -17,7 +17,7 @@ Can I monitor directories on a remote system?
 ---------------------------------------------
 Yes, using either the ``ssh_integrity_check_bsd`` or ``ssh_integrity_check_linux`` options.
 
-How can I remove Agentless monitoring configuration?
+How can I remove the Agentless monitoring configuration?
 ---------------------------------------------
 To remove your Agentless configuration and passwords you have to perform the following steps:
 
