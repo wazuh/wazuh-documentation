@@ -1,15 +1,14 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. meta::
-  :description: Learn more about how to monitor AWS based services with Wazuh. In this section, you will learn more about installing dependencies. 
-  
-.. _amazon_dependencies:
+.. _azure_monitoring_dependencies:
+
 
 Installing dependencies
 =======================
 
 .. note::
-  **The integration** with AWS S3 **can be configured in the Wazuh manager** (which also behaves as an agent) **or directly in a Wazuh agent**. This choice merely depends on how you decide to access your AWS infrastructure in your environment. 
+
+  **The Azure monitoring module can be configured in the Wazuh manager** (which also behaves as an agent) **or directly in a Wazuh agent**.
 
 .. warning::
   The Wazuh manager includes all dependencies installed, **these steps are only necessary** when configuring the integration **in a Wazuh agent**.
@@ -18,7 +17,7 @@ Installing dependencies
 Python
 ------
 
-The AWS S3 integration requires python 3. It is compatible with python versions from `3.6.0` to `3.9.5`.  Future python releases should maintain compatibility although it cannot be guaranteed.
+The Azure monitoring module requires python 3. It is compatible with python versions from `3.6.0` to `3.9.5`.  Future python releases should maintain compatibility although it cannot be guaranteed.
 
 a) For **CentOS/RHEL/Fedora** systems:
 
@@ -72,13 +71,13 @@ b. From sources:
   # python3 get-pip.py
 
 
-Boto3
------
+Azure Storage Blobs client library for Python
+---------------------------------------------
 
-`Boto3 <https://boto3.readthedocs.io/>`_ is the official package supported by Amazon to manage AWS resources. It will be used to download the log messages from the S3 Bucket or the log groups for the CloudWatch Logs service integration. The module is compatible with boto3 from ``1.13.1`` to ``1.17.76``. Future boto3 releases should maintain compatibility although it cannot be guaranteed.
+`Azure Storage Blobs client library <https://pypi.org/project/azure-storage-blob/>`_ is the official Python library for Microsoft's Azure Blob storage.
 
-To install boto3, execute the following command:
+To install the Azure Storage Blobs client library for Python, execute the following command:
 
 .. code-block:: console
 
-  # pip install boto3==1.17.76
+  # pip install azure-common==1.1.25 azure-storage-blob==2.1.0 azure-storage-blob==2.1.0 azure-storage-common==2.1.0 pytz==2020.1 requests==2.23.0
