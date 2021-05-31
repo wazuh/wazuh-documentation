@@ -202,7 +202,9 @@ changePassword() {
 
         if [ "${NUSER}" == "wazuh" ]; then
             wazuhpass=${PASSWORD}
-        fi
+        elif [ "${NUSER}" == "kibanaserver" ]; then
+            kibpass=${PASSWORD}
+        fi        
 
     fi
     
@@ -239,7 +241,7 @@ changePassword() {
         fi 
 
         if [ -n "${haskibana}" ]; then
-            conf="$(awk '{sub("elasticsearch.password: '${wazuhkibold}'", "elasticsearch.password: '${wazuhpass}'")}1' /etc/kibana/kibana.yml)"
+            conf="$(awk '{sub("elasticsearch.password: '${wazuhkibold}'", "elasticsearch.password: '${kibpass}'")}1' /etc/kibana/kibana.yml)"
             echo "${conf}" > /etc/kibana/kibana.yml 
             restartService "kibana"
         fi         
