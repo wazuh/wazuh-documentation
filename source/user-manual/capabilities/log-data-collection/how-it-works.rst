@@ -62,6 +62,8 @@ Wazuh can monitor classic Windows event logs, as well as the newer Windows event
       <log_format>eventchannel</log_format>
     </localfile>
 
+.. _remote_syslog:
+
 Remote syslog
 ^^^^^^^^^^^^^
 
