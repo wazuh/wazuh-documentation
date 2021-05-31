@@ -20,6 +20,7 @@ from requests.utils import requote_uri
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #sys.path.insert(0, os.path.abspath('.'))
+sys.path.append(os.path.abspath("_exts"))
 
 # -- Project information -----------------------------------------------------
 
@@ -48,7 +49,7 @@ needs_sphinx = '1.8'
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.extlinks', # Sphinx built-in extension
-    'sphinxcontrib.images',
+    'wazuh-doc-images',
     'sphinx_tabs.tabs',
 ]
 
@@ -344,8 +345,9 @@ epub_exclude_files = ['search.html', 'not_found.html']
 
 # -- Images extension -----------------------------------------------------
 
-images_config = {
-    'default_group': 'default'
+wazuh_images_config = {
+    'override_image_directive': 'thumbnail',
+    'show_caption': True
 }
 
 # -- Options for intersphinx extension ---------------------------------------
