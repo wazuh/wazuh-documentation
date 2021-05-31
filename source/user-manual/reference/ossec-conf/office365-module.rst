@@ -119,7 +119,7 @@ This block configures the credential for the **authentication** with the Office3
 api_auth\\tenant_id
 ^^^^^^^^^^^^^^^^^^^
 
-Tenat id of your application registered in azure.
+Tenat id of your application registered in Azure.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -130,7 +130,7 @@ Tenat id of your application registered in azure.
 api_auth\\client_id
 ^^^^^^^^^^^^^^^^^^^
 
-Client id of your application registered in azure.
+Client id of your application registered in Azure.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -141,7 +141,7 @@ Client id of your application registered in azure.
 api_auth\\client_secret_path
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Path of the file that contains the client secret value of your application registered in azure. Incompatible with ``client_secret`` option.
+Path of the file that contains the client secret value of your application registered in Azure. Incompatible with ``client_secret`` option.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -152,7 +152,7 @@ Path of the file that contains the client secret value of your application regis
 api_auth\\client_secret
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Client secret value of your application registered in azure.
+Client secret value of your application registered in Azure.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -162,7 +162,7 @@ Client secret value of your application registered in azure.
 
 .. note::
 
-    This block can be repeated to give the possibility to connect with more than one organization on Office 365.
+    This block can be repeated to give the possibility to connect with more than one tenant on Office 365.
 
 subscriptions
 -------------
@@ -189,7 +189,7 @@ The event types to include:
 - DLP.All: Data loss prevention workloads.
 
 +--------------------+-------------------------------------------------------------------------------------------+
-| **Default value**  | N/A                                                                                       |
+| **Default value**  | Audit.AzureActiveDirectory, Audit.Exchange, Audit.SharePoint, Audit.General, DLP.All      |
 +--------------------+-------------------------------------------------------------------------------------------+
 | **Allowed values** | Audit.AzureActiveDirectory, Audit.Exchange, Audit.SharePoint, Audit.General, DLP.All      |
 +--------------------+-------------------------------------------------------------------------------------------+
@@ -214,8 +214,8 @@ Example of configuration
         </subscriptions>
     </office365>
 
-Example of multiple organizations
----------------------------------
+Example of multiple tenants
+---------------------------
 
 .. code-block:: xml
 

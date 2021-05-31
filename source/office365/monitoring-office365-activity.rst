@@ -11,7 +11,7 @@ Monitoring Office 365 Activity
 The **audit log** allows organization admins to quickly review the actions performed by members of your organization. It includes details such as who performed the action, what the action was, and when it was performed.
 This Wazuh module allows you to collect all the logs from Office 365 using its API. The Office 365 Management Activity API aggregates actions and events into tenant-specific content blobs, which are classified by the type and source of the content they contain. 
 
-List available content:
+**List available content:**
 
 This operation lists the content currently available for retrieval for the specified content type.
 
@@ -19,7 +19,7 @@ This operation lists the content currently available for retrieval for the speci
 
     GET https://manage.office.com/api/v1.0/{client_id}/activity/feed/subscriptions/content?contentType={content_type}&startTime={start_time}&endTime={end_time}
 
-Retrieving content:
+**Retrieving content:**
 
 To retrieve a content blob, make a GET request against the corresponding content URI that is included in the list of available content.
 
@@ -32,7 +32,7 @@ Office 365 API description can be found in this `link <https://docs.microsoft.co
 Office 365 API requirements
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-For **Wazuh** to successfully connect to the **Office365 API**, an authentication process is required. To do this, we must provide the tenant_id, client_id and client_secret of the application that we authorize in the organization.
+For **Wazuh** to successfully connect to the **Office365 API**, an authentication process is required. To do this, we must provide the ``tenant_id``, ``client_id`` and ``client_secret`` of the application that we authorize in the organization.
 
 1. Register your app
 
@@ -105,7 +105,7 @@ Proceed to configure the ``office365`` module in the Wazuh manager. Through the 
             <client_secret>your_client_secret</client_secret>
         </api_auth>
         <subscriptions>
-            <subscription>Audit.AzureActiveDirectory</subscription>
+            <subscription>Audit.Exchange</subscription>
         </subscriptions>
     </office365>
 
