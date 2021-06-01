@@ -88,7 +88,7 @@ checkInstalled() {
     elif [ "${SYS_TYPE}" == "zypper" ]; then
         elasticinstalled=$(zypper packages --installed | grep opendistroforelasticsearch | grep i+ | grep noarch)
     elif [ "${SYS_TYPE}" == "apt-get" ]; then
-        elasticinstalled=$(apt list --installed  2>/dev/null | grep opendistroforelasticsearch)
+        elasticinstalled=$(apt list --installed  2>/dev/null | grep 'opendistroforelasticsearch*')
     fi 
 
     if [ -z "${elasticinstalled}" ]; then
