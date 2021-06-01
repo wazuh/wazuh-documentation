@@ -81,4 +81,4 @@ To install boto3, execute the following command:
 
 .. code-block:: console
 
-  # pip install boto3==1.17.76
+  # pip3 install boto3==1.17.76

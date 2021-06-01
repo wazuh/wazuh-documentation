@@ -80,4 +80,4 @@ To install the Azure Storage Blobs client library for Python, execute the follow
 
 .. code-block:: console
 
-  # pip install azure-common==1.1.25 azure-storage-blob==2.1.0 azure-storage-blob==2.1.0 azure-storage-common==2.1.0 pytz==2020.1 requests==2.23.0
+  # pip3 install azure-common==1.1.25 azure-storage-blob==2.1.0 azure-storage-blob==2.1.0 azure-storage-common==2.1.0 pytz==2020.1 requests==2.23.0
