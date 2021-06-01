@@ -80,4 +80,4 @@ To install the Python Docker Library, execute the following command:
 
 .. code-block:: console
 
-  # pip install docker==4.2.0
+  # pip3 install docker==4.2.0

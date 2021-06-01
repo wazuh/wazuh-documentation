@@ -86,4 +86,4 @@ Google cloud pip dependencies
 
 .. code-block:: console
 
-  # pip install google-cloud-pubsub==1.4.3
+  # pip3 install google-cloud-pubsub==1.4.3
