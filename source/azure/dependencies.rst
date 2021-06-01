@@ -35,40 +35,20 @@ b) For **Debian/Ubuntu** systems:
 Pip
 ---
 
-The required modules can be installed with Pip, the Python package manager. Most of UNIX distributions have this tool available in their software repositories, but it can be compiled from sources too:
+The required modules can be installed with Pip, the Python package manager. Most of UNIX distributions have this tool available in their software repositories:
 
-A) For **CentOS/RHEL/Fedora** systems:
-
-a. Using ``yum``:
+a) For **CentOS/RHEL/Fedora** systems:
 
 .. code-block:: console
 
   # yum update && yum install python3-pip
 
-b. From sources:
 
-.. code-block:: console
-
-  # yum update && yum install curl python3-distutils
-  # curl -O https://bootstrap.pypa.io/get-pip.py
-  # python3 get-pip.py
-
-
-B) For **Debian/Ubuntu** systems:
-
-a. Using ``apt-get``:
+b) For **Debian/Ubuntu** systems:
 
 .. code-block:: console
 
   # apt-get update && apt-get install python3-pip
-
-b. From sources:
-
-.. code-block:: console
-
-  # apt-get update && apt-get install curl python3-distutils
-  # curl -O https://bootstrap.pypa.io/get-pip.py
-  # python3 get-pip.py
 
 
 Azure Storage Blobs client library for Python
