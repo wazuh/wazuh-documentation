@@ -31,7 +31,10 @@ logstash:
 kibana_user:
   reserved: false
   backend_roles:
-  - "kibanauser"  
+  - "kibanauser"
+  users:
+  - "wazuh_user"
+  - "wazuh_admin"    
   description: "Maps kibanauser to kibana_user"
 
 readall:
@@ -48,3 +51,22 @@ kibana_server:
   reserved: true
   users:
   - "kibanaserver"
+
+wazuh_ui_admin:
+  reserved: true
+  hidden: false
+  backend_roles: []
+  hosts: []
+  users:
+  - "wazuh_admin"
+  - "kibanaserver"
+  and_backend_roles: []
+
+wazuh_ui_user:
+  reserved: true
+  hidden: false
+  backend_roles: []
+  hosts: []
+  users:
+  - "wazuh_user"
+  and_backend_roles: []
