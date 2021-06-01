@@ -214,7 +214,7 @@ addWazuhrepo() {
         eval "echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages.wazuh.com/4.x/yum/\nprotect=1' | tee /etc/zypp/repos.d/wazuh.repo ${debug}"            
     elif [ ${sys_type} == "apt-get" ]; then
         eval "curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH --max-time 300 | apt-key add - ${debug}"
-        eval "echo "deb https://packages.wazuh.com/4.x/apt/ stable main" | tee /etc/apt/sources.list.d/wazuh.list ${debug}"
+        eval "echo "deb https://packages.wazuh.com/4.x/apt/ stable main" | tee - /etc/apt/sources.list.d/wazuh.list ${debug}"
         eval "apt-get update -q ${debug}"
     fi    
 
@@ -265,7 +265,7 @@ installElasticsearch() {
 
         logger "Configuring Elasticsearch..."
 
-        eval "curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/3364-Unattended_improvements_v1/resources/open-distro/elasticsearch/7.x/elasticsearch.yml --max-time 300 ${debug}"
+        eval "curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/3364-Unattended_improvements_v1/resources/open-distro/elasticsearch/7.x/elasticsearch_unattended.yml --max-time 300 ${debug}"
         eval "curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/3364-Unattended_improvements_v1/resources/open-distro/elasticsearch/roles/roles.yml --max-time 300 ${debug}"
         eval "curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles_mapping.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/3364-Unattended_improvements_v1/resources/open-distro/elasticsearch/roles/roles_mapping.yml --max-time 300 ${debug}"
         eval "curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/3364-Unattended_improvements_v1/resources/open-distro/elasticsearch/roles/internal_users.yml --max-time 300 ${debug}"        
@@ -352,7 +352,7 @@ installFilebeat() {
         exit 1;
     else
         filebeatinstalled="1"
-        eval "curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/3364-Unattended_improvements_v1/resources/open-distro/filebeat/7.x/filebeat.yml --max-time 300  ${debug}"
+        eval "curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/3364-Unattended_improvements_v1/resources/open-distro/filebeat/7.x/filebeat_unattended.yml --max-time 300  ${debug}"
         eval "curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/4.0/extensions/elasticsearch/7.x/wazuh-template.json --max-time 300 ${debug}"
         eval "chmod go+r /etc/filebeat/wazuh-template.json ${debug}"
         eval "curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.1.tar.gz --max-time 300 | tar -xvz -C /usr/share/filebeat/module ${debug}"
@@ -383,7 +383,7 @@ installKibana() {
         exit 1;
     else    
         kibanainstalled="1"
-        eval "curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/3364-Unattended_improvements_v1/resources/open-distro/kibana/7.x/kibana.yml --max-time 300 ${debug}"
+        eval "curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/3364-Unattended_improvements_v1/resources/open-distro/kibana/7.x/kibana_unattended.yml --max-time 300 ${debug}"
         eval "mkdir /usr/share/kibana/data ${debug}"
         eval "chown -R kibana:kibana /usr/share/kibana/ ${debug}"
         eval "cd /usr/share/kibana ${debug}"

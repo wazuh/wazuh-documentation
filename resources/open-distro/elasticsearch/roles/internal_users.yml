@@ -1,63 +1,72 @@
 ---
-# This is the internal user database
-# The hash value is a bcrypt hash and can be generated with plugin/tools/hash.sh
+# In this file users, backendroles and hosts can be mapped to Open Distro Security roles.
+# Permissions for Opendistro roles are configured in roles.yml
 
 _meta:
-  type: "internalusers"
+  type: "rolesmapping"
   config_version: 2
 
-# Define your internal users here
+# Define your roles mapping here
 
-## Demo users
+## Demo roles mapping
 
-wazuh:
-  hash: "$2y$12$BeIKI3ilHXr5lFL3LR9lmeIA.AHaCqU1ll4D/GYjER70SaDEUuLGC"
-  reserved: true
-  backend_roles:
-  - "admin"
-  description: "Wazuh admin user"  
-
-admin:
-  hash: "$2a$12$VcCDgh2NDk07JGN0rjGbM.Ad41qVR/YFJcgHp0UGns5JDymv..TOG"
-  reserved: true
-  backend_roles:
-  - "admin"
-  description: "Demo admin user"
-
-kibanaserver:
-  hash: "$2a$12$4AcgAt3xwOWadA5s5blL6ev39OXDNhmOesEoo33eZtrq2N0YrU3H."
-  reserved: true
-  description: "Demo kibanaserver user"
-
-kibanaro:
-  hash: "$2a$12$JJSXNfTowz7Uu5ttXfeYpeYE0arACvcwlPBStB1F.MI7f0U9Z4DGC"
+all_access:
   reserved: false
   backend_roles:
-  - "kibanauser"
-  - "readall"
-  attributes:
-    attribute1: "value1"
-    attribute2: "value2"
-    attribute3: "value3"
-  description: "Demo kibanaro user"
+  - "admin"
+  - "wazuh"
+  description: "Maps admin to all_access"
+
+own_index:
+  reserved: false
+  users:
+  - "*"
+  description: "Allow full access to an index named like the username"
 
 logstash:
-  hash: "$2a$12$u1ShR4l4uBS3Uv59Pa2y5.1uQuZBrZtmNfqB3iM/.jL0XoV9sghS2"
   reserved: false
   backend_roles:
   - "logstash"
-  description: "Demo logstash user"
+
+kibana_user:
+  reserved: false
+  backend_roles:
+  - "kibanauser"
+  users:
+  - "wazuh_user"
+  - "wazuh_admin"    
+  description: "Maps kibanauser to kibana_user"
 
 readall:
-  hash: "$2a$12$ae4ycwzwvLtZxwZ82RmiEunBbIPiAmGZduBAjKN0TXdwQFtCwARz2"
   reserved: false
   backend_roles:
   - "readall"
-  description: "Demo readall user"
 
-snapshotrestore:
-  hash: "$2y$12$DpwmetHKwgYnorbgdvORCenv4NAK8cPUg8AI6pxLCuWf/ALc0.v7W"
+manage_snapshots:
   reserved: false
   backend_roles:
   - "snapshotrestore"
-  description: "Demo snapshotrestore user"
+
+kibana_server:
+  reserved: true
+  users:
+  - "kibanaserver"
+
+wazuh_ui_admin:
+  reserved: true
+  hidden: false
+  backend_roles: []
+  hosts: []
+  users:
+  - "wazuh_admin"
+  - "kibanaserver"
+  and_backend_roles: []
+
+wazuh_ui_user:
+  reserved: true
+  hidden: false
+  backend_roles: []
+  hosts: []
+  users:
+  - "wazuh_user"
+  and_backend_roles: []
