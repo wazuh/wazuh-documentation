@@ -25,7 +25,7 @@ Create a subscription
 
 Use the button below the topic details (choose *pull* delivery). You can create as many subscriptions as you wish.
 
-.. thumbnail:: ../../images/gcp/gcp-account-key.png
+.. thumbnail:: ../../images/gcp/gcp-subscription.png
     :align: center
     :width: 100%
 
