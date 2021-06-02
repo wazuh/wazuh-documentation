@@ -5,26 +5,37 @@
   .. code-block:: console
 
     # mkdir /etc/elasticsearch/certs
+    # cd /etc/elasticsearch/certs
 
-* Download the Wazuh certificates tool and the configuration file:
-
-  .. code-block:: console
-
-    # curl -so ~/wazuh-cert-tool.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/3364-Unattended_improvements/resources/open-distro/tools/certificate-utility/wazuh-cert-tool.sh
-    # curl -so ~/instances.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/3364-Unattended_improvements/resources/open-distro/tools/certificate-utility/instances_aio.yml
-
-* Run the script to generate the certificates:
+* Download the Search Guard offline TLS tool to create the certificates:
 
   .. code-block:: console
 
-    #  bash ~/wazuh-cert-tool.sh
+    # curl -so ~/search-guard-tlstool-1.8.zip https://maven.search-guard.com/search-guard-tlstool/1.8/search-guard-tlstool-1.8.zip
 
-* Copy the certificates into the Elasticsearch location
+* Extract the downloaded file. It is assumed that it has been downloaded in ``~/`` (home directory):
 
   .. code-block:: console
 
-    # cp ~/certs/elasticsearch* /etc/elasticsearch/certs/
-    # cp ~/certs/root-ca.pem /etc/elasticsearch/certs/
-    # cp ~/certs/admin* /etc/elasticsearch/certs/
+    # unzip ~/search-guard-tlstool-1.8.zip -d ~/searchguard
+
+* Download the ``search-guard.yml`` configuration file. This file is pre-configured to generate all the necessary certificates:
+
+  .. code-block:: console
+
+      # curl -so ~/searchguard/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/searchguard/search-guard-aio.yml
+
+* Run the Search Guard script to create the certificates:
+
+  .. code-block:: console
+
+    #  ~/searchguard/tools/sgtlstool.sh -c ~/searchguard/search-guard.yml -ca -crt -t /etc/elasticsearch/certs/
+
+
+* Once the certificates have been created, remove the unnecessary files:
+
+  .. code-block:: console
+
+    # rm /etc/elasticsearch/certs/client-certificates.readme /etc/elasticsearch/certs/elasticsearch_elasticsearch_config_snippet.yml ~/search-guard-tlstool-1.8.zip ~/searchguard -rf
 
 .. End of include file

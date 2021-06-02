@@ -2,7 +2,7 @@
 
 .. code-block:: console 
 
-  # curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/3364-Unattended_improvements/resources/open-distro/elasticsearch/7.x/elasticsearch_cluster_subsequent_nodes.yml
+  # curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/elasticsearch/7.x/elasticsearch_cluster_subsequent_nodes.yml
 
 Edit the file ``/etc/elasticsearch/elasticsearch.yml``. By default, the pre-configured template includes 3 nodes, in case of having a different number, lines must be added or removed accordingly: 
 
