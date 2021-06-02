@@ -59,8 +59,4 @@ To enable multi-factor authentication:
 Configure your login method
 ---------------------------
 
-You can log in to your `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_ using password-based login or Google Sign-In.
-
-- If you signed up for a Wazuh Cloud account using the password-based login, you can still log in with your Google account. You then have access to the Wazuh Cloud Console with both methods. To perform this action, click **Log in with Google** on the log in page of the Wazuh Cloud Console.   
-
-- If you signed up using Google Sing-In, it is not possible to switch to the password-based login method.
+You can log in to your `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_ using password-based login or Google Sign-In. It is not possible to switch between them.
