@@ -21,6 +21,18 @@ Download our wazuh-packages repository from GitHub and go to the rpms directory.
 
  $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/rpms
 
+If you want to build a version later or equal to |WAZUH_GCC_CHANGE|, you must change to |WAZUH_PACKAGES_BRANCH| branch.
+
+.. code-block:: console
+
+ $ git checkout |WAZUH_PACKAGES_BRANCH|
+
+If you want to build a version prior to |WAZUH_GCC_CHANGE|, you must change to the corresponding tag, e.g. v|WAZUH_PREGCC_CHANGE|
+
+.. code-block:: console
+
+ $ git checkout v|WAZUH_PREGCC_CHANGE|
+
 Execute the ``generate_rpm_package.sh`` script, with the different options you desire. This script will build a Docker image with all the necessary tools to create the RPM and run a container that will build it:
 
 .. code-block:: console
@@ -32,7 +44,8 @@ Execute the ``generate_rpm_package.sh`` script, with the different options you d
 
   Usage: ./generate_rpm_package.sh [OPTIONS]
   
-      -b, --branch <branch>        [Required] Select Git branch or tag e.g. master
+      -b, --branch <branch>        [Required] Select Git branch or tag.
+      --packages-branch <branch>   [Required] Select Git branch or tag from wazuh-packages repository.
       -t, --target <target>        [Required] Target package to build [manager/api/agent].
       -a, --architecture <arch>    [Optional] Target architecture of the package [x86_64/i386/ppc64le/aarch64/armv7hl].
       -r, --revision <rev>         [Optional] Package revision that append to version e.g. x.x.x-rev
@@ -42,9 +55,8 @@ Execute the ``generate_rpm_package.sh`` script, with the different options you d
       -p, --path <path>            [Optional] Installation path for the package. By default: /var/ossec.
       -d, --debug                  [Optional] Build the binaries with debug symbols and create debuginfo packages. By default: no.
       -c, --checksum <path>        [Optional] Generate checksum on the desired path (by default, if no path is specified it will be generated on the same directory than the package).
-      --dont-build-docker      [Optional] Locally built docker image will be used instead of generating a new one.
+      --dont-build-docker          [Optional] Locally built docker image will be used instead of generating a new one.
       --sources <path>             [Optional] Absolute path containing wazuh source code. This option will use local source code instead of downloading it from GitHub.
-      --packages-branch <branch>   [Optional] Select Git branch or tag from wazuh-packages repository. e.g master
       --dev                        [Optional] Use the SPECS files stored in the host instead of downloading them from GitHub.
       --src                        [Optional] Generate the source package in the destination directory.
       -h, --help                   Show this help.
@@ -53,18 +65,18 @@ Below, you will find some examples of how to build an RPM package.
 
 .. code-block:: console
 
-  # ./generate_rpm_package.sh -b v|WAZUH_LATEST| -s /tmp -t manager -a x86_64 -r my_rev.
+  # ./generate_rpm_package.sh -b v|WAZUH_LATEST| --packages-branch |WAZUH_PACKAGES_BRANCH| -s /tmp -t manager -a x86_64 -r my_rev.
 
 This will generate a |WAZUH_LATEST| Wazuh manager RPM package with revision ``my_rev`` for ``x86_64`` systems.
 
 .. code-block:: console
 
-  # ./generate_rpm_package.sh -b v|WAZUH_LATEST| -s /tmp -t api -a i386 -r my_rev
+  # ./generate_rpm_package.sh -b v|WAZUH_LATEST| --packages-branch |WAZUH_PACKAGES_BRANCH| -s /tmp -t api -a i386 -r my_rev
 
 This will generate a |WAZUH_LATEST| Wazuh api RPM package with revision ``my_rev`` for ``i386`` systems and store it in ``/tmp``.
 
 .. code-block:: console
 
-  # ./generate_rpm_package.sh -b v|WAZUH_LATEST| -t agent -a x86_64 -p /opt
+  # ./generate_rpm_package.sh -b v|WAZUH_LATEST| --packages-branch |WAZUH_PACKAGES_BRANCH| -t agent -a x86_64 -p /opt
 
 This will generate a |WAZUH_LATEST| Wazuh agent RPM package with ``/opt`` as installation directory for ``x86_64`` systems.
