@@ -76,7 +76,7 @@ To fix this you need to:
 
 "Agent evolution graph shows incorrect data"
 --------------------------------------------
-Sometimes, after adding a new API to the Wazuh Kibana plugin, the agent evolution graph may show data as if there were more agents than expected for that API.
+Sometimes, after connecting two o more Wazuh APIs to the Wazuh Kibana plugin, the agent evolution graph may show data as if there were more agents than expected for that selected API.
 
 .. thumbnail:: ../../..//images/kibana-app/troubleshooting/agent_evolution_graph_incorrect.png
     :title: Graph showing more agents than expected
@@ -84,7 +84,7 @@ Sometimes, after adding a new API to the Wazuh Kibana plugin, the agent evolutio
     :width: 100%
 
 This is caused by the way agent data is stored in the Elasticsearch indices. Agent monitoring data references its manager or cluster by name only, so when two clusters or managers share the same name, data can be displayed incorrectly in this graph.
-In order to solve it, each cluster and manager should have distinct names:
+In order to solve it, each cluster (even every node) or manager must have different names:
 
 .. tabs::
   .. group-tab:: Changing name of a manager
