@@ -2133,22 +2133,36 @@ ul {
 }
 
 table,
-main .wazuh-image {
+a[data-lightbox] img {
   margin-bottom: 2em;
 }
 
-main .wazuh-image {
+[data-lightbox] {
   max-width: 800px;
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 100%;
-  outline: none;
 }
 
-.wazuh-image {
+[data-lightbox] img {
   border: 1px solid #eee;
 }
+
+/* Fix lightbox styles */
+#lightbox .lb-data {
+  position: relative;
+}
+
+#lightbox .lb-data .lb-details {
+  width: 96%;
+}
+
+#lightbox .lb-closeContainer {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+/* Fix lightbox styles end here */
 
 .index .central-page-area #main-content #rst-content {
   overflow-anchor: none;
@@ -2671,9 +2685,12 @@ a:focus {
   border-bottom: 1px solid transparent;
 }
 
-#main-content a:hover,
-#main-content a:focus,
-#main-content .wazuh-image:focus {
+#main-content a:not([data-lightbox]):hover,
+#main-content a:not([data-lightbox]):focus {
+  border-color: rgba(0, 148, 206, 0.8);
+}
+
+#main-content a[data-lightbox]:focus img {
   border-color: rgba(0, 148, 206, 0.8);
 }
 
