@@ -1,5 +1,9 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Get to know more about the labels section of the OSSEC local configuration in this section of the Wazuh documentation. 
+
+
 .. _reference_ossec_labels:
 
 labels
