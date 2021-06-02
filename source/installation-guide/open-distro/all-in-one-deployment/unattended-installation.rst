@@ -18,7 +18,7 @@ Installing Wazuh
 
    .. code-block:: console
 
-     # curl -so ~/all-in-one-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/|WAZUH_LATEST_MINOR|/resources/open-distro/unattended-installation/all-in-one-installation.sh && bash ~/all-in-one-installation.sh
+     # curl -so ~/all-in-one-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/|WAZUH_LATEST_MINOR|/resources/open-distro/unattended-installation/unattended-installation.sh && bash ~/all-in-one-installation.sh
 
    The script performs a health check to ensure that the host has enough resources to guarantee proper performance. To skip this step, add the ``-i`` or ``--ignore-healthcheck`` option when running the script.
 
@@ -60,8 +60,8 @@ Installing Wazuh
   .. code-block:: none
 
       URL: https://<wazuh_server_ip>
-      user: admin
-      password: admin
+      user: wazuh
+      password: <wazuh_user_password>
 
 On the first access to Kibana, the browser displays a warning message indicating that the certificate was not issued by a trusted authority. It is possible to add an exception in the browser's advanced options or, for increased security, the previously generated ``root-ca.pem``  file  can be imported into the certificate manager of the browser. Alternatively, it is possible to configure a certificate from a trusted authority.
 
@@ -71,8 +71,6 @@ Customizing the installation
 ----------------------------
 
 The Kibana configuration found at the ``/etc/kibana/kibana.yml`` file has the ``server.host`` parameter set to ``0.0.0.0``. This means that Kibana can be accessed from the outside and accepts all the available IPs of the host.  This value can be changed for a specific IP if needed.
-
-It is highly recommended to change Elasticsearch default passwords for the users' found at the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. For more information on Elasticsearch configuration and passwords, check the :ref:`Elasticsearch tuning <change_elastic_pass>` section.
 
 To uninstall all the components of the all-in-one installation, see the :ref:`Uninstalling section <user_manual_uninstall_wazuh_installation_open_distro>`.
  
