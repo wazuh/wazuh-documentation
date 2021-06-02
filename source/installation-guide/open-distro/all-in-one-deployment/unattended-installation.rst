@@ -4,7 +4,7 @@ Unattended installation
 =======================
 
 You can install Wazuh on a single host by using a script that automatically detects whether the operating system uses ``rpm`` or ``deb`` packages.
-The script performs a health check to verify that the available system resources meet the minimal requirements. For more information, check the :ref:`requirements <installation_requirements>` section.
+The script performs a health check to verify that the available system resources meet the minimal requirements. For more information, check the :ref:`Requirements <installation_requirements>` section.
 
 The script installs some packages, including ``unzip`` and ``libcap``, required by Open Distro for Elasticsearch.
 
@@ -22,7 +22,7 @@ Installing Wazuh
 
    The script performs a health check to ensure that the host has enough resources to guarantee proper performance. To skip this step, add the ``-i`` or ``--ignore-healthcheck`` option when running the script.
 
-   After executing the script, a message is shown to confirm that the installation was successful and will prompt all the user's passwords:
+   After executing the script, the output prompts all the user's passwords and a message confirms that the installation was successful.
    
    .. code-block:: none
      :class: output
@@ -63,16 +63,16 @@ Installing Wazuh
       user: wazuh
       password: <wazuh_user_password>
 
-On the first access to Kibana, the browser displays a warning message indicating that the certificate was not issued by a trusted authority. It is possible to add an exception in the browser's advanced options or, for increased security, the previously generated ``root-ca.pem``  file  can be imported into the certificate manager of the browser. Alternatively, it is possible to configure a certificate from a trusted authority.
+On the first access to Kibana, the browser displays a warning message indicating that the certificate was not issued by a trusted authority. It is possible to add an exception in the browser's advanced options or, for increased security, the previously generated ``root-ca.pem`` file can be imported into the certificate manager of the browser. Alternatively, it is possible to configure a certificate from a trusted authority.
 
 .. note:: The Open Distro for Elasticsearch performance analyzer plugin is removed during the installation since it might have a negative impact on system resources. 
 
 Customizing the installation
 ----------------------------
 
-The Kibana configuration found at the ``/etc/kibana/kibana.yml`` file has the ``server.host`` parameter set to ``0.0.0.0``. This means that Kibana can be accessed from the outside and accepts all the available IPs of the host.  This value can be changed for a specific IP if needed.
+The Kibana configuration found at the ``/etc/kibana/kibana.yml`` file has the ``server.host`` parameter set to ``0.0.0.0``. This means that Kibana can be accessed from the outside and accepts all the available IPs of the host. This value can be changed for a specific IP if needed.
 
-To uninstall all the components of the all-in-one installation, you can use the option ``-r / --uninstall`` to remove all the components installed.
+To uninstall the components of the all-in-one installation, you can use the option ``-r / --uninstall`` to remove all the components installed.
  
 Next steps
 ----------
