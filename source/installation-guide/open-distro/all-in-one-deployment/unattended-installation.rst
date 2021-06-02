@@ -77,4 +77,4 @@ To uninstall the components of the all-in-one installation, you can use the opti
 Next steps
 ----------
 
-Once the Wazuh environment is ready, a Wazuh agent can be installed in every endpoint to be monitored. To learn how to install agents, check the :ref:`Wazuh agent<installation_agents>` section.
+Once the Wazuh environment is ready, a Wazuh agent can be installed on every endpoint to be monitored. To learn how to install agents, check the :ref:`Wazuh agent<installation_agents>` section.
