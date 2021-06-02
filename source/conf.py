@@ -418,6 +418,7 @@ def customReplacements(app, docname, source):
 custom_replacements = {
     "|WAZUH_LATEST|" : "3.11.4",
     "|WAZUH_LATEST_MINOR|" : "3.11",
+    "|WAZUH_PACKAGES_BRANCH|" : "legacy",
     "|WAZUH_LATEST_ANSIBLE|" : "3.11.4",
     "|WAZUH_LATEST_KUBERNETES|" : "3.11.4",
     "|WAZUH_LATEST_PUPPET|" : "3.11.4",
