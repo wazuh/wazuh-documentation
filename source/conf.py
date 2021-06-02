@@ -425,6 +425,7 @@ custom_replacements = {
     "|CURRENT_MAJOR|" : "4.x",
     "|WAZUH_LATEST|" : "4.0.4",
     "|WAZUH_LATEST_MINOR|": "4.0",
+    "|WAZUH_PACKAGES_BRANCH|" : "4.0",
     "|WAZUH_LATEST_ANSIBLE|" : "4.0.4",
     "|WAZUH_LATEST_KUBERNETES|" : "4.0.4",
     "|WAZUH_LATEST_PUPPET|" : "4.0.4",
