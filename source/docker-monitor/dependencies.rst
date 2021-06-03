@@ -8,10 +8,10 @@ Installing dependencies
 
 .. note::
 
-  **The Docker listener module can be configured in the Wazuh manager** (which also behaves as an agent) **or directly in a Wazuh agent**.
+  The Docker listener module can be configured in the Wazuh manager (which also behaves as an agent) or directly in a Wazuh agent.
 
 .. warning::
-  The Wazuh manager includes all dependencies installed, **these steps are only necessary** when configuring the integration **in a Wazuh agent**.
+  The Wazuh manager includes all dependencies installed, these steps are only necessary when configuring the integration in a Wazuh agent.
 
 
 Python
@@ -19,13 +19,13 @@ Python
 
 The Docker listener module requires python 3. It is compatible with python versions from `3.6.0` to `3.9.5`.  Future python releases should maintain compatibility although it cannot be guaranteed.
 
-a) For **CentOS/RHEL/Fedora** systems:
+a) For CentOS/RHEL/Fedora systems:
 
 .. code-block:: console
 
   # yum update && yum install python3
 
-b) For **Debian/Ubuntu** systems:
+b) For Debian/Ubuntu systems:
 
 .. code-block:: console
 
@@ -37,14 +37,14 @@ Pip
 
 The required modules can be installed with Pip, the Python package manager. Most of UNIX distributions have this tool available in their software repositories:
 
-a) For **CentOS/RHEL/Fedora** systems:
+a) For CentOS/RHEL/Fedora systems:
 
 .. code-block:: console
 
   # yum update && yum install python3-pip
 
 
-b) For **Debian/Ubuntu** systems:
+b) For Debian/Ubuntu systems:
 
 .. code-block:: console
 
