@@ -54,7 +54,7 @@ Google cloud pip dependencies
 
 `google-cloud-pubsub <https://pypi.org/project/google-cloud-pubsub//>`_ is the official python library supported by Google to manage Google Cloud Pub/Sub resources. It will be used to pull the log messages from the Pub/Sub queue. Wazuh supports google-cloud-pubsub up to 1.4.3.
 
-To install this package, along with its dependencies, execute the following command:
+To install this package along with its dependencies, execute the following command:
 
 .. code-block:: console
 
