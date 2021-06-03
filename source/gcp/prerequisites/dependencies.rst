@@ -17,13 +17,13 @@ Python
 
 The GCP module requires python 3. It is compatible with python versions from `3.6.0` to `3.9.5`. Future python releases should maintain compatibility although it cannot be guaranteed.
 
-a) For **CentOS/RHEL/Fedora** operating systems:
+a) For CentOS/RHEL/Fedora operating systems:
 
 .. code-block:: console
 
   # yum update && yum install python3
 
-b) For **Debian/Ubuntu** operating systems:
+b) For Debian/Ubuntu operating systems:
 
 .. code-block:: console
 
@@ -35,14 +35,14 @@ Pip
 
 The required modules can be installed with Pip, the Python package manager. Most of UNIX distributions have this tool available in their software repositories:
 
-a) For **CentOS/RHEL/Fedora** operating systems:
+a) For CentOS/RHEL/Fedora operating systems:
 
 .. code-block:: console
 
   # yum update && yum install python3-pip
 
 
-b) For **Debian/Ubuntu** operating systems:
+b) For Debian/Ubuntu operating systems:
 
 .. code-block:: console
 
