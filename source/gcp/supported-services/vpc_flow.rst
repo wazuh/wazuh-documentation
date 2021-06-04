@@ -19,7 +19,7 @@ VPC Flow Logs can be enabled in the VPC networks page in the Google Cloud Consol
 Exporting VPC Flow logs to Pub/Sub
 ----------------------------------
 
-In the :ref:`Pub/Sub <pubsub>` page we explained how to set up a sink to logs to a Pub/Sub topic. However, this would export every single log available, and not only the VPC Flow logs. It is possible to configure the Sink to export VPC Flow logs only to a topic, ignoring logs coming from other services, by adding a filtering condition to the Sink. To do so, follow the same instructions as explained in the :ref:`Pub/Sub <pubsub>` section but adding the following filter in **Step 3 - Choose logs to include in sink**:
+In the :ref:`Pub/Sub <pubsub>` page, it was explained how to set up a sink to logs for a Pub/Sub topic. However, this would export every single log available, and not only the VPC Flow logs. It is possible to configure the sink to export VPC Flow logs only to a topic, ignoring logs coming from other services, by adding a filtering condition to the sink. To do so, follow the same instructions as explained in the :ref:`Pub/Sub <pubsub>` section but adding the following filter in **Step 3 - Choose logs to include in sink**:
 
 .. code-block:: console
 
