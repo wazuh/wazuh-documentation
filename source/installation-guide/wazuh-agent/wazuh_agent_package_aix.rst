@@ -4,38 +4,31 @@
 
 .. _wazuh_agent_package_aix:
 
-AIX
-===
+Deploying Wazuh agents to your AIX systems
+==========================================
 
-You can download the `AIX installer <https://packages.wazuh.com/|CURRENT_MAJOR|/aix/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_AIX|.aix.ppc.rpm>`_ from our :ref:`packages list <packages>`. You can choose installation or a deployment:
+Deploy a Wazuh agent to your AIX system. 
 
-  a) Installation:
 
-    .. code-block:: console
+#. Download the `AIX installer <https://packages.wazuh.com/|CURRENT_MAJOR|/aix/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_AIX|.aix.ppc.rpm>`_. 
 
-      # rpm -ivh wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_AIX|.aix.ppc.rpm
+#. Edit the ``WAZUH_MANAGER`` variable to contain your Wazuh manager IP address or hostname and proceed to deploy the agent in your system: 
 
-    Start the service:
+   .. code-block:: console
+   
+      # WAZUH_MANAGER="10.0.0.2" rpm -ivh wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_AIX|.aix.ppc.rpm
+
+   See the following document for additional deployment options: :ref:`deployment variables <deployment_variables_aix>`.
+
+#. Start the service:
 
     .. code-block:: console
 
       # startsrc -s wazuh-agent
+    
+    
+Alternatively, you can install the agent ``rpm -ivh wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_AIX|.aix.ppc.rpm`` and then proceed to register and configure it to communicate with the manager. For more information about this process, see: :ref:`registering agents <register_agents>`.
 
-    With this simple installation, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :ref:`user manual<register_agents>`.
-
-  b) Deployment:
-
-    You can automate the agent registration and configuration using variables. It is necessary to define at least the variable ``WAZUH_MANAGER``. The agent will use this value to register and this will be the assigned manager for forwarding events.
-
-    .. code-block:: console
-
-      # WAZUH_MANAGER="10.0.0.2" rpm -ivh wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_AIX|.aix.ppc.rpm
-
-    .. code-block:: console
-
-      # startsrc -s wazuh-agent      
-
-    See the following document for additional deployment options: :ref:`deployment variables <deployment_variables_aix>`.
 
 Uninstall
 ---------
