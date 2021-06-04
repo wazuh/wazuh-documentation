@@ -13,7 +13,7 @@ VPC Flow logs
 Enabling VPC Flow Logs
 ----------------------
 
-VPC Flow Logs can be enabled in the VPC networks page in the Google Cloud Console. It can be enabled both for new and existing subnets. Follow its `official documentation <https://cloud.google.com/vpc/docs/using-flow-logs#enabling-vpc-flow-logs>`__ for the most up-to-date instructions on how to enable this feature.
+VPC Flow Logs can be enabled in the VPC networks page in the Google Cloud Console. They can be enabled for both new and existing subnets. Follow its `official documentation <https://cloud.google.com/vpc/docs/using-flow-logs#enabling-vpc-flow-logs>`__ for the most up-to-date instructions on how to enable this feature.
 
 
 Exporting VPC Flow logs to Pub/Sub
