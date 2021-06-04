@@ -50,9 +50,9 @@ If you are deploying Wazuh in a large environment, with a high number of servers
     :hidden:
     :maxdepth: 2
 
-    wazuh_agent_package_aix
+    AIX <wazuh_agent_package_aix>
     wazuh_agent_package_hpux
-    wazuh_agent_package_linux
+    Linux <wazuh_agent_package_linux>
     wazuh_agent_package_macos
     wazuh_agent_package_solaris
     wazuh_agent_package_windows
