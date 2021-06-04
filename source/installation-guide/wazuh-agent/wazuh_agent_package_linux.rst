@@ -4,15 +4,17 @@
 
 .. _wazuh_agent_package_linux:
 
-Linux
-=====
+Deploy Wazuh agents on your Linux systems
+=========================================
 
-This document will guide you to install or deploy the Wazuh agent.
+Deploy a Wazuh agent on your Linux system. 
 
 .. note:: To execute the commands described below, root privileges are required.
 
 Adding the Wazuh repository
 ---------------------------
+
+Add the Wazuh repository to download the official packages. 
 
 .. tabs::
 
@@ -37,68 +39,42 @@ Adding the Wazuh repository
     .. include:: ../../_templates/installations/wazuh/zypp/add_repository.rst
 
 
-Installing Wazuh agent
-----------------------
 
-#. Install the Wazuh agent on your terminal. You can choose between installation or deployment:
+Deploying a Wazuh agent
+-----------------------
 
-    a) Installation:
+#. Choose your package manager tab, edit the ``WAZUH_MANAGER`` variable to contain your Wazuh manager IP address or hostname and proceed to deploy the agent in your system:   
 
+          
       .. tabs::
-
-
+    
+   
         .. group-tab:: Yum
-
-
-          .. include:: ../../_templates/installations/wazuh/yum/install_wazuh_agent.rst
-
-
-
-        .. group-tab:: APT
-
-
-          .. include:: ../../_templates/installations/wazuh/deb/install_wazuh_agent.rst
-
-
-
-        .. group-tab:: ZYpp
-
-
-          .. include:: ../../_templates/installations/wazuh/zypp/install_wazuh_agent.rst
-
-
-      Once the agent is installed, the next step is to register it and configure it to communicate with the manager. For more information on this process, visit the :ref:`user manual<register_agents>` section.
-
-    b) Deployment:
-
-      The registration and configuration of the agent can be automated using variables. It is necessary to define, at least, the variable ``WAZUH_MANAGER``. The agent will use this value to register and this will be the assigned manager for forwarding events. 
       
-      .. tabs::
-
-
-        .. group-tab:: Yum
-
-
+   
           .. include:: ../../_templates/installations/wazuh/yum/deploy_wazuh_agent.rst
-
-
-
+      
+   
+   
         .. group-tab:: APT
-
-
+      
+   
           .. include:: ../../_templates/installations/wazuh/deb/deploy_wazuh_agent.rst
-
-
-
+      
+   
+   
         .. group-tab:: ZYpp
-
-
+      
+   
           .. include:: ../../_templates/installations/wazuh/zypp/deploy_wazuh_agent.rst
+      
+    
+    
+        For additional deployment options, like agent name, agent group, and registration password, see :ref:`deployment variables <deployment_variables_apt>` section.   
+        
+        
 
-
-    See the following document for additional deployment options: :ref:`deployment variables <deployment_variables_apt>`.
-
-#. Enable the service
+#. Enable and start the service:
 
   .. include:: ../../_templates/installations/wazuh/common/enable_wazuh_agent_service.rst
 
