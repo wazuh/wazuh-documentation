@@ -13,4 +13,5 @@ Wazuh's File integrity monitoring (FIM) system watches selected files and trigge
         :maxdepth: 2
 
         how-it-works
+        fim-fields-rule-mapping
         fim-configuration
