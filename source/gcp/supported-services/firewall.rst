@@ -13,7 +13,7 @@ Firewall Rules Logging
 Enabling Firewall Rules Logging
 -------------------------------
 
-Firewall Rules Logging can be enabled in the Firewall in the Google Cloud Console. Follow its `official documentation <https://cloud.google.com/vpc/docs/using-firewall-rules-logging#enable>`__ for the most up-to-date instructions on how to enable this feature.
+Firewall Rules Logging can be enabled in the Firewall page in the Google Cloud Console. Follow its `official documentation <https://cloud.google.com/vpc/docs/using-firewall-rules-logging#enable>`__ for the most up-to-date instructions on how to enable this feature.
 
 
 Exporting Firewall Rules Logging logs to Pub/Sub
