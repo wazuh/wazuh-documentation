@@ -5,7 +5,7 @@
 VPC Flow logs
 =============
 
-`VPC Flow Logs <https://cloud.google.com/vpc/docs/flow-logs>`__ records a sample of network flows sent from and received by VM instances, including instances used as Google Kubernetes Engine nodes. Flow logs are aggregated by connection from Compute Engine VMs and exported in real time.
+`VPC Flow Logs <https://cloud.google.com/vpc/docs/flow-logs>`__ records a sample of network flows sent from and received by VM instances, including instances used as Google Kubernetes Engine nodes. Flow logs are aggregated by the connection from Compute Engine VMs and exported in real time.
 
 .. note:: To be able to send VPC Flow logs to Wazuh, Cloud Logging must be configured to export these logs to Pub/Sub first. More information about how Pub/Sub works and how to configure it :ref:`here <pubsub>`.
 
