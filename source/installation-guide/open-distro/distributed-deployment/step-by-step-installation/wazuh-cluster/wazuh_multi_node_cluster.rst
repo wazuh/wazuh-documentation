@@ -1,6 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. meta:: :description: Learn how to install a Wazuh multi-node cluster
+.. meta::
+  :description: Learn more about the installation of the Wazuh server components and Filebeat in a Wazuh multi-node cluster in this section of our documentation. 
 
 .. _wazuh_multi_node_cluster:
 
