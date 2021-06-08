@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about how to install or deploy the Wazuh lightweight agent in Linux in this section of our Installation Guide. 
+  :description: Learn more about how to install or deploy the Wazuh lightweight agent in Linux in this section of our installation guide. 
 
 .. _wazuh_agent_package_linux:
 
