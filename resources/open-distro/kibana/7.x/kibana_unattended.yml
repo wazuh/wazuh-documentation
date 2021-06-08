@@ -1,3 +1,5 @@
+server.host: 0.0.0.0
+elasticsearch.hosts: https://127.0.0.1:9200
 server.port: 443
 elasticsearch.ssl.verificationMode: certificate
 elasticsearch.username: kibanaserver
@@ -10,3 +12,4 @@ server.ssl.key: "/etc/kibana/certs/kibana-key.pem"
 server.ssl.certificate: "/etc/kibana/certs/kibana.pem"
 elasticsearch.ssl.certificateAuthorities: ["/etc/kibana/certs/root-ca.pem"]
 server.defaultRoute: /app/wazuh?security_tenant=global
+
