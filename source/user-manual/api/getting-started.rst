@@ -419,6 +419,8 @@ Here are some of the basic concepts related to making API requests and understan
 - The Wazuh API log is stored on the manager as ``/var/ossec/logs/api.log`` (the path and verbosity level can be changed in the Wazuh API configuration file). The Wazuh API logs are rotated daily. Rotated logs are stored in ``/var/ossec/logs/api/<year>/<month>`` and compressed using ``gzip``.
 - All Wazuh API requests will be aborted if no response is received after a certain amount of time. The parameter ``wait_for_complete`` can be used to disable this timeout. This is useful for calls that could take more time than expected, such as :ref:`PUT/agents/:agent_id/upgrade <api_reference>`.
 
+.. note:: The maximum API response time can be modified in the :ref:`API configuration <api_configuration_options>`.
+
 .. _wazuh_api_use_cases:
 
 Use cases
