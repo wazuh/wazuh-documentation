@@ -66,6 +66,8 @@ getHelp() {
    echo -e "\t-a     | --change-all Changes all the Open Distro user passwords and prints them on screen"
    echo -e "\t-u     | --user <user> Indicates the name of the user whose password will be changed. If no password specified it will generate a random one"
    echo -e "\t-p     | --password <password> Indicates the new password, must be used with option -u"
+   echo -e "\t-c     | --cert <route-admin-certificate> Indicates route to the admin certificate"
+   echo -e "\t-k     | --certkey <route-admin-certificate-key> Indicates route to the admin certificate key"
    echo -e "\t-v     | --verbose Shows the complete script execution output"
    echo -e "\t-h     | --help Shows help"
    exit 1 # Exit script after printing help
