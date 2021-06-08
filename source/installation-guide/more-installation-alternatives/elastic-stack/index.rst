@@ -1,5 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
-
+.. meta::
+  :description: Check out how to install Wazuh with Elastic Stack basic license: deployment types, installation methods, and more. 
+  
 .. _basic_installation_guide:
 
 Wazuh with Elastic Stack basic license
