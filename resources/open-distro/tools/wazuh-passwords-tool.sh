@@ -98,7 +98,7 @@ checkInstalled() {
         capem=$(grep "opendistro_security.ssl.transport.pemtrustedcas_filepath: " /etc/elasticsearch/elasticsearch.yml )
         rcapem="opendistro_security.ssl.transport.pemtrustedcas_filepath: "
         capem="${capem//$rcapem}"
-        if [ -z ${adminpem} ]; then
+        if [[ -z ${adminpem} ]] || [[ -z ${adminkey} ]]; then
             readAdmincerts
         fi
     fi
@@ -115,9 +115,9 @@ readAdmincerts() {
     fi
 
     if [[ -f /etc/elasticsearch/certs/admin-key.pem ]]; then
-        adminpem="/etc/elasticsearch/certs/admin-key.pem"
+        adminkey="/etc/elasticsearch/certs/admin-key.pem"
     elif [[ -f /etc/elasticsearch/certs/admin.key ]]; then
-        adminpem="/etc/elasticsearch/certs/admin.key"
+        adminkey="/etc/elasticsearch/certs/admin.key"
     else
         echo "Error. No admin certificate key indicated. Please run the script with the option -k <path-to-key-certificate>."
         exit 1;
@@ -154,7 +154,7 @@ createBackUp() {
     echo "Creating backup..."
     eval "mkdir /usr/share/elasticsearch/backup ${VERBOSE}"
     eval "cd /usr/share/elasticsearch/plugins/opendistro_security/tools/ ${VERBOSE}"
-    eval "./securityadmin.sh -backup /usr/share/elasticsearch/backup -nhnv -cacert ${capem} -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin-key.pem -icl -h ${IP} ${VERBOSE}"
+    eval "./securityadmin.sh -backup /usr/share/elasticsearch/backup -nhnv -cacert ${capem} -cert ${adminpem} -key ${adminkey} -icl -h ${IP} ${VERBOSE}"
     if [  "$?" != 0  ]; then
         echo "Error: The backup could not be created"
         exit 1;
@@ -284,7 +284,7 @@ runSecurityAdmin() {
     echo "Loading changes..."
     eval "cp /usr/share/elasticsearch/backup/* /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/ ${VERBOSE}"
     eval "cd /usr/share/elasticsearch/plugins/opendistro_security/tools/ ${VERBOSE}"
-    eval "./securityadmin.sh -cd ../securityconfig/ -nhnv -cacert ${capem} -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin-key.pem -icl ${VERBOSE}"
+    eval "./securityadmin.sh -cd ../securityconfig/ -nhnv -cacert ${capem} -cert ${adminpem} -key ${adminkey} -icl ${VERBOSE}"
     if [  "$?" != 0  ]; then
         echo "Error: Could not load the changes."
         exit 1;
@@ -338,7 +338,17 @@ main() {
                 PASSWORD=$2
                 shift
                 shift
-                ;;                              
+                ;;
+            "-c"|"--cert")
+                adminpem=$2
+                shift
+                shift
+                ;; 
+            "-k"|"--certkey")
+                adminkey=$2
+                shift
+                shift
+                ;;                                                            
             "-h"|"--help")
                 getHelp
                 ;;
