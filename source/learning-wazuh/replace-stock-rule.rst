@@ -1,5 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
-
+.. meta::
+  :description: Learn how to customize Wazuh rules to suit your needs. The Wazuh ruleset is used to detect attacks, intrusions, malware or application errors, among others.
+  
 .. _learning_wazuh_replace_stock_rule:
 
 Change the rules
