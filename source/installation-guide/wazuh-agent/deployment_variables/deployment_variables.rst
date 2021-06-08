@@ -1,6 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. meta:: :description: Learn how to use the deployment variables
+.. meta::
+  :description: Learn about the variables that facilitate the deployment of the Wazuh agent on Linux, macOS, Windows and AIX operating systems.
 
 .. _deployment_variables:
 

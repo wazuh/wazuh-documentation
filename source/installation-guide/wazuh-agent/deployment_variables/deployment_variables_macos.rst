@@ -1,7 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. meta:: :description: Learn how to use deployment variables on macOS
-
+.. meta::
+  :description: Learn about the variables that facilitate the deployment of the Wazuh agent on macOS in this section of our documentation.
+  
 .. _deployment_variables_macos:
 
 Deployment variables for macOS
