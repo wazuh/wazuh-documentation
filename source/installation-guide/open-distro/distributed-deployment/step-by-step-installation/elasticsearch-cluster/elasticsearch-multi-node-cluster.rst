@@ -182,7 +182,7 @@ Certificates deployment
 3. Initializing the cluster
 ---------------------------
 
-the final stage of the process for installing a multi-node cluster is performed on the initial node and consists in running the security admin script. 
+The final stage of the process for installing a multi-node cluster is performed on the initial node and consists in running the security admin script. 
 
 Run the Elasticsearch ``securityadmin`` script to load the new certificates information and start the cluster. To run this command, the value ``<elasticsearch_IP>`` must be replaced with the Elasticsearch installation IP:
 
