@@ -1,5 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
-
+.. meta::
+  :description: Check out all the Wazuh release notes in this section of our documentation - from the first release to the latest one.
+  
 .. _release_notes:
 
 Release notes
