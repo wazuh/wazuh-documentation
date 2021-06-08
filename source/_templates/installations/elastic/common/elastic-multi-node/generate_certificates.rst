@@ -19,7 +19,7 @@
 
     # unzip ~/search-guard-tlstool-1.8.zip -d ~/searchguard
 
-* the Wazuh single-node cluster tab if there is only one Wazuh server or the Wazuh multi-node cluster tab in case of having more than one Wazuh server, and follow the steps:
+* Select the Wazuh single-node cluster tab if there is only one Wazuh server or the Wazuh multi-node cluster tab in case of having more than one Wazuh server, and follow the steps:
 
   .. tabs::
 
