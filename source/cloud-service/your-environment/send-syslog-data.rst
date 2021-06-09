@@ -70,23 +70,14 @@ To perform the following steps, make sure to replace ``<file_name.log>`` with th
 Logstash on Windows
 ^^^^^^^^^^^^^^^^^^^
    
-Use Logstash on a Windows host with a Wazuh agent to receive syslog, log to a file, and send those logs to the environment. To perform this action successfully, make sure that Windows is fully updated and `Java JRE <https://www.java.com/en/download/windows-64bit.jsp>`_ is installed.
+Use Logstash on a Windows host with a Wazuh agent to receive syslog, log to a file, and send those logs to the environment.
 
-1. Configure JRE.
-
-   #. On the taskbar of your computer desktop, click **Start** to open the menu, search for "Edit the system environment variables", and open the system properties applet.
-   #. On the Advanced tab pane, click **Environment Variables...**.
-   #. Under **System variables**, click **New...**.
-   #. Enter the variable name JAVA_HOME and browse to the JRE install directory, then click **OK** to confirm the action. In the variable value, the JRE directory should be displayed. For example, ``C:\Program Files\Java\jre1.8.0_201``.
-   
-      You might need to reopen your terminal to apply changes.
-
-2. Install Logstash.
+1. Install Logstash.
 
    #. `Download the Logstash <https://www.elastic.co/downloads/logstash>`_ ZIP package.
    #. Extract the ZIP contents into a local folder. For example, to ``C:\logstash\``.
 
-3. Install ``logstash-input-syslog`` and ``logstash-output-file`` plugins.
+2. Install ``logstash-input-syslog`` and ``logstash-output-file`` plugins.
 
    .. code-block::
       
@@ -98,30 +89,30 @@ Use Logstash on a Windows host with a Wazuh agent to receive syslog, log to a fi
 
    If you are using PowerShell, make sure to add ``.\`` before the executable: ``.\logstash-plugin``
 
-4. Configure Logstash.
+3. Configure Logstash.
 
    Create the following file: ``C:\logstash\config\logstash.conf``
 
    .. code-block::
 
       input {
-      syslog {
-         port => <PORT>
-      }
+         syslog {
+            port => <PORT>
+         }
       }
       
       output {
-      file {
-         path => “C:\logstash\logs\<file_name.log>”
-         codec => “line“
-      }
+         file {
+            path => "C:\logstash\logs\file_name.log"
+            codec => "line"
+         }
       }
 
-To perform the following steps, make sure to replace ``<file_name.log>`` with the name chosen for this log.
+To perform the following steps, make sure to replace ``file_name.log`` with the name chosen for this log.
 
-5. Deploy a Wazuh agent on the same host that has Logstash.
+4. Deploy a Wazuh agent on the same host that has Logstash.
    
-6. Configure the agent to read the Logstash output file.
+5. Configure the agent to read the Logstash output file.
 
    Edit ``C:\Program Files (x86)\ossec-agent\ossec.conf`` by adding the following configuration:
 
@@ -130,11 +121,11 @@ To perform the following steps, make sure to replace ``<file_name.log>`` with th
       <ossec_config>
       <localfile>
          <log_format>syslog</log_format>
-         <location>C:\logstash\logs\<file_name.log></location>
+         <location>C:\logstash\logs\file_name.log</location>
       </localfile>
       </ossec_config>
 
-7. Restart Logstash.
+6. Restart Logstash.
 
    #. Run Logstash from the command line:
 
@@ -144,7 +135,7 @@ To perform the following steps, make sure to replace ``<file_name.log>`` with th
    
    #. `Install Logstash as a Windows Service <https://www.elastic.co/guide/en/logstash/current/running-logstash-windows.html#running-logstash-windows>`_ either using `NSSM <https://www.elastic.co/guide/en/logstash/current/running-logstash-windows.html#running-logstash-windows-nssm>`_ or `Windows Task Scheduler <https://www.elastic.co/guide/en/logstash/current/running-logstash-windows.html#running-logstash-windows-scheduledtask>`_.
 
-8. Restart the Wazuh agent. If you are running PowerShell, use the following command:
+7. Restart the Wazuh agent. If you are running PowerShell, use the following command:
 
    .. code-block:: console
       
