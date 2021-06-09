@@ -169,6 +169,29 @@ getHelp() {
 
 }
 
+## Checks if the configuration file or certificates exist
+checkConfig() {
+
+    if [ -f ~/config.yml ]; then
+        echo "Configuration file found. Starting the installation..."
+    else
+        if [ -f ~/certs.tar ]; then
+            echo "Certificates file found. Starting the installation..."
+            eval "tar --overwrite -C ~/ -xf ~/certs.tar config.yml ${debug}"
+            IFS=$'\r\n' GLOBIGNORE='*' command eval  'CONFIG=($(cat ~/condig.yml))'
+        elif [ -f /etc/elasticsearch/certs/certs.tar ]; then
+            eval "mv /etc/elasticsearch/certs/certs.tar ~/ ${debug}"
+            eval "tar --overwrite -C ~/ -xf ~/certs.tar config.yml ${debug}"
+            echo "Certificates file found. Starting the installation..."
+            IFS=$'\r\n' GLOBIGNORE='*' command eval  'CONFIG=($(cat ~/condig.yml))'
+        else
+            echo "No configuration file found."
+            exit 1;
+        fi
+    fi
+
+}
+
 ## Install the required packages for the installation
 installPrerequisites() {
     logger "Installing all necessary utilities for the installation..."
