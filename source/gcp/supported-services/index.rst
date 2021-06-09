@@ -18,3 +18,4 @@ The following GCP services are supported by the Wazuh GCP module. The logs are r
        cloud_audit_logs
        dns_queries
        vpc_flow
+       firewall
