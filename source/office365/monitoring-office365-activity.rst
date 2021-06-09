@@ -98,6 +98,7 @@ Proceed to configure the ``office365`` module in the Wazuh manager. Through the 
     <office365>
         <enabled>yes</enabled>
         <interval>10m</interval>
+        <curl_max_size>1000</curl_max_size>
         <only_future_events>yes</only_future_events>
         <api_auth>
             <tenant_id>your_tenant_id</tenant_id>

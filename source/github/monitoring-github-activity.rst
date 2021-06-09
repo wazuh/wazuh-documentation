@@ -47,6 +47,7 @@ Proceed to configure the ``github`` module in the Wazuh manager. We will use the
         <run_on_start>yes</run_on_start>
         <interval>10m</interval>
         <time_delay>1s</time_delay>
+        <curl_max_size>1000</curl_max_size>
         <only_future_events>yes</only_future_events>
         <api_auth>
             <org_name>insert_organization_name</org_name>
