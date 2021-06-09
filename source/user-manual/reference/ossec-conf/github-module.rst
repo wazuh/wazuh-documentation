@@ -122,7 +122,7 @@ Each scan will monitor until that delay backwards, by default it is 1 second.
 curl_max_size
 ^^^^^^^^^^^^^
 
-Specifies the maximum size allowed for the GitHub API response.
+Specifies the maximum size in KB allowed for the GitHub API response.
 
 +--------------------+----------------------+
 | **Default value**  | 1024                 |

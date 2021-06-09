@@ -106,7 +106,7 @@ Proceed to configure the ``office365`` module in the Wazuh manager. Through the 
             <client_secret>your_client_secret</client_secret>
         </api_auth>
         <subscriptions>
-            <subscription>Audit.Exchange</subscription>
+            <subscription>Audit.SharePoint</subscription>
         </subscriptions>
     </office365>
 
@@ -117,96 +117,110 @@ Using the configuration mentioned above, we will see an example of monitoring Of
 Generate activity on Office 365
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-For this example, we will start by generating some activity in our Office 365 Organization, in this case let's add a new mailbox to our team. If we do that, we can see that Office 365 will generate a new json event, something like this:
+For this example, we will start by generating some activity in our Office 365 Organization, in this case let's modify a ``Communication site`` in ``SharePoint``. If we do that, we can see that Office 365 will generate a new json event, something like this:
 
 .. code-block:: json
     :class: output
 
     {
-        "CreationTime": "2021-05-19T21:30:51",
-        "Id": "xxxx-xxxx-xxxx-xxxx-xxxx",
-        "Operation": "New-Mailbox",
-        "OrganizationId": "xxxx-xxxx-xxxx-xxxx-xxxx",
-        "RecordType": 1,
-        "ResultStatus": "True",
-        "UserKey": "NT AUTHORITY\\SYSTEM (w3wp)",
-        "UserType": 3,
-        "Version": 1,
-        "Workload": "Exchange",
-        "ClientIP": "[aaa:bbb:ccc:aa:aa::aa]:32132",
-        "ObjectId": "xxxx.prod.outlook.com/Microsoft Exchange Hosted Organizations/org_name.onmicrosoft.com/CompliancePolicyCacheCustomTag",
-        "UserId": "NT AUTHORITY\\SYSTEM (w3wp)",
-        "AppId": "xxx-xxx-xxx-xxx-xxxx",
-        "ClientAppId": "xxx-xxx-xxx-xxx-xxx",
-        "ExternalAccess": true,
-        "OrganizationName": "org_name.onmicrosoft.com",
-        "OriginatingServer": "...",
-        "SessionId": ""
+        "CreationTime":"2021-06-09T22:10:45",
+        "Id":"xxxx-xxxx-xxxx-xxxx-xxxx",
+        "Operation":"FileModified",
+        "OrganizationId":"xxxx-xxxx-xxxx-xxxx-xxxx",
+        "RecordType":"6",
+        "UserKey":"i:xx.f|membership|xxxx@live.com",
+        "UserType":"0",
+        "Version":"1",
+        "Workload":"SharePoint",
+        "ClientIP":"xxx.xx.x.xxx",
+        "ObjectId":"https://xxxx.sharepoint.com/SitePages/xxxx.aspx",
+        "UserId":"xxx.xxx@xxx.com",
+        "CorrelationId":"0b50d09f-e0f2-2000-d9c7-a5b468efc712",
+        "DoNotDistributeEvent":"true",
+        "EventSource":"SharePoint",
+        "ItemType":"File",
+        "ListId":"xxxx-xxxx-xxxx-xxxx-xxxx",
+        "ListItemUniqueId":"xxxx-xxxx-xxxx-xxxx-xxxx",
+        "Site":"xxxx-xxxx-xxxx-xxxx-xxxx",
+        "UserAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36",
+        "WebId":"xxxx-xxxx-xxxx-xxxx-xxxx",
+        "SourceFileExtension":"aspx",
+        "SiteUrl":"https://xxxx.sharepoint.com/",
+        "SourceFileName":"xxxx.aspx",
+        "SourceRelativeUrl":"SitePages"
     }
 
 Wazuh Rules
 ^^^^^^^^^^^
 
-Wazuh provides a series of rules to catch different events on Office365, for this example we will take the rule id ``91533`` which detects a ``Office 365: Events from the Exchange admin audit log.`` action.
+Wazuh provides a series of rules to catch different events on Office365, for this example we will take the rule id ``91532`` which detects a ``Office 365: SharePoint file operation events.`` action.
 
 .. code-block:: xml
 
-    <rule id="91533" level="3">
+    <rule id="91537" level="3">
         <if_sid>91532</if_sid>
-        <field name="office_365.RecordType" type="osregex">^1$</field>
-        <description>Office 365: Events from the Exchange admin audit log.</description>
+        <field name="office365.RecordType" type="osregex">^6$</field>
+        <description>Office 365: SharePoint file operation events.</description>
         <options>no_full_log</options>
-        <group>ExchangeAdmin</group>
+        <group>SharePointFileOperation</group>
     </rule>
 
 If Wazuh successfully connects to Office 365 API, the events raised above will trigger these rules and cause an alert like this:
 
 .. code-block:: json
-    :emphasize-lines: 13
+    :emphasize-lines: 5
     :class: output
 
     {
-        "agent": {
-            "name": "agent01",
-            "id": "001"
+        "timestamp":"2021-06-09T22:12:54.301+0000",
+        "rule":{
+            "level":3,
+            "description":"Office 365: SharePoint file operation events.",
+            "id":"91537",
+            "firedtimes":2,
+            "mail":false,
+            "groups":["office365","SharePointFileOperation"]
         },
-        "manager": {
-            "name": "manager01"
+        "agent":{
+            "id":"001",
+            "name":"ubuntu-bionic"
         },
-        "data": {
-            "office_365": {
-                "CreationTime": "2021-05-19T21:30:51",
-                "Id": "xxxx-xxxx-xxxx-xxxx-xxxx",
-                "Operation": "New-Mailbox",
-                "OrganizationId": "xxxx-xxxx-xxxx-xxxx-xxxx",
-                "RecordType": 1,
-                "ResultStatus": "True",
-                "UserKey": "NT AUTHORITY\\SYSTEM (w3wp)",
-                "UserType": 3,
-                "Version": 1,
-                "Workload": "Exchange",
-                "ClientIP": "[aaa:bbb:ccc:aa:aa::aa]:32132",
-                "ObjectId": "xxxx.prod.outlook.com/Microsoft Exchange Hosted Organizations/org_name.onmicrosoft.com/CompliancePolicyCacheCustomTag",
-                "UserId": "NT AUTHORITY\\SYSTEM (w3wp)",
-                "AppId": "xxx-xxx-xxx-xxx-xxxx",
-                "ClientAppId": "xxx-xxx-xxx-xxx-xxx",
-                "ExternalAccess": true,
-                "OrganizationName": "org_name.onmicrosoft.com",
-                "OriginatingServer": "...",
-                "SessionId": ""
+        "manager":{
+            "name":"ubuntu-bionic"
+        },
+        "id":"1623276774.47272",
+        "decoder":{
+            "name":"json"
+        },
+        "data":{
+            "integration":"office365",
+            "office365":{
+                "CreationTime":"2021-06-09T22:10:45",
+                "Id":"xxxx-xxxx-xxxx-xxxx-xxxx",
+                "Operation":"FileModified",
+                "OrganizationId":"xxxx-xxxx-xxxx-xxxx-xxxx",
+                "RecordType":"6",
+                "UserKey":"i:xx.f|membership|xxxx@live.com",
+                "UserType":"0",
+                "Version":"1",
+                "Workload":"SharePoint",
+                "ClientIP":"xxx.xx.x.xxx",
+                "ObjectId":"https://xxxx.sharepoint.com/SitePages/xxxx.aspx",
+                "UserId":"xxx.xxx@xxx.com",
+                "CorrelationId":"0b50d09f-e0f2-2000-d9c7-a5b468efc712",
+                "DoNotDistributeEvent":"true",
+                "EventSource":"SharePoint",
+                "ItemType":"File",
+                "ListId":"xxxx-xxxx-xxxx-xxxx-xxxx",
+                "ListItemUniqueId":"xxxx-xxxx-xxxx-xxxx-xxxx",
+                "Site":"xxxx-xxxx-xxxx-xxxx-xxxx",
+                "UserAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36",
+                "WebId":"xxxx-xxxx-xxxx-xxxx-xxxx",
+                "SourceFileExtension":"aspx",
+                "SiteUrl":"https://xxxx.sharepoint.com/",
+                "SourceFileName":"xxxx.aspx",
+                "SourceRelativeUrl":"SitePages"
             }
         },
-        "rule": {
-            "firedtimes": 26,
-            "mail": false,
-            "level": 3,
-            "description": "Office 365: Events from the Exchange admin audit log.",
-            "groups":["office_365"],
-            "id": "91533"
-        },
-        "location": "office_365",
-        "decoder": {
-            "name": "json"
-        },
-        "timestamp": "2020-03-20T12:19:08.694+0000"
+        "location":"office365"
     }

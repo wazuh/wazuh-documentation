@@ -100,7 +100,7 @@ Interval between Wazuh wodle executions.
 curl_max_size
 ^^^^^^^^^^^^^
 
-Specifies the maximum size allowed for the Office365 API response.
+Specifies the maximum size in KB allowed for the Office365 API response.
 
 +--------------------+----------------------+
 | **Default value**  | 1024                 |
