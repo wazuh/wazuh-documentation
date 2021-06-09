@@ -12,17 +12,15 @@ Open Distro for Elasticsearch is an open source distribution of Elasticsearch, a
 
 You can install Elasticsearch on a multi-node cluster. For security and stability reasons in case Elasticsearch nodes become unavailable, it is recommended to have an odd number of master eligible nodes. Make sure that you take this into consideration when deciding the configuration of your Elasticsearch cluster.
 
-.. note:: Root user privileges are necessary to run all the commands.
-
-
-Installing Elasticsearch
-------------------------
-
 The installation process for a multi-node cluster is performed in three stages.
 
 #. Initial node configuration
+
 #. Subsequent nodes configuration
+
 #. Initializing the Elasticsearch cluster
+
+.. note:: Root user privileges are necessary to run all the commands.
 
 1. Initial node configuration
 ---------------------------------
