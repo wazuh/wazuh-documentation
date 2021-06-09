@@ -196,7 +196,7 @@ In the commands below ``127.0.0.1`` IP address is used. If Elasticsearch is boun
 
 #. Repeat the steps for every Elasticsearch node.
 
-.. note:: The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it with the following command ``/usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro_performance_analyzer``. 
+.. note:: The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it with the following command ``/usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer``. 
 
 
 Upgrading Filebeat
@@ -387,7 +387,7 @@ Upgrading Kibana
             # zypper update opendistroforelasticsearch-kibana-|OPEN_DISTRO_LATEST|
 
 
-#. Remove generated bundles and the ``wazuh-registry.json`` file:
+#. **(For upgrades from 3.x versions)** Remove generated bundles and the ``wazuh-registry.json`` file:
 
     .. code-block:: console
 
@@ -441,6 +441,12 @@ Upgrading Kibana
     .. code-block:: console
 
       # setcap 'cap_net_bind_service=+ep' /usr/share/kibana/node/bin/node
+
+#. **(Recommended)** Enable multitenancy in the ``/etc/kibana/kibana.yml`` configuration file:
+
+   .. code-block:: console
+
+      opendistro_security.multitenancy.enabled: true
 
 #. Restart Kibana:
 

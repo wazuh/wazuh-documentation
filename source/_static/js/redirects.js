@@ -47,6 +47,7 @@ newUrls['4.3'] = [
 /* Pages added in 4.2 */
 
 newUrls['4.2'] = [
+  '/release-notes/release_4_2_0.html',
   '/user-manual/capabilities/active-response/custom-active-response.html',
   '/user-manual/reference/daemons/wazuh-agentd.html',
   '/user-manual/reference/daemons/wazuh-agentlessd.html',

@@ -402,13 +402,13 @@ Installing Wazuh agent from sources
 
         # cd wazuh-*
         # gmake -C src deps RESOURCES_URL=https://packages.wazuh.com/deps/|WAZUH_LATEST_MINOR|
-        # gmake -C src TARGET=agent USE_SELINUX=no PREFIX=/var/ossec DISABLE_SHARED=yes
+        # gmake -C src TARGET=agent USE_SELINUX=no PREFIX=/var/ossec
 
     4. Run the ``install.sh`` script. This will run a wizard that will guide you through the installation process using the Wazuh sources:
 
      .. code-block:: console
 
-      # DISABLE_SHARED="yes" ./install.sh
+      # ./install.sh
 
      If you have previously compiled for another platform, you must clean the build using the Makefile in ``src``:
 
@@ -530,13 +530,13 @@ Installing Wazuh agent from sources
 
         # cd wazuh-*
         # /usr/local/bin/gmake -C src deps RESOURCES_URL=https://packages.wazuh.com/deps/|WAZUH_LATEST_MINOR|/
-        # /usr/local/bin/gmake -C src TARGET=agent USE_SELINUX=no DISABLE_SHARED=yes
+        # /usr/local/bin/gmake -C src TARGET=agent USE_SELINUX=no
 
     4. Run the ``install.sh`` script. This will run a wizard that will guide you through the installation process using the Wazuh sources:
 
      .. code-block:: console
 
-      # DISABLE_SHARED=yes ./install.sh
+      # ./install.sh
 
      If you have previously compiled for another platform, you must clean the build using the Makefile in ``src``:
 
@@ -692,7 +692,7 @@ Installing Wazuh agent from sources
             # cd wazuh/src
             # gmake clean
             # gmake deps
-            # gmake -j 4 TARGET=agent PREFIX=/var/ossec USE_SELINUX=no DISABLE_SHARED=yes
+            # gmake -j 4 TARGET=agent PREFIX=/var/ossec USE_SELINUX=no
 
          * For Solaris 10 SPARC:
 
@@ -701,7 +701,7 @@ Installing Wazuh agent from sources
             # cd wazuh/src
             # gmake clean
             # gmake deps
-            # gmake -j 4 TARGET=agent PREFIX=/var/ossec USE_SELINUX=no USE_BIG_ENDIAN=yes DISABLE_SHARED=yes
+            # gmake -j 4 TARGET=agent PREFIX=/var/ossec USE_SELINUX=no USE_BIG_ENDIAN=yes
 
         6. Run the ``solaris10_patch.sh`` that has previously been downloaded.
 

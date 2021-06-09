@@ -23,21 +23,21 @@ An example output of the command looks as follows:
 .. code-block:: console
   :class: output
 
-  "version": "7.10.0",
+  "version": "7.10.2",
 
 
 The Wazuh version can be checked by executing the following command:
 
 .. code-block:: console
 
- # cat /var/ossec/etc/ossec-init.conf | grep VERSION
+ # /var/ossec/bin/wazuh-control info | grep WAZUH_VERSION
 
 An example output of the command looks as follows:
 
 .. code-block:: console
   :class: output
 
-  VERSION="v4.1.1"
+  WAZUH_VERSION="v4.2.0"
 
 Using the Kibana version and the Wazuh version, you can find the correct plugin in `compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/#wazuh---kibana---open-distro-version-compatibility-matrix>`_.
 
@@ -59,7 +59,7 @@ If this error occurs after an **upgrade from a 3.x version** the solution is to 
 
 .. code-block:: console
    
-   # curl 'https://<kibana_ip>:<kibana_port>/api/saved_objects/index-pattern/wazuh-alerts-3.x-*' -X DELETE  -H 'Content-Type: application/json' -H 'kbn-version: 7.10.0' -k -u <elasticsearch_user>:<elasticsearch_password>
+   # curl 'https://<kibana_ip>:<kibana_port>/api/saved_objects/index-pattern/wazuh-alerts-3.x-*' -X DELETE  -H 'Content-Type: application/json' -H 'kbn-version: 7.10.2' -k -u <elasticsearch_user>:<elasticsearch_password>
 
 
 If you have a custom index pattern, make sure to replace it accordingly.
@@ -145,7 +145,7 @@ To ensure that Filebeat is correctly configured, run the following command:
               TLS version: TLSv1.3
               dial up... OK
             talk to server... OK
-            version: 7.10.0
+            version: 7.10.2
 
 
 
@@ -168,7 +168,7 @@ Starting Wazuh 4.0 the Wazuh API username variable changed from ``user`` to ``us
 Wazuh Kibana plugin page goes blank
 -----------------------------------
 
-Sometimes, after an upgrade, the Wazuh Kibana plugin page goes blank. The is due to some issues with the cache memory of the browser.
+Sometimes, after an upgrade, the Wazuh Kibana plugin page goes blank. This is due to some issues with the cache memory of the browser.
 
 .. thumbnail:: ../../images/kibana-app/troubleshooting/page_goes_blank.png
     :title: Page goes blank
@@ -178,11 +178,21 @@ Sometimes, after an upgrade, the Wazuh Kibana plugin page goes blank. The is due
 
 To fix this you need to:
 
-1. **Open the browser DevTools:** Right-click on any element of the page and select Inspect.
+  .. include:: ../../_templates/common/clear_cache.rst
 
-2. **Go to the application tab:** On the left you should see a section called ``Clear storage``  and click on ``Clear site data``.
+"Conflict with the Wazuh app version" error is displayed
+--------------------------------------------------------
 
-After following these two steps, refresh the page.
+Sometimes, after an upgrade, the Wazuh Kibana plugin displays the "Conflict with the Wazuh app version" error. This is due to some issues with the cache memory of the browser.
+
+.. thumbnail:: ../../images/kibana-app/troubleshooting/conflict_wazuh_app_version.png
+    :title: Conflict wazuh app version
+    :align: left
+    :width: 100%
+
+To fix this you need to:
+
+  .. include:: ../../_templates/common/clear_cache.rst
 
 None of the above solutions are fixing my problem
 -------------------------------------------------

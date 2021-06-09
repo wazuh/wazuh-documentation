@@ -847,6 +847,19 @@ Specifies whether there will be periodic inventory synchronizations or not.
 | **Allowed values** | yes/no                                |
 +--------------------+---------------------------------------+
 
+**registry_enabled**
+
+.. versionadded:: 4.1.0
+
+On Windows agents, enables inventory synchronizations for registry entries. If ``enabled`` is set to no,
+this parameter is ignored.
+
++--------------------+---------------------------------------+
+| **Default value**  | yes                                   |
++--------------------+---------------------------------------+
+| **Allowed values** | yes/no                                |
++--------------------+---------------------------------------+
+
 **interval**
 
 .. versionadded:: 3.12.0

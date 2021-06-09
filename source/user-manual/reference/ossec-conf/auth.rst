@@ -1,4 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
+.. meta::
+  :description: This section of the Wazuh Documentation shows the options for the agents registration service.
+
 
 .. _reference_ossec_auth:
 
@@ -21,6 +24,7 @@ Options
 -------
 
 - `disabled`_
+- `remote_enrollment`_
 - `port`_
 - `use_source_ip`_
 - `force_insert`_
@@ -41,6 +45,19 @@ Toggles the execution of the Auth daemon on or off.
 
 +--------------------+---------------------+
 | **Default value**  | no                  |
++--------------------+---------------------+
+| **Allowed values** | yes, no             |
++--------------------+---------------------+
+
+remote_enrollment
+^^^^^^^^^^^^^^^^^
+
+.. versionadded:: 4.2.0
+
+Allow listening for new agents on TLS port (1515 by default).
+
++--------------------+---------------------+
+| **Default value**  | yes                 |
 +--------------------+---------------------+
 | **Allowed values** | yes, no             |
 +--------------------+---------------------+
@@ -199,6 +216,7 @@ Default configuration
 
   <auth>
     <disabled>no</disabled>
+    <remote_enrollment>yes<remote_enrollment>
     <port>1515</port>
     <use_source_ip>no</use_source_ip>
     <force_insert>yes</force_insert>

@@ -1,4 +1,6 @@
 .. Copyright (C>`_ 2021 Wazuh, Inc.
+.. meta::
+  :description: Wazuh 4.1.3 has been released. Check out our release notes to discover the changes and additions of this release.
 
 .. _release_4_1_3:
 

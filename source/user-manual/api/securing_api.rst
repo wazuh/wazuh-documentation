@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Securing the Wazuh API is crucial. In this section we show you how to do it.
+
 .. _securing_api:
 
 Securing the Wazuh API

@@ -5,12 +5,12 @@
 Wazuh server unattended installation
 ====================================
 
-This section will explain how to install the Wazuh manager and Filebeat using an automated script. This script will perform a health check to verify that the system has enough resources to achieve an optimal performance. For more information, please visit the :ref:`requirements <installation_requirements>` section.
+You can install the Wazuh manager and Filebeat using an automated script. This script performs a health check to verify that the system has enough resources to achieve optimal performance. For more information on system resources, see the :ref:`requirements <installation_requirements>` section.
 
 Installing the Wazuh server
 ---------------------------
 
-.. note:: Root user privileges are required to run all the commands described below. To download the script the package ``curl`` will be used.
+.. note:: Root user privileges are required to run all the commands. To download the script, the package ``curl`` is used.
 
 
 Download the installation script:
@@ -19,32 +19,35 @@ Download the installation script:
 
     # curl -so ~/wazuh-server-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/|WAZUH_LATEST_MINOR|/resources/open-distro/unattended-installation/distributed/wazuh-server-installation.sh 
     
-Run the following command to install the Wazuh manager. Replace ``<node_name>`` by the name of the Wazuh server (this name must be the same used in ``config.yml`` for the certificate creation, e.g. ``filebeat``): 
+Run the following command to install the Wazuh manager. Replace ``<node_name>`` with the name of the Wazuh server. The name of the node must be the same used in ``config.yml`` for the certificate creation, e.g. ``filebeat``. 
+
+In case of installing a multi-node Wazuh cluster, repeat the process on every host:
 
 .. code-block:: console
 
         # bash ~/wazuh-server-installation.sh -n <node_name>
 
-The installation script allows the following options:
+The installation script allows the following options to be applied:
 
 +-------------------------------+---------------------------------------------------------------------------------------------------------------+
 | Options                       | Purpose                                                                                                       |
 +===============================+===============================================================================================================+
-| -n / --node-name              | Indicates the name of the Wazuh server instance                                                               |
+| -n / --node-name              | It indicates the name of the Wazuh server instance.                                                           |
 +-------------------------------+---------------------------------------------------------------------------------------------------------------+
-| -i / --ignore-healthcheck     | Ignores the health-check                                                                                      |
+| -i / --ignore-healthcheck     | It ignores the health check.                                                                                  |
 +-------------------------------+---------------------------------------------------------------------------------------------------------------+
-| -d / --debug                  | Shows the complete installation output                                                                        |
+| -d / --debug                  | It shows the complete installation output.                                                                    |
 +-------------------------------+---------------------------------------------------------------------------------------------------------------+
-| -h / --help                   | Shows help                                                                                                    |
+| -h / --help                   | It shows help.                                                                                                |
 +-------------------------------+---------------------------------------------------------------------------------------------------------------+
 
-In case of installing a multi-node Wazuh cluster, repeat this process in every host.  
 
 Configure the installation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-After the installation of all the components of the node, some steps must be done manually. Choose the cluster mode between single-node or multi-node:
+After the installation of all the components of the node, you need to perform some steps to finish configuring the installation. 
+
+Choose the cluster mode between single-node or multi-node:
 
 .. tabs::
 
@@ -52,16 +55,16 @@ After the installation of all the components of the node, some steps must be don
   .. group-tab:: Single-node
 
 
-    Once the script finishes the installation, all the components will be ready to use.
+    Once the script finishes the installation, all the components are ready to use.
 
 
 
   .. group-tab:: Multi-node
 
 
-    The Wazuh manager is installed and configured as a single-node cluster by default. The following sections will describe how to build a Wazuh multi-node cluster by configuring each Wazuh manager as a master or worker node.
+    The Wazuh manager is installed and configured as a single-node cluster by default. To build a Wazuh multi-node cluster, you need to configure each Wazuh manager as a master or worker node.
      
-    One server has to be chosen as a master, the rest will be workers. The ``Master node``  configuration must be applied only to the server chosen for this role. For all the other servers, the configuration ``Worker node`` must be applied.
+    One server has to be chosen as a master, the rest are designated as workers. The ``Master node``  configuration must be applied only to the server chosen for this role. For all the other servers, the configuration ``Worker node`` needs to be applied.
 
 
     **Master node:**
@@ -86,4 +89,4 @@ After the installation of all the components of the node, some steps must be don
     #. .. include:: ../../../../_templates/installations/wazuh/common/check_wazuh_cluster.rst 
 
 
-To uninstall Wazuh and Filebeat, visit the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_open_distro>`.
+To uninstall Wazuh and Filebeat, see the :ref:`Uninstalling <user_manual_uninstall_wazuh_installation_open_distro>` section.
