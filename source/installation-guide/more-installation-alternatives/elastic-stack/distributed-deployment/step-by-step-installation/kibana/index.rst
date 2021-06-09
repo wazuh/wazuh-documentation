@@ -83,7 +83,7 @@ Kibana installation and configuration
 
    .. Note::
 
-     Starting Elasticsearch 7.11.0, a DNS must be specified in the ``elasticsearch.hosts`` field since IPs are no longer allowed. 
+     Starting Elasticsearch 7.11.0, a DNS name must be specified in the ``elasticsearch.hosts`` field since IPs are no longer allowed. 
 
    .. include:: ../../../../../../_templates/installations/basic/elastic/common/configure_kibana.rst
 
@@ -174,4 +174,4 @@ To uninstall Kibana, visit the :ref:`uninstalling section <basic_uninstall_kiban
 Next steps
 ~~~~~~~~~~
 
-Once the Wazuh - Elastic Stack environment is ready, a Wazuh agent can be installed in every endpoint to be monitored. The Wazuh installation guide is available for most operating systems and it can be found :ref:`here<installation_agents>`.
+Once the Wazuh - Elastic Stack environment is ready, a Wazuh agent can be installed on every endpoint to be monitored. The Wazuh installation guide is available for most operating systems and it can be found :ref:`here<installation_agents>`.
