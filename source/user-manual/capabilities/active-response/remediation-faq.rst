@@ -81,7 +81,7 @@ The custom active response executables must be able to read JSON input from STDI
 Will the active response alerts continue to be the same?
 --------------------------------------------------------
 
-No. New rules are included for the new active response capability, you can check them under the `active response rules<https://github.com/wazuh/wazuh/blob/4.2/ruleset/rules/0015-ossec_rules.xml#L341>`_ .
+No. New rules are included for the new active response capability, you can check them under the `active response rules <https://github.com/wazuh/wazuh/blob/4.2/ruleset/rules/0015-ossec_rules.xml#L341>`_ .
 Alerts generated on older agents to version 4.2.0 remain the same while newer agents now have new alert IDs. 
 For example, rule 601 "Host Blocked by firewall-drop Active Response" is now rule 651 for new agents.
 If you have email notifications, rules, and integrations set with the old active response rules, make sure to include the new ones.
