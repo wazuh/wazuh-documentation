@@ -1,4 +1,6 @@
 .. Copyright (C) 2021 Wazuh, Inc.
+.. meta::
+  :description: Wazuh allows you to monitor the output of specific commands. Learn more about how to configure them in this section.
 
 .. _command-examples:
 

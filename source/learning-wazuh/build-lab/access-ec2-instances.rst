@@ -1,4 +1,6 @@
 .. Copyright (C) 2021 Wazuh, Inc.
+.. meta::
+  :description: One of the steps in preparing your Wazuh Lab Environment involves establishing access to your EC2 instances. Learn how to do it in this section.
 
 .. _build_lab_access_ec2_instances:
 

@@ -25,4 +25,3 @@ node.max_local_storage_nodes: 3
 
 path.data: /var/lib/elasticsearch
 path.logs: /var/log/elasticsearch
-

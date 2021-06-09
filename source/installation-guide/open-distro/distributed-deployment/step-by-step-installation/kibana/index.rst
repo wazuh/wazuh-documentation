@@ -148,4 +148,4 @@ To uninstall Kibana, visit the :ref:`uninstalling section <uninstall_kibana>`.
 Next steps
 ~~~~~~~~~~
 
-Once the Wazuh environment is ready, a Wazuh agent can be installed in every endpoint to be monitored. The Wazuh agent installation guide is available for most operating systems and can be found :ref:`here<installation_agents>`.
+Once the Wazuh environment is ready, a Wazuh agent can be installed on every endpoint to be monitored. The Wazuh agent installation guide is available for most operating systems and can be found :ref:`here<installation_agents>`.
