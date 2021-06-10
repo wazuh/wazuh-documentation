@@ -4,31 +4,34 @@
 
 .. _wazuh_agent_package_hpux:
 
-HP-UX
-=====
 
-You can download the `HP-UX installer <https://packages.wazuh.com/|CURRENT_MAJOR|/hp-ux/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar>`_ from our :ref:`packages list<packages>`. The installation steps are:
+Installing Wazuh agents on your HP-UX systems
+=============================================
 
-Create the user and the group OSSEC:
+Install a Wazuh agent on your HP-UX system. 
 
-.. code-block:: console
+#. Download the `HP-UX installer <https://packages.wazuh.com/|CURRENT_MAJOR|/hp-ux/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar>`_. 
 
-    # groupadd ossec
-    # useradd -G ossec ossec
+#. Create the user and the group OSSEC:
+   
+   .. code-block:: console
+   
+       # groupadd ossec
+       # useradd -G ossec ossec
+   
+#. Unzip the package in ``/``:
 
-Unzip the package in ``/``:
+   .. code-block:: console
+   
+       # tar -xvf wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar
 
-.. code-block:: console
+#. Start the service:
 
-    # tar -xvf wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar
+   .. code-block:: console
+   
+       # /sbin/init.d/wazuh-agent start
 
-Start the service:
-
-.. code-block:: console
-
-    # /sbin/init.d/wazuh-agent start
-
-Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document:  :ref:`user manual<register_agents>`.
+Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, see :ref:`Registering Wazuh agents <register_agents>`.
 
 Uninstall
 ---------
