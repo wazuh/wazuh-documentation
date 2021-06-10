@@ -51,9 +51,9 @@ If you are deploying Wazuh in a large environment, with a high number of servers
     :maxdepth: 2
 
     AIX <wazuh_agent_package_aix>
-    wazuh_agent_package_hpux
+    HP-UX <wazuh_agent_package_hpux>
     Linux <wazuh_agent_package_linux>
-    wazuh_agent_package_macos
-    wazuh_agent_package_solaris
-    wazuh_agent_package_windows
+    macOS <wazuh_agent_package_macos>
+    Solaris <wazuh_agent_package_solaris>
+    Windows <wazuh_agent_package_windows>
     deployment_variables/deployment_variables
