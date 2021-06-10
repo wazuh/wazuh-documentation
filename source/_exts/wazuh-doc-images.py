@@ -24,7 +24,8 @@ DEFAULT_CONFIG = dict(
     requests_kwargs={},
     override_image_directive=False,
     show_caption=False,
-    default_class='wazuh-image'
+    default_class='wazuh-image',
+    wrap_image=True
 )
 
 class WazuhImages(nodes.image, nodes.General, nodes.Element):
@@ -72,7 +73,8 @@ class WazuhImagesDirective(SphinxDirective):
         'align': align,
         'target': directives.unchanged_required,
         'class': directives.class_option,
-        'show_caption': directive_boolean
+        'show_caption': directive_boolean,
+        'wrap_image': directive_boolean
     }
 
     def run(self):
@@ -95,6 +97,7 @@ class WazuhImagesDirective(SphinxDirective):
         title = self.options.get('title', '' if conf['default_show_title'] else None)
         align = self.options.get('align', '')
         show_caption = self.options.get('show_caption', conf['show_caption'])
+        wrap_image = self.options.get('wrap_image', conf['wrap_image'])
         
         wazuh_image_node = WazuhImages()
         
@@ -113,6 +116,7 @@ class WazuhImagesDirective(SphinxDirective):
         wazuh_image_node['classes'] += classes
         wazuh_image_node['alt'] = alt
         wazuh_image_node['tabindex'] = 0
+        wazuh_image_node['wrap_image'] = wrap_image
         if len(align) > 0:
             wazuh_image_node['align'] = align
         
@@ -135,10 +139,18 @@ def purge_wazuh_images(app, env, docname):
     env.wazuh_images_all_images = [wazuh_image for wazuh_image in env.wazuh_images_all_images
                                     if wazuh_image['docname'] != docname]
 
-def visit_light_box_node_html(self, node):     
-    pass
+def visit_wazuh_image_node_html(self, node):
+    container_align = ''
+    if 'align' in node:
+        container_align = ' align-'+node['align']
+    if node['wrap_image']:
+        self.body.append('<div class="%s-wrapper%s">' % (node['classes'][0], container_align))
+        self.visit_image(node)
+        self.body.append('</div>')
+    else:
+        self.visit_image(node)
 
-def depart_light_box_node_html(self, node):
+def depart_wazuh_image_node_html(self, node):
     pass
 
 class WazuhLightBox(nodes.General, nodes.Element):
@@ -251,7 +263,8 @@ def load_config(app, config):
 def setup(app):
     app.connect("config-inited", load_config)
     app.add_config_value('wazuh_images_config', DEFAULT_CONFIG, 'env')
-    app.add_node(WazuhLightBox, html=(visit_light_box_node_html, depart_light_box_node_html))
+    app.add_node(WazuhImages, html=(visit_wazuh_image_node_html, depart_wazuh_image_node_html))
+    app.add_node(WazuhLightBox)
     app.add_directive('wazuh_image', WazuhImagesDirective)
     app.connect("html-page-context", setup_add_wazuh_light_box)
     app.connect('env-purge-doc', purge_wazuh_images)
