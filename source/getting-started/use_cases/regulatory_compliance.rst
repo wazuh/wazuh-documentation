@@ -94,9 +94,9 @@ Example alert for rule ``Apache: Attempt to access forbidden directory index.``:
 
 Example of regulatory compliance dashboard for PCI DSS:
 
-.. image:: ../../images/getting_started/use_case_regulatory_compliance.png
+.. thumbnail:: ../../images/getting_started/use_case_regulatory_compliance.png
    :align: center
-   :width: 100%
+   :wrap_image: No
 
 More information about how Wazuh helps meet regulatory compliance requirements can be found at:
 

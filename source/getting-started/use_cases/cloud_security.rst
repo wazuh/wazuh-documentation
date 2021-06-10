@@ -96,9 +96,9 @@ Example of an alert when an AWS security group is deleted:
 
 Example of AWS dashboard:
 
-.. image:: ../../images/getting_started/use_case_cloud.png
+.. thumbnail:: ../../images/getting_started/use_case_cloud.png
    :align: center
-   :width: 100%
+   :wrap_image: No
 
 More information about how does Wazuh monitor AWS can be found at our :ref:`documentation <amazon>`.
 
