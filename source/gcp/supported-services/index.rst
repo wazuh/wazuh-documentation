@@ -19,3 +19,4 @@ The following GCP services are supported by the Wazuh GCP module. The logs are r
        dns_queries
        vpc_flow
        firewall
+       load_balancing
