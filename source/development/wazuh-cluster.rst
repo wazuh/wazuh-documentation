@@ -78,6 +78,7 @@ Workflow
 The image below shows a schema of how a master node and a worker node interact with each other in the synchronization process. Every dotted square represents a synchronization task and they all work in parallel:
 
 .. image:: ../images/manual/cluster/cluster_flow.png
+  :align: center
 
 Keep alive
 ~~~~~~~~~~
