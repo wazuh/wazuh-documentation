@@ -4,10 +4,10 @@
 
 .. _wazuh_agent_package_aix:
 
-Deploying Wazuh agents to your AIX systems
+Deploying Wazuh agents on your AIX systems
 ==========================================
 
-Deploy a Wazuh agent to your AIX system. 
+Deploy a Wazuh agent on your AIX system. 
 
 
 #. Download the `AIX installer <https://packages.wazuh.com/|CURRENT_MAJOR|/aix/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_AIX|.aix.ppc.rpm>`_. 
@@ -25,8 +25,11 @@ Deploy a Wazuh agent to your AIX system.
     .. code-block:: console
 
       # startsrc -s wazuh-agent
-    
-    
+
+      
+Now you have an active Wazuh agent connected to the Wazuh manager. 
+      
+
 Alternatively, you can install the agent ``rpm -ivh wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_AIX|.aix.ppc.rpm`` and then proceed to register and configure it to communicate with the manager. For more information about this process, see: :ref:`registering agents <register_agents>`.
 
 
@@ -39,4 +42,4 @@ To uninstall the agent:
 
       # rpm -e wazuh-agent
 
-There are files marked as configuration files. Due to this designation, the package manager does not remove those files from the filesystem. The complete file removal action is on user's responsibility. it can be done by removing the folder ``/var/ossec``.
+To remove the configuration files that are not eliminated by the package manager, remove the folder ``/var/ossec``. 
