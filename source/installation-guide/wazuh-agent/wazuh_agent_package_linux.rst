@@ -4,8 +4,8 @@
 
 .. _wazuh_agent_package_linux:
 
-Deploy Wazuh agents on your Linux systems
-=========================================
+Deploying Wazuh agents on your Linux systems
+============================================
 
 Deploy a Wazuh agent on your Linux system. 
 
