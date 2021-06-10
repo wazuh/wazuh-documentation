@@ -5,7 +5,7 @@
 office365
 =========
 
-.. versionadded:: 4.4.0
+.. versionadded:: 4.3.0
 
 .. note::
 

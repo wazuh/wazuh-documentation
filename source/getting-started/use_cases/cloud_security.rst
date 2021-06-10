@@ -160,7 +160,7 @@ Office 365
 
 Wazuh monitors Office 365 by extracting events from audit logs, which is used as a middleware for event ingestion and delivery. This integration helps detect threats targeting your Office 365 organizations.
 
-The following example shows an alert when a new mailbox is created:
+The following example shows an alert when a ``Communication site`` is modified in ``SharePoint``:
 
 .. code-block:: json
   :emphasize-lines: 5

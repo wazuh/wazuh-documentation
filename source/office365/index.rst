@@ -8,7 +8,7 @@ Using Wazuh to monitor Office 365
 .. meta::
   :description: Discover how Wazuh can help you to monitor your Office 365 organizations.
 
-.. versionadded:: 4.4.0
+.. versionadded:: 4.3.0
 
 This section provides instructions for monitoring the **Office 365** audit log for your organization.
 

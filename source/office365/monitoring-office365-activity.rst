@@ -153,7 +153,7 @@ For this example, we will start by generating some activity in our Office 365 Or
 Wazuh Rules
 ^^^^^^^^^^^
 
-Wazuh provides a series of rules to catch different events on Office365, for this example we will take the rule id ``91532`` which detects a ``Office 365: SharePoint file operation events.`` action.
+Wazuh provides a series of rules to catch different events on Office365, for this example we will take the rule id ``91537`` which detects a ``Office 365: SharePoint file operation events.`` action.
 
 .. code-block:: xml
 
