@@ -25,6 +25,8 @@ Here are all the available settings for the ``api.yaml`` configuration file. For
      use_only_authd: no
      drop_privileges: yes
      experimental_features: no
+     intervals:
+        request_timeout: 10
 
      https:
         enabled: yes
@@ -181,6 +183,14 @@ experimental_features
 +======================+===============+===================================+
 | yes, true, no, false | false         | Enable features under development |
 +----------------------+---------------+-----------------------------------+
+
+intervals
+^^^^^^^^^^
++-----------------+----------------------+---------------+-----------------------------------------------------------------+
+| Sub-fields      | Allowed values       | Default value | Description                                                     |
++=================+======================+===============+=================================================================+
+| request_timeout | Any positive integer | 10            | Set the maximum response time (in seconds) for each API request |
++-----------------+----------------------+---------------+-----------------------------------------------------------------+
 
 https
 ^^^^^^^^^^^^^^^^^^^^^^
