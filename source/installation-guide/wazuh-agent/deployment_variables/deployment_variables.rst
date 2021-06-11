@@ -1,6 +1,6 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. meta:: :description: Learn how to use the deployment variables
+.. meta:: :description: Learn how to use the deployment variables to install, register and configure Wazuh agents. 
 
 .. _deployment_variables:
 
@@ -11,18 +11,14 @@ For an agent to be fully deployed and connected to the Wazuh server it needs to 
 
 Below you can find a table showing the different operating systems with which you can make an automatic deployment using these variables.
 
-+---------------------------------------------------------------------+-------------------------------------------------------------+
-| Type                                                                | Description                                                 |
-+=====================================================================+=============================================================+
-| :ref:`AIX deployment variables <deployment_variables_aix>`          | Install Wazuh agent on AIX using deployment variables.      |
-+---------------------------------------------------------------------+-------------------------------------------------------------+
-| :ref:`Linux deployment variables <deployment_variables_linux>`      | Install Wazuh agent on Linux using deployment variables.    |
-+---------------------------------------------------------------------+-------------------------------------------------------------+
-| :ref:`macOS deployment variables <deployment_variables_macos>`      | Install Wazuh agent on macOS using deployment variables.    |
-+---------------------------------------------------------------------+-------------------------------------------------------------+
-| :ref:`Windows deployment variables <deployment_variables_windows>`  | Install Wazuh agent on Windows using deployment variables.  |
-+---------------------------------------------------------------------+-------------------------------------------------------------+
 
+- :ref:`Linux deployment variables <deployment_variables_linux>`
+
+- :ref:`Windows deployment variables <deployment_variables_windows>` 
+
+- :ref:`macOS deployment variables <deployment_variables_macos>`
+
+- :ref:`AIX deployment variables <deployment_variables_aix>`     
 
 .. rst-class:: d-none
 
