@@ -72,14 +72,14 @@ Install Open Distro for Elasticsearch:
 Elasticsearch configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To configure Elasticsearch download the ``/etc/elasticsearch/elasticsearch.yml`` file:
+To configure Elastisearch successfully, follow these steps:
 
 .. include:: ../../../../../_templates/installations/elastic/common/elastic-multi-node/configure_elasticsearch_initial.rst
 
 Elasticsearch roles and users
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You need to add extra users and roles in order to use the Wazuh Kibana plugin properly.
+To use the Wazuh Kibana plugin properly, run the following command to add new users and roles in Kibana.
 
 .. include:: ../../../../../_templates/installations/elastic/common/add_roles_and_users.rst
 
