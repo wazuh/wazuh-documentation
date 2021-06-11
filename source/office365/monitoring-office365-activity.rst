@@ -32,7 +32,7 @@ Office 365 API description can be found in this `link <https://docs.microsoft.co
 Office 365 API requirements
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-For **Wazuh** to successfully connect to the **Office365 API**, an authentication process is required. To do this, we must provide the ``tenant_id``, ``client_id`` and ``client_secret`` of the application that we authorize in the organization.
+For **Wazuh** to successfully connect to the **Office365 API**, an authentication process is required. To do this, we must provide the ``tenant_id``, ``client_id``, and ``client_secret`` of the application that we authorize in the organization.
 
 1. Register your app
 
@@ -68,11 +68,11 @@ You can generate a password to use during the authentication process. Go to ``Ce
     :align: center
     :width: 100%
 
-.. note:: Make sure you write it down because the UI won’t let you copy it afterwards.
+.. note:: Make sure you write it down because the UI won’t let you copy it afterward.
 
 3. API permissions
 
-The application needs specific API permissions to be able to request the Office 365 activity events. In this case you are looking for permissions related to the ``https://manage.office.com`` resource.
+The application needs specific API permissions to be able to request the Office 365 activity events. In this case, you are looking for permissions related to the ``https://manage.office.com`` resource.
 
 To configure the application permissions go to the ``API permissions`` page, choose ``Add a permission``, then select the Office 365 Management APIs and click on ``Application permissions``:
 
@@ -117,7 +117,7 @@ Using the configuration mentioned above, we will see an example of monitoring Of
 Generate activity on Office 365
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-For this example, we will start by generating some activity in our Office 365 Organization, in this case let's modify a ``Communication site`` in ``SharePoint``. If we do that, we can see that Office 365 will generate a new json event, something like this:
+For this example, we will start by generating some activity in our Office 365 Organization. In this case, let's modify a ``Communication site`` in ``SharePoint``. If we do that, we can see that Office 365 will generate a new json event, something like this:
 
 .. code-block:: json
     :class: output

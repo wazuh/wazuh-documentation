@@ -9,7 +9,7 @@ office365
 
 .. note::
 
-    This module only works on Windows, Linux and MacOS. It is recommended to have it enabled only in one agent to avoid repeated logs.
+    This module only works on Windows, Linux, and macOS. It is recommended to have it enabled only in one agent to avoid repeated logs.
 
 .. topic:: XML section name
 
@@ -133,7 +133,7 @@ This block configures the credential for the **authentication** with the Office3
 api_auth\\tenant_id
 ^^^^^^^^^^^^^^^^^^^
 
-Tenat id of your application registered in Azure.
+Tenant id of your application registered in Azure.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
