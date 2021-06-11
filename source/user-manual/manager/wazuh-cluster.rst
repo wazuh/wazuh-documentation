@@ -33,7 +33,6 @@ Servers eventually fail: hardware can be broken, a human can turn them off, the 
 .. thumbnail:: ../../images/manual/cluster/cluster_infrastructure.png
     :title: Wazuh cluster infrastructure
     :align: center
-    :width: 80%
 
 Types of nodes
 ^^^^^^^^^^^^^^
@@ -291,6 +290,7 @@ There are different independent threads running, each one is framed in the image
 All cluster logs are written in the file ``logs/cluster.log``.
 
 .. image:: ../../images/manual/cluster/cluster_flow.png
+  :align: center
 
 Keep alive thread
 ^^^^^^^^^^^^^^^^^
