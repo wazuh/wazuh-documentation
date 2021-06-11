@@ -14,14 +14,12 @@ See below how components are distributed when the Wazuh server and the Elasticse
 .. thumbnail:: ../images/installation/installing_wazuh.png
     :title: Distributed architecture
     :align: center
-    :width: 100%
 
 In smaller Wazuh deployments, Wazuh and Elastic Stack with a single-node Elasticsearch cluster, can all be deployed on a single server. In this scenario, Logstash can read the Wazuh alerts and/or archived events directly from the local file system and feed them into the local Elasticsearch instance.
 
 .. thumbnail:: ../images/installation/installing_wazuh_singlehost.png
     :title: Single-host architecture
     :align: center
-    :width: 100%
 
 Communications and data flow
 ----------------------------
@@ -29,7 +27,6 @@ Communications and data flow
 .. thumbnail:: ../images/getting_started/data_flow_2048x794.png
     :title: Data flow
     :align: center
-    :width: 100%
 
 
 Agent-server communication
