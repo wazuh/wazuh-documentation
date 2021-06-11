@@ -362,12 +362,12 @@ The following configuration will update the vulnerability database for Ubuntu, D
         <!-- SUSE Linux Enterprise OS vulnerabilities -->
         <provider name="suse">
           <enabled>yes</enabled>
-          <os>15-server</os>
-          <os>15-desktop</os>
-          <os>12-server</os>
-          <os>12-desktop</os>
           <os>11-server</os>
           <os>11-desktop</os>
+          <os>12-server</os>
+          <os>12-desktop</os>
+          <os>15-server</os>
+          <os>15-desktop</os>
           <update_interval>1h</update_interval>
         </provider>
 
