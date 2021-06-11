@@ -1,24 +1,26 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. code-block:: console
+#. Download the ``/etc/elasticsearch/elasticsearch.yml`` file.
 
-  # curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/elasticsearch/7.x/elasticsearch_cluster_initial_node.yml
+  .. code-block:: console
 
-Edit the file ``/etc/elasticsearch/elasticsearch.yml``. The pre-configured template includes 3 nodes by default; you can add or remove lines according to the number of nodes in your cluster.
+    # curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/elasticsearch/7.x/elasticsearch_cluster_initial_node.yml
 
-.. code-block:: yaml
+#. Edit the file ``/etc/elasticsearch/elasticsearch.yml``. The pre-configured template includes 3 nodes by default; you can add or remove lines according to the number of nodes in your cluster.
 
-  network.host: <elasticsearch_ip>
-  node.name: node-1
-  cluster.name: <elastic_cluster>
-  cluster.initial_master_nodes:
-          - node-1
-          - node-2
-          - node-3
-  discovery.seed_hosts:
-          - <elasticsearch_ip_node1>
-          - <elasticsearch_ip_node2>
-          - <elasticsearch_ip_node3>
+  .. code-block:: yaml
+
+    network.host: <elasticsearch_ip>
+    node.name: node-1
+    cluster.name: <elastic_cluster>
+    cluster.initial_master_nodes:
+            - node-1
+            - node-2
+            - node-3
+    discovery.seed_hosts:
+            - <elasticsearch_ip_node1>
+            - <elasticsearch_ip_node2>
+            - <elasticsearch_ip_node3>
 
 
 Depending on the node type, some parameters may vary between nodes. The ``cluster.initial_master_nodes`` and the ``discovery.seed_hosts`` are lists of all the master-eligible nodes in the cluster. The parameter ``node.master: false`` must be included in every Elasticsearch node that will not be configured as master. 
