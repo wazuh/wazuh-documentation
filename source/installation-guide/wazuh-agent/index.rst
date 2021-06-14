@@ -110,10 +110,10 @@ If you are deploying Wazuh in a large environment, with a high number of servers
     :hidden:
     :maxdepth: 2
 
+    Linux <wazuh_agent_package_linux>
+    Windows <wazuh_agent_package_windows>
+    macOS <wazuh_agent_package_macos>
     AIX <wazuh_agent_package_aix>
     HP-UX <wazuh_agent_package_hpux>
-    Linux <wazuh_agent_package_linux>
-    macOS <wazuh_agent_package_macos>
-    Solaris <wazuh_agent_package_solaris>
-    Windows <wazuh_agent_package_windows>
+    Solaris <wazuh_agent_package_solaris>   
     deployment_variables/deployment_variables
