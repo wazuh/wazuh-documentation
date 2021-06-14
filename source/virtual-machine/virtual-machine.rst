@@ -23,15 +23,22 @@ This virtual appliance, available `in this link <https://packages.wazuh.com/|CUR
     - Kibana: |ELASTICSEARCH_LATEST_OVA|
     - Wazuh Kibana plugin: |WAZUH_LATEST_OVA|-|ELASTICSEARCH_LATEST_OVA|
 
-First, import the OVA in the virtualization platform and run the virtual machine. The password of the user ``root`` is ``wazuh`` and the username and password for the Wazuh API are ``wazuh-wui/wazuh-wui``. The `following video <https://www.youtube.com/watch?v=uijZuneDPPk>`_ explains how to import and run the virtual machine.
+First, import the OVA in the virtualization platform and run the virtual machine. 
+
+You can access to it with the following credentials (user/password):
+
+    - root/wazuh
+    - wazuh/wazuh
+
+The `following video <https://www.youtube.com/watch?v=uijZuneDPPk>`_ explains how to import and run the virtual machine.
 
 To access the web interface: 
 
   .. code-block:: none
 
       URL: https://<wazuh_server_ip>
-      user: admin
-      password: admin
+      user: wazuh
+      password: wazuh
 
 All components included in this virtual image are configured to work out-of-the-box without the need to modify any settings. However, all components can be fully customized. These are the configuration files locations:
 
@@ -47,6 +54,9 @@ In case of using VirtualBox, once the virtual machine is imported it may run int
 
 
 Once the virtual machine is imported and running, the next step is to :ref:`deploy the Wazuh agents <installation_agents>` on the systems to be monitored.
+
+It is highly recommended to change Elasticsearch default passwords for the users' found at the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. More information about this process can be found in the :ref:`user manual <change_elastic_pass>`.
+
 
 Upgrading the VM
 ----------------
