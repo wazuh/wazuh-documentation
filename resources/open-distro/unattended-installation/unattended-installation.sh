@@ -17,6 +17,8 @@ ELK_VER="7.10.2"
 OD_VER="1.13.2"
 OD_REV="1"
 ow=""
+CONFIG_ROUTE="~/certs.tar"
+
 if [ -n "$(command -v yum)" ]; then
     sys_type="yum"
     sep="-"
@@ -175,21 +177,82 @@ checkConfig() {
     if [ -f ~/config.yml ]; then
         echo "Configuration file found. Starting the installation..."
     else
-        if [ -f ~/certs.tar ]; then
+        if [ -f ${CONFIG_ROUTE} ]; then
             echo "Certificates file found. Starting the installation..."
-            eval "tar --overwrite -C ~/ -xf ~/certs.tar config.yml ${debug}"
-            IFS=$'\r\n' GLOBIGNORE='*' command eval  'CONFIG=($(cat ~/condig.yml))'
+            eval "tar --overwrite -C ~/ -xf ${CONFIG_ROUTE} config.yml ${debug}"
+            readConfig
         elif [ -f /etc/elasticsearch/certs/certs.tar ]; then
             eval "mv /etc/elasticsearch/certs/certs.tar ~/ ${debug}"
-            eval "tar --overwrite -C ~/ -xf ~/certs.tar config.yml ${debug}"
+            eval "tar --overwrite -C ~/ -xf ${CONFIG_ROUTE} config.yml ${debug}"
             echo "Certificates file found. Starting the installation..."
-            IFS=$'\r\n' GLOBIGNORE='*' command eval  'CONFIG=($(cat ~/condig.yml))'
+            readConfig
         else
             echo "No configuration file found."
             exit 1;
         fi
     fi
 
+}
+
+readConfig() {
+    
+    IFS=$'\r\n' GLOBIGNORE='*' command eval  'CONFIG=($(cat ~/config.yml))'
+    for i in "${!CONFIG[@]}"; do
+        if [[ "${CONFIG[$i]}" == "${ELASTICINSTANCES}" ]]; then
+            ELASTICLIMITT=${i}
+        fi
+            if [[ "${CONFIG[$i]}" == "${FILEBEATINSTANCES}" ]]; then
+            ELASTICLIMIB=${i}
+        fi
+
+        if [[ "${CONFIG[$i]}" == "${FILEBEATINSTANCES}" ]]; then
+            FILEBEATLIMITT=${i}
+        fi
+        
+        if [[ "${CONFIG[$i]}" == "${KIBANAINSTANCES}" ]]; then
+            FILEBEATLIMIB=${i}
+        fi  
+    done
+
+    ## Read Elasticsearch nodes
+    counter=${ELASTICLIMITT}
+    i=0
+    char="#"
+    while [ "${counter}" -le "${ELASTICLIMIB}" ]
+    do
+        if  [ "${CONFIG[counter]}" !=  "${ELASTICINSTANCES}" ] && [ "${CONFIG[counter]}" !=  "${FILEBEATINSTANCES}" ] && [ "${CONFIG[counter]}" !=  "${FILEBEATHEAD}" ] && [ "${CONFIG[counter]}" !=  "    ip:" ] && [ -n "${CONFIG[counter]}" ] && [ "${CONFIG[counter]}" =~ ^${char}.* ] ; then
+            ELASTICNODES[i]+="$(echo "${CONFIG[counter]}" | tr -d '\011\012\013\014\015\040')"
+            ((i++))
+        fi    
+
+        ((counter++))
+    done
+
+    ## Read Filebeat nodes
+    counter=${FILEBEATLIMITT}
+    i=0
+    while [ "${counter}" -le "${FILEBEATLIMIB}" ]
+    do
+        if  [ "${CONFIG[counter]}" !=  "${FILEBEATINSTANCES}" ] && [ "${CONFIG[counter]}" !=  "${KIBANAINSTANCES}" ] && [ "${CONFIG[counter]}" !=  "${KIBANAHEAD}" ] && [ "${CONFIG[counter]}" !=  "    ip:" ] && [ -n "${CONFIG[counter]}" ]; then
+            FILEBEATNODES[i]+="$(echo "${CONFIG[counter]}" | tr -d '\011\012\013\014\015\040')"
+            ((i++))
+        fi    
+
+        ((counter++))
+    done
+
+    ## Read Kibana nodes
+    counter=${FILEBEATLIMIB}
+    i=0
+    while [ "${counter}" -le "${#CONFIG[@]}" ]
+    do
+        if  [ "${CONFIG[counter]}" !=  "${KIBANAINSTANCES}" ]  && [ "${CONFIG[counter]}" !=  "${KIBANAHEAD}" ] && [ "${CONFIG[counter]}" !=  "    ip:" ] && [ -n "${CONFIG[counter]}" ]; then
+            KIBANANODES[i]+="$(echo "${CONFIG[counter]}" | tr -d '\011\012\013\014\015\040')"
+            ((i++))
+        fi    
+
+        ((counter++))    
+    done
 }
 
 ## Install the required packages for the installation
