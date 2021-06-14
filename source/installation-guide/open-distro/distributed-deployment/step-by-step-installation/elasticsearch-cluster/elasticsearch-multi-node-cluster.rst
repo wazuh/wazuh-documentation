@@ -153,8 +153,7 @@ Install Open Distro for Elasticsearch:
 Elasticsearch configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To configure Elasticsearch download the following ``/etc/elasticsearch/elasticsearch.yml`` file:
-
+To configure Elastisearch successfully, follow these steps:
 
 .. include:: ../../../../../_templates/installations/elastic/common/elastic-multi-node/configure_elasticsearch_subsequent.rst
 
@@ -182,47 +181,47 @@ Certificates deployment
 
 The final stage of the process for installing a multi-node cluster is performed on the initial node and consists in running the security admin script. 
 
-Run the Elasticsearch ``securityadmin`` script to load the new certificates information and start the cluster. To run this command, the value ``<elasticsearch_IP>`` must be replaced with the Elasticsearch installation IP:
+#. Run the Elasticsearch ``securityadmin`` script to load the new certificates information and start the cluster. To run this command, the value ``<elasticsearch_IP>`` must be replaced with the Elasticsearch installation IP:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # /usr/share/elasticsearch/plugins/opendistro_security/tools/securityadmin.sh -cd /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/ -icl -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key -h <elasticsearch_IP>
+      # /usr/share/elasticsearch/plugins/opendistro_security/tools/securityadmin.sh -cd /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/ -icl -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key -h <elasticsearch_IP>
 
-To confirm that the installation is successful, run the following command replacing the value ``<elasticsearch_IP>`` with the Elasticsearch installation IP.
+#. To confirm that the installation is successful, run the following command replacing the value ``<elasticsearch_IP>`` with the Elasticsearch installation IP.
 
-.. code-block:: console
+    .. code-block:: console
 
-  # curl -XGET https://<elasticsearch_ip>:9200 -u admin:admin -k
+      # curl -XGET https://<elasticsearch_ip>:9200 -u admin:admin -k
 
-An example response should look as follows:
+    An example response should look as follows:
 
-.. code-block:: none
-    :class: output
+    .. code-block:: none
+        :class: output
 
-    {
-      "name" : "node-1",
-      "cluster_name" : "elasticsearch",
-      "cluster_uuid" : "tWYgqpgdRz6fGN8gH11flw",
-      "version" : {
-        "number" : "7.10.2",
-        "build_flavor" : "oss",
-        "build_type" : "rpm",
-        "build_hash" : "747e1cc71def077253878a59143c1f785afa92b9",
-        "build_date" : "2021-01-13T00:42:12.435326Z",
-        "build_snapshot" : false,
-        "lucene_version" : "8.7.0",
-        "minimum_wire_compatibility_version" : "6.8.0",
-        "minimum_index_compatibility_version" : "6.0.0-beta1"
-      },
-      "tagline" : "You Know, for Search"
-    }
+        {
+          "name" : "node-1",
+          "cluster_name" : "elasticsearch",
+          "cluster_uuid" : "tWYgqpgdRz6fGN8gH11flw",
+          "version" : {
+            "number" : "7.10.2",
+            "build_flavor" : "oss",
+            "build_type" : "rpm",
+            "build_hash" : "747e1cc71def077253878a59143c1f785afa92b9",
+            "build_date" : "2021-01-13T00:42:12.435326Z",
+            "build_snapshot" : false,
+            "lucene_version" : "8.7.0",
+            "minimum_wire_compatibility_version" : "6.8.0",
+            "minimum_index_compatibility_version" : "6.0.0-beta1"
+          },
+          "tagline" : "You Know, for Search"
+        }
 
 
-To verify the nodes that are connected to the cluster, run the following command replacing ``<elasticsearch_ip>`` with the Elasticsearch installation IP. 
+#. To verify the nodes that are connected to the cluster, run the following command replacing ``<elasticsearch_ip>`` with the Elasticsearch installation IP. 
 
-.. code-block:: console
+    .. code-block:: console
 
-  # curl -XGET https://<elasticsearch_ip>:9200/_cat/nodes -u admin:admin -k
+        # curl -XGET https://<elasticsearch_ip>:9200/_cat/nodes -u admin:admin -k
 
 
 It is highly recommended to change Elasticsearch default passwords for the users' found at the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. It is also recommended to customize the file ``/etc/elasticsearch/jvm.options`` in order to improve the performance of Elasticsearch. Learn more about these processes in the :ref:`Elasticsearch tuning <elastic_tuning>` section.
