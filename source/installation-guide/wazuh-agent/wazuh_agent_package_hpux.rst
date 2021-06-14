@@ -12,7 +12,7 @@ Install a Wazuh agent on your HP-UX system.
 
 #. Download the `HP-UX installer <https://packages.wazuh.com/|CURRENT_MAJOR|/hp-ux/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar>`_. 
 
-#. Create the user and the group OSSEC:
+#. Create the ``ossec`` user and group:
    
    .. code-block:: console
    
@@ -31,14 +31,15 @@ Install a Wazuh agent on your HP-UX system.
    
        # /sbin/init.d/wazuh-agent start
 
-Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, see :ref:`Registering Wazuh agents <register_agents>`.
+
+You now have an installed Wazuh agent, the next step is to register and configure it to communicate with the Wazuh manager. See :ref:`Registering Wazuh agents <register_agents>`.        
 
 Uninstall
 ---------
 
-To uninstall the agent:
+To uninstall the agent follow the next steps. 
 
-1. Stop the Wazuh agent service
+1. Stop the Wazuh agent service:
 
     .. code-block:: console
 
