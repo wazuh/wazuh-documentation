@@ -1,6 +1,6 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. meta:: :description: Learn how to install the Wazuh agent on Debian
+.. meta:: :description: Learn how to deploy Wazuh agents on your Linux systems. 
 
 .. _wazuh_agent_package_linux:
 
@@ -11,8 +11,8 @@ Deploy a Wazuh agent on your Linux system.
 
 .. note:: To execute the commands described below, root privileges are required.
 
-Adding the Wazuh repository
----------------------------
+Add the Wazuh repository
+-------------------------
 
 Add the Wazuh repository to download the official packages. 
 
@@ -40,8 +40,8 @@ Add the Wazuh repository to download the official packages.
 
 
 
-Deploying a Wazuh agent
------------------------
+Deploy a Wazuh agent
+--------------------
 
 #. Choose your package manager tab, edit the ``WAZUH_MANAGER`` variable to contain your Wazuh manager IP address or hostname and proceed to deploy the agent in your system:   
 
@@ -70,7 +70,7 @@ Deploying a Wazuh agent
       
     
     
-        For additional deployment options, like agent name, agent group, and registration password, see :ref:`deployment variables <deployment_variables_apt>` section.   
+        For additional deployment options, like agent name, agent group, and registration password, see :ref:`deployment variables <deployment_variables_linux>` section.   
         
         
 
