@@ -220,7 +220,7 @@ readConfig() {
     char="#"
     while [ "${counter}" -le "${ELASTICLIMIB}" ]
     do
-        if  [ "${CONFIG[counter]}" !=  "${ELASTICINSTANCES}" ] && [ "${CONFIG[counter]}" !=  "${FILEBEATINSTANCES}" ] && [ "${CONFIG[counter]}" !=  "${FILEBEATHEAD}" ] && [ "${CONFIG[counter]}" !=  "    ip:" ] && [ -n "${CONFIG[counter]}" ] && [ "${CONFIG[counter]}" =~ ^${char}.* ] ; then
+        if  [ "${CONFIG[counter]}" !=  "${ELASTICINSTANCES}" ] && [ "${CONFIG[counter]}" !=  "${FILEBEATINSTANCES}" ] && [ "${CONFIG[counter]}" !=  "${FILEBEATHEAD}" ] && [ "${CONFIG[counter]}" !=  "    ip:" ] && [ -n "${CONFIG[counter]}" ]; then
             ELASTICNODES[i]+="$(echo "${CONFIG[counter]}" | tr -d '\011\012\013\014\015\040')"
             ((i++))
         fi    
