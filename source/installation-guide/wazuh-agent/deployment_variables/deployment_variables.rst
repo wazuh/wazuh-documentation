@@ -24,7 +24,7 @@ Below you can find a table showing the different operating systems with which yo
 
 .. toctree::
     :hidden:
-    :maxdepth: 2
+    :maxdepth: 1
 
     deployment_variables_aix
     deployment_variables_linux
