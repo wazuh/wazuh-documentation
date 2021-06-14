@@ -201,7 +201,8 @@ IFS=$'\r\n' GLOBIGNORE='*' command eval  'CONFIG=($(cat ~/config.yml | grep -v "
         if [[ "${CONFIG[$i]}" == "${ELASTICINSTANCES}" ]]; then
             ELASTICLIMITT=${i}
         fi
-            if [[ "${CONFIG[$i]}" == "${FILEBEATINSTANCES}" ]]; then
+        
+        if [[ "${CONFIG[$i]}" == "${FILEBEATINSTANCES}" ]]; then
             ELASTICLIMIB=${i}
         fi
 
