@@ -27,38 +27,50 @@ Execute the ``generate_ova.sh`` script, with the different options you desire.
 
 .. code-block:: console
 
-  $ ./generate_wazuh_packages.sh -h
+  $ ./generate_ova.sh -h
 
 .. code-block:: none
   :class: output
 
   Usage: ./generate_ova.sh [OPTIONS]
 
-    -v, --version          [Required] Version of wazuh to install on VM.
-    -o, --opendistro       [Required] Version of Open Distro for Elasticsearch.
-    -f, --filebeat         [Required] Filebeat's version.
-    -r, --repository       [Required] Select the software repository [prod/dev].
-    -b, --branch           [Optional] Branch/tag of the Wazuh repository.
-    -s, --store <path>     [Optional] Set the destination absolute path of package.
-    -c, --checksum <path>  [Optional] Generate checksum.
-    -u, --ui-revision      [Optional] Revision of the UI package. By default, 1.
+    -w, --wazuh            [Optional] Version of wazuh to install on VM.
+    -o, --opendistro       [Optional] Version of Open Distro for Elasticsearch.
+    -e, --elk              [Optional] Versions of Elasticsearch, Logstash and Kibana.
+    -r, --repository       [Optional] Select the software repository [dev/prod]. By default: prod
+    -b, --branch           [Optional] Branch/tag of the Wazuh repository. By default: v|WAZUH_LATEST|
+                           [Required by -r|--repository]
+    -d, --doc              [Optional] Branch/tag of the Wazuh documentation repository. By default: v|WAZUH_LATEST|
+                           [Required by -r|--repository]
+    -s, --store <path>     [Optional] Set the destination absolute path where the ova file will be stored.
+    -c, --checksum         [Optional] Generate checksum [yes/no]. By default: no
+    -u, --ui-revision      [Optional] Revision of the UI package. By default: 1
+    -g, --debug            [Optional] Set debug mode on [yes/no]. By default: no
     -h, --help             [  Util  ] Show this help.
 
 The options for the repository indicates whether the packages used to install Wazuh are the production ones or not.
 
- * Stable: The OVA uses released packages.
- * Unstable: The OVA uses not released packages.
+ * prod: The OVA uses released packages.
+ * dev: The OVA uses not released packages.
 
 Below, you will find some examples of how to build a Wazuh virtual machine.
 
 .. code-block:: console
 
-  # ./generate_ova.sh -b -v |WAZUH_LATEST| -e |ELASTICSEARCH_LATEST| -r stable
+  # ./generate_ova.sh
 
-This will generate a Virtual machine with Wazuh manager |WAZUH_LATEST| and ELK |ELASTICSEARCH_LATEST| installed using stable packages
+This will generate a Virtual machine with Wazuh manager |WAZUH_LATEST|, Opendistro |OPEN_DISTRO_LATEST| and ELK |ELASTICSEARCH_LATEST| using stable packages.
 
 .. code-block:: console
 
-  # ./generate_ova.sh -b -v |WAZUH_LATEST| -e |ELASTICSEARCH_LATEST| -r unstable -c
+  # ./generate_ova.sh -w |WAZUH_LATEST| -o |OPEN_DISTRO_LATEST| -e |ELASTICSEARCH_LATEST|
 
-This will generate a Virtual machine with Wazuh manager |WAZUH_LATEST| and ELK |ELASTICSEARCH_LATEST| installed using unstable packages and generate the sha512 checksum
+This will generate a Virtual machine with the specified Wazuh manager |WAZUH_LATEST|, Opendistro |OPEN_DISTRO_LATEST| and ELK |ELASTICSEARCH_LATEST| using stable packages.
+
+.. code-block:: console
+
+  # ./generate_ova.sh -w |WAZUH_LATEST| -o |OPEN_DISTRO_LATEST| -e |ELASTICSEARCH_LATEST| -b v4.2.0-rc6 -d 4.2-rc -r dev -g yes
+
+This will generate a Virtual machine with Wazuh manager |WAZUH_LATEST|, Opendistro |OPEN_DISTRO_LATEST| and ELK |ELASTICSEARCH_LATEST| using v4.2.0-rc6 tag of wazuh repository and 4.2-rc branch documentation repository with development packages and debug mode on.
+
+It is highly recommended to change Elasticsearch default passwords for the users' found at the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. More information about this process can be found in the :ref:`user manual <change_elastic_pass>`.
