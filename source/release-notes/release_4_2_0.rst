@@ -118,6 +118,13 @@ What's new
 ^^^^^^^^^^
 This release includes new features or enhancements. 
 
+**Cluster**
+
+- `#8175 <https://github.com/wazuh/wazuh/pull/8175>`_  Improvements in cluster node integrity calculation make the process more efficient. Now, it calculates the MD5 of only the files that were modified since the last integrity check.
+- `#8182 <https://github.com/wazuh/wazuh/pull/8182>`_  The synchronization workflow of agent information between cluster nodes is optimized and now the synchronization is performed in a single task for each worker.
+- `#8002 <https://github.com/wazuh/wazuh/pull/8002>`_  Cluster logs are now changed to show more useful and essential information, improving clarity and readability.
+
+
 **Core**
 
 - `#3368 <https://github.com/wazuh/wazuh/issues/3368>`_ Wazuh adds support for bookmarks in ``logcollector``. This allows you to follow the log file from the last read line where the agent stopped. 
@@ -130,6 +137,7 @@ This release includes new features or enhancements.
 - `#7444 <https://github.com/wazuh/wazuh/pull/7444>`_ New ``ip_update_interval`` option is added to set how often the agent refreshes its IP address.
 - `#7661 <https://github.com/wazuh/wazuh/issues/7661>`_ New support is added for testing location information in Wazuh logtest. 
 - `#7731 <https://github.com/wazuh/wazuh/pull/7731>`_ Vulnerability detection capabilities are now improved by adding new vulnerability detector reports to the Wazuh DB so you can know which CVE affect an agent.
+- `#8755 <https://github.com/wazuh/wazuh/pull/8755>`_ Newly added option allows you to enable or disable listening to Authd TSL port.
 - `#6912 <https://github.com/wazuh/wazuh/pull/6912>`_ Wazuh daemons are now renamed to follow the Wazuh unified standard. 
 - `#6903 <https://github.com/wazuh/wazuh/pull/6903>`_ Wazuh CLIs and related tools are now renamed to follow Wazuh unified standard.
 - `#6920 <https://github.com/wazuh/wazuh/pull/6920>`_ Wazuh internal directories are now renamed to follow Wazuh unified standard. 
@@ -164,11 +172,15 @@ This release includes new features or enhancements.
 - `#7909 <https://github.com/wazuh/wazuh/pull/7909>`_ Login security controller is improved to avoid errors in Restful API reference links. 
 - `#8123 <https://github.com/wazuh/wazuh/pull/8123>`_ The ``PUT /agents/group/{group_id}/restart`` response format is now improved when there are no agents assigned to the group.
 - `#8149 <https://github.com/wazuh/wazuh/pull/8149>`_ Agent keys used when adding agents through the Wazuh API are now obscured in the API log.
+- `#8457 <https://github.com/wazuh/wazuh/pull/8457>`_ All agent-restart function of endpoints is now improved by removing the active-response check.
+- `#8615 <https://github.com/wazuh/wazuh/pull/8615>`_ The performance of API request processing time is optimized by applying cache to token RBAC permissions extraction. Now, this process is invalidated if any resource related to the token is modified.
+- `#8841 <https://github.com/wazuh/wazuh/pull/8841>`_ Wazuh default value set for the ``limit`` API parameter is 500, but now you can specify the maximum value to 100000.
 - `#7588 <https://github.com/wazuh/wazuh/pull/7588>`_ The ``allow_run_as`` parameter is now removed from endpoints to create and update API users.
 - `#7006 <https://github.com/wazuh/wazuh/issues/7006>`_ The ``behind_proxy_server`` option is now removed from configuration.
   
 **Framework**
 
+- `#8682 <https://github.com/wazuh/wazuh/pull/8682>`_ This enhancement improves the agent insertion algorithm when Authd is not available.
 - `#6904 <https://github.com/wazuh/wazuh/issues/6904>`_ ``update_ruleset`` script is now deprecated and removed.
 
 **Ruleset**
@@ -189,6 +201,8 @@ This release resolves known issues.
 Reference                                                         Description
 ==============================================================    =============
 `#6736 <https://github.com/wazuh/wazuh/pull/6736>`_               Memory usage is now optimized and improved when creating cluster messages.
+`#8142 <https://github.com/wazuh/wazuh/pull/8142>`_               Error when unpacking incomplete headers in cluster messages is now fixed. Now cluster communication works correctly and the process is completed successfully.
+`#8499 <https://github.com/wazuh/wazuh/pull/8499>`_               When iterating a file listed that is already deleted, the error message is now changed and shown as a debug message.
 ==============================================================    =============
 
 **Core**
@@ -236,6 +250,8 @@ Reference                                                         Description
 `#7798 <https://github.com/wazuh/wazuh/pull/7798>`_               API integration test mapping script is now updated, fixing redundant paths and duplicated tests.
 `#8014 <https://github.com/wazuh/wazuh/pull/8014>`_               API integration test case ``test_rbac_white_all`` no longer fails and a new test case for the enable/disable ``run_as`` endpoint is added for improved consistency.
 `#8148 <https://github.com/wazuh/wazuh/pull/8148>`_               Issue with thread race condition when adding or deleting agents without ``authd``  is now fixed.
+`#8496 <https://github.com/wazuh/wazuh/pull/8496>`_               CORS is now fixed in API configuration, allowing lists to be added to ``expose_headers`` and ``allow_headers``.
+
 ==============================================================    =============
 
 **Ruleset**
