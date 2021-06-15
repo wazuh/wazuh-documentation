@@ -110,44 +110,62 @@ The first rule silence alerts from the change of permissions from mask 600 to  m
 .. code-block:: console
 
   {
-      "type": "event",
-      "data": {
-        "path": "/specialdir/file.txt",
-        "mode": "whodata",
-        "type": "deleted",
-        "timestamp": 1623668187,
-        "attributes": {
-          "type": "file",
-          "size": 0,
-          "perm": "rw-r--r--",
-          "uid": "0",
-          "gid": "0",
-          "user_name": "root",
-          "group_name": "root",
-          "inode": 4352002,
-          "mtime": 1623665041,
-          "hash_md5": "d41d8cd98f00b204e9800998ecf8427e",
-          "hash_sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
-          "hash_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-          "checksum": "a1e1975f6f2799cb9f7e25af0b8f0bd1c4e183e4"
-        },
-        "audit": {
-          "user_id": "0",
-          "user_name": "root",
-          "process_name": "/usr/bin/mv",
-          "process_id": 3019,
-          "cwd": "/specialdir",
-          "group_id": "0",
-          "group_name": "root",
-          "audit_uid": "1000",
-          "audit_name": "vagrant",
-          "effective_uid": "0",
-          "effective_name": "root",
-          "parent_name": "/usr/bin/bash",
-          "parent_cwd": "/specialdir",
-          "ppid": 1747
-        }
+    "type": "event",
+    "data": {
+      "path": "/specialdir/file.log",
+      "mode": "whodata",
+      "type": "modified",
+      "timestamp": 1623745234,
+      "attributes": {
+        "type": "file",
+        "size": 0,
+        "perm": "rw-------",
+        "uid": "0",
+        "gid": "0",
+        "user_name": "root",
+        "group_name": "root",
+        "inode": 4352002,
+        "mtime": 1623665041,
+        "hash_md5": "d41d8cd98f00b204e9800998ecf8427e",
+        "hash_sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+        "hash_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "checksum": "25e338d1eca897691bacd33246c38650bdcd5630"
+      },
+      "changed_attributes": [
+        "permission"
+      ],
+      "old_attributes": {
+        "type": "file",
+        "size": 0,
+        "perm": "rw-r--r--",
+        "uid": "0",
+        "gid": "0",
+        "user_name": "root",
+        "group_name": "root",
+        "inode": 4352002,
+        "mtime": 1623665041,
+        "hash_md5": "d41d8cd98f00b204e9800998ecf8427e",
+        "hash_sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+        "hash_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "checksum": "a1e1975f6f2799cb9f7e25af0b8f0bd1c4e183e4"
+      },
+      "audit": {
+        "user_id": "0",
+        "user_name": "root",
+        "process_name": "/usr/bin/chmod",
+        "process_id": 8866,
+        "cwd": "/specialdir",
+        "group_id": "0",
+        "group_name": "root",
+        "audit_uid": "1000",
+        "audit_name": "vagrant",
+        "effective_uid": "0",
+        "effective_name": "root",
+        "parent_name": "/usr/bin/bash",
+        "parent_cwd": "/specialdir",
+        "ppid": 3275
       }
+    }
   }
 
 
