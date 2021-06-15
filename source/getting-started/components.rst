@@ -23,7 +23,6 @@ The diagram below represents the internal tasks and processes that take place at
 .. thumbnail:: ../images/getting_started/wazuh_agent_processes.png
    :title: Wazuh agent components
    :align: center
-   :width: 80%
 
 All agent processes have different purposes and settings. Here is a brief description of what is done by each of them:
 
@@ -45,7 +44,6 @@ The server component is in charge of analyzing the data received from the agents
 .. thumbnail:: ../images/getting_started/wazuh_server_processes.png
    :title: Wazuh server components
    :align: center
-   :width: 80%
 
 The server usually runs on a stand-alone physical machine, virtual machine or cloud instance and runs agent components with the purpose of monitoring itself. Below is a list of the main server components:
 

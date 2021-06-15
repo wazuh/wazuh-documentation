@@ -73,7 +73,8 @@ How the cluster works
 
     All cluster logs are written in the file ``logs/cluster.log``.
 
-    .. image:: ../../images/manual/cluster/cluster_flow.png
+    .. thumbnail:: ../../images/manual/cluster/cluster_flow.png
+      :align: center
 
 Keep alive thread
 ~~~~~~~~~~~~~~~~~~

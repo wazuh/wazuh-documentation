@@ -19,14 +19,12 @@ The diagram below illustrates how components are distributed when the Wazuh serv
 .. thumbnail:: ../images/installation/installing_wazuh_distributed.png
     :title: Distributed architecture
     :align: center
-    :width: 100%
 
 In smaller Wazuh deployments, Wazuh and Elastic Stack with a single-node Elasticsearch instance can be all deployed on a single server.
 
 .. thumbnail:: ../images/installation/installing_wazuh_singlehost.png
     :title: Single-host architecture
     :align: center
-    :width: 100%
 
 Communications and data flow
 ----------------------------
@@ -34,7 +32,6 @@ Communications and data flow
 .. thumbnail:: ../images/getting_started/wazuh_data_flow.png
     :title: Data flow
     :align: center
-    :width: 100%
 
 Agent-server communication
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
