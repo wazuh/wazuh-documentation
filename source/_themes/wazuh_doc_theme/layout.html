@@ -159,9 +159,6 @@
           <div id="globaltoc" class="globaltoc" role="navigation" aria-label="main navigation">
 
             <nav>
-              {% if is_latest_release %}
-              <ul id="link-to-guide"><li class="toctree-l1"><a class="reference internal" href="../{{pathto('guide.html', 1) }}">Documentation index guide</a></li></ul>
-              {% endif %}
               {% block menu %}
               {% set toctree = toctree(maxdepth=theme_globaltoc_depth|toint, collapse=theme_collapse_navigation, includehidden=theme_globaltoc_includehidden|tobool) %}
               {% if toctree %}
@@ -258,5 +255,6 @@
 {% endif %}
 {%- endblock footer_js %}
 
+{{ add_wazuh_light_box() }}
 </body>
 </html>
