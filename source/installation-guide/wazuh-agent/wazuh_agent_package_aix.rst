@@ -18,7 +18,7 @@ Deploy a Wazuh agent on your AIX system.
    
       # WAZUH_MANAGER="10.0.0.2" rpm -ivh wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_AIX|.aix.ppc.rpm
 
-      For additional deployment options, like agent name, agent group, and registration password, see :ref:`deployment variables <deployment_variables_aix>` section.   
+   For additional deployment options, like agent name, agent group, and registration password, see :ref:`deployment variables <deployment_variables_aix>` section.   
 
 #. Start the service:
 
