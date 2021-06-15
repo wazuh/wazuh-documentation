@@ -30,10 +30,9 @@ High availability
 
 Server eventually fail: hardware can be broken, a human can turn them off, the system can go down... And while the server is restored, you won't be able to see what is happening in your agents. Using a cluster you make sure your agents will always have a manager to report to.
 
-.. image:: ../../images/manual/cluster/cluster_infrastructure.png
+.. thumbnail:: ../../images/manual/cluster/cluster_infrastructure.png
     :alt: Wazuh cluster infrastructure
     :align: center
-    :width: 80%
 
 Types of nodes
 ^^^^^^^^^^^^^^
@@ -291,6 +290,7 @@ There are different independent threads running, each one is framed in the image
 All cluster logs are written in the file ``logs/cluster.log``.
 
 .. thumbnail:: ../../images/manual/cluster/cluster_flow.png
+  :align: center
 
 Keep alive thread
 ^^^^^^^^^^^^^^^^^
