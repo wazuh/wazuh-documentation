@@ -628,6 +628,7 @@ header .menuweb-bar .menu-item a {
   border: 1px solid #0094ce;
   border-radius: 3rem;
   padding: 1rem;
+  position: relative;
 }
 
 .deployment-types .item-deployment h3 {
@@ -637,12 +638,13 @@ header .menuweb-bar .menu-item a {
   padding: 0.5rem;
 }
 
-.deployment-types .item-deployment .detailed img {
+.deployment-types .item-deployment .detailed {
   position: absolute;
   z-index: 99;
   width: 100% !important;
   opacity: 0;  
-  border: none
+  border: none;
+  max-width: 100%;
 }
 
 .agent-os {
@@ -725,12 +727,13 @@ header .menuweb-bar .menu-item a {
   padding: 0.5rem;
 }
 
-.deployment-types .item-deployment .detailed img {
+.deployment-types .item-deployment .detailed {
   position: absolute;
   z-index: 99;
   width: 100% !important;
   opacity: 0;  
-  border: none
+  border: none;
+  max-width: 100%;
 }
 
 .agent-os {
@@ -2138,12 +2141,13 @@ main .wazuh-image {
 }
 
 main .wazuh-image {
-  max-width: 800px;
+  max-width: 100%;
   display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
   outline: none;
+}
+
+main .wazuh-image-wrapper {
+  max-width: 800px;
 }
 
 .wazuh-image {
@@ -2993,7 +2997,7 @@ div.highlight pre {
     grid-template-columns: 35% 65%
   }
 
-  .deployment-types #distributed .detailed img {
+  .deployment-types #distributed .detailed {
     height: 27rem !important;
   }
 
