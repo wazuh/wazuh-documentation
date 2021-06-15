@@ -13,20 +13,20 @@ To gather the data, the Wazuh agent runs periodic scans (the time interval is co
 
 Example of hardware inventory, network interfaces, open ports, and network settings:
 
-.. image:: ../../images/getting_started/use_case_inventory_1.png
+.. thumbnail:: ../../images/getting_started/use_case_inventory_1.png
     :align: center
-    :width: 100%
+    :wrap_image: No
 
 Example of software inventory:
 
-.. image:: ../../images/getting_started/use_case_inventory_2.png
+.. thumbnail:: ../../images/getting_started/use_case_inventory_2.png
     :align: center
-    :width: 100%
+    :wrap_image: No
 
 Example of running processes:
 
-.. image:: ../../images/getting_started/use_case_inventory_3.png
+.. thumbnail:: ../../images/getting_started/use_case_inventory_3.png
     :align: center
-    :width: 100%
+    :wrap_image: No
 
 More information about the Wazuh system inventory module can be found at the :ref:`user manual <syscollector>`.
