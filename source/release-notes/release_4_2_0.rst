@@ -264,8 +264,8 @@ Reference                                                         Description
 `#7798 <https://github.com/wazuh/wazuh/pull/7798>`_               API integration test mapping script is now updated, fixing redundant paths and duplicated tests.
 `#8014 <https://github.com/wazuh/wazuh/pull/8014>`_               API integration test case ``test_rbac_white_all`` no longer fails and a new test case for the enable/disable ``run_as`` endpoint is added for improved consistency.
 `#8148 <https://github.com/wazuh/wazuh/pull/8148>`_               Issue with thread race condition when adding or deleting agents without ``authd``  is now fixed.
-`#8496 <https://github.com/wazuh/wazuh/pull/8496>`_               CORS is now fixed in API configuration, allowing lists to be added to ``expose_headers`` and ``allow_headers``.
-
+`#8496 <https://github.com/wazuh/wazuh/pull/8496>`_               CORS (cross-origin resource sharing) is now fixed in API configuration, allowing lists to be added to ``expose_headers`` and ``allow_headers``.
+`#8887 <https://github.com/wazuh/wazuh/pull/8887>`_               Issue is fixed with api.log to avoid unhandled exceptions on API timeouts.
 ==============================================================    =============
 
 **Ruleset**
