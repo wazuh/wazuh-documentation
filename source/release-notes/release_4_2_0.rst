@@ -153,7 +153,8 @@ This release includes new features or enhancements.
 - `#7974 <https://github.com/wazuh/wazuh/pull/7974>`_ Wazuh adds performance improvements to analysisd when running on multi-core hosts.
 - `#8021 <https://github.com/wazuh/wazuh/pull/8021>`_ Agents now report to the manager when they stopped. That allows the manager to log an alert and immediately set their state to "disconnected".
 - `#7327 <https://github.com/wazuh/wazuh/pull/7327>`_ Wazuh building process is now independent of the installation directory. With this improvement, the embedded Python interpreter is now provided in a preinstalled, portable package, and the Wazuh resources are now accessed via a relative path to the installation directory.
-- `#8201 <https://github.com/wazuh/wazuh/pull/8201>`_ In the Security configuration assessment module, the error log message shown when the agent cannot connect to the SCA queue is now changed to a warning message to redefined its severity.
+- `#8201 <https://github.com/wazuh/wazuh/pull/8201>`_ In the Security configuration assessment module, the error log message shown when the agent cannot connect to the SCA queue is now changed to a warning message to redefine its severity.
+- `#8921 <https://github.com/wazuh/wazuh/pull/8921>`_ The agent now validates the Audit connection configuration when enabling whodata for FIM on Linux.
 - `#7175 <https://github.com/wazuh/wazuh/pull/7175>`_ The ``/etc/ossec-init.conf`` file no longer exists. 
 - `#7398 <https://github.com/wazuh/wazuh/issues/7398>`_ Unused files are removed from the repository, including TAP tests.
 
@@ -188,6 +189,10 @@ This release includes new features or enhancements.
 - `#7100 <https://github.com/wazuh/wazuh/pull/7100>`_ Wazuh now provides decoder support for UFW (Uncomplicated Firewall) and its log format. This improvement ensures the correct processing of Ubuntu default firewall logs. 
 - `#6867 <https://github.com/wazuh/wazuh/pull/6867>`_ The ruleset is updated and normalized to follow the Wazuh unified standard.
 - `#7316 <https://github.com/wazuh/wazuh/pull/7316>`_ CIS policy "Ensure XD/NX support is enabled" is restored for SCA.
+
+**External dependencies**
+
+- `#8886 <https://github.com/wazuh/wazuh/pull/8886>`_ Boto3, botocore, requests, s3transfer, and urllib3 Python dependencies are now upgraded to latest stable versions.
 
 
 Resolved issues
