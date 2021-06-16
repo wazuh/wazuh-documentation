@@ -2,15 +2,8 @@
 
 .. _active_response_use_cases:
 
-Active response use cases
-=========================
-
-.. meta::
-    :description:  Active responses perform various countermeasures to address active threats. Explore Wazuh Active Response use cases.
-
-Check the following Active Response use cases. 
-
-.. topic:: Contents
+Use cases
+=========
 
     .. toctree::
         :maxdepth: 1
