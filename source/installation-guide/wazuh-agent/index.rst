@@ -99,6 +99,8 @@ To install a Wazuh agent, select your operating system and follow the instructio
   </div>
 
 
+.. note:: Compatibility between the Wazuh agent and the Wazuh manager is guaranteed when the Wazuh manager version is later than or equal to that of the Wazuh agent.
+
 .. rst-class:: d-none
 
 .. toctree::
