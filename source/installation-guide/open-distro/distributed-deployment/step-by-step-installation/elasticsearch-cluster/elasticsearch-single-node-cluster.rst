@@ -10,9 +10,9 @@ Elasticsearch single-node cluster
 
 Open Distro for Elasticsearch is an open source distribution of Elasticsearch, a highly scalable full-text search engine. It offers advanced security, alerting, index management, deep performance analysis, and several other additional features.
 
-This document will explain how to install Elasticsearch in a single-node cluster.
+You can install Elasticsearch on a single-node cluster.
 
-.. note:: Root user privileges are necessary to run all the commands described below.
+.. note:: Root user privileges are necessary to run all the commands.
 
 Installing Elasticsearch
 ------------------------
@@ -20,7 +20,7 @@ Installing Elasticsearch
 Prerequisites
 ~~~~~~~~~~~~~
 
-Open Distro for Elasticsearch requires the Java Development Kit and other packages installation including ``wget``, ``curl``, and ``unzip`` that will be used in further steps:
+Java Development Kit is installed as it is required by Open Distro for Elasticsearch. To perform the following tasks, install ``wget``, ``curl``, and ``unzip`` packages:
 
 .. include:: ../../../../../_templates/installations/elastic/common/before_installation.rst
 
@@ -68,7 +68,7 @@ Elasticsearch configuration
 Elasticsearch roles and users
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In order to use the Wazuh Kibana plugin properly, it is necessary to add the extra roles and users:
+You need to add users and roles in order to use the Wazuh Kibana plugin properly.
 
 .. include:: ../../../../../_templates/installations/elastic/common/add_roles_and_users.rst
 
@@ -87,13 +87,13 @@ Certificates creation and deployment
 
     .. include:: ../../../../../_templates/installations/elastic/common/enable_elasticsearch.rst
 
-#. Run the Elasticsearch's ``securityadmin`` script to load the new certificates information and start the cluster. To run this command, the value ``<elasticsearch_IP>`` must be replaced by the Elasticsearch installation IP:
+#. Run the Elasticsearch ``securityadmin`` script to load the new certificates information and start the cluster. To run this command, the value ``<elasticsearch_IP>`` must be replaced by the Elasticsearch installation IP:
 
   .. code-block:: console
 
     # /usr/share/elasticsearch/plugins/opendistro_security/tools/securityadmin.sh -cd /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/ -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key -h <elasticsearch_IP>
 
-Run the following command to ensure that the installation has been successful:
+Run the following command to ensure that the installation is successful:
 
 .. code-block:: console
 
@@ -120,19 +120,20 @@ An example response should look as follows:
         "minimum_index_compatibility_version" : "6.0.0-beta1"
       },
       "tagline" : "You Know, for Search"
-    }
-  
+    }     
 
-.. note:: The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it with the following command ``/usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer``. Please be sure to restart the Elasticsearch service afterwards. 
 
-It is highly recommended to change Elasticsearch’s default passwords for the users found at the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. More information about this process can be found :ref:`here <change_elastic_pass>`. It is also recommended to customize the file ``/etc/elasticsearch/jvm.options`` in order to improve the performance of Elasticsearch. Learn more about this process in the :ref:`Elasticsearch tuning <elastic_tuning>` section.
 
-To uninstall Elasticsearch, visit the :ref:`uninstalling section <uninstall_elasticsearch>`.
+.. note:: The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it with the following command ``/usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer``. Make sure to restart the Elasticsearch service afterward. 
+
+It is highly recommended to change Elasticsearch default passwords for the users' found at the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. It is also recommended to customize the file ``/etc/elasticsearch/jvm.options`` in order to improve the performance of Elasticsearch. Learn more about these processes in the :ref:`Elasticsearch tuning <elastic_tuning>` section.
+
+To uninstall Elasticsearch, see the :ref:`Uninstalling <uninstall_elasticsearch>` section.
 
 Next steps
 ----------
 
-The next step is the installation of the Wazuh server, select the cluster mode:
+You can now install the Wazuh server. First, choose the cluster mode.
 
 - :ref:`Wazuh single-node cluster<wazuh_single_node_cluster>`
 - :ref:`Wazuh multi-node cluster<wazuh_multi_node_cluster>`
