@@ -8,7 +8,7 @@
 Installing Wazuh agents on your HP-UX systems
 =============================================
 
-Install a Wazuh agent on your HP-UX system. 
+The agent runs on the host you want to monitor and communicates with Wazuh manager, sending data in near real time through an encrypted and authenticated channel. The installation of a Wazuh agent on an HP-UX system uses deployment variables that facilitate the task of installing, registering, and configuring the agent. 
 
 #. Download the `HP-UX installer <https://packages.wazuh.com/|CURRENT_MAJOR|/hp-ux/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar>`_. 
 
