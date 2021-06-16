@@ -109,7 +109,7 @@ Highlights
 Breaking changes
 ----------------
 
-- `#7317 <https://github.com/wazuh/wazuh/pull/7317>`_ The Active Response capability now sends information to the active response executables via ``stdin`` instead of in-line arguments. Any custom active response script developed for previous versions of Wazuh needs to be adapted to accept the event information. Previous default scripts present in the ``active-response/bin`` directories are now replaced as part of the agent upgrade process. The Wazuh manager continues to send in-line arguments to Wazuh agents up to version 4.1.5. This improvement also includes new rules to match the new active response logs.
+- `#7317 <https://github.com/wazuh/wazuh/pull/7317>`_ With its Active Response capability, Wazuh now sends information to the  active response executables via ``stdin`` instead of in-line arguments. Any custom active response script developed for previous versions of Wazuh needs to be adapted to accept the event information. Previous default scripts present in the ``active-response/bin`` directories are now replaced as part of the agent upgrade process. The Wazuh manager continues to send in-line arguments to Wazuh agents up to version 4.1.5. This improvement also includes new rules to match the new active response logs.
  
 Wazuh core
 ----------
@@ -192,7 +192,7 @@ This release includes new features or enhancements.
 
 **External dependencies**
 
-- `#8886 <https://github.com/wazuh/wazuh/pull/8886>`_ Boto3, botocore, requests, s3transfer, and urllib3 Python dependencies are now upgraded to latest stable versions.
+- `#8886 <https://github.com/wazuh/wazuh/pull/8886>`_ Boto3, botocore, requests, s3transfer, and urllib3 Python dependencies are now upgraded to their latest stable versions.
 
 Resolved issues
 ^^^^^^^^^^^^^^^
@@ -240,12 +240,12 @@ Reference                                                                       
 `#7990 <https://github.com/wazuh/wazuh/pull/7990>`_                                                                  In FIM, false positives were triggered due to file ``inode`` collisions in the engine database. This issue is now fixed and FIM works properly when the ``inode`` of multiple files is changed.
 `#6932 <https://github.com/wazuh/wazuh/pull/6932>`_                                                                  Issue with error handling when wildcarded RHEL feeds are not found is now fixed. 
 `#7862 <https://github.com/wazuh/wazuh/pull/7862>`_                                                                  The ``equals`` comparator is fixed for OVAL feeds in Vulnerability detector. Now, equal versions in the OVAL scan are successfully compared.
-`#8098 <https://github.com/wazuh/wazuh/pull/8098>`_ `#8143 <https://github.com/wazuh/wazuh/pull/8143>`_              In FIM, an issue that caused a Windows agent to crash when synchronizing a Windows Registry value that starts with a colon ``:`` is now resolved. ``winagent`` no longer crash during synchronization of registries.
+`#8098 <https://github.com/wazuh/wazuh/pull/8098>`_ `#8143 <https://github.com/wazuh/wazuh/pull/8143>`_              In FIM, an issue that caused a Windows agent to crash when synchronizing a Windows Registry value that starts with a colon ``:`` is now resolved. ``winagent`` no longer crashes during the synchronization of registries.
 `#8151 <https://github.com/wazuh/wazuh/pull/8151>`_                                                                  A starving hazard issue in Wazuh DB is fixed and there are no longer risks of incoming requests being stalled during database commitment.
-`#8224 <https://github.com/wazuh/wazuh/pull/8224>`_                                                                  Issue with race condition in Remoted that, under certain circumstances, crashes when closing RID files is now fixed. Now, Remoted locks the keystore in writing mode when closing RIDs.
+`#8224 <https://github.com/wazuh/wazuh/pull/8224>`_                                                                  Issue with race condition in Remoted that, under certain circumstances, crashes when closing RID files is now fixed. Now, Remoted locks the KeyStore in writing mode when closing RIDs.
 `#8789 <https://github.com/wazuh/wazuh/pull/8789>`_                                                                  Descriptor leak issue in the agent when it failed to connect to Authd is now fixed.
 `#8828 <https://github.com/wazuh/wazuh/pull/8828>`_                                                                  Issue with a potential error when starting the manager due to a delay in the creation of Analysisd PID file is now fixed.
-`#8551 <https://github.com/wazuh/wazuh/pull/8551>`_                                                                  An invalid memory access hazard issue is fixed In Vulnerability Detector.
+`#8551 <https://github.com/wazuh/wazuh/pull/8551>`_                                                                  An invalid memory access hazard issue is fixed In Vulnerability detector.
 `#8571 <https://github.com/wazuh/wazuh/pull/8571>`_                                                                  When the agent reports a file with an empty ACE list, it no longer causes an error at the manager in the FIM decoder.
 `#8620 <https://github.com/wazuh/wazuh/pull/8620>`_                                                                  Error is prevented and the agent on macOS does not get corrupted after an operating system upgrade. 
 `#8357 <https://github.com/wazuh/wazuh/pull/8357>`_                                                                  An error in the manager that prevented its configuration to be checked after a change by the API when Active response is disabled is fixed.
