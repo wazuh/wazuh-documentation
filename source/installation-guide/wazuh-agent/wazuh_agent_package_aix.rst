@@ -7,8 +7,7 @@
 Deploying Wazuh agents on your AIX systems
 ==========================================
 
-Deploy a Wazuh agent on your AIX system. 
-
+The agent runs on the host you want to monitor and communicates with Wazuh manager, sending data in near real time through an encrypted and authenticated channel. The deployment of a Wazuh agent on an AIX system uses deployment variables that facilitate the task of deploying, logging, and configuring the agent.
 
 #. Download the `AIX installer <https://packages.wazuh.com/|CURRENT_MAJOR|/aix/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_AIX|.aix.ppc.rpm>`_. 
 
