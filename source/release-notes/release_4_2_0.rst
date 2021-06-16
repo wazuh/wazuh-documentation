@@ -243,6 +243,14 @@ Reference                                                                       
 `#8098 <https://github.com/wazuh/wazuh/pull/8098>`_ `#8143 <https://github.com/wazuh/wazuh/pull/8143>`_              In FIM, an issue that caused a Windows agent to crash when synchronizing a Windows Registry value that starts with a colon ``:`` is now resolved. ``winagent`` no longer crash during synchronization of registries.
 `#8151 <https://github.com/wazuh/wazuh/pull/8151>`_                                                                  A starving hazard issue in Wazuh DB is fixed and there are no longer risks of incoming requests being stalled during database commitment.
 `#8224 <https://github.com/wazuh/wazuh/pull/8224>`_                                                                  Issue with race condition in Remoted that, under certain circumstances, crashes when closing RID files is now fixed. Now, Remoted locks the keystore in writing mode when closing RIDs.
+`#8789 <https://github.com/wazuh/wazuh/pull/8789>`_                                                                  Descriptor leak issue in the agent when it failed to connect to Authd is now fixed.
+`#8828 <https://github.com/wazuh/wazuh/pull/8828>`_                                                                  Issue with a potential error when starting the manager due to a delay in the creation of Analysisd PID file is now fixed.
+`#8551 <https://github.com/wazuh/wazuh/pull/8551>`_                                                                  An invalid memory access hazard issue is fixed In Vulnerability Detector.
+`#8571 <https://github.com/wazuh/wazuh/pull/8571>`_                                                                  When the agent reports a file with an empty ACE list, it no longer causes an error at the manager in the FIM decoder.
+`#8620 <https://github.com/wazuh/wazuh/pull/8620>`_                                                                  Error is prevented and the agent on macOS does not get corrupted after an operating system upgrade. 
+`#8357 <https://github.com/wazuh/wazuh/pull/8357>`_                                                                  An error in the manager that prevented its configuration to be checked after a change by the API when Active response is disabled is fixed.
+`#8630 <https://github.com/wazuh/wazuh/pull/8630>`_                                                                  When removing an agent, the manager now correctly removes remote counters and agent group files.
+`#8905 <https://github.com/wazuh/wazuh/pull/8905>`_                                                                  Issue is fixed in the agent on Windows that might corrupt the FIM database when disabling the disk sync.
 =================================================================================================================    =============
 
 **API**
