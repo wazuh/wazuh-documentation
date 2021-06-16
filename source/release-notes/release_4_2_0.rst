@@ -194,7 +194,6 @@ This release includes new features or enhancements.
 
 - `#8886 <https://github.com/wazuh/wazuh/pull/8886>`_ Boto3, botocore, requests, s3transfer, and urllib3 Python dependencies are now upgraded to latest stable versions.
 
-
 Resolved issues
 ^^^^^^^^^^^^^^^
 
@@ -208,6 +207,8 @@ Reference                                                         Description
 `#6736 <https://github.com/wazuh/wazuh/pull/6736>`_               Memory usage is now optimized and improved when creating cluster messages.
 `#8142 <https://github.com/wazuh/wazuh/pull/8142>`_               Error when unpacking incomplete headers in cluster messages is now fixed. Now cluster communication works correctly and the process is completed successfully.
 `#8499 <https://github.com/wazuh/wazuh/pull/8499>`_               When iterating a file listed that is already deleted, the error message is now changed and shown as a debug message.
+`#8901 <https://github.com/wazuh/wazuh/pull/8901>`_               Issue with cluster timeout exceptions is now fixed.
+`#8872 <https://github.com/wazuh/wazuh/pull/8872>`_               Issue with KeyError when an error command is received in any cluster node is now fixed.
 ==============================================================    =============
 
 **Core**
