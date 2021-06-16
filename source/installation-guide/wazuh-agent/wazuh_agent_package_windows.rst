@@ -7,9 +7,9 @@
 Installing Wazuh agents on your Windows systems
 ===============================================
 
-Install, register and configure a Wazuh agent on your Windows system. 
+The agent runs on the host you want to monitor and communicates with Wazuh manager, sending data in near real time through an encrypted and authenticated channel. The installation of a Wazuh agent on a Windows system uses deployment variables that facilitate the task of installing, registering, and configuring the agent.
 
-.. note:: In order to perform this installation, administrator privileges are required.
+.. note:: To perform the installation, administrator privileges are required.
 
 #. Download the `Windows installer <https://packages.wazuh.com/|CURRENT_MAJOR|/windows/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi>`_. 
 
