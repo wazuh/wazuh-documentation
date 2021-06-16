@@ -330,7 +330,7 @@ Reference                                                         Description
 ==============================================================    =============
 
 
-Splunk Enterprise 8.2.1
+Splunk Enterprise 8.1.2
 ------------------------
 
 What's new
