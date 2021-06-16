@@ -99,13 +99,6 @@ To install a Wazuh agent, select your operating system and follow the instructio
   </div>
 
 
-
-Each operating system section describes how to deploy the agent using the deployment variables, which facilitates the task of deploying, logging, and configuring the agent in a single command. You can also check the complete guide of variables in the :ref:`deployment variables <deployment_variables>` section.
-
-If you are deploying Wazuh in a large environment, with a high number of servers or endpoints, keep in mind that this deployment might be easier using automation tools such as :ref:`Puppet <wazuh_puppet>`, `Chef <https://github.com/wazuh/wazuh-chef>`_, SCCM, or :ref:`Ansible <wazuh_ansible_guide>`.
-
-.. note:: Compatibility between the Wazuh agent and the Wazuh manager is guaranteed when the Wazuh manager version is later than or equal to that the Wazuh agent.
-
 .. rst-class:: d-none
 
 .. toctree::
