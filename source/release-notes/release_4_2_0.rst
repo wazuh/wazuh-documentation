@@ -260,7 +260,7 @@ Reference                                                         Description
 ==============================================================    =============
 `#7587 <https://github.com/wazuh/wazuh/pull/7587>`_               API messages when getting agent upgrade results are fixed and improved.
 `#7709 <https://github.com/wazuh/wazuh/pull/7709>`_               Issue with wrong user strings in API logs is fixed when receiving responses with status codes 308 or 404.
-`#7867 <https://github.com/wazuh/wazuh/pull/7867>`_               New variable added fixes API errors when ``cluster`` is ``disabled`` and ``node_type`` is ``worker``.
+`#7867 <https://github.com/wazuh/wazuh/pull/7867>`_               Newly added variable fixes API errors when ``cluster`` is ``disabled`` and ``node_type`` is ``worker``.
 `#7798 <https://github.com/wazuh/wazuh/pull/7798>`_               API integration test mapping script is now updated, fixing redundant paths and duplicated tests.
 `#8014 <https://github.com/wazuh/wazuh/pull/8014>`_               API integration test case ``test_rbac_white_all`` no longer fails and a new test case for the enable/disable ``run_as`` endpoint is added for improved consistency.
 `#8148 <https://github.com/wazuh/wazuh/pull/8148>`_               Issue with thread race condition when adding or deleting agents without ``authd`` is now fixed.
