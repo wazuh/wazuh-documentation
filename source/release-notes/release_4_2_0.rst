@@ -216,7 +216,7 @@ Reference                                                         Description
 =================================================================================================================    =============
 Reference                                                                                                            Description
 =================================================================================================================    =============
-`#6934 <https://github.com/wazuh/wazuh/pull/6934>`_                                                                  In FIM, setting ``scan_time`` to *12am* or *12pm* now works correctly. 
+`#6934 <https://github.com/wazuh/wazuh/pull/6934>`_                                                                  In FIM, setting ``scan_time`` to 12am or 12pm now works correctly. 
 `#6802 <https://github.com/wazuh/wazuh/pull/6802>`_                                                                  In FIM, reaching the file limit no longer creates wrong alerts for events triggered in a monitored folder. Now, a new SQLite query fetches the information of all the files in a specific order.
 `#7105 <https://github.com/wazuh/wazuh/pull/7105>`_                                                                  Issue in analysisd that reserved the static decoder field name ``command`` but was not evaluated is resolved. From now on, it is always treated as a dynamic decoder field.
 `#7073 <https://github.com/wazuh/wazuh/pull/7073>`_                                                                  The evaluation of fields in the ``description`` tag of roles now works correctly.
@@ -248,7 +248,7 @@ Reference                                                                       
 `#8551 <https://github.com/wazuh/wazuh/pull/8551>`_                                                                  An invalid memory access hazard issue is fixed In Vulnerability detector.
 `#8571 <https://github.com/wazuh/wazuh/pull/8571>`_                                                                  When the agent reports a file with an empty ACE list, it no longer causes an error at the manager in the FIM decoder.
 `#8620 <https://github.com/wazuh/wazuh/pull/8620>`_                                                                  Error is prevented and the agent on macOS does not get corrupted after an operating system upgrade. 
-`#8357 <https://github.com/wazuh/wazuh/pull/8357>`_                                                                  An error in the manager that prevented its configuration to be checked after a change by the API when Active response is disabled is fixed.
+`#8357 <https://github.com/wazuh/wazuh/pull/8357>`_                                                                  An error is fixed in the manager that prevented its configuration to be checked after a change by the API when Active response is disabled.
 `#8630 <https://github.com/wazuh/wazuh/pull/8630>`_                                                                  When removing an agent, the manager now correctly removes remote counters and agent group files.
 `#8905 <https://github.com/wazuh/wazuh/pull/8905>`_                                                                  Issue is fixed in the agent on Windows that might corrupt the FIM database when disabling the disk sync.
 =================================================================================================================    =============
