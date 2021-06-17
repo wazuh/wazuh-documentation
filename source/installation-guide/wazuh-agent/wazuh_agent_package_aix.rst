@@ -4,8 +4,8 @@
 
 .. _wazuh_agent_package_aix:
 
-Deploying Wazuh agents on your AIX systems
-==========================================
+Deploying Wazuh agents on AIX systems
+=====================================
 
 The agent runs on the host you want to monitor and communicates with the Wazuh manager, sending data in near real time through an encrypted and authenticated channel. The deployment of a Wazuh agent on an AIX system uses deployment variables that facilitate the task of deploying, logging, and configuring the agent.
 
