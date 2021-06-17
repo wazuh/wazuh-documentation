@@ -13,7 +13,7 @@ Highlights
 
 **Core**
 
-- `#3368 <https://github.com/wazuh/wazuh/issues/3368>`_, `#5652 <https://github.com/wazuh/wazuh/issues/5652>`_, `#7109 <https://github.com/wazuh/wazuh/pull/7109>`_  Logcollector improvements:
+- `#3368 <https://github.com/wazuh/wazuh/issues/3368>`_, `#5652 <https://github.com/wazuh/wazuh/issues/5652>`_, `#7109 <https://github.com/wazuh/wazuh/pull/7109>`_ Logcollector improvements:
 
        Logcollector is now enhanced with several new features. Wazuh adds logcollector support for bookmarks, which allows you to continue reading a log file from the last read line where the agent stopped, improving efficiency and productivity. The multi-line log support through regex lets you collect multi-line logs with a variable number of lines. Wazuh also generates a statistics file report during ``wazuh-logcollector`` lifetime. This means that, in addition to the alternative of accessing metrics via API queries, you now have the option to access this information from a file stored in an agent, according to a configurable time.
 
@@ -120,9 +120,9 @@ This release includes new features or enhancements.
 
 **Cluster**
 
-- `#8175 <https://github.com/wazuh/wazuh/pull/8175>`_  Improvements in cluster node integrity calculation make the process more efficient. Now, it calculates the MD5 of only the files that were modified since the last integrity check.
-- `#8182 <https://github.com/wazuh/wazuh/pull/8182>`_  The synchronization workflow of agent information between cluster nodes is optimized and now the synchronization is performed in a single task for each worker.
-- `#8002 <https://github.com/wazuh/wazuh/pull/8002>`_  Cluster logs are now changed to show more useful and essential information, improving clarity and readability.
+- `#8175 <https://github.com/wazuh/wazuh/pull/8175>`_ Improvements in cluster node integrity calculation make the process more efficient. Now, it calculates the MD5 of only the files that were modified since the last integrity check.
+- `#8182 <https://github.com/wazuh/wazuh/pull/8182>`_ The synchronization workflow of agent information between cluster nodes is optimized and now the synchronization is performed in a single task for each worker.
+- `#8002 <https://github.com/wazuh/wazuh/pull/8002>`_ Cluster logs are now changed to show more useful and essential information, improving clarity and readability.
 
 
 **Core**
@@ -224,7 +224,7 @@ Reference                                                                       
 `#7018 <https://github.com/wazuh/wazuh/pull/7018>`_                                                                  Path validation in FIM configuration is now fixed. Now, the process to validate and format a path from configuration is performed correctly.
 `#7018 <https://github.com/wazuh/wazuh/pull/7018>`_                                                                  Issue with “ignore” option in FIM where relative paths are not resolved is now fixed.
 `#7268 <https://github.com/wazuh/wazuh/pull/7268>`_                                                                  Issue in FIM that wrongly detected that the file limit was reached is now fixed and ``nodes_count`` database variable is checked correctly.
-`#7265 <https://github.com/wazuh/wazuh/pull/7265>`_                                                                  Alerts are now successfully generated in FIM when a domain user deletes a file.  
+`#7265 <https://github.com/wazuh/wazuh/pull/7265>`_                                                                  Alerts are now successfully generated in FIM when a domain user deletes a file. 
 `#7359 <https://github.com/wazuh/wazuh/pull/7359>`_                                                                  Windows agent compilation with GCC 10 is now performed successfully.
 `#7332 <https://github.com/wazuh/wazuh/pull/7332>`_                                                                  Errors in FIM when expanding environment variables are now fixed. 
 `#7476 <https://github.com/wazuh/wazuh/pull/7476>`_                                                                  Rule descriptions are now included in archives when the input event matches a rule, regardless of whether an alert was triggered or not.
@@ -263,7 +263,7 @@ Reference                                                         Description
 `#7867 <https://github.com/wazuh/wazuh/pull/7867>`_               New variable added fixes API errors when ``cluster`` is ``disabled`` and ``node_type`` is ``worker``.
 `#7798 <https://github.com/wazuh/wazuh/pull/7798>`_               API integration test mapping script is now updated, fixing redundant paths and duplicated tests.
 `#8014 <https://github.com/wazuh/wazuh/pull/8014>`_               API integration test case ``test_rbac_white_all`` no longer fails and a new test case for the enable/disable ``run_as`` endpoint is added for improved consistency.
-`#8148 <https://github.com/wazuh/wazuh/pull/8148>`_               Issue with thread race condition when adding or deleting agents without ``authd``  is now fixed.
+`#8148 <https://github.com/wazuh/wazuh/pull/8148>`_               Issue with thread race condition when adding or deleting agents without ``authd`` is now fixed.
 `#8496 <https://github.com/wazuh/wazuh/pull/8496>`_               CORS (cross-origin resource sharing) is now fixed in API configuration, allowing lists to be added to ``expose_headers`` and ``allow_headers``.
 `#8887 <https://github.com/wazuh/wazuh/pull/8887>`_               Issue is fixed with api.log to avoid unhandled exceptions on API timeouts.
 ==============================================================    =============
