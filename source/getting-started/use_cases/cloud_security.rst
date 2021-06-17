@@ -1,4 +1,6 @@
 .. Copyright (C) 2021 Wazuh, Inc.
+.. meta::
+  :description: The Wazuh agent provides a module to monitor and secure your AWS cloud infrastructure, as well as Microsoft Azure and Google Cloud Platform
 
 .. _cloud_security:
 
@@ -96,9 +98,9 @@ Example of an alert when an AWS security group is deleted:
 
 Example of AWS dashboard:
 
-.. image:: ../../images/getting_started/use_case_cloud.png
+.. thumbnail:: ../../images/getting_started/use_case_cloud.png
    :align: center
-   :width: 100%
+   :wrap_image: No
 
 More information on how Wazuh monitors AWS can be found at our :ref:`documentation <amazon>`.
 

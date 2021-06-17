@@ -211,7 +211,7 @@ An example response should look as follows:
                   TLS version: TLSv1.3
                   dial up... OK
                 talk to server... OK
-                version: 7.10.0
+                version: 7.10.2
 
 To uninstall Wazuh and Filebeat, visit the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_open_distro>`.
 

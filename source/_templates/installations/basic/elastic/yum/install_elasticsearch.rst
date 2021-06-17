@@ -2,6 +2,6 @@
 
 .. code-block:: console
 
-  # yum install elasticsearch-7.10.2
+  # yum install elasticsearch-7.11.2
 
 .. End of include file

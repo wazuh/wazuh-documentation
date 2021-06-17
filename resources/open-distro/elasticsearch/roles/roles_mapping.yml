@@ -14,6 +14,7 @@ all_access:
   reserved: false
   backend_roles:
   - "admin"
+  - "wazuh"
   description: "Maps admin to all_access"
 
 own_index:

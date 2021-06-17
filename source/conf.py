@@ -20,6 +20,7 @@ from requests.utils import requote_uri
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #sys.path.insert(0, os.path.abspath('.'))
+sys.path.append(os.path.abspath("_exts"))
 
 # -- Project information -----------------------------------------------------
 
@@ -48,7 +49,7 @@ needs_sphinx = '1.8'
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.extlinks', # Sphinx built-in extension
-    'sphinxcontrib.images',
+    'wazuh-doc-images',
     'sphinx_tabs.tabs',
 ]
 
@@ -344,8 +345,9 @@ epub_exclude_files = ['search.html', 'not_found.html']
 
 # -- Images extension -----------------------------------------------------
 
-images_config = {
-    'default_group': 'default'
+wazuh_images_config = {
+  'override_image_directive': 'thumbnail',
+  'show_caption': True
 }
 
 # -- Options for intersphinx extension ---------------------------------------
@@ -433,21 +435,24 @@ def customReplacements(app, docname, source):
 custom_replacements = {
     "|CURRENT_MAJOR|" : "4.x",
     "|WAZUH_LATEST|" : "4.1.5",
-    "|WAZUH_LATEST_MINOR|": "4.1",
+    "|WAZUH_GCC_CHANGE|" : "4.1.4",
+    "|WAZUH_PREGCC_CHANGE|" : "4.1.3",
+    "|WAZUH_LATEST_MINOR|" : "4.1",
+    "|WAZUH_PACKAGES_BRANCH|" : "4.1",
     "|WAZUH_LATEST_ANSIBLE|" : "4.1.5",
-    "|WAZUH_LATEST_KUBERNETES|" : "4.1.1",
-    "|WAZUH_LATEST_PUPPET|" : "4.0.4",
+    "|WAZUH_LATEST_KUBERNETES|" : "4.1.5",
+    "|WAZUH_LATEST_PUPPET|" : "4.1.5",
     "|WAZUH_LATEST_OVA|" : "4.1.5",
     "|WAZUH_LATEST_DOCKER|" : "4.1.5",
-    "|OPEN_DISTRO_LATEST|" : "1.12.0",
-    "|ELASTICSEARCH_LATEST|" : "7.10.0",
-    "|ELASTICSEARCH_LATEST_OVA|" : "7.10.0",
-    "|ELASTICSEARCH_LATEST_ANSIBLE|" : "7.10.0",
+    "|OPEN_DISTRO_LATEST|" : "1.13.2",
+    "|ELASTICSEARCH_LATEST|" : "7.10.2",
+    "|ELASTICSEARCH_LATEST_OVA|" : "7.10.2",
+    "|ELASTICSEARCH_LATEST_ANSIBLE|" : "7.10.2",
     "|ELASTICSEARCH_LATEST_KUBERNETES|" : "7.10.2",
-    "|ELASTICSEARCH_LATEST_PUPPET|" : "7.8.0",
+    "|ELASTICSEARCH_LATEST_PUPPET|" : "7.10.2",
     "|ELASTICSEARCH_LATEST_DOCKER|" : "7.10.2",
-    "|OPENDISTRO_LATEST_DOCKER|" : "1.12.0",
-    "|OPENDISTRO_LATEST_KUBERNETES|" : "1.12.0",
+    "|OPENDISTRO_LATEST_DOCKER|" : "1.13.2",
+    "|OPENDISTRO_LATEST_KUBERNETES|" : "1.13.2",
     "|DOCKER_COMPOSE_VERSION|" : "1.28.3",
     "|SPLUNK_LATEST|" : "8.1.2",
     "|WAZUH_SPLUNK_LATEST|" : "4.1.5",
@@ -487,11 +492,11 @@ custom_replacements = {
     "|DEB_MANAGER|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-manager/wazuh-manager",
     "|DEB_API|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-api/wazuh-api",
     # Variables for Elastic's Elasticsearch
-    "|ELASTICSEARCH_ELK_LATEST|" : "7.10.2",
-    "|ELASTICSEARCH_ELK_LATEST_ANSIBLE|" : "7.10.0",
-    "|ELASTICSEARCH_ELK_LATEST_KUBERNETES|" : "7.8.0",
-    "|ELASTICSEARCH_ELK_LATEST_PUPPET|" : "7.8.0",
-    "|ELASTICSEARCH_ELK_LATEST_DOCKER|" : "7.10.0",
+    "|ELASTICSEARCH_ELK_LATEST|" : "7.11.2",
+    "|ELASTICSEARCH_ELK_LATEST_ANSIBLE|" : "7.10.2",
+    "|ELASTICSEARCH_ELK_LATEST_KUBERNETES|" : "7.10.2",
+    "|ELASTICSEARCH_ELK_LATEST_PUPPET|" : "7.10.2",
+    "|ELASTICSEARCH_ELK_LATEST_DOCKER|" : "7.10.2",
 }
 
 # -- Setup -------------------------------------------------------------------

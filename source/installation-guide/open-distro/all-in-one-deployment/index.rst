@@ -1,4 +1,6 @@
 .. Copyright (C) 2021 Wazuh, Inc.
+.. meta::
+  :description: Looking to install and configure the Wazuh server and Elastic Stack on the same host? Learn more about the all-in-one deployment.
 
 .. _all_in_one_index:
 

@@ -127,7 +127,7 @@ To check that the installation was made successfully, run the following command 
 
 .. code-block:: console
   
-  # curl -XGET https://localhost:9200 -uelastic:<elastic_password> -k
+  # curl -XGET https://localhost:9200 -u elastic:<elastic_password> -k
 
 This command should have an output like this:
 
@@ -137,13 +137,13 @@ This command should have an output like this:
   {
     "name" : "elasticsearch",
     "cluster_name" : "elasticsearch",
-    "cluster_uuid" : "LTTJx4wGTmONK4pkD0IclA",
+    "cluster_uuid" : "TLGcuHLRTL6PAyIRlxjtLg",
     "version" : {
-    "number" : "7.10.0",
+      "number" : "7.11.2",
       "build_flavor" : "default",
       "build_type" : "rpm",
-      "build_hash" : "51e9d6f22758d0374a0f3f5c6e8f3a7997850f96",
-      "build_date" : "2020-11-09T21:30:33.964949Z",
+      "build_hash" : "3e5a16cfec50876d20ea77b075070932c6464c7d",
+      "build_date" : "2021-03-06T05:54:38.141101Z",
       "build_snapshot" : false,
       "lucene_version" : "8.7.0",
       "minimum_wire_compatibility_version" : "6.8.0",
@@ -151,6 +151,7 @@ This command should have an output like this:
     },
     "tagline" : "You Know, for Search"
   }
+
 
 
 
@@ -322,7 +323,7 @@ An example response should look as follows:
       TLS version: TLSv1.3
       dial up... OK
     talk to server... OK
-    version: 7.10.0
+    version: 7.11.2
    
 
 
@@ -374,7 +375,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
     .. code-block:: console
 
         # cd /usr/share/kibana
-        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.1.5_7.10.2-1.zip
+        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.1.5_7.11.2-1.zip
 
 #. Link Kibana's socket to privileged port 443:
 
@@ -432,4 +433,4 @@ To uninstall all the components of the all in one installation, visit the :ref:`
 Next steps
 ----------
 
-Once the Wazuh environment is ready, a Wazuh agent can be installed in every endpoint to be monitored. The Wazuh agent installation guide is available for most operating systems and can be found :ref:`here<installation_agents>`.
+Once the Wazuh environment is ready, a Wazuh agent can be installed on every endpoint to be monitored. The Wazuh agent installation guide is available for most operating systems and can be found :ref:`here<installation_agents>`.

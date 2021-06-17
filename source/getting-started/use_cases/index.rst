@@ -1,4 +1,6 @@
 .. Copyright (C) 2019 Wazuh, Inc.
+.. meta::
+  :description: Explore some practical examples of the most common use cases of the Wazuh solution in this section of our documentation. 
 
 .. _use_cases:
 
