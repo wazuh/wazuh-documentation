@@ -260,7 +260,7 @@ The main IoCs to look for in this component are the IP and files that it copies 
 Rootkit
 ^^^^^^^
 
-User-space based rootkit enforced via the LD_PRELOAD Linux mechanism, and delivered as an ET_DYN stripped ELF binary. It tries to hide the trojan part of the malware by cloaking artifacts and TCP connections.
+User-space-based rootkit enforced via the LD_PRELOAD Linux mechanism and delivered as an ET_DYN stripped ELF binary. It tries to hide the trojan part of the malware by cloaking artifacts and TCP connections.
 
 The following YARA rule detects its signature by using hexadecimal strings:
 
