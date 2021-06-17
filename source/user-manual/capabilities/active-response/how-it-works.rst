@@ -12,7 +12,7 @@ How it works
 When is an active response triggered?
 -------------------------------------
 
-An **active response** is a script that is configured to execute when a specific alert, alert level or rule group has been triggered.  Active responses are either stateful or stateless responses. 
+An **active response** is a script that is configured to execute when a specific alert, alert level, or rule group has been triggered. Active responses are either stateful or stateless responses. 
 
 - ``Stateful``. Are configured to undo the action after a specified period of time. 
 
