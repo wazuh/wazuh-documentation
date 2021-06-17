@@ -136,14 +136,14 @@ This release includes new features or enhancements.
 - `#7408 <https://github.com/wazuh/wazuh/pull/7408>`_ Agent IP detection capabilities are improved and agents running on Solaris now send their IP to the manager.
 - `#7444 <https://github.com/wazuh/wazuh/pull/7444>`_ New ``ip_update_interval`` option is added to set how often the agent refreshes its IP address.
 - `#7661 <https://github.com/wazuh/wazuh/issues/7661>`_ New support is added for testing location information in Wazuh logtest. 
-- `#7731 <https://github.com/wazuh/wazuh/pull/7731>`_ Vulnerability detection capabilities are now improved by adding new vulnerability detector reports to the Wazuh DB so you can know which CVE affect an agent.
+- `#7731 <https://github.com/wazuh/wazuh/pull/7731>`_ Vulnerability detection capabilities are now improved by adding new vulnerability detector reports to the Wazuh database so you can know which CVE affect an agent.
 - `#8755 <https://github.com/wazuh/wazuh/pull/8755>`_ Newly added option allows you to enable or disable listening to Authd TSL port.
 - `#6912 <https://github.com/wazuh/wazuh/pull/6912>`_ Wazuh daemons are now renamed to follow the Wazuh unified standard. 
 - `#6903 <https://github.com/wazuh/wazuh/pull/6903>`_ Wazuh CLIs and related tools are now renamed to follow Wazuh unified standard.
 - `#6920 <https://github.com/wazuh/wazuh/pull/6920>`_ Wazuh internal directories are now renamed to follow Wazuh unified standard. 
 - `#6759 <https://github.com/wazuh/wazuh/pull/6759>`_ Wazuh improvement prevents a condition in FIM from possibly causing a memory error.
 - `#6828 <https://github.com/wazuh/wazuh/pull/6828>`_ FIM now switches from audit in immutable mode to real-time mode for directories where who-data is not available. 
-- `#7317 <https://github.com/wazuh/wazuh/pull/7317>`_ Active Response protocol changed to receive messages in JSON format that now include the full alert.
+- `#7317 <https://github.com/wazuh/wazuh/pull/7317>`_ Active Response protocol changed to receive messages in JSON format that include the full alert.
 - `#7264 <https://github.com/wazuh/wazuh/pull/7264>`_ References in logs are now changed to include Wazuh product name. 
 - `#7541 <https://github.com/wazuh/wazuh/pull/7541>`_ Remoted now supports both TCP and UDP protocols simultaneously.
 - `#7595 <https://github.com/wazuh/wazuh/pull/7595>`_ Unit tests for the ``os_net`` library are now improved in functionality and consistency.
@@ -151,7 +151,7 @@ This release includes new features or enhancements.
 - `#7797 <https://github.com/wazuh/wazuh/pull/7797>`_ Compilation from sources now downloads the prebuilt external dependencies. This improvement helps to consume fewer resources and eliminates overhead. 
 - `#7807 <https://github.com/wazuh/wazuh/pull/7807>`_ The old implementation of logtest is restored and renamed as ``wazuh-logtest-legacy``, improving functionality.
 - `#7974 <https://github.com/wazuh/wazuh/pull/7974>`_ Wazuh adds performance improvements to analysisd when running on multi-core hosts.
-- `#8021 <https://github.com/wazuh/wazuh/pull/8021>`_ Agents now report to the manager when they stopped. That allows the manager to log an alert and immediately set their state to "disconnected".
+- `#8021 <https://github.com/wazuh/wazuh/pull/8021>`_ Agents now report to the manager when they stopped. This allows the manager to log an alert and immediately set their state to "disconnected".
 - `#7327 <https://github.com/wazuh/wazuh/pull/7327>`_ Wazuh building process is now independent of the installation directory. With this improvement, the embedded Python interpreter is now provided in a preinstalled, portable package, and the Wazuh resources are now accessed via a relative path to the installation directory.
 - `#8201 <https://github.com/wazuh/wazuh/pull/8201>`_ In the Security configuration assessment module, the error log message shown when the agent cannot connect to the SCA queue is now changed to a warning message to redefine its severity.
 - `#8921 <https://github.com/wazuh/wazuh/pull/8921>`_ The agent now validates the Audit connection configuration when enabling whodata for FIM on Linux.
@@ -163,11 +163,11 @@ This release includes new features or enhancements.
   
 - `#7200 <https://github.com/wazuh/wazuh/pull/7200>`_ Wazuh adds a new endpoint to get agent statistics from different components. 
 - `#7588 <https://github.com/wazuh/wazuh/pull/7588>`_ Wazuh adds a new endpoint to modify the user’s ``allow_run_as`` flag, allowing you to enable or disable the parameter.
-- `#7647 <https://github.com/wazuh/wazuh/pull/7647>`_ Wazuh adds a new endpoint to get CVE data on affected agents. With this new endpoint, you can query the vulnerability data of any agent.
+- `#7647 <https://github.com/wazuh/wazuh/pull/7647>`_ Wazuh adds a new endpoint to get CVE data on affected agents. You can now query the vulnerability data of any agent.
 - `#7803 <https://github.com/wazuh/wazuh/pull/7803>`_ A new API configuration validator is now added to improve validation checking processes.
 - `#8115 <https://github.com/wazuh/wazuh/pull/8115>`_ Wazuh adds the capability that allows you to disable the ``max_request_per_minute`` API configuration option by setting its value to ``0``.
 - `#6904 <https://github.com/wazuh/wazuh/issues/6904>`_ Ruleset versions for ``GET /cluster/{node_id}/info`` and ``GET /manager/info`` are deprecated and removed.
-- `#6909 <https://github.com/wazuh/wazuh/pull/6909>`_ ``POST /groups`` endpoint is now changed to specify the group name in a JSON body instead of in a query parameter. 
+- `#6909 <https://github.com/wazuh/wazuh/pull/6909>`_ ``POST /groups`` endpoint is now changed to specify the group name in a JSON body instead of a query parameter. 
 - `#7312 <https://github.com/wazuh/wazuh/pull/7312>`_ ``PUT /active-response`` endpoint function is now changed to create messages with new JSON format. 
 - `#6366 <https://github.com/wazuh/wazuh/issues/6366>`_ The ``DELETE/agents`` query now integrates new parameters that allow you to easily remove agents that belong to a group. With this improvement, the ``older_than`` field is also removed from the response.
 - `#7909 <https://github.com/wazuh/wazuh/pull/7909>`_ Login security controller is improved to avoid errors in Restful API reference links. 
@@ -241,7 +241,7 @@ Reference                                                                       
 `#6932 <https://github.com/wazuh/wazuh/pull/6932>`_                                                                  Issue with error handling when wildcarded RHEL feeds are not found is now fixed. 
 `#7862 <https://github.com/wazuh/wazuh/pull/7862>`_                                                                  The ``equals`` comparator is fixed for OVAL feeds in Vulnerability detector. Now, equal versions in the OVAL scan are successfully compared.
 `#8098 <https://github.com/wazuh/wazuh/pull/8098>`_ `#8143 <https://github.com/wazuh/wazuh/pull/8143>`_              In FIM, an issue that caused a Windows agent to crash when synchronizing a Windows Registry value that starts with a colon ``:`` is now resolved. ``winagent`` no longer crashes during the synchronization of registries.
-`#8151 <https://github.com/wazuh/wazuh/pull/8151>`_                                                                  A starving hazard issue in Wazuh DB is fixed and there are no longer risks of incoming requests being stalled during database commitment.
+`#8151 <https://github.com/wazuh/wazuh/pull/8151>`_                                                                  A starving hazard issue in Wazuh database is fixed and there are no longer risks of incoming requests being stalled during database commitment.
 `#8224 <https://github.com/wazuh/wazuh/pull/8224>`_                                                                  Issue with race condition in Remoted that, under certain circumstances, crashes when closing RID files is now fixed. Now, Remoted locks the KeyStore in writing mode when closing RIDs.
 `#8789 <https://github.com/wazuh/wazuh/pull/8789>`_                                                                  Descriptor leak issue in the agent when it failed to connect to Authd is now fixed.
 `#8828 <https://github.com/wazuh/wazuh/pull/8828>`_                                                                  Issue with a potential error when starting the manager due to a delay in the creation of Analysisd PID file is now fixed.
