@@ -45,7 +45,7 @@ Options
 +----------------------------------------+---------------------------------+
 | `interval`_                            | A positive number + suffix      |
 +----------------------------------------+---------------------------------+
-| `curl_max_size`_                       | A positive number               |
+| `curl_max_size`_                       | A positive number + suffix      |
 +----------------------------------------+---------------------------------+
 | `api_auth`_                            | N/A                             |
 +----------------------------------------+---------------------------------+
@@ -100,13 +100,13 @@ Interval between Wazuh wodle executions.
 curl_max_size
 ^^^^^^^^^^^^^
 
-Specifies the maximum size in KB allowed for the Office365 API response.
+Specifies the maximum size allowed for the Office365 API response.
 
-+--------------------+----------------------+
-| **Default value**  | 1024                 |
-+--------------------+----------------------+
-| **Allowed values** | Any positive integer |
-+--------------------+----------------------+
++--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Default value**  | 1M                                                                                                                                                           |
++--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Allowed values** | A positive number that should contain a suffix character indicating a size unit, such as b/B (bytes), k/K (kilobytes), m/M (megabytes), and g/G (gigabytes). |
++--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 api_auth
 --------
@@ -216,7 +216,7 @@ Example of configuration
     <office365>
         <enabled>yes</enabled>
         <interval>10m</interval>
-        <curl_max_size>1000</curl_max_size>
+        <curl_max_size>1M</curl_max_size>
         <only_future_events>yes</only_future_events>
         <api_auth>
             <tenant_id>your_tenant_id</tenant_id>
@@ -237,7 +237,7 @@ Example of multiple tenants
     <office365>
         <enabled>yes</enabled>
         <interval>10m</interval>
-        <curl_max_size>1000</curl_max_size>
+        <curl_max_size>1M</curl_max_size>
         <only_future_events>yes</only_future_events>
         <api_auth>
             <tenant_id>your_tenant_id</tenant_id>

@@ -49,7 +49,7 @@ Options
 +----------------------------------------+----------------------------------------------+
 | `time_delay`_                          | A positive number + suffix                   |
 +----------------------------------------+----------------------------------------------+
-| `curl_max_size`_                       | A positive number                            |
+| `curl_max_size`_                       | A positive number + suffix                   |
 +----------------------------------------+----------------------------------------------+
 | `api_auth`_                            | N/A                                          |
 +----------------------------------------+----------------------------------------------+
@@ -122,13 +122,13 @@ Each scan will monitor until that delay backwards, by default it is 1 second.
 curl_max_size
 ^^^^^^^^^^^^^
 
-Specifies the maximum size in KB allowed for the GitHub API response.
+Specifies the maximum size allowed for the GitHub API response.
 
-+--------------------+----------------------+
-| **Default value**  | 1024                 |
-+--------------------+----------------------+
-| **Allowed values** | Any positive integer |
-+--------------------+----------------------+
++--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Default value**  | 1M                                                                                                                                                           |
++--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Allowed values** | A positive number that should contain a suffix character indicating a size unit, such as b/B (bytes), k/K (kilobytes), m/M (megabytes), and g/G (gigabytes). |
++--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 api_auth
 --------
@@ -210,7 +210,7 @@ Example of configuration
         <run_on_start>yes</run_on_start>
         <interval>10m</interval>
         <time_delay>1s</time_delay>
-        <curl_max_size>1000</curl_max_size>
+        <curl_max_size>1M</curl_max_size>
         <only_future_events>yes</only_future_events>
         <api_auth>
             <org_name>dummy</org_name>
@@ -231,7 +231,7 @@ Example of multiple organizations
         <run_on_start>yes</run_on_start>
         <interval>1h</interval>
         <time_delay>10s</time_delay>
-        <curl_max_size>1000</curl_max_size>
+        <curl_max_size>1M</curl_max_size>
         <only_future_events>no</only_future_events>
         <api_auth>
             <org_name>dummy1</org_name>
