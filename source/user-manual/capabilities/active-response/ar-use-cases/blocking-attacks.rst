@@ -171,6 +171,6 @@ We set up a blocking time of 30 minutes for our active response, but in case you
     <repeated_offenders>60,120,180</repeated_offenders>
   </active-response>
 
-The first time that the active response is triggered, it will block the IP for 30 minutes, the second time for 60 minutes, the third time for 120 minutes and finally the fourth time for 180 minutes.
+The first time that the active response is triggered, it will block the IP for 30 minutes, the second time for 60 minutes, the third time for 120 minutes, and finally the fourth time for 180 minutes.
 
 Thanks to active response you can perform actions responding to several scenarios and restricting malicious activities and blocking attacks. Be aware any automated response has an implicit risk, so define your responses carefully.
