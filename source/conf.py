@@ -454,7 +454,7 @@ custom_replacements = {
     "|OPENDISTRO_LATEST_DOCKER|" : "1.13.2",
     "|OPENDISTRO_LATEST_KUBERNETES|" : "1.13.2",
     "|DOCKER_COMPOSE_VERSION|" : "1.28.3",
-    "|SPLUNK_LATEST|" : "8.1.2",
+    "|SPLUNK_LATEST|" : "8.1.3",
     "|WAZUH_SPLUNK_LATEST|" : "4.1.5",
     "|ELASTIC_6_LATEST|" : "6.8.8",
     "|WAZUH_REVISION_YUM_AGENT_I386|" : "1",
