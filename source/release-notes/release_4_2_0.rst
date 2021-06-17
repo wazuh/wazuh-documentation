@@ -313,14 +313,14 @@ This release resolves known issues.
 Reference                                                         Description
 ==============================================================    =============
 `#3088 <https://github.com/wazuh/wazuh-kibana-app/pull/3088>`_    Only authorized agents are shown in the Agents stats and Visualizations dashboard.
-`#3095 <https://github.com/wazuh/wazuh-kibana-app/pull/3095>`_    ``Pending`` status option for agents is now included on the Agents overview page.
-`#3097 <https://github.com/wazuh/wazuh-kibana-app/pull/3097>`_    Index patter setting is now applied when choosing from existing patterns.
+`#3095 <https://github.com/wazuh/wazuh-kibana-app/pull/3095>`_    *Pending* status option for agents is now included on the Agents overview page.
+`#3097 <https://github.com/wazuh/wazuh-kibana-app/pull/3097>`_    Index pattern setting is now applied when choosing from existing patterns.
 `#3108 <https://github.com/wazuh/wazuh-kibana-app/pull/3108>`_    Issue with space character missing on the deployment command when UDP is configured is now fixed. 
 `#3110 <https://github.com/wazuh/wazuh-kibana-app/pull/3110>`_    When a node is selected in the **Analysis Engine** section of the Statistics page, you can now correctly see the statistics of the selected node.
 `#3114 <https://github.com/wazuh/wazuh-kibana-app/pull/3114>`_    When selecting a MITRE technique in the MITRE ATTACK module, the changed date filter of the flyout window no longer modifies the main date filter as well.
 `#3118 <https://github.com/wazuh/wazuh-kibana-app/pull/3118>`_    Issue with the name of the TCP sessions visualization is now fixed and the average metric is now changed to total TCP sessions.
-`#3120 <https://github.com/wazuh/wazuh-kibana-app/pull/3120>`_    Only authorized agents are now shown on the Events and Security alerts tables. 
-`#3122 <https://github.com/wazuh/wazuh-kibana-app/pull/3122>`_    In the Agents module, ``Last keep alive`` data is now displayed correctly within the panel.
+`#3120 <https://github.com/wazuh/wazuh-kibana-app/pull/3120>`_    Only authorized agents are correctly shown on the Events and Security alerts tables. 
+`#3122 <https://github.com/wazuh/wazuh-kibana-app/pull/3122>`_    In the Agents module, *Last keep alive* data is now displayed correctly within the panel.
 `#3128 <https://github.com/wazuh/wazuh-kibana-app/pull/3128>`_    Wazuh Kibana plugin no longer redirects to the Settings page instead of the Overview page after a health check.
 `#3144 <https://github.com/wazuh/wazuh-kibana-app/pull/3144>`_    Issue with the Wazuh logo path in the Kibana menu when ``server.basePath`` setting is used is now fixed.
 `#3152 <https://github.com/wazuh/wazuh-kibana-app/pull/3152>`_    Issue with deprecated endpoint for creating agent groups is now fixed.
