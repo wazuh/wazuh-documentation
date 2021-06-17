@@ -43,7 +43,7 @@ Add the Wazuh repository to download the official packages.
 Deploy a Wazuh agent
 --------------------
 
-#. Select your package manager below, edit the ``WAZUH_MANAGER`` variable to contain your Wazuh manager IP address or hostname, and proceed to deploy the agent to your system.   
+#. To deploy the Wazuh agent to your system, select your package manager and edit the ``WAZUH_MANAGER`` variable to contain your Wazuh manager IP address or hostname.   
 
           
       .. tabs::
@@ -70,48 +70,49 @@ Deploy a Wazuh agent
       
     
     
-      For additional deployment options, like agent name, agent group, and registration password, see :ref:`deployment variables <deployment_variables_linux>` section.   
-        
-        
+    For additional deployment options, like agent name, agent group, and registration password, see the :ref:`deployment variables <deployment_variables_linux>` section.   
+         
 
-#. Enable and start the service:
+#. Enable and start the Wazuh agent service.
 
   .. include:: ../../_templates/installations/wazuh/common/enable_wazuh_agent_service.rst
 
-**(Optional)** Disable Wazuh updates:
+The deployment process is complete and the Wazuh agent is now sucessfully running on your Linux system. 
 
-The version of the Wazuh manager is recommended to be greater than or equal to that of the Wazuh agents. Therefore, we recommend disabling the Wazuh repository to prevent accidental upgrades. To do so, use the following command:
+- **Recommended action** -  Disable Wazuh updates
 
-    .. tabs::
+  Compatibility between the Wazuh agent and the Wazuh manager is guaranteed when the Wazuh manager version is later than or equal to that of the Wazuh agent. Therefore, we recommend disabling the Wazuh repository to prevent accidental upgrades. To do so, use the following command:
 
-
-      .. group-tab:: Yum
-
-
-        .. include:: ../../_templates/installations/wazuh/yum/disabling_repository.rst
+      .. tabs::
 
 
+        .. group-tab:: Yum
 
-      .. group-tab:: APT
 
-
-        .. include:: ../../_templates/installations/wazuh/deb/disabling_repository.rst
+          .. include:: ../../_templates/installations/wazuh/yum/disabling_repository.rst
 
 
 
-      .. group-tab:: ZYpp
-
-        .. include:: ../../_templates/installations/wazuh/zypp/disabling_repository.rst
+        .. group-tab:: APT
 
 
+          .. include:: ../../_templates/installations/wazuh/deb/disabling_repository.rst
 
-Visit our :ref:`packages list <packages>` section to download the Wazuh agent package directly or to check the compatible versions. 
+
+
+        .. group-tab:: ZYpp
+
+          .. include:: ../../_templates/installations/wazuh/zypp/disabling_repository.rst
+
+
+
+If you want to download the Wazuh agent package directly or check the compatible versions, see the :ref:`packages list <packages>` section . 
 
 
 Uninstall
 ---------
 
-To uninstall the agent:
+To uninstall the agent, select your package manager and run the command. 
 
 .. tabs::
 
