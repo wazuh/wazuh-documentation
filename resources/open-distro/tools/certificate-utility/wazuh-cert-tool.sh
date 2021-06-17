@@ -34,20 +34,20 @@ readFile() {
 
     IFS=$'\r\n' GLOBIGNORE='*' command eval  'INSTANCES=($(cat ~/instances.yml))'
     for i in "${!INSTANCES[@]}"; do
-        if [[ "${INSTANCES[$i]}" == "${ELASTICINSTANCES}" ]]; then
-            ELASTICLIMITT=${i}
-        fi
-            if [[ "${INSTANCES[$i]}" == "${FILEBEATINSTANCES}" ]]; then
-            ELASTICLIMIB=${i}
-        fi
-
+    if [[ "${INSTANCES[$i]}" == "${ELASTICINSTANCES}" ]]; then
+        ELASTICLIMITT=${i}
+    fi
         if [[ "${INSTANCES[$i]}" == "${FILEBEATINSTANCES}" ]]; then
-            FILEBEATLIMITT=${i}
-        fi
-        
-        if [[ "${INSTANCES[$i]}" == "${KIBANAINSTANCES}" ]]; then
-            FILEBEATLIMIB=${i}
-        fi  
+        ELASTICLIMIB=${i}
+    fi
+
+    if [[ "${INSTANCES[$i]}" == "${FILEBEATINSTANCES}" ]]; then
+        FILEBEATLIMITT=${i}
+    fi
+    
+    if [[ "${INSTANCES[$i]}" == "${KIBANAINSTANCES}" ]]; then
+        FILEBEATLIMIB=${i}
+    fi  
     done
 
     ## Read Elasticsearch nodes
