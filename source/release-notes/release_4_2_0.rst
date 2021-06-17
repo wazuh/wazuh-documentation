@@ -17,13 +17,13 @@ Highlights
 
        Logcollector is now enhanced with several new features. Wazuh adds logcollector support for bookmarks, which allows you to continue reading a log file from the last read line where the agent stopped, improving efficiency and productivity. The multi-line log support through regex lets you collect multi-line logs with a variable number of lines. Wazuh also generates a statistics file report during ``wazuh-logcollector`` lifetime. This means that, in addition to the alternative of accessing metrics via API queries, you now have the option to access this information from a file stored in an agent, according to a configurable time.
 
-- `#7731 <https://github.com/wazuh/wazuh/pull/7731>`_ Visibility improvements on agent’s CVE inventory report:
+- `#7731 <https://github.com/wazuh/wazuh/pull/7731>`_ Visibility improvements on agent CVE inventory report:
 
-      Wazuh now generates CVE inventory reports that provide you with insight into vulnerabilities that affect an agent. With this added feature, this information is now queried through the RESTful API and displayed in the user interface. This visibility improvement allows you to assess vulnerabilities affecting your monitored agents and take quick corrective action if needed.
+      Wazuh now generates CVE inventory reports that gives you insight into vulnerabilities that affect an agent. With this added feature, this information is now queried through the RESTful API and displayed on the user interface for analysis. This visibility improvement allows you to assess vulnerabilities affecting your monitored agents and take quick corrective action if needed.
 
 - `#7541 <https://github.com/wazuh/wazuh/pull/7541>`_ Agent port support for TCP and UDP:
 
-      Remoted now supports listening to a TCP and UDP port simultaneously. This new support of both protocols provides several enhanced features related to manager active check, agent connection and logging, active response, API requests, JSON formatting, and more. This new supportability also provides enhancements related to centralized configuration since now agents can be configured remotely by using the ``agent.conf`` file.
+      Remoted now supports listening to TCP and UDP ports simultaneously. This new support of both protocols provides several enhanced features related to manager active check, agent connection and logging, active response, API requests, JSON formatting, and more. This new supportability also provides enhancements related to centralized configuration since now agents can be configured remotely by using the ``agent.conf`` file.
 
 - `#6912 <https://github.com/wazuh/wazuh/pull/6912>`_ Wazuh unified standard improvements:
 
@@ -58,7 +58,7 @@ Highlights
 
 - `#1434 <https://github.com/wazuh/wazuh-kibana-app/issues/1434>`_ New Ruleset Test tool:
 
-      Wazuh improves user experience by adding a new **Ruleset Test** feature under the Tools section of the Wazuh plugin menu. This feature is also included as a tool in the action bar of both the Edit Rules and Edit Decoders sections, allowing you to keep the **Ruleset Test** window open while you navigate through the page to edit or create a ruleset file.
+      Wazuh improves user experience by adding a new **Ruleset Test** feature under the Tools section of the Wazuh Kibana plugin menu. This feature is also included as a tool in the action bar of both the Edit Rules and Edit Decoders sections, allowing you to keep the **Ruleset Test** window open while you navigate through the page to edit or create a ruleset file.
 
       The new **Ruleset Test** tool also integrates an input box for reading sample logs and an output box that allows you to visualize the test results. With this enhancement, you can now test sample logs directly on the Wazuh user interface and see how the ruleset reacts to specific log messages.
 
@@ -79,7 +79,7 @@ Highlights
 
 - `#1434 <https://github.com/wazuh/wazuh-kibana-app/issues/1434>`_ Tools menu improvements:
 
-      To improve user experience and access to Wazuh tools. The **Dev Tools** feature is renamed as **API Console** and it is now found, together with the new **Ruleset Test** feature, inside the new Tool section under the Wazuh plugin menu.
+      To improve user experience and access to Wazuh tools. The **Dev Tools** feature is renamed as **API Console** and it is now found, together with the new **Ruleset Test** feature, inside the new Tool section under the Wazuh Kibana plugin menu.
 
 .. thumbnail::  ../images/release-notes/4.2.0/new-menu.png
       :align: center
@@ -96,7 +96,7 @@ Highlights
 
 - `#3069 <https://github.com/wazuh/wazuh-kibana-app/pull/3069>`_ Agent’s new vulnerability inventory:
 
-      Wazuh now provides you with enhanced insight into the CVE that are affecting an agent. The newly added **Inventory** tab in the Vulnerabilities module allows you to visualize information such as package name, package version, package architecture, and the CVE ID that affects the package, and more. You can also access the vulnerability data flyout to expand on the specifics of each vulnerability entry detailed in the Inventory.   
+      Wazuh now gives you enhanced insight into the CVE that are affecting an agent. The newly added **Inventory** tab in the Vulnerabilities module allows you to visualize information such as package name, package version, package architecture, and the CVE ID that affects the package, and more. You can also access the vulnerability data flyout to expand on the specifics of each vulnerability entry detailed in the Inventory.   
 
 .. thumbnail::  ../images/release-notes/4.2.0/vuln_inventory_detail.png
       :align: center  
