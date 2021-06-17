@@ -20,6 +20,7 @@ readInstances() {
 
     if [ -f ~/instances.yml ]; then
         echo "Configuration file found. Creating certificates..."
+        eval "mkdir ~/certs $debug"
     else
         echo "Error: no configuration file found."
         exit 1;
@@ -33,20 +34,20 @@ readFile() {
 
     IFS=$'\r\n' GLOBIGNORE='*' command eval  'INSTANCES=($(cat ~/instances.yml))'
     for i in "${!INSTANCES[@]}"; do
-    if [[ "${INSTANCES[$i]}" == "${ELASTICINSTANCES}" ]]; then
-        ELASTICLIMITT=${i}
-    fi
-        if [[ "${INSTANCES[$i]}" == "${FILEBEATINSTANCES}" ]]; then
-        ELASTICLIMIB=${i}
-    fi
+        if [[ "${INSTANCES[$i]}" == "${ELASTICINSTANCES}" ]]; then
+            ELASTICLIMITT=${i}
+        fi
+            if [[ "${INSTANCES[$i]}" == "${FILEBEATINSTANCES}" ]]; then
+            ELASTICLIMIB=${i}
+        fi
 
-    if [[ "${INSTANCES[$i]}" == "${FILEBEATINSTANCES}" ]]; then
-        FILEBEATLIMITT=${i}
-    fi
-    
-    if [[ "${INSTANCES[$i]}" == "${KIBANAINSTANCES}" ]]; then
-        FILEBEATLIMIB=${i}
-    fi  
+        if [[ "${INSTANCES[$i]}" == "${FILEBEATINSTANCES}" ]]; then
+            FILEBEATLIMITT=${i}
+        fi
+        
+        if [[ "${INSTANCES[$i]}" == "${KIBANAINSTANCES}" ]]; then
+            FILEBEATLIMIB=${i}
+        fi  
     done
 
     ## Read Elasticsearch nodes
@@ -276,8 +277,6 @@ main() {
                 getHelp
             esac
         done    
-
-        eval "mkdir ~/certs $debug"
 
         if [ -n "${debugEnabled}" ]; then
             debug=""           
