@@ -109,7 +109,7 @@ Highlights
 Breaking changes
 ----------------
 
-- `#7317 <https://github.com/wazuh/wazuh/pull/7317>`_ With its Active Response capability, Wazuh now sends information to the  active response executables via ``stdin`` instead of in-line arguments. Any custom active response script developed for previous versions of Wazuh needs to be adapted to accept the event information. Previous default scripts present in the ``active-response/bin`` directories are now replaced as part of the agent upgrade process. The Wazuh manager continues to send in-line arguments to Wazuh agents up to version 4.1.5. This improvement also includes new rules to match the new active response logs.
+- `#7317 <https://github.com/wazuh/wazuh/pull/7317>`_ With its Active Response capability, Wazuh now sends information to the active response executables via ``stdin`` instead of in-line arguments. Any custom active response script developed for previous versions of Wazuh needs to be adapted to accept the event information. Previous default scripts present in the ``active-response/bin`` directories are now replaced as part of the agent upgrade process. The Wazuh manager continues to send in-line arguments to Wazuh agents up to version 4.1.5. This improvement also includes new rules to match the new active response logs.
  
 Wazuh core
 ----------
@@ -165,7 +165,7 @@ This release includes new features or enhancements.
 - `#7588 <https://github.com/wazuh/wazuh/pull/7588>`_ Wazuh adds a new endpoint to modify the user’s ``allow_run_as`` flag, allowing you to enable or disable the parameter.
 - `#7647 <https://github.com/wazuh/wazuh/pull/7647>`_ Wazuh adds a new endpoint to get CVE data on affected agents. With this new endpoint, you can query the vulnerability data of any agent.
 - `#7803 <https://github.com/wazuh/wazuh/pull/7803>`_ A new API configuration validator is now added to improve validation checking processes.
-- `#8115 <https://github.com/wazuh/wazuh/pull/8115>`_ Wazuh adds the capability that allows you to disable the  ``max_request_per_minute`` API configuration option by setting its value to ``0``.
+- `#8115 <https://github.com/wazuh/wazuh/pull/8115>`_ Wazuh adds the capability that allows you to disable the ``max_request_per_minute`` API configuration option by setting its value to ``0``.
 - `#6904 <https://github.com/wazuh/wazuh/issues/6904>`_ Ruleset versions for ``GET /cluster/{node_id}/info`` and ``GET /manager/info`` are deprecated and removed.
 - `#6909 <https://github.com/wazuh/wazuh/pull/6909>`_ ``POST /groups`` endpoint is now changed to specify the group name in a JSON body instead of in a query parameter. 
 - `#7312 <https://github.com/wazuh/wazuh/pull/7312>`_ ``PUT /active-response`` endpoint function is now changed to create messages with new JSON format. 
@@ -299,7 +299,7 @@ What's new
 - `#3126 <https://github.com/wazuh/wazuh-kibana-app/pull/3126>`_ When you deploy a new agent, a new link to the Wazuh documentation is added under the *Start the agent* step of the process for you to check if the connection to the manager is successful after adding a new agent. 
 - `#3238 <https://github.com/wazuh/wazuh-kibana-app/pull/3238>`_ When you deploy a new agent, a warning message is shown under the *Install and enroll the agent* step of the process to warn you about running the command on a host with an agent already installed. This action causes the agent package to be upgraded without enrolling the agent.
 - `#2892 <https://github.com/wazuh/wazuh-kibana-app/issues/2892>`_ In the Integrity monitoring module, the Top 5 users result table is now changed to improve user experience.
-- `#3080 <https://github.com/wazuh/wazuh-kibana-app/pull/3080>`_ The editing process of the  ``allow_run_as`` user property is now adapted to the new ``PUT /security/users/{user_id}/run_as`` endpoint.
+- `#3080 <https://github.com/wazuh/wazuh-kibana-app/pull/3080>`_ The editing process of the ``allow_run_as`` user property is now adapted to the new ``PUT /security/users/{user_id}/run_as`` endpoint.
 - `#3046 <https://github.com/wazuh/wazuh-kibana-app/pull/3046>`_ Some ossec references are now renamed to follow Wazuh unified standard.
 
 Resolved issues
