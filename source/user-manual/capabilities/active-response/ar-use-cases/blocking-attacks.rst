@@ -47,7 +47,7 @@ Configure Wazuh to run the active response. The main fields are:
 
 - ``command``: The command previously defined (firewall-drop).
   
-- ``location``: Where the command should be executed. We want execute the command on the agent that reported the event. So, we use local.
+- ``location``: Where the command should be executed. We want to execute the command on the agent that reported the event. So, we use local.
 
 - ``rules_id``: The command is executed if the rule 5712 is fired.
 
@@ -174,4 +174,3 @@ We set up a blocking time of 30 minutes for our active response, but in case you
 The first time that the active response is triggered, it will block the IP for 30 minutes, the second time for 60 minutes, the third time for 120 minutes and finally the fourth time for 180 minutes.
 
 Thanks to active response you can perform actions responding to several scenarios and restricting malicious activities and blocking attacks. Be aware any automated response has an implicit risk, so define your responses carefully.
-
