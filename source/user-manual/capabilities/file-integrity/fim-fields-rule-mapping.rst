@@ -6,7 +6,7 @@ FIM fields rule mapping
 This guide aims to help to understand how FIM fields can be mapped into rules.
 
 
-FIM - Alerts : fields correspondence
+FIM - Alerts: fields correspondence
 ------------------------------------
 
 The following table establishes a correspondence between the decoded FIM fields and their counterpart in rules.
