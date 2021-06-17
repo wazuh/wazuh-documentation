@@ -21,7 +21,7 @@ Highlights
 
       Wazuh now generates CVE inventory reports that provide you with insight into vulnerabilities that affect an agent. With this added feature, this information is now queried through the RESTful API and displayed in the user interface. This visibility improvement allows you to assess vulnerabilities affecting your monitored agents and take quick corrective action if needed.
 
-- `#7541 <https://github.com/wazuh/wazuh/pull/7541>`_ TCP and UDP agent ports support:
+- `#7541 <https://github.com/wazuh/wazuh/pull/7541>`_ Agent port support for TCP and UDP:
 
       Remoted now supports listening to a TCP and UDP port simultaneously. This new support of both protocols provides several enhanced features related to manager active check, agent connection and logging, active response, API requests, JSON formatting, and more. This new supportability also provides enhancements related to centralized configuration since now agents can be configured remotely by using the ``agent.conf`` file.
 
