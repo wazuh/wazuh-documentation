@@ -20,6 +20,6 @@
     # mkdir /etc/elasticsearch/certs/
     # mv ~/certs/elasticsearch* /etc/elasticsearch/certs/
     # mv ~/certs/admin* /etc/elasticsearch/certs/
-    # mv ~/certs/root-ca* /etc/elasticsearch/certs/
+    # cp ~/certs/root-ca* /etc/elasticsearch/certs/
 
 .. End of include file
