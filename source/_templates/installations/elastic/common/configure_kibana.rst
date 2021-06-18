@@ -2,7 +2,7 @@
 
 .. code-block:: console
 
-  # curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/kibana/7.x/kibana.yml
+  # curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/3128-Certificate_tool/resources/open-distro/kibana/7.x/kibana.yml
 
 
 Edit the ``/etc/kibana/kibana.yml`` file:
