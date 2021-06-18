@@ -52,7 +52,9 @@ Replace the values ``<node-name>`` and ``<node-ip>``  with the corresponding nam
 
   .. code-block:: console
 
-    # tar -cf ~/certs/certs.tar *
+    # cd ~/certs/  
+    # tar -cvf certs.tar *
+    # mv ~/certs/certs.tar ~/
 
 * Copy ``certs.tar`` to all the servers of the distributed deployment. This can be done by using, for example, ``scp``. 
 
