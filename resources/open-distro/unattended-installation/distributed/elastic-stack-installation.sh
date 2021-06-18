@@ -381,14 +381,14 @@ copyCertificates() {
 
     if [ -n "${single}" ]; then
         eval "mv /etc/elasticsearch/certs/${iname}.pem /etc/elasticsearch/certs/elasticsearch.pem ${debug}"
-        eval "mv /etc/elasticsearch/certs/${iname}.key /etc/elasticsearch/certs/elasticsearch-key.pem ${debug}"
+        eval "mv /etc/elasticsearch/certs/${iname}-key.pem /etc/elasticsearch/certs/elasticsearch-key.pem ${debug}"
     else
         if [ -z "${certificates}" ]; then
             eval "mv ~/certs.tar /etc/elasticsearch/certs ${debug}"
-            eval "tar -xf certs.tar ${IMN[pos]}.pem ${IMN[pos]}.key ${IMN[pos]}_http.pem ${IMN[pos]}_http.key root-ca.pem ${debug}"
+            eval "tar -xf certs.tar ${IMN[pos]}.pem ${IMN[pos]}-key.pem root-ca.pem ${debug}"
         fi
         eval "mv /etc/elasticsearch/certs/${IMN[pos]}.pem /etc/elasticsearch/certs/elasticsearch.pem ${debug}"
-        eval "mv /etc/elasticsearch/certs/${IMN[pos]}.key /etc/elasticsearch/certs/elasticsearch-key.pem ${debug}"
+        eval "mv /etc/elasticsearch/certs/${IMN[pos]}-key.pem /etc/elasticsearch/certs/elasticsearch-key.pem ${debug}"
     fi
     eval "/usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer ${debug}"
     if [[ -n "${certificates}" ]] || [[ -n "${single}" ]]; then
@@ -416,7 +416,7 @@ initializeElastic() {
 
     if [ -n "${single}" ]; then
         eval "cd /usr/share/elasticsearch/plugins/opendistro_security/tools/ ${debug}"
-        eval "./securityadmin.sh -cd ../securityconfig/ -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key -h ${nip} ${debug}"
+        eval "./securityadmin.sh -cd ../securityconfig/ -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin-key.pem -h ${nip} ${debug}"
     fi
 
     logger "Done"
@@ -478,9 +478,9 @@ installKibana() {
 
         eval "cp ~/certs.tar /etc/kibana/certs/ ${debug}"
         eval "cd /etc/kibana/certs/ ${debug}"
-        eval "tar -xf certs.tar kibana_http.pem kibana_http.key root-ca.pem ${debug}"
-        eval "mv /etc/kibana/certs/kibana_http.key /etc/kibana/certs/kibana.key ${debug}"
-        eval "mv /etc/kibana/certs/kibana_http.pem /etc/kibana/certs/kibana.pem ${debug}"        
+        eval "tar -xf certs.tar kibana.pem kibana-key.pem root-ca.pem ${debug}"
+        eval "mv /etc/kibana/certs/kibana-key.pem /etc/kibana/certs/kibana-key.pem ${debug}"
+        eval "mv /etc/kibana/certs/kibana.pem /etc/kibana/certs/kibana.pem ${debug}"        
         logger "Kibana installed."
 
         copyKibanacerts iname
