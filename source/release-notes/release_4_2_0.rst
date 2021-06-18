@@ -58,7 +58,7 @@ Highlights
 
 - `#1434 <https://github.com/wazuh/wazuh-kibana-app/issues/1434>`_ New Ruleset Test tool:
 
-      Wazuh improves user experience by adding a new **Ruleset Test** feature under the Tools section of the Wazuh Kibana plugin menu. This feature is also included as a tool in the action bar of both the Edit Rules and Edit Decoders sections, allowing you to keep the **Ruleset Test** window open while you navigate through the page to edit or create a ruleset file.
+      Wazuh improves the user experience by adding a new **Ruleset Test** feature under the Tools section of the Wazuh Kibana plugin menu. This feature is also included as a tool in the action bar of both the Edit Rules and Edit Decoders sections, allowing you to keep the **Ruleset Test** window open while you navigate through the page to edit or create a ruleset file.
 
       The new **Ruleset Test** tool also integrates an input box for reading sample logs and an output box that allows you to visualize the test results. With this enhancement, you can now test sample logs directly on the Wazuh user interface and see how the ruleset reacts to specific log messages.
 
@@ -79,7 +79,7 @@ Highlights
 
 - `#1434 <https://github.com/wazuh/wazuh-kibana-app/issues/1434>`_ Tools menu improvements:
 
-      To improve user experience and access to Wazuh tools. The **Dev Tools** feature is renamed as **API Console** and it is now found, together with the new **Ruleset Test** feature, inside the new Tool section under the Wazuh Kibana plugin menu.
+       The **Dev Tools** feature is renamed as **API Console** and it is now found, together with the new **Ruleset Test** feature, inside the new Tool section under the Wazuh Kibana plugin menu.
 
 .. thumbnail::  ../images/release-notes/4.2.0/new-menu.png
       :align: center
