@@ -69,9 +69,11 @@ Highlights
 
 .. thumbnail::  ../images/release-notes/4.2.0/ruleset-test.png 
       :align: center
+      :title: New Ruleset test tool
 
 .. thumbnail::  ../images/release-notes/4.2.0/rules_ruleset_test.png
       :align: center
+      :title: Ruleset test window 
 
 .. raw:: html
 
@@ -79,10 +81,11 @@ Highlights
 
 - `#1434 <https://github.com/wazuh/wazuh-kibana-app/issues/1434>`_ Tools menu improvements:
 
-       The **Dev Tools** feature is renamed as **API Console** and it is now found, together with the new **Ruleset Test** feature, inside the new Tool section under the Wazuh Kibana plugin menu.
+       The **Dev Tools** feature is renamed as **API Console** and it is now found, together with the new **Ruleset Test** feature, inside the new Tools section under the Wazuh Kibana plugin menu.
 
 .. thumbnail::  ../images/release-notes/4.2.0/new-menu.png
       :align: center
+      :title: New Tools section 
 
 - `#3056 <https://github.com/wazuh/wazuh-kibana-app/pull/3056>`_ New Agent Stats section:
 
@@ -90,16 +93,19 @@ Highlights
 
 .. thumbnail::  ../images/release-notes/4.2.0/new_stats_access.png
       :align: center
+      :title: New Stats button on the Agent data overview page
 
 .. thumbnail::  ../images/release-notes/4.2.0/agent_stats_section.png
       :align: center
+      :title: Agent's new Stats section
 
 - `#3069 <https://github.com/wazuh/wazuh-kibana-app/pull/3069>`_ Agent’s new vulnerability inventory:
 
       Wazuh now gives you enhanced insight into the CVE that are affecting an agent. The newly added **Inventory** tab in the Vulnerabilities module allows you to visualize information such as package name, package version, package architecture, and the CVE ID that affects the package, and more. You can also access the vulnerability data flyout to expand on the specifics of each vulnerability entry detailed in the Inventory.   
 
 .. thumbnail::  ../images/release-notes/4.2.0/vuln_inventory_detail.png
-      :align: center  
+      :align: center
+      :title: Agent’s new vulnerability inventory  
 
 .. raw:: html
 
