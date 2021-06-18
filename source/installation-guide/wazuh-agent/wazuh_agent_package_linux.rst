@@ -7,7 +7,7 @@
 Deploying Wazuh agents on Linux systems
 =======================================
 
-The agent runs on the host you want to monitor and communicates with the Wazuh manager, sending data in near real time through an encrypted and authenticated channel. The deployment of a Wazuh agent on a Linux system uses deployment variables that facilitate the task of deploying, logging, and configuring the agent. Alternatively, if you want to download the Wazuh agent package directly or check the compatible versions, see the :ref:`packages list <packages>` section . 
+The agent runs on the host you want to monitor and communicates with the Wazuh manager, sending data in near real time through an encrypted and authenticated channel. The deployment of a Wazuh agent on a Linux system uses deployment variables that facilitate the task of deploying, logging, and configuring the agent. Alternatively, if you want to download the Wazuh agent package directly or check the compatible versions, see the :ref:`packages list <packages>` section. 
 
 
 .. note:: To execute all the commands, root user privileges are required.
@@ -78,7 +78,7 @@ Deploy a Wazuh agent
 
   .. include:: ../../_templates/installations/wazuh/common/enable_wazuh_agent_service.rst
 
-The deployment process is complete and the Wazuh agent is now sucessfully running on your Linux system. 
+The deployment process is now complete and the Wazuh agent is successfully running on your Linux system. 
 
 - **Recommended action** -  Disable Wazuh updates
 
