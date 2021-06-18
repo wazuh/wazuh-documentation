@@ -4,6 +4,6 @@ Download the configuration file ``/etc/elasticsearch/elasticsearch.yml`` as foll
 
 .. code-block:: console
 
-  # curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/3128-Certificate_tool/resources/elastic-stack/elasticsearch/7.x/elasticsearch_all_in_one.yml
+  # curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/elastic-stack/elasticsearch/7.x/elasticsearch_all_in_one.yml
 
 .. End of include file
