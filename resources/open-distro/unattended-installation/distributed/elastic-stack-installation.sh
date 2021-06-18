@@ -358,15 +358,7 @@ createCertificates() {
             echo '      - "'${DSH[i]}'"' >> ~/searchguard/search-guard.yml
         done      
     fi
-    kip=$(grep -A 1 "Kibana-instance" ~/config.yml | tail -1)
-    rm="- "
-    kip="${kip//$rm}"        
-    echo '  - name: "kibana"' >> ~/searchguard/search-guard.yml
-    echo '    dn: CN="kibana",OU=Docu,O=Wazuh,L=California,C=US' >> ~/searchguard/search-guard.yml
-    echo '    ip:' >> ~/searchguard/search-guard.yml
-    echo '      - "'${kip}'"' >> ~/searchguard/search-guard.yml      
-    awk -v RS='' '/# Clients certificates/' ~/config.yml >> ~/searchguard/search-guard.yml
-    eval "chmod +x ~/searchguard/tools/sgtlstool.sh ${debug}"
+    
     eval "bash ~/searchguard/tools/sgtlstool.sh -c ~/searchguard/search-guard.yml -ca -crt -t /etc/elasticsearch/certs/ ${debug}"
     if [  "$?" != 0  ]; then
         echo "Error: certificates were not created"
@@ -374,7 +366,7 @@ createCertificates() {
     else
         logger "Certificates created"
     fi
-    #awk -v RS='' '/## Certificates/' ~/config.yml >> /etc/elasticsearch/certs/searchguard/search-guard.yml
+    
 }
 
 copyCertificates() {
