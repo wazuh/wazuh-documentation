@@ -7,19 +7,19 @@
 Installing Wazuh agents on Windows systems
 ==========================================
 
-The agent runs on the host you want to monitor and communicates with the Wazuh manager, sending data in near real time through an encrypted and authenticated channel. The installation of a Wazuh agent on a Windows system uses deployment variables that facilitate the task of installing, registering, and configuring the agent. Alternatively, if you want to download the Wazuh agent package directly or check the compatible versions, see the :ref:`packages list <packages>` section . 
+The agent runs on the host you want to monitor and communicates with the Wazuh manager, sending data in near real time through an encrypted and authenticated channel. The installation of a Wazuh agent on a Windows system uses deployment variables that facilitate the task of installing, registering, and configuring the agent. Alternatively, if you want to download the Wazuh agent package directly or check the compatible versions, see the :ref:`packages list <packages>` section. 
 
 .. note:: To perform the installation, administrator privileges are required.
 
-#. Download the `Windows installer <https://packages.wazuh.com/|CURRENT_MAJOR|/windows/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi>`_. 
+#. To start the installation process, download the `Windows installer <https://packages.wazuh.com/|CURRENT_MAJOR|/windows/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi>`_. 
 
-#. Select between command line or Graphical User Interface:
+#. Select the installation method you want to follow: command line interface (CLI) or graphical user interface (GUI).
 
         .. tabs::
     
-          .. group-tab:: Command line
+          .. group-tab:: CLI
     
-             Edit the ``WAZUH_MANAGER`` and ``WAZUH_REGISTRATION_SERVER`` variables to contain the Wazuh managers IP address or hostname, and proceed to deploy the agent in your system using command line:
+             To deploy the Wazuh agent to your system, choose one of the command shell alternatives and edit the ``WAZUH_MANAGER`` and ``WAZUH_REGISTRATION_SERVER`` variables so that they contain the Wazuh manager IP address or hostname.
  
              - Using CMD:
 
@@ -34,30 +34,30 @@ The agent runs on the host you want to monitor and communicates with the Wazuh m
                   .\wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi /q WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2"
 
 
-               For additional deployment options, like agent name, agent group, and registration password, see :ref:`Deployment variables for Windows <deployment_variables_windows>`.
+              For additional deployment options such as agent name, agent group, and registration password, see the :ref:`Deployment variables <deployment_variables_windows>` section.
 
-
-               You now have an installed, registered and configured Wazuh agent reporting to the Wazuh manager.
+              The installation process is now complete and the Wazuh agent is successfully installed, registered, and configured, running on your Windows system.
+               
 
             
           .. group-tab:: GUI
 
-                Run the Windows installer and follow the steps in the installation wizard. If unsure how to answer some of the prompts, use the default answers. Once installed, the agent uses a graphical user interface for configuration, opening the log file or starting and stopping the service.
+                Run the Windows installer and follow the steps in the installation wizard. If you are not sure how to answer some of the prompts, use the default answers. Once installed, the agent uses a GUI for configuration, opening the log file, and starting or stopping the service.
             
                     .. thumbnail:: ../../images/installation/windows-agent.png
                         :align: center
                         :width: 50%
             
-                You now have an installed Wazuh agent, the next step is to register and configure it to communicate with the Wazuh manager. See :ref:`Registering Wazuh agents <register_agents>`.                 
+              The installation process is now complete and the Wazuh agent is successfully installed on your Windows system. The next step is to register and configure the agent to communicate with the Wazuh manager. To perfom this action, see the :ref:`Registering Wazuh agents <register_agents>` section.                 
  
 
- By default, all agent files are stored in: ``C:\Program Files (x86)\ossec-agent``.
+ By default, all agent files are stored in ``C:\Program Files (x86)\ossec-agent`` after the installation.
 
 
 Uninstall a Wazuh agent
 -----------------------
 
-In order to uninstall the agent, the original MSI file will be needed to perform the unattended process:
+To uninstall the agent, the original MSI file is required to perform the unattended process:
 
   .. code-block:: none
   
