@@ -18,11 +18,11 @@
 {%- endif %}
 
 {%- macro css() %}
-  <link rel="stylesheet" href="{{ pathto('_static/' + style, 1) }}" type="text/css" />
-  {% for cssfile in css_files %}
-    <link rel="stylesheet" href="{{ pathto(cssfile, 1) }}" type="text/css" />
-  {% endfor %}
-  <link rel='stylesheet' id='google-fonts-css'  href='https://fonts.googleapis.com/css?family=Montserrat:400,500|Open+Sans:400,700|Fira+Mono' type='text/css' media='all' />
+<link rel="stylesheet" href="{{ pathto('_static/' + style, 1) }}" type="text/css" />
+{% for cssfile in css_files %}
+  <link rel="stylesheet" href="{{ pathto(cssfile, 1) }}" type="text/css" />
+{% endfor %}
+<style type="text/css">{{ inline_fonts }}</style>
 {%- endmacro %}
 
 {%- macro js() %}
