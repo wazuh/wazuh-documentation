@@ -353,6 +353,11 @@ todo_include_todos = False
 
 extra_assets = []
 
+# Fonts to be preloaded
+google_fonts_path = os.path.join(html_theme_path[0], html_theme, 'static', 'css', 'google-fonts.css')
+with open(google_fonts_path, 'r') as reader:
+    google_fonts = reader.read()
+
 def minification(actual_path):
 
     files = [
@@ -589,6 +594,7 @@ html_context = {
     "github_version": version,
     "production": production,
     "compilation_ts": str(time.time()),
-    "is_latest_release": is_latest_release
+    "is_latest_release": is_latest_release,
+    "inline_fonts": google_fonts
 }
 sphinx_tabs_nowarn = True
