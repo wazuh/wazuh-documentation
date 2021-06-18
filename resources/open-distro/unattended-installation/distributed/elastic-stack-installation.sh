@@ -498,7 +498,7 @@ copyKibanacerts() {
     elif [ -f ~/certs.tar ]; then
         eval "cp ~/certs.tar /etc/kibana/certs/ ${debug}"
         eval "cd /etc/kibana/certs/ ${debug}"
-        eval "tar --overwrite -xf certs.tar kibana_http.pem kibana_http.key root-ca.pem ${debug}"           
+        eval "tar --overwrite -xf certs.tar kibana.pem kibana-key.pem root-ca.pem ${debug}"           
     else
         echo "No certificates found. Could not initialize Kibana"
         exit 1;
