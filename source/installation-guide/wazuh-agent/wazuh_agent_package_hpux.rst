@@ -10,50 +10,52 @@ Installing Wazuh agents on HP-UX systems
 
 The installed agent runs on the host you want to monitor and communicates with the Wazuh manager, sending data in near real time through an encrypted and authenticated channel. Alternatively, if you want to download the Wazuh agent package directly or check the compatible versions, see the :ref:`packages list <packages>` section. 
 
-#. Download the `HP-UX installer <https://packages.wazuh.com/|CURRENT_MAJOR|/hp-ux/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar>`_. 
+#. To start the installation process, download the `HP-UX installer <https://packages.wazuh.com/|CURRENT_MAJOR|/hp-ux/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar>`_. 
 
-#. Create the ``ossec`` user and group:
+#. Create the ``ossec`` user and group.
    
    .. code-block:: console
    
        # groupadd ossec
        # useradd -G ossec ossec
    
-#. Unzip the package in ``/``:
+#. Unzip the package in ``/``.
 
    .. code-block:: console
    
        # tar -xvf wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar
 
-#. Start the service:
+#. To complete the installation process, start the Wazuh agent service.
 
    .. code-block:: console
    
        # /sbin/init.d/wazuh-agent start
 
 
-You now have an installed Wazuh agent, the next step is to register and configure it to communicate with the Wazuh manager. See :ref:`Registering Wazuh agents <register_agents>`.        
+The installation process is now complete and the Wazuh agent is successfully installed on your HP-UX system. The next step is to register and configure the agent to communicate with the Wazuh manager. To perform this action, see the :ref:`Registering Wazuh agents <register_agents>` section.        
 
 Uninstall a Wazuh agent
 -----------------------
 
-To uninstall the agent follow the next steps. 
+To uninstall the agent, follow these steps: 
 
-1. Stop the Wazuh agent service:
+1. Stop the Wazuh agent service.
 
     .. code-block:: console
 
       # /var/ossec/bin/ossec-control stop
 
-2. Delete ``ossec`` user and group:
+2. Delete ``ossec`` user and group.
 
     .. code-block:: console
 
         # groupdel ossec
         # userdel ossec
 
-3. Remove Wazuh files:
+3. Remove Wazuh files.
 
     .. code-block:: console
 
       # rm -rf /var/ossec
+
+The Wazuh agent is now completely removed from your HP-UX system.
