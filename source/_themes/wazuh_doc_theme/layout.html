@@ -75,6 +75,14 @@
 {%- endblock css %}
 
 {%- block linktags %}
+  {% if pagename == 'not_found' %}
+  <link rel="preload" href="_static/img/wazuh_404_bg_xs.png" as="image" type="image/x-png">
+  <link rel="preload" href="_static/img/wazuh_404_bg_desktop.png" as="image" type="image/x-png">
+  <link rel="preload" href="_static/img/wazuh_404_bg_4k.png" as="image" type="image/x-png">
+  {% endif %}
+  <link rel="preload" href="{{ url_root }}_static/img/wazuh_bg_head.png" as="image" type="image/x-png">
+  
+
   {%- if hasdoc('about') %}
     <link rel="author" title="{{ _('About these documents') }}"
             href="{{ pathto('about') }}"/>
