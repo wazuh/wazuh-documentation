@@ -71,7 +71,7 @@ Deploy a Wazuh agent
       
     
     
-    For additional deployment options, like agent name, agent group, and registration password, see the :ref:`deployment variables <deployment_variables_linux>` section.   
+    For additional deployment options such as agent name, agent group, and registration password, see the :ref:`deployment variables <deployment_variables_linux>` section.   
          
 
 #. Enable and start the Wazuh agent service.
@@ -106,8 +106,8 @@ The deployment process is complete and the Wazuh agent is now sucessfully runnin
           .. include:: ../../_templates/installations/wazuh/zypp/disabling_repository.rst
 
 
-Uninstall
----------
+Uninstall a Wazuh agent
+-----------------------
 
 To uninstall the agent, select your package manager and run the command. 
 
