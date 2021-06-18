@@ -225,8 +225,8 @@ Filebeat is the tool on the Wazuh server that securely forwards alerts and archi
     .. code-block:: console
 
       # mkdir /etc/filebeat/certs
-      # cp /etc/elasticsearch/certs/root-ca.pem /etc/filebeat/certs/
-      # mv /etc/elasticsearch/certs/filebeat* /etc/filebeat/certs/
+      # cp ~/certs/root-ca.pem /etc/filebeat/certs/
+      # mv ~/certs/filebeat* /etc/filebeat/certs/
 
 #. Enable and start the Filebeat service:
 
