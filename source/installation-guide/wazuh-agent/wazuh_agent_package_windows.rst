@@ -54,8 +54,8 @@ The agent runs on the host you want to monitor and communicates with the Wazuh m
  By default, all agent files are stored in: ``C:\Program Files (x86)\ossec-agent``.
 
 
-Uninstall
----------
+Uninstall a Wazuh agent
+-----------------------
 
 In order to uninstall the agent, the original MSI file will be needed to perform the unattended process:
 

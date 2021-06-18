@@ -29,8 +29,8 @@ The agent runs on the host you want to monitor and communicates with the Wazuh m
 Now you have an active Wazuh agent connected to the Wazuh manager. 
       
 
-Uninstall
----------
+Uninstall a Wazuh agent
+-----------------------
 
 To uninstall the agent:
 

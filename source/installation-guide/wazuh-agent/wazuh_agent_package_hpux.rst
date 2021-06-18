@@ -34,8 +34,8 @@ The installed agent runs on the host you want to monitor and communicates with t
 
 You now have an installed Wazuh agent, the next step is to register and configure it to communicate with the Wazuh manager. See :ref:`Registering Wazuh agents <register_agents>`.        
 
-Uninstall
----------
+Uninstall a Wazuh agent
+-----------------------
 
 To uninstall the agent follow the next steps. 
 

@@ -54,8 +54,8 @@ The agent runs on the host you want to monitor and communicates with the Wazuh m
 By default, all agent files can be found at the following location: ``/Library/Ossec/``.
     
 
-Uninstall
----------
+Uninstall a Wazuh agent
+-----------------------
 
 To uninstall the agent in macOS follow the next steps. 
 
