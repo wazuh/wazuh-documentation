@@ -13,4 +13,12 @@
 
     #  bash ~/wazuh-cert-tool.sh
 
+* Move the Elasticsearch certificates to their corresponding location:
+
+  .. code-block:: console
+
+    # mkdir /etc/elasticsearch/certs/
+    # mv ~/certs/root-ca.pem /etc/elasticsearch/certs/
+    # mv ~/certs/elasticsearch* /etc/elasticsearch/certs/
+
 .. End of include file
