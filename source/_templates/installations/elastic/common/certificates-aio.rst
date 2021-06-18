@@ -1,6 +1,6 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-* Download the Search Guard offline TLS tool to create the certificates:
+* Download the Wazuh cert tool to create the certificates:
 
   .. code-block:: console
 
