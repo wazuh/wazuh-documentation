@@ -125,6 +125,7 @@ Wazuh core
 
 What's new
 ^^^^^^^^^^
+
 This release includes new features or enhancements. 
 
 **Cluster**
@@ -291,10 +292,10 @@ Reference                                                         Description
 Wazuh Kibana plugin
 -------------------
 
-This release includes new features or enhancements. 
-
 What's new
 ^^^^^^^^^^
+
+This release includes new features or enhancements. 
 
 - `#1434 <https://github.com/wazuh/wazuh-kibana-app/issues/1434>`_ New **Ruleset Test** tool is added under the Tools menu and in the action bar of the Edit Rules and Edit Decoders sections. You can now test sample logs directly on the Wazuh user interface and see how the ruleset reacts to specific log messages.
 - `#1434 <https://github.com/wazuh/wazuh-kibana-app/issues/1434>`_ **Dev Tools** feature is now moved under the new Tools menu and it is renamed as **API Console**.
@@ -339,8 +340,8 @@ Reference                                                         Description
 ==============================================================    =============
 
 
-Splunk Enterprise
------------------
+Wazuh Splunk app
+----------------
 
 What's new
 ^^^^^^^^^^
