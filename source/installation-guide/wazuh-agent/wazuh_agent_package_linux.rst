@@ -7,7 +7,7 @@
 Deploying Wazuh agents on Linux systems
 =======================================
 
-The agent runs on the host you want to monitor and communicates with the Wazuh manager, sending data in near real time through an encrypted and authenticated channel. The deployment of a Wazuh agent on a Linux system uses deployment variables that facilitate the task of deploying, logging, and configuring the agent. Alternatively, if you want to download the Wazuh agent package directly or check the compatible versions, see the :ref:`packages list <packages>` section. 
+The deployment of a Wazuh agent on a Linux system uses deployment variables that facilitate the task of deploying, logging, and configuring the agent. The agent runs on the host you want to monitor and communicates with the Wazuh manager, sending data in near real time through an encrypted and authenticated channel. Alternatively, if you want to download the Wazuh agent package directly or check the compatible versions, see the :ref:`packages list <packages>` section. 
 
 
 .. note:: To execute all the commands, root user privileges are required.
@@ -71,7 +71,7 @@ Deploy a Wazuh agent
       
     
     
-    For additional deployment options such as agent name, agent group, and registration password, see the :ref:`deployment variables <deployment_variables_linux>` section.   
+    For additional deployment options such as agent name, agent group, and registration password, see the :ref:`deployment variables for Linux <deployment_variables_linux>` section.   
          
 
 #. Enable and start the Wazuh agent service.
@@ -111,26 +111,28 @@ Uninstall a Wazuh agent
 
 To uninstall the agent, select your package manager and run the command. 
 
-.. tabs::
+  .. tabs::
 
 
-  .. group-tab:: Yum
+    .. group-tab:: Yum
 
 
-    .. include:: ../../_templates/installations/wazuh/yum/uninstall_wazuh_agent.rst
-
-
-
-  .. group-tab:: APT
-
-
-    .. include:: ../../_templates/installations/wazuh/deb/uninstall_wazuh_agent.rst
+      .. include:: ../../_templates/installations/wazuh/yum/uninstall_wazuh_agent.rst
 
 
 
-  .. group-tab:: ZYpp
+    .. group-tab:: APT
 
 
-    .. include:: ../../_templates/installations/wazuh/zypp/uninstall_wazuh_agent.rst
+      .. include:: ../../_templates/installations/wazuh/deb/uninstall_wazuh_agent.rst
 
 
+
+    .. group-tab:: ZYpp
+
+
+      .. include:: ../../_templates/installations/wazuh/zypp/uninstall_wazuh_agent.rst
+
+
+
+The Wazuh agent is now completely removed from your Linux system.
