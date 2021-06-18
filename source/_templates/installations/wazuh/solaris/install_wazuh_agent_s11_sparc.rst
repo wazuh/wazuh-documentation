@@ -10,8 +10,8 @@
    
 If the Solaris 11 zone where you want to install the package has child zones, create a repository to install the Wazuh agent:
 
-   .. code-block:: console
+.. code-block:: console
 
-     # pkg set-publisher -g wazuh-agent_v4.1.5-sol11-sparc.p5p wazuh && pkg install --accept wazuh-agent && pkg unset-publisher wazuh
+  # pkg set-publisher -g wazuh-agent_v4.1.5-sol11-sparc.p5p wazuh && pkg install --accept wazuh-agent && pkg unset-publisher wazuh
 
 .. End of include file
