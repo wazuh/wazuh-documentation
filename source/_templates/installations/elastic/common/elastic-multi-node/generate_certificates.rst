@@ -1,11 +1,5 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-* Move to the installation location and create the certificates directory:
-
-  .. code-block:: console
-
-    # mkdir /etc/elasticsearch/certs
-
 #. Download the Wazuh cert tool to create the certificates:
 
   .. code-block:: console
