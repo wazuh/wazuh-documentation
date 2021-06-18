@@ -9,8 +9,8 @@ The ``X`` must be replaced with the number used in the certificate name defined 
   # mkdir /etc/filebeat/certs
   # mv ~/certs.tar /etc/filebeat/certs/
   # cd /etc/filebeat/certs/
-  # tar -xf certs.tar filebeat-X.pem filebeat-X.key root-ca.pem
+  # tar -xf certs.tar filebeat-X.pem filebeat-X-key.pem root-ca.pem
   # mv /etc/filebeat/certs/filebeat-X.pem /etc/filebeat/certs/filebeat.pem
-  # mv /etc/filebeat/certs/filebeat-X.key /etc/filebeat/certs/filebeat.key
+  # mv /etc/filebeat/certs/filebeat-X-key.pem /etc/filebeat/certs/filebeat-key.pem
 
 .. End of copy_certificates_filebeat_wazuh_cluster.rst

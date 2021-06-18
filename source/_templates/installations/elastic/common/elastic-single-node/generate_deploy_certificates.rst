@@ -5,102 +5,64 @@
   .. code-block:: console
 
     # mkdir /etc/elasticsearch/certs
-    # cd /etc/elasticsearch/certs
 
-* Download the Search Guard offline TLS tool to create the certificates:
-
-  .. code-block:: console
-
-    # curl -so ~/search-guard-tlstool-1.8.zip https://maven.search-guard.com/search-guard-tlstool/1.8/search-guard-tlstool-1.8.zip
-
-* Extract the downloaded file. It is assumed that it has been downloaded in ``~/`` (home directory):
+#. Download the Wazuh cert tool to create the certificates:
 
   .. code-block:: console
 
-    # unzip ~/search-guard-tlstool-1.8.zip -d ~/searchguard
+    # curl -so ~/wazuh-cert-tool.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/tools/certificate-utility/wazuh-cert-tool.sh
+    # curl -so ~/instances.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/tools/certificate-utility/instances.yml
 
-* Download the ``search-guard.yml`` configuration file. Choose either the Wazuh single-node cluster tab if there is only one Wazuh server or the Wazuh multi-node cluster tab in case of having more than one Wazuh server, and follow the steps:
+Replace the values ``<node-name>`` and ``<node-ip>``  with the corresponding names and IP addresses. There can be added as many nodes fields as needed:
 
-  .. tabs::
+  .. code-block:: yaml
 
-    .. group-tab:: Wazuh single-node cluster
-
-      .. code-block:: console
-
-        # curl -so ~/searchguard/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/searchguard/single-node/search-guard.yml
-
-
-      After downloading the configuration file in ``~/searchguard/search-guard.yml``, replace the values ``<elasticsearch_IP>`` and ``<kibana_ip>``  with the corresponding IP addresses. More than one IP can be specified (one entry per line):
-
-        .. code-block:: yaml
-
-          # Nodes certificates
-          nodes:
-            - name: elasticsearch
-              dn: CN=node-1,OU=Docu,O=Wazuh,L=California,C=US
-              ip:
-                - <elasticsearch_IP>
-            - name: kibana
-              dn: CN=kibana,OU=Docu,O=Wazuh,L=California,C=US     
-              ip:
-                - <kibana_ip>    
-
-    .. group-tab:: Wazuh multi-node cluster
-
-      .. code-block:: console
-
-        # curl -so ~/searchguard/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/searchguard/single-node/search-guard-multi-node.yml
-
-
-      After downloading the configuration file, replace the value ``<elasticsearch_IP>`` and ``<kibana_ip>``  with the corresponding IP addresses in the file ``~/searchguard/search-guard.yml``. More than one IP can be specified (one entry per line):
-
-        .. code-block:: yaml
-
-          # Nodes certificates
-          nodes:
-            - name: elasticsearch
-              dn: CN=node-1,OU=Docu,O=Wazuh,L=California,C=US
-              ip: 
-                - <elasticsearch_IP>
-            - name: kibana
-              dn: CN=kibana,OU=Docu,O=Wazuh,L=California,C=US     
-              ip:
-                - <kibana_ip> 
-
-      There should be as many ``filebeat-X`` sections as Wazuh servers in the installation:
-
-        .. code-block:: yaml
-
-          - name: filebeat-1
-            dn: CN=filebeat-1,OU=Docu,O=Wazuh,L=California,C=US
-          - name: filebeat-2
-            dn: CN=filebeat-2,OU=Docu,O=Wazuh,L=California,C=US
- 
+    # Elasticsearch nodes
+    elasticsearch-nodes:
+      - name: <node-name>
+        ip:
+          - node-IP
+    
+    # Wazuh server nodes
+    wazuh-servers:
+      - name: <node-name>
+        ip:
+          - node-IP      
+    
+    # Kibana node
+    kibana:
+      - name: <node-name>
+        ip:
+          - node-IP      
   
   To learn more about how to create and configure the certificates, see the :ref:`Certificates deployment <user_manual_certificates>` section.
 
-* Run the Search Guard script to create the certificates:
+* Run the Wazuh cert Tool to create the certificates:
 
   .. code-block:: console
 
-    # ~/searchguard/tools/sgtlstool.sh -c ~/searchguard/search-guard.yml -ca -crt -t /etc/elasticsearch/certs/
+    #  bash ~/wazuh-cert-tool.sh
+
+* Move the Elasticsearch certificates to their corresponding location:
+
+  .. code-block:: console
+
+    # mkdir /etc/elasticsearch/certs/
+    # mv ~/certs/elasticsearch* /etc/elasticsearch/certs/
+    # mv ~/certs/admin* /etc/elasticsearch/certs/
+    # cp ~/certs/root-ca* /etc/elasticsearch/certs/
 
 
-  In case of further certificates deployment, it is highly recommended to keep Search Guard TLS offline tool and its configuration file ``search-guard.yml`` on the master node.
 
 * Compress all the necessary files to be sent to all the instances:
 
   .. code-block:: console
 
-    # tar -cf /etc/elasticsearch/certs/certs.tar *
+    # cd ~/certs/  
+    # tar -cvf certs.tar *
+    # mv ~/certs/certs.tar ~/
 
 * Copy ``certs.tar`` to all the servers of the distributed deployment. This can be done by using, for example, ``scp``. 
-
-* Remove unnecessary files:
-
-  .. code-block:: console
-
-    # rm /etc/elasticsearch/certs/client-certificates.readme /etc/elasticsearch/certs/elasticsearch_elasticsearch_config_snippet.yml search-guard-tlstool-1.7.zip filebeat* -f
 
 * If Kibana will be installed on this node, keep the certificates file. Otherwise, if the file is already copied to all the instances of the distributed deployment, remove it to increase security  ``rm -f certs.tar``.
 

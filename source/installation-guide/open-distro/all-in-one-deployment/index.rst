@@ -19,7 +19,7 @@ The following components are installed:
 
 - Elastic Stack, including Open Distro for Elasticsearch as a single-node cluster, Filebeat, Kibana, and the Wazuh Kibana plugin.
 
-The communication is encrypted using SSL certificates. These certificates are generated using the Search Guard offline TLS tool. 
+The communication is encrypted using SSL certificates. These certificates are generated using the Wazuh cert offline TLS tool. 
 
 Also, to use the Wazuh Kibana plugin correctly, the extra Elasticsearch roles and users are added.
 
