@@ -8,7 +8,7 @@
 Installing Wazuh agents on macOS systems
 ========================================
 
-The agent runs on the host you want to monitor and communicates with the Wazuh manager, sending data in near real time through an encrypted and authenticated channel. The installation of a Wazuh agent on a macOS system uses deployment variables that facilitate the task of installing, registering, and configuring the agent.
+The agent runs on the host you want to monitor and communicates with the Wazuh manager, sending data in near real time through an encrypted and authenticated channel. The installation of a Wazuh agent on a macOS system uses deployment variables that facilitate the task of installing, registering, and configuring the agent. Alternatively, if you want to download the Wazuh agent package directly or check the compatible versions, see the :ref:`packages list <packages>` section . 
 
 #. Download the `Wazuh agent for macOS <https://packages.wazuh.com/|CURRENT_MAJOR|/macos/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_OSX|.pkg>`_. The package is suitable for macOS Sierra or greater. 
 
