@@ -7,7 +7,7 @@
 Installing Wazuh agents on Windows systems
 ==========================================
 
-The installation of a Wazuh agent on a Windows system uses deployment variables that facilitate the task of installing, registering, and configuring the agent. The agent runs on the host you want to monitor and communicates with the Wazuh manager, sending data in near real time through an encrypted and authenticated channel. Alternatively, if you want to download the Wazuh agent package directly or check the compatible versions, see the :ref:`packages list <packages>` section. 
+The agent runs on the host you want to monitor and communicates with the Wazuh manager, sending data in near real time through an encrypted and authenticated channel. 
 
 .. note:: To perform the installation, administrator privileges are required.
 

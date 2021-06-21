@@ -7,27 +7,15 @@
 Deployment variables
 ====================
 
-For an agent to be fully deployed and connected to the Wazuh server it needs to be installed, registered and configured. To make the process simple, the installers can use variables that allow the configuration provisioning.
+To simplify the process of installing, registering and configuring a Wazuh agent, the installers can use deployment variables that allow the configuration provisioning. 
 
-Below you can find a table showing the different operating systems with which you can make an automatic deployment using these variables.
-
-
-- :ref:`Linux deployment variables <deployment_variables_linux>`
-
-- :ref:`Windows deployment variables <deployment_variables_windows>` 
-
-- :ref:`macOS deployment variables <deployment_variables_macos>`
-
-- :ref:`AIX deployment variables <deployment_variables_aix>`     
-
-.. rst-class:: d-none
+Select your operating system to learn how to make an automatic deployment using these variables.
 
 .. toctree::
-    :hidden:
     :maxdepth: 1
 
-    deployment_variables_aix
-    deployment_variables_linux
-    deployment_variables_macos
-    deployment_variables_windows
+    Linux <deployment_variables_linux>
+    Windows <deployment_variables_windows>
+    macOS <deployment_variables_macos>
+    AIX <deployment_variables_aix>
 
