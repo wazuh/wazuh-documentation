@@ -79,7 +79,8 @@ Workflow
 The image below shows a schema of how a master node and a worker node interact with each other in the synchronization process. Every dotted square represents a synchronization task and they all work in parallel:
 
 .. image:: ../images/manual/cluster/cluster_flow.png
-
+  :align: center
+  
 Keep alive
 ~~~~~~~~~~
 
@@ -361,6 +362,7 @@ Integrity synchronization process
 Let's review the integrity synchronization process to see how asyncio tasks are created to process data from the peer. The following diagram shows the whole process of synchronizing integrity:
 
 .. image:: ../images/development/sync_integrity_diagram.png
+  :align: center
 
 * **1**: The worker's ``sync_integrity`` task wakes up after sleeping during *interval* seconds (which is defined in the `cluster.json <https://github.com/wazuh/wazuh/blob/stable/framework/wazuh/cluster/cluster.json#L108>`_ file). The first thing it does is checking whether the previous synchronization process is finished or not using the ``sync_i_w_m_p`` command. The master replies with a boolean value specifying that the previous synchronization process is finished and, therefore, the worker can start a new one.
 * **2**: The worker starts the synchronization process using ``sync_i_w_m`` command. When the master receives the command, it creates an asyncio task to process the received integrity from the worker node. But since no file has been received yet, the task keeps waiting until the worker sends the file. The master sends the worker the task ID so the worker can notify the master to wake it up once the file has been sent.
@@ -386,6 +388,7 @@ The type association with every endpoint can be found in the `requests_list.py <
 Imagine a cluster with two nodes, where there is an agent reporting to the worker node with id *020*. The following diagram shows the process of requesting ``GET/syscollector/020/os`` API endpoint:
 
 .. image:: ../images/development/distributed_dapi_worker.png
+  :align: center
 
 * **1**: The user does an API request. The API server receives the connection and calls ``distribute_function``. Since the requested endpoint is ``distributed_master`` the worker realizes it can't solve the request locally and proceeds to forward the request to the master node.
 * **2**: The API server doesn't have direct contact with the cluster master node. So the API process forwards the request to a Unix socket the cluster has to receive API requests locally. This Unix server is running inside the cluster process, so it can send requests to the master node. In order to identify the API request when the master sends a response back, the local server adds an ID (``local_client1`` in the example).

@@ -137,7 +137,7 @@ Certificates creation
 
   .. code-block:: console
 
-    # /usr/share/elasticsearch/plugins/opendistro_security/tools/securityadmin.sh -cd /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/ -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key
+    # /usr/share/elasticsearch/plugins/opendistro_security/tools/securityadmin.sh -cd /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/ -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin-key.pem
 
 Run the following command to ensure that the installation is successful:
 
@@ -225,8 +225,8 @@ Filebeat is the tool on the Wazuh server that securely forwards alerts and archi
     .. code-block:: console
 
       # mkdir /etc/filebeat/certs
-      # cp /etc/elasticsearch/certs/root-ca.pem /etc/filebeat/certs/
-      # mv /etc/elasticsearch/certs/filebeat* /etc/filebeat/certs/
+      # cp ~/certs/root-ca.pem /etc/filebeat/certs/
+      # mv ~/certs/filebeat* /etc/filebeat/certs/
 
 #. Enable and start the Filebeat service:
 
@@ -313,9 +313,8 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
     .. code-block:: console
 
       # mkdir /etc/kibana/certs
-      # cp /etc/elasticsearch/certs/root-ca.pem /etc/kibana/certs/
-      # mv /etc/elasticsearch/certs/kibana_http.key /etc/kibana/certs/kibana.key
-      # mv /etc/elasticsearch/certs/kibana_http.pem /etc/kibana/certs/kibana.pem
+      # cp ~/certs/root-ca.pem /etc/kibana/certs/
+      # mv ~/certs/kibana* /etc/kibana/certs/
 
 #. Link Kibana's socket to privileged port 443:
 

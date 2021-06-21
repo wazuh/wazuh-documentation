@@ -18,7 +18,7 @@ The following components will be installed:
 - Elastic Stack, including Open Distro for Elasticsearch as a single-node cluster or as a multi-node cluster, Kibana, and the Wazuh Kibana plugin, on the same host as Elasticsearch node or on a separate one.
 
 
-The communication is encrypted using SSL certificates. These certificates are generated using the Search Guard offline TLS tool.
+The communication is encrypted using SSL certificates. These certificates are generated using the Wazuh cert tool.
 
 Also, to use the Wazuh Kibana plugin correctly, the extra Elasticsearch roles and users are added.
 
