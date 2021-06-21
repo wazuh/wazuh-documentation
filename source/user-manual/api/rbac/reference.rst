@@ -515,7 +515,8 @@ Rootcheck
 ^^^^^^^^^^^^^^^
 rootcheck:clear
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`DELETE /rootcheck <operation/api.controllers.rootcheck_controller.delete_rootcheck>` (`agent:id`_, `agent:group`_)
+- :api-ref:`DELETE /rootcheck/{agent_id} <operation/api.controllers.rootcheck_controller.delete_rootcheck>` (`agent:id`_, `agent:group`_)
+- :api-ref:`DELETE /experimental/rootcheck <operation/api.controllers.experimental_controller.clear_rootcheck_database>` (`agent:id`_, `agent:group`_)
 
 rootcheck:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
