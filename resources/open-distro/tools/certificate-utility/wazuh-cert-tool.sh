@@ -34,7 +34,7 @@ getHelp() {
    echo ""
    echo "Usage: $0 arguments"
    echo -e "\t-a     | --admin-certificates Creates the admin certificates."
-   echo -e "\t-ca     | --root-ca-certificates Creates the root-ca certificates."
+   echo -e "\t-ca    | --root-ca-certificates Creates the root-ca certificates."
    echo -e "\t-a     | --elasticsearch-certificates Creates the Elasticsearch certificates."
    echo -e "\t-w     | --wazuh-certificates Creates the Wazuh server certificates."
    echo -e "\t-k     | --kibana-certificates Creates the Kibana certificates."
