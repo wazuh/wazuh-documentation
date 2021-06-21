@@ -43,7 +43,7 @@ Highlights
 
 - `#7588 <https://github.com/wazuh/wazuh/pull/7588>`_ Endpoint for ``allow_run_as`` parameter configuration:
   
-      The ``allow_run_as`` parameter is now removed from endpoints to create and update API users. Now, Wazuh adds a new endpoint to modify the user’s ``allow_run_as`` flag, allowing you to enable or disable the parameter when creating a user.
+      The ``allow_run_as`` parameter is now removed from endpoints to create and update API users. Now, Wazuh adds a new endpoint to modify the user’s ``allow_run_as`` flag, allowing you to enable or disable the parameter after creating a user.
 
 - `#7647 <https://github.com/wazuh/wazuh/pull/7647>`_ CVE data endpoint integration:
 
