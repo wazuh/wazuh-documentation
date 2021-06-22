@@ -14,9 +14,11 @@ This feature allows the user to customize the alert information to include speci
 Configuration example
 ---------------------
 
-MITRE ATT&CK assigns each attack technique an ID, which can be consulted on this `link <https://attack.mitre.org>`_. These techniques are grouped by tactics (Defense Evasion, Privilege Escalation, etc.) although some of them belong to more than one tactic. 
+MITRE ATT&CK assigns each attack technique an ID, which can be consulted on this `link <https://attack.mitre.org>`_. These techniques are grouped by tactics (Defense Evasion, Privilege Escalation, etc.) although some of them belong to more than one tactic.
 
-The ID `T1110 <https://attack.mitre.org/techniques/T1110/>`_ is related to the brute force attack. This technique fits in well with the following rule 100002, which detects a force brute attack and generates an alert. Below is an example of how to extend this MITRE ATT&CK technique to that rule.
+.. versionadded:: 5.0.0
+
+The technique ID `T1110 <https://attack.mitre.org/techniques/T1110/>`_ is related to the brute force attack and uses the 'Credential Access' tactic whose ID is `TA0006 <https://attack.mitre.org/tactics/TA0006/>`_. This technique and tactic fit in well with the following rule 100002, which detects a force brute attack and generates an alert. Below is an example of how to extend this MITRE ATT&CK technique and tactic to that rule.
 
 Add the following lines to /var/ossec/etc/rules/local_rules.xml:
 
@@ -36,22 +38,30 @@ Add the following lines to /var/ossec/etc/rules/local_rules.xml:
       <description>sshd: brute force trying to get access to the system.</description>
       <same_srcip />
       <mitre>
-        <id>T1110</id>
+        <techniqueID>T1110</techniqueID>
+        <tacticID>TA0006</tacticID>
       </mitre>
     </rule>
 
   </group>
 
-Restart Wazuh and you will have finished configuring the rule. 
+Restart Wazuh and you will have finished configuring the rule.
 
 If you want to configure a rule using two o more techniques, you can do it as follows:
 
 .. code-block:: xml
 
   <mitre>
-    <id>T1110</id>
-    <id>T1084</id>
-    <id>T1057</id>
+    <techniqueID>T1110</techniqueID>
+    <tacticID>TA0006</tacticID>
+  </mitre>
+  <mitre>
+    <techniqueID>T1078.004</techniqueID>
+    <tacticID>TA0001</tacticID>
+  </mitre>
+  <mitre>
+    <techniqueID>T1078.004</techniqueID>
+    <tacticID>TA0004</tacticID>
   </mitre>
 
 Alert example
