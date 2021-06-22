@@ -214,7 +214,8 @@ The following example shows an alert when a ``Communication site`` is modified i
                 "SourceFileExtension":"aspx",
                 "SiteUrl":"https://xxxx.sharepoint.com/",
                 "SourceFileName":"xxxx.aspx",
-                "SourceRelativeUrl":"SitePages"
+                "SourceRelativeUrl":"SitePages",
+                "Subscription":"Audit.SharePoint"
             }
         },
         "location":"office365"

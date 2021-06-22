@@ -219,7 +219,8 @@ If Wazuh successfully connects to Office 365 API, the events raised above will t
                 "SourceFileExtension":"aspx",
                 "SiteUrl":"https://xxxx.sharepoint.com/",
                 "SourceFileName":"xxxx.aspx",
-                "SourceRelativeUrl":"SitePages"
+                "SourceRelativeUrl":"SitePages",
+                "Subscription":"Audit.SharePoint"
             }
         },
         "location":"office365"
