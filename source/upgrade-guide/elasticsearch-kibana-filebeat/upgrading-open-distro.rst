@@ -448,6 +448,8 @@ Upgrading Kibana
 
       opendistro_security.multitenancy.enabled: true
 
+   When you access Kibana, a popup window asks you to define a tenant. Select one, for example global, and save the configuration.
+
 #. Restart Kibana:
 
     .. include:: ../../_templates/installations/basic/elastic/common/enable_kibana.rst
