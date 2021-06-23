@@ -13,7 +13,7 @@ The following components are installed:
 
 - **Wazuh cluster:** The script installs the Wazuh manager and Filebeat.
 
-It is highly recommended to first install Open Distro for Elasticsearch since the certificates needed for securing the communication are created during its installation. 
+During the Elasticsearch cluster installation, the certificates needed for securing the communication are generated. Therefore, we recommend that you first install Open Distro for Elasticsearch to encrypt the communication.
 
 .. toctree::
     :maxdepth: 1
