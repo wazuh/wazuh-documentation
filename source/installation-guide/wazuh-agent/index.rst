@@ -11,19 +11,22 @@ The Wazuh agent is multi-platform and runs on the hosts that the user wants to m
 
 The agent was developed considering the need to monitor a wide variety of different endpoints without impacting their performance. Therefore, it is supported on the most popular operating systems and only requires about 0.1 GB of RAM.
 
-The wazuh agent provides key features to enhance your system’s security. 
+The wazuh agent provides :ref:`key features <agents_modules>` to enhance your system’s security. 
 
-- **Log and data collection** - It reads operating system and application logs, and then securely forwards them to a central manager for rule-based analysis and storage.
+.. list-table::
+   :width: 100%
+   :widths: 50 50
 
-- **File integrity monitoring** - It monitors the file system, identifying changes in content, permissions, ownership, and attributes of files that need attention.
-
-- **Rootkit and malware detection** -  it scans the monitored systems looking for malware, rootkits, and suspicious anomalies. It can detect hidden files, cloaked processes, or unregistered network listeners as well as inconsistencies in system call responses.
-
-- **Security policy monitoring** -  It monitors system and application configuration settings to ensure they are compliant with your security policies, standards, and hardening guides. 
-
-- **Configuration assessments** - It performs periodic scans to detect applications that are known to be vulnerable, unpatched, or insecurely configured. These configuration checks can be customized to properly align with your organization. Alerts include recommendations for better configuration, references, and mapping with regulatory compliance.
-
-- **Software inventory** -  It pulls software inventory data and sends this information to the server, where it is correlated with continuously updated Common Vulnerabilities and Exposure (CVE) databases, in order to identify well-known vulnerable software.
+   * - Log collector
+     - Command execution
+   * - File integrity monitoring (FIM) 
+     - Security configuration assessment (SCA) 
+   * - System inventory 
+     - Malware detection
+   * - Active response
+     - Containers security monitoring
+   * - Cloud security monitoring
+     -
 
 To install a Wazuh agent, select your operating system and follow the instructions.
 
