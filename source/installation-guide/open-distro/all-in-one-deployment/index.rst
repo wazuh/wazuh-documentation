@@ -11,7 +11,7 @@ With all-in-one deployment, you install and configure the Wazuh server and Elast
 
 The following components are installed:
 
-- The Wazuh server, including the Wazuh manager as a single-node cluster and the Wazuh API.
+- The Wazuh server, including the Wazuh manager as a single-node cluster, and the Wazuh API.
 
 - Elastic Stack, including Open Distro for Elasticsearch as a single-node cluster, as well as Filebeat, Kibana, and the Wazuh Kibana plugin.
 
@@ -21,7 +21,7 @@ The following components are installed:
      :width: 100%
 
 
-With all-in-one deployment, the communication is encrypted using SSL certificates generated with the ``wazuh-cert-tool.sh``. Also, extra Elasticsearch roles and users are added to make sure that the Wazuh Kibana plugin works correctly.
+In a all-in-one deployment, the communication is encrypted using SSL certificates generated with the ``wazuh-cert-tool.sh``. Also, extra Elasticsearch roles and users are added to make sure that the Wazuh Kibana plugin works correctly.
 
 To guarantee the expected performance of the Wazuh components, verify that the host meets the hardware requirements described in the :ref:`Requirements <installation_requirements>` section.
 
