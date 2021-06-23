@@ -15,14 +15,6 @@ Follow the instructions to configure the official repositories to perform instal
 
 .. _all_in_one_elastic:
 
-Prerequisites
--------------
-
-Java Development Kit is installed as it is required by Open Distro for Elasticsearch.  To perform the following tasks, install ``wget``, ``curl``, ``unzip``, and ``libcap`` packages:
-
-.. include:: ../../../_templates/installations/before_installation_all_in_one.rst
-
-
 .. _all_in_one_wazuh:
 
 Installing Wazuh
@@ -41,7 +33,7 @@ Adding the Wazuh repository
   .. group-tab:: Yum
 
 
-    .. include:: ../../../_templates/installations/wazuh/yum/add_repository.rst
+    .. include:: ../../../_templates/installations/wazuh/yum/add_repository_aio.rst
 
 
 
@@ -55,7 +47,7 @@ Adding the Wazuh repository
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../_templates/installations/wazuh/zypp/add_repository.rst    
+    .. include:: ../../../_templates/installations/wazuh/zypp/add_repository_aio.rst    
 
 
 
