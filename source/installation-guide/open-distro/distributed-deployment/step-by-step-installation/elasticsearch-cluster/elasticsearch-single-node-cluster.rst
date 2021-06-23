@@ -8,9 +8,8 @@
 Elasticsearch single-node cluster
 =================================
 
-Open Distro for Elasticsearch is an open source distribution of Elasticsearch, a highly scalable full-text search engine. It offers advanced security, alerting, index management, deep performance analysis, and several other additional features.
+Install Elasticsearch on a single-node cluster. Open Distro for Elasticsearch is an open source distribution of Elasticsearch, a highly scalable full-text search engine. It offers advanced security, alerting, index management, deep performance analysis, and several other additional features.
 
-You can install Elasticsearch on a single-node cluster.
 
 .. note:: Root user privileges are necessary to run all the commands.
 
@@ -126,14 +125,18 @@ An example response should look as follows:
 
 .. note:: The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it with the following command ``/usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer``. Make sure to restart the Elasticsearch service afterward. 
 
-It is highly recommended to change Elasticsearch default passwords for the users' found at the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. It is also recommended to customize the file ``/etc/elasticsearch/jvm.options`` in order to improve the performance of Elasticsearch. Learn more about these processes in the :ref:`Elasticsearch tuning <elastic_tuning>` section.
+
+.. note:: It is highly recommended to change the default passwords of Elasticsearch for the users’ passwords found at the file ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. To perform this action, see the :ref:`Elasticsearch tuning <elastic_tuning>` section.
+
+
+It is also recommended to customize the file ``/etc/elasticsearch/jvm.options`` in order to improve the performance of Elasticsearch. Learn more about this process in the :ref:`user manual <elastic_tuning>`.
 
 To uninstall Elasticsearch, see the :ref:`Uninstalling <uninstall_elasticsearch>` section.
 
 Next steps
 ----------
 
-You can now install the Wazuh server. First, choose the cluster mode.
+You can now proceed with the Wazuh server installation. To do so, choose the cluster mode.
 
 - :ref:`Wazuh single-node cluster<wazuh_single_node_cluster>`
 - :ref:`Wazuh multi-node cluster<wazuh_multi_node_cluster>`
