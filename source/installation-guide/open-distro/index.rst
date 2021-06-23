@@ -30,7 +30,7 @@ For each type of deployment, the user can choose between two installation method
 
 - **Unattended**: You can install Wazuh using scripts that automate the installation process. The scripts also perform health checks to verify that the available system resources meet the minimal requirements.
 
-- **Step by step**: This is a manual installation that includes a detailed description of each step of the installation process.
+- **Step by step**: This is a manual way of carrying out the installation that includes a detailed description of each step of the process.
 
 
 Start deploying Wazuh with Open Distro for Elasticsearch
