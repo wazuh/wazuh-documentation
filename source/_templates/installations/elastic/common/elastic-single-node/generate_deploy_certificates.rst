@@ -6,7 +6,7 @@
 
     # mkdir /etc/elasticsearch/certs
 
-#. Download the Wazuh cert tool to create the certificates:
+#. Download the ``wazuh-cert-tool.sh`` to create the certificates:
 
   .. code-block:: console
 
@@ -37,7 +37,7 @@ Replace the values ``<node-name>`` and ``<node-ip>``  with the corresponding nam
   
   To learn more about how to create and configure the certificates, see the :ref:`Certificates deployment <user_manual_certificates>` section.
 
-* Run the Wazuh cert Tool to create the certificates:
+* Run the ``wazuh-cert-tool.sh`` to create the certificates:
 
   .. code-block:: console
 
