@@ -17,7 +17,7 @@ Wazuh server installation
 
 There are two different options for deploying Wazuh:
 
-- :ref:`All-in-one <all_in_one_index>`: All the Wazuh components are installed on the same host. You can choose between unattended installation, which is an automated way of installing the solution with a single script, or step-by-step installation, a manual way of carrying out the process. Moreover, you can download our ready-to-use :ref:`OVA <virtual_machine>` to start using Wazuh with this deployment option.
+- :ref:`All-in-one <all_in_one_index>`: The Wazuh server and Elastic Stack are installed on the same host. With this deployment option, you can install Wazuh directly on your system or download our ready-to-use :ref:`OVA <virtual_machine>`.
 
 - :ref:`Distributed <distributed_index>`: Each component is installed on a separate host as a single-node or multi-node cluster. This type of deployment provides high availability and scalability of the product, and it is convenient for large working environments.
 
