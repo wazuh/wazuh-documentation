@@ -11,7 +11,7 @@ The following components are installed:
 
 - The Wazuh server, including the Wazuh manager as a single-node cluster or as a multi-node cluster, the Wazuh API, and Filebeat.
 
-- Elastic Stack, including Open Distro for Elasticsearch as a single-node cluster or as a multi-node cluster. Installing Elastic Stack also includes the installation of Kibana and the Wazuh Kibana plugin, on the same host as Elasticsearch node or on a separate one.
+- Elastic Stack, including Open Distro for Elasticsearch as a single-node cluster or as a multi-node cluster. Installing Elastic Stack also includes the installation of Kibana and the Wazuh Kibana plugin, on the same host as the Elasticsearch node or on a separate one.
 
 
    .. thumbnail:: ../../../images/installation/distributed_no_title.png
@@ -20,7 +20,7 @@ The following components are installed:
 
 
 
-With distributed deployment, the communication is encrypted using SSL certificates generated with the ``wazuh-cert-tool.sh``. Also, extra Elasticsearch roles and users are added to make sure that the Wazuh Kibana plugin works correctly.
+In a distributed deployment, the communication is encrypted using SSL certificates generated with the ``wazuh-cert-tool.sh``. Also, extra Elasticsearch roles and users are added to make sure that the Wazuh Kibana plugin works correctly.
 
 To guarantee the expected performance of the Wazuh and Elastic Stack components, all hosts must meet the hardware requirements described in the :ref:`Requirements <installation_requirements>` section.
 
