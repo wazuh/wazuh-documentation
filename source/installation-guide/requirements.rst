@@ -5,7 +5,7 @@
 Requirements
 ============
 
-See the supported operating systems and the recommended hardware requirements for the different types of deployments of the Wazuh installation. Make sure that your system environment meets all requirements and that you have root user privileges.
+Check the supported operating systems and the recommended hardware requirements for the different types of deployments of the Wazuh installation. Make sure that your system environment meets all requirements and that you have root user privileges.
 
 Supported operating systems
 ---------------------------
