@@ -126,7 +126,7 @@ An example response should look as follows:
 .. note:: The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it with the following command ``/usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer``. Make sure to restart the Elasticsearch service afterward. 
 
 
-.. note:: It is highly recommended to change the default passwords of Elasticsearch for the users’ passwords found at the file ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. To perform this action, see the :ref:`Elasticsearch tuning <elastic_tuning>` section.
+.. note:: It is highly recommended to change the default passwords of Elasticsearch for the users’ passwords. To perform this action, see the :ref:`Elasticsearch tuning <elastic_tuning>` section.
 
 
 It is also recommended to customize the file ``/etc/elasticsearch/jvm.options`` in order to improve the performance of Elasticsearch. Learn more about this process in the :ref:`user manual <elastic_tuning>`.
