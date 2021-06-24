@@ -40,7 +40,7 @@ Adding the Wazuh repository
   .. group-tab:: APT
 
 
-    .. include:: ../../../_templates/installations/wazuh/deb/add_repository.rst
+    .. include:: ../../../_templates/installations/wazuh/deb/add_repository_aio.rst
 
 
 
