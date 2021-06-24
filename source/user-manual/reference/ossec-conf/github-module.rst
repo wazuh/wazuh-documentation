@@ -28,6 +28,7 @@ Options
 - `only_future_events`_
 - `interval`_
 - `time_delay`_
+- `curl_max_size`_
 - `api_auth`_
 - `api_auth\\org_name`_
 - `api_auth\\api_token`_
@@ -44,6 +45,8 @@ Options
 | `interval`_                            | A positive number + suffix                   |
 +----------------------------------------+----------------------------------------------+
 | `time_delay`_                          | A positive number + suffix                   |
++----------------------------------------+----------------------------------------------+
+| `curl_max_size`_                       | A positive number + suffix                   |
 +----------------------------------------+----------------------------------------------+
 | `api_auth`_                            | N/A                                          |
 +----------------------------------------+----------------------------------------------+
@@ -101,6 +104,17 @@ Each scan will monitor until that delay backwards, by default it is 1 second.
 +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
 | **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days) |
 +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+
+curl_max_size
+^^^^^^^^^^^^^
+
+Specifies the maximum size allowed for the GitHub API response.
+
++--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Default value**  | 1M                                                                                                                                                           |
++--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Allowed values** | A positive number that should contain a suffix character indicating a size unit, such as b/B (bytes), k/K (kilobytes), m/M (megabytes), and g/G (gigabytes). |
++--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 api_auth
 --------
@@ -181,6 +195,7 @@ Example of configuration
         <enabled>no</enabled>
         <interval>10m</interval>
         <time_delay>1s</time_delay>
+        <curl_max_size>1M</curl_max_size>
         <only_future_events>yes</only_future_events>
         <api_auth>
             <org_name>dummy</org_name>
@@ -200,6 +215,7 @@ Example of multiple organizations
         <enabled>no</enabled>
         <interval>1h</interval>
         <time_delay>10s</time_delay>
+        <curl_max_size>1M</curl_max_size>
         <only_future_events>no</only_future_events>
         <api_auth>
             <org_name>dummy1</org_name>
