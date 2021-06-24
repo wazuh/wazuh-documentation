@@ -247,10 +247,8 @@ Upon the first access to Kibana, the browser shows a warning message stating tha
 
 .. _configure_kibana_unattended:
 
-Configuring Kibana
-^^^^^^^^^^^^^^^^^^
 
-.. note:: It is highly recommended to change the default passwords of Elasticsearch for the users' passwords found at the file ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml``. To perform this action, see the :ref:`Elasticsearch tuning <change_elastic_pass>` section.
+.. note:: It is highly recommended to change the default passwords of Elasticsearch for the users' passwords. To perform this action, see the :ref:`Elasticsearch tuning <change_elastic_pass>` section.
 
 If you need to uninstall Elasticsearch and Kibana, visit the :ref:`Uninstalling <user_manual_uninstall_wazuh_installation_open_distro>` section.
 
