@@ -225,7 +225,7 @@ The final stage of the process for installing a multi-node cluster is performed 
 
 
 
-.. note:: It is highly recommended to change the default passwords of Elasticsearch for the users’ passwords found at the file ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. To perform this action, see the :ref:`Elasticsearch tuning <elastic_tuning>` section.
+.. note:: It is highly recommended to change the default passwords of Elasticsearch for the users’ passwords. To perform this action, see the :ref:`Elasticsearch tuning <elastic_tuning>` section.
 
 
 It is also recommended to customize the file ``/etc/elasticsearch/jvm.options`` in order to improve the performance of Elasticsearch. Learn more about these processes in the :ref:`user manual <elastic_tuning>`.
