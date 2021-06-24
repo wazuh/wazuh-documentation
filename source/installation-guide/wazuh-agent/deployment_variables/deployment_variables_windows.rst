@@ -23,7 +23,7 @@ Below you can find a table describing the variables used by Wazuh installers on 
 +------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
 |   WAZUH_PROTOCOL                   |  Sets the communication protocol between the manager and the agent. Accepts UDP and TCP. Default is TCP.                     |
 +------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
-|   WAZUH_REGISTRATION_SERVER        |  Specifies the Authd IP address.  If empty, the value set in ``WAZUH_MANAGER`` will be used.                                 |
+|   WAZUH_REGISTRATION_SERVER        |  Specifies the Authd IP address.                                                                                             |
 +------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
 |   WAZUH_REGISTRATION_PORT          |  Specifies the Authd connection port.                                                                                        |
 +------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
