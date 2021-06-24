@@ -15,7 +15,9 @@ This document will go through the installation of the Wazuh server components an
 Installing the Wazuh server
 ---------------------------
 
-The Wazuh server collects and analyzes data from the deployed Wazuh agents. It runs the Wazuh manager, the Wazuh API, and Filebeat. The first step to set up Wazuh is adding the Wazuh's repository to the servers, alternatively, the installation can be done using packages. A list with all the available packages can be found :ref:`here <packages>`. 
+The Wazuh server collects and analyzes data from the deployed Wazuh agents. It runs the Wazuh manager, the Wazuh API, and Filebeat. The first step to set up Wazuh is adding the Wazuh's repository to the servers.
+
+As an alternative to this installation method, you can install Wazuh using packages. To perform this action, see the :ref:`Package list <packages>` section. 
 
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
