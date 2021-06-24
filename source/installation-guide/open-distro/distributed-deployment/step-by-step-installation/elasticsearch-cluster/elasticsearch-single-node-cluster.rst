@@ -14,16 +14,6 @@ You can install Elasticsearch on a single-node cluster.
 
 .. note:: Root user privileges are necessary to run all the commands.
 
-Installing Elasticsearch
-------------------------
-
-Prerequisites
-~~~~~~~~~~~~~
-
-Java Development Kit is installed as it is required by Open Distro for Elasticsearch. To perform the following tasks, install ``wget``, ``curl``, and ``unzip`` packages:
-
-.. include:: ../../../../../_templates/installations/elastic/common/before_installation.rst
-
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -33,21 +23,21 @@ Adding the Wazuh repository
   .. group-tab:: Yum
 
 
-    .. include:: ../../../../../_templates/installations/wazuh/yum/add_repository.rst
+    .. include:: ../../../../../_templates/installations/wazuh/yum/add_repository_elastic_cluster.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../../../../_templates/installations/wazuh/deb/add_repository.rst
+    .. include:: ../../../../../_templates/installations/wazuh/deb/add_repository_elastic_cluster.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../../../_templates/installations/wazuh/zypp/add_repository.rst
+    .. include:: ../../../../../_templates/installations/wazuh/zypp/add_repository_elastic_cluster.rst
 
 
 
