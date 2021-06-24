@@ -9,7 +9,7 @@ Step-by-step installation
 
 Install Wazuh and Open Distro for Elasticsearch components in an all-in-one deployment. Follow the instructions to configure the official repositories to perform installations. 
 
-As an alternative to the step-by-step installation, you can download the Wazuh agent package directly. To perform this action, see the :ref:`Packages list <packages>` section. 
+As an alternative to the step-by-step installation, you can install Wazuh using packages. To perform this action, see the :ref:`Packages list <packages>` section. 
 
 .. note:: Root privileges are required to execute all the commands.
 
@@ -337,7 +337,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 Upon the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or,  for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser.  Alternatively, a certificate from a trusted authority can be configured. 
 
 
-.. note::  It is highly recommended to change the default passwords of Elasticsearch for the users' passwords found at the file ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml``. To perform this action, see the :ref:`Elasticsearch tuning <elastic_tuning>` section.
+.. note::  It is highly recommended to change the default passwords of Elasticsearch for the users' passwords. To perform this action, see the :ref:`Elasticsearch tuning <elastic_tuning>` section.
 
 It is also recommended to customize the file ``/etc/elasticsearch/jvm.options`` to improve the performance of Elasticsearch. Learn more about this process in the :ref:`user manual <change_elastic_pass>`.
 
