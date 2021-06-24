@@ -25,7 +25,9 @@ The agent runs on the host you want to monitor and communicates with the Wazuh m
                   # launchctl setenv WAZUH_MANAGER "10.0.0.2" && installer -pkg wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_OSX|.pkg -target /
     
                 For additional deployment options such as agent name, agent group, and registration password, see the :ref:`Deployment variables for macOS <deployment_variables_macos>` section.
-    
+                
+                .. note:: Alternatively, if you want to install an agent without registering it, omit the deployment variables. To learn more about the different registration methods, see the :ref:`Registering Wazuh agents <register_agents>` section.
+
              #. To complete the installation process, start the Wazuh agent.
     
                 .. code-block:: console
