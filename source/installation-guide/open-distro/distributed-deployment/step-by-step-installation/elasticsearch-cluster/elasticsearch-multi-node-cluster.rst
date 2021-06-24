@@ -99,14 +99,6 @@ Certificates creation and deployment
 
 The second stage of the process for installing a multi-node cluster is performed on the subsequent nodes of the Elasticsearch cluster. 
 
-
-Prerequisites
-~~~~~~~~~~~~~
-
-Open Distro for Elasticsearch requires the Java Development Kit and other packages installation including ``wget``, ``curl``, and ``unzip`` that will be used in further steps:
-
-.. include:: ../../../../../_templates/installations/elastic/common/before_installation.rst
-
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -117,21 +109,21 @@ Adding the Wazuh repository
   .. group-tab:: Yum
 
 
-    .. include:: ../../../../../_templates/installations/wazuh/yum/add_repository.rst
+    .. include:: ../../../../../_templates/installations/wazuh/yum/add_repository_elastic_cluster.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../../../../_templates/installations/wazuh/deb/add_repository.rst
+    .. include:: ../../../../../_templates/installations/wazuh/deb/add_repository_elastic_cluster.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../../../_templates/installations/wazuh/zypp/add_repository.rst
+    .. include:: ../../../../../_templates/installations/wazuh/zypp/add_repository_elastic_cluster.rst
 
 
 
