@@ -15,14 +15,6 @@ As an alternative to this installation method, you can install Wazuh using packa
 
 .. _all_in_one_elastic:
 
-Prerequisites
--------------
-
-Java Development Kit is installed as it is required by Open Distro for Elasticsearch.  To perform the following tasks, install ``wget``, ``curl``, ``unzip``, and ``libcap`` packages:
-
-.. include:: ../../../_templates/installations/before_installation_all_in_one.rst
-
-
 .. _all_in_one_wazuh:
 
 Installing Wazuh
@@ -41,21 +33,21 @@ Adding the Wazuh repository
   .. group-tab:: Yum
 
 
-    .. include:: ../../../_templates/installations/wazuh/yum/add_repository.rst
+    .. include:: ../../../_templates/installations/wazuh/yum/add_repository_aio.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../../_templates/installations/wazuh/deb/add_repository.rst
+    .. include:: ../../../_templates/installations/wazuh/deb/add_repository_aio.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../_templates/installations/wazuh/zypp/add_repository.rst    
+    .. include:: ../../../_templates/installations/wazuh/zypp/add_repository_aio.rst    
 
 
 
@@ -137,7 +129,7 @@ Certificates creation
 
   .. code-block:: console
 
-    # /usr/share/elasticsearch/plugins/opendistro_security/tools/securityadmin.sh -cd /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/ -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin-key.pem
+    # export JAVA_HOME=/usr/share/elasticsearch/jdk/ && /usr/share/elasticsearch/plugins/opendistro_security/tools/securityadmin.sh -cd /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/ -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin-key.pem
 
 Run the following command to ensure that the installation is successful:
 

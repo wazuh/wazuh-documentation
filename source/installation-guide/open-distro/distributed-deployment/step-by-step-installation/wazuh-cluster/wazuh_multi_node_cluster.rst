@@ -12,13 +12,6 @@ This document will go through the installation of the Wazuh server components an
 
 .. note:: Root user privileges are required to run all the commands described below.
 
-Prerequisites
--------------
-
-Before installing the Wazuh servers and Filebeat, some extra packages must be installed:
-
-.. include:: ../../../../../_templates/installations/elastic/common/before_installation_kibana_filebeat.rst
-
 Installing the Wazuh server
 ---------------------------
 
@@ -38,21 +31,21 @@ This section describes how to add the Wazuh repository. It will be used for the 
     .. group-tab:: Yum
 
 
-      .. include:: ../../../../../_templates/installations/wazuh/yum/add_repository.rst
+      .. include:: ../../../../../_templates/installations/wazuh/yum/add_repository_wazuh_server.rst
 
 
 
     .. group-tab:: APT
 
 
-      .. include:: ../../../../../_templates/installations/wazuh/deb/add_repository.rst
+      .. include:: ../../../../../_templates/installations/wazuh/deb/add_repository_wazuh_server.rst
 
 
 
     .. group-tab:: ZYpp
 
 
-      .. include:: ../../../../../_templates/installations/wazuh/zypp/add_repository.rst
+      .. include:: ../../../../../_templates/installations/wazuh/zypp/add_repository_wazuh_server.rst
 
 
 
