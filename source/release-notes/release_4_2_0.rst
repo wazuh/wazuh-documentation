@@ -161,7 +161,7 @@ This release includes new features or enhancements.
 - `#7797 <https://github.com/wazuh/wazuh/pull/7797>`_ Compilation from sources now downloads the prebuilt external dependencies. This improvement helps to consume fewer resources and eliminates overhead. 
 - `#7807 <https://github.com/wazuh/wazuh/pull/7807>`_ The old implementation of logtest is restored and renamed as ``wazuh-logtest-legacy``, improving functionality.
 - `#7974 <https://github.com/wazuh/wazuh/pull/7974>`_ Wazuh adds performance improvements to Analysisd when running on multi-core hosts.
-- `#8021 <https://github.com/wazuh/wazuh/pull/8021>`_ Agents now report to the manager when they stopped. This allows the manager to log an alert and immediately set their state to "disconnected".
+- `#8021 <https://github.com/wazuh/wazuh/pull/8021>`_ Agents now notify the manager that they are stopping. This allows the manager to log an alert and immediately set their state to "disconnected".
 - `#7327 <https://github.com/wazuh/wazuh/pull/7327>`_ Wazuh building process is now independent of the installation directory. With this improvement, the embedded Python interpreter is now provided in a preinstalled, portable package, and the Wazuh resources are now accessed via a relative path to the installation directory.
 - `#8201 <https://github.com/wazuh/wazuh/pull/8201>`_ In the Security configuration assessment module, the error log message shown when the agent cannot connect to the SCA queue is now changed to a warning message to redefine its severity.
 - `#8921 <https://github.com/wazuh/wazuh/pull/8921>`_ The agent now validates the Audit connection configuration when enabling whodata for FIM on Linux.
@@ -226,7 +226,7 @@ Reference                                                         Description
 =================================================================================================================    =============
 Reference                                                                                                            Description
 =================================================================================================================    =============
-`#6934 <https://github.com/wazuh/wazuh/pull/6934>`_                                                                  In FIM, setting ``scan_time`` to 12am or 12pm now works correctly. 
+`#6934 <https://github.com/wazuh/wazuh/pull/6934>`_                                                                  In FIM, setting ``scan_time`` to ``12am`` or ``12pm`` now works correctly. 
 `#6802 <https://github.com/wazuh/wazuh/pull/6802>`_                                                                  In FIM, reaching the file limit no longer creates wrong alerts for events triggered in a monitored folder. Now, a new SQLite query fetches the information of all the files in a specific order.
 `#7105 <https://github.com/wazuh/wazuh/pull/7105>`_                                                                  Issue in Analysisd that reserved the static decoder field name ``command`` but was not evaluated is resolved. From now on, it is always treated as a dynamic decoder field.
 `#7073 <https://github.com/wazuh/wazuh/pull/7073>`_                                                                  The evaluation of fields in the ``description`` tag of roles now works correctly.
