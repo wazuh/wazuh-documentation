@@ -5,7 +5,7 @@
 Distributed deployment
 ======================
 
-You install and configure the Wazuh server and Elastic Stack, following a distributed deployment process. In this type of deployment, the components will be installed on separate hosts. Kibana can be installed either on the same server of an Elasticsearch node or on a separate one.
+You install and configure the Wazuh server and Elastic Stack, following a distributed deployment process. In this type of deployment, the components are installed on separate hosts. Kibana can be installed either on the same server of an Elasticsearch node or on a separate one.
 
 The following components are installed:
 
