@@ -11,7 +11,7 @@ The following components are installed:
 
 - The Wazuh server, including the Wazuh manager as a single-node cluster or as a multi-node cluster, the Wazuh API, and Filebeat.
 
-- Elastic Stack, including Open Distro for Elasticsearch as a single-node cluster or as a multi-node cluster. Installing Elastic Stack also includes the installation of Kibana and the Wazuh Kibana plugin, on the same host as the Elasticsearch node or on a separate one.
+- Elastic Stack, including Open Distro for Elasticsearch as a single-node cluster or as a multi-node cluster. Installing Elastic Stack also includes the installation of Kibana, and the Wazuh Kibana plugin, on the same host as the Elasticsearch node or on a separate one.
 
 
    .. thumbnail:: ../../../images/installation/distributed_no_title.png
