@@ -25,7 +25,7 @@ The installation process for a multi-node cluster is performed in three stages.
 1. Initial node configuration
 ---------------------------------
 
-The first stage of the process for installing a multi-node cluster is performed on the first Elasticsearch node to be configured. The SSL certificates generated in this stage are to later be deployed to the subsequent nodes.
+The first stage of the process for installing a multi-node cluster is performed on the first Elasticsearch node to be configured. The SSL certificates generated in this stage are later deployed to the subsequent nodes.
 
 Prerequisites
 ~~~~~~~~~~~~~
