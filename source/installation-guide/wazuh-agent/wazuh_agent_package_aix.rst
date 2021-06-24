@@ -19,7 +19,7 @@ The deployment of a Wazuh agent on an AIX system uses deployment variables that 
    
       # WAZUH_MANAGER="10.0.0.2" rpm -ivh wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_AIX|.aix.ppc.rpm
 
-   For additional deployment options such as agent name, agent group, and registration password, see :ref:`deployment variables for AIX <deployment_variables_aix>` section.   
+   For additional deployment options such as agent name, agent group, and registration password, see :ref:`Deployment variables for AIX <deployment_variables_aix>` section.   
    
    .. note:: Alternatively, if you want to install an agent without registering it, omit the deployment variables.  To learn more about the different registration methods, see the :ref:`Registering Wazuh agents <register_agents>` section.
 
