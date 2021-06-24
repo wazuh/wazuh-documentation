@@ -25,7 +25,7 @@ The installation process for a multi-node cluster is performed in three stages.
 1. Initial node configuration
 ---------------------------------
 
-The first stage of the process for installing a multi-node cluster is performed on the first Elasticsearch node to be configured. The SSL certificates generated in this stage are to later be deployed to the subsequent nodes.
+The first stage of the process for installing a multi-node cluster is performed on the first Elasticsearch node to be configured. The SSL certificates generated in this stage are later deployed to the subsequent nodes.
 
 Prerequisites
 ~~~~~~~~~~~~~
@@ -224,7 +224,11 @@ The final stage of the process for installing a multi-node cluster is performed 
         # curl -XGET https://<elasticsearch_ip>:9200/_cat/nodes -u admin:admin -k
 
 
-It is highly recommended to change Elasticsearch default passwords for the users' found at the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. It is also recommended to customize the file ``/etc/elasticsearch/jvm.options`` in order to improve the performance of Elasticsearch. Learn more about these processes in the :ref:`Elasticsearch tuning <elastic_tuning>` section.
+
+.. note:: It is highly recommended to change the default passwords of Elasticsearch for the users’ passwords. To perform this action, see the :ref:`Elasticsearch tuning <elastic_tuning>` section.
+
+
+It is also recommended to customize the file ``/etc/elasticsearch/jvm.options`` in order to improve the performance of Elasticsearch. Learn more about these processes in the :ref:`user manual <elastic_tuning>`.
 
 
 

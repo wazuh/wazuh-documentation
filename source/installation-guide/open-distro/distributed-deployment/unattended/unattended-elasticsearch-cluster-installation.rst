@@ -7,13 +7,13 @@ Elasticsearch & Kibana unattended installation
 
 You can install Open Distro for Elasticsearch and Open Distro for Kibana using an automated script. This script performs a health check to verify that the system has enough resources to achieve optimal performance.
 
-For more information on system resources, see the :ref:`requirements <installation_requirements>` section.
+For more information on system resources, see the :ref:`Requirements <installation_requirements>` section.
 
 
 .. note:: Root user privileges are required to run all the commands. To download the script, the package ``curl`` is used.
 
 
-The script allows installing both Elasticsearch and Kibana. They can be installed either together or on separate machines. There are options available for you to use when running the script:
+The script allows installing both Elasticsearch and Kibana, either together or on separate machines. There are options available for you to use when running the script:
 
 +-------------------------------+----------------------------------------------------------------------------------------------------------------+
 | Options                       | Purpose                                                                                                        |
@@ -193,7 +193,7 @@ Choose the cluster mode between single-node or multi-node:
 
     **Cluster initialization**
 
-      Once all the nodes on the cluster are started, run the ``securityadmin`` script  on the **initial node** to load the new certificates information and start the cluster. To run this command, the value ``<elasticsearch_IP>`` must be replaced by the Elasticsearch installation IP:
+      Once all the nodes of the cluster are started, run the ``securityadmin`` script  on the **initial node** to load the new certificates information and start the cluster. To run this command, the value ``<elasticsearch_IP>`` must be replaced by the Elasticsearch installation IP:
 
       .. code-block:: console
 
@@ -247,16 +247,13 @@ Upon the first access to Kibana, the browser shows a warning message stating tha
 
 .. _configure_kibana_unattended:
 
-Configuring Kibana
-^^^^^^^^^^^^^^^^^^
 
-It is highly recommended to change the default passwords of Elasticsearch for the users' passwords found at the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. For more information about this process, see the :ref:`Elasticsearch tuning <change_elastic_pass>` section.
+.. note:: It is highly recommended to change the default passwords of Elasticsearch for the users' passwords. To perform this action, see the :ref:`Elasticsearch tuning <change_elastic_pass>` section.
 
-Once Kibana is running it is necessary to assign the corresponding role to each user. To learn more, see the :ref:`Setting up the Wazuh Kibana plugin <connect_kibana_app>` section. 
-
-If you need to uninstall Elasticsearch and Kibana, visit the :ref:`uninstalling <user_manual_uninstall_wazuh_installation_open_distro>` section.
+If you need to uninstall Elasticsearch and Kibana, visit the :ref:`Uninstalling <user_manual_uninstall_wazuh_installation_open_distro>` section.
 
 Next steps
-~~~~~~~~~~
+----------
 
 Once the Elastic Stack environment is ready, the Wazuh server can be installed. To do this, follow the steps described in the :ref:`Wazuh server <unattended_distributed_wazuh>` section of the installation guide.
+
