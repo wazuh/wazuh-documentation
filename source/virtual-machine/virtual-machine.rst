@@ -8,7 +8,7 @@
 Virtual Machine (OVA)
 =====================
 
-Wazuh provides a pre-built virtual machine image (OVA) that you can directly import using VirtualBox or other OVA compatible virtualization systems. Remember that this VM only runs on 64-bit systems and does not provide high availability and scalability of the product.
+Wazuh provides a pre-built virtual machine image (OVA) that you can directly import using VirtualBox or other OVA compatible virtualization systems. This VM only runs on 64-bit systems and does not provide high availability and scalability of the product.
 
 
 This virtual appliance, available `in this link <https://packages.wazuh.com/|CURRENT_MAJOR|/vm/wazuh-|WAZUH_LATEST_OVA|_|OPEN_DISTRO_LATEST|.ova>`_, contains the following components:
