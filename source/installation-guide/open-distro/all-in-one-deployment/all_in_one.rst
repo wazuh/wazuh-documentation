@@ -9,7 +9,7 @@ Step-by-step installation
 
 Install Wazuh and Open Distro for Elasticsearch components in an all-in-one deployment. Follow the instructions to configure the official repositories to perform installations. 
 
-As an alternative to the step-by-step installation, you can install Wazuh using packages. To perform this action, see the :ref:`Packages list <packages>` section. 
+As an alternative to this installation method, you can install Wazuh using packages. To perform this action, see the :ref:`Packages list <packages>` section. 
 
 .. note:: Root privileges are required to execute all the commands.
 
