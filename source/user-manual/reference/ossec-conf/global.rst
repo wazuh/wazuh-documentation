@@ -256,17 +256,21 @@ This sets the memory size for the event correlation engine.
 white_list
 ^^^^^^^^^^
 
-This specifies an IP for which Active Responses will not be triggered. Only one IP may be specified for each ``<while_list>`` tag, but several IPs may be used by including multiple ``<white_list>`` tags.
+This specifies an IP, netblock, or hostname for which Active Responses will not be triggered. Only one of those values may
+be specified for each ``<while_list>`` tag, but several values may be used by including multiple ``<white_list>`` tags.
+For this to work the field **srcip** needs to be extracted from the event in the correspondent decoder as it is the one that
+will be use to compare against the values defined in white_list.
 
-+--------------------+----------------------------+
-| **Default value**  | n/a                        |
-+--------------------+----------------------------+
-| **Allowed values** | Any IP address or netblock |
-+--------------------+----------------------------+
++--------------------+-----------------------------------------------------------+
+| **Default value**  | n/a                                                       |
++--------------------+-----------------------------------------------------------+
+| **Allowed values** | Any IP address, netblock (Ej: 192.168.0.0/16) or hostname |
++--------------------+-----------------------------------------------------------+
 
 .. note::
 
-  This option is only valid in server and local installs.
+  This option is only valid in server and local installs. Also, wazuh supports IPv4 mapped into IPv6 if the
+  IPv6 address contains the prefix **::ffff:**, e.g, from ::ffff:192.168.1.17 the ip 192.168.1.17 would be extracted.
 
 host_information
 ^^^^^^^^^^^^^^^^
