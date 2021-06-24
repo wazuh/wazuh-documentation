@@ -35,7 +35,7 @@ Highlights
 
 - `#7105 <https://github.com/wazuh/wazuh/pull/7105>`_, `#7018 <https://github.com/wazuh/wazuh/pull/7018>`_, `#7268 <https://github.com/wazuh/wazuh/pull/7268>`_, `#8224 <https://github.com/wazuh/wazuh/pull/8224>`_, `#7795 <https://github.com/wazuh/wazuh/pull/7795>`_ Stability enhancements on Wazuh features:
 
-      Wazuh new fixes provide stability to several features of the solution, including Analysisd, File integrity monitoring, Remoted, and Vulnerability detector. These changes improve user experience throughout the product.
+      Wazuh new fixes provide stability to several features of the solution, including Analysisd, File Integrity Monitoring, Remoted, and Vulnerability Detector. These changes improve user experience throughout the product.
 
 
 
@@ -137,16 +137,16 @@ This release includes new features or enhancements.
 
 **Core**
 
-- `#3368 <https://github.com/wazuh/wazuh/issues/3368>`_ Wazuh adds support for bookmarks in ``logcollector``. This allows you to follow the log file from the last read line where the agent stopped. 
+- `#3368 <https://github.com/wazuh/wazuh/issues/3368>`_ Wazuh adds support for bookmarks in Logcollector. This allows you to follow the log file from the last read line where the agent stopped. 
 - `#5652 <https://github.com/wazuh/wazuh/issues/5652>`_ Wazuh collects multi-line logs with a variable number of lines in Logcollector. This improved support is especially useful when dealing with logs such as Java Stack Trace, since the number of lines in the log no longer needs to be held constant for every event type.
 - `#6830 <https://github.com/wazuh/wazuh/pull/6830>`_ A new option is added that lets you limit the maximum number of files read per second for File Integrity Monitoring (FIM) scan. You now have more FIM control by allowing you to set the limit of the amount of data analyzed during a scheduled scan.
-- `#7109 <https://github.com/wazuh/wazuh/pull/7109>`_ Wazuh adds statistics file to Logcollector. In addition to the alternative of accessing metrics via API queries, you now have the option to access this information from a file stored in an agent, according to a configurable time. This data is generated and updated every ``logcollector.state_interval`` and can be accessed at any moment. 
+- `#7109 <https://github.com/wazuh/wazuh/pull/7109>`_ Wazuh adds statistics file to Logcollector. In addition to the alternative of accessing metrics via API queries, you now have the option to access this information from a file stored in an agent, according to a configurable time. This data is generated and updated every ``logcollector.state_interval`` seconds and can be accessed at any moment. 
 - `#7239 <https://github.com/wazuh/wazuh/pull/7239>`_ Wazuh provides enhanced state information by adding statistical data queries to the agent.
 - `#7307 <https://github.com/wazuh/wazuh/pull/7307>`_ Quoting in commands to group arguments in the command wodle and SCA checks are allowed. Before this enhancement, the system parsed quoted substrings into the same argument but double-quotes were kept. Now, scapes and double-quotes are allowed in command lines so that you can handle arguments in command calls. 
 - `#7408 <https://github.com/wazuh/wazuh/pull/7408>`_ Agent IP detection capabilities are improved and agents running on Solaris now send their IP to the manager.
 - `#7444 <https://github.com/wazuh/wazuh/pull/7444>`_ New ``ip_update_interval`` option is added to set how often the agent refreshes its IP address.
 - `#7661 <https://github.com/wazuh/wazuh/issues/7661>`_ New support is added for testing location information in Wazuh logtest. 
-- `#7731 <https://github.com/wazuh/wazuh/pull/7731>`_ Vulnerability detection capabilities are now improved by adding new vulnerability detector reports to the Wazuh database so you can know which CVE affect an agent.
+- `#7731 <https://github.com/wazuh/wazuh/pull/7731>`_ Vulnerability Detection capabilities are now improved by adding new Vulnerability Detector reports to the Wazuh database so you can know which CVE affect an agent.
 - `#8755 <https://github.com/wazuh/wazuh/pull/8755>`_ Newly added option allows you to enable or disable listening to Authd TSL port.
 - `#6912 <https://github.com/wazuh/wazuh/pull/6912>`_ Wazuh daemons are now renamed to follow the Wazuh unified standard. 
 - `#6903 <https://github.com/wazuh/wazuh/pull/6903>`_ Wazuh CLIs and related tools are now renamed to follow Wazuh unified standard.
@@ -242,20 +242,20 @@ Reference                                                                       
 `#7414 <https://github.com/wazuh/wazuh/pull/7414>`_                                                                  In FIM, issue with ``delete`` events with real-time is now fixed. Now, deleted files in agents running on Solaris generate alerts and are correctly reported.
 `#7633 <https://github.com/wazuh/wazuh/pull/7633>`_                                                                  In Remoted, the priority header is no longer included incorrectly in Syslog when using TCP.
 `#7782 <https://github.com/wazuh/wazuh/pull/7782>`_                                                                  Stack overflow issue in the XML parsing is now fixed by limiting the levels of recursion to 1024.
-`#7795 <https://github.com/wazuh/wazuh/pull/7795>`_                                                                  Vulnerability detector now correctly skips scanning all the agents in the master node that are connected to another worker.
+`#7795 <https://github.com/wazuh/wazuh/pull/7795>`_                                                                  Vulnerability Detector now correctly skips scanning all the agents in the master node that are connected to another worker.
 `#7858 <https://github.com/wazuh/wazuh/pull/7858>`_                                                                  Wazuh database synchronization module now correctly cleans dangling agent group files.
 `#7919 <https://github.com/wazuh/wazuh/pull/7919>`_                                                                  In Analysisd, regex parser issue with memory leaks is now fixed.
 `#7905 <https://github.com/wazuh/wazuh/pull/7905>`_                                                                  A typo is fixed in the initial value for the hotfix scan ID in the agents' database schema.
-`#8003 <https://github.com/wazuh/wazuh/pull/8003>`_                                                                  Segmentation fault issue is fixed in Vulnerability detector when parsing an unsupported package version format.
+`#8003 <https://github.com/wazuh/wazuh/pull/8003>`_                                                                  Segmentation fault issue is fixed in Vulnerability Detector when parsing an unsupported package version format.
 `#7990 <https://github.com/wazuh/wazuh/pull/7990>`_                                                                  In FIM, false positives were triggered due to file ``inode`` collisions in the engine database. This issue is now fixed and FIM works properly when the ``inode`` of multiple files is changed.
 `#6932 <https://github.com/wazuh/wazuh/pull/6932>`_                                                                  Issue with error handling when wildcarded RHEL feeds are not found is now fixed. 
-`#7862 <https://github.com/wazuh/wazuh/pull/7862>`_                                                                  The ``equals`` comparator is fixed for OVAL feeds in Vulnerability detector. Now, equal versions in the OVAL scan are successfully compared.
+`#7862 <https://github.com/wazuh/wazuh/pull/7862>`_                                                                  The ``equals`` comparator is fixed for OVAL feeds in Vulnerability Detector. Now, equal versions in the OVAL scan are successfully compared.
 `#8098 <https://github.com/wazuh/wazuh/pull/8098>`_ `#8143 <https://github.com/wazuh/wazuh/pull/8143>`_              In FIM, an issue that caused a Windows agent to crash when synchronizing a Windows Registry value that starts with a colon ``:`` is now resolved. ``winagent`` no longer crashes during the synchronization of registries.
 `#8151 <https://github.com/wazuh/wazuh/pull/8151>`_                                                                  A starving hazard issue in Wazuh database is fixed and there are no longer risks of incoming requests being stalled during database commitment.
 `#8224 <https://github.com/wazuh/wazuh/pull/8224>`_                                                                  Issue with race condition in Remoted that, under certain circumstances, crashes when closing RID files is now fixed. Now, Remoted locks the KeyStore in writing mode when closing RIDs.
 `#8789 <https://github.com/wazuh/wazuh/pull/8789>`_                                                                  Descriptor leak issue in the agent when it failed to connect to Authd is now fixed.
 `#8828 <https://github.com/wazuh/wazuh/pull/8828>`_                                                                  Issue with a potential error when starting the manager due to a delay in the creation of Analysisd PID file is now fixed.
-`#8551 <https://github.com/wazuh/wazuh/pull/8551>`_                                                                  An invalid memory access hazard issue is fixed In Vulnerability detector.
+`#8551 <https://github.com/wazuh/wazuh/pull/8551>`_                                                                  An invalid memory access hazard issue is fixed In Vulnerability Detector.
 `#8571 <https://github.com/wazuh/wazuh/pull/8571>`_                                                                  When the agent reports a file with an empty ACE list, it no longer causes an error at the manager in the FIM decoder.
 `#8620 <https://github.com/wazuh/wazuh/pull/8620>`_                                                                  Error is prevented and the agent on macOS does not get corrupted after an operating system upgrade. 
 `#8357 <https://github.com/wazuh/wazuh/pull/8357>`_                                                                  An error is fixed in the manager that prevented its configuration to be checked after a change by the API when Active response is disabled.
