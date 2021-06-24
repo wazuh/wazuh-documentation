@@ -23,7 +23,7 @@ The following components are installed:
 
 In a all-in-one deployment, the communication is encrypted using SSL certificates generated with the ``wazuh-cert-tool.sh``. Also, extra Elasticsearch roles and users are added to make sure that the Wazuh Kibana plugin works correctly.
 
-To guarantee the expected performance of the Wazuh components, verify that the host meets the hardware requirements described in the :ref:`Requirements <installation_requirements>` section.
+To guarantee the expected performance of the Wazuh components, the host must meet the hardware requirements described in the :ref:`Requirements <installation_requirements>` section.
 
 Installation methods
 ---------------------
