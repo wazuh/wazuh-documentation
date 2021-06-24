@@ -18,7 +18,7 @@ The agent runs on the host you want to monitor and communicates with the Wazuh m
     
           .. group-tab:: CLI
     
-             #. To deploy the Wazuh agent to your system, run the following command defining the variable ``WAZUH_MANAGER``. The agent uses this value to register and this is also the assigned manager for forwarding events.
+             #. To deploy the Wazuh agent to your system, edit the ``WAZUH_MANAGER`` variable to contain your Wazuh manager IP address or hostname and run the following command. 
 
                 .. code-block:: console
     

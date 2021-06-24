@@ -59,7 +59,7 @@ The agent runs on the host you want to monitor and communicates with the Wazuh m
 Uninstall a Wazuh agent
 -----------------------
 
-To uninstall the agent, the original MSI file is required to perform the unattended process:
+To uninstall the agent, the original Windows installer file is required to perform the unattended process:
 
   .. code-block:: none
   
