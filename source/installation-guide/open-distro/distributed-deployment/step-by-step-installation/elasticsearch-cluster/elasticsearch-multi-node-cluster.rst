@@ -25,14 +25,7 @@ The installation process for a multi-node cluster is performed in three stages.
 1. Initial node configuration
 ---------------------------------
 
-The first stage of the process for installing a multi-node cluster is performed on the first Elasticsearch node to be configured. The SSL certificates generated in this stage are to later be deployed to the subsequent nodes.
-
-Prerequisites
-~~~~~~~~~~~~~
-
-Java Development Kit is installed as it is required by Open Distro for Elasticsearch. To perform the following tasks, install ``wget``, ``curl``, and ``unzip`` packages:
-
-.. include:: ../../../../../_templates/installations/elastic/common/before_installation.rst
+The first stage of the process for installing a multi-node cluster is performed on the first Elasticsearch node to be configured. The SSL certificates generated in this stage are later deployed to the subsequent nodes.
 
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -44,21 +37,21 @@ Adding the Wazuh repository
   .. group-tab:: Yum
 
 
-    .. include:: ../../../../../_templates/installations/wazuh/yum/add_repository.rst
+    .. include:: ../../../../../_templates/installations/wazuh/yum/add_repository_elastic_cluster.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../../../../_templates/installations/wazuh/deb/add_repository.rst
+    .. include:: ../../../../../_templates/installations/wazuh/deb/add_repository_elastic_cluster.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../../../_templates/installations/wazuh/zypp/add_repository.rst
+    .. include:: ../../../../../_templates/installations/wazuh/zypp/add_repository_elastic_cluster.rst
 
 
 
@@ -106,14 +99,6 @@ Certificates creation and deployment
 
 The second stage of the process for installing a multi-node cluster is performed on the subsequent nodes of the Elasticsearch cluster. 
 
-
-Prerequisites
-~~~~~~~~~~~~~
-
-Open Distro for Elasticsearch requires the Java Development Kit and other packages installation including ``wget``, ``curl``, and ``unzip`` that will be used in further steps:
-
-.. include:: ../../../../../_templates/installations/elastic/common/before_installation.rst
-
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -124,21 +109,21 @@ Adding the Wazuh repository
   .. group-tab:: Yum
 
 
-    .. include:: ../../../../../_templates/installations/wazuh/yum/add_repository.rst
+    .. include:: ../../../../../_templates/installations/wazuh/yum/add_repository_elastic_cluster.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../../../../_templates/installations/wazuh/deb/add_repository.rst
+    .. include:: ../../../../../_templates/installations/wazuh/deb/add_repository_elastic_cluster.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../../../_templates/installations/wazuh/zypp/add_repository.rst
+    .. include:: ../../../../../_templates/installations/wazuh/zypp/add_repository_elastic_cluster.rst
 
 
 
@@ -185,7 +170,7 @@ The final stage of the process for installing a multi-node cluster is performed 
 
     .. code-block:: console
 
-      # /usr/share/elasticsearch/plugins/opendistro_security/tools/securityadmin.sh -cd /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/ -icl -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin-key.pem -h <elasticsearch_IP>
+      # export JAVA_HOME=/usr/share/elasticsearch/jdk/ && /usr/share/elasticsearch/plugins/opendistro_security/tools/securityadmin.sh -cd /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/ -icl -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin-key.pem -h <elasticsearch_IP>
 
 #. To confirm that the installation is successful, run the following command replacing the value ``<elasticsearch_IP>`` with the Elasticsearch installation IP.
 
@@ -224,7 +209,11 @@ The final stage of the process for installing a multi-node cluster is performed 
         # curl -XGET https://<elasticsearch_ip>:9200/_cat/nodes -u admin:admin -k
 
 
-It is highly recommended to change Elasticsearch default passwords for the users' found at the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. It is also recommended to customize the file ``/etc/elasticsearch/jvm.options`` in order to improve the performance of Elasticsearch. Learn more about these processes in the :ref:`Elasticsearch tuning <elastic_tuning>` section.
+
+.. note:: It is highly recommended to change the default passwords of Elasticsearch for the users’ passwords. To perform this action, see the :ref:`Elasticsearch tuning <elastic_tuning>` section.
+
+
+It is also recommended to customize the file ``/etc/elasticsearch/jvm.options`` in order to improve the performance of Elasticsearch. Learn more about these processes in the :ref:`user manual <elastic_tuning>`.
 
 
 

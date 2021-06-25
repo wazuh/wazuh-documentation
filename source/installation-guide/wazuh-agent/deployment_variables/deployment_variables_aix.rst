@@ -1,6 +1,6 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. meta:: :description: Learn how to use deployment variables on AIX
+.. meta:: :description: Learn how to use deployment variables on AIX to install, register and configure Wazuh agents. 
 
 .. _deployment_variables_aix:
 
