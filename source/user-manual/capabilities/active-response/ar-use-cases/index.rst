@@ -10,4 +10,5 @@ Use cases
 
         blocking-attacks
         wazuh-with-yara
+        Detecting and removing malware <removing-malware>
 
