@@ -162,6 +162,12 @@ getHelp() {
 
    echo ""
    echo "Usage: $0 arguments"
+   echo -e "\t-w   | --install-wazuh Installs the Wazuh server (cannot be used together with option -e or -k)"
+   echo -e "\t-e   | --install-elasticsearch Installs Open Distro for Elasticsearch (cannot be used together with option -w or -k)"
+   echo -e "\t-k   | --install-kibana Installs Open Distro for Kibana (cannot be used together with option -w or -e)"
+   echo -e "\t-n   | --node-name Name of the node"
+   echo -e "\t-c   | --create-certificates Generates the certificates for all the indicated nodes"
+   echo -e "\t-k   | --install-kibana Install Kibana"
    echo -e "\t-o   | --overwrite Overwrite the existing installation"
    echo -e "\t-r   | --uninstall Remove the installation"
    echo -e "\t-v   | --verbose Shows the complete installation output"
@@ -692,6 +698,27 @@ main() {
         while [ -n "$1" ]
         do
             case "$1" in 
+            "-w"|"--install-wazuh")
+                wazuh=1
+                shift 1
+                ;;               
+            "-e"|"--install-elasticsearch")
+                elastic=1
+                shift 1
+                ;;
+            "-c"|"--create-certificates")
+                certificates=1
+                shift 1
+                ;;
+            "-n"|"--node-name")
+                iname=$2
+                shift
+                shift
+                ;;
+            "-k"|"--install-kibana")
+                kibana=1
+                shift 1
+                ;;            
             "-i"|"--ignore-healthcheck") 
                 ignore=1          
                 shift 1
