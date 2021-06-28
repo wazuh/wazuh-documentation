@@ -710,11 +710,21 @@ main() {
                 certificates=1
                 shift 1
                 ;;
-            "-n"|"--node-name")
-                iname=$2
+            "-en"|"--elastic-node-name")
+                ename=$2
                 shift
                 shift
                 ;;
+            "-wn"|"--wazuh-node-name")
+                wname=$2
+                shift
+                shift
+                ;;
+            "-kn"|"--kibana-node-name")
+                kname=$2
+                shift
+                shift
+                ;;                                
             "-k"|"--install-kibana")
                 kibana=1
                 shift 1
@@ -750,7 +760,28 @@ main() {
         if [ -n "${uninstall}" ]; then
             checkInstalled
             exit 0;
-        fi        
+        fi
+
+        if [ -n "${elastic}" ]; then
+            if [ -z "${ename}" ]; then
+                getHelp
+            else
+
+            fi
+                
+        fi 
+
+        if [[ -n "${elastic}" ]] && [[ -z "${ename}" ]]; then
+            getHelp
+        fi
+
+        if [[ -n "${wazuh}" ]] && [[ -z "${wname}" ]]; then
+            getHelp
+        fi
+
+        if [[ -n "${kibana}" ]] && [[ -z "${kname}" ]]; then
+            getHelp
+        fi
         
         if [ -n "${ignore}" ]; then
             echo "Health-check ignored."    
