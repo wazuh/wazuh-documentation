@@ -17,6 +17,7 @@ ELK_VER="7.10.2"
 OD_VER="1.13.2"
 OD_REV="1"
 ow=""
+aio=""
 CONFIG_ROUTE="~/certs.tar"
 
 if [ -n "$(command -v yum)" ]; then
@@ -786,21 +787,75 @@ main() {
         if [[ -z "${kibana}" ]] && [[ -n "${kname}" ]]; then
             getHelp
         fi
+
+        if [[ -n "${elastic}" ]] && [[ -n "${wazuh}" ]] && [[ -n "${kibana}" ]]; then
+            aio=1
+        fi
+
+        if [ -n "$aio" ]; then
         
-        if [ -n "${ignore}" ]; then
-            echo "Health-check ignored."    
-            checkInstalled
-        else
-            checkInstalled
-            healthCheck           
-        fi            
-        installPrerequisites
-        addWazuhrepo
-        installWazuh
-        installElasticsearch
-        installFilebeat
-        installKibana
-        checkInstallation    
+            if [ -n "${ignore}" ]; then
+                echo "Health-check ignored."    
+                checkInstalled
+            else
+                checkInstalled
+                healthCheck           
+            fi            
+            installPrerequisites
+            addWazuhrepo
+            installWazuh
+            installElasticsearch
+            installFilebeat
+            installKibana
+            checkInstallation  
+
+        fi
+
+        if [ -n "$elastic" ]; then
+        
+            if [ -n "${ignore}" ]; then
+                echo "Health-check ignored."    
+                checkInstalled
+            else
+                checkInstalled
+                healthCheck           
+            fi            
+            installPrerequisites
+            addWazuhrepo
+            installElasticsearch 
+
+        fi     
+
+        if [ -n "$wazuh" ]; then
+        
+            if [ -n "${ignore}" ]; then
+                echo "Health-check ignored."    
+                checkInstalled
+            else
+                checkInstalled
+                healthCheck           
+            fi            
+            installPrerequisites
+            addWazuhrepo
+            installWazuh
+
+        fi   
+
+        if [ -n "$kibana" ]; then
+        
+            if [ -n "${ignore}" ]; then
+                echo "Health-check ignored."    
+                checkInstalled
+            else
+                checkInstalled
+                healthCheck           
+            fi            
+            installPrerequisites
+            addWazuhrepo           
+            installKibana
+
+        fi                
+
     else
         checkInstalled  
         healthCheck   
