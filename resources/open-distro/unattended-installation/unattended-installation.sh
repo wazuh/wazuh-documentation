@@ -169,7 +169,6 @@ getHelp() {
    echo -e "\t-wn  | --wazuh-node-name Name of the node"
    echo -e "\t-kn  | --kibana-node-name Name of the node"
    echo -e "\t-c   | --create-certificates Generates the certificates for all the indicated nodes"
-   echo -e "\t-k   | --install-kibana Install Kibana"
    echo -e "\t-o   | --overwrite Overwrite the existing installation"
    echo -e "\t-r   | --uninstall Remove the installation"
    echo -e "\t-v   | --verbose Shows the complete installation output"
