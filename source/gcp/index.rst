@@ -25,7 +25,6 @@ This module requires dependencies in order to work, and also the right credentia
     :maxdepth: 1
 
     prerequisites/index
-    Configuration <../user-manual/reference/ossec-conf/gcp-pubsub>
     supported-services/index
 
 Data flow

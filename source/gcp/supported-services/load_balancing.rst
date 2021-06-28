@@ -5,6 +5,9 @@
 HTTP(S) Load Balancing Logging
 ==============================
 
+.. note::
+    This service is supported by Wazuh using the **gcp-pubsub** module. Details on how to configure this module can be found :ref:`here <gcp-pubsub>`.
+
 `HTTP(S) Load Balancing Logging <https://cloud.google.com/load-balancing/docs/https/https-logging-monitoring>`__ allows the user to enable, disable, and view logs for an HTTP(S) Load Balancing backend service.
 
 .. note:: To be able to send HTTP(S) Load Balancing Logging logs to Wazuh, Cloud Logging must be configured to export these logs to Pub/Sub first. More information about how Pub/Sub works and how to configure it :ref:`here <pubsub>`.

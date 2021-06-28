@@ -5,6 +5,9 @@
 Firewall Rules Logging
 ======================
 
+.. note::
+    This service is supported by Wazuh using the **gcp-pubsub** module. Details on how to configure this module can be found :ref:`here <gcp-pubsub>`.
+
 `Firewall Rules Logging <https://cloud.google.com/vpc/docs/firewall-rules-logging>`__ logs traffic to and from Compute Engine virtual machine (VM) instances. This includes Google Cloud products built on Compute Engine VMs, such as Google Kubernetes Engine (GKE) clusters and App Engine flexible environment instances.
 
 .. note:: To be able to send Firewall Rules Logging logs to Wazuh, Cloud Logging must be configured to export these logs to Pub/Sub first. More information about how Pub/Sub works and how to configure it :ref:`here <pubsub>`.

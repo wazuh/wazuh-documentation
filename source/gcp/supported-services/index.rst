@@ -8,15 +8,32 @@ Supported services
 .. meta::
   :description: Supported services
 
-The following GCP services are supported by the Wazuh GCP module. The logs are retrieved by pulling the data from Google Cloud Pub/Sub.
+The Wazuh GCP module is able to retrieve logs from Google Cloud Pub/sub and from Google Cloud Storage buckets.
 
-.. topic:: Supported services
+Supported services using Google Cloud Pub/sub
+---------------------------------------------
 
-    .. toctree::
-       :maxdepth: 2
+The following GCP services are supported by the Wazuh GCP module by pulling the data from Google Cloud Pub/Sub:
 
-       cloud_audit_logs
-       dns_queries
-       vpc_flow
-       firewall
-       load_balancing
+.. toctree::
+   :maxdepth: 2
+
+   cloud_audit_logs
+   dns_queries
+   vpc_flow
+   firewall
+   load_balancing
+
+The `gcp-pubsub` configuration used to pull data from Google Cloud Pub/Sub can be checked :ref:`here <../../user-manual/reference/ossec-conf/gcp-pubsub>`.
+
+Supported services using Google Cloud Storage buckets
+-----------------------------------------------------
+
+The following GCP services are supported by the Wazuh GCP module by pulling the data from Google Cloud Storage buckets:
+
+.. toctree::
+   :maxdepth: 2
+
+   access_logs
+
+The `gcp-bucket` configuration used to pull data from Google Cloud Storage buckets can be checked :ref:`here <../../user-manual/reference/ossec-conf/gcp-bucket>`.
