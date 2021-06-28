@@ -775,8 +775,6 @@ main() {
             getHelp
         fi
 
-#####################################
-
         if [[ -z "${elastic}" ]] && [[ -n "${ename}" ]]; then
             getHelp
         fi
