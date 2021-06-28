@@ -162,10 +162,12 @@ getHelp() {
 
    echo ""
    echo "Usage: $0 arguments"
-   echo -e "\t-w   | --install-wazuh Installs the Wazuh server (cannot be used together with option -e or -k)"
-   echo -e "\t-e   | --install-elasticsearch Installs Open Distro for Elasticsearch (cannot be used together with option -w or -k)"
-   echo -e "\t-k   | --install-kibana Installs Open Distro for Kibana (cannot be used together with option -w or -e)"
-   echo -e "\t-n   | --node-name Name of the node"
+   echo -e "\t-w   | --install-wazuh Installs the Wazuh server. Must be used with option -wname <node-name>"
+   echo -e "\t-e   | --install-elasticsearch Installs Open Distro for Elasticsearch. Must be used with option -ename <node-name>"
+   echo -e "\t-k   | --install-kibana Installs Open Distro for Kibana. Must be used with option -kname <node-name>"
+   echo -e "\t-en  | --elastic-node-name Name of the node"
+   echo -e "\t-wn  | --wazuh-node-name Name of the node"
+   echo -e "\t-kn  | --kibana-node-name Name of the node"
    echo -e "\t-c   | --create-certificates Generates the certificates for all the indicated nodes"
    echo -e "\t-k   | --install-kibana Install Kibana"
    echo -e "\t-o   | --overwrite Overwrite the existing installation"
@@ -761,15 +763,6 @@ main() {
             checkInstalled
             exit 0;
         fi
-
-        if [ -n "${elastic}" ]; then
-            if [ -z "${ename}" ]; then
-                getHelp
-            else
-
-            fi
-                
-        fi 
 
         if [[ -n "${elastic}" ]] && [[ -z "${ename}" ]]; then
             getHelp
