@@ -22,7 +22,7 @@ When using the ``only_logs_after`` tag the Wazuh module will use the creation ti
 Configuring multiple Google Cloud Storage bucket
 ------------------------------------------------
 
-Below there is an example of a configuration using more than one bucket:
+Below there is an example of a configuration that uses more than one bucket:
 
 .. code-block:: xml
 
