@@ -40,6 +40,7 @@ removedUrls['x.y'] = [
 
 newUrls['4.2'] = [
   '/release-notes/release_4_2_0.html',
+  '/user-manual/capabilities/active-response/ar-use-cases/removing-malware.html,
   '/user-manual/capabilities/active-response/ar-use-cases/wazuh-with-yara.html',
   '/user-manual/capabilities/active-response/ar-use-cases/blocking-attacks.html',
   '/user-manual/capabilities/active-response/ar-use-cases/index.html',
