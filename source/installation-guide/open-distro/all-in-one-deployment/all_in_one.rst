@@ -7,21 +7,13 @@
 Step-by-step installation
 =========================
 
-Install Wazuh and Open Distro for Elasticsearch components in an all-in-one deployment. This type of deployment is appropriate for testing and small working environments.  
+Install Wazuh and Open Distro for Elasticsearch components in an all-in-one deployment. Follow the instructions to configure the official repositories to perform installations. 
 
-Follow the instructions to configure the official repositories to perform installations. As an alternative, the installation can also be done using packages. Check out the list of available packages in the :ref:`Packages list <packages>` section. 
+As an alternative to this installation method, you can install Wazuh using packages. To perform this action, see the :ref:`Packages list <packages>` section. 
 
 .. note:: Root privileges are required to execute all the commands.
 
 .. _all_in_one_elastic:
-
-Prerequisites
--------------
-
-Java Development Kit is installed as it is required by Open Distro for Elasticsearch.  To perform the following tasks, install ``wget``, ``curl``, ``unzip``, and ``libcap`` packages:
-
-.. include:: ../../../_templates/installations/before_installation_all_in_one.rst
-
 
 .. _all_in_one_wazuh:
 
@@ -41,21 +33,21 @@ Adding the Wazuh repository
   .. group-tab:: Yum
 
 
-    .. include:: ../../../_templates/installations/wazuh/yum/add_repository.rst
+    .. include:: ../../../_templates/installations/wazuh/yum/add_repository_aio.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../../_templates/installations/wazuh/deb/add_repository.rst
+    .. include:: ../../../_templates/installations/wazuh/deb/add_repository_aio.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../_templates/installations/wazuh/zypp/add_repository.rst    
+    .. include:: ../../../_templates/installations/wazuh/zypp/add_repository_aio.rst    
 
 
 
@@ -137,7 +129,7 @@ Certificates creation
 
   .. code-block:: console
 
-    # /usr/share/elasticsearch/plugins/opendistro_security/tools/securityadmin.sh -cd /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/ -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key
+    # export JAVA_HOME=/usr/share/elasticsearch/jdk/ && /usr/share/elasticsearch/plugins/opendistro_security/tools/securityadmin.sh -cd /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/ -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin-key.pem
 
 Run the following command to ensure that the installation is successful:
 
@@ -225,8 +217,8 @@ Filebeat is the tool on the Wazuh server that securely forwards alerts and archi
     .. code-block:: console
 
       # mkdir /etc/filebeat/certs
-      # cp /etc/elasticsearch/certs/root-ca.pem /etc/filebeat/certs/
-      # mv /etc/elasticsearch/certs/filebeat* /etc/filebeat/certs/
+      # cp ~/certs/root-ca.pem /etc/filebeat/certs/
+      # mv ~/certs/filebeat* /etc/filebeat/certs/
 
 #. Enable and start the Filebeat service:
 
@@ -313,11 +305,10 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
     .. code-block:: console
 
       # mkdir /etc/kibana/certs
-      # cp /etc/elasticsearch/certs/root-ca.pem /etc/kibana/certs/
-      # mv /etc/elasticsearch/certs/kibana_http.key /etc/kibana/certs/kibana.key
-      # mv /etc/elasticsearch/certs/kibana_http.pem /etc/kibana/certs/kibana.pem
+      # cp ~/certs/root-ca.pem /etc/kibana/certs/
+      # mv ~/certs/kibana* /etc/kibana/certs/
 
-#. Link Kibana's socket to privileged port 443:
+#. Link Kibana socket to privileged port 443:
 
     .. code-block:: console
 
@@ -337,9 +328,10 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
 Upon the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or,  for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser.  Alternatively, a certificate from a trusted authority can be configured. 
 
-It is highly recommended to change Elasticsearch default passwords for the users' found at the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. More information about this process can be found in the :ref:`user manual <change_elastic_pass>`. It is also recommended to customize the file ``/etc/elasticsearch/jvm.options`` to improve the performance of Elasticsearch. Learn more about this process in the :ref:`Elasticsearch tuning <elastic_tuning>` section.
 
-Once Kibana is running, it is necessary to assign each user its corresponding role. To learn more, see the :ref:`setting up the Wazuh Kibana plugin <connect_kibana_app>` section. 
+.. note::  It is highly recommended to change the default passwords of Elasticsearch for the users' passwords. To perform this action, see the :ref:`Elasticsearch tuning <elastic_tuning>` section.
+
+It is also recommended to customize the file ``/etc/elasticsearch/jvm.options`` to improve the performance of Elasticsearch. Learn more about this process in the :ref:`user manual <change_elastic_pass>`.
 
 To uninstall all the components of the all-in-one installation, see the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_open_distro>`.
 
