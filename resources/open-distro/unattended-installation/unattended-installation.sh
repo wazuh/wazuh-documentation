@@ -203,7 +203,7 @@ checkConfig() {
 
 readConfig() {
     
-IFS=$'\r\n' GLOBIGNORE='*' command eval  'CONFIG=($(cat ~/config.yml | grep -v "#" ~/config.yml))'
+    IFS=$'\r\n' GLOBIGNORE='*' command eval  'CONFIG=($(cat ~/config.yml | grep -v "#" ~/config.yml))'
     for i in "${!CONFIG[@]}"; do
         if [[ "${CONFIG[$i]}" == "${ELASTICINSTANCES}" ]]; then
             ELASTICLIMITT=${i}
@@ -772,6 +772,20 @@ main() {
         fi
 
         if [[ -n "${kibana}" ]] && [[ -z "${kname}" ]]; then
+            getHelp
+        fi
+
+#####################################
+
+        if [[ -z "${elastic}" ]] && [[ -n "${ename}" ]]; then
+            getHelp
+        fi
+
+        if [[ -z "${wazuh}" ]] && [[ -n "${wname}" ]]; then
+            getHelp
+        fi
+
+        if [[ -z "${kibana}" ]] && [[ -n "${kname}" ]]; then
             getHelp
         fi
         
