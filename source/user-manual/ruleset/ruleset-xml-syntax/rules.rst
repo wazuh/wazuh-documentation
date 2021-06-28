@@ -1679,7 +1679,7 @@ Rule 100002 will fire when ``key2`` in the currently considered event is the sam
   {"key":"value", "key2":"CCCC"}
   {"key":"value", "key2":"AAAA"}
 
-The last event will fire rule 100002 instead of 100001 becasue it found the value ``AAAA`` in three of the previous events. The corresponding alert looks like this one:
+The last event will fire rule 100002 instead of 100001 because it found the value ``AAAA`` in three of the previous events. The corresponding alert looks like this one:
 
 .. code-block:: json
   :emphasize-lines: 5
