@@ -268,8 +268,8 @@ values may be specified for each ``<while_list>`` tag, but several values may be
 
 .. note::
 
-  This option is only valid in server and local installs. Also, IPv4-mapped IPv6 addresses are allowed too for
-  comparation.
+  This option is only valid in server and local installs. IPv4-mapped IPv6 addresses will be compared against any configured
+  IPv4 or netblock.
 
 host_information
 ^^^^^^^^^^^^^^^^
