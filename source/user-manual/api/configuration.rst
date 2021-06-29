@@ -25,7 +25,7 @@ Here are all the available settings for the ``api.yaml`` configuration file. For
      use_only_authd: no
      drop_privileges: yes
      experimental_features: no
-     max_upload_size: 1048576
+     max_upload_size: 10485760
 
      intervals:
         request_timeout: 10
@@ -191,7 +191,7 @@ max_upload_size
 +----------------------+---------------+------------------------------------------------------------------------------+
 | Allowed values       | Default value | Description                                                                  |
 +======================+===============+==============================================================================+
-| Any positive integer | 1048576       | Set the maximum body size that the API can accept, in bytes (0 -> limitless) |
+| Any positive integer | 10485760      | Set the maximum body size that the API can accept, in bytes (0 -> limitless) |
 +----------------------+---------------+------------------------------------------------------------------------------+
 
 intervals
