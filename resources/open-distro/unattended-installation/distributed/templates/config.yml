@@ -12,9 +12,19 @@ Elasticsearch nodes:
 
 # Wazuh-master configuration
 Wazuh servers IPs:
-  - <wazuh_master_server_IP_1>
-  # - <wazuh_master_server_IP_2>
+
+  name:
+    - <node_name>
+  ip:
+    - <wazuh_master_server_IP_1>
+  # name:
+  #   - <node_name>
+  # ip:
+  #   - <wazuh_master_server_IP_2>
 
 # Kibana configuration
 Kibana IP:
-  - <kibana_ip>
+  name:
+    - node-name
+  ip:
+    - <kibana_ip>
