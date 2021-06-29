@@ -21,10 +21,12 @@ aio=""
 CONFIG_ROUTE="~/certs.tar"
 ELASTICINSTANCES="Elasticsearch nodes:"
 FILEBEATINSTANCES="Wazuh servers IPs:"
-KIBANAINSTANCES="kibana:"
+KIBANAINSTANCES="Kibana IP:"
 ELASTICHEAD='## Elasticsearch configuration'
 FILEBEATHEAD='# Wazuh-master configuration'
-KIBANAHEAD='Kibana IP:'
+KIBANAHEAD='# Kibana configuration'
+CLUSTERINITIALMNODES='  cluster.initial_master_nodes:'
+DISCOVERSEEDHOST='  discovery.seed_hosts:'
 
 if [ -n "$(command -v yum)" ]; then
     sys_type="yum"
