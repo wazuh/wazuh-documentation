@@ -20,7 +20,7 @@ The log delivery for any bucket must be set up manually using the gsutil tool, t
 
 
 Example of configuration
----------------------
+------------------------
 
 .. code-block:: xml
 
@@ -35,4 +35,4 @@ Example of configuration
         <path>access_logs/</path>
         <remove_from_bucket>no</remove_from_bucket>
     </bucket>
-</gcp-bucket>
+ </gcp-bucket>
