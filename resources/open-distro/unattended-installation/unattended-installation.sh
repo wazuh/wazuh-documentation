@@ -19,6 +19,12 @@ OD_REV="1"
 ow=""
 aio=""
 CONFIG_ROUTE="~/certs.tar"
+ELASTICINSTANCES="Elasticsearch nodes:"
+FILEBEATINSTANCES="Wazuh servers IPs:"
+KIBANAINSTANCES="kibana:"
+ELASTICHEAD='## Elasticsearch configuration'
+FILEBEATHEAD='# Wazuh-master configuration'
+KIBANAHEAD='Kibana IP:'
 
 if [ -n "$(command -v yum)" ]; then
     sys_type="yum"
@@ -440,13 +446,27 @@ installFilebeat() {
         exit 1;
     else
         filebeatinstalled="1"
+
         eval "curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/filebeat/7.x/filebeat_unattended.yml --max-time 300  ${debug}"
         eval "curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/4.0/extensions/elasticsearch/7.x/wazuh-template.json --max-time 300 ${debug}"
         eval "chmod go+r /etc/filebeat/wazuh-template.json ${debug}"
         eval "curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.1.tar.gz --max-time 300 | tar -xvz -C /usr/share/filebeat/module ${debug}"
         eval "mkdir /etc/filebeat/certs ${debug}"
-        eval "cp ~/certs/root-ca.pem /etc/filebeat/certs/ ${debug}"
-        eval "cp ~/certs/filebeat* /etc/filebeat/certs/ ${debug}"
+        if [[ -n "${aio}" ]]; then
+            eval "cp ~/certs/root-ca.pem /etc/filebeat/certs/ ${debug}"
+            eval "cp ~/certs/filebeat* /etc/filebeat/certs/ ${debug}"
+        else
+            ##CONFIGURE YML
+
+            eval "cp ~/certs.tar /etc/filebeat/certs/ ${debug}"
+            eval "cd /etc/filebeat/certs/ ${debug}"
+            eval "tar -xf certs.tar ${wname}.pem ${wname}-key.pem root-ca.pem ${debug}"
+            if [ ${wname} != "filebeat" ]
+            then
+                eval "mv /etc/filebeat/certs/${wname}.pem /etc/filebeat/certs/filebeat.pem ${debug}"
+                eval "mv /etc/filebeat/certs/${wname}-key.pem /etc/filebeat/certs/filebeat-key.pem ${debug}"
+            fi
+        fi
 
         # Start Filebeat
         startService "filebeat"
