@@ -220,7 +220,6 @@ readConfig() {
 
         if [[ "${CONFIG[$i]}" == "${DISCOVERSEEDHOST}" ]]; then
             DSH=${i}
-            echo "VALOR ${CONFIG[DSH]}"
         fi    
 
         if [[ "${CONFIG[$i]}" == "${FILEBEATINSTANCES}" ]]; then
