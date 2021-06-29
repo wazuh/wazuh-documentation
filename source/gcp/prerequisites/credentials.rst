@@ -15,13 +15,10 @@ To do this, we will need to create a service account with the Pub/Sub permission
 Create a service account
 ------------------------
 
-Within the **Service Accounts** section, create a new service account and add the following roles and permissions depending on which module to use: ``gcp-pubsub``, ``gcp-bucket`` or both:
+Within the **Service Accounts** section, create a new service account and add the following roles depending on which module to use: ``gcp-pubsub``, ``gcp-bucket`` or both:
 
-- For ``gcp-pubsub`` add two roles with *Pub/Sub* permissions: **publisher** and **subscriber**.
-- For ``gcp-bucket`` add one role with the following permissions:
-    - storage.buckets.get
-    - storage.objects.delete
-    - storage.objects.list
+- For ``gcp-pubsub`` add two roles with *Pub/Sub* permissions: **Pub/Sub Publisher** and **Pub/Sub Subscriber**.
+- For ``gcp-bucket`` add the following role with *Google Cloud Storage bucket* permissions: **Storage Legacy Bucket Writer**
 
 .. thumbnail:: ../../images/gcp/gcp-service-account.png
     :align: center
