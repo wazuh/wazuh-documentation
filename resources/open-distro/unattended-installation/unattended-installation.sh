@@ -217,15 +217,17 @@ readConfig() {
         if [[ "${CONFIG[$i]}" == "${ELASTICINSTANCES}" ]]; then
             ELASTICLIMITT=${i}
         fi
-        
-        if [[ "${CONFIG[$i]}" == "${FILEBEATINSTANCES}" ]]; then
-            ELASTICLIMIB=${i}
-        fi
+
+        if [[ "${CONFIG[$i]}" == "${DISCOVERSEEDHOST}" ]]; then
+            DSH=${i}
+            echo "VALOR ${CONFIG[DSH]}"
+        fi    
 
         if [[ "${CONFIG[$i]}" == "${FILEBEATINSTANCES}" ]]; then
+            ELASTICLIMIB=${i}
             FILEBEATLIMITT=${i}
         fi
-        
+
         if [[ "${CONFIG[$i]}" == "${KIBANAINSTANCES}" ]]; then
             FILEBEATLIMIB=${i}
         fi  
@@ -237,10 +239,14 @@ readConfig() {
     char="#"
     while [ "${counter}" -le "${ELASTICLIMIB}" ]
     do
-        if  [ "${CONFIG[counter]}" !=  "${ELASTICINSTANCES}" ] && [ "${CONFIG[counter]}" !=  "${FILEBEATINSTANCES}" ] && [ "${CONFIG[counter]}" !=  "${FILEBEATHEAD}" ] && [ "${CONFIG[counter]}" !=  "    ip:" ] && [ -n "${CONFIG[counter]}" ]; then
-            ELASTICNODES[i]+="$(echo "${CONFIG[counter]}" | tr -d '\011\012\013\014\015\040')"
+        if  [ "${CONFIG[counter]}" !=  "${ELASTICINSTANCES}" ] && [ "${CONFIG[counter]}" !=  "${FILEBEATINSTANCES}" ] && [ "${CONFIG[counter]}" !=  "${FILEBEATHEAD}" ] && [ "${CONFIG[counter]}" !=  "${CLUSTERINITIALMNODES}" ] && [ "${CONFIG[counter]}" !=  "${DISCOVERSEEDHOST}" ] && [ -n "${CONFIG[counter]}" ]; then
+            
+            if [ "${counter}" -lt "${DSH}" ]; then
+                ELASTICNODES[i]+="$(echo "${CONFIG[counter]}" | tr -d '\011\012\013\014\015\040')"
+            else
+                ENODESIP[i]+="$(echo "${CONFIG[counter]}" | tr -d '\011\012\013\014\015\040')"
+            fi
             ((i++))
-            echo "ELASTIC ${CONFIG[counter]}"
         fi    
 
         ((counter++))
@@ -251,13 +257,12 @@ readConfig() {
     i=0
     while [ "${counter}" -le "${FILEBEATLIMIB}" ]
     do
-        if  [ "${CONFIG[counter]}" !=  "${FILEBEATINSTANCES}" ] && [ "${CONFIG[counter]}" !=  "${KIBANAINSTANCES}" ] && [ "${CONFIG[counter]}" !=  "${KIBANAHEAD}" ] && [ "${CONFIG[counter]}" !=  "    ip:" ] && [ -n "${CONFIG[counter]}" ]; then
+        if  [ "${CONFIG[counter]}" !=  "${FILEBEATINSTANCES}" ] && [ "${CONFIG[counter]}" !=  "${KIBANAINSTANCES}" ] && [ "${CONFIG[counter]}" !=  "${KIBANAHEAD}" ] && [ -n "${CONFIG[counter]}" ]; then
             FILEBEATNODES[i]+="$(echo "${CONFIG[counter]}" | tr -d '\011\012\013\014\015\040')"
             ((i++))
-            echo "FILEBEAT ${CONFIG[counter]}"
         fi    
 
-        ((counter++))
+    ((counter++))
     done
 
     ## Read Kibana nodes
@@ -268,7 +273,6 @@ readConfig() {
         if  [ "${CONFIG[counter]}" !=  "${KIBANAINSTANCES}" ]  && [ "${CONFIG[counter]}" !=  "${KIBANAHEAD}" ] && [ "${CONFIG[counter]}" !=  "    ip:" ] && [ -n "${CONFIG[counter]}" ]; then
             KIBANANODES[i]+="$(echo "${CONFIG[counter]}" | tr -d '\011\012\013\014\015\040')"
             ((i++))
-            echo "KIBANA ${CONFIG[counter]}"
         fi    
 
         ((counter++))    
