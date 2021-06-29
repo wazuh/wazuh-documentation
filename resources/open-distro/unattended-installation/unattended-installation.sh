@@ -257,7 +257,7 @@ readConfig() {
     i=0
     while [ "${counter}" -le "${FILEBEATLIMIB}" ]
     do
-        if  [ "${CONFIG[counter]}" !=  "${FILEBEATINSTANCES}" ] && [ "${CONFIG[counter]}" !=  "${KIBANAINSTANCES}" ] && [ "${CONFIG[counter]}" !=  "${KIBANAHEAD}" ] && [ -n "${CONFIG[counter]}" ]; then
+        if  [ "${CONFIG[counter]}" !=  "${FILEBEATINSTANCES}" ] && [ "${CONFIG[counter]}" !=  "${KIBANAINSTANCES}" ] && [ "${CONFIG[counter]}" !=  "${KIBANAHEAD}" ] && [ -n "${CONFIG[counter]}" ] && [ "${CONFIG[counter]}" !=  "  name:" ] && [ "${CONFIG[counter]}" !=  "  ip:" ]; then
             FILEBEATNODES[i]+="$(echo "${CONFIG[counter]}" | tr -d '\011\012\013\014\015\040')"
             ((i++))
         fi    
@@ -270,7 +270,7 @@ readConfig() {
     i=0
     while [ "${counter}" -le "${#CONFIG[@]}" ]
     do
-        if  [ "${CONFIG[counter]}" !=  "${KIBANAINSTANCES}" ]  && [ "${CONFIG[counter]}" !=  "${KIBANAHEAD}" ] && [ "${CONFIG[counter]}" !=  "    ip:" ] && [ -n "${CONFIG[counter]}" ]; then
+        if  [ "${CONFIG[counter]}" !=  "${KIBANAINSTANCES}" ]  && [ "${CONFIG[counter]}" !=  "${KIBANAHEAD}" ] && [ "${CONFIG[counter]}" !=  "    ip:" ] && [ -n "${CONFIG[counter]}" ] && [ "${CONFIG[counter]}" !=  "  name:" ] && [ "${CONFIG[counter]}" !=  "  ip:" ]; then
             KIBANANODES[i]+="$(echo "${CONFIG[counter]}" | tr -d '\011\012\013\014\015\040')"
             ((i++))
         fi    
