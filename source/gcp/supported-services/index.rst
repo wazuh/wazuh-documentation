@@ -8,9 +8,9 @@ Supported services
 .. meta::
   :description: Supported services
 
-The Wazuh GCP module is able to retrieve logs from Google Cloud Pub/sub and from Google Cloud Storage buckets.
+The Wazuh GCP module is able to retrieve logs from Google Cloud Pub/Sub and from Google Cloud Storage buckets.
 
-Supported services using Google Cloud Pub/sub
+Supported services using Google Cloud Pub/Sub
 ---------------------------------------------
 
 The following GCP services are supported by the Wazuh GCP module by pulling the data from Google Cloud Pub/Sub:

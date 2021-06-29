@@ -61,7 +61,7 @@ Toggle between the different logging levels.
 bucket type
 ^^^^^^^^^^^
 
-Defines a bucket to process. Must have its attribute ``type`` defined. (Supports multiple instances of this option).
+Defines a bucket to process. It must have its ``type`` attribute defined. (Supports multiple instances of this option).
 
 Bucket options
 ~~~~~~~~~~~~~~
@@ -75,7 +75,7 @@ Bucket options
 type
 ^^^^
 
-Specifies type of bucket. Is an attribute of the ``bucket`` tag.
+Specifies type of bucket. It is an attribute of the ``bucket`` tag.
 
 +--------------------+-------------+
 | **Default value**  | N/A         |
@@ -97,7 +97,7 @@ Name of the Google Cloud Storage bucket from where logs are read.
 bucket\\credentials_file
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-This setting specifies the path to the Google Cloud credentials file in JW Tokens. Allows both relative (to $HOME_INSTALLATION) and absolute paths.
+This setting specifies the path to the Google Cloud credentials file in JW Tokens. It allows both relative (to $HOME_INSTALLATION) and absolute paths.
 
 +--------------------+--------------------------------+
 | **Default value**  | n/a                            |
@@ -132,7 +132,7 @@ A valid date, in YYYY-MMM-DD format, that only logs from after that date will be
 bucket\\remove_from_bucket
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Define if you want to remove logs from your Google Cloud Storage bucket after they are read by the module.
+Define if logs from the Google Cloud Storage bucket should be removed after they are read by the module.
 
 +--------------------+---------+
 | **Default value**  | no      |
@@ -167,7 +167,7 @@ Interval between module executions.
 day
 ^^^
 
-Day of the month to run the fetch logs from GCP.
+Day of the month to run the script to fetch logs from GCP.
 
 +--------------------+--------------------------+
 | **Default value**  | n/a                      |

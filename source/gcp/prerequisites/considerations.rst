@@ -14,7 +14,7 @@ The ``gcp-pubsub`` Wazuh module only looks for new logs based upon the key for l
 Creation time in Google Cloud Storage bucket contents
 -----------------------------------------------------
 
-The ``gcp-bucket`` Wazuh module will use the creation time for each blob inside the provided Cloud Storage bucket to determine the date to which each log file corresponds. This means if the user manually move any file inside the specified bucket its creation time will be updated and the ``gcp-module`` will assume the file is new.
+The ``gcp-bucket`` Wazuh module will use the creation time for each blob inside the provided Cloud Storage bucket to determine the date to which each log file corresponds. This means if the user manually moves any file inside the specified bucket its creation time will be updated and the ``gcp-module`` will assume the file is new.
 
 When using the ``only_logs_after`` tag the Wazuh module will use the creation time of each blob to determine if it should be processed. Any date in the file's name will be ignored. Only creation date is used to determine whether a file should be processed.
 

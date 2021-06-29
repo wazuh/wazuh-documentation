@@ -78,7 +78,7 @@ For example ``<subscription_name>wazuh-name</subscription_name>``.
 credentials_file
 ^^^^^^^^^^^^^^^^
 
-This setting specifies the path to the Google Cloud credentials file in JW Tokens. Allows both relative (to $HOME_INSTALLATION) and absolute paths.
+This setting specifies the path to the Google Cloud credentials file in JW Tokens. It allows both relative (to $HOME_INSTALLATION) and absolute paths.
 
 +--------------------+--------------------------------+
 | **Default value**  | n/a                            |
@@ -153,7 +153,7 @@ Interval between module executions.
 day
 ^^^
 
-Day of the month to run the fetch logs from GCP.
+Day of the month to run the script to fetch logs from GCP.
 
 +--------------------+--------------------------+
 | **Default value**  | n/a                      |

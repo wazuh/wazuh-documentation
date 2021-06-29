@@ -138,7 +138,7 @@ When unable to process and parse a CloudTrail log, skip the log and continue pro
 bucket type
 ^^^^^^^^^^^
 
-Defines a bucket to process. Must have its attribute ``type`` defined. (Supports multiple instances of this option).
+Defines a bucket to process. It must have its ``type`` attribute defined. (Supports multiple instances of this option).
 
 Bucket options
 ~~~~~~~~~~~~~~
@@ -202,7 +202,7 @@ Bucket options
 type
 ^^^^
 
-Specifies type of bucket. Is an attribute of the ``bucket`` tag.
+Specifies type of bucket. It is an attribute of the ``bucket`` tag.
 
 +--------------------+------------------------------------------------+
 | **Default value**  | N/A                                            |
