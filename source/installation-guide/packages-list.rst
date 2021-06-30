@@ -2,7 +2,7 @@
 
 .. meta::
   :description: 
-Find the packages required for Wazuh installation on this page. Available for AIX, Linux, HP-UX, macOS, Solaris and Windows.
+Find the packages required for Wazuh installation on this page. Available for AIX, Linux, HP-UX, macOS, Solaris, and Windows.
 
 .. _packages:
 
