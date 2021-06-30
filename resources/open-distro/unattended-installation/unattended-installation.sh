@@ -518,7 +518,11 @@ installKibana() {
             eval "chmod 440 /etc/kibana/certs/kibana* ${debug}"
             eval "setcap 'cap_net_bind_service=+ep' /usr/share/kibana/node/bin/node ${debug}"
         else
+            ## EDIT KIBANA.YML
             
+            eval "cp ~/certs.tar /etc/kibana/certs/ ${debug}"
+            eval "cd /etc/kibana/certs/ ${debug}"
+            eval "tar --overwrite -xf certs.tar ${KIBANANODES[0]}.pem ${KIBANANODES[0]}-key.pem root-ca.pem ${debug}"            
         fi
 
         # Start Kibana
