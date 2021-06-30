@@ -1,9 +1,9 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. _od_installation_guide:
+.. _step_by_step_installation_guide:
 
-Wazuh server
-============
+Step-by-step mode
+=================
 
 .. meta::
   :description: Find useful technical documentation about how Wazuh works, suitable for developers and tech enthusiasts.
@@ -39,5 +39,6 @@ Start deploying Wazuh with Open Distro for Elasticsearch
 .. toctree::
     :maxdepth: 2
 
-    all-in-one-deployment/index
-    distributed-deployment/index
+    elasticsearch
+    wazuh-server
+    kibana

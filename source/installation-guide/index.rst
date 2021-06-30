@@ -149,7 +149,8 @@ Check the :ref:`Requirements <installation_requirements>` section for informatio
     :maxdepth: 1
 
     requirements
-    open-distro/index
+    quickstart
+    custom-installation/index
     wazuh-agent/index
     packages-list
     more-installation-alternatives/index

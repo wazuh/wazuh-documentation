@@ -1,9 +1,9 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. _unattended_distributed_elasticsearch:
+.. _unattended_installation:
 
-Elasticsearch & Kibana unattended installation
-==============================================
+Unattended mode
+===============
 
 You can install Open Distro for Elasticsearch and Open Distro for Kibana using an automated script. This script performs a health check to verify that the system has enough resources to achieve optimal performance.
 

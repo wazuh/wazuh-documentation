@@ -1,7 +1,9 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-Unattended installation
-=======================
+.. _quickstart:
+
+Quickstart
+==========
 
 You can install Wazuh on a single host by using a script that automatically detects whether the operating system uses ``rpm`` or ``deb`` packages.
 The script performs a health check to verify that the available system resources meet the minimal requirements. For more information, check the :ref:`Requirements <installation_requirements>` section.

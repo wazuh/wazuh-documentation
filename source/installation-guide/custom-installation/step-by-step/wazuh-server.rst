@@ -5,8 +5,8 @@
 .. _wazuh_multi_node_cluster:
 
 
-Wazuh multi-node cluster
-=========================
+Wazuh server
+============
 
 This document will go through the installation of the Wazuh server components and Filebeat in a Wazuh multi-node cluster.
 
