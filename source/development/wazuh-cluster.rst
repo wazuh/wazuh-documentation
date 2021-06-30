@@ -173,7 +173,7 @@ The wazuh cluster protocol is defined on top of this framework. The following di
     :align: center
     :width: 80%
 
-The higher classes on the diagram (``wazuh.cluster.common.Handler``, ``wazuh.cluster.server.AbstractServerHandler`` and ``wazuh.cluster.client.AbstractClient``) define abstract concepts of what a client and a server is. Those abstract concepts are used by the lower classes on the diagram (``wazuh.cluster.local_server.LocalServerHandler``, ``wazuh.cluster.master.MasterHandler``, ``wazuh.cluster.worker.WorkerHandler`` and ``wazuh.cluster.local_client.LocalClientHandler``) to define specific communication protocols. These specific protocols are described in the `Protocols`_ section.
+The higher classes on the diagram (``wazuh.core.cluster.common.Handler``, ``wazuh.core.cluster.server.AbstractServerHandler`` and ``wazuh.core.cluster.client.AbstractClient``) define abstract concepts of what a client and a server is. Those abstract concepts are used by the lower classes on the diagram (``wazuh.core.cluster.local_server.LocalServerHandler``, ``wazuh.core.cluster.master.MasterHandler``, ``wazuh.core.cluster.worker.WorkerHandler`` and ``wazuh.core.cluster.local_client.LocalClientHandler``) to define specific communication protocols. These specific protocols are described in the `Protocols`_ section.
 
 There are abstract server and client classes to handle multiple connections from multiple clients and connecting to the server. This way, all the logic to connect to a server or handling multiple clients can be shared between all types of servers and clients in the cluster. These classes are shown in the diagrams below:
 
@@ -197,7 +197,7 @@ Protocols
 Protocol definition
 ~~~~~~~~~~~~~~~~~~~
 
-The communication protocol used in all communications (both cluster and API) is defined in the ``wazuh.cluster.common.Handler``. Each message in the protocol has the following structure:
+The communication protocol used in all communications (both cluster and API) is defined in the ``wazuh.core.cluster.common.Handler``. Each message in the protocol has the following structure:
 
 .. thumbnail:: ../images/development/structure_message_protocol.png
     :title: Structure for each message in the protocol
@@ -217,7 +217,7 @@ The header has four subparts:
 Wazuh cluster protocol
 ~~~~~~~~~~~~~~~~~~~~~~
 
-This communication protocol is used by all cluster nodes to synchronize the necessary information to receive reports from the agents. All communications are made through TCP. These commands are defined in ``wazuh.cluster.master.MasterHandler.process_request`` and in ``wazuh.cluster.worker.WorkerHandler.process_request``.
+This communication protocol is used by all cluster nodes to synchronize the necessary information to receive reports from the agents. All communications are made through TCP. These commands are defined in ``wazuh.core.cluster.master.MasterHandler.process_request`` and in ``wazuh.core.cluster.worker.WorkerHandler.process_request``.
 
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
 | Message           | Received in | Arguments             | Description                                                                                     |
@@ -286,7 +286,7 @@ This communication protocol is used by all cluster nodes to synchronize the nece
 Local protocol
 ~~~~~~~~~~~~~~
 
-This communication protocol is used by the API to forward requests to other cluster nodes. All communications are made using a Unix socket since the communication is all local (from the process running the API to the process running the cluster). These commands are defined in ``wazuh.cluster.local_server.LocalServerHandler.process_request``, ``wazuh.cluster.local_server.LocalServerHandlerMaster.process_request`` and ``wazuh.cluster.local_server.LocalServerHandlerWorker.process_request``.
+This communication protocol is used by the API to forward requests to other cluster nodes. All communications are made using a Unix socket since the communication is all local (from the process running the API to the process running the cluster). These commands are defined in ``wazuh.core.cluster.local_server.LocalServerHandler.process_request``, ``wazuh.core.cluster.local_server.LocalServerHandlerMaster.process_request`` and ``wazuh.core.cluster.local_server.LocalServerHandlerWorker.process_request``.
 
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
 | Message           | Received in | Arguments             | Description                                                                                     |
@@ -311,7 +311,7 @@ This communication protocol is used by the API to forward requests to other clus
 Common messages
 ~~~~~~~~~~~~~~~
 
-As said before, all protocols are built from a common abstract base. This base defines some messages to manage connections, keep alives, etc. These commands are defined in ``wazuh.cluster.common.Handler.process_request``, ``wazuh.cluster.server.AbstractServerHandler.process_request`` and ``wazuh.cluster.client.AbstractClient.process_request``.
+As said before, all protocols are built from a common abstract base. This base defines some messages to manage connections, keep alives, etc. These commands are defined in ``wazuh.core.cluster.common.Handler.process_request``, ``wazuh.core.cluster.server.AbstractServerHandler.process_request`` and ``wazuh.core.cluster.client.AbstractClient.process_request``.
 
 +---------------+-------------+--------------------+--------------------------------------------------------------------------+
 | Message       | Received in | Arguments          | Description                                                              |
@@ -345,7 +345,7 @@ Asynchronous tasks
 
 The magic behind the cluster performance is using asynchronous tasks. An asynchronous task is like a thread, because it will be executed in "parallel" with the main task and other ones, but it is much more lightweight than a thread and it's faster to create. Asynchronous tasks take advantage of how slow I/O is to do its "parallel" execution: while a task is waiting for some data to be fetched/sent from/to a socket, another one is executing. Imagine a chef who's cooking multiple meals at the same time to better picture the idea of "asynchronous" in your head.
 
-Each of the "threads" described in the `Workflow`_ section are implemented as asynchronous tasks. These tasks are started in ``wazuh.cluster.client.AbstractClientManager.start``, ``wazuh.cluster.server.AbstractServer.start`` and ``wazuh.cluster.local_server.LocalServer.start`` and they are all implemented using infinite loops.
+Each of the "threads" described in the `Workflow`_ section are implemented as asynchronous tasks. These tasks are started in ``wazuh.core.cluster.client.AbstractClientManager.start``, ``wazuh.core.cluster.server.AbstractServer.start`` and ``wazuh.core.cluster.local_server.LocalServer.start`` and they are all implemented using infinite loops.
 
 In addition to those already mentioned, there are more tasks that are created when a received request requires a complex process to be solved. These tasks are created to solve the received request and destroyed once the response has been sent. This type of architecture is necessary to prevent the server to be busy serving a single request.
 
