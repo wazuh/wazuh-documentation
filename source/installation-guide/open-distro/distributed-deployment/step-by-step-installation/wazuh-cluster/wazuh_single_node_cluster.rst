@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Learn how to install Elasticsearch in a single-node cluster in this section of the Wazuh documentation. 
+  :description: Learn how to install Elasticsearch as a single-node cluster. This kind of installation provides high availability and load balancing.
 
 .. _wazuh_single_node_cluster:
 
