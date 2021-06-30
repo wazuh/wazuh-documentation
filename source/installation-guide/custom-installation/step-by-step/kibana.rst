@@ -22,21 +22,21 @@ This step is required only if Kibana will be installed on a separate host where 
   .. group-tab:: Yum
 
 
-    .. include:: ../../../../../_templates/installations/wazuh/yum/add_repository_kibana.rst
+    .. include:: ../../../_templates/installations/wazuh/yum/add_repository_kibana.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../../../../_templates/installations/wazuh/deb/add_repository_kibana.rst
+    .. include:: ../../../_templates/installations/wazuh/deb/add_repository_kibana.rst
 
 
 
   .. group-tab:: Zypp
 
 
-    .. include:: ../../../../../_templates/installations/wazuh/zypp/add_repository_kibana.rst
+    .. include:: ../../../_templates/installations/wazuh/zypp/add_repository_kibana.rst
 
 
 
@@ -50,27 +50,27 @@ Kibana installation and configuration
         .. group-tab:: Yum
 
 
-            .. include:: ../../../../../_templates/installations/elastic/yum/install_kibana.rst
+            .. include:: ../../../_templates/installations/elastic/yum/install_kibana.rst
 
 
 
         .. group-tab:: APT
 
 
-            .. include:: ../../../../../_templates/installations/elastic/deb/install_kibana.rst
+            .. include:: ../../../_templates/installations/elastic/deb/install_kibana.rst
 
 
 
         .. group-tab:: Zypp
 
 
-            .. include:: ../../../../../_templates/installations/elastic/zypp/install_kibana.rst
+            .. include:: ../../../_templates/installations/elastic/zypp/install_kibana.rst
 
 
 
 #. Download the Kibana configuration file:
 
-    .. include:: ../../../../../_templates/installations/elastic/common/configure_kibana.rst
+    .. include:: ../../../_templates/installations/elastic/common/configure_kibana.rst
 
 
 #. Create the ``/usr/share/kibana/data`` directory:
@@ -93,7 +93,7 @@ Kibana installation and configuration
 
 #. The next step involves the certificates placement. This guide assumes that a copy of ``certs.tar`` is placed in the root home folder (~/):
 
-    .. include:: ../../../../../_templates/installations/elastic/common/generate_new_kibana_certificates.rst
+    .. include:: ../../../_templates/installations/elastic/common/generate_new_kibana_certificates.rst
 
 
 #. Link Kibana's socket to privileged port 443:
@@ -105,7 +105,7 @@ Kibana installation and configuration
 
 #. Enable and start the Kibana service:
 
-    .. include:: ../../../../../_templates/installations/elastic/common/enable_kibana.rst
+    .. include:: ../../../_templates/installations/elastic/common/enable_kibana.rst
 
 
 #. Access the web interface: 

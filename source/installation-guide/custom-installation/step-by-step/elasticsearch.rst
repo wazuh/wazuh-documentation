@@ -37,21 +37,21 @@ Adding the Wazuh repository
   .. group-tab:: Yum
 
 
-    .. include:: ../../../../../_templates/installations/wazuh/yum/add_repository_elastic_cluster.rst
+    .. include:: ../../../_templates/installations/wazuh/yum/add_repository_elastic_cluster.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../../../../_templates/installations/wazuh/deb/add_repository_elastic_cluster.rst
+    .. include:: ../../../_templates/installations/wazuh/deb/add_repository_elastic_cluster.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../../../_templates/installations/wazuh/zypp/add_repository_elastic_cluster.rst
+    .. include:: ../../../_templates/installations/wazuh/zypp/add_repository_elastic_cluster.rst
 
 
 
@@ -60,36 +60,36 @@ Elasticsearch installation
 
 Install Open Distro for Elasticsearch:
 
-.. include:: ../../../../../_templates/installations/elastic/common/install_elastic.rst
+.. include:: ../../../_templates/installations/elastic/common/install_elastic.rst
 
 Elasticsearch configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To configure Elastisearch successfully, follow these steps:
 
-.. include:: ../../../../../_templates/installations/elastic/common/elastic-multi-node/configure_elasticsearch_initial.rst
+.. include:: ../../../_templates/installations/elastic/common/elastic-multi-node/configure_elasticsearch_initial.rst
 
 Elasticsearch roles and users
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To use the Wazuh Kibana plugin properly, run the following command to add new users and roles in Kibana.
 
-.. include:: ../../../../../_templates/installations/elastic/common/add_roles_and_users.rst
+.. include:: ../../../_templates/installations/elastic/common/add_roles_and_users.rst
 
 Certificates creation and deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #. Remove the demo certificates:
 
-    .. include:: ../../../../../_templates/installations/elastic/common/remove_demo_certs.rst
+    .. include:: ../../../_templates/installations/elastic/common/remove_demo_certs.rst
 
 #.  Generate and deploy the certificates:
 
-    .. include:: ../../../../../_templates/installations/elastic/common/elastic-multi-node/generate_certificates.rst
+    .. include:: ../../../_templates/installations/elastic/common/elastic-multi-node/generate_certificates.rst
 
 #. Enable and start the Elasticsearch service:
 
-    .. include:: ../../../../../_templates/installations/elastic/common/enable_elasticsearch.rst
+    .. include:: ../../../_templates/installations/elastic/common/enable_elasticsearch.rst
 
 .. note:: The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it with the following command ``/usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer``. Make sure to restart the Elasticsearch service afterwards. 
  
@@ -109,21 +109,21 @@ Adding the Wazuh repository
   .. group-tab:: Yum
 
 
-    .. include:: ../../../../../_templates/installations/wazuh/yum/add_repository_elastic_cluster.rst
+    .. include:: ../../../_templates/installations/wazuh/yum/add_repository_elastic_cluster.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../../../../_templates/installations/wazuh/deb/add_repository_elastic_cluster.rst
+    .. include:: ../../../_templates/installations/wazuh/deb/add_repository_elastic_cluster.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../../../_templates/installations/wazuh/zypp/add_repository_elastic_cluster.rst
+    .. include:: ../../../_templates/installations/wazuh/zypp/add_repository_elastic_cluster.rst
 
 
 
@@ -132,7 +132,7 @@ Elasticsearch installation
 
 Install Open Distro for Elasticsearch:
 
-.. include:: ../../../../../_templates/installations/elastic/common/install_elastic.rst
+.. include:: ../../../_templates/installations/elastic/common/install_elastic.rst
 
 
 Elasticsearch configuration
@@ -140,7 +140,7 @@ Elasticsearch configuration
 
 To configure Elastisearch successfully, follow these steps:
 
-.. include:: ../../../../../_templates/installations/elastic/common/elastic-multi-node/configure_elasticsearch_subsequent.rst
+.. include:: ../../../_templates/installations/elastic/common/elastic-multi-node/configure_elasticsearch_subsequent.rst
 
 
 Certificates deployment
@@ -148,15 +148,15 @@ Certificates deployment
 
 #. Remove the demo certificates:
 
-    .. include:: ../../../../../_templates/installations/elastic/common/remove_demo_certs.rst
+    .. include:: ../../../_templates/installations/elastic/common/remove_demo_certs.rst
 
 #. Configure Elasticsearch certificates:
 
-    .. include:: ../../../../../_templates/installations/elastic/common/elastic-multi-node/deploy_certificates.rst
+    .. include:: ../../../_templates/installations/elastic/common/elastic-multi-node/deploy_certificates.rst
 
 #. Enable and start the Elasticsearch service:
 
-    .. include:: ../../../../../_templates/installations/elastic/common/enable_elasticsearch.rst
+    .. include:: ../../../_templates/installations/elastic/common/enable_elasticsearch.rst
 
 .. note:: The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it with the following command ``/usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer``. Make sure to restart the Elasticsearch service afterward. 
 
