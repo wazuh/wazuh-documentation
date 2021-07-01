@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: In this section of the Wazuh documentation you will find the instructions to uninstall each Wazuh component. Learn more here. 
+  
 .. _user_manual_uninstall_wazuh_installation_open_distro:
 
 Uninstalling Wazuh with Open Distro for Elasticsearch
