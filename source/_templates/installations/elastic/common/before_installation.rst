@@ -15,13 +15,13 @@
 
         .. group-tab:: APT
 
-                Run the following command to install all the necessary packages for the installation:
+                #. Run the following command to install all the necessary packages for the installation:
 
                     .. code-block:: console
 
                         # apt install curl apt-transport-https unzip wget software-properties-common
 
-                Add the repository for Java Development Kit (JDK):
+                #. Add the repository for Java Development Kit (JDK):
 
                     * For Debian:
 
@@ -36,13 +36,13 @@
 
                                 # add-apt-repository ppa:openjdk-r/ppa
 
-                Update repository data:
+                #. Update repository data:
 
                     .. code-block:: console
 
                         # apt update
 
-                Install all the required utilities:
+                #. Install all the required utilities:
 
                     .. code-block:: console
 

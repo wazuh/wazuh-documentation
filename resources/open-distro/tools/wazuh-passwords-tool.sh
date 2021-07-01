@@ -66,6 +66,8 @@ getHelp() {
    echo -e "\t-a     | --change-all Changes all the Open Distro user passwords and prints them on screen"
    echo -e "\t-u     | --user <user> Indicates the name of the user whose password will be changed. If no password specified it will generate a random one"
    echo -e "\t-p     | --password <password> Indicates the new password, must be used with option -u"
+   echo -e "\t-c     | --cert <route-admin-certificate> Indicates route to the admin certificate"
+   echo -e "\t-k     | --certkey <route-admin-certificate-key> Indicates route to the admin certificate key"
    echo -e "\t-v     | --verbose Shows the complete script execution output"
    echo -e "\t-h     | --help Shows help"
    exit 1 # Exit script after printing help
@@ -94,7 +96,34 @@ checkInstalled() {
     if [ -z "${elasticinstalled}" ]; then
         echo "Error: Open Distro is not installed on the system."
         exit 1;
+    else
+        capem=$(grep "opendistro_security.ssl.transport.pemtrustedcas_filepath: " /etc/elasticsearch/elasticsearch.yml )
+        rcapem="opendistro_security.ssl.transport.pemtrustedcas_filepath: "
+        capem="${capem//$rcapem}"
+        if [[ -z ${adminpem} ]] || [[ -z ${adminkey} ]]; then
+            readAdmincerts
+        fi
     fi
+
+}
+
+readAdmincerts() {
+
+    if [[ -f /etc/elasticsearch/certs/admin.pem ]]; then
+        adminpem="/etc/elasticsearch/certs/admin.pem"
+    else
+        echo "Error. No admin certificate indicated. Please run the script with the option -c <path-to-certificate>."
+        exit 1;
+    fi
+
+    if [[ -f /etc/elasticsearch/certs/admin-key.pem ]]; then
+        adminkey="/etc/elasticsearch/certs/admin-key.pem"
+    elif [[ -f /etc/elasticsearch/certs/admin.key ]]; then
+        adminkey="/etc/elasticsearch/certs/admin.key"
+    else
+        echo "Error. No admin certificate key indicated. Please run the script with the option -k <path-to-key-certificate>."
+        exit 1;
+    fi    
 
 }
 
@@ -127,7 +156,7 @@ createBackUp() {
     echo "Creating backup..."
     eval "mkdir /usr/share/elasticsearch/backup ${VERBOSE}"
     eval "cd /usr/share/elasticsearch/plugins/opendistro_security/tools/ ${VERBOSE}"
-    eval "./securityadmin.sh -backup /usr/share/elasticsearch/backup -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin-key.pem -icl -h ${IP} ${VERBOSE}"
+    eval "./securityadmin.sh -backup /usr/share/elasticsearch/backup -nhnv -cacert ${capem} -cert ${adminpem} -key ${adminkey} -icl -h ${IP} ${VERBOSE}"
     if [  "$?" != 0  ]; then
         echo "Error: The backup could not be created"
         exit 1;
@@ -257,7 +286,7 @@ runSecurityAdmin() {
     echo "Loading changes..."
     eval "cp /usr/share/elasticsearch/backup/* /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/ ${VERBOSE}"
     eval "cd /usr/share/elasticsearch/plugins/opendistro_security/tools/ ${VERBOSE}"
-    eval "./securityadmin.sh -cd ../securityconfig/ -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin-key.pem -icl ${VERBOSE}"
+    eval "./securityadmin.sh -cd ../securityconfig/ -nhnv -cacert ${capem} -cert ${adminpem} -key ${adminkey} -icl ${VERBOSE}"
     if [  "$?" != 0  ]; then
         echo "Error: Could not load the changes."
         exit 1;
@@ -311,7 +340,17 @@ main() {
                 PASSWORD=$2
                 shift
                 shift
-                ;;                              
+                ;;
+            "-c"|"--cert")
+                adminpem=$2
+                shift
+                shift
+                ;; 
+            "-k"|"--certkey")
+                adminkey=$2
+                shift
+                shift
+                ;;                                                            
             "-h"|"--help")
                 getHelp
                 ;;

@@ -71,7 +71,7 @@ Examples:
 .. code-block:: console
 
      # launchctl setenv WAZUH_MANAGER "10.0.0.2" WAZUH_REGISTRATION_SERVER "10.0.0.2" WAZUH_AGENT_NAME "macos-agent" \
-          WAZUH_PROTOCOL "tcp" && installer -pkg wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_OSX|.pkg -target /
+          WAZUH_PROTOCOL "udp" && installer -pkg wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_OSX|.pkg -target /
 
 * Registration and adding multiple address:
 

@@ -4,6 +4,7 @@ _build
 .DS_Store
 test
 node_modules
+__pycache__
 .eslintrc
 package-lock.json
 package.json
