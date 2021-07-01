@@ -7,9 +7,6 @@
 Using Wazuh to monitor AWS
 ==========================
 
-.. meta::
-  :description: Discover how Wazuh can help you to monitor your Amazon Web Services (AWS) infrastructure.
-
 .. versionadded:: 3.2.0
 
 Wazuh helps to increase the security of an AWS infrastructure in two different, complementary ways:

@@ -1,14 +1,12 @@
 .. Copyright (C) 2021 Wazuh, Inc.
+
 .. meta::
-  :description: The Wazuh Kibana plugin allows users to view and analyze Wazuh alerts stored in Elasticsearch. Check out how to install it in our documentation. 
+  :description: Find information about the Wazuh Kibana plugin, its different features, configuration reference and how to troubleshoot some of the most common problems.
   
 .. _kibana_app:
 
 Wazuh Kibana plugin
 ===================
-
-.. meta::
-  :description: Find information about the Wazuh Kibana plugin, its different features, configuration reference and how to troubleshoot some of the most common problems.
 
 The Wazuh Kibana plugin allows users to view and analyze Wazuh alerts stored in Elasticsearch. Users are able to get statistics per agent, search for alerts and filter them using different visualizations. It integrates with the Wazuh API to retrieve information about manager and agents configuration, logs, ruleset, groups and much more.
 
