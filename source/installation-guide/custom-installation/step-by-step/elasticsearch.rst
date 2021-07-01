@@ -216,7 +216,6 @@ To uninstall Elasticsearch, visit the :ref:`Uninstalling section <uninstall_elas
 Next steps
 ----------
 
-The next step is the installation of the Wazuh server. First, choose the cluster mode.
+The next step is the installation of the Wazuh server.
 
-- :ref:`Wazuh single-node cluster<wazuh_single_node_cluster>`
 - :ref:`Wazuh multi-node cluster<wazuh_multi_node_cluster>`

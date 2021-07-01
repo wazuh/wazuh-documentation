@@ -206,7 +206,7 @@ Choose the cluster mode between single-node or multi-node:
 Configuring Elasticsearch
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Once Elasticsearch is installed, the script starts the services automatically. The certificates are placed at ``~/certs.tar``. This file must be copied into the :ref:`Wazuh server <unattended_distributed_wazuh>` to extract the certificates needed.
+Once Elasticsearch is installed, the script starts the services automatically. The certificates are placed at ``~/certs.tar``. This file must be copied into the Wazuh server to extract the certificates needed.
 
 In case Kibana is installed on a different server, the ``certs.tar`` file should be also copied into the Wazuh server to extract the corresponding certificates.
 
@@ -255,5 +255,5 @@ If you need to uninstall Elasticsearch and Kibana, visit the :ref:`Uninstalling 
 Next steps
 ----------
 
-Once the Elastic Stack environment is ready, the Wazuh server can be installed. To do this, follow the steps described in the :ref:`Wazuh server <unattended_distributed_wazuh>` section of the installation guide.
+Once the Elastic Stack environment is ready, the Wazuh server can be installed. 
 
