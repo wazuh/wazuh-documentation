@@ -519,7 +519,12 @@ installKibana() {
             eval "setcap 'cap_net_bind_service=+ep' /usr/share/kibana/node/bin/node ${debug}"
         else
             ## EDIT KIBANA.YML
-            
+            if [ ${#ENODESIP[@]} -gt "1" ]; then
+
+            else
+                conf="$(awk '{sub("elasticsearch.hosts: https://127.0.0.1:9200", "elasticsearch.hosts: '${ENODESIP[0]}'")}1' ~/certs/$cname.conf)"
+                echo "${conf}" > ~/certs/$cname.conf    
+            fi
             eval "cp ~/certs.tar /etc/kibana/certs/ ${debug}"
             eval "cd /etc/kibana/certs/ ${debug}"
             eval "tar --overwrite -xf certs.tar ${KIBANANODES[0]}.pem ${KIBANANODES[0]}-key.pem root-ca.pem ${debug}"            
