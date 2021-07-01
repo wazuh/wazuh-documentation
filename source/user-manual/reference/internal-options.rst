@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: In this section of the Wazuh documentation you will find all the information related to the internal configuration of Wazuh. 
+  
 .. _reference_internal_options:
 
 Internal configuration
