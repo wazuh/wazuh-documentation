@@ -9,6 +9,12 @@
 Custom installation
 ===================
 
+Choose between two installation methods:
+
+- **Unattended**: You can install Wazuh components by using scripts that automate the installation process.  
+
+- **Step by step**: This is a manual way of carrying out the installation that includes a detailed description of each step of the process.
+
 .. toctree::
     :hidden:
     :maxdepth: 1
