@@ -1,5 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
-
+.. meta::
+  :description: Learn more about the architecture of Wazuh, our open source cybersecurity platform, in this section of our documentation. 
+  
 .. _architecture:
 
 Architecture

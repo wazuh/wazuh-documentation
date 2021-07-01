@@ -1,5 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
-
+.. meta::
+  :description: Check out how to add new decoders and rules, and how to change existing ones in this section of the Wazuh documentation. 
+  
 .. _ruleset_custom:
 
 Custom rules and decoders

@@ -1,5 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
-
+.. meta::
+  :description: This section of the Wazuh documentation guides through the upgrade process of Elasticsearch, Filebeat, and Kibana for Open Distro for Elasticsearch distribution.
+  
 .. _upgrading_open_distro:
 
 Upgrading Open Distro for Elasticsearch
