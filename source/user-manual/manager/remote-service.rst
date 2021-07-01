@@ -1,4 +1,5 @@
 .. Copyright (C) 2021 Wazuh, Inc.
+
 .. meta::
   :description: Want to know how the Wazuh manager can be configured to publish the remote service? Check out this section of our documentation.
   

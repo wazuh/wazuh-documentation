@@ -1,4 +1,5 @@
 .. Copyright (C) 2021 Wazuh, Inc.
+
 .. meta::
   :description: Check out alternative Wazuh installation configurations, which include installation with Elastic Stack basic license, with Splunk, or from sources.  
   

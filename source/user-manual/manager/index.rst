@@ -1,4 +1,5 @@
 .. Copyright (C) 2021 Wazuh, Inc.
+
 .. meta::
   :description: Find out more about Wazuh server administration and its configurations in this section of our documentation. 
   

@@ -1,4 +1,5 @@
 .. Copyright (C) 2021 Wazuh, Inc.
+
 .. meta::
   :description: Learn more about how to install and configure the Wazuh server and Elastic Stack by following a step-by-step deployment process. 
 

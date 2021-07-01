@@ -1,4 +1,5 @@
 .. Copyright (C) 2021 Wazuh, Inc.
+
 .. meta::
   :description: Find out more about how to check the connection to the Wazuh Manager in this section of our documentation. 
   

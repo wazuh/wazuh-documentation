@@ -1,4 +1,5 @@
 .. Copyright (C) 2021 Wazuh, Inc.
+
 .. meta::
   :description: Auditing who-data informs about the user who made changes to monitored files, and the name of the program or process used to do so. Find out more in this section.
 

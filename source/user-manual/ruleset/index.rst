@@ -1,4 +1,5 @@
 .. Copyright (C) 2021 Wazuh, Inc.
+
 .. meta::
   :description: This part of the documentation explains how to install, update, and contribute to the Wazuh Ruleset. 
   

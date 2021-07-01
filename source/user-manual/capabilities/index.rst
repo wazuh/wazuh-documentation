@@ -1,4 +1,5 @@
 .. Copyright (C) 2021 Wazuh, Inc.
+
 .. meta::
   :description: Learn more about Wazuh capabilities, how they work, their configuration, FAQs, and practical examples on how to use our solution. 
   

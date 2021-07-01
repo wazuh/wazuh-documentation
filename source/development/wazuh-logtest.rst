@@ -1,4 +1,5 @@
 .. Copyright (C) 2021 Wazuh, Inc.
+
 .. meta::
   :description: Wazuh-Logtest allows the testing and verification of rules and decoders. Learn more about it in this section.
 

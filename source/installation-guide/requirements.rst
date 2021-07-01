@@ -1,4 +1,5 @@
 .. Copyright (C) 2021 Wazuh, Inc.
+
 .. meta::
   :description: Check the supported operating systems and the recommended hardware requirements for the different types of deployments of the Wazuh installation.
   

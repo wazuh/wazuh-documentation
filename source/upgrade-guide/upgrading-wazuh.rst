@@ -1,4 +1,5 @@
 .. Copyright (C) 2021 Wazuh, Inc.
+
 .. meta::
   :description: Learn how to upgrade the Wazuh manager to the latest version available in this section of the Wazuh documentation. 
   
