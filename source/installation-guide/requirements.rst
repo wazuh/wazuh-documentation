@@ -32,7 +32,7 @@ The Wazuh server and Elastic Stack components can be installed in the following 
 All-in-one deployment
 ---------------------
 
-In an all-in-one deployment, both the Wazuh server and Elastic Stack are installed on the same host. This type of deployment is suitable for testing and small production environments. A typical use case for this kind of environment supports around 100 agents.
+In an all-in-one deployment, both the Wazuh server and Elastic Stack are installed on the same host. A typical use case for this kind of environment supports around 100 agents.
 
 The minimum requirements for this type of deployment are 4 GB of RAM and 2 CPU cores, and the recommended are 16 GB of RAM and 8 CPU cores. A 64-bit operating system is required. 
 
@@ -54,9 +54,9 @@ For example, for an environment with 80 workstations, 10 servers, and 10 network
 Distributed deployment
 ----------------------
 
-In a distributed deployment, both the Wazuh server and Elastic Stack are installed on separate hosts. This configuration is recommended for production environments as it provides the high availability and scalability of the services. 
+In a distributed deployment, both the Wazuh server and Elastic Stack are installed on separate hosts. This configuration is recommended for environments that require high availability and scalability of the services. 
 
-The Wazuh server and Elastic Stack can each be installed as a single-node or as a multi-node cluster. Kibana can either be installed on the same node as Elasticsearch or on a dedicated host. Hardware recommendations for each node:
+The Wazuh server and Elastic Stack can both be installed as a single-node or as a multi-node cluster. Kibana can either be installed on the same node as Elasticsearch or on a dedicated host. Hardware recommendations for each node:
                           
 +-------------------------+-------------------------+-------------------------------+
 |                         |  Minimum                |   Recommended                 |

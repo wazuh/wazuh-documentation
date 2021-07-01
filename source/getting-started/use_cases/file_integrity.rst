@@ -92,8 +92,8 @@ Below is an example of an alert generated when a monitored file is changed. Meta
 
 A good summary of file changes can be found in the FIM dashboard, which provides drill-down capabilities to view all of the details of the alerts triggered.
 
-.. image:: ../../images/getting_started/use_case_fim.png
+.. thumbnail:: ../../images/getting_started/use_case_fim.png
    :align: center
-   :width: 100%
+   :wrap_image: No
 
 More information on how Wazuh monitors file integrity can be found in the :ref:`user manual <manual_file_integrity>`.

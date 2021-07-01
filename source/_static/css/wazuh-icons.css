@@ -4,6 +4,7 @@
   src:  url('../fonts/wazuh-icons.eot?eahygt#iefix') format('embedded-opentype'),
     url('../fonts/wazuh-icons.ttf?eahygt') format('truetype'),
     url('../fonts/wazuh-icons.woff?eahygt') format('woff'),
+    url('../fonts/wazuh-icons.woff2') format('woff2'),
     url('../fonts/wazuh-icons.svg?eahygt#wazuh-icons') format('svg');
   font-weight: normal;
   font-style: normal;

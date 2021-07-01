@@ -18,10 +18,13 @@ The Wazuh agent has a modular architecture, where different components take care
 
 The diagram below represents the agent architecture and components:
 
-.. image:: ../../images/getting_started/architecture_agent.png
+.. thumbnail:: ../../images/getting_started/architecture_agent.png
    :alt: Wazuh agent architecture
    :align: center
-   :width: 100%
+   :wrap_image: No
+
+
+.. _agents_modules: 
 
 Agent modules
 -------------
