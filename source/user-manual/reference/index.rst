@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Check out this section of our documentation to learn more about the configuration files used by Wazuh and define the setting options
+  
 .. _reference_files:
 
 Reference
