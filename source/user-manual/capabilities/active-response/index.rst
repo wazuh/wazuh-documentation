@@ -1,8 +1,5 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. meta::
-    :description: The Syscollector module is in charge of collecting system information and store it into an SQLite database for each agent on the manager side.
-    
 .. _automatic_remediation:
 
 Active response
