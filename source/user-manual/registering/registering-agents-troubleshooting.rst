@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Learn more about the registration of Wazuh agents and troubleshooting in this section of our documentation.
+  
 .. _registering-agents-troubleshooting:
 
 Registering Wazuh agents - Troubleshooting
