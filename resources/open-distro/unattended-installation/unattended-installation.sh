@@ -1,6 +1,8 @@
 #!/bin/bash
 
-# Program to install Wazuh manager along Open Distro for Elasticsearch
+# Program to install Wazuh manager along Open Distro for Elasticsearch for both, all-in-one and distributed deploments.
+#
+#
 # Copyright (C) 2015-2021, Wazuh Inc.
 #
 # This program is a free software; you can redistribute it
@@ -508,9 +510,10 @@ installKibana() {
             exit 1;
         fi
 
+        eval "mkdir /etc/kibana/certs ${debug}"
+
         if [ -n "${aio}" ]; then
 
-            eval "mkdir /etc/kibana/certs ${debug}"
             eval "cp ~/certs/kibana* /etc/kibana/certs/ ${debug}"
             eval "cp ~/certs/root-ca.pem /etc/kibana/certs/ ${debug}"
             eval "chown -R kibana:kibana /etc/kibana/ ${debug}"
@@ -530,8 +533,8 @@ installKibana() {
                 done
 
             else
-                conf="$(awk '{sub("elasticsearch.hosts: https://127.0.0.1:9200", "elasticsearch.hosts: '${ENODESIP[0]}'")}1' ~/certs/$cname.conf)"
-                echo "${conf}" > ~/certs/$cname.conf    
+                conf="$(awk '{sub("elasticsearch.hosts: https://127.0.0.1:9200", "elasticsearch.hosts: '${ENODESIP[0]}'")}1' /etc/kibana/kibana.yml)"
+                echo "${conf}" > /etc/kibana/kibana.yml
             fi
 
             eval "cp ~/certs.tar /etc/kibana/certs/ ${debug}"
