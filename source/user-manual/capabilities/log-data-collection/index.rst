@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+    :description: Learn more about log data collection: how it woks, how to collect Windows logs, the configuration, and more in this section of our documentation. 
+    
 .. _manual_log_analysis:
 
 Log data collection
