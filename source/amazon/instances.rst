@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Check out how to monitor AWS instances with Wazuh and the several capabilities of the platform that allow it. 
+  
 .. _amazon_instances:
 
 Monitoring AWS instances
