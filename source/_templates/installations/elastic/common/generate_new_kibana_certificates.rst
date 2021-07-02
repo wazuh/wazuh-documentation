@@ -5,6 +5,7 @@
 
   # mkdir /etc/kibana/certs
   # mv ~/certs.tar /etc/kibana/certs/
+  # chown kibana:kibana /etc/kibana/certs/*
   # cd /etc/kibana/certs/
   # tar -xf certs.tar kibana.pem kibana-key.pem root-ca.pem
   # rm -f certs.tar
