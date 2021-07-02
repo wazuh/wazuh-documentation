@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Check out the user manual of the Wazuh Platform in this section. Learn more about how Wazuh works, the components, and more. 
+  
 .. _user_manual:
 
 User manual
