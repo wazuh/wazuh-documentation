@@ -8,21 +8,20 @@
 Wazuh server
 ============
 
-This document will go through the installation of the Wazuh server components and Filebeat in a Wazuh multi-node cluster.
+Install the Wazuh server in a single-node or multi-node configuration. 
 
 .. note:: Root user privileges are required to run all the commands described below.
 
 Installing the Wazuh server
 ---------------------------
 
-The Wazuh server collects and analyzes data from the deployed Wazuh agents. It runs the Wazuh manager, the Wazuh API, and Filebeat. The first step to set up Wazuh is adding the Wazuh's repository to the servers.
+The Wazuh server collects and analyzes data from the deployed Wazuh agents. It runs the Wazuh manager and Filebeat. 
 
-As an alternative to this installation method, you can install Wazuh using packages. To perform this action, see the :ref:`Package list <packages>` section. 
 
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This section describes how to add the Wazuh repository. It will be used for the Wazuh manager, the Wazuh API, and Filebeat installation. These steps must be followed in all the servers that will be part of the Wazuh multi-node cluster:
+Add the Wazuh repository to download the official Wazuh packages. As an alternative, you can download the Wazuh packages directly from our :ref:`Package list <packages>`. 
 
 .. tabs::
 
@@ -52,7 +51,7 @@ This section describes how to add the Wazuh repository. It will be used for the 
 Installing the Wazuh manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Install the Wazuh manager package. This step must be applied in all servers that will act as Wazuh cluster nodes:
+Install the Wazuh manager package. 
 
 .. tabs::
 
@@ -120,14 +119,14 @@ Wazuh server worker nodes
 Installing Filebeat
 -------------------
 
-Filebeat is the tool on the Wazuh server that securely forwards alerts and archived events to Elasticsearch.  It has to be installed in every Wazuh manager server.
+Filebeat securely forwards alerts and archived events to Elasticsearch.  It has to be installed in every Wazuh manager server.
 
 
 Filebeat installation and configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-#. Install the Filebeat package:
+#. Install the Filebeat package.
 
     .. tabs::
 
@@ -153,18 +152,18 @@ Filebeat installation and configuration
 
 
 
-#. Download the pre-configured Filebeat configuration file used to forward the Wazuh alerts to Elasticsearch:
+#. Download the pre-configured Filebeat configuration file used to forward the Wazuh alerts to Elasticsearch.
 
     .. code-block:: console
 
       # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/|WAZUH_LATEST_MINOR|/resources/open-distro/filebeat/7.x/filebeat_elastic_cluster.yml
 
-#. Download the alerts template for Elasticsearch:
+#. Download the alerts template for Elasticsearch.
 
     .. include:: ../../../_templates/installations/elastic/common/load_filebeat_template.rst
 
 
-#. Download the Wazuh module for Filebeat:
+#. Download the Wazuh module for Filebeat.
 
     .. code-block:: console
 
