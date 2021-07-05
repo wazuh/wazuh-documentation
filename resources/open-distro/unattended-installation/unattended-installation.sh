@@ -464,6 +464,24 @@ installFilebeat() {
             eval "cp ~/certs/filebeat* /etc/filebeat/certs/ ${debug}"
         else
             ##CONFIGURE YML
+            if [ ${#FILEBEATNODES[@]} -lt "3" ]; then
+                conf="$(awk '{sub("        - 127.0.0.1:9200", "        - '${FILEBEATNODES[1]}':9200")}1' /etc/filebeat/filebeat.yml)"
+                echo "${conf}" > /etc/filebeat/filebeat.yml                
+            else
+                conf="$( grep -v "output.elasticsearch.hosts:" /etc/filebeat/filebeat.yml)"
+                echo "${conf}" > /etc/filebeat/filebeat.yml
+                conf="$( grep -v "        - 127.0.0.1:9200" /etc/filebeat/filebeat.yml)"
+                echo "${conf}" > /etc/filebeat/filebeat.yml  
+                conf="$( grep -v "#        - <elasticsearch_ip_node_2>:9200" /etc/filebeat/filebeat.yml)"
+                echo "${conf}" > /etc/filebeat/filebeat.yml   
+                conf="$( grep -v "#        - <elasticsearch_ip_node_3>:9200" /etc/filebeat/filebeat.yml)"
+                echo "${conf}" > /etc/filebeat/filebeat.yml   
+                
+                echo "output.elasticsearch.hosts:" >> /etc/filebeat/filebeat.yml
+                for i in "${!ENODESIP[@]}"; do
+                    echo "        - ${ENODESIP[i]}:9200"
+                done 
+            fi
 
             eval "cp ~/certs.tar /etc/filebeat/certs/ ${debug}"
             eval "cd /etc/filebeat/certs/ ${debug}"
