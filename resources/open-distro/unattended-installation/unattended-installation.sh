@@ -482,6 +482,15 @@ installFilebeat() {
                 for i in "${!ENODESIP[@]}"; do
                     echo "        - ${ENODESIP[i]}:9200"
                 done 
+
+                # Configure the Wazuh cluster
+                if [ -n "${ismaster}" ]; then
+                    masterIP="${ENODESIP[masterpos-1]}"
+                    clusterkey="$()"
+                else
+                    # Configure worker node
+
+                fi
             fi
 
             eval "cp ~/certs.tar /etc/filebeat/certs/ ${debug}"
