@@ -20,6 +20,7 @@ OD_VER="1.13.2"
 OD_REV="1"
 ow=""
 aio=""
+ismaster=""
 CONFIG_ROUTE="~/certs.tar"
 ELASTICINSTANCES="Elasticsearch nodes:"
 FILEBEATINSTANCES="Wazuh servers IPs:"
@@ -463,7 +464,7 @@ installFilebeat() {
             eval "cp ~/certs/root-ca.pem /etc/filebeat/certs/ ${debug}"
             eval "cp ~/certs/filebeat* /etc/filebeat/certs/ ${debug}"
         else
-            ##CONFIGURE YML
+
             if [ ${#FILEBEATNODES[@]} -lt "3" ]; then
                 conf="$(awk '{sub("        - 127.0.0.1:9200", "        - '${FILEBEATNODES[1]}':9200")}1' /etc/filebeat/filebeat.yml)"
                 echo "${conf}" > /etc/filebeat/filebeat.yml                
@@ -491,6 +492,12 @@ installFilebeat() {
                 eval "mv /etc/filebeat/certs/${wname}.pem /etc/filebeat/certs/filebeat.pem ${debug}"
                 eval "mv /etc/filebeat/certs/${wname}-key.pem /etc/filebeat/certs/filebeat-key.pem ${debug}"
             fi
+        fi
+
+        # Configure the Wazuh cluster
+
+        if [ -n "${ismaster}" ]; then
+            masterIP="${ENODESIP[masterpos-1]}"
         fi
 
         # Start Filebeat
