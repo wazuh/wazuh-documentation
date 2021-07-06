@@ -148,9 +148,8 @@ Check the :ref:`Requirements <installation_requirements>` section for informatio
     :hidden:
     :maxdepth: 1
 
-    requirements
     quickstart
-    custom-installation/index
+    central-components/index
     wazuh-agent/index
     packages-list
-    more-installation-alternatives/index
+
