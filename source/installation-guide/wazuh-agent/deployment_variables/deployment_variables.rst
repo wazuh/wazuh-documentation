@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Learn about the variables that facilitate the deployment of the Wazuh agent on Linux, macOS, Windows and AIX operating systems.
+  :description: Learn about the variables that facilitate the deployment of the Wazuh agent on Linux, macOS, Windows, and AIX operating systems.
 
 .. _deployment_variables:
 
@@ -19,4 +19,3 @@ Select your operating system to learn how to make an automatic deployment using 
     Windows <deployment_variables_windows>
     macOS <deployment_variables_macos>
     AIX <deployment_variables_aix>
-
