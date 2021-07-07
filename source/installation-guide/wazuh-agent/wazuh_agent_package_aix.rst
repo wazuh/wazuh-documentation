@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about how to install or deploy the Wazuh lightweight agent in AIX in this section of our installation guide. 
+  :description: Learn how to deploy the Wazuh agent on AIX, using deployment variables that facilitate the task of installing, registering, and configuring the agent. 
 
 .. _wazuh_agent_package_aix:
 
