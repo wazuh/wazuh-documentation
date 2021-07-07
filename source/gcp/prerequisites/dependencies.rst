@@ -70,4 +70,4 @@ To install the rest of the dependencies, execute the following command:
 
 .. code-block:: console
 
-  # pip3 install google-cloud-storage==1.39.0 google-api-core==1.16.0 google-auth==1.30.1 grpc-google-iam-v1==0.12.3 grpcio==1.38.0 pytz==2020.1
+  # pip3 install google-api-core==1.30.0 google-auth==1.28.0 google-cloud-core==1.7.1 google-cloud-storage==1.39.0 google-crc32c==1.1.2 google-resumable-media==1.3.1 googleapis-common-protos==1.51.0 grpc-google-iam-v1==0.12.3 grpcio==1.38.1 pytz==2020.1
