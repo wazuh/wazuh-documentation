@@ -487,7 +487,16 @@ installFilebeat() {
                 if [ -n "${ismaster}" ]; then
                     masterIP="${ENODESIP[masterpos-1]}"
                     if [ -z "$clusterkey" ]; then
+                        echo "Generating the Wazuh cluster key..."
                         clusterkey="$(openssl rand -hex 16)"
+                        conf="$(awk '{sub("    <node_name>node01</node_name>", "    <node_name>'${wname}'</node_name>")}1' /var/ossec/etc/ossec.conf)"
+                        echo "${conf}" > /var/ossec/etc/ossec.conf  
+                        conf="$(awk '{sub("    <key></key>", "    <key>'${clusterkey}'</key>")}1' /var/ossec/etc/ossec.conf)"
+                        echo "${conf}" > /var/ossec/etc/ossec.conf  
+                        conf="$(awk '{sub("        <node>NODE_IP</node>", "        <node>'${masterIP}'</node>")}1' /var/ossec/etc/ossec.conf)"
+                        echo "${conf}" > /var/ossec/etc/ossec.conf 
+                        conf="$(awk '{sub("    <disabled>yes</disabled>", "    <disabled>no</disabled>")}1' /var/ossec/etc/ossec.conf)"
+                        echo "${conf}" > /var/ossec/etc/ossec.conf                                                                          
                     fi
                 else
                     # Configure worker node
