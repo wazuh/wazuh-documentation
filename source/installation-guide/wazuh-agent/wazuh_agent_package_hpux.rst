@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about how to install or deploy the Wazuh lightweight agent in HP-UX in this section of our installation guide. 
+  :description: Learn more about how to successfully install the Wazuh agent on HP-UX systems in this section of our Installation guide.
 
 .. _wazuh_agent_package_hpux:
 
