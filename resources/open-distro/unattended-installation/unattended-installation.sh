@@ -262,7 +262,10 @@ readConfig() {
         if  [ "${CONFIG[counter]}" !=  "${FILEBEATINSTANCES}" ] && [ "${CONFIG[counter]}" !=  "${KIBANAINSTANCES}" ] && [ "${CONFIG[counter]}" !=  "${KIBANAHEAD}" ] && [ -n "${CONFIG[counter]}" ] && [ "${CONFIG[counter]}" !=  "  name:" ] && [ "${CONFIG[counter]}" !=  "  ip:" ]; then
             FILEBEATNODES[i]+="$(echo "${CONFIG[counter]}" | tr -d '\011\012\013\014\015\040')"
             ((i++))
-        fi    
+        elif [ ${CONFIG[counter]} ]
+            ismaster="1"
+            masterpos="${i}"
+        fi  
 
     ((counter++))
     done
@@ -279,6 +282,11 @@ readConfig() {
 
         ((counter++))    
     done
+
+}
+
+checkMaster() {
+    if [ ${#FILEBEATNODES[@]} -gt "3" ]; then    
 }
 
 ## Install the required packages for the installation
@@ -496,11 +504,19 @@ installFilebeat() {
                         conf="$(awk '{sub("        <node>NODE_IP</node>", "        <node>'${masterIP}'</node>")}1' /var/ossec/etc/ossec.conf)"
                         echo "${conf}" > /var/ossec/etc/ossec.conf 
                         conf="$(awk '{sub("    <disabled>yes</disabled>", "    <disabled>no</disabled>")}1' /var/ossec/etc/ossec.conf)"
-                        echo "${conf}" > /var/ossec/etc/ossec.conf                                                                          
+                        echo "${conf}" > /var/ossec/etc/ossec.conf                                                                
                     fi
                 else
                     # Configure worker node
-
+                    masterIP="${ENODESIP[masterpos-1]}"
+                    conf="$(awk '{sub("    <node_name>node01</node_name>", "    <node_name>'${wname}'</node_name>")}1' /var/ossec/etc/ossec.conf)"
+                    echo "${conf}" > /var/ossec/etc/ossec.conf  
+                    conf="$(awk '{sub("    <key></key>", "    <key>'${clusterkey}'</key>")}1' /var/ossec/etc/ossec.conf)"
+                    echo "${conf}" > /var/ossec/etc/ossec.conf  
+                    conf="$(awk '{sub("        <node>NODE_IP</node>", "        <node>'${masterIP}'</node>")}1' /var/ossec/etc/ossec.conf)"
+                    echo "${conf}" > /var/ossec/etc/ossec.conf 
+                    conf="$(awk '{sub("    <disabled>yes</disabled>", "    <disabled>no</disabled>")}1' /var/ossec/etc/ossec.conf)"
+                    echo "${conf}" > /var/ossec/etc/ossec.conf  
                 fi
             fi
 
@@ -823,7 +839,12 @@ main() {
                 kname=$2
                 shift
                 shift
-                ;;                                
+                ;;   
+            "-ck"|"--cluster-key")
+                clusterkey=$2
+                shift
+                shift
+                ;;                                               
             "-k"|"--install-kibana")
                 kibana=1
                 shift 1
