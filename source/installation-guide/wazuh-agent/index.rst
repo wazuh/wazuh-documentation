@@ -64,6 +64,17 @@ To install a Wazuh agent, select your operating system and follow the instructio
 
 .. raw:: html
 
+      </a>
+  </div>
+  <div class="item-agent" id="solaris-logo">
+      <a href="./wazuh_agent_package_solaris.html" class="d-flex align-items-center">
+          <p>Solaris</p>
+
+.. image:: ../../images/installation/solaris.png
+    :align: center      
+
+.. raw:: html
+
         </a>
     </div>
     <div class="item-agent">
@@ -86,17 +97,6 @@ To install a Wazuh agent, select your operating system and follow the instructio
 
 .. raw:: html
 
-        </a>
-    </div>
-    <div class="item-agent" id="solaris-logo">
-        <a href="./wazuh_agent_package_solaris.html" class="d-flex align-items-center">
-            <p>Solaris</p>
-
-.. image:: ../../images/installation/solaris.png
-      :align: center
-
-.. raw:: html
-
           </a>
       </div>
   </div>
@@ -115,7 +115,8 @@ If you are deploying Wazuh in a large environment, with a high number of servers
     Linux <wazuh_agent_package_linux>
     Windows <wazuh_agent_package_windows>
     macOS <wazuh_agent_package_macos>
+    Solaris <wazuh_agent_package_solaris> 
     AIX <wazuh_agent_package_aix>
     HP-UX <wazuh_agent_package_hpux>
-    Solaris <wazuh_agent_package_solaris>   
+     
     
