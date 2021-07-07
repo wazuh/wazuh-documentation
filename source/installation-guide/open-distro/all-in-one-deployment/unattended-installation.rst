@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Looking for installing Wazuh through unattended installation? Learn more about how to do it in this section of the documentation.
+  
 Unattended installation
 =======================
 
@@ -22,7 +25,7 @@ Installing Wazuh
 
    The script performs a health check to ensure that the host has enough resources to guarantee proper performance. To skip this step, add the ``-i`` or ``--ignore-healthcheck`` option when running the script.
 
-   After executing the script, the output prompts all the user's passwords and a message confirms that the installation was successful.
+   After executing the script, the output prompts all the users' passwords and a message confirms that the installation was successful.
    
    .. code-block:: none
      :class: output

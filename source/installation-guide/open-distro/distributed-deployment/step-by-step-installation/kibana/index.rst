@@ -1,7 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. meta:: :description: Learn how to install Elastic Stack for using Wazuh on Debian
-
+.. meta::
+  :description: Learn more about Kibana prerequisites, instalation and configuration, and how to add it to the Wazuh repository.
+  
 .. _kibana:
 
 
@@ -11,13 +12,6 @@ Kibana
 Kibana is a flexible and intuitive web interface for mining and visualizing the events and archives stored in Elasticsearch. 
 
 .. note:: Root user privileges are required to run all the commands described below.
-
-Prerequisites
-~~~~~~~~~~~~~
-
-Before installing Kibana, some extra packages must be installed:
-
-.. include:: ../../../../../_templates/installations/elastic/common/before_installation_kibana.rst
 
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -29,21 +23,21 @@ This step is required only if Kibana will be installed on a separate host where 
   .. group-tab:: Yum
 
 
-    .. include:: ../../../../../_templates/installations/wazuh/yum/add_repository.rst
+    .. include:: ../../../../../_templates/installations/wazuh/yum/add_repository_kibana.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../../../../_templates/installations/wazuh/deb/add_repository.rst
+    .. include:: ../../../../../_templates/installations/wazuh/deb/add_repository_kibana.rst
 
 
 
   .. group-tab:: Zypp
 
 
-    .. include:: ../../../../../_templates/installations/wazuh/zypp/add_repository.rst
+    .. include:: ../../../../../_templates/installations/wazuh/zypp/add_repository_kibana.rst
 
 
 

@@ -1,6 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. meta:: :description: Learn how to install Elastic Stack for using Wazuh on Debian
+.. meta::
+  :description: Learn how to install Elasticsearch as a single-node cluster. This kind of installation provides high availability and load balancing.
 
 .. _wazuh_single_node_cluster:
 
@@ -11,13 +12,6 @@ Wazuh single-node cluster
 This document will go through the installation of the Wazuh server components and Filebeat in a Wazuh single-node cluster.
 
 .. note:: Root user privileges are required to run all the commands described below.
-
-Prerequisites
--------------
-
-Before installing the Wazuh server and Filebeat, some extra packages must be installed:
-
-.. include:: ../../../../../_templates/installations/elastic/common/before_installation_kibana_filebeat.rst
 
 Installing the Wazuh server
 ---------------------------
@@ -33,21 +27,21 @@ Adding the Wazuh repository
   .. group-tab:: Yum
 
 
-    .. include:: ../../../../../_templates/installations/wazuh/yum/add_repository.rst
+    .. include:: ../../../../../_templates/installations/wazuh/yum/add_repository_wazuh_server.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../../../../_templates/installations/wazuh/deb/add_repository.rst
+    .. include:: ../../../../../_templates/installations/wazuh/deb/add_repository_wazuh_server.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../../../_templates/installations/wazuh/zypp/add_repository.rst
+    .. include:: ../../../../../_templates/installations/wazuh/zypp/add_repository_wazuh_server.rst
 
 
 

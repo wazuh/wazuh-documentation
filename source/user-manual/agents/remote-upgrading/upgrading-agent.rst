@@ -1,4 +1,5 @@
 .. Copyright (C) 2021 Wazuh, Inc.
+
 .. meta::
   :description: Learn how to upgrade a Wazuh agent remotely using the command line or the RESTful API. 
 

@@ -347,8 +347,8 @@ epub_exclude_files = ['search.html', 'not_found.html']
 # -- Images extension -----------------------------------------------------
 
 wazuh_images_config = {
-    'override_image_directive': 'thumbnail',
-    'show_caption': True
+  'override_image_directive': 'thumbnail',
+  'show_caption': True
 }
 
 # -- Options for intersphinx extension ---------------------------------------
@@ -460,7 +460,7 @@ custom_replacements = {
     "|OPENDISTRO_LATEST_DOCKER|" : "1.13.2",
     "|OPENDISTRO_LATEST_KUBERNETES|" : "1.13.2",
     "|DOCKER_COMPOSE_VERSION|" : "1.28.3",
-    "|SPLUNK_LATEST|" : "8.1.2",
+    "|SPLUNK_LATEST|" : "8.1.3",
     "|WAZUH_SPLUNK_LATEST|" : "4.2.0",
     "|ELASTIC_6_LATEST|" : "6.8.8",
     "|WAZUH_REVISION_YUM_AGENT_I386|" : "1",

@@ -80,7 +80,7 @@ The image below shows a schema of how a master node and a worker node interact w
 
 .. image:: ../images/manual/cluster/cluster_flow.png
   :align: center
-
+  
 Keep alive
 ~~~~~~~~~~
 
@@ -316,20 +316,23 @@ As said before, all protocols are built from a common abstract base. This base d
 +---------------+-------------+--------------------+--------------------------------------------------------------------------+
 | Message       | Received in | Arguments          | Description                                                              |
 +===============+=============+====================+==========================================================================+
-| ``echo``      | Both        | Message<str>       | Used to send keep alives to the peer. Replies the same received message. |
+| ``new_str``   | Both        | String length<int> | Used to start the sending long strings process.                          |
++---------------+-------------+--------------------+--------------------------------------------------------------------------+
+| ``str_upd``   | Both        | String Id<str>,    | Used to send a string chunk during the sending long strings process.     |
+|               |             | Data chunk<str>    |                                                                          |
++---------------+-------------+--------------------+--------------------------------------------------------------------------+
+| ``err_str``   | Both        | String length<int> | Used to notify an error while sending a string so the reserved space is  |
+|               |             |                    | freed.                                                                   |
 +---------------+-------------+--------------------+--------------------------------------------------------------------------+
 | ``new_file``  | Both        | Filename<str>      | Used to start the sending file process.                                  |
 +---------------+-------------+--------------------+--------------------------------------------------------------------------+
-| ``new_str``   | Both        | String length<int> | Used to start the sending long strings process.                          |
-+---------------+-------------+--------------------+--------------------------------------------------------------------------+
-| ``file_upd``  | Both        | Filename<str>,     | Used to send a file during the sending file process.                     |
-|               |             | Data<str>          |                                                                          |
-+---------------+-------------+--------------------+--------------------------------------------------------------------------+
-| ``str_upd``   | Both        | String Id<str>,    | Used to send a string during the sending long strings process.           |
-|               |             | Data<str>          |                                                                          |
+| ``file_upd``  | Both        | Filename<str>,     | Used to send a file chunk during the sending file process.               |
+|               |             | Data chunk<str>    |                                                                          |
 +---------------+-------------+--------------------+--------------------------------------------------------------------------+
 | ``file_end``  | Both        | Filename<str>,     | Used to finish the sending file process.                                 |
 |               |             | File checksum<str> |                                                                          |
++---------------+-------------+--------------------+--------------------------------------------------------------------------+
+| ``echo``      | Both        | Message<str>       | Used to send keep alives to the peer. Replies the same received message. |
 +---------------+-------------+--------------------+--------------------------------------------------------------------------+
 | ``echo-c``    | Server      | Message<str>       | Used by the client to send keep alives to the server.                    |
 +---------------+-------------+--------------------+--------------------------------------------------------------------------+

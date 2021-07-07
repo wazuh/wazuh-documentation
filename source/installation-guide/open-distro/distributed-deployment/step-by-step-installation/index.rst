@@ -3,9 +3,9 @@
 Step-by-step installation
 =========================
 
-You install and configure the Wazuh server and Elastic Stack by following a step-by-step deployment process of each involved component. It is highly recommended to first install Open Distro for Elasticsearch since the certificates needed for securing the communication are created during its installation.
+You install and configure the Wazuh server and Elastic Stack by following a step-by-step deployment process of each involved component. During the installation, the certificates needed for securing the communication are generated. Therefore, we recommend that you first install Open Distro for Elasticsearch to encrypt the communication.
 
-For a distributed deployment, each of the following components is installed on their dedicated server, except for Kibana that can optionally be installed on the same server as an Elasticsearch node.
+For a distributed deployment, each of the following components is installed on their dedicated server. If needed, Kibana can optionally be installed on the same server as an Elasticsearch node.
 
 
 - **Elasticsearch cluster:** 

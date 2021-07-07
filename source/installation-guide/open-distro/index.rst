@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: In this section of the Wazuh documentation, we provide information on how to install Wazuh with Open Distro for Elasticsearch.
+  
 .. _od_installation_guide:
 
 Wazuh server
@@ -14,23 +17,23 @@ Install Wazuh with Open Distro for Elasticsearch, which is an Apache 2.0 license
 Deployment types
 ----------------
 
-Wazuh allows you to adapt the deployment process according to your enterprise needs. You can choose between two alternatives for deploying a Wazuh installation.
+There are two different options for deploying Wazuh:
 
+- **All-in-one deployment**: Wazuh and Open Distro for Elasticsearch are installed on the same host. 
+
+- **Distributed deployment**: Each component is installed on a separate host as a single-node or multi-node cluster. This type of deployment provides high availability and scalability of the product, and it is convenient for large working environments.
+  
 For information on the minimum hardware requirements for the different types of deployment, check the :ref:`Requirements <installation_requirements>` section. 
 
-- All-in-one deployment: Wazuh and Open Distro for Elasticsearch are installed on the same host. This type of deployment is appropriate for testing and small working environments. 
-
-- Distributed deployment: Each component is installed on a separate host as a single-node or multi-node cluster. This type of deployment allows high availability and scalability of the product and is convenient for large working environments.
-  
 
 Installation methods
 ---------------------
 
 For each type of deployment, the user can choose between two installation methods:
 
-- Unattended: This is an automated installation that requires the initial input of the necessary information to perform the installation process through scripts.
+- **Unattended**: You can install Wazuh using scripts that automate the installation process. The scripts also perform health checks to verify that the available system resources meet the minimal requirements.
 
-- Step by step: This is a manual installation that includes a detailed description of each step of the installation process.
+- **Step by step**: This is a manual way of carrying out the installation that includes a detailed description of each step of the process.
 
 
 Start deploying Wazuh with Open Distro for Elasticsearch

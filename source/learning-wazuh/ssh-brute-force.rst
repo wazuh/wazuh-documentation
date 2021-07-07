@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Looking for how to Detect an SSH brute-force attack? Learn more about how Wazuh detects attacks and generates alerts to protect your system.
+  
 .. _learning_wazuh_ssh_brute_force:
 
 Detect an SSH brute-force attack
