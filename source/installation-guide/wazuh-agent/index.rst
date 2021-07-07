@@ -118,4 +118,4 @@ If you are deploying Wazuh in a large environment, with a high number of servers
     AIX <wazuh_agent_package_aix>
     HP-UX <wazuh_agent_package_hpux>
     Solaris <wazuh_agent_package_solaris>   
-    deployment_variables/deployment_variables
+    
