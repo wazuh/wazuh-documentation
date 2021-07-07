@@ -15,7 +15,6 @@ Welcome to the Wazuh user manual. Use it as your Wazuh reference library once yo
     .. toctree::
         :maxdepth: 2
 
-        overview
         manager/index
         certificates
         registering/index
