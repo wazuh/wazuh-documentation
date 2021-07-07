@@ -7,14 +7,14 @@
 Installing Wazuh interface in step-by-step mode
 ===============================================
 
-Wazuh interface is a flexible and intuitive web interface for mining and visualizing the events and archives based on Kibana. 
+Wazuh interface is a flexible and intuitive web interface, based on Kibana, for mining and visualizing the events and archives. 
 
 .. note:: Root user privileges are required to run all the commands described below.
 
-Adding the Wazuh repository
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Add the Wazuh repository
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-This step is required only if Kibana will be installed on a separate host where Elasticsearch was installed.
+Add the Wazuh repository if you are installing the Wazuh interface on a dedicated server.
 
 .. tabs::
 
@@ -39,8 +39,8 @@ This step is required only if Kibana will be installed on a separate host where 
 
 
 
-Kibana installation and configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Wazuh interface installation and configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #. Install the Kibana package:
 
@@ -95,7 +95,7 @@ Kibana installation and configuration
     .. include:: ../../../_templates/installations/elastic/common/generate_new_kibana_certificates.rst
 
 
-#. Link Kibana's socket to privileged port 443:
+#. Link Kibana socket to privileged port 443:
 
     .. code-block:: console
 
@@ -107,20 +107,18 @@ Kibana installation and configuration
     .. include:: ../../../_templates/installations/elastic/common/enable_kibana.rst
 
 
-#. Access the web interface: 
+#. Access the Wazuh web interface: 
 
   .. code-block:: none
 
       URL: https://<kibana_ip>
-      user: admin
-      password: admin    
+      user: wazuh
+      password: <wazuh_user_password>  
 
 
 Upon the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or,  for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser.  Alternatively, a certificate from a trusted authority can be configured. 
 
-It is highly recommended to change Elasticsearch’s default passwords for the users found at the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. More information about this process can be found :ref:`here <change_elastic_pass>`.
-
-With the first access attempt, the Wazuh Kibana plugin may prompt a message that indicates that it cannot communicate with the Wazuh API. To solve this issue edit the file ``/usr/share/kibana/data/wazuh/config/wazuh.yml`` and replace the ``url`` by the Wazuh server's address: 
+With the first access attempt, the Wazuh Kibana plugin may prompt a message that indicates that it cannot communicate with the Wazuh API. To solve this issue edit the file ``/usr/share/kibana/data/wazuh/config/wazuh.yml`` and replace the ``url`` by the Wazuh server's IP address or hostname: 
 
 .. code-block:: yaml
 
@@ -132,8 +130,7 @@ With the first access attempt, the Wazuh Kibana plugin may prompt a message that
        password: wazuh-wui
        run_as: false
 
-Once Kibana is running it is necessary to assign each user its corresponding role. To learn more visit the :ref:`Setting up the Wazuh Kibana plugin <connect_kibana_app>` section. 
-
+ 
 To uninstall Kibana, visit the :ref:`uninstalling section <uninstall_kibana>`.
 
 Next steps
