@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Visit the Wazuh installation guide and learn more about the deployment process, available installation alternatives, and requirements.
+  
 .. _installation_guide:
 
 .. meta::

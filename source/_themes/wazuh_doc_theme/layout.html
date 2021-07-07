@@ -22,7 +22,7 @@
 {% for cssfile in css_files %}
   <link rel="stylesheet" href="{{ pathto(cssfile, 1) }}" type="text/css" />
 {% endfor %}
-<link rel='stylesheet' id='google-fonts-css'  href='https://fonts.googleapis.com/css?family=Montserrat:400,500|Open+Sans:400,700|Fira+Mono' type='text/css' media='all' />
+<style type="text/css">{{ inline_fonts }}</style>
 {%- endmacro %}
 
 {%- macro js() %}
@@ -75,6 +75,15 @@
 {%- endblock css %}
 
 {%- block linktags %}
+  {% if pagename == 'not_found' %}
+  <link rel="preload" href="_static/img/wazuh_404_bg_xs.png" as="image" type="image/x-png">
+  <link rel="preload" href="_static/img/wazuh_404_bg_desktop.png" as="image" type="image/x-png">
+  <link rel="preload" href="_static/img/wazuh_404_bg_4k.png" as="image" type="image/x-png">
+  {% endif %}
+  <link rel="preload" href="{{ url_root }}_static/img/wazuh_bg_head.png" as="image" type="image/x-png">
+  <link rel="preload" href="{{ url_root }}_static/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  
+
   {%- if hasdoc('about') %}
     <link rel="author" title="{{ _('About these documents') }}"
             href="{{ pathto('about') }}"/>

@@ -1,4 +1,5 @@
 .. Copyright (C) 2021 Wazuh, Inc.
+
 .. meta::
   :description: Learn how anomaly and malware detection works in Wazuh.
 

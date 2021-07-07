@@ -1,4 +1,5 @@
 .. Copyright (C) 2021 Wazuh, Inc.
+
 .. meta::
   :description: Check out the step-by-step guide on how to create a WPK package.
 .. _create-wpk:
