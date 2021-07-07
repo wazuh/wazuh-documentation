@@ -285,10 +285,6 @@ readConfig() {
 
 }
 
-checkMaster() {
-    if [ ${#FILEBEATNODES[@]} -gt "3" ]; then    
-}
-
 ## Install the required packages for the installation
 installPrerequisites() {
     logger "Installing all necessary utilities for the installation..."
