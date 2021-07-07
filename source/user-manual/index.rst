@@ -27,4 +27,5 @@ Welcome to the Wazuh user manual. Use it as your Wazuh reference library once yo
         kibana-app/index
         reference/index
         elasticsearch/elastic_tuning
+        more-installation-alternatives/index
         uninstall/index
