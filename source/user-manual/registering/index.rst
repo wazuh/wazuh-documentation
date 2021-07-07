@@ -163,3 +163,4 @@ In case of problems during registration, visit the :ref:`registering Wazuh agent
     host-verification-registration
     registering-agents-theory
     registering-agents-troubleshooting
+    deployment_variables/deployment_variables
