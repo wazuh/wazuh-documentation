@@ -212,4 +212,4 @@ To uninstall Wazuh and Filebeat, visit the :ref:`uninstalling section <user_manu
 Next steps
 ----------
 
-The next step consists of :ref:`installing Kibana <kibana>`.
+The next step consists of :ref:`installing Kibana <wazuh_interface_step_by_step>`.

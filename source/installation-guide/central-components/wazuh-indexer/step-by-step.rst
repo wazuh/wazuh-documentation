@@ -218,4 +218,4 @@ Next steps
 
 The next step is the installation of the Wazuh server.
 
-- :ref:`Wazuh multi-node cluster<wazuh_multi_node_cluster>`
+- :ref:`Wazuh multi-node cluster<wazuh_server_step_by_step>`

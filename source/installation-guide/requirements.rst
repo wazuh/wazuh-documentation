@@ -98,4 +98,4 @@ These two variables should be zero if the environment is working properly. If it
 
 To monitor if the Elastic Stack environment is working properly, tools such as the performance analyzer are available.
 
-In case that scaling is needed, a distributed deployment of :ref:`Wazuh with Elastic Stack <elasticsearch_multi_node_cluster>` is recommended.
+In case that scaling is needed, a distributed deployment of :ref:`Wazuh with Elastic Stack <wazuh_indexer_installation>` is recommended.

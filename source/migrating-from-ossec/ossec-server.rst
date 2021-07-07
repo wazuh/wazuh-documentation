@@ -55,7 +55,7 @@ Remove your current installation
 Install Wazuh server
 --------------------
 
-Now it's time to install the Wazuh server component. This can be done from sources or from binary packages. Go to our documentation to :ref:`Installing Wazuh server <wazuh_multi_node_cluster>` section for detailed instructions on this process.
+Now it's time to install the Wazuh server component. This can be done from sources or from binary packages. Go to our documentation to :ref:`Installing Wazuh server <wazuh_server_installation>` section for detailed instructions on this process.
 
 Restore configuration
 ---------------------
