@@ -486,7 +486,9 @@ installFilebeat() {
                 # Configure the Wazuh cluster
                 if [ -n "${ismaster}" ]; then
                     masterIP="${ENODESIP[masterpos-1]}"
-                    clusterkey="$()"
+                    if [ -z "$clusterkey" ]; then
+                        clusterkey="$(openssl rand -hex 16)"
+                    fi
                 else
                     # Configure worker node
 
