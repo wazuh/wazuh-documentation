@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Learn more about how to prepare your Wazuh Lab Environment. In this section, we show you how to install the Linux Wazuh agent. 
+
 .. _build_lab_install_linux_agents:
 
 Install the Linux Wazuh agents
