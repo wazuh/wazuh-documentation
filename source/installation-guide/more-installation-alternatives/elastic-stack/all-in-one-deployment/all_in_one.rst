@@ -1,6 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. meta:: :description: Learn how to install Wazuh and Elastic Stack on a single host
+.. meta::
+  :description: This section guides you through an installation of the Wazuh server and Elastic stack components in an all-in-one configuration. 
 
 .. _basic_all_in_one:
 
