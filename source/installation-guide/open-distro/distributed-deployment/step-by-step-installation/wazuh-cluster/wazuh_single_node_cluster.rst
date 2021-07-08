@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Looking for how to install Wazuh server components and Filebeat in a single node cluster? Check out this section of our documentation.
+  :description: Learn how to install Elasticsearch as a single-node cluster. This kind of installation provides high availability and load balancing.
 
 .. _wazuh_single_node_cluster:
 

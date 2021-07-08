@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: In this section you will find a set of hands-on experiences to accelerate your progress in becoming a Wazuh master.
+  
 :orphan:
 
 .. _learning_wazuh:

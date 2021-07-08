@@ -1,6 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. meta:: :description: Learn how to install Wazuh and Elastic Stack on a single host
+.. meta::
+  :description: Discover the step-by-step process to install Wazuh and OpenDistro components for Elasticsearch in an all-in-one deployment. 
 
 .. _all_in_one:
 
@@ -307,6 +308,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
       # mkdir /etc/kibana/certs
       # cp ~/certs/root-ca.pem /etc/kibana/certs/
       # mv ~/certs/kibana* /etc/kibana/certs/
+      # chown kibana:kibana /etc/kibana/certs/*
 
 #. Link Kibana socket to privileged port 443:
 

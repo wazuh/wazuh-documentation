@@ -1,6 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
+
 .. meta::
-  :description: Visit our Installation guide to get started with Wazuh. In this section, you can learn how to install the Wazuh server. 
+  :description: In this section of the Wazuh documentation, we provide information on how to install Wazuh with Open Distro for Elasticsearch.
   
 .. _od_installation_guide:
 
