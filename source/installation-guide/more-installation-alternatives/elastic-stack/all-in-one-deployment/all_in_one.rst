@@ -87,7 +87,7 @@ Certificates creation and deployment
 
     .. code-block:: console
 
-        # curl -so /usr/share/elasticsearch/instances.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/|WAZUH_LATEST_MINOR|/resources/elastic-stack/instances_aio.yml
+        # curl -so /usr/share/elasticsearch/instances.yml https://documentation.wazuh.com/4.1/resources/elastic-stack/instances_aio.yml
     
     
     In the following steps, a file that contains a folder named after the instance defined here will be created. This folder will contain the certificates and the keys necessary to communicate with the Elasticsearch node using SSL.
@@ -266,7 +266,7 @@ Filebeat installation and configuration
 
     .. code-block:: console
 
-      # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/|WAZUH_LATEST_MINOR|/resources/elastic-stack/filebeat/7.x/filebeat_all_in_one.yml
+      # curl -so /etc/filebeat/filebeat.yml https://documentation.wazuh.com/4.1/resources/elastic-stack/filebeat/7.x/filebeat_all_in_one.yml
 
 #. Download the alerts template for Elasticsearch:
 
