@@ -1,6 +1,6 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 .. meta::
-  :description: Learn more about File Integrity Monitoring, a key capability of Wazuh. Check out how it works and some use cases. 
+  :description: Learn more about File Integrity Monitoring, a key capability of Wazuh. Check out how it works and some practical use cases. 
   
 How it works
 ============
