@@ -1,6 +1,6 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 .. meta::
-  :description: Check out how to configure syscheck on windows-agent to monitor specific directories for changes, make changes within them and observe the alerts that are generated with Wazuh. 
+  :description: Check out how to configure syscheck on windows-agent to make changes to specific directories, monitor their behavior, and observe generated alerts. 
   
 .. _learning_wazuh_detect_fs_changes:
 
