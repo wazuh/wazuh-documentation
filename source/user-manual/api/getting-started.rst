@@ -71,7 +71,7 @@ Wazuh API endpoints require authentication in order to be used. Therefore, all c
                 "license_name": "GPL 2.0",
                 "license_url": "https://github.com/wazuh/wazuh/blob/master/LICENSE",
                 "hostname": "wazuh-master",
-                "timestamp": "2020-05-25T07:05:00+0000"
+                "timestamp": "2020-05-25T07:05:00Z"
             },
             "error": 0
         }
@@ -164,7 +164,7 @@ Running the script provides a result similar to the following:
           "license_name": "GPL 2.0",
           "license_url": "https://github.com/wazuh/wazuh/blob/master/LICENSE",
           "hostname": "wazuh-master",
-          "timestamp": "2020-08-19T09:20:02+0000"
+          "timestamp": "2020-08-19T09:20:02Z"
        },
        "error": 0
     }
@@ -230,7 +230,7 @@ Running the script provides a result similar to the following:
           "license_name": "GPL 2.0",
           "license_url": "https://github.com/wazuh/wazuh/blob/master/LICENSE",
           "hostname": "wazuh-master",
-          "timestamp": "2020-08-19T09:20:02+0000"
+          "timestamp": "2020-08-19T09:20:02Z"
        },
        "error": 0
     }
@@ -571,7 +571,7 @@ With the Wazuh API, it is possible to start a **wazuh-logtest** session or use a
           "INFO: (7202): Session initialized with token 'bc3ca27a'"
         ],
         "output": {
-          "timestamp": "2020-10-15T09:40:53.630+0000",
+          "timestamp": "2020-10-15T09:40:53.630000Z",
           "rule": {
             "level": 0,
             "description": "FreeIPA messages grouped",

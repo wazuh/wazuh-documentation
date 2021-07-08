@@ -29,7 +29,7 @@ cURL is a command-line tool for sending http/https requests and commands. It is 
             "license_name": "GPL 2.0",
             "license_url": "https://github.com/wazuh/wazuh/blob/master/LICENSE",
             "hostname": "wazuh-master",
-            "timestamp": "2020-05-25T07:05:00+0000"
+            "timestamp": "2020-05-25T07:05:00Z"
         },
         "error": 0
     }
