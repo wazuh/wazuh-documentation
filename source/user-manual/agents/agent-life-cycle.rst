@@ -1,6 +1,6 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 .. meta::
-  :description: Learn more about the Wazuh agent life cycle here: registered agents, status of the agents, and removed agents.  
+  :description: Learn more about the Wazuh agent lifecycle here: registered agents, the status of the agents, and removed agents.  
   
 .. _agent-life-cycle:
 
