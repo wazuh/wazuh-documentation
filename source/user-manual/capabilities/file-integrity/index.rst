@@ -1,6 +1,6 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 .. meta::
-  :description: The Wazuh File integrity monitoring (FIM) is a key capability of our platform. Learn more about it in this section. 
+  :description: The Wazuh File integrity monitoring (FIM) is a key capability of our platform. Learn how you can capitalize on this feature to protect your system.
   
 .. _manual_file_integrity:
 
