@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about the cluster nodes configuration in Wazuh: labels, Filebeat, Splunk forwarder installation and more. 
+  :description: Learn more about the cluster node configuration in Wazuh: labels, Filebeat, Splunk forwarder installation, and more. 
 
 .. _configuring-cluster:
 
