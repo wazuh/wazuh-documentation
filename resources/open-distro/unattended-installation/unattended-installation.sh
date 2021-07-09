@@ -262,7 +262,7 @@ readConfig() {
         if  [ "${CONFIG[counter]}" !=  "${FILEBEATINSTANCES}" ] && [ "${CONFIG[counter]}" !=  "${KIBANAINSTANCES}" ] && [ "${CONFIG[counter]}" !=  "${KIBANAHEAD}" ] && [ -n "${CONFIG[counter]}" ] && [ "${CONFIG[counter]}" !=  "  name:" ] && [ "${CONFIG[counter]}" !=  "  ip:" ]; then
             FILEBEATNODES[i]+="$(echo "${CONFIG[counter]}" | tr -d '\011\012\013\014\015\040')"
             ((i++))
-        elif [ ${CONFIG[counter]} ]
+        elif [ "${CONFIG[counter]}" == "master: true" ]; then
             ismaster="1"
             masterpos="${i}"
         fi  
@@ -372,6 +372,53 @@ installElasticsearch() {
         logger "Configuring Elasticsearch..."
 
         eval "curl -so /etc/elasticsearch/elasticsearch.yml https://documentation.wazuh.com/4.1/resources/open-distro/elasticsearch/7.x/elasticsearch_unattended.yml --max-time 300 ${debug}"
+
+        if [ -z "${aio}" ]; then
+            conf="$(awk '{sub("node.name: node-1", "node.name: '${ename}':9200")}1' /etc/elasticsearch/elasticsearch.yml)"
+            echo "${conf}" > /etc/elasticsearch/elasticsearch.yml
+            conf="$( grep -v "cluster.initial_master_nodes:" /etc/elasticsearch/elasticsearch.yml)"
+            echo "${conf}" > /etc/elasticsearch/elasticsearch.yml
+            conf="$( grep -v "        - node-1" /etc/elasticsearch/elasticsearch.yml)"
+            echo "${conf}" > /etc/elasticsearch/elasticsearch.yml    
+            conf="$( grep -v "#        - node-2" /etc/elasticsearch/elasticsearch.yml)"
+            echo "${conf}" > /etc/elasticsearch/elasticsearch.yml
+            conf="$( grep -v "#        - node-3" /etc/elasticsearch/elasticsearch.yml)"
+            echo "${conf}" > /etc/elasticsearch/elasticsearch.yml
+            conf="$( grep -v "# discovery.seed_hosts:" /etc/elasticsearch/elasticsearch.yml)"
+            echo "${conf}" > /etc/elasticsearch/elasticsearch.yml
+            conf="$( grep -v "#         - <elasticsearch_ip_node1>" /etc/elasticsearch/elasticsearch.yml)"
+            echo "${conf}" > /etc/elasticsearch/elasticsearch.yml                    
+            conf="$( grep -v "#         - <elasticsearch_ip_node2>" /etc/elasticsearch/elasticsearch.yml)"
+            echo "${conf}" > /etc/elasticsearch/elasticsearch.yml                    
+            conf="$( grep -v "#         - <elasticsearch_ip_node3>" /etc/elasticsearch/elasticsearch.yml)"
+            echo "${conf}" > /etc/elasticsearch/elasticsearch.yml
+            conf="$( grep -v "opendistro_security.nodes_dn:" /etc/elasticsearch/elasticsearch.yml)"
+            echo "${conf}" > /etc/elasticsearch/elasticsearch.yml            
+            conf="$( grep -v "- CN=node-1,OU=Docu,O=Wazuh,L=California,C=US" /etc/elasticsearch/elasticsearch.yml)"
+            echo "${conf}" > /etc/elasticsearch/elasticsearch.yml
+            conf="$( grep -v "# - CN=node-2,OU=Docu,O=Wazuh,L=California,C=US" /etc/elasticsearch/elasticsearch.yml)"
+            echo "${conf}" > /etc/elasticsearch/elasticsearch.yml
+            conf="$( grep -v "# - CN=node-3,OU=Docu,O=Wazuh,L=California,C=US" /etc/elasticsearch/elasticsearch.yml)"
+            echo "${conf}" > /etc/elasticsearch/elasticsearch.yml
+            
+            echo "cluster.initial_master_nodes:" >> /etc/elasticsearch/elasticsearch.yml
+            for i in "${!ELASTICNODES[@]}"; do
+                echo "        - ${ELASTICNODES[i]}" >> /etc/elasticsearch/elasticsearch.yml
+            done 
+            if [ ${#ELASTICNODES[@]} -lt "3" ]; then
+                echo "cluster.initial_master_nodes:" >> /etc/elasticsearch/elasticsearch.yml   
+                for i in "${!ENODESIP[@]}"; do
+                    echo "        - ${ENODESIP[i]}" >> /etc/elasticsearch/elasticsearch.yml
+                done                         
+            fi 
+            echo "opendistro_security.nodes_dn:" >> /etc/elasticsearch/elasticsearch.yml
+            for i in "${!ELASTICNODES[@]}"; do
+                echo "- CN=${ELASTICNODES[i]},OU=Docu,O=Wazuh,L=California,C=US" >> /etc/elasticsearch/elasticsearch.yml
+            done             
+
+
+        fi
+
         eval "curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles.yml https://documentation.wazuh.com/4.1/resources/open-distro/elasticsearch/roles/roles.yml --max-time 300 ${debug}"
         eval "curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles_mapping.yml https://documentation.wazuh.com/4.1/resources/open-distro/elasticsearch/roles/roles_mapping.yml --max-time 300 ${debug}"
         eval "curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml https://documentation.wazuh.com/4.1/resources/open-distro/elasticsearch/roles/internal_users.yml --max-time 300 ${debug}"        
