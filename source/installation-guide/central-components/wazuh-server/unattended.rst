@@ -6,7 +6,7 @@ Installing Wazuh server in unattended mode
 ==========================================
 
 
-You can install the Wazuh manager and Filebeat using an automated script. This script performs a health check to verify that the system has enough resources to achieve optimal performance. For more information on system resources, see the :ref:`requirements <installation_requirements>` section.
+You can install the Wazuh manager and the Wazuh forwarder using an automated script. This script performs a health check to verify that the system has enough resources to achieve optimal performance. For more information on system resources, see the :ref:`requirements <installation_requirements>` section.
 
 Installing the Wazuh server
 ---------------------------
@@ -14,19 +14,21 @@ Installing the Wazuh server
 .. note:: Root user privileges are required to run all the commands. To download the script, the package ``curl`` is used.
 
 
-Download the installation script:
+#. Download the installation script:
 
-.. code-block:: console
-
-    # curl -so ~/wazuh-server-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/|WAZUH_LATEST_MINOR|/resources/open-distro/unattended-installation/distributed/wazuh-server-installation.sh 
+   .. code-block:: console
+   
+       # curl -so ~/wazuh-server-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/|WAZUH_LATEST_MINOR|/resources/open-distro/unattended-installation/distributed/wazuh-server-installation.sh 
     
-Run the following command to install the Wazuh manager. Replace ``<node_name>`` with the name of the Wazuh server. The name of the node must be the same used in ``config.yml`` for the certificate creation, e.g. ``filebeat``. 
+#. Replace ``<node_name>`` with the name of the Wazuh server and run the following command to install the Wazuh server. 
 
-In case of installing a multi-node Wazuh cluster, repeat the process on every host:
+   The name of the node must be the same used in ``config.yml`` for the certificate creation, e.g. ``filebeat``. 
 
-.. code-block:: console
+   .. code-block:: console
+   
+           # bash ~/wazuh-server-installation.sh -n <node_name>
 
-        # bash ~/wazuh-server-installation.sh -n <node_name>
+   In case of installing a multi-node Wazuh cluster, repeat the process on every host.        
 
 The installation script allows the following options to be applied:
 
@@ -90,4 +92,4 @@ Choose the cluster mode between single-node or multi-node:
     #. .. include:: ../../../_templates/installations/wazuh/common/check_wazuh_cluster.rst 
 
 
-To uninstall Wazuh and Filebeat, see the :ref:`Uninstalling <user_manual_uninstall_wazuh_installation_open_distro>` section.
+To uninstall the Wazuh server, see the :ref:`Uninstalling <user_manual_uninstall_wazuh_installation_open_distro>` section.
