@@ -211,7 +211,7 @@ Once Elasticsearch is installed, the script starts the services automatically. T
 In case Kibana is installed on a different server, the ``certs.tar`` file should be also copied into the Wazuh server to extract the corresponding certificates.
 
 
-.. _install_kibana_unattended:
+.. _wazuh_interface_unattended_installation:
 
 Installing Kibana
 -----------------
