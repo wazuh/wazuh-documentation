@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Learn more about certificates deployment in this section of the Wazuh user manual.
+
 .. _user_manual_certificates:
 
 Certificates deployment

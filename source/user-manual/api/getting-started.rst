@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Getting started with the Wazuh API? Visit this guide to learn more about it and see some case uses.
+  
 .. _api_getting_started:
 
 Getting started

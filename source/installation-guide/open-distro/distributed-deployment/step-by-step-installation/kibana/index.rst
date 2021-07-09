@@ -1,7 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. meta:: :description: Learn how to install Elastic Stack for using Wazuh on Debian
-
+.. meta::
+  :description: Learn more about Kibana prerequisites, instalation and configuration, and how to add it to the Wazuh repository.
+  
 .. _kibana:
 
 

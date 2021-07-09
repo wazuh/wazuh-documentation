@@ -1,6 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. meta:: :description: Learn how to install Wazuh and Elastic Stack on a single host
+.. meta::
+  :description: Discover the step-by-step process to install Wazuh and OpenDistro components for Elasticsearch in an all-in-one deployment. 
 
 .. _all_in_one:
 
@@ -199,7 +200,7 @@ Filebeat is the tool on the Wazuh server that securely forwards alerts and archi
 
     .. code-block:: console
 
-      # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/|WAZUH_LATEST_MINOR|/resources/open-distro/filebeat/7.x/filebeat_all_in_one.yml
+      # curl -so /etc/filebeat/filebeat.yml https://documentation.wazuh.com/4.1/resources/open-distro/filebeat/7.x/filebeat_all_in_one.yml
 
 #. Download the alerts template for Elasticsearch:
 
@@ -307,6 +308,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
       # mkdir /etc/kibana/certs
       # cp ~/certs/root-ca.pem /etc/kibana/certs/
       # mv ~/certs/kibana* /etc/kibana/certs/
+      # chown kibana:kibana /etc/kibana/certs/*
 
 #. Link Kibana socket to privileged port 443:
 

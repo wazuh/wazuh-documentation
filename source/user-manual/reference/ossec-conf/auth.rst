@@ -1,4 +1,5 @@
 .. Copyright (C) 2021 Wazuh, Inc.
+
 .. meta::
   :description: This section of the Wazuh Documentation shows the options for the agents registration service.
 

@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Find out how to register Wazuh agents using the command line (CLI) in this section of the Wazuh documentation. 
+  
 .. _command-line-registration:
 
 Registering the Wazuh agents using the command line (CLI)

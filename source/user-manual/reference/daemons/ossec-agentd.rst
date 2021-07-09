@@ -1,4 +1,5 @@
 .. Copyright (C) 2021 Wazuh, Inc.
+
 .. meta::
   :description: The ossec-agentd program is the client-side daemon that handles communications with the server. Find out more in this section. 
 

@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: In this section of the Wazuh documentation, you will find more information on how to tune Elasticsearch: changing user passwords, memory locking, and shards and replicas.
+  
 .. _elastic_tuning:
 
 Elasticsearch tuning
@@ -28,7 +31,7 @@ In order to improve security, it is highly recommended to change Elasticsearch's
     
       .. code-block:: console
       
-        # curl -so wazuh-passwords-tool.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/tools/wazuh-passwords-tool.sh
+        # curl -so wazuh-passwords-tool.sh https://documentation.wazuh.com/4.1/resources/open-distro/tools/wazuh-passwords-tool.sh
 
     - Run the script:
 
