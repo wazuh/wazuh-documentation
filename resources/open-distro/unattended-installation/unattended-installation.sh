@@ -422,9 +422,9 @@ installElasticsearch() {
 
             echo "# Kibana node"  >> ~/instances.yml
             echo "kibana:"  >> ~/instances.yml
-            echo "- name: kibana" >> ~/instances.yml
+            echo "- name: ${KIBANANODES[0]}" >> ~/instances.yml
             echo "    ip:" >> ~/instances.yml
-            echo "    - 127.0.0.1" >> ~/instances.yml
+            echo "    - ${KIBANANODES[1]}" >> ~/instances.yml
 
         fi
 
