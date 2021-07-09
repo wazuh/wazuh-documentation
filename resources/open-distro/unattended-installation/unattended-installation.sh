@@ -377,28 +377,56 @@ installElasticsearch() {
         eval "curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml https://documentation.wazuh.com/4.1/resources/open-distro/elasticsearch/roles/internal_users.yml --max-time 300 ${debug}"        
         eval "rm /etc/elasticsearch/esnode-key.pem /etc/elasticsearch/esnode.pem /etc/elasticsearch/kirk-key.pem /etc/elasticsearch/kirk.pem /etc/elasticsearch/root-ca.pem -f ${debug}"
 
-        ## Create certificates
-        eval "mkdir /etc/elasticsearch/certs ${debug}"
-        eval "cd /etc/elasticsearch/certs ${debug}"
-        eval "curl -so ~/wazuh-cert-tool.sh https://documentation.wazuh.com/4.1/resources/open-distro/tools/certificate-utility/wazuh-cert-tool.sh --max-time 300 ${debug}"
+        if [ -n "${aio}" ]; then
 
-        echo "# Elasticsearch nodes" >> ~/instances.yml
-        echo "elasticsearch-nodes:" >> ~/instances.yml
-        echo "- name: elasticsearch" >> ~/instances.yml
-        echo "    ip:" >> ~/instances.yml
-        echo "    - 127.0.0.1" >> ~/instances.yml
+            ## Create certificates
+            eval "mkdir /etc/elasticsearch/certs ${debug}"
+            eval "cd /etc/elasticsearch/certs ${debug}"
+            eval "curl -so ~/wazuh-cert-tool.sh https://documentation.wazuh.com/4.1/resources/open-distro/tools/certificate-utility/wazuh-cert-tool.sh --max-time 300 ${debug}"
 
-        echo "# Wazuh server nodes" >> ~/instances.yml
-        echo "wazuh-servers:" >> ~/instances.yml
-        echo "- name: filebeat" >> ~/instances.yml
-        echo "    ip:" >> ~/instances.yml
-        echo "    - 127.0.0.1" >> ~/instances.yml
+            echo "# Elasticsearch nodes" >> ~/instances.yml
+            echo "elasticsearch-nodes:" >> ~/instances.yml
+            echo "- name: elasticsearch" >> ~/instances.yml
+            echo "    ip:" >> ~/instances.yml
+            echo "    - 127.0.0.1" >> ~/instances.yml
 
-        echo "# Kibana node"  >> ~/instances.yml
-        echo "kibana:"  >> ~/instances.yml
-        echo "- name: kibana" >> ~/instances.yml
-        echo "    ip:" >> ~/instances.yml
-        echo "    - 127.0.0.1" >> ~/instances.yml
+            echo "# Wazuh server nodes" >> ~/instances.yml
+            echo "wazuh-servers:" >> ~/instances.yml
+            echo "- name: filebeat" >> ~/instances.yml
+            echo "    ip:" >> ~/instances.yml
+            echo "    - 127.0.0.1" >> ~/instances.yml
+
+            echo "# Kibana node"  >> ~/instances.yml
+            echo "kibana:"  >> ~/instances.yml
+            echo "- name: kibana" >> ~/instances.yml
+            echo "    ip:" >> ~/instances.yml
+            echo "    - 127.0.0.1" >> ~/instances.yml
+        else
+            eval "mkdir /etc/elasticsearch/certs ${debug}"
+            eval "cd /etc/elasticsearch/certs ${debug}"
+            eval "curl -so ~/wazuh-cert-tool.sh https://documentation.wazuh.com/4.1/resources/open-distro/tools/certificate-utility/wazuh-cert-tool.sh --max-time 300 ${debug}"
+            echo "# Elasticsearch nodes" >> ~/instances.yml
+            echo "elasticsearch-nodes:" >> ~/instances.
+            i=0
+            while [ ${i} -lt ${#ENODESIP[@]} ]; do
+                echo "  - name: ${ELASTICNODES[i]}" >> ~/instances.yml
+                echo "    ip:" >> ~/instances.yml
+                echo "      - ${ENODESIP[i]}" >> ~/instances.yml
+                ((i++))
+            done           
+            echo "# Wazuh server nodes" >> ~/instances.yml
+            echo "wazuh-servers:" >> ~/instances.yml
+            echo "- name: filebeat" >> ~/instances.yml
+            echo "    ip:" >> ~/instances.yml
+            echo "    - 127.0.0.1" >> ~/instances.yml
+
+            echo "# Kibana node"  >> ~/instances.yml
+            echo "kibana:"  >> ~/instances.yml
+            echo "- name: kibana" >> ~/instances.yml
+            echo "    ip:" >> ~/instances.yml
+            echo "    - 127.0.0.1" >> ~/instances.yml
+
+        fi
 
         export JAVA_HOME=/usr/share/elasticsearch/jdk/
         bash ~/wazuh-cert-tool.sh
@@ -523,12 +551,6 @@ installFilebeat() {
                 eval "mv /etc/filebeat/certs/${wname}.pem /etc/filebeat/certs/filebeat.pem ${debug}"
                 eval "mv /etc/filebeat/certs/${wname}-key.pem /etc/filebeat/certs/filebeat-key.pem ${debug}"
             fi
-        fi
-
-        # Configure the Wazuh cluster
-
-        if [ -n "${ismaster}" ]; then
-            masterIP="${ENODESIP[masterpos-1]}"
         fi
 
         # Start Filebeat
