@@ -67,8 +67,6 @@ Installing Wazuh
 
 On the first access to Kibana, the browser displays a warning message indicating that the certificate was not issued by a trusted authority. It is possible to add an exception in the browser's advanced options or, for increased security, the previously generated ``root-ca.pem`` file can be imported into the certificate manager of the browser. Alternatively, it is possible to configure a certificate from a trusted authority.
 
-.. note:: The Open Distro for Elasticsearch performance analyzer plugin is removed during the installation since it might have a negative impact on system resources. 
-
 Customizing the installation
 ----------------------------
 
