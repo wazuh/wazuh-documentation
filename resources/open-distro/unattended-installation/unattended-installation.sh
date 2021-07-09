@@ -416,9 +416,18 @@ installElasticsearch() {
             done           
             echo "# Wazuh server nodes" >> ~/instances.yml
             echo "wazuh-servers:" >> ~/instances.yml
-            echo "- name: filebeat" >> ~/instances.yml
-            echo "    ip:" >> ~/instances.yml
-            echo "    - 127.0.0.1" >> ~/instances.yml
+            i=0
+            while [ ${i} -le ${#FILEBEATNODES[@]} ]; do
+                if [ "${FILEBEATNODES[i]}" == "master: true" ]; then
+                    ((i++))
+                else
+                    echo "  - name: ${FILEBEATNODES[i]}" >> ~/instances.yml
+                    echo "    ip:" >> ~/instances.yml
+                    echo "  - ${FILEBEATNODES[i+1]}" >> ~/instances.yml
+                    ((i++))
+                    ((i++))
+                fi
+            done
 
             echo "# Kibana node"  >> ~/instances.yml
             echo "kibana:"  >> ~/instances.yml
