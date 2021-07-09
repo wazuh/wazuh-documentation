@@ -9,17 +9,18 @@
 Installation guide
 ==================
 
-Install Wazuh by following the installation workflow that best suits your needs.
-To learn more about each component and its capabilities, check the :ref:`Components <components>` section. 
+Install Wazuh by following the installation workflow that best suits your needs. To learn more about each component and its capabilities, check the :ref:`Components <components>` section. 
 
-Wazuh server installation
--------------------------
+Wazuh central components installation
+-------------------------------------
 
-There are two different options for deploying Wazuh:
+There are two different options for deploying Wazuh central components:
 
-- All-in-one: The Wazuh server and Elastic Stack are installed on the same host. With this deployment option, you can install Wazuh directly on your system or download our ready-to-use :ref:`OVA <virtual_machine>`.
+- All-in-one: The Wazuh server, the Wazuh indexer and the Wazuh interface are installed on the same host. To install with this deployment option in an automated way check the :ref:`Quickstart <quickstart>` section, and to install manually see the :ref:`Central components <central_components>` section and follow the step-by-step instructions.  You may also download our ready-to-use :ref:`OVA <virtual_machine>`.
 
 - Distributed: Each component is installed on a separate host as a single-node or multi-node cluster. This type of deployment provides high availability and scalability of the product, and it is convenient for large working environments.
+
+  To install Wazuh in a distributed mode, see the :ref:`Central components <central_components>` section and follow the instructions for each component. 
 
 .. raw:: html
 
@@ -28,10 +29,11 @@ There are two different options for deploying Wazuh:
       <h3>All-in-one deployment</h3>
 
 .. thumbnail:: ../images/installation/all_in_one.png
+      :title: Wazuh all-in-one installation
       :align: center
       :class: detailed
 
-.. image:: ../images/installation/all_in_one_no_title.png
+.. image:: ../images/installation/all_in_one.png
       :align: center
       :class: front
 
@@ -42,10 +44,11 @@ There are two different options for deploying Wazuh:
       <h3>Distributed deployment</h3>
 
 .. thumbnail:: ../images/installation/distributed.png
+      :title: Wazuh distributed installation
       :align: center
       :class: detailed
 
-.. image:: ../images/installation/distributed_no_title.png
+.. image:: ../images/installation/distributed.png
       :align: center
       :class: front
 
@@ -64,7 +67,7 @@ Alternatively, Wazuh can also be installed with commercial options like Elastic 
 Wazuh agent installation
 ------------------------
 
-The :ref:`Wazuh agent <wazuh_agent>` is a single, light-weight monitoring software that runs on most operating systems and provides visibility into the endpoint's security by collecting critical system and application records, inventory data, and detecting potential anomalies. If the Wazuh server and its components are already installed on your environment, select your operating system and follow the installation steps to deploy the agent to the endpoints:
+The :ref:`Wazuh agent <wazuh_agent>` is a single, light-weight monitoring software that runs on most operating systems and provides visibility into the endpoint's security by collecting critical system and application records, inventory data, and detecting potential anomalies. If the Wazuh central components are already installed on your environment, select your operating system and follow the installation steps to deploy the agent to the endpoints. 
 
 .. raw:: html
 
@@ -137,12 +140,6 @@ The :ref:`Wazuh agent <wazuh_agent>` is a single, light-weight monitoring softwa
       </div>
   </div>
 
-
-
-Requirements
-------------
-
-Check the :ref:`Requirements <installation_requirements>` section for information about supported operating systems and the minimum recommended hardware specifications to guarantee optimum performance.   
 
 .. toctree::
     :hidden:
