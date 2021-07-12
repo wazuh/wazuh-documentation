@@ -226,16 +226,16 @@ installElasticsearch() {
 
         logger "Configuring Elasticsearch..."
 
-        eval "curl -so /etc/elasticsearch/elasticsearch.yml https://documentation.wazuh.com/4.1/resources/open-distro/elasticsearch/7.x/elasticsearch_all_in_one.yml --max-time 300 ${debug}"
-        eval "curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles.yml https://documentation.wazuh.com/4.1/resources/open-distro/elasticsearch/roles/roles.yml --max-time 300 ${debug}"
-        eval "curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles_mapping.yml https://documentation.wazuh.com/4.1/resources/open-distro/elasticsearch/roles/roles_mapping.yml --max-time 300 ${debug}"
-        eval "curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml https://documentation.wazuh.com/4.1/resources/open-distro/elasticsearch/roles/internal_users.yml --max-time 300 ${debug}"
+        eval "curl -so /etc/elasticsearch/elasticsearch.yml https://packages.wazuh.com/resources/4.1/open-distro/elasticsearch/7.x/elasticsearch_all_in_one.yml --max-time 300 ${debug}"
+        eval "curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles.yml https://packages.wazuh.com/resources/4.1/open-distro/elasticsearch/roles/roles.yml --max-time 300 ${debug}"
+        eval "curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles_mapping.yml https://packages.wazuh.com/resources/4.1/open-distro/elasticsearch/roles/roles_mapping.yml --max-time 300 ${debug}"
+        eval "curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml https://packages.wazuh.com/resources/4.1/open-distro/elasticsearch/roles/internal_users.yml --max-time 300 ${debug}"
         eval "rm /etc/elasticsearch/esnode-key.pem /etc/elasticsearch/esnode.pem /etc/elasticsearch/kirk-key.pem /etc/elasticsearch/kirk.pem /etc/elasticsearch/root-ca.pem -f ${debug}"
         eval "mkdir /etc/elasticsearch/certs ${debug}"
         eval "cd /etc/elasticsearch/certs ${debug}"
         eval "curl -so ~/search-guard-tlstool-1.8.zip https://maven.search-guard.com/search-guard-tlstool/1.8/search-guard-tlstool-1.8.zip --max-time 300 ${debug}"
         eval "unzip ~/search-guard-tlstool-1.8.zip -d ~/searchguard ${debug}"
-        eval "curl -so ~/searchguard/search-guard.yml https://documentation.wazuh.com/4.1/resources/open-distro/searchguard/search-guard-aio.yml --max-time 300 ${debug}"
+        eval "curl -so ~/searchguard/search-guard.yml https://packages.wazuh.com/resources/4.1/open-distro/searchguard/search-guard-aio.yml --max-time 300 ${debug}"
         eval "chmod +x ~/searchguard/tools/sgtlstool.sh ${debug}"
         eval "bash ~/searchguard/tools/sgtlstool.sh -c ~/searchguard/search-guard.yml -ca -crt -t /etc/elasticsearch/certs/ ${debug}"
         if [  "$?" != 0  ]; then
@@ -295,7 +295,7 @@ installFilebeat() {
         echo "Error: Filebeat installation failed"
         exit 1;
     else
-        eval "curl -so /etc/filebeat/filebeat.yml https://documentation.wazuh.com/4.1/resources/open-distro/filebeat/7.x/filebeat_all_in_one.yml --max-time 300  ${debug}"
+        eval "curl -so /etc/filebeat/filebeat.yml https://packages.wazuh.com/resources/4.1/open-distro/filebeat/7.x/filebeat_all_in_one.yml --max-time 300  ${debug}"
         eval "curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/4.1/extensions/elasticsearch/7.x/wazuh-template.json --max-time 300 ${debug}"
         eval "chmod go+r /etc/filebeat/wazuh-template.json ${debug}"
         eval "curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.1.tar.gz --max-time 300 | tar -xvz -C /usr/share/filebeat/module ${debug}"
@@ -324,7 +324,7 @@ installKibana() {
         echo "Error: Kibana installation failed"
         exit 1;
     else
-        eval "curl -so /etc/kibana/kibana.yml https://documentation.wazuh.com/4.1/resources/open-distro/kibana/7.x/kibana_all_in_one.yml --max-time 300 ${debug}"
+        eval "curl -so /etc/kibana/kibana.yml https://packages.wazuh.com/resources/4.1/open-distro/kibana/7.x/kibana_all_in_one.yml --max-time 300 ${debug}"
         eval "mkdir /usr/share/kibana/data ${debug}"
         eval "chown -R kibana:kibana /usr/share/kibana/ ${debug}"
         eval "cd /usr/share/kibana ${debug}"

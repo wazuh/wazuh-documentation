@@ -21,7 +21,7 @@ Installing Wazuh
 
    .. code-block:: console
 
-     # curl -so ~/unattended-installation.sh https://documentation.wazuh.com/4.1/resources/open-distro/unattended-installation/unattended-installation.sh && bash ~/unattended-installation.sh
+     # curl -so ~/unattended-installation.sh https://packages.wazuh.com/resources/4.1/open-distro/unattended-installation/unattended-installation.sh && bash ~/unattended-installation.sh
 
    The script performs a health check to ensure that the host has enough resources to guarantee proper performance. To skip this step, add the ``-i`` or ``--ignore-healthcheck`` option when running the script.
 
