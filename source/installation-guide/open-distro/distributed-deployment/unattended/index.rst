@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Interested in learning more about the unattended installation of Wazuh? Visit this section of our documentation and learn more about the process.
+  :description: Learn more about the unattended installation of Wazuh in this section of our documentation. 
   
 .. _unattended_distributed_index:
 
