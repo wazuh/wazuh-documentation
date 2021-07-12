@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Looking to install and configure the Wazuh server and Elastic Stack on the same host? Learn more about the all-in-one deployment.
+  :description: Find out how to install Wazuh and OpenDistro components for Elasticsearch on the same host, following an all-in-one deployment process, in this section of our documentation.
 
 .. _all_in_one_index:
 
