@@ -1,7 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Looking for how to install the Wazuh manager and Filebeat using an automated script? Check out the Wazuh server unattended installation script here. 
+  :description: Check out more about the Wazuh server unattended installation script and learn how to install the Wazuh manager and Filebeat using an automated script 
+
 
 .. _ruleset_update:
 
