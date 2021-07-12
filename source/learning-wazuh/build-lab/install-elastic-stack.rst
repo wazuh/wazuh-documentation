@@ -138,8 +138,15 @@ events and archives stored in Elasticsearch. More info at `Kibana
 
     # setcap 'CAP_NET_BIND_SERVICE=+eip' /usr/share/kibana/node/bin/node
 
+6. Enable and start the Kibana service:
 
-6. Configure the credentials to access the Wazuh API:
+  .. code-block:: console
+
+  	# systemctl daemon-reload
+  	# systemctl enable kibana.service
+  	# systemctl start kibana.service
+
+7. Configure the credentials to access the Wazuh API:
 
   .. code-block:: console
 
@@ -150,15 +157,7 @@ events and archives stored in Elasticsearch. More info at `Kibana
          port: 55000
          username: wazuhapiuser
          password: wazuhlab
-    EOF
-
-8. Enable and start the Kibana service:
-
-  .. code-block:: console
-
-  	# systemctl daemon-reload
-  	# systemctl enable kibana.service
-  	# systemctl start kibana.service
+    EOF    
 
 Disable the Elastic repository
 ------------------------------
