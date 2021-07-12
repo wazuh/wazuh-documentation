@@ -1,6 +1,6 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 .. meta::
-  :description: Check out how to install Open Distro for Elasticsearch and Open Distro for Kibana using an automated script. 
+  :description: Check out how to install Open Distro for Elasticsearch and Open Distro for Kibana using a script that automates the installation process.
   
 .. _unattended_distributed_elasticsearch:
 
@@ -258,4 +258,3 @@ Next steps
 ----------
 
 Once the Elastic Stack environment is ready, the Wazuh server can be installed. To do this, follow the steps described in the :ref:`Wazuh server <unattended_distributed_wazuh>` section of the installation guide.
-
