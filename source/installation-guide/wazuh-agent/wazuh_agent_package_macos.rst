@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about how to successfully install the Wazuh agent on macOS systems in this section of our Installation guide.
+  :description: Learn more about how to successfully install the Wazuh agent on macOS systems in this section of our Installation Guide.
 
 .. _wazuh_agent_package_macos:
 
@@ -102,7 +102,6 @@ To uninstall the agent, follow these steps:
       # /usr/sbin/pkgutil --forget com.wazuh.pkg.wazuh-agent
 
 The Wazuh agent is now completely removed from your macOS system.
-
 
 
 
