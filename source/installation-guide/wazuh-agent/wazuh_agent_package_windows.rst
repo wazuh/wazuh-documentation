@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about how to successfully install the Wazuh agent on Windows systems in this section of our Installation guide.
+  :description: Learn more about how to successfully install the Wazuh agent on Windows systems in this section of our Installation Guide.
 
 .. _wazuh_agent_package_windows:
 
