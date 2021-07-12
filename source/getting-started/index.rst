@@ -8,8 +8,6 @@
 Getting started
 ===============
 
-.. meta::
-  :description: Get started with the Wazuh open source security platform. 
 
 Wazuh is a free and open source platform used for threat prevention, detection, and response. It protects workloads across on-premises, virtualized, containerized and cloud-based environments. Wazuh is widely used by thousands of organizations around the world, from small businesses to large enterprises.
 
