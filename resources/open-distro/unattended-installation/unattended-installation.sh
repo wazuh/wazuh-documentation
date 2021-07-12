@@ -416,7 +416,6 @@ installElasticsearch() {
                 echo "- CN=${ELASTICNODES[i]},OU=Docu,O=Wazuh,L=California,C=US" >> /etc/elasticsearch/elasticsearch.yml
             done             
 
-
         fi
 
         eval "curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles.yml https://documentation.wazuh.com/4.1/resources/open-distro/elasticsearch/roles/roles.yml --max-time 300 ${debug}"
@@ -979,7 +978,7 @@ main() {
             getHelp
         fi
 
-        if [[ -n "${elastic}" ]] && [[ -n "${wazuh}" ]] && [[ -n "${kibana}" ]]; then
+        if [[ -z "${elastic}" ]] && [[ -z "${wazuh}" ]] && [[ -z "${kibana}" ]]; then
             aio=1
         fi
 
