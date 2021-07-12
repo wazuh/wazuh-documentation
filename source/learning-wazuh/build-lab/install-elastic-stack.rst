@@ -138,14 +138,8 @@ events and archives stored in Elasticsearch. More info at `Kibana
 
     # setcap 'CAP_NET_BIND_SERVICE=+eip' /usr/share/kibana/node/bin/node
 
-6. Optimize Kibana packages:
 
-  .. code-block:: console
-
-    # cd /usr/share/kibana/
-    NODE_OPTIONS="--max-old-space-size=4096" /usr/share/kibana/bin/kibana --optimize --allow-root
-
-7. Configure the credentials to access the Wazuh API:
+6. Configure the credentials to access the Wazuh API:
 
   .. code-block:: console
 
