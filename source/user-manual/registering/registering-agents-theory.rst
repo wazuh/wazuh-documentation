@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Want to know more about how to register a Wazuh agent? Check out this additional information in this section of our documentation.
+  :description: Learn more about how to register a Wazuh agent in this section of our documentation.
   
 .. _registering_agent_theory:
 
