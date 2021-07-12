@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about how to install Elasticsearch in a multi-node cluster for Wazuh in this step-by-step guide. 
+  :description: Learn how to install Elasticsearch on a multi-node cluster with Wazuh. This deployment type provides high availability and scalability of the product. 
 
 .. _elasticsearch_multi_node_cluster:
 
