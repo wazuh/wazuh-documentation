@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: This guide provides the basic information needed to get started with the Wazuh API, including some useful use cases. 
+  :description: This guide provides the basic information needed to get started with the Wazuh API, including some practical use cases. 
   
 .. _api_getting_started:
 
