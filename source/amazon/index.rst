@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Learn how Wazuh helps to increase the security of AWS infrastructure in this section of our documentation. 
+  :description: Learn how Wazuh helps to increase the security of AWS infrastructure, monitoring AWS instances and AWS services, in this section of our documentation. 
   
 .. _amazon:
 
