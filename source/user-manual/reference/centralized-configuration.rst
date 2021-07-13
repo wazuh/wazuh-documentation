@@ -110,7 +110,7 @@ The ``shared.conf`` is only valid on server installations.
 
 The ``shared.conf`` may exist in each group folder at ``/var/ossec/etc/shared``.
 
-For example, for the ``group1`` group, it is in ``/var/ossec/etc/shared/group1``.  Each of these files should be readable by the ossec user.
+For example, for the ``group1`` group, it is in ``/var/ossec/etc/shared/group1``.  Each of these files should be readable by the ``wazuh`` user.
 
 Options
 -------
@@ -151,7 +151,7 @@ The following is an example of how a centralized configuration can be done.
     .. code-block:: console
 
         # touch /var/ossec/etc/shared/default/shared.conf
-        # chown ossec:ossec /var/ossec/etc/shared/default/shared.conf
+        # chown wazuh:wazuh /var/ossec/etc/shared/default/shared.conf
         # chmod 640 /var/ossec/etc/shared/default/shared.conf
 
     Several configurations may be created based on the ``name``, ``OS`` or ``profile`` of an agent.
@@ -333,7 +333,7 @@ Here we can distinct the two main blocks: ``groups`` and ``agents``.
 
     This configuration can be changed on the fly. The **manager** will reload the file and parse it again so there is no need to restart the **manager** every time.
 
-    The information about the parsing is shown on the ``/var/ossec/logs/ossec.log`` file. For example:
+    The information about the parsing is shown on the ``/var/ossec/logs/wazuh.log`` file. For example:
 
     - Parsing is successful:
 

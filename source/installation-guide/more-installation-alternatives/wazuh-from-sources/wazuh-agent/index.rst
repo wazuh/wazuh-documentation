@@ -97,7 +97,13 @@ Installing Wazuh agent from sources
 
          # zypper addrepo http://download.opensuse.org/distribution/11.4/repo/oss/ oss
 
+      .. tab:: Pacman
 
+        .. code-block:: console
+
+         # pacman --noconfirm -Syu curl gcc make sudo wget expect gnupg perl-base \
+          perl fakeroot python brotli automake autoconf libtool gawk libsigsegv nodejs \
+          base-devel inetutils cmake
 
 
     2. Download and extract the latest version:
@@ -181,10 +187,8 @@ Installing Wazuh agent from sources
 
     .. code-block:: console
 
-     # userdel ossec 2> /dev/null
-     # userdel ossecm 2> /dev/null
-     # userdel ossecr 2> /dev/null
-     # groupdel ossec 2> /dev/null
+     # userdel wazuh 2> /dev/null
+     # groupdel wazuh 2> /dev/null
 
 
 
@@ -348,10 +352,8 @@ Installing Wazuh agent from sources
 
     .. code-block:: console
 
-     # dscl . -delete "/Users/ossec" > /dev/null 2>&1
-     # dscl . -delete "/Users/ossecm" > /dev/null 2>&1
-     # dscl . -delete "/Users/ossecr" > /dev/null 2>&1
-     # dscl . -delete "/Groups/ossec" > /dev/null 2>&1
+     # dscl . -delete "/Users/wazuh" > /dev/null 2>&1
+     # dscl . -delete "/Groups/wazuh" > /dev/null 2>&1
 
 
 
@@ -466,10 +468,8 @@ Installing Wazuh agent from sources
 
     .. code-block:: console
 
-     # userdel ossec 2> /dev/null
-     # userdel ossecm 2> /dev/null
-     # userdel ossecr 2> /dev/null
-     # groupdel ossec 2> /dev/null
+     # userdel wazuh 2> /dev/null
+     # groupdel wazuh 2> /dev/null
 
 
 
@@ -587,10 +587,8 @@ Installing Wazuh agent from sources
 
     .. code-block:: console
 
-     # userdel ossec 2> /dev/null
-     # userdel ossecm 2> /dev/null
-     # userdel ossecr 2> /dev/null
-     # groupdel ossec 2> /dev/null
+     # userdel wazuh 2> /dev/null
+     # groupdel wazuh 2> /dev/null
 
 
 
@@ -671,12 +669,12 @@ Installing Wazuh agent from sources
            # /opt/csw/bin/git clone -b v|WAZUH_LATEST| https://github.com/wazuh/wazuh.git
            # wget -P wazuh https://raw.githubusercontent.com/wazuh/wazuh-packages/master/solaris/solaris10/solaris10_patch.sh
 
-        3. Create an user and group called `ossec` needed for installation.
+        3. Create an user and group called `wazuh` needed for installation.
 
          .. code-block:: console
 
-          # groupadd ossec
-          # useradd -g ossec ossec
+          # groupadd wazuh
+          # useradd -g wazuh wazuh
 
         4. Run the following commands to update the makefile
 
@@ -775,10 +773,8 @@ Installing Wazuh agent from sources
 
         .. code-block:: console
 
-         # userdel ossec 2> /dev/null
-         # userdel ossecm 2> /dev/null
-         # userdel ossecr 2> /dev/null
-         # groupdel ossec 2> /dev/null
+         # userdel wazuh 2> /dev/null
+         # groupdel wazuh 2> /dev/null
 
 
       .. tab:: Solaris 11
@@ -917,7 +913,5 @@ Installing Wazuh agent from sources
 
         .. code-block:: console
 
-         # userdel ossec 2> /dev/null
-         # userdel ossecm 2> /dev/null
-         # userdel ossecr 2> /dev/null
-         # groupdel ossec 2> /dev/null
+         # userdel wazuh 2> /dev/null
+         # groupdel wazuh 2> /dev/null

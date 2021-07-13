@@ -87,7 +87,7 @@ There have been some syntax changes, and new settings, incorporated to ``agent.c
      <client>
        <server-ip>MANAGER_IP</server-ip>
 
-Finally we can start the agent again. Please check ``/var/ossec/logs/ossec.log`` file to ensure there are no errors or warnings related to the settings migration.
+Finally we can start the agent again. Please check ``/var/ossec/logs/wazuh.log`` file to ensure there are no errors or warnings related to the settings migration.
 
 .. code-block:: bash
 

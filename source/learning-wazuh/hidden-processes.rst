@@ -166,11 +166,11 @@ Wazuh a very effective Linux rootkit detection application by looking for genera
     The next rootcheck scan should run shortly and it will alert about the rsyslogd process
     which we hid with Diamorphine.
 
-10. Watch ``ossec.log`` on linux-agent for rootcheck activity that should start within 5 minutes of the agent restart.
+10. Watch ``wazuh.log`` on linux-agent for rootcheck activity that should start within 5 minutes of the agent restart.
 
         .. code-block:: console
 
-            # tailf /var/ossec/logs/ossec.log | grep rootcheck
+            # tailf /var/ossec/logs/wazuh.log | grep rootcheck
 
     You should see something like this shortly:
 
