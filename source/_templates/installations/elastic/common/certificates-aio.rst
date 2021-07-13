@@ -4,8 +4,8 @@
 
   .. code-block:: console
 
-    # curl -so ~/wazuh-cert-tool.sh https://documentation.wazuh.com/4.1/resources/open-distro/tools/certificate-utility/wazuh-cert-tool.sh
-    # curl -so ~/instances.yml https://documentation.wazuh.com/4.1/resources/open-distro/tools/certificate-utility/instances_aio.yml
+    # curl -so ~/wazuh-cert-tool.sh https://packages.wazuh.com/resources/4.1/open-distro/tools/certificate-utility/wazuh-cert-tool.sh
+    # curl -so ~/instances.yml https://packages.wazuh.com/resources/4.1/open-distro/tools/certificate-utility/instances_aio.yml
 
 * Run the  ``wazuh-cert-tool.sh`` to create the certificates:
 
