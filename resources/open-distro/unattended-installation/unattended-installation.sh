@@ -1028,6 +1028,7 @@ main() {
             installPrerequisites
             addWazuhrepo
             installWazuh
+            installFilebeat
 
         fi   
 
