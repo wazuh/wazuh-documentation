@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Learn how to install Wazuh through an unattended installation in this section of our documentation. 
+  :description: Learn how to install Wazuh through an unattended installation using an automated script in this section of our documentation. 
   
 Unattended installation
 =======================
