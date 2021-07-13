@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Get started with Wazuh. Learn about our community of developers, the Wazuh components, architecture, and deployment.
+  :description: Get started with Wazuh. Learn about our open source community of developers, the Wazuh components, architecture, and deployment.
   
 .. _getting_started:
 
