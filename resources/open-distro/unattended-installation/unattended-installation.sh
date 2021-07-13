@@ -452,7 +452,7 @@ installElasticsearch() {
             eval "cd /etc/elasticsearch/certs ${debug}"
             eval "curl -so ~/wazuh-cert-tool.sh https://packages.wazuh.com/resources/4.1/open-distro/tools/certificate-utility/wazuh-cert-tool.sh --max-time 300 ${debug}"
             echo "# Elasticsearch nodes" >> ~/instances.yml
-            echo "elasticsearch-nodes:" >> ~/instances.
+            echo "elasticsearch-nodes:" >> ~/instances.yml
             i=0
             while [ ${i} -lt ${#ENODESIP[@]} ]; do
                 echo "  - name: ${ELASTICNODES[i]}" >> ~/instances.yml
@@ -497,6 +497,12 @@ installElasticsearch() {
         eval "cp ~/certs/elasticsearch* /etc/elasticsearch/certs/ ${debug}"
         eval "cp ~/certs/root-ca.pem /etc/elasticsearch/certs/ ${debug}"
         eval "cp ~/certs/admin* /etc/elasticsearch/certs/ ${debug}"
+
+        if [ -z "${aio}" ]; then
+            eval "cd ~/certs/ ${debug}"
+            eval "tar -cvf certs.tar * ${debug}"
+            eval "mv ~/certs/certs.tar ~/ ${debug}"
+        fi
         
         # Configure JVM options for Elasticsearch
         ram_gb=$(free -g | awk '/^Mem:/{print $2}')
@@ -773,7 +779,7 @@ checkInstalled() {
             rollBack
         else
             echo "All the Wazuh componets were found on this host. If you want to overwrite the current installation, run this script back using the option -o/--overwrite. NOTE: This will erase all the existing configuration and data."
-            exit 1;
+            # exit 1;
         fi
     fi          
 
@@ -1010,6 +1016,7 @@ main() {
                 checkInstalled
                 healthCheck           
             fi            
+            checkConfig
             installPrerequisites
             addWazuhrepo
             installElasticsearch 
@@ -1024,7 +1031,8 @@ main() {
             else
                 checkInstalled
                 healthCheck           
-            fi            
+            fi  
+            checkConfig          
             installPrerequisites
             addWazuhrepo
             installWazuh
@@ -1040,7 +1048,8 @@ main() {
             else
                 checkInstalled
                 healthCheck           
-            fi            
+            fi  
+            checkConfig          
             installPrerequisites
             addWazuhrepo           
             installKibana
@@ -1048,6 +1057,7 @@ main() {
         fi                
 
     else
+        aio="1"
         checkInstalled  
         healthCheck   
         installPrerequisites
