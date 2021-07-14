@@ -1,5 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
-
+.. meta::
+  :description: Learn more about how to prepare your Wazuh Lab environment by following the step-by-step guide in this section of our documentation. 
+  
 .. _build_lab:
 
 Prepare your Wazuh Lab Environment

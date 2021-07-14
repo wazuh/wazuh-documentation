@@ -8,10 +8,6 @@
 Wazuh server
 ============
 
-.. meta::
-  :description: Find useful technical documentation about how Wazuh works, suitable for developers and tech enthusiasts.
-
-
 Install Wazuh with Open Distro for Elasticsearch, which is an Apache 2.0 licensed distribution of Elasticsearch enhanced with enterprise security, alerts, SQL support, automated index management, or deep performance analysis, among other features. To learn more about each component and its capabilities, check the :ref:`Components <components>` section.
 
 Deployment types
