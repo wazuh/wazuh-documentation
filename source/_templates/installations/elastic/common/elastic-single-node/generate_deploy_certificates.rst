@@ -8,7 +8,7 @@
      # curl -so ~/wazuh-cert-tool.sh https://packages.wazuh.com/resources/4.1/open-distro/tools/certificate-utility/wazuh-cert-tool.sh
      # curl -so ~/instances.yml https://packages.wazuh.com/resources/4.1/open-distro/tools/certificate-utility/instances.yml
 
-#. Replace the values ``<node-name>`` and ``<node-ip>``  with the corresponding names and IP addresses. There can be added as many nodes fields as needed:
+#. Edit ``~/instances.yml`` and replace the values ``<node-name>`` and ``node-IP``  with the corresponding names and IP addresses. Add as many nodes fields as needed:
  
    .. code-block:: yaml
  
@@ -16,8 +16,8 @@
      elasticsearch-nodes:
        - name: <node-name>
          ip:
-           - node-IP
-     
+           - node-IP  
+
      # Wazuh server nodes
      wazuh-servers:
        - name: <node-name>
