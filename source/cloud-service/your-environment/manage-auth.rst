@@ -53,7 +53,7 @@ Follow these steps to create an internal user with read access as an example:
 7. To map the user with Wazuh, follow these steps:
    
    #. Go to the Wazuh WUI, click **Wazuh** to open the menu, select **Security**, and then **Roles mapping** to open the page.
-   #. Click on **Create role mapping** and complete the empty fields with the following parameters:
+   #. Click **Create role mapping** and complete the empty fields with the following parameters:
    
       - Role mapping name: Assign a name to the role mapping.
       - Roles: Select ``readonly`` role.
