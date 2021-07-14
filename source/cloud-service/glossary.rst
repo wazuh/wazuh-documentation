@@ -4,7 +4,7 @@ Glossary
 ========
 
 .. meta::
-  :description: Wazuh Cloud Service Glossary. 
+  :description: Check cloud-related terms in this glossary to expand your knowledge and take full advantage of the Wazuh Cloud service. 
 
 Here is a list of terms related to Wazuh Cloud.
   
@@ -60,7 +60,7 @@ Hot storage
 
 It is the data available on the Wazuh WUI corresponding to the information indexed by Wazuh. This information is available as soon as Wazuh ingests and indexes the events sent by the agents, making the data searchable and analyzable.
 
-This storage is calculated using the primary shards of ``wazuh-*`` indices.
+Hot storage use is calculated using the primary shards of ``wazuh-*`` indices.
 
 .. _cloud_glossary_region:
 
