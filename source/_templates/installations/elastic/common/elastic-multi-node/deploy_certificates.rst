@@ -4,7 +4,10 @@
 
     .. code-block:: console
 
-      # node_name=elasticsearch-node-name  
+      # node_name=elasticsearch-node-name
+      
+    .. code-block:: console
+      
       # mkdir /etc/elasticsearch/certs
       # mv ~/certs.tar /etc/elasticsearch/certs/
       # cd /etc/elasticsearch/certs/

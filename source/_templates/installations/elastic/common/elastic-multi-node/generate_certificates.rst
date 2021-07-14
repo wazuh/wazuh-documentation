@@ -52,6 +52,9 @@
    .. code-block:: console
 
      # node_name=elasticsearch-node-name
+
+   .. code-block:: console 
+     
      # mkdir /etc/elasticsearch/certs/
      # mv ~/certs/$node_name* /etc/elasticsearch/certs/
      # mv ~/certs/admin* /etc/elasticsearch/certs/

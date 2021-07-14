@@ -3,7 +3,10 @@
 
 .. code-block:: console
 
-  # node_name=kibana-node-name 
+  # node_name=kibana-node-name
+  
+.. code-block:: console  
+  
   # mkdir /etc/kibana/certs
   # mv ~/certs.tar /etc/kibana/certs/
   # chown kibana:kibana /etc/kibana/certs/*

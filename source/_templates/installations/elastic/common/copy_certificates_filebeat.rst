@@ -3,6 +3,9 @@
 .. code-block:: console
 
   # node_name=wazuh-node-name 
+
+.. code-block:: console
+  
   # mkdir /etc/filebeat/certs
   # mv ~/certs.tar /etc/filebeat/certs/
   # cd /etc/filebeat/certs/
