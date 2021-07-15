@@ -11,7 +11,7 @@
     .. code-block:: yaml
 
       network.host: <elasticsearch_ip>
-      node.name: <node-X>
+      node.name: <node_name>
       cluster.name: <elastic_cluster>
       cluster.initial_master_nodes:
               - node-1
@@ -23,16 +23,16 @@
               - <elasticsearch_ip_node3>
 
 
-    Depending on the node type, some parameters may vary between nodes. The ``cluster.initial_master_nodes`` and the ``discovery.seed_hosts`` are lists of all the master-eligible nodes in the cluster. The parameter ``node.master: false`` must be included in every Elasticsearch node that will not be configured as master. 
+    The ``cluster.initial_master_nodes`` and the ``discovery.seed_hosts`` are lists of all the master-eligible nodes in the cluster. The parameter ``node.master: false`` must be included in every Elasticsearch node that will not be configured as master. 
 
-    Values to be replaced in the file:
+    Replace the following values:
 
-    - ``<elasticsearch_ip>``: the host's IP. For example, ``10.0.0.2``. 
+    - ``<elasticsearch_ip>``: The host's IP. For example, ``10.0.0.2``. 
     - ``<node_name>``: The node name. For example, ``node-2``.
     - ``<elastic_cluster>``: Elasticsearch cluster name. For example, ``elastic-cluster-production``.
     - ``<elasticsearch_ip_nodeX>`` Elasticsearch cluster master-eligible nodes IP. For example, ``10.0.0.3``.
-    - The node certificates for each node must be specified under the ``opendistro_security.nodes_dn`` section.
-
+    - ``opendistro_security.nodes_dn``: Specify each node certificate. 
+  
         .. code-block:: yaml
             :emphasize-lines: 5
 
