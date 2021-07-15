@@ -66,7 +66,7 @@ Install Open Distro for Elasticsearch:
 Elasticsearch configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To configure Elastisearch successfully, follow these steps:
+To configure Elasticsearch successfully, follow these steps:
 
 .. include:: ../../../../../_templates/installations/elastic/common/elastic-multi-node/configure_elasticsearch_initial.rst
 
@@ -139,7 +139,7 @@ Install Open Distro for Elasticsearch:
 Elasticsearch configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To configure Elastisearch successfully, follow these steps:
+To configure Elasticsearch successfully, follow these steps:
 
 .. include:: ../../../../../_templates/installations/elastic/common/elastic-multi-node/configure_elasticsearch_subsequent.rst
 
