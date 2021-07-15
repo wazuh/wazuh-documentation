@@ -1,6 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. meta:: :description: Learn how to install Elasticsearch on a multi-node cluster with Wazuh. This deployment type of Wazuh is convenient for large working environments.
+.. meta:: :description: The Wazuh indexer is a highly scalable full-text search engine. Install the Wazuh indexer in a single-node or multi-node configuration according to your environment needs. 
+
 
 .. _wazuh_indexer_step_by_step:
 
@@ -8,82 +9,86 @@
 Installing Wazuh indexer in step-by-step mode
 =============================================
 
-Open Distro for Elasticsearch is an open source distribution of Elasticsearch, a highly scalable full-text search engine. It offers advanced security, alerting, index management, deep performance analysis, and several other additional features.
-
-You can install Elasticsearch on a multi-node cluster. For security and stability reasons in case Elasticsearch nodes become unavailable, it is recommended to have an odd number of master eligible nodes. Make sure that you take this into consideration when deciding the configuration of your Elasticsearch cluster.
-
-The installation process for a multi-node cluster is performed in three stages.
-
-#. Initial node configuration
-
-#. Subsequent nodes configuration
-
-#. Initializing the Elasticsearch cluster
+The Wazuh indexer is a highly scalable full-text search engine based on Open Distro for Elasticsearch. It offers advanced security, alerting, index management, deep performance analysis, and several other features.
 
 .. note:: Root user privileges are necessary to run all the commands.
 
-1. Initial node configuration
----------------------------------
+Wazuh indexer cluster installation and configuration
+----------------------------------------------------
 
-The first stage of the process for installing a multi-node cluster is performed on the first Elasticsearch node to be configured. The SSL certificates generated in this stage are later deployed to the subsequent nodes.
+Install the Wazuh indexer in a single-node or multi-node configuration according to your environment needs. If you want to install a single-node cluster, follow the instructions to install the initial node and proceed directly to initialize the cluster. 
+
+The installation process is divided in three stages.  
+
+#. Initial node installation and configuration
+
+#. Subsequent nodes installation and configuration for distributed deployments
+
+#. Initializing the Elasticsearch cluster
+
+
+1. Initial node configuration
+-----------------------------
+
+Install and configure the initial node. During this stage the SSL certificates to encrypt communications between the different Wazuh components are generated, these certificates are later deployed to other Wazuh instances. 
 
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-.. tabs::
+  .. tabs::
+  
+  
+    .. group-tab:: Yum
+  
+  
+      .. include:: ../../../_templates/installations/wazuh/yum/add_repository_elastic_cluster.rst
+  
+  
+  
+    .. group-tab:: APT
+  
+  
+      .. include:: ../../../_templates/installations/wazuh/deb/add_repository_elastic_cluster.rst
+  
+  
+  
+    .. group-tab:: ZYpp
+  
+  
+      .. include:: ../../../_templates/installations/wazuh/zypp/add_repository_elastic_cluster.rst
 
 
-  .. group-tab:: Yum
 
+Installing Elasticsearch
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-    .. include:: ../../../_templates/installations/wazuh/yum/add_repository_elastic_cluster.rst
+Install Open Distro for Elasticsearch.
 
+  .. include:: ../../../_templates/installations/elastic/common/install_elastic.rst
 
+Configuring Elasticsearch
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  .. group-tab:: APT
+To configure Elasticsearch successfully, follow these steps:
 
+  .. include:: ../../../_templates/installations/elastic/common/elastic-multi-node/configure_elasticsearch_initial.rst
 
-    .. include:: ../../../_templates/installations/wazuh/deb/add_repository_elastic_cluster.rst
-
-
-
-  .. group-tab:: ZYpp
-
-
-    .. include:: ../../../_templates/installations/wazuh/zypp/add_repository_elastic_cluster.rst
-
-
-
-Elasticsearch installation
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Install Open Distro for Elasticsearch:
-
-.. include:: ../../../_templates/installations/elastic/common/install_elastic.rst
-
-Elasticsearch configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-To configure Elastisearch successfully, follow these steps:
-
-.. include:: ../../../_templates/installations/elastic/common/elastic-multi-node/configure_elasticsearch_initial.rst
-
-Elasticsearch roles and users
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Adding Elasticsearch roles and users
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To use the Wazuh Kibana plugin properly, run the following command to add new users and roles in Kibana.
 
-.. include:: ../../../_templates/installations/elastic/common/add_roles_and_users.rst
+  .. include:: ../../../_templates/installations/elastic/common/add_roles_and_users.rst
 
-Certificates creation and deployment
+Creating and deploying certificates
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #. Remove the demo certificates:
 
     .. include:: ../../../_templates/installations/elastic/common/remove_demo_certs.rst
 
-#.  Generate and deploy the certificates:
+#. Generate and deploy the certificates:
 
     .. include:: ../../../_templates/installations/elastic/common/elastic-multi-node/generate_certificates.rst
 
@@ -93,6 +98,7 @@ Certificates creation and deployment
 
 .. note:: The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it with the following command ``/usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer``. Make sure to restart the Elasticsearch service afterwards. 
  
+If you want to install a single-node cluster, proceed directly to :ref:`initialize the cluster <initialize_cluster>`. 
 
 2. Subsequent nodes configuration
 ---------------------------------
@@ -103,47 +109,47 @@ Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-.. tabs::
+  .. tabs::
+  
+  
+    .. group-tab:: Yum
+  
+  
+      .. include:: ../../../_templates/installations/wazuh/yum/add_repository_elastic_cluster.rst
+  
+  
+  
+    .. group-tab:: APT
+  
+  
+      .. include:: ../../../_templates/installations/wazuh/deb/add_repository_elastic_cluster.rst
+  
+  
+  
+    .. group-tab:: ZYpp
+  
+  
+      .. include:: ../../../_templates/installations/wazuh/zypp/add_repository_elastic_cluster.rst
 
 
-  .. group-tab:: Yum
 
-
-    .. include:: ../../../_templates/installations/wazuh/yum/add_repository_elastic_cluster.rst
-
-
-
-  .. group-tab:: APT
-
-
-    .. include:: ../../../_templates/installations/wazuh/deb/add_repository_elastic_cluster.rst
-
-
-
-  .. group-tab:: ZYpp
-
-
-    .. include:: ../../../_templates/installations/wazuh/zypp/add_repository_elastic_cluster.rst
-
-
-
-Elasticsearch installation
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Installing Elasticsearch
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 Install Open Distro for Elasticsearch:
 
-.. include:: ../../../_templates/installations/elastic/common/install_elastic.rst
+  .. include:: ../../../_templates/installations/elastic/common/install_elastic.rst
 
 
-Elasticsearch configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Configuring Elasticsearch
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To configure Elastisearch successfully, follow these steps:
+To configure Elasticsearch successfully, follow these steps:
 
 .. include:: ../../../_templates/installations/elastic/common/elastic-multi-node/configure_elasticsearch_subsequent.rst
 
 
-Certificates deployment
+Deploying certificates
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 #. Remove the demo certificates:
@@ -160,19 +166,20 @@ Certificates deployment
 
 .. note:: The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it with the following command ``/usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer``. Make sure to restart the Elasticsearch service afterward. 
 
+.. _initialize_cluster:
 
 3. Initializing the cluster
 ---------------------------
 
 The final stage of the process for installing a multi-node cluster is performed on the initial node and consists in running the security admin script. 
 
-#. Run the Elasticsearch ``securityadmin`` script to load the new certificates information and start the cluster. To run this command, the value ``<elasticsearch_IP>`` must be replaced with the Elasticsearch installation IP:
+#. Run the Elasticsearch ``securityadmin`` script on the initial node to load the new certificates information and start the cluster. Replace ``<elasticsearch_IP>`` with the Elasticsearch installation IP and run the following command:
 
     .. code-block:: console
 
       # export JAVA_HOME=/usr/share/elasticsearch/jdk/ && /usr/share/elasticsearch/plugins/opendistro_security/tools/securityadmin.sh -cd /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/ -icl -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin-key.pem -h <elasticsearch_IP>
 
-#. To confirm that the installation is successful, run the following command replacing the value ``<elasticsearch_IP>`` with the Elasticsearch installation IP.
+#. Replace ``<elasticsearch_IP>`` and run the following command to confirm that the installation is successful: 
 
     .. code-block:: console
 
