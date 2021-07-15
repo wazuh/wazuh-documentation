@@ -13,13 +13,13 @@ A flexible and intuitive web interface for mining, analyzing, and visualizing da
 
 Choose between two installation methods:
 
-- :ref:`Unattended <wazuh_interface_unattended_installation>`: You can install Wazuh interface by using scripts that automate the installation process.  
+- :ref:`Unattended installation <wazuh_interface_unattended_installation>`: You can install Wazuh interface by using scripts that automate the installation process.  
 
-- :ref:`Step by step <wazuh_interface_step_by_step>`: This is a manual way of carrying out the installation that includes a detailed description of each step of the process.
+- :ref:`Step-by-step installation <wazuh_interface_step_by_step>`: This is a manual way of carrying out the installation that includes a detailed description of each step of the process.
 
 .. toctree::
     :hidden:
     :maxdepth: 1
 
-    Unattended <unattended>
-    Step-by-step <step-by-step>
+    Unattended installation <unattended>
+    Step-by-step installation <step-by-step>

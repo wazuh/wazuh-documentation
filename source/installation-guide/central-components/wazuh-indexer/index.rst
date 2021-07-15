@@ -13,14 +13,14 @@ The Wazuh indexer is a highly scalable, full-text search and analytics engine ba
 
 Choose between two installation methods:
 
-- :ref:`Unattended <wazuh_indexer_unattended>`: You can install the Wazuh indexer by using scripts that automate the installation process.  
+- :ref:`Unattended installation <wazuh_indexer_unattended>`: You can install the Wazuh indexer by using scripts that automate the installation process.  
 
-- :ref:`Step by step <wazuh_indexer_step_by_step>`: This is a manual way of carrying out the installation that includes a detailed description of each step of the process.
+- :ref:`Step-by-step installation <wazuh_indexer_step_by_step>`: This is a manual way of carrying out the installation that includes a detailed description of each step of the process.
 
 .. toctree::
     :hidden:
     :maxdepth: 1
 
-    Unattended <unattended>
-    Step-by-step <step-by-step>
+    Unattended installation <unattended>
+    Step-by-step installation <step-by-step>
 

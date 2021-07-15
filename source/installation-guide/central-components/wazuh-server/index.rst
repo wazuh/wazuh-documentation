@@ -13,13 +13,13 @@ The Wazuh server is in charge of analyzing the data received from the Wazuh agen
 
 Choose between two installation methods:
 
-- :ref:`Unattended <wazuh_server_unattended>`: You can install Wazuh server by using scripts that automate the installation process.  
+- :ref:`Unattended installation <wazuh_server_unattended>`: You can install Wazuh server by using scripts that automate the installation process.  
 
-- :ref:`Step by step <wazuh_server_step_by_step>`: This is a manual way of carrying out the installation that includes a detailed description of each step of the process.
+- :ref:`Step-by-step installation <wazuh_server_step_by_step>`: This is a manual way of carrying out the installation that includes a detailed description of each step of the process.
 
 .. toctree::
     :hidden:
     :maxdepth: 1
 
-    Unattended <unattended>
-    Step-by-step <step-by-step>
+    Unattended installation <unattended>
+    Step-by-step installation <step-by-step>
