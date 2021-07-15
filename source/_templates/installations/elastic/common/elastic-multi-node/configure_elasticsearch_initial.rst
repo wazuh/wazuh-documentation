@@ -2,13 +2,13 @@
 
 #. Download the ``/etc/elasticsearch/elasticsearch.yml`` configuration file.
 
-    .. code-block:: console
+   .. code-block:: console
 
       # curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/elasticsearch/7.x/elasticsearch_cluster_initial_node.yml
 
 #. Edit the configuration file ``/etc/elasticsearch/elasticsearch.yml``. The pre-configured template includes 3 nodes by default; add or remove lines according to the number of nodes in your cluster.
 
-    .. code-block:: yaml
+   .. code-block:: yaml
 
       network.host: <elasticsearch_ip>
       node.name: <node_name>
