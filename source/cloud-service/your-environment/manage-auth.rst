@@ -18,7 +18,7 @@ You can use the native support for managing and authenticating users, or integra
 Native support for users and roles
 ----------------------------------
 
-The Wazuh WUI allows you to add users, create roles, and mapping roles to users.
+The Wazuh WUI allows you to add users, create roles, and map roles to users.
 
 Follow these steps to create an internal user with read access as an example:
 
