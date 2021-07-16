@@ -8,7 +8,7 @@
 
 #. Edit the configuration file ``/etc/elasticsearch/elasticsearch.yml``. The pre-configured template includes 3 nodes by default; add or remove lines according to the number of nodes in your cluster.
 
-   .. code-block:: yaml
+    .. code-block:: yaml
 
       network.host: <elasticsearch_ip>
       node.name: <node_name>
@@ -21,18 +21,18 @@
               - <elasticsearch_ip_node1>
               - <elasticsearch_ip_node2>
               - <elasticsearch_ip_node3>
-
-
-  The ``cluster.initial_master_nodes`` and the ``discovery.seed_hosts`` are lists of all the master-eligible nodes in the cluster. The parameter ``node.master: false`` must be included in every Elasticsearch node that will not be configured as master. 
-
-  Replace the following values:
-
-  -  ``<elasticsearch_ip>``: The host's IP. For example, ``10.0.0.2``. 
-  -  ``<node_name>``: The node name. For example, ``node-1``. 
-  -  ``<elastic_cluster>``: Elasticsearch cluster name. For example, ``elastic-cluster-production``.
-  -  ``<elasticsearch_ip_nodeX>``: Elasticsearch cluster master-eligible nodes IP. For example, ``10.0.0.3``.
-  -  ``opendistro_security.nodes_dn``: Specify each node certificate. Make sure to use the same names to create the certificates. 
-
+  
+  
+    The ``cluster.initial_master_nodes`` and the ``discovery.seed_hosts`` are lists of all the master-eligible nodes in the cluster. The parameter ``node.master: false`` must be included in every Elasticsearch node that will not be configured as master. 
+  
+    Replace the following values:
+  
+    - ``<elasticsearch_ip>``: The host's IP. For example, ``10.0.0.2``. 
+    - ``<node_name>``: The node name. For example, ``node-1``. 
+    - ``<elastic_cluster>``: Elasticsearch cluster name. For example, ``elastic-cluster-production``.
+    - ``<elasticsearch_ip_nodeX>``: Elasticsearch cluster master-eligible nodes IP. For example, ``10.0.0.3``.
+    - ``opendistro_security.nodes_dn``: Specify each node certificate. Make sure to use the same names to create the certificates. 
+  
     .. code-block:: yaml
         :emphasize-lines: 5
 
