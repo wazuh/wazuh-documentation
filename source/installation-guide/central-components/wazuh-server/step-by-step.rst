@@ -8,7 +8,8 @@
 Installing Wazuh server in step-by-step mode
 ============================================
 
-The Wazuh server includes the Wazuh manager and the Wazuh forwarder. Install the Wazuh server in a single-node or multi-node configuration according to your environment needs. 
+This central component includes the Wazuh manager and the Wazuh forwarder. You can install the Wazuh server in a single-node or multi-node configuration according to your environment needs.
+
 
 .. note:: Root user privileges are required to run all the commands described below.
 
@@ -50,7 +51,7 @@ Add the Wazuh repository to download the official Wazuh packages. As an alternat
 Installing the Wazuh manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Install the Wazuh manager package. 
+#. Install the Wazuh manager package: 
 
    .. tabs::
    
@@ -75,7 +76,7 @@ Installing the Wazuh manager
        .. include:: ../../../_templates/installations/wazuh/zypp/install_wazuh_manager.rst
 
 
-#. Enable and start the Wazuh manager service:
+#. Enable and start the Wazuh manager service.
 
     .. include:: ../../../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
 
@@ -124,7 +125,7 @@ Installing and configuring the Wazuh forwarder
 
 
 
-#. Download the pre-configured Filebeat configuration file used to forward the Wazuh alerts to the Wazuh indexer.
+#. Download the preconfigured Filebeat configuration file used to forward the Wazuh alerts to the Wazuh indexer.
 
     .. code-block:: console
 
@@ -141,15 +142,15 @@ Installing and configuring the Wazuh forwarder
 
       # curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.1.tar.gz | tar -xvz -C /usr/share/filebeat/module
 
-#. Edit the file ``/etc/filebeat/filebeat.yml``:
+#. Edit the file ``/etc/filebeat/filebeat.yml``.
 
     .. include:: ../../../_templates/installations/elastic/common/configure_filebeat.rst
 
-#. Replace ``wazuh-node-name`` with your Wazuh server node name, the same used in ``instances.yml`` to create the certificates, and move the certificates to their corresponding location. This guide assumes that a copy of ``certs.tar``, created during the Wazuh indexer installation,  has been placed in the root home folder (``~/``). 
+#. Replace ``wazuh-node-name`` with your Wazuh server node name, the same used in ``instances.yml`` to create the certificates, and move the certificates to their corresponding location. By default, a copy of ``certs.tar``, created during the Wazuh indexer installation, should be located in the root home folder (``~/``). 
 
     .. include:: ../../../_templates/installations/elastic/common/copy_certificates_filebeat_wazuh_cluster.rst
 
-#. Enable and start the Filebeat service:
+#. Enable and start the Filebeat service.
 
     .. include:: ../../../_templates/installations/elastic/common/enable_filebeat.rst
 
@@ -159,7 +160,7 @@ Installing and configuring the Wazuh forwarder
 
       # filebeat test output
 
-   An example response should look as follows:
+   An example response looks as follows:
    
    .. code-block:: none
                 :class: output
@@ -180,12 +181,12 @@ Installing and configuring the Wazuh forwarder
                    version: 7.10.2
 
 
-Your Wazuh server is now installed. If you want to do a single-node deployment, you may proceed to install the Wazuh interface. If you want to do a multi-node deployment, install the Wazuh server on every node and proceed to configure the cluster. 
+Your Wazuh server is now successfully installed. If you want to do a single-node deployment, you may proceed to install the :ref:` Wazuh interface <wazuh_interface_step_by_step>`.. If you want to do a multi-node deployment, install the Wazuh server on every node and proceed to configure the cluster. 
 
 Configure the Wazuh cluster
 ---------------------------
 
-The Wazuh manager is configured as a single-node cluster by default. The following sections describes how to configure the Wazuh manager as a Wazuh master node or as a Wazuh worker node.
+The Wazuh manager is configured as a single-node cluster by default. The following section describes how to configure the Wazuh manager as a Wazuh master node or as a Wazuh worker node.
 
 One server has to be chosen as a master, the rest will be workers. So, the section ``Wazuh server master node`` must be applied once, in the server chosen for this role. For all the other servers, the section ``Wazuh server worker node`` must be applied.
 
