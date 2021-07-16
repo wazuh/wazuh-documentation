@@ -9,26 +9,26 @@
 Installing Wazuh indexer in step-by-step mode
 =============================================
 
-The Wazuh indexer is a highly scalable full-text search engine based on Open Distro for Elasticsearch. It offers advanced security, alerting, index management, deep performance analysis, and several other features.
+Install and configure the Wazuh indexer, a highly scalable full-text search engine based on Open Distro for Elasticsearch. It offers advanced security, alerting, index management, deep performance analysis, and several other features.
 
 .. note:: Root user privileges are necessary to run all the commands.
 
 Wazuh indexer cluster installation and configuration
 ----------------------------------------------------
 
-Install the Wazuh indexer in a single-node or multi-node configuration according to your environment needs. If you want to install a single-node cluster, follow the instructions to install the initial node and proceed directly to initialize the cluster. 
+Install the Wazuh indexer as a single-node or multi-node cluster according to your environment needs. If you want to install a single-node cluster, follow the instructions to install the initial node and proceed directly to initialize the cluster. 
 
 The installation process is divided in three stages.  
 
 #. Initial node installation and configuration
 
-#. Subsequent nodes installation and configuration for distributed deployments
+#. Subsequent nodes installation and configuration for multi-node clusters
 
-#. Initializing the Elasticsearch cluster
+#. Cluster initialization 
 
 
-1. Initial node configuration
------------------------------
+1. Initial node installation and configuration
+-----------------------------------------------
 
 Install and configure the initial node. During this stage the SSL certificates to encrypt communications between the different Wazuh components are generated, these certificates are later deployed to other Wazuh instances. 
 
@@ -70,40 +70,53 @@ Install Open Distro for Elasticsearch.
 Configuring Elasticsearch
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To configure Elasticsearch successfully, follow these steps:
+Follow these steps to configure Elasticsearch. 
 
   .. include:: ../../../_templates/installations/elastic/common/elastic-multi-node/configure_elasticsearch_initial.rst
 
 Adding Elasticsearch roles and users
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To use the Wazuh Kibana plugin properly, run the following command to add new users and roles in Kibana.
+Add new users and roles in Kibana.
 
   .. include:: ../../../_templates/installations/elastic/common/add_roles_and_users.rst
 
 Creating and deploying certificates
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Remove the demo certificates:
+Create and deploy SSL certificates to encrypt communications between the Wazuh central components. 
+
+#. Remove the demo certificates.
 
     .. include:: ../../../_templates/installations/elastic/common/remove_demo_certs.rst
 
-#. Generate and deploy the certificates:
+#. Generate and deploy the certificates.
 
     .. include:: ../../../_templates/installations/elastic/common/elastic-multi-node/generate_certificates.rst
 
-#. Enable and start the Elasticsearch service:
+#. Enable and start the Elasticsearch service.
 
     .. include:: ../../../_templates/installations/elastic/common/enable_elasticsearch.rst
 
-.. note:: The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it with the following command ``/usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer``. Make sure to restart the Elasticsearch service afterwards. 
+
+- **Recommended action**  - Remove Open Distro for Elasticsearch performance analyzer plugin. 
+
+  The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it with the following command:  
+
+  .. code-block:: console
+  
+    # /usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer
+
+  Restart Elasticsearch after removing the plugin. 
+  
  
-If you want to install a single-node cluster, proceed directly to :ref:`initialize the cluster <initialize_cluster>`. 
+You now have installed and configured the initial Wazuh indexer node, if you want a single-node cluster, proceed directly to :ref:`initialize the cluster <initialize_cluster>`. If you want to install a multi-node cluster, follow the instructions to install and configure subsequent nodes. 
 
 2. Subsequent nodes configuration
 ---------------------------------
 
-The second stage of the process for installing a multi-node cluster is performed on the subsequent nodes of the Elasticsearch cluster. 
+Install and configure subsequent nodes of your multi-node cluster. 
+
 
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -152,6 +165,8 @@ To configure Elasticsearch successfully, follow these steps:
 Deploying certificates
 ~~~~~~~~~~~~~~~~~~~~~~~
 
+Deploy the certificates to encrypt communications between the Wazuh central components.
+
 #. Remove the demo certificates:
 
     .. include:: ../../../_templates/installations/elastic/common/remove_demo_certs.rst
@@ -164,14 +179,24 @@ Deploying certificates
 
     .. include:: ../../../_templates/installations/elastic/common/enable_elasticsearch.rst
 
-.. note:: The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it with the following command ``/usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer``. Make sure to restart the Elasticsearch service afterward. 
+- **Recommended action**  - Remove Open Distro for Elasticsearch performance analyzer plugin. 
+
+  The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it with the following command:  
+
+  .. code-block:: console
+  
+    # /usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer
+
+  Restart Elasticsearch after removing the plugin.
+
+You now have install a subsequent node of your Wazuh indexer multi-node cluster. Repeat this process on every other subsequent node that you want to add to your cluster and proceed to initialize the cluster. 
 
 .. _initialize_cluster:
 
-3. Initializing the cluster
----------------------------
+3. Cluster initialization
+-------------------------
 
-The final stage of the process for installing a multi-node cluster is performed on the initial node and consists in running the security admin script. 
+The final stage of the process for installing a Wazuh indexer multi-node cluster consists in running the security admin script. 
 
 #. Run the Elasticsearch ``securityadmin`` script on the initial node to load the new certificates information and start the cluster. Replace ``<elasticsearch_IP>`` with the Elasticsearch installation IP and run the following command:
 
@@ -210,19 +235,9 @@ The final stage of the process for installing a multi-node cluster is performed 
   
 
 
-
-.. note:: It is highly recommended to change the default passwords of Elasticsearch for the users’ passwords. To perform this action, see the :ref:`Elasticsearch tuning <elastic_tuning>` section.
-
-
-It is also recommended to customize the file ``/etc/elasticsearch/jvm.options`` in order to improve the performance of Elasticsearch. Learn more about these processes in the :ref:`user manual <elastic_tuning>`.
-
-
-
-To uninstall Elasticsearch, visit the :ref:`Uninstalling section <uninstall_elasticsearch>`.
-
 Next steps
 ----------
 
-The next step is the installation of the Wazuh server.
+The next step is the installation of the :ref:`Wazuh server <wazuh_server_step_by_step>`.
 
-- :ref:`Wazuh multi-node cluster<wazuh_server_step_by_step>`
+If you want to uninstall the Wazuh indexer, visit the :ref:`Uninstalling section <uninstall_elasticsearch>`.
