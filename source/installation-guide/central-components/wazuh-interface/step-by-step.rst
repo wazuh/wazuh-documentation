@@ -100,7 +100,7 @@ Installing and configuring the Wazuh interface
         # sudo -u kibana bin/kibana-plugin install https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|-1.zip
         
 
-#. Configure the Kibana certificates. This guide assumes that a copy of ``certs.tar`` is placed in the root home folder (~/).
+#. Replace ``kibana-node-name`` with your Kibana node name, the same used in ``instances.yml`` to create the certificates, and move the certificates to their corresponding location. This guide assumes that a copy of ``certs.tar``, created during the Wazuh indexer installation,  has been placed in the root home folder (``~/``). 
 
     .. include:: ../../../_templates/installations/elastic/common/generate_new_kibana_certificates.rst
 
@@ -126,7 +126,7 @@ Installing and configuring the Wazuh interface
       password: <wazuh_user_password>  
 
 
-Upon the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or,  for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser.  Alternatively, a certificate from a trusted authority can be configured. 
+Upon the first access to the Wazuh interface, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or, for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser.  Alternatively, a certificate from a trusted authority can be configured. 
 
 With the first access attempt on a distributed deployment, the Wazuh Kibana plugin may prompt a message that indicates that it cannot communicate with the Wazuh API. To solve this issue edit the file ``/usr/share/kibana/data/wazuh/config/wazuh.yml`` and replace the ``url`` by the Wazuh server's IP address or hostname: 
   
