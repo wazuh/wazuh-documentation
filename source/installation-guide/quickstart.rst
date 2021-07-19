@@ -5,8 +5,10 @@
 Quickstart
 ==========
 
-You can install Wazuh on a single host by using a script that automatically detects whether the operating system uses ``rpm`` or ``deb`` packages.
-The script performs a health check to verify that the available system resources meet the minimal requirements. For more information, check the :ref:`Requirements <installation_requirements>` section.
+You can install Wazuh on a Linux single host by using a script that automatically detects whether the operating system uses ``rpm`` or ``deb`` packages.
+The script performs a health check to verify that the available system resources meet the minimal requirements. 
+
+The minimum requirements for this type of deployment are 4 GB of RAM and 2 CPU cores, and the recommended are 16 GB of RAM and 8 CPU cores. A 64-bit operating system is required. 
 
 The script installs some packages, including ``unzip`` and ``libcap``, required by the Wazuh indexer. 
 
