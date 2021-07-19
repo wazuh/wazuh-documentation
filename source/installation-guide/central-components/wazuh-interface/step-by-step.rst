@@ -9,7 +9,7 @@ Installing Wazuh interface in step-by-step mode
 
 Wazuh interface is a flexible and intuitive web interface, based on Kibana, for mining and visualizing the events and archives. 
 
-.. note:: Root user privileges are required to run all the commands described below.
+.. note:: Root user privileges are required to run the commands described below.
 
 Install the Wazuh interface
 ---------------------------
@@ -17,7 +17,7 @@ Install the Wazuh interface
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Add the Wazuh repository if you are installing the Wazuh interface on a dedicated server. In case you are installing on the same host as the Wazuh server or Wazuh indexer you may skip this step. 
+Add the Wazuh repository if you are installing the Wazuh interface on a dedicated server. In case you are installing it on the same host as the Wazuh server or Wazuh indexer, you can skip this step. 
 
   .. tabs::
   
@@ -128,7 +128,7 @@ Installing and configuring the Wazuh interface
 
 Upon the first access to the Wazuh interface, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or, for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser.  Alternatively, a certificate from a trusted authority can be configured. 
 
-With the first access attempt on a distributed deployment, the Wazuh Kibana plugin may prompt a message that indicates that it cannot communicate with the Wazuh API. To solve this issue edit the file ``/usr/share/kibana/data/wazuh/config/wazuh.yml`` and replace the ``url`` by the Wazuh server's IP address or hostname: 
+With the first access attempt on a distributed deployment, the Wazuh Kibana plugin may prompt a message that indicates that it cannot communicate with the Wazuh API. To solve this issue edit the file ``/usr/share/kibana/data/wazuh/config/wazuh.yml`` and replace the ``url`` by the Wazuh server IP address or hostname. 
   
   .. code-block:: yaml
   
@@ -144,6 +144,6 @@ With the first access attempt on a distributed deployment, the Wazuh Kibana plug
 Next steps
 ----------
 
-Once the Wazuh environment is ready, a Wazuh agent can be installed on every endpoint to be monitored. The Wazuh agent installation guide is available for most operating systems and can be found :ref:`here<installation_agents>`.
+Once the Wazuh environment is ready, you can install a Wazuh agent on every endpoint to be monitored. The Wazuh agent installation guide is available for most operating systems and can be found :ref:`here<installation_agents>`.
 
 If you want to uninstall Kibana, visit the :ref:`uninstalling section <uninstall_kibana>`.
