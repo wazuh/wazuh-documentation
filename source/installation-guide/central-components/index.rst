@@ -38,7 +38,7 @@ Follow this installation workflow to install Wazuh.
 
     Select an installation method, unattended or step-by-step, and follow the instructions. 
 
-After these steps, your Wazuh server is ready to use and you can deploy :ref:`Wazuh agents <installation_agents>` on the endpoints you wish to monitor.  
+After these steps, your Wazuh installation is ready to use and you can deploy :ref:`Wazuh agents <installation_agents>` on the endpoints you wish to monitor.  
 
 
 
