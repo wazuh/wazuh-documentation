@@ -14,7 +14,7 @@ The Wazuh server is in charge of analyzing the data received from the agents and
 Wazuh server cluster installation and configuration
 ----------------------------------------------------
 
-Install the Wazuh server as a single-node or multi-node cluster according to your environment needs. If you want to install a single-node cluster, follow the instructions to install the Wazuh manager and the Wazuh forwared, and proceed directly with :ref:`installing the Wazuh interface <wazuh_interface_step_by_step>`.
+Install the Wazuh server as a single-node or multi-node cluster according to your environment needs. If you want to install a single-node cluster, follow the instructions to install the Wazuh manager and the Wazuh forwared, and proceed directly with :ref:`installing the Wazuh interface <wazuh_interface_installation>`.
 
 The installation process is divided in three stages.  
 
@@ -64,7 +64,7 @@ Add the Wazuh repository to download the official Wazuh packages. As an alternat
 Installing the Wazuh manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Install the Wazuh manager package: 
+#. Install the Wazuh manager package. 
 
    .. tabs::
    
@@ -94,7 +94,7 @@ Installing the Wazuh manager
     .. include:: ../../../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
 
 
-#. Run the following command to check if the Wazuh manager is active: 
+#. Run the following command to verify the Wazuh manager status. 
 
     .. include:: ../../../_templates/installations/wazuh/common/check_wazuh_manager.rst
 
@@ -167,7 +167,7 @@ Installing and configuring the Wazuh forwarder
 
     .. include:: ../../../_templates/installations/elastic/common/enable_filebeat.rst
 
-#. To ensure that Filebeat has been successfully installed, run the following command:
+#. Run the following command to verify that Filebeat is successfully installed.
 
    .. code-block:: console
 
@@ -194,14 +194,19 @@ Installing and configuring the Wazuh forwarder
                    version: 7.10.2
 
 
-Your Wazuh server is now successfully installed. If you want to do a single-node deployment, you may proceed to install the :ref:` Wazuh interface <wazuh_interface_step_by_step>`.. If you want to do a multi-node deployment, install the Wazuh server on every node and proceed to configure the cluster. 
+Your Wazuh server is now successfully installed and the Wazuh manager is configured as a single-node cluster by default. 
+
+- If you want a single-node deployment configuration, you can proceed directly with :ref:`installing the Wazuh interface <wazuh_interface_installation>`. 
+  
+- If you want to perform a multi-node deployment, install the Wazuh server on every node and carry on with configuring the Wazuh cluster.
 
 Configure the Wazuh cluster
 ---------------------------
 
-The Wazuh manager is configured as a single-node cluster by default. The following section describes how to configure the Wazuh manager as a Wazuh master node or as a Wazuh worker node.
+To configure the Wazuh cluster as a multi-node deployment, the Wazuh server needs to be installed on every node. After completing this action, you need to choose and configure one server as a Wazuh master node, the rest will be configured as workers. 
 
-One server has to be chosen as a master, the rest will be workers. So, the section ``Wazuh server master node`` must be applied once, in the server chosen for this role. For all the other servers, the section ``Wazuh server worker node`` must be applied.
+The *Wazuh server master node* configuration needs to be applied only to the server chosen for this role. Once the master node is fully configured, apply the *Wazuh server worker nodes* configuration to the rest of the servers.
+
 
 
 Wazuh server master node
@@ -209,7 +214,7 @@ Wazuh server master node
 
 #. .. include:: ../../../_templates/installations/wazuh/common/configure_wazuh_master_node.rst
 
-#. Once the ``/var/ossec/etc/ossec.conf`` configuration file is edited, restart the Wazuh manager: 
+#. Once the ``/var/ossec/etc/ossec.conf`` configuration file is edited, restart the Wazuh manager. 
 
     .. include:: ../../../_templates/installations/wazuh/common/restart_wazuh_manager.rst
 
@@ -218,16 +223,16 @@ Wazuh server worker nodes
 
 #. .. include:: ../../../_templates/installations/wazuh/common/configure_wazuh_worker_node.rst
 
-#. Once the ``/var/ossec/etc/ossec.conf`` configuration file is edited, restart the Wazuh manager: 
+#. Once the ``/var/ossec/etc/ossec.conf`` configuration file is edited, restart the Wazuh manager. 
 
     .. include:: ../../../_templates/installations/wazuh/common/restart_wazuh_manager.rst
 
 #. .. include:: ../../../_templates/installations/wazuh/common/check_wazuh_cluster.rst
 
 
-To uninstall the Wazuh server, visit the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_open_distro>`.
+To uninstall the Wazuh server, see the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_open_distro>`.
 
 Next steps
 ----------
 
-The next step consists of :ref:`Installing the Wazuh interface <wazuh_interface_step_by_step>`.
+The next step consists of :ref:`installing the Wazuh interface <wazuh_interface_step_by_step>` for mining, analyzing, and visualizing data.
