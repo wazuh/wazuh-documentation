@@ -8,10 +8,23 @@
 Installing Wazuh server in step-by-step mode
 ============================================
 
-This central component includes the Wazuh manager and the Wazuh forwarder. You can install the Wazuh server in a single-node or multi-node configuration according to your environment needs.
+The Wazuh server is in charge of analyzing the data received from the agents and triggering alerts when threats or anomalies are detected. This central component includes the Wazuh manager and the Wazuh forwarder.
 
 
-.. note:: Root user privileges are required to run all the commands described below.
+Wazuh server cluster installation and configuration
+----------------------------------------------------
+
+Install the Wazuh server as a single-node or multi-node cluster according to your environment needs. If you want to install a single-node cluster, follow the instructions to install the Wazuh manager and the Wazuh forwared, and proceed directly with :ref:`installing the Wazuh interface <wazuh_interface_step_by_step>`.
+
+The installation process is divided in three stages.  
+
+#. Wazuh manager installation
+
+#. Wazuh forwarder installation
+
+#. Cluster configuration for multi-node deployment 
+
+.. note:: Root user privileges are required to run the commands described below.
 
 Install the Wazuh manager
 -------------------------
