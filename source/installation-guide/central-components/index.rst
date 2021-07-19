@@ -8,15 +8,17 @@
 Central components
 ==================
 
+Wazuh central components are in charge of analyzing the data gathered by the Wazuh agents, providing a search engine and data visualization tool that allows users to navigate through their security alerts. The Wazuh central components include the Wazuh indexer, the Wazuh server and the Wazuh interface. 
+
+You can install all the  Wazuh central components on the same server, as an all-in-one deployment, or on different servers as a distributed deployment that provides high availability and scalability of the product. 
+
+Follow this installation workflow to install Wazuh. 
+
 .. thumbnail:: ../../images/installation/Installation_workflow.png
   :title: Wazuh installation workflow
   :align: center
   :width: 100%
 
-
-You can install all the central components on the same server, as an all-in-one deployment, or on different servers as a distributed deployment that provides high availability and scalability of the product. 
-
-Install the Wazuh components in the following order.  
 
 #. :ref:`Wazuh indexer <wazuh_indexer_installation>`: A highly scalable, full-text search and analytics engine based on Open Distro for Elasticsearch.
     
