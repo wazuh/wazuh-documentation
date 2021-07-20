@@ -196,14 +196,14 @@ Installing and configuring the Wazuh forwarder
 
 Your Wazuh server is now successfully installed and the Wazuh manager is configured as a single-node cluster by default. 
 
-- If you want a single-node deployment configuration, you can proceed directly with :ref:`installing the Wazuh interface <wazuh_interface_installation>`. 
+- If you want a Wazuh server single-node cluster, everything is set and you can proceed directly with :ref:`installing the Wazuh interface <wazuh_interface_installation>`. 
   
-- If you want to perform a multi-node deployment, install the Wazuh server on every node and carry on with configuring the Wazuh cluster.
+- If you want a Wazuh server multi-node cluster,  install the Wazuh server on every node and carry on with configuring the Wazuh cluster.
 
 Configure the Wazuh cluster
 ---------------------------
 
-To configure the Wazuh cluster as a multi-node deployment, the Wazuh server needs to be installed on every node. After completing this action, you need to choose and configure one server as a Wazuh master node, the rest will be configured as workers. 
+To configure the Wazuh cluster as a multi-node cluster, the Wazuh server needs to be installed on every node. After completing this action, you need to choose and configure one server as a Wazuh master node, and configure the rest as workers. 
 
 The *Wazuh server master node* configuration needs to be applied only to the server chosen for this role. Once the master node is fully configured, apply the *Wazuh server worker nodes* configuration to the rest of the servers.
 
