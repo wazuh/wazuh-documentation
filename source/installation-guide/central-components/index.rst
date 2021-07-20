@@ -24,7 +24,7 @@ Follow this installation workflow to install Wazuh.
     
     During the installation of the Wazuh indexer, the Wazuh certificates tool is used to create certificates needed for encrypting the communication between the central components. These certificates must be distributed to all the servers in the Wazuh installation. Random passwords are also generated for the system users.
 
-#. :ref:`Wazuh server <wazuh_server_installation>`: in charge of analyzing the data received from the Wazuh agents and triggering alerts when threats or anomalies are detected. It is also used to manage the agents’ configuration remotely and to monitor their status. 
+#. :ref:`Wazuh server <wazuh_server_installation>`: in charge of analyzing the data received from the Wazuh agents and triggering alerts when threats or anomalies are detected. It is also used to manage the agents' configuration remotely and to monitor their status. 
 
     This component includes the Wazuh manager and the Wazuh forwarder, based on Filebeat-OSS. The Wazuh server can be deployed as a single or multi-node cluster depending on the environment needs.
 
