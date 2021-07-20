@@ -271,6 +271,16 @@ readConfig() {
     ((counter++))
     done
 
+    i=0
+    j=0
+    while [ "${i}" -lt "${#FILEBEATNODES[@]}" ]
+    do
+        ((i++))
+        WAZUHSERVERIPS[j]+=${FILEBEATNODES[i]}
+        ((i++))
+        ((j++))
+    done    
+
     ## Read Kibana nodes
     counter=${FILEBEATLIMIB}
     i=0
@@ -465,7 +475,7 @@ installElasticsearch() {
             echo "wazuh-servers:" >> ~/instances.yml
             i=0
             while [ ${i} -le ${#FILEBEATNODES[@]} ]; do
-                if [ "${FILEBEATNODES[i]}" == "master: true" ]; then
+                if [ "${FILEBEATNODES[i]}" == "  master: true" ]; then
                     ((i++))
                 else
                     echo "  - name: ${FILEBEATNODES[i]}" >> ~/instances.yml
