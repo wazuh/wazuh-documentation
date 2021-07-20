@@ -235,4 +235,4 @@ To uninstall the Wazuh server, see the :ref:`uninstalling section <user_manual_u
 Next steps
 ----------
 
-The next step consists of :ref:`installing the Wazuh interface <wazuh_interface_step_by_step>` for mining, analyzing, and visualizing data.
+The next step consists of :ref:`installing the Wazuh interface <wazuh_interface_installation>` for mining, analyzing, and visualizing data.
