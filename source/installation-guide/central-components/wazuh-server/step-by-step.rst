@@ -32,7 +32,7 @@ Install the Wazuh manager
 The Wazuh manager collects and analyzes data from the deployed Wazuh agents. 
 
 Adding the Wazuh repository
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Add the Wazuh repository to download the official Wazuh packages. As an alternative, you can download the Wazuh packages directly from our :ref:`Package list <packages>`. 
     
@@ -62,7 +62,7 @@ Add the Wazuh repository to download the official Wazuh packages. As an alternat
 
 
 Installing the Wazuh manager
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 #. Install the Wazuh manager package. 
 
@@ -109,7 +109,7 @@ The Wazuh forwarder, based on Filebeat-OSS, securely forwards alerts and archive
 
 
 Installing and configuring the Wazuh forwarder 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
 #. Install the Filebeat package.
@@ -210,7 +210,7 @@ The *Wazuh server master node* configuration needs to be applied only to the ser
 
 
 Wazuh server master node
-~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 #. .. include:: ../../../_templates/installations/wazuh/common/configure_wazuh_master_node.rst
 
@@ -219,7 +219,7 @@ Wazuh server master node
     .. include:: ../../../_templates/installations/wazuh/common/restart_wazuh_manager.rst
 
 Wazuh server worker nodes
-~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 #. .. include:: ../../../_templates/installations/wazuh/common/configure_wazuh_worker_node.rst
 
