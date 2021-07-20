@@ -17,7 +17,7 @@ Install the Wazuh interface
 Adding the Wazuh repository
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Add the Wazuh repository if you are installing the Wazuh interface on a dedicated server. In case you are installing it on the same host as the Wazuh server or Wazuh indexer, you can skip this step. 
+Add the Wazuh repository if you are installing the Wazuh interface on a dedicated server. Skip this step if you are installing it on the same host as the Wazuh server or Wazuh indexer. 
 
   .. tabs::
   
@@ -81,8 +81,8 @@ Installing and configuring the Wazuh interface
         server.host: 0.0.0.0
         elasticsearch.hosts: "https://127.0.0.1:9200"
        
-    - ``server.host: 0.0.0.0``: Kibana is available from the outside and will accept all the available IPs of the host.
-    - ``elasticsearch.hosts: "https://127.0.0.1:9200"``: Elasticsearch host is set to localhost by default, replace this value if necessary. In case of having more than one Elasticsearch node, Kibana can be configured to connect to multiple Elasticsearch nodes in the same cluster. The IPs of the nodes can be separated with commas. Eg. ``["https://10.0.0.2:9200", "https://10.0.0.3:9200","https://10.0.0.4:9200"]``   
+    - ``server.host: 0.0.0.0``: Kibana is available from the outside and accepts all the available IPs of the host.
+    - ``elasticsearch.hosts: "https://127.0.0.1:9200"``: Elasticsearch host is set to localhost by default, replace this value if necessary. If you have more than one Elasticsearch node, Kibana can be configured to connect to multiple Elasticsearch nodes in the same cluster. To do this, you need to separate the IPs of the nodes with commas as in ``["https://10.0.0.2:9200", "https://10.0.0.3:9200","https://10.0.0.4:9200"]``.
 
 #. Create the ``/usr/share/kibana/data`` directory.
 
@@ -92,7 +92,7 @@ Installing and configuring the Wazuh interface
       # chown -R kibana:kibana /usr/share/kibana/data
 
 
-#. Install the Wazuh Kibana plugin. The installation of the plugin must be done from the Kibana home directory. 
+#. Install the Wazuh Kibana plugin from the Kibana home directory. 
 
     .. code-block:: console
 
@@ -100,12 +100,12 @@ Installing and configuring the Wazuh interface
         # sudo -u kibana bin/kibana-plugin install https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|-1.zip
         
 
-#. Replace ``kibana-node-name`` with your Kibana node name, the same used in ``instances.yml`` to create the certificates, and move the certificates to their corresponding location. This guide assumes that a copy of ``certs.tar``, created during the Wazuh indexer installation,  has been placed in the root home folder (``~/``). 
+#. Replace ``kibana-node-name`` with your Kibana node name, the same used in ``instances.yml`` to create the certificates, and move the certificates to their corresponding location. We assume that you placed a copy of ``certs.tar``, created during the Wazuh indexer installation, in the root home folder (``~/``).
 
     .. include:: ../../../_templates/installations/elastic/common/generate_new_kibana_certificates.rst
 
 
-#. Link Kibana socket to privileged port 443.
+#. Link the Kibana socket to privileged port 443.
 
     .. code-block:: console
 
@@ -126,7 +126,7 @@ Installing and configuring the Wazuh interface
       password: <wazuh_user_password>  
 
 
-Upon the first access to the Wazuh interface, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or, for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser.  Alternatively, a certificate from a trusted authority can be configured. 
+When you access the Wazuh interface for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or, for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser.  Alternatively, a certificate from a trusted authority can be configured. 
 
 With the first access attempt on a distributed deployment, the Wazuh Kibana plugin may prompt a message that indicates that it cannot communicate with the Wazuh API. To solve this issue edit the file ``/usr/share/kibana/data/wazuh/config/wazuh.yml`` and replace the ``url`` by the Wazuh server IP address or hostname. 
   
