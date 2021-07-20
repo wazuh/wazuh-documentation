@@ -27,18 +27,27 @@ $(function() {
         let accordionBody = accordions[j];
         let sectionId = accordions[j].parentElement.getAttribute("id") + "-accordion";
         let accordionParent = accordions[j].parentElement;
+        let collapsed = "collapsed";
+        let show = "";
+        let aria = false;
+
+        if(accordions[j].classList.contains('open')) {
+            collapsed = "";
+            show = " show";
+            aria = true;
+        }
 
         accordionParent.classList.add("accordion-parent");
 
         setAccordionAttributes(accordionTitle, {"data-toggle": "collapse",
                                                 "href": "#" + sectionId,
                                                 "role": "button",
-                                                "aria-expanded": "false",
+                                                "aria-expanded": aria,
                                                 "aria-controls": sectionId,
-                                                "class": "accordion-title collapsed"                                       
+                                                "class": "accordion-title " + collapsed                                       
                                             });  
 
-        setAccordionAttributes(accordionBody, {"class": "accordion-section accordion collapse",
+        setAccordionAttributes(accordionBody, {"class": "accordion-section accordion collapse" + show,
                                                "id": sectionId });
         
         accordionTitle.innerHTML = "<i class='fas fa-chevron-right'></i>" + accordionTitle.innerHTML;
@@ -50,7 +59,7 @@ $(function() {
             }
         });
 
-        if (window.location.href.indexOf(accordionParent.getAttribute("id")) > -1 && accordionTitle.classList.contains('collapsed')) {
+        if (window.location.href.indexOf(accordionParent.getAttribute("id")) > -1&& accordionTitle.classList.contains('collapsed')) {
             accordionTitle.click();
         }
     }

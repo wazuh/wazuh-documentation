@@ -31,7 +31,7 @@ The installation process is divided in three stages.
 -----------------------------------------------
 .. raw:: html
 
-    <div class="accordion-section">
+    <div class="accordion-section open">
 
 Install and configure the initial node. During this stage the SSL certificates to encrypt communications between the different Wazuh components are generated, these certificates are later deployed to other Wazuh instances. 
 
