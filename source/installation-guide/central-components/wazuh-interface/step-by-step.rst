@@ -15,7 +15,7 @@ Install the Wazuh interface
 ---------------------------
 
 Adding the Wazuh repository
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Add the Wazuh repository if you are installing the Wazuh interface on a dedicated server. In case you are installing it on the same host as the Wazuh server or Wazuh indexer, you can skip this step. 
 
@@ -43,7 +43,7 @@ Add the Wazuh repository if you are installing the Wazuh interface on a dedicate
   
 
 Installing and configuring the Wazuh interface
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 #. Install the Kibana package.
 
