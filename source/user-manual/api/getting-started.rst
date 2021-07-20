@@ -27,6 +27,10 @@ The Wazuh API will be installed along the Wazuh manager by default. To control o
 
     # service wazuh-manager start/status/stop/restart
 
+.. note::
+    The -k parameter applied to API requests is used to avoid the server connection verification by using server certificates. If these are valid, this parameter can be removed.
+    To configure the certificates use the following guide :ref:`Securing API <securing_api>`.
+
 .. _api_log_in:
 
 Logging into the Wazuh API
