@@ -11,7 +11,7 @@ The Wazuh API allows the Wazuh agent registration by running a single request fr
 
 .. warning::
 
-  Terminal history will keep the generated agent key when using the ``manage_agents`` utility. Consider disabling it beforehand, cleaning it afterwards or using another registration method.
+  Terminal history will keep the generated agent key when using the ``manage_agents`` utility. Consider disabling it beforehand, cleaning it afterward, or using another registration method.
 
 Choose the tab corresponding to the Wazuh agent host operating system:
 

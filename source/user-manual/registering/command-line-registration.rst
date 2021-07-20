@@ -14,7 +14,7 @@ This method consists on registering the Wazuh agent on the Wazuh manager using `
 
 .. warning::
 
-  Terminal history will keep the generated agent key when using the ``manage_agents`` utility. Consider disabling it beforehand, cleaning it afterwards or using another registration method.
+  Terminal history will keep the generated agent key when using the ``manage_agents`` utility. Consider disabling it beforehand, cleaning it afterward, or using another registration method.
 
 The Wazuh agent's key extraction from the Wazuh manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
