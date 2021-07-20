@@ -159,7 +159,7 @@ Installing and configuring the Wazuh forwarder
 
     .. include:: ../../../_templates/installations/elastic/common/configure_filebeat.rst
 
-#. Replace ``wazuh-node-name`` with your Wazuh server node name, the same used in ``instances.yml`` to create the certificates, and move the certificates to their corresponding location. By default, a copy of ``certs.tar``, created during the Wazuh indexer installation, should be located in the root home folder (``~/``). 
+#. Replace ``wazuh-node-name`` with your Wazuh server node name, the same used in ``instances.yml`` to create the certificates, and move the certificates to their corresponding location. We assume that you placed a copy of ``certs.tar``, created during the Wazuh indexer installation, in the root home folder (``~/``).
 
     .. include:: ../../../_templates/installations/elastic/common/copy_certificates_filebeat_wazuh_cluster.rst
 
