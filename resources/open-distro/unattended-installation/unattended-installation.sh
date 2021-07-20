@@ -259,13 +259,14 @@ readConfig() {
     i=0
     while [ "${counter}" -le "${FILEBEATLIMIB}" ]
     do
-        if  [ "${CONFIG[counter]}" !=  "${FILEBEATINSTANCES}" ] && [ "${CONFIG[counter]}" !=  "${KIBANAINSTANCES}" ] && [ "${CONFIG[counter]}" !=  "${KIBANAHEAD}" ] && [ -n "${CONFIG[counter]}" ] && [ "${CONFIG[counter]}" !=  "  name:" ] && [ "${CONFIG[counter]}" !=  "  ip:" ]; then
+        if  [ "${CONFIG[counter]}" !=  "${FILEBEATINSTANCES}" ] && [ "${CONFIG[counter]}" !=  "${KIBANAINSTANCES}" ] && [ "${CONFIG[counter]}" !=  "${KIBANAHEAD}" ] && [ -n "${CONFIG[counter]}" ] && [ "${CONFIG[counter]}" !=  "  name:" ] && [ "${CONFIG[counter]}" !=  "  ip:" ] && [ "${CONFIG[counter]}" != "  master: true" ]; then
             FILEBEATNODES[i]+="$(echo "${CONFIG[counter]}" | tr -d '\011\012\013\014\015\040')"
             ((i++))
-        elif [ "${CONFIG[counter]}" == "master: true" ]; then
+        elif [ "${CONFIG[counter]}" == "  master: true" ]; then
             ismaster="1"
             masterpos="${i}"
-        fi  
+            echo "POS ${masterpos}"
+        fi    
 
     ((counter++))
     done
@@ -577,7 +578,7 @@ installFilebeat() {
 
                 # Configure the Wazuh cluster
                 if [ -n "${ismaster}" ]; then
-                    masterIP="${ENODESIP[masterpos-1]}"
+                    masterIP="${FILEBEATNODES[masterpos-1]}"
                     if [ -z "$clusterkey" ]; then
                         echo "Generating the Wazuh cluster key..."
                         clusterkey="$(openssl rand -hex 16)"
@@ -592,7 +593,7 @@ installFilebeat() {
                     fi
                 else
                     # Configure worker node
-                    masterIP="${ENODESIP[masterpos-1]}"
+                    masterIP="${FILEBEATNODES[masterpos-1]}"
                     conf="$(awk '{sub("    <node_name>node01</node_name>", "    <node_name>'${wname}'</node_name>")}1' /var/ossec/etc/ossec.conf)"
                     echo "${conf}" > /var/ossec/etc/ossec.conf  
                     conf="$(awk '{sub("    <key></key>", "    <key>'${clusterkey}'</key>")}1' /var/ossec/etc/ossec.conf)"
