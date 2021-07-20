@@ -1,13 +1,13 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. meta:: :description: Learn how to install Elastic Stack for using Wazuh on Debian
+.. meta:: :description: Learn how to install the Wazuh interface. As a flexible and intuitive web interface for mining and visualizing the events and archives. 
 
 .. _wazuh_interface_step_by_step:
 
 Installing Wazuh interface in step-by-step mode
 ===============================================
 
-Wazuh interface is a flexible and intuitive web interface, based on Kibana, for mining and visualizing the events and archives. 
+The Wazuh interface is a flexible and intuitive web interface, based on Kibana, for mining and visualizing the events and archives. 
 
 .. note:: Root user privileges are required to run the commands described below.
 
