@@ -15,7 +15,7 @@ $(function() {
                                                  "class": "collapsed"                                       
                                             });
 
-            setAccordionAttributes(outputBody, {"id": "outputAccordion" + i } )
+            setAccordionAttributes(outputBody, {"id": "outputAccordion" + i } );
             outputBody.classList.add("collapse");                                        
         }
     }
