@@ -26,8 +26,8 @@ The installation process is divided in three stages.
 
 .. note:: Root user privileges are required to run the commands described below.
 
-Install the Wazuh manager
--------------------------
+1. Install the Wazuh manager
+----------------------------
 
 The Wazuh manager collects and analyzes data from the deployed Wazuh agents. 
 
@@ -102,8 +102,8 @@ Installing the Wazuh manager
 
 .. _wazuh_server_multi_node_filebeat:
 
-Install the Wazuh forwarder
----------------------------
+2. Install the Wazuh forwarder
+------------------------------
 
 The Wazuh forwarder, based on Filebeat-OSS, securely forwards alerts and archived events to the Wazuh indexer.  
 
@@ -200,8 +200,8 @@ Your Wazuh server is now successfully installed and the Wazuh manager is configu
   
 - If you want a Wazuh server multi-node cluster,  install the Wazuh server on every node and carry on with configuring the Wazuh cluster.
 
-Configure the Wazuh cluster
----------------------------
+3. Configure the Wazuh cluster
+------------------------------
 
 To configure the Wazuh cluster as a multi-node cluster, the Wazuh server needs to be installed on every node. After completing this action, you need to choose and configure one server as a Wazuh master node, and configure the rest as workers. 
 
