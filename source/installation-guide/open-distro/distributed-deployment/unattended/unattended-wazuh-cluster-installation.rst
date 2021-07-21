@@ -19,7 +19,7 @@ Download the installation script:
 
 .. code-block:: console
 
-    # curl -so ~/wazuh-server-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/|WAZUH_LATEST_MINOR|/resources/open-distro/unattended-installation/distributed/wazuh-server-installation.sh 
+    # curl -so ~/wazuh-server-installation.sh https://packages.wazuh.com/resources/4.1/open-distro/unattended-installation/distributed/wazuh-server-installation.sh 
     
 Run the following command to install the Wazuh manager. Replace ``<node_name>`` with the name of the Wazuh server. The name of the node must be the same used in ``config.yml`` for the certificate creation, e.g. ``filebeat``. 
 

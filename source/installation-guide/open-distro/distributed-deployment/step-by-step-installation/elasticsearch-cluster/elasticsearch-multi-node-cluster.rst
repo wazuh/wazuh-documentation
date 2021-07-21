@@ -1,6 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. meta:: :description: Learn how to install Elasticsearch on a multi-node cluster with Wazuh. This deployment type of Wazuh is convenient for large working environments.
+.. meta::
+  :description: Learn how to install Elasticsearch on a multi-node cluster with Wazuh. This deployment type provides high availability and scalability of the product. 
 
 .. _elasticsearch_multi_node_cluster:
 
@@ -65,7 +66,7 @@ Install Open Distro for Elasticsearch:
 Elasticsearch configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To configure Elastisearch successfully, follow these steps:
+To configure Elasticsearch successfully, follow these steps:
 
 .. include:: ../../../../../_templates/installations/elastic/common/elastic-multi-node/configure_elasticsearch_initial.rst
 
@@ -138,7 +139,7 @@ Install Open Distro for Elasticsearch:
 Elasticsearch configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To configure Elastisearch successfully, follow these steps:
+To configure Elasticsearch successfully, follow these steps:
 
 .. include:: ../../../../../_templates/installations/elastic/common/elastic-multi-node/configure_elasticsearch_subsequent.rst
 

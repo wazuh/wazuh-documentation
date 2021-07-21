@@ -1,5 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
-
+.. meta::
+  :description: Learn more about client configuration, connection to the manager, and its configuring options in this section of the Wazuh user manual. 
+  
 .. _reference_ossec_client:
 
 client

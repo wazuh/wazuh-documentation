@@ -1,5 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
-
+.. meta::
+  :description: Wazuh supports more than 3000 rules that accomplish a variety of technologies. Check them out here. 
+  
 .. _ruleset_getting_started:
 
 Getting started

@@ -22,8 +22,6 @@ In this section you will find:
 - Some practical examples.
 
 
-If you find a problem, an error, or you want to ask related questions, please do not hesitate to contact us through our `mailing list <https://groups.google.com/d/forum/wazuh>`_.
-
 .. toctree::
     :maxdepth: 2
 
