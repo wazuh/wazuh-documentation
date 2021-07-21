@@ -21,7 +21,7 @@ Installing Wazuh
 
    .. code-block:: console
 
-     # curl -so ~/unattended-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/|WAZUH_LATEST_MINOR|/resources/open-distro/unattended-installation/unattended-installation.sh && sudo bash ~/unattended-installation.sh
+     # curl -so ~/unattended-installation.sh https://packages.wazuh.com/resources/4.2/unattended-installation/unattended-installation.sh && sudo bash ~/unattended-installation.sh
 
 
    After executing the script, the output prompts all the users' passwords and a message confirms that the installation was successful.
