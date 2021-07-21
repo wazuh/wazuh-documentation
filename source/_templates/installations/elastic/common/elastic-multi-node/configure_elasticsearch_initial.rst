@@ -6,7 +6,7 @@
 
       # curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/elasticsearch/7.x/elasticsearch_cluster_initial_node.yml
 
-#. Edit the configuration file ``/etc/elasticsearch/elasticsearch.yml``. The pre-configured template includes 3 nodes by default; add or remove lines according to the number of nodes in your cluster.
+#. Edit the configuration file ``/etc/elasticsearch/elasticsearch.yml``. The preconfigured template includes 3 nodes by default, but you can add or remove lines according to the number of nodes in your cluster.
 
     .. code-block:: yaml
 
@@ -25,13 +25,13 @@
   
     The ``cluster.initial_master_nodes`` and the ``discovery.seed_hosts`` are lists of all the master-eligible nodes in the cluster. The parameter ``node.master: false`` must be included in every Elasticsearch node that will not be configured as master. 
   
-    Replace the following values:
+    Values to be replaced:
   
-    - ``<elasticsearch_ip>``: The host's IP. For example, ``10.0.0.2``. 
-    - ``<node_name>``: The node name. For example, ``node-1``. 
-    - ``<elastic_cluster>``: Elasticsearch cluster name. For example, ``elastic-cluster-production``.
-    - ``<elasticsearch_ip_nodeX>``: Elasticsearch cluster master-eligible nodes IP. For example, ``10.0.0.3``.
-    - ``opendistro_security.nodes_dn``: Specify each node certificate. Make sure to use the same names to create the certificates. 
+    - ``<elasticsearch_ip>``: the host's IPM; for example, ``10.0.0.2``. 
+    - ``<node_name>``: the node name; for example, ``node-1``. 
+    - ``<elastic_cluster>``: Elasticsearch cluster name; for example, ``elastic-cluster-production``.
+    - ``<elasticsearch_ip_nodeX>``: Elasticsearch cluster master-eligible nodes IP; for example, ``10.0.0.3``.
+    - ``opendistro_security.nodes_dn``: value used to specify each node certificate. Make sure to use the same names to create the certificates. 
   
     .. code-block:: yaml
         :emphasize-lines: 5
