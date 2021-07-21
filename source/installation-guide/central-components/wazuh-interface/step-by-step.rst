@@ -4,7 +4,7 @@
 
 .. _wazuh_interface_step_by_step:
 
-Installing Wazuh interface in step-by-step mode
+Installing the Wazuh interface in step-by-step mode
 ===============================================
 
 The Wazuh interface is a flexible and intuitive web interface, based on Kibana, for mining and visualizing the events and archives. 
