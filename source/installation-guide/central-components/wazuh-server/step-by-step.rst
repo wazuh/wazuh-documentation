@@ -5,8 +5,8 @@
 .. _wazuh_server_step_by_step:
 
 
-Installing Wazuh server in step-by-step mode
-============================================
+Installing the Wazuh server in step-by-step mode
+================================================
 
 The Wazuh server is in charge of analyzing the data received from the agents and triggering alerts when threats or anomalies are detected. This central component includes the Wazuh manager and the Wazuh forwarder.
 
@@ -243,4 +243,4 @@ If you want to uninstall the Wazuh server, see the :ref:`uninstalling section <u
 Next steps
 ----------
 
-The next step consists of :ref:`installing the Wazuh interface <wazuh_interface_installation>` for mining, analyzing, and visualizing data.
+The Wazuh server installation is complete and you can now proceed with installing the Wazuh interface. To perform this action, see the :ref:`Wazuh interface <wazuh_interface_installation>` section.
