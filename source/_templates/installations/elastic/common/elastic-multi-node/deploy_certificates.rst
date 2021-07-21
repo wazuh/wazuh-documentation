@@ -1,6 +1,6 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-#. Replace ``elasticsearch-node-name`` with your Elasticsearch node name, the same used in ``instances.yml`` to create the certificates, and move the certificates to their corresponding location.  The ``certs.tar`` file should be placed in ~/ (root home user folder).
+#. Replace ``elasticsearch-node-name`` with your Elasticsearch node name, the same used in ``instances.yml`` to create the certificates, and move the certificates to their corresponding location. We assume that you placed a copy of ``certs.tar`` in the root home folder (``~/``).
 
     .. code-block:: console
 
@@ -15,7 +15,7 @@
       # mv /etc/elasticsearch/certs/$node_name.pem /etc/elasticsearch/certs/elasticsearch.pem
       # mv /etc/elasticsearch/certs/$node_name-key.pem /etc/elasticsearch/certs/elasticsearch-key.pem
 
-#. If the Wazuh interface will be installed in this node, keep the certificates file. Otherwise, remove it to increase security  ``rm -f certs.tar``.
+#. If you want to later install the Wazuh interface on this node, keep the certificates file. Otherwise, remove it to increase security  ``rm -f certs.tar``.
 
 
 .. End of include file
