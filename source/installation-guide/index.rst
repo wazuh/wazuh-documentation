@@ -3,13 +3,13 @@
 .. _installation_guide:
 
 .. meta::
-  :description: Wazuh is a free, open source and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response, and compliance.
+  :description: Wazuh is a free, open source, and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response, and regulatory compliance.
 
 
 Installation guide
 ==================
 
-Wazuh is a free, open source and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response, and compliance. To learn more about each Wazuh component and its capabilities, check the :ref:`Components <components>` section. 
+Wazuh is a free, open source, and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response, and regulatory compliance. To learn more about each Wazuh component and its capabilities, check the :ref:`Components <components>` section. 
 
 Wazuh installation
 ------------------
@@ -17,16 +17,16 @@ Wazuh installation
 Install Wazuh by following the installation workflow that best suits your needs. 
 
 
-- :ref:`Quickstart <quickstart>`: Install the Wazuh server, the Wazuh indexer and the Wazuh interface on the same host by using the unattended installation script. Install and configure Wazuh central components in just a few minutes. 
+- :ref:`Quickstart <quickstart>`: Install the Wazuh server, the Wazuh indexer, and the Wazuh interface on the same host by using the unattended installation script. With Quickstart, you install and configure the Wazuh central components in just a few minutes. 
 
   You may also download our ready-to-use :ref:`OVA <virtual_machine>`.
 
-- :ref:`Central components <central_components>`: Install the Wazuh server, the Wazuh indexer and the Wazuh interface one by one. All these components can be installed on the same host or on dedicated servers. 
+- :ref:`Central components <central_components>`: Install the Wazuh server, the Wazuh indexer, and the Wazuh interface one by one. All these components can be installed on the same host or on dedicated servers. 
 
   You can install each component manually by following detailed step-by-step instructions or in an unattended mode by using a script. The Wazuh server and the Wazuh indexer can each be installed as a single-node or multi-node cluster. 
   
   
-The Wazuh central components can be installed on a single host in what is known as an all-in-one deployment, or on several hosts forming single or multi-node clusters in what is known as a distributed deployment. A distributed deployment provides high availability and scalability of the product, and it is convenient for large working environments.
+The Wazuh central components can be installed on a single host in what is known as an all-in-one deployment, or on several hosts forming single or multi-node clusters, known as distributed deployment. A distributed deployment provides high availability and scalability of the product, and it is convenient for large working environments.
 
 
 .. raw:: html
@@ -68,7 +68,7 @@ The Wazuh central components can be installed on a single host in what is known 
 
 Alternatively, Wazuh can also be installed with commercial options like Elastic Stack basic license or Splunk. To learn more about these options and other installation alternatives, see the :ref:`More installation alternatives <more_installation_alternatives>` section.
 
-.. note:: Wazuh also offers the `Wazuh Cloud <https://wazuh.com/cloud/>`_, where all components are hosted on our PCI-DSS and SOC 2 certified SaaS solution and maintained by our team. With the Wazuh cloud, no dedicated hardware is required and everything is ready to use. This service offers a highly flexible infrastructure to match your enterprise needs.
+.. note:: Wazuh also offers the `Wazuh Cloud <https://wazuh.com/cloud/>`_, where all components are hosted on our PCI-DSS and SOC 2 Type 2 certified SaaS solution, which is maintained by our team. With the Wazuh cloud, no dedicated hardware is required and everything is ready to use. This service offers a highly flexible infrastructure to match your enterprise needs.
 
 
 Wazuh agent installation
