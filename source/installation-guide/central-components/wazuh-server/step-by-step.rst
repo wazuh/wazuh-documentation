@@ -243,4 +243,4 @@ If you want to uninstall the Wazuh server, see the :ref:`uninstalling section <u
 Next steps
 ----------
 
-The Wazuh server installation is complete and you can now proceed with installing the Wazuh interface. To perform this action, see the :ref:`Wazuh interface <wazuh_interface_installation>` section.
+The Wazuh server installation is now complete and you can proceed with installing the Wazuh interface. To perform this action, see the :ref:`Wazuh interface <wazuh_interface_installation>` section.
