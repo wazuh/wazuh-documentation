@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Visit the installation guide of the Wazuh agent for Linux in this section of our documentation.
+  :description: Learn how to deploy the Wazuh agent on Linux with deployment variables that facilitate the task of installing, registering, and configuring the agent. 
 
 .. _wazuh_agent_package_linux:
 

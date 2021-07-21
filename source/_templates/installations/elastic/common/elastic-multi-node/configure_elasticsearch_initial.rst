@@ -4,7 +4,7 @@
 
     .. code-block:: console
 
-      # curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/elasticsearch/7.x/elasticsearch_cluster_initial_node.yml
+      # curl -so /etc/elasticsearch/elasticsearch.yml https://packages.wazuh.com/resources/4.1/open-distro/elasticsearch/7.x/elasticsearch_cluster_initial_node.yml
 
 #. Edit the file ``/etc/elasticsearch/elasticsearch.yml``. The pre-configured template includes 3 nodes by default; you can add or remove lines according to the number of nodes in your cluster.
 
@@ -30,7 +30,7 @@ Values to be replaced in the file:
 - ``<elasticsearch_ip>``: the host's IP. For example, ``10.0.0.2``. 
 - ``<elastic_cluster>``: Elasticsearch cluster name. For example, ``elastic-cluster-production``.
 - ``<elasticsearch_ip_nodeX>`` Elasticsearch cluster master-eligible nodes IP. For example, ``10.0.0.3``.
-- The node certificates for each node must be specified under the ``opendistro_security.nodes_dn`` section.
+- The node certificates for each Elasticsearch node must be specified under the ``opendistro_security.nodes_dn`` section. Make sure to use the same names to create the nodes certificates. 
 
     .. code-block:: yaml
         :emphasize-lines: 5

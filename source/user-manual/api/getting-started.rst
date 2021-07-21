@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Getting started with the Wazuh API? Visit this guide to learn more about it and see some case uses.
+  :description: This guide provides the basic information needed to get started with the Wazuh API, including some practical use cases. 
   
 .. _api_getting_started:
 
@@ -26,6 +26,10 @@ The Wazuh API will be installed along the Wazuh manager by default. To control o
 .. code-block:: console
 
     # service wazuh-manager start/status/stop/restart
+
+.. note::
+    The -k parameter applied to API requests is used to avoid the server connection verification by using server certificates. If these are valid, this parameter can be removed.
+    To configure the certificates use the following guide :ref:`Securing API <securing_api>`.
 
 .. _api_log_in:
 

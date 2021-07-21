@@ -1,5 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
-
+.. meta::
+  :description: Learn more about how to set up the Wazuh Kibana plugin and how to assign each user their respective roles after the Wazuh installation process.
+  
 .. _connect_kibana_app:
 
 Setting up the Wazuh Kibana plugin

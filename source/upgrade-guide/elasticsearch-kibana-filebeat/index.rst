@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Looking for how to Upgrade Elasticsearch, Filebeat, and Kibana? Visit this section of the Wazuh documentation.
+  :description: Learn more about how to upgrade Elasticsearch, Filebeat, and Kibana, depending on the distribution in this section of the Wazuh documentation.
   
 .. _upgrade_elasticsearch_filebeat_kibana:
 

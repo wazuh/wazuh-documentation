@@ -47,7 +47,7 @@ By default, syscheck scans selected directories, whose list depends on the :ref:
 Configuring scheduled scans
 ---------------------------
 
-For the schedluled scans, syscheck has an option to configure the :ref:`frequency <reference_ossec_syscheck_frequency>` of the system scans. In this example, syscheck is configured to run every 10 hours:
+For the scheduled scans, syscheck has an option to configure the :ref:`frequency <reference_ossec_syscheck_frequency>` of the system scans. In this example, syscheck is configured to run every 10 hours:
 
 .. code-block:: xml
 
