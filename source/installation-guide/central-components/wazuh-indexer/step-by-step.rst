@@ -29,6 +29,9 @@ The installation process is divided in three stages.
 
 1. Initial node installation and configuration
 -----------------------------------------------
+.. raw:: html
+
+    <div class="accordion-section open">
 
 Install and configure the initial node. During this stage the SSL certificates to encrypt communications between the different Wazuh components are generated, these certificates are later deployed to other Wazuh instances. 
 
@@ -114,6 +117,9 @@ You now have installed and configured the initial Wazuh indexer node, if you wan
 
 2. Subsequent nodes configuration
 ---------------------------------
+.. raw:: html
+
+    <div class="accordion-section">
 
 Install and configure subsequent nodes of your multi-node cluster. 
 
@@ -195,6 +201,9 @@ You now have install a subsequent node of your Wazuh indexer multi-node cluster.
 
 3. Cluster initialization
 -------------------------
+.. raw:: html
+
+    <div class="accordion-section">
 
 The final stage of the process for installing a Wazuh indexer multi-node cluster consists in running the security admin script. 
 
@@ -213,7 +222,7 @@ The final stage of the process for installing a Wazuh indexer multi-node cluster
     An example response should look as follows:
 
     .. code-block:: none
-        :class: output
+        :class: output accordion-output
 
         {
           "name" : "node-1",

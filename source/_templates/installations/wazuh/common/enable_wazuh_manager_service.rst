@@ -15,16 +15,16 @@
 
   .. group-tab:: SysV Init
 
-    Choose one option according to the operating system used:
+    Choose one option according to your operating system:
 
-    a) RPM based operating system:
+    a) RPM based operating system.
 
       .. code-block:: console
 
         # chkconfig --add wazuh-manager
         # service wazuh-manager start
 
-    b) Debian based operating system:
+    b) Debian based operating system.
 
       .. code-block:: console
 

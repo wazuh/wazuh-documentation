@@ -2,34 +2,33 @@
 
 .. _quickstart:
 
+
+.. meta::
+  :description: Install and configure Wazuh, the open source security platform, in just a few minutes using the unattended installation script. 
+
+
 Quickstart
 ==========
 
-You can install Wazuh on a Linux single host by using a script that automatically detects whether the operating system uses ``rpm`` or ``deb`` packages.
-The script performs a health check to verify that the available system resources meet the minimal requirements. 
+Install Wazuh on a single host by using the unattended installation script. The minimum requirements for this type of deployment are 4 GB of RAM and 2 CPU cores, and the recommended are 16 GB of RAM and 8 CPU cores. A 64-bit :ref:`Linux operating system <supported_operating_systems>` is required. The ``curl`` package is used to download the script. 
 
-The minimum requirements for this type of deployment are 4 GB of RAM and 2 CPU cores, and the recommended are 16 GB of RAM and 8 CPU cores. A 64-bit operating system is required. 
-
-The script installs some packages, including ``unzip`` and ``libcap``, required by the Wazuh indexer. 
+The unattended installation script installs and configures the Wazuh server, the Wazuh indexer and the Wazuh interface. 
 
 Installing Wazuh
 ----------------
 
-.. note:: Root user privileges are required to run all the commands. The ``curl`` package is used to download the script. 
-
-
-#. Run the following command:
+#. Download and run the Wazuh unattended installation script by running the following command: 
 
    .. code-block:: console
 
-     # curl -so ~/unattended-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/|WAZUH_LATEST_MINOR|/resources/open-distro/unattended-installation/unattended-installation.sh && bash ~/unattended-installation.sh
+     # curl -so ~/unattended-installation.sh https://packages.wazuh.com/resources/4.2/unattended-installation/unattended-installation.sh && sudo bash ~/unattended-installation.sh
 
-   The script performs a health check to ensure that the host has enough resources to guarantee proper performance. To skip this step, add the ``-i`` or ``--ignore-healthcheck`` option when running the script.
 
    After executing the script, the output prompts all the users' passwords and a message confirms that the installation was successful.
    
    .. code-block:: none
      :class: output
+     :emphasize-lines: 1,26
 
       The password for wazuh is vhDpq7YcwA08BLTmcdeYeJmXPU_VD31f
 
@@ -56,8 +55,9 @@ Installing Wazuh
       .
       Installation finished
       
-      You can access the web interface https://<kibana_ip>. The credentials are wazuh:vhDpq7YcwA08BLTmcdeYeJmXPU_VD31f
-     
+      You can access the web interface https://<server_ip>. The credentials are wazuh:vhDpq7YcwA08BLTmcdeYeJmXPU_VD31f
+
+   You now have installed and configured Wazuh. Access the web interface and start securing your systems with Wazuh.       
 
 #. Access the Wazuh web interface: 
 
@@ -67,15 +67,11 @@ Installing Wazuh
       user: wazuh
       password: <wazuh_user_password>
 
-On the first access to the Wazuh interface, the browser displays a warning message indicating that the certificate was not issued by a trusted authority. It is possible to add an exception in the browser's advanced options or, for increased security, the previously generated ``root-ca.pem`` file can be imported into the certificate manager of the browser. Alternatively, it is possible to configure a certificate from a trusted authority.
 
-Customizing the installation
-----------------------------
+  On the first access to the Wazuh interface, the browser displays a warning message indicating that the certificate was not issued by a trusted authority. It is possible to add an exception in the browser's advanced options or, for increased security, the previously generated ``root-ca.pem`` file can be imported into the certificate manager of the browser. Alternatively, it is possible to configure a certificate from a trusted authority.
 
-The Wazuh interface configuration found at the ``/etc/kibana/kibana.yml`` file has the ``server.host`` parameter set to ``0.0.0.0``. This means that Wazuh interface can be accessed from the outside and accepts all the available IPs of the host. This value can be changed for a specific IP if needed.
+If you want uninstall the components of the all-in-one installation, run the unattended installation script and use the option ``-r / --uninstall``.  
 
-To uninstall the components of the all-in-one installation, you can use the option ``-r / --uninstall``.
- 
 Next steps
 ----------
 

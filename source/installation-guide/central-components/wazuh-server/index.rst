@@ -16,6 +16,8 @@ Requirements
 
 Check the supported operating systems and the recommended hardware requirements for the Wazuh server installation. Make sure that your system environment meets all requirements and that you have root user privileges.
 
+.. _supported_operating_systems:
+
 Supported operating systems
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
