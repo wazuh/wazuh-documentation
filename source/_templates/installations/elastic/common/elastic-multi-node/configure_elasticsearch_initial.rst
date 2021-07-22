@@ -27,7 +27,7 @@
   
     Values to be replaced:
   
-    - ``<elasticsearch_ip>``: the host's IPM; for example, ``10.0.0.2``. 
+    - ``<elasticsearch_ip>``: the host's IP; for example, ``10.0.0.2``. 
     - ``<node_name>``: the node name; for example, ``node-1``. 
     - ``<elastic_cluster>``: Elasticsearch cluster name; for example, ``elastic-cluster-production``.
     - ``<elasticsearch_ip_nodeX>``: Elasticsearch cluster master-eligible nodes IP; for example, ``10.0.0.3``.
