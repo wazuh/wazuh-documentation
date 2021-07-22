@@ -369,10 +369,12 @@ def minification(actual_path):
         ['css/style','css'],
         ['css/wazuh-icons','css'],
         ['css/custom-redoc','css'],
+        ['css/accordions','css'],
         ['js/version-selector','js'],
         ['js/redirects','js'],
         ['js/style','js'],
-        ['js/custom-redoc','js']
+        ['js/custom-redoc','js'],
+        ['js/accordion', 'js']
     ]
     
     if is_latest_release == True:
