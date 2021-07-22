@@ -7,7 +7,7 @@
       # curl -so ~/wazuh-cert-tool.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/tools/certificate-utility/wazuh-cert-tool.sh
       # curl -so ~/instances.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/tools/certificate-utility/instances.yml
 
-#. Edit ``~/instances.yml`` and replace the values ``<node-name>`` and ``node-IP``  with the corresponding names and IP addresses. Add as many nodes fields as needed.
+#. Edit ``~/instances.yml`` and replace the values ``<node-name>`` and ``node-IP``  with the corresponding names and IP addresses. Add as many node fields as needed.
 
    .. code-block:: yaml
 
@@ -69,8 +69,8 @@
      # tar -cvf certs.tar *
      # mv ~/certs/certs.tar ~/
 
-#. Copy ``certs.tar`` to all the servers of the distributed deployment including Wazuh indexer, Wazuh server and Wazuh interface nodes. This can be done by using, for example, ``scp``. 
+#. Copy ``certs.tar`` to all the servers of the distributed deployment including Wazuh indexer, Wazuh server, and Wazuh interface nodes. This can be done by using, for example, ``scp``. 
 
-#. If other Wazuh components will be installed on this node, keep the certificates file. Otherwise, if the file is already copied to all the instances of the distributed deployment, remove it to increase security  ``rm -f certs.tar``.
+#. If you want to later install other Wazuh components on this node, keep the certificates file. Otherwise, if the file is already copied to all the instances of the distributed deployment, remove it to increase security  ``rm -f certs.tar``.
 
 .. End of include file

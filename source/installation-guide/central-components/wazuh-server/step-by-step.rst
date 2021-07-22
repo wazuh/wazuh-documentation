@@ -5,8 +5,8 @@
 .. _wazuh_server_step_by_step:
 
 
-Installing Wazuh server in step-by-step mode
-============================================
+Installing the Wazuh server in step-by-step mode
+================================================
 
 The Wazuh server is in charge of analyzing the data received from the agents and triggering alerts when threats or anomalies are detected. This central component includes the Wazuh manager and the Wazuh forwarder.
 
@@ -28,6 +28,9 @@ The installation process is divided in three stages.
 
 1. Install the Wazuh manager
 ----------------------------
+.. raw:: html
+
+  <div class="accordion-section open">
 
 The Wazuh manager collects and analyzes data from the deployed Wazuh agents. 
 
@@ -104,6 +107,9 @@ Installing the Wazuh manager
 
 2. Install the Wazuh forwarder
 ------------------------------
+.. raw:: html
+
+  <div class="accordion-section open">
 
 The Wazuh forwarder, based on Filebeat-OSS, securely forwards alerts and archived events to the Wazuh indexer.  
 
@@ -173,10 +179,10 @@ Installing and configuring the Wazuh forwarder
 
       # filebeat test output
 
-   An example response looks as follows:
+   Expand the output to see an example response.
    
    .. code-block:: none
-                :class: output
+                :class: output accordion-output
    
                  elasticsearch: https://127.0.0.1:9200...
                    parse url... OK
@@ -202,11 +208,13 @@ Your Wazuh server is now successfully installed and the Wazuh manager is configu
 
 3. Configure the Wazuh cluster
 ------------------------------
+.. raw:: html
+
+  <div class="accordion-section">
 
 To configure the Wazuh cluster as a multi-node cluster, the Wazuh server needs to be installed on every node. After completing this action, you need to choose and configure one server as a Wazuh master node, and configure the rest as workers. 
 
 The *Wazuh server master node* configuration needs to be applied only to the server chosen for this role. Once the master node is fully configured, apply the *Wazuh server worker nodes* configuration to the rest of the servers.
-
 
 
 Wazuh server master node
@@ -230,9 +238,9 @@ Wazuh server worker nodes
 #. .. include:: ../../../_templates/installations/wazuh/common/check_wazuh_cluster.rst
 
 
-To uninstall the Wazuh server, see the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_open_distro>`.
+If you want to uninstall the Wazuh server, see the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_open_distro>`.
 
 Next steps
 ----------
 
-The next step consists of :ref:`installing the Wazuh interface <wazuh_interface_installation>` for mining, analyzing, and visualizing data.
+The Wazuh server installation is now complete and you can proceed with installing the Wazuh interface. To perform this action, see the :ref:`Wazuh interface <wazuh_interface_installation>` section.

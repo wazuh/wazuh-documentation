@@ -6,12 +6,12 @@
 .. _wazuh_indexer_step_by_step:
 
 
-Installing Wazuh indexer in step-by-step mode
-=============================================
+Installing the Wazuh indexer in step-by-step mode
+=================================================
 
 Install and configure the Wazuh indexer, a highly scalable full-text search engine based on Open Distro for Elasticsearch. It offers advanced security, alerting, index management, deep performance analysis, and several other features.
 
-.. note:: Root user privileges are necessary to run all the commands.
+.. note:: Root user privileges are required to run the commands described below.
 
 Wazuh indexer cluster installation and configuration
 ----------------------------------------------------
@@ -33,10 +33,10 @@ The installation process is divided in three stages.
 
     <div class="accordion-section open">
 
-Install and configure the initial node. During this stage the SSL certificates to encrypt communications between the different Wazuh components are generated, these certificates are later deployed to other Wazuh instances. 
+Install and configure the initial node. During this stage, the SSL certificates to encrypt communications between the Wazuh components are generated. These certificates are later deployed to other Wazuh instances. 
 
 Adding the Wazuh repository
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
   .. tabs::
@@ -64,28 +64,26 @@ Adding the Wazuh repository
 
 
 Installing Elasticsearch
-~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 Install Open Distro for Elasticsearch.
 
   .. include:: ../../../_templates/installations/elastic/common/install_elastic.rst
 
 Configuring Elasticsearch
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Follow these steps to configure Elasticsearch. 
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
   .. include:: ../../../_templates/installations/elastic/common/elastic-multi-node/configure_elasticsearch_initial.rst
 
 Adding Elasticsearch roles and users
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Add new users and roles in Kibana.
 
   .. include:: ../../../_templates/installations/elastic/common/add_roles_and_users.rst
 
 Creating and deploying certificates
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Create and deploy SSL certificates to encrypt communications between the Wazuh central components. 
 
@@ -113,7 +111,10 @@ Create and deploy SSL certificates to encrypt communications between the Wazuh c
   Restart Elasticsearch after removing the plugin. 
   
  
-You now have installed and configured the initial Wazuh indexer node, if you want a single-node cluster, proceed directly to :ref:`initialize the cluster <initialize_cluster>`. If you want to install a multi-node cluster, follow the instructions to install and configure subsequent nodes. 
+You now have installed and configured the initial Wazuh indexer node. 
+
+- if you want a single-node cluster, proceed directly with :ref:`initializing the cluster <initialize_cluster>`. 
+- If you want to install a multi-node cluster, follow the instructions to install and configure subsequent nodes. 
 
 2. Subsequent nodes configuration
 ---------------------------------
@@ -125,7 +126,7 @@ Install and configure subsequent nodes of your multi-node cluster.
 
 
 Adding the Wazuh repository
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
   .. tabs::
@@ -153,7 +154,7 @@ Adding the Wazuh repository
 
 
 Installing Elasticsearch
-~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 Install Open Distro for Elasticsearch:
 
@@ -161,27 +162,25 @@ Install Open Distro for Elasticsearch:
 
 
 Configuring Elasticsearch
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-To configure Elasticsearch successfully, follow these steps:
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. include:: ../../../_templates/installations/elastic/common/elastic-multi-node/configure_elasticsearch_subsequent.rst
 
 
 Deploying certificates
-~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^
 
 Deploy the certificates to encrypt communications between the Wazuh central components.
 
-#. Remove the demo certificates:
+#. Remove the demo certificates.
 
     .. include:: ../../../_templates/installations/elastic/common/remove_demo_certs.rst
 
-#. Configure Elasticsearch certificates:
+#. Configure Elasticsearch certificates.
 
     .. include:: ../../../_templates/installations/elastic/common/elastic-multi-node/deploy_certificates.rst
 
-#. Enable and start the Elasticsearch service:
+#. Enable and start the Elasticsearch service.
 
     .. include:: ../../../_templates/installations/elastic/common/enable_elasticsearch.rst
 
@@ -195,7 +194,7 @@ Deploy the certificates to encrypt communications between the Wazuh central comp
 
   Restart Elasticsearch after removing the plugin.
 
-You now have install a subsequent node of your Wazuh indexer multi-node cluster. Repeat this process on every other subsequent node that you want to add to your cluster and proceed to initialize the cluster. 
+You now have install a subsequent node of your Wazuh indexer multi-node cluster. Repeat this process on every other subsequent node that you want to add to your cluster and proceed with initializing the cluster. 
 
 .. _initialize_cluster:
 
@@ -203,23 +202,23 @@ You now have install a subsequent node of your Wazuh indexer multi-node cluster.
 -------------------------
 .. raw:: html
 
-    <div class="accordion-section">
+  <div class="accordion-section open">
 
 The final stage of the process for installing a Wazuh indexer multi-node cluster consists in running the security admin script. 
 
-#. Run the Elasticsearch ``securityadmin`` script on the initial node to load the new certificates information and start the cluster. Replace ``<elasticsearch_IP>`` with the Elasticsearch installation IP and run the following command:
+#. Run the Elasticsearch ``securityadmin`` script on the initial node to load the new certificates information and start the cluster. Replace ``<elasticsearch_IP>`` with the Elasticsearch installation IP and run the following command.
 
     .. code-block:: console
 
       # export JAVA_HOME=/usr/share/elasticsearch/jdk/ && /usr/share/elasticsearch/plugins/opendistro_security/tools/securityadmin.sh -cd /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/ -icl -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin-key.pem -h <elasticsearch_IP>
 
-#. Replace ``<elasticsearch_IP>`` and run the following command to confirm that the installation is successful: 
+#. Replace ``<elasticsearch_IP>`` and run the command to confirm that the installation is successful. 
 
     .. code-block:: console
 
       # curl -XGET https://<elasticsearch_ip>:9200 -u admin:admin -k
 
-    An example response should look as follows:
+    Expand the output to see an example response.
 
     .. code-block:: none
         :class: output accordion-output
@@ -243,10 +242,10 @@ The final stage of the process for installing a Wazuh indexer multi-node cluster
         }
   
 
+If you want to uninstall the Wazuh indexer, see the :ref:`Uninstalling <uninstall_elasticsearch>` section.
 
 Next steps
 ----------
 
-The next step is the installation of the :ref:`Wazuh server <wazuh_server_step_by_step>`.
+The Wazuh indexer is now sucessfully installed and you can proceed with installing the Wazuh server. To perform this action, see the :ref:`Wazuh server <wazuh_server_step_by_step>` section.
 
-If you want to uninstall the Wazuh indexer, visit the :ref:`Uninstalling section <uninstall_elasticsearch>`.
