@@ -3,7 +3,7 @@
 .. _wazuh_indexer_installation:
 
 .. meta::
-  :description: Wazuh is a free, open source and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response and compliance.
+  :description: Wazuh is a free, open source, and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response and compliance.
 
 
 Wazuh indexer
@@ -19,7 +19,7 @@ Check the supported operating systems and the recommended hardware requirements 
 Supported operating systems
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Wazuh indexer can be installed in the following Linux operating systems:
+The Wazuh indexer can be installed on the following Linux operating systems:
 
 - Amazon Linux 1 and 2
 
@@ -41,40 +41,40 @@ The Wazuh indexer can be installed in the following Linux operating systems:
 Hardware recommendations
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
+The Wazuh indexer can be installed as a single-node or as a multi-node cluster. For the installation, a 64-bit operating system is necessary. 
 
-The Wazuh indexer can be installed as a single-node or as a multi-node cluster. Hardware recommendations for each node are:
+- Hardware recommendations for each node
                           
-+-------------------------+-------------------------+-------------------------------+
-|                         |  Minimum                |   Recommended                 |
-+-------------------------+----------+--------------+--------------+----------------+
-| Component               |  RAM (GB)|  CPU (cores) |  RAM (GB)    |   CPU (cores)  |
-+=========================+==========+==============+==============+================+
-| Wazuh indexer           |     4    |     2        |     16       |       8        |
-+-------------------------+----------+--------------+--------------+----------------+
+  +-------------------------+-------------------------+-------------------------------+
+  |                         |  Minimum                |   Recommended                 |
+  +-------------------------+----------+--------------+--------------+----------------+
+  | Component               |  RAM (GB)|  CPU (cores) |  RAM (GB)    |   CPU (cores)  |
+  +=========================+==========+==============+==============+================+
+  | Wazuh indexer           |     4    |     2        |     16       |       8        |
+  +-------------------------+----------+--------------+--------------+----------------+
 
 
-A 64-bit operating system is necessary.
+- Disk space requirements
 
-Regarding disk space requirements, the amount of data depends on the generated alerts per second (APS). Estimated disk space per agent needed to store 90 days of alerts on an Wazuh indexer server, depending on the type of monitored endpoints:
+  The amount of data depends on the generated alerts per second (APS). This table details the estimated disk space needed per agent to store 90 days of alerts on an Wazuh indexer server, depending on the type of monitored endpoints.
 
+  +-------------------------------------------------+-----+---------------------------+
+  | Monitored endpoints                             | APS | Storage in Wazuh indexer  |
+  |                                                 |     |  (GB/90 days)             |
+  +=================================================+=====+===========================+
+  | Servers                                         | 0.25|           3.7             |
+  +-------------------------------------------------+-----+---------------------------+
+  | Workstations                                    | 0.1 |           1.5             |
+  +-------------------------------------------------+-----+---------------------------+
+  | Network devices                                 | 0.5 |           7.4             |
+  +-------------------------------------------------+-----+---------------------------+
 
-+-------------------------------------------------+-----+---------------------------+
-| Monitored endpoints                             | APS | Storage in Wazuh indexer  |
-|                                                 |     |  (GB/90 days)             |
-+=================================================+=====+===========================+
-| Servers                                         | 0.25|           3.7             |
-+-------------------------------------------------+-----+---------------------------+
-| Workstations                                    | 0.1 |           1.5             |
-+-------------------------------------------------+-----+---------------------------+
-| Network devices                                 | 0.5 |           7.4             |
-+-------------------------------------------------+-----+---------------------------+
-
-For example, for an environment with 80 workstations, 10 servers, and 10 network devices, the storage needed for 90 days of alerts is 230 GB on the Wazuh indexer server. 
+  For example, for an environment with 80 workstations, 10 servers, and 10 network devices, the storage needed on the Wazuh indexer server for 90 days of alerts is 230 GB. 
 
 Wazuh indexer installation
 --------------------------
 
-Choose between two installation methods:
+Choose an installation method to install this Wazuh central component.
 
 - :ref:`Unattended installation <wazuh_indexer_unattended>`: Install the Wazuh indexer by using a script that automates the installation process.  
 
