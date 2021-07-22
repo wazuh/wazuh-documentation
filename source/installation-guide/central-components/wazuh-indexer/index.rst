@@ -55,7 +55,7 @@ The Wazuh indexer can be installed as a single-node or as a multi-node cluster. 
 
 A 64-bit operating system is necessary.
 
-Regarding disk space requirements, the amount of data depends on the alerts per second (APS) generated. Estimated disk space per agent needed to store 90 days of alerts on an Wazuh indexer server, depending on the type of monitored endpoints:
+Regarding disk space requirements, the amount of data depends on the generated alerts per second (APS). Estimated disk space per agent needed to store 90 days of alerts on an Wazuh indexer server, depending on the type of monitored endpoints:
 
 
 +-------------------------------------------------+-----+---------------------------+
