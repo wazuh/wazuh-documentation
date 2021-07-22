@@ -7,7 +7,7 @@
 Packages list
 =============
 
-This download page contains packages required for the Wazuh installation with the Wazuh version |WAZUH_LATEST|  :
+This download page contains packages required for the Wazuh installation with the Wazuh version |WAZUH_LATEST|:
 
 - `Wazuh manager and Wazuh agent`_
 
