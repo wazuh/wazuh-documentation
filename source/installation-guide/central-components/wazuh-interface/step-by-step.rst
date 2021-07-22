@@ -116,10 +116,11 @@ Installing and configuring the Wazuh interface
 
     .. include:: ../../../_templates/installations/elastic/common/enable_kibana.rst
 
-    - **Recommended action** - Only for distributed deployments
+    
+    - **Only for distributed deployments**  
   
-      Edit the file ``/usr/share/kibana/data/wazuh/config/wazuh.yml`` and replace the ``url`` with the Wazuh server IP address or hostname. This configuration prevents the Wazuh Kibana plugin from showing a message indicating that it cannot communicate with the Wazuh API.
-        
+      Edit the file ``/usr/share/kibana/data/wazuh/config/wazuh.yml`` and replace the ``url`` with the Wazuh server IP address or hostname.
+      
         .. code-block:: yaml
         
           hosts:
@@ -129,7 +130,6 @@ Installing and configuring the Wazuh interface
               username: wazuh-wui
               password: wazuh-wui
               run_as: false
-    
 
 
 #. Access the Wazuh web interface.
@@ -142,7 +142,9 @@ Installing and configuring the Wazuh interface
 
     When you access the Wazuh interface for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or, for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser.  Alternatively, a certificate from a trusted authority can be configured. 
 
-  
+    
+
+
 If you want to uninstall Kibana, see the :ref:`uninstalling <uninstall_kibana>` section. 
 
 Next steps
