@@ -10,8 +10,8 @@
 
   .. code-block:: console
 
-    # curl -so ~/wazuh-cert-tool.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/tools/certificate-utility/wazuh-cert-tool.sh
-    # curl -so ~/instances.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/tools/certificate-utility/instances.yml
+    # curl -so ~/wazuh-cert-tool.sh https://packages.wazuh.com/resources/4.2/open-distro/tools/certificate-utility/wazuh-cert-tool.sh
+    # curl -so ~/instances.yml https://packages.wazuh.com/resources/4.2/open-distro/tools/certificate-utility/instances.yml
 
 Replace the values ``<node-name>`` and ``<node-ip>``  with the corresponding names and IP addresses. There can be added as many nodes fields as needed:
 

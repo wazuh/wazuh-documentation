@@ -18,7 +18,7 @@ Installing the Wazuh server
 
    .. code-block:: console
    
-       # curl -so ~/wazuh-server-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/|WAZUH_LATEST_MINOR|/resources/open-distro/unattended-installation/distributed/wazuh-server-installation.sh 
+       # curl -so ~/wazuh-server-installation.sh https://packages.wazuh.com/resources/|WAZUH_LATEST_MINOR|/open-distro/unattended-installation/distributed/wazuh-server-installation.sh 
     
 #. Replace ``<node_name>`` with the name of the Wazuh server and run the following command to install the Wazuh server. 
 

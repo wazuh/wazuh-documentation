@@ -2,6 +2,6 @@
 
 .. code-block:: console
 
-  # curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/kibana/7.x/kibana.yml
+  # curl -so /etc/kibana/kibana.yml https://packages.wazuh.com/resources/4.2/open-distro/kibana/7.x/kibana.yml
 
 .. End of configure_kibana.rst

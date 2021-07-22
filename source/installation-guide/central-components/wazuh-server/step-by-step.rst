@@ -148,7 +148,7 @@ Installing and configuring the Wazuh forwarder
 
     .. code-block:: console
 
-      # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/|WAZUH_LATEST_MINOR|/resources/open-distro/filebeat/7.x/filebeat_elastic_cluster.yml
+      # curl -so /etc/filebeat/filebeat.yml https://packages.wazuh.com/resources/|WAZUH_LATEST_MINOR|/open-distro/filebeat/7.x/filebeat_elastic_cluster.yml
 
 #. Download the alerts template for the Wazuh indexer.
 

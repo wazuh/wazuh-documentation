@@ -17,7 +17,7 @@ For more information on system resources, see the :ref:`Requirements <installati
 
     .. code-block:: console
 
-      # curl -so ~/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/|WAZUH_LATEST_MINOR|/resources/open-distro/unattended-installation/distributed/elastic-stack-installation.sh
+      # curl -so ~/elastic-stack-installation.sh https://packages.wazuh.com/resources/|WAZUH_LATEST_MINOR|/open-distro/unattended-installation/distributed/elastic-stack-installation.sh
 
 #. Replace ``node_name`` by the instance name and run the script. 
    
