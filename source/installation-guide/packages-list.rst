@@ -20,11 +20,10 @@ This download page contains packages required for the Wazuh installation with th
 - `MSU`_
 - `Wazuh Kibana plugin and Wazuh Splunk app`_
 - `Virtual machine`_
-- `Open Distro for Elasticsearch`_
+- `Wazuh indexer`_
+- `Wazuh interface`_
+- `Wazuh forwarder`_
 
-   - `Elasticsearch`_
-   - `Kibana`_
-   - `Filebeat`_
 
 Wazuh manager and Wazuh agent
 -----------------------------
@@ -251,24 +250,20 @@ Virtual machine
 |   CentOS 7   |    64bits    |      OVA     |  |WAZUH_LATEST_OVA|  | `wazuh-|WAZUH_LATEST_OVA|_|OPEN_DISTRO_LATEST|.ova <https://packages.wazuh.com/|CURRENT_MAJOR|/vm/wazuh-|WAZUH_LATEST_OVA|_|OPEN_DISTRO_LATEST|.ova>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST_OVA|/wazuh-|WAZUH_LATEST_OVA|_|OPEN_DISTRO_LATEST|.ova.sha512>`__)             |
 +--------------+--------------+--------------+---------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
+Wazuh indexer
+-------------
 
-Open Distro for Elasticsearch
-------------------------------
-
-Elasticsearch
-^^^^^^^^^^^^^
-
-+----------------------------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Product                          | Package type | Package                                                                                                                                                                                                                                                                                                      |
-+==================================+==============+==============================================================================================================================================================================================================================================================================================================+
-|                                  |     RPM      | `opendistroforelasticsearch-|OPEN_DISTRO_LATEST|.rpm <https://packages.wazuh.com/4.x/yum/opendistroforelasticsearch-|OPEN_DISTRO_LATEST|-linux-x64.rpm>`_ (`sha512 <https://packages.wazuh.com/4.x/checksums/opendistro/|OPEN_DISTRO_LATEST|/opendistroforelasticsearch-|OPEN_DISTRO_LATEST|-linux-x64.rpm.sha512>`__)                                               |
-+ Open Distro for Elasticsearch    +--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|                                  |     DEB      | `opendistroforelasticsearch-|OPEN_DISTRO_LATEST|.deb <https://packages.wazuh.com/4.x/apt/pool/main/o/opendistroforelasticsearch/opendistroforelasticsearch_|OPEN_DISTRO_LATEST|-1_amd64.deb>`_ (`sha512 <https://packages.wazuh.com/4.x/checksums/opendistro/|OPEN_DISTRO_LATEST|/opendistroforelasticsearch_|OPEN_DISTRO_LATEST|-1_amd64.deb.sha512>`__)            |
-+----------------------------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Package type | Package                                                                                                                                                                                                                                                                                                      |
++==============+==============================================================================================================================================================================================================================================================================================================+
+|     RPM      | `opendistroforelasticsearch-|OPEN_DISTRO_LATEST|.rpm <https://packages.wazuh.com/4.x/yum/opendistroforelasticsearch-|OPEN_DISTRO_LATEST|-linux-x64.rpm>`_ (`sha512 <https://packages.wazuh.com/4.x/checksums/opendistro/|OPEN_DISTRO_LATEST|/opendistroforelasticsearch-|OPEN_DISTRO_LATEST|-linux-x64.rpm.sha512>`__)                                               |
++--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|     DEB      | `opendistroforelasticsearch-|OPEN_DISTRO_LATEST|.deb <https://packages.wazuh.com/4.x/apt/pool/main/o/opendistroforelasticsearch/opendistroforelasticsearch_|OPEN_DISTRO_LATEST|-1_amd64.deb>`_ (`sha512 <https://packages.wazuh.com/4.x/checksums/opendistro/|OPEN_DISTRO_LATEST|/opendistroforelasticsearch_|OPEN_DISTRO_LATEST|-1_amd64.deb.sha512>`__)            |
++--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
-Kibana
-^^^^^^
+Wazuh interface
+---------------
 
 +--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Package type | Package                                                                                                                                                                                                                                                                                                                                                     |
@@ -278,8 +273,8 @@ Kibana
 |     DEB      | `opendistroforelasticsearch-kibana-|OPEN_DISTRO_LATEST|.deb <https://packages.wazuh.com/4.x/apt/pool/main/o/opendistroforelasticsearch-kibana/opendistroforelasticsearch-kibana_|OPEN_DISTRO_LATEST|_amd64.deb>`_ (`sha512 <https://packages.wazuh.com/4.x/checksums/opendistro/|OPEN_DISTRO_LATEST|/opendistroforelasticsearch-kibana_|OPEN_DISTRO_LATEST|_amd64.deb.sha512>`__)                                   |
 +--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-Filebeat
-^^^^^^^^
+Wazuh forwarder
+---------------
 
 +--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Package type | Package                                                                                                                                                                                                                                         |
