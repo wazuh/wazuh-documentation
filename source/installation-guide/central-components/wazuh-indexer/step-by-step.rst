@@ -114,7 +114,7 @@ Create and deploy SSL certificates to encrypt communications between the Wazuh c
 You now have installed and configured the initial Wazuh indexer node. 
 
 - if you want a single-node cluster, proceed directly with :ref:`initializing the cluster <initialize_cluster>`. 
-- If you want to install a multi-node cluster, follow the instructions to install and configure subsequent nodes. 
+- If you want to install a multi-node cluster, expand the instructions below to install and configure subsequent nodes. 
 
 2. Subsequent nodes configuration
 ---------------------------------
