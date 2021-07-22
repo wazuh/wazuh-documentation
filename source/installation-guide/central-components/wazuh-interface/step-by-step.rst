@@ -1,23 +1,23 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. meta:: :description: Learn how to install Elastic Stack for using Wazuh on Debian
+.. meta:: :description: Learn how to install the Wazuh interface. As a flexible and intuitive web interface for mining and visualizing the events and archives. 
 
 .. _wazuh_interface_step_by_step:
 
-Installing Wazuh interface in step-by-step mode
+Installing the Wazuh interface in step-by-step mode
 ===============================================
 
-Wazuh interface is a flexible and intuitive web interface, based on Kibana, for mining and visualizing the events and archives. 
+The Wazuh interface is a flexible and intuitive web interface, based on Kibana, for mining and visualizing the events and archives. 
 
-.. note:: Root user privileges are required to run all the commands described below.
+.. note:: Root user privileges are required to run the commands described below.
 
 Install the Wazuh interface
 ---------------------------
 
 Adding the Wazuh repository
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Add the Wazuh repository if you are installing the Wazuh interface on a dedicated server. In case you are installing on the same host as the Wazuh server or Wazuh indexer you may skip this step. 
+Add the Wazuh repository if you are installing the Wazuh interface on a dedicated server. Skip this step to install it on the same host as the Wazuh server or Wazuh indexer. 
 
   .. tabs::
   
@@ -43,7 +43,7 @@ Add the Wazuh repository if you are installing the Wazuh interface on a dedicate
   
 
 Installing and configuring the Wazuh interface
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 #. Install the Kibana package.
 
@@ -74,15 +74,15 @@ Installing and configuring the Wazuh interface
 
     .. include:: ../../../_templates/installations/elastic/common/configure_kibana.rst
 
-#. Edit the ``/etc/kibana/kibana.yml`` file and replace ``server.host`` and ``elasticsearch.host`` if necessary. 
+#. Edit the ``/etc/kibana/kibana.yml`` file to replace ``server.host`` and ``elasticsearch.host`` if necessary. 
 
     .. code-block:: yaml
     
         server.host: 0.0.0.0
         elasticsearch.hosts: "https://127.0.0.1:9200"
        
-    - ``server.host: 0.0.0.0``: Kibana is available from the outside and will accept all the available IPs of the host.
-    - ``elasticsearch.hosts: "https://127.0.0.1:9200"``: Elasticsearch host is set to localhost by default, replace this value if necessary. In case of having more than one Elasticsearch node, Kibana can be configured to connect to multiple Elasticsearch nodes in the same cluster. The IPs of the nodes can be separated with commas. Eg. ``["https://10.0.0.2:9200", "https://10.0.0.3:9200","https://10.0.0.4:9200"]``   
+    - ``server.host: 0.0.0.0``: Kibana is available from the outside and accepts all the available IPs of the host.
+    - ``elasticsearch.hosts: "https://127.0.0.1:9200"``: Elasticsearch host is set to localhost by default, replace this value if necessary. If you have more than one Elasticsearch node, Kibana can be configured to connect to multiple Elasticsearch nodes in the same cluster. To do this, you need to separate the IPs of the nodes with commas as in ``["https://10.0.0.2:9200", "https://10.0.0.3:9200","https://10.0.0.4:9200"]``.
 
 #. Create the ``/usr/share/kibana/data`` directory.
 
@@ -92,7 +92,7 @@ Installing and configuring the Wazuh interface
       # chown -R kibana:kibana /usr/share/kibana/data
 
 
-#. Install the Wazuh Kibana plugin. The installation of the plugin must be done from the Kibana home directory. 
+#. Install the Wazuh Kibana plugin from the Kibana home directory. 
 
     .. code-block:: console
 
@@ -100,12 +100,12 @@ Installing and configuring the Wazuh interface
         # sudo -u kibana bin/kibana-plugin install https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|-1.zip
         
 
-#. Replace ``kibana-node-name`` with your Kibana node name, the same used in ``instances.yml`` to create the certificates, and move the certificates to their corresponding location. This guide assumes that a copy of ``certs.tar``, created during the Wazuh indexer installation,  has been placed in the root home folder (``~/``). 
+#. Replace ``kibana-node-name`` with your Kibana node name, the same used in ``instances.yml`` to create the certificates, and move the certificates to their corresponding location. We assume that you placed a copy of ``certs.tar``, created during the Wazuh indexer installation, in the root home folder (``~/``).
 
     .. include:: ../../../_templates/installations/elastic/common/generate_new_kibana_certificates.rst
 
 
-#. Link Kibana socket to privileged port 443.
+#. Link the Kibana socket to privileged port 443.
 
     .. code-block:: console
 
@@ -116,34 +116,37 @@ Installing and configuring the Wazuh interface
 
     .. include:: ../../../_templates/installations/elastic/common/enable_kibana.rst
 
+    - **Recommended action** - Only for distributed deployments
+  
+      Edit the file ``/usr/share/kibana/data/wazuh/config/wazuh.yml`` and replace the ``url`` with the Wazuh server IP address or hostname. This configuration prevents the Wazuh Kibana plugin from showing a message indicating that it cannot communicate with the Wazuh API.
+        
+        .. code-block:: yaml
+        
+          hosts:
+            - default:
+              url: https://localhost
+              port: 55000
+              username: wazuh-wui
+              password: wazuh-wui
+              run_as: false
+    
+
 
 #. Access the Wazuh web interface.
 
-  .. code-block:: none
+    .. code-block:: none
 
-      URL: https://<kibana_ip>
-      user: wazuh
-      password: <wazuh_user_password>  
+        URL: https://<kibana_ip>
+        user: wazuh
+        password: <wazuh_user_password>  
 
+    When you access the Wazuh interface for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or, for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser.  Alternatively, a certificate from a trusted authority can be configured. 
 
-Upon the first access to the Wazuh interface, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or, for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser.  Alternatively, a certificate from a trusted authority can be configured. 
-
-With the first access attempt on a distributed deployment, the Wazuh Kibana plugin may prompt a message that indicates that it cannot communicate with the Wazuh API. To solve this issue edit the file ``/usr/share/kibana/data/wazuh/config/wazuh.yml`` and replace the ``url`` by the Wazuh server's IP address or hostname: 
   
-  .. code-block:: yaml
-  
-    hosts:
-      - default:
-         url: https://localhost
-         port: 55000
-         username: wazuh-wui
-         password: wazuh-wui
-         run_as: false
-  
- 
+If you want to uninstall Kibana, see the :ref:`uninstalling <uninstall_kibana>` section. 
+
 Next steps
 ----------
 
-Once the Wazuh environment is ready, a Wazuh agent can be installed on every endpoint to be monitored. The Wazuh agent installation guide is available for most operating systems and can be found :ref:`here<installation_agents>`.
+The Wazuh environment is now ready and you can proceed with installing the Wazuh agent on the endpoints to be monitored. To perform this action, see the :ref:`Wazuh agent <installation_agents>` section.
 
-If you want to uninstall Kibana, visit the :ref:`uninstalling section <uninstall_kibana>`.
