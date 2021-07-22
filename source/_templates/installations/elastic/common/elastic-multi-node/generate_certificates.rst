@@ -7,36 +7,36 @@
       # curl -so ~/wazuh-cert-tool.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/tools/certificate-utility/wazuh-cert-tool.sh
       # curl -so ~/instances.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/tools/certificate-utility/instances.yml
 
-#. Edit ``~/instances.yml`` and replace the values ``<node-name>`` and ``node-IP``  with the corresponding names and IP addresses. Add as many node fields as needed.
+#. Edit ``~/instances.yml`` and replace the node names and IP values with the corresponding names and IP addresses. Add as many node fields as needed.
 
    .. code-block:: yaml
 
      # Elasticsearch nodes
      elasticsearch-nodes:
-       - name: <node-name>
+       - name: <elasticsearch-node-name-1>
          ip:
-           - node-IP
-       - name: <node-name>
+           - <elasticsearch-node-1-IP>
+       - name: <elasticsearch-node-name-2>
          ip:
-           - node-IP
-       - name: <node-name>
+           - <elasticsearch-node-2-IP>
+       - name: <elasticsearch-node-name-3>
          ip:
-           - node-IP             
+           - <elasticsearch-node-3-IP>            
 
      # Wazuh server nodes
      wazuh-servers:
-       - name: <node-name>
+       - name: <wazuh-node-name-1>
          ip:
-           - node-IP  
-       - name: <node-name>
+           - <wazuh-node-1-IP>  
+       - name: <wazuh-node-name-2>
          ip:
-           - node-IP     
+           - <wazuh-node-2-IP>     
      
      # Kibana node
      kibana:
-       - name: <node-name>
+       - name: <kibana-node-name>
          ip:
-           - node-IP      
+           - <kibana-node-IP>      
   
    To learn more about how to create and configure the certificates, see the :ref:`Certificates deployment <user_manual_certificates>` section.
 
