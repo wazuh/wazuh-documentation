@@ -21,11 +21,11 @@ Wazuh servers IPs:
   # name:
   #   - <node_name>
   # ip:
-  #   - <wazuh_master_server_IP_2>
+  #   - <wazuh_worker_server_IP>
 
 # Kibana configuration
 Kibana IP:
   name:
-    - node-name
+    - <node-name>
   ip:
     - <kibana_ip>
