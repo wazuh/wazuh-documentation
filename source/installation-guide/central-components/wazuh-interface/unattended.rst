@@ -22,7 +22,7 @@ You can install and configure the Wazuh interface using an automated script.
 
 #. Replace ``node_name`` by the instance name and run the script. 
    
-   ``node_name`` must be the same used in ``config.yml`` for the certificate creation, e.g. ``kibana``.
+   The ``node_name`` must be the same used in ``config.yml`` for the certificate creation, e.g. ``kibana``.
 
     .. code-block:: console
 
@@ -34,11 +34,11 @@ You can install and configure the Wazuh interface using an automated script.
     +-------------------------------+----------------------------------------------------------------------------------------------------------------+
     | Options                       | Purpose                                                                                                        |
     +===============================+================================================================================================================+
-    | -k / --install-kibana         | It installs Kibana. Must be used with option -kname <node-name>.                                               |
+    | -k / --install-kibana         | It installs Kibana. Must be used with option ``-kname <node-name>``.                                           |
     +-------------------------------+----------------------------------------------------------------------------------------------------------------+
     | -kn / --kibana-node-name      | It indicates the name of the Kibana instance.                                                                  |
     +-------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -o / --overwrite              | It Overwrites the existing installation.                                                                       |
+    | -o / --overwrite              | It overwrites the existing installation.                                                                       |
     +-------------------------------+----------------------------------------------------------------------------------------------------------------+
     | -r / --uninstall              | It removes the installation.                                                                                   |
     +-------------------------------+----------------------------------------------------------------------------------------------------------------+
@@ -46,18 +46,17 @@ You can install and configure the Wazuh interface using an automated script.
     +-------------------------------+----------------------------------------------------------------------------------------------------------------+
     | -i / --ignore-health-check    | It ignores the health check.                                                                                   |
     +-------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -h / --help                   | It shows help.                                                                                                 |
+    | -h / --help                   | It shows *help*.                                                                                               |
     +-------------------------------+----------------------------------------------------------------------------------------------------------------+
     
 
     
 #. Access the Wazuh web interface with your credentials. 
 
-    - URL: *https://<server_ip>*
-    - **Username**: *wazuh*
-    - **Password**: *<wazuh_password>*
+     - URL: *https://<server_ip>*
+     - **Username**: *wazuh*
+     - **Password**: *<wazuh_password>*
   
-
 
     When you access the Wazuh interface for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or, for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser. Alternatively, a certificate from a trusted authority can be configured. 
 
