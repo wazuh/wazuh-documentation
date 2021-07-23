@@ -2,22 +2,23 @@
 
 .. _wazuh_interface_unattended_installation:
 
-Installing Wazuh interface in unattended mode
-=============================================
+Installing the Wazuh interface in unattended mode
+=================================================
 
-You can install the Wazuh interface using an automated script. This script performs a health check to verify that the system has enough resources to achieve optimal performance.
+The Wazuh interface is a flexible and intuitive web interface, based on Kibana, for mining and visualizing the events and archives.
 
-For more information on system resources, see the :ref:`Requirements <installation_requirements>` section.
+Install Wazuh interface
+-----------------------
 
-
-.. note:: Root user privileges are required to run all the commands. To download the script, the package ``curl`` is used.
+You can install and configure the Wazuh interface using an automated script. 
 
 
 #. Download the script. Skip this step if you are installing the Wazuh interface on the same server as the Wazuh indexer. 
 
     .. code-block:: console
 
-      # curl -so ~/elastic-stack-installation.sh https://packages.wazuh.com/resources/|WAZUH_LATEST_MINOR|/open-distro/unattended-installation/distributed/elastic-stack-installation.sh
+      # curl -so ./unattended-installation.sh https://packages.wazuh.com/resources/|WAZUH_LATEST_MINOR|/unattended-installation/unattended-installation.sh
+
 
 #. Replace ``node_name`` by the instance name and run the script. 
    
@@ -25,40 +26,47 @@ For more information on system resources, see the :ref:`Requirements <installati
 
     .. code-block:: console
 
-      # bash ~/elastic-stack-installation.sh -k -n <node_name>
+      # sudo bash ~/elastic-stack-installation.sh -k -kn <node_name>
 
     
-    Options available for you to use when running the script:
+    Options available when running the script:
 
     +-------------------------------+----------------------------------------------------------------------------------------------------------------+
     | Options                       | Purpose                                                                                                        |
     +===============================+================================================================================================================+
-    | -k / --install-kibana         | It installs Open Distro for Kibana. It cannot be used together with option ``-e``.                             |
+    | -k / --install-kibana         | It installs Kibana. Must be used with option -kname <node-name>.                                               |
     +-------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -n / --node-name              | It indicates the name of the instance.                                                                         |
+    | -kn / --kibana-node-name      | It indicates the name of the Kibana instance.                                                                  |
     +-------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -d / --debug                  | It shows the complete installation output.                                                                     |
+    | -o / --overwrite              | It Overwrites the existing installation.                                                                       |
     +-------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -i / --ignore-healthcheck     | It ignores the health check.                                                                                   |
+    | -r / --uninstall              | It removes the installation.                                                                                   |
+    +-------------------------------+----------------------------------------------------------------------------------------------------------------+
+    | -v / --verbose                | It shows the complete installation output.                                                                     |
+    +-------------------------------+----------------------------------------------------------------------------------------------------------------+
+    | -i / --ignore-health-check    | It ignores the health check.                                                                                   |
     +-------------------------------+----------------------------------------------------------------------------------------------------------------+
     | -h / --help                   | It shows help.                                                                                                 |
     +-------------------------------+----------------------------------------------------------------------------------------------------------------+
     
+
     
-#. Access the web interface: 
+#. Access the Wazuh web interface with your credentials. 
 
-    .. code-block:: none
-
-      URL: https://<kibana_ip>
-      user: admin
-      password: admin  
+    - URL: *https://<server_ip>*
+    - **Username**: *wazuh*
+    - **Password**: *<wazuh_password>*
   
 
-Upon the first access to the Wazuh interface, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or,  for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser.  Alternatively, a certificate from a trusted authority can be configured. 
 
-.. note:: If the Wazuh interface is accessed before installing the Wazuh server, it indicates that it cannot establish a connection with the Wazuh API. Proceed with the Wazuh server installation to remediate this.
+    When you access the Wazuh interface for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or, for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser. Alternatively, a certificate from a trusted authority can be configured. 
 
-If you need to uninstall Elasticsearch and Kibana, visit the :ref:`Uninstalling <user_manual_uninstall_wazuh_installation_open_distro>` section.
+
+Next steps
+----------
+
+The Wazuh environment is now ready and you can proceed with installing the Wazuh agent on the endpoints to be monitored. To perform this action, see the :ref:`Wazuh agent<installation_agents>` section.
+
 
 
 
