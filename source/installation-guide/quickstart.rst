@@ -12,12 +12,12 @@ Quickstart
 
 Install Wazuh on a single host by using the unattended installation script. The minimum requirements for this type of deployment are 4 GB of RAM and 2 CPU cores, and the recommended are 16 GB of RAM and 8 CPU cores. A 64-bit :ref:`Linux operating system <supported_operating_systems>` is required. The ``curl`` package is used to download the script. 
 
-The unattended installation script installs and configures the Wazuh server, the Wazuh indexer and the Wazuh interface. 
+The unattended installation script installs and configures the Wazuh server, the Wazuh indexer, and the Wazuh interface. To learn more about each Wazuh component and its capabilities, check the :ref:`Components <components>` section. 
 
 Installing Wazuh
 ----------------
 
-#. Download and run the Wazuh unattended installation script by running the following command: 
+#. Download and run the Wazuh unattended installation. 
 
    .. code-block:: console
 
@@ -25,9 +25,11 @@ Installing Wazuh
 
 
    After executing the script, the output prompts all the users' passwords and a message confirms that the installation was successful.
+
+   Expand the output to see an example response.
    
    .. code-block:: none
-     :class: output
+     :class: output accordion-output
      :emphasize-lines: 1,26
 
       The password for wazuh is vhDpq7YcwA08BLTmcdeYeJmXPU_VD31f
@@ -59,20 +61,23 @@ Installing Wazuh
 
    You now have installed and configured Wazuh. Access the web interface and start securing your systems with Wazuh.       
 
-#. Access the Wazuh web interface: 
+#. Access the Wazuh web interface with your credentials. 
 
-  .. code-block:: none
+    - URL: *https://<wazuh_server_ip>*
+    - **Username**: *wazuh*
+    - **Password**: *<wazuh_user_password>*
 
-      URL: https://<wazuh_server_ip>
-      user: wazuh
-      password: <wazuh_user_password>
+      .. thumbnail:: ../images/installation/kibana-log-in.png
+          :alt: Wazuh interface login page
+          :align: center
+          :wrap_image: No
 
 
-  On the first access to the Wazuh interface, the browser displays a warning message indicating that the certificate was not issued by a trusted authority. It is possible to add an exception in the browser's advanced options or, for increased security, the previously generated ``root-ca.pem`` file can be imported into the certificate manager of the browser. Alternatively, it is possible to configure a certificate from a trusted authority.
+    When you access the Wazuh interface for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or, for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser. Alternatively, a certificate from a trusted authority can be configured. 
 
 If you want uninstall the components of the all-in-one installation, run the unattended installation script and use the option ``-r / --uninstall``.  
 
 Next steps
 ----------
 
-Once the Wazuh environment is ready, a Wazuh agent can be installed on every endpoint to be monitored. To learn how to install agents, check the :ref:`Wazuh agent<installation_agents>` section.
+The Wazuh environment is now ready and you can proceed with installing the Wazuh agent on the endpoints to be monitored. To perform this action, see the :ref:`Wazuh agent<installation_agents>` section.
