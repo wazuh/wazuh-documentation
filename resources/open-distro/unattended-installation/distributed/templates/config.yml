@@ -16,7 +16,7 @@ Wazuh servers IPs:
   name:
     - <node_name>
   ip:
-    - <wazuh_master_server_IP_1>
+    - <wazuh_master_server_IP>
   master: true
   # name:
   #   - <node_name>
