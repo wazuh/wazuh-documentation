@@ -195,6 +195,7 @@ checkConfig() {
 
     if [ -f ~/config.yml ]; then
         echo "Configuration file found. Starting the installation..."
+        readConfig
     else
         if [ -f ${CONFIG_ROUTE} ]; then
             echo "Certificates file found. Starting the installation..."
@@ -245,8 +246,10 @@ readConfig() {
             
             if [ "${counter}" -lt "${DSH}" ]; then
                 ELASTICNODES[i]+="$(echo "${CONFIG[counter]}" | tr -d '\011\012\013\014\015\040')"
+                echo "  - name: ${ELASTICNODES[i]}"
             else
                 ENODESIP[i]+="$(echo "${CONFIG[counter]}" | tr -d '\011\012\013\014\015\040')"
+                echo "      - ${ENODESIP[i]}"
             fi
             ((i++))
         fi    
@@ -385,7 +388,7 @@ installElasticsearch() {
         eval "curl -so /etc/elasticsearch/elasticsearch.yml https://packages.wazuh.com/resources/4.1/open-distro/elasticsearch/7.x/elasticsearch_unattended.yml --max-time 300 ${debug}"
 
         if [ -z "${aio}" ]; then
-            conf="$(awk '{sub("node.name: node-1", "node.name: '${ename}':9200")}1' /etc/elasticsearch/elasticsearch.yml)"
+            conf="$(awk '{sub("node.name: node-1", "node.name: '${ename}'")}1' /etc/elasticsearch/elasticsearch.yml)"
             echo "${conf}" > /etc/elasticsearch/elasticsearch.yml
             conf="$( grep -v "cluster.initial_master_nodes:" /etc/elasticsearch/elasticsearch.yml)"
             echo "${conf}" > /etc/elasticsearch/elasticsearch.yml
@@ -405,11 +408,7 @@ installElasticsearch() {
             echo "${conf}" > /etc/elasticsearch/elasticsearch.yml
             conf="$( grep -v "opendistro_security.nodes_dn:" /etc/elasticsearch/elasticsearch.yml)"
             echo "${conf}" > /etc/elasticsearch/elasticsearch.yml            
-            conf="$( grep -v "- CN=node-1,OU=Docu,O=Wazuh,L=California,C=US" /etc/elasticsearch/elasticsearch.yml)"
-            echo "${conf}" > /etc/elasticsearch/elasticsearch.yml
-            conf="$( grep -v "# - CN=node-2,OU=Docu,O=Wazuh,L=California,C=US" /etc/elasticsearch/elasticsearch.yml)"
-            echo "${conf}" > /etc/elasticsearch/elasticsearch.yml
-            conf="$( grep -v "# - CN=node-3,OU=Docu,O=Wazuh,L=California,C=US" /etc/elasticsearch/elasticsearch.yml)"
+            conf="$( grep -v "CN=node" /etc/elasticsearch/elasticsearch.yml)"
             echo "${conf}" > /etc/elasticsearch/elasticsearch.yml
             
             echo "cluster.initial_master_nodes:" >> /etc/elasticsearch/elasticsearch.yml
@@ -425,7 +424,8 @@ installElasticsearch() {
             echo "opendistro_security.nodes_dn:" >> /etc/elasticsearch/elasticsearch.yml
             for i in "${!ELASTICNODES[@]}"; do
                 echo "- CN=${ELASTICNODES[i]},OU=Docu,O=Wazuh,L=California,C=US" >> /etc/elasticsearch/elasticsearch.yml
-            done             
+            done     
+            nano /etc/elasticsearch/elasticsearch.yml        
 
         fi
 
@@ -464,33 +464,32 @@ installElasticsearch() {
             eval "curl -so ~/wazuh-cert-tool.sh https://packages.wazuh.com/resources/4.1/open-distro/tools/certificate-utility/wazuh-cert-tool.sh --max-time 300 ${debug}"
             echo "# Elasticsearch nodes" >> ~/instances.yml
             echo "elasticsearch-nodes:" >> ~/instances.yml
-            i=0
-            while [ ${i} -lt ${#ENODESIP[@]} ]; do
+            
+            for i in "${!ELASTICNODES[@]}"; do
                 echo "  - name: ${ELASTICNODES[i]}" >> ~/instances.yml
                 echo "    ip:" >> ~/instances.yml
                 echo "      - ${ENODESIP[i]}" >> ~/instances.yml
-                ((i++))
             done           
             echo "# Wazuh server nodes" >> ~/instances.yml
             echo "wazuh-servers:" >> ~/instances.yml
             i=0
             while [ ${i} -le ${#FILEBEATNODES[@]} ]; do
-                if [ "${FILEBEATNODES[i]}" == "  master: true" ]; then
-                    ((i++))
-                else
-                    echo "  - name: ${FILEBEATNODES[i]}" >> ~/instances.yml
-                    echo "    ip:" >> ~/instances.yml
-                    echo "  - ${FILEBEATNODES[i+1]}" >> ~/instances.yml
-                    ((i++))
-                    ((i++))
-                fi
+                echo "  - name: ${FILEBEATNODES[i]}" >> ~/instances.yml
+                echo "    ip:" >> ~/instances.yml
+                echo "  - ${WAZUHSERVERIPS[i]}" >> ~/instances.yml
+                ((i++))
             done
 
             echo "# Kibana node"  >> ~/instances.yml
             echo "kibana:"  >> ~/instances.yml
-            echo "- name: ${KIBANANODES[0]}" >> ~/instances.yml
+            rm="-"
+            kibananame="${KIBANANODES[0]}"
+            kibananame="${kibananame//$rm}"
+            kibanaip="${KIBANANODES[1]}"
+            kibanaip="${kibanaip//$rm}"
+            echo "  - name: ${kibananame}" >> ~/instances.yml
             echo "    ip:" >> ~/instances.yml
-            echo "    - ${KIBANANODES[1]}" >> ~/instances.yml
+            echo "    - ${kibanaip}" >> ~/instances.yml
 
         fi
 
@@ -636,7 +635,7 @@ installFilebeat() {
 ## Kibana
 installKibana() {
     
-    logger "Installing Open Distro for Kibana..."
+    logger "Installing Kibana..."
     if [ ${sys_type} == "zypper" ]; then
         eval "zypper -n install opendistroforelasticsearch-kibana=${OD_VER} ${debug}"
     else
