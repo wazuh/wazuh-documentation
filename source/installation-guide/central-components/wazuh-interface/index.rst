@@ -41,7 +41,7 @@ The Wazuh interface can be installed on the following Linux operating systems:
 Hardware requirements
 ^^^^^^^^^^^^^^^^^^^^^
 
-The Wazuh interface can be installed on a dedicated node or along with the Wazuh indexer. For the installation, a 64-bit operating system is necessary. 
+The Wazuh interface can be installed on a dedicated node or along with the Wazuh indexer. A 64-bit operating system is necessary. 
 
 - Hardware recommendations
                           

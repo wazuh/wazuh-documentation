@@ -42,7 +42,7 @@ The Wazuh server can be installed on the following Linux operating systems:
 Hardware requirements
 ^^^^^^^^^^^^^^^^^^^^^
 
-The Wazuh server can be installed as a single-node or as a multi-node cluster. For the installation, a 64-bit operating system is necessary. 
+The Wazuh server can be installed as a single-node or as a multi-node cluster. A 64-bit operating system is necessary. 
 
 - Hardware recommendations
                           
