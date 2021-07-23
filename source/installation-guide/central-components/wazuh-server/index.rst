@@ -70,7 +70,7 @@ The Wazuh server can be installed as a single-node or as a multi-node cluster. F
   | Network devices                                 | 0.5 |    0.2                      |
   +-------------------------------------------------+-----+-----------------------------+
 
-  For example, for an environment with 80 workstations, 10 servers, and 10 network devices, the storage needed on the Wazuh indexer server for 90 days of alerts is 6 GB.
+  For example, for an environment with 80 workstations, 10 servers, and 10 network devices, the storage needed on the Wazuh server for 90 days of alerts is 6 GB.
 
 
 
