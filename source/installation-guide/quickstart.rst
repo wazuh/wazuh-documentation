@@ -10,9 +10,9 @@
 Quickstart
 ==========
 
-Install Wazuh on a single host by using the unattended installation script. The minimum requirements for this type of deployment are 4 GB of RAM and 2 CPU cores, and the recommended are 16 GB of RAM and 8 CPU cores. A 64-bit :ref:`Linux operating system <supported_operating_systems>` is required. The ``curl`` package is used to download the script. 
+Install Wazuh on a single host by using the unattended installation script. The minimum requirements for this type of deployment are 4 GB of RAM and 2 CPU cores, and the recommended are 16 GB of RAM and 8 CPU cores. A 64-bit :ref:`Linux operating system <supported_operating_systems>` is required. 
 
-The unattended installation script installs and configures the Wazuh server, the Wazuh indexer, and the Wazuh interface. To learn more about each Wazuh component and its capabilities, check the :ref:`Components <components>` section. 
+The unattended installation script installs and configures the Wazuh indexer, the Wazuh server, and the Wazuh interface. To learn more about each Wazuh component and its capabilities, check the :ref:`Components <components>` section. 
 
 Installing Wazuh
 ----------------
@@ -21,8 +21,7 @@ Installing Wazuh
 
    .. code-block:: console
 
-     # curl -so ~/unattended-installation.sh https://packages.wazuh.com/resources/4.2/unattended-installation/unattended-installation.sh && sudo bash ~/unattended-installation.sh
-
+     # curl -so ./unattended-installation.sh https://packages.wazuh.com/resources/4.2/unattended-installation/unattended-installation.sh && sudo bash ./unattended-installation.sh
 
    After executing the script, the output prompts all the users' passwords and a message confirms that the installation was successful.
 
@@ -63,9 +62,9 @@ Installing Wazuh
 
 #. Access the Wazuh web interface with your credentials. 
 
-    - URL: *https://<wazuh_server_ip>*
+    - URL: *https://<server_ip>*
     - **Username**: *wazuh*
-    - **Password**: *<wazuh_user_password>*
+    - **Password**: *<wazuh_password>*
 
       .. thumbnail:: ../images/installation/kibana-log-in.png
           :alt: Wazuh interface login page
