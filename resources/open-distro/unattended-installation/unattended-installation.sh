@@ -461,21 +461,17 @@ installElasticsearch() {
             echo "# Elasticsearch nodes" >> ~/instances.yml
             echo "elasticsearch-nodes:" >> ~/instances.yml
 
-            for i in "${!ENODESIP[@]}"; do
-                echo "IP ${ENODESIP[i]}"
-            done
-            j=0
-            echo "index ${j}"
-            echo "IP ${ENODESIP[j]}"
             for i in "${!ELASTICNODES[@]}"; do
                 rm="-"
                 elasticname="${ELASTICNODES[i]}"
-                elasticname="${elasticname//$rm}"                            
+                elasticname="${elasticname:1}"
+                elasticsearchip="${ENODESIP[i]}"
+                elasticsearchip="${elasticsearchip:1}"
                 echo "NOMBRE ${elasticname}"
                 echo "IP ${ENODESIP[i]}"
                 echo "  - name: ${elasticname}" >> ~/instances.yml
                 echo "    ip:" >> ~/instances.yml
-                echo "      - ${ENODESIP[j]}" >> ~/instances.yml
+                echo "      - ${elasticsearchip}" >> ~/instances.yml
             done           
             echo "# Wazuh server nodes" >> ~/instances.yml
             echo "wazuh-servers:" >> ~/instances.yml
@@ -497,9 +493,9 @@ installElasticsearch() {
             echo "kibana:"  >> ~/instances.yml
             rm="-"
             kibananame="${KIBANANODES[0]}"
-            kibananame="${kibananame//$rm}"
             kibanaip="${KIBANANODES[1]}"
-            kibanaip="${kibanaip//$rm}"
+            kibananame="${kibananame:1}"
+            kibanaip="${kibanaip:1}"
             echo "  - name: ${kibananame}" >> ~/instances.yml
             echo "    ip:" >> ~/instances.yml
             echo "    - ${kibanaip}" >> ~/instances.yml
