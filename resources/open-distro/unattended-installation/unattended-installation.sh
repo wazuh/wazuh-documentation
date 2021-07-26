@@ -410,12 +410,16 @@ installElasticsearch() {
             
             echo "cluster.initial_master_nodes:" >> /etc/elasticsearch/elasticsearch.yml
             for i in "${!ELASTICNODES[@]}"; do
-                echo "        - ${ELASTICNODES[i]}" >> /etc/elasticsearch/elasticsearch.yml
+                elasticname="${ELASTICNODES[i]}"
+                elasticname="${elasticname:1}"                
+                echo "        - ${elasticname}" >> /etc/elasticsearch/elasticsearch.yml
             done 
-            if [ ${#ELASTICNODES[@]} -lt "3" ]; then
-                echo "cluster.initial_master_nodes:" >> /etc/elasticsearch/elasticsearch.yml   
+            if [ ${#ELASTICNODES[@]} -gt "1" ]; then
+                echo "discovery.seed_hosts:" >> /etc/elasticsearch/elasticsearch.yml   
                 for i in "${!ENODESIP[@]}"; do
-                    echo "        - ${ENODESIP[i]}" >> /etc/elasticsearch/elasticsearch.yml
+                    elasticip="${ENODESIP[i]}"
+                    elasticip="${elasticip:1}"
+                    echo "        - ${elasticip}" >> /etc/elasticsearch/elasticsearch.yml
                 done                         
             fi 
             echo "opendistro_security.nodes_dn:" >> /etc/elasticsearch/elasticsearch.yml
@@ -465,10 +469,8 @@ installElasticsearch() {
                 rm="-"
                 elasticname="${ELASTICNODES[i]}"
                 elasticname="${elasticname:1}"
-                elasticsearchip="${ENODESIP[i]}"
+                elasticsearchip="${ENODESIP[1]}"
                 elasticsearchip="${elasticsearchip:1}"
-                echo "NOMBRE ${elasticname}"
-                echo "IP ${ENODESIP[i]}"
                 echo "  - name: ${elasticname}" >> ~/instances.yml
                 echo "    ip:" >> ~/instances.yml
                 echo "      - ${elasticsearchip}" >> ~/instances.yml
@@ -513,14 +515,20 @@ installElasticsearch() {
         else
             logger "Certificates created"
         fi     
-        eval "cp ~/certs/elasticsearch* /etc/elasticsearch/certs/ ${debug}"
-        eval "cp ~/certs/root-ca.pem /etc/elasticsearch/certs/ ${debug}"
-        eval "cp ~/certs/admin* /etc/elasticsearch/certs/ ${debug}"
 
         if [ -z "${aio}" ]; then
+            eval "cp ~/certs/${ename}* /etc/elasticsearch/certs/ ${debug}"
+            eval "cp ~/certs/root-ca.pem /etc/elasticsearch/certs/ ${debug}"
+            eval "cp ~/certs/admin* /etc/elasticsearch/certs/ ${debug}"
+            eval "mv /etc/elasticsearch/certs/${ename}-key.pem /etc/elasticsearch/certs/elasticsearch-key.pem ${debug}"
+            eval "mv /etc/elasticsearch/certs/${ename}.pem /etc/elasticsearch/certs/elasticsearch.pem ${debug}"
             eval "cd ~/certs/ ${debug}"
             eval "tar -cvf certs.tar * ${debug}"
             eval "mv ~/certs/certs.tar ~/ ${debug}"
+        else
+            eval "cp ~/certs/elasticsearch* /etc/elasticsearch/certs/ ${debug}"
+            eval "cp ~/certs/root-ca.pem /etc/elasticsearch/certs/ ${debug}"
+            eval "cp ~/certs/admin* /etc/elasticsearch/certs/ ${debug}"
         fi
         
         # Configure JVM options for Elasticsearch
@@ -536,15 +544,29 @@ installElasticsearch() {
         eval "/usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer ${debug}"
         # Start Elasticsearch
         startService "elasticsearch"
-        echo "Initializing Elasticsearch..."
-        until $(curl -XGET https://localhost:9200/ -uadmin:admin -k --max-time 120 --silent --output /dev/null); do
-            echo -ne ${char}
-            sleep 10
-        done    
+        if [ ${#ELASTICNODES[@]} -le "1" ]; then
+            echo "Initializing Elasticsearch..."
+            echo ${#ELASTICNODES[@]}
+            until $(curl -XGET https://localhost:9200/ -uadmin:admin -k --max-time 120 --silent --output /dev/null); do
+                echo -ne ${char}
+                sleep 10
+            done    
 
-        eval "cd /usr/share/elasticsearch/plugins/opendistro_security/tools/ ${debug}"
-        eval "./securityadmin.sh -cd ../securityconfig/ -icl -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin-key.pem ${debug}"
-        echo "Done"
+            eval "cd /usr/share/elasticsearch/plugins/opendistro_security/tools/ ${debug}"
+            eval "./securityadmin.sh -cd ../securityconfig/ -icl -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin-key.pem ${debug}"
+            echo "Done"
+        elif [ -n "${aio}" ]; then
+            echo "Initializing Elasticsearch..."
+            echo ${#ELASTICNODES[@]}
+            until $(curl -XGET https://localhost:9200/ -uadmin:admin -k --max-time 120 --silent --output /dev/null); do
+                echo -ne ${char}
+                sleep 10
+            done    
+
+            eval "cd /usr/share/elasticsearch/plugins/opendistro_security/tools/ ${debug}"
+            eval "./securityadmin.sh -cd ../securityconfig/ -icl -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin-key.pem ${debug}"
+            echo "Done"        
+        fi
         
     fi
 
