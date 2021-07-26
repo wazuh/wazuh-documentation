@@ -470,7 +470,7 @@ installElasticsearch() {
             for i in "${!ELASTICNODES[@]}"; do
                 rm="-"
                 elasticname="${ELASTICNODES[i]}"
-                elasticname="${elasticname//$rm}"            
+                elasticname="${elasticname//$rm}"                            
                 echo "NOMBRE ${elasticname}"
                 echo "IP ${ENODESIP[i]}"
                 echo "  - name: ${elasticname}" >> ~/instances.yml
@@ -481,9 +481,14 @@ installElasticsearch() {
             echo "wazuh-servers:" >> ~/instances.yml
             i=0
             while [ ${i} -lt ${#FILEBEATNODES[@]} ]; do
-                echo "  - name: ${FILEBEATNODES[i]}" >> ~/instances.yml
+                rm="-"
+                filebeatname="${FILEBEATNODES[i]}"
+                filebeatname="${filebeatname//$rm}" 
+                filebeatip="${WAZUHSERVERIPS[i]}"
+                filebeatip="${filebeatip//$rm}"             
+                echo "  - name: ${filebeatname}" >> ~/instances.yml
                 echo "    ip:" >> ~/instances.yml
-                echo "  - ${WAZUHSERVERIPS[i]}" >> ~/instances.yml
+                echo "      - ${filebeatip}" >> ~/instances.yml
                 ((i++))
                 ((i++))
             done
