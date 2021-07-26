@@ -7,7 +7,6 @@ Installing the Wazuh indexer in unattended mode
 
 Install and configure the Wazuh indexer, a highly scalable full-text search engine based on Open Distro for Elasticsearch. It offers advanced security, alerting, index management, deep performance analysis, and several other features.
 
-.. note:: Root user privileges are required to run all the commands. To download the script, the package ``curl`` is used.
 
 Wazuh indexer cluster installation
 ----------------------------------
@@ -21,6 +20,9 @@ The installation process is divided in three stages.
 #. Subsequent nodes installation and configuration for multi-node clusters   
 
 #. Cluster initialization for multi-node clusters
+
+.. note:: Root user privileges are required to run the commands described below.
+
 
 1. Initial node installation and configuration
 -----------------------------------------------
@@ -38,7 +40,7 @@ Install and configure the initial node. During this stage, the SSL certificates 
           # curl -so ~/config.yml https://packages.wazuh.com/resources/4.2/unattended-installation/templates/config.yml
 
     
-#. Edit ``~/config.yml`` and replace the node names and IP values with the corresponding names and IP addresses, include all the Wazuh indexer, Wazuh server, and Wazuh interface nodes. Add as many node fields as needed.
+#. Edit ``~/config.yml`` and replace the node names and IP values with the corresponding names and IP addresses, including all the Wazuh indexer, Wazuh server, and Wazuh interface nodes. Add as many node fields as needed.
 
       .. code-block:: yaml
         :emphasize-lines: 4, 8, 15, 17, 27, 29
@@ -75,7 +77,7 @@ Install and configure the initial node. During this stage, the SSL certificates 
 
 
 
-#. Run the script with the options ``-e``, ``-en <node_name>`` and ``-c`` to install Open distro for Elasticsearch and generate the SSL certificates. The node name must be the same used in ``config.yml`` for the certificate creation, e.g. ``master-node-1``.
+#. Run the script with the options ``-e``, ``-en <node_name>``, and ``-c`` to install Open Distro for Elasticsearch and generate the SSL certificates. The node name must be the same used in ``config.yml`` for the certificate creation; for example, ``master-node-1``.
 
       .. code-block:: console
 
@@ -87,30 +89,30 @@ Install and configure the initial node. During this stage, the SSL certificates 
     +-------------------------------+----------------------------------------------------------------------------------------------------------------+
     | Options                       | Purpose                                                                                                        |
     +===============================+================================================================================================================+
-    | -e / --install-elasticsearch  | It installs Open distro for Elasticsearch. Must be used with option ``-ename <node-name>``.                    |
+    | -e / --install-elasticsearch  | Installs Open Distro for Elasticsearch. Must be used with option ``-ename <node-name>``.                       |
     +-------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -en / --elastic-node-name     | It indicates the name of the Elasticsearch instance.                                                           |
+    | -en / --elastic-node-name     | Indicates the name of the Elasticsearch instance.                                                              |
     +-------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -c / --create-certificates    | It generates the certificates for all the indicated nodes.                                                     |
+    | -c / --create-certificates    | Generates the certificates for all the indicated nodes.                                                        |
     +-------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -o / --overwrite              | It overwrites the existing installation.                                                                       |
+    | -o / --overwrite              | Overwrites the existing installation.                                                                          |
     +-------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -r / --uninstall              | It removes the installation.                                                                                   |
+    | -r / --uninstall              | Removes the installation.                                                                                      |
     +-------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -v / --verbose                | It shows the complete installation output.                                                                     |
+    | -v / --verbose                | Shows the complete installation output.                                                                        |
     +-------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -i / --ignore-health-check    | It ignores the health check.                                                                                   |
+    | -i / --ignore-health-check    | Ignores the health check.                                                                                      |
     +-------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -h / --help                   | It shows *help*.                                                                                               |
+    | -h / --help                   | Shows *help*.                                                                                                  |
     +-------------------------------+----------------------------------------------------------------------------------------------------------------+        
 
-#.  Copy ``~/certs.tar`` to all the servers of the distributed deployment including Wazuh indexer, Wazuh server, and Wazuh interface nodes. This can be done by using, for example, ``scp``.
+#.  Copy ``~/certs.tar`` to all the servers of the distributed deployment the including the Wazuh indexer, Wazuh server, and Wazuh interface nodes. This can be done by using, for example, ``scp``.
 
 You now have installed and configured the initial Wazuh indexer node. 
 
-    - If you want a single-node cluster, everything is set. Proceed with the :ref:`Wazuh server installation <wazuh_server_unattended>` section.
+    - If you want a single-node cluster, everything is set and you can proceed directly with :ref:`installing the Wazuh server <wazuh_server_installation>`.
  
-    - If you want to install a multi-node cluster, expand the instructions below to install and configure subsequent nodes and then initialize the cluster. 
+    - If you want to install a multi-node cluster, expand the instructions below to install and configure subsequent nodes, and then initialize the cluster. 
 
 2. Subsequent nodes installation and cluster initialization for multi-node clusters 
 -----------------------------------------------------------------------------------
@@ -128,14 +130,14 @@ Install and configure subsequent nodes of your multi-node cluster. Make sure tha
         # curl -so ~/unattended-installation.sh https://packages.wazuh.com/resources/4.2/unattended-installation/unattended-installation.sh   
 
 
-#. Run the script with the options ``-e`` and ``-en <node_name>`` to install Open distro for Elasticsearch. The node name must be the same used in ``config.yml`` for the certificate creation, e.g. ``master-node-2``.
+#. Run the script with the options ``-e`` and ``-en <node_name>`` to install Open Distro for Elasticsearch. The node name must be the same used in ``config.yml`` for the certificate creation; for example, ``master-node-2``.
 
       .. code-block:: console
 
         # bash ~/unattended-installation.sh -e -en <node_name> 
 
 
-Repeat this process on each Wazuh indexer node and proceed to initialize the cluster.             
+Repeat this process on each Wazuh indexer node and proceed with initializing the cluster.             
 
 
 3. Cluster initialization for multi-node clusters
@@ -146,7 +148,7 @@ Repeat this process on each Wazuh indexer node and proceed to initialize the clu
 
 The final stage of the process for installing a Wazuh indexer multi-node cluster consists in running the security admin script. 
 
-#. Run the ``securityadmin`` script on the initial node to load the new certificates information and start the cluster. Replace ``<elasticsearch_IP>`` with the Elasticsearch installation IP and run the following command:
+#. Run the ``securityadmin`` script on the initial node to load the new certificates information and start the cluster. Replace ``<elasticsearch_IP>`` with the Elasticsearch installation IP and run the command.
 
     .. code-block:: console
 
