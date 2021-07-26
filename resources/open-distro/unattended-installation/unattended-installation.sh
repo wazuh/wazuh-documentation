@@ -197,13 +197,13 @@ checkConfig() {
         echo "Configuration file found. Starting the installation..."
         readConfig
     else
-        if [ -f ${CONFIG_ROUTE} ]; then
+        if [ -f ~/certs.tar ]; then
             echo "Certificates file found. Starting the installation..."
-            eval "tar --overwrite -C ~/ -xf ${CONFIG_ROUTE} config.yml ${debug}"
+            eval "tar --overwrite -C ~/ -xf ~/certs.tar config.yml ${debug}"
             readConfig
         elif [ -f /etc/elasticsearch/certs/certs.tar ]; then
             eval "mv /etc/elasticsearch/certs/certs.tar ~/ ${debug}"
-            eval "tar --overwrite -C ~/ -xf ${CONFIG_ROUTE} config.yml ${debug}"
+            eval "tar --overwrite -C ~/ -xf ~/config.yml config.yml ${debug}"
             echo "Certificates file found. Starting the installation..."
             readConfig
         else
@@ -246,6 +246,9 @@ readConfig() {
             
             if [ "${counter}" -lt "${DSH}" ]; then
                 ELASTICNODES[i]+="$(echo "${CONFIG[counter]}" | tr -d '\011\012\013\014\015\040')"
+                if [ "${CONFIG[counter]}" == "${ename}" ]; then
+                    ippos="${i}"
+                fi
             else
                 ENODESIP[i]+="$(echo "${CONFIG[counter]}" | tr -d '\011\012\013\014\015\040')"
             fi
@@ -523,6 +526,7 @@ installElasticsearch() {
             eval "mv /etc/elasticsearch/certs/${ename}-key.pem /etc/elasticsearch/certs/elasticsearch-key.pem ${debug}"
             eval "mv /etc/elasticsearch/certs/${ename}.pem /etc/elasticsearch/certs/elasticsearch.pem ${debug}"
             eval "cd ~/certs/ ${debug}"
+            eval "mv ~/config.yml ~/certs/config.yml"
             eval "tar -cvf certs.tar * ${debug}"
             eval "mv ~/certs/certs.tar ~/ ${debug}"
         else
@@ -599,7 +603,10 @@ installFilebeat() {
         else
 
             if [ ${#FILEBEATNODES[@]} -lt "3" ]; then
-                conf="$(awk '{sub("        - 127.0.0.1:9200", "        - '${FILEBEATNODES[1]}':9200")}1' /etc/filebeat/filebeat.yml)"
+                elasticip="${ENODESIP[1]}"
+                elasticip="${elasticip:1}"
+                echo "VALOR ${elasticIp}"
+                conf="$(awk '{sub("        - 127.0.0.1:9200", "        - '${elasticip}':9200")}1' /etc/filebeat/filebeat.yml)"
                 echo "${conf}" > /etc/filebeat/filebeat.yml                
             else
                 conf="$( grep -v "output.elasticsearch.hosts:" /etc/filebeat/filebeat.yml)"
@@ -613,7 +620,9 @@ installFilebeat() {
                 
                 echo "output.elasticsearch.hosts:" >> /etc/filebeat/filebeat.yml
                 for i in "${!ENODESIP[@]}"; do
-                    echo "        - ${ENODESIP[i]}:9200"
+                    elasticip="${ENODESIP[i]}"
+                    elasticip="${elasticip:1}"
+                    echo "        - ${elasticip}:9200"
                 done 
 
                 # Configure the Wazuh cluster
