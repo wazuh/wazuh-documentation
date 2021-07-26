@@ -246,10 +246,8 @@ readConfig() {
             
             if [ "${counter}" -lt "${DSH}" ]; then
                 ELASTICNODES[i]+="$(echo "${CONFIG[counter]}" | tr -d '\011\012\013\014\015\040')"
-                echo "  - name: ${ELASTICNODES[i]}"
             else
                 ENODESIP[i]+="$(echo "${CONFIG[counter]}" | tr -d '\011\012\013\014\015\040')"
-                echo "      - ${ENODESIP[i]}"
             fi
             ((i++))
         fi    
@@ -268,7 +266,6 @@ readConfig() {
         elif [ "${CONFIG[counter]}" == "  master: true" ]; then
             ismaster="1"
             masterpos="${i}"
-            echo "POS ${masterpos}"
         fi    
 
     ((counter++))
@@ -424,8 +421,7 @@ installElasticsearch() {
             echo "opendistro_security.nodes_dn:" >> /etc/elasticsearch/elasticsearch.yml
             for i in "${!ELASTICNODES[@]}"; do
                 echo "- CN=${ELASTICNODES[i]},OU=Docu,O=Wazuh,L=California,C=US" >> /etc/elasticsearch/elasticsearch.yml
-            done     
-            nano /etc/elasticsearch/elasticsearch.yml        
+            done
 
         fi
 
@@ -464,19 +460,31 @@ installElasticsearch() {
             eval "curl -so ~/wazuh-cert-tool.sh https://packages.wazuh.com/resources/4.1/open-distro/tools/certificate-utility/wazuh-cert-tool.sh --max-time 300 ${debug}"
             echo "# Elasticsearch nodes" >> ~/instances.yml
             echo "elasticsearch-nodes:" >> ~/instances.yml
-            
+
+            for i in "${!ENODESIP[@]}"; do
+                echo "IP ${ENODESIP[i]}"
+            done
+            j=0
+            echo "index ${j}"
+            echo "IP ${ENODESIP[j]}"
             for i in "${!ELASTICNODES[@]}"; do
-                echo "  - name: ${ELASTICNODES[i]}" >> ~/instances.yml
+                rm="-"
+                elasticname="${ELASTICNODES[i]}"
+                elasticname="${elasticname//$rm}"            
+                echo "NOMBRE ${elasticname}"
+                echo "IP ${ENODESIP[i]}"
+                echo "  - name: ${elasticname}" >> ~/instances.yml
                 echo "    ip:" >> ~/instances.yml
-                echo "      - ${ENODESIP[i]}" >> ~/instances.yml
+                echo "      - ${ENODESIP[j]}" >> ~/instances.yml
             done           
             echo "# Wazuh server nodes" >> ~/instances.yml
             echo "wazuh-servers:" >> ~/instances.yml
             i=0
-            while [ ${i} -le ${#FILEBEATNODES[@]} ]; do
+            while [ ${i} -lt ${#FILEBEATNODES[@]} ]; do
                 echo "  - name: ${FILEBEATNODES[i]}" >> ~/instances.yml
                 echo "    ip:" >> ~/instances.yml
                 echo "  - ${WAZUHSERVERIPS[i]}" >> ~/instances.yml
+                ((i++))
                 ((i++))
             done
 
