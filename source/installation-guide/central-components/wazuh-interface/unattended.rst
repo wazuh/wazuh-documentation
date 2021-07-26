@@ -29,7 +29,7 @@ You can install and configure the Wazuh interface using an automated script.
       # sudo bash ~/elastic-stack-installation.sh -k -kn <node_name>
 
     
-    Options available when running the script:
+    Options available when running the scripts:
 
     +-------------------------------+----------------------------------------------------------------------------------------------------------------+
     | Options                       | Purpose                                                                                                        |
