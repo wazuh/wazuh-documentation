@@ -13,10 +13,10 @@ Install and configure the Wazuh indexer, a highly scalable full-text search engi
 
 .. note:: Root user privileges are required to run the commands described below.
 
-Wazuh indexer cluster installation and configuration
-----------------------------------------------------
+Wazuh indexer cluster installation 
+----------------------------------
 
-Install the Wazuh indexer as a single-node or multi-node cluster according to your environment needs. If you want to install a single-node cluster, follow the instructions to install the initial node and proceed directly to initialize the cluster. 
+Install and configure the Wazuh indexer as a single-node or multi-node cluster according to your environment needs. If you want to install a single-node cluster, follow the instructions to install the initial node and proceed directly to initialize the cluster. 
 
 The installation process is divided in three stages.  
 
@@ -204,7 +204,7 @@ You now have install a subsequent node of your Wazuh indexer multi-node cluster.
 
   <div class="accordion-section open">
 
-The final stage of the process for installing a Wazuh indexer multi-node cluster consists in running the security admin script. 
+The final stage of the process for installing a Wazuh indexer consists in running the security admin script. 
 
 #. Run the Elasticsearch ``securityadmin`` script on the initial node to load the new certificates information and start the cluster. Replace ``<elasticsearch_IP>`` with the Elasticsearch installation IP and run the following command.
 
