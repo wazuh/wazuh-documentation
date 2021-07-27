@@ -290,7 +290,6 @@ installElasticsearch() {
         if [  "$?" != 0  ]; then
             echo "Error: certificates were not created"
             rollBack
-
             exit 1;
         else
             logger "Certificates created"
@@ -550,7 +549,13 @@ changePasswords() {
     else
         VERBOSE='> /dev/null 2>&1'
         bash ~/wazuh-passwords-tool.sh -a
-    fi     
+    fi    
+    
+    if [  "$?" != 0  ]; then
+        echo "The passwords could not be changed"
+        rollBack
+        exit 1; 
+    fi
 }
 
 checkInstallation() {
