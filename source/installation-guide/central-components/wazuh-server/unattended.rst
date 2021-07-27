@@ -20,7 +20,7 @@ The installation process is divided in two stages.
 
 #. Wazuh worker nodes installation
 
-.. note:: Root user privileges are required to run all the commands. 
+.. note:: Root user privileges are required to run the commands described below.
 
 1. Wazuh master node installation and configuration
 ----------------------------------------------------
@@ -38,9 +38,9 @@ Install and configure the Wazuh master node. Make sure that a copy of ``certs.ta
    
        # curl -so ~/unattended-installation.sh https://packages.wazuh.com/resources/4.2/unattended-installation/unattended-installation.sh 
 
-#. Run the script with the options ``-w`` and ``-wn <node_name>`` to install the Wazuh server. The node name must be the same used in ``config.yml`` for the certificate creation, e.g. ``wazuh-master``.
+#. Run the script with the options ``-w`` and ``-wn <node_name>`` to install the Wazuh server. The node name must be the same used in ``config.yml`` for the certificate creation, for example, ``wazuh-master``.
  
-- Additionally, a cluster key can be indicated with option ``-ck``, this key must be 32 characters. If no key is provided, the installation script generates one using ``openssl``.
+- Additionally, you can indicate a cluster key of 32 characters with option ``-ck``. If no key is provided, the installation script generates one using ``openssl``.
 
   .. code-block:: console
   
@@ -55,7 +55,7 @@ Install and configure the Wazuh master node. Make sure that a copy of ``certs.ta
   +-------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
   | -wn / --wazuh-node-name       | Indicates the name of the Wazuh instance.                                                                                                    |
   +-------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
-  | -ck / --cluster-key           | Key that is used to encrypt communication between cluster nodes. It must be 32 characters long and same for all of the nodes in the cluster. |                                          
+  | -ck / --cluster-key           | Key used to encrypt communication between cluster nodes. It must be 32 characters long and same for all of the nodes in the cluster.         |                                          
   +-------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
   | -o / --overwrite              | Overwrites the existing installation.                                                                                                        |
   +-------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
@@ -91,7 +91,7 @@ Install and configure the Wazuh worker nodes. Make sure that a copy of ``certs.t
    
        # curl -so ~/unattended-installation.sh https://packages.wazuh.com/resources/4.2/unattended-installation/unattended-installation.sh 
 
-#. Run the script with the options ``-w``, ``-wn <node_name>`` and ``-ck`` to install the Wazuh server. The node name must be the same used in ``config.yml`` for the certificate creation, e.g. ``wazuh-worker-1``. The cluster key must be the same used in the Wazuh master node. 
+#. Run the script with the options ``-w``, ``-wn <node_name>``, and ``-ck`` to install the Wazuh server. The node name must be the same used in ``config.yml`` for the certificate creation, for example, ``wazuh-worker-1``. The cluster key must be the same used in the Wazuh master node. 
  
    .. code-block:: console
    
