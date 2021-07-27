@@ -2,94 +2,104 @@
 
 .. _wazuh_server_unattended:
 
-Installing Wazuh server in unattended mode
-==========================================
+Installing the Wazuh server in unattended mode
+==============================================
 
 
-You can install the Wazuh manager and the Wazuh forwarder using an automated script. This script performs a health check to verify that the system has enough resources to achieve optimal performance. For more information on system resources, see the :ref:`requirements <installation_requirements>` section.
-
-Installing the Wazuh server
----------------------------
-
-.. note:: Root user privileges are required to run all the commands. To download the script, the package ``curl`` is used.
+The Wazuh server is in charge of analyzing the data received from the agents and triggering alerts when threats or anomalies are detected. This central component includes the Wazuh manager and the Wazuh forwarder.
 
 
-#. Download the installation script:
+Wazuh server cluster installation
+---------------------------------
+
+Install the Wazuh server as a single-node or multi-node cluster according to your environment needs.  If you want to install a single-node cluster, follow the instructions to install the Wazuh master node, and proceed directly with :ref:`installing the Wazuh interface <wazuh_interface_installation>`.
+
+The installation process is divided in two stages.  
+
+#. Wazuh master node installation
+
+#. Wazuh worker nodes installation
+
+.. note:: Root user privileges are required to run all the commands. 
+
+1. Wazuh master node installation and configuration
+----------------------------------------------------
+
+.. raw:: html
+
+  <div class="accordion-section open">
+
+
+Install and configure the Wazuh master node. Make sure that a copy of ``certs.tar``, created during the Wazuh indexer installation, is placed in the root home folder ``(~/)``.
+
+#. Download the unattended installation script. 
 
    .. code-block:: console
    
-       # curl -so ~/wazuh-server-installation.sh https://packages.wazuh.com/resources/|WAZUH_LATEST_MINOR|/open-distro/unattended-installation/distributed/wazuh-server-installation.sh 
-    
-#. Replace ``<node_name>`` with the name of the Wazuh server and run the following command to install the Wazuh server. 
+       # curl -so ~/unattended-installation.sh https://packages.wazuh.com/resources/4.2/unattended-installation/unattended-installation.sh 
 
-   The name of the node must be the same used in ``config.yml`` for the certificate creation, e.g. ``filebeat``. 
+#. Run the script with the options ``-w`` and ``-wn <node_name>`` to install the Wazuh server. The node name must be the same used in ``config.yml`` for the certificate creation, e.g. ``wazuh-master``.
+ 
+- Additionally, a cluster key can be indicated with option ``-ck``, this key must be 32 characters. If no key is provided, the installation script generates one using ``openssl``.
+
+  .. code-block:: console
+  
+         # bash ~/wazuh-server-installation.sh -w -wn <node_name>
+
+  Options available when running the script:
+  
+  +-------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
+  | Options                       | Purpose                                                                                                                                      |
+  +===============================+==============================================================================================================================================+
+  | -w / --install-wazuh          | Installs the Wazuh server. Must be used with option ``-wname <node-name>``.                                                                  |
+  +-------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
+  | -wn / --wazuh-node-name       | Indicates the name of the Wazuh instance.                                                                                                    |
+  +-------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
+  | -ck / --cluster-key           | Key that is used to encrypt communication between cluster nodes. It must be 32 characters long and same for all of the nodes in the cluster. |                                          
+  +-------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
+  | -o / --overwrite              | Overwrites the existing installation.                                                                                                        |
+  +-------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
+  | -r / --uninstall              | Removes the installation.                                                                                                                    |
+  +-------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
+  | -v / --verbose                | Shows the complete installation output.                                                                                                      |
+  +-------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
+  | -i / --ignore-health-check    | Ignores the health check.                                                                                                                    |
+  +-------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
+  | -h / --help                   | Shows *help*.                                                                                                                                |
+  +-------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------+  
+
+Your Wazuh server is now successfully installed. 
+
+- If you want a Wazuh server single-node cluster, everything is set and you can proceed directly with :ref:`installing the Wazuh interface <wazuh_interface_installation>`. 
+      
+- If you want a Wazuh server multi-node cluster, expand the instructions below to install and configure Wazuh worker nodes. 
+
+
+2. Wazuh worker nodes installation and configuration
+----------------------------------------------------
+
+.. raw:: html
+
+  <div class="accordion-section">
+
+
+Install and configure the Wazuh worker nodes. Make sure that a copy of ``certs.tar``, created during the Wazuh indexer installation, is placed in the root home folder ``(~/)``.
+
+#. Download the unattended installation script. 
 
    .. code-block:: console
    
-           # bash ~/wazuh-server-installation.sh -n <node_name>
+       # curl -so ~/unattended-installation.sh https://packages.wazuh.com/resources/4.2/unattended-installation/unattended-installation.sh 
 
-   In case of installing a multi-node Wazuh cluster, repeat the process on every host.        
+#. Run the script with the options ``-w``, ``-wn <node_name>`` and ``-ck`` to install the Wazuh server. The node name must be the same used in ``config.yml`` for the certificate creation, e.g. ``wazuh-worker-1``. The cluster key must be the same used in the Wazuh master node. 
+ 
+   .. code-block:: console
+   
+       # bash ~/wazuh-server-installation.sh -w -wn <node_name> -ck <cluster_key> 
 
-The installation script allows the following options to be applied:
+Your Wazuh server is now successfully installed. Repeat this process on every Wazuh worker node in the multi-node cluster. 
 
-+-------------------------------+---------------------------------------------------------------------------------------------------------------+
-| Options                       | Purpose                                                                                                       |
-+===============================+===============================================================================================================+
-| -n / --node-name              | It indicates the name of the Wazuh server instance.                                                           |
-+-------------------------------+---------------------------------------------------------------------------------------------------------------+
-| -i / --ignore-healthcheck     | It ignores the health check.                                                                                  |
-+-------------------------------+---------------------------------------------------------------------------------------------------------------+
-| -d / --debug                  | It shows the complete installation output.                                                                    |
-+-------------------------------+---------------------------------------------------------------------------------------------------------------+
-| -h / --help                   | It shows help.                                                                                                |
-+-------------------------------+---------------------------------------------------------------------------------------------------------------+
-
-
-Configure the installation
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-After the installation of all the components of the node, you need to perform some steps to finish configuring the installation. 
-
-Choose the cluster mode between single-node or multi-node:
-
-.. tabs::
-
-
-  .. group-tab:: Single-node
-
-
-    Once the script finishes the installation, all the components are ready to use.
-
-
-
-  .. group-tab:: Multi-node
-
-
-    The Wazuh manager is installed and configured as a single-node cluster by default. To build a Wazuh multi-node cluster, you need to configure each Wazuh manager as a master or worker node.
-     
-    One server has to be chosen as a master, the rest are designated as workers. The ``Master node``  configuration must be applied only to the server chosen for this role. For all the other servers, the configuration ``Worker node`` needs to be applied.
-
-
-    **Master node:**
-
-    #. .. include:: ../../../_templates/installations/wazuh/common/configure_wazuh_master_node.rst
-
-
-    #. Once the ``/var/ossec/etc/ossec.conf`` configuration file is edited, the Wazuh manager needs to be restarted:
-
-        .. include:: ../../../_templates/installations/wazuh/common/restart_wazuh_manager.rst
-
-
-    **Worker node:**
-
-    #. .. include:: ../../../_templates/installations/wazuh/common/configure_wazuh_worker_node.rst
-
-
-    #. Once the ``/var/ossec/etc/ossec.conf`` configuration file is edited, the Wazuh manager needs to be restarted:
-
-        .. include:: ../../../_templates/installations/wazuh/common/restart_wazuh_manager.rst
-
-    #. .. include:: ../../../_templates/installations/wazuh/common/check_wazuh_cluster.rst 
-
-
-To uninstall the Wazuh server, see the :ref:`Uninstalling <user_manual_uninstall_wazuh_installation_open_distro>` section.
+Next steps
+----------
+  
+The Wazuh server installation is now complete and you can proceed with installing the Wazuh interface. To perform this action, see the :ref:`Wazuh interface <wazuh_interface_installation>` section.  
