@@ -34,19 +34,19 @@ You can install and configure the Wazuh interface using an automated script.
     +-------------------------------+----------------------------------------------------------------------------------------------------------------+
     | Options                       | Purpose                                                                                                        |
     +===============================+================================================================================================================+
-    | -k / --install-kibana         | It installs Kibana. Must be used with option ``-kname <node-name>``.                                           |
+    | -k / --install-kibana         | Installs Kibana. Must be used with option ``-kname <node-name>``.                                              |
     +-------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -kn / --kibana-node-name      | It indicates the name of the Kibana instance.                                                                  |
+    | -kn / --kibana-node-name      | Indicates the name of the Kibana instance.                                                                     |
     +-------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -o / --overwrite              | It overwrites the existing installation.                                                                       |
+    | -o / --overwrite              | Overwrites the existing installation.                                                                          |
     +-------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -r / --uninstall              | It removes the installation.                                                                                   |
+    | -r / --uninstall              | Removes the installation.                                                                                      |
     +-------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -v / --verbose                | It shows the complete installation output.                                                                     |
+    | -v / --verbose                | Shows the complete installation output.                                                                        |
     +-------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -i / --ignore-health-check    | It ignores the health check.                                                                                   |
+    | -i / --ignore-health-check    | Ignores the health check.                                                                                      |
     +-------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -h / --help                   | It shows *help*.                                                                                               |
+    | -h / --help                   | Shows *help*.                                                                                                  |
     +-------------------------------+----------------------------------------------------------------------------------------------------------------+
     
 
