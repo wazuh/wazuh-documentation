@@ -156,5 +156,5 @@ The final stage of the process for installing a Wazuh indexer multi-node cluster
 Next steps
 ----------
 
-The Wazuh indexer is now successfully installed and you can proceed with installing the Wazuh server. To perform this action, see the :ref:`Wazuh server <wazuh_server_unattended>` section.
+The Wazuh indexer is now successfully installed and you can proceed with installing the Wazuh server. To perform this action, see the :ref:`Wazuh server <wazuh_server_installation>` section.
 
