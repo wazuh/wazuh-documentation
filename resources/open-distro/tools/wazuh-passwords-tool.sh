@@ -79,6 +79,10 @@ getNetworkHost() {
     IP=$(grep -hr "network.host:" /etc/elasticsearch/elasticsearch.yml)
     NH="network.host: "
     IP="${IP//$NH}"
+    
+    if [ ${IP} == "0.0.0.0" ]; then
+        IP="localhost"
+    fi
 }
 
 ## Checks if Open Distro for Elasticsearch is installed
