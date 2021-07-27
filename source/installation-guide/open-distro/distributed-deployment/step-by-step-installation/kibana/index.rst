@@ -125,9 +125,9 @@ Kibana installation and configuration
 
 Upon the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or,  for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser.  Alternatively, a certificate from a trusted authority can be configured. 
 
-It is highly recommended to change Elasticsearch’s default passwords for the users found at the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. More information about this process can be found :ref:`here <change_elastic_pass>`.
+It is highly recommended to change Elasticsearch’s default passwords for the users found at the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. More information on this process can be found in the :ref:`Elasticsearch tuning <change_elastic_pass>` section. 
 
-With the first access attempt, the Wazuh Kibana plugin may prompt a message that indicates that it cannot communicate with the Wazuh API. To solve this issue edit the file ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml`` and replace the ``url`` by the Wazuh server's address: 
+With the first access attempt, the Wazuh Kibana plugin may display a message indicating that it cannot communicate with the Wazuh API. To solve this issue edit the file ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml`` and replace the ``url`` with the Wazuh server address: 
 
 .. code-block:: yaml
 
@@ -139,11 +139,11 @@ With the first access attempt, the Wazuh Kibana plugin may prompt a message that
        password: wazuh
        run_as: false
 
-Once Kibana is running it is necessary to assign each user its corresponding role. To learn more visit the :ref:`Setting up the Wazuh Kibana plugin <connect_kibana_app>` section. 
+Once Kibana is running it is necessary to assign each user their corresponding role. To learn more visit the :ref:`Setting up the Wazuh Kibana plugin <connect_kibana_app>` section. 
 
 To uninstall Kibana, visit the :ref:`uninstalling section <uninstall_kibana>`.
 
 Next steps
 ~~~~~~~~~~
 
-Once the Wazuh environment is ready, a Wazuh agent can be installed in every endpoint to be monitored. The Wazuh agent installation guide is available for most operating systems and can be found :ref:`here<installation_agents>`.
+Once the Wazuh environment is ready, a Wazuh agent can be installed in every endpoint to be monitored. The Wazuh agent installation guide is available for most operating systems and can be found in our :ref:`installation guide<installation_agents>`.
