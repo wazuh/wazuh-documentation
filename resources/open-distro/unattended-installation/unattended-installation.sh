@@ -627,7 +627,7 @@ main() {
         done    
 
         if [ -n "${verbose}" ]; then
-            debug='>> /var/log/wazuh-unattended-installation.log'
+            debug='2>&1 | tee -a /var/log/wazuh-unattended-installation.log'
         fi
 
         if [ -n "${uninstall}" ]; then
