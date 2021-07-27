@@ -18,7 +18,7 @@ The installation process is divided in two stages.
 
 #. Wazuh master node installation
 
-#. Wazuh worker nodes installation
+#. Wazuh worker nodes installation for multi-node clusters
 
 .. note:: Root user privileges are required to run the commands described below.
 
