@@ -715,14 +715,25 @@ installKibana() {
                 conf="$( grep -v "elasticsearch.hosts: https://127.0.0.1:9200" /etc/kibana/kibana.yml)"
                 echo "${conf}" > /etc/kibana/kibana.yml   
                 echo "elasticsearch.hosts:" >> /etc/kibana/kibana.yml
-                i=0
-                while [ ${i} -lt ${#ENODESIP[@]} ]; do
-                    echo "  - ${ENODESIP[i]}" >> /etc/kibana/kibana.yml
-                    ((i++))
+                for i in "${!ENODESIP[@]}"; do
+                    elasticip="${ENODESIP[i]}"
+                    echo "  - ${elasticip:1}" >> /etc/kibana/kibana.yml
                 done
 
             else
-                conf="$(awk '{sub("elasticsearch.hosts: https://127.0.0.1:9200", "elasticsearch.hosts: '${ENODESIP[0]}'")}1' /etc/kibana/kibana.yml)"
+                i=0
+                while [ ${i} -le ${#ENODESIP[@]} ]; do
+                    echo "VALOR ${i}: ${ENODESIP[i]}"
+                    ((i++))
+                done
+                echo "LT"
+                i=0
+                while [ ${i} -lt ${#ENODESIP[@]} ]; do
+                    echo "VALOR ${i}: ${ENODESIP[i]}"
+                    ((i++))
+                done                
+                elasticip="${ENODESIP[1]}"
+                conf="$(awk '{sub("elasticsearch.hosts: https://127.0.0.1:9200", "elasticsearch.hosts: '${elasticip:1}'")}1' /etc/kibana/kibana.yml)"
                 echo "${conf}" > /etc/kibana/kibana.yml
             fi
 
