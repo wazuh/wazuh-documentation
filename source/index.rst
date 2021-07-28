@@ -316,6 +316,7 @@ Wazuh is a free and open source platform for threat detection, security monitori
    :titlesonly:
    :includehidden:
 
+   getting-started/index
    installation-guide/index
 
 .. raw:: html
