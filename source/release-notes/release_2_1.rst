@@ -5,7 +5,7 @@
 2.1 Release notes
 ===================
 
-This section shows the most relevant new features of Wazuh v2.1. You will find more detailed information in our `changelog <https://github.com/wazuh/wazuh/blob/2.1/CHANGELOG.md>`_ file.
+This section shows the most relevant new features of Wazuh v2.1. You will find more detailed information in our `changelog <https://github.com/wazuh/wazuh/blob/v2.1.0/CHANGELOG.md>`_ file.
 
 **New features:**
 
