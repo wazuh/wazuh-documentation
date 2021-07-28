@@ -239,6 +239,7 @@ readConfig() {
     ## Read Elasticsearch nodes
     counter=${ELASTICLIMITT}
     i=0
+    j=0
     char="#"
     while [ "${counter}" -le "${ELASTICLIMIB}" ]
     do
@@ -249,10 +250,12 @@ readConfig() {
                 if [ "${CONFIG[counter]}" == "${ename}" ]; then
                     ippos="${i}"
                 fi
+                ((i++))
             else
-                ENODESIP[i]+="$(echo "${CONFIG[counter]}" | tr -d '\011\012\013\014\015\040')"
+                ENODESIP[j]+="$(echo "${CONFIG[counter]}" | tr -d '\011\012\013\014\015\040')"
+                ((j++))
             fi
-            ((i++))
+            
         fi    
 
         ((counter++))
@@ -472,7 +475,7 @@ installElasticsearch() {
                 rm="-"
                 elasticname="${ELASTICNODES[i]}"
                 elasticname="${elasticname:1}"
-                elasticsearchip="${ENODESIP[1]}"
+                elasticsearchip="${ENODESIP[i]}"
                 elasticsearchip="${elasticsearchip:1}"
                 echo "  - name: ${elasticname}" >> ~/instances.yml
                 echo "    ip:" >> ~/instances.yml
@@ -720,19 +723,8 @@ installKibana() {
                     echo "  - ${elasticip:1}" >> /etc/kibana/kibana.yml
                 done
 
-            else
-                i=0
-                while [ ${i} -le ${#ENODESIP[@]} ]; do
-                    echo "VALOR ${i}: ${ENODESIP[i]}"
-                    ((i++))
-                done
-                echo "LT"
-                i=0
-                while [ ${i} -lt ${#ENODESIP[@]} ]; do
-                    echo "VALOR ${i}: ${ENODESIP[i]}"
-                    ((i++))
-                done                
-                elasticip="${ENODESIP[1]}"
+            else            
+                elasticip="${ENODESIP[0]}"
                 conf="$(awk '{sub("elasticsearch.hosts: https://127.0.0.1:9200", "elasticsearch.hosts: '${elasticip:1}'")}1' /etc/kibana/kibana.yml)"
                 echo "${conf}" > /etc/kibana/kibana.yml
             fi
