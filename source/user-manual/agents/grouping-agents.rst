@@ -304,7 +304,7 @@ It is also possible to switch between groups overwriting the existing assignment
 
 The ``-f`` parameter resets groups assigned to the agent and forces it to only belong to the new group.
 
-Finally, to check the synchronization status of the group configuration for a single agent, both following methods are available, **agent_groups** and **Wazuh API** endpoint :api-ref:`GET /agents/{agent_id}/group/is_sync <operation/api.controllers.agent_controller.get_sync_agent>`:
+Finally, to check the synchronization status of the group configuration, both following methods are available, **agent_groups** (for a single agent) and **Wazuh API** endpoint :api-ref:`GET /agents/group/is_sync <operation/api.controllers.agent_controller.get_sync_agent>` (for one or more agents):
 
     .. code-block:: console
 
@@ -317,7 +317,7 @@ Finally, to check the synchronization status of the group configuration for a si
 
     .. code-block:: console
 
-        # curl -k -X GET "https://localhost:55000/agents/001/group/is_sync?pretty=true" -H  "Authorization: Bearer $TOKEN"
+        # curl -k -X GET "https://localhost:55000/agents/group/is_sync?pretty=true&agents_list=001" -H  "Authorization: Bearer $TOKEN"
 
     .. code-block:: json
         :class: output
