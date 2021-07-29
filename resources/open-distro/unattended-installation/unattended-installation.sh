@@ -553,7 +553,6 @@ installElasticsearch() {
         startService "elasticsearch"
         if [ ${#ELASTICNODES[@]} -le "1" ]; then
             echo "Initializing Elasticsearch..."
-            echo ${#ELASTICNODES[@]}
             until $(curl -XGET https://localhost:9200/ -uadmin:admin -k --max-time 120 --silent --output /dev/null); do
                 echo -ne ${char}
                 sleep 10
@@ -564,7 +563,6 @@ installElasticsearch() {
             echo "Done"
         elif [ -n "${aio}" ]; then
             echo "Initializing Elasticsearch..."
-            echo ${#ELASTICNODES[@]}
             until $(curl -XGET https://localhost:9200/ -uadmin:admin -k --max-time 120 --silent --output /dev/null); do
                 echo -ne ${char}
                 sleep 10
@@ -605,12 +603,12 @@ installFilebeat() {
             eval "cp ~/certs/filebeat* /etc/filebeat/certs/ ${debug}"
         else
 
-            if [ ${#FILEBEATNODES[@]} -lt "3" ]; then
-                elasticip="${ENODESIP[1]}"
-                elasticip="${elasticip:1}"
-                echo "VALOR ${elasticIp}"
-                conf="$(awk '{sub("        - 127.0.0.1:9200", "        - '${elasticip}':9200")}1' /etc/filebeat/filebeat.yml)"
-                echo "${conf}" > /etc/filebeat/filebeat.yml                
+            if [ ${#ENODESIP[@]} -lt "2" ]; then
+                for i in "${!ENODESIP[@]}"; do
+                    elasticip="${ENODESIP[i]}"
+                    conf="$(awk '{sub("        - 127.0.0.1:9200", "        - '${elasticip:1}':9200")}1' /etc/filebeat/filebeat.yml)"
+                    echo "${conf}" > /etc/filebeat/filebeat.yml                
+                done
             else
                 conf="$( grep -v "output.elasticsearch.hosts:" /etc/filebeat/filebeat.yml)"
                 echo "${conf}" > /etc/filebeat/filebeat.yml
@@ -830,9 +828,9 @@ checkInstalled() {
         elif [ -n "${uninstall}" ]; then
             echo "Removing the installed items"
             rollBack
-        else
-            echo "All the Wazuh componets were found on this host. If you want to overwrite the current installation, run this script back using the option -o/--overwrite. NOTE: This will erase all the existing configuration and data."
-            # exit 1;
+        # else
+        #     echo "All the Wazuh componets were found on this host. If you want to overwrite the current installation, run this script back using the option -o/--overwrite. NOTE: This will erase all the existing configuration and data."
+        #     # exit 1;
         fi
     fi          
 
