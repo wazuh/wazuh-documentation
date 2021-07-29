@@ -88,6 +88,6 @@ Both alerts and non-alert events are stored in files on the Wazuh server, in add
   -rw-r----- 1 ossec ossec 156296 Jan  2 00:00 ossec-archive-03.log.gz
   -rw-r----- 1 ossec ossec    346 Jan  2 00:00 ossec-archive-03.log.sum
 
-Rotation and backups of archive files are recommended according to the storage capacity of the :ref:`Wazuh server <wazuh_server>`. By using *cron* jobs, you can easily arrange them to keep only a certain time window of archive files locally on the server, for example, *last year* or *last three months*.
+Rotation and backups of archive files are recommended according to the storage capacity of the :ref:`Wazuh server <wazuh_server>`. By using *cron* jobs, you can easily manage to keep only a certain time window of archive files locally on the server, for example, *last year* or *last three months*.
 
 On the other hand, you may choose to dispense with storing archive files at all and simply rely on the Wazuh indexer for archive storage, especially if you are running periodic Wazuh indexer snapshot backups and/or a multi-node Wazuh indexer cluster with shard replicas for high availability. You could even use a *cron* job to move snapshotted indexes to a final data storage server, and sign them using MD5, SHA1, and SHA256 hashing algorithms.
