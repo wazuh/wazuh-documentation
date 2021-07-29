@@ -5,7 +5,7 @@
 Command monitoring
 ==================
 
-There are times when you may want to monitor things that are not in the logs. To address this, Wazuh incorporates the ability to monitor the output of specific commands and treat the output as though it were log file content.
+Wazuh not only can watch log files or Windows events on its monitored hosts for applications and operating system log messages, or watch for messages of devices that are using Syslog, but it can also read the output of monitored commands to be run periodically on these hosts. These specifically authorized commands can be configured to check important system status data such as running processes, system load averages, or to detect USB storage, among other monitoring purposes.
 
 .. topic:: Contents
 
