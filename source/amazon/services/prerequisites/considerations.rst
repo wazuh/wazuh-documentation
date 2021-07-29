@@ -87,3 +87,43 @@ Below there is an example of different services configuration:
     </bucket>
 
   </wodle>
+
+
+Using VPC endpoints
+-------------------
+
+VPC endpoints can help reducing the bill for the traffic in your VPC by allowing connections from the VPC to the AWS services that supports it without having to use their public IP to connect to the AWS Services. As the ``aws-s3`` Wazuh module uses the AWS S3 service to access the data from the S3 buckets, regardless of the service they come from, VPC endpoints can be used, as long as Wazuh runs in the VPC. The same applies to the AWS services the ``aws-s3`` Wazuh module supports, such as CloudWatchLogs, as long as they are compatible with VPC endpoints. The list of AWS services supporting VPC endpoints can be checked `here <https://docs.aws.amazon.com/vpc/latest/privatelink/integrated-services-vpce-list.html>`_.
+
+The service_endpoint and sts_endpoint tags can be used to specify the VPC endpoint URL to use for obtaining the data and for logging into STS when using a IAM role, respectively. Here is an example on how to use them:
+
+.. code-block:: xml
+
+  <wodle name="aws-s3">
+    <disabled>no</disabled>
+    <interval>10m</interval>
+    <run_on_start>yes</run_on_start>
+    <skip_on_error>yes</skip_on_error>
+
+    <bucket type="cloudtrail">
+      <name>wazuh-cloudtrail</name>
+      <aws_profile>default</aws_profile>
+      <service_endpoint>https://bucket.xxxxxx.s3.us-east-2.vpce.amazonaws.com</service_endpoint>
+    </bucket>
+
+    <bucket type="cloudtrail">
+      <name>wazuh-cloudtrail-2</name>
+      <access_key>xxxxxx</access_key>
+      <secret_key>xxxxxx</secret_key>
+      <iam_role_arn>arn:aws:iam::xxxxxxxxxxx:role/wazuh-role</iam_role_arn>
+      <sts_endpoint>xxxxxx.sts.us-east-2.vpce.amazonaws.com</sts_endpoint>
+      <service_endpoint>https://bucket.xxxxxx.s3.us-east-2.vpce.amazonaws.com</service_endpoint>
+    </bucket>
+
+    <service type="cloudwatchlogs">
+      <aws_profile>default</aws_profile>
+      <regions>us-east-2</regions>
+      <aws_log_groups>log_group_name</aws_log_groups>
+      <service_endpoint>https://xxxxxx.logs.us-east-2.vpce.amazonaws.com</service_endpoint>
+    </service>
+
+  </wodle>

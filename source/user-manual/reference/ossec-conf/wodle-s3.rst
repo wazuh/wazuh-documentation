@@ -155,11 +155,13 @@ Bucket options
 - `bucket\\only_logs_after`_
 - `bucket\\regions`_
 - `bucket\\discard_regex`_
+- `bucket\\sts_endpoint`_
+- `bucket\\service_endpoint`_
 
 
 +----------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | Options                          | Allowed values                                              | Mandatory/Optional                            |
-+==================================+================================================+============================================================+
++==================================+=============================================================+===============================================+
 | `type`_                          | cloudtrail, guardduty, vpcflow, config, custom              | Mandatory                                     |
 +----------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | `bucket\\name`_                  | Any valid bucket name                                       | Mandatory                                     |
@@ -187,6 +189,10 @@ Bucket options
 | `bucket\\aws_organization_id`_   | Name of AWS organization                                    | Optional (only works with CloudTrail buckets) |
 +----------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | `bucket\\discard_regex`_         | A regex value to determine if an event should be discarded. | Optional                                      |
++----------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+| `bucket\\sts_endpoint`_          | The AWS Security Token Service VPC endpoint URL.            | Optional                                      |
++----------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+| `bucket\\service_endpoint`_      | The AWS S3 VPC endpoint URL.                                | Optional                                      |
 +----------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 
 type
@@ -364,6 +370,28 @@ Usage example:
     <discard_regex field="data.configurationItemStatus">REJECT</discard_regex>
 
 
+bucket\\sts_endpoint
+^^^^^^^^^^^^^^^^^^^^
+
+The AWS Security Token Service VPC endpoint URL to be used when an IAM role is provided as the authentication method. Check the :ref:`Considerations for configuration <amazon_considerations>` page to learn more about VPC endpoints.
+
++--------------------+----------------------------------------+
+| **Default value**  | N/A                                    |
++--------------------+----------------------------------------+
+| **Allowed values** | Any valid VPC endpoint URL for STS     |
++--------------------+----------------------------------------+
+
+bucket\\service_endpoint
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+The AWS S3 VPC endpoint URL to be used to download the data from the bucket. Check the :ref:`Considerations for configuration <amazon_considerations>` page to learn more about VPC endpoints.
+
++--------------------+----------------------------------------+
+| **Default value**  | N/A                                    |
++--------------------+----------------------------------------+
+| **Allowed values** | Any valid VPC endpoint URL for S3      |
++--------------------+----------------------------------------+
+
 run_on_start
 ^^^^^^^^^^^^
 
@@ -410,13 +438,13 @@ Day of the week to run the scan. This option is **not compatible** with the ``da
 | **Default value**  | n/a                      |
 +--------------------+--------------------------+
 | **Allowed values** | Day of the week:         |
-|                    |   - sunday/sun           |
-|                    |   - monday/mon           |
-|                    |   - tuesday/tue          |
-|                    |   - wednesday/wed        |
-|                    |   - thursday/thu         |
-|                    |   - friday/fri           |
-|                    |   - saturday/sat         |
+|                    |  - sunday/sun            |
+|                    |  - monday/mon            |
+|                    |  - tuesday/tue           |
+|                    |  - wednesday/wed         |
+|                    |  - thursday/thu          |
+|                    |  - friday/fri            |
+|                    |  - saturday/sat          |
 +--------------------+--------------------------+
 
 .. note::
@@ -457,6 +485,8 @@ Service options
 - `Service\\only_logs_after`_
 - `Service\\regions`_
 - `Service\\remove_log_streams`_
+- `Service\\sts_endpoint`_
+- `Service\\service_endpoint`_
 
 
 Service\\aws_account_id
@@ -610,6 +640,7 @@ Example of configuration
           <aws_account_id>112233445566</aws_account_id>
           <aws_account_alias>dev2-account</aws_account_alias>
           <discard_regex field="data.configurationItemStatus">REJECT</discard_regex>
+          <service_endpoint>https://bucket.xxxxxx.s3.us-east-2.vpce.amazonaws.com</service_endpoint>
       </bucket>
       <bucket type="custom">
           <name>s3-stage-bucket</name>
@@ -634,3 +665,26 @@ Example of configuration
           <discard_regex field="data.configurationItemStatus">REJECT</discard_regex>
       </service>
   </wodle>
+
+
+Service\\sts_endpoint
+^^^^^^^^^^^^^^^^^^^^^
+
+The AWS Security Token Service VPC endpoint URL to be used when an IAM role is provided as the authentication method. Check the :ref:`Considerations for configuration <amazon_considerations>` page to learn more about VPC endpoints.
+
++--------------------+----------------------------------------+
+| **Default value**  | N/A                                    |
++--------------------+----------------------------------------+
+| **Allowed values** | Any valid VPC endpoint URL for STS     |
++--------------------+----------------------------------------+
+
+Service\\service_endpoint
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The VPC endpoint URL for the required AWS Service to be used to download the data from it. Check the :ref:`Considerations for configuration <amazon_considerations>` page to learn more about VPC endpoints.
+
++--------------------+------------------------------------------------+
+| **Default value**  | N/A                                            |
++--------------------+------------------------------------------------+
+| **Allowed values** | Any valid VPC endpoint URL for the AWS Service |
++--------------------+------------------------------------------------+
