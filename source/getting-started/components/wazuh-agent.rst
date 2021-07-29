@@ -5,12 +5,12 @@
 Wazuh agent
 ===========
 
-The Wazuh agent runs on Linux, Windows, macOS, Solaris, AIX, and other operating systems. It can be deployed to laptops, desktops, servers, cloud instances, containers, or virtual machines. It provides threats prevention, detection, and response capabilities. It is also used to collect different types of system and application data, that it forwards to the :ref:`Wazuh server <wazuh_server>` through an encrypted and authenticated channel.
+The Wazuh agent is a multi-platform component and runs on Linux, Windows, macOS, Solaris, AIX, and other operating systems. It can be deployed to laptops, desktops, servers, cloud instances, containers, or virtual machines. The agent helps to protect your system by providing threat prevention, detection, and response capabilities. It is also used to collect different types of system and application data that it forwards to the :ref:`Wazuh server <wazuh_server>` through an encrypted and authenticated channel.
 
 Agent architecture
 ------------------
 
-The Wazuh agent has a modular architecture, where different components take care of their own tasks: monitoring the file system, reading log messages, collecting inventory data, scanning system configuration, looking for malware, etc. Users can enable or disable agent modules via configuration settings, adapting the solution to their particular use cases.
+TThe Wazuh agent has a modular architecture composed of components. Each component is in charge of its own tasks, including security actions such as monitoring the file system, reading log messages, collecting inventory data, scanning system configuration, and looking for malware. Users can enable or disable agent modules via configuration settings, adapting the solution to their particular use cases.
 
 The diagram below represents the agent architecture and components:
 
