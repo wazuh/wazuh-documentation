@@ -10,7 +10,7 @@ The Wazuh agent is a multi-platform component and runs on Linux, Windows, macOS,
 Agent architecture
 ------------------
 
-TThe Wazuh agent has a modular architecture composed of components. Each component is in charge of its own tasks, including security actions such as monitoring the file system, reading log messages, collecting inventory data, scanning system configuration, and looking for malware. Users can enable or disable agent modules via configuration settings, adapting the solution to their particular use cases.
+TThe Wazuh agent has a modular architecture composed of components. Each component is in charge of its own tasks, including security actions such as monitoring the file system, reading log messages, collecting inventory data, scanning system configuration, and looking for malware. Users can manage agent modules via configuration settings, adapting the solution to their particular use cases.
 
 The diagram below represents the agent architecture and components:
 
@@ -25,7 +25,7 @@ The diagram below represents the agent architecture and components:
 Agent modules
 -------------
 
-All agent modules have different purposes and settings. Here is a brief description of what they do:
+All agent modules are configurable and perform different security tasks. This modular architecture allows you to enable or disable each component according to your security needs. Below you can learn about the different purposes and settings of all the agent modules.
 
 - **Log collector:** This agent component can read flat log files and Windows events, collecting operating system and application log messages. It supports XPath filters for Windows events and recognizes multi-line formats like Linux Audit logs. It can also enrich JSON events with additional metadata.
 
