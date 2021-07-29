@@ -31,7 +31,7 @@ All agent modules have different purposes and settings. Here is a brief descript
 
 - **Command execution:** Agents run authorized commands periodically, collecting their output and reporting it back to the Wazuh server for further analysis. You can also use this module for other purposes such as to monitor hard disk space left and get a list of last logged-in users.
 
-- **File integrity monitoring (FIM):** This module monitors the file system, reporting when files are created, deleted, or modified. It keeps track of file attributes, permissions, ownership, and content. When an event occurs, it captures *who*, *what*, and *when* details in real time. Additionally, this module builds and maintains a database with the state of the monitored files, allowing queries to be run remotely.
+- **File integrity monitoring (FIM):** This module monitors the file system, reporting when files are created, deleted, or modified. It also keeps track of changes in file attributes, permissions, ownership, and content. When an event occurs, it captures *who*, *what*, and *when* details in real time. Additionally, the FIM module builds and maintains a database with the state of the monitored files, allowing queries to be run remotely.
 
 - **Security configuration assessment (SCA):** This component provides continuous configuration assessment, utilizing out-of-the-box checks based on the Center of Internet Security (CIS) benchmarks. Users can also create their own SCA checks to monitor and enforce their security policies.
 
