@@ -35,9 +35,9 @@ All agent modules have different purposes and settings. Here is a brief descript
 
 - **Security configuration assessment (SCA):** This component provides continuous configuration assessment, utilizing out-of-the-box checks based on the Center of Internet Security (CIS) benchmarks. Users can also create their own SCA checks to monitor and enforce their security policies.
 
-- **System inventory:** This agent module periodically runs scans, collecting inventory data such as operating system version, network interfaces, running processes, installed applications, and a list of open ports. Scan results are stored into local SQLite databases that can be queried remotely.
+- **System inventory:** This agent module periodically runs scans, collecting inventory data such as operating system version, network interfaces, running processes, installed applications, and a list of open ports. Scan results are stored in local SQLite databases that can be queried remotely.
 
-- **Malware detection:** Using a non-signature based approach, this component is capable of detecting anomalies and possible presence of rootkits. Monitoring system calls, it looks for hidden processes, hidden files, and hidden ports. 
+- **Malware detection:** Using a non-signature-based approach, this component is capable of detecting anomalies and the possible presence of rootkits. Also, it looks for hidden processes, hidden files, and hidden ports while monitoring system calls. 
 
 - **Active response:** This module runs automatic actions when threats are detected. Among other things, it can block a network connection, stop a running process, or delete a malicious file. Custom responses can also be created by users when necessary (e.g. run a binary in a sandbox, capture a network connection traffic, scan a file with an antivirus, etc.).
 
