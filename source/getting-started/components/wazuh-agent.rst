@@ -29,7 +29,7 @@ All agent modules have different purposes and settings. Here is a brief descript
 
 - **Log collector:** This agent component can read flat log files and Windows events, collecting operating system and application log messages. It does support XPath filters for Windows events and recognizes multi-line formats (e.g. Linux Audit logs). It can also enrich JSON events with additional metadata.
 
-- **Command execution:** Agents can run authorized commands periodically, collecting their output and reporting it back to the Wazuh server for further analysis. This module can be used to meet different purposes (e.g. monitoring hard disk space left, getting a list of last logged in users, etc.).
+- **Command execution:** Agents can run authorized commands periodically, collecting their output and reporting it back to the Wazuh server for further analysis. This module can be used to meet different purposes (e.g. monitoring hard disk space left, getting a list of last logged-in users, etc.).
 
 - **File integrity monitoring (FIM):** This module monitors the file system, reporting when files are created, deleted, or modified. It keeps track of file attributes, permissions, ownership, and content. When an event occurs, it captures *who*, *what*, and *when* details in real time. Additionally, this module builds and maintains a database with the state of the monitored files, allowing queries to be run remotely.
 
