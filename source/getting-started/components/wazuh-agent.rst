@@ -39,7 +39,7 @@ All agent modules have different purposes and settings. Here is a brief descript
 
 - **Malware detection:** Using a non-signature-based approach, this component is capable of detecting anomalies and the possible presence of rootkits. Also, it looks for hidden processes, hidden files, and hidden ports while monitoring system calls. 
 
-- **Active response:** This module runs automatic actions when threats are detected. Among other things, it can block a network connection, stop a running process, or delete a malicious file. Custom responses can also be created by users when necessary (e.g. run a binary in a sandbox, capture a network connection traffic, scan a file with an antivirus, etc.).
+- **Active response:** This module runs automatic actions when threats are detected, triggering responses to block a network connection, stop a running process, or delete a malicious file. Users can also create custom responses when necessary and customize, for example, responses for running a binary in a sandbox, capturing a network connection traffic, and scanning a file with an antivirus.
 
 - **Containers security monitoring:** This agent module is integrated with the Docker Engine API in order to monitor changes in a containerized environment. For example, it detects changes to container images, network configuration, or data volumes. Besides, it alerts on containers running in privileged mode and on users executing commands in a running container.
 
