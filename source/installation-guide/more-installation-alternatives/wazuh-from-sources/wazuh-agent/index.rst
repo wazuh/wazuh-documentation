@@ -56,6 +56,7 @@ Installing Wazuh agent from sources
               # cd cmake-3.18.3 && ./bootstrap --no-system-curl
               # make -j$(nproc) && make install
               # cd .. && rm -rf cmake-*
+              # export PATH=/usr/local/bin:$PATH
 
 
       .. tab:: APT
