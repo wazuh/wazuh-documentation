@@ -8,10 +8,8 @@
 Upgrading the Wazuh manager
 ===========================
 
-This section describes how to upgrade the Wazuh manager to the latest available version, which includes upgrading to the latest compatible version of Open Distro for Elasticsearch or Elastic Stack basic licence.
+This section describes how to upgrade the Wazuh manager to the latest available version. When upgrading a Wazuh multi-node cluster, it is recommended to update the master node first to reduce server downtime.
 
-.. note::
-  In order to reduce server downtime, it is recommended to update the master node first
 
 .. note:: Root user privileges are required to execute all the commands described below.
 
