@@ -47,7 +47,7 @@ Follow these steps to create an internal user, map it to its appropriate role, a
 
 
 Set a user as admin
--------------------
+^^^^^^^^^^^^^^^^^^^
 
 After creating an internal user and mapping the user to Wazuh, you need to follow these steps to give administrator permissions to the user.
 
@@ -75,7 +75,7 @@ After creating an internal user and mapping the user to Wazuh, you need to follo
 
 
 Set a user as read-only
------------------------
+^^^^^^^^^^^^^^^^^^^^^^^
 
 After creating an internal user and mapping the user to Wazuh, you need to follow these steps to give read-only permissions to the user.
 
