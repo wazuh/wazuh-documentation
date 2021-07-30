@@ -52,4 +52,4 @@ The Wazuh agent communicates with the :ref:`Wazuh server <wazuh_server>` in orde
 
 The communication of the agent with the server takes place through a secure channel (TCP or UDP), providing data encryption and compression in real time. Additionally, it includes flow control mechanisms to avoid flooding, queueing events when necessary, and protecting the network bandwidth.
 
-You need to register the agent first before connecting it to the server for the first time. This process provisions the agent with a unique pre-shared key that is used for authentication and data encryption. 
+You need to register the agent before connecting it to the server for the first time. This process provisions the agent with a unique pre-shared key that is used for authentication and data encryption. 
