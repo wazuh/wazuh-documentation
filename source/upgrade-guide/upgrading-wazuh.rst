@@ -8,7 +8,7 @@
 Upgrading the Wazuh manager
 ===========================
 
-This section describes how to upgrade the Wazuh manager to the latest available version, which includes upgrading to the latest compatible version of Open Distro for Elasticsearch or Elastic Stack basic licence. 
+This section describes how to upgrade the Wazuh manager to the latest available version, which includes upgrading to the latest compatible version of Open Distro for Elasticsearch or Elastic Stack basic licence.
 
 .. note::
   In order to reduce server downtime, it is recommended to update the master node first
@@ -28,8 +28,15 @@ To upgrade the Wazuh manager, choose the appropriate tab for the desired package
       .. code-block:: console
 
         # yum clean all
+
+    4. **(For upgrades from version 3.13.3)** Remove the Wazuh API:
+
+      .. code-block:: console
+
+          # yum remove wazuh-api
+
     
-    4. Upgrade the Wazuh manager to the latest version:
+    5. Upgrade the Wazuh manager to the latest version:
 
       .. code-block:: console
 
@@ -38,8 +45,14 @@ To upgrade the Wazuh manager, choose the appropriate tab for the desired package
   .. group-tab:: APT
 
     .. include:: ../_templates/installations/basic/wazuh/deb/add_repository_aio.rst
+   
+    4. **(For upgrades from version 3.13.3)** Remove the Wazuh API:
 
-    4. Upgrade the Wazuh manager to the latest version:
+      .. code-block:: console 
+
+          # apt-get remove --purge wazuh-api
+
+    5. Upgrade the Wazuh manager to the latest version:
 
       .. code-block:: console
 
@@ -49,7 +62,13 @@ To upgrade the Wazuh manager, choose the appropriate tab for the desired package
 
     .. include:: ../_templates/installations/basic/wazuh/zypp/add_repository_aio.rst
 
-    3. Upgrade the Wazuh manager to the latest version:
+    3. **(For upgrades from version 3.13.3)** Remove the Wazuh API:
+
+      .. code-block:: console 
+
+          # zypper remove wazuh-api
+
+    4. Upgrade the Wazuh manager to the latest version:
 
       .. code-block:: console
 
