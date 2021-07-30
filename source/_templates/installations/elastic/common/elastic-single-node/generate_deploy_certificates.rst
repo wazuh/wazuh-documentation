@@ -1,69 +1,69 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-* Move to the installation location and create the certificates directory:
-
-  .. code-block:: console
-
-    # mkdir /etc/elasticsearch/certs
 
 #. Download the ``wazuh-cert-tool.sh`` to create the certificates:
 
-  .. code-block:: console
+   .. code-block:: console
+ 
+     # curl -so ~/wazuh-cert-tool.sh https://packages.wazuh.com/resources/4.1/open-distro/tools/certificate-utility/wazuh-cert-tool.sh
+     # curl -so ~/instances.yml https://packages.wazuh.com/resources/4.1/open-distro/tools/certificate-utility/instances.yml
 
-    # curl -so ~/wazuh-cert-tool.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/tools/certificate-utility/wazuh-cert-tool.sh
-    # curl -so ~/instances.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/tools/certificate-utility/instances.yml
+#. Edit ``~/instances.yml`` and replace the values ``<node-name>`` and ``node-IP``  with the corresponding names and IP addresses. Add as many nodes fields as needed:
+ 
+   .. code-block:: yaml
+ 
+     # Elasticsearch nodes
+     elasticsearch-nodes:
+       - name: <node-name>
+         ip:
+           - node-IP  
 
-Replace the values ``<node-name>`` and ``<node-ip>``  with the corresponding names and IP addresses. There can be added as many nodes fields as needed:
+     # Wazuh server nodes
+     wazuh-servers:
+       - name: <node-name>
+         ip:
+           - node-IP      
+     
+     # Kibana node
+     kibana:
+       - name: <node-name>
+         ip:
+           - node-IP      
+   
+   To learn more about how to create and configure the certificates, see the :ref:`Certificates deployment <user_manual_certificates>` section.
 
-  .. code-block:: yaml
+#. Run the ``wazuh-cert-tool.sh`` to create the certificates:
 
-    # Elasticsearch nodes
-    elasticsearch-nodes:
-      - name: <node-name>
-        ip:
-          - node-IP
-    
-    # Wazuh server nodes
-    wazuh-servers:
-      - name: <node-name>
-        ip:
-          - node-IP      
-    
-    # Kibana node
-    kibana:
-      - name: <node-name>
-        ip:
-          - node-IP      
-  
-  To learn more about how to create and configure the certificates, see the :ref:`Certificates deployment <user_manual_certificates>` section.
+   .. code-block:: console
 
-* Run the ``wazuh-cert-tool.sh`` to create the certificates:
+     #  bash ~/wazuh-cert-tool.sh
 
-  .. code-block:: console
+#. Replace ``elasticsearch-node-name`` with your Elasticsearch node name, the same used in ``instances.yml`` to create the certificates, and move the certificates to their corresponding location:
 
-    #  bash ~/wazuh-cert-tool.sh
+   .. code-block:: console
 
-* Move the Elasticsearch certificates to their corresponding location:
+     # node_name=elasticsearch-node-name
 
-  .. code-block:: console
-
-    # mkdir /etc/elasticsearch/certs/
-    # mv ~/certs/elasticsearch* /etc/elasticsearch/certs/
-    # mv ~/certs/admin* /etc/elasticsearch/certs/
-    # cp ~/certs/root-ca* /etc/elasticsearch/certs/
+   .. code-block:: console
+     
+     # mkdir /etc/elasticsearch/certs/
+     # mv ~/certs/$node_name* /etc/elasticsearch/certs/
+     # mv ~/certs/admin* /etc/elasticsearch/certs/
+     # cp ~/certs/root-ca* /etc/elasticsearch/certs/
+     # mv /etc/elasticsearch/certs/$node_name.pem /etc/elasticsearch/certs/elasticsearch.pem
+     # mv /etc/elasticsearch/certs/$node_name-key.pem /etc/elasticsearch/certs/elasticsearch-key.pem
 
 
+#. Compress all the necessary files to be sent to all the instances:
 
-* Compress all the necessary files to be sent to all the instances:
+   .. code-block:: console
 
-  .. code-block:: console
+     # cd ~/certs/  
+     # tar -cvf certs.tar *
+     # mv ~/certs/certs.tar ~/
 
-    # cd ~/certs/  
-    # tar -cvf certs.tar *
-    # mv ~/certs/certs.tar ~/
+#. Copy ``certs.tar`` to all the servers of the distributed deployment. This can be done by using, for example, ``scp``. 
 
-* Copy ``certs.tar`` to all the servers of the distributed deployment. This can be done by using, for example, ``scp``. 
-
-* If Kibana will be installed on this node, keep the certificates file. Otherwise, if the file is already copied to all the instances of the distributed deployment, remove it to increase security  ``rm -f certs.tar``.
+#. If Kibana will be installed on this node, keep the certificates file. Otherwise, if the file is already copied to all the instances of the distributed deployment, remove it to increase security  ``rm -f certs.tar``.
 
 .. End of include file

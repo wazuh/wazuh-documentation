@@ -10,22 +10,22 @@
 
 This section lists the changes in version 4.1.0. More details about these changes are provided in the changelog of each component:
 
-- `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/4.1/CHANGELOG.md>`_
+- `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v4.1.0/CHANGELOG.md>`_
 - `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/4.1-7.10/CHANGELOG.md>`_
 - `wazuh/wazuh-ruleset <https://github.com/wazuh/wazuh-ruleset/blob/4.1/CHANGELOG.md>`_
 
 Highlights
 ----------
 
-- Added support for regular expressions negation and PCRE2 format in rules and decoders. 
+- Added support for regular expressions negation and PCRE2 format in rules and decoders.
 - New **ruleset test module** managed by the analysis daemon allowing testing sessions of rules and decoders.
-- New **upgrade module** that provides simultaneous agent upgrades in a single node or cluster architecture. 
+- New **upgrade module** that provides simultaneous agent upgrades in a single node or cluster architecture.
 - The Vulnerability Detector now supports macOS agents. These agents must be updated to 4.1 to scan vulnerabilities.
 - Support for AWS load balancers logs: Application Load Balancer, Classic Load Balancer, and Network Load Balancer.
 - Removed the limit on the number of agents a manager can support.
 - New endpoints to query and manage Rootcheck data.
-- Support for Open Distro for Elasticsearch 1.12.0. 
-- Support for Elastic Stack basic license 7.10.0 and 7.10.2. 
+- Support for Open Distro for Elasticsearch 1.12.0.
+- Support for Elastic Stack basic license 7.10.0 and 7.10.2.
 
 Wazuh core
 ----------

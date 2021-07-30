@@ -1,5 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
-
+.. meta::
+  :description: Check out how to install Open Distro for Elasticsearch and Open Distro for Kibana using a script that automates the installation process.
+  
 .. _unattended_distributed_elasticsearch:
 
 Elasticsearch & Kibana unattended installation
@@ -48,8 +50,8 @@ Choose the cluster mode between single-node or multi-node:
 
       .. code-block:: console
 
-          # curl -so ~/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/|WAZUH_LATEST_MINOR|/resources/open-distro/unattended-installation/distributed/elastic-stack-installation.sh 
-          # curl -so ~/config.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/|WAZUH_LATEST_MINOR|/resources/open-distro/unattended-installation/distributed/templates/config.yml
+          # curl -so ~/elastic-stack-installation.sh https://packages.wazuh.com/resources/4.1/open-distro/unattended-installation/distributed/elastic-stack-installation.sh 
+          # curl -so ~/config.yml https://packages.wazuh.com/resources/4.1/open-distro/unattended-installation/distributed/templates/config.yml
 
     **Configure the installation** 
       
@@ -110,8 +112,8 @@ Choose the cluster mode between single-node or multi-node:
 
       .. code-block:: console
 
-          # curl -so ~/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/|WAZUH_LATEST_MINOR|/resources/open-distro/unattended-installation/distributed/elastic-stack-installation.sh 
-          # curl -so ~/config.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/|WAZUH_LATEST_MINOR|/resources/open-distro/unattended-installation/distributed/templates/config_cluster.yml
+          # curl -so ~/elastic-stack-installation.sh https://packages.wazuh.com/resources/4.1/open-distro/unattended-installation/distributed/elastic-stack-installation.sh 
+          # curl -so ~/config.yml https://packages.wazuh.com/resources/4.1/open-distro/unattended-installation/distributed/templates/config_cluster.yml
 
     - Configure the installation:
 
@@ -182,7 +184,7 @@ Choose the cluster mode between single-node or multi-node:
 
       .. code-block:: console
 
-        # curl -so ~/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/|WAZUH_LATEST_MINOR|/resources/open-distro/unattended-installation/distributed/elastic-stack-installation.sh 
+        # curl -so ~/elastic-stack-installation.sh https://packages.wazuh.com/resources/4.1/open-distro/unattended-installation/distributed/elastic-stack-installation.sh 
 
 
     - In order to install the subsequent nodes, run the script with the options ``-e`` and ``-n <node_name>``. The name of the node must be the same used in ``config.yml`` for the certificate creation, e.g. ``master_node_x``:
@@ -220,7 +222,7 @@ Installing Kibana
 
     .. code-block:: console
 
-      # curl -so ~/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/|WAZUH_LATEST_MINOR|/resources/open-distro/unattended-installation/distributed/elastic-stack-installation.sh
+      # curl -so ~/elastic-stack-installation.sh https://packages.wazuh.com/resources/4.1/open-distro/unattended-installation/distributed/elastic-stack-installation.sh
 
 #. Run the script:
 
@@ -256,4 +258,3 @@ Next steps
 ----------
 
 Once the Elastic Stack environment is ready, the Wazuh server can be installed. To do this, follow the steps described in the :ref:`Wazuh server <unattended_distributed_wazuh>` section of the installation guide.
-

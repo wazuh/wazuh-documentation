@@ -24,7 +24,7 @@ Requirements
 Container memory
 ^^^^^^^^^^^^^^^^
 
-It is recommended to set Docker host preferences to give at least **6GB** memory for the host that created the containers (this doesn't necessarily mean they all will use it, but **Elasticsearch** requires them to work properly).
+It is recommended to configure the Docker host preferences to give at least 6GB of memory for the host that created the containers (this does not necessarily mean that everyone uses them, but Elasticsearch requires them to work properly).
 
 Increase max_map_count on your host (Linux)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -77,12 +77,12 @@ Increase max_map_count on your host (Windows)
 
     .. warning::
 
-      If you don't set the **max_map_count** on your host, Elasticsearch will probably NOT work.
+      If the **max_map_count** is not set on the host, Elasticsearch will probably NOT work.
 
 SELinux
 ^^^^^^^
 
-On distributions with SELinux enabled out-of-the-box, you will need to either re-context the files or put SELinux into Permissive mode for docker-elk to start properly. For example, on Red Hat and CentOS the following command will apply the proper context:
+On distributions with SELinux enabled out-of-the-box, it is necessary to either re-context the files or put SELinux into Permissive mode for docker-elk to start properly. For example, on Red Hat and CentOS the following command will apply the proper context:
 
 .. code-block:: console
 
@@ -91,7 +91,7 @@ On distributions with SELinux enabled out-of-the-box, you will need to either re
 Docker for OSX
 ^^^^^^^^^^^^^^
 
-In Docker for OSX, there is a default memory limit of 2GB, so in order to run `docker-compose up` successfully you have to change default memory settings from 2GB to at least 4 or 5GB. To do so, click on the Docker icon in the menu bar, then on "Preferences...", go to the "Advanced" tab and set 5GB of memory, and finally click on "Apply & Restart" and run `docker-compose up`.
+In Docker for OSX, there is a default memory limit of 2GB, so in order to run `docker-compose up` successfully, it is necessary to change default memory settings from 2GB to at least 4 or 5GB. To do so, click on the Docker icon in the menu bar, then on "Preferences...", go to the "Advanced" tab and set 5GB of memory. Finally, click on "Apply & Restart" and run `docker-compose up`.
 
 Usage
 -----
@@ -99,7 +99,7 @@ Usage
 Demo deployment
 ^^^^^^^^^^^^^^^
 
-This configuration is provided as-is for testing purposes only, it is designed for maximum ease of use to get you started fast with Wazuh. For real production environments see `Production deployment`_.
+This configuration is provided as-is for testing purposes only. It is designed for maximum ease of use to get started quickly with Wazuh. For real production environments see `Production deployment`_.
 
 
 1. Clone the Wazuh repository to your system:
@@ -134,13 +134,13 @@ These are the steps to deploy a production grade Wazuh cluster using the "Open D
 
     $ git clone https://github.com/wazuh/wazuh-docker.git -b v|WAZUH_LATEST_DOCKER| --depth=1
 
-  We'll use ``production-cluster.yml`` as base for this deployment, all code snippets on this section come from this file.
+  ``production-cluster.yml`` will be used as base for this deployment, and all code snippets on this section come from this file.
 
 2. Secure traffic by replacing demo certificates
 
   2.1 Generate certificates for each node of the cluster
 
-    We made a Docker image to automate certificate generation using `SearchGuard TLS Tool <https://docs.search-guard.com/latest/offline-tls-tool>`_, modify the file ``ssl_certs/certs.yml`` and execute the following command to obtain the desired certificates::
+    Make a Docker image to automate certificate generation using `SearchGuard TLS Tool <https://docs.search-guard.com/latest/offline-tls-tool>`_. Then, modify the file ``ssl_certs/certs.yml`` and execute the following command to obtain the desired certificates::
 
       docker-compose -f generate-opendistro-certs.yml run --rm generator
 
@@ -159,7 +159,7 @@ These are the steps to deploy a production grade Wazuh cluster using the "Open D
 
   2.3 Use a secure password for the admin user on Elasticsearch
 
-    You have complete freedom to customize users on the Elasticsearch container by mounting your own ``internal_users.yml``::
+    You can customize users on the Elasticsearch container by mounting your own ``internal_users.yml``::
 
       - ./elastic_opendistro/internal_users.yml:/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml
 
@@ -197,7 +197,7 @@ These are the steps to deploy a production grade Wazuh cluster using the "Open D
         - ./production_cluster/kibana_ssl/key.pem:/usr/share/kibana/config/key.pem
 
   .. note::
-    We provide an easy way to generate a self signed certificate by running ``bash ./production_cluster/kibana_ssl/generate-self-signed-cert.sh``
+    Wazuh provides an easy way to generate a self signed certificate by running ``bash ./production_cluster/kibana_ssl/generate-self-signed-cert.sh``
 
 
   2.5 Setup SSL on the Nginx load balancer
@@ -213,7 +213,7 @@ These are the steps to deploy a production grade Wazuh cluster using the "Open D
         - ./production_cluster/nginx/ssl:/etc/nginx/ssl:ro
 
   .. note::
-    We provide an easy way to generate a self signed certificate by running ``bash ./production_cluster/nginx/ssl/generate-self-signed-cert.sh``
+    Wazuh provides an easy way to generate a self signed certificate by running ``bash ./production_cluster/nginx/ssl/generate-self-signed-cert.sh``
 
 
 3. Start Wazuh and Elastic Stack using ``docker-compose``:
@@ -249,4 +249,4 @@ By default, the stack exposes the following ports:
 +-----------+-----------------------------+
 
 .. note::
-  Configuration is not dynamically reloaded, so you will need to restart the stack after any change in the configuration of a component.
+  Configuration is not dynamically reloaded, so it is necessary to restart the stack after changing the configuration of a component.

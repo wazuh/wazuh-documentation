@@ -1,5 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
-
+.. meta::
+  :description: Learn more about how to configure the collection of log data from files, Windows events, and from the output of commands with Wazuh. 
+  
 .. _reference_ossec_localfile:
 
 localfile

@@ -123,7 +123,7 @@ Filebeat installation and configuration
 
     .. code-block:: console
 
-      # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/|WAZUH_LATEST_MINOR|/resources/open-distro/filebeat/7.x/filebeat.yml
+      # curl -so /etc/filebeat/filebeat.yml https://packages.wazuh.com/resources/4.1/open-distro/filebeat/7.x/filebeat.yml
 
 #. Download the alerts template for Elasticsearch:
 
@@ -140,7 +140,7 @@ Filebeat installation and configuration
 
     .. include:: ../../../../../_templates/installations/elastic/common/configure_filebeat.rst
 
-#. Configure Filebeat certificates:
+#. Replace ``wazuh-node-name`` with your Wazuh node name, the same used in ``instances.yml`` to create the certificates, and move the certificates to their corresponding location. This guide assumes that a copy of ``certs.tar``, created during the Elasticsearch installation,  has been placed in the root home folder (``~/``). 
 
     .. include:: ../../../../../_templates/installations/elastic/common/copy_certificates_filebeat.rst
 
