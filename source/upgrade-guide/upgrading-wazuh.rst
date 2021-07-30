@@ -13,7 +13,7 @@ This section describes how to upgrade the Wazuh manager to the latest available 
 
 .. note:: Root user privileges are required to execute all the commands described below.
 
-To upgrade the Wazuh manager, choose the appropriate tab for the desired package manager:
+To upgrade the Wazuh manager, choose your package manager and follow the instructions. 
 
 .. tabs::
 
@@ -115,4 +115,5 @@ It is recommended to disable the Wazuh repository in order to avoid undesired up
 Next step
 ---------
 
-:ref:`Upgrading Elasticsearch, Kibana and Filebeat<upgrade_elasticsearch_filebeat_kibana>`.
+The Wazuh manager is now successfully upgraded and you can proceed with upgrading the Elastic Stack. To perform this action, see the :ref:`Upgrading Elasticsearch, Kibana and Filebeat<upgrade_elasticsearch_filebeat_kibana>` section.
+
