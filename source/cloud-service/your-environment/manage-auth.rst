@@ -37,7 +37,7 @@ Follow these steps to create an internal user, map it to its appropriate role, a
 #. To map the user with Wazuh, follow these steps:
    
    #. Go to the Wazuh WUI, click **Wazuh** to open the menu, select **Security**, and then **Roles mapping** to open the page.
-   #. Click **Create role mapping** and complete the empty fields with the following parameters:
+   #. Click **Create Role mapping** and complete the empty fields with the following parameters:
    
       - **Role mapping name**: Assign a name to the role mapping.
       - **Roles**: Select the Wazuh roles that you want to map with the user.
@@ -46,48 +46,68 @@ Follow these steps to create an internal user, map it to its appropriate role, a
    #. Click **Save role mapping** to save and map the user with Wazuh.
 
 
-Set an user as admin
---------------------
+Set a user as admin
+-------------------
 
-After creating an internal user and mapping the user to Wazuh, you need to follow these steps to give administrator permissions to the user:
+After creating an internal user and mapping the user to Wazuh, you need to follow these steps to give administrator permissions to the user.
 
-1. :ref:`Log into your WUI<cloud_getting_started_wui_access>` as administrator.
+#. :ref:`Log into your WUI<cloud_getting_started_wui_access>` as administrator.
 
-2. Click the upper-left menu icon to open the options, select **Security** and then **Roles** to open the roles page.
+#. Click the upper-left menu icon to open the options, select **Security** and then **Roles** to open the roles page.
 
-3. Click the **all_access** role to open the role detail.
+#. Search for the **all_access** role in the roles' list and select it to open the details window.
 
-4. Select the **Mapped users** tab and click **Manage mapping**.
+#. Select the **Mapped users** tab and click **Manage mapping**.
  
-5. Add the user you created in the previous steps and click **Map** to confirm the action.
+#. Add the user you created in the previous steps and click **Map** to confirm the action.
 
-6. To map the user as administrator with Wazuh, repeat the step 5 of the **Create internal user* guide, but for the **Roles** parameter select just ``administrator`` role.
+#. To map the user with Wazuh, follow these steps:
+   
+   #. Go to the Wazuh WUI, click **Wazuh** to open the menu, select **Security**, and then **Roles mapping** to open the page.
+   #. Click **Create Role mapping** and complete the empty fields with the following parameters:
+   
+      - **Role mapping name**: Assign a name to the role mapping.
+      - **Roles**: Select ``administrator``.
+      - **Internal users**: Select the internal user created previously.
+  
+   #. Click **Save role mapping** to save and map the user with Wazuh as *administrator*. 
 
 
-Set an user as read-only
+
+Set a user as read-only
 -----------------------
 
-After creating an internal user and mapping the user to Wazuh, you need to follow these steps to give read-only permissions to the user:
+After creating an internal user and mapping the user to Wazuh, you need to follow these steps to give read-only permissions to the user.
 
-1. :ref:`Log into your WUI<cloud_getting_started_wui_access>` as administrator.
+#. :ref:`Log into your WUI<cloud_getting_started_wui_access>` as administrator.
 
-2. Click the upper-left menu icon to open the options, select **Security** and then **Roles** to open the roles page.
+#. Click the upper-left menu icon to open the options, select **Security** and then **Roles** to open the roles page.
 
-3. Click **Create role**, complete the empty fields with the following parameters, and then click **Create** to complete the task. 
+#. Click **Create role**, complete the empty fields with the following parameters, and then click **Create** to complete the task. 
    
-   - Name: Assign a name to the role.
+   - **Name**: Assign a name to the role.
      
-   - Cluster permissions: ``cluster_composite_ops_ro``
+   - **Cluster permissions**: ``cluster_composite_ops_ro``
 
-   - Index: ``*``
+   - **Index**: ``*``
 
-   - Index permissions: ``read``
+   - **Index permissions**: ``read``
 
-   - Tenant permissions: ``global_tenant`` and select the **Read only** option.
+   - **Tenant permissions**: ``global_tenant`` and select the **Read only** option.
 
-4. To map the user as read-only with Wazuh, repeat the step 5 of the **Create internal user* guide, but for the **Roles** parameter select just ``readonly`` role.
+#. To map the user with Wazuh, follow these steps:
 
-To add more read-only users, you can skip the role creation task and map them to the already existing read-only role.
+   #. Go to the Wazuh WUI, click **Wazuh** to open the menu, select **Security**, and then **Roles mapping** to open the page.
+
+   #. Click **Create Role mapping** and complete the empty fields with the following parameters:
+
+      - **Role mapping name**: Assign a name to the role mapping.
+      - **Roles**: Select ``readonly``.
+      - **Internal users**: Select the internal user created previously.
+
+   #. Click **Save role mapping** to save and map the user with Wazuh as *read-only*. 
+
+To add more read-only users, you can skip the role creation task and map the users to the already existing read-only role.
 
 
 Integrating with external user management systems
