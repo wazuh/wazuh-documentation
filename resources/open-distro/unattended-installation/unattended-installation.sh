@@ -430,7 +430,8 @@ installElasticsearch() {
             fi 
             echo "opendistro_security.nodes_dn:" >> /etc/elasticsearch/elasticsearch.yml
             for i in "${!ELASTICNODES[@]}"; do
-                echo "- CN=${ELASTICNODES[i]},OU=Docu,O=Wazuh,L=California,C=US" >> /etc/elasticsearch/elasticsearch.yml
+                enodename="${ELASTICNODES[i]}"
+                echo "- CN=${enodename:1},OU=Docu,O=Wazuh,L=California,C=US" >> /etc/elasticsearch/elasticsearch.yml
             done
 
         fi
