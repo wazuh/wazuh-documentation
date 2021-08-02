@@ -29,7 +29,9 @@ Installing Wazuh manager
           .. code-block:: console
 
             # yum update
-            # yum install make gcc gcc-c++ policycoreutils-python automake autoconf libtool centos-release-scl devtoolset-7
+            # yum install make gcc gcc-c++ policycoreutils-python automake autoconf libtool centos-release-scl openssl-devel
+            # yum update
+            # yum install devtoolset-7
             # scl enable devtoolset-7 bash
 
 
