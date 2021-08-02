@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Wazuh is a comprehensive open source cybersecurity platform. Check out the user manual to  find out how to configure and use each of the Wazuh components. 
+  
 .. _user_manual:
 
 User manual
