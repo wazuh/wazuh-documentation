@@ -17,8 +17,8 @@ Community and support
 
 .. include:: ../_templates/community.rst
 
-Capabilities
-------------
+Screenshots
+-----------
 
 .. list-table::
    :width: 100%
