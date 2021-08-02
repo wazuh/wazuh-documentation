@@ -2,8 +2,8 @@
 
 .. _active_response:
 
-Active response
-===============
+Incident response
+=================
 
 :ref:`Wazuh agent <wazuh_agent>` automates the response to threats by running actions when they are detected. The agent has the ability to block network connections, stop running processes or delete malicious files, among other actions. In addition, it can also run customized scripts developed by the user (for example, Python, Bash or PowerShell).
 
