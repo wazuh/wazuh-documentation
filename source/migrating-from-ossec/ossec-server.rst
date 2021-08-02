@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+   :description: If you are looking for how to migrate from OSSEC to Wazuh, in this section we explain how to migrate without losing configuration data or agent keys.
+   
 .. _ossec_server:
 
 Migrating OSSEC server
