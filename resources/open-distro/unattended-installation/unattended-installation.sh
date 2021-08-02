@@ -393,6 +393,11 @@ installElasticsearch() {
         if [ -z "${aio}" ]; then
             conf="$(awk '{sub("node.name: node-1", "node.name: '${ename}'")}1' /etc/elasticsearch/elasticsearch.yml)"
             echo "${conf}" > /etc/elasticsearch/elasticsearch.yml
+            if [ ${#ENODESIP[@]} -gt "1" ]; then
+                nip=${ENODESIP[ippos]}
+                conf="$(awk '{sub("network.host: 0.0.0.0", "network.host: '${nip:1}'")}1' /etc/elasticsearch/elasticsearch.yml)"
+                echo "${conf}" > /etc/elasticsearch/elasticsearch.yml
+            fi
             conf="$( grep -v "cluster.initial_master_nodes:" /etc/elasticsearch/elasticsearch.yml)"
             echo "${conf}" > /etc/elasticsearch/elasticsearch.yml
             conf="$( grep -v "        - node-1" /etc/elasticsearch/elasticsearch.yml)"
@@ -441,89 +446,91 @@ installElasticsearch() {
         eval "curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml https://packages.wazuh.com/resources/4.1/open-distro/elasticsearch/roles/internal_users.yml --max-time 300 ${debug}"        
         eval "rm /etc/elasticsearch/esnode-key.pem /etc/elasticsearch/esnode.pem /etc/elasticsearch/kirk-key.pem /etc/elasticsearch/kirk.pem /etc/elasticsearch/root-ca.pem -f ${debug}"
 
-        if [ -n "${aio}" ]; then
+        if [[ -n "${aio}" ]] || [[ -n ${certificates} ]]; then
+            if [ -n "${aio}" ]; then
 
-            ## Create certificates
-            eval "mkdir /etc/elasticsearch/certs ${debug}"
-            eval "cd /etc/elasticsearch/certs ${debug}"
-            eval "curl -so ~/wazuh-cert-tool.sh https://packages.wazuh.com/resources/4.1/open-distro/tools/certificate-utility/wazuh-cert-tool.sh --max-time 300 ${debug}"
+                ## Create certificates
+                eval "mkdir /etc/elasticsearch/certs ${debug}"
+                eval "cd /etc/elasticsearch/certs ${debug}"
+                eval "curl -so ~/wazuh-cert-tool.sh https://packages.wazuh.com/resources/4.1/open-distro/tools/certificate-utility/wazuh-cert-tool.sh --max-time 300 ${debug}"
 
-            echo "# Elasticsearch nodes" >> ~/instances.yml
-            echo "elasticsearch-nodes:" >> ~/instances.yml
-            echo "- name: elasticsearch" >> ~/instances.yml
-            echo "    ip:" >> ~/instances.yml
-            echo "    - 127.0.0.1" >> ~/instances.yml
-
-            echo "# Wazuh server nodes" >> ~/instances.yml
-            echo "wazuh-servers:" >> ~/instances.yml
-            echo "- name: filebeat" >> ~/instances.yml
-            echo "    ip:" >> ~/instances.yml
-            echo "    - 127.0.0.1" >> ~/instances.yml
-
-            echo "# Kibana node"  >> ~/instances.yml
-            echo "kibana:"  >> ~/instances.yml
-            echo "- name: kibana" >> ~/instances.yml
-            echo "    ip:" >> ~/instances.yml
-            echo "    - 127.0.0.1" >> ~/instances.yml
-        else
-            eval "mkdir /etc/elasticsearch/certs ${debug}"
-            eval "cd /etc/elasticsearch/certs ${debug}"
-            eval "curl -so ~/wazuh-cert-tool.sh https://packages.wazuh.com/resources/4.1/open-distro/tools/certificate-utility/wazuh-cert-tool.sh --max-time 300 ${debug}"
-            echo "# Elasticsearch nodes" >> ~/instances.yml
-            echo "elasticsearch-nodes:" >> ~/instances.yml
-
-            for i in "${!ELASTICNODES[@]}"; do
-                rm="-"
-                elasticname="${ELASTICNODES[i]}"
-                elasticname="${elasticname:1}"
-                elasticsearchip="${ENODESIP[i]}"
-                elasticsearchip="${elasticsearchip:1}"
-                echo "  - name: ${elasticname}" >> ~/instances.yml
+                echo "# Elasticsearch nodes" >> ~/instances.yml
+                echo "elasticsearch-nodes:" >> ~/instances.yml
+                echo "- name: elasticsearch" >> ~/instances.yml
                 echo "    ip:" >> ~/instances.yml
-                echo "      - ${elasticsearchip}" >> ~/instances.yml
-            done           
-            echo "# Wazuh server nodes" >> ~/instances.yml
-            echo "wazuh-servers:" >> ~/instances.yml
-            i=0
-            while [ ${i} -lt ${#FILEBEATNODES[@]} ]; do
-                rm="-"
-                filebeatname="${FILEBEATNODES[i]}"
-                filebeatname="${filebeatname//$rm}" 
-                filebeatip="${WAZUHSERVERIPS[i]}"
-                filebeatip="${filebeatip//$rm}"             
-                echo "  - name: ${filebeatname}" >> ~/instances.yml
+                echo "    - 127.0.0.1" >> ~/instances.yml
+
+                echo "# Wazuh server nodes" >> ~/instances.yml
+                echo "wazuh-servers:" >> ~/instances.yml
+                echo "- name: filebeat" >> ~/instances.yml
                 echo "    ip:" >> ~/instances.yml
-                echo "      - ${filebeatip}" >> ~/instances.yml
-                ((i++))
-                ((i++))
-            done
+                echo "    - 127.0.0.1" >> ~/instances.yml
 
-            echo "# Kibana node"  >> ~/instances.yml
-            echo "kibana:"  >> ~/instances.yml
-            rm="-"
-            kibananame="${KIBANANODES[0]}"
-            kibanaip="${KIBANANODES[1]}"
-            kibananame="${kibananame:1}"
-            kibanaip="${kibanaip:1}"
-            echo "  - name: ${kibananame}" >> ~/instances.yml
-            echo "    ip:" >> ~/instances.yml
-            echo "    - ${kibanaip}" >> ~/instances.yml
+                echo "# Kibana node"  >> ~/instances.yml
+                echo "kibana:"  >> ~/instances.yml
+                echo "- name: kibana" >> ~/instances.yml
+                echo "    ip:" >> ~/instances.yml
+                echo "    - 127.0.0.1" >> ~/instances.yml
+            else
+                eval "mkdir /etc/elasticsearch/certs ${debug}"
+                eval "cd /etc/elasticsearch/certs ${debug}"
+                eval "curl -so ~/wazuh-cert-tool.sh https://packages.wazuh.com/resources/4.1/open-distro/tools/certificate-utility/wazuh-cert-tool.sh --max-time 300 ${debug}"
+                echo "# Elasticsearch nodes" >> ~/instances.yml
+                echo "elasticsearch-nodes:" >> ~/instances.yml
 
-        fi
+                for i in "${!ELASTICNODES[@]}"; do
+                    rm="-"
+                    elasticname="${ELASTICNODES[i]}"
+                    elasticname="${elasticname:1}"
+                    elasticsearchip="${ENODESIP[i]}"
+                    elasticsearchip="${elasticsearchip:1}"
+                    echo "  - name: ${elasticname}" >> ~/instances.yml
+                    echo "    ip:" >> ~/instances.yml
+                    echo "      - ${elasticsearchip}" >> ~/instances.yml
+                done           
+                echo "# Wazuh server nodes" >> ~/instances.yml
+                echo "wazuh-servers:" >> ~/instances.yml
+                i=0
+                while [ ${i} -lt ${#FILEBEATNODES[@]} ]; do
+                    rm="-"
+                    filebeatname="${FILEBEATNODES[i]}"
+                    filebeatname="${filebeatname//$rm}" 
+                    filebeatip="${WAZUHSERVERIPS[i]}"
+                    filebeatip="${filebeatip//$rm}"             
+                    echo "  - name: ${filebeatname}" >> ~/instances.yml
+                    echo "    ip:" >> ~/instances.yml
+                    echo "      - ${filebeatip}" >> ~/instances.yml
+                    ((i++))
+                    ((i++))
+                done
 
-        export JAVA_HOME=/usr/share/elasticsearch/jdk/
-        bash ~/wazuh-cert-tool.sh
+                echo "# Kibana node"  >> ~/instances.yml
+                echo "kibana:"  >> ~/instances.yml
+                rm="-"
+                kibananame="${KIBANANODES[0]}"
+                kibanaip="${KIBANANODES[1]}"
+                kibananame="${kibananame:1}"
+                kibanaip="${kibanaip:1}"
+                echo "  - name: ${kibananame}" >> ~/instances.yml
+                echo "    ip:" >> ~/instances.yml
+                echo "    - ${kibanaip}" >> ~/instances.yml
 
-        if [  "$?" != 0  ]; then
-            echo "Error: certificates were not created"
-            rollBack
+            fi
 
-            exit 1;
-        else
-            logger "Certificates created"
+            export JAVA_HOME=/usr/share/elasticsearch/jdk/
+            bash ~/wazuh-cert-tool.sh
+
+            if [  "$?" != 0  ]; then
+                echo "Error: certificates were not created"
+                rollBack
+
+                exit 1;
+            else
+                logger "Certificates created"
+            fi
         fi     
 
-        if [ -z "${aio}" ]; then
+        if [ -z "${aio}" ] && [ -n "${certificates}" ]; then
             eval "cp ~/certs/${ename}* /etc/elasticsearch/certs/ ${debug}"
             eval "cp ~/certs/root-ca.pem /etc/elasticsearch/certs/ ${debug}"
             eval "cp ~/certs/admin* /etc/elasticsearch/certs/ ${debug}"
@@ -533,6 +540,13 @@ installElasticsearch() {
             eval "mv ~/config.yml ~/certs/config.yml"
             eval "tar -cvf certs.tar * ${debug}"
             eval "mv ~/certs/certs.tar ~/ ${debug}"
+        elif [ -z "${aio}" ] && [ -z "${certificates}" ]; then
+            eval "mkdir /etc/elasticsearch/certs ${debug}"
+            eval "mv ~/certs.tar /etc/elasticsearch/certs/ ${debug}"
+            eval "cd /etc/elasticsearch/certs/ ${debug}"
+            eval "tar -xf certs.tar ${ename}.pem ${ename}-key.pem root-ca.pem ${debug}"
+            eval "mv /etc/elasticsearch/certs/${ename}.pem /etc/elasticsearch/certs/elasticsearch.pem ${debug}"
+            eval "mv /etc/elasticsearch/certs/${ename}-key.pem /etc/elasticsearch/certs/elasticsearch-key.pem ${debug}"
         else
             eval "cp ~/certs/elasticsearch* /etc/elasticsearch/certs/ ${debug}"
             eval "cp ~/certs/root-ca.pem /etc/elasticsearch/certs/ ${debug}"
@@ -552,9 +566,12 @@ installElasticsearch() {
         eval "/usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer ${debug}"
         # Start Elasticsearch
         startService "elasticsearch"
+        echo "VALOR: ${#ELASTICNODES[@]}"
         if [ ${#ELASTICNODES[@]} -le "1" ]; then
             echo "Initializing Elasticsearch..."
-            until $(curl -XGET https://localhost:9200/ -uadmin:admin -k --max-time 120 --silent --output /dev/null); do
+            nip=${ENODESIP[ippos]}
+            echo ${nip:1}
+            until $(curl -XGET https://${nip:1}:9200/ -uadmin:admin -k --max-time 120 --silent --output /dev/null); do
                 echo -ne ${char}
                 sleep 10
             done    
