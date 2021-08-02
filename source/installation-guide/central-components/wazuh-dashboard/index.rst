@@ -14,12 +14,12 @@ This central component is a flexible and intuitive web interface for mining, ana
 Requirements
 ------------
 
-Check the supported operating systems and the recommended hardware requirements for the Wazuh interface installation. Make sure that your system environment meets all requirements and that you have root user privileges.
+Check the supported operating systems and the recommended hardware requirements for the Wazuh dashboard installation. Make sure that your system environment meets all requirements and that you have root user privileges.
 
 Supported operating systems
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Wazuh interface can be installed on the following Linux operating systems:
+The Wazuh dashboard can be installed on the following Linux operating systems:
 
 - Amazon Linux 1 and 2
 
@@ -41,7 +41,7 @@ The Wazuh interface can be installed on the following Linux operating systems:
 Hardware requirements
 ^^^^^^^^^^^^^^^^^^^^^
 
-The Wazuh interface can be installed on a dedicated node or along with the Wazuh indexer. A 64-bit operating system is necessary. 
+The Wazuh dashboard can be installed on a dedicated node or along with the Wazuh indexer. A 64-bit operating system is necessary. 
 
 - Hardware recommendations
                           
@@ -50,20 +50,20 @@ The Wazuh interface can be installed on a dedicated node or along with the Wazuh
   +-------------------------+----------+--------------+--------------+----------------+
   | Component               |  RAM (GB)|  CPU (cores) |  RAM (GB)    |   CPU (cores)  |
   +=========================+==========+==============+==============+================+
-  | Wazuh interface         |     4    |     2        |     16       |       8        |
+  | Wazuh dashboard         |     4    |     2        |     16       |       8        |
   +-------------------------+----------+--------------+--------------+----------------+
 
 
 
-Wazuh interface installation
+Wazuh dashboard installation
 ----------------------------
 
 
 Choose an installation method to install this Wazuh central component.
 
-- :ref:`Unattended installation <wazuh_dashboard_unattended_installation>`: Install the Wazuh interface by using a script that automates the installation process.  
+- :ref:`Unattended installation <wazuh_dashboard_unattended_installation>`: Install the Wazuh dashboard by using a script that automates the installation process.  
 
-- :ref:`Step-by-step installation <wazuh_dashboard_step_by_step>`: Install the Wazuh interface manually following detailed step-by-step instructions.
+- :ref:`Step-by-step installation <wazuh_dashboard_step_by_step>`: Install the Wazuh dashboard manually following detailed step-by-step instructions.
 
 
 

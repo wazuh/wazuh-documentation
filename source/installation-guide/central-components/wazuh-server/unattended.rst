@@ -102,4 +102,4 @@ Your Wazuh server is now successfully installed. Repeat this process on every Wa
 Next steps
 ----------
   
-The Wazuh server installation is now complete and you can proceed with installing the Wazuh interface. To perform this action, see the :ref:`Wazuh dashboard <wazuh_dashboard_installation>` section.  
+The Wazuh server installation is now complete and you can proceed with installing the Wazuh dashboard. To perform this action, see the :ref:`Wazuh dashboard <wazuh_dashboard_installation>` section.  

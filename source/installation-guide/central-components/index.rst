@@ -8,7 +8,7 @@
 Central components
 ==================
 
-Wazuh central components are in charge of analyzing the data gathered by the Wazuh agents, providing a search engine and data visualization tool that allow users to navigate through their security alerts. The Wazuh central components include the Wazuh indexer, the Wazuh server, and the Wazuh interface. 
+Wazuh central components are in charge of analyzing the data gathered by the Wazuh agents, providing a search engine and data visualization tool that allow users to navigate through their security alerts. The Wazuh central components include the Wazuh indexer, the Wazuh server, and the Wazuh dashboard. 
 
 You can install all the  Wazuh central components on the same server, as an all-in-one deployment, or on different servers as a distributed deployment. A distributed deployment provides high availability and scalability of the product. 
 

@@ -17,11 +17,11 @@ Wazuh installation
 Install Wazuh by following the installation workflow that best suits your needs. 
 
 
-- :ref:`Quickstart <quickstart>`: Install the Wazuh server, the Wazuh indexer, and the Wazuh interface on the same host by using the unattended installation script. With the Quickstart installation workflow, you install and configure the Wazuh central components in just a few minutes. 
+- :ref:`Quickstart <quickstart>`: Install the Wazuh server, the Wazuh indexer, and the Wazuh dashboard on the same host by using the unattended installation script. With the Quickstart installation workflow, you install and configure the Wazuh central components in just a few minutes. 
 
   You may also download our ready-to-use :ref:`OVA <virtual_machine>`.
 
-- :ref:`Central components <central_components>`: Install the Wazuh server, the Wazuh indexer, and the Wazuh interface one by one. All these components can be installed on the same host or on dedicated servers. 
+- :ref:`Central components <central_components>`: Install the Wazuh server, the Wazuh indexer, and the Wazuh dashboard one by one. All these components can be installed on the same host or on dedicated servers. 
 
   You can install each component manually by following detailed step-by-step instructions or in an unattended mode by using a script. The Wazuh server and the Wazuh indexer can each be installed as a single-node or multi-node cluster. 
   
