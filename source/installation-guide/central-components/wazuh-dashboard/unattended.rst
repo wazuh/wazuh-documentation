@@ -1,8 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. _wazuh_interface_unattended_installation:
+.. _wazuh_dashboard_unattended_installation:
 
-Installing the Wazuh interface in unattended mode
+Installing the Wazuh dashboard in unattended mode
 =================================================
 
 The Wazuh interface is a flexible and intuitive web interface, based on Kibana, for mining and visualizing the events and archives.

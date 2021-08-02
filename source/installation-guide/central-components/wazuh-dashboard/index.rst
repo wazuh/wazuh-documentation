@@ -1,12 +1,12 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. _wazuh_interface_installation:
+.. _wazuh_dashboard_installation:
 
 .. meta::
   :description: Wazuh is a free, open source, and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response and compliance.
 
 
-Wazuh interface
+Wazuh dashboard
 ===============
 
 This central component is a flexible and intuitive web interface for mining, analyzing, and visualizing data based on Kibana. It includes out-of-the-box dashboards for security events, detected vulnerable applications, file integrity monitoring data, configuration assessment results, cloud infrastructure monitoring events, regulatory compliance, such as PCI DSS, GDPR, CIS, HIPAA, and NIST 800-53 standards, and other data.
@@ -61,9 +61,9 @@ Wazuh interface installation
 
 Choose an installation method to install this Wazuh central component.
 
-- :ref:`Unattended installation <wazuh_interface_unattended_installation>`: Install the Wazuh interface by using a script that automates the installation process.  
+- :ref:`Unattended installation <wazuh_dashboard_unattended_installation>`: Install the Wazuh interface by using a script that automates the installation process.  
 
-- :ref:`Step-by-step installation <wazuh_interface_step_by_step>`: Install the Wazuh interface manually following detailed step-by-step instructions.
+- :ref:`Step-by-step installation <wazuh_dashboard_step_by_step>`: Install the Wazuh interface manually following detailed step-by-step instructions.
 
 
 

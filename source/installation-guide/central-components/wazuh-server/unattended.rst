@@ -12,7 +12,7 @@ The Wazuh server is in charge of analyzing the data received from the agents and
 Wazuh server cluster installation
 ---------------------------------
 
-Install the Wazuh server as a single-node or multi-node cluster according to your environment needs.  If you want to install a single-node cluster, follow the instructions to install the Wazuh master node, and proceed directly with :ref:`installing the Wazuh interface <wazuh_interface_installation>`.
+Install the Wazuh server as a single-node or multi-node cluster according to your environment needs.  If you want to install a single-node cluster, follow the instructions to install the Wazuh master node, and proceed directly with :ref:`installing the Wazuh dashboard <wazuh_dashboard_installation>`.
 
 The installation process is divided in two stages.  
 
@@ -70,7 +70,7 @@ Install and configure the Wazuh master node. Make sure that a copy of ``certs.ta
 
 Your Wazuh server is now successfully installed. 
 
-- If you want a Wazuh server single-node cluster, everything is set and you can proceed directly with :ref:`installing the Wazuh interface <wazuh_interface_installation>`. 
+- If you want a Wazuh server single-node cluster, everything is set and you can proceed directly with :ref:`installing the Wazuh dashboard <wazuh_dashboard_installation>`. 
       
 - If you want a Wazuh server multi-node cluster, expand the instructions below to install and configure Wazuh worker nodes. 
 
@@ -102,4 +102,4 @@ Your Wazuh server is now successfully installed. Repeat this process on every Wa
 Next steps
 ----------
   
-The Wazuh server installation is now complete and you can proceed with installing the Wazuh interface. To perform this action, see the :ref:`Wazuh interface <wazuh_interface_installation>` section.  
+The Wazuh server installation is now complete and you can proceed with installing the Wazuh interface. To perform this action, see the :ref:`Wazuh dashboard <wazuh_dashboard_installation>` section.  

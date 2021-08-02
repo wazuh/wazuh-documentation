@@ -2,9 +2,9 @@
 
 .. meta:: :description: Learn how to install the Wazuh interface. As a flexible and intuitive web interface for mining and visualizing the events and archives. 
 
-.. _wazuh_interface_step_by_step:
+.. _wazuh_dashboard_step_by_step:
 
-Installing the Wazuh interface in step-by-step mode
+Installing the Wazuh dashboard in step-by-step mode
 ===================================================
 
 The Wazuh interface is a flexible and intuitive web interface, based on Kibana, for mining and visualizing the events and archives. 
