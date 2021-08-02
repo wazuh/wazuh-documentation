@@ -92,9 +92,9 @@ Below there is an example of different services configuration:
 Using VPC endpoints
 -------------------
 
-VPC endpoints can help reducing the bill for the traffic in your VPC by allowing connections from the VPC to the AWS services that supports it without having to use their public IP to connect to the AWS Services. As the ``aws-s3`` Wazuh module uses the AWS S3 service to access the data from the S3 buckets, regardless of the service they come from, VPC endpoints can be used, as long as Wazuh runs in the VPC. The same applies to the AWS services the ``aws-s3`` Wazuh module supports, such as CloudWatchLogs, as long as they are compatible with VPC endpoints. The list of AWS services supporting VPC endpoints can be checked `here <https://docs.aws.amazon.com/vpc/latest/privatelink/integrated-services-vpce-list.html>`_.
+VPC endpoints can help reducing the bill for the traffic in your VPC by allowing connections from the VPC to the AWS services that supports it, without having to rely on their public IP to connect to the AWS Services. As the ``aws-s3`` Wazuh module connects to the AWS S3 service to access the data from the S3 buckets, regardless of the service they come from, VPC endpoints can be used, as long as Wazuh runs in the VPC. The same applies to the AWS services the ``aws-s3`` Wazuh module supports, such as CloudWatchLogs, provided that they are compatible with VPC endpoints. The list of AWS services supporting VPC endpoints can be checked `here <https://docs.aws.amazon.com/vpc/latest/privatelink/integrated-services-vpce-list.html>`_.
 
-The service_endpoint and sts_endpoint tags can be used to specify the VPC endpoint URL to use for obtaining the data and for logging into STS when using a IAM role, respectively. Here is an example on how to use them:
+The service_endpoint and sts_endpoint tags can be used to specify the VPC endpoint URL for obtaining the data and for logging into STS when an IAM role was specified, respectively. Here is an example of a valid configuration:
 
 .. code-block:: xml
 
