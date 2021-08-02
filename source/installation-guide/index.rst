@@ -9,7 +9,7 @@
 Installation guide
 ==================
 
-Wazuh is a free, open source, and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response, and regulatory compliance. To learn more about each Wazuh component and its capabilities, check the :ref:`Components <components>` section. 
+Wazuh is a free, open source, and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response, and regulatory compliance. To learn more about the Wazuh solution, its components, architecture, and capabilities, check the :ref:`Getting started <getting_started>` section. 
 
 Wazuh installation
 ------------------
