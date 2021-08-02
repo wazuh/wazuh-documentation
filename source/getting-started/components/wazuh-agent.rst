@@ -1,5 +1,9 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+
+.. meta::
+   :description: The Wazuh agent is multi-platform and runs on monitored systems providing threat prevention, detection, and response capabilities.
+
 .. _wazuh_agent:
 
 Wazuh agent
