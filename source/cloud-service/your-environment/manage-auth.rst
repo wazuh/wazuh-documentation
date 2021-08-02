@@ -49,8 +49,8 @@ Follow these steps to create an internal user, map it to its appropriate role, a
    #. Click **Save role mapping** to save and map the user with Wazuh.
 
 
-Creating a user with admin permissions and mapping it with Wazuh
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Creating and setting a user as admin with Wazuh
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Follow these steps to create an internal user, create a new role mapping, and give administrator permissions to the user.
 
@@ -81,8 +81,8 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
 
 
-Creating a user with read-only permissions and mapping it with Wazuh
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Creating and setting a user as read-only with Wazuh
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Follow these steps to create an internal user, create a new role mapping, and give read-only permissions to the user.
 
