@@ -20,6 +20,9 @@ Native support for users and roles
 
 The Wazuh WUI allows you to add users, create roles, and mapping roles to users.
 
+Creating an internal user and mapping it with Wazuh
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 Follow these steps to create an internal user, map it to its appropriate role, and create a new role mapping.
 
 #. :ref:`Log into your WUI<cloud_getting_started_wui_access>` as administrator.
@@ -46,12 +49,16 @@ Follow these steps to create an internal user, map it to its appropriate role, a
    #. Click **Save role mapping** to save and map the user with Wazuh.
 
 
-Set a user as admin
-^^^^^^^^^^^^^^^^^^^
+Creating a user with admin permissions and mapping it with Wazuh
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-After creating an internal user and mapping the user to Wazuh, you need to follow these steps to give administrator permissions to the user.
+Follow these steps to create an internal user, create a new role mapping, and give administrator permissions to the user.
 
 #. :ref:`Log into your WUI<cloud_getting_started_wui_access>` as administrator.
+
+#. Click the upper-left menu icon to open the options, select **Security** and then **Internal users** to open the internal users page.
+
+#. Click **Create internal user**, complete the empty fields with the requested information, and click **Create** to create a user.
 
 #. Click the upper-left menu icon to open the options, select **Security** and then **Roles** to open the roles page.
 
@@ -74,12 +81,16 @@ After creating an internal user and mapping the user to Wazuh, you need to follo
 
 
 
-Set a user as read-only
-^^^^^^^^^^^^^^^^^^^^^^^
+Creating a user with read-only permissions and mapping it with Wazuh
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-After creating an internal user and mapping the user to Wazuh, you need to follow these steps to give read-only permissions to the user.
+Follow these steps to create an internal user, create a new role mapping, and give read-only permissions to the user.
 
 #. :ref:`Log into your WUI<cloud_getting_started_wui_access>` as administrator.
+
+#. Click the upper-left menu icon to open the options, select **Security** and then **Internal users** to open the internal users page.
+
+#. Click **Create internal user**, complete the empty fields with the requested information, and click **Create** to create a user.
 
 #. Click the upper-left menu icon to open the options, select **Security** and then **Roles** to open the roles page.
 
