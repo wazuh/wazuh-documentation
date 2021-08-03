@@ -11,22 +11,17 @@ Installation guide
 
 Wazuh is a free, open source, and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response, and regulatory compliance. To learn more about the Wazuh solution, its components, architecture, and capabilities, check the :ref:`Getting started <getting_started>` section. 
 
-Wazuh installation
-------------------
+The :ref:`Wazuh central components <central_components>` include the :ref:`Wazuh server <wazuh_server_installation>`, :ref:`the Wazuh indexer <wazuh_indexer_installation>`, and the :ref:`Wazuh dashboard <wazuh_dashboard_installation>`. You can install each component manually by following detailed step-by-step instructions or in an unattended mode by using a script. 
 
-Install Wazuh by following the installation workflow that best suits your needs. 
+Deployment types
+----------------
 
+There are two different options for deploying Wazuh:
 
-- :ref:`Quickstart <quickstart>`: Install the Wazuh server, the Wazuh indexer, and the Wazuh dashboard on the same host by using the unattended installation script. With the Quickstart installation workflow, you install and configure the Wazuh central components in just a few minutes. 
+- All-in-one: Install the Wazuh server, the Wazuh indexer, and the Wazuh dashboard on the same host. With this deployment option, you can install Wazuh directly on your system or download our ready-to-use :ref:`OVA <virtual_machine>`.
 
-  You may also download our ready-to-use :ref:`OVA <virtual_machine>`.
+- Distributed: Each component is installed on a separate host as a single-node or multi-node cluster. This type of deployment provides high availability and scalability of the product, and it is convenient for large working environments.
 
-- :ref:`Central components <central_components>`: Install the Wazuh server, the Wazuh indexer, and the Wazuh dashboard one by one. All these components can be installed on the same host or on dedicated servers. 
-
-  You can install each component manually by following detailed step-by-step instructions or in an unattended mode by using a script. The Wazuh server and the Wazuh indexer can each be installed as a single-node or multi-node cluster. 
-  
-  
-The Wazuh central components can be installed on a single host in what is known as an all-in-one deployment, or on several hosts forming single or multi-node clusters, known as distributed deployment. A distributed deployment provides high availability and scalability of the product, and it is convenient for large working environments.
 
 
 .. raw:: html
@@ -63,6 +58,21 @@ The Wazuh central components can be installed on a single host in what is known 
 
     </div>
   </div>
+
+
+Installing the Wazuh central components
+---------------------------------------
+
+You can install all the Wazuh central components on the same server, as an all-in-one deployment, or on different servers as a distributed deployment. 
+
+Moreover, the Wazuh server and the Wazuh indexer can each be installed as a single-node or multi-node cluster. Small Wazuh deployments, which do not require processing large amounts of data, can easily be handled by a single-node cluster. Multi-node clusters are recommended when there is a large number of monitored endpoints, when a large volume of data is anticipated, or when high availability is required.
+
+The diagram below represents a Wazuh deployment architecture. It shows the solution components and how the Wazuh servers and Wazuh indexer can be configured as a cluster, providing load balancing and high-availability.
+
+.. thumbnail:: ../images/getting_started/deployment.png
+    :alt: Wazuh deployment
+    :align: center
+    :wrap_image: No
 
 
 
@@ -152,7 +162,6 @@ The :ref:`Wazuh agent <wazuh_agent>` is a single, light-weight monitoring softwa
     :hidden:
     :maxdepth: 1
 
-    quickstart
     central-components/index
     wazuh-agent/index
     packages-list
