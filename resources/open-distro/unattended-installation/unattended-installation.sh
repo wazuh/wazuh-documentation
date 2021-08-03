@@ -736,7 +736,7 @@ installKibana() {
                 echo "elasticsearch.hosts:" >> /etc/kibana/kibana.yml
                 for i in "${!ENODESIP[@]}"; do
                     elasticip="${ENODESIP[i]}"
-                    echo "  - ${elasticip:1}" >> /etc/kibana/kibana.yml
+                    echo "  - https://${elasticip:1}:9200" >> /etc/kibana/kibana.yml
                 done
 
             else            
