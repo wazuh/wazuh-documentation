@@ -331,25 +331,19 @@ Here are some of the basic concepts related to making API requests and understan
               {
                 "error": {
                   "code": 1707,
-                  "message": "Impossible to restart non-active agent: never_connected",
-                  "remediation": "Please, make sure agent is active before attempting to restart"
+                  "message": "Cannot send request, agent is not active",
+                  "remediation": "Please, check non-active agents connection and try again. Visit 
+                  https://documentation.wazuh.com/current/user-manual/registering/index.html and 
+                  https://documentation.wazuh.com/current/user-manual/agents/agent-connection.html 
+                  to obtain more information on registering and connecting agents" 
                 },
                 "id": [
                   "001",
                   "002",
-                ]
-              },
-              {
-                "error": {
-                  "code": 1707,
-                  "message": "Impossible to restart non-active agent: disconnected",
-                  "remediation": "Please, make sure agent is active before attempting to restart"
-                },
-                "id": [
                   "009",
                   "010"
                 ]
-              }
+              },
             ]
           },
           "message": "Restart command was not sent to any agent",
