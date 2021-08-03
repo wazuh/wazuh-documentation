@@ -763,17 +763,19 @@ installKibana() {
             sleep 2
         done
 
-        if [[ -z ${aio} ]] && [[ ${#FILEBEATNODES[@]} -le "1" ]]; then
+        echo ${#FILEBEATNODES[@]}
+        if [[ -z ${aio} ]] || [[ ${#FILEBEATNODES[@]} -lt "2" ]]; then
             wsname="${FILEBEATNODES[0]}"
             wsip="${FILEBEATNODES[1]}"
-            conf="$(awk '{sub("  - default:, "  - '${wsname:1}':")}1' /usr/share/kibana/data/wazuh/config/wazuh.yml)"
+
+            conf="$(awk '{sub("  - default:", "  - '${wsname:1}':")}1' /usr/share/kibana/data/wazuh/config/wazuh.yml)"
             echo "${conf}" > /usr/share/kibana/data/wazuh/config/wazuh.yml
-            conf="$(awk '{sub("     url: https://localhost, "     url: https://'${wsip:1}'")}1' /usr/share/kibana/data/wazuh/config/wazuh.yml)"
+            conf="$(awk '{sub("     url: https://localhost", "     url: https://'${wsip:1}'")}1' /usr/share/kibana/data/wazuh/config/wazuh.yml)"
             echo "${conf}" > /usr/share/kibana/data/wazuh/config/wazuh.yml
         fi
         
 
-        logger "Done"
+        echo $'\nDone'
     fi
 
 }
