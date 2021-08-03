@@ -20,8 +20,8 @@ Native support for users and roles
 
 The Wazuh WUI allows you to add users, create roles, and mapping roles to users.
 
-Creating an internal user and mapping it with Wazuh
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Creating an internal user and mapping it to Wazuh
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Follow these steps to create an internal user, map it to its appropriate role, and create a new role mapping.
 
@@ -49,8 +49,8 @@ Follow these steps to create an internal user, map it to its appropriate role, a
    #. Click **Save role mapping** to save and map the user with Wazuh.
 
 
-Creating and setting a user as admin with Wazuh
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Creating and setting a Wazuh admin user
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Follow these steps to create an internal user, create a new role mapping, and give administrator permissions to the user.
 
@@ -81,8 +81,8 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
 
 
-Creating and setting a user as read-only with Wazuh
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Creating and setting a Wazuh read-only user
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Follow these steps to create an internal user, create a new role mapping, and give read-only permissions to the user.
 
