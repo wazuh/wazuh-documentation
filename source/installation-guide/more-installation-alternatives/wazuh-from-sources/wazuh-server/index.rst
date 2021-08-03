@@ -39,7 +39,7 @@ Installing Wazuh manager
 
           .. code-block:: console
 
-            # curl -OL http://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
+            # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
             # cd cmake-3.18.3 && ./bootstrap --no-system-curl
             # make -j$(nproc) && make install
             # cd .. && rm -rf cmake-*
@@ -49,18 +49,19 @@ Installing Wazuh manager
 
           .. code-block:: console
 
-            # yum install make cmake gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool
-            # rpm -i http://mirror.centos.org/centos/8/PowerTools/x86_64/os/Packages/libstdc++-static-8.3.1-5.el8.0.2.x86_64.rpm
+            # yum install make cmake gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool openssl-devel
+            # rpm -i $(rpm --eval https://packages.wazuh.com/utils/libstdc%2B%2B/libstdc%2B%2B-static-8.4.1-1.el8.'%{_arch}'.rpm)
 
 
           CMake 3.18 installation
 
           .. code-block:: console
 
-            # curl -OL http://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
+            # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
             # cd cmake-3.18.3 && ./bootstrap --no-system-curl
             # make -j$(nproc) && make install
             # cd .. && rm -rf cmake-*
+            # export PATH=/usr/local/bin:$PATH
 
 
   .. group-tab:: APT
@@ -75,7 +76,7 @@ Installing Wazuh manager
 
     .. code-block:: console
 
-      # curl -OL http://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
+      # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
       # cd cmake-3.18.3 && ./bootstrap --no-system-curl
       # make -j$(nproc) && make install
       # cd .. && rm -rf cmake-*
@@ -91,7 +92,7 @@ Installing Wazuh manager
 
     .. code-block:: console
 
-      # curl -OL http://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
+      # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
       # cd cmake-3.18.3 && ./bootstrap --no-system-curl
       # make -j$(nproc) && make install
       # cd .. && rm -rf cmake-*
