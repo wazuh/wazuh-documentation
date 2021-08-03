@@ -1,7 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: The client.keys file stores the data used to authenticate secure agents. For more information and examples, visit this section.
+    :description: In this section of the Wazuh documentation you will find more information about the client keys file: its location, file format and examples. 
+    
 
 .. _client-keys:
 
