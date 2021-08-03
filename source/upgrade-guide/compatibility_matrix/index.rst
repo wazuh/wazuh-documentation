@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: In this section of the Wazuh documentation you can find the compatibility matrix that shows the operating systems where the Wazuh manager and agent are compatible.  
+  
 .. _compatibility_matrix:
 
 Compatibility matrix
