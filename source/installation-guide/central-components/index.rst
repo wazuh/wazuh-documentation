@@ -8,7 +8,7 @@
 Central components
 ==================
 
-Wazuh central components are in charge of analyzing the data gathered by the Wazuh agents, providing a search engine and data visualization tool that allow users to navigate through their security alerts. The Wazuh central components include the Wazuh indexer, the Wazuh server, and the Wazuh interface. 
+Wazuh central components are in charge of analyzing the data gathered by the Wazuh agents, providing a search engine and data visualization tool that allow users to navigate through their security alerts. The Wazuh central components include the Wazuh indexer, the Wazuh server, and the Wazuh dashboard. 
 
 You can install all the  Wazuh central components on the same server, as an all-in-one deployment, or on different servers as a distributed deployment. A distributed deployment provides high availability and scalability of the product. 
 
@@ -28,7 +28,7 @@ Follow this installation workflow to install Wazuh.
 
     This component includes the Wazuh manager and the Wazuh forwarder, based on Filebeat-OSS. The Wazuh server can be deployed as a single or multi-node cluster depending on the environment needs.
 
-#. :ref:`Wazuh interface <wazuh_interface_installation>`: a flexible and intuitive web interface for mining, analyzing, and visualizing data, based on Kibana. It includes out-of-the-box dashboards for security events, detected vulnerable applications, file integrity monitoring data, configuration assessment results, cloud infrastructure monitoring events, regulatory compliance, such as PCI DSS, GDPR, CIS, HIPAA, and NIST 800-53 standards, and other data.
+#. :ref:`Wazuh dashboard <wazuh_dashboard_installation>`: a flexible and intuitive web interface for mining, analyzing, and visualizing data, based on Kibana. It includes out-of-the-box dashboards for security events, detected vulnerable applications, file integrity monitoring data, configuration assessment results, cloud infrastructure monitoring events, regulatory compliance, such as PCI DSS, GDPR, CIS, HIPAA, and NIST 800-53 standards, and other data.
 
 Each central component can be installed in unattended mode using an automated script, or manually, by following detailed step-by-step instructions.
 
@@ -42,4 +42,4 @@ Once the Wazuh central components are installed on your environment, Wazuh is re
 
       wazuh-indexer/index
       wazuh-server/index
-      wazuh-interface/index
+      wazuh-dashboard/index

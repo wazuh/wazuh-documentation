@@ -14,7 +14,7 @@ The Wazuh server is in charge of analyzing the data received from the agents and
 Wazuh server cluster installation and configuration
 ----------------------------------------------------
 
-Install the Wazuh server as a single-node or multi-node cluster according to your environment needs. If you want to install a single-node cluster, follow the instructions to install the Wazuh manager and the Wazuh forwarder, and proceed directly with :ref:`installing the Wazuh interface <wazuh_interface_installation>`.
+Install the Wazuh server as a single-node or multi-node cluster according to your environment needs. If you want to install a single-node cluster, follow the instructions to install the Wazuh manager and the Wazuh forwarder, and proceed directly with :ref:`installing the Wazuh dashboard <wazuh_dashboard_installation>`.
 
 The installation process is divided in three stages.  
 
@@ -202,7 +202,7 @@ Installing and configuring the Wazuh forwarder
 
 Your Wazuh server is now successfully installed and the Wazuh manager is configured as a single-node cluster by default. 
 
-- If you want a Wazuh server single-node cluster, everything is set and you can proceed directly with :ref:`installing the Wazuh interface <wazuh_interface_installation>`. 
+- If you want a Wazuh server single-node cluster, everything is set and you can proceed directly with :ref:`installing the Wazuh dashboard <wazuh_dashboard_installation>`. 
   
 - If you want a Wazuh server multi-node cluster,  install the Wazuh server on every node and carry on with configuring the Wazuh cluster.
 
@@ -243,4 +243,4 @@ If you want to uninstall the Wazuh server, see the :ref:`uninstalling section <u
 Next steps
 ----------
 
-The Wazuh server installation is now complete and you can proceed with installing the Wazuh interface. To perform this action, see the :ref:`Wazuh interface <wazuh_interface_installation>` section.
+The Wazuh server installation is now complete and you can proceed with installing the Wazuh dashboard. To perform this action, see the :ref:`Wazuh dashboard <wazuh_dashboard_installation>` section.

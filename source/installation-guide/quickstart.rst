@@ -12,7 +12,7 @@ Quickstart
 
 Install Wazuh on a single host by using the unattended installation script. The minimum requirements for this type of deployment are 4 GB of RAM and 2 CPU cores, and the recommended are 16 GB of RAM and 8 CPU cores. A 64-bit :ref:`Linux operating system <supported_operating_systems>` is required. 
 
-The unattended installation script installs and configures the Wazuh indexer, the Wazuh server, and the Wazuh interface. To learn more about each Wazuh component and its capabilities, check the :ref:`Components <components>` section. 
+The unattended installation script installs and configures the Wazuh indexer, the Wazuh server, and the Wazuh dashboard. To learn more about each Wazuh component and its capabilities, check the :ref:`Components <components>` section. 
 
 Installing Wazuh
 ----------------
@@ -67,12 +67,12 @@ Installing Wazuh
     - **Password**: *<wazuh_password>*
 
       .. thumbnail:: ../images/installation/kibana-log-in.png
-          :alt: Wazuh interface login page
+          :alt: Wazuh dashboard login page
           :align: center
           :wrap_image: No
 
 
-    When you access the Wazuh interface for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or, for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser. Alternatively, a certificate from a trusted authority can be configured. 
+    When you access the Wazuh dashboard for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or, for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser. Alternatively, a certificate from a trusted authority can be configured. 
 
 If you want uninstall the components of the all-in-one installation, run the unattended installation script and use the option ``-r / --uninstall``.  
 

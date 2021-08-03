@@ -1,23 +1,23 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. meta:: :description: Learn how to install the Wazuh interface. As a flexible and intuitive web interface for mining and visualizing the events and archives. 
+.. meta:: :description: Learn how to install the Wazuh dashboard, a flexible and intuitive web interface for mining and visualizing the events and archives. 
 
-.. _wazuh_interface_step_by_step:
+.. _wazuh_dashboard_step_by_step:
 
-Installing the Wazuh interface in step-by-step mode
+Installing the Wazuh dashboard in step-by-step mode
 ===================================================
 
-The Wazuh interface is a flexible and intuitive web interface, based on Kibana, for mining and visualizing the events and archives. 
+The Wazuh dashboard is a flexible and intuitive web interface, based on Kibana, for mining and visualizing the events and archives. 
 
 .. note:: Root user privileges are required to run the commands described below.
 
-Install the Wazuh interface
+Install the Wazuh dashboard
 ---------------------------
 
 Adding the Wazuh repository
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Add the Wazuh repository if you are installing the Wazuh interface on a dedicated server. Skip this step to install it on the same host as the Wazuh server or Wazuh indexer. 
+Add the Wazuh repository if you are installing the Wazuh dashboard on a dedicated server. Skip this step to install it on the same host as the Wazuh server or Wazuh indexer. 
 
   .. tabs::
   
@@ -42,7 +42,7 @@ Add the Wazuh repository if you are installing the Wazuh interface on a dedicate
   
   
 
-Installing and configuring the Wazuh interface
+Installing and configuring the Wazuh dashboard
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 #. Install the Kibana package.
@@ -138,7 +138,7 @@ Installing and configuring the Wazuh interface
     - **Username**: *wazuh*
     - **Password**: *<wazuh_user_password>*
 
-  When you access the Wazuh interface for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or, for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser. Alternatively, a certificate from a trusted authority can be configured. 
+  When you access the Wazuh dashboard for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or, for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser. Alternatively, a certificate from a trusted authority can be configured. 
 
 
 If you want to uninstall Kibana, see the :ref:`uninstalling <uninstall_kibana>` section. 
