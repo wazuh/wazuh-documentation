@@ -155,18 +155,17 @@ We create a custom level 7 rule to monitor for changes using the :ref:`check_dif
 
 Disk space usage monitoring
 ---------------------------
-
-The `df` command can be used to check the available disk space for file systems.
+On the manager and on the agents for Linux systems, a disk space usage monitoring configuration is made by default upon installation. It sets to use the `df` command to check the available disk space for file systems as follows:
 
 .. code-block:: xml
 
   <localfile>
-      <log_format>command</log_format>
-      <command>df -P</command>
-      <frequency>300</frequency>
+    <log_format>command</log_format>
+    <command>df -P</command>
+    <frequency>360</frequency>
   </localfile>
 
-Wazuh already has a rule to trip an alert once the disk space usage on any partition reaches 100%.
+It also defines a rule to trip an alert once the disk space usage on any partition reaches 100%.
 
 .. code-block:: xml
 
@@ -181,18 +180,18 @@ Wazuh already has a rule to trip an alert once the disk space usage on any parti
 Network connections monitoring
 ------------------------------
 
-In this example, the Linux `netstat` command is used along with the :ref:`check_diff option <rules_check_diff>` to monitor for changes in listening TCP sockets. If the output changes, the system will generate an alert.
+On the manager and on the agents for Linux systems, network connections monitoring is also configured by default upon installation. The `netstat` command is used along with the :ref:`check_diff option <rules_check_diff>` to monitor for changes in listening TCP sockets. If the output changes, the system will generate an alert.
 
 .. code-block:: xml
 
   <localfile>
     <log_format>full_command</log_format>
-    <command>netstat -tulpn | sed 's/\([[:alnum:]]\+\)\ \+[[:digit:]]\+\ \+[[:digit:]]\+\ \+\(.*\):\([[:digit:]]*\)\ \+\([0-9\.\:\*]\+\).\+\ \([[:digit:]]*\/[[:alnum:]\-]*\).*/\1 \2 == \3 == \4 \5/' | sort -k 4 -g | sed 's/ == \(.*\) ==/:\1/' | sed 1,2d</command>
+    <command>netstat -tulpn | sed 's/\([[:alnum:]]\+\)\ \+[[:digit:]]\+\ \+[[:digit:]]\+\ \+\(.*\):\([[:digit:]]*\)\ \+\ ([0-9\.\:\*]\+\).\+\ \([[:digit:]]*\/[[:alnum:]\-]*\).*/\1 \2 == \3 == \4 \5/' | sort -k 4 -g | sed 's/ == \(.*\) ==/:\1 /' | sed 1,2d</command>
     <alias>netstat listening ports</alias>
-    <frequency>300</frequency>
+    <frequency>360</frequency>
   </localfile>
 
-Wazuh already has a rule to alert when a network listener has disappeared or a new one has appeared. This may indicate something is broken or a network backdoor has been installed.
+A rule to alert when a network listener has disappeared or a new one has appeared is also defined by default. These changes may indicate something is broken or a network backdoor has been installed.
 
 .. code-block:: xml
 
