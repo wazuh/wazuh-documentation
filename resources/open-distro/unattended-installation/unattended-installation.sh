@@ -447,7 +447,7 @@ installElasticsearch() {
         eval "curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml https://packages.wazuh.com/resources/4.1/open-distro/elasticsearch/roles/internal_users.yml --max-time 300 ${debug}"        
         eval "rm /etc/elasticsearch/esnode-key.pem /etc/elasticsearch/esnode.pem /etc/elasticsearch/kirk-key.pem /etc/elasticsearch/kirk.pem /etc/elasticsearch/root-ca.pem -f ${debug}"
 
-        if [[ -n "${aio}" ]] || [[ -n ${certificates} ]]; then
+        if [[ -n "${aio}" ]] || [[ -n ${certificates} ]] || [ ${#ELASTICNODES[@]} -le "1" ]; then
             if [ -n "${aio}" ]; then
 
                 ## Create certificates
