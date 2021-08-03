@@ -531,7 +531,7 @@ installElasticsearch() {
             fi
         fi     
 
-        if [ -z "${aio}" ] && [ -n "${certificates}" ]; then
+        if [ -z "${aio}" ] && [ -n "${certificates}" ] || [ ${#ELASTICNODES[@]} -le "1" ]; then
             eval "cp ~/certs/${ename}* /etc/elasticsearch/certs/ ${debug}"
             eval "cp ~/certs/root-ca.pem /etc/elasticsearch/certs/ ${debug}"
             eval "cp ~/certs/admin* /etc/elasticsearch/certs/ ${debug}"
