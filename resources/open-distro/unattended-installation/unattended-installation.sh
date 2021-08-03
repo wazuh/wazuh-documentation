@@ -727,7 +727,6 @@ installKibana() {
             eval "chown -R kibana:kibana /etc/kibana/ ${debug}"
             eval "chmod -R 500 /etc/kibana/certs ${debug}"
             eval "chmod 440 /etc/kibana/certs/kibana* ${debug}"
-            eval "setcap 'cap_net_bind_service=+ep' /usr/share/kibana/node/bin/node ${debug}"
         else
             ## EDIT KIBANA.YML
             if [ ${#ENODESIP[@]} -gt "1" ]; then
@@ -741,14 +740,17 @@ installKibana() {
 
             else            
                 elasticip="${ENODESIP[0]}"
-                conf="$(awk '{sub("elasticsearch.hosts: https://127.0.0.1:9200", "elasticsearch.hosts: '${elasticip:1}':9200")}1' /etc/kibana/kibana.yml)"
+                conf="$(awk '{sub("elasticsearch.hosts: https://127.0.0.1:9200", "elasticsearch.hosts: https://'${elasticip:1}':9200")}1' /etc/kibana/kibana.yml)"
                 echo "${conf}" > /etc/kibana/kibana.yml
             fi
 
             eval "cp ~/certs.tar /etc/kibana/certs/ ${debug}"
             eval "cd /etc/kibana/certs/ ${debug}"
-            eval "tar --overwrite -xf certs.tar ${KIBANANODES[0]}.pem ${KIBANANODES[0]}-key.pem root-ca.pem ${debug}"            
+            instancename=${KIBANANODES[0]}
+            eval "tar --overwrite -xf certs.tar ${instancename:1}.pem ${instancename:1}-key.pem root-ca.pem ${debug}"            
         fi
+
+        eval "setcap 'cap_net_bind_service=+ep' /usr/share/kibana/node/bin/node ${debug}"
 
         # Start Kibana
         startService "kibana"
