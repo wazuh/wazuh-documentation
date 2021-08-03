@@ -573,7 +573,7 @@ installElasticsearch() {
             echo ${nip:1}
             until $(curl -XGET https://${nip:1}:9200/ -uadmin:admin -k --max-time 120 --silent --output /dev/null); do
                 echo -ne ${char}
-                sleep 10
+                sleep 2
             done    
 
             eval "cd /usr/share/elasticsearch/plugins/opendistro_security/tools/ ${debug}"
@@ -583,7 +583,7 @@ installElasticsearch() {
             echo "Initializing Elasticsearch..."
             until $(curl -XGET https://localhost:9200/ -uadmin:admin -k --max-time 120 --silent --output /dev/null); do
                 echo -ne ${char}
-                sleep 10
+                sleep 2
             done    
 
             eval "cd /usr/share/elasticsearch/plugins/opendistro_security/tools/ ${debug}"
@@ -710,6 +710,7 @@ installKibana() {
         eval "mkdir /usr/share/kibana/data ${debug}"
         eval "chown -R kibana:kibana /usr/share/kibana/ ${debug}"
         eval "cd /usr/share/kibana ${debug}"
+        echo "Installing the Wazuh Kibana plugin..."
         eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.1.5_7.10.2-1.zip ${debug}"
         if [  "$?" != 0  ]; then
             echo "Error: Wazuh Kibana plugin could not be installed."
@@ -754,6 +755,14 @@ installKibana() {
 
         # Start Kibana
         startService "kibana"
+
+        echo "Adding the Wazuh configuration..."
+        while [ ! -f /usr/share/kibana/data/wazuh/config/wazuh.yml ]
+        do
+            echo -ne ${char}
+            sleep 2
+        done
+        
 
         logger "Done"
     fi
@@ -939,7 +948,7 @@ checkInstallation() {
     logger "Initializing Kibana (this may take a while)"
     until [[ "$(curl -XGET https://localhost/status -I -uwazuh:${wazuhpass} -k -s --max-time 300 | grep "200 OK")" ]]; do
         echo -ne $char
-        sleep 10
+        sleep 2
     done    
     echo $'\nInstallation finished'
     echo $'\nYou can access the web interface https://<kibana_ip>. The credentials are wazuh:'${wazuhpass}''
