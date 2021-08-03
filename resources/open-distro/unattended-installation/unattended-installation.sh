@@ -741,7 +741,7 @@ installKibana() {
 
             else            
                 elasticip="${ENODESIP[0]}"
-                conf="$(awk '{sub("elasticsearch.hosts: https://127.0.0.1:9200", "elasticsearch.hosts: '${elasticip:1}'")}1' /etc/kibana/kibana.yml)"
+                conf="$(awk '{sub("elasticsearch.hosts: https://127.0.0.1:9200", "elasticsearch.hosts: '${elasticip:1}':9200")}1' /etc/kibana/kibana.yml)"
                 echo "${conf}" > /etc/kibana/kibana.yml
             fi
 
