@@ -10,9 +10,20 @@
 Quickstart
 ==========
 
-Install Wazuh on a single host by using the unattended installation script. The minimum requirements for this type of deployment are 4 GB of RAM and 2 CPU cores, and the recommended are 16 GB of RAM and 8 CPU cores. A 64-bit :ref:`Linux operating system <supported_operating_systems>` is required. 
+Install the Wazuh server, the Wazuh indexer, and the Wazuh dashboard on the same host by using the unattended installation script. By running the automated script, you install and configure the Wazuh central components in just a few minutes. To learn more about each Wazuh component and its capabilities, check the :ref:`Components <components>` section. 
 
-The unattended installation script installs and configures the Wazuh indexer, the Wazuh server, and the Wazuh dashboard. To learn more about each Wazuh component and its capabilities, check the :ref:`Components <components>` section. 
+
+**Hardware requirements**
+
++-------------------------+-------------------------------+
+|  Minimum                |   Recommended                 |
++----------+--------------+--------------+----------------+
+|  RAM (GB)|  CPU (cores) |  RAM (GB)    |   CPU (cores)  |
++==========+==============+==============+================+
+|     4    |     2        |     16       |       8        |
++----------+--------------+--------------+----------------+
+
+A 64-bit :ref:`Linux operating system <supported_operating_systems>` is also required.
 
 Installing Wazuh
 ----------------
