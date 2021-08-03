@@ -641,7 +641,7 @@ installFilebeat() {
                 for i in "${!ENODESIP[@]}"; do
                     elasticip="${ENODESIP[i]}"
                     elasticip="${elasticip:1}"
-                    echo "        - ${elasticip}:9200"
+                    echo "        - ${elasticip}:9200" >> /etc/filebeat/filebeat.yml
                 done 
 
                 # Configure the Wazuh cluster
