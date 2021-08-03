@@ -18,7 +18,12 @@ You can use the native support for managing and authenticating users, or integra
 Native support for users and roles
 ----------------------------------
 
-The Wazuh WUI allows you to add users, create roles, and mapping roles to users.
+The Wazuh WUI allows you to add users, create roles, and map roles to users.
+
+- `Creating an internal user and mapping it to Wazuh`_
+- `Creating and setting a Wazuh admin user`_
+- `Creating and setting a Wazuh read-only user`_
+
 
 Creating an internal user and mapping it to Wazuh
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -60,13 +65,15 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
 #. Click **Create internal user**, complete the empty fields with the requested information, and click **Create** to create a user.
 
-#. Click the upper-left menu icon to open the options, select **Security** and then **Roles** to open the roles page.
+#. To map the user to the appropriate role, follow these steps:
 
-#. Search for the **all_access** role in the roles' list and select it to open the details window.
+   #. Click the upper-left menu icon to open the options, select **Security** and then **Roles** to open the roles page.
 
-#. Select the **Mapped users** tab and click **Manage mapping**.
- 
-#. Add the user you created in the previous steps and click **Map** to confirm the action.
+   #. Search for the **all_access** role in the roles' list and select it to open the details window.
+
+   #. Select the **Mapped users** tab and click **Manage mapping**.
+   
+   #. Add the user you created in the previous steps and click **Map** to confirm the action.
 
 #. To map the user with Wazuh, follow these steps:
    
@@ -92,19 +99,25 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
 #. Click **Create internal user**, complete the empty fields with the requested information, and click **Create** to create a user.
 
-#. Click the upper-left menu icon to open the options, select **Security** and then **Roles** to open the roles page.
+#. To map the user to the appropriate role, follow these steps:
 
-#. Click **Create role**, complete the empty fields with the following parameters, and then click **Create** to complete the task. 
-   
-   - **Name**: Assign a name to the role.
+   #. Click the upper-left menu icon to open the options, select **Security** and then **Roles** to open the roles page.
+
+   #. Click **Create role**, complete the empty fields with the following parameters, and then click **Create** to complete the task. 
      
-   - **Cluster permissions**: ``cluster_composite_ops_ro``
+      - **Name**: Assign a name to the role.
+       
+      - **Cluster permissions**: ``cluster_composite_ops_ro``
 
-   - **Index**: ``*``
+      - **Index**: ``*``
 
-   - **Index permissions**: ``read``
+      - **Index permissions**: ``read``
 
-   - **Tenant permissions**: ``global_tenant`` and select the **Read only** option.
+      - **Tenant permissions**: ``global_tenant`` and select the **Read only** option.
+
+   #. Select the **Mapped users** tab and click **Manage mapping**.
+   
+   #. Add the user you created in the previous steps and click **Map** to confirm the action.   
 
 #. To map the user with Wazuh, follow these steps:
 
