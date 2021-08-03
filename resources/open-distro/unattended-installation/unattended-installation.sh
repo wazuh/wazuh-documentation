@@ -247,7 +247,8 @@ readConfig() {
             
             if [ "${counter}" -lt "${DSH}" ]; then
                 ELASTICNODES[i]+="$(echo "${CONFIG[counter]}" | tr -d '\011\012\013\014\015\040')"
-                if [ "${CONFIG[counter]}" == "${ename}" ]; then
+                value=$(echo ${CONFIG[counter]} | xargs)
+                if [ "${value:2}" == "${ename}" ]; then
                     ippos="${i}"
                 fi
                 ((i++))
