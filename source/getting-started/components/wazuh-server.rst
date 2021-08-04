@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: The Wazuh server is a key component of our solution. It analyzes the data received from the agents and triggers alerts when threats are detected.
+
 .. _wazuh_server:
 
 Wazuh server

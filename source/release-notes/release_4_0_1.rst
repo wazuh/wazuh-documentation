@@ -1,4 +1,5 @@
 .. Copyright (C) 2021 Wazuh, Inc.
+
 .. meta::
   :description: Wazuh 4.0.1 has been released. Check out our release notes to discover the changes and additions of this release.
 
@@ -9,7 +10,7 @@
 
 This section lists the changes in version 4.0.1. More details about these changes are provided in the changelog of each component:
 
-- `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/4.0.1/CHANGELOG.md>`_
+- `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v4.0.1/CHANGELOG.md>`_
 - `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v4.0.1-7.9.3/CHANGELOG.md>`_
 - `wazuh/ruleset <https://github.com/wazuh/wazuh-ruleset/blob/4.0.1/CHANGELOG.md>`_
 
