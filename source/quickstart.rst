@@ -19,7 +19,7 @@ Requirements
 
   <div class="accordion-section">
 
-Check the supported operating systems and the recommended hardware requirements for the Wazuh installation. This deployment is suitable for an environment of around 100 deployed agents.
+Check the supported operating systems and the recommended hardware requirements for the Wazuh installation. This deployment supports around 100 agents.
 
 Supported operating systems
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -60,17 +60,17 @@ Hardware requirements
   The amount of data depends on the generated alerts per second (APS). This table details the estimated disk space needed per agent to store 90 days of alerts on a Wazuh server, depending on the type of monitored endpoints.
 
   +-------------------------------------------------+-----+---------------------------+
-  | Monitored endpoints                             | APS | Wazuh storage             |
+  | Monitored endpoints                             | APS | Storage                   |
   |                                                 |     |  (GB/90 days)             |
   +=================================================+=====+===========================+
-  | Servers                                         | 0.25|           3.7             |
+  | Servers                                         | 0.25|           3.8             |
   +-------------------------------------------------+-----+---------------------------+
   | Workstations                                    | 0.1 |           1.5             |
   +-------------------------------------------------+-----+---------------------------+
-  | Network devices                                 | 0.5 |           7.4             |
+  | Network devices                                 | 0.5 |           7.6             |
   +-------------------------------------------------+-----+---------------------------+
 
-  For example, for an environment with 80 workstations, 10 servers, and 10 network devices, the storage needed on the Wazuh server for 90 days of alerts is 236 GB. 
+  For example, for an environment with 80 workstations, 10 servers, and 10 network devices, the storage needed on the Wazuh server for 90 days of alerts is 236 GB approximately. 
  
 
    
