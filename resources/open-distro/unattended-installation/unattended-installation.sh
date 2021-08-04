@@ -737,7 +737,7 @@ installKibana() {
                 for i in "${!ENODESIP[@]}"; do
                     elasticip="${ENODESIP[i]}"
                     echo -n '"https://'${elasticip:1}':9200"' >> /etc/kibana/kibana.yml
-                    if [ "$i" != "${!ENODESIP[@]}"]; then
+                    if [ $i != ${!ENODESIP[@]}]; then
                         echo -n ", "
                     fi
                 done
