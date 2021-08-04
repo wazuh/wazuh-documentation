@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: In this section of the Wazuh documentation you can find the compatibility matrix that shows the operating systems where the Wazuh manager and agent are compatible.  
+  :description: Check out the compatibility matrix of the upgrade process of the Wazuh server, Open Distro for Elasticsearch, Elastic Stack, and the Wazuh agents.
   
 .. _compatibility_matrix:
 
