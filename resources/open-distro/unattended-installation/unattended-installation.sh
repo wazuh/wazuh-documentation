@@ -567,7 +567,7 @@ installElasticsearch() {
         eval "/usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer ${debug}"
         # Start Elasticsearch
         startService "elasticsearch"
-        if [ ${#ELASTICNODES[@]} -le "1" ]; then
+        if [ ${#ELASTICNODES[@]} -le "1" ] && [ -z ${aio} ]; then
             echo "Initializing Elasticsearch..."
             nip=${ENODESIP[ippos]}
             echo ${nip:1}
