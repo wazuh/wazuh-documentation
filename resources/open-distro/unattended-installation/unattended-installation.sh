@@ -733,11 +733,15 @@ installKibana() {
             if [ ${#ENODESIP[@]} -gt "1" ]; then
                 conf="$( grep -v "elasticsearch.hosts: https://127.0.0.1:9200" /etc/kibana/kibana.yml)"
                 echo "${conf}" > /etc/kibana/kibana.yml   
-                echo "elasticsearch.hosts:" >> /etc/kibana/kibana.yml
+                echo -n 'elasticsearch.hosts: [' >> /etc/kibana/kibana.yml
                 for i in "${!ENODESIP[@]}"; do
                     elasticip="${ENODESIP[i]}"
-                    echo "  - https://${elasticip:1}:9200" >> /etc/kibana/kibana.yml
+                    echo -n '"https://'${elasticip:1}':9200"' >> /etc/kibana/kibana.yml
+                    if [ "$i" != "${!ENODESIP[@]}"]; then
+                        echo -n ", "
+                    fi
                 done
+                echo -n "]"
 
             else            
                 elasticip="${ENODESIP[0]}"
