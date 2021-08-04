@@ -763,7 +763,6 @@ installKibana() {
             sleep 2
         done
 
-        echo ${#FILEBEATNODES[@]}
         if [[ -z ${aio} ]] || [[ ${#FILEBEATNODES[@]} -lt "2" ]]; then
             wsname="${FILEBEATNODES[0]}"
             wsip="${FILEBEATNODES[1]}"
