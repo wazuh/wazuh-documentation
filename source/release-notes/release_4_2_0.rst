@@ -203,6 +203,10 @@ This release includes new features or enhancements.
 **External dependencies**
 
 - `#8886 <https://github.com/wazuh/wazuh/pull/8886>`_ Boto3, botocore, requests, s3transfer, and urllib3 Python dependencies are now upgraded to their latest stable versions.
+- `#9389 <https://github.com/wazuh/wazuh/pull/9389>`_ Python is now updated to the latest stable version 3.9.6.
+- GCP dependencies and pip are now upgraded to their latest stable versions.
+- python-jose is upgraded to version 3.1.0.
+- Wazuh now adds tabulate dependency.
 
 Resolved issues
 ^^^^^^^^^^^^^^^
@@ -262,6 +266,7 @@ Reference                                                                       
 `#8630 <https://github.com/wazuh/wazuh/pull/8630>`_                                                                  When removing an agent, the manager now correctly removes remote counters and agent group files.
 `#8905 <https://github.com/wazuh/wazuh/pull/8905>`_                                                                  This fix in the agent on Windows resolves the issue that might cause the FIM DB to be corrupted when disabling the disk sync.
 `#9364 <https://github.com/wazuh/wazuh/pull/9364>`_                                                                  Logcollector on Windows no longer crashes when handling the position of the file. 
+`#9285 <https://github.com/wazuh/wazuh/pull/9285>`_                                                                  In Remoted, a buffer underflow hazard when handling input messages is now fixed.
 =================================================================================================================    =============
 
 **API**
