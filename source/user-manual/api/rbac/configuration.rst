@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Check out how to configure the Role-Based Access Control (RBAC) with Wazuh in this step-by-step guide of our documentation. 
+  
 .. _api_rbac_configuration:
 
 Configuration
