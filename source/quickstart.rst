@@ -13,17 +13,67 @@ Quickstart
 Install the Wazuh server, the Wazuh indexer, and the Wazuh dashboard on the same host by using the unattended installation script. By running the automated script, you install and configure the Wazuh central components in just a few minutes. To learn more about each Wazuh component and its capabilities, check the :ref:`Components <components>` section. 
 
 
-**Hardware requirements**
+Requirements
+------------
+.. raw:: html
 
-+-------------------------+-------------------------------+
-|  Minimum                |   Recommended                 |
-+----------+--------------+--------------+----------------+
-|  RAM (GB)|  CPU (cores) |  RAM (GB)    |   CPU (cores)  |
-+==========+==============+==============+================+
-|     4    |     2        |     16       |       8        |
-+----------+--------------+--------------+----------------+
+  <div class="accordion-section">
 
-A 64-bit :ref:`Linux operating system <supported_operating_systems>` is also required.
+Check the supported operating systems and the recommended hardware requirements for the Wazuh installation. This deployment is suitable for an environment of around 100 deployed agents.
+
+Supported operating systems
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Wazuh can be installed on the following Linux operating systems:
+
+- Amazon Linux 1 and 2
+
+- CentOS 6 or later
+
+- Debian 7 or later
+
+- Fedora 31 or later
+
+- Oracle Linux 6 or later
+
+- Red Hat Enterprise Linux 6 or later
+
+- Ubuntu 12 or later
+
+Hardware requirements
+^^^^^^^^^^^^^^^^^^^^^
+
+- A 64-bit operating system is necessary.
+
+- Hardware
+  
+  +-------------------------+-------------------------------+
+  |  Minimum                |   Recommended                 |
+  +----------+--------------+--------------+----------------+
+  |  RAM (GB)|  CPU (cores) |  RAM (GB)    |   CPU (cores)  |
+  +==========+==============+==============+================+
+  |     4    |     2        |     16       |       8        |
+  +----------+--------------+--------------+----------------+
+
+- Disk space
+
+  The amount of data depends on the generated alerts per second (APS). This table details the estimated disk space needed per agent to store 90 days of alerts on a Wazuh server, depending on the type of monitored endpoints.
+
+  +-------------------------------------------------+-----+---------------------------+
+  | Monitored endpoints                             | APS | Wazuh storage             |
+  |                                                 |     |  (GB/90 days)             |
+  +=================================================+=====+===========================+
+  | Servers                                         | 0.25|           3.7             |
+  +-------------------------------------------------+-----+---------------------------+
+  | Workstations                                    | 0.1 |           1.5             |
+  +-------------------------------------------------+-----+---------------------------+
+  | Network devices                                 | 0.5 |           7.4             |
+  +-------------------------------------------------+-----+---------------------------+
+
+  For example, for an environment with 80 workstations, 10 servers, and 10 network devices, the storage needed on the Wazuh server for 90 days of alerts is 236 GB. 
+ 
+
+   
 
 Installing Wazuh
 ----------------
