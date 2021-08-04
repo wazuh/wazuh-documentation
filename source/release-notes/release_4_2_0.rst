@@ -261,6 +261,7 @@ Reference                                                                       
 `#8357 <https://github.com/wazuh/wazuh/pull/8357>`_                                                                  An error is fixed in the manager that prevented its configuration to be checked after a change by the API when Active response is disabled.
 `#8630 <https://github.com/wazuh/wazuh/pull/8630>`_                                                                  When removing an agent, the manager now correctly removes remote counters and agent group files.
 `#8905 <https://github.com/wazuh/wazuh/pull/8905>`_                                                                  This fix in the agent on Windows resolves the issue that might cause the FIM DB to be corrupted when disabling the disk sync.
+`#9364 <https://github.com/wazuh/wazuh/pull/9364>`_                                                                  Logcollector on Windows no longer crashes when handling the position of the file. 
 =================================================================================================================    =============
 
 **API**
