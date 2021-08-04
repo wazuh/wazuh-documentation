@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Securing the Wazuh API is crucial. In this section we show you how to do it.
+
 .. _securing_api:
 
 Securing the Wazuh API
@@ -34,7 +37,8 @@ Recommended changes to securize Wazuh API
         cert: "api/configuration/ssl/server.crt"
         use_ca: False
         ca: "api/configuration/ssl/ca.crt"
-        ssl_cipher: "TLSv1.2"
+        ssl_protocol: "TLSv1.2"
+        ssl_ciphers: ""
 
     After setting these parameters, it will be necessary to restart the Wazuh API using the ``wazuh-manager`` service:
 

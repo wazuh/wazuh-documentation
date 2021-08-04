@@ -17,11 +17,11 @@ Requirements
  * `Git <https://git-scm.com/book/en/v2/Getting-Started-Installing-Git>`_
  * `Python <https://www.python.org/download/releases/2.7/>`_
 
-Download our wazuh-packages repository from GitHub and go to the ova directory.
+Download our wazuh-packages repository from GitHub and go to the ova directory of the |WAZUH_PACKAGES_BRANCH| branch.
 
 .. code-block:: console
 
- $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/ova
+ $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/ova && git checkout |WAZUH_PACKAGES_BRANCH|
 
 Execute the ``generate_ova.sh`` script, with the different options you desire.
 
@@ -33,14 +33,15 @@ Execute the ``generate_ova.sh`` script, with the different options you desire.
   :class: output
 
   Usage: ./generate_ova.sh [OPTIONS]
-  
-    -b, --build            [Required] Build the OVA and OVF.
+
     -v, --version          [Required] Version of wazuh to install on VM.
-    -e, --elastic-version  [Required] Elastic version to download inside VM.
-    -r, --repository       [Required] Status of the packages [stable/unstable]
-    -d, --directory        [Optional] Where will be installed manager. Default /var/ossec
+    -o, --opendistro       [Required] Version of Open Distro for Elasticsearch.
+    -f, --filebeat         [Required] Filebeat's version.
+    -r, --repository       [Required] Select the software repository [prod/dev].
+    -b, --branch           [Optional] Branch/tag of the Wazuh repository.
     -s, --store <path>     [Optional] Set the destination absolute path of package.
     -c, --checksum <path>  [Optional] Generate checksum.
+    -u, --ui-revision      [Optional] Revision of the UI package. By default, 1.
     -h, --help             [  Util  ] Show this help.
 
 The options for the repository indicates whether the packages used to install Wazuh are the production ones or not.

@@ -1,15 +1,15 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: The pre-built Wazuh Virtual Machine includes all Wazuh components ready-to-use. Test all Wazuh capabilities with our OVA.  
+
 .. _virtual_machine:
 
 Virtual Machine (OVA)
 =====================
 
-Wazuh provides a pre-built virtual machine image (OVA) that you can directly import using VirtualBox or other OVA compatible virtualization systems.
+Wazuh provides a pre-built virtual machine image (OVA) that you can directly import using VirtualBox or other OVA compatible virtualization systems. Take into account that this VM only runs on 64-bit systems and does not provide high availability and scalability of the product.
 
-.. note::
-
-  This VM only runs on 64-bit systems and is not recommended for use in production environments. It is a useful tool for proof-of-concepts and labs. Multi-tier servers and multi-node clusters are generally more suitable for production environments where higher performance is required.
 
 This virtual appliance, available `in this link <https://packages.wazuh.com/|CURRENT_MAJOR|/vm/wazuh-|WAZUH_LATEST_OVA|_|OPEN_DISTRO_LATEST|.ova>`_, contains the following components:
 

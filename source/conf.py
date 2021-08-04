@@ -20,6 +20,7 @@ from requests.utils import requote_uri
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #sys.path.insert(0, os.path.abspath('.'))
+sys.path.append(os.path.abspath("_exts"))
 
 # -- Project information -----------------------------------------------------
 
@@ -49,7 +50,7 @@ needs_sphinx = '1.8'
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.extlinks', # Sphinx built-in extension
-    'sphinxcontrib.images',
+    'wazuh-doc-images',
     'sphinx_tabs.tabs',
 ]
 
@@ -345,8 +346,9 @@ epub_exclude_files = ['search.html', 'not_found.html']
 
 # -- Images extension -----------------------------------------------------
 
-images_config = {
-    'default_group': 'default'
+wazuh_images_config = {
+  'override_image_directive': 'thumbnail',
+  'show_caption': True
 }
 
 # -- Options for intersphinx extension ---------------------------------------
@@ -368,16 +370,23 @@ extra_assets = [
     'js/moved-content.js'
 ]
 
+# Fonts to be preloaded
+google_fonts_path = os.path.join(html_theme_path[0], html_theme, 'static', 'css', 'google-fonts.css')
+with open(google_fonts_path, 'r') as reader:
+    google_fonts = reader.read()
+
 def minification(actual_path):
 
     files = [
         ['css/style','css'],
         ['css/wazuh-icons','css'],
         ['css/custom-redoc','css'],
+        ['css/accordions','css'],
         ['js/version-selector','js'],
         ['js/redirects','js'],
         ['js/style','js'],
-        ['js/custom-redoc','js']
+        ['js/custom-redoc','js'],
+        ['js/accordion', 'js']
     ]
 
     if is_latest_release == True:
@@ -434,24 +443,27 @@ def customReplacements(app, docname, source):
 custom_replacements = {
     "|CURRENT_MAJOR|" : "4.x",
     "|WAZUH_LATEST|" : "4.2.0",
-    "|WAZUH_LATEST_MINOR|": "4.2",
-    "|WAZUH_LATEST_ANSIBLE|" : "4.1.5",
-    "|WAZUH_LATEST_KUBERNETES|" : "4.1.1",
-    "|WAZUH_LATEST_PUPPET|" : "4.0.4",
-    "|WAZUH_LATEST_OVA|" : "4.1.5",
-    "|WAZUH_LATEST_DOCKER|" : "4.1.2",
-    "|OPEN_DISTRO_LATEST|" : "1.13.0",
-    "|ELASTICSEARCH_LATEST|" : "7.10.0",
-    "|ELASTICSEARCH_LATEST_OVA|" : "7.10.0",
-    "|ELASTICSEARCH_LATEST_ANSIBLE|" : "7.10.0",
+    "|WAZUH_GCC_CHANGE|" : "4.2.0",
+    "|WAZUH_PREGCC_CHANGE|" : "4.2.0",
+    "|WAZUH_LATEST_MINOR|" : "4.2",
+    "|WAZUH_PACKAGES_BRANCH|" : "4.1",
+    "|WAZUH_LATEST_ANSIBLE|" : "4.2.0",
+    "|WAZUH_LATEST_KUBERNETES|" : "4.2.0",
+    "|WAZUH_LATEST_PUPPET|" : "4.2.0",
+    "|WAZUH_LATEST_OVA|" : "4.2.0",
+    "|WAZUH_LATEST_DOCKER|" : "4.2.0",
+    "|OPEN_DISTRO_LATEST|" : "1.13.2",
+    "|ELASTICSEARCH_LATEST|" : "7.10.2",
+    "|ELASTICSEARCH_LATEST_OVA|" : "7.10.2",
+    "|ELASTICSEARCH_LATEST_ANSIBLE|" : "7.10.2",
     "|ELASTICSEARCH_LATEST_KUBERNETES|" : "7.10.2",
-    "|ELASTICSEARCH_LATEST_PUPPET|" : "7.8.0",
+    "|ELASTICSEARCH_LATEST_PUPPET|" : "7.10.2",
     "|ELASTICSEARCH_LATEST_DOCKER|" : "7.10.2",
-    "|OPENDISTRO_LATEST_DOCKER|" : "1.12.0",
-    "|OPENDISTRO_LATEST_KUBERNETES|" : "1.12.0",
+    "|OPENDISTRO_LATEST_DOCKER|" : "1.13.2",
+    "|OPENDISTRO_LATEST_KUBERNETES|" : "1.13.2",
     "|DOCKER_COMPOSE_VERSION|" : "1.28.3",
-    "|SPLUNK_LATEST|" : "8.1.2",
-    "|WAZUH_SPLUNK_LATEST|" : "4.1.5",
+    "|SPLUNK_LATEST|" : "8.1.3",
+    "|WAZUH_SPLUNK_LATEST|" : "4.2.0",
     "|ELASTIC_6_LATEST|" : "6.8.8",
     "|WAZUH_REVISION_YUM_AGENT_I386|" : "1",
     "|WAZUH_REVISION_YUM_MANAGER_I386|" : "1",
@@ -478,7 +490,7 @@ custom_replacements = {
     "|WAZUH_REVISION_DEB_MANAGER_ARMHF|" : "1",
     "|WAZUH_REVISION_DEB_API_ARMHF|" : "1",
     "|WAZUH_REVISION_HPUX|" : "1",
-    "|WAZUH_REVISION_OSX|" : "1",
+    "|WAZUH_REVISION_OSX|" : "2",
     "|WAZUH_REVISION_WINDOWS|" : "1",
     "|WAZUH_REVISION_AIX|" : "1",
     "|CHECKSUMS_URL|" : "https://packages.wazuh.com/4.x/checksums/wazuh/",
@@ -488,11 +500,11 @@ custom_replacements = {
     "|DEB_MANAGER|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-manager/wazuh-manager",
     "|DEB_API|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-api/wazuh-api",
     # Variables for Elastic's Elasticsearch
-    "|ELASTICSEARCH_ELK_LATEST|" : "7.10.2",
-    "|ELASTICSEARCH_ELK_LATEST_ANSIBLE|" : "7.10.0",
-    "|ELASTICSEARCH_ELK_LATEST_KUBERNETES|" : "7.8.0",
-    "|ELASTICSEARCH_ELK_LATEST_PUPPET|" : "7.8.0",
-    "|ELASTICSEARCH_ELK_LATEST_DOCKER|" : "7.10.0",
+    "|ELASTICSEARCH_ELK_LATEST|" : "7.11.2",
+    "|ELASTICSEARCH_ELK_LATEST_ANSIBLE|" : "7.10.2",
+    "|ELASTICSEARCH_ELK_LATEST_KUBERNETES|" : "7.10.2",
+    "|ELASTICSEARCH_ELK_LATEST_PUPPET|" : "7.10.2",
+    "|ELASTICSEARCH_ELK_LATEST_DOCKER|" : "7.10.2",
 }
 
 # -- Setup -------------------------------------------------------------------
@@ -509,11 +521,15 @@ def setup(app):
         os.path.join(actual_path, "_static/css/wazuh-icons.css")).st_mtime)
     app.add_css_file("css/style.min.css?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/css/style.css")).st_mtime)
+    app.add_css_file("css/accordions.min.css?ver=%s" % os.stat(
+        os.path.join(actual_path, "_static/css/accordions.css")).st_mtime)
 
     app.add_js_file("js/version-selector.min.js?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/js/version-selector.js")).st_mtime)
     app.add_js_file("js/style.min.js?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/js/style.js")).st_mtime)
+    app.add_js_file("js/accordion.min.js?ver=%s" % os.stat(
+        os.path.join(actual_path, "_static/js/accordion.js")).st_mtime)
     app.add_js_file("js/redirects.min.js?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/js/redirects.js")).st_mtime)
     app.add_config_value('custom_replacements', {}, True)
@@ -613,6 +629,7 @@ html_context = {
     "production": production,
     "apiURL": apiURL,
     "compilation_ts": str(time.time()),
-    "is_latest_release": is_latest_release
+    "is_latest_release": is_latest_release,
+    "inline_fonts": google_fonts
 }
 sphinx_tabs_nowarn = True

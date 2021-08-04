@@ -1,6 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. meta:: :description: Learn how to install a Wazuh multi-node cluster
+.. meta::
+  :description: Learn more about the installation of the Wazuh server components and Filebeat in a Wazuh multi-node cluster in this section of our documentation. 
 
 .. _wazuh_multi_node_cluster:
 
@@ -12,17 +13,12 @@ This document will go through the installation of the Wazuh server components an
 
 .. note:: Root user privileges are required to run all the commands described below.
 
-Prerequisites
--------------
-
-Before installing the Wazuh servers and Filebeat, some extra packages must be installed:
-
-.. include:: ../../../../../_templates/installations/elastic/common/before_installation_kibana_filebeat.rst
-
 Installing the Wazuh server
 ---------------------------
 
-The Wazuh server collects and analyzes data from the deployed Wazuh agents. It runs the Wazuh manager, the Wazuh API, and Filebeat. The first step to set up Wazuh is adding the Wazuh's repository to the servers, alternatively, the installation can be done using packages. A list with all the available packages can be found :ref:`here <packages>`. 
+The Wazuh server collects and analyzes data from the deployed Wazuh agents. It runs the Wazuh manager, the Wazuh API, and Filebeat. The first step to set up Wazuh is adding the Wazuh's repository to the servers.
+
+As an alternative to this installation method, you can install Wazuh using packages. To perform this action, see the :ref:`Package list <packages>` section. 
 
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -36,21 +32,21 @@ This section describes how to add the Wazuh repository. It will be used for the 
     .. group-tab:: Yum
 
 
-      .. include:: ../../../../../_templates/installations/wazuh/yum/add_repository.rst
+      .. include:: ../../../../../_templates/installations/wazuh/yum/add_repository_wazuh_server.rst
 
 
 
     .. group-tab:: APT
 
 
-      .. include:: ../../../../../_templates/installations/wazuh/deb/add_repository.rst
+      .. include:: ../../../../../_templates/installations/wazuh/deb/add_repository_wazuh_server.rst
 
 
 
     .. group-tab:: ZYpp
 
 
-      .. include:: ../../../../../_templates/installations/wazuh/zypp/add_repository.rst
+      .. include:: ../../../../../_templates/installations/wazuh/zypp/add_repository_wazuh_server.rst
 
 
 
@@ -162,7 +158,7 @@ Filebeat installation and configuration
 
     .. code-block:: console
 
-      # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/|WAZUH_LATEST_MINOR|/resources/open-distro/filebeat/7.x/filebeat_elastic_cluster.yml
+      # curl -so /etc/filebeat/filebeat.yml https://packages.wazuh.com/resources/4.1/open-distro/filebeat/7.x/filebeat_elastic_cluster.yml
 
 #. Download the alerts template for Elasticsearch:
 
@@ -179,7 +175,7 @@ Filebeat installation and configuration
 
     .. include:: ../../../../../_templates/installations/elastic/common/configure_filebeat.rst
 
-#. Configure Filebeat certificates:
+#. Replace ``wazuh-node-name`` with your Wazuh node name, the same used in ``instances.yml`` to create the certificates, and move the certificates to their corresponding location. This guide assumes that a copy of ``certs.tar``, created during the Elasticsearch installation,  has been placed in the root home folder (``~/``). 
 
     .. include:: ../../../../../_templates/installations/elastic/common/copy_certificates_filebeat_wazuh_cluster.rst
 
@@ -211,7 +207,7 @@ An example response should look as follows:
                   TLS version: TLSv1.3
                   dial up... OK
                 talk to server... OK
-                version: 7.10.0
+                version: 7.10.2
 
 To uninstall Wazuh and Filebeat, visit the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_open_distro>`.
 

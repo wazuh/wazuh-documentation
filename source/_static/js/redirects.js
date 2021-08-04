@@ -34,11 +34,27 @@ removedUrls['x.y'] = [
 ];
 */
 
+/* Pages added in 4.3 */
+
+newUrls['4.3'] = [
+  '/github/index.html',
+  '/github/monitoring-github-activity.html',
+  '/user-manual/reference/ossec-conf/github-module.html',
+  '/office365/index.html',
+  '/office365/monitoring-office365-activity.html',
+  '/user-manual/reference/ossec-conf/office365-module.html',
+];
+
 /* *** RELEASE 4.2 ****/
 
 /* Pages added in 4.2 */
 
 newUrls['4.2'] = [
+  '/release-notes/release_4_2_0.html',
+  '/user-manual/capabilities/active-response/ar-use-cases/removing-malware.html',
+  '/user-manual/capabilities/active-response/ar-use-cases/wazuh-with-yara.html',
+  '/user-manual/capabilities/active-response/ar-use-cases/blocking-attacks.html',
+  '/user-manual/capabilities/active-response/ar-use-cases/index.html',
   '/user-manual/capabilities/active-response/custom-active-response.html',
   '/user-manual/reference/daemons/wazuh-agentd.html',
   '/user-manual/reference/daemons/wazuh-agentlessd.html',
@@ -209,8 +225,38 @@ newUrls['4.1'] = [
   '/user-manual/capabilities/wazuh-logtest/how-it-works.html',
   '/user-manual/capabilities/wazuh-logtest/logtest-configuration.html',
   '/user-manual/capabilities/wazuh-logtest/logtest-faq.html',
-  '/user-manual/ruleset/ruleset-xml-syntax/pcre2.html'
+  '/user-manual/ruleset/ruleset-xml-syntax/pcre2.html',
 ];
+
+removedUrls['4.1'] = [
+  '/installation-guide/wazuh-agent/deployment_variables/linux/deployment_variables_apt.rst',
+  '/installation-guide/wazuh-agent/deployment_variables/linux/deployment_variables_dnf.rst',
+  '/installation-guide/wazuh-agent/deployment_variables/linux/deployment_variables_yum.rst',
+  '/installation-guide/wazuh-agent/deployment_variables/linux/deployment_variables_zypper.rst',
+];
+
+redirections.push(
+  {
+    'target': ['4.0=>4.1', '4.1=>4.0'],
+    '4.0': '/installation-guide/wazuh-agent/deployment_variables/linux/deployment_variables_apt.rst',
+    '4.1': '/installation-guide/wazuh-agent/deployment_variables/deployment_variables_linux.rst',
+  },
+  {
+    'target': ['4.0=>4.1', '4.1=>4.0'],
+    '4.0': '/installation-guide/wazuh-agent/deployment_variables/linux/deployment_variables_dnf.rst',
+    '4.1': '/installation-guide/wazuh-agent/deployment_variables/deployment_variables_linux.rst',
+  },
+  {
+    'target': ['4.0=>4.1', '4.1=>4.0'],
+    '4.0': '/installation-guide/wazuh-agent/deployment_variables/linux/deployment_variables_yum.rst',
+    '4.1': '/installation-guide/wazuh-agent/deployment_variables/deployment_variables_linux.rst',
+  },
+  {
+    'target': ['4.0=>4.1', '4.1=>4.0'],
+    '4.0': '/installation-guide/wazuh-agent/deployment_variables/linux/deployment_variables_zypper.rst',
+    '4.1': '/installation-guide/wazuh-agent/deployment_variables/deployment_variables_linux.rst',
+  },  
+);
 
 /* *** RELEASE 4.0 ****/
 

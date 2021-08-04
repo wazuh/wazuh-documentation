@@ -156,7 +156,7 @@ Filebeat installation and configuration
 
     .. code-block:: console
 
-      # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/|WAZUH_LATEST_MINOR|/resources/elastic-stack/filebeat/7.x/filebeat.yml
+      # curl -so /etc/filebeat/filebeat.yml https://packages.wazuh.com/resources/4.1/elastic-stack/filebeat/7.x/filebeat.yml
 
 #. Download the alerts template for Elasticsearch:
 
@@ -208,7 +208,7 @@ An example response should look as follows:
       TLS version: TLSv1.3
       dial up... OK
     talk to server... OK
-    version: 7.10.0
+    version: 7.11.2
    
 
 

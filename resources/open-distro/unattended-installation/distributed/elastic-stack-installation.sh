@@ -11,10 +11,10 @@
 ## Check if system is based on yum or apt-get
 char="."
 debug='> /dev/null 2>&1'
-WAZUH_VER="4.1.5"
+WAZUH_VER="4.2.0"
 WAZUH_REV="1"
-ELK_VER="7.10.0"
-OD_VER="1.12.0"
+ELK_VER="7.10.2"
+OD_VER="1.13.2"
 OD_REV="1"
 if [ -n "$(command -v yum)" ]; then
     sys_type="yum"
@@ -229,10 +229,10 @@ installElasticsearch() {
 
         logger "Configuring Elasticsearch..."
 
-        eval "curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/unattended-installation/distributed/templates/elasticsearch_unattended.yml --max-time 300 ${debug}"
-        eval "curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/elasticsearch/roles/roles.yml --max-time 300 ${debug}"
-        eval "curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles_mapping.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/elasticsearch/roles/roles_mapping.yml --max-time 300 ${debug}"
-        eval "curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/elasticsearch/roles/internal_users.yml --max-time 300 ${debug}"
+        eval "curl -so /etc/elasticsearch/elasticsearch.yml https://packages.wazuh.com/resources/4.1/open-distro/unattended-installation/distributed/templates/elasticsearch_unattended.yml --max-time 300 ${debug}"
+        eval "curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles.yml https://packages.wazuh.com/resources/4.1/open-distro/elasticsearch/roles/roles.yml --max-time 300 ${debug}"
+        eval "curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles_mapping.yml https://packages.wazuh.com/resources/4.1/open-distro/elasticsearch/roles/roles_mapping.yml --max-time 300 ${debug}"
+        eval "curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml https://packages.wazuh.com/resources/4.1/open-distro/elasticsearch/roles/internal_users.yml --max-time 300 ${debug}"
 
         if [ -n "${single}" ]; then
             nh=$(awk -v RS='' '/network.host:/' ~/config.yml)
@@ -339,7 +339,7 @@ createCertificates() {
     logger "Creating the certificates..."
     eval "curl -so ~/search-guard-tlstool-1.8.zip https://maven.search-guard.com/search-guard-tlstool/1.8/search-guard-tlstool-1.8.zip --max-time 300 ${debug}"
     eval "unzip ~/search-guard-tlstool-1.8.zip -d ~/searchguard ${debug}"
-    eval "curl -so ~/searchguard/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/unattended-installation/distributed/templates/search-guard-unattended.yml --max-time 300 ${debug}"
+    eval "curl -so ~/searchguard/search-guard.yml https://packages.wazuh.com/resources/4.1/open-distro/unattended-installation/distributed/templates/search-guard-unattended.yml --max-time 300 ${debug}"
 
     if [ -n "${single}" ]; then
         echo -e "\n" >> ~/searchguard/search-guard.yml
@@ -396,7 +396,7 @@ copyCertificates() {
         eval "mv /etc/elasticsearch/certs/${IMN[pos]}_http.key /etc/elasticsearch/certs/elasticsearch_http.key ${debug}"
         eval "rm /etc/elasticsearch/certs/client-certificates.readme /etc/elasticsearch/certs/elasticsearch_elasticsearch_config_snippet.yml ~/search-guard-tlstool-1.8.zip -f ${debug}"
     fi
-    eval "/usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro_performance_analyzer ${debug}"
+    eval "/usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer ${debug}"
     if [[ -n "${certificates}" ]] || [[ -n "${single}" ]]; then
         cp ~/config.yml /etc/elasticsearch/certs/
         tar -cf /etc/elasticsearch/certs/certs.tar *
@@ -447,11 +447,11 @@ installKibana() {
         echo "Error: Kibana installation failed"
         exit 1;
     else
-        eval "curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/unattended-installation/distributed/templates/kibana_unattended.yml --max-time 300 ${debug}"
+        eval "curl -so /etc/kibana/kibana.yml https://packages.wazuh.com/resources/4.1/open-distro/unattended-installation/distributed/templates/kibana_unattended.yml --max-time 300 ${debug}"
         eval "mkdir /usr/share/kibana/data ${debug}"
         eval "chown -R kibana:kibana /usr/share/kibana/ ${debug}"
         eval "cd /usr/share/kibana ${debug}"
-        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.1.5_7.10.0-1.zip ${debug}"
+        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.2.0_7.10.2-1.zip ${debug}"
         if [  "$?" != 0  ]; then
             echo "Error: Wazuh Kibana plugin could not be installed."
             exit 1;

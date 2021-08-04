@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Learn more about the wazuh-regex tool in this section of the Wazuh documentation.
+
 .. _wazuh-regex:
 
 wazuh-regex

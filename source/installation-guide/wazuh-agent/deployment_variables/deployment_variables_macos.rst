@@ -1,7 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. meta:: :description: Learn how to use deployment variables on macOS
-
+.. meta::
+  :description: Learn about the variables that facilitate the deployment of the Wazuh agent on macOS in this section of our documentation.
+  
 .. _deployment_variables_macos:
 
 Deployment variables for macOS
@@ -70,7 +71,7 @@ Examples:
 .. code-block:: console
 
      # launchctl setenv WAZUH_MANAGER "10.0.0.2" WAZUH_REGISTRATION_SERVER "10.0.0.2" WAZUH_AGENT_NAME "macos-agent" \
-          WAZUH_PROTOCOL "tcp" && installer -pkg wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_OSX|.pkg -target /
+          WAZUH_PROTOCOL "udp" && installer -pkg wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_OSX|.pkg -target /
 
 * Registration and adding multiple address:
 

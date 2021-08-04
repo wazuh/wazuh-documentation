@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Learn more about how to register Wazuh agents on Linux, Windows, or macOS X in this section of our documentation.
+  
 .. _register_agents:
 
 Registering Wazuh agents
@@ -73,21 +76,23 @@ To register the Wazuh agent, choose the tab corresponding to the Wazuh agent's h
 
     #. To register the Wazuh agent, run the ``agent-auth.exe`` utility, using the Wazuh manager's IP address:
     
-      .. tabs::
+    
+        .. tabs::
+    
+          .. group-tab:: Powershell
+    
+           .. code-block:: console
+    
+              # &'C:\Program Files (x86)\ossec-agent\agent-auth.exe' -m <manager_IP> 
+    
+          .. group-tab:: Windows cmd
+    
+           .. code-block:: console
+    
+              # "C:\Program Files (x86)\ossec-agent\agent-auth.exe" -m <manager_IP>
 
-       .. group-tab:: Powershell
 
-         .. code-block:: console
-
-          # &'C:\Program Files (x86)\ossec-agent\agent-auth.exe' -m <manager_IP> 
-
-       .. group-tab:: Windows cmd
-
-         .. code-block:: console
-
-          # "C:\Program Files (x86)\ossec-agent\agent-auth.exe" -m <manager_IP>
-
-      .. include:: ../../_templates/registrations/common/set_agent_name.rst
+        .. include:: ../../_templates/registrations/common/set_agent_name.rst
 
 
     #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``C:\Program Files (x86)\ossec-agent\ossec.conf``.

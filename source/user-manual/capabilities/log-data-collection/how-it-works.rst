@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Learn more about how the Log Data Collection capability of Wazuh works.
+
 How it works
 ============
 
@@ -59,6 +62,8 @@ Wazuh can monitor classic Windows event logs, as well as the newer Windows event
       <location>Microsoft-Windows-PrintService/Operational</location>
       <log_format>eventchannel</log_format>
     </localfile>
+
+.. _remote_syslog:
 
 Remote syslog
 ^^^^^^^^^^^^^

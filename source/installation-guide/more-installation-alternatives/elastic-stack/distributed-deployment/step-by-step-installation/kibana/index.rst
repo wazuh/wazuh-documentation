@@ -81,7 +81,11 @@ Kibana installation and configuration
 
 #. Download the Kibana configuration file:
 
-    .. include:: ../../../../../../_templates/installations/basic/elastic/common/configure_kibana.rst
+   .. Note::
+
+     Starting Elasticsearch 7.11.0, a DNS name must be specified in the ``elasticsearch.hosts`` field since IPs are no longer allowed. 
+
+   .. include:: ../../../../../../_templates/installations/basic/elastic/common/configure_kibana.rst
 
 
 #. Create the ``/usr/share/kibana/data`` directory:
@@ -99,7 +103,7 @@ Kibana installation and configuration
     .. code-block:: console
 
         # cd /usr/share/kibana
-        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.1.5_7.10.2-1.zip
+        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.2.0_7.10.2-1.zip
 
 #. Link Kibana's socket to privileged port 443:
 
@@ -170,4 +174,4 @@ To uninstall Kibana, visit the :ref:`uninstalling section <basic_uninstall_kiban
 Next steps
 ~~~~~~~~~~
 
-Once the Wazuh - Elastic Stack environment is ready, a Wazuh agent can be installed in every endpoint to be monitored. The Wazuh installation guide is available for most operating systems and it can be found :ref:`here<installation_agents>`.
+Once the Wazuh - Elastic Stack environment is ready, a Wazuh agent can be installed on every endpoint to be monitored. The Wazuh installation guide is available for most operating systems and it can be found :ref:`here<installation_agents>`.

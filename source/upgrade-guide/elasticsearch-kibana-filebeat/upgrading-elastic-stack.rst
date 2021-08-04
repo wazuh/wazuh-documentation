@@ -1,5 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
-
+.. meta::
+  :description: Check out more about how to upgrade the Elastic Stack basic license: preparing and upgrading Elastic Stack, upgrading Filebeat and Kibana, and next steps. 
+  
 .. _upgrading_elastic_stack:
 
 Upgrading Elastic Stack basic license
@@ -114,6 +116,8 @@ In the commands below ``127.0.0.1`` IP address is used. If Elasticsearch is boun
           .. code-block:: console
 
             # apt-get install elasticsearch=|ELASTICSEARCH_ELK_LATEST|
+          
+          It's recommended to keep your currently installed version of the configuration file (option N or O if prompted).  
 
         .. group-tab:: ZYpp
 
@@ -174,6 +178,8 @@ The following steps needs to be run in the Wazuh server or servers in case of Wa
         .. code-block:: console
 
           # apt-get install filebeat=|ELASTICSEARCH_ELK_LATEST|
+        
+        It's recommended to keep your currently installed version of the configuration file (option N or O if prompted).  
 
       .. group-tab:: ZYpp
 
@@ -322,13 +328,15 @@ Upgrading Kibana
 
             # apt-get install kibana=|ELASTICSEARCH_ELK_LATEST|
 
+          It's recommended to keep your currently installed version of the configuration file (option N or O if prompted).
+
         .. group-tab:: ZYpp
 
           .. code-block:: console
 
             # zypper update kibana=|ELASTICSEARCH_ELK_LATEST|
 
-#. Remove generated bundles and the ``wazuh-registry.json`` file:
+#. **(For upgrades from 3.x versions)** Remove generated bundles and the ``wazuh-registry.json`` file:
 
     .. code-block:: console
 
@@ -340,8 +348,7 @@ Upgrading Kibana
     .. code-block:: console
 
       # chown -R kibana:kibana /usr/share/kibana
-      # chown -R kibana:kibana /usr/share/kibana/plugins
-
+    
 #. Install the Wazuh Kibana plugin:
 
     .. code-block:: console
@@ -350,12 +357,15 @@ Upgrading Kibana
       # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_ELK_LATEST|-1.zip
 
 
-#. Update configuration file permissions:
+#. Update configuration file and certificates permissions:
 
     .. code-block:: console
 
-      # sudo chown kibana:kibana /usr/share/kibana/data/wazuh/config/wazuh.yml
-      # sudo chmod 600 /usr/share/kibana/data/wazuh/config/wazuh.yml
+      # chown kibana:kibana /usr/share/kibana/data/wazuh/config/wazuh.yml
+      # chmod 600 /usr/share/kibana/data/wazuh/config/wazuh.yml
+      # chown -R kibana: /etc/kibana/certs
+      # chmod -R 500 /etc/kibana/certs
+      # chmod 400 /etc/kibana/certs/ca/ca.* /etc/kibana/certs/kibana.*
 
 #. For installations on Kibana 7.6.x version and higher, it is recommended to increase the heap size of Kibana to ensure the Kibana's plugins installation:
 
@@ -365,6 +375,37 @@ Upgrading Kibana
       NODE_OPTIONS="--max_old_space_size=2048"
       EOF
 
+#. Edit the ``/etc/kibana/kibana.yml`` configuration file: 
+
+
+   .. code-block:: none
+      :emphasize-lines: 3,20,21
+
+      server.host: <kibana_ip>
+      server.port: 443
+      elasticsearch.hosts: https://<elasticsearch_DN>:9200
+      elasticsearch.password: <elasticsearch_password>
+
+      # Elasticsearch from/to Kibana
+
+      elasticsearch.ssl.certificateAuthorities: /etc/kibana/certs/ca/ca.crt
+      elasticsearch.ssl.certificate: /etc/kibana/certs/kibana.crt
+      elasticsearch.ssl.key: /etc/kibana/certs/kibana.key
+
+      # Browser from/to Kibana
+      server.ssl.enabled: true
+      server.ssl.certificate: /etc/kibana/certs/kibana.crt
+      server.ssl.key: /etc/kibana/certs/kibana.key
+
+      # Elasticsearch authentication
+      xpack.security.enabled: true
+      elasticsearch.username: elastic
+      uiSettings.overrides.defaultRoute: "/app/wazuh"
+      elasticsearch.ssl.verificationMode: certificate
+
+   - ``elasticsearch.hosts:`` In case of having an IP, replace it with a DNS name (Starting Elasticsearch 7.11.0, IPs are not allowed). For example, ``https://localhost:9200``
+   - Replace ``server.defaultRoute: /app/wazuh`` with ``uiSettings.overrides.defaultRoute: "/app/wazuh"``
+   - Add the following line to select ``certificate`` as verification mode: ``elasticsearch.ssl.verificationMode: certificate``
 
 #. Link Kibana’s socket to privileged port 443:
 

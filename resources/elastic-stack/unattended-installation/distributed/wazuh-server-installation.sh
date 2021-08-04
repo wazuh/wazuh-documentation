@@ -255,20 +255,20 @@ installFilebeat() {
 
     if [ $sys_type == "yum" ]
     then
-        eval "yum install filebeat-7.10.2 -y -q  $debug"    
+        eval "yum install filebeat-7.11.2 -y -q  $debug"    
     elif [ $sys_type == "zypper" ] 
     then
-        eval "zypper -n install filebeat-7.10.2 $debug"
+        eval "zypper -n install filebeat-7.11.2 $debug"
     elif [ $sys_type == "apt-get" ] 
     then
-        eval "apt-get install filebeat=7.10.2 -y -q  $debug"
+        eval "apt-get install filebeat=7.11.2 -y -q  $debug"
     fi
     if [  "$?" != 0  ]
     then
         echo "Error: Filebeat installation failed"
         exit 1;
     else
-        eval "curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/elastic-stack/unattended-installation/distributed/templates/filebeat.yml --max-time 300  $debug"
+        eval "curl -so /etc/filebeat/filebeat.yml https://packages.wazuh.com/resources/4.1/elastic-stack/unattended-installation/distributed/templates/filebeat.yml --max-time 300  $debug"
         eval "curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/4.1/extensions/elasticsearch/7.x/wazuh-template.json --max-time 300 $debug"
         eval "chmod go+r /etc/filebeat/wazuh-template.json $debug"
         eval "curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.1.tar.gz --max-time 300 | tar -xvz -C /usr/share/filebeat/module $debug"
