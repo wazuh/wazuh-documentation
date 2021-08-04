@@ -27,6 +27,49 @@ The JSON message format is as follows:
     }
   }
 
+
+**Additional steps for a Stateful AR**
+
+A *Stateful* AR will undo its original action after the period of time specified in the active response. So, as part of the timeout behavior, when the recived command is ``add`` the AR must send a control message to the ``execd`` through ``STDOUT`` to check the keys, wait for the response via ``STDIN`` and check the ``command`` field if it has to continue the execution or abort it.
+
+The keys must be sufficient to identify an execution instance, for example to block a user on a specific host, with the ip and the user keys it is enough.
+
+The control message format is as follows:
+
+.. code-block:: json
+
+  {
+    "version":1,
+    "origin":{
+        "name":"program-name",
+        "module":"active-response"
+    },
+    "command":"check_keys",
+    "parameters":{
+        "keys":["10.0.0.1", "root"]
+    }
+  }
+
+
+The response message from execd is a follows:
+
+.. code-block:: json
+
+  {
+    "version":1,
+    "origin":{
+        "name":"node01",
+        "module":"wazuh-execd"
+    },
+    "command":"continue/abort",
+    "parameters":{}
+  }
+
+.. warning:: 
+
+    When the ``STDIN`` reading occurs, it must be read up to the newline character (``\n``), in the same way when writing to ``STDOUT`` the newline character must be added at the end, otherwise a deadlock may occur in ``execd`` and in the ``AR`` waiting for messages.
+
+
 The AR can be done in whatever language you are comfortable with, but it should at least be able to:
 
 1. Read through ``STDIN``.
@@ -34,6 +77,13 @@ The AR can be done in whatever language you are comfortable with, but it should 
 2. Parse the read JSON object.
 
 3. Extract the necessary information for its execution.
+
+4. Write ``STDOUT`` to send control message to execd.
+
+5. Wait for the response via ``STDIN``.
+
+6. Check the ``command`` field.
+
 
 Here is an example of the message that is passed to the ``firewall-drop`` AR:
 
