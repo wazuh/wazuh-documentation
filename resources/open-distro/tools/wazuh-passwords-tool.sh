@@ -79,6 +79,10 @@ getNetworkHost() {
     IP=$(grep -hr "network.host:" /etc/elasticsearch/elasticsearch.yml)
     NH="network.host: "
     IP="${IP//$NH}"
+    
+    if [ ${IP} == "0.0.0.0" ]; then
+        IP="localhost"
+    fi
 }
 
 ## Checks if Open Distro for Elasticsearch is installed
@@ -286,7 +290,7 @@ runSecurityAdmin() {
     echo "Loading changes..."
     eval "cp /usr/share/elasticsearch/backup/* /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/ ${VERBOSE}"
     eval "cd /usr/share/elasticsearch/plugins/opendistro_security/tools/ ${VERBOSE}"
-    eval "./securityadmin.sh -cd ../securityconfig/ -nhnv -cacert ${capem} -cert ${adminpem} -key ${adminkey} -icl ${VERBOSE}"
+    eval "./securityadmin.sh -cd ../securityconfig/ -nhnv -cacert ${capem} -cert ${adminpem} -key ${adminkey} -icl -h ${IP} ${VERBOSE}"
     if [  "$?" != 0  ]; then
         echo "Error: Could not load the changes."
         exit 1;
