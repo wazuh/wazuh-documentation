@@ -11,7 +11,7 @@ Installation guide
 
 Wazuh is a free, open source, and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response, and regulatory compliance. To learn more about the Wazuh solution, its components, architecture, and capabilities, check the :ref:`Getting started <getting_started>` section. 
 
-The Wazuh central components are in charge of analyzing the data gathered by the Wazuh agents, providing a search engine and data visualization tool that allow users to navigate through their security alerts. The Wazuh central components include the Wazuh indexer, the Wazuh server, and the Wazuh dashboard. Each central component can be installed in unattended mode using an automated script, or manually, by following detailed step-by-step instructions.
+The Wazuh central components include the Wazuh indexer, the Wazuh server, and the Wazuh dashboard. They are in charge of analyzing the data gathered by the Wazuh agents, providing a search engine and data visualization tool that allow users to navigate through their security alerts. Each component can be installed in unattended mode using an automated script, or manually, by following detailed step-by-step instructions.
 
 Installing the Wazuh central components
 ---------------------------------------
