@@ -538,7 +538,7 @@ installElasticsearch() {
             eval "mv /etc/elasticsearch/certs/${ename}-key.pem /etc/elasticsearch/certs/elasticsearch-key.pem ${debug}"
             eval "mv /etc/elasticsearch/certs/${ename}.pem /etc/elasticsearch/certs/elasticsearch.pem ${debug}"
             eval "cd ~/certs/ ${debug}"
-            eval "mv ~/config.yml ~/certs/config.yml"
+            eval "mv ~/config.yml ~/certs/config.yml ${debug}"
             eval "tar -cvf certs.tar * ${debug}"
             eval "mv ~/certs/certs.tar ~/ ${debug}"
         elif [ -z "${aio}" ] && [ -z "${certificates}" ]; then
@@ -760,25 +760,26 @@ installKibana() {
         # Start Kibana
         startService "kibana"
 
-        echo "Adding the Wazuh configuration..."
-        while [ ! -f /usr/share/kibana/data/wazuh/config/wazuh.yml ]
-        do
-            echo -ne ${char}
-            sleep 2
-        done
+        if [ -z "${aio}" ]; then
+            echo "Adding the Wazuh configuration..."
+            while [ ! -f /usr/share/kibana/data/wazuh/config/wazuh.yml ]
+            do
+                echo -ne ${char}
+                sleep 2
+            done
 
-        if [[ -z ${aio} ]] || [[ ${#FILEBEATNODES[@]} -lt "2" ]]; then
-            wsname="${FILEBEATNODES[0]}"
-            wsip="${FILEBEATNODES[1]}"
+            if [[ -z ${aio} ]] || [[ ${#FILEBEATNODES[@]} -lt "2" ]]; then
+                wsname="${FILEBEATNODES[0]}"
+                wsip="${FILEBEATNODES[1]}"
 
-            conf="$(awk '{sub("  - default:", "  - '${wsname:1}':")}1' /usr/share/kibana/data/wazuh/config/wazuh.yml)"
-            echo "${conf}" > /usr/share/kibana/data/wazuh/config/wazuh.yml
-            conf="$(awk '{sub("     url: https://localhost", "     url: https://'${wsip:1}'")}1' /usr/share/kibana/data/wazuh/config/wazuh.yml)"
-            echo "${conf}" > /usr/share/kibana/data/wazuh/config/wazuh.yml
+                conf="$(awk '{sub("  - default:", "  - '${wsname:1}':")}1' /usr/share/kibana/data/wazuh/config/wazuh.yml)"
+                echo "${conf}" > /usr/share/kibana/data/wazuh/config/wazuh.yml
+                conf="$(awk '{sub("     url: https://localhost", "     url: https://'${wsip:1}'")}1' /usr/share/kibana/data/wazuh/config/wazuh.yml)"
+                echo "${conf}" > /usr/share/kibana/data/wazuh/config/wazuh.yml
+            fi
+
+            echo $'\nDone'
         fi
-        
-
-        echo $'\nDone'
     fi
 
 }
