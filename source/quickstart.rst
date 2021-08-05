@@ -24,7 +24,7 @@ Check the supported operating systems and the recommended hardware requirements 
 Supported operating systems
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh can be installed on the following Linux operating systems:
+Wazuh can be installed on a 64-bit Linux operating system.
 
 - Amazon Linux 1 and 2
 
@@ -42,8 +42,6 @@ Wazuh can be installed on the following Linux operating systems:
 
 Hardware requirements
 ^^^^^^^^^^^^^^^^^^^^^
-
-- A 64-bit operating system is necessary.
 
 - Hardware
   
