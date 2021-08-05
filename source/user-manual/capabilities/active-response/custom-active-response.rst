@@ -84,6 +84,8 @@ The AR can be done in whatever language you are comfortable with, but it should 
 
 6. Check the ``command`` field.
 
+.. note::
+  **Only for Windows Agents** For scripts developed in python for example, it is necessary to create the executable file(``.exe``) of this script and configure it in :ref:`command <reference_ossec_commands>`. To create the ``.exe`` file it is possible to use tools such as ``pyinstaller``.
 
 Here is an example of the message that is passed to the ``firewall-drop`` AR:
 
