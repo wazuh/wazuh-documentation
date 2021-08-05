@@ -43,7 +43,7 @@ The Wazuh server and the Wazuh indexer can each be installed as a single-node or
 
 The diagram below represents a Wazuh deployment architecture. It shows the solution components and how the Wazuh servers and Wazuh indexer can be configured as a cluster, providing load balancing and high-availability.
 
-.. thumbnail:: ../images/getting_started/deployment.png
+.. thumbnail:: ../images/installation/distributed.png
     :alt: Wazuh deployment
     :align: center
     :wrap_image: No
