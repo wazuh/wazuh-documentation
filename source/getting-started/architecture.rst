@@ -14,7 +14,7 @@ A Wazuh indexer cluster is a collection of one or more nodes that communicate wi
 
 For production environments it is recommended to deploy the Wazuh server and Wazuh indexer to different hosts. In this scenario, the Wazuh forwarder is used to securely forward Wazuh alerts and/or archived events to the Wazuh indexer cluster (single-node or multi-node) using TLS encryption.
 
-The diagram below represents a Wazuh deployment architecture. It shows the solution components and how the :ref:`Wazuh servers <wazuh_server>` and :ref:`Wazuh indexer <elastic_stack>` can be configured as a cluster, providing load balancing and high-availability.
+The diagram below represents a Wazuh deployment architecture. It shows the solution components and how the :ref:`Wazuh servers <wazuh_server>` and :ref:`Wazuh indexer <wazuh_indexer>` can be configured as a cluster, providing load balancing and high-availability.
 
 .. thumbnail:: ../images/getting_started/deployment.png
     :alt: Wazuh deployment
