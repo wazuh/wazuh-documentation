@@ -11,6 +11,17 @@ Wazuh indexer
 
 The Wazuh indexer is a highly scalable, full-text search and analytics engine based on Open Distro for Elasticsearch. The Wazuh indexer is distributed, meaning the data indices are divided into shards and each shard can have zero or more replicas. Wazuh uses different indices for alerts data, raw events, and status monitoring information.
 
+You can now choose an installation method and start installing the Wazuh indexer.
+
+- :ref:`Unattended installation <wazuh_indexer_unattended>`: Install this component by using a script that automates the installation process.  
+
+- :ref:`Step-by-step installation <wazuh_indexer_step_by_step>`: Install this component manually following detailed step-by-step instructions.
+
+.. thumbnail:: /images/installation/Wazuh-Installation-indexer-1.png
+    :alt: Wazuh indexer installation
+    :align: center
+    :width: 100%
+
 Requirements
 ------------
 
@@ -71,14 +82,6 @@ The Wazuh indexer can be installed as a single-node or as a multi-node cluster. 
 
   For example, for an environment with 80 workstations, 10 servers, and 10 network devices, the storage needed on the Wazuh indexer server for 90 days of alerts is 230 GB. 
 
-Wazuh indexer installation
---------------------------
-
-Choose an installation method to install this Wazuh central component.
-
-- :ref:`Unattended installation <wazuh_indexer_unattended>`: Install the Wazuh indexer by using a script that automates the installation process.  
-
-- :ref:`Step-by-step installation <wazuh_indexer_step_by_step>`: Install the Wazuh indexer manually following detailed step-by-step instructions.
 
 .. toctree::
     :hidden:
