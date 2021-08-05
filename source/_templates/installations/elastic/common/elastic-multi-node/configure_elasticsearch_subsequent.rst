@@ -4,7 +4,7 @@
 
     .. code-block:: console 
 
-      # curl -so /etc/elasticsearch/elasticsearch.yml https://packages.wazuh.com/resources/4.2/open-distro/elasticsearch/7.x/elasticsearch_cluster_subsequent_nodes.yml
+      # curl -so /etc/elasticsearch/elasticsearch.yml https://packages.wazuh.com/resources/4.1/open-distro/elasticsearch/7.x/elasticsearch_cluster_subsequent_nodes.yml
 
 #. Edit the file ``/etc/elasticsearch/elasticsearch.yml``. The pre-configured template includes 3 nodes by default; you can add or remove lines according to the number of nodes in your cluster.
 

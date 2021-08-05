@@ -31,7 +31,7 @@ Changing the default passwords of Elasticsearch is highly recommended in order t
     
       .. code-block:: console
       
-        # curl -so wazuh-passwords-tool.sh https://packages.wazuh.com/resources/4.2/open-distro/tools/wazuh-passwords-tool.sh
+        # curl -so wazuh-passwords-tool.sh https://packages.wazuh.com/resources/4.1/open-distro/tools/wazuh-passwords-tool.sh
 
     - Run the script:
 
