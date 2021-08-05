@@ -279,7 +279,7 @@ Filebeat installation and configuration
 
     .. code-block:: console
 
-      # curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.1.tar.gz | tar -xvz -C /usr/share/filebeat/module
+      # curl -s https://packages-dev.wazuh.com/pre-release/filebeat/wazuh-filebeat-0.1.tar.gz | tar -xvz -C /usr/share/filebeat/module
 
 #. Edit the file ``/etc/filebeat/filebeat.yml``:
 
@@ -375,7 +375,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
     .. code-block:: console
 
         # cd /usr/share/kibana
-        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.2.0_7.10.2-1.zip
+        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages-dev.wazuh.com/pre-release/ui/kibana/wazuh_kibana-4.2.0_7.10.2-1.zip
 
 #. Link Kibana's socket to privileged port 443:
 

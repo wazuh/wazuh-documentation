@@ -139,15 +139,15 @@ addWazuhrepo() {
     if [ ${sys_type} == "yum" ]
     then
         eval "rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH ${debug}"
-        eval "echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-${releasever} - Wazuh\nbaseurl=https://packages.wazuh.com/4.x/yum/\nprotect=1' | tee /etc/yum.repos.d/wazuh.repo ${debug}"
+        eval "echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-${releasever} - Wazuh\nbaseurl=https://packages-dev.wazuh.com/pre-release/yum/\nprotect=1' | tee /etc/yum.repos.d/wazuh.repo ${debug}"
     elif [ ${sys_type} == "zypper" ]
     then
         eval "rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH ${debug}"
-        eval "echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-${releasever} - Wazuh\nbaseurl=https://packages.wazuh.com/4.x/yum/\nprotect=1' | tee /etc/zypp/repos.d/wazuh.repo ${debug}"
+        eval "echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-${releasever} - Wazuh\nbaseurl=https://packages-dev.wazuh.com/pre-release/yum/\nprotect=1' | tee /etc/zypp/repos.d/wazuh.repo ${debug}"
     elif [ ${sys_type} == "apt-get" ]
     then
         eval "curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH --max-time 300 | apt-key add - ${debug}"
-        eval "echo "deb https://packages.wazuh.com/4.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list ${debug}"
+        eval "echo "deb https://packages-dev.wazuh.com/pre-release/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list ${debug}"
         eval "apt-get update -q ${debug}"
     fi
 
@@ -197,7 +197,7 @@ installFilebeat() {
         eval "curl -so /etc/filebeat/filebeat.yml https://packages.wazuh.com/resources/4.1/open-distro/unattended-installation/distributed/templates/filebeat.yml --max-time 300 ${debug}"
         eval "curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/4.2/extensions/elasticsearch/7.x/wazuh-template.json --max-time 300 ${debug}"
         eval "chmod go+r /etc/filebeat/wazuh-template.json ${debug}"
-        eval "curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.1.tar.gz --max-time 300 | tar -xvz -C /usr/share/filebeat/module ${debug}"
+        eval "curl -s https://packages-dev.wazuh.com/pre-release/filebeat/wazuh-filebeat-0.1.tar.gz --max-time 300 | tar -xvz -C /usr/share/filebeat/module ${debug}"
     fi
 }
 

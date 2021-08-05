@@ -31,7 +31,7 @@ The first step to setting up the manager is to add the Wazuh repository:
          gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
          enabled=1
          name=Wazuh repository
-         baseurl=https://packages.wazuh.com/4.x/yum/
+         baseurl=https://packages-dev.wazuh.com/pre-release/yum/
          protect=1
          EOF
 
@@ -125,7 +125,7 @@ and archived events to the Elasticsearch service.
 
   .. code-block:: console
 
-    # curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.1.tar.gz | sudo tar -xvz -C /usr/share/filebeat/module
+    # curl -s https://packages-dev.wazuh.com/pre-release/filebeat/wazuh-filebeat-0.1.tar.gz | sudo tar -xvz -C /usr/share/filebeat/module
 
 6. Edit and set the specific IP address of your Elasticsearch instance into the Filebeat config:
 

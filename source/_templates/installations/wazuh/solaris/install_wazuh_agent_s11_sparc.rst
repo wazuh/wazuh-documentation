@@ -1,6 +1,6 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-#. Download the `Wazuh agent for Solaris 11 Sparc <https://packages.wazuh.com/4.x/solaris/sparc/11/wazuh-agent_v4.2.0-sol11-sparc.p5p>`_. 
+#. Download the `Wazuh agent for Solaris 11 Sparc <https://packages-dev.wazuh.com/pre-release/solaris/sparc/11/wazuh-agent_v4.2.0-sol11-sparc.p5p>`_. 
 
 #. Install the agent:
    

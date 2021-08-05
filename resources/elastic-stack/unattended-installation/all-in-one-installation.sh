@@ -169,7 +169,7 @@ addWazuhrepo() {
     if [ $sys_type == "yum" ]
     then
         eval "rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH $debug"
-        eval "echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages.wazuh.com/4.x/yum/\nprotect=1' | tee /etc/yum.repos.d/wazuh.repo $debug"
+        eval "echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages-dev.wazuh.com/pre-release/yum/\nprotect=1' | tee /etc/yum.repos.d/wazuh.repo $debug"
     elif [ $sys_type == "zypper" ]
     then
         rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH > /dev/null 2>&1
@@ -179,14 +179,14 @@ addWazuhrepo() {
 		gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
 		enabled=1
 		name=Wazuh repository
-		baseurl=https://packages.wazuh.com/4.x/yum/
+		baseurl=https://packages-dev.wazuh.com/pre-release/yum/
 		protect=1
 		EOF
 
     elif [ $sys_type == "apt-get" ]
     then
         eval "curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH --max-time 300 | apt-key add - $debug"
-        eval "echo "deb https://packages.wazuh.com/4.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list $debug"
+        eval "echo "deb https://packages-dev.wazuh.com/pre-release/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list $debug"
         eval "apt-get update -q $debug"
     fi
 
@@ -316,7 +316,7 @@ installFilebeat() {
         eval "curl -so /etc/filebeat/filebeat.yml https://packages.wazuh.com/resources/4.1/elastic-stack/filebeat/7.x/filebeat_all_in_one.yml --max-time 300  $debug"
         eval "curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/4.2/extensions/elasticsearch/7.x/wazuh-template.json --max-time 300 $debug"
         eval "chmod go+r /etc/filebeat/wazuh-template.json $debug"
-        eval "curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.1.tar.gz --max-time 300 | tar -xvz -C /usr/share/filebeat/module $debug"
+        eval "curl -s https://packages-dev.wazuh.com/pre-release/filebeat/wazuh-filebeat-0.1.tar.gz --max-time 300 | tar -xvz -C /usr/share/filebeat/module $debug"
         eval "mkdir /etc/filebeat/certs $debug"
         eval "cp -r /etc/elasticsearch/certs/ca/ /etc/filebeat/certs/ $debug"
         eval "cp /etc/elasticsearch/certs/elasticsearch.crt /etc/filebeat/certs/filebeat.crt $debug"
@@ -354,7 +354,7 @@ installKibana() {
         eval "mkdir /usr/share/kibana/data ${debug}"
         eval "chown -R kibana:kibana /usr/share/kibana/ ${debug}"
         eval "cd /usr/share/kibana ${debug}"
-        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.2.0_7.10.2-1.zip ${debug}"
+        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages-dev.wazuh.com/pre-release/ui/kibana/wazuh_kibana-4.2.0_7.10.2-1.zip ${debug}"
         if [  "$?" != 0  ]; then
             echo "Error: Wazuh Kibana plugin could not be installed."
             exit 1;
