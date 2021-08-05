@@ -155,7 +155,7 @@ The :ref:`Wazuh agent <wazuh_agent>` is a single, light-weight monitoring softwa
     :hidden:
     :maxdepth: 1
 
-    quickstart
+    Quickstart <quickstart>
     central-components/index
     wazuh-agent/index
     packages-list
