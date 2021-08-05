@@ -446,7 +446,7 @@ checkInstalled() {
     if [ "${sys_type}" == "yum" ]; then
         filebeatinstalled=$(yum list installed 2>/dev/null | grep filebeat)
     elif [ "${sys_type}" == "zypper" ]; then
-        filebeatinstalled=$(zypper packages --installed | grep filebeat | grep i+ | grep noarch)
+        filebeatinstalled=$(zypper packages --installed | grep filebeat | grep i+)
     elif [ "${sys_type}" == "apt-get" ]; then
         filebeatinstalled=$(apt list --installed  2>/dev/null | grep filebeat)
     fi 
