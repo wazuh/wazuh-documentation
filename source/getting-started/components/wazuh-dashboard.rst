@@ -2,8 +2,8 @@
 
 .. _wazuh_dashboard:
 
-Wazuh dashboard
-===============
+[WIP] Wazuh dashboard
+=====================
 
 The Wazuh dashboard is a flexible and intuitive web interface for managing and monitoring the Wazuh infrastructure, and for mining, analyzing, and visualizing data.
 
