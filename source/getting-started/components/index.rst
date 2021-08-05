@@ -26,6 +26,6 @@ The diagram below represents the Wazuh components and data flow.
     :hidden:
 
     wazuh-agent
-    wazuh-server
-    wazuh-indexer
-    wazuh-dashboard
+    wazuh server <wazuh-server>
+    wazuh indexer <wazuh-indexer>
+    wazuh dashboard <wazuh-dashboard>

@@ -2,8 +2,8 @@
 
 .. _wazuh_server:
 
-Wazuh server
-============
+[WIP] Wazuh server
+==================
 
 The Wazuh server component is in charge of analyzing the data received from the :ref:`agents <wazuh_agent>`, triggering alerts when threats or anomalies are detected. It is also used to manage the agents configuration remotely and to monitor their status.
 
