@@ -15,9 +15,9 @@ This central component can be installed as a single-node or multi-node cluster d
 
 You can now choose an installation method and start installing the Wazuh server.
 
-- :ref:`Unattended installation <wazuh_indexer_unattended>`: Install this component by using a script that automates the installation process.  
+- :ref:`Unattended installation <wazuh_server_unattended>`: Install this component by using a script that automates the installation process.  
 
-- :ref:`Step-by-step installation <wazuh_indexer_step_by_step>`: Install this component manually following detailed step-by-step instructions.
+- :ref:`Step-by-step installation <wazuh_server_step_by_step>`: Install this component manually following detailed step-by-step instructions.
 
 
 .. thumbnail:: /images/installation/Wazuh-Installation-server-2.png

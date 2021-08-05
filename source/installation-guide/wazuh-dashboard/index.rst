@@ -13,9 +13,9 @@ This central component is a flexible and intuitive web interface for mining, ana
 
 You can now choose an installation method and start installing the Wazuh dashboard.
 
-- :ref:`Unattended installation <wazuh_indexer_unattended>`: Install this component by using a script that automates the installation process.  
+- :ref:`Unattended installation <wazuh_dashboard_unattended_installation>`: Install this component by using a script that automates the installation process.  
 
-- :ref:`Step-by-step installation <wazuh_indexer_step_by_step>`: Install this component manually following detailed step-by-step instructions.
+- :ref:`Step-by-step installation <wazuh_dashboard_step_by_step>`: Install this component manually following detailed step-by-step instructions.
 
 
 .. thumbnail:: /images/installation/Wazuh-Installation-dashboard-3.png
