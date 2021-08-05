@@ -5,8 +5,8 @@
 
 .. _cloud_security:
 
-Cloud security monitoring
-=========================
+Cloud security
+==============
 
 The Wazuh security platform provides threat detection, configuration compliance, and continuous monitoring for multicloud and hybrid environments. It protects cloud workloads by monitoring the infrastructure at two different levels:
 

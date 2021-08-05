@@ -20,28 +20,27 @@ Bellow you can find examples of some of the most common use cases of the Wazuh s
    :width: 100%
    :widths: 50 50
 
-   * - :ref:`Log data analysis <log_analysis>`
-     - :ref:`File integrity monitoring <file_integrity>`
-   * - :ref:`Rootkits detection <rootkits_detection>`
-     - :ref:`Active response <active_response>`
-   * - :ref:`Configuration assessment <configuration_assessment>`
-     - :ref:`System inventory <system_inventory>`
-   * - :ref:`Vulnerability detection <vulnerability_detection>`
-     - :ref:`Cloud security monitoring <cloud_security>`
-   * - :ref:`Containers security monitoring <containers_security>`
-     - :ref:`Regulatory compliance <regulatory_compliance>`
+   * - :ref:`security_analytics`
+     - :ref:`intrusion_detection`
+   * - :ref:`log_analysis`
+     - :ref:`file_integrity`
+   * - :ref:`vulnerability_detection`
+     - :ref:`configuration_assessment`
+   * - :ref:`active_response`
+     - :ref:`regulatory_compliance`
+   * - :ref:`cloud_security`
+     - :ref:`containers_security`
 
 .. toctree::
    :hidden:
-   :maxdepth: 1
 
+   security_analytics
+   intrusion_detection
    log_analysis
    file_integrity
-   rootkits_detection
-   active_response
-   configuration_assessment
-   system_inventory
    vulnerability_detection
+   configuration_assessment
+   active_response
+   regulatory_compliance
    cloud_security
    containers_security
-   regulatory_compliance

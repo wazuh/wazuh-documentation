@@ -2,8 +2,8 @@
 
 .. _containers_security:
 
-Containers security monitoring
-==============================
+Containers security
+===================
 
 Wazuh is used to monitor for signs of security incidents across containers, alerting in real time. Wazuh protects container workloads at two different levels:
 
