@@ -13,6 +13,13 @@ The Wazuh server is in charge of analyzing the data received from the Wazuh agen
 
 This central component can be installed as a single-node or multi-node cluster depending on the environment needs. Small Wazuh deployments, which do not require processing large amounts of data, can easily be handled by a single-node cluster. Multi-node clusters are recommended when there is a large number of monitored endpoints, when a large volume of data is anticipated, or when high availability is required.
 
+You can now choose an installation method and start installing the Wazuh server.
+
+- :ref:`Unattended installation <wazuh_indexer_unattended>`: Install this component by using a script that automates the installation process.  
+
+- :ref:`Step-by-step installation <wazuh_indexer_step_by_step>`: Install this component manually following detailed step-by-step instructions.
+
+
 .. thumbnail:: /images/installation/Wazuh-Installation-server-2.png
     :alt: Wazuh server installation
     :align: center
@@ -20,9 +27,6 @@ This central component can be installed as a single-node or multi-node cluster d
 
 Requirements
 ------------
-.. raw:: html
-
-  <div class="accordion-section">
 
 Check the supported operating systems and the recommended hardware requirements for the Wazuh server installation. Make sure that your system environment meets all requirements and that you have root user privileges.
 
@@ -95,15 +99,6 @@ To determine if a Wazuh server requires more resources, monitor these files:
 
 These two variables should be zero if the environment is working properly. If it is not the case, additional nodes can be added to the cluster. 
 
-Installation methods
---------------------
-
-Choose an installation method to install this Wazuh central component.
-
-- :ref:`Unattended installation <wazuh_server_unattended>`: Install the Wazuh server by using a script that automates the installation process.  
-
-
-- :ref:`Step-by-step installation <wazuh_server_step_by_step>`: Install the Wazuh server manually following detailed step-by-step instructions.
 
 
 .. toctree::

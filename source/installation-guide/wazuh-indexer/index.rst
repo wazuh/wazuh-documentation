@@ -13,6 +13,12 @@ The Wazuh indexer is a highly scalable, full-text search and analytics engine ba
 
 This central component can be installed as a single-node or multi-node cluster depending on the environment needs. Small Wazuh deployments, which do not require processing large amounts of data, can easily be handled by a single-node cluster. Multi-node clusters are recommended when there is a large number of monitored endpoints, when a large volume of data is anticipated, or when high availability is required.
 
+You can now choose an installation method and start installing the Wazuh indexer.
+
+- :ref:`Unattended installation <wazuh_indexer_unattended>`: Install this component by using a script that automates the installation process.  
+
+- :ref:`Step-by-step installation <wazuh_indexer_step_by_step>`: Install this component manually following detailed step-by-step instructions.
+
 .. thumbnail:: /images/installation/Wazuh-Installation-indexer-1.png
     :alt: Wazuh indexer installation
     :align: center
@@ -20,9 +26,6 @@ This central component can be installed as a single-node or multi-node cluster d
 
 Requirements
 ------------
-.. raw:: html
-
-  <div class="accordion-section">
 
 Check the supported operating systems and the recommended hardware requirements for the Wazuh indexer installation. Make sure that your system environment meets all requirements and that you have root user privileges.
 
@@ -81,14 +84,9 @@ The Wazuh indexer can be installed as a single-node or as a multi-node cluster.
 
   For example, for an environment with 80 workstations, 10 servers, and 10 network devices, the storage needed on the Wazuh indexer server for 90 days of alerts is 230 GB. 
 
-Installation methods
---------------------
 
-Choose an installation method to install this Wazuh central component.
 
-- :ref:`Unattended installation <wazuh_indexer_unattended>`: Install the Wazuh indexer by using a script that automates the installation process.  
 
-- :ref:`Step-by-step installation <wazuh_indexer_step_by_step>`: Install the Wazuh indexer manually following detailed step-by-step instructions.
 
 .. toctree::
     :hidden:

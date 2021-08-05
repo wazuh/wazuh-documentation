@@ -11,6 +11,12 @@ Wazuh dashboard
 
 This central component is a flexible and intuitive web interface for mining, analyzing, and visualizing data based on Kibana. It includes out-of-the-box dashboards for security events, detected vulnerable applications, file integrity monitoring data, configuration assessment results, cloud infrastructure monitoring events, regulatory compliance, such as PCI DSS, GDPR, CIS, HIPAA, and NIST 800-53 standards, and other data.
 
+You can now choose an installation method and start installing the Wazuh server.
+
+- :ref:`Unattended installation <wazuh_indexer_unattended>`: Install this component by using a script that automates the installation process.  
+
+- :ref:`Step-by-step installation <wazuh_indexer_step_by_step>`: Install this component manually following detailed step-by-step instructions.
+
 
 .. thumbnail:: /images/installation/Wazuh-Installation-dashboard-3.png
     :alt: Wazuh dashboard installation
@@ -20,9 +26,6 @@ This central component is a flexible and intuitive web interface for mining, ana
 
 Requirements
 ------------
-.. raw:: html
-
-  <div class="accordion-section">
 
 Check the supported operating systems and the recommended hardware requirements for the Wazuh dashboard installation. Make sure that your system environment meets all requirements and that you have root user privileges.
 
@@ -63,16 +66,6 @@ The Wazuh dashboard can be installed on a dedicated node or along with the Wazuh
   | Wazuh dashboard         |     4    |     2        |     16       |       8        |
   +-------------------------+----------+--------------+--------------+----------------+
 
-
-
-Installation methods
---------------------
-
-Choose an installation method to install this Wazuh central component.
-
-- :ref:`Unattended installation <wazuh_dashboard_unattended_installation>`: Install the Wazuh dashboard by using a script that automates the installation process.  
-
-- :ref:`Step-by-step installation <wazuh_dashboard_step_by_step>`: Install the Wazuh dashboard manually following detailed step-by-step instructions.
 
 
 
