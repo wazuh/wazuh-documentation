@@ -46,21 +46,21 @@ Add the Wazuh repository to download the official Wazuh packages. As an alternat
        .. group-tab:: Yum
    
    
-         .. include:: ../../../_templates/installations/wazuh/yum/add_repository_wazuh_server.rst
+         .. include:: ../../_templates/installations/wazuh/yum/add_repository_wazuh_server.rst
    
    
    
        .. group-tab:: APT
    
    
-         .. include:: ../../../_templates/installations/wazuh/deb/add_repository_wazuh_server.rst
+         .. include:: ../../_templates/installations/wazuh/deb/add_repository_wazuh_server.rst
    
    
    
        .. group-tab:: ZYpp
    
    
-         .. include:: ../../../_templates/installations/wazuh/zypp/add_repository_wazuh_server.rst
+         .. include:: ../../_templates/installations/wazuh/zypp/add_repository_wazuh_server.rst
     
 
 
@@ -75,31 +75,31 @@ Installing the Wazuh manager
      .. group-tab:: Yum
    
    
-       .. include:: ../../../_templates/installations/wazuh/yum/install_wazuh_manager.rst
+       .. include:: ../../_templates/installations/wazuh/yum/install_wazuh_manager.rst
    
    
    
      .. group-tab:: APT
    
    
-       .. include:: ../../../_templates/installations/wazuh/deb/install_wazuh_manager.rst
+       .. include:: ../../_templates/installations/wazuh/deb/install_wazuh_manager.rst
    
    
    
      .. group-tab:: ZYpp
    
    
-       .. include:: ../../../_templates/installations/wazuh/zypp/install_wazuh_manager.rst
+       .. include:: ../../_templates/installations/wazuh/zypp/install_wazuh_manager.rst
 
 
 #. Enable and start the Wazuh manager service.
 
-    .. include:: ../../../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
+    .. include:: ../../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
 
 
 #. Run the following command to verify the Wazuh manager status. 
 
-    .. include:: ../../../_templates/installations/wazuh/common/check_wazuh_manager.rst
+    .. include:: ../../_templates/installations/wazuh/common/check_wazuh_manager.rst
 
 
 
@@ -126,21 +126,21 @@ Installing and configuring the Wazuh forwarder
       .. group-tab:: Yum
 
 
-        .. include:: ../../../_templates/installations/elastic/yum/install_filebeat.rst
+        .. include:: ../../_templates/installations/elastic/yum/install_filebeat.rst
 
 
 
       .. group-tab:: APT
 
 
-        .. include:: ../../../_templates/installations/elastic/deb/install_filebeat.rst
+        .. include:: ../../_templates/installations/elastic/deb/install_filebeat.rst
 
 
 
       .. group-tab:: ZYpp
 
 
-        .. include:: ../../../_templates/installations/elastic/zypp/install_filebeat.rst
+        .. include:: ../../_templates/installations/elastic/zypp/install_filebeat.rst
 
 
 
@@ -152,7 +152,7 @@ Installing and configuring the Wazuh forwarder
 
 #. Download the alerts template for the Wazuh indexer.
 
-    .. include:: ../../../_templates/installations/elastic/common/load_filebeat_template.rst
+    .. include:: ../../_templates/installations/elastic/common/load_filebeat_template.rst
 
 
 #. Download the Wazuh module.
@@ -163,15 +163,15 @@ Installing and configuring the Wazuh forwarder
 
 #. Edit the file ``/etc/filebeat/filebeat.yml``.
 
-    .. include:: ../../../_templates/installations/elastic/common/configure_filebeat.rst
+    .. include:: ../../_templates/installations/elastic/common/configure_filebeat.rst
 
 #. Replace ``wazuh-node-name`` with your Wazuh server node name, the same used in ``instances.yml`` to create the certificates, and move the certificates to their corresponding location. We assume that you placed a copy of ``certs.tar``, created during the Wazuh indexer installation, in the root home folder (``~/``).
 
-    .. include:: ../../../_templates/installations/elastic/common/copy_certificates_filebeat_wazuh_cluster.rst
+    .. include:: ../../_templates/installations/elastic/common/copy_certificates_filebeat_wazuh_cluster.rst
 
 #. Enable and start the Filebeat service.
 
-    .. include:: ../../../_templates/installations/elastic/common/enable_filebeat.rst
+    .. include:: ../../_templates/installations/elastic/common/enable_filebeat.rst
 
 #. Run the following command to verify that Filebeat is successfully installed.
 
@@ -220,22 +220,22 @@ The *Wazuh server master node* configuration needs to be applied only to the ser
 Wazuh server master node
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. .. include:: ../../../_templates/installations/wazuh/common/configure_wazuh_master_node.rst
+#. .. include:: ../../_templates/installations/wazuh/common/configure_wazuh_master_node.rst
 
 #. Once the ``/var/ossec/etc/ossec.conf`` configuration file is edited, restart the Wazuh manager. 
 
-    .. include:: ../../../_templates/installations/wazuh/common/restart_wazuh_manager.rst
+    .. include:: ../../_templates/installations/wazuh/common/restart_wazuh_manager.rst
 
 Wazuh server worker nodes
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. .. include:: ../../../_templates/installations/wazuh/common/configure_wazuh_worker_node.rst
+#. .. include:: ../../_templates/installations/wazuh/common/configure_wazuh_worker_node.rst
 
 #. Once the ``/var/ossec/etc/ossec.conf`` configuration file is edited, restart the Wazuh manager. 
 
-    .. include:: ../../../_templates/installations/wazuh/common/restart_wazuh_manager.rst
+    .. include:: ../../_templates/installations/wazuh/common/restart_wazuh_manager.rst
 
-#. .. include:: ../../../_templates/installations/wazuh/common/check_wazuh_cluster.rst
+#. .. include:: ../../_templates/installations/wazuh/common/check_wazuh_cluster.rst
 
 
 If you want to uninstall the Wazuh server, see the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_open_distro>`.
