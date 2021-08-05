@@ -20,7 +20,7 @@ You can install all the Wazuh components on the same server, as an all-in-one de
 
 Follow this installation workflow to install Wazuh. 
 
-.. thumbnail:: ../images/installation/Installation_workflow.png
+.. thumbnail:: ../images/installation/Wazuh-Installation-workflow.png
   :title: Wazuh installation workflow
   :align: center
   :width: 100%
@@ -28,7 +28,7 @@ Follow this installation workflow to install Wazuh.
 
 #. :ref:`Wazuh indexer <wazuh_indexer_installation>`: a highly scalable, full-text search and analytics engine based on Open Distro for Elasticsearch.
     
-    During the installation of the Wazuh indexer, the Wazuh certificates tool is used to create certificates needed for encrypting the communication between the central components. These certificates must be distributed to all the servers in the Wazuh installation. Random passwords are also generated for the system users.
+    During the installation of the Wazuh indexer, the Wazuh certificates tool is used to create certificates needed for encrypting the communication between the components. These certificates must be distributed to all the servers in the Wazuh installation. Random passwords are also generated for the system users.
 
 #. :ref:`Wazuh server <wazuh_server_installation>`: in charge of analyzing the data received from the Wazuh agents and triggering alerts when threats or anomalies are detected. 
 
