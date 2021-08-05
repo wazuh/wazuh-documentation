@@ -211,7 +211,7 @@ Filebeat is the tool on the Wazuh server that securely forwards alerts and archi
 
     .. code-block:: console
 
-      # curl -s https://packages-dev.wazuh.com/pre-release/filebeat/wazuh-filebeat-0.1.tar.gz | tar -xvz -C /usr/share/filebeat/module
+      # curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.1.tar.gz | tar -xvz -C /usr/share/filebeat/module
 
 #. Copy the Elasticsearch certificates into ``/etc/filebeat/certs``:
 
