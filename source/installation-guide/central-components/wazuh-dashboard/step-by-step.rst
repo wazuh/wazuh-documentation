@@ -146,5 +146,12 @@ If you want to uninstall Kibana, see the :ref:`uninstalling <uninstall_kibana>` 
 Next steps
 ----------
 
-The Wazuh environment is now ready and you can proceed with installing the Wazuh agent on the endpoints to be monitored. To perform this action, see the :ref:`Wazuh agent <installation_agents>` section.
+All the Wazuh central components are successfully installed.
 
+.. thumbnail:: ../../../images/installation/Wazuh-Installation-workflow-complete.png
+    :alt: Wazuh installation workflow
+    :align: center
+    :width: 100%
+
+
+The Wazuh environment is now ready and you can proceed with installing the Wazuh agent on the endpoints to be monitored. To perform this action, see the :ref:`Wazuh agent <installation_agents>` section.
