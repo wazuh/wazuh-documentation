@@ -4,7 +4,7 @@
 
     .. code-block:: console
 
-      # zypper install zip unzip tar
+      # zypper install zip unzip tar libcap-progs
 
 #. Import the GPG key:
 
