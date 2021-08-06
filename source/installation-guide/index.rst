@@ -11,12 +11,12 @@ Installation guide
 
 Wazuh is a free, open source, and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response, and regulatory compliance. To learn more about the Wazuh solution, its components, architecture, and capabilities, check the :ref:`Getting started <getting_started>` section. 
 
-The Wazuh central components include the Wazuh indexer, the Wazuh server, and the Wazuh dashboard. They are in charge of analyzing the data gathered by the Wazuh agents, providing a search engine and data visualization tool that allow users to navigate through their security alerts. Each component can be installed in unattended mode using an automated script, or manually, by following detailed step-by-step instructions.
+The Wazuh central components include the Wazuh indexer, the Wazuh server, and the Wazuh dashboard. With this guided installation, you install each component on the same server, as an all-in-one deployment, or on different servers as a distributed deployment depending on the environment needs. A distributed deployment provides high availability and scalability of the product.
+
+Alternatively, you can check our :ref:`Wazuh quickstart <quickstart>` to learn how to install all the central components on the same host using the unattended installation script. With Wazuh quickstart, you install and configure the Wazuh in just a few minutes.
 
 Installing the Wazuh central components
 ---------------------------------------
-
-You can install all the Wazuh components on the same server, as an all-in-one deployment, or on different servers as a distributed deployment. A distributed deployment provides high availability and scalability of the product. 
 
 Follow this installation workflow to install Wazuh. 
 
@@ -50,7 +50,7 @@ The diagram below represents a Wazuh deployment architecture. It shows the solut
 
 
 
-Alternatively, Wazuh can also be installed with commercial options like Elastic Stack basic license or Splunk. To learn more about these options and other installation alternatives, see the :ref:`More installation alternatives <more_installation_alternatives>` section.
+Installation alternatives: Wazuh can also be installed with commercial options like Elastic Stack basic license or Splunk. To learn more about these options and other installation alternatives, see the :ref:`More installation alternatives <more_installation_alternatives>` section.
 
 .. note:: Wazuh also offers the `Wazuh Cloud <https://wazuh.com/cloud/>`_, where all components are hosted on our PCI-DSS and SOC 2 Type 2 certified SaaS solution, which is maintained by our team. With the Wazuh cloud, no dedicated hardware is required and everything is ready to use. This service offers a highly flexible infrastructure to match your enterprise needs.
 
