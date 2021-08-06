@@ -9,7 +9,7 @@
 Security analytics
 ==================
 
-Wazuh delivers a set of strong security analytics tools that include file integrity monitoring (FIM), rule-based analysis of log events, and anomaly detection, among others. Wazuh analyzes threads events and improves the detection of attacks in real-time by deploying a complete set of security analytics tools.
+Wazuh delivers a set of strong security analytics tools that include file integrity monitoring (FIM), rule-based analysis of log events, and anomaly detection, among others. Wazuh analyzes thread events and improves the detection of attacks in real-time by deploying a complete set of security analytics tools.
 
 Users can perform complex security actions such as file modifications and registry keys detection, Illicit activity identification, or anomaly and malware detection. Wazuh generates alerts and events, fetching data from the endpoints where the agents are installed. Its agent modular architecture allows Wazuh to collect security data from different components.
 
