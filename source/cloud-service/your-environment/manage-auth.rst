@@ -97,7 +97,7 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
 #. Click the upper-left menu icon to open the options, select **Security** and then **Internal users** to open the internal users page.
 
-#. Click **Create internal user**, complete the empty fields with the requested information, and click **Create** to create a user.
+#. Click **Create internal user**, complete the empty fields with the requested information, and click **Create** to complete the action.
 
 #. To map the user to the appropriate role, follow these steps:
 
