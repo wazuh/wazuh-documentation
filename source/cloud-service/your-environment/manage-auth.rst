@@ -28,7 +28,7 @@ The Wazuh WUI allows you to add users, create roles, and map roles to users.
 Creating an internal user and mapping it to Wazuh
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Follow these steps to create an internal user, map it to its appropriate role, and create a new role mapping.
+Follow these steps to create an internal user and map it to its appropriate role.
 
 #. :ref:`Log into your WUI<cloud_getting_started_wui_access>` as administrator.
 
