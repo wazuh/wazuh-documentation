@@ -15,10 +15,6 @@ Install the Wazuh server, the Wazuh indexer, and the Wazuh dashboard on the same
 
 Requirements
 ------------
-.. raw:: html
-
-  <div class="accordion-section">
-
 Check the supported operating systems and the recommended hardware requirements for the Wazuh installation. This deployment supports around 100 agents.
 
 Supported operating systems
