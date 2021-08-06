@@ -24,5 +24,5 @@ Below you can see a list of these components:
 
 This way, security analytics tools help users perform thread prevention actions collecting log messages. Users can also get a list of last logged-in users, monitor the file system, and report when files are changed.
 
-In addition, these tools assist users in detecting the possible presence of rootkits, collect inventory data from different internal and external areas such as operating systems, processes, applications, ports, and network interfaces.
+In addition, these tools assist users in detecting the possible presence of rootkits and collecting inventory data from different internal and external areas such as operating systems, processes, applications, ports, and network interfaces.
 
