@@ -22,7 +22,7 @@ Below you can see a list of these components:
 - **System inventory** runs regular scans, collecting inventory data including network interfaces, operating system version, installed applications, running processes, and a list of open ports. 
 - **Security configuration assessment (SCA)** provides configuration assessment based on the Center of Internet Security (CIS) benchmarks.
 
-Security Analytics tools help users perform thread prevention actions such as collecting operating systems and application log messages. Users can also get a list of last logged-in users, monitor the file system, and report when files are created, deleted, or modified.
+This way Security Analytics tools help users perform thread prevention actions such as collecting operating systems and application log messages. Users can also get a list of last logged-in users, monitor the file system, and report when files are created, deleted, or modified.
 
 In addition, these tools assist users in monitoring space left in multiple hard disks, detecting the possible presence of rootkits; and collect inventory data such as operating system version, network interfaces, running processes, installed applications, and a list of open ports.
 
