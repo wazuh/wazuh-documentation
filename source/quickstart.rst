@@ -10,8 +10,13 @@
 Wazuh quickstart
 ================
 
-Install the Wazuh server, the Wazuh indexer, and the Wazuh dashboard on the same host by using the unattended installation script. By running the automated script, you install and configure the Wazuh central components in just a few minutes. To learn more about each Wazuh component and its capabilities, check the :ref:`Components <components>` section. 
+Wazuh is a free, open source, and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response, and regulatory compliance. To learn more about the Wazuh solution, its components, architecture, and capabilities, check the :ref:`Getting started <getting_started>` section. 
 
+With Wazuh quickstart, you install the Wazuh indexer, the Wazuh server, and the Wazuh dashboard on the same host using the unattended installation script. These central components are in charge of analyzing the data gathered by the Wazuh agents, providing a search engine and data visualization tool that allow users to navigate through their security alerts.
+
+By running the automated script, you install and configure the Wazuh in just a few minutes.
+
+Alternatively, you can check our :ref:`Installation guide <installation_guide>` to learn how to individually install each component on the same server, as an all-in-one deployment, or on different servers as a distributed deployment depending on the environment needs. 
 
 Requirements
 ------------
