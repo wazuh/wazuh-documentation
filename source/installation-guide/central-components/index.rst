@@ -14,7 +14,7 @@ You can install all the  Wazuh central components on the same server, as an all-
 
 Follow this installation workflow to install Wazuh. 
 
-.. thumbnail:: ../../images/installation/Installation_workflow.png
+.. thumbnail:: ../../images/installation/Wazuh-Installation-workflow.png
   :title: Wazuh installation workflow
   :align: center
   :width: 100%
