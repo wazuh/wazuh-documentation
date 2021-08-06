@@ -34,19 +34,16 @@ Supported operating systems
 
 The Wazuh dashboard can be installed on a 64-bit Linux operating system.
 
-- Amazon Linux 1 and 2
-
-- CentOS 6 or later
-
-- Debian 7 or later
-
-- Fedora 31 or later
-
-- Oracle Linux 6 or later
-
-- Red Hat Enterprise Linux 6 or later
-
-- Ubuntu 12 or later
+.. list-table::
+   :width: 50%
+   
+   * - Amazon Linux 1 and 2
+   * - CentOS 6 or later
+   * - Debian 7 or later
+   * - Fedora 31 or later
+   * - Oracle Linux 6 or later 
+   * - Red Hat Enterprise Linux 6 or later
+   * - Ubuntu 12 or later
 
 
 
