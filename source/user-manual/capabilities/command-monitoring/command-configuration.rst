@@ -18,7 +18,7 @@ The command monitoring capability is configured either locally or centrally:
 *  Locally through the :ref:`ossec.conf <reference_ossec_conf>` local configuration file.
 *  Centrally through the :ref:`agent.conf<reference_agent_conf>` group configuration file.
 
-The configuration options are defined in the :ref:`localfile section<reference_ossec_localfile>` of the configuration file, under the ``<localfile>`` section tag.
+The configuration options are defined in the :ref:`localfile <reference_ossec_localfile>` section of the configuration file, under the ``<localfile>`` section tag.
 
 .. code-block:: xml
 
@@ -49,7 +49,7 @@ Running processes monitoring
 ----------------------------
 The command monitoring capability can be used to alert about the missing execution of a given process.
 
-As an example, we configure the ``<localfile>`` to check periodically the `clamd.exe` process execution on a monitored Windows system. To do this, we use the command ``tasklist`` and set it to run repeatedly once every 120 seconds.
+As an example, we configure ``<localfile>`` to check periodically the `clamd.exe` process execution on a monitored Windows system. To do this, we use the command ``tasklist`` and set it to run repeatedly once every 120 seconds.
 
 .. code-block:: xml
 
@@ -62,7 +62,7 @@ As an example, we configure the ``<localfile>`` to check periodically the `clamd
 
 We add two rules:
 
-*  One level 6 rule to generate an alert about the process not running. This is a fallback rule and is going to be triggered whenever the monitored process is not found within the `tasklist` command's output:
+*  One level 6 rule to generate an alert about the process not running. This is a fallback rule and is going to be triggered whenever the monitored process is not found within the `tasklist` command's output.
 
 .. code-block:: xml
 
@@ -84,14 +84,14 @@ We add two rules:
     <group>process_monitor,</group>
   </rule>
 
-In this example, unless there is a match for `clamd.exe` found in the `tasklist` command's output,  `rule id 100010` will trip a level 6 alert. Likewise, new rules similar to rules `id 100010` and `id 100011` above can be added to watch for other processes as well.
+In this example, unless there is a match for `clamd.exe` found in the `tasklist` command's output, `rule id 100010` will trip a level 6 alert. Likewise, new rules similar to rules `id 100010` and `id 100011` above can be added to watch for other processes as well.
 
 In the case of monitoring Linux processes, this example can be adapted by changing the ``<command>`` option from ``tasklist`` to a Linux command that lists processes, like ``ps -auxw``.
 
 Load average monitoring
 -----------------------
 
-Wazuh can be configured to monitor the Linux `uptime` command's output and alert when its reported load average has reached a given threshold.
+Wazuh can be configured to monitor the Linux `uptime` command's output and alert when its reported load average reaches a given threshold.
 
 The output of `uptime` looks like this:
 
@@ -103,7 +103,7 @@ The output of `uptime` looks like this:
 ..
   used PowerShell syntax instead of sh due to bad highlighting
 
-In the :ref:`localfile section<reference_ossec_localfile>` of the configuration file we set to run the command ``uptime``.
+We configure the :ref:`localfile <reference_ossec_localfile>` section of the configuration file to run the ``uptime`` command.
 
 .. code-block:: xml
 
@@ -113,7 +113,7 @@ In the :ref:`localfile section<reference_ossec_localfile>` of the configuration 
       <frequency>60</frequency>
   </localfile>
 
-In this example we define a level 7 rule and use the regular expression ``load average: 2.`` to alert when the load average has reached a value of two in the last minute:
+In this example, we define a level 7 rule and use the regular expression ``load average: 2.`` to alert when the load average reaches a value of `2` in the last minute.
 
 .. code-block:: xml
 
@@ -129,7 +129,7 @@ USB storage detection
 
 Wazuh can be configured to alert when a USB storage device is connected.
 
-In this example we configure Windows agents to monitor the `USBSTOR` registry entry by adding the following to the group's `agent.conf` configuration file:
+In this example, we configure Windows agents to monitor the `USBSTOR` registry entry by adding the following command to the group's `agent.conf` configuration file.
 
 .. code-block:: xml
 
@@ -140,7 +140,7 @@ In this example we configure Windows agents to monitor the `USBSTOR` registry en
     </localfile>
   </agent_config>
 
-We create a custom level 7 rule to monitor for changes using the :ref:`check_diff option <rules_check_diff>`:
+We create a custom level 7 rule to monitor for changes using the :ref:`check_diff option <rules_check_diff>`.
 
 .. code-block:: xml
 
@@ -153,7 +153,7 @@ We create a custom level 7 rule to monitor for changes using the :ref:`check_dif
 
 Disk space usage monitoring
 ---------------------------
-On the manager and on the agents for Linux systems, a disk space usage monitoring configuration is made by default upon installation. It sets to use the `df` command to check the available disk space for file systems as follows:
+After installing Wazuh, a configuration for disk space usage monitoring is set by default on the manager and agents for Linux systems. This configuration is set to use the ``df`` command to check the available disk space for file systems as follows:
 
 .. code-block:: xml
 
@@ -178,7 +178,7 @@ It also defines a rule to trip an alert once the disk space usage on any partiti
 Network connections monitoring
 ------------------------------
 
-On the manager and on the agents for Linux systems, network connections monitoring is also configured by default upon installation. The `netstat` command is used along with the :ref:`check_diff option <rules_check_diff>` to monitor for changes in listening TCP sockets. If the output changes, the system will generate an alert.
+After installing Wazuh, a configuration for network connections monitoring is set by default on the manager and agents for Linux systems. The ``netstat`` command is used along with the :ref:`check_diff <rules_check_diff>` option to monitor for changes in listening TCP sockets. If the output changes, the system will generate an alert.
 
 .. code-block:: xml
 
@@ -189,7 +189,7 @@ On the manager and on the agents for Linux systems, network connections monitori
     <frequency>360</frequency>
   </localfile>
 
-A rule to alert when a network listener has disappeared or a new one has appeared is also defined by default. These changes may indicate something is broken or a network backdoor has been installed.
+A rule to alert when a network listener disappears or a new one appears is also defined by default. These changes may indicate something is broken or a network backdoor has been installed.
 
 .. code-block:: xml
 
