@@ -30,9 +30,9 @@ The configuration options are defined in the :ref:`localfile section<reference_o
 
 The configuration options are as follows:
 
-*  ``<log_format>``: The ``full_command`` option is used to turn the command's output into a single log message. With the ``command`` option, each line of output is treated as a separate log.
+*  ``<log_format>``: The ``full_command`` option used to turn the command's output into a single log message. With the ``command`` option, each line of output is treated as a separate log.
 *  ``<command>``: The command and arguments whose output is going to be monitored.
-*  ``<frequency>``: The time interval to wait between executions. This value is expressed in seconds. By default, the command will be run every 360 seconds.
+*  ``<frequency>``: The time interval to wait between executions. This value is expressed in seconds. By default, the command runs every 360 seconds.
 
 Additionally, when central configuration is used, an explicit consent on the monitored system is required. This permission is granted in the agent's :ref:`local_internal_options.conf<reference_internal_options>` configuration file by enabling remote commands on the :ref:`Logcollector<ossec_internal_logcollector>`.
 
@@ -43,7 +43,7 @@ Additionally, when central configuration is used, an explicit consent on the mon
   # 0: Disable remote commands
   logcollector.remote_commands=1
 
-Depending on the specific application, :ref:`custom rules<ruleset_custom>` may need to be added.
+Depending on the specific application, :ref:`custom rules<ruleset_custom>` might need to be added.
 
 Running processes monitoring
 ----------------------------
