@@ -214,8 +214,9 @@ Your Wazuh server is now successfully installed and the Wazuh manager is configu
 
 To configure the Wazuh cluster as a multi-node cluster, the Wazuh server needs to be installed on every node. After completing this action, you need to choose and configure one server as a Wazuh master node, and configure the rest as workers. 
 
-The *Wazuh server master node* configuration needs to be applied only to the server chosen for this role. Once the master node is fully configured, apply the *Wazuh server worker nodes* configuration to the rest of the servers.
+The :ref:`Wazuh server master node <wazuh_server_master_node>` configuration needs to be applied only to the server chosen for this role. Once the master node is fully configured, apply the :ref:`Wazuh server worker nodes <wazuh_server_worker_nodes>` configuration to the rest of the servers.
 
+.. _wazuh_server_master_node:
 
 Wazuh server master node
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -226,6 +227,8 @@ Wazuh server master node
 
     .. include:: ../../_templates/installations/wazuh/common/restart_wazuh_manager.rst
 
+.. _wazuh_server_worker_nodes:
+    
 Wazuh server worker nodes
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
