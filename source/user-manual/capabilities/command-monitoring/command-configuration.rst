@@ -49,7 +49,7 @@ Running processes monitoring
 ----------------------------
 The command monitoring capability can be used to alert about the missing execution of a given process.
 
-As an example, we will configure to check periodically the `clamd.exe` process execution on a monitored Windows system. To do this, we use the command `tasklist` and set it to run repeatedly once every 120 seconds.
+As an example, we configure the ``<localfile>`` to check periodically the `clamd.exe` process execution on a monitored Windows system. To do this, we use the command ``tasklist`` and set it to run repeatedly once every 120 seconds.
 
 .. code-block:: xml
 
@@ -84,11 +84,9 @@ We add two rules:
     <group>process_monitor,</group>
   </rule>
 
-In this example, unless there is a match for ``clamd.exe`` found in the `tasklist` command's output,  `rule id 100010` will trip a level 6 alert.
+In this example, unless there is a match for `clamd.exe` found in the `tasklist` command's output,  `rule id 100010` will trip a level 6 alert. Likewise, new rules similar to rules `id 100010` and `id 100011` above can be added to watch for other processes as well.
 
-Following this example, new rules similar to rules `id 100010` and `id 100011` above may be added to watch for other processes as well.
-
-In the case of monitoring Linux processes, this example could be adapted by changing the ``<command>`` option from ``tasklist`` to a Linux command that lists processes, like ``ps -auxw``.
+In the case of monitoring Linux processes, this example can be adapted by changing the ``<command>`` option from ``tasklist`` to a Linux command that lists processes, like ``ps -auxw``.
 
 Load average monitoring
 -----------------------
