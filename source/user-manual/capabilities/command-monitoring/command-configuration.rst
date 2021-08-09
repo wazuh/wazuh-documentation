@@ -10,8 +10,8 @@ Configuration
 
 .. contents:: :local:
 
-General utilization
--------------------
+Basic usage configuration
+-------------------------
 
 The command monitoring capability is configured either locally or centrally:
 
