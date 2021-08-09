@@ -36,7 +36,7 @@ Follow this installation workflow to install Wazuh.
 
 #. :ref:`Wazuh dashboard <wazuh_dashboard_installation>`: a flexible and intuitive web interface for mining, analyzing, and visualizing data, based on Kibana. 
 
-   It includes out-of-the-box dashboards for security events, detected vulnerable applications, file integrity monitoring data, configuration assessment results, cloud infrastructure monitoring events, regulatory compliance, such as PCI DSS, GDPR, CIS, HIPAA, and NIST 800-53 standards, and other data.
+   It includes out-of-the-box dashboards for security events, detected vulnerable applications, file integrity monitoring data, configuration assessment results, cloud infrastructure monitoring events, regulatory compliance, such as PCI DSS, GDPR, CIS, HIPAA, and NIST 800-53 standards, and other visibility purposes.
 
 
 The Wazuh server and the Wazuh indexer can each be installed as a single-node or multi-node cluster depending on the environment needs. Small Wazuh deployments, which do not require processing large amounts of data, can easily be handled by a single-node cluster. Multi-node clusters are recommended when there is a large number of monitored endpoints, when a large volume of data is anticipated, or when high availability is required.

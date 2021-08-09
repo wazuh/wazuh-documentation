@@ -5,7 +5,7 @@
 [WIP] Wazuh dashboard
 =====================
 
-The Wazuh dashboard is a flexible and intuitive web interface for mining, analyzing, and visualizing data. It runs on top of the indexed content in a Wazuh indexer cluster.  It includes out-of-the-box dashboards for security events, regulatory compliance (e.g. PCI DSS, GDPR, CIS, HIPAA, NIST 800-53), detected vulnerable applications, file integrity monitoring data, configuration assessment results, cloud infrastructure monitoring events, and others. The Wazuh dashboard is also used for management and monitoring of the Wazuh infrastructure.
+The Wazuh dashboard is a flexible and intuitive web interface for mining, analyzing, and visualizing data. It runs on top of the indexed content in a Wazuh indexer cluster.  It includes out-of-the-box dashboards for security events, regulatory compliance (e.g. PCI DSS, GDPR, CIS, HIPAA, NIST 800-53), detected vulnerable applications, file integrity monitoring data, configuration assessment results, cloud infrastructure monitoring events, and other visibility purposes. The Wazuh dashboard is also used for management and monitoring of the Wazuh infrastructure.
 
 The Wazuh dashboard allows you to visualize and analyze Wazuh alerts and provides the following capabilities:
 
