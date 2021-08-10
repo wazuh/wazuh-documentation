@@ -28,7 +28,7 @@ The Rootcheck and Syscheck components
 
 Rootcheck and Syscheck are the Wazuh main components responsible for detecting malware and anomalous behaviors. 
 
-:ref:`Rootcheck <reference_ossec_rootcheck>` detects abnormal behavior among files, processes, and ports. The Rootcheck engine checks hidden processes and ports. It also scans the content of a file or registry key looking for particular patterns or strings.
+:ref:`Rootcheck <reference_ossec_rootcheck>` detects abnormal behavior among files, processes, and ports. The Rootcheck engine checks hidden processes and ports. It also scans the content of files or registry keys looking for particular patterns or strings.
 
 :ref:`Syscheck <reference_ossec_syscheck>` is responsible for the FIM module that watches the files within the monitored directories during a scheduled scan. Syscheck also compares the actual state of the file with the information stored in the FIM baseline when the operating system reports that a particular file has changed.
 
