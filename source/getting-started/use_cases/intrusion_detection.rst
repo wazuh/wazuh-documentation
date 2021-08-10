@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-   :description: Intrusion detection is sometimes also called anomaly detection and refers to finding unexpected patterns that differ from the expected behavior of a system.  
+   :description: Wazuh intrusion detection, also called anomaly detection, refers to finding unexpected patterns that differ from the expected behavior of a system.  
   
  
 .. _intrusion_detection:
