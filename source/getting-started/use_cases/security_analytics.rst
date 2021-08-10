@@ -17,7 +17,7 @@ Below you can see a list of these components:
 
 - **File integrity monitoring (FIM)** reports when files are created, deleted, or modified in the monitored directories. 
 - **Malware detection** looks for hidden processes, files, and ports to detect anomalies and the possible presence of rootkits. 
-- **Command execution** can be used to achieve different purposes such as monitoring hard disk space left, getting a list of last logged-in users, etc. 
+- **Command execution** can be used to achieve different purposes such as to monitor hard disk space left and get a list of last logged-in users. 
 - **Log collector** reads flat log files, collecting operating system and application log messages.
 - **System inventory** runs regular scans, collecting inventory data including network interfaces, operating system version, installed applications, running processes, and a list of open ports. 
 - **Security configuration assessment (SCA)** provides configuration assessment based on the Center of Internet Security (CIS) benchmarks.
