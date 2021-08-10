@@ -632,7 +632,7 @@ Logcollector
 |                                          |               |                                                                            |
 |                                          |               | .. versionadded:: 4.2                                                      |
 +                                          +---------------+----------------------------------------------------------------------------+
-|                                          | Default value | 5                                                                          |
+|                                          | Default value | 60                                                                         |
 +                                          +---------------+----------------------------------------------------------------------------+
 |                                          | Allowed values| 0: Disable statistics file generation. Statistics information will continue|
 |                                          |               | to be available through the API                                            |
