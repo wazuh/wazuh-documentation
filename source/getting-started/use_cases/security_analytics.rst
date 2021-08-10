@@ -20,10 +20,13 @@ Below you can see a list of these components:
 - **Command execution** can be used to achieve different purposes such as to monitor hard disk space left and get a list of last logged-in users. 
 - **Log collector** reads flat log files, collecting operating system and application log messages.
 - **System inventory** runs regular scans, collecting inventory data including network interfaces, operating system version, installed applications, running processes, and a list of open ports. 
-- **Security configuration assessment (SCA)** provides configuration assessment based on the Center of Internet Security (CIS) benchmarks.
+- **Security configuration assessment (SCA)** provides a continuous evaluation based on the Center of Internet Security (CIS) benchmarks.
 
-This way, security analytics tools help users perform thread prevention actions collecting log messages. Users can also get a list of last logged-in users and logs from files changed in the monitored file systems.
+Hence security analytics tools help users managing logs to perform thread prevention actions such as the logs regarding the files changed in the monitored file systems.
 
 In addition, these tools assist users in detecting the possible presence of rootkits and collecting inventory data from different points such as operating systems, processes, applications, ports, and network interfaces.
 
-
+.. thumbnail:: ../../images/getting_started/screenshot_01_security_analytics.png
+    :alt: Data flow
+    :align: center
+    :wrap_image: No
