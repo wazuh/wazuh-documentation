@@ -26,13 +26,13 @@ Some of these essential anomaly detection techniques are the following:
 The Rootcheck and Syscheck components
 -------------------------------------
 
-Rootcheck and Syscheck are the Wazuh main components responsible for detecting anomalous behaviors. Below there are more details of these two Wazuh critical components. 
+Rootcheck and Syscheck are the Wazuh main components responsible for detecting malware and anomalous behaviors. 
 
-The :ref:`Rootcheck <reference_ossec_rootcheck>` component detects abnormal behavior among files, processes, and ports. The Rootcheck engine checks hidden processes and ports. It also explores if the content of a file or registry key contains a particular pattern or string.
+:ref:`Rootcheck <reference_ossec_rootcheck>` detects abnormal behavior among files, processes, and ports. The Rootcheck engine checks hidden processes and ports. It also scans the content of a file or registry key looking for particular patterns or strings.
 
-The :ref:`Syscheck <reference_ossec_syscheck>` is responsible for the FIM module that watches the files within the monitored directories during a scheduled scan. Syscheck also compares the actual state of the file with the information stored in the FIM baseline when the operating system reports that a particular file has changed.
+:ref:`Syscheck <reference_ossec_syscheck>` is responsible for the FIM module that watches the files within the monitored directories during a scheduled scan. Syscheck also compares the actual state of the file with the information stored in the FIM baseline when the operating system reports that a particular file has changed.
 
-Users can strengthen their systems' intrusion detection capabilities by using Syscheck to scan file-related anomalies and rootcheck to detect suspicious hidden processes or ports. 
+Users can strengthen their systems intrusion detection capabilities by using Syscheck to scan for file-related anomalies and Rootcheck to detect suspicious hidden processes or ports. 
 
 .. toctree::
 
