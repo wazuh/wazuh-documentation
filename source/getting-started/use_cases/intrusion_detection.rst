@@ -12,11 +12,11 @@ Intrusion detection
 
 Wazuh owns a highly effective group of capabilities to perform intrusion detection within user's systems. These set of capabilities include :ref:`File Integrity monitoring (FIM) <file_integrity>`, :ref:`Log data analysis <log_analysis>`, :ref:`Rootkits detection <rootkits_detection>`, and :ref:`System inventory <system_inventory>`. Which are useful to identify suspicious anomalies within files, processes, and ports.
 
-Intrusion detection is sometimes also called anomaly detection and refers to finding unexpected patterns that differ from the expected behavior of a system. Within intrusion detection, users can find a set of relevant techniques to guarantee higher levels of security. 
+Intrusion detection is sometimes called anomaly detection and refers to finding unexpected patterns that differ from the expected behavior of a system. Within intrusion detection, users can find a set of relevant techniques to guarantee higher levels of security. 
 
 Some of these essential anomaly detection techniques are the following:
 
-- Scanning files that are created, deleted or modified in the monitored directories
+- Scan files created, deleted, or modified in the monitored directories
 - Log collection, log analysis, and alert creation
 - Check unusual files and permissions
 - Monitor running processes
