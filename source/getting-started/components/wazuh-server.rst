@@ -7,9 +7,9 @@
 
 The Wazuh server component is in charge of analyzing the data received from the :ref:`agents <wazuh_agent>`, triggering alerts when threats or anomalies are detected. It is also used to manage the agents configuration remotely and to monitor their status.
 
-The Wazuh server uses threat intelligence sources to improve its detection capabilities. It also makes use of regulatory compliance requirements (e.g. PCI DSS, HIPAA, NIST 800-53...) and Mitre ATT&CK framework to enrich alerts data, providing useful context around them.
+The Wazuh server uses threat intelligence sources to improve its detection capabilities. It also enriches alerts data by making use of `MITRE ATT&CK <https://attack.mitre.org//>`_ framework and regulatory compliance requirements such as PCI DSS, GDPR, HIPAA, CIS, and NIST 800-53, providing useful context for threat detection.
 
-Additionally, the Wazuh server can be integrated with external software such as ticketing systems (e.g. Service Now, Jira, PagerDuty) and instant messaging platforms (e.g. Slack). This is convenient to streamline security operations.
+Additionally, the Wazuh server can be integrated with external software, including ticketing systems such as `ServiceNow <https://www.servicenow.com/>`_, `Jira <https://www.atlassian.com/software/jira>`_, and `PagerDuty <https://www.pagerduty.com/>`_, and instant messaging platforms like `Slack <https://slack.com//>`_. This is convenient to streamline security operations.
 
 Server architecture
 -------------------
