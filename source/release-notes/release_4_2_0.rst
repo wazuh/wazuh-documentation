@@ -267,6 +267,7 @@ Reference                                                                       
 `#8905 <https://github.com/wazuh/wazuh/pull/8905>`_                                                                  This fix in the agent on Windows resolves the issue that might cause the FIM DB to be corrupted when disabling the disk sync.
 `#9364 <https://github.com/wazuh/wazuh/pull/9364>`_                                                                  Logcollector on Windows no longer crashes when handling the position of the file. 
 `#9285 <https://github.com/wazuh/wazuh/pull/9285>`_                                                                  In Remoted, a buffer underflow hazard when handling input messages is now fixed.
+`#9547 <https://github.com/wazuh/wazuh/pull/9547>`_                                                                  In the agent, an issue that tried to verify the WPK CA certificate even when verification was disabled is now fixed.
 =================================================================================================================    =============
 
 **API**
