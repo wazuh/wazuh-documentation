@@ -24,9 +24,19 @@ Below you can see a list of these components:
 
 Security analytics tools give users the needed visibility to perform thread prevention actions. The :ref:`FIM <file_integrity>` module is a good example because it detects changes that could compromise data and creates alerts. Then, the agent can be configured to trigger an Active Response in reply to the alerts.
 
-In addition, these tools assist users in detecting the possible presence of rootkits and collecting inventory data from different points such as operating systems, processes, applications, ports, and network interfaces.
+In addition, these tools assist users in detecting the possible presence of rootkits and collecting inventory data from different points such as operating systems, processes, applications, ports, and network interfaces. FIM results can be observed in :ref:`Kibana app<kibana_app>` in the *Overview > Integrity monitoring* section:
 
-.. thumbnail:: ../../images/getting_started/screenshot_01_security_analytics.png
-    :alt: Data flow
-    :align: center
-    :wrap_image: No
+.. thumbnail:: ../../images/manual/fim/fim-kibana-overview1.png
+  :title: Kibana app: Fim overview
+  :align: center
+  :width: 100%
+
+.. thumbnail:: ../../images/manual/fim/fim-kibana-overview2.png
+  :title: Kibana app: Fim overview2
+  :align: center
+  :width: 100%
+
+.. thumbnail:: ../../images/manual/fim/fim-kibana-overview3.png
+  :title: Kibana app: Fim overview3
+  :align: center
+  :width: 100%
