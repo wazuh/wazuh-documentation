@@ -5,9 +5,9 @@
 File integrity monitoring
 =========================
 
-The File Integrity Monitoring (FIM) component detects and alerts when operating system or application files are modified. This capability is often used to detect access or changes to sensitive data. If your servers are PCI DSS compliant, requirement 11.5 stipulates that a file integrity monitoring solution must be installed in order to successfully pass the audit.
+The File Integrity Monitoring (FIM) component generates an alert when it detects a change in the monitored files or registry keys. This capability is often used to detect access or changes to sensitive data. If your servers are PCI DSS compliant, requirement 11.5 stipulates that a file integrity monitoring solution must be installed to pass the audit successfully.
 
-Below is an example of an alert generated when a monitored file is changed. Metadata includes MD5, SHA1 and SHA256 checksums, file sizes (before and after the change), file permissions, file owner, content changes, and the user who made these changes (who-data).
+Below is an example of an alert generated when a monitored file is changed. Metadata includes MD5, SHA1, and SHA256 checksums, file sizes (before and after the change), file permissions, file owner, content changes, and the user who made these changes (who-data).
 
 .. code-block:: json
   :emphasize-lines: 14,22,27,37,48,54,60
@@ -90,7 +90,7 @@ Below is an example of an alert generated when a monitored file is changed. Meta
     "timestamp": "2020-07-12T18:07:57.676+0000"
   }
 
-A good summary of file changes can be found in the FIM dashboard, which provides drill-down capabilities to view all of the details of the alerts triggered.
+Users can find a comprehensive summary of changes in files and registry keys in the FIM dashboard. In addition, it provides drill-down capabilities to view all of the details of the alerts triggered.
 
 .. thumbnail:: ../../images/getting_started/use_case_fim.png
    :align: center
