@@ -168,7 +168,7 @@ email_log_source
 This selects the alert file to be read from.
 
 +--------------------+---------------------------+
-| **Default value**  | alerts.json               |
+| **Default value**  | alerts.log               |
 +--------------------+---------------------------+
 | **Allowed values** | alerts.log or alerts.json |
 +--------------------+---------------------------+
