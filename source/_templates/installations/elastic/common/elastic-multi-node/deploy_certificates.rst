@@ -15,7 +15,7 @@
       # mv /etc/elasticsearch/certs/$node_name.pem /etc/elasticsearch/certs/elasticsearch.pem
       # mv /etc/elasticsearch/certs/$node_name-key.pem /etc/elasticsearch/certs/elasticsearch-key.pem
 
-#. If you want to later install the Wazuh dashboard on this node, keep the certificates file. Otherwise, remove it to increase security  ``rm -f certs.tar``.
+#. If you want to later install the Wazuh dashboard on this node, keep the certificates file. Otherwise, remove it with ``rm -f certs.tar`` to increase security.
 
 
 .. End of include file
