@@ -5,9 +5,9 @@
 Regulatory compliance
 =====================
 
-The Wazuh platform is often used to meet the technical aspects of regulatory compliance standards. Wazuh not only provides the necessary security controls such as intrusion detection, configuration assessment, log analysis, vulnerability detection, among others, to meet compliance requirements, but also uses its SIEM capabilities to centralize, analyze and enrich security data. 
+The Wazuh platform is often used to meet the technical aspects of regulatory compliance standards. Wazuh provides the necessary security controls to perform this type of activity. We can mention intrusion detection, configuration assessment, log analysis, vulnerability detection, among others. This set of SIEM capabilities allows Wazuh to meet compliance requirements and centralize, analyze, and enrich security data. 
 
-In order to provide regulatory compliance support, the Wazuh rules have carefully been mapped against compliance requirements. This way, when an alert is generated (a rule condition has been matched), it automatically includes compliance information. Here is the list of currently supported standards:
+The Wazuh rules have carefully been mapped against compliance requirements to provide regulatory compliance support. This way, when an alert is generated (a rule condition has been matched), it automatically includes compliance information. Here is the list of currently supported standards:
 
 - Payment Card Industry Data Security Standard (PCI DSS)
 - General Data Protection Regulation (GDPR)
@@ -16,7 +16,7 @@ In order to provide regulatory compliance support, the Wazuh rules have carefull
 - Trust Services Criteria (TSC SOC2)
 - Health Insurance Portability and Accountability Act (HIPAA)
 
-Besides, Wazuh rules include mapping with MITRE ATT&CK framework, which is used for alerts taxonomy and to provide better security context. Below is an example of a detection rule used to detect access to forbidden directories in Apache web servers:
+Wazuh rules also include mapping with the MITRE ATT&CK framework, which is used for alerts taxonomy and to provide better security context. Below is an example of a detection rule used to identify access to forbidden directories in Apache web servers:
 
 .. code-block:: xml
   :emphasize-lines: 6,8
