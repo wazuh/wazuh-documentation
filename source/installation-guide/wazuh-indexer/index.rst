@@ -24,8 +24,8 @@ You can now choose an installation method and start installing the Wazuh indexer
     :align: center
     :width: 100%
 
-Requirements
-------------
+[WIP]Requirements
+-----------------
 
 Check the supported operating systems and the recommended hardware requirements for the Wazuh indexer installation. Make sure that your system environment meets all requirements and that you have root user privileges.
 

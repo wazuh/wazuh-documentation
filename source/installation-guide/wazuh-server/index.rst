@@ -25,8 +25,8 @@ You can now choose an installation method and start installing the Wazuh server.
     :align: center
     :width: 100%
 
-Requirements
-------------
+[WIP] Requirements
+------------------
 
 Check the supported operating systems and the recommended hardware requirements for the Wazuh server installation. Make sure that your system environment meets all requirements and that you have root user privileges.
 
