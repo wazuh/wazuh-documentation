@@ -9,7 +9,7 @@
 Wazuh dashboard
 ===============
 
-This central component is a flexible and intuitive web interface for mining, analyzing, and visualizing data based on Kibana. It includes out-of-the-box dashboards for security events, detected vulnerable applications, file integrity monitoring data, configuration assessment results, cloud infrastructure monitoring events, regulatory compliance, such as PCI DSS, GDPR, CIS, HIPAA, and NIST 800-53 standards, and other data.
+This central component is a flexible and intuitive web interface for mining, analyzing, and visualizing data based on Kibana. It includes out-of-the-box dashboards for security events, detected vulnerable applications, file integrity monitoring data, configuration assessment results, cloud infrastructure monitoring events, regulatory compliance, such as PCI DSS, GDPR, CIS, HIPAA, and NIST 800-53 standards, and visibility purposes.
 
 You can now choose an installation method and start installing the Wazuh dashboard.
 
@@ -23,6 +23,7 @@ You can now choose an installation method and start installing the Wazuh dashboa
     :align: center
     :width: 100%
 
+
 Requirements
 ------------
 
@@ -31,21 +32,18 @@ Check the supported operating systems and the recommended hardware requirements 
 Supported operating systems
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Wazuh dashboard can be installed on the following Linux operating systems:
+The Wazuh dashboard can be installed on a 64-bit Linux operating system.
 
-- Amazon Linux 1 and 2
-
-- CentOS 6 or later
-
-- Debian 7 or later
-
-- Fedora 31 or later
-
-- Oracle Linux 6 or later
-
-- Red Hat Enterprise Linux 6 or later
-
-- Ubuntu 12 or later
+.. list-table::
+   :width: 50%
+   
+   * - Amazon Linux 1 and 2
+   * - CentOS 6 or later
+   * - Debian 7 or later
+   * - Fedora 31 or later
+   * - Oracle Linux 6 or later 
+   * - Red Hat Enterprise Linux 6 or later
+   * - Ubuntu 12 or later
 
 
 
@@ -53,7 +51,7 @@ The Wazuh dashboard can be installed on the following Linux operating systems:
 Hardware requirements
 ^^^^^^^^^^^^^^^^^^^^^
 
-The Wazuh dashboard can be installed on a dedicated node or along with the Wazuh indexer. A 64-bit operating system is necessary. 
+The Wazuh dashboard can be installed on a dedicated node or along with the Wazuh indexer.
 
 - Hardware recommendations
                           

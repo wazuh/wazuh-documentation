@@ -24,21 +24,21 @@ Add the Wazuh repository if you are installing the Wazuh dashboard on a dedicate
     .. group-tab:: Yum
   
   
-      .. include:: ../../../_templates/installations/wazuh/yum/add_repository_kibana.rst
+      .. include:: ../../_templates/installations/wazuh/yum/add_repository_kibana.rst
   
   
   
     .. group-tab:: APT
   
   
-      .. include:: ../../../_templates/installations/wazuh/deb/add_repository_kibana.rst
+      .. include:: ../../_templates/installations/wazuh/deb/add_repository_kibana.rst
   
   
   
     .. group-tab:: Zypp
   
   
-      .. include:: ../../../_templates/installations/wazuh/zypp/add_repository_kibana.rst
+      .. include:: ../../_templates/installations/wazuh/zypp/add_repository_kibana.rst
   
   
 
@@ -52,27 +52,27 @@ Installing and configuring the Wazuh dashboard
         .. group-tab:: Yum
 
 
-            .. include:: ../../../_templates/installations/elastic/yum/install_kibana.rst
+            .. include:: ../../_templates/installations/elastic/yum/install_kibana.rst
 
 
 
         .. group-tab:: APT
 
 
-            .. include:: ../../../_templates/installations/elastic/deb/install_kibana.rst
+            .. include:: ../../_templates/installations/elastic/deb/install_kibana.rst
 
 
 
         .. group-tab:: Zypp
 
 
-            .. include:: ../../../_templates/installations/elastic/zypp/install_kibana.rst
+            .. include:: ../../_templates/installations/elastic/zypp/install_kibana.rst
 
 
 
 #. Download the Kibana configuration file.
 
-    .. include:: ../../../_templates/installations/elastic/common/configure_kibana.rst
+    .. include:: ../../_templates/installations/elastic/common/configure_kibana.rst
 
 #. Edit the ``/etc/kibana/kibana.yml`` file to replace ``server.host`` and ``elasticsearch.host`` if necessary. 
 
@@ -102,7 +102,7 @@ Installing and configuring the Wazuh dashboard
 
 #. Replace ``kibana-node-name`` with your Kibana node name, the same used in ``instances.yml`` to create the certificates, and move the certificates to their corresponding location. We assume that you placed a copy of ``certs.tar``, created during the Wazuh indexer installation, in the root home folder (``~/``).
 
-    .. include:: ../../../_templates/installations/elastic/common/generate_new_kibana_certificates.rst
+    .. include:: ../../_templates/installations/elastic/common/generate_new_kibana_certificates.rst
 
 
 #. Link the Kibana socket to privileged port 443.
@@ -114,7 +114,7 @@ Installing and configuring the Wazuh dashboard
 
 #. Enable and start the Kibana service.
 
-    .. include:: ../../../_templates/installations/elastic/common/enable_kibana.rst
+    .. include:: ../../_templates/installations/elastic/common/enable_kibana.rst
 
     
     - **Only for distributed deployments**  
@@ -148,10 +148,13 @@ Next steps
 
 All the Wazuh central components are successfully installed.
 
-.. thumbnail:: ../../../images/installation/Wazuh-Installation-workflow-complete.png
+.. thumbnail:: ../../images/installation/Wazuh-Installation-workflow-complete.png
     :alt: Wazuh installation workflow
     :align: center
     :width: 100%
+
+
+The Wazuh environment is now ready and you can proceed with installing the Wazuh agent on the endpoints to be monitored. To perform this action, see the :ref:`Wazuh agent <installation_agents>` section.
 
 
 The Wazuh environment is now ready and you can proceed with installing the Wazuh agent on the endpoints to be monitored. To perform this action, see the :ref:`Wazuh agent <installation_agents>` section.

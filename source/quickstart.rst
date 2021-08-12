@@ -10,32 +10,35 @@
 Wazuh quickstart
 ================
 
-Install the Wazuh server, the Wazuh indexer, and the Wazuh dashboard on the same host by using the unattended installation script. By running the automated script, you install and configure the Wazuh central components in just a few minutes. To learn more about each Wazuh component and its capabilities, check the :ref:`Components <components>` section. 
+Wazuh is a free, open source and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response, and regulatory compliance. To learn more about the Wazuh solution, its components, architecture, and capabilities, check the :ref:`Getting started <getting_started>` section. 
 
+With Wazuh quickstart, you install the Wazuh indexer, the Wazuh server, and the Wazuh dashboard on the same host using the unattended installation script. These central components are in charge of analyzing the data gathered by the Wazuh agents, providing a search engine and data visualization tool that allow users to navigate through their security alerts.
+
+By running the automated script, you install and configure the Wazuh in just a few minutes.
+
+Alternatively, you can check our :ref:`Installation guide <installation_guide>` to learn how to install each component individually on the same server, as an all-in-one deployment, or on different servers as a distributed deployment depending on the environment needs. 
 
 Requirements
 ------------
-
-Check the supported operating systems and the recommended hardware requirements for the Wazuh installation. This deployment supports around 100 agents.
+Check the supported operating systems and the recommended hardware requirements for the Wazuh installation.
 
 Supported operating systems
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Wazuh can be installed on a 64-bit Linux operating system.
 
-- Amazon Linux 1 and 2
+.. list-table::
+   :width: 50%
+   
+   * - Amazon Linux 1 and 2
+   * - CentOS 6 or later
+   * - Debian 7 or later
+   * - Fedora 31 or later
+   * - Oracle Linux 6 or later 
+   * - Red Hat Enterprise Linux 6 or later
+   * - Ubuntu 12 or later
 
-- CentOS 6 or later
 
-- Debian 7 or later
-
-- Fedora 31 or later
-
-- Oracle Linux 6 or later
-
-- Red Hat Enterprise Linux 6 or later
-
-- Ubuntu 12 or later
 
 Hardware requirements
 ^^^^^^^^^^^^^^^^^^^^^
@@ -66,6 +69,9 @@ Hardware requirements
   +-------------------------------------------------+-----+---------------------------+
 
   For example, for an environment with 80 workstations, 10 servers, and 10 network devices, the storage needed on the Wazuh server for 90 days of alerts is 236 GB approximately. 
+ 
+
+   
 
 Installing Wazuh
 ----------------
@@ -119,7 +125,7 @@ Installing Wazuh
     - **Username**: *wazuh*
     - **Password**: *<wazuh_password>*
 
-      .. thumbnail:: ../images/installation/kibana-log-in.png
+      .. thumbnail:: /images/installation/kibana-log-in.png
           :alt: Wazuh dashboard login page
           :align: center
           :wrap_image: No
@@ -132,4 +138,77 @@ If you want uninstall the components of the all-in-one installation, run the una
 Next steps
 ----------
 
-The Wazuh environment is now ready and you can proceed with installing the Wazuh agent on the endpoints to be monitored. To perform this action, see the :ref:`Wazuh agent<installation_agents>` section.
+The Wazuh environment is now ready and you can proceed with installing the Wazuh agent on the endpoints to be monitored.
+
+The :ref:`Wazuh agent <wazuh_agent>` is a single and light-weight monitoring software that runs on most operating systems and provides visibility into the endpoint's security by collecting critical system and application records, inventory data, and detecting potential anomalies. Now that your environment is ready, select your operating system and follow the installation steps to deploy the agent to the endpoints. 
+
+.. raw:: html
+
+  <div class="agent-os">
+      <div class="item-agent">
+          <a href="./installation-guide/wazuh-agent/wazuh_agent_package_linux.html" class="d-flex align-items-center">
+            <p>Linux</p>
+
+.. image:: /images/installation/linux.png
+      :align: center
+
+.. raw:: html
+
+        </a>
+    </div>
+    <div class="item-agent">
+        <a href="./installation-guide/wazuh-agent/wazuh_agent_package_windows.html" class="d-flex align-items-center">
+                    <p>Windows</p>
+
+.. image:: /images/installation/windows_icon.png
+      :align: center
+
+.. raw:: html
+
+        </a>
+    </div>
+    <div class="item-agent">
+        <a href="./installation-guide/wazuh-agent/wazuh_agent_package_macos.html" class="d-flex align-items-center">
+            <p>macOS</p>
+
+.. image:: /images/installation/macOS_logo.png
+      :align: center
+
+.. raw:: html
+
+      </a>
+  </div>
+  <div class="item-agent" id="solaris-logo">
+      <a href="./installation-guide/wazuh-agent/wazuh_agent_package_solaris.html" class="d-flex align-items-center">
+          <p>Solaris</p>
+
+.. image:: /images/installation/solaris.png
+    :align: center      
+
+.. raw:: html
+
+        </a>
+    </div>
+    <div class="item-agent">
+        <a href="./installation-guide/wazuh-agent/wazuh_agent_package_aix.html" class="d-flex align-items-center">
+            <p>AIX</p>
+
+.. image:: /images/installation/AIX.png
+      :align: center
+
+.. raw:: html
+
+        </a>
+    </div>
+    <div class="item-agent">
+        <a href="./installation-guide/wazuh-agent/wazuh_agent_package_hpux.html" class="d-flex align-items-center">
+            <p>HP-UX</p>
+
+.. image:: /images/installation/hpux.png
+      :align: center
+
+.. raw:: html
+
+          </a>
+      </div>
+  </div>

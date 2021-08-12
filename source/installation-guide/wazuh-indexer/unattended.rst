@@ -77,7 +77,7 @@ Install and configure the initial node. During this stage, the SSL certificates 
 
 
 
-#. Run the script with the options ``-e``, ``-en <node_name>``, and ``-c`` to install Open Distro for Elasticsearch and generate the SSL certificates. The node name must be the same used in ``config.yml`` for the certificate creation; for example, ``master-node-1``.
+#. Run the script with the options ``-e``, ``-en <node_name>``, and ``-c`` to install Open Distro for Elasticsearch and generate the SSL certificates. The node name must be the same used in ``config.yml`` for the certificate creation, for example, ``master-node-1``.
 
       .. code-block:: console
 
@@ -114,8 +114,8 @@ You now have installed and configured the initial Wazuh indexer node.
  
     - If you want to install a multi-node cluster, expand the instructions below to install and configure subsequent nodes, and then initialize the cluster. 
 
-2. Subsequent nodes installation and cluster initialization for multi-node clusters 
------------------------------------------------------------------------------------
+2. Subsequent nodes installation and configuration for multi-node clusters 
+--------------------------------------------------------------------------
 .. raw:: html
 
     <div class="accordion-section">
@@ -130,7 +130,7 @@ Install and configure subsequent nodes of your multi-node cluster. Make sure tha
         # curl -so ~/unattended-installation.sh https://packages.wazuh.com/resources/4.2/unattended-installation/unattended-installation.sh   
 
 
-#. Run the script with the options ``-e`` and ``-en <node_name>`` to install Open Distro for Elasticsearch. The node name must be the same used in ``config.yml`` for the certificate creation; for example, ``master-node-2``.
+#. Run the script with the options ``-e`` and ``-en <node_name>`` to install Open Distro for Elasticsearch. The node name must be the same used in ``config.yml`` for the certificate creation, for example, ``master-node-2``.
 
       .. code-block:: console
 
@@ -148,11 +148,11 @@ Repeat this process on each Wazuh indexer node and proceed with initializing the
 
 The final stage of the process for installing a Wazuh indexer multi-node cluster consists in running the security admin script. 
 
-#. Run the ``securityadmin`` script on the initial node to load the new certificates information and start the cluster. Replace ``<elasticsearch_IP>`` with the Elasticsearch installation IP and run the command.
+Run the ``securityadmin`` script on the initial node to load the new certificates information and start the cluster. Replace ``<elasticsearch_IP>`` with the Elasticsearch installation IP and run the command.
 
-    .. code-block:: console
+  .. code-block:: console
 
-      # export JAVA_HOME=/usr/share/elasticsearch/jdk/ && /usr/share/elasticsearch/plugins/opendistro_security/tools/securityadmin.sh -cd /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/ -icl -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin-key.pem -h <elasticsearch_IP>
+    # export JAVA_HOME=/usr/share/elasticsearch/jdk/ && /usr/share/elasticsearch/plugins/opendistro_security/tools/securityadmin.sh -cd /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/ -icl -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin-key.pem -h <elasticsearch_IP>
 
 
 Next steps
