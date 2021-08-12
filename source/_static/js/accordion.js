@@ -49,6 +49,7 @@ $(function() {
 
         setAccordionAttributes(accordionBody, {"class": "accordion-section accordion collapse" + show,
                                                "id": sectionId });
+        
         accordionTitle.innerHTML = "<i class='fas fa-chevron-right'></i>" + accordionTitle.innerHTML;
 
         let urlIcon = accordionTitle.getElementsByClassName('headerlink')[0];
@@ -68,3 +69,5 @@ $(function() {
             element.setAttribute(key, attrs[key]);
         }
     }
+    
+});
