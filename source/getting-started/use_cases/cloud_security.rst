@@ -12,12 +12,12 @@ The Wazuh security platform provides threat detection, configuration compliance,
 
 - **Endpoint level**: monitoring cloud instances or virtual machines using the lightweight :ref:`Wazuh security agent <wazuh_agent>`.
 
-- **Cloud infrastructure level**: monitoring cloud services and activity by collecting and analyzing data from the provider API. Amazon AWS, Microsoft Azure and Google Cloud Platform are supported.
+- **Cloud infrastructure level**: monitoring cloud services and activity by collecting and analyzing data from the provider API. Amazon AWS, Microsoft Azure, and Google Cloud Platform are supported.
 
 Amazon Web Services
 -------------------
 
-The :ref:`Wazuh agent <wazuh_agent>` also provides a module to monitor and secure your AWS cloud infrastructure. This module collects AWS services log data from S3 buckets, and forwards collected log messages to the :ref:`Wazuh server <wazuh_server>`, where events are analyzed using out-of-the-box Wazuh rules for AWS. 
+The :ref:`Wazuh agent <wazuh_agent>` also provides a module to monitor and secure your AWS cloud infrastructure. This module collects AWS services log data from S3 buckets and forwards collected log messages to the :ref:`Wazuh server <wazuh_server>`, where events are analyzed using out-of-the-box Wazuh rules for AWS. 
 
 The following list describes the AWS services that Wazuh is capable of monitoring:
 
@@ -29,7 +29,7 @@ The following list describes the AWS services that Wazuh is capable of monitorin
 
 - :ref:`Amazon Macie <amazon_macie>`: fully managed data security and data privacy service. It automatically detects unencrypted S3 buckets, publicly accessible buckets, and buckets shared with external AWS accounts.
 
-- :ref:`Amazon Virtual Private Cloud (VPC) <amazon_vpc>`: provisions a logically isolated section of the AWS Cloud where AWS resources can be launched on a virtual network define by the user.
+- :ref:`Amazon Virtual Private Cloud (VPC) <amazon_vpc>`: provisions a logically isolated section of the AWS Cloud where AWS resources can be launched on a virtual network defined by the user.
 
 - :ref:`AWS Config <amazon_config>`: assess, audit, and evaluate the configurations of your AWS resources. Config continuously monitors and records the AWS resource configurations enabling automation of the evaluation of recorded configurations against the desired ones.
 
@@ -108,15 +108,15 @@ More information on how Wazuh monitors AWS can be found at our :ref:`documentati
 Microsoft Azure
 ---------------
 
-The :ref:`Wazuh agent <wazuh_agent>` module for Microsoft Azure makes it easy to pull Azure platform logs.  In particular, it is designed to obtain data from the following services:
+The :ref:`Wazuh agent <wazuh_agent>` module for Microsoft Azure makes it easy to pull Azure platform logs. In particular, it is designed to obtain data from the following services:
 
-- :ref:`Log Analytics API <azure_monitoring_activity>`: The Log Analytics API is a core component of the Azure Monitor service, which is used to aggregate and analyze log data. The sources of such data are cloud applications, operating systems and Azure resources. The Wazuh module for Azure is capable of querying the Log Analytics API, pulling the logs that are collected by the Azure monitor service.
+- :ref:`Log Analytics API <azure_monitoring_activity>`: The Log Analytics API is a core component of the Azure Monitor service, which is used to aggregate and analyze log data. The sources of such data are cloud applications, operating systems, and Azure resources. The Wazuh module for Azure is capable of querying the Log Analytics API, pulling the logs collected by the Azure monitor service.
 
-- :ref:`Blob Storage API <azure_monitoring_activity>`: Logs from Azure services are optionally pushed to Azure Blob Storage. Specifically, it is possible to configure an Azure service to export logs to a container in a storage account created for that purpose. Afterwards, the Wazuh agent will download those logs via its integration with the Blob Storage API.
+- :ref:`Blob Storage API <azure_monitoring_activity>`: Logs from Azure services are optionally pushed to Azure Blob Storage. Specifically, it is possible to configure an Azure service to export logs to a container in a storage account created for that purpose. Afterward, the Wazuh agent will download those logs via its integration with the Blob Storage API.
 
-- :ref:`Active Directory Graph API <azure_monitoring_services>`: The Azure Active Directory Graph API provides access to AZURE AD through REST API endpoints. It is used by Wazuh to monitor Active Directory events (e.g. creation of a new user, update of a user's properties, disable of a user's account, etc.)
+- :ref:`Active Directory Graph API <azure_monitoring_services>`: The Azure Active Directory Graph API provides access to AZURE AD through REST API endpoints. It is used by Wazuh to monitor Active Directory events (e.g., creation of a new user, update of a user's properties, disable of a user's account, etc.)
 
-Here is an example of a rule that Azure alerts.
+Here is an example of a rule that Azure alerts:
 
 .. code-block:: json
   :emphasize-lines: 14,16
