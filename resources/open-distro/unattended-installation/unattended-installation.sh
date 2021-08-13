@@ -318,6 +318,7 @@ installElasticsearch() {
         done    
 
         eval "cd /usr/share/elasticsearch/plugins/opendistro_security/tools/ ${debug}"
+        export JAVA_HOME=/usr/share/elasticsearch/jdk/
         eval "./securityadmin.sh -cd ../securityconfig/ -icl -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin-key.pem ${debug}"
         echo "Done"
         
