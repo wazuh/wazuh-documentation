@@ -370,11 +370,6 @@ extra_assets = [
     'js/moved-content.js'
 ]
 
-# Fonts to be preloaded
-google_fonts_path = os.path.join(html_theme_path[0], html_theme, 'static', 'css', 'google-fonts.css')
-with open(google_fonts_path, 'r') as reader:
-    google_fonts = reader.read()
-
 def minification(actual_path):
 
     files = [
@@ -386,7 +381,7 @@ def minification(actual_path):
         ['js/redirects','js'],
         ['js/style','js'],
         ['js/custom-redoc','js'],
-        ['js/accordion', 'js']
+        ['js/accordion','js'],
     ]
 
     if is_latest_release == True:
@@ -523,15 +518,11 @@ def setup(app):
         os.path.join(actual_path, "_static/css/accordions.css")).st_mtime)
     app.add_css_file("css/style.min.css?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/css/style.css")).st_mtime)
-    app.add_css_file("css/accordions.min.css?ver=%s" % os.stat(
-        os.path.join(actual_path, "_static/css/accordions.css")).st_mtime)
 
     app.add_js_file("js/version-selector.min.js?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/js/version-selector.js")).st_mtime)
     app.add_js_file("js/style.min.js?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/js/style.js")).st_mtime)
-    app.add_js_file("js/accordion.min.js?ver=%s" % os.stat(
-        os.path.join(actual_path, "_static/js/accordion.js")).st_mtime)
     app.add_js_file("js/redirects.min.js?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/js/redirects.js")).st_mtime)
     app.add_js_file("js/accordion.min.js?ver=%s" % os.stat(
@@ -633,7 +624,6 @@ html_context = {
     "production": production,
     "apiURL": apiURL,
     "compilation_ts": str(time.time()),
-    "is_latest_release": is_latest_release,
-    "inline_fonts": google_fonts
+    "is_latest_release": is_latest_release
 }
 sphinx_tabs_nowarn = True
