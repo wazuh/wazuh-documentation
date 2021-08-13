@@ -43,8 +43,7 @@ On both agents as root, install Suricata and its dependencies, along with the Em
     rm -f /etc/suricata/suricata.yaml
     wget -O /etc/suricata/suricata.yaml http://www.branchnetconsulting.com/wazuh/suricata.yaml
     systemctl daemon-reload
-    systemctl enable suricata
-    systemctl start suricata
+    systemctl enable suricata --now
 
 
 Trigger NIDS alerts on both agents and see the output

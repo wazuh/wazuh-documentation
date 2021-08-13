@@ -114,8 +114,7 @@ After this enable and start the osquery Daemon:
 
 .. code-block:: console
 
-  systemctl enable osqueryd
-  systemctl start osqueryd
+  systemctl enable osqueryd --now
 
 And the osquery module must be enabled for the agents where the osquery is running by adding:
 

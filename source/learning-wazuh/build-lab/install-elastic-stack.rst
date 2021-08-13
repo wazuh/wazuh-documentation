@@ -64,8 +64,7 @@ to Kibana. For more information, please see `Elasticsearch
   .. code-block:: console
 
   	# systemctl daemon-reload
-  	# systemctl enable elasticsearch.service
-  	# systemctl start elasticsearch.service
+  	# systemctl enable elasticsearch.service --now
 
 3. Optimize Elasticsearch for lab use according to :ref:`this guide <elastic_tuning>`.
 
@@ -143,8 +142,7 @@ events and archives stored in Elasticsearch. More info at `Kibana
   .. code-block:: console
 
   	# systemctl daemon-reload
-  	# systemctl enable kibana.service
-  	# systemctl start kibana.service
+  	# systemctl enable kibana.service --now
 
 7. Configure the credentials to access the Wazuh API:
 

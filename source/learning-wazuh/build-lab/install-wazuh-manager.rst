@@ -138,8 +138,7 @@ and archived events to the Elasticsearch service.
   .. code-block:: console
 
     # systemctl daemon-reload
-    # systemctl enable filebeat.service
-    # systemctl start filebeat.service
+    # systemctl enable filebeat.service --now
 
 8. Now disable the Wazuh and Elastic repositories in order to prevent
    unintended upgrades that may cause a version conflict with the current installation.
