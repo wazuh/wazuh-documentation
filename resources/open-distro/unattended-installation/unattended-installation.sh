@@ -415,7 +415,7 @@ checkInstalled() {
     if [ "${sys_type}" == "yum" ]; then
         wazuhinstalled=$(yum list installed 2>/dev/null | grep wazuh-manager)
     elif [ "${sys_type}" == "zypper" ]; then
-        wazuhinstalled=$(zypper packages --installed | grep wazuh-manager | grep i+)
+        wazuhinstalled=$(zypper packages | grep wazuh-manager | grep i+)
     elif [ "${sys_type}" == "apt-get" ]; then
         wazuhinstalled=$(apt list --installed  2>/dev/null | grep wazuh-manager)
     fi    
@@ -431,7 +431,7 @@ checkInstalled() {
     if [ "${sys_type}" == "yum" ]; then
         elasticinstalled=$(yum list installed 2>/dev/null | grep opendistroforelasticsearch)
     elif [ "${sys_type}" == "zypper" ]; then
-        elasticinstalled=$(zypper packages --installed | grep opendistroforelasticsearch | grep i+)
+        elasticinstalled=$(zypper packages | grep opendistroforelasticsearch | grep i+)
     elif [ "${sys_type}" == "apt-get" ]; then
         elasticinstalled=$(apt list --installed  2>/dev/null | grep opendistroforelasticsearch)
     fi 
@@ -447,7 +447,7 @@ checkInstalled() {
     if [ "${sys_type}" == "yum" ]; then
         filebeatinstalled=$(yum list installed 2>/dev/null | grep filebeat)
     elif [ "${sys_type}" == "zypper" ]; then
-        filebeatinstalled=$(zypper packages --installed | grep filebeat | grep i+)
+        filebeatinstalled=$(zypper packages | grep filebeat | grep i+)
     elif [ "${sys_type}" == "apt-get" ]; then
         filebeatinstalled=$(apt list --installed  2>/dev/null | grep filebeat)
     fi 
@@ -463,7 +463,7 @@ checkInstalled() {
     if [ "${sys_type}" == "yum" ]; then
         kibanainstalled=$(yum list installed 2>/dev/null | grep opendistroforelasticsearch-kibana)
     elif [ "${sys_type}" == "zypper" ]; then
-        kibanainstalled=$(zypper packages --installed | grep opendistroforelasticsearch-kibana | grep i+)
+        kibanainstalled=$(zypper packages | grep opendistroforelasticsearch-kibana | grep i+)
     elif [ "${sys_type}" == "apt-get" ]; then
         kibanainstalled=$(apt list --installed  2>/dev/null | grep opendistroforelasticsearch-kibana)
     fi 
