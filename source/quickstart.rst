@@ -125,13 +125,7 @@ Installing Wazuh
     - **Username**: *wazuh*
     - **Password**: *<wazuh_password>*
 
-      .. thumbnail:: /images/installation/kibana-log-in.png
-          :alt: Wazuh dashboard login page
-          :align: center
-          :wrap_image: No
-
-
-    When you access the Wazuh dashboard for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or, for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser. Alternatively, a certificate from a trusted authority can be configured. 
+  When you access the Wazuh dashboard for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or, for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser. Alternatively, a certificate from a trusted authority can be configured. 
 
 If you want uninstall the components of the all-in-one installation, run the unattended installation script and use the option ``-r / --uninstall``.  
 
