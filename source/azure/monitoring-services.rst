@@ -15,14 +15,14 @@ Monitoring Services
     :align: center
     :width: 100%
 
-Wazuh also allows to monitor services such as Azure Active Directory using the `Azure Active Directory Graph REST API <https://docs.microsoft.com/en-us/azure/active-directory/4.0/active-directory-graph-api-quickstart>`_, which provides access to Azure AD through REST API endpoints. Applications can use the Azure AD Graph API to perform read operations on directory data and objects.
+Wazuh also allows to monitor services such as Azure Active Directory using the `Microsoft Graph REST API <https://docs.microsoft.com/en-us/graph/overview>`_, which provides access to Azure AD through REST API endpoints. Applications can use the Microsoft Graph API to perform read operations on directory data and objects.
 
-Using Azure Active Directory Graph
-----------------------------------
+Using Microsoft Graph
+---------------------
 
-We're going to configure an application from the Microsoft Azure portal to be able to use the **Azure Active Directory Graph REST API**.
+We're going to configure an application from the Microsoft Azure portal to be able to use the **Microsoft Graph REST API**.
 
-.. note:: The process explained below details the configuration of an application that will use the Active Directory Graph REST API. You can also create a new application, as the creation process is similar to the application for Azure Log Analytics.
+.. note:: The process explained below details the configuration of an application that will use the Microsoft Graph REST API. You can also create a new application, as the creation process is similar to the application for Azure Log Analytics.
 
 1. Giving permissions to the application
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -34,14 +34,14 @@ We're going to configure an application from the Microsoft Azure portal to be ab
     :align: center
     :width: 100%
 
-1.2 - Access the ``Settings`` section. Save the ``application id`` for later authentication.
+1.2 - Access the ``Overview`` section. Save the ``application id`` for later authentication.
 
 .. thumbnail:: ../images/azure/graph2.png
     :title: AAD
     :align: center
     :width: 75%
 
-1.3 - In the ``Required permissions`` section select the ``Add`` option.
+1.3 - In the ``API permissions`` section select the ``Add a permission`` option.
 
 .. thumbnail:: ../images/azure/graph3.png
     :title: AAD
@@ -55,26 +55,29 @@ We're going to configure an application from the Microsoft Azure portal to be ab
     :align: center
     :width: 100%
 
-1.5 - Select the permissions that adapt to our infrastructure.
+1.5 - Select the permissions in "Applications permissions" section that adapt to our infrastructure. In this example we are going to grant "AuditLogs" permissions.
 
 .. thumbnail:: ../images/azure/graph5.png
     :title: AAD
     :align: center
     :width: 100%
 
-1.6 - Select ``Done``.
+1.6 - Select ``Grant admin consent`` to request consent for the permissions. This must be done by an admin user.
 
 .. thumbnail:: ../images/azure/graph6.png
     :title: AAD
     :align: center
     :width: 50%
 
-1.7 - Back to the ``Azure Active Directory`` section, select the option ``Enterprise applications`` and once inside, select the newly created app. Open ``Permissions`` and click ``Grant Admin Consent`` for the application. In the popup window that appears, review the permissions are appropriate, and select ``Accept``.
+.. thumbnail:: ../images/azure/graph7.png
+    :title: AAD
+    :align: center
+    :width: 50%
 
 2. Obtaining the application key for authentication
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-2.1 - Select ``Keys`` and fill in the ``DESCRIPTION`` and ``EXPIRES`` fields. Once we ``save`` the key we will get its ``value``. This will be the key with which we will authenticate our application in order to use the API.
+2.1 - Select ``New client secret`` in ``Certificates & secrets`` and fill in the ``DESCRIPTION`` and ``EXPIRES`` fields. Once we ``save`` the new secret copy its ``value``. This will be the key with which we will authenticate our application in order to use the API.
 
 .. thumbnail:: ../images/azure/la_create_key.png
     :title: AAD
@@ -114,12 +117,12 @@ Next we will see the options we have for configuring the integration.
 
         <graph>
 
-            <auth_path>/home/manager/Azure/graph_auth.txt</auth_path>
+            <auth_path>/var/ossec/wodles/azure/credentials</auth_path>
             <tenantdomain>wazuh.onmicrosoft.com</tenantdomain>
 
             <request>
                 <tag>azure-active_directory</tag>
-                <query>activities/audit?api-version=beta</query>
+                <query>auditLogs/directoryAudits</query>
                 <time_offset>1d</time_offset>
             </request>
 
@@ -129,15 +132,11 @@ Next we will see the options we have for configuring the integration.
 
 You can see the wodle reference :ref:`here <wodle_azure_logs>`.
 
-The field ``tenantdomain`` is necessary and we can obtain it easily. In the azure portal, we can see it leaving the cursor in the upper right corner.
+.. note::
+    The field ``tenantdomain`` is not necessary as it will be obtained from the token obtained using the id and secret.
 
-.. thumbnail:: ../images/azure/tenant.png
-    :title: AAD
-    :align: center
-    :width: 100%
-
-Azure Active Directory Graph Use Case
--------------------------------------
+Microsoft Graph Use Case
+------------------------
 
 Using the configuration prepared above, we will show an example of use.
 
@@ -159,15 +158,10 @@ Create a new user
 
 Proceed to create a new user. If the creation is successful, a log will be written to reflect it.
 
-.. thumbnail:: ../images/azure/new_user1.png
+.. thumbnail:: ../images/azure/new_user.png
     :title: AAD
     :align: center
     :width: 100%
-
-.. thumbnail:: ../images/azure/new_user2.png
-    :title: AAD
-    :align: center
-    :width: 30%
 
 Azure portal visualization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
