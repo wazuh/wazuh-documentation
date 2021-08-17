@@ -11,9 +11,9 @@ Modules directory for data visualization, mining, and analysis
 -------------------------------------------------------------- 
 You can search alerts classified by modules and filter them using the different views. You will be able to explore the alerts both at Wazuh cluster level, and in a particular agent. The Wazuh dashboard includes a *Modules directory* and out-of-the-box dashboards for Security information management, Auditing and Policy Monitoring, Threat Detection and Response, and Regulatory Compliance. 
 
-User can navigate and visualize security events, detected vulnerable applications, file integrity monitoring data, configuration assessment results, cloud infrastructure monitoring events, regulatory compliance, such as PCI DSS, GDPR, CIS, HIPAA, and NIST 800-53 standards, as well as use the Wazuh dashboard for other data visibility purposes.
+Users can navigate and visualize security events, detected vulnerable applications, file integrity monitoring data, configuration assessment results, cloud infrastructure monitoring events, regulatory compliance, such as PCI DSS, GDPR, CIS, HIPAA, and NIST 800-53 standards, as well as use the Wazuh dashboard for other data visibility purposes.
 
-Moreover, the Wazuh dashboard is flexible. This component provides enhanced visibility of your infrastructure by allowing you to create your own visualizations and dashboards according to the environment needs.
+Moreover, the Wazuh dashboard is flexible. This component provides enhanced visibility of your infrastructure by allowing you to create visualizations and dashboards according to the environment needs.
 
 
 
@@ -100,7 +100,7 @@ Management directory of Wazuh infrastructure
 
 The Wazuh dashboard provides you with a directory dedicated to administrate and monitor your infrastructure. From there, you can manage and configure your Wazuh cluster rules and decoders, and CDB lists. The component runs on top of the indexed content in a Wazuh indexer cluster so users can view and edit the Wazuh manager configuration. Additionally, agent groups and centralized configuration can be managed and edited through the interface as well.
 
-Data analysis visualization gives you full visibility into your cluster infrastructure for fast threat detection and remediation. Users can check the status, logs and statistics of Wazuh clusters and create their own downloadable reports using predefined templates, or personalize their own if required. Wazuh provides the tools for comprehensive and streamlined security analytics.
+Data analysis visualization gives you full visibility into your cluster infrastructure for fast threat detection and remediation. Users can check the status, logs, and statistics of Wazuh clusters and create their own downloadable reports using predefined templates, or personalize their own if required. Wazuh provides the tools for comprehensive and streamlined security analytics.
 
 
 .. raw:: html
@@ -124,7 +124,7 @@ Data analysis visualization gives you full visibility into your cluster infrastr
 Agent centralized management
 ----------------------------
 
-From the web interface you manage your agents, their configuration, and data inventory. Inspecting the status of any agent deployed to your system is streamlined with filters for fine-tuning and quick access to data. You can also also create deployment commands to install and configure new Wazuh agents. 
+From the web interface you manage your agents, their configuration, and data inventory. Inspecting the status of any agent deployed to your system is streamlined with filters for fine-tuning and quick access to data. You can also create deployment commands to install and configure new Wazuh agents. 
 
 
 
