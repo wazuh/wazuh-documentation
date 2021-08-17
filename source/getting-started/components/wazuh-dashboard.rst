@@ -5,7 +5,7 @@
 [WIP] Wazuh dashboard
 =====================
 
-The Wazuh dashboard is a flexible and intuitive web interface for mining, analyzing, and visualizing data. It is also used for management and monitoring of the Wazuh infrastructure.
+The Wazuh dashboard is a flexible and intuitive web interface for mining, analyzing, and visualizing data. It is also used for management and monitoring of the Wazuh infrastructure. 
 
 Modules directory for data visualization, mining, and analysis
 -------------------------------------------------------------- 
@@ -95,10 +95,11 @@ Moreover, the Wazuh dashboard is flexible. This component provides enhanced visi
 
 
 
+
 Management directory of Wazuh infrastructure
 ----------------------------------------------
 
-The Wazuh dashboard provides you with a directory dedicated to administrate and monitor your infrastructure. From there, you can manage and configure your Wazuh cluster rules and decoders, and CDB lists. The component runs on top of the indexed content in a Wazuh indexer cluster so users can view and edit the Wazuh manager configuration. Additionally, agent groups and centralized configuration can be managed and edited through the interface as well.
+The Wazuh dashboard provides you with a directory dedicated to administrate and monitor your infrastructure. From there, you can manage and configure your Wazuh cluster rules and decoders, and CDB lists. The component runs on top of the indexed content in a Wazuh indexer cluster so users can view and edit the Wazuh manager configuration. Additionally, agent groups and centralized configuration can be managed and edited through the interface as well. Identity and access management can be controlled through the web interface, where you can create and manage users, and assign roles as needed.
 
 Data analysis visualization gives you full visibility into your cluster infrastructure for fast threat detection and remediation. Users can check the status, logs, and statistics of Wazuh clusters and create their own downloadable reports using predefined templates, or personalize their own if required. Wazuh provides the tools for comprehensive and streamlined security analytics.
 
@@ -121,8 +122,12 @@ Data analysis visualization gives you full visibility into your cluster infrastr
     </div> 
 
 
-Agent centralized management
-----------------------------
+
+ 
+
+Monitoring deployed agents
+--------------------------
+
 
 From the web interface you manage your agents, their configuration, and data inventory. Inspecting the status of any agent deployed to your system is streamlined with filters for fine-tuning and quick access to data. You can also create deployment commands to install and configure new Wazuh agents. 
 
