@@ -52,6 +52,8 @@ Configuration options for file integrity monitoring:
 alert_new_files
 ---------------
 
+.. deprecated:: 3.11.0
+
 Specifies if syscheck should alert when new files are created.
 
 +--------------------+----------+
@@ -102,6 +104,8 @@ Example:
 
 auto_ignore
 -----------
+
+.. deprecated:: 3.11.0
 
 Specifies whether or not syscheck will ignore files that change too many times (manager only).
 
@@ -625,6 +629,8 @@ Example:
 scan_on_start
 -------------
 
+.. deprecated:: 3.12.0
+
 Specifies if syscheck scans immediately when started.
 
 +--------------------+----------+
@@ -810,7 +816,7 @@ The database synchronization settings are configured inside this tag.
       <interval>5m</interval>
       <max_interval>1h</max_interval>
       <response_timeout>30</response_timeout>
-      <sync_queue_size>16384</sync_queue_size>
+      <queue_size>16384</queue_size>
       <max_eps>10</max_eps>
     </synchronization>
 
