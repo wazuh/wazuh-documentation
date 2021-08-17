@@ -113,7 +113,7 @@ The following example describes the steps to follow to list the files of your co
 
    .. code-block::
 
-      curl -XPOST https://pending.cloud.wazuh.com/api/storage/token -H "x-api-key: <your_api_key>" -H "Content-Type: application/json" --data '
+      curl -XPOST https://api.cloud.wazuh.com/v1.1/storage/token -H "x-api-key: <your_api_key>" -H "Content-Type: application/json" --data '
       {
          "environment_cloud_id": "0123456789ab",
          "token_expiration": "3600"
