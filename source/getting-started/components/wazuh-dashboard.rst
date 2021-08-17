@@ -121,16 +121,18 @@ Data analysis visualization gives you full visibility into your cluster infrastr
     </div> 
 
 
-Agent management
-----------------
+Agent centralized management
+----------------------------
 
-With this component you can manage your agents, their configuration and data inventory. You can also create deployment commands to install and configure new Wazuh agents. 
-
-
+From the web interface you manage your agents, their configuration, and data inventory. Inspecting the status of any agent deployed to your system is streamlined with filters for fine-tuning and quick access to data. You can also also create deployment commands to install and configure new Wazuh agents. 
 
 
-_ Tools
---------
 
-The Wazuh dashboard also includes an API console for users to interact with the Wazuh API.
-You can also deploy new agents.
+Dev tools
+---------
+
+The Wazuh dashboard also includes an API console for users to interact with the Wazuh API through the Wazuh API Console. The Wazuh API accommodates complete remote management of the Wazuh infrastructure and, from the API Console, you can easily perform everyday actions such as adding agents, restarting components, or looking up syscheck details.
+
+Additionally, the Wazuh dashboard provides you with the Ruleset Test tool used by the system to detect attacks, intrusions, software misuse, configuration problems, application errors, malware, rootkits, system anomalies, or security policy violations.
+
+The new Ruleset Test tool also integrates an input box for reading sample logs and an output box to visualize the test results. This feature of the Wazuh dashboard allows you to test sample logs directly on the Wazuh user interface and see how the ruleset reacts to specific log messages.
