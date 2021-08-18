@@ -39,11 +39,11 @@ The following list describes the AWS services that Wazuh is capable of monitorin
 
 - :ref:`AWS Web Application Firewall (WAF) <amazon_waf>`: helps protect your web applications or APIs against common web exploits that may affect availability, compromise security, or consume excessive resources.
 
-Example of an alert when an AWS security group is deleted:
+Expand the output to see an example of an alert generated when an AWS security group is deleted.
 
 .. code-block:: json
   :emphasize-lines: 11,19,29,40
-  :class: output
+  :class: output accordion-output
 
   {
     "agent": {

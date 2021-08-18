@@ -33,11 +33,11 @@ Example of security alerts at an infrastructure level:
    * - A new application is installed on the Docker host
      - Vulnerabilities are detected on the Docker host
 
-Example of alert when a Docker container is created:
+Expand the output to see an example of an alert generated when a Docker container is created.
 
 .. code-block:: json
   :emphasize-lines: 9,12,14
-  :class: output
+  :class: output accordion-output
 
   {
     "agent": {
@@ -73,11 +73,11 @@ Example of alert when a Docker container is created:
     "timestamp": "2020-09-04T02:24:20.266+0000"
   } 
 
-Example of alert when a command is executed inside a container:
+Expand the output to see an example of an alert generated when a command is executed inside a container.
 
 .. code-block:: json
   :emphasize-lines: 9,15
-  :class: output
+  :class: output accordion-output
 
   {
     "agent": {

@@ -80,11 +80,11 @@ Wazuh uses different detection mechanisms to search for system anomalies or well
 |                               | ownership anomalies             |         |             |
 +-------------------------------+---------------------------------+---------+-------------+
 
-Below is an example of an alert generated when a hidden process is found. In this case, the affected system is running a Linux kernel-level rootkit (named Diamorphine):
+Expand the output to see an example of an alert generated when a hidden process is found. In this case, the affected system is running a Linux kernel-level rootkit (named Diamorphine):
 
 .. code-block:: json
   :emphasize-lines: 10,12
-  :class: output
+  :class: output accordion-output
 
   {
     "agent": {

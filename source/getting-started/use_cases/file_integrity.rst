@@ -9,9 +9,11 @@ The File Integrity Monitoring (FIM) component generates an alert when it detects
 
 Below is an example of an alert generated when a monitored file is changed. Metadata includes MD5, SHA1, and SHA256 checksums, file sizes (before and after the change), file permissions, file owner, content changes, and the user who made these changes (who-data).
 
+Expand the output to see an example response of this use case.
+
 .. code-block:: json
   :emphasize-lines: 14,22,27,37,48,54,60
-  :class: output
+  :class: output accordion-output
 
   {
     "agent": {
