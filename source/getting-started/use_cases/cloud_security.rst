@@ -116,11 +116,11 @@ The :ref:`Wazuh agent <wazuh_agent>` module for Microsoft Azure makes it easy to
 
 - :ref:`Active Directory Graph API <azure_monitoring_services>`: The Azure Active Directory Graph API provides access to AZURE AD through REST API endpoints. It is used by Wazuh to monitor Active Directory events (e.g., creation of a new user, update of a user's properties, disable of a user's account, etc.)
 
-Here is an example of a rule that Azure alerts:
+Expand the output to see an example of a rule that Azure alerts.
 
 .. code-block:: json
   :emphasize-lines: 14,16
-  :class: output
+  :class: output accordion-output
 
   {
     "agent": {
@@ -163,11 +163,13 @@ Google Cloud Platform
 
 Wazuh monitors Google Cloud services by pulling events from the Google Pub/Sub messaging service, which is used as a middleware for events ingestion and delivery. This integration helps detect threats targeting your Google Cloud assets.
 
-The following example shows an alert generated when a known bad actor (a source IP address with low reputation) tries to get a list of Pods running in Google Kubernetes Engine (GKE):
+Expand the output to see an example of an alert generated when a known bad actor (a source IP address with low reputation) tries to get a list of Pods running in Google Kubernetes Engine (GKE).
+
+
 
 .. code-block:: json
   :emphasize-lines: 32,34
-  :class: output
+  :class: output accordion-output
 
   {
     "agent": {
