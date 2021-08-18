@@ -28,11 +28,11 @@ Rules include a ``match`` field, used to define the pattern the rule will be loo
 
 The manager will generate an alert every time an event, collected by one of the agents or via syslog, matches a rule with a priority level higher than a predefined threshold (``3`` by default).
 
-Here is an example found in ``/var/ossec/logs/alerts/alerts.json`` (some fields have been removed for reasons of brevity):
+Expand the output to see an example output found in ``/var/ossec/logs/alerts/alerts.json``. Some fields have been removed for reasons of brevity.
 
 .. code-block:: json
   :emphasize-lines: 16,24
-  :class: output
+  :class: output accordion-output
 
   {
     "agent": {
