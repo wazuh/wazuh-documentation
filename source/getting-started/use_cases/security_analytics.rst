@@ -22,9 +22,9 @@ Below you can see a list of these components:
 - **System inventory** runs regular scans, collecting inventory data including network interfaces, operating system version, installed applications, running processes, and a list of open ports. 
 - **Security configuration assessment (SCA)** provides a continuous evaluation based on the Center of Internet Security (CIS) benchmarks.
 
-Security analytics tools give users the needed visibility to perform thread prevention actions. The :ref:`FIM <file_integrity>` module is a good example because it detects changes that could compromise data and creates alerts. Then, the agent can be configured to trigger an Active Response in reply to the alerts.
+Security analytics tools give users the visibility needed to perform thread prevention actions. The :ref:`FIM <file_integrity>` module is a good example because it detects changes that could compromise data and creates alerts based on them. Then, the agent can be configured to trigger an Active Response in reply to these alerts.
 
-In addition, these tools assist users in detecting the possible presence of rootkits and collecting inventory data from different points such as operating systems, processes, applications, ports, and network interfaces. FIM results can be observed in :ref:`Wazuh Kibana plugin<kibana_app>` in the *Overview > Integrity monitoring* section:
+In addition, these tools assist users in detecting the possible presence of rootkits and collecting inventory data from different sources such as operating systems, processes, applications, ports, and network interfaces. FIM results can be observed in :ref:`Wazuh Kibana plugin<kibana_app>` in the *Overview > Integrity monitoring* section:
 
 .. thumbnail:: ../../images/manual/fim/fim-kibana-overview1.png
   :title: Kibana app: Fim overview
