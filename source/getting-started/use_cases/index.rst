@@ -14,7 +14,7 @@ Wazuh is a popular security solution among users of IaaS (Amazon AWS, Azure, or 
 
 Additionally, Wazuh is often employed to protect containerized environments providing cloud-native runtime security. This feature is based on an integration with the Docker engine API and Kubernetes API. Moreover, for better protection, the Wazuh security agent can run on the Docker host providing a complete set of threat detection and response capabilities.
 
-Bellow you can find examples of some of the most common use cases of the Wazuh solution.
+Below you can find examples of some of the most common use cases of the Wazuh solution.
 
 .. list-table::
    :width: 100%
