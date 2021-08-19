@@ -18,27 +18,25 @@ Moreover, the Wazuh dashboard is flexible. This component provides enhanced visi
 
 
 
-.. raw:: html
-
-  </div>
 
 .. raw:: html
 
   <div class="screenshots">
-     <div id="another_slider" class="carousel slide" data-ride="carousel">
+     <div id="another_slider" class="carousel slide" data-ride="carousel" data-interval="2000">
        <div class="carousel-inner">
          <div class="carousel-item active">
-
-
-         
-.. raw:: html
-    
-  <div class="images-rn-420-container">
-  <div class="images-rn-420">
+            <div class="row">
+               <div class="col-12 col-lg-6">
 
 .. thumbnail::  ../../images/getting_started/dashboard_modules_infomanagement.png 
     :align: center
     :title: Modules directory
+
+.. raw:: html
+
+  </div> 
+   <div class="col-12 col-lg-6">
+
 
 .. thumbnail::  ../../images/getting_started/dashboard_modules_auditing_and_policy.png 
     :align: center
@@ -46,17 +44,22 @@ Moreover, the Wazuh dashboard is flexible. This component provides enhanced visi
 
 .. raw:: html
 
-  </div> 
+         </div>
+         </div>
+  </div>
 
-
-.. raw:: html
-    
-  <div class="images-rn-420-container">
-  <div class="images-rn-420">
+  <div class="carousel-item">
+   <div class="row">
+      <div class="col-12 col-lg-6">
 
 .. thumbnail::  ../../images/getting_started/dashboard_modules_threat_detection.png 
     :align: center
     :title: Modules directory
+
+.. raw:: html
+
+   </div> 
+      <div class="col-12 col-lg-6">
 
 .. thumbnail::  ../../images/getting_started/dashboard_modules_compliance.png 
     :align: center
@@ -64,34 +67,12 @@ Moreover, the Wazuh dashboard is flexible. This component provides enhanced visi
 
 .. raw:: html
 
-  </div> 
-
-
-.. raw:: html
-
-          </div>
-
-          <a class="carousel-control-prev" href="#another_slider" role="button" data-slide="prev">
-            <span class="fas fa-angle-left" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#another_slider" role="button" data-slide="next">
-            <span class="fas fa-angle-right" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
-
-        </div>
-      </div>
-
-.. raw:: html
-
+  </div>
+  </div>
+  </div>
+  </div>
    </div>
-
-
-
-.. raw:: html
-
-   </div></div>
+   </div>
 
 
 
