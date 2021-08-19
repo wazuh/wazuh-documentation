@@ -502,7 +502,6 @@ installElasticsearch() {
                     echo "    ip:" >> ~/instances.yml
                     echo "      - ${filebeatip}" >> ~/instances.yml
                     ((i++))
-                    ((i++))
                 done
 
                 echo "# Kibana node"  >> ~/instances.yml
@@ -570,7 +569,6 @@ installElasticsearch() {
         if [ ${#ELASTICNODES[@]} -le "1" ] && [ -z ${aio} ]; then
             echo "Initializing Elasticsearch..."
             nip=${ENODESIP[ippos]}
-            echo ${nip:1}
             until $(curl -XGET https://${nip:1}:9200/ -uadmin:admin -k --max-time 120 --silent --output /dev/null); do
                 echo -ne ${char}
                 sleep 2
@@ -650,6 +648,7 @@ installFilebeat() {
                     if [ -z "$clusterkey" ]; then
                         echo "Generating the Wazuh cluster key..."
                         clusterkey="$(openssl rand -hex 16)"
+                    fi
                         conf="$(awk '{sub("    <node_name>node01</node_name>", "    <node_name>'${wname}'</node_name>")}1' /var/ossec/etc/ossec.conf)"
                         echo "${conf}" > /var/ossec/etc/ossec.conf  
                         conf="$(awk '{sub("    <key></key>", "    <key>'${clusterkey}'</key>")}1' /var/ossec/etc/ossec.conf)"
@@ -658,7 +657,6 @@ installFilebeat() {
                         echo "${conf}" > /var/ossec/etc/ossec.conf 
                         conf="$(awk '{sub("    <disabled>yes</disabled>", "    <disabled>no</disabled>")}1' /var/ossec/etc/ossec.conf)"
                         echo "${conf}" > /var/ossec/etc/ossec.conf                                                                
-                    fi
                 else
                     # Configure worker node
                     masterIP="${FILEBEATNODES[masterpos-1]}"
