@@ -28,7 +28,7 @@ Moreover, the Wazuh dashboard is flexible. This component provides enhanced visi
             <div class="row">
                <div class="col-12 col-lg-6">
 
-.. thumbnail::  ../../images/getting_started/dashboard_modules_infomanagement.png 
+.. thumbnail::  ../../images/getting_started/module_info_management.png 
     :align: center
     :title: Modules directory
 
@@ -38,7 +38,7 @@ Moreover, the Wazuh dashboard is flexible. This component provides enhanced visi
    <div class="col-12 col-lg-6">
 
 
-.. thumbnail::  ../../images/getting_started/dashboard_modules_auditing_and_policy.png 
+.. thumbnail::  ../../images/getting_started/mudule_policy.png 
     :align: center
     :title: Modules directory
 
@@ -52,7 +52,7 @@ Moreover, the Wazuh dashboard is flexible. This component provides enhanced visi
    <div class="row">
       <div class="col-12 col-lg-6">
 
-.. thumbnail::  ../../images/getting_started/dashboard_modules_threat_detection.png 
+.. thumbnail::  ../../images/getting_started/module_threat_detection.png 
     :align: center
     :title: Modules directory
 
@@ -61,7 +61,7 @@ Moreover, the Wazuh dashboard is flexible. This component provides enhanced visi
    </div> 
       <div class="col-12 col-lg-6">
 
-.. thumbnail::  ../../images/getting_started/dashboard_modules_compliance.png 
+.. thumbnail::  ../../images/getting_started/module_compliance.png 
     :align: center
     :title: Modules directory
 
