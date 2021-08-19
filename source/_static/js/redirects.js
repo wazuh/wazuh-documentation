@@ -64,8 +64,6 @@ newUrls['4.2'] = [
   '/user-manual/reference/statistics-files/wazuh-logcollector-state.html',
   '/user-manual/reference/tools/wazuh-control.html',
   '/user-manual/reference/tools/wazuh-regex.html',
-  '/getting-started/use_cases/security_analytics.html',
-  '/getting-started/use_cases/intrusion_detection.html',
 ];
 
 removedUrls['4.2'] = [
@@ -94,6 +92,8 @@ removedUrls['4.2'] = [
   '/user-manual/reference/tools/util.sh.html',
   '/user-manual/reference/tools/ossec-makelists.html',
   '/user-manual/reference/tools/ossec-logtest.html',
+  '/getting-started/use_cases/security_analytics.html',
+  '/getting-started/use_cases/intrusion_detection.html',
 ];
 
 redirections.push(
