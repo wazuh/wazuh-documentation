@@ -18,8 +18,8 @@ By running the automated script, you install and configure the Wazuh in just a f
 
 Alternatively, you can check our :ref:`Installation guide <installation_guide>` to learn how to install each component individually on the same server, as an all-in-one deployment, or on different servers as a distributed deployment depending on the environment needs. 
 
-[WIP] Requirements
-------------------
+Requirements
+------------
 Check the supported operating systems and the recommended hardware requirements for the Wazuh installation.
 
 Supported operating systems

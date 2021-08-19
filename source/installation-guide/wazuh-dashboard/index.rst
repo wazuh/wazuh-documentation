@@ -24,8 +24,8 @@ You can now choose an installation method and start installing the Wazuh dashboa
     :width: 100%
 
 
-[WIP] Requirements
-------------------
+Requirements
+------------
 
 Check the supported operating systems and the recommended hardware requirements for the Wazuh dashboard installation. Make sure that your system environment meets all requirements and that you have root user privileges.
 
