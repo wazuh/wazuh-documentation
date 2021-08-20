@@ -131,6 +131,69 @@ Compile the WPK package using the MSI package and, your SSL certificate and key:
 
   # tools/agent-upgrade/wpkpack.py output/myagent.wpk path/to/wpkcert.pem path/to/wpkcert.key path/to/wazuhagent.msi path/to/upgrade.bat path/to/do_upgrade.ps1
 
+MacOS WPK
+^^^^^^^^^
+
+Install development tools and compilers. In macOS, this can be easily done by installing brew, a package manager for macOS:
+
+.. code-block:: console
+
+ $ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+.. code-block:: console
+
+ $ brew install automake autoconf libtool cmake
+
+Download and extract the latest version:
+
+.. code-block:: console
+
+  # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_LATEST|.tar.gz | tar zx
+
+Modify the ``wazuh-|WAZUH_LATEST|/etc/preloaded-vars.conf`` file that was downloaded to deploy an :ref:`unattended update <unattended-installation>` in the agent by uncommenting the following lines:
+
+.. code-block:: pkgconfig
+
+  USER_LANGUAGE="en"
+  USER_NO_STOP="y"
+  USER_UPDATE="y"
+
+Compile the project from the ``src`` folder:
+
+.. code-block:: console
+
+  # cd wazuh-|WAZUH_LATEST|/src
+  # make deps TARGET=agent
+  # make TARGET=agent
+
+Delete the files that are no longer needed, this step can be skipped but the size of the WPK will be considerably larger:
+
+.. code-block:: console
+
+  $ rm -rf doc wodles/oscap/content/* gen_ossec.sh add_localfiles.sh Jenkinsfile*
+  $ rm -rf src/{addagent,analysisd,client-agent,config,error_messages,external/*,headers,logcollector,monitord,os_auth,os_crypto,os_csyslogd,os_dbdos_execd}
+  $ rm -rf src/{os_integrator,os_maild,os_netos_regex,os_xml,os_zlib,remoted,reportd,shared,syscheckd,tests,update,wazuh_db,wazuh_modules}
+  $ rm -rf src/win32
+  $ rm -rf src/*.a
+  $ rm -rf etc/{decoders,lists,rules}
+  $ find etc/templates/* -maxdepth 0 -not -name "en" | xargs rm -rf
+
+Install the root CA if you want to overwrite the root CA with the file you created previously:
+
+.. code-block:: console
+
+  # cd ../
+  # cp path/to/wpk_root.pem etc/wpk_root.pem
+
+Compile the WPK package using your SSL certificate and key:
+
+.. code-block:: console
+
+  # tools/agent-upgrade/wpkpack.py output/myagent.wpk path/to/wpkcert.pem path/to/wpkcert.key *
+
+In this example, the Wazuh project's root directory contains the proper ``upgrade.sh`` file.
+
+
 Definitions:
     - ``output/myagent.wpk`` is the name of the output WPK package.
     - ``path/to/wpkcert.pem`` is the path to your SSL certificate.
