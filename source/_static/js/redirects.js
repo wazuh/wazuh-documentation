@@ -59,32 +59,32 @@ newUrls['4.1'] = [
 ];
 
 removedUrls['4.1'] = [
-  '/installation-guide/wazuh-agent/deployment_variables/linux/deployment_variables_apt.rst',
-  '/installation-guide/wazuh-agent/deployment_variables/linux/deployment_variables_dnf.rst',
-  '/installation-guide/wazuh-agent/deployment_variables/linux/deployment_variables_yum.rst',
-  '/installation-guide/wazuh-agent/deployment_variables/linux/deployment_variables_zypper.rst',
+  '/installation-guide/wazuh-agent/deployment_variables/linux/deployment_variables_apt.html',
+  '/installation-guide/wazuh-agent/deployment_variables/linux/deployment_variables_dnf.html',
+  '/installation-guide/wazuh-agent/deployment_variables/linux/deployment_variables_yum.html',
+  '/installation-guide/wazuh-agent/deployment_variables/linux/deployment_variables_zypper.html',
 ];
 
 redirections.push(
   {
     'target': ['4.0=>4.1', '4.1=>4.0'],
-    '4.0': '/installation-guide/wazuh-agent/deployment_variables/linux/deployment_variables_apt.rst',
-    '4.1': '/installation-guide/wazuh-agent/deployment_variables/deployment_variables_linux.rst',
+    '4.0': '/installation-guide/wazuh-agent/deployment_variables/linux/deployment_variables_apt.html',
+    '4.1': '/installation-guide/wazuh-agent/deployment_variables/deployment_variables_linux.html',
   },
   {
     'target': ['4.0=>4.1', '4.1=>4.0'],
-    '4.0': '/installation-guide/wazuh-agent/deployment_variables/linux/deployment_variables_dnf.rst',
-    '4.1': '/installation-guide/wazuh-agent/deployment_variables/deployment_variables_linux.rst',
+    '4.0': '/installation-guide/wazuh-agent/deployment_variables/linux/deployment_variables_dnf.html',
+    '4.1': '/installation-guide/wazuh-agent/deployment_variables/deployment_variables_linux.html',
   },
   {
     'target': ['4.0=>4.1', '4.1=>4.0'],
-    '4.0': '/installation-guide/wazuh-agent/deployment_variables/linux/deployment_variables_yum.rst',
-    '4.1': '/installation-guide/wazuh-agent/deployment_variables/deployment_variables_linux.rst',
+    '4.0': '/installation-guide/wazuh-agent/deployment_variables/linux/deployment_variables_yum.html',
+    '4.1': '/installation-guide/wazuh-agent/deployment_variables/deployment_variables_linux.html',
   },
   {
     'target': ['4.0=>4.1', '4.1=>4.0'],
-    '4.0': '/installation-guide/wazuh-agent/deployment_variables/linux/deployment_variables_zypper.rst',
-    '4.1': '/installation-guide/wazuh-agent/deployment_variables/deployment_variables_linux.rst',
+    '4.0': '/installation-guide/wazuh-agent/deployment_variables/linux/deployment_variables_zypper.html',
+    '4.1': '/installation-guide/wazuh-agent/deployment_variables/deployment_variables_linux.html',
   },  
 );
 
