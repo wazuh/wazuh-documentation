@@ -18,7 +18,7 @@ Wazuh indexer cluster installation
 
 Install and configure the Wazuh indexer as a single-node or multi-node cluster according to your environment needs. If you want to install a single-node cluster, follow the instructions to install the initial node and proceed directly to initialize the cluster. 
 
-The installation process is divided in three stages.  
+The installation process is divided into three stages.  
 
 #. Initial node installation and configuration
 
@@ -194,7 +194,7 @@ Deploy the certificates to encrypt communications between the Wazuh central comp
 
   Restart Elasticsearch after removing the plugin.
 
-You now have install a subsequent node of your Wazuh indexer multi-node cluster. Repeat this process on every other subsequent node that you want to add to your cluster and proceed with initializing the cluster. 
+You now have installed a subsequent node of your Wazuh indexer multi-node cluster. Repeat this process on every other subsequent node that you want to add to your cluster and proceed with initializing the cluster. 
 
 .. _initialize_cluster:
 
