@@ -23,7 +23,7 @@ You can install and configure the Wazuh dashboard using an automated script.
       # curl -so ./unattended-installation.sh https://packages.wazuh.com/resources/|WAZUH_LATEST_MINOR|/unattended-installation/unattended-installation.sh
 
 
-#. Replace ``node_name`` by the instance name and run the script. 
+#. Replace ``node_name`` with the instance name and run the script. 
    
    The ``node_name`` must be the same used in ``config.yml`` for the certificate creation, e.g. ``kibana``.
 
