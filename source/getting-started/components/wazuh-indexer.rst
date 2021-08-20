@@ -5,7 +5,7 @@
 [WIP] Wazuh indexer
 ===================
 
-The Wazuh indexer is highly scalable, full-text search and analytics engine. The component is distributed, meaning the data indices are divided into shards and each shard can have zero or more replicas. Wazuh uses different indices for alerts data, raw events, and status monitoring information.
+The Wazuh indexer is a highly scalable, full-text search and analytics engine. The component is distributed, meaning the data indices are divided into shards and each shard can have zero or more replicas. Wazuh uses different indices for alerts data, raw events, and status monitoring information.
 
 
 A Wazuh index is a collection of documents that have somewhat similar characteristics, like certain common fields and shared data retention requirements. Wazuh utilizes as many as three different indices, created daily, to store different event types.
