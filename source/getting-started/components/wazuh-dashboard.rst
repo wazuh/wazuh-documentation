@@ -88,14 +88,6 @@ Additionally, agent groups and centralized configuration can be managed and edit
 
   
 
-Dev tools
----------
-
-The Wazuh dashboard also includes an API console for users to interact with the Wazuh API. This API accommodates complete remote management of the Wazuh infrastructure and, from the API Console, you can easily perform everyday actions such as adding agents, restarting components, or looking up syscheck details.
-
-The Ruleset Test tool also integrates an input box for reading sample logs and an output box to visualize the test results. This feature of the Wazuh dashboard allows you to test sample logs directly on the Wazuh user interface and see how the ruleset reacts to specific log messages.
-
-
 Management of Wazuh infrastructure
 ----------------------------------
 
@@ -121,3 +113,34 @@ Data analysis visualization gives you full visibility into your cluster infrastr
 
     </div> 
 
+
+
+Dev tools
+---------
+
+User can easily access developer tools integrated directly into the Wazuh dashboard. 
+
+The Ruleset Test tool provides an input box for reading sample logs and an output box to visualize the test results. This feature of the Wazuh dashboard allows you to test sample logs directly on the Wazuh user interface and see how the ruleset reacts to specific log messages.
+
+The Wazuh dashboard also includes an API console for users to interact with the Wazuh API. This API accommodates complete remote management of the Wazuh infrastructure and, from the API Console, you can easily perform everyday actions such as adding agents, restarting components, creating roles, or looking up syscheck details.
+
+
+.. raw:: html
+    
+    <div class="images-rn-420-container">
+    <div class="images-rn-420">
+
+
+.. thumbnail::  ../../images/getting_started/dashboard_API_console1.png 
+      :align: center
+      :title: API Console
+
+
+.. thumbnail::  ../../images/getting_started/dashboard_API_console2.png 
+      :align: center
+      :title: API Console
+
+
+.. raw:: html
+
+    </div> 
