@@ -89,7 +89,7 @@ Wazuh is a free and open source platform for threat detection, security monitori
 
   Wazuh helps monitoring cloud infrastructure at an API level, using integration modules that are able to pull security data from well-known cloud providers like Amazon AWS, Azure, or Google Cloud. In addition, Wazuh provides rules to assess the configuration of your cloud environment, easily spotting weaknesses.
 
-  In addition, Wazuh light-weight and multi-platform agents are commonly used to monitor cloud environments at the instance level.
+  In addition, Wazuh lightweight and multi-platform agents are commonly used to monitor cloud environments at the instance level.
 
 .. topic:: Containers Security
   :class: docker
@@ -115,7 +115,7 @@ Wazuh is a free and open source platform for threat detection, security monitori
 
    Wazuh is used to collect, aggregate, index, and analyze security data, helping organizations detect intrusions, threats and behavioral anomalies.
 
-   As cyber threats are becoming more sophisticated, real-time monitoring and security analysis are needed for fast threat detection and remediation. That is why our light-weight agent provides the necessary monitoring and response capabilities, while our server component provides the security intelligence and performs data analysis.
+   As cyber threats are becoming more sophisticated, real-time monitoring and security analysis are needed for fast threat detection and remediation. That is why our lightweight agent provides the necessary monitoring and response capabilities, while our server component provides the security intelligence and performs data analysis.
 
 .. topic:: Log Data Analysis
    :class: logdata
@@ -172,7 +172,7 @@ Wazuh is a free and open source platform for threat detection, security monitori
 
    Wazuh helps monitor cloud infrastructure at an API level, using integration modules that are able to pull security data from well-known cloud providers like Amazon AWS, Azure, or Google Cloud. In addition, Wazuh provides rules to assess the configuration of your cloud environment, easily spotting weaknesses.
 
-   Furthermore, Wazuh light-weight and multi-platform agents are commonly used to monitor cloud environments at the instance level.
+   Furthermore, Wazuh lightweight and multi-platform agents are commonly used to monitor cloud environments at the instance level.
 
 .. topic:: Containers Security
    :class: docker
