@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+    :description: The Wazuh platform is often used to meet the technical aspects of regulatory compliance standards. Learn more about this Wazuh capability in this section. 
+    
 .. _regulatory_compliance:
 
 Regulatory compliance
