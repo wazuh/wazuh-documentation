@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+    :description: The operation of RBAC is based on the relationship between three components: users, roles and policies or permissions. Learn more about the Role-Based Access Control of Wazuh. 
+
 .. _api_rbac_how_it_works:
 
 How it works
