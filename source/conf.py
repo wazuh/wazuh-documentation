@@ -481,6 +481,7 @@ custom_replacements = {
     "|WAZUH_REVISION_OSX|" : "1",
     "|WAZUH_REVISION_WINDOWS|" : "1",
     "|WAZUH_REVISION_AIX|" : "1",
+    "|WAZUH_REVISION_MACOS|" : "1",    
     "|CHECKSUMS_URL|" : "https://packages.wazuh.com/4.x/checksums/wazuh/",
     "|RPM_AGENT|" : "https://packages.wazuh.com/4.x/yum/wazuh-agent",
     "|RPM_MANAGER|" : "https://packages.wazuh.com/4.x/yum/wazuh-manager",

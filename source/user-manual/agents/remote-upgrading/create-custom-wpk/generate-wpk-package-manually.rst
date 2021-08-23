@@ -134,49 +134,31 @@ Compile the WPK package using the MSI package and, your SSL certificate and key:
 MacOS WPK
 ^^^^^^^^^
 
-Install development tools and compilers. In macOS, this can be easily done by installing brew, a package manager for macOS:
+Install development tools and compilers. In Linux this can easily be done using your distribution's package manager:
+
+For RPM-based distributions:
 
 .. code-block:: console
 
- $ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  # yum install make gcc policycoreutils-python automake autoconf libtool unzip
+
+For Debian-based distributions:
 
 .. code-block:: console
 
- $ brew install automake autoconf libtool cmake
+  # apt-get install make gcc libc6-dev curl policycoreutils automake autoconf libtool unzip
 
-Download and extract the latest version:
+Download and extract the latest version of wazuh sources:
 
 .. code-block:: console
 
   # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_LATEST|.tar.gz | tar zx
 
-Modify the ``wazuh-|WAZUH_LATEST|/etc/preloaded-vars.conf`` file that was downloaded to deploy an :ref:`unattended update <unattended-installation>` in the agent by uncommenting the following lines:
-
-.. code-block:: pkgconfig
-
-  USER_LANGUAGE="en"
-  USER_NO_STOP="y"
-  USER_UPDATE="y"
-
-Compile the project from the ``src`` folder:
+Download the latest version of the wazuh PKG package:
 
 .. code-block:: console
 
-  # cd wazuh-|WAZUH_LATEST|/src
-  # make deps TARGET=agent
-  # make TARGET=agent
-
-Delete the files that are no longer needed, this step can be skipped but the size of the WPK will be considerably larger:
-
-.. code-block:: console
-
-  $ rm -rf doc wodles/oscap/content/* gen_ossec.sh add_localfiles.sh Jenkinsfile*
-  $ rm -rf src/{addagent,analysisd,client-agent,config,error_messages,external/*,headers,logcollector,monitord,os_auth,os_crypto,os_csyslogd,os_dbdos_execd}
-  $ rm -rf src/{os_integrator,os_maild,os_netos_regex,os_xml,os_zlib,remoted,reportd,shared,syscheckd,tests,update,wazuh_db,wazuh_modules}
-  $ rm -rf src/win32
-  $ rm -rf src/*.a
-  $ rm -rf etc/{decoders,lists,rules}
-  $ find etc/templates/* -maxdepth 0 -not -name "en" | xargs rm -rf
+  # curl -Ls https://packages.wazuh.com/|CURRENT_MAJOR|/macos/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_MACOS|.pkg --output wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_MACOS|.pkg
 
 Install the root CA if you want to overwrite the root CA with the file you created previously:
 
@@ -185,13 +167,11 @@ Install the root CA if you want to overwrite the root CA with the file you creat
   # cd ../
   # cp path/to/wpk_root.pem etc/wpk_root.pem
 
-Compile the WPK package using your SSL certificate and key:
+Compile the WPK package using the PKG package and, your SSL certificate and key:
 
 .. code-block:: console
 
-  # tools/agent-upgrade/wpkpack.py output/myagent.wpk path/to/wpkcert.pem path/to/wpkcert.key *
-
-In this example, the Wazuh project's root directory contains the proper ``upgrade.sh`` file.
+  # tools/agent-upgrade/wpkpack.py output/myagent.wpk path/to/wpkcert.pem path/to/wpkcert.key path/to/wazuhagent.pkg path/to/upgrade.sh path/to/pkg_installer.sh
 
 
 Definitions:
