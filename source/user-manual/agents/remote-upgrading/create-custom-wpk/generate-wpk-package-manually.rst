@@ -158,7 +158,7 @@ Download the latest version of the wazuh PKG package:
 
 .. code-block:: console
 
-  # curl -Ls https://packages.wazuh.com/|CURRENT_MAJOR|/macos/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_MACOS|.pkg --output wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_MACOS|.pkg
+  # curl -Ls https://packages.wazuh.com/|CURRENT_MAJOR|/macos/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_OSX|.pkg --output wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_OSX|.pkg
 
 Install the root CA if you want to overwrite the root CA with the file you created previously:
 
