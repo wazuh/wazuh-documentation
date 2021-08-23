@@ -182,8 +182,7 @@ Definitions:
     - ``path/to/do_upgrade.ps1`` is the path to the do_upgrade.ps1 file you can find an example at src/win32 within the wazuh repository or write your own.
     - ``path/to/wazuhagent.msi`` is the path to the MSI you have downloaded in step 3.
     - ``path/to/upgrade.sh`` is the path to the upgrade.sh file you can find an example at base directory within the wazuh repository or write your own.
-    - ``path/to/pkg_installer.sh`` is the path to the pkg_installer.sh file you can find an example at src/init/pkg_installer.sh
- within the wazuh repository.
+    - ``path/to/pkg_installer.sh`` is the path to the pkg_installer.sh file you can find an example at src/init within the wazuh repository.
     - ``\*`` is the file (or the files) to be included into the WPK package. In this case, all the contents will be added.
 
 .. note::
