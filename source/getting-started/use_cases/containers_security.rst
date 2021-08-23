@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Wazuh is used to monitor for signs of container security incidents, alerting in real time. Wazuh protects container workloads at both the infrastructure and container level. Learn more here. 
+  
 .. _containers_security:
 
 Containers security monitoring
