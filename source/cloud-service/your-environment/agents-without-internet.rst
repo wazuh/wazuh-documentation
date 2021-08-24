@@ -99,7 +99,7 @@ In case your agents are located in AWS, you can access our Wazuh Cloud service s
 
    #. Select **Endpoints**.
 
-4. Create a new endpoint pointing to the endpoint service you requested from the Wazuh team. Keep in mind that the endpoint must be located in the same AWS Region as the endpoint service. For more information on AWS PrivateLink and VPC endpoints, see the  `AWS documentation <https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html#create-interface-endpoint>`_ .
+4. Create a new endpoint pointing to the endpoint service you requested from the Wazuh team. Keep in mind that the endpoint must be located in the same AWS Region as the endpoint service. For more information on AWS PrivateLink and VPC endpoints, see the  `AWS documentation <https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html#create-interface-endpoint>`_.
 
 5. After the endpoint is created, Wazuh approves the connection and sends a notification when it is ready to use.
 
