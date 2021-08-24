@@ -12,11 +12,11 @@ Wazuh agents can run on a wide range of operative systems, but when it is not po
 
 Since every communication with your environment is performed through the Wazuh agent, you have to configure the agent to forward the syslog events. To do so, you have these options:
 
-- `rsyslog on Linux`_
+- `Rsyslog on Linux`_
 
 - `Logstash on Windows`_
 
-rsyslog on Linux
+Rsyslog on Linux
 ^^^^^^^^^^^^^^^^
 
 Use rsyslog on a Linux host with a Wazuh agent to log to a file and send those logs to the environment.
@@ -75,7 +75,7 @@ Use Logstash on a Windows host with a Wazuh agent to receive syslog, log to a fi
 1. Install Logstash.
 
    #. `Download the Logstash <https://www.elastic.co/downloads/logstash>`_ ZIP package.
-   #. Extract the ZIP contents into a local folder. For example, to ``C:\logstash\``.
+   #. Extract the ZIP contents into a local folder, for example, to ``C:\logstash\``.
 
 2. Install ``logstash-input-syslog`` and ``logstash-output-file`` plugins.
 
