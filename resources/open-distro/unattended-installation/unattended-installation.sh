@@ -11,12 +11,18 @@
 ## Check if system is based on yum or apt-get
 char="."
 debug='>> /var/log/wazuh-unattended-installation.log 2>&1'
-WAZUH_VER="4.2.0"
+WAZUH_MAJOR="4.1"
+WAZUH_VER="4.1.5"
 WAZUH_REV="1"
 ELK_VER="7.10.2"
 OD_VER="1.13.2"
 OD_REV="1"
+WAZUH_KIB_PLUG_REV="1"
 ow=""
+repogpg="https://packages.wazuh.com/key/GPG-KEY-WAZUH"
+repobaseurl="https://packages.wazuh.com/4.x"
+resources="https://packages.wazuh.com/resources/"
+
 if [ -n "$(command -v yum)" ]; then
     sys_type="yum"
     sep="-"
@@ -197,14 +203,14 @@ addWazuhrepo() {
     logger "Adding the Wazuh repository..."
 
     if [ ${sys_type} == "yum" ]; then
-        eval "rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH ${debug}"
-        eval "echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages.wazuh.com/4.x/yum/\nprotect=1' | tee /etc/yum.repos.d/wazuh.repo ${debug}"
+        eval "rpm --import ${repogpg} ${debug}"
+        eval "echo -e '[wazuh]\ngpgcheck=1\ngpgkey=${repogpg}\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl='${repobaseurl}'/yum/\nprotect=1' | tee /etc/yum.repos.d/wazuh.repo ${debug}"
     elif [ ${sys_type} == "zypper" ]; then
-        eval "rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH ${debug}"
-        eval "echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages.wazuh.com/4.x/yum/\nprotect=1' | tee /etc/zypp/repos.d/wazuh.repo ${debug}"            
+        eval "rpm --import ${repogpg} ${debug}"
+        eval "echo -e '[wazuh]\ngpgcheck=1\ngpgkey=${repogpg}\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl='${repobaseurl}'/yum/\nprotect=1' | tee /etc/zypp/repos.d/wazuh.repo ${debug}"            
     elif [ ${sys_type} == "apt-get" ]; then
-        eval "curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH --max-time 300 | apt-key add - ${debug}"
-        eval "echo "deb https://packages.wazuh.com/4.x/apt/ stable main" | tee - /etc/apt/sources.list.d/wazuh.list ${debug}"
+        eval "curl -s ${repogpg} --max-time 300 | apt-key add - ${debug}"
+        eval "echo "deb '${repobaseurl}'/apt/ stable main" | tee - /etc/apt/sources.list.d/wazuh.list ${debug}"
         eval "apt-get update -q ${debug}"
     fi    
 
@@ -255,16 +261,17 @@ installElasticsearch() {
 
         logger "Configuring Elasticsearch..."
 
-        eval "curl -so /etc/elasticsearch/elasticsearch.yml https://packages.wazuh.com/resources/4.2/open-distro/elasticsearch/7.x/elasticsearch_unattended.yml --max-time 300 ${debug}"
-        eval "curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles.yml https://packages.wazuh.com/resources/4.2/open-distro/elasticsearch/roles/roles.yml --max-time 300 ${debug}"
-        eval "curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles_mapping.yml https://packages.wazuh.com/resources/4.2/open-distro/elasticsearch/roles/roles_mapping.yml --max-time 300 ${debug}"
-        eval "curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml https://packages.wazuh.com/resources/4.2/open-distro/elasticsearch/roles/internal_users.yml --max-time 300 ${debug}"        
+        eval "curl -so /etc/elasticsearch/elasticsearch.yml ${resources}${WAZUH_MAJOR}/open-distro/elasticsearch/7.x/elasticsearch_unattended.yml --max-time 300 ${debug}"
+        eval "curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles.yml ${resources}${WAZUH_MAJOR}/open-distro/elasticsearch/roles/roles.yml --max-time 300 ${debug}"
+        eval "curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles_mapping.yml ${resources}${WAZUH_MAJOR}/open-distro/elasticsearch/roles/roles_mapping.yml --max-time 300 ${debug}"
+        eval "curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml ${resources}${WAZUH_MAJOR}/open-distro/elasticsearch/roles/internal_users.yml --max-time 300 ${debug}"        
         eval "rm /etc/elasticsearch/esnode-key.pem /etc/elasticsearch/esnode.pem /etc/elasticsearch/kirk-key.pem /etc/elasticsearch/kirk.pem /etc/elasticsearch/root-ca.pem -f ${debug}"
 
         ## Create certificates
         eval "mkdir /etc/elasticsearch/certs ${debug}"
         eval "cd /etc/elasticsearch/certs ${debug}"
-        eval "curl -so ~/wazuh-cert-tool.sh https://packages.wazuh.com/resources/4.2/open-distro/tools/certificate-utility/wazuh-cert-tool.sh --max-time 300 ${debug}"
+        echo "${resources}${WAZUH_MAJOR}/open-distro/tools/certificate-utility/wazuh-cert-tool.sh --max-time 300"
+        eval "curl -so ~/wazuh-cert-tool.sh ${resources}${WAZUH_MAJOR}/open-distro/tools/certificate-utility/wazuh-cert-tool.sh --max-time 300 ${debug}"
 
         echo "# Elasticsearch nodes" >> ~/instances.yml
         echo "elasticsearch-nodes:" >> ~/instances.yml
@@ -341,10 +348,10 @@ installFilebeat() {
         exit 1;
     else
         filebeatinstalled="1"
-        eval "curl -so /etc/filebeat/filebeat.yml https://packages.wazuh.com/resources/4.2/open-distro/filebeat/7.x/filebeat_unattended.yml --max-time 300  ${debug}"
+        eval "curl -so /etc/filebeat/filebeat.yml ${resources}${WAZUH_MAJOR}/open-distro/filebeat/7.x/filebeat_unattended.yml --max-time 300  ${debug}"
         eval "curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/4.0/extensions/elasticsearch/7.x/wazuh-template.json --max-time 300 ${debug}"
         eval "chmod go+r /etc/filebeat/wazuh-template.json ${debug}"
-        eval "curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.1.tar.gz --max-time 300 | tar -xvz -C /usr/share/filebeat/module ${debug}"
+        eval "curl -s '${repobaseurl}'/filebeat/wazuh-filebeat-0.1.tar.gz --max-time 300 | tar -xvz -C /usr/share/filebeat/module ${debug}"
         eval "mkdir /etc/filebeat/certs ${debug}"
         eval "cp ~/certs/root-ca.pem /etc/filebeat/certs/ ${debug}"
         eval "cp ~/certs/filebeat* /etc/filebeat/certs/ ${debug}"
@@ -372,11 +379,11 @@ installKibana() {
         exit 1;
     else    
         kibanainstalled="1"
-        eval "curl -so /etc/kibana/kibana.yml https://packages.wazuh.com/resources/4.2/open-distro/kibana/7.x/kibana_unattended.yml --max-time 300 ${debug}"
+        eval "curl -so /etc/kibana/kibana.yml ${resources}${WAZUH_MAJOR}/open-distro/kibana/7.x/kibana_unattended.yml --max-time 300 ${debug}"
         eval "mkdir /usr/share/kibana/data ${debug}"
         eval "chown -R kibana:kibana /usr/share/kibana/ ${debug}"
         eval "cd /usr/share/kibana ${debug}"
-        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.2.0_7.10.2-1.zip ${debug}"
+        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install '${repobaseurl}'/ui/kibana/wazuh_kibana-${WAZUH_VER}_${ELK_VER}-${WAZUH_KIB_PLUG_REV}.zip ${debug}"
         if [  "$?" != 0  ]; then
             echo "Error: Wazuh Kibana plugin could not be installed."
             rollBack
@@ -543,7 +550,7 @@ healthCheck() {
 }
 
 changePasswords() {
-    eval "curl -so ~/wazuh-passwords-tool.sh https://packages.wazuh.com/resources/4.2/open-distro/tools/wazuh-passwords-tool.sh --max-time 300 ${debug}"
+    eval "curl -so ~/wazuh-passwords-tool.sh ${resources}${WAZUH_MAJOR}/open-distro/tools/wazuh-passwords-tool.sh --max-time 300 ${debug}"
     if [ -n "${verbose}" ]; then
         bash ~/wazuh-passwords-tool.sh -a -v
     else

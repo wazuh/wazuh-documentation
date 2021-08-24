@@ -206,7 +206,7 @@ Elasticsearch malfunctions when the system is swapping memory. It is crucial for
 .. tabs::
 
 
-    .. group-tab:: Systemd Systemd
+    .. group-tab:: Systemd
 
 
       .. code-block:: console
@@ -216,7 +216,7 @@ Elasticsearch malfunctions when the system is swapping memory. It is crucial for
 
 
 
-    .. group-tab:: Systemd SysV Init
+    .. group-tab:: SysV Init
 
 
       .. code-block:: console
