@@ -27,4 +27,4 @@ The Wazuh Cloud SMTP is limited to 100 emails per hour, regardless of the ``emai
      ...
    </global>
 
-The Wazuh Cloud SMTP is now sucessfully configured.
+The Wazuh Cloud SMTP is now successfully configured.
