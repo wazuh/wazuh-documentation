@@ -92,8 +92,6 @@ The files include the following fields:
 
 .. _cloud_cold_storage_access:
 
-.. meta::
-  :description: Learn about cold storage
 
 Access
 ------
@@ -155,8 +153,6 @@ You now have access to your cold storage.
 
 .. _cloud_cold_storage_tools:
 
-.. meta::
-  :description: Learn about cold storage
 
 .. toctree::
   :hidden:
