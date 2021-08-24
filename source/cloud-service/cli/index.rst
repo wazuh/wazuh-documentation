@@ -8,7 +8,7 @@
 CLI
 ===
 
-The Wazuh Cloud Command Line Interface (``wcloud-cli``) is a tool that enables you to interact with Wazuh Cloud using commands in your command-line shell.
+The Wazuh Cloud Command Line Interface (``wcloud-cli``) is a tool that allows you to interact with Wazuh Cloud using commands in your command-line shell.
 
 Requirements
 ------------
