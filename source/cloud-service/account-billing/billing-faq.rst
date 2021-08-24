@@ -66,7 +66,7 @@ Charges are nonrefundable, but if you want to cease using an environment you can
 What is included in my Wazuh Cloud environment?
 -----------------------------------------------
 
-A full set-up of Wazuh, according to your tier and a standard or premium support service.
+A full set-up of Wazuh, according to your tier, and a standard or premium support service.
 
 How can I request more information?
 -----------------------------------
