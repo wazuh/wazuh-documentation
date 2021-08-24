@@ -89,6 +89,13 @@ Compile the WPK package using your SSL certificate and key:
 
 In this example, the Wazuh project's root directory contains the proper ``upgrade.sh`` file.
 
+Definitions:
+    - ``output/myagent.wpk`` is the name of the output WPK package.
+    - ``path/to/wpkcert.pem`` is the path to SSL certificate.
+    - ``path/to/wpkcert.key`` is the path to SSL certificate's key.
+    - ``\*`` is the file (or the files) to be included into WPK package. In this case, all the contents will be added.
+
+
 Windows WPK
 ^^^^^^^^^^^
 
@@ -130,6 +137,15 @@ Compile the WPK package using the MSI package and, your SSL certificate and key:
 .. code-block:: console
 
   # tools/agent-upgrade/wpkpack.py output/myagent.wpk path/to/wpkcert.pem path/to/wpkcert.key path/to/wazuhagent.msi path/to/upgrade.bat path/to/do_upgrade.ps1
+
+Definitions:
+    - ``output/myagent.wpk`` is the name of the output WPK package.
+    - ``path/to/wpkcert.pem`` is the path to SSL certificate.
+    - ``path/to/wpkcert.key`` is the path to SSL certificate's key.
+    - ``path/to/wazuhagent.msi`` is the path to MSI file, downloaded in step 3.
+    - ``path/to/upgrade.bat`` is the path to the upgrade.bat file. Find an example at src/win32 within wazuh repository.
+    - ``path/to/do_upgrade.ps1`` is the path to the do_upgrade.ps1 file. Find an example at src/win32 within wazuh repository.
+
 
 MacOS WPK
 ^^^^^^^^^
@@ -176,14 +192,11 @@ Compile the WPK package using the PKG package and, your SSL certificate and key:
 
 Definitions:
     - ``output/myagent.wpk`` is the name of the output WPK package.
-    - ``path/to/wpkcert.pem`` is the path to your SSL certificate.
-    - ``path/to/wpkcert.key`` is the path to your SSL certificate's key.
-    - ``path/to/upgrade.bat`` is the path to the upgrade.bat file you can find an example at src/win32 within the wazuh repository or write your own.
-    - ``path/to/do_upgrade.ps1`` is the path to the do_upgrade.ps1 file you can find an example at src/win32 within the wazuh repository or write your own.
-    - ``path/to/wazuhagent.msi`` is the path to the MSI you have downloaded in step 3.
-    - ``path/to/upgrade.sh`` is the path to the upgrade.sh file you can find an example at base directory within the wazuh repository or write your own.
-    - ``path/to/pkg_installer_mac.sh`` is the path to the pkg_installer_mac.sh file you can find an example at src/init within the wazuh repository.
-    - ``\*`` is the file (or the files) to be included into the WPK package. In this case, all the contents will be added.
+    - ``path/to/wpkcert.pem`` is the path to SSL certificate.
+    - ``path/to/wpkcert.key`` is the path to SSL certificate's key.
+    - ``path/to/wazuhagent.pkg`` is the path to PKG file, downloaded in step 3.
+    - ``path/to/upgrade.sh`` is the path to the upgrade.sh file. Find an example at base directory within wazuh repository.
+    - ``path/to/pkg_installer_mac.sh`` is the path to the pkg_installer_mac.sh file. Find an example at src/init within wazuh repository.
 
 .. note::
  These are only examples. If you want to distribute a WPK package using these methods, it's important to begin with an empty directory.
