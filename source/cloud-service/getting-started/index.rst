@@ -77,7 +77,7 @@ Follow these steps to access Wazuh WUI:
 
 It is highly recommended for security reasons to change the default password and create your own users. 
 
-.. note:: You can access the Wazuh WUI directly using the URL ``https://<cloud_id>.cloud.wazuh.com``, where ``<cloud_id>`` is the Cloud ID of your environment.
+.. note:: You can access the Wazuh WUI directly using the URL *https://<cloud_id>.cloud.wazuh.com*, where ``<cloud_id>`` is the Cloud ID of your environment.
 
 .. _cloud_getting_started_register_agents:
 
