@@ -59,9 +59,6 @@ Once the environment is ready, you can access the Wazuh WUI and register the age
 Access Wazuh WUI
 ----------------
 
-.. meta::
-  :description: Learn about how to access Wazuh WUI. 
-
 The Wazuh WUI is a flexible and intuitive web interface. Through this WUI, you have access to the tools for mining and visualizing events, giving you a comprehensive insight into your monitored systems.
 
 Follow these steps to access Wazuh WUI:
@@ -84,12 +81,9 @@ It is highly recommended for security reasons to change the default password and
 Register agents
 ---------------
 
-.. meta::
-  :description: Learn about how to register agents. 
-
 To start using Wazuh, you need to install a Wazuh agent on your endpoint and register it in your environment. 
 
-To register an agent, follow these steps:
+Follow these steps to register an agent:
 
 #. Log into the Wazuh WUI.
 
