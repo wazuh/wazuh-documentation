@@ -10,13 +10,13 @@ SMTP configuration
 
 Wazuh can be :ref:`configured to send email alerts <manual_email_report>` to one or more email addresses when certain rules are triggered or for daily event reports.
 
-This configuration requires an SMTP. You can use your own SMTP or the Wazuh Cloud SMTP.
+This configuration requires an SMTP and you can use your own SMTP or the Wazuh Cloud SMTP.
 
 .. note::
 
-  In case your SMTP requires authentication, please open a ticket to configure it.
+  If your SMTP requires authentication, you need to open a ticket through the **Help** section of your Wazuh Cloud Console to configure it.
 
-The Wazuh Cloud SMTP is limited to 100 emails per hour (regardless of **<email_maxperhour>** setting). To enable it, just configure the following settings:
+The Wazuh Cloud SMTP is limited to 100 emails per hour, regardless of the ``email_maxperhour`` setting. To enable the Wazuh Cloud SMTP, configure the following settings:
 
 .. code-block::
 
@@ -27,4 +27,4 @@ The Wazuh Cloud SMTP is limited to 100 emails per hour (regardless of **<email_m
      ...
    </global>
 
-When using the Wazuh Cloud SMTP, the ``email_from`` must be `no-reply@wazuh.com`.
+The Wazuh Cloud SMTP is now sucessfully configured.

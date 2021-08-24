@@ -8,7 +8,9 @@
 Your environment
 ================
 
-The information in this section covers:
+The Wazuh Cloud environment contains all the Wazuh components running on Wazuh Cloud and ready for you to use.
+
+Learn more about your environment in the below sections.
 
 .. toctree::
       :maxdepth: 1

@@ -14,9 +14,9 @@ Wazuh Cloud supports only API key-based authentication.
 
 To obtain an API key:
 
-1. Log in to the Wazuh Cloud Console.
+1. Log in to the `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_.
 
-2. Go to **Account** > **API Keys**.
+2. Go to the **Account** section and select **API Keys**.
   
 3. Click **Generate API Key**.
 
@@ -26,12 +26,16 @@ To obtain an API key:
 
 .. note::
 
-  The API key has no expiration, so it may be used indefinitely. You may have multiple API keys for different purposes and you can revoke them when you no longer need them.
+  The API key has no expiration date, so it can be used indefinitely. You might also have multiple API keys for different purposes and you can revoke them when you no longer need them.
 
 To revoke an API key:
 
-1. Log in to the Wazuh Cloud Console.
+1. Log in to the `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_.
 
-2. Go to **Account** > **API Keys**.
+2. Go to the **Account** section and select **API Keys**.
 
-3. Click the trash icon under the Revoke column for any keys that you want to delete. 
+3. Click the trash icon under the **Revoke** column for any API key you want to delete.
+    
+4. Click **Revoke Api key** to confirm the action.
+   
+The deleted API is removed from the list of API keys.

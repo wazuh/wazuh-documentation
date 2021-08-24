@@ -2,15 +2,15 @@
 
 .. _cloud_apis:
 
-RESTful API
-===========
+Wazuh Cloud API
+===============
 
 .. meta::
-  :description: Learn about Wazuh Cloud RESTful API
+  :description: Learn about Wazuh Cloud API
 
-Wazuh Cloud provides a RESTful API that allows you to perform some operations with your cloud environments such as downloading the cold storage.
+Wazuh Cloud provides a Wazuh Cloud API that allows you to perform some operations with your cloud environments such as downloading the cold storage.
 
-The information in this section covers:
+The information in this section covers: 
 
    .. toctree::
       :maxdepth: 1
