@@ -10,17 +10,17 @@
 Intrusion detection
 ===================
 
-Wazuh owns a highly effective array of tools to perform intrusion detection within user's systems. This set of tools include :ref:`File Integrity monitoring (FIM) <file_integrity>`, :ref:`Log data analysis <log_analysis>`, :ref:`Rootkits detection <rootkits_detection>`, and :ref:`System inventory <system_inventory>` which are useful to identify suspicious anomalies within files, processes, and ports.
+Wazuh owns a highly effective array of tools to perform intrusion detection within user's systems. This set of tools include :ref:`File Integrity Monitoring (FIM) <file_integrity>`, :ref:`Log data analysis <log_analysis>`, :ref:`rootkits detection <rootkits_detection>`, and :ref:`system inventory <system_inventory>` which are useful to identify suspicious anomalies within files, processes, and ports.
 
 Intrusion detection is sometimes called anomaly detection and refers to finding unexpected patterns that differ from the expected behavior of a system. Within intrusion detection, users can find a set of relevant techniques to guarantee higher levels of security. 
 
 Some of these essential anomaly detection techniques are the following:
 
-- Scan files created, deleted, or modified in the monitored directories
+- Scanning files created, deleted, or modified in the monitored directories
 - Log collection, log analysis, and alert creation
-- Check unusual files and permissions
-- Monitor running processes
-- Verify hidden ports
+- Checking unusual files and permissions
+- Monitoring running processes
+- Verifying hidden ports
 
 
 
@@ -35,7 +35,7 @@ Rootcheck and Syscheck are the Wazuh main components responsible for detecting m
 
 Users can strengthen their system's intrusion detection capacities by using Syscheck to scan for file-related anomalies and Rootcheck to detect suspicious hidden processes or ports. 
 
-
+.. _rootkits_detection:
 
 Rootkits detection
 ------------------
@@ -104,15 +104,16 @@ Expand the output to see an example of an alert generated when a hidden process 
     "timestamp": "2020-07-12T18:07:00-0800"
   }
 
-More information on how Wazuh detects rootkits can be found at the :ref:`user manual <manual_anomaly_detection>`.
+More information on how Wazuh detects rootkits can be found in the :ref:`user manual <manual_anomaly_detection>`.
 
 
 
+.. _system_inventory:
 
 System inventory
 ----------------
 
-The :ref:`Wazuh agent <wazuh_agent>` system inventory module collects hardware and software information from the monitored system. This capability helps to identify assets and evaluate the efficacy of patch management.
+The :ref:`Wazuh agent <wazuh_agent>` system inventory module collects hardware and software information from the monitored system. This tool helps to identify assets and evaluate the efficacy of patch management.
 
 The collected inventory data, for each of the monitored endpoints, can be queried via the Wazuh RESTful API and from the web user interface. This includes memory usage, disk space, CPU specs, network interfaces, open ports, running processes, and a list of installed applications.
 
@@ -136,4 +137,4 @@ Example of running processes:
     :align: center
     :wrap_image: No
 
-More information about the Wazuh system inventory module can be found at the :ref:`user manual <syscollector>`.
+More information about the Wazuh system inventory module can be found in the :ref:`user manual <syscollector>`.
