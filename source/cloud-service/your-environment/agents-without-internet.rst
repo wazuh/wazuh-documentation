@@ -28,7 +28,7 @@ To achieve this configuration, follow these steps:
 
 1. Deploy a new instance in a public subnet with internet access.
 
-2. Install NGINX in your instance following the `NGINX documentation <https://docs.nginx.com/nginx/admin-guide/installing-nginx/installing-nginx-open-source/>`_.
+2. Install NGINX on your instance following the `NGINX documentation <https://docs.nginx.com/nginx/admin-guide/installing-nginx/installing-nginx-open-source/>`_.
 
 3. Configure NGINX.
 
