@@ -52,7 +52,7 @@ It is possible to get a new URL by opening a support ticket through the **Help**
 What happens if the tier limit is reached?
 ------------------------------------------
 
-When the tier limit is reached, the oldest events are removed from your index. These data is available in cold storage for you to access them. To learn more about data logging and storage, see the :ref:`Cold storage <cloud_your_environment_accessing_cold_storage>` section.
+When the tier limit is reached, the oldest events are removed from your index. These data is available in cold storage for you to access. To learn more about data logging and storage, see the :ref:`Cold storage <cloud_your_environment_accessing_cold_storage>` section.
 
 Can I move data from cold to hot storage?
 -----------------------------------------
