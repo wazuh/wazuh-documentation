@@ -14,7 +14,7 @@ Wazuh ingests and indexes the events sent by the agents, making the data searcha
 
 This is an example of how Wazuh manages the storing of data:
 
-Let's suppose that an environment with a tier of 100GB has 50 agents connected. Wazuh ingests 5GB on a daily basis, and assuming that 20% of events generate an alert, indexes 1GB per day. In this scenario, the hot storage contains 100 days of alerts (1 GB per day). When that 100 GB of data is exceeded, the oldest data is rotated. All information is still accessible in cold storage.
+Let's suppose that an environment with a tier of 100GB has 50 agents connected. Wazuh ingests 5GB on a daily basis and, assuming that 20% of events generate an alert, indexes 1GB per day. In this scenario, the hot storage contains 100 days of alerts (1 GB per day). When that 100 GB of data is exceeded, the oldest data is rotated. All information is still accessible in cold storage.
 
 .. _cloud_cold_storage_configuration:
 
@@ -109,7 +109,7 @@ The following example describes the steps to follow to list the files of your co
 
 1. Before your start using the Wazuh Cloud API, you need an API key. To generate your API key, see the :ref:`Authentication <cloud_apis_auth>` section.
 
-2. Use the ``POST /storage/token`` endpoint of the :cloud-api-ref:`Wazuh Cloud API <tag/storage>` to get the AWS token and access the cold storage of a specific environment. In this example, we generate an AWS token valid for 3600 seconds for the environment `0123456789ab`.
+2. Use the ``POST /storage/token`` endpoint of the :cloud-api-ref:`Wazuh Cloud API <tag/storage>` to get the AWS token and access the cold storage of a specific environment. In this example, we generate an AWS token valid for 3600 seconds for environment `0123456789ab`.
 
    .. code-block::
 
