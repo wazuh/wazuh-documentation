@@ -171,7 +171,7 @@ Compile the WPK package using the PKG package and, your SSL certificate and key:
 
 .. code-block:: console
 
-  # tools/agent-upgrade/wpkpack.py output/myagent.wpk path/to/wpkcert.pem path/to/wpkcert.key path/to/wazuhagent.pkg path/to/upgrade.sh path/to/pkg_installer.sh
+  # tools/agent-upgrade/wpkpack.py output/myagent.wpk path/to/wpkcert.pem path/to/wpkcert.key path/to/wazuhagent.pkg path/to/upgrade.sh path/to/pkg_installer_mac.sh
 
 
 Definitions:
@@ -182,7 +182,7 @@ Definitions:
     - ``path/to/do_upgrade.ps1`` is the path to the do_upgrade.ps1 file you can find an example at src/win32 within the wazuh repository or write your own.
     - ``path/to/wazuhagent.msi`` is the path to the MSI you have downloaded in step 3.
     - ``path/to/upgrade.sh`` is the path to the upgrade.sh file you can find an example at base directory within the wazuh repository or write your own.
-    - ``path/to/pkg_installer.sh`` is the path to the pkg_installer.sh file you can find an example at src/init within the wazuh repository.
+    - ``path/to/pkg_installer_mac.sh`` is the path to the pkg_installer.sh file you can find an example at src/init within the wazuh repository.
     - ``\*`` is the file (or the files) to be included into the WPK package. In this case, all the contents will be added.
 
 .. note::
