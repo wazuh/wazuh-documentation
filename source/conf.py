@@ -35,9 +35,8 @@ is_latest_release = True
 # The full version, including alpha/beta/rc tags
 # Important: use a valid branch (4.0) or, preferably, tag name (v4.0.0)
 release = '4.2'
-api_tag = 'v4.1.1'
-temp = 'master'
-apiURL = 'https://raw.githubusercontent.com/wazuh/wazuh/'+temp+'/api/api/spec/spec.yaml'
+api_tag = 'v4.2.0'
+apiURL = 'https://raw.githubusercontent.com/wazuh/wazuh/'+api_tag+'/api/api/spec/spec.yaml'
 
 # -- General configuration ------------------------------------------------
 
