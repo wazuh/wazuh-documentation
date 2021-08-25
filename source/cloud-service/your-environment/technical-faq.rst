@@ -6,7 +6,7 @@ Technical FAQ
 =============
 
 .. meta::
-  :description: Get answers to the most frequently asked questions about the Wazuh Cloud in this technical FAQ. 
+  :description: Get answers to the most frequently asked questions about the Wazuh Cloud in this technical FAQ and get the most out of the Wazuh Cloud service.  
 
 
 - `How can I send data to my environment?`_
