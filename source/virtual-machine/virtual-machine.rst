@@ -20,15 +20,15 @@ This virtual appliance, available `in this link <https://packages.wazuh.com/|CUR
     - Kibana: |ELASTICSEARCH_LATEST_OVA|
     - Wazuh Kibana plugin: |WAZUH_LATEST_OVA|-|ELASTICSEARCH_LATEST_OVA|
 
-First, import the OVA in the virtualization platform and run the virtual machine. The password of the user ``root`` is ``wazuh`` and the username and password for the Wazuh API are ``wazuh-wui/wazuh-wui``. The `following video <https://www.youtube.com/watch?v=uijZuneDPPk>`_ explains how to import and run the virtual machine.
+First, import the OVA in the virtualization platform and run the virtual machine. The password of the user ``root`` is ``wazuh`` and the username and password for the ``wazuh`` user is ``wazuh``.
 
 To access the web interface: 
 
   .. code-block:: none
 
       URL: https://<wazuh_server_ip>
-      user: admin
-      password: admin
+      user: wazuh
+      password: wazuh
 
 All components included in this virtual image are configured to work out-of-the-box without the need to modify any settings. However, all components can be fully customized. These are the configuration files locations:
 
@@ -38,6 +38,9 @@ All components included in this virtual image are configured to work out-of-the-
   - Kibana: ``/etc/kibana/kibana.yml``
 
 In case of using VirtualBox, once the virtual machine is imported it may run into issues caused by time skew when VirtualBox synchronizes the time of the guest machine. To avoid this situation, enable the ``Hardware Clock in UTC Time`` option in the ``System`` tab of the virtual machine configuration.
+
+.. note::
+  You need to enable RBAC in the kibana wazuh user manually
 
 .. note::
   By default, the network interface type is bridge. The VM will attempt to obtain an IP address from the network DHCP server. Alternatively, a static IP address can be set by configuring the appropriate network files in the CentOS operating system on which the VM is based.
