@@ -40,9 +40,6 @@ All components included in this virtual image are configured to work out-of-the-
 In case of using VirtualBox, once the virtual machine is imported it may run into issues caused by time skew when VirtualBox synchronizes the time of the guest machine. To avoid this situation, enable the ``Hardware Clock in UTC Time`` option in the ``System`` tab of the virtual machine configuration.
 
 .. note::
-  You need to enable RBAC in the kibana wazuh user manually
-
-.. note::
   By default, the network interface type is bridge. The VM will attempt to obtain an IP address from the network DHCP server. Alternatively, a static IP address can be set by configuring the appropriate network files in the CentOS operating system on which the VM is based.
 
 
