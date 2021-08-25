@@ -6,7 +6,7 @@ Billing FAQ
 ===========
 
 .. meta::
-  :description: Some Frequently Asked Questions about billing. 
+  :description: Get answers to the most frequently asked questions about the Wazuh Cloud billing in this FAQ.
 
 - `When is my credit card charged?`_
 
