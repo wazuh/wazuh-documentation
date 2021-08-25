@@ -8,7 +8,7 @@ Authentication
 ==============
 
 .. meta::
-  :description: Wazuh Cloud supports only API key-based authentication. Learn how to obtain and revoke an API key in this section. 
+  :description: Wazuh Cloud supports API key-based authentication. Learn how to obtain and revoke an API key directly from the Wazuh Cloud Console.
 
 Wazuh Cloud supports only API key-based authentication.
 
