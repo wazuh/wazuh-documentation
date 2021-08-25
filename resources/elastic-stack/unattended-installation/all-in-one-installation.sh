@@ -18,12 +18,13 @@ WAZUH_REV="1"
 ELK_VER="7.11.2"
 if [ -n "$(command -v yum)" ]; then
     sys_type="yum"
-elif [ -n "$(command -v zypper)" ]
-then
-    sys_type="zypper"
-elif [ -n "$(command -v apt-get)" ]
-then
-    sys_type="apt-get"
+    sep="-"
+elif [ -n "$(command -v zypper)" ]; then
+    sys_type="zypper"   
+    sep="-"  
+elif [ -n "$(command -v apt-get)" ]; then
+    sys_type="apt-get"   
+    sep="="
 fi
 
 logger() {
