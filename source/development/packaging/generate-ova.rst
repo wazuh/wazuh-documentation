@@ -33,9 +33,9 @@ Execute the ``generate_ova.sh`` script, with the different options you desire.
   :class: output
 
   General usage: generate_ova.sh [OPTIONS]
-    -w,    --wazuh            [Optional] Select the wazuh major version [4.1, 4.2]. By default: 4.2
+    -w,    --wazuh            [Optional] Select the Wazuh major version [4.1, 4.2]. By default: 4.2
     -r,    --repository       [Optional] Select the software repository [prod/dev]. By default: prod
-    -s,    --store <path>     [Optional] Set the destination absolute path where the ova file will be stored.
+    -s,    --store <path>     [Optional] Set the destination absolute path where the OVA file will be stored.
     -c,    --checksum         [Optional] Generate checksum [yes/no]. By default: no
     -g,    --debug            [Optional] Set debug mode on [yes/no]. By default: no
     -h,    --help             [  Util  ] Show this help.
@@ -43,7 +43,7 @@ Execute the ``generate_ova.sh`` script, with the different options you desire.
 The options for the repository indicates whether the packages used to install Wazuh are the production ones or not.
 
  * prod: The OVA uses released packages.
- * dev: The OVA uses not released packages.
+ * dev: The OVA uses pre-release packages.
 
 Below, you will find some examples of how to build a Wazuh virtual machine.
 
