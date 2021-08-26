@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about rootchecks configuration options.
+  :description: Learn more about monitoring security policies with Wazuh. In this section of our documentation you can check out more about the rootcheck configuration. 
 
 Configuration
 =============
