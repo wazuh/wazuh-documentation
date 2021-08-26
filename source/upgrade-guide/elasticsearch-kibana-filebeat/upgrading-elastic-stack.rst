@@ -427,7 +427,7 @@ Upgrading Kibana
 
     If you have a custom index pattern, be sure to replace it accordingly.
 
-#. Clean the browser's cache and cookies.
+#. Clear the browser's cache and cookies.
 
 
 
