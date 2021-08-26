@@ -12,9 +12,6 @@ Registering Wazuh agents
 
 	Since Wazuh 4.0, by default, the agent registers automatically with the manager through enrollment. Configuration details can be found on the :ref:`Enrollment section <reference_ossec_client>`.
 
-.. meta::
-  :description: Learn more about the different methods that can be used to register Wazuh agents against the Wazuh manager.
-
 The security event data collection from the Wazuh agent requires enabling the communication with the Wazuh manager.
 
 The Wazuh manager needs to know which Wazuh agent is sending the security events and if they are authorized. This step is called Wazuh agent registration and can be performed using the ``registration service``. Using the port 1515 and TCP protocol, the Wazuh manager will attend the registration request of the Wazuh agent using a TLS connection. The Wazuh agent will obtain an unique
