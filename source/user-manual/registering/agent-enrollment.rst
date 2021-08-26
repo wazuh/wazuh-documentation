@@ -88,9 +88,9 @@ In the next example, we show how an Ubuntu Wazuh Agent can be configured, regist
 
 .. code-block:: console
 
-  curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -
-  echo "deb https://packages.wazuh.com/4.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
-  apt-get update
+  # curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -
+  # echo "deb https://packages.wazuh.com/4.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
+  # apt-get update
   
  
 
@@ -98,7 +98,7 @@ In the next example, we show how an Ubuntu Wazuh Agent can be configured, regist
 
 .. code-block:: console  
 
-  WAZUH_MANAGER="192.168.2.129" apt-get install wazuh-agent
+  # WAZUH_MANAGER="192.168.2.129" apt-get install wazuh-agent
   
  
 
@@ -106,9 +106,9 @@ In the next example, we show how an Ubuntu Wazuh Agent can be configured, regist
 
 .. code-block:: console
 
-  systemctl daemon-reload
-  systemctl enable wazuh-agent
-  systemctl start wazuh-agent
+  # systemctl daemon-reload
+  # systemctl enable wazuh-agent
+  # systemctl start wazuh-agent
 
 After following these steps, we can see the below logs on ``ossec.log`` confirming the enrollment was successful.	
 
@@ -129,7 +129,7 @@ On the manager side, the agent can be found and appear at ``active`` status afte
  
 .. code-block:: console
 
-    curl -k -X GET "https://localhost:55000/agents?pretty=true&offset=1&limit=2&select=status%2Cid%2Cmanager%2Cname%2Cnode_name%2Cversion&status=active" -H "Authorization: Bearer $TOKEN"
+    # curl -k -X GET "https://localhost:55000/agents?pretty=true&offset=1&limit=2&select=status%2Cid%2Cmanager%2Cname%2Cnode_name%2Cversion&status=active" -H "Authorization: Bearer $TOKEN"
  
 
 .. thumbnail:: ../../images/manual/managing-agents/API.png
