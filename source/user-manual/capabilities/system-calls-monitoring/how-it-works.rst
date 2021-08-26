@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+   :description: Learn more about monitoring system calls with Wazuh in this guide of our documentation: control rules, file system rules and system call rules. 
+   
 How it works
 ============
 
