@@ -86,7 +86,7 @@ In the next example, we show how an Ubuntu Wazuh Agent can be configured, regist
 
 1. Add the Wazuh repository:
 
-.. code-block:: xml
+.. code-block:: console
 
   curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -
   echo "deb https://packages.wazuh.com/4.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
@@ -96,7 +96,7 @@ In the next example, we show how an Ubuntu Wazuh Agent can be configured, regist
 
 2. Deploy Wazuh Agent with Manager IP defined:
 
-.. code-block:: xml  
+.. code-block:: console  
 
   WAZUH_MANAGER="192.168.2.129" apt-get install wazuh-agent
   
@@ -104,7 +104,7 @@ In the next example, we show how an Ubuntu Wazuh Agent can be configured, regist
 
 3. Start Wazuh Agent:
 
-.. code-block:: xml
+.. code-block:: console
 
   systemctl daemon-reload
   systemctl enable wazuh-agent
@@ -127,9 +127,9 @@ And ``client.keys`` can now contain the obtained key.
 
 On the manager side, the agent can be found and appear at ``active`` status after a few seconds. Running the following command shows the new registered agent.
  
-.. code-block:: xml
+.. code-block:: console
 
-  curl -k -X GET "https://localhost:55000/agents?pretty=true&offset=1&limit=2&select=status%2Cid%2Cmanager%2Cname%2Cnode_name%2Cversion&status=active" -H "Authorization: Bearer $TOKEN"
+    curl -k -X GET "https://localhost:55000/agents?pretty=true&offset=1&limit=2&select=status%2Cid%2Cmanager%2Cname%2Cnode_name%2Cversion&status=active" -H "Authorization: Bearer $TOKEN"
  
 
 .. thumbnail:: ../../images/manual/managing-agents/API.png
@@ -137,7 +137,7 @@ On the manager side, the agent can be found and appear at ``active`` status afte
   :align: left
   :width: 100%
 
-  
+
 Wazuh enrollment method highly reduces the burden of registering new agents with the manager. Jointly with deployment using variables, this setup can be performed in only three easy steps.
 
 This new feature reduces the setup times for our users, allowing them to have Wazuh ready and running in their environment sooner. In addition, this improvement provides a recovery mechanism that eliminates the risk of blocking the monitoring of massive agents in case the client keys get lost.
