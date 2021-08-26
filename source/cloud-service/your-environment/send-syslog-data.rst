@@ -3,7 +3,7 @@
 .. _cloud_your_environment_send_syslog:
 
 .. meta::
-  :description: Learn about your environment
+  :description: Wazuh agents work on a wide range of operating systems, but if this is not possible, you can forward syslog events to your environment.  
 
 Forward syslog events
 =====================

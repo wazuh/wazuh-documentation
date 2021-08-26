@@ -3,7 +3,7 @@
 .. _cloud_your_environment_configure_email_alerts:
 
 .. meta::
-  :description: Learn about how to configure your email alerts
+  :description: Wazuh can be configured to send email alerts to one or more email addresses when certain rules are triggered or for daily event reports. Learn more about it here. 
 
 SMTP configuration
 ==================

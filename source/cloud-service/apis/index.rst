@@ -6,7 +6,7 @@ Wazuh Cloud API
 ===============
 
 .. meta::
-  :description: Learn about Wazuh Cloud API
+  :description: Wazuh Cloud provides a Wazuh Cloud API that allows you to perform some operations with your cloud environments. Learn more about it here. 
 
 Wazuh Cloud provides a Wazuh Cloud API that allows you to perform some operations with your cloud environments such as downloading the cold storage.
 

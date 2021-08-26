@@ -6,7 +6,7 @@ Update billing and operational contacts
 =======================================
 
 .. meta::
-  :description: Learn how to update billing and operational contacts. 
+  :description: Check how to update billing and operational contacts through the Wazuh Cloud Console in this section.
 
 You can specify billing and operational contacts in addition to the primary email address of your account. 
 

@@ -6,7 +6,7 @@ Cancellation
 =============
 
 .. meta::
-  :description: Learn how to cancel an environment. 
+  :description: Check out the process to cancel an environment in Wazuh Cloud. The environment will be removed at the end of the billing cycle.
 
 To cancel your environment:
 
