@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Rootcheck allows to define policies in order to check if the agents meet the requirement specified. Learn more about how it works in this section. 
+  
 How it works
 ============
 
