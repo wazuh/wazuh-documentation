@@ -29,8 +29,6 @@ Configuration options for file integrity monitoring:
 - `prefilter_cmd`_
 - `process_priority`_
 - `registry_ignore`_
-- `remove_old_diff`_
-- `restart_audit`_
 - `scan_day`_
 - `scan_on_start`_
 - `scan_time`_
@@ -601,57 +599,6 @@ Example:
 
  <registry_ignore>HKEY_LOCAL_MACHINE\Security\Policy\Secrets</registry_ignore>
  <registry_ignore type="sregex">\Enum$</registry_ignore>
-
-
-.. _reference_ossec_syscheck_remove_old_diff:
-
-remove_old_diff
----------------
-
-.. versionadded:: 3.4.0
-.. deprecated:: 3.8.0
-
-Specifies if Syscheck should delete the local snapshots that are not currently being monitored. Since version 3.8.0, Syscheck will always purge those snapshots.
-
-+--------------------+---------+
-| **Default value**  | yes     |
-+--------------------+---------+
-| **Allowed values** | yes, no |
-+--------------------+---------+
-
-Example:
-
-.. code-block:: xml
-
- <remove_old_diff>yes</remove_old_diff>
-
-
-.. _reference_ossec_syscheck_restart_audit:
-
-restart_audit
--------------
-
-.. versionadded:: 3.5.0
-.. deprecated:: 3.9.0
-
-.. note::  This option is set inside the ``<whodata>`` tag since version 3.9.0.
-
-Allows the system to restart ``Auditd`` after installing the plugin. Note that setting this field to ``no`` the new
-whodata rules won't be applied automatically.
-
-+--------------------+---------+
-| **Default value**  | yes     |
-+--------------------+---------+
-| **Allowed values** | yes, no |
-+--------------------+---------+
-
-Example for ``restart_audit`` since v3.9.0:
-
-.. code-block:: xml
-
- <whodata>
-  <restart_audit>yes</restart_audit>
- </whodata>
 
 
 .. _reference_ossec_syscheck_scan_day:

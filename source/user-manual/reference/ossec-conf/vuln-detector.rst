@@ -25,8 +25,6 @@ Options
 - `ignore_time`_
 - `provider`_
 
-.. note:: The options ``update_ubuntu_oval``/``update_redhat_oval`` (since 3.5) and ``feed`` (since 3.11) are deprecated. It is recommended to use ``provider`` instead.
-
 +---------------------------+-----------------------------+
 | Options                   | Allowed values              |
 +===========================+=============================+
