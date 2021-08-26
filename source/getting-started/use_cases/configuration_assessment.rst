@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Check out some use cases of the Wazuh Security Configuration Assessment capability.
+  :description: Automated Security Configuration Assessment is an essential capability to improve the enterprise security posture and to reduce its attack surface. Learn more about it here. 
 
 
 .. _configuration_assessment:
