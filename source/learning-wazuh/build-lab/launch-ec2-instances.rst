@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: In this section of the Wazuh documentation we will show you how to launch the Wazuh Server, the Elastic Server, and the Linux Agent as CentOS 7 EC2 instances. 
+  
 .. _build_lab_launch_ec2_instances:
 
 Launch the EC2 instances
