@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+	:description: Check out this section about the local configuration (ossec.conf) of Wazuh. In this section, you can learn more about the wodle name = “syscollector
+	
 .. _wodle-syscollector:
 
 wodle name="syscollector"
