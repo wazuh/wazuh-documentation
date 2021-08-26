@@ -1,5 +1,10 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+    :description: 
+  Check out this installation guide of how to create an environment consisting of a Wazuh server, an Elastic Stack server, and a Wazuh agent, in a simple and intuitive way.  
+  
+  
 .. _wazuh_ansible_guide:
 
 Installation Guide
