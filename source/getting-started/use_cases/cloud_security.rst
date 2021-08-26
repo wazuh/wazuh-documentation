@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: The Wazuh agent provides a module to monitor and secure your AWS cloud infrastructure, as well as Microsoft Azure and Google Cloud Platform
+    :description: Learn more about the Cloud security monitoring provided by Wazuh in Amazon Web Services, Microsoft Azure, and Google Cloud Platform. 
 
 .. _cloud_security:
 
