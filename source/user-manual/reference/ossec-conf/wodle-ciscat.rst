@@ -5,8 +5,6 @@
 wodle name="cis-cat"
 ========================
 
-.. versionadded:: 3.1.0
-
 .. topic:: XML section name
 
 	.. code-block:: xml
@@ -173,8 +171,6 @@ The interval option is conditioned by the following described options ``day``, `
 day
 ^^^
 
-.. versionadded:: 3.5.0
-
 Day of the month to run the CIS-CAT scan.
 
 +--------------------+--------------------------+
@@ -190,8 +186,6 @@ Day of the month to run the CIS-CAT scan.
 
 wday
 ^^^^
-
-.. versionadded:: 3.5.0
 
 Day of the week to run the CIS-CAT scan. This option is **not compatible** with the ``day`` option.
 
@@ -214,8 +208,6 @@ Day of the week to run the CIS-CAT scan. This option is **not compatible** with 
 
 time
 ^^^^
-
-.. versionadded:: 3.5.0
 
 Time of the day to run the scan. It has to be represented in the format *hh:mm*.
 

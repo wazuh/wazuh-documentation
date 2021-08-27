@@ -5,8 +5,6 @@
 Perl-compatible Regular Expressions
 ***********************************
 
-.. versionadded:: 4.1.0
-
 Log collecting and processing is one of the most important features in Wazuh,
 allowing to know the status in real-time of Wazuh agent operating system and
 their running applications. Incorporation of PCRE regex support along with
