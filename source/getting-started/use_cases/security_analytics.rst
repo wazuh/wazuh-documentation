@@ -27,16 +27,16 @@ Security analytics tools give users the visibility needed to perform thread prev
 In addition, these tools assist users in detecting the possible presence of rootkits and collecting inventory data from different sources such as operating systems, processes, applications, ports, and network interfaces. FIM results can be observed in the **Integrity monitoring** module dashboard of the :ref:`Wazuh Kibana plugin<kibana_app>`.
 
 .. thumbnail:: ../../images/getting_started/integrity_monitoring_1.png 
-  :title: Kibana app: FIM overview
+  :title: FIM overview
   :align: center
   :width: 100%
 
 .. thumbnail:: ../../images/getting_started/integrity_monitoring_2.png 
-  :title: Kibana app: FIM dashboard
+  :title: FIM dashboard
   :align: center
   :width: 100%
 
 .. thumbnail:: ../../images/getting_started/integrity_monitoring_3.png 
-  :title: Kibana app: FIM events
+  :title: FIM events
   :align: center
   :width: 100%
