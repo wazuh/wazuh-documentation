@@ -170,27 +170,30 @@ Upgrade the Wazuh Kibana plugin
 
 #. Install the new Wazuh Kibana plugin. Replace the Kibana version if necessary:
 
-   .. tabs::
+    .. code-block:: console
 
-    .. group-tab:: From the URL
+      # cd /usr/share/kibana/
+      # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|-1.zip
 
-      .. code-block:: console
-
-        # cd /usr/share/kibana/
-        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|-1.zip
-
-    .. group-tab:: From the package
-
-      .. code-block:: console
-
-        # cd /usr/share/kibana/
-        # sudo -u kibana bin/kibana-plugin install file:///path/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|-1.zip
 
 
 #. Restart Kibana:
 
-   .. include:: ../_templates/installations/basic/elastic/common/enable_kibana.rst
+   .. tabs::
    
+     .. group-tab:: Systemd
+    
+      .. code-block:: console
+    
+       # systemctl restart kibana
+    
+     .. group-tab:: SysV init
+    
+      .. code-block:: console
+    
+       # service kibana restart
+    
+      
 #. Clear the browser’s cache and cookies.
 
    
