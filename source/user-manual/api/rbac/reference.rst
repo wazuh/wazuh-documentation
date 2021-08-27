@@ -375,10 +375,6 @@ cluster:status
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 - :api-ref:`GET /cluster/status <operation/api.controllers.cluster_controller.get_status>` (`*:*`_)
 
-cluster:update_api_config
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-- .. deprecated:: 4.0.4
-
 cluster:update_config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 - :api-ref:`PUT /cluster/{node_id}/configuration <operation/api.controllers.cluster_controller.update_configuration>` (`node:id`_)
@@ -485,10 +481,6 @@ manager:read
 manager:restart
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 - :api-ref:`PUT /manager/restart <operation/api.controllers.manager_controller.put_restart>` (`*:*`_)
-
-manager:update_api_config
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-- .. deprecated:: 4.0.4
 
 manager:update_config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
