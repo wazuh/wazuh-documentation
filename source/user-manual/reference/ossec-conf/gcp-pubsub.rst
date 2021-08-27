@@ -27,6 +27,7 @@ Main options
 - `subscription_name`_
 - `credentials_file`_
 - `max_messages`_
+- `num_threads`_
 - `logging`_
 
 Scheduling options
@@ -89,13 +90,29 @@ For example ``<credentials_file>wodles/gcp-pubsub/credentials.json</credentials_
 
 max_messages
 ^^^^^^^^^^^^
-Number of maximum messages pulled in each iteration.
+Number of maximum messages pulled in each iteration. This value does not depend on the number of threads used.
 
 +--------------------+-------------+
 | **Default value**  | 100         |
 +--------------------+-------------+
 | **Allowed values** | Any integer |
 +--------------------+-------------+
+
+num_threads
+^^^^^^^^^^^^
+.. versionadded:: 4.2.1
+
+Number of threads used to pull in each iteration. The number of maximum messages will be divided between all the configured threads.
+
++--------------------+-------------+
+| **Default value**  | 1           |
++--------------------+-------------+
+| **Allowed values** | Any integer |
++--------------------+-------------+
+
+.. note::
+
+  The number of threads will be truncated to the maximum allowed, depending on the number of CPU cores. The maximum value is ``number_of_physical_cores * 5``.
 
 logging
 ^^^^^^^^
