@@ -16,19 +16,14 @@ Supported operating systems
 The Wazuh server and Elastic Stack components can be installed in the following Linux operating systems:
 
 * Amazon Linux 2
-* Arch Linux
-* CentOS Stream 8
-* CentOS Linux 7 and 8
-* Debian 8 ELTS, 9 LTS, and 10
-* Fedora Linux 33 and 34
-* Gentoo Linux
-* Mageia 8
-* openSUSE Tumbleweed
-* openSUSE Leap 15.2 and 15.3
-* Oracle Linux 6 Extended, 7, and 8
-* Red Hat Enterprise Linux 6 ELS, 7, and 8
-* SUSE Linux enterprise server 11 LTSS, 12, and 15
-* Ubuntu 14.04 ESM, 16.04 ESM, 18.04 LTS, 20.04 LTS, and 21.04
+* CentOS 7 and later
+* Debian 8 ELTS and later
+* Fedora Linux 33 and later
+* openSUSE Tumbleweed, Leap 15.2 and later
+* Oracle Linux 6 Extended and later
+* Red Hat Enterprise Linux 6 ELS and later
+* SUSE Linux enterprise server 11 LTSS and later
+* Ubuntu 14.04 ESM and later
 
 All-in-one deployment
 ---------------------
