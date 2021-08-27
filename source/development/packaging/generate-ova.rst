@@ -33,7 +33,6 @@ Execute the ``generate_ova.sh`` script, with the different options you desire.
   :class: output
 
   General usage: generate_ova.sh [OPTIONS]
-    -w,    --wazuh            [Optional] Select the Wazuh major version [4.1, 4.2]. By default: 4.2
     -r,    --repository       [Optional] Select the software repository [prod/dev]. By default: prod
     -s,    --store <path>     [Optional] Set the destination absolute path where the OVA file will be stored.
     -c,    --checksum         [Optional] Generate checksum [yes/no]. By default: no
