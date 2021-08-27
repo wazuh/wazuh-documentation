@@ -84,8 +84,6 @@ Data from FIM records reported by the agent
 sync_info
 ---------
 
-.. versionadded:: 3.12.0
-
 It stores the information related to the synchronization between the databases of the agents and the manager
 
 +-----------------------+---------------------------------------------------------+-------------------------------------------+

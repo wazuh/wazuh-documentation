@@ -5,8 +5,6 @@
 wodle name="aws-s3"
 ===================
 
-.. versionadded:: 3.2.0
-
 .. topic:: XML section name
 
 	.. code-block:: xml

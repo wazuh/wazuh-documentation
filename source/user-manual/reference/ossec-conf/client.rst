@@ -22,8 +22,6 @@ Subsections
 server
 ^^^^^^
 
-.. versionadded:: 3.0.0
-
 Configures the connection parameters for each server an agent connects to.
 
 Server subsection options
@@ -182,8 +180,6 @@ Toggles on and off the automatic restart of agents when a new valid configuratio
 
 crypto_method
 ^^^^^^^^^^^^^
-
-.. versionadded:: 3.5.0
 
 Choose the encryption of the messages that the agent sends to the manager.
 
