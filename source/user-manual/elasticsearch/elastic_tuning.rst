@@ -31,7 +31,7 @@ Changing the default passwords of Elasticsearch is highly recommended in order t
     
       .. code-block:: console
       
-        # curl -so wazuh-passwords-tool.sh https://packages.wazuh.com/resources/4.1/open-distro/tools/wazuh-passwords-tool.sh
+        # curl -so wazuh-passwords-tool.sh https://packages.wazuh.com/resources/4.2/open-distro/tools/wazuh-passwords-tool.sh
 
     - Run the script:
 
@@ -206,7 +206,7 @@ Elasticsearch malfunctions when the system is swapping memory. It is crucial for
 .. tabs::
 
 
-    .. group-tab:: Systemd Systemd
+    .. group-tab:: Systemd
 
 
       .. code-block:: console
@@ -216,7 +216,7 @@ Elasticsearch malfunctions when the system is swapping memory. It is crucial for
 
 
 
-    .. group-tab:: Systemd SysV Init
+    .. group-tab:: SysV Init
 
 
       .. code-block:: console

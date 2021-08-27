@@ -8,9 +8,6 @@
 Overview
 ========
 
-.. meta::
-  :description: The Wazuh user manual describes how to configure and use each of the components, which consist of the Wazuh server, the Wazuh agent, and Elastic Stack.
-
 Wazuh is a comprehensive and open source platform  for threat detection, security monitoring, incident response and regulatory compliance. This manual describes how to configure and use each of Wazuh components, which consist of the Wazuh server, the Wazuh agent, and Elastic Stack.
 
 Wazuh server

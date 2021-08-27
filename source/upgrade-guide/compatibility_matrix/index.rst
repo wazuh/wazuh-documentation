@@ -113,6 +113,8 @@ The compatibility between the Wazuh agent and the Wazuh manager is guaranteed wh
 
     The Wazuh manager is also compatible with **OSSEC agents**, however, not all capabilities will be available for them. 
 
+.. _wazuh_kibana_compatibility_matrix:    
+
 Wazuh and Wazuh Kibana plugin
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

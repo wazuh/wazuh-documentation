@@ -158,7 +158,7 @@ In the commands below ``127.0.0.1`` IP address is used. If Elasticsearch is boun
 
           .. code-block:: console
 
-            # apt install opendistroforelasticsearch=|OPEN_DISTRO_LATEST|
+            # apt install opendistroforelasticsearch=|OPEN_DISTRO_LATEST|-1
 
 
         .. group-tab:: ZYpp
@@ -466,7 +466,7 @@ Upgrading Kibana
 
     If you have a custom index pattern, be sure to replace it accordingly.      
 
-#. Clean the browser's cache and cookies.
+#. Clear the browser's cache and cookies.
 
 
 Disabling the repository

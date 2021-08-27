@@ -20,15 +20,15 @@ This virtual appliance, available `in this link <https://packages.wazuh.com/|CUR
     - Kibana: |ELASTICSEARCH_LATEST_OVA|
     - Wazuh Kibana plugin: |WAZUH_LATEST_OVA|-|ELASTICSEARCH_LATEST_OVA|
 
-First, import the OVA in the virtualization platform and run the virtual machine. The password of the user ``root`` is ``wazuh`` and the username and password for the Wazuh API are ``wazuh-wui/wazuh-wui``. The `following video <https://www.youtube.com/watch?v=uijZuneDPPk>`_ explains how to import and run the virtual machine.
+First, import the OVA in the virtualization platform and run the virtual machine. The password of the user ``root`` is ``wazuh`` and the username and password for the ``wazuh`` user is ``wazuh``.
 
 To access the web interface: 
 
   .. code-block:: none
 
       URL: https://<wazuh_server_ip>
-      user: admin
-      password: admin
+      user: wazuh
+      password: wazuh
 
 All components included in this virtual image are configured to work out-of-the-box without the need to modify any settings. However, all components can be fully customized. These are the configuration files locations:
 
