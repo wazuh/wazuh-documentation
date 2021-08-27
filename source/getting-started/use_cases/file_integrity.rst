@@ -92,9 +92,10 @@ Expand the output to see an example response of this use case.
     "timestamp": "2020-07-12T18:07:57.676+0000"
   }
 
-Users can find a comprehensive summary of changes in files and registry keys in the FIM dashboard. In addition, it provides drill-down capabilities to view all of the details of the alerts triggered.
+In the *Integrity monitoring* module of the Wazuh dashboard, users can view all of the details of the alerts triggered and find a comprehensive summary of changes in files and registry keys. 
 
 .. thumbnail:: ../../images/getting_started/use_case_fim.png
+   :title: Integrity monitoring module
    :align: center
    :wrap_image: No
 
