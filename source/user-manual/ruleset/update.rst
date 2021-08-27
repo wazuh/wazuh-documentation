@@ -5,6 +5,8 @@
 Update ruleset
 ==============
 
+.. deprecated:: 4.2.0
+
 Run the ``update_ruleset`` script to update the Wazuh ruleset. You should not need to make any other changes to accommodate the updated rules.
 
 Usage examples
