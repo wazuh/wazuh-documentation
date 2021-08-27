@@ -40,7 +40,7 @@ Users can strengthen their system's intrusion detection capacities by using Sysc
 Rootkits detection
 ------------------
 
-The :ref:`Wazuh agent <wazuh_agent>` periodically scans the monitored system to detect rootkits both at the kernel and the user space level. This kind of malware usually replaces or changes the components of the existing operating system, in order to alter the system behavior. Rootkits can hide other processes, files, and network connections.
+The :ref:`Wazuh agent <wazuh_agent>` periodically scans the monitored system to detect rootkits both at the kernel and the user space level. This kind of malware usually replaces or changes the components of the existing operating system to alter the system's behavior. Rootkits can hide other processes, files, and network connections.
 
 Wazuh uses different detection mechanisms to search for system anomalies or well-known intrusions. The *Rootcheck* component does this periodically:
 
