@@ -108,6 +108,12 @@ To perform the upgrade locally, follow the instructions for the operating system
          baseurl=https://packages.wazuh.com/4.x/yum/
          protect=1
          EOF 
+    
+    #. Refresh the repository:
+
+       .. code-block:: console
+ 
+         # zypper refresh     
 
 
     #. Upgrade the Wazuh agent to the latest version:
