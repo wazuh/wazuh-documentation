@@ -46,3 +46,12 @@ The data flow between the Wazuh module and Cloud Pub/Sub looks as follows:
 .. thumbnail:: ../images/gcp/gcp-data-flow.png
     :align: center
     :width: 100%
+
+Performance
+-----------
+
+The Wazuh module for GCP Pub/Sub uses a `Python library <https://googleapis.dev/python/pubsub/2.7.1/index.html/>`_ to pull the messages from the topic. Its implementation has design limitations when integrated with the Wazuh module.
+
+To improve this integration performance, it is highly recommended to use horizontal scalability, configuring this module for the same subscription on different machines (managers or agents).
+
+In addition, it is possible to use multiple threads to pull a larger number of messages using the ``num_threads`` parameter in the module configuration.
