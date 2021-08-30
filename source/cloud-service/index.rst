@@ -4,7 +4,7 @@
 
 
 .. meta::
-  :description: Get started with Wazuh Cloud. 
+  :description: Wazuh offers cloud-delivered protection. Prevent, detect, and respond to threats in real-time. Learn more about Wazuh Cloud here. 
 
 Cloud service
 =============

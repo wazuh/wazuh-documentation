@@ -3,7 +3,7 @@
 .. _cloud_your_environment_agents_without_internet:
 
 .. meta::
-  :description: Learn about connecting agents without internet to your environment
+  :description: Learn more about how to connect agents without Internet access. Wazuh provides different approaches to securely connect your private network to your environment.
 
 Agents without Internet access
 ===============================

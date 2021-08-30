@@ -1,7 +1,7 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
 .. meta::
-  :description: Learn how to get started with Wazuh Cloud Service. We provide a free trial for you to create a cloud environment and explore the Wazuh Cloud. 
+  :description: Learn more about how to get started with Wazuh Cloud Service. Explore the potential of Wazuh Cloud with your 14-day free trial.
 
 .. _cloud_getting_started:
 

@@ -6,7 +6,7 @@ Add your billing details
 ========================
 
 .. meta::
-  :description: Learn how to add your billing details. 
+  :description: Learn how to add your billing details to your Wazuh Cloud account. This step is required if you wish to continue using your environment after the free trial. 
 
 If you want to continue using your environment beyond the trial period, you need to add credit card details to your Wazuh Cloud account. Your credit card information is sent securely to our billing provider and stored with them.
 

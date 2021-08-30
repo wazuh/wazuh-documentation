@@ -3,7 +3,7 @@
 .. _cloud_wazuh_cloud_cli:
 
 .. meta::
-  :description: Learn about Wazuh Cloud tools
+  :description: The Wazuh Cloud Command Line Interface allows you to interact with Wazuh Cloud using commands in your command-line shell. Learn more about it. 
 
 CLI
 ===

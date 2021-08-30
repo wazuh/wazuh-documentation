@@ -3,7 +3,7 @@
 .. _cloud_your_environment_accessing_cold_storage:
 
 .. meta::
-  :description: Learn about accessing your environment's cold storage
+  :description: Wazuh provides two types of storage for your indexed data: hot storage and cold storage. Learn more about the cold storage in this section. 
 
 Cold storage
 ============

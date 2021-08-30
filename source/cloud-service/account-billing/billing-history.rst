@@ -6,7 +6,7 @@ See your billing cycle and history
 ==================================
 
 .. meta::
-  :description: See your billing history and current billing cycle information
+  :description: Learn how to check out the billing history and the current billing cycle information of your Wazuh Cloud environments in this section.  
 
 Information about your current billing cycle, outstanding payments, and billing receipts is available from the Wazuh Cloud Console. The billing cycle is the period between the last billing date and the current billing date, while your billing history shows an overview of all invoices issued for your account.
 

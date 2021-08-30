@@ -6,7 +6,7 @@ Cloud service FAQ
 =================
 
 .. meta::
-  :description: Learn about some FAQ while getting started. 
+  :description: Get answers to the most frequently asked questions about the Wazuh Cloud in this FAQ. What is Wazuh Cloud, how to start your free trial, is Wazuh PCI DSS compliant, and more. 
 
 
 

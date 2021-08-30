@@ -6,4 +6,4 @@ Reference
 =========
 
 .. meta::
-  :description: Wazuh Public API Reference. 
+  :description: Chek out the Wazuh Public API Reference here. 
