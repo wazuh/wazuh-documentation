@@ -95,8 +95,6 @@ Create and deploy SSL certificates to encrypt communications between the Wazuh c
 
     .. include:: ../../_templates/installations/elastic/common/elastic-multi-node/generate_certificates.rst
 
-#. Enable and start the Elasticsearch service.
-
     **Recommended action**  - Remove Open Distro for Elasticsearch performance analyzer plugin
 
      The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it with the following command:  
@@ -105,13 +103,10 @@ Create and deploy SSL certificates to encrypt communications between the Wazuh c
   
        # /usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer
      
-     Proceed with enabling and starting Elasticsearch service:
+#. Enable and start the Elasticsearch service.
 
-    .. include:: ../../_templates/installations/elastic/common/enable_elasticsearch.rst
+        .. include:: ../../_templates/installations/elastic/common/enable_elasticsearch.rst
 
-
-
-  
  
 You now have installed and configured the initial Wazuh indexer node. 
 
@@ -182,17 +177,15 @@ Deploy the certificates to encrypt communications between the Wazuh central comp
 
     .. include:: ../../_templates/installations/elastic/common/elastic-multi-node/deploy_certificates.rst
 
-#. Enable and start the Elasticsearch service.
+    - **Recommended action**  - Remove Open Distro for Elasticsearch performance analyzer plugin. 
 
-    **Recommended action**  - Remove Open Distro for Elasticsearch performance analyzer plugin
+      The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it with the following command:  
 
-     The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it with the following command:  
-
-     .. code-block:: console
+      .. code-block:: console
   
-       # /usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer
-     
-     Proceed with enabling and starting Elasticsearch service:
+        # /usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer
+
+#. Enable and start the Elasticsearch service.
 
     .. include:: ../../_templates/installations/elastic/common/enable_elasticsearch.rst
 
