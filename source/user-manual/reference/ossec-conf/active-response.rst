@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _reference_ossec_active_response:
 
@@ -71,7 +71,7 @@ Indicates which system(s) the command should be executed on.
 | **Default value**  | n/a                                                                              |
 +--------------------+---------------+------------------------------------------------------------------+
 | **Allowed values** | local         | This runs the command on the agent that generated the event.     |
-+--------------------+---------------+------------------------------------------------------------------+
++                    +---------------+------------------------------------------------------------------+
 |                    | server        | This runs the command on the Wazuh manager.                      |
 +                    +---------------+------------------------------------------------------------------+
 |                    | defined-agent | This runs the command on a specific agent identified by agent_id.|

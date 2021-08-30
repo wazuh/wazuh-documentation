@@ -1,5 +1,7 @@
-.. Copyright (C) 2020 Wazuh, Inc.
-
+.. Copyright (C) 2021 Wazuh, Inc.
+.. meta::
+  :description: Learn more about client configuration, connection to the manager, and its configuring options in this section of the Wazuh user manual. 
+  
 .. _reference_ossec_client:
 
 client
@@ -115,6 +117,7 @@ Options
 - `config-profile`_
 - `notify_time`_
 - `time-reconnect`_
+- `ip_update_interval`_
 - `local_ip`_
 - `disable-active-response`_
 - `auto_restart`_
@@ -210,6 +213,10 @@ Specifies the time in seconds between agent checkins to the manager.  More frequ
 | **Allowed values** | A positive number (seconds) |
 +--------------------+-----------------------------+
 
+.. warning::
+
+  This setting should always be lower than :ref:`disconnection time <reference_agents_disconnection_time>` configured for the agents in the manager. This allows them to always notify the manager before it would consider them disconnected.
+
 .. _time_reconnect:
 
 time-reconnect
@@ -227,6 +234,26 @@ For example, a ``notify_time`` setting of 60 combined with a time-reconnect of 3
 
 .. warning::
 	Notice that the ``notify_time`` value uses an underscore while the ``time-reconnect`` value uses a dash.  This is an unfortunate legacy naming inconsistency that is easy to mix up.
+
+.. _ip_update_interval:
+
+ip_update_interval
+^^^^^^^^^^^^^^^^^^
+
+.. versionadded:: 4.2.0
+
+Specifies how often an agent will query the control module for its main IP.
+
+
+Any value equal to or lower than the configured ``notify_time`` will cause the IP to be queried on each keep-alive message.
+
++--------------------+-----------------------------+
+| **Default value**  | 0                           |
++--------------------+-----------------------------+
+| **Allowed values** | A positive number (seconds) |
++--------------------+-----------------------------+
+
+ .. note:: Most systems won't need to modify this value, but on systems with large routing tables this configuration can help lower CPU usage from wazuh-modulesd.
 
 local_ip
 ^^^^^^^^
@@ -415,6 +442,9 @@ Used for manager verification. If no CA certificate is set server will not be ve
 +--------------------+---------------------------------------------+
 | **Allowed values** | Path to a valid CA certificate.             |
 +--------------------+---------------------------------------------+
+
+.. note::
+  Paths can be referred to relative paths under the Wazuh installation directory, or full paths.
 
 agent_certificate_path
 ^^^^^^^^^^^^^^^^^^^^^^

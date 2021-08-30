@@ -1,48 +1,111 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
-.. meta:: :description: Learn how to install the Wazuh agent
+.. meta::
+  :description: Find out in this section more about the Wazuh agent, its capabilities, and the options for installing the agent on different operating systems.
 
 .. _installation_agents:
 
 Wazuh agent
 ===========
 
-The Wazuh agent runs on the hosts that you want to monitor. It is multi-platform and provides the following capabilities:
+The Wazuh agent is multi-platform and runs on the hosts that the user wants to monitor. It communicates with the Wazuh manager, sending data in near real time through an encrypted and authenticated channel.
 
-- Log and data collection
-- File integrity monitoring
-- Rootkit and malware detection
-- Security policy monitoring.
-- Configuration assessments
-- Software inventory
+The agent was developed considering the need to monitor a wide variety of different endpoints without impacting their performance. Therefore, it is supported on the most popular operating systems and only requires about 0.1 GB of RAM.
 
-It communicates with the Wazuh manager, sending data in near real-time through an encrypted and authenticated channel.
+The wazuh agent provides :ref:`key features <agents_modules>` to enhance your system’s security. 
 
-The Wazuh agent has been developed taking into consideration the need for monitoring a great variety of different endpoints without impacting their performance. It is because of this that the Wazuh agent is supported in the most popular operating systems and only requires around 0.1 GB of RAM. 
+.. list-table::
+   :width: 100%
+   :widths: 50 50
 
-There are several options to install a Wazuh agent, depending on the operating system and whether you wish to build from source or not. Consult the table below and choose how to proceed for a given agent:
+   * - Log collector
+     - Command execution
+   * - File integrity monitoring (FIM) 
+     - Security configuration assessment (SCA) 
+   * - System inventory 
+     - Malware detection
+   * - Active response
+     - Containers security monitoring
+   * - Cloud security monitoring
+     -
 
-+----------------------------------------------------------+-----------------------------------------------------------------------+
-| Operating system                                         | Description                                                           |
-+==========================================================+=======================================================================+
-| :ref:`AIX installer <wazuh_agent_package_aix>`           | Install Wazuh agents on AIX.                                          |
-+----------------------------------------------------------+-----------------------------------------------------------------------+
-| :ref:`HP-UX installer <wazuh_agent_package_hpux>`        | Install Wazuh agents on HP-UX.                                        |
-+----------------------------------------------------------+-----------------------------------------------------------------------+
-| :ref:`Linux installer <wazuh_agent_package_linux>`       | Install Wazuh agents on Linux.                                        |
-+----------------------------------------------------------+-----------------------------------------------------------------------+
-| :ref:`macOS installer <wazuh_agent_package_macos>`       | Install Wazuh agents on macOS.                                        |
-+----------------------------------------------------------+-----------------------------------------------------------------------+
-| :ref:`Solaris installer <wazuh_agent_solaris>`           | Install Wazuh agents on Solaris.                                      |
-+----------------------------------------------------------+-----------------------------------------------------------------------+
-| :ref:`Windows installer <wazuh_agent_package_windows>`   | Install Wazuh agents on Windows.                                      |
-+----------------------------------------------------------+-----------------------------------------------------------------------+
+To install a Wazuh agent, select your operating system and follow the instructions.
 
-In each OS installer document, it is described how to deploy the agent using the deployment variables, which facilitates the task of deployment, registration, and configuration of the agent in a single command. The complete guide: :ref:`Deployment variables <deployment_variables>`.
+.. raw:: html
 
-On the other hand, deploying agents to a large number of servers or endpoints can be easier using automation tools like :ref:`Puppet <wazuh_puppet>`, `Chef <https://github.com/wazuh/wazuh-chef>`_, SCCM or :ref:`Ansible <wazuh_ansible_guide>`. Consider exploring these options if you are deploying Wazuh in a large environment.
+  <div class="agent-os">
+      <div class="item-agent">
+          <a href="./wazuh_agent_package_linux.html" class="d-flex align-items-center">
+            <p>Linux</p>
 
-.. note:: The compatibility between Wazuh agent and Wazuh manager is guaranteed when the Wazuh manager has a newer or equal version than the Wazuh agent.
+.. image:: ../../images/installation/linux.png
+      :align: center
+
+.. raw:: html
+
+        </a>
+    </div>
+    <div class="item-agent">
+        <a href="./wazuh_agent_package_windows.html" class="d-flex align-items-center">
+                    <p>Windows</p>
+
+.. image:: ../../images/installation/windows_icon.png
+      :align: center
+
+.. raw:: html
+
+        </a>
+    </div>
+    <div class="item-agent">
+        <a href="./wazuh_agent_package_macos.html" class="d-flex align-items-center">
+            <p>macOS</p>
+
+.. image:: ../../images/installation/macOS_logo.png
+      :align: center
+
+.. raw:: html
+
+        </a>
+    </div>
+    <div class="item-agent">
+        <a href="./wazuh_agent_package_aix.html" class="d-flex align-items-center">
+            <p>AIX</p>
+
+.. image:: ../../images/installation/AIX.png
+      :align: center
+
+.. raw:: html
+
+        </a>
+    </div>
+    <div class="item-agent">
+        <a href="./wazuh_agent_package_hpux.html" class="d-flex align-items-center">
+            <p>HP-UX</p>
+
+.. image:: ../../images/installation/hpux.png
+      :align: center
+
+.. raw:: html
+
+        </a>
+    </div>
+    <div class="item-agent" id="solaris-logo">
+        <a href="./wazuh_agent_package_solaris.html" class="d-flex align-items-center">
+            <p>Solaris</p>
+
+.. image:: ../../images/installation/solaris.png
+      :align: center
+
+.. raw:: html
+
+          </a>
+      </div>
+  </div>
+
+
+If you are deploying Wazuh in a large environment, with a high number of servers or endpoints, keep in mind that this deployment might be easier using automation tools such as :ref:`Puppet <wazuh_puppet>`, `Chef <https://github.com/wazuh/wazuh-chef>`_, SCCM, or :ref:`Ansible <wazuh_ansible_guide>`.
+
+.. note:: Compatibility between the Wazuh agent and the Wazuh manager is guaranteed when the Wazuh manager version is later than or equal to that of the Wazuh agent.
 
 .. rst-class:: d-none
 
@@ -50,10 +113,10 @@ On the other hand, deploying agents to a large number of servers or endpoints ca
     :hidden:
     :maxdepth: 2
 
-    wazuh_agent_package_aix
-    wazuh_agent_package_hpux
-    wazuh_agent_package_linux
-    wazuh_agent_package_macos
-    wazuh_agent_package_solaris
-    wazuh_agent_package_windows
+    Linux <wazuh_agent_package_linux>
+    Windows <wazuh_agent_package_windows>
+    macOS <wazuh_agent_package_macos>
+    AIX <wazuh_agent_package_aix>
+    HP-UX <wazuh_agent_package_hpux>
+    Solaris <wazuh_agent_package_solaris>   
     deployment_variables/deployment_variables

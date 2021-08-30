@@ -1,14 +1,15 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Get started with Wazuh. Learn about our open source community of developers, the Wazuh components, architecture, and deployment.
+  
 .. _getting_started:
 
 Getting started
 ===============
 
-.. meta::
-  :description: Get started with the Wazuh open source security platform. 
 
-Wazuh is a free and open source platform used for threat prevention, detection, and response. It is capable of protecting workloads across on-premises, virtualized, containerized, and cloud-based environments. Wazuh is widely used by thousands of organizations around the world, from small businesses to large enterprises.
+Wazuh is a free and open source platform used for threat prevention, detection, and response. It protects workloads across on-premises, virtualized, containerized and cloud-based environments. Wazuh is widely used by thousands of organizations around the world, from small businesses to large enterprises.
 
 Wazuh solution consists of an :ref:`endpoint security agent <wazuh_agent>`, deployed to the monitored systems, and a :ref:`management server <wazuh_server>`, which collects and analyzes data gathered by the agents. Besides, Wazuh has been fully integrated with the :ref:`Elastic Stack <elastic_stack>`, providing a search engine and data visualization tool that allows users to navigate through their security alerts.
 

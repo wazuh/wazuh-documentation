@@ -1,24 +1,25 @@
-.. Copyright (C) 2020 Wazuh, Inc.
-
-.. _installation_guide:
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Wazuh is a free, open source and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response and compliance.
+  :description: Visit the Wazuh installation guide and learn more about the deployment process, available installation alternatives, and requirements.
+  
+.. _installation_guide:
 
 
 Installation guide
 ==================
 
-This section aims to guide the user through the process of installing Wazuh and its multiple components. A brief explanation about each component and its capabilities can be found in the :ref:`getting started <components>` section.
+Install Wazuh by following the installation workflow that best suits your needs.
+To learn more about each component and its capabilities, check the :ref:`Components <components>` section. 
 
-Install Wazuh server
---------------------
+Wazuh server installation
+-------------------------
 
-There are two different alternatives to deploy a Wazuh installation. Here is a brief explanation about each deployment type:
+There are two different options for deploying Wazuh:
 
-- :ref:`All-in-one <all_in_one_index>`: All the Wazuh components are installed in the same host, this type of deployment is suitable for testing and small working environments. If you want to test Wazuh, you can download our ready to use :ref:`OVA <virtual_machine>`.
+- :ref:`All-in-one <all_in_one_index>`: The Wazuh server and Elastic Stack are installed on the same host. With this deployment option, you can install Wazuh directly on your system or download our ready-to-use :ref:`OVA <virtual_machine>`.
 
-- :ref:`Distributed <distributed_index>`: Each component is installed in a separate host as a single-node or multi-node cluster. This type of deployment allows the high availability and scalability of the product and is suitable for large working environments.
+- :ref:`Distributed <distributed_index>`: Each component is installed on a separate host as a single-node or multi-node cluster. This type of deployment provides high availability and scalability of the product, and it is convenient for large working environments.
 
 .. raw:: html
 
@@ -55,17 +56,15 @@ There are two different alternatives to deploy a Wazuh installation. Here is a b
 
 
 
+Alternatively, Wazuh can also be installed with commercial options like Elastic Stack basic license or Splunk. To learn more about these options and other installation alternatives, see the :ref:`More installation alternatives <more_installation_alternatives>` section.
+
+.. note:: Wazuh also offers the `Wazuh Cloud <https://wazuh.com/cloud/>`_, where all components are hosted on our PCI-DSS and SOC 2 certified SaaS solution and maintained by our team. With the Wazuh cloud, no dedicated hardware is required and everything is ready to use. This service offers a highly flexible infrastructure to match your enterprise needs.
 
 
-.. note:: Wazuh also offers the `Wazuh Cloud <https://wazuh.com/cloud/>`_, where all components are hosted in our PCI-DSS certified SaaS solution and maintained by our team. With Wazuh cloud no dedicated hardware is required and everything is ready to use. This service offers a flexible infrastructure to match your enterprise needs.
+Wazuh agent installation
+------------------------
 
-This installation guide will teach you how to install all Wazuh components: the Wazuh agent, the Wazuh manager and Elastic Stack. Alternatively, Wazuh can be installed with commercial options like Elastic Stack basic license or Splunk. To learn more about these options and other installation alternatives, visit the :ref:`more installation alternatives <more_installation_alternatives>` section.
-
-
-Install Wazuh agents
---------------------
-
-The Wazuh Agent is a single, light-weight monitoring software that can be installed in the majority of Operating Systems providing visibility on the security of that endpoint by collecting critical system and application logs, inventory data and detecting possible anomalies. To install a Wazuh agent select your operating system and follow the installation steps:
+The :ref:`Wazuh agent <wazuh_agent>` is a single, light-weight monitoring software that runs on most operating systems and provides visibility into the endpoint's security by collecting critical system and application records, inventory data, and detecting potential anomalies. If the Wazuh server and its components are already installed on your environment, select your operating system and follow the installation steps to deploy the agent to the endpoints:
 
 .. raw:: html
 
@@ -143,7 +142,7 @@ The Wazuh Agent is a single, light-weight monitoring software that can be instal
 Requirements
 ------------
 
-The :ref:`requirements <installation_requirements>`  section specifies the supported operating systems as well as the minimum recommended hardware specifications to guarantee the expected performance. Furthermore, information about the expected alerts per second depending on the different types of monitored endpoints can be found, allowing users to calculate the expected data storage needed for their environments.
+Check the :ref:`Requirements <installation_requirements>` section for information about supported operating systems and the minimum recommended hardware specifications to guarantee optimum performance.   
 
 .. toctree::
     :hidden:
@@ -154,10 +153,3 @@ The :ref:`requirements <installation_requirements>`  section specifies the suppo
     wazuh-agent/index
     packages-list
     more-installation-alternatives/index
-
-
-
-
-
-
-

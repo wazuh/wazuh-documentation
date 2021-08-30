@@ -1,5 +1,8 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Learn more about how Wazuh detects an SSH brute force attack and how it generates alerts to protect your system. 
+  
 .. _learning_wazuh_ssh_brute_force:
 
 Detect an SSH brute-force attack
@@ -67,6 +70,17 @@ Here is a beautified example of the JSON record in ``alerts.json`` that correspo
         "level": 5,
         "description": "sshd: Attempt to login using a non-existent user",
         "id": "5710",
+        "mitre":{
+          "id":[
+              "T1110"
+          ],
+          "tactic":[
+              "Credential Access"
+          ],
+          "technique":[
+              "Brute Force"
+          ]
+        },
         "firedtimes": 7,
         "mail": false,
         "groups": [
@@ -94,6 +108,12 @@ Here is a beautified example of the JSON record in ``alerts.json`` that correspo
           "AU.14",
           "AC.7",
           "AU.6"
+        ],
+        "tsc":[
+          "CC6.1",
+          "CC6.8",
+          "CC7.2",
+          "CC7.3"
         ]
       },
       "agent": {
@@ -173,7 +193,10 @@ To better understand this alert, let's look up rule **5710** (from the ``rule.id
         <if_sid>5700</if_sid>
         <match>illegal user|invalid user</match>
         <description>sshd: Attempt to login using a non-existent user</description>
-        <group>invalid_login,authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,pci_dss_10.6.1,gpg13_7.1,gdpr_IV_35.7.d,gdpr_IV_32.2,hipaa_164.312.b,nist_800_53_AU.14,nist_800_53_AC.7,nist_800_53_AU.6,</group>
+        <mitre>
+          <id>T1110</id>
+        </mitre>
+        <group>invalid_login,authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,pci_dss_10.6.1,gpg13_7.1,gdpr_IV_35.7.d,gdpr_IV_32.2,hipaa_164.312.b,nist_800_53_AU.14,nist_800_53_AC.7,nist_800_53_AU.6,tsc_CC6.1,tsc_CC6.8,tsc_CC7.2,tsc_CC7.3,</group>
       </rule>
 
 The rule **5710** looks for matching text "*illegal user*" or "*invalid user*" to appear in
@@ -210,8 +233,11 @@ Let's look into this new rule **5712** and see why was it triggered.
         <if_matched_sid>5710</if_matched_sid>
         <description>sshd: brute force trying to get access to </description>
         <description>the system.</description>
+        <mitre>
+          <id>T1110</id>
+        </mitre>
         <same_source_ip />
-        <group>authentication_failures,pci_dss_11.4,pci_dss_10.2.4,pci_dss_10.2.5,gdpr_IV_35.7.d,gdpr_IV_32.2,hipaa_164.312.b,nist_800_53_SI.4,nist_800_53_AU.14,nist_800_53_AC.7,</group>
+        <group>authentication_failures,pci_dss_11.4,pci_dss_10.2.4,pci_dss_10.2.5,gdpr_IV_35.7.d,gdpr_IV_32.2,hipaa_164.312.b,nist_800_53_SI.4,nist_800_53_AU.14,nist_800_53_AC.7,tsc_CC6.1,tsc_CC6.8,tsc_CC7.2,tsc_CC7.3,</group>
       </rule>
 
 The rule **5712** is a special kind of child rule to rule **5710**.
@@ -244,32 +270,45 @@ On wazuh-manager, run the wazuh-logtest command and then paste in the above line
 .. code-block:: none
 
     [root@wazuh-manager centos]# /var/ossec/bin/wazuh-logtest
-    
+
 You should see an analysis of the event and the resulting rule **5710** match like this:
 
 .. code-block:: none
     :class: output
 
-    2019/10/16 15:55:14 ossec-testrule: INFO: Started (pid: 11223).
-    ossec-testrule: Type one log per line.
+    Type one log per line
+
+    Oct 15 21:07:56 linux-agent sshd[29205]: Invalid user blimey from 18.18.18.18 port 48928
 
     **Phase 1: Completed pre-decoding.
-           full event: 'Oct 15 21:07:56 linux-agent sshd[29205]: Invalid user blimey from 18.18.18.18 port 48928'
-           timestamp: 'Oct 15 21:07:56'
-           hostname: 'linux-agent'
-           program_name: 'sshd'
-           log: 'Invalid user blimey from 18.18.18.18 port 48928'
+            full event: 'Oct 15 21:07:56 linux-agent sshd[29205]: Invalid user blimey from 18.18.18.18 port 48928'
+            timestamp: 'Oct 15 21:07:56'
+            hostname: 'linux-agent'
+            program_name: 'sshd'
 
     **Phase 2: Completed decoding.
-           decoder: 'sshd'
-           srcuser: 'blimey'
-           srcip: '18.18.18.18'
-           srcport: '48928'
+            name: 'sshd'
+            parent: 'sshd'
+            srcip: '18.18.18.18'
+            srcport: '48928'
+            srcuser: 'blimey'
 
     **Phase 3: Completed filtering (rules).
-           Rule id: '5710'
-           Level: '5'
-           Description: 'sshd: Attempt to login using a non-existent user'
+            id: '5710'
+            level: '5'
+            description: 'sshd: Attempt to login using a non-existent user'
+            groups: '['syslog', 'sshd', 'invalid_login', 'authentication_failed']'
+            firedtimes: '1'
+            gdpr: '['IV_35.7.d', 'IV_32.2']'
+            gpg13: '['7.1']'
+            hipaa: '['164.312.b']'
+            mail: 'False'
+            mitre.id: '['T1110']'
+            mitre.tactic: '['Credential Access']'
+            mitre.technique: '['Brute Force']'
+            nist_800_53: '['AU.14', 'AC.7', 'AU.6']'
+            pci_dss: '['10.2.4', '10.2.5', '10.6.1']'
+            tsc: '['CC6.1', 'CC6.8', 'CC7.2', 'CC7.3']'
     **Alert to be generated.
 
 .. note::
@@ -284,22 +323,34 @@ Paste that log record in a number of times.  On the 8th time, you should see a r
     :class: output
 
     **Phase 1: Completed pre-decoding.
-           full event: 'Oct 15 21:07:56 linux-agent sshd[29205]: Invalid user blimey from 18.18.18.18 port 48928'
-           timestamp: 'Oct 15 21:07:56'
-           hostname: 'linux-agent'
-           program_name: 'sshd'
-           log: 'Invalid user blimey from 18.18.18.18 port 48928'
+            full event: 'Oct 15 21:07:56 linux-agent sshd[29205]: Invalid user blimey from 18.18.18.18 port 48928'
+            timestamp: 'Oct 15 21:07:56'
+            hostname: 'linux-agent'
+            program_name: 'sshd'
 
     **Phase 2: Completed decoding.
-           decoder: 'sshd'
-           srcuser: 'blimey'
-           srcip: '18.18.18.18'
-           srcport: '48928'
+            name: 'sshd'
+            parent: 'sshd'
+            srcip: '18.18.18.18'
+            srcport: '48928'
+            srcuser: 'blimey'
 
     **Phase 3: Completed filtering (rules).
-           Rule id: '5712'
-           Level: '10'
-           Description: 'sshd: brute force trying to get access to the system.'
+            id: '5712'
+            level: '10'
+            description: 'sshd: brute force trying to get access to the system.'
+            groups: '['syslog', 'sshd', 'authentication_failures']'
+            firedtimes: '1'
+            frequency: '8'
+            gdpr: '['IV_35.7.d', 'IV_32.2']'
+            hipaa: '['164.312.b']'
+            mail: 'False'
+            mitre.id: '['T1110']'
+            mitre.tactic: '['Credential Access']'
+            mitre.technique: '['Brute Force']'
+            nist_800_53: '['SI.4', 'AU.14', 'AC.7']'
+            pci_dss: '['11.4', '10.2.4', '10.2.5']'
+            tsc: '['CC6.1', 'CC6.8', 'CC7.2', 'CC7.3']'
     **Alert to be generated.
 
 Press Control+C to exit wazuh-logtest.

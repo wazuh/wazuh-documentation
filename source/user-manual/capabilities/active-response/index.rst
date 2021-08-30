@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _automatic_remediation:
 
@@ -17,4 +17,6 @@ Active responses execute a script in response to the triggering of specific aler
 
         how-it-works
         remediation-configuration
+        custom-active-response
+        ar-use-cases/index
         remediation-faq

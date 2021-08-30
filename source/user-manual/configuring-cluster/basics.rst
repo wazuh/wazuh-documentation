@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _wazuh-cluster-introduction:
 
@@ -73,7 +73,8 @@ How the cluster works
 
     All cluster logs are written in the file ``logs/cluster.log``.
 
-    .. image:: ../../images/manual/cluster/cluster_flow.png
+    .. thumbnail:: ../../images/manual/cluster/cluster_flow.png
+      :align: center
 
 Keep alive thread
 ~~~~~~~~~~~~~~~~~~

@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _pci_dss_rootkit_detection:
 
@@ -10,8 +10,8 @@ Rootkit and trojan detection is performed using two files: ``rootkit_files.txt``
 .. code-block:: xml
 
     <rootcheck>
-        <rootkit_files>/var/ossec/etc/shared/rootkit_files.txt</rootkit_files>
-        <rootkit_trojans>/var/ossec/etc/shared/rootkit_trojans.txt</rootkit_trojans>
+        <rootkit_files>etc/shared/rootkit_files.txt</rootkit_files>
+        <rootkit_trojans>etc/shared/rootkit_trojans.txt</rootkit_trojans>
     </rootcheck>
 
 These are the options available for the :ref:`rootcheck component<reference_ossec_rootcheck>`:

@@ -1,4 +1,7 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
+
+.. meta::
+  :description: Learn more about how to collect and monitor Windows logs with Wazuh and check out this use case of the log data collection feature.
 
 How to collect Windows logs
 ===========================

@@ -1,11 +1,13 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Wazuh 3.2.0 has been released. Check out our release notes to discover the changes and additions of this release.
 .. _release_3_2_0:
 
 3.2.0 Release notes
 ===================
 
-This section shows the most relevant new features of Wazuh v3.2.0. You will find more detailed information in our `changelog <https://github.com/wazuh/wazuh/blob/3.2/CHANGELOG.md>`_ file.
+This section shows the most relevant new features of Wazuh v3.2.0. You will find more detailed information in our `changelog <https://github.com/wazuh/wazuh/blob/v3.2.0/CHANGELOG.md>`_ file.
 
 **New features:**
 

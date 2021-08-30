@@ -1,4 +1,8 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
+
+.. meta::
+  :description: Find out more about the configuration options for enabling or disabling rules and decoders with Wazuh.
+
 
 .. _reference_ossec_rules:
 

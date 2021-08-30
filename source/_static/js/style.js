@@ -1,11 +1,9 @@
 $(function() {
-  let loc = location.hash;
   const version = '' + $('[data-version]').data('version');
   const minVersionScreenshot = '3.13';
   const minVersionRedoc = '4.0';
   const simultaneousCapaSlide = (compareVersion(version, minVersionScreenshot) >= 0);
   const useApiRedoc = (compareVersion(version, minVersionRedoc) >= 0);
-  const spaceBeforeAnchor = 60;
   /* List of folders that will be excluded from search */
   const excludedSearchFolders = ['release-notes'];
   const intervalTime = 5000;
@@ -14,10 +12,10 @@ $(function() {
   if ( useApiRedoc ) {
     /* Change DOMAIN in href */
     const domainReplacePattern = 'https://DOMAIN';
-    const url_root = $('[data-url_root]').data('url_root');
+    const urlRoot = $('[data-url_root]').length == 0 ? '/' : $('[data-url_root]').data('url_root');
     $('[href^="'+domainReplacePattern+'/"]').each(function() {
       const oldHref = $(this).attr('href');
-      $(this).attr('href', oldHref.replace(domainReplacePattern+'/', url_root));
+      $(this).attr('href', oldHref.replace(domainReplacePattern+'/', urlRoot));
       $(this).attr('target', '_blank');
     });
   }
@@ -44,6 +42,7 @@ $(function() {
     'user-manual/ruleset/ruleset-xml-syntax/index',
     'installation-guide/distributed-deployment/step-by-step-installation/elasticsearch-cluster/index',
     'installation-guide/distributed-deployment/step-by-step-installation/wazuh-cluster/index',
+    'user-manual/capabilities/active-response/ar-use-cases/index',
   ];
 
   /* List of nodes in the toctree that should be open in a new tab */
@@ -77,9 +76,6 @@ $(function() {
 
   markTocNodesWithClass(emptyTocNodes, 'empty-toc-node');
   checkScroll();
-  if (document.location.hash) {
-    correctScrollTo(spaceBeforeAnchor);
-  }
 
   /* Finds all nodes that contains subtrees within the globaltoc and appends a toggle button to them */
   $('.globaltoc .toctree-l1 a').each(function(e) {
@@ -90,10 +86,6 @@ $(function() {
   });
 
   hideSubtree(hideSubtreeNodes);
-
-  $(window).on('hashchange', function() {
-    correctScrollTo(spaceBeforeAnchor);
-  });
 
   /* Turn all tables in responsive table */
   reponsiveTables();
@@ -111,7 +103,7 @@ $(function() {
 
   /* Page scroll event -------------------------------------------------------*/
   $('#btn-scroll').on('click', function() {
-    $('html, body').animate({scrollTop: 0}, 'slow');
+    $('html, body').animate({scrollTop: 0}, 'smooth');
     return false;
   });
 
@@ -133,10 +125,7 @@ $(function() {
    */
   function checkScroll() {
     const scrollTop = $(document).scrollTop();
-    let headerHeight = 100;
-    if ($('#page').hasClass('no-latest-docs')) {
-      headerHeight += parseInt($('.no-latest-notice').outerHeight());
-    }
+    const headerHeight = parseInt($('#header').outerHeight());
     if (scrollTop >= headerHeight) {
       $('body').addClass('scrolled');
     } else {
@@ -146,7 +135,7 @@ $(function() {
 
   /* -- Menu scroll -------------------------------------------------------------------------------*/
 
-  const navbarTop = 100;
+  let navbarTop = parseInt($('#header').outerHeight());
   let noticeHeight = 0;
   if ($('#page').hasClass('no-latest-docs')) {
     noticeHeight = parseInt($('.no-latest-notice').outerHeight());
@@ -158,7 +147,6 @@ $(function() {
   let eventScroll;
 
   heightNavbar();
-  headerSticky();
 
   setTimeout(function() {
     if ($('#page').hasClass('no-latest-docs')) {
@@ -283,7 +271,6 @@ $(function() {
     navHeight = parseInt($('#globaltoc').outerHeight());
     /* Update height of navbar */
     heightNavbar();
-    headerSticky();
   });
 
   $('.navbar-toggler').on('click', function(e) {
@@ -298,16 +285,19 @@ $(function() {
    * Changes the navbar (globaltoc) height
    */
   function heightNavbar() {
+    const noticeElement = $('.no-latest-notice');
+    noticeHeight = noticeElement.length == 0 ? 0 : parseInt(noticeElement.outerHeight());
     if ($(window).width() >= 992) {
-      if (documentScroll <= navbarTop) {
-        $('#navbar').css({'padding-top': (noticeHeight + navbarTop - documentScroll) + 'px'});
-        $('#navbar-globaltoc').css({'height': 'calc(100vh - 152px - ' + noticeHeight + 'px + ' + documentScroll + 'px)'});
+      if (!$('body').hasClass('scrolled')) {
+        navbarTop = parseInt($('#header').outerHeight());
+        $('#navbar').css({'padding-top': (navbarTop - documentScroll) + 'px'});
+        $('#navbar-globaltoc').css({'height': 'calc(100vh - ' + (parseInt($('#navbar .search_main').outerHeight()) + parseInt($('#header').outerHeight())) + 'px + ' + documentScroll + 'px)', 'padding-top': 0});
       } else {
-        $('#navbar').css({'padding-top': noticeHeight});
-        $('#navbar-globaltoc').css({'height': 'calc(100vh - 152px - ' + noticeHeight + 'px + ' + navbarTop + 'px)'});
+        $('#navbar').css({'padding-top': noticeHeight +'px'});
+        $('#navbar-globaltoc').css({'height': 'calc(100vh - ' + noticeHeight + 'px - ' + parseInt($('#header-sticky').outerHeight()) + 'px)', 'padding-top': 0});
       }
-      $('#navbar-globaltoc').css({'padding-top': 0});
     } else {
+      navbarTop = parseInt($('#header-sticky').outerHeight());
       if (documentScroll <= navbarTop) {
         $('#navbar').css({'padding-top': 0});
         $('#navbar-globaltoc').css({'padding-top': (noticeHeight + 100) + 'px'});
@@ -315,18 +305,6 @@ $(function() {
         $('#navbar').css({'padding-top': 0});
         $('#navbar-globaltoc').css({'padding-top': (noticeHeight + 52) + 'px'});
       }
-    }
-  }
-
-  /**
-   * Changes the "top" value of sticky header
-   */
-  function headerSticky() {
-    const documentScroll = $(window).scrollTop();
-    if (documentScroll >= (noticeHeight + 100)) {
-      $('#header-sticky').css({'top': noticeHeight});
-    } else {
-      $('#header-sticky').css({'top': '-52px'});
     }
   }
 
@@ -431,20 +409,6 @@ $(function() {
     reponsiveTables();
     checkScroll();
   });
-
-  /**
-   * Corrects the scrolling movement so the element to which the page is being scrolled appears correctly in the screen,
-   * having in mind the fixed top bar and the no-latest-notice if present.
-   * @param {int} spaceBeforeAnchor Space required between the target element and the top of the window.
-   */
-  function correctScrollTo(spaceBeforeAnchor) {
-    if ($('#page').hasClass('no-latest-docs')) {
-      spaceBeforeAnchor = spaceBeforeAnchor + 40;
-    }
-    setTimeout(function() {
-      window.scrollTo(window.scrollX, window.scrollY - spaceBeforeAnchor);
-    }, 10);
-  }
 
   /* -- Add functionality for the capabilities in the home page --------------------------------------------- */
 
@@ -731,8 +695,11 @@ $(function() {
    * If .no-latest-notice is not visible, the margin is zero
    */
   function adjustLightboxHeight() {
-    noLatestHeight = document.querySelector('.no-latest-notice').offsetHeight;
-    $('#lightbox').css('margin-top', noLatestHeight);
+    const noLatestElement = $('.no-latest-notice');
+    if ( noLatestElement.length > 0) {
+      const noLatestHeight = noLatestElement[0].offsetHeight;
+      $('#lightbox').css('margin-top', noLatestHeight);
+    }
   }
 
   /* Restore overflow when pressing key 'Esc' */
@@ -893,6 +860,13 @@ $(function() {
     e.preventDefault();
     e.stopPropagation();
     return false;
+  });
+
+  /* Add image for the pages with deprecated content -------------------------------------------*/
+  $('.dropdown-menu li a').each(function() {
+    if ( $(this).text().indexOf(DOCUMENTATION_OPTIONS.VERSION) != -1 && $(this).hasClass('disable') ) {
+      $('#rst-content').addClass('deprecated-content');
+    }
   });
 });
 

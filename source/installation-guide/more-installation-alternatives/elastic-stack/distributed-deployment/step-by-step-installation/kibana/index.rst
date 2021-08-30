@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta:: :description: Learn how to install Elastic Stack for using Wazuh on Debian
 
@@ -81,15 +81,19 @@ Kibana installation and configuration
 
 #. Download the Kibana configuration file:
 
-    .. include:: ../../../../../../_templates/installations/basic/elastic/common/configure_kibana.rst
+   .. Note::
+
+     Starting Elasticsearch 7.11.0, a DNS name must be specified in the ``elasticsearch.hosts`` field since IPs are no longer allowed. 
+
+   .. include:: ../../../../../../_templates/installations/basic/elastic/common/configure_kibana.rst
 
 
-#. Update the ``optimize`` and ``plugins`` directories permissions:
+#. Create the ``/usr/share/kibana/data`` directory:
 
     .. code-block:: console
     
-      # chown -R kibana:kibana /usr/share/kibana/optimize
-      # chown -R kibana:kibana /usr/share/kibana/plugins    
+      # mkdir /usr/share/kibana/data
+      # chown -R kibana:kibana /usr/share/kibana  
 
 
 #. Install the Wazuh Kibana plugin:
@@ -99,7 +103,7 @@ Kibana installation and configuration
     .. code-block:: console
 
         # cd /usr/share/kibana
-        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.3_7.9.3-1.zip
+        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.2.0_7.11.2-1.zip
 
 #. Link Kibana's socket to privileged port 443:
 
@@ -123,7 +127,7 @@ Kibana installation and configuration
 
   Upon the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or,  for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser.  Alternatively, a certificate from a trusted authority can be configured.
 
-With the first access attempt, the Wazuh Kibana plugin may prompt a message that indicates that it cannot communicate with the Wazuh API. To solve this issue edit the file ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml`` and replace the ``url`` with the Wazuh server's address: 
+With the first access attempt, the Wazuh Kibana plugin may prompt a message that indicates that it cannot communicate with the Wazuh API. To solve this issue edit the file ``/usr/share/kibana/data/wazuh/config/wazuh.yml`` and replace the ``url`` with the Wazuh server's address: 
 
 .. code-block:: yaml
 
@@ -131,8 +135,9 @@ With the first access attempt, the Wazuh Kibana plugin may prompt a message that
     - default:
        url: https://localhost
        port: 55000
-       username: wazuh
-       password: wazuh
+       username: wazuh-wui
+       password: wazuh-wui
+       run_as: false
 
 
 Disabling repositories
@@ -169,4 +174,4 @@ To uninstall Kibana, visit the :ref:`uninstalling section <basic_uninstall_kiban
 Next steps
 ~~~~~~~~~~
 
-Once the Wazuh - Elastic Stack environment is ready, a Wazuh agent can be installed in every endpoint to be monitored. The Wazuh installation guide is available for most operating systems and it can be found :ref:`here<installation_agents>`.
+Once the Wazuh - Elastic Stack environment is ready, a Wazuh agent can be installed on every endpoint to be monitored. The Wazuh installation guide is available for most operating systems and it can be found :ref:`here<installation_agents>`.

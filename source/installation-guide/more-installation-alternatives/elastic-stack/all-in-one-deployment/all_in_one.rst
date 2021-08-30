@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta:: :description: Learn how to install Wazuh and Elastic Stack on a single host
 
@@ -87,7 +87,7 @@ Certificates creation and deployment
 
     .. code-block:: console
 
-        # curl -so /usr/share/elasticsearch/instances.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/instances_aio.yml
+        # curl -so /usr/share/elasticsearch/instances.yml https://packages.wazuh.com/resources/4.2/elastic-stack/instances_aio.yml
     
     
     In the following steps, a file that contains a folder named after the instance defined here will be created. This folder will contain the certificates and the keys necessary to communicate with the Elasticsearch node using SSL.
@@ -127,30 +127,33 @@ To check that the installation was made successfully, run the following command 
 
 .. code-block:: console
   
-  # curl -XGET https://localhost:9200 -uelastic:<elastic_password> -k
+  # curl -XGET https://localhost:9200 -u elastic:<elastic_password> -k
 
 This command should have an output like this:
 
 .. code-block:: console
   :class: output
 
-  # {
+  {
     "name" : "elasticsearch",
     "cluster_name" : "elasticsearch",
-    "cluster_uuid" : "J4wjlf1USzKDMRmxnliFPw",
+    "cluster_uuid" : "TLGcuHLRTL6PAyIRlxjtLg",
     "version" : {
-      "number" : "7.8.0",
+      "number" : "7.11.2",
       "build_flavor" : "default",
       "build_type" : "rpm",
-      "build_hash" : "757314695644ea9a1dc2fecd26d1a43856725e65",
-      "build_date" : "2020-06-14T19:35:50.234439Z",
+      "build_hash" : "3e5a16cfec50876d20ea77b075070932c6464c7d",
+      "build_date" : "2021-03-06T05:54:38.141101Z",
       "build_snapshot" : false,
-      "lucene_version" : "8.5.1",
+      "lucene_version" : "8.7.0",
       "minimum_wire_compatibility_version" : "6.8.0",
       "minimum_index_compatibility_version" : "6.0.0-beta1"
     },
     "tagline" : "You Know, for Search"
   }
+
+
+
 
 .. _basic_all_in_one_wazuh:
 
@@ -263,13 +266,13 @@ Filebeat installation and configuration
 
     .. code-block:: console
 
-      # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/filebeat/7.x/filebeat_all_in_one.yml
+      # curl -so /etc/filebeat/filebeat.yml https://packages.wazuh.com/resources/4.2/elastic-stack/filebeat/7.x/filebeat_all_in_one.yml
 
 #. Download the alerts template for Elasticsearch:
 
     .. code-block:: console
 
-      # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/4.0/extensions/elasticsearch/7.x/wazuh-template.json
+      # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/|WAZUH_LATEST_MINOR|/extensions/elasticsearch/7.x/wazuh-template.json
       # chmod go+r /etc/filebeat/wazuh-template.json
 
 #. Download the Wazuh module for Filebeat:
@@ -320,7 +323,7 @@ An example response should look as follows:
       TLS version: TLSv1.3
       dial up... OK
     talk to server... OK
-    version: 7.8.0
+    version: 7.11.2
    
 
 
@@ -360,19 +363,19 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
     .. include:: ../../../../_templates/installations/basic/elastic/common/configure_kibana_all_in_one.rst
 
-#. Update the ``optimize`` and ``plugins`` directories permissions:
+#. Create the ``/usr/share/kibana/data`` directory:
 
     .. code-block:: console
     
-      # chown -R kibana:kibana /usr/share/kibana/optimize
-      # chown -R kibana:kibana /usr/share/kibana/plugins
+      # mkdir /usr/share/kibana/data
+      # chown -R kibana:kibana /usr/share/kibana
 
 #. Install the Wazuh Kibana plugin. The installation of the plugin must be done from the Kibana home directory as follows:
 
     .. code-block:: console
 
         # cd /usr/share/kibana
-        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.3_7.9.3-1.zip
+        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.2.0_7.11.2-1.zip
 
 #. Link Kibana's socket to privileged port 443:
 
@@ -430,4 +433,4 @@ To uninstall all the components of the all in one installation, visit the :ref:`
 Next steps
 ----------
 
-Once the Wazuh environment is ready, a Wazuh agent can be installed in every endpoint to be monitored. The Wazuh agent installation guide is available for most operating systems and can be found :ref:`here<installation_agents>`.
+Once the Wazuh environment is ready, a Wazuh agent can be installed on every endpoint to be monitored. The Wazuh agent installation guide is available for most operating systems and can be found :ref:`here<installation_agents>`.

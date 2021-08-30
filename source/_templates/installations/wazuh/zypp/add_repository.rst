@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 #. Import the GPG key:
 
@@ -20,4 +20,11 @@
       protect=1
       EOF 
 
+#. Refresh the repository:
+
+    .. code-block:: console
+ 
+      # zypper refresh
+
+      
 .. End of include file

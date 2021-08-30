@@ -1,5 +1,7 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Wazuh 3.4.0 has been released. Check out our release notes to discover the changes and additions of this release.
 .. _release_3_4_0:
 
 3.4.0 Release notes

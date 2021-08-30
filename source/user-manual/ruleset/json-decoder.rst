@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _ruleset_json-decoder:
 
@@ -89,39 +89,42 @@ The output of *wazuh-logtest* from the above JSON record is as follows:
 .. code-block:: none
     :class: output
 
+    Type one log per line
+
+    {"timestamp":"2016-05-02T17:46:48.515262+0000","flow_id":1234,"in_iface":"eth0","event_type":"alert","src_ip":"16.10.10.10","src_port":5555,"dest_ip":"16.10.10.11","dest_port":80,"proto":"TCP","alert":{"action":"allowed","gid":1,"signature_id":2019236,"rev":3,"signature":"ET WEB_SERVER Possible CVE-2014-6271 Attempt in HTTP Version Number","category":"Attempted Administrator Privilege Gain","severity":1},"payload":"21YW5kXBtgdW5zIGRlcHJY2F0QgYWI","payload_printable":"this_is_an_example","stream":0,"host":"suricata.com"}
+
     **Phase 1: Completed pre-decoding.
-       full event: '{"timestamp":"2016-05-02T17:46:48.515262+0000","flow_id":1234,"in_iface":"eth0","event_type":"alert","src_ip":"16.10.10.10","src_port":5555,"dest_ip":"16.10.10.11","dest_port":80,"proto":"TCP","alert":{"action":"allowed","gid":1,"signature_id":2019236,"rev":3,"signature":"ET WEB_SERVER Possible CVE-2014-6271 Attempt in HTTP Version Number","category":"Attempted Administrator Privilege Gain","severity":1},"payload":"21YW5kXBtgdW5zIGRlcHJY2F0QgYWI","payload_printable":"this_is_an_example","stream":0,"host":"suricata.com"}'
-       hostname: 'ip-172-31-22-71'
-       program_name: '(null)'
-       log: '{"timestamp":"2016-05-02T17:46:48.515262+0000","flow_id":1234,"in_iface":"eth0","event_type":"alert","src_ip":"16.10.10.10","src_port":5555,"dest_ip":"16.10.10.11","dest_port":80,"proto":"TCP","alert":{"action":"allowed","gid":1,"signature_id":2019236,"rev":3,"signature":"ET WEB_SERVER Possible CVE-2014-6271 Attempt in HTTP Version Number","category":"Attempted Administrator Privilege Gain","severity":1},"payload":"21YW5kXBtgdW5zIGRlcHJY2F0QgYWI","payload_printable":"this_is_an_example","stream":0,"host":"suricata.com"}'
 
     **Phase 2: Completed decoding.
-           decoder: 'json'
-           timestamp: '2016-05-02T17:46:48.515262+0000'
-           flow_id: '1234'
-           in_iface: 'eth0'
-           event_type: 'alert'
-           src_ip: '16.10.10.10'
-           src_port: '5555'
-           dest_ip: '16.10.10.11'
-           dest_port: '80'
-           proto: 'TCP'
-           alert.action: 'allowed'
-           alert.gid: '1'
-           alert.signature_id: '2019236'
-           alert.rev: '3'
-           alert.signature: 'ET WEB_SERVER Possible CVE-2014-6271 Attempt in HTTP Version Number'
-           alert.category: 'Attempted Administrator Privilege Gain'
-           alert.severity: '1'
-           payload: '21YW5kXBtgdW5zIGRlcHJY2F0QgYWI'
-           payload_printable: 'this_is_an_example'
-           stream: '0'
-           host: 'suricata.com'
+            name: 'json'
+            alert.action: 'allowed'
+            alert.category: 'Attempted Administrator Privilege Gain'
+            alert.gid: '1'
+            alert.rev: '3'
+            alert.severity: '1'
+            alert.signature: 'ET WEB_SERVER Possible CVE-2014-6271 Attempt in HTTP Version Number'
+            alert.signature_id: '2019236'
+            dest_ip: '16.10.10.11'
+            dest_port: '80'
+            event_type: 'alert'
+            flow_id: '1234'
+            host: 'suricata.com'
+            in_iface: 'eth0'
+            payload: '21YW5kXBtgdW5zIGRlcHJY2F0QgYWI'
+            payload_printable: 'this_is_an_example'
+            proto: 'TCP'
+            src_ip: '16.10.10.10'
+            src_port: '5555'
+            stream: '0'
+            timestamp: '2016-05-02T17:46:48.515262+0000'
 
     **Phase 3: Completed filtering (rules).
-           Rule id: '86601'
-           Level: '3'
-           Description: 'Suricata: Alert - ET WEB_SERVER Possible CVE-2014-6271 Attempt in HTTP Version Number'
+            id: '86601'
+            level: '3'
+            description: 'Suricata: Alert - ET WEB_SERVER Possible CVE-2014-6271 Attempt in HTTP Version Number'
+            groups: '['ids', 'suricata']'
+            firedtimes: '1'
+            mail: 'False'
     **Alert to be generated.
 
 .. _json_decoder_example_3.3:
@@ -152,20 +155,22 @@ The JSON decoder will extract the fields contained in the JSON event as dynamic 
 .. code-block:: none
     :class: output
 
+    Type one log per line
+
+    2018 Apr 04 13:11:52 nba_program: this_is_an_example: " player_information: "{ "name": "Stephen", "surname": "Curry", "team": "Golden State Warriors", "number": 30, "position": "point guard"}
+
     **Phase 1: Completed pre-decoding.
-        full event: '2018 Apr 04 13:11:52 nba_program: this_is_an_example: " player_information: "{ "name": "Stephen", "surname": "Curry", "team": "Golden State Warriors", "number": 30, "position": "point guard"}'
-        timestamp: '2018 Apr 04 13:11:52'
-        hostname: 'ubuntu18'
-        program_name: 'nba_program'
-        log: 'this_is_an_example: " player_information: "{ "name": "Stephen", "surname": "Curry", "team": "Golden State Warriors", "number": 30, "position": "point guard   "}'
+            full event: '2018 Apr 04 13:11:52 nba_program: this_is_an_example: " player_information: "{ "name": "Stephen", "surname": "Curry", "team": "Golden State Warriors", "number": 30, "position": "point guard"}'
+            timestamp: '2018 Apr 04 13:11:52'
+            program_name: 'nba_program'
 
     **Phase 2: Completed decoding.
-        decoder: 'raw_json'
-        name: 'Stephen'
-        surname: 'Curry'
-        team: 'Golden State Warriors'
-        number: '30'
-        position: 'point guard'
+            name: 'raw_json'
+            name: 'Stephen'
+            number: '30'
+            position: 'point guard'
+            surname: 'Curry'
+            team: 'Golden State Warriors'
 
 As we can see, the JSON decoder is not affected by any more data after a valid JSON object.
 
@@ -173,10 +178,14 @@ In addition, we could define a rule for these raw events decoded:
 
 .. code-block:: xml
 
-    <rule id="100001" level="5">
+    <group name="local,">
+
+      <rule id="100002" level="5">
         <decoded_as>raw_json</decoded_as>
         <description>Raw JSON event</description>
-    </rule>
+      </rule>
+
+    </group>
 
 Finally, the result retrieved by *wazuh-logtest* would be:
 
@@ -184,9 +193,12 @@ Finally, the result retrieved by *wazuh-logtest* would be:
     :class: output
 
     **Phase 3: Completed filtering (rules).
-        Rule id: '100001'
-        Level: '5'
-        Description: 'Raw JSON event'
+            id: '100002'
+            level: '5'
+            description: 'Raw JSON event'
+            groups: '['local']'
+            firedtimes: '1'
+            mail: 'False'
     **Alert to be generated.
 
 Another new feature is the ability of mixing plugin decoders with regex expressions, take a look in the following incoming log:
@@ -221,16 +233,18 @@ The output of the *wazuh-logtest* tool shows the decoded fields by the JSON deco
 .. code-block:: none
     :class: output
 
+    Type one log per line
+
+    2018 Jun 08 13:11:52 nba_email_db: json_data: { "name": "Stephen", "surname": "Curry", "email": "curry@gmail.com"}
+
     **Phase 1: Completed pre-decoding.
-        full event: '2018 Apr 04 13:11:52 nba_email_db: json_data: { "name": "Stephen", "surname": "Curry", "email": "curry@gmail.com"}'
-        timestamp: '2018 Apr 04 13:11:52'
-        hostname: 'ubuntu18'
-        program_name: 'nba_email_db'
-        log: 'json_data: { "name": "Stephen", "surname": "Curry", "email": "curry@gmail.com"}'
+            full event: '2018 Jun 08 13:11:52 nba_email_db: json_data: { "name": "Stephen", "surname": "Curry", "email": "curry@gmail.com"}'
+            timestamp: '2018 Jun 08 13:11:52'
+            program_name: 'nba_email_db'
 
     **Phase 2: Completed decoding.
-        decoder: 'json_parent'
-        name: 'Stephen'
-        surname: 'Curry'
-        email: 'curry@gmail.com'
-        email.domain: 'gmail.com'
+            name: 'json_parent'
+            parent: 'json_parent'
+            email: 'curry@gmail.com'
+            name: 'Stephen'
+            surname: 'Curry'

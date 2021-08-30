@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _learning_wazuh_survive_flood:
 
@@ -135,7 +135,7 @@ Generate a log flood on linux-agent
         #!/bin/bash
         for i in {1..10000}
         do
-          echo -n "1:floodtest:Feb  3 03:08:47 linux-agent centos: fatal firehose $i" | ncat -Uu /var/ossec/queue/ossec/queue
+          echo -n "1:floodtest:Feb  3 03:08:47 linux-agent centos: fatal firehose $i" | ncat -Uu /var/ossec/queue/sockets/queue
           echo -n "."
         done
 

@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _wazuh_agentd_state_file:
 
@@ -40,3 +40,11 @@ Below there is an example of the content of the file:
 
     # Number of messages (events + control messages) sent to the manager
     msg_sent='12928'
+
+    # Number of events currently buffered
+    # Empty if anti-flooding mechanism is disabled
+    msg_buffer='35'
+
+.. note::
+
+    Statistics can also be acquired in real-time through the API.

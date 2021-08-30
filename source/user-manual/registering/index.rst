@@ -1,5 +1,8 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Learn more about how to register Wazuh agents on Linux, Windows, or macOS X in this section of our documentation.
+  
 .. _register_agents:
 
 Registering Wazuh agents
@@ -7,21 +10,18 @@ Registering Wazuh agents
 
 .. note::
 
-	Since Wazuh 4.0, by default, the agent registers automatically with the manager through enrollment. Configuration details can be found on :ref:`Enrollment section <reference_ossec_client>`.
-
-.. meta::
-  :description: Learn more about the different methods that can be used to register Wazuh agents against the Wazuh manager.
+	Since Wazuh 4.0, by default, the agent registers automatically with the manager through enrollment. Configuration details can be found on the :ref:`Enrollment section <reference_ossec_client>`.
 
 The security event data collection from the Wazuh agent requires enabling the communication with the Wazuh manager.
 
-The Wazuh manager must know which Wazuh agent is sending the security events and if it is authorized. This step is called Wazuh agent registration and it can be done by using the ``registration service``. Using the port 1515 and TCP protocol, the Wazuh manager will attend the registration request of the Wazuh agent using a TLS connection. The Wazuh agent will obtain an unique
-key, used to encrypt the traffic between them. Once the registration is done, this communication will no longer be used, unless the Wazuh agent needs to be registered into a new Wazuh manager.
+The Wazuh manager needs to know which Wazuh agent is sending the security events and if they are authorized. This step is called Wazuh agent registration and can be performed using the ``registration service``. Using the port 1515 and TCP protocol, the Wazuh manager will attend the registration request of the Wazuh agent using a TLS connection. The Wazuh agent will obtain an unique
+key used to encrypt the traffic between them. Once the registration is done, this communication will no longer be used, unless the Wazuh agent needs to be registered into a new Wazuh manager.
 
 After the registration, the Wazuh agent has to be configured to indicate the destination where the collected security events will be sent. By default, the Wazuh manager will use a communication channel over the port 1514 using TCP protocol, through which The Wazuh Agent will send the collected data.
 
 .. note::
 
-    This documentation section can be skipped if the Wazuh agent was deployed using :ref:`Deployment variables <deployment_variables>`, :ref:`Deployed with Ansible <wazuh_ansible>` or :ref:`Deployed with Puppet <wazuh_puppet>`. In those cases, the registration process is different and described in their corresponding sections of the documentation.
+    This documentation section can be skipped if the Wazuh agent was deployed using :ref:`Deployment variables <deployment_variables>`, :ref:`Deployed with Ansible <wazuh_ansible>` or :ref:`Deployed with Puppet <wazuh_puppet>`. In these cases, the registration process is different and described in their corresponding sections of the documentation.
 
 
 .. _simple-registration-service:
@@ -73,21 +73,23 @@ To register the Wazuh agent, choose the tab corresponding to the Wazuh agent's h
 
     #. To register the Wazuh agent, run the ``agent-auth.exe`` utility, using the Wazuh manager's IP address:
     
-      .. tabs::
+    
+        .. tabs::
+    
+          .. group-tab:: Powershell
+    
+           .. code-block:: console
+    
+              # &'C:\Program Files (x86)\ossec-agent\agent-auth.exe' -m <manager_IP> 
+    
+          .. group-tab:: Windows cmd
+    
+           .. code-block:: console
+    
+              # "C:\Program Files (x86)\ossec-agent\agent-auth.exe" -m <manager_IP>
 
-       .. group-tab:: Powershell
 
-         .. code-block:: console
-
-          # &'C:\Program Files (x86)\ossec-agent\agent-auth.exe' -m <manager_IP> 
-
-       .. group-tab:: Windows cmd
-
-         .. code-block:: console
-
-          # "C:\Program Files (x86)\ossec-agent\agent-auth.exe" -m <manager_IP>
-
-      .. include:: ../../_templates/registrations/common/set_agent_name.rst
+        .. include:: ../../_templates/registrations/common/set_agent_name.rst
 
 
     #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``C:\Program Files (x86)\ossec-agent\ossec.conf``.
@@ -133,7 +135,7 @@ To register the Wazuh agent, choose the tab corresponding to the Wazuh agent's h
     The Wazuh agent registration can be adjusted by using different :ref:`agent-auth` options.
 
 
-There are also other easy registration methods. The choice depends on the particular use case and the user's preferences:
+There are also other easy registration methods. The choice depends on the particular use case and the preferences of the user:
 
 +-----------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Registration method                                                                                 | Description                                                                                                                                                         |
@@ -149,7 +151,7 @@ There are also other easy registration methods. The choice depends on the partic
 
 To learn more about the Wazuh agent registration process, please read the :ref:`registering Wazuh agents - additional information <registering_agent_theory>`.
 
-In case of having problems during the registration, several solutions can be found on :ref:`registering Wazuh agents - troubleshooting <registering-agents-troubleshooting>`.
+In case of problems during registration, visit the :ref:`registering Wazuh agents - troubleshooting <registering-agents-troubleshooting>` page to find a solution.
 
 .. toctree::
     :maxdepth: 2

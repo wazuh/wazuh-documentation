@@ -1,4 +1,9 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
+
+.. meta::
+  :description: The wazuh-agentd program is the client-side daemon that handles communications with the server. Find out more in this section. 
+
+
 
 .. _wazuh-agentd:
 

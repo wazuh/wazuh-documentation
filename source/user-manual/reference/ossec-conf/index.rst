@@ -1,5 +1,7 @@
-.. Copyright (C) 2020 Wazuh, Inc.
-
+.. Copyright (C) 2021 Wazuh, Inc.
+.. meta::
+  :description: Learn more about the Wazuh local configuration, including configuration sections and supported installations, in this section of our documentation. 
+  
 .. _reference_ossec_conf:
 
 Local configuration (ossec.conf)

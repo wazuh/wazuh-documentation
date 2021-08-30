@@ -1,5 +1,7 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Wazuh 3.7.0 has been released. Check out our release notes to discover the changes and additions of this release.
 .. _release_3_7_0:
 
 3.7.0 Release notes
@@ -162,7 +164,7 @@ Breaking changes
 
 Wazuh 3.7.0 introduces an update to the Elasticsearch template. This will cause a **breaking change** in existing installations, although new installations **won't be affected** by this error.
 
-To learn more about how to fix this, check out the Kibana app's :ref:`toubleshooting guide <kibana_troubleshooting_3_7_0>`.
+To learn more about how to fix this, check out the Kibana app's troubleshooting guide.
 
 New features for Splunk plugin
 ------------------------------

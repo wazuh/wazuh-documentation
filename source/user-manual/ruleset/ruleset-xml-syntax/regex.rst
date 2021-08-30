@@ -1,5 +1,7 @@
-.. Copyright (C) 2020 Wazuh, Inc.
-
+.. Copyright (C) 2021 Wazuh, Inc.
+.. meta::
+  :description: Learn more about regular expressions or regex. The Wazuh Ruleset is used to analyze incoming events and generate alerts when appropriate. 
+  
 .. _regex_syntax:
 
 Regular Expression Syntax
@@ -85,6 +87,8 @@ This library is designed to be simple while still supporting the most common reg
   - ``.`` matches a literal dot, whereas ``\.`` matches any character
   - ``\s`` matches only an ASCII space (32), not other whitespace like tab
   - there is no syntax to match a literal caret, asterisk or plus (although ``\p`` will match asterisk or plus, along with some other characters)
+
+.. _os_sregex_syntax:
 
 Sregex (OS_Match) syntax
 -----------------------------

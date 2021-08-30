@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. tabs::
 
@@ -8,7 +8,7 @@
 
       .. code-block:: console
 
-        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.3_7.9.3-1.zip
+        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.2.0_7.11.2-1.zip
 
 
 
@@ -17,7 +17,7 @@
 
       .. code-block:: console
 
-        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install file:///path/wazuh_kibana-4.0.3_7.9.3-1.zip
+        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install file:///path/wazuh_kibana-4.2.0_7.11.2-1.zip
 
 
 

@@ -1,5 +1,7 @@
-.. Copyright (C) 2020 Wazuh, Inc.
-
+.. Copyright (C) 2021 Wazuh, Inc.
+.. meta::
+  :description: Learn more about the Wazuh agent lifecycle here: registered agents, the status of the agents, and removed agents.  
+  
 .. _agent-life-cycle:
 
 Agent life cycle
@@ -25,7 +27,7 @@ Agent status
 - **Never connected:** The agent has been registered but has not yet connected to the manager.
 - **Pending.** The authentication process is pending: The manager has received a request for connection from the agent but has not received anything else. This may indicate a firewall issue. The agent will be in this state one time in its life cycle after each startup.
 - **Active:** The agent has successfully connected and can now communicate with the manager.
-- **Disconnected:** The manager will consider the agent disconnected if it does not receive any ``keep alive`` messages within :ref:`agents_disconnection_time<reference_agents_disconnection_time>` (20s default time).
+- **Disconnected:** The manager will consider the agent disconnected if it does not receive any ``keep alive`` messages within :ref:`agents_disconnection_time<reference_agents_disconnection_time>` (10m default time).
 
 Removed agent
 -------------

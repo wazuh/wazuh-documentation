@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. tabs::
 
@@ -16,7 +16,7 @@
 
                 .. code-block:: console
 
-                    # apt-get install apt-transport-https zip unzip lsb-release curl gnupg2
+                    # apt-get install apt-transport-https zip unzip lsb-release curl gnupg
 
         .. group-tab:: ZYpp
 

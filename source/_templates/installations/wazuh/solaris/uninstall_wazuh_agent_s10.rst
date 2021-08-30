@@ -1,6 +1,6 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
-To uninstall the agent in Solaris 10:
+To uninstall the Wazuh agent in Solaris 10, run the following command:
 
 .. code-block:: console
 

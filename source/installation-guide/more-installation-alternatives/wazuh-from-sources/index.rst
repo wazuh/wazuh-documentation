@@ -1,11 +1,10 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _installation_from_sources:
 
 Wazuh installation from sources
 ===============================
-
-
+The Wazuh manager and agent can be installed via sources as an alternative to the installation from packages.
 
 .. toctree::
     :maxdepth: 1

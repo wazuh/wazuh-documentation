@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _create-splunk-app:
 
@@ -21,6 +21,18 @@ Download our wazuh-packages repository from GitHub and go to the splunkapp direc
 
   $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/splunkapp
 
+If you want to build a version later or equal to |WAZUH_GCC_CHANGE|, you must change to |WAZUH_PACKAGES_BRANCH| branch.
+
+.. code-block:: console
+
+ $ git checkout |WAZUH_PACKAGES_BRANCH|
+
+If you want to build a version prior to |WAZUH_GCC_CHANGE|, you must change to the corresponding tag, e.g. v|WAZUH_PREGCC_CHANGE|
+
+.. code-block:: console
+
+ $ git checkout v|WAZUH_PREGCC_CHANGE|
+
 Execute the ``generate_wazuh_splunk_app.sh`` script, with the different options you desire. This script will build a Docker image with all the necessary tools to create the Wazuh Splunk App package and run a container that will build it:
 
 .. code-block:: console
@@ -32,7 +44,7 @@ Execute the ``generate_wazuh_splunk_app.sh`` script, with the different options 
 
   Usage: ./generate_wazuh_splunk_app.sh [OPTIONS]
   
-      -b, --branch <branch>     [Required] Select Git branch or tag e.g. 3.8 or v3.8.1-7.2.3
+      -b, --branch <branch>     [Required] Select Git branch or tag.
       -s, --store <directory>   [Optional] Destination directory by default /home/vagrant/wazuh-wazuh-packages-26460eb/splunkapp/output
       -r, --revision            [Optional] Package revision that append to version e.g. x.x.x-y.y.y_rev
       -c, --checksum <path>     [Optional] Generate checksum

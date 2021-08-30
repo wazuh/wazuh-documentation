@@ -1,11 +1,11 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _regulatory_compliance:
 
 Regulatory compliance
 =====================
 
-The Wazuh platform is often used to meet the technical aspects of regulatory compliance standards. Wazuh not only provides the necessary security controls (e.g. intrusion detection, configuration assessment, log analysis, vulnerability detection, etc.) to meet with the compliance requirements, but it also uses its SIEM capabilities to centralize, analyze, and enrich security data. 
+The Wazuh platform is often used to meet the technical aspects of regulatory compliance standards. Wazuh not only provides the necessary security controls such as intrusion detection, configuration assessment, log analysis, vulnerability detection, among others, to meet compliance requirements, but also uses its SIEM capabilities to centralize, analyze and enrich security data. 
 
 In order to provide regulatory compliance support, the Wazuh rules have carefully been mapped against compliance requirements. This way, when an alert is generated (a rule condition has been matched), it automatically includes compliance information. Here is the list of currently supported standards:
 
@@ -94,11 +94,11 @@ Example alert for rule ``Apache: Attempt to access forbidden directory index.``:
 
 Example of regulatory compliance dashboard for PCI DSS:
 
-.. image:: ../../images/getting_started/use_case_regulatory_compliance.png
+.. thumbnail:: ../../images/getting_started/use_case_regulatory_compliance.png
    :align: center
-   :width: 100%
+   :wrap_image: No
 
-More information about how Wazuh helps meet regulatory compliance requirements can be found at:
+More information on how Wazuh helps meet compliance requirements can be found at:
 
 - :ref:`Using Wazuh for PCI DSS <pci_dss>`
 - :ref:`Using Wazuh for GDPR <gdpr>`

@@ -1,5 +1,7 @@
-.. Copyright (C) 2020 Wazuh, Inc.
-
+.. Copyright (C) 2021 Wazuh, Inc.
+.. meta::
+  :description: Learn more about how to configure syslog output in the Wazuh server administration section of our documentation. 
+  
 .. _manual_syslog_output:
 
 Configuring syslog output
