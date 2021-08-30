@@ -47,7 +47,7 @@ Once, the directory path is removed from the syscheck configuration and the Wazu
 Configuring scan time
 ---------------------
 
-By default, syscheck scans when the Wazuh starts, however, this behavior can be changed with the :ref:`scan_on_start <reference_ossec_syscheck_scan_on_start>` option.
+By default, syscheck scans when the Wazuh starts, however, this behavior can be changed with the `scan_on_start` option.
 
 For the schedluled scans, syscheck has an option to configure the :ref:`frequency <reference_ossec_syscheck_frequency>` of the system scans. In this example, syscheck is configured to run every 10 hours:
 
@@ -126,7 +126,7 @@ It sets a delay between real-time alerts in milliseconds. The value has to be de
 Configuring reporting new files
 -------------------------------
 
-To report new files added to the system, syscheck can be configured with the :ref:`alert_new_files <reference_ossec_syscheck_alert_new_files>` option. By default, this feature is enabled on the monitored Wazuh agent, but the option is not present in the syscheck section of the configuration:
+To report new files added to the system, syscheck can be configured with the `alert_new_files` option. By default, this feature is enabled on the monitored Wazuh agent, but the option is not present in the syscheck section of the configuration:
 
 .. code-block:: xml
 
