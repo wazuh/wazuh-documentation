@@ -26,7 +26,7 @@ Below you can find examples of some of the most common use cases of the Wazuh so
      - :ref:`file_integrity`
    * - :ref:`vulnerability_detection`
      - :ref:`configuration_assessment`
-   * - :ref:`active_response`
+   * - :ref:`incident_response`
      - :ref:`regulatory_compliance`
    * - :ref:`cloud_security`
      - :ref:`containers_security`
@@ -40,7 +40,7 @@ Below you can find examples of some of the most common use cases of the Wazuh so
    file_integrity
    vulnerability_detection
    configuration_assessment
-   active_response
+   incident_response
    regulatory_compliance
    cloud_security
    containers_security
