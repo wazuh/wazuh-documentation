@@ -104,6 +104,8 @@ Create and deploy SSL certificates to encrypt communications between the Wazuh c
      .. code-block:: console
   
        # /usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer
+     
+     Proceed with enabling and starting Elasticsearch service:
 
     .. include:: ../../_templates/installations/elastic/common/enable_elasticsearch.rst
 
