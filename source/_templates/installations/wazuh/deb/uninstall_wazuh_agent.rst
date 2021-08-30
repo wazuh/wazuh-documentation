@@ -1,10 +1,10 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. code-block:: console
 
   # apt-get remove wazuh-agent
 
-There are certain files marked as configuration files. Due to this designation, the package manager does not remove those files from the filesystem. A complete file removal can be done using the following command:
+Some files are marked as configuration files. Due to this designation, the package manager does not remove these files from the filesystem. If you want to completely remove all files, run the following command:
 
 .. code-block:: console
 

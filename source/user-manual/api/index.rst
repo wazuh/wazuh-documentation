@@ -1,11 +1,13 @@
-.. Copyright (C) 2020 Wazuh, Inc.
-
+.. Copyright (C) 2021 Wazuh, Inc.
+.. meta::
+  :description: The Wazuh API is an open source RESTful API that allows for interaction with the Wazuh manager. Check out the list of the Wazuh API capabilities.
+  
 .. _api:
 
 RESTful API
 ===========
 
-The Wazuh API is an open source RESTful API that allows for interaction with the Wazuh manager from a web browser, command line tool like cURL or any script or program able to make web requests. The Wazuh UI relies on the Wazuh API and Wazuh's ultimate goal is to accommodate complete remote management of the Wazuh infrastructure via the Wazuh UI. Use the Wazuh API to easily perform everyday actions like adding an agent, restarting the manager(s) or agent(s) or looking up syscheck details.
+The Wazuh API is an open source RESTful API that allows interaction with the Wazuh manager from a web browser, a command line tool such as cURL or any script or program able to make web requests. The Wazuh UI relies on the Wazuh API and the ultimate goal of Wazuh is to accommodate complete remote management of its infrastructure via the Wazuh UI. Use the Wazuh API to easily perform everyday actions such as adding an agent, restarting the manager(s) or agent(s), or looking up syscheck details.
 
 Here is a list of the Wazuh API capabilities:
 
@@ -24,7 +26,7 @@ Here is a list of the Wazuh API capabilities:
 * Error handling
 * Query remote configuration
 
-For more details, see the :ref:`Use Cases <wazuh_api_use_cases>`.
+For more details, check out the :ref:`Use Cases <wazuh_api_use_cases>`.
 
 
 .. topic:: Contents

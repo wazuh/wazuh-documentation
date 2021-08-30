@@ -1,5 +1,7 @@
-.. Copyright (C) 2020 Wazuh, Inc.
-
+.. Copyright (C) 2021 Wazuh, Inc.
+.. meta::
+  :description: Check out our documentation to learn about registering Wazuh agents and the registration service with password authorization. 
+  
 .. _password-authorization-registration:
 
 Registration service with password authorization

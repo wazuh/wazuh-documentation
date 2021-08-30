@@ -1,4 +1,7 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
+
+.. meta::
+  :description: Check out more information on how to upgrade Wazuh installed in Kubernetes.
 
 .. _kubernetes_upgrade:
 
@@ -12,17 +15,17 @@ Our Kubernetes deployment uses our Wazuh images from Docker. If we look at the f
 
 .. code-block:: bash
 
-    DATA_DIRS[((i++))]="api/configuration"
-    DATA_DIRS[((i++))]="etc"
-    DATA_DIRS[((i++))]="logs"
-    DATA_DIRS[((i++))]="queue/db"
-    DATA_DIRS[((i++))]="queue/agent-groups"
-    DATA_DIRS[((i++))]="queue/agents-timestamp"
-    DATA_DIRS[((i++))]="queue/agentless"
-    DATA_DIRS[((i++))]="queue/cluster"
-    DATA_DIRS[((i++))]="queue/rids"
-    DATA_DIRS[((i++))]="queue/fts"
-    DATA_DIRS[((i++))]="var/multigroups"
+    /var/ossec/api/configuration
+    /var/ossec/etc
+    /var/ossec/logs
+    /var/ossec/queue
+    /var/ossec/var/multigroups
+    /var/ossec/integrations
+    /var/ossec/active-response/bin
+    /var/ossec/agentless
+    /var/ossec/wodles
+    /etc/filebeat
+    /var/lib/filebeat
 
 Any modification related to these files will also be made in the associated volume. When the replica pod is created, it will get those files from the volume, keeping the previous changes.
 
@@ -34,8 +37,7 @@ The only step to update Wazuh is to change the image of the pod in each file tha
 These files are the *StatefulSet* files:
 
     - wazuh-master-sts.yaml
-    - wazuh-worker-0-sts.yaml
-    - wazuh-worker-1-sts.yaml
+    - wazuh-worker-sts.yaml
 
 For example:
 
@@ -43,17 +45,17 @@ For example:
 
     containers:
     - name: wazuh-manager
-      image: 'wazuh/wazuh:|WAZUH_LATEST_KUBERNETES|_|ELASTICSEARCH_LATEST_KUBERNETES|'
+      image: 'wazuh/wazuh:|WAZUH_LATEST_KUBERNETES|'
 
 
 Apply the new configuration
 ---------------------------
 
-The last step is to apply the new configuration of each pod. For example for the wazuh manager master:
+The last step is to apply the new configuration:
 
 .. code-block:: console
 
-    $ kubectl apply -f wazuh-manager-master-sts.yaml
+    $ kubectl apply -k envs/eks/
 
 .. code-block:: none
     :class: output

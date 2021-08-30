@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. tabs::
 
@@ -26,7 +26,7 @@
 
     - An ``elasticsearch`` instance with IP ``10.0.0.2``.
     - A ``filebeat`` instance with IP ``10.0.0.3`` corresponding to a single-node Wazuh cluster.
-    - A ``kibana`` instance with IP ``10.0.0.4``. If Kibana will be installed in the same server as Elastisearch, the same IP may be used.  
+    - A ``kibana`` instance with IP ``10.0.0.4``. If Kibana will be installed in the same server as Elasticsearch, the same IP may be used.  
     
     Replace the IPs with the corresponding addresses for each instance in your environment.
 
@@ -69,7 +69,7 @@
 
     - An ``elasticsearch`` instance with IP ``10.0.0.2``. It is an Elasticsearch single-node cluster.
     - Two ``filebeat`` instances, the #1 and #2 with their respective IPs ``10.0.0.3`` and ``10.0.0.4``. These correspond to two Wazuh cluster nodes. In case of configuring a Wazuh multi-node cluster with three or more nodes, more ``name`` sections with their respective names and IPs can be defined.
-    - A ``kibana`` instance with IP ``10.0.0.5``. If Kibana will be installed in the same server as Elastisearch, the same IP may be used.   
+    - A ``kibana`` instance with IP ``10.0.0.5``. If Kibana will be installed in the same server as Elasticsearch, the same IP may be used.   
 
     Replace the IPs of this example with the corresponding addresses in your environment.
 

@@ -1,11 +1,11 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _file_integrity:
 
 File integrity monitoring
 =========================
 
-The File Integrity Monitoring (FIM) component detects and alerts when operating system or application files are modified. This capability is often used to detect access or changes to sensitive data. If your servers are in scope with PCI DSS regulatory compliance, the requirement 11.5 states that you must install a file integrity monitoring solution to pass your audit.
+The File Integrity Monitoring (FIM) component detects and alerts when operating system or application files are modified. This capability is often used to detect access or changes to sensitive data. If your servers are PCI DSS compliant, requirement 11.5 stipulates that a file integrity monitoring solution must be installed in order to successfully pass the audit.
 
 Below is an example of an alert generated when a monitored file is changed. Metadata includes MD5, SHA1 and SHA256 checksums, file sizes (before and after the change), file permissions, file owner, content changes, and the user who made these changes (who-data).
 
@@ -92,8 +92,8 @@ Below is an example of an alert generated when a monitored file is changed. Meta
 
 A good summary of file changes can be found in the FIM dashboard, which provides drill-down capabilities to view all of the details of the alerts triggered.
 
-.. image:: ../../images/getting_started/use_case_fim.png
+.. thumbnail:: ../../images/getting_started/use_case_fim.png
    :align: center
-   :width: 100%
+   :wrap_image: No
 
-More information about how does Wazuh monitor file integrity can be found at the :ref:`user manual <manual_file_integrity>`.
+More information on how Wazuh monitors file integrity can be found in the :ref:`user manual <manual_file_integrity>`.

@@ -1,5 +1,8 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: This guide provides the basic information needed to get started with the Wazuh API, including some practical use cases. 
+  
 .. _api_getting_started:
 
 Getting started
@@ -24,6 +27,10 @@ The Wazuh API will be installed along the Wazuh manager by default. To control o
 
     # service wazuh-manager start/status/stop/restart
 
+.. note::
+    The -k parameter applied to API requests is used to avoid the server connection verification by using server certificates. If these are valid, this parameter can be removed.
+    To configure the certificates use the following guide :ref:`Securing API <securing_api>`.
+
 .. _api_log_in:
 
 Logging into the Wazuh API
@@ -41,7 +48,7 @@ Wazuh API endpoints require authentication in order to be used. Therefore, all c
 
     By default (``raw=false``), the token is obtained in an ``application/json`` format. If using this option, copy the token found in ``<YOUR_JWT_TOKEN>`` without the quotes.
 
-    .. code-block:: none
+    .. code-block:: json
         :class: output
 
         {
@@ -235,14 +242,16 @@ Running the script provides a result similar to the following:
     Getting /agents/summary/os:
 
     {
-       "data": {
-          "active": 1,
-          "disconnected": 0,
-          "never_connected": 0,
-          "pending": 0,
-          "total": 1
-       },
-       "error": 0
+        "data": {
+            "affected_items": [
+                "windows"
+            ],
+            "total_affected_items": 1,
+            "total_failed_items": 0,
+            "failed_items": []
+        },
+        "message": "Showing the operative system of all specified agents",
+        "error": 0
     }
 
     End of the script.
@@ -411,7 +420,7 @@ Here are some of the basic concepts related to making API requests and understan
           }
         }
 
-- Responses containing collections of data will return a maximum of 500 elements. The *offset* and *limit* parameters may be used to iterate through large collections.
+- Responses containing collections of data will return a maximum of 500 elements by default. The *offset* and *limit* parameters may be used to iterate through large collections. The *limit* parameter accepts up to 100000 items, although it is recommended not to exceed the default value (500 items). Doing so can lead to unexpected behaviors (timeouts, large responses, etc.). Use with caution.
 - All responses have an HTTP status code: 2xx (success), 4xx (client error), 5xx (server error), etc.
 - All requests (except ``GET /security/user/authenticate`` and ``POST /security/user/authenticate/run_as``) accept the parameter ``pretty`` to convert the JSON response to a more human-readable format.
 - The Wazuh API log is stored on the manager as ``/var/ossec/logs/api.log`` (the path and verbosity level can be changed in the Wazuh API configuration file). The Wazuh API logs are rotated daily. Rotated logs are stored in ``/var/ossec/logs/api/<year>/<month>`` and compressed using ``gzip``.

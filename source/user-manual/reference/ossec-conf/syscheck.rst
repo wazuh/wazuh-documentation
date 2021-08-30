@@ -1,4 +1,7 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
+.. meta::
+  :description: The ossec.conf file is the main configuration file on the Wazuh manager and it also plays an important role on the agents. Learn more about it and check out an example here. 
+
 
 .. _reference_ossec_syscheck:
 
@@ -24,6 +27,7 @@ Configuration options for file integrity monitoring:
 - `frequency`_
 - `ignore`_
 - `max_eps`_
+- `max_files_per_second`_
 - `prefilter_cmd`_
 - `process_priority`_
 - `registry_ignore`_
@@ -442,6 +446,28 @@ Example:
  <max_eps>100</max_eps>
 
 
+.. _reference_ossec_syscheck_max_files_per_second:
+
+max_files_per_second
+--------------------
+
+.. versionadded:: 4.2.0
+
+Sets the maximum number of files scanned per second. If this option is set to 0, there will be no limit on the number of files scanned per second.
+
++--------------------+---------------------------------------------------------+
+| **Default value**  | 0                                                       |
++--------------------+---------------------------------------------------------+
+| **Allowed values** | Integer positive number. 0 means no limit.              |
++--------------------+---------------------------------------------------------+
+
+Example:
+
+.. code-block:: xml
+
+ <max_files_per_second>100</max_files_per_second>
+
+
 .. _reference_ossec_syscheck_prefilter_cmd:
 
 prefilter_cmd
@@ -817,6 +843,19 @@ The database synchronization settings are configured inside this tag.
 .. versionadded:: 3.12.0
 
 Specifies whether there will be periodic inventory synchronizations or not.
+
++--------------------+---------------------------------------+
+| **Default value**  | yes                                   |
++--------------------+---------------------------------------+
+| **Allowed values** | yes/no                                |
++--------------------+---------------------------------------+
+
+**registry_enabled**
+
+.. versionadded:: 4.1.0
+
+On Windows agents, enables inventory synchronizations for registry entries. If ``enabled`` is set to no,
+this parameter is ignored.
 
 +--------------------+---------------------------------------+
 | **Default value**  | yes                                   |
@@ -1289,8 +1328,8 @@ Example:
 
 .. _reference_ossec_syscheck_default_configuration:
 
-Defaut syscheck configuration:
-------------------------------
+Default syscheck configuration:
+-------------------------------
 
 
 

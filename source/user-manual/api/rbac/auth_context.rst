@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _authorization_context_method:
 
@@ -10,18 +10,22 @@ This guide provides the basic information needed to start using the Authorizatio
 Authorization context login method
 ----------------------------------
 
-This authentication method is used to obtain the permissions dynamically. It allows any authorized user to possibly obtain any desired permissions without assigning it to any role. To do this, a properly formalization of the authorization context is needed. In this case the user-roles relations are not taken in consideration. In order to use this method of authentication, a user allowed to use authorization context is needed (how to create a user allowed to use authorization context information :ref:`here <api_rbac_user>`). After that, and having created the necessary security rules, an authorization context with all the required information must be sent, it will be checked against the security rules and finally the permissions associated with them will be granted:
+This authentication method (:api-ref:`GET /security/user/authenticate/run_as <operation/api.controllers.security_controller.run_as_login>`) is used to obtain the permissions dynamically. It allows any authorized user to possibly obtain any desired permissions without it being assigned to any role. To do this, a proper formalization of the authorization context is needed. In this case, the user-roles relations are not taken into consideration.
 
-.. code-block:: console
-        :class: output
+In order to use this authentication method, a user allowed to use authorization context is needed (how to create and allow a user to use authorization context information :ref:`here <api_rbac_user>`). After that, and having created the necessary security rules, an authorization context with all the required information must be sent, it will be checked against the security rules and finally, the permissions associated with them will be granted:
 
-        curl -k -u <user>:<password> -X POST https://localhost:55000/security/user/authenticate/run_as -H 'content-type: application/json' -d '{
+.. code-block:: 
+
+        # curl -k -u <user>:<password> -X POST https://localhost:55000/security/user/authenticate/run_as -H 'content-type: application/json' -d '{
                 "name": "Initial_auth",
                 "auth": {
                         "name": "Bill",
                         "office": ["20", "21", "30"]
                 }
         }'
+
+.. code-block:: json
+        :class: output
 
         {
                 "data": {
@@ -225,7 +229,6 @@ Example 1
 - To achieve this, the user uses the following authorization context:
 
 .. code-block:: json
-        :class: output
 
         {
             "name": "Eleventh_auth",
@@ -324,7 +327,6 @@ Example 2
 - To achieve this match, the user sends the following authorization context:
 
 .. code-block:: json
-        :class: output
 
         {
             "name": "First_example",

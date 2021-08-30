@@ -1,27 +1,20 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
-.. meta:: :description: Learn how to install Wazuh and Elastic Stack on a single host
+.. meta::
+  :description: Discover the step-by-step process to install Wazuh and OpenDistro components for Elasticsearch in an all-in-one deployment. 
 
 .. _all_in_one:
 
 Step-by-step installation
 =========================
 
-This document guides through the installation of the Wazuh and Open Distro for Elasticsearch components in an all-in-one deployment. This deployment type is meant for small production environments and testing purposes. 
+Install Wazuh and Open Distro for Elasticsearch components in an all-in-one deployment. Follow the instructions to configure the official repositories to perform installations. 
 
-This guide provides instructions to configure the official repositories to do the installations, alternatively, the installation can be done using packages. A list of all the available packages can be found :ref:`here <packages>`. 
+As an alternative to this installation method, you can install Wazuh using packages. To perform this action, see the :ref:`Packages list <packages>` section. 
 
-.. note:: Root user privileges are required to run all the commands described below.
+.. note:: Root privileges are required to execute all the commands.
 
 .. _all_in_one_elastic:
-
-Prerequisites
--------------
-
-Open Distro for Elasticsearch requires the Java Development Kit and other packages installation including ``wget``, ``curl``, ``unzip``, and ``libcap`` that will be used in further steps:
-
-.. include:: ../../../_templates/installations/before_installation_all_in_one.rst
-
 
 .. _all_in_one_wazuh:
 
@@ -30,7 +23,7 @@ Installing Wazuh
 
 The Wazuh server collects and analyzes data from the deployed Wazuh agents. It runs the Wazuh manager, the Wazuh API and Filebeat. 
 
-The first step to set up Wazuh is to add the Wazuh repository to the server.
+To start setting up Wazuh, add the Wazuh repository to the server.
 
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -41,21 +34,21 @@ Adding the Wazuh repository
   .. group-tab:: Yum
 
 
-    .. include:: ../../../_templates/installations/wazuh/yum/add_repository.rst
+    .. include:: ../../../_templates/installations/wazuh/yum/add_repository_aio.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../../_templates/installations/wazuh/deb/add_repository.rst
+    .. include:: ../../../_templates/installations/wazuh/deb/add_repository_aio.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../_templates/installations/wazuh/zypp/add_repository.rst    
+    .. include:: ../../../_templates/installations/wazuh/zypp/add_repository_aio.rst    
 
 
 
@@ -108,13 +101,14 @@ Configuring Elasticsearch
 
 .. include:: ../../../_templates/installations/elastic/common/elastic-single-node/configure_elasticsearch_all_in_one.rst
 
-Elasticsearch roles and users
+Elasticsearch users and roles
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In order to use the Wazuh Kibana plugin properly, it is necessary to add the extra roles and users:
+You need to add users and roles in order to use the Wazuh Kibana properly.
+
+Run the following commands to add the Wazuh users and additional roles in Kibana:
 
 .. include:: ../../../_templates/installations/elastic/common/add_roles_and_users.rst
-
 
 Certificates creation
 ~~~~~~~~~~~~~~~~~~~~~
@@ -132,13 +126,13 @@ Certificates creation
 
     .. include:: ../../../_templates/installations/elastic/common/enable_elasticsearch.rst
 
-#. Run the Elasticsearch's ``securityadmin`` script to load the new certificates information and start the cluster:
+#. Run the Elasticsearch ``securityadmin`` script to load the new certificates information and start the cluster:
 
   .. code-block:: console
 
-    # /usr/share/elasticsearch/plugins/opendistro_security/tools/securityadmin.sh -cd /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/ -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key
+    # export JAVA_HOME=/usr/share/elasticsearch/jdk/ && /usr/share/elasticsearch/plugins/opendistro_security/tools/securityadmin.sh -cd /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/ -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin-key.pem
 
-Run the following command to ensure that the installation has been successful:
+Run the following command to ensure that the installation is successful:
 
 .. code-block:: console
 
@@ -147,27 +141,27 @@ Run the following command to ensure that the installation has been successful:
 An example response should look as follows:
 
 .. code-block:: none
-             :class: output
+    :class: output
 
-              {
-                "name" : "node-1",
-                "cluster_name" : "elasticsearch",
-                "cluster_uuid" : "2gIeOOeUQh25c2yU0Pd-RQ",
-                "version" : {
-                  "number" : "7.9.1",
-                  "build_flavor" : "oss",
-                  "build_type" : "rpm",
-                  "build_hash" : "083627f112ba94dffc1232e8b42b73492789ef91",
-                  "build_date" : "2020-09-01T21:22:21.964974Z",
-                  "build_snapshot" : false,
-                  "lucene_version" : "8.6.2",
-                  "minimum_wire_compatibility_version" : "6.8.0",
-                  "minimum_index_compatibility_version" : "6.0.0-beta1"
-                },
-                "tagline" : "You Know, for Search"
-              }
-  
-
+    {
+      "name" : "node-1",
+      "cluster_name" : "elasticsearch",
+      "cluster_uuid" : "tWYgqpgdRz6fGN8gH11flw",
+      "version" : {
+        "number" : "7.10.2",
+        "build_flavor" : "oss",
+        "build_type" : "rpm",
+        "build_hash" : "747e1cc71def077253878a59143c1f785afa92b9",
+        "build_date" : "2021-01-13T00:42:12.435326Z",
+        "build_snapshot" : false,
+        "lucene_version" : "8.7.0",
+        "minimum_wire_compatibility_version" : "6.8.0",
+        "minimum_index_compatibility_version" : "6.0.0-beta1"
+      },
+      "tagline" : "You Know, for Search"
+    }
+              
+.. note:: The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it with the following command ``/usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer``. Please be sure to restart the Elasticsearch service afterwards. 
 
 .. _wazuh_server_packages_filebeat:
 
@@ -202,11 +196,11 @@ Filebeat is the tool on the Wazuh server that securely forwards alerts and archi
 
 
 
-#. Download the pre-configured Filebeat configuration file used to forward the Wazuh alerts to Elasticsearch:
+#. Download the preconfigured Filebeat configuration file used to forward the Wazuh alerts to Elasticsearch:
 
     .. code-block:: console
 
-      # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/filebeat/7.x/filebeat_all_in_one.yml
+      # curl -so /etc/filebeat/filebeat.yml https://packages.wazuh.com/resources/4.2/open-distro/filebeat/7.x/filebeat_all_in_one.yml
 
 #. Download the alerts template for Elasticsearch:
 
@@ -224,15 +218,15 @@ Filebeat is the tool on the Wazuh server that securely forwards alerts and archi
     .. code-block:: console
 
       # mkdir /etc/filebeat/certs
-      # cp /etc/elasticsearch/certs/root-ca.pem /etc/filebeat/certs/
-      # mv /etc/elasticsearch/certs/filebeat* /etc/filebeat/certs/
+      # cp ~/certs/root-ca.pem /etc/filebeat/certs/
+      # mv ~/certs/filebeat* /etc/filebeat/certs/
 
 #. Enable and start the Filebeat service:
 
     .. include:: ../../../_templates/installations/elastic/common/enable_filebeat.rst
 
 
-To ensure that Filebeat has been successfully installed, run the following command:
+To ensure that Filebeat is successfully installed, run the following command:
 
     .. code-block:: console
 
@@ -256,7 +250,7 @@ An example response should look as follows:
                   TLS version: TLSv1.3
                   dial up... OK
                 talk to server... OK
-                version: 7.9.1
+                version: 7.10.2
 
 Installing Kibana
 -----------------
@@ -293,30 +287,30 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
     .. include:: ../../../_templates/installations/elastic/common/configure_kibana_all_in_one.rst
 
-#. Update the ``optimize`` and ``plugins`` directories permissions:
+#. Create the ``/usr/share/kibana/data`` directory:
 
     .. code-block:: console
     
-      # chown -R kibana:kibana /usr/share/kibana/optimize
-      # chown -R kibana:kibana /usr/share/kibana/plugins
+      # mkdir /usr/share/kibana/data
+      # chown -R kibana:kibana /usr/share/kibana/data
 
 #. Install the Wazuh Kibana plugin. The installation of the plugin must be done from the Kibana home directory as follows:
 
     .. code-block:: console
 
         # cd /usr/share/kibana
-        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.3_7.9.1-1.zip
+        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|-1.zip
 
 #. Copy the Elasticsearch certificates into ``/etc/kibana/certs``:
 
     .. code-block:: console
 
       # mkdir /etc/kibana/certs
-      # cp /etc/elasticsearch/certs/root-ca.pem /etc/kibana/certs/
-      # mv /etc/elasticsearch/certs/kibana_http.key /etc/kibana/certs/kibana.key
-      # mv /etc/elasticsearch/certs/kibana_http.pem /etc/kibana/certs/kibana.pem
+      # cp ~/certs/root-ca.pem /etc/kibana/certs/
+      # mv ~/certs/kibana* /etc/kibana/certs/
+      # chown kibana:kibana /etc/kibana/certs/*
 
-#. Link Kibana's socket to privileged port 443:
+#. Link Kibana socket to privileged port 443:
 
     .. code-block:: console
 
@@ -336,13 +330,14 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
 Upon the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or,  for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser.  Alternatively, a certificate from a trusted authority can be configured. 
 
-It is highly recommended to change Elasticsearch’s default passwords for the users found at the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. More information about this process can be found :ref:`here <change_elastic_pass>`. It is also recommended to customize the file ``/etc/elasticsearch/jvm.options`` to improve the performance of Elasticsearch. Learn more about this process in the :ref:`Elasticsearch tuning <elastic_tuning>` section.
 
-Once Kibana is running it is necessary to assign each user its corresponding role. To learn more visit the :ref:`Setting up the Wazuh Kibana plugin <connect_kibana_app>` section. 
+.. note::  It is highly recommended to change the default passwords of Elasticsearch for the users' passwords. To perform this action, see the :ref:`Elasticsearch tuning <elastic_tuning>` section.
 
-To uninstall all the components of the all in one installation, visit the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_open_distro>`.
+It is also recommended to customize the file ``/etc/elasticsearch/jvm.options`` to improve the performance of Elasticsearch. Learn more about this process in the :ref:`user manual <change_elastic_pass>`.
+
+To uninstall all the components of the all-in-one installation, see the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_open_distro>`.
 
 Next steps
 ----------
 
-Once the Wazuh environment is ready, a Wazuh agent can be installed in every endpoint to be monitored. The Wazuh agent installation guide is available for most operating systems and can be found :ref:`here<installation_agents>`.
+Once the Wazuh environment is ready, a Wazuh agent can be installed on every endpoint to be monitored. To install the Wazuh agents and start monitoring the endpoints, see the :ref:`Wazuh agent<installation_agents>` section.

@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _reference_ruleset:
 
@@ -13,4 +13,5 @@ Ruleset XML syntax
        decoders
        rules
        regex
+       pcre2
        sibling-decoders

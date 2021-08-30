@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _reference_ossec_rootcheck:
 
@@ -50,7 +50,7 @@ The base directory that will be prefixed to the following options:
 - Check rootkits
 - Check trojans
 - Scan the ``/dev`` directory
-- Check de hidden files using system calls
+- Check the hidden files using system calls
 
 +-----------------------------+---------------------+
 | **Default value (UNIX)**    | /                   |
@@ -87,10 +87,13 @@ rootkit_files
 Change the location of the rootkit files database.
 
 +--------------------+------------------------------------------+
-| **Default value**  | /var/ossec/etc/shared/rootkit_files.txt  |
+| **Default value**  | etc/shared/rootkit_files.txt             |
 +--------------------+------------------------------------------+
 | **Allowed values** | A file with the rootkit files signatures |
 +--------------------+------------------------------------------+
+
+.. note::
+  Paths can be referred to relative paths under the Wazuh installation directory, or full paths.
 
 .. _reference_ossec_rootcheck_rootkit_trojans:
 
@@ -100,7 +103,7 @@ rootkit_trojans
 Change the location of the rootkit trojans database.
 
 +--------------------+-------------------------------------------+
-| **Default value**  | /var/ossec/etc/shared/rootkit_trojans.txt |
+| **Default value**  | etc/shared/rootkit_trojans.txt            |
 +--------------------+-------------------------------------------+
 | **Allowed values** | A file with the trojans signatures        |
 +--------------------+-------------------------------------------+
@@ -352,8 +355,8 @@ Default Unix configuration
       <!-- Frequency that rootcheck is executed - every 12 hours -->
       <frequency>43200</frequency>
 
-      <rootkit_files>/var/ossec/etc/shared/rootkit_files.txt</rootkit_files>
-      <rootkit_trojans>/var/ossec/etc/shared/rootkit_trojans.txt</rootkit_trojans>
+      <rootkit_files>etc/shared/rootkit_files.txt</rootkit_files>
+      <rootkit_trojans>etc/shared/rootkit_trojans.txt</rootkit_trojans>
 
       <skip_nfs>yes</skip_nfs>
     </rootcheck>

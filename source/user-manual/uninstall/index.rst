@@ -1,4 +1,7 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
+
+.. meta::
+  :description: Check out how to uninstall each Wazuh component with Open Distro for Elasticsearch and Elastic Stack in this section of our documentation. 
 
 .. _user_manual_uninstall:
 

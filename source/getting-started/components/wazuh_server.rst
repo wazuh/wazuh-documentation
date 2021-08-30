@@ -1,4 +1,7 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
+
+.. meta::
+  :description: The Wazuh server is a key component of our solution. It analyzes the data received from the agents and triggers alerts when threats are detected.
 
 .. _wazuh_server:
 
@@ -16,10 +19,10 @@ Server architecture
 
 The Wazuh server runs the analysis engine, the Wazuh RESTful API, the agents registration service, the agents connection service, the Wazuh cluster daemon, and Filebeat. The diagram below represents the server architecture and components:
 
-.. image:: ../../images/getting_started/architecture_server.png
+.. thumbnail:: ../../images/getting_started/architecture_server.png
    :alt: Wazuh server architecture
    :align: center
-   :width: 100%
+   :wrap_image: No
 
 The server usually runs on a stand-alone physical machine, virtual machine, docker container, or cloud instance. It is installed on a Linux operating system. Below is a list of the main server components:
 

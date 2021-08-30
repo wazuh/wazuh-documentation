@@ -1,4 +1,7 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
+
+.. meta::
+  :description: You can list and see basic information about all registered agents by going to the Agents tab in the Wazuh app.
 
 .. _wazuh-app:
 

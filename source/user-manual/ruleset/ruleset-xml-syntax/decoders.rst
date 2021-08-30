@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _decoders_syntax:
 
@@ -16,7 +16,7 @@ There are many options to configure in decoders:
 +------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
 | Option                 | Values                                                        | Description                                                                                     |
 +========================+===============================================================+=================================================================================================+
-| `decoder`_             | Name and/or type                                              | Its attributes will be used to define the decoder.                                              |
+| `decoder`_             | Name of the decoder                                           | This attribute defines the decoder.                                                             |
 +------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
 | `parent`_              | Any decoder's name                                            | It will reference a parent decoder and the current one will become a child decoder.             |
 +------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
@@ -64,16 +64,20 @@ To understand the inner workings of a decoder, it will be easier through example
 .. code-block:: none
   :class: output
 
+  Type one log per line
+
+  Apr 14 19:28:21 gorilla sshd[31274]: Connection closed by 192.168.1.33
+
   **Phase 1: Completed pre-decoding.
-         full event: 'Apr 14 19:28:21 gorilla sshd[31274]: Connection closed by 192.168.1.33'
-         timestamp: 'Apr 14 19:28:21'
-         hostname: 'gorilla'
-         program_name: 'sshd'
-         log: 'Connection closed by 192.168.1.33'
+          full event: 'Apr 14 19:28:21 gorilla sshd[31274]: Connection closed by 192.168.1.33'
+          timestamp: 'Apr 14 19:28:21'
+          hostname: 'gorilla'
+          program_name: 'sshd'
 
   **Phase 2: Completed decoding.
-         decoder: 'sshd'
-         srcip: '192.168.1.33'
+          name: 'sshd'
+          parent: 'sshd'
+          srcip: '192.168.1.33'
 
 At the beginning of the example is the full log of an event. The log firstly goes through a pre-decoding phase, where general information will be extracted if possible.
 
@@ -455,9 +459,11 @@ Specifies how to treat the `NULL` fields coming from the JSON events. Only for t
 +--------------------+-------------------------------------------------------------------------+
 | **Allowed values** | string (It shows the NULL value as string)                              |
 +                    +-------------------------------------------------------------------------+
-|                    | discard (It discard NULL fields and doesn't store them into the alert)  |
+|                    | discard (It discards NULL fields and doesn't store them into the alert) |
 +                    +-------------------------------------------------------------------------+
 |                    | empty (It shows the NULL field as an empty field)                       |
+|                    |                                                                         |
+|                    | .. deprecated:: 3.7                                                     |
 +--------------------+-------------------------------------------------------------------------+
 
 json_array_structure

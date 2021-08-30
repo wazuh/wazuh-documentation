@@ -1,7 +1,7 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. code-block:: console
 
-  # yum install filebeat-7.9.3
+  # yum install filebeat-7.11.2
 
 .. End of include file

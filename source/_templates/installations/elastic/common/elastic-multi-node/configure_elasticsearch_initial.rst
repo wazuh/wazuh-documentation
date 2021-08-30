@@ -1,34 +1,36 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
-.. code-block:: console
+#. Download the ``/etc/elasticsearch/elasticsearch.yml`` file.
 
-  # curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/elasticsearch/7.x/elasticsearch_cluster_initial_node.yml
+    .. code-block:: console
 
-Edit the file ``/etc/elasticsearch/elasticsearch.yml``. By default, the pre-configured template includes 3 nodes, in case of having a different number of nodes, lines must be added or removed accordingly:
+      # curl -so /etc/elasticsearch/elasticsearch.yml https://packages.wazuh.com/resources/4.2/open-distro/elasticsearch/7.x/elasticsearch_cluster_initial_node.yml
 
-.. code-block:: yaml
+#. Edit the file ``/etc/elasticsearch/elasticsearch.yml``. The pre-configured template includes 3 nodes by default; you can add or remove lines according to the number of nodes in your cluster.
 
-  network.host: <elasticsearch_ip>
-  node.name: node-1
-  cluster.name: <elastic_cluster>
-  cluster.initial_master_nodes:
-          - node-1
-          - node-2
-          - node-3
-  discovery.seed_hosts:
-          - <elasticsearch_ip_node1>
-          - <elasticsearch_ip_node2>
-          - <elasticsearch_ip_node3>
+    .. code-block:: yaml
+
+      network.host: <elasticsearch_ip>
+      node.name: node-1
+      cluster.name: <elastic_cluster>
+      cluster.initial_master_nodes:
+              - node-1
+              - node-2
+              - node-3
+      discovery.seed_hosts:
+              - <elasticsearch_ip_node1>
+              - <elasticsearch_ip_node2>
+              - <elasticsearch_ip_node3>
 
 
 Depending on the node type, some parameters may vary between nodes. The ``cluster.initial_master_nodes`` and the ``discovery.seed_hosts`` are lists of all the master-eligible nodes in the cluster. The parameter ``node.master: false`` must be included in every Elasticsearch node that will not be configured as master. 
 
-Values to be replaced:
+Values to be replaced in the file:
 
-- ``<elasticsearch_ip>``: the host's IP. E.g.: ``10.0.0.2``. 
-- ``<elastic_cluster>``: Elasticsearch cluster name. E.g.: ``elastic-cluster-production``.
-- ``<elasticsearch_ip_nodeX>`` Elasticsearch cluster master-eligible nodes IP. E.g.: ``10.0.0.3``.
-- The node certificates for each node must be specified under the ``opendistro_security.nodes_dn`` section.
+- ``<elasticsearch_ip>``: the host's IP. For example, ``10.0.0.2``. 
+- ``<elastic_cluster>``: Elasticsearch cluster name. For example, ``elastic-cluster-production``.
+- ``<elasticsearch_ip_nodeX>`` Elasticsearch cluster master-eligible nodes IP. For example, ``10.0.0.3``.
+- The node certificates for each Elasticsearch node must be specified under the ``opendistro_security.nodes_dn`` section. Make sure to use the same names to create the nodes certificates. 
 
     .. code-block:: yaml
         :emphasize-lines: 5

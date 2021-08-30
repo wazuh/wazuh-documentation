@@ -1,4 +1,7 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
+
+.. meta::
+  :description: The CIS-CAT wodle is used to integrate CIS benchmark assessments into Wazuh agents. See how it works and some use cases here.
 
 .. _ciscat_module:
 

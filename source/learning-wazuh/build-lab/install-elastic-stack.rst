@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _build_lab_install_elastic_stack:
 
@@ -98,7 +98,16 @@ events and archives stored in Elasticsearch. More info at `Kibana
 
     # yum install -y kibana-|ELASTICSEARCH_LATEST|
 
-2. Install the Wazuh plugin for Kibana:
+
+2. Create the ``/usr/share/kibana/data`` directory:
+
+    .. code-block:: console
+    
+      # mkdir /usr/share/kibana/data
+      # chown -R kibana:kibana /usr/share/kibana
+
+
+3. Install the Wazuh plugin for Kibana:
 
 
   * Install from URL:
@@ -106,9 +115,10 @@ events and archives stored in Elasticsearch. More info at `Kibana
   .. code-block:: console
 
     # cd /usr/share/kibana/
-    # sudo -u kibana bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip
+    # sudo -u kibana bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|-1.zip
+   
 
-3. Kibana will only listen on the loopback interface (localhost) by default,
+4. Kibana will only listen on the loopback interface (localhost) by default,
    which means that it can be only accessed from the same machine. To access
    Kibana from the any IP set the ``server.host: "0.0.0.0"`` variable, and
    set the port to be the standard port for HTTPS: ``server.port: 443``
@@ -122,39 +132,32 @@ events and archives stored in Elasticsearch. More info at `Kibana
     EOF
 
 
-4.  Allow Kibana (which is run as a non-root process) to bind to port 443:
+5.  Allow Kibana (which is run as a non-root process) to bind to port 443:
 
   .. code-block:: console
 
     # setcap 'CAP_NET_BIND_SERVICE=+eip' /usr/share/kibana/node/bin/node
 
-5. Optimize Kibana packages:
-
-  .. code-block:: console
-
-    # cd /usr/share/kibana/
-    NODE_OPTIONS="--max-old-space-size=4096" /usr/share/kibana/bin/kibana --optimize --allow-root
-
-6. Configure the credentials to access the Wazuh API:
-
-  .. code-block:: console
-
-    # cat >> /usr/share/kibana/optimize/wazuh/config/wazuh.yml << EOF
-
-      - wazuhapi:
-         url: https://172.30.0.10
-         port: 55000
-         username: wazuhapiuser
-         password: wazuhlab
-    EOF
-
-7. Enable and start the Kibana service:
+6. Enable and start the Kibana service:
 
   .. code-block:: console
 
   	# systemctl daemon-reload
   	# systemctl enable kibana.service
   	# systemctl start kibana.service
+
+7. Configure the credentials to access the Wazuh API:
+
+  .. code-block:: console
+
+    # cat >> /usr/share/kibana/data/wazuh/config/wazuh.yml << EOF
+
+      - wazuhapi:
+         url: https://172.30.0.10
+         port: 55000
+         username: wazuhapiuser
+         password: wazuhlab
+    EOF    
 
 Disable the Elastic repository
 ------------------------------

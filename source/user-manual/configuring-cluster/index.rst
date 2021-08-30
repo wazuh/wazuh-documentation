@@ -1,12 +1,12 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
+
+.. meta::
+  :description: Learn more about the cluster node configuration in Wazuh: master and worker nodes, labels, Filebeat, Splunk forwarder installation, and more. 
 
 .. _configuring-cluster:
 
 Deploying a Wazuh cluster
 ===========================
-
-.. meta::
-  :description: A complete user manual about how to configure a Wazuh cluster.
 
 .. toctree::
     :maxdepth: 1

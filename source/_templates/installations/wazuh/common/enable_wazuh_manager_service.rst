@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. tabs::
 
@@ -15,16 +15,16 @@
 
   .. group-tab:: SysV Init
 
-    Choose one option according to the OS used:
+    Choose one option according to the operating system used:
 
-    a) RPM based OS:
+    a) RPM based operating system:
 
       .. code-block:: console
 
         # chkconfig --add wazuh-manager
         # service wazuh-manager start
 
-    b) Debian based OS:
+    b) Debian based operating system:
 
       .. code-block:: console
 

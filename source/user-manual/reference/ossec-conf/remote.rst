@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _reference_ossec_remote:
 
@@ -62,8 +62,8 @@ Specifies the protocol to use. It is available for secure connections and syslog
 | **Allowed values** | udp, tcp |
 +--------------------+----------+
 
-.. note::
-	It is not possible to use both protocols simultaneously.
+.. versionadded:: 4.2.0
+  It is now possible to configure both UDP and TCP protocols to work simultaneously in the secure connections, this can be achieved by writing in the same configuration block the accepted protocols separated with a comma. For syslog connections, multiple protocols support require multiple configuration blocks since only one protocol per block is allowed.
 
 allowed-ips
 ^^^^^^^^^^^
@@ -117,7 +117,9 @@ Whether the local IP address is IPv6
 
 .. note::
 
-  Currently it's not possible to set both *local_ip* and *ipv6*
+  At the moment it's not possible to set both *local_ip* and *ipv6*.
+
+  IPv6 is not available for secure connections.
 
 queue_size
 ^^^^^^^^^^^^
@@ -161,7 +163,7 @@ Example of configuration
     <remote>
       <connection>secure</connection>
       <port>1514</port>
-      <protocol>tcp</protocol>
+      <protocol>tcp,udp</protocol>
       <queue_size>16384</queue_size>
       <rids_closing_time>5m</rids_closing_time>
     </remote>

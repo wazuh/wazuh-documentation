@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _reference_ossec_agent_upgrade:
 
@@ -157,9 +157,9 @@ Configuration block to specify CA certificates to validate WPK files.
 +---------------------------+--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                           | Indicates the path to the root CA certificate. The agent needs the certificate with which the WPK was signed in order to be updated.                                                 |
 |                           +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|  **ca_store**             | **Default value**  | wpk_root.pem                                                                                                                                                    |
+|  **ca_store**             | **Default value**  | etc/wpk_root.pem                                                                                                                                                |
 |                           +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|                           | **Allowed values** | Path to root CA certificate                                                                                                                                     |
+|                           | **Allowed values** | Path to root CA certificate. It can be referred to a relative path under the Wazuh installation directory, or a full path.                                      |
 +---------------------------+--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -172,7 +172,7 @@ Sample Configuration
 
     <agent-upgrade>
       <chunk_size>16384</chunk_size>
-      <wpk_repository>packages.wazuh.com/wpk/</wpk_repository>
+      <wpk_repository>packages.wazuh.com/4.x/wpk/</wpk_repository>
       <max_threads>16</max_threads>
     </agent-upgrade>
 
@@ -184,6 +184,6 @@ Sample Configuration
       <notification_wait_max>2h</notification_wait_max>
       <ca_verification>
         <enabled>yes</enabled>
-        <ca_store>/var/ossec/etc/wpk_root.pem</ca_store>
+        <ca_store>etc/wpk_root.pem</ca_store>
       </ca_verification>
     </agent-upgrade>

@@ -1,3 +1,5 @@
+.. meta::
+  :description: Learn how to install PuppetDB in this section of the Wazuh documentation.
 
 PuppetDB installation (Optional)
 ================================
@@ -10,7 +12,7 @@ Installation on CentOS/RHEL 7/Fedora
 .. code-block:: console
 
    # rpm -Uvh https://yum.postgresql.org/9.4/redhat/rhel-latest-x86_64/pgdg-centos94-9.4-2.noarch.rpm
-   # yum install puppetdb-terminus.noarch puppetdb postgresql94-server postgresql94 postgresql94-contrib.x86_64
+   # yum install puppetdb-termini.noarch puppetdb postgresql94-server postgresql94 postgresql94-contrib.x86_64
    # /usr/pgsql-9.4/bin/postgresql94-setup initdb
    # systemctl start postgresql-9.4
    # systemctl enable postgresql-9.4
@@ -23,7 +25,7 @@ Installation on Debian/Ubuntu
   # sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
   # wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
   # apt-get update
-  # apt-get install puppetdb-terminus puppetdb postgresql-9.4 postgresql-contrib-9.4
+  # apt-get install puppetdb-termini puppetdb postgresql-9.4 postgresql-contrib-9.4
 
 Configuration
 ^^^^^^^^^^^^^
