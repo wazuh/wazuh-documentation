@@ -1,17 +1,19 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. _active_response:
+
+
+.. _incident_response:
 
 Incident response
 =================
 
-:ref:`Wazuh agent <wazuh_agent>` automates the response to threats by running actions when they are detected. The agent has the ability to block network connections, stop running processes, or delete malicious files, among other actions. In addition, it can also run customized scripts developed by the user (for example, Python, Bash, or PowerShell).
+:ref:`Wazuh agent <wazuh_agent>` automates the response to threats by running actions when these are detected. The agent has the ability to block network connections, stop running processes, and delete malicious files, among other actions. In addition, it can also run customized scripts developed by the user, such as Python, Bash, or PowerShell.
 
-To use this feature, users define the conditions that will trigger the scripted actions, which usually involve threat detection and assessment. For example, a user could use log analysis rules to detect an intrusion attempt and an IP reputation database to assess the threat by looking for the source IP address of the attempted connection.
+To use this feature, users define the conditions that trigger the scripted actions, which usually involve threat detection and assessment. For example, a user can use log analysis rules to detect an intrusion attempt and an IP reputation database to assess the threat by looking for the source IP address of the attempted connection.
 
 In the scenario described above, when the source IP address is recognized as malicious (low reputation), the monitored system is protected by automatically setting up a firewall rule to drop all traffic from the attacker. Depending on the active response, this firewall rule is temporary or permanent.
 
-On Linux systems, the Wazuh agent usually integrates with the local iptables firewall for this purpose. On Windows systems, instead, it uses the null routing technique (also known as blackholing). Below you can find the configuration used to define two scripts that are used for automated connection blocking:
+On Linux systems, the Wazuh agent usually integrates with the local iptables firewall for this purpose. On Windows systems, instead, it uses the null routing technique (also known as blackholing). Below you can find the configuration to define two scripts that are used for automated connection blocking:
 
   .. code-block:: xml
 
@@ -29,7 +31,7 @@ On Linux systems, the Wazuh agent usually integrates with the local iptables fir
       <timeout_allowed>yes</timeout_allowed>
     </command>
 
-Active responses set the conditions that need to be met to trigger them on top of the defined commands. Below is an example of a configuration that would trigger the ``firewall-drop`` command when the log analysis rule ``100100`` is matched.
+On top of the defined commands, active responses set the conditions that need to be met to trigger them. Below is an example of a configuration that triggers the ``firewall-drop`` command when the log analysis rule ``100100`` is matched.
 
   .. code-block:: xml
 
@@ -40,7 +42,7 @@ Active responses set the conditions that need to be met to trigger them on top o
       <timeout>60</timeout>
     </active-response>
 
-In this case, rule ``100100`` is used to look for alerts where the source IP address is part of a well-known IP reputation database:
+In this case, rule ``100100`` is used to look for alerts where the source IP address is part of a well-known IP reputation database.
 
   .. code-block:: xml
 
@@ -50,7 +52,7 @@ In this case, rule ``100100`` is used to look for alerts where the source IP add
       <description>IP address found in AlienVault reputation database.</description>
     </rule>
 
-Below is a screenshot with two Wazuh alerts: the one triggered when a web attack is detected (trying to exploit a PHP server vulnerability), and the one that informs that the malicious actor has been blocked.
+Below is a screenshot with two Wazuh alerts: one that is triggered when a web attack is detected trying to exploit a PHP server vulnerability, and one that informs that the malicious actor has been blocked.
 
 .. thumbnail:: ../../images/getting_started/use_case_active_response.png
    :align: center
