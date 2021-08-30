@@ -97,18 +97,18 @@ Create and deploy SSL certificates to encrypt communications between the Wazuh c
 
 #. Enable and start the Elasticsearch service.
 
+    **Recommended action**  - Remove Open Distro for Elasticsearch performance analyzer plugin
+
+     The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it with the following command:  
+
+     .. code-block:: console
+  
+       # /usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer
+
     .. include:: ../../_templates/installations/elastic/common/enable_elasticsearch.rst
 
 
-- **Recommended action**  - Remove Open Distro for Elasticsearch performance analyzer plugin. 
 
-  The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it with the following command:  
-
-  .. code-block:: console
-  
-    # /usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer
-
-  Restart Elasticsearch after removing the plugin. 
   
  
 You now have installed and configured the initial Wazuh indexer node. 
