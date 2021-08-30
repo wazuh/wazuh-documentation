@@ -95,21 +95,19 @@ Create and deploy SSL certificates to encrypt communications between the Wazuh c
 
     .. include:: ../../_templates/installations/elastic/common/elastic-multi-node/generate_certificates.rst
 
+
+    - **Recommended action**  - Remove Open Distro for Elasticsearch performance analyzer plugin. 
+
+      The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it with the following command:  
+
+      .. code-block:: console
+  
+        # /usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer
+
 #. Enable and start the Elasticsearch service.
 
     .. include:: ../../_templates/installations/elastic/common/enable_elasticsearch.rst
-
-
-- **Recommended action**  - Remove Open Distro for Elasticsearch performance analyzer plugin. 
-
-  The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it with the following command:  
-
-  .. code-block:: console
-  
-    # /usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer
-
-  Restart Elasticsearch after removing the plugin. 
-  
+ 
  
 You now have installed and configured the initial Wazuh indexer node. 
 
@@ -180,19 +178,18 @@ Deploy the certificates to encrypt communications between the Wazuh central comp
 
     .. include:: ../../_templates/installations/elastic/common/elastic-multi-node/deploy_certificates.rst
 
+    - **Recommended action**  - Remove Open Distro for Elasticsearch performance analyzer plugin. 
+
+      The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it with the following command:  
+
+      .. code-block:: console
+  
+        # /usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer
+
 #. Enable and start the Elasticsearch service.
 
     .. include:: ../../_templates/installations/elastic/common/enable_elasticsearch.rst
 
-- **Recommended action**  - Remove Open Distro for Elasticsearch performance analyzer plugin. 
-
-  The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it with the following command:  
-
-  .. code-block:: console
-  
-    # /usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer
-
-  Restart Elasticsearch after removing the plugin.
 
 You now have installed a subsequent node of your Wazuh indexer multi-node cluster. Repeat this process on every other subsequent node that you want to add to your cluster and proceed with initializing the cluster. 
 
