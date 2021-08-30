@@ -103,7 +103,7 @@ Example of AWS dashboard:
    :align: center
    :wrap_image: No
 
-More information on how Wazuh monitors AWS can be found at our :ref:`documentation <amazon>`.
+More information on how Wazuh monitors AWS can be found in our :ref:`documentation <amazon>`.
 
 Microsoft Azure
 ---------------
@@ -156,7 +156,7 @@ Expand the output to see an example of a rule that Azure alerts.
     "timestamp": "2020-05-25T15:45:51.432+0000"
   }
 
-More information about how to use Wazuh to monitor Microsoft Azure can be found at our :ref:`documentation <azure>`.
+More information about how to use Wazuh to monitor Microsoft Azure can be found in our :ref:`documentation <azure>`.
 
 Google Cloud Platform
 ---------------------
