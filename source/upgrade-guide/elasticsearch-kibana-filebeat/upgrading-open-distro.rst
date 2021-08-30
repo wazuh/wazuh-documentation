@@ -451,7 +451,11 @@ Upgrading Kibana
 
       opendistro_security.multitenancy.enabled: true
 
-   When you access Kibana, a popup window asks you to define a tenant. Select one, for example global, and save the configuration.
+   When you access Kibana, a popup window asks you to define a tenant. You can avoid it by modifying the default route to include the selection of a tenant, for example, global.  
+
+   .. code-block:: console
+
+      server.defaultRoute: /app/wazuh?security_tenant=global
 
 #. Restart Kibana:
 
