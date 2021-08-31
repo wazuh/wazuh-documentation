@@ -25,6 +25,6 @@
                 .. code-block:: console
 
                     # zypper install curl
-                    # zypper install libcap-progs $debug || zypper install libcap2
+                    # zypper install libcap-progs || zypper install libcap2
 
 .. End of include file

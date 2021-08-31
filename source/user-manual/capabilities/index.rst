@@ -1,12 +1,12 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Learn more about Wazuh capabilities, how they work, their configuration, FAQs, and practical examples on how to use our solution. 
+  
 .. _capabilities:
 
 Capabilities
 ============
-
-.. meta::
-  :description: Find here a deeper explanation of how each Wazuh capability works, configuration options for each one, frequently asked questions and some practical examples.
 
 In this section you will find:
 
@@ -18,8 +18,6 @@ In this section you will find:
 
 - Some practical examples.
 
-
-If you find a problem, an error, or you want to ask related questions, please do not hesitate to contact us through our `mailing list <https://groups.google.com/d/forum/wazuh>`_.
 
 .. toctree::
     :maxdepth: 2

@@ -92,7 +92,7 @@ Optionally the following files can be restored to preserve alert log files and s
    $ cp -rp /var/ossec_backup/queue/rootcheck/* /var/ossec/queue/rootcheck
    $ cp -rp /var/ossec_backup/queue/syscheck/* /var/ossec/queue/syscheck
 
-Finally we can start the services again. Please check ``/var/ossec/logs/ossec.log`` file to ensure there are no errors or warnings related to the settings migration.
+Finally we can start the services again. Please check ``/var/ossec/logs/wazuh.log`` file to ensure there are no errors or warnings related to the settings migration.
 
 .. code-block:: bash
 

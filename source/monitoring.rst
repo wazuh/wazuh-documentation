@@ -10,5 +10,7 @@ Monitoring with Wazuh
 
    amazon/index
    azure/index
+   github/index
    docker-monitor/index
    gcp/index
+   office365/index

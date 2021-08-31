@@ -1,5 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
-
+.. meta::
+  :description: Check out our documentation to learn about registering Wazuh agents and the registration service with password authorization. 
+  
 .. _password-authorization-registration:
 
 Registration service with password authorization
@@ -46,11 +48,11 @@ Enabling the password authorization option and creating a registration password 
      .. group-tab:: Using a random password
 
 
-           If no password is specified in the ``/var/ossec/etc/authd.pass`` file, the registration service will create a random password. The password can be found in ``/var/ossec/logs/ossec.log`` by executing the following command:
+           If no password is specified in the ``/var/ossec/etc/authd.pass`` file, the registration service will create a random password. The password can be found in ``/var/ossec/logs/wazuh.log`` by executing the following command:
 
            .. code-block:: console
 
-             # grep "Random password" /var/ossec/logs/ossec.log
+             # grep "Random password" /var/ossec/logs/wazuh.log
 
            .. code-block:: none
                    :class: output

@@ -29,14 +29,16 @@ Installing Wazuh agent from sources
             .. code-block:: console
 
               # yum update
-              # yum install make gcc gcc-c++ policycoreutils-python automake autoconf libtool centos-release-scl devtoolset-7
+              # yum install make gcc gcc-c++ policycoreutils-python automake autoconf libtool centos-release-scl openssl-devel
+              # yum update
+              # yum install devtoolset-7
               # scl enable devtoolset-7 bash
 
             CMake 3.18 installation
 
             .. code-block:: console
 
-              # curl -OL http://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
+              # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
               # cd cmake-3.18.3 && ./bootstrap --no-system-curl
               # make -j$(nproc) && make install
               # cd .. && rm -rf cmake-*
@@ -45,17 +47,18 @@ Installing Wazuh agent from sources
 
             .. code-block:: console
 
-              # yum install make gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool
-              # rpm -i http://mirror.centos.org/centos/8/PowerTools/x86_64/os/Packages/libstdc++-static-8.3.1-5.1.el8.x86_64.rpm
+              # yum install make gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool openssl-devel
+              # rpm -i $(rpm --eval https://packages.wazuh.com/utils/libstdc%2B%2B/libstdc%2B%2B-static-8.4.1-1.el8.'%{_arch}'.rpm)
 
             CMake 3.18 installation
 
             .. code-block:: console
 
-              # curl -OL http://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
+              # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
               # cd cmake-3.18.3 && ./bootstrap --no-system-curl
               # make -j$(nproc) && make install
               # cd .. && rm -rf cmake-*
+              # export PATH=/usr/local/bin:$PATH
 
 
       .. tab:: APT
@@ -69,7 +72,7 @@ Installing Wazuh agent from sources
 
         .. code-block:: console
 
-          # curl -OL http://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
+          # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
           # cd cmake-3.18.3 && ./bootstrap --no-system-curl
           # make -j$(nproc) && make install
           # cd .. && rm -rf cmake-*
@@ -86,7 +89,7 @@ Installing Wazuh agent from sources
 
         .. code-block:: console
 
-          # curl -OL http://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
+          # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
           # cd cmake-3.18.3 && ./bootstrap --no-system-curl
           # make -j$(nproc) && make install
           # cd .. && rm -rf cmake-*
@@ -97,7 +100,13 @@ Installing Wazuh agent from sources
 
          # zypper addrepo http://download.opensuse.org/distribution/11.4/repo/oss/ oss
 
+      .. tab:: Pacman
 
+        .. code-block:: console
+
+         # pacman --noconfirm -Syu curl gcc make sudo wget expect gnupg perl-base \
+          perl fakeroot python brotli automake autoconf libtool gawk libsigsegv nodejs \
+          base-devel inetutils cmake
 
 
     2. Download and extract the latest version:
@@ -181,10 +190,8 @@ Installing Wazuh agent from sources
 
     .. code-block:: console
 
-     # userdel ossec 2> /dev/null
-     # userdel ossecm 2> /dev/null
-     # userdel ossecr 2> /dev/null
-     # groupdel ossec 2> /dev/null
+     # userdel wazuh 2> /dev/null
+     # groupdel wazuh 2> /dev/null
 
 
 
@@ -348,10 +355,8 @@ Installing Wazuh agent from sources
 
     .. code-block:: console
 
-     # dscl . -delete "/Users/ossec" > /dev/null 2>&1
-     # dscl . -delete "/Users/ossecm" > /dev/null 2>&1
-     # dscl . -delete "/Users/ossecr" > /dev/null 2>&1
-     # dscl . -delete "/Groups/ossec" > /dev/null 2>&1
+     # dscl . -delete "/Users/wazuh" > /dev/null 2>&1
+     # dscl . -delete "/Groups/wazuh" > /dev/null 2>&1
 
 
 
@@ -400,13 +405,13 @@ Installing Wazuh agent from sources
 
         # cd wazuh-*
         # gmake -C src deps RESOURCES_URL=https://packages.wazuh.com/deps/|WAZUH_LATEST_MINOR|
-        # gmake -C src TARGET=agent USE_SELINUX=no PREFIX=/var/ossec DISABLE_SHARED=yes
+        # gmake -C src TARGET=agent USE_SELINUX=no PREFIX=/var/ossec
 
     4. Run the ``install.sh`` script. This will run a wizard that will guide you through the installation process using the Wazuh sources:
 
      .. code-block:: console
 
-      # DISABLE_SHARED="yes" ./install.sh
+      # ./install.sh
 
      If you have previously compiled for another platform, you must clean the build using the Makefile in ``src``:
 
@@ -466,10 +471,8 @@ Installing Wazuh agent from sources
 
     .. code-block:: console
 
-     # userdel ossec 2> /dev/null
-     # userdel ossecm 2> /dev/null
-     # userdel ossecr 2> /dev/null
-     # groupdel ossec 2> /dev/null
+     # userdel wazuh 2> /dev/null
+     # groupdel wazuh 2> /dev/null
 
 
 
@@ -530,13 +533,13 @@ Installing Wazuh agent from sources
 
         # cd wazuh-*
         # /usr/local/bin/gmake -C src deps RESOURCES_URL=https://packages.wazuh.com/deps/|WAZUH_LATEST_MINOR|/
-        # /usr/local/bin/gmake -C src TARGET=agent USE_SELINUX=no DISABLE_SHARED=yes
+        # /usr/local/bin/gmake -C src TARGET=agent USE_SELINUX=no
 
     4. Run the ``install.sh`` script. This will run a wizard that will guide you through the installation process using the Wazuh sources:
 
      .. code-block:: console
 
-      # DISABLE_SHARED=yes ./install.sh
+      # ./install.sh
 
      If you have previously compiled for another platform, you must clean the build using the Makefile in ``src``:
 
@@ -587,10 +590,8 @@ Installing Wazuh agent from sources
 
     .. code-block:: console
 
-     # userdel ossec 2> /dev/null
-     # userdel ossecm 2> /dev/null
-     # userdel ossecr 2> /dev/null
-     # groupdel ossec 2> /dev/null
+     # userdel wazuh 2> /dev/null
+     # groupdel wazuh 2> /dev/null
 
 
 
@@ -671,12 +672,12 @@ Installing Wazuh agent from sources
            # /opt/csw/bin/git clone -b v|WAZUH_LATEST| https://github.com/wazuh/wazuh.git
            # wget -P wazuh https://raw.githubusercontent.com/wazuh/wazuh-packages/master/solaris/solaris10/solaris10_patch.sh
 
-        3. Create an user and group called `ossec` needed for installation.
+        3. Create an user and group called `wazuh` needed for installation.
 
          .. code-block:: console
 
-          # groupadd ossec
-          # useradd -g ossec ossec
+          # groupadd wazuh
+          # useradd -g wazuh wazuh
 
         4. Run the following commands to update the makefile
 
@@ -694,7 +695,7 @@ Installing Wazuh agent from sources
             # cd wazuh/src
             # gmake clean
             # gmake deps
-            # gmake -j 4 TARGET=agent PREFIX=/var/ossec USE_SELINUX=no DISABLE_SHARED=yes
+            # gmake -j 4 TARGET=agent PREFIX=/var/ossec USE_SELINUX=no
 
          * For Solaris 10 SPARC:
 
@@ -703,7 +704,7 @@ Installing Wazuh agent from sources
             # cd wazuh/src
             # gmake clean
             # gmake deps
-            # gmake -j 4 TARGET=agent PREFIX=/var/ossec USE_SELINUX=no USE_BIG_ENDIAN=yes DISABLE_SHARED=yes
+            # gmake -j 4 TARGET=agent PREFIX=/var/ossec USE_SELINUX=no USE_BIG_ENDIAN=yes
 
         6. Run the ``solaris10_patch.sh`` that has previously been downloaded.
 
@@ -775,10 +776,8 @@ Installing Wazuh agent from sources
 
         .. code-block:: console
 
-         # userdel ossec 2> /dev/null
-         # userdel ossecm 2> /dev/null
-         # userdel ossecr 2> /dev/null
-         # groupdel ossec 2> /dev/null
+         # userdel wazuh 2> /dev/null
+         # groupdel wazuh 2> /dev/null
 
 
       .. tab:: Solaris 11
@@ -917,7 +916,5 @@ Installing Wazuh agent from sources
 
         .. code-block:: console
 
-         # userdel ossec 2> /dev/null
-         # userdel ossecm 2> /dev/null
-         # userdel ossecr 2> /dev/null
-         # groupdel ossec 2> /dev/null
+         # userdel wazuh 2> /dev/null
+         # groupdel wazuh 2> /dev/null

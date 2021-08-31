@@ -1,10 +1,12 @@
 .. Copyright (C) 2021 Wazuh, Inc.
+.. meta::
+  :description: Learn more about the Active Response capability, how it works, and how to configure it in this section of the Wazuh documentation. 
 
 How it works
 ============
 
 .. thumbnail:: ../../../images/manual/automatic-remediation/automatic-remediation.png
-  :title: Command monitoring
+  :title: Active response workflow 
   :align: center
   :width: 100%
 
@@ -12,12 +14,25 @@ How it works
 When is an active response triggered?
 -------------------------------------
 
-An **active response** is a script that is configured to execute when a specific alert, alert level or rule group has been triggered.  Active responses are either stateful or stateless responses.  Stateful responses are configured to undo the action after a specified period of time while stateless responses are configured as one-time actions.
+An **active response** is a script that is configured to execute when a specific alert, alert level, or rule group has been triggered. Active responses are either stateful or stateless responses. 
+
+- ``Stateful``. Are configured to undo the action after a specified period of time. 
+
+- ``Stateless``.  Are configured as one-time actions without an event to revert the original effect.
 
 Where are active response actions executed?
 -------------------------------------------
 
-Each active response specifies where its associated command will be executed: on the agent that triggered the alert, on the manager, on another specified agent or on all agents, which also includes the manager(s).
+Each active response specifies where its associated command will be executed: on the agent that triggered the alert, on the manager, on another specified agent or on all agents, which also includes the manager(s). The ``location`` options are: 
+
+- ``Local``. It runs the script on the agent that generated the alert.
+
+- ``Server``. It runs the script on the Wazuh manager.
+
+- ``Defined agent``. It specifies the IDs of the agents that run the script regardless of where the event has been observed.
+
+- ``All``. Every agent in the environment will run the script. Use with caution.
+
 
 Active response configuration
 -----------------------------
@@ -28,9 +43,7 @@ Active responses are configured in the manager by modifying the :ref:`manager.co
 
 	In order to configure an active response, a **command** must be defined that will initiate a certain script in response to a trigger.
 
-	To configure the active response, define the name of a command using the pattern below and then reference the script to be initiated. Next, define what data element(s) will be passed to the script.
-
-	Custom scripts that have the ability to receive parameters from the command line may also be used for an **active response**.
+	To configure the active response, define the name of a command using the pattern below and then reference the script to be initiated. 
 
 	Example::
 
@@ -61,7 +74,7 @@ Active responses are configured in the manager by modifying the :ref:`manager.co
 	In this example, the active response is configured to execute the command that was defined in the previous step. The *where* of the action is defined as the local host and the *when* is defined as any time the rule has a level higher than 6.  The timeout that was allowed in the command configuration is also defined in the above example.
 
 .. note::
-	More information about active response options: :ref:`Active response <reference_ossec_active_response_manager>`
+	More information about active response configuration: :ref:`Active response <reference_ossec_active_response_manager>`
 
 
 The active response log can be viewed at ``/var/ossec/logs/active-responses.log``.
@@ -71,42 +84,42 @@ The active response log can be viewed at ``/var/ossec/logs/active-responses.log`
 Default Active response scripts
 -------------------------------
 
-Wazuh is pre-configured with the following scripts for Linux:
+Wazuh is preconfigured with the following scripts for Linux, located at ``/var/ossec/active-response/bin``. Click each script name to see its source code.
 
-+--------------------------+-----------------------------------------------------------------+
-| Script name              |                          Description                            |
-+==========================+=================================================================+
-| disable-account          | Disables an account by setting ``passwd-l``                     |
-+--------------------------+-----------------------------------------------------------------+
-| firewall-drop            | Adds an IP to the iptables deny list                            |
-+--------------------------+-----------------------------------------------------------------+
-| firewalld-drop           | Adds an IP to the firewalld drop list                           |
-+--------------------------+-----------------------------------------------------------------+
-| host-deny                | Adds an IP to the /etc/hosts.deny file                          |
-+--------------------------+-----------------------------------------------------------------+
-| ip-customblock           | Custom OSSEC block, easily modifiable for custom response       |
-+--------------------------+-----------------------------------------------------------------+
-| ipfw                     | Firewall-drop response script created for ipfw                  |
-+--------------------------+-----------------------------------------------------------------+
-| npf                      | Firewall-drop response script created for npf                   |
-+--------------------------+-----------------------------------------------------------------+
-| wazuh-slack              | Posts modifications on Slack                                    |
-+--------------------------+-----------------------------------------------------------------+
-| pf                       | Firewall-drop response script created for pf                    |
-+--------------------------+-----------------------------------------------------------------+
-| restart-wazuh            | Automatically restarts Wazuh when agent.conf has been changed   |
-+--------------------------+-----------------------------------------------------------------+
-| route-null               | Adds an IP to null route                                        |
-+--------------------------+-----------------------------------------------------------------+
++---------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
+| Script name                                                                                                                           |                          Description                          |
++=======================================================================================================================================+===============================================================+
+| `disable-account <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/active_responses.c>`_                                   | Disables an account by setting ``passwd-l``                   |
++---------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
+| `firewall-drop <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/firewalls/default-firewall-drop.c>`_                      | Adds an IP to the iptables deny list                          |
++---------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
+| `firewalld-drop <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/firewalld-drop.c>`_                                      | Adds an IP to the firewalld drop list                         |
++---------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
+| `host-deny <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/host-deny.c>`_                                                | Adds an IP to the /etc/hosts.deny file                        |
++---------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
+| `ip-customblock <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/ip-customblock.c>`_                                      | Custom OSSEC block, easily modifiable for custom response     |
++---------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
+| `ipfw <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/firewalls/ipfw.c>`_                                                | Firewall-drop response script created for ipfw                |
++---------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
+| `npf <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/firewalls/npf.c>`_                                                  | Firewall-drop response script created for npf                 |
++---------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
+| `wazuh-slack <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/wazuh-slack.c>`_                                            | Posts modifications on Slack                                  |
++---------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
+| `pf <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/firewalls/pf.c>`_                                                    | Firewall-drop response script created for pf                  |
++---------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
+| `restart-wazuh <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/restart-wazuh.c>`_                                        | Automatically restarts Wazuh when agent.conf has been changed |
++---------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
+| `route-null <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/route-null.c>`_                                              | Adds an IP to null route                                      |
++---------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
 
-The following pre-configured scripts are for Windows:
+The following preconfigured scripts for Windows are located at ``C:\Program Files\ossec-agent\active-response\bin``. Click each script name to see its source code.
 
-+--------------------------+---------------------------------------------------------------+
-| Script name              |                          Description                          |
-+==========================+===============================================================+
-| netsh.exe                | Blocks an ip using netsh                                      |
-+--------------------------+---------------------------------------------------------------+
-| restart-wazuh.exe        | Restarts wazuh agent                                          |
-+--------------------------+---------------------------------------------------------------+
-| route-null.exe           | Adds an IP to null route                                      |
-+--------------------------+---------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
+| Script name                                                                                            |                          Description                          |
++========================================================================================================+===============================================================+
+| `netsh.exe <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/netsh.c>`_                     | Blocks an ip using netsh                                      |
++--------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
+| `restart-wazuh.exe <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/restart-wazuh.c>`_     | Restarts wazuh agent                                          |
++--------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
+| `route-null.exe <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/route-null.c>`_           | Adds an IP to null route                                      |
++--------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+

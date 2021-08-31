@@ -55,6 +55,8 @@ Configure Wazuh manager to allow self registration of new agents with authentica
     # grep "<use_password>" -B7 -A8 /var/ossec/etc/manager.conf
     # echo "please123" > /var/ossec/etc/authd.pass # this is the password agents will use for self-registration
 
+The password echoed to ``/var/ossec/etc/authd.pass`` is the one agents will use for self-registration. 
+
 Restart Wazuh manager and confirm the agent listener and the self-registration
 listener are in place:
 

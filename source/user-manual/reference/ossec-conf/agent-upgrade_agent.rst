@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _reference_ossec_agent_upgrade_agent:
 
@@ -114,6 +114,14 @@ Sample Configuration
 --------------------
 
 .. code-block:: xml
+
+    <!-- On the manager side -->
+
+    <agent-upgrade>
+      <chunk_size>16384</chunk_size>
+      <wpk_repository>packages.wazuh.com/4.x/wpk/</wpk_repository>
+      <max_threads>16</max_threads>
+    </agent-upgrade>
 
     <!-- On the agent side -->
     <agent-upgrade>

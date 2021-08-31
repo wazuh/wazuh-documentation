@@ -31,9 +31,9 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +---------------------------------------------------------------------+
 | Configuration sections                                              |
 +=====================================================================+
-| :doc:`active-response <active-response_agent>`                      |
+| :doc:`active-response_agent <active-response_agent>`                |
 +---------------------------------------------------------------------+
-| :doc:`agent-upgrade <agent-upgrade_agent>`                          |
+| :doc:`agent-upgrade_agent <agent-upgrade_agent>`                    |
 +---------------------------------------------------------------------+
 | :doc:`client <client>`                                              |
 +---------------------------------------------------------------------+
@@ -41,11 +41,15 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +---------------------------------------------------------------------+
 | :doc:`fluent-forward <fluent-forward>`                              |
 +---------------------------------------------------------------------+
-| :doc:`labels  <labels_agent>`                                       |
+| :doc:`github <github-module>`                                       |
++---------------------------------------------------------------------+
+| :doc:`labels_agent <labels_agent>`                                  |
 +---------------------------------------------------------------------+
 | :doc:`localfile <localfile>`                                        |
 +---------------------------------------------------------------------+
-| :doc:`logging <logging_agent>`                                      |
+| :doc:`logging_agent <logging_agent>`                                |
++---------------------------------------------------------------------+
+| :doc:`office365 <office365-module>`                                 |
 +---------------------------------------------------------------------+
 | :doc:`rootcheck <rootcheck>`                                        |
 +---------------------------------------------------------------------+
@@ -79,27 +83,26 @@ All of the above sections must be located within the top-level ``<wazuh_config>`
    :hidden:
    :maxdepth: 1
 
-
    active-response_agent
    agent-upgrade_agent
    client
    client_buffer
+   fluent-forward
+   gcp-pubsub
+   github-module
    labels_agent
    localfile
    logging_agent
+   office365-module
    rootcheck
    sca
    socket
    syscheck
-   fluent-forward
-   wodle-agent-key-polling
-   wodle-s3
-   wodle-azure-logs
    wodle-ciscat
    wodle-command
    wodle-docker
    wodle-openscap
    wodle-osquery
+   wodle-s3
    wodle-syscollector
-   gcp-pubsub
-   verifying-configuration
+   verifying-configuration.rst

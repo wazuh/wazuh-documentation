@@ -235,7 +235,7 @@ Wazuh Manager
 
   Configures the :ref:`email_from<reference_ossec_global>` section from ``manager.conf``.
 
-  *Default ossecm@example.wazuh.com*
+  *Default wazuh@example.wazuh.com*
 
 
 **wazuh_manager_email_maxperhour**
@@ -1195,7 +1195,7 @@ Wazuh Agent
 
 **wazuh_agent_labels**
 
-  Configures the :ref:`labels<reference_ossec_labels_agent>` section from ``agent.conf``.
+  Configures the :ref:`labels <reference_ossec_labels_agent>` section from ``agent.conf``.
 
   *Default:*
 

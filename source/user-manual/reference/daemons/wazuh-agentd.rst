@@ -1,5 +1,10 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: The wazuh-agentd program is the client-side daemon that handles communications with the server. Find out more in this section. 
+
+
+
 .. _wazuh-agentd:
 
 wazuh-agentd
@@ -7,7 +12,7 @@ wazuh-agentd
 
 .. versionadded:: 4.2
 
-The wazuh-agentd program is the client-side daemon that communicates with the server. It runs as user ``ossec``.
+The wazuh-agentd program is the client-side daemon that communicates with the server. It runs as user ``wazuh``.
 
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-c <config>** | Run using <config> as the configuration file.                                                   |
@@ -30,7 +35,7 @@ The wazuh-agentd program is the client-side daemon that communicates with the se
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-u <user>**   | Run as a specific user.                                                                         |
 +                 +-------------------------------------------+-----------------------------------------------------+
-|                 | Default value                             | ossecm                                              |
+|                 | Default value                             | wazuh                                               |
 +-----------------+-------------------------------------------+-----------------------------------------------------+
 | **-V**          | Display the version and license information                                                     |
 +-----------------+-------------------------------------------------------------------------------------------------+

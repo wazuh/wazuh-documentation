@@ -13,7 +13,7 @@ Using Wazuh to monitor Microsoft Azure
 This section provides instructions for monitoring **Microsoft Azure** infrastructures, such as:
 
 - How to **monitor all the activity happening in the infrastructure**, for instance, changes that occur in virtual machines, activation of alerts, health data information as well as control data.
-- How to install Wazuh agents to **monitor the virtual machines that form the infrastructure**, which will send events to the Wazuh manager for analysis in order to classify the event with a range of alerts that that can be easily viewed.
+- How to install Wazuh agents to **monitor the virtual machines that form the infrastructure**, which will send events to the Wazuh manager for analysis in order to classify the event with a range of alerts that can be easily viewed.
 - How to monitor services of our infrastructure such as **Azure Active Directory (AAD)**.
 
 From a wider perspective, the Microsoft Azure infrastructure resources can be divided into two types of logs, the **Activity logs** and the **Diagnostic logs**.
@@ -36,6 +36,7 @@ As a built-in Wazuh feature, now you can search, analyze and trigger alerts from
     .. toctree::
        :maxdepth: 2
 
+       dependencies
        monitoring-instances
        monitoring-activity
        monitoring-services

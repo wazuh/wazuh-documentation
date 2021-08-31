@@ -29,7 +29,9 @@ Installing Wazuh manager
           .. code-block:: console
 
             # yum update
-            # yum install make gcc gcc-c++ policycoreutils-python automake autoconf libtool centos-release-scl devtoolset-7
+            # yum install make gcc gcc-c++ policycoreutils-python automake autoconf libtool centos-release-scl openssl-devel
+            # yum update
+            # yum install devtoolset-7
             # scl enable devtoolset-7 bash
 
 
@@ -37,7 +39,7 @@ Installing Wazuh manager
 
           .. code-block:: console
 
-            # curl -OL http://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
+            # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
             # cd cmake-3.18.3 && ./bootstrap --no-system-curl
             # make -j$(nproc) && make install
             # cd .. && rm -rf cmake-*
@@ -47,18 +49,19 @@ Installing Wazuh manager
 
           .. code-block:: console
 
-            # yum install make cmake gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool
-            # rpm -i http://mirror.centos.org/centos/8/PowerTools/x86_64/os/Packages/libstdc++-static-8.3.1-5.el8.0.2.x86_64.rpm
+            # yum install make cmake gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool openssl-devel
+            # rpm -i $(rpm --eval https://packages.wazuh.com/utils/libstdc%2B%2B/libstdc%2B%2B-static-8.4.1-1.el8.'%{_arch}'.rpm)
 
 
           CMake 3.18 installation
 
           .. code-block:: console
 
-            # curl -OL http://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
+            # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
             # cd cmake-3.18.3 && ./bootstrap --no-system-curl
             # make -j$(nproc) && make install
             # cd .. && rm -rf cmake-*
+            # export PATH=/usr/local/bin:$PATH
 
 
   .. group-tab:: APT
@@ -73,7 +76,7 @@ Installing Wazuh manager
 
     .. code-block:: console
 
-      # curl -OL http://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
+      # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
       # cd cmake-3.18.3 && ./bootstrap --no-system-curl
       # make -j$(nproc) && make install
       # cd .. && rm -rf cmake-*
@@ -89,10 +92,19 @@ Installing Wazuh manager
 
     .. code-block:: console
 
-      # curl -OL http://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
+      # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
       # cd cmake-3.18.3 && ./bootstrap --no-system-curl
       # make -j$(nproc) && make install
       # cd .. && rm -rf cmake-*
+
+  .. group-tab:: Pacman
+
+
+    .. code-block:: console
+
+        # pacman --noconfirm -Syu curl gcc make sudo wget expect gnupg perl-base \
+        perl fakeroot python brotli automake autoconf libtool gawk libsigsegv nodejs \
+        base-devel inetutils cmake
 
 
 **Optional**. Install the following dependencies **only when compiling the CPython from sources**. Since v4.2.0, ``make deps TARGET=server`` will download a portable version of CPython ready to be installed. Nevertheless, you can download the CPython sources adding the ``PYTHON_SOURCE`` flag when running ``make deps``.
@@ -115,9 +127,9 @@ To install the required dependencies to build the python interpreter, follow the
 
     .. code-block:: console
 
-        # echo "deb-src http://deb.debian.org/debian $(lsb_release -cs) main" >> /etc/apt/sources.list
+        # sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
         # apt-get update
-        # apt-get build-dep python3.5 -y
+        # apt-get build-dep python3.9 -y
 
 
   .. group-tab:: ZYpp
@@ -148,7 +160,7 @@ To install the required dependencies to build the python interpreter, follow the
       # cd wazuh-*
       # ./install.sh
 
-    If you have previously compiled for another platform, you must clean the build using the Makefile in ``src``:
+    If you have previously compiled for another platform or **you want to install Wazuh in a custom path**, you must clean the build using the Makefile in ``src``:
 
     .. code-block:: console
 
@@ -242,7 +254,5 @@ Remove users:
 
   .. code-block:: console
 
-    # userdel ossec 2> /dev/null
-    # userdel ossecm 2> /dev/null
-    # userdel ossecr 2> /dev/null
-    # groupdel ossec 2> /dev/null
+    # userdel wazuh 2> /dev/null
+    # groupdel wazuh 2> /dev/null

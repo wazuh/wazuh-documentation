@@ -1,5 +1,9 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Learn more about GCP credentials configuration.
+
+
 .. _gcp_credentials:
 
 Configuring GCP credentials

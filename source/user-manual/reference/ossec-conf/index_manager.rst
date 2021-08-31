@@ -29,11 +29,11 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +---------------------------------------------------------------------+
 | Configuration sections                                              |
 +=====================================================================+
-| :doc:`active-response <active-response_manager>`                    |
+| :doc:`active-response_manager <active-response_manager>`            |
 +---------------------------------------------------------------------+
 | :doc:`agentless <agentless>`                                        |
 +---------------------------------------------------------------------+
-| :doc:`agent-upgrade <agent-upgrade_manager>`                        |
+| :doc:`agent-upgrade_manager <agent-upgrade_manager>`                |
 +---------------------------------------------------------------------+
 | :doc:`alerts <alerts>`                                              |
 +---------------------------------------------------------------------+
@@ -47,27 +47,63 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +---------------------------------------------------------------------+
 | :doc:`email_alerts <email_alerts>`                                  |
 +---------------------------------------------------------------------+
+| :doc:`fluent-forward <fluent-forward>`                              |
++---------------------------------------------------------------------+
 | :doc:`global  <global>`                                             |
++---------------------------------------------------------------------+
+| :doc:`github <github-module>`                                       |
 +---------------------------------------------------------------------+
 | :doc:`integration  <integration>`                                   |
 +---------------------------------------------------------------------+
-| :doc:`labels  <labels_manager>`                                     |
+| :doc:`labels_manager <labels_manager>`                              |
 +---------------------------------------------------------------------+
-| :doc:`logging <logging_manager>`                                    |
+| :doc:`localfile <localfile>`                                        |
++---------------------------------------------------------------------+
+| :doc:`logging_manager <logging_manager>`                            |
++---------------------------------------------------------------------+
+| :doc:`office365 <office365-module>`                                 |
 +---------------------------------------------------------------------+
 | :doc:`remote <remote>`                                              |
 +---------------------------------------------------------------------+
 | :doc:`reports <reports>`                                            |
 +---------------------------------------------------------------------+
+| :doc:`rootcheck <rootcheck>`                                        |
++---------------------------------------------------------------------+
 | :doc:`rule_test <rule_test>`                                        |
 +---------------------------------------------------------------------+
 | :doc:`ruleset <ruleset>`                                            |
++---------------------------------------------------------------------+
+| :doc:`sca <sca>`                                                    |
++---------------------------------------------------------------------+
+| :doc:`socket <socket>`                                              |
++---------------------------------------------------------------------+
+| :doc:`syscheck <syscheck>`                                          |
 +---------------------------------------------------------------------+
 | :doc:`syslog_output <syslog-output>`                                |
 +---------------------------------------------------------------------+
 | :doc:`task-manager <task-manager>`                                  |
 +---------------------------------------------------------------------+
 | :doc:`vulnerability-detector <vuln-detector>`                       |
++---------------------------------------------------------------------+
+| :doc:`wodle name="agent-key-polling" <wodle-agent-key-polling>`     |
++---------------------------------------------------------------------+
+| :doc:`wodle name="aws-s3" <wodle-s3>`                               |
++---------------------------------------------------------------------+
+| :doc:`wodle name="azure-logs" <wodle-azure-logs>`                   |
++---------------------------------------------------------------------+
+| :doc:`wodle name="cis-cat" <wodle-ciscat>`                          |
++---------------------------------------------------------------------+
+| :doc:`wodle name="command" <wodle-command>`                         |
++---------------------------------------------------------------------+
+| :doc:`wodle name="docker-listener" <wodle-docker>`                  |
++---------------------------------------------------------------------+
+| :doc:`wodle name="open-scap" <wodle-openscap>`                      |
++---------------------------------------------------------------------+
+| :doc:`wodle name="osquery" <wodle-osquery>`                         |
++---------------------------------------------------------------------+
+| :doc:`wodle name="syscollector" <wodle-syscollector>`               |
++---------------------------------------------------------------------+
+| :doc:`gcp-pubsub <gcp-pubsub>`                                      |
 +---------------------------------------------------------------------+
 
 All of the above sections must be located within the top-level ``<wazuh_config>`` tag. In case of adding another ``<wazuh_config>`` tag, it may override the values set on the previous tag.
@@ -77,24 +113,41 @@ All of the above sections must be located within the top-level ``<wazuh_config>`
    :hidden:
    :maxdepth: 1
 
-
    active-response_manager
-   agentless
    agent-upgrade_manager
+   agentless
    alerts
    auth
    cluster
    commands
    database-output
    email_alerts
+   fluent-forward
+   gcp-pubsub
+   github-module
    global
    integration
    labels_manager
+   localfile
    logging_manager
+   office365-module
    remote
    reports
+   rootcheck
    rule_test
    ruleset
+   sca
+   socket
+   syscheck
    syslog-output
    task-manager
    vuln-detector
+   wodle-agent-key-polling
+   wodle-azure-logs
+   wodle-ciscat
+   wodle-command
+   wodle-docker
+   wodle-openscap
+   wodle-osquery
+   wodle-s3
+   wodle-syscollector

@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: The Wazuh module for AWS provides capabilities to monitor AWS based services. See more about how to configure GuardDuty and some use cases.
+
 .. _amazon_guardduty:
 
 Amazon GuardDuty

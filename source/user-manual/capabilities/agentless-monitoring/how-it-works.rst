@@ -98,7 +98,7 @@ Checking the setup
 
 Finally, the ``expect`` package must be present on the manager for this feature to work.
 
-When the ``expect`` package is present and Wazuh is restarted, the following is shown in the ``/var/ossec/logs/ossec.log`` file:
+When the ``expect`` package is present and Wazuh is restarted, the following is shown in the ``/var/ossec/logs/wazuh.log`` file:
 
 .. code-block:: none
   :class: output
