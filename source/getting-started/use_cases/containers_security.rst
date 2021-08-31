@@ -1,11 +1,16 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Check out some use cases of our Containers security capability to get the most out of the Wazuh solution.
+
+
+
 .. _containers_security:
 
 Containers security
 ===================
 
-Wazuh is used to monitor for signs of security incidents across containers and alerting in real time. Wazuh protects container workloads at two different levels:
+Wazuh is used to monitor for signs of security incidents across containers, alerting in real time. Wazuh protects container workloads at two different levels: infrastructure and container level.
 
 Infrastructure level
 --------------------
@@ -16,7 +21,7 @@ Wazuh provides the following mechanisms to monitor Docker hosts or Kubernetes no
 
 - **Wazuh agent deployment to Docker hosts and Kubernetes nodes:** For a self-managed infrastructure, the deployment of the :ref:`Wazuh agent <wazuh_agent>` provides a comprehensive set of security capabilities, such as malware detection, file integrity monitoring, configuration assessment, log data analysis, vulnerability detection, and active responses.
 
-- **Integration with hosted infrastructure providers (e.g., Google GKE, Amazon EKS, etc.):** In this case, the Wazuh modules for cloud security monitoring download the managed service audit logs for security analysis.
+- **Integration with hosted infrastructure providers:** In this case, the Wazuh modules for cloud security monitoring download the managed service audit logs for security analysis. Wazuh integrates with hosted infrastructure providers such as Google GKE, Amazon EKS, and more. 
 
 Example of security alerts at an infrastructure level:
 
@@ -117,7 +122,7 @@ Expand the output to see an example of an alert generated when a command is exec
 Container level
 ---------------
   
-In order to get visibility at a container level, you can deploy the :ref:`Wazuh agent <wazuh_agent>` to a Kubernetes DaemonSet container. This kind of deployment ensures that the Wazuh agent will run in all nodes of your Kubernetes cluster. Besides, other Kubernetes Pods will be able to send data (e.g. application log messages) to the DaemonSet container, so the agent can process it and forward it to the :ref:`Wazuh server <wazuh_server>` for security analysis.
+In order to get visibility at a container level, you can deploy the :ref:`Wazuh agent <wazuh_agent>` to a Kubernetes DaemonSet container. This kind of deployment ensures that the Wazuh agent runs in all nodes of your Kubernetes cluster. Besides, other Kubernetes Pods are able to send data, like application log messages, to the DaemonSet container, so the agent can process it and forward it to the :ref:`Wazuh server <wazuh_server>` for security analysis.
   
 Example of security alerts at a container level:
 
@@ -129,5 +134,5 @@ Example of security alerts at a container level:
      - File integrity monitoring alerts
    * - New application installed in a container
      - Vulnerability detected in a container
-   * - Log analysis alert (e.g. Nginx event)
+   * - Log analysis alert (for example, Nginx event)
      - Hardening check failed in a container
