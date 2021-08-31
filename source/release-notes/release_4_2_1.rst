@@ -57,7 +57,24 @@ Resolved issues
 
 This release resolves known issues. 
 
-**Core**
+**Wazuh Kibana plugin**
+
+==============================================================    =============
+Reference                                                         Description
+==============================================================    =============
+`#nnnn <https://nnnn>`_                                           [add description]
+`#nnnn <https://nnnn>`_                                           [add description]
+==============================================================    =============
+
+Wazuh Splunk app
+----------------
+
+What's new
+^^^^^^^^^^
+
+This release includes new features or enhancements. 
+
+**Splunk**
 
 ==============================================================    =============
 Reference                                                         Description
@@ -75,3 +92,4 @@ More details about these changes are provided in the changelog of each component
 
 - `wazuh/wazuh <https:xxxx>`_
 - `wazuh/wazuh-kibana-app <https://xxxx>`_
+- `wazuh/wazuh-splunk <https://xxxx>`_
