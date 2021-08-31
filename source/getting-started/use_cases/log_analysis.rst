@@ -1,5 +1,9 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Check out some use cases of our Log data analysis capability to get the most out of the Wazuh solution.
+
+
 .. _log_analysis:
 
 Log data analysis
