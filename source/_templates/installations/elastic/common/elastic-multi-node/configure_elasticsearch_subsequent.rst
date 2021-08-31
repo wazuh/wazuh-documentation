@@ -31,7 +31,8 @@
     - ``<node_name>``: the node name; for example, ``node-2``.
     - ``<elastic_cluster>``: Elasticsearch cluster name; for example, ``elastic-cluster-production``.
     - ``<elasticsearch_ip_nodeX>`` Elasticsearch cluster master-eligible nodes IP; for example, ``10.0.0.3``.
-    - ``opendistro_security.nodes_dn``: value used to specify each node certificate.
+    - ``opendistro_security.nodes_dn``: value used to specify each node certificate. Make sure to use the same names to create the certificates. You can use the following structure:
+      ``CN=<common_name>,OU=<operational_unit>,O=<organization_name>,L=<locality>,C=<country_code>``
   
         .. code-block:: yaml
             :emphasize-lines: 5
@@ -40,6 +41,6 @@
                 - CN=node-1,OU=Docu,O=Wazuh,L=California,C=US
                 - CN=node-2,OU=Docu,O=Wazuh,L=California,C=US
                 - CN=node-3,OU=Docu,O=Wazuh,L=California,C=US
-                - CN=<common_name>,OU=<operational_unit>,O=<organization_name>,L=<locality>,C=<country_code>
+                
 
 .. End of include file
