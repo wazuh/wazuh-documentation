@@ -73,7 +73,7 @@ Installation
     The default values are for index ``wazuh`` and for source type ``*``.
 
     .. note::
-      The Wazuh app considers as valid index all indexes that contain the word ``wazuh`` in the source type, the default value for source type is ``wazuh``.
+       The Wazuh app considers as valid index all indexes that contain the word ``wazuh`` in the source type, the default value from the installation guide for source type is ``wazuh``.
 
     .. thumbnail:: ../../../images/splunk-app/app-index-sourcetype.png
       :title: Index and Source Type configuration
