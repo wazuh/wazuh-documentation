@@ -77,11 +77,11 @@ Now we will restore the following files:
    $ cp -p /var/ossec_backup/etc/manager.conf /var/ossec/etc/manager.conf.orig
    $ cp -p /var/ossec_backup/etc/local_internal_options.conf /var/ossec/etc/local_internal_options.conf
    $ cp -p /var/ossec_backup/etc/local_decoder.xml /var/ossec/etc/decoders/local_decoder.xml
-   $ cp -p /var/ossec_backup/etc/shared/agent.conf /var/ossec/etc/shared/default/agent.conf
+   $ cp -p /var/ossec_backup/etc/shared/shared.conf /var/ossec/etc/shared/default/shared.conf
    $ cp -p /var/ossec_backup/rules/local_rules.xml /var/ossec/etc/rules/local_rules.xml
    $ cp -p /var/ossec_backup/queue/rids/sender_counter /var/ossec/queue/rids/sender_counter
 
-There have been some syntax changes, and new settings, incorporated to ``manager.conf`` file. Please review this file manually in order to import your previous configuration. In addition, note note that ``shared/agent.conf`` file directory has now changed to ``/var/ossec/etc/shared/default``.
+There have been some syntax changes, and new settings, incorporated to ``manager.conf`` file. Please review this file manually in order to import your previous configuration. In addition, note note that ``shared.conf`` file directory has now changed to ``/var/ossec/etc/shared/default``.
 
 Optionally the following files can be restored to preserve alert log files and syscheck/rootcheck databases:
 

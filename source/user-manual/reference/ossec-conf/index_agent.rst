@@ -24,7 +24,7 @@ Here is an example of the proper location of the *active-response* configuration
         </active-response>
     </wazuh_config>
 
-The ``shared/agent.conf`` file is very similar to ``agent.conf``, but ``shared/agent.conf`` is used to centrally distribute configuration information to agents. See more :doc:`here <../centralized-configuration>`.
+The ``shared.conf`` file is very similar to ``agent.conf``, but ``shared.conf`` is used to centrally distribute configuration information to agents. See more :doc:`here <../centralized-configuration>`.
 
 Wazuh can be installed in two ways: as a manager by using the "server/manager" installation type and as an agent by using the "agent" installation type.
 

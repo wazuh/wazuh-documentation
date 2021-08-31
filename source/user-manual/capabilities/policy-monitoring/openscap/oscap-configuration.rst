@@ -66,7 +66,7 @@ If you prefer, you can restart a specific agent with option ``-u <id>``.
 
 We want to execute the PCI-DSS profile of the SSG RH7 policy only on Red Hat 7 agents.
 
-To do this, modify the ``/var/ossec/etc/shared/default/agent.conf`` file in the manager (assuming that the agent is on the ``default`` group):
+To do this, modify the ``/var/ossec/etc/shared/default/shared.conf`` file in the manager (assuming that the agent is on the ``default`` group):
 
 .. code-block:: xml
 
@@ -154,7 +154,7 @@ If you prefer, you can restart a specific agent with option ``-u <id>``.
 
 We want to execute the RedHat security policy only on Red Hat 7 agents.
 
-To do this, modify the ``/var/ossec/etc/shared/default/agent.conf`` file in the manager (assuming that the agent is on the ``default`` group):
+To do this, modify the ``/var/ossec/etc/shared/default/shared.conf`` file in the manager (assuming that the agent is on the ``default`` group):
 
 .. code-block:: xml
 

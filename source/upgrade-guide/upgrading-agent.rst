@@ -254,7 +254,7 @@ To perform the upgrade locally, follow the instructions for the operating system
         .. code-block:: console
 
           # mv ~/agent.conf.bk /var/ossec/etc/agent.conf
-          # chown root:ossec /var/ossec/etc/agent.conf
+          # chown root:wazuh /var/ossec/etc/agent.conf
 
 
     #. Start the wazuh-agent:
@@ -295,7 +295,7 @@ To perform the upgrade locally, follow the instructions for the operating system
           .. code-block:: console
 
             # mv ~/agent.conf.bk /var/ossec/etc/agent.conf
-            # chown root:ossec /var/ossec/etc/agent.conf
+            # chown root:wazuh /var/ossec/etc/agent.conf
             # mv ~/client.keys.bk /var/ossec/etc/client.keys
             # chown root:wazuh /var/ossec/etc/client.keys
 

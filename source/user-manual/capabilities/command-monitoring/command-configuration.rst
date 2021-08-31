@@ -18,7 +18,7 @@ Configuration
 Basic usage
 -----------
 
-Command monitoring is configured in the :ref:`localfile section<reference_ossec_localfile>` of :ref:`agent.conf <reference_client_conf>`. It can be also be centrally configured in :ref:`shared/agent.conf<reference_agent_conf>`.
+Command monitoring is configured in the :ref:`localfile section<reference_ossec_localfile>` of :ref:`agent.conf <reference_client_conf>`. It can be also be centrally configured in :ref:`shared.conf<reference_shared_conf>`.
 
 Monitor running Windows processes
 ---------------------------------
@@ -33,7 +33,7 @@ Example with notepad.exe as the important process to monitor:
       # Logcollector - Whether or not to accept remote commands from the manager
       logcollector.remote_commands=1
 
-2. Define the command in the group's **shared/agent.conf** file to list running processes.
+2. Define the command in the group's **shared.conf** file to list running processes.
 
     .. code-block:: xml
 
@@ -70,7 +70,7 @@ Disk space utilization
 
 The ``df`` command helps here to check the available disk space for file systems.
 
-This can be configured in either the ``shared/agent.conf`` file or the ``agent.conf`` file:
+This can be configured in either the ``shared.conf`` file or the ``agent.conf`` file:
 
 .. code-block:: xml
 
@@ -99,7 +99,7 @@ Check if the output changed
 
 In this case, the Linux "netstat" command is used along with the :ref:`check_diff option <rules_check_diff>` to monitor for changes in listening tcp sockets.
 
-This can be configured in either the ``shared/agent.conf`` file or the ``agent.conf`` file:
+This can be configured in either the ``shared.conf`` file or the ``agent.conf`` file:
 
 .. code-block:: xml
 
@@ -129,7 +129,7 @@ Load average
 
 Wazuh can be configured to monitor the Linux ``uptime`` command and alert when it is higher than a given threshold, like two load averages in this example.
 
-This can be configured in ``shared/agent.conf`` or ``agent.conf``:
+This can be configured in ``shared.conf`` or ``agent.conf``:
 
 .. code-block:: xml
 
@@ -154,7 +154,7 @@ Detect USB Storage
 
 Wazuh can be configured to alert when a USB storage device is connected. This example is for a Windows agent.
 
-Configure your agent to monitor the USBSTOR registry entry by adding the following to the group's ``shared/agent.conf``:
+Configure your agent to monitor the USBSTOR registry entry by adding the following to the group's ``shared.conf``:
 
 .. code-block:: xml
 

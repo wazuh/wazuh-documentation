@@ -115,14 +115,6 @@ Sample Configuration
 
 .. code-block:: xml
 
-    <!-- On the manager side -->
-
-    <agent-upgrade>
-      <chunk_size>16384</chunk_size>
-      <wpk_repository>packages.wazuh.com/4.x/wpk/</wpk_repository>
-      <max_threads>16</max_threads>
-    </agent-upgrade>
-
     <!-- On the agent side -->
     <agent-upgrade>
       <enabled>yes</enabled>
