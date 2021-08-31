@@ -53,6 +53,7 @@ Modify the ``wazuh-|WAZUH_LATEST|/etc/preloaded-vars.conf`` file that was downlo
   USER_LANGUAGE="en"
   USER_NO_STOP="y"
   USER_UPDATE="y"
+  USER_BINARYINSTALL="y"
 
 Compile the project from the ``src`` folder:
 
