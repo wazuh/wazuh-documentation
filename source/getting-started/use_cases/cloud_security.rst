@@ -31,7 +31,7 @@ The following list describes the AWS services that Wazuh is capable of monitorin
 
 - :ref:`Amazon Virtual Private Cloud (VPC) <amazon_vpc>`: provisions a logically isolated section of the AWS Cloud where AWS resources can be launched on a virtual network defined by the user.
 
-- :ref:`AWS Config <amazon_config>`: assess, audit, and evaluate the configurations of your AWS resources. Config continuously monitors and records the AWS resource configurations enabling automation of the evaluation of recorded configurations against the desired ones.
+- :ref:`AWS Config <amazon_config>`: assess, audit, and evaluate the configurations of your AWS resources. AWS Config continuously monitors and records the AWS resource configurations enabling automation of the evaluation of recorded configurations against the desired ones.
 
 - :ref:`AWS Cloudtrail <amazon_cloudtrail>`: enables governance, compliance, operational auditing, and risk auditing of your AWS account. With CloudTrail, you can log, continuously monitor, and retain account activity related to actions across your AWS infrastructure.
 
