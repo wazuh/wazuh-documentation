@@ -1,9 +1,11 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. _regulatory_compliance:
 
 .. meta::
     :description: Check out some use cases of our Regulatory compliance capability to get the most out of the Wazuh solution.
+
+
+.. _regulatory_compliance:
 
 Regulatory compliance
 =====================
