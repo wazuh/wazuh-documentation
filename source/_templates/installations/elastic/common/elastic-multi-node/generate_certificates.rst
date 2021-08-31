@@ -50,16 +50,16 @@
 
    .. code-block:: console
 
-     # node_name=elasticsearch-node-name
+     # NODE_NAME=elasticsearch-node-name
 
    .. code-block:: console 
      
      # mkdir /etc/elasticsearch/certs/
-     # mv ~/certs/$node_name* /etc/elasticsearch/certs/
+     # mv ~/certs/$NODE_NAME* /etc/elasticsearch/certs/
      # mv ~/certs/admin* /etc/elasticsearch/certs/
      # cp ~/certs/root-ca* /etc/elasticsearch/certs/
-     # mv /etc/elasticsearch/certs/$node_name.pem /etc/elasticsearch/certs/elasticsearch.pem
-     # mv /etc/elasticsearch/certs/$node_name-key.pem /etc/elasticsearch/certs/elasticsearch-key.pem     
+     # mv /etc/elasticsearch/certs/$NODE_NAME.pem /etc/elasticsearch/certs/elasticsearch.pem
+     # mv /etc/elasticsearch/certs/$NODE_NAME-key.pem /etc/elasticsearch/certs/elasticsearch-key.pem     
 
 #. Compress all the necessary files to be sent to all the instances.
 
