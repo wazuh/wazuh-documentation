@@ -5,8 +5,8 @@
   
 .. _use_cases:
 
-[WIP] Use cases
-===============
+Use cases
+=========
 
 The Wazuh platform is used to protect and monitor systems in different ways. Because of all of its capabilities, it is widely used for threat prevention, detection, and response. Besides, the Wazuh platform is used to meet regulatory compliance requirements, such as PCI DSS or HIPAA, and configuration standards like CIS hardening guides.
 
