@@ -11,7 +11,7 @@ S3 Server Access
 Amazon configuration
 --------------------
 
-#. :ref:`Create a new <S3_bucket>` S3 bucket to store the access logs in it. (If you want to use an already created one, skip this step).
+#. :ref:`Create a new <S3_bucket>` S3 bucket to store the access logs in it. If you want to use an existing one, skip this step.
 
 #. Go to Services > Storage > S3:
 
@@ -42,7 +42,7 @@ Amazon configuration
       :width: 70%
 
     .. note::
-      It is possible to store the S3 Server Access logs in the same bucket to be monitored. It is also possible specify a custom path inside the bucket to store the logs in it.
+      It is possible to store the S3 Server Access logs in the same bucket to be monitored. It is also possible to specify a custom path inside the bucket to store the logs in it.
 
 
 #. Finally, click on the *Save changes*. S3 Server Access logs will start to be stored in the specified path.
