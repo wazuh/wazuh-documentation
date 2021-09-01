@@ -159,10 +159,10 @@ Check that everything works correctly
         {
             "data": {
                 "title": "Wazuh API REST",
-                "api_version": "4.1.0",
+                "api_version": "4.2.0",
                 "revision": 40100,
                 "license_name": "GPL 2.0",
-                "license_url": "https://github.com/wazuh/wazuh/blob/4.1/LICENSE",
+                "license_url": "https://github.com/wazuh/wazuh/blob/4.2/LICENSE",
                 "hostname": "wazuh-manager",
                 "timestamp": "2020-11-10T15:15:31+0000"
             },

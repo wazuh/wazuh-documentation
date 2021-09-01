@@ -1,5 +1,8 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
+.. meta::
+  :description: Learn more about how the Wazuh capabilities work and check out some common Wazuh use cases in this section of our documentation. 
+  
 .. _use_cases:
 
 Use cases

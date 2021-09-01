@@ -20,7 +20,7 @@ The script allows installing both Elasticsearch and Kibana. They can be installe
 +-------------------------------+---------------------------------------------------------------------------------------------------------------+
 | -k / --install-kibana         | Installs Kibana (cannot be used together with option ``-e``)                                                  |
 +-------------------------------+---------------------------------------------------------------------------------------------------------------+
-| -n / --node-name              | Name of the Wazuh server instance                                                                             |
+| -n / --node-name              | Name of the Elasticsearch instance                                                                            |
 +-------------------------------+---------------------------------------------------------------------------------------------------------------+
 | -p / --elastic-password       | Elastic user password                                                                                         |
 +-------------------------------+---------------------------------------------------------------------------------------------------------------+
@@ -46,8 +46,8 @@ Download the script and the configuration file. After downloading them, configur
 
       .. code-block:: console
 
-          # curl -so ~/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/|WAZUH_LATEST_MINOR|/resources/elastic-stack/unattended-installation/distributed/elastic-stack-installation.sh 
-          # curl -so ~/config.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/|WAZUH_LATEST_MINOR|/resources/elastic-stack/unattended-installation/distributed/templates/config.yml
+          # curl -so ~/elastic-stack-installation.sh https://packages.wazuh.com/resources/4.2/elastic-stack/unattended-installation/distributed/elastic-stack-installation.sh 
+          # curl -so ~/config.yml https://packages.wazuh.com/resources/4.2/elastic-stack/unattended-installation/distributed/templates/config.yml
 
     **Configure the installation** 
       
@@ -132,8 +132,8 @@ Download the script and the configuration file. After downloading them, configur
 
       .. code-block:: console
 
-          # curl -so ~/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/|WAZUH_LATEST_MINOR|/resources/elastic-stack/unattended-installation/distributed/elastic-stack-installation.sh 
-          # curl -so ~/config.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/|WAZUH_LATEST_MINOR|/resources/elastic-stack/unattended-installation/distributed/templates/config_cluster.yml
+          # curl -so ~/elastic-stack-installation.sh https://packages.wazuh.com/resources/4.2/elastic-stack/unattended-installation/distributed/elastic-stack-installation.sh 
+          # curl -so ~/config.yml https://packages.wazuh.com/resources/4.2/elastic-stack/unattended-installation/distributed/templates/config_cluster.yml
 
     - Configure the installation
 
@@ -234,7 +234,7 @@ Installing Kibana
 
    .. code-block:: console
 
-     # curl -so ~/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/|WAZUH_LATEST_MINOR|/resources/elastic-stack/unattended-installation/distributed/elastic-stack-installation.sh
+     # curl -so ~/elastic-stack-installation.sh https://packages.wazuh.com/resources/4.2/elastic-stack/unattended-installation/distributed/elastic-stack-installation.sh
 
 #. Run the script:
 

@@ -1,5 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
-
+.. meta::
+  :description: Learn more about log data collection with Wazuh, from basic usage to monitoring logs, in this section of our documentation. 
+  
 .. _log-analysis-examples:
 
 Configuration

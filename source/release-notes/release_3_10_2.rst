@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Wazuh 3.10.2 has been released. Check out our release notes to discover the changes and additions of this release.
+
 .. _release_3_10_2:
 
 3.10.2 Release notes

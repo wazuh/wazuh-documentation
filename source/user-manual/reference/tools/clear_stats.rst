@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: The Wazuh clear_stats tool clears event stats. Learn more about this feature.
+
 .. _clear_stats:
 
 clear_stats

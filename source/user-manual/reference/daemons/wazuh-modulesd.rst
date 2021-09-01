@@ -1,6 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. _wazuh-modulesd:
+.. meta::
+  :description: The wazuh-modulesd program manages some Wazuh modules. Learn more about it in this section.
 
 wazuh-modulesd
 ==============
@@ -33,6 +35,14 @@ The wazuh-modulesd program manages the Wazuh modules described below.
 .. topic:: AWS S3 wodle
 
   The AWS S3 wodle allows you to gather and parse logs from multiple AWS services, such as Guard Duty, Macie, VPC Flow, etc. See the :ref:`AWS S3 <amazon>` section for more information on this functionality.
+
+.. topic:: GitHub wodle
+
+  The GitHub wodle allows you to gather audit logs from multiple GitHub organizations. See the :ref:`GitHub <github>` section for more information on this functionality.
+
+.. topic:: Office 365 wodle
+
+  The Office 365 wodle allows you to gather audit logs from multiple Office 365 organizations. See the :ref:`Office 365 <office365>` section for more information on this functionality.
 
 .. topic:: Vulnerability detector wodle
 

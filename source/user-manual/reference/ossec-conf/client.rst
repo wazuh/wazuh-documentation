@@ -1,5 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
-
+.. meta::
+  :description: Learn more about client configuration, connection to the manager, and its configuring options in this section of the Wazuh user manual. 
+  
 .. _reference_ossec_client:
 
 client
@@ -443,7 +445,7 @@ Override SSL used ciphers.
 +--------------------+----------------------------------------------------+
 | **Default value**  | HIGH:!ADH:!EXP:!MD5:!RC4:!3DES:!CAMELLIA:@STRENGTH |
 +--------------------+----------------------------------------------------+
-| **Allowed values** | valid ssl ciphers.                                 |
+| **Allowed values** | Any valid ssl cipher.                              |
 +--------------------+----------------------------------------------------+
 
 server_ca_path

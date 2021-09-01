@@ -1,5 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
-
+.. meta::
+  :description: Check out how to upgrade the Wazuh agent to the latest available version remotely, using the agent_upgrade tool or the Wazuh API, or locally. 
+  
 .. _upgrading_wazuh_agent:
 
 Upgrading the Wazuh agent
@@ -106,6 +108,12 @@ To perform the upgrade locally, follow the instructions for the operating system
          baseurl=https://packages.wazuh.com/4.x/yum/
          protect=1
          EOF 
+    
+    #. Refresh the repository:
+
+       .. code-block:: console
+ 
+         # zypper refresh     
 
 
     #. Upgrade the Wazuh agent to the latest version:

@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: This section of the Wazuh documentation guides through the upgrade process of Elasticsearch, Filebeat, and Kibana for Open Distro for Elasticsearch distribution.
+  
 .. _upgrading_open_distro:
 
 Upgrading Open Distro for Elasticsearch
@@ -155,7 +158,7 @@ In the commands below ``127.0.0.1`` IP address is used. If Elasticsearch is boun
 
           .. code-block:: console
 
-            # apt install opendistroforelasticsearch=|OPEN_DISTRO_LATEST|
+            # apt install opendistroforelasticsearch=|OPEN_DISTRO_LATEST|-1
 
 
         .. group-tab:: ZYpp
@@ -196,7 +199,7 @@ In the commands below ``127.0.0.1`` IP address is used. If Elasticsearch is boun
 
 #. Repeat the steps for every Elasticsearch node.
 
-.. note:: The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it with the following command ``/usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro_performance_analyzer``. 
+.. note:: The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it with the following command ``/usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer``. 
 
 
 Upgrading Filebeat
@@ -387,7 +390,7 @@ Upgrading Kibana
             # zypper update opendistroforelasticsearch-kibana-|OPEN_DISTRO_LATEST|
 
 
-#. Remove generated bundles and the ``wazuh-registry.json`` file:
+#. **(For upgrades from 3.x versions)** Remove generated bundles and the ``wazuh-registry.json`` file:
 
     .. code-block:: console
 
@@ -442,6 +445,14 @@ Upgrading Kibana
 
       # setcap 'cap_net_bind_service=+ep' /usr/share/kibana/node/bin/node
 
+#. **(Recommended)** Enable multitenancy in the ``/etc/kibana/kibana.yml`` configuration file:
+
+   .. code-block:: console
+
+      opendistro_security.multitenancy.enabled: true
+
+   When you access Kibana, a popup window asks you to define a tenant. Select one, for example global, and save the configuration.
+
 #. Restart Kibana:
 
     .. include:: ../../_templates/installations/basic/elastic/common/enable_kibana.rst
@@ -455,7 +466,7 @@ Upgrading Kibana
 
     If you have a custom index pattern, be sure to replace it accordingly.      
 
-#. Clean the browser's cache and cookies.
+#. Clear the browser's cache and cookies.
 
 
 Disabling the repository

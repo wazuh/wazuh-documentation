@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: The Wazuh agent is one of the components of our solution. Learn about its architecture, modules, and how it communicates with the Wazuh manager.
+
 .. _wazuh_agent:
 
 Wazuh agent
@@ -14,10 +17,13 @@ The Wazuh agent has a modular architecture, where different components take care
 
 The diagram below represents the agent architecture and components:
 
-.. image:: ../../images/getting_started/architecture_agent.png
+.. thumbnail:: ../../images/getting_started/architecture_agent.png
    :alt: Wazuh agent architecture
    :align: center
-   :width: 100%
+   :wrap_image: No
+
+
+.. _agents_modules: 
 
 Agent modules
 -------------
@@ -40,7 +46,7 @@ All agent modules have different purposes and settings. Here is a brief descript
 
 - **Containers security monitoring:** This agent module is integrated with the Docker Engine API in order to monitor changes in a containerized environment. For example, it detects changes to container images, network configuration, or data volumes. Besides, it alerts on containers running in privileged mode and on users executing commands in a running container.
 
-- **Cloud security monitoring:** This component monitors cloud providers such as Amazon AWS, Microsoft Azure, or Google GCP. It natively communicates with their APIs. It is capable of detecting changes to the cloud infrastructure (e.g. a new user is created, a security group is modified, a cloud instance is stopped, etc.), and collecting cloud services log data (e.g. AWS Cloudtrail, AWS Macie, AWS GuardDuty, Azure Active Directory, etc.)
+- **Cloud security monitoring:** This component monitors cloud providers such as Amazon AWS, GitHub, Microsoft Azure, Office 365, or Google GCP. It natively communicates with their APIs. It is capable of detecting changes to the cloud infrastructure (e.g. a new user is created, a security group is modified, a cloud instance is stopped, etc.), and collecting cloud services log data (e.g. AWS Cloudtrail, AWS Macie, AWS GuardDuty, Azure Active Directory, etc.)
 
 Communication with Wazuh server
 -------------------------------
