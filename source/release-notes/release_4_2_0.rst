@@ -203,6 +203,10 @@ This release includes new features or enhancements.
 **External dependencies**
 
 - `#8886 <https://github.com/wazuh/wazuh/pull/8886>`_ Boto3, botocore, requests, s3transfer, and urllib3 Python dependencies are now upgraded to their latest stable versions.
+- `#9389 <https://github.com/wazuh/wazuh/pull/9389>`_ Python is now updated to the latest stable version 3.9.6.
+- GCP dependencies and pip are now upgraded to their latest stable versions.
+- python-jose is upgraded to version 3.1.0.
+- Wazuh now adds tabulate dependency.
 
 Resolved issues
 ^^^^^^^^^^^^^^^
@@ -261,6 +265,9 @@ Reference                                                                       
 `#8357 <https://github.com/wazuh/wazuh/pull/8357>`_                                                                  An error is fixed in the manager that prevented its configuration to be checked after a change by the API when Active response is disabled.
 `#8630 <https://github.com/wazuh/wazuh/pull/8630>`_                                                                  When removing an agent, the manager now correctly removes remote counters and agent group files.
 `#8905 <https://github.com/wazuh/wazuh/pull/8905>`_                                                                  This fix in the agent on Windows resolves the issue that might cause the FIM DB to be corrupted when disabling the disk sync.
+`#9364 <https://github.com/wazuh/wazuh/pull/9364>`_                                                                  Logcollector on Windows no longer crashes when handling the position of the file. 
+`#9285 <https://github.com/wazuh/wazuh/pull/9285>`_                                                                  In Remoted, a buffer underflow hazard when handling input messages is now fixed.
+`#9547 <https://github.com/wazuh/wazuh/pull/9547>`_                                                                  In the agent, an issue that tried to verify the WPK CA certificate even when verification was disabled is now fixed.
 =================================================================================================================    =============
 
 **API**
@@ -337,6 +344,8 @@ Reference                                                         Description
 `#3163 <https://github.com/wazuh/wazuh-kibana-app/pull/3163>`_    This fix resolves the issue caused when checking process for TCP protocol in  **Deploy a new agent** window.
 `#3181 <https://github.com/wazuh/wazuh-kibana-app/pull/3181>`_    An issue with RBAC with agent group permissions is fixed. Now, when authorized agents are specified by their group instead of their IDs, you can successfully access the Security configuration assessment module, the Integrity monitoring module, and the Configuration window on the Agents page. 
 `#3232 <https://github.com/wazuh/wazuh-kibana-app/pull/3232>`_    The index pattern is now successfully created when performing the health check, preventing an API-conflict error during this process.
+`#3569 <https://github.com/wazuh/wazuh-kibana-app/pull/3569>`_    *Windows updates* section is no longer displayed incorrectly when generating PDF reports for Linux agent inventories.
+`#3574 <https://github.com/wazuh/wazuh-kibana-app/pull/3574>`_    Error logging is now improved and some unnecessary error messages are removed. 
 ==============================================================    =============
 
 

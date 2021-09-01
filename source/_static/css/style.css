@@ -2563,6 +2563,7 @@ p.admonition-title::before,
 .output .admonition-title {
   background-color: rgba(0, 0, 0, 0.5);
   color: #ffffff;
+  margin-bottom: 0;
 }
 
 .note p.admonition-title::before,
@@ -2572,6 +2573,18 @@ p.admonition-title::before,
 
 .output p.admonition-title::before {
   content: '\f138';
+}
+
+.output p.admonition-title::before {
+  content: '\f138';
+  transform: rotate(90deg);
+  transition: transform .2s;
+  width: auto;
+}
+
+.output .collapsed p.admonition-title::before {
+  transform: none;
+  transition: transform .2s;
 }
 
 .note > ol,

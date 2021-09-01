@@ -8,7 +8,7 @@
 Elasticsearch tuning
 ====================
 
-This guide summarizes the relevant configurations that allow for the optimization of Elasticsearch.
+This guide summarizes the relevant settings that enable Elasticsearch optimization.
 
 - `Change users' password`_
 - `Memory locking`_
@@ -19,7 +19,7 @@ This guide summarizes the relevant configurations that allow for the optimizatio
 Change users' password
 ----------------------
 
-In order to improve security, it is highly recommended to change Elasticsearch's default passwords.
+Changing the default passwords of Elasticsearch is highly recommended in order to improve security.
 
 .. tabs::
 
@@ -31,7 +31,7 @@ In order to improve security, it is highly recommended to change Elasticsearch's
     
       .. code-block:: console
       
-        # curl -so wazuh-passwords-tool.sh https://packages.wazuh.com/resources/4.1/open-distro/tools/wazuh-passwords-tool.sh
+        # curl -so wazuh-passwords-tool.sh https://packages.wazuh.com/resources/4.2/open-distro/tools/wazuh-passwords-tool.sh
 
     - Run the script:
 
@@ -138,7 +138,7 @@ In order to improve security, it is highly recommended to change Elasticsearch's
 Memory locking
 --------------
 
-Elasticsearch performs poorly when the system is swapping the memory. It is vitally important to the health of the node that none of the JVM is ever swapped out to disk. The following steps show how to set the ``bootstrap.memory_lock`` setting to true so Elasticsearch will lock the process address space into RAM. This prevents any Elasticsearch memory from being swapped out.
+Elasticsearch malfunctions when the system is swapping memory. It is crucial for the health of the node that none of the JVM is ever swapped out to disk. The following steps show how to set the ``bootstrap.memory_lock`` setting to true so Elasticsearch will lock the process address space into RAM. This prevents any Elasticsearch memory from being swapped out.
 
 #. Set ``bootstrap.memory_lock``:
 
@@ -150,7 +150,7 @@ Elasticsearch performs poorly when the system is swapping the memory. It is vita
 
 #. Edit the limit of system resources:
 
-    Where to configure systems settings depends on which package and operating system used for the Elasticsearch installation.
+    Where to configure system settings depends on which package and operating system used for the Elasticsearch installation.
 
     .. tabs::
 
@@ -181,12 +181,13 @@ Elasticsearch performs poorly when the system is swapping the memory. It is vita
 
 #. Limit memory:
 
-    The previous configuration might cause node instability or even node death with an ``OutOfMemory`` exception if Elasticsearch tries to allocate more memory than is available. JVM heap limits will help limit memory usage and prevent this situation. There are two rules to apply when setting the Elasticsearch heap size:
+    The previous configuration might cause node instability or even node death with an ``OutOfMemory`` exception if Elasticsearch tries to allocate more memory than is available. JVM heap limits will help limit memory usage and prevent this situation. Two rules must be applied when setting Elasticsearch's heap size:
+
 
       - Use no more than 50% of available RAM.
       - Use no more than 32 GB.
 
-    In addition, it is important to take into account the memory usage of the operating system, services, and software that are running on the host. By default, Elasticsearch is configured with a 1 GB heap. It can be changed via JVM flags using the ``/etc/elasticsearch/jvm.options`` file:
+    It is also important to consider the memory usage of the operating system, services and software running on the host. By default, Elasticsearch is configured with a heap of 1 GB. It can be changed via JVM flags using the ``/etc/elasticsearch/jvm.options`` file:
 
     .. code-block:: yaml
 
@@ -205,7 +206,7 @@ Elasticsearch performs poorly when the system is swapping the memory. It is vita
 .. tabs::
 
 
-    .. group-tab:: Systemd Systemd
+    .. group-tab:: Systemd
 
 
       .. code-block:: console
@@ -215,7 +216,7 @@ Elasticsearch performs poorly when the system is swapping the memory. It is vita
 
 
 
-    .. group-tab:: Systemd SysV Init
+    .. group-tab:: SysV Init
 
 
       .. code-block:: console
@@ -241,14 +242,14 @@ After starting Elasticsearch, run the following request to verify that the setti
       }
     }
 
-If the output of the ``"mlockall"`` field is **false**, the request failed.  In addition, the following line will appear in ``/var/log/elasticsearch/elasticsearch.log``:
+If the output of the ``"mlockall"`` field is **false**, the request has failed.  In addition, the following line will appear in ``/var/log/elasticsearch/elasticsearch.log``:
 
 .. code-block:: none
   :class: output
 
   Unable to lock JVM Memory
 
-Reference:
+References:
 
   - `Memory lock check <https://www.elastic.co/guide/en/elasticsearch/reference/current/_memory_lock_check.html>`_.
   - `bootstrap.memory_lock <https://www.elastic.co/guide/en/elasticsearch/reference/current/important-settings.html#bootstrap.memory_lock>`_.
@@ -259,37 +260,37 @@ Reference:
 Shards and replicas
 -------------------
 
-Elasticsearch provides the ability to split an index into multiple segments called shards. Each shard is, in and of itself, a fully-functional and independent "index" that can be hosted on any node in the cluster. Sharding is important for two primary reasons:
+Elasticsearch offers the possibility to split an index into multiple segments called shards. Each shard is in itself a fully functional and independent "index" that can be hosted on any node in the cluster. The splitting is important for two main reasons:
 
-- Horizontally scalation.
+- Horizontal scalation.
 
 - Distribute and parallelize operations across shards, increasing the performance and throughput.
 
-Also, Elasticsearch allows making one or more copies of the index’s shards into what are called replica shards, or replicas for short. Replication is important for two primary reasons:
+In addition, Elasticsearch allows the user to make one or more copies of the index shards in what are called replica shards, or replicas for short. Replication is important for two main reasons
 
-- Provides high availability in case a shard or node failure.
+- It provides high availability in case a shard or node fails.
 
-- Allows to scale out the search volume and throughput since searches can be executed on all replicas in parallel.
+- It allows search volume and throughput to scale, since searches can be executed on all replicas in parallel.
 
 .. warning::
 
-  The number of shards and replicas can be defined per index at the time the index is created. After the index is created, the number of *replicas* will have to be changed dynamically, however, the number of *shards* after-the-fact cannot be changed.
+  The number of shards and replicas can be defined per index at the time of their creation. Once the index is created, the number of replicas must be changed dynamically, whereas the number of fragments cannot be changed afterwards. 
 
 How many shards should an index have?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-As it is not possible to *reshard* (changing the number of shards) without reindexing, careful consideration should be given to how many shards will be needed *before* the first index is created. The number of nodes that will be on the installation will influence how many shards should be planned. In general, the most optimal performance will be realized by using the same number of shards as nodes are. So, a cluster with three nodes should have three shards, while a cluster with one node would only need one shard.
+As it is not possible to *reshard* (changing the number of shards) without reindexing, careful consideration should be given to how many shards will be needed *before* creating the first index. The number of nodes in the installation will influence the number of shards to be planned. In general, the most optimal performance will be realized by using the same number of shards as nodes. Thus, a cluster with three nodes should have three shards, while a cluster with one node would only need one shard.
 
 How many replicas should an index have?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Here is an example of how a cluster with three nodes and three shards could be set up:
 
-- **No replica:** Each node has one shard. If a node goes down, we will be left with an incomplete index of two shards.
+- **No replica:** Each node has one shard. If a node goes down, an incomplete index of two fragments will remain.
 
-- **One replica:** Each node has one shard and one replica. If a node goes down, there will still be a complete index.
+- **One replica:** Each node has one shard and one replica.  If a node goes down, a full index will remain.
 
-- **Two replicas:** Each node has one shard and two replicas (the full index). With this setup, the cluster can still function even if two nodes go down. This appears to be the best solution, however, it increases the storage requirements.
+- **Two replicas:** Each node has one shard and two replicas (the full index). With this setup, the cluster can continue to operate even if two nodes go down. Although this seems to be the best solution, it increases the storage requirements.
 
 Setting the number of shards and replicas
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -343,7 +344,7 @@ To change these settings, the Elasticsearch's template will have to be edited. I
 
       { "acknowledged" : true }
 
-#. *Optional*. Confirm that the configuration was updated successfully:
+#. *Optional*. Confirm that the configuration was successfully updated:
 
     .. code-block:: console
 
@@ -387,7 +388,7 @@ The number of replicas can be changed dynamically using the Elasticsearch API. I
     }
   }'
 
-More information about configuring and shards and replicas can be found in the :ref:`Kibana configuration section <kibana_config_file>`.
+More information about configuring shards and replicas can be found in the :ref:`Kibana configuration section <kibana_config_file>`.
 
 Reference:
 
