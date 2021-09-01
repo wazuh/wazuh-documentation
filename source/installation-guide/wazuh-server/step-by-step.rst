@@ -38,6 +38,7 @@ Adding the Wazuh repository
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Add the Wazuh repository to download the official Wazuh packages. As an alternative, you can download the Wazuh packages directly from our :ref:`Package list <packages>`. 
+Skip this step to install it on the same host as the Wazuh indexer.
     
    .. tabs::
    
