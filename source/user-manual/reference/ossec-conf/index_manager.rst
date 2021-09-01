@@ -51,8 +51,6 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +---------------------------------------------------------------------+
 | :doc:`global  <global>`                                             |
 +---------------------------------------------------------------------+
-| :doc:`github <github-module>`                                       |
-+---------------------------------------------------------------------+
 | :doc:`integration  <integration>`                                   |
 +---------------------------------------------------------------------+
 | :doc:`labels_manager <labels_manager>`                              |
@@ -60,8 +58,6 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 | :doc:`localfile <localfile>`                                        |
 +---------------------------------------------------------------------+
 | :doc:`logging_manager <logging_manager>`                            |
-+---------------------------------------------------------------------+
-| :doc:`office365 <office365-module>`                                 |
 +---------------------------------------------------------------------+
 | :doc:`remote <remote>`                                              |
 +---------------------------------------------------------------------+
@@ -124,13 +120,11 @@ All of the above sections must be located within the top-level ``<wazuh_config>`
    email_alerts
    fluent-forward
    gcp-pubsub
-   github-module
    global
    integration
    labels_manager
    localfile
    logging_manager
-   office365-module
    remote
    reports
    rootcheck
