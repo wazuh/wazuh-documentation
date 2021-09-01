@@ -98,6 +98,8 @@ Number of maximum messages pulled in each iteration. This value does not depend 
 | **Allowed values** | Any integer |
 +--------------------+-------------+
 
+.. _num_threads:
+
 num_threads
 ^^^^^^^^^^^^
 .. versionadded:: 4.2.1
