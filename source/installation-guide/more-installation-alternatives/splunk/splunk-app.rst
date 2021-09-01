@@ -68,7 +68,7 @@ Installation
 
     When the Wazuh app for Splunk is installed, the next step consists on installing and configuring :ref:`Splunk forwarder <splunk_forwarder>`.
 
-#. In order to configure the index and source type of the app, we must go to *Settings/Index* (view image).
+#. In order to configure the index and source type of the app, go to *Settings/Index* (view image).
 
     The default values are for index ``wazuh`` and for source type ``*``.
 
