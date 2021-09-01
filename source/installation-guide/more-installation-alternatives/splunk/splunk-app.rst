@@ -80,6 +80,18 @@ Installation
       :align: center
       :width: 100%
 
+    In the same way we can select our API, Index and Source Type, from the quick menu of configurations.
+
+    .. thumbnail:: ../../../images/splunk-app/quick-settings.png
+      :title: Index and Source Type configuration
+      :align: center
+      :width: 100%
+
+    .. thumbnail:: ../../../images/splunk-app/quick-settings-open.png
+      :title: Index and Source Type configuration
+      :align: center
+      :width: 100%
+
 Installing the Wazuh app for Splunk in a Splunk cluster
 -------------------------------------------------------
 
