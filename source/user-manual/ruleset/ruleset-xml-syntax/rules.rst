@@ -83,7 +83,7 @@ The **xml labels** used to configure ``rules`` are listed here.
 | `dstgeoip`_             | Any `regular expression <regex.html>`_.                       | It will compare a regular expression representing a GeoIP destination with a value decoded           |
 |                         |                                                               | as ``dstgeoip``.                                                                                     |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `if_sid`_               | A comma separated list of rule IDs.                           | It works similar to parent decoder. It will match when a rule ID in the list has previously matched. |
+| `if_sid`_               | A list of rule IDs separated by commas or spaces.             | It works similar to parent decoder. It will match when a rule ID in the list has previously matched. |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `if_group`_             | Any group name.                                               | It will match if the indicated group has matched before.                                             |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
@@ -1276,11 +1276,11 @@ if_sid
 
 Used as a requisite to trigger the rule. Matches when an ID in the list has previously matched. It is similar to a child decoder, with the key difference that alerts can have as many descendants as necessary, whereas decoder cannot have "grandchildren".
 
-+--------------------+----------------------------------------------------------+
-| **Default Value**  | n/a                                                      |
-+--------------------+----------------------------------------------------------+
-| **Allowed values** | Any rule ID. Multiple values must be separated by commas.|
-+--------------------+----------------------------------------------------------+
++--------------------+--------------------------------------------------------------------+
+| **Default Value**  | n/a                                                                |
++--------------------+--------------------------------------------------------------------+
+| **Allowed values** | Any rule ID. Multiple values must be separated by commas or spaces.|
++--------------------+--------------------------------------------------------------------+
 
 
 
@@ -1294,7 +1294,8 @@ Example:
         <description>There is an error in the log.</description>
       </rule>
 
-The rule will be triggered both when the rule with id: ``100100`` and when the rule with id: ``100101`` have previously been triggered and the logs contain the word "Error".
+The rule ``100110`` will be triggered in both cases, when the rule with id: ``100100`` and when the rule with id: ``100101`` have previously been triggered and the logs contain the word "Error".
+
 
 if_group
 ^^^^^^^^
