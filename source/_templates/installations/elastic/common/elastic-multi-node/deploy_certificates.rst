@@ -4,16 +4,16 @@
 
     .. code-block:: console
 
-      # node_name=elasticsearch-node-name
+      # NODE_NAME=elasticsearch-node-name
       
     .. code-block:: console
       
       # mkdir /etc/elasticsearch/certs
       # mv ~/certs.tar /etc/elasticsearch/certs/
       # cd /etc/elasticsearch/certs/
-      # tar -xf certs.tar $node_name.pem $node_name-key.pem root-ca.pem
-      # mv /etc/elasticsearch/certs/$node_name.pem /etc/elasticsearch/certs/elasticsearch.pem
-      # mv /etc/elasticsearch/certs/$node_name-key.pem /etc/elasticsearch/certs/elasticsearch-key.pem
+      # tar -xf certs.tar $NODE_NAME.pem $NODE_NAME-key.pem root-ca.pem
+      # mv /etc/elasticsearch/certs/$NODE_NAME.pem /etc/elasticsearch/certs/elasticsearch.pem
+      # mv /etc/elasticsearch/certs/$NODE_NAME-key.pem /etc/elasticsearch/certs/elasticsearch-key.pem
 
 #. If you want to later install the Wazuh dashboard on this node, keep the certificates file. Otherwise, remove it with ``rm -f certs.tar`` to increase security.
 
