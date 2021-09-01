@@ -66,7 +66,7 @@ Installation
       :align: center
       :width: 100%
 
-    When the Wazuh app for Splunk is installed, the next step consists on installing and configuring :ref:`Splunk forwarder <splunk_forwarder>`.
+    When the Wazuh app for Splunk is installed, the next step is installing and configuring :ref:`Splunk forwarder <splunk_forwarder>`.
 
 #. In order to configure the index and source type of the app, go to *Settings/Index* (view image).
 
