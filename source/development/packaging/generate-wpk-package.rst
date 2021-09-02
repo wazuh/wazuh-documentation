@@ -39,7 +39,7 @@ Execute the ``generate_wpk_package.sh`` script, with the different options you d
       -t,   --target-system <target>              [Required] Select target wpk to build [linux/windows/macos].
       -b,   --branch <branch>                     [Required] Select Git branch or tag e.g. 
       -d,   --destination <path>                  [Required] Set the destination path of package.
-      -pn,  --package-name <name>                 [Required for windows] Package name to pack on wpk.
+      -pn,  --package-name <name>                 [Required for windows and macos] Package name to pack on wpk.
       -o,   --output <name>                       [Required] Name to the output package.
       -k,   --key-dir <arch>                      [Required] Set the WPK key path to sign package.
       --aws-wpk-key                               [Optional] AWS Secrets manager Name/ARN to get WPK private key.
@@ -47,9 +47,7 @@ Execute the ``generate_wpk_package.sh`` script, with the different options you d
       --aws-wpk-key-region                        [Optional] AWS Region where secrets are stored.
       -a,   --architecture <arch>                 [Optional] Target architecture of the package [x86_64].
       -j,   --jobs <number>                       [Optional] Number of parallel jobs when compiling.
-      -pn,  --package-name <name>                 [Required for windows and macos] Package name to pack on wpk.
       -p,   --path <path>                         [Optional] Installation path for the package. By default: /var.
-      -o,   --output <name>                       [Required] Name to the output package.
       -c,   --checksum                            [Optional] Generate checksum.
       -h,   --help                                Show this help.
 
