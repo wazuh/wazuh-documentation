@@ -91,7 +91,7 @@ Below, you will find an example of macOS WPK package building.
 
 .. code-block:: console
 
-  # ./generate_wpk_package.sh -t macOS -b v|WAZUH_LATEST| -d /tmp/wpk -k /tmp/keys -o macOSAgent.wpk -pn /tmp/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_OSX|.pkg
+  # ./generate_wpk_package.sh -t macos -b v|WAZUH_LATEST| -d /tmp/wpk -k /tmp/keys -o macOSAgent.wpk -pn /tmp/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_OSX|.pkg
 
 This will build a |WAZUH_LATEST| Wazuh macOS WPK package named macOSAgent.wpk, using the previously generated keys that are saved in ``/tmp/keys``, and store it in ``/tmp/wpk``.
 
