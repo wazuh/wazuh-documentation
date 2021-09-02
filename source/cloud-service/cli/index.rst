@@ -26,7 +26,7 @@ Installation
 
   .. code-block:: console
 
-    # curl -so ~/wcloud-cli https://packages.wazuh.com/resources/cloud/wcloud-cli && chmod 500  ~/wcloud-cli 
+    # curl -so ~/wcloud-cli https://documentation.wazuh.com/resources/cloud/wcloud-cli && chmod 500  ~/wcloud-cli 
 
 2. Run it with the version argument to confirm that the installation was successful.
 
