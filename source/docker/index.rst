@@ -1,12 +1,12 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Learn more about the process of installing and configuring the Wazuh deployment on Docker in this section of our documentation. 
+
 .. _wazuh_docker:
 
 Docker
 ======
-
-.. meta::
-  :description: Find instructions to deploy Wazuh using Docker containers.
 
 `Docker <https://www.docker.com/>`_ is an open-source project that automates the deployment of different applications inside software containers. Docker containers wrap up a piece of software in a complete filesystem that contains everything it needs to run like: code, system tools, libraries, etc. This process guarantees that the system will always run the same, regardless the environment it is running.
 

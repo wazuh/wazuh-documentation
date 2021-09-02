@@ -1,41 +1,25 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-* Move to the installation location and create the certificates directory:
+* Download the ``wazuh-cert-tool.sh``:
 
   .. code-block:: console
 
-    # mkdir /etc/elasticsearch/certs
-    # cd /etc/elasticsearch/certs
+    # curl -so ~/wazuh-cert-tool.sh https://packages.wazuh.com/resources/4.2/open-distro/tools/certificate-utility/wazuh-cert-tool.sh
+    # curl -so ~/instances.yml https://packages.wazuh.com/resources/4.2/open-distro/tools/certificate-utility/instances_aio.yml
 
-* Download the Search Guard offline TLS tool to create the certificates:
-
-  .. code-block:: console
-
-    # curl -so ~/search-guard-tlstool-1.8.zip https://maven.search-guard.com/search-guard-tlstool/1.8/search-guard-tlstool-1.8.zip
-
-* Extract the downloaded file. It is assumed that it has been downloaded in ``~/`` (home directory):
+* Run the  ``wazuh-cert-tool.sh`` to create the certificates:
 
   .. code-block:: console
 
-    # unzip ~/search-guard-tlstool-1.8.zip -d ~/searchguard
+    #  bash ~/wazuh-cert-tool.sh
 
-* Download the ``search-guard.yml`` configuration file. This file is pre-configured to generate all the necessary certificates:
-
-  .. code-block:: console
-
-      # curl -so ~/searchguard/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/searchguard/search-guard-aio.yml
-
-* Run the Search Guard script to create the certificates:
+* Move the Elasticsearch certificates to their corresponding location:
 
   .. code-block:: console
 
-    #  ~/searchguard/tools/sgtlstool.sh -c ~/searchguard/search-guard.yml -ca -crt -t /etc/elasticsearch/certs/
-
-
-* Once the certificates have been created, remove the unnecessary files:
-
-  .. code-block:: console
-
-    # rm /etc/elasticsearch/certs/client-certificates.readme /etc/elasticsearch/certs/elasticsearch_elasticsearch_config_snippet.yml ~/search-guard-tlstool-1.8.zip ~/searchguard -rf
+    # mkdir /etc/elasticsearch/certs/
+    # mv ~/certs/elasticsearch* /etc/elasticsearch/certs/
+    # mv ~/certs/admin* /etc/elasticsearch/certs/
+    # cp ~/certs/root-ca* /etc/elasticsearch/certs/
 
 .. End of include file

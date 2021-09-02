@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Learn more about how the Security Content Automation Protocol (SCAP) works and its requirements.
+
 How it works
 ============
 

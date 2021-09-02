@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Learn more about File Integrity Monitoring, one of the Wazuh capabilities. We show you some configuration examples to get the best out of Wazuh.
+  
 .. _fim-examples:
 
 Configuration
@@ -44,7 +47,7 @@ By default, syscheck scans selected directories, whose list depends on the :ref:
 Configuring scheduled scans
 ---------------------------
 
-For the schedluled scans, syscheck has an option to configure the :ref:`frequency <reference_ossec_syscheck_frequency>` of the system scans. In this example, syscheck is configured to run every 10 hours:
+For the scheduled scans, syscheck has an option to configure the :ref:`frequency <reference_ossec_syscheck_frequency>` of the system scans. In this example, syscheck is configured to run every 10 hours:
 
 .. code-block:: xml
 
@@ -450,7 +453,7 @@ Configuring synchronization
       <interval>5m</interval>
       <max_interval>1h</max_interval>
       <response_timeout>30</response_timeout>
-      <sync_queue_size>16384</sync_queue_size>
+      <queue_size>16384</queue_size>
       <max_eps>10</max_eps>
     </synchronization>
   </syscheck>

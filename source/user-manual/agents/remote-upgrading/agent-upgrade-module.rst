@@ -61,7 +61,7 @@ The module expects 3 parameters:
             "parameters": {
                 "agents": [5,6],
                 "wpk_repo": "packages.wazuh.com/wpk/",
-                "version": "v4.1.0",
+                "version": "v4.2.0",
                 "use_http": false,
                 "force_upgrade": false
             }

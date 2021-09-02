@@ -1,12 +1,12 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Wazuh was born as a fork of OSSEC. In this section we explain the value we add to the OSSEC project and how to move to Wazuh from OSSEC.
+  
 .. _upgrading_ossec:
 
 Migrating from OSSEC
 ====================
-
-.. meta::
-  :description: Learn why it's a good reason to upgrade your infrastructure migrating it to Wazuh.
 
 Why it's time to migrate
 ------------------------

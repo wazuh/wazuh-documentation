@@ -29,14 +29,16 @@ Installing Wazuh agent from sources
             .. code-block:: console
 
               # yum update
-              # yum install make gcc gcc-c++ policycoreutils-python automake autoconf libtool centos-release-scl devtoolset-7
+              # yum install make gcc gcc-c++ policycoreutils-python automake autoconf libtool centos-release-scl openssl-devel
+              # yum update
+              # yum install devtoolset-7
               # scl enable devtoolset-7 bash
 
             CMake 3.18 installation
 
             .. code-block:: console
 
-              # curl -OL http://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
+              # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
               # cd cmake-3.18.3 && ./bootstrap --no-system-curl
               # make -j$(nproc) && make install
               # cd .. && rm -rf cmake-*
@@ -45,17 +47,18 @@ Installing Wazuh agent from sources
 
             .. code-block:: console
 
-              # yum install make gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool
-              # rpm -i http://mirror.centos.org/centos/8/PowerTools/x86_64/os/Packages/libstdc++-static-8.3.1-5.1.el8.x86_64.rpm
+              # yum install make gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool openssl-devel
+              # rpm -i $(rpm --eval https://packages.wazuh.com/utils/libstdc%2B%2B/libstdc%2B%2B-static-8.4.1-1.el8.'%{_arch}'.rpm)
 
             CMake 3.18 installation
 
             .. code-block:: console
 
-              # curl -OL http://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
+              # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
               # cd cmake-3.18.3 && ./bootstrap --no-system-curl
               # make -j$(nproc) && make install
               # cd .. && rm -rf cmake-*
+              # export PATH=/usr/local/bin:$PATH
 
 
       .. tab:: APT
@@ -69,7 +72,7 @@ Installing Wazuh agent from sources
 
         .. code-block:: console
 
-          # curl -OL http://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
+          # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
           # cd cmake-3.18.3 && ./bootstrap --no-system-curl
           # make -j$(nproc) && make install
           # cd .. && rm -rf cmake-*
@@ -86,7 +89,7 @@ Installing Wazuh agent from sources
 
         .. code-block:: console
 
-          # curl -OL http://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
+          # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
           # cd cmake-3.18.3 && ./bootstrap --no-system-curl
           # make -j$(nproc) && make install
           # cd .. && rm -rf cmake-*
@@ -400,13 +403,13 @@ Installing Wazuh agent from sources
 
         # cd wazuh-*
         # gmake -C src deps RESOURCES_URL=https://packages.wazuh.com/deps/|WAZUH_LATEST_MINOR|
-        # gmake -C src TARGET=agent USE_SELINUX=no PREFIX=/var/ossec DISABLE_SHARED=yes
+        # gmake -C src TARGET=agent USE_SELINUX=no PREFIX=/var/ossec
 
     4. Run the ``install.sh`` script. This will run a wizard that will guide you through the installation process using the Wazuh sources:
 
      .. code-block:: console
 
-      # DISABLE_SHARED="yes" ./install.sh
+      # ./install.sh
 
      If you have previously compiled for another platform, you must clean the build using the Makefile in ``src``:
 
@@ -530,13 +533,13 @@ Installing Wazuh agent from sources
 
         # cd wazuh-*
         # /usr/local/bin/gmake -C src deps RESOURCES_URL=https://packages.wazuh.com/deps/|WAZUH_LATEST_MINOR|/
-        # /usr/local/bin/gmake -C src TARGET=agent USE_SELINUX=no DISABLE_SHARED=yes
+        # /usr/local/bin/gmake -C src TARGET=agent USE_SELINUX=no
 
     4. Run the ``install.sh`` script. This will run a wizard that will guide you through the installation process using the Wazuh sources:
 
      .. code-block:: console
 
-      # DISABLE_SHARED=yes ./install.sh
+      # ./install.sh
 
      If you have previously compiled for another platform, you must clean the build using the Makefile in ``src``:
 
@@ -694,7 +697,7 @@ Installing Wazuh agent from sources
             # cd wazuh/src
             # gmake clean
             # gmake deps
-            # gmake -j 4 TARGET=agent PREFIX=/var/ossec USE_SELINUX=no DISABLE_SHARED=yes
+            # gmake -j 4 TARGET=agent PREFIX=/var/ossec USE_SELINUX=no
 
          * For Solaris 10 SPARC:
 
@@ -703,7 +706,7 @@ Installing Wazuh agent from sources
             # cd wazuh/src
             # gmake clean
             # gmake deps
-            # gmake -j 4 TARGET=agent PREFIX=/var/ossec USE_SELINUX=no USE_BIG_ENDIAN=yes DISABLE_SHARED=yes
+            # gmake -j 4 TARGET=agent PREFIX=/var/ossec USE_SELINUX=no USE_BIG_ENDIAN=yes
 
         6. Run the ``solaris10_patch.sh`` that has previously been downloaded.
 

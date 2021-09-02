@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: This guide provides the basic information needed to get started with the Wazuh API, including some practical use cases. 
+  
 .. _api_getting_started:
 
 Getting started
@@ -23,6 +26,10 @@ The Wazuh API will be installed along the Wazuh manager by default. To control o
 .. code-block:: console
 
     # service wazuh-manager start/status/stop/restart
+
+.. note::
+    The -k parameter applied to API requests is used to avoid the server connection verification by using server certificates. If these are valid, this parameter can be removed.
+    To configure the certificates use the following guide :ref:`Securing API <securing_api>`.
 
 .. _api_log_in:
 
@@ -413,7 +420,7 @@ Here are some of the basic concepts related to making API requests and understan
           }
         }
 
-- Responses containing collections of data will return a maximum of 500 elements. The *offset* and *limit* parameters may be used to iterate through large collections.
+- Responses containing collections of data will return a maximum of 500 elements by default. The *offset* and *limit* parameters may be used to iterate through large collections. The *limit* parameter accepts up to 100000 items, although it is recommended not to exceed the default value (500 items). Doing so can lead to unexpected behaviors (timeouts, large responses, etc.). Use with caution.
 - All responses have an HTTP status code: 2xx (success), 4xx (client error), 5xx (server error), etc.
 - All requests (except ``GET /security/user/authenticate`` and ``POST /security/user/authenticate/run_as``) accept the parameter ``pretty`` to convert the JSON response to a more human-readable format.
 - The Wazuh API log is stored on the manager as ``/var/ossec/logs/api.log`` (the path and verbosity level can be changed in the Wazuh API configuration file). The Wazuh API logs are rotated daily. Rotated logs are stored in ``/var/ossec/logs/api/<year>/<month>`` and compressed using ``gzip``.

@@ -1,4 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
+.. meta::
+  :description: The ossec.conf file is the main configuration file on the Wazuh manager and it also plays an important role on the agents. Learn more about it and check out an example here. 
+
 
 .. _reference_ossec_syscheck:
 
@@ -830,7 +833,7 @@ The database synchronization settings are configured inside this tag.
       <interval>5m</interval>
       <max_interval>1h</max_interval>
       <response_timeout>30</response_timeout>
-      <sync_queue_size>16384</sync_queue_size>
+      <queue_size>16384</queue_size>
       <max_eps>10</max_eps>
     </synchronization>
 
@@ -840,6 +843,19 @@ The database synchronization settings are configured inside this tag.
 .. versionadded:: 3.12.0
 
 Specifies whether there will be periodic inventory synchronizations or not.
+
++--------------------+---------------------------------------+
+| **Default value**  | yes                                   |
++--------------------+---------------------------------------+
+| **Allowed values** | yes/no                                |
++--------------------+---------------------------------------+
+
+**registry_enabled**
+
+.. versionadded:: 4.1.0
+
+On Windows agents, enables inventory synchronizations for registry entries. If ``enabled`` is set to no,
+this parameter is ignored.
 
 +--------------------+---------------------------------------+
 | **Default value**  | yes                                   |

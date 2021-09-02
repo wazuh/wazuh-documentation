@@ -1,5 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
-
+.. meta::
+  :description: Wazuh can be configured to send email alerts to one or more email addresses when certain rules are triggered or for daily event reports. Learn more here. 
+  
 .. _manual_email_report:
 
 Configuring email alerts

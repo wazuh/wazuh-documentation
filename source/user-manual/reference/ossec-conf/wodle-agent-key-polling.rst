@@ -1,5 +1,9 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Learn more about the configuration options of the key polling wodle.
+
+
 .. _wodle-agentkeypolling:
 
 wodle name="agent-key-polling"

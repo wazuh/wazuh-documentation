@@ -1,3 +1,5 @@
+.. meta::
+  :description: Learn how to install PuppetDB in this section of the Wazuh documentation.
 
 PuppetDB installation (Optional)
 ================================

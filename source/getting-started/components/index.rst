@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: The Wazuh components are the Wazuh agent, the Wazuh server, and Elastic Stack. Learn more about them in this section of our documentation.
+  
 .. _components:
 
 Components
@@ -15,10 +18,10 @@ In addition to agent-based monitoring capabilities, the Wazuh platform can monit
 
 The diagram below represents the Wazuh components and data flow. It shows the three main components of the solution, which are the :ref:`Wazuh agent <wazuh_agent>`, the :ref:`Wazuh server <wazuh_server>`, and the :ref:`Elastic Stack <elastic_stack>`.
 
-.. image:: ../../images/getting_started/data_flow.png
+.. thumbnail:: ../../images/getting_started/data_flow.png
     :alt: Data flow
     :align: center
-    :width: 100%
+    :wrap_image: No
 
 In this section of the documentation you will find a description of the three Wazuh components:
     - :ref:`Wazuh agent <wazuh_agent>`
