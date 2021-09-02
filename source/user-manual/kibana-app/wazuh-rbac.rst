@@ -23,3 +23,30 @@ These actions are done through the following entities:
 - Customized rules that allow the acquisition of permissions without creating the user-role relationship in the database. This functionality is beneficial for audits and temporary users.
   
 More information about how to add or modify any RBAC configuration can be found `here <https://documentation.wazuh.com/current/user-manual/api/rbac/configuration.html>`_.
+
+
+RBAC in Wazuh
+-------------
+
+RBAC in Wazuh fulfills the function of managing the system resources. It is a layer between the software and its clients. This layer works at the lowest level within the software Wazuh, thus ensuring that all endpoints of our API are protected and appropriately managed.
+
+The first of these methods is access through the relationship between users and roles. This method is the classic method in which a client provides a username-password, and based on the relationship of the specified user, it will obtain the designated permissions for it. More information about this method is here.
+
+The second method of access is based on the relationship between the rules and the roles of the system. In this way, each rule satisfied by the authorization context provided by the client will grant all the roles associated with it. Each rule can be associated with one or several roles, so if it is successfully checked, the user will have the permissions given by the roles associated with the satisfied rules. More information here.
+
+In this entry, the focus will be on the second method. This access system is based on the use of authorization contexts, which will be checked by each of the system rules. Every rule satisfied by an authorization context will give certain roles to the user who presents the authorization context.
+
+Our entire RBAC system works in both non-clustered and clustered environments, this last one being totally transparent to it. RBAC can grant permissions on the different nodes of a cluster and this one can work in a totally independent way to them, all the information is in the master node.
+
+Below you can see two pictures with the schema of the two methods of authentication and their relationships:
+
+.. thumbnail:: ../../images/kibana-app/rbac_scheme.png
+    :title: Keys
+    :align: left
+    :width: 100%
+
+
+.. thumbnail:: ../../images/kibana-app/rbac_scheme2.png
+    :title: Keys
+    :align: left
+    :width: 100%    
