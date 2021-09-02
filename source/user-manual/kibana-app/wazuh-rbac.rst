@@ -20,9 +20,9 @@ The main features provided by RBAC in Wazuh are:
 These actions are done through the following entities:
 
 - Relationships between users, roles, and policies.
-- Customized rules that allow the acquisition of permissions without creating the user-role relationship in the database. This functionality is beneficial for audits and temporary users.
+- Customized rules that allow the acquisition of permissions without creating the user-role relationship in the database. This functionality is beneficial for audits and temporary users. 
   
-More information about how to add or modify any RBAC configuration can be found `here <https://documentation.wazuh.com/current/user-manual/api/rbac/configuration.html>`_.
+Follow the link for more information about `how to add or modify any RBAC configuration <https://documentation.wazuh.com/current/user-manual/api/rbac/configuration.html>`_.
 
 
 RBAC in Wazuh
@@ -30,14 +30,14 @@ RBAC in Wazuh
 
 RBAC manage the system resources and is a layer between the software and its clients. This layer works at a low level within the software Wazuh ensuring that all endpoints of the API are protected and appropriately managed.
 
-RBAC has two methods of authentication and the first of these is the access through the relationship between users and roles. This method is the classic method in which a client provides a username-password, and based on the relationship of the specified user, it will obtain the designated permissions for it. You can find more information about this method  `here <https://documentation.wazuh.com/current/user-manual/api/rbac/configuration.html#assign-roles-to-a-user>`_. 
+RBAC has two methods of authentication and the first of these is the access through the relationship between users and roles. This method is the classic method in which a client provides a username-password, and based on the relationship of the specified user, it will obtain the designated permissions for it. You can find more information about this method `here <https://documentation.wazuh.com/current/user-manual/api/rbac/configuration.html#assign-roles-to-a-user>`_. 
 
 .. thumbnail:: ../../images/kibana-app/rbac_scheme.png
     :title: Keys
     :align: left
     :width: 100%
 
-The second method of access is based on the relationship between the rules and the roles of the system. In this way, each rule satisfied by the authorization context provided by the administrator will grant all the roles associated with it. Each rule can be associated with one or several roles, so if it is successfully checked, the user will have the permissions given by the roles associated with the satisfied rules. You can find more information about this method  `here <https://documentation.wazuh.com/current/user-manual/api/rbac/auth_context.html#authorization-context>`_. 
+The second method of access is based on the relationship between the rules and the roles of the system. In this way, each rule satisfied by the authorization context provided by the administrator will grant all the roles associated with it. Each rule can be associated with one or several roles, so if it is successfully checked, the user will have the permissions given by the roles associated with the satisfied rules. You can find more information about this method `here <https://documentation.wazuh.com/current/user-manual/api/rbac/auth_context.html#authorization-context>`_. 
 
 .. thumbnail:: ../../images/kibana-app/rbac_scheme2.png
     :title: Keys
@@ -73,6 +73,7 @@ The goal of this use case is to create a user for the Framework team. This user 
 The first step is to create a Kibana user. 
 
 To do this follow the instructions below:
+
 - Go to the main panel and select the “Security” option.
 - Once inside, select the option “Internal users” and click on the button “Create internal user”.
 - Choose the name and password and click on the “Create” button.
