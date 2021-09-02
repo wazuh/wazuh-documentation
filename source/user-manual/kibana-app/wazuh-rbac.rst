@@ -30,14 +30,14 @@ RBAC in Wazuh
 
 RBAC manage the system resources and is a layer between the software and its clients. This layer works at a low level within the software Wazuh ensuring that all endpoints of the API are protected and appropriately managed.
 
-RBAC has two methods of authentication and the first of these is the access through the relationship between users and roles. This method is the classic method in which a client provides a username-password, and based on the relationship of the specified user, it will obtain the designated permissions for it. You can find more information about this method here. 
+RBAC has two methods of authentication and the first of these is the access through the relationship between users and roles. This method is the classic method in which a client provides a username-password, and based on the relationship of the specified user, it will obtain the designated permissions for it. You can find more information about this method  `here <https://documentation.wazuh.com/current/user-manual/api/rbac/configuration.html#assign-roles-to-a-user>`_. 
 
 .. thumbnail:: ../../images/kibana-app/rbac_scheme.png
     :title: Keys
     :align: left
     :width: 100%
 
-The second method of access is based on the relationship between the rules and the roles of the system. In this way, each rule satisfied by the authorization context provided by the administrator will grant all the roles associated with it. Each rule can be associated with one or several roles, so if it is successfully checked, the user will have the permissions given by the roles associated with the satisfied rules. You can find more information about this method here. 
+The second method of access is based on the relationship between the rules and the roles of the system. In this way, each rule satisfied by the authorization context provided by the administrator will grant all the roles associated with it. Each rule can be associated with one or several roles, so if it is successfully checked, the user will have the permissions given by the roles associated with the satisfied rules. You can find more information about this method  `here <https://documentation.wazuh.com/current/user-manual/api/rbac/auth_context.html#authorization-context>`_. 
 
 .. thumbnail:: ../../images/kibana-app/rbac_scheme2.png
     :title: Keys
@@ -46,5 +46,5 @@ The second method of access is based on the relationship between the rules and t
 
 Below we will focus on the second method. This access system is based on the use of authorization contexts, which will be checked by each of the system rules. Every rule satisfied by an authorization context will give certain roles to the user who presents the authorization context.
 
-Wazuh RBAC system works in both non-clustered and clustered environments, this last one being totally transparent to it. RBAC can grant permissions on the different nodes of a cluster and work independently due to all the information in the master node.
+Wazuh RBAC system works in both non-clustered and clustered environments, this last one being totally transparent to it. RBAC can grant permissions on the different nodes of a cluster and work independently due to all the information is always stored in the master node.
 
