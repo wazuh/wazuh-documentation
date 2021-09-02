@@ -48,3 +48,39 @@ Below we will focus on the second method. This access system is based on the use
 
 Wazuh RBAC system works in both non-clustered and clustered environments, this last one being totally transparent to it. RBAC can grant permissions on the different nodes of a cluster and work independently due to all the information is always stored in the master node.
 
+
+RBAC at Wazuh’s UI
+------------------
+
+As indicated in the scheme, an authorization context can either be created or obtained by some means. To ilustrate this we will work on a use case. In it there will be an environment with 10 agents. 
+
+These agents are divided into two different groups. On one hand, the agents 001, 002, 003, 004, 005, and 006 belong to the Framework group. On the other hand, the agents 006, 007, 008, 009, and 010 belong to the group US-WEST. This is the current state of this environment:
+
+.. thumbnail:: ../../images/kibana-app/0.1.overview_framework_group.png
+    :title: Keys
+    :align: left
+    :width: 100%
+
+.. thumbnail:: ../../images/kibana-app/0.2.overview_us-west_group.png
+    :title: Keys
+    :align: left
+    :width: 100%    
+
+User creation
+-------------
+
+The goal of this use case is to create a user for the Framework team. This user will have to have permissions on the agents that belong to the group with the same name.
+The first step is to create a Kibana user. 
+
+To do this follow the instructions below:
+- Go to the main panel and select the “Security” option.
+- Once inside, select the option “Internal users” and click on the button “Create internal user”.
+- Choose the name and password and click on the “Create” button.
+- This user does not have any kind of permission on Kibana, so the next thing is to add this user to the “all_access” role so that it can access all the Wazuh’ s boards.
+- Within the role go to the tab Mapped users and then select the option Manage mapping.
+- Then add the new user in the “Internal users” part.
+
+.. thumbnail:: ../../images/kibana-app/0.3.mapped_users.png
+    :title: Keys
+    :align: left
+    :width: 100%
