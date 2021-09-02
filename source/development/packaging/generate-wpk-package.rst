@@ -34,16 +34,16 @@ Execute the ``generate_wpk_package.sh`` script, with the different options you d
 
   Usage: ./generate_wpk_package.sh [OPTIONS]
   
-      -t,   --target-system <target>              [Required] Select target wpk to build [linux/windows]
+      -t,   --target-system <target>              [Required] Select target wpk to build [linux/windows/macOS].
       -b,   --branch <branch>                     [Required] Select Git branch or tag e.g. 
       -d,   --destination <path>                  [Required] Set the destination path of package.
       -k,   --key-dir <arch>                      [Required] Set the WPK key path to sign package.
       -a,   --architecture <arch>                 [Optional] Target architecture of the package [x86_64].
       -j,   --jobs <number>                       [Optional] Number of parallel jobs when compiling.
-      -pd,  --package-directory <directory>       [Required for windows] Package name to pack on wpk.
+      -pn,  --package-name <name>                 [Required for windows and macOS] Package name to pack on wpk.
       -p,   --path <path>                         [Optional] Installation path for the package. By default: /var.
       -o,   --output <name>                       [Required] Name to the output package.
-      -c,   --checksum                            [Optional] Generate checksum
+      -c,   --checksum                            [Optional] Generate checksum.
       -h,   --help                                Show this help.
 
 To use this tool, the previously required :ref:`certificate <create-wpk-key>` and the key must be in the same directory.
@@ -57,7 +57,7 @@ Below, you will find an example of Linux WPK package building.
 
   # ./generate_wpk_package.sh -t linux -b v|WAZUH_LATEST| -d /tmp/wpk -k /tmp/keys -o LinuxAgent.wpk
 
-This will build a |WAZUH_LATEST| Wazuh Linux WPK package named LinuxAgent.wpk, using the  with the previously generated keys that are saved in ``/tmp/keys`` and store it in ``/tmp/wpk``.
+This will build a |WAZUH_LATEST| Wazuh Linux WPK package named LinuxAgent.wpk, using the previously generated keys that are saved in ``/tmp/keys``, and store it in ``/tmp/wpk``.
 
 Windows WPK
 ^^^^^^^^^^^
@@ -72,9 +72,28 @@ Below, you will find an example of Windows WPK package building.
 
 .. code-block:: console
 
-  # ./generate_wpk_package.sh -t windows -b v|WAZUH_LATEST| -d /tmp/wpk -k /tmp/keys -o WindowsAgent.wpk -pd /tmp/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi
+  # ./generate_wpk_package.sh -t windows -b v|WAZUH_LATEST| -d /tmp/wpk -k /tmp/keys -o WindowsAgent.wpk -pn /tmp/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi
 
-This will build a |WAZUH_LATEST| Wazuh Windows WPK package named WindowsAgent.wpk, using the  with the previously generated keys that are saved in ``/tmp/keys`` and store it in ``/tmp/wpk``.
+This will build a |WAZUH_LATEST| Wazuh Windows WPK package named WindowsAgent.wpk, using the previously generated keys that are saved in ``/tmp/keys``, and store it in ``/tmp/wpk``.
+
+If the ``-c`` or ``--checksum`` option is used there will be a file containing the SHA512 checksum in the same output path or you can indicate where you want to store it.
+
+macOS WPK
+^^^^^^^^^
+
+To build a WPK for macOS you need to first download an PKG package of the desired version:
+
+.. code-block:: console
+
+  # curl -O https://packages.wazuh.com/|CURRENT_MAJOR|/macos/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_OSX|.pkg
+
+Below, you will find an example of macOS WPK package building.
+
+.. code-block:: console
+
+  # ./generate_wpk_package.sh -t macOS -b v|WAZUH_LATEST| -d /tmp/wpk -k /tmp/keys -o macOSAgent.wpk -pn /tmp/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_OSX|.pkg
+
+This will build a |WAZUH_LATEST| Wazuh macOS WPK package named macOSAgent.wpk, using the previously generated keys that are saved in ``/tmp/keys``, and store it in ``/tmp/wpk``.
 
 If the ``-c`` or ``--checksum`` option is used there will be a file containing the SHA512 checksum in the same output path or you can indicate where you want to store it.
 
