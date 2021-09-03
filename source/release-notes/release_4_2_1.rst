@@ -25,6 +25,14 @@ Reference                                                         Description
 `#9973 <https://github.com/wazuh/wazuh/pull/9973>`_               An issue in the upgrade to 4.2.0 that disabled Eventchannel support on Windows agents is now fixed. 
 ==============================================================    =============
 
+**Modules**
+
+==============================================================    =============
+Reference                                                         Description
+==============================================================    =============
+`#9975 <https://github.com/wazuh/wazuh/issues/9975>`_             An issue with Python-based integration modules causing the integrations to stop working in Wazuh v4.2.0 agents is now fixed.
+==============================================================    =============
+
 
 Wazuh Kibana plugin
 -------------------
