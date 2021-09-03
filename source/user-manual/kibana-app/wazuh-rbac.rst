@@ -15,7 +15,7 @@ The main features provided by RBAC in Wazuh are:
 
 - It is an easy-to-use administration system that permits to manage users or entities’ permissions to the different resources of the system in a simple way.
 
-- The users will be able to execute only the functions over which they have permissions. - - This way, the system administrators, can isolate the workflow of each of them.
+- The users will be able to execute only the functions over which they have permissions. This way, the system administrators can isolate the workflow of each of them.
 
 - It allows administrators to create different categories of users with additional permissions and roles in the system.
 
@@ -41,7 +41,7 @@ RBAC has two authentication methods, and the first of these is access through th
     :align: left
     :width: 100%
 
-The second method of access is based on the relationship between the rules and the roles of the system. In this way, each rule satisfied by the authorization context provided by the administrator will grant all the roles associated with it. Each rule can be associated with one or several roles. If it is successfully checked, the user will have the permissions given by the roles associated with the satisfied rules. In the following link, you can find more information about `the authorization Context <https://documentation.wazuh.com/current/user-manual/api/rbac/auth_context.html#authorization-context>`_. 
+The second method of access is based on the relationship between the rules and the roles of the system. In this way, each rule satisfied by the authorization context provided by the administrator will grant all the roles associated with it. Each rule can be associated with one or several roles. If it is successfully checked, the user will have the permissions given by the roles associated with the satisfied rules. In the following link, you can find more information about `the authorization context <https://documentation.wazuh.com/current/user-manual/api/rbac/auth_context.html#authorization-context>`_. 
 
 .. thumbnail:: ../../images/kibana-app/rbac_scheme2.png
     :title: Keys
@@ -56,7 +56,7 @@ Wazuh RBAC system works in both non-clustered and clustered environments, this l
 RBAC at Wazuh’s UI
 ------------------
 
-As indicated in the scheme, an authorization context can either be created or obtained by some means. To ilustrate this, we will work on a use case where there will be an environment with 10 agents.
+As indicated in the scheme, an authorization context can either be created or obtained by some means. To illustrate this, we will work on a use case where there will be an environment with 10 agents.
 
 These agents are divided into two different groups. On the one hand, the agents 001, 002, 003, 004, 005, and 006 belong to the Framework group. On the other hand, the agents 006, 007, 008, 009, and 010 belong to the group US-WEST. This is the current state of this environment:
 
