@@ -86,3 +86,25 @@ To do this follow the instructions below:
     :align: left
     :width: 100%
     
+
+RBAC configuration
+------------------
+
+Now it is time to go to the Wazuh interface, and within it move to the “Security” option, then choose “Policies”. This is the menu that allows users to edit any RBAC policy. In this one is possible to define which permissions will be in the system. 
+
+These will not be applied to any role until both entities are joined as described later. There are many default policies in Wazuh and you can find `more information about them here <https://documentation.wazuh.com/current/user-manual/api/rbac/reference.html#default-policies>`_.
+
+In order to achieve this, a new policy has to be created that gives users access to the agents of the “Framework” group. In this policy, you need to select all the options that the user of the “Framework” team will be able to do with the agents. And as a resource of these actions chooses the “Framework” group:
+
+.. thumbnail:: ../../images/kibana-app/0.4.security_policies.png
+    :title: Keys
+    :align: left
+    :width: 100%
+
+The next thing is to create a role for that user, to do this go to the “Roles” tab. Inside it, by default, there are several roles and you can find `more information about them here <https://documentation.wazuh.com/current/user-manual/api/rbac/reference.html#default-roles>`_. In this example, let’s create a new role that will be assigned to our user.
+
+This role will have a name of our choice and it will be linked to the policy created before, this way, the user to whom this role is assigned will have permissions on the agents of the “Framework” group.
+
+Finally, let’s link our Kibana user with the “Framework_role “, for this go to the tab “Roles_mapping” and select “Create Role mapping”. 
+To perform the mapping, choose the previously created role and select the previously created internal user.
+
