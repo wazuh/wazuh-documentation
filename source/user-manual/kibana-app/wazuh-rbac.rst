@@ -108,3 +108,39 @@ This role will have a name of our choice and it will be linked to the policy cre
 Finally, let’s link our Kibana user with the “Framework_role “, for this go to the tab “Roles_mapping” and select “Create Role mapping”. 
 To perform the mapping, choose the previously created role and select the previously created internal user.
 
+
+Test configuration
+------------------
+
+Once all these steps have been completed, just authenticate with the user to verify that everything is correctly configured. I this example Kibana’s main panel now only shows 6 active agents, out of the 10 that the system has but in the agents tab is possible to see in more detail which agents are displayed:
+
+.. thumbnail:: ../../images/kibana-app/0.5.framework_agents.png
+    :title: Keys
+    :align: left
+    :width: 100%
+
+
+
+Block US-WEST group
+-------------------
+
+This user has permissions for all the agents of the “Framework” group. Let's suppose that the Framework team should not have permission to see the agents of the “US-WEST” group. The problem is that this team can see agent 006, which belongs to the group “US-WEST”. To solve this you have to create a new policy that denies the “US-WEST” group so that the 006 agent does not appear.
+
+Note: For this particular case it is not necessary to block the whole US-WEST group, however, this guarantees that if in the future this same case occurs (an agent belonging to both groups), the user “framework” will not be able to see it.
+
+So let’s go back to the policy administration panel and create a new one that blocks the “US-WEST” group for the “framework” user. Once created, let’s go to the “Roles” panel and link this new policy to the role created earlier.
+
+The policies are applied in the order they are listed, this means that first the entire Framework group will be enabled and then the US-WEST group will be denied. The intersection of both will also be denied as it applies after they are allowed. In the picture below you can see the  result of the role:
+
+.. thumbnail:: ../../images/kibana-app/0.6.role_edit.png
+    :title: Keys
+    :align: left
+    :width: 100%
+
+Finally, you need to authenticate again with the user “framework” and check that it shows you that there is an agent less in the asset counter and inside the agent’s panel because the agent 006 does not appear:
+
+.. thumbnail:: ../../images/kibana-app/0.7.login_1.png
+    :title: Keys
+    :align: left
+    :width: 100%    
+
