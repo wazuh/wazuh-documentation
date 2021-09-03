@@ -22,22 +22,22 @@ These actions are done through the following entities:
 - Relationships between users, roles, and policies.
 - Customized rules that allow the acquisition of permissions without creating the user-role relationship in the database. This functionality is beneficial for audits and temporary users. 
   
-Follow the link for more information about `how to add or modify any RBAC configuration <https://documentation.wazuh.com/current/user-manual/api/rbac/configuration.html>`_.
+In the folowing link you can find more information about `how to add or modify any RBAC configuration <https://documentation.wazuh.com/current/user-manual/api/rbac/configuration.html>`_.
 
 
 RBAC in Wazuh
 -------------
 
-RBAC manage the system resources and is a layer between the software and its clients. This layer works at a low level within the software Wazuh ensuring that all endpoints of the API are protected and appropriately managed.
+RBAC manages the system resources and is a layer between the software and its clients. This layer works at a low level within the software Wazuh ensuring that all endpoints of the API are protected and appropriately managed.
 
-RBAC has two methods of authentication and the first of these is the access through the relationship between users and roles. This method is the classic method in which a client provides a username-password, and based on the relationship of the specified user, it will obtain the designated permissions for it. You can find more information about this method `here <https://documentation.wazuh.com/current/user-manual/api/rbac/configuration.html#assign-roles-to-a-user>`_. 
+RBAC has two methods of authentication and the first of these is the access through the relationship between users and roles. This method is the classic method in which a client provides a username-password, and based on the relationship of the specified user, it will obtain the designated permissions for it. In the folowing link you can find more information about how to `assign roles to a user <https://documentation.wazuh.com/current/user-manual/api/rbac/configuration.html#assign-roles-to-a-user>`_. 
 
 .. thumbnail:: ../../images/kibana-app/rbac_scheme.png
     :title: Keys
     :align: left
     :width: 100%
 
-The second method of access is based on the relationship between the rules and the roles of the system. In this way, each rule satisfied by the authorization context provided by the administrator will grant all the roles associated with it. Each rule can be associated with one or several roles, so if it is successfully checked, the user will have the permissions given by the roles associated with the satisfied rules. You can find more information about this method `here <https://documentation.wazuh.com/current/user-manual/api/rbac/auth_context.html#authorization-context>`_. 
+The second method of access is based on the relationship between the rules and the roles of the system. In this way, each rule satisfied by the authorization context provided by the administrator will grant all the roles associated with it. Each rule can be associated with one or several roles, so if it is successfully checked, the user will have the permissions given by the roles associated with the satisfied rules. In the folowing link you can find more information about `authorization Context <https://documentation.wazuh.com/current/user-manual/api/rbac/auth_context.html#authorization-context>`_. 
 
 .. thumbnail:: ../../images/kibana-app/rbac_scheme2.png
     :title: Keys
@@ -85,3 +85,4 @@ To do this follow the instructions below:
     :title: Keys
     :align: left
     :width: 100%
+    
