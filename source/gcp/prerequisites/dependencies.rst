@@ -56,4 +56,4 @@ google-cloud-pubsub
 
 .. code-block:: console
 
-  # pip install google-cloud-pubsub==1.7.0
+  # pip install google-cloud-pubsub==1.4.3
