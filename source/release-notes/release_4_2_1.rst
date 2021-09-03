@@ -14,29 +14,15 @@ This section lists the changes in version 4.2.1. Every update of the Wazuh solut
 Wazuh core
 ----------
 
-What's new
-^^^^^^^^^^
-
-This release includes new features or enhancements. 
-
-**Core**
-
-- `#nnnn <https://nnnn>`_ [add description]
-- `#nnnn <https://nnnn>`_ [add description]
-
-
 Resolved issues
 ^^^^^^^^^^^^^^^
 
-This release resolves known issues. 
-
-**Core**
+**Installer**
 
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#nnnn <https://nnnn>`_                                           [add description]
-`#nnnn <https://nnnn>`_                                           [add description]
+`#9973 <https://github.com/wazuh/wazuh/pull/9973>`_               An issue in the upgrade to 4.2.0 that disabled Eventchannel support on Windows agents is now fixed. 
 ==============================================================    =============
 
 
@@ -46,25 +32,8 @@ Wazuh Kibana plugin
 What's new
 ^^^^^^^^^^
 
-This release includes new features or enhancements. 
+- Wazuh Kibana plugin is now compatible with Wazuh 4.2.1.
 
-- `#nnnn <https://nnnn>`_ [add description]
-- `#nnnn <https://nnnn>`_ [add description]
-
-
-Resolved issues
-^^^^^^^^^^^^^^^
-
-This release resolves known issues. 
-
-**Wazuh Kibana plugin**
-
-==============================================================    =============
-Reference                                                         Description
-==============================================================    =============
-`#nnnn <https://nnnn>`_                                           [add description]
-`#nnnn <https://nnnn>`_                                           [add description]
-==============================================================    =============
 
 Wazuh Splunk app
 ----------------
@@ -72,17 +41,7 @@ Wazuh Splunk app
 What's new
 ^^^^^^^^^^
 
-This release includes new features or enhancements. 
-
-**Splunk**
-
-==============================================================    =============
-Reference                                                         Description
-==============================================================    =============
-`#nnnn <https://nnnn>`_                                           [add description]
-`#nnnn <https://nnnn>`_                                           [add description]
-==============================================================    =============
-
+- Wazuh Splunk app is now compatible with Wazuh 4.2.1.
 
 
 Changelogs
@@ -90,6 +49,7 @@ Changelogs
 
 More details about these changes are provided in the changelog of each component:
 
-- `wazuh/wazuh <https:xxxx>`_
-- `wazuh/wazuh-kibana-app <https://xxxx>`_
-- `wazuh/wazuh-splunk <https://xxxx>`_
+
+- `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v4.2.1/CHANGELOG.md>`_
+- `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v4.2.1-7.10.2/CHANGELOG.md>`_
+- `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v4.2.1-8.1.2/CHANGELOG.md>`_
