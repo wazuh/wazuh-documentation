@@ -12,7 +12,7 @@ Wazuh provides a pre-built virtual machine image (OVA) that you can directly imp
   This VM only runs on 64-bit systems and is recommended for use in testing and small working environments. It can be a useful tool for proofs of concept and labs. Multi-node Wazuh and Elastic Stack clusters are usually a better fit for production environments where higher performance is required.
   This appliance use OSS versions of Elasticsearch, Filebeat and Kibana. Make sure to use the corresponding OSS packages for possible future upgrades.
 
-1. This virtual appliance, available `here <https://packages.wazuh.com/vm/wazuh|WAZUH_LATEST_OVA|_|ELASTICSEARCH_LATEST_OVA|.ova>`_, contains the following components:
+Download this `virtual appliance (OVA) <https://packages.wazuh.com/vm/wazuh|WAZUH_LATEST_OVA|_|ELASTICSEARCH_LATEST_OVA|.ova>`_, that contains the following components:
 
   - CentOS 7
   - Wazuh |WAZUH_LATEST_OVA|
