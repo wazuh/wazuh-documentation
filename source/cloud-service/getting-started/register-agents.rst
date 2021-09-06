@@ -5,7 +5,7 @@
 
 
 Register agents
----------------
+===============
 
 To start using Wazuh, you need to install a Wazuh agent on your endpoint and register it in your environment. 
 
