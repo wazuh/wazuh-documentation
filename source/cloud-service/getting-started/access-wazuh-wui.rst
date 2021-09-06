@@ -5,7 +5,7 @@
 
 
 Access Wazuh WUI
-----------------
+================
 
 The Wazuh WUI is a flexible and intuitive web interface. Through this WUI, you have access to the tools for mining and visualizing events, giving you a comprehensive insight into your monitored systems.
 
@@ -23,3 +23,11 @@ Follow these steps to access Wazuh WUI:
 It is highly recommended for security reasons to change the default password and create your own users. 
 
 .. note:: You can access the Wazuh WUI directly using the URL *https://<cloud_id>.cloud.wazuh.com*, where ``<cloud_id>`` is the Cloud ID of your environment.
+
+
+If you have any questions about the Wazuh Cloud, see the :ref:`Cloud service FAQ <cloud_getting_started_starting_faq>`.
+
+Next steps
+----------
+
+Your Wazuh Cloud environment is ready and you can install a Wazuh agent on every endpoint to be monitored. To learn how to install agents, check :ref:`Register agents <cloud_register_agents>` section.
