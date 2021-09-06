@@ -92,7 +92,7 @@ The :ref:`Wazuh agent <wazuh_agent>` is a single, light-weight monitoring softwa
         </a>
     </div>
     <div class="item-agent">
-        <a href="./wazuh-agent/wazuh_agent_package_macos.html" class="d-flex align-items-center">
+        <a href="./wazuh-agent/wazuh-agent-package-macos.html" class="d-flex align-items-center">
             <p>macOS</p>
 
 .. image:: ../images/installation/macOS_logo.png
@@ -103,7 +103,7 @@ The :ref:`Wazuh agent <wazuh_agent>` is a single, light-weight monitoring softwa
         </a>
     </div>
     <div class="item-agent">
-        <a href="./wazuh-agent/wazuh_agent_package_aix.html" class="d-flex align-items-center">
+        <a href="./wazuh-agent/wazuh-agent-package-aix.html" class="d-flex align-items-center">
             <p>AIX</p>
 
 .. image:: ../images/installation/AIX.png

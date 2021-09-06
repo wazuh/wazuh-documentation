@@ -85,6 +85,23 @@ newUrls['4.2'] = [
   '/cloud-service/your-environment/cancel-environment.html',
   '/cloud-service/your-environment/manage-wui-access.html',
   '/cloud-service/your-environment/understanding-storage.html',
+  '/getting-started/use-cases/cloud-security.html',
+  '/getting-started/use-cases/configuration-assessment.html',
+  '/getting-started/use-cases/rootkits-detection.html',
+  '/installation-guide/more-installation-alternatives/elastic-stack/distributed-deployment/step-by-step-installation/wazuh-cluster/wazuh-multi-node-cluster.html',
+  '/installation-guide/open-distro/distributed-deployment/step-by-step-installation/wazuh-cluster/wazuh-single-node-cluster.html',
+  '/installation-guide/wazuh-agent/wazuh-agent-package-aix.html',
+  '/installation-guide/wazuh-agent/wazuh-agent-package-macos.html',
+  '/release-notes/release-3-7-2.html',
+  '/release-notes/release-3-10-1.html',
+  '/release-notes/release-3-11-2.html',
+  '/release-notes/release-4-0-0.html',
+  '/release-notes/release-4-0-2.html',
+  '/user-manual/api/securing-api.html',
+  '/user-manual/configuring-cluster/cluster-management.html',
+  '/user-manual/manager/manual-email-report/smtp-authentication.html',
+  '/user-manual/reference/tools/clear-stats.html',
+  '/user-manual/reference/tools/update-ruleset.html',
 ];
 
 removedUrls['4.2'] = [
@@ -113,6 +130,23 @@ removedUrls['4.2'] = [
   '/user-manual/reference/tools/util.sh.html',
   '/user-manual/reference/tools/ossec-makelists.html',
   '/user-manual/reference/tools/ossec-logtest.html',
+  '/getting-started/use_cases/cloud_security.html',
+  '/getting-started/use_cases/configuration_assessment.html',
+  '/getting-started/use_cases/rootkits_detection.html',
+  '/installation-guide/more-installation-alternatives/elastic-stack/distributed-deployment/step-by-step-installation/wazuh-cluster/wazuh_multi_node_cluster.html',
+  '/installation-guide/open-distro/distributed-deployment/step-by-step-installation/wazuh-cluster/wazuh_single_node_cluster.html',
+  '/installation-guide/wazuh-agent/wazuh_agent_package_aix.html',
+  '/installation-guide/wazuh-agent/wazuh_agent_package_macos.html',
+  '/release-notes/release_3_7_2.html',
+  '/release-notes/release_3_10_1.html',
+  '/release-notes/release_3_11_2.html',
+  '/release-notes/release_4_0_0.html',
+  '/release-notes/release_4_0_2.html',
+  '/user-manual/api/securing_api.html',
+  '/user-manual/configuring-cluster/cluster_management.html',
+  '/user-manual/manager/manual-email-report/smtp_authentication.html',
+  '/user-manual/reference/tools/clear_stats.html',
+  '/user-manual/reference/tools/update_ruleset.html',
 ];
 
 redirections.push(
@@ -210,6 +244,91 @@ redirections.push(
       'target': ['4.1=>4.2', '4.2=>4.1'],
       '4.1': '/user-manual/reference/tools/ossec-regex.html',
       '4.2': '/user-manual/reference/tools/wazuh-regex.html',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/getting-started/use_cases/cloud_security.html',
+      '4.2': '/getting-started/use-cases/cloud-security.html',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/getting-started/use_cases/configuration_assessment.html',
+      '4.2': '/getting-started/use-cases/configuration-assessment.html',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/getting-started/use_cases/rootkits_detection.html',
+      '4.2': '/getting-started/use-cases/rootkits-detection.html',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/installation-guide/more-installation-alternatives/elastic-stack/distributed-deployment/step-by-step-installation/wazuh-cluster/wazuh_multi_node_cluster.html',
+      '4.2': '/installation-guide/more-installation-alternatives/elastic-stack/distributed-deployment/step-by-step-installation/wazuh-cluster/wazuh-multi-node-cluster.html',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/installation-guide/open-distro/distributed-deployment/step-by-step-installation/wazuh-cluster/wazuh_single_node_cluster.html',
+      '4.2': '/installation-guide/open-distro/distributed-deployment/step-by-step-installation/wazuh-cluster/wazuh-single-node-cluster.html',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/installation-guide/wazuh-agent/wazuh_agent_package_aix.html',
+      '4.2': '/installation-guide/wazuh-agent/wazuh-agent-package-aix.html',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/installation-guide/wazuh-agent/wazuh_agent_package_macos.html',
+      '4.2': '/installation-guide/wazuh-agent/wazuh-agent-package-macos.html',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/release-notes/release_3_7_2.html',
+      '4.2': '/release-notes/release-3-7-2.html',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/release-notes/release_3_10_1.html',
+      '4.2': '/release-notes/release-3-10-1.html',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/release-notes/release_3_11_2.html',
+      '4.2': '/release-notes/release-3-11-2.html',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/release-notes/release_4_0_0.html',
+      '4.2': '/release-notes/release-4-0-0.html',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/release-notes/release_4_0_2.html',
+      '4.2': '/release-notes/release-4-0-2.html',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/user-manual/api/securing_api.html',
+      '4.2': '/user-manual/api/securing-api.html',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/user-manual/configuring-cluster/cluster_management.html',
+      '4.2': '/user-manual/configuring-cluster/cluster-management.html',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/user-manual/manager/manual-email-report/smtp_authentication.html',
+      '4.2': '/user-manual/manager/manual-email-report/smtp-authentication.html',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/user-manual/reference/tools/clear_stats.html',
+      '4.2': '/user-manual/reference/tools/clear-stats.html',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/user-manual/reference/tools/update_ruleset.html',
+      '4.2': '/user-manual/reference/tools/update-ruleset.html',
     },
 );
 

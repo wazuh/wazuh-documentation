@@ -23,9 +23,9 @@ This section summarizes the most important features of each Wazuh release.
         release_4_1_0
         release_4_0_4
         release_4_0_3 
-        release_4_0_2
+        release-4-0-2
         release_4_0_1
-        release_4_0_0
+        release-4-0-0
         release_3_13_3
         release_3_13_2
         release_3_13_1
@@ -36,11 +36,11 @@ This section summarizes the most important features of each Wazuh release.
         release_3_12_0
         release_3_11_4
         release_3_11_3
-        release_3_11_2
+        release-3-11-2
         release_3_11_1
         release_3_11_0
         release_3_10_2
-        release_3_10_1
+        release-3-10-1
         release_3_10_0
         release_3_9_5
         release_3_9_4
@@ -51,7 +51,7 @@ This section summarizes the most important features of each Wazuh release.
         release_3_8_2
         release_3_8_1
         release_3_8_0
-        release_3_7_2
+        release-3-7-2
         release_3_7_1
         release_3_7_0
         release_3_6_1

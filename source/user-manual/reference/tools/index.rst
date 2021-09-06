@@ -22,11 +22,11 @@ Tools
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`wazuh-logtest <wazuh-logtest>`              | Allows testing and verification of rules against provided log records      | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :doc:`clear_stats <clear_stats>`                  | Clears the events stats                                                    | manager                     |
+| :doc:`clear_stats <clear-stats>`                  | Clears the events stats                                                    | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`wazuh-regex <wazuh-regex>`                  | Validates a regex expression                                               | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :doc:`update_ruleset <update_ruleset>`            | Update Decoders, Rules and Rootchecks                                      | manager                     |
+| :doc:`update_ruleset <update-ruleset>`            | Update Decoders, Rules and Rootchecks                                      | manager                     |
 |                                                   |                                                                            |                             |
 |                                                   | .. deprecated:: 4.2                                                        |                             |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
@@ -52,9 +52,9 @@ Tools
     manage_agents
     wazuh-control
     wazuh-logtest
-    clear_stats
+    clear-stats
     wazuh-regex
-    update_ruleset
+    update-ruleset
     verify-agent-conf
     agent_groups
     agent_upgrade

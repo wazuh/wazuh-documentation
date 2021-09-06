@@ -57,7 +57,7 @@ To install a Wazuh agent, select your operating system and follow the instructio
         </a>
     </div>
     <div class="item-agent">
-        <a href="./wazuh_agent_package_macos.html" class="d-flex align-items-center">
+        <a href="./wazuh-agent-package-macos.html" class="d-flex align-items-center">
             <p>macOS</p>
 
 .. image:: ../../images/installation/macOS_logo.png
@@ -68,7 +68,7 @@ To install a Wazuh agent, select your operating system and follow the instructio
         </a>
     </div>
     <div class="item-agent">
-        <a href="./wazuh_agent_package_aix.html" class="d-flex align-items-center">
+        <a href="./wazuh-agent-package-aix.html" class="d-flex align-items-center">
             <p>AIX</p>
 
 .. image:: ../../images/installation/AIX.png
@@ -115,8 +115,8 @@ If you are deploying Wazuh in a large environment, with a high number of servers
 
     Linux <wazuh_agent_package_linux>
     Windows <wazuh_agent_package_windows>
-    macOS <wazuh_agent_package_macos>
-    AIX <wazuh_agent_package_aix>
+    macOS <wazuh-agent-package-macos>
+    AIX <wazuh-agent-package-aix>
     HP-UX <wazuh_agent_package_hpux>
     Solaris <wazuh_agent_package_solaris>   
     deployment_variables/deployment_variables
