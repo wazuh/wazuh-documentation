@@ -4,16 +4,16 @@
   :description: Wazuh offers cloud-delivered protection. Prevent, detect, and respond to threats in real-time. Learn more about Wazuh Cloud here. 
 
 Sign up for a trial
--------------------
+===================
 
-Wazuh provides a free trial for you to create a cloud environment and explore the Wazuh Cloud service. 
+Wazuh provides a 14-day free trial for you to create a cloud environment and explore the Wazuh Cloud service. 
 
 Follow the next steps to create your trial environment.
 
 Sign up
-^^^^^^^
+-------
 
-To sign up, all you need is an email address:
+To sign up for a free trial, all you need is an email address:
 
 #. Go to our `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_ page.
 
@@ -22,7 +22,7 @@ To sign up, all you need is an email address:
 Now you are ready to create your first :ref:`environment <cloud_glossary_environment>`.
 
 Create environment
-^^^^^^^^^^^^^^^^^^
+------------------
 
 Follow these steps to quickly set up and run your environment:
 
@@ -42,4 +42,6 @@ Follow these steps to quickly set up and run your environment:
 
 #. Click **View the summary** and then **Create** to build your environment. This process might take a moment.
 
-Once the environment is ready, you can access the Wazuh WUI and register the agents.
+Once the environment is ready, you can :ref:`access the Wazuh WUI <cloud_wui_access>`  and register the agents. 
+
+If you have any questions about the Wazuh Cloud, see the :ref:`Cloud service FAQ <cloud_getting_started_starting_faq>`.
