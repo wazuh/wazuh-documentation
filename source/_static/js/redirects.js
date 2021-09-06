@@ -86,6 +86,9 @@ newUrls['4.2'] = [
   '/cloud-service/your-environment/cancel-environment.html',
   '/cloud-service/your-environment/manage-wui-access.html',
   '/cloud-service/your-environment/understanding-storage.html',
+  '/cloud-service/getting-started/sign-up-trial',
+  '/cloud-service/getting-started/access-wazuh-wui',
+  '/cloud-service/getting-started/register-agents', 
 ];
 
 removedUrls['4.2'] = [
