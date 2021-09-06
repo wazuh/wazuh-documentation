@@ -50,6 +50,7 @@ newUrls['4.3'] = [
 /* Pages added in 4.2 */
 
 newUrls['4.2'] = [
+  '/release-notes/release_4_2_1.html',
   '/release-notes/release_4_2_0.html',
   '/user-manual/capabilities/active-response/ar-use-cases/removing-malware.html',
   '/user-manual/capabilities/active-response/ar-use-cases/wazuh-with-yara.html',
@@ -75,7 +76,27 @@ newUrls['4.2'] = [
   '/user-manual/reference/statistics-files/wazuh-remoted-state.html',
   '/user-manual/reference/statistics-files/wazuh-logcollector-state.html',
   '/user-manual/reference/tools/wazuh-control.html',
-  '/user-manual/reference/tools/wazuh-regex.html',
+  '/user-manual/reference/tools/wazuh-regex.html',  
+  '/cloud-service/index.html',
+  '/cloud-service/glossary.html',
+  '/cloud-service/account-billing/index.html',
+  '/cloud-service/account-billing/add-billing-details.html',
+  '/cloud-service/account-billing/billing-faq.html',
+  '/cloud-service/account-billing/update-billing.html',
+  '/cloud-service/apis/index.html',
+  '/cloud-service/apis/reference.html',
+  '/cloud-service/cold-storage/index.html',
+  '/cloud-service/getting-started/index.html',
+  '/cloud-service/getting-started/starting-faq.html',
+  '/cloud-service/your-environment/index.html',
+  '/cloud-service/your-environment/acessing-cold-storage.html',
+  '/cloud-service/your-environment/configure-email.html',
+  '/cloud-service/your-environment/send-syslog-data.html',
+  '/cloud-service/your-environment/agents-without-internet.html',
+  '/cloud-service/your-environment/technical-faq.html',
+  '/cloud-service/your-environment/cancel-environment.html',
+  '/cloud-service/your-environment/manage-wui-access.html',
+  '/cloud-service/your-environment/understanding-storage.html',
 ];
 
 removedUrls['4.2'] = [

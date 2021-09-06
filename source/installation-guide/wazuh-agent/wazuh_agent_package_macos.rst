@@ -68,7 +68,7 @@ To uninstall the agent, follow these steps:
 
       # /Library/Ossec/bin/wazuh-control stop
 
-#. Remove the ``/Library/Ossec/`` folder and ``ossec-init.conf`` file.
+#. Remove the ``/Library/Ossec/`` folder.
 
     .. code-block:: console
 
