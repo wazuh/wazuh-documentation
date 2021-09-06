@@ -64,6 +64,6 @@ This will generate a |WAZUH_LATEST| Wazuh api package DEB with revision ``my_rev
 
 .. code-block:: console
 
-  # ./generate_debian_package.sh -b v|WAZUH_LATEST| --packages-branch |WAZUH_PACKAGES_BRANCH| -t agent -a amd64 -p /opt
+  # ./generate_debian_package.sh -b v|WAZUH_LATEST| --packages-branch |WAZUH_PACKAGES_BRANCH| -t agent -a amd64 -p /opt/ossec
 
-This will generate a |WAZUH_LATEST| Wazuh agent DEB package with ``/opt`` as installation directory for ``amd64`` systems.
+This will generate a |WAZUH_LATEST| Wazuh agent DEB package with ``/opt/ossec`` as installation directory for ``amd64`` systems.
