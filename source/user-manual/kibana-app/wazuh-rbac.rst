@@ -62,7 +62,7 @@ RBAC at Wazuh’s UI
 
 As indicated in the scheme, an authorization context can either be created or obtained by some means. To illustrate this, we will work on a use case where there will be an environment with ten agents.
 
-These agents are divided into two different groups. On one side, the agents 001, 002, 003, 004, 005, and 006 belong to the Framework group. On the other side, the agents 006, 007, 008, 009, and 010 belong to the group US-WEST. You can see in the picture below the current state of this environment:
+These agents are divided into two different groups. On one side, the agents 001, 002, 003, 004, 005, and 006 belong to the Framework group. On the other side, the agents 006, 007, 008, 009, and 010 belong to the group US-WEST. You can see in the picture below the current state of this environment.
 
 .. thumbnail:: ../../images/kibana-app/0.1.overview_framework_group.png
     :title: Keys
@@ -99,7 +99,7 @@ RBAC configuration
 
 Now it is time to go to the Wazuh web interface and move to the “Security” option. Then choose “Policies.” This menu allows users to edit any RBAC policy and define which permissions will be in the system.
 
-These permissions will not be applied to any role until both entities are joined. Before, you need to create a new policy that gives users access to the agents of the “Framework” group. In this policy, you must select all the options the “Framework” team will perform with the agents and choose the “Framework” group:
+These permissions will not be applied to any role until both entities are joined. Before, you need to create a new policy that gives users access to the agents of the “Framework” group. In this policy, you must select all the options the “Framework” team will perform with the agents and choose the “Framework” group.
 
 .. thumbnail:: ../../images/kibana-app/0.4.security_policies.png
     :title: Keys
@@ -121,7 +121,7 @@ Finally, let’s link our Kibana user with the “Framework_role.” Go to the t
 Test configuration
 ------------------
 
-Once all these steps have been completed, authenticate with the user to verify that everything is correctly configured. In this example, Kibana’s main panel now only shows six active agents out of the ten that the system has, but in the agents’ tab is possible to see in more detail which agents are displayed:
+Once all these steps have been completed, authenticate with the user to verify that everything is correctly configured. In this example, Kibana’s main panel now only shows six active agents out of the ten that the system has, but in the agents’ tab is possible to see in more detail which agents are displayed.
 
 .. thumbnail:: ../../images/kibana-app/0.5.framework_agents.png
     :title: Keys
@@ -145,7 +145,7 @@ The policies are applied in the order they are listed so that the entire Framewo
     :align: left
     :width: 100%
 
-Finally, you need to authenticate again with the user “framework” user and check that it shows that there is one less agent in the asset counter and inside the agent’s panel because agent 006 does not appears.
+Finally, you need to authenticate again with the user “framework” and check that it shows that there is one less agent in the asset counter and inside the agent’s panel because agent 006 does not appears.
 
 .. thumbnail:: ../../images/kibana-app/0.7.login_1.png
     :title: Keys
