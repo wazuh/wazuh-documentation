@@ -74,9 +74,9 @@ The module expects 3 parameters:
     +-----------------+---------------+--------+----------+---------------------------------------------------------------+----------------------------------------+
     | Option          | Suboption     | Values | Required | Default                                                       | Description                            |
     +=================+===============+========+==========+===============================================================+========================================+
-    | **parameters**  | **file_path** | string | yes      |                                                               | Path to the WPK file that will be sent |
+    | **parameters**  | **file_path** | string | yes      |                                                               | Path to the WPK file to be sent        |
     |                 +---------------+--------+----------+---------------------------------------------------------------+----------------------------------------+
-    |                 | **installer** | string | no       | ``upgrade.sh`` in Linux and MacOS, ``upgrade.bat`` in Windows | Override the default installer script  |
+    |                 | **installer** | string | no       | ``upgrade.sh`` in Linux and MacOS, ``upgrade.bat`` in Windows | Overrides the default installer script |
     +-----------------+---------------+--------+----------+---------------------------------------------------------------+----------------------------------------+
 
     Example message:
