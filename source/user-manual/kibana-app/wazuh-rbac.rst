@@ -34,14 +34,18 @@ RBAC in Wazuh
 
 RBAC manages the system resources and is a layer between the software and its clients. This layer works at a low level within the software Wazuh ensuring that all API endpoints are protected and appropriately managed.
 
-RBAC has two authentication methods, and the first of these is access through the relationship between users and roles. This method is the classic method in which a client provides a username-password based on the relationship of the specified user. It will obtain the designated permissions for it. In the following link, you can find more information about how to `assign roles to a user <https://documentation.wazuh.com/current/user-manual/api/rbac/configuration.html#assign-roles-to-a-user>`_. 
+RBAC has two authentication methods, and the first of these is access through the relationship between users and roles. This method is the classic m    ethod in which a client provides a username-password and based on the relationship of the specified user, it will obtain the designated permissions.
+
+In the following link, you can find more information about how to `assign roles to a user <https://documentation.wazuh.com/current/user-manual/api/rbac/configuration.html#assign-roles-to-a-user>`_. 
 
 .. thumbnail:: ../../images/kibana-app/rbac_scheme.png
     :title: Keys
     :align: left
     :width: 100%
 
-The second method of access is based on the relationship between the rules and the roles of the system. In this way, each rule satisfied by the authorization context provided by the administrator will grant all the roles associated with it. Each rule can be related to one or several roles. If it is successfully checked, the user will have the permissions given by the roles associated with the satisfied rules. In the following link, you can find more information about `the authorization context <https://documentation.wazuh.com/current/user-manual/api/rbac/auth_context.html#authorization-context>`_. 
+The second method of access is based on the relationship between the rules and the roles of the system. In this way, each rule satisfied by the authorization context provided by the client will grant all the roles associated with it. Each rule can be related to one or several roles. If it is successfully checked, the user will have the permissions given by the roles associated with the satisfied rules. 
+
+In the following link, you can find more information about `the authorization context <https://documentation.wazuh.com/current/user-manual/api/rbac/auth_context.html#authorization-context>`_. 
 
 .. thumbnail:: ../../images/kibana-app/rbac_scheme2.png
     :title: Keys
@@ -73,7 +77,7 @@ These agents are divided into two different groups. On one side, the agents 001,
 User creation
 -------------
 
-The goal of this use case is to create a user for the Framework team. This user will have to have permissions on the agents that belong to the group with the same name. The first step is to create a Kibana user.
+The goal of this use case is to create a user for the Framework team. This user needs to have permissions on the agents that belong to the group with the same name. The first step is to create a Kibana user.
 
 To do this, follow the instructions below:
 
@@ -95,14 +99,14 @@ RBAC configuration
 
 Now it is time to go to the Wazuh web interface and move to the “Security” option. Then choose “Policies.” This menu allows users to edit any RBAC policy and define which permissions will be in the system.
 
-These permissions will not be applied to any role until both entities are joined. Before, you need to create a new policy that gives users access to the agents of the “Framework” group. In this policy, you must select all the options the “Framework” team will perform with the agents. And as a result of these actions, you will choose the “Framework” group:
+These permissions will not be applied to any role until both entities are joined. Before, you need to create a new policy that gives users access to the agents of the “Framework” group. In this policy, you must select all the options the “Framework” team will perform with the agents and choose the “Framework” group:
 
 .. thumbnail:: ../../images/kibana-app/0.4.security_policies.png
     :title: Keys
     :align: left
     :width: 100%
 
-The next thing is to create a role for that user. To do this, go to the “Roles” tab. Inside it, by default, there is more information about `default roles <https://documentation.wazuh.com/current/user-manual/api/rbac/reference.html#default-roles>`_ in the documentation. In this example, we will create a new role that will be assigned to our user.
+The next thing is to create a role for that user. To do this, go to the “Roles” tab. Inside it, by default. You can find more information about `default roles <https://documentation.wazuh.com/current/user-manual/api/rbac/reference.html#default-roles>`_ in the documentation. In this example, we will create a new role that will be assigned to our user.
 
 This role will have a name of our choice, and it will be linked to the policy created before. This way, the user to whom this role is assigned will have permissions on the agents of the “Framework” group.
 
