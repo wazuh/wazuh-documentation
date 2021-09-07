@@ -43,7 +43,7 @@ The module expects 3 parameters:
     |                 +-------------------+---------------+----------+------------------------------+----------------------------------------------------------------------------------+
     |                 | **version**       | vX.Y.Z        | no       | Last available version       | Overrides the version of the package that will be downloaded from the repository |
     |                 +-------------------+---------------+----------+------------------------------+----------------------------------------------------------------------------------+
-    |                 | **use_http**      | true, false   | no       | false                        | Wheter retrieve the WPK file over http or https                                  |
+    |                 | **use_http**      | true, false   | no       | false                        | Whether retrieve the WPK file over http or https                                 |
     |                 +-------------------+---------------+----------+------------------------------+----------------------------------------------------------------------------------+
     |                 | **force_upgrade** | true, false   | no       | false                        | Forces the agents to upgrade, ignoring version validations                       |
     +-----------------+-------------------+---------------+----------+------------------------------+----------------------------------------------------------------------------------+
