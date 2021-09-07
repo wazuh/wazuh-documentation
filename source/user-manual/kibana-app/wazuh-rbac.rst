@@ -112,6 +112,11 @@ This role will have a name of our choice, and it will be linked to the policy cr
 
 Finally, let’s link our Kibana user with the “Framework_role.” Go to the tab “Roles_mapping” and select “Create Role mapping.” To perform the mapping, choose the previously created role and select the previously created internal user.
 
+.. thumbnail:: ../../images/kibana-app/0.8.roles_mapping_create.png
+    :title: Keys
+    :align: left
+    :width: 100%
+
 
 Test configuration
 ------------------
