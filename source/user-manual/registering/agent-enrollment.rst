@@ -1,16 +1,16 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Wazuh 4.0 registration process provides the user with an automated mechanism to enroll agents with minimal configuration steps.
+  :description: Wazuh agent's registration process provides the user with an automated mechanism to enroll agents with minimal configuration steps.
   
 .. _agent-enrollment:
 
 Registration using the enrollment method
 ========================================
 
-The registration process is highly improved from Wazuh 4.0, providing the user with an automated mechanism to enroll agents with minimal configuration steps.
+Wazuh includes a registration process that provides the user with an automated mechanism to enroll agents with minimal configuration steps. This feature is available on Wazuh 4.0.0 and later.
 
-An agent can be started with this new improvement as soon as a valid manager IP is set. The agent checks the key inexistence in ``client.keys`` file and automatically requests the key to the manager for which the agent was configured for reporting.
+To register an agent using the enrollment method, a manager with a valid IP needs to be configured first. The agent then checks for the registration key in the ``client.keys`` file, and when the file is empty, it automatically requests the key to the configured manager the agent is reporting to.
 
 In the same way, if the communication with the manager gets lost, the agent updates its key by requesting a new one from the manager. This allows the recovery of agents’ communication even if the manager deletes, loses, corrupts, or replaces the agents’ keys file.
 
