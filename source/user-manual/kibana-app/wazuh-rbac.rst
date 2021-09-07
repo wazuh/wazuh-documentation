@@ -121,7 +121,7 @@ Finally, let’s link our Kibana user with the “Framework_role.” Go to the t
 Test configuration
 ------------------
 
-Once all these steps have been completed, authenticate with the user to verify that everything is correctly configured. I this example, Kibana’s main panel now only shows six active agents out of the ten that the system has, but in the agents’ tab is possible to see in more detail which agents are displayed:
+Once all these steps have been completed, authenticate with the user to verify that everything is correctly configured. In this example, Kibana’s main panel now only shows six active agents out of the ten that the system has, but in the agents’ tab is possible to see in more detail which agents are displayed:
 
 .. thumbnail:: ../../images/kibana-app/0.5.framework_agents.png
     :title: Keys
@@ -133,7 +133,7 @@ Once all these steps have been completed, authenticate with the user to verify t
 Block US-WEST group
 -------------------
 
-This user has permissions for all the agents of the “Framework” group. Let’s suppose that the Framework team should not have permission to see the agents of the “US-WEST” group. The problem is that this team can see agent 006, which belongs to the group “US-WEST.” To solve this, you must create a new policy that denies the “US-WEST” group so that the 006 agent does not appear.
+In this example, the user has permission to see all the agents of the “Framework” group. Let’s suppose that the Framework team should not have permission to see the agents of the “US-WEST” group. The problem is that this team can see agent 006, which belongs to the group “US-WEST.” To solve this, you must create a new policy that denies the “Framework” group to see the “US-WEST” group. Then the  “Framework” group will not see agent 006 anymore.
 
 Note: For this particular case, it is not necessary to block the whole US-WEST group. However, this guarantees that if this same case repeats in the future (an agent belonging to both groups), the  “framework” user will not be able to see it.
 
