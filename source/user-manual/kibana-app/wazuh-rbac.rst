@@ -7,7 +7,7 @@
 
 Getting started with Wazuh RBAC
 ===============================
-Role-based access control systems refer to security mechanisms designed to control users’ access to a system’s resources or tasks. In this sense, these systems control the access of the different users. They also distribute the additional resources and actions so that system administrators can have specific users for each task or access resources.
+Role-based access control systems refer to security mechanisms designed to control users’ access to a system’s resources or tasks. These systems control the access of the users and distribute the different resources and actions so that system administrators can have specific users for each task or access to resources.
 
 The main features provided by RBAC in Wazuh are:
 
@@ -15,15 +15,15 @@ The main features provided by RBAC in Wazuh are:
 
 - It is an easy-to-use administration system that permits to manage users or entities’ permissions to the different resources of the system in a simple way.
 
-- The users will be able to execute only the functions over which they have permissions. This way, the system administrators can isolate the workflow of each of them.
+- The users will be able to execute only the functions over which they have permissions. This way, the system administrators can isolate the workflow of each of the users.
 
 - It allows administrators to create different categories of users with additional permissions and roles in the system.
 
 - These actions are done through the following entities:
 
-- Relationships between users, roles, and policies.
+  - Relationships between users, roles, and policies.
 
-- Customized rules that allow the acquisition of permissions without creating the user-role relationship in the database. This functionality is beneficial for audits and temporary users.
+  - Customized rules that allow the acquisition of permissions without creating the user-role relationship in the database. This functionality is beneficial for audits and temporary users.
 
 In the following link, you can find more information about `how to modify the RBAC configuration <https://documentation.wazuh.com/current/user-manual/api/rbac/configuration.html>`_.
 
