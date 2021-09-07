@@ -186,10 +186,10 @@ html_static_path = ['_static']
 html_additional_pages = {}
 
 if version >= '4.0':
-    html_additional_pages = {
-        'user-manual/api/reference': 'api-redoc.html',
-        'cloud-service/apis/reference': 'cloud-api-redoc.html'
-    }
+    html_additional_pages['user-manual/api/reference'] = 'api-redoc.html'
+
+if version >= '4.2':
+    html_additional_pages['cloud-service/apis/reference'] = 'cloud-api-redoc.html'
 
 if is_latest_release == True:
     html_additional_pages['moved-content'] = 'moved-content.html'
