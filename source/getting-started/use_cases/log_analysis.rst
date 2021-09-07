@@ -19,7 +19,8 @@ Wazuh uses *decoders* to identify the source application of the log message. The
     <match>^Failed|^error: PAM: Authentication</match>
     <description>SSHD authentication failed.</description>
     <mitre>
-      <id>T1110</id>
+      <techniqueID>T1110</techniqueID>
+      <tacticID>TA0006</tacticID>
     </mitre>
     <group>authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,gpg13_7.1,gdpr_IV_35.7.d,gdpr_IV_32.2,hipaa_164.312.b,nist_800_53_AU.14,nist_800_53_AC.7,tsc_CC6.1,tsc_CC6.8,tsc_CC7.2,tsc_CC7.3,</group>
   </rule>

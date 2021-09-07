@@ -2262,15 +2262,17 @@ It's a very useful label to keep the rules ordered.
 
 mitre
 ^^^^^
-.. versionadded:: 3.13.0
+.. versionadded:: 5.0.0
 
-Specifies the `MITRE ATT&CK <https://attack.mitre.org>`_ technique ID or IDs that fit in well with the rule.
+Specifies both `MITRE ATT&CK <https://attack.mitre.org>`_ technique ID and tactic ID or pairs of technique ID and tactic ID that fit in well with the rule.
 
-+----------------+----------------------------+
-| Required label | Value                      |
-+================+============================+
-| **id**         | MITRE ATT&CK technique ID. |
-+----------------+----------------------------+
++-----------------+----------------------------+
+| Required label  | Value                      |
++=================+============================+
+| **techniqueID** | MITRE ATT&CK technique ID. |
++-----------------+----------------------------+
+| **tacticID**    | MITRE ATT&CK tactic ID.    |
++-----------------+----------------------------+
 
 Example:
 
@@ -2279,8 +2281,12 @@ Example:
     <rule id="100002" level="10">
       <description>Attack technique sample.</description>
       <mitre>
-        <id>T1110</id>
-        <id>T1037</id>
+        <techniqueID>T1562.001</techniqueID>
+        <tacticID>TA0005</tacticID>
+      </mitre>
+      <mitre>
+        <techniqueID>T1594</techniqueID>
+        <tacticID>TA0043</tacticID>
       </mitre>
     </rule>
 
