@@ -18,22 +18,18 @@ In the same way, if the communication with the manager gets lost, the agent upda
 How it works
 ------------
 
-The agent detects the need for new keys if ``client.keys`` file is empty during the startup, or if the communication with the manager fails the number of times defined in ``<client><server><max_retries>``, 5 by default.
+The agent detects the need for new keys if the ``client.keys`` file is empty during the startup, or if the communication with the manager fails the number of times defined in ``<client><server><max_retries>``, 5 by default. Each time this scenario is detected, the agent requests a new key to the manager using the configuration defined in ``ossec.conf``. 
 
-Each time this scenario is detected, the agent requests a new key to the manager using the configuration defined in ``ossec.conf``. 
+By default, the agent runs the enrollment process with the settings below:
 
-By default, out of the box, the agent runs the enrollment process with the settings below:
-
-- Same server address configured for reporting in ``<client><server><address>`` section.
-- Agent name extracted from the hostname of the OS.
+- Same server address configured for reporting in the ``<client><server><address>`` section.
+- Agent name extracted from the hostname of the operating system.
 - No agent belongship to groups.
 - Registration without password nor certificate validation.
 
-But every possible configuration available as options for ``agent-auth`` binary can be set in ``ossec.conf`` under the section ``<enrollment>``. And each time an agent enrolls, it uses this configuration to request the key.
+Additionally, every possible configuration available as options for ``agent-auth`` binary can be set in ``ossec.conf`` under the section ``<enrollment>``. Each time an agent enrolls, it uses this configuration to request the key.
 
-When the agent already has a key but fails to communicate with the manager several times, requests a new key appending the hash of the actual key in the registration message. In this way, Authd can verify if the agent already has a valid key previously to avoid unnecessarily generating a new one that replaces the first one.
-
-Although this new feature eliminates the need to register agents through agent-auth, this binary is conserved, allowing the user to use both registration mechanisms.
+When the agent already has a key but fails to communicate with the manager several times, it requests a new key appending the hash of the actual key in the registration message. In this way, Authd can verify if the agent already has a valid key to avoid generating a new one that replaces the first one unnecessarily. Although this new feature eliminates the need to register agents through agent-auth, this binary is preserved, allowing the user to use both registration mechanisms.
 
 
 
