@@ -7,7 +7,7 @@
 
 Getting started with Wazuh RBAC
 ===============================
-Role-based access control systems refer to security mechanisms designed to control users’ access to a system’s resources or tasks. In this sense, these systems control the access of the different users. Also, they serve to distribute the additional resources and actions so that system administrators can have specific users for each task or access to resources.
+Role-based access control systems refer to security mechanisms designed to control users’ access to a system’s resources or tasks. In this sense, these systems control the access of the different users. They also distribute the additional resources and actions so that system administrators can have specific users for each task or access resources.
 
 The main features provided by RBAC in Wazuh are:
 
@@ -25,7 +25,7 @@ The main features provided by RBAC in Wazuh are:
 
 - Customized rules that allow the acquisition of permissions without creating the user-role relationship in the database. This functionality is beneficial for audits and temporary users.
 
-In the following link, you can find more information about `how to add or modify any RBAC configuration <https://documentation.wazuh.com/current/user-manual/api/rbac/configuration.html>`_.
+In the following link, you can find more information about `how to modify the RBAC configuration <https://documentation.wazuh.com/current/user-manual/api/rbac/configuration.html>`_.
 
 
 
@@ -34,31 +34,31 @@ RBAC in Wazuh
 
 RBAC manages the system resources and is a layer between the software and its clients. This layer works at a low level within the software Wazuh ensuring that all API endpoints are protected and appropriately managed.
 
-RBAC has two authentication methods, and the first of these is access through the relationship between users and roles. This method is the classic method in which a client provides a username-password and is based on the relationship of the specified user. It will obtain the designated permissions for it. In the following link, you can find more information about how to `assign roles to a user <https://documentation.wazuh.com/current/user-manual/api/rbac/configuration.html#assign-roles-to-a-user>`_. 
+RBAC has two authentication methods, and the first of these is access through the relationship between users and roles. This method is the classic method in which a client provides a username-password based on the relationship of the specified user. It will obtain the designated permissions for it. In the following link, you can find more information about how to `assign roles to a user <https://documentation.wazuh.com/current/user-manual/api/rbac/configuration.html#assign-roles-to-a-user>`_. 
 
 .. thumbnail:: ../../images/kibana-app/rbac_scheme.png
     :title: Keys
     :align: left
     :width: 100%
 
-The second method of access is based on the relationship between the rules and the roles of the system. In this way, each rule satisfied by the authorization context provided by the administrator will grant all the roles associated with it. Each rule can be associated with one or several roles. If it is successfully checked, the user will have the permissions given by the roles associated with the satisfied rules. In the following link, you can find more information about `the authorization context <https://documentation.wazuh.com/current/user-manual/api/rbac/auth_context.html#authorization-context>`_. 
+The second method of access is based on the relationship between the rules and the roles of the system. In this way, each rule satisfied by the authorization context provided by the administrator will grant all the roles associated with it. Each rule can be related to one or several roles. If it is successfully checked, the user will have the permissions given by the roles associated with the satisfied rules. In the following link, you can find more information about `the authorization context <https://documentation.wazuh.com/current/user-manual/api/rbac/auth_context.html#authorization-context>`_. 
 
 .. thumbnail:: ../../images/kibana-app/rbac_scheme2.png
     :title: Keys
     :align: left
     :width: 100%    
 
-Below we will focus on the second method. This access system is based on authorization contexts, which will be checked by each of the system rules. Every rule satisfied by an authorization context will give certain roles to the user who presents the authorization context.
+Below we will focus on the second method. This access system is based on authorization contexts, which will be checked by each of the system rules. Every rule satisfied by an authorization context will give specific roles to the user who presents the authorization context.
 
-Wazuh RBAC system works in both non-clustered and clustered environments, this last one being totally transparent to it. RBAC can grant permissions on the different nodes of a cluster and work independently because all the information is always stored in the master node.
+Wazuh RBAC system works in both non-clustered and clustered environments, being this last one transparent to it. RBAC can grant permissions on the different cluster nodes and work independently because all the information is always stored in the master node.
 
 
 RBAC at Wazuh’s UI
 ------------------
 
-As indicated in the scheme, an authorization context can either be created or obtained by some means. To illustrate this, we will work on a use case where there will be an environment with 10 agents.
+As indicated in the scheme, an authorization context can either be created or obtained by some means. To illustrate this, we will work on a use case where there will be an environment with ten agents.
 
-These agents are divided into two different groups. On the one hand, the agents 001, 002, 003, 004, 005, and 006 belong to the Framework group. On the other hand, the agents 006, 007, 008, 009, and 010 belong to the group US-WEST. This is the current state of this environment:
+These agents are divided into two different groups. On one side, the agents 001, 002, 003, 004, 005, and 006 belong to the Framework group. On the other side, the agents 006, 007, 008, 009, and 010 belong to the group US-WEST. You can see in the picture below the current state of this environment:
 
 .. thumbnail:: ../../images/kibana-app/0.1.overview_framework_group.png
     :title: Keys
@@ -93,11 +93,9 @@ To do this, follow the instructions below:
 RBAC configuration
 ------------------
 
-Now it is time to go to the Wazuh interface, and within it, move to the “Security” option, then choose “Policies.” This is the menu that allows users to edit any RBAC policy. In this one is possible to define which permissions will be in the system.
+Now it is time to go to the Wazuh web interface and move to the “Security” option. Then choose “Policies.” This menu allows users to edit any RBAC policy and define which permissions will be in the system.
 
-These will not be applied to any role until both entities are joined, as described later. There are many default policies in Wazuh, and you can find `more information here <https://documentation.wazuh.com/current/user-manual/api/rbac/reference.html#default-policies>`_.
-
-To achieve this, a new policy has to be created that gives users access to the agents of the “Framework” group. In this policy, you need to select all the options that the “Framework” team will be able to do with the agents. And as a resource of these actions chooses the “Framework” group:
+These permissions will not be applied to any role until both entities are joined. Before, you need to create a new policy that gives users access to the agents of the “Framework” group. In this policy, you must select all the options the “Framework” team will perform with the agents. And as a result of these actions, you will choose the “Framework” group:
 
 .. thumbnail:: ../../images/kibana-app/0.4.security_policies.png
     :title: Keys
@@ -114,7 +112,7 @@ Finally, let’s link our Kibana user with the “Framework_role.” Go to the t
 Test configuration
 ------------------
 
-Once all these steps have been completed, authenticate with the user to verify that everything is correctly configured. I this example, Kibana’s main panel now only shows 6 active agents out of the 10 that the system has, but in the agents' tab is possible to see in more detail which agents are displayed:
+Once all these steps have been completed, authenticate with the user to verify that everything is correctly configured. I this example, Kibana’s main panel now only shows six active agents out of the ten that the system has, but in the agents’ tab is possible to see in more detail which agents are displayed:
 
 .. thumbnail:: ../../images/kibana-app/0.5.framework_agents.png
     :title: Keys
@@ -128,11 +126,11 @@ Block US-WEST group
 
 This user has permissions for all the agents of the “Framework” group. Let’s suppose that the Framework team should not have permission to see the agents of the “US-WEST” group. The problem is that this team can see agent 006, which belongs to the group “US-WEST.” To solve this, you must create a new policy that denies the “US-WEST” group so that the 006 agent does not appear.
 
-Note: For this particular case, it is not necessary to block the whole US-WEST group. However, this guarantees that if in the future this same case occurs (an agent belonging to both groups), the user “framework” will not be able to see it.
+Note: For this particular case, it is not necessary to block the whole US-WEST group. However, this guarantees that if this same case repeats in the future (an agent belonging to both groups), the  “framework” user will not be able to see it.
 
-So let’s go back to the policy administration panel and create a new one that blocks the “US-WEST” group for the “framework” user. Once created, let’s go to the “Roles” panel and link this new policy to the role created earlier.
+So let’s go back to the policy administration panel and create a new one that blocks the “US-WEST” group for the “framework” user. Once created, let’s go to the “Roles” panel and link this new policy to the role made earlier.
 
-The policies are applied in the order they are listed. This means that the entire Framework group will be enabled, and then the US-WEST group will be denied. The intersection of both will also be denied as it applies after they are allowed. In the picture below, you can see the result of the role:
+The policies are applied in the order they are listed so that the entire Framework group will be enabled, and then the US-WEST group will be denied. The intersection of both will also be denied as it applies after they are allowed. In the picture below, you can see the result of the role:
 
 .. thumbnail:: ../../images/kibana-app/0.6.role_edit.png
     :title: Keys
