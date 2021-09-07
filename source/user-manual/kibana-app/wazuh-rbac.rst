@@ -7,7 +7,7 @@
 
 Getting started with Wazuh RBAC
 ===============================
-Role-based access control systems refer to security mechanisms designed to control users’ access to a system’s resources or tasks. These systems control the access of the users and distribute the different resources and actions so that system administrators can have specific users for each task or access to resources.
+Role-based access control systems refer to security mechanisms designed to control users’ access to a system’s resources or tasks. These systems control the users’ access and distribute the different resources and actions so that system administrators can have specific users for each task or access to resources.
 
 The main features provided by RBAC in Wazuh are:
 
@@ -121,7 +121,7 @@ Finally, let’s link our Kibana user with the “Framework_role.” Go to the t
 Test configuration
 ------------------
 
-Once all these steps have been completed, authenticate with the user to verify that everything is correctly configured. In this example, Kibana’s main panel now only shows six active agents out of the ten that the system has, but in the agents’ tab is possible to see in more detail which agents are displayed.
+Once all these steps have been completed, authenticate with the user to verify that everything is correctly configured. Kibana’s main panel now only shows six active agents out of the ten that the system has. But in the agents’ tab is possible to see in more detail which agents are displayed.
 
 .. thumbnail:: ../../images/kibana-app/0.5.framework_agents.png
     :title: Keys
