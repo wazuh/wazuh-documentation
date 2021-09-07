@@ -135,18 +135,17 @@ Block US-WEST group
 
 In this example, the user has permission to see all the agents of the “Framework” group. Let’s suppose that the Framework team should not have permission to see the agents of the “US-WEST” group. The problem is that this team can see agent 006, which belongs to the group “US-WEST.” To solve this, you must create a new policy that denies the “Framework” group to see the “US-WEST” group. Then the  “Framework” group will not see agent 006 anymore.
 
-Note: For this particular case, it is not necessary to block the whole US-WEST group. However, this guarantees that if this same case repeats in the future (an agent belonging to both groups), the  “framework” user will not be able to see it.
+.. note:: For this particular case it is not necessary to block the whole US-WEST group, however, this guarantees that if in the future this same case occurs (an agent belonging to both groups), the user “framework” will not be able to see it.
 
 So let’s go back to the policy administration panel and create a new one that blocks the “US-WEST” group for the “framework” user. Once created, let’s go to the “Roles” panel and link this new policy to the role made earlier.
-
-The policies are applied in the order they are listed so that the entire Framework group will be enabled, and then the US-WEST group will be denied. The intersection of both will also be denied as it applies after they are allowed. In the picture below, you can see the result of the role:
+The policies are applied in the order they are listed so that the entire Framework group will be enabled, and then the US-WEST group will be denied. The intersection of both will also be denied as it applies after they are allowed. In the picture below, you can see the result of the role.
 
 .. thumbnail:: ../../images/kibana-app/0.6.role_edit.png
     :title: Keys
     :align: left
     :width: 100%
 
-Finally, you need to authenticate again with the user “framework” and check that it shows you that there is one less agent in the asset counter and inside the agent’s panel because agent 006 does not appear:
+Finally, you need to authenticate again with the user “framework” user and check that it shows that there is one less agent in the asset counter and inside the agent’s panel because agent 006 does not appears.
 
 .. thumbnail:: ../../images/kibana-app/0.7.login_1.png
     :title: Keys
