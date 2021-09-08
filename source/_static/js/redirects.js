@@ -263,6 +263,126 @@ redirections.push(
       '4.1': '/user-manual/reference/tools/ossec-regex.html',
       '4.2': '/user-manual/reference/tools/wazuh-regex.html',
     },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/getting-started/use_cases/cloud_security.html',
+      '4.2': '/getting-started/use-cases/cloud-security.html',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/getting-started/use_cases/configuration_assessment.html',
+      '4.2': '/getting-started/use-cases/configuration-assessment.html',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/getting-started/use_cases/rootkits_detection.html',
+      '4.2': '/getting-started/use-cases/rootkits-detection.html',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/getting-started/use-cases/active_response.html',
+      '4.2': '/getting-started/use-cases/active-response.html',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/getting-started/use-cases/containers_security.html',
+      '4.2': '/getting-started/use-cases/containers-security.html',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/getting-started/use-cases/file_integrity.html',
+      '4.2': '/getting-started/use-cases/file-integrity.html',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/getting-started/use-cases/log_analysis.html',
+      '4.2': '/getting-started/use-cases/log-analysis.html',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/getting-started/use-cases/regulatory_compliance.html',
+      '4.2': '/getting-started/use-cases/regulatory-compliance.html',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/getting-started/use-cases/system_inventory.html',
+      '4.2': '/getting-started/use-cases/system-inventory.html',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/getting-started/use-cases/vulnerability_detection.html',
+      '4.2': '/getting-started/use-cases/vulnerability-detection.html',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/installation-guide/more-installation-alternatives/elastic-stack/distributed-deployment/step-by-step-installation/wazuh-cluster/wazuh_multi_node_cluster.html',
+      '4.2': '/installation-guide/more-installation-alternatives/elastic-stack/distributed-deployment/step-by-step-installation/wazuh-cluster/wazuh-multi-node-cluster.html',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/installation-guide/open-distro/distributed-deployment/step-by-step-installation/wazuh-cluster/wazuh_single_node_cluster.html',
+      '4.2': '/installation-guide/open-distro/distributed-deployment/step-by-step-installation/wazuh-cluster/wazuh-single-node-cluster.html',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/installation-guide/wazuh-agent/wazuh_agent_package_aix.html',
+      '4.2': '/installation-guide/wazuh-agent/wazuh-agent-package-aix.html',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/installation-guide/wazuh-agent/wazuh_agent_package_macos.html',
+      '4.2': '/installation-guide/wazuh-agent/wazuh-agent-package-macos.html',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/release-notes/release_3_7_2.html',
+      '4.2': '/release-notes/release-3-7-2.html',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/release-notes/release_3_10_1.html',
+      '4.2': '/release-notes/release-3-10-1.html',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/release-notes/release_3_11_2.html',
+      '4.2': '/release-notes/release-3-11-2.html',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/release-notes/release_4_0_0.html',
+      '4.2': '/release-notes/release-4-0-0.html',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/release-notes/release_4_0_2.html',
+      '4.2': '/release-notes/release-4-0-2.html',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/user-manual/api/securing_api.html',
+      '4.2': '/user-manual/api/securing-api.html',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/user-manual/configuring-cluster/cluster_management.html',
+      '4.2': '/user-manual/configuring-cluster/cluster-management.html',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/user-manual/manager/manual-email-report/smtp_authentication.html',
+      '4.2': '/user-manual/manager/manual-email-report/smtp-authentication.html',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/user-manual/reference/tools/clear_stats.html',
+      '4.2': '/user-manual/reference/tools/clear-stats.html',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/user-manual/reference/tools/update_ruleset.html',
+      '4.2': '/user-manual/reference/tools/update-ruleset.html',
+    },
 );
 
 /* *** RELEASE 4.1 ****/
