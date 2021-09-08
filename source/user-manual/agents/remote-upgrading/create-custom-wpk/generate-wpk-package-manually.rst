@@ -148,7 +148,7 @@ Definitions:
     - ``path/to/do_upgrade.ps1`` is the path to the do_upgrade.ps1 file. Find an example in src/win32 in the Wazuh repository.
 
 
-MacOS WPK
+macOS WPK
 ^^^^^^^^^
 
 Install development tools and compilers. In Linux this can easily be done using your distribution's package manager:
