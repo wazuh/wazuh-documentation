@@ -12,11 +12,11 @@ Tools
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`agent-auth <agent-auth>`                    | Adds agents to a Wazuh manager                                             | agent                       |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :doc:`agent_control <agent_control>`              | Allows queries of the manager to get information about                     | manager                     |
+| :doc:`agent_control <agent-control>`              | Allows queries of the manager to get information about                     | manager                     |
 |                                                   |                                                                            |                             |
 |                                                   | any agent                                                                  |                             |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :doc:`manage_agents <manage_agents>`              | Provides an interface to handle authentication                             | manager, agent              |
+| :doc:`manage_agents <manage-agents>`              | Provides an interface to handle authentication                             | manager, agent              |
 |                                                   |                                                                            |                             |
 |                                                   | keys for  agents                                                           |                             |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
@@ -32,13 +32,13 @@ Tools
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`verify-agent-conf <verify-agent-conf>`      | Verifies the Wazuh agent.conf configuration                                | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :doc:`agent_groups <agent_groups>`                | Manages and assigns groups                                                 | manager                     |
+| :doc:`agent_groups <agent-groups>`                | Manages and assigns groups                                                 | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :doc:`agent_upgrade <agent_upgrade>`              | List outdated agents and upgrade them                                      | manager                     |
+| :doc:`agent_upgrade <agent-upgrade>`              | List outdated agents and upgrade them                                      | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :doc:`cluster_control <cluster_control>`          | Manages and retrieves cluster information                                  | manager                     |
+| :doc:`cluster_control <cluster-control>`          | Manages and retrieves cluster information                                  | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :doc:`fim_migrate <fim_migrate>`                  | Migrates older FIM databases to Wazuh-DB                                   | manager                     |
+| :doc:`fim_migrate <fim-migrate>`                  | Migrates older FIM databases to Wazuh-DB                                   | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 
 
@@ -48,15 +48,15 @@ Tools
     :maxdepth: 1
 
     agent-auth
-    agent_control
-    manage_agents
+    agent-control
+    manage-agents
     wazuh-control
     wazuh-logtest
     clear-stats
     wazuh-regex
     update-ruleset
     verify-agent-conf
-    agent_groups
-    agent_upgrade
-    cluster_control
-    fim_migrate
+    agent-groups
+    agent-upgrade
+    cluster-control
+    fim-migrate

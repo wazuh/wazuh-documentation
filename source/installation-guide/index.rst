@@ -70,7 +70,7 @@ The :ref:`Wazuh agent <wazuh_agent>` is a single, light-weight monitoring softwa
 
   <div class="agent-os">
       <div class="item-agent">
-          <a href="./wazuh-agent/wazuh_agent_package_linux.html" class="d-flex align-items-center">
+          <a href="./wazuh-agent/wazuh-agent-package-linux.html" class="d-flex align-items-center">
             <p>Linux</p>
 
 .. image:: ../images/installation/linux.png
@@ -81,7 +81,7 @@ The :ref:`Wazuh agent <wazuh_agent>` is a single, light-weight monitoring softwa
         </a>
     </div>
     <div class="item-agent">
-        <a href="./wazuh-agent/wazuh_agent_package_windows.html" class="d-flex align-items-center">
+        <a href="./wazuh-agent/wazuh-agent-package-windows.html" class="d-flex align-items-center">
                     <p>Windows</p>
 
 .. image:: ../images/installation/windows_icon.png
@@ -114,7 +114,7 @@ The :ref:`Wazuh agent <wazuh_agent>` is a single, light-weight monitoring softwa
         </a>
     </div>
     <div class="item-agent">
-        <a href="./wazuh-agent/wazuh_agent_package_hpux.html" class="d-flex align-items-center">
+        <a href="./wazuh-agent/wazuh-agent-package-hpux.html" class="d-flex align-items-center">
             <p>HP-UX</p>
 
 .. image:: ../images/installation/hpux.png
@@ -125,7 +125,7 @@ The :ref:`Wazuh agent <wazuh_agent>` is a single, light-weight monitoring softwa
         </a>
     </div>
     <div class="item-agent" id="solaris-logo">
-        <a href="./wazuh-agent/wazuh_agent_package_solaris.html" class="d-flex align-items-center">
+        <a href="./wazuh-agent/wazuh-agent-package-solaris.html" class="d-flex align-items-center">
             <p>Solaris</p>
 
 .. image:: ../images/installation/solaris.png

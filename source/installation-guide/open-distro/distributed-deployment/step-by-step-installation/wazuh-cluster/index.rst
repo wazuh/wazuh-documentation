@@ -16,4 +16,4 @@ The Wazuh server can be installed as a single-node cluster or as a multi-node cl
      :maxdepth: 1
 
      wazuh-single-node-cluster
-     wazuh_multi_node_cluster
+     wazuh-multi-node-cluster

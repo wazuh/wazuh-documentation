@@ -15,7 +15,7 @@ Select your operating system to learn how to make an automatic deployment using 
 .. toctree::
     :maxdepth: 1
 
-    Linux <deployment_variables_linux>
-    Windows <deployment_variables_windows>
-    macOS <deployment_variables_macos>
-    AIX <deployment_variables_aix>
+    Linux <deployment-variables-linux>
+    Windows <deployment-variables-windows>
+    macOS <deployment-variables-macos>
+    AIX <deployment-variables-aix>
