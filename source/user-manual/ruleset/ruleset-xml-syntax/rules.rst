@@ -1294,7 +1294,7 @@ Example:
         <description>There is an error in the log.</description>
       </rule>
 
-The rule ``100110`` will be triggered in both cases, when the rule with id: ``100100`` and when the rule with id: ``100101`` have previously been triggered and the logs contain the word "Error".
+The rule ``100110`` will be triggered when either of the parent rules has matched and the logs contain the word "Error".
 
 
 if_group
