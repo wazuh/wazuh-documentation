@@ -79,8 +79,32 @@ This release resolves known issues.
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#nnnn <https://nnnn>`_                                           [add description]
-`#nnnn <https://nnnn>`_                                           [add description]
+`#3159 <https://github.com/wazuh/wazuh-kibana-app/pull/3159>`_    [add description]
+`#3161 <https://github.com/wazuh/wazuh-kibana-app/pull/3161>`_    [add description]
+`#3173 <https://github.com/wazuh/wazuh-kibana-app/pull/3173>`_    [add description]
+`#3234 <https://github.com/wazuh/wazuh-kibana-app/pull/3234>`_    [add description]
+`#3217 <https://github.com/wazuh/wazuh-kibana-app/pull/3217>`_    [add description]
+`#3257 <https://github.com/wazuh/wazuh-kibana-app/pull/3257>`_    [add description]
+`#3237 <https://github.com/wazuh/wazuh-kibana-app/pull/3237>`_    [add description]
+`#3244 <https://github.com/wazuh/wazuh-kibana-app/pull/3244>`_    [add description]
+`#3260 <https://github.com/wazuh/wazuh-kibana-app/pull/3260>`_    [add description]
+`#3272 <https://github.com/wazuh/wazuh-kibana-app/pull/3272>`_    [add description]
+`#3289 <https://github.com/wazuh/wazuh-kibana-app/pull/3289>`_    [add description]
+`#3297 <https://github.com/wazuh/wazuh-kibana-app/pull/3297>`_    [add description]
+`#3241 <https://github.com/wazuh/wazuh-kibana-app/pull/3241>`_    [add description]
+`#3244 <https://github.com/wazuh/wazuh-kibana-app/pull/3244>`_    [add description]
+`#3303 <https://github.com/wazuh/wazuh-kibana-app/pull/3303>`_    [add description]
+`#3315 <https://github.com/wazuh/wazuh-kibana-app/pull/3315>`_    [add description]
+`#3309 <https://github.com/wazuh/wazuh-kibana-app/pull/3309>`_    [add description]
+`#3306 <https://github.com/wazuh/wazuh-kibana-app/pull/3306>`_    [add description]
+`#3326 <https://github.com/wazuh/wazuh-kibana-app/pull/3326>`_    [add description]
+`#3323 <https://github.com/wazuh/wazuh-kibana-app/pull/3323>`_    [add description]
+`#3355 <https://github.com/wazuh/wazuh-kibana-app/pull/3355>`_    [add description]
+`#3358 <https://github.com/wazuh/wazuh-kibana-app/pull/3358>`_    [add description]
+`#3345 <https://github.com/wazuh/wazuh-kibana-app/pull/3345>`_    [add description]
+`#3347 <https://github.com/wazuh/wazuh-kibana-app/pull/3347>`_    [add description]
+`#3397 <https://github.com/wazuh/wazuh-kibana-app/pull/3397>`_    [add description]
+`#3593 <https://github.com/wazuh/wazuh-kibana-app/pull/3593>`_    [add description]
 ==============================================================    =============
 
 Wazuh Splunk app
@@ -91,13 +115,30 @@ What's new
 
 This release includes new features or enhancements. 
 
+
+- `#1083 <https://github.com/wazuh/wazuh-splunk/pull/1083>`_ [add description]
+- `#1076 <https://github.com/wazuh/wazuh-splunk/pull/1076>`_ [add description]
+- Support for Splunk v8.1.4
+
+
+Resolved issues
+^^^^^^^^^^^^^^^
+
+This release resolves known issues. 
+
 **Splunk**
 
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#nnnn <https://nnnn>`_                                           [add description]
-`#nnnn <https://nnnn>`_                                           [add description]
+`#1070 <https://github.com/wazuh/wazuh-splunk/pull/1070>`_        [add description]
+`#1074 <https://github.com/wazuh/wazuh-splunk/pull/1074>`_        [add description]
+`#1077 <https://github.com/wazuh/wazuh-splunk/pull/1077>`_        [add description]
+`#1078 <https://github.com/wazuh/wazuh-splunk/pull/1078>`_        [add description]
+`#1084 <https://github.com/wazuh/wazuh-splunk/pull/1084>`_        [add description]
+`#1083 <https://github.com/wazuh/wazuh-splunk/pull/1083>`_        [add description]
+`#1083 <https://github.com/wazuh/wazuh-splunk/pull/1083>`_        [add description]
+`#1099 <https://github.com/wazuh/wazuh-splunk/pull/1099>`_        [add description]
 ==============================================================    =============
 
 
