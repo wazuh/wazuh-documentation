@@ -83,7 +83,7 @@ The **xml labels** used to configure ``rules`` are listed here.
 | `dstgeoip`_             | Any `regular expression <regex.html>`_.                       | It will compare a regular expression representing a GeoIP destination with a value decoded           |
 |                         |                                                               | as ``dstgeoip``.                                                                                     |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `if_sid`_               | A list of rule IDs separated by commas or spaces.             | It works similar to parent decoder. It will match when a rule ID in the list has previously matched. |
+| `if_sid`_               | A list of rule IDs separated by commas or spaces.             | It works similar to parent decoder. It will match when a rule ID on the list has previously matched. |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `if_group`_             | Any group name.                                               | It will match if the indicated group has matched before.                                             |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
