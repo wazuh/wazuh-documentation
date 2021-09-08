@@ -46,8 +46,27 @@ What's new
 
 This release includes new features or enhancements. 
 
-- `#nnnn <https://nnnn>`_ [add description]
-- `#nnnn <https://nnnn>`_ [add description]
+- `#3170 <https://github.com/wazuh/wazuh-kibana-app/pull/3170>`_ [add description]
+- `#3184 <https://github.com/wazuh/wazuh-kibana-app/pull/3184>`_ [add description]
+- `#3222 <https://github.com/wazuh/wazuh-kibana-app/pull/3222>`_ - `#3292 <https://github.com/wazuh/wazuh-kibana-app/pull/3292>`_ [add description]
+- `#3221 <https://github.com/wazuh/wazuh-kibana-app/pull/3221>`_ [add description]
+- `#3240 <https://github.com/wazuh/wazuh-kibana-app/pull/3240>`_ [add description]
+- `#3274 <https://github.com/wazuh/wazuh-kibana-app/pull/3274>`_ [add description]
+- `#3503 <https://github.com/wazuh/wazuh-kibana-app/pull/3503>`_ [add description]
+- `#3592 <https://github.com/wazuh/wazuh-kibana-app/pull/3592>`_ [add description]
+
+- `#3160 <https://github.com/wazuh/wazuh-kibana-app/pull/3160>`_ [add description]
+- `#3174 <https://github.com/wazuh/wazuh-kibana-app/pull/3174>`_ [add description]
+- `#3174 <https://github.com/wazuh/wazuh-kibana-app/pull/3174>`_ [add description]
+- `#3189 <https://github.com/wazuh/wazuh-kibana-app/pull/3189>`_ [add description]
+- `#3250 <https://github.com/wazuh/wazuh-kibana-app/pull/3250>`_ [add description]
+- `#3197 <https://github.com/wazuh/wazuh-kibana-app/pull/3197>`_ [add description]
+- `#3210 <https://github.com/wazuh/wazuh-kibana-app/issues/3210>`_ [add description]
+- `#3243 <https://github.com/wazuh/wazuh-kibana-app/pull/3243>`_ [add description]
+- `#3175 <https://github.com/wazuh/wazuh-kibana-app/pull/3175>`_ [add description]
+- `#3258 <https://github.com/wazuh/wazuh-kibana-app/pull/3258>`_ [add description]
+- `#3355 <https://github.com/wazuh/wazuh-kibana-app/pull/3355>`_ [add description]
+- `#3349 <https://github.com/wazuh/wazuh-kibana-app/pull/3349>`_ [add description]
 
 
 Resolved issues
