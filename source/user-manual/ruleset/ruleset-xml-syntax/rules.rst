@@ -1274,7 +1274,7 @@ If ``dstgeoip`` label is declared multiple times within the rule, the following 
 if_sid
 ^^^^^^
 
-Used as a requisite to trigger the rule. Matches when an ID in the list has previously matched. It is similar to a child decoder, with the key difference that alerts can have as many descendants as necessary, whereas decoder cannot have "grandchildren".
+Used as a requisite to trigger the rule. Matches when an ID on the list has previously matched. It is similar to a child decoder, with the key difference that alerts can have as many descendants as necessary, whereas decoder cannot have "grandchildren".
 
 +--------------------+--------------------------------------------------------------------+
 | **Default Value**  | n/a                                                                |
@@ -1294,7 +1294,7 @@ Example:
         <description>There is an error in the log.</description>
       </rule>
 
-The rule ``100110`` will be triggered when either of the parent rules has matched and the logs contain the word "Error".
+The rule ``100110`` is triggered when either of the parent rules has matched and the logs contain the word "Error".
 
 
 if_group
