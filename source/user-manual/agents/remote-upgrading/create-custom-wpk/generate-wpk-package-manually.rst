@@ -26,7 +26,7 @@ Requirements
 Linux WPK
 ^^^^^^^^^
 
-Install development tools and compilers. In Linux this can easily be done using your distribution's package manager:
+Install the development tools and compilers. In Linux this can easily be done using your distribution's package manager:
 
 a) For RPM-based distributions:
 
@@ -53,6 +53,7 @@ Modify the ``wazuh-|WAZUH_LATEST|/etc/preloaded-vars.conf`` file that was downlo
   USER_LANGUAGE="en"
   USER_NO_STOP="y"
   USER_UPDATE="y"
+  USER_BINARYINSTALL="y"
 
 Compile the project from the ``src`` folder:
 
@@ -62,7 +63,7 @@ Compile the project from the ``src`` folder:
   # make deps TARGET=agent
   # make TARGET=agent
 
-Delete the files that are no longer needed, this step can be skipped but the size of the WPK will be considerably larger:
+Delete the files that are no longer needed. This step can be skipped but the size of the WPK will be considerably larger:
 
 .. code-block:: console
 
@@ -89,10 +90,17 @@ Compile the WPK package using your SSL certificate and key:
 
 In this example, the Wazuh project's root directory contains the proper ``upgrade.sh`` file.
 
+Definitions:
+    - ``output/myagent.wpk`` is the name of the output WPK package.
+    - ``path/to/wpkcert.pem`` is the path to the SSL certificate.
+    - ``path/to/wpkcert.key`` is the path to the SSL certificate's key.
+    - ``\*`` is the file or files to be included in the WPK package. In this case, all the contents are added.
+
+
 Windows WPK
 ^^^^^^^^^^^
 
-Install development tools and compilers. In Linux this can easily be done using your distribution's package manager:
+Install the development tools and compilers. In Linux this can easily be done using your distribution's package manager:
 
 For RPM-based distributions:
 
@@ -133,12 +141,63 @@ Compile the WPK package using the MSI package and, your SSL certificate and key:
 
 Definitions:
     - ``output/myagent.wpk`` is the name of the output WPK package.
-    - ``path/to/wpkcert.pem`` is the path to your SSL certificate.
-    - ``path/to/wpkcert.key`` is the path to your SSL certificate's key.
-    - ``path/to/upgrade.bat`` is the path to the upgrade.bat file you can find an example at src/win32 within the wazuh repository or write your own.
-    - ``path/to/do_upgrade.ps1`` is the path to the do_upgrade.ps1 file you can find an example at src/win32 within the wazuh repository or write your own.
-    - ``path/to/wazuhagent.msi`` is the path to the MSI you have downloaded in step 3.
-    - ``\*`` is the file (or the files) to be included into the WPK package. In this case, all the contents will be added.
+    - ``path/to/wpkcert.pem`` is the path to the SSL certificate.
+    - ``path/to/wpkcert.key`` is the path to the SSL certificate's key.
+    - ``path/to/wazuhagent.msi`` is the path to the MSI file downloaded in step 3.
+    - ``path/to/upgrade.bat`` is the path to the upgrade.bat file. Find an example in src/win32 in the Wazuh repository.
+    - ``path/to/do_upgrade.ps1`` is the path to the do_upgrade.ps1 file. Find an example in src/win32 in the Wazuh repository.
+
+
+macOS WPK
+^^^^^^^^^
+
+Install development tools and compilers. In Linux this can easily be done using your distribution's package manager:
+
+For RPM-based distributions:
+
+.. code-block:: console
+
+  # yum install make gcc policycoreutils-python automake autoconf libtool unzip
+
+For Debian-based distributions:
+
+.. code-block:: console
+
+  # apt-get install make gcc libc6-dev curl policycoreutils automake autoconf libtool unzip
+
+Download and extract the latest version of Wazuh sources:
+
+.. code-block:: console
+
+  # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_LATEST|.tar.gz | tar zx
+
+Download the latest version of the Wazuh PKG package:
+
+.. code-block:: console
+
+  # curl -Ls https://packages.wazuh.com/|CURRENT_MAJOR|/macos/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_OSX|.pkg --output wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_OSX|.pkg
+
+Install the root CA if you want to overwrite the root CA with the file you created previously:
+
+.. code-block:: console
+
+  # cd ../
+  # cp path/to/wpk_root.pem etc/wpk_root.pem
+
+Compile the WPK package using the PKG package and, your SSL certificate and key:
+
+.. code-block:: console
+
+  # tools/agent-upgrade/wpkpack.py output/myagent.wpk path/to/wpkcert.pem path/to/wpkcert.key path/to/wazuhagent.pkg path/to/upgrade.sh path/to/pkg_installer_mac.sh
+
+
+Definitions:
+    - ``output/myagent.wpk`` is the name of the output WPK package.
+    - ``path/to/wpkcert.pem`` is the path to the SSL certificate.
+    - ``path/to/wpkcert.key`` is the path to the SSL certificate's key.
+    - ``path/to/wazuhagent.pkg`` is the path to the PKG file downloaded in step 3.
+    - ``path/to/upgrade.sh`` is the path to the upgrade.sh file. Find an example at the base directory in the Wazuh repository.
+    - ``path/to/pkg_installer_mac.sh`` is the path to the pkg_installer_mac.sh file. Find an example in src/init in the Wazuh repository.
 
 .. note::
  These are only examples. If you want to distribute a WPK package using these methods, it's important to begin with an empty directory.
