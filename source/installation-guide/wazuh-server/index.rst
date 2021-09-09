@@ -40,6 +40,7 @@ The Wazuh server can be installed on a 64-bit Linux operating system.
 .. list-table::
    :width: 50%
    
+   * - Amazon Linux 2
    * - CentOS 7 and later
    * - Debian 8 ELTS and later
    * - Fedora Linux 33 and later
