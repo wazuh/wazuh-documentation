@@ -10,7 +10,6 @@
       
       # mkdir /etc/elasticsearch/certs
       # mv ~/certs.tar /etc/elasticsearch/certs/
-      # cd /etc/elasticsearch/certs/
       # tar -xf certs.tar $NODE_NAME.pem $NODE_NAME-key.pem root-ca.pem
       # mv /etc/elasticsearch/certs/$NODE_NAME.pem /etc/elasticsearch/certs/elasticsearch.pem
       # mv /etc/elasticsearch/certs/$NODE_NAME-key.pem /etc/elasticsearch/certs/elasticsearch-key.pem
