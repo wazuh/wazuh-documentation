@@ -46,8 +46,8 @@ What's new
 
 This release includes new features or enhancements. 
 
-- `#3170 <https://github.com/wazuh/wazuh-kibana-app/pull/3170>`_ [add description]
-- `#3184 <https://github.com/wazuh/wazuh-kibana-app/pull/3184>`_ [add description]
+- `#3170 <https://github.com/wazuh/wazuh-kibana-app/pull/3170>`_ **Wazuh support** links are added to the Kibana help menu. You now get quick access to the Wazuh **Documentation**, **Slack channel**, **Projects on GitHub**, and **Google Group**.
+- `#3184 <https://github.com/wazuh/wazuh-kibana-app/pull/3184>`_ You now can access group details directly by using the ``group`` query parameter in the URL.
 - `#3222 <https://github.com/wazuh/wazuh-kibana-app/pull/3222>`_ - `#3292 <https://github.com/wazuh/wazuh-kibana-app/pull/3292>`_ [add description]
 - `#3221 <https://github.com/wazuh/wazuh-kibana-app/pull/3221>`_ [add description]
 - `#3240 <https://github.com/wazuh/wazuh-kibana-app/pull/3240>`_ [add description]
