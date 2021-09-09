@@ -785,7 +785,7 @@ Example:
 
       <rule id="30316" level="10" frequency="10" timeframe="120">
         <if_matched_sid>30315</if_matched_sid>
-        <same_source_ip />
+        <same_srcip />
         <description>Apache: Multiple Invalid URI requests from same source.</description>
         <group>invalid_request,pci_dss_10.2.4,pci_dss_11.4,gdpr_IV_35.7.d,hipaa_164.312.b,nist_800_53_AU.14,nist_800_53_AC.7,nist_800_53_SI.4,</group>
       </rule>
