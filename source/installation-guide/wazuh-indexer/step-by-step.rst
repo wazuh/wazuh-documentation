@@ -203,17 +203,24 @@ You now have installed a subsequent node of your Wazuh indexer multi-node cluste
 
 The final stage of the process for installing a Wazuh indexer consists in running the security admin script. 
 
-#. Run the Elasticsearch ``securityadmin`` script on the initial node to load the new certificates information and start the cluster. Replace ``<elasticsearch_IP>`` with the Elasticsearch installation IP and run the following command.
+#. On the initial node, configure ELASTICSEARCH_IP as an environment variable.
+  
+   .. code-block:: console
+
+    # export ELASTICSEARCH_IP="Put here your Elasticsearch initial node IP address"
+
+
+#. Run the Elasticsearch ``securityadmin`` script on the initial node to load the new certificates information and start the cluster. Run the following command.
 
     .. code-block:: console
 
-      # export JAVA_HOME=/usr/share/elasticsearch/jdk/ && /usr/share/elasticsearch/plugins/opendistro_security/tools/securityadmin.sh -cd /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/ -icl -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin-key.pem -h <elasticsearch_IP>
+      # export JAVA_HOME=/usr/share/elasticsearch/jdk/ && /usr/share/elasticsearch/plugins/opendistro_security/tools/securityadmin.sh -cd /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/ -icl -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin-key.pem -h $ELASTICSEARCH_IP
 
-#. Replace ``<elasticsearch_IP>`` and run the command to confirm that the installation is successful. 
+#. Run the command to confirm that the installation is successful. 
 
     .. code-block:: console
 
-      # curl -XGET https://<elasticsearch_ip>:9200 -u admin:admin -k
+      # curl -XGET https://$ELASTICSEARCH_IP:9200 -u admin:admin -k
 
     Expand the output to see an example response.
 
