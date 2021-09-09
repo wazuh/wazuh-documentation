@@ -203,7 +203,7 @@ You now have installed a subsequent node of your Wazuh indexer multi-node cluste
 
 The final stage of the process for installing a Wazuh indexer consists in running the security admin script. 
 
-#. Configure ELASTICSEARCH_IP as an environment variable with the IP address of your Elasticsearch initial node.
+#. On the initial node, configure ELASTICSEARCH_IP as an environment variable.
   
    .. code-block:: console
 
