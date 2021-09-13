@@ -31,8 +31,8 @@ Agent
 Wazuh Kibana plugin
 ^^^^^^^^^^^^^^^^^^^
 
-- `#3170 <https://github.com/wazuh/wazuh-kibana-app/pull/3170>`_ Wazuh help links in the Kibana help menu
-- `#3184 <https://github.com/wazuh/wazuh-kibana-app/pull/3184>`_ Redirect to group details using the group query param in the URL 
+- `#3170 <https://github.com/wazuh/wazuh-kibana-app/pull/3170>`_ **Wazuh support** links are added to the Kibana help menu. You now get quick access to the Wazuh **Documentation**, **Slack channel**, **Projects on GitHub**, and **Google Group**.
+- `#3184 <https://github.com/wazuh/wazuh-kibana-app/pull/3184>`_ You now can access group details directly by using the ``group`` query parameter in the URL. 
 - `#3222 <https://github.com/wazuh/wazuh-kibana-app/pull/3222>`_ `#3292 <https://github.com/wazuh/wazuh-kibana-app/pull/3292>`_ Configuration to disable Wazuh App access from X-Pack/ODFE role.
 - `#3221 <https://github.com/wazuh/wazuh-kibana-app/pull/3221>`_ Added confirmation message when closing a form.
 - `#3240 <https://github.com/wazuh/wazuh-kibana-app/pull/3240>`_ Improvement to hide navbar Wazuh label.
