@@ -1012,7 +1012,7 @@ Syscheck
 +                                      +---------------+--------------------------------------------------------------------------------+
 |                                      | Allowed value | Any integer between 1 and 1000                                                 |
 +--------------------------------------+---------------+--------------------------------------------------------------------------------+
-| **syscheck.max_fd_win_rt**           | Description   | Maximum numbers of directories can be configured in agent.conf for Windows     |
+| **syscheck.max_fd_win_rt**           | Description   | Maximum number of directories can be configured in agent.conf for Windows      |
 |                                      |               | in realtime and whodata mode.                                                  |
 |                                      |               |                                                                                |
 |                                      |               | .. versionadded:: 3.4.0                                                        |
