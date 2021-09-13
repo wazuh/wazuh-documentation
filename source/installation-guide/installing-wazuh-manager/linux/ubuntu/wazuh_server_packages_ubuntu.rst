@@ -12,7 +12,7 @@ For Ubuntu 12.04 or greater, installing the Wazuh server components entails the 
 Adding the Wazuh repository
 ---------------------------
 
-The first step to setting up Wazuh is to add the Wazuh repository to your server. If you want to download the wazuh-manager package directly, or check the compatible versions, click :ref:`here <packages>`.
+The first step to setting up Wazuh is to add the Wazuh repository to your server. You can download the :ref:`wazuh-manager package <packages>`  directly, or check the :ref:`compatible versions <packages>`.
 
 1. To perform this procedure, the ``curl``, ``apt-transport-https`` and ``lsb-release`` packages must be installed on your system. If they are not already present, install them using the commands below:
 
