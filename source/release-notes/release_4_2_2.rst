@@ -17,16 +17,16 @@ This release includes new features or enhancements.
 Manager
 ^^^^^^^
 
-- `#9133 <https://github.com/wazuh/wazuh/pull/9133>`_ Clean up the agent's inventory data on the manager if Syscollector is disabled.
+- `#9133 <https://github.com/wazuh/wazuh/pull/9133>`_ The agent's inventory data on the manager is correctly cleaned up when Syscollector is disabled.
 - `#9779 <https://github.com/wazuh/wazuh/pull/9779>`_ Authd now refuses enrollment attempts if the agent already holds a valid key.
 
 Agent
 ^^^^^
 
-- `#9907 <https://github.com/wazuh/wazuh/pull/9907>`_ Optimized Syscollector scan performance.
-- `#9927 <https://github.com/wazuh/wazuh/pull/9927>`_ Reworked the Google Cloud Pub/Sub integration module to increase the number of processed events per second allowing multithreading. Added new ``num_threads`` option to module configuration.
-- `#9964 <https://github.com/wazuh/wazuh/pull/9964>`_ Upgraded google-cloud-pubsub dependency to the latest stable version (2.7.1).
-- `#9943 <https://github.com/wazuh/wazuh/pull/9443>`_ Reimplemented the WPK installer rollback on Linux.
+- `#9907 <https://github.com/wazuh/wazuh/pull/9907>`_ Syscollector scan performance is optimized.
+- `#9927 <https://github.com/wazuh/wazuh/pull/9927>`_ The Google Cloud Pub/Sub integration module rework increases the number of processed events per second allowing multithreading. Also, a new ``num_threads`` option is added to module configuration.
+- `#9964 <https://github.com/wazuh/wazuh/pull/9964>`_ google-cloud-pubsub dependency is now upgraded to the latest stable version (2.7.1).
+- `#9943 <https://github.com/wazuh/wazuh/pull/9443>`_ The WPK installer rollback is reimplemented on Linux.
 
 Wazuh Kibana plugin
 ^^^^^^^^^^^^^^^^^^^
@@ -40,8 +40,8 @@ Wazuh Kibana plugin
 - `#3503 <https://github.com/wazuh/wazuh-kibana-app/pull/3503>`_ New functionality to change app logos.
 - `#3592 <https://github.com/wazuh/wazuh-kibana-app/pull/3592>`_ Added link to the upgrade guide when the Wazuh API version and the Wazuh App version mismatch.
 - `#3160 <https://github.com/wazuh/wazuh-kibana-app/pull/3160>`_ Removed module titles.
-- `#3174 <https://github.com/wazuh/wazuh-kibana-app/pull/3174>`_ Changed default ``wazuh.monitoring.creation`` app setting from ``d`` to ``w``.
-- `#3174 <https://github.com/wazuh/wazuh-kibana-app/pull/3174>`_ Changed default ``wazuh.monitoring.shards`` app setting from ``2`` to ``1``.
+- `#3174 <https://github.com/wazuh/wazuh-kibana-app/pull/3174>`_ The default ``wazuh.monitoring.creation`` app setting is changed from ``d`` to ``w``.
+- `#3174 <https://github.com/wazuh/wazuh-kibana-app/pull/3174>`_ The default ``wazuh.monitoring.shards`` app setting is changed from ``2`` to ``1``.
 - `#3189 <https://github.com/wazuh/wazuh-kibana-app/pull/3189>`_ Removed Sha1 field from registry key detail. 
 - `#3250 <https://github.com/wazuh/wazuh-kibana-app/pull/3250>`_ Removed tooltip in last breadcrumb in header breadcrumb.
 - `#3197 <https://github.com/wazuh/wazuh-kibana-app/pull/3197>`_ Refactored the Health check component.
