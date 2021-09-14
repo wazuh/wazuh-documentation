@@ -101,42 +101,54 @@ Choose the tab corresponding to the Wazuh agent host operating system:
 
          If the Wazuh API is running over HTTPS and it is using a self-signed certificate, the function below has to be executed in Powershell:
 
-         .. code-block:: powershell
+         .. tabs::
 
-          > function Ignore-SelfSignedCerts {
-              add-type @"
-                  using System.Net;
-                  using System.Security.Cryptography.X509Certificates;
-                  public class PolicyCert : ICertificatePolicy {
-                      public PolicyCert() {}
-                      public bool CheckValidationResult(
-                          ServicePoint sPoint, X509Certificate cert,
-                          WebRequest wRequest, int certProb) {
-                          return true;
-                      }
-                  }
-          "@
-              [System.Net.ServicePointManager]::CertificatePolicy = new-object PolicyCert
-              [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12;
-          }
+          .. group-tab:: Powershell
 
-          > Ignore-SelfSignedCerts
+           .. code-block:: powershell
+
+            > function Ignore-SelfSignedCerts {
+                add-type @"
+                    using System.Net;
+                    using System.Security.Cryptography.X509Certificates;
+                    public class PolicyCert : ICertificatePolicy {
+                        public PolicyCert() {}
+                        public bool CheckValidationResult(
+                            ServicePoint sPoint, X509Certificate cert,
+                            WebRequest wRequest, int certProb) {
+                            return true;
+                        }
+                    }
+            "@
+                [System.Net.ServicePointManager]::CertificatePolicy = new-object PolicyCert
+                [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12;
+            }
+
+            > Ignore-SelfSignedCerts
 
          Use ``Invoke-WebRequest`` to execute the Wazuh API request to register the Wazuh agent. Values in the angle brackets have to be replaced:
 
-         .. code-block:: console
+         .. tabs::
 
-          # $base64AuthInfo = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(("{0}:{1}" -f <API_username>, <API_password>)))
-          # Invoke-WebRequest -Headers @{Authorization=("Basic {0}" -f $base64AuthInfo)} -Method POST -Uri https://<manager_IP>:55000/agents -Body @{name=<agent_name>} | ConvertFrom-Json
+          .. group-tab:: Powershell
+
+           .. code-block:: powershell
+
+            > $base64AuthInfo = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(("{0}:{1}" -f <API_username>, <API_password>)))
+            > Invoke-WebRequest -Headers @{Authorization=("Basic {0}" -f $base64AuthInfo)} -Method POST -Uri https://<manager_IP>:55000/agents -Body @{name=<agent_name>} | ConvertFrom-Json
 
          The command above returns the Wazuh agent's ``ID``.
 
 
     #. Extract the Wazuh agent's key using the Wazuh agent's ID. Values in the angle brackets have to be replaced:
 
-         .. code-block:: console
+        .. tabs::
 
-          # Invoke-WebRequest -Headers @{Authorization=("Basic {0}" -f $base64AuthInfo)} -Method GET -Uri https://<manager_IP>:55000/agents/<agent_ID>/key | ConvertFrom-Json
+         .. group-tab:: Powershell
+
+           .. code-block:: powershell
+
+            > Invoke-WebRequest -Headers @{Authorization=("Basic {0}" -f $base64AuthInfo)} -Method GET -Uri https://<manager_IP>:55000/agents/<agent_ID>/key | ConvertFrom-Json
 
          The output of the request returns the registration key:
 
@@ -185,16 +197,24 @@ Choose the tab corresponding to the Wazuh agent host operating system:
 
           #. Clean it all
 
-              .. code-block:: console
+              .. tabs::
 
-                # Clear-History
+               .. group-tab:: Powershell
+
+                  .. code-block:: powershell
+
+                    > Clear-History
 
 
           #. Clean any specific line
 
-              .. code-block:: console
+              .. tabs::
 
-                # Clear-History -Id <line IDs separated by a comma and a whitespace>
+               .. group-tab:: Powershell
+
+                .. code-block:: powershell
+
+                  > Clear-History -Id <line IDs separated by a comma and a whitespace>
 
 
     #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``C:\Program Files (x86)\ossec-agent\ossec.conf``.

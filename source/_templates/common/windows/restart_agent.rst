@@ -4,15 +4,15 @@
 
  .. group-tab:: Powershell
 
-  .. code-block:: console
+  .. code-block:: powershell
 
-   # Restart-Service -Name wazuh
+   > Restart-Service -Name wazuh
 
  .. group-tab:: Windows cmd
 
-  .. code-block:: console
+  .. code-block:: doscon
 
-   # net stop wazuh
-   # net start wazuh
+   > net stop wazuh
+   > net start wazuh
 
 .. End of include file
