@@ -28,7 +28,7 @@ This option specifies the additional information that will appear in alerts. Lab
 Attributes:
 
 +--------------------+-------------------------------------------------------------------------------------------------+
-| **key**            | The title that will describe the information of the label.                                      |
+| **key**            | The title that describes the information of the label.                                          |
 +                    +---------------------------------------+---------------------------------------------------------+
 |                    | Allowed value                         | Any string that does not start with an underscore ( _ ) |
 +--------------------+---------------------------------------+---------------------------------------------------------+
