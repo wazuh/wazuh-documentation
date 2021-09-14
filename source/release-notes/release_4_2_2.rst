@@ -8,6 +8,17 @@
 
 This section lists the changes in version 4.2.2. Every update of the Wazuh solution is cumulative and includes all enhancements and fixes from previous releases.
 
+Highlights
+----------
+
+- `#9927 <https://github.com/wazuh/wazuh/pull/9927>`_ The Google Cloud Pub/Sub integration module rework increases the number of processed events per second allowing multithreading. Also, a new ``num_threads`` option is added to module configuration.
+
+
+- `#3175 <https://github.com/wazuh/wazuh-kibana-app/pull/3175>`_
+- `#3503 <https://github.com/wazuh/wazuh-kibana-app/pull/3503>`_
+- `#3222 <https://github.com/wazuh/wazuh-kibana-app/pull/3222>`_
+
++ Splunk
 
 What's new
 ----------
@@ -38,13 +49,13 @@ Wazuh Kibana plugin
 - `#3240 <https://github.com/wazuh/wazuh-kibana-app/pull/3240>`_ A new improvement is implemented to hide navbar Wazuh label.
 - `#3274 <https://github.com/wazuh/wazuh-kibana-app/pull/3274>`_ New modeal message is now added when creating new rule/decoder.
 - `#3503 <https://github.com/wazuh/wazuh-kibana-app/pull/3503>`_ Wazuh introduces a new functionality to change and customize app logos.
-- `#3592 <https://github.com/wazuh/wazuh-kibana-app/pull/3592>`_ The link to the Wazuh documentation Upgrade guide is now added when the Wazuh API version and the Wazuh App version mismatch.
+- `#3592 <https://github.com/wazuh/wazuh-kibana-app/pull/3592>`_ The link to the Wazuh documentation Upgrade guide is now included in the message shown when the Wazuh API version and the Wazuh App version mismatch.
 
-- `#3160 <https://github.com/wazuh/wazuh-kibana-app/pull/3160>`_ Removed module titles.
+- `#3160 <https://github.com/wazuh/wazuh-kibana-app/pull/3160>`_ To improve user experience, module titles are now removed from the dashboards.
 - `#3174 <https://github.com/wazuh/wazuh-kibana-app/pull/3174>`_ The default ``wazuh.monitoring.creation`` app setting is changed from ``d`` to ``w``.
 - `#3174 <https://github.com/wazuh/wazuh-kibana-app/pull/3174>`_ The default ``wazuh.monitoring.shards`` app setting is changed from ``2`` to ``1``.
-- `#3189 <https://github.com/wazuh/wazuh-kibana-app/pull/3189>`_ Removed Sha1 field from registry key detail. 
-- `#3250 <https://github.com/wazuh/wazuh-kibana-app/pull/3250>`_ Removed tooltip in last breadcrumb in header breadcrumb.
+- `#3189 <https://github.com/wazuh/wazuh-kibana-app/pull/3189>`_ SHA1 field is removed from **Windows Registry** details pane. 
+- `#3250 <https://github.com/wazuh/wazuh-kibana-app/pull/3250>`_ Removed tooltip in header breadcrumb.
 - `#3197 <https://github.com/wazuh/wazuh-kibana-app/pull/3197>`_ Refactored the Health check component.
 - `#3210 <https://github.com/wazuh/wazuh-kibana-app/issues/3210>`_ Added version in package downloaded name in agent deploy command.
 - `#3243 <https://github.com/wazuh/wazuh-kibana-app/pull/3243>`_ Removed restriction to allow only current active agents from vulnerability inventory.
