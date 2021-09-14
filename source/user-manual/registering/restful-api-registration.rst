@@ -154,11 +154,21 @@ Choose the tab corresponding to the Wazuh agent host operating system:
 
     #. Import the registration key to the Wazuh agent using ``manage_agents`` utility:
 
-         .. code-block:: console
+        .. tabs::
 
-          # 'C:\Program Files (x86)\ossec-agent\manage_agents' -i <key>
+          .. group-tab:: Powershell
 
-         An example output of the command looks as follows:
+            .. code-block:: powershell
+
+              > & "C:\Program Files (x86)\ossec-agent\manage_agents" -i <key>
+
+          .. group-tab:: Windows cmd
+
+            .. code-block:: doscon
+
+              > "C:\Program Files (x86)\ossec-agent\manage_agents" -i <key>
+
+       An example output of the command looks as follows:
 
          .. code-block:: none
                 :class: output
