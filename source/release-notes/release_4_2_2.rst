@@ -33,12 +33,13 @@ Wazuh Kibana plugin
 
 - `#3170 <https://github.com/wazuh/wazuh-kibana-app/pull/3170>`_ **Wazuh support** links are added to the Kibana help menu. You now get quick access to the Wazuh **Documentation**, **Slack channel**, **Projects on GitHub**, and **Google Group**.
 - `#3184 <https://github.com/wazuh/wazuh-kibana-app/pull/3184>`_ You now can access group details directly by using the ``group`` query parameter in the URL. 
-- `#3222 <https://github.com/wazuh/wazuh-kibana-app/pull/3222>`_ `#3292 <https://github.com/wazuh/wazuh-kibana-app/pull/3292>`_ Configuration to disable Wazuh App access from X-Pack/ODFE role.
-- `#3221 <https://github.com/wazuh/wazuh-kibana-app/pull/3221>`_ Added confirmation message when closing a form.
-- `#3240 <https://github.com/wazuh/wazuh-kibana-app/pull/3240>`_ Improvement to hide navbar Wazuh label.
-- `#3274 <https://github.com/wazuh/wazuh-kibana-app/pull/3274>`_ Add modal creating new rule/decoder.
-- `#3503 <https://github.com/wazuh/wazuh-kibana-app/pull/3503>`_ New functionality to change app logos.
-- `#3592 <https://github.com/wazuh/wazuh-kibana-app/pull/3592>`_ Added link to the upgrade guide when the Wazuh API version and the Wazuh App version mismatch.
+- `#3222 <https://github.com/wazuh/wazuh-kibana-app/pull/3222>`_ `#3292 <https://github.com/wazuh/wazuh-kibana-app/pull/3292>`_ A new configuration is added to disable Wazuh App access from X-Pack/ODFE role.
+- `#3221 <https://github.com/wazuh/wazuh-kibana-app/pull/3221>`_ New confirmation message is now added when closing a form.
+- `#3240 <https://github.com/wazuh/wazuh-kibana-app/pull/3240>`_ A new improvement is implemented to hide navbar Wazuh label.
+- `#3274 <https://github.com/wazuh/wazuh-kibana-app/pull/3274>`_ New modeal message is now added when creating new rule/decoder.
+- `#3503 <https://github.com/wazuh/wazuh-kibana-app/pull/3503>`_ Wazuh introduces a new functionality to change and customize app logos.
+- `#3592 <https://github.com/wazuh/wazuh-kibana-app/pull/3592>`_ The link to the Wazuh documentation Upgrade guide is now added when the Wazuh API version and the Wazuh App version mismatch.
+
 - `#3160 <https://github.com/wazuh/wazuh-kibana-app/pull/3160>`_ Removed module titles.
 - `#3174 <https://github.com/wazuh/wazuh-kibana-app/pull/3174>`_ The default ``wazuh.monitoring.creation`` app setting is changed from ``d`` to ``w``.
 - `#3174 <https://github.com/wazuh/wazuh-kibana-app/pull/3174>`_ The default ``wazuh.monitoring.shards`` app setting is changed from ``2`` to ``1``.
