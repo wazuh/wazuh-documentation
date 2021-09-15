@@ -32,9 +32,9 @@ In the following link, you can find more information about `how to modify the RB
 RBAC in Wazuh
 -------------
 
-RBAC manages the system resources and is a layer between the software and its clients. This layer works at a low level within the software Wazuh ensuring that all API endpoints are protected and appropriately managed.
+RBAC manages the system resources and is a layer between the software and its clients. This layer works at a low level within the software ensuring that all API endpoints are protected and appropriately managed.
 
-RBAC has two authentication methods, and the first of these is access through the relationship between users and roles. This method is the classic m    ethod in which a client provides a username-password and based on the relationship of the specified user, it will obtain the designated permissions.
+RBAC has two authentication methods, and the first of these is access through the relationship between users and roles. This method is the classic method in which a client provides a username-password and based on the relationship of the specified user, it will obtain the designated permissions.
 
 In the following link, you can find more information about how to `assign roles to a user <https://documentation.wazuh.com/current/user-manual/api/rbac/configuration.html#assign-roles-to-a-user>`_. 
 
@@ -106,7 +106,7 @@ These permissions will not be applied to any role until both entities are joined
     :align: left
     :width: 100%
 
-The next thing is to create a role for that user. To do this, go to the “Roles” tab. Inside it, by default. You can find more information about `default roles <https://documentation.wazuh.com/current/user-manual/api/rbac/reference.html#default-roles>`_ in the documentation. In this example, we will create a new role that will be assigned to our user.
+The next thing is to create a role for that user. To do this, go to the “Roles” tab. You can find more information about `default roles <https://documentation.wazuh.com/current/user-manual/api/rbac/reference.html#default-roles>`_ in the documentation. In this example, we will create a new role that will be assigned to our user.
 
 This role will have a name of our choice, and it will be linked to the policy created before. This way, the user to whom this role is assigned will have permissions on the agents of the “Framework” group.
 
