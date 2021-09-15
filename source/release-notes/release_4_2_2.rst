@@ -70,7 +70,7 @@ Wazuh Splunk app
 
 - `#1083 <https://github.com/wazuh/wazuh-splunk/pull/1083>`_ Added MITRE ATT&CK framework integration.
 - `#1076 <https://github.com/wazuh/wazuh-splunk/pull/1076>`_ Added MITRE ATT&CK dashboard integration.
-- Support for Splunk v8.1.4
+- Support for Splunk 8.1.4
 
 Resolved issues
 ---------------
