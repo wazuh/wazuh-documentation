@@ -186,10 +186,10 @@ html_static_path = ['_static']
 html_additional_pages = {}
 
 if version >= '4.0':
-    html_additional_pages = {
-        'user-manual/api/reference': 'api-redoc.html',
-        'cloud-service/apis/reference': 'cloud-api-redoc.html'
-    }
+    html_additional_pages['user-manual/api/reference'] = 'api-redoc.html'
+
+if version >= '4.2':
+    html_additional_pages['cloud-service/apis/reference'] = 'cloud-api-redoc.html'
 
 if is_latest_release == True:
     html_additional_pages['moved-content'] = 'moved-content.html'
@@ -450,11 +450,11 @@ custom_replacements = {
     "|WAZUH_PREGCC_CHANGE|" : "4.1.3",
     "|WAZUH_LATEST_MINOR|" : "4.2",
     "|WAZUH_PACKAGES_BRANCH|" : "4.2",
-    "|WAZUH_LATEST_ANSIBLE|" : "4.2.0",
-    "|WAZUH_LATEST_KUBERNETES|" : "4.1.5",
-    "|WAZUH_LATEST_PUPPET|" : "4.1.5",
+    "|WAZUH_LATEST_ANSIBLE|" : "4.2.1",
+    "|WAZUH_LATEST_KUBERNETES|" : "4.2.1",
+    "|WAZUH_LATEST_PUPPET|" : "4.2.1",
     "|WAZUH_LATEST_OVA|" : "4.2.1",
-    "|WAZUH_LATEST_DOCKER|" : "4.2.0",
+    "|WAZUH_LATEST_DOCKER|" : "4.2.1",
     "|OPEN_DISTRO_LATEST|" : "1.13.2",
     "|ELASTICSEARCH_LATEST|" : "7.10.2",
     "|ELASTICSEARCH_LATEST_OVA|" : "7.10.2",

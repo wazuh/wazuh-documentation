@@ -39,7 +39,7 @@ Wazuh Cloud hosts and manages all the Wazuh components in one integrated platfor
 Can I try it for free?
 ----------------------
 
-Yes, Wazuh provides a free trial for you to create a cloud environment and access the Wazuh Cloud. You can :ref:`sign up for a 14-day free trial <cloud_getting_started_sign_up>` and no credit card information is required to complete this process.
+Yes, Wazuh provides a free trial for you to create a cloud environment and access the Wazuh Cloud. You can :ref:`sign up for a 14-day free trial <cloud_sign_up>` and no credit card information is required to complete this process.
 
 Will I be charged when my trial is over?
 ----------------------------------------
