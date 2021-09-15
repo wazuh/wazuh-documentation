@@ -29,7 +29,7 @@ If you haven't already, install a web server in your linux-agent, for example **
         [root@linux-agent centos]# yum install nginx
         [root@linux-agent centos]# systemctl start nginx
 
-Ensure that the nginx **access** and **error** logs are collected by Wazuh by having
+Make sure that Wazuh collects the nginx **access** and **error** logs by having
 these ``<localfile>`` sections present in the agent's ``/var/ossec/etc/agent.conf`` file:
 
     .. code-block:: xml
@@ -117,10 +117,10 @@ Set up Active Response (AR) countermeasures to Shellshock probes
 ----------------------------------------------------------------
 
 The Wazuh Active Response capability allows scripted actions to be taken in
-response to specific criteria of Wazuh rules being matched.  By default, AR
+response to specific criteria of Wazuh rules being matched. By default, AR
 is enabled on all agents and all standard AR commands are defined in ``manager.conf``
 on the Wazuh manager, but no actual criteria for calling the AR commands is
-included.  No AR commands will actually be triggered until further configuration
+included. No AR commands are actually triggered until further configuration
 is performed on the Wazuh manager.
 
 For the purpose of automated blocking, a very popular command for blocking in
@@ -265,7 +265,7 @@ AR Scenario 2 - Make all Linux lab systems block attacker even if they were not 
 
 In the newly-added ``<active-response>`` section in ``manager.conf`` on wazuh-manager,
 change the ``<location>`` value from **local** to **all** so that all Linux Wazuh
-agents will block the attacker even when only one of them is targeted.
+agents block the attacker even when only one of them is targeted.
 
 .. note::
     The option **all** sends the active response to all **agents**. If we want it

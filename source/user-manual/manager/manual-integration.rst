@@ -2,7 +2,7 @@
 
 .. meta::
   :description: Learn more about the Integrator daemon, which allows Wazuh to connect to external APIs, as well as alerting tools such as Slack, PagerDuty, and VirusTotal.
-  
+
 .. _manual_integration:
 
 Integration with external APIs
@@ -13,7 +13,7 @@ The **Integrator** daemon allows Wazuh to connect to external APIs and alerting 
 Configuration
 -------------
 
-The integrations are configured on the Wazuh manager's ``manager.conf`` file which is located inside the Wazuh installation folder (``/var/ossec/etc/``). To configure an integration, add the following configuration inside the *<wazuh_config>* section:
+The integrations are configured on the Wazuh manager's ``manager.conf`` file which is located inside the Wazuh installation folder (``/var/ossec/etc/``). To configure an integration, add the following configuration to the *<wazuh_config>* section:
 
 .. code-block:: xml
 

@@ -18,7 +18,7 @@ Wazuh configuration
 .. note::
   It is required to append the type of logs inside ``path`` tag as in the next example. `dnslogs`, `proxylogs`, and `iplogs` are currently supported. Each one require to be defined in an independent ``bucket`` tag.
 
-#. Open the Wazuh configuration file (``/var/ossec/etc/agent.conf``) and add the following block (this example is for `dnslogs` and `proxylogs`, it is not required to add both):
+#. Open the Wazuh configuration file (``/var/ossec/etc/agent.conf``) and add the following block below. This example is for `dnslogs` and `proxylogs` and it is not required to add both.
 
     .. code-block:: xml
 

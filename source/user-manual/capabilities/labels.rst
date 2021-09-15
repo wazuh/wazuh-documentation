@@ -17,7 +17,7 @@ Configuring labels that will be included in alerts is a straightforward process.
 
 Information on how to configure labels can be found in the :doc:`Labels section <../reference/ossec-conf/labels_agent>` of ``agent.conf``.
 
-Agent labels can also be centralized using the ``shared.conf`` file, such that labels can be set for specific agents at the manager level. When there is pre-existing label that is the same as one the user has defined in ``agent.conf`` or ``shared.conf``, the second one will override the first.
+Agent labels can also be centralized using the ``shared.conf`` file, such labels can be set for specific agents at the manager level. When there is pre-existing label that is the same as one the user has defined in ``agent.conf`` or ``shared.conf``, the second one will override the first.
 
 For more information about on how to centralize agent configuration, see the :doc:`Centralized configuration <../reference/centralized-configuration>` section.
 
@@ -49,7 +49,7 @@ To include these labels in alerts from a specific agent, the following configura
           <label key="installation" hidden="yes">January 1st, 2017</label>
         </labels>
 
-To set the labels at the manager level, the following configuration would be added to the ``shared.conf`` file:
+To set the labels at the manager level, the following configuration needs to be added to the ``shared.conf`` file:
 
 .. code-block:: xml
 

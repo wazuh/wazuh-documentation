@@ -79,7 +79,7 @@ Now we will restore the following files:
    $ cp -p /var/ossec_backup/etc/client.keys /var/ossec/etc/
    $ cp -p /var/ossec_backup/queue/rids/* /var/ossec/queue/rids/
 
-There have been some syntax changes, and new settings, incorporated to ``agent.conf`` file. Please review this file manually in order to import your previous configuration. More specifically, one of the changes is the configuration stanza for the communication with the manager:
+There have been some syntax changes and new settings incorporated into the ``agent.conf`` file. Make sure to review this file manually in order to import your previous configuration. More specifically, one of the changes is the configuration stanza for the communication with the manager:
 
 .. code-block:: xml
 

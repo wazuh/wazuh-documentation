@@ -45,7 +45,7 @@ Finally, the new ``force_insert`` and ``force_time`` options in Authd (``-F<time
 New features for internal logs
 ------------------------------
 
-As JSON is one of the most popular logging formats, we have made it possible in this new version to have internal logs written in JSON format, plain text or both.  This can be configured in the :doc:`logging section <../user-manual/reference/ossec-conf/logging_agent>` of ``ossec.conf``.
+As JSON is one of the most popular logging formats, we made it possible in this new version to have internal logs written in JSON format, plain text, or both.  This can be configured in the :doc:`logging section <../user-manual/reference/ossec-conf/logging_agent>` of ``ossec.conf``.
 
 In addition, we have simplified the management of internal logs such that they are rotated and compressed daily.  We have further made it possible to control the use of disk space by configuring a the length of time for between the rotated logs before they are automatically deleted.
 

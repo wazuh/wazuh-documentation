@@ -5,7 +5,7 @@
 Internal configuration
 =======================
 
-The main configuration is located in the ``manager.conf`` or ``agent.conf`` file, however some internal configuration features are located in the ``/var/ossec/etc/internal_options.conf`` file.
+The main configuration is located in the ``manager.conf`` or ``agent.conf`` file, however, some internal configuration features are located in the ``/var/ossec/etc/internal_options.conf`` file.
 
 Generally, this file is reserved for debugging issues and for troubleshooting. **Any error in this file may cause your installation to malfunction or fail to run.**
 

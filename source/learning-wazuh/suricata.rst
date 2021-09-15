@@ -138,9 +138,9 @@ Linux agents need an additional ``<localfile>`` config section like this:
         </localfile>
 
 Instead of adding the above directly to ``agent.conf`` on each Linux agent, this time let's use Wazuh manager's centralized agent
-configuration facility.  This is a powerful feature that makes it feasible to manage the varied configurations of a diverse fleet of systems running
-Wazuh agent.  Search the online documentation for "Centralized Configuration" for the full details about this.  In short, groups of agents share common
-configuration content served up to them by Wazuh manager.  Agents automatically pick up and apply changes made to this content on the manager, and merge
+configuration facility. This is a powerful feature that makes it feasible to manage the varied configurations of a diverse fleet of systems running
+Wazuh agent. Search the online documentation for "Centralized Configuration" for the full details about this. In short, groups of agents share common
+configuration content served up to them by the Wazuh manager. Agents automatically pick up and apply changes made to this content on the manager, and merge
 the shared configuration with their local configuration.
 
 #. Add elastic-server and linux-agent to a new agent group called "linux". Go to wazuh-manager and:
@@ -192,7 +192,7 @@ the shared configuration with their local configuration.
 
             Group 'linux' set to agent '002'.
 
-#. Put our Suricata-specific Wazuh agent config into the shared.conf file belonging to the "linux" agent group.  In wazuh-manager, edit this file: ``/var/ossec/etc/shared/linux/shared.conf``.  Make it look like this:
+#. Put our Suricata-specific Wazuh agent config into the shared.conf file belonging to the "linux" agent group.  In wazuh-manager, edit the ``/var/ossec/etc/shared/linux/shared.conf`` files follows:
 
     .. code-block:: xml
 
@@ -232,7 +232,7 @@ the shared configuration with their local configuration.
 
         # service wazuh-manager restart
 
-   Each agent should pull down and apply this additional configuration almost immediately. You can find the fetched configuration on each agent at ``/var/ossec/etc/shared/shared.conf``.
+   Each agent needs to pull down and apply this additional configuration almost immediately. You can find the fetched configuration on each agent in the ``/var/ossec/etc/shared/shared.conf`` file.
 
 See Suricata NIDS events in Kibana
 ----------------------------------

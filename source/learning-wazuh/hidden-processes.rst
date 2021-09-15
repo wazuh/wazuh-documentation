@@ -126,7 +126,7 @@ Wazuh a very effective Linux rootkit detection application by looking for genera
 
     When using these last commands, an empty output is expected.
 
-9. Next configure linux-agent to run rootcheck scans every 5 minutes setting the ``frequency`` option the ``<rootcheck>`` section of your agent's ``/var/ossec/etc/agent.conf`` file to **300** with the following:
+9. Configure linux-agent to run rootcheck scans every 5 minutes setting the ``frequency`` option the ``<rootcheck>`` section of your agent's ``/var/ossec/etc/agent.conf`` file to **300** with the following:
 
     .. code-block:: xml
 
@@ -197,7 +197,7 @@ Wazuh a very effective Linux rootkit detection application by looking for genera
 
     We see various rootkit scanning measures taking place that correspond to the various
     ``<check_...>`` options specified in the ``<rootkit>`` section of ``agent.conf``.
-    The **check_rc_pids** scan is the one that will catch Diamorphine.
+    The **check_rc_pids** scan is the one that catches Diamorphine.
 
 |
 

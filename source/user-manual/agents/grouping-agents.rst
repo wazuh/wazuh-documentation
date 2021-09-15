@@ -8,7 +8,7 @@ Grouping agents
 .. versionadded:: 3.0.0
 
 There are two methods for configuring registered agents. They can either be configured locally with the :doc:`agent.conf <../reference/ossec-conf/index_agent>` file or remotely using
-the :doc:`centralized configuration <../reference/centralized-configuration>`. If the centralized configuration is used, agents may be assigned to groups with each group possessing a unique configuration.  This greatly simplifies the overall configuration process.
+the :doc:`centralized configuration <../reference/centralized-configuration>`. If the centralized configuration is used, agents might be assigned to groups with each group possessing a unique configuration. This greatly simplifies the overall configuration process.
 
 .. note:: Read the `Agent groups and centralized configuration <https://wazuh.com/blog/agent-groups-and-centralized-configuration//>`_ document for more information.
 
@@ -94,9 +94,9 @@ Below are the steps to assign agents to a group with a specific configuration:
             "error": 0,
         }
 
-2. Once a group is created, its ``shared.conf`` file can be edited to include the specific configuration you wish to assign to this group. For this example, the file to be edited is located at ``/var/ossec/etc/shared/dbms/shared.conf`` and each agent belonging to this group will receive this file.
+2. Once a group is created, its ``shared.conf`` file can be edited to include the specific configuration you want to assign to this group. For this example, the file to be edited is located in the ``/var/ossec/etc/shared/dbms/shared.conf`` file and each agent belonging to this group receives this file.
 
-3. Within 20 minutes of connecting to the manager, each agent assigned to a group will receive the files contained in the *'dbms'* folder from the manager, including the ``shared.conf`` file that was modified in the previous step.  The length of time it takes for the manager to push these files to the agents depends on the size of the files, the number of agents in the group and the connection protocol used. For example, depending on network bandwidth and performance, it may take 8 minutes to receive a 10 MB folder (excluding **merged.mg** file) on 100 agents using UDP, however if TCP is used, this may move along much faster.
+3. Within 20 minutes of connecting to the manager, each agent assigned to a group receives the files contained in the *'dbms'* folder from the manager, including the ``shared.conf`` file that was modified in the previous step.  The length of time it takes for the manager to push these files to the agents depends on the size of the files, the number of agents in the group, and the connection protocol used. For example, depending on network bandwidth and performance, it might take 8 minutes to receive a 10 MB folder (excluding **merged.mg** file) on 100 agents using UDP, however, if TCP is used, this might move along much faster.
 
 4. Once a specific agent belongs to a group, it will be **automatically reassigned** to this group even if it is registered under another name or ID. This happens because, when the agent is re-registered, the checksum of ``merged.mg`` sent by the agent is compared with that of the other agents registered with the manager. However, this is not the default behavior, and, if needed, it must be explicitly activated by the user in ``local_internal_options.conf`` by adding the option ``remoted.guess_agent_group=1`` (see section ``remoted`` in :doc:`internal options <../reference/internal-options>`).
 
@@ -348,7 +348,7 @@ As it was explained above, traditionally the manager shared configuration files 
 In case of belonging to multiple groups, the configuration files of every group are merged into one following the next criteria:
 
 - Shared files such as CIS benchmarks for the rootkit detection are joined in the shared folder, if repeated files, the last one added overwrites old ones.
-- The new ``shared.conf`` file added is appended to the existing one. When two groups have conflicting configuration, the last group assigned to the agent will be the leading one. Learn more about the configuration precedence in :doc:`Centralized configuration manual <../reference/centralized-configuration>`.
+- The new ``shared.conf`` file added is appended to the existing one. When two groups have conflicting configurations, the last group assigned to the agent is the leading one. Learn more about the configuration precedence in :doc:`Centralized configuration manual <../reference/centralized-configuration>`.
 - Custom shared files set from the user to a particular group are also joined to send them to the agents.
 
 

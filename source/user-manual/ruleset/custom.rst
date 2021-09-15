@@ -1,8 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Check out how to add new decoders and rules, and how to change existing ones in this section of the Wazuh documentation. 
-  
+  :description: Check out how to add new decoders and rules, and how to change existing ones in this section of the Wazuh documentation.
+
 .. _ruleset_custom:
 
 Custom rules and decoders
@@ -129,7 +129,7 @@ If we want to change something in the decoder file ``0310-ssh_decoders.xml``, we
 
 1. Copy the decoder file ``/var/ossec/ruleset/decoders/0310-ssh_decoders.xml`` from the default folder to the user folder ``/var/ossec/etc/decoders`` in order to keep the changes.
 
-2. Exclude the original decoder file ``ruleset/decoders/0310-ssh_decoders.xml`` from the Wazuh loading list. To do this, use the tag ``<decoder_exclude>`` in the ``manager.conf`` file. Thus, the specified decoder will not be loaded from the default decoder folder, and the decoder file saved in the user folder will be loaded instead.
+2. Exclude the original decoder file ``ruleset/decoders/0310-ssh_decoders.xml`` from the Wazuh loading list. To do this, use the tag ``<decoder_exclude>`` in the ``manager.conf`` file. With this action, the specified decoder is not loaded from the default decoder folder and the decoder file saved in the user folder is loaded instead.
 
     ::
 

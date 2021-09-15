@@ -131,4 +131,4 @@ Pointing agents to the cluster (Failover mode)
             <crypto_method>aes</crypto_method>
         </client>
 
-    In this way, if the worker01 node is not available, the agents will report to the worker02 node. This process is performed cyclically between all the nodes that we place in the ``agent.conf`` of the agents.
+    In this way, if the worker01 node is not available, the agents still report to the worker02 node. This process is performed cyclically between all the nodes that we place in the ``agent.conf`` of the agents.

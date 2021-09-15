@@ -18,7 +18,7 @@ The agent upgrade module is responsible for carrying out the entire agent upgrad
 
 This configuration section only needs to be defined in order to change the default values.
 
-.. note:: It is also necessary to include agent-upgrade configuration in the agent side, check :ref:`here <reference_ossec_agent_upgrade_agent>`.
+.. note:: It is also necessary to include agent-upgrade configuration on the agent side, check :ref:`here <reference_ossec_agent_upgrade_agent>`.
 
 Options
 -------
@@ -27,13 +27,13 @@ Options
 - `wpk_repository`_
 - `max_threads`_
 
-.. note:: On the manager side, this module will be always enabled and cannot be deactivated.
+.. note:: On the manager side, this module is always enabled and cannot be deactivated.
 
 
 chunk_size
 ^^^^^^^^^^
 
-Size in KB of the chunk that will be used to send the WPK file.
+Size in KB of the chunk that is used to send the WPK file.
 
 +--------------------+----------------------------------+
 | **Default value**  | 512                              |
@@ -47,7 +47,7 @@ Size in KB of the chunk that will be used to send the WPK file.
 wpk_repository
 ^^^^^^^^^^^^^^
 
-Repository where the WPK files will be downloaded.
+Repository where the WPK files are downloaded.
 
 +--------------------+--------------------------------------------------+
 | **Default value**  | packages.wazuh.com/4.x/wpk/                      |

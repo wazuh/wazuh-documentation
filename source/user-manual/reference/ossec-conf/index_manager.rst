@@ -6,9 +6,9 @@ Manager configuration (manager.conf)
 ====================================
 
 .. warning::
-    Upgrade from older version than v5.0.0, will create a new manager.conf file and current configuration will be saved into ossec.conf.backup file, restarting configuration from zero.
+    Upgrade from an older version than v5.0.0 creates a new manager.conf file and the current configuration is saved into ossec.conf.backup file, restarting configuration from zero.
 
-The ``manager.conf`` file is the main configuration file on the Wazuh manager. It is located at ``/var/ossec/etc/manager.conf`` on Linux machines. It is recommended to back up this file before making changes on it. A configuration error may prevent Wazuh services from starting up.
+The ``manager.conf`` file is the main configuration file on the Wazuh manager. It is located at ``/var/ossec/etc/manager.conf`` on Linux machines. It is recommended to back up this file before making changes to it. A configuration error might prevent Wazuh services from starting up.
 
 The ``manager.conf`` file is in XML format and all of its configuration options are nested in their appropriate section of the file. In this file, the outermost XML tag is ``<wazuh_config>``. There can be more than one ``<wazuh_config>`` tag.
 

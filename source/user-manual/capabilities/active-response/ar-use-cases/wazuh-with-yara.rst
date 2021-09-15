@@ -23,7 +23,7 @@ The next diagram illustrates the flow of events between the different components
 Wazuh manager configuration
 ---------------------------
 
-First, configure the manager the action that you want to execute and under which circumstances you want it to be triggered. For that, edit the configuration file located at ``/var/ossec/etc/manager.conf`` and add the following:
+First, configure in the manager the action that you want to execute, specifying under which circumstances you want it to be triggered. For that, edit the configuration file located at ``/var/ossec/etc/manager.conf`` and add the following:
 
 .. code-block:: none
 
@@ -80,7 +80,7 @@ Create a decoder file, for example, ``/var/ossec/etc/decoders/yara_decoders.xml`
    - Copyright (C) 2015-2021, Wazuh Inc.
    - This program is a free software; you can redistribute it and/or modify it under the terms of GPLv2.
   -->
- 
+
   <decoder name="yara">
     <prematch>wazuh-yara: </prematch>
   </decoder>
@@ -102,11 +102,11 @@ Similarly create a rule file, ``/var/ossec/etc/rules/yara_rules.xml``, with the 
 
 .. code-block:: none
 
-  <!-- 
-   - YARA rules 
-   - Created by Wazuh, Inc. 
-   - Copyright (C) 2015-2021, Wazuh Inc. 
-   - This program is a free software; you can redistribute it and/or modify it under the terms of GPLv2. 
+  <!--
+   - YARA rules
+   - Created by Wazuh, Inc.
+   - Copyright (C) 2015-2021, Wazuh Inc.
+   - This program is a free software; you can redistribute it and/or modify it under the terms of GPLv2.
   -->
 
    <group name="yara,">
@@ -128,17 +128,17 @@ Similarly create a rule file, ``/var/ossec/etc/rules/yara_rules.xml``, with the 
       </rule>
   </group>
 
-Restart the Wazuh manager for the changes to take effect. 
+Restart the Wazuh manager for the changes to take effect.
 
 Wazuh agent configuration
 -------------------------
 
-The following section assumes YARA is already installed on the monitored endpoint.  If you need to install it, you can do it following the `official YARA installation guide <https://yara.readthedocs.io/en/stable/gettingstarted.html#compiling-and-installing-yara>`_. 
+The following section assumes YARA is already installed on the monitored endpoint.  If you need to install it, you can do it following the `official YARA installation guide <https://yara.readthedocs.io/en/stable/gettingstarted.html#compiling-and-installing-yara>`_.
 
 The script configured to run as part of the active response settings defined on the Wazuh manager, ``yara.sh``, needs to be placed under ``/var/ossec/active-response/bin`` on the Wazuh agent side. Add the following content to it:
-  
+
 .. code-block:: none
-  
+
   #!/bin/bash
   # Wazuh - Yara active response
   # Copyright (C) 2015-2021, Wazuh Inc.
@@ -148,27 +148,27 @@ The script configured to run as part of the active response settings defined on 
   # License (version 2) as published by the FSF - Free Software
   # Foundation.
   #------------------------- Gather parameters -------------------------#
-  
+
   # Static active response parameters
   LOCAL=`dirname $0`
-  
+
   # Extra arguments
   read INPUT_JSON
   YARA_PATH=$(echo $INPUT_JSON | jq -r .parameters.extra_args[1])
   YARA_RULES=$(echo $INPUT_JSON | jq -r .parameters.extra_args[3])
   FILENAME=$(echo $INPUT_JSON | jq -r .parameters.alert.syscheck.path)
   COMMAND=$(echo $INPUT_JSON | jq -r .command)
-  
+
   # Move to the active response folder
   cd $LOCAL
   cd ../
-  
+
   # Set LOG_FILE path
   PWD=`pwd`
   LOG_FILE="${PWD}/../logs/active-responses.log"
-  
+
   #----------------------- Analyze parameters -----------------------#
-  
+
   if [[ ! $YARA_PATH ]] || [[ ! $YARA_RULES ]]
   then
     echo "wazuh-yara: ERROR - Yara active response error. Yara path and rules parameters are mandatory." >> ${LOG_FILE}
@@ -189,12 +189,12 @@ The script configured to run as part of the active response settings defined on 
       exit 1;
     fi
   fi
-  
+
   #------------------------- Main workflow --------------------------#
-  
+
   # Execute Yara scan on the specified filename
   yara_output="$("${YARA_PATH}"/yara -w -r "$YARA_RULES" "$FILENAME")"
-  
+
   if [[ $yara_output != "" ]]
   then
     # Iterate every detected rule and append it to the LOG_FILE
@@ -202,19 +202,19 @@ The script configured to run as part of the active response settings defined on 
     echo "wazuh-yara: INFO - Scan result: $line" >> ${LOG_FILE}
     done <<< "$yara_output"
   fi
-  
+
   exit 1;
-  
-  
+
+
 .. note:: Make sure that you have `jq <https://stedolan.github.io/jq/>`_ installed, and that the ``yara.sh`` file ownership is ``root:ossec`` and the permissions are ``750``.
-  
+
 The script receives these paths:
-  
+
 - The file path contained in the alert that triggered the active response in the ``parameters.alert.syscheck.path`` object.
 
 - ``-yara_path``. Path to the folder where the Yara executable is located; by default this is usually ``/usr/local/bin``.
 
-- ``-yara_rules``. File path to the Yara rules file used for the scan.  
+- ``-yara_rules``. File path to the Yara rules file used for the scan.
 
 The script uses the parameters above to perform a YARA scan:
 
@@ -240,7 +240,7 @@ For every line in the output, the script appends an event to the active response
 
 .. note:: There's no need to configure the agent to monitor the active response log as it is part of the agent's default configuration.
 
-Malware detection 
+Malware detection
 -----------------
 
 ``HiddenWasp`` is a sophisticated malware that infects Linux systems, used for targeted remote control. Its authors took advantage of various publicly available Open Source malware, such as Mirai and Azazel rootkit.

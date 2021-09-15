@@ -18,7 +18,7 @@ Configuration
 Basic usage
 -----------
 
-Command monitoring is configured in the :ref:`localfile section<reference_ossec_localfile>` of :ref:`agent.conf <reference_client_conf>`. It can be also be centrally configured in :ref:`shared.conf<reference_shared_conf>`.
+Command monitoring is configured in the :ref:`localfile section<reference_ossec_localfile>` of :ref:`agent.conf <reference_client_conf>`. It can also be centrally configured in :ref:`shared.conf<reference_shared_conf>`.
 
 Monitor running Windows processes
 ---------------------------------

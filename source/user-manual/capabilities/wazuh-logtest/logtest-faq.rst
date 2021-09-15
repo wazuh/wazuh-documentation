@@ -22,7 +22,7 @@ Logtest will detect when the token is not valid, process the log and return the 
 
 When is a session closed?
 -------------------------
-There are 3 reasons why a session has been closed
+There are 3 reasons why a session has been closed:
     - Force logout via a logout request.
     - The session has been idle longer than the `session_timeout` defined in the rule_test configuration in manager.conf.
     - The :ref:`max_session<reference_ossec_rule_test>` number of sessions has been reached and a new session replaces the session that has been idle the longest.

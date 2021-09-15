@@ -12,7 +12,7 @@ active-response (Agent)
 		<active-response>
 		</active-response>
 
-.. note:: It is also necessary to include active-response configuration in the manager side, check :ref:`here <reference_ossec_active_response_manager>`.
+.. note:: It is also necessary to include active-response configuration on the manager side, check :ref:`here <reference_ossec_active_response_manager>`.
 
 Options
 -------
@@ -23,7 +23,7 @@ Options
 disabled
 ^^^^^^^^
 
-Toggles the active-response capability on and off. Setting this option to ``yes`` on an agent.conf will disable active-response for that agent only.
+Toggles the active-response capability on and off. Setting this option to ``yes`` on an agent.conf disables active-response for that agent only.
 
 .. note::
 
@@ -48,7 +48,7 @@ Sets timeouts in minutes for repeat offenders. This is a comma-separated list of
 +--------------------+-----------------------------+
 
 .. warning::
-    This option must be configured in the **agent.conf** file, even when using a manager/agent setup with centralized configuration of other settings via **shared.conf**. Apart from that, it has to be defined in the upper ``<active-response>`` section found in the configuration file.
+    This option must be configured in the **agent.conf** file, even when using a manager/agent setup with centralized configuration of other settings via **shared.conf**. Additionally, it has to be defined in the upper ``<active-response>`` section found in the configuration file.
 
 Sample Configuration
 --------------------

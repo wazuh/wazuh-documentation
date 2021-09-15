@@ -18,7 +18,7 @@ The agent upgrade module is responsible for carrying out the entire agent upgrad
 
 This configuration section only needs to be defined in order to change the default values.
 
-.. note:: It is also necessary to include agent-upgrade configuration in the manager side, check :ref:`here <reference_ossec_agent_upgrade_manager>`.
+.. note:: It is also necessary to include agent-upgrade configuration on the manager side, check :ref:`here <reference_ossec_agent_upgrade_manager>`.
 
 Options
 -------

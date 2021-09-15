@@ -219,7 +219,7 @@ To perform the upgrade locally, follow the instructions for the operating system
           # /var/ossec/bin/wazuh-control stop
 
 
-    #. Backup the ``agent.conf`` configuration file:
+    #. Back up the ``agent.conf`` configuration file:
 
         .. code-block:: console
 
@@ -275,7 +275,7 @@ To perform the upgrade locally, follow the instructions for the operating system
             # /var/ossec/bin/wazuh-control stop
 
 
-      #. Backup the ``agent.conf`` configuration file:
+      #. Back up the ``agent.conf`` configuration file:
 
           .. code-block:: console
 

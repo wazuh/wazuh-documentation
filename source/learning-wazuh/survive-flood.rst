@@ -96,7 +96,7 @@ Wazuh manager does not record alerts on rules of severity levels less than 3,
 so for this lab we will lower the threshold:
 
 #. Edit ``/var/ossec/etc/manager.conf`` and change ``<log_alert_level>`` from 3 to 1 so that the ``<alerts>``
-   section looks like the one below.  Now alerts of all severity levels except level 0 will show up in Kibana.
+   section looks like the one below. Now alerts of all severity levels except level 0 will show up in Kibana.
 
     .. code-block:: xml
 
@@ -206,7 +206,7 @@ See what happened according to Kibana
 Return settings back to normal
 ------------------------------
 
-#. In linux-agent, edit the ``<client_buffer>`` section of ``/var/ossec/etc/agent.conf`` file back to this:
+#. In linux-agent, edit the ``<client_buffer>`` section of the ``/var/ossec/etc/agent.conf`` file back to this:
 
     .. code-block:: xml
 
@@ -231,7 +231,7 @@ Return settings back to normal
 
         # service wazuh-agent restart
 
-#. In wazuh-manager, edit the ``<alerts>`` section of ``/var/ossec/etc/manager.conf`` file back to this:
+#. In wazuh-manager, edit the ``<alerts>`` section of the ``/var/ossec/etc/manager.conf`` file back to this:
 
    .. code-block:: xml
 

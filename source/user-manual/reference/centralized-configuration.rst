@@ -108,7 +108,7 @@ shared.conf
 
 The ``shared.conf`` is only valid on server installations.
 
-The ``shared.conf`` may exist in each group folder at ``/var/ossec/etc/shared``.
+The ``shared.conf`` can exist in each group folder at ``/var/ossec/etc/shared``.
 
 For example, for the ``group1`` group, it is in ``/var/ossec/etc/shared/group1``.  Each of these files should be readable by the ``wazuh`` user.
 
@@ -146,7 +146,7 @@ The following is an example of how a centralized configuration can be done.
 
 1. Configure the ``shared.conf`` file:
 
-    Edit the file corresponding to the agent group. For example, for the ``default`` group, edit the file ``/var/ossec/etc/shared/default/shared.conf``. If the file does not exist, create it:
+    Edit the file corresponding to the agent group. For example, for the ``default`` group, edit the file ``/var/ossec/etc/shared/default/shared.conf``. If the file does not exist, you need to create it:
 
     .. code-block:: console
 
@@ -184,13 +184,13 @@ The following is an example of how a centralized configuration can be done.
 
 2. Run ``/var/ossec/bin/verify-agent-conf``:
 
-    Each time you make a change to the ``shared.conf`` file, it is important to check for configuration errors. If any errors are reported by this check, they must be fixed before the next step.  Failure to perform this step may allow errors to be pushed to agents which may prevent the agents from running.  At that point, it is very likely that you will be forced to visit each agent manually to recover them.
+    Each time you make a change to the ``shared.conf`` file, it is important to check for configuration errors. If any errors are reported by this check, they must be fixed before the next step. Failure to perform this step might allow errors to be pushed to agents and prevent the agents from running.  At that point, it is very likely that you will be forced to visit each agent manually to recover them.
 
 3. Push the configuration to the agents:
 
     With every agent keepalive (10 seconds default), the agent sends to the manager the checksum of its merge.md file and the manager compares it with the current one. If the received checksum differs from the available one, the Wazuh manager pushes the new file to the agent. The agent will start using the new configuration after being restarted.
 
-    .. note:: Restarting the manager will make the new ``shared.conf`` file available to the agents more quickly.
+    .. note:: Restarting the manager makes the new ``shared.conf`` file available to the agents more quickly.
 
 4. Confirm that the agent received the configuration:
 
@@ -232,7 +232,7 @@ The following is an example of how a centralized configuration can be done.
 
     By default, the agent restarts by itself automatically when it receives a new shared configuration.
 
-    If ``auto_restart`` has been disabled (in the ``<client>`` section of :doc:`Local configuration <ossec-conf/index_agent>`), the agent will have to be manually restarted so that the new ``shared.conf`` file will be used. This can be done as follows:
+    If ``auto_restart`` is disabled in the ``<client>`` section of :doc:`Local configuration <ossec-conf/index_agent>`, the agent needs to be manually restarted so that the new ``shared.conf`` file can be used. This can be done as follows:
 
     .. code-block:: console
 
@@ -246,7 +246,7 @@ The following is an example of how a centralized configuration can be done.
 Precedence
 ----------
 
-It's important to understand which configuration file takes precedence between ``shared.conf`` and ``agent.conf`` when central configuration is used. When central configuration is utilized, the local and the shared configuration are merged, however, the ``agent.conf`` file is read before the shared ``shared.conf`` and the last configuration of any setting will overwrite the previous. Also, if a file path for a particular setting is set in both of the configuration files, both paths will be included in the final configuration.
+It's important to understand which configuration file takes precedence between ``shared.conf`` and ``agent.conf`` when central configuration is used. When central configuration is utilized, the local and the shared configuration are merged, however, the ``agent.conf`` file is read before the shared ``shared.conf`` and the last configuration of any setting overwrites the previous. Also, if a file path for a particular setting is set in both of the configuration files, both paths are included in the final configuration.
 
 For example:
 
@@ -280,7 +280,7 @@ and this configuration in the ``shared.conf`` file.
   </sca>
 
 The final configuration will enable the Security Configuration Assessment module. In addition, it will add the `cis_debian_linux_rcl.yml` to the list of scanned policies.
-In other words, the configuration located at ``shared.conf`` will overwrite the one of the ``agent.conf``.
+In other words, the configuration located in ``shared.conf`` overwrites the one in the ``agent.conf`` file.
 
 How to ignore shared configuration
 ----------------------------------

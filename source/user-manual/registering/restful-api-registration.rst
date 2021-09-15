@@ -78,7 +78,7 @@ Choose the tab corresponding to the Wazuh agent host operating system:
                 # history -d <line to delete>
 
 
-    #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``/var/ossec/etc/agent.conf``.
+    #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file located in ``/var/ossec/etc/agent.conf``.
 
          .. include:: ../../_templates/registrations/common/client_server_section.rst
 
@@ -187,7 +187,7 @@ Choose the tab corresponding to the Wazuh agent host operating system:
                 # Clear-History -Id <line IDs separated by a comma and a whitespace>
 
 
-    #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``C:\Program Files (x86)\ossec-agent\agent.conf``.
+    #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file located in ``C:\Program Files (x86)\ossec-agent\agent.conf``.
 
          .. include:: ../../_templates/registrations/common/client_server_section.rst
 
@@ -258,7 +258,7 @@ Choose the tab corresponding to the Wazuh agent host operating system:
                 # history -d <line to delete>
 
 
-    #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``/Library/Ossec/etc/agent.conf``.
+    #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file located in ``/Library/Ossec/etc/agent.conf``.
 
          .. include:: ../../_templates/registrations/common/client_server_section.rst
 

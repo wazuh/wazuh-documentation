@@ -76,7 +76,7 @@ allow_remote_prefilter_cmd
 
 .. versionadded:: 3.11.0
 
-Allows ``prefilter_cmd`` option apply in remote configuration (*shared.conf*).
+Allows ``prefilter_cmd`` option to be applied in remote configuration (*shared.conf*).
 
 +--------------------+--------------------------------+
 | **Default value**  | no                             |
@@ -93,7 +93,7 @@ Example:
 
 .. note::
 
-   This option only can be activated from the agent side, on its own ``agent.conf``.
+   This option can only be activated from the agent side, on its own ``agent.conf``.
 
 
 .. _reference_ossec_syscheck_auto_ignore:
@@ -163,7 +163,7 @@ All files and subdirectories within the noted directories will also be monitored
 
 Drive letters without directories are valid. It's possible to configure them by removing the last backslash, for example ``D:``.
 
-This is to be set on the system to be monitored (or in the ``shared.conf``, if appropriate).
+This is to be set on the system to be monitored, or in the ``shared.conf`` file, if appropriate.
 
 There is a limit of 64 directories, comma-separated, that can be written in one line .
 

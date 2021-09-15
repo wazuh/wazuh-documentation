@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 .. meta::
-  :description: Check out our documentation to learn about registering Wazuh agents and the registration service with password authorization. 
-  
+  :description: Check out our documentation to learn about registering Wazuh agents and the registration service with password authorization.
+
 .. _password-authorization-registration:
 
 Registration service with password authorization
@@ -17,7 +17,7 @@ Enabling the password authorization option and creating a registration password 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
-#. To enable password authorization amend the Wazuh manager's ``/var/ossec/etc/manager.conf`` configuration file as shown below:
+#. To enable password authorization, amend the Wazuh manager's ``/var/ossec/etc/manager.conf`` configuration file as shown below:
 
          .. code-block:: xml
 
@@ -109,7 +109,7 @@ Choose the tab corresponding to the Wazuh agent host operating system:
 
 
 
-   #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``/var/ossec/etc/agent.conf``.
+   #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file located in ``/var/ossec/etc/agent.conf``.
 
 
          .. include:: ../../_templates/registrations/common/client_server_section.rst
@@ -163,7 +163,7 @@ Choose the tab corresponding to the Wazuh agent host operating system:
 
 
 
-   #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``C:\Program Files (x86)\ossec-agent\agent.conf``.
+   #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file located in ``C:\Program Files (x86)\ossec-agent\agent.conf``.
 
 
          .. include:: ../../_templates/registrations/common/client_server_section.rst
@@ -211,7 +211,7 @@ Choose the tab corresponding to the Wazuh agent host operating system:
 
 
 
-  #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``/Library/Ossec/etc/agent.conf``.
+  #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file located in ``/Library/Ossec/etc/agent.conf``.
 
 
          .. include:: ../../_templates/registrations/common/client_server_section.rst

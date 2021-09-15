@@ -6,9 +6,9 @@ Agent configuration (agent.conf)
 ================================
 
 .. warning::
-    Upgrade from older version than v5.0.0, will create a new agent.conf file and current configuration will be saved into ossec.conf.backup file, restarting configuration from zero.
+    Upgrade from an older version than v5.0.0 creates a new agent.conf file and the current configuration is saved into ossec.conf.backup file, restarting configuration from zero.
 
-The ``agent.conf`` file is the main configuration file on the Wazuh agent. It is located at ``/var/ossec/etc/agent.conf`` on Linux machines. On Windows agents, we can find it at ``C:\Program Files (x86)\ossec-agent\agent.conf``. It is recommended to back up this file before making changes on it. A configuration error may prevent Wazuh services from starting up.
+The ``agent.conf`` file is the main configuration file on the Wazuh agent. It is located at ``/var/ossec/etc/agent.conf`` on Linux machines. On Windows agents, we can find it at ``C:\Program Files (x86)\ossec-agent\agent.conf``. It is recommended to back up this file before making changes to it. A configuration error might prevent Wazuh services from starting up.
 
 The ``agent.conf`` file is in XML format and all of its configuration options are nested in their appropriate section of the file. In this file, the outermost XML tag is ``<wazuh_config>``. There can be more than one ``<wazuh_config>`` tag.
 
@@ -76,7 +76,7 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 | :doc:`gcp-pubsub <gcp-pubsub>`                                      |
 +---------------------------------------------------------------------+
 
-All of the above sections must be located within the top-level ``<wazuh_config>`` tag. In case of adding another ``<wazuh_config>`` tag, it may override the values set on the previous tag.
+All of the above sections must be located within the top-level ``<wazuh_config>`` tag. Adding another ``<wazuh_config>`` tag might override the values set on the previous tag.
 
 
 .. toctree::

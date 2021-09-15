@@ -8,9 +8,9 @@ Supported services
 .. meta::
   :description: Supported services
 
-All the services except ``Inspector`` and ``CloudWatch Logs`` get their data from log files stored in an ``S3`` bucket. These services store their data into log files which are configured inside ``<bucket type='TYPE'> </bucket>`` tags, while ``Inspector`` and ``CloudWatch Logs`` services are configured inside ``<service type='inspector'> </service>`` and ``<service type='cloudwatchlogs'> </service>`` tags, respectively.
+All the services, except for ``Inspector`` and ``CloudWatch Logs``, get their data from log files stored in an ``S3`` bucket. These services store their data into log files which are configured inside ``<bucket type='TYPE'> </bucket>`` tags, while ``Inspector`` and ``CloudWatch Logs`` services are configured inside ``<service type='inspector'> </service>`` and ``<service type='cloudwatchlogs'> </service>`` tags, respectively.
 
-The next table contains the more relevant information about configuring each service in ``agent.conf``:
+The table below contains the most relevant information about configuring each service in ``agent.conf``:
 
 +--------------+--------------------------------------------------+-----------------------+----------------+-----------------------------------------------------------------------------------------------+
 | **Provider** | **Service**                                      | **Configuration tag** | **Type**       | **Path to logs**                                                                              |
