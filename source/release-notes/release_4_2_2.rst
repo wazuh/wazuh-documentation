@@ -29,13 +29,13 @@ Manager
 ^^^^^^^
 
 - `#9133 <https://github.com/wazuh/wazuh/pull/9133>`_ The agent's inventory data on the manager is correctly cleaned up when Syscollector is disabled.
-- `#9779 <https://github.com/wazuh/wazuh/pull/9779>`_ Authd now refuses enrollment attempts if the agent already holds a valid key.
+- `#9779 <https://github.com/wazuh/wazuh/pull/9779>`_ Authd now correctly refuses enrollment attempts if the agent already holds a valid key.
 
 Agent
 ^^^^^
 
 - `#9907 <https://github.com/wazuh/wazuh/pull/9907>`_ Syscollector scan performance is optimized.
-- `#9927 <https://github.com/wazuh/wazuh/pull/9927>`_ The Google Cloud Pub/Sub integration module rework increases the number of processed events per second allowing multithreading. Also, a new ``num_threads`` option is added to module configuration.
+- `#9927 <https://github.com/wazuh/wazuh/pull/9927>`_ The Google Cloud Pub/Sub integration module rework increases the number of processed events per second allowing multithreading and enhancing performance. Also, a new ``num_threads`` option is added to module configuration.
 - `#9964 <https://github.com/wazuh/wazuh/pull/9964>`_ google-cloud-pubsub dependency is now upgraded to the latest stable version (2.7.1).
 - `#9943 <https://github.com/wazuh/wazuh/pull/9443>`_ The WPK installer rollback is reimplemented on Linux.
 
@@ -56,20 +56,20 @@ Wazuh Kibana plugin
 - `#3174 <https://github.com/wazuh/wazuh-kibana-app/pull/3174>`_ The default ``wazuh.monitoring.shards`` app setting is changed from ``2`` to ``1``.
 - `#3189 <https://github.com/wazuh/wazuh-kibana-app/pull/3189>`_ SHA1 field is removed from **Windows Registry** details pane. 
 - `#3250 <https://github.com/wazuh/wazuh-kibana-app/pull/3250>`_ Removed tooltip in header breadcrumb.
-- `#3197 <https://github.com/wazuh/wazuh-kibana-app/pull/3197>`_ Refactored the Health check component.
-- `#3210 <https://github.com/wazuh/wazuh-kibana-app/issues/3210>`_ Added version in package downloaded name in agent deploy command.
-- `#3243 <https://github.com/wazuh/wazuh-kibana-app/pull/3243>`_ Removed restriction to allow only current active agents from vulnerability inventory.
-- `#3175 <https://github.com/wazuh/wazuh-kibana-app/pull/3175>`_ Move API selector and Index Pattern Selector to the header bar.
-- `#3258 <https://github.com/wazuh/wazuh-kibana-app/pull/3258>`_ Health check actions notifications refactored and added debug mode.
-- `#3355 <https://github.com/wazuh/wazuh-kibana-app/pull/3355>`_ Improved visualizations object configuration readability.
-- `#3349 <https://github.com/wazuh/wazuh-kibana-app/pull/3349>`_ Changed the way kibana-vis hides the visualization while loading, this should prevent errors caused by having a 0 height visualization.
+- `#3197 <https://github.com/wazuh/wazuh-kibana-app/pull/3197>`_ Refactoring of Health check component improves user experience.
+- `#3210 <https://github.com/wazuh/wazuh-kibana-app/issues/3210>`_ When deploying a new agent, the **Install and enroll the agent** command now specifies the version in the package downloaded name.
+- `#3243 <https://github.com/wazuh/wazuh-kibana-app/pull/3243>`_ In the vulnerabilities' **Inventory**, the restriction that only allowed current active agents’ information to be shown is removed. Now, it displays the vulnerabilities table regardless of whether the agent is connected or not. 
+- `#3175 <https://github.com/wazuh/wazuh-kibana-app/pull/3175>`_ To improve user experience of the Wazuh Kibana API, the **Index pattern** selector and **API** selector are moved to the the header bar.
+- `#3258 <https://github.com/wazuh/wazuh-kibana-app/pull/3258>`_ Health check actions' notifications are refactored and the process can now be ran in debug mode.
+- `#3355 <https://github.com/wazuh/wazuh-kibana-app/pull/3355>`_ Visualizations and object configuration are refactored, improving readability.
+- `#3349 <https://github.com/wazuh/wazuh-kibana-app/pull/3349>`_ Changed the way kibana-vis hides the visualization while loading. This improvement prevents errors caused by having a 0 height visualization.
 
 
 Wazuh Splunk app
 ^^^^^^^^^^^^^^^^
 
-- `#1083 <https://github.com/wazuh/wazuh-splunk/pull/1083>`_ Added MITRE ATT&CK Framework integration.
-- `#1076 <https://github.com/wazuh/wazuh-splunk/pull/1076>`_ Added MITRE ATT&CK Dashboard integration.
+- `#1083 <https://github.com/wazuh/wazuh-splunk/pull/1083>`_ Added MITRE ATT&CK framework integration.
+- `#1076 <https://github.com/wazuh/wazuh-splunk/pull/1076>`_ Added MITRE ATT&CK dashboard integration.
 - Support for Splunk v8.1.4
 
 Resolved issues
