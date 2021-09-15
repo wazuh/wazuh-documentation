@@ -101,11 +101,11 @@ Agent
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#9710 <https://github.com/wazuh/wazuh/pull/9710>`_               Prevented the manager from hashing the shared configuration too often.
-`#9310 <https://github.com/wazuh/wazuh/pull/9310>`_               Fixed a memory leak in Logcollector when re-subscribing to Windows Eventchannel.
-`#9967 <https://github.com/wazuh/wazuh/pull/9967>`_               Fixed a memory leak in the agent when enrolling for the first time if it had no previous key. 
-`#9934 <https://github.com/wazuh/wazuh/pull/9934>`_               Removed CloudWatchLogs log stream limit when there are more than 50 log streams.
-`#9897 <https://github.com/wazuh/wazuh/pull/9897>`_               Fixed Authd's startup to set up the PID file before loading keys.
+`#9710 <https://github.com/wazuh/wazuh/pull/9710>`_               This fix prevents the manager from hashing the shared configuration too often.
+`#9310 <https://github.com/wazuh/wazuh/pull/9310>`_               Memory leak is fixed in Logcollector when re-subscribing to Windows EventChannel.
+`#9967 <https://github.com/wazuh/wazuh/pull/9967>`_               Memory leak is fixed in the agent when enrolling for the first time with no previous key. 
+`#9934 <https://github.com/wazuh/wazuh/pull/9934>`_               CloudWatchLogs log stream limit, when there are more than 50 log streams, is now removed.
+`#9897 <https://github.com/wazuh/wazuh/pull/9897>`_               Fixed a problem on the Windows installer and now, with this fix, the agent can be successfully uninstalled or upgraded.
 ==============================================================    =============
 
 
@@ -115,7 +115,7 @@ RESTful API
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#9984 <https://github.com/wazuh/wazuh/pull/9984>`_               Fixed a bug with distributed API calls when the cluster is disabled. 
+`#9984 <https://github.com/wazuh/wazuh/pull/9984>`_               An issue with distributed API calls when the cluster is disabled is now fixed. 
 ==============================================================    =============
 
 Wazuh Kibana plugin
