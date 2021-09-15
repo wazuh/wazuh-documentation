@@ -50,7 +50,6 @@ Wazuh Kibana plugin
 - `#3274 <https://github.com/wazuh/wazuh-kibana-app/pull/3274>`_ New modal message is now added when creating a new rule/decoder.
 - `#3503 <https://github.com/wazuh/wazuh-kibana-app/pull/3503>`_ Wazuh introduces a new functionality to change and customize app logos.
 - `#3592 <https://github.com/wazuh/wazuh-kibana-app/pull/3592>`_ The link to the Wazuh documentation Upgrade guide is now included in the message shown when the Wazuh API version and the Wazuh App version mismatch.
-
 - `#3160 <https://github.com/wazuh/wazuh-kibana-app/pull/3160>`_ To improve user experience, module titles are now removed from the dashboards.
 - `#3174 <https://github.com/wazuh/wazuh-kibana-app/pull/3174>`_ The default ``wazuh.monitoring.creation`` app setting is changed from ``d`` to ``w``.
 - `#3174 <https://github.com/wazuh/wazuh-kibana-app/pull/3174>`_ The default ``wazuh.monitoring.shards`` app setting is changed from ``2`` to ``1``.
@@ -83,16 +82,16 @@ Manager
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#9647 <https://github.com/wazuh/wazuh/pull/9647>`_               Fixed a false positive in Vulnerability Detector when packages have multiple conditions in the OVAL feed.
-`#9042 <https://github.com/wazuh/wazuh/pull/9042>`_               Prevented pending agents from keeping their state indefinitely in the manager. 
-`#9088 <https://github.com/wazuh/wazuh/pull/9088>`_               Fixed Remoted to avoid agents in connected state with no group assignation.
-`#9278 <https://github.com/wazuh/wazuh/pull/9278>`_               Fixed a bug in Analysisd that ignored the value of the rule option ``noalert``.
+`#9647 <https://github.com/wazuh/wazuh/pull/9647>`_               A false positive in Vulnerability Detector is no longer generated when packages have multiple conditions in the OVAL feed.
+`#9042 <https://github.com/wazuh/wazuh/pull/9042>`_               This fix prevents pending agents from keeping their state indefinitely in the manager. 
+`#9088 <https://github.com/wazuh/wazuh/pull/9088>`_               An issue in Remoted is fixed. Now, it checks the group an agent belongs to when it receives the keep-alive message and avoids agents in *connected* state with no group assignation.
+`#9278 <https://github.com/wazuh/wazuh/pull/9278>`_               An issue in Analysisd that caused the value of the rule option ``noalert`` to be ignored is now fixed.
 `#9378 <https://github.com/wazuh/wazuh/pull/9378>`_               Fixed Authd's startup to set up the PID file before loading keys.
-`#9295 <https://github.com/wazuh/wazuh/pull/9295>`_               Fixed a bug in Authd that delayed the agent timestamp update when removing agents. 
-`#9705 <https://github.com/wazuh/wazuh/pull/9705>`_               Fixed a bug in Wazuh DB that held wrong agent timestamp data.
-`#9942 <https://github.com/wazuh/wazuh/pull/9942>`_               Fixed a bug in Remoted that kept deleted shared files in the multi-groups' merged.mg file. 
-`#9987 <https://github.com/wazuh/wazuh/pull/9987>`_               Fixed a bug in Analysisd that overwrote its queue socket when launched in test mode. 
-`#9775 <https://github.com/wazuh/wazuh/pull/9775>`_               Fixed AWS WAF log parsing when there are multiple dicts in one line. 
+`#9295 <https://github.com/wazuh/wazuh/pull/9295>`_               An issue in Authd that delayed the agent timestamp update when removing agents is now fixed. 
+`#9705 <https://github.com/wazuh/wazuh/pull/9705>`_               An error in Wazuh DB that held wrong agent timestamp data is now resolved.
+`#9942 <https://github.com/wazuh/wazuh/pull/9942>`_               An issue in Remoted that kept deleted shared files in the multi-groups' merged.mg file is now fixed. 
+`#9987 <https://github.com/wazuh/wazuh/pull/9987>`_               An issue in Analysisd that overwrote its queue socket when launched in test mode  is now resolved. 
+`#9775 <https://github.com/wazuh/wazuh/pull/9775>`_               AWS WAF log parsing error is fixed and log parsing now works correctly when there are multiple dictionaries in one line. 
 ==============================================================    =============
 
 
@@ -104,7 +103,7 @@ Reference                                                         Description
 ==============================================================    =============
 `#9710 <https://github.com/wazuh/wazuh/pull/9710>`_               Prevented the manager from hashing the shared configuration too often.
 `#9310 <https://github.com/wazuh/wazuh/pull/9310>`_               Fixed a memory leak in Logcollector when re-subscribing to Windows Eventchannel.
-`#9967 <https://github.com/wazuh/wazuh/pull/9967>`_               Fixed Remoted to avoid agents in connected state with no group assignation.
+`#9967 <https://github.com/wazuh/wazuh/pull/9967>`_               Fixed a memory leak in the agent when enrolling for the first time if it had no previous key. 
 `#9934 <https://github.com/wazuh/wazuh/pull/9934>`_               Removed CloudWatchLogs log stream limit when there are more than 50 log streams.
 `#9897 <https://github.com/wazuh/wazuh/pull/9897>`_               Fixed Authd's startup to set up the PID file before loading keys.
 ==============================================================    =============
