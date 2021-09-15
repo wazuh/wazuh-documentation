@@ -46,21 +46,21 @@ Wazuh Kibana plugin
 - `#3184 <https://github.com/wazuh/wazuh-kibana-app/pull/3184>`_ You now can access group details directly by using the ``group`` query parameter in the URL. 
 - `#3222 <https://github.com/wazuh/wazuh-kibana-app/pull/3222>`_ `#3292 <https://github.com/wazuh/wazuh-kibana-app/pull/3292>`_ A new configuration is added to disable Wazuh App access from X-Pack/ODFE role.
 - `#3221 <https://github.com/wazuh/wazuh-kibana-app/pull/3221>`_ New confirmation message is now added when closing a form.
-- `#3240 <https://github.com/wazuh/wazuh-kibana-app/pull/3240>`_ A new improvement is implemented to hide navbar Wazuh label.
-- `#3274 <https://github.com/wazuh/wazuh-kibana-app/pull/3274>`_ New modeal message is now added when creating new rule/decoder.
+- `#3240 <https://github.com/wazuh/wazuh-kibana-app/pull/3240>`_ A new improvement is implemented to hide the avbar Wazuh label.
+- `#3274 <https://github.com/wazuh/wazuh-kibana-app/pull/3274>`_ New modal message is now added when creating a new rule/decoder.
 - `#3503 <https://github.com/wazuh/wazuh-kibana-app/pull/3503>`_ Wazuh introduces a new functionality to change and customize app logos.
 - `#3592 <https://github.com/wazuh/wazuh-kibana-app/pull/3592>`_ The link to the Wazuh documentation Upgrade guide is now included in the message shown when the Wazuh API version and the Wazuh App version mismatch.
 
 - `#3160 <https://github.com/wazuh/wazuh-kibana-app/pull/3160>`_ To improve user experience, module titles are now removed from the dashboards.
 - `#3174 <https://github.com/wazuh/wazuh-kibana-app/pull/3174>`_ The default ``wazuh.monitoring.creation`` app setting is changed from ``d`` to ``w``.
 - `#3174 <https://github.com/wazuh/wazuh-kibana-app/pull/3174>`_ The default ``wazuh.monitoring.shards`` app setting is changed from ``2`` to ``1``.
-- `#3189 <https://github.com/wazuh/wazuh-kibana-app/pull/3189>`_ SHA1 field is removed from **Windows Registry** details pane. 
+- `#3189 <https://github.com/wazuh/wazuh-kibana-app/pull/3189>`_ SHA1 field is removed from the **Windows Registry** details pane. 
 - `#3250 <https://github.com/wazuh/wazuh-kibana-app/pull/3250>`_ Removed tooltip in header breadcrumb.
-- `#3197 <https://github.com/wazuh/wazuh-kibana-app/pull/3197>`_ Refactoring of Health check component improves user experience.
+- `#3197 <https://github.com/wazuh/wazuh-kibana-app/pull/3197>`_ Refactoring of the Health check component improves user experience.
 - `#3210 <https://github.com/wazuh/wazuh-kibana-app/issues/3210>`_ When deploying a new agent, the **Install and enroll the agent** command now specifies the version in the package downloaded name.
-- `#3243 <https://github.com/wazuh/wazuh-kibana-app/pull/3243>`_ In the vulnerabilities' **Inventory**, the restriction that only allowed current active agents’ information to be shown is removed. Now, it displays the vulnerabilities table regardless of whether the agent is connected or not. 
-- `#3175 <https://github.com/wazuh/wazuh-kibana-app/pull/3175>`_ To improve user experience of the Wazuh Kibana API, the **Index pattern** selector and **API** selector are moved to the the header bar.
-- `#3258 <https://github.com/wazuh/wazuh-kibana-app/pull/3258>`_ Health check actions' notifications are refactored and the process can now be ran in debug mode.
+- `#3243 <https://github.com/wazuh/wazuh-kibana-app/pull/3243>`_ In the vulnerabilities **Inventory**, the restriction that only allowed current active agents’ information to be shown is removed. Now, it displays the vulnerabilities table regardless of whether the agent is connected or not. 
+- `#3175 <https://github.com/wazuh/wazuh-kibana-app/pull/3175>`_ To improve user experience of the Wazuh Kibana API, the **Index pattern** selector and **API** selector are moved to the header bar.
+- `#3258 <https://github.com/wazuh/wazuh-kibana-app/pull/3258>`_ Health check actions' notifications are refactored and the process can now be run in debug mode.
 - `#3355 <https://github.com/wazuh/wazuh-kibana-app/pull/3355>`_ Visualizations and object configuration are refactored, improving readability.
 - `#3349 <https://github.com/wazuh/wazuh-kibana-app/pull/3349>`_ Changed the way kibana-vis hides the visualization while loading. This improvement prevents errors caused by having a 0 height visualization.
 
