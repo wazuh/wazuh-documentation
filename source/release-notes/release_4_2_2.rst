@@ -11,14 +11,16 @@ This section lists the changes in version 4.2.2. Every update of the Wazuh solut
 Highlights
 ----------
 
+- `#9779 <https://github.com/wazuh/wazuh/pull/9779>`_ Authd now correctly refuses enrollment attempts if the agent already holds a valid key.
+
+
 - `#9927 <https://github.com/wazuh/wazuh/pull/9927>`_ The Google Cloud Pub/Sub integration module rework increases the number of processed events per second allowing multithreading. Also, a new ``num_threads`` option is added to module configuration.
 
+- `#3175 <https://github.com/wazuh/wazuh-kibana-app/pull/3175>`_ To improve user experience of the Wazuh Kibana API, the **Index pattern** selector and **API** selector are moved to the header bar.
+- `#3503 <https://github.com/wazuh/wazuh-kibana-app/pull/3503>`_ Wazuh introduces a new functionality to change and customize app logos.
 
-- `#3175 <https://github.com/wazuh/wazuh-kibana-app/pull/3175>`_
-- `#3503 <https://github.com/wazuh/wazuh-kibana-app/pull/3503>`_
-- `#3222 <https://github.com/wazuh/wazuh-kibana-app/pull/3222>`_
 
-+ Splunk
+- `#1107 <https://github.com/wazuh/wazuh-splunk/pull/1107>`_ Added quick settings to improve the view and selection of API, index, and source type
 
 What's new
 ----------
