@@ -639,6 +639,17 @@ Logcollector
 +                                          +               +----------------------------------------------------------------------------+
 |                                          |               | Any other integer between 1 and 3600.                                      |
 +------------------------------------------+---------------+----------------------------------------------------------------------------+
+| **logcollector.ip_update_interval**      | Description   | IP refresh interval, in seconds. This specifies how often the environment  |
+|                                          |               | IP is obtained to be used by the output format.                            |
+|                                          |               | .. versionadded:: 4.3                                                      |
++                                          +---------------+----------------------------------------------------------------------------+
+|                                          | Default value | 60                                                                         |
++                                          +---------------+----------------------------------------------------------------------------+
+|                                          | Allowed values| 0: It allows to obtain the IP in real-time. Systems with large             |
+|                                          |               | routing tablescan cause a heavy CPU USAGE in wazuh-modulesd.               |
++                                          +               +----------------------------------------------------------------------------+
+|                                          |               | Any other integer between 1 and 3600.                                      |
++------------------------------------------+---------------+----------------------------------------------------------------------------+
 
 Maild
 -----
