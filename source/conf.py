@@ -450,7 +450,7 @@ custom_replacements = {
     "|WAZUH_PREGCC_CHANGE|" : "4.1.3",
     "|WAZUH_LATEST_MINOR|" : "4.2",
     "|WAZUH_PACKAGES_BRANCH|" : "4.2",
-    "|WAZUH_LATEST_ANSIBLE|" : "4.2.0",
+    "|WAZUH_LATEST_ANSIBLE|" : "4.2.2",
     "|WAZUH_LATEST_KUBERNETES|" : "4.1.5",
     "|WAZUH_LATEST_PUPPET|" : "4.1.5",
     "|WAZUH_LATEST_OVA|" : "4.2.1",
