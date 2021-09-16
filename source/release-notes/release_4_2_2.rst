@@ -130,7 +130,7 @@ Reference                                                         Description
 `#3161 <https://github.com/wazuh/wazuh-kibana-app/pull/3161>`_    Links now work correctly when using ``server.basePath`` Kibana setting.
 `#3173 <https://github.com/wazuh/wazuh-kibana-app/pull/3173>`_    In the Vulnerabilities module, a filter error is resolved and PDF reports are generated with complete *Summary* information.
 `#3234 <https://github.com/wazuh/wazuh-kibana-app/pull/3234>`_    Fixed typo error in the **Configuration** tab of the **Settings** page.
-`#3217 <https://github.com/wazuh/wazuh-kibana-app/pull/3217>`_    In the agent summary of the Agents data overview page, fields no longer overlap under certain circumstances and are correctly displayed.
+`#3217 <https://github.com/wazuh/wazuh-kibana-app/pull/3217>`_    In the agent summary of the **Agents** data overview page, fields no longer overlap under certain circumstances and are correctly displayed.
 `#3257 <https://github.com/wazuh/wazuh-kibana-app/pull/3257>`_    An issue when using the **Ruleset Test** is now fixed. Now, all requests are made in the session unless you click **Clear session**.
 `#3237 <https://github.com/wazuh/wazuh-kibana-app/pull/3237>`_    **Visualize** button issue is resolved and the button is displayed when expanding a field in the **Events** tab sidebar.
 `#3244 <https://github.com/wazuh/wazuh-kibana-app/pull/3244>`_    Some modules were missing from the Agents data overview page. This issue is fixed and they are now successfully displayed.
