@@ -10,17 +10,18 @@ This section lists the changes in version 4.2.2. Every update of the Wazuh solut
 
 Highlights
 ----------
+This release includes highlighted features and enhancements
 
-- `#9779 <https://github.com/wazuh/wazuh/pull/9779>`_ Authd now correctly refuses enrollment attempts if the agent already holds a valid key.
+- `#9779 <https://github.com/wazuh/wazuh/pull/9779>`_ Authd now refuses enrollment attempts if the agent already holds a valid key. With this added feature, Authd can only generate new keys if the agent key does not exist on the manager side. Based on this, the manager has the capability to decide if a new key should be generated or not. Since the introduction of Enrollment in version 4.0.0, Wazuh provides the user with an automated mechanism to enroll agents with minimal configuration. This registration method might cause agents to self-register under certain circumstances, even if they were already registered. This improvement prevents this issue from happening and avoids re-registering agents that already have valid keys. 
 
+- `#9927 <https://github.com/wazuh/wazuh/pull/9927>`_ The Google Cloud Pub/Sub integration module is updated to increase processed events per second. The rework of this integration module allows multithreading, increases performance significantly, and adds a new ``num_threads`` option to the module configuration. The new multithreading feature allows pulling messages with multiple subscribers simultaneously, improving the performance drastically. In addition, this new Google Cloud integration includes some improvements in the pulling and acknowledging mechanism and the socket connection as well.
 
-- `#9927 <https://github.com/wazuh/wazuh/pull/9927>`_ The Google Cloud Pub/Sub integration module rework increases the number of processed events per second allowing multithreading. Also, a new ``num_threads`` option is added to module configuration.
 
 - `#3175 <https://github.com/wazuh/wazuh-kibana-app/pull/3175>`_ To improve user experience of the Wazuh Kibana API, the **Index pattern** selector and **API** selector are moved to the header bar.
 - `#3503 <https://github.com/wazuh/wazuh-kibana-app/pull/3503>`_ Wazuh introduces a new functionality to change and customize app logos.
 
 
-- `#1107 <https://github.com/wazuh/wazuh-splunk/pull/1107>`_ Added quick settings to improve the view and selection of API, index, and source type
+- `#1107 <https://github.com/wazuh/wazuh-splunk/pull/1107>`_ Wazuh adds **Quick Settings** to improve the view and selection of the **Wazuh API**, **Index**, and **Source type** of the Wazuh Splunk app. Now users can change the configuration of these elements easily from these new menu in the app. 
 
 What's new
 ----------
