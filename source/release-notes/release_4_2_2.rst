@@ -142,7 +142,7 @@ Reference                                                         Description
 `#3303 <https://github.com/wazuh/wazuh-kibana-app/pull/3303>`_    An error in reports is fixed and now the **Alerts Summary** of modules is generated completely.
 `#3315 <https://github.com/wazuh/wazuh-kibana-app/pull/3315>`_    Fixed dark mode visualization background in PDF reports.
 `#3309 <https://github.com/wazuh/wazuh-kibana-app/pull/3309>`_    Kibana integrations are now adapted to Kibana 7.11 and 7.12. 
-`#3306 <https://github.com/wazuh/wazuh-kibana-app/pull/3306>`_    An issue is fixed in the **Agents** overview window and it is now rendered correctly.
+`#3306 <https://github.com/wazuh/wazuh-kibana-app/pull/3306>`_    An issue is fixed in the **Agents** overview window and is now rendered correctly.
 `#3326 <https://github.com/wazuh/wazuh-kibana-app/pull/3326>`_    Fixed an issue with miscalculation of table width in PDF reports. With this fix, tables are displayed correctly.
 `#3323 <https://github.com/wazuh/wazuh-kibana-app/pull/3323>`_    ``visData`` table property is normalized for 7.12 backward compatibility and **Alerts Summary** table is shown in PDF reports.
 `#3358 <https://github.com/wazuh/wazuh-kibana-app/pull/3358>`_    Export-to-CSV buttons in dashboard tables are now fixed.
