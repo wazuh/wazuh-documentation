@@ -46,7 +46,6 @@ Wazuh Kibana plugin
 - `#3184 <https://github.com/wazuh/wazuh-kibana-app/pull/3184>`_ You now can access group details directly by using the ``group`` query parameter in the URL. 
 - `#3222 <https://github.com/wazuh/wazuh-kibana-app/pull/3222>`_ `#3292 <https://github.com/wazuh/wazuh-kibana-app/pull/3292>`_ A new configuration is added to disable Wazuh App access from X-Pack/ODFE role.
 - `#3221 <https://github.com/wazuh/wazuh-kibana-app/pull/3221>`_ New confirmation message is now displayed when closing a form.
-- `#3274 <https://github.com/wazuh/wazuh-kibana-app/pull/3274>`_ New modal message is now added when creating a new rule/decoder.
 - `#3503 <https://github.com/wazuh/wazuh-kibana-app/pull/3503>`_ Wazuh introduces a new functionality to change and customize app logos.
 - `#3592 <https://github.com/wazuh/wazuh-kibana-app/pull/3592>`_ The link to the Wazuh documentation Upgrade guide is now included in the message shown when the Wazuh API version and the Wazuh App version mismatch.
 - `#3160 <https://github.com/wazuh/wazuh-kibana-app/pull/3160>`_ To improve user experience, module titles are now removed from the dashboards.
@@ -59,7 +58,6 @@ Wazuh Kibana plugin
 - `#3243 <https://github.com/wazuh/wazuh-kibana-app/pull/3243>`_ In the vulnerabilities **Inventory**, the restriction that only allowed current active agents’ information to be shown is removed. Now, it displays the vulnerabilities table regardless of whether the agent is connected or not. 
 - `#3175 <https://github.com/wazuh/wazuh-kibana-app/pull/3175>`_ To improve user experience of the Wazuh Kibana API, the **Index pattern** selector and **API** selector are moved to the header bar.
 - `#3258 <https://github.com/wazuh/wazuh-kibana-app/pull/3258>`_ Health check actions' notifications are refactored and the process can now be run in debug mode.
-- `#3355 <https://github.com/wazuh/wazuh-kibana-app/pull/3355>`_ Visualizations and object configuration are refactored, improving readability.
 - `#3349 <https://github.com/wazuh/wazuh-kibana-app/pull/3349>`_ Changed the way kibana-vis hides the visualization while loading. This improvement prevents errors caused by having a 0 height visualization.
 
 
@@ -71,6 +69,7 @@ Wazuh Splunk app
 - `#1109 <https://github.com/wazuh/wazuh-splunk/pull/1109>`_ Added CVE Dashboard
 - `#1104 <https://github.com/wazuh/wazuh-splunk/pull/1104>`_ Added new source type selector to customize queries used by dashboards
 - `#1107 <https://github.com/wazuh/wazuh-splunk/pull/1107>`_ Added quick settings to improve the view and selection of API, index, and source type
+- `#1118 <https://github.com/wazuh/wazuh-splunk/pull/1118>`_ Upgrades jQuery version from 2.1.0 to 3.5.0
 - Support for Splunk 8.1.4. 
 - Support for Splunk 8.2.2
 
@@ -131,30 +130,28 @@ Reference                                                         Description
 `#3161 <https://github.com/wazuh/wazuh-kibana-app/pull/3161>`_    Links now work correctly when using ``server.basePath`` Kibana setting.
 `#3173 <https://github.com/wazuh/wazuh-kibana-app/pull/3173>`_    In the Vulnerabilities module, a filter error is resolved and PDF reports are generated with complete *Summary* information.
 `#3234 <https://github.com/wazuh/wazuh-kibana-app/pull/3234>`_    Fixed typo error in the **Configuration** tab of the **Settings** page.
-`#3217 <https://github.com/wazuh/wazuh-kibana-app/pull/3217>`_    In the agent summary of the Agents data overview page, fields no longer overlapped under certaing circumstances and are correctly displayed.
-`#3257 <https://github.com/wazuh/wazuh-kibana-app/pull/3257>`_    Fixed Ruleset Test, each request is made in a different session instead of all in the same session.
-`#3237 <https://github.com/wazuh/wazuh-kibana-app/pull/3237>`_    Fixed the ``Visualize`` button is not displaying when expanding a field in the Events sidebar.
-`#3244 <https://github.com/wazuh/wazuh-kibana-app/pull/3244>`_    Fix modules are missing in the agent menu.
-`#3260 <https://github.com/wazuh/wazuh-kibana-app/pull/3260>`_    Fix improving and removing WUI error logs.
-`#3272 <https://github.com/wazuh/wazuh-kibana-app/pull/3272>`_    Fix some errors of PDF reports.
-`#3289 <https://github.com/wazuh/wazuh-kibana-app/pull/3289>`_    Fix TypeError when selecting macOS agent deployment in a Safari Browser.
-`#3297 <https://github.com/wazuh/wazuh-kibana-app/pull/3297>`_    Fix error in how the SCA check's checks are displayed.
-`#3241 <https://github.com/wazuh/wazuh-kibana-app/pull/3241>`_    Fixed message of error when add sample data fails.
-`#3244 <https://github.com/wazuh/wazuh-kibana-app/pull/3244>`_    Fixed modules are missing in the agent menu.
-`#3303 <https://github.com/wazuh/wazuh-kibana-app/pull/3303>`_    Fixed Alerts Summary of modules for reports.
-`#3315 <https://github.com/wazuh/wazuh-kibana-app/pull/3315>`_    Fixed dark mode visualization background in pdf reports.
-`#3309 <https://github.com/wazuh/wazuh-kibana-app/pull/3309>`_    Adapt Kibana integrations to Kibana 7.11 and 7.12. 
-`#3306 <https://github.com/wazuh/wazuh-kibana-app/pull/3306>`_    Fixed error agent view does not render correctly.
-`#3326 <https://github.com/wazuh/wazuh-kibana-app/pull/3326>`_    Fixed miscalculation in table column width in PDF reports.
-`#3323 <https://github.com/wazuh/wazuh-kibana-app/pull/3323>`_    Normalized visData table property for 7.12 retro-compatibility.
-`#3355 <https://github.com/wazuh/wazuh-kibana-app/pull/3355>`_    Fixed error that caused the labels in certain visualizations to overlap.
-`#3358 <https://github.com/wazuh/wazuh-kibana-app/pull/3358>`_    Fixed export to csv button in dashboards tables.
-`#3345 <https://github.com/wazuh/wazuh-kibana-app/pull/3345>`_    Fixed Elastic UI breaking changes in 7.12.
-`#3347 <https://github.com/wazuh/wazuh-kibana-app/pull/3347>`_    Fixed Wazuh main menu and breadcrumb render issues.
-`#3397 <https://github.com/wazuh/wazuh-kibana-app/pull/3397>`_    Fixed generation of huge logs from backend errors.
-`#3593 <https://github.com/wazuh/wazuh-kibana-app/pull/3593>`_    Fixed vulnerabilities flyout not showing alerts if the vulnerability had a field missing.
-`#3240 <https://github.com/wazuh/wazuh-kibana-app/pull/3240>`_    A new improvement is implemented to hide the navbar Wazuh label.
-
+`#3217 <https://github.com/wazuh/wazuh-kibana-app/pull/3217>`_    In the agent summary of the Agents data overview page, fields no longer overlap under certain circumstances and are correctly displayed.
+`#3257 <https://github.com/wazuh/wazuh-kibana-app/pull/3257>`_    An issue when using the **Ruleset Test** is now fixed. Now, all requests are made in the session unless you click **Clear session**.
+`#3237 <https://github.com/wazuh/wazuh-kibana-app/pull/3237>`_    **Visualize** button issue is resolved and the button is displayed when expanding a field in the **Events** tab sidebar.
+`#3244 <https://github.com/wazuh/wazuh-kibana-app/pull/3244>`_    Some modules were missing from the Agents data overview page. This issue is fixed and they are now successfully displayed.
+`#3260 <https://github.com/wazuh/wazuh-kibana-app/pull/3260>`_    With this fix, *App log messages* are improved and WUI error logs removed.
+`#3272 <https://github.com/wazuh/wazuh-kibana-app/pull/3272>`_    Some errors on PDF reports are fixed.
+`#3289 <https://github.com/wazuh/wazuh-kibana-app/pull/3289>`_    When deploying a new agent, selecting macOS as the operating system in a Safari browser no longer generates a TypeError.
+`#3297 <https://github.com/wazuh/wazuh-kibana-app/pull/3297>`_    An issue in the Security configuration assessment module is fixed. SCA checks are displayed correctly.
+`#3241 <https://github.com/wazuh/wazuh-kibana-app/pull/3241>`_    An issue with an error message when adding sample data fails is fixed.
+`#3303 <https://github.com/wazuh/wazuh-kibana-app/pull/3303>`_    An error in reports is fixed and now the **Alerts Summary** of modules is generated completely.
+`#3315 <https://github.com/wazuh/wazuh-kibana-app/pull/3315>`_    Fixed dark mode visualization background in PDF reports.
+`#3309 <https://github.com/wazuh/wazuh-kibana-app/pull/3309>`_    Kibana integrations are now adapted to Kibana 7.11 and 7.12. 
+`#3306 <https://github.com/wazuh/wazuh-kibana-app/pull/3306>`_    An issue is fixed in the **Agents** overview window and it is now rendered correctly.
+`#3326 <https://github.com/wazuh/wazuh-kibana-app/pull/3326>`_    Fixed an issue with miscalculation of table width in PDF reports. With this fix, tables are displayed correctly.
+`#3323 <https://github.com/wazuh/wazuh-kibana-app/pull/3323>`_    ``visData`` table property is normalized for 7.12 backward compatibility and **Alerts Summary** table is shown in PDF reports.
+`#3358 <https://github.com/wazuh/wazuh-kibana-app/pull/3358>`_    Export-to-CSV buttons in dashboard tables are now fixed.
+`#3345 <https://github.com/wazuh/wazuh-kibana-app/pull/3345>`_    Fixed Elastic UI breaking changes errors in 7.12.
+`#3347 <https://github.com/wazuh/wazuh-kibana-app/pull/3347>`_    Wazuh main menu and breadcrumb render issues are now fixed.
+`#3397 <https://github.com/wazuh/wazuh-kibana-app/pull/3397>`_    This fix prevents some errors from causing a massive increase in logs size.
+`#3593 <https://github.com/wazuh/wazuh-kibana-app/pull/3593>`_    Fixed an issue in the Vulnerabilities pane that did not show alerts if the vulnerability had a field missing.
+`#3240 <https://github.com/wazuh/wazuh-kibana-app/pull/3240>`_    This fix correctly hides the navbar Wazuh label.
+`#3355 <https://github.com/wazuh/wazuh-kibana-app/pull/3355>`_    Labels of some visualizations no longer overlap, improving readability. 
 ==============================================================    =============
 
 Wazuh Splunk app
