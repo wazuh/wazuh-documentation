@@ -45,8 +45,7 @@ Wazuh Kibana plugin
 - `#3170 <https://github.com/wazuh/wazuh-kibana-app/pull/3170>`_ **Wazuh support** links are added to the Kibana help menu. You now get quick access to the Wazuh **Documentation**, **Slack channel**, **Projects on GitHub**, and **Google Group**.
 - `#3184 <https://github.com/wazuh/wazuh-kibana-app/pull/3184>`_ You now can access group details directly by using the ``group`` query parameter in the URL. 
 - `#3222 <https://github.com/wazuh/wazuh-kibana-app/pull/3222>`_ `#3292 <https://github.com/wazuh/wazuh-kibana-app/pull/3292>`_ A new configuration is added to disable Wazuh App access from X-Pack/ODFE role.
-- `#3221 <https://github.com/wazuh/wazuh-kibana-app/pull/3221>`_ New confirmation message is now added when closing a form.
-- `#3240 <https://github.com/wazuh/wazuh-kibana-app/pull/3240>`_ A new improvement is implemented to hide the navbar Wazuh label.
+- `#3221 <https://github.com/wazuh/wazuh-kibana-app/pull/3221>`_ New confirmation message is now displayed when closing a form.
 - `#3274 <https://github.com/wazuh/wazuh-kibana-app/pull/3274>`_ New modal message is now added when creating a new rule/decoder.
 - `#3503 <https://github.com/wazuh/wazuh-kibana-app/pull/3503>`_ Wazuh introduces a new functionality to change and customize app logos.
 - `#3592 <https://github.com/wazuh/wazuh-kibana-app/pull/3592>`_ The link to the Wazuh documentation Upgrade guide is now included in the message shown when the Wazuh API version and the Wazuh App version mismatch.
@@ -69,7 +68,11 @@ Wazuh Splunk app
 
 - `#1083 <https://github.com/wazuh/wazuh-splunk/pull/1083>`_ Added MITRE ATT&CK framework integration.
 - `#1076 <https://github.com/wazuh/wazuh-splunk/pull/1076>`_ Added MITRE ATT&CK dashboard integration.
-- Support for Splunk 8.1.4.
+- `#1109 <https://github.com/wazuh/wazuh-splunk/pull/1109>`_ Added CVE Dashboard
+- `#1104 <https://github.com/wazuh/wazuh-splunk/pull/1104>`_ Added new source type selector to customize queries used by dashboards
+- `#1107 <https://github.com/wazuh/wazuh-splunk/pull/1107>`_ Added quick settings to improve the view and selection of API, index, and source type
+- Support for Splunk 8.1.4. 
+- Support for Splunk 8.2.2
 
 Resolved issues
 ---------------
@@ -124,11 +127,11 @@ Wazuh Kibana plugin
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#3159 <https://github.com/wazuh/wazuh-kibana-app/pull/3159>`_    Fixed screen flickers in Cluster visualization.
-`#3161 <https://github.com/wazuh/wazuh-kibana-app/pull/3161>`_    Fixed the broken links when using ``server.basePath`` Kibana setting.
-`#3173 <https://github.com/wazuh/wazuh-kibana-app/pull/3173>`_    Fixed filter in reports.
-`#3234 <https://github.com/wazuh/wazuh-kibana-app/pull/3234>`_    Fixed typo error in Settings/Configuration.
-`#3217 <https://github.com/wazuh/wazuh-kibana-app/pull/3217>`_    Fixed fields overlap in the agent summary screen.
+`#3159 <https://github.com/wazuh/wazuh-kibana-app/pull/3159>`_    Cluster visualization screen flickering is fixed.
+`#3161 <https://github.com/wazuh/wazuh-kibana-app/pull/3161>`_    Links now work correctly when using ``server.basePath`` Kibana setting.
+`#3173 <https://github.com/wazuh/wazuh-kibana-app/pull/3173>`_    In the Vulnerabilities module, a filter error is resolved and PDF reports are generated with complete *Summary* information.
+`#3234 <https://github.com/wazuh/wazuh-kibana-app/pull/3234>`_    Fixed typo error in the **Configuration** tab of the **Settings** page.
+`#3217 <https://github.com/wazuh/wazuh-kibana-app/pull/3217>`_    In the agent summary of the Agents data overview page, fields no longer overlapped under certaing circumstances and are correctly displayed.
 `#3257 <https://github.com/wazuh/wazuh-kibana-app/pull/3257>`_    Fixed Ruleset Test, each request is made in a different session instead of all in the same session.
 `#3237 <https://github.com/wazuh/wazuh-kibana-app/pull/3237>`_    Fixed the ``Visualize`` button is not displaying when expanding a field in the Events sidebar.
 `#3244 <https://github.com/wazuh/wazuh-kibana-app/pull/3244>`_    Fix modules are missing in the agent menu.
@@ -150,6 +153,8 @@ Reference                                                         Description
 `#3347 <https://github.com/wazuh/wazuh-kibana-app/pull/3347>`_    Fixed Wazuh main menu and breadcrumb render issues.
 `#3397 <https://github.com/wazuh/wazuh-kibana-app/pull/3397>`_    Fixed generation of huge logs from backend errors.
 `#3593 <https://github.com/wazuh/wazuh-kibana-app/pull/3593>`_    Fixed vulnerabilities flyout not showing alerts if the vulnerability had a field missing.
+`#3240 <https://github.com/wazuh/wazuh-kibana-app/pull/3240>`_    A new improvement is implemented to hide the navbar Wazuh label.
+
 ==============================================================    =============
 
 Wazuh Splunk app
@@ -166,6 +171,9 @@ Reference                                                         Description
 `#1083 <https://github.com/wazuh/wazuh-splunk/pull/1083>`_        Fixed search bar queries with spaces.
 `#1083 <https://github.com/wazuh/wazuh-splunk/pull/1083>`_        Fixed pinned fields ending with curly brackets.
 `#1099 <https://github.com/wazuh/wazuh-splunk/pull/1099>`_        Fixed issues for Splunk Cloud compatibility.
+`#1103 <https://github.com/wazuh/wazuh-splunk/pull/1103>`_        Fixed missing node name for agent overview
+`#1103 <https://github.com/wazuh/wazuh-splunk/pull/1103>`_        Fixed missing columns for some tables in reports
+`#1112 <https://github.com/wazuh/wazuh-splunk/pull/1112>`_        Fixed expand row feature in Agent File Integrity Monitoring
 ==============================================================    =============
 
 Changelogs
