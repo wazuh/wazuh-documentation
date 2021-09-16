@@ -68,12 +68,12 @@ Wazuh Splunk app
 
 - `#1083 <https://github.com/wazuh/wazuh-splunk/pull/1083>`_ Added MITRE ATT&CK framework integration.
 - `#1076 <https://github.com/wazuh/wazuh-splunk/pull/1076>`_ Added MITRE ATT&CK dashboard integration.
-- `#1109 <https://github.com/wazuh/wazuh-splunk/pull/1109>`_ Added CVE Dashboard
-- `#1104 <https://github.com/wazuh/wazuh-splunk/pull/1104>`_ Added new source type selector to customize queries used by dashboards
-- `#1107 <https://github.com/wazuh/wazuh-splunk/pull/1107>`_ Added quick settings to improve the view and selection of API, index, and source type
-- `#1118 <https://github.com/wazuh/wazuh-splunk/pull/1118>`_ Upgrades jQuery version from 2.1.0 to 3.5.0
-- Support for Splunk 8.1.4. 
-- Support for Splunk 8.2.2
+- `#1109 <https://github.com/wazuh/wazuh-splunk/pull/1109>`_ Wazuh now gives you enhanced insight into the CVE that are affecting an agent. The newly added **Inventory** dashboard in the Vulnerabilities module allows you to visualize information such as name, version, and package architecture, as well as the CVE ID that affects the package.
+- `#1104 <https://github.com/wazuh/wazuh-splunk/pull/1104>`_ New **Source type** selector is now added to customize queries used by dashboards.
+- `#1107 <https://github.com/wazuh/wazuh-splunk/pull/1107>`_ The Wazuh Splunk app now includes a **Quick settings** menu to improve user experience. This enhancement allows you to quickly view and select the **Wazuh API**, **Index**, and **Source type**.
+- `#1118 <https://github.com/wazuh/wazuh-splunk/pull/1118>`_ jQuery version is upgraded from 2.1.0 to 3.5.0.
+- Wazuh supports Splunk 8.1.4. 
+- Wazuh supports Splunk 8.2.2
 
 Resolved issues
 ---------------
