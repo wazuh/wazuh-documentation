@@ -10,18 +10,43 @@ This section lists the changes in version 4.2.2. Every update of the Wazuh solut
 
 Highlights
 ----------
-This release includes highlighted features and enhancements
+This release includes highlighted features and enhancements.
+
+Manager
+^^^^^^^
 
 - `#9779 <https://github.com/wazuh/wazuh/pull/9779>`_ Authd now refuses enrollment attempts if the agent already holds a valid key. With this added feature, Authd can only generate new keys if the agent key does not exist on the manager side. Based on this, the manager has the capability to decide if a new key should be generated or not. Since the introduction of Enrollment in version 4.0.0, Wazuh provides the user with an automated mechanism to enroll agents with minimal configuration. This registration method might cause agents to self-register under certain circumstances, even if they were already registered. This improvement prevents this issue from happening and avoids re-registering agents that already have valid keys. 
 
+Agent
+^^^^^
+
 - `#9927 <https://github.com/wazuh/wazuh/pull/9927>`_ The Google Cloud Pub/Sub integration module is updated to increase processed events per second. The rework of this integration module allows multithreading, increases performance significantly, and adds a new ``num_threads`` option to the module configuration. The new multithreading feature allows pulling messages with multiple subscribers simultaneously, improving the performance drastically. In addition, this new Google Cloud integration includes some improvements in the pulling and acknowledging mechanism, and the socket connection as well.
 
+Wazuh Kibana plugin
+^^^^^^^^^^^^^^^^^^^
 
-- `#3175 <https://github.com/wazuh/wazuh-kibana-app/pull/3175>`_ To improve user experience of the Wazuh Kibana API, the **Index pattern** selector and **API** selector are moved to the header bar.
-- `#3503 <https://github.com/wazuh/wazuh-kibana-app/pull/3503>`_ Wazuh introduces a new functionality to change and customize app logos.
+
+- `#3175 <https://github.com/wazuh/wazuh-kibana-app/pull/3175>`_ Wazuh improves the API selector and Index pattern selector of the Wazuh Kibana plugin, moving both from the main menu to the upper right corner of the header bar for quick access. This new UX improvement allows users to have better management of these two features.  As for visualization, the  **API** selector is displayed when there is more than one to select. The **Index pattern** selector is displayed under the same conditions and only contains index patterns that have Wazuh alerts.
+
+- `#3503 <https://github.com/wazuh/wazuh-kibana-app/pull/3503>`_ Wazuh adds a new functionality that allows users to change the logotype settings of the Wazuh Kibana plugin. From the **Logo Customization** section of the **Configuration** page, users can customize the logos of the app easily and to their liking. Setting options include customization of **Logo App**, **Logo Sidebar**, **Logo Health Check**, and **Logo Reports**. 
+
+.. thumbnail:: ../images/release-notes/4.2.2/Kibana-logo-customization.png
+   :alt: Logo customization settings
+   :align: center
+   :wrap_image: No
 
 
-- `#1107 <https://github.com/wazuh/wazuh-splunk/pull/1107>`_ Wazuh adds **Quick Settings** to improve the view and selection of the **Wazuh API**, **Index**, and **Source type** of the Wazuh Splunk app. Now users can change the configuration of these elements easily from these new menu in the app. 
+Wazuh Splunk app
+^^^^^^^^^^^^^^^^
+
+- `#1107 <https://github.com/wazuh/wazuh-splunk/pull/1107>`_ Wazuh adds **Quick Settings** to improve the view and selection of the **Wazuh API**, **Index**, and **Source type** of the Wazuh Splunk app. Now users can change the configuration of these elements easily from this new menu in the app. 
+
+
+
+.. thumbnail:: ../images/release-notes/4.2.2/splunk-quicksettings-2.png
+   :alt: Quick settings menu
+   :align: center
+   :wrap_image: No
 
 What's new
 ----------
@@ -49,7 +74,7 @@ Wazuh Kibana plugin
 - `#3184 <https://github.com/wazuh/wazuh-kibana-app/pull/3184>`_ You now can access group details directly by using the ``group`` query parameter in the URL. 
 - `#3222 <https://github.com/wazuh/wazuh-kibana-app/pull/3222>`_ `#3292 <https://github.com/wazuh/wazuh-kibana-app/pull/3292>`_ A new configuration is added to disable Wazuh App access from X-Pack/ODFE role.
 - `#3221 <https://github.com/wazuh/wazuh-kibana-app/pull/3221>`_ New confirmation message is now displayed when closing a form.
-- `#3503 <https://github.com/wazuh/wazuh-kibana-app/pull/3503>`_ Wazuh introduces a new functionality to change and customize app logos.
+- `#3503 <https://github.com/wazuh/wazuh-kibana-app/pull/3503>`_ Wazuh introduces a new Logo Customization section that allows you to change and customize app logotypes. 
 - `#3592 <https://github.com/wazuh/wazuh-kibana-app/pull/3592>`_ The link to the Wazuh documentation Upgrade guide is now included in the message shown when the Wazuh API version and the Wazuh App version mismatch.
 - `#3160 <https://github.com/wazuh/wazuh-kibana-app/pull/3160>`_ To improve user experience, module titles are now removed from the dashboards.
 - `#3174 <https://github.com/wazuh/wazuh-kibana-app/pull/3174>`_ The default ``wazuh.monitoring.creation`` app setting is changed from ``d`` to ``w``.
