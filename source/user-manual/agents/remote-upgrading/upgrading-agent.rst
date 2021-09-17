@@ -194,11 +194,11 @@ Using the RESTful API
             "affected_items": [
               {
                 "id": "002",
-                "version": "Wazuh v4.2.1"
+                "version": "Wazuh v4.2.2"
               },
               {
                 "id": "003",
-                "version": "Wazuh v4.2.1"
+                "version": "Wazuh v4.2.2"
               }
             ],
             "total_affected_items": 2,
