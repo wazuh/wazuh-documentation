@@ -121,7 +121,6 @@ Reference                                                         Description
 `#9705 <https://github.com/wazuh/wazuh/pull/9705>`_               An error in Wazuh DB that held wrong agent timestamp data is now resolved.
 `#9942 <https://github.com/wazuh/wazuh/pull/9942>`_               An issue in Remoted that kept deleted shared files in the multi-groups' merged.mg file is now fixed. 
 `#9987 <https://github.com/wazuh/wazuh/pull/9987>`_               An issue in Analysisd that overwrote its queue socket when launched in test mode  is now resolved. 
-`#9775 <https://github.com/wazuh/wazuh/pull/9775>`_               AWS WAF log parsing error is fixed and log parsing now works correctly when there are multiple dictionaries in one line. 
 ==============================================================    =============
 
 
@@ -136,6 +135,7 @@ Reference                                                         Description
 `#9967 <https://github.com/wazuh/wazuh/pull/9967>`_               Memory leak is fixed in the agent when enrolling for the first time with no previous key. 
 `#9934 <https://github.com/wazuh/wazuh/pull/9934>`_               CloudWatchLogs log stream limit, when there are more than 50 log streams, is now removed.
 `#9897 <https://github.com/wazuh/wazuh/pull/9897>`_               Fixed a problem on the Windows installer and now, with this fix, the agent can be successfully uninstalled or upgraded.
+`#9775 <https://github.com/wazuh/wazuh/pull/9775>`_               AWS WAF log parsing error is fixed and log parsing now works correctly when there are multiple dictionaries in one line. 
 ==============================================================    =============
 
 
@@ -206,6 +206,6 @@ Changelogs
 
 More details about these changes are provided in the changelog of each component:
 
-- `wazuh/wazuh <https:xxxx>`_
-- `wazuh/wazuh-kibana-app <https://xxxx>`_
-- `wazuh/wazuh-splunk <https://xxxx>`_
+- `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v4.2.2/CHANGELOG.md>`_
+- `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v4.2.2-7.12.1/CHANGELOG.md>`_
+- `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v4.2.2-8.2.2/CHANGELOG.md>`_
