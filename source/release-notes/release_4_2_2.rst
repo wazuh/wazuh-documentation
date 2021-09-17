@@ -63,7 +63,7 @@ Agent
 ^^^^^
 
 - `#9907 <https://github.com/wazuh/wazuh/pull/9907>`_ Syscollector scan performance is optimized.
-- `#9927 <https://github.com/wazuh/wazuh/pull/9927>`_ The Google Cloud Pub/Sub integration module rework increases the number of processed events per second allowing multithreading and enhancing performance. Also, a new ``num_threads`` option is added to module configuration.
+- `#9927 <https://github.com/wazuh/wazuh/pull/9927>`_ The Google Cloud Pub/Sub integration module rework increases the number of processed events per second allowing multithreading and enhancing performance. Also, a new ``num_threads`` option is added to the module configuration.
 - `#9964 <https://github.com/wazuh/wazuh/pull/9964>`_ google-cloud-pubsub dependency is now upgraded to the latest stable version (2.7.1).
 - `#9943 <https://github.com/wazuh/wazuh/pull/9443>`_ The WPK installer rollback is reimplemented on Linux.
 
