@@ -188,17 +188,17 @@ Wazuh Splunk app
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#1070 <https://github.com/wazuh/wazuh-splunk/pull/1070>`_        Cannot pin search filters on Edge - Chip style collapses.
-`#1074 <https://github.com/wazuh/wazuh-splunk/pull/1074>`_        Tables without server side pagination.
-`#1077 <https://github.com/wazuh/wazuh-splunk/pull/1077>`_        Fixed gear icon in fim table.
-`#1078 <https://github.com/wazuh/wazuh-splunk/pull/1078>`_        Added cache control.
+`#1070 <https://github.com/wazuh/wazuh-splunk/pull/1070>`_        Error when trying to pin filters is fixed.
+`#1074 <https://github.com/wazuh/wazuh-splunk/pull/1074>`_        Issue in tables without server side pagination is fixed. This allows to load unlimited items but only 1 page at a time preserving client and server resources.
+`#1077 <https://github.com/wazuh/wazuh-splunk/pull/1077>`_        An issue with the gear icon mispositioned in FIM tables is now fixed.
+`#1078 <https://github.com/wazuh/wazuh-splunk/pull/1078>`_        Added cache control. With this fix, a message is displayed if the version of the Wazuh app in your browser does not correspond with the app version installed on Splunk.
 `#1084 <https://github.com/wazuh/wazuh-splunk/pull/1084>`_        Fixed error where tables unset their loading state before finishing API calls.
-`#1083 <https://github.com/wazuh/wazuh-splunk/pull/1083>`_        Fixed search bar queries with spaces.
+`#1083 <https://github.com/wazuh/wazuh-splunk/pull/1083>`_        An issue about search bar queries with spaces is fixed.
 `#1083 <https://github.com/wazuh/wazuh-splunk/pull/1083>`_        Fixed pinned fields ending with curly brackets.
-`#1099 <https://github.com/wazuh/wazuh-splunk/pull/1099>`_        Fixed issues for Splunk Cloud compatibility.
-`#1103 <https://github.com/wazuh/wazuh-splunk/pull/1103>`_        Fixed missing node name for agent overview
-`#1103 <https://github.com/wazuh/wazuh-splunk/pull/1103>`_        Fixed missing columns for some tables in reports
-`#1112 <https://github.com/wazuh/wazuh-splunk/pull/1112>`_        Fixed expand row feature in Agent File Integrity Monitoring
+`#1099 <https://github.com/wazuh/wazuh-splunk/pull/1099>`_        Splunk Cloud compatibility issues are now fixed.
+`#1103 <https://github.com/wazuh/wazuh-splunk/pull/1103>`_        Agents node names are now correctly displayed for agent overview.
+`#1103 <https://github.com/wazuh/wazuh-splunk/pull/1103>`_        Reports no longer have missing columns for some tables and are now displayed correctly.
+`#1112 <https://github.com/wazuh/wazuh-splunk/pull/1112>`_        Issue with expanding row feature in File Integrity Monitoring of agents is now fixed.
 ==============================================================    =============
 
 Changelogs
