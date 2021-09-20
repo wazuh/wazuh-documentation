@@ -90,7 +90,7 @@ In the next example, we show how an Ubuntu Wazuh agent can be configured, regist
   
  
 
-#. Deploy the Wazuh agent with Manager IP defined.
+#. Deploy the Wazuh agent with manager IP defined.
 
     .. code-block:: console  
 
