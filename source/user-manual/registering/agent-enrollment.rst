@@ -10,7 +10,7 @@ Registration using the enrollment method
 
 Wazuh includes a registration process that provides the user with an automated mechanism to enroll agents with minimal configuration steps. This feature is available on Wazuh 4.0.0 and later.
 
-To register an agent using the enrollment method, a manager with a valid IP needs to be configured first. The agent then checks for the registration key in the ``client.keys`` file, and when the file is empty, it automatically requests the key to the configured manager the agent is reporting to.
+To register an agent using the enrollment method, a manager with a valid IP needs to be configured first. The agent then checks for the registration key in the ``client.keys`` file, and when the file is empty, it automatically requests the key from the configured manager the agent is reporting to.
 
 In the same way, if the communication with the manager gets lost, the agent updates its key by requesting a new one from the manager. This allows the recovery of agents’ communication even if the manager deletes, loses, corrupts, or replaces the agents’ keys file.
 
@@ -18,7 +18,7 @@ In the same way, if the communication with the manager gets lost, the agent upda
 How it works
 ------------
 
-The agent detects the need for new keys if the ``client.keys`` file is empty during the startup, or if the communication with the manager fails the number of times defined in ``<client><server><max_retries>``, 5 by default. Each time this scenario is detected, the agent requests a new key to the manager using the configuration defined in ``ossec.conf``. 
+The agent detects the need for new keys if the ``client.keys`` file is empty during the startup, or if the communication with the manager fails the number of times defined in ``<client><server><max_retries>``, 5 by default. Each time this scenario is detected, the agent requests a new key from the manager using the configuration defined in ``ossec.conf``. 
 
 By default, the agent runs the enrollment process with the settings below:
 
