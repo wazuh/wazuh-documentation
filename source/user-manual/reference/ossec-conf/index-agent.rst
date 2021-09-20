@@ -31,9 +31,9 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +---------------------------------------------------------------------+
 | Configuration sections                                              |
 +=====================================================================+
-| :doc:`active-response_agent <active-response_agent>`                |
+| :doc:`active-response-agent <active-response-agent>`                |
 +---------------------------------------------------------------------+
-| :doc:`agent-upgrade_agent <agent-upgrade_agent>`                    |
+| :doc:`agent-upgrade-agent <agent-upgrade-agent>`                    |
 +---------------------------------------------------------------------+
 | :doc:`client <client>`                                              |
 +---------------------------------------------------------------------+
@@ -43,11 +43,11 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +---------------------------------------------------------------------+
 | :doc:`github <github-module>`                                       |
 +---------------------------------------------------------------------+
-| :doc:`labels_agent <labels_agent>`                                  |
+| :doc:`labels-agent <labels-agent>`                                  |
 +---------------------------------------------------------------------+
 | :doc:`localfile <localfile>`                                        |
 +---------------------------------------------------------------------+
-| :doc:`logging_agent <logging_agent>`                                |
+| :doc:`logging-agent <logging-agent>`                                |
 +---------------------------------------------------------------------+
 | :doc:`office365 <office365-module>`                                 |
 +---------------------------------------------------------------------+
@@ -83,16 +83,16 @@ All of the above sections must be located within the top-level ``<wazuh_config>`
    :hidden:
    :maxdepth: 1
 
-   active-response_agent
-   agent-upgrade_agent
+   active-response-agent
+   agent-upgrade-agent
    client
    client_buffer
    fluent-forward
    gcp-pubsub
    github-module
-   labels_agent
+   labels-agent
    localfile
-   logging_agent
+   logging-agent
    office365-module
    rootcheck
    sca

@@ -15,7 +15,7 @@ How it works
 
 Configuring labels that will be included in alerts is a straightforward process. It can be done using a simple XML structure that adds information into alerts. Labels can be nested by separating "key" terms by a period for inclusion in JSON formatted alerts.
 
-Information on how to configure labels can be found in the :doc:`Labels section <../reference/ossec-conf/labels_agent>` of ``agent.conf``.
+Information on how to configure labels can be found in the :doc:`Labels section <../reference/ossec-conf/labels-agent>` of ``agent.conf``.
 
 Agent labels can also be centralized using the ``shared.conf`` file, such labels can be set for specific agents at the manager level. When there is pre-existing label that is the same as one the user has defined in ``agent.conf`` or ``shared.conf``, the second one will override the first.
 

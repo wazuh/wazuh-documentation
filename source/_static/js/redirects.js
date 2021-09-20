@@ -35,17 +35,53 @@ removedUrls['x.y'] = [
 */
 
 newUrls['5.0'] = [
-  '/user-manual/reference/ossec-conf/index_agent.html',
-  '/user-manual/reference/ossec-conf/index_manager.html',
-  '/user-manual/reference/ossec-conf/active-response_agent.html',
-  '/user-manual/reference/ossec-conf/active-response_manager.html',
-  '/user-manual/reference/ossec-conf/agent-upgrade_manager.html',
-  '/user-manual/reference/ossec-conf/agent-upgrade_agent.html',
-  '/user-manual/reference/ossec-conf/labels_manager.html',
-  '/user-manual/reference/ossec-conf/labels_agent.html',
-  '/user-manual/reference/ossec-conf/logging_manager.html',
-  '/user-manual/reference/ossec-conf/logging_agent.html',
+  '/user-manual/reference/ossec-conf/index-agent.html',
+  '/user-manual/reference/ossec-conf/index-manager.html',
+  '/user-manual/reference/ossec-conf/active-response-agent.html',
+  '/user-manual/reference/ossec-conf/active-response-manager.html',
+  '/user-manual/reference/ossec-conf/agent-upgrade-manager.html',
+  '/user-manual/reference/ossec-conf/agent-upgrade-agent.html',
+  '/user-manual/reference/ossec-conf/labels-manager.html',
+  '/user-manual/reference/ossec-conf/labels-agent.html',
+  '/user-manual/reference/ossec-conf/logging-manager.html',
+  '/user-manual/reference/ossec-conf/logging-agent.html',
 ];
+
+removedUrls['5.0'] = [
+  '/user-manual/reference/ossec-conf/index.html',
+  '/user-manual/reference/ossec-conf/active-response.html',
+  '/user-manual/reference/ossec-conf/agent-upgrade.html',
+  '/user-manual/reference/ossec-conf/labels.html',
+  '/user-manual/reference/ossec-conf/logging.html',
+];
+
+redirections.push(
+  {
+    'target': ['4.3=>5.0', '5.0=>4.3'],
+    '4.3': '/user-manual/reference/ossec-conf/index.html',
+    '5.0': '/user-manual/reference/ossec-conf/index-manager.html',
+  },
+  {
+    'target': ['4.3=>5.0', '5.0=>4.3'],
+    '4.3': '/user-manual/reference/ossec-conf/active-response.html',
+    '5.0': '/user-manual/reference/ossec-conf/active-response-manager.html',
+  },
+  {
+    'target': ['4.3=>5.0', '5.0=>4.3'],
+    '4.3': '/user-manual/reference/ossec-conf/agent-upgrade.html',
+    '5.0': '/user-manual/reference/ossec-conf/agent-upgrade-manager.html',
+  },
+  {
+    'target': ['4.3=>5.0', '5.0=>4.3'],
+    '4.3': '/user-manual/reference/ossec-conf/labels.html',
+    '5.0': '/user-manual/reference/ossec-conf/labels-manager.html',
+  },
+  {
+    'target': ['4.3=>5.0', '5.0=>4.3'],
+    '4.3': '/user-manual/reference/ossec-conf/logging.html',
+    '5.0': '/user-manual/reference/ossec-conf/logging-manager.html',
+  },
+);
 
 /* Pages added in 4.3 */
 
@@ -268,7 +304,7 @@ redirections.push(
     'target': ['4.0=>4.1', '4.1=>4.0'],
     '4.0': '/installation-guide/wazuh-agent/deployment_variables/linux/deployment_variables_zypper.html',
     '4.1': '/installation-guide/wazuh-agent/deployment_variables/deployment_variables_linux.html',
-  },  
+  },
 );
 
 /* *** RELEASE 4.0 ****/
@@ -1155,7 +1191,7 @@ redirections.push(
       '3.13': '/installation-guide/installing-wazuh-agent/linux/oracle5/wazuh_agent_package_oracle5.html',
       '4.0':  '/installation-guide/wazuh-agent/index.html',
     },
-); 
+);
 
 /* *** RELEASE 3.13 ****/
 

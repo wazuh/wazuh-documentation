@@ -26,7 +26,7 @@ Options
 name
 ^^^^
 
-Specifies the name of the command which is called in the :doc:`active-response <active-response_manager>` section.
+Specifies the name of the command which is called in the :doc:`active-response <active-response-manager>` section.
 
 +--------------------+---------------+
 | **Default value**  | n/a           |

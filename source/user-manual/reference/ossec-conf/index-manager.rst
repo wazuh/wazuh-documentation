@@ -29,11 +29,11 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +---------------------------------------------------------------------+
 | Configuration sections                                              |
 +=====================================================================+
-| :doc:`active-response_manager <active-response_manager>`            |
+| :doc:`active-response-manager <active-response-manager>`            |
 +---------------------------------------------------------------------+
 | :doc:`agentless <agentless>`                                        |
 +---------------------------------------------------------------------+
-| :doc:`agent-upgrade_manager <agent-upgrade_manager>`                |
+| :doc:`agent-upgrade-manager <agent-upgrade-manager>`                |
 +---------------------------------------------------------------------+
 | :doc:`alerts <alerts>`                                              |
 +---------------------------------------------------------------------+
@@ -53,11 +53,11 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +---------------------------------------------------------------------+
 | :doc:`integration  <integration>`                                   |
 +---------------------------------------------------------------------+
-| :doc:`labels_manager <labels_manager>`                              |
+| :doc:`labels-manager <labels-manager>`                              |
 +---------------------------------------------------------------------+
 | :doc:`localfile <localfile>`                                        |
 +---------------------------------------------------------------------+
-| :doc:`logging_manager <logging_manager>`                            |
+| :doc:`logging-manager <logging-manager>`                            |
 +---------------------------------------------------------------------+
 | :doc:`remote <remote>`                                              |
 +---------------------------------------------------------------------+
@@ -109,8 +109,8 @@ All of the above sections must be located within the top-level ``<wazuh_config>`
    :hidden:
    :maxdepth: 1
 
-   active-response_manager
-   agent-upgrade_manager
+   active-response-manager
+   agent-upgrade-manager
    agentless
    alerts
    auth
@@ -122,9 +122,9 @@ All of the above sections must be located within the top-level ``<wazuh_config>`
    gcp-pubsub
    global
    integration
-   labels_manager
+   labels-manager
    localfile
-   logging_manager
+   logging-manager
    remote
    reports
    rootcheck

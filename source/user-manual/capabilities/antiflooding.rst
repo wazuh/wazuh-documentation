@@ -70,7 +70,7 @@ The leaky bucket is totally configurable to adapt to any environment with the us
 Measured configuration
 ^^^^^^^^^^^^^^^^^^^^^^
 
-In the ``<client_buffer>`` section of :doc:`Local configuration <../reference/ossec-conf/index_agent>`, it is possible to disable the buffer, configure the size of the buffer (in number of events), and configure its throughput limit measured in EPS, or event-per-second.
+In the ``<client_buffer>`` section of :doc:`Local configuration <../reference/ossec-conf/index-agent>`, it is possible to disable the buffer, configure the size of the buffer (in number of events), and configure its throughput limit measured in EPS, or event-per-second.
 
 - Disable buffer: This parameter disables the use of the leaky bucket, resulting in no restriction on the rate of events transmitted by the agent to the manger.  This is how previous versions of the agent were set up.
 

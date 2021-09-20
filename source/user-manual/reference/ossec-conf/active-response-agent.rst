@@ -2,8 +2,8 @@
 
 .. _reference_ossec_active_response_agent:
 
-active-response (Agent)
-=======================
+active-response
+===============
 
 .. topic:: XML section name
 

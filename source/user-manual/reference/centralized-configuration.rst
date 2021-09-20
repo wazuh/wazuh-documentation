@@ -232,7 +232,7 @@ The following is an example of how a centralized configuration can be done.
 
     By default, the agent restarts by itself automatically when it receives a new shared configuration.
 
-    If ``auto_restart`` is disabled in the ``<client>`` section of :doc:`Local configuration <ossec-conf/index_agent>`, the agent needs to be manually restarted so that the new ``shared.conf`` file can be used. This can be done as follows:
+    If ``auto_restart`` is disabled in the ``<client>`` section of :doc:`Local configuration <ossec-conf/index-agent>`, the agent needs to be manually restarted so that the new ``shared.conf`` file can be used. This can be done as follows:
 
     .. code-block:: console
 

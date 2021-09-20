@@ -2,8 +2,8 @@
 
 .. _reference_ossec_agent_upgrade_manager:
 
-agent-upgrade (Manager)
-=======================
+agent-upgrade
+=============
 
 .. topic:: XML section name
 

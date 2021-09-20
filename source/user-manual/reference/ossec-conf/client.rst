@@ -289,7 +289,7 @@ disable-active-response
 
 .. warning::
 
-        This is an obsolete method to disable active response. The recommended way is by configuring as shown in the :doc:`active-response <active-response_agent>` section.
+        This is an obsolete method to disable active response. The recommended way is by configuring as shown in the :doc:`active-response <active-response-agent>` section.
 
 +--------------------+---------------------+
 | **Default value**  | no                  |

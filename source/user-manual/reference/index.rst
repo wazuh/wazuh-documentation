@@ -15,8 +15,8 @@ This part of the user manual will cover the configuration files used by Wazuh an
     .. toctree::
        :maxdepth: 1
 
-       ossec-conf/index_manager
-       ossec-conf/index_agent
+       ossec-conf/index-manager
+       ossec-conf/index-agent
        centralized-configuration.rst
        internal-options
        daemons/index

@@ -2,8 +2,8 @@
 
 .. _reference_ossec_active_response_manager:
 
-active-response (Manager)
-=========================
+active-response
+===============
 
 .. topic:: XML section name
 
