@@ -39,7 +39,7 @@ Options
 - `ciphers`_
 
 disabled
---------
+^^^^^^^^
 
 Toggles the execution of the Auth daemon on or off.
 
@@ -63,7 +63,7 @@ Allow listening for new agents on TLS port (1515 by default).
 +--------------------+---------------------+
 
 port
-----
+^^^^
 
 Defines the TCP port number for listening to connections.
 
@@ -76,7 +76,7 @@ Defines the TCP port number for listening to connections.
 .. _auth_use_source_ip:
 
 use_source_ip
--------------
+^^^^^^^^^^^^^
 
 Toggles the use of the client's source IP address or the use of "any" to add an agent.
 
@@ -87,11 +87,11 @@ Toggles the use of the client's source IP address or the use of "any" to add an 
 +--------------------+---------------------+
 
 force
------
+^^^^^
 
 .. versionadded:: 4.3.0
 
-The agent replacement option are configured inside this tag. All conditions must be satisfied to perform the replacement.
+The agent replacement options are configured inside this tag. All conditions must be satisfied to perform the replacement.
 
 .. code-block:: xml
 
@@ -114,12 +114,12 @@ Toggles whether or not to force the insertion of an agent if there is a duplicat
 
 **disconnected_time**
 
-This option, when enabled, specifies that the replacement will be performed only for agents that have been disconnected longer than the value configured in the setting but keeping the active agents. To replace any agent regardless its state the option should be disabled.
+This option, when enabled, specifies that the replacement will be performed only for agents that have been disconnected longer than the value configured in the setting. To replace any agent regardless of its state the option should be disabled.
 
 +--------------------+----------------------------------------------------------------------------+
 | **Default value**  | 1h                                                                         |
 +--------------------+----------------------------------------------------------------------------+
-| **Allowed values** | Any number greater than or equal to interval. Allowed sufixes (s, m, h, d).|
+| **Allowed values** | Any number greater than or equal to zero. Allowed suffixes (s, m, h, d).   |
 +--------------------+----------------------------------------------------------------------------+
 
 Attributes:
@@ -132,23 +132,23 @@ Attributes:
 
 Value ``no`` means to force replacement even for active agents.
 
-Value ``0`` means to force replacement for any disconnected agent.
+Value ``0`` means to force the replacement of any disconnected agent.
 
 **after_registration_time**
 
-Specifies that the agent replacement will be performed only when the agent registration age is greater than the value configured in the settings.
+Specifies that the agent replacement will be performed only when the time passed since the agent registration is greater than the value configured in the setting.
 
 +--------------------+----------------------------------------------------------------------------+
 | **Default value**  | 1h                                                                         |
 +--------------------+----------------------------------------------------------------------------+
-| **Allowed values** | Any number greater than or equal to interval. Allowed sufixes (s, m, h, d).|
+| **Allowed values** | Any number greater than or equal to zero. Allowed suffixes (s, m, h, d).   |
 +--------------------+----------------------------------------------------------------------------+
 
 Value ``0`` means to always force replacement.
 
 **key_mismatch**
 
-Defines whether or not the agent replacent only occurs when there is a key mismatch.
+Defines whether or not the agent replacement only occurs when the key held by the agent is different than the one registered by the manager.
 
 +--------------------+---------------------+
 | **Default value**  | yes                 |
@@ -157,7 +157,7 @@ Defines whether or not the agent replacent only occurs when there is a key misma
 +--------------------+---------------------+
 
 purge
------
+^^^^^
 
 Toggles the deletion of client keys on or off when agents are removed.
 
@@ -170,7 +170,7 @@ Toggles the deletion of client keys on or off when agents are removed.
 When set to ``no``, removed agents will remain in the client keys file marked as removed.  When set to ``yes``, the client keys file will be purged.
 
 use_password
-------------
+^^^^^^^^^^^^
 
 Toggles shared password authentication on or off.
 
@@ -185,7 +185,7 @@ When enabled, the shared password will be read from the ``/var/ossec/etc/authd.p
 If this file does not exist, a **random password** will be generated.
 
 ssl_agent_ca
-------------
+^^^^^^^^^^^^
 
 Specifies the path to the CA certificate used to verify clients. It can be referred to a relative path under the Wazuh installation directory, or a full path.
 
@@ -194,7 +194,7 @@ Specifies the path to the CA certificate used to verify clients. It can be refer
 +--------------------+---------------------+
 
 ssl_verify_host
----------------
+^^^^^^^^^^^^^^^
 
 Toggles source host verification on and off when a CA certificate is specified. This means that the client source IP address will be validated using the *Common Name* field.
 
@@ -205,7 +205,7 @@ Toggles source host verification on and off when a CA certificate is specified. 
 +--------------------+---------------------+
 
 ssl_manager_cert
-----------------
+^^^^^^^^^^^^^^^^
 
 Specifies the path to the server SSL certificate. It can be referred to a relative path under the Wazuh installation directory, or a full path.
 
@@ -216,7 +216,7 @@ Specifies the path to the server SSL certificate. It can be referred to a relati
 +--------------------+--------------------------------+
 
 ssl_manager_key
----------------
+^^^^^^^^^^^^^^^
 
 Specifies the path to the server's SSL key. It can be referred to a relative path under the Wazuh installation directory, or a full path.
 
@@ -227,7 +227,7 @@ Specifies the path to the server's SSL key. It can be referred to a relative pat
 +--------------------+--------------------------------+
 
 ssl_auto_negotiate
-------------------
+^^^^^^^^^^^^^^^^^^
 
 Toggles whether or not to auto select the SSL/TLS method.
 
@@ -242,7 +242,7 @@ By default only TLS v1.2 is allowed. When set to ``yes`` the system will negotia
 In older systems, where the **manager does not support TLS v1.2**, this option will be enabled automatically.
 
 ciphers
--------
+^^^^^^^
 
 Sets the list of ciphers for network communication using SSL.
 

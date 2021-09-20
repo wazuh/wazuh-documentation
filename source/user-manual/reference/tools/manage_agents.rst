@@ -16,7 +16,7 @@ Usage
 
 .. code-block:: none
 
-    manage_agents -[VhljL] [-a <ip> -n <name>] [-F sec] [-e id] [-r id] [-i id] [-f file]
+    manage_agents -[VhljL] [-a <ip> -n <name>] [-R sec] [-D sec] [-e id] [-r id] [-i id] [-f file]
 
 Options
 -------
