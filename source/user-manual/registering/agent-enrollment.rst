@@ -8,7 +8,7 @@
 Registration using the enrollment method
 ========================================
 
-Wazuh includes a registration process that provides the user with an automated mechanism to enroll agents with minimal configuration steps. This feature is available on Wazuh 4.0.0 and later.
+Wazuh includes a registration process that provides the user with an automated mechanism to enroll agents with minimal configuration steps. This feature is available for Wazuh 4.0.0 and later.
 
 To register an agent using the enrollment method, a manager with a valid IP needs to be configured first. The agent then checks for the registration key in the ``client.keys`` file, and when the file is empty, it automatically requests the key from the configured manager the agent is reporting to.
 
@@ -22,10 +22,10 @@ The agent detects the need for new keys if the ``client.keys`` file is empty dur
 
 By default, the agent runs the enrollment process with the settings below:
 
-- Same server address configured for reporting in the ``<client><server><address>`` section.
-- Agent name extracted from the hostname of the operating system.
-- No agent belongship to groups.
-- Registration without password nor certificate validation.
+- Same server address configured for reporting in the ``<client><server><address>`` section
+- Agent name extracted from the hostname of the operating system
+- Agents not belonging to groups
+- Registration without password nor certificate validation
 
 Additionally, every possible configuration available as options for ``agent-auth`` binary can be set in ``ossec.conf`` under the section ``<enrollment>``. Each time an agent enrolls, it uses this configuration to request the key.
 
