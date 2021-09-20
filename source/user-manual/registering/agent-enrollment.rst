@@ -12,7 +12,7 @@ Wazuh includes a registration process that provides the user with an automated m
 
 To register an agent using the enrollment method, a manager with a valid IP needs to be configured first. The agent then checks for the registration key in the ``client.keys`` file, and when the file is empty, it automatically requests the key from the configured manager the agent is reporting to.
 
-In the same way, if the communication with the manager gets lost, the agent updates its key by requesting a new one from the manager. This allows the recovery of agents’ communication even if the manager deletes, loses, corrupts, or replaces the agents’ keys file.
+In the same way, if the communication with the manager gets lost, the agent requests a new key providing a hash of the current key. However, if the hash sent by the agent matches with one of the keys registered by the manager, authd rejects the request. This function allows the recovery of agents' communication even if the manager deletes, loses, corrupts, or replaces the agents' keys file.
 
 
 How it works
@@ -29,28 +29,28 @@ By default, the agent runs the enrollment process with the settings below:
 
 Additionally, every possible configuration available as options for ``agent-auth`` binary can be set in ``ossec.conf`` under the section ``<enrollment>``. Each time an agent enrolls, it uses this configuration to request the key.
 
-When the agent already has a key but fails to communicate with the manager several times, it requests a new key appending the hash of the actual key in the registration message. In this way, Authd can verify if the agent already has a valid key to avoid generating a new one that replaces the first one unnecessarily. Although this new feature eliminates the need to register agents through agent-auth, this binary is preserved, allowing the user to use both registration mechanisms.
+When the agent already has a key but fails to communicate with the manager several times, it requests a new key appending a hash of the actual key in the registration message. In this way, Authd can verify if the agent already has a valid key to avoid generating a new one that replaces the first one unnecessarily. Although this new feature eliminates the need to register agents through agent-auth, this binary is preserved, allowing the user to use both registration mechanisms.
 
 
 
 Typical configurations
 ----------------------
 
-- ``Agent name``: The name used to register with the manager can be defined and different from the hostname of the OS. For doing this, ``<enrollment><agent_name>`` needs to be filled with the desired name.
-- ``Centralized groups``: The belongship of the agent to one or more groups can be set in ``<enrollment><groups>``, using a comma-separated string with all the groups where the agent belongs.
-- ``Password validation``: By default, the agent tries to read the password for verification from ``WAZUH_PATH/etc/authd.pass`` in Unix systems and ``WAZUH_PATH/authd.pass`` in Windows systems; as this file doesn’t exist out of the box, the registration runs without a password. Adding this file with a password string makes the agent use it for validation. Also, the path to this file can be modified on the ``<enrollment><authorization_pass_path>`` section.
-- ``Manager Certificate validation``: If a valid file path is defined in ``<enrollment><server_ca_path>``, the agent can only accept a key returned by a trusted manager able to identify itself with certificates that match the one located on ``server_ca_path``.
-- ``Agent Certificate validation``: If valid file paths are defined in ``<enrollment><agent_certificate_path>`` and ``<enrollment><agent_key_path>`` the agent identifies itself with the manager using the provided certificates.
+- *Agent name*: The name used to register with the manager can be configured and be different from the hostname of the operating system. For doing this, ``<enrollment><agent_name>`` needs to be edited with the desired name.
+- *Centralized groups*: Agents belonging to one or more groups can be set in ``<enrollment><groups>`` using a comma-separated string with all the groups where the agent belongs.
+- *Password validation*: By default, the agent tries to read the password for verification from ``WAZUH_PATH/etc/authd.pass`` on Unix systems and ``WAZUH_PATH/authd.pass`` on Windows systems. As these files do not exist out of the box, the registration runs without a password. Adding this file with a password string makes the agent use it for validation. Also, the path to this file can be modified in the ``<enrollment><authorization_pass_path>`` section.
+- *Manager certificate validation*: If a valid file path is defined in ``<enrollment><server_ca_path>``, the agent can only accept a key returned by a trusted manager able to identify itself with certificates that match the one located on ``server_ca_path``.
+- *Agent certificate validation*: If valid file paths are defined in ``<enrollment><agent_certificate_path>`` and ``<enrollment><agent_key_path>``, the agent identifies itself with the manager using the provided certificates.
  
  
 
 Other configurations
 --------------------
 
-- ``Disabled``: The enrollment method can be disabled, setting ``<enrollment><enabled>`` as ``no``. This prevents any registration through Wazuh Agent, needing the use of ``agent-auth`` as in previous versions of Wazuh.
-- ``Delay after enrollment``: After successful enrollment, the agent waits before communicating with the manager to guarantee synchronization between all Wazuh modules and cluster nodes. The waiting time is set to 20 seconds by default and can be modified in ``<enrollment><delay_after_enrollment>``.
-- ``Use source IP``: The agent can request the manager to be registered using the IP of the connection instead of being registered with the option ``any`` by setting ``<enrollment><use_source_ip>`` as ``yes``. This option isn’t compatible with ``agent_address``.
-- ``Agent address``: The agent can request the manager to be registered with a specified IP by setting ``<enrollment><agent_address>`` to any desired address. This option isn’t compatible with ``use_source_ip``.
+- *Disabled*: The enrollment method can be disabled by setting ``<enrollment><enabled>`` as ``no``. This prevents any registration through the Wazuh Agent, needing the use of ``agent-auth`` as in previous versions of Wazuh.
+- *Delay after enrollment*: After successful enrollment, the agent waits before communicating with the manager to guarantee synchronization between all Wazuh modules and cluster nodes. The waiting time is set to 20 seconds by default and can be modified in ``<enrollment><delay_after_enrollment>``.
+- *Use source IP*: The agent can request the manager to be registered using the IP of the connection instead of being registered with the option ``any``. This can be done by setting ``<enrollment><use_source_ip>`` as ``yes``. This option isn’t compatible with ``agent_address``.
+- *Agent address*: The agent can request the manager to be registered with a specified IP by setting ``<enrollment><agent_address>`` to any desired address. This option isn’t compatible with ``use_source_ip``.
 
 
 
@@ -77,10 +77,10 @@ Use case example
 ----------------
 
 Using variables allows us to fully automate the agent registration and configuration. To successfully start the agent and register it, it’s necessary to define at least the variable ``WAZUH_MANAGER``.
-In the next example, we show how an Ubuntu Wazuh Agent can be configured, registered, and started in three minimal steps:
+In the next example, we show how an Ubuntu Wazuh agent can be configured, registered, and started with three simple steps:
 
 
-1. Add the Wazuh repository:
+1. Add the Wazuh repository.
 
 .. code-block:: console
 
@@ -90,7 +90,7 @@ In the next example, we show how an Ubuntu Wazuh Agent can be configured, regist
   
  
 
-2. Deploy Wazuh Agent with Manager IP defined:
+2. Deploy the Wazuh agent with Manager IP defined.
 
 .. code-block:: console  
 
@@ -98,7 +98,7 @@ In the next example, we show how an Ubuntu Wazuh Agent can be configured, regist
   
  
 
-3. Start Wazuh Agent:
+3. Start the Wazuh agent.
 
 .. code-block:: console
 
@@ -114,14 +114,14 @@ After following these steps, we can see the below logs on ``ossec.log`` confirmi
     :width: 100%
 
 
-And ``client.keys`` can now contain the obtained key.
+Moreover, ``client.keys`` can now contain the obtained key.
 
 .. thumbnail:: ../../images/manual/managing-agents/keys.png
     :title: Keys
     :align: left
     :width: 100%
 
-On the manager side, the agent can be found and appear at ``active`` status after a few seconds. Running the following command shows the new registered agent.
+On the manager side, the agent can be found and appears with ``active`` status after a few seconds. Running the following command shows the new registered agent.
  
 .. code-block:: console
 
@@ -134,6 +134,6 @@ On the manager side, the agent can be found and appear at ``active`` status afte
   :width: 100%
 
 
-Wazuh enrollment method highly reduces the burden of registering new agents with the manager. Jointly with deployment using variables, this setup can be performed in only three easy steps.
+Wazuh enrollment method highly reduces the burden of registering new agents with the manager. Jointly with deployment using variables, this setup can be performed in just three easy steps.
 
-This new feature reduces the setup times for our users, allowing them to have Wazuh ready and running in their environment sooner. In addition, this improvement provides a recovery mechanism that eliminates the risk of blocking the monitoring of massive agents in case the client keys get lost.
+This new feature reduces the setup times for our users, allowing them to have Wazuh ready and running on their environment sooner. In addition, this improvement provides a recovery mechanism that eliminates the risk of blocking the monitoring of massive agents in case the client keys get lost.
