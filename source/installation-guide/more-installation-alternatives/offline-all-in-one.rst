@@ -15,136 +15,7 @@ Download packages and configuration files
 
 #. Run the following script from a system with an Internet connection. This will download all required files for the offline installation.
 
-    .. tabs::
-
-      .. group-tab:: Yum
-
-        .. code-block:: bash
-          
-          #!/bin/bash
-
-          WAZUH_MAJOR="4.x"
-          WAZUH_MINOR="4.2"
-          WAZUH_VERSION="4.2.1"
-
-          OD_VERSION="1.13.2"
-          ES_VERSION="7.10.2"
-          
-          BASE_DEST="wazuh-offline"
-
-          install_prerequisites(){
-
-          # Install the prerequisites
-          yum install -y yum-plugin-downloadonly curl unzip wget libcap
-
-          }
-
-          get_wazuh_packages(){
-
-          # Install RPM key and Wazuh repo
-          rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH
-
-          cat > /etc/yum.repos.d/wazuh.repo << EOF
-          [wazuh]
-          gpgcheck=1
-          gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
-          enabled=0
-          name=EL-$releasever - Wazuh
-          baseurl=https://packages.wazuh.com/${WAZUH_MAJOR}/yum/
-          protect=1
-          EOF
-
-          # Download packages for Wazuh, Filebeat and OpenSSL
-          echo "Downloading Wazuh packages..."
-
-          DEST_PATH="${BASE_DEST}/wazuh-packages"
-          yum install --enablerepo=wazuh --downloadonly --downloaddir=${DEST_PATH} wazuh-manager-${WAZUH_VERSION}-1 filebeat-${ES_VERSION}-1
-
-          }
-
-          get_opendistro_packages(){
-
-          # Download packages for Elasticsearch, Kibana and Java
-          echo "Downloading Opendistro packages..."
-
-          DEST_PATH="${BASE_DEST}/opendistro-packages"
-          yum install --enablerepo=wazuh --downloadonly --downloaddir=${DEST_PATH} opendistroforelasticsearch-${OD_VERSION}-1
-
-          DEST_PATH="${BASE_DEST}/opendistro-kibana-packages"
-          yum install --enablerepo=wazuh --downloadonly --downloaddir=${DEST_PATH} opendistroforelasticsearch-kibana-${OD_VERSION}-1
-
-          }
-
-          get_wazuh_files(){
-
-          DEST_PATH="${BASE_DEST}/wazuh_files"
-
-          mkdir ${DEST_PATH}
-
-          mkdir ${DEST_PATH}/filebeat
-
-          mkdir ${DEST_PATH}/kibana
-
-          # Download config templates and Filebeat module
-          echo "Downloading Wazuh configuration files"
-
-          curl -so ${DEST_PATH}/filebeat/filebeat.yml https://packages.wazuh.com/resources/${WAZUH_MINOR}/open-distro/filebeat/7.x/filebeat_all_in_one.yml
-          
-          curl -so ${DEST_PATH}/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/${WAZUH_MINOR}/extensions/elasticsearch/7.x/wazuh-template.json
-          
-          curl -so ${DEST_PATH}/filebeat/wazuh-filebeat-module.tar.gz https://packages.wazuh.com/${WAZUH_MAJOR}/filebeat/wazuh-filebeat-0.1.tar.gz
-          
-          curl -so ${DEST_PATH}/kibana/wazuh_kibana.zip https://packages.wazuh.com/${WAZUH_MAJOR}/ui/kibana/wazuh_kibana-${WAZUH_VERSION}_${ES_VERSION}-1.zip
-
-          }
-
-          get_opendistro_files(){
-
-          DEST_PATH="${BASE_DEST}/opendistro_files"
-
-          mkdir ${DEST_PATH}
-
-          mkdir ${DEST_PATH}/elasticsearch
-
-
-          # Download Elasticsearch config templates
-          echo "Downloading Elasticsearch configuration files"
-
-          curl -so ${DEST_PATH}/elasticsearch/elasticsearch.yml https://packages.wazuh.com/resources/${WAZUH_MINOR}/open-distro/elasticsearch/7.x/elasticsearch_all_in_one.yml
-          
-          curl -so ${DEST_PATH}/elasticsearch/roles.yml https://packages.wazuh.com/resources/${WAZUH_MINOR}/open-distro/elasticsearch/roles/roles.yml
-          
-          curl -so ${DEST_PATH}/elasticsearch/roles_mapping.yml https://packages.wazuh.com/resources/${WAZUH_MINOR}/open-distro/elasticsearch/roles/roles_mapping.yml
-          
-          curl -so ${DEST_PATH}/elasticsearch/internal_users.yml https://packages.wazuh.com/resources/${WAZUH_MINOR}/open-distro/elasticsearch/roles/internal_users.yml      
-          
-          
-          # Download certificates utility files
-          echo "Downloading Wazuh certificates tool"
-          
-          curl -so ${DEST_PATH}/elasticsearch/wazuh-cert-tool.sh https://packages.wazuh.com/resources/${WAZUH_MINOR}/open-distro/tools/certificate-utility/wazuh-cert-tool.sh
-          
-          curl -so ${DEST_PATH}/elasticsearch/instances.yml https://packages.wazuh.com/resources/${WAZUH_MINOR}/open-distro/tools/certificate-utility/instances_aio.yml
-
-
-          # Download Kibana config templates and Kibana app
-          echo "Downloading Kibana configuration files"
-
-          mkdir ${DEST_PATH}/kibana
-
-          curl -so ${DEST_PATH}/kibana/kibana.yml https://packages.wazuh.com/resources/${WAZUH_MINOR}/open-distro/kibana/7.x/kibana_all_in_one.yml
-
-          }
-
-          install_prerequisites
-
-          get_wazuh_packages
-
-          get_opendistro_packages
-
-          get_wazuh_files
-
-          get_opendistro_files    
+    .. include:: /_templates/installations/offline/wazuh-download-script.rst
 
 #. Copy or move ``/wazuh-offline/`` folder contents to a folder accessible to the host from where the offline installation will be carried out.
 
@@ -170,6 +41,12 @@ Install Wazuh manager
         
           # yum install -y ./wazuh-packages/wazuh-manager-4.2.1-1.x86_64.rpm
 
+      .. group-tab:: APT
+
+        .. code-block:: console
+        
+          # apt install -y ./wazuh-packages/wazuh-manager_4.2.1-1_amd64.deb
+
 #. Enable and start the Wazuh manager service:
 
     .. include:: /_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
@@ -191,6 +68,12 @@ Install Elasticsearch
         
           # yum install -y ./opendistro-packages/*.rpm
 
+      .. group-tab:: APT
+
+        .. code-block:: console
+        
+          # apt install -y ./opendistro-packages/*.deb
+
 #. Move a copy of the configuration files to the appropriate locations.
 
     .. tabs::
@@ -203,6 +86,17 @@ Install Elasticsearch
           # \cp ./opendistro_files/elasticsearch/roles.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/
           # \cp ./opendistro_files/elasticsearch/roles_mapping.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/
           # \cp ./opendistro_files/elasticsearch/internal_users.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/
+          # cp ./opendistro_files/elasticsearch/wazuh-cert-tool.sh ~
+          # cp ./opendistro_files/elasticsearch/instances.yml ~
+
+      .. group-tab:: APT
+
+        .. code-block:: console
+        
+          # cp ./opendistro_files/elasticsearch/elasticsearch.yml /etc/elasticsearch/
+          # cp ./opendistro_files/elasticsearch/roles.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/
+          # cp ./opendistro_files/elasticsearch/roles_mapping.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/
+          # cp ./opendistro_files/elasticsearch/internal_users.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/
           # cp ./opendistro_files/elasticsearch/wazuh-cert-tool.sh ~
           # cp ./opendistro_files/elasticsearch/instances.yml ~
 
@@ -280,6 +174,12 @@ Install Filebeat
         
           # yum install -y ./wazuh-packages/filebeat-oss-7.10.2-x86_64.rpm
 
+      .. group-tab:: APT
+
+        .. code-block:: console
+        
+          # apt install -y ./wazuh-packages/filebeat_7.10.2_amd64.deb
+
 #. Move a copy of the configuration files.
 
     .. tabs::
@@ -290,6 +190,14 @@ Install Filebeat
         
           # \cp ./wazuh_files/filebeat/filebeat.yml /etc/filebeat/
           # \cp ./wazuh_files/filebeat/wazuh-template.json /etc/filebeat/
+          # chmod go+r /etc/filebeat/wazuh-template.json
+
+      .. group-tab:: APT
+
+        .. code-block:: console
+        
+          # cp ./wazuh_files/filebeat/filebeat.yml /etc/filebeat/
+          # cp ./wazuh_files/filebeat/wazuh-template.json /etc/filebeat/
           # chmod go+r /etc/filebeat/wazuh-template.json
 
 #. Install the Wazuh module for Filebeat.
@@ -350,6 +258,12 @@ Install Kibana
        
          # yum install -y ./opendistro-kibana-packages/opendistroforelasticsearch-kibana-1.13.2-linux-x64.rpm
 
+     .. group-tab:: APT
+
+       .. code-block:: console
+       
+         # apt install -y ./opendistro-kibana-packages/opendistroforelasticsearch-kibana_1.13.2_amd64.deb
+
 #. Move a copy of the configuration files.
 
      .. tabs::
@@ -359,6 +273,12 @@ Install Kibana
          .. code-block:: console
          
            # \cp ./opendistro_files/kibana/kibana.yml /etc/kibana/
+
+       .. group-tab:: APT
+
+         .. code-block:: console
+         
+           # cp ./opendistro_files/kibana/kibana.yml /etc/kibana/
 
     .. note::
       ``server.host: 0.0.0.0`` in ``/etc/kibana/kibana.yml`` means that Kibana can be accessed from the outside and accepts all the available IPs of the host. This value can be changed for a specific IP if needed.
@@ -396,24 +316,24 @@ Install Kibana
 
     .. include:: /_templates/installations/elastic/common/enable_kibana.rst
 
+#. Access the web interface: 
+
+  .. code-block:: none
+
+      URL: https://<wazuh_server_ip>
+      user: admin
+      password: admin
+
+Upon the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or,  for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser.  Alternatively, a certificate from a trusted authority can be configured. 
+
+
+.. note::  It is highly recommended to change the default passwords of Elasticsearch for the users' passwords. To perform this action, see the :ref:`Elasticsearch tuning <elastic_tuning>` section.
+
+It is also recommended to customize the file ``/etc/elasticsearch/jvm.options`` to improve the performance of Elasticsearch. Learn more about this process in the :ref:`user manual <change_elastic_pass>`.
+
+To uninstall all the components of the all-in-one installation, see the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_open_distro>`.
+
 ..
-  #. Access the web interface: 
-
-    .. code-block:: none
-
-        URL: https://<wazuh_server_ip>
-        user: admin
-        password: admin
-
-  Upon the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or,  for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser.  Alternatively, a certificate from a trusted authority can be configured. 
-
-
-  .. note::  It is highly recommended to change the default passwords of Elasticsearch for the users' passwords. To perform this action, see the :ref:`Elasticsearch tuning <elastic_tuning>` section.
-
-  It is also recommended to customize the file ``/etc/elasticsearch/jvm.options`` to improve the performance of Elasticsearch. Learn more about this process in the :ref:`user manual <change_elastic_pass>`.
-
-  To uninstall all the components of the all-in-one installation, see the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_open_distro>`.
-
   Next steps
   ----------
 
