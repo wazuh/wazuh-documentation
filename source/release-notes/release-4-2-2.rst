@@ -15,7 +15,7 @@ This release includes highlighted features and enhancements.
 Manager
 ^^^^^^^
 
-- `#9779 <https://github.com/wazuh/wazuh/pull/9779>`_ Authd now refuses enrollment attempts if the agent already holds a valid key. With this added feature, Authd can only generate new keys if the agent key does not exist on the manager side. Based on this, the manager has the capability to decide if a new key should be generated or not. Since the introduction of Enrollment in version 4.0.0, Wazuh provides the user with an automated mechanism to enroll agents with minimal configuration. This registration method might cause agents to self-register under certain circumstances, even if they were already registered. This improvement prevents this issue from happening and avoids re-registering agents that already have valid keys. 
+- `#9779 <https://github.com/wazuh/wazuh/pull/9779>`_ Authd now refuses enrollment attempts if the agent already holds a valid key. With this added feature, Authd can only generate new keys if the agent key does not exist on the manager side. Based on this, the manager has the capability to decide if a new key should be generated or not. Since the introduction of *Enrollment* in version 4.0.0, Wazuh provides the user with an automated mechanism to enroll agents with minimal configuration. This registration method might cause agents to self-register under certain circumstances, even if they were already registered. This improvement prevents this issue from happening and avoids re-registering agents that already have valid keys. 
 
 Agent
 ^^^^^
