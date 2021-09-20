@@ -80,31 +80,31 @@ Using variables allows us to fully automate the agent registration and configura
 In the next example, we show how an Ubuntu Wazuh agent can be configured, registered, and started with three simple steps:
 
 
-1. Add the Wazuh repository.
+#. Add the Wazuh repository.
 
-.. code-block:: console
+    .. code-block:: console
 
-  # curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -
-  # echo "deb https://packages.wazuh.com/4.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
-  # apt-get update
+      # curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -
+      # echo "deb https://packages.wazuh.com/4.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
+      # apt-get update
   
  
 
-2. Deploy the Wazuh agent with Manager IP defined.
+#. Deploy the Wazuh agent with Manager IP defined.
 
-.. code-block:: console  
+    .. code-block:: console  
 
-  # WAZUH_MANAGER="192.168.2.129" apt-get install wazuh-agent
-  
+      # WAZUH_MANAGER="192.168.2.129" apt-get install wazuh-agent
+    
  
 
-3. Start the Wazuh agent.
+#. Start the Wazuh agent.
 
-.. code-block:: console
+    .. code-block:: console
 
-  # systemctl daemon-reload
-  # systemctl enable wazuh-agent
-  # systemctl start wazuh-agent
+      # systemctl daemon-reload
+      # systemctl enable wazuh-agent
+      # systemctl start wazuh-agent
 
 After following these steps, we can see the below logs on ``ossec.log`` confirming the enrollment was successful.	
 
