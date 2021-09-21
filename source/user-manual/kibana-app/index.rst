@@ -23,5 +23,7 @@ This manual describes the configuration process to start this plugin and the dif
 
         connect-kibana-app
         features/index
+        wazuh-rbac
         troubleshooting
         reference/index
+        
