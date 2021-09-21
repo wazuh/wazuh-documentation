@@ -99,7 +99,7 @@ Wazuh Splunk app
 - `#1107 <https://github.com/wazuh/wazuh-splunk/pull/1107>`_ The Wazuh Splunk app now includes a **Quick settings** menu to improve user experience. This enhancement allows you to quickly view and select the **Wazuh API**, **Index**, and **Source type**.
 - `#1118 <https://github.com/wazuh/wazuh-splunk/pull/1118>`_ jQuery version is upgraded from 2.1.0 to 3.5.0.
 - Wazuh supports Splunk 8.1.4. 
-- Wazuh supports Splunk 8.2.2
+- Wazuh supports Splunk 8.2.2.
 
 Resolved issues
 ---------------
