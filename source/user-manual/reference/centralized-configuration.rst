@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Learn how to remotely configure agents using shared.conf. In this section you will find which capabilities can be configured remotely.
+
 .. _reference_shared_conf:
 
 Centralized configuration (shared.conf)
