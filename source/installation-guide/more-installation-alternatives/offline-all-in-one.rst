@@ -6,7 +6,7 @@
 Offline step-by-step all-in-one installation
 ============================================
 
-This document will guide you to download Wazuh and the Open Distro for Elasticsearch components. Then, it will guide you to install them from local storage in an all-in-one offline deployment.
+This document will guide you to download Wazuh and the Open Distro for Elasticsearch components and then to install them later when there is no connection to the Internet or from a system without connection in an all-in-one offline deployment.
 
 .. note:: Run ``su`` or ``sudo su`` to gain root privileges. This is necessary to execute the commands below.
 
@@ -15,7 +15,389 @@ Download packages and configuration files
 
 #. Run the following script from a system with an Internet connection. This will download all required files for the offline installation.
 
-    .. include:: /_templates/installations/offline/wazuh-download-script.rst
+    .. tabs::
+
+      .. group-tab:: Yum
+
+        .. code-block:: bash
+          
+          #!/bin/bash
+
+          WAZUH_MAJOR="|CURRENT_MAJOR|"
+          WAZUH_MINOR="|WAZUH_LATEST_MINOR|"
+          WAZUH_VERSION="|WAZUH_LATEST|"
+
+          OD_VERSION="|OPEN_DISTRO_LATEST|"
+          ES_VERSION="|ELASTICSEARCH_LATEST|"
+          
+          BASE_DEST="wazuh-offline"
+
+          install_prerequisites(){
+
+          # Install the prerequisites
+          yum install -y yum-plugin-downloadonly curl unzip wget libcap
+
+          }
+
+          get_wazuh_packages(){
+
+          # Install GPG key and add Wazuh repo
+          rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH
+
+          cat > /etc/yum.repos.d/wazuh.repo << EOF
+          [wazuh]
+          gpgcheck=1
+          gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
+          enabled=0
+          name=EL-$releasever - Wazuh
+          baseurl=https://packages.wazuh.com/${WAZUH_MAJOR}/yum/
+          protect=1
+          EOF
+
+          # Download packages for Wazuh and Filebeat
+          echo "Downloading Wazuh packages..."
+
+          DEST_PATH="${BASE_DEST}/wazuh-packages"
+          yum install --enablerepo=wazuh --downloadonly --downloaddir=${DEST_PATH} wazuh-manager-${WAZUH_VERSION}-|WAZUH_REVISION_YUM_MANAGER_X86| filebeat-${ES_VERSION}-1
+
+          }
+
+          get_opendistro_packages(){
+
+          # Download packages for Elasticsearch, Kibana and Java
+          echo "Downloading Opendistro packages..."
+
+          DEST_PATH="${BASE_DEST}/opendistro-packages"
+          yum install --enablerepo=wazuh --downloadonly --downloaddir=${DEST_PATH} opendistroforelasticsearch-${OD_VERSION}-1
+
+          DEST_PATH="${BASE_DEST}/opendistro-kibana-packages"
+          yum install --enablerepo=wazuh --downloadonly --downloaddir=${DEST_PATH} opendistroforelasticsearch-kibana-${OD_VERSION}-1
+
+          }
+
+          get_wazuh_files(){
+
+          DEST_PATH="${BASE_DEST}/wazuh_files"
+
+          mkdir -p ${DEST_PATH}/filebeat
+
+          mkdir -p ${DEST_PATH}/kibana
+
+          # Download config templates and Filebeat module
+          echo "Downloading Wazuh configuration files"
+
+          curl -so ${DEST_PATH}/filebeat/filebeat.yml https://packages.wazuh.com/resources/${WAZUH_MINOR}/open-distro/filebeat/7.x/filebeat_all_in_one.yml
+          
+          curl -so ${DEST_PATH}/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/${WAZUH_MINOR}/extensions/elasticsearch/7.x/wazuh-template.json
+          
+          curl -so ${DEST_PATH}/filebeat/wazuh-filebeat-module.tar.gz https://packages.wazuh.com/${WAZUH_MAJOR}/filebeat/wazuh-filebeat-0.1.tar.gz
+          
+          curl -so ${DEST_PATH}/kibana/wazuh_kibana.zip https://packages.wazuh.com/${WAZUH_MAJOR}/ui/kibana/wazuh_kibana-${WAZUH_VERSION}_${ES_VERSION}-1.zip
+
+          }
+
+          get_opendistro_files(){
+
+          DEST_PATH="${BASE_DEST}/opendistro_files"
+
+          mkdir -p ${DEST_PATH}/elasticsearch
+
+
+          # Download Elasticsearch config templates
+          echo "Downloading Elasticsearch configuration files"
+
+          curl -so ${DEST_PATH}/elasticsearch/elasticsearch.yml https://packages.wazuh.com/resources/${WAZUH_MINOR}/open-distro/elasticsearch/7.x/elasticsearch_all_in_one.yml
+          
+          curl -so ${DEST_PATH}/elasticsearch/roles.yml https://packages.wazuh.com/resources/${WAZUH_MINOR}/open-distro/elasticsearch/roles/roles.yml
+          
+          curl -so ${DEST_PATH}/elasticsearch/roles_mapping.yml https://packages.wazuh.com/resources/${WAZUH_MINOR}/open-distro/elasticsearch/roles/roles_mapping.yml
+          
+          curl -so ${DEST_PATH}/elasticsearch/internal_users.yml https://packages.wazuh.com/resources/${WAZUH_MINOR}/open-distro/elasticsearch/roles/internal_users.yml      
+          
+          
+          # Download certificates utility files
+          echo "Downloading Wazuh certificates tool"
+          
+          curl -so ${DEST_PATH}/elasticsearch/wazuh-cert-tool.sh https://packages.wazuh.com/resources/${WAZUH_MINOR}/open-distro/tools/certificate-utility/wazuh-cert-tool.sh
+          
+          curl -so ${DEST_PATH}/elasticsearch/instances.yml https://packages.wazuh.com/resources/${WAZUH_MINOR}/open-distro/tools/certificate-utility/instances_aio.yml
+
+
+          # Download Kibana config templates and Kibana app
+          echo "Downloading Kibana configuration files"
+
+          mkdir -p ${DEST_PATH}/kibana
+
+          curl -so ${DEST_PATH}/kibana/kibana.yml https://packages.wazuh.com/resources/${WAZUH_MINOR}/open-distro/kibana/7.x/kibana_all_in_one.yml
+
+          }
+
+          install_prerequisites
+
+          get_wazuh_packages
+
+          get_opendistro_packages
+
+          get_wazuh_files
+
+          get_opendistro_files    
+          
+      .. group-tab:: APT
+
+        .. code-block:: bash
+          
+          #!/bin/bash
+
+          WAZUH_MAJOR="|CURRENT_MAJOR|"
+          WAZUH_MINOR="|WAZUH_LATEST_MINOR|"
+          WAZUH_VERSION="|WAZUH_LATEST|"
+
+          OD_VERSION="|OPEN_DISTRO_LATEST|"
+          ES_VERSION="|ELASTICSEARCH_LATEST|"
+          
+          BASE_DEST="wazuh-offline"
+
+          install_prerequisites(){
+
+          # Install the prerequisites
+          apt install -y aptitude curl apt-transport-https unzip wget libcap2-bin software-properties-common lsb-release gnupg
+          
+          }
+
+          get_wazuh_packages(){
+
+          # Install GPG key and add Wazuh repo
+          curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -
+
+          echo "deb https://packages.wazuh.com/4.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
+          
+          apt update
+          
+          # Download packages for Wazuh and Filebeat
+          echo "Downloading Wazuh packages..."
+
+          DEST_PATH="${BASE_DEST}/wazuh-packages"
+          aptitude clean
+          aptitude --download-only install wazuh-manager filebeat
+          mkdir -p ${DEST_PATH} && cp /var/cache/apt/archives/*.deb ${DEST_PATH}
+
+          }
+
+          get_opendistro_packages(){
+
+          # Download packages for Elasticsearch, Kibana and Java
+          echo "Downloading Opendistro packages..."
+
+          DEST_PATH="${BASE_DEST}/opendistro-packages"
+          aptitude clean
+          aptitude --download-only install elasticsearch-oss opendistroforelasticsearch
+          mkdir -p ${DEST_PATH} && cp /var/cache/apt/archives/*.deb ${DEST_PATH}
+
+          DEST_PATH="${BASE_DEST}/opendistro-kibana-packages"
+          aptitude clean
+          aptitude --download-only install opendistroforelasticsearch-kibana
+          mkdir -p ${DEST_PATH} && cp /var/cache/apt/archives/*.deb ${DEST_PATH}
+          
+          }
+
+          get_wazuh_files(){
+
+          DEST_PATH="${BASE_DEST}/wazuh_files"
+
+          mkdir -p ${DEST_PATH}/filebeat
+
+          mkdir -p ${DEST_PATH}/kibana
+
+          # Download config templates and Filebeat module
+          echo "Downloading Wazuh configuration files"
+
+          curl -so ${DEST_PATH}/filebeat/filebeat.yml https://packages.wazuh.com/resources/${WAZUH_MINOR}/open-distro/filebeat/7.x/filebeat_all_in_one.yml
+          
+          curl -so ${DEST_PATH}/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/${WAZUH_MINOR}/extensions/elasticsearch/7.x/wazuh-template.json
+          
+          curl -so ${DEST_PATH}/filebeat/wazuh-filebeat-module.tar.gz https://packages.wazuh.com/${WAZUH_MAJOR}/filebeat/wazuh-filebeat-0.1.tar.gz
+          
+          curl -so ${DEST_PATH}/kibana/wazuh_kibana.zip https://packages.wazuh.com/${WAZUH_MAJOR}/ui/kibana/wazuh_kibana-${WAZUH_VERSION}_${ES_VERSION}-1.zip
+
+          }
+
+          get_opendistro_files(){
+
+          DEST_PATH="${BASE_DEST}/opendistro_files"
+
+          mkdir -p ${DEST_PATH}/elasticsearch
+
+
+          # Download Elasticsearch config templates
+          echo "Downloading Elasticsearch configuration files"
+
+          curl -so ${DEST_PATH}/elasticsearch/elasticsearch.yml https://packages.wazuh.com/resources/${WAZUH_MINOR}/open-distro/elasticsearch/7.x/elasticsearch_all_in_one.yml
+          
+          curl -so ${DEST_PATH}/elasticsearch/roles.yml https://packages.wazuh.com/resources/${WAZUH_MINOR}/open-distro/elasticsearch/roles/roles.yml
+          
+          curl -so ${DEST_PATH}/elasticsearch/roles_mapping.yml https://packages.wazuh.com/resources/${WAZUH_MINOR}/open-distro/elasticsearch/roles/roles_mapping.yml
+          
+          curl -so ${DEST_PATH}/elasticsearch/internal_users.yml https://packages.wazuh.com/resources/${WAZUH_MINOR}/open-distro/elasticsearch/roles/internal_users.yml      
+          
+          
+          # Download certificates utility files
+          echo "Downloading Wazuh certificates tool"
+          
+          curl -so ${DEST_PATH}/elasticsearch/wazuh-cert-tool.sh https://packages.wazuh.com/resources/${WAZUH_MINOR}/open-distro/tools/certificate-utility/wazuh-cert-tool.sh
+          
+          curl -so ${DEST_PATH}/elasticsearch/instances.yml https://packages.wazuh.com/resources/${WAZUH_MINOR}/open-distro/tools/certificate-utility/instances_aio.yml
+
+
+          # Download Kibana config templates and Kibana app
+          echo "Downloading Kibana configuration files"
+
+          mkdir -p ${DEST_PATH}/kibana
+
+          curl -so ${DEST_PATH}/kibana/kibana.yml https://packages.wazuh.com/resources/${WAZUH_MINOR}/open-distro/kibana/7.x/kibana_all_in_one.yml
+
+          }
+
+          install_prerequisites
+
+          get_wazuh_packages
+
+          get_opendistro_packages
+
+          get_wazuh_files
+
+          get_opendistro_files
+
+      .. group-tab:: ZYpp
+
+        .. code-block:: bash
+          
+          #!/bin/bash
+
+          WAZUH_MAJOR="|CURRENT_MAJOR|"
+          WAZUH_MINOR="|WAZUH_LATEST_MINOR|"
+          WAZUH_VERSION="|WAZUH_LATEST|"
+
+          OD_VERSION="|OPEN_DISTRO_LATEST|"
+          ES_VERSION="|ELASTICSEARCH_LATEST|"
+          
+          BASE_DEST="wazuh-offline"
+
+          install_prerequisites(){
+
+          # Install the prerequisites
+          zypper install -y zip unzip tar libcap-progs
+
+          }
+
+          get_wazuh_packages(){
+
+          # Install GPG key and add Wazuh repo
+          rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH
+
+          cat > /etc/zypp/repos.d/wazuh.repo <<\EOF
+          [wazuh]
+          gpgcheck=1
+          gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
+          enabled=1
+          name=EL-$releasever - Wazuh
+          baseurl=https://packages.wazuh.com/${WAZUH_MAJOR}/yum/
+          protect=1
+          EOF
+
+          # Download packages for Wazuh and Filebeat
+          echo "Downloading Wazuh packages..."
+
+          DEST_PATH="${BASE_DEST}/wazuh-packages"
+          zypper clean
+          zypper install -y --download-only wazuh-manager filebeat
+          mkdir -p ${DEST_PATH} && cp /var/cache/zypp/packages/wazuh/*.rpm ${DEST_PATH}
+
+          }
+
+          get_opendistro_packages(){
+
+          # Download packages for Elasticsearch, Kibana and Java
+          echo "Downloading Opendistro packages..."
+
+          DEST_PATH="${BASE_DEST}/opendistro-packages"
+          zypper clean
+          zypper install -y --download-only opendistroforelasticsearch
+          mkdir -p ${DEST_PATH} && cp /var/cache/zypp/packages/wazuh/*.rpm ${DEST_PATH}
+
+          DEST_PATH="${BASE_DEST}/opendistro-kibana-packages"
+          zypper clean
+          zypper install -y --download-only opendistroforelasticsearch-kibana
+          mkdir -p ${DEST_PATH} && cp /var/cache/zypp/packages/wazuh/*.rpm ${DEST_PATH}
+
+          }
+
+          get_wazuh_files(){
+
+          DEST_PATH="${BASE_DEST}/wazuh_files"
+
+          mkdir -p ${DEST_PATH}/filebeat
+
+          mkdir -p ${DEST_PATH}/kibana
+
+          # Download config templates and Filebeat module
+          echo "Downloading Wazuh configuration files"
+
+          curl -so ${DEST_PATH}/filebeat/filebeat.yml https://packages.wazuh.com/resources/${WAZUH_MINOR}/open-distro/filebeat/7.x/filebeat_all_in_one.yml
+          
+          curl -so ${DEST_PATH}/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/${WAZUH_MINOR}/extensions/elasticsearch/7.x/wazuh-template.json
+          
+          curl -so ${DEST_PATH}/filebeat/wazuh-filebeat-module.tar.gz https://packages.wazuh.com/${WAZUH_MAJOR}/filebeat/wazuh-filebeat-0.1.tar.gz
+          
+          curl -so ${DEST_PATH}/kibana/wazuh_kibana.zip https://packages.wazuh.com/${WAZUH_MAJOR}/ui/kibana/wazuh_kibana-${WAZUH_VERSION}_${ES_VERSION}-1.zip
+
+          }
+
+          get_opendistro_files(){
+
+          DEST_PATH="${BASE_DEST}/opendistro_files"
+
+          mkdir -p ${DEST_PATH}/elasticsearch
+
+
+          # Download Elasticsearch config templates
+          echo "Downloading Elasticsearch configuration files"
+
+          curl -so ${DEST_PATH}/elasticsearch/elasticsearch.yml https://packages.wazuh.com/resources/${WAZUH_MINOR}/open-distro/elasticsearch/7.x/elasticsearch_all_in_one.yml
+          
+          curl -so ${DEST_PATH}/elasticsearch/roles.yml https://packages.wazuh.com/resources/${WAZUH_MINOR}/open-distro/elasticsearch/roles/roles.yml
+          
+          curl -so ${DEST_PATH}/elasticsearch/roles_mapping.yml https://packages.wazuh.com/resources/${WAZUH_MINOR}/open-distro/elasticsearch/roles/roles_mapping.yml
+          
+          curl -so ${DEST_PATH}/elasticsearch/internal_users.yml https://packages.wazuh.com/resources/${WAZUH_MINOR}/open-distro/elasticsearch/roles/internal_users.yml      
+          
+          
+          # Download certificates utility files
+          echo "Downloading Wazuh certificates tool"
+          
+          curl -so ${DEST_PATH}/elasticsearch/wazuh-cert-tool.sh https://packages.wazuh.com/resources/${WAZUH_MINOR}/open-distro/tools/certificate-utility/wazuh-cert-tool.sh
+          
+          curl -so ${DEST_PATH}/elasticsearch/instances.yml https://packages.wazuh.com/resources/${WAZUH_MINOR}/open-distro/tools/certificate-utility/instances_aio.yml
+
+
+          # Download Kibana config templates and Kibana app
+          echo "Downloading Kibana configuration files"
+
+          mkdir -p ${DEST_PATH}/kibana
+
+          curl -so ${DEST_PATH}/kibana/kibana.yml https://packages.wazuh.com/resources/${WAZUH_MINOR}/open-distro/kibana/7.x/kibana_all_in_one.yml
+
+          }
+
+          install_prerequisites
+
+          get_wazuh_packages
+
+          get_opendistro_packages
+
+          get_wazuh_files
+
+          get_opendistro_files    
+
 
 #. Copy or move ``/wazuh-offline/`` folder contents to a folder accessible to the host from where the offline installation will be carried out.
 
