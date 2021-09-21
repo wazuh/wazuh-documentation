@@ -639,7 +639,6 @@ Logcollector
 +                                          +               +----------------------------------------------------------------------------+
 |                                          |               | Any other integer between 1 and 3600.                                      |
 +------------------------------------------+---------------+----------------------------------------------------------------------------+
-+------------------------------------------+---------------+----------------------------------------------------------------------------+
 | **logcollector.ip_update_interval**      | Description   | IP update interval, in seconds. This specifies how often the system        |
 |                                          |               | IP is obtained when the                                                    |
 |                                          |               | :ref:`out_format<ossec_localfile_out_format>` option is used.              |
@@ -650,8 +649,8 @@ Logcollector
 +                                          +---------------+----------------------------------------------------------------------------+
 |                                          | Allowed values| 0: Obtain the IP on demand.                                                |
 |                                          |               |                                                                            |
-|                                          |               | .. warning:: Systems with extensive routing tables                         |
-|                                          |               |    can suffer from high CPU usage                                          |
+|                                          |               | **Warning:** Systems with extensive routing tables                         |
+|                                          |               | can suffer from high CPU usage.                                            |
 +                                          +               +----------------------------------------------------------------------------+
 |                                          |               | Any other integer between 1 and 3600.                                      |
 +------------------------------------------+---------------+----------------------------------------------------------------------------+
