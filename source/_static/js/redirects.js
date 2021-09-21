@@ -55,6 +55,10 @@ removedUrls['5.0'] = [
   '/user-manual/reference/ossec-conf/logging.html',
 ];
 
+
+/* REMINDER: Check the last/current version released. If the version previous to 5.0 is 4.3, there's no further action needed. 
+For versions later than 4.3, this section below needs to be updated.  */
+
 redirections.push(
   {
     'target': ['4.3=>5.0', '5.0=>4.3'],
