@@ -294,7 +294,7 @@ Download packages and configuration files
           # Install GPG key and add Wazuh repo
           rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH
 
-          cat > /etc/zypp/repos.d/wazuh.repo <<\EOF
+          cat > /etc/zypp/repos.d/wazuh.repo <<EOF
           [wazuh]
           gpgcheck=1
           gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
@@ -429,6 +429,13 @@ Install Wazuh manager
         
           # apt install -y ./wazuh-packages/wazuh-manager_4.2.1-1_amd64.deb
 
+      .. group-tab:: ZYpp
+
+        .. code-block:: console
+        
+          # zypper install -y ./wazuh-packages/wazuh-manager-4.2.1-1.x86_64.rpm
+
+
 #. Enable and start the Wazuh manager service:
 
     .. include:: /_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
@@ -456,6 +463,13 @@ Install Elasticsearch
         
           # apt install -y ./opendistro-packages/*.deb
 
+      .. group-tab:: ZYpp
+
+        .. code-block:: console
+        
+          # zypper install -y ./opendistro-packages/*.rpm
+
+
 #. Move a copy of the configuration files to the appropriate locations.
 
     .. tabs::
@@ -472,6 +486,17 @@ Install Elasticsearch
           # cp ./opendistro_files/elasticsearch/instances.yml ~
 
       .. group-tab:: APT
+
+        .. code-block:: console
+        
+          # cp ./opendistro_files/elasticsearch/elasticsearch.yml /etc/elasticsearch/
+          # cp ./opendistro_files/elasticsearch/roles.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/
+          # cp ./opendistro_files/elasticsearch/roles_mapping.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/
+          # cp ./opendistro_files/elasticsearch/internal_users.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/
+          # cp ./opendistro_files/elasticsearch/wazuh-cert-tool.sh ~
+          # cp ./opendistro_files/elasticsearch/instances.yml ~
+
+      .. group-tab:: ZYpp
 
         .. code-block:: console
         
@@ -562,6 +587,12 @@ Install Filebeat
         
           # apt install -y ./wazuh-packages/filebeat_7.10.2_amd64.deb
 
+      .. group-tab:: ZYpp
+
+        .. code-block:: console
+        
+          # zypper install -y ./wazuh-packages/filebeat-oss-7.10.2-x86_64.rpm
+
 #. Move a copy of the configuration files.
 
     .. tabs::
@@ -575,6 +606,14 @@ Install Filebeat
           # chmod go+r /etc/filebeat/wazuh-template.json
 
       .. group-tab:: APT
+
+        .. code-block:: console
+        
+          # cp ./wazuh_files/filebeat/filebeat.yml /etc/filebeat/
+          # cp ./wazuh_files/filebeat/wazuh-template.json /etc/filebeat/
+          # chmod go+r /etc/filebeat/wazuh-template.json
+
+      .. group-tab:: ZYpp
 
         .. code-block:: console
         
@@ -646,6 +685,12 @@ Install Kibana
        
          # apt install -y ./opendistro-kibana-packages/opendistroforelasticsearch-kibana_1.13.2_amd64.deb
 
+     .. group-tab:: ZYpp
+
+       .. code-block:: console
+       
+         # zypper install -y ./opendistro-kibana-packages/opendistroforelasticsearch-kibana-1.13.2-linux-x64.rpm
+
 #. Move a copy of the configuration files.
 
      .. tabs::
@@ -657,6 +702,12 @@ Install Kibana
            # \cp ./opendistro_files/kibana/kibana.yml /etc/kibana/
 
        .. group-tab:: APT
+
+         .. code-block:: console
+         
+           # cp ./opendistro_files/kibana/kibana.yml /etc/kibana/
+
+       .. group-tab:: ZYpp
 
          .. code-block:: console
          
