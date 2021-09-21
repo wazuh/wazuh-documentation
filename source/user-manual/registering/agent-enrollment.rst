@@ -24,7 +24,7 @@ By default, the agent runs the enrollment process with the settings below:
 
 - Same server address configured for reporting in the ``<client><server><address>`` section
 - Agent name extracted from the hostname of the operating system
-- Agents not belonging to groups
+- Agents are not assigned to groups
 - Registration without password nor certificate validation
 
 Additionally, every possible configuration available as options for ``agent-auth`` binary can be set in ``ossec.conf`` under the section ``<enrollment>``. Each time an agent enrolls, it uses this configuration to request the key.
