@@ -465,7 +465,7 @@ custom_replacements = {
     "|OPENDISTRO_LATEST_DOCKER|" : "1.13.2",
     "|OPENDISTRO_LATEST_KUBERNETES|" : "1.13.2",
     "|DOCKER_COMPOSE_VERSION|" : "1.28.3",
-    "|SPLUNK_LATEST|" : "8.1.3",
+    "|SPLUNK_LATEST|" : "8.2.2",
     "|WAZUH_SPLUNK_LATEST|" : "4.2.2",
     "|ELASTIC_6_LATEST|" : "6.8.8",
     "|WAZUH_REVISION_YUM_AGENT_I386|" : "1",
@@ -503,7 +503,7 @@ custom_replacements = {
     "|DEB_MANAGER|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-manager/wazuh-manager",
     "|DEB_API|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-api/wazuh-api",
     # Variables for Elastic's Elasticsearch
-    "|ELASTICSEARCH_ELK_LATEST|" : "7.11.2",
+    "|ELASTICSEARCH_ELK_LATEST|" : "7.12.1",
     "|ELASTICSEARCH_ELK_LATEST_ANSIBLE|" : "7.10.2",
     "|ELASTICSEARCH_ELK_LATEST_KUBERNETES|" : "7.10.2",
     "|ELASTICSEARCH_ELK_LATEST_PUPPET|" : "7.10.2",
