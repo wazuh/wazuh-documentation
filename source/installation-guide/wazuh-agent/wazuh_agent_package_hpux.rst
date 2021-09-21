@@ -27,14 +27,25 @@ The installed agent runs on the host you want to monitor and communicates with t
    
        # tar -xvf wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar
 
-#. To complete the installation process, start the Wazuh agent service.
+#. Edit ``/var/ossec/etc/ossec.conf`` and add the Wazuh manager IP address. The agent registers automatically with the manager through enrollment, configuration details can be found on the :ref:`Enrollment section <reference_ossec_client>`.
+
+   .. code-block:: console
+   
+      <server>
+        <address>WAZUH_MANAGER_IP</address>
+        <port>1514</port>
+        <protocol>tcp</protocol>
+      </server>
+
+
+#. To complete the installation and registration process, start the Wazuh agent service.
 
    .. code-block:: console
    
        # /sbin/init.d/wazuh-agent start
 
 
-The installation process is now complete and the Wazuh agent is successfully installed on your HP-UX system. The next step is to register and configure the agent to communicate with the Wazuh manager. To perform this action, see the :ref:`Registering Wazuh agents <register_agents>` section.        
+The installation process is now complete and the Wazuh agent is successfully installed and registered.  
 
 Uninstall a Wazuh agent
 -----------------------
