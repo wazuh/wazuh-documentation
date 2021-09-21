@@ -12,7 +12,7 @@ For Fedora 22 or greater, installing the Wazuh server components entails the ins
 Adding the Wazuh repository
 ---------------------------
 
-The first step to setting up Wazuh is to add the Wazuh repository to your server. You can download the :ref:`wazuh-manager package <packages>`  directly, or check the :ref:`compatible versions <packages>`.
+The first step to setting up Wazuh is to add the Wazuh repository to your server. You can download the wazuh-manager package directly or check the compatible versions in the :ref:`Packages list <packages>` section.
 
 To set up the repository, run this command:
 
