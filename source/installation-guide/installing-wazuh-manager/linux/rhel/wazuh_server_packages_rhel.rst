@@ -12,7 +12,7 @@ For Red Hat Enterprise Linux 6 or greater, installing the Wazuh server component
 Adding the Wazuh repository
 ---------------------------
 
-The first step to setting up Wazuh is to add the Wazuh repository to your server. If you want to download the wazuh-manager package directly, or check the compatible versions, click :ref:`here <packages>`.
+The first step to setting up Wazuh is to add the Wazuh repository to your server. You can download the wazuh-manager package directly or check the compatible versions in the :ref:`Packages list <packages>` section.
 
 To set up the repository, run this command:
 
