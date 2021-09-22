@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Check out how to register the Wazuh agents using the Wazuh API, that allows the Wazuh agent registration by running a single request from any host.
+  :description: Check out how to register the Wazuh agents using the Wazuh API. This allows the Wazuh agent registration by running a single request from any host.
   
 .. _restful-api-registration:
 
