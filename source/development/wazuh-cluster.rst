@@ -276,10 +276,6 @@ This communication protocol is used by all cluster nodes to synchronize the nece
 |                   |             | - Filename<str>       | If master had issues sending/processing/receiving worker integrity an error message will be     |
 |                   |             |                       | sent instead of the task name and filename.                                                     |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
-| ``syn_m_e_ok``    | Worker      | None                  | Master has correctly finished updating extra-valid files.                                       |
-+-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
-| ``syn_m_e_err``   | Worker      | - Error msg<str>      | The master ran into an error while processing extra-valid files.                                |
-+-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
 | ``syn_m_a_e``     | Worker      | - Arguments<Dict>     | Master has finished updating agent-info. Number of updated chunks and chunks with               |
 |                   |             |                       | errors (if any) will be sent.                                                                   |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
