@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Check out this section of our documentation to learn more about the configuration files used by Wazuh and define the setting options
+  :description: Check out this section to see a complete reference of all the configurations and settings that can be customized on Wazuh, for both managers and agents.
   
 .. _reference_files:
 
