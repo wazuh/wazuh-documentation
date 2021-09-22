@@ -8,8 +8,6 @@
 Registering Wazuh agents - additional information
 =================================================
 
-.. meta::
-  :description: Registering Wazuh agents - additional Information
 
 .. _openssl_package_requirement:
 

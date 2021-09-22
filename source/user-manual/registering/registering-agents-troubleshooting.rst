@@ -8,9 +8,6 @@
 Registering Wazuh agents - Troubleshooting
 ==========================================
 
-.. meta::
-  :description: Registering Wazuh agents - Troubleshooting
-
 
 The Wazuh agent registers successfully but disappears after another Wazuh agent is being registered
 ---------------------------------------------------------------------------------------------------
