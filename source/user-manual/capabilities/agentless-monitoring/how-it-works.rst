@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about how it works the agentless monitoring of Wazuh: connection, monitoring, checking the setup, and alert. 
+  :description: Learn more about how the agentless monitoring of Wazuh works: connection, monitoring, checking the setup, and alert. 
   
 How it works
 ============
