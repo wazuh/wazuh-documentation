@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Check out the user manual of the Wazuh Platform in this section. Learn more about how Wazuh works, the components, and more. 
+  :description: The Wazuh user manual helps you configure, adjust, and make use of all of the available capabilities. Learn more about product functionalities in this section.
   
 .. _user_manual:
 
