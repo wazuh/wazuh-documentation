@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: In this section on how to configure email alerts we show you the minimum configuration needed to use Postfix to send emails.  
+  :description: In this section of the Wazuh documentation on how to configure email alerts, we show you the minimum configuration needed to use Postfix to send emails.  
 .. _smtp_authentication:
 
 SMTP server with authentication
