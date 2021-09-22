@@ -6,7 +6,10 @@
 Offline step-by-step all-in-one installation
 ============================================
 
-This document will guide you to download Wazuh and the Open Distro for Elasticsearch components and then to install them later when there is no connection to the Internet or from a system without connection in an all-in-one offline deployment.
+This document will guide you to:
+
+* Download Wazuh and the Open Distro for Elasticsearch components.
+* Install them later when there is no connection to the Internet or from a system without connection to it in an all-in-one offline deployment.
 
 .. note:: Run ``su`` or ``sudo su`` to gain root privileges. This is necessary to execute the commands below.
 
@@ -530,7 +533,7 @@ Install Elasticsearch
 
     .. include:: /_templates/installations/elastic/common/enable_elasticsearch.rst
 
-#. Run the Elasticsearch `securityadmin script to load the new certificates information and start the cluster:
+#. Run the Elasticsearch `securityadmin` script to load the new certificates information and start the cluster:
 
     .. code-block:: console
 
@@ -625,7 +628,7 @@ Install Filebeat
 
     .. code-block:: console
     
-      # tar -xvzf ./wazuh_files/filebeat/wazuh-filebeat-module.tar.gz -C /usr/share/filebeat/module
+      # tar -xzf ./wazuh_files/filebeat/wazuh-filebeat-module.tar.gz -C /usr/share/filebeat/module
 
 #. Copy the Elasticsearch certificates into ``/etc/filebeat/certs``:
 
@@ -723,12 +726,30 @@ Install Kibana
       # mkdir /usr/share/kibana/data
       # chown -R kibana:kibana /usr/share/kibana/data
 
-#. Replace ``</path/to/installation/files>`` with your actual path to the installation folder and run the following commands to install the Wazuh Kibana plugin. The installation of the plugin must be done from the Kibana home directory, as follows:
+#. Replace ``</path/to/installation/files>`` with your actual path to the installation folder in the following commands and run them to install the Wazuh Kibana plugin. The installation of the plugin must be done from the Kibana home directory, as follows:
 
-    .. code-block:: console
+    .. tabs::
 
-        # cd /usr/share/kibana
-        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install file://</path/to/installation/files>/wazuh_files/kibana/wazuh_kibana.zip
+      .. group-tab:: Yum
+
+        .. code-block:: console
+
+            # cd /usr/share/kibana
+            # sudo /usr/share/kibana/bin/kibana-plugin install --allow-root file://</path/to/installation/files>/wazuh_files/kibana/wazuh_kibana.zip
+
+      .. group-tab:: APT
+
+        .. code-block:: console
+
+            # cd /usr/share/kibana
+            # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install file://</path/to/installation/files>/wazuh_files/kibana/wazuh_kibana.zip
+
+      .. group-tab:: ZYpp
+
+        .. code-block:: console
+
+            # cd /usr/share/kibana
+            # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install file://</path/to/installation/files>/wazuh_files/kibana/wazuh_kibana.zip
 
 #. Copy the Elasticsearch certificates into ``/etc/kibana/certs``:
 
