@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Learn how anomaly and malware detection works in Wazuh.
+  :description: Learn more about the Wazuh anomaly detection capability and the checks performed to find the anomalies caused by an intruder or malware.
 
 How it works
 ============
