@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Learn how to check the connection to the Wazuh manager.
+  :description: Learn how to check the connection to the Wazuh manager in this section of the Wazuh documentation.
 
 .. _agent-connection:
 
