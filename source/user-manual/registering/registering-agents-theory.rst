@@ -1,12 +1,13 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Learn more about how to register a Wazuh agent in this section of the Wazuh documentation.
+  
 .. _registering_agent_theory:
 
 Registering Wazuh agents - additional information
 =================================================
 
-.. meta::
-  :description: Registering Wazuh agents - additional Information
 
 .. _openssl_package_requirement:
 

@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: The ossec-syscheckd program checks files for changes to the checksums, permissions and ownership. Learn more in this section. 
+  :description: The ossec-syscheckd program checks files for changes to the checksums, permissions, and ownership. Learn more in this section of the Wazuh documentation.
 
 .. _ossec-syscheckd:
 
