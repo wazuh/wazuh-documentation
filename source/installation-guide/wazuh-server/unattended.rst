@@ -14,7 +14,7 @@ Wazuh server cluster installation
 
 Install the Wazuh server as a single-node or multi-node cluster according to your environment needs.  If you want to install a single-node cluster, follow the instructions to install the Wazuh master node and proceed directly with :ref:`installing the Wazuh dashboard <wazuh_dashboard_installation>`.
 
-The installation process is divided into two stages.  
+The installation process is divided into two stages:  
 
 #. Wazuh master node installation
 
