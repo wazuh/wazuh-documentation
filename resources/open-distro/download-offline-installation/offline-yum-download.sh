@@ -14,7 +14,7 @@ install_prerequisites(){
 # Install the prerequisites
 printf "\nInstalling prerequisites for packages and files download...\n"
 
-yum install -y yum-plugin-downloadonly curl unzip wget libcap
+yum install -y yum-plugin-downloadonly unzip wget libcap
 
 }
 

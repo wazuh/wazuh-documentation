@@ -12,11 +12,9 @@ BASE_DEST="wazuh-offline"
 install_prerequisites(){
 
 # Install the prerequisites
-printf "\nInstall prerequisites for packages and files download...\n"
+printf "\nInstalling prerequisites for packages and files download...\n"
 
-apt update
-
-apt install -y aptitude curl apt-transport-https unzip wget libcap2-bin software-properties-common lsb-release gnupg
+apt install -y aptitude apt-transport-https unzip wget libcap2-bin software-properties-common lsb-release gnupg
 
 }
 
@@ -26,8 +24,6 @@ get_wazuh_packages(){
 curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -
 
 echo "deb https://packages.wazuh.com/4.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
-
-apt update
 
 # Download packages for Wazuh and Filebeat
 printf "\nDownloading Wazuh packages...\n"

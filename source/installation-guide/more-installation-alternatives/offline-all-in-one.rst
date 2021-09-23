@@ -8,7 +8,7 @@ Offline step-by-step all-in-one installation
 
 This document will guide you to:
 
-* Download Wazuh and the Open Distro for Elasticsearch components.
+* Download Wazuh and the Open Distro for Elasticsearch components files.
 * Install them later when there is no connection to the Internet or from a system without connection to it in an all-in-one offline deployment.
 
 .. note:: Run ``su`` or ``sudo su`` to gain root privileges. This is necessary to execute the commands below.
@@ -16,28 +16,34 @@ This document will guide you to:
 Download packages and configuration files
 -----------------------------------------
 
-#. Run the following command from a system with an Internet connection. This will download and execute a script. This script will download all required files for the offline installation.
+#. Run the following commands from a system with an Internet connection. This will download and execute a script. This script will download all required files for the offline installation.
 
     .. tabs::
 
       .. group-tab:: Yum
 
-        .. code-block:: bash
+        .. code-block:: console
           
-          curl -sO https://raw.githubusercontent.com/wazuh/wazuh-documentation/develop/resources/open-distro/download-offline-installation/offline-yum-download.sh && bash ./offline-yum-download.sh
+          # yum install -y curl
+          # curl -sO https://raw.githubusercontent.com/wazuh/wazuh-documentation/4329_Write_offline_installation_guide/resources/open-distro/download-offline-installation/offline-yum-download.sh
+          # bash ./offline-yum-download.sh
           
       .. group-tab:: APT
 
-        .. code-block:: bash
+        .. code-block:: console
           
-          curl -sO https://raw.githubusercontent.com/wazuh/wazuh-documentation/develop/resources/open-distro/download-offline-installation/offline-apt-download.sh && bash ./offline-apt-download.sh
+          # apt update
+          # apt install -y curl
+          # curl -sO https://raw.githubusercontent.com/wazuh/wazuh-documentation/4329_Write_offline_installation_guide/resources/open-distro/download-offline-installation/offline-apt-download.sh
+          # bash ./offline-apt-download.sh
 
       .. group-tab:: ZYpp
 
-        .. code-block:: bash
+        .. code-block:: console
           
-          curl -sO https://raw.githubusercontent.com/wazuh/wazuh-documentation/develop/resources/open-distro/download-offline-installation/offline-zypp-download.sh && bash ./offline-zypp-download.sh
-
+          # zypper install -y curl
+          # curl -sO https://raw.githubusercontent.com/wazuh/wazuh-documentation/4329_Write_offline_installation_guide/resources/open-distro/download-offline-installation/offline-zypp-download.sh
+          # bash ./offline-zypp-download.sh
 
 #. Copy or move ``/wazuh-offline/`` folder contents to a folder accessible to the host from where the offline installation will be carried out.
 
@@ -73,7 +79,7 @@ Install Wazuh manager
 
         .. code-block:: console
         
-          # zypper install -y ./wazuh-packages/wazuh-manager-4.2.1-1.x86_64.rpm
+          # zypper install --repo wazuh -y ./wazuh-packages/wazuh-manager-4.2.1-1.x86_64.rpm
 
 
 #. Enable and start the Wazuh manager service:
@@ -107,7 +113,7 @@ Install Elasticsearch
 
         .. code-block:: console
         
-          # zypper install -y ./opendistro-packages/*.rpm
+          # zypper install --repo wazuh -y ./opendistro-packages/*.rpm
 
 
 #. Move a copy of the configuration files to the appropriate locations.
@@ -236,7 +242,7 @@ Install Filebeat
 
         .. code-block:: console
         
-          # zypper install -y ./wazuh-packages/filebeat-oss-7.10.2-x86_64.rpm
+          # zypper install --repo wazuh -y ./wazuh-packages/filebeat-oss-7.10.2-x86_64.rpm
 
 #. Move a copy of the configuration files.
 
@@ -334,7 +340,7 @@ Install Kibana
 
        .. code-block:: console
        
-         # zypper install -y ./opendistro-kibana-packages/opendistroforelasticsearch-kibana-1.13.2-linux-x64.rpm
+         # zypper install --repo wazuh -y ./opendistro-kibana-packages/opendistroforelasticsearch-kibana-1.13.2-linux-x64.rpm
 
 #. Move a copy of the configuration files.
 
@@ -428,8 +434,7 @@ It is also recommended to customize the file ``/etc/elasticsearch/jvm.options`` 
 
 To uninstall all the components of the all-in-one installation, see the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_open_distro>`.
 
-..
-  Next steps
-  ----------
+Next steps
+----------
 
-  Once the Wazuh environment is ready, a Wazuh agent can be installed on every endpoint to be monitored. To install the Wazuh agents and start monitoring the endpoints, see the :ref:`Wazuh agent<installation_agents>` section.
+Once the Wazuh environment is ready, Wazuh agents can be installed on every endpoint to be monitored. To install the Wazuh agents and start monitoring the endpoints, see the :ref:`Wazuh agent<installation_agents>` installation section. And if you need to install them offline, you can check the appropriate agent package to download for your monitored system in the :ref:`Packages list <packages>` section.

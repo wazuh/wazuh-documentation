@@ -12,7 +12,7 @@ BASE_DEST="wazuh-offline"
 install_prerequisites(){
 
 # Install the prerequisites
-printf "\nInstall prerequisites for packages and files download...\n"
+printf "\nInstalling prerequisites for packages and files download...\n"
 
 zypper install -y zip unzip tar libcap-progs
 
