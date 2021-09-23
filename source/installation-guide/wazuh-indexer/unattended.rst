@@ -13,7 +13,7 @@ Wazuh indexer cluster installation
 
 Install and configure the Wazuh indexer as a single-node or multi-node cluster according to your environment needs. If you want to install a single-node cluster, follow the instructions to install the initial node.
 
-The installation process is divided into three stages.  
+The installation process is divided into three stages:  
 
 #. Initial node installation and configuration
 
@@ -106,7 +106,7 @@ Install and configure the initial node. During this stage, the SSL certificates 
     | -h / --help                   | Shows *help*.                                                                                                  |
     +-------------------------------+----------------------------------------------------------------------------------------------------------------+        
 
-#.  Copy ``~/certs.tar`` to all the servers of the distributed deployment the including the Wazuh indexer, Wazuh server, and Wazuh dashboard nodes. This can be done by using, for example, ``scp``.
+#.  Copy ``~/certs.tar`` to all the servers of the distributed deployment, including the Wazuh indexer, Wazuh server, and Wazuh dashboard nodes. This can be done by using, for example, ``scp``.
 
 You now have installed and configured the initial Wazuh indexer node. 
 
