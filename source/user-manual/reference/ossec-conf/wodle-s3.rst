@@ -196,7 +196,7 @@ Bucket options
 +----------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | `bucket\\sts_endpoint`_          | The AWS Security Token Service VPC endpoint URL.            | Optional                                      |
 +----------------------------------+-------------------------------------------------------------+-----------------------------------------------+
-| `bucket\\service_endpoint`_      | The AWS S3 VPC endpoint URL.                                | Optional                                      |
+| `bucket\\service_endpoint`_      | The AWS S3 endpoint URL.                                    | Optional                                      |
 +----------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 
 type
@@ -401,12 +401,12 @@ The AWS Security Token Service VPC endpoint URL to be used when an IAM role is p
 bucket\\service_endpoint
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-The AWS S3 VPC endpoint URL to be used to download the data from the bucket. Check the :ref:`Considerations for configuration <amazon_considerations>` page to learn more about VPC endpoints.
+The AWS S3 endpoint URL to be used to download the data from the bucket. Check the :ref:`Considerations for configuration <amazon_considerations>` page to learn more about VPC and FIPS endpoints.
 
 +--------------------+----------------------------------------+
 | **Default value**  | N/A                                    |
 +--------------------+----------------------------------------+
-| **Allowed values** | Any valid VPC endpoint URL for S3      |
+| **Allowed values** | Any valid endpoint URL for S3          |
 +--------------------+----------------------------------------+
 
 run_on_start
@@ -713,10 +713,10 @@ The AWS Security Token Service VPC endpoint URL to be used when an IAM role is p
 Service\\service_endpoint
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The VPC endpoint URL for the required AWS Service to be used to download the data from it. Check the :ref:`Considerations for configuration <amazon_considerations>` page to learn more about VPC endpoints.
+The VPC endpoint URL for the required AWS Service to be used to download the data from it. Check the :ref:`Considerations for configuration <amazon_considerations>` page to learn more about VPC and FIPS endpoints.
 
 +--------------------+------------------------------------------------+
 | **Default value**  | N/A                                            |
 +--------------------+------------------------------------------------+
-| **Allowed values** | Any valid VPC endpoint URL for the AWS Service |
+| **Allowed values** | Any valid endpoint URL for the AWS Service     |
 +--------------------+------------------------------------------------+
