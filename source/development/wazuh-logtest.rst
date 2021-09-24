@@ -46,8 +46,8 @@ of the new session.
 Idle session collector
 ^^^^^^^^^^^^^^^^^^^^^^
 
-The idle session collector, runs every ``session_timeout`` seconds. This parameter is defined in the
-:ref:`rule_test <reference_ossec_rule_test>` section of the :ref:`ossec.conf <reference_ossec_conf>` file.
+The idle session collector runs every ``session_timeout`` seconds. This parameter is defined in the
+:ref:`rule_test <reference_ossec_rule_test>` section of the :ref:`manager.conf <reference_manager_conf>` file.
 Every time the collector starts, it searches for sessions that have been idle longer than the time specified in
 ``session_timeout`` to close them.
 

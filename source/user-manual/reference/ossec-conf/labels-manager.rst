@@ -1,10 +1,6 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
-.. meta::
-  :description: Get to know more about the labels section of the OSSEC local configuration in this section of the Wazuh documentation. 
-
-
-.. _reference_ossec_labels:
+.. _reference_ossec_labels_manager:
 
 labels
 ======
@@ -16,25 +12,23 @@ labels
 	    <labels>
 	    </labels>
 
-The labels section of ``ossec.conf`` allows additional user-defined information about agents to be included in alerts. When email notifications are enabled, this additional data is also contained in the email alerts without any further configuration.
+The labels section of ``manager.conf`` allows additional user-defined information about agents to be included in alerts. When email notifications are enabled, this additional data is also contained in the email alerts without any further configuration.
 
 Options
 -------
 
 - `label`_
 
-.. _reference_ossec_labels_label:
-
 label
 ^^^^^
 
-This option specifies the additional information that will appear in alerts. Labels can be nested in JSON formatted alerts by separating the "key" terms by a period.
+This option specifies the additional information that appears in alerts. Labels can be nested in JSON formatted alerts by separating the "key" terms by a period.
 
 
 Attributes:
 
 +--------------------+-------------------------------------------------------------------------------------------------+
-| **key**            | The title that will describe the information of the label.                                      |
+| **key**            | The title that describes the information of the label.                                          |
 +                    +---------------------------------------+---------------------------------------------------------+
 |                    | Allowed value                         | Any string that does not start with an underscore ( _ ) |
 +--------------------+---------------------------------------+---------------------------------------------------------+
@@ -46,11 +40,11 @@ Attributes:
 +--------------------+---------------------------------------+---------------------------------------------------------+
 
 .. note::
-    
+
     In ``internal_options.conf``, hidden labels can be set to be displayed in alerts.
 
 .. note::
-    
+
     .. versionadded:: 3.9.0
 
       Keys starting with an underscore character are reserved for the system labels. These labels are invisible and contain internal information of the agents.

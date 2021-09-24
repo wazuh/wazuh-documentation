@@ -1,17 +1,17 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Learn how to remotely configure agents using agent.conf. In this section you will find which capabilities can be configured remotely. 
+  :description: Learn how to remotely configure agents using shared.conf. In this section you will find which capabilities can be configured remotely.
 
-.. _reference_agent_conf:
+.. _reference_shared_conf:
 
-Centralized configuration (agent.conf)
-======================================
+Centralized configuration (shared.conf)
+=======================================
 
 Introduction
 ------------
 
-Agents can be configured remotely by using the ``agent.conf`` file. The following capabilities can be configured remotely:
+Agents can be configured remotely by using the ``shared.conf`` file. The following capabilities can be configured remotely:
 
 - :doc:`File Integrity monitoring <../capabilities/file-integrity/index>` (**syscheck**)
 - :doc:`Rootkit detection <../capabilities/anomalies-detection/index>` (**rootcheck**)
@@ -58,8 +58,8 @@ Below are the files that would be found in this folder on an agent assigned to t
 |                                                     |                                                     |
 |    /var/ossec/etc/shared/                           |    /var/ossec/etc/shared/                           |
 |    ├── ar.conf                                      |    ├── ar.conf                                      |
-|    ├── debian                                       |    ├── agent.conf                                   |
-|    │   ├── agent.conf                               |    ├── cis_debian_linux_rcl.txt                     |
+|    ├── debian                                       |    ├── shared.conf                                  |
+|    │   ├── shared.conf                              |    ├── cis_debian_linux_rcl.txt                     |
 |    │   ├── cis_debian_linux_rcl.txt                 |    ├── cis_rhel5_linux_rcl.txt                      |
 |    │   ├── cis_rhel5_linux_rcl.txt                  |    ├── cis_rhel6_linux_rcl.txt                      |
 |    │   ├── cis_rhel6_linux_rcl.txt                  |    ├── cis_rhel7_linux_rcl.txt                      |
@@ -79,7 +79,7 @@ Below are the files that would be found in this folder on an agent assigned to t
 |    │   ├── win_audit_rcl.txt                        |    └── win_malware_rcl.txt                          |
 |    │   └── win_malware_rcl.txt                      |                                                     |
 |    └── default                                      |                                                     |
-|        ├── agent.conf                               |                                                     |
+|        ├── shared.conf                              |                                                     |
 |        ├── cis_debian_linux_rcl.txt                 |                                                     |
 |        ├── cis_rhel5_linux_rcl.txt                  |                                                     |
 |        ├── cis_rhel6_linux_rcl.txt                  |                                                     |
@@ -97,10 +97,10 @@ Below are the files that would be found in this folder on an agent assigned to t
 |        └── win_malware_rcl.txt                      |                                                     |
 +-----------------------------------------------------+-----------------------------------------------------+
 
-The proper syntax of ``agent.conf`` is shown below along with the process for pushing the configuration from the manager to the agent.
+The proper syntax of ``shared.conf`` is shown below along with the process for pushing the configuration from the manager to the agent.
 
-agent.conf
-----------
+shared.conf
+-----------
 .. topic:: XML section name
 
 	.. code-block:: xml
@@ -109,9 +109,9 @@ agent.conf
 		    ...
 		</agent_config>
 
-The ``agent.conf`` is only valid on server installations.
+The ``shared.conf`` is only valid on server installations.
 
-The ``agent.conf`` may exist in each group folder at ``/var/ossec/etc/shared``.
+The ``shared.conf`` can exist in each group folder at ``/var/ossec/etc/shared``.
 
 For example, for the ``group1`` group, it is in ``/var/ossec/etc/shared/group1``.  Each of these files should be readable by the ``wazuh`` user.
 
@@ -147,15 +147,15 @@ Centralized configuration process
 
 The following is an example of how a centralized configuration can be done.
 
-1. Configure the ``agent.conf`` file:
+1. Configure the ``shared.conf`` file:
 
-    Edit the file corresponding to the agent group. For example, for the ``default`` group, edit the file ``/var/ossec/etc/shared/default/agent.conf``. If the file does not exist, create it:
+    Edit the file corresponding to the agent group. For example, for the ``default`` group, edit the file ``/var/ossec/etc/shared/default/shared.conf``. If the file does not exist, you need to create it:
 
     .. code-block:: console
 
-        # touch /var/ossec/etc/shared/default/agent.conf
-        # chown wazuh:wazuh /var/ossec/etc/shared/default/agent.conf
-        # chmod 640 /var/ossec/etc/shared/default/agent.conf
+        # touch /var/ossec/etc/shared/default/shared.conf
+        # chown wazuh:wazuh /var/ossec/etc/shared/default/shared.conf
+        # chmod 640 /var/ossec/etc/shared/default/shared.conf
 
     Several configurations may be created based on the ``name``, ``OS`` or ``profile`` of an agent.
 
@@ -187,13 +187,13 @@ The following is an example of how a centralized configuration can be done.
 
 2. Run ``/var/ossec/bin/verify-agent-conf``:
 
-    Each time you make a change to the ``agent.conf`` file, it is important to check for configuration errors. If any errors are reported by this check, they must be fixed before the next step.  Failure to perform this step may allow errors to be pushed to agents which may prevent the agents from running.  At that point, it is very likely that you will be forced to visit each agent manually to recover them.
+    Each time you make a change to the ``shared.conf`` file, it is important to check for configuration errors. If any errors are reported by this check, they must be fixed before the next step. Failure to perform this step might allow errors to be pushed to agents and prevent the agents from running.  At that point, it is very likely that you will be forced to visit each agent manually to recover them.
 
 3. Push the configuration to the agents:
 
     With every agent keepalive (10 seconds default), the agent sends to the manager the checksum of its merge.md file and the manager compares it with the current one. If the received checksum differs from the available one, the Wazuh manager pushes the new file to the agent. The agent will start using the new configuration after being restarted.
 
-    .. note:: Restarting the manager will make the new ``agent.conf`` file available to the agents more quickly.
+    .. note:: Restarting the manager makes the new ``shared.conf`` file available to the agents more quickly.
 
 4. Confirm that the agent received the configuration:
 
@@ -235,7 +235,7 @@ The following is an example of how a centralized configuration can be done.
 
     By default, the agent restarts by itself automatically when it receives a new shared configuration.
 
-    If ``auto_restart`` has been disabled (in the ``<client>`` section of :doc:`Local configuration <ossec-conf/index>`), the agent will have to be manually restarted so that the new ``agent.conf`` file will be used. This can be done as follows:
+    If ``auto_restart`` is disabled in the ``<client>`` section of :doc:`Local configuration <ossec-conf/index-agent>`, the agent needs to be manually restarted so that the new ``shared.conf`` file can be used. This can be done as follows:
 
     .. code-block:: console
 
@@ -249,11 +249,11 @@ The following is an example of how a centralized configuration can be done.
 Precedence
 ----------
 
-It's important to understand which configuration file takes precedence between ``ossec.conf`` and ``agent.conf`` when central configuration is used. When central configuration is utilized, the local and the shared configuration are merged, however, the ``ossec.conf`` file is read before the shared ``agent.conf`` and the last configuration of any setting will overwrite the previous. Also, if a file path for a particular setting is set in both of the configuration files, both paths will be included in the final configuration.
+It's important to understand which configuration file takes precedence between ``shared.conf`` and ``agent.conf`` when central configuration is used. When central configuration is utilized, the local and the shared configuration are merged, however, the ``agent.conf`` file is read before the shared ``shared.conf`` and the last configuration of any setting overwrites the previous. Also, if a file path for a particular setting is set in both of the configuration files, both paths are included in the final configuration.
 
 For example:
 
-Let's say we have this configuration in the ``ossec.conf`` file:
+Let's say we have this configuration in the ``agent.conf`` file:
 
 .. code-block:: xml
 
@@ -270,7 +270,7 @@ Let's say we have this configuration in the ``ossec.conf`` file:
     </policies>
   </sca>
 
-and this configuration in the ``agent.conf`` file.
+and this configuration in the ``shared.conf`` file.
 
 .. code-block:: xml
 
@@ -283,7 +283,7 @@ and this configuration in the ``agent.conf`` file.
   </sca>
 
 The final configuration will enable the Security Configuration Assessment module. In addition, it will add the `cis_debian_linux_rcl.yml` to the list of scanned policies.
-In other words, the configuration located at ``agent.conf`` will overwrite the one of the ``ossec.conf``.
+In other words, the configuration located in ``shared.conf`` overwrites the one in the ``agent.conf`` file.
 
 How to ignore shared configuration
 ----------------------------------
@@ -308,14 +308,14 @@ The ``files.yml`` has the following structure as shown in the following example:
     groups:
         my_group_1:
             files:
-                agent.conf: https://example.com/agent.conf
+                shared.conf: https://example.com/shared.conf
                 rootcheck.txt: https://example.com/rootcheck.txt
                 merged.mg: https://example.com/merged.mg
             poll: 15
 
         my_group_2:
             files:
-                agent.conf: https://example.com/agent.conf
+                shared.conf: https://example.com/shared.conf
             poll: 200
 
     agents:

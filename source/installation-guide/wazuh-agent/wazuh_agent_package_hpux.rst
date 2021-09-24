@@ -9,28 +9,28 @@
 Installing Wazuh agents on HP-UX systems
 ========================================
 
-The installed agent runs on the host you want to monitor and communicates with the Wazuh manager, sending data in near real time through an encrypted and authenticated channel. 
+The installed agent runs on the host you want to monitor and communicates with the Wazuh manager, sending data in near real time through an encrypted and authenticated channel.
 
 
-#. To start the installation process, download the `HP-UX installer <https://packages.wazuh.com/|CURRENT_MAJOR|/hp-ux/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar>`_. 
+#. To start the installation process, download the `HP-UX installer <https://packages.wazuh.com/|CURRENT_MAJOR|/hp-ux/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar>`_.
 
 #. Create the ``ossec`` user and group.
-   
+
    .. code-block:: console
-   
+
        # groupadd ossec
        # useradd -G ossec ossec
-   
+
 #. Unzip the package in ``/``.
 
    .. code-block:: console
-   
+
        # tar -xvf wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar
 
-#. Edit ``/var/ossec/etc/ossec.conf`` and add the Wazuh manager IP address. The agent registers automatically with the manager through enrollment, configuration details can be found on the :ref:`Enrollment section <reference_ossec_client>`.
+#. Edit ``/var/ossec/etc/agent.conf`` and add the Wazuh manager IP address. The agent registers automatically with the manager through enrollment, configuration details can be found on the :ref:`Enrollment section <reference_ossec_client>`.
 
    .. code-block:: console
-   
+
       <server>
         <address>WAZUH_MANAGER_IP</address>
         <port>1514</port>
@@ -41,16 +41,16 @@ The installed agent runs on the host you want to monitor and communicates with t
 #. To complete the installation and registration process, start the Wazuh agent service.
 
    .. code-block:: console
-   
+
        # /sbin/init.d/wazuh-agent start
 
 
-The installation process is now complete and the Wazuh agent is successfully installed and registered.  
+The installation process is now complete and the Wazuh agent is successfully installed and registered.
 
 Uninstall a Wazuh agent
 -----------------------
 
-To uninstall the agent, follow these steps: 
+To uninstall the agent, follow these steps:
 
 1. Stop the Wazuh agent service.
 

@@ -119,7 +119,7 @@ There are two options to register the Wazuh agent using host verification. Pleas
            Note that this method must include the ``-v option`` that indicates the location of the CA. If this option is not included, a warning message will be displayed and the connection will be established without verifying the Wazuh manager.
 
 
-     #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``/var/ossec/etc/ossec.conf``.
+     #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file located in ``/var/ossec/etc/agent.conf``.
 
          .. include:: ../../_templates/registrations/common/client_server_section.rst
 
@@ -159,7 +159,7 @@ There are two options to register the Wazuh agent using host verification. Pleas
            Note that this method must include the ``-v option`` that indicates the location of the CA. If this option is not included, a warning message will be displayed and the connection will be established without verifying the Wazuh manager.
 
 
-     #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``C:\Program Files (x86)\ossec-agent\ossec.conf``.
+     #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file located in ``C:\Program Files (x86)\ossec-agent\agent.conf``.
 
          .. include:: ../../_templates/registrations/common/client_server_section.rst
 
@@ -197,7 +197,7 @@ There are two options to register the Wazuh agent using host verification. Pleas
            Note that this method must include the ``-v option`` that indicates the location of the CA. If this option is not included, a warning message will be displayed and the connection will be established without verifying the Wazuh manager.
 
 
-     #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``/Library/Ossec/etc/ossec.conf``.
+     #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file located in ``/Library/Ossec/etc/agent.conf``.
 
          .. include:: ../../_templates/registrations/common/client_server_section.rst
 
@@ -246,7 +246,7 @@ There are two options to register the Wazuh agent using host verification. Pleas
           # cp rootCA.pem /var/ossec/etc
 
 
-     #. Modify the ``/var/ossec/etc/ossec.conf`` file to enable the host verification. Uncomment the ``<auth><ssl_agent_ca>`` section and add the path to the ``CA`` file.
+     #. Modify the ``/var/ossec/etc/manager.conf`` file to enable the host verification. Uncomment the ``<auth><ssl_agent_ca>`` section and add the path to the ``CA`` file.
 
          .. code-block:: xml
 
@@ -285,7 +285,7 @@ There are two options to register the Wazuh agent using host verification. Pleas
           # cp rootCA.pem /var/ossec/etc
 
 
-     #. Modify the ``/var/ossec/etc/ossec.conf`` file to enable the host verification. Uncomment the ``<auth><ssl_agent_ca>`` section and add the path to the ``CA`` file. Set the field ``<ssl_verify_host>`` to ``yes``:
+     #. Modify the ``/var/ossec/etc/manager.conf`` file to enable the host verification. Uncomment the ``<auth><ssl_agent_ca>`` section and add the path to the ``CA`` file. Set the field ``<ssl_verify_host>`` to ``yes``:
 
          .. code-block:: xml
 
@@ -331,7 +331,7 @@ There are two options to register the Wazuh agent using host verification. Pleas
          .. include:: ../../_templates/registrations/common/set_agent_name.rst
 
 
-     #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``/var/ossec/etc/ossec.conf``.
+     #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file located in ``/var/ossec/etc/agent.conf``.
 
          .. include:: ../../_templates/registrations/common/client_server_section.rst
 
@@ -367,7 +367,7 @@ There are two options to register the Wazuh agent using host verification. Pleas
          .. include:: ../../_templates/registrations/common/set_agent_name.rst
 
 
-      #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``C:\Program Files (x86)\ossec-agent\ossec.conf``.
+      #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file located in ``C:\Program Files (x86)\ossec-agent\agent.conf``.
 
            .. include:: ../../_templates/registrations/common/client_server_section.rst
 
@@ -399,7 +399,7 @@ There are two options to register the Wazuh agent using host verification. Pleas
             .. include:: ../../_templates/registrations/common/set_agent_name.rst
 
 
-       #. To enable the communication with the Wauh manager, edit the Wazuh agent's configuration file placed at ``/Library/Ossec/etc/ossec.conf``.
+       #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file located in ``/Library/Ossec/etc/agent.conf``.
 
             .. include:: ../../_templates/registrations/common/client_server_section.rst
 

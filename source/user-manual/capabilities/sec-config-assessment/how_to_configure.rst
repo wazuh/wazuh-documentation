@@ -36,9 +36,9 @@ You can also specify a relative path to the Wazuh installation directory.
 
     <policy>etc/shared/policy_file_to_enable.yml</policy>
 
-There are two ways to disable policies, the simplest one is by renaming the policy file by adding ``.disabled``
+There are two ways to disable policies, the simplest one is to rename the policy file by adding ``.disabled``
 (or anything different from `.yaml` or `.yml`) after their YAML extension. The second is to disable them from
-the `ossec.conf` by adding a line such as
+the `agent.conf` by adding a line such as
 
 .. code-block:: xml
 
@@ -64,7 +64,7 @@ to the ``default`` group, which is used here as an example:
 #. Place a new policy file in the Wazuh manager's ``/var/ossec/etc/shared/default`` folder. This file must be owned by the user ``wazuh``.
 
 
-#. Add the configuration block to the Wazuh manager's ``etc/shared/default/agent.conf`` file to push the new policy file to the Wazuh agent:
+#. Add the configuration block to the Wazuh manager's ``etc/shared/default/shared.conf`` file to push the new policy file to the Wazuh agent:
 
      .. code-block:: xml
 

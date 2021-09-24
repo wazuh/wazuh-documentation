@@ -37,7 +37,7 @@ How can I remove the Agentless monitoring configuration?
 --------------------------------------------------------
 To remove your agentless configuration and passwords you have to perform the following steps:
 
-#. Remove the agentless configuration from your ``ossec.conf`` file.
+#. Remove the agentless configuration from your ``manager.conf`` file.
 
 #. Remove the file ``.passlist`` located at ``/var/ossec/agentless/.passlist``.
 

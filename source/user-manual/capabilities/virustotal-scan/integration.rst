@@ -33,7 +33,7 @@ Getting started
 
 Follow the instructions from :ref:`manual_integration` to enable the **Integrator** daemon and configure the VirusTotal integration.
 
-This is an example configuration to add on the ``ossec.conf`` file:
+This is an example configuration to add on the ``manager.conf`` file:
 
 .. code-block:: xml
 

@@ -195,70 +195,70 @@ Wazuh Manager
 
 **wazuh_manager_json_output**
 
-  Configures the :ref:`jsonout_output<reference_ossec_global>` section from ``ossec.conf``. This is a string, not a bool.
+  Configures the :ref:`jsonout_output<reference_ossec_global>` section from ``manager.conf``. This is a string, not a bool.
 
   *Default yes*
 
 **wazuh_manager_alerts_log**
 
-  Configures the :ref:`alerts_log<reference_ossec_global>` section from ``ossec.conf``. This is a string, not a bool.
+  Configures the :ref:`alerts_log<reference_ossec_global>` section from ``manager.conf``. This is a string, not a bool.
 
   *Default yes*
 
 **wazuh_manager_logall**
 
-  Configures the :ref:`logall<reference_ossec_global>` section from ``ossec.conf``. This is a string, not a bool.
+  Configures the :ref:`logall<reference_ossec_global>` section from ``manager.conf``. This is a string, not a bool.
 
   *Default yes*
 
 **wazuh_manager_email_notification**
 
-  Configures the :ref:`email_notification<reference_ossec_global>` section from ``ossec.conf``. This is a string, not a bool.
+  Configures the :ref:`email_notification<reference_ossec_global>` section from ``manager.conf``. This is a string, not a bool.
 
   *Default yes*
 
 **wazuh_manager_mailto**
 
-  Configures the :ref:`email_to<reference_ossec_global>` items from ``ossec.conf``.
+  Configures the :ref:`email_to<reference_ossec_global>` items from ``manager.conf``.
 
   *Default ['admin@example.net']*
 
 
 **wazuh_manager_email_smtp_server**
 
-  Configures the :ref:`smtp_server<reference_ossec_global>` section from ``ossec.conf``.
+  Configures the :ref:`smtp_server<reference_ossec_global>` section from ``manager.conf``.
 
   *Default smtp.example.wazuh.com*
 
 
 **wazuh_manager_email_from**
 
-  Configures the :ref:`email_from<reference_ossec_global>` section from ``ossec.conf``.
+  Configures the :ref:`email_from<reference_ossec_global>` section from ``manager.conf``.
 
   *Default wazuh@example.wazuh.com*
 
 
 **wazuh_manager_email_maxperhour**
 
-  Configures the :ref:`email_maxperhour<reference_ossec_global>` section from ``ossec.conf``.
+  Configures the :ref:`email_maxperhour<reference_ossec_global>` section from ``manager.conf``.
 
   *Default 12*
 
 **wazuh_manager_email_queue_size**
 
-  Configures the :ref:`queue_size<reference_ossec_remote>` section from ``ossec.conf``.
+  Configures the :ref:`queue_size<reference_ossec_remote>` section from ``manager.conf``.
 
   *Default 131072*
 
 **wazuh_manager_email_log_source**
 
-  Configures the :ref:`email_log_source<reference_ossec_global>` section from ``ossec.conf``.
+  Configures the :ref:`email_log_source<reference_ossec_global>` section from ``manager.conf``.
 
   *Default alerts.log*
 
 **wazuh_manager_globals**
 
-  Configures the :ref:`white_list<reference_ossec_global>` section from ``ossec.conf``.
+  Configures the :ref:`white_list<reference_ossec_global>` section from ``manager.conf``.
 
   *Default:*
 
@@ -272,28 +272,28 @@ Wazuh Manager
 
 **wazuh_manager_log_level**
 
-  Configures the :ref:`log_alert_level<reference_ossec_alerts>` section from ``ossec.conf``.
+  Configures the :ref:`log_alert_level<reference_ossec_alerts>` section from ``manager.conf``.
 
   *Default 3*
 
 
 **wazuh_manager_email_level**
 
-  Configures the :ref:`email_alert_level<reference_ossec_alerts>` section from ``ossec.conf``.
+  Configures the :ref:`email_alert_level<reference_ossec_alerts>` section from ``manager.conf``.
 
   *Default 12*
 
 
 **wazuh_manager_log_format**
 
-  Configures :ref:`log_format<reference_ossec_logging>` inside logging section from ``ossec.conf``.
+  Configures :ref:`log_format<reference_ossec_logging>` inside logging section from ``manager.conf``.
 
   *Default plain*
 
 
 **wazuh_manager_extra_emails**
 
-  Configures one or more :ref:`email_alerts<reference_ossec_email_alerts>` sections from ``ossec.conf``.
+  Configures one or more :ref:`email_alerts<reference_ossec_email_alerts>` sections from ``manager.conf``.
 
   *Default:*
 
@@ -313,7 +313,7 @@ Wazuh Manager
 
 **wazuh_manager_connection**
 
-  Configures one or more :ref:`remote<reference_ossec_remote>` sections from ``ossec.conf``.
+  Configures one or more :ref:`remote<reference_ossec_remote>` sections from ``manager.conf``.
 
   *Default:*
 
@@ -327,7 +327,7 @@ Wazuh Manager
 
 **wazuh_manager_reports**
 
-  Configures one or more :ref:`reports<reference_ossec_reports>` sections from ``ossec.conf``.
+  Configures one or more :ref:`reports<reference_ossec_reports>` sections from ``manager.conf``.
 
   *Default:*
 
@@ -346,124 +346,9 @@ Wazuh Manager
         user: null
         showlogs: null
 
-**wazuh_manager_rootcheck**
-
-  Configures the :ref:`rootcheck<reference_ossec_rootcheck>` section from ``ossec.conf``.
-
-  *Default:*
-
-  .. code-block:: yaml
-
-    wazuh_manager_rootcheck:
-      frequency: 43200
-
-**wazuh_manager_openscap**
-
-  Configures the :ref:`wodle<wodle_openscap>` item named ``open-scap`` from ``ossec.conf``.
-
-  *Default:*
-
-  .. code-block:: yaml
-
-    wazuh_manager_openscap:
-      disable: 'yes'
-      timeout: 1800
-      interval: '1d'
-      scan_on_start: 'yes'
-
-
-**wazuh_manager_ciscat**
-
-  Configures the :ref:`wodle<wodle_ciscat>` item named ``cis-cat`` from ``ossec.conf``.
-
-  *Default:*
-
-  .. code-block:: yaml
-
-     wazuh_manager_ciscat:
-       disable: 'yes'
-       install_java: 'yes'
-       timeout: 1800
-       interval: '1d'
-       scan_on_start: 'yes'
-       java_path: '/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/bin'
-       ciscat_path: 'wodles/ciscat'
-
-**wazuh_manager_osquery**
-
-  Configures the :ref:`wodle<wodle-osquery>` item named ``osquery`` from ``ossec.conf``.
-
-  *Default:*
-
-  .. code-block:: yaml
-
-    wazuh_manager_osquery:
-      disable: 'yes'
-      run_daemon: 'yes'
-      log_path: '/var/log/osquery/osqueryd.results.log'
-      config_path: '/etc/osquery/osquery.conf'
-      ad_labels: 'yes'
-
-**wazuh_manager_syscollector**
-
-  Configures the :ref:`wodle<wodle-syscollector>` item named ``syscollector`` from ``ossec.conf``.
-
-  *Default:*
-
-  .. code-block:: yaml
-
-    wazuh_manager_syscollector:
-      disable: 'no'
-      interval: '1h'
-      scan_on_start: 'yes'
-      hardware: 'yes'
-      os: 'yes'
-      network: 'yes'
-      packages: 'yes'
-      ports_no: 'yes'
-      processes: 'yes'
-
-**wazuh_manager_monitor_aws**
-
-  Configures the :ref:`wodle<wodle_s3>` item named ``aws-s3`` from ``ossec.conf``.
-
-  *Default:*
-
-  .. code-block:: yaml
-
-    wazuh_manager_monitor_aws:
-      disabled: 'yes'
-      interval: '10m'
-      run_on_start: 'yes'
-      skip_on_error: 'yes'
-      s3:
-        - name: null
-          bucket_type: null
-          path: null
-          only_logs_after: null
-          access_key: null
-          secret_key: null
-
-**wazuh_manager_sca**
-
-  Configures the :ref:`sca<reference_sec_config_assessment>` section from ``ossec.conf``.
-
-  *Default:*
-
-  .. code-block:: yaml
-
-    wazuh_manager_sca:
-      enabled: 'yes'
-      scan_on_start: 'yes'
-      interval: '12h'
-      skip_nfs: 'yes'
-      day: ''
-      wday: ''
-      time: ''
-
 **wazuh_manager_vulnerability_detector**
 
-  Configures the :ref:`vulnerability-detector<vuln_detector>` section from ``ossec.conf``.
+  Configures the :ref:`vulnerability-detector<vuln_detector>` section from ``manager.conf``.
 
   *Default:*
 
@@ -499,59 +384,10 @@ Wazuh Manager
           update_interval: '1h'
           name: '"nvd"'
 
-**wazuh_manager_syscheck**
-
-  Configures the :ref:`syscheck<reference_ossec_syscheck>` section from ``ossec.conf``.
-
-  *Default:*
-
-  .. code-block:: yaml
-
-    wazuh_manager_syscheck:
-      disable: 'no'
-      frequency: 43200
-      scan_on_start: 'yes'
-      auto_ignore: 'no'
-      ignore:
-        - /etc/mtab
-        - /etc/hosts.deny
-        - /etc/mail/statistics
-        - /etc/random-seed
-        - /etc/random.seed
-        - /etc/adjtime
-        - /etc/httpd/logs
-        - /etc/utmpx
-        - /etc/wtmpx
-        - /etc/cups/certs
-        - /etc/dumpdates
-        - /etc/svc/volatile
-      ignore_linux_type:
-        - '.log$|.swp$'
-      no_diff:
-        - /etc/ssl/private.key
-      directories:
-        - dirs: /etc,/usr/bin,/usr/sbin
-          checks: ''
-        - dirs: /bin,/sbin,/boot
-          checks: ''
-      auto_ignore_frequency:
-        frequency: 'frequency="10"'
-        timeframe: 'timeframe="3600"'
-        value: 'no'
-      skip_nfs: 'yes'
-      skip_dev: 'yes'
-      skip_proc: 'yes'
-      skip_sys: 'yes'
-      process_priority: 10
-      max_eps: 100
-      sync_enabled: 'yes'
-      sync_interval: '5m'
-      sync_max_interval: '1h'
-      sync_max_eps: 10
 
 **wazuh_manager_commands**
 
-  Configures the :ref:`command<reference_ossec_commands>` section from ``ossec.conf``.
+  Configures the :ref:`command<reference_ossec_commands>` section from ``manager.conf``.
 
   *Default:*
 
@@ -582,50 +418,10 @@ Wazuh Manager
         executable: 'netsh-win-2016.cmd'
         timeout_allowed: 'yes'
 
-**wazuh_manager_localfiles**
-
-  Configures the :ref:`localfile<reference_ossec_localfile>` section from ``ossec.conf`` for each platform.
-
-  *Default:*
-
-  .. code-block:: yaml
-
-    wazuh_manager_localfiles:
-      common:
-        - format: 'command'
-          command: df -P
-          frequency: '360'
-        - format: 'full_command'
-          command: netstat -tulpn | sed 's/\([[:alnum:]]\+\)\ \+[[:digit:]]\+\ \+[[:digit:]]\+\ \+\(.*\):\([[:digit:]]*\)\ \+\([0-9\.\:\*]\+\).\+\ \([[:digit:]]*\/[[:alnum:]\-]*\).*/\1 \2 == \3 == \4 \5/' | sort -k 4 -g | sed 's/ == \(.*\) ==/:\1/' | sed 1,2d
-          alias: 'netstat listening ports'
-          frequency: '360'
-        - format: 'full_command'
-          command: 'last -n 20'
-          frequency: '360'
-        - format: 'syslog'
-          location: '/var/ossec/logs/active-responses.log'
-      debian:
-        - format: 'syslog'
-          location: '/var/log/auth.log'
-        - format: 'syslog'
-          location: '/var/log/syslog'
-        - format: 'syslog'
-          location: '/var/log/dpkg.log'
-        - format: 'syslog'
-          location: '/var/log/kern.log'
-      centos:
-        - format: 'syslog'
-          location: '/var/log/messages'
-        - format: 'syslog'
-          location: '/var/log/secure'
-        - format: 'syslog'
-          location: '/var/log/maillog'
-        - format: 'audit'
-          location: '/var/log/audit/audit.log'
 
 **wazuh_manager_syslog_outputs**
 
-  Configures the :ref:`syslog_output<reference_ossec_syslog_output>` section from ``ossec.conf``.
+  Configures the :ref:`syslog_output<reference_ossec_syslog_output>` section from ``manager.conf``.
 
   *Default:*
 
@@ -638,7 +434,7 @@ Wazuh Manager
 
 **wazuh_manager_integrations**
 
-  Configures the :ref:`integration<reference_ossec_integration>` section from ``ossec.conf``.
+  Configures the :ref:`integration<reference_ossec_integration>` section from ``manager.conf``.
 
   *Default:*
 
@@ -658,7 +454,7 @@ Wazuh Manager
 
 **wazuh_manager_labels**
 
-  Configures the :ref:`labels<reference_ossec_labels>` section from ``ossec.conf``.
+  Configures the :ref:`labels<reference_ossec_labels_manager>` section from ``manager.conf``.
 
   *Default:*
 
@@ -672,7 +468,7 @@ Wazuh Manager
 
 **wazuh_manager_ruleset**
 
-  Configures the :ref:`ruleset<reference_ossec_rules>` section from ``ossec.conf``.
+  Configures the :ref:`ruleset<reference_ossec_rules>` section from ``manager.conf``.
 
   *Default:*
 
@@ -688,7 +484,7 @@ Wazuh Manager
 
 **wazuh_manager_rule_exclude**
 
-  Configures the :ref:`rule_exclude<reference_ossec_rules>` section from ``ossec.conf``.
+  Configures the :ref:`rule_exclude<reference_ossec_rules>` section from ``manager.conf``.
 
   *Default:*
 
@@ -700,7 +496,7 @@ Wazuh Manager
 
 **wazuh_manager_authd**
 
-  Configures the :ref:`auth<reference_ossec_auth>` section from ``ossec.conf``.
+  Configures the :ref:`auth<reference_ossec_auth>` section from ``manager.conf``.
 
   *Default:*
 
@@ -724,7 +520,7 @@ Wazuh Manager
 
 **wazuh_manager_cluster**
 
-  Configures the :ref:`cluster<reference_ossec_cluster>` section from ``ossec.conf``.
+  Configures the :ref:`cluster<reference_ossec_cluster>` section from ``manager.conf``.
 
   *Default:*
 
@@ -861,67 +657,8 @@ Wazuh Manager
           srcip: null
           user: null
           showlogs: null
-      syscheck:
-        frequency: 43200
-        scan_on_start: 'yes'
-        auto_ignore: 'no'
-        alert_new_files: 'yes'
-        ignore:
-          - /etc/mtab
-          - /etc/mnttab
-          - /etc/hosts.deny
-          - /etc/mail/statistics
-          - /etc/random-seed
-          - /etc/random.seed
-          - /etc/adjtime
-          - /etc/httpd/logs
-          - /etc/utmpx
-          - /etc/wtmpx
-          - /etc/cups/certs
-          - /etc/dumpdates
-          - /etc/svc/volatile
-        no_diff:
-          - /etc/ssl/private.key
-        directories:
-          - dirs: /etc,/usr/bin,/usr/sbin
-            checks: 'check_all="yes"'
-          - dirs: /bin,/sbin
-            checks: 'check_all="yes"'
-      rootcheck:
-        frequency: 43200
-      openscap:
-        disable: 'no'
-        timeout: 1800
-        interval: '1d'
-        scan_on_start: 'yes'
-      cis_cat:
-        disable: 'yes'
-        install_java: 'yes'
-        timeout: 1800
-        interval: '1d'
-        scan_on_start: 'yes'
-        java_path: '/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/bin'
-        ciscat_path: '/var/ossec/wodles/ciscat'
-        content:
-          - type: 'xccdf'
-            path: 'benchmarks/CIS_Ubuntu_Linux_16.04_LTS_Benchmark_v1.0.0-xccdf.xml'
-            profile: 'xccdf_org.cisecurity.benchmarks_profile_Level_1_-_Server'
       log_level: 1
       email_level: 12
-      localfiles:
-        - format: 'syslog'
-          location: '/var/log/messages'
-        - format: 'syslog'
-          location: '/var/log/secure'
-        - format: 'command'
-          command: 'df -P'
-          frequency: '360'
-        - format: 'full_command'
-          command: 'netstat -tln | grep -v 127.0.0.1 | sort'
-          frequency: '360'
-        - format: 'full_command'
-          command: 'last -n 20'
-          frequency: '360'
       globals:
         - '127.0.0.1'
         - '192.168.2.1'
@@ -1131,21 +868,6 @@ Wazuh Agent
 
       wazuh_profile: "centos7, centos7-web"
 
-**wazuh_agent_authd:**
-
-  Set the agent-authd facility. This will enable or not the automatic agent registration, you could set various options in accordance of the authd service configured in the Wazuh Manager. This Ansible role will use the address defined on ``registration_address`` as the authd registration server.
-
-  .. code-block:: yaml
-
-    wazuh_agent_authd:
-      registration_address: 10.1.1.12
-      enable: false
-      port: 1515
-      ssl_agent_ca: null
-      ssl_agent_cert: null
-      ssl_agent_key: null
-      ssl_auto_negotiate: 'no'
-
 **wazuh_notify_time**
 
   Set the <notify_time> option in the agent.
@@ -1172,7 +894,7 @@ Wazuh Agent
 
 **wazuh_agent_enrollment**
 
-  Configures the :ref:`enrollment<reference_ossec_client>` section from agent ``ossec.conf``.
+  Configures the :ref:`enrollment<reference_ossec_client>` section from agent ``agent.conf``.
 
   *Example:*
 
@@ -1196,7 +918,7 @@ Wazuh Agent
 
 **wazuh_agent_client_buffer**
 
-  Configures the :ref:`client_buffer<reference_client_buffer>` section from agent ``ossec.conf``.
+  Configures the :ref:`client_buffer<reference_client_buffer>` section from agent ``agent.conf``.
 
   .. code-block:: yaml
 
@@ -1207,7 +929,7 @@ Wazuh Agent
 
 **wazuh_agent_rootcheck**
 
-  Configures the :ref:`rootcheck<reference_ossec_rootcheck>` section from agent ``ossec.conf``.
+  Configures the :ref:`rootcheck<reference_ossec_rootcheck>` section from agent ``agent.conf``.
 
   .. code-block:: yaml
 
@@ -1216,7 +938,7 @@ Wazuh Agent
 
 **wazuh_agent_openscap**
 
-  Configures the :ref:`wodle<wodle_openscap>` item named ``open-scap`` from ``ossec.conf``.
+  Configures the :ref:`wodle<wodle_openscap>` item named ``open-scap`` from ``agent.conf``.
 
   *Default:*
 
@@ -1231,7 +953,7 @@ Wazuh Agent
 
 **wazuh_agent_cis_cat**
 
-  Configures the :ref:`wodle<wodle_ciscat>` item named ``cis-cat`` from ``ossec.conf``.
+  Configures the :ref:`wodle<wodle_ciscat>` item named ``cis-cat`` from ``agent.conf``.
 
   *Default:*
 
@@ -1251,7 +973,7 @@ Wazuh Agent
 
 **wazuh_agent_osquery**
 
-  Configures the :ref:`wodle<wodle-osquery>` item named ``osquery`` from ``ossec.conf``.
+  Configures the :ref:`wodle<wodle-osquery>` item named ``osquery`` from ``agent.conf``.
 
   *Default:*
 
@@ -1270,7 +992,7 @@ Wazuh Agent
 
 **wazuh_agent_syscollector**
 
-  Configures the :ref:`wodle<wodle-syscollector>` item named ``syscollector`` from ``ossec.conf``.
+  Configures the :ref:`wodle<wodle-syscollector>` item named ``syscollector`` from ``agent.conf``.
 
   *Default:*
 
@@ -1289,7 +1011,7 @@ Wazuh Agent
 
 **wazuh_agent_sca**
 
-  Configures the :ref:`sca<reference_sec_config_assessment>` section from ``ossec.conf``.
+  Configures the :ref:`sca<reference_sec_config_assessment>` section from ``agent.conf``.
 
   *Default:*
 
@@ -1306,7 +1028,7 @@ Wazuh Agent
 
 **wazuh_agent_syscheck**
 
-  Configures the :ref:`syscheck<reference_ossec_syscheck>` section from ``ossec.conf``.
+  Configures the :ref:`syscheck<reference_ossec_syscheck>` section from ``agent.conf``.
 
   *Default:*
 
@@ -1422,7 +1144,7 @@ Wazuh Agent
 
 **wazuh_agent_localfiles**
 
-  Configures the :ref:`localfile<reference_ossec_localfile>` section from ``ossec.conf``.
+  Configures the :ref:`localfile<reference_ossec_localfile>` section from ``agent.conf``.
 
   *Default:*
 
@@ -1473,7 +1195,7 @@ Wazuh Agent
 
 **wazuh_agent_labels**
 
-  Configures the :ref:`labels<reference_ossec_labels>` section from ``ossec.conf``.
+  Configures the :ref:`labels <reference_ossec_labels_agent>` section from ``agent.conf``.
 
   *Default:*
 
@@ -1487,7 +1209,7 @@ Wazuh Agent
 
 **wazuh_agent_active_response**
 
-  Configures the :ref:`active-response<reference_ossec_active_response>` section from ``ossec.conf``.
+  Configures the :ref:`active-response<reference_ossec_active_response_agent>` section from ``agent.conf``.
 
   *Default:*
 
@@ -1501,7 +1223,7 @@ Wazuh Agent
 
 **wazuh_agent_log_format**
 
-  Configures the :ref:`log_format<reference_ossec_logging>` section from ``ossec.conf``.
+  Configures the :ref:`log_format<reference_ossec_logging_agent>` section from ``agent.conf``.
 
   *Default: plain*
 
@@ -1579,15 +1301,3 @@ Wazuh Agent
         - format: 'full_command'
           command: 'last -n 20'
           frequency: '360'
-
-  .. warning:: We recommend the use of `Ansible Vault <https://docs.ansible.com/ansible/latest/user_guide/vault.html>`_ to protect authd credentials.
-
-**authd_pass:**
-
-  Wazuh authd credentials for agent registration.
-
-  *Example:*
-
-  .. code-block:: yaml
-
-    authd_pass: foobar

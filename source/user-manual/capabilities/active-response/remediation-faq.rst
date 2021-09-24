@@ -93,7 +93,7 @@ No. For security reasons, the custom active response scripts should be placed in
 
 Can I configure active responses for only one host?
 ---------------------------------------------------
-Yes, using the location option. More information: :ref:`Active Response options <reference_ossec_active_response>`
+Yes, using the location option. More information: :ref:`Active Response options <reference_ossec_active_response_manager>`
 
 
 Can an active response remove the action after a period of time?

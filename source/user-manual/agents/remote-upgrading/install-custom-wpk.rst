@@ -18,7 +18,7 @@ You have two options to perform this action:
 
         # cp /path/to/certificate etc/wpk_root.pem
 
-    b. Add a new certificate by editing the ossec.conf file:
+    b. Add a new certificate by editing the agent.conf file:
 
     .. code-block:: xml
 

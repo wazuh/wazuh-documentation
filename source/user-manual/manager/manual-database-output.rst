@@ -106,7 +106,7 @@ Now that we have Wazuh installed with database support, we need to set up the da
 Wazuh configuration
 -------------------
 
-In order for Wazuh to output alerts and other data into the database, the users must add a ``<database_output>`` section on the configuration file, located at ``/var/ossec/etc/ossec.conf``. Fill in the block with the right database name and credentials. The hostname must be the IP address of the database server.
+In order for Wazuh to output alerts and other data into the database, the users must add a ``<database_output>`` section to the configuration file located in ``/var/ossec/etc/manager.conf``. Fill in the block with the right database name and credentials. The hostname must be the IP address of the database server.
 
 **For MySQL:**
 

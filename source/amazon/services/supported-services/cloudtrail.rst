@@ -40,7 +40,7 @@ Amazon configuration
 Wazuh configuration
 -------------------
 
-#. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following configuration block to enable the integration with CloudTrail:
+#. Open the Wazuh configuration file (``/var/ossec/etc/agent.conf``) and add the following configuration block to enable the integration with CloudTrail:
 
     .. code-block:: xml
 

@@ -74,7 +74,7 @@ Debian and Ubuntu based Linux distributions:
 
     # apt-get install auditd
 
-Editing ossec.conf
+Editing agent.conf
 ~~~~~~~~~~~~~~~~~~
 Wazuh must be aware of the events detected by Audit. So, it is needs to be configured to read the audit log file:
 

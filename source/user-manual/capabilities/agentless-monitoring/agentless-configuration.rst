@@ -10,7 +10,7 @@ Configuration
 #. `Generic Diff`_
 #. `Pix config`_
 
-Agentless monitoring is configured in the :ref:`ossec.conf <reference_ossec_conf>` file in the section :ref:`agentless <reference_ossec_agentless>`.
+Agentless monitoring is configured in the :ref:`manager.conf <reference_manager_conf>` file in the section :ref:`agentless <reference_ossec_agentless>`.
 
 Integrity check BSD
 -------------------

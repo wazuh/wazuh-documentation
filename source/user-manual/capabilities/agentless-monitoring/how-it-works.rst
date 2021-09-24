@@ -31,7 +31,7 @@ Once created, the public key must be copied into the remote device.
 Monitoring
 ----------
 
-After devices have been added to the list, the manager must be configured to monitor them. To view additional configuration options for the ``ossec.conf`` file, please refer to :ref:`agentless <reference_ossec_agentless>`.
+After devices have been added to the list, the manager must be configured to monitor them. To view additional configuration options for the ``manager.conf`` file, please refer to :ref:`agentless <reference_ossec_agentless>`.
 
 BSD Integrity Check
 ^^^^^^^^^^^^^^^^^^^

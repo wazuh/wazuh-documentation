@@ -29,8 +29,8 @@ If you haven't already, install a web server in your linux-agent, for example **
         [root@linux-agent centos]# yum install nginx
         [root@linux-agent centos]# systemctl start nginx
 
-Ensure that the nginx **access** and **error** logs are collected by Wazuh by having
-these ``<localfile>`` sections present in the agent's ``/var/ossec/etc/ossec.conf`` file:
+Make sure that Wazuh collects the nginx **access** and **error** logs by having
+these ``<localfile>`` sections present in the agent's ``/var/ossec/etc/agent.conf`` file:
 
     .. code-block:: xml
 
@@ -117,10 +117,10 @@ Set up Active Response (AR) countermeasures to Shellshock probes
 ----------------------------------------------------------------
 
 The Wazuh Active Response capability allows scripted actions to be taken in
-response to specific criteria of Wazuh rules being matched.  By default, AR
-is enabled on all agents and all standard AR commands are defined in ``ossec.conf``
+response to specific criteria of Wazuh rules being matched. By default, AR
+is enabled on all agents and all standard AR commands are defined in ``manager.conf``
 on the Wazuh manager, but no actual criteria for calling the AR commands is
-included.  No AR commands will actually be triggered until further configuration
+included. No AR commands are actually triggered until further configuration
 is performed on the Wazuh manager.
 
 For the purpose of automated blocking, a very popular command for blocking in
@@ -146,14 +146,15 @@ Each command has a descriptive ``<name>`` by which it will be referred to in the
 ``<active-response>`` sections.  The actual script to be called is defined by
 ``<executable>``.  Lastly, if ``<timeout_allowed>`` is set to **yes**, then the
 command is considered stateful and can be reversed after an amount of time specified
-in a specific ``<active-response>`` section (see :ref:`timeout <reference_ossec_active_response>`).
+in a specific ``<active-response>`` section (see :ref:`timeout <reference_ossec_active_response_manager>`).
 For more details about configuring active response, see the Wazuh user manual.
+
 
 
 AR Scenario 1 - Make victim block attacker with iptables
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-In the ``/var/ossec/etc/ossec.conf`` file on the Wazuh manager, replace this section:
+In the ``/var/ossec/etc/manager.conf`` file on the Wazuh manager, replace this section:
 
     .. code-block:: xml
 
@@ -262,9 +263,9 @@ requesting the webpage again, or by using an iptables command on the attacked se
 AR Scenario 2 - Make all Linux lab systems block attacker even if they were not the target of the attack
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-In the newly-added ``<active-response>`` section in ``ossec.conf`` on wazuh-manager,
+In the newly-added ``<active-response>`` section in ``manager.conf`` on wazuh-manager,
 change the ``<location>`` value from **local** to **all** so that all Linux Wazuh
-agents will block the attacker even when only one of them is targeted.
+agents block the attacker even when only one of them is targeted.
 
 .. note::
     The option **all** sends the active response to all **agents**. If we want it
@@ -296,7 +297,7 @@ that all Linux systems configured are blocking the attacker's IP.
 AR Scenario 3 - Make windows null route the attacker
 ::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-Add an additional AR section to ``ossec.conf`` on wazuh-manager:
+Add an additional AR section to ``manager.conf`` on wazuh-manager:
 
     .. code-block:: xml
 

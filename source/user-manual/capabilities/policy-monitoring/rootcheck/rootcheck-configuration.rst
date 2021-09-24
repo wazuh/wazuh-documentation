@@ -13,7 +13,7 @@ Configuration
 Basic usage
 -----------
 
-To configure the options for rootcheck, go to the :ref:`Rootcheck section <reference_ossec_rootcheck>` in :ref:`ossec.conf <reference_ossec_conf>`. The most common configuration options are: :ref:`frequency <reference_ossec_rootcheck_frequency>` and :ref:`system-audit <reference_ossec_rootcheck_audit>`
+To configure the options for rootcheck, go to the :ref:`Rootcheck section <reference_ossec_rootcheck>` in :ref:`agent.conf <reference_client_conf>`. The most common configuration options are: :ref:`frequency <reference_ossec_rootcheck_frequency>` and :ref:`system-audit <reference_ossec_rootcheck_audit>`.
 
 Basic example to configure audit polices:
 

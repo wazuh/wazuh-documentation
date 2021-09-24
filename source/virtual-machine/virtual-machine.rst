@@ -32,7 +32,7 @@ To access the web interface:
 
 All components included in this virtual image are configured to work out-of-the-box without the need to modify any settings. However, all components can be fully customized. These are the configuration files locations:
 
-  - Wazuh manager: ``/var/ossec/etc/ossec.conf``
+  - Wazuh manager: ``/var/ossec/etc/manager.conf``
   - Open Distro for Elasticsearch: ``/etc/elasticsearch/elasticsearch.yml``
   - Filebeat-OSS: ``/etc/filebeat/filebeat.yml``
   - Kibana: ``/etc/kibana/kibana.yml``

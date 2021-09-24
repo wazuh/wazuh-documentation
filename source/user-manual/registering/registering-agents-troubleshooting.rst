@@ -36,7 +36,7 @@ By default, the Wazuh manager attaches the Wazuh agent to the visible IP of the 
 
 #. To set up this behavior for all subsequent registrations:
 
-   In the Wazuh manager's configuration ``/var/ossec/etc/ossec.conf`` file, set the :ref:`use_source_ip <auth_use_source_ip>` to ``no``:
+   In the Wazuh manager's configuration ``/var/ossec/etc/manager.conf`` file, set the :ref:`use_source_ip <auth_use_source_ip>` to ``no``:
 
    .. code-block:: xml
 

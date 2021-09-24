@@ -47,7 +47,7 @@ In order to check SSH security settings and help meet requirement 2.2.4, we have
 
 .. code-block:: console
 
-    [root@manager ossec]# cat etc/ossec.conf | grep system_audit_ssh -B 4 -A 2
+    [root@manager ossec]# cat etc/agent.conf | grep system_audit_ssh -B 4 -A 2
 
 .. code-block:: xml
     :class: output

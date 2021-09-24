@@ -75,7 +75,7 @@ If your SMTP server uses authentication (like Gmail, for instance), a server rel
 
     You should receive an email at ``you@example.com``.
 
-#. Configure Wazuh in the ``/var/ossec/etc/ossec.conf`` as follows:
+#. Configure Wazuh in the ``/var/ossec/etc/manager.conf`` file as follows:
 
     ::
 

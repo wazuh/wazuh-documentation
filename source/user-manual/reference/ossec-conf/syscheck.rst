@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
-.. meta::
-  :description: The ossec.conf file is the main configuration file on the Wazuh manager and it also plays an important role on the agents. Learn more about it and check out an example here. 
 
+.. meta::
+  :description: The agent.conf file is the main configuration file on the Wazuh agent. Learn more about it and check out an example here.
 
 .. _reference_ossec_syscheck:
 
@@ -79,7 +79,7 @@ allow_remote_prefilter_cmd
 
 .. versionadded:: 3.11.0
 
-Allows ``prefilter_cmd`` option apply in remote configuration (*agent.conf*).
+Allows ``prefilter_cmd`` option to be applied in remote configuration (*shared.conf*).
 
 +--------------------+--------------------------------+
 | **Default value**  | no                             |
@@ -96,7 +96,7 @@ Example:
 
 .. note::
 
-   This option only can be activated from the agent side, on its own ``ossec.conf``.
+   This option can only be activated from the agent side, on its own ``agent.conf``.
 
 
 .. _reference_ossec_syscheck_auto_ignore:
@@ -166,7 +166,7 @@ All files and subdirectories within the noted directories will also be monitored
 
 Drive letters without directories are valid. It's possible to configure them by removing the last backslash, for example ``D:``.
 
-This is to be set on the system to be monitored (or in the ``agent.conf``, if appropriate).
+This is to be set on the system to be monitored, or in the ``shared.conf`` file, if appropriate.
 
 There is a limit of 64 directories, comma-separated, that can be written in one line .
 
@@ -514,7 +514,7 @@ Example:
 
 .. note::
 
-  This option is ignored when defined at *agent.conf* if ``allow_remote_prefilter_cmd`` is set to ``no`` at *ossec.conf*.
+  This option is ignored when defined at *shared.conf* if ``allow_remote_prefilter_cmd`` is set to ``no`` at *agent.conf*.
 
 
 .. _reference_ossec_syscheck_process_priority:

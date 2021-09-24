@@ -50,10 +50,10 @@ Configure Wazuh manager to allow self registration of new agents with authentica
 
   .. code-block:: console
 
-    # grep "<use_password>" -B7 -A8 /var/ossec/etc/ossec.conf
-    # sed -i 's/<use_password>no/<use_password>yes/' /var/ossec/etc/ossec.conf
-    # grep "<use_password>" -B7 -A8 /var/ossec/etc/ossec.conf
-    # echo "please123" > /var/ossec/etc/authd.pass 
+    # grep "<use_password>" -B7 -A8 /var/ossec/etc/manager.conf
+    # sed -i 's/<use_password>no/<use_password>yes/' /var/ossec/etc/manager.conf
+    # grep "<use_password>" -B7 -A8 /var/ossec/etc/manager.conf
+    # echo "please123" > /var/ossec/etc/authd.pass # this is the password agents will use for self-registration
 
 The password echoed to ``/var/ossec/etc/authd.pass`` is the one agents will use for self-registration. 
 

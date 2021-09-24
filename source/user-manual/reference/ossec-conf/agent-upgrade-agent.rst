@@ -1,6 +1,6 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. _reference_ossec_agent_upgrade:
+.. _reference_ossec_agent_upgrade_agent:
 
 agent-upgrade
 =============
@@ -14,25 +14,14 @@ agent-upgrade
 
 The agent upgrade module is responsible for carrying out the entire agent upgrade process remotely:
 
-- On the manager side, it validates, downloads and/or sends the WPK files to the agents.
 - On the agent side, it processes the received commands and sends a notification to the manager after an upgrade process has been accomplished.
 
 This configuration section only needs to be defined in order to change the default values.
 
+.. note:: It is also necessary to include agent-upgrade configuration on the manager side, check :ref:`here <reference_ossec_agent_upgrade_manager>`.
+
 Options
 -------
-
-Manager side
-^^^^^^^^^^^^
-
-- `chunk_size`_
-- `wpk_repository`_
-- `max_threads`_
-
-.. note:: On the manager side, this module will be always enabled and cannot be deactivated.
-
-Agent side
-^^^^^^^^^^
 
 - `enabled`_
 - `notification_wait_start`_
@@ -41,48 +30,6 @@ Agent side
 - `ca_verification`_
 
 .. note:: On the agent side, this module can be disabled and doing so will block remote upgrading of that agent.
-
-
-chunk_size
-^^^^^^^^^^
-
-Size in KB of the chunk that will be used to send the WPK file.
-
-+--------------------+----------------------------------+
-| **Default value**  | 512                              |
-+--------------------+----------------------------------+
-| **Allowed values** | Any number between 64 and 32768  |
-+--------------------+----------------------------------+
-| **Required**       | no                               |
-+--------------------+----------------------------------+
-
-
-wpk_repository
-^^^^^^^^^^^^^^
-
-Repository where the WPK files will be downloaded.
-
-+--------------------+--------------------------------------------------+
-| **Default value**  | packages.wazuh.com/4.x/wpk/                      |
-+--------------------+--------------------------------------------------+
-| **Allowed values** | Any repository URL that contains the WPK files.  |
-+--------------------+--------------------------------------------------+
-| **Required**       | no                                               |
-+--------------------+--------------------------------------------------+
-
-
-max_threads
-^^^^^^^^^^^
-
-Maximum number of threads to process upgrades in parallel. Value 0 means number of CPU cores.
-
-+--------------------+-------------------------------+
-| **Default value**  | 8                             |
-+--------------------+-------------------------------+
-| **Allowed values** | Any number between 0 and 256  |
-+--------------------+-------------------------------+
-| **Required**       | no                            |
-+--------------------+-------------------------------+
 
 
 enabled
@@ -167,14 +114,6 @@ Sample Configuration
 --------------------
 
 .. code-block:: xml
-
-    <!-- On the manager side -->
-
-    <agent-upgrade>
-      <chunk_size>16384</chunk_size>
-      <wpk_repository>packages.wazuh.com/4.x/wpk/</wpk_repository>
-      <max_threads>16</max_threads>
-    </agent-upgrade>
 
     <!-- On the agent side -->
     <agent-upgrade>

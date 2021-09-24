@@ -1,6 +1,6 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-Configure the cluster node by editing the following settings in the ``/var/ossec/etc/ossec.conf`` file:
+Configure the cluster node by editing the following settings in the ``/var/ossec/etc/manager.conf`` file:
 
 .. code-block:: xml
 

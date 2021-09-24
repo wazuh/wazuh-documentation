@@ -231,7 +231,7 @@ We will obtain a final result similar to the one shown in the following code blo
 	TASK [ansible-wazuh-agent : Linux | Vuls integration deploy (runs in background, can take a while)] *******************************************************
 	skipping: [192.168.0.102]
 
-	TASK [ansible-wazuh-agent : Linux | Installing agent configuration (ossec.conf)] **************************************************************************
+	TASK [ansible-wazuh-agent : Linux | Installing agent configuration (agent.conf)] **************************************************************************
 	changed: [192.168.0.102]
 
 	TASK [ansible-wazuh-agent : Linux | Ensure Wazuh Agent service is started and enabled] ********************************************************************

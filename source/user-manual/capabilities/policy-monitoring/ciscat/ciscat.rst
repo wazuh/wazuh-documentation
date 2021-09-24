@@ -80,7 +80,7 @@ Use case: Running a CIS evaluation
 
 The following is an example of how to deploy the CIS-CAT integration:
 
-1. In the configuration file, ``ossec.conf``, set up a section as follows:
+1. In the configuration file, ``agent.conf``, set up a section as follows:
 
     1.1 If you are using a UNIX environment:
 

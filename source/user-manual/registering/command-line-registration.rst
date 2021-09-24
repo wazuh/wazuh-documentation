@@ -1,8 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Find out how to register Wazuh agents using the command line (CLI) in this section of the Wazuh documentation. 
-  
+  :description: Find out how to register Wazuh agents using the command line (CLI) in this section of the Wazuh documentation.
+
 .. _command-line-registration:
 
 Registering the Wazuh agents using the command line (CLI)
@@ -102,7 +102,7 @@ Choose the tab corresponding to the Wazuh agent's host operating system:
                 # history -d <line to delete>
 
 
-    #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``/var/ossec/etc/ossec.conf``.
+    #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file located in ``/var/ossec/etc/agent.conf``.
 
          .. include:: ../../_templates/registrations/common/client_server_section.rst
 
@@ -156,7 +156,7 @@ Choose the tab corresponding to the Wazuh agent's host operating system:
                 # Clear-History -Id <line IDs separated by a comma and a whitespace>
 
 
-    #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``C:\Program Files (x86)\ossec-agent\ossec.conf``.
+    #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file located in ``C:\Program Files (x86)\ossec-agent\agent.conf``.
 
          .. include:: ../../_templates/registrations/common/client_server_section.rst
 
@@ -207,7 +207,7 @@ Choose the tab corresponding to the Wazuh agent's host operating system:
 
                 # history -d <line to delete>
 
-    #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``/Library/Ossec/etc/ossec.conf``.
+    #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file located in ``/Library/Ossec/etc/agent.conf``.
 
          .. include:: ../../_templates/registrations/common/client_server_section.rst
 

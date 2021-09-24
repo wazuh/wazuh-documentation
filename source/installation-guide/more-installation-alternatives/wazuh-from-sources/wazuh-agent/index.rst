@@ -426,8 +426,8 @@ Installing Wazuh agent from sources
 
       .. code-block:: console
 
-        # sed '/System inventory/,/^$/{/^$/!d;}' /var/ossec/etc/ossec.conf > /var/ossec/etc/ossec.conf.tmp
-        # mv /var/ossec/etc/ossec.conf.tmp /var/ossec/etc/ossec.conf
+        # sed '/System inventory/,/^$/{/^$/!d;}' /var/ossec/etc/agent.conf > /var/ossec/etc/agent.conf.tmp
+        # mv /var/ossec/etc/agent.conf.tmp /var/ossec/etc/agent.conf
 
      .. note:: Note that the above commands have been executed for the default installation path /var/ossec. If you have installed the agent in another path, you will have to modify the path of those commands.
 

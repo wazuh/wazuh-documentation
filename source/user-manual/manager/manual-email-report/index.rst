@@ -35,7 +35,7 @@ Sample email:
 Generic email options
 ---------------------
 
-In order to configure Wazuh to send email alerts, the email settings must be configured in the ``<global>`` section of the ``ossec.conf`` file:
+In order to configure Wazuh to send email alerts, the email settings must be configured in the ``<global>`` section of the ``manager.conf`` file:
 
 .. code-block:: xml
 

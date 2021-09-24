@@ -16,7 +16,7 @@ The inspector works as a searcher, so it retrieves information using the AWS API
 Wazuh configuration
 -------------------
 
-#. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following configuration block to enable the integration with Inspector:
+#. Open the Wazuh configuration file (``/var/ossec/etc/agent.conf``) and add the following configuration block to enable the integration with Inspector:
 
     .. code-block:: xml
 

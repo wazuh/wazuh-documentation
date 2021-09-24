@@ -1,8 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: The Wazuh manager can be configured to publish the remote service. Check out this section of our documentation to learn more about this. 
-  
+  :description: The Wazuh manager can be configured to publish the remote service. Check out this section of our documentation to learn more about this.
+
 .. _remote-service:
 
 Remote service
@@ -13,7 +13,7 @@ The Wazuh manager can be configured to publish the remote service used by agents
 Configuration
 -------------
 
-All of the configuration of Remote Service is done via the ``ossec.conf`` file using the ``<remote>`` XML tag. The available options are detailed in :ref:`Remote config <reference_ossec_remote>`.
+All of the configuration of Remote Service is done via the ``manager.conf`` file using the ``<remote>`` XML tag. The available options are detailed in :ref:`Remote config <reference_ossec_remote>`.
 
 You can change the IP address used to listen the service with the following configuration:
 
@@ -27,7 +27,7 @@ You can change the IP address used to listen the service with the following conf
 
 This will set the manager to listen on IP address to 10.0.0.10.
 
-When you change any value in the ``ossec.conf`` file, you must restart the service before these changes will take effect.
+When you change any value in the ``manager.conf`` file, you must restart the service for these changes to take effect.
 
 a. For Systemd:
 

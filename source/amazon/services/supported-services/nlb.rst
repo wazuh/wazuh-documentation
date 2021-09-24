@@ -39,7 +39,7 @@ Amazon configuration
 Wazuh configuration
 -------------------
 
-#. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following block for NLB:
+#. Open the Wazuh configuration file (``/var/ossec/etc/agent.conf``) and add the following block for NLB:
 
     .. code-block:: xml
 

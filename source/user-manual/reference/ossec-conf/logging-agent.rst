@@ -1,0 +1,45 @@
+.. Copyright (C) 2020 Wazuh, Inc.
+
+.. _reference_ossec_logging_agent:
+
+logging
+=======
+
+.. topic:: XML section name
+
+    .. code-block:: xml
+
+      <logging>
+      </logging>
+
+This section shows how to configure the format of the internal log file ("wazuh.log").
+
+Options
+-------
+
+- `log_format`_
+
+log_format
+^^^^^^^^^^
+
+Specifies the log format between JSON output (.json) or plain text (.log). It also can be set to output both formats at the same time, when both are formats are entered, separated by a comma.
+
+Depending on the given format configured on ``agent.conf``, the output file is ``/var/ossec/logs/wazuh.log``, ``/var/ossec/logs/wazuh.json``, or both of them.
+
++--------------------+----------------+
+| **Default value**  | plain          |
++--------------------+----------------+
+| **Allowed values** | - plain        |
+|                    | - json         |
+|                    | - plain, json  |
++--------------------+----------------+
+
+Default configuration
+---------------------
+
+.. code-block:: xml
+
+    <!-- Choose between plain or json format (or both) for internal log file -->
+    <logging>
+      <log_format>plain</log_format>
+    </logging>

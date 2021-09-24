@@ -3,7 +3,7 @@
 .. _cloud_your_environment_send_syslog:
 
 .. meta::
-  :description: Wazuh agents work on a wide range of operating systems, but if this is not possible, you can forward syslog events to your environment.  
+  :description: Wazuh agents work on a wide range of operating systems, but if this is not possible, you can forward syslog events to your environment.
 
 Forward syslog events
 =====================
@@ -38,7 +38,7 @@ Use rsyslog on a Linux host with a Wazuh agent to log to a file and send those l
       $UDPServerRun <PORT>
 
    Make sure to review your firewall/SELinux configuration to allow this communication.
- 
+
 2. Configure rsyslog to forward events to a file by editing ``/etc/rsyslog.conf``.
 
    .. code-block::
@@ -51,7 +51,7 @@ To perform the following steps, make sure to replace ``<file_name.log>`` with th
 
 3. Deploy a Wazuh agent on the same host that has rsyslog.
 
-4. Configure the agent to read the syslog output file by editing ``/var/ossec/etc/ossec.conf``.
+4. Configure the agent to read the syslog output file by editing ``/var/ossec/etc/agent.conf``.
 
    .. code-block:: XML
 
@@ -66,10 +66,10 @@ To perform the following steps, make sure to replace ``<file_name.log>`` with th
 
       # systemctl restart rsyslog
       # systemctl restart wazuh-agent
-   
+
 Logstash on Windows
 ^^^^^^^^^^^^^^^^^^^
-   
+
 Use Logstash on a Windows host with a Wazuh agent to receive syslog, log to a file, and send those logs to the environment.
 
 1. Install Logstash.
@@ -80,11 +80,11 @@ Use Logstash on a Windows host with a Wazuh agent to receive syslog, log to a fi
 2. Install ``logstash-input-syslog`` and ``logstash-output-file`` plugins.
 
    .. code-block::
-      
+
       C:\logstash\bin>logstash-plugin install logstash-input-syslog
 
    .. code-block::
-               
+
       C:\logstash\bin>logstash-plugin install logstash-output-file
 
    If you are using PowerShell, make sure to add ``.\`` before the executable: ``.\logstash-plugin``
@@ -100,7 +100,7 @@ Use Logstash on a Windows host with a Wazuh agent to receive syslog, log to a fi
             port => <PORT>
          }
       }
-      
+
       output {
          file {
             path => "C:\logstash\logs\file_name.log"
@@ -111,10 +111,10 @@ Use Logstash on a Windows host with a Wazuh agent to receive syslog, log to a fi
 To perform the following steps, make sure to replace ``file_name.log`` with the name chosen for this log.
 
 4. Deploy a Wazuh agent on the same host that has Logstash.
-   
+
 5. Configure the agent to read the Logstash output file.
 
-   Edit ``C:\Program Files (x86)\ossec-agent\ossec.conf`` by adding the following configuration:
+   Edit ``C:\Program Files (x86)\ossec-agent\agent.conf`` by adding the following configuration:
 
    .. code-block:: XML
 
@@ -130,13 +130,13 @@ To perform the following steps, make sure to replace ``file_name.log`` with the 
    #. Run Logstash from the command line:
 
       .. code-block:: console
-   
+
          C:\logstash\bin\logstash.bat -f C:\logstash\config\logstash.conf
-   
+
    #. `Install Logstash as a Windows Service <https://www.elastic.co/guide/en/logstash/current/running-logstash-windows.html#running-logstash-windows>`_ either using `NSSM <https://www.elastic.co/guide/en/logstash/current/running-logstash-windows.html#running-logstash-windows-nssm>`_ or `Windows Task Scheduler <https://www.elastic.co/guide/en/logstash/current/running-logstash-windows.html#running-logstash-windows-scheduledtask>`_.
 
 7. Restart the Wazuh agent. If you are running PowerShell, use the following command:
 
    .. code-block:: console
-      
+
       Restart-Service OssecSvc

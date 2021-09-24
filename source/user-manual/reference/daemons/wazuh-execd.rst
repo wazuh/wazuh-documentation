@@ -12,7 +12,7 @@ The wazuh-execd program runs active responses by initiating the configured scrip
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-c <config>** | Run using <config> as the configuration file.                                                   |
 +                 +-------------------------------------------+-----------------------------------------------------+
-|                 | Default value                             | /var/ossec/etc/ossec.conf                           |
+|                 | Default value                             | /var/ossec/etc/agent.conf                           |
 +-----------------+-------------------------------------------+-----------------------------------------------------+
 | **-d**          | Run in debug mode. This option may be repeated to increase the verbosity of the debug messages. |
 +-----------------+-------------------------------------------------------------------------------------------------+

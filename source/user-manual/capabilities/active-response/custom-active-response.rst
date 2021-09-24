@@ -5,7 +5,7 @@
 Custom Active Response
 ======================
 
-It is possible to create a custom AR in any programming language and configure a :ref:`command <reference_ossec_commands>` and an :ref:`active response <reference_ossec_active_response>` to refer to it.
+It is possible to create a custom AR in any programming language, and configure a :ref:`command <reference_ossec_commands>` and an :ref:`active response <reference_ossec_active_response_manager>` to refer to it.
 
 The full alert is passed to the AR via ``STDIN`` within a JSON object and each AR is responsible for extracting the information necessary for its execution.
 

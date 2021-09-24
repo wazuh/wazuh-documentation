@@ -24,7 +24,7 @@ After the installation, the Wazuh manager and the Wazuh agent have defined a :re
 #. `Configuring where the database is to be stored`_
 #. `Configuring synchronization`_
 
-Syscheck component is configured both in the Wazuh manager's and in the Wazuh agent's :ref:`ossec.conf <reference_ossec_conf>` file. This capability can be also configured remotely using centralized configuration and the :ref:`agent.conf <reference_agent_conf>` file.
+Syscheck component is configured in the Wazuh agent's :ref:`agent.conf <reference_client_conf>` file. This capability can be also configured remotely using centralized configuration and the :ref:`shared.conf <reference_shared_conf>` file.
 The list of all syscheck configuration options is available in the :ref:`syscheck <reference_ossec_syscheck>` section.
 
 Configuring syscheck - basic usage
@@ -35,7 +35,7 @@ By default, syscheck scans selected directories, whose list depends on the :ref:
 
 .. note::
 
-  If a directory is specified both in a :ref:`centralized configuration <reference_agent_conf>` and on the Wazuh agent's  ``ossec.conf``, the centralized configuration will take preference and override the local configuration.
+  If a directory is specified both, in a :ref:`centralized configuration <reference_shared_conf>` and on the Wazuh agent's ``agent.conf``, the centralized configuration takes preference and overrides the local configuration.
 
 .. code-block:: xml
 
@@ -473,4 +473,4 @@ Configuring synchronization
     </synchronization>
   </syscheck>
 
-If the Wazuh agent is upgraded to the v3.12 and keeps its old configuration, the synchronization section will not be present in the ``ossec.conf`` file but the Wazuh agent will still use the default synchronization settings as shown above.
+If the Wazuh agent is upgraded to the v3.12 and keeps its old configuration, the synchronization section will not be present in the ``agent.conf`` file but the Wazuh agent will still use the default synchronization settings as shown above.

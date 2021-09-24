@@ -67,7 +67,7 @@ Delete the files that are no longer needed. This step can be skipped but the siz
 
 .. code-block:: console
 
-  $ rm -rf doc wodles/oscap/content/* gen_ossec.sh add_localfiles.sh Jenkinsfile*
+  $ rm -rf doc wodles/oscap/content/* gen_wazuh.sh add_localfiles.sh Jenkinsfile*
   $ rm -rf src/{addagent,analysisd,client-agent,config,error_messages,external/*,headers,logcollector,monitord,os_auth,os_crypto,os_csyslogd,os_dbdos_execd}
   $ rm -rf src/{os_integrator,os_maild,os_netos_regex,os_xml,os_zlib,remoted,reportd,shared,syscheckd,tests,update,wazuh_db,wazuh_modules}
   $ rm -rf src/win32

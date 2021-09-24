@@ -20,7 +20,7 @@ In addition, the interlocking problem that existed in the one-threaded version w
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-c <config>** | Run using <config> as the configuration file.                                                   |
 +                 +-------------------------------------------+-----------------------------------------------------+
-|                 | Default value                             | /var/ossec/etc/ossec.conf                           |
+|                 | Default value                             | /var/ossec/etc/agent.conf                           |
 +-----------------+-------------------------------------------+-----------------------------------------------------+
 | **-d**          | Run in debug mode. This option may be repeated to increase the verbosity of the debug messages. |
 +-----------------+-------------------------------------------------------------------------------------------------+

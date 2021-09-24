@@ -15,9 +15,9 @@ How it works
 
 Configuring labels that will be included in alerts is a straightforward process. It can be done using a simple XML structure that adds information into alerts. Labels can be nested by separating "key" terms by a period for inclusion in JSON formatted alerts.
 
-Information on how to configure labels can be found in the :doc:`Labels section <../reference/ossec-conf/labels>` of ``ossec.conf``.
+Information on how to configure labels can be found in the :doc:`Labels section <../reference/ossec-conf/labels-agent>` of ``agent.conf``.
 
-Agent labels can also be centralized using the ``agent.conf`` file, such that labels can be set for specific agents at the manager level. When there is pre-existing label that is the same as one the user has defined in ``ossec.conf`` or ``agent.conf``, the second one will override the first.
+Agent labels can also be centralized using the ``shared.conf`` file, such labels can be set for specific agents at the manager level. When there is pre-existing label that is the same as one the user has defined in ``agent.conf`` or ``shared.conf``, the second one will override the first.
 
 For more information about on how to centralize agent configuration, see the :doc:`Centralized configuration <../reference/centralized-configuration>` section.
 
@@ -37,7 +37,7 @@ each agent when an alert is triggered:
 - Network MAC.
 - Date of installation (hidden).
 
-To include these labels in alerts from a specific agent, the following configuration must be inserted into the ``ossec.conf`` file:
+To include these labels in alerts from a specific agent, the following configuration must be inserted into the ``agent.conf`` file:
 
 .. code-block:: xml
 
@@ -49,7 +49,7 @@ To include these labels in alerts from a specific agent, the following configura
           <label key="installation" hidden="yes">January 1st, 2017</label>
         </labels>
 
-To set the labels at the manager level, the following configuration would be added to the ``agent.conf`` file:
+To set the labels at the manager level, the following configuration needs to be added to the ``shared.conf`` file:
 
 .. code-block:: xml
 
@@ -76,7 +76,7 @@ When an alert is fired for an agent with the above configuration applied from th
     network.ip: 172.17.0.0
     network.mac: 02:42:ac:11:00:02
     Rule: 550 (level 7) -> 'Integrity checksum changed.'
-    Integrity checksum changed for: '/var/ossec/etc/ossec.conf'
+    Integrity checksum changed for: '/var/ossec/etc/agent.conf'
     Size changed from '3663' to '3664'
     Old md5sum was: '98b351df146410f174a967d726f9965e'
     New md5sum is : '7f4f5846dcaa0013a91bd6d3ac4a1915'
@@ -121,9 +121,9 @@ And the same alert in JSON format shows the advantage of using nested labels:
     "manager": {
       "name": "ubuntu"
     },
-    "full_log": "Integrity checksum changed for: '/var/ossec/etc/ossec.conf' Size changed from '3663' to '3664' Old md5sum was: '98b351df146410f174a967d726f9965e' New md5sum is : '7f4f5846dcaa0013a91bd6d3ac4a1915' Old sha1sum was: 'c6368b866a835b15baf20976ae5ea7ea2788a30e' New sha1sum is : 'c959321244bdcec824ff0a32cad6d4f1246f53e9'",
+    "full_log": "Integrity checksum changed for: '/var/ossec/etc/agent.conf' Size changed from '3663' to '3664' Old md5sum was: '98b351df146410f174a967d726f9965e' New md5sum is : '7f4f5846dcaa0013a91bd6d3ac4a1915' Old sha1sum was: 'c6368b866a835b15baf20976ae5ea7ea2788a30e' New sha1sum is : 'c959321244bdcec824ff0a32cad6d4f1246f53e9'",
     "syscheck": {
-      "path": "/var/ossec/etc/ossec.conf",
+      "path": "/var/ossec/etc/agent.conf",
       "size_before": "3663",
       "size_after": "3664",
       "perm_after": "100640",
@@ -157,7 +157,7 @@ If email reports have been enabled, the following email notification would then 
   aws.sec-group: sg-1103
   network.ip: 172.17.0.0
   network.mac: 02:42:ac:11:00:02
-  Integrity checksum changed for: '/var/ossec/etc/ossec.conf'
+  Integrity checksum changed for: '/var/ossec/etc/agent.conf'
   Old md5sum was: '98b351df146410f174a967d726f9965e'
   New md5sum is : '7f4f5846dcaa0013a91bd6d3ac4a1915'
   Old sha1sum was: 'c6368b866a835b15baf20976ae5ea7ea2788a30e'

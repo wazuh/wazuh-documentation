@@ -5,7 +5,7 @@
 Internal configuration
 =======================
 
-The main configuration is located in the ``ossec.conf`` file, however some internal configuration features are located in the ``/var/ossec/etc/internal_options.conf`` file.
+The main configuration is located in the ``manager.conf`` or ``agent.conf`` file, however, some internal configuration features are located in the ``/var/ossec/etc/internal_options.conf`` file.
 
 Generally, this file is reserved for debugging issues and for troubleshooting. **Any error in this file may cause your installation to malfunction or fail to run.**
 
@@ -1027,7 +1027,7 @@ Syscheck
 +                                      +---------------+--------------------------------------------------------------------------------+
 |                                      | Allowed value | Any integer between 1 and 1000                                                 |
 +--------------------------------------+---------------+--------------------------------------------------------------------------------+
-| **syscheck.max_fd_win_rt**           | Description   | Maximum numbers of directories can be configured in ossec.conf for Windows     |
+| **syscheck.max_fd_win_rt**           | Description   | Maximum number of directories can be configured in agent.conf for Windows      |
 |                                      |               | in realtime and whodata mode.                                                  |
 |                                      |               |                                                                                |
 |                                      |               | .. versionadded:: 3.4.0                                                        |

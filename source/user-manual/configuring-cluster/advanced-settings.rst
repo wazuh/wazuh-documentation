@@ -21,7 +21,7 @@ Pointing agents to the cluster with a load balancer
     In Wazuh's case, users want to use a load balancer to catch all the agent events and distribute them between the different workers in the cluster.
     The correct way to use it is to point every agent to send the events to the *load balancer*:
 
-    1. Edit the Wazuh agent configuration in ``/var/ossec/etc/ossec.conf`` to add the **Load Balancer** IP address. In the ``<client><server>`` section, change the ``LOAD_BALANCER_IP`` value to the ``load balancer`` address and ``port``:
+    1. Edit the Wazuh agent configuration in ``/var/ossec/etc/agent.conf`` to add the **Load Balancer** IP address. In the ``<client><server>`` section, change the ``LOAD_BALANCER_IP`` value to the ``load balancer`` address and ``port``:
 
       .. code-block:: xml
 
@@ -109,7 +109,7 @@ Pointing agents to the cluster (Failover mode)
             worker02: 172.0.0.5
 
     We want all our agents to report to worker01 node, our worker02 node will be a backup node in case the worker01 node is not available.
-    To do this we must modify the configuration file of our agents ``/var/ossec/etc/ossec.conf``, within this we have a block ``<server>...</server>``, we will have to create as many blocks **server** as backup nodes we have and want to assign it to the agent:
+    To do this we must modify the configuration file of our agents ``/var/ossec/etc/agent.conf``, within this we have a block ``<server>...</server>``, we will have to create as many blocks **server** as backup nodes we have and want to assign it to the agent:
 
     .. code-block:: xml
 
@@ -131,4 +131,4 @@ Pointing agents to the cluster (Failover mode)
             <crypto_method>aes</crypto_method>
         </client>
 
-    In this way, if the worker01 node is not available, the agents will report to the worker02 node. This process is performed cyclically between all the nodes that we place in the ``ossec.conf`` of the agents.
+    In this way, if the worker01 node is not available, the agents still report to the worker02 node. This process is performed cyclically between all the nodes that we place in the ``agent.conf`` of the agents.

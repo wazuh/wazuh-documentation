@@ -37,7 +37,7 @@ Each active response specifies where its associated command will be executed: on
 Active response configuration
 -----------------------------
 
-Active responses are configured in the manager by modifying the :ref:`ossec.conf <reference_ossec_conf>` file as follows:
+Active responses are configured in the manager by modifying the :ref:`manager.conf <reference_manager_conf>` file as follows:
 
 1. Create a command
 
@@ -74,7 +74,7 @@ Active responses are configured in the manager by modifying the :ref:`ossec.conf
 	In this example, the active response is configured to execute the command that was defined in the previous step. The *where* of the action is defined as the local host and the *when* is defined as any time the rule has a level higher than 6.  The timeout that was allowed in the command configuration is also defined in the above example.
 
 .. note::
-	More information about active response configuration: :ref:`Active response <reference_ossec_active_response>`
+	For more information about active response configuration, see the :ref:`Active response <reference_ossec_active_response_manager>` section.
 
 
 The active response log can be viewed at ``/var/ossec/logs/active-responses.log``.
@@ -107,7 +107,7 @@ Wazuh is preconfigured with the following scripts for Linux, located at ``/var/o
 +---------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
 | `pf <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/firewalls/pf.c>`_                                                    | Firewall-drop response script created for pf                  |
 +---------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
-| `restart-wazuh <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/restart-wazuh.c>`_                                        | Automatically restarts Wazuh when ossec.conf has been changed |
+| `restart-wazuh <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/restart-wazuh.c>`_                                        | Automatically restarts Wazuh when agent.conf has been changed |
 +---------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
 | `route-null <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/route-null.c>`_                                              | Adds an IP to null route                                      |
 +---------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+

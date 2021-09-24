@@ -46,10 +46,10 @@ We recommend to store the lists on ``/var/ossec/etc/lists``.
 
 Since Wazuh v3.11.0, CDB lists are built and loaded automatically when the analysis engine is started. Therefore, when adding or modifying CDB lists just restart the manager.
 
-Adding the list to ossec.conf
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Adding the list to manager.conf
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Each list must be defined in the ``ossec.conf`` file using the following syntax:
+Each list must be defined in the ``manager.conf`` file using the following syntax:
 
 .. code-block:: xml
 

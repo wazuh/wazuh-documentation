@@ -29,7 +29,7 @@ stored.
 Configure ``syscollector`` for all the agents
 ---------------------------------------------
 
-In the ``/var/ossec/etc/ossec.conf`` file of the Wazuh manager and agents
+In the ``/var/ossec/etc/agent.conf`` file of the agents,
 see the default configuration and find the syscollector section.
 
 For Linux systems:
@@ -78,7 +78,7 @@ Configure ``vulnerability-detector`` on  the Wazuh Manager
       This configuration will only work for Wazuh v3.11 or above.
 
 
-In the ``/var/ossec/etc/ossec.conf`` file of the Wazuh manager, scroll down to the **vulnerability-detector** wodle (Wazuh module) and enable both the service and feeds you may want to use.
+In the ``/var/ossec/etc/manager.conf`` file of the Wazuh manager, scroll down to the **vulnerability-detector** wodle (Wazuh module) and enable both the service and feeds you want to use.
 
   .. code-block:: xml
 

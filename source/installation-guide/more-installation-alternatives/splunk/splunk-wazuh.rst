@@ -105,7 +105,7 @@ Choose the corresponding tab to configure the installation as a single-node or m
         #. .. include:: ../../../_templates/installations/wazuh/common/configure_wazuh_master_node.rst
 
 
-        #. Once the ``/var/ossec/etc/ossec.conf`` configuration file is edited, enable and start the Wazuh manager service:
+        #. Once the ``/var/ossec/etc/manager.conf`` configuration file is edited, enable and start the Wazuh manager service:
 
             .. include:: ../../../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
 
@@ -118,7 +118,7 @@ Choose the corresponding tab to configure the installation as a single-node or m
         #. .. include:: ../../../_templates/installations/wazuh/common/configure_wazuh_worker_node.rst
 
 
-        #. Once the ``/var/ossec/etc/ossec.conf`` configuration file is edited, enable and start the Wazuh manager service:
+        #. Once the ``/var/ossec/etc/manager.conf`` configuration file is edited, enable and start the Wazuh manager service:
 
             .. include:: ../../../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
 
