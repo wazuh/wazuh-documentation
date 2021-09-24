@@ -32,7 +32,7 @@ If your SMTP server uses authentication (like Gmail, for instance), a server rel
       smtp_sasl_auth_enable = yes
       smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
       smtp_sasl_security_options = noanonymous
-      smtp_tls_CAfile = /etc/ssl/certs/thawte_Primary_Root_CA.pem
+      smtp_tls_CAfile = /etc/ssl/certs/ca-certificates.crt
       smtp_use_tls = yes
 
     CentOS

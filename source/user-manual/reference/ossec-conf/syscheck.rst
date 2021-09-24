@@ -853,7 +853,7 @@ The database synchronization settings are configured inside this tag.
       <interval>5m</interval>
       <max_interval>1h</max_interval>
       <response_timeout>30</response_timeout>
-      <sync_queue_size>16384</sync_queue_size>
+      <queue_size>16384</queue_size>
       <max_eps>10</max_eps>
     </synchronization>
 
@@ -999,7 +999,7 @@ Specifices the limit for the size of the ``queue/diff/local`` folder.
 | **Default value**  | 1GB                                         |
 +--------------------+---------------------------------------------+
 | **Allowed values** | Any positive number followed by KB/MB/GB    |
-+--------------------------+---------------------------------------+
++--------------------+---------------------------------------------+
 
 file_size
 """""""""
@@ -1030,7 +1030,7 @@ Specifices the limit for the size of files monitored with ``report_changes``.
 | **Default value**  | 50MB                                        |
 +--------------------+---------------------------------------------+
 | **Allowed values** | Any positive number followed by KB/MB/GB    |
-+--------------------------+---------------------------------------+
++--------------------+---------------------------------------------+
 
 .. _reference_ossec_syscheck_nodiff:
 

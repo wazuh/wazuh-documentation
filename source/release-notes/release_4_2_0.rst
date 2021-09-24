@@ -167,6 +167,7 @@ This release includes new features or enhancements.
 - `#8921 <https://github.com/wazuh/wazuh/pull/8921>`_ The agent now validates the Audit connection configuration when enabling who-data for FIM on Linux.
 - `#7175 <https://github.com/wazuh/wazuh/pull/7175>`_ The ``/etc/ossec-init.conf`` file no longer exists. 
 - `#7398 <https://github.com/wazuh/wazuh/issues/7398>`_ Unused files are removed from the repository, including TAP tests.
+- `#7379 <https://github.com/wazuh/wazuh/pull/7379>`_ Syscollector now synchronizes its database with the manager, avoiding full data delivery on each scan.
 
 
 **API**
@@ -390,6 +391,6 @@ Changelogs
 
 More details about these changes are provided in the changelog of each component:
 
-- `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/4.2/CHANGELOG.md>`_
+- `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v4.2.0/CHANGELOG.md>`_
 - `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v4.2.0-7.10.2/CHANGELOG.md>`_
 - `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v4.2.0-8.1.2/CHANGELOG.md>`_

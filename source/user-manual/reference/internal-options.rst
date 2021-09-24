@@ -639,6 +639,21 @@ Logcollector
 +                                          +               +----------------------------------------------------------------------------+
 |                                          |               | Any other integer between 1 and 3600.                                      |
 +------------------------------------------+---------------+----------------------------------------------------------------------------+
+| **logcollector.ip_update_interval**      | Description   | IP update interval, in seconds. This specifies how often the system        |
+|                                          |               | IP is obtained when the                                                    |
+|                                          |               | :ref:`out_format<ossec_localfile_out_format>` option is used.              |
+|                                          |               |                                                                            |
+|                                          |               | .. versionadded:: 4.3                                                      |
++                                          +---------------+----------------------------------------------------------------------------+
+|                                          | Default value | 60                                                                         |
++                                          +---------------+----------------------------------------------------------------------------+
+|                                          | Allowed values| 0: Obtain the IP on demand.                                                |
+|                                          |               |                                                                            |
+|                                          |               | **Warning:** Systems with extensive routing tables                         |
+|                                          |               | can suffer from high CPU usage.                                            |
++                                          +               +----------------------------------------------------------------------------+
+|                                          |               | Any other integer between 1 and 3600.                                      |
++------------------------------------------+---------------+----------------------------------------------------------------------------+
 
 Maild
 -----

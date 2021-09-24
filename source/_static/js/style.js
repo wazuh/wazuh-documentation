@@ -48,6 +48,7 @@ $(function() {
   /* List of nodes in the toctree that should be open in a new tab */
   const newTabNodes = [
     'user-manual/api/reference',
+    'cloud-service/apis/reference',
   ];
   if ( useApiRedoc ) {
     markTocNodesWithClass(newTabNodes, 'js-new-tab');
