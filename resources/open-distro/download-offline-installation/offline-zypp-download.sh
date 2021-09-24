@@ -37,7 +37,6 @@ EOF
 printf "\nDownloading Wazuh packages...\n"
 
 DEST_PATH="${BASE_DEST}/wazuh-packages"
-zypper clean
 zypper install -y --download-only wazuh-manager filebeat
 mkdir -p ${DEST_PATH} && cp /var/cache/zypp/packages/wazuh/*.rpm ${DEST_PATH}
 
@@ -49,12 +48,10 @@ get_opendistro_packages(){
 printf "\nDownloading Opendistro packages...\n"
 
 DEST_PATH="${BASE_DEST}/opendistro-packages"
-zypper clean
 zypper install -y --download-only opendistroforelasticsearch
 mkdir -p ${DEST_PATH} && cp /var/cache/zypp/packages/wazuh/*.rpm ${DEST_PATH}
 
 DEST_PATH="${BASE_DEST}/opendistro-kibana-packages"
-zypper clean
 zypper install -y --download-only opendistroforelasticsearch-kibana
 mkdir -p ${DEST_PATH} && cp /var/cache/zypp/packages/wazuh/*.rpm ${DEST_PATH}
 

@@ -8,7 +8,7 @@ Offline all-in-one installation
 
 This document will guide you step by step to:
 
-* Download Wazuh components.
+* Download the Wazuh components.
 * Install them later when there is no connection to the Internet or from a system without connection to it in an all-in-one offline deployment.
 
 .. note:: Run ``su`` or ``sudo su`` to gain root privileges. This is necessary to execute the commands below.
@@ -183,11 +183,22 @@ Install Elasticsearch
 
 #. Optionally, run the following commands to remove the `Open Distro for Elasticsearch performance analyzer plugin`. This is installed by default and can have a negative impact on system resources.
 
-    .. code-block:: console
+    .. tabs::
 
-      # /usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer
-      # systemctl restart elasticsearch
+      .. group-tab:: Systemd
 
+        .. code-block:: console
+
+          # /usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer
+          # systemctl restart elasticsearch
+
+      .. group-tab:: SysV Init
+
+        .. code-block:: console
+
+          # /usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer
+          # service elasticsearch restart
+        
 #. Run the following command to make sure the installation is successful:
 
     .. code-block:: console
