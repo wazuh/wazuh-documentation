@@ -66,6 +66,13 @@ Agent
 - `#9927 <https://github.com/wazuh/wazuh/pull/9927>`_ The Google Cloud Pub/Sub integration module rework increases the number of processed events per second allowing multithreading and enhancing performance. Also, a new ``num_threads`` option is added to the module configuration.
 - `#9964 <https://github.com/wazuh/wazuh/pull/9964>`_ google-cloud-pubsub dependency is now upgraded to the latest stable version (2.7.1).
 - `#9443 <https://github.com/wazuh/wazuh/pull/9443>`_ The WPK installer rollback is reimplemented on Linux.
+- `#10217 <https://github.com/wazuh/wazuh/pull/10217>`_ Updated AWS WAF implementation to change ``httpRequest.headers`` field format.
+
+
+RESTful API
+^^^^^^^^^^^
+
+- `#10219 <https://github.com/wazuh/wazuh/pull/10219>`_ Made SSL ciphers configurable and renamed SSL protocol option.
 
 Wazuh Kibana plugin
 ^^^^^^^^^^^^^^^^^^^
@@ -120,7 +127,10 @@ Reference                                                         Description
 `#9295 <https://github.com/wazuh/wazuh/pull/9295>`_               An issue in Authd that delayed the agent timestamp update when removing agents is now fixed. 
 `#9705 <https://github.com/wazuh/wazuh/pull/9705>`_               An error in Wazuh DB that held wrong agent timestamp data is now resolved.
 `#9942 <https://github.com/wazuh/wazuh/pull/9942>`_               An issue in Remoted that kept deleted shared files in the multi-groups' merged.mg file is now fixed. 
-`#9987 <https://github.com/wazuh/wazuh/pull/9987>`_               An issue in Analysisd that overwrote its queue socket when launched in test mode  is now resolved. 
+`#9987 <https://github.com/wazuh/wazuh/pull/9987>`_               An issue in Analysisd that overwrote its queue socket when launched in test mode  is now resolved.
+`#10016 <https://github.com/wazuh/wazuh/pull/10016>`_             This fix prevents false positives when evaluating DU patches in the Windows Vulnerability Detector.
+`#10214 <https://github.com/wazuh/wazuh/pull/10214>`_             Memory leak is fixed when generating the Windows report in Vulnerability Detector.
+`#10194 <https://github.com/wazuh/wazuh/pull/10194>`_             A file descriptor leak is fixed in Analysisd when delivering an AR request to an agent.
 ==============================================================    =============
 
 
@@ -135,7 +145,11 @@ Reference                                                         Description
 `#9967 <https://github.com/wazuh/wazuh/pull/9967>`_               Memory leak is fixed in the agent when enrolling for the first time with no previous key. 
 `#9934 <https://github.com/wazuh/wazuh/pull/9934>`_               CloudWatchLogs log stream limit, when there are more than 50 log streams, is now removed.
 `#9897 <https://github.com/wazuh/wazuh/pull/9897>`_               Fixed a problem on the Windows installer and now, with this fix, the agent can be successfully uninstalled or upgraded.
-`#9775 <https://github.com/wazuh/wazuh/pull/9775>`_               AWS WAF log parsing error is fixed and log parsing now works correctly when there are multiple dictionaries in one line. 
+`#9775 <https://github.com/wazuh/wazuh/pull/9775>`_               AWS WAF log parsing error is fixed and log parsing now works correctly when there are multiple dictionaries in one line.
+`#10024 <https://github.com/wazuh/wazuh/pull/10024>`_             An issue is fixed in the AWS CloudWatch Logs module that caused already processed logs to be collected and reprocessed.
+`#8256 <https://github.com/wazuh/wazuh/pull/8256>`_               This fix avoids duplicate alerts from case-insensitive 32-bit registry values in FIM configuration for Windows agents.
+`#10250 <https://github.com/wazuh/wazuh/pull/10250>`_             Error with Wazuh path in Azure module is now fixed.
+`#10210 <https://github.com/wazuh/wazuh/pull/10210>`_             An issue is fixed in the sources and WPK installer that made the upgrade unable to detect the previous installation on CentOS 7.
 ==============================================================    =============
 
 
@@ -161,7 +175,7 @@ Reference                                                         Description
 `#3217 <https://github.com/wazuh/wazuh-kibana-app/pull/3217>`_    In the agent summary of the **Agents** data overview page, fields no longer overlap under certain circumstances and are correctly displayed.
 `#3257 <https://github.com/wazuh/wazuh-kibana-app/pull/3257>`_    An issue when using the **Ruleset Test** is now fixed. Now, all requests are made in the session unless you click **Clear session**.
 `#3237 <https://github.com/wazuh/wazuh-kibana-app/pull/3237>`_    **Visualize** button issue is resolved and the button is displayed when expanding a field in the **Events** tab sidebar.
-`#3244 <https://github.com/wazuh/wazuh-kibana-app/pull/3244>`_    Some modules were missing from the Agents data overview page. This issue is fixed and they are now successfully displayed.
+`#3244 <https://github.com/wazuh/wazuh-kibana-app/pull/3244>`_    Some modules were missing from the **Agents** data overview page. This issue is fixed and they are now successfully displayed.
 `#3260 <https://github.com/wazuh/wazuh-kibana-app/pull/3260>`_    With this fix, *App log messages* are improved and WUI error logs removed.
 `#3272 <https://github.com/wazuh/wazuh-kibana-app/pull/3272>`_    Some errors on PDF reports are fixed.
 `#3289 <https://github.com/wazuh/wazuh-kibana-app/pull/3289>`_    When deploying a new agent, selecting macOS as the operating system in a Safari browser no longer generates a TypeError.
