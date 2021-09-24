@@ -72,7 +72,7 @@ Install Wazuh manager
 
         .. code-block:: console
         
-          # apt install -y ./wazuh-packages/wazuh-manager_4.2.1-1_amd64.deb
+          # dpkg -i ./wazuh-packages/wazuh-manager_4.2.1-1_amd64.deb
 
       .. group-tab:: ZYpp
 
@@ -106,7 +106,7 @@ Install Elasticsearch
 
         .. code-block:: console
         
-          # apt install -y ./opendistro-packages/*.deb
+          # dpkg -i ./opendistro-packages/*.deb
 
       .. group-tab:: ZYpp
 
@@ -235,7 +235,7 @@ Install Filebeat
 
         .. code-block:: console
         
-          # apt install -y ./wazuh-packages/filebeat_7.10.2_amd64.deb
+          # dpkg -i ./wazuh-packages/filebeat_7.10.2_amd64.deb
 
       .. group-tab:: ZYpp
 
@@ -347,7 +347,7 @@ Install Kibana
 
        .. code-block:: console
        
-         # apt install -y ./opendistro-kibana-packages/opendistroforelasticsearch-kibana_1.13.2_amd64.deb
+         # dpkg -i ./opendistro-kibana-packages/opendistroforelasticsearch-kibana_1.13.2_amd64.deb
 
      .. group-tab:: ZYpp
 
