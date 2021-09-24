@@ -3,12 +3,12 @@
 .. meta::
   :description: Discover the offline step-by-step process to install Wazuh and OpenDistro components for Elasticsearch in an all-in-one deployment without connection to the internet.
 
-Offline step-by-step all-in-one installation
-============================================
+Offline all-in-one installation
+===============================
 
-This document will guide you to:
+This document will guide you step by step to:
 
-* Download Wazuh and the Open Distro for Elasticsearch components files.
+* Download Wazuh components.
 * Install them later when there is no connection to the Internet or from a system without connection to it in an all-in-one offline deployment.
 
 .. note:: Run ``su`` or ``sudo su`` to gain root privileges. This is necessary to execute the commands below.
@@ -16,7 +16,7 @@ This document will guide you to:
 Download packages and configuration files
 -----------------------------------------
 
-#. Run the following commands from a system with an Internet connection. This will download and execute a script. This script will download all required files for the offline installation.
+#. Run the following commands from a system with an Internet connection. They will download and execute a script. This script will download all required files for the offline installation.
 
     .. tabs::
 
@@ -32,8 +32,7 @@ Download packages and configuration files
 
         .. code-block:: console
           
-          # apt update
-          # apt install -y curl
+          # apt update; apt install -y curl
           # curl -sO https://raw.githubusercontent.com/wazuh/wazuh-documentation/4329_Write_offline_installation_guide/resources/open-distro/download-offline-installation/offline-apt-download.sh
           # bash ./offline-apt-download.sh
 
@@ -86,7 +85,7 @@ Install Wazuh manager
 
     .. include:: /_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
 
-#. Run the following command to check if the Wazuh manager is active: 
+#. Check if the Wazuh manager is active: 
 
     .. include:: /_templates/installations/wazuh/common/check_wazuh_manager.rst    
 
@@ -182,7 +181,7 @@ Install Elasticsearch
 
       # export JAVA_HOME=/usr/share/elasticsearch/jdk/ && /usr/share/elasticsearch/plugins/opendistro_security/tools/securityadmin.sh -cd /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/ -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin-key.pem
 
-#. Optionally, run the following commands to remove the Open Distro for Elasticsearch performance analyzer plugin. This is installed by default and can have a negative impact on system resources.
+#. Optionally, run the following commands to remove the `Open Distro for Elasticsearch performance analyzer plugin`. This is installed by default and can have a negative impact on system resources.
 
     .. code-block:: console
 
@@ -272,6 +271,20 @@ Install Filebeat
           # cp ./wazuh_files/filebeat/wazuh-template.json /etc/filebeat/
           # chmod go+r /etc/filebeat/wazuh-template.json
 
+#. Edit ``/etc/filebeat/wazuh-template.json`` and change to ``"1"`` the value for ``"index.number_of_shards"``.
+
+    .. code-block:: none
+
+      {
+        ...
+        "settings": {
+          ...
+          "index.number_of_shards": "1",
+          ...
+        },
+        ...
+      }      
+
 #. Install the Wazuh module for Filebeat.
 
     .. code-block:: console
@@ -291,7 +304,7 @@ Install Filebeat
     .. include:: /_templates/installations/elastic/common/enable_filebeat.rst
 
 
-To ensure that Filebeat is successfully installed, run the following command:
+#. Run the following command to make sure Filebeat is successfully installed:
 
     .. code-block:: console
 
