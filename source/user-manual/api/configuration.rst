@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+   :description: Learn more about how to configure the Wazuh API. We show you the available settings for the api.yaml configuration file in this section.  
+   
 .. _api_configuration:
 
 Configuration
