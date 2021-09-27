@@ -315,13 +315,11 @@ Install Filebeat
     .. include:: /_templates/installations/elastic/common/enable_filebeat.rst
 
 
-#. Run the following command to make sure Filebeat is successfully installed:
+#. Run the following commands to make sure Filebeat is successfully installed and one shard only is configured:
 
     .. code-block:: console
 
       # filebeat test output
-
-An example response should look as follows:
 
     .. code-block:: none
      :class: output accordion-output
@@ -340,6 +338,24 @@ An example response should look as follows:
          dial up... OK
        talk to server... OK
        version: 7.10.2
+
+    .. code-block:: console
+
+     # curl "https://localhost:9200/_template/wazuh?pretty&filter_path=wazuh.settings.index.number_of_shards" -k -u admin:admin
+
+    .. code-block:: none
+     :class: output accordion-output
+
+     {
+       "wazuh" : {
+         "settings" : {
+           "index" : {
+             "number_of_shards" : "1"
+           }
+         }
+       }
+     }
+
 
 Install Kibana
 ~~~~~~~~~~~~~~
