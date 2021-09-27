@@ -282,7 +282,7 @@ Install Filebeat
           # cp ./wazuh_files/filebeat/wazuh-template.json /etc/filebeat/
           # chmod go+r /etc/filebeat/wazuh-template.json
 
-#. Edit ``/etc/filebeat/wazuh-template.json`` and change to ``"1"`` the value for ``"index.number_of_shards"``.
+#. Edit ``/etc/filebeat/wazuh-template.json`` and change to ``"1"`` the value for ``"index.number_of_shards"`` as this is a one node installation.
 
     .. code-block:: none
 
