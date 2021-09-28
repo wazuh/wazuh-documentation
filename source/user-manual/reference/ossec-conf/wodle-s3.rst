@@ -713,7 +713,7 @@ The AWS Security Token Service VPC endpoint URL to be used when an IAM role is p
 Service\\service_endpoint
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The VPC endpoint URL for the required AWS Service to be used to download the data from it. Check the :ref:`Considerations for configuration <amazon_considerations>` page to learn more about VPC and FIPS endpoints.
+The endpoint URL for the required AWS Service to be used to download the data from it. Check the :ref:`Considerations for configuration <amazon_considerations>` page to learn more about VPC and FIPS endpoints.
 
 +--------------------+------------------------------------------------+
 | **Default value**  | N/A                                            |

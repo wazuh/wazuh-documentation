@@ -134,7 +134,7 @@ The `service_endpoint` and `sts_endpoint` tags can be used to specify the VPC en
 FIPS endpoints
 ~~~~~~~~~~~~~~
 
-Wazuh supports the use of AWS FIPS endpoints for users that need to comply with the `Federal Information Processing Standard (FIPS) Publication 140-2 <https://csrc.nist.gov/publications/detail/fips/140/2/final>`_. Depending on the service and region of choice, a different endpoint must be taken from the `AWS FIPS endpoints list <https://aws.amazon.com/compliance/fips/>`_. Once chosen the desired endpoint, it must be specified in the ``ossec.conf`` file using the ``service_endpoint`` tag.
+Wazuh supports the use of AWS FIPS endpoints to comply with the `Federal Information Processing Standard (FIPS) Publication 140-2 <https://csrc.nist.gov/publications/detail/fips/140/2/final>`_. Depending on the service and region of choice, a different endpoint must be taken from the `AWS FIPS endpoints list <https://aws.amazon.com/compliance/fips/>`_. Once chosen the desired endpoint, it must be specified in the ``ossec.conf`` file using the ``service_endpoint`` tag.
 
 An example of a valid configuration would be the following:
 
