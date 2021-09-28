@@ -39,6 +39,7 @@ removedUrls['x.y'] = [
 /* Pages added in 4.2 */
 
 newUrls['4.2'] = [
+  '/release-notes/release-4-2-2.html',
   '/release-notes/release_4_2_1.html',
   '/release-notes/release_4_2_0.html',
   '/user-manual/capabilities/active-response/ar-use-cases/removing-malware.html',
@@ -86,6 +87,9 @@ newUrls['4.2'] = [
   '/cloud-service/your-environment/cancel-environment.html',
   '/cloud-service/your-environment/manage-wui-access.html',
   '/cloud-service/your-environment/understanding-storage.html',
+  '/cloud-service/getting-started/sign-up-trial.html',
+  '/cloud-service/getting-started/access-wazuh-wui.html',
+  '/cloud-service/getting-started/register-agents.html', 
 ];
 
 removedUrls['4.2'] = [
