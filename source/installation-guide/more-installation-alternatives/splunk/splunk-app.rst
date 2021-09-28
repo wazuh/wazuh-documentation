@@ -80,7 +80,7 @@ Installation
       :align: center
       :width: 100%
 
-    In the same way we can select our API, Index and Source Type, from the quick menu of configurations.
+    You can also select the API, Index and Source Type using the *Quick settings* menu. 
 
     .. thumbnail:: ../../../images/splunk-app/quick-settings.png
       :title: Index and Source Type configuration
