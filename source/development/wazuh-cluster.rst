@@ -228,7 +228,7 @@ This communication protocol is used by all cluster nodes to synchronize the nece
 |                   |             | - Wazuh version<str>  |                                                                                                 |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
 | ``syn_i_w_m_p``,  | Master      | None                  | - Ask permission to start synchronization protocol. Message characters define the action to do: |
-| ``syn_e_w_m_p``,  |             |                       | - I (integrity), E (extra valid), A (agent-info).                                               |
+|                   |             |                       | - I (integrity), A (agent-info).                                                                |
 | ``syn_a_w_m_p``   |             |                       | - W (worker), M (master), P (permission).                                                       |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
 | ``syn_i_w_m``,    | Master      | - None or             | - Start synchronization protocol. Message characters define the action to do:                   |
@@ -240,7 +240,7 @@ This communication protocol is used by all cluster nodes to synchronize the nece
 |                   |             |                       | - W (worker), M (master), E(end).                                                               |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
 | ``syn_i_w_m_r``,  | Master      | None                  | - Notify an error during synchronization. Message characters define the action to do:           |
-| ``syn_e_w_m_r``   |             |                       | - I (integrity), E (extra valid).                                                               |
+|                   |             |                       | - I (integrity).                                                                                |
 |                   |             |                       | - W (worker), M (master), R(error).                                                             |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
 | ``sendsync``      | Master      | - Arguments<Dict>     | Receive a message from a worker node destined for the specified daemon of the master node.      |
