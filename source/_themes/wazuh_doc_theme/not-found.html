@@ -1,8 +1,8 @@
 {#
-  wazuh_doc_theme/layout.html
-  ~~~~~~~~~~~~~~~~~
+    wazuh_doc_theme/not-found.html
+    ~~~~~~~~~~~~~~~~~
 
-  Master layout template for Wazuh Documentation Sphinx theme.
+    Not-found template for Wazuh Documentation Sphinx theme v2.0.
 #}
 
 {# TEMPLATE VAR SETTINGS #}
@@ -16,19 +16,20 @@
 {%- else %}
   {%- set titlesuffix = "" %}
 {%- endif %}
+{%- set style = "css/bootstrap.min.css" %}
 
 {%- macro css() %}
 <link rel="stylesheet" href="{{ pathto('_static/' + style, 1) }}" type="text/css" />
-  {% for cssfile in css_files %}
-<link rel="stylesheet" href="{{ pathto(cssfile, 1) }}" type="text/css" />
-  {% endfor %}
+{% for cssfile in css_files %}
+  <link rel="stylesheet" href="{{ pathto(cssfile, 1) }}" type="text/css" />
+{% endfor %}
 <style type="text/css">{{ inline_fonts }}</style>
 {%- endmacro %}
 
 {%- macro js() %}
-  {% for scriptfile in script_files %}
+{% for scriptfile in script_files %}
   <script src="{{ pathto(scriptfile, 1) }}"></script>
-  {% endfor %}
+{% endfor %}
 {%- endmacro %}
 
 {%- set pagetitle = title|striptags %}
@@ -40,32 +41,29 @@
 {%- endif %}
 
 {%- if (pagetitle + titlesuffix)|length > 70 %}
-  {%- set titlesuffix = "" %}
+{%- set titlesuffix = "" %}
 {%- endif %}
 
 <!DOCTYPE html>
 <html lang="{{ language }}">
 {% block head %}
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta charset="UTF-8">
-<meta name="author" content="Wazuh" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta charset="UTF-8">
+  <meta name="author" content="Wazuh" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta property="og:image" content="{{ theme_wazuh_doc_url + '/current/_static/images/wazuh-docs-card.png' }}" />
-<meta property="og:url" content="{{ theme_wazuh_doc_url + '/current/' + pagename + '.html' }}" />
-<meta property="og:type" content="website" />
-<meta property="og:title" content="{{ pagetitle|e + titlesuffix }}" />
-<meta property="og:description" content="User manual, installation and configuration guides. Learn how to get the most out of the Wazuh platform." />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:site" content="@wazuh" />
-<meta name="twitter:creator" content="@wazuh" />
-<meta name="twitter:title" content="{{ pagetitle|e + titlesuffix }}" />
-<meta name="twitter:description" content="User manual, installation and configuration guides. Learn how to get the most out of the Wazuh platform." />
-<meta name="twitter:image" content="{{ theme_wazuh_doc_url + '/current/_static/images/wazuh-docs-card.png' }}" />
-{% if not is_latest_release %}
-<meta name="robots" content="noindex" />
-{% endif %}
+  <meta property="og:image" content="{{ theme_wazuh_doc_url + '/current/_static/images/wazuh-docs-card.png' }}" />
+  <meta property="og:url" content="{{ theme_wazuh_doc_url + '/current/' + pagename + '.html' }}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="{{ pagetitle|e + titlesuffix }}" />
+  <meta property="og:description" content="User manual, installation and configuration guides. Learn how to get the most out of the Wazuh platform." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@wazuh" />
+  <meta name="twitter:creator" content="@wazuh" />
+  <meta name="twitter:title" content="{{ pagetitle|e + titlesuffix }}" />
+  <meta name="twitter:description" content="User manual, installation and configuration guides. Learn how to get the most out of the Wazuh platform." />
+  <meta name="twitter:image" content="{{ theme_wazuh_doc_url + '/current/_static/images/wazuh-docs-card.png' }}" />
 
 {{- metatags }}
 
@@ -78,6 +76,9 @@
 {%- endblock css %}
 
 {%- block linktags %}
+  <link rel="preload" href="_static/images/wazuh_404_bg_xs.png" as="image" type="image/x-png">
+  <link rel="preload" href="_static/images/wazuh_404_bg_desktop.png" as="image" type="image/x-png">
+  <link rel="preload" href="_static/images/wazuh_404_bg_4k.png" as="image" type="image/x-png">
   <link rel="preload" href="{{ url_root }}_static/images/wazuh_bg_head.png" as="image" type="image/x-png">
   <link rel="preload" href="{{ url_root }}_static/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
   
@@ -96,18 +97,9 @@
       <link rel="copyright" title="{{ _('Copyright') }}" href="{{ pathto('copyright') }}"/>
   {%- endif %}
   <link rel="top" title="{{ docstitle|e }}" href="{{ pathto('index') }}"/>
-  {%- if parents %}
-      <link rel="up" title="{{ parents[-1].title|striptags|e }}" href="{{ parents[-1].link|e }}"/>
-  {%- endif %}
-  {%- if next %}
-      <link rel="next" title="{{ next.title|striptags|e }}" href="{{ next.link|e }}"/>
-  {%- endif %}
-  {%- if prev %}
-      <link rel="prev" title="{{ prev.title|striptags|e }}" href="{{ prev.link|e }}"/>
-  {%- endif %}
 {%- endblock %}
 
-{# FAVICON and canonical #}
+{# FAVICON  and canonical #}
 {%- if favicon %}
   <link rel="shortcut icon" href="{{ pathto('_static/images/' + favicon, 1) }}"/>
 {%- endif %}
@@ -141,13 +133,7 @@
   <i class="fa fa-chevron-circle-up" aria-hidden="true"></i>
 </a>
 
-{% if pagename == 'index' %}
-<div id="page" class="index">
-{% elif pagename == 'search' or pagename == 'genindex' %}
-<div id="page" class="not-indexed">
-{% else %}
-<div id="page">
-{% endif %}
+<div id="page" class="page-404 not-indexed">
 
   {% include "header.html" %} {%- block header %}{% endblock header %}
 
@@ -190,15 +176,6 @@
       <div id="main-content" class="order-1">
         <div id="rst-content">
 
-        {% if pagename != 'index' and pagename != 'search' and pagename != 'genindex' %}
-        <div class="edit-repo-wrapper">
-          {% include "editrepo.html" %}
-        </div>
-        <div class="breadcrumbs-wrapper">
-          {% include "breadcrumbs.html" %}
-        </div>
-        {% endif %}
-
         {%- block latest %}
           {%- set nav_version = version %}
           {% if current_version %}
@@ -216,12 +193,16 @@
         
         {# Main content #}
         <main role="main">
-          {% block body %} {% endblock %}
+          <div class="section" id="page-not-found">
+            <span id="not-found"></span>
+            <h1>Page not found</h1>
+            <div class="section">
+              <h2>404</h2>
+              <p>Seems that you got lost…</p>
+              <p><a class="reference internal" href="{{ pathto(master_doc) }}"><span class="std std-ref">Return home</span></a></p>
+            </div>
+          </div>
         </main>
-
-        {% if pagename != 'index' %}
-          {% include "navigation.html" %}
-        {% endif %}
 
         </div>
         <footer>
@@ -260,6 +241,5 @@
 {% endif %}
 {%- endblock footer_js %}
 
-{{ add_wazuh_light_box() }}
 </body>
 </html>
