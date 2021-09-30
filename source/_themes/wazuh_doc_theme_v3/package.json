@@ -1,0 +1,23 @@
+{
+  "name": "wazuh-documentation",
+  "version": "3.0.0",
+  "description": "Wazuh is a free, open source and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response and compliance.",
+  "main": "index.html",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wazuh/wazuh-documentation.git"
+  },
+  "keywords": [
+    "Wazuh",
+    "documentation"
+  ],
+  "author": "Wazuh, Inc.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wazuh/wazuh-documentation/issues"
+  },
+  "homepage": "https://github.com/wazuh/wazuh-documentation#readme",
+  "devDependencies": {},
+  "dependencies": {}
+}

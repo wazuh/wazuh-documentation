@@ -1,0 +1,21 @@
+{#
+  wazuh_doc_theme_v3/layout.html
+  ~~~~~~~~~~~~~~~~~
+
+  Master layout template for Wazuh Documentation Sphinx theme v3.0.
+#}
+
+<head>
+  {%- for cssfile in css_files %}
+    <link rel="stylesheet" href="{{ pathto(cssfile, 1) }}" type="text/css" >
+  {%- endfor -%}
+  <style type="text/css">{{ inline_fonts }}</style>
+</head>
+<body>
+  {% block body %} {% endblock %}
+  {%- for scriptfile in script_files -%}
+  {%- if scriptfile not in ["_static/jquery.js", "_static/underscore.js", "_static/doctools.js", "_static/language_data.js"] %}
+    <script src="{{ pathto(scriptfile, 1) }}"></script>
+  {%- endif -%}
+{% endfor -%}
+</body>

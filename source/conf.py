@@ -119,7 +119,7 @@ pygments_style = 'sphinx'
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'wazuh_doc_theme'
+html_theme = 'wazuh_doc_theme_v3'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -506,9 +506,32 @@ custom_replacements = {
 
 # -- Setup -------------------------------------------------------------------
 
+compilation_time = str(time.time())
+
 def setup(app):
 
     current_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), theme_assets_path)
+    
+    if html_theme == 'wazuh_doc_theme_v3':
+        # CSS files
+        app.add_css_file("css/min/bootstrap.min.css?ver=%s" % os.stat(
+            os.path.join(current_path, "static/css/min/bootstrap.min.css")).st_mtime)
+        app.add_css_file("css/min/wazuh.min.css?ver=%s" % os.stat(
+            os.path.join(current_path, "static/css/min/wazuh.min.css")).st_mtime)
+        
+        # JS files
+        app.add_js_file("js/jquery.js?ver=%s" % os.stat(
+            os.path.join(current_path, "static/js/jquery.js")).st_mtime)
+        app.add_js_file("js/underscore.js?ver=%s" % os.stat(
+            os.path.join(current_path, "static/js/underscore.js")).st_mtime)
+        app.add_js_file("js/doctools.js?ver=%s" % os.stat(
+            os.path.join(current_path, "static/js/doctools.js")).st_mtime)
+        app.add_js_file("js/language_data.js?ver=%s" % os.stat(
+            os.path.join(current_path, "static/js/language_data.js")).st_mtime)
+        # app.add_js_file("js/searchtool.js?ver=%s" % os.stat(
+            # os.path.join(current_path, "static/js/searchtool.js")).st_mtime)
+        app.add_js_file("js/min/wazuh.min.js?ver=%s" % os.stat(
+            os.path.join(current_path, "static/js/min/wazuh.min.js")).st_mtime)
     
     if html_theme == 'wazuh_doc_theme':
         minification(current_path)
@@ -612,7 +635,7 @@ html_context = {
     "github_version": version,
     "production": production,
     "apiURL": apiURL,
-    "compilation_ts": str(time.time()),
+    "compilation_ts": compilation_time,
     "is_latest_release": is_latest_release
 }
 sphinx_tabs_nowarn = True
