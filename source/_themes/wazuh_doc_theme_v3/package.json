@@ -4,7 +4,15 @@
   "description": "Wazuh is a free, open source and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response and compliance.",
   "main": "index.html",
   "scripts": {
-    "css:lint": "stylelint --config config/.stylelintrc --syntax scss \"src/scss/**/*.scss\" --cache --cache-location \"build/.stylelintcache/\""
+    "css:lint": "stylelint --config config/.stylelintrc --syntax scss \"src/scss/**/*.scss\" --cache --cache-location \"build/.stylelintcache/\"",
+    "css:compile:google-fonts": "node-sass --output-style expanded --source-map true --source-map-contents true --precision 6 src/scss/google-fonts.scss src/css/google-fonts.css",
+    "css:compile:bootstrap": "node-sass --output-style expanded --source-map true --source-map-contents true --precision 6 src/scss/libs/bootstrap/bootstrap.scss src/css/bootstrap.css",
+    "css:compile:page:default": "node-sass --output-style expanded --source-map true --source-map-contents true --precision 6 src/scss/pages/wazuh-documentation.scss src/css/wazuh-documentation.css",
+    "css:compile:page:api": "node-sass --output-style expanded --source-map true --source-map-contents true --precision 6 src/scss/pages/api-reference.scss src/css/api-reference.css",
+    "css:compile:page:index": "node-sass --output-style expanded --source-map true --source-map-contents true --precision 6 src/scss/pages/index.scss src/css/index.css",
+    "css:compile:page:not-found": "node-sass --output-style expanded --source-map true --source-map-contents true --precision 6 src/scss/pages/not-found.scss src/css/not-found.css",
+    "css:compile:page:search": "node-sass --output-style expanded --source-map true --source-map-contents true --precision 6 src/scss/pages/search-results.scss src/css/search-results.css",
+    "css:compile": "npm-run-all css:compile:* css:compile:page:*"
   },
   "repository": {
     "type": "git",
@@ -24,6 +32,7 @@
     "autoprefixer": "^10.3.6",
     "clean-css-cli": "^5.4.1",
     "node-sass": "^6.0.1",
+    "npm-run-all": "^4.1.5",
     "postcss": "^8.3.8",
     "postcss-cli": "^9.0.1",
     "stylelint": "^13.13.1",
