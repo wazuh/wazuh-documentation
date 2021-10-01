@@ -41,7 +41,7 @@ Downloading packages and configuration files
           # curl -sO https://raw.githubusercontent.com/wazuh/wazuh-documentation/4329_Write_offline_installation_guide/resources/open-distro/download-offline-installation/offline-zypp-download.sh
           # bash ./offline-zypp-download.sh
 
-#. Copy or move the ``/wazuh-offline/`` folder contents to a folder accessible to the host from where the offline installation will be carried out.
+#. Copy or move ``./wazuh-offline/`` folder contents to a folder accessible to the host from where the offline installation will be carried out.
 
 ..
   see the :ref:`Packages list <packages>` section. 
@@ -120,10 +120,11 @@ Installing Elasticsearch
 
         .. code-block:: console
         
-          # \cp ./opendistro_files/elasticsearch/elasticsearch.yml /etc/elasticsearch/
-          # \cp ./opendistro_files/elasticsearch/roles.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/
-          # \cp ./opendistro_files/elasticsearch/roles_mapping.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/
-          # \cp ./opendistro_files/elasticsearch/internal_users.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/
+          # unalias cp
+          # cp ./opendistro_files/elasticsearch/elasticsearch.yml /etc/elasticsearch/
+          # cp ./opendistro_files/elasticsearch/roles.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/
+          # cp ./opendistro_files/elasticsearch/roles_mapping.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/
+          # cp ./opendistro_files/elasticsearch/internal_users.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/
           # cp ./opendistro_files/elasticsearch/wazuh-cert-tool.sh ~
           # cp ./opendistro_files/elasticsearch/instances.yml ~
 
@@ -259,8 +260,8 @@ Installing Filebeat
 
         .. code-block:: console
         
-          # \cp ./wazuh_files/filebeat/filebeat.yml /etc/filebeat/
-          # \cp ./wazuh_files/filebeat/wazuh-template.json /etc/filebeat/
+          # cp ./wazuh_files/filebeat/filebeat.yml /etc/filebeat/
+          # cp ./wazuh_files/filebeat/wazuh-template.json /etc/filebeat/
           # chmod go+r /etc/filebeat/wazuh-template.json
 
       .. group-tab:: APT
@@ -387,7 +388,7 @@ Installing Kibana
 
          .. code-block:: console
          
-           # \cp ./opendistro_files/kibana/kibana.yml /etc/kibana/
+           # cp ./opendistro_files/kibana/kibana.yml /etc/kibana/
 
        .. group-tab:: APT
 
