@@ -3,7 +3,9 @@
   "version": "3.0.0",
   "description": "Wazuh is a free, open source and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response and compliance.",
   "main": "index.html",
-  "scripts": {},
+  "scripts": {
+    "css:lint": "stylelint --config config/.stylelintrc --syntax scss \"src/scss/**/*.scss\" --cache --cache-location \"build/.stylelintcache/\""
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wazuh/wazuh-documentation.git"
