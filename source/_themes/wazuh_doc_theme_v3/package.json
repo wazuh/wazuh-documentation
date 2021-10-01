@@ -12,8 +12,26 @@
     "css:compile:page:index": "node-sass --output-style expanded --source-map true --source-map-contents true --precision 6 src/scss/pages/index.scss src/css/index.css",
     "css:compile:page:not-found": "node-sass --output-style expanded --source-map true --source-map-contents true --precision 6 src/scss/pages/not-found.scss src/css/not-found.css",
     "css:compile:page:search": "node-sass --output-style expanded --source-map true --source-map-contents true --precision 6 src/scss/pages/search-results.scss src/css/search-results.css",
-    "css:compile": "run-p css:compile:* css:compile:page:*",
-    "css:prefix": "postcss --config config/postcss.config.js --replace \"src/css/**/*.css\" \"!src/css/**/*.min.css\""
+    "css:compile": "run-p css:compile:page:*",
+    "css:prefix": "postcss --config config/postcss.config.js --replace \"src/css/**/*.css\" \"!src/css/**/*.min.css\"",
+    "css:minify:google-fonts": "cd src/css && cleancss -O1 --source-map --source-map-inline-sources --output ../../static/css/inline/google-fonts.min.css google-fonts.css",
+    "css:minify:bootstrap": "cd src/css && cleancss -O1 --source-map --source-map-inline-sources --output ../../static/css/min/bootstrap.min.css bootstrap.css",
+    "css:minify:page:default": "cd src/css && cleancss -O1 --source-map --source-map-inline-sources --output ../../static/css/min/wazuh-documentation.min.css wazuh-documentation.css",
+    "css:minify:page:api": "cd src/css && cleancss -O1 --source-map --source-map-inline-sources --output ../../static/css/min/api-reference.min.css api-reference.css",
+    "css:minify:page:index": "cd src/css && cleancss -O1 --source-map --source-map-inline-sources --output ../../static/css/min/index.min.css index.css",
+    "css:minify:page:not-found": "cd src/css && cleancss -O1 --source-map --source-map-inline-sources --output ../../static/css/min/not-found.min.css not-found.css",
+    "css:minify:page:search": "cd src/css && cleancss -O1 --source-map --source-map-inline-sources --output ../../static/css/min/search-results.min.css search-results.css",
+    "css:minify": "run-p css:minify:page:*",
+    "css:build:google-fonts": "run-s css:compile:google-fonts css:prefix css:minify:google-fonts eol:lf",
+    "css:build:bootstrap": "run-s css:compile:bootstrap css:prefix css:minify:bootstrap eol:lf",
+    "css:build:page:default": "run-s css:compile:page:default css:prefix css:minify:page:default eol:lf",
+    "css:build:page:api": "run-s css:compile:page:api css:prefix css:minify:page:api eol:lf",
+    "css:build:page:index": "run-s css:compile:page:index css:prefix css:minify:page:index eol:lf",
+    "css:build:page:not-found": "run-s css:compile:page:not-found css:prefix css:minify:page:not-found",
+    "css:build:page:search": "run-s css:compile:page:default css:prefix css:minify:page:search eol:lf",
+    "css:build": "run-s css:compile css:prefix css:minify eol:lf",
+    "eol:lf": "eolConverter lf \"static/{css,js}/**/*.{css,js}\"",
+    "css:clean": "rimraf \"src/css/**/*.css\" && rimraf \"src/css/**/*.css.map\""
   },
   "repository": {
     "type": "git",
@@ -32,6 +50,7 @@
   "devDependencies": {
     "autoprefixer": "^10.3.6",
     "clean-css-cli": "^5.4.1",
+    "eol-converter-cli": "^1.0.8",
     "node-sass": "^6.0.1",
     "npm-run-all": "^4.1.5",
     "postcss": "^8.3.8",
@@ -41,6 +60,5 @@
     "stylelint-config-standard": "^22.0.0",
     "stylelint-order": "^4.1.0",
     "stylelint-scss": "^3.21.0"
-  },
-  "dependencies": {}
+  }
 }
