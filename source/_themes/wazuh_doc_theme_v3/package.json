@@ -12,7 +12,8 @@
     "css:compile:page:index": "node-sass --output-style expanded --source-map true --source-map-contents true --precision 6 src/scss/pages/index.scss src/css/index.css",
     "css:compile:page:not-found": "node-sass --output-style expanded --source-map true --source-map-contents true --precision 6 src/scss/pages/not-found.scss src/css/not-found.css",
     "css:compile:page:search": "node-sass --output-style expanded --source-map true --source-map-contents true --precision 6 src/scss/pages/search-results.scss src/css/search-results.css",
-    "css:compile": "npm-run-all css:compile:* css:compile:page:*"
+    "css:compile": "run-p css:compile:* css:compile:page:*",
+    "css:prefix": "postcss --config config/postcss.config.js --replace \"src/css/**/*.css\" \"!src/css/**/*.min.css\""
   },
   "repository": {
     "type": "git",
