@@ -6,12 +6,7 @@
 Offline all-in-one installation
 ===============================
 
-This document guides you step by step to:
-
-* Download the Wazuh components.
-* Install them later when there is no connection to the Internet or from a system without connection to it in an all-in-one offline deployment.
-
-With an all-in-one deployment, you install and configure the Wazuh server and Elastic Stack on the same host. To learn more about components visit :ref:`components` in the `Getting started` section.
+You can install Wazuh even when there is no connection to the Internet. Installing the solution offline involves downloading the Wazuh components to later install them on a system with no internet connection. Although here the Wazuh server and Elastic Stack are installed and configured on the same host in an all-in-one deployment, each component can also be installed on a separate host as a distributed deployment, depending on the environment needs. To learn more about each component and its capabilities, check the :ref:`Components <components>` section. 
 
 .. note:: Root privileges are required to execute all the commands.
 
@@ -52,13 +47,13 @@ Downloading packages and configuration files
   see the :ref:`Packages list <packages>` section. 
 
 
-Install Wazuh and components from local files
----------------------------------------------
+Installing Wazuh and components from local files
+------------------------------------------------
 
 .. note:: In the host where the installation is taking place, change the working directory to the folder with the installation files downloaded in the previous steps.
 
-Install Wazuh manager
-~~~~~~~~~~~~~~~~~~~~~
+Installing the Wazuh manager
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #. Run the following command to install the Wazuh manager.
 
@@ -91,8 +86,8 @@ Install Wazuh manager
 
     .. include:: /_templates/installations/wazuh/common/check_wazuh_manager.rst    
 
-Install Elasticsearch
-~~~~~~~~~~~~~~~~~~~~~
+Installing Elasticsearch
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 #. Run the following command to install `Open Distro for Elasticsearch`.
 
@@ -231,8 +226,8 @@ Install Elasticsearch
         }
 
 
-Install Filebeat
-~~~~~~~~~~~~~~~~
+Installing Filebeat
+~~~~~~~~~~~~~~~~~~~
 
 #. Run the following command to install Filebeat.
 
@@ -359,8 +354,8 @@ Install Filebeat
      }
 
 
-Install Kibana
-~~~~~~~~~~~~~~
+Installing Kibana
+~~~~~~~~~~~~~~~~~
 
 #. Run the following command to install Kibana.
 
