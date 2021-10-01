@@ -89,6 +89,7 @@ newUrls['4.2'] = [
   '/cloud-service/getting-started/sign-up-trial.html',
   '/cloud-service/getting-started/access-wazuh-wui.html',
   '/cloud-service/getting-started/register-agents.html', 
+  '/installation-guide/more-installation-alternatives/offline-all-in-one.html',
 ];
 
 removedUrls['4.2'] = [
@@ -214,6 +215,11 @@ redirections.push(
       'target': ['4.1=>4.2', '4.2=>4.1'],
       '4.1': '/user-manual/reference/tools/ossec-regex.html',
       '4.2': '/user-manual/reference/tools/wazuh-regex.html',
+    },
+    {
+      'target': ['4.2=>4.1'],
+      '4.1': '/installation-guide/more-installation-alternatives/index.html',
+      '4.2': '/installation-guide/more-installation-alternatives/offline-all-in-one.html',
     },
 );
 
