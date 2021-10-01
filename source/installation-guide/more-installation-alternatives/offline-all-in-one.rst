@@ -6,12 +6,14 @@
 Offline all-in-one installation
 ===============================
 
-This document will guide you step by step to:
+This document guides you step by step to:
 
 * Download the Wazuh components.
 * Install them later when there is no connection to the Internet or from a system without connection to it in an all-in-one offline deployment.
 
-.. note:: Run ``su`` or ``sudo su`` to gain root privileges. This is necessary to execute the commands below.
+With an all-in-one deployment, you install and configure the Wazuh server and Elastic Stack on the same host. To learn more about components visit :ref:`components` in the `Getting started` section.
+
+.. note:: Root privileges are required to execute all the commands.
 
 Download packages and configuration files
 -----------------------------------------
