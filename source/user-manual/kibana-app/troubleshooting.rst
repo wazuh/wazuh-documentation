@@ -98,7 +98,7 @@ If the Wazuh API is running, try to fetch data using the CLI from the Kibana ser
 
 .. code-block:: console
 
-  # curl -k -X GET "https://<api_url>:55000/" -H "Authorization: Bearer $(curl -u <api_user>:<api_password> -k -X GET 'https://<api_url>:55000/security/user/authenticate?raw=true')"
+  # curl -k -X GET "https://<api_url>:55000/" -H "Authorization: Bearer $(curl -u <api_user>:<api_password> -k -X POST 'https://<api_url>:55000/security/user/authenticate?raw=true')"
 
 .. code-block:: console
   :class: output
