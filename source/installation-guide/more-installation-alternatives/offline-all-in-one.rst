@@ -15,10 +15,10 @@ With an all-in-one deployment, you install and configure the Wazuh server and El
 
 .. note:: Root privileges are required to execute all the commands.
 
-Download packages and configuration files
------------------------------------------
+Downloading packages and configuration files
+--------------------------------------------
 
-#. Run the following commands from a system with an Internet connection. They will download and execute a script. This script will download all required files for the offline installation.
+#. Run the following commands from a system with Internet connection. This action executes a script that downloads all required files for the offline installation.
 
     .. tabs::
 
@@ -46,7 +46,7 @@ Download packages and configuration files
           # curl -sO https://raw.githubusercontent.com/wazuh/wazuh-documentation/4329_Write_offline_installation_guide/resources/open-distro/download-offline-installation/offline-zypp-download.sh
           # bash ./offline-zypp-download.sh
 
-#. Copy or move ``/wazuh-offline/`` folder contents to a folder accessible to the host from where the offline installation will be carried out.
+#. Copy or move the ``/wazuh-offline/`` folder contents to a folder accessible to the host from where the offline installation will be carried out.
 
 ..
   see the :ref:`Packages list <packages>` section. 
