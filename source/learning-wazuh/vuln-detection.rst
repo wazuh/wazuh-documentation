@@ -97,18 +97,25 @@ In the ``/var/ossec/etc/ossec.conf`` file of the Wazuh manager, scroll down to t
       </provider>
       <provider name="debian">
         <enabled>no</enabled>
-        <os>wheezy</os>
         <os>stretch</os>
-        <os>jessie</os>
+        <os>buster</os>
+        <os>bullseye</os>
         <update_interval>1h</update_interval>
       </provider>
       <provider name="redhat">
         <enabled>yes</enabled>
-        <update_from_year>2010</update_from_year>
+        <os>5</os>
+        <os>6</os>
+        <os>7</os>
+        <os>8</os>
         <update_interval>1h</update_interval>
       </provider>
       <provider name="arch">
         <enabled>no</enabled>
+        <update_interval>1h</update_interval>
+      </provider>
+      <provider name="msu">
+        <enabled>yes</enabled>
         <update_interval>1h</update_interval>
       </provider>
       <provider name="nvd">
