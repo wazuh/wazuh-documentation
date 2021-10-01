@@ -21,7 +21,6 @@ This manual describes the configuration process to start this plugin and the dif
     .. toctree::
         :maxdepth: 1
 
-        connect-kibana-app
         features/index
         wazuh-rbac
         troubleshooting
