@@ -516,6 +516,8 @@ def setup(app):
         # CSS files
         app.add_css_file("css/min/bootstrap.min.css?ver=%s" % os.stat(
             os.path.join(current_path, "static/css/min/bootstrap.min.css")).st_mtime)
+        app.add_css_file("css/fontawesome.min.css?ver=%s" % os.stat(
+            os.path.join(current_path, "static/css/fontawesome.min.css")).st_mtime)
         app.add_css_file("css/min/wazuh-documentation.min.css?ver=%s" % os.stat(
             os.path.join(current_path, "static/css/min/wazuh-documentation.min.css")).st_mtime)
         
