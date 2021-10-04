@@ -47,10 +47,10 @@ Download the packages and configuration files
   see the :ref:`Packages list <packages>` section. 
 
 
-Installing Wazuh and components from local files
-------------------------------------------------
+Install Wazuh and the components from local files
+-------------------------------------------------
 
-.. note:: In the host where the installation is taking place, change the working directory to the folder with the installation files downloaded in the previous steps.
+.. note:: In the host where the installation is taking place, make sure to change the working directory to the folder with the installation files downloaded in the previous steps.
 
 Installing the Wazuh manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -78,18 +78,18 @@ Installing the Wazuh manager
           # zypper install --repo wazuh -y ./wazuh-packages/wazuh-manager-4.2.1-1.x86_64.rpm
 
 
-#. Enable and start the Wazuh manager service:
+#. Enable and start the Wazuh manager service.
 
     .. include:: /_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
 
-#. Check if the Wazuh manager is active: 
+#. Check that the Wazuh manager is active.
 
     .. include:: /_templates/installations/wazuh/common/check_wazuh_manager.rst    
 
 Installing Elasticsearch
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Run the following command to install `Open Distro for Elasticsearch`.
+#. Run the following command to install Open Distro for Elasticsearch.
 
     .. tabs::
 
@@ -150,17 +150,17 @@ Installing Elasticsearch
           # cp ./opendistro_files/elasticsearch/wazuh-cert-tool.sh ~
           # cp ./opendistro_files/elasticsearch/instances.yml ~
 
-#. Remove the demo certificates:
+#. Remove the demo certificates.
 
     .. include:: /_templates/installations/elastic/common/remove_demo_certs.rst
 
-#. Run `wazuh-cert-tool.sh` to create the new certificates.
+#. Run ``wazuh-cert-tool.sh`` to create the new certificates.
 
     .. code-block:: console
     
       # bash ~/wazuh-cert-tool.sh
 
-#. Move the certificates.
+#. Move the certificates to the appropriate locations.
 
     .. code-block:: console
 
@@ -169,41 +169,45 @@ Installing Elasticsearch
       # mv ~/certs/admin* /etc/elasticsearch/certs/
       # cp ~/certs/root-ca* /etc/elasticsearch/certs/
 
-#. Enable and start the Elasticsearch service:
+#. Enable and start the Elasticsearch service.
 
     .. include:: /_templates/installations/elastic/common/enable_elasticsearch.rst
 
-#. Run the Elasticsearch `securityadmin` script to load the new certificates information and start the cluster:
+#. Run the Elasticsearch ``securityadmin.sh`` script to load the new certificates information and start the cluster.
 
     .. code-block:: console
 
       # export JAVA_HOME=/usr/share/elasticsearch/jdk/ && /usr/share/elasticsearch/plugins/opendistro_security/tools/securityadmin.sh -cd /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/ -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin-key.pem
 
-#. Optionally, run the following commands to remove the `Open Distro for Elasticsearch performance analyzer plugin`. This is installed by default and can have a negative impact on system resources.
+  
+  
+    **Recommended action**  - Remove Open Distro for Elasticsearch performance analyzer plugin
 
-    .. tabs::
+      The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it and restarting the service with the following commands.
 
-      .. group-tab:: Systemd
+      .. tabs::
 
-        .. code-block:: console
+        .. group-tab:: Systemd
 
-          # /usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer
-          # systemctl restart elasticsearch
+          .. code-block:: console
 
-      .. group-tab:: SysV Init
+            # /usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer
+            # systemctl restart elasticsearch
 
-        .. code-block:: console
+        .. group-tab:: SysV Init
 
-          # /usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer
-          # service elasticsearch restart
+          .. code-block:: console
+
+            # /usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer
+            # service elasticsearch restart
         
-#. Run the following command to make sure the installation is successful:
+#. Run the following command to make sure the installation is successful.
 
     .. code-block:: console
 
       # curl -XGET https://localhost:9200 -u admin:admin -k
 
-    An example response should look as follows:
+    Expand the output to see an example response.
 
     .. code-block:: none
         :class: output accordion-output
