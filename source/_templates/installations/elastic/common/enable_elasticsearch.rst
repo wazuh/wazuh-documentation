@@ -16,7 +16,7 @@
 
   .. group-tab:: SysV Init
 
-    Choose one option according to the operating system used:
+    Choose one option according to the operating system used.
 
     a) RPM based operating system:
 
