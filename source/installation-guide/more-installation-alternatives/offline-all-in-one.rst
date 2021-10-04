@@ -112,7 +112,7 @@ Installing Elasticsearch
           # zypper install --repo wazuh -y ./opendistro-packages/*.rpm
 
 
-#. Move a copy of the configuration files to the appropriate locations.
+#. Move a copy of the configuration files to the appropriate location.
 
     .. tabs::
 
@@ -160,7 +160,7 @@ Installing Elasticsearch
     
       # bash ~/wazuh-cert-tool.sh
 
-#. Move the certificates to the appropriate locations.
+#. Move the certificates to the appropriate location.
 
     .. code-block:: console
 
@@ -256,7 +256,7 @@ Installing Filebeat
         
           # zypper install --repo wazuh -y ./wazuh-packages/filebeat-oss-7.10.2-x86_64.rpm
 
-#. Move a copy of the configuration files.
+#. Move a copy of the configuration files to the appropriate location.
 
     .. tabs::
 
@@ -284,7 +284,7 @@ Installing Filebeat
           # cp ./wazuh_files/filebeat/wazuh-template.json /etc/filebeat/
           # chmod go+r /etc/filebeat/wazuh-template.json
 
-#. Edit ``/etc/filebeat/wazuh-template.json`` and change to ``"1"`` the value for ``"index.number_of_shards"`` as this is a one node installation.
+#. Edit ``/etc/filebeat/wazuh-template.json`` and change to ``"1"`` the value for ``"index.number_of_shards"`` as this is a single-node installation.
 
     .. code-block:: none
 
@@ -304,7 +304,7 @@ Installing Filebeat
     
       # tar -xzf ./wazuh_files/filebeat/wazuh-filebeat-module.tar.gz -C /usr/share/filebeat/module
 
-#. Copy the Elasticsearch certificates into ``/etc/filebeat/certs``:
+#. Copy the Elasticsearch certificates into ``/etc/filebeat/certs``.
 
     .. code-block:: console
 
@@ -312,16 +312,18 @@ Installing Filebeat
       # cp ~/certs/root-ca.pem /etc/filebeat/certs/
       # mv ~/certs/filebeat* /etc/filebeat/certs/
 
-#. Enable and start the Filebeat service:
+#. Enable and start the Filebeat service.
 
     .. include:: /_templates/installations/elastic/common/enable_filebeat.rst
 
 
-#. Run the following commands to make sure Filebeat is successfully installed and one shard only is configured:
+#. Run the following commands to make sure Filebeat is successfully installed and one shard only is configured.
 
     .. code-block:: console
 
       # filebeat test output
+
+    Expand the output to see an example response.
 
     .. code-block:: none
      :class: output accordion-output
@@ -344,6 +346,8 @@ Installing Filebeat
     .. code-block:: console
 
      # curl "https://localhost:9200/_template/wazuh?pretty&filter_path=wazuh.settings.index.number_of_shards" -k -u admin:admin
+
+    Expand the output to see an example response.
 
     .. code-block:: none
      :class: output accordion-output
@@ -384,7 +388,7 @@ Installing Kibana
        
          # zypper install --repo wazuh -y ./opendistro-kibana-packages/opendistroforelasticsearch-kibana-1.13.2-linux-x64.rpm
 
-#. Move a copy of the configuration files.
+#. Move a copy of the configuration files to the appropriate location.
 
      .. tabs::
 
@@ -409,14 +413,14 @@ Installing Kibana
     .. note::
       ``server.host: 0.0.0.0`` in ``/etc/kibana/kibana.yml`` means that Kibana can be accessed from the outside and accepts all the available IPs of the host. This value can be changed for a specific IP if needed.
   
-#. Create the ``/usr/share/kibana/data`` directory:
+#. Create the ``/usr/share/kibana/data`` directory.
 
     .. code-block:: console
     
       # mkdir /usr/share/kibana/data
       # chown -R kibana:kibana /usr/share/kibana/data
 
-#. Replace ``/path/to/installation/folder`` with your actual path to the installation folder in the following command and run it to install the Wazuh Kibana plugin:
+#. Replace ``/path/to/installation/folder`` with your actual path to the installation folder in the following command and run it to install the Wazuh Kibana plugin.
 
     .. tabs::
 
@@ -440,7 +444,7 @@ Installing Kibana
             # cd /usr/share/kibana
             # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install file:///path/to/installation/folder/wazuh_files/kibana/wazuh_kibana.zip
 
-#. Copy the Elasticsearch certificates into ``/etc/kibana/certs``:
+#. Copy the Elasticsearch certificates into ``/etc/kibana/certs``.
 
     .. code-block:: console
 
@@ -449,17 +453,17 @@ Installing Kibana
       # mv ~/certs/kibana* /etc/kibana/certs/
       # chown kibana:kibana /etc/kibana/certs/*
 
-#. Link Kibana socket to privileged port 443:
+#. Link Kibana socket to privileged port 443.
 
     .. code-block:: console
 
       # setcap 'cap_net_bind_service=+ep' /usr/share/kibana/node/bin/node
 
-#. Enable and start the Kibana service:
+#. Enable and start the Kibana service.
 
     .. include:: /_templates/installations/elastic/common/enable_kibana.rst
 
-#. Access the web interface: 
+#. Access the web interface. 
 
   .. code-block:: none
 
