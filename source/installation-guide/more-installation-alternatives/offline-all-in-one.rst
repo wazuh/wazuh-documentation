@@ -10,8 +10,8 @@ You can install Wazuh even when there is no connection to the Internet. Installi
 
 .. note:: Root privileges are required to execute all the commands.
 
-Downloading packages and configuration files
---------------------------------------------
+Download the packages and configuration files
+---------------------------------------------
 
 #. Run the following commands from a system with Internet connection. This action executes a script that downloads all required files for the offline installation.
 
@@ -41,7 +41,7 @@ Downloading packages and configuration files
           # curl -sO https://raw.githubusercontent.com/wazuh/wazuh-documentation/4329_Write_offline_installation_guide/resources/open-distro/download-offline-installation/offline-zypp-download.sh
           # bash ./offline-zypp-download.sh
 
-#. Copy or move ``./wazuh-offline/`` folder contents to a folder accessible to the host from where the offline installation will be carried out.
+#. Copy or move the ``./wazuh-offline/`` folder contents to a folder accessible to the host from where the offline installation will be carried out.
 
 ..
   see the :ref:`Packages list <packages>` section. 
