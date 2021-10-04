@@ -24,7 +24,7 @@ To upgrade agents using the command line, use the :doc:`agent_upgrade <../../ref
 
     .. code-block:: console
 
-        # agent_upgrade -l
+        # /var/ossec/bin/agent_upgrade -l
 
     .. code-block:: none
         :class: output
@@ -36,11 +36,11 @@ To upgrade agents using the command line, use the :doc:`agent_upgrade <../../ref
 
         Total outdated agents: 3
 
-2. Upgrade the agent with ID 002 using the *'-a'* parameter followed by the agent ID:
+2. Upgrade the agent with ID 002 using the *'-a'* parameter followed by the agent ID and the *'-v'* parameter followed by the version to upgrade:
 
     .. code-block:: console
 
-        # agent_upgrade -a 002
+        # /var/ossec/bin/agent_upgrade -a 002 -v 4.0.0
 
     .. code-block:: none
         :class: output
@@ -105,7 +105,15 @@ Using the RESTful API
         }
 
 
-2. Upgrade the agents with ID 002 and 003 using endpoint :api-ref:`PUT /agents/upgrade <operation/api.controllers.agent_controller.put_upgrade_agent>`:
+2. Upgrade the agents with ID 002 and 003 using endpoint :api-ref:`PUT /agents/upgrade <operation/api.controllers.agent_controller.put_upgrade_agents>`:
+
+    .. versionadded:: 4.3.0
+
+        The parameter `agents_list` of endpoints :api-ref:`PUT /agents/upgrade <operation/api.controllers.agent_controller.put_upgrade_agents>` and :api-ref:`PUT /agents/upgrade_custom <operation/api.controllers.agent_controller.put_upgrade_custom_agents>` allows the value `all`. When setting this value, an upgrade request will be sent to all agents.
+
+    Despite the fact that there is no API limit when upgrading agents at the same time, it is not advised to upgrade an agents list exceeding 3000 agents. In case of doing it, it is highly recommended to use the parameter `wait_for_complete` set to `true` to avoid a possible API timeout.
+
+    This agents list size limit has been set after testing the endpoint in a Wazuh environment whose manager was installed in a host with specifications: 2.5 GHz AMD EPYC 7000 series processor and 4 GiB of memory. Using an agents list with size less than or equal to 3000 and a host with same or higher specs will guarantee this endpoint to return a response before the API timeout.
 
     .. code-block:: console
 
@@ -156,8 +164,8 @@ Using the RESTful API
                 "module": "upgrade_module",
                 "command": "upgrade",
                 "status": "Updated",
-                "create_time": "2020/10/21 17:13:45",
-                "update_time": "2020/10/21 17:14:07"
+                "create_time": "2020-10-21T17:13:45Z",
+                "update_time": "2020-10-21T17:14:07Z"
               },
               {
                 "message": "Success",
@@ -167,15 +175,15 @@ Using the RESTful API
                 "module": "upgrade_module",
                 "command": "upgrade",
                 "status": "Updated",
-                "create_time": "2020/10/21 17:13:45",
-                "update_time": "2020/10/21 17:14:11"
+                "create_time": "2020-10-21T17:13:45Z",
+                "update_time": "2020-10-21T17:14:11Z"
               }
             ],
             "total_affected_items": 2,
             "total_failed_items": 0,
             "failed_items": []
           },
-          "message": "All agents have been updated",
+          "message": "All upgrade tasks were returned",
           "error": 0
         }
 
@@ -194,11 +202,11 @@ Using the RESTful API
             "affected_items": [
               {
                 "id": "002",
-                "version": "Wazuh v4.2.2"
+                "version": "Wazuh v4.0.0"
               },
               {
                 "id": "003",
-                "version": "Wazuh v4.2.2"
+                "version": "Wazuh v4.0.0"
               }
             ],
             "total_affected_items": 2,
