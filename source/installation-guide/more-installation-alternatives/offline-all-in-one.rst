@@ -181,25 +181,25 @@ Installing Elasticsearch
 
   
   
-    **Recommended action**  - Remove Open Distro for Elasticsearch performance analyzer plugin
+#. **Recommended action**  - Remove Open Distro for Elasticsearch performance analyzer plugin
 
-      The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it and restarting the service with the following commands.
+    The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it and restarting the service with the following commands.
 
-      .. tabs::
+    .. tabs::
 
-        .. group-tab:: Systemd
+      .. group-tab:: Systemd
 
-          .. code-block:: console
+        .. code-block:: console
 
-            # /usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer
-            # systemctl restart elasticsearch
+          # /usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer
+          # systemctl restart elasticsearch
 
-        .. group-tab:: SysV Init
+      .. group-tab:: SysV Init
 
-          .. code-block:: console
+        .. code-block:: console
 
-            # /usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer
-            # service elasticsearch restart
+          # /usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer
+          # service elasticsearch restart
         
 #. Run the following command to make sure the installation is successful.
 
