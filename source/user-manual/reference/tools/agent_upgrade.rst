@@ -60,7 +60,7 @@ Examples
 
 .. code-block:: console
 
-    # agent_upgrade -a 002
+    # agent_upgrade -a 002 -v 4.0.0
 
 .. code-block:: none
     :class: output

@@ -333,8 +333,8 @@ agent:restart
 agent:upgrade
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 - :api-ref:`GET /agents/{agent_id}/upgrade_result <operation/api.controllers.agent_controller.get_agent_upgrade>` (`agent:id`_, `agent:group`_)
-- :api-ref:`PUT /agents/{agent_id}/upgrade <operation/api.controllers.agent_controller.put_upgrade_agent>` (`agent:id`_, `agent:group`_)
-- :api-ref:`PUT /agents/{agent_id}/upgrade_custom <operation/api.controllers.agent_controller.put_upgrade_custom_agent>` (`agent:id`_, `agent:group`_)
+- :api-ref:`PUT /agents/{agent_id}/upgrade <operation/api.controllers.agent_controller.put_upgrade_agents>` (`agent:id`_, `agent:group`_)
+- :api-ref:`PUT /agents/{agent_id}/upgrade_custom <operation/api.controllers.agent_controller.put_upgrade_custom_agents>` (`agent:id`_, `agent:group`_)
 
 
 Ciscat
