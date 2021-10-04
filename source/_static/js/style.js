@@ -714,10 +714,12 @@ $(function() {
     const blockCode = $(this).parent();
 
     /* Output */
-    if (!blockCode.hasClass('output')) {
+    if (!blockCode.hasClass('output') && !blockCode.hasClass('no-copy')) {
       blockCode.prepend('<button type="button" class="copy-to-clipboard" title="Copy to clipboard"><span>Copied to clipboard</span><i class="far fa-copy" aria-hidden="true"></i></button>');
     } else {
-      blockCode.prepend('<div class="admonition admonition-output"><p class="first admonition-title">Output</p></div>');
+      if (blockCode.hasClass('output')) {
+        blockCode.prepend('<div class="admonition admonition-output"><p class="first admonition-title">Output</p></div>');
+      }
     }
 
     /* Escaped tag signs */

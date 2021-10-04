@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+    :description: Learn more in this section about monitoring containers activity with Wazuh as well as the requirements, configuration, and helpful use cases. 
+    
 .. _docker_containers_activity:
 
 Monitoring containers activity

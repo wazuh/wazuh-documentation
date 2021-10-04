@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+    :description: Learn more about how to prepare your Wazuh Lab environment. In this section, we explain how to configure X-Pack Security. 
+    
 .. _build_lab_xpack-security-setup:
 
 Configure X-Pack Security
