@@ -465,11 +465,9 @@ Installing Kibana
 
 #. Access the web interface. 
 
-  .. code-block:: none
-
-      URL: https://<wazuh_server_ip>
-      user: admin
-      password: admin
+    - URL: *https://<wazuh_server_ip>*
+    - **Username**: admin
+    - **Password**: admin
 
 Upon the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or,  for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser.  Alternatively, a certificate from a trusted authority can be configured. 
 
@@ -483,4 +481,4 @@ To uninstall all the components of the all-in-one installation, see the :ref:`un
 Next steps
 ----------
 
-Once the Wazuh environment is ready, Wazuh agents can be installed on every endpoint to be monitored. To install the Wazuh agents and start monitoring the endpoints, see the :ref:`Wazuh agent<installation_agents>` installation section. And if you need to install them offline, you can check the appropriate agent package to download for your monitored system in the :ref:`Packages list <packages>` section.
+Once the Wazuh environment is ready, Wazuh agents can be installed on every endpoint to be monitored. To install the Wazuh agents and start monitoring the endpoints, see the :ref:`Wazuh agent<installation_agents>` installation section. If you need to install them offline, you can check the appropriate agent package to download for your monitored system in the :ref:`Packages list <packages>` section.
