@@ -154,7 +154,7 @@ Installing Elasticsearch
 
     .. include:: /_templates/installations/elastic/common/remove_demo_certs.rst
 
-#. Run ``wazuh-cert-tool.sh`` to create the new certificates.
+#. Run *wazuh-cert-tool.sh* to create the new certificates.
 
     .. code-block:: console
     
@@ -173,7 +173,7 @@ Installing Elasticsearch
 
     .. include:: /_templates/installations/elastic/common/enable_elasticsearch.rst
 
-#. Run the Elasticsearch ``securityadmin.sh`` script to load the new certificates information and start the cluster.
+#. Run the Elasticsearch *securityadmin* script to load the new certificates information and start the cluster.
 
     .. code-block:: console
 
