@@ -45,7 +45,9 @@ Once the instance is running, you can access the web interface as follows:
 
       URL: https://<instance_ip>
       user: wazuh
-      password: wazuh
+      password: <your_instance_id>
+
+Keep in mind that after launching the instance, the passwords of the opendsitro users will be changed to the id of the instance created from the AMI, in this way access to the interface is guaranteed only to the creator of it. This process can take an average of 5 minutes depending on the type of instance and both the ssh access and the kibana interface will be disabled. 
 
 All components included in this AMI are configured to work out-of-the-box without the need to modify any settings. However, all components can be fully customized. These are the configuration files locations:
 
