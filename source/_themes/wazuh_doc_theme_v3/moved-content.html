@@ -1,15 +1,14 @@
-<!DOCTYPE html>
+{%- extends "!wazuh_doc_theme_v3/template-parts/body.html" -%}
 
-<!-- TODO:  -->
+<!-- TODO: moved-content -->
+{%- block social_cards -%}{% endblock %}
 
-{%- set titlesuffix = " · "|safe + docstitle|e %}
-{%- set pagetitle = "Redirecting ..." %}
-<html lang="{{ language }}">
+
   <head>
     <title>{{ pagetitle + titlesuffix }}</title>
     <meta name="robots" content="noindex">
     <link rel="stylesheet" id="google-fonts-css" href="https://fonts.googleapis.com/css?family=Montserrat:400,500|Open+Sans:400" type="text/css" media="all">
-    <link rel="stylesheet" href="{{ pathto('_static/css/dist/style-redirect.min.css?ver=' + compilation_ts, 1) }}" type="text/css" />
+    <link rel="stylesheet" href="{{ pathto('_static/css/min/style-redirect.min.css?ver=' + compilation_ts, 1) }}" type="text/css" />
 
     {# FAVICON #}
     {%- if favicon %}
@@ -18,6 +17,7 @@
 
   </head>
   <body>
+  {%- block body -%}
 
     <h1>This content was moved</h1>
 
@@ -26,7 +26,10 @@
     </div>
 
     <p>Redirecting ...</p>
-    <script src="{{ pathto('_static/js/dist/redirects.min.js?ver=' + compilation_ts, 1) }}"></script>
-    <script src="{{ pathto('_static/js/dist/moved-content.min.js?ver=' + compilation_ts, 1) }}"></script>
+
+    {{ super () }}
+    {% endblock %}
+    <script src="{{ pathto('_static/js/min/redirects.min.js?ver=' + compilation_ts, 1) }}"></script>
+    <script src="{{ pathto('_static/js/min/moved-content.min.js?ver=' + compilation_ts, 1) }}"></script>
   </body>
 </html>

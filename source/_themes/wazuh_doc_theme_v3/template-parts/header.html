@@ -6,7 +6,7 @@
 #}
 
 {%- block header %}
-<!-- TODO:  -->
+<!-- TODO: part-header -->
 <header id="header">
 
   <div id="header-sticky">
@@ -28,13 +28,13 @@
         </div>
 
         <div class="middle col-6">
-          {% include "part-searchbar.html" %}
+          {% include "template-parts/search-box.html" %}
         </div> <!-- // #search-lg -->
 
         <div class="version-zone col-3">
           <span class="release-selector-wrapper">
             {% if theme_display_version %}
-            {% include "part-versions.html" %}
+            {% include "template-parts/version-selector.html" %}
             {% endif %}
           </span>
         </div>
@@ -85,7 +85,7 @@
           <div class="version-zone">
             <span class="release-selector-wrapper">
               {% if theme_display_version %}
-              {% include "part-versions.html" %}
+              {% include "template-parts/version-selector.html" %}
               {% endif %}
             </span>
           </div>
@@ -96,7 +96,7 @@
             </button>
           </div>
 
-          {% include "part-searchbar.html" %}
+          {% include "template-parts/search-box.html" %}
 
         </div>
 

@@ -1,0 +1,22 @@
+{#
+    wazuh_doc_theme_v3/index.html
+    ~~~~~~~~~~~~~~~~~
+
+    Index template for Wazuh Documentation Sphinx theme v3.0.
+    
+-#}
+
+{% if is_latest_release %}
+<!-- TODO: index -->
+
+  {%- extends "!wazuh_doc_theme_v3/template-parts/body.html" -%}
+  {%- block header %}{% endblock %}
+  {%- block back_to_top %}{% endblock %}
+  {%- block body -%}
+  {{pagename}}
+  {{ super () }}
+  {% endblock %}
+
+{%- else -%}
+  <script src="{{ pathto( '', 1) + '_static/js/index-redirect.js' }}"></script>
+{%- endif %}

@@ -1,0 +1,1 @@
+document.location="{{ theme_wazuh_doc_url + '/current/index.html' }}";

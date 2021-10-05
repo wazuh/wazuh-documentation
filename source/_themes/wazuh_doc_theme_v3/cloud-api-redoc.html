@@ -1,14 +1,14 @@
 {%- set titlesuffix = " · "|safe + docstitle|e %}
 {%- set pagetitle = "API reference" %}
 
-<!-- TODO:  -->
+<!-- TODO: cloud-api-redoc -->
 
 <!DOCTYPE html>
 <html lang="{{ language }}">
   <head>
     <title>{{ pagetitle + titlesuffix }}</title>
     <link rel='stylesheet' id='google-fonts-css'  href='https://fonts.googleapis.com/css?family=Montserrat:400,500|Open+Sans:400,700|Fira+Mono' type='text/css' media='all' />
-    <link rel="stylesheet" href="{{ pathto('_static/css/dist/custom-redoc.min.css', 1) }}" type="text/css" />
+    <link rel="stylesheet" href="{{ pathto('_static/css/min/api-reference.min.css', 1) }}" type="text/css" />
 
     {# FAVICON  and canonical #}
     {%- if favicon %}
@@ -76,6 +76,6 @@
       </div>
     </footer>
     <script src="{{ pathto('_static/js/redoc.standalone.js', 1) }}"></script>
-    <script src="{{ pathto('_static/js/dist/custom-redoc.min.js', 1) }}"></script>
+    <script src="{{ pathto('_static/js/min/api-reference.min.js', 1) }}"></script>
   </body>
 </html>

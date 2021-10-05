@@ -1,6 +1,6 @@
-<!-- TODO:  -->
+<!-- TODO: part-sidebar-left -->
 <div id="globaltoc-navbar">
-  {% include "part-searchbar.html" %}
+  {% include "template-parts/search-box.html" %}
   {% block menu -%}
   <nav id="globaltoc">
     {% set toctree = toctree(maxdepth=theme_globaltoc_depth|toint, collapse=theme_collapse_navigation, includehidden=theme_globaltoc_includehidden|tobool) -%}

@@ -185,9 +185,10 @@ html_static_path = ['_static']
 
 # Additional templates that should be rendered to pages, maps page names to
 # template names.
-html_additional_pages = {
-    'not_found': 'not-found.html',
-}
+html_additional_pages = {}
+
+if html_theme == 'wazuh_doc_theme_v3':
+    html_additional_pages['not_found'] = 'not-found.html'
 
 if version >= '4.0':
     html_additional_pages['user-manual/api/reference'] = 'api-redoc.html'
@@ -358,6 +359,8 @@ wazuh_images_config = {
   'show_caption': True
 }
 
+html_scaled_image_link = False
+
 # -- Options for intersphinx extension ---------------------------------------
 
 # Example configuration for intersphinx: refer to the Python standard library.
@@ -518,8 +521,6 @@ def setup(app):
             os.path.join(current_path, "static/css/min/bootstrap.min.css")).st_mtime)
         app.add_css_file("css/fontawesome.min.css?ver=%s" % os.stat(
             os.path.join(current_path, "static/css/fontawesome.min.css")).st_mtime)
-        app.add_css_file("css/min/wazuh-documentation.min.css?ver=%s" % os.stat(
-            os.path.join(current_path, "static/css/min/wazuh-documentation.min.css")).st_mtime)
         
         # JS files
         app.add_js_file("js/jquery.js?ver=%s" % os.stat(
@@ -564,6 +565,7 @@ def setup(app):
 	# List of compiled documents
     app.connect('html-page-context', collect_compiled_pagename)
     app.connect('html-page-context', insert_inline_style)
+    app.connect('html-page-context', manage_assets)
     app.connect('build-finished', finish_and_clean)
 
 
@@ -574,6 +576,28 @@ def insert_inline_style(app, pagename, templatename, context, doctree):
     with open(google_fonts_path, 'r') as reader:
         google_fonts = reader.read()
         context['inline_fonts'] = google_fonts
+
+def manage_assets(app, pagename, templatename, context, doctree):
+    ''' Defines the function get_css_by_page(page_name) that can be used in a template to get the CSS files depending on the page name. '''
+    def get_css_by_page(pagename):
+        theme_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), theme_assets_path)
+        css_map = {
+            'index': "css/min/index.min.css?ver=%s" % os.stat(os.path.join(theme_dir, "static/css/min/index.min.css")).st_mtime,
+            'user-manual/api/reference': "css/min/api-reference.min.css?ver=%s" % os.stat(os.path.join(theme_dir, "static/css/min/api-reference.min.css")).st_mtime,
+            'cloud-service/apis/reference': "css/min/api-reference.min.css?ver=%s" % os.stat(os.path.join(theme_dir, "static/css/min/api-reference.min.css")).st_mtime,
+            'search': "css/min/search-results.min.css?ver=%s" % os.stat(os.path.join(theme_dir, "static/css/min/search-results.min.css")).st_mtime,
+            # 'moved-content.html': "css/min/moved-content.min.css?ver=%s" % os.stat(os.path.join(theme_dir, "static/css/min/moved-content.min.css")).st_mtime,
+            'not_found': "css/min/not-found.min.css?ver=%s" % os.stat(os.path.join(theme_dir, "static/css/min/not-found.min.css")).st_mtime
+        }
+        default = "css/min/wazuh-documentation.min.css?ver=%s" % os.stat(os.path.join(theme_dir, "static/css/min/wazuh-documentation.min.css")).st_mtime
+        
+        if pagename in css_map.keys():
+            return css_map[pagename]
+        else:
+            return default
+
+    # Add it to the page's context
+    context['get_css_by_page'] = get_css_by_page
 
 exclude_doc = ["not_found"]
 list_compiled_html = []
