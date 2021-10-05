@@ -100,7 +100,7 @@ In the *Integrity monitoring* module of the Wazuh dashboard, users can view all 
 
 .. list-table::
    :width: 100%
-   :widths: 25 25 25 25
+   :widths: 33 33 33
 
    * - .. thumbnail:: /images/getting_started/use-cases/wazuh-use-cases-fim1.png
           :title: Integrity monitoring dashboard
@@ -108,7 +108,9 @@ In the *Integrity monitoring* module of the Wazuh dashboard, users can view all 
           :title: Integrity monitoring
      - .. thumbnail:: /images/getting_started/use-cases/wazuh-use-cases-fim3.png
           :title: Integrity monitoring inventory
-     - .. thumbnail:: ../../images/getting_started/use_case_fim.png
-          :title: Integrity monitoring module
+
+.. thumbnail:: ../../images/getting_started/use_case_fim.png
+  :title: Integrity monitoring module
+  :align: center
 
 More information on how Wazuh monitors file integrity can be found in the :ref:`user manual <manual_file_integrity>`.

@@ -103,7 +103,7 @@ Example of regulatory compliance dashboards:
    :width: 100%
    :widths: 33 33 33
 
-   * - .. thumbnail:: ../../images/getting_started/use_case_regulatory_compliance.png
+   * - .. thumbnail:: /images/getting_started/use-cases/wazuh-use-cases-regulatory3.png
           :title: PCI DSS compliance
      - .. thumbnail:: /images/getting_started/use-cases/wazuh-use-cases-regulatory1.png
           :title: NIST 800-53 compliance

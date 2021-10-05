@@ -14,6 +14,10 @@ The Wazuh security platform provides threat detection, configuration compliance,
 
 - **Cloud infrastructure level**: monitoring cloud services and activity by collecting and analyzing data from the provider API. Amazon AWS, Microsoft Azure, and Google Cloud Platform are supported.
 
+.. thumbnail:: /images/getting_started/use-cases/wazuh-use-cases-cloud.png
+   :title: Cloud events dashboard
+   :align: center
+
 Amazon Web Services
 -------------------
 
@@ -99,9 +103,9 @@ Expand the output to see an example of an alert generated when an AWS security g
 
 Example of AWS dashboard:
 
-.. thumbnail:: ../../images/getting_started/use_case_cloud.png
+.. thumbnail:: /images/getting_started/use-cases/wazuh-use-cases-cloud-geo.png
+   :title: AWS dashboard
    :align: center
-   :wrap_image: No
 
 More information on how Wazuh monitors AWS can be found in our :ref:`documentation <amazon>`.
 

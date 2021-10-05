@@ -23,12 +23,9 @@ Wazuh provides the following mechanisms to monitor Docker hosts or Kubernetes no
 
 - **Integration with hosted infrastructure providers:** In this case, the Wazuh modules for cloud security monitoring download the managed service audit logs for security analysis. Wazuh integrates with hosted infrastructure providers such as Google GKE, Amazon EKS, and more. 
 
-.. list-table::
-   :width: 100%
-   :widths: 100
-
-   * - .. thumbnail:: /images/getting_started/use-cases/wazuh-use-cases-docker.png
-          :title: Docker events
+.. thumbnail:: /images/getting_started/use-cases/wazuh-use-cases-docker.png
+  :title: Docker events
+  :align: center
  
 Example of security alerts at an infrastructure level:
 
