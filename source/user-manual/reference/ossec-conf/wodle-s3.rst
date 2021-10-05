@@ -294,9 +294,9 @@ A valid role arn with permission to read logs from the bucket.
 +--------------------+----------------+
 
 bucket\\iam_role_duration
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
-A valid number of seconds that defines the duration of the session assuming the provided :ref:`iam_role_arn<bucket_iam_role_arn>` is used.
+A valid number of seconds that defines the duration of the session assumed when using the provided :ref:`iam_role_arn<bucket_iam_role_arn>`.
 
 +--------------------+------------------------------------------+
 | **Default value**  | N/A                                      |
@@ -590,9 +590,9 @@ A valid role arn with permission to access the service.
 +--------------------+----------------+
 
 Service\\iam_role_duration
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-A valid number of seconds that defines the duration of the session assuming the provided :ref:`iam_role_arn<service_iam_role_arn>` is used.
+A valid number of seconds that defines the duration of the session assumed when using the provided :ref:`iam_role_arn<service_iam_role_arn>`.
 
 +--------------------+------------------------------------------+
 | **Default value**  | N/A                                      |
