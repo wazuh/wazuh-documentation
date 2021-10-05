@@ -41,7 +41,7 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
 #. To map the user with Wazuh, follow these steps:
    
-   #. Click **Wazuh** to open the menu, select **Security**, and then **Roles mapping** to open the page.
+   #. Click **Wazuh** to open the menu, select **Security** and then **Roles mapping** to open the page.
    #. Click **Create Role mapping** and complete the empty fields with the following parameters:
    
       - **Role mapping name**: Assign a name to the role mapping.
@@ -86,7 +86,7 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
 #. To map the user with Wazuh, follow these steps:
 
-   #. Click **Wazuh** to open the menu, select **Security**, and then **Roles mapping** to open the page.
+   #. Click **Wazuh** to open the menu, select **Security** and then **Roles mapping** to open the page.
 
    #. Click **Create Role mapping** and complete the empty fields with the following parameters:
 
@@ -118,7 +118,7 @@ Follow these steps to create an internal user and map it to a given role.
 
 #. To map the user with Wazuh, follow these steps:
    
-   #. Click **Wazuh** to open the menu, select **Security**, and then **Roles mapping** to open the page.
+   #. Click **Wazuh** to open the menu, select **Security** and then **Roles mapping** to open the page.
    #. Click **Create Role mapping** and complete the empty fields with the following parameters:
    
       - **Role mapping name**: Assign a name to the role mapping.
@@ -140,7 +140,7 @@ In this use case, we have an environment with five agents and we want to create 
     :align: center
     :width: 100%
  
-Follow these steps to create an internal user and give they permissions to manage an agents group. 
+Follow these steps to create an internal user and give them permissions to manage an agents group. 
 
 #. Log into Kibana as administrator.
 
@@ -157,13 +157,13 @@ Follow these steps to create an internal user and give they permissions to manag
 
 #. To map the user with Wazuh, follow these steps:
    
-   #. Click **Wazuh** to open the menu, select **Security**, and then **Policies** to open the policies page.
+   #. Click **Wazuh** to open the menu, select **Security** and then **Policies** to open the policies page.
    #. Click **Create policy** and complete the empty fields with the requested information.
    
       - **Policy name**: Assign a name to the new policy. 
-      - **Action**: Select the actions that the user is allowed to perform, for example, ``agent:read`` and click **Add**. Select as many actions as needed. 
+      - **Action**: Select the actions that the user is allowed to perform, for example, ``agent:read``, and click **Add**. Select as many actions as needed. 
       - **Resource**: Select ``agent:group``.
-      - **Resource identifier**: Write the name of the agents group, for example, ``Team_A`` and click **Add**. You may add as many resources as needed. 
+      - **Resource identifier**: Write the name of the agents group, for example, ``Team_A``, and click **Add**. You can add as many resources as needed. 
       - **Select an effect**: Select ``Allow``.  
        
        .. thumbnail:: ../../images/kibana-app/rbac/create_policy.png
@@ -171,8 +171,8 @@ Follow these steps to create an internal user and give they permissions to manag
           :align: center
           :width: 100%
     
-   #. Click **Create policy** to finish the action.
-   #. Click **Roles** to open the tab, click **Create Role** and fill the empty fields with the requested information. 
+   #. Click **Create policy** to complete the action.
+   #. Click **Roles** to open the tab, click **Create Role**, and fill the empty fields with the requested information. 
 
       - **Role name**: Assign a name to the new role. 
       - **Policies**: Select the policy created previously. 
@@ -200,7 +200,7 @@ Follow these steps to create an internal user and give they permissions to manag
    For the role mapping to take effect, enable ``run_as`` in ``/usr/share/kibana/data/wazuh/config/wazuh.yml`` configuration file. Restart the Kibana service and clear your browser cache and cookies.
 
 
-You have now created a new internal user and mapped it to manage a Wazuh agents group. Authenticate with the new user and open the Wazuh Kibana plugin, see that only ``Team_A`` agents' alerts and information is displayed.  
+You have now created a new internal user and mapped it to manage a Wazuh agents group. Authenticate with the new user and open the Wazuh Kibana plugin, see that only ``Team_A`` agents' alerts and information are displayed.  
 
 
 .. thumbnail:: ../../images/kibana-app/rbac/team_A_agents.png
