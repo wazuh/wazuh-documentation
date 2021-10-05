@@ -133,7 +133,7 @@ Follow these steps to create an internal user and map it to a given role.
 Use case: Give a user permissions to manage an agents group
 -----------------------------------------------------------
 
-In this use case we have an environment with five agents and we want to create a user with permissions to manage an agent group. Agents ``001``, ``002`` and ``005`` belong to the ``Team_A`` group and agents ``003``, ``004`` and ``005`` belong to the ``Team_B`` group. To learn more on how to create agents groups see :ref:`Grouping agents <grouping-agents>`. 
+In this use case, we have an environment with five agents and we want to create a user with permissions to manage an agent group. Agents ``001``, ``002`` and ``005`` belong to the ``Team_A`` group and agents ``003``, ``004`` and ``005`` belong to the ``Team_B`` group. To learn more on how to create agents groups see :ref:`Grouping agents <grouping-agents>`. 
 
 .. thumbnail:: ../../images/kibana-app/rbac/environment.png
     :title: Keys
