@@ -161,7 +161,7 @@ Follow these steps to create an internal user and give they permissions to manag
    #. Click **Create policy** and complete the empty fields with the requested information.
    
       - **Policy name**: Assign a name to the new policy. 
-      - **Action**: Select the actions that the user is allowed to perform, for example, ``agent:read`` an click **Add**. Select as many actions as needed. 
+      - **Action**: Select the actions that the user is allowed to perform, for example, ``agent:read`` and click **Add**. Select as many actions as needed. 
       - **Resource**: Select ``agent:group``.
       - **Resource identifier**: Write the name of the agents group, for example, ``Team_A`` and click **Add**. You may add as many resources as needed. 
       - **Select an effect**: Select ``Allow``.  
