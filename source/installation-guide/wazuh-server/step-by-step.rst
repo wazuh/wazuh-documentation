@@ -88,8 +88,8 @@ Installing the Wazuh manager
    
    
      .. group-tab:: ZYpp
-   
-   
+     
+         
        .. include:: ../../_templates/installations/wazuh/zypp/install_wazuh_manager.rst
 
 
