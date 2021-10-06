@@ -5,6 +5,7 @@
   "main": "index.html",
   "scripts": {
     "css:lint": "stylelint --config config/.stylelintrc --syntax scss \"src/scss/**/*.scss\" --cache --cache-location \"build/.stylelintcache/\"",
+    "css:lint:fix": "stylelint --config config/.stylelintrc --syntax scss \"src/scss/**/*.scss\" --fix --cache --cache-location \"build/.stylelintcache/\"",
     "css:compile:google-fonts": "node-sass --output-style expanded --precision 6 src/scss/google-fonts.scss src/css/google-fonts.css",
     "css:compile:bootstrap": "node-sass --output-style expanded --source-map true --source-map-contents true --precision 6 src/scss/libs/bootstrap/bootstrap.scss src/css/bootstrap.css",
     "css:compile:moved-content": "node-sass --output-style expanded --source-map true --source-map-contents true --precision 6 src/scss/pages/moved-content.scss src/css/moved-content.css",
@@ -34,7 +35,9 @@
     "css:build:page:search": "run-s css:compile:page:default css:prefix css:minify:page:search eol:lf",
     "css:build": "run-s css:compile css:prefix css:minify eol:lf",
     "eol:lf": "eolConverter lf \"static/{css,js}/**/*.{css,js}\"",
-    "css:clean": "rimraf \"src/css/**/*.css\" && rimraf \"src/css/**/*.css.map\""
+    "css:clean": "rimraf \"src/css/**/*.css\" && rimraf \"src/css/**/*.css.map\"",
+    "js:lint": "eslint --config config/.eslintrc.json \"src/js/**/*.js\" --cache --cache-location \"build/.eslintcache/\"",
+    "js:lint:fix": "eslint --config config/.eslintrc.json \"src/js/**/*.js\" --fix --cache --cache-location \"build/.eslintcache/\""
   },
   "repository": {
     "type": "git",
@@ -54,6 +57,8 @@
     "autoprefixer": "^10.3.6",
     "clean-css-cli": "^5.4.1",
     "eol-converter-cli": "^1.0.8",
+    "eslint": "^7.32.0",
+    "eslint-config-google": "^0.14.0",
     "node-sass": "^6.0.1",
     "npm-run-all": "^4.1.5",
     "postcss": "^8.3.8",
