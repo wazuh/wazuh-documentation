@@ -13,34 +13,17 @@ You can install Wazuh even when there is no connection to the Internet. Installi
 Download the packages and configuration files
 ---------------------------------------------
 
-#. Run the following commands from a system with Internet connection. This action executes a script that downloads all required files for the offline installation.
+#. Replace ``<deb|rpm>`` and ``<x86_64|aarch64>`` with your package format and architecture choice in the following commands. Run them from a system with Internet connection. This action executes a script that downloads all required files for the offline installation.
 
     .. tabs::
 
-      .. group-tab:: Yum
+      .. group-tab:: Linux
 
         .. code-block:: console
           
-          # yum install -y curl
-          # curl -sO https://raw.githubusercontent.com/wazuh/wazuh-documentation/4329_Write_offline_installation_guide/resources/open-distro/download-offline-installation/offline-yum-download.sh
-          # bash ./offline-yum-download.sh
+          # curl -sO https://raw.githubusercontent.com/wazuh/wazuh-documentation/4329_Write_offline_installation_guide/resources/open-distro/download-offline-installation/offline-download.sh
+          # bash ./offline-download.sh -p <deb|rpm> -a <x86_64|aarch64>
           
-      .. group-tab:: APT
-
-        .. code-block:: console
-          
-          # apt update; apt install -y curl
-          # curl -sO https://raw.githubusercontent.com/wazuh/wazuh-documentation/4329_Write_offline_installation_guide/resources/open-distro/download-offline-installation/offline-apt-download.sh
-          # bash ./offline-apt-download.sh
-
-      .. group-tab:: ZYpp
-
-        .. code-block:: console
-          
-          # zypper install -y curl
-          # curl -sO https://raw.githubusercontent.com/wazuh/wazuh-documentation/4329_Write_offline_installation_guide/resources/open-distro/download-offline-installation/offline-zypp-download.sh
-          # bash ./offline-zypp-download.sh
-
 #. Copy or move the ``./wazuh-offline/`` folder contents to a folder accessible to the host from where the offline installation will be carried out.
 
 ..
