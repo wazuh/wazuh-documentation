@@ -128,7 +128,7 @@ The Wazuh app for Kibana requires compatibility between two different components
 +-----------------------------------+------------------------------------+---------------------------+
 |              |WAZUH_LATEST|                | |ELASTICSEARCH_LATEST|                             | |OPEN_DISTRO_LATEST|                    |
 +-----------------------------------+------------------------------------+---------------------------+
-|              |WAZUH_LATEST|                | 7.11.2, |ELASTICSEARCH_ELK_LATEST|                     |                           |
+|              |WAZUH_LATEST|                | |ELASTICSEARCH_ELK_LATEST|                             |                           |
 +-----------------------------------+------------------------------------+---------------------------+
 
 
