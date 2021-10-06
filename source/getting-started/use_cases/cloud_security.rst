@@ -17,6 +17,8 @@ The Wazuh security platform provides threat detection, configuration compliance,
 .. thumbnail:: /images/getting_started/use-cases/wazuh-use-cases-cloud.png
    :title: Cloud events dashboard
    :align: center
+   :width: 100%
+   :wrap_image: No
 
 Amazon Web Services
 -------------------
@@ -106,6 +108,8 @@ Example of AWS dashboard:
 .. thumbnail:: /images/getting_started/use-cases/wazuh-use-cases-cloud-geo.png
    :title: AWS dashboard
    :align: center
+   :width: 100%
+   :wrap_image: No
 
 More information on how Wazuh monitors AWS can be found in our :ref:`documentation <amazon>`.
 

@@ -26,7 +26,8 @@ Below you can see a list of these components:
   :title: Wazuh security analytics dashboard
   :align: center
   :width: 100%
-
+  :wrap_image: No
+  
 Security analytics tools give users the visibility needed to perform thread prevention actions. The :ref:`FIM <file_integrity>` module is a good example because it detects changes that could compromise data and creates alerts based on them. Then, the agent can be configured to trigger an active response in reply to these alerts.
 
 In addition, these tools assist users in detecting the possible presence of rootkits and collecting inventory data from different sources such as operating systems, processes, applications, ports, and network interfaces. FIM results can be observed in the **Integrity monitoring** module dashboard of the :ref:`Wazuh Kibana plugin<kibana_app>`.
