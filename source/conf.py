@@ -525,6 +525,8 @@ def setup(app):
         # JS files
         app.add_js_file("js/jquery.js?ver=%s" % os.stat(
             os.path.join(current_path, "static/js/jquery.js")).st_mtime)
+        app.add_js_file("js/min/bootstrap.bundle.min.js?ver=%s" % os.stat(
+            os.path.join(current_path, "static/js/min/bootstrap.bundle.min.js")).st_mtime)
         app.add_js_file("js/underscore.js?ver=%s" % os.stat(
             os.path.join(current_path, "static/js/underscore.js")).st_mtime)
         app.add_js_file("js/doctools.js?ver=%s" % os.stat(
@@ -533,8 +535,6 @@ def setup(app):
             os.path.join(current_path, "static/js/language_data.js")).st_mtime)
         # app.add_js_file("js/searchtool.js?ver=%s" % os.stat(
             # os.path.join(current_path, "static/js/searchtool.js")).st_mtime)
-        app.add_js_file("js/min/wazuh.min.js?ver=%s" % os.stat(
-            os.path.join(current_path, "static/js/min/wazuh.min.js")).st_mtime)
     
     if html_theme == 'wazuh_doc_theme':
         minification(current_path)
