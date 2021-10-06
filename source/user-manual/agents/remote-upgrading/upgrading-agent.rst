@@ -117,7 +117,7 @@ Using the RESTful API
 
     .. code-block:: console
 
-        # curl -k -X PUT "https://localhost:55000/agents/upgrade?agents_list=002,003&pretty=true" -H  "Authorization: Bearer $TOKEN"
+        # curl -k -X PUT "https://localhost:55000/agents/upgrade?agents_list=002,003&version=4.0.0&pretty=true" -H  "Authorization: Bearer $TOKEN"
 
 
     .. code-block:: json
@@ -139,7 +139,7 @@ Using the RESTful API
             "total_failed_items": 0,
             "failed_items": []
           },
-          "message": "All upgrade tasks have been created",
+          "message": "All upgrade tasks were created",
           "error": 0
         }
 
