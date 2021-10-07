@@ -521,7 +521,7 @@ def setup(app):
             os.path.join(current_path, "static/css/min/bootstrap.min.css")).st_mtime)
         app.add_css_file("css/fontawesome.min.css?ver=%s" % os.stat(
             os.path.join(current_path, "static/css/fontawesome.min.css")).st_mtime)
-        
+
         # JS files
         app.add_js_file("js/jquery.js?ver=%s" % os.stat(
             os.path.join(current_path, "static/js/jquery.js")).st_mtime)
@@ -529,12 +529,6 @@ def setup(app):
             os.path.join(current_path, "static/js/min/bootstrap.bundle.min.js")).st_mtime)
         app.add_js_file("js/underscore.js?ver=%s" % os.stat(
             os.path.join(current_path, "static/js/underscore.js")).st_mtime)
-        app.add_js_file("js/doctools.js?ver=%s" % os.stat(
-            os.path.join(current_path, "static/js/doctools.js")).st_mtime)
-        app.add_js_file("js/language_data.js?ver=%s" % os.stat(
-            os.path.join(current_path, "static/js/language_data.js")).st_mtime)
-        # app.add_js_file("js/searchtool.js?ver=%s" % os.stat(
-            # os.path.join(current_path, "static/js/searchtool.js")).st_mtime)
     
     if html_theme == 'wazuh_doc_theme':
         minification(current_path)
@@ -578,9 +572,23 @@ def insert_inline_style(app, pagename, templatename, context, doctree):
         context['inline_fonts'] = google_fonts
 
 def manage_assets(app, pagename, templatename, context, doctree):
-    ''' Defines the function get_css_by_page(page_name) that can be used in a template to get the CSS files depending on the page name. '''
+    theme_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), theme_assets_path)
+    static = '_static/'
+    # Full list of non-common javascript files
+    individual_js_files = {
+        "redirects": static + "js/min/redirects.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/redirects.min.js")).st_mtime,
+        "wazuh-documentation": static + "js/min/wazuh-documentation.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/wazuh-documentation.min.js")).st_mtime,
+        "index": static + "js/min/index.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/index.min.js")).st_mtime,
+        "index-redirect": static + "js/min/index-redirect.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/index-redirect.min.js")).st_mtime,
+        "search-results": static + "js/min/search-results.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/search-results.min.js")).st_mtime,
+        "not-found": static + "js/min/not-found.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/not-found.min.js")).st_mtime,
+        "api-reference": static + "js/min/api-reference.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/api-reference.min.js")).st_mtime,
+        "redoc-standalone": static + "js/redoc.standalone.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/redoc.standalone.js")).st_mtime,
+        "moved-content": static + "js/min/moved-content.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/moved-content.min.js")).st_mtime
+    }
+    
+    # The template function
     def get_css_by_page(pagename):
-        theme_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), theme_assets_path)
         css_map = {
             'index': "css/min/index.min.css?ver=%s" % os.stat(os.path.join(theme_dir, "static/css/min/index.min.css")).st_mtime,
             'user-manual/api/reference': "css/min/api-reference.min.css?ver=%s" % os.stat(os.path.join(theme_dir, "static/css/min/api-reference.min.css")).st_mtime,
@@ -596,8 +604,51 @@ def manage_assets(app, pagename, templatename, context, doctree):
         else:
             return default
 
+    # The template function
+    def get_js_by_page(pagename):
+        js_map = {
+            'index': [
+                individual_js_files['index'],
+                individual_js_files['index-redirect']
+            ],
+            'search': [
+                individual_js_files['redirects'],
+                individual_js_files['search-results']
+            ],
+            'not_found': [
+                individual_js_files['redirects'],
+                individual_js_files['not-found']
+            ],
+            'user-manual/api/reference': [
+                individual_js_files['redoc-standalone'],
+                individual_js_files['redirects'],
+                individual_js_files['api-reference']
+            ],
+            'cloud-service/apis/reference': [
+                # individual_js_files['redoc-standalone'],
+                individual_js_files['redirects'],
+                individual_js_files['api-reference']
+            ],
+            'moved-content': [
+                individual_js_files['redirects'],
+                individual_js_files['moved-content']
+            ]
+        }
+        default = [
+            individual_js_files['redirects'],
+            individual_js_files['wazuh-documentation']
+            # tabs (extension)
+            # lightbox (extension)
+        ]
+        
+        if pagename in js_map.keys():
+            return js_map[pagename]
+        else:
+            return default
+
     # Add it to the page's context
     context['get_css_by_page'] = get_css_by_page
+    context['get_js_by_page'] = get_js_by_page
 
 exclude_doc = ["not_found"]
 list_compiled_html = []
@@ -606,11 +657,13 @@ def finish_and_clean(app, exception):
     ''' Performs the final tasks after the compilation '''
     # Create additional files such as the `.doclist` and the sitemap
     creating_file_list(app, exception)
-    # Remove extra minified files
-    # for asset in extra_assets:
-    #     mini_asset = '.min.'.join(asset.split('.'))
-    #     if os.path.exists(app.srcdir + '/_static/' + mini_asset):
-    #         os.remove(app.srcdir + '/_static/' + mini_asset)
+    
+    if html_theme == 'wazuh_doc_theme':
+        # Remove extra minified files
+        for asset in extra_assets:
+            mini_asset = '.min.'.join(asset.split('.'))
+            if os.path.exists(app.srcdir + '/_static/' + mini_asset):
+                os.remove(app.srcdir + '/_static/' + mini_asset)
 
 def collect_compiled_pagename(app, pagename, templatename, context, doctree):
     ''' Runs once per page, storing the pagename (full page path) extracted from the context '''

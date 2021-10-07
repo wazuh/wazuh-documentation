@@ -10,6 +10,11 @@
         "ecmaVersion": 12,
         "sourceType": "module"
     },
+    "ignorePatterns": [ 
+      "src/js/",
+      "src/js-source/libs/bootstrap/",
+      "src/js-source/common/doctools.js"
+    ],
     "rules": {
         "max-len": [
             "error", {
