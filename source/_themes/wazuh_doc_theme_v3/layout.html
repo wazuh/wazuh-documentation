@@ -32,6 +32,26 @@
   {%- endif -%}
 {%- endif -%}
 
+{#- Remove sphinx_tabs assets from templates where they are not used -#}
+{%- if pagename in special_pages %}
+  
+  {%- set temp_css_files = []  -%}
+  {%- for cssfile in css_files -%}
+    {%- if 'sphinx_tabs' not in cssfile -%}
+     {{- temp_css_files.append(cssfile)|default("", True) -}}
+    {%- endif -%}
+  {%- endfor -%}
+  {%- set css_files = temp_css_files -%}
+  
+  {%- set temp_script_files = []  -%}
+  {%- for scriptfile in script_files -%}
+    {%- if 'sphinx_tabs' not in scriptfile -%}
+      {{- temp_script_files.append(scriptfile)|default("", True) -}}
+    {%- endif -%}
+  {% endfor -%}
+  {%- set script_files = temp_script_files -%}
+{%- endif -%}
+
 {#- TEMPLATE MACROS -#}
 
 {%- macro css() -%}
@@ -51,16 +71,27 @@
     <link rel="stylesheet" href="{{ pathto('_static/'+get_css_by_page(pagename), 1) }}" type="text/css">
 {%- endmacro %}
 
-{%- macro fonts() -%}
-    <style type="text/css">{{ inline_fonts }}</style>
-{%- endmacro -%}
-
 {%- macro js() -%}
+{% block specific_js %}
+{#- Add specific files -#}
+{% set specific_js_files = get_js_by_page(pagename) %}
+{%- for scriptfile in specific_js_files -%}
+    {{- script_files.append(scriptfile)|default("", True) -}}
+{% endfor -%}
+{% endblock specific_js %}
+        
+{#- Insert the script tags -#}
+{% block updated_js %}
 {%- for scriptfile in script_files -%}
   {%- if scriptfile not in ["_static/jquery.js", "_static/underscore.js", "_static/doctools.js", "_static/language_data.js"] %}
     <script src="{{ pathto(scriptfile, 1) }}"></script>
   {%- endif -%}
 {% endfor -%}
+{% endblock updated_js %}
+{%- endmacro -%}
+
+{%- macro fonts() -%}
+    <style type="text/css">{{ inline_fonts }}</style>
 {%- endmacro -%}
 
 <!DOCTYPE html>

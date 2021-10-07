@@ -10,13 +10,27 @@
 <!-- TODO: index -->
 
   {%- extends "!wazuh_doc_theme_v3/template-parts/body.html" -%}
+  
+  {#- Replace the list of JavaScript files with the ones that are specific for this page -#}
+  {%- block specific_js %}
+  {% set specific_js_files = get_js_by_page(pagename)[0] %}
+  {{- script_files.append(specific_js_files)|default("", True) -}}
+  {% endblock %}
+  {%- block updated_js %}
+  {{ super () }}
+  {% endblock %}
+  
+  {#- Remove header and "Back to top" button -#}
   {%- block header %}{% endblock %}
   {%- block back_to_top %}{% endblock %}
+  
   {%- block body -%}
-  {{pagename}}
   {{ super () }}
   {% endblock %}
 
 {%- else -%}
-  <script src="{{ pathto( '', 1) + '_static/js/index-redirect.js' }}"></script>
+  <body>
+    {{ get_js_by_page(pagename)[1] }}
+    <script src="{{ pathto( get_js_by_page(pagename)[1], 1) }}"></script>
+  </body>
 {%- endif %}

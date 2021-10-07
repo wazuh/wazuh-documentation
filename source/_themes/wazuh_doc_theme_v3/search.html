@@ -11,14 +11,7 @@
 <!-- TODO: search -->
 {%- extends "!wazuh_doc_theme_v3/template-parts/body.html" -%}
 {% set title = _('Search') %}
-{% set script_files = script_files + ['_static/searchtools.js'] %}
-{% block footer %}
 
-
-  {# this is used when loading the search index using $.ajax fails,
-     such as on Chrome for documents on localhost #}
-  <script type="text/javascript" id="searchindexloader"></script>
-{% endblock %}
 {% block body %}
   <noscript>
   <div id="fallback" class="admonition warning">
@@ -35,6 +28,7 @@
       <p>{{ _('Your search did not match any documents. Please make sure that all words are spelled correctly and that you\'ve selected enough categories.') }}</p>
     {% endif %}
   {% endif %}
+  {{ super() }}
   <div id="search-results">
   {% if search_results %}
     <ul>
@@ -49,9 +43,13 @@
   </div>
 {% endblock %}
 
-{%- block footer_js %}
+{%- block after_footer %}
 {{ super() }}
+{{ pathto('searchindex.js', 1) }}
+{# this is used when loading the search index using $.ajax fails,
+   such as on Chrome for documents on localhost #}
+<script type="text/javascript" id="searchindexloader"></script>
 <script type="text/javascript">
   $(function() { Search.loadIndex("{{ pathto('searchindex.js', 1) }}"); });
 </script>
-{% endblock footer_js %}
+{% endblock after_footer %}
