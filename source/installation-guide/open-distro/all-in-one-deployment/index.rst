@@ -1,8 +1,9 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Find out how to install Wazuh and OpenDistro components for Elasticsearch on the same host, following an all-in-one deployment process.
-  
+  :description: Find out in this section how to install Wazuh and OpenDistro components for Elasticsearch on the same host, following an all-in-one deployment process.
+
+
 .. _all_in_one_index:
 
 All-in-one deployment

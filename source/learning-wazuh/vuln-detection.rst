@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Learn more about how to perform the offline update of the Wazuh Vulnerability Detector in this section of our documentation. 
+  
 .. _learning_wazuh_vuln_detection:
 
 Track down vulnerable applications
@@ -97,18 +100,25 @@ In the ``/var/ossec/etc/manager.conf`` file of the Wazuh manager, scroll down to
       </provider>
       <provider name="debian">
         <enabled>no</enabled>
-        <os>wheezy</os>
         <os>stretch</os>
-        <os>jessie</os>
+        <os>buster</os>
+        <os>bullseye</os>
         <update_interval>1h</update_interval>
       </provider>
       <provider name="redhat">
         <enabled>yes</enabled>
-        <update_from_year>2010</update_from_year>
+        <os>5</os>
+        <os>6</os>
+        <os>7</os>
+        <os>8</os>
         <update_interval>1h</update_interval>
       </provider>
       <provider name="arch">
         <enabled>no</enabled>
+        <update_interval>1h</update_interval>
+      </provider>
+      <provider name="msu">
+        <enabled>yes</enabled>
         <update_interval>1h</update_interval>
       </provider>
       <provider name="nvd">

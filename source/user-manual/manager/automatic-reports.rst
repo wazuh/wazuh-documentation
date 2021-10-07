@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Learn how to configure your own customized reports in Wazuh by using the report option in the ossec.conf file. 
+  
 .. _automatic-reports:
 
 Generating automatic reports

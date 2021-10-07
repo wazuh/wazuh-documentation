@@ -103,6 +103,8 @@ newUrls['4.3'] = [
 /* Pages added in 4.2 */
 
 newUrls['4.2'] = [
+  '/release-notes/release-4-2-3.html',
+  '/release-notes/release-4-2-2.html',
   '/release-notes/release_4_2_1.html',
   '/release-notes/release_4_2_0.html',
   '/user-manual/capabilities/active-response/ar-use-cases/removing-malware.html',

@@ -144,3 +144,56 @@ Wazuh configuration
       .. code-block:: console
 
         # service wazuh-agent restart
+
+
+HTTP Request headers
+--------------------
+
+The Wazuh AWS WAF implementation parses the header information present in the ``httpRequest`` field, allowing filtering by these headers and their values in the Wazuh UI. During this parsing, any non-standard header will be extracted and removed from the event before sending it to ``Analysisd``. Here is the complete list of the allowed standard header fields:
+
+.. code-block:: console
+
+  a-im
+  accept
+  accept-charset
+  accept-encoding
+  accept-language
+  access-control-request-method
+  access-control-request-headers
+  authorization
+  cache-control
+  connection
+  content-encoding
+  content-length
+  content-type
+  cookie
+  date
+  expect
+  forwarded
+  from
+  host
+  http2-settings
+  if-match
+  if-modified-since
+  if-none-match
+  if-range
+  if-unmodified-since
+  max-forwards
+  origin
+  pragma
+  prefer
+  proxy-authorization
+  range
+  referer
+  te
+  trailer
+  transfer-encoding
+  user-agent
+  upgrade
+  via
+  warning
+  x-requested-with
+  x-forwarded-for
+  x-forwarded-host
+  x-forwarded-proto
+

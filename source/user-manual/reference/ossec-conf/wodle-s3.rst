@@ -150,6 +150,7 @@ Bucket options
 - `bucket\\secret_key`_
 - `bucket\\aws_profile`_
 - `bucket\\iam_role_arn`_
+- `bucket\\iam_role_duration`_
 - `bucket\\path`_
 - `bucket\\path_suffix`_
 - `bucket\\only_logs_after`_
@@ -178,6 +179,9 @@ Bucket options
 +----------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | `bucket\\iam_role_arn`_          | IAM role ARN                                                | Optional                                      |
 +----------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+| `bucket\\iam_role_duration`_     | Number of seconds between 900 and 3600                      | Optional (if set, it requires an iam_role_arn |
+|                                  |                                                             | to be provided)                               |
++----------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | `bucket\\path`_                  | Prefix for S3 bucket key                                    | Optional                                      |
 +----------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | `bucket\\path_suffix`_           | Suffix for S3 bucket key                                    | Optional                                      |
@@ -192,7 +196,7 @@ Bucket options
 +----------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | `bucket\\sts_endpoint`_          | The AWS Security Token Service VPC endpoint URL.            | Optional                                      |
 +----------------------------------+-------------------------------------------------------------+-----------------------------------------------+
-| `bucket\\service_endpoint`_      | The AWS S3 VPC endpoint URL.                                | Optional                                      |
+| `bucket\\service_endpoint`_      | The AWS S3 endpoint URL.                                    | Optional                                      |
 +----------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 
 type
@@ -276,6 +280,8 @@ A valid profile name from a Shared Credential File or AWS Config File with the p
 | **Allowed values** | Valid profile name |
 +--------------------+--------------------+
 
+.. _bucket_iam_role_arn:
+
 bucket\\iam_role_arn
 ^^^^^^^^^^^^^^^^^^^^
 
@@ -286,6 +292,17 @@ A valid role arn with permission to read logs from the bucket.
 +--------------------+----------------+
 | **Allowed values** | Valid role arn |
 +--------------------+----------------+
+
+bucket\\iam_role_duration
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+A valid number of seconds that defines the duration of the session assumed when using the provided :ref:`iam_role_arn<bucket_iam_role_arn>`.
+
++--------------------+------------------------------------------+
+| **Default value**  | N/A                                      |
++--------------------+------------------------------------------+
+| **Allowed values** | Number of seconds between 900 and 3600   |
++--------------------+------------------------------------------+
 
 bucket\\path
 ^^^^^^^^^^^^
@@ -384,12 +401,12 @@ The AWS Security Token Service VPC endpoint URL to be used when an IAM role is p
 bucket\\service_endpoint
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-The AWS S3 VPC endpoint URL to be used to download the data from the bucket. Check the :ref:`Considerations for configuration <amazon_considerations>` page to learn more about VPC endpoints.
+The AWS S3 endpoint URL to be used to download the data from the bucket. Check the :ref:`Considerations for configuration <amazon_considerations>` page to learn more about VPC and FIPS endpoints.
 
 +--------------------+----------------------------------------+
 | **Default value**  | N/A                                    |
 +--------------------+----------------------------------------+
-| **Allowed values** | Any valid VPC endpoint URL for S3      |
+| **Allowed values** | Any valid endpoint URL for S3          |
 +--------------------+----------------------------------------+
 
 run_on_start
@@ -482,6 +499,7 @@ Service options
 - `Service\\secret_key`_
 - `Service\\aws_profile`_
 - `Service\\iam_role_arn`_
+- `Service\\iam_role_duration`_
 - `Service\\only_logs_after`_
 - `Service\\regions`_
 - `Service\\remove_log_streams`_
@@ -558,6 +576,8 @@ A valid profile name from a Shared Credential File or AWS Config File with the p
 | **Allowed values** | Valid profile name |
 +--------------------+--------------------+
 
+.. _service_iam_role_arn:
+
 Service\\iam_role_arn
 ^^^^^^^^^^^^^^^^^^^^^
 
@@ -568,6 +588,17 @@ A valid role arn with permission to access the service.
 +--------------------+----------------+
 | **Allowed values** | Valid role arn |
 +--------------------+----------------+
+
+Service\\iam_role_duration
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+A valid number of seconds that defines the duration of the session assumed when using the provided :ref:`iam_role_arn<service_iam_role_arn>`.
+
++--------------------+------------------------------------------+
+| **Default value**  | N/A                                      |
++--------------------+------------------------------------------+
+| **Allowed values** | Number of seconds between 900 and 3600   |
++--------------------+------------------------------------------+
 
 Service\\only_logs_after
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -652,6 +683,7 @@ Example of configuration
       <bucket type="custom">
           <name>s3-prod-bucket</name>
           <iam_role_arn>arn:aws:iam::010203040506:role/ROLE_SVC_Log-Parser</iam_role_arn>
+          <iam_role_duration>1300</iam_role_duration>
           <aws_account_id>11112222333</aws_account_id>
           <aws_account_alias>prod-account</aws_account_alias>
           <discard_regex field="data.configurationItemStatus">REJECT</discard_regex>
@@ -681,10 +713,10 @@ The AWS Security Token Service VPC endpoint URL to be used when an IAM role is p
 Service\\service_endpoint
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The VPC endpoint URL for the required AWS Service to be used to download the data from it. Check the :ref:`Considerations for configuration <amazon_considerations>` page to learn more about VPC endpoints.
+The endpoint URL for the required AWS Service to be used to download the data from it. Check the :ref:`Considerations for configuration <amazon_considerations>` page to learn more about VPC and FIPS endpoints.
 
 +--------------------+------------------------------------------------+
 | **Default value**  | N/A                                            |
 +--------------------+------------------------------------------------+
-| **Allowed values** | Any valid VPC endpoint URL for the AWS Service |
+| **Allowed values** | Any valid endpoint URL for the AWS Service     |
 +--------------------+------------------------------------------------+

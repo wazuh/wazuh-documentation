@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+    :description: Learn more about the agent management in Wazuh. In this section, we will show you how to group agents and how to manage multiple groups. 
+    
 .. _grouping-agents:
 
 Grouping agents

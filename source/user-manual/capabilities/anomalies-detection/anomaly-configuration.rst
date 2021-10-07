@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Learn more about anomaly and malware detection with Wazuh. In this section, we show you a basic example and how to ignore false positives. 
+  
 .. _anomaly-examples:
 
 Configuration

@@ -89,8 +89,11 @@ Below there is an example of different services configuration:
   </wodle>
 
 
-Using VPC endpoints
--------------------
+Using non-default AWS endpoints
+-------------------------------
+
+VPC endpoints
+~~~~~~~~~~~~~
 
 VPC endpoints can help reduce the traffic bill in your VPC by allowing connections from the VPC to the AWS services that support it, without having to rely on their public IP to connect to the AWS Services. As the ``aws-s3`` Wazuh module connects to the AWS S3 service to access the data from the S3 buckets, regardless of the service they come from, VPC endpoints can be used, as long as Wazuh runs in the VPC. The same applies to the AWS services the ``aws-s3`` Wazuh module supports, such as CloudWatchLogs, provided that they are compatible with VPC endpoints. The list of AWS services supporting VPC endpoints can be checked `here <https://docs.aws.amazon.com/vpc/latest/privatelink/integrated-services-vpce-list.html>`_.
 
@@ -124,6 +127,30 @@ The `service_endpoint` and `sts_endpoint` tags can be used to specify the VPC en
       <regions>us-east-2</regions>
       <aws_log_groups>log_group_name</aws_log_groups>
       <service_endpoint>https://xxxxxx.logs.us-east-2.vpce.amazonaws.com</service_endpoint>
+    </service>
+
+  </wodle>
+
+FIPS endpoints
+~~~~~~~~~~~~~~
+
+Wazuh supports the use of AWS FIPS endpoints to comply with the `Federal Information Processing Standard (FIPS) Publication 140-2 <https://csrc.nist.gov/publications/detail/fips/140/2/final>`_. Depending on the service and region of choice, a different endpoint must be selected from the `AWS FIPS endpoints list <https://aws.amazon.com/compliance/fips/>`_. Specify the selected endpoint in the ``ossec.conf`` file using the ``service_endpoint`` tag.
+
+The following is an example of a valid configuration.
+
+.. code-block:: xml
+
+  <wodle name="aws-s3">
+    <disabled>no</disabled>
+    <interval>10m</interval>
+    <run_on_start>yes</run_on_start>
+    <skip_on_error>yes</skip_on_error>
+
+    <service type="cloudwatchlogs">
+      <aws_profile>default</aws_profile>
+      <regions>us-east-2</regions>
+      <aws_log_groups>log_group_name</aws_log_groups>
+      <service_endpoint>logs-fips.us-east-2.amazonaws.com</service_endpoint>
     </service>
 
   </wodle>

@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: In this section of the Wazuh documentation, you will find all the information related to the internal configuration of Wazuh. 
+  
 .. _reference_internal_options:
 
 Internal configuration
@@ -887,15 +890,6 @@ Remoted
 +                                   +---------------+--------------------------------------------------------------+
 |                                   | Allowed value | Any integer between 1 and 60.                                |
 +-----------------------------------+---------------+--------------------------------------------------------------+
-|   **remoted.send_timeout**        | Description   | Maximum number of seconds to wait for message delivery in    |
-|                                   |               | TCP.                                                         |
-|                                   |               |                                                              |
-|                                   |               | .. versionadded:: 3.7.0                                      |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Default value | 1                                                            |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed value | Any integer between 1 and 60.                                |
-+-----------------------------------+---------------+--------------------------------------------------------------+
 |         **remoted.debug**         | Description   | Debug level (manager installation)                           |
 +                                   +---------------+--------------------------------------------------------------+
 |                                   | Default value | 0                                                            |
@@ -956,6 +950,36 @@ Remoted
 +                                   +---------------+--------------------------------------------------------------+
 |                                   | Allowed value | | Any other integer between 1024 and 16384.                  |
 |                                   |               | | Powers of two are suggested.                               |
++-----------------------------------+---------------+--------------------------------------------------------------+
+| **remoted.send_chunk**            | Description   | | Send buffer size for TCP (bytes).                          |
+|                                   |               | | Amount of data that Remoted can send per operation.        |
+|                                   |               |                                                              |
+|                                   |               | .. versionadded:: 4.3.0                                      |
++                                   +---------------+--------------------------------------------------------------+
+|                                   | Default value | 4096                                                         |
++                                   +---------------+--------------------------------------------------------------+
+|                                   | Allowed value | | Any other integer between 512 and 16384.                   |
+|                                   |               | | Powers of two are suggested.                               |
++-----------------------------------+---------------+--------------------------------------------------------------+
+| **remoted.send_buffer_size**      | Description   | | Send queue size for TCP (bytes).                           |
+|                                   |               | | Amount of data that Remoted can queue to send              |
+|                                   |               | | (one queue per agent).                                     |
+|                                   |               |                                                              |
+|                                   |               | .. versionadded:: 4.3.0                                      |
++                                   +---------------+--------------------------------------------------------------+
+|                                   | Default value | 131072                                                       |
++                                   +---------------+--------------------------------------------------------------+
+|                                   | Allowed value | | Any other integer between 65536 and 1048576.               |
+|                                   |               | | Powers of two are suggested.                               |
++-----------------------------------+---------------+--------------------------------------------------------------+
+| **remoted.send_timeout_to_retry** | Description   | | Maximum number of seconds to wait before retrying to       |
+|                                   |               | | queue a packet to send in TCP.                             |
+|                                   |               |                                                              |
+|                                   |               | .. versionadded:: 4.3.0                                      |
++                                   +---------------+--------------------------------------------------------------+
+|                                   | Default value | 1                                                            |
++                                   +---------------+--------------------------------------------------------------+
+|                                   | Allowed value | | Any integer between 1 and 60.                              |
 +-----------------------------------+---------------+--------------------------------------------------------------+
 | **remoted.buffer_relax**          | Description   | | Method for memory deallocation after accepting input data. |
 |                                   |               | | This option applies in TCP mode only.                      |

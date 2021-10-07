@@ -49,13 +49,19 @@ b) For Debian/Ubuntu operating systems:
   # apt-get update && apt-get install python3-pip
 
 
-Google cloud pip dependencies
------------------------------
+google-cloud-pubsub
+-------------------
 
-`google-cloud-pubsub <https://pypi.org/project/google-cloud-pubsub//>`_ is the official python library supported by Google to manage Google Cloud Pub/Sub resources. It will be used to pull the log messages from the Pub/Sub queue. Wazuh supports google-cloud-pubsub up to 1.4.3.
+`google-cloud-pubsub <https://pypi.org/project/google-cloud-pubsub//>`_ is the official python library supported by Google to manage Google Cloud Pub/Sub resources. It will be used to pull the log messages from the Pub/Sub queue. Depending on the Wazuh version used, it is necessary to install a different ``google-cloud-pubsub`` version.
 
-To install this package along with its dependencies, execute the following command:
+1. For Wazuh versions greater or equal to ``4.2.2``:
 
 .. code-block:: console
 
-  # pip3 install google-cloud-pubsub==1.4.3 google-api-core==1.16.0 google-auth==1.30.1 grpc-google-iam-v1==0.12.3 grpcio==1.38.0
+  # pip install google-cloud-pubsub==2.7.1
+
+2. For older versions:
+
+.. code-block:: console
+
+  # pip install google-cloud-pubsub==1.4.3

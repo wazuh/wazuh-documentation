@@ -1,6 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. meta:: :description: Learn how to install Wazuh and Elastic Stack on a single host
+.. meta::
+  :description: This section guides you through an installation of the Wazuh server and Elastic stack components in an all-in-one configuration. 
 
 .. _basic_all_in_one:
 
@@ -133,27 +134,27 @@ This command should have an output like this:
 
 .. code-block:: console
   :class: output
-
+  
   {
     "name" : "elasticsearch",
     "cluster_name" : "elasticsearch",
-    "cluster_uuid" : "TLGcuHLRTL6PAyIRlxjtLg",
+    "cluster_uuid" : "4AgWSXskREu4aSlW9W-WjA",
     "version" : {
-      "number" : "7.11.2",
+      "number" : "7.12.1",
       "build_flavor" : "default",
       "build_type" : "rpm",
-      "build_hash" : "3e5a16cfec50876d20ea77b075070932c6464c7d",
-      "build_date" : "2021-03-06T05:54:38.141101Z",
+      "build_hash" : "3186837139b9c6b6d23c3200870651f10d3343b7",
+      "build_date" : "2021-04-20T20:56:39.040728659Z",
       "build_snapshot" : false,
-      "lucene_version" : "8.7.0",
+      "lucene_version" : "8.8.0",
       "minimum_wire_compatibility_version" : "6.8.0",
       "minimum_index_compatibility_version" : "6.0.0-beta1"
     },
     "tagline" : "You Know, for Search"
   }
-
-
-
+  
+  
+  
 
 .. _basic_all_in_one_wazuh:
 
@@ -323,7 +324,7 @@ An example response should look as follows:
       TLS version: TLSv1.3
       dial up... OK
     talk to server... OK
-    version: 7.11.2
+    version: 7.12.1
    
 
 
@@ -375,7 +376,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
     .. code-block:: console
 
         # cd /usr/share/kibana
-        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.2.1_7.11.2-1.zip
+        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.2.3_7.12.1-1.zip
 
 #. Link Kibana's socket to privileged port 443:
 
