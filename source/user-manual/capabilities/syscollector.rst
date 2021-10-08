@@ -440,7 +440,7 @@ The following table shows the operating systems that this module currently suppo
 Using Syscollector information to trigger alerts
 ------------------------------------------------
 
-.. deprecated:: 4.2
+.. note:: This capability is not available in Wazuh 4.2 but will be included in a future version. 
 
 Since Wazuh 3.9 version, ``Syscollector`` module information can be used to trigger alerts and show that information in the alerts' description.
 
