@@ -139,7 +139,8 @@ In this use case, we have an environment with five agents and we want to create 
     :title: Keys
     :align: center
     :width: 100%
- 
+
+
 Follow these steps to create an internal user and give them permissions to manage an agents group. 
 
 #. Log into Kibana as administrator.
@@ -148,10 +149,62 @@ Follow these steps to create an internal user and give them permissions to manag
 
 #. Click **Create internal user**, complete the empty fields with the requested information, and click **Create** to complete the action.
 
-#. To map the user to a given role, follow these steps:
+#. To create a custom role and map the user to it, follow these steps:
    
    #. Go to **Security**, select **Roles** to open the page.
-   #. Search for the ``all_access`` role in the roles' list and select it to open the details window.
+   #. Click **Create role**, complete the empty fields with the following parameters: 
+     
+      - **Name**: Assign a name to the role.
+       
+      - **Cluster permissions**: ``cluster_composite_ops_ro``
+
+      - **Index**: ``*``
+
+      - **Index permissions**: ``read``
+
+   #. Click **Add another index permission** and unfold the new section **Add index permission**. Complete the empty fields with the following parameters: 
+
+      - **Index**: ``wazuh-alerts*`` 
+
+      - **Index permissions**: ``read``
+
+      - **Document level security**: 
+      
+        .. code-block:: console
+
+          {
+            "bool": {
+              "must": {
+                "match": {
+                  "agent.labels.group": "Team_A"
+                }
+              }
+            }
+          }
+
+   #. Click **Add another index permission** and unfold the new section **Add index permission**. Complete the empty fields with the following parameters: 
+
+      - **Index**: ``wazuh-monitoring*`` 
+
+      - **Index permissions**: ``read``
+
+      - **Document level security**: 
+
+        .. code-block:: console
+     
+          {
+            "bool": {
+              "must": {
+                "match": {
+                  "group": "Team_A"
+                }
+              }
+            }
+          }          
+            
+
+   #. Under **Tenant permissions** select **Tenant**: ``global_tenant`` and the **Read only** option.
+   #. Click **Create** to complete the task.    
    #. Select the **Mapped users** tab and click **Manage mapping**.
    #. Add the user you created in the previous steps and click **Map** to confirm the action.
 
@@ -207,6 +260,8 @@ You have now created a new internal user and mapped it to manage a Wazuh agents 
     :title: Keys
     :align: center
     :width: 100%
+
+
 
 
 
