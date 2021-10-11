@@ -140,6 +140,15 @@ In this use case, we have an environment with five agents and we want to create 
     :align: center
     :width: 100%
 
+To prepare the environment, add a label in the ``Team_A`` centralized configuration ``agent.conf``. To learn more, see :ref:`Agent labels <labels>`. 
+
+  .. code-block:: console
+
+      <agent_config>
+      	<labels>
+      		<label key="group">Team_A</label>
+      	</labels>
+      </agent_config>
 
 Follow these steps to create an internal user and give them permissions to manage an agents group. 
 
