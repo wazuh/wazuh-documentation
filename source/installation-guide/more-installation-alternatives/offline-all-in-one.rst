@@ -13,7 +13,7 @@ You can install Wazuh even when there is no connection to the Internet. Installi
 Download the packages and configuration files
 ---------------------------------------------
 
-#. Replace ``<deb|rpm>`` and ``<x86_64|aarch64>`` with your package format and architecture choice in the following commands. Run them from a system with Internet connection. This action executes a script that downloads all required files for the offline installation.
+#. Replace ``<deb|rpm>`` and ``<x86_64|aarch64>`` in the following commands with your choice of package format and architecture. Run them from a system with Internet connection. This action executes a script that downloads all required files for the offline installation.
 
     .. tabs::
 

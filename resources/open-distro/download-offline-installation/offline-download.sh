@@ -10,10 +10,13 @@
 
 WAZUH_MAJOR="4.x"
 WAZUH_MINOR="4.2"
-WAZUH_VERSION="4.2.3"
+DEFAULT_WAZUH_VERSION="4.2.3"
+WAZUH_VERSION=${DEFAULT_WAZUH_VERSION}
+
+DEFAULT_ES_VERSION="7.10.2"
+ES_VERSION=${DEFAULT_ES_VERSION}
 
 #OD_VERSION="1.13.2"
-ES_VERSION="7.10.2"
 
 BASE_DEST_FOLDER="wazuh-offline"
 
@@ -29,11 +32,12 @@ FILEBEAT_RPM_BASE_URL="${BASE_URL}/yum"
 OD_RPM_BASE_URL="${BASE_URL}/yum"
 KIBANA_RPM_BASE_URL="${BASE_URL}/yum"
 
-SILENT="s" #Verbose turned off by default
+SILENT="s" # Silent turned on by default
+VERBOSE="" # Verbose turned off by default
 
 get_wazuh_packages(){
 
-  DEST_PATH="${BASE_DEST_FOLDER}/wazuh_packages"
+  DEST_PATH="${BASE_DEST_FOLDER}/wazuh-packages"
 
   mkdir -p ${DEST_PATH}
 
@@ -42,12 +46,14 @@ get_wazuh_packages(){
 
   case "$PACKAGE $ARCH" in
     "deb x86_64")
-      curl -${SILENT}o ${DEST_PATH}/wazuh-manager_4.2.3-1_amd64.deb ${WAZUH_DEB_BASE_URL}/wazuh-manager_4.2.3-1_amd64.deb
-      curl -${SILENT}o ${DEST_PATH}/filebeat_7.10.2_amd64.deb ${WAZUH_DEB_BASE_URL}/filebeat_7.10.2_amd64.deb
+      rm -f${VERBOSE} ${DEST_PATH}/* # Clean folder before downloading specific versions
+      curl -${SILENT}o ${DEST_PATH}/wazuh-manager_${WAZUH_VERSION}-1_amd64.deb ${WAZUH_DEB_BASE_URL}/wazuh-manager_${WAZUH_VERSION}-1_amd64.deb
+      curl -${SILENT}o ${DEST_PATH}/filebeat_${ES_VERSION}_amd64.deb ${WAZUH_DEB_BASE_URL}/filebeat_${ES_VERSION}_amd64.deb
     ;;
     "rpm x86_64")
-      curl -${SILENT}o ${DEST_PATH}/wazuh-manager-4.2.3-1.x86_64.rpm ${WAZUH_RPM_BASE_URL}/wazuh-manager-4.2.3-1.x86_64.rpm
-      curl -${SILENT}o ${DEST_PATH}/filebeat-oss-7.10.2-x86_64.rpm ${WAZUH_RPM_BASE_URL}/filebeat-oss-7.10.2-x86_64.rpm
+      rm -f${VERBOSE} ${DEST_PATH}/* # Clean folder before downloading specific versions
+      curl -${SILENT}o ${DEST_PATH}/wazuh-manager-${WAZUH_VERSION}-1.x86_64.rpm ${WAZUH_RPM_BASE_URL}/wazuh-manager-${WAZUH_VERSION}-1.x86_64.rpm
+      curl -${SILENT}o ${DEST_PATH}/filebeat-oss-${ES_VERSION}-x86_64.rpm ${WAZUH_RPM_BASE_URL}/filebeat-oss-${ES_VERSION}-x86_64.rpm
     ;;
     *)
       print_unknown_args
@@ -68,10 +74,11 @@ get_opendistro_packages(){
 
   case "$PACKAGE $ARCH" in
     "deb x86_64")
+      rm -f${VERBOSE} ${DEST_PATH}/* # Clean folder before downloading specific versions
       curl -${SILENT}o ${DEST_PATH}/opendistro-anomaly-detection_1.13.0.0-1_all.deb ${OD_DEB_BASE_URL}/opendistro-anomaly-detection_1.13.0.0-1_all.deb
       curl -${SILENT}o ${DEST_PATH}/opendistro-reports-scheduler_1.13.0.0-1_all.deb ${OD_DEB_BASE_URL}/opendistro-reports-scheduler_1.13.0.0-1_all.deb
       curl -${SILENT}o ${DEST_PATH}/opendistro-knn_1.13.0.0-1_all.deb ${OD_DEB_BASE_URL}/opendistro-knn_1.13.0.0-1_all.deb
-      curl -${SILENT}o ${DEST_PATH}/elasticsearch-oss_7.10.2_amd64.deb ${OD_DEB_BASE_URL}/elasticsearch-oss_7.10.2_amd64.deb
+      curl -${SILENT}o ${DEST_PATH}/elasticsearch-oss_${ES_VERSION}_amd64.deb ${OD_DEB_BASE_URL}/elasticsearch-oss_${ES_VERSION}_amd64.deb
       curl -${SILENT}o ${DEST_PATH}/opendistro-performance-analyzer_1.13.0.0-1_all.deb ${OD_DEB_BASE_URL}/opendistro-performance-analyzer_1.13.0.0-1_all.deb
       curl -${SILENT}o ${DEST_PATH}/opendistro-asynchronous-search_1.13.0.1-1_all.deb ${OD_DEB_BASE_URL}/opendistro-asynchronous-search_1.13.0.1-1_all.deb
       curl -${SILENT}o ${DEST_PATH}/opendistro-knnlib_1.13.0.0_amd64.deb ${OD_DEB_BASE_URL}/opendistro-knnlib_1.13.0.0_amd64.deb
@@ -83,6 +90,7 @@ get_opendistro_packages(){
       curl -${SILENT}o ${DEST_PATH}/opendistro-sql_1.13.2.0-1_all.deb ${OD_DEB_BASE_URL}/opendistro-sql_1.13.2.0-1_all.deb
     ;;
     "rpm x86_64")
+      rm -f${VERBOSE} ${DEST_PATH}/* # Clean folder before downloading specific versions
       curl -${SILENT}o ${DEST_PATH}/opendistro-alerting-1.13.1.0.rpm ${OD_RPM_BASE_URL}/opendistro-alerting-1.13.1.0.rpm
       curl -${SILENT}o ${DEST_PATH}/opendistro-anomaly-detection-1.13.0.0.rpm ${OD_RPM_BASE_URL}/opendistro-anomaly-detection-1.13.0.0.rpm
       curl -${SILENT}o ${DEST_PATH}/opendistro-asynchronous-search-1.13.0.1.rpm ${OD_RPM_BASE_URL}/opendistro-asynchronous-search-1.13.0.1.rpm
@@ -95,7 +103,7 @@ get_opendistro_packages(){
       curl -${SILENT}o ${DEST_PATH}/opendistro-security-1.13.1.0.rpm ${OD_RPM_BASE_URL}/opendistro-security-1.13.1.0.rpm
       curl -${SILENT}o ${DEST_PATH}/opendistro-sql-1.13.2.0.rpm ${OD_RPM_BASE_URL}/opendistro-sql-1.13.2.0.rpm
       curl -${SILENT}o ${DEST_PATH}/opendistroforelasticsearch-1.13.2-linux-x64.rpm ${OD_RPM_BASE_URL}/opendistroforelasticsearch-1.13.2-linux-x64.rpm
-      curl -${SILENT}o ${DEST_PATH}/elasticsearch-oss-7.10.2-x86_64.rpm ${OD_RPM_BASE_URL}/elasticsearch-oss-7.10.2-x86_64.rpm
+      curl -${SILENT}o ${DEST_PATH}/elasticsearch-oss-${ES_VERSION}-x86_64.rpm ${OD_RPM_BASE_URL}/elasticsearch-oss-${ES_VERSION}-x86_64.rpm
     ;;
     *)
       print_unknown_args
@@ -109,9 +117,11 @@ get_opendistro_packages(){
 
   case "$PACKAGE $ARCH" in
     "deb x86_64")
+      rm -f${VERBOSE} ${DEST_PATH}/* # Clean folder before downloading specific versions
       curl -${SILENT}o ${DEST_PATH}/opendistroforelasticsearch-kibana_1.13.2_amd64.deb ${KIBANA_RPM_BASE_URL}/opendistroforelasticsearch-kibana_1.13.2_amd64.deb
     ;;
     "rpm x86_64")
+      rm -f${VERBOSE} ${DEST_PATH}/*  # Clean folder before downloading specific versions
       curl -${SILENT}o ${DEST_PATH}/opendistroforelasticsearch-kibana-1.13.2-linux-x64.rpm ${KIBANA_RPM_BASE_URL}/opendistroforelasticsearch-kibana-1.13.2-linux-x64.rpm
     ;;
     *)
@@ -137,7 +147,7 @@ get_wazuh_files(){
 
   curl -${SILENT}o ${DEST_PATH}/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/${WAZUH_MINOR}/extensions/elasticsearch/7.x/wazuh-template.json
 
-  curl -${SILENT}o ${DEST_PATH}/filebeat/wazuh-filebeat-module.tar.gz https://packages.wazuh.com/${WAZUH_MAJOR}/filebeat/wazuh-filebeat-0.1.tar.gz
+  curl -${SILENT}o ${DEST_PATH}/filebeat/wazuh-f${VERBOSE}ilebeat-module.tar.gz https://packages.wazuh.com/${WAZUH_MAJOR}/filebeat/wazuh-f${VERBOSE}ilebeat-0.1.tar.gz
 
   curl -${SILENT}o ${DEST_PATH}/kibana/wazuh_kibana.zip https://packages.wazuh.com/${WAZUH_MAJOR}/ui/kibana/wazuh_kibana-${WAZUH_VERSION}_${ES_VERSION}-1.zip
 
@@ -207,7 +217,8 @@ parse_arguments() {
         ;;
       -v|--verbose)
         SILENT=""
-        shift # past argument
+        VERBOSE="v"
+        shift # past argument with no value
         ;;
       *)    # unknown option
         POSITIONAL+=("$1") # save it in an array for later
@@ -217,17 +228,33 @@ parse_arguments() {
   done
 
   set -- "${POSITIONAL[@]}" # restore positional parameters
+  
+  for i in "$@"; do
+    case $i in
+      -w=*|--wazuh-version=*)
+        WAZUH_VERSION="${i#*=}"
+        shift # past argument=value
+        ;;
+      -e=*|--elastic-version=*)
+        ES_VERSION="${i#*=}"
+        shift # past argument=value
+        ;;
+      *)
+        # unknown option
+        ;;
+    esac
+  done
 }
 
 print_help(){
   
-  printf "Usage: offline-download [OPTION]...\n\nMandatory options\n\t-p, --packages\t\tdeb | rpm\n\t-a, --architecture\tx86_64 | aarch64\n\t-v, --verbose\t\tShow output\n"
+  printf "Usage: $0 [OPTION]...\n\nMandatory options\n\t-p, --packages\t\t\t\t\tdeb | rpm\n\t-a, --architecture\t\t\t\tx86_64 | aarch64\nOther options\n\t-w=<version>, --wazuh-version=<version>\t\tSelect specific Wazuh manager version\n\t-e=<version>, --elastic-version=<version>\tSelect specific ELK version\n\t-v, --\t\t\t\t\tShow output\n"
 
 }
 
 print_unknown_args(){
 
-  printf "Not available for packages type and/or target architecture. Try 'offline_download --help' for more information\n"
+  printf "Not available for packages type and/or target architecture. Try '$0 --help' for more information\n"
 
 }
 
