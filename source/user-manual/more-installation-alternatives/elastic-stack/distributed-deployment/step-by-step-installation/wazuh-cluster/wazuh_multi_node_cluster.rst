@@ -56,8 +56,6 @@ This section describes how to add the Wazuh repository. It will be used for Wazu
 Installing the Wazuh manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-
-
 #. Install the Wazuh manager package. This step must be applied in all servers that will act as a Wazuh cluster nodes:
 
 .. tabs::
