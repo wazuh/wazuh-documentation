@@ -38,6 +38,7 @@ Options
 - `ssl_manager_key`_
 - `ssl_auto_negotiate`_
 - `ciphers`_
+- `key_request`_
 
 disabled
 ^^^^^^^^
@@ -210,6 +211,99 @@ The format of this parameter is described in `SSL ciphers <https://www.openssl.o
 
 .. versionadded:: 3.0.0
 
+key_request
+^^^^^^^^^^^
+
+The key polling settings are configured inside this tag.
+
+.. code-block:: xml
+  <key_request>
+    <enabled>yes</enabled>
+    <exec_path>/usr/bin/python /home/script.py</exec_path>
+    <socket>/path/to/socket</socket>
+    <timeout>60</timeout>
+    <threads>1</threads>
+    <queue_size>1024</queue_size>
+  </key_request>
+
+Configuration options of the key polling.
+
+Options
+-------
+
+- `enabled`_
+- `timeout`_
+- `exec_path`_
+- `socket`_
+- `threads`_
+- `queue_size`_
+
+enabled
+^^^^^^^
+
+Enable the key polling.
+
++--------------------+-----------------------------+
+| **Default value**  | yes                         |
++--------------------+-----------------------------+
+| **Allowed values** | yes, no                     |
++--------------------+-----------------------------+
+
+timeout
+^^^^^^^
+
+Maximum time for waiting a response from the executable.
+
++--------------------+------------------------------+
+| **Default value**  | 60                           |
++--------------------+------------------------------+
+| **Allowed values** | A positive number in seconds |
++--------------------+------------------------------+
+
+exec_path
+^^^^^^^^^
+
+Full path to the executable.
+
++--------------------+-----------------------------------+
+| **Default value**  | none                              |
++--------------------+-----------------------------------+
+| **Allowed values** | A string indicating the full path |
++--------------------+-----------------------------------+
+
+socket
+^^^^^^
+
+Full path to the unix domain socket.
+
++--------------------+-----------------------------------------------------------+
+| **Default value**  | none                                                      |
++--------------------+-----------------------------------------------------------+
+| **Allowed values** | A string indicating the full path to a unix domain socket |
++--------------------+-----------------------------------------------------------+
+
+threads
+^^^^^^^
+
+Number of threads for polling external keys.
+
++--------------------+------------------------------------------------------------+
+| **Default value**  | 1                                                          |
++--------------------+------------------------------------------------------------+
+| **Allowed values** | A positive number indicating the number of threads [1..32] |
++--------------------+------------------------------------------------------------+
+
+queue_size
+^^^^^^^^^^
+
+Indicates the maximum size of the queue for polling external keys.
+
++--------------------+------------------------------------------------------------+
+| **Default value**  | 1024                                                       |
++--------------------+------------------------------------------------------------+
+| **Allowed values** | A positive number indicating the queue size [1..220000]    |
++--------------------+------------------------------------------------------------+
+
 Default configuration
 ---------------------
 
@@ -230,4 +324,12 @@ Default configuration
     <ssl_manager_cert>etc/sslmanager.cert</ssl_manager_cert>
     <ssl_manager_key>etc/sslmanager.key</ssl_manager_key>
     <ssl_auto_negotiate>no</ssl_auto_negotiate>
+    <key_request>
+      <enabled>yes</enabled>
+      <exec_path>/usr/bin/python /home/script.py</exec_path>
+      <socket>/path/to/socket</socket>
+      <timeout>60</timeout>
+      <threads>1</threads>
+      <queue_size>1024</queue_size>
+    </key_request>
   </auth>
