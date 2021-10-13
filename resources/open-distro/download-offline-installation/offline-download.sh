@@ -34,8 +34,8 @@ KIBANA_RPM_BASE_URL="${BASE_URL}/yum"
 
 ARCH="x86_64" # Default architecture
 
-SILENT="s" # Silent turned on by default
-VERBOSE="" # Verbose turned off by default
+SILENT="s" # Silent and Verbose turned
+VERBOSE="" # on and off by default
 
 get_wazuh_packages(){
 
@@ -82,7 +82,7 @@ get_opendistro_packages(){
   mkdir -p ${DEST_PATH}
 
   # Download packages for Elasticsearch, Kibana and Java
-  printf "\nDownloading Opendistro packages...\n"
+  printf "\nDownloading Opendistro $PACKAGE packages...\n"
 
   case "$PACKAGE $ARCH" in
     "deb x86_64")
@@ -130,7 +130,7 @@ get_opendistro_packages(){
   case "$PACKAGE $ARCH" in
     "deb x86_64")
       rm -f${VERBOSE} ${DEST_PATH}/* # Clean folder before downloading specific versions
-      curl -${SILENT}o ${DEST_PATH}/opendistroforelasticsearch-kibana_1.13.2_amd64.deb ${KIBANA_RPM_BASE_URL}/opendistroforelasticsearch-kibana_1.13.2_amd64.deb
+      curl -${SILENT}o ${DEST_PATH}/opendistroforelasticsearch-kibana_1.13.2_amd64.deb ${KIBANA_DEB_BASE_URL}/opendistroforelasticsearch-kibana_1.13.2_amd64.deb
     ;;
     "rpm x86_64")
       rm -f${VERBOSE} ${DEST_PATH}/*  # Clean folder before downloading specific versions
@@ -152,17 +152,19 @@ get_wazuh_files(){
 
   mkdir -p ${DEST_PATH}/kibana
 
-  # Download config templates and Filebeat module
+  # Download key, config templates and Filebeat module
   printf "\nDownloading Wazuh configuration files...\n"
+
+  curl -${SILENT}o ${DEST_PATH}/GPG-KEY-WAZUH https://packages.wazuh.com/key/GPG-KEY-WAZUH
 
   curl -${SILENT}o ${DEST_PATH}/filebeat/filebeat.yml https://packages.wazuh.com/resources/${WAZUH_MINOR}/open-distro/filebeat/7.x/filebeat_all_in_one.yml
 
   curl -${SILENT}o ${DEST_PATH}/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/${WAZUH_MINOR}/extensions/elasticsearch/7.x/wazuh-template.json
 
-  curl -${SILENT}o ${DEST_PATH}/filebeat/wazuh-filebeat-module.tar.gz https://packages.wazuh.com/${WAZUH_MAJOR}/filebeat/wazuh-filebeat-0.1.tar.gz
+  curl -${SILENT}o ${DEST_PATH}/filebeat/wazuh-filebeat-module.tar.gz ${BASE_URL}/filebeat/wazuh-filebeat-0.1.tar.gz
 
-  curl -${SILENT}o ${DEST_PATH}/kibana/wazuh_kibana.zip https://packages.wazuh.com/${WAZUH_MAJOR}/ui/kibana/wazuh_kibana-${WAZUH_VERSION}_${ES_VERSION}-1.zip
-
+  curl -${SILENT}o ${DEST_PATH}/kibana/wazuh_kibana.zip ${BASE_URL}/ui/kibana/wazuh_kibana-${WAZUH_VERSION}_${ES_VERSION}-1.zip
+  
 }
 
 get_opendistro_files(){

@@ -13,7 +13,7 @@ You can install Wazuh even when there is no connection to the Internet. Installi
 Download the packages and configuration files
 ---------------------------------------------
 
-#. Replace ``<deb|rpm>`` in the following commands with your choice of package format and run them from a system with internet connection. This action executes a script that downloads all required files for the offline installation on `x86_64` architectures. Add ``-a aarch64`` to download files for `ARM64`  architectures.
+#. Replace ``<deb|rpm>`` in the following commands with your choice of package format and run them from a system with internet connection. This action executes a script that downloads all required files for the offline installation on `x86_64` architectures. Add ``-a aarch64`` if you want to download files for `ARM64`  architectures.
 
     .. tabs::
 
@@ -46,14 +46,14 @@ Installing the Wazuh manager
 
         .. code-block:: console
         
-          # rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH
+          # rpm --import ./wazuh_files/GPG-KEY-WAZUH
           # rpm -ivh ./wazuh-packages/wazuh-manager*.rpm
 
       .. group-tab:: Deb
 
         .. code-block:: console
         
-          # curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -
+          # apt-key add ./wazuh_files/GPG-KEY-WAZUH
           # dpkg -i ./wazuh-packages/wazuh-manager*.deb
 
 #. Enable and start the Wazuh manager service.
@@ -130,20 +130,10 @@ Installing Elasticsearch
 
     The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it and restarting the service with the following commands.
 
-    .. tabs::
+    .. code-block:: console
 
-      .. group-tab:: Systemd
+      # /usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer
 
-        .. code-block:: console
-
-          # /usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer
-
-      .. group-tab:: SysV Init
-
-        .. code-block:: console
-
-          # /usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer
-        
 #. Run the following command to restart the service and check that the installation is successful.
 
     .. tabs::
