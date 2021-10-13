@@ -66,7 +66,7 @@ To upgrade agents using the command line, use the :doc:`agent_upgrade <../../ref
         Status:     Active
 
         Operating system:    Linux |wazuh-agent2 |5.8.0-7625-generic |#26~1604441477~20.10~d41e407-Ubuntu SMP Wed Nov 4 01:25:00 UTC 2 |x86_64
-        Client version:      Wazuh v4.0.0
+        Client version:      Wazuh v|WAZUH_LATEST|
         Configuration hash:  e2f47d482da37c099fa1d6e4c43b523c
         Shared file hash:    aabb92f4a8cba49c7c6045c1aa80fbd3
         Last keep alive:     1604927114
