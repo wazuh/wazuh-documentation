@@ -32,6 +32,8 @@ FILEBEAT_RPM_BASE_URL="${BASE_URL}/yum"
 OD_RPM_BASE_URL="${BASE_URL}/yum"
 KIBANA_RPM_BASE_URL="${BASE_URL}/yum"
 
+ARCH="x86_64" # Default architecture
+
 SILENT="s" # Silent turned on by default
 VERBOSE="" # Verbose turned off by default
 
@@ -50,9 +52,19 @@ get_wazuh_packages(){
       curl -${SILENT}o ${DEST_PATH}/wazuh-manager_${WAZUH_VERSION}-1_amd64.deb ${WAZUH_DEB_BASE_URL}/wazuh-manager_${WAZUH_VERSION}-1_amd64.deb
       curl -${SILENT}o ${DEST_PATH}/filebeat_${ES_VERSION}_amd64.deb ${WAZUH_DEB_BASE_URL}/filebeat_${ES_VERSION}_amd64.deb
     ;;
+    "deb aarch64")
+      rm -f${VERBOSE} ${DEST_PATH}/* # Clean folder before downloading specific versions
+      curl -${SILENT}o ${DEST_PATH}/wazuh-manager_${WAZUH_VERSION}-1_arm64.deb ${WAZUH_DEB_BASE_URL}/wazuh-manager_${WAZUH_VERSION}-1_arm64.deb
+      curl -${SILENT}o ${DEST_PATH}/filebeat_${ES_VERSION}_amd64.deb ${WAZUH_DEB_BASE_URL}/filebeat_${ES_VERSION}_amd64.deb
+    ;;
     "rpm x86_64")
       rm -f${VERBOSE} ${DEST_PATH}/* # Clean folder before downloading specific versions
       curl -${SILENT}o ${DEST_PATH}/wazuh-manager-${WAZUH_VERSION}-1.x86_64.rpm ${WAZUH_RPM_BASE_URL}/wazuh-manager-${WAZUH_VERSION}-1.x86_64.rpm
+      curl -${SILENT}o ${DEST_PATH}/filebeat-oss-${ES_VERSION}-x86_64.rpm ${WAZUH_RPM_BASE_URL}/filebeat-oss-${ES_VERSION}-x86_64.rpm
+    ;;
+    "rpm aarch64")
+      rm -f${VERBOSE} ${DEST_PATH}/* # Clean folder before downloading specific versions
+      curl -${SILENT}o ${DEST_PATH}/wazuh-manager-${WAZUH_VERSION}-1.aarch64.rpm ${WAZUH_RPM_BASE_URL}/wazuh-manager-${WAZUH_VERSION}-1.aarch64.rpm
       curl -${SILENT}o ${DEST_PATH}/filebeat-oss-${ES_VERSION}-x86_64.rpm ${WAZUH_RPM_BASE_URL}/filebeat-oss-${ES_VERSION}-x86_64.rpm
     ;;
     *)
@@ -147,7 +159,7 @@ get_wazuh_files(){
 
   curl -${SILENT}o ${DEST_PATH}/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/${WAZUH_MINOR}/extensions/elasticsearch/7.x/wazuh-template.json
 
-  curl -${SILENT}o ${DEST_PATH}/filebeat/wazuh-f${VERBOSE}ilebeat-module.tar.gz https://packages.wazuh.com/${WAZUH_MAJOR}/filebeat/wazuh-f${VERBOSE}ilebeat-0.1.tar.gz
+  curl -${SILENT}o ${DEST_PATH}/filebeat/wazuh-filebeat-module.tar.gz https://packages.wazuh.com/${WAZUH_MAJOR}/filebeat/wazuh-filebeat-0.1.tar.gz
 
   curl -${SILENT}o ${DEST_PATH}/kibana/wazuh_kibana.zip https://packages.wazuh.com/${WAZUH_MAJOR}/ui/kibana/wazuh_kibana-${WAZUH_VERSION}_${ES_VERSION}-1.zip
 
@@ -248,7 +260,7 @@ parse_arguments() {
 
 print_help(){
   
-  printf "Usage: $0 [OPTION]...\n\nMandatory options\n\t-p, --packages\t\t\t\t\tdeb | rpm\n\t-a, --architecture\t\t\t\tx86_64 | aarch64\nOther options\n\t-w=<version>, --wazuh-version=<version>\t\tSelect specific Wazuh manager version\n\t-e=<version>, --elastic-version=<version>\tSelect specific ELK version\n\t-v, --\t\t\t\t\tShow output\n"
+  printf "Usage: $0 [OPTION]...\n\nMandatory options\n\t-p, --packages <deb|rpm>\t\t\tPackage file format\n\nOther options\n\t-a, --architecture <x86_64|aarch64>\t\tArchitecture type (Default: x86_64)\n\t-w=<version>, --wazuh-version=<version>\t\tSelect specific Wazuh manager version\n\t-e=<version>, --elastic-version=<version>\tSelect specific ELK version\n\t-v, --verbose\t\t\t\t\tShow detailed output\n\t-h, --help\t\t\t\t\tShow this help\n"
 
 }
 

@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Discover the offline step-by-step process to install Wazuh and OpenDistro components for Elasticsearch in an all-in-one deployment without connection to the internet.
+  :description: Discover the offline step-by-step process to install Wazuh and OpenDistro components for Elasticsearch in an all-in-one deployment without connection to the Internet.
 
 Offline all-in-one installation
 ===============================
@@ -13,7 +13,7 @@ You can install Wazuh even when there is no connection to the Internet. Installi
 Download the packages and configuration files
 ---------------------------------------------
 
-#. Replace ``<deb|rpm>`` and ``<x86_64|aarch64>`` in the following commands with your choice of package format and architecture. Run them from a system with Internet connection. This action executes a script that downloads all required files for the offline installation.
+#. Replace ``<deb|rpm>`` in the following commands with your choice of package format and run them from a system with internet connection. This action executes a script that downloads all required files for the offline installation on `x86_64` architectures. Add ``-a aarch64`` to download files for `ARM64`  architectures.
 
     .. tabs::
 
@@ -22,7 +22,7 @@ Download the packages and configuration files
         .. code-block:: console
           
           # curl -sO https://raw.githubusercontent.com/wazuh/wazuh-documentation/4329_Write_offline_installation_guide/resources/open-distro/download-offline-installation/offline-download.sh
-          # bash ./offline-download.sh -p <deb|rpm> -a <x86_64|aarch64>
+          # bash ./offline-download.sh -p <deb|rpm>
           
 #. Copy or move the ``./wazuh-offline/`` folder contents to a folder accessible to the host from where the offline installation will be carried out.
 
@@ -38,28 +38,23 @@ Install Wazuh and the components from local files
 Installing the Wazuh manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Run the following command to install the Wazuh manager.
+#. Run the following command to import the Wazuh key and install the Wazuh manager.
 
     .. tabs::
 
-      .. group-tab:: Yum
+      .. group-tab:: RPM
 
         .. code-block:: console
         
-          # yum install -y ./wazuh-packages/wazuh-manager-4.2.1-1.x86_64.rpm
+          # rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH
+          # rpm -ivh ./wazuh-packages/wazuh-manager*.rpm
 
-      .. group-tab:: APT
-
-        .. code-block:: console
-        
-          # dpkg -i ./wazuh-packages/wazuh-manager_4.2.1-1_amd64.deb
-
-      .. group-tab:: ZYpp
+      .. group-tab:: Deb
 
         .. code-block:: console
         
-          # zypper install --repo wazuh -y ./wazuh-packages/wazuh-manager-4.2.1-1.x86_64.rpm
-
+          # curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -
+          # dpkg -i ./wazuh-packages/wazuh-manager*.deb
 
 #. Enable and start the Wazuh manager service.
 
@@ -76,62 +71,29 @@ Installing Elasticsearch
 
     .. tabs::
 
-      .. group-tab:: Yum
+      .. group-tab:: RPM
 
         .. code-block:: console
         
-          # yum install -y ./opendistro-packages/*.rpm
+          # rpm -i ./opendistro-packages/*.rpm > ODfE_output.txt
 
-      .. group-tab:: APT
-
-        .. code-block:: console
-        
-          # dpkg -i ./opendistro-packages/*.deb
-
-      .. group-tab:: ZYpp
+      .. group-tab:: Deb
 
         .. code-block:: console
         
-          # zypper install --repo wazuh -y ./opendistro-packages/*.rpm
-
+          # dpkg -i ./opendistro-packages/*.deb > ODfE_output.txt
 
 #. Move a copy of the configuration files to the appropriate location.
 
-    .. tabs::
-
-      .. group-tab:: Yum
-
-        .. code-block:: console
-        
-          # unalias cp
-          # cp ./opendistro_files/elasticsearch/elasticsearch.yml /etc/elasticsearch/
-          # cp ./opendistro_files/elasticsearch/roles.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/
-          # cp ./opendistro_files/elasticsearch/roles_mapping.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/
-          # cp ./opendistro_files/elasticsearch/internal_users.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/
-          # cp ./opendistro_files/elasticsearch/wazuh-cert-tool.sh ~
-          # cp ./opendistro_files/elasticsearch/instances.yml ~
-
-      .. group-tab:: APT
-
-        .. code-block:: console
-        
-          # cp ./opendistro_files/elasticsearch/elasticsearch.yml /etc/elasticsearch/
-          # cp ./opendistro_files/elasticsearch/roles.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/
-          # cp ./opendistro_files/elasticsearch/roles_mapping.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/
-          # cp ./opendistro_files/elasticsearch/internal_users.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/
-          # cp ./opendistro_files/elasticsearch/wazuh-cert-tool.sh ~
-          # cp ./opendistro_files/elasticsearch/instances.yml ~
-
-      .. group-tab:: ZYpp
-
-        .. code-block:: console
-        
-          # cp ./opendistro_files/elasticsearch/elasticsearch.yml /etc/elasticsearch/
-          # cp ./opendistro_files/elasticsearch/roles.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/
-          # cp ./opendistro_files/elasticsearch/roles_mapping.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/
-          # cp ./opendistro_files/elasticsearch/internal_users.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/
-          # cp ./opendistro_files/elasticsearch/wazuh-cert-tool.sh ~
-          # cp ./opendistro_files/elasticsearch/instances.yml ~
+    .. code-block:: console
+    
+      # unalias cp
+      # cp ./opendistro_files/elasticsearch/elasticsearch.yml /etc/elasticsearch/
+      # cp ./opendistro_files/elasticsearch/roles.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/
+      # cp ./opendistro_files/elasticsearch/roles_mapping.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/
+      # cp ./opendistro_files/elasticsearch/internal_users.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/
+      # cp ./opendistro_files/elasticsearch/wazuh-cert-tool.sh ~
+      # cp ./opendistro_files/elasticsearch/instances.yml ~
 
 #. Remove the demo certificates.
 
@@ -175,20 +137,31 @@ Installing Elasticsearch
         .. code-block:: console
 
           # /usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer
-          # systemctl restart elasticsearch
 
       .. group-tab:: SysV Init
 
         .. code-block:: console
 
           # /usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer
-          # service elasticsearch restart
         
-#. Run the following command to make sure the installation is successful.
+#. Run the following command to restart the service and check that the installation is successful.
 
-    .. code-block:: console
+    .. tabs::
 
-      # curl -XGET https://localhost:9200 -u admin:admin -k
+      .. group-tab:: Systemd
+
+        .. code-block:: console
+
+          # systemctl restart elasticsearch
+          # curl -XGET https://localhost:9200 -u admin:admin -k
+
+      .. group-tab:: SysV Init
+
+        .. code-block:: console
+
+          # service elasticsearch restart
+          # curl -XGET https://localhost:9200 -u admin:admin -k
+
 
     Expand the output to see an example response.
 
@@ -221,51 +194,25 @@ Installing Filebeat
 
     .. tabs::
 
-      .. group-tab:: Yum
+      .. group-tab:: RPM
 
         .. code-block:: console
         
-          # yum install -y ./wazuh-packages/filebeat-oss-7.10.2-x86_64.rpm
+          # rpm -i ./wazuh-packages/filebeat*.rpm
 
-      .. group-tab:: APT
-
-        .. code-block:: console
-        
-          # dpkg -i ./wazuh-packages/filebeat_7.10.2_amd64.deb
-
-      .. group-tab:: ZYpp
+      .. group-tab:: Deb
 
         .. code-block:: console
         
-          # zypper install --repo wazuh -y ./wazuh-packages/filebeat-oss-7.10.2-x86_64.rpm
+          # dpkg -i ./wazuh-packages/filebeat*.deb
 
 #. Move a copy of the configuration files to the appropriate location.
 
-    .. tabs::
-
-      .. group-tab:: Yum
-
-        .. code-block:: console
-        
-          # cp ./wazuh_files/filebeat/filebeat.yml /etc/filebeat/
-          # cp ./wazuh_files/filebeat/wazuh-template.json /etc/filebeat/
-          # chmod go+r /etc/filebeat/wazuh-template.json
-
-      .. group-tab:: APT
-
-        .. code-block:: console
-        
-          # cp ./wazuh_files/filebeat/filebeat.yml /etc/filebeat/
-          # cp ./wazuh_files/filebeat/wazuh-template.json /etc/filebeat/
-          # chmod go+r /etc/filebeat/wazuh-template.json
-
-      .. group-tab:: ZYpp
-
-        .. code-block:: console
-        
-          # cp ./wazuh_files/filebeat/filebeat.yml /etc/filebeat/
-          # cp ./wazuh_files/filebeat/wazuh-template.json /etc/filebeat/
-          # chmod go+r /etc/filebeat/wazuh-template.json
+    .. code-block:: console
+    
+      # cp ./wazuh_files/filebeat/filebeat.yml /etc/filebeat/
+      # cp ./wazuh_files/filebeat/wazuh-template.json /etc/filebeat/
+      # chmod go+r /etc/filebeat/wazuh-template.json
 
 #. Edit ``/etc/filebeat/wazuh-template.json`` and change to ``"1"`` the value for ``"index.number_of_shards"`` as this is a single-node installation.
 
@@ -353,45 +300,23 @@ Installing Kibana
 
    .. tabs::
 
-     .. group-tab:: Yum
+     .. group-tab:: RPM
 
        .. code-block:: console
        
-         # yum install -y ./opendistro-kibana-packages/opendistroforelasticsearch-kibana-1.13.2-linux-x64.rpm
+         # rpm -i ./opendistro-kibana-packages/opendistroforelasticsearch-kibana*.rpm
 
-     .. group-tab:: APT
-
-       .. code-block:: console
-       
-         # dpkg -i ./opendistro-kibana-packages/opendistroforelasticsearch-kibana_1.13.2_amd64.deb
-
-     .. group-tab:: ZYpp
+     .. group-tab:: Deb
 
        .. code-block:: console
        
-         # zypper install --repo wazuh -y ./opendistro-kibana-packages/opendistroforelasticsearch-kibana-1.13.2-linux-x64.rpm
+         # dpkg -i ./opendistro-kibana-packages/opendistroforelasticsearch-kibana*.deb
 
 #. Move a copy of the configuration files to the appropriate location.
 
-     .. tabs::
-
-       .. group-tab:: Yum
-
-         .. code-block:: console
-         
-           # cp ./opendistro_files/kibana/kibana.yml /etc/kibana/
-
-       .. group-tab:: APT
-
-         .. code-block:: console
-         
-           # cp ./opendistro_files/kibana/kibana.yml /etc/kibana/
-
-       .. group-tab:: ZYpp
-
-         .. code-block:: console
-         
-           # cp ./opendistro_files/kibana/kibana.yml /etc/kibana/
+     .. code-block:: console
+     
+       # cp ./opendistro_files/kibana/kibana.yml /etc/kibana/
 
     .. note::
       ``server.host: 0.0.0.0`` in ``/etc/kibana/kibana.yml`` means that Kibana can be accessed from the outside and accepts all the available IPs of the host. This value can be changed for a specific IP if needed.
@@ -407,20 +332,13 @@ Installing Kibana
 
     .. tabs::
 
-      .. group-tab:: Yum
+      .. group-tab:: RPM
 
         .. code-block:: console
 
             # /usr/share/kibana/bin/kibana-plugin install --allow-root file:///path/to/installation/folder/wazuh_files/kibana/wazuh_kibana.zip
 
-      .. group-tab:: APT
-
-        .. code-block:: console
-
-            # cd /usr/share/kibana
-            # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install file:///path/to/installation/folder/wazuh_files/kibana/wazuh_kibana.zip
-
-      .. group-tab:: ZYpp
+      .. group-tab:: Deb
 
         .. code-block:: console
 
