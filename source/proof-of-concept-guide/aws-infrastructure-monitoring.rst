@@ -6,6 +6,7 @@ Amazon AWS infrastructure monitoring
 Wazuh module for AWS (aws-s3) enables log data gathering from different AWS sources. You can find a detailed guide on how to Monitor AWS resources in Wazuh `AWS Monitoring guide <https://https://documentation.wazuh.com/current/amazon/>`_.
 
 Configuration
+-------------
 
 - Enable ``aws-s3`` wodle in ``/var/ossec/etc/ossec.conf`` in the Wazuh manager configuration file:
 
@@ -59,7 +60,7 @@ Configuration
 Steps to generate the alerts
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- lerts are automatically generated from AWS logs (when using out-of-the-box rules). They will appear as soon as they are fetched from the AWS S3 bucket.
+- Alerts are automatically generated from AWS logs (when using out-of-the-box rules). They will appear as soon as they are fetched from the AWS S3 bucket.
 
 Alerts
 ^^^^^^
