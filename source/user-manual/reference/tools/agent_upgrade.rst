@@ -60,7 +60,7 @@ Examples
 
 .. code-block:: console
 
-    # /var/ossec/bin/agent_upgrade -a 002 -v 4.0.0
+    # /var/ossec/bin/agent_upgrade -a 002
 
 .. code-block:: none
     :class: output
@@ -68,7 +68,7 @@ Examples
     Upgrading...
 
     Upgraded agents:
-        Agent 002 upgraded: Wazuh v3.13.2 -> 4.0.0
+        Agent 002 upgraded: Wazuh v3.13.2 -> |WAZUH_LATEST|
 
 
 * Downgrade agent using a custom repository:
