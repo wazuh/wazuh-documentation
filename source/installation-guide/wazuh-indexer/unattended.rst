@@ -13,7 +13,7 @@ Wazuh indexer cluster installation
 
 Install and configure the Wazuh indexer as a single-node or multi-node cluster according to your environment needs. If you want to install a single-node cluster, follow the instructions to install the initial node.
 
-The installation process is divided into three stages:  
+The installation process is divided into three stages.  
 
 #. Initial node installation and configuration
 
