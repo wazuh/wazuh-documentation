@@ -36,11 +36,11 @@ To upgrade agents using the command line, use the :doc:`agent_upgrade <../../ref
 
         Total outdated agents: 3
 
-2. Upgrade the agent with ID 002 using the *'-a'* parameter followed by the agent ID and the *'-v'* parameter followed by the version to upgrade:
+2. Upgrade the agent with ID 002 using the *'-a'* parameter followed by the agent ID:
 
     .. code-block:: console
 
-        # /var/ossec/bin/agent_upgrade -a 002 -v 4.0.0
+        # /var/ossec/bin/agent_upgrade -a 002
 
     .. code-block:: none
         :class: output
@@ -48,7 +48,7 @@ To upgrade agents using the command line, use the :doc:`agent_upgrade <../../ref
         Upgrading...
 
         Upgraded agents:
-            Agent 002 upgraded: Wazuh v3.13.2 -> 4.0.0
+            Agent 002 upgraded: Wazuh v3.13.2 -> |WAZUH_LATEST|
 
 
 3. Following the upgrade, the agent is automatically restarted.  Check the agent version to ensure it has been properly upgraded as follows:
@@ -111,13 +111,13 @@ Using the RESTful API
 
         The parameter `agents_list` of endpoints :api-ref:`PUT /agents/upgrade <operation/api.controllers.agent_controller.put_upgrade_agents>` and :api-ref:`PUT /agents/upgrade_custom <operation/api.controllers.agent_controller.put_upgrade_custom_agents>` allows the value `all`. When setting this value, an upgrade request will be sent to all agents.
 
-    Despite the fact that there is no API limit when upgrading agents at the same time, it is not advised to upgrade an agents list exceeding 3000 agents. In case of doing it, it is highly recommended to use the parameter `wait_for_complete` set to `true` to avoid a possible API timeout.
+    When upgrading more than 3000 agents at the same time, it's highly recommended to use the parameter `wait_for_complete` set to `true` to avoid a possible API timeout.
 
-    This agents list size limit has been set after testing the endpoint in a Wazuh environment whose manager was installed in a host with specifications: 2.5 GHz AMD EPYC 7000 series processor and 4 GiB of memory. Using an agents list with size less than or equal to 3000 and a host with same or higher specs will guarantee this endpoint to return a response before the API timeout.
+    This number of agents from which `wait_for_complete=true` is recommended, has been set after testing the endpoint in a Wazuh environment whose manager was installed in a host with specifications: 2.5 GHz AMD EPYC 7000 series processor and 4 GiB of memory. Using an agents list with size less than or equal to 3000 and a host with same or higher specs guarantees this endpoint to return a response before the API timeout.
 
     .. code-block:: console
 
-        # curl -k -X PUT "https://localhost:55000/agents/upgrade?agents_list=002,003&version=4.0.0&pretty=true" -H  "Authorization: Bearer $TOKEN"
+        # curl -k -X PUT "https://localhost:55000/agents/upgrade?agents_list=002,003&pretty=true" -H  "Authorization: Bearer $TOKEN"
 
 
     .. code-block:: json
@@ -202,11 +202,11 @@ Using the RESTful API
             "affected_items": [
               {
                 "id": "002",
-                "version": "Wazuh v4.2.4"
+                "version": "Wazuh |WAZUH_LATEST|"
               },
               {
                 "id": "003",
-                "version": "Wazuh v4.2.4"
+                "version": "Wazuh |WAZUH_LATEST|"
               }
             ],
             "total_affected_items": 2,
