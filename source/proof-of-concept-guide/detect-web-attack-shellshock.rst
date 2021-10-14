@@ -3,7 +3,7 @@
 Detecting a web attack - Shellshock
 ===================================
 
-This example shows how Wazuh can detect a Shellshock attack by analyzing web server logs collected from a monitored endpoint. Please check :ref:`Wazuh Shellshock Attack documentation <https://documentation.wazuh.com/current/learning-wazuh/shellshock.html>`.
+This example shows how Wazuh can detect a Shellshock attack by analyzing web server logs collected from a monitored endpoint. Please check :ref:`Wazuh Shellshock Attack documentation <learning_wazuh_shellshock>`.
 
 In addition, for further detection, the attack can also be detected at a network level when Suricata integration is configured.
 
