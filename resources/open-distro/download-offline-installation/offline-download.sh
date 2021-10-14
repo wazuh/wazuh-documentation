@@ -24,11 +24,13 @@ BASE_URL="https://packages.wazuh.com/${WAZUH_MAJOR}"
 
 WAZUH_DEB_BASE_URL="${BASE_URL}/apt/pool/main/w/wazuh-manager"
 FILEBEAT_DEB_BASE_URL="${BASE_URL}/apt/pool/main/f/filebeat"
-OD_DEB_BASE_URL="${BASE_URL}/apt/pool/main/o/opendistroforelasticsearch"
+ESOSS_DEB_BASE_URL="${BASE_URL}/apt/pool/main/e/elasticsearch-oss"
+OD_DEB_BASE_URL="${BASE_URL}/apt/pool/main/o"
 KIBANA_DEB_BASE_URL="${BASE_URL}/apt/pool/main/o/opendistroforelasticsearch-kibana"
 
 WAZUH_RPM_BASE_URL="${BASE_URL}/yum"
 FILEBEAT_RPM_BASE_URL="${BASE_URL}/yum"
+ESOSS_RPM_BASE_URL="${BASE_URL}/yum"
 OD_RPM_BASE_URL="${BASE_URL}/yum"
 KIBANA_RPM_BASE_URL="${BASE_URL}/yum"
 
@@ -50,23 +52,23 @@ get_wazuh_packages(){
     "deb x86_64")
       rm -f${VERBOSE} ${DEST_PATH}/* # Clean folder before downloading specific versions
       curl -${SILENT}o ${DEST_PATH}/wazuh-manager_${WAZUH_VERSION}-1_amd64.deb ${WAZUH_DEB_BASE_URL}/wazuh-manager_${WAZUH_VERSION}-1_amd64.deb
-      curl -${SILENT}o ${DEST_PATH}/filebeat_${ES_VERSION}_amd64.deb ${WAZUH_DEB_BASE_URL}/filebeat_${ES_VERSION}_amd64.deb
+      curl -${SILENT}o ${DEST_PATH}/filebeat-${ES_VERSION}-amd64.deb ${FILEBEAT_DEB_BASE_URL}/filebeat-oss-${ES_VERSION}-amd64.deb
     ;;
-    "deb aarch64")
-      rm -f${VERBOSE} ${DEST_PATH}/* # Clean folder before downloading specific versions
-      curl -${SILENT}o ${DEST_PATH}/wazuh-manager_${WAZUH_VERSION}-1_arm64.deb ${WAZUH_DEB_BASE_URL}/wazuh-manager_${WAZUH_VERSION}-1_arm64.deb
-      curl -${SILENT}o ${DEST_PATH}/filebeat_${ES_VERSION}_amd64.deb ${WAZUH_DEB_BASE_URL}/filebeat_${ES_VERSION}_amd64.deb
-    ;;
+    #"deb aarch64")
+    #  rm -f${VERBOSE} ${DEST_PATH}/* # Clean folder before downloading specific versions
+    #  curl -${SILENT}o ${DEST_PATH}/wazuh-manager_${WAZUH_VERSION}-1_arm64.deb ${WAZUH_DEB_BASE_URL}/wazuh-manager_${WAZUH_VERSION}-1_arm64.deb
+    #  curl -${SILENT}o ${DEST_PATH}/filebeat_${ES_VERSION}_amd64.deb ${FILEBEAT_DEB_BASE_URL}/filebeat-oss-${ES_VERSION}-amd64.deb
+    #;;
     "rpm x86_64")
       rm -f${VERBOSE} ${DEST_PATH}/* # Clean folder before downloading specific versions
       curl -${SILENT}o ${DEST_PATH}/wazuh-manager-${WAZUH_VERSION}-1.x86_64.rpm ${WAZUH_RPM_BASE_URL}/wazuh-manager-${WAZUH_VERSION}-1.x86_64.rpm
-      curl -${SILENT}o ${DEST_PATH}/filebeat-oss-${ES_VERSION}-x86_64.rpm ${WAZUH_RPM_BASE_URL}/filebeat-oss-${ES_VERSION}-x86_64.rpm
+      curl -${SILENT}o ${DEST_PATH}/filebeat-oss-${ES_VERSION}-x86_64.rpm ${FILEBEAT_RPM_BASE_URL}/filebeat-oss-${ES_VERSION}-x86_64.rpm
     ;;
-    "rpm aarch64")
-      rm -f${VERBOSE} ${DEST_PATH}/* # Clean folder before downloading specific versions
-      curl -${SILENT}o ${DEST_PATH}/wazuh-manager-${WAZUH_VERSION}-1.aarch64.rpm ${WAZUH_RPM_BASE_URL}/wazuh-manager-${WAZUH_VERSION}-1.aarch64.rpm
-      curl -${SILENT}o ${DEST_PATH}/filebeat-oss-${ES_VERSION}-x86_64.rpm ${WAZUH_RPM_BASE_URL}/filebeat-oss-${ES_VERSION}-x86_64.rpm
-    ;;
+    #"rpm aarch64")
+    #  rm -f${VERBOSE} ${DEST_PATH}/* # Clean folder before downloading specific versions
+    #  curl -${SILENT}o ${DEST_PATH}/wazuh-manager-${WAZUH_VERSION}-1.aarch64.rpm ${WAZUH_RPM_BASE_URL}/wazuh-manager-${WAZUH_VERSION}-1.aarch64.rpm
+    #  curl -${SILENT}o ${DEST_PATH}/filebeat-oss-${ES_VERSION}-x86_64.rpm ${FILEBEAT_RPM_BASE_URL}/filebeat-oss-${ES_VERSION}-x86_64.rpm
+    #;;
     *)
       print_unknown_args
       exit 0
@@ -87,22 +89,27 @@ get_opendistro_packages(){
   case "$PACKAGE $ARCH" in
     "deb x86_64")
       rm -f${VERBOSE} ${DEST_PATH}/* # Clean folder before downloading specific versions
-      curl -${SILENT}o ${DEST_PATH}/opendistro-anomaly-detection_1.13.0.0-1_all.deb ${OD_DEB_BASE_URL}/opendistro-anomaly-detection_1.13.0.0-1_all.deb
-      curl -${SILENT}o ${DEST_PATH}/opendistro-reports-scheduler_1.13.0.0-1_all.deb ${OD_DEB_BASE_URL}/opendistro-reports-scheduler_1.13.0.0-1_all.deb
-      curl -${SILENT}o ${DEST_PATH}/opendistro-knn_1.13.0.0-1_all.deb ${OD_DEB_BASE_URL}/opendistro-knn_1.13.0.0-1_all.deb
-      curl -${SILENT}o ${DEST_PATH}/elasticsearch-oss_${ES_VERSION}_amd64.deb ${OD_DEB_BASE_URL}/elasticsearch-oss_${ES_VERSION}_amd64.deb
-      curl -${SILENT}o ${DEST_PATH}/opendistro-performance-analyzer_1.13.0.0-1_all.deb ${OD_DEB_BASE_URL}/opendistro-performance-analyzer_1.13.0.0-1_all.deb
-      curl -${SILENT}o ${DEST_PATH}/opendistro-asynchronous-search_1.13.0.1-1_all.deb ${OD_DEB_BASE_URL}/opendistro-asynchronous-search_1.13.0.1-1_all.deb
-      curl -${SILENT}o ${DEST_PATH}/opendistro-knnlib_1.13.0.0_amd64.deb ${OD_DEB_BASE_URL}/opendistro-knnlib_1.13.0.0_amd64.deb
-      curl -${SILENT}o ${DEST_PATH}/opendistro-alerting_1.13.1.0-1_all.deb ${OD_DEB_BASE_URL}/opendistro-alerting_1.13.1.0-1_all.deb
-      curl -${SILENT}o ${DEST_PATH}/opendistro-security_1.13.1.0-1_all.deb ${OD_DEB_BASE_URL}/opendistro-security_1.13.1.0-1_all.deb
-      curl -${SILENT}o ${DEST_PATH}/opendistroforelasticsearch_1.13.2-1_amd64.deb ${OD_DEB_BASE_URL}/opendistroforelasticsearch_1.13.2-1_amd64.deb
-      curl -${SILENT}o ${DEST_PATH}/opendistro-index-management_1.13.2.0-1_all.deb ${OD_DEB_BASE_URL}/opendistro-index-management_1.13.2.0-1_all.deb
-      curl -${SILENT}o ${DEST_PATH}/opendistro-job-scheduler_1.13.0.0-1_all.deb ${OD_DEB_BASE_URL}/opendistro-job-scheduler_1.13.0.0-1_all.deb
-      curl -${SILENT}o ${DEST_PATH}/opendistro-sql_1.13.2.0-1_all.deb ${OD_DEB_BASE_URL}/opendistro-sql_1.13.2.0-1_all.deb
+
+      curl -${SILENT}o ${DEST_PATH}/elasticsearch-oss-${ES_VERSION}-amd64.deb ${ESOSS_DEB_BASE_URL}/elasticsearch-oss-${ES_VERSION}-amd64.deb
+
+      curl -${SILENT}o ${DEST_PATH}/opendistro-anomaly-detection_1.13.0.0-1_all.deb ${OD_DEB_BASE_URL}/opendistro-anomaly-detection/opendistro-anomaly-detection_1.13.0.0-1_all.deb
+      curl -${SILENT}o ${DEST_PATH}/opendistro-reports-scheduler_1.13.0.0-1_all.deb ${OD_DEB_BASE_URL}/opendistro-reports-scheduler/opendistro-reports-scheduler_1.13.0.0-1_all.deb
+      curl -${SILENT}o ${DEST_PATH}/opendistro-knn_1.13.0.0-1_all.deb ${OD_DEB_BASE_URL}/opendistro-knn/opendistro-knn_1.13.0.0-1_all.deb
+      curl -${SILENT}o ${DEST_PATH}/opendistro-performance-analyzer_1.13.0.0-1_all.deb ${OD_DEB_BASE_URL}/opendistro-performance-analyzer/opendistro-performance-analyzer_1.13.0.0-1_all.deb
+      curl -${SILENT}o ${DEST_PATH}/opendistro-asynchronous-search_1.13.0.1-1_all.deb ${OD_DEB_BASE_URL}/opendistro-asynchronous-search/opendistro-asynchronous-search_1.13.0.1-1_all.deb
+      curl -${SILENT}o ${DEST_PATH}/opendistro-knnlib_1.13.0.0_amd64.deb ${OD_DEB_BASE_URL}/opendistro-knnlib/opendistro-knnlib_1.13.0.0_amd64.deb
+      curl -${SILENT}o ${DEST_PATH}/opendistro-alerting_1.13.1.0-1_all.deb ${OD_DEB_BASE_URL}/opendistro-alerting/opendistro-alerting_1.13.1.0-1_all.deb
+      curl -${SILENT}o ${DEST_PATH}/opendistro-security_1.13.1.0-1_all.deb ${OD_DEB_BASE_URL}/opendistro-security/opendistro-security_1.13.1.0-1_all.deb
+      curl -${SILENT}o ${DEST_PATH}/opendistroforelasticsearch_1.13.2-1_amd64.deb ${OD_DEB_BASE_URL}/opendistroforelasticsearch/opendistroforelasticsearch_1.13.2-1_amd64.deb
+      curl -${SILENT}o ${DEST_PATH}/opendistro-index-management_1.13.2.0-1_all.deb ${OD_DEB_BASE_URL}/opendistro-index-management/opendistro-index-management_1.13.2.0-1_all.deb
+      curl -${SILENT}o ${DEST_PATH}/opendistro-job-scheduler_1.13.0.0-1_all.deb ${OD_DEB_BASE_URL}/opendistro-job-scheduler/opendistro-job-scheduler_1.13.0.0-1_all.deb
+      curl -${SILENT}o ${DEST_PATH}/opendistro-sql_1.13.2.0-1_all.deb ${OD_DEB_BASE_URL}/opendistro-sql/opendistro-sql_1.13.2.0-1_all.deb
     ;;
     "rpm x86_64")
       rm -f${VERBOSE} ${DEST_PATH}/* # Clean folder before downloading specific versions
+
+      curl -${SILENT}o ${DEST_PATH}/elasticsearch-oss-${ES_VERSION}-x86_64.rpm ${ESOSS_RPM_BASE_URL}/elasticsearch-oss-${ES_VERSION}-x86_64.rpm
+
       curl -${SILENT}o ${DEST_PATH}/opendistro-alerting-1.13.1.0.rpm ${OD_RPM_BASE_URL}/opendistro-alerting-1.13.1.0.rpm
       curl -${SILENT}o ${DEST_PATH}/opendistro-anomaly-detection-1.13.0.0.rpm ${OD_RPM_BASE_URL}/opendistro-anomaly-detection-1.13.0.0.rpm
       curl -${SILENT}o ${DEST_PATH}/opendistro-asynchronous-search-1.13.0.1.rpm ${OD_RPM_BASE_URL}/opendistro-asynchronous-search-1.13.0.1.rpm
@@ -115,7 +122,6 @@ get_opendistro_packages(){
       curl -${SILENT}o ${DEST_PATH}/opendistro-security-1.13.1.0.rpm ${OD_RPM_BASE_URL}/opendistro-security-1.13.1.0.rpm
       curl -${SILENT}o ${DEST_PATH}/opendistro-sql-1.13.2.0.rpm ${OD_RPM_BASE_URL}/opendistro-sql-1.13.2.0.rpm
       curl -${SILENT}o ${DEST_PATH}/opendistroforelasticsearch-1.13.2-linux-x64.rpm ${OD_RPM_BASE_URL}/opendistroforelasticsearch-1.13.2-linux-x64.rpm
-      curl -${SILENT}o ${DEST_PATH}/elasticsearch-oss-${ES_VERSION}-x86_64.rpm ${OD_RPM_BASE_URL}/elasticsearch-oss-${ES_VERSION}-x86_64.rpm
     ;;
     *)
       print_unknown_args
@@ -207,6 +213,7 @@ parse_arguments() {
   POSITIONAL=()
   
   if [ $# = 0 ]; then
+    printf "Missing arguments\n\n"
     print_help
     exit 0
   fi
@@ -224,11 +231,11 @@ parse_arguments() {
         shift # past argument
         shift # past value
         ;;
-      -a|--architecture)
-        ARCH="$2"
-        shift # past argument
-        shift # past value
-        ;;
+      #-a|--architecture)
+      #  ARCH="$2"
+      #  shift # past argument
+      #  shift # past value
+      #  ;;
       -v|--verbose)
         SILENT=""
         VERBOSE="v"
@@ -262,7 +269,8 @@ parse_arguments() {
 
 print_help(){
   
-  printf "Usage: $0 [OPTION]...\n\nMandatory options\n\t-p, --packages <deb|rpm>\t\t\tPackage file format\n\nOther options\n\t-a, --architecture <x86_64|aarch64>\t\tArchitecture type (Default: x86_64)\n\t-w=<version>, --wazuh-version=<version>\t\tSelect specific Wazuh manager version\n\t-e=<version>, --elastic-version=<version>\tSelect specific ELK version\n\t-v, --verbose\t\t\t\t\tShow detailed output\n\t-h, --help\t\t\t\t\tShow this help\n"
+  #printf "\t-a, --architecture <x86_64|aarch64>\t\tArchitecture type (Default: x86_64)\n"
+  printf "Usage: $0 [OPTIONS]\n\nMandatory options\n\t-p, --packages <deb|rpm>\t\t\t\tPackage file format\n\nOther options\n\t-w=<version>, --wazuh-version=<version>\t\tSelect specific Wazuh manager version\n\t-e=<version>, --elastic-version=<version>\tSelect specific ELK version\n\t-v, --verbose\t\t\t\t\t\tShow detailed output\n\t-h, --help\t\t\t\t\t\tShow this help\n"
 
 }
 

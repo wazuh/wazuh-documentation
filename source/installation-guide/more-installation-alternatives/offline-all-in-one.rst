@@ -6,14 +6,19 @@
 Offline all-in-one installation
 ===============================
 
-You can install Wazuh even when there is no connection to the Internet. Installing the solution offline involves downloading the Wazuh components to later install them on a system with no internet connection. Although here the Wazuh server and Elastic Stack are installed and configured on the same host in an all-in-one deployment, each component can also be installed on a separate host as a distributed deployment, depending on the environment needs. To learn more about each component and its capabilities, check the :ref:`Components <components>` section. 
+You can install Wazuh even when there is no connection to the Internet. Installing the solution offline involves downloading the Wazuh components to later install them on a system with no internet connection. Although here the Wazuh server and Elastic Stack are installed and configured on the same host in an all-in-one deployment, each component can also be installed on a separate host as a distributed deployment, depending on your environment needs. To learn more about each component and its capabilities, check the :ref:`Components <components>` section. 
 
-.. note:: Root privileges are required to execute all the commands.
+.. note::
+  * Root privileges are required to execute all the commands.
+  * ``curl``, ``tar``, ``setcap``, and ``gnupg`` are used in this guide and need to be preinstalled in the target system where the offline installation will be carried out.
 
 Download the packages and configuration files
 ---------------------------------------------
 
-#. Replace ``<deb|rpm>`` in the following commands with your choice of package format and run them from a system with internet connection. This action executes a script that downloads all required files for the offline installation on `x86_64` architectures. Add ``-a aarch64`` if you want to download files for `ARM64`  architectures.
+#. Replace ``<deb|rpm>`` in the following commands with your choice of package format and run them from a system with internet connection. This action executes a script that downloads all required files for the offline installation on `x86_64` architectures.
+
+    ..
+      Add ``-a aarch64`` if you want to download files for `ARM64`  architectures.
 
     .. tabs::
 
@@ -38,7 +43,7 @@ Install Wazuh and the components from local files
 Installing the Wazuh manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Run the following command to import the Wazuh key and install the Wazuh manager.
+#. Run the following commands to import the Wazuh key and install the Wazuh manager.
 
     .. tabs::
 
@@ -75,13 +80,13 @@ Installing Elasticsearch
 
         .. code-block:: console
         
-          # rpm -i ./opendistro-packages/*.rpm > ODfE_output.txt
+          # rpm -i ./opendistro-packages/*.rpm > opendistro_output.txt
 
       .. group-tab:: Deb
 
         .. code-block:: console
         
-          # dpkg -i ./opendistro-packages/*.deb > ODfE_output.txt
+          # dpkg -i ./opendistro-packages/*.deb > opendistro_output.txt
 
 #. Move a copy of the configuration files to the appropriate location.
 
@@ -237,13 +242,11 @@ Installing Filebeat
     .. include:: /_templates/installations/elastic/common/enable_filebeat.rst
 
 
-#. Run the following commands to make sure Filebeat is successfully installed and one shard only is configured.
+#. Run the following command to make sure Filebeat is successfully installed.
 
     .. code-block:: console
 
       # filebeat test output
-
-    Expand the output to see an example response.
 
     .. code-block:: none
      :class: output accordion-output
@@ -263,11 +266,11 @@ Installing Filebeat
        talk to server... OK
        version: 7.10.2
 
+    To check only one shard has been configured, you can run the following command.
+    
     .. code-block:: console
 
-     # curl "https://localhost:9200/_template/wazuh?pretty&filter_path=wazuh.settings.index.number_of_shards" -k -u admin:admin
-
-    Expand the output to see an example response.
+     # curl -k -u admin:admin "https://localhost:9200/_template/wazuh?pretty&filter_path=wazuh.settings.index.number_of_shards"
 
     .. code-block:: none
      :class: output accordion-output
