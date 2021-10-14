@@ -217,14 +217,15 @@ key_request
 The key polling settings are configured inside this tag.
 
 .. code-block:: xml
-  <key_request>
-    <enabled>yes</enabled>
-    <exec_path>/usr/bin/python /home/script.py</exec_path>
-    <socket>/path/to/socket</socket>
-    <timeout>60</timeout>
-    <threads>1</threads>
-    <queue_size>1024</queue_size>
-  </key_request>
+
+    <key_request>
+      <enabled>yes</enabled>
+      <exec_path>/usr/bin/python /home/script.py</exec_path>
+      <socket>/path/to/socket</socket>
+      <timeout>60</timeout>
+      <threads>1</threads>
+      <queue_size>1024</queue_size>
+    </key_request>
 
 Configuration options of the key polling.
 
