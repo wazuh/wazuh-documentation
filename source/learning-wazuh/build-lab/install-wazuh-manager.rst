@@ -71,8 +71,6 @@ listener are in place:
       tcp        0      0 0.0.0.0:1514            0.0.0.0:*               LISTEN      14311/wazuh-remoted
       tcp        0      0 0.0.0.0:1515            0.0.0.0:*               LISTEN      14263/wazuh-authd
 
-.. versionadded:: 4.0.0
-
 The Wazuh API will be installed along the Wazuh manager by default. No extra steps or requirements are needed to install it.
 
 .. note::

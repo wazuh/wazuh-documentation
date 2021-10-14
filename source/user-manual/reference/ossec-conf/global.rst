@@ -388,8 +388,6 @@ For example:
 rotate_interval
 ^^^^^^^^^^^^^^^
 
-.. versionadded:: 3.1.0
-
 This option sets the interval between file rotation. The range of possible values is from ``10m`` (10 minutes) to ``1d`` (1 day).
 
 +-------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
@@ -411,8 +409,6 @@ Example:
 max_output_size
 ^^^^^^^^^^^^^^^
 
-.. versionadded:: 3.1.0
-
 This sets the size limit of alert files with a maximum allowed value of 1TiB and a minimum allowed value of 1MiB.
 
 +-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
@@ -429,8 +425,6 @@ Example:
 
 queue_size
 ^^^^^^^^^^
-
-.. versionadded:: 3.3.0
 
 This sets the size of the message input buffer in Analysisd (number of events).
 
@@ -450,8 +444,6 @@ Example:
 
 agents_disconnection_time
 ^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. versionadded:: 4.1.0
 
 This sets the time after which the manager considers an agent as disconnected since its last keepalive.
 
@@ -475,8 +467,6 @@ Example:
 
 agents_disconnection_alert_time
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. versionadded:: 4.1.0
 
 This sets the time after which an alert is generated since an agent was considered as disconnected.
 As this is a time-lapse after an agent is considered as disconnected because of the :ref:`disconnection time<reference_agents_disconnection_time>`, the minimum time frame to produce an alert taking the default values is 2m and 20s.

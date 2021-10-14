@@ -160,14 +160,13 @@ The attributes below are optional.
 +-------------+---------------------------------------+--------------+---------------+
 | Attribute   |              Description              | Value range  | Default value |
 +=============+=======================================+==============+===============+
+|             | .. versionadded:: 4.2.0               |              |               |
 |**max-size** | Allows to skip reading old events     |              |               |
 |             | from the last read if the length of   |  0 to 2GB    |     10MB      |
 |             | them exceeds a certain value in bytes.|              |               |
 |             |                                       |              |               |
 |             | Positive number followed by B, KB, MB |              |               |
 |             | and GB units are supported            |              |               |
-|             |                                       |              |               |
-|             | .. versionadded:: 4.2.0               |              |               |
 +-------------+---------------------------------------+--------------+---------------+
 
 .. note::
@@ -197,8 +196,6 @@ Example:
 
 label
 ^^^^^
-
-.. versionadded:: 3.0.0
 
 Used to add custom data in JSON events. Set `log_format`_ to ``json`` to use it.
 
@@ -251,8 +248,6 @@ The additional fields configured above would appear in the resulting event as be
 target
 ^^^^^^
 
-.. versionadded:: 3.3.0
-
 Target specifies the name of the socket where the output will be redirected. The socket must be defined previously.
 
 +--------------------+--------------------------------+
@@ -276,8 +271,6 @@ Set the format of the log to be read. **field is required**
 |                    | json               | Used for single-line JSON files and allows for customized labels to be added to JSON events.     |
 |                    |                    |                                                                                                  |
 |                    |                    | See also the tag `label`_ for more information.                                                  |
-|                    |                    |                                                                                                  |
-|                    |                    | .. versionadded:: 3.0.0                                                                          |
 +                    +--------------------+--------------------------------------------------------------------------------------------------+
 |                    | snort-full         | Used for Snort’s full-output format.                                                             |
 +                    +--------------------+--------------------------------------------------------------------------------------------------+
@@ -325,11 +318,10 @@ Set the format of the log to be read. **field is required**
 |                    |                    |                                                                                                  |
 |                    |                    | The format for this value is: <log_format>multi-line: NUMBER</log_format>                        |
 +                    +--------------------+--------------------------------------------------------------------------------------------------+
+|                    |                    | .. versionadded:: 4.2.0                                                                          |
 |                    | multi-line-regex   | Used to monitor applications that log variable amount lines with variable length per event.      |
 |                    |                    |                                                                                                  |
 |                    |                    | The behavior depends on `multiline_regex`_ option.                                               |
-|                    |                    |                                                                                                  |
-|                    |                    | .. versionadded:: 4.2.0                                                                          |
 +--------------------+--------------------+--------------------------------------------------------------------------------------------------+
 
 .. warning::
@@ -361,8 +353,6 @@ Sample Log message as analyzed by wazuh-analysisd:
 
 out_format
 ^^^^^^^^^^
-
-.. versionadded:: 3.3.0
 
 This option allows formatting logs from Logcollector using field substitution.
 
@@ -471,8 +461,6 @@ For example, we may want to read all the files from a directory, but exclude tho
 reconnect_time
 ^^^^^^^^^^^^^^
 
-.. versionadded:: 3.12.0
-
 Defines the interval of reconnection attempts when the Windows Event Channel service is down.
 
 +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -487,6 +475,7 @@ Defines the interval of reconnection attempts when the Windows Event Channel ser
 
 multiline_regex
 ^^^^^^^^^^^^^^^
+
 .. versionadded:: 4.2.0
 
 This specifies a regular expression, match criteria and replace option for logs with a variable amount of lines.

@@ -5,8 +5,6 @@
 wodle name="aws-s3"
 ===================
 
-.. versionadded:: 3.2.0
-
 .. topic:: XML section name
 
 	.. code-block:: xml
@@ -450,8 +448,6 @@ The access key ID for the IAM user with the permission to access the service.
 Service\\aws_log_groups
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-.. versionadded:: 4.0.0
-
 A comma-delimited list of log group names from where the logs should be extracted. Only works for CloudWatch Logs service.
 
 +--------------------+------------------------------------------------+
@@ -496,8 +492,6 @@ A valid role arn with permission to access the service.
 Service\\only_logs_after
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. versionadded:: 4.0.0
-
 A valid date, in YYYY-MMM-DD format. Only those logs from after that date will be parsed, the logs from before that date will be skipped. Only works for CloudWatch Logs service.
 
 +--------------------+-------------+
@@ -509,8 +503,6 @@ A valid date, in YYYY-MMM-DD format. Only those logs from after that date will b
 Service\\regions
 ^^^^^^^^^^^^^^^^
 
-.. versionadded:: 4.0.0
-
 A comma-delimited list of regions to limit parsing of logs. Only works for CloudWatch Logs service.
 
 +--------------------+----------------------------------------+
@@ -521,8 +513,6 @@ A comma-delimited list of regions to limit parsing of logs. Only works for Cloud
 
 Service\\remove_log_streams
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. versionadded:: 4.0.0
 
 Define whether or not to remove the log streams from the log groups after they are read by the module. Only works for CloudWatch Logs service.
 
