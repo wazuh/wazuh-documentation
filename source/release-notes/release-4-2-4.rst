@@ -23,13 +23,15 @@ Resolved issues
 
 This release resolves known issues. 
 
-[add component]
-^^^^^^^^^^^^^^^
+Manager
+^^^^^^^
 
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#xxxx <https://github.com/wazuh/wazuh/pull/xxxx>`_               xxx
+`#9158 <https://github.com/wazuh/wazuh/pull/9158>`_               This fix prevents files belonging to deleted agents from remaining in the manager.
+`#10432 <https://github.com/wazuh/wazuh/pull/10432>`_             Fixed inaccurate agent group file cleanup in the database sync module. Now, the module syncs up the agent database from ``client.keys`` before cleaning up the groups folder.
+`#10479 <https://github.com/wazuh/wazuh/pull/10479>`_             This fix prevents the manager from corrupting the agent data integrity when the disk gets full.
 ==============================================================    =============
 
 
