@@ -64,8 +64,8 @@ The ``wazuh-authd`` program can automatically add a Wazuh agent to a Wazuh manag
   Paths can be referred to relative paths under the Wazuh installation directory, or full paths.
 
   
-.. topic:: Key polling wodle
+.. topic:: Key request
 
-  The key polling tag allows you to fetch a client key from an external source, for example, a database. This provides a mechanism to auto-register agents when they are not registered on a manager instance but reporting to it.
+  The key request tag allows you to fetch a client key from an external source, for example, a database. This provides a mechanism to auto-register agents when they are not registered on a manager instance but reporting to it.
 
 .. _`SSL ciphers`: https://www.openssl.org/docs/man1.1.0/apps/ciphers.html

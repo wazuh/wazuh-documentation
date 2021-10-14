@@ -214,10 +214,10 @@ The format of this parameter is described in `SSL ciphers <https://www.openssl.o
 key_request
 ^^^^^^^^^^^
 
-The key polling settings are configured inside this tag.
+The key request settings are configured inside this tag.
 
 .. code-block:: xml
-
+    
     <key_request>
       <enabled>yes</enabled>
       <exec_path>/usr/bin/python /home/script.py</exec_path>
@@ -227,7 +227,7 @@ The key polling settings are configured inside this tag.
       <queue_size>1024</queue_size>
     </key_request>
 
-Configuration options of the key polling.
+Configuration options of the key request.
 
 Options
 -------
@@ -242,7 +242,7 @@ Options
 enabled
 ^^^^^^^
 
-Enable the key polling.
+Enable the key request.
 
 +--------------------+-----------------------------+
 | **Default value**  | yes                         |
@@ -325,12 +325,4 @@ Default configuration
     <ssl_manager_cert>etc/sslmanager.cert</ssl_manager_cert>
     <ssl_manager_key>etc/sslmanager.key</ssl_manager_key>
     <ssl_auto_negotiate>no</ssl_auto_negotiate>
-    <key_request>
-      <enabled>yes</enabled>
-      <exec_path>/usr/bin/python /home/script.py</exec_path>
-      <socket>/path/to/socket</socket>
-      <timeout>60</timeout>
-      <threads>1</threads>
-      <queue_size>1024</queue_size>
-    </key_request>
   </auth>
