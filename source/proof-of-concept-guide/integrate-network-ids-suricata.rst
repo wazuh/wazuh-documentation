@@ -19,7 +19,7 @@ On Linux RHEL monitored endpoint:
 
 - Download and extract Emerging rules:
 
-    .. code-block:: XML
+    .. code-block:: console
 
         cd /tmp/
         curl -LO https://rules.emergingthreats.net/open/suricata-5.0.4/emerging.rules.tar.gz

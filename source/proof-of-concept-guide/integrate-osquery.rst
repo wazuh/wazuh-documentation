@@ -18,7 +18,7 @@ On the monitored endpoint (RHEL Linux):
 
 - Set the content of the Osquery configuration file ``/etc/osquery/osquery.conf`` to:
 
-    .. code-block:: XML
+    .. code-block:: console
 
         {
         "options": {
