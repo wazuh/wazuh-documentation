@@ -6,11 +6,12 @@
 Offline all-in-one installation
 ===============================
 
-You can install Wazuh even when there is no connection to the Internet. Installing the solution offline involves downloading the Wazuh components to later install them on a system with no internet connection. Although here the Wazuh server and Elastic Stack are installed and configured on the same host in an all-in-one deployment, each component can also be installed on a separate host as a distributed deployment, depending on your environment needs. To learn more about each component and its capabilities, check the :ref:`Components <components>` section. 
+You can install Wazuh even when there is no connection to the Internet. Installing the solution offline involves downloading the Wazuh components to later install them on a system with no internet connection. Although in this section the Wazuh server and Elastic Stack are installed and configured on the same host in an all-in-one deployment, each component can also be installed on a separate host as a distributed deployment, depending on your environment needs. To learn more about each component and its capabilities, check the :ref:`Components <components>` section. 
 
 .. note::
   * Root privileges are required to execute all the commands.
-  * ``curl``, ``tar``, ``setcap``, and ``gnupg`` are used in this guide and need to be preinstalled in the target system where the offline installation will be carried out.
+  * ``curl``, ``tar``, and ``setcap`` are used in this guide and need to be preinstalled in the target system where the offline installation will be carried out. ``gnupg`` might need to be preinstalled as well for Debian based systems.
+  * You might want to use ``unalias cp`` to avoid being asked for confirmation to overwrite files when `alias cp` shows `cp` as the alias for `cp -i`.
 
 Download the packages and configuration files
 ---------------------------------------------
@@ -92,7 +93,6 @@ Installing Elasticsearch
 
     .. code-block:: console
     
-      # unalias cp
       # cp ./opendistro_files/elasticsearch/elasticsearch.yml /etc/elasticsearch/
       # cp ./opendistro_files/elasticsearch/roles.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/
       # cp ./opendistro_files/elasticsearch/roles_mapping.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/
@@ -139,7 +139,7 @@ Installing Elasticsearch
 
       # /usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer
 
-#. Run the following command to restart the service and check that the installation is successful.
+#. Run the following commands to restart the service and check that the installation is successful.
 
     .. tabs::
 

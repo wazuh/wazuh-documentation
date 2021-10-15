@@ -270,13 +270,13 @@ parse_arguments() {
 print_help(){
   
   #printf "\t-a, --architecture <x86_64|aarch64>\t\tArchitecture type (Default: x86_64)\n"
-  printf "Usage: $0 [OPTIONS]\n\nMandatory options\n\t-p, --packages <deb|rpm>\t\t\t\tPackage file format\n\nOther options\n\t-w=<version>, --wazuh-version=<version>\t\tSelect specific Wazuh manager version\n\t-e=<version>, --elastic-version=<version>\tSelect specific ELK version\n\t-v, --verbose\t\t\t\t\t\tShow detailed output\n\t-h, --help\t\t\t\t\t\tShow this help\n"
+  printf "Usage: $0 [OPTIONS]\n\nMandatory options\n\t-p, --packages <deb|rpm>\t\t\tPackage file format\n\nOther options\n\t-w=<version>, --wazuh-version=<version>\t\tSelect specific Wazuh manager version\n\t-e=<version>, --elastic-version=<version>\tSelect specific ELK version\n\t-v, --verbose\t\t\t\t\tShow detailed output\n\t-h, --help\t\t\t\t\tShow this help\n"
 
 }
 
 print_unknown_args(){
 
-  printf "Not available for packages type and/or target architecture. Try '$0 --help' for more information\n"
+  printf "Not available for the packages format. Try '$0 --help' for more information\n"
 
 }
 
