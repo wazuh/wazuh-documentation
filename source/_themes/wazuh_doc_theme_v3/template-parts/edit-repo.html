@@ -30,21 +30,21 @@
     {% if hasdoc(pagename) %}
     {% if display_github %}
     {% if check_meta and 'github_url' in meta %}
-    <!-- User defined GitHub URL -->
+    {# User defined GitHub URL #}
     <a target="_blank" href="{{ meta['github_url'] }}"> <i class="fas fa-pencil-alt" aria-hidden="true"></i> {{ _('Edit on GitHub') }}</a>
     {% else %}
     <a target="_blank" href="https://{{ github_host|default("github.com") }}/{{ github_user }}/{{ github_repo }}/{{ theme_vcs_pageview_mode|default("blob") }}/{{ github_version }}{{ conf_py_path }}{{ pagename }}{{ suffix }}"> <i class="fas fa-pencil-alt" aria-hidden="true"></i> {{ _('Edit on GitHub') }}</a>
     {% endif %}
     {% elif display_bitbucket %}
     {% if check_meta and 'bitbucket_url' in meta %}
-    <!-- User defined Bitbucket URL -->
+    {# User defined Bitbucket URL #}
     <a target="_blank" href="{{ meta['bitbucket_url'] }}"> <i class="fab fa-bitbucket" aria-hidden="true"></i> {{ _('Edit on Bitbucket') }}</a>
     {% else %}
     <a target="_blank" href="https://bitbucket.org/{{ bitbucket_user }}/{{ bitbucket_repo }}/src/{{ bitbucket_version}}{{ conf_py_path }}{{ pagename }}{{ suffix }}?mode={{ theme_vcs_pageview_mode|default("view") }}"> <i class="fab fa-bitbucket" aria-hidden="true"></i> {{ _('Edit on Bitbucket') }}</a>
     {% endif %}
     {% elif display_gitlab %}
     {% if check_meta and 'gitlab_url' in meta %}
-    <!-- User defined GitLab URL -->
+    {# User defined GitLab URL #}
     <a target="_blank" href="{{ meta['gitlab_url'] }}"> <i class="fab fa-gitlab" aria-hidden="true"></i> {{ _('Edit on GitLab') }}</a>
     {% else %}
     <a target="_blank" href="https://{{ gitlab_host|default("gitlab.com") }}/{{ gitlab_user }}/{{ gitlab_repo }}/{{ theme_vcs_pageview_mode|default("blob") }}/{{ gitlab_version }}{{ conf_py_path }}{{ pagename }}{{ suffix }}"> <i class="fab fa-gitlab" aria-hidden="true"></i> {{ _('Edit on GitLab') }}</a>
@@ -55,6 +55,6 @@
     <a target="_blank" href="{{ pathto('_sources/' + sourcename, true)|e }}" rel="nofollow"> {{ _('View page source') }}</a>
     {% endif %}
     {% endif %}
-  </span> <!-- // .edit-repo -->
+  </span>
   {% endif %}
   {% endblock %}

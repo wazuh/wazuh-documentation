@@ -201,3 +201,11 @@ These scripts minifies the JavaScript files that needs to stay separated:
 #### Force UNIX EOF in css and js files
 `eol:lf`: Forces UNIX end of line (LF). This is required as the EOL of the files that the package `cleancss` (for minification) creates, depends on the operating system. This script is included by all the other scripts for building the CSS files, though it is applied to JavaScript files too.
 
+#### Watch
+
+`watch`: Waits for changes in the SCSS files or the source JavaScript files and then runs `build` to build the main assets.
+`watch-all`: Waits for changes in the SCSS files or the source JavaScript files and then runs `build-all` to build all the assets.
+`watch:style`: Waits for changes in the SCSS files and then runs `css:build` to build the main CSS files.
+`watch:style-all`: Waits for changes in the SCSS files and then runs `css:build-all` to build all the CSS files.
+`watch:scripts`: Waits for changes in the source JavaScript files and then runs `js:build` to build the main scripts.
+`watch:scripts-all`: Waits for changes in the source JavaScript files and then runs `js:build-all` to build all the scripts.

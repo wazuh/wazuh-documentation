@@ -86,7 +86,7 @@ if "%1" == "redirects" (
 )
 
 if "%1" == "theme" (
-	cd source/_themes/wazuh_doc_theme_v3 && npm run build
+	cd source/_themes/wazuh_doc_theme_v3 && npm run build-all
 	if errorlevel 1 (
 		echo.
 		echo.Error. The theme assets could not be updated.

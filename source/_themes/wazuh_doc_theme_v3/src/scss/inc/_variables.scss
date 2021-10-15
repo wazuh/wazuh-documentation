@@ -2,5 +2,40 @@
   Variables (inc)
 ----------------------------------------------------------------------------- */
 
-//Main colors
-$wzh-blue: #8af;
+/* -- Device screens variables ---------------------------------------------------------------------------- */
+
+$breakpoints: (
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  wzh-xl: 1300px,
+  xxl: 1600px,
+);
+
+/* -- Color variables ------------------------------------------------------------------------------------ */
+
+// Main colors - Light theme
+$wuiColorPrimary: #256BD1;
+$primaryLighter: #3585F9;
+$wuiMainColorAccent: #FEDD0B;
+
+$wuiColorWarning: #FF7A2F;
+$wuiColorDanger: #BD271E;
+$wuiColorSuccess: #2DA4AA;
+
+$wuiColorEmptyShade: #FFF;
+$wuiColorLightestShade: #EBF2FB;
+$wuiColorLightShade: #B7C6D7;
+$wuiColorMediumShade: #657C97;
+
+$wuiColorDarkShade: #545F73;
+$wuiColorDarkestShade: #292929;
+$wuiColorFullShade: #000000;
+
+/* -- Theme elements fixed dimensions ------------------------------------------------------------------------------------ */
+
+// Fixed dimensions
+$header-height: 77px;
+$left-sidebar-width: 385px;
+$right-sidebar-width: $left-sidebar-width;

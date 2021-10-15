@@ -3,6 +3,32 @@
   "version": "3.0.0",
   "description": "Wazuh is a free, open source and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response and compliance.",
   "main": "index.html",
+  "watch": {
+    "build": {
+      "patterns": ["src/js-source", "src/scss"],
+      "extensions": "js,scss"
+    },
+    "build-all": {
+      "patterns": ["src/js-source", "src/scss"],
+      "extensions": "js,scss"
+    },
+    "css:build": {
+      "patterns": ["src/scss"],
+      "extensions": "scss"
+    },
+    "css:build-all": {
+      "patterns": ["src/scss"],
+      "extensions": "scss"
+    },
+    "js:build": {
+      "patterns": ["src/js-source"],
+      "extensions": "js"
+    },
+    "js:build-all": {
+      "patterns": ["src/js-source"],
+      "extensions": "js"
+    }
+  },
   "scripts": {
     "css:lint": "stylelint --config config/.stylelintrc --syntax scss \"src/scss/**/*.scss\" --cache --cache-location \"build/.stylelintcache/\"",
     "css:lint:fix": "stylelint --config config/.stylelintrc --syntax scss \"src/scss/**/*.scss\" --fix --cache --cache-location \"build/.stylelintcache/\"",
@@ -15,7 +41,7 @@
     "css:compile:page:not-found": "node-sass --output-style expanded --source-map true --source-map-contents true --precision 6 src/scss/pages/not-found.scss src/css/not-found.css",
     "css:compile:page:search": "node-sass --output-style expanded --source-map true --source-map-contents true --precision 6 src/scss/pages/search-results.scss src/css/search-results.css",
     "css:compile": "run-p css:compile:page:*",
-    "css:compile-all": "run-p css:compile:*",
+    "css:compile-all": "run-p css:compile css:compile:*",
     "css:prefix": "postcss --config config/postcss.config.js --replace \"src/css/**/*.css\" \"!src/css/**/*.min.css\"",
     "css:minify:google-fonts": "cd src/css && cleancss -O1 --output ../../static/css/inline/google-fonts.min.css google-fonts.css",
     "css:minify:bootstrap": "cd src/css && cleancss -O1 --source-map --source-map-inline-sources --output ../../static/css/min/bootstrap.min.css bootstrap.css",
@@ -26,7 +52,7 @@
     "css:minify:page:not-found": "cd src/css && cleancss -O1 --source-map --source-map-inline-sources --output ../../static/css/min/not-found.min.css not-found.css",
     "css:minify:page:search": "cd src/css && cleancss -O1 --source-map --source-map-inline-sources --output ../../static/css/min/search-results.min.css search-results.css",
     "css:minify": "run-p css:minify:page:*",
-    "css:minify-all": "run-p css:minify:*",
+    "css:minify-all": "run-p css:minify css:minify:*",
     "css:build:google-fonts": "run-s css:compile:google-fonts css:prefix css:minify:google-fonts eol:lf",
     "css:build:bootstrap": "run-s css:compile:bootstrap css:prefix css:minify:bootstrap eol:lf",
     "css:build:moved-content": "run-s css:compile:moved-content css:prefix css:minify:moved-content eol:lf",
@@ -58,9 +84,15 @@
     "js:build": "run-s js:build:page:* js:build:redirects",
     "js:build-all": "run-S js:build js:build:bootstrap js:build:moved-content js:build:index-redirect",
     "js:clean": "rimraf \"src/js/**/*.js\" && rimraf \"src/js/**/*.js.map\"",
-    "build": "run-s css:build js:build",
-    "build-all": "run-s css:build-all js:build-all",
-    "clean": "run-p css:clean js:clean"
+    "build": "run-s js:build css:build",
+    "build-all": "run-s js:build-all css:build-all",
+    "clean": "run-p css:clean js:clean",
+    "watch": "npm-watch build",
+    "watch-all": "npm-watch build-all",
+    "watch:style": "npm-watch css:build",
+    "watch:style-all": "npm-watch css:build-all",
+    "watch:scripts": "npm-watch js:build",
+    "watch:scripts-all": "npm-watch js:build-all"
   },
   "repository": {
     "type": "git",
@@ -86,6 +118,7 @@
     "eslint-config-google": "^0.14.0",
     "node-sass": "^6.0.1",
     "npm-run-all": "^4.1.5",
+    "npm-watch": "^0.11.0",
     "popper.js": "^1.16.1",
     "postcss": "^8.3.8",
     "postcss-cli": "^9.0.1",

@@ -6,3 +6,12 @@
 
 @import "../components/search-box";
 @import "../components/global-toc";
+
+#left-sidebar {
+  grid-area: left-sidebar;
+  width: $left-sidebar-width;
+  
+  @include media-min(lg) {
+    display: block;
+  }
+}

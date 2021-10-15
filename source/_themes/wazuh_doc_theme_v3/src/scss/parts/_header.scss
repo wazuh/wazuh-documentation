@@ -5,5 +5,15 @@
 ----------------------------------------------------------------------------- */
 
 @import "../components/brand";
-@import "../components/navbar";
+@import "../components/navbar-menu";
 @import "../components/version-selector";
+
+header {
+  background: $wuiColorEmptyShade;
+  height: $header-height;
+  box-shadow: 0px 4px 12px 0px rgba($primaryLighter, .15);
+  
+  .navbar {
+    height: $header-height;
+  }
+}

@@ -4,10 +4,9 @@
   {%- set nav_version = current_version %}
 {% endif %}
 {% if nav_version %}
-<div id="select-version" class="btn-group">
-  <button type="button" class="btn btn-default dropdown-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<div id="version-selector" class="btn-group ml-3">
+  <button type="button" class="btn dropdown-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
   <span class="current"></span>
-  <span class="caret"></span>
   </button>
   <ul class="dropdown-menu dropdown-menu-right"></ul>
 </div>

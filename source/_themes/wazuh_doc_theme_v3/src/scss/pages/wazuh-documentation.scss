@@ -12,6 +12,11 @@
 @import "../parts/content-column";
 @import "../parts/right-sidebar";
 
-body {
-  background-color: $wzh-blue;
+.inner-body {
+  display: grid;
+  align-items: stretch;
+  grid-template-columns: $left-sidebar-width 1fr $right-sidebar-width;
+  grid-template-rows: 1fr;
+  grid-template-areas: 
+    "left-sidebar central-column right-sidebar";
 }

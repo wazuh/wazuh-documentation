@@ -56,17 +56,19 @@
 
 {%- macro css() -%}
   {%- if pagename in special_pages %}
-    {#- Removed sphinx_tabs files for this template -#}
+    {#- Remove extension files for this template -#}
     {%- set temp_css_files = []  -%}
     {%- for cssfile in css_files -%}
-      {%- if 'sphinx_tabs' not in cssfile -%}
+      {%- if 'sphinx_tabs' not in cssfile and 'wazuh-doc-images' not in cssfile -%}
        {{- temp_css_files.append(cssfile)|default("", True) -}}
       {%- endif -%}
     {%- endfor -%}
     {%- set css_files = temp_css_files -%}
   {% endif -%}
   {%- if pagename != 'moved-content' %}
-    <link rel="stylesheet" href="{{ pathto(css_files[0], 1) }}" type="text/css">
+    {%- for cssfile in css_files -%}
+    <link rel="stylesheet" href="{{ pathto(cssfile, 1) }}" type="text/css">
+    {%- endfor -%}
   {% endif -%}
     <link rel="stylesheet" href="{{ pathto('_static/'+get_css_by_page(pagename), 1) }}" type="text/css">
 {%- endmacro %}
@@ -170,7 +172,7 @@
     {%- endblock ga %}
     {% endblock head -%}
   </head>
-  
+
   {%- if pagename in special_pages -%}
   {%- set body_class = pagename -%}
   {%- else -%}
@@ -189,5 +191,8 @@
     <script id="documentation_options" data-url_root="{{ pathto('', 1) }}" src="{{ pathto('_static/js/documentation_options.js', 1) }}"></script>
   {{- js() }}
   {% endblock after_footer -%}
+  {%- block light_box_display %}
+    {{- add_wazuh_light_box() }}
+  {%- endblock light_box_display -%}
   </body>
 </html>

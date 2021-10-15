@@ -1,8 +1,6 @@
 {% if (theme_prev_next_buttons_location == 'bottom' or theme_prev_next_buttons_location == 'both') and (next or prev) %}
-<!-- TODO: part-navigation -->
-<div class="row">
-  <div class="col">
-    <div class="navigation-buttons" role="navigation" aria-label="navigation">
+  PREV_NEXT
+    <div class="navigation-buttons d-none" role="navigation" aria-label="breadcrumb navigation">
       {% if prev %}
       <a href="{{ prev.link|e }}" class="btn btn-neutral" title="Previous. {{ prev.title|striptags|e }}" accesskey="p"><span class="fa fa-angle-left"></span> {{ prev.title|striptags|e }}</a>
       {% endif %}
@@ -10,6 +8,4 @@
       <a href="{{ next.link|e }}" class="btn btn-neutral float-right" title="Next. {{ next.title|striptags|e }}" accesskey="n">{{ next.title|striptags|e }} <span class="fa fa-angle-right"></span></a>
       {% endif %}
     </div>
-  </div>
-</div>
 {% endif %}

@@ -1,9 +1,11 @@
 <!-- TODO: part-sidebar-right -->
-<div id="localtoc-navbar">
-  <div class="edit-repo-wrapper">
+<div id="right-sidebar" class="sidebar">
+  <div class="sidebar-container">
+    RIGHT SIDEBAR
+    {% include "template-parts/light-dark-switch.html" %}
     {% include "template-parts/edit-repo.html" %}
+    <nav id="localtoc">
+      {{ toc }}
+    </nav>
   </div>
-  <nav id="localtoc">
-    {{ toc }}
-  </nav>
 </div>

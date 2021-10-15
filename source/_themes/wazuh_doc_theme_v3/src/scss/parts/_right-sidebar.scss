@@ -6,3 +6,8 @@
 
 @import "../components/mode-switch";
 @import "../components/local-toc";
+
+#right-sidebar {
+  grid-area: right-sidebar;
+  width: $right-sidebar-width;
+}

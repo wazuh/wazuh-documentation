@@ -9,3 +9,7 @@
 @import "../components/admonitions";
 @import "../components/code-blocks";
 @import "../components/customized-tabs";
+
+#central-column {
+  grid-area: central-column;
+}

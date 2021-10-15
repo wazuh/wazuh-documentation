@@ -1,2 +1,2 @@
-html{font-size:18px}
+body{font-family:Manrope,sans-serif;font-size:16px;font-weight:500px;padding-top:77px}body main img{max-width:100%}body .sidebar{position:relative}body .sidebar .sidebar-container{position:sticky;top:77px;width:100%;height:calc(100vh - $header-height);overflow:auto}body a{color:#256bd1}
 /*# sourceMappingURL=index.min.css.map */

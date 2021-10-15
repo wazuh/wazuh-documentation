@@ -8,21 +8,16 @@
 
 {%- extends "!wazuh_doc_theme_v3/layout.html" -%}
 {%- block body -%}
-{%- set is_defualt_page = pagename not in special_pages %}
 {%- block header %}
 {% include "template-parts/header.html" %}
 {% endblock header -%}
-    <div class="main-content-area">
+    <div class="inner-body">
       {% block sidebar1 -%}
         {% include "template-parts/sidebar-left.html" %}
       {% endblock sidebar1 -%}
       
       {%- block main_column -%}
-      <div class="main-column">
-        {% if is_defualt_page %}
-          {% include "template-parts/breadcrumbs.html" %}
-        {% endif %}
-        
+      <div id="central-column">      
         {%- block latest %}
           {%- set nav_version = version %}
           {% if current_version %}
@@ -30,7 +25,7 @@
           {% endif %}
           {% if nav_version and not is_latest_release %}
           <div class="no-latest-notice-wrapper">
-            <div class="no-latest-notice" data-version="{{ nav_version }}">
+            <div class="no-latest-notice">
               <div class="no-latest-icon-wrapper"><i class="fas fa-exclamation-triangle"></i></div>
               <div class="no-latest-text-wrapper"><span class="font-weight-bold d-none d-sm-inline-block">Warning:</span> This is the documentation for Wazuh {{ nav_version }}. Check out the docs for <a class="link-latest" href="#">the latest version of Wazuh</a>!</div>
             </div>
@@ -38,14 +33,17 @@
           {% endif %}
         {% endblock latest %}
         
+        {% if pagename not in special_pages %}
+          {% include "template-parts/breadcrumbs.html" %}
+        {% endif %}
+        
         {# Main content #}
         <main role="main">
         {{ body }}
-        </main>
-        
-        {% if is_defualt_page %}
-          {% include "template-parts/navigation.html" %}
+        {% if pagename not in special_pages %}
+        {% include "template-parts/navigation.html" %}
         {% endif %}
+        </main>  
       </div>
       {%- endblock main_column -%}
       

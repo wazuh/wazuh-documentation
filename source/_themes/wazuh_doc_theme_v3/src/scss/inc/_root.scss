@@ -2,6 +2,29 @@
   Root (inc)
 ----------------------------------------------------------------------------- */
 
-html {
-  font-size: 18px;
+body {
+  font-family: "Manrope", sans-serif;
+  font-size: 16px;
+  font-weight: 500px;
+  padding-top: $header-height;
+  
+  main img {
+    max-width: 100%;
+  }
+  
+  .sidebar {
+    position: relative;
+    
+    .sidebar-container {
+      position: sticky;
+      top: $header-height;
+      width: 100%;
+      height: calc(100vh - $header-height);
+      overflow: auto;
+    }
+  }
+  
+  a {
+    color: $wuiColorPrimary;
+  }
 }

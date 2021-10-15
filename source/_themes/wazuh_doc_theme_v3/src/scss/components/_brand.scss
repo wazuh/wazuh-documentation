@@ -3,3 +3,23 @@
 
   Style for the element containing the logo in the header.
 ----------------------------------------------------------------------------- */
+
+.navbar-brand {
+  display: flex;
+  justify-content: flex-end;
+  
+  a.logo-link {  
+    &.web {
+      padding-bottom: .3rem;
+    }
+    &.docs {
+      color: $wuiColorFullShade;
+      line-height: 2.15;
+      margin-left: 5px;
+      
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+}

@@ -104,7 +104,7 @@ jQuery(function($) {
   document.head.appendChild(canonicalTag);
 
   /* Initialize the tooltip of bootstrap */
-  $('#select-version [data-toggle="tooltip"]').tooltip();
+  $('#version-selector [data-toggle="tooltip"]').tooltip();
 
   /**
    * Add the current version to the version selector
@@ -112,7 +112,7 @@ jQuery(function($) {
   function checkCurrentVersion() {
     let selected = -1;
     let thisVersion = DOCUMENTATION_OPTIONS.VERSION;
-    const selectVersionCurrent = $('#select-version .current');
+    const selectVersionCurrent = $('#version-selector .current');
     if ( thisVersion == currentVersion ) {
       thisVersion = 'current';
     }
@@ -132,7 +132,7 @@ jQuery(function($) {
     * Shows a warning message to the user if current doc version is not the latest version.
     * Note: For this to work, it requires the documentation version variable (in file conf.py)
     * and the array of versions (in this script) to be updated.
-		* @param {Object} redirHistory Javascript object containing the corresponding path of the current page in every release.
+    * @param {Object} redirHistory Contains the corresponding path of the current page in every release.
     */
   function checkLatestDocs(redirHistory) {
     const thisVersion = DOCUMENTATION_OPTIONS.VERSION;
@@ -167,7 +167,7 @@ jQuery(function($) {
    */
   function addVersions() {
     let ele = '';
-    const selectVersionUl = $('#select-version .dropdown-menu');
+    const selectVersionUl = $('#version-selector .dropdown-menu');
     const thisVersion = DOCUMENTATION_OPTIONS.VERSION;
     let fullUrl = window.location.href;
     let page = '';
