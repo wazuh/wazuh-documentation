@@ -195,9 +195,6 @@ We will obtain a final result similar to the one shown in the following code blo
 .. code-block:: none
 	:class: output
 
-	ansible-playbook wazuh-manager-oss.yml -b -K
-	BECOME password: 
-
 	PLAY [linuxwazuhmanager] *********************************************************************************
 
 	TASK [Gathering Facts] ***********************************************************************************
