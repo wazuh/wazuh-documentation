@@ -7,8 +7,8 @@ Variables references
 
 .. _wazuh_ansible_reference_elasticsearch:
 
-Elasticsearch
-===================
+Elasticsearch / Opendistro
+==========================
 
 **elasticsearch_cluster_name**
 
@@ -67,7 +67,7 @@ Elasticsearch
 .. _wazuh_ansible_reference_kibana:
 
 Kibana
-=========
+======
 
 **elasticsearch_http_port**
 
@@ -132,7 +132,7 @@ Kibana
 .. _wazuh_ansible_reference_filebeat:
 
 Filebeat
-===================
+========
 
 **filebeat_version:**
 
@@ -1075,7 +1075,7 @@ Wazuh Manager
 .. _wazuh_ansible_reference_agent:
 
 Wazuh Agent
-===================
+===========
 
 **wazuh_managers:**
 
