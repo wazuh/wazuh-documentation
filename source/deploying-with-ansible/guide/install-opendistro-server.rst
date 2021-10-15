@@ -542,6 +542,6 @@ We can check the status of our new services in our Elastic Stack server.
 
 Once the Wazuh API is registered we can access it through our Kibana portal.
 
-.. thumbnail:: ../../images/ansible/ansible-elk.png
+.. thumbnail:: ../../images/ansible/wazuh-dashboard-main.png
     :align: center
     :width: 100%
