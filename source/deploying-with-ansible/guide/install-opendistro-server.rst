@@ -141,7 +141,7 @@ And we can see the preconfigured playbooks we have.
 	└── wazuh-opendistro.yml
 
 
-Using **opendistro** roles we will install and configure the Opendistro Stack server components, there are several variables we can use to customize the installation or configuration. To consult the default configuration go to this :ref:`section <wazuh_ansible_reference>`.
+Using **opendistro** and **Kibana** roles we will install and configure the Opendistro Stack server components, there are several variables we can use to customize the installation or configuration. To consult the default configuration go to this :ref:`section <wazuh_ansible_reference>`.
 
 If we want to change the default configuration we can change the following files:
 - ``/etc/ansible/roles/wazuh-ansible/roles/opendistro/opendistro-elasticsearch/defaults/main.yml``
