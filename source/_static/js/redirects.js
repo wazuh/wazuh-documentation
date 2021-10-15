@@ -93,6 +93,7 @@ newUrls['4.2'] = [
 ];
 
 removedUrls['4.2'] = [
+  '/user-manual/kibana-app/connect-kibana-app.html',
   '/user-manual/reference/daemons/ossec-agentd.html',
   '/user-manual/reference/daemons/ossec-agentlessd.html',
   '/user-manual/reference/daemons/ossec-analysisd.html',
