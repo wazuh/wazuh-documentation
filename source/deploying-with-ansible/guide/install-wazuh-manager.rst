@@ -113,7 +113,7 @@ Let's see below, the content of the YAML file ``/etc/ansible/roles/wazuh-ansible
 	:class: output
 
 	- hosts: <your server host>
-	roles:
+	  roles:
 		- role: ../roles/wazuh/ansible-wazuh-manager
 		- role: ../roles/wazuh/ansible-filebeat-oss
 		become: yes
@@ -135,8 +135,6 @@ Let's see below, the content of the YAML file ``/etc/ansible/roles/wazuh-ansible
 			# - "<opendistro-node-2>"
 			# - "<opendistro-node-3>"
 			# - "<opendistro-node-n>"
-
-
 
 Let's take a closer look at the content.
 
