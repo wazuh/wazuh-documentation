@@ -195,7 +195,7 @@ We will obtain a final result similar to the one shown in the following code blo
 .. code-block:: none
 	:class: output
 
-	PLAY [linuxwazuhmanager] *********************************************************************************
+	PLAY [wazuh-cluster-manager] *********************************************************************************
 
 	TASK [Gathering Facts] ***********************************************************************************
 	ok: [poc-allinone-wm]

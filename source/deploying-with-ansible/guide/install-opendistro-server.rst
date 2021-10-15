@@ -141,7 +141,7 @@ And we can see the preconfigured playbooks we have.
 	└── wazuh-opendistro.yml
 
 
-Using **opendistro** and **Kibana** roles we will install and configure the Opendistro Stack server components, there are several variables we can use to customize the installation or configuration. To consult the default configuration go to this :ref:`section <wazuh_ansible_reference>`.
+Using **Opendistro** and **Kibana** roles we will install and configure the Opendistro Stack server components, there are several variables we can use to customize the installation or configuration. To consult the default configuration go to this :ref:`section <wazuh_ansible_reference>`.
 
 If we want to change the default configuration we can change the following files:
 - ``/etc/ansible/roles/wazuh-ansible/roles/opendistro/opendistro-elasticsearch/defaults/main.yml``
@@ -207,7 +207,7 @@ We could configure these three files and execute them, but we are going to creat
 .. code-block:: yaml
 	:class: output
 
-    - hosts: linuxwazuhmanager
+    - hosts: wazuh-cluster-manager
       roles:
         - role: ../roles/opendistro/opendistro-elasticsearch
         - role: ../roles/opendistro/opendistro-kibana
@@ -237,7 +237,7 @@ It seems that we are ready to run the playbook and start the installation, but s
 
 .. code-block:: console
 
-	ansible@ansible:/etc/ansible/roles/wazuh-ansible/playbooks$ ansible-playbook wazuh-opendistro-full.yml -b -K
+	ansible@ansible:/etc/ansible/roles/wazuh-ansible/playbooks$ ansible-playbook wazuh-opendistro-and-kibana.yml -b -K
 
 .. note::
 
@@ -250,7 +250,264 @@ We will obtain a final result similar to the one shown in the following code blo
 .. code-block:: none
 	:class: output
 
+	PLAY [wazuh-cluster-manager] *********************************************************************************
 
+	TASK [Gathering Facts] ***********************************************************************************
+	ok: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-elasticsearch : Check if certificates already exists] ***************
+	ok: [poc-allinone-wm -> localhost]
+
+	TASK [../roles/opendistro/opendistro-elasticsearch : Local action | Create local temporary directory for certificates generation] ***
+	skipping: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-elasticsearch : Local action | Check that the generation tool exists] ***
+	skipping: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-elasticsearch : Local action | Download certificates generation tool] ***
+	skipping: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-elasticsearch : Local action | Extract the certificates generation tool] ***
+	skipping: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-elasticsearch : Local action | Add the execution bit to the binary] ***
+	skipping: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-elasticsearch : Local action | Prepare the certificates generation template file] ***
+	skipping: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-elasticsearch : Create a directory if it does not exist] ************
+	skipping: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-elasticsearch : Local action | Check if root CA file exists] ********
+	skipping: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-elasticsearch : Local action | Generate the node & admin certificates in local] ***
+	skipping: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-elasticsearch : Local action | Generate the node & admin certificates using an existing root CA] ***
+	skipping: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-elasticsearch : RedHat/CentOS/Fedora | Add OpenDistro repo] *********
+	skipping: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-elasticsearch : RedHat/CentOS/Fedora | Install OpenJDK 11] **********
+	skipping: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-elasticsearch : Install Amazon extras] ******************************
+	skipping: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-elasticsearch : Install OpenJDK 11] *********************************
+	skipping: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-elasticsearch : RedHat/CentOS/Fedora | Install OpenDistro dependencies] ***
+	skipping: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-elasticsearch : Install OpenDistro] *********************************
+	skipping: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-elasticsearch : Add openjdk repository] *****************************
+	skipping: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-elasticsearch : Install openjdk-11-jdk] *****************************
+	ok: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-elasticsearch : Add apt repository signing key] *********************
+	ok: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-elasticsearch : Add Opendistro repository] **************************
+	ok: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-elasticsearch : Install OpenDistro] *********************************
+	ok: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-elasticsearch : Remove performance analyzer plugin from elasticsearch] ***
+	fatal: [poc-allinone-wm]: FAILED! => {"changed": true, "cmd": ["./elasticsearch-plugin", "remove", "opendistro-performance-analyzer"], "delta": "0:00:01.363928", "end": "2021-10-15 03:58:54.698552", "msg": "non-zero return code", "rc": 78, "start": "2021-10-15 03:58:53.334624", "stderr": "ERROR: plugin [opendistro-performance-analyzer] not found; run 'elasticsearch-plugin list' to get list of installed plugins", "stderr_lines": ["ERROR: plugin [opendistro-performance-analyzer] not found; run 'elasticsearch-plugin list' to get list of installed plugins"], "stdout": "-> removing [opendistro-performance-analyzer]...", "stdout_lines": ["-> removing [opendistro-performance-analyzer]..."]}
+	...ignoring
+
+	TASK [../roles/opendistro/opendistro-elasticsearch : Remove elasticsearch configuration file] ************
+	changed: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-elasticsearch : Copy Configuration File] ****************************
+	changed: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-elasticsearch : include_tasks] **************************************
+	included: /home/nikos/workspace/work-wazuh/repos/wazuh-ansible/roles/opendistro/opendistro-elasticsearch/tasks/security_actions.yml for poc-allinone-wm
+
+	TASK [../roles/opendistro/opendistro-elasticsearch : Remove demo certs] **********************************
+	ok: [poc-allinone-wm] => (item=/etc/elasticsearch//kirk.pem)
+	ok: [poc-allinone-wm] => (item=/etc/elasticsearch//kirk-key.pem)
+	ok: [poc-allinone-wm] => (item=/etc/elasticsearch//esnode.pem)
+	ok: [poc-allinone-wm] => (item=/etc/elasticsearch//esnode-key.pem)
+
+	TASK [../roles/opendistro/opendistro-elasticsearch : Configure IP (Private address)] *********************
+	skipping: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-elasticsearch : Configure IP (Public address)] **********************
+	ok: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-elasticsearch : Copy the node & admin certificates to Elasticsearch cluster] ***
+	ok: [poc-allinone-wm] => (item=root-ca.pem)
+	ok: [poc-allinone-wm] => (item=root-ca.key)
+	ok: [poc-allinone-wm] => (item=node-1.key)
+	ok: [poc-allinone-wm] => (item=node-1.pem)
+	ok: [poc-allinone-wm] => (item=node-1_http.key)
+	ok: [poc-allinone-wm] => (item=node-1_http.pem)
+	ok: [poc-allinone-wm] => (item=node-1_elasticsearch_config_snippet.yml)
+	ok: [poc-allinone-wm] => (item=admin.key)
+	ok: [poc-allinone-wm] => (item=admin.pem)
+
+	TASK [../roles/opendistro/opendistro-elasticsearch : Copy the OpenDistro security configuration file to cluster] ***
+	changed: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-elasticsearch : Prepare the OpenDistro security configuration file] ***
+	changed: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-elasticsearch : Restart elasticsearch with security configuration] ***
+	changed: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-elasticsearch : Copy the OpenDistro security internal users template] ***
+	changed: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-elasticsearch : Hashing the custom admin password] ******************
+	changed: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-elasticsearch : Set the Admin user password] ************************
+	changed: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-elasticsearch : Hash the kibanaserver role/user pasword] ************
+	changed: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-elasticsearch : Set the kibanaserver user password] *****************
+	changed: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-elasticsearch : Initialize the OpenDistro security index in elasticsearch] ***
+	changed: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-elasticsearch : Create custom user] *********************************
+	skipping: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-elasticsearch : Configure OpenDistro Elasticsearch JVM memmory.] ****
+	changed: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-elasticsearch : Ensure Elasticsearch started and enabled] ***********
+	changed: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-elasticsearch : Wait for Elasticsearch API] *************************
+	ok: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-elasticsearch : Wait for Elasticsearch API (Private IP)] ************
+	skipping: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-elasticsearch : RedHat/CentOS/Fedora | Remove Elasticsearch repository (and clean up left-over metadata)] ***
+	skipping: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-kibana : Stopping early, trying to compile Wazuh Kibana Plugin on Debian 10 is not possible] ***
+	skipping: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-kibana : RedHat/CentOS/Fedora | Add OpenDistro repo] ****************
+	skipping: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-kibana : Install Kibana] ********************************************
+	skipping: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-kibana : include_vars] **********************************************
+	ok: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-kibana : Add apt repository signing key] ****************************
+	ok: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-kibana : Debian systems | Add OpenDistro repo] **********************
+	ok: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-kibana : Install Kibana] ********************************************
+	changed: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-kibana : Remove Kibana configuration file] **************************
+	changed: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-kibana : Copy the certificates from local to the Kibana instance] ***
+	changed: [poc-allinone-wm] => (item=root-ca.pem)
+	changed: [poc-allinone-wm] => (item=node-1_http.key)
+	changed: [poc-allinone-wm] => (item=node-1_http.pem)
+
+	TASK [../roles/opendistro/opendistro-kibana : Copy Configuration File] ***********************************
+	changed: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-kibana : Ensuring Kibana directory owner] ***************************
+	changed: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-kibana : Ensure the Git package is present] *************************
+	skipping: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-kibana : Modify repo url if host is in Debian family] ***************
+	skipping: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-kibana : Download script to install Nodejs repository] **************
+	skipping: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-kibana : Execute downloaded script to install Nodejs repo] **********
+	skipping: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-kibana : Install Nodejs] ********************************************
+	skipping: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-kibana : Install yarn dependency to build the Wazuh Kibana Plugin] ***
+	skipping: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-kibana : Remove old wazuh-kibana-app git directory] *****************
+	skipping: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-kibana : Clone wazuh-kibana-app repository] *************************
+	skipping: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-kibana : Executing yarn to build the package] ***********************
+	skipping: [poc-allinone-wm] => (item=yarn) 
+	skipping: [poc-allinone-wm] => (item=yarn build) 
+
+	TASK [../roles/opendistro/opendistro-kibana : Obtain name of generated package] **************************
+	skipping: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-kibana : Install Wazuh Plugin (can take a while)] *******************
+	skipping: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-kibana : Install Wazuh Plugin (can take a while)] *******************
+	[WARNING]: Unable to use /home/kibana/.ansible/tmp as temporary directory, failing back to system: [Errno
+	13] Permission denied: '/home/kibana'
+	changed: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-kibana : Kibana optimization (can take a while)] ********************
+	ok: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-kibana : Wait for Elasticsearch port] *******************************
+	ok: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-kibana : Select correct API protocol] *******************************
+	ok: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-kibana : Attempting to delete legacy Wazuh index if exists] *********
+	ok: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-kibana : Create wazuh plugin config directory] **********************
+	ok: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-kibana : Configure Wazuh Kibana Plugin] *****************************
+	ok: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-kibana : Ensure Kibana started and enabled] *************************
+	changed: [poc-allinone-wm]
+
+	TASK [../roles/opendistro/opendistro-kibana : Remove Elasticsearch repository (and clean up left-over metadata)] ***
+	skipping: [poc-allinone-wm]
+
+	RUNNING HANDLER [../roles/opendistro/opendistro-elasticsearch : restart elasticsearch] *******************
+	changed: [poc-allinone-wm]
+
+	RUNNING HANDLER [../roles/opendistro/opendistro-kibana : restart kibana] *********************************
+	changed: [poc-allinone-wm]
+
+	PLAY RECAP ***********************************************************************************************
+	poc-allinone-wm            : ok=43   changed=23   unreachable=0    failed=0    skipped=36   rescued=0    ignored=1   
 
 
 We can check the status of our new services in our Elastic Stack server.
