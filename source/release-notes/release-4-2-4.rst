@@ -13,10 +13,15 @@ What's new
 
 This release includes new features or enhancements.
 
-[add component]
-^^^^^^^^^^^^^^^
+Wazuh Kibana plugin
+^^^^^^^^^^^^^^^^^^^
 
-- `#xxxx <xxx>`_ xxx
+- Wazuh Kibana plugin is now compatible with Wazuh 4.2.4.
+
+Wazuh Splunk app
+^^^^^^^^^^^^^^^^
+
+- Wazuh Splunk app is now compatible with Wazuh 4.2.4.
 
 Resolved issues
 ---------------
@@ -41,5 +46,5 @@ Changelogs
 More details about these changes are provided in the changelog of each component:
 
 - `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v4.2.4/CHANGELOG.md>`_
-- `wazuh/wazuh-kibana-app <xxxxx>`_
-- `wazuh/wazuh-splunk <xxxxx>`_
+- `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v4.2.4-7.10.2/CHANGELOG.md>`_
+- `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v4.2.4-8.1.4/CHANGELOG.md>`_
