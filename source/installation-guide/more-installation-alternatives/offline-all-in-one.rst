@@ -10,8 +10,8 @@ You can install Wazuh even when there is no connection to the Internet. Installi
 
 .. note::
   * Root privileges are required to execute all the commands.
-  * ``curl``, ``tar``, and ``setcap`` are used in this guide and need to be preinstalled in the target system where the offline installation will be carried out. ``gnupg`` might need to be preinstalled as well for Debian based systems.
-  * You might want to use ``unalias cp`` to avoid being asked for confirmation to overwrite files when `alias cp` shows `cp` as the alias for `cp -i`.
+  * ``curl``, ``tar``, and ``setcap`` are used in this guide and need to be preinstalled in the target system where the offline installation will be carried out. ``gnupg`` might need to be preinstalled as well for some Debian based systems.
+  * You might want to use ``unalias cp`` to avoid being asked for confirmation to overwrite files if the "`alias cp`" command shows "`cp`" as an alias for the "`cp -i`" command.
 
 Download the packages and configuration files
 ---------------------------------------------
@@ -27,8 +27,7 @@ Download the packages and configuration files
 
         .. code-block:: console
           
-          # curl -sO https://raw.githubusercontent.com/wazuh/wazuh-documentation/4329_Write_offline_installation_guide/resources/open-distro/download-offline-installation/offline-download.sh
-          # bash ./offline-download.sh -p <deb|rpm>
+          # curl -sO https://raw.githubusercontent.com/wazuh/wazuh-documentation/4329_Write_offline_installation_guide/resources/open-distro/download-offline-installation/wazuh-offline-download.sh && bash ./wazuh-offline-download.sh -p <deb|rpm>
           
 #. Copy or move the ``./wazuh-offline/`` folder contents to a folder accessible to the host from where the offline installation will be carried out.
 
@@ -39,7 +38,7 @@ Download the packages and configuration files
 Install Wazuh and the components from local files
 -------------------------------------------------
 
-.. note:: In the host where the installation is taking place, make sure to change the working directory to the folder with the installation files downloaded in the previous steps.
+.. note:: In the host where the installation is taking place, make sure to change the working directory to the folder where the downloaded installation files were placed.
 
 Installing the Wazuh manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -323,20 +322,9 @@ Installing Kibana
 
 #. Replace ``/path/to/installation/folder`` with your actual path to the installation folder in the following command and run it to install the Wazuh Kibana plugin.
 
-    .. tabs::
+    .. code-block:: console
 
-      .. group-tab:: RPM
-
-        .. code-block:: console
-
-            # /usr/share/kibana/bin/kibana-plugin install --allow-root file:///path/to/installation/folder/wazuh_files/kibana/wazuh_kibana.zip
-
-      .. group-tab:: Deb
-
-        .. code-block:: console
-
-            # cd /usr/share/kibana
-            # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install file:///path/to/installation/folder/wazuh_files/kibana/wazuh_kibana.zip
+        # /usr/share/kibana/bin/kibana-plugin install --allow-root file:///path/to/installation/folder/wazuh_files/kibana/wazuh_kibana.zip
 
 #. Copy the Elasticsearch certificates into ``/etc/kibana/certs``.
 
