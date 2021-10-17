@@ -561,7 +561,7 @@ The current inventory can be consulted in different ways. Let's see an example q
               {
                   "vendor": "Wazuh, Inc <support@wazuh.com>",
                   "description": "Wazuh helps you to gain security visibility into your infrastructure by monitoring hosts at an operating system and application level. It provides the following capabilities: log analysis, file integrity monitoring, intrusions detection and policy and compliance monitoring",
-                  "scan": {"id": 696614220, "time": "2018/08/06 02:07:30"},
+                  "scan": {"id": 696614220, "time": "2018-08-06T02:07:30Z"},
                   "section": "admin",
                   "format": "deb",
                   "name": "wazuh-agent",

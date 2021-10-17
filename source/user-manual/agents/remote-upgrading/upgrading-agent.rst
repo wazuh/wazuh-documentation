@@ -156,8 +156,8 @@ Using the RESTful API
                 "module": "upgrade_module",
                 "command": "upgrade",
                 "status": "Updated",
-                "create_time": "2020/10/21 17:13:45",
-                "update_time": "2020/10/21 17:14:07"
+                "create_time": "2020-10-21T17:13:45Z",
+                "update_time": "2020-10-21T17:14:07Z"
               },
               {
                 "message": "Success",
@@ -167,8 +167,8 @@ Using the RESTful API
                 "module": "upgrade_module",
                 "command": "upgrade",
                 "status": "Updated",
-                "create_time": "2020/10/21 17:13:45",
-                "update_time": "2020/10/21 17:14:11"
+                "create_time": "2020-10-21T17:13:45Z",
+                "update_time": "2020-10-21T17:14:11Z"
               }
             ],
             "total_affected_items": 2,

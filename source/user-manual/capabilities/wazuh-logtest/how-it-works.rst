@@ -164,7 +164,7 @@ Check that everything works correctly
                 "license_name": "GPL 2.0",
                 "license_url": "https://github.com/wazuh/wazuh/blob/4.2/LICENSE",
                 "hostname": "wazuh-manager",
-                "timestamp": "2020-11-10T15:15:31+0000"
+                "timestamp": "2020-11-10T15:15:31Z"
             },
             "error": 0
         }
@@ -220,7 +220,7 @@ Then the request is send to logtest
                     "INFO: (7202): Session initialized with token '95375d4c'"
                 ],
                 "output": {
-                    "timestamp": "2020-11-10T17:46:23.289+0000",
+                    "timestamp": "2020-11-10T17:46:23.289000Z",
                     "rule": {
                         "level": 5,
                         "description": "sshd: Attempt to login using a non-existent user",
@@ -342,7 +342,7 @@ Then rule 5712 matches level 10 is triggered by the frequency of rule 5710 and a
             "data": {
                 "token": "95375d4c",
                 "output": {
-                    "timestamp": "2020-11-10T18:04:42.440+0000",
+                    "timestamp": "2020-11-10T18:04:42.440000Z",
                     "rule": {
                         "level": 10,
                         "description": "sshd: brute force trying to get access to the system.",
