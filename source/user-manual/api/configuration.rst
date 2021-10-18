@@ -22,7 +22,6 @@ Here are all the available settings for the ``api.yaml`` configuration file. For
      host: 0.0.0.0
      port: 55000
 
-     use_only_authd: no
      drop_privileges: yes
      experimental_features: no
      max_upload_size: 10485760
@@ -161,6 +160,8 @@ port
 +===============================+===============+=======================================+
 | Any value between 1 and 65535 | 55000         | Port where the Wazuh API will listen. |
 +-------------------------------+---------------+---------------------------------------+
+
+.. deprecated:: 4.3.0
 
 use_only_authd
 ^^^^^^^^^^^^^^^^^^^^^^
