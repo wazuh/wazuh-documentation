@@ -8,8 +8,6 @@
 Using Wazuh to monitor Microsoft Azure
 ======================================
 
-.. meta::
-  :description: Discover how Wazuh can help you to monitor your Microsoft Azure infrastructure.
 
 .. versionadded:: 3.7.0
 
