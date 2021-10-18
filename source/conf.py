@@ -445,7 +445,7 @@ def customReplacements(app, docname, source):
 
 custom_replacements = {
     "|CURRENT_MAJOR|" : "4.x",
-    "|WAZUH_LATEST|" : "4.2.4,
+    "|WAZUH_LATEST|" : "4.2.4",
     "|WAZUH_LATEST_MINOR|" : "4.2",
     "|WAZUH_PACKAGES_BRANCH|" : "4.2",
     "|WAZUH_LATEST_ANSIBLE|" : "4.2.3",
