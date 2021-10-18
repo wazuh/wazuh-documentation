@@ -39,6 +39,14 @@ Reference                                                         Description
 `#10479 <https://github.com/wazuh/wazuh/pull/10479>`_             This fix prevents the manager from corrupting the agent data integrity when the disk gets full.
 ==============================================================    =============
 
+Wazuh Kibana plugin
+^^^^^^^^^^^^^^^^^^^
+
+==============================================================    =============
+Reference                                                         Description
+==============================================================    =============
+`#3638 <https://github.com/wazuh/wazuh-kibana-app/pull/3638>`_    An issue that caused the user's auth token not to be deprecated correctly after logging out of the API is now fixed. 
+==============================================================    =============
 
 Changelogs
 ----------
