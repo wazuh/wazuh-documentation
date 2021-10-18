@@ -131,9 +131,8 @@ Changing the default passwords of Elasticsearch is highly recommended in order t
     
     .. note:: The password may need to be updated in ``/etc/filebeat/filebeat.yml`` and ``/etc/kibana/kibana.yml``. 
     
-  
 
-
+.. _memory_locking:
 
 Memory locking
 --------------

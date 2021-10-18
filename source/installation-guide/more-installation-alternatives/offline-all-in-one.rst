@@ -11,12 +11,13 @@ You can install Wazuh even when there is no connection to the Internet. Installi
 .. note::
   * Root privileges are required to execute all the commands.
   * ``curl``, ``tar``, and ``setcap`` are used in this guide and need to be preinstalled in the target system where the offline installation will be carried out. ``gnupg`` might need to be preinstalled as well for some Debian based systems.
-  * You might want to use ``unalias cp`` to avoid being asked for confirmation to overwrite files if the "`alias cp`" command shows "`cp`" as an alias for the "`cp -i`" command.
+  * You might want to use ``unalias cp`` to avoid being asked for confirmation to overwrite files if the "`alias cp`" command showed "`cp`" as an alias for the "`cp -i`" command.
+
 
 Download the packages and configuration files
 ---------------------------------------------
 
-#. Replace ``<deb|rpm>`` in the following commands with your choice of package format and run them from a system with internet connection. This action executes a script that downloads all required files for the offline installation on `x86_64` architectures.
+#. Replace ``<deb|rpm>`` in the following command with your choice of package format and run it from a system with internet connection. This action executes a script that downloads all required files for the offline installation on `x86_64` architectures.
 
     ..
       Add ``-a aarch64`` if you want to download files for `ARM64`  architectures.
@@ -35,8 +36,8 @@ Download the packages and configuration files
   see the :ref:`Packages list <packages>` section. 
 
 
-Install Wazuh and the components from local files
--------------------------------------------------
+Install Wazuh components from local files
+-----------------------------------------
 
 .. note:: In the host where the installation is taking place, make sure to change the working directory to the folder where the downloaded installation files were placed.
 
@@ -90,14 +91,14 @@ Installing Elasticsearch
 
 #. Move a copy of the configuration files to the appropriate location.
 
-    .. code-block:: console
+    .. code-block:: none
     
-      # cp ./opendistro_files/elasticsearch/elasticsearch.yml /etc/elasticsearch/
-      # cp ./opendistro_files/elasticsearch/roles.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/
-      # cp ./opendistro_files/elasticsearch/roles_mapping.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/
-      # cp ./opendistro_files/elasticsearch/internal_users.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/
-      # cp ./opendistro_files/elasticsearch/wazuh-cert-tool.sh ~
-      # cp ./opendistro_files/elasticsearch/instances.yml ~
+      cp ./opendistro_files/elasticsearch/elasticsearch.yml /etc/elasticsearch/ &&\
+      cp ./opendistro_files/elasticsearch/roles.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/ &&\
+      cp ./opendistro_files/elasticsearch/roles_mapping.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/ &&\
+      cp ./opendistro_files/elasticsearch/internal_users.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/ &&\
+      cp ./opendistro_files/elasticsearch/wazuh-cert-tool.sh ~ &&\
+      cp ./opendistro_files/elasticsearch/instances.yml ~
 
 #. Remove the demo certificates.
 
@@ -118,6 +119,14 @@ Installing Elasticsearch
       # mv ~/certs/admin* /etc/elasticsearch/certs/
       # cp ~/certs/root-ca* /etc/elasticsearch/certs/
 
+#. **Recommended action**  - Remove Open Distro for Elasticsearch performance analyzer plugin
+
+    The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it with the following command.
+
+    .. code-block:: console
+
+      # /usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer
+
 #. Enable and start the Elasticsearch service.
 
     .. include:: /_templates/installations/elastic/common/enable_elasticsearch.rst
@@ -130,32 +139,11 @@ Installing Elasticsearch
 
   
   
-#. **Recommended action**  - Remove Open Distro for Elasticsearch performance analyzer plugin
-
-    The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it and restarting the service with the following commands.
+#. Run the following command to check that the installation is successful.
 
     .. code-block:: console
 
-      # /usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer
-
-#. Run the following commands to restart the service and check that the installation is successful.
-
-    .. tabs::
-
-      .. group-tab:: Systemd
-
-        .. code-block:: console
-
-          # systemctl restart elasticsearch
-          # curl -XGET https://localhost:9200 -u admin:admin -k
-
-      .. group-tab:: SysV Init
-
-        .. code-block:: console
-
-          # service elasticsearch restart
-          # curl -XGET https://localhost:9200 -u admin:admin -k
-
+      # curl -XGET https://localhost:9200 -u admin:admin -k
 
     Expand the output to see an example response.
 
@@ -202,11 +190,11 @@ Installing Filebeat
 
 #. Move a copy of the configuration files to the appropriate location.
 
-    .. code-block:: console
+    .. code-block:: none
     
-      # cp ./wazuh_files/filebeat/filebeat.yml /etc/filebeat/
-      # cp ./wazuh_files/filebeat/wazuh-template.json /etc/filebeat/
-      # chmod go+r /etc/filebeat/wazuh-template.json
+      cp ./wazuh_files/filebeat/filebeat.yml /etc/filebeat/ &&\
+      cp ./wazuh_files/filebeat/wazuh-template.json /etc/filebeat/ &&\
+      chmod go+r /etc/filebeat/wazuh-template.json
 
 #. Edit ``/etc/filebeat/wazuh-template.json`` and change to ``"1"`` the value for ``"index.number_of_shards"`` as this is a single-node installation.
 
@@ -351,16 +339,17 @@ Installing Kibana
     - **Username**: admin
     - **Password**: admin
 
-Upon the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or,  for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser.  Alternatively, a certificate from a trusted authority can be configured. 
+Upon the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or, for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser. Alternatively, a certificate from a trusted authority can be configured. 
 
 
-.. note::  It is highly recommended to change the default passwords of Elasticsearch for the users' passwords. To perform this action, see the :ref:`Elasticsearch tuning <elastic_tuning>` section.
+.. note::
+  
+  * It is highly recommended to change the default passwords of Elasticsearch for the users' passwords. To perform this action, see the :ref:`Change users' password <change_elastic_pass>` section.
+  * It is also recommended to customize the file ``/etc/elasticsearch/jvm.options`` to improve the performance of Elasticsearch. Learn more about this process in the :ref:`memory_locking` section.
 
-It is also recommended to customize the file ``/etc/elasticsearch/jvm.options`` to improve the performance of Elasticsearch. Learn more about this process in the :ref:`user manual <change_elastic_pass>`.
-
-To uninstall all the components of the all-in-one installation, see the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_open_distro>`.
+To uninstall all the components of the all-in-one installation, see the :ref:`Uninstalling Wazuh <user_manual_uninstall_wazuh_installation_open_distro>` section.
 
 Next steps
 ----------
 
-Once the Wazuh environment is ready, Wazuh agents can be installed on every endpoint to be monitored. To install the Wazuh agents and start monitoring the endpoints, see the :ref:`Wazuh agent<installation_agents>` installation section. If you need to install them offline, you can check the appropriate agent package to download for your monitored system in the :ref:`Packages list <packages>` section.
+Once the Wazuh environment is ready, Wazuh agents can be installed on every endpoint to be monitored. To install the Wazuh agents and start monitoring the endpoints, see the :ref:`Wazuh agent<installation_agents>` installation section. If you need to install them offline, you can check the appropriate agent package to download for your monitored system in the :ref:`Wazuh agent packages list <Wazuh_manager_agent_packages_list>` section.

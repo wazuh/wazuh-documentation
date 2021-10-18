@@ -270,7 +270,7 @@ parse_arguments() {
 print_help(){
   
   #printf "\t-a, --architecture <x86_64|aarch64>\t\tArchitecture type (Default: x86_64)\n"
-  printf "Usage: $0 [OPTIONS]\n\nMandatory options\n\t-p, --packages <deb|rpm>\t\t\tPackage file format\n\nOther options\n\t-w=<version>, --wazuh-version=<version>\t\tSelect specific Wazuh manager version\n\t-e=<version>, --elastic-version=<version>\tSelect specific ELK version\n\t-v, --verbose\t\t\t\t\tShow detailed output\n\t-h, --help\t\t\t\t\tShow this help\n"
+  printf "Usage: $0 [OPTIONS]\n\nMandatory options\n\t-p, --packages <deb|rpm>\t\t\tPackage files format\n\nOther options\n\t-w=<version>, --wazuh-version=<version>\t\tSelect specific Wazuh manager version (Default: ${DEFAULT_WAZUH_VERSION})\n\t-e=<version>, --elastic-version=<version>\tSelect specific ELK version (Default: ${DEFAULT_ES_VERSION})\n\t-v, --verbose\t\t\t\t\tShow detailed output\n\t-h, --help\t\t\t\t\tShow this help\n"
 
 }
 
