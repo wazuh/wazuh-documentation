@@ -16,9 +16,9 @@ The following document explains how to set up the Wazuh environment to test the 
 A good guide on how to install these components can be found in the :ref:`installation guide <installation_guide>` section. 
 
 
-
 .. toctree::
-    :hidden:
+    :titlesonly:
+    :includehidden:
     :maxdepth: 1
 
     audit-commands-run-by-user
