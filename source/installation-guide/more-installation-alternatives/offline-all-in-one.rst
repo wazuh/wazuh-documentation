@@ -8,11 +8,14 @@ Offline all-in-one installation
 
 You can install Wazuh even when there is no connection to the Internet. Installing the solution offline involves downloading the Wazuh components to later install them on a system with no internet connection. Although in this section the Wazuh server and Elastic Stack are installed and configured on the same host in an all-in-one deployment, each component can also be installed on a separate host as a distributed deployment, depending on your environment needs. For more information, check the :ref:`Requirements <installation_requirements>` section.
 
-.. note::
-  * Root privileges are required to execute all the commands.
-  * ``curl``, ``tar``, and ``setcap`` are used in this guide and need to be preinstalled in the target system where the offline installation will be carried out. ``gnupg`` might need to be preinstalled as well for some Debian based systems.
-  * You might want to use ``unalias cp`` to avoid being asked for confirmation to overwrite files if the "`alias cp`" command showed "`cp`" as an alias for the "`cp -i`" command.
+.. note:: Root privileges are required to execute all the commands.
 
+Prerequisites
+-------------
+
+- ``curl``, ``tar``, and ``setcap`` need to be installed in the target system where the offline installation will be carried out. ``gnupg`` might need to be installed as well for some Debian-based systems.
+
+- You can use ``unalias cp`` to avoid being asked for confirmation to overwrite files if the `alias cp` command showed `cp` as an alias for the `cp -i` command.
 
 Download the packages and configuration files
 ---------------------------------------------
