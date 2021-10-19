@@ -6,7 +6,7 @@
 Wazuh Proof of Concept Guide
 ============================
 
-The following document explains how to set up the Wazuh environment to test the different product capabilities. It assumes that these components are already installed:
+The following document is a cheat-sheet on setting up the Wazuh environment to test the different product capabilities. It assumes that the following components are already installed:
 
 - Elasticsearch + Kibana + Wazuh Kibana plugin
 - Wazuh manager + Filebeat (for integration with Elasticsearch)
