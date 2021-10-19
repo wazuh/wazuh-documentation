@@ -6,7 +6,7 @@
 Offline all-in-one installation
 ===============================
 
-You can install Wazuh even when there is no connection to the Internet. Installing the solution offline involves downloading the Wazuh components to later install them on a system with no internet connection. Although in this section the Wazuh server and Elastic Stack are installed and configured on the same host in an all-in-one deployment, each component can also be installed on a separate host as a distributed deployment, depending on your environment needs. To learn more about each component and its capabilities, check the :ref:`Components <components>` section. 
+You can install Wazuh even when there is no connection to the Internet. Installing the solution offline involves downloading the Wazuh components to later install them on a system with no internet connection. Although in this section the Wazuh server and Elastic Stack are installed and configured on the same host in an all-in-one deployment, each component can also be installed on a separate host as a distributed deployment, depending on your environment needs. For more information, check the :ref:`Requirements <installation_requirements>` section.
 
 .. note::
   * Root privileges are required to execute all the commands.
@@ -17,7 +17,7 @@ You can install Wazuh even when there is no connection to the Internet. Installi
 Download the packages and configuration files
 ---------------------------------------------
 
-#. Replace ``<deb|rpm>`` in the following command with your choice of package format and run it from a system with internet connection. This action executes a script that downloads all required files for the offline installation on `x86_64` architectures.
+#. Replace ``<deb|rpm>`` in the following command with your choice of package format and run it from a system with internet connection. This action executes a script that downloads all required files for the offline installation on x86_64 architectures.
 
     ..
       Add ``-a aarch64`` if you want to download files for `ARM64`  architectures.
@@ -55,7 +55,7 @@ Installing the Wazuh manager
           # rpm --import ./wazuh_files/GPG-KEY-WAZUH
           # rpm -ivh ./wazuh-packages/wazuh-manager*.rpm
 
-      .. group-tab:: Deb
+      .. group-tab:: deb
 
         .. code-block:: console
         
@@ -66,7 +66,7 @@ Installing the Wazuh manager
 
     .. include:: /_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
 
-#. Check that the Wazuh manager is active.
+#. Run the following command to verify the Wazuh manager status is active.
 
     .. include:: /_templates/installations/wazuh/common/check_wazuh_manager.rst    
 
@@ -83,7 +83,7 @@ Installing Elasticsearch
         
           # rpm -i ./opendistro-packages/*.rpm > opendistro_output.txt
 
-      .. group-tab:: Deb
+      .. group-tab:: deb
 
         .. code-block:: console
         
@@ -182,7 +182,7 @@ Installing Filebeat
         
           # rpm -i ./wazuh-packages/filebeat*.rpm
 
-      .. group-tab:: Deb
+      .. group-tab:: deb
 
         .. code-block:: console
         
@@ -286,7 +286,7 @@ Installing Kibana
        
          # rpm -i ./opendistro-kibana-packages/opendistroforelasticsearch-kibana*.rpm
 
-     .. group-tab:: Deb
+     .. group-tab:: deb
 
        .. code-block:: console
        
