@@ -238,6 +238,8 @@ Installing Filebeat
 
       # filebeat test output
 
+    Expand the output to see an example response.
+
     .. code-block:: none
      :class: output accordion-output
 
@@ -262,6 +264,8 @@ Installing Filebeat
 
      # curl -k -u admin:admin "https://localhost:9200/_template/wazuh?pretty&filter_path=wazuh.settings.index.number_of_shards"
 
+    Expand the output to see an example response.
+    
     .. code-block:: none
      :class: output accordion-output
 
