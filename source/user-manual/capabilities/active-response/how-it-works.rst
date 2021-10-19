@@ -89,7 +89,7 @@ Wazuh is preconfigured with the following scripts for Linux, located at ``/var/o
 +---------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
 | Script name                                                                                                                           |                          Description                          |
 +=======================================================================================================================================+===============================================================+
-| `disable-account <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/active_responses.c>`_                                   | Disables an account by setting ``passwd-l``                   |
+| `disable-account <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/disable-account.c>`_                                   | Disables an account by setting ``passwd-l``                   |
 +---------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
 | `firewall-drop <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/firewalls/default-firewall-drop.c>`_                      | Adds an IP to the iptables deny list                          |
 +---------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
