@@ -6,7 +6,7 @@ Compatibility matrix
 ====================
 
 
-.. Wazuh software can be installed on many operating systems. In addition, there are also specific compatibility requirements between the different components of Wazuh. For more information, check the compatibility matrix below.
+Wazuh software can be installed on many operating systems. In addition, there are also specific compatibility requirements between the different components of Wazuh. For more information, check the compatibility matrix below.
 
 - `Operating system compatibility`_
 - `Components compatibility`_
