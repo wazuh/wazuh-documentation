@@ -308,11 +308,11 @@ Installing Kibana
       # mkdir /usr/share/kibana/data
       # chown -R kibana:kibana /usr/share/kibana/data
 
-#. Replace ``/path/to/installation/folder`` with your actual path to the installation folder in the following command and run it to install the Wazuh Kibana plugin.
+#. Replace ``</path/to/installation/folder>`` with your installation folder path and run the following command to install the Wazuh Kibana plugin.
 
     .. code-block:: console
 
-        # /usr/share/kibana/bin/kibana-plugin install --allow-root file:///path/to/installation/folder/wazuh_files/kibana/wazuh_kibana.zip
+        # /usr/share/kibana/bin/kibana-plugin install --allow-root file://</path/to/installation/folder>/wazuh_files/kibana/wazuh_kibana.zip
 
 #. Copy the Elasticsearch certificates into ``/etc/kibana/certs``.
 
