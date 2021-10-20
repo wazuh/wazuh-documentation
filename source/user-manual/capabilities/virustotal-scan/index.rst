@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-    :description: Wazuh scans monitored files for malicious content in monitored files. This is possible thanks to its integration with VirusTotal. Learn more in this section of the Wazuh documentation. 
+    :description: Wazuh scans monitored files looking for malicious content. This is possible thanks to its integration with VirusTotal. Learn more in this section of the Wazuh documentation.
     
 .. _virustotal-scan:
 
