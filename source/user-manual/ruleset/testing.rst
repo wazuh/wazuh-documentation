@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-    :description: Learn more about how to test decoders and rules with Wazuh. The tool ossec-logtest allow us to test how an event is decoded and if an alert is generated.
+    :description: Learn more about how to test decoders and rules with Wazuh. The tool ossec-logtest allows you to test how an event is decoded and if an alert is generated.
     
 .. _ruleset_testing:
 
