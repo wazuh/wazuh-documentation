@@ -29,7 +29,7 @@ Setting it up
 
 The following diagram shows what we want to accomplish:
 
-    .. thumbnail:: /images/aws/cloudwatch-diagram.png
+.. image:: ../images/aws/cloudwatch-diagram.png
       :align: center
-      :width: 70%
+      :class: front      
 
