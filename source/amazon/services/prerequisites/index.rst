@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Check out the prerequisites needed to monitor AWS based services with Wazuh. See how to configure an S3 Bucket, how to configure AWS credentials, and how to install dependencies. 
+  :description: Check out the prerequisites to monitor AWS-based services with Wazuh. See how to configure an S3 Bucket and AWS credentials, and how to install dependencies.
   
 .. _amazon_prerequisites:
 
