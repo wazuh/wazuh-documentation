@@ -2,7 +2,7 @@
 
 .. meta::
   :description: The Wazuh Syscollector module is in charge of collecting system information and store it into an SQLite database for each agent on the manager side.
-  
+
 .. _syscollector:
 
 System inventory
@@ -73,8 +73,6 @@ Retrieve basic information about the hardware components of a system.
 +------------------+---------------------------------+-------------------------------------------+-------------------+
 | **ram_usage**    | Percentage of RAM in use        | 87                                        | All               |
 +------------------+---------------------------------+-------------------------------------------+-------------------+
-| **checksum**     | Integrity synchronization value | 503709147600c8e0023cf2b9995772280eee30    | All               |
-+------------------+---------------------------------+-------------------------------------------+-------------------+
 
 .. _syscollector_system:
 
@@ -122,8 +120,6 @@ Retrieve basic information about the operating system.
 +------------------------+---------------------------------+-----------------------------------------------------+-------------------+
 | **version**            | Release version                 | #31~16.04.1-Ubuntu SMP Wed Jul 18 08:54:04 UTC 2018 | All               |
 +------------------------+---------------------------------+-----------------------------------------------------+-------------------+
-| **checksum**           | Integrity synchronization value | 503709147600c8e0023cf2b9995772280eee30              | All               |
-+------------------------+---------------------------------+-----------------------------------------------------+-------------------+
 
 .. _syscollector_packages:
 
@@ -166,10 +162,6 @@ The current packages inventory of each Wazuh agent. On Linux systems, retrieved 
 | **description**  | Description of the package             | Generic Linux kernel headers                      | deb/rpm/pacman/pkg |
 +------------------+----------------------------------------+---------------------------------------------------+--------------------+
 | **location**     | Location of the package                | C:\\Program Files\\VMware\\VMware Tools\\         | win/pkg            |
-+------------------+----------------------------------------+---------------------------------------------------+--------------------+
-| **checksum**     | Integrity synchronization value        | 78503709147600c8e0023cf2b9995772280eee30          | All                |
-+------------------+----------------------------------------+---------------------------------------------------+--------------------+
-| **item_id**      | Unified primary key                    | 4323709147600c8e0023cf2b9995772280eef451          | All                |
 +------------------+----------------------------------------+---------------------------------------------------+--------------------+
 
 .. _syscollector_interfaces:
@@ -221,10 +213,6 @@ it is composed of three tables to ensure that the information is as structured a
 +------------------+---------------------------------+-----------------------------------------------------+-------------------+
 | **rx_dropped**   | Dropped reception packets       | 0                                                   | All               |
 +------------------+---------------------------------+-----------------------------------------------------+-------------------+
-| **checksum**     | Integrity synchronization value | 8503709147600c8e0023cf2b9995772280eee30             | All               |
-+------------------+---------------------------------+-----------------------------------------------------+-------------------+
-| **item_id**      | Unified primary key             | 4323709147600c8e0023cf2b9995772280eef41             | All               |
-+------------------+---------------------------------+-----------------------------------------------------+-------------------+
 
 
 .. _syscollector_netaddr:
@@ -248,10 +236,6 @@ Referencing interfaces described at `sys_netiface`, this table shows the IPv4 an
 +------------------+---------------------------------+-----------------------------------------------------+-------------------+
 | **broadcast**    | Broadcast address               | 192.168.1.255                                       | All               |
 +------------------+---------------------------------+-----------------------------------------------------+-------------------+
-| **checksum**     | Integrity synchronization value | 78503709147600c8e0023cf2b9995772280eee30            | All               |
-+------------------+---------------------------------+-----------------------------------------------------+-------------------+
-| **item_id**      | Unified primary key             | 4323709147600c8e0023cf2b9995772280eef4              | All               |
-+------------------+---------------------------------+-----------------------------------------------------+-------------------+
 
 .. _syscollector_netproto:
 
@@ -273,10 +257,6 @@ Referencing interfaces described at `sys_netiface`, this table shows the routing
 | **gateway**      | Default gateway                 | 192.168.1.1                                         | Linux/Windows/macOS |
 +------------------+---------------------------------+-----------------------------------------------------+---------------------+
 | **dhcp**         | DHCP status                     | enabled                                             | Linux/Windows       |
-+------------------+---------------------------------+-----------------------------------------------------+---------------------+
-| **checksum**     | Integrity synchronization value | 78503709147600c8e0023cf2b9995772280eee30            | All                 |
-+------------------+---------------------------------+-----------------------------------------------------+---------------------+
-| **item_id**      | Unified primary key             | 4323709147600c8e0023cf2b9995772280eef4              | All                 |
 +------------------+---------------------------------+-----------------------------------------------------+---------------------+
 
 .. _syscollector_ports:
@@ -316,10 +296,6 @@ List the opened ports of a system.
 | **PID**          | PID owner of the opened port           | 4                                                 | Windows/macOS     |
 +------------------+----------------------------------------+---------------------------------------------------+-------------------+
 | **process**      | Name of the PID                        | System                                            | Windows/macOS     |
-+------------------+----------------------------------------+---------------------------------------------------+-------------------+
-| **checksum**     | Integrity synchronization value        | 78503709147600c8e0023cf2b9995772280eee30          | All               |
-+------------------+----------------------------------------+---------------------------------------------------+-------------------+
-| **item_id**      | Unified primary key                    | 4323709147600c8e0023cf2b9995772280eef412          | All               |
 +------------------+----------------------------------------+---------------------------------------------------+-------------------+
 
 .. _syscollector_processes:
@@ -394,8 +370,6 @@ List the current processes running in a system host.
 +-----------------+----------------------------------------+---------------------------------------------------+-------------------+
 | **processor**   | Number of the processor                | 0                                                 | Linux             |
 +-----------------+----------------------------------------+---------------------------------------------------+-------------------+
-| **checksum**    | Integrity synchronization value        | 78503709147600c8e0023cf2b9995772280eee30          | All               |
-+-----------------+----------------------------------------+---------------------------------------------------+-------------------+
 
 .. _syscollector_hotfixes:
 
@@ -414,8 +388,6 @@ List the Windows updates installed on Windows agents, also known as hotfixes. Th
 | **scan_time**    | Scan date                              | 2019/08/22 07:27:15                      | Windows           |
 +------------------+----------------------------------------+------------------------------------------+-------------------+
 | **hotfix**       | Windows update ID                      | KB4489899                                | Windows           |
-+------------------+----------------------------------------+------------------------------------------+-------------------+
-| **checksum**     | Integrity synchronization value        | 78503709147600c8e0023cf2b9995772280eee30 | Windows           |
 +------------------+----------------------------------------+------------------------------------------+-------------------+
 
 Compatibility matrix
@@ -442,31 +414,49 @@ The following table shows the operating systems that this module currently suppo
 Using Syscollector information to trigger alerts
 ------------------------------------------------
 
-  Since Wazuh 3.9 version, ``Syscollector`` module information can be used to trigger alerts and show that information in the alerts' description.
+Since Wazuh 3.9 version, ``Syscollector`` module information can be used to trigger alerts and show that information in the alerts' description.
 
-  To allow this configuration, in a rule declaration set the ``<decoded_as>`` field as **syscollector**.
+To allow this configuration, in a rule declaration set the ``<decoded_as>`` field as **syscollector**.
 
-  As an example, this rule will be triggered when the interface ``eth0`` of an agent is enabled and will show what IPv4 has that interface.
+As an example, the following set of rules will be triggered when a port is being opened, modified or just closed.
 
   .. code-block:: xml
 
-    <rule id="100001" level="5">
-      <if_sid>221</if_sid>
-      <decoded_as>syscollector</decoded_as>
-      <field name="netinfo.iface.name">eth0</field>
-      <description>eth0 interface enabled. IP: $(netinfo.iface.ipv4.address)</description>
-    </rule>
+    <group name="syscollector,">
+      ...
+      <!-- ports -->
+      <rule id="100310" level="3" >
+          <if_sid>100221</if_sid>
+          <field name="type">dbsync_ports</field>
+          <description>Syscollector ports event.</description>
+      </rule>
+      <rule id="100311" level="3" >
+          <if_sid>100310</if_sid>
+          <field name="operation_type">INSERTED</field>
+          <description>Syscollector port creation event.</description>
+      </rule>
+      <rule id="100312" level="3" >
+          <if_sid>100310</if_sid>
+          <field name="operation_type">MODIFIED</field>
+          <description>Syscollector port modification event.</description>
+      </rule>
+      <rule id="100313" level="3" >
+          <if_sid>100310</if_sid>
+          <field name="operation_type">DELETED</field>
+          <description>Syscollector port deletion event.</description>
+      </rule>
+    </group>
 
   .. warning::
 
     The tag ``<if_sid>221</if_sid>`` is necessary because the events from Syscollector are muted by default with that rule.
 
-  When the alerts are triggered they will be displayed in Kibana this way:
+  When the alerts are triggered (for ports opening operation) they will be displayed in Kibana as follow:
 
-    .. thumbnail:: ../../images/manual/internal-capabilities/syscollector_alerts.png
+    .. thumbnail:: ../../images/manual/internal-capabilities/syscollector_port_inserted_alert.png
       :title: Information from syscollector for "port" value.
       :align: center
-      :width: 80%
+      :width: 100%
 
 New searchable fields for Kibana
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -521,7 +511,7 @@ The Syscollector module is enabled by default in all compatible systems includin
 Once the module starts, it will run periodically scans and send the new data in JSON events format to the manager, where it will be decoded and stored into a particular database
 for each agent.
 
-The current inventory can be consulted in different ways. Let's see an example querying for a particular package in a Debian agent:
+The current inventory can be consulted in different ways. Let's see an example querying for a list of ports in a Debian agent:
 
 - Querying the Database directly on the manager side, located at ``$install_directory/queue/db/:agent_id.db``.
 
@@ -539,48 +529,74 @@ The current inventory can be consulted in different ways. Let's see an example q
 
 .. code-block:: console
 
-  sqlite> select * from sys_programs where name="wazuh-agent";
+  sqlite> select * from sys_ports;
 
 .. code-block:: none
   :class: output
 
-  696614220|2018/08/06 02:07:30|deb|wazuh-agent|extra|admin|105546|Wazuh, Inc <support@wazuh.com>||3.5.0-1|amd64|||Wazuh helps you to gain security visibility into your infrastructure by monitoring hosts at an operating system and application level. It provides the following capabilities: log analysis, file integrity monitoring, intrusions detection and policy and compliance monitoring||0
+  0|2021/10/18 22:53:03|tcp|0.0.0.0|445|0.0.0.0|0|0|0|0|listening|4|System|481fa26d857363b78f4f3f586816a2bca324560a|120ef3368b130c7432e4ee29d7ae502fb6767d10
+  0|2021/10/18 22:53:06|tcp6|::|445|::|0|0|0|0|listening|4|System|effa4fd964755442c367e0912108801fb70d253d|cf372ca01c25d7a8fe58b1d9d104771364e3d281
 
-- By querying the Wazuh API endpoint :api-ref:`GET /syscollector/{agent_id}/packages <operation/api.controllers.syscollector_controller.get_packages_info>`, which retrieves nested data in JSON format.
+- By querying the Wazuh API endpoint :api-ref:`GET /syscollector/{agent_id}/ports <operation/api.controllers.syscollector_controller.get_ports_info>`, which retrieves nested data in JSON format.
 
 .. code-block:: console
 
-  # curl -k -X GET "https://localhost:55000/syscollector/003/packages?pretty=true&name=wazuh-agent" -H  "Authorization: Bearer $TOKEN"
+  # curl -k -X GET "https://localhost:55000/syscollector/003/ports?pretty=true" -H  "Authorization: Bearer $TOKEN"
 
 .. code-block:: json
   :class: output
 
   {
-      "data": {
-          "affected_items": [
-              {
-                  "vendor": "Wazuh, Inc <support@wazuh.com>",
-                  "description": "Wazuh helps you to gain security visibility into your infrastructure by monitoring hosts at an operating system and application level. It provides the following capabilities: log analysis, file integrity monitoring, intrusions detection and policy and compliance monitoring",
-                  "scan": {"id": 696614220, "time": "2018/08/06 02:07:30"},
-                  "section": "admin",
-                  "format": "deb",
-                  "name": "wazuh-agent",
-                  "priority": "extra",
-                  "version": "3.5.0-1",
-                  "architecture": "amd64",
-                  "size": 105546,
-                  "agent_id": "003",
-              }
-          ],
-          "total_affected_items": 1,
-          "total_failed_items": 0,
-          "failed_items": [],
-      },
-      "message": "All specified syscollector information was returned",
-      "error": 0,
+   "data":{
+      "affected_items":[
+         {
+            "local":{
+               "ip":"0.0.0.0",
+               "port":445
+            },
+            "remote":{
+               "ip":"0.0.0.0",
+               "port":0
+            },
+            "scan":{
+               "id":0,
+               "time":"2021-10-18T22:53:03Z"
+            },
+            "protocol":"tcp",
+            "rx_queue":0,
+            "tx_queue":0,
+            "process":"System",
+            "inode":0,
+            "pid":4,
+            "state":"listening",
+            "agent_id":"003"
+         },
+         {
+            "local":{
+               "ip":"::",
+               "port":445
+            },
+            "remote":{
+               "ip":"::",
+               "port":0
+            },
+            "scan":{
+               "id":0,
+               "time":"2021-10-18T22:53:06Z"
+            },
+            "protocol":"tcp6",
+            "rx_queue":0,
+            "tx_queue":0,
+            "process":"System",
+            "inode":0,
+            "pid":4,
+            "state":"listening",
+            "agent_id":"003"
+         }]
+      }
   }
 
-Moreover, the same information can be consulted at the Wazuh app, which includes an `Inventory` tab for each agent. For now, there are available OS, hardware and packages inventories at this tab, which looks like the following screenshot:
+Moreover, the same information can be consulted on the Wazuh app, which includes an `Inventory Data` tab for each agent.
 
 .. thumbnail:: ../../images/manual/inventory.png
     :title: Inventory tab
