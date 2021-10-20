@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Check out a use case about active response, one of the key capabilities of the Wazuh platform. Learn more about it in this section of our documentation. 
+  :description: Check out a use case about Active Response, one of the key capabilities of the Wazuh platform. Learn more about it in this section of our documentation. 
   
 .. _active_response:
 
