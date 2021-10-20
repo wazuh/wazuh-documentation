@@ -414,74 +414,78 @@ The following table shows the operating systems that this module currently suppo
 Using Syscollector information to trigger alerts
 ------------------------------------------------
 
+.. note:: This capability is not available in Wazuh 4.2 but it does in greater versions.
+
 Since Wazuh 3.9 version, ``Syscollector`` module information can be used to trigger alerts and show that information in the alerts' description.
 
 To allow this configuration, in a rule declaration set the ``<decoded_as>`` field as **syscollector**.
 
-As an example, the following set of rules will be triggered when a port is being opened, modified or just closed.
+As an example, the following set of custom rules will be triggered when a port is being opened, modified or just closed.
 
-  .. code-block:: xml
+.. code-block:: xml
 
     <group name="syscollector,">
-      ...
       <!-- ports -->
       <rule id="100310" level="3" >
-          <if_sid>100221</if_sid>
+          <if_sid>221</if_sid>
           <field name="type">dbsync_ports</field>
           <description>Syscollector ports event.</description>
       </rule>
       <rule id="100311" level="3" >
           <if_sid>100310</if_sid>
           <field name="operation_type">INSERTED</field>
-          <description>Syscollector port creation event.</description>
+          <description>The port: $(port.local_port), with local ip: $(port.local_ip) has been opened. Syscollector creation event detected.</description>
       </rule>
       <rule id="100312" level="3" >
           <if_sid>100310</if_sid>
           <field name="operation_type">MODIFIED</field>
-          <description>Syscollector port modification event.</description>
+          <description>The port: $(port.local_port), with local ip: $(port.local_ip) has been modified. Syscollector modification event detected.</description>
       </rule>
       <rule id="100313" level="3" >
           <if_sid>100310</if_sid>
           <field name="operation_type">DELETED</field>
-          <description>Syscollector port deletion event.</description>
+          <description>The port: $(port.local_port), with local ip: $(port.local_ip) has been deleted. Syscollector deletion event detected.</description>
       </rule>
     </group>
 
-  .. warning::
+.. warning::
 
     The tag ``<if_sid>221</if_sid>`` is necessary because the events from Syscollector are muted by default with that rule.
 
-  When the alerts are triggered (for ports opening operation) they will be displayed in Kibana as follow:
+When the alerts are triggered (for ports opening operation) they will be displayed in Kibana as follow:
 
     .. thumbnail:: ../../images/manual/internal-capabilities/syscollector_port_inserted_alert.png
       :title: Information from syscollector for "port" value.
       :align: center
       :width: 100%
 
+.. note:: The alerts will be triggered **after the second syscollector scan** (when a delta of information is being detected). The first scan
+          will not generate alerts.
+
 New searchable fields for Kibana
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 In Elasticsearch the fields will be saved as ``data.type.value``. For example, for **Hardware** type, the ``cpu_name`` field can be found as ``data.hardware.cpu_name``
 
-+----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
-| **Type**             | **Fields**                                                                                                           | **Example**                      |
-+----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
-| **Hardware**         | cpu_name, cpu_cores, cpu_mhz, ram_total, ram_free, ram_usage                                                         | data.hardware.cpu_mhz            |
-+----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
-| **Operating System** | architecture, name, version, codename, major, minor, build, platform, sysname, release, release_version              | data.os.codename                 |
-+----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
-| **Port**             | local_ip, local_port, remote_ip, remote_port, tx_queue, rx_queue, inode, state, pid, process                         | data.port.inode                  |
-+----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
-| **Program**          | name, priority, section, size, vendor, install_time, version, architecture, multiarch, source, description, location | data.program.name                |
-+----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
-| **Process**          | name, state, ppid, utime, stime, cmd, args, euser, ruser, suser, egroup, sgroup, fgroup, rgroup, priority, nice,     | data.process.state               |
-|                      | size, vm_size, resident, share, start_time, pgrp, session, nlwp, tgid, tty, processor                                |                                  |
-+----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
-| **Network**          | mac, adapter, type, state, mtu, tx_bytes, rx_bytes, tx_errors, rx_errors, tx_dropped, rx_dropped, tx_packets,        | data.netinfo.iface.ipv4.address, |
-|                      | rx_packets, ipv4, ipv6                                                                                               | data.netinfo.iface.mac           |
-+----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
-| **Hotfix**           | hotfix                                                                                                               | data.hotfix                      |
-+----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
++----------------------+------------------------------------------------------------------------------------------------------------------------+----------------------------------+
+| **Type**             | **Fields**                                                                                                             | **Example**                      |
++----------------------+------------------------------------------------------------------------------------------------------------------------+----------------------------------+
+| **Hardware**         | cpu_name, cpu_cores, cpu_mhz, ram_total, ram_free, ram_usage, serial                                                   | data.hardware.cpu_mhz            |
++----------------------+------------------------------------------------------------------------------------------------------------------------+----------------------------------+
+| **Operating System** | architecture, name, version, codename, major, minor, build, platform, sysname, release, release_version, hostname      | data.os.codename                 |
++----------------------+------------------------------------------------------------------------------------------------------------------------+----------------------------------+
+| **Port**             | protocol, local_ip, local_port, remote_ip, remote_port, tx_queue, rx_queue, inode, state, pid, process, operation_type | data.port.inode                  |
++----------------------+------------------------------------------------------------------------------------------------------------------------+----------------------------------+
+| **Program**          | name, priority, section, size, vendor, install_time, version, architecture, multiarch, source, description, location   | data.program.name                |
++----------------------+------------------------------------------------------------------------------------------------------------------------+----------------------------------+
+| **Process**          | name, state, ppid, utime, stime, cmd, args, euser, ruser, suser, egroup, sgroup, fgroup, rgroup, priority, nice,       | data.process.state               |
+|                      | size, vm_size, resident, share, start_time, pgrp, session, nlwp, tgid, tty, processor                                  |                                  |
++----------------------+------------------------------------------------------------------------------------------------------------------------+----------------------------------+
+| **Network**          | mac, adapter, type, state, mtu, tx_bytes, rx_bytes, tx_errors, rx_errors, tx_dropped, rx_dropped, tx_packets,          | data.netinfo.iface.ipv4.address, |
+|                      | rx_packets, ipv4, ipv6                                                                                                 | data.netinfo.iface.mac           |
++----------------------+------------------------------------------------------------------------------------------------------------------------+----------------------------------+
+| **Hotfix**           | hotfix                                                                                                                 | data.hotfix                      |
++----------------------+------------------------------------------------------------------------------------------------------------------------+----------------------------------+
 
 Use case: Visualize system inventory in the Wazuh app
 -----------------------------------------------------
@@ -512,30 +516,6 @@ Once the module starts, it will run periodically scans and send the new data in 
 for each agent.
 
 The current inventory can be consulted in different ways. Let's see an example querying for a list of ports in a Debian agent:
-
-- Querying the Database directly on the manager side, located at ``$install_directory/queue/db/:agent_id.db``.
-
-.. code-block:: console
-
-  # sqlite3 /var/ossec/queue/db/003.db
-
-.. code-block:: none
-  :class: output
-
-  SQLite version 3.7.17 2013-05-20 00:56:22
-  Enter ".help" for instructions
-  Enter SQL statements terminated with a ";"
-  sqlite>
-
-.. code-block:: console
-
-  sqlite> select * from sys_ports;
-
-.. code-block:: none
-  :class: output
-
-  0|2021/10/18 22:53:03|tcp|0.0.0.0|445|0.0.0.0|0|0|0|0|listening|4|System|481fa26d857363b78f4f3f586816a2bca324560a|120ef3368b130c7432e4ee29d7ae502fb6767d10
-  0|2021/10/18 22:53:06|tcp6|::|445|::|0|0|0|0|listening|4|System|effa4fd964755442c367e0912108801fb70d253d|cf372ca01c25d7a8fe58b1d9d104771364e3d281
 
 - By querying the Wazuh API endpoint :api-ref:`GET /syscollector/{agent_id}/ports <operation/api.controllers.syscollector_controller.get_ports_info>`, which retrieves nested data in JSON format.
 
@@ -595,6 +575,30 @@ The current inventory can be consulted in different ways. Let's see an example q
          }]
       }
   }
+
+- Querying the Database directly on the manager side, located at ``$install_directory/queue/db/:agent_id.db``.
+
+.. code-block:: console
+
+  # sqlite3 /var/ossec/queue/db/003.db
+
+.. code-block:: none
+  :class: output
+
+  SQLite version 3.7.17 2013-05-20 00:56:22
+  Enter ".help" for instructions
+  Enter SQL statements terminated with a ";"
+  sqlite>
+
+.. code-block:: console
+
+  sqlite> select * from sys_ports;
+
+.. code-block:: none
+  :class: output
+
+  0|2021/10/18 22:53:03|tcp|0.0.0.0|445|0.0.0.0|0|0|0|0|listening|4|System|481fa26d857363b78f4f3f586816a2bca324560a|120ef3368b130c7432e4ee29d7ae502fb6767d10
+  0|2021/10/18 22:53:06|tcp6|::|445|::|0|0|0|0|listening|4|System|effa4fd964755442c367e0912108801fb70d253d|cf372ca01c25d7a8fe58b1d9d104771364e3d281
 
 Moreover, the same information can be consulted on the Wazuh app, which includes an `Inventory Data` tab for each agent.
 
