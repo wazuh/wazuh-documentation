@@ -34,23 +34,23 @@ Configuration
        -a exit,always -F euid=${<your_user_id>} -F arch=b32 -S execve -k audit-wazuh-c
        -a exit,always -F euid=${<your_user_id>} -F arch=b64 -S execve -k audit-wazuh-c
 
-#. Delete old rules (optional)
+#. Optionally, delete old rules.
 
-    .. code-block:: XML
+    .. code-block:: console
 
-        auditctl -D
+        # auditctl -D
 
-#. Update rules
+#. Update rules.
 
-    .. code-block:: XML
+    .. code-block:: console
 
-        auditctl -R /etc/audit/rules.d/wazuh.rules
+        # auditctl -R /etc/audit/rules.d/wazuh.rules
 
 
 Steps to generate the alerts
 ----------------------------
 
-#. Log in the RHEL Agent as the monitored user
+#. Log in the RHEL 7 Agent endpoint as the monitored user.
 
 #. Execute a ping to www.google.com
 
@@ -63,4 +63,4 @@ Related alerts can be found with:
 Affected endpoints
 ------------------
 
-* RHEL 7 Agent
+* RHEL 7 agent host

@@ -1,47 +1,40 @@
 .. _poc_detect_bruteforce:
 
-
 Detecting a brute-force attack
 ==============================
 
-Brute forcing SSH (on Linux) or RDP (on Windows) are common attack vectors. Wazuh provides out of the box rules capable of identifying brute-force attacks, by correlating multiple authentication failure events.
+Identify SSH and RDP brute force attacks with Wazuh's out-of-the-box rules. This rules can correlate multiple authentication failure events and alert about a brute force attack.
 
 Configuration
 -------------
 
-- Ensure you have SSH installed and enabled.
+#. Install `ssh` from your operating system repositories if missing.
 
-- If you want to execute automated RDP connections you can use ``hydra``:
+#. Install `hydra` to execute automated RDP connections. You can run ``yum install -y hydra`` on RPM based systems.
+
+Steps to generate the alerts
+----------------------------
+
+#. Replace ``<username@rhel.agent.endpoint>`` with the appropriate destination in the following command. Run it to create multiple failed authentication attempts on the monitored Linux endpoint.
 
     .. code-block:: console
 
-      yum install -y hydra
+        # for i in `seq 1 10`; do sshpass -p 'wrong_password' ssh -o StrictHostKeyChecking=no <username@rhel.agent.endpoint>; done
 
-Steps to Generate the alerts
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Run multiple failed authentication failure attempts against the monitored endpoints:
-
-- Linux example:
-
-    .. code-block:: XML
-
-        for i in `seq 1 10`; do sshpass -p 'wrong_password' ssh -o StrictHostKeyChecking=no <rhel-agent-endpoint>; done
-
-- Windows example:
+#. Replace ``<username@win.agent.endpoint>`` with the appropriate destination in the following command. Run it to create multiple failed authentication attempts on the monitored Windows endpoint.
   
-    .. code-block:: XML
+    .. code-block:: console
 
-        hydra -l Administrator -p wrong_password <win-agent-endpoint> rdp
+        # hydra -l Administrator -p wrong_password <username@win.agent.endpoint> rdp
 
 
 Alerts
-^^^^^^
-- Linux: ``rule.id:(5710 OR 5712)`` (other related rules are 5711, 5716, 5720, 5503, 5504)
-- Windows: ``rule.id:(60122 OR 60137)``
+------
+* Linux: ``rule.id:(5710 OR 5712)``. (Other related rules are ``5711``, ``5716``, ``5720``, ``5503``, ``5504``)
+* Windows: ``rule.id:(60122 OR 60137)``
 
 Affected endpoints
-^^^^^^^^^^^^^^^^^^
+------------------
 
-- Linux RHEL
-- Windows
+- RHEL 7 agent host
+- Windows agent host
