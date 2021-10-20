@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about how to configure AWS credentials. In this section of the Wazuh documentation, you can find the multiple ways to configure them. 
+  :description: Learn more about Wazuh AWS module configuration. In this section of the Wazuh documentation, you can find multiple ways to configure AWS credentials.
   
 .. _amazon_credentials:
 
