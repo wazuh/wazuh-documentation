@@ -3,3 +3,45 @@
 
   Style for the searchbox in general.
 ----------------------------------------------------------------------------- */
+
+#search-box {
+  background-color: $wuiColorLightestShade;
+  border: 2px solid $wuiColorLightShade;
+  border-radius: $roundedCorners;
+
+  .search-form {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 46px;
+
+    .form-control {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      font-size: 18px;
+      font-weight: 400;
+      background-color: $wuiColorLightestShade;
+      border: none;
+    }
+
+    .btn-search {
+      position: absolute;
+      right: 0;
+      z-index: 10;
+      width: 46px;
+      height: 46px;
+      padding: 5px;
+      background: none;
+      border: none;
+
+      svg {
+        width: 100%;
+        height: 100%;
+        fill: $primaryLighter;
+      }
+    }
+  }
+}

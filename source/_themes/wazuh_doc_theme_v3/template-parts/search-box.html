@@ -1,11 +1,11 @@
-<!-- TODO: part-search-box  -->
 <div id="search-box" role="search">
-  SEARCH BOX
-  <form method="get" class="searchform d-none" action="{{ pathto('search') }}" id="search-form">
-    <div class="search-input-wrapper">
-      <input type="text" class="form-control" name="q" placeholder="Search our documentation"></input>
-    </div>
-    <button type="submit" class="btn-search"><i class="fa fa-search"></i></button>
+  <form method="get" class="search-form" action="{{ pathto('search') }}" id="search-form">
+    <input type="text" class="form-control" name="q" placeholder="Quick search here"></input>
+    <button type="submit" class="btn-search">
+      <svg class="icon-search">
+        <use xlink:href="#search"></use>
+      </svg>
+    </button>
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>

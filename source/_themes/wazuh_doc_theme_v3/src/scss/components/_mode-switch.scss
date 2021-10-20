@@ -3,3 +3,47 @@
 
   Style for the component that switches the theme style to light or dark mmode.
 ----------------------------------------------------------------------------- */
+
+#light-dark-switch {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 8px;
+
+  .switch-icon {
+    width: 20px;
+    height: 20px;
+    margin: 0 5px;
+    fill: $wuiColorLightShade;
+
+    &.on {
+      fill: $primaryLighter;
+    }
+  }
+}
+
+#mode-switch {
+  box-sizing: content-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 26px;
+  height: 16px;
+  padding: 0;
+  margin: 0 5px;
+  background-color: $primaryLighter;
+  border: 1px solid $primaryLighter;
+  border-radius: 25px;
+
+  &.dark {
+    justify-content: flex-end;
+  }
+
+  span {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    content: "";
+    background-color: $wuiColorEmptyShade;
+    border-radius: 50%;
+  }
+}

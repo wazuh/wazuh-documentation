@@ -5,79 +5,56 @@
   menu in the top bar).
 ----------------------------------------------------------------------------- */
 
-.navbar {
-  .navbar-nav {
-    .nav-item {
-      .nav-link {
-        font-size: 18px;
-        color: $wuiColorFullShade;
-        padding: 0 10px;
-        &:hover, &:focus {
-          color: $wuiColorPrimary;
-          text-decoration: none;
-        }
-        &.dropdown-toggle {
-          padding: 0 28px 0 15px;
-          &[aria-expanded=true] {
-            text-decoration: none;
-            &::before {
-              transform: rotate(-35deg);
-              transition: all .1s;
-            }
-            &::after {
-              transform: rotate(35deg);
-              transition: all .1s;
-            }
-          }
-          &::before {
-            content: '';
-            height: 2px;
-            width: 8px;
-            background-color: $wuiColorFullShade;
-            position: absolute;
-            transform: rotate(35deg);
-            right: 13px;
-            bottom: 11px;
-            transition: all .1s;
-            border-radius: 25% 0;
-          }
-          &::after {
-            content: '';
-            height: 2px;
-            width: 8px;
-            background-color: $wuiColorFullShade;
-            position: absolute;
-            transform: rotate(-35deg);
-            right: 7px;
-            bottom: 11px;
-            border: 0;
-            transition: all .1s;
-            border-radius: 25% 0;
-          }
-        }  
-      }
-      .dropdown-menu {
-        box-shadow: 0px -2px 8px rgba($wuiColorFullShade, 0.05);
-        border: 0;
-        border-radius: 10px;
-        margin-top: 20px;
-        min-width: unset;
-        padding: 15px;
-        &::before {
-          content: '';
-          height: 18px;
-          width: 18px;
-          background-color: $wuiColorEmptyShade;
-          box-shadow: 0px -2px 8px rgba($wuiColorFullShade, 0.05);
-          clip-path: inset(-15px 0 0 -15px);
-          transform: rotate(45deg);
-          position: absolute;
-          top: -9px;
-        }
-        .dropdown-item {
-          padding: .25rem .75rem;
+.navbar-nav {
+  .nav-link {
+    padding: 0 10px;
+    font-size: 18px;
+    color: $wuiColorFullShade;
+    &:hover,
+    &:focus {
+      color: $wuiColorPrimary;
+      text-decoration: none;
+    }
+    &.dropdown-toggle {
+      &[aria-expanded="true"] {
+        text-decoration: none;
+
+        &::after {
+          transition: transform .1s;
+          transform: rotateX(180deg);
         }
       }
+      &::after {
+        width: 1em;
+        height: 1em;
+        vertical-align: middle;
+        content: "";
+        background: url("#{$icoPath}svg-icons.svg#svgView(viewBox(50,0,32,32))");
+        border: none;
+        transition: transform .1s;
+      }
+    }
+  }
+  .dropdown-menu {
+    min-width: unset;
+    padding: 15px;
+    margin-top: 20px;
+    border: 0;
+    border-radius: 10px;
+    box-shadow: 0 -2px 8px rgba($wuiColorFullShade, .05);
+    &::before {
+      position: absolute;
+      top: -9px;
+      width: 18px;
+      height: 18px;
+      content: "";
+      background-color: $wuiColorEmptyShade;
+      box-shadow: 0 -2px 8px rgba($wuiColorFullShade, .05);
+      clip-path: inset(-15px 0 0 -15px);
+      transform: rotate(45deg);
+    }
+    .dropdown-item {
+      padding: .25rem .75rem;
     }
   }
 }

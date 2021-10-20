@@ -128,8 +128,7 @@
 
     {%- block preload -%}
     {{- fonts() }}
-    <!-- <link rel="preload" href="{{ url_root }}_static/images/wazuh_bg_head.png" as="image" type="image/x-png"> -->
-    <!-- <link rel="preload" href="{{ url_root }}_static/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin> -->
+    <link rel="preload" href="{{ url_root }}_static/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
     {% endblock preload -%}
     
     {%- block linktags %}
@@ -181,12 +180,6 @@
 
   <body class="{{ body_class }}">
   {% block body %} {% endblock %}
-  {%- block back_to_top %}
-  {#- Back to top #}
-    <a id="btn-scroll" href="#" title="Back to top">
-      <i class="fa fa-chevron-circle-up" aria-hidden="true"></i>
-    </a>
-  {%- endblock back_to_top -%}
   {%- block after_footer %}
     <script id="documentation_options" data-url_root="{{ pathto('', 1) }}" src="{{ pathto('_static/js/documentation_options.js', 1) }}"></script>
   {{- js() }}

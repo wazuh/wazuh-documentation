@@ -11,31 +11,37 @@ $breakpoints: (
   xl: 1200px,
   wzh-xl: 1300px,
   xxl: 1600px,
-);
+) !default;
 
 /* -- Color variables ------------------------------------------------------------------------------------ */
 
 // Main colors - Light theme
-$wuiColorPrimary: #256BD1;
-$primaryLighter: #3585F9;
-$wuiMainColorAccent: #FEDD0B;
+$wuiColorPrimary: #256bd1 !default;
+$primaryLighter: #3585f9 !default;
+$wuiMainColorAccent: #fedd0b !default;
 
-$wuiColorWarning: #FF7A2F;
-$wuiColorDanger: #BD271E;
-$wuiColorSuccess: #2DA4AA;
+$wuiColorWarning: #ff7a2f !default;
+$wuiColorDanger: #bd271e !default;
+$wuiColorSuccess: #2da4aa !default;
 
-$wuiColorEmptyShade: #FFF;
-$wuiColorLightestShade: #EBF2FB;
-$wuiColorLightShade: #B7C6D7;
-$wuiColorMediumShade: #657C97;
+$wuiColorEmptyShade: #fff !default;
+$wuiColorLightestShade: #ebf2fb !default;
+$wuiColorLightShade: #b7c6d7 !default;
+$wuiColorMediumShade: #657c97 !default;
 
-$wuiColorDarkShade: #545F73;
-$wuiColorDarkestShade: #292929;
-$wuiColorFullShade: #000000;
+$wuiColorDarkShade: #545f73 !default;
+$wuiColorDarkestShade: #292929 !default;
+$wuiColorFullShade: #000 !default;
 
 /* -- Theme elements fixed dimensions ------------------------------------------------------------------------------------ */
 
 // Fixed dimensions
-$header-height: 77px;
-$left-sidebar-width: 385px;
-$right-sidebar-width: $left-sidebar-width;
+$headerHeight: 77px !default;
+$leftSidebarWidth: 385px !default;
+$rightSidebarWidth: 290px !default;
+$roundedCorners: 10px !default;
+
+/* -- Others ------------------------------------------------------------------------------------ */
+$imgPath: "../../images/" !default;
+$icoPath: $imgPath + "icons/" !default;
+$maxTocLevel: 6 !default;

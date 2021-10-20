@@ -3,3 +3,16 @@
 
   Style for the breadcrumbs present in the content area.
 ----------------------------------------------------------------------------- */
+
+#breadcrumbs {
+  position: sticky;
+  top: 0;
+  display: inline-flex;
+  flex-direction: row;
+  width: 100%;
+  height: 60px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  background-color: $wuiColorEmptyShade;
+}

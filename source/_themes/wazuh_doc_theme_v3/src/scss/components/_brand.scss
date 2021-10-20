@@ -7,16 +7,16 @@
 .navbar-brand {
   display: flex;
   justify-content: flex-end;
-  
-  a.logo-link {  
+
+  .logo-link {
     &.web {
       padding-bottom: .3rem;
     }
     &.docs {
-      color: $wuiColorFullShade;
-      line-height: 2.15;
       margin-left: 5px;
-      
+      line-height: 2.15;
+      color: $wuiColorFullShade;
+
       &:hover {
         text-decoration: none;
       }

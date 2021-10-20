@@ -3,28 +3,41 @@
 ----------------------------------------------------------------------------- */
 
 body {
-  font-family: "Manrope", sans-serif;
+  position: relative;
+  margin-top: $headerHeight;
+  font-family: Manrope, sans-serif;
   font-size: 16px;
-  font-weight: 500px;
-  padding-top: $header-height;
-  
-  main img {
-    max-width: 100%;
+  font-weight: 500;
+}
+
+#icon-sprite {
+  display: none;
+}
+
+.inner-body {
+  position: fixed;
+  top: $headerHeight;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: calc(100vh - #{$headerHeight});
+  overflow-y: auto;
+}
+
+main img {
+  max-width: 100%;
+}
+
+.sidebar {
+  flex-shrink: 0;
+
+  .sidebar-container {
+    top: 0;
+    height: calc(100vh - #{$headerHeight});
+    overflow-y: auto;
   }
-  
-  .sidebar {
-    position: relative;
-    
-    .sidebar-container {
-      position: sticky;
-      top: $header-height;
-      width: 100%;
-      height: calc(100vh - $header-height);
-      overflow: auto;
-    }
-  }
-  
-  a {
-    color: $wuiColorPrimary;
-  }
+}
+
+a {
+  color: $wuiColorPrimary;
 }

@@ -19,7 +19,7 @@
     @media (max-width: ($breakpoint-value - 1)) {
       @content;
     }
-  } 
+  }
 }
 
 @mixin media-only($lower, $upper) {
@@ -28,6 +28,21 @@
     $upper-breakpoint: map-get($breakpoints, $upper);
     @media (min-width: $lower-breakpoint) and (max-width: ($upper-breakpoint - 1)) {
       @content;
+    }
+  }
+}
+
+/* -- Sidebar ---------------------------------------------------------------------------- */
+
+@mixin global-toc-nested-padding($min, $max) {
+  @for $level from $min through $max {
+    .current {
+      .toctree-l#{$level} > a {
+        padding-left: 20px * ($level - 1);
+        &.current-toc-node::before {
+          left: (20px * ($level - 1)) - 15px;
+        }
+      }
     }
   }
 }

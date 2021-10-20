@@ -8,16 +8,19 @@
 
 {%- extends "!wazuh_doc_theme_v3/layout.html" -%}
 {%- block body -%}
+{%- block icons %}
+{% include "static/images/icons/svg-icons.svg" %}
+{% endblock icons -%}
 {%- block header %}
 {% include "template-parts/header.html" %}
 {% endblock header -%}
-    <div class="inner-body">
+    <div class="inner-body" data-spy="scroll" data-target="#local-toc" data-offset="100">
       {% block sidebar1 -%}
         {% include "template-parts/sidebar-left.html" %}
       {% endblock sidebar1 -%}
       
       {%- block main_column -%}
-      <div id="central-column">      
+      <div id="central-column">
         {%- block latest %}
           {%- set nav_version = version %}
           {% if current_version %}
@@ -32,7 +35,7 @@
           </div>
           {% endif %}
         {% endblock latest %}
-        
+
         {% if pagename not in special_pages %}
           {% include "template-parts/breadcrumbs.html" %}
         {% endif %}
@@ -43,7 +46,7 @@
         {% if pagename not in special_pages %}
         {% include "template-parts/navigation.html" %}
         {% endif %}
-        </main>  
+        </main>
       </div>
       {%- endblock main_column -%}
       
