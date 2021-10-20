@@ -8,9 +8,9 @@
 Amazon Machine Images (AMI)
 ===========================
 
-Wazuh provides a pre-built Amazon Machine Image that you can directly launch using our AMI in the AWS Marketplace. You can also see our `consulting service <https://aws.amazon.com/marketplace/pp/prodview-ve4mgmhukgmzi>`_.
+Wazuh provides a pre-built Amazon Machine Image that you can directly launch using our AMI in the AWS Marketplace, the use of our software is free and you will only have to pay the costs related to AWS. You can also see our `consulting service <https://aws.amazon.com/marketplace/pp/prodview-ve4mgmhukgmzi>`_.
 
-The characteristics of the latest AMI are:
+These are the characteristics of the latest AMI:
 
     - Amazon Linux 2
     - Wazuh manager: |WAZUH_LATEST_AMI|
@@ -19,19 +19,42 @@ The characteristics of the latest AMI are:
     - Kibana: |KIBANA_VERSION_AMI|
     - Wazuh Kibana plugin: |WAZUH_LATEST_AMI|-|OPENDISTRO_LATEST_AMI|
 
-To deploy an instance from this AMI you must perform the following steps:
+Deploying an instance
+---------------------
 
-1. Subscribe to our Server Product: `Wazuh All-In-One Deployment <https://aws.amazon.com/marketplace/pp/prodview-eju4flv5eqmgq>`_.
-2. Select the desired version of the AMI when configuring the subscription.
-3. Launch an instance with the AMI ``Wazuh All-In-One Deployment``, it can be found on AWS Marketplace or launched from the subscription page.
-4. Select the type of instance according to your needs, it is recommended to use an instance type ``t3a.xlarge`` or similar, you must take into account the `minimum and recommended requirements <https://documentation.wazuh.com/current/installation-guide/requirements.html#all-in-one-deployment>`_ for this type of instance.
-5. Configure your instance details.
-6. Set the storage capacity, 100GiB or more is recommended.
-7. Add the tags that you think are convenient.
-8. Establish an SG (Security Group). Take into account the `protocols and ports <https://documentation.wazuh.com/current/getting-started/architecture.html#required-ports>`_ necessary for its correct operation and the security measures for your instance.
-9. When you're done reviewing the instance details, click on ``Launch`` and select one ``Key Pair`` with which to access the instance through ssh. Without this ``Key Pair`` it will only be possible to access the instance through ``EC2 Instance Connect``
 
-Considerations about ssh:
+First, you have to subscribe to our Server Product `Wazuh All-In-One Deployment <https://aws.amazon.com/marketplace/pp/prodview-eju4flv5eqmgq>`_, clicking the **Continue to Subscribe** button, once subscribed you have two options to deploy the instance:
+
+
+1. Deploying a predefined instance
+
+  1. After clicking in **Continue to Subscribe**, you will have to Accept the Terms an Conditions. Once accepted, click **Continue to Configuration**.
+  2. Now you have to configure the software selecting the Software Version and the Region where the instance will be deployed. Once configured, click **Continue to Launch**.
+  3. Finally, you will can see the Usage Information, EC2 Instance Type, network and Key Pair settings among others. When finished, click **Launch** and your instance will be launched.
+
+
+2. Configure and deploying the instance manually
+
+  1. Once subscribed, you can deploy an instance directly from AWS EC2 Dashboard. For this, ckick on **Launch instance**, where you will have to configure a total of 7 steps.
+  2. First, choose an Amazon Machine Image (AMI) from AWS Marketplace searching by Wazuh All-In-One Deployment. Click **Select**.
+  3. Review the Server Product characteristics and click **Continue**.
+  4. Select the type of instance according to your needs. We recommended using an instance type ``t3a.xlarge`` or similar, and checking the `minimum and recommended requirements <https://documentation.wazuh.com/current/installation-guide/requirements.html#all-in-one-deployment>`_ for this type of instance. Click **Next: Configure Instance Details** when ready.
+  5. Review the intance details, such as Network, CPU, instance behavior or User data. Then, click **Next: Add Storage**.
+  6. Set the storage capacity, 100GiB or more is recommended. Click **Next: Add Tags**.
+  7. Add the tags that you think are convenient. Click **Next: Configure Security Group**.
+  8. Establish an SG (Security Group). Make sure you check the `protocols and ports <https://documentation.wazuh.com/current/getting-started/architecture.html#required-ports>`_ necessary for its correct operation and the security measures for your instance. Click **Review and Launch**
+  9. Review all the intance configuration and when finished, click **Launch**
+  10. Now you have to **Select an existing key pair or create a new key pair**, you can:
+  
+    a.  Choose an existing key pair.
+    b. Create a new key pair.
+    c. Proceed without a key pair.
+
+If you want to access the instance with ssh, you will need a key pair, without it will only be possible to access the instance through ``EC2 Instance Connect``.
+
+Once finished clik **Launch instances** and enjoy.
+
+.. note:: Considerations about ssh:
 
     - For security reasons, the ``root`` user cannot be identified by ssh. It can only be accessed through the user: ``wazuh-user``
     - For security, ssh authentication through passwords is disabled, it can only be accessed through a ``Key Pair``, so that only the user with said ``Key Pair`` will be able to access the instance.
