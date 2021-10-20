@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-    :description: In this section of the Wazuh documentation you will find more information about the client keys file: its location, file format and examples. 
+    :description: In this section of the Wazuh documentation, you will find more information about the client.keys file: its location, file format, and examples. 
     
 
 .. _client-keys:
