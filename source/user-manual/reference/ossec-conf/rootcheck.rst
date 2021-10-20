@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about the configuration options for policy monitoring and anomaly detection in the rootcheck section. 
+  :description: Learn more about the configuration options for policy monitoring and anomaly detection in the rootcheck section of the Wazuh documentation.
   
 .. _reference_ossec_rootcheck:
 
