@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-   :description: Learn how to migrate OSSEC agents to Wazuh agents on Linux systems without losing any configuration data in this section. 
+   :description: Learn in this section how to migrate OSSEC agents to Wazuh agents on Linux systems without losing any configuration data. 
    
 .. _ossec_agent:
 
