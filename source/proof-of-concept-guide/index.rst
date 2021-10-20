@@ -6,14 +6,14 @@
 Wazuh Proof of Concept Guide
 ============================
 
-The following document is a cheat-sheet on setting up the Wazuh environment to test the different product capabilities. It assumes that the following components are already installed:
+The POC (Proof of Concept) guide is a cheat-sheet on setting up the Wazuh environment to test the different product capabilities. It assumes that the following components are already installed:
 
 - Elasticsearch + Kibana + Wazuh Kibana plugin
 - Wazuh manager + Filebeat (for integration with Elasticsearch)
 - Wazuh agent (RHEL 7)
 - Wazuh agent (Windows)
 
-A good guide on how to install these components can be found in the :ref:`installation guide <installation_guide>` section. 
+A good guide on how to install these components can be found in the :ref:`Installation guide <installation_guide>` section. 
 
 
 .. toctree::
