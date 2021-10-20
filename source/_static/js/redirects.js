@@ -65,6 +65,7 @@ newUrls['4.2'] = [
   '/user-manual/reference/statistics-files/wazuh-logcollector-state.html',
   '/user-manual/reference/tools/wazuh-control.html',
   '/user-manual/reference/tools/wazuh-regex.html',
+  '/amazon/integrating-aws-cloudwatch-logs.html',
 ];
 
 removedUrls['4.2'] = [
