@@ -206,7 +206,7 @@ Adding authentication for Elasticsearch
 X-Pack security also provides authentication within each component. The credentials
 are configured in the Elastic Server using Elasticsearch directly.
 
-1. Add ``x.pack.security.enabled`` to ``/etc/elasticsearch/elasticsearch.yml``.
+1. Add ``xpack.security.enabled`` to ``/etc/elasticsearch/elasticsearch.yml``.
 
   .. code-block:: console
 
