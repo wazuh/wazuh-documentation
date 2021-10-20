@@ -33,3 +33,19 @@ The following diagram shows what we want to accomplish:
       :align: center
       :class: front      
 
+.. note::  
+  The following steps describe how to set up the wazuh module. It assumes the user already has CloudWatch Logs configured and working, with some data existing in a log group.
+
+Step 1: Create AWS credentials
+------------------------------
+
+Once we have a log group with log events in it we need to set up credentials so that Wazuh is able to connect and extract those events. We recommend doing this instead of hardcoding the user and password for the AWS account in the ``ossec.conf``. More information about how to configure AWS credentials can be found in the `Wazuh documentation <https://documentation.wazuh.com/current/amazon/services/prerequisites/credentials.html>`_.
+
+For testing purposes, we are going to create a file located at ``~/.aws/credentials`` with the following content to grant us access to CloudWatch:
+
+.. code-block:: xml
+[default]
+aws_access_key_id=<YOUR_AWS_ACCESS_KEY>
+aws_secret_access_key=<YOUR_AWS_SECRET_KEY>
+
+This way we will be able to connect to the AWS account if we specify default as the AWS profile in the next step.
