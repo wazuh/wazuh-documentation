@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Check out the compatibility matrix of the upgrade process of the Wazuh server, Open Distro for Elasticsearch, Elastic Stack, and the Wazuh agents. 
+  :description: Find out more about the process of upgrading the Wazuh server, Open Distro for Elasticsearch, Elastic Stack, and Wazuh agents in this section.
   
 .. _upgrade_guide:
 
