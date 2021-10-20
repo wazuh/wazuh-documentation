@@ -1,0 +1,4 @@
+**/*.min.css
+**/vendor/
+/_gh_pages/
+**/libs/

@@ -1,2 +1,2 @@
-body{font-family:Manrope,sans-serif;font-size:16px;font-weight:500px;padding-top:77px}body main img{max-width:100%}body .sidebar{position:relative}body .sidebar .sidebar-container{position:sticky;top:77px;width:100%;height:calc(100vh - $header-height);overflow:auto}body a{color:#256bd1}
+body{position:relative;margin-top:77px;font-family:Manrope,sans-serif;font-size:16px;font-weight:500}#icon-sprite{display:none}.inner-body{position:fixed;top:77px;display:flex;flex-direction:row;width:100%;height:calc(100vh - 77px);overflow-y:auto}main img{max-width:100%}.sidebar{flex-shrink:0}.sidebar .sidebar-container{top:0;height:calc(100vh - 77px);overflow-y:auto}a{color:#256bd1}
 /*# sourceMappingURL=api-reference.min.css.map */

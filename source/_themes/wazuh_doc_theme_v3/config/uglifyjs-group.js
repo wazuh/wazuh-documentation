@@ -23,7 +23,7 @@ const pageSpecificJS = {
     SRC_PATH + "components/version-selector.js",
     SRC_PATH + "components/search-box.js",
     SRC_PATH + "components/global-toc.js",
-    SRC_PATH + "components/scroll-spy.js" 
+    SRC_PATH + "components/local-toc.js"
     // + JS files for different parts/components of the theme (only functionality for regular documentation content pages) + tabs (extension) + lightbox (extension)
   ],
   "index": [

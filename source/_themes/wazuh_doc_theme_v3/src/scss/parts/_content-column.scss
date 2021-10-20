@@ -11,5 +11,5 @@
 @import "../components/customized-tabs";
 
 #central-column {
-  grid-area: central-column;
+  width: calc(100% - #{$leftSidebarWidth} - #{$rightSidebarWidth});
 }

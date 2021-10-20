@@ -1,5 +1,5 @@
 /* -----------------------------------------------------------------------------
-  Moved content page (redirect for not-found)
+  Moved content page (redirect for not not-found)
 ----------------------------------------------------------------------------- */
 
 @import "../inc/variables";
@@ -7,36 +7,35 @@
 @import "../inc/root";
 
 body {
-  text-align: center;
-  color: #333;
-  font-family: "Open Sans", sans-serif;
   display: flex;
-  justify-content: center;
   flex-direction: column;
+  justify-content: center;
   padding: 50px 15px;
+  font-family: "Open Sans", sans-serif;
+  color: #333;
+  text-align: center;
 }
 
 h1 {
-  font-family: "Montserrat", sans-serif;
-  font-weight: 400;
-  color: #404040;
-  line-height: 1.2;
+  font-family: Manrope, sans-serif;
   font-size: 26px;
-
+  font-weight: 400;
+  line-height: 1.2;
+  color: #404040;
 }
 
 #spinner-wrapper {
-  margin: 15px auto;
-  width: 100px;
-  height: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100px;
+  height: 100px;
+  margin: 15px auto;
 }
 
 #spinner {
-  display: block;
   position: relative;
+  display: block;
   width: 60px;
   height: 60px;
   border-top: 8px solid #00a9e5;
@@ -44,46 +43,33 @@ h1 {
   border-bottom: 8px solid #00a9e5;
   border-left: 8px solid transparent;
   border-radius: 50%;
-  -webkit-animation: spin 1s linear infinite;
-  -moz-animation: spin 1s linear infinite;
   animation: spin 1s linear infinite;
 }
 
 #spinner::before {
-  content: "";
-  height: 8px;
-  width: 8px;
-  border-radius: 50%;
   position: absolute;
-  background-color: #00a9e5;
-  left: 1px;
   top: 3px;
+  left: 1px;
+  width: 8px;
+  height: 8px;
+  content: "";
+  background-color: #00a9e5;
+  border-radius: 50%;
 }
 
 #spinner::after {
-  content: "";
-  height: 8px;
-  width: 8px;
-  border-radius: 50%;
   position: absolute;
-  background-color: #00a9e5;
-  left: 1px;
   bottom: 3px;
+  left: 1px;
+  width: 8px;
+  height: 8px;
+  content: "";
+  background-color: #00a9e5;
+  border-radius: 50%;
 }
 
-@-moz-keyframes spin {
-  100% {
-    -moz-transform: rotate(360deg);
-  }
-}
-@-webkit-keyframes spin {
-  100% {
-    -webkit-transform: rotate(360deg);
-  }
-}
 @keyframes spin {
   100% {
-    -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
 }
