@@ -44,8 +44,10 @@ Once we have a log group with log events in it we need to set up credentials so 
 For testing purposes, we are going to create a file located at ``~/.aws/credentials`` with the following content to grant us access to CloudWatch:
 
 .. code-block:: xml
-[default]
-aws_access_key_id=<YOUR_AWS_ACCESS_KEY>
-aws_secret_access_key=<YOUR_AWS_SECRET_KEY>
+
+ [default]
+ aws_access_key_id=<YOUR_AWS_ACCESS_KEY>
+ aws_secret_access_key=<YOUR_AWS_SECRET_KEY>
 
 This way we will be able to connect to the AWS account if we specify default as the AWS profile in the next step.
+
