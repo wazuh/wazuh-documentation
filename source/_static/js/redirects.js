@@ -40,6 +40,7 @@ removedUrls['x.y'] = [
 
 newUrls['4.2'] = [
   '/release-notes/release_4_2_0.html',
+  '/deploying-with-ansible/guide/install-opendistro-server.html',
   '/user-manual/capabilities/active-response/ar-use-cases/removing-malware.html',
   '/user-manual/capabilities/active-response/ar-use-cases/wazuh-with-yara.html',
   '/user-manual/capabilities/active-response/ar-use-cases/blocking-attacks.html',
@@ -68,6 +69,7 @@ newUrls['4.2'] = [
 ];
 
 removedUrls['4.2'] = [
+  '/deploying-with-ansible/guide/install-elk-server.html',
   '/user-manual/reference/daemons/ossec-agentd.html',
   '/user-manual/reference/daemons/ossec-agentlessd.html',
   '/user-manual/reference/daemons/ossec-analysisd.html',
@@ -96,6 +98,11 @@ removedUrls['4.2'] = [
 ];
 
 redirections.push(
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/deploying-with-ansible/guide/install-elk-server.html',
+      '4.2': '/deploying-with-ansible/guide/install-opendistro-server.html',
+    },
     {
       'target': ['4.1=>4.2', '4.2=>4.1'],
       '4.1': '/user-manual/reference/daemons/ossec-agentd.html',
