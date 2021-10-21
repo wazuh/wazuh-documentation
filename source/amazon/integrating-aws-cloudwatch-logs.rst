@@ -210,10 +210,10 @@ If you have any questions about this, don’t hesitate to check out our `documen
 References
 ==========
 
-`Configuring AWS credentials <https://documentation.wazuh.com/3.12/amazon/services/prerequisites/credentials.html>`_
-`Wazuh AWS-S3 Wodle options <https://documentation.wazuh.com/3.12/user-manual/reference/ossec-conf/wodle-s3.html>`_
-`Using Wazuh to monitor AWS <https://documentation.wazuh.com/3.12/amazon/index.html>`_
-`Integrating Amazon Macie in Wazuh <https://wazuh.com/blog/integrating-amazon-macie-in-wazuh/>`_
-`Integrating AWS CloudTrail in Wazuh <https://wazuh.com/blog/integrating-aws-cloudtrail-in-wazuh/>`_
-`AWS CloudWatch Logs official documentation <https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html>`_
+- `Configuring AWS credentials <https://documentation.wazuh.com/3.12/amazon/services/prerequisites/credentials.html>`_
+- `Wazuh AWS-S3 Wodle options <https://documentation.wazuh.com/3.12/user-manual/reference/ossec-conf/wodle-s3.html>`_
+- `Using Wazuh to monitor AWS <https://documentation.wazuh.com/3.12/amazon/index.html>`_
+- `Integrating Amazon Macie in Wazuh <https://wazuh.com/blog/integrating-amazon-macie-in-wazuh/>`_
+- `Integrating AWS CloudTrail in Wazuh <https://wazuh.com/blog/integrating-aws-cloudtrail-in-wazuh/>`_
+- `AWS CloudWatch Logs official documentation <https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html>`_
  
