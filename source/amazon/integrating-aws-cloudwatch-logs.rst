@@ -100,7 +100,7 @@ After restarting we can ensure everything is working fine by checking the ``<WAZ
 It is also possible to verify the integration is working as expected by accessing the Wazuh UI.
 
 Troubleshooting
----------------
+===============
 This section covers possible errors that may occur if we have made any mistake during the configuration process. Those errors will be found in the ``<WAZUH_HOME>/logs/ossec.log file``.
 
 .. note::  
@@ -138,4 +138,37 @@ This error message appears when one of the following cases happens:
 - We are not providing a region list using the regions tag. If that is the case, Wazuh will try to find the log group in every single region available. However, it may exist only in one of them. The same applies if we provide a list of regions.
 
 **Solution**: Ensure you are using the right credentials, specifying the proper region, and the log group is created in that particular region.
+
+
+Use Case: Getting logs from an Apache HTTP Server instance (httpd)
+==================================================================
+
+One of the most useful applications of this integration is the ability to get the logs from our AWS containers and monitor them. In this particular case, we are going to deploy an Apache HTTP server inside a Fargate container and get its logs, so if something happens Wazuh will alert us.
+The first thing we need to achieve this is a container generating some logs for us. As an example, we are going to access Elastic Container Service > Task Definition in AWS Console and create a new TaskDefinition providing Fargate as the launch type and the following configuration using the Configure via JSON button:
+
+
+.. code-block:: xml
+
+    {
+        "containerDefinitions": [{
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "awslogs-test-apache",
+                    "awslogs-region": "us-east-1",
+                    "awslogs-stream-prefix": "awslogs-example"
+                }
+            },
+            "portMappings": [{
+                "hostPort": 80,
+                "protocol": "tcp",
+                "containerPort": 80
+            }],
+            "image": "httpd:latest",
+            "name": "apache"
+        }],
+        "memory": "512",
+        "requiresCompatibilities": ["FARGATE"],
+        "cpu": "256",
+    }
 
