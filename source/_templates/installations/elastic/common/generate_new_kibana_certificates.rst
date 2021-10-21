@@ -1,5 +1,6 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+
 .. code-block:: console
 
   # NODE_NAME=kibana-node-name

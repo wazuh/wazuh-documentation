@@ -118,7 +118,7 @@ This will generate a |WAZUH_LATEST| Wazuh agent package for Solaris 11
 
 .. code-block:: console
 
-  # vagrant --branch-tag=v|WAZUH_LATEST| up solaris10 solaris 11
+  # vagrant --branch-tag=v|WAZUH_LATEST| up solaris10 solaris11
 
 This will generate a |WAZUH_LATEST| Wazuh agent package for Solaris 10 and Solaris 11
 
@@ -128,4 +128,4 @@ To finish destroy the machines:
 
 .. code-block:: console
 
-  # vagrant destroy solaris10 solaris 11
+  # vagrant destroy solaris10 solaris11

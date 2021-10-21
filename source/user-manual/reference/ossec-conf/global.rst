@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: The ossec.conf file is the main configuration file on the Wazuh manager and plays an important role on the agents. Learn more about the global configuration here. 
+  
 .. _reference_ossec_global:
 
 global
@@ -168,7 +171,7 @@ email_log_source
 This selects the alert file to be read from.
 
 +--------------------+---------------------------+
-| **Default value**  | alerts.json               |
+| **Default value**  | alerts.log                |
 +--------------------+---------------------------+
 | **Allowed values** | alerts.log or alerts.json |
 +--------------------+---------------------------+

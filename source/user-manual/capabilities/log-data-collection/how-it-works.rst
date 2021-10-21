@@ -1,12 +1,12 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about how the Log Data Collection capability of Wazuh works.
+  :description: Learn more about how the Log Data Collection capability of Wazuh works: how to collect log files and Windows event logs, how to receive log events through syslog, and more.
 
 How it works
 ============
 
-The below image illustrations how events flow through the Wazuh environment.
+The below image illustrates how events flow through the Wazuh environment.
 
 .. thumbnail:: ../../../images/manual/log_analysis/log-analysis-flow.png
     :title: Log analysis flow

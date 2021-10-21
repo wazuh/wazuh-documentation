@@ -6,7 +6,7 @@
 .. _installation_guide:
 
 .. meta::
-  :description: Wazuh is a free, open source and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response, and regulatory compliance.
+  :description: Wazuh is a free, open source and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response and compliance.
 
 
 Installation guide
@@ -50,8 +50,6 @@ The diagram below represents a Wazuh deployment architecture. It shows the solut
     :alt: Wazuh deployment
     :align: center
     :wrap_image: No
-
-
 
 Installation alternatives: Wazuh can also be installed with commercial options like Elastic Stack basic license or Splunk. To learn more about these options and other installation alternatives, see the :ref:`More installation alternatives <more_installation_alternatives>` section.
 
@@ -134,7 +132,6 @@ The :ref:`Wazuh agent <wazuh_agent>` is a single and lightweight monitoring soft
       </div>
   </div>
 
-
 .. toctree::
     :hidden:
     :maxdepth: 1
@@ -144,4 +141,3 @@ The :ref:`Wazuh agent <wazuh_agent>` is a single and lightweight monitoring soft
     wazuh-dashboard/index
     wazuh-agent/index
     packages-list
-

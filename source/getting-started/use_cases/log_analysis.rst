@@ -1,9 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Check out some use cases of our Log data analysis capability to get the most out of the Wazuh solution.
-
-
+  :description: Check out these use cases of Log Data Analysis, a Wazuh capability that allows you to review, interpret and understand logs.
+  
 .. _log_analysis:
 
 Log data analysis

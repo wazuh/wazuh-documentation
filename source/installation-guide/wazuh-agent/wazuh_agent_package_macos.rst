@@ -33,7 +33,7 @@ The agent runs on the host you want to monitor and communicates with the Wazuh m
     
                 .. code-block:: console
     
-                  # sudo /Library/Ossec/bin/ossec-control start
+                  # sudo /Library/Ossec/bin/wazuh-control start
 
 
             The installation process is now complete and the Wazuh agent is successfully installed, registered, and configured, running on your macOS system.
@@ -50,7 +50,7 @@ The agent runs on the host you want to monitor and communicates with the Wazuh m
     
                 .. code-block:: console
     
-                  # sudo /Library/Ossec/bin/ossec-control start
+                  # sudo /Library/Ossec/bin/wazuh-control start
  
             The installation process is now complete and the Wazuh agent is successfully installed on your macOS system. The next step is to register and configure the agent to communicate with the Wazuh manager. To perform this action, see the :ref:`Registering Wazuh agents <register_agents>` section. 
 
@@ -68,7 +68,7 @@ To uninstall the agent, follow these steps:
 
       # /Library/Ossec/bin/wazuh-control stop
 
-#. Remove the ``/Library/Ossec/`` folder and ``ossec-init.conf`` file.
+#. Remove the ``/Library/Ossec/`` folder.
 
     .. code-block:: console
 

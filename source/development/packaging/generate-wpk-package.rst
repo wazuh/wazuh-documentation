@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Check out the step-by-step guide on how to create a WPK package.
+  :description: Check out the Wazuh documentation to learn how to create a WPK package. Wazuh provides an automated way of building WPK packages using docker.
 .. _create-wpk:
 
 WPK
@@ -23,19 +23,7 @@ Download our wazuh-packages repository from GitHub and go to the wpk directory.
 
 .. code-block:: console
 
- $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/wpk
-
-If you want to build a version later or equal to |WAZUH_GCC_CHANGE|, you must change to |WAZUH_PACKAGES_BRANCH| branch.
-
-.. code-block:: console
-
- $ git checkout |WAZUH_PACKAGES_BRANCH|
-
-If you want to build a version prior to |WAZUH_GCC_CHANGE|, you must change to the corresponding tag, e.g. v|WAZUH_PREGCC_CHANGE|
-
-.. code-block:: console
-
- $ git checkout v|WAZUH_PREGCC_CHANGE|
+ $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/wpk && git checkout |WAZUH_PACKAGES_BRANCH|
 
 Execute the ``generate_wpk_package.sh`` script, with the different options you desire. This script will build a Docker image with all the necessary tools to create the WPK and run a container that will build it:
 

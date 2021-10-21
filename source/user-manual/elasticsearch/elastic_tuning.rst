@@ -55,19 +55,24 @@ Changing the default passwords of Elasticsearch is highly recommended in order t
 
     The script allows changing the password for either a single user or all the users present on the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. All the available options to run the script are:
 
-    +-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
-    | Options                     | Purpose                                                                                                                      |
-    +=============================+==============================================================================================================================+
-    | -a / --change-all           | Generates random passwords, changes all the Open Distro user passwords and prints them on screen                             |
-    +-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
-    | -p / --password <password>  | Indicates the new password, must be used with option ``-u``                                                                  |
-    +-----------------------------+------------------------------------------------------------------------------------------------------------------------------+    
-    | -u / --user <user>          | Indicates the name of the user whose password will be changed. If no password specified it will generate a random one        |
-    +-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
-    | -v / --verbose              | Shows the complete script execution output                                                                                   |
-    +-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
-    | -h / --help                 | Shows help                                                                                                                   |
-    +-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
+    +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
+    | Options                                      | Purpose                                                                                                     |
+    +==============================================+=============================================================================================================+
+    | -a / --change-all                            | Generates random passwords, changes all the Open Distro user passwords and prints them on screen            |
+    +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
+    | -p / --password <password>                   | Indicates the new password, must be used with option ``-u``                                                 |
+    +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+    
+    | -u / --user <user>                           | Indicates the name of the user whose password will be changed.                                              |
+    |                                              | If no password specified it will generate a random one                                                      |
+    +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
+    | -c / --cert <route-admin-certificate>        | Indicates route to the admin certificate                                                                    |
+    +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
+    | -k / --certkey <route-admin-certificate-key> | Indicates route to the admin certificate key                                                                |
+    +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
+    | -v / --verbose                               | Shows the complete script execution output                                                                  |
+    +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
+    | -h / --help                                  | Shows help                                                                                                  |
+    +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
 
     To generate and change passwords for all users, run the script with the ``-a`` option:
 
@@ -206,7 +211,7 @@ Elasticsearch malfunctions when the system is swapping memory. It is crucial for
 .. tabs::
 
 
-    .. group-tab:: Systemd Systemd
+    .. group-tab:: Systemd
 
 
       .. code-block:: console
@@ -216,7 +221,7 @@ Elasticsearch malfunctions when the system is swapping memory. It is crucial for
 
 
 
-    .. group-tab:: Systemd SysV Init
+    .. group-tab:: SysV Init
 
 
       .. code-block:: console

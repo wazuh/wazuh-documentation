@@ -314,7 +314,7 @@ installFilebeat() {
         exit 1;
     else
         eval "curl -so /etc/filebeat/filebeat.yml https://packages.wazuh.com/resources/4.2/elastic-stack/filebeat/7.x/filebeat_all_in_one.yml --max-time 300  $debug"
-        eval "curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/4.1/extensions/elasticsearch/7.x/wazuh-template.json --max-time 300 $debug"
+        eval "curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/4.2/extensions/elasticsearch/7.x/wazuh-template.json --max-time 300 $debug"
         eval "chmod go+r /etc/filebeat/wazuh-template.json $debug"
         eval "curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.1.tar.gz --max-time 300 | tar -xvz -C /usr/share/filebeat/module $debug"
         eval "mkdir /etc/filebeat/certs $debug"
@@ -354,7 +354,7 @@ installKibana() {
         eval "mkdir /usr/share/kibana/data ${debug}"
         eval "chown -R kibana:kibana /usr/share/kibana/ ${debug}"
         eval "cd /usr/share/kibana ${debug}"
-        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.2.0_7.10.2-1.zip ${debug}"
+        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.2.0_7.11.2-1.zip ${debug}"
         if [  "$?" != 0  ]; then
             echo "Error: Wazuh Kibana plugin could not be installed."
             exit 1;

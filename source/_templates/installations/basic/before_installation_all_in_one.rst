@@ -16,7 +16,7 @@
 
                 .. code-block:: console
 
-                    # apt-get install apt-transport-https zip unzip lsb-release curl gnupg2
+                    # apt-get install apt-transport-https zip unzip lsb-release curl gnupg
 
         .. group-tab:: ZYpp
 

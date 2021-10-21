@@ -40,7 +40,7 @@ An example output of the command looks as follows:
 .. code-block:: console
   :class: output
 
-  WAZUH_VERSION="v4.2.0"
+  WAZUH_VERSION="v|WAZUH_LATEST|"
 
 Using the Kibana version and the Wazuh version, you can find the correct plugin in `compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/#wazuh---kibana---open-distro-version-compatibility-matrix>`_.
 
