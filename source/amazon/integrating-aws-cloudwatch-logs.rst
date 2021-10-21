@@ -81,3 +81,61 @@ Two options stand out from this module:
 
 .. note::
    It is possible to have multiple Service or Bucket tags inside the aws-s3 module. This allows us to get logs from services like CloudWatch Logs using different credentials and also enables us to have logs from all AWS instances and services in the same place. You can find more information about the `configuration options of the AWS-S3 wodle <https://documentation.wazuh.com/current/user-manual/reference/ossec-conf/wodle-s3.html#wodle-name-aws-s3>`_.
+
+Finally, restart Wazuh to apply the changes, and the CloudWatch alerts will start to appear on the Wazuh UI.
+
+Step 3: Ensure everything is running fine
+-----------------------------------------
+
+After restarting we can ensure everything is working fine by checking the ``<WAZUH_HOME>/logs/ossec.log``. If the following message appears in the log and there are no warnings related to AWS then everything is ready:
+
+
+.. code-block:: xml
+
+    INFO: Module AWS started
+    INFO: Starting fetching of logs.
+    INFO: Executing Service Analysis: (Service: cloudwatchlogs, Profile: default)
+
+
+It is also possible to verify the integration is working as expected by accessing the Wazuh UI.
+
+Troubleshooting
+---------------
+This section covers possible errors that may occur if we have made any mistake during the configuration process. Those errors will be found in the ``<WAZUH_HOME>/logs/ossec.log file``.
+
+.. note::  
+    To increase the verbosity of the messages found in ossec.log you can enable the debug mode for the AWS module by adding the line wazuh_modules.debug=2 to the <WAZUH_HOME>/etc/local_internal_options.conf file and restarting Wazuh.
+
+The config profile could not be found
+-------------------------------------
+
+
+.. code-block:: xml
+
+    INFO: Module AWS started
+    INFO: Starting fetching of logs.
+    INFO: Executing Service Analysis: (Service: cloudwatchlogs, Profile: default)
+    WARNING: Bucket: - Returned exit code 12
+    WARNING: Bucket: - The config profile (default) could not be found
+    INFO: Fetching logs finished.
+
+This error means that the AWS credentials cannot be found.
+
+**Solution**: Make sure the AWS credentials have been correctly set up as indicated in **Step 1: Create AWS credentials**.
+
+Log group does not exists or insufficient privileges to access it
+-----------------------------------------------------------------
+
+
+.. code-block:: xml
+
+    DEBUG: ++++ The specified "invalid-log-group" log group does not exist or insufficient privileges to access it.
+
+This error message appears when one of the following cases happens:
+
+- The credentials specified during the Step 1 do not grant access to the specified log group.
+- The specified log group does not exist in the provided region.
+- We are not providing a region list using the regions tag. If that is the case, Wazuh will try to find the log group in every single region available. However, it may exist only in one of them. The same applies if we provide a list of regions.
+
+**Solution**: Ensure you are using the right credentials, specifying the proper region, and the log group is created in that particular region.
+
