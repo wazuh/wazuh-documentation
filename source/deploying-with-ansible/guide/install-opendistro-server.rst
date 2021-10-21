@@ -11,6 +11,13 @@ The deployment of the Opendistro Stack server involves the installation of Opend
 - `2 - Preparing the playbook`_
 - `3 - Running the playbook`_
 
+
+.. warning::
+
+	In previous versions of this guide, playbooks were used pointing to roles to install Elasticsearch.
+	Currently, the roles for the installation of guides from previous versions are preserved.
+	Since version 4.2.4 the installation steps of this guide point to the roles that install Opendistro.
+
 .. note::
 
 	Following the example we started in the previous sections, we have added a second host to the ``/etc/ansible/hosts`` file, in this case the operating system is Ubuntu 17 and we need to indicate the path of the Python interpreter.
