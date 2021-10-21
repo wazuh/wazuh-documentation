@@ -173,10 +173,24 @@ The first thing we need to achieve this is a container generating some logs for 
         "cpu": "256",
     }
 
-With this configuration, we will have an instance of httpd running on a Fargate container and sending its logs to a log group called ``awslogs-test-apache`` using ``awslogs-example`` as a prefix for the log streams that will be created inside that log group. Once the TaskDefinition is created run it and wait until some logs are sent to the log group. The task can be stopped after you have some logs stored.
+With this configuration, we will have an instance of httpd running on a Fargate container and sending its logs to a log group called ``awslogs-test-apache`` using ``awslogs-example`` as a prefix for the log streams that will be created inside that log group. Once the TaskDefinition is created, run it and wait until some logs are sent to the log group. The task can be stopped after you have some logs stored.
 
-Having the data already stored in a log group the only step remaining is to allow Wazuh to access those logs by following the instructions in the ``Setting it up`` section.
+Having the data already stored in a log group, you only need to allow Wazuh to access those logs by following the instructions in the ``Setting it up`` section.
 
 Once Wazuh has access to the logs they will be fetched. We need to ensure that we are using the proper ``only_logs_after`` value.
 
 The events raised by AWS CloudWatch Logs can be found in ``Wazuh > Security Information Management > Security events``:
+
+.. image:: ../images/aws/security-information-management.png
+      :align: center
+      :class: front   
+
+
+.. image:: ../images/aws/dashboard.png
+      :align: center
+      :class: front   
+
+
+.. image:: ../images/aws/Security-events.png
+      :align: center
+      :class: front   
