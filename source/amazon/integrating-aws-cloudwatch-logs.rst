@@ -144,7 +144,8 @@ Use Case: Getting logs from an Apache HTTP Server instance (httpd)
 ==================================================================
 
 One of the most useful applications of this integration is the ability to get the logs from our AWS containers and monitor them. In this particular case, we are going to deploy an Apache HTTP server inside a Fargate container and get its logs, so if something happens Wazuh will alert us.
-The first thing we need to achieve this is a container generating some logs for us. As an example, we are going to access Elastic Container Service > Task Definition in AWS Console and create a new TaskDefinition providing Fargate as the launch type and the following configuration using the Configure via JSON button:
+
+The first thing we need to achieve this is a container generating some logs for us. As an example, we are going to access ``Elastic Container Service`` > ``Task Definition`` in AWS Console and create a new TaskDefinition providing ``Fargate`` as the launch type and the following configuration using the Configure via ``JSON button``:
 
 
 .. code-block:: xml
@@ -172,3 +173,10 @@ The first thing we need to achieve this is a container generating some logs for 
         "cpu": "256",
     }
 
+With this configuration, we will have an instance of httpd running on a Fargate container and sending its logs to a log group called ``awslogs-test-apache`` using ``awslogs-example`` as a prefix for the log streams that will be created inside that log group. Once the TaskDefinition is created run it and wait until some logs are sent to the log group. The task can be stopped after you have some logs stored.
+
+Having the data already stored in a log group the only step remaining is to allow Wazuh to access those logs by following the instructions in the ``Setting it up`` section.
+
+Once Wazuh has access to the logs they will be fetched. We need to ensure that we are using the proper ``only_logs_after`` value.
+
+The events raised by AWS CloudWatch Logs can be found in ``Wazuh > Security Information Management > Security events``:
