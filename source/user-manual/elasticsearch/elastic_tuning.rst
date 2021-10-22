@@ -124,9 +124,9 @@ Changing the default passwords of Elasticsearch is highly recommended in order t
             name: kibanaserer
             password: <password_kibanaserver>
 
-    If you also use the ``-a`` option, all users not specified in the file will be given a random password.
+    If the ``-a`` option is used, all users not specified in the file will be given a random password.
 
-      - If you run the script:
+      - If the script is run:
 
         .. code-block:: console
           
