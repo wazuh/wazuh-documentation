@@ -96,6 +96,7 @@ newUrls['4.3'] = [
   '/office365/index.html',
   '/office365/monitoring-office365-activity.html',
   '/user-manual/reference/ossec-conf/office365-module.html',
+  '/user-manual/capabilities/file-integrity/fim-fields-rule-mapping.html',
 ];
 
 /* *** RELEASE 4.2 ****/
@@ -132,7 +133,7 @@ newUrls['4.2'] = [
   '/user-manual/reference/statistics-files/wazuh-remoted-state.html',
   '/user-manual/reference/statistics-files/wazuh-logcollector-state.html',
   '/user-manual/reference/tools/wazuh-control.html',
-  '/user-manual/reference/tools/wazuh-regex.html',  
+  '/user-manual/reference/tools/wazuh-regex.html',
   '/cloud-service/index.html',
   '/cloud-service/glossary.html',
   '/cloud-service/account-billing/index.html',
@@ -155,7 +156,7 @@ newUrls['4.2'] = [
   '/cloud-service/your-environment/understanding-storage.html',
   '/cloud-service/getting-started/sign-up-trial.html',
   '/cloud-service/getting-started/access-wazuh-wui.html',
-  '/cloud-service/getting-started/register-agents.html', 
+  '/cloud-service/getting-started/register-agents.html',
 ];
 
 removedUrls['4.2'] = [
