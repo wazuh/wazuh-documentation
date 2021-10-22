@@ -22,5 +22,5 @@ The main objective of this section is to guide any user in the installation of a
 
     guide/install-ansible
     guide/install-wazuh-manager
-    guide/install-elk-server
+    guide/install-opendistro-server
     guide/install-wazuh-agent
