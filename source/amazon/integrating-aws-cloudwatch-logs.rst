@@ -71,7 +71,7 @@ Next we need to indicate in the ``<WAZUH_HOME>/etc/ossec.conf`` file that we wan
         </service>
     </wodle>
 
-Two options stand out from this module:
+The following options stand out from this module:
 
 - ``aws_profile``: The name of the profile defined for granting Wazuh access to the bucket. It allows us to log in with our AWS account and must match with the profile specified in the credentials file created in step 1.
 - ``aws_log_groups``: A list of comma-separated log group names where the log streams are saved. In our case, we want to get the logs from a log group named “example_log_group”.
@@ -103,7 +103,7 @@ It is also possible to verify the integration is working as expected by accessin
 
 Troubleshooting
 ===============
-This section covers possible errors that may occur if we have made any mistakes during the configuration process. Those errors will be found in the ``<WAZUH_HOME>/logs/ossec.log file``.
+This section covers possible errors that may occur if we have made any mistakes during the configuration process. Those errors will be found in the ``<WAZUH_HOME>/logs/ossec.log`` file.
 
 .. note::  
     To increase the verbosity of the messages found in ossec.log you can enable the debug mode for the AWS module by adding the line wazuh_modules.debug=2 to the <WAZUH_HOME>/etc/local_internal_options.conf file and restarting Wazuh.
@@ -137,7 +137,7 @@ This error message appears when one of the following cases happens:
 
 - The credentials specified during the Step 1 do not grant access to the specified log group.
 - The specified log group does not exist in the provided region.
-- We are not providing a region list using the regions tag. If that is the case, Wazuh will try to find the log group in every single region available. However, it may exist only in one of them. The same applies if we provide a list of regions.
+- We are not providing a region list using the ``regions`` tag. If that is the case, Wazuh will try to find the log group in every single region available. However, it may exist only in one of them. The same applies if we provide a list of regions.
 
 **Solution**: Ensure you are using the right credentials, specifying the proper region, and that the log group is created in that particular region.
 
@@ -182,11 +182,6 @@ Having the data already stored in a log group, you only need to allow Wazuh to a
 Once Wazuh has access to the logs, they will be fetched. We need to ensure that we are using the proper ``only_logs_after`` value.
 
 The events raised by AWS CloudWatch Logs can be found in ``Wazuh > Security Information Management > Security events``:
-
-
-.. thumbnail:: ../images/aws/security_information_management.png
-      :align: center
-      :width: 100%
 
 
 .. thumbnail:: ../images/aws/dashboard.png
