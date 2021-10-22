@@ -109,6 +109,8 @@ All components included in this AMI are configured to work out-of-the-box withou
     - Wazuh Kibana plugin: ``/usr/share/kibana/data/wazuh/config/wazuh.yml``
 
 
+To learn more about the Wazuh configuration options for its components, see the :ref:`User manual <user_manual>`.
+
 .. _ami_wazuh_ui:
 
 Access the Wazuh web interface
