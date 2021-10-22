@@ -53,7 +53,7 @@ Changing the default passwords of Elasticsearch is highly recommended in order t
         Password changed. Remember to update the password in /etc/filebeat/filebeat.yml and /etc/kibana/kibana.yml if necessary and restart the services.
 
 
-    The script allows changing the password for either a single user or all the users present on the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. All the available options to run the script are:
+    The script allows changing the password for either a single user or all the users present on the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. It also offers the option to change the password of more than one user at once, getting them from a formatted file. All the available options to run the script are:
 
     +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
     | Options                                      | Purpose                                                                                                     |
@@ -70,6 +70,8 @@ Changing the default passwords of Elasticsearch is highly recommended in order t
     | -k / --certkey <route-admin-certificate-key> | Indicates route to the admin certificate key                                                                |
     +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
     | -v / --verbose                               | Shows the complete script execution output                                                                  |
+    +------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | -f / --file <password_file.yml>              | Indicates route to file where new passwords are given 
     +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
     | -h / --help                                  | Shows help                                                                                                  |
     +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
@@ -109,6 +111,67 @@ Changing the default passwords of Elasticsearch is highly recommended in order t
         The password for snapshotrestore is rd35bCchP3Uf-0w77VCEJzHF7WEP3fNw
 
         Passwords changed. Remember to update the password in /etc/filebeat/filebeat.yml and /etc/kibana/kibana.yml if necessary and restart the services.
+
+    To use a formatted file, run the script with the ``-f`` option followed by the route to a file similar to this: 
+
+      .. code-block:: none
+
+        User: 
+            name: wazuh
+            password: <password_wazuh
+
+        User: 
+            name: kibanaserer
+            password: <password_kibanaserver>
+
+    If you also use the ``-a`` option, all users not specified in the file will be given a random password.
+
+      - If you run the script:
+
+        .. code-block:: console
+          
+          # bash wazuh-passwords-tool.sh -a -f passwords.yml
+      
+      - Being passwords.yml:
+
+        .. code-block:: none
+
+          User:
+              name:kibanaserver
+              password:kibanaserverpass
+          User:
+              name:admin
+              password:adminpass
+        
+      - The output would be:
+
+        .. code-block:: none
+          :class: output
+
+          Generating random passwords
+          Done
+          Creating backup...
+          Backup created
+          Generating hashes
+          Hashes generated
+          Loading changes...
+          Done
+
+          The password for admin is adminpass
+
+          The password for kibanaserver is kibanaserverpass
+
+          The password for kibanaro is zCd-SrihVwzfRxj5qPrwlSgmZJP9RsMA
+
+          The password for logstash is OmbPImuV5fv11R6XYAG92cUjaDy9PkdH
+
+          The password for readall is F2vglVGFJHXohwqEW5G4Tfjsiz-qqkTU
+
+          The password for snapshotrestore is rd35bCchP3Uf-0w77VCEJzHF7WEP3fNw
+
+          Passwords changed. Remember to update the password in /etc/filebeat/filebeat.yml and /etc/kibana/kibana.yml if necessary and restart the services.
+
+
   
 
     .. note:: The password may need to be updated in both ``/etc/filebeat/filebeat.yml`` and ``/etc/kibana/kibana.yml``. After changing the configuration files, remember to restart the corresponding services.
