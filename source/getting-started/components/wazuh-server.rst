@@ -17,11 +17,11 @@ Additionally, the Wazuh server can be integrated with external software, includi
 Server architecture
 -------------------
 
-The Wazuh server runs the analysis engine, the Wazuh RESTful API, the agents registration service, the agents connection service, the Wazuh cluster daemon, and the Wazuh forwarder. The server is installed on a Linux operating system and usually runs on a stand-alone physical machine, virtual machine, docker container, or cloud instance. 
+The Wazuh server runs the analysis engine, the Wazuh RESTful API, the agents registration service, the agents connection service, the Wazuh cluster daemon, and Filebeat. The server is installed on a Linux operating system and usually runs on a stand-alone physical machine, virtual machine, docker container, or cloud instance. 
 
 The diagram below represents the server architecture and components:
 
-.. thumbnail:: ../../images/getting_started/architecture_server_updated.png
+.. thumbnail:: ../../images/getting_started/architecture_server.png
    :alt: Wazuh server architecture
    :align: center
    :wrap_image: No
@@ -40,4 +40,4 @@ Server components
 
 - **Wazuh cluster daemon:** This service is used to scale Wazuh servers horizontally, deploying them as a cluster. This kind of configuration, in combination with a network load balancer, provides high availability and load balancing. The Wazuh cluster daemon is what Wazuh servers use to communicate with each other and to keep synchronized.
 
-- **Wazuh forwarder:** It is used to send events and alerts to the Wazuh indexer. It reads the output of the Wazuh analysis engine and ships events in real time. It also provides load balancing when connected to a multi-node Wazuh indexer cluster.
+- **Filebeat:** It is used to send events and alerts to Elasticsearch. It reads the output of the Wazuh analysis engine and ships events in real time. It also provides load balancing when connected to a multi-node Elasticsearch cluster.
