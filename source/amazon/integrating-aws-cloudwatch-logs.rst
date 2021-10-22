@@ -22,7 +22,7 @@ To understand how CloudWatch Logs works, it is necessary to learn about the foll
 How the Wazuh integration works
 -------------------------------
 
-The Wazuh CloudWatch Logs integration establishes a connection with CloudWatch using the AWS API and the credentials provided by the user. It will periodically pull the logs contained in the specified log group and send them to the Analysisd component, which will generate an alert if the log message matches with an applicable rule.
+The Wazuh CloudWatch Logs integration establishes a connection with CloudWatch using the AWS API and the credentials provided by the user. It will periodically pull the logs contained in the specified log group and send them to the ``Analysisd`` component, which will generate an alert if the log message matches with an applicable rule.
 
 Setting it up
 -------------
@@ -55,7 +55,7 @@ This way we will be able to connect to the AWS account if we specify ``default``
 Step 2: Configure Wazuh
 -----------------------
 
-Next we need to indicate in the <WAZUH_HOME>/etc/ossec.conf file that we want to collect logs from CloudWatch Logs by adding the following module. This step is performed on the Wazuh Manager or Agent. For this example we are going to configure it on a Wazuh Manager:
+Next we need to indicate in the ``<WAZUH_HOME>/etc/ossec.conf`` file that we want to collect logs from CloudWatch Logs by adding the following module. This step is performed on the Wazuh Manager or Agent. For this example we are going to configure it on a Wazuh Manager:
 
 
 .. code-block:: xml
