@@ -3,12 +3,12 @@
 Detecting a brute-force attack
 ==============================
 
-Identify SSH and RDP brute force attacks with Wazuh's out-of-the-box rules. This rules can correlate multiple authentication failure events and alert about a brute force attack.
+Identify SSH and RDP brute force attacks using Wazuh's out-of-the-box rules. This rules can correlate multiple authentication failure events and alert about a brute force attack.
 
 Configuration
 -------------
 
-#. Install `ssh` from your operating system repositories if missing.
+#. Install `ssh` from the operating system repositories if missing, in a system that will play as the attacker.
 
 #. Install `hydra` to execute automated RDP connections. You can run ``yum install -y hydra`` on RPM based systems.
 
@@ -30,6 +30,9 @@ Steps to generate the alerts
 
 Alerts
 ------
+
+Related alerts can be found with:
+
 * Linux: ``rule.id:(5710 OR 5712)``. (Other related rules are ``5711``, ``5716``, ``5720``, ``5503``, ``5504``)
 * Windows: ``rule.id:(60122 OR 60137)``
 

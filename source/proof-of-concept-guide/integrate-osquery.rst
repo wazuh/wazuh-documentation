@@ -3,22 +3,22 @@
 Osquery integration
 ===================
 
-Wazuh agent can be integrated with Osquery, making it easy to capture additional information from the endpoint. This can be useful for telemetry and threat hinging. More info at Wazuh Osquery documentation
+Integrate Wazuh with Osquery to capture additional information from the monitored RHEL 7 endpoint.
+
+More information about using Osquery with Wazuh at :ref:`osquery`.
 
 Configuration
 -------------
 
-On the monitored endpoint (RHEL Linux):
-
-- Install Osquery
+#. Install Osquery on the monitored RHEL 7 endpoint.
 
     .. code-block:: console
 
-        yum install -y https://pkg.osquery.io/rpm/osquery-4.5.1-1.linux.x86_64.rpm
+        # yum install -y https://pkg.osquery.io/rpm/osquery-4.5.1-1.linux.x86_64.rpm
 
-- Set the content of the Osquery configuration file ``/etc/osquery/osquery.conf`` to:
+#. Set the content of the Osquery configuration file ``/etc/osquery/osquery.conf``.
 
-    .. code-block:: console
+    .. code-block:: JSON
 
         {
         "options": {
@@ -54,7 +54,7 @@ On the monitored endpoint (RHEL Linux):
             }
         }
 
-- Edit ``/var/ossec/etc/ossec.conf`` to enable the Osquery wodle. The Wazuh module will take care of running Osquery when needed (no need to start Osqueryd):
+#. Edit ``/var/ossec/etc/ossec.conf`` at the monitored RHEL 7 endpoint and enable the Osquery wodle.
   
     .. code-block:: XML
 
@@ -69,17 +69,27 @@ On the monitored endpoint (RHEL Linux):
             </wodle>
         </ossec_config>
 
-- Restart Wazuh-agent to apply changes
-  
-    .. code-block:: console 
+    No need to start Osqueryd. The Wazuh module will run the service when needed.
 
-        systemctl restart wazuh-agent
+#. Restart the Wazuh agent to apply changes.
+  
+    .. code-block:: console
+    
+        # systemctl restart wazuh-agent
 
 Steps to generate the alerts
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+----------------------------
 
-- Wazuh automatically reads the ``/var/log/osquery/osqueryd.results.log`` and generates alerts based on the obtained information
+No action required. Wazuh automatically reads the ``/var/log/osquery/osqueryd.results.log`` file and generates alerts based on the these logs.
 
-Affected endpoint
-^^^^^^^^^^^^^^^^^
-- Linux RHEL
+Alerts
+------
+
+Related alerts can be found with:
+
+* ``rule.groups:osquery``
+
+Affected endpoints
+------------------
+
+* RHEL 7 agent host

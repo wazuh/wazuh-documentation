@@ -10,7 +10,7 @@ More information on the :ref:`Audit Configuration Guide <learning_wazuh_audit_co
 Configuration
 -------------
 
-#. Check that the Linux Auditing System (``auditd``) is installed and running in your system.
+#. Check that the Linux Auditing System (``auditd``) is installed and running in your RHEL7 agent's host system.
 
 #. Check that your Wazuh agent is configured to read ``audit.log`` file. This configuration is included by default.
 
@@ -50,7 +50,7 @@ Configuration
 Steps to generate the alerts
 ----------------------------
 
-#. Log in the RHEL 7 Agent endpoint as the monitored user.
+#. Log in the RHEL 7 Agent host as the monitored user.
 
 #. Execute a ping to www.google.com
 

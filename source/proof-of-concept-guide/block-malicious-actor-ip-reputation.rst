@@ -3,12 +3,12 @@
 Blocking a malicious actor - IP Reputation
 ==========================================
 
-Prerequesites
+Identify the monitored Windows endpoint's IP address as a bad reputation one. Log in that host as the attacker and try connecting to the victim Apache server.
+
+Configuration
 -------------
 
-- Apache server running on the monitored system (Linux RHEL)
-
-- Wazuh agent configured to monitor the Apache access logs:
+#. Add the following lines to ``/var/ossec/etc/ossec.conf`` at the Wazuh RHEL 7 agent host to monitor the access logs of your Apache server:
 
     .. code-block:: XML
 
@@ -17,57 +17,45 @@ Prerequesites
             <location>/var/log/httpd/access_log</location>
         </localfile>
 
-Configuration
--------------
-
-On Wazuh manager (the server):
-
-- Download Alienvault IP reputation database
-
-    .. code-block:: XML
-
-        wget https://raw.githubusercontent.com/firehol/blocklist-ipsets/master/alienvault_reputation.ipset -O /var/ossec/etc/lists/alienvault_reputation.ipset
-
-- Download script to convert from ipset format to cdblist format
-
-    .. code-block:: XML
-
-        wget https://wazuh.com/resources/iplist-to-cdblist.py -O /tmp/iplist-to-cdblist.py
-
-- Add an additional IP (the attacker) to the list. For the test, we will use the Windows endpoint.
+#. Download the Alienvault IP reputation database to your Wazuh manager endpoint.
 
     .. code-block:: console
 
-        echo "${replace_by_your_windows_ip_address}" >> /var/ossec/etc/lists/alienvault_reputation.ipset
+        # wget https://raw.githubusercontent.com/firehol/blocklist-ipsets/master/alienvault_reputation.ipset -O /var/ossec/etc/lists/alienvault_reputation.ipset
 
+#. Run the following command replacing ``<your_windows_ip_address>`` with the monitored Windows endpoint's IP address.
 
-- Convert the ``.ipset`` to ``.cdb`` using the previously downloaded script
+    .. code-block:: console
 
-    .. code-block:: python
+        # echo "<your_windows_ip_address>" >> /var/ossec/etc/lists/alienvault_reputation.ipset
 
-        python /tmp/iplist-to-cdblist.py /var/ossec/etc/lists/alienvault_reputation.ipset /var/ossec/etc/lists/blacklist-alienvault
+#. Download the script to convert from the `ipset` format to the `cdb` list format.
 
-- Remove the ``.ipset`` file and the Python script
+    .. code-block:: console
 
-    .. code-block:: XML
+        # wget https://wazuh.com/resources/iplist-to-cdblist.py -O /tmp/iplist-to-cdblist.py
 
-        rm -rf /var/ossec/etc/lists/alienvault_reputation.ipset
-        rm -rf /var/ossec/etc/lists/iplist-to-cdblist.py
+#. Convert the `alienvault_reputation.ipset` file to a `.cdb` format using the previously downloaded script.
 
-- Assign the right permissions and owner to the generated file:
+    .. code-block:: console
 
-    .. code-block:: XML
+        # python /tmp/iplist-to-cdblist.py /var/ossec/etc/lists/alienvault_reputation.ipset /var/ossec/etc/lists/blacklist-alienvault
 
-        chown ossec:ossec /var/ossec/etc/lists/blacklist-alienvault
-        chmod 660 /var/ossec/etc/lists/blacklist-alienvault
+#. Optionally, remove the `alienvault_reputation.ipset` file and the `iplist-to-cdblist.py` script as they are no longer needed.
 
-- Execute ossec binary to generate ``.cdb`` file
+    .. code-block:: console
 
-    .. code-block:: XML
+        # rm -rf /var/ossec/etc/lists/alienvault_reputation.ipset
+        # rm -rf /var/ossec/etc/lists/iplist-to-cdblist.py
 
-        /var/ossec/bin/ossec-makelists
+#. Assign the right permissions and owner to the generated file.
 
-- Add a custom rule to trigger the active response. This can be done at ``/var/ossec/etc/rules/local_rules.xml``
+    .. code-block:: console
+
+        # chown ossec:ossec /var/ossec/etc/lists/blacklist-alienvault
+        # chmod 660 /var/ossec/etc/lists/blacklist-alienvault
+
+#. Add a custom rule triggering the active response to the ``/var/ossec/etc/rules/local_rules.xml`` file at the Wazuh manager endpoint.
 
     .. code-block:: XML
 
@@ -80,7 +68,7 @@ On Wazuh manager (the server):
         </group>
         
 
-- Add configuration to trigger the active response. Modify the ``ruleset`` block in the ``/var/ossec/etc/ossec.conf`` file:     
+#. Add the appropriate active response settings to ``/var/ossec/etc/ossec.conf`` at the Wazuh manager endpoint.
 
     .. code-block:: XML
 
@@ -111,27 +99,26 @@ On Wazuh manager (the server):
             </active-response>
         </ossec_config>
 
-- Restart the Wazuh Manager
+#. Restart the Wazuh Manager.
 
-.. code-block:: console
+    .. code-block:: console
 
-    /var/ossec/bin/ossec-control restart
+        # systemctl restart wazuh-manager
 
 
 Steps to generate the alerts
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+----------------------------
 
-- Log in the attacker system (the Windows box) and connect to the victim (Linux RHEL) Apache server from a web browser.
-
-- A Linux firewall rule will temporarily block any connection from the attacker system for 60 seconds (using IPtables).
+#. Log in the attacker system (the monitored Windows endpoint) and connect to the victim (the Apache server in the monitored RHEL7 endpoint) from a web browser. The custom firewall rule will temporarily block any connection from the attacker system for 60 seconds.
 
 Alerts
-^^^^^^
+------
 
-- Related alerts can be found with:
-- rule.id:(601 OR 100100)
+Related alerts can be found with:
 
-Affected endpoint
-^^^^^^^^^^^^^^^^^
+* ``rule.id:(601 OR 100100)``
 
-- Linux RHEL
+Affected endpoints
+------------------
+
+* RHEL 7 agent host

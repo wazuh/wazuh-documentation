@@ -55,7 +55,9 @@ Configuration
 
 #. Restart Wazuh manager to apply changes:
   
-    .. include:: /_templates/installations/wazuh/common/restart_wazuh_manager.rst
+    .. code-block:: console
+
+        # systemctl restart wazuh-manager
 
 Steps to generate the alerts
 ----------------------------
