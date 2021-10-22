@@ -15,7 +15,7 @@ The deployment of the Opendistro Stack server involves the installation of Opend
 .. warning::
 
 	In previous versions of this guide, playbooks were used pointing to roles to install Elasticsearch.
-    Currently, the roles for the installation following guides from previous versions are preserved.
+	Currently, the roles for the installation following guides from previous versions are preserved.
 	Since version 4.2.4 the installation steps of this guide point to the roles that install Opendistro.
 
 .. note::
