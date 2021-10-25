@@ -132,7 +132,7 @@ Changing the default passwords of Elasticsearch is highly recommended in order t
           
           # bash wazuh-passwords-tool.sh -a -f passwords.yml
       
-      - Being passwords.yml:
+      - And the content of ``passwords.yml`` is:
 
         .. code-block:: none
 
