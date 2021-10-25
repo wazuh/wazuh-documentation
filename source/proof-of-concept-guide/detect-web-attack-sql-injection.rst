@@ -3,14 +3,14 @@
 Detecting a web attack - SQL Injection
 ======================================
 
-This use case aims to show that Wazuh is able to detect a SQL Injection attack (https://portswigger.net/web-security/sql-injection). Wazuh can detect it by monitoring Apache logs and detect some patterns on it, like some common SQL attacks: ``select``, ``union``, etc...
+Detect a `SQL Injection attack <https://portswigger.net/web-security/sql-injection>`_ from web server logs showing patterns like ``select``, ``union`` and other common SQL patterns of attack in a monitored endpoint.
 
-Prerequesites
+If Suricata integration is configured to monitor the endpoint's network traffic, the attack can additionally be detected at a network level.
+
+Configuration
 -------------
 
-- Apache server running on the monitored system (Linux RHEL)
-
-- Wazuh agent configured to monitor the Apache access logs:
+#. Add the following lines to ``/var/ossec/etc/ossec.conf`` at the Wazuh RHEL 7 agent host. This sets the Linux agent to monitor the access logs of your Apache server.
 
     .. code-block:: XML
 
@@ -19,27 +19,27 @@ Prerequesites
         <location>/var/log/httpd/access_log</location>
         </localfile>
 
-- Suricata use case configured and monitoring the endpoint traffic (to make it easy, for the test, Suricata can run in the monitored system)
-  
-Configuration
--------------
-
-- This use case requires no additional configuration.
+Optionally, you can install Suricata in the RHEL 7 agent endpoint and configure it to monitor the endpoint's network traffic.
 
 Steps to generate the alerts
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+----------------------------
 
-From an external host (the attacker), execute curl from a terminal:
+#. Replace ``<your_web_server_address>`` with the appropriate value and execute the following command from a system external to your RHEL7 endpoint (the attacker).
 
-    .. code-block:: XML
+    .. code-block:: console
 
-        curl -XGET "http://${replace_by_your_web_server_address}/?id=SELECT+*+FROM+users";
+        # curl -XGET "http://${replace_by_your_web_server_address}/?id=SELECT+*+FROM+users";
 
 Alerts
-^^^^^^
-- For alert based on web server log analysis: rule.id:31103
-- For alert based on network traffic analysis (Suricata NIDS): ``data.alert.signature_id:2006445``
+------
 
-Affected endpoint
-^^^^^^^^^^^^^^^^^
-Linux RHEL
+Related alerts, based on the web server log analysis, can be found with:
+
+* ``rule.id:31103``
+
+If you have Suricata monitoring the endpoint's traffic you can also query ``data.alert.signature_id:2006445`` for the related Suricata's alerts.
+
+Affected endpoints
+------------------
+
+* RHEL 7 agent host
