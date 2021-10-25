@@ -39,6 +39,7 @@ removedUrls['x.y'] = [
 /* Pages added in 4.2 */
 
 newUrls['4.2'] = [
+  '/amazon-machine-images/amazon-machine-images.html',
   '/release-notes/release-4-2-4.html',
   '/release-notes/release-4-2-3.html',
   '/release-notes/release-4-2-2.html',
