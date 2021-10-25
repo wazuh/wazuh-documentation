@@ -112,7 +112,7 @@ Changing the default passwords of Elasticsearch is highly recommended in order t
 
         Passwords changed. Remember to update the password in /etc/filebeat/filebeat.yml and /etc/kibana/kibana.yml if necessary and restart the services.
 
-    To use a formatted file, run the script with the ``-f`` option followed by the route to a file similar to this: 
+    To use a formatted file to indicate the passwords, run the script with the ``-f`` option followed by the file path. Use the following pattern to indicate the users and passwords in the formatted file: 
 
       .. code-block:: none
 
