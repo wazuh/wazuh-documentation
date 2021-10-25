@@ -118,7 +118,7 @@ Changing the default passwords of Elasticsearch is highly recommended in order t
 
         User: 
             name: wazuh
-            password: <password_wazuh
+            password: <password_wazuh>
 
         User: 
             name: kibanaserer
