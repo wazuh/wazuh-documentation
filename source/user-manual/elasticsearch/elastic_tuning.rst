@@ -126,7 +126,7 @@ Changing the default passwords of Elasticsearch is highly recommended in order t
 
     If the ``-a`` option is used in combination with the ``-f`` option, all users not included in the file are given a random password.
 
-      - If the script is run:
+      - For example, if the script is run with the following options:
 
         .. code-block:: console
           
