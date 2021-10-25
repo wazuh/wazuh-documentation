@@ -3,25 +3,25 @@
 Detecting a brute-force attack
 ==============================
 
-Identify SSH and RDP brute force attacks using Wazuh's out-of-the-box rules. This rules can correlate multiple authentication failure events and alert about a brute force attack.
+Identify SSH and RDP brute force attacks using Wazuh's out-of-the-box rules. This rules can correlate multiple authentication failure events and alert about these attacks.
 
 Configuration
 -------------
 
-#. Install `ssh` from the operating system repositories if missing, in a system that will play as the attacker.
+#. Install `ssh` in a system that will play as the attacker from the operating system repositories if missing.
 
-#. Install `hydra` to execute automated RDP connections. You can run ``yum install -y hydra`` on RPM based systems.
+#. Run ``yum install -y hydra`` to install `hydra`. This tool can execute automated RDP connections.
 
 Steps to generate the alerts
 ----------------------------
 
-#. Replace ``<username@rhel.agent.endpoint>`` with the appropriate destination in the following command. Run it to create multiple failed authentication attempts on the monitored Linux endpoint.
+#. Replace ``<username@rhel.agent.endpoint>`` with the appropriate destination in the following command. Run it from the attacker system to create multiple failed authentication attempts to the monitored Linux endpoint.
 
     .. code-block:: console
 
         # for i in `seq 1 10`; do sshpass -p 'wrong_password' ssh -o StrictHostKeyChecking=no <username@rhel.agent.endpoint>; done
 
-#. Replace ``<username@win.agent.endpoint>`` with the appropriate destination in the following command. Run it to create multiple failed authentication attempts on the monitored Windows endpoint.
+#. Replace ``<username@win.agent.endpoint>`` with the appropriate destination in the following command. Run it from the attacker system to create multiple failed authentication attempts to the monitored Windows endpoint.
   
     .. code-block:: console
 

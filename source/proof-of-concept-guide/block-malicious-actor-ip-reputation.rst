@@ -3,7 +3,7 @@
 Blocking a malicious actor - IP Reputation
 ==========================================
 
-Identify the monitored Windows endpoint's IP address as a bad reputation one. Log in that host as the attacker and try connecting to the victim Apache server.
+Identify the monitored Windows endpoint's IP address as a bad reputation one. Log in this Windows endpoint as the attacker and try connecting to the victim Apache server.
 
 Configuration
 -------------
@@ -23,7 +23,7 @@ Configuration
 
         # wget https://raw.githubusercontent.com/firehol/blocklist-ipsets/master/alienvault_reputation.ipset -O /var/ossec/etc/lists/alienvault_reputation.ipset
 
-#. Run the following command replacing ``<your_windows_ip_address>`` with the monitored Windows endpoint's IP address.
+#. Run the following command at the Wazuh manager endpoint replacing ``<your_windows_ip_address>`` with the monitored Windows endpoint's IP address.
 
     .. code-block:: console
 

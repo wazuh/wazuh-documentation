@@ -3,12 +3,12 @@
 Detecting suspicious binaries - Trojan
 ======================================
 
-Wazuh can detect trojaned system binaries by using signatures in ``/var/ossec/etc/shared/rootkit_trojans.txt`` file.
+Detect trojaned system binaries using the signatures in the ``/var/ossec/etc/shared/rootkit_trojans.txt`` file.
 
 Configuration
 -------------
 
-On the Linux monitored endpoint, we will use out-of-the box configuration for trojans detection in ``/var/ossec/etc/ossec.conf`` file:
+No additional configuration is required. Trojans detection is configured out-of-the-box. Check your configuration in ``/var/ossec/etc/ossec.conf`` at the RHEL 7 monitored endpoint.
 
     .. code-block:: XML
 
@@ -33,18 +33,17 @@ On the Linux monitored endpoint, we will use out-of-the box configuration for tr
         </rootcheck>
 
 Steps to generate the alerts
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+----------------------------
 
-- Create a copy of the trojaned file
+#. Save a copy of the original system binary.
 
-    .. code-block:: XML
-
-        cp -p /usr/bin/w /usr/bin/w.copy
-
-
-- Then modify the original system binary so it runs a shell script instead. In this case we modify ``/usr/bin/w``:
-  
     .. code-block:: console
+
+        # cp -p /usr/bin/w /usr/bin/w.copy
+
+#. Replace the original system binary ``/usr/bin/w`` with the following shell script.
+  
+    .. code-block:: sh
 
         #!/bin/bash
         echo "`date` this is evil"   > /tmp/trojan_created_file
@@ -52,15 +51,14 @@ Steps to generate the alerts
         #Now running original binary
         /usr/bin/w.copy
 
-
 Alerts
-^^^^^^
+------
 
-Wait for the next rootcheck scan to be completed (frequency can be adjusted), and look for the resulting trojan alert running the following query:
+Related alerts can be found with the following query once the next rootcheck scan has been completed:
 
-- ``location:rootcheck AND rule.id:510 AND data.title:Trojan*``
+* ``location:rootcheck AND rule.id:510 AND data.title:Trojan*``
 
 Affected endpoints
-^^^^^^^^^^^^^^^^^^
+------------------
 
-- Linux RHEL
+* RHEL 7 agent host

@@ -69,7 +69,7 @@ Configuration
             </wodle>
         </ossec_config>
 
-    No need to start Osqueryd. The Wazuh module will run the service when needed.
+    There is no need to start `Osqueryd`. The Wazuh module will run the service when needed.
 
 #. Restart the Wazuh agent to apply changes.
   

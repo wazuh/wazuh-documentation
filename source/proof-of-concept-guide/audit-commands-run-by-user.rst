@@ -10,9 +10,9 @@ More information on the :ref:`Audit Configuration Guide <learning_wazuh_audit_co
 Configuration
 -------------
 
-#. Check that the Linux Auditing System (``auditd``) is installed and running in your RHEL7 agent's host system.
+#. Run ``systemctl status auditd.service`` to check that the Linux Auditing System is installed and running in your RHEL7 agent endpoint.
 
-#. Check that your Wazuh agent is configured to read ``audit.log`` file. This configuration is included by default.
+#. Check that ``/var/ossec/etc/ossec.conf`` in your RHEL7 agent endpoint is configured for the agent to read the ``audit.log`` file.
 
    .. code-block:: XML
 
@@ -21,7 +21,7 @@ Configuration
         <location>/var/log/audit/audit.log</location>
       </localfile>
 
-#. Get your current `euid`. This is needed to monitor the actions of your user.  Monitoring 'root' user's actions is not recommended for the test, as it can be quite noisy.
+#. Get your current `euid` in the RHEL7 agent endpoint. This is needed to monitor the actions of your user. Monitoring 'root' user's actions is not recommended for the test, as it can be quite noisy.
 
     .. code-block:: console
 
@@ -40,7 +40,7 @@ Configuration
 
         # auditctl -D
 
-#. Update rules.
+#. Load rules from file.
 
     .. code-block:: console
 
@@ -50,7 +50,7 @@ Configuration
 Steps to generate the alerts
 ----------------------------
 
-#. Log in the RHEL 7 Agent host as the monitored user.
+#. Log in the RHEL 7 Agent endpoint as the monitored user.
 
 #. Execute a ping to www.google.com
 

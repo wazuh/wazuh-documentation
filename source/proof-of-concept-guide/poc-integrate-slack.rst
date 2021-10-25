@@ -3,33 +3,37 @@
 Slack integration
 =================
 
-Wazuh can report alerts to Slack by using the `ossec-integratordn <https://documentation.wazuh.com/current/user-manual/reference/daemons/wazuh-integratord.html>`_ daemon. Please check our `Integration with external APIs <https://documentation.wazuh.com/current/user-manual/manager/manual-integration.html>`_ for detailed information about this.
+Report alerts to a `Slack <https://slack.com/>`_ channel with the :ref:`wazuh-integratord` daemon.
+
+Check our :ref:`manual_integration` for detailed information about integrations.
 
 Configuration
 -------------
 
-On Wazuh manager:
+#. `Create a Slack webhook <https://api.slack.com/messaging/webhooks>`_. This is a unique URL to which Wazuh will send messages with the alerts.
 
-- A Slack webhook must be configured before setting up this scenario.
-
-- Configure Slack integration in ``/var/ossec/etc/ossec.conf``:
+#. Replace ``<your_slack_webhook>`` in the below configuration with the url obtained in the previous step. Set this Slack integration configuration in ``/var/ossec/etc/ossec.conf`` at the Wazuh manager endpoint.
 
     .. code-block:: XML
 
         <integration>
             <name>slack</name>
-            <hook_url>${replace_by_SlackHook}</hook_url>
+            <hook_url><your_slack_webhook></hook_url>
             <level>10</level>
             <alert_format>json</alert_format>
         </integration>
 
+Steps to generate the alerts
+----------------------------
+
+No action required. Wazuh will automatically forward alerts level 10 or higher to the provided Slack webhook.
 
 Alerts
-^^^^^^
+------
 
-- Wazuh will automatically forward alerts level 10 or higher to the provided Slack hook (the Slack channel you associated with your Slack hook will show the alerts in real time).
+The Slack channel you associated with your Slack webhook will show the alerts in real time.
 
 Affected endpoints
-^^^^^^^^^^^^^^^^^^
+------------------
 
-- Wazuh manager
+* Wazuh manager endpoint

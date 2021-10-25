@@ -10,7 +10,7 @@ You can find a detailed guide on how to Monitor AWS resources in the `AWS Monito
 Configuration
 -------------
 
-#. Enable ``aws-s3`` wodle in ``/var/ossec/etc/ossec.conf`` configuration file in the Wazuh manager endpoint:
+#. Enable ``aws-s3`` wodle in ``/var/ossec/etc/ossec.conf`` configuration file at the Wazuh manager endpoint:
 
    .. code-block:: XML
 
