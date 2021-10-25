@@ -83,19 +83,6 @@ Deploy and configure the instance manually
 
 Your instance is fully configured and ready. You can now :ref:`access the Wazuh web interface <ami_wazuh_ui>`.
 
-- **Security considerations about SSH**
-
-  - The ``root`` user cannot be identified by SSH and the instance can only be accessed through the user: ``wazuh-user``.
-  - SSH authentication through passwords is disabled and the instance can only be accessed through a key pair. This means that only the user with the key pair has access to the instance.
-  - To access the instance with a key pair, you need to download the key generated or stored in AWS. Then, run the following command to connect with the instance.
-
-    .. code-block:: console
-  
-        # ssh -i "key_pair_name" wazuh-user@instance_ip
-
-
-.. note:: It is highly recommended to change the default passwords of Elasticsearch for the users’ passwords in the first SSH access. To perform this action, see the :ref:`Elasticsearch tuning <elastic_tuning>` section.
- 
 
 Configuration files
 -------------------
@@ -123,7 +110,21 @@ Once the instance is running, you can access the web interface with your credent
 - **Username**: *wazuh*
 - **Password**: *<your_instance_id>*
 
-Keep in mind that after launching the instance, the passwords of the Open Distro users are changed to the ID of the instance created from the AMI. In this way, access to the interface is guaranteed only to the creator of it. This process can take an average of 5 minutes depending on the type of instance and both the SSH access and the Kibana web interface are disabled during the process. 
+Keep in mind that after launching the instance, the passwords of the users are changed to the ID of the instance created from the AMI. In this way, access to the interface is guaranteed only to the creator of it. This process can take an average of 5 minutes depending on the type of instance and both the SSH access and the Kibana web interface are disabled during the process. 
+
+.. note:: It is highly recommended to change the default passwords of Elasticsearch for the users’ passwords in the first SSH access. To perform this action, see the :ref:`Elasticsearch tuning <elastic_tuning>` section.
+
+
+Security considerations about SSH
+---------------------------------
+
+- The ``root`` user cannot be identified by SSH and the instance can only be accessed through the user: ``wazuh-user``.
+- SSH authentication through passwords is disabled and the instance can only be accessed through a key pair. This means that only the user with the key pair has access to the instance.
+- To access the instance with a key pair, you need to download the key generated or stored in AWS. Then, run the following command to connect with the instance.
+
+  .. code-block:: console
+
+      # ssh -i "key_pair_name" wazuh-user@instance_ip
 
 
 Next steps
@@ -133,10 +134,6 @@ The Wazuh AMI is now ready and you can proceed with :ref:`deploying the Wazuh ag
 
 Upgrading the Wazuh server
 --------------------------
-
-.. raw:: html
-
-  <div class="accordion-section">
 
 The Wazuh server in the instance can be upgraded as a traditional installation.
 
