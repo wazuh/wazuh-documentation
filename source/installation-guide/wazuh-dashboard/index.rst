@@ -18,7 +18,7 @@ You can now choose an installation method and start installing the Wazuh dashboa
 - :ref:`Step-by-step installation <wazuh_dashboard_step_by_step>`: Install this component manually following detailed step-by-step instructions.
 
 
-.. thumbnail:: /images/installation/Wazuh-Installation-dashboard-3.png
+.. thumbnail:: /images/installation/Wazuh-Installation-dashboard-4.png
     :alt: Wazuh dashboard installation
     :align: center
     :width: 100%
