@@ -53,10 +53,11 @@ removedUrls['5.0'] = [
   '/user-manual/reference/ossec-conf/agent-upgrade.html',
   '/user-manual/reference/ossec-conf/labels.html',
   '/user-manual/reference/ossec-conf/logging.html',
+  '/user-manual/capabilities/file-integrity/fim-fields-rule-mapping.html',
 ];
 
 
-/* REMINDER: Check the last/current version released. If the version previous to 5.0 is 4.3, there's no further action needed. 
+/* REMINDER: Check the last/current version released. If the version previous to 5.0 is 4.3, there's no further action needed.
 For versions later than 4.3, this section below needs to be updated.  */
 
 redirections.push(
