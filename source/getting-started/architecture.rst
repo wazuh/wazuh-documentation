@@ -8,13 +8,13 @@
 Architecture
 ============
 
-The Wazuh architecture is based on :ref:`agents <wazuh_agent>`, running on the monitored endpoints, that forward security data to a central :ref:`server <wazuh_server>`. Moreover, agentless devices such as firewalls, switches, routers, and access points are supported and can actively submit log data via Syslog, SSH, or using their own API. The central server decodes and analyzes the incoming information, and passes the results along to a Wazuh indexer cluster for indexing and storage.
+The Wazuh architecture is based on :ref:`agents <wazuh_agent>`, running on the monitored endpoints, that forward security data to a central :ref:`server <wazuh_server>`. Moreover, agentless devices such as firewalls, switches, routers, and access points are supported and can actively submit log data via Syslog, SSH, or using their own API. The central server decodes and analyzes the incoming information, and passes the results along to an Elasticsearch cluster for indexing and storage.
 
-A Wazuh indexer cluster is a collection of one or more nodes that communicate with each other to perform read and write operations on indexes. Small Wazuh deployments, which do not require processing large amounts of data, can easily be handled by a single-node cluster. Multi-node clusters are recommended when there is a large number of monitored endpoints, when a large volume of data is anticipated, or when high availability is required.
+An Elasticsearch cluster is a collection of one or more nodes that communicate with each other to perform read and write operations on indexes. Small Wazuh deployments, which do not require processing large amounts of data, can easily be handled by a single-node cluster. Multi-node clusters are recommended when there is a large number of monitored endpoints, when a large volume of data is anticipated, or when high availability is required.
 
-For production environments it is recommended to deploy the Wazuh server and Wazuh indexer to different hosts. In this scenario, the Wazuh forwarder is used to securely forward Wazuh alerts and/or archived events to the Wazuh indexer cluster (single-node or multi-node) using TLS encryption.
+For production environments it is recommended to deploy the Wazuh server and Elasticsearch to different hosts. In this scenario, Filebeat is used to securely forward Wazuh alerts and/or archived events to the Elasticsearch cluster (single-node or multi-node) using TLS encryption.
 
-The diagram below represents a Wazuh deployment architecture. It shows the solution components and how the :ref:`Wazuh servers <wazuh_server>` and :ref:`Wazuh indexer <wazuh_indexer>` can be configured as a cluster, providing load balancing and high availability.
+The diagram below represents a Wazuh deployment architecture. It shows the solution components and how the :ref:`Wazuh servers <wazuh_server>` and :ref:`Elasticsearch <elasticsearch>` can be configured as a cluster, providing load balancing and high availability.
 
 .. thumbnail:: ../images/getting_started/deployment.png
     :alt: Wazuh deployment

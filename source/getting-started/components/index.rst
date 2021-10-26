@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-    :description: The Wazuh components are the Wazuh agent, the Wazuh server, the Wazuh indexer, and the Wazuh dashboard. Learn more about them in this section of our documentation.
+    :description: The Wazuh components are the Wazuh agent, the Wazuh server, Elasticsearch, and Kibana. Learn more about them in this section of our documentation.
 
 .. _components:
 
