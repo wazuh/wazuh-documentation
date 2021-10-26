@@ -517,9 +517,9 @@ We will obtain a final result similar to the one shown in the following code blo
 	poc-allinone-wm            : ok=43   changed=23   unreachable=0    failed=0    skipped=36   rescued=0    ignored=1   
 
 
-We can check the status of our new services in our Elastic Stack server.
+We can check the status of our new services in our Opendistro Stack server.
 
-- Elasticsearch.
+- Elasticsearch/Opendistro.
 
 .. code-block:: console
 
