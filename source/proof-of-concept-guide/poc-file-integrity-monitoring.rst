@@ -1,4 +1,4 @@
-.. _poc_fim_:
+.. _poc_fim:
 
 File integrity monitoring
 =========================
