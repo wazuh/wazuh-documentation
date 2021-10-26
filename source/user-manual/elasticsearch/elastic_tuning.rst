@@ -121,7 +121,7 @@ Changing the default passwords of Elasticsearch is highly recommended in order t
             password: <password_wazuh>
 
         User: 
-            name: kibanaserer
+            name: kibanaserver
             password: <password_kibanaserver>
 
     If the ``-a`` option is used in combination with the ``-f`` option, all users not included in the file are given a random password.
