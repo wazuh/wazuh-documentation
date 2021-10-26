@@ -3,28 +3,55 @@
 .. meta::
   :description: The Proof of Concept guide explains how to set up the Wazuh environment to test the different product capabilities. Learn more about it in our documentation.
 
-Wazuh Proof of Concept Guide
+Wazuh Proof of Concept guide
 ============================
 
-The Proof of Concept (POC) guide is a cheat-sheet on setting up the Wazuh environment to test or demo the different product capabilities. It assumes that the following components are already installed:
+The Proof of Concept (POC) guide explores how to set up the Wazuh environment to test or demo the different product capabilities. Each POC represents real-world scenarios for which a specific configuration is needed to set up different use cases. To verify the feasibility of the product, further information is provided on how to generate and query the alerts, and the affected endpoints resulting from each POC.
 
-* Elasticsearch + Kibana + Wazuh Kibana plugin
-* Wazuh manager + Filebeat (for integration with Elasticsearch)
-* Wazuh agent (RHEL 7)
-* Wazuh agent (Windows)
 
-A good guide on how to install these components can be found in the :ref:`Installation guide <installation_guide>` section.
+Prerequisites
+-------------
 
-It is also assumed that the following prerequisites are met:
+- You need to have these components already installed to test any POC.
 
-* An Apache server running on the Wazuh agent RHEL 7 host system.
+    * Elasticsearch, Kibana, and Wazuh Kibana plugin
+    * Wazuh manager and Filebeat (for integration with Elasticsearch)
+    * Wazuh agent (RHEL 7) 
+    * Wazuh agent (Windows)
 
-Contents
-^^^^^^^^
+  To install these components, see the :ref:`Installation guide <installation_guide>` section.
+
+- You also need an Apache server running on the Wazuh agent RHEL 7 host system.
+
+Proofs of Concept
+-----------------
+
+
+.. list-table::
+   :width: 100%
+   :widths: 50 50
+   
+   * - :ref:`poc_audit_commands`
+     - :ref:`poc_aws_monitoring`
+   * - :ref:`poc_detect_bruteforce`
+     - :ref:`poc_monitoring_docker`
+   * - :ref:`poc_fim`
+     - :ref:`poc_block_actor_IP_reputation`
+   * - :ref:`poc_detect_unauthorized_process_netcat`
+     - :ref:`poc_integrate_osquery`
+   * - :ref:`poc_ids_integration_suricata`
+     - :ref:`poc_detect_web_attack_shellshock`
+   * - :ref:`poc_detect_web_attack_sql_injection`
+     - :ref:`poc_slack_integration`
+   * - :ref:`poc_trojan_detection`
+     - :ref:`poc_detect_remove_malware_virustotal`
+   * - :ref:`poc_vulnerability_detector`
+     - :ref:`poc_detect_yara`
+
+
 
 .. toctree::
-    :titlesonly:
-    :includehidden:
+    :hidden:
     :maxdepth: 1
 
     audit-commands-run-by-user
