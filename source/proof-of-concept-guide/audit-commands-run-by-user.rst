@@ -3,7 +3,7 @@
 Auditing commands run by user
 =============================
 
-Enable `Audit` logging to capture and log `execve` system calls so the Wazuh agent can read these logs. Create specific rules to alert about commands run by the user.
+You can enable `Audit` logging to capture and log `execve` system calls so the Wazuh agent can read these logs. Create specific rules to alert about commands run by the user.
 
 More information on the :ref:`Audit Configuration Guide <learning_wazuh_audit_commands>`. In addition, `RHEL Audit documentation <https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/security_guide/chap-system_auditing>`_ has extended information about the Audit kernel subsystem.
 
