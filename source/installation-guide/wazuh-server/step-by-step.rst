@@ -8,19 +8,19 @@
 Installing the Wazuh server in step-by-step mode
 ================================================
 
-The Wazuh server is in charge of analyzing the data received from the agents and triggering alerts when threats or anomalies are detected. This central component includes the Wazuh manager and the Wazuh forwarder.
+The Wazuh server is in charge of analyzing the data received from the agents and triggering alerts when threats or anomalies are detected. This central component includes the Wazuh manager and the Filebeat.
 
 
 Wazuh server cluster installation and configuration
 ----------------------------------------------------
 
-Install the Wazuh server as a single-node or multi-node cluster according to your environment needs. If you want to install a single-node cluster, follow the instructions to install the Wazuh manager and the Wazuh forwarder and proceed directly with :ref:`installing the Wazuh dashboard <wazuh_dashboard_installation>`.
+Install the Wazuh server as a single-node or multi-node cluster according to your environment needs. If you want to install a single-node cluster, follow the instructions to install the Wazuh manager and the Filebeat and proceed directly with :ref:`installing the Kibana <wazuh_dashboard_installation>`.
 
 The installation process is divided into three stages.  
 
 #. Wazuh manager installation
 
-#. Wazuh forwarder installation
+#. Filebeat installation
 
 #. Cluster configuration for multi-node deployment 
 
@@ -38,7 +38,7 @@ Adding the Wazuh repository
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Add the Wazuh repository to download the official Wazuh packages. As an alternative, you can download the Wazuh packages directly from our :ref:`Package list <packages>`. 
-Skip this step to install it on the same host as the Wazuh indexer.
+Skip this step to install it on the same host as the Elasticsearch.
     
    .. tabs::
    
@@ -106,16 +106,16 @@ Installing the Wazuh manager
 
 .. _wazuh_server_multi_node_filebeat:
 
-2. Install the Wazuh forwarder
+2. Install the Filebeat
 ------------------------------
 .. raw:: html
 
   <div class="accordion-section open">
 
-The Wazuh forwarder, based on Filebeat-OSS, securely forwards alerts and archived events to the Wazuh indexer.  
+The Filebeat, based on Filebeat-OSS, securely forwards alerts and archived events to the Elasticsearch.  
 
 
-Installing and configuring the Wazuh forwarder 
+Installing and configuring the Filebeat 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
@@ -145,13 +145,13 @@ Installing and configuring the Wazuh forwarder
 
 
 
-#. Download the preconfigured Filebeat configuration file used to forward the Wazuh alerts to the Wazuh indexer.
+#. Download the preconfigured Filebeat configuration file used to forward the Wazuh alerts to the Elasticsearch.
 
     .. code-block:: console
 
       # curl -so /etc/filebeat/filebeat.yml https://packages.wazuh.com/resources/|WAZUH_LATEST_MINOR|/open-distro/filebeat/7.x/filebeat_elastic_cluster.yml
 
-#. Download the alerts template for the Wazuh indexer.
+#. Download the alerts template for the Elasticsearch.
 
     .. include:: ../../_templates/installations/elastic/common/load_filebeat_template.rst
 
@@ -166,7 +166,7 @@ Installing and configuring the Wazuh forwarder
 
     .. include:: ../../_templates/installations/elastic/common/configure_filebeat.rst
 
-#. Replace ``wazuh-node-name`` with your Wazuh server node name, the same used in ``instances.yml`` to create the certificates, and move the certificates to their corresponding location. We assume that you placed a copy of ``certs.tar``, created during the Wazuh indexer installation, in the root home folder (``~/``).
+#. Replace ``wazuh-node-name`` with your Wazuh server node name, the same used in ``instances.yml`` to create the certificates, and move the certificates to their corresponding location. We assume that you placed a copy of ``certs.tar``, created during the Elasticsearch installation, in the root home folder (``~/``).
 
     .. include:: ../../_templates/installations/elastic/common/copy_certificates_filebeat_wazuh_cluster.rst
 
@@ -203,7 +203,7 @@ Installing and configuring the Wazuh forwarder
 
 Your Wazuh server is now successfully installed and the Wazuh manager is configured as a single-node cluster by default. 
 
-- If you want a Wazuh server single-node cluster, everything is set and you can proceed directly with :ref:`installing the Wazuh dashboard <wazuh_dashboard_installation>`. 
+- If you want a Wazuh server single-node cluster, everything is set and you can proceed directly with :ref:`installing the Kibana <wazuh_dashboard_installation>`. 
   
 - If you want a Wazuh server multi-node cluster,  install the Wazuh server on every node and carry on with configuring the Wazuh cluster.
 
@@ -247,4 +247,4 @@ If you want to uninstall the Wazuh server, see the :ref:`uninstalling section <u
 Next steps
 ----------
 
-The Wazuh server installation is now complete and you can proceed with installing the Wazuh dashboard. To perform this action, see the :ref:`Wazuh dashboard <wazuh_dashboard_installation>` section.
+The Wazuh server installation is now complete and you can proceed with installing the Kibana. To perform this action, see the :ref:`Kibana <wazuh_dashboard_installation>` section.

@@ -2,16 +2,16 @@
 
 .. _wazuh_indexer_unattended:
 
-Installing the Wazuh indexer in unattended mode
+Installing the Elasticsearch in unattended mode
 ===============================================
 
-Install and configure the Wazuh indexer, a highly scalable full-text search engine based on Open Distro for Elasticsearch. It offers advanced security, alerting, index management, deep performance analysis, and several other features.
+Install and configure the Elasticsearch, a highly scalable full-text search engine based on Open Distro for Elasticsearch. It offers advanced security, alerting, index management, deep performance analysis, and several other features.
 
 
-Wazuh indexer cluster installation
+Elasticsearch cluster installation
 ----------------------------------
 
-Install and configure the Wazuh indexer as a single-node or multi-node cluster according to your environment needs. If you want to install a single-node cluster, follow the instructions to install the initial node.
+Install and configure the Elasticsearch as a single-node or multi-node cluster according to your environment needs. If you want to install a single-node cluster, follow the instructions to install the initial node.
 
 The installation process is divided into three stages. 
 
@@ -40,7 +40,7 @@ Install and configure the initial node. During this stage, the SSL certificates 
           # curl -so ~/config.yml https://packages.wazuh.com/resources/4.2/unattended-installation/templates/config.yml
 
     
-#. Edit ``~/config.yml`` and replace the node names and IP values with the corresponding names and IP addresses, including all the Wazuh indexer, Wazuh server, and Wazuh dashboard nodes. Add as many node fields as needed.
+#. Edit ``~/config.yml`` and replace the node names and IP values with the corresponding names and IP addresses, including all the Elasticsearch, Wazuh server, and Kibana nodes. Add as many node fields as needed.
 
       .. code-block:: yaml
         :emphasize-lines: 4, 8, 15, 17, 27, 29
@@ -106,9 +106,9 @@ Install and configure the initial node. During this stage, the SSL certificates 
     | -h / --help                   | Shows *help*.                                                                                                  |
     +-------------------------------+----------------------------------------------------------------------------------------------------------------+        
 
-#.  Copy ``~/certs.tar`` to all the servers of the distributed deployment, including the Wazuh indexer, Wazuh server, and Wazuh dashboard nodes. This can be done by using, for example, ``scp``.
+#.  Copy ``~/certs.tar`` to all the servers of the distributed deployment, including the Elasticsearch, Wazuh server, and Kibana nodes. This can be done by using, for example, ``scp``.
 
-You now have installed and configured the initial Wazuh indexer node. 
+You now have installed and configured the initial Elasticsearch node. 
 
     - If you want a single-node cluster, everything is set and you can proceed directly with :ref:`installing the Wazuh server <wazuh_server_installation>`.
  
@@ -137,7 +137,7 @@ Install and configure subsequent nodes of your multi-node cluster. Make sure tha
         # bash ~/unattended-installation.sh -e -en <node_name> 
 
 
-Repeat this process on each Wazuh indexer node and proceed with initializing the cluster.             
+Repeat this process on each Elasticsearch node and proceed with initializing the cluster.             
 
 
 3. Cluster initialization for multi-node clusters
@@ -146,7 +146,7 @@ Repeat this process on each Wazuh indexer node and proceed with initializing the
 
     <div class="accordion-section">
 
-The final stage of the process for installing a Wazuh indexer multi-node cluster consists in running the security admin script. 
+The final stage of the process for installing a Elasticsearch multi-node cluster consists in running the security admin script. 
 
 Run the ``securityadmin`` script on the initial node to load the new certificates information and start the cluster. Replace ``<elasticsearch_IP>`` with the Elasticsearch installation IP and run the command.
 
@@ -158,5 +158,5 @@ Run the ``securityadmin`` script on the initial node to load the new certificate
 Next steps
 ----------
 
-The Wazuh indexer is now successfully installed and you can proceed with installing the Wazuh server. To perform this action, see the :ref:`Wazuh server <wazuh_server_unattended>` section.
+The Elasticsearch is now successfully installed and you can proceed with installing the Wazuh server. To perform this action, see the :ref:`Wazuh server <wazuh_server_unattended>` section.
 

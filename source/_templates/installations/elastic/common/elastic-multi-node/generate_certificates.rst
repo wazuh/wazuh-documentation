@@ -69,7 +69,7 @@
      # tar -cvf certs.tar *
      # mv ~/certs/certs.tar ~/
 
-#. Copy ``certs.tar`` to all the servers of the distributed deployment, including the Wazuh indexer, Wazuh server, and Wazuh dashboard nodes. This can be done by using, for example, ``scp``. 
+#. Copy ``certs.tar`` to all the servers of the distributed deployment, including the Elasticsearch, Wazuh server, and Kibana nodes. This can be done by using, for example, ``scp``. 
 
 #. If you want to later install other Wazuh components on this node, keep the certificates file. Otherwise, if the file is already copied to all the instances of the distributed deployment, remove it with ``rm -f certs.tar`` to increase security.
 

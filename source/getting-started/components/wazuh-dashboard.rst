@@ -2,10 +2,10 @@
 
 .. _wazuh_dashboard:
 
-Wazuh dashboard
+Kibana
 ===============
 
-The Wazuh dashboard is a flexible and intuitive web interface for mining, analyzing, and visualizing data. It is also used for management and monitoring of the Wazuh infrastructure. From the Wazuh dashboard user interface, identity and access management can be controlled as well, creating and managing users, and assigning roles as needed. 
+The Kibana is a flexible and intuitive web interface for mining, analyzing, and visualizing data. It is also used for management and monitoring of the Wazuh infrastructure. From the Kibana user interface, identity and access management can be controlled as well, creating and managing users, and assigning roles as needed. 
 
 Data visualization, mining, and analysis
 ----------------------------------------
@@ -91,7 +91,7 @@ Additionally, agent groups and centralized configuration can be managed and edit
 Management of Wazuh infrastructure
 ----------------------------------
 
-The Wazuh dashboard runs on top of the indexed data in a Wazuh indexer cluster and provides you with a directory dedicated to administrate and monitor your infrastructure. From there, you can manage and configure your Wazuh cluster rules and decoders, and CDB lists. 
+The Kibana runs on top of the indexed data in a Elasticsearch cluster and provides you with a directory dedicated to administrate and monitor your infrastructure. From there, you can manage and configure your Wazuh cluster rules and decoders, and CDB lists. 
 
 Data analysis visualization gives you full visibility into your cluster infrastructure for fast threat detection and remediation. Users can check the status, logs, and statistics of Wazuh clusters and create their own downloadable reports using predefined templates, or personalize their own if required. Wazuh provides the tools for comprehensive and streamlined security analytics.
 
@@ -118,11 +118,11 @@ Data analysis visualization gives you full visibility into your cluster infrastr
 Dev tools
 ---------
 
-User can easily access developer tools integrated directly into the Wazuh dashboard. 
+User can easily access developer tools integrated directly into the Kibana. 
 
-The Ruleset Test tool provides an input box for reading sample logs and an output box to visualize the test results. This feature of the Wazuh dashboard allows you to test sample logs directly on the Wazuh user interface and see how the ruleset reacts to specific log messages.
+The Ruleset Test tool provides an input box for reading sample logs and an output box to visualize the test results. This feature of the Kibana allows you to test sample logs directly on the Wazuh user interface and see how the ruleset reacts to specific log messages.
 
-The Wazuh dashboard also includes an API console for users to interact with the Wazuh API. This API accommodates complete remote management of the Wazuh infrastructure and, from the API Console, you can easily perform everyday actions such as adding agents, restarting components, creating roles, or looking up syscheck details.
+The Kibana also includes an API console for users to interact with the Wazuh API. This API accommodates complete remote management of the Wazuh infrastructure and, from the API Console, you can easily perform everyday actions such as adding agents, restarting components, creating roles, or looking up syscheck details.
 
 
 .. raw:: html

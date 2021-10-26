@@ -1,22 +1,22 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. meta:: :description: The Wazuh indexer is a highly scalable full-text search engine. Install the Wazuh indexer in a single-node or multi-node configuration according to your environment needs. 
+.. meta:: :description: The Elasticsearch is a highly scalable full-text search engine. Install the Elasticsearch in a single-node or multi-node configuration according to your environment needs. 
 
 
 .. _wazuh_indexer_step_by_step:
 
 
-Installing the Wazuh indexer in step-by-step mode
+Installing the Elasticsearch in step-by-step mode
 =================================================
 
-Install and configure the Wazuh indexer, a highly scalable full-text search engine based on Open Distro for Elasticsearch. It offers advanced security, alerting, index management, deep performance analysis, and several other features.
+Install and configure the Elasticsearch, a highly scalable full-text search engine based on Open Distro for Elasticsearch. It offers advanced security, alerting, index management, deep performance analysis, and several other features.
 
 .. note:: Root user privileges are required to run the commands described below.
 
-Wazuh indexer cluster installation 
+Elasticsearch cluster installation 
 ----------------------------------
 
-Install and configure the Wazuh indexer as a single-node or multi-node cluster according to your environment needs. If you want to install a single-node cluster, follow the instructions to install the initial node and proceed directly to initialize the cluster. 
+Install and configure the Elasticsearch as a single-node or multi-node cluster according to your environment needs. If you want to install a single-node cluster, follow the instructions to install the initial node and proceed directly to initialize the cluster. 
 
 The installation process is divided into three stages.  
 
@@ -108,7 +108,7 @@ Create and deploy SSL certificates to encrypt communications between the Wazuh c
         .. include:: ../../_templates/installations/elastic/common/enable_elasticsearch.rst
 
  
-You now have installed and configured the initial Wazuh indexer node. 
+You now have installed and configured the initial Elasticsearch node. 
 
 - If you want a single-node cluster, proceed directly with :ref:`initializing the cluster <initialize_cluster>`. 
 - If you want to install a multi-node cluster, expand the instructions below to install and configure subsequent nodes. 
@@ -191,7 +191,7 @@ Deploy the certificates to encrypt communications between the Wazuh central comp
 
    
 
-You now have installed a subsequent node of your Wazuh indexer multi-node cluster. Repeat this process on every other subsequent node that you want to add to your cluster and proceed with initializing the cluster. 
+You now have installed a subsequent node of your Elasticsearch multi-node cluster. Repeat this process on every other subsequent node that you want to add to your cluster and proceed with initializing the cluster. 
 
 .. _initialize_cluster:
 
@@ -201,7 +201,7 @@ You now have installed a subsequent node of your Wazuh indexer multi-node cluste
 
   <div class="accordion-section open">
 
-The final stage of the process for installing a Wazuh indexer consists in running the security admin script. 
+The final stage of the process for installing a Elasticsearch consists in running the security admin script. 
 
 #. On the initial node, configure ELASTICSEARCH_IP as an environment variable.
   
@@ -246,10 +246,10 @@ The final stage of the process for installing a Wazuh indexer consists in runnin
         }
   
 
-If you want to uninstall the Wazuh indexer, see the :ref:`Uninstalling <uninstall_elasticsearch>` section.
+If you want to uninstall the Elasticsearch, see the :ref:`Uninstalling <uninstall_elasticsearch>` section.
 
 Next steps
 ----------
 
-The Wazuh indexer is now successfully installed and you can proceed with installing the Wazuh server. To perform this action, see the :ref:`Wazuh server <wazuh_server_step_by_step>` section.
+The Elasticsearch is now successfully installed and you can proceed with installing the Wazuh server. To perform this action, see the :ref:`Wazuh server <wazuh_server_step_by_step>` section.
 

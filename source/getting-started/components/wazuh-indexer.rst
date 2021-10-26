@@ -2,10 +2,10 @@
 
 .. _wazuh_indexer:
 
-Wazuh indexer
+Elasticsearch
 =============
 
-The Wazuh indexer is a highly scalable, full-text search and analytics engine. The component is distributed, meaning the data indices are divided into shards and each shard can have zero or more replicas. Wazuh uses different indices for alerts data, raw events, and status monitoring information.
+The Elasticsearch is a highly scalable, full-text search and analytics engine. The component is distributed, meaning the data indices are divided into shards and each shard can have zero or more replicas. Wazuh uses different indices for alerts data, raw events, and status monitoring information.
 
 A Wazuh index is a collection of documents that have somewhat similar characteristics, like certain common fields and shared data retention requirements. Wazuh utilizes as many as four different indices to store different event types.
 
@@ -27,6 +27,6 @@ A Wazuh index is a collection of documents that have somewhat similar characteri
 
 An index is composed of documents. For the indices above, documents are individual alerts, archived events, the Wazuh agents status-related data or the Wazuh manager performance-related data.
 
-A Wazuh index is divided into one or more shards, and each shard can optionally have one or more replicas. Each primary and replica shard is an individual Lucene index. Thus, a Wazuh index is made up of many Lucene indexes. When a search is run on a Wazuh index, the search is executed on all the shards in parallel and the results are merged. Dividing Wazuh indexes into multiple shards and replicas is used in multi-node Wazuh indexer clusters with the purpose of scaling out searches and for high availability. Single-node Wazuh indexer clusters normally have only one shard per index and no replicas.
+A Wazuh index is divided into one or more shards, and each shard can optionally have one or more replicas. Each primary and replica shard is an individual Lucene index. Thus, a Wazuh index is made up of many Lucene indexes. When a search is run on a Wazuh index, the search is executed on all the shards in parallel and the results are merged. Dividing Wazuh indexes into multiple shards and replicas is used in multi-node Elasticsearch clusters with the purpose of scaling out searches and for high availability. Single-node Elasticsearch clusters normally have only one shard per index and no replicas.
 
-You interact with the Wazuh indexer clusters using the REST API, which offers a lot of flexibility. You can perform searches, add or delete documents, modify indices, and more. 
+You interact with the Elasticsearch clusters using the REST API, which offers a lot of flexibility. You can perform searches, add or delete documents, modify indices, and more. 
