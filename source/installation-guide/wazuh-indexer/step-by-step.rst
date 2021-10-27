@@ -1,6 +1,6 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. meta:: :description: The Elasticsearch is a highly scalable full-text search engine. Install the Elasticsearch in a single-node or multi-node configuration according to your environment needs. 
+.. meta:: :description: Elasticsearch is a highly scalable full-text search engine. Install  Elasticsearch in a single-node or multi-node configuration according to your environment needs. 
 
 
 .. _wazuh_indexer_step_by_step:
