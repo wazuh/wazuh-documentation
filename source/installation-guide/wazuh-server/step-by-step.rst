@@ -112,7 +112,7 @@ Installing the Wazuh manager
 
   <div class="accordion-section open">
 
-The Filebeat, based on Filebeat-OSS, securely forwards alerts and archived events to the Elasticsearch.  
+Filebeat securely forwards alerts and archived events to the Elasticsearch.  
 
 
 Installing and configuring the Filebeat 
