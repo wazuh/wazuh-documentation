@@ -151,7 +151,7 @@ Installing and configuring Filebeat
 
       # curl -so /etc/filebeat/filebeat.yml https://packages.wazuh.com/resources/|WAZUH_LATEST_MINOR|/open-distro/filebeat/7.x/filebeat_elastic_cluster.yml
 
-#. Download the alerts template for the Elasticsearch.
+#. Download the alerts template for Elasticsearch.
 
     .. include:: ../../_templates/installations/elastic/common/load_filebeat_template.rst
 
