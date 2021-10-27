@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-    :description: The Wazuh agent system inventory module collects hardware and software information from the monitored system. This capability helps to identify assets and evaluate the efficacy of patch management.
+    :description: The Wazuh agent system inventory module collects hardware and software information from the monitored system. Learn more about this capability here.
     
 .. _system_inventory:
 
