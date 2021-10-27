@@ -247,4 +247,4 @@ If you want to uninstall the Wazuh server, see the :ref:`uninstalling section <u
 Next steps
 ----------
 
-The Wazuh server installation is now complete and you can proceed with installing the Kibana. To perform this action, see the :ref:`Kibana <wazuh_dashboard_installation>` section.
+The Wazuh server installation is now complete and you can proceed with installing Kibana. To perform this action, see the :ref:`Kibana <wazuh_dashboard_installation>` section.
