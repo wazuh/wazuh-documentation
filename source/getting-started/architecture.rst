@@ -8,13 +8,13 @@
 Architecture
 ============
 
-The Wazuh architecture is based on :ref:`agents <wazuh_agent>`, running on the monitored endpoints, that forward security data to a central :ref:`server <wazuh_server>`. Moreover, agentless devices such as firewalls, switches, routers, and access points are supported and can actively submit log data via Syslog, SSH, or using their own API. The central server decodes and analyzes the incoming information, and passes the results along to a Elasticsearch cluster for indexing and storage.
+The Wazuh architecture is based on :ref:`agents <wazuh_agent>`, running on the monitored endpoints, that forward security data to a central :ref:`server <wazuh_server>`. Moreover, agentless devices such as firewalls, switches, routers, and access points are supported and can actively submit log data via Syslog, SSH, or using their own API. The central server decodes and analyzes the incoming information, and passes the results along to an Elasticsearch cluster for indexing and storage.
 
-A Elasticsearch cluster is a collection of one or more nodes that communicate with each other to perform read and write operations on indexes. Small Wazuh deployments, which do not require processing large amounts of data, can easily be handled by a single-node cluster. Multi-node clusters are recommended when there is a large number of monitored endpoints, when a large volume of data is anticipated, or when high availability is required.
+An Elasticsearch cluster is a collection of one or more nodes that communicate with each other to perform read and write operations on indexes. Small Wazuh deployments, which do not require processing large amounts of data, can easily be handled by a single-node cluster. Multi-node clusters are recommended when there is a large number of monitored endpoints, when a large volume of data is anticipated, or when high availability is required.
 
-For production environments it is recommended to deploy the Wazuh server and Elasticsearch to different hosts. In this scenario, the Filebeat is used to securely forward Wazuh alerts and/or archived events to the Elasticsearch cluster (single-node or multi-node) using TLS encryption.
+For production environments it is recommended to deploy the Wazuh server and Elasticsearch to different hosts. In this scenario, Filebeat is used to securely forward Wazuh alerts and/or archived events to the Elasticsearch cluster (single-node or multi-node) using TLS encryption.
 
-The diagram below represents a Wazuh deployment architecture. It shows the solution components and how the :ref:`Wazuh servers <wazuh_server>` and :ref:`Elasticsearch <wazuh_indexer>` can be configured as a cluster, providing load balancing and high availability.
+The diagram below represents a Wazuh deployment architecture. It shows the solution components and how the :ref:`Wazuh servers <wazuh_server>` and :ref:`Elasticsearch <elasticsearch>` can be configured as a cluster, providing load balancing and high availability.
 
 .. thumbnail:: ../images/getting_started/deployment.png
     :alt: Wazuh deployment
@@ -36,9 +36,9 @@ The Wazuh messages protocol uses AES encryption by default, with 128 bits per bl
 Wazuh components communication
 ------------------------------
 
-The Wazuh server uses the Filebeat to send alert and event data to the Elasticsearch, using TLS encryption. Filebeat reads the Wazuh server output data and sends it to the Elasticsearch (by default listening on port 9200/TCP). Once the data is indexed by the Elasticsearch, the Kibana is used to mine and visualize the information.
+The Wazuh server uses Filebeat to send alert and event data to Elasticsearch, using TLS encryption. Filebeat reads the Wazuh server output data and sends it to Elasticsearch (by default listening on port 9200/TCP). Once the data is indexed by Elasticsearch, Kibana is used to mine and visualize the information.
 
-The Kibana queries the Wazuh RESTful API (by default listening on port 55000/TCP on the Wazuh server) to display configuration and status-related information of the :ref:`Wazuh server <wazuh_server>` and :ref:`agents <wazuh_agent>`. It can also modify, through API calls, agents or server configuration settings when desired. This communication is encrypted with TLS and authenticated with username and password.
+The Wazuh Kibana plugin queries the Wazuh RESTful API (by default listening on port 55000/TCP on the Wazuh server) to display configuration and status-related information of the :ref:`Wazuh server <wazuh_server>` and :ref:`agents <wazuh_agent>`. It can also modify, through API calls, agents or server configuration settings when desired. This communication is encrypted with TLS and authenticated with username and password.
 
 Default ports
 -------------
@@ -66,13 +66,13 @@ Several services are used for the communication of Wazuh components. Below is th
 + Elasticsearch +-----------+---------------+----------------------------------------------+
 |               | 9300-9400 | TCP           | Elasticsearch cluster communication          |
 +---------------+-----------+---------------+----------------------------------------------+
-|Kibana| 443       | TCP           | Kibana                              |
+|Kibana         | 443       | TCP           | Wazuh web interface                          |
 +---------------+-----------+---------------+----------------------------------------------+
 
 Archival data storage
 ---------------------
 
-Both alerts and non-alert events are stored in files on the Wazuh server, in addition to being sent to the Elasticsearch. These files can be written in JSON format, ``.json``,  and/or in plain text format as ``.log``, which contains no decoded fields but is more compact. These files are daily compressed and signed using MD5, SHA1, and SHA256 checksums. The directory and filename structure is as follows:
+Both alerts and non-alert events are stored in files on the Wazuh server, in addition to being sent to Elasticsearch. These files can be written in JSON format, ``.json``,  and/or in plain text format as ``.log``, which contains no decoded fields but is more compact. These files are daily compressed and signed using MD5, SHA1, and SHA256 checksums. The directory and filename structure is as follows:
 
 .. code-block:: bash
 
@@ -93,4 +93,4 @@ Both alerts and non-alert events are stored in files on the Wazuh server, in add
 
 Rotation and backups of archive files are recommended according to the storage capacity of the :ref:`Wazuh server <wazuh_server>`. By using *cron* jobs, you can easily manage to keep only a certain time window of archive files locally on the server, for example, *last year* or *last three months*.
 
-On the other hand, you may choose to dispense with storing archive files at all and simply rely on the Elasticsearch for archive storage, especially if you are running periodic Elasticsearch snapshot backups and/or a multi-node Elasticsearch cluster with shard replicas for high availability. You could even use a *cron* job to move snapshotted indexes to a final data storage server, and sign them using MD5, SHA1, and SHA256 hashing algorithms.
+On the other hand, you may choose to dispense with storing archive files at all and simply rely on Elasticsearch for archive storage, especially if you are running periodic Elasticsearch snapshot backups and/or a multi-node Elasticsearch cluster with shard replicas for high availability. You could even use a *cron* job to move snapshotted indexes to a final data storage server, and sign them using MD5, SHA1, and SHA256 hashing algorithms.

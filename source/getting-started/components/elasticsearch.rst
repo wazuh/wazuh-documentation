@@ -1,11 +1,11 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. _wazuh_indexer:
+.. _elasticsearch:
 
 Elasticsearch
 =============
 
-The Elasticsearch is a highly scalable, full-text search and analytics engine. The component is distributed, meaning the data indices are divided into shards and each shard can have zero or more replicas. Wazuh uses different indices for alerts data, raw events, and status monitoring information.
+Elasticsearch is a highly scalable, full-text search and analytics engine. The component is distributed, meaning the data indices are divided into shards and each shard can have zero or more replicas. Wazuh uses different indices for alerts data, raw events, and status monitoring information.
 
 A Wazuh index is a collection of documents that have somewhat similar characteristics, like certain common fields and shared data retention requirements. Wazuh utilizes as many as four different indices to store different event types.
 
