@@ -14,7 +14,7 @@ The Wazuh server is in charge of analyzing the data received from the agents and
 Wazuh server cluster installation and configuration
 ----------------------------------------------------
 
-Install the Wazuh server as a single-node or multi-node cluster according to your environment needs. If you want to install a single-node cluster, follow the instructions to install the Wazuh manager and the Filebeat and proceed directly with :ref:`installing the Kibana <wazuh_dashboard_installation>`.
+Install the Wazuh server as a single-node or multi-node cluster according to your environment needs. If you want to install a single-node cluster, follow the instructions to install the Wazuh manager and Filebeat and proceed directly with :ref:`installing Kibana <wazuh_dashboard_installation>`.
 
 The installation process is divided into three stages.  
 
