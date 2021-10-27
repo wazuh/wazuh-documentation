@@ -1,6 +1,6 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-.. _ansible-wazuh-elasticsearch:
+.. _ansible-wazuh-opendistro:
 
 Opendistro
 ----------

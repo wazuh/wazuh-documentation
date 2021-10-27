@@ -212,7 +212,7 @@ We could configure these three files and execute them, but we are going to creat
 	ansible@ansible:/etc/ansible/wazuh-ansible$ cat playbooks/wazuh-opendistro-and-kibana.yml
 
 .. code-block:: yaml
-	:class: output
+    :class: output
 
     - hosts: wazuh-cluster-manager
       roles:
