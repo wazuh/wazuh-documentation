@@ -35,7 +35,7 @@ Follow this installation workflow to install Wazuh.
 
 #. :ref:`Wazuh server <wazuh_server_installation>`: in charge of analyzing the data received from the Wazuh agents and triggering alerts when threats or anomalies are detected. 
 
-   It is also used to manage the agents' configuration remotely and to monitor their status. This component includes the Wazuh manager and the Filebeat, based on Filebeat-OSS. 
+   It is also used to manage the agents' configuration remotely and to monitor their status. This component includes the Wazuh manager and Filebeat. 
 
 #. :ref:`Kibana <wazuh_dashboard_installation>`: a flexible and intuitive web interface for mining, analyzing, and visualizing data. 
 
