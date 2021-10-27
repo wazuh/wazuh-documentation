@@ -53,7 +53,7 @@ The Kibana can be installed on a 64-bit Linux operating system.
 Hardware requirements
 ^^^^^^^^^^^^^^^^^^^^^
 
-The Kibana can be installed on a dedicated node or along with the Elasticsearch.
+Kibana can be installed on a dedicated node or along with the Elasticsearch.
 
 - Hardware recommendations
                           
