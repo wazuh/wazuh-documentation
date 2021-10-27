@@ -9,7 +9,7 @@
 Kibana
 ===============
 
-This central component is a flexible and intuitive web interface for mining, analyzing, and visualizing data based on Kibana. It includes out-of-the-box dashboards for security events, detected vulnerable applications, file integrity monitoring data, configuration assessment results, cloud infrastructure monitoring events, regulatory compliance, such as PCI DSS, GDPR, CIS, HIPAA, and NIST 800-53 standards, as well as other data visibility purposes.
+This central component is a flexible and intuitive web interface for mining, analyzing, and visualizing data. It includes out-of-the-box dashboards for security events, detected vulnerable applications, file integrity monitoring data, configuration assessment results, cloud infrastructure monitoring events, regulatory compliance, such as PCI DSS, GDPR, CIS, HIPAA, and NIST 800-53 standards, as well as other data visibility purposes.
 
 You can now choose an installation method and start installing the Kibana.
 
