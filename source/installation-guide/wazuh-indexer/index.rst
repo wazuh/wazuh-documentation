@@ -9,7 +9,7 @@
 Elasticsearch
 =============
 
-The Elasticsearch is a highly scalable, full-text search and analytics engine based on Open Distro for Elasticsearch. The Elasticsearch is distributed, meaning the data indices are divided into shards and each shard can have zero or more replicas. Wazuh uses different indices for alerts data, raw events, and status monitoring information.
+Elasticsearch is a highly scalable, full-text search and analytics engine. Elasticsearch is distributed, meaning the data indices are divided into shards and each shard can have zero or more replicas. Wazuh uses different indices for alerts data, raw events, and status monitoring information.
 
 This central component can be installed as a single-node or multi-node cluster depending on the environment needs. Small Wazuh deployments, which do not require processing large amounts of data, can easily be handled by a single-node cluster. Multi-node clusters are recommended when there is a large number of monitored endpoints, when a large volume of data is anticipated, or when high availability is required.
 
