@@ -158,5 +158,5 @@ Run the ``securityadmin`` script on the initial node to load the new certificate
 Next steps
 ----------
 
-The Elasticsearch is now successfully installed and you can proceed with installing the Wazuh server. To perform this action, see the :ref:`Wazuh server <wazuh_server_unattended>` section.
+Elasticsearch is now successfully installed and you can proceed with installing the Wazuh server. To perform this action, see the :ref:`Wazuh server <wazuh_server_unattended>` section.
 
