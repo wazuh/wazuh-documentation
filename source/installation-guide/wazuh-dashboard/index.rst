@@ -32,7 +32,7 @@ Check the supported operating systems and the recommended hardware requirements 
 Supported operating systems
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Kibana can be installed on a 64-bit Linux operating system.
+Kibana can be installed on a 64-bit Linux operating system.
 
 .. list-table::
    :width: 50%
