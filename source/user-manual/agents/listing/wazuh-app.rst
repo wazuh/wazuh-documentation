@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about listing agents using the Wazuh app in this section of the Wazuh documentation. You can list and see basic information about registered agents in the Agent tab. 
+  :description: You can list and see basic information about registered agents in the Agent tab. Learn more about listing agents using the Wazuh app here. 
 
 .. _wazuh-app:
 
