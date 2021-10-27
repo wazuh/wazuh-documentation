@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Kibana is a flexible and intuitive web interface for mining and visualizing the events and archives stored in Elasticsearch. Learn more about it in this section of the Wazuh documentation. 
+  :description: Kibana is a flexible and intuitive web interface for mining and visualizing the events and archives stored in Elasticsearch. Learn more about it here. 
 
 .. _basic_kibana:
 
