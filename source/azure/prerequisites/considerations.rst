@@ -8,7 +8,7 @@ Considerations for configuration
 Configuring multiple services
 -----------------------------
 
-It is possible to add more than one ``graph``, ``log_analytics`` and ``storage`` block at the same time in the same configuration. Here is an example:
+It is possible to add more than one ``request`` block at the same time in the same configuration. Each request will be processed sequentially. Here is an example configuration:
 
 .. code-block:: xml
 

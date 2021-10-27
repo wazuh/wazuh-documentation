@@ -76,10 +76,6 @@ Proceed to configure the ``azure-logs`` module in the local configuration (``oss
     :align: center
     :width: 50%
 
-.. note::
-    Check the :ref:`credentials <azure_credentials>` reference page for more information about the different authentication options available.
-
-
 Using the following configuration the integration will be executed everyday, using a credentials file for authentication . The contents of the ``insights-operational-logs``, downloading every blob available with ``.json`` extension from the last ``24 hours``. The content for these blobs is expected to be in ``json_inline`` format:
 
 .. warning:: As of November 1st 2018, the format of logs stored in Azure accounts became inline JSON (``json_inline`` in Wazuh) and the previous format became obsolete (``json_file`` in Wazuh).

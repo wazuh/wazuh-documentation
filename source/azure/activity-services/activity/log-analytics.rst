@@ -47,7 +47,7 @@ Giving permissions to the application
     :align: center
     :width: 100%
 
-2 - Access the ``API permissions`` section and proceed to grant the required permissions to the application.
+2 - Access the ``API permissions`` section and add the required permissions to the application.
 
 .. thumbnail:: ../../../images/azure/logsanalytics3.png
     :title: Log Analytics App

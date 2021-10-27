@@ -7,7 +7,6 @@ Using Microsoft Graph
 
 This section shows how to configure an application from the Microsoft Azure portal to be able to use the **Microsoft Graph REST API**.
 
-.. note:: The process explained below details the creation of an application that will use the of Azure Log Analytics REST API. It is also possible to configure an existing application. If this is the case, skip the ``Creating the application`` step.
 
 
 Azure configuration
@@ -15,6 +14,8 @@ Azure configuration
 
 Creating the application
 ^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. note:: This section explains the creation of an application that will use the of Azure Log Analytics REST API. It is also possible to configure an existing application. If this is the case, skip this step.
 
 In the ``Azure Active Directory`` section select the option ``App registrations`` and once inside, select ``New registration``.
 
@@ -116,7 +117,7 @@ Here is an example on how to get the audit log of the Azure Active Directory usi
 
     </wodle>
 
-You can see the wodle reference :ref:`here <wodle_azure_logs>`.
+Check the :ref:`azure-logs <wodle_azure_logs>` module reference for more information about how to use the different parameters available.
 
 .. note:: If an authentication file is used, as in this example, its content must follow the format ``field = value``. Here is an example of this format:
 
