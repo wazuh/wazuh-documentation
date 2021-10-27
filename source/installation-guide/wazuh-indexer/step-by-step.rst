@@ -201,7 +201,7 @@ You now have installed a subsequent node of your Elasticsearch multi-node cluste
 
   <div class="accordion-section open">
 
-The final stage of the process for installing a Elasticsearch consists in running the security admin script. 
+The final stage of the process for installing an Elasticsearch consists in running the security admin script. 
 
 #. On the initial node, configure ELASTICSEARCH_IP as an environment variable.
   
