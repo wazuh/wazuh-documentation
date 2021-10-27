@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: There are several PCI DSS requirements to verify that systems are properly hardened. Learn more about the policy monitoring in this section of the Wazuh documentation.
+  :description: There are several PCI DSS requirements to verify that systems are properly hardened. Learn more about policy monitoring here.
   
 .. _pci_dss_policy_monitoring:
 
