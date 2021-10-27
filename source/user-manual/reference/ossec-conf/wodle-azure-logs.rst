@@ -550,7 +550,7 @@ Timeout for each request evaluation. This option overwrites the general `timeout
 graph\\request\\time_offset
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This option sets the time delay in which we will perform the query. For example, if we establish this option with the value "1d", the integration will perform the query on the events that have been generated in the interval of time defined between the current date of the system minus one day (1d) and the current date of the system. If the ``time_offset`` tag is not present in the configuration the module will try to obtain every log from the current day, starting from ``00:00:00``.
+This option sets the time-lapse that the query will request. For example, if this option is set to the value "1d", the integration will request the events generated in the interval of time defined between the current system's date minus one day (1d) and the current system's date. If the ``time_offset`` tag is not present in the configuration the module will try to obtain every log from the current day, starting from ``00:00:00``.
 
 +--------------------+----------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | 1d                                                                                                                         |
