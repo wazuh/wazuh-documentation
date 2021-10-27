@@ -352,7 +352,7 @@ Defines a tag that we will add to the query. This entry is optional and can be u
 log_analytics\\request\\query
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This is the query we will make to the Azure Log Analytics API. This option is ready to use any query we can make in the Log Analytics portal. You can find a reference of the language used. `Reference <https://docs.loganalytics.io/docs/Language-Reference>`_.
+This is the query we will make to the Azure Log Analytics API. This option is ready to use any query we can make in the Log Analytics portal. You can find a reference of the language used. `Reference <https://docs.microsoft.com/en-us/azure/azure-monitor/logs/get-started-queries>`_.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -473,7 +473,7 @@ Key to the application we will use for authentication and to be able to make use
 graph\\auth_path
 ^^^^^^^^^^^^^^^^
 
-Path of the file that contains the application identifier and the application key for authentication in order to use the AAD Graph API. Incompatible with ``application_id`` and ``application_key`` options.
+Path of the file that contains the application identifier and the application key for authentication in order to use the AAD Graph API. Incompatible with ``application_id`` and ``application_key`` options. Check the :ref:`credentials <azure_credentials>` reference for more information about this topic.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -481,12 +481,6 @@ Path of the file that contains the application identifier and the application ke
 | **Allowed values** | File path          |
 +--------------------+--------------------+
 
-File example:
-
-.. code-block:: shell
-
-    application_id = 8b7...c14
-    application_key = w22...91x
 
 graph\\tenantdomain
 ^^^^^^^^^^^^^^^^^^^
@@ -556,7 +550,7 @@ Timeout for each request evaluation. This option overwrites the general `timeout
 graph\\request\\time_offset
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This option sets the time delay in which we will perform the query. For example, if we establish this option with the value "1d", the integration will perform the query on the events that have been generated in the interval of time defined between the current date of the system minus one day (1d) and the current date of the system.
+This option sets the time delay in which we will perform the query. For example, if we establish this option with the value "1d", the integration will perform the query on the events that have been generated in the interval of time defined between the current date of the system minus one day (1d) and the current date of the system. If the ``time_offset`` tag is not present in the configuration the module will try to obtain every log from the current day, starting from ``00:00:00``.
 
 +--------------------+----------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | 1d                                                                                                                         |

@@ -11,11 +11,11 @@ Using Wazuh to monitor Microsoft Azure
 
 .. versionadded:: 3.7.0
 
-This section provides instructions for monitoring **Microsoft Azure** infrastructures, such as:
+Wazuh helps to increase the security of an Azure infrastructure in three different, complementary ways:
 
-- How to **monitor all the activity happening in the infrastructure**, for instance, changes that occur in virtual machines, activation of alerts, health data information as well as control data.
-- How to install Wazuh agents to **monitor the virtual machines that form the infrastructure**, which will send events to the Wazuh manager for analysis in order to classify the event with a range of alerts that can be easily viewed.
-- How to monitor services of our infrastructure such as **Azure Active Directory (AAD)**.
+- **Installing the Wazuh agent on the instances** that form the infrastructure, which will send events to the Wazuh manager for analysis in order to classify the event with a range of alerts that can be easily viewed.
+- **Monitoring the activity** happening in the infrastructure, for instance, changes that occur in virtual machines, activation of alerts, health data information as well as control data.
+- **Monitoring the services** such as Azure Active Directory (AAD).
 
 From a wider perspective, the Microsoft Azure infrastructure resources can be divided into two types of logs, the **Activity logs** and the **Diagnostic logs**.
 
@@ -26,9 +26,10 @@ The operations performed on a resource outside of the infrastructure are stored 
 
 Wazuh has the ability to obtain and read Microsoft Azure logs through:
 
-- **Azure Log Analytics**
-- **Azure Active Directory Graph**
-- **Azure Storage**
+- :ref:`Azure Log Analytics <azure_log_analytics>`
+- :ref:`Azure Storage <azure_storage>`
+- :ref:`Microsoft Graph <azure_graph>`
+
 
 As a built-in Wazuh feature, now you can search, analyze and trigger alerts from Microsoft Azure log data.
 
@@ -37,7 +38,6 @@ As a built-in Wazuh feature, now you can search, analyze and trigger alerts from
     .. toctree::
        :maxdepth: 2
 
-       dependencies
+       prerequisites/index
        monitoring-instances
-       monitoring-activity
-       monitoring-services
+       activity-services/index
