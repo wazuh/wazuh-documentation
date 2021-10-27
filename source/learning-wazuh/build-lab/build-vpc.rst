@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-    :description: Learn more about how to create the VPC, an isolated portion of the AWS cloud populated by AWS objects, in this section of the Wazuh documentation. 
+    :description: Learn more about creating the VPC, an isolated portion of the AWS cloud populated by AWS objects, in this section of the Wazuh documentation. 
     
 .. _build_lab_build_vpc:
 
