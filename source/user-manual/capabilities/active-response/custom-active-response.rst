@@ -144,11 +144,11 @@ Here is an example of the message that is passed to the ``firewall-drop`` AR:
     }
   }
 
-**Custom AR Linux Example**
+**Custom AR**
 
-This Python script could be use as template to develop your own custom AR.
+A Custom AR allows run any command that host system allows, integrating parameters from a specific alert. This section provides an AR Python script, which can be used as a template to develop your own custom AR.
 
-Customize the script behavior modifying 3 sections:
+It's possible customize the script behavior modifying 3 sections:
 
 1. **Start/End Custom Key**: Select necessary parameters to use from an alert. ie: ``srcip`` to block that ip, ``processname`` to stop the process.
 
@@ -156,6 +156,8 @@ Customize the script behavior modifying 3 sections:
 
 3. **Start/End Custom Action Delete**: Execute secondary action, usually as recovery section after a time period. ie: wait a time period to unblock an ip after main action blocked it.
 
+
+**Custom AR Linux Example**
 
 Following Python script run on Linux, it creates a file with rule id legend that triggered AR, after 60 seconds it deletes the file. in this case sections contains.
 
@@ -406,9 +408,9 @@ Windows AR doesn't reconize Python scripts, to overcome this issue we have 2 opt
 
 Use ``pyinstaller`` tool to convert python script into executable file.
 
-Install PyInstaller from PyPI.
+1. Install PyInstaller from PyPI.
 
-Move to ``/var/ossec/active-response/bin/`` and run:
+2. Move to ``/var/ossec/active-response/bin/`` and run:
 
 .. code-block:: bash
 
@@ -419,9 +421,9 @@ Move to ``/var/ossec/active-response/bin/`` and run:
 
 This will generate ``custom-ar.exe`` file into in a subdirectory called ``dist``.
 
-Move ``custom-ar.exe`` to ``/var/ossec/active-response/bin/``.
+3. Move ``custom-ar.exe`` to ``/var/ossec/active-response/bin/``.
 
-And update Manager ``ossec.conf`` with ``custom-ar.exe`` instead ``custom-ar.py``:
+4. And update Manager ``ossec.conf`` with ``custom-ar.exe`` instead ``custom-ar.py``:
 
 .. code-block:: xml
 
@@ -430,3 +432,142 @@ And update Manager ``ossec.conf`` with ``custom-ar.exe`` instead ``custom-ar.py`
     <executable>custom-ar.exe</executable>
     <timeout_allowed>yes</timeout_allowed>
   </command>
+
+
+A **Second option** is run Python script through a bash launcher. AR will call ``launcher.cmd`` and ``launcher.cmd`` will call ``custom-ar.py``
+
+1. Create a ``launcher.cmd`` file into ``/var/ossec/active-response/bin/`` as following
+
+.. code-block:: cmd
+
+  @echo off
+
+  setlocal enableDelayedExpansion
+
+  if "%~1" equ "" (
+      call :read
+      echo !line! >alert.txt
+
+      set aux=!line:*"extra_args":[=!
+      for /f "tokens=1 delims=]" %%a in ("!aux!") do (
+          set aux=%%a
+      )
+      set script="C:\Program Files (x86)\ossec-agent\active-response\bin\\"!aux:~1,-1!
+
+      if exist !script! (
+          set aux=!line:*"command":=!
+          for /f "tokens=1 delims=," %%a in ("!aux!") do (
+              set aux=%%a
+          )
+          set command=!aux:~1,-1!
+
+          start /b cmd /c "%~f0" child
+
+          if "!command!" equ "add" (
+              call :wait keys.txt
+              call :write !str!
+              del keys.txt
+
+              call :read
+              echo !line! >result.txt
+          )
+      ) else (
+          del alert.txt
+      )
+
+      exit /b
+  )
+
+  set "name=%~1"
+  goto !name!
+
+
+  :child
+  copy nul pipe1.txt >nul
+  copy nul pipe2.txt >nul
+
+  call :wait alert.txt
+
+  set aux=!str:*"extra_args":[=!
+  for /f "tokens=1 delims=]" %%a in ("!aux!") do (
+      set aux=%%a
+  )
+  set script="C:\Program Files (x86)\ossec-agent\active-response\bin\\"!aux:~1,-1!
+
+  "%~f0" launcher <pipe1.txt >pipe2.txt | python !script! <pipe2.txt >pipe1.txt
+
+  del pipe1.txt pipe2.txt
+
+  exit /b
+
+
+  :launcher
+  call :wait alert.txt
+  call :write !str!
+  del alert.txt
+
+  set aux=!str:*"command":=!
+  for /f "tokens=1 delims=," %%a in ("!aux!") do (
+      set aux=%%a
+  )
+  set command=!aux:~1,-1!
+
+  if "!command!" equ "add" (
+      call :read
+      echo !line! >keys.txt
+
+      call :wait result.txt
+      call :write !str!
+      del result.txt
+  )
+
+  exit /b
+
+
+  :read
+  set line=
+  set /p line=
+  if not defined line goto :read
+  exit /b
+
+
+  :write
+  echo(%*
+  exit /b
+
+
+  :wait
+  if exist %* (
+      set /p str= <%*
+  ) else (
+      goto :wait
+  )
+  exit /b
+
+2. Move the custom Python script to ``/var/ossec/active-response/bin/``, in this case we use same as Linux, ``custom-ar.py``.
+
+3. Update Manager ``ossec.conf``, ``launcher.cmd`` will look for Python script name to run into ``extra_args`` command option.
+
+.. code-block:: xml
+
+  <command>
+    <name>custom-ar</name>
+    <executable>launcher.cmd</executable>
+    <extra_args>custom-ar.py</extra_args>
+    <timeout_allowed>yes</timeout_allowed>
+  </command>
+
+  <active-response>
+    <disabled>no</disabled>
+    <command>custom-ar</command>
+    <location>local</location>
+    <rules_id>591</rules_id>
+    <timeout>60</timeout>
+  </active-response>
+
+4. Add python path to system path.
+
+  1. Go to ``Environment Variables``.
+  2. Select from ``System Variables``, ``Path`` option, and click on ``Edit``.
+  3. Click on ``New`` and set the Python system Path, example: ``C:\Users\XXXX\AppData\Local\Programs\Python\python38\``
+  4. Reboot the windows system.
