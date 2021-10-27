@@ -115,7 +115,7 @@ Installing the Wazuh manager
 Filebeat securely forwards alerts and archived events to the Elasticsearch.  
 
 
-Installing and configuring the Filebeat 
+Installing and configuring Filebeat 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
