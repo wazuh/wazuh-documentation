@@ -31,7 +31,7 @@ Follow this installation workflow to install Wazuh.
 
 #. :ref:`Elasticsearch <wazuh_indexer_installation>`: a highly scalable, full-text search and analytics engine.
     
-    During the installation of the Elasticsearch, the Wazuh certificates tool is used to create certificates needed for encrypting the communication between the components. These certificates must be distributed to all the servers in the Wazuh installation. Random passwords are also generated for the system users.
+    During the installation of Elasticsearch, the Wazuh certificates tool is used to create certificates needed for encrypting the communication between the components. These certificates must be distributed to all the servers in the Wazuh installation. Random passwords are also generated for the system users.
 
 #. :ref:`Wazuh server <wazuh_server_installation>`: in charge of analyzing the data received from the Wazuh agents and triggering alerts when threats or anomalies are detected. 
 
