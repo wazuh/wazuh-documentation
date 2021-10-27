@@ -29,7 +29,7 @@ Follow this installation workflow to install Wazuh.
   :width: 100%
 
 
-#. :ref:`Elasticsearch <wazuh_indexer_installation>`: a highly scalable, full-text search and analytics engine based on Open Distro for Elasticsearch.
+#. :ref:`Elasticsearch <wazuh_indexer_installation>`: a highly scalable, full-text search and analytics engine.
     
     During the installation of the Elasticsearch, the Wazuh certificates tool is used to create certificates needed for encrypting the communication between the components. These certificates must be distributed to all the servers in the Wazuh installation. Random passwords are also generated for the system users.
 
