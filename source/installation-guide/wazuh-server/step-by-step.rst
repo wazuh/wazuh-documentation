@@ -203,7 +203,7 @@ Installing and configuring the Filebeat
 
 Your Wazuh server is now successfully installed and the Wazuh manager is configured as a single-node cluster by default. 
 
-- If you want a Wazuh server single-node cluster, everything is set and you can proceed directly with :ref:`installing the Kibana <wazuh_dashboard_installation>`. 
+- If you want a Wazuh server single-node cluster, everything is set and you can proceed directly with :ref:`installing Kibana <wazuh_dashboard_installation>`. 
   
 - If you want a Wazuh server multi-node cluster,  install the Wazuh server on every node and carry on with configuring the Wazuh cluster.
 
