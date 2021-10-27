@@ -9,7 +9,7 @@
 Installing the Elasticsearch in step-by-step mode
 =================================================
 
-Install and configure the Elasticsearch, a highly scalable full-text search engine based on Open Distro for Elasticsearch. It offers advanced security, alerting, index management, deep performance analysis, and several other features.
+Install and configure Elasticsearch, a highly scalable full-text search engine. It offers advanced security, alerting, index management, deep performance analysis, and several other features.
 
 .. note:: Root user privileges are required to run the commands described below.
 
