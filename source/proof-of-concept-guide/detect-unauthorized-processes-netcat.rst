@@ -1,16 +1,16 @@
 .. _poc_detect_unauthorized_process_netcat:
 
-
 Detecting unauthorized processes - Netcat
 =========================================
 
-Wazuh is capable of detecting if Netcat is running on a monitored host.
+Detect if Netcat is running on the monitored RHEL 7 host.
+
+You can learn more about the :ref:`command monitoring capability <manual_command_monitoring>` in the documentation.
 
 Configuration
 -------------
-On the monitored endpoint (Linux RHEL):
 
-- Add ``<localfile>`` configuration block to periodically get a list of running processes. This can be done in the ``ossec.conf`` file.
+#. Add the following configuration block under the `<localfile>` section of the ``/var/ossec/etc/ossec.conf`` at the monitored RHEL 7 endpoint. This is to periodically get a list of running processes.
 
     .. code-block:: XML
 
@@ -23,21 +23,19 @@ On the monitored endpoint (Linux RHEL):
             </localfile>
         </ossec_config>
 
-- Restart the Wazuh agent to apply changes    
+#. Restart the Wazuh agent to load the changes.
 
-    .. code-block:: XML
+    .. code-block:: console
 
-        systemctl restart wazuh-agent
+        # systemctl restart wazuh-agent
 
-Install Netcat and required dependencies
+#. Install Netcat and required dependencies in the RHEL 7 agent endpoint.
 
-    .. code-block:: XML
+    .. code-block:: console
 
-        yum install nmap-ncat
+        # yum install nmap-ncat
 
-On Wazuh Manager:
-
-- Add following rules to ``/var/ossec/etc/rules/local_rules.xml``:
+#. Add following rules to ``/var/ossec/etc/rules/local_rules.xml`` at the Wazuh Manager's endpoint.
 
     .. code-block:: XML
 
@@ -56,17 +54,19 @@ On Wazuh Manager:
             </rule>
         </group>
 
-Steps to Generate alerts
-^^^^^^^^^^^^^^^^^^^^^^^^
+Steps to generate alerts
+------------------------
 
-- Log in to the RHEL system and run ``nc -l -p 8000`` (keep it running for 30 seconds)
+#. Log in to the monitored RHEL 7 system and run ``nc -l 8000`` for 30 seconds.
 
 Alerts
-^^^^^^
+------
 
-- ``rule.id:(601 OR 100100)``
+Related alerts can be found with:
 
-Affected endpoint
-^^^^^^^^^^^^^^^^^
+* ``rule.id:(601 OR 100051)``
 
-- Linux RHEL
+Affected endpoints
+------------------
+
+* RHEL 7 agent host.
