@@ -37,7 +37,7 @@ Follow this installation workflow to install Wazuh.
 
    It is also used to manage the agents' configuration remotely and to monitor their status. This component includes the Wazuh manager and the Filebeat, based on Filebeat-OSS. 
 
-#. :ref:`Kibana <wazuh_dashboard_installation>`: a flexible and intuitive web interface for mining, analyzing, and visualizing data, based on Kibana. 
+#. :ref:`Kibana <wazuh_dashboard_installation>`: a flexible and intuitive web interface for mining, analyzing, and visualizing data. 
 
    It includes out-of-the-box dashboards for security events, detected vulnerable applications, file integrity monitoring data, configuration assessment results, cloud infrastructure monitoring events, regulatory compliance, such as PCI DSS, GDPR, CIS, HIPAA, and NIST 800-53 standards, and other visibility purposes.
 
