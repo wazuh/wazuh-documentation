@@ -1,7 +1,7 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about how to use Wazuh to monitor Google Cloud Platform services with Wazuh in this section of our documentation. 
+  :description: Learn more about how to monitor Google Cloud Platform services with Wazuh in this section of our documentation. 
   
 .. _gcp:
 
