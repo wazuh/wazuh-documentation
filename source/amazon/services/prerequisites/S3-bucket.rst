@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Learn how to configure an Amazon S3, an object storage service that delivers industry-leading scalability, data availability, security, and performance.
+  :description: Learn how to configure an Amazon S3, an object storage service that delivers scalability, data availability, security, and performance.
   
 .. _s3_bucket:
 
