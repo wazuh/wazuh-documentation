@@ -2,7 +2,7 @@
 
 .. _wazuh_indexer_unattended:
 
-Installing the Elasticsearch in unattended mode
+Installing Elasticsearch in unattended mode
 ===============================================
 
 Install and configure the Elasticsearch, a highly scalable full-text search engine based on Open Distro for Elasticsearch. It offers advanced security, alerting, index management, deep performance analysis, and several other features.
