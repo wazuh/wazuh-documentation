@@ -145,7 +145,7 @@ Installing and configuring Filebeat
 
 
 
-#. Download the preconfigured Filebeat configuration file used to forward the Wazuh alerts to the Elasticsearch.
+#. Download the preconfigured Filebeat configuration file used to forward the Wazuh alerts to Elasticsearch.
 
     .. code-block:: console
 
