@@ -106,7 +106,7 @@ Installing the Wazuh manager
 
 .. _wazuh_server_multi_node_filebeat:
 
-2. Install the Filebeat
+2. Install Filebeat
 ------------------------------
 .. raw:: html
 
