@@ -246,7 +246,7 @@ The final stage of the process for installing a Elasticsearch consists in runnin
         }
   
 
-If you want to uninstall the Elasticsearch, see the :ref:`Uninstalling <uninstall_elasticsearch>` section.
+If you want to uninstall Elasticsearch, see the :ref:`Uninstalling <uninstall_elasticsearch>` section.
 
 Next steps
 ----------
