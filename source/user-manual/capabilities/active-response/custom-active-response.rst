@@ -144,17 +144,17 @@ Here is an example of the message that is passed to the ``firewall-drop`` AR:
     }
   }
 
-**Custom AR Example**
+**Custom AR Linux Example**
 
 This Python script could be use as template to develop your own custom AR.
 
 Customize the script behavior modifying 3 sections:
 
-1. Start/End Custom Key: Select necessary parameters to use from an alert. ie: ``srcip`` to block that ip, ``processname`` to stop the process.
+1. **Start/End Custom Key**: Select necessary parameters to use from an alert. ie: ``srcip`` to block that ip, ``processname`` to stop the process.
 
-2. Start/End Custom Action Add: Execute main action, calling a system function. ie: ``pkill <processname>``.
+2. **Start/End Custom Action Add**: Execute main action, calling a system function. ie: ``pkill <processname>``.
 
-3. Start/End Custom Action Delete: Execute secondary action, usually as recovery section after a time period. ie: wait a time period to unblock an ip after main action blocked it.
+3. **Start/End Custom Action Delete**: Execute secondary action, usually as recovery section after a time period. ie: wait a time period to unblock an ip after main action blocked it.
 
 
 Following Python script run on Linux, it creates a file with rule id legend that triggered AR, after 60 seconds it deletes the file. in this case sections contains.
@@ -182,7 +182,7 @@ Following Python script run on Linux, it creates a file with rule id legend that
   os.system('rm /var/ossec/logs/ar-test-result')
 
 
-Manager ossec.conf used for this test:
+Manager ``ossec.conf`` used for this test:
 
 .. code-block:: xml
 
@@ -219,10 +219,12 @@ Python script must be sotore into ``/var/ossec/active-response/bin/``, in this c
   import os
   import sys
   import json
-  import fileinput
   import datetime
 
-  LOG_FILE = "/var/ossec/logs/active-responses.log"
+  if os.name == 'nt':
+     LOG_FILE = "C:\\Program Files (x86)\\ossec-agent\\active-response\\active-responses.log"
+  else:
+     LOG_FILE = "/var/ossec/logs/active-responses.log"
 
   ADD_COMMAND = 0
   DELETE_COMMAND = 1
@@ -237,8 +239,6 @@ Python script must be sotore into ``/var/ossec/active-response/bin/``, in this c
   AR_MODULE_NAME = "active-response"
   CHECK_KEYS_ENTRY = "check_keys"
 
-  finput = 0
-
   class message:
       def __init__(self):
           self.alert = ""
@@ -246,7 +246,6 @@ Python script must be sotore into ``/var/ossec/active-response/bin/``, in this c
 
 
   def write_debug_file(ar_name, msg):
-
       with open(LOG_FILE, mode="a") as log_file:
           log_file.write(str(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')) + " " + ar_name + ": " + msg +"\n")
           return OS_SUCCESS
@@ -255,35 +254,32 @@ Python script must be sotore into ``/var/ossec/active-response/bin/``, in this c
 
   def setup_and_check_message(argv):
 
-      # get alert from std input
-      global finput
-      finput = fileinput.input()
-      for input in finput:
-          try:
-              data = json.loads(input)
-              break
-          except ValueError:
-              write_debug_file(argv[0], 'Decoding JSON has failed, invalid input format')
-              message.command = OS_INVALID
-              return message
+      # get alert from stdin
+      input_str = ""
+      for line in sys.stdin:
+          input_str = line
+          break
+
+      write_debug_file(argv[0], input_str)
+
+      try:
+          data = json.loads(input_str)
+      except ValueError:
+          write_debug_file(argv[0], 'Decoding JSON has failed, invalid input format')
+          message.command = OS_INVALID
+          return message
 
       message.alert = data
 
-      # write debug file
-      if (write_debug_file(argv[0], input)):
-          message.command = OS_NOTFOUND
-          return message
-
-      # get command by json
       command = data.get("command")
 
-      if (command == "add"):
+      if command == "add":
           message.command = ADD_COMMAND
-      elif (command == "delete"):
+      elif command == "delete":
           message.command = DELETE_COMMAND
       else:
-          write_debug_file(argv[0], 'Not valid command: ' + command)
           message.command = OS_INVALID
+          write_debug_file(argv[0], 'Not valid command: ' + command)
 
       return message
 
@@ -297,31 +293,36 @@ Python script must be sotore into ``/var/ossec/active-response/bin/``, in this c
 
 
   def send_keys_and_check_message(argv, keys):
-      ret = OS_INVALID
-      action = None
-      # Build and send message with keys
+
+      # build and send message with keys
       keys_msg = build_json_keys_message(argv[0], keys)
 
       write_debug_file(argv[0], keys_msg)
-      print(keys_msg + '\0', file = sys.stdout)
+
+      print(keys_msg)
       sys.stdout.flush()
 
-
-      # Read the response of previous message
-      global finput
-      for input in finput:
-          try:
-              data = json.loads(input)
-              write_debug_file(argv[0], input)
-              action = data.get("command")
+      # read the response of previous message
+      input_str = ""
+      while True:
+          line = sys.stdin.readline()
+          if line:
+              input_str = line
               break
-          except ValueError:
-              write_debug_file(argv[0], "Cannot read input from stdin")
-              return OS_INVALID
 
-      if ("continue" == action):
+      write_debug_file(argv[0], input_str)
+
+      try:
+          data = json.loads(input_str)
+      except ValueError:
+          write_debug_file(argv[0], 'Decoding JSON has failed, invalid input format')
+          return message
+
+      action = data.get("command")
+
+      if "continue" == action:
           ret = CONTINUE_COMMAND
-      elif ("abort" == action):
+      elif "abort" == action:
           ret = ABORT_COMMAND
       else:
           ret = OS_INVALID
@@ -336,14 +337,15 @@ Python script must be sotore into ``/var/ossec/active-response/bin/``, in this c
 
       # validate json and get command
       msg = setup_and_check_message(argv)
-      if (msg.command < 0):
+
+      if msg.command < 0:
           sys.exit(OS_INVALID)
 
-      if (msg.command == ADD_COMMAND):
+      if msg.command == ADD_COMMAND:
 
           """ Start Custom Key
           At this point, it's necessary select the keys that we want to use from the alert, add them into keys array.
-          This example use rule id parameter from alert.
+          In this example, I use rule id parameter.
           """
 
           alert = msg.alert["parameters"]["alert"]
@@ -351,33 +353,34 @@ Python script must be sotore into ``/var/ossec/active-response/bin/``, in this c
 
           """ End Custom Key """
 
-          action2 = OS_INVALID
-          action2 = send_keys_and_check_message(argv, keys)
+          action = send_keys_and_check_message(argv, keys)
 
-          # If necessary, abort execution
-          if (action2 != CONTINUE_COMMAND):
+          # if necessary, abort execution
+          if action != CONTINUE_COMMAND:
 
-              if (action2 == ABORT_COMMAND):
+              if action == ABORT_COMMAND:
                   write_debug_file(argv[0], "Aborted")
                   sys.exit(OS_SUCCESS)
               else:
                   write_debug_file(argv[0], "Invalid command")
                   sys.exit(OS_INVALID)
 
-          """ Start Custom Action Add """
           write_debug_file(argv[0], "Add")
 
-          with open("/var/ossec/logs/ar-test-result", mode="a") as test_file:
+          """ Start Custom Action Add """
+
+          with open("ar-test-result.txt", mode="a") as test_file:
               test_file.write("Active response triggered by rule ID: " + str(keys) + "\n")
 
           """ End Custom Action Add """
 
-      elif (msg.command == DELETE_COMMAND):
+      elif msg.command == DELETE_COMMAND:
 
-          """ Start Custom Action Delete """
           write_debug_file(argv[0], "Delete")
 
-          os.system('rm /var/ossec/logs/ar-test-result')
+          """ Start Custom Action Delete """
+
+          os.remove("ar-test-result.txt")
 
           """ End Custom Action Delete """
 
@@ -391,3 +394,39 @@ Python script must be sotore into ``/var/ossec/active-response/bin/``, in this c
 
   if __name__ == "__main__":
       main(sys.argv)
+
+
+
+**Custom AR Windows Example**
+
+Windows AR doesn't reconize Python scripts, to overcome this issue we have 2 options:
+
+
+**First option** is convert python scripts into executable application.
+
+Use ``pyinstaller`` tool to convert python script into executable file.
+
+Install PyInstaller from PyPI.
+
+Move to ``/var/ossec/active-response/bin/`` and run:
+
+.. code-block:: bash
+
+  pyinstaller -F custom-ar.py
+
+.. note::
+  Full path command pyinstaller sometimes is necessary.
+
+This will generate ``custom-ar.exe`` file into in a subdirectory called ``dist``.
+
+Move ``custom-ar.exe`` to ``/var/ossec/active-response/bin/``.
+
+And update Manager ``ossec.conf`` with ``custom-ar.exe`` instead ``custom-ar.py``:
+
+.. code-block:: xml
+
+  <command>
+    <name>custom-ar</name>
+    <executable>custom-ar.exe</executable>
+    <timeout_allowed>yes</timeout_allowed>
+  </command>
