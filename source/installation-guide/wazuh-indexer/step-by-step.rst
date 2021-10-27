@@ -16,7 +16,7 @@ Install and configure Elasticsearch, a highly scalable full-text search engine. 
 Elasticsearch cluster installation 
 ----------------------------------
 
-Install and configure the Elasticsearch as a single-node or multi-node cluster according to your environment needs. If you want to install a single-node cluster, follow the instructions to install the initial node and proceed directly to initialize the cluster. 
+Install and configure Elasticsearch as a single-node or multi-node cluster according to your environment needs. If you want to install a single-node cluster, follow the instructions to install the initial node and proceed directly to initialize the cluster. 
 
 The installation process is divided into three stages.  
 
