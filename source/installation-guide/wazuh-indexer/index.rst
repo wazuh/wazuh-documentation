@@ -53,7 +53,7 @@ The Elasticsearch can be installed on a 64-bit Linux operating system.
 Hardware recommendations
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Elasticsearch can be installed as a single-node or as a multi-node cluster.
+Elasticsearch can be installed as a single-node or as a multi-node cluster.
 
 - Hardware recommendations for each node
                           
