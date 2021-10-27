@@ -251,5 +251,5 @@ If you want to uninstall Elasticsearch, see the :ref:`Uninstalling <uninstall_el
 Next steps
 ----------
 
-The Elasticsearch is now successfully installed and you can proceed with installing the Wazuh server. To perform this action, see the :ref:`Wazuh server <wazuh_server_step_by_step>` section.
+Elasticsearch is now successfully installed and you can proceed with installing the Wazuh server. To perform this action, see the :ref:`Wazuh server <wazuh_server_step_by_step>` section.
 
