@@ -3,14 +3,14 @@
 Auditing commands run by user
 =============================
 
-You can enable `Audit` logging to capture and log `execve` system calls so the Wazuh agent can read these logs. Create specific rules to alert about commands run by the user.
+For this POC, you need to create specific rules to alert about commands run by the user. To do this, you have to first enable `Audit` logging for it to capture and log `execve` system calls so the Wazuh agent can read these logs. 
 
-More information on the :ref:`Audit Configuration Guide <learning_wazuh_audit_commands>`. In addition, `RHEL Audit documentation <https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/security_guide/chap-system_auditing>`_ has extended information about the Audit kernel subsystem.
+For more information on Linux auditd system, see the :ref:`Audit configuration guide <learning_wazuh_audit_commands>` section. In addition, `RHEL Audit documentation <https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/security_guide/chap-system_auditing>`_ has extended information about the Audit kernel subsystem.
 
 Configuration
 -------------
 
-#. Run ``systemctl status auditd.service`` to check that the Linux Auditing System is installed and running in your RHEL7 agent endpoint.
+#. Run ``systemctl status auditd.service`` to check that the Linux Auditing System is installed and running on your RHEL7 agent endpoint.
 
 #. Check that ``/var/ossec/etc/ossec.conf`` in your RHEL7 agent endpoint is configured for the agent to read the ``audit.log`` file.
 
@@ -21,20 +21,20 @@ Configuration
         <location>/var/log/audit/audit.log</location>
       </localfile>
 
-#. Get your current `euid` in the RHEL7 agent endpoint. This is needed to monitor the actions of your user. Monitoring 'root' user's actions is not recommended for the test, as it can be quite noisy.
+#. Get your current `euid` in the RHEL7 agent endpoint. This is needed to monitor the actions of your user. Monitoring *root* user's actions is not recommended for the test, as it can be quite noisy.
 
     .. code-block:: console
 
       # echo $EUID
 
-#. Create the rules for your user at ``/etc/audit/rules.d/wazuh.rules``, replacing ``<your_user_id>`` with your current ``euid``.
+#. Create the rules for your user at ``/etc/audit/rules.d/wazuh.rules`` by replacing ``<your_user_id>`` with your current ``euid``.
 
     .. code-block:: XML
 
        -a exit,always -F euid=${<your_user_id>} -F arch=b32 -S execve -k audit-wazuh-c
        -a exit,always -F euid=${<your_user_id>} -F arch=b64 -S execve -k audit-wazuh-c
 
-#. Optionally, delete old rules.
+#. Optionally, you can delete old rules.
 
     .. code-block:: console
 
@@ -50,12 +50,12 @@ Configuration
 Steps to generate the alerts
 ----------------------------
 
-#. Log in the RHEL 7 Agent endpoint as the monitored user.
+#. Log in the RHEL 7 agent endpoint as the monitored user.
 
 #. Execute a ping to www.google.com
 
-Alerts
-------
+Querying the alerts
+-------------------
 Related alerts can be found with:
 
 * ``data.audit.exe: "/usr/bin/ping"``
