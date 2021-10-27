@@ -8,7 +8,7 @@
 Installing the Wazuh server in step-by-step mode
 ================================================
 
-The Wazuh server is in charge of analyzing the data received from the agents and triggering alerts when threats or anomalies are detected. This central component includes the Wazuh manager and the Filebeat.
+The Wazuh server is in charge of analyzing the data received from the agents and triggering alerts when threats or anomalies are detected. This central component includes the Wazuh manager and Filebeat.
 
 
 Wazuh server cluster installation and configuration
