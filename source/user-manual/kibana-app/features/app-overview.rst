@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Check out the overview, management and more of the Wazuh app, located on the Kibana sidebar, in this section of the Wazuh documentation.  
+  :description: Check out the overview, management, and more of the Wazuh app, located on the Kibana sidebar. Learn more about this in this section.  
   
 .. _kibana_app_overview:
 
