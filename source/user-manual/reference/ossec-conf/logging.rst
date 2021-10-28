@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about the local configuration of Wazuh. In this section of the documentation you can check out more about the log file (“ossec.log”) 
+  :description: Learn how to configure the format of the internal log file ("ossec.log") of Wazuh in this section of our documentation. 
   
 .. _reference_ossec_logging:
 
