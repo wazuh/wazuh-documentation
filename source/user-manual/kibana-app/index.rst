@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: The Wazuh Kibana plugin allows users to view and analyze Wazuh alerts stored in Elasticsearch. Learn more about it in the Wazuh documentation
+  :description:  The Wazuh Kibana plugin allows users to view and analyze Wazuh alerts stored in Elasticsearch. Learn more about it in this section.
   
 .. _kibana_app:
 
