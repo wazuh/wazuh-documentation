@@ -20,15 +20,15 @@ Install and configure Elasticsearch as a single-node or multi-node cluster accor
 
 The installation process is divided into three stages.  
 
-#. Initial node installation and configuration
+#. Initial node 
 
-#. Subsequent nodes installation and configuration for multi-node clusters
+#. Subsequent nodes 
 
-#. Cluster initialization 
+#. Initialize cluster
 
 
-1. Initial node installation and configuration
------------------------------------------------
+1. Initial node
+---------------
 .. raw:: html
 
     <div class="accordion-section open">
@@ -113,8 +113,8 @@ You now have installed and configured the initial Elasticsearch node.
 - If you want a single-node cluster, proceed directly with :ref:`initializing the cluster <initialize_cluster>`. 
 - If you want to install a multi-node cluster, expand the instructions below to install and configure subsequent nodes. 
 
-2. Subsequent nodes configuration
----------------------------------
+2. Subsequent nodes
+-------------------
 .. raw:: html
 
     <div class="accordion-section">
@@ -195,8 +195,8 @@ You now have installed a subsequent node of your Elasticsearch multi-node cluste
 
 .. _initialize_cluster:
 
-3. Cluster initialization
--------------------------
+3. Initialize cluster
+---------------------
 .. raw:: html
 
   <div class="accordion-section open">
