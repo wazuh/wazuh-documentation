@@ -146,7 +146,8 @@ Here is an example of the message that is passed to the ``firewall-drop`` AR:
 
 **Custom AR**
 
-A Custom AR allows run any command that host system allows, integrating parameters from a specific alert. This section provides an AR Python script, which can be used as a template to develop your own custom AR.
+A Custom AR allows run any command that host system allows, integrating parameters from a specific alert, called in this section as keys, this keys are selected by the user and monitorized by Wazuh, which will manage execution times avoiding repetitions.
+This section provides an AR Python script, which can be used as a template to develop your own custom AR.
 
 It's possible customize the script behavior modifying 3 sections:
 
@@ -173,18 +174,19 @@ Following Python script run on Linux, it creates a file with rule id legend that
 
 .. code-block:: python
 
-  with open("/var/ossec/logs/ar-test-result", mode="a") as test_file:
+  with open("ar-test-result.txt", mode="a") as test_file:
     test_file.write("Active response triggered by rule ID: " + str(keys) + "\n")
 
 3. Start/End Custom Action Delete:
-    It deletes the file ones timeout triggered. Timeout action must set in AR section into ``ossec.conf`` manager file.
+    It deletes the file ones timeout triggered. Timeout action must be set in AR section into ``ossec.conf`` manager file.
 
 .. code-block:: python
 
-  os.system('rm /var/ossec/logs/ar-test-result')
+  os.remove("ar-test-result.txt")
 
 
-Manager ``ossec.conf`` used for this test:
+Manager ``ossec.conf``:
+This example configuration is triggered by rule id 591, it was selected for this example, it could be any alert that Wazuh provides.
 
 .. code-block:: xml
 
@@ -403,25 +405,21 @@ Python script must be sotore into ``/var/ossec/active-response/bin/``, in this c
 
 Windows AR doesn't reconize Python scripts, to overcome this issue we have 2 options:
 
-
-**First option** is convert python scripts into executable application.
+**First option** is converting python scripts into executable application.
 
 Use ``pyinstaller`` tool to convert python script into executable file.
 
 1. Install PyInstaller from PyPI.
 
-2. Move to ``/var/ossec/active-response/bin/`` and run:
+2. Move to ``C:\Program Files (x86)\ossec-agent\active-response\bin\`` and run:
 
 .. code-block:: bash
 
   pyinstaller -F custom-ar.py
 
-.. note::
-  Full path command pyinstaller sometimes is necessary.
-
 This will generate ``custom-ar.exe`` file into in a subdirectory called ``dist``.
 
-3. Move ``custom-ar.exe`` to ``/var/ossec/active-response/bin/``.
+3. Move ``custom-ar.exe`` to ``C:\Program Files (x86)\ossec-agent\active-response\bin\``.
 
 4. And update Manager ``ossec.conf`` with ``custom-ar.exe`` instead ``custom-ar.py``:
 
@@ -436,9 +434,12 @@ This will generate ``custom-ar.exe`` file into in a subdirectory called ``dist``
 
 A **Second option** is run Python script through a bash launcher. AR will call ``launcher.cmd`` and ``launcher.cmd`` will call ``custom-ar.py``
 
-1. Create a ``launcher.cmd`` file into ``/var/ossec/active-response/bin/`` as following
+.. note::
+  The buffer "Command Prompt" is limited to 1024 bytes, triggered alert couldn't contain more than 1024 characters.
 
-.. code-block:: cmd
+1. Create a ``launcher.cmd`` file into ``C:\Program Files (x86)\ossec-agent\active-response\bin\`` as following:
+
+.. code-block:: console
 
   @echo off
 
@@ -544,9 +545,9 @@ A **Second option** is run Python script through a bash launcher. AR will call `
   )
   exit /b
 
-2. Move the custom Python script to ``/var/ossec/active-response/bin/``, in this case we use same as Linux, ``custom-ar.py``.
+2. Move the custom Python script to ``C:\Program Files (x86)\ossec-agent\active-response\bin\``, in this case we use same as Linux, ``custom-ar.py``.
 
-3. Update Manager ``ossec.conf``, ``launcher.cmd`` will look for Python script name to run into ``extra_args`` command option.
+3. Update Manager ``ossec.conf``, ``launcher.cmd`` will look for Python script name to run into ``extra_args`` command option. This example configuration is triggered by rule id 591, it was selected for this example, it could be any alert that Wazuh provides.
 
 .. code-block:: xml
 
@@ -565,9 +566,6 @@ A **Second option** is run Python script through a bash launcher. AR will call `
     <timeout>60</timeout>
   </active-response>
 
-4. Add python path to system path.
+.. note::
+  Python path should be included into System path, look for it into Windows ``Environment Variables``.
 
-  1. Go to ``Environment Variables``.
-  2. Select from ``System Variables``, ``Path`` option, and click on ``Edit``.
-  3. Click on ``New`` and set the Python system Path, example: ``C:\Users\XXXX\AppData\Local\Programs\Python\python38\``
-  4. Reboot the windows system.
