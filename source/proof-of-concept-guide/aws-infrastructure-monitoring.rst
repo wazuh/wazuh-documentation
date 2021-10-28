@@ -3,14 +3,16 @@
 Amazon AWS infrastructure monitoring
 ====================================
 
-This POC shows how you can use Wazuh to gather log data from different AWS sources with the Wazuh module for AWS (aws-s3).
+This POC shows how the Wazuh module for AWS (aws-s3) enables log data gathering from different AWS sources. 
 
 To learn more about monitoring AWS resources, see the `Using Wazuh to monitor AWS <amazon>`_ section.
 
 Configuration
 -------------
 
-#. Enable ``aws-s3`` wodle in ``/var/ossec/etc/ossec.conf`` configuration file at the Wazuh manager endpoint:
+Configure your environment as follows to test the POC.
+
+#. Enable ``aws-s3`` wodle in the ``/var/ossec/etc/ossec.conf`` configuration file at the Wazuh manager endpoint.
 
    .. code-block:: XML
 
@@ -53,7 +55,7 @@ Configuration
         </service>
       </wodle>
 
-#. Restart Wazuh manager to apply changes:
+#. Restart Wazuh manager to apply changes.
   
     .. code-block:: console
 
@@ -62,10 +64,11 @@ Configuration
 Steps to generate the alerts
 ----------------------------
 
-No action is required. Alerts are automatically generated from AWS logs when using out-of-the-box rules. They will appear as soon as they are fetched from the AWS S3 bucket.
+No action is required since alerts are automatically generated from AWS logs when using out-of-the-box rules, They appear as soon as they are fetched from the AWS S3 bucket.
 
-Alerts
-------
+Querying the alerts
+-------------------
+
 Related alerts can be found with:
 
 - ``rule.groups: "amazon"``
