@@ -3,37 +3,45 @@
 Detecting a brute-force attack
 ==============================
 
-Identify SSH and RDP brute force attacks using Wazuh's out-of-the-box rules. This rules can correlate multiple authentication failure events and alert about these attacks.
+Brute forcing SSH (on Linux) or RDP (on Windows) are common attack vectors. Wazuh provides out of the box rules capable of identifying brute-force attacks by correlating multiple authentication failure events.
 
 Configuration
 -------------
 
-#. Install `ssh` in a system that will play as the attacker from the operating system repositories if missing.
+Configure your environment as follows to test the POC.
 
-#. Run ``yum install -y hydra`` to install `hydra`. This tool can execute automated RDP connections.
+#. Make sure you have SSH installed and enabled in a system chosen to play as an attacker.
+
+#. Install *Hydra* if you want to execute automated RDP connections. 
+
+    .. code-block:: XML
+
+        yum install -y hydra
 
 Steps to generate the alerts
 ----------------------------
 
-#. Replace ``<username@rhel.agent.endpoint>`` with the appropriate destination in the following command. Run it from the attacker system to create multiple failed authentication attempts to the monitored Linux endpoint.
+#. Replace ``<username@rhel.agent.endpoint>`` for Linux and ``<username@win.agent.endpoint>`` for Windows with the appropriate destination in the following commands and run multiple failed authentication failure attempts against the monitored endpoints.
 
-    .. code-block:: console
+    #. For the monitored Linux endpoint:
 
-        # for i in `seq 1 10`; do sshpass -p 'wrong_password' ssh -o StrictHostKeyChecking=no <username@rhel.agent.endpoint>; done
+        .. code-block:: console
 
-#. Replace ``<username@win.agent.endpoint>`` with the appropriate destination in the following command. Run it from the attacker system to create multiple failed authentication attempts to the monitored Windows endpoint.
+            # for i in `seq 1 10`; do sshpass -p 'wrong_password' ssh -o StrictHostKeyChecking=no <username@rhel.agent.endpoint>; done
+
+    #. For the monitored Windows endpoint:
   
-    .. code-block:: console
+        .. code-block:: console
 
-        # hydra -l Administrator -p wrong_password <username@win.agent.endpoint> rdp
+            # hydra -l Administrator -p wrong_password <username@win.agent.endpoint> rdp
 
 
-Alerts
-------
+Querying the alerts
+-------------------
 
 Related alerts can be found with:
 
-* Linux: ``rule.id:(5710 OR 5712)``. (Other related rules are ``5711``, ``5716``, ``5720``, ``5503``, ``5504``)
+* Linux: ``rule.id:(5710 OR 5712)``. Other related rules are ``5711``, ``5716``, ``5720``, ``5503``, ``5504``.
 * Windows: ``rule.id:(60122 OR 60137)``
 
 Affected endpoints
