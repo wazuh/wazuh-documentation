@@ -20,7 +20,7 @@ You can now choose an installation method and start installing the Wazuh server.
 - :ref:`Step-by-step installation <wazuh_server_step_by_step>`: Install this component manually following detailed step-by-step instructions.
 
 
-.. thumbnail:: /images/installation/Wazuh-Installation-server-3.png
+.. thumbnail:: /images/installation/Wazuh-Installation-server-2.png
     :alt: Wazuh server installation
     :align: center
     :width: 100%

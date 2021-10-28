@@ -19,7 +19,7 @@ Installing the Wazuh central components
 
 Follow this installation workflow to install Wazuh. 
 
-.. thumbnail:: ../images/installation/Wazuh-Installation-workflow1.png
+.. thumbnail:: ../images/installation/Wazuh-Installation-workflow.png
   :title: Wazuh installation workflow
   :align: center
   :width: 100%
@@ -132,8 +132,8 @@ The :ref:`Wazuh agent <wazuh_agent>` is a single and lightweight monitoring soft
     :hidden:
     :maxdepth: 1
 
-    wazuh-indexer/index
+    elasticsearch/index
     wazuh-server/index
-    wazuh-dashboard/index
+    kibana/index
     wazuh-agent/index
     packages-list

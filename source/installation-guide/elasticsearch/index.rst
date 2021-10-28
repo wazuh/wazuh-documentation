@@ -19,7 +19,7 @@ You can now choose an installation method and start installing Elasticsearch.
 
 - :ref:`Step-by-step installation <wazuh_indexer_step_by_step>`: Install this component manually following detailed step-by-step instructions.
 
-.. thumbnail:: /images/installation/Wazuh-Installation-Elasticsearch.png
+.. thumbnail:: /images/installation/Wazuh-Installation-Elasticsearch-1.png
     :alt: Elasticsearch installation
     :align: center
     :width: 100%

@@ -148,7 +148,7 @@ Next steps
 
 All the Wazuh central components are successfully installed.
 
-.. thumbnail:: ../../images/installation/Wazuh-Installation-workflow-complete2.png
+.. thumbnail:: ../../images/installation/Wazuh-Installation-workflow-complete.png
     :alt: Wazuh installation workflow
     :align: center
     :width: 100%
