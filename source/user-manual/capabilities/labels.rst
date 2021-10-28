@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about agent labels feature that allows the user to customize agent alert information to include specific information.
+  :description: The agent labels feature allows users to customize agent alert information to include specific data. Learn more here.
   
 .. _labels:
 
