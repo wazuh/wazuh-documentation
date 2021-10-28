@@ -27,67 +27,17 @@ The JSON message format is as follows:
     }
   }
 
-
-**Additional steps for a Stateful AR**
-
-A *Stateful* AR will undo its original action after the period of time specified in the active response. So, as part of the timeout behavior, when the recived command is ``add`` the AR must send a control message to the ``execd`` through ``STDOUT`` to check the keys, wait for the response via ``STDIN`` and check the ``command`` field if it has to continue the execution or abort it.
-
-The keys must be sufficient to identify an execution instance, for example to block a user on a specific host, with the ip and the user keys it is enough.
-
-The control message format is as follows:
-
-.. code-block:: json
-
-  {
-    "version":1,
-    "origin":{
-        "name":"program-name",
-        "module":"active-response"
-    },
-    "command":"check_keys",
-    "parameters":{
-        "keys":["10.0.0.1", "root"]
-    }
-  }
-
-
-The response message from execd is a follows:
-
-.. code-block:: json
-
-  {
-    "version":1,
-    "origin":{
-        "name":"node01",
-        "module":"wazuh-execd"
-    },
-    "command":"continue/abort",
-    "parameters":{}
-  }
-
-.. warning:: 
-
-    When the ``STDIN`` reading occurs, it must be read up to the newline character (``\n``), in the same way when writing to ``STDOUT`` the newline character must be added at the end, otherwise a deadlock may occur in ``execd`` and in the ``AR`` waiting for messages.
-
-
 The AR can be done in whatever language you are comfortable with, but it should at least be able to:
 
-1. Read through ``STDIN``.
+1. Read ``STDIN`` to get the alert.
 
 2. Parse the read JSON object.
 
-3. Extract the necessary information for its execution.
+3. Analyze the ``command`` field to check if it has to ``add`` the action or ``delete`` it.
 
-4. Write ``STDOUT`` to send control message to execd.
+4. Extract the necessary information for its execution.
 
-5. Wait for the response via ``STDIN``.
-
-6. Check the ``command`` field.
-
-.. note::
-  **Only for Windows Agents** For scripts developed in python for example, it is necessary to create the executable file(``.exe``) of this script and configure it in :ref:`command <reference_ossec_commands>`. To create the ``.exe`` file it is possible to use tools such as ``pyinstaller``.
-
-Here is an example of the message that is passed to the ``firewall-drop`` AR:
+Here is an example of the message with the full alert that is passed to the ``firewall-drop`` AR:
 
 .. code-block:: json
 
@@ -144,442 +94,449 @@ Here is an example of the message that is passed to the ``firewall-drop`` AR:
     }
   }
 
-**Custom AR**
+Additional steps for a Stateful AR
+----------------------------------
 
-A Custom AR allows run any command that host system allows, integrating parameters from a specific alert, called in this section as keys, this keys are selected by the user and monitorized by Wazuh, which will manage execution times avoiding repetitions.
-This section provides an AR Python script, which can be used as a template to develop your own custom AR.
+A ``Stateful`` AR will undo its original action after the period of time specified in the active response.
 
-It's possible customize the script behavior modifying 3 sections:
+As part of the timeout behavior, when the received command is ``add`` the AR must execute these additional steps:
 
-1. **Start/End Custom Key**: Select necessary parameters to use from an alert. ie: ``srcip`` to block that ip, ``processname`` to stop the process.
+5. Build a control message with the **keys** extracted from the alert in JSON format.
 
-2. **Start/End Custom Action Add**: Execute main action, calling a system function. ie: ``pkill <processname>``.
+6. Write ``STDOUT`` to send the control message.
 
-3. **Start/End Custom Action Delete**: Execute secondary action, usually as recovery section after a time period. ie: wait a time period to unblock an ip after main action blocked it.
+7. Wait for the response via ``STDIN``.
 
-Active responses are either stateful or stateless responses.
+8. Parse the read JSON object.
 
-- ``Stateful``. Are configured to undo the action after a specified period of time.
-    Configuration needed for ``Stateful`` case:
+9. Analyze the ``command`` field to check if it has to ``continue`` the execution or ``abort`` it.
+
+.. note::
+
+  The **keys** are those fields extracted from the alert that the AR script will use to execute its action. They must be sufficient to identify an execution instance, for example to block a specific host, with the ip it is enough.
+
+The control message format is as follows:
+
+.. code-block:: json
+
+  {
+    "version":1,
+    "origin":{
+        "name":"program-name",
+        "module":"active-response"
+    },
+    "command":"check_keys",
+    "parameters":{
+        "keys":["10.0.0.1"]
+    }
+  }
+
+The response message is a follows:
+
+.. code-block:: json
+
+  {
+    "version":1,
+    "origin":{
+        "name":"node01",
+        "module":"wazuh-execd"
+    },
+    "command":"continue/abort",
+    "parameters":{}
+  }
+
+.. warning::
+
+    When the ``STDIN`` reading occurs, it must be read up to the newline character (``\n``). In the same way, when writing to ``STDOUT`` the newline character must be added at the end, otherwise a deadlock may occur.
+
+Custom AR Example
+-----------------
+
+This section provides an example AR Python script which can be used as a template to develop your own custom AR.
+
+It is possible to customize the behavior of the script by modifying 3 sections:
+
+1. **Start/End Custom Key**: Select the necessary parameters to use from the alert. ie: ``srcip`` to block that ip, ``processname`` to stop that process.
+
+2. **Start/End Custom Action Add**: Execute the main action, calling a system function. ie: ``pkill <processname>``.
+
+3. **Start/End Custom Action Delete**: Execute the secondary action, usually as recovery section after a time period. ie: wait a period of time to unblock an ip after the main action has blocked it.
+
+Active responses are either ``Stateful`` or ``Stateless``:
+
+- ``Stateful``: Are configured to undo the action after a specified period of time. Configuration needed for ``Stateful`` case:
+
       a. Set Custom Key.
+
       b. Set Custom Action Add.
+
       c. Set Custom Action Delete.
-      d. Set timeout option into ``active-response`` section from ``ossec.conf`` file.
 
-- ``Stateless``.  Are configured as one-time actions without an event to revert the original effect.
-    Configuration needed for ``Stateless`` case:
+      d. Set timeout option in the ``active-response`` section of the ``ossec.conf`` file.
+
+- ``Stateless``: Are configured as one-time actions without an event to reverse the original effect. Configuration needed for ``Stateless`` case:
+
       a. Set Custom Key.
-      b. Set Custom Action Add.
 
+      b. Set Custom Action Add.
 
 **Custom AR Linux Example**
 
-Following Python script run on Linux, it creates a file with rule id legend that triggered AR, after 60 seconds it deletes the file. in this case sections contains.
+The following Python script runs on Linux. It creates a file with the rule id that triggered the AR and after 60 seconds it deletes the file.
 
-1. Start/End Custom Key:
-    It tooks from alert the rule id
+.. code-block:: Python
 
-.. code-block:: python
+    #!/usr/bin/python3
+    # Copyright (C) 2015-2021, Wazuh Inc.
+    # All rights reserved.
 
-  keys = [alert["rule"]["id"]]
+    # This program is free software; you can redistribute it
+    # and/or modify it under the terms of the GNU General Public
+    # License (version 2) as published by the FSF - Free Software
+    # Foundation.
 
-2. Start/End Custom Action Add:
-    It create ``ar-test-result`` file into ``/var/ossec/logs/`` folder, and write "Active response triggered by rule ID: XXX" into.
+    import os
+    import sys
+    import json
+    import datetime
 
-.. code-block:: python
+    if os.name == 'nt':
+    LOG_FILE = "C:\\Program Files (x86)\\ossec-agent\\active-response\\active-responses.log"
+    else:
+    LOG_FILE = "/var/ossec/logs/active-responses.log"
 
-  with open("ar-test-result.txt", mode="a") as test_file:
-    test_file.write("Active response triggered by rule ID: " + str(keys) + "\n")
+    ADD_COMMAND = 0
+    DELETE_COMMAND = 1
+    CONTINUE_COMMAND = 2
+    ABORT_COMMAND = 3
 
-3. Start/End Custom Action Delete:
-    It deletes the file ones timeout triggered. Timeout action must be set in AR section into ``ossec.conf`` manager file.
+    OS_SUCCESS = 0
+    OS_INVALID = -1
 
-.. code-block:: python
+    class message:
+        def __init__(self):
+            self.alert = ""
+            self.command = 0
 
-  os.remove("ar-test-result.txt")
+
+    def write_debug_file(ar_name, msg):
+        with open(LOG_FILE, mode="a") as log_file:
+            log_file.write(str(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')) + " " + ar_name + ": " + msg +"\n")
 
 
-Manager ``ossec.conf``:
-This example configuration is triggered by rule id 591, it was selected for this example, it could be any alert that Wazuh provides.
+    def setup_and_check_message(argv):
+
+        # get alert from stdin
+        input_str = ""
+        for line in sys.stdin:
+            input_str = line
+            break
+
+        write_debug_file(argv[0], input_str)
+
+        try:
+            data = json.loads(input_str)
+        except ValueError:
+            write_debug_file(argv[0], 'Decoding JSON has failed, invalid input format')
+            message.command = OS_INVALID
+            return message
+
+        message.alert = data
+
+        command = data.get("command")
+
+        if command == "add":
+            message.command = ADD_COMMAND
+        elif command == "delete":
+            message.command = DELETE_COMMAND
+        else:
+            message.command = OS_INVALID
+            write_debug_file(argv[0], 'Not valid command: ' + command)
+
+        return message
+
+
+    def send_keys_and_check_message(argv, keys):
+
+        # build and send message with keys
+        keys_msg = json.dumps({"version": 1,"origin":{"name": argv[0],"module":"active-response"},"command":"check_keys","parameters":{"keys":keys}})
+
+        write_debug_file(argv[0], keys_msg)
+
+        print(keys_msg)
+        sys.stdout.flush()
+
+        # read the response of previous message
+        input_str = ""
+        while True:
+            line = sys.stdin.readline()
+            if line:
+                input_str = line
+                break
+
+        write_debug_file(argv[0], input_str)
+
+        try:
+            data = json.loads(input_str)
+        except ValueError:
+            write_debug_file(argv[0], 'Decoding JSON has failed, invalid input format')
+            return message
+
+        action = data.get("command")
+
+        if "continue" == action:
+            ret = CONTINUE_COMMAND
+        elif "abort" == action:
+            ret = ABORT_COMMAND
+        else:
+            ret = OS_INVALID
+            write_debug_file(argv[0], "Invalid value of 'command'")
+
+        return ret
+
+
+    def main(argv):
+
+        write_debug_file(argv[0], "Started")
+
+        # validate json and get command
+        msg = setup_and_check_message(argv)
+
+        if msg.command < 0:
+            sys.exit(OS_INVALID)
+
+        if msg.command == ADD_COMMAND:
+
+            """ Start Custom Key
+            At this point, it is necessary to select the keys from the alert and add them into the keys array.
+            """
+
+            alert = msg.alert["parameters"]["alert"]
+            keys = [alert["rule"]["id"]]
+
+            """ End Custom Key """
+
+            action = send_keys_and_check_message(argv, keys)
+
+            # if necessary, abort execution
+            if action != CONTINUE_COMMAND:
+
+                if action == ABORT_COMMAND:
+                    write_debug_file(argv[0], "Aborted")
+                    sys.exit(OS_SUCCESS)
+                else:
+                    write_debug_file(argv[0], "Invalid command")
+                    sys.exit(OS_INVALID)
+
+            """ Start Custom Action Add """
+
+            write_debug_file(argv[0], "Add")
+
+            with open("ar-test-result.txt", mode="a") as test_file:
+                test_file.write("Active response triggered by rule ID: " + str(keys) + "\n")
+
+            """ End Custom Action Add """
+
+        elif msg.command == DELETE_COMMAND:
+
+            """ Start Custom Action Delete """
+
+            write_debug_file(argv[0], "Delete")
+
+            os.remove("ar-test-result.txt")
+
+            """ End Custom Action Delete """
+
+        else:
+            write_debug_file(argv[0], "Invalid command")
+
+        write_debug_file(argv[0], "Ended")
+
+        sys.exit(OS_SUCCESS)
+
+
+    if __name__ == "__main__":
+        main(sys.argv)
+
+In this case, the configurable sections contain:
+
+1. **Start/End Custom Key**: It tooks from the alert the rule id.
+
+.. code-block:: Python
+
+    alert = msg.alert["parameters"]["alert"]
+    keys = [alert["rule"]["id"]]
+
+2. **Start/End Custom Action Add**: It creates the ``ar-test-result.txt`` file with this content: "Active response triggered by rule ID: XXX".
+
+.. code-block:: Python
+
+    with open("ar-test-result.txt", mode="a") as test_file:
+        test_file.write("Active response triggered by rule ID: " + str(keys) + "\n")
+
+3. **Start/End Custom Action Delete**: It deletes the file once the timeout is triggered. The timeout action must be set in the ``active-response`` section of the ``ossec.conf`` file.
+
+.. code-block:: Python
+
+    os.remove("ar-test-result.txt")
+
+4. Manager ``ossec.conf``: This example configuration is triggered by rule id 591, but it could be any other filter.
 
 .. code-block:: xml
 
-  <command>
-    <name>custom-ar</name>
-    <executable>custom-ar.py</executable>
-    <timeout_allowed>yes</timeout_allowed>
-  </command>
-
-  <active-response>
-    <disabled>no</disabled>
-    <command>custom-ar</command>
-    <location>server</location>
-    <rules_id>591</rules_id>
-    <timeout>60</timeout>
-  </active-response>
-
-Command executable section must have same name as Pyhton script.
-
-
-Python script must be sotore into ``/var/ossec/active-response/bin/``, in this case script name is ``custom-ar``
-
-.. code-block:: python
-
-  #!/usr/bin/python3
-  # Copyright (C) 2015-2021, Wazuh Inc.
-  # All rights reserved.
-
-  # This program is free software; you can redistribute it
-  # and/or modify it under the terms of the GNU General Public
-  # License (version 2) as published by the FSF - Free Software
-  # Foundation.
-
-  import os
-  import sys
-  import json
-  import datetime
-
-  if os.name == 'nt':
-     LOG_FILE = "C:\\Program Files (x86)\\ossec-agent\\active-response\\active-responses.log"
-  else:
-     LOG_FILE = "/var/ossec/logs/active-responses.log"
-
-  ADD_COMMAND = 0
-  DELETE_COMMAND = 1
-  CONTINUE_COMMAND = 2
-  ABORT_COMMAND = 3
-
-  OS_SUCCESS = 0
-  OS_INVALID = -1
-  OS_NOTFOUND = -2
-
-  VERSION = 1
-  AR_MODULE_NAME = "active-response"
-  CHECK_KEYS_ENTRY = "check_keys"
-
-  class message:
-      def __init__(self):
-          self.alert = ""
-          self.command = 0
-
-
-  def write_debug_file(ar_name, msg):
-      with open(LOG_FILE, mode="a") as log_file:
-          log_file.write(str(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')) + " " + ar_name + ": " + msg +"\n")
-          return OS_SUCCESS
-      return OS_NOTFOUND
-
-
-  def setup_and_check_message(argv):
-
-      # get alert from stdin
-      input_str = ""
-      for line in sys.stdin:
-          input_str = line
-          break
-
-      write_debug_file(argv[0], input_str)
-
-      try:
-          data = json.loads(input_str)
-      except ValueError:
-          write_debug_file(argv[0], 'Decoding JSON has failed, invalid input format')
-          message.command = OS_INVALID
-          return message
-
-      message.alert = data
-
-      command = data.get("command")
-
-      if command == "add":
-          message.command = ADD_COMMAND
-      elif command == "delete":
-          message.command = DELETE_COMMAND
-      else:
-          message.command = OS_INVALID
-          write_debug_file(argv[0], 'Not valid command: ' + command)
-
-      return message
-
-
-  def build_json_keys_message(ar_name, keys):
-
-      # add keys
-      message = {"version": VERSION,"origin":{"name": ar_name, "module":AR_MODULE_NAME},"command":CHECK_KEYS_ENTRY,"parameters":{"keys":keys}}
-      jsonString = json.dumps(message)
-      return jsonString
-
-
-  def send_keys_and_check_message(argv, keys):
-
-      # build and send message with keys
-      keys_msg = build_json_keys_message(argv[0], keys)
-
-      write_debug_file(argv[0], keys_msg)
-
-      print(keys_msg)
-      sys.stdout.flush()
-
-      # read the response of previous message
-      input_str = ""
-      while True:
-          line = sys.stdin.readline()
-          if line:
-              input_str = line
-              break
-
-      write_debug_file(argv[0], input_str)
-
-      try:
-          data = json.loads(input_str)
-      except ValueError:
-          write_debug_file(argv[0], 'Decoding JSON has failed, invalid input format')
-          return message
-
-      action = data.get("command")
-
-      if "continue" == action:
-          ret = CONTINUE_COMMAND
-      elif "abort" == action:
-          ret = ABORT_COMMAND
-      else:
-          ret = OS_INVALID
-          write_debug_file(argv[0], "Invalid value of 'command'")
-
-      return ret
-
-
-  def main(argv):
-
-      write_debug_file(argv[0], "Started")
-
-      # validate json and get command
-      msg = setup_and_check_message(argv)
-
-      if msg.command < 0:
-          sys.exit(OS_INVALID)
-
-      if msg.command == ADD_COMMAND:
-
-          """ Start Custom Key
-          At this point, it's necessary select the keys that we want to use from the alert, add them into keys array.
-          In this example, I use rule id parameter.
-          """
-
-          alert = msg.alert["parameters"]["alert"]
-          keys = [alert["rule"]["id"]]
-
-          """ End Custom Key """
-
-          action = send_keys_and_check_message(argv, keys)
-
-          # if necessary, abort execution
-          if action != CONTINUE_COMMAND:
-
-              if action == ABORT_COMMAND:
-                  write_debug_file(argv[0], "Aborted")
-                  sys.exit(OS_SUCCESS)
-              else:
-                  write_debug_file(argv[0], "Invalid command")
-                  sys.exit(OS_INVALID)
-
-          write_debug_file(argv[0], "Add")
-
-          """ Start Custom Action Add """
-
-          with open("ar-test-result.txt", mode="a") as test_file:
-              test_file.write("Active response triggered by rule ID: " + str(keys) + "\n")
-
-          """ End Custom Action Add """
-
-      elif msg.command == DELETE_COMMAND:
-
-          write_debug_file(argv[0], "Delete")
-
-          """ Start Custom Action Delete """
-
-          os.remove("ar-test-result.txt")
-
-          """ End Custom Action Delete """
-
-      else:
-          write_debug_file(argv[0], "Invalid command")
-
-      write_debug_file(argv[0], "Ended")
-
-      sys.exit(OS_SUCCESS)
-
-
-  if __name__ == "__main__":
-      main(sys.argv)
-
-
+    <command>
+        <name>custom-ar</name>
+        <executable>custom-ar.py</executable>
+        <timeout_allowed>yes</timeout_allowed>
+    </command>
+
+    <active-response>
+        <disabled>no</disabled>
+        <command>custom-ar</command>
+        <location>local</location>
+        <rules_id>591</rules_id>
+        <timeout>60</timeout>
+    </active-response>
 
 **Custom AR Windows Example**
 
-Windows AR doesn't reconize Python scripts, to overcome this issue we have 2 options:
+Windows AR doesn't reconize Python scripts. These are two options to overcome this issue:
 
-**First option** is converting python scripts into executable application.
+- The first option is to convert Python scripts into executable application. Use ``pyinstaller`` tool to convert Python script into executable files:
 
-Use ``pyinstaller`` tool to convert python script into executable file.
+    1. Install PyInstaller from PyPI.
 
-1. Install PyInstaller from PyPI.
+    2. Move to ``C:\Program Files (x86)\ossec-agent\active-response\bin\`` and run:
 
-2. Move to ``C:\Program Files (x86)\ossec-agent\active-response\bin\`` and run:
+    .. code-block:: bash
 
-.. code-block:: bash
+        pyinstaller -F custom-ar.py
 
-  pyinstaller -F custom-ar.py
+    3. Move the ``custom-ar.exe`` file to ``C:\Program Files (x86)\ossec-agent\active-response\bin\``.
 
-This will generate ``custom-ar.exe`` file into in a subdirectory called ``dist``.
+    4. Update the manager ``ossec.conf`` with ``custom-ar.exe`` instead of ``custom-ar.py``:
 
-3. Move ``custom-ar.exe`` to ``C:\Program Files (x86)\ossec-agent\active-response\bin\``.
+    .. code-block:: xml
 
-4. And update Manager ``ossec.conf`` with ``custom-ar.exe`` instead ``custom-ar.py``:
+        <command>
+            <name>custom-ar</name>
+            <executable>custom-ar.exe</executable>
+            <timeout_allowed>yes</timeout_allowed>
+        </command>
 
-.. code-block:: xml
+- The second option is to run the Python script through a bash launcher. In this case, the AR script will call ``launcher.cmd`` and ``launcher.cmd`` will call ``custom-ar.py``.
 
-  <command>
-    <name>custom-ar</name>
-    <executable>custom-ar.exe</executable>
-    <timeout_allowed>yes</timeout_allowed>
-  </command>
+    1. Create a ``launcher.cmd`` file into ``C:\Program Files (x86)\ossec-agent\active-response\bin\`` with the following content:
 
+    .. code-block:: console
 
-A **Second option** is run Python script through a bash launcher. AR will call ``launcher.cmd`` and ``launcher.cmd`` will call ``custom-ar.py``
+        @echo off
 
-.. note::
-  The buffer "Command Prompt" is limited to 1024 bytes, triggered alert couldn't contain more than 1024 characters.
+        setlocal enableDelayedExpansion
 
-1. Create a ``launcher.cmd`` file into ``C:\Program Files (x86)\ossec-agent\active-response\bin\`` as following:
+        set ARPATH="%programfiles(x86)%\ossec-agent\active-response\bin\\"
 
-.. code-block:: console
+        if "%~1" equ "" (
+            call :read
 
-  @echo off
+            set aux=!input:*"extra_args":[=!
+            for /f "tokens=1 delims=]" %%a in ("!aux!") do (
+                set aux=%%a
+            )
+            set script=!aux:~1,-1!
 
-  setlocal enableDelayedExpansion
+            if exist "!ARPATH!!script!" (
+                set aux=!input:*"command":=!
+                for /f "tokens=1 delims=," %%a in ("!aux!") do (
+                    set aux=%%a
+                )
+                set command=!aux:~1,-1!
 
-  if "%~1" equ "" (
-      call :read
-      echo !line! >alert.txt
+                echo !input! >alert.txt
 
-      set aux=!line:*"extra_args":[=!
-      for /f "tokens=1 delims=]" %%a in ("!aux!") do (
-          set aux=%%a
-      )
-      set script="C:\Program Files (x86)\ossec-agent\active-response\bin\\"!aux:~1,-1!
+                start /b cmd /c "%~f0" child !script! !command!
 
-      if exist !script! (
-          set aux=!line:*"command":=!
-          for /f "tokens=1 delims=," %%a in ("!aux!") do (
-              set aux=%%a
-          )
-          set command=!aux:~1,-1!
+                if "!command!" equ "add" (
+                    call :wait keys.txt
+                    echo(!output!
+                    del keys.txt
 
-          start /b cmd /c "%~f0" child
+                    call :read
+                    echo !input! >result.txt
+                )
+            )
+            exit /b
+        )
 
-          if "!command!" equ "add" (
-              call :wait keys.txt
-              call :write !str!
-              del keys.txt
-
-              call :read
-              echo !line! >result.txt
-          )
-      ) else (
-          del alert.txt
-      )
-
-      exit /b
-  )
-
-  set "name=%~1"
-  goto !name!
+        set "name=%~1"
+        goto !name!
 
 
-  :child
-  copy nul pipe1.txt >nul
-  copy nul pipe2.txt >nul
+        :child
+        copy nul pipe1.txt >nul
+        copy nul pipe2.txt >nul
 
-  call :wait alert.txt
+        "%~f0" launcher %~3 <pipe1.txt >pipe2.txt | python !ARPATH!%~2 <pipe2.txt >pipe1.txt
 
-  set aux=!str:*"extra_args":[=!
-  for /f "tokens=1 delims=]" %%a in ("!aux!") do (
-      set aux=%%a
-  )
-  set script="C:\Program Files (x86)\ossec-agent\active-response\bin\\"!aux:~1,-1!
-
-  "%~f0" launcher <pipe1.txt >pipe2.txt | python !script! <pipe2.txt >pipe1.txt
-
-  del pipe1.txt pipe2.txt
-
-  exit /b
+        del pipe1.txt pipe2.txt
+        exit /b
 
 
-  :launcher
-  call :wait alert.txt
-  call :write !str!
-  del alert.txt
+        :launcher
+        call :wait alert.txt
+        echo(!output!
+        del alert.txt
 
-  set aux=!str:*"command":=!
-  for /f "tokens=1 delims=," %%a in ("!aux!") do (
-      set aux=%%a
-  )
-  set command=!aux:~1,-1!
+        if "%~2" equ "add" (
+            call :read
+            echo !input! >keys.txt
 
-  if "!command!" equ "add" (
-      call :read
-      echo !line! >keys.txt
-
-      call :wait result.txt
-      call :write !str!
-      del result.txt
-  )
-
-  exit /b
+            call :wait result.txt
+            echo(!output!
+            del result.txt
+        )
+        exit /b
 
 
-  :read
-  set line=
-  set /p line=
-  if not defined line goto :read
-  exit /b
+        :read
+        set input=
+        for /f "delims=" %%a in ('python -c "import sys; print(sys.stdin.readline())"') do (
+            set input=%%a
+        )
+        exit /b
 
 
-  :write
-  echo(%*
-  exit /b
+        :wait
+        if exist "%*" (
+            for /f "delims=" %%a in (%*) do (
+                set output=%%a
+            )
+        ) else (
+            goto :wait
+        )
+        exit /b
 
+    3. Move the ``custom-ar.py`` file to ``C:\Program Files (x86)\ossec-agent\active-response\bin\``.
 
-  :wait
-  if exist %* (
-      set /p str= <%*
-  ) else (
-      goto :wait
-  )
-  exit /b
+    4. Update the manager ``ossec.conf``, ``launcher.cmd`` will look for the name of the Python script to run in the option ``extra_args``:
 
-2. Move the custom Python script to ``C:\Program Files (x86)\ossec-agent\active-response\bin\``, in this case we use same as Linux, ``custom-ar.py``.
+    .. code-block:: xml
 
-3. Update Manager ``ossec.conf``, ``launcher.cmd`` will look for Python script name to run into ``extra_args`` command option. This example configuration is triggered by rule id 591, it was selected for this example, it could be any alert that Wazuh provides.
+        <command>
+            <name>custom-ar</name>
+            <executable>launcher.cmd</executable>
+            <extra_args>custom-ar.py</extra_args>
+            <timeout_allowed>yes</timeout_allowed>
+        </command>
 
-.. code-block:: xml
-
-  <command>
-    <name>custom-ar</name>
-    <executable>launcher.cmd</executable>
-    <extra_args>custom-ar.py</extra_args>
-    <timeout_allowed>yes</timeout_allowed>
-  </command>
-
-  <active-response>
-    <disabled>no</disabled>
-    <command>custom-ar</command>
-    <location>local</location>
-    <rules_id>591</rules_id>
-    <timeout>60</timeout>
-  </active-response>
+        <active-response>
+            <disabled>no</disabled>
+            <command>custom-ar</command>
+            <location>local</location>
+            <rules_id>591</rules_id>
+            <timeout>60</timeout>
+        </active-response>
 
 .. note::
-  Python path should be included into System path, look for it into Windows ``Environment Variables``.
 
+    The Python path must be included in the System user path. Look for it in the Windows ``Environment Variables``.
