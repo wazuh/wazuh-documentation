@@ -3,12 +3,14 @@
 File integrity monitoring
 =========================
 
-Watch for modification of files in selected directories. Get information about the user who made the changes and the process at play in real time.
+In this POC, the Wazuh File integrity monitoring (FIM) system watches for modification of files in selected directories and then triggers alerts when these files are modified. Additionally, FIM enriches alert data by fetching information about the user who made the changes and the process at play in real time.
 
-More information can be found in :ref:`manual_file_integrity`.
+More information about FIM functionality and configuration, see the `File integrity monitoring <manual_file_integrity>`_ section.
 
 Configuration
 -------------
+
+Configure your environment as follows to test the POC.
 
 #. Edit ``/var/ossec/etc/ossec.conf`` in the monitored RHEL 7 endpoint and enable `whodata` by adding ``whodata="yes"`` to the monitored directories.
 
