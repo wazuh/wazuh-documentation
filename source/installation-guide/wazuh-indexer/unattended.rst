@@ -40,7 +40,7 @@ Install and configure the initial node. During this stage, the SSL certificates 
           # curl -so ~/config.yml https://packages.wazuh.com/resources/4.2/unattended-installation/templates/config.yml
 
     
-#. Edit ``~/config.yml`` and replace the node names and IP values with the corresponding names and IP addresses, including all the Elasticsearch, Wazuh server, and Kibana nodes. Add as many node fields as needed.
+#. Edit ``~/config.yml`` and replace the node names and IP values with the corresponding names and IP addresses, including all the Wazuh server, Elasticsearch, and Kibana nodes. Add as many node fields as needed.
 
       .. code-block:: yaml
         :emphasize-lines: 4, 8, 15, 17, 27, 29
@@ -106,7 +106,7 @@ Install and configure the initial node. During this stage, the SSL certificates 
     | -h / --help                   | Shows *help*.                                                                                                  |
     +-------------------------------+----------------------------------------------------------------------------------------------------------------+        
 
-#.  Copy ``~/certs.tar`` to all the servers of the distributed deployment, including the Elasticsearch, Wazuh server, and Kibana nodes. This can be done by using, for example, ``scp``.
+#.  Copy ``~/certs.tar`` to all the servers of the distributed deployment, including the Wazuh server, Elasticsearch and Kibana nodes. This can be done by using, for example, ``scp``.
 
 You now have installed and configured the initial Elasticsearch node. 
 

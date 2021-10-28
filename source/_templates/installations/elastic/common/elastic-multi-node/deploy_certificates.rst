@@ -14,7 +14,7 @@
       # mv /etc/elasticsearch/certs/$NODE_NAME.pem /etc/elasticsearch/certs/elasticsearch.pem
       # mv /etc/elasticsearch/certs/$NODE_NAME-key.pem /etc/elasticsearch/certs/elasticsearch-key.pem
 
-#. If you want to later install the Kibana on this node, keep the certificates file. Otherwise, remove it with ``rm -f certs.tar`` to increase security.
+#. If you want to later install Kibana on this node, keep the certificates file. Otherwise, remove it with ``rm -f certs.tar`` to increase security.
 
 
 .. End of include file

@@ -1,23 +1,23 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. meta:: :description: Learn how to install the Kibana, a flexible and intuitive web interface for mining and visualizing the events and archives. 
+.. meta:: :description: Learn how to install Kibana, a flexible and intuitive web interface for mining and visualizing the events and archives. 
 
 .. _wazuh_dashboard_step_by_step:
 
-Installing the Kibana in step-by-step mode
-===================================================
+Installing Kibana in step-by-step mode
+======================================
 
-The Kibana is a flexible and intuitive web interface, based on Kibana, for mining and visualizing the events and archives. 
+Kibana is a flexible and intuitive web interface for mining and visualizing the events and archives. 
 
 .. note:: Root user privileges are required to run the commands described below.
 
-Install the Kibana
----------------------------
+Install Kibana
+--------------
 
 Adding the Wazuh repository
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Add the Wazuh repository if you are installing the Kibana on a dedicated server. Skip this step to install it on the same host as the Wazuh server or Elasticsearch. 
+Add the Wazuh repository if you are installing Kibana on a dedicated server. Skip this step to install it on the same host as the Wazuh server or Elasticsearch. 
 
   .. tabs::
   
@@ -42,8 +42,8 @@ Add the Wazuh repository if you are installing the Kibana on a dedicated server.
   
   
 
-Installing and configuring the Kibana
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Installing and configuring Kibana
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 #. Install the Kibana package.
 
@@ -138,7 +138,7 @@ Installing and configuring the Kibana
     - **Username**: *wazuh*
     - **Password**: *<wazuh_user_password>*
 
-  When you access the Kibana for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or, for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser. Alternatively, a certificate from a trusted authority can be configured. 
+  When you access Kibana for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or, for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser. Alternatively, a certificate from a trusted authority can be configured. 
 
 
 If you want to uninstall Kibana, see the :ref:`uninstalling <uninstall_kibana>` section. 
