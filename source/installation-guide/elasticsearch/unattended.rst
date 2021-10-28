@@ -146,7 +146,7 @@ Repeat this process on each Elasticsearch node and proceed with initializing the
 
     <div class="accordion-section">
 
-The final stage of the process for installing a Elasticsearch multi-node cluster consists in running the security admin script. 
+The final stage of the process for installing an Elasticsearch multi-node cluster consists in running the security admin script. 
 
 Run the ``securityadmin`` script on the initial node to load the new certificates information and start the cluster. Replace ``<elasticsearch_IP>`` with the Elasticsearch installation IP and run the command.
 
