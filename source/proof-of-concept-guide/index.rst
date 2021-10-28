@@ -19,12 +19,7 @@ Prerequisites
     * Wazuh agent (RHEL 7) 
     * Wazuh agent (Windows)
 
-  To install these components, see the :ref:`Installation guide <installation_guide>` section.
-
-* You also need the following systems running on the Wazuh agent RHEL 7 host system to test some of the POCs in this guide.
-
-    * Apache server
-    * Docker
+To install these components, see the :ref:`Installation guide <installation_guide>` section.
 
 Proofs of Concept
 -----------------
