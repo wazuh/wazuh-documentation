@@ -6,13 +6,13 @@ Installing the Wazuh server in unattended mode
 ==============================================
 
 
-The Wazuh server is in charge of analyzing the data received from the agents and triggering alerts when threats or anomalies are detected. This central component includes the Wazuh manager and the Wazuh forwarder.
+The Wazuh server is in charge of analyzing the data received from the agents and triggering alerts when threats or anomalies are detected. This central component includes the Wazuh manager and Filebeat.
 
 
 Wazuh server cluster installation
 ---------------------------------
 
-Install the Wazuh server as a single-node or multi-node cluster according to your environment needs.  If you want to install a single-node cluster, follow the instructions to install the Wazuh master node and proceed directly with :ref:`installing the Wazuh dashboard <wazuh_dashboard_installation>`.
+Install the Wazuh server as a single-node or multi-node cluster according to your environment needs.  If you want to install a single-node cluster, follow the instructions to install the Wazuh master node and proceed directly with :ref:`installing Kibana <wazuh_dashboard_installation>`.
 
 The installation process is divided into two stages.  
 
@@ -30,7 +30,7 @@ The installation process is divided into two stages.
   <div class="accordion-section open">
 
 
-Install and configure the Wazuh master node. Make sure that a copy of ``certs.tar``, created during the Wazuh indexer installation, is placed in the root home folder ``(~/)``.
+Install and configure the Wazuh master node. Make sure that a copy of ``certs.tar``, created during the Elasticsearch installation, is placed in the root home folder ``(~/)``.
 
 #. Download the unattended installation script. 
 
@@ -70,7 +70,7 @@ Install and configure the Wazuh master node. Make sure that a copy of ``certs.ta
 
 Your Wazuh server is now successfully installed. 
 
-- If you want a Wazuh server single-node cluster, everything is set and you can proceed directly with :ref:`installing the Wazuh dashboard <wazuh_dashboard_installation>`. 
+- If you want a Wazuh server single-node cluster, everything is set and you can proceed directly with :ref:`installing Kibana <wazuh_dashboard_installation>`. 
       
 - If you want a Wazuh server multi-node cluster, expand the instructions below to install and configure Wazuh worker nodes. 
 
@@ -83,7 +83,7 @@ Your Wazuh server is now successfully installed.
   <div class="accordion-section">
 
 
-Install and configure the Wazuh worker nodes. Make sure that a copy of ``certs.tar``, created during the Wazuh indexer installation, is placed in the root home folder ``(~/)``.
+Install and configure the Wazuh worker nodes. Make sure that a copy of ``certs.tar``, created during the Elasticsearch installation, is placed in the root home folder ``(~/)``.
 
 #. Download the unattended installation script. 
 
@@ -102,4 +102,4 @@ Your Wazuh server is now successfully installed. Repeat this process on every Wa
 Next steps
 ----------
   
-The Wazuh server installation is now complete and you can proceed with installing the Wazuh dashboard. To perform this action, see the :ref:`Wazuh dashboard <wazuh_dashboard_installation>` section.  
+The Wazuh server installation is now complete and you can proceed with installing Kibana. To perform this action, see the :ref:`Kibana <wazuh_dashboard_installation>` section.  
