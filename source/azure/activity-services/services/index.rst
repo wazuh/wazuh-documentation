@@ -15,7 +15,7 @@ Monitoring Services
     :align: center
     :width: 100%
 
-Wazuh also allows to monitor services such as Azure Active Directory using the `Microsoft Graph REST API <https://docs.microsoft.com/en-us/graph/overview>`_, which provides access to Azure AD through REST API endpoints. Applications can use the Microsoft Graph API to perform read operations on directory data and objects.
+Wazuh is able to monitor the Azure Active Directory (Azure AD) service and its activity using the Activity reports provided by the `Microsoft Graph REST API <https://docs.microsoft.com/en-us/graph/overview>`_. Azure AD applications can make use the Microsoft Graph API to perform read operations on directory data and objects.
 
 
 .. topic:: Contents

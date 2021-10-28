@@ -501,17 +501,17 @@ This option includes all the other options needed to make a query. We can have m
 request options
 ~~~~~~~~~~~~~~~
 
-+-----------------------------------------+----------------------------------------------+
-| Options                                 | Allowed values                               |
-+=========================================+==============================================+
-| `graph\\request\\tag`_                  | Any string                                   |
-+-----------------------------------------+----------------------------------------------+
-| `graph\\request\\query`_                | Any string                                   |
-+-----------------------------------------+----------------------------------------------+
-| `graph\\request\\timeout`_              | A positive number (seconds)                  |
-+-----------------------------------------+----------------------------------------------+
-| `graph\\request\\time_offset`_          | A positive number + suffix                   |
-+-----------------------------------------+----------------------------------------------+
++-----------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| Options                                 | Allowed values                                                                                                                              |
++=========================================+=============================================================================================================================================+
+| `graph\\request\\tag`_                  | Any string                                                                                                                                  |
++-----------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| `graph\\request\\query`_                | Any string containing ``auditLogs/directoryaudits``, ``auditLogs/signIns`` or ``auditLogs/provisioning`` plus any optional query parameter. |
++-----------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| `graph\\request\\timeout`_              | A positive number (seconds)                                                                                                                 |
++-----------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| `graph\\request\\time_offset`_          | A positive number + suffix                                                                                                                  |
++-----------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
 
 graph\\request\\tag
 ^^^^^^^^^^^^^^^^^^^
@@ -527,13 +527,13 @@ Defines a tag that we will add to the query. This entry is optional and can be u
 graph\\request\\query
 ^^^^^^^^^^^^^^^^^^^^^
 
-This is the query we will make to the Azure Log Analytics API. This option is ready to use any query we can make in the Log Analytics portal. You can find a reference of the language used `here <https://msdn.microsoft.com/en-us/library/azure/ad/graph/howto/azure-ad-graph-api-common-queries>`_.
+The query used to obtain the logs from the Microsoft Graph API. The query value must be ``auditLogs/directoryaudits``, ``auditLogs/signIns`` or ``auditLogs/provisioning`` in conjunction with the desired optional parameters and filters available for these report types. Check this `Microsoft Activity reports <https://docs.microsoft.com/en-us/graph/api/resources/azure-ad-auditlog-overview?view=graph-rest-1.0>`_ reference page to learn more about how the activity reports work and the available query parameters for each one.
 
-+--------------------+--------------------+
-| **Default value**  | N/A                |
-+--------------------+--------------------+
-| **Allowed values** | Any String         |
-+--------------------+--------------------+
++--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| **Default value**  | N/A                                                                                                                                         |
++--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| **Allowed values** | Any string containing ``auditLogs/directoryaudits``, ``auditLogs/signIns`` or ``auditLogs/provisioning`` plus any optional query parameter. |
++--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
 
 graph\\request\\timeout
 ^^^^^^^^^^^^^^^^^^^^^^^
