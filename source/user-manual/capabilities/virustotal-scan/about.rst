@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-    :description: Learn more about how Wazuh integrates with VirusTotal, an online service that analyzes files and URLs for the detection of viruses, worms, trojans and other malicious content. 
+    :description: Learn more about how Wazuh integrates with VirusTotal, an online service that analyzes files and URLs to detect viruses and other malicious content. 
     
 .. _virustotal-about:
 
