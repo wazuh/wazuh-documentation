@@ -12,13 +12,13 @@ Configuration
 
 #. `Create a Slack webhook <https://api.slack.com/messaging/webhooks>`_. This is a unique URL to which Wazuh will send messages with the alerts.
 
-#. Replace ``<your_slack_webhook>`` in the below configuration with the url obtained in the previous step. Set this Slack integration configuration in ``/var/ossec/etc/ossec.conf`` at the Wazuh manager endpoint.
+#. Replace ``YOUR_SLACK_WEBHOOK`` in the below configuration with the url obtained in the previous step. Set this Slack integration configuration in ``/var/ossec/etc/ossec.conf`` at the Wazuh manager endpoint.
 
     .. code-block:: XML
 
         <integration>
             <name>slack</name>
-            <hook_url><your_slack_webhook></hook_url>
+            <hook_url>YOUR_SLACK_WEBHOOK</hook_url> <!-- Replace with your Slack Webhook -->
             <level>10</level>
             <alert_format>json</alert_format>
         </integration>
