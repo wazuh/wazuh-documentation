@@ -3,16 +3,18 @@
 Auditing commands run by user
 =============================
 
-For this POC, you need to create specific rules to alert about commands run by the user. To do this, you have to first enable `Audit` logging for it to capture and log `execve` system calls so the Wazuh agent can read these logs. 
+For this POC, you create specific rules to alert about commands run by the user. To do this, you have to first enable `Audit` logging for it to capture and log `execve` system calls so the Wazuh agent can read these logs. 
 
 For more information on Linux auditd system, see the :ref:`Audit configuration guide <learning_wazuh_audit_commands>` section. In addition, `RHEL Audit documentation <https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/security_guide/chap-system_auditing>`_ has extended information about the Audit kernel subsystem.
 
 Configuration
 -------------
 
+Configure your environment as follows to test the POC.
+
 #. Run ``systemctl status auditd.service`` to check that the Linux Auditing System is installed and running on your RHEL7 agent endpoint.
 
-#. Check that ``/var/ossec/etc/ossec.conf`` in your RHEL7 agent endpoint is configured for the agent to read the ``audit.log`` file.
+#. Check that ``/var/ossec/etc/ossec.conf`` in your RHEL7 agent endpoint is configured for the agent to read the ``audit.log`` file. This configuration is included by default.
 
    .. code-block:: XML
 
@@ -27,7 +29,7 @@ Configuration
 
       # echo $EUID
 
-#. Create the rules for your user at ``/etc/audit/rules.d/wazuh.rules`` by replacing ``<your_user_id>`` with your current ``euid``.
+#. Create the rules for your user at ``/etc/audit/rules.d/wazuh.rules``. Make sure you replace ``<your_user_id>`` with your current ``euid``.
 
     .. code-block:: XML
 
@@ -52,7 +54,7 @@ Steps to generate the alerts
 
 #. Log in the RHEL 7 agent endpoint as the monitored user.
 
-#. Execute a ping to www.google.com
+#. Execute a ping to *www.google.com*
 
 Querying the alerts
 -------------------
