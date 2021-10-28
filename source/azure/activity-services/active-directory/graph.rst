@@ -7,7 +7,7 @@ Using Microsoft Graph
 
 This section shows how to configure an application from the Microsoft Azure portal to be able to use the **Microsoft Graph REST API**.
 
-In order to know how the Wazuh Azure module works in conjunction with **Microsoft Graph REST API** first is important to understand what are the Azure AD activity reports and what kind of information they can provide. Wazuh is able process the logs from the following Azure AD activity reports, each one requiring a different query to run:
+In order to know how the Wazuh Azure module works in conjunction with the **Microsoft Graph REST API**, first, it is important to understand what are the Azure AD activity reports and what kind of information can they provide. Wazuh can process the logs from the following Azure AD activity reports, each one of them requiring a different query to be executed:
 
 +---------------------------------------------------------------------------------------------------------------------------+-------------------------------+
 | **Report type**                                                                                                           | **Query**                     |
