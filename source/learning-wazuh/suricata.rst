@@ -95,7 +95,7 @@ Trigger NIDS alerts on both agents and see the output
             "severity": 2
           },
         "http": {
-            "hostname": "testmyids.org",
+            "hostname": "testmynids.org",
             "url": "/uid/index.html",
             "http_user_agent": "curl/7.29.0",
             "http_content_type": "text/html",
