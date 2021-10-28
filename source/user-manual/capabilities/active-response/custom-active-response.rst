@@ -157,6 +157,20 @@ It's possible customize the script behavior modifying 3 sections:
 
 3. **Start/End Custom Action Delete**: Execute secondary action, usually as recovery section after a time period. ie: wait a time period to unblock an ip after main action blocked it.
 
+Active responses are either stateful or stateless responses.
+
+- ``Stateful``. Are configured to undo the action after a specified period of time.
+    Configuration needed for ``Stateful`` case:
+      a. Set Custom Key.
+      b. Set Custom Action Add.
+      c. Set Custom Action Delete.
+      d. Set timeout option into ``active-response`` section from ``ossec.conf`` file.
+
+- ``Stateless``.  Are configured as one-time actions without an event to revert the original effect.
+    Configuration needed for ``Stateless`` case:
+      a. Set Custom Key.
+      b. Set Custom Action Add.
+
 
 **Custom AR Linux Example**
 
