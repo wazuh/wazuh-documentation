@@ -15,7 +15,7 @@ Download the `virtual appliance (OVA) <https://packages.wazuh.com/|CURRENT_MAJOR
 
     - CentOS 7
     - Wazuh manager: |WAZUH_LATEST_OVA|
-    - Open Distro for Elasticsearch: |ELASTICSEARCH_LATEST_OVA|
+    - Open Distro for Elasticsearch: |OPEN_DISTRO_LATEST|
     - Filebeat-OSS: |ELASTICSEARCH_LATEST_OVA|
     - Kibana: |ELASTICSEARCH_LATEST_OVA|
     - Wazuh Kibana plugin: |WAZUH_LATEST_OVA|-|ELASTICSEARCH_LATEST_OVA|
