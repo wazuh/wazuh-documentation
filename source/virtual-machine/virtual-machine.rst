@@ -36,6 +36,7 @@ All components included in this virtual image are configured to work out-of-the-
   - Open Distro for Elasticsearch: ``/etc/elasticsearch/elasticsearch.yml``
   - Filebeat-OSS: ``/etc/filebeat/filebeat.yml``
   - Kibana: ``/etc/kibana/kibana.yml``
+  - Wazuh Kibana plugin: ``/usr/share/kibana/data/wazuh/config/wazuh.yml``  
 
 In case of using VirtualBox, once the virtual machine is imported it may run into issues caused by time skew when VirtualBox synchronizes the time of the guest machine. To avoid this situation, enable the ``Hardware Clock in UTC Time`` option in the ``System`` tab of the virtual machine configuration.
 
