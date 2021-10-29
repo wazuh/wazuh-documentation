@@ -87,23 +87,26 @@ In the next example, we show how an Ubuntu Wazuh agent can be configured, regist
 
 #.  Edit ossec.conf with the manager IP and, optional, any desired enrollment configuration.
 i.e.:
-.. code-block:: xml  
 
-    <client>
-        <server>
-        <address>192.168.119.131</address>
-        <port>1514</port>
-        <protocol>tcp</protocol>
-        </server>
-        <config-profile>ubuntu, ubuntu18, ubuntu18.04</config-profile>
-        <notify_time>10</notify_time>
-        <time-reconnect>60</time-reconnect>
-        <auto_restart>yes</auto_restart>
-        <crypto_method>aes</crypto_method>
+.. code-block:: console  
+
+<client>
+    <server>
+    <address>192.168.119.131</address>
+    <port>1514</port>
+    <protocol>tcp</protocol>
+    </server>
+    <config-profile>ubuntu, ubuntu18, ubuntu18.04</config-profile>
+    <notify_time>10</notify_time>
+    <time-reconnect>60</time-reconnect>
+    <auto_restart>yes</auto_restart>
+    <crypto_method>aes</crypto_method>
     <enrollment>
-        <agent_name>TEST_AGENT_1</agent_name>
+    <agent_name>TEST_AGENT_1</agent_name>
     </enrollment>	
-    </client>
+</client>
+
+
 
 #. Start the Wazuh agent:
 
