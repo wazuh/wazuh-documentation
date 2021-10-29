@@ -77,16 +77,16 @@ Use case example
 ----------------
 
 Using variables allows us to fully automate the agent registration and configuration. To successfully start the agent and register it, it’s necessary to define at least the variable ``WAZUH_MANAGER``.
-In the next example, we show how an Ubuntu Wazuh agent can be configured, registered, and started with three simple steps:
+In the next example, we show how an Ubuntu Wazuh agent can be configured, registered, and started with some simple steps:
 
-#. Deploy the Wazuh agent:
+Deploy the Wazuh agent:
 
 .. code-block:: console  
 
       # apt-get install wazuh-agent
 
 
-#. Edit ossec.conf with the manager IP and, optional, any desired enrollment configuration:
+Edit ossec.conf with the manager IP and, optional, any desired enrollment configuration:
 
 .. code-block:: xml
 
@@ -107,7 +107,7 @@ In the next example, we show how an Ubuntu Wazuh agent can be configured, regist
   </client>
 
 
-#. Start the Wazuh agent:
+Start the Wazuh agent:
 
 .. code-block:: console
 
@@ -116,7 +116,7 @@ In the next example, we show how an Ubuntu Wazuh agent can be configured, regist
       # systemctl start wazuh-agent
 
 
-#. After following these steps, we can see the below logs on ``ossec.log`` confirming the enrollment was successful:
+After following these steps, we can see the below logs on ``ossec.log`` confirming the enrollment was successful:
 
 .. code-block:: console
 
@@ -132,7 +132,14 @@ In the next example, we show how an Ubuntu Wazuh agent can be configured, regist
     wazuh-agentd: INFO: Valid key received
     wazuh-agentd: INFO: Waiting 20 seconds before server connection
 
-      
+
+And client.keys should now contain the obtained key:
+
+.. code-block:: console
+
+    001 TEST_AGENT_1 any 5520ccc4fc68eba8d3e49337784e4853f4fce44e3778d22d51b1366e013cf4f3  
+
+
 On the manager side, the agent can be found and appears with ``active`` status after a few seconds. Running the following command shows the new registered agent.
  
 .. code-block:: console
@@ -140,10 +147,31 @@ On the manager side, the agent can be found and appears with ``active`` status a
     # curl -k -X GET "https://localhost:55000/agents?pretty=true&offset=1&limit=2&select=status%2Cid%2Cmanager%2Cname%2Cnode_name%2Cversion&status=active" -H "Authorization: Bearer $TOKEN"
  
 
-.. thumbnail:: ../../images/manual/managing-agents/API.png
-  :title: API
-  :align: left
-  :width: 100%
+.. code-block:: console
+
+  TOKEN=$(curl -u wazuh:wazuh -k -X GET "https://localhost:55000/security/user/authenticate?raw=true")
+    % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                  Dload  Upload   Total   Spent    Left  Speed
+  100   398  100   398    0     0    591      0 --:--:-- --:--:-- --:--:--   590
+  root@ubuntu:/home/palacios/Workspace/Utils# curl -k -X GET "https://localhost:55000/agents?pretty=true&offset=1&limit=2&select=status%2Cid%2Cmanager%2Cname%2Cnode_name%2Cversion&status=active" -H "Authorization: Bearer $TOKEN"
+  {
+    "data": {
+        "affected_items": [
+          {
+              "name": "TEST_AGENT_1",
+              "status": "active",
+              "node_name": "node01",
+              "version": "Wazuh v4.2.4",
+              "manager": "ubuntu",
+              "id": "001"
+          }
+        ],
+        "total_affected_items": 2,
+        "total_failed_items": 0,
+        "failed_items": []
+    },
+    "message": "All selected agents information was returned",
+    "error": 0
 
 Wazuh enrollment method highly reduces the burden of registering new agents with the manager. Jointly with deployment using variables, this setup can be performed in just three easy steps.
 
