@@ -147,6 +147,8 @@ On the manager side, the agent can be found and appears with ``active`` status a
     # curl -k -X GET "https://localhost:55000/agents?pretty=true&offset=1&limit=2&select=status%2Cid%2Cmanager%2Cname%2Cnode_name%2Cversion&status=active" -H "Authorization: Bearer $TOKEN"
  
 
+First, you get the token, then you change your credentials if necessary and request the API to verify the new user information:
+
 .. code-block:: console
 
   TOKEN=$(curl -u wazuh:wazuh -k -X GET "https://localhost:55000/security/user/authenticate?raw=true")
@@ -154,6 +156,9 @@ On the manager side, the agent can be found and appears with ``active`` status a
                                   Dload  Upload   Total   Spent    Left  Speed
   100   398  100   398    0     0    591      0 --:--:-- --:--:-- --:--:--   590
   root@ubuntu:/home/palacios/Workspace/Utils# curl -k -X GET "https://localhost:55000/agents?pretty=true&offset=1&limit=2&select=status%2Cid%2Cmanager%2Cname%2Cnode_name%2Cversion&status=active" -H "Authorization: Bearer $TOKEN"
+
+
+.. code-block:: console
   {
     "data": {
         "affected_items": [
