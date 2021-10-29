@@ -85,8 +85,7 @@ In the next example, we show how an Ubuntu Wazuh agent can be configured, regist
 
       # apt-get install wazuh-agent
 
-#.  Edit ossec.conf with the manager IP and, optional, any desired enrollment configuration.
-i.e.:
+#. Edit ossec.conf with the manager IP and, optional, any desired enrollment configuration:
 
 .. code-block:: xml
 
