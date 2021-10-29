@@ -79,14 +79,14 @@ Use case example
 Using variables allows us to fully automate the agent registration and configuration. To successfully start the agent and register it, it’s necessary to define at least the variable ``WAZUH_MANAGER``.
 In the next example, we show how an Ubuntu Wazuh agent can be configured, registered, and started with some simple steps:
 
-Deploy the Wazuh agent:
+#. Deploy the Wazuh agent:
 
 .. code-block:: console  
 
       # apt-get install wazuh-agent
 
 
-Edit ossec.conf with the manager IP and, optional, any desired enrollment configuration:
+#. Edit ossec.conf with the manager IP and, optional, any desired enrollment configuration:
 
 .. code-block:: xml
 
@@ -107,7 +107,7 @@ Edit ossec.conf with the manager IP and, optional, any desired enrollment config
   </client>
 
 
-Start the Wazuh agent:
+#. Start the Wazuh agent:
 
 .. code-block:: console
 
