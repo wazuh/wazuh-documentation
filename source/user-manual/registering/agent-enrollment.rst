@@ -76,8 +76,7 @@ Enrollment configuration block example
 Use case example
 ----------------
 
-Using variables allows us to fully automate the agent registration and configuration. To successfully start the agent and register it, it’s necessary to define at least the variable ``WAZUH_MANAGER``.
-In the next example, we show how an Ubuntu Wazuh agent can be configured, registered, and started with some simple steps:
+In the following example, we show how an Ubuntu Wazuh agent can be configured, registered, and started with some simple steps:
 
 #. Deploy the Wazuh agent:
 
@@ -140,7 +139,7 @@ And client.keys should now contain the obtained key:
     001 TEST_AGENT_1 any 5520ccc4fc68eba8d3e49337784e4853f4fce44e3778d22d51b1366e013cf4f3  
 
 
-On the manager side, the agent can be found and appears with ``active`` status after a few seconds. Running the following command shows the new registered agent.
+The agent can be found on the manager side and appears with ``active`` status after a few seconds. Running the following command shows the new registered agent.
  
 .. code-block:: console
 
