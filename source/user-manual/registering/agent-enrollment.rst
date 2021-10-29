@@ -80,39 +80,39 @@ In the following example, we show how an Ubuntu Wazuh agent can be configured, r
 
 #. Deploy the Wazuh agent:
 
-.. code-block:: console  
+    .. code-block:: console  
 
-      # apt-get install wazuh-agent
+          # apt-get install wazuh-agent
 
 
 #. Edit ossec.conf with the manager IP and, optional, any desired enrollment configuration:
 
-.. code-block:: xml
+    .. code-block:: xml
 
-  <client>
-      <server>
-      <address>192.168.119.131</address>
-      <port>1514</port>
-      <protocol>tcp</protocol>
-      </server>
-      <config-profile>ubuntu, ubuntu18, ubuntu18.04</config-profile>
-      <notify_time>10</notify_time>
-      <time-reconnect>60</time-reconnect>
-      <auto_restart>yes</auto_restart>
-      <crypto_method>aes</crypto_method>
-      <enrollment>
-      <agent_name>TEST_AGENT_1</agent_name>
-      </enrollment>    
-  </client>
+      <client>
+          <server>
+          <address>192.168.119.131</address>
+          <port>1514</port>
+          <protocol>tcp</protocol>
+          </server>
+          <config-profile>ubuntu, ubuntu18, ubuntu18.04</config-profile>
+          <notify_time>10</notify_time>
+          <time-reconnect>60</time-reconnect>
+          <auto_restart>yes</auto_restart>
+          <crypto_method>aes</crypto_method>
+          <enrollment>
+          <agent_name>TEST_AGENT_1</agent_name>
+          </enrollment>    
+      </client>
 
 
 #. Start the Wazuh agent:
 
-.. code-block:: console
+    .. code-block:: console
 
-      # systemctl daemon-reload
-      # systemctl enable wazuh-agent
-      # systemctl start wazuh-agent
+          # systemctl daemon-reload
+          # systemctl enable wazuh-agent
+          # systemctl start wazuh-agent
 
 
 After following these steps, we can see the below logs on ``ossec.log`` confirming the enrollment was successful:
@@ -157,26 +157,27 @@ First, you get the token, then you change your credentials if necessary and requ
   root@ubuntu:/home/palacios/Workspace/Utils# curl -k -X GET "https://localhost:55000/agents?pretty=true&offset=1&limit=2&select=status%2Cid%2Cmanager%2Cname%2Cnode_name%2Cversion&status=active" -H "Authorization: Bearer $TOKEN"
 
 
-.. code-block:: console
+.. code-block:: none
+        :class: output
 
-  {
-   "data": {
-      "affected_items": [
-         {
-            "name": "TEST_AGENT_1",
-            "status": "active",
-            "node_name": "node01",
-            "version": "Wazuh v4.2.4",
-            "manager": "ubuntu",
-            "id": "001"
-         }
-      ],
-      "total_affected_items": 2,
-      "total_failed_items": 0,
-      "failed_items": []
-   },
-   "message": "All selected agents information was returned",
-   "error": 0
+        {
+        "data": {
+            "affected_items": [
+              {
+                  "name": "TEST_AGENT_1",
+                  "status": "active",
+                  "node_name": "node01",
+                  "version": "Wazuh v4.2.4",
+                  "manager": "ubuntu",
+                  "id": "001"
+              }
+            ],
+            "total_affected_items": 2,
+            "total_failed_items": 0,
+            "failed_items": []
+        },
+        "message": "All selected agents information was returned",
+        "error": 0
 
 Wazuh enrollment method highly reduces the burden of registering new agents with the manager. Jointly with deployment using variables, this setup can be performed in just three easy steps.
 
