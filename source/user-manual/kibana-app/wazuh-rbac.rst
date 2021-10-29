@@ -15,7 +15,7 @@ Learn how to create internal users and map them with Wazuh in the below sections
 - `Creating and setting a Wazuh admin user`_
 - `Creating and setting a Wazuh read-only user`_ 
 - `Creating an internal user and mapping it to Wazuh`_
-- `Use case: Give a user permissions to manage a group of agents`_
+- `Use case: Give a user permissions to read and manage a group of agents`_
 
 
 Creating and setting a Wazuh admin user
@@ -136,8 +136,8 @@ Follow these steps to create an internal user and map it to a role of your choic
 
 .. _wazuh-rbac-use-case-agents-group:
 
-Use case: Give a user permissions to manage a group of agents
--------------------------------------------------------------
+Use case: Give a user permissions to read and manage a group of agents
+-----------------------------------------------------------------------
 
 In this use case, we explore how to create an internal user and give it permissions to read and manage an agents group.
 
