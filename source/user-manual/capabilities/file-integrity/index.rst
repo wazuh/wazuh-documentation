@@ -7,7 +7,7 @@
 File integrity monitoring
 ==========================
 
-Wazuh's File integrity monitoring (FIM) system watches selected files and triggers alerts when these files are modified. The component responsible for this task is called ``syscheck``. This component stores the cryptographic checksum and other attributes of a known good file or Windows registry key and regularly compares it to the current file being used by the system, watching for changes.
+Wazuh File integrity monitoring (FIM) system watches selected files and triggers alerts when these files are modified. The component responsible for this task is called ``syscheck``. This component stores the cryptographic checksum and other attributes of files or Windows registry keys and regularly compares them with the current files being used by the system, watching for changes.
 
 .. topic:: Contents
 
