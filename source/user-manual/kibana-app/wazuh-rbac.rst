@@ -8,7 +8,7 @@
 Wazuh role-based access control
 ===============================
 
-Wazuh RBAC allows access to Wazuh resources based on the roles and policies assigned to the users. It is an easy-to-use administration system that enables to manage users or entities’ permissions to the system resources. To learn more, see the :ref:`Role-Based Access Control <api_rbac>` section. 
+Wazuh RBAC allows access to Wazuh resources based on the roles and policies assigned to the users. It is an easy-to-use administration system that enables to manage users' or entities' permissions to the system resources. To learn more, see the :ref:`Role-Based Access Control <api_rbac>` section. 
 
 Learn how to create internal users and map them with Wazuh in the below sections.
 
@@ -145,7 +145,7 @@ This process involves adding a label in the agent group's centralized configurat
 
 It also involves mapping this user with the Wazuh API, creating a custom policy that includes permissions to read, restart, upgrade, among other actions over a group of agents, and finally creating a custom role and mapping it to our internal user.
 
-As a final result we will have a new user with permission to manage a group of agents and read the documents regarding said group.
+As a final result, we will have a new user with permission to manage a group of agents and read the documents regarding said group.
 
 In this example, we have an environment with five agents. Agents **001**, **002**, and **005** belong to the ``Team_A`` group whereas agents **003**, **004**, and **005** belong to the ``Team_B`` group. To learn more on how to create agents groups see :ref:`Grouping agents <grouping-agents>`. We will describe how to create a new user and give it permissions to manage agents from ``Team_A``.
 
@@ -165,7 +165,7 @@ To prepare the environment, add a label in the ``Team_A`` centralized configurat
 
 #. Click **Wazuh** to open the Wazuh Kibana plugin menu, select **Management** and then **Groups** to open the page.
 
-#. Select your group, for example, ``Team_A`` and click it. 
+#. Select your group, for example, ``Team_A``.
 
 #. Select **Files** and click **Edit group configuration**. 
 
@@ -248,7 +248,7 @@ Follow these steps to create an internal user, create a custom role and map it t
           }          
             
 
-   #. Under **Tenant permissions** select **Tenant**: ``global_tenant`` and the **Read only** option.
+   #. Under **Tenant permissions**, select **Tenant**: ``global_tenant`` and the **Read only** option.
    #. Click **Create** to complete the task.    
    #. Select the **Mapped users** tab and click **Manage mapping**.
    #. Add the user you created in the previous steps and click **Map** to confirm the action.
