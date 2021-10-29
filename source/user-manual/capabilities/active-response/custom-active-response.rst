@@ -5,9 +5,28 @@
 Custom Active Response
 ======================
 
-It is possible to create a custom AR in any programming language and configure a :ref:`command <reference_ossec_commands>` and an :ref:`active response <reference_ossec_active_response>` to refer to it.
+A **custom active response** is a personalized script, configured to execute when a specific alert, alert level, or rule group has been triggered. It is possible to create a custom AR in any programming language and configure a :ref:`command <reference_ossec_commands>` and an :ref:`active response <reference_ossec_active_response>` to refer to it.
 
-The full alert is passed to the AR via ``STDIN`` within a JSON object and each AR is responsible for extracting the information necessary for its execution.
+- `Types of Active Responses`_
+- `Stateless Active Responses`_
+- `Stateful Active Responses`_
+- `Custom Active Responses Examples`_
+- `Custom Active Response Linux Example`_
+- `Custom Active Response Windows Example`_
+
+Types of Active Responses
+-------------------------
+
+Active response could be stateful or stateless.
+
+- ``Stateless``. Are configured as one-time actions without an event to revert the original effect.
+
+- ``Stateful``. Are configured to undo the action after a specified period of time.
+
+Stateless Active Responses
+--------------------------
+
+Stateless active responses is the simplest case, on Wazuh process, the full alert is passed to the AR via ``STDIN`` within a JSON object and each AR is responsible for extracting the information necessary for its execution.
 
 The JSON message format is as follows:
 
@@ -29,13 +48,13 @@ The JSON message format is as follows:
 
 The AR can be done in whatever language you are comfortable with, but it should at least be able to:
 
-1. Read ``STDIN`` to get the alert.
+#. Read ``STDIN`` to get the alert.
 
-2. Parse the read JSON object.
+#. Parse the read JSON object.
 
-3. Analyze the ``command`` field to check if it has to ``add`` the action or ``delete`` it.
+#. Analyze the ``command`` field to check if it has to ``add`` the action or ``delete`` it.
 
-4. Extract the necessary information for its execution.
+#. Extract the necessary information for its execution.
 
 Here is an example of the message with the full alert that is passed to the ``firewall-drop`` AR:
 
@@ -94,22 +113,28 @@ Here is an example of the message with the full alert that is passed to the ``fi
     }
   }
 
-Additional steps for a Stateful AR
-----------------------------------
+Stateful Active Responses
+-------------------------
 
-A ``Stateful`` AR will undo its original action after the period of time specified in the active response.
+A ``Stateful`` AR will undo its original action after the period of time specified in the active response. As part of the timeout behavior, when the received command is ``add`` the AR must execute following steps:
 
-As part of the timeout behavior, when the received command is ``add`` the AR must execute these additional steps:
+#. Read ``STDIN`` to get the alert.
 
-5. Build a control message with the **keys** extracted from the alert in JSON format.
+#. Parse the read JSON object.
 
-6. Write ``STDOUT`` to send the control message.
+#. Analyze the ``command`` field to check if it has to ``add`` the action or ``delete`` it.
 
-7. Wait for the response via ``STDIN``.
+#. Extract the necessary information for its execution.
 
-8. Parse the read JSON object.
+#. Build a control message with the **keys** extracted from the alert in JSON format.
 
-9. Analyze the ``command`` field to check if it has to ``continue`` the execution or ``abort`` it.
+#. Write ``STDOUT`` to send the control message.
+
+#. Wait for the response via ``STDIN``.
+
+#. Parse the read JSON object.
+
+#. Analyze the ``command`` field to check if it has to ``continue`` the execution or ``abort`` it.
 
 .. note::
 
@@ -149,40 +174,41 @@ The response message is a follows:
 
     When the ``STDIN`` reading occurs, it must be read up to the newline character (``\n``). In the same way, when writing to ``STDOUT`` the newline character must be added at the end, otherwise a deadlock may occur.
 
-Custom AR Example
------------------
+Custom Active Responses Examples
+--------------------------------
 
 This section provides an example AR Python script which can be used as a template to develop your own custom AR.
 
 It is possible to customize the behavior of the script by modifying 3 sections:
 
-1. **Start/End Custom Key**: Select the necessary parameters to use from the alert. ie: ``srcip`` to block that ip, ``processname`` to stop that process.
+- **Start/End Custom Key**: Select the necessary parameters to use from the alert. ie: ``srcip`` to block that ip, ``processname`` to stop that process.
 
-2. **Start/End Custom Action Add**: Execute the main action, calling a system function. ie: ``pkill <processname>``.
+- **Start/End Custom Action Add**: Execute the main action, calling a system function. ie: ``pkill <processname>``.
 
-3. **Start/End Custom Action Delete**: Execute the secondary action, usually as recovery section after a time period. ie: wait a period of time to unblock an ip after the main action has blocked it.
+- **Start/End Custom Action Delete**: Execute the secondary action, usually as recovery section after a time period. ie: wait a period of time to unblock an ip after the main action has blocked it.
 
 Active responses are either ``Stateful`` or ``Stateless``:
 
 - ``Stateful``: Are configured to undo the action after a specified period of time. Configuration needed for ``Stateful`` case:
 
-      a. Set Custom Key.
+      - Set Custom Key.
 
-      b. Set Custom Action Add.
+      - Set Custom Action Add.
 
-      c. Set Custom Action Delete.
+      - Set Custom Action Delete.
 
-      d. Set timeout option in the ``active-response`` section of the ``ossec.conf`` file.
+      - Set timeout option in the ``active-response`` section of the ``ossec.conf`` file.
 
 - ``Stateless``: Are configured as one-time actions without an event to reverse the original effect. Configuration needed for ``Stateless`` case:
 
-      a. Set Custom Key.
+      - Set Custom Key.
 
-      b. Set Custom Action Add.
+      - Set Custom Action Add.
 
-**Custom AR Linux Example**
+Custom Active Response Linux Example
+------------------------------------
 
-The following Python script runs on Linux. It creates a file with the rule id that triggered the AR and after 60 seconds it deletes the file.
+The following Python script creates a file with the rule id that triggered the AR and after 60 seconds it deletes the file.
 
 .. code-block:: Python
 
@@ -360,27 +386,27 @@ The following Python script runs on Linux. It creates a file with the rule id th
 
 In this case, the configurable sections contain:
 
-1. **Start/End Custom Key**: It tooks from the alert the rule id.
+- Start/End Custom Key: It tooks from the alert the rule id.
 
 .. code-block:: Python
 
     alert = msg.alert["parameters"]["alert"]
     keys = [alert["rule"]["id"]]
 
-2. **Start/End Custom Action Add**: It creates the ``ar-test-result.txt`` file with this content: "Active response triggered by rule ID: XXX".
+- Start/End Custom Action Add: It creates the ``ar-test-result.txt`` file with this content: "Active response triggered by rule ID: XXX".
 
 .. code-block:: Python
 
     with open("ar-test-result.txt", mode="a") as test_file:
         test_file.write("Active response triggered by rule ID: " + str(keys) + "\n")
 
-3. **Start/End Custom Action Delete**: It deletes the file once the timeout is triggered. The timeout action must be set in the ``active-response`` section of the ``ossec.conf`` file.
+- Start/End Custom Action Delete: It deletes the file once the timeout is triggered. The timeout action must be set in the ``active-response`` section of the ``ossec.conf`` file.
 
 .. code-block:: Python
 
     os.remove("ar-test-result.txt")
 
-4. Manager ``ossec.conf``: This example configuration is triggered by rule id 591, but it could be any other filter.
+- Manager ``ossec.conf``: This example configuration is triggered by rule id 591, but it could be any other filter.
 
 .. code-block:: xml
 
@@ -398,23 +424,27 @@ In this case, the configurable sections contain:
         <timeout>60</timeout>
     </active-response>
 
-**Custom AR Windows Example**
+Custom Active Response Windows Example
+--------------------------------------
 
-Windows AR doesn't reconize Python scripts. These are two options to overcome this issue:
+As Windows AR doesn't reconize Python scripts, these are two options to overcome this issue. First option is convert python scripts to executable application, and run a Python script through a Bash launcher is the second option.
+
+Convert Python Scripts to Executable Application
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 - The first option is to convert Python scripts into executable application. Use ``pyinstaller`` tool to convert Python script into executable files:
 
-    1. Install PyInstaller from PyPI.
+    #. Install PyInstaller from PyPI.
 
-    2. Move to ``C:\Program Files (x86)\ossec-agent\active-response\bin\`` and run:
+    #. Move to ``C:\Program Files (x86)\ossec-agent\active-response\bin\`` and run:
 
     .. code-block:: bash
 
         pyinstaller -F custom-ar.py
 
-    3. Move the ``custom-ar.exe`` file to ``C:\Program Files (x86)\ossec-agent\active-response\bin\``.
+    #. Move the ``custom-ar.exe`` file to ``C:\Program Files (x86)\ossec-agent\active-response\bin\``.
 
-    4. Update the manager ``ossec.conf`` with ``custom-ar.exe`` instead of ``custom-ar.py``:
+    #. Update the manager ``ossec.conf`` with ``custom-ar.exe`` instead of ``custom-ar.py``:
 
     .. code-block:: xml
 
@@ -424,9 +454,14 @@ Windows AR doesn't reconize Python scripts. These are two options to overcome th
             <timeout_allowed>yes</timeout_allowed>
         </command>
 
-- The second option is to run the Python script through a bash launcher. In this case, the AR script will call ``launcher.cmd`` and ``launcher.cmd`` will call ``custom-ar.py``.
+  Expected result is run an application instead a Python script when AR trigger.
 
-    1. Create a ``launcher.cmd`` file into ``C:\Program Files (x86)\ossec-agent\active-response\bin\`` with the following content:
+Run a Python Script Through a Bash Launcher
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- The second option is to run the Python script through a bash launcher. In this case, the AR script will call ``launcher.cmd`` and the last one will works as a bridge calling the ``custom-ar.py``.
+
+    #. Create a ``launcher.cmd`` file into ``C:\Program Files (x86)\ossec-agent\active-response\bin\`` with the following content:
 
     .. code-block:: console
 
@@ -516,9 +551,9 @@ Windows AR doesn't reconize Python scripts. These are two options to overcome th
         )
         exit /b
 
-    3. Move the ``custom-ar.py`` file to ``C:\Program Files (x86)\ossec-agent\active-response\bin\``.
+    #. Move the ``custom-ar.py`` file to ``C:\Program Files (x86)\ossec-agent\active-response\bin\``.
 
-    4. Update the manager ``ossec.conf``, ``launcher.cmd`` will look for the name of the Python script to run in the option ``extra_args``:
+    #. Update the manager ``ossec.conf``, ``launcher.cmd`` will look for the name of the Python script to run in the option ``extra_args``:
 
     .. code-block:: xml
 
@@ -537,6 +572,8 @@ Windows AR doesn't reconize Python scripts. These are two options to overcome th
             <timeout>60</timeout>
         </active-response>
 
-.. note::
+  .. note::
 
     The Python path must be included in the System user path. Look for it in the Windows ``Environment Variables``.
+
+  Expected result is run any windows script through ``launcher.cmd`` script, when AR is trigger.
