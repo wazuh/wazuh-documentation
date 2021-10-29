@@ -102,8 +102,7 @@ In the next example, we show how an Ubuntu Wazuh agent can be configured, regist
       <crypto_method>aes</crypto_method>
       <enrollment>
       <agent_name>TEST_AGENT_1</agent_name>
-      </enrollment>
-        
+      </enrollment>    
   </client>
 
 
