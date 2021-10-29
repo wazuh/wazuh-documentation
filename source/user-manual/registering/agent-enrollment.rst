@@ -24,7 +24,7 @@ By default, the agent runs the enrollment process with the settings below:
 
 - Same server address configured for reporting in the ``<client><server><address>`` section
 - Agent name extracted from the hostname of the operating system
-- Agents not assigned to groups
+- Agents are included in the default group
 - Registration without password nor certificate validation
 
 Additionally, every possible configuration available as options for ``agent-auth`` binary can be set in ``ossec.conf`` under the section ``<enrollment>``. Each time an agent enrolls, it uses this configuration to request the key.
@@ -58,19 +58,20 @@ Enrollment configuration block example
 --------------------------------------
 
 .. code-block:: xml
-
- <enrollment>
-  <enabled>yes</enabled>
-  <agent_name>EXAMPLE_NAME</agent_name>
-  <groups>GROUP1,GROUP2,GROUP3</groups>
-  <use_source_ip>yes</use_source_ip>
-  <authorization_pass_path>FILE_PATH</authorization_pass_path>
-  <server_ca_path>FILE_PATH<server_ca_path>
-  <agent_certificate_path>FILE_PATH<agent_certificate_path>
-  <agent_key_path>FILE_PATH<agent_key_path>
-  <delay_after_enrollment>15<delay_after_enrollment>
- </enrollment>
-
+  
+    <client>
+      <enrollment>
+        <enabled>yes</enabled>
+        <agent_name>EXAMPLE_NAME</agent_name>
+        <groups>GROUP1,GROUP2,GROUP3</groups>
+        <use_source_ip>yes</use_source_ip>
+        <authorization_pass_path>FILE_PATH</authorization_pass_path>
+        <server_ca_path>FILE_PATH<server_ca_path>
+        <agent_certificate_path>FILE_PATH<agent_certificate_path>
+        <agent_key_path>FILE_PATH<agent_key_path>
+        <delay_after_enrollment>15<delay_after_enrollment>
+      </enrollment>
+    </client>
  
  
 Use case example
@@ -179,6 +180,6 @@ First, you get the token, then you change your credentials if necessary and requ
         "message": "All selected agents information was returned",
         "error": 0
 
-Wazuh enrollment method highly reduces the burden of registering new agents with the manager. Jointly with deployment using variables, this setup can be performed in just three easy steps.
+`Wazuh enrollment method <https://documentation.wazuh.com/current/user-manual/reference/ossec-conf/client.html#enrollment>`_ highly reduces the burden of registering new agents with the manager. Jointly with deployment using variables, this setup can be performed in just three easy steps.
 
 This new feature reduces the setup times for our users, allowing them to have Wazuh ready and running on their environment sooner. In addition, this improvement provides a recovery mechanism that eliminates the risk of blocking the monitoring of massive agents in case the client keys get lost.
