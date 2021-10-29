@@ -80,23 +80,34 @@ Using variables allows us to fully automate the agent registration and configura
 In the next example, we show how an Ubuntu Wazuh agent can be configured, registered, and started with three simple steps:
 
 
-#. Add the Wazuh repository.
-
-    .. code-block:: console
-
-      # curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -
-      # echo "deb https://packages.wazuh.com/4.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
-      # apt-get update
-  
- 
-
-#. Deploy the Wazuh agent with manager IP defined.
+#. Deploy the Wazuh agent.
 
     .. code-block:: console  
 
-      # WAZUH_MANAGER="192.168.2.129" apt-get install wazuh-agent
-    
- 
+      # apt-get install wazuh-agent
+
+#. Edit ossec.conf with the manager IP and, optional, any desired enrollment configuration.
+i.e.:
+
+
+    .. code-block:: console  
+
+    <client>
+        <server>
+        <address>192.168.119.131</address>
+        <port>1514</port>
+        <protocol>tcp</protocol>
+        </server>
+        <config-profile>ubuntu, ubuntu18, ubuntu18.04</config-profile>
+        <notify_time>10</notify_time>
+        <time-reconnect>60</time-reconnect>
+        <auto_restart>yes</auto_restart>
+        <crypto_method>aes</crypto_method>
+    <enrollment>
+        <agent_name>TEST_AGENT_1</agent_name>
+    </enrollment>	
+    </client>
+
 
 #. Start the Wazuh agent.
 
@@ -106,21 +117,22 @@ In the next example, we show how an Ubuntu Wazuh agent can be configured, regist
       # systemctl enable wazuh-agent
       # systemctl start wazuh-agent
 
-After following these steps, we can see the below logs on ``ossec.log`` confirming the enrollment was successful.	
+After following these steps, we can see the below logs on ``ossec.log`` confirming the enrollment was successful.
 
-.. thumbnail:: ../../images/manual/managing-agents/log.png
-    :title: Log
-    :align: left
-    :width: 100%
+    .. code-block:: console
+       wazuh-agentd: INFO: (1410): Reading authentication keys file.
+       wazuh-agentd: INFO: Using notify time: 10 and max time to reconnect: 60
+       wazuh-agentd: INFO: Version detected -> Linux |ubuntu |5.3.0-28-generic |#30~18.04.1-Ubuntu SMP Fri Jan 17 06:14:09 UTC 2020 |x86_64 [Ubuntu|ubuntu: 18.04.4 LTS (Bionic Beaver)] - Wazuh v4.2.4
+       wazuh-agentd: INFO: Started (pid: 8082).
+       wazuh-agentd: INFO: Server IP Address: 192.168.119.131
+       wazuh-agentd: INFO: Requesting a key from server: 192.168.119.131
+       wazuh-agentd: INFO: No authentication password provided
+       wazuh-agentd: INFO: Using agent name as: TEST_AGENT_1
+       wazuh-agentd: INFO: Waiting for server reply
+       wazuh-agentd: INFO: Valid key received
+       wazuh-agentd: INFO: Waiting 20 seconds before server connection
 
-
-Moreover, ``client.keys`` can now contain the obtained key.
-
-.. thumbnail:: ../../images/manual/managing-agents/keys.png
-    :title: Keys
-    :align: left
-    :width: 100%
-
+      
 On the manager side, the agent can be found and appears with ``active`` status after a few seconds. Running the following command shows the new registered agent.
  
 .. code-block:: console
