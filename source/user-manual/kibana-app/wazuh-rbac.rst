@@ -151,7 +151,7 @@ In this example, we have an environment with five agents. Agents **001**, **002*
 
 
 .. thumbnail:: ../../images/kibana-app/rbac/environment.png
-    :title: Use case: Give a user permissions to manage a group of agents. Environment. 
+    :title: Use case: Give a user permissions to manage a group of agents - Environment
     :align: center
     :width: 100%
 
@@ -271,7 +271,7 @@ To map the user with Wazuh, follow these steps:
       - **Select an effect**: Select ``Allow``.  
        
        .. thumbnail:: ../../images/kibana-app/rbac/create_policy.png
-          :title: Creating a custom policy. 
+          :title: Creating a custom policy 
           :align: center
           :width: 100%
     
@@ -282,7 +282,7 @@ To map the user with Wazuh, follow these steps:
       - **Policies**: Select the policy created previously. 
     
        .. thumbnail:: ../../images/kibana-app/rbac/create_role.png
-          :title: Creating a custom role. 
+          :title: Creating a custom role 
           :align: center
           :width: 100%
 
@@ -295,7 +295,7 @@ To map the user with Wazuh, follow these steps:
       - **Internal users**: Select the internal user created previously.
 
        .. thumbnail:: ../../images/kibana-app/rbac/create_new_role_mapping.png
-          :title: Creating a new role mapping. 
+          :title: Creating a new role mapping 
           :align: center
           :width: 100%
   
@@ -307,7 +307,7 @@ You have now created a new internal user and mapped it to manage a Wazuh agents 
 
 
 .. thumbnail:: ../../images/kibana-app/rbac/team_A_agents.png
-    :title: New user's environment. Only information regarding Team_A agents is displayed. 
+    :title: New user's environment - Only information regarding Team_A agents is displayed 
     :align: center
     :width: 100%
 
