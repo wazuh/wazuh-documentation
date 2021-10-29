@@ -159,24 +159,25 @@ First, you get the token, then you change your credentials if necessary and requ
 
 
 .. code-block:: console
+
   {
-    "data": {
-        "affected_items": [
-          {
-              "name": "TEST_AGENT_1",
-              "status": "active",
-              "node_name": "node01",
-              "version": "Wazuh v4.2.4",
-              "manager": "ubuntu",
-              "id": "001"
-          }
-        ],
-        "total_affected_items": 2,
-        "total_failed_items": 0,
-        "failed_items": []
-    },
-    "message": "All selected agents information was returned",
-    "error": 0
+   "data": {
+      "affected_items": [
+         {
+            "name": "TEST_AGENT_1",
+            "status": "active",
+            "node_name": "node01",
+            "version": "Wazuh v4.2.4",
+            "manager": "ubuntu",
+            "id": "001"
+         }
+      ],
+      "total_affected_items": 2,
+      "total_failed_items": 0,
+      "failed_items": []
+   },
+   "message": "All selected agents information was returned",
+   "error": 0
 
 Wazuh enrollment method highly reduces the burden of registering new agents with the manager. Jointly with deployment using variables, this setup can be performed in just three easy steps.
 
