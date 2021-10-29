@@ -1,5 +1,8 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: The Wazuh Syscollector module is in charge of collecting system information and store it into an SQLite database for each agent on the manager side.
+  
 .. _syscollector:
 
 System inventory
@@ -28,8 +31,8 @@ As mentioned above, the main purpose of this module is to gather the most releva
 
 Once the agent starts, `Syscollector` runs periodically scans of defined targets (hardware, OS, packages, etc.), forwarding the new collected data to the manager, which updates the appropriate tables of the database.
 
-The agent's inventory is gathered for different goals. The entire inventory can be found at the `inventory` tab of the Wazuh APP for each agent, by querying the API to retrieve the data from the DB. Also the `Dev tools` tab is available,
-with this feature the API can be directly queried about the different scans being able to filter by any desired field.
+The agent's inventory is gathered for different goals. The entire inventory can be found at the `inventory` tab of the Wazuh APP for each agent, by querying the Wazuh API to retrieve the data from the DB. Also the `Dev tools` tab is available,
+with this feature the Wazuh API can be directly queried about the different scans being able to filter by any desired field.
 
 In addition, the packages and hotfixes inventory is used as feed for the :doc:`Vulnerability detector module<./vulnerability-detection/index>`.
 
@@ -49,27 +52,29 @@ Hardware
 
 Retrieve basic information about the hardware components of a system.
 
-+------------------+-----------------------------+-------------------------------------------+-------------------+
-| Field            | Description                 | Example                                   | Available         |
-+==================+=============================+===========================================+===================+
-| **scan_id**      | Scan identifier             | 573872577                                 | All               |
-+------------------+-----------------------------+-------------------------------------------+-------------------+
-| **scan_time**    | Scan date                   | 2018/07/31 15:31:26                       | All               |
-+------------------+-----------------------------+-------------------------------------------+-------------------+
-| **board_serial** | Motherboard serial number   | XDR840TUGM65E03171                        | All               |
-+------------------+-----------------------------+-------------------------------------------+-------------------+
-| **cpu_name**     | CPU name                    | Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz | All               |
-+------------------+-----------------------------+-------------------------------------------+-------------------+
-| **cpu_cores**    | Number of cores of the CPU  | 4                                         | All               |
-+------------------+-----------------------------+-------------------------------------------+-------------------+
-| **cpu_mhz**      | Current processor frequency | 900.106                                   | All               |
-+------------------+-----------------------------+-------------------------------------------+-------------------+
-| **ram_total**    | Total RAM (KB)              | 16374572                                  | All               |
-+------------------+-----------------------------+-------------------------------------------+-------------------+
-| **ram_free**     | Free RAM (KB)               | 2111928                                   | All               |
-+------------------+-----------------------------+-------------------------------------------+-------------------+
-| **ram_usage**    | Percentage of RAM in use    | 87                                        | All               |
-+------------------+-----------------------------+-------------------------------------------+-------------------+
++------------------+---------------------------------+-------------------------------------------+-------------------+
+| Field            | Description                     | Example                                   | Available         |
++==================+=================================+===========================================+===================+
+| **scan_id**      | Scan identifier                 | 573872577                                 | All               |
++------------------+---------------------------------+-------------------------------------------+-------------------+
+| **scan_time**    | Scan date                       | 2018/07/31 15:31:26                       | All               |
++------------------+---------------------------------+-------------------------------------------+-------------------+
+| **board_serial** | Motherboard serial number       | XDR840TUGM65E03171                        | All               |
++------------------+---------------------------------+-------------------------------------------+-------------------+
+| **cpu_name**     | CPU name                        | Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz | All               |
++------------------+---------------------------------+-------------------------------------------+-------------------+
+| **cpu_cores**    | Number of cores of the CPU      | 4                                         | All               |
++------------------+---------------------------------+-------------------------------------------+-------------------+
+| **cpu_mhz**      | Current processor frequency     | 900.106                                   | All               |
++------------------+---------------------------------+-------------------------------------------+-------------------+
+| **ram_total**    | Total RAM (KB)                  | 16374572                                  | All               |
++------------------+---------------------------------+-------------------------------------------+-------------------+
+| **ram_free**     | Free RAM (KB)                   | 2111928                                   | All               |
++------------------+---------------------------------+-------------------------------------------+-------------------+
+| **ram_usage**    | Percentage of RAM in use        | 87                                        | All               |
++------------------+---------------------------------+-------------------------------------------+-------------------+
+| **checksum**     | Integrity synchronization value | 503709147600c8e0023cf2b9995772280eee30    | All               |
++------------------+---------------------------------+-------------------------------------------+-------------------+
 
 .. _syscollector_system:
 
@@ -80,39 +85,43 @@ Operating system
 
 Retrieve basic information about the operating system.
 
-+------------------+-------------------------+-----------------------------------------------------+-------------------+
-| Field            | Description             | Example                                             | Available         |
-+==================+=========================+=====================================================+===================+
-| **scan_id**      | Scan identifier         | 468455719                                           | All               |
-+------------------+-------------------------+-----------------------------------------------------+-------------------+
-| **scan_time**    | Scan date               | 2018/07/31 15:31:26                                 | All               |
-+------------------+-------------------------+-----------------------------------------------------+-------------------+
-| **hostname**     | Hostname of the machine | ag-ubuntu-16                                        | All               |
-+------------------+-------------------------+-----------------------------------------------------+-------------------+
-| **architecture** | OS architecture         | x86_64                                              | All               |
-+------------------+-------------------------+-----------------------------------------------------+-------------------+
-| **os_name**      | OS name                 | Ubuntu                                              | All               |
-+------------------+-------------------------+-----------------------------------------------------+-------------------+
-| **os_version**   | OS version              | 16.04.5 LTS (Xenial Xerus)                          | All               |
-+------------------+-------------------------+-----------------------------------------------------+-------------------+
-| **os_codename**  | OS version codename     | Xenial Xerus                                        | All               |
-+------------------+-------------------------+-----------------------------------------------------+-------------------+
-| **os_major**     | Major release version   | 16                                                  | All               |
-+------------------+-------------------------+-----------------------------------------------------+-------------------+
-| **os_minor**     | Minor release version   | 04                                                  | All               |
-+------------------+-------------------------+-----------------------------------------------------+-------------------+
-| **os_build**     | Optional build-specific | 14393                                               | Windows           |
-+------------------+-------------------------+-----------------------------------------------------+-------------------+
-| **os_release**   | Windows Release ID      | SP2                                                 | Windows           |
-+------------------+-------------------------+-----------------------------------------------------+-------------------+
-| **os_platform**  | OS platform             | ubuntu                                              | All               |
-+------------------+-------------------------+-----------------------------------------------------+-------------------+
-| **sysname**      | System name             | Linux                                               | Linux             |
-+------------------+-------------------------+-----------------------------------------------------+-------------------+
-| **release**      | Release name            | 4.15.0-29-generic                                   | Linux             |
-+------------------+-------------------------+-----------------------------------------------------+-------------------+
-| **version**      | Release version         | #31~16.04.1-Ubuntu SMP Wed Jul 18 08:54:04 UTC 2018 | All               |
-+------------------+-------------------------+-----------------------------------------------------+-------------------+
++------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| Field            | Description                     | Example                                             | Available         |
++==================+=================================+=====================================================+===================+
+| **scan_id**      | Scan identifier                 | 468455719                                           | All               |
++------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **scan_time**    | Scan date                       | 2018/07/31 15:31:26                                 | All               |
++------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **hostname**     | Hostname of the machine         | ag-ubuntu-16                                        | All               |
++------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **architecture** | OS architecture                 | x86_64                                              | All               |
++------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **os_name**      | OS name                         | Ubuntu                                              | All               |
++------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **os_version**   | OS version                      | 16.04.5 LTS (Xenial Xerus)                          | All               |
++------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **os_codename**  | OS version codename             | Xenial Xerus                                        | All               |
++------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **os_major**     | Major release version           | 16                                                  | All               |
++------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **os_minor**     | Minor release version           | 04                                                  | All               |
++------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **os_patch**     | Patch release version           | 5                                                   | MacOS             |
++------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **os_build**     | Optional build-specific         | 14393                                               | Windows           |
++------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **os_release**   | Windows Release ID              | SP2                                                 | Windows           |
++------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **os_platform**  | OS platform                     | ubuntu                                              | All               |
++------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **sysname**      | System name                     | Linux                                               | Linux             |
++------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **release**      | Release name                    | 4.15.0-29-generic                                   | Linux             |
++------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **version**      | Release version                 | #31~16.04.1-Ubuntu SMP Wed Jul 18 08:54:04 UTC 2018 | All               |
++------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **checksum**     | Integrity synchronization value | 503709147600c8e0023cf2b9995772280eee30              | All               |
++------------------+---------------------------------+-----------------------------------------------------+-------------------+
 
 .. _syscollector_packages:
 
@@ -156,6 +165,10 @@ The current packages inventory of each Wazuh agent. On Linux systems, retrieved 
 +------------------+----------------------------------------+---------------------------------------------------+-------------------+
 | **location**     | Location of the package                | C:\\Program Files\\VMware\\VMware Tools\\         | win/pkg           |
 +------------------+----------------------------------------+---------------------------------------------------+-------------------+
+| **checksum**     | Integrity synchronization value        | 78503709147600c8e0023cf2b9995772280eee30          | All               |
++------------------+----------------------------------------+---------------------------------------------------+-------------------+
+| **item_id**      | Unified primary key                    | 4323709147600c8e0023cf2b9995772280eef451          | All               |
++------------------+----------------------------------------+---------------------------------------------------+-------------------+
 
 .. _syscollector_interfaces:
 
@@ -169,43 +182,48 @@ it is composed of three tables to ensure that the information is as structured a
 
 - `sys_netiface` table
 
-+------------------+------------------------------+-----------------------------------------------------+-------------------+
-| Field            | Description                  | Example                                             | Available         |
-+==================+==============================+=====================================================+===================+
-| **id**           | Id                           | 1                                                   | All               |
-+------------------+------------------------------+-----------------------------------------------------+-------------------+
-| **scan_id**      | Scan identifier              | 160615720                                           | All               |
-+------------------+------------------------------+-----------------------------------------------------+-------------------+
-| **scan_time**    | Scan date                    | 2018/07/31 16:46:20                                 | All               |
-+------------------+------------------------------+-----------------------------------------------------+-------------------+
-| **name**         | Interface name               | eth0                                                | All               |
-+------------------+------------------------------+-----------------------------------------------------+-------------------+
-| **adapter**      | Physical adapter name        | Intel(R) PRO/1000 MT Desktop Adapter                | Windows           |
-+------------------+------------------------------+-----------------------------------------------------+-------------------+
-| **type**         | Network adapter              | ethernet                                            | All               |
-+------------------+------------------------------+-----------------------------------------------------+-------------------+
-| **state**        | State of the interface       | up                                                  | All               |
-+------------------+------------------------------+-----------------------------------------------------+-------------------+
-| **mtu**          | Maximum Transmission Unit    | 1500                                                | All               |
-+------------------+------------------------------+-----------------------------------------------------+-------------------+
-| **mac**          | MAC Address                  | 08:00:27:C0:14:A5                                   | All               |
-+------------------+------------------------------+-----------------------------------------------------+-------------------+
-| **tx_packets**   | Transmitted packets          | 30279                                               | All               |
-+------------------+------------------------------+-----------------------------------------------------+-------------------+
-| **rx_packets**   | Received packets             | 12754                                               | All               |
-+------------------+------------------------------+-----------------------------------------------------+-------------------+
-| **tx_bytes**     | Transmitted bytes            | 10034626                                            | All               |
-+------------------+------------------------------+-----------------------------------------------------+-------------------+
-| **rx_bytes**     | Received bytes               | 1111175                                             | All               |
-+------------------+------------------------------+-----------------------------------------------------+-------------------+
-| **tx_errors**    | Transmission errors          | 0                                                   | All               |
-+------------------+------------------------------+-----------------------------------------------------+-------------------+
-| **rx_errors**    | Reception errors             | 0                                                   | All               |
-+------------------+------------------------------+-----------------------------------------------------+-------------------+
-| **tx_dropped**   | Dropped transmission packets | 0                                                   | All               |
-+------------------+------------------------------+-----------------------------------------------------+-------------------+
-| **rx_dropped**   | Dropped reception packets    | 0                                                   | All               |
-+------------------+------------------------------+-----------------------------------------------------+-------------------+
++------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| Field            | Description                     | Example                                             | Available         |
++==================+=================================+=====================================================+===================+
+| **id**           | Id                              | 1                                                   | All               |
++------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **scan_id**      | Scan identifier                 | 160615720                                           | All               |
++------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **scan_time**    | Scan date                       | 2018/07/31 16:46:20                                 | All               |
++------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **name**         | Interface name                  | eth0                                                | All               |
++------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **adapter**      | Physical adapter name           | Intel(R) PRO/1000 MT Desktop Adapter                | Windows           |
++------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **type**         | Network adapter                 | ethernet                                            | All               |
++------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **state**        | State of the interface          | up                                                  | All               |
++------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **mtu**          | Maximum Transmission Unit       | 1500                                                | All               |
++------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **mac**          | MAC Address                     | 08:00:27:C0:14:A5                                   | All               |
++------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **tx_packets**   | Transmitted packets             | 30279                                               | All               |
++------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **rx_packets**   | Received packets                | 12754                                               | All               |
++------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **tx_bytes**     | Transmitted bytes               | 10034626                                            | All               |
++------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **rx_bytes**     | Received bytes                  | 1111175                                             | All               |
++------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **tx_errors**    | Transmission errors             | 0                                                   | All               |
++------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **rx_errors**    | Reception errors                | 0                                                   | All               |
++------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **tx_dropped**   | Dropped transmission packets    | 0                                                   | All               |
++------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **rx_dropped**   | Dropped reception packets       | 0                                                   | All               |
++------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **checksum**     | Integrity synchronization value | 8503709147600c8e0023cf2b9995772280eee30             | All               |
++------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **item_id**      | Unified primary key             | 4323709147600c8e0023cf2b9995772280eef41             | All               |
++------------------+---------------------------------+-----------------------------------------------------+-------------------+
+
 
 .. _syscollector_netaddr:
 
@@ -228,6 +246,10 @@ Referencing interfaces described at `sys_netiface`, this table shows the IPv4 an
 +------------------+---------------------------------+-----------------------------------------------------+-------------------+
 | **broadcast**    | Broadcast address               | 192.168.1.255                                       | All               |
 +------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **checksum**     | Integrity synchronization value | 78503709147600c8e0023cf2b9995772280eee30            | All               |
++------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **item_id**      | Unified primary key             | 4323709147600c8e0023cf2b9995772280eef4              | All               |
++------------------+---------------------------------+-----------------------------------------------------+-------------------+
 
 .. _syscollector_netproto:
 
@@ -249,6 +271,10 @@ Referencing interfaces described at `sys_netiface`, this table shows the routing
 | **gateway**      | Default gateway                 | 192.168.1.1                                         | Linux/Windows/macOS |
 +------------------+---------------------------------+-----------------------------------------------------+---------------------+
 | **dhcp**         | DHCP status                     | enabled                                             | Linux/Windows       |
++------------------+---------------------------------+-----------------------------------------------------+---------------------+
+| **checksum**     | Integrity synchronization value | 78503709147600c8e0023cf2b9995772280eee30            | All                 |
++------------------+---------------------------------+-----------------------------------------------------+---------------------+
+| **item_id**      | Unified primary key             | 4323709147600c8e0023cf2b9995772280eef4              | All                 |
 +------------------+---------------------------------+-----------------------------------------------------+---------------------+
 
 .. _syscollector_ports:
@@ -288,6 +314,10 @@ List the opened ports of a system.
 | **PID**          | PID owner of the opened port           | 4                                                 | Windows/macOS     |
 +------------------+----------------------------------------+---------------------------------------------------+-------------------+
 | **process**      | Name of the PID                        | System                                            | Windows/macOS     |
++------------------+----------------------------------------+---------------------------------------------------+-------------------+
+| **checksum**     | Integrity synchronization value        | 78503709147600c8e0023cf2b9995772280eee30          | All               |
++------------------+----------------------------------------+---------------------------------------------------+-------------------+
+| **item_id**      | Unified primary key                    | 4323709147600c8e0023cf2b9995772280eef412          | All               |
 +------------------+----------------------------------------+---------------------------------------------------+-------------------+
 
 .. _syscollector_processes:
@@ -362,6 +392,8 @@ List the current processes running in a system host.
 +-----------------+----------------------------------------+---------------------------------------------------+-------------------+
 | **processor**   | Number of the processor                | 0                                                 | Linux             |
 +-----------------+----------------------------------------+---------------------------------------------------+-------------------+
+| **checksum**    | Integrity synchronization value        | 78503709147600c8e0023cf2b9995772280eee30          | All               |
++-----------------+----------------------------------------+---------------------------------------------------+-------------------+
 
 .. _syscollector_hotfixes:
 
@@ -372,15 +404,17 @@ Windows updates
 
 List the Windows updates installed on Windows agents, also known as hotfixes. They are used as feed for the Vulnerability detector to find out Windows vulnerabilities.
 
-+------------------+----------------------------------------+--------------------------------+-------------------+
-| Field            | Description                            | Example                        | Available         |
-+==================+========================================+================================+===================+
-| **scan_id**      | Scan identifier                        | 1618114744                     | Windows           |
-+------------------+----------------------------------------+--------------------------------+-------------------+
-| **scan_time**    | Scan date                              | 2019/08/22 07:27:15            | Windows           |
-+------------------+----------------------------------------+--------------------------------+-------------------+
-| **hotfix**       | Windows update ID                      | KB4489899                      | Windows           |
-+------------------+----------------------------------------+--------------------------------+-------------------+
++------------------+----------------------------------------+------------------------------------------+-------------------+
+| Field            | Description                            | Example                                  | Available         |
++==================+========================================+==========================================+===================+
+| **scan_id**      | Scan identifier                        | 1618114744                               | Windows           |
++------------------+----------------------------------------+------------------------------------------+-------------------+
+| **scan_time**    | Scan date                              | 2019/08/22 07:27:15                      | Windows           |
++------------------+----------------------------------------+------------------------------------------+-------------------+
+| **hotfix**       | Windows update ID                      | KB4489899                                | Windows           |
++------------------+----------------------------------------+------------------------------------------+-------------------+
+| **checksum**     | Integrity synchronization value        | 78503709147600c8e0023cf2b9995772280eee30 | Windows           |
++------------------+----------------------------------------+------------------------------------------+-------------------+
 
 Compatibility matrix
 --------------------
@@ -406,13 +440,15 @@ The following table shows the operating systems that this module currently suppo
 Using Syscollector information to trigger alerts
 ------------------------------------------------
 
-  Since Wazuh 3.9 version, ``Syscollector`` module information can be used to trigger alerts and show that information in the alerts' description.
+.. note:: This capability is not available in Wazuh 4.2 but will be included in a future version. 
 
-  To allow this configuration, in a rule declaration set the ``<decoded_as>`` field as **syscollector**.
+Since Wazuh 3.9 version, ``Syscollector`` module information can be used to trigger alerts and show that information in the alerts' description.
 
-  As an example, this rule will be triggered when the interface ``eth0`` of an agent is enabled and will show what IPv4 has that interface.
+To allow this configuration, in a rule declaration set the ``<decoded_as>`` field as **syscollector**.
 
-  .. code-block:: xml
+As an example, this rule will be triggered when the interface ``eth0`` of an agent is enabled and will show what IPv4 has that interface.
+
+.. code-block:: xml
 
     <rule id="100001" level="5">
       <if_sid>221</if_sid>
@@ -421,11 +457,11 @@ Using Syscollector information to trigger alerts
       <description>eth0 interface enabled. IP: $(netinfo.iface.ipv4.address)</description>
     </rule>
 
-  .. warning::
+.. warning::
 
     The tag ``<if_sid>221</if_sid>`` is necessary because the events from Syscollector are muted by default with that rule.
 
-  When the alerts are triggered they will be displayed in Kibana this way:
+When the alerts are triggered they will be displayed in Kibana this way:
 
     .. thumbnail:: ../../images/manual/internal-capabilities/syscollector_alerts.png
       :title: Information from syscollector for "port" value.
@@ -475,6 +511,11 @@ The Syscollector module is enabled by default in all compatible systems includin
     <packages>yes</packages>
     <ports all="no">yes</ports>
     <processes>yes</processes>
+
+    <!-- Database synchronization settings -->
+    <synchronization>
+      <max_eps>10</max_eps>
+    </synchronization>
   </wodle>
 
 Once the module starts, it will run periodically scans and send the new data in JSON events format to the manager, where it will be decoded and stored into a particular database
@@ -505,37 +546,38 @@ The current inventory can be consulted in different ways. Let's see an example q
 
   696614220|2018/08/06 02:07:30|deb|wazuh-agent|extra|admin|105546|Wazuh, Inc <support@wazuh.com>||3.5.0-1|amd64|||Wazuh helps you to gain security visibility into your infrastructure by monitoring hosts at an operating system and application level. It provides the following capabilities: log analysis, file integrity monitoring, intrusions detection and policy and compliance monitoring||0
 
-- By querying the API, which retrieves nested data in JSON format.
+- By querying the Wazuh API endpoint :api-ref:`GET /syscollector/{agent_id}/packages <operation/api.controllers.syscollector_controller.get_packages_info>`, which retrieves nested data in JSON format.
 
 .. code-block:: console
 
-  # curl -u foo:bar -X GET "http://localhost:55000/syscollector/003/packages?pretty&name=wazuh-agent"
+  # curl -k -X GET "https://localhost:55000/syscollector/003/packages?pretty=true&name=wazuh-agent" -H  "Authorization: Bearer $TOKEN"
 
 .. code-block:: json
   :class: output
 
   {
-   "error": 0,
-   "data": {
-      "totalItems": 1,
-      "items": [
-         {
-            "vendor": "Wazuh, Inc <support@wazuh.com>",
-            "description": "Wazuh helps you to gain security visibility into your infrastructure by monitoring hosts at an operating system and application level. It provides the following capabilities: log analysis, file integrity monitoring, intrusions detection and policy and compliance monitoring",
-            "scan": {
-               "id": 696614220,
-               "time": "2018/08/06 02:07:30"
-            },
-            "section": "admin",
-            "format": "deb",
-            "name": "wazuh-agent",
-            "priority": "extra",
-            "version": "3.5.0-1",
-            "architecture": "amd64",
-            "size": 105546
-         }
-      ]
-   }
+      "data": {
+          "affected_items": [
+              {
+                  "vendor": "Wazuh, Inc <support@wazuh.com>",
+                  "description": "Wazuh helps you to gain security visibility into your infrastructure by monitoring hosts at an operating system and application level. It provides the following capabilities: log analysis, file integrity monitoring, intrusions detection and policy and compliance monitoring",
+                  "scan": {"id": 696614220, "time": "2018/08/06 02:07:30"},
+                  "section": "admin",
+                  "format": "deb",
+                  "name": "wazuh-agent",
+                  "priority": "extra",
+                  "version": "3.5.0-1",
+                  "architecture": "amd64",
+                  "size": 105546,
+                  "agent_id": "003",
+              }
+          ],
+          "total_affected_items": 1,
+          "total_failed_items": 0,
+          "failed_items": [],
+      },
+      "message": "All specified syscollector information was returned",
+      "error": 0,
   }
 
 Moreover, the same information can be consulted at the Wazuh app, which includes an `Inventory` tab for each agent. For now, there are available OS, hardware and packages inventories at this tab, which looks like the following screenshot:
@@ -545,7 +587,7 @@ Moreover, the same information can be consulted at the Wazuh app, which includes
     :align: center
     :width: 100%
 
-The *Dev tools* tab is also available to query the API directly from the Wazuh app as shown below:
+The *Dev tools* tab is also available to query the Wazuh API directly from the Wazuh app as shown below:
 
 .. thumbnail:: ../../images/manual/devtools-syscollector.png
     :title: Dev tools tab

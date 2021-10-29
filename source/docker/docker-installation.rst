@@ -1,5 +1,7 @@
-.. Copyright (C) 2020 Wazuh, Inc.
-
+.. Copyright (C) 2021 Wazuh, Inc.
+.. meta::
+  :description: Check out this section of the Wazuh documentation to learn about Docker installation: how to install the Docker engine and the Docker compose. 
+  
 .. _docker-installation:
 
 Docker installation
@@ -58,7 +60,7 @@ Docker Compose 1.6 or newer is required. Follow these steps to install it:
 
     .. code-block:: console
 
-      # curl -L "https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+      # curl -L "https://github.com/docker/compose/releases/download/|DOCKER_COMPOSE_VERSION|/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 
 2. Grant execution permissions:
 
@@ -83,8 +85,8 @@ Docker Compose 1.6 or newer is required. Follow these steps to install it:
 
     .. code-block:: none
       :class: output
-    
-      docker-compose version 1.23.1, build b02f1306
+
+      docker-compose version |DOCKER_COMPOSE_VERSION|
 
     .. note::
 

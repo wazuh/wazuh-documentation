@@ -1,5 +1,8 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+    :description: Learn more about the agent management in Wazuh. In this section, we will show you how to group agents and how to manage multiple groups. 
+    
 .. _grouping-agents:
 
 Grouping agents
@@ -12,12 +15,12 @@ the :doc:`centralized configuration <../reference/centralized-configuration>`. I
 
 .. note:: Read the `Agent groups and centralized configuration <https://wazuh.com/blog/agent-groups-and-centralized-configuration//>`_ document for more information.
 
-Unless otherwise assigned, all new agents automatically belong to the **'default'** group. This group is created during the installation process with the configuration files placed in the ``/var/ossec/etc/shared/default/`` folder. These files will be pushed from the manager to all agents belonging to this group.
+Unless otherwise assigned, all new connected agents automatically belong to the **'default'** group. This group is created during the installation process with the configuration files placed in the ``/var/ossec/etc/shared/default/`` folder. These files will be pushed from the manager to all agents belonging to this group.
 
 Below are the steps to assign agents to a group with a specific configuration:
 
-1. Once an agent has been added to the manager, assign it to a group using the :doc:`agent_groups <../reference/tools/agent_groups>` tool or the
-   :doc:`Wazuh API <../api/index>`.  Below are examples of how to assign an agent with ID 002 to the group *'dbms'* using these methods:
+1. Once an agent has been added and connected to the manager, assign it to a group using the :doc:`agent_groups <../reference/tools/agent_groups>` tool or the
+   Wazuh API. Below are examples of how to assign an agent with ID 002 to the group *'dbms'* using these methods:
 
    Using **agent_groups**:
 
@@ -30,11 +33,25 @@ Below are the steps to assign agents to a group with a specific configuration:
 
       # /var/ossec/bin/agent_groups -a -i 002 -g dbms
 
-   Using the **Wazuh API**:
+   Using the **Wazuh API** endpoint :api-ref:`PUT /agents/{agent_id}/group/{group_id} <operation/api.controllers.agent_controller.put_agent_single_group>`:
 
    .. code-block:: console
 
-      # curl -u foo:bar -X PUT "http://localhost:55000/agents/002/group/dbms?pretty"
+      # curl -k -X PUT "https://localhost:55000/agents/002/group/dbms?pretty=true" -H  "Authorization: Bearer $TOKEN"
+
+   .. code-block:: json
+        :class: output
+
+        {
+            "data": {
+                "affected_items": ["002"],
+                "total_affected_items": 1,
+                "total_failed_items": 0,
+                "failed_items": [],
+            },
+            "message": "All selected agents were assigned to dbms",
+            "error": 0,
+        }
 
    An agent's group assignment can be checked using one of the following commands:
 
@@ -54,12 +71,31 @@ Below are the steps to assign agents to a group with a specific configuration:
           ID: 005  Name: agent-dbms-a2.
           ID: 006  Name: agent-dbms-a3.
 
-   Using the **API**:
+   Using the **Wazuh API** endpoint :api-ref:`GET /groups/{group_id}/agents <operation/api.controllers.agent_controller.get_agents_in_group>`:
 
    .. code-block:: console
 
-      # curl -u foo:bar -X GET "http://localhost:55000/agents/groups/dbms?pretty"
+      # curl -k -X GET "https://localhost:55000/groups/dbms/agents?pretty=true&select=id,name" -H  "Authorization: Bearer $TOKEN"
 
+   .. code-block:: json
+        :class: output
+
+        {
+            "data": {
+                "affected_items": [
+                    {"name": "agent-dbms-e1", "id": "002"},
+                    {"name": "agent-dbms-e2", "id": "003"},
+                    {"name": "agent-dbms-a1", "id": "004"},
+                    {"name": "agent-dbms-a2", "id": "005"},
+                    {"name": "agent-dbms-a3", "id": "006"},
+                ],
+                "total_affected_items": 5,
+                "total_failed_items": 0,
+                "failed_items": [],
+            },
+            "message": "All selected agents information was returned",
+            "error": 0,
+        }
 
 2. Once a group is created, its ``agent.conf`` file can be edited to include the specific configuration you wish to assign to this group. For this example, the file to be edited is located at ``/var/ossec/etc/shared/dbms/agent.conf`` and each agent belonging to this group will receive this file.
 
@@ -94,72 +130,62 @@ Assigning multiple groups to an agent
 
 Setting multiple groups to an agent is simple, there are three different ways to assign an agent to one or more groups: Registration, CLI and API.
 
-In this example, the agent 001 has been added to `webserver` and `apache` groups. First of all, using the **Wazuh API**:
+In this example, the agent 001 has been added to `webserver` and `apache` groups. First of all, using the **Wazuh API** endpoint :api-ref:`PUT /agents/{agent_id}/group/{group_id} <operation/api.controllers.agent_controller.put_agent_single_group>`:
 
     .. code-block:: console
 
-        # curl -u foo:bar -X PUT "http://localhost:55000/agents/001/group/webserver?pretty"
+        # curl -k -X PUT "https://localhost:55000/agents/001/group/webserver?pretty=true" -H  "Authorization: Bearer $TOKEN"
 
     .. code-block:: json
         :class: output
 
         {
-            "error": 0,
-            "data": "Group 'webserver' added to agent '001'."
-        }
-
-    .. code-block:: console
-
-        # curl -u foo:bar -X PUT "http://localhost:55000/agents/001/group/apache?pretty"
-
-    .. code-block:: json
-        :class: output
-
-        {
-            "error": 0,
-            "data": "Group 'apache' added to agent '001'."
-        }
-
-After that, we can ask the **API** about groups which an agent belongs:
-
-    .. code-block:: console
-
-        # curl -u foo:bar -X GET "http://localhost:55000/agents/001?pretty"
-
-    .. code-block:: json
-        :emphasize-lines: 6,7,8,9,10
-        :class: output
-
-        {
-            "error": 0,
             "data": {
-                "status": "Active",
-                "configSum": "f993610d3e6d7bfd7c008b4fb6deb8a5",
-                "group": [
-                    "default",
-                    "webserver",
-                    "apache"
-                ],
-                "name": "ag-windows-12",
-                "internal_key": "fd2fdb0e97895d6d8a8529685d043c14dfeb386359bb46ac2ed70c68ffeb1b55",
-                "mergedSum": "b7fbc0c6db018a8347aa60803777f780",
-                "ip": "192.168.1.82",
-                "dateAdd": "2018-10-02 02:54:28",
-                "node_name": "node01",
-                "manager": "ubuntu",
-                "version": "Wazuh v3.7.0",
-                "lastKeepAlive": "2018-10-02 03:05:32",
-                "os": {
-                    "major": "6",
-                    "name": "Microsoft Windows Server 2012 R2 Standard",
-                    "uname": "Microsoft Windows Server 2012 R2 Standard",
-                    "platform": "windows",
-                    "version": "6.3.9600",
-                    "build": "9600",
-                    "minor": "3"
-                },
-                "id": "001"
-            }
+                "affected_items": ["001"],
+                "total_affected_items": 1,
+                "total_failed_items": 0,
+                "failed_items": [],
+            },
+            "message": "All selected agents were assigned to webserver",
+            "error": 0,
+        }
+
+    .. code-block:: console
+
+        # curl -k -X PUT "https://localhost:55000/agents/001/group/apache?pretty=true" -H  "Authorization: Bearer $TOKEN"
+
+    .. code-block:: json
+        :class: output
+
+        {
+            "data": {
+                "affected_items": ["001"],
+                "total_affected_items": 1,
+                "total_failed_items": 0,
+                "failed_items": [],
+            },
+            "message": "All selected agents were assigned to apache",
+            "error": 0,
+        }
+
+After that, we can ask about groups which an agent belongs using the **Wazuh API** endpoint :api-ref:`GET /agents <operation/api.controllers.agent_controller.get_agents>`:
+
+    .. code-block:: console
+
+        # curl -k -X GET "https://localhost:55000/agents?pretty=true&agents_list=001&select=group" -H  "Authorization: Bearer $TOKEN"
+
+    .. code-block:: json
+        :class: output
+
+        {
+            "data": {
+                "affected_items": [{"group": ["default", "webserver", "apache"], "id": "001"}],
+                "total_affected_items": 1,
+                "total_failed_items": 0,
+                "failed_items": [],
+            },
+            "message": "All selected agents information was returned",
+            "error": 0,
         }
 
 In this case, the remote configuration for the group `apache` is the most priority of the three groups when there exists conflicts on any configuration parameter.
@@ -281,7 +307,7 @@ It is also possible to switch between groups overwriting the existing assignment
 
 The ``-f`` parameter resets groups assigned to the agent and forces it to only belong to the new group.
 
-Finally, to check the synchronization status of the group configuration for a single agent, the both following methods are available:
+Finally, to check the synchronization status of the group configuration for a single agent, both following methods are available, **agent_groups** and **Wazuh API** endpoint :api-ref:`GET /agents/{agent_id}/group/is_sync <operation/api.controllers.agent_controller.get_sync_agent>`:
 
     .. code-block:: console
 
@@ -290,11 +316,11 @@ Finally, to check the synchronization status of the group configuration for a si
     .. code-block:: none
         :class: output
 
-        The agent '008' sync status is: Agent configuration is synced.
+        The agent '001' sync status is: Agent configuration is synced.
 
     .. code-block:: console
 
-        # curl -u foo:bar -X GET "http://localhost:55000/agents/001/group/is_sync?pretty"
+        # curl -k -X GET "https://localhost:55000/agents/001/group/is_sync?pretty=true" -H  "Authorization: Bearer $TOKEN"
 
     .. code-block:: json
         :class: output
@@ -302,8 +328,17 @@ Finally, to check the synchronization status of the group configuration for a si
         {
             "error": 0,
             "data": {
-                "synced": "Agent configuration is synced."
-            }
+                "affected_items": [
+                    {
+                        "id": "001",
+                        "synced": true
+                    }
+                ],
+                "total_affected_items": 1,
+                "total_failed_items": 0,
+                "failed_items": []
+            },
+            "message": "Sync info was returned for all selected agents"
         }
 
 The rest of the capabilities of **agent_groups** can be found at its :doc:`reference section <../reference/tools/agent_groups>`. The same for the :doc:`Wazuh API <../api/reference>` which offers calls with the similar behavior.

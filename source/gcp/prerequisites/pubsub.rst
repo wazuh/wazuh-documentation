@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _pubsub:
 
@@ -9,14 +9,40 @@ Google Cloud Pub/Sub is a fully-managed real-time messaging service that allows 
 
 We use it to get security events from the Google Cloud instances without creating a special logic to avoid reprocessing events.
 
-In this section we will see how to create a topic, a subscription and a sink to fully configure Google Cloud Pub/Sub to work with Wazuh:
+In this section we will see how to create a topic, a subscription and a sink to fully configure Google Cloud Pub/Sub to work with Wazuh.
 
-1. Set up your GCP project and Cloud Pub/Sub topic and subscriptions:
+Create a topic
+--------------
 
-    Follow the `link <https://cloud.google.com/pubsub/docs/quickstart-py-mac#set_up_your_project_and_topic_and_subscriptions>`__ to setup Cloud Pub/Sub topic and subscription.
+Every publishing application sends messages to topics. Wazuh will retrieve the logs from this topic.
 
-2. Export logs via sink:
+.. thumbnail:: ../../images/gcp/gcp-topic.png
+    :align: center
+    :width: 100%
 
-    Follow the `link <https://cloud.google.com/logging/docs/export/configure_export_v2#begin>`__ to exports logs to the previously created Pub/Sub topic using a sink.
+Create a subscription
+---------------------
 
-After you set everything up, you should see activity in the ``Log Viewer`` section. 
+Use the button below the topic details (choose *pull* delivery). You can create as many subscriptions as you wish.
+
+.. thumbnail:: ../../images/gcp/gcp-account-key.png
+    :align: center
+    :width: 100%
+
+At this point, the Pub/Sub environment is ready to manage the message flow between the publishing and subscribing applications.
+
+Get your credentials
+--------------------
+
+If you do not have credentials yet, follow the steps in the :ref:`credentials section <gcp_credentials>`.
+
+Export logs via sink
+--------------------
+
+Log activities should appear under the **Logs Router** section. Cloud Audit logs can be published to a Cloud Pub/Sub topic through the sinks. Create a sink and use the topic as destination.
+
+.. thumbnail:: ../../images/gcp/gcp-sink.png
+    :align: center
+    :width: 100%
+
+After you set everything up, you should see activity in the ``Log Viewer`` section. Follow the `link <https://cloud.google.com/pubsub/docs/quickstart-py-mac#set_up_your_project_and_topic_and_subscriptions>`__ if you need help to setup Cloud Pub/Sub topic and subscription.

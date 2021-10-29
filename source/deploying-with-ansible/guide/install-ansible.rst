@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _wazuh_ansible_installation:
 
@@ -36,15 +36,15 @@ Installation on CentOS/RHEL/Fedora
 
 Install using yum from `EPEL <http://fedoraproject.org/wiki/EPEL>`_. Only CentOS/RedHat version 6 or 7, and Fedora distributions, are currently supported. Follow the next steps:
 
-1 - Install EPEL repository:
+#. Install EPEL repository:
 
-.. code-block:: console
+   .. code-block:: console
 
     # yum -y install epel-release
 
-2 - Install ansible:
+#. Install ansible:
 
-.. code-block:: console
+   .. code-block:: console
 
     # yum install ansible
 
@@ -53,33 +53,33 @@ Installation on Debian/Ubuntu
 
 For Debian and Ubuntu we will use the Ansible PPA repository. Follow the next steps:
 
-1 - Install required dependencies:
+#. Install required dependencies:
 
-.. code-block:: console
+   .. code-block:: console
 
-  	# apt-get update
-  	# apt-get install lsb-release software-properties-common
+    # apt-get update
+    # apt-get install lsb-release software-properties-common
 
-2 - Setup ansible repository:
+#. Setup ansible repository:
 
-  a. For Ubuntu:
+   a. For Ubuntu:
 
-  .. code-block:: console
+      .. code-block:: console
 
-      # apt-add-repository -y ppa:ansible/ansible
-      # apt-get update
+        # apt-add-repository -y ppa:ansible/ansible
+        # apt-get update
 
-  b. For Debian:
+   b. For Debian:
 
-  .. code-block:: console
+      .. code-block:: console
 
-      # echo "deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main" | sudo tee -a /etc/apt/sources.list.d/ansible-debian.list
-      # apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
-      # apt-get update
+        # echo "deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main" | sudo tee -a /etc/apt/sources.list.d/ansible-debian.list
+        # apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
+        # apt-get update
 
-3 - Finally, install ansible:
+3. Finally, install ansible:
 
-.. code-block:: console
+   .. code-block:: console
 
     # apt-get install ansible
 
@@ -93,274 +93,276 @@ Using SSH key-pairing
 
 Our Ansible server will need to connect to the other systems. Let's see how to make the connection for example with the machine where we will install the Wazuh server. We will have to repeat this procedure for each machine that we want to connect to the Ansible server, as for example the machines of the ELK server and the machines of the Wazuh agents.
 
-1 - The first step is to generate the SSH authentication key pair for the Ansible server using the ssh-keygen tool. SSH implements public key authentication using RSA or DSA. Version 1 of the SSH protocol only supports RSA, while version 2 supports both systems.
+#. The first step is to generate the SSH authentication key pair for the Ansible server using the ssh-keygen tool. SSH implements public key authentication using RSA or DSA. Version 1 of the SSH protocol only supports RSA, while version 2 supports both systems.
 
-1.1 - Move to the $HOME directory of Ansible server.
+   1.1. Move to the $HOME directory of Ansible server.
 
-.. code-block:: console
+     .. code-block:: console
 
-		ansible@ansible:~$ cd
+     		ansible@ansible:~$ cd
 
-1.2 - Generate authentication key pair for SSH.
+   1.2. Generate authentication key pair for SSH.
 
-.. code-block:: console
+     .. code-block:: console
 
-	ansible@ansible:~$ ssh-keygen
+     		ansible@ansible:~$ ssh-keygen
 
-.. code-block:: none
-	:class: output
 
-	Generating public/private rsa key pair.
-	Enter file in which to save the key (/home/ansible/.ssh/id_rsa):
-	Enter passphrase (empty for no passphrase):
-	Enter same passphrase again:
-	Your identification has been saved in /home/ansible/.ssh/id_rsa.
-	Your public key has been saved in /home/ansible/.ssh/id_rsa.pub.
-	The key fingerprint is:
-	SHA256:Z2nkI+fOVMa21NxP8YZaKpQWFqbm4cnAKXZezkuG/0g ansible@ansible
-	The key's randomart image is:
-	+---[RSA 2048]----+
-	|          o      |
-	|     . . o .     |
-	|    o = = +    . |
-	|   . + @ * = o oo|
-	|      o S % * = =|
-	|       + @ * = o.|
-	|        E + +   .|
-	|       . * .     |
-	|        . +      |
-	+----[SHA256]-----+
+     .. code-block:: none
+     		:class: output
 
-If you wish you can include a passphrase.
+     		Generating public/private rsa key pair.
+     		Enter file in which to save the key (/home/ansible/.ssh/id_rsa):
+     		Enter passphrase (empty for no passphrase):
+     		Enter same passphrase again:
+     		Your identification has been saved in /home/ansible/.ssh/id_rsa.
+     		Your public key has been saved in /home/ansible/.ssh/id_rsa.pub.
+     		The key fingerprint is:
+     		SHA256:Z2nkI+fOVMa21NxP8YZaKpQWFqbm4cnAKXZezkuG/0g ansible@ansible
+     		The key's randomart image is:
+     		+---[RSA 2048]----+
+     		|          o      |
+     		|     . . o .     |
+     		|    o = = +    . |
+     		|   . + @ * = o oo|
+     		|      o S % * = =|
+     		|       + @ * = o.|
+     		|        E + +   .|
+     		|       . * .     |
+     		|        . +      |
+     		+----[SHA256]-----+
 
-1.3 - Check the permissions of the generated keys.
+     If you wish you can include a passphrase.
 
-- ``id_rsa`` must have restrictive permits (600 or "- r w - - - - - - -").
+   1.3. Check the permissions of the generated keys.
 
-.. code-block:: none
-	:class: output
+     - ``id_rsa`` must have restrictive permits (600 or "- r w - - - - - - -").
 
-	drwx------  2 ansible ansible 4,0K sep 12 13:37 .
-	-rw-------  1 ansible ansible 1,7K sep 12 13:37 id_rsa
-	-rw-r--r--  1 ansible ansible  397 sep 12 13:37 id_rsa.pub
-	drwxr-xr-x 15 ansible ansible 4,0K sep 12 13:32 ..
+       .. code-block:: none
+     		 :class: output
 
-- In addition, the ``/home/ansible/.ssh/`` directory must have the entry permissions at 700 (d r w x - - - - - -), as we can see.
+     		 drwx------  2 ansible ansible 4,0K sep 12 13:37 .
+     		 -rw-------  1 ansible ansible 1,7K sep 12 13:37 id_rsa
+     		 -rw-r--r--  1 ansible ansible  397 sep 12 13:37 id_rsa.pub
+     		 drwxr-xr-x 15 ansible ansible 4,0K sep 12 13:32 ..
 
-2 - Now it is necessary to copy the public key of the Ansible server to the file ~/.ssh/authorized_keys in the $HOME directory of the remote system (Wazuh server in this example).
+     - In addition, the ``/home/ansible/.ssh/`` directory must have the entry permissions at 700 (d r w x - - - - - -), as we can see.
 
-2.1 - We install openssh-server if we do not have it installed.
+#. Now it is necessary to copy the public key of the Ansible server to the file ~/.ssh/authorized_keys in the $HOME directory of the remote system (Wazuh server in this example).
 
-- CentOS/RHEL/Fedora
+   2.1. We install openssh-server if we do not have it installed.
 
-.. code-block:: console
+      - CentOS/RHEL/Fedora
 
-	# yum install openssh-server
+        .. code-block:: console
 
-- Ubuntu/Debian
+        	  # yum install openssh-server
 
-.. code-block:: console
+      - Ubuntu/Debian
 
-	# apt-get install openssh-server
+        .. code-block:: console
 
-Starting the service.
+        	  # apt-get install openssh-server
 
-	a. For Systemd:
+   Starting the service.
 
-	.. code-block:: console
+        a. For Systemd:
 
-		# systemctl start sshd
+           .. code-block:: console
 
-	b. For SysV Init:
+             # systemctl start sshd
 
-	.. code-block:: console
+        b. For SysV Init:
 
-		# service sshd start
+           .. code-block:: console
 
-2.2 - Move to the $HOME directory of remote system.
+             # service sshd start
 
-.. code-block:: console
+   2.2. Move to the $HOME directory of remote system.
 
-	[centos@localhost ~]$ cd
+     .. code-block:: console
 
-2.3 - If it does not exist, create the ``.ssh`` directory and assign the appropriate permissions to it:
+     		[centos@localhost ~]$ cd
 
-.. code-block:: console
+   2.3. If it does not exist, create the ``.ssh`` directory and assign the appropriate permissions to it:
 
-	[centos@localhost ~]$ mkdir .ssh
-	[centos@localhost ~]$ chmod 700 .ssh/
+     .. code-block:: console
 
-2.4 - If the ``.ssh/authorized_keys`` file does not exist, create it with the appropriate permissions, otherwise public key authentication will not work properly:
+     		[centos@localhost ~]$ mkdir .ssh
+     		[centos@localhost ~]$ chmod 700 .ssh/
 
-.. code-block:: console
+   2.4. If the ``.ssh/authorized_keys`` file does not exist, create it with the appropriate permissions, otherwise public key authentication will not work properly:
 
-	[centos@localhost ~]$ touch .ssh/authorized_keys
-	[centos@localhost ~]$ chmod 644 .ssh/authorized_keys
+     .. code-block:: console
 
-Check the permissions.
+     		[centos@localhost ~]$ touch .ssh/authorized_keys
+     		[centos@localhost ~]$ chmod 644 .ssh/authorized_keys
 
-.. code-block:: console
+     Check the permissions.
 
-	[centos@localhost ~]$ ls -lath .ssh/
+     .. code-block:: console
 
-.. code-block:: none
-	:class: output
+        [centos@localhost ~]$ ls -lath .ssh/
 
-	total 4,0K
-	drwx------.  2 centos centos   29 sep 12 14:07 .
-	-rw-r--r--.  1 centos centos    0 sep 12 14:07 authorized_keys
-	drwx------. 15 centos centos 4,0K sep 12 14:03 ..
+     .. code-block:: none
+        :class: output
 
+        total 4,0K
+        drwx------.  2 centos centos   29 sep 12 14:07 .
+        -rw-r--r--.  1 centos centos    0 sep 12 14:07 authorized_keys
+        drwx------. 15 centos centos 4,0K sep 12 14:03 ..
 
-3 - Return to the Ansible server and concatenate the public key to the ``~/.ssh/authorized_keys`` file in the $HOME of Wazuh server using SSH
 
-3.1 - From Ansible server.
+#. Return to the Ansible server and concatenate the public key to the ``~/.ssh/authorized_keys`` file in the $HOME of Wazuh server using SSH
 
-.. code-block:: console
 
-	ansible@ansible:~$ cat .ssh/id_rsa.pub | ssh centos@192.168.0.180 "cat >> .ssh/authorized_keys"
+   3.1. From Ansible server.
 
-.. code-block:: none
-	:class: output
+     .. code-block:: console
 
-	centos@192.168.0.180's password:
+        ansible@ansible:~$ cat .ssh/id_rsa.pub | ssh centos@192.168.0.180 "cat >> .ssh/authorized_keys"
 
-We could see the authorized_keys content.
+     .. code-block:: none
+        :class: output
 
-.. code-block:: console
+        centos@192.168.0.180's password:
 
-	[centos@localhost ~]$ cat .ssh/authorized_keys
+     We could see the authorized_keys content.
 
-.. code-block:: none
-	:class: output
+     .. code-block:: console
 
-	ssh-rsa AAA...60V ansible@ansible
+        [centos@localhost ~]$ cat .ssh/authorized_keys
 
-4 - Before the public key authentication mechanism can be tested, it is necessary to verify that the SSH server allows it. To do this, open the file ``/etc/ssh/sshd_config`` in Wazuh server.
+     .. code-block:: none
+        :class: output
 
-.. code-block:: console
+        ssh-rsa AAA...60V ansible@ansible
 
-	[centos@localhost ~]$ sudo vi /etc/ssh/sshd_config
+#. Before the public key authentication mechanism can be tested, it is necessary to verify that the SSH server allows it. To do this, open the file ``/etc/ssh/sshd_config`` in Wazuh server.
 
-4.1 - Check that the following lines are uncommented:
+   .. code-block:: console
 
-	- ``PubkeyAuthentication yes``
-	- ``AuthorizedKeysFile .ssh/authorized_keys``
+    [centos@localhost ~]$ sudo vi /etc/ssh/sshd_config
 
-4.2 - If RSA keys are used instead of DSA, it will also be necessary to uncomment the following line if it exists.
+   4.1. Check that the following lines are uncommented:
 
-	- ``RSAAuthentication yes``
+      - ``PubkeyAuthentication yes``
+      - ``AuthorizedKeysFile .ssh/authorized_keys``
 
-4.3 - Restart the ssh service.
+   4.2. If RSA keys are used instead of DSA, it will also be necessary to uncomment the following line if it exists.
 
+      - ``RSAAuthentication yes``
 
-	a. For Systemd:
+   4.3. Restart the ssh service.
 
-	.. code-block:: console
 
-		# systemctl restart sshd
+      a. For Systemd:
 
-	b. For SysV Init:
+         .. code-block:: console
 
-	.. code-block:: console
+          # systemctl restart sshd
 
-		# service sshd restart
+      b. For SysV Init:
 
-5 - Verify authentication with public key.
+         .. code-block:: console
 
-5.1 - From Ansible server.
+          # service sshd restart
 
-.. code-block:: console
+#. Verify authentication with public key.
 
-	ansible@ansible:~$ ssh centos@192.168.0.180
+   5.1. From Ansible server.
 
-.. code-block:: none
-	:class: output
+     .. code-block:: console
 
-	Last login: Wed Sep 12 13:57:48 2018 from 192.168.0.107
+        ansible@ansible:~$ ssh centos@192.168.0.180
 
-As we can see, we access without having to enter any password.
+     .. code-block:: none
+        :class: output
+
+        Last login: Wed Sep 12 13:57:48 2018 from 192.168.0.107
+
+     As we can see, we access without having to enter any password.
 
 Test Connection
 ---------------
 
-1 - Add hosts to control
+#. Add hosts to control
 
-Adding hosts is easy, just put the hostname or IP Address on ``/etc/ansible/hosts`` in our Ansible server. Our Wazuh server IP is ``192.168.0.180`` and the user is ``centos`` in this example. We have to add ``192.168.0.180 ansible_ssh_user=centos``.
+   Adding hosts is easy, just put the hostname or IP Address on ``/etc/ansible/hosts`` in our Ansible server. Our Wazuh server Ip is ``192.168.0.180`` and the user is ``centos`` in this example. We have to add ``192.168.0.180 ansible_ssh_user=centos``.
 
-.. code-block:: yaml
+   .. code-block:: yaml
 
-	# This is the default ansible 'hosts' file.
-	#
-	# It should live in /etc/ansible/hosts
-	#
-	#   - Comments begin with the '#' character
-	#   - Blank lines are ignored
-	#   - Groups of hosts are delimited by [header] elements
-	#   - You can enter hostnames or ip addresses
-	#   - A hostname/ip can be a member of multiple groups
+    # This is the default ansible 'hosts' file.
+    #
+    # It should live in /etc/ansible/hosts
+    #
+    #   - Comments begin with the '#' character
+    #   - Blank lines are ignored
+    #   - Groups of hosts are delimited by [header] elements
+    #   - You can enter hostnames or ip addresses
+    #   - A hostname/ip can be a member of multiple groups
 
-	# Ex 1: Ungrouped hosts, specify before any group headers.
+    # Ex 1: Ungrouped hosts, specify before any group headers.
 
-	## green.example.com
-	## blue.example.com
-	## 192.168.100.1
-	## 192.168.100.10
+    ## green.example.com
+    ## blue.example.com
+    ## 192.168.100.1
+    ## 192.168.100.10
 
-	# Ex 2: A collection of hosts belonging to the 'webservers' group
+    # Ex 2: A collection of hosts belonging to the 'webservers' group
 
-	## [webservers]
-	## alpha.example.org
-	## beta.example.org
-	## 192.168.1.100
-	## 192.168.1.110
+    ## [webservers]
+    ## alpha.example.org
+    ## beta.example.org
+    ## 192.168.1.100
+    ## 192.168.1.110
 
-	# If you have multiple hosts following a pattern you can specify
-	# them like this:
+    # If you have multiple hosts following a pattern you can specify
+    # them like this:
 
-	## www[001:006].example.com
+    ## www[001:006].example.com
 
-	# Ex 3: A collection of database servers in the 'dbservers' group
+    # Ex 3: A collection of database servers in the 'dbservers' group
 
-	## [dbservers]
-	##
-	## db01.intranet.mydomain.net
-	## db02.intranet.mydomain.net
-	## 10.25.1.56
-	## 10.25.1.57
+    ## [dbservers]
+    ##
+    ## db01.intranet.mydomain.net
+    ## db02.intranet.mydomain.net
+    ## 10.25.1.56
+    ## 10.25.1.57
 
-	# Here's another example of host ranges, this time there are no
-	# leading 0s:
+    # Here's another example of host ranges, this time there are no
+    # leading 0s:
 
-	## db-[99:101]-node.example.com
+    ## db-[99:101]-node.example.com
 
-	192.168.0.180 ansible_ssh_user=centos
+    192.168.0.180 ansible_ssh_user=centos
 
-.. note:: Python 3
+   .. note:: Python 3
 
-	In some systems, such as Ubuntu 18, we may have problems with the use of Python interpreter due to its version and the path that Ansible has to follow for its use. If this happens, we must add to the host side the following line:
+    In some systems, such as Ubuntu 18, we may have problems with the use of Python interpreter due to its version and the path that Ansible has to follow for its use. If this happens, we must add to the host side the following line:
 
-	 - 192.168.0.181  ansible_ssh_user=ubuntu   **ansible_python_interpreter=/usr/bin/python3**
-
-
-2 - This will attempt a connection with the remote hosts using ping module.
-
-.. code-block:: console
-
-	ansible@ansible:~$ ansible all -m ping
-
-You will get an output like this:
-
-.. code-block:: none
-	:class: output
-
-	192.168.0.180 | SUCCESS => {
-	    "changed": false,
-	    "ping": "pong"
-	}
+    - 192.168.0.181  ansible_ssh_user=ubuntu   **ansible_python_interpreter=/usr/bin/python3**
 
 
-This way we will know that Ansible server reaches the remote system (Wazuh server).
+#. This will attempt a connection with the remote hosts using ping module.
+
+   .. code-block:: console
+
+	    ansible@ansible:~$ ansible all -m ping
+
+   You will get an output like this:
+
+   .. code-block:: none
+	    :class: output
+
+	    192.168.0.180 | SUCCESS => {
+	        "changed": false,
+	        "ping": "pong"
+	    }
+
+
+   This way we will know that Ansible server reaches the remote system (Wazuh server).
 
 Playbooks and Roles
 -------------------
@@ -372,7 +374,7 @@ From Ansible server.
 .. code-block:: console
 
 	ansible@ansible:~$ cd /etc/ansible/roles/
-	ansible@ansible:/etc/ansible/roles$ sudo git clone --branch v|WAZUH_LATEST_ANSIBLE|_|ELASTICSEARCH_LATEST_ANSIBLE| https://github.com/wazuh/wazuh-ansible.git
+	ansible@ansible:/etc/ansible/roles$ sudo git clone --branch v|WAZUH_LATEST_ANSIBLE| https://github.com/wazuh/wazuh-ansible.git
 	ansible@ansible:/etc/ansible/roles$ ls
 
 .. code-block:: none

@@ -1,5 +1,8 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Check out how to configure the manager to listen for events from the agents and an example of configuration in this section of the Wazuh documentation. 
+  
 .. _reference_ossec_remote:
 
 remote
@@ -25,6 +28,7 @@ Options
 - `local_ip`_
 - `ipv6`_
 - `queue_size`_
+- `rids_closing_time`_
 
 connection
 ^^^^^^^^^^^
@@ -56,13 +60,13 @@ protocol
 Specifies the protocol to use. It is available for secure connections and syslog events.
 
 +--------------------+----------+
-| **Default value**  | udp      |
+| **Default value**  | tcp      |
 +--------------------+----------+
 | **Allowed values** | udp, tcp |
 +--------------------+----------+
 
-.. note::
-	It is not possible to use both protocols simultaneously.
+.. versionadded:: 4.2.0
+  It is now possible to configure both UDP and TCP protocols to work simultaneously in the secure connections, this can be achieved by writing in the same configuration block the accepted protocols separated with a comma. For syslog connections, multiple protocols support require multiple configuration blocks since only one protocol per block is allowed.
 
 allowed-ips
 ^^^^^^^^^^^
@@ -116,7 +120,9 @@ Whether the local IP address is IPv6
 
 .. note::
 
-  Currently it's not possible to set both *local_ip* and *ipv6*
+  At the moment it's not possible to set both *local_ip* and *ipv6*.
+
+  IPv6 is not available for secure connections.
 
 queue_size
 ^^^^^^^^^^^^
@@ -132,6 +138,18 @@ Sets the capacity of the remote daemon queue in number of agent events.
 .. note::
   The remote queue is only available for agent events, not *syslog* events. This option only works when the **connection** is set to ``secure``.
 
+rids_closing_time
+^^^^^^^^^^^^^^^^^^
+
+Sets the time to close the RIDS files for agents that don't report new events in that time interval.
+
++--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
+| **Default value**  | 5m                                                                                                                                       |
++--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
+| **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days). |
++--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
+
+
 Example of configuration
 ------------------------
 
@@ -140,7 +158,7 @@ Example of configuration
     <remote>
       <connection>syslog</connection>
       <port>514</port>
-      <protocol>udp</protocol>
+      <protocol>tcp</protocol>
       <allowed-ips>192.168.1.0/24</allowed-ips>
       <local_ip>192.168.1.5</local_ip>
     </remote>
@@ -148,6 +166,7 @@ Example of configuration
     <remote>
       <connection>secure</connection>
       <port>1514</port>
-      <protocol>udp</protocol>
+      <protocol>tcp,udp</protocol>
       <queue_size>16384</queue_size>
+      <rids_closing_time>5m</rids_closing_time>
     </remote>

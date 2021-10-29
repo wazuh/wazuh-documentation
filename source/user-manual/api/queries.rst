@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _queries:
 
@@ -16,235 +16,237 @@ Advance filtering is possible using the Wazuh API's queries. Queries are specifi
     * ``<``: smaller.
     * ``>``: bigger.
     * ``~``: like as.
+    * ``()``: grouping operators
 * **Value**: Value to filter filter by.
 * **Separator**: Operator to join multiple "queries":
     * ``,``: represents an ``OR``.
     * ``;``: represents an ``AND``.
 
+.. note::
+    Reserved characters need to be percent-encoded, especially semicolons (``;`` → ``%3B``). You can use ``--data-urlencode`` inside cURL to make the process easier.
+
 Examples
 --------
 
-Filtering agents by OS name and OS version
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-For example, to filter Ubuntu agents with a version higher than 12, the following query would be used:
+For example, to filter Ubuntu agents with a version higher than 18, the following query would be used. Remember that the value of the parameter q is being encoded with ``--data-urlencode``:
 
 .. code-block:: console
 
-    # curl -u foo:bar -X GET "http://localhost:55000/agents?pretty&q=os.name=ubuntu;os.version>12&select=id,name,os.name,os.version,os.codename,os.major"
+    # curl -G --data-urlencode "q=os.name=ubuntu;os.version>18" -k -X GET "https://localhost:55000/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.codename,os.major" -H  "Authorization: Bearer $TOKEN"
 
 .. code-block:: json
     :class: output
 
     {
-        "error": 0,
-        "data": {
-            "totalItems": 2,
-            "items": [
-                {
-                    "os": {
-                    "codename": "Bionic Beaver",
-                    "version": "18.04.1 LTS",
-                    "major": "18",
-                    "name": "Ubuntu"
-                    },
-                    "name": "wazuh",
-                    "id": "000"
+       "data": {
+          "affected_items": [
+             {
+                "os": {
+                   "codename": "Bionic Beaver",
+                   "major": "18",
+                   "name": "Ubuntu",
+                   "version": "18.04.4 LTS"
                 },
-                {
-                    "os": {
-                    "codename": "Xenial Xerus",
-                    "version": "16.04.5 LTS",
-                    "major": "16",
-                    "name": "Ubuntu"
-                    },
-                    "name": "ubuntu",
-                    "id": "001"
-                }
-            ]
-        }
+                "name": "wazuh-master",
+                "id": "000"
+             },
+             {
+                "os": {
+                   "codename": "Bionic Beaver",
+                   "major": "18",
+                   "name": "Ubuntu",
+                   "version": "18.04.4 LTS"
+                },
+                "name": "wazuh-agent4",
+                "id": "004"
+             },
+             {
+                "os": {
+                   "codename": "Bionic Beaver",
+                   "major": "18",
+                   "name": "Ubuntu",
+                   "version": "18.04.4 LTS"
+                },
+                "name": "wazuh-agent5",
+                "id": "005"
+             },
+             {
+                "os": {
+                   "codename": "Bionic Beaver",
+                   "major": "18",
+                   "name": "Ubuntu",
+                   "version": "18.04.4 LTS"
+                },
+                "name": "wazuh-agent6",
+                "id": "006"
+             },
+             {
+                "os": {
+                   "codename": "Bionic Beaver",
+                   "major": "18",
+                   "name": "Ubuntu",
+                   "version": "18.04.4 LTS"
+                },
+                "name": "wazuh-agent7",
+                "id": "007"
+             },
+             {
+                "os": {
+                   "codename": "Bionic Beaver",
+                   "major": "18",
+                   "name": "Ubuntu",
+                   "version": "18.04.4 LTS"
+                },
+                "name": "wazuh-agent8",
+                "id": "008"
+             },
+             {
+                "os": {
+                   "codename": "Bionic Beaver",
+                   "major": "18",
+                   "name": "Ubuntu",
+                   "version": "18.04.2 LTS"
+                },
+                "name": "wazuh-agent9",
+                "id": "009"
+             },
+             {
+                "os": {
+                   "codename": "Bionic Beaver",
+                   "major": "18",
+                   "name": "Ubuntu",
+                   "version": "18.04.2 LTS"
+                },
+                "name": "wazuh-agent10",
+                "id": "010"
+             }
+          ],
+          "total_affected_items": 8,
+          "total_failed_items": 0,
+          "failed_items": []
+       },
+       "message": "All selected agents information was returned",
+       "error": 0
     }
 
-The same field can be used multiple times to get a more accurate result. For example, filtering agents with a version higher than Ubuntu 12 but lower than Ubuntu 18:
+The same field can be used multiple times to get a more accurate result. For example, filtering agents with a version higher than Ubuntu 18 but lower than Ubuntu 18.04.4:
 
 .. code-block:: console
 
-    # curl -u foo:bar -X GET "http://localhost:55000/agents?pretty&q=os.name=ubuntu;os.version>12;os.version<18&select=id,name,os.name,os.version,os.codename,os.major"
+    # curl -G --data-urlencode "q=os.name=ubuntu;os.version>18;os.version<18.04.4" -k -X GET "https://localhost:55000/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.codename,os.major" -H  "Authorization: Bearer $TOKEN"
 
 .. code-block:: json
     :class: output
 
     {
-        "error": 0,
-        "data": {
-            "totalItems": 1,
-            "items": [
-                {
-                    "os": {
-                    "codename": "Xenial Xerus",
-                    "version": "16.04.5 LTS",
-                    "major": "16",
-                    "name": "Ubuntu"
-                    },
-                    "name": "ubuntu",
-                    "id": "001"
-                }
-            ]
-        }
+       "data": {
+          "affected_items": [
+             {
+                "os": {
+                   "codename": "Bionic Beaver",
+                   "major": "18",
+                   "name": "Ubuntu",
+                   "version": "18.04.2 LTS"
+                },
+                "name": "wazuh-agent9",
+                "id": "009"
+             },
+             {
+                "os": {
+                   "codename": "Bionic Beaver",
+                   "major": "18",
+                   "name": "Ubuntu",
+                   "version": "18.04.2 LTS"
+                },
+                "name": "wazuh-agent10",
+                "id": "010"
+             }
+          ],
+          "total_affected_items": 2,
+          "total_failed_items": 0,
+          "failed_items": []
+       },
+       "message": "All selected agents information was returned",
+       "error": 0
     }
 
-An example of using the OR operator can be filtering Ubuntu or CentOS agents:
+An example of using the OR (``,``) operator and LIKE AS (``~``) can be filtering agents whose operating system name contains *windows* or *centos*.
 
 .. code-block:: console
 
-    # curl -u foo:bar -X GET "http://localhost:55000/agents?pretty&q=os.name=ubuntu,os.name=centos+linux&select=id,name,os.name,os.version,os.codename,os.major"
+    # curl -G --data-urlencode "q=os.name~centos,os.name~windows" -k -X GET "https://localhost:55000/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.codename,os.major" -H  "Authorization: Bearer $TOKEN"
 
 .. code-block:: json
     :class: output
 
     {
-        "error": 0,
-        "data": {
-            "totalItems": 3,
-            "items": [
-                {
-                    "os": {
-                    "codename": "Bionic Beaver",
-                    "version": "18.04.1 LTS",
-                    "major": "18",
-                    "name": "Ubuntu"
-                    },
-                    "name": "wazuh",
-                    "id": "000"
+       "data": {
+          "affected_items": [
+             {
+                "os": {
+                   "major": "6",
+                   "name": "Microsoft Windows 7 Ultimate Edition Professional Service Pack 1",
+                   "version": "6.1.7601"
                 },
-                {
-                    "os": {
-                    "codename": "Xenial Xerus",
-                    "version": "16.04.5 LTS",
-                    "major": "16",
-                    "name": "Ubuntu"
-                    },
-                    "name": "ubuntu",
-                    "id": "001"
-                },
-                {
-                    "os": {
-                    "codename": "Core",
-                    "version": "7",
-                    "major": "7",
-                    "name": "CentOS Linux"
-                    },
-                    "name": "centos7",
-                    "id": "002"
-                }
-            ]
-        }
+                "name": "jmv74211-PC",
+                "id": "013"
+             }
+          ],
+          "total_affected_items": 1,
+          "total_failed_items": 0,
+          "failed_items": []
+       },
+       "message": "All selected agents information was returned",
+       "error": 0
     }
 
-Another example using the ``~`` operator is the following:
+Getting the ubuntu agents with id other than 0 and lower than 4, whose name contains the substring ``waz`` and whose major version is 16 or 18, is an example that involves multiple operators at the same time:
 
 .. code-block:: console
 
-    # curl -u foo:bar -X GET "http://localhost:55000/agents?pretty&q=os.name~cent"
+    # curl -G --data-urlencode "q=id!=0;id<4;name~waz;(os.major=16,os.major=18)" -k -X GET "https://localhost:55000/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.codename,os.major" -H  "Authorization: Bearer $TOKEN"
 
 .. code-block:: json
     :class: output
 
     {
-        "error": 0,
-        "data": {
-            "items": [
-                {
-                    "os": {
-                    "arch": "x86_64",
-                    "codename": "Core",
-                    "major": "7",
-                    "name": "CentOS Linux",
-                    "platform": "centos",
-                    "uname": "Linux |localhost.localdomain ||WAZUH_LATEST|-862.11.6.el7.x86_64 |#1 SMP Tue Aug 14 21:49:04 UTC 2018 |x86_64",
-                    "version": "7"
-                    },
-                    "name": "agent002",
-                    "configSum": "ab73af41699f13fdd81903b5f23d8d00",
-                    "node_name": "master",
-                    "status": "Active",
-                    "lastKeepAlive": "2018-10-16 16:36:36",
-                    "mergedSum": "bcb219b9b009801f3b29eb9e00a6a88d",
-                    "id": "002",
-                    "group": [
-                    "default"
-                    ],
-                    "manager": "localhost.localdomain",
-                    "version": "Wazuh v3.7.0",
-                    "dateAdd": "2018-10-16 13:34:24",
-                    "ip": "192.168.122.19"
-                }
-            ],
-            "totalItems": 1
-        }
-    }
-
-
-Filtering rootcheck events by date
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-The following example shows how to check rootcheck events generated in a specified timeframe:
-
-.. code-block:: console
-
-    # curl -u foo:bar -X GET "http://localhost:55000/rootcheck/001?pretty&q=oldDay<3h25m&limit=2"
-
-.. code-block:: json
-    :class: output
-
-    {
-        "error": 0,
-        "data": {
-            "totalItems": 7,
-            "items": [
-                {
-                    "status": "outstanding",
-                    "oldDay": "2018-10-03 12:47:26",
-                    "event": "Ending CIS-CAT scan. File: /var/ossec/wodles/ciscat/benchmarks/CIS_Ubuntu_Linux_16.04_LTS_Benchmark_v1.0.0-xccdf.xml. ",
-                    "readDay": "2018-10-03 15:44:53"
+       "data": {
+          "affected_items": [
+             {
+                "os": {
+                   "codename": "Xenial Xerus",
+                   "major": "16",
+                   "name": "Ubuntu",
+                   "version": "16.04.6 LTS"
                 },
-                {
-                    "status": "outstanding",
-                    "oldDay": "2018-10-03 12:46:06",
-                    "event": "Starting CIS-CAT scan. File: /var/ossec/wodles/ciscat/benchmarks/CIS_Ubuntu_Linux_16.04_LTS_Benchmark_v1.0.0-xccdf.xml. ",
-                    "readDay": "2018-10-03 15:44:18"
-                }
-            ]
-        }
-    }
-
-
-A more precise timeframe can be specified using operators ``>`` and ``<`` together:
-
-.. code-block:: console
-
-    # curl -u foo:bar -X GET "http://localhost:55000/rootcheck/001?pretty&q=oldDay<3h30m;oldDay>3h&limit=2"
-
-.. code-block:: json
-    :class: output
-
-    {
-        "error": 0,
-        "data": {
-            "totalItems": 7,
-            "items": [
-                {
-                    "status": "outstanding",
-                    "oldDay": "2018-10-03 12:47:26",
-                    "event": "Ending CIS-CAT scan. File: /var/ossec/wodles/ciscat/benchmarks/CIS_Ubuntu_Linux_16.04_LTS_Benchmark_v1.0.0-xccdf.xml. ",
-                    "readDay": "2018-10-03 15:44:53"
+                "name": "wazuh-agent1",
+                "id": "001"
+             },
+             {
+                "os": {
+                   "codename": "Xenial Xerus",
+                   "major": "16",
+                   "name": "Ubuntu",
+                   "version": "16.04.6 LTS"
                 },
-                {
-                    "status": "outstanding",
-                    "oldDay": "2018-10-03 12:46:06",
-                    "event": "Starting CIS-CAT scan. File: /var/ossec/wodles/ciscat/benchmarks/CIS_Ubuntu_Linux_16.04_LTS_Benchmark_v1.0.0-xccdf.xml. ",
-                    "readDay": "2018-10-03 15:44:18"
-                }
-            ]
-        }
+                "name": "wazuh-agent2",
+                "id": "002"
+             },
+             {
+                "os": {
+                   "codename": "Xenial Xerus",
+                   "major": "16",
+                   "name": "Ubuntu",
+                   "version": "16.04.6 LTS"
+                },
+                "name": "wazuh-agent3",
+                "id": "003"
+             }
+          ],
+          "total_affected_items": 3,
+          "total_failed_items": 0,
+          "failed_items": []
+       },
+       "message": "All selected agents information was returned",
+       "error": 0
     }

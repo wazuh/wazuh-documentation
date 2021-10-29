@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _fim_migrate:
 
@@ -7,7 +7,7 @@ fim_migrate
 
 .. versionadded:: 3.7.0
 
-The *fim_migrate* tool allows to migrate FIM databases older than Wazuh v3.7.0 to the new format included in Wazuh-DB. This tool must be executed after the :ref:`upgrading process <upgrading_wazuh>` has been completed.
+The *fim_migrate* tool allows to migrate FIM databases older than Wazuh v3.7.0 to the new format included in Wazuh-DB. This tool must be executed after the :ref:`upgrading process <upgrading_wazuh_server>` has been completed.
 
 .. note::
     The new database will be available at ``/var/ossec/queue/db``.

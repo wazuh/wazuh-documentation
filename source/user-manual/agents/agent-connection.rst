@@ -1,5 +1,8 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Find out more about how to check the connection to the Wazuh Manager in this section of our documentation. 
+  
 .. _agent-connection:
 
 Checking connection with Manager
@@ -13,7 +16,7 @@ Before you check the agent's connection with the manager, first ensure the agent
     <client>
       <server>
         <address>10.0.0.10</address>
-        <protocol>udp</protocol>
+        <protocol>tcp</protocol>
       </server>
     </client>
   </ossec_config>
@@ -38,11 +41,11 @@ After you register the agent and it has successfully connected, you can see a li
 
   # /var/ossec/bin/agent_control -lc
 
-You can also check to see if an agent connected correctly by verifying if the UDP connection to the manager is established:
+You can also check to see if an agent connected correctly by verifying if the TCP connection to the manager is established:
 
 .. code-block:: console
 
-  # netstat -vatunp|grep ossec-agentd
+  # netstat -vatunp|grep wazuh-agentd
 
 The result should match the agent and manager IP addresses.
 

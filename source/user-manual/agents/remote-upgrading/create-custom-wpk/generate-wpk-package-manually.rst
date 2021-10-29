@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _create-custom-wpk-manually:
 
@@ -59,7 +59,7 @@ Compile the project from the ``src`` folder:
 .. code-block:: console
 
   # cd wazuh-|WAZUH_LATEST|/src
-  # make deps
+  # make deps TARGET=agent
   # make TARGET=agent
 
 Delete the files that are no longer needed, this step can be skipped but the size of the WPK will be considerably larger:
@@ -85,7 +85,7 @@ Compile the WPK package using your SSL certificate and key:
 
 .. code-block:: console
 
-  # contrib/agent-upgrade/wpkpack.py output/myagent.wpk path/to/wpkcert.pem path/to/wpkcert.key *
+  # tools/agent-upgrade/wpkpack.py output/myagent.wpk path/to/wpkcert.pem path/to/wpkcert.key *
 
 In this example, the Wazuh project's root directory contains the proper ``upgrade.sh`` file.
 
@@ -116,7 +116,7 @@ Download the latest version of the wazuh MSI package:
 
 .. code-block:: console
 
-  # curl -Ls https://packages.wazuh.com/3.x/windows/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi --output wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi
+  # curl -Ls https://packages.wazuh.com/|CURRENT_MAJOR|/windows/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi --output wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi
 
 Install the root CA if you want to overwrite the root CA with the file you created previously:
 
@@ -129,7 +129,7 @@ Compile the WPK package using the MSI package and, your SSL certificate and key:
 
 .. code-block:: console
 
-  # contrib/agent-upgrade/wpkpack.py output/myagent.wpk path/to/wpkcert.pem path/to/wpkcert.key path/to/wazuhagent.msi path/to/upgrade.bat path/to/do_upgrade.ps1
+  # tools/agent-upgrade/wpkpack.py output/myagent.wpk path/to/wpkcert.pem path/to/wpkcert.key path/to/wazuhagent.msi path/to/upgrade.bat path/to/do_upgrade.ps1
 
 Definitions:
     - ``output/myagent.wpk`` is the name of the output WPK package.

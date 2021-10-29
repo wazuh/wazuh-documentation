@@ -1,4 +1,8 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
+
+.. meta::
+  :description: The Wazuh GCP module allows you to pull log data from Google Pub/Sub. Learn more about GCP credentials configuration in this section.
+
 
 .. _gcp_credentials:
 
@@ -9,9 +13,27 @@ In order to make the Wazuh GCP module pull log data from Google Pub/Sub, it will
 
 To do this, we will need to create a service account with the Pub/Sub permissions and then create a key. It is important to save this key as a JSON file. We will use this file as credentials for the GCP module.
 
+Create a service account
+------------------------
+
+Within the **Service Accounts** section, create a new service account and add two roles with *Pub/Sub* permissions: **publisher** and **subscriber**.
+
+.. thumbnail:: ../../images/gcp/gcp-service-account.png
+    :align: center
+    :width: 100%
+
+Create private key
+------------------
+
+After creating a service account, add a key for it. Save it as **JSON**:
+
+.. thumbnail:: ../../images/gcp/gcp-account-key.png
+    :align: center
+    :width: 100%
+
 Your key should have this format:
 
-:: 
+::
 
 	{
 	   "type": "service_account",

@@ -1,147 +1,82 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Learn more about the architecture of Wazuh, our open source cybersecurity platform, in this section of our documentation. 
+  
 .. _architecture:
 
 Architecture
 ============
 
-.. meta::
-  :description: Learn about different architectures that can be used to install Wazuh.
+The Wazuh architecture is based on :ref:`agents <wazuh_agent>`, running on the monitored endpoints, that forward security data to a central :ref:`server <wazuh_server>`. Moreover, agentless devices (such as firewalls, switches, routers, access points, etc.) are supported and can actively submit log data via Syslog, SSH, or using their own API. The central server decodes and analyzes the incoming information, and passes the results along to an Elasticsearch cluster for indexing and storage.
 
-The Wazuh architecture is based on agents running on monitored hosts that forward log data to a central server. Also, agentless devices (such as firewalls, switches, routers, access points, etc.) are supported and can actively submit log data via syslog and/or a periodic probe of their configuration changes to later forward the data to the central server. The central server decodes and analyzes the incoming information and passes the results along to an Elasticsearch cluster for indexing and storage.
+An Elasticsearch cluster is a collection of one or more nodes that communicate with each other to perform read and write operations on indexes. Small Wazuh deployments, which do not require processing large amounts of data, can easily be handled by a single-node cluster. Multi-node clusters are recommended when there is a large number of monitored endpoints, when a large volume of data is anticipated, or when high availability is required.
 
-An Elasticsearch cluster is a collection of one or more nodes (servers) that communicate with each other to perform read and write operations on indexes. Small Wazuh deployments (<50 agents), can easily be handled by a single-node cluster. Multi-node clusters are recommended when there is a large number of monitored systems, when a large volume of data is anticipated and/or when high availability is required.
+For production environments it is recommended to deploy the Wazuh server and Elasticsearch to different hosts. In this scenario, Filebeat is used to securely forward Wazuh alerts and/or archived events to the Elasticsearch cluster (single-node or multi-node) using TLS encryption.
 
-When the Wazuh server and the Elasticsearch cluster are on different hosts, Filebeat is used to securely forward Wazuh alerts and/or archived events to the Elasticsearch server(s) using TLS encryption.
+The diagram below represents a Wazuh deployment architecture. It shows the solution components and how the :ref:`Wazuh servers <wazuh_server>` and :ref:`Elasticsearch <elastic_stack>` can be configured as a cluster, providing load balancing and high-availability.
 
-The diagram below illustrates how components are distributed when the Wazuh server and the Elasticsearch cluster run on different hosts. Note that with multi-node clusters there will be multiple Elastic Stack servers to which Filebeat is capable of forwarding data:
-
-.. thumbnail:: ../images/installation/installing_wazuh_distributed.png
-    :title: Distributed architecture
+.. thumbnail:: ../images/getting_started/deployment.png
+    :alt: Wazuh deployment
     :align: center
-    :width: 100%
+    :wrap_image: No
 
-In smaller Wazuh deployments, Wazuh and Elastic Stack with a single-node Elasticsearch instance can be all deployed on a single server.
+Wazuh agent - Wazuh server communication
+----------------------------------------
 
-.. thumbnail:: ../images/installation/installing_wazuh_singlehost.png
-    :title: Single-host architecture
-    :align: center
-    :width: 100%
-
-Communications and data flow
-----------------------------
-
-.. thumbnail:: ../images/getting_started/wazuh_data_flow.png
-    :title: Data flow
-    :align: center
-    :width: 100%
-
-Agent-server communication
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Wazuh agents use the OSSEC message protocol to send collected events to the Wazuh server over port 1514 (UDP or TCP). Then the Wazuh server decodes and rule-checks the received events with the analysis engine. Events that trip a rule are augmented with alert data such as rule id and rule name. Events can be spooled to one or both of the following files, depending on whether or not a rule is tripped:
+:ref:`Wazuh agent <wazuh_agent>` continuously sends events to the :ref:`Wazuh server <wazuh_server>` for analysis and threat detection. In order to start shipping them, the agent establishes a connection with the server service for agents connection, which listens on port 1514 (this is configurable). The Wazuh server then decodes and rule-checks the received events, utilizing the analysis engine. Events that trip a rule are augmented with alert data such as rule id and rule name. Events can be spooled to one or both of the following files, depending on whether or not a rule is tripped:
 
 - The file ``/var/ossec/logs/archives/archives.json`` contains all events whether they tripped a rule or not.
-- The file ``/var/ossec/logs/alerts/alerts.json`` contains only events that tripped a rule.
+- The file ``/var/ossec/logs/alerts/alerts.json`` contains only events that tripped a rule with high enough priority (the threshold is configurable).
 
-.. note:: Alerts will be duplicated if you use both of these files. Also, note that both files receive fully decoded event data.
+The Wazuh messages protocol uses AES encryption by default, with 128 bits per block and 256-bit keys (Blowfish encryption is also optional).
 
-The Wazuh message protocol uses a 192-bit Blowfish encryption with a full 16-round implementation, or AES encryption with 128 bits per block and 256-bit keys.
+.. note:: Read the `Benefits of using AES in Wazuh communications <https://wazuh.com/blog/benefits-of-using-aes-in-our-communications>`_ document for more information.
 
-.. note:: Read the `Benefits of using AES in Wazuh communications <https://wazuh.com/blog/benefits-of-using-aes-in-our-communications//>`_ document for more information.
+Wazuh server - Elastic Stack communication
+------------------------------------------
 
-Wazuh-Elastic communication
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Wazuh server uses Filebeat to send alert and event data to the Elasticsearch server, using TLS encryption. Filebeat reads the Wazuh server output data and sends it to Elasticsearch (by default listening on port 9200/TCP). Once the data is indexed by Elasticsearch, Kibana is used to mine and visualize the information.
 
-Wazuh server uses Filebeat to send alerts and events data to Elasticsearch server using TLS encryption.
-
-Filebeat formats the incoming data and optionally enriches it with GeoIP information before sending it to Elasticsearch (port 9200/TCP). Once the data is indexed into Elasticsearch, Kibana (port 5601/TCP) is used to mine and visualize the information.
-
-The Wazuh App runs inside Kibana constantly querying the RESTful API (port 55000/TCP on the Wazuh manager) in order to display configuration and status related information of the server and agents, as well to restart agents when desired. This communication is encrypted with TLS and authenticated with username and password.
+The Wazuh web user interface runs inside Kibana, as a plugin. It queries the Wazuh RESTful API (by default listening on port 55000/TCP on the Wazuh server) in order to display configuration and status-related information of the :ref:`Wazuh server <wazuh_server>` and :ref:`agents <wazuh_agent>`. It can also modify, through API calls, agents or server configuration settings when desired. This communication is encrypted with TLS and authenticated with username and password.
 
 Required ports
 --------------
 
-For an installation of Wazuh and the Elastic Stack, several network ports must be available and opened so the different components can communicate properly between them.
+For the communication of Wazuh components several services are used. Below is the list of default ports used by these services. Users can modify these port numbers when necessary.
 
-Wazuh
-^^^^^
-
-+---------------+-----------+----------+-----------------------------------------------------------------------+
-| Component     | Port      | Protocol | Purpose                                                               |
-+===============+===========+==========+=======================================================================+
-|               | 1514      | TCP      | Send collected events from agents (when configured for TCP)           |
-+               +-----------+----------+-----------------------------------------------------------------------+
-|               | 1514      | UDP      | Send collected events from agents (when configured for UDP) - Default |
-+               +-----------+----------+-----------------------------------------------------------------------+
-| Wazuh manager | 1515      | TCP      | Agents registration service                                           |
-+               +-----------+----------+-----------------------------------------------------------------------+
-|               | 1516      | TCP      | Wazuh cluster communications                                          |
-+               +-----------+----------+-----------------------------------------------------------------------+
-|               | 514       | TCP      | Send collected events from syslog (when configured for TCP)           |
-+               +-----------+----------+-----------------------------------------------------------------------+
-|               | 514       | UDP      | Send collected events from syslog (when configured for UDP) - Default |
-+---------------+-----------+----------+-----------------------------------------------------------------------+
-| Wazuh API     | 55000     | TCP      | Incoming HTTP requests                                                |
-+---------------+-----------+----------+-----------------------------------------------------------------------+
-
-Elastic Stack
-^^^^^^^^^^^^^
-
-+---------------+-----------+----------+-------------------------------------------------------------+
-| Component     | Port      | Protocol | Purpose                                                     |
-+===============+===========+==========+=============================================================+
-|               | 9200      | TCP      | Elasticsearch RESTful API                                   |
-+ Elasticsearch +-----------+----------+-------------------------------------------------------------+
-|               | 9300-9400 | TCP      | Elasticsearch cluster communications                        |
-+---------------+-----------+----------+-------------------------------------------------------------+
-| Kibana        | 5601      | TCP      | Kibana web interface                                        |
-+---------------+-----------+----------+-------------------------------------------------------------+
-
-.. thumbnail:: ../images/getting_started/architecture_ports_elastic.png
-    :title: Elastic ports diagram
-    :align: center
-    :width: 100%
-
-Splunk
-^^^^^^
-
-+---------------+-----------+----------+-------------------------------------------------------------+
-| Component     | Port      | Protocol | Purpose                                                     |
-+===============+===========+==========+=============================================================+
-|               | 8000      | TCP      | Splunk web interface                                        |
-+               +-----------+----------+-------------------------------------------------------------+
-|               | 9997      | TCP      | Input port (for Splunk Forwarder)                           |
-+ Splunk        +-----------+----------+-------------------------------------------------------------+
-|               | 8089      | TCP      | Management port (for indexers)                              |
-+               +-----------+----------+-------------------------------------------------------------+
-|               | 9887      | TCP      | Splunk cluster communications                               |
-+---------------+-----------+----------+-------------------------------------------------------------+
-
-.. thumbnail:: ../images/getting_started/architecture_ports_splunk.png
-    :title: Splunk ports diagram
-    :align: center
-    :width: 100%
-
-More information
-^^^^^^^^^^^^^^^^
-
-- `Elasticsearch network settings <https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-network.html>`_
-- `Accessing Kibana <https://www.elastic.co/guide/en/kibana/current/access.html>`_
-- `Splunk components and their relationship with the network <https://docs.splunk.com/Documentation/Splunk/latest/InheritedDeployment/Ports>`_
++---------------+---------------+-----------+---------------+----------------------------------------------+
+| Component     | Software      | Port      | Protocol      | Purpose                                      |
++===============+===============+===========+===============+==============================================+
+|               |               | 1514      | TCP (default) | Agents connection service                    |
++               +               +-----------+---------------+----------------------------------------------+
+|               |               | 1514      | UDP           | Agents connection service                    |
++               +               +-----------+---------------+----------------------------------------------+
+|               | Wazuh manager | 1515      | TCP           | Agents registration service                  |
++               +               +-----------+---------------+----------------------------------------------+
+| Wazuh server  |               | 1516      | TCP           | Wazuh cluster daemon                         |
++               +               +-----------+---------------+----------------------------------------------+
+|               |               | 514       | UDP (default) | Wazuh syslog collector (disabled by default) |
++               +               +-----------+---------------+----------------------------------------------+
+|               |               | 514       | TCP           | Wazuh syslog collector (disabled by default) |
++               +---------------+-----------+---------------+----------------------------------------------+
+|               | Wazuh API     | 55000     | TCP           | Wazuh RESTful API                            |
++---------------+---------------+-----------+---------------+----------------------------------------------+
+|               |               | 9200      | TCP           | Elasticsearch RESTful API                    |
++               + Elasticsearch +-----------+---------------+----------------------------------------------+
+| Elastic Stack |               | 9300-9400 | TCP           | Elasticsearch cluster communication          |
++               +---------------+-----------+---------------+----------------------------------------------+
+|               | Kibana        | 443       | TCP           | Kibana web interface                         |
++---------------+---------------+-----------+---------------+----------------------------------------------+
 
 Archival data storage
 ---------------------
 
-Both alerts and non-alert events are stored in files on the Wazuh server in addition to being sent to Elasticsearch. These files can be written in JSON format (.json) and/or in plain text format (.log - no decoded fields but more compact). These files are daily compressed and signed using MD5 and SHA1 checksums. The directory and filename structure is as follows:
+Both alerts and non-alert events are stored in files on the Wazuh server, in addition to being sent to Elasticsearch. These files can be written in JSON format (``.json``) and/or in plain text format (``.log`` - no decoded fields but more compact). These files are daily compressed and signed using MD5, SHA1, and SHA256 checksums. The directory and filename structure is as follows:
 
 .. code-block:: bash
 
-  root@wazuh-manager:/var/ossec/logs/archives/2017/Jan# ls -l
-
-.. code-block:: none
-  :class: output
-
+  root@wazuh-manager:/var/ossec/logs/archives/2020/Jan# ls -l
   total 176
   -rw-r----- 1 ossec ossec 234350 Jan  2 00:00 ossec-archive-01.json.gz
   -rw-r----- 1 ossec ossec    350 Jan  2 00:00 ossec-archive-01.json.sum
@@ -156,6 +91,6 @@ Both alerts and non-alert events are stored in files on the Wazuh server in addi
   -rw-r----- 1 ossec ossec 156296 Jan  2 00:00 ossec-archive-03.log.gz
   -rw-r----- 1 ossec ossec    346 Jan  2 00:00 ossec-archive-03.log.sum
 
-Rotation and backups of archive files is recommended according to the storage capacity of the Wazuh manager server. By using *cron* jobs, you could easily arrange to keep only a certain time window of archive files locally on the Manager (e.g., last year or last three months).
+Rotation and backups of archive files are recommended according to the storage capacity of the :ref:`Wazuh server <wazuh_server>`. By using *cron* jobs, you could easily arrange to keep only a certain time window of archive files locally on the server (e.g., last year or last three months).
 
-On the other hand, you may choose to dispense with storing archive files at all and simply rely on Elasticsearch for archive storage, especially if you are running periodic Elasticsearch snapshot backups and/or a multi-node Elasticsearch cluster with shard replicas for high availability. You could even use a *cron* job to move snapshotted indexes to a final data storage server and sign them using MD5 and SHA1 algorithms.
+On the other hand, you may choose to dispense with storing archive files at all and simply rely on Elasticsearch for archive storage, especially if you are running periodic Elasticsearch snapshot backups and/or a multi-node Elasticsearch cluster with shard replicas for high availability. You could even use a *cron* job to move snapshotted indexes to a final data storage server, and sign them using MD5, SHA1, and SHA256 hashing algorithms.

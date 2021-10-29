@@ -1,12 +1,12 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
+
+.. meta::
+  :description: Learn more about the cluster node configuration in Wazuh: master and worker nodes, labels, Filebeat, Splunk forwarder installation, and more. 
 
 .. _configuring-cluster:
 
 Deploying a Wazuh cluster
 ===========================
-
-.. meta::
-  :description: A complete user manual about how to configure a Wazuh cluster.
 
 .. toctree::
     :maxdepth: 1
@@ -22,10 +22,10 @@ Deploying a Wazuh cluster
 
 .. topic:: Cluster nodes configuration
 
-    The Wazuh cluster is made up by manager type nodes where one of them is the master node and the rest are worker nodes. For both node types, the configuration file ``/var/ossec/etc/ossec.conf`` contains the cluster configuration values.
-    Inside the labels ``<cluster>...</cluster>`` are the following configuration values:
+    The Wazuh cluster is made up by manager type nodes. Only one of them will take the master role, the others will take the worker role. For both node types, the configuration file ``/var/ossec/etc/ossec.conf`` contains the cluster configuration values.
+    Within the labels ``<cluster>...</cluster>`` the following configuration values can be set:
 
-        - :ref:`name <cluster_name>`: Name that we will assign to the cluster
+        - :ref:`name <cluster_name>`: Name that will be assigned to the cluster
         - :ref:`node_name <cluster_node_name>`: Name of the current node
         - :ref:`key <cluster_key>`: The key must be 32 characters long and should be the same for all of the nodes of the cluster. You may use the following command to generate a random one:
 
@@ -36,7 +36,7 @@ Deploying a Wazuh cluster
         - :ref:`node_type <cluster_node_type>`: Set the node type (master/worker)
         - :ref:`port <cluster_port>`: Destination port for cluster communication
         - :ref:`bind_addr <cluster_bind_addr>`: IP where this node is listening to (0.0.0.0 any IP)
-        - :ref:`nodes <cluster_nodes>`: The address of the **master** must be specified in all nodes (including the master itself). The address can be either an IP or a DNS.
+        - :ref:`nodes <cluster_nodes>`: The address of the **master** , it must be specified in all nodes (including the master itself). The address can be either an IP or a DNS.
         - :ref:`hidden <cluster_hidden>`: Toggles whether or not to show information about the cluster that generated an alert.
         - :ref:`disabled <cluster_disabled>`: Indicates whether the node will be enabled or not in the cluster.
 
@@ -64,7 +64,7 @@ Deploying a Wazuh cluster
 
             # systemctl restart wazuh-manager
 
-    Now it is time to configure the **worker node**:
+    Now it's time to configure the **worker node**:
 
         .. code-block:: xml
 
@@ -88,7 +88,7 @@ Deploying a Wazuh cluster
 
             # systemctl restart wazuh-manager
 
-    Let's execute the following command (works on both worker and master nodes) to check that everything works correctly:
+    Let's execute the following command (works on both worker and master nodes) to check that everything worked as expected:
 
         .. code-block:: console
 
@@ -102,11 +102,6 @@ Deploying a Wazuh cluster
             worker01-node  worker  |WAZUH_LATEST|   172.22.0.3
 
 
-    .. warning::
-
-        **All agents must be registered in the master node, even if the agent is going to report to the worker node**. The master is responsible for replicating the new agent's information across all worker nodes. If an agent is registered in a worker node, it will be **deleted** by the master node.
-
-
 .. topic:: Forwarder installation
 
     - The apps must be configured to point to the master's API.
@@ -114,36 +109,22 @@ Deploying a Wazuh cluster
 
     **Installing Filebeat:**
 
-    +------------------------------------------------------------------------+-------------------------------------------------------------+
-    | Type                                                                   | Description                                                 |
-    +========================================================================+=============================================================+
-    | :ref:`RPM packages <wazuh_server_packages_amazon_filebeat>`            | Install Filebeat on Amazon Linux.                           |
-    +------------------------------------------------------------------------+-------------------------------------------------------------+
-    | :ref:`RPM packages <wazuh_server_packages_centos_filebeat>`            | Install Filebeat on CentOS.                                 |
-    +------------------------------------------------------------------------+-------------------------------------------------------------+
-    | :ref:`DEB packages <wazuh_server_packages_deb_filebeat>`               | Install Filebeat on Debian.                                 |
-    +------------------------------------------------------------------------+-------------------------------------------------------------+
-    | :ref:`RPM packages <wazuh_server_packages_fedora_filebeat>`            | Install Filebeat on Fedora.                                 |
-    +------------------------------------------------------------------------+-------------------------------------------------------------+
-    | :ref:`RPM packages <wazuh_server_packages_opensuse_filebeat>`          | Install Filebeat on OpenSUSE.                               |
-    +------------------------------------------------------------------------+-------------------------------------------------------------+
-    | :ref:`RPM packages <wazuh_server_packages_oracle_filebeat>`            | Install Filebeat on Oracle Linux.                           |
-    +------------------------------------------------------------------------+-------------------------------------------------------------+
-    | :ref:`RPM packages <wazuh_server_packages_rhel_filebeat>`              | Install Filebeat on Red Hat Enterprise Linux.               |
-    +------------------------------------------------------------------------+-------------------------------------------------------------+
-    | :ref:`RPM packages <wazuh_server_packages_suse_filebeat>`              | Install Filebeat on SUSE.                                   |
-    +------------------------------------------------------------------------+-------------------------------------------------------------+
-    | :ref:`DEB packages <wazuh_server_packages_ubuntu_filebeat>`            | Install Filebeat on Ubuntu.                                 |
-    +------------------------------------------------------------------------+-------------------------------------------------------------+
-
+    +---------------------------------------------------------------------+------------------------------------------------+
+    | Type                                                                | Description                                    |
+    +=====================================================================+================================================+
+    | :ref:`Wazuh single node cluster<wazuh_server_single_node_filebeat>` | Install Filebeat on Wazuh single node cluster. |
+    +---------------------------------------------------------------------+------------------------------------------------+
+    | :ref:`Wazuh multi node cluster<wazuh_server_multi_node_filebeat>`   | Install Filebeat on Wazuh multi node cluster.  |
+    +---------------------------------------------------------------------+------------------------------------------------+
+    
 
     **Installing Splunk forwarder:**
 
-    +-------------------------------------------------------------------+-------------------------------------------------------------+
-    | Type                                                              | Description                                                 |
-    +===================================================================+=============================================================+
-    | :ref:`RPM/DEB packages <splunk_forwarder>`                        | Install Splunk forwarder for RPM or DEB based OS.           |
-    +-------------------------------------------------------------------+-------------------------------------------------------------+
+    +-------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
+    | Type                                                              | Description                                                                                                                            |
+    +===================================================================+========================================================================================================================================+
+    | `RPM/DEB packages <https://documentation.wazuh.com/3.13/installation-guide/installing-splunk/splunk-forwarder.html>`_                        | Install Splunk forwarder for RPM or DEB based OS.           |
+    +-------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
 
 
 .. _deploy_wazuh_agents_cluster:
@@ -202,4 +183,4 @@ Deploying a Wazuh cluster
 
     .. note::
 
-        We recommend using a :ref:`load balancer <load_balancer>` for connecting the agents. This way the agents will be able to report to the nodes in a distributed way and it will be the load balancer who assigns which worker they report to. Using this option we can better distribute the load and in case of a fall in some worker node, its agents will **reconnect** to another one.
+        We recommend using a :ref:`load balancer <load_balancer>` for registering and connecting the agents. This way the agents will be able to be registered and report to the nodes in a distributed way, and it will be the load balancer who assigns which worker they will report to. Using this option we can better distribute the load and in case of a fall in some worker node, its agents will **reconnect** to another one.

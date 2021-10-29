@@ -1,8 +1,24 @@
 $(function() {
-  let loc = location.hash;
-  const spaceBeforeAnchor = 60;
+  const version = '' + $('[data-version]').data('version');
+  const minVersionScreenshot = '3.13';
+  const minVersionRedoc = '4.0';
+  const simultaneousCapaSlide = (compareVersion(version, minVersionScreenshot) >= 0);
+  const useApiRedoc = (compareVersion(version, minVersionRedoc) >= 0);
   /* List of folders that will be excluded from search */
   const excludedSearchFolders = ['release-notes'];
+  const intervalTime = 5000;
+  let capaInterval = null;
+
+  if ( useApiRedoc ) {
+    /* Change DOMAIN in href */
+    const domainReplacePattern = 'https://DOMAIN';
+    const urlRoot = $('[data-url_root]').length == 0 ? '/' : $('[data-url_root]').data('url_root');
+    $('[href^="'+domainReplacePattern+'/"]').each(function() {
+      const oldHref = $(this).attr('href');
+      $(this).attr('href', oldHref.replace(domainReplacePattern+'/', urlRoot));
+      $(this).attr('target', '_blank');
+    });
+  }
 
   /* List of empty nodes, containing only a toctree */
   const emptyTocNodes = [
@@ -12,6 +28,8 @@ $(function() {
     'deployment',
     'development/index',
     'docker-monitor/index',
+    'installation-guide/elasticsearch-cluster/index',
+    'installation-guide/wazuh-cluster/index',
     'installation-guide/upgrading/legacy/index',
     'installation-guide/packages-list/linux/linux-index',
     'installation-guide/packages-list/solaris/solaris-index',
@@ -22,7 +40,31 @@ $(function() {
     'user-manual/agents/listing/index',
     'user-manual/kibana-app/reference/index',
     'user-manual/ruleset/ruleset-xml-syntax/index',
+    'installation-guide/distributed-deployment/step-by-step-installation/elasticsearch-cluster/index',
+    'installation-guide/distributed-deployment/step-by-step-installation/wazuh-cluster/index',
+    'user-manual/capabilities/active-response/ar-use-cases/index',
   ];
+
+  /* List of nodes in the toctree that should be open in a new tab */
+  const newTabNodes = [
+    'user-manual/api/reference',
+    'cloud-service/apis/reference',
+  ];
+  if ( useApiRedoc ) {
+    markTocNodesWithClass(newTabNodes, 'js-new-tab');
+    $('.js-new-tab').attr('target', '_blank');
+
+    /* Links to new tab found within the main content */
+    $('#main-content .reference.internal').each(function() {
+      const linkRef = this;
+      newTabNodes.forEach(function(item) {
+        if (linkRef.href.indexOf(item) !== -1) {
+          $(linkRef).attr('target', '_blank');
+          return;
+        }
+      });
+    });
+  }
 
   /* list of nodes (by title) which will not show their subtree */
   const hideSubtreeNodes = [
@@ -34,16 +76,6 @@ $(function() {
 
   markTocNodesWithClass(emptyTocNodes, 'empty-toc-node');
   checkScroll();
-  if (document.location.hash) {
-    correctScrollTo(spaceBeforeAnchor);
-  }
-
-  /* Finds current page section in globaltoc */
-  $('.globaltoc .toctree-l2.current a').each(function(e) {
-    if (!$(this).siblings('ul').length) {
-      $(this).addClass('leaf');
-    }
-  });
 
   /* Finds all nodes that contains subtrees within the globaltoc and appends a toggle button to them */
   $('.globaltoc .toctree-l1 a').each(function(e) {
@@ -53,39 +85,7 @@ $(function() {
     }
   });
 
-  showCurrentSubtree();
   hideSubtree(hideSubtreeNodes);
-
-  /* Show the hidden menu */
-  setTimeout(function() {
-    $('#navbar').removeClass('hidden');
-  }, 100);
-
-  $(window).on('hashchange', function() {
-    updateFromHash();
-    correctScrollTo(spaceBeforeAnchor);
-  });
-
-  /**
-   * Updates the hash value (from the URL) in order to update the selected leaf from the globl toctree.
-   * That is, when the sections within a document are included in the toctree.
-   */
-  function updateFromHash() {
-    loc = location.hash;
-    selectLeaf(loc);
-  }
-
-  /**
-   * When sections of a document are included in the toctree, this updates the selected section in the global toctree.
-   * @param {string} hash String that appearse after the sign # in the URL.
-   */
-  function selectLeaf(hash) {
-    if (hash.length > 0) {
-      $('.globaltoc [href="' + hash + '"]').addClass('current');
-    } else {
-      $('.globaltoc [href="#"]').addClass('current');
-    }
-  }
 
   /* Turn all tables in responsive table */
   reponsiveTables();
@@ -103,7 +103,7 @@ $(function() {
 
   /* Page scroll event -------------------------------------------------------*/
   $('#btn-scroll').on('click', function() {
-    $('html, body').animate({scrollTop: 0}, 'slow');
+    $('html, body').animate({scrollTop: 0}, 'smooth');
     return false;
   });
 
@@ -125,10 +125,7 @@ $(function() {
    */
   function checkScroll() {
     const scrollTop = $(document).scrollTop();
-    let headerHeight = 100;
-    if ($('#page').hasClass('no-latest-docs')) {
-      headerHeight += parseInt($('.no-latest-notice').outerHeight());
-    }
+    const headerHeight = parseInt($('#header').outerHeight());
     if (scrollTop >= headerHeight) {
       $('body').addClass('scrolled');
     } else {
@@ -138,7 +135,7 @@ $(function() {
 
   /* -- Menu scroll -------------------------------------------------------------------------------*/
 
-  const navbarTop = 100;
+  let navbarTop = parseInt($('#header').outerHeight());
   let noticeHeight = 0;
   if ($('#page').hasClass('no-latest-docs')) {
     noticeHeight = parseInt($('.no-latest-notice').outerHeight());
@@ -150,7 +147,6 @@ $(function() {
   let eventScroll;
 
   heightNavbar();
-  headerSticky();
 
   setTimeout(function() {
     if ($('#page').hasClass('no-latest-docs')) {
@@ -203,22 +199,6 @@ $(function() {
       }
     }, {passive: false});
   }
-
-  /* $('#navbar-globaltoc').on('mousewheel', function(e) {
-    eventScroll = 'mousewheel';
-    if (e.originalEvent.wheelDelta > 0 || e.originalEvent.detail < 0) {
-      scrollDirection = 'up';
-    } else {
-      scrollDirection = 'down';
-    }
-    enableDisableScroll();
-    if (disableScroll) {
-      e.preventDefault();
-      e.stopPropagation();
-      e.returnValue = false;
-      return false;
-    }
-  }); */
 
   $('#navbar-globaltoc').keydown(function(e) {
     eventScroll = 'keys';
@@ -291,7 +271,6 @@ $(function() {
     navHeight = parseInt($('#globaltoc').outerHeight());
     /* Update height of navbar */
     heightNavbar();
-    headerSticky();
   });
 
   $('.navbar-toggler').on('click', function(e) {
@@ -306,16 +285,19 @@ $(function() {
    * Changes the navbar (globaltoc) height
    */
   function heightNavbar() {
+    const noticeElement = $('.no-latest-notice');
+    noticeHeight = noticeElement.length == 0 ? 0 : parseInt(noticeElement.outerHeight());
     if ($(window).width() >= 992) {
-      if (documentScroll <= navbarTop) {
-        $('#navbar').css({'padding-top': (noticeHeight + navbarTop - documentScroll) + 'px'});
-        $('#navbar-globaltoc').css({'height': 'calc(100vh - 152px - ' + noticeHeight + 'px + ' + documentScroll + 'px)'});
+      if (!$('body').hasClass('scrolled')) {
+        navbarTop = parseInt($('#header').outerHeight());
+        $('#navbar').css({'padding-top': (navbarTop - documentScroll) + 'px'});
+        $('#navbar-globaltoc').css({'height': 'calc(100vh - ' + (parseInt($('#navbar .search_main').outerHeight()) + parseInt($('#header').outerHeight())) + 'px + ' + documentScroll + 'px)', 'padding-top': 0});
       } else {
-        $('#navbar').css({'padding-top': noticeHeight});
-        $('#navbar-globaltoc').css({'height': 'calc(100vh - 152px - ' + noticeHeight + 'px + ' + navbarTop + 'px)'});
+        $('#navbar').css({'padding-top': noticeHeight +'px'});
+        $('#navbar-globaltoc').css({'height': 'calc(100vh - ' + noticeHeight + 'px - ' + parseInt($('#header-sticky').outerHeight()) + 'px)', 'padding-top': 0});
       }
-      $('#navbar-globaltoc').css({'padding-top': 0});
     } else {
+      navbarTop = parseInt($('#header-sticky').outerHeight());
       if (documentScroll <= navbarTop) {
         $('#navbar').css({'padding-top': 0});
         $('#navbar-globaltoc').css({'padding-top': (noticeHeight + 100) + 'px'});
@@ -323,18 +305,6 @@ $(function() {
         $('#navbar').css({'padding-top': 0});
         $('#navbar-globaltoc').css({'padding-top': (noticeHeight + 52) + 'px'});
       }
-    }
-  }
-
-  /**
-   * Changes the "top" value of sticky header
-   */
-  function headerSticky() {
-    const documentScroll = $(window).scrollTop();
-    if (documentScroll >= (noticeHeight + 100)) {
-      $('#header-sticky').css({'top': noticeHeight});
-    } else {
-      $('#header-sticky').css({'top': '-52px'});
     }
   }
 
@@ -364,26 +334,6 @@ $(function() {
     completelyHideMenuItems();
     return false;
   });
-
-  /**
-   * Shows the selected style for the parent document of pages that don't appear in the globaltoc
-   * @return {boolean} Returns true only if this funcionability in not applicable to the current page.
-   */
-  function showCurrentSubtree() {
-    updateFromHash();
-    if ($('ul li.toctree-l1 a.current.reference.internal, ul li.toctree-l1 .current > .leaf').length == 0 && !$('#page').hasClass('index') && !$('#page').hasClass('not-indexed')) {
-      $('.globaltoc :contains("' + $('#breadcrumbs li:nth-last-child(2) a').text() + '")').addClass('show').addClass('current');
-      return true;
-    }
-    let currentLeaf = $('.globaltoc a.current.leaf');
-    if (currentLeaf.length == 0) {
-      currentLeaf = $('.globaltoc [href="#"].current');
-    }
-    currentLeaf.parents('li').each(function() {
-      $(this).addClass('initial').addClass('show');
-    });
-    completelyHideMenuItems();
-  }
 
   /**
    * Completely hides the visually hidden elements
@@ -420,9 +370,6 @@ $(function() {
         /* The selected menu link in the globaltoc acts as the toggle button, showing on and off its subtree */
         if (regex.test(href) || isCurrent) {
           $(this).addClass(className);
-        }
-        if (isCurrent) {
-          $(this).addClass('current-toc-node');
         }
       });
     });
@@ -463,28 +410,18 @@ $(function() {
     checkScroll();
   });
 
-  /**
-   * Corrects the scrolling movement so the element to which the page is being scrolled appears correctly in the screen,
-   * having in mind the fixed top bar and the no-latest-notice if present.
-   * @param {int} spaceBeforeAnchor Space required between the target element and the top of the window.
-   */
-  function correctScrollTo(spaceBeforeAnchor) {
-    if ($('#page').hasClass('no-latest-docs')) {
-      spaceBeforeAnchor = spaceBeforeAnchor + 40;
-    }
-    setTimeout(function() {
-      window.scrollTo(window.scrollX, window.scrollY - spaceBeforeAnchor);
-    }, 10);
-  }
-
-  /* -- Add funcionability for cloud-info --------------------------------------------------------------------------- */
+  /* -- Add functionality for the capabilities in the home page --------------------------------------------- */
 
   if ($(window).outerWidth() < 1200) {
     $('#capabilities .left .topic.active p').not('.topic-title').slideDown(300);
   }
 
   $(window).resize(function() {
+    clearInterval(capaInterval);
     if ($(window).outerWidth() >= 1200) {
+      if (simultaneousCapaSlide) {
+        initCapabilities();
+      }
       $('#capabilities .left .topic p').not('.topic-title').css({'display': 'none'});
       if ($('#capabilities .left .topic.active').length > 0) {
         capabilitiesHome($('#capabilities .left .topic.active'));
@@ -492,23 +429,87 @@ $(function() {
         capabilitiesHome($('#capabilities .left .topic').first());
       }
     } else {
+      if (simultaneousCapaSlide) {
+        stopCapabilities();
+      }
       $('#capabilities .left .topic.active p').not('.topic-title').css({'display': 'block'});
     }
   });
 
   $('#capabilities .left .topic').click(function() {
-    capabilitiesHome(this);
+    capabilitiesHome(this, simultaneousCapaSlide);
   });
 
+  if ($(window).outerWidth() >= 1200 && simultaneousCapaSlide ) {
+    initCapabilities();
+  }
+
+  if ( simultaneousCapaSlide ) {
+    $('.screenshots .carousel').carousel({
+      interval: intervalTime,
+    });
+
+    $('.capab .topic, .screenshots .carousel').on('click', function() {
+      $('.carousel').carousel('pause');
+      clearInterval(capaInterval);
+    });
+  }
+
+  /**
+   * Initialices part of the functionality of the capability selection in the home page
+   */
+  function initCapabilities() {
+    capaInterval = setInterval(function() {
+      changeCapabilityNext(true);
+    }, intervalTime);
+
+    $('.screenshots .carousel .carousel-control-prev, .screenshots .carousel .carousel-control-next').click(function() {
+      /* Update the selected capability to the correct one only when the slide animation has started */
+      $('.screenshots .carousel').one('slide.bs.carousel', function(carousel) {
+        changeCapabilityTo(carousel.to, false);
+      });
+    });
+  }
+
+  /**
+   * Stops part of the functionality of the capability selection in the home page
+   */
+  function stopCapabilities() {
+    $('.screenshots .carousel .carousel-control-prev, .screenshots .carousel .carousel-control-next').off();
+  }
+
+  /**
+   * Given an index (capaindex), change the active capability.
+   * @param {int} capaindex Index of the capability to be selected
+   * @param {boolean} auto Indicates whether the carousel slide must be automatically updated (true) or not (false)
+   */
+  function changeCapabilityTo(capaindex, auto) {
+    const topics = $('#capabilities .left .topic');
+    capabilitiesHome(topics.eq(capaindex), auto);
+  }
+
+  /**
+   * Change the active capability to the next one.
+   * @param {boolean} auto Indicates whether the carousel slide must be automatically updated (true) or not (false)
+   */
+  function changeCapabilityNext(auto) {
+    const topics = $('#capabilities .left .topic');
+    const active = $('#capabilities .left .topic.active');
+    let capaindex = topics.index(active);
+    capaindex = (capaindex+1) % topics.length;
+    capabilitiesHome(topics.eq(capaindex), auto);
+  }
 
   /**
    * Only for main index (documentation's home page).
    * Functionality of the capabilities section: selects capability, controls the responsive behavior, etc.
    * @param {DOMObject} ele Element containing the capability currently selected (active) or clicked.
+   * @param {boolean} auto Indicates whether the carousel slide must be automatically updated (true) or not (false)
    */
-  function capabilitiesHome(ele) {
+  function capabilitiesHome(ele, auto) {
     let eleOther = ele;
     let active = false;
+    const item = $('#capabilities .left .topic').index(ele);
 
     if ($('#page.index').length > 0) {
       if ($(ele).hasClass('active')) {
@@ -518,6 +519,11 @@ $(function() {
       }
       if ($('#capabilities .left .topic.active').length <= 0) {
         eleOther = false;
+      }
+
+      /* Update slider */
+      if ( auto ) {
+        $('.screenshots .carousel').carousel(item);
       }
 
       if ($(window).outerWidth() >= 1200) {
@@ -565,7 +571,6 @@ $(function() {
     let lastResult = null;
     let splitURL = null;
     const configAdd = {childList: true};
-    const configAtt = {attributes: true, attributeOldValue: true};
     let observerResults = null;
     let observerResultList = null;
     let observerResultText = null;
@@ -600,7 +605,7 @@ $(function() {
           observerResultList = new MutationObserver(addedResult);
           observerResultList.observe(ulSearch[0], configAdd);
           observerResultText = new MutationObserver(changeResultText);
-          observerResultText.observe($('#search-results > p')[0], configAtt);
+          observerResultText.observe($('#search-results > p')[0], configAdd);
         }
       }
     };
@@ -608,7 +613,7 @@ $(function() {
     /* Replaces the result message */
     const changeResultText = function(mutationsList, observer) {
       for (i = 0; i < mutationsList.length; i++) {
-        if (mutationsList[i].type === 'attributes') {
+        if (mutationsList[i].type === 'childList') {
           observerResultText.disconnect();
           const totalResults = $('ul.search li').length;
           const excludedResults = $('ul.search li.excluded-search-result').length;
@@ -690,8 +695,11 @@ $(function() {
    * If .no-latest-notice is not visible, the margin is zero
    */
   function adjustLightboxHeight() {
-    noLatestHeight = document.querySelector('.no-latest-notice').offsetHeight;
-    $('#lightbox').css('margin-top', noLatestHeight);
+    const noLatestElement = $('.no-latest-notice');
+    if ( noLatestElement.length > 0) {
+      const noLatestHeight = noLatestElement[0].offsetHeight;
+      $('#lightbox').css('margin-top', noLatestHeight);
+    }
   }
 
   /* Restore overflow when pressing key 'Esc' */
@@ -706,10 +714,12 @@ $(function() {
     const blockCode = $(this).parent();
 
     /* Output */
-    if (!blockCode.hasClass('output')) {
+    if (!blockCode.hasClass('output') && !blockCode.hasClass('no-copy')) {
       blockCode.prepend('<button type="button" class="copy-to-clipboard" title="Copy to clipboard"><span>Copied to clipboard</span><i class="far fa-copy" aria-hidden="true"></i></button>');
     } else {
-      blockCode.prepend('<div class="admonition admonition-output"><p class="first admonition-title">Output</p></div>');
+      if (blockCode.hasClass('output')) {
+        blockCode.prepend('<div class="admonition admonition-output"><p class="first admonition-title">Output</p></div>');
+      }
     }
 
     /* Escaped tag signs */
@@ -853,6 +863,13 @@ $(function() {
     e.stopPropagation();
     return false;
   });
+
+  /* Add image for the pages with deprecated content -------------------------------------------*/
+  $('.dropdown-menu li a').each(function() {
+    if ( $(this).text().indexOf(DOCUMENTATION_OPTIONS.VERSION) != -1 && $(this).hasClass('disable') ) {
+      $('#rst-content').addClass('deprecated-content');
+    }
+  });
 });
 
 /**
@@ -941,4 +958,40 @@ function replacePromptOnHeredoc(code, heredocs, isConsole = false, isBash = fals
   });
 
   return parsed.join('\n');
+}
+
+/**
+ * Compare the numbers of 2 release versions
+ * @param {string} version1 First version to compare
+ * @param {string} version2 Second version to compare
+ * @return {int} Resulting value:
+ *  * 1 if version1 > version2
+ *  * 0 if version1 = version2
+ *  * -1 if version1 < version2
+ *  * false if the comparation could not be done
+ */
+function compareVersion(version1, version2) {
+  let result = false;
+  if ( typeof(version1) == 'string' && typeof(version2) == 'string') {
+    let v1 = version1.split('.');
+    let v2 = version2.split('.');
+    if ( v1.length >= 2 && v2.length >= 2 ) {
+      v1 = v1.map((x) =>parseInt(x));
+      v2 = v2.map((x) =>parseInt(x));
+      if ( v1[0] > v2[0] ) {
+        result = 1;
+      } else if ( v1[0] < v2[0] ) {
+        result = -1;
+      } else {
+        if ( v1[1] > v2[1] ) {
+          result = 1;
+        } else if ( v1[1] < v2[1] ) {
+          result = -1;
+        } else {
+          result = 0;
+        }
+      }
+    }
+  }
+  return result;
 }

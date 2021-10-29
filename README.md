@@ -11,7 +11,7 @@ The online documentation for this project is available in this repository. Membe
 
 ## Online documentation
 
-- [Current version (3.x)](https://documentation.wazuh.com/current/)
+- [Current version (4.x)](https://documentation.wazuh.com/current/)
 - [Legacy version (2.1)](https://documentation.wazuh.com/2.1/)
 
 ## Contribute to this project
@@ -23,13 +23,12 @@ You can also join our [users mailing list](https://groups.google.com/d/forum/waz
 ## Software and libraries used
 
 - [Python](https://www.python.org/) 3.5+
-- [Sphinx](http://www.sphinx-doc.org/) 3.0.3
+- [Sphinx](http://www.sphinx-doc.org/) 3.0.4
 - [sphinxcontrib-images](https://pypi.org/project/sphinxcontrib-images/) 0.9.2
-- [sphinxprettysearchresults](https://pypi.org/project/sphinxprettysearchresults/) 0.3.5
 - [sphinx-tabs](https://github.com/djungelorm/sphinx-tabs) 1.1.13
 
 ## Copyright & License
 
-Copyright © 2020 Wazuh, Inc.
+Copyright © 2021 Wazuh, Inc.
 
 Wazuh is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.

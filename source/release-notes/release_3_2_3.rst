@@ -1,5 +1,7 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Wazuh 3.2.3 has been released. Check out our release notes to discover the changes and additions of this release.
 .. _release_3_2_3:
 
 3.2.3 Release notes
@@ -43,7 +45,7 @@ These are the most relevant changes in the Wazuh core:
 Wazuh app for Splunk
 --------------------
 
-New section describing the installation process for the :ref:`Wazuh app for Splunk <installation_splunk>`.
+New section describing the installation process for the `Wazuh app for Splunk <https://documentation.wazuh.com/3.13/installation-guide/installing-splunk/index.html>`_.
 
 Wazuh app for Kibana
 --------------------

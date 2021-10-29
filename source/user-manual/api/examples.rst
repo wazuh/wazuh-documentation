@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _api_examples:
 
@@ -10,43 +10,28 @@ Examples
 CURL
 ^^^^
 
-cURL is a command-line tool for sending http/https requests and commands. It is pre-installed on many Linux and Mac systems and can be used to interact with the API. Some examples:
+cURL is a command-line tool for sending http/https requests and commands. It is pre-installed on many Linux and Mac systems and can be used to interact with the Wazuh API. Please note that before executing any endpoint, a JWT token will be needed. In the following examples the ``raw`` option has been used in order to obtain the token and save it in an environment variable (``$TOKEN``). For information about getting the JWT token visit :ref:`Getting started <api_log_in>`.
 
 **GET**
 
 .. code-block:: console
 
-    # curl -u foo:bar "http://localhost:55000"
+    # curl -k -X GET "https://localhost:55000/" -H  "Authorization: Bearer $TOKEN"
 
 .. code-block:: json
     :class: output
 
     {
-       "error": 0,
-       "data": {
-          "msg": "Welcome to Wazuh HIDS API",
-          "api_version": "v|WAZUH_LATEST|",
-          "hostname": "wazuh",
-          "timestamp": "Mon Dec 03 2018 03:00:51 GMT+0000 (UTC)"
-       }
-    }
-
-
-**PUT**
-
-.. code-block:: console
-
-    # curl -u foo:bar -X PUT "http://localhost:55000/agents/new_agent"
-
-.. code-block:: json
-    :class: output
-
-    {
-       "error": 0,
-       "data": {
-          "id": "009",
-          "key": "MDA5IG5ld19hZ2VudCBhbnkgNWQ3NGY1ZjY3YTJiY2U5M2MzMjAyOGM2NTRjMjkyNjgwYTQxMDYzYmI3Y2FhYmI4YjI2ZTU1ZTY4OTUzNGYwMQ=="
-       }
+        "data": {
+            "title": "Wazuh API",
+            "api_version": "4.0.0",
+            "revision": 4000,
+            "license_name": "GPL 2.0",
+            "license_url": "https://github.com/wazuh/wazuh/blob/master/LICENSE",
+            "hostname": "wazuh-master",
+            "timestamp": "2020-05-25T07:05:00+0000"
+        },
+        "error": 0
     }
 
 
@@ -54,17 +39,25 @@ cURL is a command-line tool for sending http/https requests and commands. It is 
 
 .. code-block:: console
 
-    # curl -u foo:bar -X POST -d '{"name":"NewHost","ip":"10.0.0.8"}' -H 'Content-Type:application/json' "http://localhost:55000//agents"
+    # curl -k -X POST "https://localhost:55000/security/users" -H  "Authorization: Bearer $TOKEN" -H  "Content-Type: application/json" -d "{\"username\":\"test_user\",\"password\":\"Test_user1\"}"
 
 .. code-block:: json
     :class: output
 
     {
-       "error": 0,
-       "data": {
-          "id": "010",
-          "key": "MDEwIE5ld0hvc3QgMTAuMC4wLjggZDQzMzU4NzNjMDA3OTRjZmRmZjA2ZWU5ZjBlODI1YzA3NmQ4MDBjNmY2OTRhMjY1NTM0NzBmMjY5NDA0ZTM1Mw=="
-       }
+      "data": {
+        "affected_items": [
+          {
+            "username": "test_user",
+            "roles": []
+          }
+        ],
+        "total_affected_items": 1,
+        "total_failed_items": 0,
+        "failed_items": []
+      },
+      "message": "User was successfully created",
+      "error": 0
     }
 
 
@@ -72,14 +65,35 @@ cURL is a command-line tool for sending http/https requests and commands. It is 
 
 .. code-block:: console
 
-    # curl -u foo:bar -X DELETE "http://localhost:55000/rootcheck/001?pretty"
+    # curl -k -X DELETE "https://localhost:55000/groups?pretty=true&groups_list=all" -H  "Authorization: Bearer $TOKEN"
 
 .. code-block:: json
     :class: output
 
     {
-       "error": 0,
-       "data": "Rootcheck database deleted"
+      "data": {
+        "affected_items": [
+          "group1",
+          "group2",
+          "group3"
+        ],
+        "total_affected_items": 3,
+        "total_failed_items": 0,
+        "failed_items": [],
+        "affected_agents": [
+          "001",
+          "002",
+          "003",
+          "005",
+          "006",
+          "007",
+          "008",
+          "009",
+          "010"
+        ]
+      },
+      "message": "All selected groups were deleted",
+      "error": 0
     }
 
 .. _api_python-label:
@@ -87,70 +101,87 @@ cURL is a command-line tool for sending http/https requests and commands. It is 
 Python
 ^^^^^^
 
-You can also interact with the API using Python as shown below:
+It is also possible to interact with the Wazuh API using Python as shown below:
 
 Code:
 
 .. code-block:: python
 
-    #!/usr/bin/env python
+    #!/usr/bin/env python3
 
     import json
-    import requests # To install requests, use: pip install requests
+    from base64 import b64encode
+
+    import requests  # To install requests, use: pip install requests
+    import urllib3
 
     # Configuration
-    base_url = 'https://IP:55000'
-    auth = requests.auth.HTTPBasicAuth('foo', 'bar')
-    verify = False
-    requests.packages.urllib3.disable_warnings()
+    endpoint = '/agents?select=lastKeepAlive&select=id&status=disconnected'
 
-    # Request
-    url = '{0}{1}'.format(base_url, "/agents/000")
-    r = requests.get(url, auth=auth, params=None, verify=verify)
-    print(json.dumps(r.json(), indent=4, sort_keys=True))
-    print("Status: {0}".format(r.status_code))
+    protocol = 'https'
+    host = 'API_IP'
+    port = 'API_PORT'
+    user = 'wazuh'
+    password = 'wazuh'
+
+    # Disable insecure https warnings (for self-signed SSL certificates)
+    urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+    # Functions
+    def get_response(url, headers, verify=False):
+        """Get API result"""
+        request_result = requests.get(url, headers=headers, verify=verify)
+
+        if request_result.status_code == 200:
+            return json.loads(request_result.content.decode())
+        else:
+            raise Exception(f"Error obtaining response: {request_result.json()}")
+
+    # Variables
+    base_url = f"{protocol}://{host}:{port}"
+    login_url = f"{base_url}/security/user/authenticate"
+    basic_auth = f"{user}:{password}".encode()
+    headers = {'Authorization': f'Basic {b64encode(basic_auth).decode()}'}
+    headers['Authorization'] = f'Bearer {get_response(login_url, headers)["data"]["token"]}'
+
+    #Request
+    response = get_response(base_url + endpoint, headers)
+
+    # WORK WITH THE RESPONSE AS YOU LIKE
+    print(json.dumps(response, indent=4, sort_keys=True))
 
 .. code-block:: json
     :class: output
 
     {
         "data": {
-            "dateAdd": "2018-08-02 16:48:58",
-            "id": "000",
-            "ip": "127.0.0.1",
-            "lastKeepAlive": "9999-12-31 23:59:59",
-            "manager_host": "wazuh",
-            "name": "wazuh",
-            "os": {
-                "arch": "x86_64",
-                "codename": "Bionic Beaver",
-                "major": "18",
-                "minor": "04",
-                "name": "Ubuntu",
-                "platform": "ubuntu",
-                "uname": "Linux |wazuh |4.15.0-29-generic |#31-Ubuntu SMP Tue Jul 17 15:39:52 UTC 2018 |x86_64",
-                "version": "18.04 LTS"
-            },
-            "status": "Active",
-            "version": "Wazuh v|WAZUH_LATEST|"
+            "affected_items": [
+                {
+                    "id": "009",
+                    "lastKeepAlive": "2020-05-23T12:39:50Z"
+                },
+                {
+                    "id": "010",
+                    "lastKeepAlive": "2020-05-23T12:39:50Z"
+                }
+            ],
+            "failed_items": [],
+            "total_affected_items": 2,
+            "total_failed_items": 0
         },
+        "message": "All selected agents information was returned",
         "error": 0
     }
 
-.. code-block:: none
-    :class: output
 
-    Status: 200
-
-
-For a more complete example, see ``/var/ossec/api/examples/api-client.py``.
+In this example, the script will show which agents are disconnected with their ID and the time of their last connection. All it does is print the response of the GET request. But it can be modified to do other things with the response obtained. PUT, POST or DELETE requests can also be made. It is possible to call other endpoints, too.
 
 .. _api_powershell_label:
 
 PowerShell
 ^^^^^^^^^^
 
-The **Invoke-RestMethod** cmdlet was introduced in PowerShell 3.0.  It sends requests to the API and handles the response.
+The **Invoke-RestMethod** cmdlet was introduced in PowerShell 3.0.  It sends requests to the Wazuh API and handles the response.
 
 Code:
 
@@ -173,31 +204,48 @@ Code:
         [System.Net.ServicePointManager]::CertificatePolicy = new-object PolicyCert
     }
 
+
     # Configuration
-    $base_url = "https://IP:55000"
-    $username = "foo"
-    $password = "bar"
+    $endpoint = "/agents?select=lastKeepAlive&select=id&status=disconnected"
+    $method = "get"
+
+    $protocol = "https"
+    $host_name = "API_IP"
+    $port = "API_PORT"
+    $username = "wazuh"
+    $password = "wazuh"
+
+    # Variables
+    $base_url = $protocol + "://" + $host_name + ":" + $port
+    $login_url = $base_url + "/security/user/authenticate"
+    $endpoint_url = $base_url + $endpoint
     $base64AuthInfo = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(("{0}:{1}" -f $username, $password)))
+    $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
+    $headers.Add("Content-Type", 'application/json')
+    $headers.Add("Authorization", "Basic " + $base64AuthInfo)
+
     Ignore-SelfSignedCerts
+    $token_response = Invoke-RestMethod -Uri $login_url -Headers $headers
+    $headers["Authorization"] = "Bearer " + $token_response.data.token
 
     # Request
-    $url = $base_url + "/syscheck/000/last_scan"
-    $method = "get"
     try{
-        $r = Invoke-RestMethod -Headers @{Authorization=("Basic {0}" -f $base64AuthInfo)} -Method $method -Uri $url
+        $response = Invoke-RestMethod -Method $method -Uri $endpoint_url -Headers $headers
     }catch{
-        $r = $_.Exception
+        $response = $_.Exception.Response
     }
 
-    Write-Output $r
+    # WORK WITH THE RESPONSE AS YOU LIKE
+    Write-Output $response.data
 
 
 .. code-block:: none
     :class: output
 
-    error data
-    ----- --------
-    0     @{syscheckTime=Wed Feb 24 09:55:04 2016; syscheckEndTime=Wed Feb 24 10:00:42 2016}
+    affected_items                                   total_affected_items total_failed_items failed_items
+    --------------                                   -------------------- ------------------ ------------
+    {@{lastKeepAlive=2020-05-23T12:39:50Z; id=009},  2                    0                  {}
+    @{lastKeepAlive=2020-05-23T12:39:50Z; id=010}}
 
 
-For a more complete example, see ``/var/ossec/api/examples/api-client.ps1``.
+As in the previous case, this script can be modified as the user desires.

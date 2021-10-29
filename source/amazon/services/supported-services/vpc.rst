@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _amazon_vpc:
 
@@ -10,21 +10,21 @@ Amazon VPC
 Amazon configuration
 --------------------
 
-1. Select an existing S3 Bucket or :ref:`create a new one. <S3_bucket>`
+#. Select an existing S3 Bucket or :ref:`create a new one. <S3_bucket>`
 
-2. Go to Services > Compute > EC2:
+#. Go to Services > Compute > EC2:
 
     .. thumbnail:: ../../../images/aws/aws-create-vpc-1.png
       :align: center
       :width: 70%
 
-3. Go to Network & Security > Network Interfaces on the left menu. Select a network interface and select *Create a flow log* on the *Actions* menu:
+#. Go to Network & Security > Network Interfaces on the left menu. Select a network interface and select *Create a flow log* on the *Actions* menu:
 
     .. thumbnail:: ../../../images/aws/aws-create-vpc-2.png
       :align: center
       :width: 70%
 
-4. Change all fields to look like the following screenshot and paste the ARN of the previously created bucket:
+#. Change all fields to look like the following screenshot and paste the ARN of the previously created bucket:
 
     .. thumbnail:: ../../../images/aws/aws-create-vpc-3.png
       :align: center
@@ -34,7 +34,7 @@ Amazon configuration
 Wazuh configuration
 -------------------
 
-1. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following block:
+#. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following block:
 
     .. code-block:: xml
 
@@ -53,7 +53,7 @@ Wazuh configuration
     .. note::
       Check the :ref:`AWS S3 module <wodle_s3>` reference manual to learn more about each setting.
 
-2. Restart Wazuh in order to apply the changes:
+#. Restart Wazuh in order to apply the changes:
 
     * If you're configuring a Wazuh manager:
 

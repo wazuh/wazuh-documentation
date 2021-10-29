@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _create-osx:
 
@@ -18,11 +18,11 @@ Requirements
 
 If ``Packages`` and ``Brew`` are not already installed in your system, they can be installed using the generate_wazuh_packages.sh script
 
-Download our wazuh-packages repository from GitHub and go to the macos directory.
+Download our wazuh-packages repository from GitHub and go to the macos directory of the |WAZUH_PACKAGES_BRANCH| branch.
 
 .. code-block:: console
 
-  $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/macos
+  $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/macos && git checkout |WAZUH_PACKAGES_BRANCH|
 
 Execute the ``generate_wazuh_packages.sh`` script, with the different options you desire.
 
@@ -34,9 +34,9 @@ Execute the ``generate_wazuh_packages.sh`` script, with the different options yo
   :class: output
 
   Usage: ./generate_wazuh_packages.sh [OPTIONS]
-
-  Build options:
-      -b, --branch <branch>         [Required] Select Git branch or tag e.g.
+  
+    Build options:
+      -b, --branch <branch>         [Required] Select Git branch or tag. 
       -s, --store-path <path>       [Optional] Set the destination absolute path of package.
       -j, --jobs <number>           [Optional] Number of parallel jobs when compiling.
       -r, --revision <rev>          [Optional] Package revision that append to version e.g. x.x.x-rev
@@ -44,8 +44,9 @@ Execute the ``generate_wazuh_packages.sh`` script, with the different options yo
       -h, --help                    [  Util  ] Show this help.
       -i, --install-deps            [  Util  ] Install build dependencies (Packages).
       -x, --install-xcode           [  Util  ] Install X-Code and brew. Can't be executed as root.
-
-  Signing options:
+      -v, --verbose                 [  Util  ] Show additional information during the package generation.
+  
+    Signing options:
       --keychain                    [Optional] Keychain where the Certificates are installed.
       --keychain-password           [Optional] Password of the keychain.
       --application-certificate     [Optional] Apple Developer ID certificate name to sign Apps and binaries.

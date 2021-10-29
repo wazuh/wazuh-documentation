@@ -1,4 +1,7 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
+
+.. meta::
+  :description: The Wazuh Ruleset is used to analyze incoming events and generate alerts when appropriate. Learn more about it in the Wazuh documentation.
 
 .. _rules_syntax:
 
@@ -20,42 +23,67 @@ The **xml labels** used to configure ``rules`` are listed here.
 +=========================+===============================================================+======================================================================================================+
 | `rule`_                 | See `table <rules.html#rule>`_ below.                         | Its starts a new rule and its defining options.                                                      |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `match`_                | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | It will attempt to find a match in the log, deciding if the rule should be triggered.                |
+| `match`_                | Any `regular expression <regex.html>`_.                       | It will attempt to find a match in the log using `sregex <regex.html#sregex-os-match-syntax>`_  by   |
+|                         |                                                               | default, deciding if the rule should be triggered.                                                   |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `regex`_                | Any `regex expression <regex.html#regex-os-regex-syntax>`_.   | It does the same as ``match`` but in *regex* instead of *sregex*.                                    |
+| :ref:`regex_rules`      | Any `regular expression <regex.html>`_.                       | It does the same as ``match``, but with `regex <regex.html#regex-os-regex-syntax>`_ as default.      |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `decoded_as`_           | Any decoder's name.                                           | It will match with logs that have been decoded by a specific decoder.                                |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `category`_             | ossec, ids, syslog, firewall, web-log, squid or windows.      | It will match with logs whose decoder's `type <decoders.html#decoder>`_ concur.                      |
+| `category`_             | Any `type <decoders.html#type>`_.                             | It will match with logs whose decoder's `type <decoders.html#type>`_ concur.                         |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `field`_                | Name and `sregex <regex.html#sregex-os-match-syntax>`_        | It will compare a field extracted by the decoder in `order <decoders.html#order>`_ with a specific   |
-|                         |                                                               | value.                                                                                               |
+| `field`_                | Name and any `regular expression <regex.html>`_.              | It will compare a field extracted by the decoder in `order <decoders.html#order>`_ with a            |
+|                         |                                                               | regular expression.                                                                                  |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `srcip`_                | Any IP address.                                               | It will compare the IP address with the IP decoded as ``srcip``. Use "!" to negate it.               |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `dstip`_                | Any IP address.                                               | It will compare the IP address with the IP decoded as ``dstip``. Use "!" to negate it.               |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `extra_data`_           | Any String.                                                   | It will compare a string with the string decoded as ``extra_data``.                                  |
+| `srcport`_              | Any `regular expression <regex.html>`_.                       | It will compare a regular expression representing a port with a value decoded as ``srcport``.        |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `user`_                 | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | It will compare a sregex representing a username with a string decoded as ``user``.                  |
+| `dstport`_              | Any `regular expression <regex.html>`_.                       | It will compare a regular expression representing a port with a value decoded as ``dstport``.        |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `program_name`_         | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | It compares it with the program_name obtained in the pre-decoding phase.                             |
+| `data`_                 | Any `regular expression <regex.html>`_.                       | It will compare a regular expression representing a data with a value decoded as  ``data``.          |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `hostname`_             | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | It compares it with the hostname obtained in the pre-decoding phase.                                 |
+| `extra_data`_           | Any `regular expression <regex.html>`_.                       | It will compare a regular expression representing a extra data with a value decoded                  |
+|                         |                                                               | as ``extra_data``.                                                                                   |
++-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `user`_                 | Any `regular expression <regex.html>`_.                       | It will compare a regular expression representing a user with a value decoded as ``user``.           |
++-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `system_name`_          | Any `regular expression <regex.html>`_.                       | It will compare a regular expression representing a system name with a value decoded                 |
+|                         |                                                               | as ``system_name``.                                                                                  |
++-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `program_name`_         | Any `regular expression <regex.html>`_.                       | It will compare a regular expression representing a program name with a value pre-decoded            |
+|                         |                                                               | as ``program_name``.                                                                                 |
++-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `protocol`_             | Any `regular expression <regex.html>`_.                       | It will compare a regular expression representing a protocol with a value decoded as ``protocol``.   |
++-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `hostname`_             | Any `regular expression <regex.html>`_.                       | It will compare a regular expression representing a hostname with a value pre-decoded                |
+|                         |                                                               | as ``hostname``.                                                                                     |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `time`_                 | Any time range. e.g. (hh:mm-hh:mm)                            | It checks if the event was generated during that time range.                                         |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `weekday`_              | monday - sunday, weekdays, weekends                           | It checks whether the event was generated during certain weekdays.                                   |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `id`_                   | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | It will look for a match with the field decoded as ``ID``                                            |
+| `id`_                   | Any `regular expression <regex.html>`_.                       | It will compare a regular expression representing an ID with a value decoded as ``id``               |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `url`_                  | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | It will look for a match with the field decoded as ``url``                                           |
+| `url`_                  | Any `regular expression <regex.html>`_.                       | It will compare a regular expression representing a URL with a value decoded as ``url``              |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `location`_             | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | Location identifies the origin of the input.                                                         |
+| `location`_             | Any `regular expression <regex.html>`_.                       | It will compare a regular expression representing a location with a value pre-decoded                |
+|                         |                                                               | as ``location``.                                                                                     |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `action`_               | Any String.                                                   | It will compare it with the field decoded as ``action``.                                             |
+| `action`_               | Any String or `regular expression <regex.html>`_.             | It will compare a string or regular expression representing an action with a value decoded           |
+|                         |                                                               | as ``action``.                                                                                       |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `if_sid`_               | A rule ID.                                                    | It works similar to parent decoder. It will match if that rule ID has previously matched.            |
+| `status`_               | Any `regular expression <regex.html>`_.                       | It will compare a regular expression representing a status with a value decoded as ``status``.       |
++-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `srcgeoip`_             | Any `regular expression <regex.html>`_.                       | It will compare a regular expression representing a GeoIP source with a value decoded                |
+|                         |                                                               | as ``srcgeoip``.                                                                                     |
++-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `dstgeoip`_             | Any `regular expression <regex.html>`_.                       | It will compare a regular expression representing a GeoIP destination with a value decoded           |
+|                         |                                                               | as ``dstgeoip``.                                                                                     |
++-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `if_sid`_               | A list of rule IDs separated by commas or spaces.             | It works similar to parent decoder. It will match when a rule ID on the list has previously matched. |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `if_group`_             | Any group name.                                               | It will match if the indicated group has matched before.                                             |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
@@ -162,8 +190,6 @@ The **xml labels** used to configure ``rules`` are listed here.
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `group`_                | Any String.                                                   | Add additional groups to the alert.                                                                  |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `status`_               | started, aborted, succeeded, failed, lost, etc.               | Declares the current status of a rule.                                                               |
-+-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `mitre`_                | See `Mitre table <rules.html#mitre>`_ below.                  | Contains Mitre Technique IDs that fit the rule                                                       |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `var`_                  | Name for the variable. Most used: `BAD_WORDS`_                | Defines a variable that can be used anywhere inside the same file.                                   |
@@ -175,39 +201,39 @@ rule
 
 ``<rule>`` is the label that starts the block that defines a *rule*. In this section, different options for this label are explained.
 
-+---------------+----------------+----------------------------------------------------------------------------------------+
-| **level**     | Definition     | Specifies the level of the rule. Alerts and responses use this value.                  |
-+               +----------------+----------------------------------------------------------------------------------------+
-|               | Allowed values | 0 to 16                                                                                |
-+---------------+----------------+----------------------------------------------------------------------------------------+
-| **id**        | Definition     | Specifies the ID of the rule.                                                          |
-+               +----------------+----------------------------------------------------------------------------------------+
-|               | Allowed values | Any number from 1 to 999999                                                            |
-+---------------+----------------+----------------------------------------------------------------------------------------+
-| **maxsize**   | Definition     | Specifies the maximum size of the event.                                               |
-+               +----------------+----------------------------------------------------------------------------------------+
-|               | Allowed values | Any number from 1 to 9999                                                              |
-+---------------+----------------+----------------------------------------------------------------------------------------+
-| **frequency** | Definition     | Number of times the rule must have matched before firing.                              |
-+               +----------------+----------------------------------------------------------------------------------------+
-|               | Allowed values | Any number from 2 to 9999                                                              |
-+---------------+----------------+----------------------------------------------------------------------------------------+
-| **timeframe** | Definition     | The timeframe in seconds. This option is intended to be used with the frequency option.|
-+               +----------------+----------------------------------------------------------------------------------------+
-|               | Allowed values | Any number from 1 to 99999                                                             |
-+---------------+----------------+----------------------------------------------------------------------------------------+
-| **ignore**    | Definition     | The time (in seconds) to ignore this rule after firing it (to avoid floods).           |
-+               +----------------+----------------------------------------------------------------------------------------+
-|               | Allowed values | Any number from 1 to 999999                                                            |
-+---------------+----------------+----------------------------------------------------------------------------------------+
-| **overwrite** | Definition     | Used to supersede an OSSEC rule with local changes.                                    |
-+               +----------------+----------------------------------------------------------------------------------------+
-|               | Allowed values | yes, no                                                                                |
-+---------------+----------------+----------------------------------------------------------------------------------------+
-| **noalert**   | Definition     | Not trigger an alert if the rule matches.                                              |
-+               +----------------+----------------------------------------------------------------------------------------+
-|               | Allowed values | Attribute with no value                                                                |
-+---------------+----------------+----------------------------------------------------------------------------------------+
++---------------+----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **level**     | Definition     | Specifies the level of the rule. Alerts and responses use this value.                                                                                          |
++               +----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|               | Allowed values | 0 to 16                                                                                                                                                        |
++---------------+----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **id**        | Definition     | Specifies the ID of the rule.                                                                                                                                  |
++               +----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|               | Allowed values | Any number from 1 to 999999                                                                                                                                    |
++---------------+----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **maxsize**   | Definition     | Specifies the maximum size of the event.                                                                                                                       |
++               +----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|               | Allowed values | Any number from 1 to 9999                                                                                                                                      |
++---------------+----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **frequency** | Definition     | Number of times the rule must have matched before firing.                                                                                                      |
++               +----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|               | Allowed values | Any number from 2 to 9999                                                                                                                                      |
++---------------+----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **timeframe** | Definition     | The timeframe in seconds. This option is intended to be used with the frequency option.                                                                        |
++               +----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|               | Allowed values | Any number from 1 to 99999                                                                                                                                     |
++---------------+----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **ignore**    | Definition     | The time (in seconds) to ignore this rule after firing it (to avoid floods).                                                                                   |
++               +----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|               | Allowed values | Any number from 1 to 999999                                                                                                                                    |
++---------------+----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **overwrite** | Definition     | Used to supersede a rule with local changes.                                                                                                                   |
++               +----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|               | Allowed values | yes, no                                                                                                                                                        |
++---------------+----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **noalert**   | Definition     | Not trigger an alert if the rule matches.                                                                                                                      |
++               +----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|               | Allowed values | ``0`` (alerts, value by default) or ``1`` (no alerts). If ``noalert`` is set to ``1``, the event continues analyzing other rules despite the rule matches.     |
++---------------+----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Example:
 
@@ -227,11 +253,13 @@ match
 ^^^^^
 Used as a requisite to trigger the rule, will search for a match in the log event.
 
-+--------------------+-----------------------------------------------------------------+
-| **Default Value**  | n/a                                                             |
-+--------------------+-----------------------------------------------------------------+
-| **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_    |
-+--------------------+-----------------------------------------------------------------+
++--------------------+---------------------------------------------------------------+
+| **Default Value**  | n/a                                                           |
++--------------------+---------------------------------------------------------------+
+| **Allowed values** | Any `regex <regex.html#regex-os-regex-syntax>`_,              |
+|                    | `sregex <regex.html#sregex-os-match-syntax>`_ or              |
+|                    | `pcre2 <regex.html#pcre2-syntax>`_ expression.                |
++--------------------+---------------------------------------------------------------+
 
 Example:
 
@@ -245,6 +273,29 @@ Example:
 
 If the rule matches the ``id`` 100200 and the log contains the ``Queue flood!`` phrase in it, rule activates and triggers a level 3 alert.
 
+The attributes below are optional.
+
++-------------+-----------------------------------------+-------------+---------------+
+| Attribute   |              Description                | Value range | Default value |
++=============+=========================================+=============+===============+
+| **negate**  | allows to negate the regular expression |     no      |       no      |
+|             |                                         +-------------+               |
+|             |                                         |     yes     |               |
++-------------+-----------------------------------------+-------------+---------------+
+| **type**    | allows to set regular expression type   |   osmatch   |    osmatch    |
+|             |                                         +-------------+               |
+|             |                                         |   osregex   |               |
+|             |                                         +-------------+               |
+|             |                                         |   pcre2     |               |
++-------------+-----------------------------------------+-------------+---------------+
+
+If ``match`` label is declared multiple times within the rule, the following rules apply:
+
+- The resulting value is their concatenation.
+- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
+
+.. _regex_rules:
+
 regex
 ^^^^^
 
@@ -253,7 +304,9 @@ Used as a requisite to trigger the rule, will search for a match in the log even
 +--------------------+---------------------------------------------------------------+
 | **Default Value**  | n/a                                                           |
 +--------------------+---------------------------------------------------------------+
-| **Allowed values** | Any `regex expression <regex.html#regex-os-regex-syntax>`_    |
+| **Allowed values** | Any `regex <regex.html#regex-os-regex-syntax>`_,              |
+|                    | `sregex <regex.html#sregex-os-match-syntax>`_ or              |
+|                    | `pcre2 <regex.html#pcre2-syntax>`_ expression.                |
 +--------------------+---------------------------------------------------------------+
 
 Example:
@@ -268,6 +321,27 @@ Example:
     </rule>
 
 If the rule matches the ``ìd`` 100500 and the event contains any valid IP, the rule is triggered and generates a level 3 alert.
+
+The attributes below are optional.
+
++-------------+-----------------------------------------+-------------+---------------+
+| Attribute   |              Description                | Value range | Default value |
++=============+=========================================+=============+===============+
+| **negate**  | allows to negate the regular expression |     no      |       no      |
+|             |                                         +-------------+               |
+|             |                                         |     yes     |               |
++-------------+-----------------------------------------+-------------+---------------+
+| **type**    | allows to set regular expression type   |   osregex   |    osregex    |
+|             |                                         +-------------+               |
+|             |                                         |   osmatch   |               |
+|             |                                         +-------------+               |
+|             |                                         |   pcre2     |               |
++-------------+-----------------------------------------+-------------+---------------+
+
+If ``regex`` label is declared multiple times within the rule, the following rules apply:
+
+- The resulting value is their concatenation.
+- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
 
 decoded_as
 ^^^^^^^^^^
@@ -296,13 +370,13 @@ category
 ^^^^^^^^
 
 
-Used as a requisite to trigger the rule. It will be triggered if the ``decoder`` included that log in said category. The main categories are: ids, syslog, firewall, web-log, squid or windows.
+Used as a requisite to trigger the rule. It will be triggered if the ``decoder`` included that log in said category.
 
-+--------------------+--------------+
-| **Default Value**  | n/a          |
-+--------------------+--------------+
-| **Allowed values** | Any category |
-+--------------------+--------------+
++--------------------+----------------------------------+
+| **Default Value**  | n/a                              |
++--------------------+----------------------------------+
+| **Allowed values** | Any `type <decoders.html#type>`_ |
++--------------------+----------------------------------+
 
 
 
@@ -322,11 +396,32 @@ field
 
 Used as a requisite to trigger the rule. It will check for a match in the content of a field extracted by the decoder.
 
-+--------------------+-----------------------------------------------------------------+
-| **name**           | Specifies the name of the field extracted by the decoder.       |
-+--------------------+-----------------------------------------------------------------+
-| **Allowed values** | Any `regex expression <regex.html#regex-os-regex-syntax>`_      |
-+--------------------+-----------------------------------------------------------------+
++--------------------+---------------------------------------------------------------+
+| **Default Value**  | n/a                                                           |
++--------------------+---------------------------------------------------------------+
+| **Allowed values** | Any `regex <regex.html#regex-os-regex-syntax>`_,              |
+|                    | `sregex <regex.html#sregex-os-match-syntax>`_ or              |
+|                    | `pcre2 <regex.html#pcre2-syntax>`_ expression.                |
++--------------------+---------------------------------------------------------------+
+
+Below is the list of attributes.
+
++-------------+-----------------------------------------+-------------+---------------+
+| Attribute   |              Description                | Value range | Default value |
++=============+=========================================+=============+===============+
+|  **name**   | specifies the name of the field         |     n/a     |       n/a     |
+|             | extracted by the decoder.               |             |               |
++-------------+-----------------------------------------+-------------+---------------+
+| **negate**  | allows to negate the regular expression |     no      |       no      |
+|             |                                         +-------------+               |
+|             |                                         |     yes     |               |
++-------------+-----------------------------------------+-------------+---------------+
+| **type**    | allows to set regular expression type   |   osregex   |    osregex    |
+|             |                                         +-------------+               |
+|             |                                         |   osmatch   |               |
+|             |                                         +-------------+               |
+|             |                                         |   pcre2     |               |
++-------------+-----------------------------------------+-------------+---------------+
 
 Example:
 
@@ -357,12 +452,27 @@ Example:
   .. code-block:: xml
 
       <rule id="100105" level="8">
-          <if_sid>100100<if_sid>
+          <if_sid>100100</if_sid>
           <srcip>10.25.23.12</srcip>
           <description>Forbidden srcip has been detected.</description>
       </rule>
 
 This rule will trigger when that exact ``scrip`` has been decoded.
+
+The attributes below are optional.
+
++-------------+-----------------------------------------+-------------+---------------+
+| Attribute   |              Description                | Value range | Default value |
++=============+=========================================+=============+===============+
+| **negate**  | allows to negate the regular expression |     no      |       no      |
+|             |                                         +-------------+               |
+|             |                                         |     yes     |               |
++-------------+-----------------------------------------+-------------+---------------+
+
+If ``srcip`` label is declared multiple times within the rule, the following rules apply:
+
+- The resulting value is their concatenation.
+- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
 
 dstip
 ^^^^^
@@ -380,35 +490,154 @@ Example:
   .. code-block:: xml
 
       <rule id="100110" level="5">
-          <if_sid>100100<if_sid>
+          <if_sid>100100</if_sid>
           <dstip>!198.168.41.30</dstip>
           <description>A different dstip has been detected.</description>
       </rule>
 
 This rule will trigger when an ``dstip`` different from ``198.168.41.30`` is detected.
 
+The attributes below are optional.
+
++-------------+-----------------------------------------+-------------+---------------+
+| Attribute   |              Description                | Value range | Default value |
++=============+=========================================+=============+===============+
+| **negate**  | allows to negate the regular expression |     no      |       no      |
+|             |                                         +-------------+               |
+|             |                                         |     yes     |               |
++-------------+-----------------------------------------+-------------+---------------+
+
+If ``dstip`` label is declared multiple times within the rule, the following rules apply:
+
+- The resulting value is their concatenation.
+- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
+
+srcport
+^^^^^^^
+
+Used as a requisite to trigger the rule. It will check the source port (decoded as ``srcport``).
+
++--------------------+---------------------------------------------------------------+
+| **Default Value**  | n/a                                                           |
++--------------------+---------------------------------------------------------------+
+| **Allowed values** | Any `regex <regex.html#regex-os-regex-syntax>`_,              |
+|                    | `sregex <regex.html#sregex-os-match-syntax>`_ or              |
+|                    | `pcre2 <regex.html#pcre2-syntax>`_ expression.                |
++--------------------+---------------------------------------------------------------+
+
+Example:
+
+  .. code-block:: xml
+
+      <rule id="100110" level="5">
+          <if_sid>100100</if_sid>
+          <srcport type="pcre2">^5000[0-7]$</srcport>
+          <description>Source port $(srcport) is detected.</description>
+      </rule>
+
+This rule will trigger when ``srcport`` is in the range of 50000 to 50007.
+
+The attributes below are optional.
+
++-------------+-----------------------------------------+-------------+---------------+
+| Attribute   |              Description                | Value range | Default value |
++=============+=========================================+=============+===============+
+| **negate**  | allows to negate the regular expression |     no      |       no      |
+|             |                                         +-------------+               |
+|             |                                         |     yes     |               |
++-------------+-----------------------------------------+-------------+---------------+
+| **type**    | allows to set regular expression type   |   osmatch   |    osmatch    |
+|             |                                         +-------------+               |
+|             |                                         |   osregex   |               |
+|             |                                         +-------------+               |
+|             |                                         |   pcre2     |               |
++-------------+-----------------------------------------+-------------+---------------+
+
+If ``srcport`` label is declared multiple times within the rule, the following rules apply:
+
+- The resulting value is their concatenation.
+- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
+
+dstport
+^^^^^^^
+
+Used as a requisite to trigger the rule. It will check the destination port (decoded as ``dstport``).
+
++--------------------+---------------------------------------------------------------+
+| **Default Value**  | n/a                                                           |
++--------------------+---------------------------------------------------------------+
+| **Allowed values** | Any `regex <regex.html#regex-os-regex-syntax>`_,              |
+|                    | `sregex <regex.html#sregex-os-match-syntax>`_ or              |
+|                    | `pcre2 <regex.html#pcre2-syntax>`_ expression.                |
++--------------------+---------------------------------------------------------------+
+
+The attributes below are optional.
+
++-------------+-----------------------------------------+-------------+---------------+
+| Attribute   |              Description                | Value range | Default value |
++=============+=========================================+=============+===============+
+| **negate**  | allows to negate the regular expression |     no      |       no      |
+|             |                                         +-------------+               |
+|             |                                         |     yes     |               |
++-------------+-----------------------------------------+-------------+---------------+
+| **type**    | allows to set regular expression type   |   osmatch   |    osmatch    |
+|             |                                         +-------------+               |
+|             |                                         |   osregex   |               |
+|             |                                         +-------------+               |
+|             |                                         |   pcre2     |               |
++-------------+-----------------------------------------+-------------+---------------+
+
+If ``dstport`` label is declared multiple times within the rule, the following rules apply:
+
+- The resulting value is their concatenation.
+- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
 
 data
 ^^^^
 
-Any string that is decoded into the ``data`` field.
+Used as a requisite to trigger the rule. It will check the data (decoded as ``data``).
 
-+--------------------+-----------------------------------------------------------------+
-| **Default Value**  | n/a                                                             |
-+--------------------+-----------------------------------------------------------------+
-| **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_    |
-+--------------------+-----------------------------------------------------------------+
++--------------------+---------------------------------------------------------------+
+| **Default Value**  | n/a                                                           |
++--------------------+---------------------------------------------------------------+
+| **Allowed values** | Any `regex <regex.html#regex-os-regex-syntax>`_,              |
+|                    | `sregex <regex.html#sregex-os-match-syntax>`_ or              |
+|                    | `pcre2 <regex.html#pcre2-syntax>`_ expression.                |
++--------------------+---------------------------------------------------------------+
+
+The attributes below are optional.
+
++-------------+-----------------------------------------+-------------+---------------+
+| Attribute   |              Description                | Value range | Default value |
++=============+=========================================+=============+===============+
+| **negate**  | allows to negate the regular expression |     no      |       no      |
+|             |                                         +-------------+               |
+|             |                                         |     yes     |               |
++-------------+-----------------------------------------+-------------+---------------+
+| **type**    | allows to set regular expression type   |   osmatch   |    osmatch    |
+|             |                                         +-------------+               |
+|             |                                         |   osregex   |               |
+|             |                                         +-------------+               |
+|             |                                         |   pcre2     |               |
++-------------+-----------------------------------------+-------------+---------------+
+
+If ``data`` label is declared multiple times within the rule, the following rules apply:
+
+- The resulting value is their concatenation.
+- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
 
 extra_data
 ^^^^^^^^^^
 
 Used as a requisite to trigger the rule. It will compare any string with the one decoded into the extra_data field.
 
-+--------------------+-------------+
-| **Default Value**  | n/a         |
-+--------------------+-------------+
-| **Allowed values** | Any string. |
-+--------------------+-------------+
++--------------------+---------------------------------------------------------------+
+| **Default Value**  | n/a                                                           |
++--------------------+---------------------------------------------------------------+
+| **Allowed values** | Any `regex <regex.html#regex-os-regex-syntax>`_,              |
+|                    | `sregex <regex.html#sregex-os-match-syntax>`_ or              |
+|                    | `pcre2 <regex.html#pcre2-syntax>`_ expression.                |
++--------------------+---------------------------------------------------------------+
 
 Example:
 
@@ -422,51 +651,119 @@ Example:
 
 This rule will trigger when the log belongs to ``windows`` category and the decoded field ``extra_data`` is: ``Symantec AntiVirus``
 
+The attributes below are optional.
+
++-------------+-----------------------------------------+-------------+---------------+
+| Attribute   |              Description                | Value range | Default value |
++=============+=========================================+=============+===============+
+| **negate**  | allows to negate the regular expression |     no      |       no      |
+|             |                                         +-------------+               |
+|             |                                         |     yes     |               |
++-------------+-----------------------------------------+-------------+---------------+
+| **type**    | allows to set regular expression type   |   osmatch   |    osmatch    |
+|             |                                         +-------------+               |
+|             |                                         |   osregex   |               |
+|             |                                         +-------------+               |
+|             |                                         |   pcre2     |               |
++-------------+-----------------------------------------+-------------+---------------+
+
+If ``extra_data`` label is declared multiple times within the rule, the following rules apply:
+
+- The resulting value is their concatenation.
+- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
+
 user
 ^^^^
 
 Used as a requisite to trigger the rule. It will check the username (decoded as ``user``).
 
-+--------------------+------------------------------------------------------------------+
-| **Default Value**  | n/a                                                              |
-+--------------------+------------------------------------------------------------------+
-| **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_     |
-+--------------------+------------------------------------------------------------------+
-
++--------------------+---------------------------------------------------------------+
+| **Default Value**  | n/a                                                           |
++--------------------+---------------------------------------------------------------+
+| **Allowed values** | Any `regex <regex.html#regex-os-regex-syntax>`_,              |
+|                    | `sregex <regex.html#sregex-os-match-syntax>`_ or              |
+|                    | `pcre2 <regex.html#pcre2-syntax>`_ expression.                |
++--------------------+---------------------------------------------------------------+
 
 Example:
 
   .. code-block:: xml
 
-      <rule id="140101" level="12">
-        <if_group>authentication_success</if_group>
-        <user>mysql</user>
-        <description>System user successfully logged to the system.</description>
-      </rule>
+    <rule id="140101" level="12">
+      <if_group>authentication_success</if_group>
+      <user negate="yes">wazuh|root</user>
+      <description>Unexpected user successfully logged to the system.</description>
+    </rule>
 
-This rule will trigger when the user ``mysql`` successfully logs into the system. Being a System user it should never log in to the system.
+This rule will trigger when a user different from ``root`` or ``wazuh`` successfully login into the system.
+
+The attributes below are optional.
+
++-------------+-----------------------------------------+-------------+---------------+
+| Attribute   |              Description                | Value range | Default value |
++=============+=========================================+=============+===============+
+| **negate**  | allows to negate the regular expression |     no      |       no      |
+|             |                                         +-------------+               |
+|             |                                         |     yes     |               |
++-------------+-----------------------------------------+-------------+---------------+
+| **type**    | allows to set regular expression type   |   osmatch   |    osmatch    |
+|             |                                         +-------------+               |
+|             |                                         |   osregex   |               |
+|             |                                         +-------------+               |
+|             |                                         |   pcre2     |               |
++-------------+-----------------------------------------+-------------+---------------+
+
+If ``user`` label is declared multiple times within the rule, the following rules apply:
+
+- The resulting value is their concatenation.
+- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
 
 system_name
 ^^^^^^^^^^^^
 
-Any string that is decoded into the ``system_name`` field.
+Used as a requisite to trigger the rule. It will check the system name (decoded as ``system_name``).
 
-+--------------------+------------------------------------------------------------------+
-| **Default Value**  | n/a                                                              |
-+--------------------+------------------------------------------------------------------+
-| **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_     |
-+--------------------+------------------------------------------------------------------+
++--------------------+---------------------------------------------------------------+
+| **Default Value**  | n/a                                                           |
++--------------------+---------------------------------------------------------------+
+| **Allowed values** | Any `regex <regex.html#regex-os-regex-syntax>`_,              |
+|                    | `sregex <regex.html#sregex-os-match-syntax>`_ or              |
+|                    | `pcre2 <regex.html#pcre2-syntax>`_ expression.                |
++--------------------+---------------------------------------------------------------+
+
+The attributes below are optional.
+
++-------------+-----------------------------------------+-------------+---------------+
+| Attribute   |              Description                | Value range | Default value |
++=============+=========================================+=============+===============+
+| **negate**  | allows to negate the regular expression |     no      |       no      |
+|             |                                         +-------------+               |
+|             |                                         |     yes     |               |
++-------------+-----------------------------------------+-------------+---------------+
+| **type**    | allows to set regular expression type   |   osmatch   |    osmatch    |
+|             |                                         +-------------+               |
+|             |                                         |   osregex   |               |
+|             |                                         +-------------+               |
+|             |                                         |   pcre2     |               |
++-------------+-----------------------------------------+-------------+---------------+
+
+If ``system_name`` label is declared multiple times within the rule, the following rules apply:
+
+- The resulting value is their concatenation.
+- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
 
 program_name
 ^^^^^^^^^^^^
 
 Used as a requisite to trigger the rule. The program's name is decoded from syslog process name.
 
-+--------------------+------------------------------------------------------------------+
-| **Default Value**  | n/a                                                              |
-+--------------------+------------------------------------------------------------------+
-| **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_     |
-+--------------------+------------------------------------------------------------------+
++--------------------+---------------------------------------------------------------+
+| **Default Value**  | n/a                                                           |
++--------------------+---------------------------------------------------------------+
+| **Allowed values** | Any `regex <regex.html#regex-os-regex-syntax>`_,              |
+|                    | `sregex <regex.html#sregex-os-match-syntax>`_ or              |
+|                    | `pcre2 <regex.html#pcre2-syntax>`_ expression.                |
++--------------------+---------------------------------------------------------------+
 
 Example:
 
@@ -481,28 +778,73 @@ Example:
 
 The rule will trigger when the program Syslogd restarted.
 
+The attributes below are optional.
+
++-------------+-----------------------------------------+-------------+---------------+
+| Attribute   |              Description                | Value range | Default value |
++=============+=========================================+=============+===============+
+| **negate**  | allows to negate the regular expression |     no      |       no      |
+|             |                                         +-------------+               |
+|             |                                         |     yes     |               |
++-------------+-----------------------------------------+-------------+---------------+
+| **type**    | allows to set regular expression type   |   osmatch   |    osmatch    |
+|             |                                         +-------------+               |
+|             |                                         |   osregex   |               |
+|             |                                         +-------------+               |
+|             |                                         |   pcre2     |               |
++-------------+-----------------------------------------+-------------+---------------+
+
+If ``program_name`` label is declared multiple times within the rule, the following rules apply:
+
+- The resulting value is their concatenation.
+- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
+
 protocol
 ^^^^^^^^
 
-Any string that is decoded into the ``protocol`` field.
+Used as a requisite to trigger the rule. It will check the protocol (decoded as ``protocol``).
 
-+--------------------+------------------------------------------------------------------+
-| **Default Value**  | n/a                                                              |
-+--------------------+------------------------------------------------------------------+
-| **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_     |
-+--------------------+------------------------------------------------------------------+
++--------------------+---------------------------------------------------------------+
+| **Default Value**  | n/a                                                           |
++--------------------+---------------------------------------------------------------+
+| **Allowed values** | Any `regex <regex.html#regex-os-regex-syntax>`_,              |
+|                    | `sregex <regex.html#sregex-os-match-syntax>`_ or              |
+|                    | `pcre2 <regex.html#pcre2-syntax>`_ expression.                |
++--------------------+---------------------------------------------------------------+
 
+The attributes below are optional.
+
++-------------+-----------------------------------------+-------------+---------------+
+| Attribute   |              Description                | Value range | Default value |
++=============+=========================================+=============+===============+
+| **negate**  | allows to negate the regular expression |     no      |       no      |
+|             |                                         +-------------+               |
+|             |                                         |     yes     |               |
++-------------+-----------------------------------------+-------------+---------------+
+| **type**    | allows to set regular expression type   |   osmatch   |    osmatch    |
+|             |                                         +-------------+               |
+|             |                                         |   osregex   |               |
+|             |                                         +-------------+               |
+|             |                                         |   pcre2     |               |
++-------------+-----------------------------------------+-------------+---------------+
+
+If ``protocol`` label is declared multiple times within the rule, the following rules apply:
+
+- The resulting value is their concatenation.
+- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
 
 hostname
 ^^^^^^^^
 
 Used as a requisite to trigger the rule. Any hostname (decoded as the syslog hostname) or log file.
 
-+--------------------+------------------------------------------------------------------+
-| **Default Value**  | n/a                                                              |
-+--------------------+------------------------------------------------------------------+
-| **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_     |
-+--------------------+------------------------------------------------------------------+
++--------------------+---------------------------------------------------------------+
+| **Default Value**  | n/a                                                           |
++--------------------+---------------------------------------------------------------+
+| **Allowed values** | Any `regex <regex.html#regex-os-regex-syntax>`_,              |
+|                    | `sregex <regex.html#sregex-os-match-syntax>`_ or              |
+|                    | `pcre2 <regex.html#pcre2-syntax>`_ expression.                |
++--------------------+---------------------------------------------------------------+
 
 Example:
 
@@ -515,6 +857,27 @@ Example:
         </rule>
 
 This rule will group rules for ``Yum logs`` when something is either being installed, updated or erased.
+
+The attributes below are optional.
+
++-------------+-----------------------------------------+-------------+---------------+
+| Attribute   |              Description                | Value range | Default value |
++=============+=========================================+=============+===============+
+| **negate**  | allows to negate the regular expression |     no      |       no      |
+|             |                                         +-------------+               |
+|             |                                         |     yes     |               |
++-------------+-----------------------------------------+-------------+---------------+
+| **type**    | allows to set regular expression type   |   osmatch   |    osmatch    |
+|             |                                         +-------------+               |
+|             |                                         |   osregex   |               |
+|             |                                         +-------------+               |
+|             |                                         |   pcre2     |               |
++-------------+-----------------------------------------+-------------+---------------+
+
+If ``hostname`` label is declared multiple times within the rule, the following rules apply:
+
+- The resulting value is their concatenation.
+- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
 
 time
 ^^^^
@@ -569,13 +932,13 @@ id
 
 Used as a requisite to trigger the rule. It will check any ID (decoded as the ID).
 
-+--------------------+------------------------------------------------------------------+
-| **Default Value**  | n/a                                                              |
-+--------------------+------------------------------------------------------------------+
-| **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_     |
-+--------------------+------------------------------------------------------------------+
-
-
++--------------------+---------------------------------------------------------------+
+| **Default Value**  | n/a                                                           |
++--------------------+---------------------------------------------------------------+
+| **Allowed values** | Any `regex <regex.html#regex-os-regex-syntax>`_,              |
+|                    | `sregex <regex.html#sregex-os-match-syntax>`_ or              |
+|                    | `pcre2 <regex.html#pcre2-syntax>`_ expression.                |
++--------------------+---------------------------------------------------------------+
 
 Example:
 
@@ -589,16 +952,39 @@ Example:
 
 This rule will group the logs whose decoded ID is usb.
 
+The attributes below are optional.
+
++-------------+-----------------------------------------+-------------+---------------+
+| Attribute   |              Description                | Value range | Default value |
++=============+=========================================+=============+===============+
+| **negate**  | allows to negate the regular expression |     no      |       no      |
+|             |                                         +-------------+               |
+|             |                                         |     yes     |               |
++-------------+-----------------------------------------+-------------+---------------+
+| **type**    | allows to set regular expression type   |   osmatch   |    osmatch    |
+|             |                                         +-------------+               |
+|             |                                         |   osregex   |               |
+|             |                                         +-------------+               |
+|             |                                         |   pcre2     |               |
++-------------+-----------------------------------------+-------------+---------------+
+
+If ``id`` label is declared multiple times within the rule, the following rules apply:
+
+- The resulting value is their concatenation.
+- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
+
 url
 ^^^
 
 Used as a requisite to trigger the rule. It will check any URL (decoded as the URL).
 
-+--------------------+------------------------------------------------------------------+
-| **Default Value**  | n/a                                                              |
-+--------------------+------------------------------------------------------------------+
-| **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_     |
-+--------------------+------------------------------------------------------------------+
++--------------------+---------------------------------------------------------------+
+| **Default Value**  | n/a                                                           |
++--------------------+---------------------------------------------------------------+
+| **Allowed values** | Any `regex <regex.html#regex-os-regex-syntax>`_,              |
+|                    | `sregex <regex.html#sregex-os-match-syntax>`_ or              |
+|                    | `pcre2 <regex.html#pcre2-syntax>`_ expression.                |
++--------------------+---------------------------------------------------------------+
 
 Example:
 
@@ -613,6 +999,27 @@ Example:
 
 This rule is a child from a level 5 rule ``31101`` and becomes a level 0 rule when it confirms that the extensions are nothing to worry about.
 
+The attributes below are optional.
+
++-------------+-----------------------------------------+-------------+---------------+
+| Attribute   |              Description                | Value range | Default value |
++=============+=========================================+=============+===============+
+| **negate**  | allows to negate the regular expression |     no      |       no      |
+|             |                                         +-------------+               |
+|             |                                         |     yes     |               |
++-------------+-----------------------------------------+-------------+---------------+
+| **type**    | allows to set regular expression type   |   osmatch   |    osmatch    |
+|             |                                         +-------------+               |
+|             |                                         |   osregex   |               |
+|             |                                         +-------------+               |
+|             |                                         |   pcre2     |               |
++-------------+-----------------------------------------+-------------+---------------+
+
+If ``url`` label is declared multiple times within the rule, the following rules apply:
+
+- The resulting value is their concatenation.
+- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
+
 location
 ^^^^^^^^
 
@@ -620,11 +1027,13 @@ location
 
 Used as a requisite to trigger the rule. It will check the content of the field location and trying to find a match.
 
-+--------------------+------------------------------------------------------------------+
-| **Default Value**  | n/a                                                              |
-+--------------------+------------------------------------------------------------------+
-| **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_     |
-+--------------------+------------------------------------------------------------------+
++--------------------+---------------------------------------------------------------+
+| **Default Value**  | n/a                                                           |
++--------------------+---------------------------------------------------------------+
+| **Allowed values** | Any `regex <regex.html#regex-os-regex-syntax>`_,              |
+|                    | `sregex <regex.html#sregex-os-match-syntax>`_ or              |
+|                    | `pcre2 <regex.html#pcre2-syntax>`_ expression.                |
++--------------------+---------------------------------------------------------------+
 
 The location identifies the origin of the input. If the event comes from an agent, its name and registered IP (as it was added) is appended to the location.
 
@@ -678,16 +1087,39 @@ Example:
 
 This rule, groups logs that come from ``osquery`` location. Triggering a level 3 alert for it.
 
+The attributes below are optional.
+
++-------------+-----------------------------------------+-------------+---------------+
+| Attribute   |              Description                | Value range | Default value |
++=============+=========================================+=============+===============+
+| **negate**  | allows to negate the regular expression |     no      |       no      |
+|             |                                         +-------------+               |
+|             |                                         |     yes     |               |
++-------------+-----------------------------------------+-------------+---------------+
+| **type**    | allows to set regular expression type   |   osmatch   |    osmatch    |
+|             |                                         +-------------+               |
+|             |                                         |   osregex   |               |
+|             |                                         +-------------+               |
+|             |                                         |   pcre2     |               |
++-------------+-----------------------------------------+-------------+---------------+
+
+If ``location`` label is declared multiple times within the rule, the following rules apply:
+
+- The resulting value is their concatenation.
+- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
+
 action
 ^^^^^^
 
 Used as a requisite to trigger the rule. It will check any action (decoded as the ACTION).
 
-+--------------------+----------------------+
-| **Default Value**  | n/a                  |
-+--------------------+----------------------+
-| **Allowed values** | Any String.          |
-+--------------------+----------------------+
++--------------------+---------------------------------------------------------------+
+| **Default Value**  | n/a                                                           |
++--------------------+---------------------------------------------------------------+
+| **Allowed values** | Any `regex <regex.html#regex-os-regex-syntax>`_,              |
+|                    | `sregex <regex.html#sregex-os-match-syntax>`_ or              |
+|                    | `pcre2 <regex.html#pcre2-syntax>`_ expression.                |
++--------------------+---------------------------------------------------------------+
 
 Example:
 
@@ -695,22 +1127,160 @@ Example:
 
       <rule id="4502" level="4">
         <if_sid>4500</if_sid>
-        <action>warning</action>
+        <action type="osregex">warning|WARN</action>
         <description>Netscreen warning message.</description>
       </rule>
 
-This rule will trigger a level 4 alert when the decoded action from Netscreen is ``warning``.
+This rule will trigger a level 4 alert when the decoded action from Netscreen is ``warning`` or ``WARN``.
+
+The attributes below are optional.
+
++-------------+-----------------------------------------+-------------+---------------+
+| Attribute   |              Description                | Value range | Default value |
++=============+=========================================+=============+===============+
+| **negate**  | allows to negate the regular expression |     no      |       no      |
+|             |                                         +-------------+               |
+|             |                                         |     yes     |               |
++-------------+-----------------------------------------+-------------+---------------+
+| **type**    | allows to set regular expression type   |   osmatch   |    string     |
+|             |                                         +-------------+               |
+|             |                                         |   osregex   |               |
+|             |                                         +-------------+               |
+|             |                                         |   pcre2     |               |
++-------------+-----------------------------------------+-------------+---------------+
+
+.. note::
+
+   Use ``type`` attribute only for regular expression match. It must be omitted if ``action`` field try to match a string.
+
+If ``action`` label is declared multiple times within the rule, the following rules apply:
+
+- The resulting value is their concatenation.
+- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
+
+status
+^^^^^^
+
+Checks the actual status of an event.
+
++--------------------+---------------------------------------------------------------+
+| **Default Value**  | n/a                                                           |
++--------------------+---------------------------------------------------------------+
+| **Allowed values** | Any `regex <regex.html#regex-os-regex-syntax>`_,              |
+|                    | `sregex <regex.html#sregex-os-match-syntax>`_ or              |
+|                    | `pcre2 <regex.html#pcre2-syntax>`_ expression.                |
++--------------------+---------------------------------------------------------------+
+
+Example:
+
+  .. code-block:: xml
+
+      <rule id="213" level="7">
+        <if_sid>210</if_sid>
+        <status>aborted</status>
+        <description>Remote upgrade could not be launched. Error: $(error).</description>
+        <group>upgrade,upgrade_failure,</group>
+      </rule>
+
+The attributes below are optional.
+
++-------------+-----------------------------------------+-------------+---------------+
+| Attribute   |              Description                | Value range | Default value |
++=============+=========================================+=============+===============+
+| **negate**  | allows to negate the regular expression |     no      |       no      |
+|             |                                         +-------------+               |
+|             |                                         |     yes     |               |
++-------------+-----------------------------------------+-------------+---------------+
+| **type**    | allows to set regular expression type   |   osmatch   |    osmatch    |
+|             |                                         +-------------+               |
+|             |                                         |   osregex   |               |
+|             |                                         +-------------+               |
+|             |                                         |   pcre2     |               |
++-------------+-----------------------------------------+-------------+---------------+
+
+If ``status`` label is declared multiple times within the rule, the following rules apply:
+
+- The resulting value is their concatenation.
+- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
+
+srcgeoip
+^^^^^^^^
+
+Used as a requisite to trigger the rule. It will check the GeoIP source (decoded as ``srcgeoip``).
+
++--------------------+---------------------------------------------------------------+
+| **Default Value**  | n/a                                                           |
++--------------------+---------------------------------------------------------------+
+| **Allowed values** | Any `regex <regex.html#regex-os-regex-syntax>`_,              |
+|                    | `sregex <regex.html#sregex-os-match-syntax>`_ or              |
+|                    | `pcre2 <regex.html#pcre2-syntax>`_ expression.                |
++--------------------+---------------------------------------------------------------+
+
+The attributes below are optional.
+
++-------------+-----------------------------------------+-------------+---------------+
+| Attribute   |              Description                | Value range | Default value |
++=============+=========================================+=============+===============+
+| **negate**  | allows to negate the regular expression |     no      |       no      |
+|             |                                         +-------------+               |
+|             |                                         |     yes     |               |
++-------------+-----------------------------------------+-------------+---------------+
+| **type**    | allows to set regular expression type   |   osmatch   |    osmatch    |
+|             |                                         +-------------+               |
+|             |                                         |   osregex   |               |
+|             |                                         +-------------+               |
+|             |                                         |   pcre2     |               |
++-------------+-----------------------------------------+-------------+---------------+
+
+If ``srcgeoip`` label is declared multiple times within the rule, the following rules apply:
+
+- The resulting value is their concatenation.
+- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
+
+dstgeoip
+^^^^^^^^
+
+Used as a requisite to trigger the rule. It will check the GeoIP destination (decoded as ``dstgeoip``).
+
++--------------------+---------------------------------------------------------------+
+| **Default Value**  | n/a                                                           |
++--------------------+---------------------------------------------------------------+
+| **Allowed values** | Any `regex <regex.html#regex-os-regex-syntax>`_,              |
+|                    | `sregex <regex.html#sregex-os-match-syntax>`_ or              |
+|                    | `pcre2 <regex.html#pcre2-syntax>`_ expression.                |
++--------------------+---------------------------------------------------------------+
+
+The attributes below are optional.
+
++-------------+-----------------------------------------+-------------+---------------+
+| Attribute   |              Description                | Value range | Default value |
++=============+=========================================+=============+===============+
+| **negate**  | allows to negate the regular expression |     no      |       no      |
+|             |                                         +-------------+               |
+|             |                                         |     yes     |               |
++-------------+-----------------------------------------+-------------+---------------+
+| **type**    | allows to set regular expression type   |   osmatch   |    osmatch    |
+|             |                                         +-------------+               |
+|             |                                         |   osregex   |               |
+|             |                                         +-------------+               |
+|             |                                         |   pcre2     |               |
++-------------+-----------------------------------------+-------------+---------------+
+
+If ``dstgeoip`` label is declared multiple times within the rule, the following rules apply:
+
+- The resulting value is their concatenation.
+- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
 
 if_sid
 ^^^^^^
 
-Used as a requisite to trigger the rule. Matches if the ID has previously matched. It is similar to a child decoder, with the key difference that alerts can have as many descendants as necessary, whereas decoder cannot have "grandchildren".
+Used as a requisite to trigger the rule. Matches when an ID on the list has previously matched. It is similar to a child decoder, with the key difference that alerts can have as many descendants as necessary, whereas decoder cannot have "grandchildren".
 
-+--------------------+-------------+
-| **Default Value**  | n/a         |
-+--------------------+-------------+
-| **Allowed values** | Any rule id |
-+--------------------+-------------+
++--------------------+--------------------------------------------------------------------+
+| **Default Value**  | n/a                                                                |
++--------------------+--------------------------------------------------------------------+
+| **Allowed values** | Any rule ID. Multiple values must be separated by commas or spaces.|
++--------------------+--------------------------------------------------------------------+
 
 
 
@@ -719,12 +1289,13 @@ Example:
   .. code-block:: xml
 
       <rule id="100110" level="5">
-        <if_sid>100100</if_sid>
+        <if_sid>100100, 100101</if_sid>
         <match>Error</match>
         <description>There is an error in the log.</description>
       </rule>
 
-The rule will be triggered if the rule with id: ``100100`` has previously been triggered and the log contains the word "Error".
+The rule ``100110`` is triggered when either of the parent rules has matched and the logs contain the word "Error".
+
 
 if_group
 ^^^^^^^^
@@ -785,7 +1356,7 @@ Example:
 
       <rule id="30316" level="10" frequency="10" timeframe="120">
         <if_matched_sid>30315</if_matched_sid>
-        <same_source_ip />
+        <same_srcip />
         <description>Apache: Multiple Invalid URI requests from same source.</description>
         <group>invalid_request,pci_dss_10.2.4,pci_dss_11.4,gdpr_IV_35.7.d,hipaa_164.312.b,nist_800_53_AU.14,nist_800_53_AC.7,nist_800_53_SI.4,</group>
       </rule>
@@ -1112,7 +1683,7 @@ Rule 100002 will fire when ``key2`` in the currently considered event is the sam
   {"key":"value", "key2":"CCCC"}
   {"key":"value", "key2":"AAAA"}
 
-The last event will fire rule 100002 instead of 100001 becasue it found the value ``AAAA`` in three of the previous events. The corresponding alert looks like this one:
+The last event will fire rule 100002 instead of 100001 because it found the value ``AAAA`` in three of the previous events. The corresponding alert looks like this one:
 
 .. code-block:: json
   :emphasize-lines: 5
@@ -1486,7 +2057,7 @@ This option is used in conjunction with ``frequency`` and ``timeframe``.
 description
 ^^^^^^^^^^^
 
-Specifies a human-readable description to the rule in order to provide context to each alert regarding the nature of the events matched by it. This field is required.
+Specifies a human-readable description to the rule in order to provide context to each alert regarding the nature of the events matched by it.
 
 +--------------------+------------+
 | **Default Value**  | n/a        |
@@ -1520,6 +2091,9 @@ Example:
       <options>no_log</options>
     </rule>
 
+If ``description`` label is declared multiple times within the rule, the following rules apply:
+
+- The resulting value is their concatenation.
 
 list
 ^^^^
@@ -1686,29 +2260,6 @@ It's a very useful label to keep the rules ordered.
 +--------------------+------------+
 | **Allowed values** | Any String |
 +--------------------+------------+
-
-status
-^^^^^^
-
-Checks the actual status of an event.
-
-+--------------------+----------------------------------------------+
-| **Default Value**  | n/a                                          |
-+--------------------+----------------------------------------------+
-| **Allowed values** | started, aborted, succeded, failed, lost...  |
-+--------------------+----------------------------------------------+
-
-Example:
-
-  .. code-block:: xml
-
-      <rule id="213" level="7">
-        <if_sid>210</if_sid>
-        <status>aborted</status>
-        <description>Remote upgrade could not be launched. Error: $(error).</description>
-        <group>upgrade,upgrade_failure,</group>
-      </rule>
-
 
 mitre
 ^^^^^

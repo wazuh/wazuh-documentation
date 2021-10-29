@@ -1,108 +1,437 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: This guide provides the basic information needed to get started with the Wazuh API, including some practical use cases. 
+  
 .. _api_getting_started:
 
 Getting started
 ===============
 
-This guide provides the basic information you need to start using the Wazuh API.
+This guide provides the basic information needed to start using the Wazuh API.
 
-Starting and stopping the API
------------------------------
+Starting and stopping the Wazuh API
+-----------------------------------
 
-The API starts at boot time. To control or check the **wazuh-api** service, use the ``systemctl`` or ``service`` command.
+The Wazuh API will be installed along the Wazuh manager by default. To control or check the **wazuh-api** use the **wazuh-manager** service with the ``systemctl`` or ``service`` command:
 
 **Systemd systems**
 
 .. code-block:: console
 
-    # systemctl start/status/stop/restart wazuh-api
+    # systemctl start/status/stop/restart wazuh-manager
 
 **SysVinit systems**
 
 .. code-block:: console
 
-    # service wazuh-api start/status/stop/restart
+    # service wazuh-manager start/status/stop/restart
 
-Use the cURL command to send a *request* to confirm that everything is working as expected:
+.. note::
+    The -k parameter applied to API requests is used to avoid the server connection verification by using server certificates. If these are valid, this parameter can be removed.
+    To configure the certificates use the following guide :ref:`Securing API <securing_api>`.
+
+.. _api_log_in:
+
+Logging into the Wazuh API
+--------------------------
+
+Wazuh API endpoints require authentication in order to be used. Therefore, all calls must include a JSON Web Token. JWT is an open standard (RFC 7519) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object. Follow the steps below to log in using :api-ref:`GET /security/user/authenticate <operation/api.controllers.security_controller.login_user>` and obtain a token in order to run any endpoint:
+
+#. Use the cURL command to log in, the Wazuh API will provide a JWT token upon success. Replace <user> and <password> with yours. By default, the user is ``wazuh`` and the password is ``wazuh``. If ``SSL`` (HTTPS) is enabled in the API and it is using the default **self-signed certificates**, it will be necessary to add the parameter ``-k``. Use the ``raw`` option to get the token in a plain text format. Querying the login endpoint with ``raw=true`` is recommended when using cURL commands as tokens could be long and difficult to handle otherwise. Exporting the token to an environment variable will ease the use of API requests after login.
+
+    Export the token to an environment variable to use it in authorization header of future API requests:
+
+    .. code-block:: console
+
+        # TOKEN=$(curl -u <user>:<password> -k -X GET "https://localhost:55000/security/user/authenticate?raw=true")
+
+    By default (``raw=false``), the token is obtained in an ``application/json`` format. If using this option, copy the token found in ``<YOUR_JWT_TOKEN>`` without the quotes.
+
+    .. code-block:: json
+        :class: output
+
+        {
+            "data": {
+                "token": "<YOUR_JWT_TOKEN>"
+            },
+            "error": 0
+        }
+
+#. Send an *API request* to confirm that everything is working as expected:
+
+    .. code-block:: console
+
+        # curl -k -X GET "https://localhost:55000/" -H "Authorization: Bearer $TOKEN"
+
+    .. code-block:: json
+        :class: output
+
+        {
+            "data": {
+                "title": "Wazuh API",
+                "api_version": "4.0.0",
+                "revision": 4000,
+                "license_name": "GPL 2.0",
+                "license_url": "https://github.com/wazuh/wazuh/blob/master/LICENSE",
+                "hostname": "wazuh-master",
+                "timestamp": "2020-05-25T07:05:00+0000"
+            },
+            "error": 0
+        }
+
+
+Once logged in, it is possible to run any API endpoint following the structure below. Please, do not forget to replace <endpoint> with the string corresponding to the chosen endpoint. If the environment variable is not going to be used, replace $TOKEN with the JWT token obtained.
 
 .. code-block:: console
 
-    # curl -u foo:bar "http://localhost:55000?pretty"
+    # curl -k -X <METHOD> "https://localhost:55000/<ENDPOINT>" -H  "Authorization: Bearer $TOKEN"
 
-.. code-block:: json
-    :class: output
 
+.. note::
+  There is an advanced authentication method, which allows obtaining the permissions dynamically using a run_as based system. See :ref:`Authorization Context login method <authorization_context_method>`.
+
+
+Logging into the Wazuh API via scripts
+--------------------------------------
+
+The following scripts provide API login examples using default (`false`) or plain text (`true`) `raw` parameter. They intend to bring the user closer to real use cases with the Wazuh API.
+
+#. Logging in with Python:
+
+.. code-block:: python
+
+    #!/usr/bin/env python3
+
+    import json
+    import requests
+    import urllib3
+    from base64 import b64encode
+
+    # Disable insecure https warnings (for self-signed SSL certificates)
+    urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+    # Configuration
+    protocol = 'https'
+    host = 'localhost'
+    port = 55000
+    user = 'wazuh'
+    password = 'wazuh'
+    login_endpoint = 'security/user/authenticate'
+
+    login_url = f"{protocol}://{host}:{port}/{login_endpoint}"
+    basic_auth = f"{user}:{password}".encode()
+    login_headers = {'Content-Type': 'application/json',
+                     'Authorization': f'Basic {b64encode(basic_auth).decode()}'}
+
+    print("\nLogin request ...\n")
+    response = requests.get(login_url, headers=login_headers, verify=False)
+    token = json.loads(response.content.decode())['data']['token']
+    print(token)
+
+    # New authorization header with the JWT token we got
+    requests_headers = {'Content-Type': 'application/json',
+                        'Authorization': f'Bearer {token}'}
+
+    print("\n- API calls with TOKEN environment variable ...\n")
+
+    print("Getting API information:")
+
+    response = requests.get(f"{protocol}://{host}:{port}/?pretty=true", headers=requests_headers, verify=False)
+    print(response.text)
+
+    print("\nGetting agents status summary:")
+
+    response = requests.get(f"{protocol}://{host}:{port}/agents/summary/status?pretty=true", headers=requests_headers, verify=False)
+    print(response.text)
+
+    print("\nEnd of the script.\n")
+
+Running the script provides a result similar to the following:
+
+.. code-block:: console
+
+    # root@wazuh-master:/# python3 login_script.py
+
+    Login request ...
+
+    eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3YXp1aCIsImF1ZCI6IldhenVoIEFQSSBSRVNUIiwibmJmIjoxNjAyMjMxNjU2LCJleHAiOjE2MDIyMzUyNTYsInN1YiI6IndhenVoIiwicmJhY19yb2xlcyI6WzFdLCJyYmFjX21vZGUiOiJ3aGl0ZSJ9.V60_otHPaT4NTkrS6SF3GHva0Z9r5p4mqe5Cn0hk4o4
+
+    - API calls with TOKEN environment variable ...
+
+    Getting API information:
     {
-        "error": 0,
-        "data": {
-            "msg": "Welcome to Wazuh HIDS API",
-            "api_version": "v|WAZUH_LATEST|",
-            "hostname": "wazuh",
-            "timestamp": "Mon Dec 03 2018 00:36:13 GMT+0000 (UTC)"
-        }
+       "data": {
+          "title": "Wazuh API REST",
+          "api_version": "4.0.0",
+          "revision": 4000,
+          "license_name": "GPL 2.0",
+          "license_url": "https://github.com/wazuh/wazuh/blob/master/LICENSE",
+          "hostname": "wazuh-master",
+          "timestamp": "2020-08-19T09:20:02+0000"
+       },
+       "error": 0
     }
 
+    Getting agents status summary:
+    {
+       "data": {
+          "active": 1,
+          "disconnected": 0,
+          "never_connected": 0,
+          "pending": 0,
+          "total": 1
+       },
+       "error": 0
+    }
 
-Explanation:
+    End of the script.
 
- * ``curl``: A command-line tool for sending requests and commands over HTTP and HTTPS.
- * ``-u foo:bar``: The username and password to authenticate with the API.
- * ``http://localhost:55000``: The API URL to use if you are running the command on the manager itself.
- * ``?pretty``: The parameter that makes the JSON output more human-readable.
+
+#. Logging in with a bash script and raw token:
+
+.. code-block:: bash
+
+    #!/bin/bash
+
+    echo -e "\n- Getting token...\n"
+
+    TOKEN=$(curl -u wazuh:wazuh -k -X GET "https://localhost:55000/security/user/authenticate?raw=true")
+
+    echo -e "\n- API calls with TOKEN environment variable ...\n"
+
+    echo -e "Getting default information:\n"
+
+    curl -k -X GET "https://localhost:55000/?pretty=true" -H  "Authorization: Bearer $TOKEN"
+
+    echo -e "\n\nGetting /agents/summary/os:\n"
+
+    curl -k -X GET "https://localhost:55000/agents/summary/status?pretty=true" -H  "Authorization: Bearer $TOKEN"
+
+    echo -e "\n\nEnd of the script.\n"
+
+Running the script provides a result similar to the following:
+
+.. code-block:: console
+
+    # root@wazuh-master:/# ./login_script.sh
+
+    - Getting token...
+
+      % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                     Dload  Upload   Total   Spent    Left  Speed
+    100  3059  100  3059    0     0  17089      0 --:--:-- --:--:-- --:--:-- 17089
+
+    - API calls with TOKEN environment variable ...
+
+    Getting default information:
+
+    {
+       "data": {
+          "title": "Wazuh API REST",
+          "api_version": "4.0.0",
+          "revision": 4000,
+          "license_name": "GPL 2.0",
+          "license_url": "https://github.com/wazuh/wazuh/blob/master/LICENSE",
+          "hostname": "wazuh-master",
+          "timestamp": "2020-08-19T09:20:02+0000"
+       },
+       "error": 0
+    }
+
+    Getting /agents/summary/os:
+
+    {
+        "data": {
+            "affected_items": [
+                "windows"
+            ],
+            "total_affected_items": 1,
+            "total_failed_items": 0,
+            "failed_items": []
+        },
+        "message": "Showing the operative system of all specified agents",
+        "error": 0
+    }
+
+    End of the script.
+
 
 Basic concepts
 --------------
 
 Here are some of the basic concepts related to making API requests and understanding their responses:
 
-* The *base URL* for each request is ``https://IP:55000/`` or ``http://IP:55000/``, depending on whether or not SSL is enabled and set up in the API.
-* All responses are in *JSON format* with the following structure:
+-  The *cURL command* for each request contains:
 
-    +---------+-------------------------------------------------------+
-    | Field   | Description                                           |
-    +=========+=======================================================+
-    | error   | 0 if everything was fine and an error code otherwise. |
-    +---------+-------------------------------------------------------+
-    | data    | The data requested. Only if error is equal to 0.      |
-    +---------+-------------------------------------------------------+
-    | message | The error description. Only if error is other than 0. |
-    +---------+-------------------------------------------------------+
+    +-------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | Field                                           | Description                                                                                                                                                        |
+    +=================================================+====================================================================================================================================================================+
+    | ``-X GET/POST/PUT/DELETE``                      | Specifies a custom request method to use when communicating with the HTTP server.                                                                                  |
+    +-------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | ``http://localhost:55000/<ENDPOINT>``           | The API URL to use if you are running the command on the manager itself. It will be ``http`` or ``https`` depending on whether SSL is activated in the API or not. |
+    | ``https://localhost:55000/<ENDPOINT>``          |                                                                                                                                                                    |
+    +-------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | ``-H "Authorization: Bearer <YOUR_JWT_TOKEN>"`` | Include extra header in the request to specify JWT token.                                                                                                          |
+    +-------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | ``-k``                                          | Suppress SSL certificate errors (only if you use the default self-signed certificates).                                                                            |
+    +-------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
- * Example response without errors:
+- All responses are in *JSON format* and most of them follow this structure:
 
-  .. code-block:: json
+    +---------+----------------------+----------------------------------------------------------------------------------------------------------------+
+    | Field   | Optional Sub-fields  | Description                                                                                                    |
+    +=========+======================+================================================================================================================+
+    | data    | affected_items       | List with each of the successfully affected items in the request.                                              |
+    |         +----------------------+----------------------------------------------------------------------------------------------------------------+
+    |         | total_affected_items | Total number of successfully affected items.                                                                   |
+    |         +----------------------+----------------------------------------------------------------------------------------------------------------+
+    |         | failed_items         | List containing each of the failed items in the request.                                                       |
+    |         +----------------------+----------------------------------------------------------------------------------------------------------------+
+    |         | total_failed_items   | Total number of failed items.                                                                                  |
+    +---------+----------------------+----------------------------------------------------------------------------------------------------------------+
+    | message |                      | Result description.                                                                                            |
+    +---------+----------------------+----------------------------------------------------------------------------------------------------------------+
+    | error   |                      | For HTTP ``200`` responses determines if the response was complete (``0``), failed (``1``) or partial (``2``). |
+    |         |                      |                                                                                                                |
+    |         |                      | For HTTP ``4xx`` or ``5xx`` responses determines the error code related to the failure.                        |
+    +---------+----------------------+----------------------------------------------------------------------------------------------------------------+
+
+
+    - Example response without errors (HTTP status code 200):
+
+    .. code-block:: json
         :class: output
 
         {
-            "error":0,
-            "data":{
-                "msg":"Welcome to Wazuh HIDS API",
-                "api_version":"v|WAZUH_LATEST|",
-                "hostname":"wazuh",
-                "timestamp":"Mon Dec 03 2018 00:37:50 GMT+0000 (UTC)"
-            }
+          "data": {
+            "affected_items": [
+              "master-node",
+              "worker1"
+            ],
+            "total_affected_items": 2,
+            "failed_items": [],
+            "total_failed_items": 0
+          },
+          "message": "Restart request sent to all specified nodes",
+          "error": 0
         }
 
- * Example response with errors:
- 
-  .. code-block:: json
+    - Example response with errors (HTTP status code 200):
+
+    .. code-block:: json
         :class: output
 
-        { "error": "603", "message": "The requested URL was not found on this server" }
+        {
+          "data": {
+            "affected_items": [],
+            "total_affected_items": 0,
+            "total_failed_items": 4,
+            "failed_items": [
+              {
+                "error": {
+                  "code": 1707,
+                  "message": "Impossible to restart non-active agent: never_connected",
+                  "remediation": "Please, make sure agent is active before attempting to restart"
+                },
+                "id": [
+                  "001",
+                  "002",
+                ]
+              },
+              {
+                "error": {
+                  "code": 1707,
+                  "message": "Impossible to restart non-active agent: disconnected",
+                  "remediation": "Please, make sure agent is active before attempting to restart"
+                },
+                "id": [
+                  "009",
+                  "010"
+                ]
+              }
+            ]
+          },
+          "message": "Restart command was not sent to any agent",
+          "error": 1
+        }
 
-* Responses containing collections of data will return a maximum of 500 elements. The *offset* and *limit* parameters may be used to iterate through large collections.
-* All responses have an HTTP status code: 2xx (success), 4xx (client error), 5xx (server error), etc.
-* All requests accept the parameter ``pretty`` to convert the JSON response to a more human-readable format.
-* The API log is stored on the manager as ``/var/ossec/logs/api.log``. The API logs are rotated daily. The rotations are stored in ``/var/ossec/logs/api/<year>/<month>`` and compressed using ``gzip``.
-* All API requests will be aborted if no response is received after a certain amount of time. The parameter ``wait_for_complete`` can be used to disable this timeout. This is useful for calls that could take more time than expected, such as :ref:`PUT/agents/:agent_id/upgrade <api_reference>`.
+   - Example of partial response (HTTP status code 200):
+
+    .. code-block:: json
+        :class: output
+
+        {
+          "data": {
+            "affected_items": [
+              {
+                "ip": "10.0.0.9",
+                "id": "001",
+                "name": "Carlos",
+                "dateAdd": "2020-10-07T08:14:32Z",
+                "node_name": "unknown",
+                "registerIP": "10.0.0.9",
+                "status": "never_connected"
+              }
+            ],
+            "total_affected_items": 1,
+            "total_failed_items": 1,
+            "failed_items": [
+              {
+                "error": {
+                  "code": 1701,
+                  "message": "Agent does not exist",
+                  "remediation": "Please, use `GET /agents?select=id,name` to find all available agents"
+                },
+                "id": [
+                  "005"
+                ]
+              }
+            ]
+          },
+          "message": "Some agents information was not returned",
+          "error": 2
+        }
+
+    - Example response to report an unauthorized request (HTTP status code 401):
+
+    .. code-block:: json
+        :class: output
+
+        {
+          "title": "Unauthorized",
+          "detail": "The server could not verify that you are authorized to access the URL requested. You either supplied the wrong credentials (e.g. a bad password), or your browser doesn't understand how to supply the credentials required.",
+        }
+
+    - Example response to report a permission denied error (HTTP status code 403):
+
+    .. code-block:: json
+        :class: output
+
+        {
+          "title": "Permission Denied",
+          "detail": "Permission denied: Resource type: *:*",
+          "remediation": "Please, make sure you have permissions to execute the current request. For more information on how to set up permissions, please visit https://documentation.wazuh.com/current/user-manual/api/rbac/configuration.html",
+          "error": 4000,
+          "dapi_errors": {
+            "unknown-node": {
+              "error": "Permission denied: Resource type: *:*"
+            }
+          }
+        }
+
+- Responses containing collections of data will return a maximum of 500 elements by default. The *offset* and *limit* parameters may be used to iterate through large collections. The *limit* parameter accepts up to 100000 items, although it is recommended not to exceed the default value (500 items). Doing so can lead to unexpected behaviors (timeouts, large responses, etc.). Use with caution.
+- All responses have an HTTP status code: 2xx (success), 4xx (client error), 5xx (server error), etc.
+- All requests (except ``GET /security/user/authenticate`` and ``POST /security/user/authenticate/run_as``) accept the parameter ``pretty`` to convert the JSON response to a more human-readable format.
+- The Wazuh API log is stored on the manager as ``/var/ossec/logs/api.log`` (the path and verbosity level can be changed in the Wazuh API configuration file). The Wazuh API logs are rotated daily. Rotated logs are stored in ``/var/ossec/logs/api/<year>/<month>`` and compressed using ``gzip``.
+- All Wazuh API requests will be aborted if no response is received after a certain amount of time. The parameter ``wait_for_complete`` can be used to disable this timeout. This is useful for calls that could take more time than expected, such as :ref:`PUT/agents/:agent_id/upgrade <api_reference>`.
 
 .. _wazuh_api_use_cases:
 
 Use cases
 ---------
 
-This section will present several use cases to give you a taste for the API's potential. You can find details about all possible API requests in the :ref:`reference <api_reference>` section.
+This section will present several use cases to give you a taste for the Wazuh API's potential. Details about all possible API requests can be found in the :ref:`reference <api_reference>` section.
 
 Exploring the ruleset
 ^^^^^^^^^^^^^^^^^^^^^
@@ -111,273 +440,126 @@ Often when an alert fires, it is helpful to know details about the rule itself. 
 
 .. code-block:: console
 
-    # curl -u foo:bar "http://localhost:55000/rules/1002?pretty"
+    # curl -k -X GET "https://localhost:55000/rules?rule_ids=1002&pretty=true" -H  "Authorization: Bearer $TOKEN"
 
 .. code-block:: json
     :class: output
 
     {
-       "error": 0,
        "data": {
-          "totalItems": 1,
-          "items": [
+          "affected_items": [
              {
-                "status": "enabled",
-                "pci": [],
-                "description": "Unknown problem somewhere in the system.",
-                "file": "0020-syslog_rules.xml",
+                "filename": "0020-syslog_rules.xml",
+                "relative_dirname": "ruleset/rules",
+                "id": 1002,
                 "level": 2,
-                "path": "/var/ossec/ruleset/rules",
+                "status": "enabled",
                 "details": {
-                   "match": "$BAD_WORDS"
+                   "match": {
+                      "pattern": "core_dumped|failure|error|attack| bad |illegal |denied|refused|unauthorized|fatal|failed|Segmentation Fault|Corrupted"
+                    }
                 },
+                "pci_dss": [],
+                "gpg13": [
+                   "4.3"
+                ],
+                "gdpr": [],
+                "hipaa": [],
+                "nist_800_53": [],
                 "groups": [
-                   "gpg13_4.3",
                    "syslog",
                    "errors"
                 ],
-                "id": 1002,
-                "gdpr": []
+                "description": "Unknown problem somewhere in the system."
              }
-          ]
-       }
+          ],
+          "total_affected_items": 1,
+          "total_failed_items": 0,
+          "failed_items": []
+       },
+       "message": "All selected rules were returned",
+       "error": 0
     }
 
 
-It can also be helpful to know what rules are available that match a specific criteria. For example, all the rules with a group of **web**, a PCI tag of **10.6.1**, and containing the word **failures** can be showed using the command below:
+It can also be helpful to know which rules matching a specific criteria are available. For example, all the rules with a group of **web**, a PCI tag of **10.6.1**, and containing the word **failures** can be showed using the command below:
 
 .. code-block:: console
 
-    # curl -u foo:bar "http://localhost:55000/rules?group=web&pci=10.6.1&search=failures&pretty"
+    # curl -k -X GET "https://localhost:55000/rules?pretty=true&limit=500&search=failures&group=web&pci_dss=10.6.1" -H  "Authorization: Bearer $TOKEN"
 
 .. code-block:: json
     :class: output
 
     {
-       "error": 0,
-       "data": {
-          "totalItems": 1,
-          "items": [
-             {
-                "status": "enabled",
-                "pci": [
-                   "10.6.1",
-                   "10.2.4",
-                   "10.2.5",
-                   "11.4"
-                ],
-                "description": "Nginx: Multiple web authentication failures.",
-                "file": "0260-nginx_rules.xml",
-                "level": 10,
-                "path": "/var/ossec/ruleset/rules",
-                "details": {
-                   "same_source_ip": "",
-                   "frequency": "8",
-                   "if_matched_sid": "31315",
-                   "timeframe": "240"
-                },
-                "groups": [
-                   "authentication_failures",
-                   "gpg13_7.1",
-                   "nginx",
-                   "web"
-                ],
-                "id": 31316,
-                "gdpr": [
-                   "IV_35.7.d",
-                   "IV_32.2"
-                ]
-             }
-          ]
-       }
+      "data": {
+        "affected_items": [
+          {
+            "filename": "0260-nginx_rules.xml",
+            "relative_dirname": "ruleset/rules",
+            "id": 31316,
+            "level": 10,
+            "status": "enabled",
+            "details": {
+              "frequency": "8",
+              "timeframe": "240",
+              "if_matched_sid": "31315",
+              "same_source_ip": "",
+              "mitre": "\n      "
+            },
+            "pci_dss": [
+              "10.6.1",
+              "10.2.4",
+              "10.2.5",
+              "11.4"
+            ],
+            "gpg13": [
+              "7.1"
+            ],
+            "gdpr": [
+              "IV_35.7.d",
+              "IV_32.2"
+            ],
+            "hipaa": [
+              "164.312.b"
+            ],
+            "nist_800_53": [
+              "AU.6",
+              "AU.14",
+              "AC.7",
+              "SI.4"
+            ],
+            "groups": [
+              "authentication_failures",
+              "tsc_CC7.2",
+              "tsc_CC7.3",
+              "tsc_CC6.1",
+              "tsc_CC6.8",
+              "nginx",
+              "web"
+            ],
+            "description": "Nginx: Multiple web authentication failures."
+          }
+        ],
+        "total_affected_items": 1,
+        "total_failed_items": 0,
+        "failed_items": []
+      },
+      "message": "All selected rules were returned",
+      "error": 0
     }
 
 
 
-Mining the file integrity monitoring database of an agent
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Testing rules and decoders
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The API can be used to show information about all monitored files by syscheck. The following example shows all modified *.py* files in agent *000* (the manager):
-
-.. code-block:: console
-
-    # curl -u foo:bar "http://localhost:55000/syscheck/000?event=modified&search=.py&pretty"
-
-.. code-block:: json
-    :class: output
-
-    {
-        "error": 0,
-        "data": {
-            "totalItems": 2,
-            "items": [
-                {
-                    "sha1": "67b0a8ccf18bf5d2eb8c7f214b5a5d0d4a5e409d",
-                    "group": "root",
-                    "uid": 0,
-                    "scanDate": "2018-08-02 16:49:47",
-                    "gid": 0,
-                    "user": "root",
-                    "file": "/etc/python2.7/sitecustomize.py",
-                    "modificationDate": "2018-04-15 21:51:34",
-                    "octalMode": "100644",
-                    "permissions": "-rw-r--r--",
-                    "md5": "d6b276695157bde06a56ba1b2bc53670",
-                    "inode": 536845,
-                    "event": "modified",
-                    "size": 155
-                },
-                {
-                    "sha1": "67b0a8ccf18bf5d2eb8c7f214b5a5d0d4a5e409d",
-                    "group": "root",
-                    "uid": 0,
-                    "scanDate": "2018-08-02 16:49:33",
-                    "gid": 0,
-                    "user": "root",
-                    "file": "/etc/python3.6/sitecustomize.py",
-                    "modificationDate": "2018-04-01 05:46:30",
-                    "octalMode": "100644",
-                    "permissions": "-rw-r--r--",
-                    "md5": "d6b276695157bde06a56ba1b2bc53670",
-                    "inode": 394698,
-                    "event": "modified",
-                    "size": 155
-                }
-            ]
-        }
-    }
-
-
-You can find a file using its md5/sha1 hash. In the following examples, the same file is retrieved using both its md5 and sha1:
+With the Wazuh API, it is possible to start a **wazuh-logtest** session or use an already started session to test and verify custom or default rules and decoders. With the following request, a logtest session is created and the rules and decoders that match with the given log are shown. The predecoding phase is also shown, among other information.
 
 .. code-block:: console
 
-    # curl -u foo:bar "http://localhost:55000/syscheck/000?pretty&hash=17f51705df5b61c53ef600fc1fcbe031e4d53c20"
+    # curl -k -X PUT "https://localhost:55000/logtest" -H  "Authorization: Bearer $TOKEN" -H  "Content-Type: application/json" -d "{\"event\":\"Jun 29 15:54:13 focal multipathd[557]: sdb: failed to get sysfs uid: No data available\",\"log_format\":\"syslog\",\"location\":\"user->/var/log/syslog\"}"
 
-.. code-block:: json
-    :class: output
-
-    {
-       "error": 0,
-       "data": {
-          "totalItems": 1,
-          "items": [
-             {
-                "sha1": "17f51705df5b61c53ef600fc1fcbe031e4d53c20",
-                "group": "root",
-                "uid": 0,
-                "scanDate": "2018-08-02 16:50:12",
-                "gid": 0,
-                "user": "root",
-                "file": "/sbin/swapon",
-                "modificationDate": "2018-03-15 22:47:34",
-                "octalMode": "100755",
-                "permissions": "-rwxr-xr-x",
-                "md5": "39b88ab3ddfaf00db53e5cf193051351",
-                "inode": 584,
-                "event": "modified",
-                "size": 47184
-             }
-          ]
-       }
-    }
-
-.. code-block:: console
-
-    # curl -u foo:bar "http://localhost:55000/syscheck/000?pretty&hash=39b88ab3ddfaf00db53e5cf193051351"
-
-.. code-block:: json
-    :class: output
-
-    {
-       "error": 0,
-       "data": {
-          "totalItems": 1,
-          "items": [
-             {
-                "sha1": "17f51705df5b61c53ef600fc1fcbe031e4d53c20",
-                "group": "root",
-                "uid": 0,
-                "scanDate": "2018-08-02 16:50:12",
-                "gid": 0,
-                "user": "root",
-                "file": "/sbin/swapon",
-                "modificationDate": "2018-03-15 22:47:34",
-                "octalMode": "100755",
-                "permissions": "-rwxr-xr-x",
-                "md5": "39b88ab3ddfaf00db53e5cf193051351",
-                "inode": 584,
-                "event": "modified",
-                "size": 47184
-             }
-          ]
-       }
-    }
-
-
-Listing outstanding rootcheck issues
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Rootcheck requests are very similar to the syscheck requests. In order to get all rootcheck issues with the **outstanding** status, run this request:
-
-.. code-block:: console
-
-    # curl -u foo:bar "http://localhost:55000/rootcheck/000?status=outstanding&offset=10&limit=1&pretty"
-
-.. code-block:: json
-    :class: output
-
-    {
-       "error": 0,
-       "data": {
-          "totalItems": 14,
-          "items": [
-             {
-                "status": "outstanding",
-                "oldDay": "2018-08-02 16:50:41",
-                "pci": "2.2.4",
-                "readDay": "2018-08-03 00:27:29",
-                "event": "System Audit: SSH Hardening - 6: Empty passwords allowed {PCI_DSS: 2.2.4}. File: /etc/ssh/sshd_config. Reference: 6 ."
-             }
-          ]
-       }
-    }
-
-
-Getting information about the manager
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Some information about the manager can be retrieved using the API. Configuration, status, information, logs, etc. The following example retrieves the status of each daemon Wazuh runs:
-
-.. code-block:: console
-
-    # curl -u foo:bar "http://localhost:55000/manager/status?pretty"
-
-.. code-block:: json
-    :class: output
-
-    {
-        "error": 0,
-        "data": {
-          "wazuh-modulesd": "running",
-          "ossec-authd": "stopped",
-          "wazuh-clusterd": "running",
-          "ossec-monitord": "running",
-          "ossec-logcollector": "running",
-          "ossec-execd": "running",
-          "ossec-remoted": "running",
-          "ossec-syscheckd": "running",
-          "ossec-analysisd": "running",
-          "ossec-maild": "stopped"
-        }
-    }
-
-
-You can even dump the manager's current configuration with the request below (response shortened for brevity):
-
-.. code-block:: console
-
-    # curl -u foo:bar "http://localhost:55000/manager/configuration?pretty"
 
 .. code-block:: json
     :class: output
@@ -385,18 +567,268 @@ You can even dump the manager's current configuration with the request below (re
     {
       "error": 0,
       "data": {
-        "global": {
-          "email_notification": "no",
-          "white_list": [
-            "127.0.0.1",
-            "^localhost.localdomain$",
-            "10.0.0.2"
-          ],
-          "jsonout_output": "yes",
-          "logall": "yes"
+        "token": "bc3ca27a",
+        "messages": [
+          "WARNING: (7309): 'null' is not a valid token",
+          "INFO: (7202): Session initialized with token 'bc3ca27a'"
+        ],
+        "output": {
+          "timestamp": "2020-10-15T09:40:53.630+0000",
+          "rule": {
+            "level": 0,
+            "description": "FreeIPA messages grouped",
+            "id": "82202",
+            "firedtimes": 1,
+            "mail": false,
+            "groups": [
+              "freeipa"
+            ]
+          },
+          "agent": {
+            "id": "000",
+            "name": "wazuh-master"
+          },
+          "manager": {
+            "name": "wazuh-master"
+          },
+          "id": "1602754853.1000774",
+          "cluster": {
+            "name": "wazuh",
+            "node": "master-node"
+          },
+          "full_log": "Jun 29 15:54:13 focal multipathd[557]: sdb: failed to get sysfs uid: No data available",
+          "predecoder": {
+            "program_name": "multipathd",
+            "timestamp": "Jun 29 15:54:13",
+            "hostname": "focal"
+          },
+          "decoder": {
+            "name": "freeipa"
+          },
+          "location": "user->/var/log/syslog"
         },
-        "...": {"...": "..."}
+        "alert": false,
+        "codemsg": 1
       }
+    }
+
+
+
+Mining the file integrity monitoring database of an agent
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The API can be used to show information about all monitored files by syscheck. The following example shows all events related with *.py* files in agent *000* (the manager):
+
+.. code-block:: console
+
+    # curl -k -X GET "https://localhost:55000/syscheck/000?pretty=true&search=.py" -H  "Authorization: Bearer $TOKEN"
+
+.. code-block:: json
+    :class: output
+
+    {
+      "data": {
+        "affected_items": [
+          {
+            "file": "/etc/python2.7/sitecustomize.py",
+            "perm": "rw-r--r--",
+            "sha1": "67b0a8ccf18bf5d2eb8c7f214b5a5d0d4a5e409d",
+            "changes": 1,
+            "md5": "d6b276695157bde06a56ba1b2bc53670",
+            "inode": 29654607,
+            "size": 155,
+            "uid": "0",
+            "gname": "root",
+            "mtime": "2020-04-15T17:20:14Z",
+            "sha256": "43d81125d92376b1a69d53a71126a041cc9a18d8080e92dea0a2ae23be138b1e",
+            "date": "2020-05-25T14:28:41Z",
+            "uname": "root",
+            "type": "file",
+            "gid": "0"
+          },
+          {
+            "file": "/etc/python3.6/sitecustomize.py",
+            "perm": "rw-r--r--",
+            "sha1": "67b0a8ccf18bf5d2eb8c7f214b5a5d0d4a5e409d",
+            "changes": 1,
+            "md5": "d6b276695157bde06a56ba1b2bc53670",
+            "inode": 29762235,
+            "size": 155,
+            "uid": "0",
+            "gname": "root",
+            "mtime": "2020-04-18T01:56:04Z",
+            "sha256": "43d81125d92376b1a69d53a71126a041cc9a18d8080e92dea0a2ae23be138b1e",
+            "date": "2020-05-25T14:28:41Z",
+            "uname": "root",
+            "type": "file",
+            "gid": "0"
+          }
+        ],
+        "total_affected_items": 2,
+        "total_failed_items": 0,
+        "failed_items": []
+      },
+      "message": "FIM findings of the agent were returned",
+      "error": 0
+    }
+
+You can find a file using its md5/sha1 hash. In the following examples, the same file is retrieved using both its md5 and sha1:
+
+.. code-block:: console
+
+    # curl -k -X GET "https://localhost:55000/syscheck/000?pretty=true&hash=bc929cb047b79d5c16514f2c553e6b759abfb1b8" -H  "Authorization: Bearer $TOKEN"
+
+.. code-block:: json
+    :class: output
+
+    {
+      "data": {
+        "affected_items": [
+          {
+            "file": "/sbin/swapon",
+            "perm": "rwxr-xr-x",
+            "sha1": "bc929cb047b79d5c16514f2c553e6b759abfb1b8",
+            "changes": 1,
+            "md5": "085c1161d814a8863562694b3819f6a5",
+            "inode": 14025822,
+            "size": 47184,
+            "uid": "0",
+            "gname": "root",
+            "mtime": "2020-01-08T18:31:23Z",
+            "sha256": "f274025a1e4870301c5678568ab9519152f49d3cb907c01f7c71ff17b1a6e870",
+            "date": "2020-05-25T14:29:44Z",
+            "uname": "root",
+            "type": "file",
+            "gid": "0"
+          }
+        ],
+        "total_affected_items": 1,
+        "total_failed_items": 0,
+        "failed_items": []
+      },
+      "message": "FIM findings of the agent were returned",
+      "error": 0
+    }
+
+.. code-block:: console
+
+    # curl -k -X GET "https://localhost:55000/syscheck/000?pretty=true&hash=085c1161d814a8863562694b3819f6a5" -H  "Authorization: Bearer $TOKEN"
+
+.. code-block:: json
+    :class: output
+
+    {
+      "data": {
+        "affected_items": [
+          {
+            "file": "/sbin/swapon",
+            "perm": "rwxr-xr-x",
+            "sha1": "bc929cb047b79d5c16514f2c553e6b759abfb1b8",
+            "changes": 1,
+            "md5": "085c1161d814a8863562694b3819f6a5",
+            "inode": 14025822,
+            "size": 47184,
+            "uid": "0",
+            "gname": "root",
+            "mtime": "2020-01-08T18:31:23Z",
+            "sha256": "f274025a1e4870301c5678568ab9519152f49d3cb907c01f7c71ff17b1a6e870",
+            "date": "2020-05-25T14:29:44Z",
+            "uname": "root",
+            "type": "file",
+            "gid": "0"
+          }
+        ],
+        "total_affected_items": 1,
+        "total_failed_items": 0,
+        "failed_items": []
+      },
+      "message": "FIM findings of the agent were returned",
+      "error": 0
+    }
+
+Getting information about the manager
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Some information about the manager can be retrieved using the Wazuh API. Configuration, status, information, logs, etc. The following example retrieves the status of each Wazuh daemon:
+
+.. code-block:: console
+
+    # curl -k -X GET "https://localhost:55000/manager/status?pretty=true" -H  "Authorization: Bearer $TOKEN"
+
+.. code-block:: json
+    :class: output
+
+    {
+      "data": {
+        "affected_items": [
+          {
+            "wazuh-agentlessd": "running",
+            "wazuh-analysisd": "running",
+            "wazuh-authd": "running",
+            "wazuh-csyslogd": "running",
+            "wazuh-dbd": "stopped",
+            "wazuh-monitord": "running",
+            "wazuh-execd": "running",
+            "wazuh-integratord": "running",
+            "wazuh-logcollector": "running",
+            "wazuh-maild": "running",
+            "wazuh-remoted": "running",
+            "wazuh-reportd": "stopped",
+            "wazuh-syscheckd": "running",
+            "wazuh-clusterd": "running",
+            "wazuh-modulesd": "running",
+            "wazuh-db": "running",
+            "wazuh-apid": "stopped"
+          }
+        ],
+        "total_affected_items": 1,
+        "total_failed_items": 0,
+        "failed_items": []
+      },
+      "message": "Processes status were successfully read in specified node",
+      "error": 0
+    }
+
+
+You can even dump the manager's current configuration with the request below (response shortened for brevity):
+
+.. code-block:: console
+
+    # curl -k -X GET "https://localhost:55000/manager/configuration?pretty=true&section=global" -H  "Authorization: Bearer $TOKEN"
+
+.. code-block:: json
+    :class: output
+
+    {
+      "data": {
+        "affected_items": [
+          {
+            "global": {
+              "jsonout_output": "yes",
+              "alerts_log": "yes",
+              "logall": "no",
+              "logall_json": "no",
+              "email_notification": "yes",
+              "email_to": "me@test.com",
+              "smtp_server": "mail.test.com",
+              "email_from": "wazuh@test.com",
+              "email_maxperhour": "12",
+              "email_log_source": "alerts.log",
+              "white_list": [
+                "127.0.0.1",
+                "^localhost.localdomain$",
+                "8.8.8.8",
+                "8.8.4.4"
+              ]
+            }
+          }
+        ],
+        "total_affected_items": 1,
+        "total_failed_items": 0,
+        "failed_items": []
+      },
+      "message": "Configuration was successfully read in specified node",
+      "error": 0
     }
 
 
@@ -405,47 +837,41 @@ Playing with agents
 
 Here are some commands for working with the agents.
 
-This enumerates **active** agents:
+This enumerates 2 **active** agents:
 
 .. code-block:: console
 
-    # curl -u foo:bar "http://localhost:55000/agents?offset=1&limit=1&status=active&pretty"
+    # curl -k -X GET "https://localhost:55000/agents?pretty=true&offset=1&limit=2&select=status%2Cid%2Cmanager%2Cname%2Cnode_name%2Cversion&status=active" -H  "Authorization: Bearer $TOKEN"
 
 .. code-block:: json
     :class: output
 
     {
-       "error": 0,
-       "data": {
-          "totalItems": 2,
-          "items": [
-             {
-                "status": "Active",
-                "configSum": "ab73af41699f13fdd81903b5f23d8d00",
-                "group": "default",
-                "name": "ubuntu",
-                "mergedSum": "f1a9e24e02ba4cc5ea80a9d3feb3bb9a",
-                "ip": "192.168.185.7",
-                "node_name": "node01",
-                "dateAdd": "2018-08-02 16:52:04",
-                "version": "Wazuh v|WAZUH_LATEST|",
-                "key": "ac7b7eddf95d65374cb82003024096effa8d90789d447805c375427cb62c75a2",
-                "manager_host": "wazuh",
-                "lastKeepAlive": "2018-08-03 01:27:33",
-                "os": {
-                   "major": "16",
-                   "name": "Ubuntu",
-                   "uname": "Linux |ubuntu |4.4.0-131-generic |#157-Ubuntu SMP Thu Jul 12 15:51:36 UTC 2018 |x86_64",
-                   "platform": "ubuntu",
-                   "version": "16.04.5 LTS",
-                   "codename": "Xenial Xerus",
-                   "arch": "x86_64",
-                   "minor": "04"
-                },
-                "id": "001"
-             }
-          ]
-       }
+      "data": {
+        "affected_items": [
+          {
+            "node_name": "worker2",
+            "status": "active",
+            "manager": "wazuh-worker2",
+            "version": "Wazuh v3.13.1",
+            "id": "001",
+            "name": "wazuh-agent1"
+          },
+          {
+            "node_name": "worker2",
+            "status": "active",
+            "manager": "wazuh-worker2",
+            "version": "Wazuh v3.13.1",
+            "id": "002",
+            "name": "wazuh-agent2"
+          }
+        ],
+        "total_affected_items": 9,
+        "total_failed_items": 0,
+        "failed_items": []
+      },
+      "message": "All selected agents information was returned",
+      "error": 0
     }
 
 
@@ -453,20 +879,20 @@ Adding an agent is now easier than ever. Simply send a request with the agent na
 
 .. code-block:: console
 
-    # curl -u foo:bar -X POST -d '{"name":"NewHost","ip":"10.0.0.9"}' -H 'Content-Type:application/json' "http://localhost:55000/agents?pretty"
+    # curl -k -X POST "https://localhost:55000/agents?pretty=true" -H  "Authorization: Bearer $TOKEN" -H  "Content-Type: application/json" -d "{\"name\":\"NewHost\",\"ip\":\"10.0.10.11\"}"
 
 .. code-block:: json
     :class: output
 
     {
-        "error": 0,
-        "data": {
-          "id": "007",
-          "key": "MDA3IE5ld0hvc3QgMTAuMC4wLjkgYzc2YmZiOTEyYzI0MmMyYzFmMjY2ZTZiMzMyMDM4OTlkMzQ5M2E3OTRkOTMyMDU1MzAzZTE3ZDBkN2I0MmM5Yw=="
-        }
+      "data": {
+        "id": "013",
+        "key": "MDEzIE5ld0hvc3RfMiAxMC4wLjEwLjEyIDkzOTE0MmE4OTQ4YTNlMzA0ZTdiYzVmZTRhN2Q4Y2I1MjgwMWIxNDI4NWMzMzk3N2U5MWU5NGJiMDc4ZDEzNjc="
+      },
+      "error": 0
     }
 
 
 Conclusion
 ^^^^^^^^^^
-We hope those examples have helped you to appreciate the potential of the Wazuh API. Remember to check out the :ref:`reference <api_reference>` document to discover all the available API requests. A nice summary can also be found here: :ref:`summary <request_list>`.
+The provided examples should help appreciate the potential of the Wazuh API. Remember to check out the :ref:`reference <api_reference>` document to discover all the available API requests.

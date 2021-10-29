@@ -1,5 +1,7 @@
-.. Copyright (C) 2020 Wazuh, Inc.
-
+.. Copyright (C) 2021 Wazuh, Inc.
+.. meta::
+  :description: Learn how to remove agents using the command line interface (CLI) in Wazuh.
+  
 .. _command-line-remove:
 
 Remove agents using the CLI

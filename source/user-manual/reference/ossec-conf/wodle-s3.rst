@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _wodle_s3:
 
@@ -30,7 +30,8 @@ Main options
 - `remove_from_bucket`_
 - `run_on_start`_
 - `skip_on_error`_
-- `bucket`_
+- `bucket type`_
+- `service type`_
 
 
 +-----------------------+-----------------------------+--------------------+
@@ -118,7 +119,7 @@ remove_from_bucket
 Define if you want to remove logs from your S3 bucket after they are read by the wodle.
 
 +--------------------+---------+
-| **Default value**  | yes     |
+| **Default value**  | no      |
 +--------------------+---------+
 | **Allowed values** | yes, no |
 +--------------------+---------+
@@ -392,6 +393,145 @@ Time of the day to run the scan. It has to be represented in the format *hh:mm*.
 	When only the ``time`` option is set, the interval value must be a multiple of days or weeks. By default, the interval is set to a day.
 
 
+service type
+^^^^^^^^^^^^
+
+Define a service to process. Must have the attribute ``type`` defined. (Supports multiple instances of this option).
+
+Service options
+~~~~~~~~~~~~~~~
+
+- `Service\\aws_account_id`_
+- `Service\\aws_account_alias`_
+- `Service\\aws_log_groups`_
+- `Service\\access_key`_
+- `Service\\secret_key`_
+- `Service\\aws_profile`_
+- `Service\\iam_role_arn`_
+- `Service\\only_logs_after`_
+- `Service\\regions`_
+- `Service\\remove_log_streams`_
+
+
+Service\\aws_account_id
+^^^^^^^^^^^^^^^^^^^^^^^
+
+The AWS Account ID for accessing the service.
+
++--------------------+-----------------------------------------------------+
+| **Default value**  | All accounts.                                       |
++--------------------+-----------------------------------------------------+
+| **Allowed values** | Comma-delimited list of 12 digit AWS Account ID     |
++--------------------+-----------------------------------------------------+
+
+
+Service\\aws_account_alias
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+A user-friendly name for the AWS account.
+
++--------------------+-----------------------------+
+| **Default value**  | N/A                         |
++--------------------+-----------------------------+
+| **Allowed values** | Any string                  |
++--------------------+-----------------------------+
+
+Service\\access_key
+^^^^^^^^^^^^^^^^^^^
+
+The access key ID for the IAM user with the permission to access the service.
+
++--------------------+--------------------------+
+| **Default value**  | N/A                      |
++--------------------+--------------------------+
+| **Allowed values** | Any alphanumerical key.  |
++--------------------+--------------------------+
+
+Service\\aws_log_groups
+^^^^^^^^^^^^^^^^^^^^^^^
+
+.. versionadded:: 4.0.0
+
+A comma-delimited list of log group names from where the logs should be extracted. Only works for CloudWatch Logs service.
+
++--------------------+------------------------------------------------+
+| **Default value**  | All regions                                    |
++--------------------+------------------------------------------------+
+| **Allowed values** | Comma-delimited list of valid log group names  |
++--------------------+------------------------------------------------+
+
+Service\\secret_key
+^^^^^^^^^^^^^^^^^^^
+
+The secret key created for the IAM user with the permission to access the service.
+
++--------------------+--------------------------+
+| **Default value**  | N/A                      |
++--------------------+--------------------------+
+| **Allowed values** | Any alphanumerical key.  |
++--------------------+--------------------------+
+
+Service\\aws_profile
+^^^^^^^^^^^^^^^^^^^^
+
+A valid profile name from a Shared Credential File or AWS Config File with the permission to access the service.
+
++--------------------+--------------------+
+| **Default value**  | N/A                |
++--------------------+--------------------+
+| **Allowed values** | Valid profile name |
++--------------------+--------------------+
+
+Service\\iam_role_arn
+^^^^^^^^^^^^^^^^^^^^^
+
+A valid role arn with permission to access the service.
+
++--------------------+----------------+
+| **Default value**  | N/A            |
++--------------------+----------------+
+| **Allowed values** | Valid role arn |
++--------------------+----------------+
+
+Service\\only_logs_after
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. versionadded:: 4.0.0
+
+A valid date, in YYYY-MMM-DD format. Only those logs from after that date will be parsed, the logs from before that date will be skipped. Only works for CloudWatch Logs service.
+
++--------------------+-------------+
+| **Default value**  | 1970-JAN-01 |
++--------------------+-------------+
+| **Allowed values** | Valid date  |
++--------------------+-------------+
+
+Service\\regions
+^^^^^^^^^^^^^^^^
+
+.. versionadded:: 4.0.0
+
+A comma-delimited list of regions to limit parsing of logs. Only works for CloudWatch Logs service.
+
++--------------------+----------------------------------------+
+| **Default value**  | All regions                            |
++--------------------+----------------------------------------+
+| **Allowed values** | Comma-delimited list of valid regions  |
++--------------------+----------------------------------------+
+
+Service\\remove_log_streams
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. versionadded:: 4.0.0
+
+Define whether or not to remove the log streams from the log groups after they are read by the module. Only works for CloudWatch Logs service.
+
++--------------------+---------+
+| **Default value**  | no      |
++--------------------+---------+
+| **Allowed values** | yes, no |
++--------------------+---------+
+
 Example of configuration
 ------------------------
 
@@ -435,4 +575,11 @@ Example of configuration
           <aws_account_id>11112222333</aws_account_id>
           <aws_account_alias>prod-account</aws_account_alias>
       </bucket>
+      <service type="cloudwatchlogs">
+          <access_key>insert_access_key</access_key>
+          <secret_key>insert_secret_key</secret_key>
+          <aws_log_groups>log_group1,log_group2</aws_log_groups>
+          <only_logs_after>2018-JUN-01</only_logs_after>
+          <regions>us-east-1,us-west-1,eu-central-1</regions>
+      </service>
   </wodle>

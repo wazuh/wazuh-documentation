@@ -4,11 +4,12 @@ _build
 .DS_Store
 test
 node_modules
+__pycache__
 .eslintrc
 package-lock.json
 package.json
-source/_static/css/style.min.css
-source/_static/css/wazuh-icons.min.css
-source/_static/js/style.min.js
-source/_static/js/version-selector.min.js
-source/_static/js/redirects.min.js
+source/_static/css/*.min.css
+source/_static/js/*.min.js
+!source/_static/js/bootstrap.min.js
+!source/_static/js/popper.min.js
+!source/_static/css/fontawesome.min.css

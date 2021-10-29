@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _learning_wazuh_survive_flood:
 
@@ -27,7 +27,7 @@ produced to keep us informed about the onset of, escalation of, and recovery fro
 Configure the Wazuh agent client buffer on linux-agent
 ------------------------------------------------------
 
-1. In this lab, we will limit agent log production to 50 events per second (EPS) in order to easily simulate
+#. In this lab, we will limit agent log production to 50 events per second (EPS) in order to easily simulate
    a flooding event. Open ``/var/ossec/etc/ossec.conf`` and find the **<client_buffer>** section,
    and edit within it the  ``<events_per_second>`` value:
 
@@ -54,17 +54,17 @@ Configure the Wazuh agent client buffer on linux-agent
         ``# echo "agent.min_eps=10" >> /var/ossec/etc/local_internal_options.conf``
 
 
-2. Restart the Wazuh agent so the configuration may take effect:
+#. Restart the Wazuh agent so the configuration may take effect:
 
     a. For Systemd:
 
-      .. code-block:: console
+       .. code-block:: console
 
         # systemctl restart wazuh-agent
 
     b. For SysV Init:
 
-      .. code-block:: console
+       .. code-block:: console
 
         # service wazuh-agent restart
 
@@ -95,7 +95,7 @@ generic Wazuh rule ``1002`` which has a low severity level (2).  By default,
 Wazuh manager does not record alerts on rules of severity levels less than 3,
 so for this lab we will lower the threshold:
 
-1. Edit ``/var/ossec/etc/ossec.conf`` and change ``<log_alert_level>`` from 3 to 1 so that the ``<alerts>``
+#. Edit ``/var/ossec/etc/ossec.conf`` and change ``<log_alert_level>`` from 3 to 1 so that the ``<alerts>``
    section looks like the one below.  Now alerts of all severity levels except level 0 will show up in Kibana.
 
     .. code-block:: xml
@@ -105,19 +105,19 @@ so for this lab we will lower the threshold:
             <email_alert_level>12</email_alert_level>
         </alerts>
 
-2. Restart Wazuh manager.
+#. Restart Wazuh manager.
 
-  a. For Systemd:
+   a. For Systemd:
 
-    .. code-block:: console
+      .. code-block:: console
 
-      # systemctl restart wazuh-manager
+        # systemctl restart wazuh-manager
 
-  b. For SysV Init:
+   b. For SysV Init:
 
-    .. code-block:: console
+      .. code-block:: console
 
-      # service wazuh-manager restart
+        # service wazuh-manager restart
 
 Generate a log flood on linux-agent
 -----------------------------------
@@ -128,14 +128,14 @@ Generate a log flood on linux-agent
 
       [root@linux-agent centos]#  yum install nmap-ncat
 
-1. Create a script called ``/usr/local/bin/makeflood``, with this content:
+#. Create a script called ``/usr/local/bin/makeflood``, with this content:
 
     .. code-block:: console
 
         #!/bin/bash
         for i in {1..10000}
         do
-          echo -n "1:floodtest:Feb  3 03:08:47 linux-agent centos: fatal firehose $i" | ncat -Uu /var/ossec/queue/ossec/queue
+          echo -n "1:floodtest:Feb  3 03:08:47 linux-agent centos: fatal firehose $i" | ncat -Uu /var/ossec/queue/sockets/queue
           echo -n "."
         done
 
@@ -143,7 +143,7 @@ Generate a log flood on linux-agent
         While we could write records to a log file monitored by Wazuh agent,
         this script takes an even faster approach of writing records directly
         to the Wazuh agent's internal socket. This is where components like
-        **ossec-logcollector** streams new log lines from log files.
+        **wazuh-logcollector** streams new log lines from log files.
 
         The script uses netcat to do this, but any tool that can write datagrams
         to a Unix socket will do the job. Sometimes it is desirable to have a script
@@ -155,58 +155,58 @@ Generate a log flood on linux-agent
         The second field causes the location metadata value to be set to "floodtest".
         After that is a log line just like you might see in ``/var/log/messages``.
 
-2. Make the script executable and then run it to generate a rapid flood of **10,000** log entries.
+#. Make the script executable and then run it to generate a rapid flood of **10,000** log entries.
 
     .. code-block:: console
 
         # chmod 700 /usr/local/bin/makeflood
         # makeflood
 
-3. Notice that the periods representing log messages are scrolling across the
+#. Notice that the periods representing log messages are scrolling across the
    screen at a rate well above our 50 EPS limit.
 
 
 See what happened according to Kibana
 -------------------------------------
 
-1. Query Kibana for "firehose".  Click on **[Add]** next to "full_log" for readability.
+#. Query Kibana for "firehose".  Click on **[Add]** next to "full_log" for readability.
    Change the scale from "Auto" to "Second".
 
-.. thumbnail:: ../images/learning-wazuh/labs/flood-1.png
+   .. thumbnail:: ../images/learning-wazuh/labs/flood-1.png
     :title: Flood
     :align: center
     :width: 100%
 
 
-2. Notice that the flooding events only arrived at the Wazuh manager at a rate of 50 EPS,
+#. Notice that the flooding events only arrived at the Wazuh manager at a rate of 50 EPS,
    our intended limit.  The client buffer EPS limit worked!
 
-3. Notice that only 8,306 hits are reported for a flood.  It appears some of the flooded events were lost.
+#. Notice that only 8,306 hits are reported for a flood.  It appears some of the flooded events were lost.
 
-4. Expand one of the "firehose" records and compare the field values to the script you used to produce these records.
+#. Expand one of the "firehose" records and compare the field values to the script you used to produce these records.
 
-.. thumbnail:: ../images/learning-wazuh/labs/flood-1a.png
+   .. thumbnail:: ../images/learning-wazuh/labs/flood-1a.png
     :title: Flood
     :align: center
     :width: 100%
 
 
-5. Query Kibana for "agent_flooding".  Click **[Add]** additionally next to "rule.description" and "data.level" for readability.
+#. Query Kibana for "agent_flooding".  Click **[Add]** additionally next to "rule.description" and "data.level" for readability.
 
-.. thumbnail:: ../images/learning-wazuh/labs/flood-2.png
+   .. thumbnail:: ../images/learning-wazuh/labs/flood-2.png
     :title: Flood
     :align: center
     :width: 100%
 
 
-6. Observe how Wazuh alerts us at various stages of a flooding event so that we
+#. Observe how Wazuh alerts us at various stages of a flooding event so that we
    can know when we need to intervene with an over-logging system that is not
    recovering to a normal state on its own.
 
 Return settings back to normal
 ------------------------------
 
-1. In linux-agent, edit the ``<client_buffer>`` section of ``/var/ossec/etc/ossec.conf`` file back to this:
+#. In linux-agent, edit the ``<client_buffer>`` section of ``/var/ossec/etc/ossec.conf`` file back to this:
 
     .. code-block:: xml
 
@@ -217,42 +217,42 @@ Return settings back to normal
             <events_per_second>500</events_per_second>
         </client_buffer>
 
-2. Restart the Wazuh agent:
+#. Restart the Wazuh agent:
 
     a. For Systemd:
 
-      .. code-block:: console
+       .. code-block:: console
 
         # systemctl restart wazuh-agent
 
     b. For SysV Init:
 
-      .. code-block:: console
+       .. code-block:: console
 
         # service wazuh-agent restart
 
-3. In wazuh-manager, edit the ``<alerts>`` section of ``/var/ossec/etc/ossec.conf`` file back to this:
+#. In wazuh-manager, edit the ``<alerts>`` section of ``/var/ossec/etc/ossec.conf`` file back to this:
 
-.. code-block:: xml
+   .. code-block:: xml
 
     <alerts>
         <log_alert_level>3</log_alert_level>
         <email_alert_level>12</email_alert_level>
     </alerts>
 
-4. Restart the Wazuh manager:
+#. Restart the Wazuh manager:
 
-a. For Systemd:
+   a. For Systemd:
 
-  .. code-block:: console
+      .. code-block:: console
 
-    # systemctl restart wazuh-manager
+       # systemctl restart wazuh-manager
 
-b. For SysV Init:
+   b. For SysV Init:
 
-  .. code-block:: console
+      .. code-block:: console
 
-    # service wazuh-manager restart
+       # service wazuh-manager restart
 
 
 Congratulations on completing this lab. You survived the log flood!

@@ -1,46 +1,33 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
+
+.. meta::
+    :description: Learn more about how to prepare your Wazuh Lab Environment. In this section, we show you how to install the Windows Wazuh agent. 
 
 .. _build_lab_install_windows_agent:
 
 Install the Windows Wazuh agent
 ===============================
 
-Download the Wazuh agent package
---------------------------------
+Run the installer to download, install and self-register the Wazuh agent
+------------------------------------------------------------------------
 
 1. Log into your Windows Agent instance via Remote Desktop as Administrator. Remember to use the password you obtained `previously <access-ec2-instances.html#rdp-access-to-windows-instance>`_.
 
-2. Open Internet Explorer and paste the following into the address bar:
-
-  .. code-block:: none
-
-    https://packages.wazuh.com/3.x/windows/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi
-
-3. Press <Enter>. In the Warning dialog, click on **[Add]**, on **[Add]** again
-   and then on **[Close]**.
-
-4. Re-paste the above link into the address bar and press <Enter> again.  Click on
-   **[Save]**.  The MSI installer is now in your Downloads folder.
-
-
-Run the installer to both install and self-register
----------------------------------------------------
-
-1. Click the **"Search Windows"** icon (magnifying glass in bottom left of screen).  Type: **"powershell"** and right click on Windows PowerShell
+2. Click the **"Search Windows"** icon (magnifying glass in bottom left of screen).  Type: **"powershell"** and right click on Windows PowerShell
 
     .. thumbnail:: ../../images/learning-wazuh/build-lab/pshell-1.png
         :title: powershell
         :width: 40%
 
-2. Click **"Run as administrator"**
+3. Click **"Run as administrator"**
 
-3. In PowerShell, change to the Downloads directory with **"cd Downloads"**
+4. In PowerShell, change to the Downloads directory with **"cd Downloads"**
 
-4. Then run the installer with this command line:
+5. Then download and run the installer with this command line:
 
     .. code-block:: console
 
-        .\\wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi /q WAZUH_MANAGER="172.30.0.10" WAZUH_PROTOCOL="tcp" WAZUH_REGISTRATION_SERVER="172.30.0.10" WAZUH_REGISTRATION_PASSWORD="please123" WAZUH_AGENT_NAME="windows-agent"
+        Invoke-WebRequest -Uri https://packages.wazuh.com/4.x/windows/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi -OutFile wazuh-agent.msi; ./wazuh-agent.msi /q WAZUH_MANAGER='172.30.0.10' WAZUH_REGISTRATION_SERVER='172.30.0.10' WAZUH_REGISTRATION_PASSWORD="please123" WAZUH_AGENT_NAME="windows-agent"
 
     It should look like this
 
@@ -49,7 +36,7 @@ Run the installer to both install and self-register
         :align: center
         :width: 100%
 
-5.  A black window will pop up briefly and disappear.  The Windows agent should
+6.  A black window will pop up briefly and disappear.  The Windows agent should
     now be installed and registered.  Close PowerShell.
 
 
@@ -86,7 +73,7 @@ Run the Wazuh agent Manager and confirm it is running and connected to the Wazuh
     .. code-block:: none
         :class: output
 
-        2019/11/22 12:05:23 ossec-agent: INFO: (4102): Connected to the server (172.30.0.10:1514/tcp).
+        2019/11/22 12:05:23 wazuh-agent: INFO: (4102): Connected to the server (172.30.0.10:1514/tcp).
 
 
 Observe that Wazuh manager is aware of all the connected agents.

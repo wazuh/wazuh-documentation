@@ -1,5 +1,7 @@
-.. Copyright (C) 2020 Wazuh, Inc.
-
+.. Copyright (C) 2021 Wazuh, Inc.
+.. meta::
+  :description: Check out our documentation to learn about registering Wazuh agents and the registration service with password authorization. 
+  
 .. _password-authorization-registration:
 
 Registration service with password authorization
@@ -55,7 +57,7 @@ Enabling the password authorization option and creating a registration password 
            .. code-block:: none
                    :class: output
 
-                   2019/04/25 15:09:50 ossec-authd: INFO: Accepting connections on port 1515. Random password chosen for agent authentication: 3027022fa85bb4c697dc0ed8274a4554
+                   2019/04/25 15:09:50 wazuh-authd: INFO: Accepting connections on port 1515. Random password chosen for agent authentication: 3027022fa85bb4c697dc0ed8274a4554
 
 
 

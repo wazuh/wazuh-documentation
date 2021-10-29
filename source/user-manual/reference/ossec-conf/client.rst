@@ -1,5 +1,7 @@
-.. Copyright (C) 2020 Wazuh, Inc.
-
+.. Copyright (C) 2021 Wazuh, Inc.
+.. meta::
+  :description: Learn more about client configuration, connection to the manager, and its configuring options in this section of the Wazuh user manual. 
+  
 .. _reference_ossec_client:
 
 client
@@ -18,6 +20,7 @@ Subsections
 -----------
 
 - `server`_
+- `enrollment`_
 
 server
 ^^^^^^
@@ -32,6 +35,8 @@ Server subsection options
 - `address`_
 - :ref:`port <server_port>`
 - :ref:`protocol <server_protocol>`
+- `max_retries`_
+- `retry_interval`_
 
 .. _server_address:
 
@@ -67,10 +72,40 @@ protocol
 Specifies the protocol to use when connecting to the manager.
 
 +--------------------+----------+
-| **Default value**  | udp      |
+| **Default value**  | tcp      |
 +--------------------+----------+
 | **Allowed values** | udp, tcp |
 +--------------------+----------+
+
+.. _server_max_retries:
+
+max_retries
+^^^^^^^^^^^
+
+.. versionadded:: 3.13.1
+
+Number of connection retries.
+
++--------------------+--------------------+
+| **Default value**  | 5                  |
++--------------------+--------------------+
+| **Allowed values** | 1 to 1.000.000.000 |
++--------------------+--------------------+
+
+.. _server_retry_interval:
+
+retry_interval
+^^^^^^^^^^^^^^
+
+.. versionadded:: 3.13.1
+
+Time interval between connection attempts (seconds).
+
++--------------------+--------------------+
+| **Default value**  | 10                 |
++--------------------+--------------------+
+| **Allowed values** | 1 to 1.000.000.000 |
++--------------------+--------------------+
 
 Options
 -------
@@ -82,6 +117,7 @@ Options
 - `config-profile`_
 - `notify_time`_
 - `time-reconnect`_
+- `ip_update_interval`_
 - `local_ip`_
 - `disable-active-response`_
 - `auto_restart`_
@@ -146,7 +182,7 @@ protocol
 Specifies the protocol to use when connecting to manager.
 
 +--------------------+----------+
-| **Default value**  | udp      |
+| **Default value**  | tcp      |
 +--------------------+----------+
 | **Allowed values** | udp, tcp |
 +--------------------+----------+
@@ -177,6 +213,10 @@ Specifies the time in seconds between agent checkins to the manager.  More frequ
 | **Allowed values** | A positive number (seconds) |
 +--------------------+-----------------------------+
 
+.. warning::
+
+  This setting should always be lower than :ref:`disconnection time <reference_agents_disconnection_time>` configured for the agents in the manager. This allows them to always notify the manager before it would consider them disconnected.
+
 .. _time_reconnect:
 
 time-reconnect
@@ -194,6 +234,26 @@ For example, a ``notify_time`` setting of 60 combined with a time-reconnect of 3
 
 .. warning::
 	Notice that the ``notify_time`` value uses an underscore while the ``time-reconnect`` value uses a dash.  This is an unfortunate legacy naming inconsistency that is easy to mix up.
+
+.. _ip_update_interval:
+
+ip_update_interval
+^^^^^^^^^^^^^^^^^^
+
+.. versionadded:: 4.2.0
+
+Specifies how often an agent will query the control module for its main IP.
+
+
+Any value equal to or lower than the configured ``notify_time`` will cause the IP to be queried on each keep-alive message.
+
++--------------------+-----------------------------+
+| **Default value**  | 0                           |
++--------------------+-----------------------------+
+| **Allowed values** | A positive number (seconds) |
++--------------------+-----------------------------+
+
+ .. note:: Most systems won't need to modify this value, but on systems with large routing tables this configuration can help lower CPU usage from wazuh-modulesd.
 
 local_ip
 ^^^^^^^^
@@ -255,6 +315,8 @@ Sample configuration
         <address>192.168.1.100</address>
         <port>1514</port>
         <protocol>tcp</protocol>
+        <max_retries>5</max_retries>
+        <retry_interval>5</retry_interval>
       </server>
       <server>
         <address>example.hostname</address>
@@ -264,4 +326,213 @@ Sample configuration
       <notify_time>30</notify_time>
       <time-reconnect>120</time-reconnect>
       <auto_restart>yes</auto_restart>
+    </client>
+
+enrollment
+^^^^^^^^^^
+
+.. versionadded:: 4.0
+
+Configures the connection parameters for the agent enrollment.
+
+Options
+-------
+
+- `enabled`_
+- `manager_address`_
+- :ref:`port <enrollment_port>`
+- `agent_name`_
+- `groups`_
+- `agent_address`_
+- `ssl_cipher`_
+- `server_ca_path`_
+- `agent_certificate_path`_
+- `agent_key_path`_
+- `authorization_pass_path`_
+- `auto_method`_
+- `delay_after_enrollment`_
+- `use_source_ip`_
+
+enabled
+^^^^^^^
+
+Enables/disables agent enrollment.
+
++--------------------+----------------------------------+
+| **Default value**  | yes                              |
++--------------------+----------------------------------+
+| **Allowed values** | yes or no                        |
++--------------------+----------------------------------+
+
+manager_address
+^^^^^^^^^^^^^^^
+
+Hostname or IP of the manager where the agent will be enrolled. If no value is set, the agent will try enrolling to the same manager that was specified for connection.
+
++--------------------+---------------------------------------+
+| **Default value**  | n/a                                   |
++--------------------+---------------------------------------+
+| **Allowed values** | string -  Should be valid IP/Hostname |
++--------------------+---------------------------------------+
+
+.. _enrollment_port:
+
+port
+^^^^
+
+Specifies the port on the manager to send enrollment request.  This must match the associated listening port configured on the Wazuh manager.
+
++--------------------+---------------------------------------------+
+| **Default value**  | 1515                                        |
++--------------------+---------------------------------------------+
+| **Allowed values** | Any port number from 0 to 65535 is allowed. |
++--------------------+---------------------------------------------+
+
+agent_name
+^^^^^^^^^^
+
+Agent name that will be used for enrollment. Only alphanumeric characters, "-", "_" or "." are allowed, and the minimum length is two characters.
+
++--------------------+---------------------------------------------+
+| **Default value**  | Hostname of the machine.                    |
++--------------------+---------------------------------------------+
+| **Allowed values** | string - Registration name for the agent.   |
++--------------------+---------------------------------------------+
+
+groups
+^^^^^^
+
+Groups name to which the agent belongs.
+
++--------------------+---------------------------------------------+
+| **Default value**  | NULL                                        |
++--------------------+---------------------------------------------+
+| **Allowed values** | string - Name of one or many valid groups.  |
++--------------------+---------------------------------------------+
+
+agent_address
+^^^^^^^^^^^^^
+
+Force IP address from the agent. If this is not set manager will extract source IP from enrollment message.
+
++--------------------+---------------------------------------------+
+| **Default value**  | src                                         |
++--------------------+---------------------------------------------+
+| **Allowed values** | string - Valid IP.                          |
++--------------------+---------------------------------------------+
+
+ssl_cipher
+^^^^^^^^^^
+
+Override SSL used ciphers.
+
++--------------------+----------------------------------------------------+
+| **Default value**  | HIGH:!ADH:!EXP:!MD5:!RC4:!3DES:!CAMELLIA:@STRENGTH |
++--------------------+----------------------------------------------------+
+| **Allowed values** | valid ssl ciphers.                                 |
++--------------------+----------------------------------------------------+
+
+server_ca_path
+^^^^^^^^^^^^^^
+
+Used for manager verification. If no CA certificate is set server will not be verified.
+
++--------------------+---------------------------------------------+
+| **Default value**  | NULL                                        |
++--------------------+---------------------------------------------+
+| **Allowed values** | Path to a valid CA certificate.             |
++--------------------+---------------------------------------------+
+
+.. note::
+  Paths can be referred to relative paths under the Wazuh installation directory, or full paths.
+
+agent_certificate_path
+^^^^^^^^^^^^^^^^^^^^^^
+
+Required when agent verification is enabled in the manager.
+
++--------------------+---------------------------------------------+
+| **Default value**  | NULL                                        |
++--------------------+---------------------------------------------+
+| **Allowed values** | Path to a valid agent certificate file.     |
++--------------------+---------------------------------------------+
+
+agent_key_path
+^^^^^^^^^^^^^^
+
+Required when agent verification is enabled in the manager.
+
++--------------------+---------------------------------------------+
+| **Default value**  | NULL                                        |
++--------------------+---------------------------------------------+
+| **Allowed values** | Path to a valid agent key file.             |
++--------------------+---------------------------------------------+
+
+authorization_pass_path
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Required when enrollment is using password verification.
+
++--------------------+---------------------------------------------+
+| **Default value**  | Windows: authd.pass                         |
+|                    | Unix:    /etc/authd.pass                    |
++--------------------+---------------------------------------------+
+| **Allowed values** | Path to a valid password file               |
++--------------------+---------------------------------------------+
+
+auto_method
+^^^^^^^^^^^
+
+Auto negotiates the most secure common SSL/TLS method with the manager, use "yes" for auto negotiate or "no" for TLS v1.2 only.
+
++--------------------+---------------------------------------------+
+| **Default value**  | no                                          |
++--------------------+---------------------------------------------+
+| **Allowed values** | yes or no                                   |
++--------------------+---------------------------------------------+
+
+delay_after_enrollment
+^^^^^^^^^^^^^^^^^^^^^^
+
+Time that agentd should wait after a successful registration.
+
++--------------------+---------------------------------------------+
+| **Default value**  | 20                                          |
++--------------------+---------------------------------------------+
+| **Allowed values** | number of seconds                           |
++--------------------+---------------------------------------------+
+
+use_source_ip
+^^^^^^^^^^^^^
+
+Force manager to compute IP from agent message.
+
++--------------------+-------------------------------------+
+| **Default value**  | no                                  |
++--------------------+-------------------------------------+
+| **Allowed values** | yes or no                           |
++--------------------+-------------------------------------+
+
+Sample configuration
+--------------------
+
+.. code-block:: xml
+
+    <client>
+      <enrollment>
+        <enabled>yes</enabled>
+        <manager_address>192.168.1.100</manager_address>
+        <port>1515</port>
+        <agent_name>agent</agent_name>
+        <groups>Group1</groups>
+        <agent_address>192.168.0.110</agent_address>
+        <ssl_cipher>HIGH:!ADH:!EXP:!MD5:!RC4:!3DES:!CAMELLIA:@STRENGTH</ssl_cipher>
+        <server_ca_path>/path/to/server_ca</server_ca_path>
+        <agent_certificate_path>/path/to/agent.cert</agent_certificate_path>
+        <agent_key_path>/path/to/agent.key</agent_key_path>
+        <authorization_pass_path>/path/to/agent.pass</authorization_pass_path>
+        <auto_method>no</auto_method>
+        <delay_after_enrollment>20</delay_after_enrollment>
+        <use_source_ip>no</use_source_ip>
+      </enrollment>
     </client>

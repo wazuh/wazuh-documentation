@@ -1,27 +1,30 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _restful-api-remove:
 
 Remove agents using the Wazuh API
 ----------------------------------
 
-The request `DELETE /agents <https://documentation.wazuh.com/current/user-manual/api/reference.html#delete-agents>`_ removes the specified agents.
+The request :api-ref:`DELETE /agents <operation/api.controllers.agent_controller.delete_agents>` removes the specified agents.
 
 .. code-block:: console
 
-    # curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/agents?older_than=10s&ids=005,006,007&pretty"
+    # curl -k -X DELETE "https://localhost:55000/agents?pretty=true&older_than=0s&agents_list=005,006,007&status=all" -H  "Authorization: Bearer $TOKEN"
 
 .. code-block:: json
     :class: output
 
     {
-        "error": 0,
         "data": {
-            "msg": "All selected agents were removed",
-            "affected_agents": [
+            "affected_items": [
                 "005",
                 "006",
                 "007"
-            ]
-        }
+            ],
+            "total_affected_items": 3,
+            "total_failed_items": 0,
+            "failed_items": [],
+        },
+        "message": "All selected agents were deleted",
+        "error": 0,
     }

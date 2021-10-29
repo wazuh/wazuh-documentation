@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _create-sol:
 
@@ -14,11 +14,11 @@ Requirements
 
  * Git
 
-Download our wazuh-packages repository from GitHub and go to the ``solaris`` directory.
+Download our wazuh-packages repository from GitHub and go to the ``solaris`` directory of the |WAZUH_PACKAGES_BRANCH| branch.
 
 .. code-block:: console
 
-  $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/solaris
+  $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/solaris && git checkout |WAZUH_PACKAGES_BRANCH|
 
 Choose the version of solaris you want to build the package for and go to that directory.
 
@@ -32,14 +32,13 @@ Execute the ``generate_wazuh_packages.sh`` script to build the package. Here you
  :class: output
 
  Usage: ./generate_wazuh_packages.sh [OPTIONS]
-
-     -b, --branch <branch>               Select Git branch or tag e.g. master.
+ 
+     -b, --branch <branch>               Select Git branch or tag.
      -e, --environment                   Install all the packages necessaries to build the pkg package.
      -s, --store  <pkg_directory>        Directory to store the resulting pkg package. By default, an output folder will be created.
      -p, --install-path <pkg_home>       Installation path for the package. By default: /var.
      -c, --checksum                      Compute the SHA512 checksum of the pkg package.
      -h, --help                          Shows this help.
-
 
 Below, you will find an example of how to build a Solaris package.
 
@@ -57,7 +56,7 @@ Download and build the sources:
 
 To build a SPARC package you just need to run the same script in a SPARC system.
 
-We also provide an automated way of building packages for i386 Solaris systems using vagrant, to use this download our wazuh-packages repository from GitHub and go to the ``solaris/package_generation`` directory.
+We also provide an automated way of building packages for i386 Solaris systems using vagrant, to use this download our wazuh-packages repository from GitHub, change to the desired branch or tag depending on the version you want to build  and go to the ``solaris/package_generation`` directory.
 
 Requirements
 ^^^^^^^^^^^^^
@@ -119,7 +118,7 @@ This will generate a |WAZUH_LATEST| Wazuh agent package for Solaris 11
 
 .. code-block:: console
 
-  # vagrant --branch-tag=v|WAZUH_LATEST| up solaris10 solaris 11
+  # vagrant --branch-tag=v|WAZUH_LATEST| up solaris10 solaris11
 
 This will generate a |WAZUH_LATEST| Wazuh agent package for Solaris 10 and Solaris 11
 
@@ -129,4 +128,4 @@ To finish destroy the machines:
 
 .. code-block:: console
 
-  # vagrant destroy solaris10 solaris 11
+  # vagrant destroy solaris10 solaris11

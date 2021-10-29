@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _amazon_cloudtrail:
 
@@ -10,19 +10,19 @@ AWS CloudTrail
 Amazon configuration
 --------------------
 
-1. From your AWS console, choose “CloudTrail” from the Deployment & Management section:
+#. From your AWS console, choose “CloudTrail” from the Deployment & Management section:
 
     .. thumbnail:: ../../../images/aws/aws-cloudtrail-1.png
       :align: center
       :width: 70%
 
-2. Create a new trail:
+#. Create a new trail:
 
     .. thumbnail:: ../../../images/aws/aws-cloudtrail-2.png
       :align: center
       :width: 70%
 
-3. Provide a name for the new S3 bucket that will be used to store the CloudTrail logs (remember the name you provide here, you’ll need to reference it during plugin setup):
+#. Provide a name for the new S3 bucket that will be used to store the CloudTrail logs (remember the name you provide here, you’ll need to reference it during plugin setup):
 
     .. thumbnail:: ../../../images/aws/aws-cloudtrail-3.png
       :align: center
@@ -40,7 +40,7 @@ Amazon configuration
 Wazuh configuration
 -------------------
 
-1. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following configuration block to enable the integration with CloudTrail:
+#. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following configuration block to enable the integration with CloudTrail:
 
     .. code-block:: xml
 
@@ -60,7 +60,7 @@ Wazuh configuration
     .. note::
       Check the :ref:`AWS S3 module <wodle_s3>` reference manual to learn more about each setting.
 
-2. Restart Wazuh in order to apply the changes:
+#. Restart Wazuh in order to apply the changes:
 
     * If you're configuring a Wazuh manager:
 

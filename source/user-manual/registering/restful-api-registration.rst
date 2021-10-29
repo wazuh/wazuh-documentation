@@ -1,5 +1,8 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Check out how to register the Wazuh agents using the Wazuh API. This allows the Wazuh agent registration by running a single request from any host.
+  
 .. _restful-api-registration:
 
 Registering the Wazuh agents using the Wazuh API
@@ -7,7 +10,11 @@ Registering the Wazuh agents using the Wazuh API
 
 The Wazuh API allows the Wazuh agent registration by running a single request from any host. This request returns the Wazuh agent's registration key, which must be manually added to the Wazuh agent using ``manage_agents`` utility.
 
-.. note:: Root user privileges are necessary to execute all the commands described below, and the Wazuh API must be accessible from the host on which the API request is executed.
+.. note:: Root user privileges are necessary to execute all the commands described below, and the Wazuh API must be accessible from the host on which the request is executed.
+
+.. warning::
+
+  Terminal history will keep the generated agent key when using the ``manage_agents`` utility. Consider disabling it beforehand, cleaning it afterward, or using another registration method.
 
 Choose the tab corresponding to the Wazuh agent host operating system:
 
@@ -17,23 +24,23 @@ Choose the tab corresponding to the Wazuh agent host operating system:
   .. group-tab:: Linux/Unix host
 
 
-    #. Open a terminal in the Wazuh agent's host as a ``root`` user. To add the Wazuh agent to the Wazuh manager and extract the registration key execute the API request replacing the values in the angle brackets:
+    #. Open a terminal in the Wazuh agent's host as a ``root`` user. To add the Wazuh agent to the Wazuh manager and extract the registration key execute the following Wazuh API request :api-ref:`POST /agents <operation/api.controllers.agent_controller.add_agent>` and replacing the values in the angle brackets:
 
          .. code-block:: console
 
-           # curl -u <API_username>:<API_password> -k -X POST -d '{"name":"<agent_name>","ip":"<agent_IP>"}' -H 'Content-Type:application/json' "https://<manager_IP>:55000/agents?pretty"
+           # curl -k -X POST -d '{"name":"<agent_name>","ip":"<agent_IP>"}' "https://localhost:55000/agents?pretty=true" -H "Content-Type:application/json" -H "Authorization: Bearer $TOKEN"
 
-         The output of the API request returns the registration key:
+         The output of the Wazuh API request returns the registration key:
 
          .. code-block:: none
                 :class: output
 
                 {
-                 "error": 0,
-                 "data": {
-                     "id": "001",
-                     "key": "MDAxIE5ld0FnZW50IDEwLjAuMC44IDM0MGQ1NjNkODQyNjcxMWIyYzUzZTE1MGIzYjEyYWVlMTU1ODgxMzVhNDE3MWQ1Y2IzZDY4M2Y0YjA0ZWVjYzM="
-                 }
+                    "error": 0,
+                    "data": {
+                        "id": "001",
+                        "key": "MDAxIE5ld0FnZW50IDEwLjAuMC44IDM0MGQ1NjNkODQyNjcxMWIyYzUzZTE1MGIzYjEyYWVlMTU1ODgxMzVhNDE3MWQ1Y2IzZDY4M2Y0YjA0ZWVjYzM=",
+                    },
                 }
 
          More information about API credentials and HTTPS support can be found on :ref:`Wazuh API configuration<api_configuration>`.
@@ -57,6 +64,21 @@ Choose the tab corresponding to the Wazuh agent host operating system:
 
                 Confirm adding it?(y/n): y
                 Added.
+
+        Optionally, clean the terminal history if it was not disabled. There are two options:
+
+          #. Clean it all
+
+              .. code-block:: console
+
+                # history -c
+
+
+          #. Clean any specific line
+
+              .. code-block:: console
+
+                # history -d <line to delete>
 
 
     #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``/var/ossec/etc/ossec.conf``.
@@ -152,6 +174,21 @@ Choose the tab corresponding to the Wazuh agent host operating system:
                 Confirm adding it?(y/n): y
                 Added.
 
+        Optionally, clean the terminal history if it was not disabled. There are two options:
+
+          #. Clean it all
+
+              .. code-block:: console
+
+                # Clear-History
+
+
+          #. Clean any specific line
+
+              .. code-block:: console
+
+                # Clear-History -Id <line IDs separated by a comma and a whitespace>
+
 
     #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``C:\Program Files (x86)\ossec-agent\ossec.conf``.
 
@@ -167,23 +204,23 @@ Choose the tab corresponding to the Wazuh agent host operating system:
   .. group-tab:: MacOS X host
 
 
-    #. Open a terminal in the Wazuh agent host as a ``root`` user. To add the Wazuh agent to the Wazuh manager and extract the registration key execute the API request replacing the values in the brackets:
+    #. Open a terminal in the Wazuh agent's host as a ``root`` user. To add the Wazuh agent to the Wazuh manager and extract the registration key execute the following Wazuh API request :api-ref:`POST /agents <operation/api.controllers.agent_controller.add_agent>` and replacing the values in the angle brackets:
 
          .. code-block:: console
 
-          # curl -u <API_username>:<API_password> -k -X POST -d '{"name":"<agent_name>","ip":"<agent_IP>"}' -H 'Content-Type:application/json' "https://<manager_IP>:55000/agents?pretty"
+          # curl -k -X POST -d '{"name":"<agent_name>","ip":"<agent_IP>"}' "https://localhost:55000/agents?pretty=true" -H "Content-Type:application/json" -H "Authorization: Bearer $TOKEN"
 
-         The output of the API request returns the registration key:
+         The output of the Wazuh API request returns the registration key:
 
          .. code-block:: none
                 :class: output
 
                 {
-                 "error": 0,
-                 "data": {
-                   "id": "001",
-                   "key": "MDAxIE5ld0FnZW50IDEwLjAuMC44IDM0MGQ1NjNkODQyNjcxMWIyYzUzZTE1MGIzYjEyYWVlMTU1ODgxMzVhNDE3MWQ1Y2IzZDY4M2Y0YjA0ZWVjYzM="
-                 }
+                    "error": 0,
+                    "data": {
+                        "id": "001",
+                        "key": "MDAxIE5ld0FnZW50IDEwLjAuMC44IDM0MGQ1NjNkODQyNjcxMWIyYzUzZTE1MGIzYjEyYWVlMTU1ODgxMzVhNDE3MWQ1Y2IzZDY4M2Y0YjA0ZWVjYzM=",
+                    },
                 }
 
          More information about API credentials and HTTPS support can be found on :ref:`Wazuh API configuration<api_configuration>`.
@@ -207,6 +244,21 @@ Choose the tab corresponding to the Wazuh agent host operating system:
 
                 Confirm adding it?(y/n): y
                 Added.
+
+        Optionally, clean the terminal history if it was not disabled. There are two options:
+
+          #. Clean it all
+
+              .. code-block:: console
+
+                # history -c
+
+
+          #. Clean any specific line
+
+              .. code-block:: console
+
+                # history -d <line to delete>
 
 
     #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``/Library/Ossec/etc/ossec.conf``.

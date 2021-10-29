@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _reference_ossec_integration:
 
@@ -93,22 +93,22 @@ group
 
 This filters alerts by rule group. For the VirusTotal integration, only rules from the `syscheck` group are available.
 
-+--------------------+-------------------------------------------------+
-| **Default value**  | n/a                                             |
-+--------------------+-------------------------------------------------+
-| **Allowed values** | Any rule group or comma-separated rule groups.  |
-+--------------------+-------------------------------------------------+
++--------------------+------------------------------------------------------------+
+| **Default value**  | n/a                                                        |
++--------------------+------------------------------------------------------------+
+| **Allowed values** | Any rule group or comma-separated rule groups.             |
++--------------------+------------------------------------------------------------+
 
 event_location
 ^^^^^^^^^^^^^^
 
-This filters alerts by where the event originated. Follows the :ref:`OS_Regex Syntax<os_regex_syntax>`.
+This filters alerts by where the event originated.
 
-+--------------------+-----------------------------------------------------------+
-| **Default value**  | n/a                                                       |
-+--------------------+-----------------------------------------------------------+
-| **Allowed values** | Any single log file.                                      |
-+--------------------+-----------------------------------------------------------+
++--------------------+--------------------------------------------------------------+
+| **Default value**  | n/a                                                          |
++--------------------+--------------------------------------------------------------+
+| **Allowed values** | Any :ref:`sregex<os_sregex_syntax>` expression.              |
++--------------------+--------------------------------------------------------------+
 
 alert_format
 ^^^^^^^^^^^^
@@ -121,6 +121,8 @@ This writes the alert file in the JSON format. The Integrator makes use this fil
 | **Allowed values** | json                                                      |
 +--------------------+-----------------------------------------------------------+
 
+.. note:: This option must be set to ``json`` for Slack and VirusTotal integrations.
+
 max_log
 ^^^^^^^
 
@@ -132,6 +134,8 @@ The maximum length of an alert snippet that will be sent to the Integrator.  Lon
 | **Allowed values** | Any integer from 165 to 1024 inclusive.                   |
 +--------------------+-----------------------------------------------------------+
 
+.. note:: This option only applies if ``alert_format`` is not set to ``json``.
+
 Configuration example
 ---------------------
 
@@ -142,7 +146,7 @@ Configuration example
     <name>slack</name>
     <hook_url>https://hooks.slack.com/services/...</hook_url> <!-- Replace with your Slack hook URL -->
     <level>10</level>
-    <group>multiple_drops|authentication_failures</group>
+    <group>multiple_drops,authentication_failures</group>
     <alert_format>json</alert_format>
   </integration>
 
@@ -165,7 +169,7 @@ Configuration example
     <name>custom-integration</name>
     <hook_url>WEBHOOK</hook_url>
     <level>10</level>
-    <group>multiple_drops|authentication_failures</group>
+    <group>multiple_drops,authentication_failures</group>
     <api_key>APIKEY</api_key> <!-- Replace with your external service API key -->
     <alert_format>json</alert_format>
   </integration>

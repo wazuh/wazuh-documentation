@@ -1,9 +1,12 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
+
+.. meta::
+  :description: Learn more about how the Log Data Collection capability of Wazuh works: how to collect log files and Windows event logs, how to receive log events through syslog, and more.
 
 How it works
 ============
 
-The below image illustrations how events flow through the Wazuh environment.
+The below image illustrates how events flow through the Wazuh environment.
 
 .. thumbnail:: ../../../images/manual/log_analysis/log-analysis-flow.png
     :title: Log analysis flow
@@ -60,6 +63,8 @@ Wazuh can monitor classic Windows event logs, as well as the newer Windows event
       <log_format>eventchannel</log_format>
     </localfile>
 
+.. _remote_syslog:
+
 Remote syslog
 ^^^^^^^^^^^^^
 
@@ -73,14 +78,14 @@ One option is for Wazuh to receive syslog logs by a custom port:
       <remote>
         <connection>syslog</connection>
         <port>513</port>
-        <protocol>udp</protocol>
+        <protocol>tcp</protocol>
         <allowed-ips>192.168.2.0/24</allowed-ips>
       </remote>
     </ossec_config>
 
 - ``<connection>syslog</connection>`` indicates that the manager will accept incoming syslog messages from across the network.
 - ``<port>513</port>`` defines the port that Wazuh will listen to retrieve the logs. The port must be free.
-- ``<protocol>udp</protocol>`` defines the protocol to listen the port. It can be UDP or TCP.
+- ``<protocol>tcp</protocol>`` defines the protocol to listen the port. It can be UDP or TCP.
 - ``<allowed-ips>192.168.2.0/24</allowed-ips>`` defines the network or IP from which syslog messages will be accepted.
 
 The other option store the logs in a plaintext file and monitor that file with Wazuh. If a ``/etc/rsyslog.conf`` configuration file is being used and we have defined where to store the syslog logs we can monitor them in Wazuh ``ossec.conf`` using a ``<localfile>`` block with ``syslog`` as the log format.

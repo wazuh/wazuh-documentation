@@ -1,5 +1,7 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Check out the Wazuh documentation to learn how to create a WPK package. Wazuh provides an automated way of building WPK packages using docker.
 .. _create-wpk:
 
 WPK
@@ -21,7 +23,7 @@ Download our wazuh-packages repository from GitHub and go to the wpk directory.
 
 .. code-block:: console
 
- $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/wpk
+ $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/wpk && git checkout |WAZUH_PACKAGES_BRANCH|
 
 Execute the ``generate_wpk_package.sh`` script, with the different options you desire. This script will build a Docker image with all the necessary tools to create the WPK and run a container that will build it:
 
@@ -33,16 +35,21 @@ Execute the ``generate_wpk_package.sh`` script, with the different options you d
   :class: output
 
   Usage: ./generate_wpk_package.sh [OPTIONS]
+  It is required to use -k or --aws-wpk-key, --aws-wpk-cert parameters
 
       -t,   --target-system <target>              [Required] Select target wpk to build [linux/windows]
       -b,   --branch <branch>                     [Required] Select Git branch or tag e.g.
       -d,   --destination <path>                  [Required] Set the destination path of package.
-      -k,   --key-dir <path>                      [Required] Set the WPK key path to sign package.
+      -pn,  --package-name <name>                 [Required for windows] Package name to pack on wpk.
+      -o,   --output <name>                       [Required] Name to the output package.
+      -k,   --key-dir <arch>                      [Required] Set the WPK key path to sign package.
+      --aws-wpk-key                               [Optional] AWS Secrets manager Name/ARN to get WPK private key.
+      --aws-wpk-cert                              [Optional] AWS secrets manager Name/ARN to get WPK certificate.
+      --aws-wpk-key-region                        [Optional] AWS Region where secrets are stored.
       -a,   --architecture <arch>                 [Optional] Target architecture of the package [x86_64].
       -j,   --jobs <number>                       [Optional] Number of parallel jobs when compiling.
-      -pd,  --package-directory <directory>       [Required for windows] Package name to pack on wpk.
-      -o,   --output <name>                       [Required] Name to the output package.
-      -c,   --checksum <path>                     [Optional] Generate checksum
+      -p,   --path <path>                         [Optional] Installation path for the package. By default: /var.
+      -c,   --checksum                            [Optional] Generate checksum
       -h,   --help                                Show this help.
 
 To use this tool, the previously required :ref:`certificate <create-wpk-key>` and the key must be in the same directory.
@@ -65,7 +72,7 @@ To build a WPK for Windows you need to first download an MSI package of the desi
 
 .. code-block:: console
 
-  # curl -O https://packages.wazuh.com/3.x/windows/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi
+  # curl -O https://packages.wazuh.com/|CURRENT_MAJOR|/windows/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi
 
 Below, you will find an example of Windows WPK package building.
 

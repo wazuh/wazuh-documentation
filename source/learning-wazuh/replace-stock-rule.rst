@@ -1,14 +1,16 @@
-.. Copyright (C) 2020 Wazuh, Inc.
-
+.. Copyright (C) 2021 Wazuh, Inc.
+.. meta::
+  :description: Learn how to customize Wazuh rules to suit your needs. The Wazuh ruleset is used to detect attacks, intrusions, malware or application errors, and more.
+  
 .. _learning_wazuh_replace_stock_rule:
 
 Change the rules
 ================
 
-The `Wazuh Ruleset <https://github.com/wazuh/wazuh-ruleset>`_ is maintained by Wazuh, Inc.
+The `Wazuh Ruleset <https://github.com/wazuh/wazuh/tree/|WAZUH_LATEST_MINOR|/ruleset>`_ is maintained by Wazuh, Inc.
 and is contributed to by the Wazuh community.  These stock rules are located in various files
-in ``/var/ossec/ruleset/rules/`` on the Wazuh manager and should not be edited in that location
-because they are overwritten when you upgrade Wazuh manager or perform a Wazuh Ruleset update.
+in ``/var/ossec/ruleset/rules/`` on the Wazuh Manager and should not be edited in that location
+because they are overwritten when you make an upgrade.
 
 Custom changes to the ruleset must be done within files in the  ``/var/ossec/etc/rules/`` folder.
 In order to change a default rule, then the ``overwrite="yes"`` option must be used when declaring the rule.
@@ -125,7 +127,7 @@ Using the Command Line Interface
 
 7. Save your changes to ``local_rules.xml``.
 
-8. Run ``ossec-logtest`` to test your customized rule and paste in this event that should trigger it:
+8. Run ``wazuh-logtest`` to test your customized rule and paste in this event that should trigger it:
 
     .. code-block:: none
         :class: output
@@ -145,6 +147,6 @@ Using the Command Line Interface
 
 .. note::
     The Wazuh manager only reads in the rules when started or restarted, so any real events like above
-    would not be affected by your customized rule until you restart Wazuh manager.  The ``ossec-logtest``
+    would not be affected by your customized rule until you restart Wazuh manager.  The ``wazuh-logtest``
     tool does not require Wazuh manager to be restarted to notice your latest rule changes, which provides
     you with a convenient way to test your rule changes before making them take effect on real events.

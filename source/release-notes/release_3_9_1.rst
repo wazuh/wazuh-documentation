@@ -1,4 +1,7 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
+
+.. meta::
+  :description: Wazuh 3.9.1 has been released. Check out our release notes to discover the changes and additions of this release.
 
 .. _release_3_9_1:
 
@@ -54,7 +57,7 @@ Wazuh is now compatible with Elastic Stack 7, which includes, between others, ne
 
 Additionally, since this Wazuh release, Logstash is no longer required, Filebeat will send the events directly to Elasticsearch server.
 
-- :ref:`Upgrading to Elastic Stack 7.1 <elastic_server_rolling_upgrade>`
+- :ref:`Upgrading to Elastic Stack 7.1 <upgrading_elastic_stack_6.8_7.x>`
 - `Elastic Stack 7.0.0 release blogpost <https://www.elastic.co/blog/elastic-stack-7-0-0-released>`_
 
 

@@ -1,5 +1,7 @@
-.. Copyright (C) 2020 Wazuh, Inc.
-
+.. Copyright (C) 2021 Wazuh, Inc.
+.. meta::
+  :description: Check out how to configure syscheck on windows-agent to make changes to specific directories, monitor their behavior, and observe generated alerts. 
+  
 .. _learning_wazuh_detect_fs_changes:
 
 Detect filesystem changes
@@ -69,8 +71,8 @@ accounting for the new syscheck monitoring of your two test directories:
     .. code-block:: none
         :class: output
 
-        2019/10/20 08:21:53 ossec-agent: INFO: Monitoring directory: 'c:/apple', with options perm | size | owner | group | md5sum | sha1sum | sha256sum | realtime | report_changes | mtime | inode | attributes'.
-        2019/10/20 08:21:53 ossec-agent: INFO: Monitoring directory: 'c:/orange', with options perm | size | owner | group | md5sum | sha1sum | sha256sum | mtime | inode | attributes'.
+        2019/10/20 08:21:53 wazuh-agent: INFO: Monitoring directory: 'c:/apple', with options perm | size | owner | group | md5sum | sha1sum | sha256sum | realtime | report_changes | mtime | inode | attributes'.
+        2019/10/20 08:21:53 wazuh-agent: INFO: Monitoring directory: 'c:/orange', with options perm | size | owner | group | md5sum | sha1sum | sha256sum | mtime | inode | attributes'.
 
 
 Testing FIM

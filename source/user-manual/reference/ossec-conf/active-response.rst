@@ -1,5 +1,8 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Learn about local configuration (ossec.conf) and how to configure the active response. Check out the options and a sample configuration in this section of the Wazuh documentation.
+  
 .. _reference_ossec_active_response:
 
 active-response
@@ -34,8 +37,6 @@ Agent side
 ^^^^^^^^^^
 
 - `repeated_offenders`_
-- `ca_store`_
-- `ca_verification`_
 
 disabled
 ^^^^^^^^
@@ -73,7 +74,7 @@ Indicates which system(s) the command should be executed on.
 | **Default value**  | n/a                                                                              |
 +--------------------+---------------+------------------------------------------------------------------+
 | **Allowed values** | local         | This runs the command on the agent that generated the event.     |
-+--------------------+---------------+------------------------------------------------------------------+
++                    +---------------+------------------------------------------------------------------+
 |                    | server        | This runs the command on the Wazuh manager.                      |
 +                    +---------------+------------------------------------------------------------------+
 |                    | defined-agent | This runs the command on a specific agent identified by agent_id.|
@@ -165,28 +166,6 @@ Sets timeouts in minutes for repeat offenders. This is a comma-separated list of
 .. warning::
     This option must be configured directly in the **ossec.conf** file of the agent, even when using a manager/agent setup with centralized configuration of other settings via **agent.conf**. Apart from that, it has to be defined in the upper ``<active-response>`` section found in the configuration file.
 
-ca_store
-^^^^^^^^
-
-Indicates the path to the root CA certificate. The agent needs the certificate with which the WPK was signed in order to be updated.
-
-+--------------------+-----------------------------+
-| **Default value**  | wpk_root.pem                |
-+--------------------+-----------------------------+
-| **Allowed values** | Path to root CA certificate |
-+--------------------+-----------------------------+
-
-ca_verification
-^^^^^^^^^^^^^^^
-
-This option enables or disables the WPK validation using the root CA certificate. If this parameter is set to ``no`` the agent will accept any WPK package coming from the manager.
-
-+--------------------+-----------------------------+
-| **Default value**  | yes                         |
-+--------------------+-----------------------------+
-| **Allowed values** | yes, no                     |
-+--------------------+-----------------------------+
-
 Sample Configuration
 --------------------
 
@@ -207,7 +186,5 @@ Sample Configuration
     <!-- On the agent side -->
     <active-response>
       <disabled>no</disabled>
-      <ca_store>/var/ossec/etc/wpk_root.pem</ca_store>
-      <ca_verification>yes</ca_verification>
       <repeated_offenders>1,5,10</repeated_offenders>
     </active-response>

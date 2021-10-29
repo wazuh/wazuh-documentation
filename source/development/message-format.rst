@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _message-format:
 
@@ -48,7 +48,7 @@ The string in *log* is the input for decoders defined in XML format or plugin de
 Standard OSSEC event
 --------------------
 
-OSSEC events are transmitted between software components of the same machine, using the local datagram socket at ``/var/ossec/queue/ossec/queue``. For instance:
+OSSEC events are transmitted between software components of the same machine, using the local datagram socket at ``/var/ossec/queue/sockets/queue``. For instance:
 
 - Log events from *Logcollector* to *Agent daemon*.
 - File integrity monitoring events from *Syscheck* to *Agent daemon*.
@@ -167,17 +167,17 @@ The compressed data is a byte array that must:
 1. Have a size multiple of 8.
 2. Start with one or more ``!``.
 
-So the ``<Padding>`` object is a string of 1 to 8 ``!`` symbols, so that the array resulting of appending both ``<Padding>`` and ``<CData>`` has asize multiple of 8. ::
+So the ``<Padding>`` object is a string of 1 to 8 ``!`` symbols, so that the array resulting of appending both ``<Padding>`` and ``<CData>`` has a size multiple of 8. ::
 
     <Padding> = 1..8 "!"
-    Length(<Padding> <Block>) = 0 (mod 8)
+    Length(<Padding> <CData>) = 0 (mod 8)
 
 Encrypted data
 ++++++++++++++
 
 The padded data is encrypted using AES::
 
-    <Encrypted> = AES(<Padding> <Block>)
+    <Encrypted> = AES(<Padding> <CData>)
 
 The initialization vector and the encryption key are described in `Encryption system`_.
 
@@ -266,9 +266,13 @@ The encryption system uses a constant initialization vector and a key:
 
 **Initialization vector**
 
-    8-byte hexadecimal array::
+    8-byte hexadecimal array for Blowfish method::
 
         <IV> = FE DC BA 98 76 54 32 10
+
+    8-byte hexadecimal array for AES method::
+
+        <IV> = FE DC BA 09 87 65 43 21
 
 **Encryption key**
 

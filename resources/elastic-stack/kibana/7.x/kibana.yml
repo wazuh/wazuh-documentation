@@ -1,0 +1,21 @@
+server.host: <kibana_ip>
+server.port: 443
+elasticsearch.hosts: https://<elasticsearch_DN>:9200
+elasticsearch.password: <elasticsearch_password>
+
+# Elasticsearch from/to Kibana
+
+elasticsearch.ssl.certificateAuthorities: /etc/kibana/certs/ca/ca.crt
+elasticsearch.ssl.certificate: /etc/kibana/certs/kibana.crt
+elasticsearch.ssl.key: /etc/kibana/certs/kibana.key
+
+# Browser from/to Kibana
+server.ssl.enabled: true
+server.ssl.certificate: /etc/kibana/certs/kibana.crt
+server.ssl.key: /etc/kibana/certs/kibana.key
+
+# Elasticsearch authentication
+xpack.security.enabled: true
+elasticsearch.username: elastic
+uiSettings.overrides.defaultRoute: "/app/wazuh"
+elasticsearch.ssl.verificationMode: certificate

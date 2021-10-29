@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _wazuh-cluster-introduction:
 
@@ -51,11 +51,11 @@ Master
 Worker
 ~~~~~~
 
-    Worker nodes are responsible of two main tasks:
+    Worker nodes are responsible of three main tasks:
 
         - Synchronizing :ref:`integrity files <integrity-thread>` from the master node.
         - Sending :ref:`agent status updates <agent-info-thread>` to the master.
-
+        - Redirecting agent registration requests to the master.
 
 
 How the cluster works
@@ -73,7 +73,8 @@ How the cluster works
 
     All cluster logs are written in the file ``logs/cluster.log``.
 
-    .. image:: ../../images/manual/cluster/cluster_flow.png
+    .. thumbnail:: ../../images/manual/cluster/cluster_flow.png
+      :align: center
 
 Keep alive thread
 ~~~~~~~~~~~~~~~~~~
@@ -85,7 +86,7 @@ Keep alive thread
 Agent info thread
 ~~~~~~~~~~~~~~~~~~
 
-    The *agent info thread* sends the :ref:`statuses of the agents <agent-status-cycle>` that are reporting to the worker node. The master checks the modification date of each received agent status file and keeps the most recent one.
+    The *agent info thread* sends the OS information, labels configured and :ref:`statuses of the agents <agent-status-cycle>` that are reporting to the worker node.
 
     The master also checks whether the agent exists or not before saving its status update. This is done to prevent the master to store unnecessary information. For example, this situation is very common when an agent is removed but the master hasn't notified worker nodes yet.
 

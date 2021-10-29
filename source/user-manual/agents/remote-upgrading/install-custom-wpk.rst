@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _install-custom-wpk:
 
@@ -22,10 +22,13 @@ You have two options to perform this action:
 
     .. code-block:: xml
 
-        <active-response>
-          <ca_store>/var/ossec/etc/wpk_root.pem</ca_store>
-          <ca_store>/path/to/certificate</ca_store>
-        </active-response>
+        <agent-upgrade>
+            <ca_verification>
+                <enabled>yes</enabled>
+                <ca_store>/var/ossec/etc/wpk_root.pem</ca_store>
+                <ca_store>/path/to/certificate</ca_store>
+            </ca_verification>
+        </agent-upgrade>
 
 
 2. Run the upgrade
@@ -47,6 +50,7 @@ Output example:
 .. code-block:: none
     :class: output
 
-    Sending WPK: [=========================] 100%
-    Installation started... Please wait.
-    Agent upgraded successfully
+    Upgrading...
+
+    Upgraded agents:
+        Agent 002 upgraded: Wazuh v3.10.1 -> 4.0.0

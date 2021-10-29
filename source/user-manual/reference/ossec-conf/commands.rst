@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _reference_ossec_commands:
 
@@ -53,6 +53,7 @@ These files are located in ``/var/ossec/active-response/bin`` directory in Linux
 
 expect
 ^^^^^^
+.. deprecated:: 4.2
 
 Specifies the lists of extracted fields that are to be passed as parameters to the command. If any of the listed fields were not declared in a certain instance, those field values would be passed as a dash (``-``) instead of as no value at all. The command requires finding the expected fields in the alert, otherwise, the AR will be skipped.
 
@@ -104,15 +105,14 @@ Sample configuration
     <!-- For Unix systems -->
     <command>
       <name>custom_command</name>
-      <executable>custom_script.sh</executable>
-      <extra_args>-arg1 --arg2 arg3 ; cat /etc/passwd</extra_args>
+      <executable>custom_script</executable>
+      <extra_args>arg1 arg2 arg3</extra_args>
       <timeout_allowed>yes</timeout_allowed>
     </command>
 
     <!-- For Windows systems -->
     <command>
       <name>win_route-null</name>
-      <executable>route-null.cmd</executable>
-      <expect>srcip</expect>
+      <executable>route-null.exe</executable>
       <timeout_allowed>yes</timeout_allowed>
     </command>

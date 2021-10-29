@@ -1,5 +1,8 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Learn more about how to perform the offline update of the Wazuh Vulnerability Detector in this section of our documentation. 
+  
 .. _learning_wazuh_vuln_detection:
 
 Track down vulnerable applications
@@ -205,20 +208,20 @@ well as the ability to create visualizations and filtering search results in Kib
    the software. However the vulnerability is still present in the version
    installed in your system.
 
-Look deeper with the Wazuh API:
--------------------------------
+Look deeper with the Wazuh API
+------------------------------
 
 Up to now we have only seen the Wazuh API enable the Wazuh Kibana plugin to
 interface directly with the Wazuh manager.  However, you can also access the
-API directly from your own scripts or from the command line with curl.  This is
+Wazuh API directly from your own scripts or from the command line with curl.  This is
 especially helpful here to obtain environment-wide package information.
 The actual inventory data is kept in agent-specific databases on the Wazuh manager.
 To see that, as well as other information collected by ``syscollector``, you can
-query the Wazuh API.  Not only are software packages inventoried, but basic
+query the Wazuh API :api-ref:`syscollector endpoints<tag/Syscollector>`.  Not only are software packages inventoried, but basic
 hardware and operating system data is also tracked.
 
 1. Run ``agent_control -l`` on the Wazuh Manager to list your agents as you will
-   need to query the API by agent id number:
+   need to query the Wazuh API by agent id number:
 
   .. code-block:: none
     :class: output
@@ -236,188 +239,171 @@ hardware and operating system data is also tracked.
 
 
 
-2. From the Wazuh Manager, query the Wazuh API for scanned hardware data about
-   agent 003.
+2. From the Wazuh Manager, query the Wazuh API for scanned hardware data about agent 003 using endpoint :api-ref:`GET /syscollector/{agent_id}/hardware <operation/api.controllers.syscollector_controller.get_hardware_info>`:
 
   .. code-block:: console
 
-    # curl -u wazuhapiuser:wazuhlab -k -X GET "https://localhost:55000/syscollector/003/hardware?pretty"
+    # curl -k -X GET "https://localhost:55000/syscollector/003/hardware?pretty=true" -H "Authorization: Bearer $TOKEN"
 
 
-
-Where ``wazuhapiuser:wazuhlab`` are the credentials for the API.
-The results should look like this:
-
-  .. code-block:: none
-
-    [root@linux-agent centos]# curl -u wazuhapiuser:wazuhlab -k -XGET "https://172.30.0.10:55000/syscollector/003/hardware?pretty"
+The result should look like this:
 
   .. code-block:: json
       :class: output
 
-      {
-         "error": 0,
-         "data": {
-            "cpu": {
-               "cores": 1,
-               "mhz": 2400,
-               "name": "Intel(R) Xeon(R) CPU E5-2676 v3 @ 2.40GHz"
-            },
-            "ram": {
-               "free": 1121708,
-               "total": 2096752,
-               "usage": 46
-            },
-            "scan": {
-               "id": 1265621549,
-               "time": "2019/12/24 13:43:33"
-            },
-            "board_serial": "unknown"
-         }
-      }
+        {
+            "data": {
+                "affected_items": [
+                    {
+                        "cpu": {
+                            "cores": 1,
+                            "mhz": 2400,
+                            "name": "Intel(R) Xeon(R) CPU E5-2676 v3 @ 2.40GHz",
+                        },
+                        "ram": {"free": 1121708, "total": 2096752, "usage": 46},
+                        "scan": {"id": 1265621549, "time": "2019/12/24 13:43:33"},
+                        "board_serial": "unknown",
+                        "agent_id": "003",
+                    }
+                ],
+                "total_affected_items": 1,
+                "total_failed_items": 0,
+                "failed_items": [],
+                },
+            "message": "All specified syscollector information was returned",
+            "error": 0,
+        }
 
 
-
-3. Next, query the Wazuh API for scanned OS data about agent 003. You can also use localhost instead of the IP if you do it in wazuh-manager
-
-  .. code-block:: console
-
-    curl -u wazuhapiuser:wazuhlab -k -XGET "https://localhost:55000/syscollector/003/os?pretty"
-
-
-The results should look like this:
-
+3. Next, query the Wazuh API for scanned OS data about agent 003 using endpoint :api-ref:`GET /syscollector/{agent_id}/os <operation/api.controllers.syscollector_controller.get_os_info>`:
 
   .. code-block:: console
 
-      [root@wazuh-manager centos]# curl -u wazuhapiuser:wazuhlab -k -XGET "https://localhost:55000/syscollector/003/os?pretty"
+    # curl -k -X GET "https://localhost:55000/syscollector/003/os?pretty=true" -H "Authorization: Bearer $TOKEN"
+
+
+The result should look like this:
 
   .. code-block:: json
       :class: output
 
-      {
-         "error": 0,
-         "data": {
-            "os": {
-               "build": "14393",
-               "major": "10",
-               "minor": "0",
-               "name": "Microsoft Windows Server 2016 Datacenter",
-               "version": "10.0.14393"
+        {
+            "data": {
+                "affected_items": [
+                    {
+                        "os": {
+                            "build": "14393",
+                            "major": "10",
+                            "minor": "0",
+                            "name": "Microsoft Windows Server 2016 Datacenter",
+                            "version": "10.0.14393",
+                        },
+                        "scan": {"id": 1230696232, "time": "2019/12/24 14:43:33"},
+                        "architecture": "x86_64",
+                        "version": "6.2",
+                        "hostname": "EC2AMAZ-KMLTB1V",
+                        "agent_id": "003",
+                    }
+                ],
+                "total_affected_items": 1,
+                "total_failed_items": 0,
+                "failed_items": [],
             },
-            "scan": {
-               "id": 1230696232,
-               "time": "2019/12/24 14:43:33"
-            },
-            "architecture": "x86_64",
-            "version": "6.2",
-            "hostname": "EC2AMAZ-KMLTB1V"
-         }
-      }
+            "message": "All specified syscollector information was returned",
+            "error": 0,
+        }
 
 
 
 4. You can also use the experimental capabilities of the API to list information
    of all agents in the environment. In order to do so it is necessary to enable
-   this capability by editing the API's configuration file:
-
-  .. code-block:: console
-
-      [root@wazuh-manager centos]# sed -i 's/config.experimental_features  = false/config.experimental_features  = true/g' /var/ossec/api/configuration/config.js
+   this capability in ``WAZUH_PATH/configuration/api.yaml``. A complete API configuration
+   guide can be found :ref:`here <api_configuration>`.
 
 
-5. Restart the Wazuh API service:
+
+5. Restart the Wazuh API using the ``wazuh-manager`` service:
 
   a. For Systemd:
 
     .. code-block:: console
 
-      # systemctl restart wazuh-api
+      # systemctl restart wazuh-manager
 
   b. For SysV Init:
 
     .. code-block:: console
 
-      # service wazuh-api restart
+      # service wazuh-manager restart
 
 
 6. Let's list the versions of curl on all of our Linux systems:
 
   .. code-block:: console
 
-    # curl -u wazuhapiuser:wazuhlab -k -X GET  "https://localhost:55000/experimental/syscollector/packages?name=curl&pretty"
+    # curl -k -X GET "https://localhost:55000/experimental/syscollector/packages?pretty=true&name=curl" -H "Authorization: Bearer $TOKEN"
 
 
-The results should look like this:
-
-  .. code-block:: console
-
-        [root@wazuh-manager centos]# curl -u wazuhapiuser:wazuhlab -k -X GET "https://172.30.0.10:55000/experimental/syscollector/packages?name=curl&pretty"
+The result should look like this:
 
   .. code-block:: json
         :class: output
 
         {
-           "error": 0,
-           "data": {
-              "items": [
-                 {
-                    "scan": {
-                       "id": 4551322,
-                       "time": "2019/12/24 14:37:55"
+            "data": {
+                "affected_items": [
+                    {
+                        "scan": {"id": 4551322, "time": "2019/12/24 14:37:55"},
+                        "vendor": "CentOS",
+                        "size": 527,
+                        "section": "Applications/Internet",
+                        "install_time": "2019/01/28 20:53:16",
+                        "format": "rpm",
+                        "version": "7.29.0-51.el7",
+                        "name": "curl",
+                        "architecture": "x86_64",
+                        "description": "A utility for getting files from remote servers (FTP, HTTP, and others)",
+                        "agent_id": "000",
                     },
-                    "vendor": "CentOS",
-                    "size": 527,
-                    "section": "Applications/Internet",
-                    "install_time": "2019/01/28 20:53:16",
-                    "format": "rpm",
-                    "version": "7.29.0-51.el7",
-                    "name": "curl",
-                    "architecture": "x86_64",
-                    "description": "A utility for getting files from remote servers (FTP, HTTP, and others)",
-                    "agent_id": "000"
-                 },
-                 {
-                    "scan": {
-                       "id": 833988275,
-                       "time": "2019/12/24 14:43:40"
+                    {
+                        "scan": {"id": 833988275, "time": "2019/12/24 14:43:40"},
+                        "vendor": "CentOS",
+                        "size": 527,
+                        "section": "Applications/Internet",
+                        "install_time": "2019/01/28 20:53:16",
+                        "format": "rpm",
+                        "version": "7.29.0-51.el7",
+                        "name": "curl",
+                        "architecture": "x86_64",
+                        "description": "A utility for getting files from remote servers (FTP, HTTP, and others)",
+                        "agent_id": "001",
                     },
-                    "vendor": "CentOS",
-                    "size": 527,
-                    "section": "Applications/Internet",
-                    "install_time": "2019/01/28 20:53:16",
-                    "format": "rpm",
-                    "version": "7.29.0-51.el7",
-                    "name": "curl",
-                    "architecture": "x86_64",
-                    "description": "A utility for getting files from remote servers (FTP, HTTP, and others)",
-                    "agent_id": "001"
-                 },
-                 {
-                    "scan": {
-                       "id": 1281439567,
-                       "time": "2019/12/24 14:43:41"
+                    {
+                        "scan": {"id": 1281439567, "time": "2019/12/24 14:43:41"},
+                        "vendor": "CentOS",
+                        "size": 527,
+                        "section": "Applications/Internet",
+                        "install_time": "2019/12/18 16:08:20",
+                        "format": "rpm",
+                        "version": "7.29.0-54.el7_7.1",
+                        "name": "curl",
+                        "architecture": "x86_64",
+                        "description": "A utility for getting files from remote servers (FTP, HTTP, and others)",
+                        "agent_id": "002",
                     },
-                    "vendor": "CentOS",
-                    "size": 527,
-                    "section": "Applications/Internet",
-                    "install_time": "2019/12/18 16:08:20",
-                    "format": "rpm",
-                    "version": "7.29.0-54.el7_7.1",
-                    "name": "curl",
-                    "architecture": "x86_64",
-                    "description": "A utility for getting files from remote servers (FTP, HTTP, and others)",
-                    "agent_id": "002"
-                 }
-              ],
-              "totalItems": 3
-           }
+                ],
+                "total_affected_items": 3,
+                "total_failed_items": 0,
+                "failed_items": [],
+            },
+            "message": "All specified syscollector information was returned",
+            "error": 0,
         }
 
 
 
 .. note::
-  Take time to read the online documentation about the `Wazuh API <../user-manual/api/index.html>`_. It is a
+  Take time to read the online documentation about the :ref:`Wazuh API <api>` . It is a
   powerful utility that puts all sorts of data, configuration details, and
   state information at your fingertips once you know how to ask for it.
 

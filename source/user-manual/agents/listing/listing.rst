@@ -1,62 +1,59 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _restful-api-listing:
 
 Listing agents using the Wazuh API
 ----------------------------------
 
-The request `GET /agents <https://documentation.wazuh.com/current/user-manual/api/reference.html#get-all-agents>`_ returns the list of available agents.
+The request :api-ref:`GET /agents <operation/api.controllers.agent_controller.get_agents>` returns the list of available agents.
 
 .. code-block:: console
 
-   # curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents?pretty&offset=0&sort=-ip,name"
+   # curl -k -X GET "https://localhost:55000/agents?pretty=true&sort=-ip,name" -H  "Authorization: Bearer $TOKEN"
 
 .. code-block:: json
    :class: output
 
    {
-      "error": 0,
-      "data": {
-         "totalItems": 2,
-         "items": [
-            {
-               "status": "Active",
-               "dateAdd": "2019-03-18 17:15:12",
-               "lastKeepAlive": "2019-03-18 17:25:30",
-               "os": {
-                  "major": "16",
-                  "name": "Ubuntu",
-                  "uname": "Linux |ubuntu |4.4.0-135-generic |#161-Ubuntu SMP Mon Aug 27 10:45:01 UTC 2018 |x86_64",
-                  "platform": "ubuntu",
-                  "version": "16.04.5 LTS",
-                  "codename": "Xenial Xerus",
-                  "arch": "x86_64",
-                  "minor": "04"
+       "data": {
+           "affected_items": [
+               {
+                   "os": {
+                       "arch": "x86_64",
+                       "codename": "Bionic Beaver",
+                       "major": "18",
+                       "minor": "04",
+                       "name": "Ubuntu",
+                       "platform": "ubuntu",
+                       "uname": "Linux |wazuh-master |5.4.0-52-generic |#57-Ubuntu SMP Thu Oct 15 10:57:00 UTC 2020 |x86_64",
+                       "version": "18.04.4 LTS",
+                   },
+                   "manager": "wazuh-master",
+                   "status": "active",
+                   "node_name": "master-node",
+                   "lastKeepAlive": "9999-12-31T23:59:59Z",
+                   "ip": "127.0.0.1",
+                   "id": "000",
+                   "version": "Wazuh v4.0.0",
+                   "name": "wazuh-master",
+                   "registerIP": "127.0.0.1",
+                   "dateAdd": "2020-10-26T09:52:01Z",
                },
-               "name": "Ubuntu-01",
-               "ip": "10.0.2.15",
-               "id": "003",
-               "node_name": "node01"
-            },
-            {
-               "status": "Active",
-               "dateAdd": "2019-03-18 17:15:49",
-               "lastKeepAlive": "2019-03-18 17:25:30",
-               "os": {
-                  "major": "16",
-                  "name": "Ubuntu",
-                  "uname": "Linux |ubuntu |4.4.0-135-generic |#39-Ubuntu SMP Mon Sep 24 16:19:09 UTC 2018 |x86_64",
-                  "platform": "ubuntu",
-                  "version": "16.04.5 LTS",
-                  "codename": "Xenial Xerus",
-                  "arch": "x86_64",
-                  "minor": "04"
+               {
+                   "status": "never_connected",
+                   "node_name": "unknown",
+                   "group": ["default", "group1", "dbms"],
+                   "ip": "any",
+                   "id": "009",
+                   "name": "wazuh-agent9",
+                   "registerIP": "any",
+                   "dateAdd": "1970-01-01T00:00:00Z",
                },
-               "name": "Ubuntu-02",
-               "ip": "10.0.2.16",
-               "id": "004",
-               "node_name": "node02"
-            }
-         ]
-      }
+           ],
+           "total_affected_items": 2,
+           "total_failed_items": 0,
+           "failed_items": [],
+       },
+       "message": "All selected agents information was returned",
+       "error": 0,
    }

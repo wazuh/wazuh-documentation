@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _cisco_umbrella:
 
@@ -18,7 +18,7 @@ Wazuh configuration
 .. note::
   It is required to append the type of logs inside ``path`` tag as in the next example. `dnslogs`, `proxylogs`, and `iplogs` are currently supported. Each one require to be defined in an independent ``bucket`` tag.
 
-1. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following block (this example is for `dnslogs` and `proxylogs`, it is not required to add both):
+#. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following block (this example is for `dnslogs` and `proxylogs`, it is not required to add both):
 
     .. code-block:: xml
 
@@ -46,7 +46,7 @@ Wazuh configuration
     .. note::
       Check the :ref:`AWS S3 module <wodle_s3>` reference manual to learn more about each setting.
 
-2. Restart Wazuh in order to apply the changes:
+#. Restart Wazuh in order to apply the changes:
 
     * If you're configuring a Wazuh manager:
 

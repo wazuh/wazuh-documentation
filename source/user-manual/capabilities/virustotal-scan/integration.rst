@@ -1,5 +1,8 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Learn more about the VirusTotal integration with Wazuh, used to detect malicious content within the files monitored by FIM. 
+  
 .. _virustotal-description:
 
 How it works

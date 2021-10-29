@@ -1,0 +1,17 @@
+# Self-signed certificate authority
+ca:
+   root:
+      dn: CN=elasticsearch,OU=Docu,O=Wazuh,L=California,C=US
+      keysize: 2048
+      validityDays: 3650
+      pkPassword: none
+      file: root-ca.pem
+
+# Default values and global settings
+defaults:
+
+      validityDays: 3650
+      pkPassword: none
+      generatedPasswordLength: 12
+      httpsEnabled: true
+      

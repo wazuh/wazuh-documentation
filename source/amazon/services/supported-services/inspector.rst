@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _amazon_inspector:
 
@@ -16,7 +16,7 @@ The inspector works as a searcher, so it retrieves information using the AWS API
 Wazuh configuration
 -------------------
 
-1. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following configuration block to enable the integration with Inspector:
+#. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following configuration block to enable the integration with Inspector:
 
     .. code-block:: xml
 
@@ -35,7 +35,7 @@ Wazuh configuration
     .. note::
       Check the :ref:`AWS S3 module <wodle_s3>` reference manual to learn more about each setting.
 
-2. Restart Wazuh in order to apply the changes:
+#. Restart Wazuh in order to apply the changes:
 
     * If you're configuring a Wazuh manager:
 

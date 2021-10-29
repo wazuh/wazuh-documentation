@@ -1,5 +1,7 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Wazuh 3.7.0 has been released. Check out our release notes to discover the changes and additions of this release.
 .. _release_3_7_0:
 
 3.7.0 Release notes
@@ -162,14 +164,14 @@ Breaking changes
 
 Wazuh 3.7.0 introduces an update to the Elasticsearch template. This will cause a **breaking change** in existing installations, although new installations **won't be affected** by this error.
 
-To learn more about how to fix this, check out the Kibana app's :ref:`toubleshooting guide <kibana_troubleshooting_3_7_0>`.
+To learn more about how to fix this, check out the Kibana app's troubleshooting guide.
 
 New features for Splunk plugin
 ------------------------------
 
 The Wazuh app for Splunk also receives lots of new features and improvements on this new version. The Configuration tab is also improved as on the Kibana plugin to get the current manager/agent configuration, multiple groups support, and also:
 
-  - A documentation article to :ref:`set up a reverse proxy configuration <splunk_reverse_proxy>` for Nginx and the Splunk plugin is now available.
+  - A documentation article to `set up a reverse proxy configuration <https://documentation.wazuh.com/3.13/installation-guide/installing-splunk/splunk-reverse-proxy.html>`_ for Nginx and the Splunk plugin is now available.
   - Added *Dev tools*, *Amazon AWS*, *Osquery*, *Inventory data* and *Monitoring* tabs to the app.
   - Added *app logs* to monitor to check and troubleshoot problems while using the app.
   - Added a new selector to check the cluster nodes’ status and logs on the *Management > Status/Logs* tabs.

@@ -1,5 +1,8 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Find out more about agent key polling, the Wazuh module that allows you to fetch keys stored in an external database.
+  
 .. _agent-key-polling:
 
 Agent key polling
@@ -19,7 +22,7 @@ How it works
 
 This module allows retrieving the agent information from an external database, like MySQL or any database engine, for registering it to the ``client.keys`` file.
 
-To do this, it is necessary to create a binary or script in any language that can be integrated into your database engine and thus request the agents' information. The ``ossec-authd`` daemon must be running.
+To do this, it is necessary to create a binary or script in any language that can be integrated into your database engine and thus request the agents' information. The ``wazuh-authd`` daemon must be running.
 
 Below you can see the flow diagram:
 

@@ -1,4 +1,7 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
+
+.. meta::
+  :description: Find out more about the Wazuh Security Configuration Assessment capability. What is SCA, how it works and how to configure it, a use case and more.
 
 .. Section marks used on this document:
 .. h0 ======================================
@@ -15,9 +18,8 @@ Security Configuration Assessment
 
 .. versionadded:: 3.9.0
 
-There are multiple Wazuh integrations that perform configuration assessment scans (see :ref:`Policy monitoring section <manual_policy_monitoring>`) including OpenSCAP and CIS-CAT and more recently the Security Configuration Assessment (SCA). The SCA was created by the Wazuh development team to overcome limitations that were inherent to the other integrations, to name a few:
+There are multiple Wazuh integrations that perform configuration assessment scans (see :ref:`Policy monitoring section <manual_policy_monitoring>`) including CIS-CAT and more recently the Security Configuration Assessment (SCA). The SCA was created by the Wazuh development team to overcome limitations that were inherent to the other integrations, to name a few:
 
-- The OpenSCAP integration is only available on Linux hosts, not Windows agents.
 - The CIS-CAT tool is proprietary software which requires an external license for its use.
 - The *Rootcheck* module depends on the *Syscheck* daemon and its policies feeds are often outdated.
 

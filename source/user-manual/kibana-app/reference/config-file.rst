@@ -1,17 +1,18 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _kibana_config_file:
 
 Configuration file
 ==================
 
-The Wazuh app includes a configuration file (located at ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml``) where you can define custom values for several options. This section describes all the settings available in this file.
+The Wazuh Kibana plugin includes a configuration file (located at ``/usr/share/kibana/data/wazuh/config/wazuh.yml``) where you can define custom values for several options. This section describes all the settings available in this file.
 
-The configuration file shows the default values for all of the possible options. You can edit the file, uncomment any of them and apply the desired values. You can also edit these settings from the Wazuh app in *Settings > Configuration*.
+The configuration file shows the default values for all of the possible options. You can edit the file, uncomment any of them and apply the desired values. You can also edit these settings from the Wazuh Kibana plugin in *Settings > Configuration*.
 
 The configuration file reference is organized by sections:
 
 `Basic options`_
+    - `hosts`_
     - `pattern`_
     - `timeout`_
     - `ip.selector`_
@@ -38,7 +39,6 @@ The configuration file reference is organized by sections:
     - `extensions.pci`_
     - `extensions.gdpr`_
     - `extensions.audit`_
-    - `extensions.oscap`_
     - `extensions.ciscat`_
     - `extensions.aws`_
     - `extensions.virustotal`_
@@ -54,13 +54,47 @@ The configuration file reference is organized by sections:
 Basic options
 -------------
 
+hosts
+^^^^^
+
+Defines the list of APIs to connect with your Wazuh managers.
+
+.. code-block:: yaml
+
+    hosts:
+        - <id>:
+            url: http(s)://<url>
+            port: <port>
+            user: <username>
+            password: <password>
+
+.. note::
+
+    It is required to specify at least one host.
+
+This is an example of a multi-host configuration:
+
+.. code-block:: yaml
+
+    hosts:
+        - wazuh_prod:
+            url: https://wazuh.com
+            port: 55000
+            user: foo
+            password: secret_password
+        - wazuh_test:
+            url: https://localhost
+            port: 55000
+            user: foo
+            password: bar
+
 pattern
 ^^^^^^^
 
 Default index pattern to use on the app. If there's no valid index patterns on Elasticsearch, the app will automatically create one with the name indicated in this option.
 
 +--------------------+-------------------------+
-| **Default value**  | wazuh-alerts-3.x-*      |
+| **Default value**  | wazuh-alerts-*          |
 +--------------------+-------------------------+
 | **Allowed values** | Any valid index pattern |
 +--------------------+-------------------------+
@@ -101,7 +135,7 @@ Defines if the user is allowed to change the selected index pattern directly fro
 ip.ignore
 ^^^^^^^^^
 
-Disable certain index pattern names from being available in index pattern selector from the Wazuh app. An empty list (the default value) won't ignore any valid index pattern.
+Disable certain index pattern names from being available in index pattern selector from the Wazuh Kibana plugin. An empty list (the default value) won't ignore any valid index pattern.
 
 +--------------------+---------------------------------------------+
 | **Default value**  | []                                          |
@@ -134,7 +168,7 @@ Enable or disable administrator requests to the Wazuh API when using the app. Th
 logs.level
 ^^^^^^^^^^
 
-Set the logging level for the Wazuh App log files.
+Set the logging level for the Wazuh Kibana plugin log files.
 
 +--------------------+------------+
 | **Default value**  | info       |
@@ -192,7 +226,7 @@ wazuh.monitoring.pattern
 Default Wazuh monitoring index pattern to use for the app. This setting does not remove any existing patterns or templates, it just updates the app to add the new ones.
 
 +--------------------+-------------------------+
-| **Default value**  | wazuh-monitoring-3.x-*  |
+| **Default value**  | wazuh-monitoring-*      |
 +--------------------+-------------------------+
 | **Allowed values** | Any valid index pattern |
 +--------------------+-------------------------+
@@ -200,7 +234,7 @@ Default Wazuh monitoring index pattern to use for the app. This setting does not
 wazuh.monitoring.creation
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Configure wazuh-monitoring-3.x-* indices custom creation interval.
+Configure wazuh-monitoring-* indices custom creation interval.
 
 +--------------------+------------------------------------------------+
 | **Default value**  | d (daily)                                      |
@@ -236,7 +270,7 @@ Enable or disable the template health check when opening the app.
 checks.api
 ^^^^^^^^^^
 
-Enable or disable the API health check when opening the app.
+Enable or disable the Wazuh API health check when opening the app.
 
 +--------------------+------------+
 | **Default value**  | true       |
@@ -299,17 +333,6 @@ extensions.audit
 ^^^^^^^^^^^^^^^^
 
 Enable or disable the Audit tab on *Overview* and *Agents*.
-
-+--------------------+------------+
-| **Default value**  | true       |
-+--------------------+------------+
-| **Allowed values** | true,false |
-+--------------------+------------+
-
-extensions.oscap
-^^^^^^^^^^^^^^^^
-
-Enable or disable the Open SCAP tab on *Overview* and *Agents*.
 
 +--------------------+------------+
 | **Default value**  | true       |
@@ -407,7 +430,7 @@ Define the number of replicas to use for the ``wazuh-version`` index.
 wazuh.monitoring.shards
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Define the number of shards to use for the ``wazuh-monitoring-3.x-*`` indices.
+Define the number of shards to use for the ``wazuh-monitoring-*`` indices.
 
 +--------------------+----------------------------+
 | **Default value**  | 2                          |
@@ -418,7 +441,7 @@ Define the number of shards to use for the ``wazuh-monitoring-3.x-*`` indices.
 wazuh.monitoring.replicas
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Define the number of replicas to use for the ``wazuh-monitoring-3.x-*`` indices.
+Define the number of replicas to use for the ``wazuh-monitoring-*`` indices.
 
 +--------------------+----------------------------+
 | **Default value**  | 0                          |

@@ -1,5 +1,8 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: In this section of the Wazuh documentation, you will find all the information related to the internal configuration of Wazuh. 
+  
 .. _reference_internal_options:
 
 Internal configuration
@@ -26,6 +29,7 @@ Generally, this file is reserved for debugging issues and for troubleshooting. *
 - `Rootcheck`_
 - `Security Configuration Assessment`_
 - `Wazuh`_
+- `Wazuh Clusterd`_
 - `Wazuh Database`_
 - `Wazuh Modules`_
 - `Wazuh Command`_
@@ -96,7 +100,7 @@ Agent
 +                           +----------------+----------------------------------------------------------------------------------+
 |                           | Default value  | 1                                                                                |
 +                           +----------------+----------------------------------------------------------------------------------+
-|                           | Allowed value  | 0: Remote configuration is disable.                                              |
+|                           | Allowed value  | 0: Remote configuration is disabled.                                             |
 +                           +                +----------------------------------------------------------------------------------+
 |                           |                | 1: Remote configuration is enable.                                               |
 +---------------------------+----------------+----------------------------------------------------------------------------------+
@@ -164,7 +168,7 @@ Analysisd
 +---------------------------------------------------------+---------------+---------------------------------------------------------------------+
 |  **analysisd.label_cache_maxage**                       | Description   | Number of in seconds without reload labels in cache from agents.    |
 +                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Default value | 0                                                                   |
+|                                                         | Default value | 10                                                                  |
 +                                                         +---------------+---------------------------------------------------------------------+
 |                                                         | Allowed value | Any integer between 0 and 60.                                       |
 +---------------------------------------------------------+---------------+---------------------------------------------------------------------+
@@ -178,7 +182,7 @@ Analysisd
 |                                                         |               |                                                                     |
 |                                                         |               | .. versionadded:: 3.0.0                                             |
 +                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Default value | 16384                                                               |
+|                                                         | Default value | 458752                                                              |
 +                                                         +---------------+---------------------------------------------------------------------+
 |                                                         | Allowed value | Any integer between 1024 and 1048576.                               |
 +---------------------------------------------------------+---------------+---------------------------------------------------------------------+
@@ -446,7 +450,7 @@ DBD
 ---
 
 +----------------------------+---------------+--------------------------------------------------------------------------+
-| **dbd.reconnect_attempts** | Description   | Number of times ossec-dbd will attempt to reconnect to the database.     |
+| **dbd.reconnect_attempts** | Description   | Number of times wazuh-dbd will attempt to reconnect to the database.     |
 +                            +---------------+--------------------------------------------------------------------------+
 |                            | Default value | 10                                                                       |
 +                            +---------------+--------------------------------------------------------------------------+
@@ -627,6 +631,17 @@ Logcollector
 +                                          +---------------+----------------------------------------------------------------------------+
 |                                          | Allowed value | Any integer between 1 and 172800                                           |
 +------------------------------------------+---------------+----------------------------------------------------------------------------+
+| **logcollector.state_interval**          | Description   | Statistics generation interval, in seconds                                 |
+|                                          |               |                                                                            |
+|                                          |               | .. versionadded:: 4.2                                                      |
++                                          +---------------+----------------------------------------------------------------------------+
+|                                          | Default value | 60                                                                         |
++                                          +---------------+----------------------------------------------------------------------------+
+|                                          | Allowed values| 0: Disable statistics file generation. Statistics information will continue|
+|                                          |               | to be available through the API                                            |
++                                          +               +----------------------------------------------------------------------------+
+|                                          |               | Any other integer between 1 and 3600.                                      |
++------------------------------------------+---------------+----------------------------------------------------------------------------+
 
 Maild
 -----
@@ -729,6 +744,10 @@ Monitord
 +----------------------------------+---------------+--------------------------------------------------------------------+
 |  **monitord.delete_old_agents**  | Description   | Number of minutes before deleting an old disconnected agent.       |
 |                                  |               |                                                                    |
+|                                  |               | This is a time-lapse after the agent is considered as              |
+|                                  |               | disconnected because of the                                        |
+|                                  |               | :ref:`disconnection time<reference_agents_disconnection_time>`.    |
+|                                  |               |                                                                    |
 |                                  |               | .. versionadded:: 3.8.0                                            |
 +                                  +---------------+--------------------------------------------------------------------+
 |                                  | Default value | 0                                                                  |
@@ -753,6 +772,8 @@ Remoted
 |                                   | Allowed value | Any integer between 10 and 999999.                           |
 +-----------------------------------+---------------+--------------------------------------------------------------+
 |     **remoted.verify_msg_id**     | Description   | Toggle to enable or disable verification of msg id.          |
+|                                   |               | This setting doesn't work with multiple threads              |
+|                                   |               | (worker_pool > 1).                                           |
 +                                   +---------------+--------------------------------------------------------------+
 |                                   | Default value | 0                                                            |
 +                                   +---------------+--------------------------------------------------------------+
@@ -1077,6 +1098,21 @@ Wazuh
 |                               | Allowed values | Any integer between 2048 and 65536                                 |
 +-------------------------------+----------------+--------------------------------------------------------------------+
 
+Wazuh Clusterd
+--------------
+
++---------------------------+----------------+------------------------------------------------------------------------+
+| **wazuh_clusterd.debug**  | Description    | Debug level.                                                           |
++                           +----------------+------------------------------------------------------------------------+
+|                           | Default value  | 0                                                                      |
++                           +----------------+------------------------------------------------------------------------+
+|                           | Allowed value  | 0: No debug output.                                                    |
++                           +                +------------------------------------------------------------------------+
+|                           |                | 1: Standard debug output.                                              |
++                           +                +------------------------------------------------------------------------+
+|                           |                | 2: Verbose debug output.                                               |
++---------------------------+----------------+------------------------------------------------------------------------+
+
 Wazuh Database
 --------------
 
@@ -1090,8 +1126,6 @@ How to disable the module
 To disable the Wazuh Database Synchronization Module, the sync directives must be set to 0 in the ``etc/local_internal_options.conf`` file as shown below::
 
     wazuh_database.sync_agents=0
-    wazuh_database.sync_syscheck=0
-    wazuh_database.sync_rootcheck=0
 
 Once these settings have been adjusted, the file must be saved followed by a restart of Wazuh.  With the above settings, the Database Synchronization Module will not be loaded when Wazuh starts.
 
@@ -1099,24 +1133,6 @@ Once these settings have been adjusted, the file must be saved followed by a res
 |   **wazuh_database.sync_agents**              | Description   | Toggles synchronization of agent database with client.keys on or off.               |
 |                                               +---------------+-------------------------------------------------------------------------------------+
 |                                               | Default value | 1                                                                                   |
-|                                               +---------------+-------------------------------------------------------------------------------------+
-|                                               | Allowed value | 0, 1                                                                                |
-+-----------------------------------------------+---------------+-------------------------------------------------------------------------------------+
-|  **wazuh_database.sync_syscheck**             | Description   | Toggles synchronization of FIM data with Syscheck database on or off.               |
-|                                               +---------------+-------------------------------------------------------------------------------------+
-|                                               | Default value | 0                                                                                   |
-|                                               +---------------+-------------------------------------------------------------------------------------+
-|                                               | Allowed value | 0, 1                                                                                |
-+-----------------------------------------------+---------------+-------------------------------------------------------------------------------------+
-| **wazuh_database.sync_rootcheck**             | Description   | Toggles synchronization of policy monitoring data with Rootcheck database on or off.|
-|                                               +---------------+-------------------------------------------------------------------------------------+
-|                                               | Default value | 1                                                                                   |
-|                                               +---------------+-------------------------------------------------------------------------------------+
-|                                               | Allowed value | 0, 1                                                                                |
-+-----------------------------------------------+---------------+-------------------------------------------------------------------------------------+
-|    **wazuh_database.full_sync**               | Description   | Toggles full data synchronization on or off.                                        |
-|                                               +---------------+-------------------------------------------------------------------------------------+
-|                                               | Default value | 0                                                                                   |
 |                                               +---------------+-------------------------------------------------------------------------------------+
 |                                               | Allowed value | 0, 1                                                                                |
 +-----------------------------------------------+---------------+-------------------------------------------------------------------------------------+

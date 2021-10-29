@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _gdpr_IV:
 
@@ -30,8 +30,8 @@ We can use rootcheck to monitor security policies. The first thing to do is to e
 .. code-block:: xml
 	:class: output
 
-	<rootkit_files>/var/ossec/etc/shared/rootkit_files.txt</rootkit_files>
-	<rootkit_trojans>/var/ossec/etc/shared/rootkit_trojans.txt</rootkit_trojans>
+	<rootkit_files>etc/shared/rootkit_files.txt</rootkit_files>
+	<rootkit_trojans>etc/shared/rootkit_trojans.txt</rootkit_trojans>
 	<system_audit>/var/ossec/etc/shared/cis_debian_linux_rcl.txt</system_audit>
 	<system_audit>/var/ossec/etc/shared/system_audit_rcl.txt</system_audit>
 	<system_audit>/var/ossec/etc/shared/system_audit_ssh.txt</system_audit>
@@ -63,7 +63,8 @@ Chapter IV, Article 28, Head 3 (c)
 
 Entities must ensure data protection during data processing through technical and organizational measures. While processing data, it is necessary to ensure its protection and integrity in order to avoid any alteration that may be harmful to the individual to whom the information belongs.
 
-By using `Syscheck <https://documentation.wazuh.com/3.x/user-manual/reference/ossec-conf/syscheck.html>`_ and through technical measures, Wazuh can ensure the protection measures established are met.
+By using `Syscheck <https://documentation.wazuh.com/|CURRENT_MAJOR|/user-manual/reference/ossec-conf/syscheck.html>`_ and through technical measures, Wazuh can ensure the protection measures established are met.
+
 Use cases
 ^^^^^^^^^
 

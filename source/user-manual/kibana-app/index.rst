@@ -1,20 +1,20 @@
-.. Copyright (C) 2020 Wazuh, Inc.
-
-.. _kibana_app:
-
-Kibana app
-==========
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Find information about the Wazuh Kibana app, its different features, configuration reference and how to troubleshoot some of the most common problems.
+  :description: Find information about the Wazuh Kibana plugin, its different features, configuration reference, and how to troubleshoot some of the most common problems.
+  
+.. _kibana_app:
 
-The Wazuh app for Kibana lets you visualize and analyze Wazuh alerts stored in Elasticsearch. You can obtain statistics per agent, search alerts and filter using different visualizations. It integrates with the Wazuh API to retrieve information about manager and agents configuration, logs, ruleset, groups and much more.
+Wazuh Kibana plugin
+===================
 
-.. note:: Read our `Searching for alerts using the Wazuh app for Kibana <https://wazuh.com/blog/searching-for-alerts-using-the-wazuh-app-for-kibana//>`_ document for more information.
+The Wazuh Kibana plugin allows users to view and analyze Wazuh alerts stored in Elasticsearch. Users are able to get statistics per agent, search for alerts and filter them using different visualizations. It integrates with the Wazuh API to retrieve information about manager and agents configuration, logs, ruleset, groups and much more.
 
-To install the app, you can follow our Elastic Stack installation guides (for :ref:`RPM <install_kibana_app_rpm>` or :ref:`Debian <install_kibana_app_deb>` systems).
+.. note:: Read our `Searching for alerts using the Wazuh Kibana plugin <https://wazuh.com/blog/searching-for-alerts-using-the-wazuh-app-for-kibana//>`_ document for more information.
 
-This manual describes the configuration process to get it started and the different app features that you can use. In addition to this, you can find a troubleshooting and reference guide for quick access to some key solutions and configuration options.
+To install the plugin, you can follow our :ref:`Elastic Stack installation guides <kibana>`.
+
+This manual describes the configuration process to start this plugin and the different features of the plugins that can be used. Additionally, a reference and troubleshooting guide is provided for quick access to some key solutions and configuration options.
 
 .. topic:: Contents
 

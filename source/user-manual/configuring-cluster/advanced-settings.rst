@@ -1,5 +1,8 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+    :description: Learn more about how to deploy a Wazuh cluster. In this section of our documentation we explain more about the agents connections. 
+    
 .. _cluster_agents_connections:
 
 Agents connections
@@ -97,8 +100,8 @@ Pointing agents to the cluster with a load balancer
 Pointing agents to the cluster (Failover mode)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-    We can set to the agents a list of nodes of manager type (workers/master). In case of a disconnection, the agent will connects to another node in order to keep reporting.
-    To configure this mode the first thing we must do is configure our cluster as indicated in our :ref:`getting started <gt-cluster>`, with the number of workers nodes we want. Once this is done we will go directly to configure the agents in the following way.
+    We can set to the agents a list of nodes of manager type (workers/master). In case of a disconnection, the agent will connect to another node in order to keep reporting.
+    To configure this mode the first thing we must do is configure our cluster as indicated in our :ref:`getting started <gt-cluster>`, with the number of workers nodes we want. Once this is done, we will go directly to configure the agents in the following way.
 
 
     Suppose we have the following IPs:
@@ -117,12 +120,12 @@ Pointing agents to the cluster (Failover mode)
             <server>
                 <address>172.0.0.4</address>
                 <port>1514</port>
-                <protocol>udp</protocol>
+                <protocol>tcp</protocol>
             </server>
             <server>
                 <address>172.0.0.5</address>
                 <port>1514</port>
-                <protocol>udp</protocol>
+                <protocol>tcp</protocol>
             </server>
             <config-profile>ubuntu, ubuntu18, ubuntu18.04</config-profile>
             <notify_time>10</notify_time>

@@ -1,5 +1,8 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Check out how to increase the security of AWS infrastructures by using Wazuh capabilities to monitor AWS instances with Wazuh.
+  
 .. _amazon_instances:
 
 Monitoring AWS instances

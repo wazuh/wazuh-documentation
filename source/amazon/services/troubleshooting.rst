@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _amazon_troubleshooting:
 
@@ -16,7 +16,7 @@ Testing the integration
 
 After configuring the module successfully users can expect to see the following log messages in their agent log file: ``/var/ossec/logs/ossec.log``
 
-1. Module starting:
+#. Module starting:
 
     .. code-block:: none
         :class: output
@@ -24,7 +24,7 @@ After configuring the module successfully users can expect to see the following 
         2019/10/28 13:58:10 wazuh-modulesd:aws-s3[8184] wm_aws.c:48 at wm_aws_main(): INFO: Module AWS started
 
 
-2. Scheduled scan:
+#. Scheduled scan:
 
     .. code-block:: none
         :class: output
@@ -36,7 +36,7 @@ After configuring the module successfully users can expect to see the following 
 Common errors
 -------------
 
-1. Errors in ``ossec.log``
+#. Errors in ``ossec.log``
 
     When an error occurs when trying to collect and parse logs for an AWS service, the ``ossec.log`` will output an error such as below:
 
@@ -84,7 +84,7 @@ Common errors
     +-----------+------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
-2. Debugging configuration:
+#. Debugging configuration:
 
     If users are unable to determine the issues from the ``ossec.log``, users can run the modules in debug mode.  With Wazuh running, stop the moduled
 
@@ -115,7 +115,7 @@ Common errors
 
         # 2019/10/28 14:08:28 wazuh-modulesd:aws-s3[2557] wm_aws.c:409 at wm_aws_run_s3(): DEBUG: Launching S3 Command: /var/ossec/wodles/aws/aws-s3 --bucket wazuh-cloudtrail --access_key XXXXXXXX --secret_key XXXXXXXX --type cloudtrail --debug 2 --skip_on_error
 
-3. Time interval is shorter than the time taken to pull log data:
+#. Time interval is shorter than the time taken to pull log data:
 
     In this case a simple warning will be displayed. There is no impact in the event data fetching process and the module will keep running.
 
@@ -124,7 +124,7 @@ Common errors
 
         # 2019/10/28 14:08:31 wazuh-modulesd:aws-s3[2557] wm_aws.c:409 at wm_aws_run_s3(): WARNING: Interval overtaken.
 
-4. Wrong AWS service path:
+#. Wrong AWS service path:
 
     If users get any trouble related to "paths", check if the AWS files path is correct:
 

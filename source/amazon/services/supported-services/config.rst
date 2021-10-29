@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _amazon_config:
 
@@ -10,9 +10,9 @@ AWS Config
 Amazon configuration
 --------------------
 
-1. On the `AWS Config page, <https://console.aws.amazon.com/config/>`_ go to *Settings*.
+#. On the `AWS Config page, <https://console.aws.amazon.com/config/>`_ go to *Settings*.
 
-2. Here, choose the **Resource types to record** (specify the AWS resource types you want AWS Config to record):
+#. Here, choose the **Resource types to record** (specify the AWS resource types you want AWS Config to record):
 
     - All resources
     - Specific types
@@ -20,7 +20,7 @@ Amazon configuration
     .. note::
       For more information about these options, see `Selecting Which Resources AWS Config Records. <https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html>`_
 
-3. Select an existing S3 Bucket or :ref:`create a new one. <S3_bucket>`
+#. Select an existing S3 Bucket or :ref:`create a new one. <S3_bucket>`
 
     .. thumbnail:: ../../../images/aws/aws-create-config-1.png
       :align: center
@@ -28,37 +28,37 @@ Amazon configuration
 
     After these steps, it is necessary to configure the rules.
 
-4. Go to Services > Management Tools > CloudWatch:
+#. Go to Services > Management Tools > CloudWatch:
 
     .. thumbnail:: ../../../images/aws/aws-create-firehose-12.png
       :align: center
       :width: 100%
 
-5. Select Rules on the left menu and click on the *Create* rule button:
+#. Select Rules on the left menu and click on the *Create* rule button:
 
     .. thumbnail:: ../../../images/aws/aws-create-firehose-13.png
       :align: center
       :width: 100%
 
-6. Select which service do you want to get logs from using the Service name slider, then, click on the Add target button and add the previously created Firehose delivery stream there. Also, create a new role to access the delivery stream:
+#. Select which service do you want to get logs from using the Service name slider, then, click on the Add target button and add the previously created Firehose delivery stream there. Also, create a new role to access the delivery stream:
 
     .. thumbnail:: ../../../images/aws/aws-create-firehose-14.png
       :align: center
       :width: 100%
 
-7. Give the rule some name and click on the *Create* rule button:
+#. Give the rule some name and click on the *Create* rule button:
 
     .. thumbnail:: ../../../images/aws/aws-create-firehose-15.png
       :align: center
       :width: 100%
 
-8. Once the rule is created, data will start to be sent to the previously created S3 bucket. Remember to first enable the service you want to monitor, otherwise you won't get any data.
+#. Once the rule is created, data will start to be sent to the previously created S3 bucket. Remember to first enable the service you want to monitor, otherwise you won't get any data.
 
 
 Wazuh configuration
 -------------------
 
-1. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following block:
+#. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following block:
 
     .. code-block:: xml
 
@@ -77,7 +77,7 @@ Wazuh configuration
     .. note::
       Check the :ref:`AWS S3 module <wodle_s3>` reference manual to learn more about each setting.
 
-2. Restart Wazuh in order to apply the changes:
+#. Restart Wazuh in order to apply the changes:
 
     * If you're configuring a Wazuh manager:
 

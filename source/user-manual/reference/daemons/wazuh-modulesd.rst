@@ -1,6 +1,8 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _wazuh-modulesd:
+.. meta::
+  :description: The wazuh-modulesd program manages some Wazuh modules. Learn more about it in this section.
 
 wazuh-modulesd
 ==============
@@ -18,12 +20,6 @@ The wazuh-modulesd program manages the Wazuh modules described below.
     - Rootcheck detected defects: issue message, first detection date and last alert time.
     - Static core settings: maximum permitted agents or SSL being enabled for Authd.
 
-.. topic:: OpenSCAP wodle
-
-  The OpenSCAP module integrates a SCAP scanner into the Wazuh agents providing security compliance under OpenSCAP policies as well as vulnerability assessments, identification and classification of vulnerabilities.
-
-  The complete documentation on this wodle can be found in the :doc:`OpenSCAP integration <../../capabilities/policy-monitoring/openscap/index>` section.
-
 .. topic:: CIS-CAT wodle
 
   The CIS-CAT wodle allows you to run CIS policy scans visualizing the results of assessments in the Wazuh App. See the :doc:`CIS-CAT integration <../../capabilities/policy-monitoring/ciscat/ciscat>` for more information on this functionality.
@@ -38,7 +34,7 @@ The wazuh-modulesd program manages the Wazuh modules described below.
 
 .. topic:: AWS S3 wodle
 
-  The AWS S3 wodle allows you to gather and parse logs from multiple AWS services, such as Guard Duty, Macie, VPC Flow, etc. See the :doc:`AWS S3 <../../../amazon/index>` section for more information on this functionality.
+  The AWS S3 wodle allows you to gather and parse logs from multiple AWS services, such as Guard Duty, Macie, VPC Flow, etc. See the :ref:`AWS S3 <amazon>` section for more information on this functionality.
 
 .. topic:: Vulnerability detector wodle
 
@@ -55,6 +51,14 @@ The wazuh-modulesd program manages the Wazuh modules described below.
 .. topic:: SCA module
 
   The :ref:`SCA module <manual_sec_config_assessment>` allows users to check the system configuration against policy files to determine vulnerabilities and misconfigurations.
+
+.. topic:: Agent upgrade module
+
+  The agent upgrade module manages, validates, executes and checks the result of all the agent upgrade requests. It uses the WPK files.
+
+.. topic:: Task manager module
+
+  The task manager module creates, updates and manages all the tasks performed on the agents.
 
 wazuh-modulesd options
 ----------------------
