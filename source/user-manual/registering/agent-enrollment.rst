@@ -82,7 +82,7 @@ In the next example, we show how an Ubuntu Wazuh agent can be configured, regist
 
 #. Deploy the Wazuh agent.
 
-    .. code-block:: console  
+.. code-block:: console  
 
       # apt-get install wazuh-agent
 
@@ -90,7 +90,7 @@ In the next example, we show how an Ubuntu Wazuh agent can be configured, regist
 i.e.:
 
 
-    .. code-block:: console  
+.. code-block:: xml  
 
     <client>
         <server>
@@ -111,7 +111,7 @@ i.e.:
 
 #. Start the Wazuh agent.
 
-    .. code-block:: console
+.. code-block:: console
 
       # systemctl daemon-reload
       # systemctl enable wazuh-agent
@@ -119,7 +119,7 @@ i.e.:
 
 After following these steps, we can see the below logs on ``ossec.log`` confirming the enrollment was successful.
 
-    .. code-block:: console
+.. code-block:: console
        wazuh-agentd: INFO: (1410): Reading authentication keys file.
        wazuh-agentd: INFO: Using notify time: 10 and max time to reconnect: 60
        wazuh-agentd: INFO: Version detected -> Linux |ubuntu |5.3.0-28-generic |#30~18.04.1-Ubuntu SMP Fri Jan 17 06:14:09 UTC 2020 |x86_64 [Ubuntu|ubuntu: 18.04.4 LTS (Bionic Beaver)] - Wazuh v4.2.4
@@ -144,7 +144,6 @@ On the manager side, the agent can be found and appears with ``active`` status a
   :title: API
   :align: left
   :width: 100%
-
 
 Wazuh enrollment method highly reduces the burden of registering new agents with the manager. Jointly with deployment using variables, this setup can be performed in just three easy steps.
 
