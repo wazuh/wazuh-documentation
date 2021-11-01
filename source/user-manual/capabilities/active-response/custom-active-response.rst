@@ -11,7 +11,7 @@ A *custom active response* is a personalized script configured to be executed wh
 - `Types of active responses`_
 - `Stateless active responses`_
 - `Stateful active responses`_
-- `Custom active responses examples`_
+- `Customizing the behavior of an AR Python script`_
 - `Custom active response Linux example`_
 - `Custom active response Windows example`_
 
@@ -174,217 +174,223 @@ The response message is a follows:
 
 .. warning::
 
-    When the ``STDIN`` reading occurs, it must be read up to the newline character (``\n``). In the same way, when writing to ``STDOUT`` the newline character must be added at the end, otherwise, a deadlock may occur.
+    When the ``STDIN`` reading occurs, it must be read up to the newline character (``\n``). In the same way, when writing to ``STDOUT``, the newline character must be added at the end, otherwise, a deadlock may occur.
 
-Custom active responses examples
---------------------------------
+Customizing the behavior of an AR Python script
+-----------------------------------------------
 
 This section provides an example AR Python script which can be used as a template to develop your own custom AR.
 
 It is possible to customize the behavior of the script by modifying 3 sections:
 
-- **Start/End Custom Key**: Select the necessary parameters to use from the alert. ie: ``srcip`` to block that ip, ``processname`` to stop that process.
+- **Start/end custom key**: Select the necessary parameters to use from the alert. For example, select ``srcip`` to block the IP or ``processname`` to stop the process.
 
-- **Start/End Custom Action Add**: Execute the main action, calling a system function. ie: ``pkill <processname>``.
+- **Start/end custom action Add**: Execute the main action. For example, call the system function: ``pkill <processname>``.
 
-- **Start/End Custom Action Delete**: Execute the secondary action, usually as recovery section after a time period. ie: wait a period of time to unblock an ip after the main action has blocked it.
+- **Start/end custom action Delete**: Execute the secondary action, which is usually a recovery section after a time period. For example, wait a period of time to unblock an IP after the main action blocked it.
 
-Active responses are either ``Stateful`` or ``Stateless``:
 
-- ``Stateful``: Are configured to undo the action after a specified period of time. Configuration needed for ``Stateful`` case:
+Stateless AR configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-      - Set Custom Key.
+Stateless ARs are configured as one-time actions without an event to reverse the original effect. The configuration needed for stateless case is the following:
 
-      - Set Custom Action Add.
+- Set custom key
 
-      - Set Custom Action Delete.
+- Set custom action *Add*
 
-      - Set timeout option in the ``active-response`` section of the ``ossec.conf`` file.
+Stateful AR configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- ``Stateless``: Are configured as one-time actions without an event to reverse the original effect. Configuration needed for ``Stateless`` case:
+Stateful ARs need the folloing configuration so they can undo the action after a specified period of time.
 
-      - Set Custom Key.
+- Set custom key
 
-      - Set Custom Action Add.
+- Set custom action *Add*
+
+- Set custom action *Delete*
+
+- Set timeout option in the ``active-response`` section of the ``ossec.conf`` file
+
 
 Custom active response Linux example
 ------------------------------------
 
-The following Python script creates a file with the rule id that triggered the AR and after 60 seconds it deletes the file.
+The following Python script creates a file with the rule ID that triggered the AR and after 60 seconds it deletes the file.
 
 .. code-block:: Python
 
-    #!/usr/bin/python3
-    # Copyright (C) 2015-2021, Wazuh Inc.
-    # All rights reserved.
+        #!/usr/bin/python3
+        # Copyright (C) 2015-2021, Wazuh Inc.
+        # All rights reserved.
 
-    # This program is free software; you can redistribute it
-    # and/or modify it under the terms of the GNU General Public
-    # License (version 2) as published by the FSF - Free Software
-    # Foundation.
+        # This program is free software; you can redistribute it
+        # and/or modify it under the terms of the GNU General Public
+        # License (version 2) as published by the FSF - Free Software
+        # Foundation.
 
-    import os
-    import sys
-    import json
-    import datetime
+        import os
+        import sys
+        import json
+        import datetime
 
-    if os.name == 'nt':
-    LOG_FILE = "C:\\Program Files (x86)\\ossec-agent\\active-response\\active-responses.log"
-    else:
-    LOG_FILE = "/var/ossec/logs/active-responses.log"
-
-    ADD_COMMAND = 0
-    DELETE_COMMAND = 1
-    CONTINUE_COMMAND = 2
-    ABORT_COMMAND = 3
-
-    OS_SUCCESS = 0
-    OS_INVALID = -1
-
-    class message:
-        def __init__(self):
-            self.alert = ""
-            self.command = 0
-
-
-    def write_debug_file(ar_name, msg):
-        with open(LOG_FILE, mode="a") as log_file:
-            log_file.write(str(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')) + " " + ar_name + ": " + msg +"\n")
-
-
-    def setup_and_check_message(argv):
-
-        # get alert from stdin
-        input_str = ""
-        for line in sys.stdin:
-            input_str = line
-            break
-
-        write_debug_file(argv[0], input_str)
-
-        try:
-            data = json.loads(input_str)
-        except ValueError:
-            write_debug_file(argv[0], 'Decoding JSON has failed, invalid input format')
-            message.command = OS_INVALID
-            return message
-
-        message.alert = data
-
-        command = data.get("command")
-
-        if command == "add":
-            message.command = ADD_COMMAND
-        elif command == "delete":
-            message.command = DELETE_COMMAND
+        if os.name == 'nt':
+        LOG_FILE = "C:\\Program Files (x86)\\ossec-agent\\active-response\\active-responses.log"
         else:
-            message.command = OS_INVALID
-            write_debug_file(argv[0], 'Not valid command: ' + command)
+        LOG_FILE = "/var/ossec/logs/active-responses.log"
 
-        return message
+        ADD_COMMAND = 0
+        DELETE_COMMAND = 1
+        CONTINUE_COMMAND = 2
+        ABORT_COMMAND = 3
+
+        OS_SUCCESS = 0
+        OS_INVALID = -1
+
+        class message:
+            def __init__(self):
+                self.alert = ""
+                self.command = 0
 
 
-    def send_keys_and_check_message(argv, keys):
+        def write_debug_file(ar_name, msg):
+            with open(LOG_FILE, mode="a") as log_file:
+                log_file.write(str(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')) + " " + ar_name + ": " + msg +"\n")
 
-        # build and send message with keys
-        keys_msg = json.dumps({"version": 1,"origin":{"name": argv[0],"module":"active-response"},"command":"check_keys","parameters":{"keys":keys}})
 
-        write_debug_file(argv[0], keys_msg)
+        def setup_and_check_message(argv):
 
-        print(keys_msg)
-        sys.stdout.flush()
-
-        # read the response of previous message
-        input_str = ""
-        while True:
-            line = sys.stdin.readline()
-            if line:
+            # get alert from stdin
+            input_str = ""
+            for line in sys.stdin:
                 input_str = line
                 break
 
-        write_debug_file(argv[0], input_str)
+            write_debug_file(argv[0], input_str)
 
-        try:
-            data = json.loads(input_str)
-        except ValueError:
-            write_debug_file(argv[0], 'Decoding JSON has failed, invalid input format')
+            try:
+                data = json.loads(input_str)
+            except ValueError:
+                write_debug_file(argv[0], 'Decoding JSON has failed, invalid input format')
+                message.command = OS_INVALID
+                return message
+
+            message.alert = data
+
+            command = data.get("command")
+
+            if command == "add":
+                message.command = ADD_COMMAND
+            elif command == "delete":
+                message.command = DELETE_COMMAND
+            else:
+                message.command = OS_INVALID
+                write_debug_file(argv[0], 'Not valid command: ' + command)
+
             return message
 
-        action = data.get("command")
 
-        if "continue" == action:
-            ret = CONTINUE_COMMAND
-        elif "abort" == action:
-            ret = ABORT_COMMAND
-        else:
-            ret = OS_INVALID
-            write_debug_file(argv[0], "Invalid value of 'command'")
+        def send_keys_and_check_message(argv, keys):
 
-        return ret
+            # build and send message with keys
+            keys_msg = json.dumps({"version": 1,"origin":{"name": argv[0],"module":"active-response"},"command":"check_keys","parameters":{"keys":keys}})
 
+            write_debug_file(argv[0], keys_msg)
 
-    def main(argv):
+            print(keys_msg)
+            sys.stdout.flush()
 
-        write_debug_file(argv[0], "Started")
+            # read the response of previous message
+            input_str = ""
+            while True:
+                line = sys.stdin.readline()
+                if line:
+                    input_str = line
+                    break
 
-        # validate json and get command
-        msg = setup_and_check_message(argv)
+            write_debug_file(argv[0], input_str)
 
-        if msg.command < 0:
-            sys.exit(OS_INVALID)
+            try:
+                data = json.loads(input_str)
+            except ValueError:
+                write_debug_file(argv[0], 'Decoding JSON has failed, invalid input format')
+                return message
 
-        if msg.command == ADD_COMMAND:
+            action = data.get("command")
 
-            """ Start Custom Key
-            At this point, it is necessary to select the keys from the alert and add them into the keys array.
-            """
+            if "continue" == action:
+                ret = CONTINUE_COMMAND
+            elif "abort" == action:
+                ret = ABORT_COMMAND
+            else:
+                ret = OS_INVALID
+                write_debug_file(argv[0], "Invalid value of 'command'")
 
-            alert = msg.alert["parameters"]["alert"]
-            keys = [alert["rule"]["id"]]
-
-            """ End Custom Key """
-
-            action = send_keys_and_check_message(argv, keys)
-
-            # if necessary, abort execution
-            if action != CONTINUE_COMMAND:
-
-                if action == ABORT_COMMAND:
-                    write_debug_file(argv[0], "Aborted")
-                    sys.exit(OS_SUCCESS)
-                else:
-                    write_debug_file(argv[0], "Invalid command")
-                    sys.exit(OS_INVALID)
-
-            """ Start Custom Action Add """
-
-            write_debug_file(argv[0], "Add")
-
-            with open("ar-test-result.txt", mode="a") as test_file:
-                test_file.write("Active response triggered by rule ID: " + str(keys) + "\n")
-
-            """ End Custom Action Add """
-
-        elif msg.command == DELETE_COMMAND:
-
-            """ Start Custom Action Delete """
-
-            write_debug_file(argv[0], "Delete")
-
-            os.remove("ar-test-result.txt")
-
-            """ End Custom Action Delete """
-
-        else:
-            write_debug_file(argv[0], "Invalid command")
-
-        write_debug_file(argv[0], "Ended")
-
-        sys.exit(OS_SUCCESS)
+            return ret
 
 
-    if __name__ == "__main__":
-        main(sys.argv)
+        def main(argv):
+
+            write_debug_file(argv[0], "Started")
+
+            # validate json and get command
+            msg = setup_and_check_message(argv)
+
+            if msg.command < 0:
+                sys.exit(OS_INVALID)
+
+            if msg.command == ADD_COMMAND:
+
+                """ Start Custom Key
+                At this point, it is necessary to select the keys from the alert and add them into the keys array.
+                """
+
+                alert = msg.alert["parameters"]["alert"]
+                keys = [alert["rule"]["id"]]
+
+                """ End Custom Key """
+
+                action = send_keys_and_check_message(argv, keys)
+
+                # if necessary, abort execution
+                if action != CONTINUE_COMMAND:
+
+                    if action == ABORT_COMMAND:
+                        write_debug_file(argv[0], "Aborted")
+                        sys.exit(OS_SUCCESS)
+                    else:
+                        write_debug_file(argv[0], "Invalid command")
+                        sys.exit(OS_INVALID)
+
+                """ Start Custom Action Add """
+
+                write_debug_file(argv[0], "Add")
+
+                with open("ar-test-result.txt", mode="a") as test_file:
+                    test_file.write("Active response triggered by rule ID: " + str(keys) + "\n")
+
+                """ End Custom Action Add """
+
+            elif msg.command == DELETE_COMMAND:
+
+                """ Start Custom Action Delete """
+
+                write_debug_file(argv[0], "Delete")
+
+                os.remove("ar-test-result.txt")
+
+                """ End Custom Action Delete """
+
+            else:
+                write_debug_file(argv[0], "Invalid command")
+
+            write_debug_file(argv[0], "Ended")
+
+            sys.exit(OS_SUCCESS)
+
+
+        if __name__ == "__main__":
+            main(sys.argv)
 
 In this case, the configurable sections contain:
 
