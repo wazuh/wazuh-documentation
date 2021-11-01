@@ -177,7 +177,7 @@ Look over the audit events
 Create a list of suspicious commands and trip an alert
 ------------------------------------------------------
 
-#. Create a CDB list for the commands ``ncat``, ``nc``, ``tcpdump``, and ``ping`` using the command names as the key names in the list. CDB lists are stored in the server.
+#. Create a CDB list for the commands ``ncat``, ``nc``, ``tcpdump``, and ``ping`` using the command names as the key names in the list. CDB lists are stored on the server.
 
     .. code-block:: console
 
