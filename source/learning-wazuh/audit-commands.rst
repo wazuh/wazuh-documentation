@@ -28,7 +28,7 @@ Turn on system call auditing
 .. hint::
    You can run ``su`` or ``sudo su`` to gain root privileges.
 
-#. Run the following commands with root privileges to add two new audit rules that will persist across reboots and will track your user activity.
+#. Run the following commands with root privileges to add two new audit rules that will persist across reboots and track your user activity.
 
    .. code-block:: bash
 
