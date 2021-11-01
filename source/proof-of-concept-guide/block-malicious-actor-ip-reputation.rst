@@ -3,19 +3,27 @@
 Blocking a malicious actor - IP Reputation
 ==========================================
 
-Identify the monitored Windows endpoint's IP address as a bad reputation one. Log in this Windows endpoint as the attacker and try connecting to the victim Apache server.
+Identify the monitored Windows endpoint IP address as a bad reputation one. Log in to this Windows endpoint as the attacker and try connecting to the victim's Apache server.
 
-Configuration
+
+Prerequesites
 -------------
 
-#. Add the following lines to ``/var/ossec/etc/ossec.conf`` at the Wazuh RHEL 7 agent host to monitor the access logs of your Apache server:
+- You need an Apache server running on the monitored RHEL 7 agent system.
+
+- Configure the Wazuh RHEL 7 agent host to monitor the Apache access logs in the ``/var/ossec/etc/ossec.conf`` configuration file.
 
     .. code-block:: XML
 
         <localfile>
-            <log_format>apache</log_format>
-            <location>/var/log/httpd/access_log</location>
+        <log_format>apache</log_format>
+        <location>/var/log/httpd/access_log</location>
         </localfile>
+
+Configuration
+-------------
+
+Configure your environment as follows to test the POC.
 
 #. Download the Alienvault IP reputation database to your Wazuh manager endpoint.
 
@@ -23,7 +31,7 @@ Configuration
 
         # wget https://raw.githubusercontent.com/firehol/blocklist-ipsets/master/alienvault_reputation.ipset -O /var/ossec/etc/lists/alienvault_reputation.ipset
 
-#. Run the following command at the Wazuh manager endpoint replacing ``<your_windows_ip_address>`` with the monitored Windows endpoint's IP address.
+#. Run the following command at the Wazuh manager endpoint (the attacker) replacing ``<your_windows_ip_address>`` with the monitored Windows endpoint's IP address.
 
     .. code-block:: console
 
@@ -55,7 +63,7 @@ Configuration
         # chown ossec:ossec /var/ossec/etc/lists/blacklist-alienvault
         # chmod 660 /var/ossec/etc/lists/blacklist-alienvault
 
-#. Add a custom rule triggering the active response to the ``/var/ossec/etc/rules/local_rules.xml`` file at the Wazuh manager endpoint.
+#. Add a custom rule to trigger the active response. This can be done in the ``/var/ossec/etc/rules/local_rules.xml`` file at the Wazuh manager endpoint.
 
     .. code-block:: XML
 
@@ -68,7 +76,7 @@ Configuration
         </group>
         
 
-#. Add the appropriate active response settings to ``/var/ossec/etc/ossec.conf`` at the Wazuh manager endpoint.
+#. Add the appropriate active response settings to the  ``ruleset`` section of the  ``/var/ossec/etc/ossec.conf`` file at the Wazuh manager endpoint.
 
     .. code-block:: XML
 
@@ -109,7 +117,7 @@ Configuration
 Steps to generate the alerts
 ----------------------------
 
-#. Log in the attacker system (the monitored Windows endpoint) and connect to the victim (the Apache server in the monitored RHEL7 endpoint) from a web browser. The custom firewall rule will temporarily block any connection from the attacker system for 60 seconds.
+#. Log in to the attacker's system (the monitored Windows endpoint) and connect to the victim's (the Apache server in the monitored RHEL7 endpoint) from a web browser. The custom firewall rule will temporarily block any connection from the attacker system for 60 seconds.
 
 Alerts
 ------
