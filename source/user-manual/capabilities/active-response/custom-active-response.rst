@@ -5,25 +5,26 @@
 Custom Active Response
 ======================
 
-A **custom active response** is a personalized script, configured to execute when a specific alert, alert level, or rule group has been triggered. It is possible to create a custom AR in any programming language and configure a :ref:`command <reference_ossec_commands>` and an :ref:`active response <reference_ossec_active_response>` to refer to it.
+A *custom active response* is a personalized script configured to be executed when a specific alert, alert level, or rule group is triggered. These custom responses can be created in any programming language and require a defined :ref:`command <reference_ossec_commands>` to initiate the script in response to a trigger and an :ref:`active response <reference_ossec_active_response>` configuration that determines when and where the command is going to be executed.
 
-- `Types of Active Responses`_
-- `Stateless Active Responses`_
-- `Stateful Active Responses`_
-- `Custom Active Responses Examples`_
-- `Custom Active Response Linux Example`_
-- `Custom Active Response Windows Example`_
 
-Types of Active Responses
+- `Types of active responses`_
+- `Stateless active responses`_
+- `Stateful active responses`_
+- `Custom active responses examples`_
+- `Custom active response Linux example`_
+- `Custom active response Windows example`_
+
+Types of active responses
 -------------------------
 
-Active response could be stateful or stateless.
+Active responses can be stateful or stateless.
 
-- ``Stateless``. Are configured as one-time actions without an event to revert the original effect.
+- **Stateless**: configured as one-time actions without an event to revert the original effect.
 
-- ``Stateful``. Are configured to undo the action after a specified period of time.
+- **Stateful**: configured to undo the action after a specified period of time.
 
-Stateless Active Responses
+Stateless active responses
 --------------------------
 
 Stateless active responses is the simplest case, on Wazuh process, the full alert is passed to the AR via ``STDIN`` within a JSON object and each AR is responsible for extracting the information necessary for its execution.
@@ -113,7 +114,7 @@ Here is an example of the message with the full alert that is passed to the ``fi
     }
   }
 
-Stateful Active Responses
+Stateful active responses
 -------------------------
 
 A ``Stateful`` AR will undo its original action after the period of time specified in the active response. As part of the timeout behavior, when the received command is ``add`` the AR must execute following steps:
@@ -174,7 +175,7 @@ The response message is a follows:
 
     When the ``STDIN`` reading occurs, it must be read up to the newline character (``\n``). In the same way, when writing to ``STDOUT`` the newline character must be added at the end, otherwise a deadlock may occur.
 
-Custom Active Responses Examples
+Custom active responses examples
 --------------------------------
 
 This section provides an example AR Python script which can be used as a template to develop your own custom AR.
@@ -205,7 +206,7 @@ Active responses are either ``Stateful`` or ``Stateless``:
 
       - Set Custom Action Add.
 
-Custom Active Response Linux Example
+Custom active response Linux example
 ------------------------------------
 
 The following Python script creates a file with the rule id that triggered the AR and after 60 seconds it deletes the file.
@@ -424,7 +425,7 @@ In this case, the configurable sections contain:
         <timeout>60</timeout>
     </active-response>
 
-Custom Active Response Windows Example
+Custom active response Windows example
 --------------------------------------
 
 As Windows AR doesn't reconize Python scripts, these are two options to overcome this issue. First option is convert python scripts to executable application, and run a Python script through a Bash launcher is the second option.
