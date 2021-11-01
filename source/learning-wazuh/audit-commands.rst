@@ -151,7 +151,7 @@ Look over the audit events
 #. Find the events for the unprivileged command (``ping``) and privileged calls (``cat`` and ``df``) generated before.  They will be mingled with other events.
 
   .. tip::
-    The field `data.audit.euid` is the effective user identity. It is sometimes the root user (`uid 0`) and sometimes your user (`uid 1000`), depending on whether privileges were escalated when issueing the commands. Notice that the audited user identity `auid` is always `1000`, even when `euid` changes. The field `data.audit.auid` allows you to see who actually ran each command.
+    The field `data.audit.euid` is the effective user identity. It is sometimes the root user (`uid 0`) and sometimes your user (`uid 1000`), depending on whether privileges were escalated when issuing the commands. Notice that the audited user identity `auid` is always `1000`, even when `euid` changes. The field `data.audit.auid` allows you to see who actually ran each command.
 
 .. topic:: Wazuh `rule id 80792` definition
 
