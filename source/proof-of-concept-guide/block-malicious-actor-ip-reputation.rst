@@ -6,7 +6,7 @@ Blocking a malicious actor - IP Reputation
 Identify the monitored Windows endpoint IP address as a bad reputation one. Log in to this Windows endpoint as the attacker and try connecting to the victim's Apache server.
 
 
-Prerequesites
+Prerequisites
 -------------
 
 - You need an Apache server running on the monitored RHEL 7 agent system.
