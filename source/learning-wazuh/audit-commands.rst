@@ -164,7 +164,7 @@ Look over the audit events
             <group>audit_command,</group>
         </rule>
 
-    While parent rule id `80700` catches all `auditd` events, this rule focuses on `auditd` command events. `Rule id 80792` looks up the decoded ``audit.key`` field in a CDB list called ``audit-keys`` to check if the key is found with a value of ``command``. Presently the key used with our audit rules that corresponds to commands execution is ``audit-wazuh-c``. The list ``/var/ossec/etc/lists/audit-keys`` content is as follows:
+    While parent rule id `80700` catches all `auditd` events, this rule focuses on `auditd` command events. `Rule id 80792` looks up the decoded ``audit.key`` field in a CDB list called ``audit-keys`` to check if the key is found with a value of ``command``. Presently the key used with our audit rules that correspond to commands execution is ``audit-wazuh-c``. The list ``/var/ossec/etc/lists/audit-keys`` content is as follows:
 
       .. code-block:: none
 
