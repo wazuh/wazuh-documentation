@@ -7,7 +7,7 @@ Watch malicious command execution on Linux system
 
 `Linux Audit`is a powerful auditing facility to track information relevant to the security of a system. It can provide a very detailed accounting of actions and changes. The component responsible for logging audit records based on pre-configured rules is called `auditd`.
 
-In this lab, we will configure `auditd` to track all the commands executed by your user in a monitored Linux host, including commands you will run with root privileges. We will generate a few events and we will look them over in Wazuh's web user interface. In addition, we will set up some custom Wazuh rules to alert on especially suspicious command calls. We will do it using the :ref:`CDB list lookup <ruleset_cdb-list>` feature. This feature allows rules to look up decoded field values in various lists and to use the findings in their alert criteria.
+In this lab, we will configure `auditd` to track all the commands executed by the user in a monitored Linux host, including commands you will run with root privileges. We will generate a few events and look them over in Wazuh's web user interface. In addition, we will set up some custom Wazuh rules to alert on especially suspicious command calls. We will do it using the :ref:`CDB list lookup <ruleset_cdb-list>` feature. This feature allows rules to look up decoded field values in various lists and use the findings in their alert criteria.
 
 .. contents:: :local:
 
