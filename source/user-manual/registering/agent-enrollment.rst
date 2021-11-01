@@ -118,67 +118,63 @@ In the following example, we show how an Ubuntu Wazuh agent can be configured, r
 
 After following these steps, we can see the below logs on ``ossec.log`` confirming the enrollment was successful:
 
-.. code-block:: console
+    .. code-block:: console
 
-    wazuh-agentd: INFO: (1410): Reading authentication keys file.
-    wazuh-agentd: INFO: Using notify time: 10 and max time to reconnect: 60
-    wazuh-agentd: INFO: Version detected -> Linux |ubuntu |5.3.0-28-generic |#30~18.04.1-Ubuntu SMP Fri Jan 17 06:14:09 UTC 2020 |x86_64 [Ubuntu|ubuntu: 18.04.4 LTS (Bionic Beaver)] - Wazuh v4.2.4
-    wazuh-agentd: INFO: Started (pid: 8082).
-    wazuh-agentd: INFO: Server IP Address: 192.168.119.131
-    wazuh-agentd: INFO: Requesting a key from server: 192.168.119.131
-    wazuh-agentd: INFO: No authentication password provided
-    wazuh-agentd: INFO: Using agent name as: TEST_AGENT_1
-    wazuh-agentd: INFO: Waiting for server reply
-    wazuh-agentd: INFO: Valid key received
-    wazuh-agentd: INFO: Waiting 20 seconds before server connection
+        wazuh-agentd: INFO: (1410): Reading authentication keys file.
+        wazuh-agentd: INFO: Using notify time: 10 and max time to reconnect: 60
+        wazuh-agentd: INFO: Version detected -> Linux |ubuntu |5.3.0-28-generic |#30~18.04.1-Ubuntu SMP Fri Jan 17 06:14:09 UTC 2020 |x86_64 [Ubuntu|ubuntu: 18.04.4 LTS (Bionic Beaver)] - Wazuh v4.2.4
+        wazuh-agentd: INFO: Started (pid: 8082).
+        wazuh-agentd: INFO: Server IP Address: 192.168.119.131
+        wazuh-agentd: INFO: Requesting a key from server: 192.168.119.131
+        wazuh-agentd: INFO: No authentication password provided
+        wazuh-agentd: INFO: Using agent name as: TEST_AGENT_1
+        wazuh-agentd: INFO: Waiting for server reply
+        wazuh-agentd: INFO: Valid key received
+        wazuh-agentd: INFO: Waiting 20 seconds before server connection
 
 
 And client.keys should now contain the obtained key:
 
-.. code-block:: console
+    .. code-block:: console
 
-    001 TEST_AGENT_1 any 5520ccc4fc68eba8d3e49337784e4853f4fce44e3778d22d51b1366e013cf4f3  
+        001 TEST_AGENT_1 any 5520ccc4fc68eba8d3e49337784e4853f4fce44e3778d22d51b1366e013cf4f3  
 
 
 The agent can be found on the manager side and appears with ``active`` status after a few seconds. Running the following command shows the new registered agent.
  
-.. code-block:: console
+    .. code-block:: console
 
-    # curl -k -X GET "https://localhost:55000/agents?pretty=true&offset=1&limit=2&select=status%2Cid%2Cmanager%2Cname%2Cnode_name%2Cversion&status=active" -H "Authorization: Bearer $TOKEN"
- 
+        # curl -k -X GET "https://localhost:55000/agents?pretty=true&offset=1&limit=2&select=status%2Cid%2Cmanager%2Cname%2Cnode_name%2Cversion&status=active" -H "Authorization: Bearer $TOKEN"
+    
 
 First, you get the token, then you change your credentials if necessary and request the API to verify the new user information:
 
-.. code-block:: console
+    .. code-block:: console
 
-  TOKEN=$(curl -u wazuh:wazuh -k -X GET "https://localhost:55000/security/user/authenticate?raw=true")
-    % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                  Dload  Upload   Total   Spent    Left  Speed
-  100   398  100   398    0     0    591      0 --:--:-- --:--:-- --:--:--   590
-  root@ubuntu:/home/palacios/Workspace/Utils# curl -k -X GET "https://localhost:55000/agents?pretty=true&offset=1&limit=2&select=status%2Cid%2Cmanager%2Cname%2Cnode_name%2Cversion&status=active" -H "Authorization: Bearer $TOKEN"
+        TOKEN=$(curl -u wazuh:wazuh -k -X GET "https://localhost:55000/security/user/authenticate?raw=true")
+        curl -k -X GET "https://localhost:55000/agents?pretty=true&offset=1&limit=2&select=status%2Cid%2Cmanager%2Cname%2Cnode_name%2Cversion&status=active" -H "Authorization: Bearer $TOKEN"
 
+    .. code-block:: none
+            :class: output
 
-.. code-block:: none
-        :class: output
-
-        {
-        "data": {
-            "affected_items": [
-              {
-                  "name": "TEST_AGENT_1",
-                  "status": "active",
-                  "node_name": "node01",
-                  "version": "Wazuh v4.2.4",
-                  "manager": "ubuntu",
-                  "id": "001"
-              }
-            ],
-            "total_affected_items": 2,
-            "total_failed_items": 0,
-            "failed_items": []
-        },
-        "message": "All selected agents information was returned",
-        "error": 0
+            {
+            "data": {
+                "affected_items": [
+                  {
+                      "name": "TEST_AGENT_1",
+                      "status": "active",
+                      "node_name": "node01",
+                      "version": "Wazuh v4.2.4",
+                      "manager": "ubuntu",
+                      "id": "001"
+                  }
+                ],
+                "total_affected_items": 2,
+                "total_failed_items": 0,
+                "failed_items": []
+            },
+            "message": "All selected agents information was returned",
+            "error": 0
 
 `Wazuh enrollment method <https://documentation.wazuh.com/current/user-manual/reference/ossec-conf/client.html#enrollment>`_ highly reduces the burden of registering new agents with the manager. Jointly with deployment using variables, this setup can be performed in just three easy steps.
 
