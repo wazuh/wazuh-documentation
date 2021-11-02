@@ -114,7 +114,7 @@ Toggles whether or not to force the insertion of an agent if there is a duplicat
 
 **disconnected_time**
 
-This option, when enabled, specifies that the replacement will be performed only for agents that have been disconnected longer than the value configured in the setting. To replace any agent regardless of its state the option should be disabled.
+This option, when enabled, specifies that the replacement will be performed only for agents that have been disconnected longer than the value configured in the setting. This option should be disabled to replace any agent regardless of its state.
 
 +--------------------+----------------------------------------------------------------------------+
 | **Default value**  | 1h                                                                         |
