@@ -357,7 +357,7 @@ The following is a stateful AR in which the Python script creates a file contain
                 write_debug_file(argv[0], "Add")
 
                 with open("ar-test-result.txt", mode="a") as test_file:
-                    test_file.write("Active response triggered by rule ID: " + str(keys) + "\n")
+                    test_file.write("Active response triggered by rule ID: <" + str(keys) + ">\n")
 
                 """ End Custom Action Add """
 
@@ -392,12 +392,12 @@ Configurable sections in this example
         alert = msg.alert["parameters"]["alert"]
         keys = [alert["rule"]["id"]]
 
-- Start/end custom action *Add*: It creates the ``ar-test-result.txt`` file with this content: *Active response triggered by rule ID: <597>*.
+- Start/end custom action *Add*: It creates the ``ar-test-result.txt`` file with this content: *Active response triggered by rule ID: <591>*.
 
     .. code-block:: Python
 
         with open("ar-test-result.txt", mode="a") as test_file:
-            test_file.write("Active response triggered by rule ID:  <" + str(keys) + ">\n")
+            test_file.write("Active response triggered by rule ID: <" + str(keys) + ">\n")
 
 - Start/end custom action *delete*: It deletes the file once the timeout is triggered. The timeout action must be set in the ``active-response`` section of the ``/var/ossec/etc/ossec.conf`` configuration file.
 
