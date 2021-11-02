@@ -452,7 +452,7 @@ Following this alternative, you use the PyInstaller tool to convert the Python s
 With this setting, you are able to run an application instead of a Python script when triggering an active response on a Windows system.
 
 Run a Python script through a Batch launcher
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 In this case, the AR script calls ``launcher.cmd`` which works as a bridge calling the ``custom-ar.py``.
 
