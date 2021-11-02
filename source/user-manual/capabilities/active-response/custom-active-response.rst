@@ -354,8 +354,6 @@ The following is a stateful AR in which the Python script creates a file contain
 
                 """ Start Custom Action Add """
 
-                write_debug_file(argv[0], "Add")
-
                 with open("ar-test-result.txt", mode="a") as test_file:
                     test_file.write("Active response triggered by rule ID: <" + str(keys) + ">\n")
 
@@ -364,8 +362,6 @@ The following is a stateful AR in which the Python script creates a file contain
             elif msg.command == DELETE_COMMAND:
 
                 """ Start Custom Action Delete """
-
-                write_debug_file(argv[0], "Delete")
 
                 os.remove("ar-test-result.txt")
 
@@ -426,7 +422,7 @@ Configurable sections in this example
 Custom active response Windows example
 --------------------------------------
 
-As Windows AR does not recognize Python scripts, these are two options to overcome this issue. The first option is to convert python scripts to executable applications, while the second entails running a Python script through a Bash launcher.
+As Windows AR does not recognize Python scripts, these are two options to overcome this issue. The first option is to convert python scripts to executable applications, while the second entails running a Python script through a Batch launcher.
 
 Convert Python scripts to executable application
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
