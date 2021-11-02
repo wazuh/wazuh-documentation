@@ -41,6 +41,7 @@ removedUrls['x.y'] = [
 newUrls['4.2'] = [
   '/deploying-with-ansible/guide/install-opendistro-server.html',
   '/deploying-with-ansible/roles/wazuh-opendistro.rst',
+  '/amazon-machine-images/amazon-machine-images.html',
   '/release-notes/release-4-2-4.html',
   '/release-notes/release-4-2-3.html',
   '/release-notes/release-4-2-2.html',
