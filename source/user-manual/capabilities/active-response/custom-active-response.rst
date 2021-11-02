@@ -5,7 +5,7 @@
 Custom Active Response
 ======================
 
-A *custom active response* is a personalized script configured to be executed when a specific alert, alert level, or rule group is triggered. These custom responses can be created in any programming language and require a defined :ref:`command <reference_ossec_commands>` to initiate the script in response to a trigger and an :ref:`active response <reference_ossec_active_response>` configuration that determines when and where the command is going to be executed. Active responses can be stateful or stateless.
+A *custom active response* is a personalized script configured to be executed when a specific alert, alert level, or rule group is triggered. These custom responses can be created in any programming language and require a defined :ref:`command <reference_ossec_commands>` to initiate the script in response to a trigger and an :ref:`active response <reference_ossec_active_response>` configuration that determines when and where the command is going to be executed. Active responses can be stateless or stateful.
 
 - `Stateless active responses`_
 - `Stateful active responses`_
@@ -200,13 +200,13 @@ Stateful ARs need the following configuration so they can undo the action after 
 
 - Set custom action *Delete*
 
-- Set timeout option in the ``active-response`` section of the ``ossec.conf`` file
+- Set timeout option in the ``active-response`` section of the ``/var/ossec/etc/ossec.conf`` file
 
 
 Custom active response Linux example
 ------------------------------------
 
-The following Python script creates a file with the rule ID that triggered the AR and after 60 seconds it deletes the file.
+The following is a stateful AR in which the Python script creates a file containing the rule ID that triggered the AR. This AR is configured to delete the file after 60 seconds.
 
 .. code-block:: Python
 
@@ -382,67 +382,68 @@ The following Python script creates a file with the rule ID that triggered the A
         if __name__ == "__main__":
             main(sys.argv)
 
-In this case, the configurable sections contain:
+Configurable sections in this example
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- Start/End Custom Key: It tooks from the alert the rule id.
+- Start/end custom *key*: Rule ID taken from the alert.
 
-.. code-block:: Python
+    .. code-block:: Python
 
-    alert = msg.alert["parameters"]["alert"]
-    keys = [alert["rule"]["id"]]
+        alert = msg.alert["parameters"]["alert"]
+        keys = [alert["rule"]["id"]]
 
-- Start/End Custom Action Add: It creates the ``ar-test-result.txt`` file with this content: "Active response triggered by rule ID: XXX".
+- Start/end custom action *Add*: It creates the ``ar-test-result.txt`` file with this content: *Active response triggered by rule ID: <597>*.
 
-.. code-block:: Python
+    .. code-block:: Python
 
-    with open("ar-test-result.txt", mode="a") as test_file:
-        test_file.write("Active response triggered by rule ID: " + str(keys) + "\n")
+        with open("ar-test-result.txt", mode="a") as test_file:
+            test_file.write("Active response triggered by rule ID:  <" + str(keys) + ">\n")
 
-- Start/End Custom Action Delete: It deletes the file once the timeout is triggered. The timeout action must be set in the ``active-response`` section of the ``ossec.conf`` file.
+- Start/end custom action *delete*: It deletes the file once the timeout is triggered. The timeout action must be set in the ``active-response`` section of the ``/var/ossec/etc/ossec.conf`` configuration file.
 
-.. code-block:: Python
+    .. code-block:: Python
 
-    os.remove("ar-test-result.txt")
+        os.remove("ar-test-result.txt")
 
-- Manager ``ossec.conf``: This example configuration is triggered by rule id 591, but it could be any other filter.
+- Manager ``/var/ossec/etc/ossec.conf`` file: This example configuration is triggered by rule ID 591, but it could be any other filter.
 
-.. code-block:: xml
+    .. code-block:: xml
 
-    <command>
-        <name>custom-ar</name>
-        <executable>custom-ar.py</executable>
-        <timeout_allowed>yes</timeout_allowed>
-    </command>
+        <command>
+            <name>custom-ar</name>
+            <executable>custom-ar.py</executable>
+            <timeout_allowed>yes</timeout_allowed>
+        </command>
 
-    <active-response>
-        <disabled>no</disabled>
-        <command>custom-ar</command>
-        <location>local</location>
-        <rules_id>591</rules_id>
-        <timeout>60</timeout>
-    </active-response>
+        <active-response>
+            <disabled>no</disabled>
+            <command>custom-ar</command>
+            <location>local</location>
+            <rules_id>591</rules_id>
+            <timeout>60</timeout>
+        </active-response>
 
 Custom active response Windows example
 --------------------------------------
 
-As Windows AR doesn't reconize Python scripts, these are two options to overcome this issue. First option is convert python scripts to executable application, and run a Python script through a Bash launcher is the second option.
+As Windows AR does not recognize Python scripts, these are two options to overcome this issue. The first option is to convert python scripts to executable applications, while the second entails running a Python script through a Bash launcher.
 
-Convert Python Scripts to Executable Application
+Convert Python scripts to executable application
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- The first option is to convert Python scripts into executable application. Use ``pyinstaller`` tool to convert Python script into executable files:
+Following this alternative, you use the PyInstaller tool to convert the Python script into executable files.
 
-    #. Install PyInstaller from PyPI.
+#. Install `PyInstaller from PyPI <https://www.pyinstaller.org/>`_.
 
-    #. Move to ``C:\Program Files (x86)\ossec-agent\active-response\bin\`` and run:
+#. Go to ``C:\Program Files (x86)\ossec-agent\active-response\bin\`` and run the following command to create the .exe.
 
     .. code-block:: bash
 
         pyinstaller -F custom-ar.py
 
-    #. Move the ``custom-ar.exe`` file to ``C:\Program Files (x86)\ossec-agent\active-response\bin\``.
+#. Move the ``custom-ar.exe`` file to ``C:\Program Files (x86)\ossec-agent\active-response\bin\``.
 
-    #. Update the manager ``ossec.conf`` with ``custom-ar.exe`` instead of ``custom-ar.py``:
+#. Update the manager ``/var/ossec/etc/ossec.conf`` file with ``custom-ar.exe`` instead of ``custom-ar.py``.
 
     .. code-block:: xml
 
@@ -452,14 +453,14 @@ Convert Python Scripts to Executable Application
             <timeout_allowed>yes</timeout_allowed>
         </command>
 
-  Expected result is run an application instead a Python script when AR trigger.
+With this setting, you are able to run an application instead of a Python script when triggering an active response on a Windows system.
 
-Run a Python Script Through a Bash Launcher
+Run a Python script through a Bash launcher
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- The second option is to run the Python script through a bash launcher. In this case, the AR script will call ``launcher.cmd`` and the last one will works as a bridge calling the ``custom-ar.py``.
+In this case, the AR script calls ``launcher.cmd`` which works as a bridge calling the ``custom-ar.py``.
 
-    #. Create a ``launcher.cmd`` file into ``C:\Program Files (x86)\ossec-agent\active-response\bin\`` with the following content:
+#. Create a ``launcher.cmd`` file into ``C:\Program Files (x86)\ossec-agent\active-response\bin\`` with the following content:
 
     .. code-block:: console
 
@@ -549,9 +550,9 @@ Run a Python Script Through a Bash Launcher
         )
         exit /b
 
-    #. Move the ``custom-ar.py`` file to ``C:\Program Files (x86)\ossec-agent\active-response\bin\``.
+#. Move the ``custom-ar.py`` file to ``C:\Program Files (x86)\ossec-agent\active-response\bin\``.
 
-    #. Update the manager ``ossec.conf``, ``launcher.cmd`` will look for the name of the Python script to run in the option ``extra_args``:
+#. Update the manager ``/var/ossec/etc/ossec.conf`` so the ``launcher.cmd`` can look for the name of the Python script to run in the option ``extra_args``.
 
     .. code-block:: xml
 
@@ -570,8 +571,9 @@ Run a Python Script Through a Bash Launcher
             <timeout>60</timeout>
         </active-response>
 
-  .. note::
+ .. note::
 
-    The Python path must be included in the System user path. Look for it in the Windows ``Environment Variables``.
+    The Python path must be included in the System user path. Look for it in the **Environment Variables** pane of your Windows system.
 
-  Expected result is run any windows script through ``launcher.cmd`` script, when AR is trigger.
+
+This configuration allows you to run any Windows script through ``launcher.cmd`` script when triggering an active response.
