@@ -21,7 +21,7 @@ Installing Wazuh
 
    .. code-block:: console
 
-     # curl -so ~/unattended-installation.sh https://packages.wazuh.com/resources/4.2/open-distro/unattended-installation/unattended-installation.sh && bash ~/unattended-installation.sh
+     # curl -so ~/unattended-installation.sh https://packages.wazuh.com/resources/|WAZUH_LATEST_MINOR|/open-distro/unattended-installation/unattended-installation.sh && bash ~/unattended-installation.sh
 
    The script performs a health check to ensure that the host has enough resources to guarantee proper performance. To skip this step, add the ``-i`` or ``--ignore-healthcheck`` option when running the script.
 
@@ -29,8 +29,6 @@ Installing Wazuh
    
    .. code-block:: none
      :class: output
-
-      The password for wazuh is vhDpq7YcwA08BLTmcdeYeJmXPU_VD31f
 
       The password for admin is uLo9SBKCE80B8OSE8zNbOWlVvHlOjQ00
       
@@ -55,7 +53,7 @@ Installing Wazuh
       .
       Installation finished
       
-      You can access the web interface https://<kibana_ip>. The credentials are wazuh:vhDpq7YcwA08BLTmcdeYeJmXPU_VD31f
+      You can access the web interface https://<kibana_ip>. The credentials are admin:uLo9SBKCE80B8OSE8zNbOWlVvHlOjQ00
      
 
 #. Access the web interface: 
@@ -63,8 +61,8 @@ Installing Wazuh
   .. code-block:: none
 
       URL: https://<wazuh_server_ip>
-      user: wazuh
-      password: <wazuh_user_password>
+      user: admin
+      password: <admin_user_password>
 
 On the first access to Kibana, the browser displays a warning message indicating that the certificate was not issued by a trusted authority. It is possible to add an exception in the browser's advanced options or, for increased security, the previously generated ``root-ca.pem`` file can be imported into the certificate manager of the browser. Alternatively, it is possible to configure a certificate from a trusted authority.
 
