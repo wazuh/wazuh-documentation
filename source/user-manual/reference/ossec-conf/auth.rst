@@ -148,7 +148,7 @@ Value ``0`` means to always force replacement.
 
 **key_mismatch**
 
-Defines whether or not the agent replacement only occurs when the key held by the agent is different than the one registered by the manager.
+This option defines that the agent replacement occurs when the key held by the agent is different from the one registered by the manager.
 
 +--------------------+---------------------+
 | **Default value**  | yes                 |
