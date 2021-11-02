@@ -96,14 +96,14 @@ The time during which a full scan will not be performed even if the database of 
 .. _retry_interval:
 
 retry_interval
-^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^
 
 The time to wait after a scan completes to retry the agents that had a problem to be scanned.
 
 +----------------------+------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**    | 30 seconds                                                                                                                         |
 +----------------------+------------------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values**   | A positive number that should contain a suffix character indicating a time unit: s (seconds), m (minutes), h (hours), or d (days).  |
+| **Allowed values**   | A positive number that should contain a suffix character indicating a time unit: s (seconds), m (minutes), h (hours), or d (days). |
 +----------------------+------------------------------------------------------------------------------------------------------------------------------------+
 
 provider
