@@ -103,7 +103,7 @@ The time to wait after a scan completes to retry the agents that had a problem t
 +----------------------+------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**    | 30 seconds                                                                                                                         |
 +----------------------+------------------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values**   | A positive number that should contain a suffix character indicating a time unit: s (seconds), m (minutes), h (hours) or d (days).  |
+| **Allowed values**   | A positive number that should contain a suffix character indicating a time unit: s (seconds), m (minutes), h (hours), or d (days).  |
 +----------------------+------------------------------------------------------------------------------------------------------------------------------------+
 
 provider
