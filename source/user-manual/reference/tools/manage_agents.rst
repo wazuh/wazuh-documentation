@@ -53,7 +53,7 @@ Options
 |               +-----------------------------+-----------------------------------------+
 |               | **Supported installations** | Agent                                   |
 +---------------+-----------------------------+-----------------------------------------+
-| **-R <sec>**  | Remove agents with duplicate IP if registered since <sec> seconds.    |
+| **-R <sec>**  | Remove agents with duplicated IP if registered since <sec> seconds.    |
 |               |                                                                       |
 |               | With ``-R 0`` it will remove **any** duplicate agent.                 |
 |               +-----------------------------+-----------------------------------------+
