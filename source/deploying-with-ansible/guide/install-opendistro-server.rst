@@ -1,9 +1,12 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Deploying the Open Distro for Elasticsearch server involves installing the Open Distro and Kibana services. Find out how to do it step by step in this section.
+
 .. _wazuh_ansible_elk_server:
 
 Install Open Distro for Elasticsearch Server
-===============================
+============================================
 
 The deployment of the Open Distro for Elasticsearch server involves the installation of Opendistro and Kibana services. In the repository of Ansible that Wazuh has we can find the playbooks and roles necessary to carry out the installation. The Ansible server must have access to the Open Distro for Elasticsearch server.
 
@@ -164,8 +167,8 @@ If we want to change the default configuration we can change the following files
 
 We also can create another YAML file only with the content we want to change the configuration for each role. We can find more information here:
 
-- :ref:`Opendistro <opendistro-elasticsearch>` role.
-- :ref:`Kibana <opendistro-kibana>` role.
+- :ref:`Open Distro <ansible-wazuh-opendistro>` role.
+- :ref:`Kibana <ansible-wazuh-kibana>` role.
 
 
 Let's see below, the content of the playbooks ``/etc/ansible/roles/wazuh-ansible/playbooks/wazuh-opendistro.yml``.

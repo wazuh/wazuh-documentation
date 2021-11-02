@@ -2,7 +2,7 @@
 
 .. _ansible-wazuh-opendistro:
 
-Opendistro
+Open Dstro
 ----------
 
 This role is intended to deploy Opendistro node, you have some variables that can be used to customize the installation:
