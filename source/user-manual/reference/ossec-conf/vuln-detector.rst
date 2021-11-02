@@ -22,8 +22,8 @@ Options
 - `enabled`_
 - `interval`_
 - `run_on_start`_
-- `retry_interval`_
 - `min_full_scan_interval`_
+- `retry_interval`_
 - `provider`_
 
 +---------------------------+-----------------------------+
