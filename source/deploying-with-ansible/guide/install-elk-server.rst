@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Deploying the Elastic Stack server involves installing the Elasticsearch and Kibana services. Find out how to do it step by step in this section.
+
 .. _wazuh_ansible_elk_server:
 
 Install Elastic Stack Server

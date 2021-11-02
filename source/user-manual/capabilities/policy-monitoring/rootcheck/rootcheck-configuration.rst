@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Learn more about rootchecks configuration options, basic usage, configuring periodic scans, and root access to SSH.
+
 Configuration
 =============
 

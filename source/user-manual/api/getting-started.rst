@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: This guide provides the basic information needed to get started with the Wazuh API, including some practical use cases. 
+  
 .. _api_getting_started:
 
 Getting started
@@ -23,6 +26,10 @@ The Wazuh API will be installed along the Wazuh manager by default. To control o
 .. code-block:: console
 
     # service wazuh-manager start/status/stop/restart
+
+.. note::
+    The -k parameter applied to API requests is used to avoid the server connection verification by using server certificates. If these are valid, this parameter can be removed.
+    To configure the certificates use the following guide :ref:`Securing API <securing_api>`.
 
 .. _api_log_in:
 
@@ -324,25 +331,19 @@ Here are some of the basic concepts related to making API requests and understan
               {
                 "error": {
                   "code": 1707,
-                  "message": "Impossible to restart non-active agent: never_connected",
-                  "remediation": "Please, make sure agent is active before attempting to restart"
+                  "message": "Cannot send request, agent is not active",
+                  "remediation": "Please, check non-active agents connection and try again. Visit 
+                  https://documentation.wazuh.com/current/user-manual/registering/index.html and 
+                  https://documentation.wazuh.com/current/user-manual/agents/agent-connection.html 
+                  to obtain more information on registering and connecting agents" 
                 },
                 "id": [
                   "001",
                   "002",
-                ]
-              },
-              {
-                "error": {
-                  "code": 1707,
-                  "message": "Impossible to restart non-active agent: disconnected",
-                  "remediation": "Please, make sure agent is active before attempting to restart"
-                },
-                "id": [
                   "009",
                   "010"
                 ]
-              }
+              },
             ]
           },
           "message": "Restart command was not sent to any agent",
@@ -413,11 +414,13 @@ Here are some of the basic concepts related to making API requests and understan
           }
         }
 
-- Responses containing collections of data will return a maximum of 500 elements. The *offset* and *limit* parameters may be used to iterate through large collections.
+- Responses containing collections of data will return a maximum of 500 elements by default. The *offset* and *limit* parameters may be used to iterate through large collections. The *limit* parameter accepts up to 100000 items, although it is recommended not to exceed the default value (500 items). Doing so can lead to unexpected behaviors (timeouts, large responses, etc.). Use with caution.
 - All responses have an HTTP status code: 2xx (success), 4xx (client error), 5xx (server error), etc.
 - All requests (except ``GET /security/user/authenticate`` and ``POST /security/user/authenticate/run_as``) accept the parameter ``pretty`` to convert the JSON response to a more human-readable format.
 - The Wazuh API log is stored on the manager as ``/var/ossec/logs/api.log`` (the path and verbosity level can be changed in the Wazuh API configuration file). The Wazuh API logs are rotated daily. Rotated logs are stored in ``/var/ossec/logs/api/<year>/<month>`` and compressed using ``gzip``.
-- All Wazuh API requests will be aborted if no response is received after a certain amount of time. The parameter ``wait_for_complete`` can be used to disable this timeout. This is useful for calls that could take more time than expected, such as :ref:`PUT/agents/:agent_id/upgrade <api_reference>`.
+- All Wazuh API requests will be aborted if no response is received after a certain amount of time. The parameter ``wait_for_complete`` can be used to disable this timeout. This is useful for calls that could take more time than expected, such as :api-ref:`PUT /agents/upgrade <operation/api.controllers.agent_controller.put_upgrade_agents>`.
+
+.. note:: The maximum API response time can be modified in the :ref:`API configuration <api_configuration_options>`.
 
 .. _wazuh_api_use_cases:
 

@@ -1,6 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. meta:: :description: Learn how to install Wazuh and Elastic Stack on a single host
+.. meta::
+  :description: This section guides you through an installation of the Wazuh server and Elastic stack components in an all-in-one configuration. 
 
 .. _basic_all_in_one:
 
@@ -87,7 +88,7 @@ Certificates creation and deployment
 
     .. code-block:: console
 
-        # curl -so /usr/share/elasticsearch/instances.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/|WAZUH_LATEST_MINOR|/resources/elastic-stack/instances_aio.yml
+        # curl -so /usr/share/elasticsearch/instances.yml https://packages.wazuh.com/resources/4.2/elastic-stack/instances_aio.yml
     
     
     In the following steps, a file that contains a folder named after the instance defined here will be created. This folder will contain the certificates and the keys necessary to communicate with the Elasticsearch node using SSL.
@@ -127,32 +128,33 @@ To check that the installation was made successfully, run the following command 
 
 .. code-block:: console
   
-  # curl -XGET https://localhost:9200 -uelastic:<elastic_password> -k
+  # curl -XGET https://localhost:9200 -u elastic:<elastic_password> -k
 
 This command should have an output like this:
 
 .. code-block:: console
   :class: output
-
+  
   {
     "name" : "elasticsearch",
     "cluster_name" : "elasticsearch",
-    "cluster_uuid" : "LTTJx4wGTmONK4pkD0IclA",
+    "cluster_uuid" : "4AgWSXskREu4aSlW9W-WjA",
     "version" : {
-    "number" : "7.10.0",
+      "number" : "7.12.1",
       "build_flavor" : "default",
       "build_type" : "rpm",
-      "build_hash" : "51e9d6f22758d0374a0f3f5c6e8f3a7997850f96",
-      "build_date" : "2020-11-09T21:30:33.964949Z",
+      "build_hash" : "3186837139b9c6b6d23c3200870651f10d3343b7",
+      "build_date" : "2021-04-20T20:56:39.040728659Z",
       "build_snapshot" : false,
-      "lucene_version" : "8.7.0",
+      "lucene_version" : "8.8.0",
       "minimum_wire_compatibility_version" : "6.8.0",
       "minimum_index_compatibility_version" : "6.0.0-beta1"
     },
     "tagline" : "You Know, for Search"
   }
-
-
+  
+  
+  
 
 .. _basic_all_in_one_wazuh:
 
@@ -265,7 +267,7 @@ Filebeat installation and configuration
 
     .. code-block:: console
 
-      # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/|WAZUH_LATEST_MINOR|/resources/elastic-stack/filebeat/7.x/filebeat_all_in_one.yml
+      # curl -so /etc/filebeat/filebeat.yml https://packages.wazuh.com/resources/4.2/elastic-stack/filebeat/7.x/filebeat_all_in_one.yml
 
 #. Download the alerts template for Elasticsearch:
 
@@ -322,7 +324,7 @@ An example response should look as follows:
       TLS version: TLSv1.3
       dial up... OK
     talk to server... OK
-    version: 7.10.0
+    version: 7.12.1
    
 
 
@@ -374,7 +376,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
     .. code-block:: console
 
         # cd /usr/share/kibana
-        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.1.5_7.10.2-1.zip
+        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_ELK_LATEST|-1.zip
 
 #. Link Kibana's socket to privileged port 443:
 
@@ -432,4 +434,4 @@ To uninstall all the components of the all in one installation, visit the :ref:`
 Next steps
 ----------
 
-Once the Wazuh environment is ready, a Wazuh agent can be installed in every endpoint to be monitored. The Wazuh agent installation guide is available for most operating systems and can be found :ref:`here<installation_agents>`.
+Once the Wazuh environment is ready, a Wazuh agent can be installed on every endpoint to be monitored. The Wazuh agent installation guide is available for most operating systems and can be found :ref:`here<installation_agents>`.

@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Check out how to uninstall the Wazuh components in this section of our documentation. 
+
 .. _user_manual_uninstall:
 
 Uninstalling the Wazuh components

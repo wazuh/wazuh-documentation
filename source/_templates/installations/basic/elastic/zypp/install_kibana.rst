@@ -2,6 +2,6 @@
 
 .. code-block:: console
 
-  # zypper install kibana-7.10.2
+  # zypper install kibana-7.12.1
 
 .. End of include file

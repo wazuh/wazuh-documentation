@@ -25,6 +25,10 @@ Here are all the available settings for the ``api.yaml`` configuration file. For
      use_only_authd: no
      drop_privileges: yes
      experimental_features: no
+     max_upload_size: 10485760
+
+     intervals:
+        request_timeout: 10
 
      https:
         enabled: yes
@@ -32,7 +36,8 @@ Here are all the available settings for the ``api.yaml`` configuration file. For
         cert: "api/configuration/ssl/server.crt"
         use_ca: False
         ca: "api/configuration/ssl/ca.crt"
-        ssl_cipher: "TLSv1.2"
+        ssl_protocol: "TLSv1.2"
+        ssl_ciphers: ""
 
      logs:
         level: "info"
@@ -181,6 +186,22 @@ experimental_features
 | yes, true, no, false | false         | Enable features under development |
 +----------------------+---------------+-----------------------------------+
 
+max_upload_size
+^^^^^^^^^^^^^^^
++----------------------+---------------+------------------------------------------------------------------------------+
+| Allowed values       | Default value | Description                                                                  |
++======================+===============+==============================================================================+
+| Any positive integer | 10485760      | Set the maximum body size that the API can accept, in bytes (0 -> limitless) |
++----------------------+---------------+------------------------------------------------------------------------------+
+
+intervals
+^^^^^^^^^^
++-----------------+----------------------+---------------+-----------------------------------------------------------------+
+| Sub-fields      | Allowed values       | Default value | Description                                                     |
++=================+======================+===============+=================================================================+
+| request_timeout | Any positive integer | 10            | Set the maximum response time (in seconds) for each API request |
++-----------------+----------------------+---------------+-----------------------------------------------------------------+
+
 https
 ^^^^^^^^^^^^^^^^^^^^^^
 +--------------+------------------------------+----------------------------------+-------------------------------------------------------------------+
@@ -196,7 +217,9 @@ https
 +--------------+------------------------------+----------------------------------+-------------------------------------------------------------------+
 | ca           | Any text string              | api/configuration/ssl/ca.crt     | Path to the certificate of the Certificate Authority (CA).        |
 +--------------+------------------------------+----------------------------------+-------------------------------------------------------------------+
-| ssl_cipher   | TLS, TLSv1, TLSv1.1, TLSv1.2 | TLSv1.2                          | SSL cipher to allow. Its value is not case sensitive.             |
+| ssl_protocol | TLS, TLSv1, TLSv1.1, TLSv1.2 | TLSv1.2                          | SSL protocol to allow. Its value is not case sensitive.           |
++--------------+------------------------------+----------------------------------+-------------------------------------------------------------------+
+| ssl_ciphers  | Any text string              | None                             | SSL ciphers to allow. Its value is not case sensitive.            |
 +--------------+------------------------------+----------------------------------+-------------------------------------------------------------------+
 
 logs

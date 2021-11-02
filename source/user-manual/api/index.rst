@@ -1,5 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
-
+.. meta::
+  :description: The Wazuh API is an open source RESTful API that allows for interaction with the Wazuh manager. Check out the list of the Wazuh API capabilities.
+  
 .. _api:
 
 RESTful API

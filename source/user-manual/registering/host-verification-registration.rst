@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Learn how to create a Certificate of Authority (CA) and the available options to register the Wazuh agent using host verification.
+  
 .. _host-verification-registration:
 
 Registration service with host verification
@@ -33,9 +36,9 @@ There are two options to register the Wazuh agent using host verification. Pleas
 
    To verify the Wazuh manager using SSL, create an SSL certificate and sign it using the Certificate of Authority (CA) created in the previous section. This will allow the Wazuh agents to ensure that they are connected to the correct Wazuh manager during the registration service.
 
-   .. image:: ../../images/manual/managing-agents/SSLregister1.png
+   .. thumbnail:: ../../images/manual/managing-agents/SSLregister1.png
       :align: center
-      :width: 100%
+      :wrap_image: No
 
    **Creating and signing a certificate on the Wazuh manager**
 
@@ -216,9 +219,9 @@ There are two options to register the Wazuh agent using host verification. Pleas
 
    To verify the Wazuh agent using an SSL, create an SSL certificate for the Wazuh agent and sign it using Certificate of Authority (CA) created in the previous section. This will allow the Wazuh manager to ensure that the correct Wazuh agent is beeing connected during the registration service.
 
-   .. image:: ../../images/manual/managing-agents/SSLregister2.png
+   .. thumbnail:: ../../images/manual/managing-agents/SSLregister2.png
     :align: center
-    :width: 100%
+    :wrap_image: No
 
    **Creating and signing the Wazuh agent's certificate and enabling the host verification option on the Wazuh manager**
 

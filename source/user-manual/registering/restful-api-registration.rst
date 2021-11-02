@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Check out how to register the Wazuh agents using the Wazuh API. This allows the Wazuh agent registration by running a single request from any host.
+  
 .. _restful-api-registration:
 
 Registering the Wazuh agents using the Wazuh API
@@ -8,6 +11,10 @@ Registering the Wazuh agents using the Wazuh API
 The Wazuh API allows the Wazuh agent registration by running a single request from any host. This request returns the Wazuh agent's registration key, which must be manually added to the Wazuh agent using ``manage_agents`` utility.
 
 .. note:: Root user privileges are necessary to execute all the commands described below, and the Wazuh API must be accessible from the host on which the request is executed.
+
+.. warning::
+
+  Terminal history will keep the generated agent key when using the ``manage_agents`` utility. Consider disabling it beforehand, cleaning it afterward, or using another registration method.
 
 Choose the tab corresponding to the Wazuh agent host operating system:
 
@@ -57,6 +64,21 @@ Choose the tab corresponding to the Wazuh agent host operating system:
 
                 Confirm adding it?(y/n): y
                 Added.
+
+        Optionally, clean the terminal history if it was not disabled. There are two options:
+
+          #. Clean it all
+
+              .. code-block:: console
+
+                # history -c
+
+
+          #. Clean any specific line
+
+              .. code-block:: console
+
+                # history -d <line to delete>
 
 
     #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``/var/ossec/etc/ossec.conf``.
@@ -152,6 +174,21 @@ Choose the tab corresponding to the Wazuh agent host operating system:
                 Confirm adding it?(y/n): y
                 Added.
 
+        Optionally, clean the terminal history if it was not disabled. There are two options:
+
+          #. Clean it all
+
+              .. code-block:: console
+
+                # Clear-History
+
+
+          #. Clean any specific line
+
+              .. code-block:: console
+
+                # Clear-History -Id <line IDs separated by a comma and a whitespace>
+
 
     #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``C:\Program Files (x86)\ossec-agent\ossec.conf``.
 
@@ -207,6 +244,21 @@ Choose the tab corresponding to the Wazuh agent host operating system:
 
                 Confirm adding it?(y/n): y
                 Added.
+
+        Optionally, clean the terminal history if it was not disabled. There are two options:
+
+          #. Clean it all
+
+              .. code-block:: console
+
+                # history -c
+
+
+          #. Clean any specific line
+
+              .. code-block:: console
+
+                # history -d <line to delete>
 
 
     #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``/Library/Ossec/etc/ossec.conf``.

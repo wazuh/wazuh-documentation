@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: The update-ruleset script updates decoders, rules, and rootchecks. Find out the arguments of this script in this section of the Wazuh documentation. 
+
 .. _update_ruleset:
 
 update_ruleset

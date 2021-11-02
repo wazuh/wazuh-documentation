@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: The Wazuh agent provides a module to monitor and secure your AWS Cloud infrastructure, as well as Microsoft Azure and Google Cloud Platform
+
 .. _cloud_security:
 
 Cloud security monitoring
@@ -9,7 +12,7 @@ The Wazuh security platform provides threat detection, configuration compliance,
 
 - **Endpoint level**: monitoring cloud instances or virtual machines using the lightweight :ref:`Wazuh security agent <wazuh_agent>`.
 
-- **Cloud infrastructure level**: monitoring cloud services and activity by collecting and analyzing data from the provider API. Amazon AWS, Microsoft Azure and Google Cloud Platform are supported.
+- **Cloud infrastructure level**: monitoring cloud services and activity by collecting and analyzing data from the provider API. Amazon AWS, Microsoft Azure, Office 365, Google Cloud Platform and GitHub are supported.
 
 Amazon Web Services
 -------------------
@@ -96,9 +99,9 @@ Example of an alert when an AWS security group is deleted:
 
 Example of AWS dashboard:
 
-.. image:: ../../images/getting_started/use_case_cloud.png
+.. thumbnail:: ../../images/getting_started/use_case_cloud.png
    :align: center
-   :width: 100%
+   :wrap_image: No
 
 More information on how Wazuh monitors AWS can be found at our :ref:`documentation <amazon>`.
 
@@ -154,6 +157,74 @@ Here is an example of a rule that Azure alerts.
   }
 
 More information about how to use Wazuh to monitor Microsoft Azure can be found at our :ref:`documentation <azure>`.
+
+Office 365
+----------
+
+Wazuh monitors Office 365 by extracting events from audit logs, which is used as a middleware for event ingestion and delivery. This integration helps detect threats targeting your Office 365 organizations.
+
+The following example shows an alert when a ``Communication site`` is modified in ``SharePoint``:
+
+.. code-block:: json
+  :emphasize-lines: 5
+  :class: output
+
+    {
+        "timestamp":"2021-06-09T22:12:54.301+0000",
+        "rule":{
+            "level":3,
+            "description":"Office 365: SharePoint file operation events.",
+            "id":"91537",
+            "firedtimes":2,
+            "mail":false,
+            "groups":["office365","SharePointFileOperation"]
+        },
+        "agent":{
+            "id":"001",
+            "name":"ubuntu-bionic"
+        },
+        "manager":{
+            "name":"ubuntu-bionic"
+        },
+        "id":"1623276774.47272",
+        "decoder":{
+            "name":"json"
+        },
+        "data":{
+            "integration":"office365",
+            "office365":{
+                "CreationTime":"2021-06-09T22:10:45",
+                "Id":"xxxx-xxxx-xxxx-xxxx-xxxx",
+                "Operation":"FileModified",
+                "OrganizationId":"xxxx-xxxx-xxxx-xxxx-xxxx",
+                "RecordType":"6",
+                "UserKey":"i:xx.f|membership|xxxx@live.com",
+                "UserType":"0",
+                "Version":"1",
+                "Workload":"SharePoint",
+                "ClientIP":"xxx.xx.x.xxx",
+                "ObjectId":"https://xxxx.sharepoint.com/SitePages/xxxx.aspx",
+                "UserId":"xxx.xxx@xxx.com",
+                "CorrelationId":"0b50d09f-e0f2-2000-d9c7-a5b468efc712",
+                "DoNotDistributeEvent":"true",
+                "EventSource":"SharePoint",
+                "ItemType":"File",
+                "ListId":"xxxx-xxxx-xxxx-xxxx-xxxx",
+                "ListItemUniqueId":"xxxx-xxxx-xxxx-xxxx-xxxx",
+                "Site":"xxxx-xxxx-xxxx-xxxx-xxxx",
+                "UserAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36",
+                "WebId":"xxxx-xxxx-xxxx-xxxx-xxxx",
+                "SourceFileExtension":"aspx",
+                "SiteUrl":"https://xxxx.sharepoint.com/",
+                "SourceFileName":"xxxx.aspx",
+                "SourceRelativeUrl":"SitePages",
+                "Subscription":"Audit.SharePoint"
+            }
+        },
+        "location":"office365"
+    }
+
+More information on how to use Wazuh to monitor GitHub can be found in our :ref:`documentation <office365>`.
 
 Google Cloud Platform
 ---------------------
@@ -225,3 +296,52 @@ The following example shows an alert generated when a known bad actor (a source 
   }
 
 More information on how to use Wazuh to monitor the Google cloud platform can be found in our :ref:`documentation <gcp>`. 
+
+GitHub
+------
+
+Wazuh monitors GitHub by extracting events from audit logs, which is used as a middleware for event ingestion and delivery. This integration helps detect threats targeting your GitHub organizations.
+
+The following example shows an alert generated when GitHub creates a Dependabot alert for a repository that uses a vulnerable dependency:
+
+.. code-block:: json
+  :emphasize-lines: 4,23
+  :class: output
+
+  {
+    "timestamp":"2021-04-29T16:40:33.955+0000",
+    "rule": {
+        "level":12,
+        "description":"GitHub Repository vulnerability alert create.",
+        "id":"91362",
+        "firedtimes":8,
+        "mail":false,
+        "groups": ["git_repository_vulnerability_alert"]
+    },
+    "agent": {
+        "id":"000",
+        "name":"ubuntu"
+    },
+    "manager": {
+        "name":"ubuntu-bionic"
+    },
+    "id":"1619714433.146108",
+    "decoder": {
+        "name":"json"
+    },
+    "data": {
+        "github": {
+            "action":"repository_vulnerability_alert.create",
+            "actor":"member_name",
+            "@timestamp":"1619031743300.000000",
+            "org":"org_name",
+            "created_at":"1619031743300.000000",
+            "user":"User",
+            "_document_id":"9Z1pUC7N0GBf4ZzZFQEXpA",
+            "source":"github"
+        }
+    },
+    "location":"github"
+  }
+
+More information on how to use Wazuh to monitor GitHub can be found in our :ref:`documentation <github>`.

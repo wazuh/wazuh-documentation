@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Check the supported operating systems and the recommended hardware requirements for the different types of deployments of the Wazuh installation.
+  
 .. _installation_requirements:
 
 Requirements
@@ -12,27 +15,19 @@ Supported operating systems
 
 The Wazuh server and Elastic Stack components can be installed in the following Linux operating systems:
 
-- Amazon Linux 1 and 2
-
-- CentOS 6 or later
-
-- Debian 7 or later
-
-- Fedora 31 or later
-
-- Oracle Linux 6 or later
-
-- Red Hat Enterprise Linux 6 or later
-
-- Arch Linux rolling release.
-
-- Ubuntu 12 or later
-
+* Amazon Linux 2
+* CentOS 7 and later
+* Debian 8 ELTS and later
+* Fedora Linux 31 and later
+* openSUSE Tumbleweed, Leap 15.2 and later
+* Oracle Linux 6 Extended and later
+* Red Hat Enterprise Linux 6 ELS and later
+* Ubuntu 14.04 ESM and later
 
 All-in-one deployment
 ---------------------
 
-In an all-in-one deployment, both the Wazuh server and Elastic Stack are installed on the same host. This type of deployment is suitable for testing and small production environments. A typical use case for this kind of environment supports around 100 agents.
+In an all-in-one deployment, both the Wazuh server and Elastic Stack are installed on the same host. A typical use case for this kind of environment supports around 100 agents.
 
 The minimum requirements for this type of deployment are 4 GB of RAM and 2 CPU cores, and the recommended are 16 GB of RAM and 8 CPU cores. A 64-bit operating system is required. 
 
@@ -54,9 +49,9 @@ For example, for an environment with 80 workstations, 10 servers, and 10 network
 Distributed deployment
 ----------------------
 
-In a distributed deployment, both the Wazuh server and Elastic Stack are installed on separate hosts. This configuration is recommended for production environments as it provides the high availability and scalability of the services. 
+In a distributed deployment, both the Wazuh server and Elastic Stack are installed on separate hosts. This configuration is recommended for environments that require high availability and scalability of the services. 
 
-The Wazuh server and Elastic Stack can each be installed as a single-node or as a multi-node cluster. Kibana can either be installed on the same node as Elasticsearch or on a dedicated host. Hardware recommendations for each node:
+The Wazuh server and Elastic Stack can both be installed as a single-node or as a multi-node cluster. Kibana can either be installed on the same node as Elasticsearch or on a dedicated host. Hardware recommendations for each node:
                           
 +-------------------------+-------------------------+-------------------------------+
 |                         |  Minimum                |   Recommended                 |
@@ -92,8 +87,8 @@ Scaling
 
 To determine if a Wazuh server requires more resources, the following files can be monitored:
 
-- ``/var/ossec/var/run/ossec-analysisd.state``: the variable ``events_dropped`` indicates whether events are being dropped due to lack of resources. 
-- ``/var/ossec/var/run/ossec-remoted.state``: the variable ``discarded_count`` indicates if messages from the agents were discarded.
+- ``/var/ossec/var/run/wazuh-analysisd.state``: the variable ``events_dropped`` indicates whether events are being dropped due to lack of resources. 
+- ``/var/ossec/var/run/wazuh-remoted.state``: the variable ``discarded_count`` indicates if messages from the agents were discarded.
 
 
 These two variables should be zero if the environment is working properly. If it is not the case, additional nodes can be added to the cluster. 

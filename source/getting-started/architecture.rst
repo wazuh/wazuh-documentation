@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Learn more about the architecture of Wazuh, our open source cybersecurity platform, in this section of our documentation. 
+  
 .. _architecture:
 
 Architecture
@@ -13,10 +16,10 @@ For production environments it is recommended to deploy the Wazuh server and Ela
 
 The diagram below represents a Wazuh deployment architecture. It shows the solution components and how the :ref:`Wazuh servers <wazuh_server>` and :ref:`Elasticsearch <elastic_stack>` can be configured as a cluster, providing load balancing and high-availability.
 
-.. image:: ../images/getting_started/deployment.png
+.. thumbnail:: ../images/getting_started/deployment.png
     :alt: Wazuh deployment
     :align: center
-    :width: 100%
+    :wrap_image: No
 
 Wazuh agent - Wazuh server communication
 ----------------------------------------
@@ -63,7 +66,7 @@ For the communication of Wazuh components several services are used. Below is th
 +               + Elasticsearch +-----------+---------------+----------------------------------------------+
 | Elastic Stack |               | 9300-9400 | TCP           | Elasticsearch cluster communication          |
 +               +---------------+-----------+---------------+----------------------------------------------+
-|               | Kibana        | 5601      | TCP           | Kibana web interface                         |
+|               | Kibana        | 443       | TCP           | Kibana web interface                         |
 +---------------+---------------+-----------+---------------+----------------------------------------------+
 
 Archival data storage

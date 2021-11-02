@@ -1,5 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
-
+.. meta::
+  :description: Learn more about the Wazuh local configuration, including configuration sections and supported installations, in this section of our documentation. 
+  
 .. _reference_ossec_conf:
 
 Local configuration (ossec.conf)
@@ -54,6 +56,8 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +---------------------------------------------------------------------+------------------------+
 | :doc:`global  <global>`                                             | manager                |
 +---------------------------------------------------------------------+------------------------+
+| :doc:`github <github-module>`                                       | manager, agent         |
++---------------------------------------------------------------------+------------------------+
 | :doc:`integration  <integration>`                                   | manager                |
 +---------------------------------------------------------------------+------------------------+
 | :doc:`labels  <labels>`                                             | manager, agent         |
@@ -61,6 +65,8 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 | :doc:`localfile <localfile>`                                        | manager, agent         |
 +---------------------------------------------------------------------+------------------------+
 | :doc:`logging <logging>`                                            | manager, agent         |
++---------------------------------------------------------------------+------------------------+
+| :doc:`office365 <office365-module>`                                 | manager, agent         |
 +---------------------------------------------------------------------+------------------------+
 | :doc:`remote <remote>`                                              | manager                |
 +---------------------------------------------------------------------+------------------------+
@@ -125,10 +131,12 @@ All of the above sections must be located within the top-level ``<ossec_config>`
    database-output
    email_alerts
    global
+   github-module
    integration
    labels
    localfile
    logging
+   office365-module
    remote
    reports
    rootcheck

@@ -1,4 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
+.. meta::
+  :description: The ossec.conf file is the main configuration file on the Wazuh manager and it also plays an important role on the agents. Learn more about it and check out an example here. 
+
 
 .. _reference_ossec_syscheck:
 
@@ -166,6 +169,11 @@ Drive letters without directories are valid. It's possible to configure them by 
 This is to be set on the system to be monitored (or in the ``agent.conf``, if appropriate).
 
 There is a limit of 64 directories, comma-separated, that can be written in one line .
+
+.. versionadded:: 4.3.0
+
+Wildcard characters (``?`` and ``*``) can be used to monitor paths that fulfill the given pattern.
+These wildcards will be reloaded every time a scheduled scan is run.
 
 +--------------------+------------------------------------+
 | **Default value**  | /etc,/usr/bin,/usr/sbin,/bin,/sbin |
@@ -351,6 +359,21 @@ The configuration above, set the option ``check_sha256`` to ``YES``.
 
 Nevertheless, the second one disables the SHA-256 hash check.
 
+.. versionadded:: 4.3.0
+
+If there is a conflict between a block with wildcards and another without them, the block without wildcards will be used for the specific case. As an example:
+
+.. code-block:: xml
+
+  <directories>C:\Users\*\Downloads</directories>
+
+The above block will set the ``Downloads`` folder of all users to be monitored in scheduled mode.
+
+.. code-block:: xml
+
+  <directories realtime="yes">C:\Users\vagrant\Downloads</directories>
+
+Even though the above block is included in the previous one, ``C:\Users\vagrant\Downloads`` will be monitored in realtime because it has no wildcards.
 
 .. _reference_ossec_syscheck_disabled:
 
@@ -830,7 +853,7 @@ The database synchronization settings are configured inside this tag.
       <interval>5m</interval>
       <max_interval>1h</max_interval>
       <response_timeout>30</response_timeout>
-      <sync_queue_size>16384</sync_queue_size>
+      <queue_size>16384</queue_size>
       <max_eps>10</max_eps>
     </synchronization>
 
@@ -840,6 +863,19 @@ The database synchronization settings are configured inside this tag.
 .. versionadded:: 3.12.0
 
 Specifies whether there will be periodic inventory synchronizations or not.
+
++--------------------+---------------------------------------+
+| **Default value**  | yes                                   |
++--------------------+---------------------------------------+
+| **Allowed values** | yes/no                                |
++--------------------+---------------------------------------+
+
+**registry_enabled**
+
+.. versionadded:: 4.1.0
+
+On Windows agents, enables inventory synchronizations for registry entries. If ``enabled`` is set to no,
+this parameter is ignored.
 
 +--------------------+---------------------------------------+
 | **Default value**  | yes                                   |
@@ -963,7 +999,7 @@ Specifices the limit for the size of the ``queue/diff/local`` folder.
 | **Default value**  | 1GB                                         |
 +--------------------+---------------------------------------------+
 | **Allowed values** | Any positive number followed by KB/MB/GB    |
-+--------------------------+---------------------------------------+
++--------------------+---------------------------------------------+
 
 file_size
 """""""""
@@ -994,7 +1030,7 @@ Specifices the limit for the size of files monitored with ``report_changes``.
 | **Default value**  | 50MB                                        |
 +--------------------+---------------------------------------------+
 | **Allowed values** | Any positive number followed by KB/MB/GB    |
-+--------------------------+---------------------------------------+
++--------------------+---------------------------------------------+
 
 .. _reference_ossec_syscheck_nodiff:
 

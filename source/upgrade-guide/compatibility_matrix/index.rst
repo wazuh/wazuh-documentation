@@ -6,7 +6,7 @@ Compatibility matrix
 ====================
 
 
-.. Wazuh software can be installed on many operating systems. In addition, there are also specific compatibility requirements between the different components of Wazuh. For more information, check the compatibility matrix below.
+Wazuh software can be installed on many operating systems. In addition, there are also specific compatibility requirements between the different components of Wazuh. For more information, check the compatibility matrix below.
 
 - `Operating system compatibility`_
 - `Components compatibility`_
@@ -113,6 +113,8 @@ The compatibility between the Wazuh agent and the Wazuh manager is guaranteed wh
 
     The Wazuh manager is also compatible with **OSSEC agents**, however, not all capabilities will be available for them. 
 
+.. _wazuh_kibana_compatibility_matrix:    
+
 Wazuh and Wazuh Kibana plugin
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -122,14 +124,15 @@ The Wazuh app for Kibana requires compatibility between two different components
   - With the **Elastic Stack**, it is only compatible with the exact same version.
 
 +-----------------------------------+------------------------------------+---------------------------+
-|                                   |                                    |                           |
-+   **Wazuh version**               +     **Elastic Stack version**      +  **Open Distro version**  +
-|                                   |                                    |                           |
+|        Wazuh version              |      Elastic Stack version         |   Open Distro version     |
 +-----------------------------------+------------------------------------+---------------------------+
 |              |WAZUH_LATEST|                | |ELASTICSEARCH_LATEST|                             | |OPEN_DISTRO_LATEST|                    |
 +-----------------------------------+------------------------------------+---------------------------+
+|              |WAZUH_LATEST|                | 7.11.2                             |                           |
++-----------------------------------+------------------------------------+---------------------------+
 |              |WAZUH_LATEST|                | |ELASTICSEARCH_ELK_LATEST|                             |                           |
 +-----------------------------------+------------------------------------+---------------------------+
+
 
 You can find more information on the `Wazuh app for Kibana repository <https://github.com/wazuh/wazuh-kibana-app#installation>`_, where you can check a more detailed compatibility matrix between the Wazuh app and Elastic Stack versions.
 
@@ -142,11 +145,9 @@ The Splunk app for Wazuh requires compatibility between two different components
   - With **Splunk**, it is only compatible with the exact same version.
 
 +---------------------------------+---------------------------+
-|                                 |                           |
-+ **Splunk App version**          +    **Splunk version**     +
-|                                 |                           |
+| Splunk App version              |       Splunk version      |
 +---------------------------------+---------------------------+
-|              4.1.5              |     8.0.4, |SPLUNK_LATEST|          |
+|              |WAZUH_SPLUNK_LATEST|              |     8.1.4, |SPLUNK_LATEST|          |
 +---------------------------------+---------------------------+
 
 You can find more information on the `Wazuh app repository <https://github.com/wazuh/wazuh-splunk#installation>`_, where you can check a more detailed compatibility matrix between the Wazuh app for Splunk and Splunk versions.

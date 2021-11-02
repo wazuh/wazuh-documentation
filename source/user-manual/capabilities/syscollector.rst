@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: The Wazuh Syscollector module is in charge of collecting system information and store it into an SQLite database for each agent on the manager side.
+  
 .. _syscollector:
 
 System inventory
@@ -82,43 +85,45 @@ Operating system
 
 Retrieve basic information about the operating system.
 
-+------------------+---------------------------------+-----------------------------------------------------+-------------------+
-| Field            | Description                     | Example                                             | Available         |
-+==================+=================================+=====================================================+===================+
-| **scan_id**      | Scan identifier                 | 468455719                                           | All               |
-+------------------+---------------------------------+-----------------------------------------------------+-------------------+
-| **scan_time**    | Scan date                       | 2018/07/31 15:31:26                                 | All               |
-+------------------+---------------------------------+-----------------------------------------------------+-------------------+
-| **hostname**     | Hostname of the machine         | ag-ubuntu-16                                        | All               |
-+------------------+---------------------------------+-----------------------------------------------------+-------------------+
-| **architecture** | OS architecture                 | x86_64                                              | All               |
-+------------------+---------------------------------+-----------------------------------------------------+-------------------+
-| **os_name**      | OS name                         | Ubuntu                                              | All               |
-+------------------+---------------------------------+-----------------------------------------------------+-------------------+
-| **os_version**   | OS version                      | 16.04.5 LTS (Xenial Xerus)                          | All               |
-+------------------+---------------------------------+-----------------------------------------------------+-------------------+
-| **os_codename**  | OS version codename             | Xenial Xerus                                        | All               |
-+------------------+---------------------------------+-----------------------------------------------------+-------------------+
-| **os_major**     | Major release version           | 16                                                  | All               |
-+------------------+---------------------------------+-----------------------------------------------------+-------------------+
-| **os_minor**     | Minor release version           | 04                                                  | All               |
-+------------------+---------------------------------+-----------------------------------------------------+-------------------+
-| **os_patch**     | Patch release version           | 5                                                   | MacOS             |
-+------------------+---------------------------------+-----------------------------------------------------+-------------------+
-| **os_build**     | Optional build-specific         | 14393                                               | Windows           |
-+------------------+---------------------------------+-----------------------------------------------------+-------------------+
-| **os_release**   | Windows Release ID              | SP2                                                 | Windows           |
-+------------------+---------------------------------+-----------------------------------------------------+-------------------+
-| **os_platform**  | OS platform                     | ubuntu                                              | All               |
-+------------------+---------------------------------+-----------------------------------------------------+-------------------+
-| **sysname**      | System name                     | Linux                                               | Linux             |
-+------------------+---------------------------------+-----------------------------------------------------+-------------------+
-| **release**      | Release name                    | 4.15.0-29-generic                                   | Linux             |
-+------------------+---------------------------------+-----------------------------------------------------+-------------------+
-| **version**      | Release version                 | #31~16.04.1-Ubuntu SMP Wed Jul 18 08:54:04 UTC 2018 | All               |
-+------------------+---------------------------------+-----------------------------------------------------+-------------------+
-| **checksum**     | Integrity synchronization value | 503709147600c8e0023cf2b9995772280eee30              | All               |
-+------------------+---------------------------------+-----------------------------------------------------+-------------------+
++------------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| Field                  | Description                     | Example                                             | Available         |
++========================+=================================+=====================================================+===================+
+| **scan_id**            | Scan identifier                 | 468455719                                           | All               |
++------------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **scan_time**          | Scan date                       | 2018/07/31 15:31:26                                 | All               |
++------------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **hostname**           | Hostname of the machine         | ag-ubuntu-16                                        | All               |
++------------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **architecture**       | OS architecture                 | x86_64                                              | All               |
++------------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **os_name**            | OS name                         | Ubuntu                                              | All               |
++------------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **os_version**         | OS version                      | 16.04.5 LTS (Xenial Xerus)                          | All               |
++------------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **os_codename**        | OS version codename             | Xenial Xerus                                        | All               |
++------------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **os_major**           | Major release version           | 16                                                  | All               |
++------------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **os_minor**           | Minor release version           | 04                                                  | All               |
++------------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **os_patch**           | Patch release version           | 5                                                   | macOS             |
++------------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **os_build**           | Optional build-specific         | 14393                                               | Windows           |
++------------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **os_release**         | Windows Release ID              | SP2                                                 | Windows           |
++------------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **os_display_version** | Windows display version         | 20H2                                                | Windows           |
++------------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **os_platform**        | OS platform                     | ubuntu                                              | All               |
++------------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **sysname**            | System name                     | Linux                                               | Linux             |
++------------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **release**            | Release name                    | 4.15.0-29-generic                                   | Linux             |
++------------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **version**            | Release version                 | #31~16.04.1-Ubuntu SMP Wed Jul 18 08:54:04 UTC 2018 | All               |
++------------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **checksum**           | Integrity synchronization value | 503709147600c8e0023cf2b9995772280eee30              | All               |
++------------------------+---------------------------------+-----------------------------------------------------+-------------------+
 
 .. _syscollector_packages:
 
@@ -437,13 +442,15 @@ The following table shows the operating systems that this module currently suppo
 Using Syscollector information to trigger alerts
 ------------------------------------------------
 
-  Since Wazuh 3.9 version, ``Syscollector`` module information can be used to trigger alerts and show that information in the alerts' description.
+.. note:: This capability is not available in Wazuh 4.2 but will be included in a future version. 
 
-  To allow this configuration, in a rule declaration set the ``<decoded_as>`` field as **syscollector**.
+Since Wazuh 3.9 version, ``Syscollector`` module information can be used to trigger alerts and show that information in the alerts' description.
 
-  As an example, this rule will be triggered when the interface ``eth0`` of an agent is enabled and will show what IPv4 has that interface.
+To allow this configuration, in a rule declaration set the ``<decoded_as>`` field as **syscollector**.
 
-  .. code-block:: xml
+As an example, this rule will be triggered when the interface ``eth0`` of an agent is enabled and will show what IPv4 has that interface.
+
+.. code-block:: xml
 
     <rule id="100001" level="5">
       <if_sid>221</if_sid>
@@ -452,11 +459,11 @@ Using Syscollector information to trigger alerts
       <description>eth0 interface enabled. IP: $(netinfo.iface.ipv4.address)</description>
     </rule>
 
-  .. warning::
+.. warning::
 
     The tag ``<if_sid>221</if_sid>`` is necessary because the events from Syscollector are muted by default with that rule.
 
-  When the alerts are triggered they will be displayed in Kibana this way:
+When the alerts are triggered they will be displayed in Kibana this way:
 
     .. thumbnail:: ../../images/manual/internal-capabilities/syscollector_alerts.png
       :title: Information from syscollector for "port" value.

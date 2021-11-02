@@ -1,14 +1,13 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Welcome to the Wazuh documentation. Here you can find the installation guide, the user manual, and everything you need to deploy Wazuh.
+  
 .. _index:
 
 ================
 Welcome to Wazuh
 ================
-
-.. meta::
-  :description: Wazuh is a free, open source and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response and compliance.
-
 
 Wazuh is a free and open source platform for threat detection, security monitoring, incident response and regulatory compliance. It can be used to monitor endpoints, cloud services and containers, and to aggregate and analyze data from external sources. Wazuh provides the following capabilities:
 
@@ -84,7 +83,7 @@ Wazuh is a free and open source platform for threat detection, security monitori
 .. topic:: Cloud Security Monitoring
   :class: cloud
 
-  Wazuh helps monitoring cloud infrastructure at an API level, using integration modules that are able to pull security data from well known cloud providers, such as Amazon AWS, Azure or Google Cloud. In addition, Wazuh provides rules to assess the configuration of your cloud environment, easily spotting weaknesses.
+  Wazuh helps monitoring cloud infrastructure at an API level, using integration modules that are able to pull security data from well known cloud providers, such as Amazon AWS, GitHub, Azure, Office 365 or Google Cloud. In addition, Wazuh provides rules to assess the configuration of your cloud environment, easily spotting weaknesses.
 
   In addition, Wazuh light-weight and multi-platform agents are commonly used to monitor cloud environments at the instance level.
 
@@ -167,7 +166,7 @@ Wazuh is a free and open source platform for threat detection, security monitori
 .. topic:: Cloud Security Monitoring
    :class: cloud
 
-   Wazuh helps monitor cloud infrastructure at an API level, using integration modules that are able to pull security data from well known cloud providers like Amazon AWS, Azure, or Google Cloud. In addition, Wazuh provides rules to assess the configuration of your cloud environment, easily spotting weaknesses.
+   Wazuh helps monitor cloud infrastructure at an API level, using integration modules that are able to pull security data from well known cloud providers like Amazon AWS, GitHub, Azure, Office 365 or Google Cloud. In addition, Wazuh provides rules to assess the configuration of your cloud environment, easily spotting weaknesses.
 
    Furthermore, Wazuh light-weight and multi-platform agents are commonly used to monitor cloud environments at the instance level.
 
@@ -191,7 +190,7 @@ Wazuh is a free and open source platform for threat detection, security monitori
 
 .. thumbnail:: images/screenshots/01-Wazuh-Security-Analytics.png
    :title: Security Analytics
-   :class: d-block w-100
+   :align: center
 
 .. raw:: html
 
@@ -201,7 +200,7 @@ Wazuh is a free and open source platform for threat detection, security monitori
 
 .. thumbnail:: images/screenshots/02-Wazuh-Intrusion-Detection.png
    :title: Wazuh Intrusion Detection
-   :class: d-block w-100
+   :align: center
 
 .. raw:: html
 
@@ -211,7 +210,7 @@ Wazuh is a free and open source platform for threat detection, security monitori
 
 .. thumbnail:: images/screenshots/03-Wazuh-Log-Data-Analysis.png
    :title: Log Data Analysis
-   :class: d-block w-100
+   :align: center
 
 .. raw:: html
 
@@ -221,7 +220,7 @@ Wazuh is a free and open source platform for threat detection, security monitori
 
 .. thumbnail:: images/screenshots/04-Wazuh-File-Integrity-Monitoring.png
    :title: File Integrity Monitoring
-   :class: d-block w-100
+   :align: center
 
 .. raw:: html
 
@@ -231,7 +230,7 @@ Wazuh is a free and open source platform for threat detection, security monitori
 
 .. thumbnail:: images/screenshots/05-Wazuh-Vulnerability-Detection.png
    :title: Vulnerability Detection
-   :class: d-block w-100
+   :align: center
 
 .. raw:: html
 
@@ -241,7 +240,7 @@ Wazuh is a free and open source platform for threat detection, security monitori
 
 .. thumbnail:: images/screenshots/06-Wazuh-Configuration-Assessment.png
    :title: Configuration Assessment
-   :class: d-block w-100
+   :align: center
 
 .. raw:: html
 
@@ -251,7 +250,7 @@ Wazuh is a free and open source platform for threat detection, security monitori
 
 .. thumbnail:: images/screenshots/07-Wazuh-Incident-Response.png
    :title: Incident Response
-   :class: d-block w-100
+   :align: center
 
 .. raw:: html
 
@@ -261,7 +260,7 @@ Wazuh is a free and open source platform for threat detection, security monitori
 
 .. thumbnail:: images/screenshots/08-Wazuh-Regulatory-Compliance.png
    :title: Regulatory Compliance
-   :class: d-block w-100
+   :align: center
 
 .. raw:: html
 
@@ -271,7 +270,7 @@ Wazuh is a free and open source platform for threat detection, security monitori
 
 .. thumbnail:: images/screenshots/09-Wazuh-Cloud-Security.png
    :title: Cloud Security
-   :class: d-block w-100
+   :align: center
 
 .. raw:: html
 
@@ -281,7 +280,7 @@ Wazuh is a free and open source platform for threat detection, security monitori
 
 .. thumbnail:: images/screenshots/10-Wazuh-Containers-Security.png
    :title: Containers Security
-   :class: d-block w-100
+   :align: center
 
 .. raw:: html
 
@@ -320,6 +319,7 @@ Wazuh is a free and open source platform for threat detection, security monitori
    installation-guide/index
    upgrade-guide/index
    user-manual/index
+   cloud-service/index
    development/index
    containers
    deployment

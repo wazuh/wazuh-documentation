@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Learn more about auditing who-data in Linux and Windows, and the manual configuration of the Local Audit Policies in Windows. 
+
 .. _auditing-whodata:
 
 Auditing who-data

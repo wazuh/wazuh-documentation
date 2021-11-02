@@ -1,5 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
-
+.. meta::
+  :description: Check out how to upgrade the Wazuh agent to the latest available version remotely, using the agent_upgrade tool or the Wazuh API, or locally. 
+  
 .. _upgrading_wazuh_agent:
 
 Upgrading the Wazuh agent
@@ -28,7 +30,7 @@ To perform the upgrade locally, follow the instructions for the operating system
          gpgcheck=1
          gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
          enabled=1
-         name=EL-$releasever - Wazuh
+         name=EL-\$releasever - Wazuh
          baseurl=https://packages.wazuh.com/4.x/yum/
          protect=1
          EOF 
@@ -106,6 +108,12 @@ To perform the upgrade locally, follow the instructions for the operating system
          baseurl=https://packages.wazuh.com/4.x/yum/
          protect=1
          EOF 
+    
+    #. Refresh the repository:
+
+       .. code-block:: console
+ 
+         # zypper refresh     
 
 
     #. Upgrade the Wazuh agent to the latest version:
@@ -134,9 +142,9 @@ To perform the upgrade locally, follow the instructions for the operating system
 
     b) Using the command line. To upgrade the Wazuh agent from the command line, run the installer using Windows PowerShell or the command prompt. The ``/q`` argument is used for unattended installations:
 
-      .. code-block:: console
+      .. code-block:: none
 
-        # wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi /q
+        # .\wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi /q
 
 
   .. group-tab:: macOS

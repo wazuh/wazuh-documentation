@@ -150,16 +150,19 @@ Bucket options
 - `bucket\\secret_key`_
 - `bucket\\aws_profile`_
 - `bucket\\iam_role_arn`_
+- `bucket\\iam_role_duration`_
 - `bucket\\path`_
 - `bucket\\path_suffix`_
 - `bucket\\only_logs_after`_
 - `bucket\\regions`_
 - `bucket\\discard_regex`_
+- `bucket\\sts_endpoint`_
+- `bucket\\service_endpoint`_
 
 
 +----------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | Options                          | Allowed values                                              | Mandatory/Optional                            |
-+==================================+================================================+============================================================+
++==================================+=============================================================+===============================================+
 | `type`_                          | cloudtrail, guardduty, vpcflow, config, custom              | Mandatory                                     |
 +----------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | `bucket\\name`_                  | Any valid bucket name                                       | Mandatory                                     |
@@ -176,6 +179,9 @@ Bucket options
 +----------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | `bucket\\iam_role_arn`_          | IAM role ARN                                                | Optional                                      |
 +----------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+| `bucket\\iam_role_duration`_     | Number of seconds between 900 and 3600                      | Optional (if set, it requires an iam_role_arn |
+|                                  |                                                             | to be provided)                               |
++----------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | `bucket\\path`_                  | Prefix for S3 bucket key                                    | Optional                                      |
 +----------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | `bucket\\path_suffix`_           | Suffix for S3 bucket key                                    | Optional                                      |
@@ -187,6 +193,10 @@ Bucket options
 | `bucket\\aws_organization_id`_   | Name of AWS organization                                    | Optional (only works with CloudTrail buckets) |
 +----------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | `bucket\\discard_regex`_         | A regex value to determine if an event should be discarded. | Optional                                      |
++----------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+| `bucket\\sts_endpoint`_          | The AWS Security Token Service VPC endpoint URL.            | Optional                                      |
++----------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+| `bucket\\service_endpoint`_      | The AWS S3 endpoint URL.                                    | Optional                                      |
 +----------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 
 type
@@ -270,6 +280,8 @@ A valid profile name from a Shared Credential File or AWS Config File with the p
 | **Allowed values** | Valid profile name |
 +--------------------+--------------------+
 
+.. _bucket_iam_role_arn:
+
 bucket\\iam_role_arn
 ^^^^^^^^^^^^^^^^^^^^
 
@@ -280,6 +292,17 @@ A valid role arn with permission to read logs from the bucket.
 +--------------------+----------------+
 | **Allowed values** | Valid role arn |
 +--------------------+----------------+
+
+bucket\\iam_role_duration
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+A valid number of seconds that defines the duration of the session assumed when using the provided :ref:`iam_role_arn<bucket_iam_role_arn>`.
+
++--------------------+------------------------------------------+
+| **Default value**  | N/A                                      |
++--------------------+------------------------------------------+
+| **Allowed values** | Number of seconds between 900 and 3600   |
++--------------------+------------------------------------------+
 
 bucket\\path
 ^^^^^^^^^^^^
@@ -364,6 +387,28 @@ Usage example:
     <discard_regex field="data.configurationItemStatus">REJECT</discard_regex>
 
 
+bucket\\sts_endpoint
+^^^^^^^^^^^^^^^^^^^^
+
+The AWS Security Token Service VPC endpoint URL to be used when an IAM role is provided as the authentication method. Check the :ref:`Considerations for configuration <amazon_considerations>` page to learn more about VPC endpoints.
+
++--------------------+----------------------------------------+
+| **Default value**  | N/A                                    |
++--------------------+----------------------------------------+
+| **Allowed values** | Any valid VPC endpoint URL for STS     |
++--------------------+----------------------------------------+
+
+bucket\\service_endpoint
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+The AWS S3 endpoint URL to be used to download the data from the bucket. Check the :ref:`Considerations for configuration <amazon_considerations>` page to learn more about VPC and FIPS endpoints.
+
++--------------------+----------------------------------------+
+| **Default value**  | N/A                                    |
++--------------------+----------------------------------------+
+| **Allowed values** | Any valid endpoint URL for S3          |
++--------------------+----------------------------------------+
+
 run_on_start
 ^^^^^^^^^^^^
 
@@ -410,13 +455,13 @@ Day of the week to run the scan. This option is **not compatible** with the ``da
 | **Default value**  | n/a                      |
 +--------------------+--------------------------+
 | **Allowed values** | Day of the week:         |
-|                    |   - sunday/sun           |
-|                    |   - monday/mon           |
-|                    |   - tuesday/tue          |
-|                    |   - wednesday/wed        |
-|                    |   - thursday/thu         |
-|                    |   - friday/fri           |
-|                    |   - saturday/sat         |
+|                    |  - sunday/sun            |
+|                    |  - monday/mon            |
+|                    |  - tuesday/tue           |
+|                    |  - wednesday/wed         |
+|                    |  - thursday/thu          |
+|                    |  - friday/fri            |
+|                    |  - saturday/sat          |
 +--------------------+--------------------------+
 
 .. note::
@@ -454,9 +499,12 @@ Service options
 - `Service\\secret_key`_
 - `Service\\aws_profile`_
 - `Service\\iam_role_arn`_
+- `Service\\iam_role_duration`_
 - `Service\\only_logs_after`_
 - `Service\\regions`_
 - `Service\\remove_log_streams`_
+- `Service\\sts_endpoint`_
+- `Service\\service_endpoint`_
 
 
 Service\\aws_account_id
@@ -528,6 +576,8 @@ A valid profile name from a Shared Credential File or AWS Config File with the p
 | **Allowed values** | Valid profile name |
 +--------------------+--------------------+
 
+.. _service_iam_role_arn:
+
 Service\\iam_role_arn
 ^^^^^^^^^^^^^^^^^^^^^
 
@@ -538,6 +588,17 @@ A valid role arn with permission to access the service.
 +--------------------+----------------+
 | **Allowed values** | Valid role arn |
 +--------------------+----------------+
+
+Service\\iam_role_duration
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+A valid number of seconds that defines the duration of the session assumed when using the provided :ref:`iam_role_arn<service_iam_role_arn>`.
+
++--------------------+------------------------------------------+
+| **Default value**  | N/A                                      |
++--------------------+------------------------------------------+
+| **Allowed values** | Number of seconds between 900 and 3600   |
++--------------------+------------------------------------------+
 
 Service\\only_logs_after
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -610,6 +671,7 @@ Example of configuration
           <aws_account_id>112233445566</aws_account_id>
           <aws_account_alias>dev2-account</aws_account_alias>
           <discard_regex field="data.configurationItemStatus">REJECT</discard_regex>
+          <service_endpoint>https://bucket.xxxxxx.s3.us-east-2.vpce.amazonaws.com</service_endpoint>
       </bucket>
       <bucket type="custom">
           <name>s3-stage-bucket</name>
@@ -621,6 +683,7 @@ Example of configuration
       <bucket type="custom">
           <name>s3-prod-bucket</name>
           <iam_role_arn>arn:aws:iam::010203040506:role/ROLE_SVC_Log-Parser</iam_role_arn>
+          <iam_role_duration>1300</iam_role_duration>
           <aws_account_id>11112222333</aws_account_id>
           <aws_account_alias>prod-account</aws_account_alias>
           <discard_regex field="data.configurationItemStatus">REJECT</discard_regex>
@@ -634,3 +697,26 @@ Example of configuration
           <discard_regex field="data.configurationItemStatus">REJECT</discard_regex>
       </service>
   </wodle>
+
+
+Service\\sts_endpoint
+^^^^^^^^^^^^^^^^^^^^^
+
+The AWS Security Token Service VPC endpoint URL to be used when an IAM role is provided as the authentication method. Check the :ref:`Considerations for configuration <amazon_considerations>` page to learn more about VPC endpoints.
+
++--------------------+----------------------------------------+
+| **Default value**  | N/A                                    |
++--------------------+----------------------------------------+
+| **Allowed values** | Any valid VPC endpoint URL for STS     |
++--------------------+----------------------------------------+
+
+Service\\service_endpoint
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The endpoint URL for the required AWS Service to be used to download the data from it. Check the :ref:`Considerations for configuration <amazon_considerations>` page to learn more about VPC and FIPS endpoints.
+
++--------------------+------------------------------------------------+
+| **Default value**  | N/A                                            |
++--------------------+------------------------------------------------+
+| **Allowed values** | Any valid endpoint URL for the AWS Service     |
++--------------------+------------------------------------------------+
