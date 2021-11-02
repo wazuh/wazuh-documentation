@@ -59,7 +59,7 @@ Options
 |               +-----------------------------+-----------------------------------------+
 |               | **Supported installations** | Manager                                 |
 +---------------+-----------------------------+-----------------------------------------+
-| **-D <sec>**  | Remove agents with duplicate IP if disconnected since <sec> seconds.  |
+| **-D <sec>**  | Remove agents with duplicated IP if disconnected since <sec> seconds.  |
 |               |                                                                       |
 |               | With ``-D 0`` it will remove **any** duplicate disconnected agent.    |
 |               +-----------------------------+-----------------------------------------+
