@@ -2,10 +2,10 @@
 
 .. _wazuh_ansible_elk_server:
 
-Install Opendistro Stack Server
+Install Open Distro for Elasticsearch Server
 ===============================
 
-The deployment of the Opendistro Stack server involves the installation of Opendistro and Kibana services. In the repository of Ansible that Wazuh has we can find the playbooks and roles necessary to carry out the installation. The Ansible server must have access to the Opendistro Stack server.
+The deployment of the Open Distro for Elasticsearch server involves the installation of Opendistro and Kibana services. In the repository of Ansible that Wazuh has we can find the playbooks and roles necessary to carry out the installation. The Ansible server must have access to the Open Distro for Elasticsearch server.
 
 - `1 - Access to wazuh-ansible`_
 - `2 - Preparing the playbook`_
@@ -16,7 +16,15 @@ The deployment of the Opendistro Stack server involves the installation of Opend
 
 	In previous versions of this guide, playbooks were used pointing to roles to install Elasticsearch.
 	Currently, the roles for the installation following guides from previous versions are preserved.
-	Since version 4.2.4 the installation steps of this guide point to the roles that install Opendistro.
+	Since version 4.2.4 the installation steps of this guide point to the roles that install Open Distro for Elasticsearch.
+
+.. warning::
+
+    About the nomenclatures:
+       - We refer with Open Distro for Elasticsearch to:
+         - https://opendistro.github.io/for-elasticsearch-docs/
+       - We refer with Elasticsearch to:
+         - https://www.elastic.co/what-is/elasticsearch
 
 .. note::
 
@@ -148,7 +156,7 @@ And we can see the preconfigured playbooks we have.
 	└── wazuh-opendistro.yml
 
 
-Using **Opendistro** and **Kibana** roles we will install and configure the Opendistro Stack server components, there are several variables we can use to customize the installation or configuration. To consult the default configuration go to this :ref:`section <wazuh_ansible_reference>`.
+Using **Opendistro** and **Kibana** roles we will install and configure the Open Distro for Elasticsearch server components, there are several variables we can use to customize the installation or configuration. To consult the default configuration go to this :ref:`section <wazuh_ansible_reference>`.
 
 If we want to change the default configuration we can change the following files:
 - ``/etc/ansible/roles/wazuh-ansible/roles/opendistro/opendistro-elasticsearch/defaults/main.yml``
@@ -517,7 +525,7 @@ We will obtain a final result similar to the one shown in the following code blo
 	poc-allinone-wm            : ok=43   changed=23   unreachable=0    failed=0    skipped=36   rescued=0    ignored=1   
 
 
-We can check the status of our new services in our Opendistro Stack server.
+We can check the status of our new services in our Open Distro for Elasticsearch server.
 
 - Elasticsearch/Opendistro.
 
