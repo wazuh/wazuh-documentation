@@ -2,7 +2,7 @@
 
 .. meta::
   :description: Learn more about how to register Wazuh agents on Linux, Windows, or macOS X in this section of our documentation.
-  
+
 .. _register_agents:
 
 Registering Wazuh agents
@@ -72,20 +72,20 @@ To register the Wazuh agent, choose the tab corresponding to the Wazuh agent's h
 
 
     #. To register the Wazuh agent, run the ``agent-auth.exe`` utility, using the Wazuh manager's IP address:
-    
-    
+
+
         .. tabs::
-    
+
           .. group-tab:: Powershell
-    
+
            .. code-block:: console
-    
-              # &'C:\Program Files (x86)\ossec-agent\agent-auth.exe' -m <manager_IP> 
-    
+
+              # &'C:\Program Files (x86)\ossec-agent\agent-auth.exe' -m <manager_IP>
+
           .. group-tab:: Windows cmd
-    
+
            .. code-block:: console
-    
+
               # "C:\Program Files (x86)\ossec-agent\agent-auth.exe" -m <manager_IP>
 
 
@@ -140,7 +140,7 @@ There are also other easy registration methods. The choice depends on the partic
 +-----------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Registration method                                                                                 | Description                                                                                                                                                         |
 +=====================================================================================================+=====================================================================================================================================================================+
-| :ref:`Using command line (CLI) <command-line-registration>`                                         | Manual registration using ``manage_agents`` utility. Requires extracting the registration key from the Wazuh manager and inserting it manually in the Wazuh agent. |
+| :ref:`Using command line (CLI) <command-line-registration>`                                         | Manual registration using ``manage_agents`` utility. Requires extracting the registration key from the Wazuh manager and inserting it manually in the Wazuh agent.  |
 +-----------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | :ref:`Using Wazuh API <restful-api-registration>`                                                   | Uses a simple Wazuh API request from any host. Requires adding returned registration key manually to the Wazuh agent.                                               |
 +-----------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+

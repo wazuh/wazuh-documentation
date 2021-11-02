@@ -53,13 +53,13 @@ Options
 |               +-----------------------------+-----------------------------------------+
 |               | **Supported installations** | Agent                                   |
 +---------------+-----------------------------+-----------------------------------------+
-| **-R <sec>**  | Remove agents with duplicated IP if registered since <sec> seconds.    |
+| **-R <sec>**  | Remove agents with duplicated IP if registered since <sec> seconds.   |
 |               |                                                                       |
 |               | With ``-R 0`` it will remove **any** duplicate agent.                 |
 |               +-----------------------------+-----------------------------------------+
 |               | **Supported installations** | Manager                                 |
 +---------------+-----------------------------+-----------------------------------------+
-| **-D <sec>**  | Remove agents with duplicated IP if disconnected since <sec> seconds.  |
+| **-D <sec>**  | Remove agents with duplicated IP if disconnected since <sec> seconds. |
 |               |                                                                       |
 |               | With ``-D 0`` it will remove **any** duplicate disconnected agent.    |
 |               +-----------------------------+-----------------------------------------+
