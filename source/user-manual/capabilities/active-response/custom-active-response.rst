@@ -5,29 +5,19 @@
 Custom Active Response
 ======================
 
-A *custom active response* is a personalized script configured to be executed when a specific alert, alert level, or rule group is triggered. These custom responses can be created in any programming language and require a defined :ref:`command <reference_ossec_commands>` to initiate the script in response to a trigger and an :ref:`active response <reference_ossec_active_response>` configuration that determines when and where the command is going to be executed.
+A *custom active response* is a personalized script configured to be executed when a specific alert, alert level, or rule group is triggered. These custom responses can be created in any programming language and require a defined :ref:`command <reference_ossec_commands>` to initiate the script in response to a trigger and an :ref:`active response <reference_ossec_active_response>` configuration that determines when and where the command is going to be executed. Active responses can be stateful or stateless.
 
-
-- `Types of active responses`_
 - `Stateless active responses`_
 - `Stateful active responses`_
 - `Customizing the behavior of an AR Python script`_
 - `Custom active response Linux example`_
 - `Custom active response Windows example`_
 
-Types of active responses
--------------------------
-
-Active responses can be stateful or stateless.
-
-- **Stateless**: configured as one-time actions without an event to revert the original effect.
-
-- **Stateful**: configured to undo the action after a specified period of time.
 
 Stateless active responses
 --------------------------
 
-Stateless active responses have the simplest configuration of both types of ARs. The process entails passing the full alert to the AR via ``STDIN`` within a JSON object and each AR is responsible for extracting the information necessary for its execution.
+Stateless active responses have the simplest configuration of both types of ARs and are configured as one-time actions without an event to revert the original effect. The process entails passing the full alert to the AR via ``STDIN`` within a JSON object and each AR is responsible for extracting the information necessary for its execution.
 
 The JSON message format is as follows:
 
@@ -118,7 +108,7 @@ This is an example of the message with the full alert that is passed to the ``fi
 Stateful active responses
 -------------------------
 
-A ``Stateful`` AR undoes its original action after the period of time specified in the active response. That is to say, the stateful AR performs the basic actions of a stateless AR to later undo the process based on the command configuration. As part of the timeout behavior, when the received command is ``add``, the AR must execute this operation.
+A Stateful AR undoes its original action after the period of time specified in the active response. That is to say, the stateful AR performs the basic actions of a stateless AR to later undo the process based on the command configuration. As part of the timeout behavior, when the received command is ``add``, the AR must execute this operation.
 
 - Read ``STDIN`` to get the alert.
 
@@ -140,7 +130,7 @@ A ``Stateful`` AR undoes its original action after the period of time specified 
 
 .. note::
 
-  The *keys* are those fields extracted from the alert that the AR script uses to execute its action. They must be sufficient to identify an execution instance, for example, to block a specific host, for which case the IP is enough.
+    The *keys* are those fields extracted from the alert that the AR script uses to execute its action. They must be sufficient to identify an execution instance, for example, to block a specific host, for which case the IP is enough.
 
 The control message format is as follows:
 
@@ -193,7 +183,7 @@ It is possible to customize the behavior of the script by modifying 3 sections:
 Stateless AR configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Stateless ARs are configured as one-time actions without an event to reverse the original effect. The configuration needed for stateless case is the following:
+Stateless ARs, as one-time actions, require the following settings to be configured.
 
 - Set custom key
 
@@ -202,7 +192,7 @@ Stateless ARs are configured as one-time actions without an event to reverse the
 Stateful AR configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Stateful ARs need the folloing configuration so they can undo the action after a specified period of time.
+Stateful ARs need the following configuration so they can undo the action after a specified period of time.
 
 - Set custom key
 
