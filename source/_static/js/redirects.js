@@ -34,6 +34,8 @@ removedUrls['x.y'] = [
 ];
 */
 
+/* *** RELEASE 4.3 ****/
+
 /* Pages added in 4.3 */
 
 newUrls['4.3'] = [
@@ -44,6 +46,7 @@ newUrls['4.3'] = [
   '/office365/monitoring-office365-activity.html',
   '/user-manual/reference/ossec-conf/office365-module.html',
   '/user-manual/capabilities/file-integrity/fim-fields-rule-mapping.html',
+  '/user-manual/capabilities/log-data-collection/how-to-collect-macoslogs.html',
 ];
 
 /* *** RELEASE 4.2 ****/
