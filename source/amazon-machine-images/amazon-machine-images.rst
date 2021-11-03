@@ -107,7 +107,7 @@ Once the instance is running, you can access the web interface with your credent
 
 
 - URL: *https://<instance_ip>*
-- **Username**: *wazuh*
+- **Username**: *admin*
 - **Password**: *<your_instance_id>*
 
 Keep in mind that after launching the instance, the passwords of the users are changed to the ID of the instance created from the AMI. In this way, access to the interface is guaranteed only to the creator of it. This process can take an average of 5 minutes depending on the type of instance and both the SSH access and the Kibana web interface are disabled during the process. 
