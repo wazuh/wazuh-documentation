@@ -66,7 +66,7 @@ To register the Wazuh agent, choose the tab corresponding to the Wazuh agent's h
   .. group-tab:: Windows host
 
 
-    Open a Powershell or CMD session in the Wazuh agent's host as an ``Administrator``.
+    Open a PowerShell or CMD session in the Wazuh agent's host as an ``Administrator``.
 
     .. include:: ../../_templates/windows/installation_directory.rst
 
@@ -76,7 +76,7 @@ To register the Wazuh agent, choose the tab corresponding to the Wazuh agent's h
 
         .. tabs::
 
-          .. group-tab:: Powershell
+          .. group-tab:: PowerShell
 
            .. code-block:: console
 
