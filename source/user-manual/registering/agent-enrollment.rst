@@ -42,7 +42,7 @@ Typical configurations
 - *Manager certificate validation*: If a valid file path is defined in ``<enrollment><server_ca_path>``, the agent can only accept a key returned by a trusted manager able to identify itself with certificates that match the one located on ``server_ca_path``.
 - *Agent certificate validation*: If valid file paths are defined in ``<enrollment><agent_certificate_path>`` and ``<enrollment><agent_key_path>``, the agent identifies itself with the manager using the provided certificates.
 
-To learn more about the registration process you can go to this section about `Wazuh enrollment method <https://documentation.wazuh.com/current/user-manual/reference/ossec-conf/client.html#enrollment>`_.
+To learn more about the registration process, you can go to this section about `Wazuh enrollment method <https://documentation.wazuh.com/current/user-manual/reference/ossec-conf/client.html#enrollment>`_.
 
 
 Other configurations
