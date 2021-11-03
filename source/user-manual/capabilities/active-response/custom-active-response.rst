@@ -108,7 +108,7 @@ This is an example of the message with the full alert that is passed to the ``fi
 Stateful active responses
 -------------------------
 
-A Stateful AR undoes its original action after the period of time specified in the active response. That is to say, the stateful AR performs the basic actions of a stateless AR to later undo the process based on the command configuration. As part of the timeout behavior, when the received command is ``add``, the AR must execute this operation.
+A stateful AR undoes its original action after the period of time specified in the active response. That is to say, the stateful AR performs the basic actions of a stateless AR to later undo the process based on the command configuration. As part of the timeout behavior, when the received command is ``add``, the AR must execute this operation.
 
 - Read ``STDIN`` to get the alert.
 
