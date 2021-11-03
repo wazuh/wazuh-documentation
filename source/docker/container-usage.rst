@@ -18,7 +18,7 @@ After installing the Wazuh-Docker containers, there are several tasks that you c
 Access to services and containers
 ---------------------------------
 
-#. You may access the Kibana UI at the Docker host's IP address, for example: `https://localhost <http://localhost>`_ if you are in the Docker host.
+#. You may access the Kibana UI at the Docker host's IP address, for example: ``https://localhost`` if you are in the Docker host.
 
    .. note::
      The certificate used for Kibana by default is a self-signed certificate, because of this your browser will warn that it cannot verify its authenticity.

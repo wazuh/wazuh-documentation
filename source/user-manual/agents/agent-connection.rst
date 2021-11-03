@@ -1,6 +1,5 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-
 .. meta::
   :description: Find out more about how to check the connection to the Wazuh Manager in this section of our documentation. 
   
@@ -46,7 +45,7 @@ You can also check to see if an agent connected correctly by verifying if the TC
 
 .. code-block:: console
 
-  # netstat -vatunp|grep ossec-agentd
+  # netstat -vatunp|grep wazuh-agentd
 
 The result should match the agent and manager IP addresses.
 

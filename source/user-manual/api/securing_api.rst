@@ -37,7 +37,8 @@ Recommended changes to securize Wazuh API
         cert: "api/configuration/ssl/server.crt"
         use_ca: False
         ca: "api/configuration/ssl/ca.crt"
-        ssl_cipher: "TLSv1.2"
+        ssl_protocol: "TLSv1.2"
+        ssl_ciphers: ""
 
     After setting these parameters, it will be necessary to restart the Wazuh API using the ``wazuh-manager`` service:
 
@@ -95,6 +96,8 @@ Recommended changes to securize Wazuh API
     In order to avoid overloading the Wazuh API, it is possible to use rate limiting to establish the maximum number of requests the Wazuh API can handle per minute. Once exceeded, all other requests (from any user) will be rejected for the remaining of the minute.
 
     The default number of requests per minute is *300*. To change it, modify the ``max_request_per_minute`` setting in ``WAZUH_PATH/api/configuration/api.yaml``.
+
+    .. note:: To disable this feature, set its value to 0.
 
 #. Set maximum number of login attempts:
 

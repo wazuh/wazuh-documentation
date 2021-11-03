@@ -54,6 +54,8 @@ Enables the module.
 | **Allowed values** | yes, no                     |
 +--------------------+-----------------------------+
 
+.. _vuln_det_interval:
+
 interval
 ^^^^^^^^
 
@@ -64,6 +66,8 @@ Time between vulnerabilities scans.
 +--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 | **Allowed values** | A positive number that should contain a suffix character indicating a time unit: s (seconds), m (minutes), h (hours) or d (days).        |
 +--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
+
+.. _vuln_det_run_on_start:
 
 run_on_start
 ^^^^^^^^^^^^
@@ -76,16 +80,21 @@ Runs updates and vulnerabilities scans immediately when service is started.
 | **Allowed values**   | yes, no   |
 +----------------------+-----------+
 
+.. _vuln_det_ignore_time:
+
 ignore_time
 ^^^^^^^^^^^^
 
-Time during which vulnerabilities that have already been alerted will be ignored.
+Time during which vulnerabilities that have already been alerted will be ignored. When this time hasn't passed yet, only :ref:`partial scans <vuln_det_scan_types>` will be performed.
 
 +----------------------+------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**    | 6 hours                                                                                                                            |
 +----------------------+------------------------------------------------------------------------------------------------------------------------------------+
 | **Allowed values**   | A positive number that should contain a suffix character indicating a time unit: s (seconds), m (minutes), h (hours) or d (days).  |
 +----------------------+------------------------------------------------------------------------------------------------------------------------------------+
+
+.. note:: In a partial scan new packages are scanned, but only a full scan removes the CVEs related to old packages that are not present anymore.
+
 
 provider
 ^^^^^^^^

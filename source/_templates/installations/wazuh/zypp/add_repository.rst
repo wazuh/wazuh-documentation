@@ -20,4 +20,11 @@
       protect=1
       EOF 
 
+#. Refresh the repository:
+
+    .. code-block:: console
+ 
+      # zypper refresh
+
+      
 .. End of include file

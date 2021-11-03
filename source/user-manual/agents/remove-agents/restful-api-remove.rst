@@ -27,7 +27,6 @@ The request :api-ref:`DELETE /agents <operation/api.controllers.agent_controller
             "total_affected_items": 3,
             "total_failed_items": 0,
             "failed_items": [],
-            "older_than": "0s",
         },
         "message": "All selected agents were deleted",
         "error": 0,

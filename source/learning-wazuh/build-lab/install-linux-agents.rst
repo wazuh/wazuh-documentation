@@ -55,7 +55,7 @@ Verify the agent has properly connected:
 
   .. code-block:: console
 
-    # grep ^status /var/ossec/var/run/ossec-agentd.state
+    # grep ^status /var/ossec/var/run/wazuh-agentd.state
 
 You should see output like this:
 
@@ -65,8 +65,8 @@ You should see output like this:
     status='connected'
 
 .. note::
-  The **/var/ossec/var/run/ossec-agentd.state** file on Unix-like platforms and the
-  **C:\\Program Files (x86)\\ossec-agent\\ossec-agent.state** file on Windows
+  The **/var/ossec/var/run/wazuh-agentd.state** file on Unix-like platforms and the
+  **C:\\Program Files (x86)\\ossec-agent\\wazuh-agent.state** file on Windows
   platforms contain several useful pieces of information about the state of the
   Wazuh agent's connection with the Wazuh manager.  See the file content itself
   for more information.

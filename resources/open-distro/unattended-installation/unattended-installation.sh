@@ -11,8 +11,8 @@
 ## Check if system is based on yum or apt-get
 char="."
 debug='>> /var/log/wazuh-unattended-installation.log 2>&1'
-WAZUH_MAJOR="4.1"
-WAZUH_VER="4.1.5"
+WAZUH_MAJOR="4.2"
+WAZUH_VER="4.2.0"
 WAZUH_REV="1"
 ELK_VER="7.10.2"
 OD_VER="1.13.2"

@@ -9,7 +9,6 @@
 Welcome to Wazuh
 ================
 
-
 Wazuh is a free and open source platform for threat detection, security monitoring, incident response and regulatory compliance. It can be used to monitor endpoints, cloud services and containers, and to aggregate and analyze data from external sources. Wazuh provides the following capabilities:
 
 .. raw:: html
@@ -320,6 +319,7 @@ Wazuh is a free and open source platform for threat detection, security monitori
    installation-guide/index
    upgrade-guide/index
    user-manual/index
+   cloud-service/index
    development/index
    containers
    deployment

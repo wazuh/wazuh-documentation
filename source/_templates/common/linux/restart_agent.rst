@@ -18,7 +18,7 @@
 
   .. code-block:: console
 
-   # /var/ossec/bin/ossec-control restart
+   # /var/ossec/bin/wazuh-control restart
 
 
 .. End of include file

@@ -38,7 +38,7 @@ Improved Authd performance
 
 The Authd program has been improved in this version such that the Wazuh API and the ``manage_agents`` tools can now register an agent while ``ossec-authd`` is running.
 
-Additionally, :doc:`ossec-authd <../user-manual/reference/daemons/ossec-authd>` now runs in the background and can be enabled using the command ``ossec-control enable auth``. See the :doc:`auth section <../user-manual/reference/ossec-conf/auth>` of ``ossec.conf`` for configuration options and sample configuration.
+Additionally, ``ossec-authd`` now runs in the background and can be enabled using the command ``ossec-control enable auth``. See the :doc:`auth section <../user-manual/reference/ossec-conf/auth>` of ``ossec.conf`` for configuration options and sample configuration.
 
 Finally, the new ``force_insert`` and ``force_time`` options in Authd (``-F<time>`` from the ``ossec-authd`` command line) allow for the automatic deletion of agents that match the name or IP address of a new agent you are attempting to register.
 

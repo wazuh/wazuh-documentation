@@ -88,6 +88,8 @@ This library is designed to be simple while still supporting the most common reg
   - ``\s`` matches only an ASCII space (32), not other whitespace like tab
   - there is no syntax to match a literal caret, asterisk or plus (although ``\p`` will match asterisk or plus, along with some other characters)
 
+.. _os_sregex_syntax:
+
 Sregex (OS_Match) syntax
 -----------------------------
 

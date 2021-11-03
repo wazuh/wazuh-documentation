@@ -106,15 +106,15 @@ When the ``expect`` package is present and Wazuh is restarted, the following is 
 .. code-block:: none
   :class: output
 
-  ossec-agentlessd: INFO: Test passed for 'ssh_integrity_check_linux'.
+  wazuh-agentlessd: INFO: Test passed for 'ssh_integrity_check_linux'.
 
 When Wazuh has connected to the remote device, the following will be shown in the same log file:
 
 .. code-block:: none
   :class: output
 
-  ossec-agentlessd: INFO: ssh_integrity_check_linux: root@example_adress.com: Starting.
-  ossec-agentlessd: INFO: ssh_integrity_check_linux: root@example_adress.com: Finished.
+  wazuh-agentlessd: INFO: ssh_integrity_check_linux: root@example_adress.com: Starting.
+  wazuh-agentlessd: INFO: ssh_integrity_check_linux: root@example_adress.com: Finished.
 
 Alert
 -----

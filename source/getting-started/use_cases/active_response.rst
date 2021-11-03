@@ -20,8 +20,7 @@ Below you can find the configuration used to define two scripts that are used fo
 
     <command>
       <name>firewall-drop</name>
-      <executable>firewall-drop.sh</executable>
-      <expect>srcip</expect>
+      <executable>firewall-drop</executable>
       <timeout_allowed>yes</timeout_allowed>
     </command>
 
@@ -29,8 +28,7 @@ Below you can find the configuration used to define two scripts that are used fo
 
     <command>
       <name>win_route-null</name>
-      <executable>route-null.cmd</executable>
-      <expect>srcip</expect>
+      <executable>route-null.exe</executable>
       <timeout_allowed>yes</timeout_allowed>
     </command>
 

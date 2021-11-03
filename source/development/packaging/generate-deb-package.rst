@@ -19,19 +19,7 @@ Download our wazuh-packages repository from GitHub and go to the debs directory.
 
 .. code-block:: console
 
- $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/debs
-
-If you want to build a version later or equal to |WAZUH_GCC_CHANGE|, you must change to |WAZUH_PACKAGES_BRANCH| branch.
-
-.. code-block:: console
-
- $ git checkout |WAZUH_PACKAGES_BRANCH|
-
-If you want to build a version prior to |WAZUH_GCC_CHANGE|, you must change to the corresponding tag, e.g. v|WAZUH_PREGCC_CHANGE|
-
-.. code-block:: console
-
- $ git checkout v|WAZUH_PREGCC_CHANGE|
+ $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/debs && git checkout |WAZUH_PACKAGES_BRANCH|
 
 Execute the ``generate_debian_package.sh`` script, with the different options you desire. This script will build a Docker image with all the necessary tools to create the DEB and run a container that will build it:
 
@@ -57,6 +45,7 @@ Execute the ``generate_debian_package.sh`` script, with the different options yo
       --dont-build-docker        [Optional] Locally built docker image will be used instead of generating a new one.
       --sources <path>           [Optional] Absolute path containing Wazuh source code. This option will use local source code instead of downloading it from GitHub.
       --dev                      [Optional] Use the SPECS files stored in the host instead of downloading them from GitHub.
+      --future                   [Optional] Build test future package x.30.0 Used for development purposes.
       -h, --help                Show this help.
 
 Below, you will find some examples of how to build a DEB package.
@@ -75,6 +64,6 @@ This will generate a |WAZUH_LATEST| Wazuh api package DEB with revision ``my_rev
 
 .. code-block:: console
 
-  # ./generate_debian_package.sh -b v|WAZUH_LATEST| --packages-branch |WAZUH_PACKAGES_BRANCH| -t agent -a amd64 -p /opt
+  # ./generate_debian_package.sh -b v|WAZUH_LATEST| --packages-branch |WAZUH_PACKAGES_BRANCH| -t agent -a amd64 -p /opt/ossec
 
-This will generate a |WAZUH_LATEST| Wazuh agent DEB package with ``/opt`` as installation directory for ``amd64`` systems.
+This will generate a |WAZUH_LATEST| Wazuh agent DEB package with ``/opt/ossec`` as installation directory for ``amd64`` systems.

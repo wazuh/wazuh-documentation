@@ -31,7 +31,7 @@ Changing the default passwords of Elasticsearch is highly recommended in order t
     
       .. code-block:: console
       
-        # curl -so wazuh-passwords-tool.sh https://packages.wazuh.com/resources/4.1/open-distro/tools/wazuh-passwords-tool.sh
+        # curl -so wazuh-passwords-tool.sh https://packages.wazuh.com/resources/4.2/open-distro/tools/wazuh-passwords-tool.sh
 
     - Run the script:
 
@@ -53,21 +53,28 @@ Changing the default passwords of Elasticsearch is highly recommended in order t
         Password changed. Remember to update the password in /etc/filebeat/filebeat.yml and /etc/kibana/kibana.yml if necessary and restart the services.
 
 
-    The script allows changing the password for either a single user or all the users present on the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. All the available options to run the script are:
+    The script allows changing the password for either a single user or all the users present on the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. It also offers the option to change the password of more than one user at once, getting them from a formatted file. All the available options to run the script are:
 
-    +-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
-    | Options                     | Purpose                                                                                                                      |
-    +=============================+==============================================================================================================================+
-    | -a / --change-all           | Generates random passwords, changes all the Open Distro user passwords and prints them on screen                             |
-    +-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
-    | -p / --password <password>  | Indicates the new password, must be used with option ``-u``                                                                  |
-    +-----------------------------+------------------------------------------------------------------------------------------------------------------------------+    
-    | -u / --user <user>          | Indicates the name of the user whose password will be changed. If no password specified it will generate a random one        |
-    +-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
-    | -v / --verbose              | Shows the complete script execution output                                                                                   |
-    +-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
-    | -h / --help                 | Shows help                                                                                                                   |
-    +-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
+    +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
+    | Options                                      | Purpose                                                                                                     |
+    +==============================================+=============================================================================================================+
+    | -a / --change-all                            | Generates random passwords, changes all the Open Distro user passwords and prints them on screen            |
+    +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
+    | -p / --password <password>                   | Indicates the new password, must be used with option ``-u``                                                 |
+    +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+    
+    | -u / --user <user>                           | Indicates the name of the user whose password will be changed.                                              |
+    |                                              | If no password specified it will generate a random one                                                      |
+    +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
+    | -c / --cert <route-admin-certificate>        | Indicates route to the admin certificate                                                                    |
+    +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
+    | -k / --certkey <route-admin-certificate-key> | Indicates route to the admin certificate key                                                                |
+    +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
+    | -v / --verbose                               | Shows the complete script execution output                                                                  |
+    +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
+    | -f / --file <password_file.yml>              | Indicates route to file where new passwords are given                                                       |
+    +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
+    | -h / --help                                  | Shows help                                                                                                  |
+    +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
 
     To generate and change passwords for all users, run the script with the ``-a`` option:
 
@@ -104,6 +111,67 @@ Changing the default passwords of Elasticsearch is highly recommended in order t
         The password for snapshotrestore is rd35bCchP3Uf-0w77VCEJzHF7WEP3fNw
 
         Passwords changed. Remember to update the password in /etc/filebeat/filebeat.yml and /etc/kibana/kibana.yml if necessary and restart the services.
+
+    To use a formatted file to indicate the passwords, run the script with the ``-f`` option followed by the file path. Use the following pattern to indicate the users and passwords in the formatted file: 
+
+      .. code-block:: none
+
+        User: 
+            name: wazuh
+            password: <password_wazuh>
+
+        User: 
+            name: kibanaserver
+            password: <password_kibanaserver>
+
+    If the ``-a`` option is used in combination with the ``-f`` option, all users not included in the file are given a random password.
+
+      - For example, if the script is run with the following options:
+
+        .. code-block:: console
+          
+          # bash wazuh-passwords-tool.sh -a -f passwords.yml
+      
+      - And the content of ``passwords.yml`` is:
+
+        .. code-block:: none
+
+          User:
+              name:kibanaserver
+              password:kibanaserverpass
+          User:
+              name:admin
+              password:adminpass
+        
+      - The output would be:
+
+        .. code-block:: none
+          :class: output
+
+          Generating random passwords
+          Done
+          Creating backup...
+          Backup created
+          Generating hashes
+          Hashes generated
+          Loading changes...
+          Done
+
+          The password for admin is adminpass
+
+          The password for kibanaserver is kibanaserverpass
+
+          The password for kibanaro is zCd-SrihVwzfRxj5qPrwlSgmZJP9RsMA
+
+          The password for logstash is OmbPImuV5fv11R6XYAG92cUjaDy9PkdH
+
+          The password for readall is F2vglVGFJHXohwqEW5G4Tfjsiz-qqkTU
+
+          The password for snapshotrestore is rd35bCchP3Uf-0w77VCEJzHF7WEP3fNw
+
+          Passwords changed. Remember to update the password in /etc/filebeat/filebeat.yml and /etc/kibana/kibana.yml if necessary and restart the services.
+
+
   
 
     .. note:: The password may need to be updated in both ``/etc/filebeat/filebeat.yml`` and ``/etc/kibana/kibana.yml``. After changing the configuration files, remember to restart the corresponding services.
