@@ -1,6 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. meta:: :description: Learn how to install Elastic Stack for using Wazuh on Debian
+.. meta::
+  :description: The Wazuh server can be installed as a single-node cluster or as a multi-node cluster. Learn more about these deployment types in our documentation. 
 
 .. _wazuh_cluster:
 

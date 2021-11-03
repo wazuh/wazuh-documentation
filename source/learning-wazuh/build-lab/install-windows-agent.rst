@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+    :description: Learn more about how to prepare your Wazuh Lab Environment. In this section, we show you how to install the Windows Wazuh agent. 
+
 .. _build_lab_install_windows_agent:
 
 Install the Windows Wazuh agent

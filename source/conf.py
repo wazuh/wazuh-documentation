@@ -30,7 +30,7 @@ copyright = u'&copy; ' + str(datetime.datetime.now().year) + u' &middot; Wazuh I
 
 # The short X.Y version
 version = '4.1'
-is_latest_release = True
+is_latest_release = False
 
 # The full version, including alpha/beta/rc tags
 # Important: use a valid branch (4.0) or, preferably, tag name (v4.0.0)
@@ -136,7 +136,7 @@ html_theme_path = ['_themes']
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
-#html_title = None
+html_title = project + ' documentation'
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
 #html_short_title = None
@@ -209,7 +209,7 @@ html_show_sphinx = False
 html_show_copyright = True
 
 # If empty string, we eliminate permalinks from documentation.
-# html_add_permalinks = ""
+html_add_permalinks = ' '
 
 # If true, an OpenSearch description file will be output, and all pages will
 # contain a <link> tag referring to it.  The value of this option must be the

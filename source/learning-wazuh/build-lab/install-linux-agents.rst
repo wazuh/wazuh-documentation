@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Learn more about how to prepare your Wazuh Lab Environment. In this section, we show you how to install the Linux Wazuh agent. 
+
 .. _build_lab_install_linux_agents:
 
 Install the Linux Wazuh agents
@@ -45,7 +48,7 @@ Install and start the Wazuh agent software
   .. code-block:: console
 
     # WAZUH_MANAGER="172.30.0.10" WAZUH_REGISTRATION_PASSWORD="please123" \
-    WAZUH_PROTOCOL="tcp" yum -y install wazuh-agent
+    WAZUH_PROTOCOL="tcp" yum -y install wazuh-agent-4.1.5-1
     # systemctl start wazuh-agent
 
 Verify the agent has properly connected:

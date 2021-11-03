@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Check out how to configure the manager to listen for events from the agents and an example of configuration in this section of the Wazuh documentation. 
+  
 .. _reference_ossec_remote:
 
 remote
