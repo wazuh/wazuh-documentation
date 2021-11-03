@@ -5,8 +5,8 @@
   
 .. _wazuh-rbac:
 
-Wazuh role-based access control
-===============================
+Wazuh RBAC - How to create and map internal users
+=================================================
 
 Wazuh RBAC allows access to Wazuh resources based on the roles and policies assigned to the users. It is an easy-to-use administration system that enables to manage users' or entities' permissions to the system resources. To learn more, see the :ref:`Role-Based Access Control <api_rbac>` section. 
 

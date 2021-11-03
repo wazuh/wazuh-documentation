@@ -22,7 +22,7 @@ This manual describes the configuration process to start this plugin and the dif
         :maxdepth: 1
 
         features/index
-        wazuh-rbac
+        RBAC - create and map users <wazuh-rbac>
         troubleshooting
         reference/index
         
