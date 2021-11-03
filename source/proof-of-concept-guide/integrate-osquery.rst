@@ -3,12 +3,13 @@
 Osquery integration
 ===================
 
-Integrate Wazuh with Osquery to capture additional information from the monitored RHEL 7 endpoint.
+Wazuh agent can be integrated with Osquery, making it easy to capture additional information from the endpoint. This can be useful for telemetry and threat hinging.
 
-More information about using Osquery with Wazuh at :ref:`osquery`.
+More information about using Osquery with Wazuh can be found in the :ref:`Osquery <osquery>` of our documentation.
 
 Configuration
 -------------
+Configure your environment as follows to test the POC.
 
 #. Install Osquery on the monitored RHEL 7 endpoint.
 
@@ -16,7 +17,7 @@ Configuration
 
         # yum install -y https://pkg.osquery.io/rpm/osquery-4.5.1-1.linux.x86_64.rpm
 
-#. Set the content of the Osquery configuration file ``/etc/osquery/osquery.conf``.
+#. Add this content block to the Osquery configuration file ``/etc/osquery/osquery.conf``.
 
     .. code-block:: JSON
 
@@ -54,7 +55,7 @@ Configuration
             }
         }
 
-#. Edit ``/var/ossec/etc/ossec.conf`` at the monitored RHEL 7 endpoint and enable the Osquery wodle.
+#. Edit ``/var/ossec/etc/ossec.conf`` on the monitored RHEL 7 endpoint and enable the Osquery wodle. The Wazuh module takes care of running Osquery when needed so there is no need to start Osqueryd.
   
     .. code-block:: XML
 
@@ -82,8 +83,8 @@ Steps to generate the alerts
 
 No action required. Wazuh automatically reads the ``/var/log/osquery/osqueryd.results.log`` file and generates alerts based on the these logs.
 
-Alerts
-------
+Querying the alerts
+-------------------
 
 Related alerts can be found with:
 

@@ -119,8 +119,8 @@ Steps to generate the alerts
 
 #. Log in to the attacker's system (the monitored Windows endpoint) and connect to the victim's (the Apache server in the monitored RHEL7 endpoint) from a web browser. The custom firewall rule will temporarily block any connection from the attacker system for 60 seconds.
 
-Alerts
-------
+Querying the alerts
+-------------------
 
 Related alerts can be found with:
 

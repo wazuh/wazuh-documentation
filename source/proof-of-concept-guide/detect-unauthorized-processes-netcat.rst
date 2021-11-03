@@ -3,14 +3,16 @@
 Detecting unauthorized processes - Netcat
 =========================================
 
-Detect if Netcat is running on the monitored RHEL 7 host.
+Wazuh is capable of detecting if Netcat is running on a monitored host.
 
 You can learn more about the :ref:`command monitoring capability <manual_command_monitoring>` in the documentation.
 
 Configuration
 -------------
 
-#. Add the following configuration block under the `<localfile>` section of the ``/var/ossec/etc/ossec.conf`` at the monitored RHEL 7 endpoint. This is to periodically get a list of running processes.
+Configure your environment as follows to test the POC.
+
+#. Add the following configuration block under the `<localfile>` section of the ``/var/ossec/etc/ossec.conf`` file at the monitored RHEL 7 endpoint. This is to periodically get a list of running processes.
 
     .. code-block:: XML
 
@@ -29,13 +31,13 @@ Configuration
 
         # systemctl restart wazuh-agent
 
-#. Install Netcat and required dependencies in the RHEL 7 agent endpoint.
+#. Install Netcat and required dependencies on the RHEL 7 agent endpoint.
 
     .. code-block:: console
 
         # yum install nmap-ncat
 
-#. Add following rules to ``/var/ossec/etc/rules/local_rules.xml`` at the Wazuh Manager's endpoint.
+#. Add following rules to ``/var/ossec/etc/rules/local_rules.xml`` at the Wazuh manager's endpoint.
 
     .. code-block:: XML
 
@@ -59,8 +61,8 @@ Steps to generate alerts
 
 #. Log in to the monitored RHEL 7 system and run ``nc -l 8000`` for 30 seconds.
 
-Alerts
-------
+Querying the alerts
+-------------------
 
 Related alerts can be found with:
 
@@ -69,4 +71,4 @@ Related alerts can be found with:
 Affected endpoints
 ------------------
 
-* RHEL 7 agent host.
+* RHEL 7 agent host

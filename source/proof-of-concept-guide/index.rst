@@ -19,7 +19,7 @@ Prerequisites
     * Wazuh agent (RHEL 7) 
     * Wazuh agent (Windows)
 
-To install these components, see the :ref:`Installation guide <installation_guide>` section.
+For information on how to install these components, see the :ref:`Installation guide <installation_guide>`.
 
 Proofs of Concept
 -----------------
