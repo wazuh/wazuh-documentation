@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: CBD lists are used to create a white/black list of users, file hashes, IPs, or domain names. Learn more about how to create CBD lists with Wazuh. 
+  
 .. _ruleset_cdb-list:
 
 Using CDB lists

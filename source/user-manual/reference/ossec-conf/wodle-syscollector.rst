@@ -1,5 +1,9 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+	:description: Check out this section about the local configuration of Wazuh and learn about the configuration options of the syscollector wodle.
+
+	
 .. _wodle-syscollector:
 
 wodle name="syscollector"
