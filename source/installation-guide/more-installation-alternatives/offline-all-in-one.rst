@@ -20,18 +20,14 @@ Prerequisites
 Download the packages and configuration files
 ---------------------------------------------
 
-#. Replace ``<deb|rpm>`` in the following command with your choice of package format and run it from a system with internet connection. This action executes a script that downloads all required files for the offline installation on x86_64 architectures.
+#. Replace ``<deb|rpm>`` in the following command with your choice of package format and run it from a Linux system with internet connection. This action executes a script that downloads all required files for the offline installation on x86_64 architectures.
 
     ..
       Add ``-a aarch64`` if you want to download files for `ARM64`  architectures.
 
-    .. tabs::
-
-      .. group-tab:: Linux
-
-        .. code-block:: console
-          
-          # curl -sO https://raw.githubusercontent.com/wazuh/wazuh-documentation/4329_Write_offline_installation_guide/resources/open-distro/download-offline-installation/wazuh-offline-download.sh && bash ./wazuh-offline-download.sh -p <deb|rpm>
+    .. code-block:: console
+      
+      # curl -sO https://raw.githubusercontent.com/wazuh/wazuh-documentation/4329_Write_offline_installation_guide/resources/open-distro/download-offline-installation/wazuh-offline-download.sh && bash ./wazuh-offline-download.sh -p <deb|rpm>
           
 #. Copy or move the ``./wazuh-offline/`` folder contents to a folder accessible to the host from where the offline installation will be carried out.
 
