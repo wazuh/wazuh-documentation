@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+	:description: Check out this guide to learn how to install the Wazuh manager if you are deploying Wazuh with Ansible, an open source platform designed for automating tasks.
+	
 .. _wazuh_ansible_wazuh_manager:
 
 Install Wazuh Manager

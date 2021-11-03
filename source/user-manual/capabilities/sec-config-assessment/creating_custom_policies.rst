@@ -1,5 +1,9 @@
 Creating custom SCA policies
 ----------------------------
+
+.. meta::
+    :description: Learn more about how to create custom Security Configuration Assessment (SCA) policies with Wazuh and discover some examples. 
+
 .. contents:: Table of Contents
    :depth: 10
 

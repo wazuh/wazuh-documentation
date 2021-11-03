@@ -1,6 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. meta:: :description: Wazuh manager sources installation
+.. meta::
+  :description: Check out how to install the Wazuh server from sources in this section of our documentation. 
 
 .. _wazuh_server_source_installation:
 

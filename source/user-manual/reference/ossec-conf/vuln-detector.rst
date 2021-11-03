@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Learn more about the available options and how to configure the Vulnerability Detector module of Wazuh in this section of our documentation.
+
 .. _vuln_detector:
 
 vulnerability-detector
