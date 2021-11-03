@@ -87,6 +87,8 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
 #. To map the user with Wazuh, follow these steps:
 
+   #. Click the upper-left menu icon to open the available options and click **Wazuh**.  
+
    #. Click **Wazuh** to open the menu, select **Security** and then **Roles mapping** to open the page.
 
    #. Click **Create Role mapping** and complete the empty fields with the following parameters:
