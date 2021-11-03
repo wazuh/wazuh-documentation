@@ -155,6 +155,7 @@ Bucket options
 - `bucket\\path_suffix`_
 - `bucket\\only_logs_after`_
 - `bucket\\regions`_
+- `bucket\\aws_organization_id`_
 - `bucket\\discard_regex`_
 - `bucket\\sts_endpoint`_
 - `bucket\\service_endpoint`_
@@ -720,3 +721,4 @@ The endpoint URL for the required AWS Service to be used to download the data fr
 +--------------------+------------------------------------------------+
 | **Allowed values** | Any valid endpoint URL for the AWS Service     |
 +--------------------+------------------------------------------------+
+
