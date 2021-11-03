@@ -185,7 +185,7 @@ frequency
 Frequency that the rootcheck is going to be executed (in seconds).
 
 +--------------------+-----------------------------+
-| **Default value**  | 36000                       |
+| **Default value**  | 43200                       |
 +--------------------+-----------------------------+
 | **Allowed values** | A positive number (seconds) |
 +--------------------+-----------------------------+
