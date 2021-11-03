@@ -59,22 +59,30 @@ Enrollment configuration block example
 --------------------------------------
 
 .. code-block:: xml
-  
+    :emphasize-lines: 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22    
+
     <client>
-     .
-     .
-     .
-      <enrollment>
-        <enabled>yes</enabled>
-        <agent_name>EXAMPLE_NAME</agent_name>
-        <groups>GROUP1,GROUP2,GROUP3</groups>
-        <use_source_ip>yes</use_source_ip>
-        <authorization_pass_path>FILE_PATH</authorization_pass_path>
-        <server_ca_path>FILE_PATH<server_ca_path>
-        <agent_certificate_path>FILE_PATH<agent_certificate_path>
-        <agent_key_path>FILE_PATH<agent_key_path>
-        <delay_after_enrollment>15<delay_after_enrollment>
-      </enrollment>
+        <server>
+        <address>192.168.119.131</address>
+        <port>1514</port>
+        <protocol>tcp</protocol>
+        </server>
+        <config-profile>ubuntu, ubuntu18, ubuntu18.04</config-profile>
+        <notify_time>10</notify_time>
+        <time-reconnect>60</time-reconnect>
+        <auto_restart>yes</auto_restart>
+        <crypto_method>aes</crypto_method>
+        <enrollment>
+            <enabled>yes</enabled>
+            <agent_name>EXAMPLE_NAME</agent_name>
+            <groups>GROUP1,GROUP2,GROUP3</groups>
+            <use_source_ip>yes</use_source_ip>
+            <authorization_pass_path>FILE_PATH</authorization_pass_path>
+            <server_ca_path>FILE_PATH<server_ca_path>
+            <agent_certificate_path>FILE_PATH<agent_certificate_path>
+            <agent_key_path>FILE_PATH<agent_key_path>
+            <delay_after_enrollment>15<delay_after_enrollment>
+        </enrollment>
     </client>
  
  
@@ -122,19 +130,20 @@ In the following example, we show how an Ubuntu Wazuh agent can be configured, r
 
 After following these steps, we can see the below logs on ``/var/ossec/log/ossec.log`` confirming the enrollment was successful:
 
-.. code-block:: console
+.. code-block:: none
+        :class: output
 
-    # wazuh-agentd: INFO: (1410): Reading authentication keys file.
-    # wazuh-agentd: INFO: Using notify time: 10 and max time to reconnect: 60
-    # wazuh-agentd: INFO: Version detected -> Linux |ubuntu |5.3.0-28-generic |#30~18.04.1-Ubuntu SMP Fri Jan 17 06:14:09 UTC 2020 |x86_64 [Ubuntu|ubuntu: 18.04.4 LTS (Bionic Beaver)] - Wazuh v4.2.4
-    # wazuh-agentd: INFO: Started (pid: 8082).
-    # wazuh-agentd: INFO: Server IP Address: 192.168.119.131
-    # wazuh-agentd: INFO: Requesting a key from server: 192.168.119.131
-    # wazuh-agentd: INFO: No authentication password provided
-    # wazuh-agentd: INFO: Using agent name as: TEST_AGENT_1
-    # wazuh-agentd: INFO: Waiting for server reply
-    # wazuh-agentd: INFO: Valid key received
-    # wazuh-agentd: INFO: Waiting 20 seconds before server connection
+        wazuh-agentd: INFO: (1410): Reading authentication keys file.
+        wazuh-agentd: INFO: Using notify time: 10 and max time to reconnect: 60
+        wazuh-agentd: INFO: Version detected -> Linux |ubuntu |5.3.0-28-generic |#30~18.04.1-Ubuntu SMP Fri Jan 17 06:14:09 UTC 2020 |x86_64 [Ubuntu|ubuntu: 18.04.4 LTS (Bionic Beaver)] - Wazuh v4.2.4
+        wazuh-agentd: INFO: Started (pid: 8082).
+        wazuh-agentd: INFO: Server IP Address: 192.168.119.131
+        wazuh-agentd: INFO: Requesting a key from server: 192.168.119.131
+        wazuh-agentd: INFO: No authentication password provided
+        wazuh-agentd: INFO: Using agent name as: TEST_AGENT_1
+        wazuh-agentd: INFO: Waiting for server reply
+        wazuh-agentd: INFO: Valid key received
+        wazuh-agentd: INFO: Waiting 20 seconds before server connection
 
 
 And ``/var/ossec/etc/client.keys`` should now contain the obtained key:
