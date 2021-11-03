@@ -2,6 +2,6 @@
 
 .. code-block:: console
 
-  # apt-get install wazuh-agent
+  # apt-get install wazuh-agent=4.1.5-1
 
 .. End of include file

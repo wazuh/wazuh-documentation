@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Learn how to create a Certificate of Authority (CA) and the available options to register the Wazuh agent using host verification.
+  
 .. _host-verification-registration:
 
 Registration service with host verification

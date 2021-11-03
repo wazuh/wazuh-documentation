@@ -1,7 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: This section of the Wazuh documentation describes the checks performed by Wazuh to find the anomalies caused by an intruder or malware.
+  :description: Learn more about the Wazuh Anomaly Detection capability and the checks performed to find the anomalies caused by an intruder or malware.
+
   
 How it works
 ============

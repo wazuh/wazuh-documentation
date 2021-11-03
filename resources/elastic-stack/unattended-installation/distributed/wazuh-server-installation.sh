@@ -11,15 +11,18 @@
 ## Check if system is based on yum or apt-get
 ips=()
 debug='> /dev/null 2>&1'
-if [ -n "$(command -v yum)" ]
-then
+WAZUH_VER="4.1.5"
+WAZUH_REV="1"
+ELK_VER="7.11.2"
+if [ -n "$(command -v yum)" ]; then
     sys_type="yum"
-elif [ -n "$(command -v zypper)" ]
-then
-    sys_type="zypper"
-elif [ -n "$(command -v apt-get)" ]
-then
-    sys_type="apt-get"
+    sep="-"
+elif [ -n "$(command -v zypper)" ]; then
+    sys_type="zypper"   
+    sep="-"  
+elif [ -n "$(command -v apt-get)" ]; then
+    sys_type="apt-get"   
+    sep="="
 fi
 
 logger() {
@@ -228,9 +231,9 @@ installWazuh() {
     logger "Installing the Wazuh manager..."
     if [ $sys_type == "zypper" ]
     then
-        eval "zypper -n install wazuh-manager $debug"
+        eval "zypper -n install wazuh-manager${sep}${WAZUH_VER}-${WAZUH_REV} $debug"
     else
-        eval "$sys_type install wazuh-manager -y -q $debug"
+        eval "$sys_type install wazuh-manager${sep}${WAZUH_VER}-${WAZUH_REV} -y -q $debug"
     fi
     if [  "$?" != 0  ]
     then
@@ -255,13 +258,13 @@ installFilebeat() {
 
     if [ $sys_type == "yum" ]
     then
-        eval "yum install filebeat-7.11.2 -y -q  $debug"    
+        eval "yum install filebeat-${ELK_VER} -y -q  $debug"    
     elif [ $sys_type == "zypper" ] 
     then
-        eval "zypper -n install filebeat-7.11.2 $debug"
+        eval "zypper -n install filebeat-${ELK_VER} $debug"
     elif [ $sys_type == "apt-get" ] 
     then
-        eval "apt-get install filebeat=7.11.2 -y -q  $debug"
+        eval "apt-get install filebeat=${ELK_VER} -y -q  $debug"
     fi
     if [  "$?" != 0  ]
     then

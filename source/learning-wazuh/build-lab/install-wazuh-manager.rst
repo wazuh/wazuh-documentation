@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Check out how to install the Wazuh server components in this section of the Wazuh documentation in this step-by-step guide. 
+  
 .. _build_lab_install_wazuh_server:
 
 Install Wazuh server Components
@@ -43,7 +46,7 @@ Install the Wazuh manager software and start its service:
 
   .. code-block:: console
 
-    # yum -y install wazuh-manager
+    # yum -y install wazuh-manager-4.1.5-1
     # systemctl start wazuh-manager
 
 Configure Wazuh manager to allow self registration of new agents with authentication:
