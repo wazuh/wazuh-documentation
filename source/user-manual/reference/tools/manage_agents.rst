@@ -55,13 +55,13 @@ Options
 +---------------+-----------------------------+-----------------------------------------+
 | **-R <sec>**  | Remove agents with duplicated IP if registered since <sec> seconds.   |
 |               |                                                                       |
-|               | With ``-R 0`` it will remove **any** duplicate agent.                 |
+|               | With ``-R 0``, it removes **any** duplicate of an agent.              |
 |               +-----------------------------+-----------------------------------------+
 |               | **Supported installations** | Manager                                 |
 +---------------+-----------------------------+-----------------------------------------+
 | **-D <sec>**  | Remove agents with duplicated IP if disconnected since <sec> seconds. |
 |               |                                                                       |
-|               | With ``-D 0`` it will remove **any** duplicate disconnected agent.    |
+|               | With ``-D 0``, it removes **any** duplicate of a disconnected agent.  |
 |               +-----------------------------+-----------------------------------------+
 |               | **Supported installations** | Manager                                 |
 +---------------+-----------------------------+-----------------------------------------+
