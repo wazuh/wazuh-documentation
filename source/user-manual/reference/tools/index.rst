@@ -8,7 +8,7 @@ Tools
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | Tools                                             | Descriptions                                                               | Supported installations     |
 +===================================================+============================================================================+=============================+
-| :doc:`ossec-control <ossec-control>`              | Manages the status of Wazuh processes                                      | manager, agent              |
+| :doc:`wazuh-control <wazuh-control>`              | Manages the status of Wazuh processes                                      | manager, agent              |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`agent-auth <agent-auth>`                    | Adds agents to a Wazuh manager                                             | agent                       |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
@@ -20,33 +20,15 @@ Tools
 |                                                   |                                                                            |                             |
 |                                                   | keys for  agents                                                           |                             |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :doc:`ossec-logtest <ossec-logtest>`              | Allows testing and verification of rules against provided log records      | manager                     |
-|                                                   |                                                                            |                             |
-|                                                   | .. deprecated:: 4.1.0                                                      |                             |
-+---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`wazuh-logtest <wazuh-logtest>`              | Allows testing and verification of rules against provided log records      | manager                     |
-+---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :doc:`ossec-makelists <ossec-makelists>`          | Compiles cdb databases                                                     | manager                     |
-+---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :doc:`rootcheck_control <rootcheck_control>`      | Allows management of policy monitoring                                     | manager                     |
-|                                                   |                                                                            |                             |
-|                                                   | and system auditing database                                               |                             |
-+---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :doc:`syscheck_control <syscheck_control>`        | Provides an interface for managing the integrity checking database         | manager                     |
-|                                                   |                                                                            |                             |
-|                                                   | .. deprecated:: 3.7                                                        |                             |
-+---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :doc:`syscheck_update <syscheck_update>`          | Updates the integrity check database                                       | manager                     |
-|                                                   |                                                                            |                             |
-|                                                   | .. deprecated:: 3.7                                                        |                             |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`clear_stats <clear_stats>`                  | Clears the events stats                                                    | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :doc:`ossec-regex <ossec-regex>`                  | Validates a regex expression                                               | manager                     |
+| :doc:`wazuh-regex <wazuh-regex>`                  | Validates a regex expression                                               | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`update_ruleset <update_ruleset>`            | Update Decoders, Rules and Rootchecks                                      | manager                     |
-+---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :doc:`util.sh <util.sh>`                          | Adds a file to be monitored by ossec-logcollector                          | manager agent               |
+|                                                   |                                                                            |                             |
+|                                                   | .. deprecated:: 4.2                                                        |                             |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`verify-agent-conf <verify-agent-conf>`      | Verifies the Wazuh agent.conf configuration                                | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
@@ -68,17 +50,11 @@ Tools
     agent-auth
     agent_control
     manage_agents
-    ossec-control
-    ossec-logtest
+    wazuh-control
     wazuh-logtest
-    ossec-makelists
-    rootcheck_control
-    syscheck_control
-    syscheck_update
     clear_stats
-    ossec-regex
+    wazuh-regex
     update_ruleset
-    util.sh
     verify-agent-conf
     agent_groups
     agent_upgrade

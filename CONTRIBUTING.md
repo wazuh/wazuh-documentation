@@ -15,7 +15,6 @@ Keep in mind that this repository is for the Wazuh documentation. There are some
 - If you think that Wazuh is working fine but you find the documentation **inaccurate, incorrect or confusing**, then create the issue [here](https://github.com/wazuh/wazuh-documentation/issues) in this repository.
 - If you have **problems, bugs or unexpected results** when using any of the Wazuh components, create the issue in its respective repository:
   - [Wazuh Core](https://github.com/wazuh/wazuh/issues)
-  - [Wazuh Ruleset](https://github.com/wazuh/wazuh-ruleset/issues)
   - [Wazuh API](https://github.com/wazuh/wazuh-api/issues)
   - [Wazuh Kibana app](https://github.com/wazuh/wazuh-kibana-app/issues)
   - [Wazuh Splunk app](https://github.com/wazuh/wazuh-splunk/issues)

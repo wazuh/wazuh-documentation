@@ -5,7 +5,7 @@
 How it works
 ============
 
-Wazuh-Logtest is a powerful feature for working with rules. This solution allows the testing and verification of rules 
+Wazuh-Logtest is a powerful feature for working with rules. This solution allows the testing and verification of rules
 and decoders before putting them into production.
 Wazuh-Logtest is based on the use of unique sessions. Each session stores its own rules and decoders loaded.
 There are two use cases to evaluate rules through Wazuh-Logtest:
@@ -41,6 +41,10 @@ The output of Wazuh-logtest from the above record is as follows:
     .. code-block:: none
         :class: output
 
+            Type one log per line
+
+            Oct 15 21:07:00 linux-agent sshd[29205]: Invalid user blimey from 18.18.18.18 port 48928
+
             **Phase 1: Completed pre-decoding.
                     full event: 'Oct 15 21:07:00 linux-agent sshd[29205]: Invalid user blimey from 18.18.18.18 port 48928'
                     timestamp: 'Oct 15 21:07:00'
@@ -64,13 +68,15 @@ The output of Wazuh-logtest from the above record is as follows:
                     gpg13: '['7.1']'
                     hipaa: '['164.312.b']'
                     mail: 'False'
-                    mitre: '{'id': ['T1110'], 'tactic': ['Credential Access'], 'technique': ['Brute Force']}'
+                    mitre.id: '['T1110']'
+                    mitre.tactic: '['Credential Access']'
+                    mitre.technique: '['Brute Force']'
                     nist_800_53: '['AU.14', 'AC.7', 'AU.6']'
                     pci_dss: '['10.2.4', '10.2.5', '10.6.1']'
                     tsc: '['CC6.1', 'CC6.8', 'CC7.2', 'CC7.3']'
             **Alert to be generated.
 
-As in Ossec-Logtest this indicates that rule 5710 level 5 matches and an alert is generated.
+This indicates that rule 5710 level 5 matches and an alert is generated.
 If the log is pasted 8 times, in the filtering phase (rules) the 'firedtime' counter will increase until it reaches 8.
 Then rule 5712 matches level 10 is triggered by the frequency of rule 5710 and an alert is generated:
 
@@ -100,7 +106,9 @@ Then rule 5712 matches level 10 is triggered by the frequency of rule 5710 and a
                 gdpr: '['IV_35.7.d', 'IV_32.2']'
                 hipaa: '['164.312.b']'
                 mail: 'False'
-                mitre: '{'id': ['T1110'], 'tactic': ['Credential Access'], 'technique': ['Brute Force']}'
+                mitre.id: '['T1110']'
+                mitre.tactic: '['Credential Access']'
+                mitre.technique: '['Brute Force']'
                 nist_800_53: '['SI.4', 'AU.14', 'AC.7']'
                 pci_dss: '['11.4', '10.2.4', '10.2.5']'
                 tsc: '['CC6.1', 'CC6.8', 'CC7.2', 'CC7.3']'
@@ -151,10 +159,10 @@ Check that everything works correctly
         {
             "data": {
                 "title": "Wazuh API REST",
-                "api_version": "4.1.0",
+                "api_version": "4.2.0",
                 "revision": 40100,
                 "license_name": "GPL 2.0",
-                "license_url": "https://github.com/wazuh/wazuh/blob/4.1/LICENSE",
+                "license_url": "https://github.com/wazuh/wazuh/blob/4.2/LICENSE",
                 "hostname": "wazuh-manager",
                 "timestamp": "2020-11-10T15:15:31+0000"
             },
@@ -164,7 +172,7 @@ Check that everything works correctly
 2. First request for Logtest
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The first time a processing request is sent it has no token, since there is no active session, then a processing 
+The first time a processing request is sent it has no token, since there is no active session, then a processing
 log request is sent to Logtest in Analysisd.
 
 The following sample data is used for request
@@ -296,7 +304,7 @@ Then the request is send to logtest
 As in :ref:`wazuh-logtest tool <wazuh-logtest>` this indicates that rule 5710 level 5 matches and an alert is generated.
 The messages field gives information that a session was initialized with the ``95375d4c`` token.
 This token should be added to the next requests to keep the session, including its event history, rules and
-docoders loaded. If the token field is not added to the next request, a new session will be initialized, 
+docoders loaded. If the token field is not added to the next request, a new session will be initialized,
 reloading the rules and decoders.
 
 

@@ -30,6 +30,8 @@ Options
 - `packages`_
 - `ports`_
 - `hotfixes`_
+- `synchronization`_
+
 
 +----------------------+-----------------------------+
 | Options              | Allowed values              |
@@ -54,6 +56,7 @@ Options
 +----------------------+-----------------------------+
 | `hotfixes`_          | yes, no                     |
 +----------------------+-----------------------------+
+
 
 
 disabled
@@ -180,6 +183,35 @@ Enables the hotfixes scan. It reports the Windows updates installed.
   This option is enabled by default but no included in the initial configuration.
 
 
+synchronization
+^^^^^^^^^^^^^^^
+
+.. versionadded:: 4.2.0
+
+The database synchronization settings are configured inside this tag.
+
+.. code-block:: xml
+
+	<wodle name="syscollector">
+	  <synchronization>
+	    <max_eps>10</max_eps>
+	  </synchronization>
+	</wodle>
+
+max_eps
+^^^^^^^
+
+.. versionadded:: 4.2.0
+
+Sets the maximum event reporting throughput.
+
++--------------------+--------------------------------------------------------------+
+| **Default value**  | 10                                                           |
++--------------------+--------------------------------------------------------------+
+| **Allowed values** | Integer number between 0 and 1000000. 0 means default value. |
++--------------------+--------------------------------------------------------------+
+
+
 Example of configuration
 ------------------------
 
@@ -195,4 +227,9 @@ Example of configuration
 	  <packages>yes</packages>
 	  <ports all="no">yes</ports>
 	  <processes>yes</processes>
+
+	  <!-- Database synchronization settings -->
+	  <synchronization>
+	    <max_eps>10</max_eps>
+	  </synchronization>
 	</wodle>

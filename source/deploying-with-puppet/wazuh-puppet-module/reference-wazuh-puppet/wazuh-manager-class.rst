@@ -287,12 +287,12 @@ $ossec_rootcheck_ignore_list
 $ossec_rootcheck_rootkit_files
   Change the location of the rootkit files database.
 
-  `Default '/var/ossec/etc/shared/rootkit_files.txt'`
+  `Default 'etc/shared/rootkit_files.txt'`
 
 $ossec_rootcheck_rootkit_trojans
   Change the location of the rootkit trojans database.
 
-  `Default '/var/ossec/etc/shared/rootkit_trojans.txt'`
+  `Default 'etc/shared/rootkit_trojans.txt'`
 
 $ossec_rootcheck_skip_nfs
   Enable or disable the scanning of network mounted filesystems (Works on Linux and FreeBSD). Currently, skip_nfs will exclude checking files on CIFS or NFS mounts.
@@ -608,11 +608,6 @@ $wazuh_api_port
 
   `Default 55000`
 
-$wazuh_api_behind_proxy_server
-  Set this option to “yes” in case the Wazuh API is running behind a proxy server.
-
-  `Default true`
-
 $wazuh_api_https_enabled
   Enable or disable SSL (https) in the Wazuh API.
 
@@ -694,12 +689,12 @@ $wazuh_api_access_block_time
   `Default 300`
 
 $wazuh_api_access_max_request_per_minute
-  Establish a maximum number of requests the Wazuh API can handle per minute (does not include authentication requests). If the number of requests for a given minute is exceeded, all incoming requests (from any user) will be blocked.
+  Establish a maximum number of requests the Wazuh API can handle per minute (does not include authentication requests). If the number of requests for a given minute is exceeded, all incoming requests (from any user) will be blocked. This feature can be disabled by setting its value to 0.
 
   `Default 300`
 
 $wazuh_api_use_only_authd
-  Forces the use of ossec-authd when registering and removing agents.
+  Forces the use of wazuh-authd when registering and removing agents.
 
   `Default false`
 
@@ -936,10 +931,7 @@ $command_name
   Human readable name for wazuh::activeresponse usage.
 
 $command_executable
-  Name of the executable. OSSEC comes preloaded with disable-account.sh, host-deny.sh, ipfw.sh, pf.sh, route-null.sh, firewall-drop.sh, ipfw_mac.sh, ossec-tweeter.sh, restart-ossec.sh.
-
-$command_expect
-  `Default srcip`
+  Name of the executable. WAZUH comes preloaded with disable-account, host-deny, ipfw, pf, route-null, firewall-drop, wazuh-slack, restart-wazuh.
 
 $timeout_allowed
   `Default true`
@@ -954,7 +946,7 @@ $active_response_name
 
 $active_response_disabled
   Toggles the active-response capability on and off.
-  
+
 $active_response_command
   Links the active-response to the command.
 

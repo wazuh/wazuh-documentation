@@ -138,7 +138,7 @@ Generate a log flood on linux-agent
         #!/bin/bash
         for i in {1..10000}
         do
-          echo -n "1:floodtest:Feb  3 03:08:47 linux-agent centos: fatal firehose $i" | ncat -Uu /var/ossec/queue/ossec/queue
+          echo -n "1:floodtest:Feb  3 03:08:47 linux-agent centos: fatal firehose $i" | ncat -Uu /var/ossec/queue/sockets/queue
           echo -n "."
         done
 
@@ -146,7 +146,7 @@ Generate a log flood on linux-agent
         While we could write records to a log file monitored by Wazuh agent,
         this script takes an even faster approach of writing records directly
         to the Wazuh agent's internal socket. This is where components like
-        **ossec-logcollector** streams new log lines from log files.
+        **wazuh-logcollector** streams new log lines from log files.
 
         The script uses netcat to do this, but any tool that can write datagrams
         to a Unix socket will do the job. Sometimes it is desirable to have a script

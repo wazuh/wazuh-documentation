@@ -14,34 +14,94 @@ The Wazuh server collects and analyzes data from deployed agents. It runs the Wa
 Installing Wazuh manager
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
+.. note:: CMake 3.12.4 is the minimal library version required to build the Wazuh server solution.
+
 .. tabs::
 
 
   .. group-tab:: Yum
 
-    .. code-block:: console
 
-        # yum install make cmake gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool
-  
+      .. tabs::
+
+
+        .. tab:: CentOS 6/7
+
+          .. code-block:: console
+
+            # yum update
+            # yum install make gcc gcc-c++ policycoreutils-python automake autoconf libtool centos-release-scl openssl-devel
+            # yum update
+            # yum install devtoolset-7
+            # scl enable devtoolset-7 bash
+
+
+          CMake 3.18 installation
+
+          .. code-block:: console
+
+            # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
+            # cd cmake-3.18.3 && ./bootstrap --no-system-curl
+            # make -j$(nproc) && make install
+            # cd .. && rm -rf cmake-*
+
+
+        .. tab:: CentOS 8
+
+          .. code-block:: console
+
+            # yum install make cmake gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool openssl-devel cmake
+            # rpm -i $(rpm --eval https://packages.wazuh.com/utils/libstdc%2B%2B/libstdc%2B%2B-static-8.4.1-1.el8.'%{_arch}'.rpm)
+
+
+          **Optional** CMake 3.18 installation from sources
+
+          .. code-block:: console
+
+            # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
+            # cd cmake-3.18.3 && ./bootstrap --no-system-curl
+            # make -j$(nproc) && make install
+            # cd .. && rm -rf cmake-*
+            # export PATH=/usr/local/bin:$PATH
+
+
   .. group-tab:: APT
 
 
     .. code-block:: console
 
-      # apt-get install python gcc make libc6-dev curl policycoreutils automake autoconf libtool
+      # apt-get install python gcc g++ make libc6-dev curl policycoreutils automake autoconf libtool
+
+
+    CMake 3.18 installation
+
+    .. code-block:: console
+
+      # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
+      # cd cmake-3.18.3 && ./bootstrap --no-system-curl
+      # make -j$(nproc) && make install
+      # cd .. && rm -rf cmake-*
 
   .. group-tab:: ZYpp
 
 
     .. code-block:: console
 
-        # zypper install make gcc policycoreutils-python automake autoconf libtool
+        # zypper install make cmake gcc gcc-c++ policycoreutils-python automake autoconf libtool
+
+    CMake 3.18 installation
+
+    .. code-block:: console
+
+      # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
+      # cd cmake-3.18.3 && ./bootstrap --no-system-curl
+      # make -j$(nproc) && make install
+      # cd .. && rm -rf cmake-*
 
 
+**Optional**. Install the following dependencies **only when compiling the CPython from sources**. Since v4.2.0, ``make deps TARGET=server`` will download a portable version of CPython ready to be installed. Nevertheless, you can download the CPython sources adding the ``PYTHON_SOURCE`` flag when running ``make deps``.
 
-**Optional**. Install the following dependencies **only if the installation directory is not** ``/var/ossec``. Since v3.9.0, ``make deps`` or ``make deps TARGET=server`` will download a pre-compiled version of CPython, built to be installed in ``/var/ossec``. Otherwise, it will download a modified version of CPython sources and it will be necessary to compile it.
-
-To install the build dependencies of CPython, follow these steps:
+To install the required dependencies to build the python interpreter, follow these steps:
 
 .. tabs::
 
@@ -142,12 +202,11 @@ Filebeat is a data shipping tool that is installed on the Wazuh server to secure
 Uninstall
 ~~~~~~~~~
 
-To uninstall Wazuh manager:
+To uninstall Wazuh manager, set WAZUH_HOME with the current installation path:
 
     .. code-block:: console
 
-      # OSSEC_INIT="/etc/ossec-init.conf"
-      # . $OSSEC_INIT 2> /dev/null
+      # WAZUH_HOME="/WAZUH/INSTALLATION/PATH"
 
 Stop the service:
 
@@ -159,13 +218,13 @@ Stop the daemon:
 
   .. code-block:: console
 
-    # $DIRECTORY/bin/ossec-control stop 2> /dev/null
+    # $WAZUH_HOME/bin/wazuh-control stop 2> /dev/null
 
-Remove files and service artifacts:
+Remove the installation folder and all its content:
 
   .. code-block:: console
 
-    # rm -rf $DIRECTORY $OSSEC_INIT
+    # rm -rf $WAZUH_HOME
 
 Delete the service:
 
@@ -173,8 +232,8 @@ Delete the service:
 
     .. code-block:: console
 
-      # [ -f /etc/rc.local ] && sed -i'' '/ossec-control start/d' /etc/rc.local
-      # find /etc/{init.d,rc*.d} -name "*wazuh" | xargs rm -f
+      # [ -f /etc/rc.local ] && sed -i'' '/wazuh-control start/d' /etc/rc.local
+      # find /etc/{init.d,rc*.d} -name "*wazuh*" | xargs rm -f
 
   For Systemd:
 

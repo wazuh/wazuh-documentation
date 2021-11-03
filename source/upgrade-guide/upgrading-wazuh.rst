@@ -8,72 +8,101 @@
 Upgrading the Wazuh manager
 ===========================
 
-This section describes how to upgrade the Wazuh manager to the latest available version. When upgrading a Wazuh multi-node cluster, it is recommended to update the master node first to reduce server downtime.
+Upgrade the Wazuh manager to the latest available version. When upgrading a Wazuh multi-node cluster, it is recommended to update the master node first to reduce server downtime.
 
 
 .. note:: Root user privileges are required to execute all the commands described below.
 
+Upgrade the Wazuh manager
+-------------------------
+
 To upgrade the Wazuh manager, choose your package manager and follow the instructions. 
 
-.. tabs::
+#. Add the Wazuh repository:
 
-  .. group-tab:: Yum
 
-    .. include:: ../_templates/installations/basic/wazuh/yum/add_repository_aio.rst
+    .. tabs::
 
-    3. Clean the YUM cache:
 
-      .. code-block:: console
+      .. group-tab:: Yum
 
-        # yum clean all
 
-    4. **(For upgrades from version 3.13.3)** Remove the Wazuh API:
+        .. include:: ../_templates/installations/wazuh/yum/add_repository.rst
 
-      .. code-block:: console
 
-          # yum remove wazuh-api
 
+      .. group-tab:: APT
+
+
+        .. include:: ../_templates/installations/wazuh/deb/add_repository.rst
+
+
+
+      .. group-tab:: ZYpp
+
+
+        .. include:: ../_templates/installations/wazuh/zypp/add_repository.rst    
+
+
+#. Stop the Wazuh manager:
+
+    .. tabs::
+
+ 
+      .. group-tab:: Systemd
+
+
+        .. code-block:: console
+
+          # systemctl stop wazuh-manager
+
+
+      .. group-tab:: SysV Init
+
+        .. code-block:: console
+
+          # service wazuh-manager stop
+
+
+#. Upgrade the Wazuh manager to the latest version:
+
+
+    .. tabs::
+
+
+      .. group-tab:: Yum
+
+         .. code-block:: console
+
+            # yum upgrade wazuh-manager
+
+
+
+      .. group-tab:: APT
+
+
+          .. code-block:: console
+
+              # apt-get install wazuh-manager
+
+
+
+      .. group-tab:: ZYpp
+
+
+          .. code-block:: console
+
+              # zypper update wazuh-manager
     
-    5. Upgrade the Wazuh manager to the latest version:
 
-      .. code-block:: console
+#. Restart the Wazuh manager:
+    
+   .. include:: ../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
 
-          # yum upgrade wazuh-manager
-
-  .. group-tab:: APT
-
-    .. include:: ../_templates/installations/basic/wazuh/deb/add_repository_aio.rst
-   
-    4. **(For upgrades from version 3.13.3)** Remove the Wazuh API:
-
-      .. code-block:: console 
-
-          # apt-get remove --purge wazuh-api
-
-    5. Upgrade the Wazuh manager to the latest version:
-
-      .. code-block:: console
-
-          # apt-get install wazuh-manager
-
-  .. group-tab:: ZYpp
-
-    .. include:: ../_templates/installations/basic/wazuh/zypp/add_repository_aio.rst
-
-    3. **(For upgrades from version 3.13.3)** Remove the Wazuh API:
-
-      .. code-block:: console 
-
-          # zypper remove wazuh-api
-
-    4. Upgrade the Wazuh manager to the latest version:
-
-      .. code-block:: console
-
-          # zypper update wazuh-manager
 
 
 .. note::
+
   The configuration file of the Wazuh manager will not be replaced in the updates if it has been modified, so the settings of the new capabilities will have to be added manually. More information can be found at the :ref:`User manual <user_manual>`.
 
   If Wazuh runs in a multi-node cluster, it is necessary to update all Wazuh managers to the same version. Otherwise, Wazuh nodes will not join the cluster.
@@ -113,9 +142,62 @@ To upgrade the Wazuh manager, choose your package manager and follow the instruc
       .. code-block:: console
   
         # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/wazuh.repo
-  
+    
+
 Next steps
 ----------
 
-The Wazuh manager is now successfully upgraded and you can proceed with upgrading the Elastic Stack. To perform this action, see the :ref:`Upgrading Elasticsearch, Kibana and Filebeat<upgrade_elasticsearch_filebeat_kibana>` section.
+The Wazuh manager is now successfully upgraded. To check if your version of Elastic Stack is compatible with the new Wazuh version, check our :ref:`compatibility matrix <wazuh_kibana_compatibility_matrix>`. 
+
+- To upgrade Elastic Stack, follow the instructions in the :ref:`Upgrading Elasticsearch, Kibana and Filebeat<upgrade_elasticsearch_filebeat_kibana>` section.
+- If you are going to keep the same version of Elastic Stack, unfold the next section and follow the instructions to replace the Wazuh Kibana plugin.  
+    
+Upgrade the Wazuh Kibana plugin
+-------------------------------
+
+.. raw:: html
+
+  <div class="accordion-section">
+
+#. Remove the old Wazuh Kibana plugin:
+
+   .. code-block:: console
+
+
+    # cd /usr/share/kibana/
+    # sudo -u kibana bin/kibana-plugin remove wazuh
+
+
+#. Install the new Wazuh Kibana plugin. Replace the Kibana version if necessary:
+
+    .. code-block:: console
+
+      # cd /usr/share/kibana/
+      # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|-1.zip
+
+
+
+#. Restart Kibana:
+
+   .. tabs::
+   
+     .. group-tab:: Systemd
+    
+      .. code-block:: console
+    
+       # systemctl restart kibana
+    
+     .. group-tab:: SysV init
+    
+      .. code-block:: console
+    
+       # service kibana restart
+    
+      
+#. Clear the browser’s cache and cookies.
+
+   
+
+
+
 

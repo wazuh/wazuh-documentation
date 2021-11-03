@@ -17,4 +17,6 @@ Active responses execute a script in response to the triggering of specific aler
 
         how-it-works
         remediation-configuration
+        custom-active-response
+        ar-use-cases/index
         remediation-faq

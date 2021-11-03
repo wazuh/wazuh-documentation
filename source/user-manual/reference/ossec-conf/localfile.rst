@@ -33,6 +33,8 @@ Options
 - `age`_
 - `exclude`_
 - `reconnect_time`_
+- `multiline_regex`_
+
 
 location
 ^^^^^^^^
@@ -41,7 +43,7 @@ Option to get the location of a log or a group of logs. ``strftime`` format stri
 
 For instance, a log file named ``file.log-2019-07-30`` can be referenced with ``file.log-%Y-%m-%d`` (assuming today is July 30th, 2019).
 
-Wildcards can be used on Linux and Windows systems, if the log file doesn't exist at ``ossec-logcollector`` start time, such log will be re-scanned after ``logcollector.vcheck_files`` seconds.
+Wildcards can be used on Linux and Windows systems, if the log file doesn't exist at ``wazuh-logcollector`` start time, such log will be re-scanned after ``logcollector.vcheck_files`` seconds.
 
 The location field is also valid to filter by channel in case of using an ``eventchannel`` supporting Windows.
 
@@ -142,17 +144,35 @@ Prevents a command from being executed in less time than the specified time (in 
 only-future-events
 ^^^^^^^^^^^^^^^^^^
 
-Set it to *no* to collect events generated since Wazuh agent was stopped.
+It allows to read new log content since ``wazuh-logcollector`` was stopped.
 
-By default, when Wazuh starts it will only read all log content from a given Windows Event Channel since the agent started.
-
-This feature is only compatible with `eventchannel` log format.
+By default, when ``wazuh-logcollector`` is started it reads the logs generated since that moment.
+Set it to ``no`` to collect events generated since ``wazuh-logcollector`` was stopped.
 
 +--------------------+-----------+
 | **Default value**  | yes       |
 +--------------------+-----------+
 | **Allowed values** | yes or no |
 +--------------------+-----------+
+
+The attributes below are optional.
+
++-------------+---------------------------------------+--------------+---------------+
+| Attribute   |              Description              | Value range  | Default value |
++=============+=======================================+==============+===============+
+|**max-size** | Allows to skip reading old events     |              |               |
+|             | from the last read if the length of   |  0 to 2GB    |     10MB      |
+|             | them exceeds a certain value in bytes.|              |               |
+|             |                                       |              |               |
+|             | Positive number followed by B, KB, MB |              |               |
+|             | and GB units are supported            |              |               |
+|             |                                       |              |               |
+|             | .. versionadded:: 4.2.0               |              |               |
++-------------+---------------------------------------+--------------+---------------+
+
+.. note::
+  If the log rotates while ``wazuh-logcollector`` is stopped and ``only-future-events`` is set to ``no``, it will start reading from the beginning of the log. 
+
 
 query
 ^^^^^
@@ -304,6 +324,12 @@ Set the format of the log to be read. **field is required**
 |                    |                    | may be multiple timestamps in the final event.                                                   |
 |                    |                    |                                                                                                  |
 |                    |                    | The format for this value is: <log_format>multi-line: NUMBER</log_format>                        |
++                    +--------------------+--------------------------------------------------------------------------------------------------+
+|                    | multi-line-regex   | Used to monitor applications that log variable amount lines with variable length per event.      |
+|                    |                    |                                                                                                  |
+|                    |                    | The behavior depends on `multiline_regex`_ option.                                               |
+|                    |                    |                                                                                                  |
+|                    |                    | .. versionadded:: 4.2.0                                                                          |
 +--------------------+--------------------+--------------------------------------------------------------------------------------------------+
 
 .. warning::
@@ -324,7 +350,7 @@ Sample of Multi-line log message in original log file:
     Aug 9 14:22:47 hostname log line three
     Aug 9 14:22:47 hostname log line five
 
-Sample Log message as analyzed by ossec-analysisd:
+Sample Log message as analyzed by wazuh-analysisd:
 
 .. code-block:: none
     :class: output
@@ -458,6 +484,75 @@ Defines the interval of reconnection attempts when the Windows Event Channel ser
 .. note::
 
     This option only applies when the ``log_format`` is ``eventchannel``.
+
+multiline_regex
+^^^^^^^^^^^^^^^
+.. versionadded:: 4.2.0
+
+This specifies a regular expression, match criteria and replace option for logs with a variable amount of lines.
+
++--------------------+--------------------------------------------------------------------------------------------+
+| **Default value**  | n/a                                                                                        |
++--------------------+--------------------------------------------------------------------------------------------+
+| **Allowed values** | Any `PCRE2 regular expression <../../ruleset/ruleset-xml-syntax/regex.html#pcre2-syntax>`_ |
++--------------------+--------------------------------------------------------------------------------------------+
+
+The attributes below are optional.
+
++-------------+---------------------------------------+--------------+---------------+
+| Attribute   |              Description              | Value range  | Default value |
++=============+=======================================+==============+===============+
+| **match**   | Allows to set how regex will handle   |   start      |    start      |
+|             | regex match.                          +--------------+               |
+|             |                                       |   end        |               |
+|             |                                       +--------------+               |
+|             |                                       |   all        |               |
++-------------+---------------------------------------+--------------+---------------+
+| **replace** | Allows to replace or remove           |  no-replace  |  no-replace   |
+|             | end-of-line.                          +--------------+               |
+|             |                                       |   wspace     |               |
+|             |                                       +--------------+               |
+|             |                                       |   tab        |               |
+|             |                                       +--------------+               |
+|             |                                       |   none       |               |
++-------------+---------------------------------------+--------------+---------------+
+| **timeout** | Allows to set max waiting time in     |   1 to 120   |      5        |
+|             | seconds to receive a new line         |              |               |
++-------------+---------------------------------------+--------------+---------------+
+
+.. note::
+    This option only applies when the `log_format`_ is ``multi-line-regex``.
+
+.. note::
+    The value of ``timeout`` attribute cannot be bigger than the value of the `age`_ option.
+
+The behavior of the ``match`` attribute is as follows
+
++-------------+-------------------------------------------------------------------------+
+| Match       |                       Description                                       |
++=============+=========================================================================+
+| **start**   | Group as one event the content between two lines that matches the regex.|
+|             |                                                                         |
+|             | The grouped event does not include the last matching line.              |
++-------------+-------------------------------------------------------------------------+
+|  **end**    | Group as one event the content until a line that matches the regex.     |
++-------------+-------------------------------------------------------------------------+
+|  **all**    | Group as one event the content until whole event match the regex.       |
++-------------+-------------------------------------------------------------------------+
+
+.. note::
+    ``start`` and ``end`` value for ``match`` attribute try to match the regex with a single line.
+
+For example, we may want to read a Python Traceback output as one single log, replacing newline with spaces
+
+.. code-block:: xml
+
+  <localfile>
+      <log_format>multi-line-regex</log_format>
+      <location>/var/logs/my_python_app.log</location>
+      <multiline_regex replace="wspace">^Traceback</multiline_regex>
+   </localfile>
+
 
 Configuration examples
 ----------------------

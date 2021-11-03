@@ -47,7 +47,7 @@ We recommend to store the lists on ``/var/ossec/etc/lists``.
 
 .. versionadded:: 3.11.0
 
-Since Wazuh v3.11.0, CDB lists are built and loaded automatically when the analysis engine is started. Therefore, when adding or modifying CDB lists, it is no longer needed to run ``ossec-makelists``, just restart the manager.
+Since Wazuh v3.11.0, CDB lists are built and loaded automatically when the analysis engine is started. Therefore, when adding or modifying CDB lists just restart the manager.
 
 Adding the list to ossec.conf
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -127,7 +127,7 @@ This example is a search for the key stored in the field attribute, and on a pos
 
      <list field="user" lookup="match_key_value" check_value="^block">etc/lists/list-user</list>
 
-In case the field is an IP address, you must use ``not_address_match_key``:
+In case the field is an IP address, you must use ``address_match_key_value``:
 
 .. code-block:: xml
 
@@ -141,7 +141,7 @@ CDB lists examples
 
   <rule id="110700" level="10">
     <if_group>json</if_group>
-    <list field="ip" lookup="address_match_key">etc/lists/List-one</list>
+    <list field="srcip" lookup="address_match_key">etc/lists/List-one</list>
     <description>IP blacklisted in LIST ONE</description>
     <group>list1,</group>
   </rule>
@@ -149,7 +149,7 @@ CDB lists examples
 
   <rule id="110701" level="10">
     <if_group>json</if_group>
-    <list field="ip" lookup="address_match_key">etc/lists/List-two</list>
+    <list field="srcip" lookup="address_match_key">etc/lists/List-two</list>
     <description>IP blacklisted in LIST TWO</description>
     <group>list2,</group>
   </rule>
@@ -157,7 +157,7 @@ CDB lists examples
 
   <rule id="110710" level="10">
     <if_sid>110700</if_sid>
-    <list field="ip" lookup="address_match_key">etc/lists/List-two</list>
+    <list field="srcip" lookup="address_match_key">etc/lists/List-two</list>
     <description>IP blacklisted in LIST ONE and LIST TWO</description>
     <group>list1,list2,</group>
   </rule>

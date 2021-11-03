@@ -1,0 +1,200 @@
+openapi: 3.0.0
+servers:
+  - url: https://api.cloud.wazuh.com/v2
+    description: Wazuh Cloud API
+info:
+  title: Wazuh Cloud API
+  description: "Manage your Wazuh Cloud account"
+  version: "2.0.0"
+paths:
+  /storage/token:
+    post:
+      tags:
+        - storage
+      summary: "Generate a token to access the cold storage."
+      description: |
+        Wazuh Cloud cold storage is located in AWS S3. This endpoint returns a temporary AWS token
+        to be used in AWS S3 API (s3:ListBucket and s3:GetObject actions).
+      security:
+        - api_key: []
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RequestToken"
+
+      responses:
+        "200":
+          description: "Successful"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Token"
+        "401":
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BasicError"
+        "403":
+          description: "Forbidden"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BasicError"
+        "415":
+          description: "Unsupported media type"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BasicError"
+        "429":
+          description: "Too many requests"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BasicError"
+        "500":
+          description: "Internal server error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BasicError"
+  /info:
+    get:
+      summary: Get deployment info of the service
+      tags:
+        - info
+      security:
+        - api_key: []
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeploymentInfo"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "500":
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BasicError"
+
+components:
+  securitySchemes:
+    api_key:
+      type: apiKey
+      name: x-api-key
+      in: header
+
+  schemas:
+    RequestToken:
+      type: object
+      required:
+        - environment_id
+      properties:
+        token_expiration:
+          type: integer
+          minimum: 900
+          maximum: 3600
+          example: 3600
+          format: int32
+        environment_cloud_id:
+          type: string
+          example: "13245356356"
+      additionalProperties: false
+
+    Token:
+      type: object
+      properties:
+        environment_cloud_id:
+          type: string
+          pattern: \S+
+          maxLength: 64
+          example: 0123456789ab
+        aws:
+          type: object
+          properties:
+            s3_path:
+              type: string
+              pattern: \S+
+              example: wazuh-cloud-cold-us-east-1/0123456789ab
+            region:
+              type: string
+              pattern: (us(-gov)?|ap|ca|cn|eu|sa)-(central|(north|south)?(east|west)?)-\d
+              example: us-east-1
+            credentials:
+              type: object
+              properties:
+                access_key_id:
+                  type: string
+                  pattern: \S+
+                  maxLength: 115
+                  example: "mUdT2dBjlHd...Gh7NniyZKR5If"
+                secret_access_key:
+                  type: string
+                  pattern: \S+
+                  maxLength: 115
+                  example: "qEzCk63a224...5aB+e4fCDBR0G"
+                session_token:
+                  type: string
+                  pattern: \S+
+                  maxLength: 113
+                  example: "MRgpt7HIuoA...4o4BXSAcPfUD8"
+                expires_in:
+                  type: integer
+                  format: int32
+                  minimum: 900
+                  maximum: 3600
+                  example: 3600
+          additionalProperties: false
+      additionalProperties: false
+    
+    DeploymentInfo:
+      type: object
+      additionalProperties: false
+      properties:
+        version:
+          type: string
+          example: "v0.60.6"
+          description: Service version
+        revision:
+          type: string
+          example: "6011"
+          description: Service revision
+        timestamp:
+          type: string
+          example: "2021-02-02T14:24:08.975Z"
+          description: Deployment timestamp
+
+    BasicError:
+      type: object
+      additionalProperties: false
+      required:
+        - message
+        - status_code
+      properties:
+        message:
+          type: string
+          example: "Not found"
+          description: A human readable brief message about the type of error
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+                example: "Environment with Cloud ID 'ig564fst342a' could not be found"
+          description: (Optional) An array or errors describing what happened
+        status_code:
+          type: number
+          example: 404
+          description: HTTP status code of the response

@@ -66,6 +66,6 @@ This will generate a |WAZUH_LATEST| Wazuh agent HPUX package with checksum.
 
 .. code-block:: console
 
-  # ./generate_wazuh_packages.sh -b v|WAZUH_LATEST|  -p /opt
+  # ./generate_wazuh_packages.sh -b v|WAZUH_LATEST|  -p /opt/ossec
 
-This will generate a |WAZUH_LATEST| Wazuh agent HPUX package with ``opt`` as installation directory.
+This will generate a |WAZUH_LATEST| Wazuh agent HPUX package with ``/opt/ossec`` as installation directory.

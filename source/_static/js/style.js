@@ -42,11 +42,13 @@ $(function() {
     'user-manual/ruleset/ruleset-xml-syntax/index',
     'installation-guide/distributed-deployment/step-by-step-installation/elasticsearch-cluster/index',
     'installation-guide/distributed-deployment/step-by-step-installation/wazuh-cluster/index',
+    'user-manual/capabilities/active-response/ar-use-cases/index',
   ];
 
   /* List of nodes in the toctree that should be open in a new tab */
   const newTabNodes = [
     'user-manual/api/reference',
+    'cloud-service/apis/reference',
   ];
   if ( useApiRedoc ) {
     markTocNodesWithClass(newTabNodes, 'js-new-tab');

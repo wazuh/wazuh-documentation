@@ -292,4 +292,4 @@ Wazuh agents are designed to monitor hosts. To start using them:
 3. Modify the file ``/var/ossec/etc/ossec.conf``, changing the "transport protocol" to *TCP* and changing the ``MANAGER_IP`` for the external IP of the service pointing to port 1514 or for the DNS provided by *AWS Route 53* if you are using it.
 
 
-4. Using the `authd <https://documentation.wazuh.com/current/user-manual/reference/daemons/ossec-authd.html?highlight=authd>`_ daemon with option *-m* specifying the external IP of the Wazuh service that takes to the port 1515 or its DNS if using *AWS Route 53*.
+4. Using the `authd <https://documentation.wazuh.com/current/user-manual/reference/daemons/wazuh-authd.html?highlight=authd>`_ daemon with option *-m* specifying the external IP of the Wazuh service that takes to the port 1515 or its DNS if using *AWS Route 53*.

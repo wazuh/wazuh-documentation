@@ -27,6 +27,7 @@ Configuration options for file integrity monitoring:
 - `frequency`_
 - `ignore`_
 - `max_eps`_
+- `max_files_per_second`_
 - `prefilter_cmd`_
 - `process_priority`_
 - `registry_ignore`_
@@ -445,6 +446,28 @@ Example:
  <max_eps>100</max_eps>
 
 
+.. _reference_ossec_syscheck_max_files_per_second:
+
+max_files_per_second
+--------------------
+
+.. versionadded:: 4.2.0
+
+Sets the maximum number of files scanned per second. If this option is set to 0, there will be no limit on the number of files scanned per second.
+
++--------------------+---------------------------------------------------------+
+| **Default value**  | 0                                                       |
++--------------------+---------------------------------------------------------+
+| **Allowed values** | Integer positive number. 0 means no limit.              |
++--------------------+---------------------------------------------------------+
+
+Example:
+
+.. code-block:: xml
+
+ <max_files_per_second>100</max_files_per_second>
+
+
 .. _reference_ossec_syscheck_prefilter_cmd:
 
 prefilter_cmd
@@ -810,7 +833,7 @@ The database synchronization settings are configured inside this tag.
       <interval>5m</interval>
       <max_interval>1h</max_interval>
       <response_timeout>30</response_timeout>
-      <sync_queue_size>16384</sync_queue_size>
+      <queue_size>16384</queue_size>
       <max_eps>10</max_eps>
     </synchronization>
 
@@ -956,7 +979,7 @@ Specifices the limit for the size of the ``queue/diff/local`` folder.
 | **Default value**  | 1GB                                         |
 +--------------------+---------------------------------------------+
 | **Allowed values** | Any positive number followed by KB/MB/GB    |
-+--------------------------+---------------------------------------+
++--------------------+---------------------------------------------+
 
 file_size
 """""""""
@@ -987,7 +1010,7 @@ Specifices the limit for the size of files monitored with ``report_changes``.
 | **Default value**  | 50MB                                        |
 +--------------------+---------------------------------------------+
 | **Allowed values** | Any positive number followed by KB/MB/GB    |
-+--------------------------+---------------------------------------+
++--------------------+---------------------------------------------+
 
 .. _reference_ossec_syscheck_nodiff:
 

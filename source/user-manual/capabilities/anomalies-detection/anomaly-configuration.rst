@@ -21,8 +21,8 @@ Here is a basic example of how to configure the database for rootkits (files and
 .. code-block:: xml
 
   <rootcheck>
-    <rootkit_files>/var/ossec/etc/shared/rootkit_files.txt</rootkit_files>
-    <rootkit_trojans>/var/ossec/etc/shared/rootkit_trojans.txt</rootkit_trojans>
+    <rootkit_files>etc/shared/rootkit_files.txt</rootkit_files>
+    <rootkit_trojans>etc/shared/rootkit_trojans.txt</rootkit_trojans>
   </rootcheck>
 
 Ignoring false positives
