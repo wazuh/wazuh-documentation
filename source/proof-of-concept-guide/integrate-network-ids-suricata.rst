@@ -13,8 +13,6 @@ Configuration
 
 Configure your environment as follows to test the POC.
 
-On Linux RHEL monitored endpoint:
-
 #. Install Suricata on the RHEL 7 monitored endpoint from the EPEL repository. Take into account that Suricata was tested using 5.0.4 and that the EPEL repository depends on your operating system version:
 
     .. code-block:: XML
@@ -69,7 +67,7 @@ On Linux RHEL monitored endpoint:
 
 
 Steps to generate the alerts
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+----------------------------
 
 #. No action is required. Wazuh automatically parses data from ``/var/log/suricata/eve.json`` and generates related alerts.
 
@@ -81,6 +79,6 @@ Related alerts can be found with:
 - ``rule.groups:*suricata*``
 
 Affected endpoint
-^^^^^^^^^^^^^^^^^
+-----------------
 
 - Linux RHEL 7
