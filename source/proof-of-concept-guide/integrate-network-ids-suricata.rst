@@ -15,14 +15,14 @@ Configure your environment as follows to test the POC.
 
 On Linux RHEL monitored endpoint:
 
-- Install Suricata (tested with version 5.0.4). It requires EPEL repository (be aware that this repository depends on your operating system version):
+- Install Suricata on the RHEL 7 monitored endpoint from the EPEL repository. Take into account that Suricata was tested using 5.0.4 and that the EPEL repository depends on your operating system version:
 
     .. code-block:: XML
 
         yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
         yum -y install suricata-5.0.4
 
-- Download and extract Emerging rules:
+- Download and extract Emerging rules.
 
     .. code-block:: console
 
@@ -32,7 +32,7 @@ On Linux RHEL monitored endpoint:
         chown suricata:suricata /etc/suricata/rules/*.rules
         chmod 640 /etc/suricata/rules/*.rules
 
-- Modify Suricata settings at ``/etc/suricata/suricata.yaml``
+- Modify Suricata settings in the ``/etc/suricata/suricata.yaml`` file.
 
     .. code-block:: XML
 
@@ -44,7 +44,7 @@ On Linux RHEL monitored endpoint:
         rule-files:
         - "*.rules"
 
-- Start Suricata
+- Start Suricata.
 
     .. code-block:: console
 
@@ -52,7 +52,7 @@ On Linux RHEL monitored endpoint:
         systemctl daemon-reload
         systemctl start suricata
 
-- Configure the Wazuh agent to read Suricata alerts file. The following settings need to be added to ``/var/ossec/etc/ossec.conf file``:
+- Configure the Wazuh agent to read Suricata logs file. The following settings need to be added to the ``/var/ossec/etc/ossec.conf`` file of the monitored RHEL 7 endpoint.
 
     .. code-block:: XML
 
@@ -61,7 +61,7 @@ On Linux RHEL monitored endpoint:
             <location>/var/log/suricata/eve.json</location>
         </localfile>
 
-- Apply changes to Wazuh agent
+- Restart the Wazuh agent to apply the changes. 
 
     .. code-block:: console
 
@@ -71,7 +71,7 @@ On Linux RHEL monitored endpoint:
 Steps to generate the alerts
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- Wazuh will automatically parse data from /var/log/suricata/eve.json and generate related alerts
+- No action is required. Wazuh automatically parses data from ``/var/log/suricata/eve.json`` and generates related alerts.
 
 Querying the alerts
 -------------------
