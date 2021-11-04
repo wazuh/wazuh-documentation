@@ -9,7 +9,7 @@ Registration service with password authorization
 
 This method is similar to the :ref:`simple registration service <simple-registration-service>`, except that it provides protection from unauthorized registrations by requiring a password during the registration process.
 
-Password protected registration is enabled in the Wazuh manager configuration. To protect a multinode cluster from unauthorized agent registrations, password authorization must be enabled on every one of the manager nodes to avoid unauthorized registrations through one of them. The password to be used with agents registration can be the one provided by the service or a custom one defined during the manager configuration.
+Password protected registration is enabled in the Wazuh manager configuration. To protect a multi-node cluster from unauthorized agent registrations, password authorization must be enabled on every one of the Wazuh manager nodes. Doing this on every node prevents unauthorized registrations to the cluster through a node not properly configured.
 
 When the configuration is complete, running the ``agent-auth`` utility providing the appropriate password will register the Wazuh agent. After the registration, the Wazuh agent has to be configured to indicate the destination where the collected security events will be sent.
 
