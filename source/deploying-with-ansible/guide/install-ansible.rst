@@ -7,12 +7,12 @@ Install Ansible
 
 In this section we will proceed to install the Ansible server. To be able to deploy using Ansible we only need to have the tool installed on a single server. From this control server, Ansible will access the other servers and execute the playbooks configured for any type of deployment or installation. It is only necessary to have a server with Ansible installed.
 
-In the example we will follow in this guide, we will have the following infrastructure.
+In the example that we will show in this guide, we have the following infrastructure.
 
-- Ansible server.
-- Wazuh server.
-- Elastic Stack server.
-- Wazuh agent.
+- Ansible server
+- Wazuh server
+- Elastic Stack server
+- Wazuh agent
 
 .. note:: OpenSSH Compatibility
 
