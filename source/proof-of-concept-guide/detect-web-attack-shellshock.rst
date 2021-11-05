@@ -3,16 +3,20 @@
 Detecting a web attack - Shellshock
 ===================================
 
-Detect a Shellshock attack from web server logs in a monitored endpoint.
+Wazuh is capable of detecting a Shellshock attack by analyzing web server logs collected from a monitored endpoint.
+Check the :ref:`Wazuh Shellshock Attack documentation <learning_wazuh_shellshock>` section for further information.
 
-Check :ref:`Wazuh Shellshock Attack documentation <learning_wazuh_shellshock>` for further information.
+In addition, for further detection, the attack can also be detected at a network level when Suricata integration is configured.
 
-If Suricata integration is configured to monitor the endpoint's network traffic, the attack can additionally be detected at a network level.
+Prerequisites
+-------------
+
+- You need an Apache server running on the monitored RHEL 7 agent system.
 
 Configuration
 -------------
 
-#. Add the following lines to ``/var/ossec/etc/ossec.conf`` at the Wazuh RHEL 7 agent host. This sets the Linux agent to monitor the access logs of your Apache server.
+#. Add the following lines to the ``/var/ossec/etc/ossec.conf`` configuration file at the Wazuh RHEL 7 agent host. This sets the Linux agent to monitor the access logs of your Apache server.
 
     .. code-block:: XML
 
@@ -32,16 +36,16 @@ Steps to generate the alerts
 
         # curl -H "User-Agent: () { :; }; /bin/cat /etc/passwd" <your_web_server_address>
 
-Alerts
-------
+Querying the alerts
+-------------------
 
 Related alerts, based on the web server log analysis, can be found with:
 
-* ``rule.description:*shellshock*``
+- ``rule.description:*shellshock*``
 
-If you have Suricata monitoring the endpoint's traffic you can also query ``rule.description:*CVE-2014-6271*`` for the related Suricata's alerts.
+- If you have Suricata monitoring the endpoint's traffic, you can also query ``rule.description:*CVE-2014-6271*`` for the related Suricata's alerts.
 
 Affected endpoints
 ------------------
 
-* RHEL 7 agent host
+-  RHEL 7 agent host
