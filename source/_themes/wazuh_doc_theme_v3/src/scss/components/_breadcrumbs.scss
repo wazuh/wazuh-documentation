@@ -5,14 +5,24 @@
 ----------------------------------------------------------------------------- */
 
 #breadcrumbs {
-  position: sticky;
-  top: 0;
+  position: fixed;
+  top: $headerHeight;
   display: inline-flex;
   flex-direction: row;
-  width: 100%;
-  height: 60px;
-  padding: 0;
+  align-items: flex-end;
+  width: calc(100% - #{$leftSidebarWidth} - #{$rightSidebarWidth});
+  height: $breadcrumbsHeight;
+  padding: 5px 15px 5px 30px;
   margin: 0;
   list-style: none;
   background-color: $wuiColorEmptyShade;
+  z-index: 99;
+
+  .breadcrumb-separator::after {
+    display: inline-block;
+    margin: 0 15px;
+    content: "/";
+    color: $wuiColorDarkestShade;
+    font-size: 1.1rem;
+  }
 }

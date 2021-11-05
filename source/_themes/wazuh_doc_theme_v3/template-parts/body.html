@@ -8,13 +8,10 @@
 
 {%- extends "!wazuh_doc_theme_v3/layout.html" -%}
 {%- block body -%}
-{%- block icons %}
-{% include "static/images/icons/svg-icons.svg" %}
-{% endblock icons -%}
 {%- block header %}
 {% include "template-parts/header.html" %}
 {% endblock header -%}
-    <div class="inner-body" data-spy="scroll" data-target="#local-toc" data-offset="100">
+    <div class="inner-body">
       {% block sidebar1 -%}
         {% include "template-parts/sidebar-left.html" %}
       {% endblock sidebar1 -%}
@@ -47,6 +44,9 @@
         {% include "template-parts/navigation.html" %}
         {% endif %}
         </main>
+        {%- block footer %}
+        {% include "template-parts/footer.html" %}
+        {% endblock footer -%}
       </div>
       {%- endblock main_column -%}
       

@@ -15,29 +15,60 @@ body {
 }
 
 .inner-body {
-  position: fixed;
-  top: $headerHeight;
-  display: flex;
-  flex-direction: row;
+  position: relative;
   width: 100%;
-  height: calc(100vh - #{$headerHeight});
-  overflow-y: auto;
 }
 
-main img {
-  max-width: 100%;
-}
+main {
+  padding-left: 30px;
+  padding-right: 15px;
+  min-height: calc(100vh - #{$headerHeight} - #{$breadcrumbsHeight} - #{$footerHeight});
+
+  img {
+    max-width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-family: Manrope, sans-serif;
+    font-style: normal;
+    letter-spacing: 0.03em;
+  }
+
+  table {
+    margin-bottom: 1rem;
+    td,
+    th {
+      vertical-align: baseline;
+    }
+  }
+} 
 
 .sidebar {
   flex-shrink: 0;
 
   .sidebar-container {
     top: 0;
-    height: calc(100vh - #{$headerHeight});
     overflow-y: auto;
   }
 }
 
 a {
   color: $wuiColorPrimary;
+
+  &:hover,
+  &:focus {
+    color: $wuiColorPrimaryLighter;
+  }
+
+  &:active {
+    color: $wuiColorPrimary;
+    font-weight: 700;
+  }
+}
+
+th p {
+  margin: 0;
+  font-weight: inherit;
+  font-weight: 500;
 }

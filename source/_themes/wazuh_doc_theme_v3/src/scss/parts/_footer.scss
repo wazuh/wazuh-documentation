@@ -1,0 +1,33 @@
+/* -----------------------------------------------------------------------------
+  PART: Footer
+
+  Style for the footer under the column containing the element main and the
+  right sidebar.
+----------------------------------------------------------------------------- */
+
+footer {
+  position: absolute;
+  right: 0;
+  left: $leftSidebarWidth;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: $footerHeight;
+  padding: 15px 0 15px 30px;
+  background: $wuiColorNeutralLighter;
+
+  ul {
+    padding-left: 15px;
+    margin: 0;
+  }
+
+  .nav-link {
+    padding: 0 10px;
+    color: $wuiColorDarkestShade;
+
+    &:hover {
+      color: $wuiColorPrimaryLighter;
+    }
+  }
+}

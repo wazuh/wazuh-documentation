@@ -16,7 +16,7 @@
       color: $wuiColorPrimary;
 
       &:hover {
-        color: $primaryLighter;
+        color: $wuiColorPrimaryLighter;
       }
 
       &::before {
@@ -51,15 +51,15 @@
     font-size: 18px;
     font-weight: 400;
     line-height: 32px;
-    color: $wuiColorFullShade;
+    color: $wuiColorDarkestShade;
     text-decoration: none;
 
     &:hover {
-      color: $primaryLighter;
+      color: $wuiColorPrimaryLighter;
     }
   }
 
-  @include global-toc-nested-padding(1, $maxTocLevel);
+  @include global-toc-nested-padding(2, $maxTocLevel, 20px, 15px);
 
   [class*="toctree-l"] {
     &.current {
@@ -77,7 +77,19 @@
     }
   }
 
-  .toctree-l1 > ul {
-    border-left: 1px solid $wuiColorPrimary;
+  .toctree-l1 {
+    > a {
+      padding-left: 40px;
+      &::before {
+        left: 25px;
+      }
+    }
+    &.show > a {
+      background-color: $globalTocHighlight;
+    }
+    > ul {
+      margin-left: 40px;
+      border-left: 1px solid $wuiColorPrimary;
+    }
   }
 }

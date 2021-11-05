@@ -8,36 +8,45 @@
 @import "../components/local-toc";
 
 #right-sidebar {
-  position: sticky;
-  top: 0;
+  position: fixed;
+  top: $headerHeight;
+  right: 0;
   flex-basis: $rightSidebarWidth;
   flex-shrink: 0;
   flex-grow: 0;
   width: $rightSidebarWidth;
+  height: calc(100vh - #{$headerHeight} - #{$footerHeight});
 
   .sidebar-container {
+    position: fixed;
+    top: $headerHeight;
+    right: 0;
+    bottom: $footerHeight;
     width: calc((#{$leftSidebarWidth} / 2) + 30px);
     padding: 30px 16px;
     margin-left: auto;
+    overflow: hidden;
     background-color: $wuiColorEmptyShade;
 
     .edit-repo {
       width: 100%;
+      height: 40px;
       padding: 8px  0;
-      border-top: 1px solid $wuiColorLightestShade;
+      border-top: 1px solid $wuiColorNeutralLight;
 
       a {
-        color: $wuiColorFullShade;
+        color: $wuiColorDarkestShade;
+        color: $wuiColorPrimary;
 
         &:hover,
         &:focus {
-          color: $wuiColorPrimary;
+          color: $wuiColorPrimaryLighter;
         }
 
         .icon {
           margin-left: 10px;
           font-size: 14px;
-          color: $wuiColorFullShade;
+          color: $wuiColorDarkestShade;
         }
       }
     }

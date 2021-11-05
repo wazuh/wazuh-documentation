@@ -4,12 +4,335 @@
   Style for the content column containing the element main.
 ----------------------------------------------------------------------------- */
 
-@import "../components/breadcrumbs";
-@import "../components/lightbox";
+@import "../components/accordions";
 @import "../components/admonitions";
+@import "../components/breadcrumbs";
 @import "../components/code-blocks";
 @import "../components/customized-tabs";
+@import "../components/lightbox";
+@import "../components/link-boxes";
+@import "../components/previous-next";
+
+#central-column * {
+  scroll-margin-top: calc(#{$headerHeight} + #{$breadcrumbsHeight});
+}
 
 #central-column {
-  width: calc(100% - #{$leftSidebarWidth} - #{$rightSidebarWidth});
+  width: 100%;
+  padding-top: $breadcrumbsHeight;
+  padding-right: $rightSidebarWidth;
+  padding-left: $leftSidebarWidth;
+
+  dl {
+    dt {
+      padding: .2rem .5rem .2rem 0;
+    }
+    dd {
+      padding: .5rem .5rem .2rem 40px;
+      margin-bottom: .2rem;
+    }
+  }
+}
+
+[role="main"] {
+
+  .no-margins {
+    margin: 0;
+  }
+
+  h1,
+  .rubric.h1 {
+    display: block;
+    width: fit-content;
+    margin-top: 1.2rem;
+    margin-bottom: 1rem;
+    font-size: 34px;
+    font-weight: 800;
+    letter-spacing: .03em;
+  }
+
+  h2,
+  .rubric.h2 {
+    display: block;
+    width: fit-content;
+    margin-top: 1.2rem;
+    margin-bottom: 1rem;
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: .03em;
+  }
+
+  h3,
+  .rubric.h3 {
+    display: block;
+    width: fit-content;
+    margin-top: 1.2rem;
+    margin-bottom: 1rem;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: .03em;
+  }
+
+  h4,
+  .rubric.h4 {
+    display: block;
+    width: fit-content;
+    margin-top: 1.2rem;
+    margin-bottom: 1rem;
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: .03em;
+  }
+
+  h5,
+  .rubric.h5 {
+    display: block;
+    width: fit-content;
+    margin-top: 1.2rem;
+    margin-bottom: 1rem;
+    font-weight: 800;
+    letter-spacing: .03em;
+  }
+
+  h6,
+  .rubric.h6 {
+    display: block;
+    width: fit-content;
+    margin-top: 1.2rem;
+    margin-bottom: 1rem;
+    font-weight: 800;
+    letter-spacing: .03em;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    .headerlink {
+      display: inline-block;
+      line-height: 1;
+      text-decoration: none;
+
+      &::after {
+        display: inline-block;
+        width: 1rem;
+        height: 1rem;
+        padding-left: 10px;
+        font: normal 700 normal .95rem/1 FontAwesome, sans-serif;
+        color: $wuiColorDarkShade;
+        text-align: right;
+        vertical-align: middle;
+        content: "\f0c1";
+        opacity: 0;
+        transition: opacity ease-in .1s;
+      }
+    }
+
+    &:hover {
+      .headerlink::after {
+        opacity: 1;
+        transition: opacity ease-in .1s;
+      }
+    }
+  }
+
+  strong {
+    font-weight: 800;
+  }
+
+  code {
+    display: inline-block;
+    padding: 1px 2px;
+    font-family: "Fira Mono", monospace;
+    color: $inlineHighlightText;
+    background-color: $inlineHighlightBackground;
+  }
+
+  .arabic {
+    list-style-type: decimal;
+  }
+  .loweralpha {
+    list-style-type: lower-alpha;
+  }
+  .lowerroman {
+    list-style-type: lower-roman;
+  }
+  .upperalpha {
+    list-style-type: upper-alpha;
+  }
+  .upperroman {
+    list-style-type: upper-roman;
+  }
+
+  caption {
+    padding: 8px;
+    border: 1px solid $tableBorderColor;
+    border-top: none;
+    border-radius: 0 0 $roundedCorners $roundedCorners;
+    .caption-text {
+      color: $wuiColorDarkShade;
+    }
+  }
+
+  .align-cells-top {
+    th,
+    td {
+      vertical-align: top;
+    }
+  }
+  .align-cells-middle {
+    th,
+    td {
+      vertical-align: middle;
+    }
+  }
+  .align-cells-bottom {
+    th,
+    td {
+      vertical-align: bottom;
+    }
+  }
+  .align-data-top {
+    td {
+      vertical-align: top;
+    }
+  }
+  .align-data-middle {
+    td {
+      vertical-align: middle;
+    }
+  }
+  .align-data-bottom {
+    td {
+      vertical-align: bottom;
+    }
+  }
+  .align-header-top {
+    th {
+      vertical-align: top;
+    }
+  }
+  .align-header-middle {
+    th {
+      vertical-align: middle;
+    }
+  }
+  .align-header-bottom {
+    th {
+      vertical-align: bottom;
+    }
+  }
+
+  .docutils:not(.list-rows) {
+    thead {
+      position: relative;
+      z-index: 10;
+      background-color: $wuiColorPrimary;
+    }
+
+    th {
+      padding: 8px;
+      font-size: 18px;
+      font-weight: 700;
+      color: $wuiColorEmptyShade;
+      border: 1px solid $wuiColorPrimary;
+    }
+
+    .stub:not(.head) {
+      font-size: 16px;
+      color: $wuiColorFullShade;
+    }
+
+    tbody {
+      position: relative;
+
+      > :nth-of-type(even) td,
+      > :nth-of-type(even) th {
+        background-color: $wuiColorLightestShade;
+      }
+      th {
+        padding: 8px;
+        background-color: $wuiColorEmptyShade;
+        border: 1px solid $tableBorderColor;
+      }
+      td {
+        padding: 8px;
+        border: 1px solid $tableBorderColor;
+      }
+      p {
+        margin-bottom: .15rem;
+      }
+    }
+  }
+
+  table {
+
+    &.docutils:not(.list-rows) {
+      display: inline-block;
+      max-width: 100%;
+      overflow: hidden;
+      overflow-x: auto;
+      border-spacing: 0;
+      border-collapse: separate;
+      border: 1px solid $tableBorderColor;
+      border-radius: $roundedCorners;
+      perspective: 1px;
+
+      &.release-notes {
+        border-spacing: 0 2rem;
+        border: none;
+        border-radius: unset;
+        &::after {
+          content: none;
+        }
+
+        tr {
+          & > td:first-child,
+          & > th:first-child {
+            padding-left: 0;
+            border-right: 1px solid $tableBorderColor;
+          }
+        }
+        td,
+        th {
+          padding-top: 0;
+          padding-bottom: 0;
+          padding-left: 1rem;
+          border: none;
+          background-color: $wuiColorEmptyShade;
+        }
+        
+        p {
+          margin-bottom: 1rem;
+        }
+      }
+    }
+
+    &.hlist {
+      margin-bottom: 1rem;
+
+      & > tbody > tr > td {
+        vertical-align: top;
+        & > ul {
+          padding: 0 15px 0 0;
+          margin: 0;
+          list-style: none;
+
+          & > li > ul {
+            list-style: disc;
+
+            & > li > ul {
+              list-style: circle;
+
+              & > li > ul {
+                list-style: square;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

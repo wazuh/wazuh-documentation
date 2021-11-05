@@ -9,28 +9,38 @@
 #local-toc {
   padding: 0;
 
+  @include local-toc-nested-padding(1, 6, 10px, 10px);
+
   .toc-title {
     display: inline-block;
     margin-top: 20px;
+    height: 30px;
     font-size: 18px;
     font-weight: 700;
-    color: $wuiColorFullShade;
+    color: $wuiColorDarkestShade;
     text-transform: uppercase;
+  }
+
+  > ul {
+    height: calc(100vh - #{$headerHeight} - #{$breadcrumbsHeight} - 40px - 30px - 30px - #{$footerHeight});
+    overflow-y: auto;
   }
 
   ul {
     padding: 0;
     margin: 0;
-    line-height: 32px;
     list-style: none;
 
     a {
       font-size: 14px;
       border-left: 2px solid $wuiColorEmptyShade;
+      line-height: 24px;
+      padding-top: 4px;
+      padding-bottom: 4px;
 
       &:hover,
       &:focus {
-        color: $primaryLighter;
+        color: $wuiColorPrimaryLighter;
         outline: none;
       }
       &:active {

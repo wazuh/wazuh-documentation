@@ -3,3 +3,253 @@
 
   Style for the code-blocks and adjustment of the pygments.
 ----------------------------------------------------------------------------- */
+
+main {
+  code, 
+  kbd, 
+  pre, 
+  samp {
+    font-family: "Fira Mono", monospace;
+  }
+}
+
+.literal-block-wrapper.docutils.container {
+  max-width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+
+  .code-block-caption {
+    display: flex;
+    height: 48px;
+    align-items: center;
+    border: 2px solid $inlineHighlightBackground;
+    padding: 5px 10px;
+    justify-content: space-between;
+    margin-top: 1rem;
+
+    .headerlink {
+      text-decoration: none;
+      line-height: 1;
+
+      &::after {
+        vertical-align: middle;
+        content: '\f0c1';
+        display: inline-block;
+        width: 1rem;
+        height: 1rem;
+        color: $wuiColorDarkShade;
+        font: normal bold normal 0.95rem/1 FontAwesome;
+        text-align: right;
+        opacity: 0;
+        transition: opacity ease-in .1s;
+      }
+    }
+
+    &:hover {
+      .headerlink::after {
+        opacity: 1;
+        transition: opacity ease-in .1s;
+      }
+    }
+  }
+}
+
+[class*="highlight-"] {
+  max-width: 100%;
+  margin-bottom: 1rem;
+  position: relative;
+
+  &.output.highlight-console .output-title {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    background-color: $wuiColorLightestShade;
+    border-radius: $roundedCorners $roundedCorners 0 0;
+    font-weight: 700;
+    width: 100%;
+
+    &::before {
+      content: '';
+      height: 40px;
+      width: 40px;
+      background-image: url('#{$icoPath}svg-icons.svg#chevron-blue');
+      background-repeat: no-repeat;
+      background-size: 18px 18px;
+      background-position: center;
+    }
+  }
+
+  .highlighttable {
+    background-color: $codeBlockBG;
+    table-layout:fixed;
+    width: 100%;
+
+    .highlight {
+      position: unset;
+      overflow-x: auto;
+      max-width: 100%;
+      padding-left: 0;
+      padding-right: 0;
+      padding-bottom: 20px;
+    }
+  }
+
+  td.code {
+
+    pre {
+      padding: 0 20px;
+      overflow: visible;
+      position: relative;
+      z-index: 6;
+    }
+  }
+
+  .linenodiv {
+    display: inline-flex;
+    border-right: 1px solid $wuiColorNeutralLight;
+    position: absolute;
+    top: 20px;
+    z-index: 10;
+    width: 50px;
+    justify-content: center;
+    user-select: none;
+  }
+
+  .linenos {
+    width: 48px;
+    
+  }
+
+  .highlight {
+    background-color: $codeBlockBG;
+    font-family: "Fira Mono", monospace;
+    color: $codeDefault;
+    position: relative;
+    padding: 20px 0 0;
+    display: flex;
+    overflow-x: auto;
+    z-index: 0;
+
+    pre {
+      margin: 0;
+      position: unset;
+      padding: 0 20px 20px;
+    }
+
+    .hll {
+      display: block;
+
+      &::before {
+        background-color: $inlineHighlightBackground;
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 23px;
+        display: block;
+        content: '';
+        z-index: -20;
+      }
+
+      > span {
+        position:relative;
+        z-index: 25;
+      }
+
+    }
+
+    .gp,
+    .o,
+    .ow,
+    .p,
+    .p.p-Indicator,
+    .nn,
+    .l.l-Scalar.l-Scalar-Plain {}
+
+    .k,
+    .kn {
+      color: $codeKeyword;
+      font-weight: 700;
+    }
+
+    .c,
+    .c1,
+    .cp,
+    .ch,
+    .go {
+      color: $codeComment; 
+    }
+
+    .m,
+    .mi {
+      color: $codeNumber; 
+    }
+
+    .s,
+    .s1,
+    .s2,
+    .sb,
+    .se,
+    .sh,
+    .si {
+      color: $codeString; 
+    }
+
+    .vm,
+    .n,
+    .nb,
+    .bp,
+    .nf {
+      color: $codeFunction; 
+    }
+
+    .nt,
+    .na,
+    .no {
+      color: $codeVariable; 
+    }
+  }
+}
+
+.highlight-default {
+  .k,
+  .kn {
+    font-weight: 700;
+  }
+
+  .c,
+  .c1,
+  .cp,
+  .ch,
+  .go {
+    color: $codeComment; 
+  }
+
+  .m,
+  .mi {
+    color: $codeNumber; 
+  }
+
+  .s,
+  .s1,
+  .s2,
+  .sb,
+  .se,
+  .sh,
+  .si {
+    color: $codeString; 
+  }
+
+  .vm,
+  .n,
+  .nb,
+  .bp,
+  .nf {
+    color: $codeFunction; 
+  }
+
+  .nt,
+  .na,
+  .no {
+    color: $codeVariable; 
+  }
+}

@@ -3,3 +3,133 @@
 
   Style for the different admonitions: note, warning, etc.
 ----------------------------------------------------------------------------- */
+
+#central-column .admonition {
+  padding: 0 30px 1px;
+  background-color: $lightestBG;
+  border-radius: $roundedCorners;
+  margin-bottom: 2rem;
+
+  .admonition-title {
+    border-bottom: 1px solid $wuiColorLightShade;
+    margin-left: -8px;
+    margin-right: -8px;
+    padding: 16px 10px 10px 42px;
+    font-weight: 700;
+    font-size: 18px;
+    position: relative;
+    line-height: 28px;
+
+    &::after {
+      vertical-align: middle;
+      content: '';
+      display: inline-block;
+      width: 1.5rem;
+      height: 1.5rem;
+      position: absolute;
+      left: 8px;
+      bottom: 10px;
+    }
+  }
+
+  &.note {
+    .admonition-title {
+      color: $wuiColorPrimary;
+
+      &::after {
+        background: url('#{$icoPath}svg-icons.svg#circle-check');
+      }
+    }
+  }
+
+  &.warning {
+    .admonition-title {
+      color: $wuiColorWarningDark;
+      
+      &::after {
+        background: url('#{$icoPath}svg-icons.svg#circle-exclamation-orange');
+      }
+    }
+  }
+
+  &.attention {
+    .admonition-title {
+      color: $wuiColorPrimary;
+
+      &::after {
+        background: url('#{$icoPath}svg-icons.svg#circle-bell');
+      }
+    }
+  }
+
+  &.caution {
+    .admonition-title {
+      color: $wuiColorWarningDark;
+
+      &::after {
+        background: url('#{$icoPath}svg-icons.svg#circle-exclamation-orange');
+      }
+    }
+  }
+
+  &.danger {
+    .admonition-title {
+      color: $wuiColorDanger;
+
+      &::after {
+        background: url('#{$icoPath}svg-icons.svg#circle-exclamation-red');
+      }
+    }
+  }
+
+  &.error {
+    .admonition-title {
+      color: $wuiColorDanger;
+
+      &::after {
+        background: url('#{$icoPath}svg-icons.svg#circle-x');
+      }
+    }
+  }
+
+  &.hint {
+    .admonition-title {
+      color: $wuiColorSuccessDark;
+
+      &::after {
+        background: url('#{$icoPath}svg-icons.svg#circle-bulb');
+      }
+    }
+  }
+
+  &.important {
+    .admonition-title {
+      color: $wuiColorPrimary;
+
+      &::after {
+        background: url('#{$icoPath}svg-icons.svg#circle-exclamation-blue');
+      }
+    }
+  }
+
+  &.tip {
+    .admonition-title {
+      color: $wuiColorSuccessDark;
+
+      &::after {
+        background: url('#{$icoPath}svg-icons.svg#circle-bulb');
+      }
+    }
+  }
+
+  &.admonition-generic-admonition {
+    .admonition-title {
+      color: $wuiColorFullShade;
+      padding-left: 10px;
+
+      &::after {
+        content: none;
+      }
+    }
+  }
+}

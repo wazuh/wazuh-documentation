@@ -8,8 +8,8 @@
 @import "../components/global-toc";
 
 #left-sidebar {
-  position: sticky;
-  top: 0;
+  position: fixed;
+  top: $headerHeight;
   flex-basis: $leftSidebarWidth;
   flex-shrink: 0;
   flex-grow: 0;
@@ -21,11 +21,17 @@
 
   .sidebar-container {
     width: $leftSidebarWidth;
-    padding: 30px 40px;
+    height: calc(100vh - #{$headerHeight});
+    padding: 30px 0;
     background-color: $wuiColorLightestShade;
 
     & > nav {
       margin-top: 20px;
+    }
+
+    .search-box {
+      margin-right: 40px;
+      margin-left: 40px;
     }
   }
 }

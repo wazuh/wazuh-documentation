@@ -17,26 +17,51 @@ $breakpoints: (
 
 // Main colors - Light theme
 $wuiColorPrimary: #256bd1 !default;
-$primaryLighter: #3585f9 !default;
+$wuiColorPrimaryLighter: #3585f9 !default;
 $wuiMainColorAccent: #fedd0b !default;
 
 $wuiColorWarning: #ff7a2f !default;
 $wuiColorDanger: #bd271e !default;
 $wuiColorSuccess: #2da4aa !default;
 
+$wuiColorWarningDark: #B35621 !default;
+$wuiColorSuccessDark: #207D82 !default;
+
 $wuiColorEmptyShade: #fff !default;
 $wuiColorLightestShade: #ebf2fb !default;
+
+$inlineHighlightBackground: #e2eefe !default;
+$inlineHighlightText: #7C3DB2 !default;
+$tableBorderColor: #DCE8F8 !default;
+$codeBlockBG: #F8FAFD !default;
+$lightestBG: #F9FCFF !default; // Admonitions
+$globalTocHighlight: #dcebff !default;
+$wuiColorLighterShade: #c1ccd9 !default; // search-box and navigation borders
 $wuiColorLightShade: #b7c6d7 !default;
 $wuiColorMediumShade: #657c97 !default;
 
-$wuiColorDarkShade: #545f73 !default;
+$wuiColorDarkShade: #545f73 !default; // header-link
 $wuiColorDarkestShade: #292929 !default;
 $wuiColorFullShade: #000 !default;
+
+$wuiColorNeutralLighter:#f6f6f6 !default; // #F5F6F7 footer background
+$wuiColorNeutralLight: #e9e9e9 !default; // mode switch and edit-repo separator border
+
+// Code-blocks - Light theme
+$codeDefault: #000 !default;
+$codeKeyword: #000 !default;
+$codeComment: #83720a !default;
+$codeNumber: #0e4a9f !default;
+$codeString: #bd3d9d !default;
+$codeFunction: #256bd1 !default;
+$codeVariable: #7c3db2 !default;
 
 /* -- Theme elements fixed dimensions ------------------------------------------------------------------------------------ */
 
 // Fixed dimensions
 $headerHeight: 77px !default;
+$breadcrumbsHeight: 60px !default;
+$footerHeight: 70px !default;
 $leftSidebarWidth: 385px !default;
 $rightSidebarWidth: 290px !default;
 $roundedCorners: 10px !default;

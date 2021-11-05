@@ -9,41 +9,57 @@
   flex-direction: row;
   padding-bottom: 8px;
 
+  > span:first-child {
+    margin-left: 8px;
+  }
+
   .switch-icon {
     width: 20px;
     height: 20px;
-    margin: 0 5px;
-    fill: $wuiColorLightShade;
-
-    &.on {
-      fill: $primaryLighter;
+    margin-left: 5px;
+    margin-right: 5px;
+    display: inline-block;
+    background-size: contain;
+    background-position: center;
+    &.icon-sun {
+      background: url('#{$icoPath}svg-icons.svg#sun');
+    }
+    &.icon-moon {
+      background: url('#{$icoPath}svg-icons.svg#moon');
     }
   }
 }
 
 #mode-switch {
   box-sizing: content-box;
+  position: relative;
+  top: 1px;
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
   width: 26px;
   height: 16px;
   padding: 0;
   margin: 0 5px;
-  background-color: $primaryLighter;
-  border: 1px solid $primaryLighter;
+  background-color: $wuiColorPrimaryLighter;
+  border: 1px solid $wuiColorPrimaryLighter;
   border-radius: 25px;
 
   &.dark {
     justify-content: flex-end;
+    span {
+      left: calc(100% - 16px);
+    }
   }
 
   span {
+    position: absolute;
+    left: 0;
     display: inline-block;
     width: 16px;
     height: 16px;
     content: "";
     background-color: $wuiColorEmptyShade;
     border-radius: 50%;
+    transition: left ease-in .2s;
   }
 }

@@ -55,41 +55,55 @@
 {#- TEMPLATE MACROS -#}
 
 {%- macro css() -%}
+{#- Remove unwanted CSS files -#}
+{%- set temp_css_files = []  -%}
+{%- set unwanted_css = ['tabs.css']  -%}
+{%- for cssfile in css_files -%}
   {%- if pagename in special_pages %}
     {#- Remove extension files for this template -#}
-    {%- set temp_css_files = []  -%}
-    {%- for cssfile in css_files -%}
-      {%- if 'sphinx_tabs' not in cssfile and 'wazuh-doc-images' not in cssfile -%}
-       {{- temp_css_files.append(cssfile)|default("", True) -}}
+    {%- if 'sphinx_tabs' not in cssfile and 'wazuh-doc-images' not in cssfile -%}
+      {{- temp_css_files.append(cssfile)|default("", True) -}}
+    {%- endif -%}
+  {% else -%}
+    {%- for unwanted in unwanted_css -%}
+      {%- if unwanted not in cssfile -%}
+        {{- temp_css_files.append(cssfile)|default("", True) -}}
       {%- endif -%}
     {%- endfor -%}
-    {%- set css_files = temp_css_files -%}
   {% endif -%}
-  {%- if pagename != 'moved-content' %}
-    {%- for cssfile in css_files -%}
+{%- endfor -%}
+{%- set css_files = temp_css_files -%}
+{%- if pagename != 'moved-content' %}
+  {%- for cssfile in css_files -%}
     <link rel="stylesheet" href="{{ pathto(cssfile, 1) }}" type="text/css">
-    {%- endfor -%}
-  {% endif -%}
+  {%- endfor -%}
+{% endif -%}
     <link rel="stylesheet" href="{{ pathto('_static/'+get_css_by_page(pagename), 1) }}" type="text/css">
 {%- endmacro %}
 
 {%- macro js() -%}
-{% block specific_js %}
-{#- Add specific files -#}
-{% set specific_js_files = get_js_by_page(pagename) %}
-{%- for scriptfile in specific_js_files -%}
-    {{- script_files.append(scriptfile)|default("", True) -}}
-{% endfor -%}
-{% endblock specific_js %}
-        
-{#- Insert the script tags -#}
-{% block updated_js %}
+{#- Remove old -#}
+{%- set theme_script_files = []  -%}
+{%- set extensions_script_files = []  -%}
 {%- for scriptfile in script_files -%}
   {%- if scriptfile not in ["_static/jquery.js", "_static/underscore.js", "_static/doctools.js", "_static/language_data.js"] %}
-    <script src="{{ pathto(scriptfile, 1) }}"></script>
+    {%- if "_static/js/" in scriptfile %}
+      {{- theme_script_files.append(scriptfile)|default("", True) -}}
+    {%- else -%}
+      {{- extensions_script_files.append(scriptfile)|default("", True) -}}
+    {%- endif -%}
   {%- endif -%}
 {% endfor -%}
-{% endblock updated_js %}
+
+{#- Add specific files -#}
+{% set specific_js_files = get_js_by_page(pagename) %}
+
+{% set script_files = theme_script_files + specific_js_files + extensions_script_files %}
+
+{#- Insert the script tags -#}
+{%- for scriptfile in script_files -%}
+    <script src="{{ pathto(scriptfile, 1) }}"></script>
+{% endfor -%}
 {%- endmacro -%}
 
 {%- macro fonts() -%}
@@ -178,7 +192,7 @@
   {%- set body_class = 'document' -%}
   {% endif -%}
 
-  <body class="{{ body_class }}">
+  <body class="{{ body_class }}" data-spy="scroll" data-target="#local-toc" data-offset="200">
   {% block body %} {% endblock %}
   {%- block after_footer %}
     <script id="documentation_options" data-url_root="{{ pathto('', 1) }}" src="{{ pathto('_static/js/documentation_options.js', 1) }}"></script>

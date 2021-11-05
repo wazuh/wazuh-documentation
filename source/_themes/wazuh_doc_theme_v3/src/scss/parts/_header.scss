@@ -11,7 +11,7 @@
 header {
   height: $headerHeight;
   background: $wuiColorEmptyShade;
-  box-shadow: 0 4px 12px 0 rgba($primaryLighter, .15);
+  box-shadow: 0 4px 12px 0 rgba($wuiColorPrimaryLighter, .15);
 
   .navbar {
     height: $headerHeight;

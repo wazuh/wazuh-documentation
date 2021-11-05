@@ -34,15 +34,25 @@
 
 /* -- Sidebar ---------------------------------------------------------------------------- */
 
-@mixin global-toc-nested-padding($min, $max) {
+@mixin global-toc-nested-padding($min, $max, $delta, $default) {
   @for $level from $min through $max {
     .current {
       .toctree-l#{$level} > a {
-        padding-left: 20px * ($level - 1);
+        padding-left: $delta * ($level - 1);
         &.current-toc-node::before {
-          left: (20px * ($level - 1)) - 15px;
+          left: $delta * ($level - 1) - $default;
         }
       }
     }
+  }
+}
+
+@mixin local-toc-nested-padding($min, $max, $delta, $default) {
+  $elements: '& > ul > li > ul > li';
+  @for $level from $min through $max {
+    #{$elements} > a {
+      padding-left: $delta * $level + $default;
+    }
+    $elements: $elements + ' > ul > li';
   }
 }

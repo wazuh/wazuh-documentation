@@ -1,0 +1,51 @@
+/* -----------------------------------------------------------------------------
+  Component: Previous and Next navigation buttons
+
+  Style for the Previous and Next navigation buttons present in the content area.
+----------------------------------------------------------------------------- */
+
+.navigation-buttons {
+  border-top: 1px solid $wuiColorLighterShade;
+  padding-top: 20px;
+  padding-bottom: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2.5rem;
+
+  a {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 400px;
+
+    &:hover {
+      color: $wuiColorPrimaryLighter;
+      text-decoration: none;
+
+      .chevron {
+        background: url('#{$icoPath}svg-icons.svg#chevron-blue-light');
+      }
+    }
+  }
+
+  .chevron {
+    width: 1.55em;
+    height: 1.55em;
+    background: url('#{$icoPath}svg-icons.svg#chevron-blue');
+    background-position: center;
+    background-size: contain;
+
+    &.left {
+      margin-right: 5px;
+      transform: rotate(90deg);
+    }
+
+    &.right {
+      margin-left: 5px;
+      transform: rotate(-90deg);
+    }
+  }
+}
