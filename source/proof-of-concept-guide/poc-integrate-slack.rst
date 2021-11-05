@@ -3,7 +3,7 @@
 Slack integration
 =================
 
-Report alerts to a `Slack <https://slack.com/>`_ channel with the :ref:`wazuh-integratord` daemon.
+Wazuh can report alerts to `Slack <https://slack.com/>`_ by using the :ref:`wazuh-integratord <wazuh-integratord>` deamon. 
 
 Check our :ref:`manual_integration` for detailed information about integrations.
 
