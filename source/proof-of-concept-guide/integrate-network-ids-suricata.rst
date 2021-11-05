@@ -13,7 +13,7 @@ Configuration
 
 Configure your environment as follows to test the POC.
 
-#. Install Suricata on the RHEL 7 monitored endpoint from the EPEL repository. Take into account that Suricata was tested using 5.0.4 and that the EPEL repository depends on your operating system version:
+#. Install Suricata on the RHEL 7 monitored endpoint from the EPEL repository. Take into account that Suricata was tested with version 5.0.4 and that the EPEL repository depends on your operating system version:
 
     .. code-block:: XML
 
