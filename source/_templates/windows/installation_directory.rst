@@ -7,6 +7,6 @@ The Wazuh agent's installation directory depends on the architecture of the host
 
  .. note::
 
-  This guide supposes that the Wazuh agent is installed in a ``x86_64`` host. The installation path will be: ``C:\Program Files (x86)\ossec-agent``.
+  This guide assumes that the Wazuh agent is installed on a ``x86_64`` host for which the installation path is: ``C:\Program Files (x86)\ossec-agent``.
 
 .. End of include file
