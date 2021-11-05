@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Wazuh agent's registration process provides the user with an automated mechanism to enroll agents with minimal configuration steps.
+  :description: Wazuh agent's registration process provides the user with an automated mechanism to enroll agents with minimal configuration steps. (Change)
   
 .. _agent-enrollment:
 
