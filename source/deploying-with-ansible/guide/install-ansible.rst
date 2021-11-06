@@ -31,6 +31,12 @@ Windows hosts
 
 Windows hosts are supported by Ansible from version 1.7 via the remote execution of PowerShell. As opposed to Linux hosts, it is necessary to do some pre-work before being able to use Ansible in Windows hosts. Please refer to `Windows Guide <https://docs.ansible.com/ansible/latest/user_guide/windows.html>`_ on Ansible official documentation. Consider the following minimum requirements:
 
+- Ansible can generally manage Windows versions under current and extended support from Microsoft. Ansible can manage desktop OSs including Windows 7, 8.1, and 10, and server OSs including Windows Server 2008, 2008 R2, 2012, 2012 R2, 2016, and 2019.
+- Ansible requires PowerShell 3.0 or newer and at least .NET 4.0 to be installed on the Windows host.
+- A WinRM listener should be created and activated.
+
+
+
 Installation on CentOS/RHEL/Fedora
 ----------------------------------
 
