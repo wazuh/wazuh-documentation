@@ -9,10 +9,10 @@ In this section we will proceed to install the Ansible server. To be able to dep
 
 In the example we will follow in this guide, we will have the following infrastructure.
 
-- Ansible server.
-- Wazuh server.
-- Elastic Stack server.
-- Wazuh agent.
+- Ansible server
+- Wazuh server
+- Elastic Stack server
+- Wazuh agent
 
 .. note:: OpenSSH Compatibility
 
