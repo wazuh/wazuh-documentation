@@ -12,7 +12,7 @@ Configuration
 
 #. `Create a Slack webhook <https://api.slack.com/messaging/webhooks>`_. This is a unique URL to which Wazuh will send messages with the alerts.
 
-#. Replace ``YOUR_SLACK_WEBHOOK`` in the below configuration with the url obtained in the previous step. Set this Slack integration configuration in ``/var/ossec/etc/ossec.conf`` at the Wazuh manager endpoint.
+#. Replace ``YOUR_SLACK_WEBHOOK`` in the below configuration with the URL obtained in the previous step. Set this Slack integration configuration in ``/var/ossec/etc/ossec.conf`` at the Wazuh manager endpoint.
 
     .. code-block:: XML
 
@@ -26,10 +26,10 @@ Configuration
 Steps to generate the alerts
 ----------------------------
 
-No action required. Wazuh will automatically forward alerts level 10 or higher to the provided Slack webhook.
+No action is required. Wazuh automatically forwards alerts level 10 or higher to the provided Slack webhook.
 
-Alerts
-------
+Querying the alerts
+-------------------
 
 The Slack channel you associated with your Slack webhook will show the alerts in real time.
 
