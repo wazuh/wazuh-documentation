@@ -7,8 +7,9 @@ Wazuh can detect trojaned system binaries by using signatures in the ``/var/osse
 
 Configuration
 -------------
+Configure your environment as follows to test the POC.
 
-No additional configuration is required. Trojans detection is configured out-of-the-box. Check your configuration in the ``/var/ossec/etc/ossec.conf`` file at the RHEL 7 monitored endpoint.
+No additional configuration is required since trojan detection is configured out-of-the-box. Check your configuration in the ``/var/ossec/etc/ossec.conf`` file at the RHEL 7 monitored endpoint.
 
     .. code-block:: none
 
