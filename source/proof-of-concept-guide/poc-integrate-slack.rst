@@ -9,6 +9,7 @@ Check our :ref:`manual_integration` for detailed information about integrations.
 
 Configuration
 -------------
+Configure your environment as follows to test the POC.
 
 #. `Create a Slack webhook <https://api.slack.com/messaging/webhooks>`_. This is a unique URL to which Wazuh will send messages with the alerts.
 
