@@ -569,7 +569,7 @@ In this case, the AR script calls ``launcher.cmd`` which works as a bridge calli
 
  .. note::
 
-    The Python path must be included in the System user path. Look for it in the **Environment Variables** panel of your Windows system.
+    The Python path must be included in the System user path. Look for it in the **Environment Variables** window of your Windows system.
 
 
 This configuration allows you to run any Windows script through ``launcher.cmd`` script when triggering an active response.
