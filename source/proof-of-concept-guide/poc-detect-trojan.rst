@@ -3,14 +3,14 @@
 Detecting suspicious binaries - Trojan
 ======================================
 
-Detect trojaned system binaries using the signatures in the ``/var/ossec/etc/shared/rootkit_trojans.txt`` file.
+Wazuh can detect trojaned system binaries by using signatures in the ``/var/ossec/etc/shared/rootkit_trojans.txt`` file.
 
 Configuration
 -------------
 
-No additional configuration is required. Trojans detection is configured out-of-the-box. Check your configuration in ``/var/ossec/etc/ossec.conf`` at the RHEL 7 monitored endpoint.
+No additional configuration is required. Trojans detection is configured out-of-the-box. Check your configuration in the ``/var/ossec/etc/ossec.conf`` file at the RHEL 7 monitored endpoint.
 
-    .. code-block:: XML
+    .. code-block:: none
 
         <rootcheck>
             <disabled>no</disabled>
@@ -35,7 +35,7 @@ No additional configuration is required. Trojans detection is configured out-of-
 Steps to generate the alerts
 ----------------------------
 
-#. Save a copy of the original system binary.
+#. Create a copy of the original system binary.
 
     .. code-block:: console
 
@@ -51,8 +51,8 @@ Steps to generate the alerts
         #Now running original binary
         /usr/bin/w.copy
 
-Alerts
-------
+Querying the alerts
+-------------------
 
 Related alerts can be found with the following query once the next rootcheck scan has been completed:
 
