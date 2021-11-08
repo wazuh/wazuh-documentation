@@ -47,14 +47,14 @@ Installing the Wazuh manager
 
     .. tabs::
 
-      .. group-tab:: RPM
+      .. group-tab:: .rpm
 
         .. code-block:: console
         
           # rpm --import ./wazuh_files/GPG-KEY-WAZUH
           # rpm -ivh ./wazuh-packages/wazuh-manager*.rpm
 
-      .. group-tab:: deb
+      .. group-tab:: .deb
 
         .. code-block:: console
         
@@ -76,13 +76,13 @@ Installing Elasticsearch
 
     .. tabs::
 
-      .. group-tab:: RPM
+      .. group-tab:: .rpm
 
         .. code-block:: console
         
-          # rpm -i ./opendistro-packages/*.rpm > opendistro_output.txt
+          # rpm -ivh ./opendistro-packages/*.rpm > opendistro_output.txt
 
-      .. group-tab:: deb
+      .. group-tab:: .deb
 
         .. code-block:: console
         
@@ -175,13 +175,13 @@ Installing Filebeat
 
     .. tabs::
 
-      .. group-tab:: RPM
+      .. group-tab:: .rpm
 
         .. code-block:: console
         
-          # rpm -i ./wazuh-packages/filebeat*.rpm
+          # rpm -ivh ./wazuh-packages/filebeat*.rpm
 
-      .. group-tab:: deb
+      .. group-tab:: .deb
 
         .. code-block:: console
         
@@ -283,13 +283,13 @@ Installing Kibana
 
    .. tabs::
 
-     .. group-tab:: RPM
+     .. group-tab:: .rpm
 
        .. code-block:: console
        
-         # rpm -i ./opendistro-kibana-packages/opendistroforelasticsearch-kibana*.rpm
+         # rpm -ivh ./opendistro-kibana-packages/opendistroforelasticsearch-kibana*.rpm
 
-     .. group-tab:: deb
+     .. group-tab:: .deb
 
        .. code-block:: console
        
@@ -311,11 +311,11 @@ Installing Kibana
       # mkdir /usr/share/kibana/data
       # chown -R kibana:kibana /usr/share/kibana/data
 
-#. Replace ``</path/to/installation/folder>`` with your installation folder path and run the following command to install the Wazuh Kibana plugin.
+#. Replace ``</path/to/installation/folder/>`` with your installation folder path and run the following command to install the Wazuh Kibana plugin.
 
     .. code-block:: console
 
-        # /usr/share/kibana/bin/kibana-plugin install --allow-root file://</path/to/installation/folder>/wazuh_files/kibana/wazuh_kibana.zip
+        # /usr/share/kibana/bin/kibana-plugin install --allow-root file://</path/to/installation/folder/>wazuh_files/kibana/wazuh_kibana.zip
 
 #. Copy the Elasticsearch certificates into ``/etc/kibana/certs``.
 
