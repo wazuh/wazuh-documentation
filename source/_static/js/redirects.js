@@ -3204,8 +3204,8 @@ newUrls['3.1'] = [
   '/user-manual/capabilities/vuls.html',
   '/user-manual/reference/ossec-conf/wodle-ciscat.html',
   '/user-manual/reference/ossec-conf/wodle-command.html',
-  '/user-manual/reference/unattended-installation.html  '/
-  '/user-manual/capabilities/vuls.html'/
+  '/user-manual/reference/unattended-installation.html',
+  '/user-manual/capabilities/vuls.html',
 ];
 
 /* Pages no longer available in 3.1 */
