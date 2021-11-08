@@ -250,6 +250,17 @@ newUrls['4.1'] = [
   '/user-manual/capabilities/wazuh-logtest/logtest-configuration.html',
   '/user-manual/capabilities/wazuh-logtest/logtest-faq.html',
   '/user-manual/ruleset/ruleset-xml-syntax/pcre2.html',
+  '/amazon/services/supported-services/alb.html',
+  '/amazon/services/supported-services/clb.html',
+  '/amazon/services/supported-services/nlb.html',
+  '/deploying-with-kubernetes/kubernetes-local-env.html',
+  '/installation-guide/more-installation-alternatives/splunk/index.html',
+  '/installation-guide/more-installation-alternatives/splunk/splunk-app.html',
+  '/installation-guide/more-installation-alternatives/splunk/splunk-basic.html',
+  '/installation-guide/more-installation-alternatives/splunk/splunk-distributed.html',
+  '/installation-guide/more-installation-alternatives/splunk/splunk-polling.html',
+  '/installation-guide/more-installation-alternatives/splunk/splunk-reverse-proxy.html',
+  '/installation-guide/more-installation-alternatives/splunk/splunk-wazuh.html',
 ];
 
 removedUrls['4.1'] = [
