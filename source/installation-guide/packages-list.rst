@@ -22,6 +22,7 @@ This download page contains packages required for the Wazuh installation with th
 - `Wazuh Kibana plugin`_
 - `Wazuh Splunk app`_
 - `Virtual machine`_
+- `Amazon Machine Image`_
 - `Open Distro for Elasticsearch`_
 
    - `Elasticsearch`_
@@ -263,6 +264,15 @@ Virtual machine
 +==============+==============+==============+=========+====================================================================================================================================================================================================+
 |   CentOS 7   |    64bits    |      OVA     |  |WAZUH_LATEST_OVA|  | `wazuh-|WAZUH_LATEST_OVA|_|OPEN_DISTRO_LATEST|.ova <https://packages.wazuh.com/|CURRENT_MAJOR|/vm/wazuh-|WAZUH_LATEST_OVA|_|OPEN_DISTRO_LATEST|.ova>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST_OVA|/wazuh-|WAZUH_LATEST_OVA|_|OPEN_DISTRO_LATEST|.ova.sha512>`__)             |
 +--------------+--------------+--------------+---------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+Amazon Machine Image
+--------------------
+
++--------------------+--------------+------------------+----------------------+------------------------------------+
+| Distribution       | Architecture | VM Format        | Version              | Package                            |
++====================+==============+==================+======================+====================================+
+|   Amazon Linux 2   |    64bits    |      AWS AMI     |  |WAZUH_LATEST_AMI|               | Wazuh  |WAZUH_LATEST_AMI|                       |
++--------------------+--------------+------------------+----------------------+------------------------------------+
 
 
 Open Distro for Elasticsearch

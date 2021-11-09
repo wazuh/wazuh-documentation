@@ -693,11 +693,6 @@ $wazuh_api_access_max_request_per_minute
 
   `Default 300`
 
-$wazuh_api_use_only_authd
-  Forces the use of wazuh-authd when registering and removing agents.
-
-  `Default false`
-
 $wazuh_api_drop_privileges
   Run wazuh-api process as wazuh user
 

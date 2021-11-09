@@ -88,6 +88,8 @@ redirections.push(
   },
 );
 
+/* *** RELEASE 4.3 ****/
+
 /* Pages added in 4.3 */
 
 newUrls['4.3'] = [
@@ -98,6 +100,7 @@ newUrls['4.3'] = [
   '/office365/monitoring-office365-activity.html',
   '/user-manual/reference/ossec-conf/office365-module.html',
   '/user-manual/capabilities/file-integrity/fim-fields-rule-mapping.html',
+  '/user-manual/capabilities/log-data-collection/how-to-collect-macoslogs.html',
 ];
 
 /* *** RELEASE 4.2 ****/
@@ -105,6 +108,7 @@ newUrls['4.3'] = [
 /* Pages added in 4.2 */
 
 newUrls['4.2'] = [
+  '/amazon-machine-images/amazon-machine-images.html',
   '/release-notes/release-4-2-4.html',
   '/release-notes/release-4-2-3.html',
   '/release-notes/release-4-2-2.html',
@@ -157,10 +161,12 @@ newUrls['4.2'] = [
   '/cloud-service/your-environment/understanding-storage.html',
   '/cloud-service/getting-started/sign-up-trial.html',
   '/cloud-service/getting-started/access-wazuh-wui.html',
-  '/cloud-service/getting-started/register-agents.html',
+  '/cloud-service/getting-started/register-agents.html', 
+  '/user-manual/kibana-app/wazuh-rbac.html',
 ];
 
 removedUrls['4.2'] = [
+  '/user-manual/kibana-app/connect-kibana-app.html',
   '/user-manual/reference/daemons/ossec-agentd.html',
   '/user-manual/reference/daemons/ossec-agentlessd.html',
   '/user-manual/reference/daemons/ossec-analysisd.html',
