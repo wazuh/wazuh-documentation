@@ -5,7 +5,7 @@
 Open Distro
 -----------
 
-This role is intended to deploy Opendistro node, you have some variables that can be used to customize the installation:
+This role is intended to deploy Open Distro node, you have some variables that can be used to customize the installation:
 
 - **elasticsearch_network_host:** defines listen ip address (default: ``127.0.0.1``).
 - **elasticsearch_http_port:** defines listen port (default: ``9200``).
@@ -38,6 +38,6 @@ Next, run the ansible playbook: ::
 
   $ ansible-playbook wazuh-elastic.yml -e@vars-production.yml
 
-The example above will install Opendistro and set the listen address to: ``10.1.1.10`` using ``vars-production.yml``.
+The example above will install Open Distro and set the listen address to: ``10.1.1.10`` using ``vars-production.yml``.
 
 Please review the :ref:`references <wazuh_ansible_reference_elasticsearch>` section to see all variables available for this role.
