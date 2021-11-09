@@ -3079,7 +3079,7 @@ redirections.push(
     {
       'target': ['3.4=>3.5'],
       '3.4': '/user-manual/capabilities/vuls.html',
-      '3.5': '/user-manual/capabilities/vulnerability-detection/index.html ',
+      '3.5': '/user-manual/capabilities/vulnerability-detection.html',
     }
 );
 
