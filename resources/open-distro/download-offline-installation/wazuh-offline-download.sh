@@ -21,17 +21,24 @@ ES_VERSION=${DEFAULT_ES_VERSION}
 BASE_DEST_FOLDER="wazuh-offline"
 
 BASE_URL="https://packages.wazuh.com/${WAZUH_MAJOR}"
+
 BASE_RESOURCES_URL="https://packages.wazuh.com/resources/${WAZUH_MINOR}"
 
-WAZUH_DEB_BASE_URL="${BASE_URL}/apt/pool/main/w/wazuh-manager"
-FILEBEAT_DEB_BASE_URL="${BASE_URL}/apt/pool/main/f/filebeat"
-ESOSS_DEB_BASE_URL="${BASE_URL}/apt/pool/main/e/elasticsearch-oss"
-OD_DEB_BASE_URL="${BASE_URL}/apt/pool/main/o"
-KIBANA_DEB_BASE_URL="${BASE_URL}/apt/pool/main/o/opendistroforelasticsearch-kibana"
+ARCH="x86_64" # Default architecture
 
+SILENT="s" # Silent and Verbose turned\
+VERBOSE="" # on and off by default
+
+WAZUH_DEB_BASE_URL="${BASE_URL}/apt/pool/main/w/wazuh-manager"
 WAZUH_DEB_PACKAGES=( "wazuh-manager_${WAZUH_VERSION}-1_amd64.deb" )
+
+FILEBEAT_DEB_BASE_URL="${BASE_URL}/apt/pool/main/f/filebeat"
 FILEBEAT_DEB_PACKAGES=( "filebeat-oss-${ES_VERSION}-amd64.deb" )
+
+ESOSS_DEB_BASE_URL="${BASE_URL}/apt/pool/main/e/elasticsearch-oss"
 ESOSS_DEB_PACKAGES=( "elasticsearch-oss-${ES_VERSION}-amd64.deb" )
+
+OD_DEB_BASE_URL="${BASE_URL}/apt/pool/main/o"
 OD_DEB_PACKAGES=( "opendistro-anomaly-detection/opendistro-anomaly-detection_1.13.0.0-1_all.deb" )
 OD_DEB_PACKAGES+=( "opendistro-reports-scheduler/opendistro-reports-scheduler_1.13.0.0-1_all.deb" )
 OD_DEB_PACKAGES+=( "opendistro-knn/opendistro-knn_1.13.0.0-1_all.deb" )
@@ -44,17 +51,20 @@ OD_DEB_PACKAGES+=( "opendistroforelasticsearch/opendistroforelasticsearch_1.13.2
 OD_DEB_PACKAGES+=( "opendistro-index-management/opendistro-index-management_1.13.2.0-1_all.deb" )
 OD_DEB_PACKAGES+=( "opendistro-job-scheduler/opendistro-job-scheduler_1.13.0.0-1_all.deb" )
 OD_DEB_PACKAGES+=( "opendistro-sql/opendistro-sql_1.13.2.0-1_all.deb" )
+
+KIBANA_DEB_BASE_URL="${BASE_URL}/apt/pool/main/o/opendistroforelasticsearch-kibana"
 KIBANA_DEB_PACKAGES=( "opendistroforelasticsearch-kibana_1.13.2_amd64.deb" )
 
 WAZUH_RPM_BASE_URL="${BASE_URL}/yum"
-FILEBEAT_RPM_BASE_URL="${BASE_URL}/yum"
-ESOSS_RPM_BASE_URL="${BASE_URL}/yum"
-OD_RPM_BASE_URL="${BASE_URL}/yum"
-KIBANA_RPM_BASE_URL="${BASE_URL}/yum"
-
 WAZUH_RPM_PACKAGES=( "wazuh-manager-${WAZUH_VERSION}-1.x86_64.rpm" )
+
+FILEBEAT_RPM_BASE_URL="${BASE_URL}/yum"
 FILEBEAT_RPM_PACKAGES=( "filebeat-oss-${ES_VERSION}-x86_64.rpm" )
+
+ESOSS_RPM_BASE_URL="${BASE_URL}/yum"
 ESOSS_RPM_PACKAGES=( "elasticsearch-oss-${ES_VERSION}-x86_64.rpm" )
+
+OD_RPM_BASE_URL="${BASE_URL}/yum"
 OD_RPM_PACKAGES=( "opendistro-alerting-1.13.1.0.rpm" )
 OD_RPM_PACKAGES+=( "opendistro-anomaly-detection-1.13.0.0.rpm" )
 OD_RPM_PACKAGES+=( "opendistro-asynchronous-search-1.13.0.1.rpm" )
@@ -67,20 +77,18 @@ OD_RPM_PACKAGES+=( "opendistro-reports-scheduler-1.13.0.0.rpm" )
 OD_RPM_PACKAGES+=( "opendistro-security-1.13.1.0.rpm" )
 OD_RPM_PACKAGES+=( "opendistro-sql-1.13.2.0.rpm" )
 OD_RPM_PACKAGES+=( "opendistroforelasticsearch-1.13.2-linux-x64.rpm" )
+
+KIBANA_RPM_BASE_URL="${BASE_URL}/yum"
 KIBANA_RPM_PACKAGES=( "opendistroforelasticsearch-kibana-1.13.2-linux-x64.rpm" )
 
-ARCH="x86_64" # Default architecture
-
-SILENT="s" # Silent and Verbose turned
-VERBOSE="" # on and off by default
+#define_packages_names(){}
 
 get_wazuh_packages(){
 
+  # Wazuh and Filebeat packages
   if [ "$LIST_ONLY" = true ] ; then
-    # List packages for Wazuh and Filebeat
     printf "\nListing Wazuh $PACKAGE packages for $ARCH...\n"
   else
-    # Download packages for Wazuh and Filebeat
     printf "\nDownloading Wazuh $PACKAGE packages for $ARCH...\n"
 
     DEST_PATH="${BASE_DEST_FOLDER}/wazuh-packages"
@@ -94,16 +102,20 @@ get_wazuh_packages(){
     "deb x86_64")
       for p in ${WAZUH_DEB_PACKAGES[@]}; do
         if [ "$LIST_ONLY" = true ] ; then
+          # List packages for Wazuh
           printf "${WAZUH_DEB_BASE_URL}/$p\n"
         else
+          # Download packages for Wazuh
           curl -${SILENT}o ${DEST_PATH}/$p ${WAZUH_DEB_BASE_URL}/$p
         fi
       done
       
       for p in ${FILEBEAT_DEB_PACKAGES[@]}; do
         if [ "$LIST_ONLY" = true ] ; then
+          # List packages for Filebeat
           printf "${FILEBEAT_DEB_BASE_URL}/$p\n"
         else
+          # Download packages for Filebeat
           curl -${SILENT}o ${DEST_PATH}/$p ${FILEBEAT_DEB_BASE_URL}/$p
         fi
       done
@@ -115,15 +127,19 @@ get_wazuh_packages(){
     "rpm x86_64")
       for p in ${WAZUH_RPM_PACKAGES[@]}; do
         if [ "$LIST_ONLY" = true ] ; then
+          # List packages for Wazuh
           printf "${WAZUH_RPM_BASE_URL}/$p\n"
         else
+          # Download packages for Wazuh
           curl -${SILENT}o ${DEST_PATH}/$p ${WAZUH_RPM_BASE_URL}/$p
         fi
       done
       for p in ${FILEBEAT_RPM_PACKAGES[@]}; do
         if [ "$LIST_ONLY" = true ] ; then
+          # List packages for Filebeat
           printf "${FILEBEAT_RPM_BASE_URL}/$p\n"
         else
+          # Download packages for Filebeat
           curl -${SILENT}o ${DEST_PATH}/$p ${FILEBEAT_RPM_BASE_URL}/$p
         fi
       done
@@ -142,11 +158,10 @@ get_wazuh_packages(){
 
 get_opendistro_packages(){
 
+  # Open Distro packages
   if [ "$LIST_ONLY" = true ] ; then
-    # List packages for Elasticsearch and Kibana
     printf "\nListing Open Distro $PACKAGE packages...\n"
   else
-    # Download packages for Elasticsearch and Kibana
     printf "\nDownloading Open Distro $PACKAGE packages...\n"
 
     DEST_PATH="${BASE_DEST_FOLDER}/opendistro-packages"
@@ -160,16 +175,20 @@ get_opendistro_packages(){
     "deb x86_64")
       for p in ${ESOSS_DEB_PACKAGES[@]}; do
         if [ "$LIST_ONLY" = true ] ; then
+          # List packages for Elasticsearch
           printf "${ESOSS_DEB_BASE_URL}/$p\n"
         else
+          # Download packages for Elasticsearch
           curl -${SILENT}o ${DEST_PATH}/$p ${ESOSS_DEB_BASE_URL}/$p
         fi
       done
       
       for p in ${OD_DEB_PACKAGES[@]}; do
         if [ "$LIST_ONLY" = true ] ; then
+          # List Open Distro packages
           printf "${OD_DEB_BASE_URL}/$p\n"
         else
+          # Download Open Distro packages
           curl -${SILENT}o ${DEST_PATH}/${p##*/} ${OD_DEB_BASE_URL}/$p
         fi
       done
@@ -177,16 +196,20 @@ get_opendistro_packages(){
     "rpm x86_64")
       for p in ${ESOSS_RPM_PACKAGES[@]}; do
         if [ "$LIST_ONLY" = true ] ; then
+          # List packages for Elasticsearch
           printf "${ESOSS_RPM_BASE_URL}/$p\n"
         else
+          # Download packages for Elasticsearch
           curl -${SILENT}o ${DEST_PATH}/$p ${ESOSS_RPM_BASE_URL}/$p
         fi
       done
       
       for p in ${OD_RPM_PACKAGES[@]}; do
         if [ "$LIST_ONLY" = true ] ; then
+          # List Open Distro packages
           printf "${OD_RPM_BASE_URL}/$p\n"
         else
+          # Download Open Distro packages
           curl -${SILENT}o ${DEST_PATH}/$p ${OD_RPM_BASE_URL}/$p
         fi
       done
@@ -197,6 +220,7 @@ get_opendistro_packages(){
     ;;
   esac
 
+  # Kibana packages
   if [ "$LIST_ONLY" = true ] ; then
     printf "\n"
   else
@@ -211,8 +235,10 @@ get_opendistro_packages(){
     "deb x86_64")
       for p in ${KIBANA_DEB_PACKAGES[@]}; do
         if [ "$LIST_ONLY" = true ] ; then
+          # List packages for Kibana
           printf "${KIBANA_DEB_BASE_URL}/$p\n"
         else
+          # Download packages for Kibana
           curl -${SILENT}o ${DEST_PATH}/$p ${KIBANA_DEB_BASE_URL}/$p
         fi
       done
@@ -220,8 +246,10 @@ get_opendistro_packages(){
     "rpm x86_64")
       for p in ${KIBANA_RPM_PACKAGES[@]}; do
         if [ "$LIST_ONLY" = true ] ; then
+          # List packages for Kibana
           printf "${KIBANA_RPM_BASE_URL}/$p\n"
         else
+          # Download packages for Kibana
           curl -${SILENT}o ${DEST_PATH}/$p ${KIBANA_RPM_BASE_URL}/$p
         fi
       done
@@ -236,6 +264,7 @@ get_opendistro_packages(){
 
 get_wazuh_files(){
 
+  # Wazuh files
   if [ "$LIST_ONLY" = true ] ; then
     # List key, config templates and Filebeat module
     printf "\nListing Wazuh configuration files...\n"
@@ -278,6 +307,7 @@ get_wazuh_files(){
 
 get_opendistro_files(){
 
+  # Open Distro files
   if [ "$LIST_ONLY" = true ] ; then
     # List Elasticsearch config templates
     printf "\nListing Elasticsearch configuration files...\n"
@@ -308,6 +338,7 @@ get_opendistro_files(){
     curl -${SILENT}o ${DEST_PATH}/elasticsearch/internal_users.yml ${BASE_RESOURCES_URL}/open-distro/elasticsearch/roles/internal_users.yml
   fi
   
+  # Certificates utility files
   if [ "$LIST_ONLY" = true ] ; then
     # List certificates utility files
     printf "\nListing Wazuh certificates utility files...\n"
@@ -324,13 +355,14 @@ get_opendistro_files(){
     curl -${SILENT}o ${DEST_PATH}/elasticsearch/instances.yml ${BASE_RESOURCES_URL}/open-distro/tools/certificate-utility/instances_aio.yml
   fi
   
+  # Kibana files
   if [ "$LIST_ONLY" = true ] ; then
-    # List Kibana config templates and Kibana app
+    # List Kibana config templates
     printf "\nListing Kibana configuration files...\n"
 
     printf "${BASE_RESOURCES_URL}/open-distro/kibana/7.x/kibana_all_in_one.yml\n"
   else
-    # Download Kibana config templates and Kibana app
+    # Download Kibana config templates
     printf "\nDownloading Kibana configuration files...\n"
 
     mkdir -p ${DEST_PATH}/kibana
@@ -384,27 +416,29 @@ parse_arguments() {
 
   set -- "${POSITIONAL[@]}" # restore positional parameters
   
-  for i in "$@"; do
-    case $i in
-      -w=*|--wazuh-version=*)
-        WAZUH_VERSION="${i#*=}"
-        shift # past argument=value
-        ;;
-      -e=*|--elastic-version=*)
-        ES_VERSION="${i#*=}"
-        shift # past argument=value
-        ;;
-      *)
-        # unknown option
-        ;;
-    esac
-  done
+  #for i in "$@"; do
+  #  case $i in
+  #    -w=*|--wazuh-version=*)
+  #      WAZUH_VERSION="${i#*=}"
+  #      shift # past argument=value
+  #      ;;
+  #    -e=*|--elastic-version=*)
+  #      ES_VERSION="${i#*=}"
+  #      shift # past argument=value
+  #      ;;
+  #    *)
+  #      # unknown option
+  #      ;;
+  #  esac
+  #done
 }
 
 print_help(){
   
+  printf "Usage: $0 [OPTIONS]\n\nMandatory options\n\t-p, --packages <deb|rpm>\t\t\tPackage files format\n\nOther options\n"
   #printf "\t-a, --architecture <x86_64|aarch64>\t\tArchitecture type (Default: x86_64)\n"
-  printf "Usage: $0 [OPTIONS]\n\nMandatory options\n\t-p, --packages <deb|rpm>\t\t\tPackage files format\n\nOther options\n\t-w=<version>, --wazuh-version=<version>\t\tSelect specific Wazuh manager version (Default: ${DEFAULT_WAZUH_VERSION})\n\t-e=<version>, --elastic-version=<version>\tSelect specific ELK version (Default: ${DEFAULT_ES_VERSION})\n\t-l, --list-only\t\t\t\t\tDo not download. Show only the list of packages\n\t-v, --verbose\t\t\t\t\tShow detailed output\n\t-h, --help\t\t\t\t\tShow this help\n"
+  #printf "\t-w=<version>, --wazuh-version=<version>\t\tSelect specific Wazuh manager version (Default: ${DEFAULT_WAZUH_VERSION})\n\t-e=<version>, --elastic-version=<version>\tSelect specific ELK version (Default: ${DEFAULT_ES_VERSION})\n"
+  printf "\t-l, --list-only\t\t\t\t\tDo not download. Show only the list of packages\n\t-v, --verbose\t\t\t\t\tShow detailed output\n\t-h, --help\t\t\t\t\tShow this help\n"
 
 }
 
@@ -415,6 +449,8 @@ print_unknown_args(){
 }
 
 parse_arguments "$@"
+
+#define_packages_names
 
 get_wazuh_packages
 
