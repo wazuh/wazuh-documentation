@@ -21,7 +21,8 @@ This manual describes the configuration process to start this plugin and the dif
     .. toctree::
         :maxdepth: 1
 
-        connect-kibana-app
         features/index
+        RBAC - create and map users <wazuh-rbac>
         troubleshooting
         reference/index
+        
