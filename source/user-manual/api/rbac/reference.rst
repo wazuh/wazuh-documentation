@@ -651,7 +651,7 @@ vulnerability:read
 ~~~~~~~~~~~~~~~~~~
 - :api-ref:`GET /vulnerability/{agent_id} <operation/api.controllers.vulnerability_controller.get_vulnerability_agent>` (`agent:id`_, `agent:group`_)
 
-
+.. _api_rbac_reference_default_policies:
 
 Default policies
 ----------------
@@ -1082,6 +1082,8 @@ Allow reading agents' vulnerabilities information.
         - agent:id:*
       effect: allow
 
+
+.. _api_rbac_reference_default_roles:
 
 Default roles
 -------------

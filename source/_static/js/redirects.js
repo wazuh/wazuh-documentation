@@ -39,6 +39,10 @@ removedUrls['x.y'] = [
 /* Pages added in 4.2 */
 
 newUrls['4.2'] = [
+  '/amazon-machine-images/amazon-machine-images.html',
+  '/release-notes/release-4-2-4.html',
+  '/release-notes/release-4-2-3.html',
+  '/release-notes/release-4-2-2.html',
   '/release-notes/release_4_2_1.html',
   '/release-notes/release_4_2_0.html',
   '/user-manual/capabilities/active-response/ar-use-cases/removing-malware.html',
@@ -202,6 +206,7 @@ newUrls['4.2'] = [
   '/user-manual/reference/tools/update-ruleset.html',
   '/user-manual/elasticsearch/elastic-tuning.html',
   '/user-manual/api/rbac/auth-context.html',
+  '/user-manual/kibana-app/wazuh-rbac.html',
   '/docker-monitor/monitoring-containers-activity.html',
   '/docker-monitor/monitoring-docker-server.html',
   '/upgrade-guide/compatibility-matrix/index.html',
@@ -209,6 +214,7 @@ newUrls['4.2'] = [
 ];
 
 removedUrls['4.2'] = [
+  '/user-manual/kibana-app/connect-kibana-app.html',
   '/user-manual/reference/daemons/ossec-agentd.html',
   '/user-manual/reference/daemons/ossec-agentlessd.html',
   '/user-manual/reference/daemons/ossec-analysisd.html',

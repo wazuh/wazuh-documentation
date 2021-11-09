@@ -153,7 +153,7 @@ The script configured to run as part of the active response settings defined on 
   LOCAL=`dirname $0`
   
   # Extra arguments
-  read INPUT_JSON
+  read -r INPUT_JSON
   YARA_PATH=$(echo $INPUT_JSON | jq -r .parameters.extra_args[1])
   YARA_RULES=$(echo $INPUT_JSON | jq -r .parameters.extra_args[3])
   FILENAME=$(echo $INPUT_JSON | jq -r .parameters.alert.syscheck.path)

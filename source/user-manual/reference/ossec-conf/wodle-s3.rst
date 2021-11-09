@@ -153,6 +153,7 @@ Bucket options
 - `bucket\\path`_
 - `bucket\\only_logs_after`_
 - `bucket\\regions`_
+- `bucket\\aws_organization_id`_
 
 +----------------------------------+------------------------------------------------+-----------------------------------------------+
 | Options                          | Allowed values                                 | Mandatory/Optional                            |

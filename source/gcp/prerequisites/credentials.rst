@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about GCP credentials configuration.
+  :description: The Wazuh GCP module allows you to pull log data from Google Pub/Sub. Learn more about GCP credentials configuration in this section.
 
 
 .. _gcp_credentials:
