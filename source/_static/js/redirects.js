@@ -395,7 +395,7 @@ newUrls['4.0'] = [
   '/user-manual/uninstall/index.html',
   '/user-manual/uninstall/open-distro.html',
   '/user-manual/certificates.html',
-  '/virtual-machine/virtual-machine.html  '/
+  '/virtual-machine/virtual-machine.html'/
   '/docker/upgrade-guide.html'/
 ];
 
