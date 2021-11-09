@@ -395,8 +395,8 @@ newUrls['4.0'] = [
   '/user-manual/uninstall/index.html',
   '/user-manual/uninstall/open-distro.html',
   '/user-manual/certificates.html',
-  '/virtual-machine/virtual-machine.html'/
-  '/docker/upgrade-guide.html'/
+  '/virtual-machine/virtual-machine.html',
+  '/docker/upgrade-guide.html',
 ];
 
 removedUrls['4.0'] = [
@@ -3205,7 +3205,6 @@ newUrls['3.1'] = [
   '/user-manual/reference/ossec-conf/wodle-ciscat.html',
   '/user-manual/reference/ossec-conf/wodle-command.html',
   '/user-manual/reference/unattended-installation.html',
-  '/user-manual/capabilities/vuls.html',
 ];
 
 /* Pages no longer available in 3.1 */
