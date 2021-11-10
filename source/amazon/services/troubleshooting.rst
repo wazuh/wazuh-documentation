@@ -85,7 +85,7 @@ Common errors
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
     | 15        | Invalid VPC endpoint URL                                          | Ensure that the VPC endpoint URL provided is correct.                                                                                                |
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | 16        | Throttling error                                                  | AWS is receiving more than 10 requests per second. Try to run the module again when the number of requests to AWS has been reduced.                  |
+    | 16        | Throttling error                                                  | AWS is receiving more than 10 requests per second. Try to run the module again when the number of requests to AWS has decreased.                     |
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 #. Debugging configuration:
