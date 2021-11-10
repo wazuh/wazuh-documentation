@@ -31,7 +31,7 @@ The deployment of the Open Distro for the Elasticsearch server involves the inst
 
 .. note::
 
-	Following the example we started in the previous sections, we have added a second host to the ``/etc/ansible/hosts`` file, in this case the operating system is Ubuntu 17 and we need to indicate the path of the Python interpreter.
+	Following the example we started in the previous sections, we have added a second host to the ``/etc/ansible/hosts`` file. In this case, the operating system is Ubuntu 17, and we need to indicate the path of the Python interpreter.
 
 
 	192.168.0.180 ansible_ssh_user=centos
