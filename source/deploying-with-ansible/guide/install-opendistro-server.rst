@@ -246,7 +246,7 @@ As we can see, we have added the IP address of our Elastic Stack server to the `
 3 - Running the playbook
 ------------------------
 
-It seems that we are ready to run the playbook and start the installation, but some of the operations we will perform on the remote systems will need sudo permissions. We can solve this in several ways, opting to enter the password when Ansible requests it. To contemplate other options we consult the option `become <https://docs.ansible.com/ansible/latest/user_guide/become.html#id1>`_ (to avoid entering passwords one by one).
+It seems that we are ready to run the playbook and start the installation, but some of the operations we will perform on the remote systems will need sudo permissions. We can solve this in several ways, such as entering the password when Ansible requests it. To contemplate other options, we can consult the option `become <https://docs.ansible.com/ansible/latest/user_guide/become.html#id1>`_ (to avoid entering passwords one by one).
 
 3.1 - Let's launch the playbook run.
 
