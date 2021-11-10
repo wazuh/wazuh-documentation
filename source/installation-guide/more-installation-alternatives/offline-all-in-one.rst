@@ -27,7 +27,7 @@ Download the packages and configuration files
 
     .. code-block:: console
       
-      # curl -sO https://raw.githubusercontent.com/wazuh/wazuh-documentation/4329_Write_offline_installation_guide/resources/open-distro/download-offline-installation/wazuh-offline-download.sh && bash ./wazuh-offline-download.sh -p <deb|rpm>
+      # curl -sO https://packages.wazuh.com/resources/4.2/open-distro/tools/wazuh-offline-download.sh && bash ./wazuh-offline-download.sh -p <deb|rpm>
           
 #. Copy or move the ``./wazuh-offline/`` folder contents to a folder accessible to the host from where the offline installation will be carried out.
 
@@ -47,14 +47,14 @@ Installing the Wazuh manager
 
     .. tabs::
 
-      .. group-tab:: .rpm
+      .. group-tab:: RPM
 
         .. code-block:: console
         
           # rpm --import ./wazuh_files/GPG-KEY-WAZUH
           # rpm -ivh ./wazuh-packages/wazuh-manager*.rpm
 
-      .. group-tab:: .deb
+      .. group-tab:: DEB
 
         .. code-block:: console
         
@@ -76,13 +76,13 @@ Installing Elasticsearch
 
     .. tabs::
 
-      .. group-tab:: .rpm
+      .. group-tab:: RPM
 
         .. code-block:: console
         
           # rpm -ivh ./opendistro-packages/*.rpm > opendistro_output.txt
 
-      .. group-tab:: .deb
+      .. group-tab:: DEB
 
         .. code-block:: console
         
@@ -175,13 +175,13 @@ Installing Filebeat
 
     .. tabs::
 
-      .. group-tab:: .rpm
+      .. group-tab:: RPM
 
         .. code-block:: console
         
           # rpm -ivh ./wazuh-packages/filebeat*.rpm
 
-      .. group-tab:: .deb
+      .. group-tab:: DEB
 
         .. code-block:: console
         
@@ -283,13 +283,13 @@ Installing Kibana
 
    .. tabs::
 
-     .. group-tab:: .rpm
+     .. group-tab:: RPM
 
        .. code-block:: console
        
          # rpm -ivh ./opendistro-kibana-packages/opendistroforelasticsearch-kibana*.rpm
 
-     .. group-tab:: .deb
+     .. group-tab:: DEB
 
        .. code-block:: console
        
