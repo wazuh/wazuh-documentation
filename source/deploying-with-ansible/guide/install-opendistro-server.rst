@@ -216,7 +216,7 @@ The ``roles:`` section indicates the roles that will be executed on the hosts.
 2 - Preparing the playbook
 --------------------------
 
-We could configure these three files and execute them, but we are going to create a single file that executes the installation of the services in our Elastic Stack Server.
+We could configure these three files and execute them, but we will create a single file that executes the installation of the services in our Elastic Stack Server.
 
 .. code-block:: console
 
