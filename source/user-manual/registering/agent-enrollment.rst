@@ -42,7 +42,7 @@ Typical configurations
 - *Manager certificate validation*: If a valid file path is defined in ``<enrollment><server_ca_path>``, the agent can only accept a key returned by a trusted manager able to identify itself with certificates that match the one located on ``server_ca_path``.
 - *Agent certificate validation*: If valid file paths are defined in ``<enrollment><agent_certificate_path>`` and ``<enrollment><agent_key_path>``, the agent identifies itself with the manager using the provided certificates.
 
-To learn more about the registration process, you can go to this section about `Wazuh enrollment method <https://documentation.wazuh.com/current/user-manual/reference/ossec-conf/client.html#enrollment>`_.
+To learn more about the registration options, check the `Enrollment reference section <https://documentation.wazuh.com/current/user-manual/reference/ossec-conf/client.html#enrollment>`_.
 
 
 Other configurations
@@ -89,7 +89,7 @@ Enrollment configuration block example
 Use case example
 ----------------
 
-In the following example, we show how an Ubuntu Wazuh agent can be configured, registered, and started with some simple steps:
+In the following example, we show how an Ubuntu Wazuh agent can be installed, configured, and registered with some simple steps:
 
 #. Install the Wazuh agent:
 
@@ -98,7 +98,7 @@ In the following example, we show how an Ubuntu Wazuh agent can be configured, r
           # apt-get install wazuh-agent
 
 
-#. Edit ``/var/ossec/etc/ossec.conf`` with the manager IP and, optional, any desired enrollment configuration:
+#. Edit ``/var/ossec/etc/ossec.conf`` to include the manager IP and, optional, any desired enrollment configuration:
 
     .. code-block:: xml
 
@@ -146,16 +146,15 @@ After following these steps, we can see the below logs on ``/var/ossec/log/ossec
         wazuh-agentd: INFO: Waiting 20 seconds before server connection
 
 
-And ``/var/ossec/etc/client.keys`` should now contain the obtained key:
+And ``/var/ossec/etc/client.keys`` now contains the obtained key:
 
 .. code-block:: console
 
     # 001 TEST_AGENT_1 any 5520ccc4fc68eba8d3e49337784e4853f4fce44e3778d22d51b1366e013cf4f3  
 
 
-The agent can be found on the manager side and appears with ``active`` status after a few seconds. Running the following command shows the new registered agent.
+The agent can be found on the manager side and appears with ``active`` status after a few seconds. Running the following command shows the new registered agent. Change your Wazuh API credentials if necessary. 
  
-You must change your credentials if it is necessary, then you get the token and request the API to verify the new user information:
 
 .. code-block:: console
 
@@ -184,6 +183,4 @@ You must change your credentials if it is necessary, then you get the token and 
         "message": "All selected agents information was returned",
         "error": 0
 
-Wazuh enrollment method highly reduces the burden of registering new agents with the manager. Jointly with deployment using variables, this setup can be performed in just three easy steps. 
-
-This new feature reduces the setup times for our users, allowing them to have Wazuh ready and running on their environment sooner. In addition, this improvement provides a recovery mechanism that eliminates the risk of blocking the monitoring of massive agents in case the client keys get lost.
+Wazuh enrollment method highly reduces the burden of registering new agents with the manager. This new feature reduces the setup times for our users, allowing them to have Wazuh ready and running on their environment sooner. In addition, this improvement provides a recovery mechanism that eliminates the risk of blocking the monitoring of massive agents in case the client keys get lost.
