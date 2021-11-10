@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Learn about local configuration (ossec.conf) and how to configure the active response. Check out the options and a sample configuration in this section of the Wazuh documentation.
+  
 .. _reference_ossec_active_response:
 
 active-response
@@ -71,7 +74,7 @@ Indicates which system(s) the command should be executed on.
 | **Default value**  | n/a                                                                              |
 +--------------------+---------------+------------------------------------------------------------------+
 | **Allowed values** | local         | This runs the command on the agent that generated the event.     |
-+--------------------+---------------+------------------------------------------------------------------+
++                    +---------------+------------------------------------------------------------------+
 |                    | server        | This runs the command on the Wazuh manager.                      |
 +                    +---------------+------------------------------------------------------------------+
 |                    | defined-agent | This runs the command on a specific agent identified by agent_id.|

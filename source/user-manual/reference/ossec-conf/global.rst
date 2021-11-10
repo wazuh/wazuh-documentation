@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: The ossec.conf file is the main configuration file on the Wazuh manager and plays an important role on the agents. Learn more about the global configuration here. 
+  
 .. _reference_ossec_global:
 
 global
@@ -457,6 +460,10 @@ This sets the time after which the manager considers an agent as disconnected si
 +-------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **Allowed values**      | A positive number that should end with a character indicating a time unit, such as: s (seconds), m (minutes), h (hours), d (days). The minimum allowed is 1s. |
 +-------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+.. warning::
+
+  This setting should always be greater than :ref:`notify-time <notify_time>` configured in the agents. This allows them to always notify the manager before it would consider them disconnected.
 
 Example:
 

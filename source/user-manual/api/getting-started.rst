@@ -48,7 +48,7 @@ Wazuh API endpoints require authentication in order to be used. Therefore, all c
 
     By default (``raw=false``), the token is obtained in an ``application/json`` format. If using this option, copy the token found in ``<YOUR_JWT_TOKEN>`` without the quotes.
 
-    .. code-block:: none
+    .. code-block:: json
         :class: output
 
         {
@@ -242,14 +242,16 @@ Running the script provides a result similar to the following:
     Getting /agents/summary/os:
 
     {
-       "data": {
-          "active": 1,
-          "disconnected": 0,
-          "never_connected": 0,
-          "pending": 0,
-          "total": 1
-       },
-       "error": 0
+        "data": {
+            "affected_items": [
+                "windows"
+            ],
+            "total_affected_items": 1,
+            "total_failed_items": 0,
+            "failed_items": []
+        },
+        "message": "Showing the operative system of all specified agents",
+        "error": 0
     }
 
     End of the script.
@@ -418,7 +420,7 @@ Here are some of the basic concepts related to making API requests and understan
           }
         }
 
-- Responses containing collections of data will return a maximum of 500 elements. The *offset* and *limit* parameters may be used to iterate through large collections.
+- Responses containing collections of data will return a maximum of 500 elements by default. The *offset* and *limit* parameters may be used to iterate through large collections. The *limit* parameter accepts up to 100000 items, although it is recommended not to exceed the default value (500 items). Doing so can lead to unexpected behaviors (timeouts, large responses, etc.). Use with caution.
 - All responses have an HTTP status code: 2xx (success), 4xx (client error), 5xx (server error), etc.
 - All requests (except ``GET /security/user/authenticate`` and ``POST /security/user/authenticate/run_as``) accept the parameter ``pretty`` to convert the JSON response to a more human-readable format.
 - The Wazuh API log is stored on the manager as ``/var/ossec/logs/api.log`` (the path and verbosity level can be changed in the Wazuh API configuration file). The Wazuh API logs are rotated daily. Rotated logs are stored in ``/var/ossec/logs/api/<year>/<month>`` and compressed using ``gzip``.
@@ -453,7 +455,7 @@ Often when an alert fires, it is helpful to know details about the rule itself. 
                 "level": 2,
                 "status": "enabled",
                 "details": {
-                   "match": { 
+                   "match": {
                       "pattern": "core_dumped|failure|error|attack| bad |illegal |denied|refused|unauthorized|fatal|failed|Segmentation Fault|Corrupted"
                     }
                 },
@@ -760,19 +762,19 @@ Some information about the manager can be retrieved using the Wazuh API. Configu
       "data": {
         "affected_items": [
           {
-            "ossec-agentlessd": "running",
-            "ossec-analysisd": "running",
-            "ossec-authd": "running",
-            "ossec-csyslogd": "running",
-            "ossec-dbd": "stopped",
-            "ossec-monitord": "running",
-            "ossec-execd": "running",
-            "ossec-integratord": "running",
-            "ossec-logcollector": "running",
-            "ossec-maild": "running",
-            "ossec-remoted": "running",
-            "ossec-reportd": "stopped",
-            "ossec-syscheckd": "running",
+            "wazuh-agentlessd": "running",
+            "wazuh-analysisd": "running",
+            "wazuh-authd": "running",
+            "wazuh-csyslogd": "running",
+            "wazuh-dbd": "stopped",
+            "wazuh-monitord": "running",
+            "wazuh-execd": "running",
+            "wazuh-integratord": "running",
+            "wazuh-logcollector": "running",
+            "wazuh-maild": "running",
+            "wazuh-remoted": "running",
+            "wazuh-reportd": "stopped",
+            "wazuh-syscheckd": "running",
             "wazuh-clusterd": "running",
             "wazuh-modulesd": "running",
             "wazuh-db": "running",

@@ -2,6 +2,6 @@
 
 .. code-block:: console
 
- # /Library/Ossec/bin/ossec-control restart
+ # /Library/Ossec/bin/wazuh-control restart
 
 .. End of include file

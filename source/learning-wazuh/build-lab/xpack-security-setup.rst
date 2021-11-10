@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+    :description: Learn more about how to prepare your Wazuh Lab environment. In this section, we explain how to configure X-Pack Security. 
+    
 .. _build_lab_xpack-security-setup:
 
 Configure X-Pack Security
@@ -203,7 +206,7 @@ Adding authentication for Elasticsearch
 X-Pack security also provides authentication within each component. The credentials
 are configured in the Elastic Server using Elasticsearch directly.
 
-1. Add ``x.pack.security.enabled`` to ``/etc/elasticsearch/elasticsearch.yml``.
+1. Add ``xpack.security.enabled`` to ``/etc/elasticsearch/elasticsearch.yml``.
 
   .. code-block:: console
 

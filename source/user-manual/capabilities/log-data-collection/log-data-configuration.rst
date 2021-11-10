@@ -67,7 +67,7 @@ Environment variables like ``%WinDir%`` can be used in the location pattern. The
 Using multiple outputs
 ----------------------
 
-Log data is sent to the agent socket by default, but it is also possible to specify other sockets as output. ``ossec-logcollector`` uses UNIX type sockets to communicate allowing TCP or UDP protocols.
+Log data is sent to the agent socket by default, but it is also possible to specify other sockets as output. ``wazuh-logcollector`` uses UNIX type sockets to communicate allowing TCP or UDP protocols.
 
 To add a new output socket we need to specify it using the tag ``<socket>`` as shown in the following example configuration:
 

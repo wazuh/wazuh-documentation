@@ -1,12 +1,13 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Wazuh helps organizations meet technical compliance requirements, including PCI DSS. Learn how our capabilities assist with each of PCI standard requirements.
+
 .. _pci_dss:
 
 Using Wazuh for PCI DSS
 =======================
 
-.. meta::
-  :description: Learn about the PCI DSS compliance and how Wazuh helps you to implement it.
 
 The **Payment Card Industry Data Security Standard (PCI DSS)** is a proprietary information security standard for organizations that handle branded credit cards from the major card companies including *Visa*, *MasterCard*, *American Express*, *Discover*, and *JCB*. The standard was created to increase controls around cardholder data to reduce credit card fraud.
 

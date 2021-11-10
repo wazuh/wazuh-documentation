@@ -130,8 +130,7 @@ Linux is using the iptables firewall, and in Windows the null routing / blackhol
 
         <command>
             <name>firewall-drop</name>
-            <executable>firewall-drop.sh</executable>
-            <expect>srcip</expect>
+            <executable>firewall-drop</executable>
             <timeout_allowed>yes</timeout_allowed>
         </command>
 
@@ -139,19 +138,16 @@ Linux is using the iptables firewall, and in Windows the null routing / blackhol
 
         <command>
             <name>win_route-null</name>
-            <executable>route-null.cmd</executable>
-            <expect>srcip</expect>
+            <executable>route-null.exe</executable>
             <timeout_allowed>yes</timeout_allowed>
         </command>
 
 Each command has a descriptive ``<name>`` by which it will be referred to in the
 ``<active-response>`` sections.  The actual script to be called is defined by
-``<executable>``.  The ``<expect>`` value specifies what log field (if any)
-will be passed along to the script (like **srcip** or **username**).  Lastly, if
-``<timeout_allowed>`` is set to **yes**, then the command is considered stateful
-and can be reversed after an amount of time specified in a specific ``<active-response>``
-section (see :ref:`timeout <reference_ossec_active_response>`).  For more details
-about configuring active response, see the Wazuh user manual.
+``<executable>``.  Lastly, if ``<timeout_allowed>`` is set to **yes**, then the
+command is considered stateful and can be reversed after an amount of time specified
+in a specific ``<active-response>`` section (see :ref:`timeout <reference_ossec_active_response>`).
+For more details about configuring active response, see the Wazuh user manual.
 
 
 AR Scenario 1 - Make victim block attacker with iptables
@@ -234,8 +230,13 @@ this event 5 minutes apart.
     .. code-block:: none
         :class: output
 
-        Mon Nov  4 19:28:08 UTC 2019 /var/ossec/active-response/bin/firewall-drop.sh add - 172.30.0.30 1572895688.94657 31166
-        Mon Nov  4 19:33:09 UTC 2019 /var/ossec/active-response/bin/firewall-drop.sh delete - 172.30.0.30 1572895688.94657 31166
+        2021/02/01 20:43:30 /var/ossec/active-response/bin/firewall-drop: Starting
+        2021/02/01 20:43:30 /var/ossec/active-response/bin/firewall-drop: {"version":1,"origin":{"name":"","module":"wazuh-execd"},"command":"add","parameters":{"extra_args":[],"alert":{"timestamp":"2021-02-01T20:43:30.526+0000","rule":{"level":15,"description":"Shellshock attack detected","id":"31166","mitre":{"id":["T1068","T1190"],"tactic":["Privilege Escalation","Initial Access"],"technique":["Exploitation for Privilege Escalation","Exploit Public-Facing Application"]},"info":"CVE-2014-6271https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6271","firedtimes":1,"mail":true,"groups":["web","accesslog","attack"],"pci_dss":["11.4"],"gdpr":["IV_35.7.d"],"nist_800_53":["SI.4"],"tsc":["CC6.1","CC6.8","CC7.2","CC7.3"]},"agent":{"id":"000","name":"ubuntu-bionic"},"manager":{"name":"ubuntu-bionic"},"id":"1612212210.6317002","full_log":"192.168.0.223 - - [01/Feb/2021:20:43:28 +0000] \"GET / HTTP/1.1\" 200 612 \"-\" \"() { :; }; /bin/cat /etc/passwd\"","decoder":{"name":"web-accesslog"},"data":{"protocol":"GET","srcip":"172.30.0.30","id":"200","url":"/"},"location":"/var/log/nginx/access.log"},"program":"/var/ossec/active-response/bin/firewall-drop"}}
+        2021/02/01 20:43:30 /var/ossec/active-response/bin/firewall-drop: Ended
+        2021/02/01 20:48:31 /var/ossec/active-response/bin/firewall-drop: Starting
+        2021/02/01 20:48:31 /var/ossec/active-response/bin/firewall-drop: {"version":1,"origin":{"name":"","module":"wazuh-execd"},"command":"delete","parameters":{"extra_args":[],"alert":{"timestamp":"2021-02-01T20:43:30.526+0000","rule":{"level":15,"description":"Shellshock attack detected","id":"31166","mitre":{"id":["T1068","T1190"],"tactic":["Privilege Escalation","Initial Access"],"technique":["Exploitation for Privilege Escalation","Exploit Public-Facing Application"]},"info":"CVE-2014-6271https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6271","firedtimes":1,"mail":true,"groups":["web","accesslog","attack"],"pci_dss":["11.4"],"gdpr":["IV_35.7.d"],"nist_800_53":["SI.4"],"tsc":["CC6.1","CC6.8","CC7.2","CC7.3"]},"agent":{"id":"000","name":"ubuntu-bionic"},"manager":{"name":"ubuntu-bionic"},"id":"1612212210.6317002","full_log":"192.168.0.223 - - [01/Feb/2021:20:43:28 +0000] \"GET / HTTP/1.1\" 200 612 \"-\" \"() { :; }; /bin/cat /etc/passwd\"","decoder":{"name":"web-accesslog"},"data":{"protocol":"GET","srcip":"172.30.0.30","id":"200","url":"/"},"location":"/var/log/nginx/access.log"},"program":"/var/ossec/active-response/bin/firewall-drop"}}
+        2021/02/01 20:48:31 /var/ossec/active-response/bin/firewall-drop: Ended
+
 
 
 Observe that the attacked server is no longer blocking the offending IP by

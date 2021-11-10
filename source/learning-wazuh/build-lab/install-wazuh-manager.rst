@@ -68,8 +68,8 @@ listener are in place:
     .. code-block:: none
       :class: output
 
-      tcp        0      0 0.0.0.0:1514            0.0.0.0:*               LISTEN      14311/ossec-remoted
-      tcp        0      0 0.0.0.0:1515            0.0.0.0:*               LISTEN      14263/ossec-authd
+      tcp        0      0 0.0.0.0:1514            0.0.0.0:*               LISTEN      14311/wazuh-remoted
+      tcp        0      0 0.0.0.0:1515            0.0.0.0:*               LISTEN      14263/wazuh-authd
 
 .. versionadded:: 4.0.0
 

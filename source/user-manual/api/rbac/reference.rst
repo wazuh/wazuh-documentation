@@ -69,6 +69,8 @@ This reference also contains a set of default roles and policies that can be imm
 
     - `Lists`_
         - `lists:read`_
+        - `lists:update`_
+        - `lists:delete`_
 
     - `Logtest`_
         - `logtest:run`_
@@ -99,6 +101,7 @@ This reference also contains a set of default roles and policies that can be imm
         - `security:create_user`_
         - `security:create`_
         - `security:delete`_
+        - `security:edit_run_as`_
         - `security:read_config`_
         - `security:read`_
         - `security:revoke`_
@@ -116,6 +119,9 @@ This reference also contains a set of default roles and policies that can be imm
     - `Task`_
         - `task:status`_
 
+    - `Vulnerability`_
+        - `vulnerability:read`_
+
 `Default policies`_
     - `agents_all`_
     - `agents_commands`_
@@ -124,19 +130,23 @@ This reference also contains a set of default roles and policies that can be imm
     - `cluster_all`_
     - `cluster_read`_
     - `decoders_all`_
+    - `decoders_read`_
+    - `lists_all`_
     - `lists_read`_
     - `logtest_all`_
     - `mitre_read`_
-    - `rootcheck_read`_
     - `rootcheck_all`_
+    - `rootcheck_read`_
     - `rules_all`_
+    - `rules_read`_
     - `sca_read`_
     - `security_all`_
-    - `users_all`_
-    - `syscheck_read`_
     - `syscheck_all`_
+    - `syscheck_read`_
     - `syscollector_read`_
     - `task_status`_
+    - `users_all`_
+    - `vulnerability_read`_
 
 `Default roles`_
     - `administrator`_
@@ -305,6 +315,7 @@ agent:read
 - :api-ref:`GET /agents/{agent_id}/group/is_sync <operation/api.controllers.agent_controller.get_sync_agent>` (`agent:id`_, `agent:group`_)
 - :api-ref:`GET /agents/{agent_id}/key <operation/api.controllers.agent_controller.get_agent_key>` (`agent:id`_, `agent:group`_)
 - :api-ref:`GET /groups/{group_id}/agents <operation/api.controllers.agent_controller.get_agents_in_group>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /agents/{agent_id}/stats/{component} <operation/api.controllers.agent_controller.get_component_stats>` (`agent:id`_, `agent:group`_)
 - :api-ref:`GET /overview/agents <operation/api.controllers.overview_controller.get_overview_agents>` (`agent:id`_, `agent:group`_)
 
 agent:restart
@@ -553,6 +564,10 @@ security:delete
 - :api-ref:`DELETE /security/users <operation/api.controllers.security_controller.delete_users>` (`user:id`_)
 - :api-ref:`DELETE /security/users/{user_id}/roles <operation/api.controllers.security_controller.remove_user_role>` (`user:id`_, `role:id`_)
 
+security:edit_run_as
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+- :api-ref:`PUT /security/users/{user_id}/run_as <operation/api.controllers.security_controller.edit_run_as>` (`*:*`_)
+
 security:read_config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 - :api-ref:`GET /security/config <operation/api.controllers.security_controller.get_security_config>` (`*:*`_)
@@ -630,6 +645,13 @@ task:status
 ~~~~~~~~~~~~~
 - :api-ref:`GET /tasks/status <operation/api.controllers.task_controller.get_tasks_status>` (`*:*`_)
 
+Vulnerability
+^^^^^^^^^^^^^^^
+vulnerability:read
+~~~~~~~~~~~~~~~~~~
+- :api-ref:`GET /vulnerability/{agent_id} <operation/api.controllers.vulnerability_controller.get_vulnerability_agent>` (`agent:id`_, `agent:group`_)
+
+.. _api_rbac_reference_default_policies:
 
 Default policies
 ----------------
@@ -637,365 +659,431 @@ agents_all
 ^^^^^^^^^^^^^^^
 Grant full access to all agents related functionalities.
 
-Actions
-    - `agent:read`_
-    - `agent:create`_
-    - `agent:delete`_
-    - `agent:modify_group`_
-    - `agent:restart`_
-    - `agent:upgrade`_
-    - `group:read`_
-    - `group:delete`_
-    - `group:create`_
-    - `group:update_config`_
-    - `group:modify_assignments`_
+.. code-block:: yaml
 
-Resources
-    - ``agent:id:*``
-    - ``agent:group:*``
-    - ``group:id:*``
-    - ``*:*:*``
-
-Effect
-    - allow
+    resourceless:
+      actions:
+        - agent:create
+        - group:create
+      resources:
+        - '*:*:*'
+      effect: allow
+    agents:
+      actions:
+        - agent:read
+        - agent:delete
+        - agent:modify_group
+        - agent:restart
+        - agent:upgrade
+      resources:
+        - agent:id:*
+        - agent:group:*
+      effect: allow
+    groups:
+      actions:
+        - group:read
+        - group:delete
+        - group:update_config
+        - group:modify_assignments
+      resources:
+        - group:id:*
+      effect: allow
 
 agents_commands
 ^^^^^^^^^^^^^^^
 Allow sending commands to agents.
 
-Actions
-    - `active-response:command`_
+.. code-block:: yaml
 
-Resources
-    - ``agent:id:*``
-    - ``agent:group:*``
-
-Effect
-    - allow
+    agents:
+      actions:
+        - active-response:command
+      resources:
+        - agent:id:*
+      effect: allow
 
 agents_read
 ^^^^^^^^^^^^^^^
 Grant read access to all agents related functionalities.
 
-Actions
-    - `agent:read`_
-    - `group:read`_
+.. code-block:: yaml
 
-Resources
-    - ``agent:id:*``
-    - ``agent:group:*``
-    - ``group:id:*``
-
-Effect
-    - allow
+    agents:
+      actions:
+        - agent:read
+      resources:
+        - agent:id:*
+        - agent:group:*
+      effect: allow
+    groups:
+      actions:
+        - group:read
+      resources:
+        - group:id:*
+      effect: allow
 
 ciscat_read
 ^^^^^^^^^^^^^^^
-Allow read agent’s ciscat results information.
+Allow reading agent’s ciscat results information.
 
-Actions
-    - `ciscat:read`_
+.. code-block:: yaml
 
-Resources
-    - ``agent:id:*``
-    - ``agent:group:*``
-
-Effect
-    - allow
+    ciscat:
+      actions:
+        - ciscat:read
+      resources:
+        - agent:id:*
+      effect: allow
 
 cluster_all
 ^^^^^^^^^^^^^^^
 Provide full access to all cluster/manager related functionalities.
 
-Actions
-    - `cluster:read`_
-    - `cluster:read_api_config`_
-    - `cluster:restart`_
-    - `cluster:status`_
-    - `cluster:update_config`_
-    - `manager:read`_
-    - `manager:read_api_config`_
-    - `manager:update_config`_
-    - `manager:restart`_
+.. code-block:: yaml
 
-Resources
-    - ``node:id:*``
-    - ``'*:*:*'``
-
-Effect
-    - allow
+    resourceless:
+      actions:
+        - cluster:status
+        - manager:read
+        - manager:read_api_config
+        - manager:update_config
+        - manager:restart
+      resources:
+        - '*:*:*'
+      effect: allow
+    nodes:
+      actions:
+        - cluster:read_api_config
+        - cluster:read
+        - cluster:restart
+        - cluster:update_config
+      resources:
+        - node:id:*
+      effect: allow
 
 cluster_read
 ^^^^^^^^^^^^^^^
 Provide read access to all cluster/manager related functionalities.
 
-Actions
-    - `cluster:read`_
-    - `cluster:read_api_config`_
-    - `cluster:status`_
-    - `manager:read`_
-    - `manager:read_api_config`_
+.. code-block:: yaml
 
-Resources
-    - ``node:id:*``
-    - ``'*:*:*'``
-
-Effect
-    - allow
-
-decoders_read
-^^^^^^^^^^^^^^^
-Allow reading all decoder files in the system.
-
-Actions
-    - `decoders:read`_
-
-Resources
-    - ``decoder:file:*``
-
-Effect
-    - allow
+    resourceless:
+      actions:
+        - cluster:status
+        - manager:read
+        - manager:read_api_config
+      resources:
+        - '*:*:*'
+      effect: allow
+    nodes:
+      actions:
+        - cluster:read_api_config
+        - cluster:read
+        - cluster:read_api_config
+      resources:
+        - node:id:*
+      effect: allow
 
 decoders_all
 ^^^^^^^^^^^^^^^
 Allow managing all decoder files in the system.
 
-Actions
-    - `decoders:read`_
-    - `decoders:update`_
-    - `decoders:delete`_
+.. code-block:: yaml
 
-Resources
-    - ``decoder:file:*``
-    - ``*:*:*``
+    files:
+      actions:
+        - decoders:read
+        - decoders:delete
+      resources:
+        - decoder:file:*
+      effect: allow
+    resourceless:
+      actions:
+        - decoders:update
+      resources:
+        - '*:*:*'
+      effect: allow
+
+decoders_read
+^^^^^^^^^^^^^^^
+Allow reading all decoder files in the system.
+
+.. code-block:: yaml
+
+    decoders:
+      actions:
+        - decoders:read
+      resources:
+        - decoder:file:*
+      effect: allow
 
 lists_all
 ^^^^^^^^^^^^^^^
 Allow managing all CDB lists files in the system.
 
-Actions
-    - `lists:read`_
-    - `lists:delete`_
-    - `lists:update`_
+.. code-block:: yaml
 
-Resources
-    - ``list:file:*``
-    - ``'*:*:*'``
-
-Effect
-    - allow
+      files:
+        actions:
+          - lists:read
+          - lists:delete
+        resources:
+          - list:file:*
+        effect: allow
+      resourceless:
+        actions:
+          - lists:update
+        resources:
+          - '*:*:*'
+        effect: allow
 
 lists_read
 ^^^^^^^^^^^^^^^
-Allow reading all list paths in the system.
+Allow reading all lists paths in the system.
 
-Actions
-    - `lists:read`_
+.. code-block:: yaml
 
-Resources
-    - ``list:file:*``
-
-Effect
-    - allow
+    lists:
+      actions:
+        - lists:read
+      resources:
+        - list:file:*
+      effect: allow
 
 logtest_all
 ^^^^^^^^^^^^^^^
 Provide access to all logtest related functionalities.
 
-Actions
-    - `logtest:run`_
+.. code-block:: yaml
 
-Resources
-    - ``*:*:*``
-
-Effect
-    - allow
+    logtest:
+      actions:
+        - logtest:run
+      resources:
+        - '*:*:*'
+      effect: allow
 
 mitre_read
 ^^^^^^^^^^^^^^^
 Allow reading MITRE database information.
 
-Actions
-    - `mitre:read`_
+.. code-block:: yaml
 
-Resources
-    - ``*:*:*``
-
-Effect
-    - allow
-
-rootcheck_read
-^^^^^^^^^^^^^^^
-Allow reading all rootcheck information.
-
-Actions
-    - `rootcheck:read`_
-
-Resources
-    - ``agent:id:*``
-    - ``agent:group:*``
-
-Effect
-    - allow
+    mitre:
+      actions:
+        - mitre:read
+      resources:
+        - '*:*:*'
+      effect: allow
 
 rootcheck_all
 ^^^^^^^^^^^^^^^
 Allow reading, running and clearing rootcheck information.
 
-Actions
-    - `rootcheck:read`_
-    - `rootcheck:clear`_
-    - `rootcheck:run`_
+.. code-block:: yaml
 
-Resources
-    - ``agent:id:*``
-    - ``agent:group:*``
+    rootcheck:
+      actions:
+        - rootcheck:clear
+        - rootcheck:read
+        - rootcheck:run
+      resources:
+        - agent:id:*
+      effect: allow
 
-Effect
-    - allow
-
-rules_read
+rootcheck_read
 ^^^^^^^^^^^^^^^
-Allow reading all rule files in the system.
+Allow reading all rootcheck information.
 
-Actions
-    - `rules:read`_
+.. code-block:: yaml
 
-Resources
-    - ``rules:file:*``
-
-Effect
-    - allow
+    rootcheck:
+      actions:
+        - rootcheck:read
+      resources:
+        - agent:id:*
+      effect: allow
 
 rules_all
 ^^^^^^^^^^^^^^^
 Allow managing all rule files in the system.
 
-Actions
-    - `rules:read`_
-    - `rules:update`_
-    - `rules:delete`_
+.. code-block:: yaml
 
-Resources
-    - ``rules:file:*``
-    - ``*:*:*``
+    files:
+      actions:
+        - rules:read
+        - rules:delete
+      resources:
+        - rule:file:*
+      effect: allow
+    resourceless:
+      actions:
+        - rules:update
+      resources:
+        - '*:*:*'
+      effect: allow
 
-Effect
-    - allow
+rules_read
+^^^^^^^^^^^^^^^
+Allow reading all rule files in the system.
+
+.. code-block:: yaml
+
+    rules:
+      actions:
+        - rules:read
+      resources:
+        - rule:file:*
+      effect: allow
 
 sca_read
 ^^^^^^^^^^^^^^^
 Allow reading agent’s sca information.
 
-Actions
-    - `sca:read`_
+.. code-block:: yaml
 
-Resources
-    - ``agent:id:*``
-    - ``agent:group:*``
-
-Effect
-    - allow
+    sca:
+      actions:
+        - sca:read
+      resources:
+        - agent:id:*
+      effect: allow
 
 security_all
 ^^^^^^^^^^^^^^^
 Provide full access to all security related functionalities.
 
-Actions
-    - `security:create`_
-    - `security:create_user`_
-    - `security:delete`_
-    - `security:read`_
-    - `security:read_config`_
-    - `security:revoke`_
-    - `security:update`_
-    - `security:update_config`_
+.. code-block:: yaml
 
-Resources
-    - ``role:id:*``
-    - ``policy:id:*``
-    - ``user:id:*``
-    - ``rule:id:*``
-    - ``*:*:*``
-
-Effect
-    - allow
-
-users_all
-^^^^^^^^^^^^^^^
-Provide full access to all users related functionalities.
-
-Actions
-    - `security:read`_
-    - `security:create_user`_
-    - `security:update`_
-    - `security:revoke`_
-    - `security:delete`_
-
-Resources
-    - ``user:id:*``
-    - ``*:*:*``
-
-Effect
-    - allow
-
-syscheck_read
-^^^^^^^^^^^^^^^
-Allow reading syscheck information.
-
-Actions
-    - `syscheck:read`_
-
-Resources
-    - ``agent:id:*``
-    - ``agent:group:*``
-
-Effect
-    - allow
+    resourceless:
+      actions:
+        - security:create
+        - security:create_user
+        - security:edit_run_as
+        - security:read_config
+        - security:update_config
+        - security:revoke
+      resources:
+        - '*:*:*'
+      effect: allow
+    security:
+      actions:
+        - security:read
+        - security:update
+        - security:delete
+      resources:
+        - role:id:*
+        - policy:id:*
+        - user:id:*
+        - rule:id:*
+      effect: allow
 
 syscheck_all
 ^^^^^^^^^^^^^^^
 Allow reading, running and clearing syscheck information.
 
-Actions
-    - `syscheck:clear`_
-    - `syscheck:read`_
-    - `syscheck:run`_
+.. code-block:: yaml
 
-Resources
-    - ``agent:id:*``
-    - ``agent:group:*``
+    syscheck:
+      actions:
+        - syscheck:clear
+        - syscheck:read
+        - syscheck:run
+      resources:
+        - agent:id:*
+      effect: allow
 
-Effect
-    - allow
+syscheck_read
+^^^^^^^^^^^^^^^
+Allow reading syscheck information.
+
+.. code-block:: yaml
+
+    syscheck:
+      actions:
+        - syscheck:read
+      resources:
+        - agent:id:*
+      effect: allow
 
 syscollector_read
 ^^^^^^^^^^^^^^^^^^
 Allow reading agents information.
 
-Actions
-    - `syscollector:read`_
+.. code-block:: yaml
 
-Resources
-    - ``agent:id:*``
-    - ``agent:group:*``
-
-Effect
-    - allow
+    syscollector:
+      actions:
+        - syscollector:read
+      resources:
+        - agent:id:*
+      effect: allow
 
 task_status
 ^^^^^^^^^^^^^^^^^^
 Allow reading tasks information.
 
-Actions
-    - `task:status`_
+.. code-block:: yaml
 
-Resources
-    - ``*:*:*``
+    task:
+      actions:
+        - task:status
+      resources:
+        - '*:*:*'
+      effect: allow
 
-Effect
-    - allow
+users_all
+^^^^^^^^^^^^^^^
+Provide full access to all users related functionalities.
 
+.. code-block:: yaml
+
+    resourceless:
+      actions:
+        - security:create_user
+        - security:edit_run_as
+        - security:revoke
+      resources:
+        - '*:*:*'
+      effect: allow
+    users:
+      actions:
+        - security:read
+        - security:update
+        - security:delete
+      resources:
+        - user:id:*
+      effect: allow
+
+users_modify_run_as
+^^^^^^^^^^^^^^^^^^^
+Provides the capability to modify the users' run_as parameter.
+
+.. code-block:: yaml
+
+    flag:
+      actions:
+        - security:edit_run_as
+      resources:
+        - '*:*:*'
+      effect: allow
+
+vulnerability_read
+^^^^^^^^^^^^^^^^^^
+Allow reading agents' vulnerabilities information.
+
+.. code-block:: yaml
+
+    vulnerability:
+      actions:
+        - vulnerability:read
+      resources:
+        - agent:id:*
+      effect: allow
+
+
+.. _api_rbac_reference_default_roles:
 
 Default roles
 -------------
@@ -1019,6 +1107,7 @@ Policies
     - `syscheck_all`_
     - `syscollector_read`_
     - `task_status`_
+    - `vulnerability_read`_
 
 Rules
     - `wui_elastic_admin`_
@@ -1068,6 +1157,7 @@ Policies
     - `sca_read`_
     - `syscheck_read`_
     - `syscollector_read`_
+    - `vulnerability_read`_
 
 
 users_admin

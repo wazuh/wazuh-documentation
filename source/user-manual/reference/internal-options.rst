@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: In this section of the Wazuh documentation, you will find all the information related to the internal configuration of Wazuh. 
+  
 .. _reference_internal_options:
 
 Internal configuration
@@ -447,7 +450,7 @@ DBD
 ---
 
 +----------------------------+---------------+--------------------------------------------------------------------------+
-| **dbd.reconnect_attempts** | Description   | Number of times ossec-dbd will attempt to reconnect to the database.     |
+| **dbd.reconnect_attempts** | Description   | Number of times wazuh-dbd will attempt to reconnect to the database.     |
 +                            +---------------+--------------------------------------------------------------------------+
 |                            | Default value | 10                                                                       |
 +                            +---------------+--------------------------------------------------------------------------+
@@ -627,6 +630,17 @@ Logcollector
 |                                          | Default value | 86400                                                                      |
 +                                          +---------------+----------------------------------------------------------------------------+
 |                                          | Allowed value | Any integer between 1 and 172800                                           |
++------------------------------------------+---------------+----------------------------------------------------------------------------+
+| **logcollector.state_interval**          | Description   | Statistics generation interval, in seconds                                 |
+|                                          |               |                                                                            |
+|                                          |               | .. versionadded:: 4.2                                                      |
++                                          +---------------+----------------------------------------------------------------------------+
+|                                          | Default value | 60                                                                         |
++                                          +---------------+----------------------------------------------------------------------------+
+|                                          | Allowed values| 0: Disable statistics file generation. Statistics information will continue|
+|                                          |               | to be available through the API                                            |
++                                          +               +----------------------------------------------------------------------------+
+|                                          |               | Any other integer between 1 and 3600.                                      |
 +------------------------------------------+---------------+----------------------------------------------------------------------------+
 
 Maild

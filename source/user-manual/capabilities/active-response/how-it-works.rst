@@ -6,7 +6,7 @@ How it works
 ============
 
 .. thumbnail:: ../../../images/manual/automatic-remediation/automatic-remediation.png
-  :title: Command monitoring
+  :title: Active response workflow 
   :align: center
   :width: 100%
 
@@ -14,12 +14,25 @@ How it works
 When is an active response triggered?
 -------------------------------------
 
-An **active response** is a script that is configured to execute when a specific alert, alert level or rule group has been triggered.  Active responses are either stateful or stateless responses.  Stateful responses are configured to undo the action after a specified period of time while stateless responses are configured as one-time actions.
+An **active response** is a script that is configured to execute when a specific alert, alert level, or rule group has been triggered. Active responses are either stateful or stateless responses. 
+
+- ``Stateful``. Are configured to undo the action after a specified period of time. 
+
+- ``Stateless``.  Are configured as one-time actions without an event to revert the original effect.
 
 Where are active response actions executed?
 -------------------------------------------
 
-Each active response specifies where its associated command will be executed: on the agent that triggered the alert, on the manager, on another specified agent or on all agents, which also includes the manager(s).
+Each active response specifies where its associated command will be executed: on the agent that triggered the alert, on the manager, on another specified agent or on all agents, which also includes the manager(s). The ``location`` options are: 
+
+- ``Local``. It runs the script on the agent that generated the alert.
+
+- ``Server``. It runs the script on the Wazuh manager.
+
+- ``Defined agent``. It specifies the IDs of the agents that run the script regardless of where the event has been observed.
+
+- ``All``. Every agent in the environment will run the script. Use with caution.
+
 
 Active response configuration
 -----------------------------
@@ -30,20 +43,17 @@ Active responses are configured in the manager by modifying the :ref:`ossec.conf
 
 	In order to configure an active response, a **command** must be defined that will initiate a certain script in response to a trigger.
 
-	To configure the active response, define the name of a command using the pattern below and then reference the script to be initiated. Next, define what data element(s) will be passed to the script.
-
-	Custom scripts that have the ability to receive parameters from the command line may also be used for an **active response**.
+	To configure the active response, define the name of a command using the pattern below and then reference the script to be initiated. 
 
 	Example::
 
 		<command>
 		  <name>host-deny</name>
-		  <executable>host-deny.sh</executable>
-		  <expect>srcip</expect>
+		  <executable>host-deny</executable>
 		  <timeout_allowed>yes</timeout_allowed>
 		</command>
 
-	In this example, the command is called ``host-deny`` and initiates the ``host-deny.sh`` script.  The data element is defined as ``srcip``. This command is configured to allow a timeout after a specified period of time, making it a stateful response.
+	In this example, the command is called ``host-deny`` and initiates the ``host-deny`` script.  This command is configured to allow a timeout after a specified period of time, making it a stateful response.
 
 	.. note::
 		More information and options to create a command here: :ref:`command <reference_ossec_commands>`
@@ -64,7 +74,7 @@ Active responses are configured in the manager by modifying the :ref:`ossec.conf
 	In this example, the active response is configured to execute the command that was defined in the previous step. The *where* of the action is defined as the local host and the *when* is defined as any time the rule has a level higher than 6.  The timeout that was allowed in the command configuration is also defined in the above example.
 
 .. note::
-	More information about active response options: :ref:`Active response <reference_ossec_active_response>`
+	More information about active response configuration: :ref:`Active response <reference_ossec_active_response>`
 
 
 The active response log can be viewed at ``/var/ossec/logs/active-responses.log``.
@@ -74,46 +84,42 @@ The active response log can be viewed at ``/var/ossec/logs/active-responses.log`
 Default Active response scripts
 -------------------------------
 
-Wazuh is pre-configured with the following scripts for Linux:
+Wazuh is preconfigured with the following scripts for Linux, located at ``/var/ossec/active-response/bin``. Click each script name to see its source code.
 
-+--------------------------+---------------------------------------------------------------+
-| Script name              |                          Description                          |
-+==========================+===============================================================+
-| disable-account.sh       | Disables an account by setting ``passwd-l``                   |
-+--------------------------+---------------------------------------------------------------+
-| firewall-drop.sh         | Adds an IP to the iptables deny list                          |
-+--------------------------+---------------------------------------------------------------+
-| firewalld-drop.sh        | Adds an IP to the firewalld drop list                         |
-+--------------------------+---------------------------------------------------------------+
-| host-deny.sh             | Adds an IP to the /etc/hosts.deny file                        |
-+--------------------------+---------------------------------------------------------------+
-| ip-customblock.sh        | Custom OSSEC block, easily modifiable for custom response     |
-+--------------------------+---------------------------------------------------------------+
-| ipfw_mac.sh              | Firewall-drop response script created for the Mac OS          |
-+--------------------------+---------------------------------------------------------------+
-| ipfw.sh                  | Firewall-drop response script created for ipfw                |
-+--------------------------+---------------------------------------------------------------+
-| npf.sh                   | Firewall-drop response script created for npf                 |
-+--------------------------+---------------------------------------------------------------+
-| ossec-slack.sh           | Posts modifications on Slack                                  |
-+--------------------------+---------------------------------------------------------------+
-| ossec-tweeter.sh         | Posts modifications on Twitter                                |
-+--------------------------+---------------------------------------------------------------+
-| pf.sh                    | Firewall-drop response script created for pf                  |
-+--------------------------+---------------------------------------------------------------+
-| restart-ossec.sh         | Automatically restarts Wazuh when ossec.conf has been changed |
-+--------------------------+---------------------------------------------------------------+
-| route-null.sh            | Adds an IP to null route                                      |
-+--------------------------+---------------------------------------------------------------+
++---------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
+| Script name                                                                                                                           |                          Description                          |
++=======================================================================================================================================+===============================================================+
+| `disable-account <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/disable-account.c>`_                                    | Disables an account by setting ``passwd-l``                   |
++---------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
+| `firewall-drop <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/firewalls/default-firewall-drop.c>`_                      | Adds an IP to the iptables deny list                          |
++---------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
+| `firewalld-drop <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/firewalld-drop.c>`_                                      | Adds an IP to the firewalld drop list                         |
++---------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
+| `host-deny <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/host-deny.c>`_                                                | Adds an IP to the /etc/hosts.deny file                        |
++---------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
+| `ip-customblock <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/ip-customblock.c>`_                                      | Custom OSSEC block, easily modifiable for custom response     |
++---------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
+| `ipfw <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/firewalls/ipfw.c>`_                                                | Firewall-drop response script created for ipfw                |
++---------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
+| `npf <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/firewalls/npf.c>`_                                                  | Firewall-drop response script created for npf                 |
++---------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
+| `wazuh-slack <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/wazuh-slack.c>`_                                            | Posts modifications on Slack                                  |
++---------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
+| `pf <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/firewalls/pf.c>`_                                                    | Firewall-drop response script created for pf                  |
++---------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
+| `restart-wazuh <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/restart-wazuh.c>`_                                        | Automatically restarts Wazuh when ossec.conf has been changed |
++---------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
+| `route-null <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/route-null.c>`_                                              | Adds an IP to null route                                      |
++---------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
 
-The following pre-configured scripts are for Windows:
+The following preconfigured scripts for Windows are located at ``C:\Program Files\ossec-agent\active-response\bin``. Click each script name to see its source code.
 
-+--------------------------+---------------------------------------------------------------+
-| Script name              |                          Description                          |
-+==========================+===============================================================+
-| netsh.cmd                | Blocks an ip using netsh                                      |
-+--------------------------+---------------------------------------------------------------+
-| restart-ossec.cmd        | Restarts ossec agent                                          |
-+--------------------------+---------------------------------------------------------------+
-| route-null.cmd           | Adds an IP to null route                                      |
-+--------------------------+---------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
+| Script name                                                                                            |                          Description                          |
++========================================================================================================+===============================================================+
+| `netsh.exe <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/netsh.c>`_                     | Blocks an ip using netsh                                      |
++--------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
+| `restart-wazuh.exe <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/restart-wazuh.c>`_     | Restarts wazuh agent                                          |
++--------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
+| `route-null.exe <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/route-null.c>`_           | Adds an IP to null route                                      |
++--------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+

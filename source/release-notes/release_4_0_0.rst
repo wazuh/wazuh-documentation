@@ -209,7 +209,7 @@ Changed
 
 - Removed the ``known-fields`` functionality.
 
-- Security Events dashboard redesinged.
+- Security Events dashboard redesigned.
 
 - Redesigned the app settings configuration with categories.
 

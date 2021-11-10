@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+    :description: Learn more about how to prepare your Wazuh Lab Environment. In this section, we show you how to install the Windows Wazuh agent. 
+
 .. _build_lab_install_windows_agent:
 
 Install the Windows Wazuh agent
@@ -70,7 +73,7 @@ Run the Wazuh agent Manager and confirm it is running and connected to the Wazuh
     .. code-block:: none
         :class: output
 
-        2019/11/22 12:05:23 ossec-agent: INFO: (4102): Connected to the server (172.30.0.10:1514/tcp).
+        2019/11/22 12:05:23 wazuh-agent: INFO: (4102): Connected to the server (172.30.0.10:1514/tcp).
 
 
 Observe that Wazuh manager is aware of all the connected agents.

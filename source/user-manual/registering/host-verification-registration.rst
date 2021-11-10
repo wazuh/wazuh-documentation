@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Learn how to create a Certificate of Authority (CA) and the available options to register the Wazuh agent using host verification.
+  
 .. _host-verification-registration:
 
 Registration service with host verification
@@ -206,7 +209,7 @@ There are two options to register the Wazuh agent using host verification. Pleas
 
       .. code-block:: console
 
-       # /Library/Ossec/bin/ossec-control restart
+       # /Library/Ossec/bin/wazuh-control restart
 
      The Wazuh agent registration can be adjusted by using different :ref:`agent-auth` options.
 

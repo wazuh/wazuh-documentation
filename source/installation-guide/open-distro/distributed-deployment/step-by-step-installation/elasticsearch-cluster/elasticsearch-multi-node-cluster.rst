@@ -201,13 +201,7 @@ The final stage of the process for installing a multi-node cluster is performed 
           },
           "tagline" : "You Know, for Search"
         }
-
-
-#. To verify the nodes that are connected to the cluster, run the following command replacing ``<elasticsearch_ip>`` with the Elasticsearch installation IP. 
-
-    .. code-block:: console
-
-        # curl -XGET https://<elasticsearch_ip>:9200/_cat/nodes -u admin:admin -k
+  
 
 
 

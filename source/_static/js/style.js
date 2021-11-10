@@ -42,11 +42,13 @@ $(function() {
     'user-manual/ruleset/ruleset-xml-syntax/index',
     'installation-guide/distributed-deployment/step-by-step-installation/elasticsearch-cluster/index',
     'installation-guide/distributed-deployment/step-by-step-installation/wazuh-cluster/index',
+    'user-manual/capabilities/active-response/ar-use-cases/index',
   ];
 
   /* List of nodes in the toctree that should be open in a new tab */
   const newTabNodes = [
     'user-manual/api/reference',
+    'cloud-service/apis/reference',
   ];
   if ( useApiRedoc ) {
     markTocNodesWithClass(newTabNodes, 'js-new-tab');
@@ -712,10 +714,12 @@ $(function() {
     const blockCode = $(this).parent();
 
     /* Output */
-    if (!blockCode.hasClass('output')) {
+    if (!blockCode.hasClass('output') && !blockCode.hasClass('no-copy')) {
       blockCode.prepend('<button type="button" class="copy-to-clipboard" title="Copy to clipboard"><span>Copied to clipboard</span><i class="far fa-copy" aria-hidden="true"></i></button>');
     } else {
-      blockCode.prepend('<div class="admonition admonition-output"><p class="first admonition-title">Output</p></div>');
+      if (blockCode.hasClass('output')) {
+        blockCode.prepend('<div class="admonition admonition-output"><p class="first admonition-title">Output</p></div>');
+      }
     }
 
     /* Escaped tag signs */
