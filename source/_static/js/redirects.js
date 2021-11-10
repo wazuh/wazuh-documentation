@@ -94,6 +94,7 @@ newUrls['4.2'] = [
   '/cloud-service/getting-started/access-wazuh-wui.html',
   '/cloud-service/getting-started/register-agents.html', 
   '/user-manual/kibana-app/wazuh-rbac.html',
+  '/user-manual/registering/agent-enrollment.html',
 ];
 
 removedUrls['4.2'] = [
@@ -245,7 +246,6 @@ newUrls['4.1'] = [
   '/user-manual/capabilities/wazuh-logtest/logtest-configuration.html',
   '/user-manual/capabilities/wazuh-logtest/logtest-faq.html',
   '/user-manual/ruleset/ruleset-xml-syntax/pcre2.html',
-  '/user-manual/registering/agent-enrollment.html',
 ];
 
 removedUrls['4.1'] = [
