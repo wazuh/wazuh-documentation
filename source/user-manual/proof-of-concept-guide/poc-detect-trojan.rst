@@ -52,8 +52,8 @@ Steps to generate the alerts
         #Now running original binary
         /usr/bin/w.copy
 
-Querying the alerts
--------------------
+Query the alerts
+----------------
 
 Related alerts can be found with the following query once the next rootcheck scan has been completed:
 

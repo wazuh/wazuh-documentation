@@ -35,8 +35,8 @@ Steps to generate the alerts
 
         # curl -XGET "http://${replace_by_your_web_server_address}/?id=SELECT+*+FROM+users";
 
-Querying the alerts
--------------------
+Query the alerts
+----------------
 
 Related alerts, based on the web server log analysis, can be found with:
 

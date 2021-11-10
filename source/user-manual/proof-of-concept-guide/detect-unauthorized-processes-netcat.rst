@@ -3,7 +3,7 @@
 Detecting unauthorized processes - Netcat
 =========================================
 
-Wazuh is capable of detecting if Netcat is running on a monitored host.
+This POC shows how Wazuh is capable of detecting if Netcat is running on a monitored host.
 
 You can learn more about the :ref:`command monitoring capability <manual_command_monitoring>` in the documentation.
 
@@ -59,16 +59,16 @@ Configure your environment as follows to test the POC.
 Steps to generate alerts
 ------------------------
 
-#. Log in to the monitored RHEL 7 system and run ``nc -l 8000`` for 30 seconds.
+- Log in to the monitored RHEL 7 system and run ``nc -l 8000`` for 30 seconds.
 
-Querying the alerts
--------------------
+Query the alerts
+----------------
 
 Related alerts can be found with:
 
-* ``rule.id:(601 OR 100051)``
+- ``rule.id:(601 OR 100051)``
 
 Affected endpoints
 ------------------
 
-* RHEL 7 agent host
+- RHEL 7 agent host

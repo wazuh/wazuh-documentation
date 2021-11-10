@@ -83,8 +83,8 @@ Steps to generate the alerts
 
 No action required. Wazuh automatically reads the ``/var/log/osquery/osqueryd.results.log`` file and generates alerts based on the these logs.
 
-Querying the alerts
--------------------
+Query the alerts
+----------------
 
 Related alerts can be found with:
 

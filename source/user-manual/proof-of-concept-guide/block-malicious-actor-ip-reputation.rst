@@ -3,7 +3,7 @@
 Blocking a malicious actor - IP Reputation
 ==========================================
 
-Identify the monitored Windows endpoint IP address as a bad reputation one. Log in to this Windows endpoint as the attacker and try connecting to the victim's Apache server.
+In this POC you identify the monitored Windows endpoint IP address as a bad reputation one. To do this, you log in to the Windows endpoint as the attacker and try connecting to the victim's Apache server.
 
 
 Prerequisites
@@ -13,7 +13,7 @@ Prerequisites
 
 - Configure the Wazuh RHEL 7 agent host to monitor the Apache access logs in the ``/var/ossec/etc/ossec.conf`` configuration file.
 
-    .. code-block:: XML
+    .. code-block:: none
 
         <localfile>
         <log_format>apache</log_format>
@@ -49,14 +49,14 @@ Configure your environment as follows to test the POC.
 
         # python /tmp/iplist-to-cdblist.py /var/ossec/etc/lists/alienvault_reputation.ipset /var/ossec/etc/lists/blacklist-alienvault
 
-#. Optionally, remove the `alienvault_reputation.ipset` file and the `iplist-to-cdblist.py` script as they are no longer needed.
+#. Optionally, remove the `alienvault_reputation.ipset` file and the `iplist-to-cdblist.py` script, as they are no longer needed.
 
     .. code-block:: console
 
         # rm -rf /var/ossec/etc/lists/alienvault_reputation.ipset
         # rm -rf /var/ossec/etc/lists/iplist-to-cdblist.py
 
-#. Assign the right permissions and owner to the generated file.
+#. Assign the right permissions and ownership to the generated file.
 
     .. code-block:: console
 
@@ -117,10 +117,10 @@ Configure your environment as follows to test the POC.
 Steps to generate the alerts
 ----------------------------
 
-#. Log in to the attacker's system (the monitored Windows endpoint) and connect to the victim's (the Apache server in the monitored RHEL7 endpoint) from a web browser. The custom firewall rule will temporarily block any connection from the attacker system for 60 seconds.
+- Log in to the attacker's system (the monitored Windows endpoint) and connect to the victim's (the Apache server in the monitored RHEL7 endpoint) from a web browser. The custom firewall rule will temporarily block any connection from the attacker system for 60 seconds.
 
-Querying the alerts
--------------------
+Query the alerts
+----------------
 
 Related alerts can be found with:
 

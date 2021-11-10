@@ -71,8 +71,8 @@ Steps to generate the alerts
 
 #. No action is required. Wazuh automatically parses data from ``/var/log/suricata/eve.json`` and generates related alerts.
 
-Querying the alerts
--------------------
+Query the alerts
+----------------
 
 Related alerts can be found with:
 

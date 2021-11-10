@@ -29,8 +29,8 @@ Steps to generate the alerts
 
 No action is required. Wazuh automatically forwards alerts level 10 or higher to the provided Slack webhook.
 
-Querying the alerts
--------------------
+Query the alerts
+----------------
 
 The Slack channel you associated with your Slack webhook will show the alerts in real time.
 

@@ -5,7 +5,7 @@ Amazon AWS infrastructure monitoring
 
 This POC shows how the Wazuh module for AWS (aws-s3) enables log data gathering from different AWS sources. 
 
-To learn more about monitoring AWS resources, see the `Using Wazuh to monitor AWS <amazon>`_ section.
+To learn more about monitoring AWS resources, see the `Using Wazuh to monitor AWS <amazon>`_ section of the documentation.
 
 Configuration
 -------------
@@ -64,10 +64,10 @@ Configure your environment as follows to test the POC.
 Steps to generate the alerts
 ----------------------------
 
-No action is required since alerts are automatically generated from AWS logs when using out-of-the-box rules, They appear as soon as they are fetched from the AWS S3 bucket.
+No action is required. Alerts are automatically generated from AWS logs when using out-of-the-box rules; they appear as soon as they are fetched from the AWS S3 bucket.
 
-Querying the alerts
--------------------
+Query the alerts
+----------------
 
 Related alerts can be found with:
 

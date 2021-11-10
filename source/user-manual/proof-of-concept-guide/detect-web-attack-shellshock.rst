@@ -36,8 +36,8 @@ Steps to generate the alerts
 
         # curl -H "User-Agent: () { :; }; /bin/cat /etc/passwd" <your_web_server_address>
 
-Querying the alerts
--------------------
+Query the alerts
+----------------
 
 Related alerts, based on the web server log analysis, can be found with:
 

@@ -3,14 +3,17 @@
 Monitoring Docker
 =================
 
-Alert in real time about the NGINX Docker container's activity using the Wazuh module for Docker. This module acts as a subscriber to the Docker Engine API and is used to identify security incidents across containers.
+The Wazuh module for Docker can be used to identify security incidents across containers, alerting in real-time. It acts as a subscriber to the Docker Engine API.
 
-Check `Docker Wodle <https://documentation.wazuh.com/current/docker-monitor/monitoring_containers_activity.html>`_ for detailed information.
+Learn more about monitoring Docker and the Docker wodle, see the :ref:`Monitoring containers activity <docker-monitor-index>` section of the documentation.
+
 
 Configuration
 -------------
 
-#. Configure the Docker listener in ``/var/ossec/etc/ossec.conf`` at the RHEL 7 Agent endpoint.
+Configure your environment as follows to test the POC.
+
+#. Configure the Docker listener in the ``/var/ossec/etc/ossec.conf`` configuration file at the RHEL 7 Agent endpoint.
 
     .. code-block:: XML
 
@@ -33,7 +36,7 @@ Configuration
 Steps to generate the alerts
 ----------------------------
 
-#. Pull a Docker image, start the container, run a Docker command and delete the container.
+- Pull a Docker image, start the container, run a Docker command and delete the container.
 
     .. code-block:: console
 
@@ -45,12 +48,13 @@ Steps to generate the alerts
         # docker stop nginx_container
         # docker rm nginx_container
 
-Alerts
-------
+Query the alerts
+----------------
 
 Related alerts can be found with:
 
-* ``rule.groups: "docker"``. The ``data.docker.Action`` field states which action was performed.
+* ``rule.groups: "docker"``. 
+* Additionally, the ``data.docker.Action`` field states which action was performed.
 
 Affected endpoints
 ------------------

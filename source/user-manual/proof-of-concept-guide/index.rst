@@ -12,16 +12,16 @@ The Proof of Concept (POC) guide explores how to set up the Wazuh environment to
 Prerequisites
 -------------
 
-* You need to have these components already installed to test any POC.
+You need to have these components already installed to test any POC.
 
-    * Elasticsearch, Kibana, and Wazuh Kibana plugin
-    * Wazuh manager and Filebeat (for integration with Elasticsearch)
-    * Wazuh agent (RHEL 7) 
-    * Wazuh agent (Windows)
+  * Elasticsearch, Kibana, and Wazuh Kibana plugin
+  * Wazuh manager and Filebeat (for integration with Elasticsearch)
+  * Wazuh agent (RHEL 7) 
+  * Wazuh agent (Windows)
 
 For information on how to install these components, see the :ref:`Installation guide <installation_guide>`.
 
-Proofs of Concept
+Proofs of concept
 -----------------
 
 
