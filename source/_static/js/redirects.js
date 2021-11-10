@@ -291,6 +291,41 @@ redirections.push(
     '4.0': '/installation-guide/wazuh-agent/deployment_variables/linux/deployment_variables_zypper.html',
     '4.1': '/installation-guide/wazuh-agent/deployment_variables/deployment_variables_linux.html',
   },  
+  {
+    'target': ['4.1=>4.0'],
+    '4.0':  '/installation-guide/more-installation-alternatives/index.html',
+    '4.1': '/installation-guide/more-installation-alternatives/splunk/index.html',
+  },
+  {
+    'target': ['4.1=>4.0'],
+    '4.0':  '/installation-guide/more-installation-alternatives/index.html',
+    '4.1': '/installation-guide/more-installation-alternatives/splunk/splunk-app.html',
+  },
+  {
+    'target': ['4.1=>4.0'],
+    '4.0':  '/installation-guide/more-installation-alternatives/index.html',
+    '4.1': '/installation-guide/more-installation-alternatives/splunk/splunk-basic.html',
+  },
+  {
+    'target': ['4.1=>4.0'],
+    '4.0':  '/installation-guide/more-installation-alternatives/index.html',
+    '4.1': '/installation-guide/more-installation-alternatives/splunk/splunk-distributed.html',
+  },
+  {
+    'target': ['4.1=>4.0'],
+    '4.0':  '/installation-guide/more-installation-alternatives/index.html',
+    '4.1': '/installation-guide/more-installation-alternatives/splunk/splunk-polling.html',
+  },
+  {
+    'target': ['4.1=>4.0'],
+    '4.0':  '/installation-guide/more-installation-alternatives/index.html',
+    '4.1': '/installation-guide/more-installation-alternatives/splunk/splunk-reverse-proxy.html',
+  },
+  {
+    'target': ['4.1=>4.0'],
+    '4.0':  '/installation-guide/more-installation-alternatives/index.html',
+    '4.1': '/installation-guide/more-installation-alternatives/splunk/splunk-wazuh.html',
+  },
 );
 
 /* *** RELEASE 4.0 ****/
@@ -326,13 +361,6 @@ newUrls['4.0'] = [
   '/installation-guide/more-installation-alternatives/elastic-stack/distributed-deployment/unattended/unattended-wazuh-cluster-installation.html',
   '/installation-guide/more-installation-alternatives/elastic-stack/distributed-deployment/index.html',
   '/installation-guide/more-installation-alternatives/elastic-stack/index.html',
-  '/installation-guide/more-installation-alternatives/splunk/index.html',
-  '/installation-guide/more-installation-alternatives/splunk/splunk-app.html',
-  '/installation-guide/more-installation-alternatives/splunk/splunk-basic.html',
-  '/installation-guide/more-installation-alternatives/splunk/splunk-distributed.html',
-  '/installation-guide/more-installation-alternatives/splunk/splunk-forwarder.html',
-  '/installation-guide/more-installation-alternatives/splunk/splunk-polling.html',
-  '/installation-guide/more-installation-alternatives/splunk/splunk-reverse-proxy.html',
   '/installation-guide/more-installation-alternatives/wazuh-from-sources/wazuh-agent/index.html',
   '/installation-guide/more-installation-alternatives/wazuh-from-sources/wazuh-server/index.html',
   '/installation-guide/more-installation-alternatives/wazuh-from-sources/index.html',
@@ -594,37 +622,37 @@ redirections.push(
       '4.0':  '/installation-guide/open-distro/index.html',
     },
     {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
+      'target': ['3.13=>4.0'],
       '3.13': '/installation-guide/installing-splunk/index.html',
       '4.0':  '/installation-guide/more-installation-alternatives/index.html'
     },
     {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
+      'target': ['3.13=>4.0'],
       '3.13': '/installation-guide/installing-splunk/splunk-app.html',
       '4.0':  '/installation-guide/more-installation-alternatives/index.html'
     },
     {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
+      'target': ['3.13=>4.0'],
       '3.13': '/installation-guide/installing-splunk/splunk-basic.html',
       '4.0':  '/installation-guide/more-installation-alternatives/index.html'
     },
     {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
+      'target': ['3.13=>4.0'],
       '3.13': '/installation-guide/installing-splunk/splunk-distributed.html',
       '4.0':  '/installation-guide/more-installation-alternatives/index.html'
     },
     {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
+      'target': ['3.13=>4.0'],
       '3.13': '/installation-guide/installing-splunk/splunk-forwarder.html',
       '4.0':  '/installation-guide/more-installation-alternatives/index.html'
     },
     {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
+      'target': ['3.13=>4.0'],
       '3.13': '/installation-guide/installing-splunk/splunk-polling.html',
       '4.0':  '/installation-guide/more-installation-alternatives/index.html'
     },
     {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
+      'target': ['3.13=>4.0'],
       '3.13': '/installation-guide/installing-splunk/splunk-reverse-proxy.html',
       '4.0':  '/installation-guide/more-installation-alternatives/index.html'
     },
