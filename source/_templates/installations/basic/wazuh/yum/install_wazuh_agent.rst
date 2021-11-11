@@ -2,6 +2,6 @@
 
 .. code-block:: console
 
-  # yum install wazuh-agent-4.1.5-1
+  # yum install wazuh-agent
 
 .. End of include file
