@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Learn more about the command configuration section. Check out the options and a sample configuration in this section of our documentation.  
+  
 .. _reference_ossec_commands:
 
 command

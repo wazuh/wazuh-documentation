@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Check out our user manual to find out how to configure and use each of the Wazuh components. In this section, you can learn more about the tools. 
+  
 .. _tools:
 
 Tools
