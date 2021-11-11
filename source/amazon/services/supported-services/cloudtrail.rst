@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: AWS CloudTrail is a service supported by Wazuh that enables auditing AWS accounts. Check out this section of our documentation to learn more about it. 
+  
 .. _amazon_cloudtrail:
 
 AWS CloudTrail

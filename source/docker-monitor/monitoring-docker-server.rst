@@ -1,5 +1,9 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+    :description: All the features available in an agent are useful to monitor Docker servers. Learn more about using Wazuh to monitor Docker in this section.
+  
+
 .. _docker_monitoring_server:
 
 Monitoring Docker server
