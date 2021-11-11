@@ -225,9 +225,9 @@ The following is a stateful AR in which the Python script creates a file contain
         import datetime
 
         if os.name == 'nt':
-        LOG_FILE = "C:\\Program Files (x86)\\ossec-agent\\active-response\\active-responses.log"
+            LOG_FILE = "C:\\Program Files (x86)\\ossec-agent\\active-response\\active-responses.log"
         else:
-        LOG_FILE = "/var/ossec/logs/active-responses.log"
+            LOG_FILE = "/var/ossec/logs/active-responses.log"
 
         ADD_COMMAND = 0
         DELETE_COMMAND = 1
@@ -569,7 +569,7 @@ In this case, the AR script calls ``launcher.cmd`` which works as a bridge calli
 
  .. note::
 
-    The Python path must be included in the System user path. Look for it in the **Environment Variables** pane of your Windows system.
+    The Python path must be included in the System user path. Look for it in the **Environment Variables** window of your Windows system.
 
 
 This configuration allows you to run any Windows script through ``launcher.cmd`` script when triggering an active response.
