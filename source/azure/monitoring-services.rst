@@ -1,12 +1,12 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+    :description: Learn more about how to use Wazuh to monitor Microsoft Azure. In this section, you can learn more about the monitoring services. 
+    
 .. _azure_monitoring_services:
 
 Monitoring Services
 ===================
-
-.. meta::
-  :description: Discover the numerous ways that Wazuh provides to monitor your Microsoft Azure services.
 
 `Azure Active Directory <https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-whatis>`_ is the identity and directory management service that combines basic directory services, application access management, and identity protection in a single solution.
 

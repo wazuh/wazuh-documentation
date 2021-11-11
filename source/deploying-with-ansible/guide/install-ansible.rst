@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+   :description: Learn how to install the Ansible server in this section of the Wazuh documentation. Check out this step-by-step guide. 
+   
 .. _wazuh_ansible_installation:
 
 Install Ansible

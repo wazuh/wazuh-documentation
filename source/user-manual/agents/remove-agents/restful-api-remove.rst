@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+    :description: Check out how to remove agents using the Wazuh API. The Wazuh API is an open source RESTful API that allows for interaction with the Wazuh manager.
+    
 .. _restful-api-remove:
 
 Remove agents using the Wazuh API

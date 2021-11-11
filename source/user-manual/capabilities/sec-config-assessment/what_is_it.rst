@@ -1,6 +1,9 @@
 What is SCA
 =================================
 
+.. meta::
+  :description: Learn more about the Security Configuration Assessment capability of Wazuh: what is SCA, overview of an SCA check, and how to interpret SCA scan results. 
+  
 .. contents:: Table of Contents
    :depth: 10
 
