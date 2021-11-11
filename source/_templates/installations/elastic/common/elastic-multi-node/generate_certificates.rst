@@ -2,10 +2,10 @@
 
 #. Download the ``wazuh-cert-tool.sh`` to create the certificates.
 
-    .. code-block:: console
+   .. code-block:: console
 
-      # curl -so ~/wazuh-cert-tool.sh https://packages.wazuh.com/resources/4.2/open-distro/tools/certificate-utility/wazuh-cert-tool.sh
-      # curl -so ~/instances.yml https://packages.wazuh.com/resources/4.2/open-distro/tools/certificate-utility/instances.yml
+     # curl -so ~/wazuh-cert-tool.sh https://packages.wazuh.com/resources/4.2/open-distro/tools/certificate-utility/wazuh-cert-tool.sh
+     # curl -so ~/instances.yml https://packages.wazuh.com/resources/4.2/open-distro/tools/certificate-utility/instances.yml
 
 #. Edit ``~/instances.yml`` and replace the node names and IP values with the corresponding names and IP addresses. Add as many node fields as needed.
 
@@ -69,7 +69,7 @@
      # tar -cvf certs.tar *
      # mv ~/certs/certs.tar ~/
 
-#. Copy ``certs.tar`` to all the servers of the distributed deployment including the Wazuh indexer, Wazuh server, and Wazuh dashboard nodes. This can be done by using, for example, ``scp``. 
+#. Copy ``certs.tar`` to all the servers of the distributed deployment, including the Elasticsearch, Wazuh server, and Kibana nodes. This can be done by using, for example, ``scp``. 
 
 #. If you want to later install other Wazuh components on this node, keep the certificates file. Otherwise, if the file is already copied to all the instances of the distributed deployment, remove it with ``rm -f certs.tar`` to increase security.
 

@@ -3,12 +3,10 @@
 
 #. Download the ``wazuh-cert-tool.sh`` to create the certificates:
 
-  .. code-block:: console
-
-    # curl -so ~/wazuh-cert-tool.sh https://packages.wazuh.com/resources/4.2/open-distro/tools/certificate-utility/wazuh-cert-tool.sh
-    # curl -so ~/instances.yml https://packages.wazuh.com/resources/4.2/open-distro/tools/certificate-utility/instances.yml
-
-Replace the values ``<node-name>`` and ``<node-ip>``  with the corresponding names and IP addresses. There can be added as many nodes fields as needed:
+   .. code-block:: console
+ 
+     # curl -so ~/wazuh-cert-tool.sh https://packages.wazuh.com/resources/4.2/open-distro/tools/certificate-utility/wazuh-cert-tool.sh
+     # curl -so ~/instances.yml https://packages.wazuh.com/resources/4.2/open-distro/tools/certificate-utility/instances.yml
 
 #. Edit ``~/instances.yml`` and replace the values ``<node-name>`` and ``node-IP``  with the corresponding names and IP addresses. Add as many nodes fields as needed:
  

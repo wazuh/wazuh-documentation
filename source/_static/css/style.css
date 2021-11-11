@@ -4019,6 +4019,10 @@ div[class*='highlight'] pre {
   overflow: auto;
 }
 
+div[class*='highlight'].no-copy .copy-to-clipboard {
+  display: none;
+}
+
 div[class*='highlight'] .copy-to-clipboard {
   z-index: 1;
   cursor: pointer;

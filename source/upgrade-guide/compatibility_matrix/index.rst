@@ -6,7 +6,7 @@ Compatibility matrix
 ====================
 
 
-.. Wazuh software can be installed on many operating systems. In addition, there are also specific compatibility requirements between the different components of Wazuh. For more information, check the compatibility matrix below.
+Wazuh software can be installed on many operating systems. In addition, there are also specific compatibility requirements between the different components of Wazuh. For more information, check the compatibility matrix below.
 
 - `Operating system compatibility`_
 - `Components compatibility`_
@@ -113,6 +113,8 @@ The compatibility between the Wazuh agent and the Wazuh manager is guaranteed wh
 
     The Wazuh manager is also compatible with **OSSEC agents**, however, not all capabilities will be available for them. 
 
+.. _wazuh_kibana_compatibility_matrix:    
+
 Wazuh and Wazuh Kibana plugin
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -125,6 +127,8 @@ The Wazuh app for Kibana requires compatibility between two different components
 |        Wazuh version              |      Elastic Stack version         |   Open Distro version     |
 +-----------------------------------+------------------------------------+---------------------------+
 |              |WAZUH_LATEST|                | |ELASTICSEARCH_LATEST|                             | |OPEN_DISTRO_LATEST|                    |
++-----------------------------------+------------------------------------+---------------------------+
+|              |WAZUH_LATEST|                | 7.11.2                             |                           |
 +-----------------------------------+------------------------------------+---------------------------+
 |              |WAZUH_LATEST|                | |ELASTICSEARCH_ELK_LATEST|                             |                           |
 +-----------------------------------+------------------------------------+---------------------------+
@@ -143,7 +147,7 @@ The Splunk app for Wazuh requires compatibility between two different components
 +---------------------------------+---------------------------+
 | Splunk App version              |       Splunk version      |
 +---------------------------------+---------------------------+
-|              4.2.0              |     8.0.4, |SPLUNK_LATEST|          |
+|              |WAZUH_SPLUNK_LATEST|              |     8.1.4, |SPLUNK_LATEST|          |
 +---------------------------------+---------------------------+
 
 You can find more information on the `Wazuh app repository <https://github.com/wazuh/wazuh-splunk#installation>`_, where you can check a more detailed compatibility matrix between the Wazuh app for Splunk and Splunk versions.

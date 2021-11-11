@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: In this section of the Wazuh documentation, you will find all the information related to the internal configuration of Wazuh. 
+  
 .. _reference_internal_options:
 
 Internal configuration
@@ -179,7 +182,7 @@ Analysisd
 |                                                         |               |                                                                     |
 |                                                         |               | .. versionadded:: 3.0.0                                             |
 +                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Default value | 16384                                                               |
+|                                                         | Default value | 458752                                                              |
 +                                                         +---------------+---------------------------------------------------------------------+
 |                                                         | Allowed value | Any integer between 1024 and 1048576.                               |
 +---------------------------------------------------------+---------------+---------------------------------------------------------------------+
@@ -632,7 +635,7 @@ Logcollector
 |                                          |               |                                                                            |
 |                                          |               | .. versionadded:: 4.2                                                      |
 +                                          +---------------+----------------------------------------------------------------------------+
-|                                          | Default value | 5                                                                          |
+|                                          | Default value | 60                                                                         |
 +                                          +---------------+----------------------------------------------------------------------------+
 |                                          | Allowed values| 0: Disable statistics file generation. Statistics information will continue|
 |                                          |               | to be available through the API                                            |

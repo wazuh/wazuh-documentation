@@ -1,6 +1,9 @@
 How to configure SCA
 ------------------------------------
 
+.. meta::
+    :description: Check out this section of our documentation to learn more about how to configure Security Configuration Assessment in Wazuh.
+    
 .. contents:: Table of Contents
    :depth: 10
 

@@ -158,7 +158,7 @@ In the commands below ``127.0.0.1`` IP address is used. If Elasticsearch is boun
 
           .. code-block:: console
 
-            # apt install opendistroforelasticsearch=|OPEN_DISTRO_LATEST|
+            # apt install opendistroforelasticsearch=|OPEN_DISTRO_LATEST|-1
 
 
         .. group-tab:: ZYpp
@@ -451,7 +451,11 @@ Upgrading Kibana
 
       opendistro_security.multitenancy.enabled: true
 
-   When you access Kibana, a popup window asks you to define a tenant. Select one, for example global, and save the configuration.
+   When you access Kibana, a popup window asks you to define a tenant. You can avoid it by modifying the default route to include the selection of a tenant, for example, global.  
+
+   .. code-block:: console
+
+      server.defaultRoute: /app/wazuh?security_tenant=global
 
 #. Restart Kibana:
 
@@ -466,7 +470,7 @@ Upgrading Kibana
 
     If you have a custom index pattern, be sure to replace it accordingly.      
 
-#. Clean the browser's cache and cookies.
+#. Clear the browser's cache and cookies.
 
 
 Disabling the repository
