@@ -71,7 +71,7 @@ macOS SCA rule example:
 
 Below is an example of the results of a configuration assessment evaluation. These can be obtained through the web user interface or directly through the Wazuh RESTful API.
 
-.. thumbnail:: /images/getting_started/use-cases/wazuh-use-cases-sca1.png
+.. thumbnail:: /images/getting_started/use-cases/wazuh-use-cases-sca01.png
    :title: Security configuration assessment inventory dashboard
    :align: center
 
