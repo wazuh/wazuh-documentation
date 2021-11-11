@@ -98,16 +98,26 @@ Expand the output to see an example response of this use case.
 
 In the *Integrity monitoring* module of the Wazuh dashboard, users can view all of the details of the alerts triggered and find a comprehensive summary of changes in files and registry keys. 
 
-.. list-table::
-   :width: 100%
-   :widths: 33 33 33
+.. raw:: html
+    
+    <div class="images-rn-420-container">
+    <div class="images-rn-420">
 
-   * - .. thumbnail:: /images/getting_started/use-cases/wazuh-use-cases-fim1.png
-          :title: Integrity monitoring dashboard
-     - .. thumbnail:: /images/getting_started/use-cases/wazuh-use-cases-fim2.png
-          :title: Integrity monitoring
-     - .. thumbnail:: /images/getting_started/use-cases/wazuh-use-cases-fim3.png
+.. thumbnail:: /images/getting_started/use-cases/wazuh-use-cases-fim1.png
+      :title: Integrity monitoring dashboard
+      :align: center
+
+.. thumbnail:: /images/getting_started/use-cases/wazuh-use-cases-fim2.png
+      :title: Integrity monitoring
+      :align: center
+
+..
+   .. thumbnail:: /images/getting_started/use-cases/wazuh-use-cases-fim3.png
           :title: Integrity monitoring inventory
+
+.. raw:: html
+
+    </div> 
 
 .. thumbnail:: ../../images/getting_started/use_case_fim.png
   :title: Integrity monitoring module
