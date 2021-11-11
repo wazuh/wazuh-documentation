@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Learn more about the agentless monitoring configuration: integrity check BSD, integrity check Linux, generic diff, and pix config. Learn more here.  
+  
 .. _agentless-examples:
 
 Configuration
