@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+    :description: Learn more about the local configuration of Wazuh. In this section of the documentation you can check out more about the wodle name “aws-s3”. 
+
 .. _wodle_s3:
 
 wodle name="aws-s3"
