@@ -39,6 +39,8 @@ removedUrls['x.y'] = [
 /* Pages added in 4.2 */
 
 newUrls['4.2'] = [
+  '/amazon-machine-images/amazon-machine-images.html',
+  '/release-notes/release-4-2-4.html',
   '/release-notes/release-4-2-3.html',
   '/release-notes/release-4-2-2.html',
   '/release-notes/release_4_2_1.html',
@@ -91,9 +93,11 @@ newUrls['4.2'] = [
   '/cloud-service/getting-started/sign-up-trial.html',
   '/cloud-service/getting-started/access-wazuh-wui.html',
   '/cloud-service/getting-started/register-agents.html', 
+  '/user-manual/kibana-app/wazuh-rbac.html',
 ];
 
 removedUrls['4.2'] = [
+  '/user-manual/kibana-app/connect-kibana-app.html',
   '/user-manual/reference/daemons/ossec-agentd.html',
   '/user-manual/reference/daemons/ossec-agentlessd.html',
   '/user-manual/reference/daemons/ossec-analysisd.html',
