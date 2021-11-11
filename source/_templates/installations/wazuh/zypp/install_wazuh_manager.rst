@@ -2,6 +2,6 @@
 
 .. code-block:: console
 
-  # zypper install wazuh-manager-4.1.5-1
+  # zypper install wazuh-manager
 
 .. End of include file

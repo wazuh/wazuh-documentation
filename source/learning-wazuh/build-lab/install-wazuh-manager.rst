@@ -46,7 +46,7 @@ Install the Wazuh manager software and start its service:
 
   .. code-block:: console
 
-    # yum -y install wazuh-manager-4.1.5-1
+    # yum -y install wazuh-manager
     # systemctl start wazuh-manager
 
 Configure Wazuh manager to allow self registration of new agents with authentication:
