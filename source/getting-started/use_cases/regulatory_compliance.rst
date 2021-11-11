@@ -97,11 +97,28 @@ Expand the output to see an example alert for rule ``Apache: Attempt to access f
     "timestamp": "2020-09-04T06:08:53.878+0000"
   }
 
-Example of regulatory compliance dashboard for PCI DSS:
+Example of regulatory compliance dashboards:
 
-.. thumbnail:: ../../images/getting_started/use_case_regulatory_compliance.png
-   :align: center
-   :wrap_image: No
+.. raw:: html
+    
+    <div class="images-rn-420-container">
+    <div class="images-rn-420">
+
+.. thumbnail:: /images/getting_started/use-cases/wazuh-use-cases-regulatory3.png
+    :title: PCI DSS compliance
+    :align: center
+
+.. thumbnail:: /images/getting_started/use-cases/wazuh-use-cases-regulatory2.png
+    :title: HIPAA compliance
+    :align: center
+          
+.. raw:: html
+
+    </div> 
+          
+.. thumbnail:: /images/getting_started/use-cases/wazuh-use-cases-regulatory1.png
+    :title: NIST 800-53 compliance
+    :align: center
 
 More information on how Wazuh helps meet compliance requirements can be found at:
 
