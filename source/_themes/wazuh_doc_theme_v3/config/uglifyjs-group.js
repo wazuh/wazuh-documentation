@@ -13,13 +13,13 @@ const FILE = parameter.split('=')[1];
 
 // List of javascript files that must be included in all pages
 const commonJS = [
-  SRC_PATH + "common/doctools.js",
   SRC_PATH + "common/light-dark-mode.js"
 ];
 
 // List of javascript files per page
 const pageSpecificJS = {
   "wazuh-documentation": [
+    SRC_PATH + "common/doctools.js",
     SRC_PATH + "components/version-selector.js",
     SRC_PATH + "components/search-box.js",
     SRC_PATH + "components/global-toc.js",
@@ -27,9 +27,11 @@ const pageSpecificJS = {
     // + JS files for different parts/components of the theme (only functionality for regular documentation content pages) + tabs (extension) + lightbox (extension)
   ],
   "index": [
+    SRC_PATH + "common/doctools.js",
     SRC_PATH + "index.js" //JS code only for page "Index" if necessary.
   ],
   "search-results": [
+    SRC_PATH + "common/doctools.js",
     SRC_PATH + "components/version-selector.js",
     SRC_PATH + "components/search-box.js",
     SRC_PATH + "components/global-toc.js",
@@ -38,13 +40,13 @@ const pageSpecificJS = {
     // + JS files only for search page
   ],
   "not-found": [
+    SRC_PATH + "common/doctools.js",
     SRC_PATH + "components/version-selector.js",
     SRC_PATH + "components/search-box.js",
     SRC_PATH + "components/global-toc.js"
     // + JS files only for page "Not found"
   ],
   "api-reference": [
-    END_PATH + "redoc.standalone.js",
     SRC_PATH + "components/version-selector.js",
     SRC_PATH + "custom-redoc.js"
   ]

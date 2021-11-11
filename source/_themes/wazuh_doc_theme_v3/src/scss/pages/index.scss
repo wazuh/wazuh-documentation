@@ -6,5 +6,218 @@
 @import "../inc/mixins";
 @import "../inc/root";
 
+@import "../components/brand";
 @import "../components/mode-switch";
 @import "../components/search-box";
+@import "../parts/footer";
+
+body {
+  margin-top: $indexHeaderHeight;
+  background: $codeBlockBG;
+}
+
+main {
+  padding-left: 15px;
+  padding-right: 15px;
+  min-height: calc(100vh - #{$indexHeaderHeight} - #{$footerHeight});
+  padding-top: 60px;
+
+  h1 {
+    width: 0;
+    height: 0;
+    overflow: hidden;
+  }
+
+  .toctree-wrapper {
+    ul {
+      padding: 0;
+      list-style: none;
+    }
+    > ul {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+
+      .toctree-l1 {
+        margin-left: #{$indexIconSize + 10};
+        width: calc(33.333% - #{$indexIconSize + 10});
+        margin-bottom: 60px;
+        position: relative;
+        min-height: 133px;
+        border-left: 3px solid $wuiColorPrimary;
+
+        &.collapsible {
+
+          ul {
+            // position: absolute;
+          }
+          .toggle {
+            display: inline-block;
+            // position: absolute;
+            // bottom: -40px;
+            left: -3px;
+            font-size: 18px;
+            color: $wuiColorPrimary;
+            font-weight: 700;
+            padding: 10px 0;
+            border-left-color: $codeBlockBG;
+
+            &::after {
+              content: '';
+              display: inline-block;
+              width: 24px;
+              height: 12px;
+              background-image: url('#{$icoPath}svg-icons.svg#chevron-blue');
+              background-repeat: no-repeat;
+              background-size: 20px 15px;
+              background-position: center;
+              margin-left: 7px;
+              transform: rotateX(180deg);
+            }
+          }
+
+          &.collapsed {
+            ul {
+              position: relative;
+            }
+            .toggle::after {
+              transform: rotateX(0);
+            }
+
+            .toctree-l2:nth-of-type(n+#{$IndexMaxShowItems+1}) {
+              display: none;
+            }
+          }
+        } 
+
+        a {
+          border-left: 3px solid $wuiColorPrimary;
+          position: relative;
+          left: -3px;
+          padding-left: 15px;
+          display: inline-block;
+          color: $wuiColorFullShade;
+          line-height: 32px;
+          font-weight: 400;
+
+          &:hover {
+            color: $wuiColorPrimaryLighter;
+            text-decoration: none;
+          }
+        }
+
+        > a {
+          font-size: 22px;
+          line-height: 22px;
+          font-weight: 700;
+          padding-bottom: 15px;
+        }
+      }
+      .toctree-l2 {
+        position: relative;
+      }
+    }
+  }
+}
+
+.loading .toctree-l1 {
+  height: 133px;
+  overflow-y: hidden;
+}
+
+#header {
+  height: $indexHeaderHeight;
+  background: $wuiColorEmptyShade;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .navbar-brand {
+    font-size: 22px;
+
+    .logo-link.web {
+      padding: 0;
+      margin-right: 10px;
+    }
+    .logo-link.docs {
+      line-height: 50px;
+    }
+  }
+
+  .search-box {
+    max-width: 850px;
+    margin-left: auto;
+    margin-right: auto;
+    background: $wuiColorEmptyShade;
+  }
+  .form-control {
+    background: $wuiColorEmptyShade;
+  }
+}
+
+#right-sidebar {
+  position: fixed;
+  top: $indexHeaderHeight;
+  right: 0;
+  width: calc((100% - 1140px)/2);
+  min-width: 150px;
+  padding-top: 15px;
+}
+
+.index footer {
+  position: static;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.index main {
+  .toctree-l1 > a::before {
+    background-repeat: no-repeat;
+    background-size: 60px 60px;
+    background-position: center;
+    content: '';
+    display: block;
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    left: -70px;
+    top: -7px;
+    pointer-events: none;
+  }
+  /* Getting started */
+  [href$="getting-started/index.html"]::before {
+    background-image: url('#{$icoPath}index-icons.svg#getting-started');
+  }
+  /* Installation guide */
+  [href$="installation-guide/index.html"]::before {
+    background-image: url('#{$icoPath}index-icons.svg#installation-guide');
+  }
+  /* Upgrade guide */
+  [href$="upgrade-guide/index.html"]::before {
+    background-image: url('#{$icoPath}index-icons.svg#upgrade-guide');
+  }
+  /* User manual */
+  [href$="user-manual/index.html"]::before {
+    background-image: url('#{$icoPath}index-icons.svg#user-manual');
+  }
+  /* Deployment */
+  [href$="deployment.html"]::before {
+    background-image: url('#{$icoPath}index-icons.svg#deployment');
+  }
+  /* Compliance */
+  [href$="compliance.html"]::before {
+    background-image: url('#{$icoPath}index-icons.svg#compliance');
+  }
+  /* Monitorin with Wazuh */
+  [href$="monitoring.html"]::before {
+    background-image: url('#{$icoPath}index-icons.svg#monitoring');
+  }
+  /* Learning Wazuh */
+  [href$="learning-wazuh/index.html"]::before {
+    background-image: url('#{$icoPath}index-icons.svg#learning');
+  }
+  /* Release notes */
+  [href$="release-notes/index.html"]::before {
+    background-image: url('#{$icoPath}index-icons.svg#release-notes');
+  }
+}

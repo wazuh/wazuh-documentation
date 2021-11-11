@@ -1,0 +1,534 @@
+<svg id="wazuh-icons-sprite" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve">
+  <defs>
+  </defs>
+  <view id="getting-started" viewBox="0 0 200 200"/>
+  <view id="installation-guide" viewBox="220 0 200 200"/>
+  <view id="upgrade-guide" viewBox="440 0 200 200"/>
+  <view id="user-manual" viewBox="660 0 200 200"/>
+  <view id="deployment" viewBox="880 0 200 200"/>
+  <view id="compliance" viewBox="1100 0 200 200"/>
+  <view id="monitoring" viewBox="1320 0 200 200"/>
+  <view id="learning" viewBox="1540 0 200 200"/>
+  <view id="release-notes" viewBox="1760 0 200 200"/>
+  <g>
+    <defs>
+    <path id="getting-started-def" d="M158.4,80.7c0,32.3-26.2,58.4-58.4,58.4S41.6,113,41.6,80.7c0,0,0,0.1,0,0.1h0v99.1l58.9-24.9
+      l57.9,24.9V80.7L158.4,80.7C158.4,80.8,158.4,80.7,158.4,80.7z"/>
+    </defs>
+    <clipPath id="getting-started-clipping">
+      <use xlink:href="#getting-started-def"  overflow="visible"/>
+    </clipPath>
+    <rect x="41.6" y="80.7" clip-path="url(#getting-started-clipping)" fill="#DBB6FC" width="0.7" height="99.2"/>
+    <rect x="42.3" y="80.7" clip-path="url(#getting-started-clipping)" fill="#DBB6FC" width="0.7" height="99.2"/>
+    <rect x="43" y="80.7" clip-path="url(#getting-started-clipping)" fill="#DAB6FC" width="0.7" height="99.2"/>
+    <rect x="43.7" y="80.7" clip-path="url(#getting-started-clipping)" fill="#DAB6FC" width="0.7" height="99.2"/>
+    <rect x="44.4" y="80.7" clip-path="url(#getting-started-clipping)" fill="#D9B5FC" width="0.7" height="99.2"/>
+    <rect x="45.1" y="80.7" clip-path="url(#getting-started-clipping)" fill="#D8B5FC" width="0.7" height="99.2"/>
+    <rect x="45.8" y="80.7" clip-path="url(#getting-started-clipping)" fill="#D8B5FC" width="0.7" height="99.2"/>
+    <rect x="46.5" y="80.7" clip-path="url(#getting-started-clipping)" fill="#D7B5FC" width="0.7" height="99.2"/>
+    <rect x="47.2" y="80.7" clip-path="url(#getting-started-clipping)" fill="#D6B5FC" width="0.7" height="99.2"/>
+    <rect x="47.9" y="80.7" clip-path="url(#getting-started-clipping)" fill="#D6B4FC" width="0.7" height="99.2"/>
+    <rect x="48.6" y="80.7" clip-path="url(#getting-started-clipping)" fill="#D5B4FC" width="0.7" height="99.2"/>
+    <rect x="49.3" y="80.7" clip-path="url(#getting-started-clipping)" fill="#D4B4FC" width="0.7" height="99.2"/>
+    <rect x="50" y="80.7" clip-path="url(#getting-started-clipping)" fill="#D4B4FC" width="0.7" height="99.2"/>
+    <rect x="50.7" y="80.7" clip-path="url(#getting-started-clipping)" fill="#D3B4FC" width="0.7" height="99.2"/>
+    <rect x="51.4" y="80.7" clip-path="url(#getting-started-clipping)" fill="#D2B3FC" width="0.7" height="99.2"/>
+    <rect x="52.1" y="80.7" clip-path="url(#getting-started-clipping)" fill="#D1B3FC" width="0.7" height="99.2"/>
+    <rect x="52.8" y="80.7" clip-path="url(#getting-started-clipping)" fill="#D1B3FC" width="0.7" height="99.2"/>
+    <rect x="53.5" y="80.7" clip-path="url(#getting-started-clipping)" fill="#D0B3FC" width="0.7" height="99.2"/>
+    <rect x="54.2" y="80.7" clip-path="url(#getting-started-clipping)" fill="#CFB2FC" width="0.7" height="99.2"/>
+    <rect x="55" y="80.7" clip-path="url(#getting-started-clipping)" fill="#CEB2FC" width="0.7" height="99.2"/>
+    <rect x="55.7" y="80.7" clip-path="url(#getting-started-clipping)" fill="#CDB2FC" width="0.7" height="99.2"/>
+    <rect x="56.4" y="80.7" clip-path="url(#getting-started-clipping)" fill="#CDB2FC" width="0.7" height="99.2"/>
+    <rect x="57.1" y="80.7" clip-path="url(#getting-started-clipping)" fill="#CCB2FC" width="0.7" height="99.2"/>
+    <rect x="57.8" y="80.7" clip-path="url(#getting-started-clipping)" fill="#CBB1FC" width="0.7" height="99.2"/>
+    <rect x="58.5" y="80.7" clip-path="url(#getting-started-clipping)" fill="#CAB1FC" width="0.7" height="99.2"/>
+    <rect x="59.2" y="80.7" clip-path="url(#getting-started-clipping)" fill="#C9B1FC" width="0.7" height="99.2"/>
+    <rect x="59.9" y="80.7" clip-path="url(#getting-started-clipping)" fill="#C9B1FC" width="0.7" height="99.2"/>
+    <rect x="60.6" y="80.7" clip-path="url(#getting-started-clipping)" fill="#C8B0FC" width="0.7" height="99.2"/>
+    <rect x="61.3" y="80.7" clip-path="url(#getting-started-clipping)" fill="#C7B0FC" width="0.7" height="99.2"/>
+    <rect x="62" y="80.7" clip-path="url(#getting-started-clipping)" fill="#C6B0FC" width="0.7" height="99.2"/>
+    <rect x="62.7" y="80.7" clip-path="url(#getting-started-clipping)" fill="#C5B0FC" width="0.7" height="99.2"/>
+    <rect x="63.4" y="80.7" clip-path="url(#getting-started-clipping)" fill="#C4AFFC" width="0.7" height="99.2"/>
+    <rect x="64.1" y="80.7" clip-path="url(#getting-started-clipping)" fill="#C3AFFC" width="0.7" height="99.2"/>
+    <rect x="64.8" y="80.7" clip-path="url(#getting-started-clipping)" fill="#C2AFFC" width="0.7" height="99.2"/>
+    <rect x="65.5" y="80.7" clip-path="url(#getting-started-clipping)" fill="#C2AEFC" width="0.7" height="99.2"/>
+    <rect x="66.2" y="80.7" clip-path="url(#getting-started-clipping)" fill="#C1AEFC" width="0.7" height="99.2"/>
+    <rect x="66.9" y="80.7" clip-path="url(#getting-started-clipping)" fill="#C0AEFC" width="0.7" height="99.2"/>
+    <rect x="67.6" y="80.7" clip-path="url(#getting-started-clipping)" fill="#BFAEFB" width="0.7" height="99.2"/>
+    <rect x="68.3" y="80.7" clip-path="url(#getting-started-clipping)" fill="#BEADFB" width="0.7" height="99.2"/>
+    <rect x="69" y="80.7" clip-path="url(#getting-started-clipping)" fill="#BDADFB" width="0.7" height="99.2"/>
+    <rect x="69.7" y="80.7" clip-path="url(#getting-started-clipping)" fill="#BCADFB" width="0.7" height="99.2"/>
+    <rect x="70.4" y="80.7" clip-path="url(#getting-started-clipping)" fill="#BBADFB" width="0.7" height="99.2"/>
+    <rect x="71.1" y="80.7" clip-path="url(#getting-started-clipping)" fill="#BAACFB" width="0.7" height="99.2"/>
+    <rect x="71.8" y="80.7" clip-path="url(#getting-started-clipping)" fill="#B9ACFB" width="0.7" height="99.2"/>
+    <rect x="72.5" y="80.7" clip-path="url(#getting-started-clipping)" fill="#B8ACFB" width="0.7" height="99.2"/>
+    <rect x="73.3" y="80.7" clip-path="url(#getting-started-clipping)" fill="#B8ACFB" width="0.7" height="99.2"/>
+    <rect x="74" y="80.7" clip-path="url(#getting-started-clipping)" fill="#B7ABFB" width="0.7" height="99.2"/>
+    <rect x="74.7" y="80.7" clip-path="url(#getting-started-clipping)" fill="#B6ABFB" width="0.7" height="99.2"/>
+    <rect x="75.4" y="80.7" clip-path="url(#getting-started-clipping)" fill="#B5ABFB" width="0.7" height="99.2"/>
+    <rect x="76.1" y="80.7" clip-path="url(#getting-started-clipping)" fill="#B4AAFB" width="0.7" height="99.2"/>
+    <rect x="76.8" y="80.7" clip-path="url(#getting-started-clipping)" fill="#B3AAFB" width="0.7" height="99.2"/>
+    <rect x="77.5" y="80.7" clip-path="url(#getting-started-clipping)" fill="#B2AAFB" width="0.7" height="99.2"/>
+    <rect x="78.2" y="80.7" clip-path="url(#getting-started-clipping)" fill="#B1AAFB" width="0.7" height="99.2"/>
+    <rect x="78.9" y="80.7" clip-path="url(#getting-started-clipping)" fill="#B0A9FB" width="0.7" height="99.2"/>
+    <rect x="79.6" y="80.7" clip-path="url(#getting-started-clipping)" fill="#AFA9FB" width="0.7" height="99.2"/>
+    <rect x="80.3" y="80.7" clip-path="url(#getting-started-clipping)" fill="#AEA9FB" width="0.7" height="99.2"/>
+    <rect x="81" y="80.7" clip-path="url(#getting-started-clipping)" fill="#ADA8FB" width="0.7" height="99.2"/>
+    <rect x="81.7" y="80.7" clip-path="url(#getting-started-clipping)" fill="#ACA8FB" width="0.7" height="99.2"/>
+    <rect x="82.4" y="80.7" clip-path="url(#getting-started-clipping)" fill="#ABA8FB" width="0.7" height="99.2"/>
+    <rect x="83.1" y="80.7" clip-path="url(#getting-started-clipping)" fill="#AAA8FB" width="0.7" height="99.2"/>
+    <rect x="83.8" y="80.7" clip-path="url(#getting-started-clipping)" fill="#A9A7FB" width="0.7" height="99.2"/>
+    <rect x="84.5" y="80.7" clip-path="url(#getting-started-clipping)" fill="#A8A7FB" width="0.7" height="99.2"/>
+    <rect x="85.2" y="80.7" clip-path="url(#getting-started-clipping)" fill="#A7A7FB" width="0.7" height="99.2"/>
+    <rect x="85.9" y="80.7" clip-path="url(#getting-started-clipping)" fill="#A6A6FB" width="0.7" height="99.2"/>
+    <rect x="86.6" y="80.7" clip-path="url(#getting-started-clipping)" fill="#A5A6FB" width="0.7" height="99.2"/>
+    <rect x="87.3" y="80.7" clip-path="url(#getting-started-clipping)" fill="#A4A6FB" width="0.7" height="99.2"/>
+    <rect x="88" y="80.7" clip-path="url(#getting-started-clipping)" fill="#A3A5FB" width="0.7" height="99.2"/>
+    <rect x="88.7" y="80.7" clip-path="url(#getting-started-clipping)" fill="#A2A5FB" width="0.7" height="99.2"/>
+    <rect x="89.4" y="80.7" clip-path="url(#getting-started-clipping)" fill="#A1A5FB" width="0.7" height="99.2"/>
+    <rect x="90.1" y="80.7" clip-path="url(#getting-started-clipping)" fill="#A0A5FB" width="0.7" height="99.2"/>
+    <rect x="90.8" y="80.7" clip-path="url(#getting-started-clipping)" fill="#9FA4FB" width="0.7" height="99.2"/>
+    <rect x="91.6" y="80.7" clip-path="url(#getting-started-clipping)" fill="#9EA4FB" width="0.7" height="99.2"/>
+    <rect x="92.3" y="80.7" clip-path="url(#getting-started-clipping)" fill="#9DA4FB" width="0.7" height="99.2"/>
+    <rect x="93" y="80.7" clip-path="url(#getting-started-clipping)" fill="#9CA3FB" width="0.7" height="99.2"/>
+    <rect x="93.7" y="80.7" clip-path="url(#getting-started-clipping)" fill="#9BA3FB" width="0.7" height="99.2"/>
+    <rect x="94.4" y="80.7" clip-path="url(#getting-started-clipping)" fill="#9AA3FB" width="0.7" height="99.2"/>
+    <rect x="95.1" y="80.7" clip-path="url(#getting-started-clipping)" fill="#99A2FB" width="0.7" height="99.2"/>
+    <rect x="95.8" y="80.7" clip-path="url(#getting-started-clipping)" fill="#98A2FB" width="0.7" height="99.2"/>
+    <rect x="96.5" y="80.7" clip-path="url(#getting-started-clipping)" fill="#97A2FB" width="0.7" height="99.2"/>
+    <rect x="97.2" y="80.7" clip-path="url(#getting-started-clipping)" fill="#96A2FB" width="0.7" height="99.2"/>
+    <rect x="97.9" y="80.7" clip-path="url(#getting-started-clipping)" fill="#95A1FB" width="0.7" height="99.2"/>
+    <rect x="98.6" y="80.7" clip-path="url(#getting-started-clipping)" fill="#94A1FB" width="0.7" height="99.2"/>
+    <rect x="99.3" y="80.7" clip-path="url(#getting-started-clipping)" fill="#93A1FB" width="0.7" height="99.2"/>
+    <rect x="100" y="80.7" clip-path="url(#getting-started-clipping)" fill="#92A0FB" width="0.7" height="99.2"/>
+    <rect x="100.7" y="80.7" clip-path="url(#getting-started-clipping)" fill="#91A0FB" width="0.7" height="99.2"/>
+    <rect x="101.4" y="80.7" clip-path="url(#getting-started-clipping)" fill="#8FA0FB" width="0.7" height="99.2"/>
+    <rect x="102.1" y="80.7" clip-path="url(#getting-started-clipping)" fill="#8E9FFB" width="0.7" height="99.2"/>
+    <rect x="102.8" y="80.7" clip-path="url(#getting-started-clipping)" fill="#8D9FFB" width="0.7" height="99.2"/>
+    <rect x="103.5" y="80.7" clip-path="url(#getting-started-clipping)" fill="#8C9FFB" width="0.7" height="99.2"/>
+    <rect x="104.2" y="80.7" clip-path="url(#getting-started-clipping)" fill="#8B9EFB" width="0.7" height="99.2"/>
+    <rect x="104.9" y="80.7" clip-path="url(#getting-started-clipping)" fill="#8A9EFB" width="0.7" height="99.2"/>
+    <rect x="105.6" y="80.7" clip-path="url(#getting-started-clipping)" fill="#899EFB" width="0.7" height="99.2"/>
+    <rect x="106.3" y="80.7" clip-path="url(#getting-started-clipping)" fill="#889EFB" width="0.7" height="99.2"/>
+    <rect x="107" y="80.7" clip-path="url(#getting-started-clipping)" fill="#879DFA" width="0.7" height="99.2"/>
+    <rect x="107.7" y="80.7" clip-path="url(#getting-started-clipping)" fill="#869DFA" width="0.7" height="99.2"/>
+    <rect x="108.4" y="80.7" clip-path="url(#getting-started-clipping)" fill="#859DFA" width="0.7" height="99.2"/>
+    <rect x="109.2" y="80.7" clip-path="url(#getting-started-clipping)" fill="#849CFA" width="0.7" height="99.2"/>
+    <rect x="109.9" y="80.7" clip-path="url(#getting-started-clipping)" fill="#839CFA" width="0.7" height="99.2"/>
+    <rect x="110.6" y="80.7" clip-path="url(#getting-started-clipping)" fill="#829CFA" width="0.7" height="99.2"/>
+    <rect x="111.3" y="80.7" clip-path="url(#getting-started-clipping)" fill="#819BFA" width="0.7" height="99.2"/>
+    <rect x="112" y="80.7" clip-path="url(#getting-started-clipping)" fill="#7F9BFA" width="0.7" height="99.2"/>
+    <rect x="112.7" y="80.7" clip-path="url(#getting-started-clipping)" fill="#7E9BFA" width="0.7" height="99.2"/>
+    <rect x="113.4" y="80.7" clip-path="url(#getting-started-clipping)" fill="#7D9AFA" width="0.7" height="99.2"/>
+    <rect x="114.1" y="80.7" clip-path="url(#getting-started-clipping)" fill="#7C9AFA" width="0.7" height="99.2"/>
+    <rect x="114.8" y="80.7" clip-path="url(#getting-started-clipping)" fill="#7B9AFA" width="0.7" height="99.2"/>
+    <rect x="115.5" y="80.7" clip-path="url(#getting-started-clipping)" fill="#7A99FA" width="0.7" height="99.2"/>
+    <rect x="116.2" y="80.7" clip-path="url(#getting-started-clipping)" fill="#7999FA" width="0.7" height="99.2"/>
+    <rect x="116.9" y="80.7" clip-path="url(#getting-started-clipping)" fill="#7899FA" width="0.7" height="99.2"/>
+    <rect x="117.6" y="80.7" clip-path="url(#getting-started-clipping)" fill="#7798FA" width="0.7" height="99.2"/>
+    <rect x="118.3" y="80.7" clip-path="url(#getting-started-clipping)" fill="#7698FA" width="0.7" height="99.2"/>
+    <rect x="119" y="80.7" clip-path="url(#getting-started-clipping)" fill="#7498FA" width="0.7" height="99.2"/>
+    <rect x="119.7" y="80.7" clip-path="url(#getting-started-clipping)" fill="#7397FA" width="0.7" height="99.2"/>
+    <rect x="120.4" y="80.7" clip-path="url(#getting-started-clipping)" fill="#7297FA" width="0.7" height="99.2"/>
+    <rect x="121.1" y="80.7" clip-path="url(#getting-started-clipping)" fill="#7197FA" width="0.7" height="99.2"/>
+    <rect x="121.8" y="80.7" clip-path="url(#getting-started-clipping)" fill="#7096FA" width="0.7" height="99.2"/>
+    <rect x="122.5" y="80.7" clip-path="url(#getting-started-clipping)" fill="#6F96FA" width="0.7" height="99.2"/>
+    <rect x="123.2" y="80.7" clip-path="url(#getting-started-clipping)" fill="#6E96FA" width="0.7" height="99.2"/>
+    <rect x="123.9" y="80.7" clip-path="url(#getting-started-clipping)" fill="#6D95FA" width="0.7" height="99.2"/>
+    <rect x="124.6" y="80.7" clip-path="url(#getting-started-clipping)" fill="#6C95FA" width="0.7" height="99.2"/>
+    <rect x="125.3" y="80.7" clip-path="url(#getting-started-clipping)" fill="#6A95FA" width="0.7" height="99.2"/>
+    <rect x="126" y="80.7" clip-path="url(#getting-started-clipping)" fill="#6994FA" width="0.7" height="99.2"/>
+    <rect x="126.7" y="80.7" clip-path="url(#getting-started-clipping)" fill="#6894FA" width="0.7" height="99.2"/>
+    <rect x="127.5" y="80.7" clip-path="url(#getting-started-clipping)" fill="#6794FA" width="0.7" height="99.2"/>
+    <rect x="128.2" y="80.7" clip-path="url(#getting-started-clipping)" fill="#6693FA" width="0.7" height="99.2"/>
+    <rect x="128.9" y="80.7" clip-path="url(#getting-started-clipping)" fill="#6593FA" width="0.7" height="99.2"/>
+    <rect x="129.6" y="80.7" clip-path="url(#getting-started-clipping)" fill="#6493FA" width="0.7" height="99.2"/>
+    <rect x="130.3" y="80.7" clip-path="url(#getting-started-clipping)" fill="#6292FA" width="0.7" height="99.2"/>
+    <rect x="131" y="80.7" clip-path="url(#getting-started-clipping)" fill="#6192FA" width="0.7" height="99.2"/>
+    <rect x="131.7" y="80.7" clip-path="url(#getting-started-clipping)" fill="#6092FA" width="0.7" height="99.2"/>
+    <rect x="132.4" y="80.7" clip-path="url(#getting-started-clipping)" fill="#5F91FA" width="0.7" height="99.2"/>
+    <rect x="133.1" y="80.7" clip-path="url(#getting-started-clipping)" fill="#5E91FA" width="0.7" height="99.2"/>
+    <rect x="133.8" y="80.7" clip-path="url(#getting-started-clipping)" fill="#5D91FA" width="0.7" height="99.2"/>
+    <rect x="134.5" y="80.7" clip-path="url(#getting-started-clipping)" fill="#5C90FA" width="0.7" height="99.2"/>
+    <rect x="135.2" y="80.7" clip-path="url(#getting-started-clipping)" fill="#5A90FA" width="0.7" height="99.2"/>
+    <rect x="135.9" y="80.7" clip-path="url(#getting-started-clipping)" fill="#5990FA" width="0.7" height="99.2"/>
+    <rect x="136.6" y="80.7" clip-path="url(#getting-started-clipping)" fill="#588FFA" width="0.7" height="99.2"/>
+    <rect x="137.3" y="80.7" clip-path="url(#getting-started-clipping)" fill="#578FFA" width="0.7" height="99.2"/>
+    <rect x="138" y="80.7" clip-path="url(#getting-started-clipping)" fill="#568FFA" width="0.7" height="99.2"/>
+    <rect x="138.7" y="80.7" clip-path="url(#getting-started-clipping)" fill="#558EFA" width="0.7" height="99.2"/>
+    <rect x="139.4" y="80.7" clip-path="url(#getting-started-clipping)" fill="#548EFA" width="0.7" height="99.2"/>
+    <rect x="140.1" y="80.7" clip-path="url(#getting-started-clipping)" fill="#528EFA" width="0.7" height="99.2"/>
+    <rect x="140.8" y="80.7" clip-path="url(#getting-started-clipping)" fill="#518DFA" width="0.7" height="99.2"/>
+    <rect x="141.5" y="80.7" clip-path="url(#getting-started-clipping)" fill="#508DF9" width="0.7" height="99.2"/>
+    <rect x="142.2" y="80.7" clip-path="url(#getting-started-clipping)" fill="#4F8DF9" width="0.7" height="99.2"/>
+    <rect x="142.9" y="80.7" clip-path="url(#getting-started-clipping)" fill="#4E8CF9" width="0.7" height="99.2"/>
+    <rect x="143.6" y="80.7" clip-path="url(#getting-started-clipping)" fill="#4D8CF9" width="0.7" height="99.2"/>
+    <rect x="144.3" y="80.7" clip-path="url(#getting-started-clipping)" fill="#4B8CF9" width="0.7" height="99.2"/>
+    <rect x="145" y="80.7" clip-path="url(#getting-started-clipping)" fill="#4A8BF9" width="0.7" height="99.2"/>
+    <rect x="145.8" y="80.7" clip-path="url(#getting-started-clipping)" fill="#498BF9" width="0.7" height="99.2"/>
+    <rect x="146.5" y="80.7" clip-path="url(#getting-started-clipping)" fill="#488BF9" width="0.7" height="99.2"/>
+    <rect x="147.2" y="80.7" clip-path="url(#getting-started-clipping)" fill="#478AF9" width="0.7" height="99.2"/>
+    <rect x="147.9" y="80.7" clip-path="url(#getting-started-clipping)" fill="#468AF9" width="0.7" height="99.2"/>
+    <rect x="148.6" y="80.7" clip-path="url(#getting-started-clipping)" fill="#448AF9" width="0.7" height="99.2"/>
+    <rect x="149.3" y="80.7" clip-path="url(#getting-started-clipping)" fill="#4389F9" width="0.7" height="99.2"/>
+    <rect x="150" y="80.7" clip-path="url(#getting-started-clipping)" fill="#4289F9" width="0.7" height="99.2"/>
+    <rect x="150.7" y="80.7" clip-path="url(#getting-started-clipping)" fill="#4189F9" width="0.7" height="99.2"/>
+    <rect x="151.4" y="80.7" clip-path="url(#getting-started-clipping)" fill="#4088F9" width="0.7" height="99.2"/>
+    <rect x="152.1" y="80.7" clip-path="url(#getting-started-clipping)" fill="#3F88F9" width="0.7" height="99.2"/>
+    <rect x="152.8" y="80.7" clip-path="url(#getting-started-clipping)" fill="#3D87F9" width="0.7" height="99.2"/>
+    <rect x="153.5" y="80.7" clip-path="url(#getting-started-clipping)" fill="#3C87F9" width="0.7" height="99.2"/>
+    <rect x="154.2" y="80.7" clip-path="url(#getting-started-clipping)" fill="#3B87F9" width="0.7" height="99.2"/>
+    <rect x="154.9" y="80.7" clip-path="url(#getting-started-clipping)" fill="#3A86F9" width="0.7" height="99.2"/>
+    <rect x="155.6" y="80.7" clip-path="url(#getting-started-clipping)" fill="#3986F9" width="0.7" height="99.2"/>
+    <rect x="156.3" y="80.7" clip-path="url(#getting-started-clipping)" fill="#3786F9" width="0.7" height="99.2"/>
+    <rect x="157" y="80.7" clip-path="url(#getting-started-clipping)" fill="#3685F9" width="0.7" height="99.2"/>
+    <rect x="157.7" y="80.7" clip-path="url(#getting-started-clipping)" fill="#3585F9" width="0.7" height="99.2"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" fill="#3585F9" d="M100,22.3c-32.3,0-58.4,26.2-58.4,58.4h116.8
+      C158.4,48.4,132.3,22.3,100,22.3z"/>
+      <path fill="#050505" d="M126.9,83.4c-1.2-8.8-5.9-15.6-13.8-20.2c-0.4,1.3-0.8,2.5-1.2,3.7c-0.1,0.2-0.1,0.4-0.1,0.4
+        c0,0,0.1,0.1,0.4,0.3c7,4.4,10.6,11,10.8,19.5l0,0.1l0,0.1c0,0.3,0,0.7-0.1,1c0,0.9-0.1,1.8-0.3,2.8
+        c-2.2,11.4-11.6,19-23.5,18.9c-6.3-0.1-12.6-3.1-16.8-8.1c-4.3-5.1-6.1-11.7-5-18.6c1-6.7,4.6-12,10.5-15.7
+        c0.2-0.1,0.3-0.2,0.3-0.3c0,0,0-0.1-0.1-0.3c-0.5-1.2-0.9-2.5-1.3-3.8c-10.1,6.2-14.7,15-13.9,26.3c0.6,7.7,4.5,14.8,10.8,19.4
+        c6.4,4.7,14.5,6.4,22.2,4.7C119.6,110.4,128.8,97.2,126.9,83.4z"/>
+        <path fill="#050505" d="M97.2,53.4c0,7.1,0,14.3,0,21.4c1,0,2,0,2.9,0c0.9,0,1.8,0,2.7,0c0-2.5,0-5,0-7.5l0-3.1l0-3.1
+          c0-2.6,0-5.1,0-7.7C100.8,53.5,98.9,53.5,97.2,53.4z"/>
+  </g>
+  <g transform="translate(220, 0)">
+    <defs>
+      <path id="installation-guide-def" d="M52.9,98.2h13.4c0-8.6,3.3-17.3,9.9-23.9c13.2-13.2,34.7-13.2,47.9,0c6.6,6.6,9.9,15.2,9.9,23.9h13h11.2
+        h11V87.4h-12.2c-1.4-7.5-4.4-14.9-8.9-21.4l8.6-8.6l-15.7-15.7l-8.6,8.6c-6.6-4.5-13.9-7.4-21.4-8.9V29.2H88.9v12.3
+        c-7.5,1.5-14.8,4.5-21.3,8.9l-8.7-8.7L43.2,57.3l8.8,8.8c-4.4,6.5-7.3,13.8-8.7,21.3H30.7v10.8h11.7H52.9z"/>
+    </defs>
+    <rect x="36.5" y="92.9" transform="matrix(6.123234e-17 -1 1 6.123234e-17 -62.1396 145.75)" fill="#FFFFFF" width="10.7" height="22.2"/>
+    <rect x="152.8" y="92.9" transform="matrix(6.123234e-17 -1 1 6.123234e-17 54.2072 262.0969)" fill="#FFFFFF" width="10.7" height="22.2"/>
+    <rect x="47.8" y="46" transform="matrix(-0.7071 0.7071 -0.7071 -0.7071 140.8332 55.7752)" fill="#3585F9" width="22.2" height="22.2"/>
+    <rect x="130" y="46" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 200.5882 197.1966)" fill="#3585F9" width="22.2" height="22.2"/>
+    <rect x="88.9" y="28.9" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 200 80.0331)" fill="#3585F9" width="22.2" height="22.2"/>
+    <path fill="#3585F9" d="M100.4,131.9c18.4,0,33.3-14.9,33.3-33.3H67.1C67.1,117,82,131.9,100.4,131.9z"/>
+    <clipPath id="installation-guide-clipping">
+      <use xlink:href="#installation-guide-def"  overflow="visible"/>
+    </clipPath>
+    <rect x="168.4" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#DBB6FC" width="0.8" height="69"/>
+    <rect x="167.6" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#DBB6FC" width="0.8" height="69"/>
+    <rect x="166.8" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#DAB6FC" width="0.8" height="69"/>
+    <rect x="165.9" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#DAB6FC" width="0.8" height="69"/>
+    <rect x="165.1" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#D9B5FC" width="0.8" height="69"/>
+    <rect x="164.3" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#D8B5FC" width="0.8" height="69"/>
+    <rect x="163.4" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#D8B5FC" width="0.8" height="69"/>
+    <rect x="162.6" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#D7B5FC" width="0.8" height="69"/>
+    <rect x="161.8" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#D6B5FC" width="0.8" height="69"/>
+    <rect x="160.9" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#D6B4FC" width="0.8" height="69"/>
+    <rect x="160.1" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#D5B4FC" width="0.8" height="69"/>
+    <rect x="159.2" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#D4B4FC" width="0.8" height="69"/>
+    <rect x="158.4" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#D4B4FC" width="0.8" height="69"/>
+    <rect x="157.6" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#D3B4FC" width="0.8" height="69"/>
+    <rect x="156.7" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#D2B3FC" width="0.8" height="69"/>
+    <rect x="155.9" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#D1B3FC" width="0.8" height="69"/>
+    <rect x="155.1" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#D1B3FC" width="0.8" height="69"/>
+    <rect x="154.2" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#D0B3FC" width="0.8" height="69"/>
+    <rect x="153.4" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#CFB2FC" width="0.8" height="69"/>
+    <rect x="152.6" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#CEB2FC" width="0.8" height="69"/>
+    <rect x="151.7" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#CDB2FC" width="0.8" height="69"/>
+    <rect x="150.9" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#CDB2FC" width="0.8" height="69"/>
+    <rect x="150.1" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#CCB2FC" width="0.8" height="69"/>
+    <rect x="149.2" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#CBB1FC" width="0.8" height="69"/>
+    <rect x="148.4" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#CAB1FC" width="0.8" height="69"/>
+    <rect x="147.6" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#C9B1FC" width="0.8" height="69"/>
+    <rect x="146.7" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#C9B1FC" width="0.8" height="69"/>
+    <rect x="145.9" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#C8B0FC" width="0.8" height="69"/>
+    <rect x="145.1" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#C7B0FC" width="0.8" height="69"/>
+    <rect x="144.2" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#C6B0FC" width="0.8" height="69"/>
+    <rect x="143.4" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#C5B0FC" width="0.8" height="69"/>
+    <rect x="142.6" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#C4AFFC" width="0.8" height="69"/>
+    <rect x="141.7" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#C3AFFC" width="0.8" height="69"/>
+    <rect x="140.9" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#C2AFFC" width="0.8" height="69"/>
+    <rect x="140.1" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#C2AEFC" width="0.8" height="69"/>
+    <rect x="139.2" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#C1AEFC" width="0.8" height="69"/>
+    <rect x="138.4" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#C0AEFC" width="0.8" height="69"/>
+    <rect x="137.6" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#BFAEFB" width="0.8" height="69"/>
+    <rect x="136.7" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#BEADFB" width="0.8" height="69"/>
+    <rect x="135.9" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#BDADFB" width="0.8" height="69"/>
+    <rect x="135" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#BCADFB" width="0.8" height="69"/>
+    <rect x="134.2" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#BBADFB" width="0.8" height="69"/>
+    <rect x="133.4" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#BAACFB" width="0.8" height="69"/>
+    <rect x="132.5" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#B9ACFB" width="0.8" height="69"/>
+    <rect x="131.7" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#B8ACFB" width="0.8" height="69"/>
+    <rect x="130.9" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#B8ACFB" width="0.8" height="69"/>
+    <rect x="130" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#B7ABFB" width="0.8" height="69"/>
+    <rect x="129.2" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#B6ABFB" width="0.8" height="69"/>
+    <rect x="128.4" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#B5ABFB" width="0.8" height="69"/>
+    <rect x="127.5" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#B4AAFB" width="0.8" height="69"/>
+    <rect x="126.7" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#B3AAFB" width="0.8" height="69"/>
+    <rect x="125.9" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#B2AAFB" width="0.8" height="69"/>
+    <rect x="125" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#B1AAFB" width="0.8" height="69"/>
+    <rect x="124.2" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#B0A9FB" width="0.8" height="69"/>
+    <rect x="123.4" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#AFA9FB" width="0.8" height="69"/>
+    <rect x="122.5" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#AEA9FB" width="0.8" height="69"/>
+    <rect x="121.7" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#ADA8FB" width="0.8" height="69"/>
+    <rect x="120.9" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#ACA8FB" width="0.8" height="69"/>
+    <rect x="120" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#ABA8FB" width="0.8" height="69"/>
+    <rect x="119.2" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#AAA8FB" width="0.8" height="69"/>
+    <rect x="118.4" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#A9A7FB" width="0.8" height="69"/>
+    <rect x="117.5" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#A8A7FB" width="0.8" height="69"/>
+    <rect x="116.7" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#A7A7FB" width="0.8" height="69"/>
+    <rect x="115.9" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#A6A6FB" width="0.8" height="69"/>
+    <rect x="115" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#A5A6FB" width="0.8" height="69"/>
+    <rect x="114.2" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#A4A6FB" width="0.8" height="69"/>
+    <rect x="113.4" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#A3A5FB" width="0.8" height="69"/>
+    <rect x="112.5" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#A2A5FB" width="0.8" height="69"/>
+    <rect x="111.7" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#A1A5FB" width="0.8" height="69"/>
+    <rect x="110.8" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#A0A5FB" width="0.8" height="69"/>
+    <rect x="110" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#9FA4FB" width="0.8" height="69"/>
+    <rect x="109.2" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#9EA4FB" width="0.8" height="69"/>
+    <rect x="108.3" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#9DA4FB" width="0.8" height="69"/>
+    <rect x="107.5" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#9CA3FB" width="0.8" height="69"/>
+    <rect x="106.7" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#9BA3FB" width="0.8" height="69"/>
+    <rect x="105.8" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#9AA3FB" width="0.8" height="69"/>
+    <rect x="105" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#99A2FB" width="0.8" height="69"/>
+    <rect x="104.2" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#98A2FB" width="0.8" height="69"/>
+    <rect x="103.3" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#97A2FB" width="0.8" height="69"/>
+    <rect x="102.5" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#96A2FB" width="0.8" height="69"/>
+    <rect x="101.7" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#95A1FB" width="0.8" height="69"/>
+    <rect x="100.8" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#94A1FB" width="0.8" height="69"/>
+    <rect x="100" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#93A1FB" width="0.8" height="69"/>
+    <rect x="99.2" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#92A0FB" width="0.8" height="69"/>
+    <rect x="98.3" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#91A0FB" width="0.8" height="69"/>
+    <rect x="97.5" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#8FA0FB" width="0.8" height="69"/>
+    <rect x="96.7" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#8E9FFB" width="0.8" height="69"/>
+    <rect x="95.8" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#8D9FFB" width="0.8" height="69"/>
+    <rect x="95" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#8C9FFB" width="0.8" height="69"/>
+    <rect x="94.2" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#8B9EFB" width="0.8" height="69"/>
+    <rect x="93.3" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#8A9EFB" width="0.8" height="69"/>
+    <rect x="92.5" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#899EFB" width="0.8" height="69"/>
+    <rect x="91.7" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#889EFB" width="0.8" height="69"/>
+    <rect x="90.8" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#879DFA" width="0.8" height="69"/>
+    <rect x="90" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#869DFA" width="0.8" height="69"/>
+    <rect x="89.2" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#859DFA" width="0.8" height="69"/>
+    <rect x="88.3" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#849CFA" width="0.8" height="69"/>
+    <rect x="87.5" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#839CFA" width="0.8" height="69"/>
+    <rect x="86.6" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#829CFA" width="0.8" height="69"/>
+    <rect x="85.8" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#819BFA" width="0.8" height="69"/>
+    <rect x="85" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#7F9BFA" width="0.8" height="69"/>
+    <rect x="84.1" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#7E9BFA" width="0.8" height="69"/>
+    <rect x="83.3" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#7D9AFA" width="0.8" height="69"/>
+    <rect x="82.5" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#7C9AFA" width="0.8" height="69"/>
+    <rect x="81.6" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#7B9AFA" width="0.8" height="69"/>
+    <rect x="80.8" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#7A99FA" width="0.8" height="69"/>
+    <rect x="80" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#7999FA" width="0.8" height="69"/>
+    <rect x="79.1" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#7899FA" width="0.8" height="69"/>
+    <rect x="78.3" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#7798FA" width="0.8" height="69"/>
+    <rect x="77.5" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#7698FA" width="0.8" height="69"/>
+    <rect x="76.6" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#7498FA" width="0.8" height="69"/>
+    <rect x="75.8" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#7397FA" width="0.8" height="69"/>
+    <rect x="75" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#7297FA" width="0.8" height="69"/>
+    <rect x="74.1" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#7197FA" width="0.8" height="69"/>
+    <rect x="73.3" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#7096FA" width="0.8" height="69"/>
+    <rect x="72.5" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#6F96FA" width="0.8" height="69"/>
+    <rect x="71.6" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#6E96FA" width="0.8" height="69"/>
+    <rect x="70.8" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#6D95FA" width="0.8" height="69"/>
+    <rect x="70" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#6C95FA" width="0.8" height="69"/>
+    <rect x="69.1" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#6A95FA" width="0.8" height="69"/>
+    <rect x="68.3" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#6994FA" width="0.8" height="69"/>
+    <rect x="67.5" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#6894FA" width="0.8" height="69"/>
+    <rect x="66.6" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#6794FA" width="0.8" height="69"/>
+    <rect x="65.8" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#6693FA" width="0.8" height="69"/>
+    <rect x="65" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#6593FA" width="0.8" height="69"/>
+    <rect x="64.1" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#6493FA" width="0.8" height="69"/>
+    <rect x="63.3" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#6292FA" width="0.8" height="69"/>
+    <rect x="62.4" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#6192FA" width="0.8" height="69"/>
+    <rect x="61.6" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#6092FA" width="0.8" height="69"/>
+    <rect x="60.8" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#5F91FA" width="0.8" height="69"/>
+    <rect x="59.9" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#5E91FA" width="0.8" height="69"/>
+    <rect x="59.1" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#5D91FA" width="0.8" height="69"/>
+    <rect x="58.3" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#5C90FA" width="0.8" height="69"/>
+    <rect x="57.4" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#5A90FA" width="0.8" height="69"/>
+    <rect x="56.6" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#5990FA" width="0.8" height="69"/>
+    <rect x="55.8" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#588FFA" width="0.8" height="69"/>
+    <rect x="54.9" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#578FFA" width="0.8" height="69"/>
+    <rect x="54.1" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#568FFA" width="0.8" height="69"/>
+    <rect x="53.3" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#558EFA" width="0.8" height="69"/>
+    <rect x="52.4" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#548EFA" width="0.8" height="69"/>
+    <rect x="51.6" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#528EFA" width="0.8" height="69"/>
+    <rect x="50.8" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#518DFA" width="0.8" height="69"/>
+    <rect x="49.9" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#508DF9" width="0.8" height="69"/>
+    <rect x="49.1" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#4F8DF9" width="0.8" height="69"/>
+    <rect x="48.3" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#4E8CF9" width="0.8" height="69"/>
+    <rect x="47.4" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#4D8CF9" width="0.8" height="69"/>
+    <rect x="46.6" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#4B8CF9" width="0.8" height="69"/>
+    <rect x="45.8" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#4A8BF9" width="0.8" height="69"/>
+    <rect x="44.9" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#498BF9" width="0.8" height="69"/>
+    <rect x="44.1" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#488BF9" width="0.8" height="69"/>
+    <rect x="43.3" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#478AF9" width="0.8" height="69"/>
+    <rect x="42.4" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#468AF9" width="0.8" height="69"/>
+    <rect x="41.6" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#448AF9" width="0.8" height="69"/>
+    <rect x="40.8" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#4389F9" width="0.8" height="69"/>
+    <rect x="39.9" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#4289F9" width="0.8" height="69"/>
+    <rect x="39.1" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#4189F9" width="0.8" height="69"/>
+    <rect x="38.2" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#4088F9" width="0.8" height="69"/>
+    <rect x="37.4" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#3F88F9" width="0.8" height="69"/>
+    <rect x="36.6" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#3D87F9" width="0.8" height="69"/>
+    <rect x="35.7" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#3C87F9" width="0.8" height="69"/>
+    <rect x="34.9" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#3B87F9" width="0.8" height="69"/>
+    <rect x="34.1" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#3A86F9" width="0.8" height="69"/>
+    <rect x="33.2" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#3986F9" width="0.8" height="69"/>
+    <rect x="32.4" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#3786F9" width="0.8" height="69"/>
+    <rect x="31.6" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#3685F9" width="0.8" height="69"/>
+    <rect x="30.7" y="29.2" clip-path="url(#installation-guide-clipping)" fill="#3585F9" width="0.8" height="69"/>
+    <path fill="#3585F9" d="M30.7,179.2h138.5h6V98.2h-6v11.1h-12.1c-1.5,7.4-4.4,14.6-8.9,21.1l8.8,8.8l-15.7,15.7l-8.8-8.8
+          c-6.5,4.4-13.8,7.3-21.2,8.7v12.5H89.1v-12.6c-7.4-1.5-14.6-4.4-21.1-8.8l-8.7,8.7l-15.7-15.7l8.7-8.7c-4.4-6.4-7.3-13.6-8.8-20.9
+          H30.7V98.2h-6v81.1H30.7z"/>
+    <polygon fill="#050505" points="97,113.3 80,101.1 82.6,97.6 96,107.2 114,82.2 117.5,84.8 "/>
+  </g>
+  <g transform="translate(440, 0)">
+    <linearGradient id="upgrade-guide-gradient" gradientUnits="userSpaceOnUse" x1="29.6447" y1="55.2853" x2="170.3323" y2="55.2853">
+      <stop  offset="0" style="stop-color:#DBB6FC"/>
+      <stop  offset="0.1387" style="stop-color:#CBB1FC"/>
+      <stop  offset="0.4095" style="stop-color:#A1A5FB"/>
+      <stop  offset="0.7821" style="stop-color:#5F91FA"/>
+      <stop  offset="1" style="stop-color:#3585F9"/>
+    </linearGradient>
+    <path fill-rule="evenodd" clip-rule="evenodd" fill="url(#upgrade-guide-gradient)" d="M100,20.1c-38.8,0-70.3,31.5-70.3,70.3h140.7
+      C170.3,51.6,138.8,20.1,100,20.1z"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" fill="#3585F9" d="M170.3,90.5c0,38.8-31.5,70.3-70.3,70.3
+      c-38.8,0-70.3-31.5-70.3-70.3c0,0,0,0.1,0,0.1h0v89.3h140.7V90.5L170.3,90.5C170.3,90.5,170.3,90.5,170.3,90.5z"/>
+    <polygon fill="#050505" points="120,118.6 116.1,118.2 117.1,108.9 107.8,107.9 108.2,103.9 121.5,105.3"/>
+    <path fill="#050505" d="M125.8,100.3l-3.7-1.5c3.5-8.8,1.5-18.9-5.3-25.6c-4.5-4.5-10.4-7-16.8-7c-6.3,0-12.3,2.5-16.8,7
+      l-2.8-2.8c5.2-5.2,12.2-8.1,19.6-8.1c7.4,0,14.4,2.9,19.6,8.1C127.5,78.2,129.9,90,125.8,100.3z"/>
+    <path fill="#050505" d="M100,117.7c-7.4,0-14.4-2.9-19.6-8.1c-7.9-7.9-10.3-19.6-6.2-29.9l3.7,1.5c-3.5,8.8-1.5,18.9,5.3,25.6
+      c4.5,4.5,10.4,7,16.8,7c6.3,0,12.3-2.5,16.8-7l2.8,2.8C114.4,114.9,107.4,117.7,100,117.7z"/>
+    <polygon fill="#050505" points="91.8,76.1 78.5,74.7 79.9,61.4 83.9,61.8 82.9,71.1 92.2,72.1"/>
+  </g>
+  <g transform="translate(660, 0)">
+    <path fill="#FFFFFF" d="M119.4,63.6h34.7V29h-34.6C119.5,29,119.6,63.6,119.4,63.6z"/>
+    <polygon fill="#FFFFFF" points="120.6,62.6 154,62.6 120.6,29.2"/>
+    <polygon fill="none" points="154.1,62.8 154.1,62.7 120.5,29 120.5,62.6"/>
+    <linearGradient id="user-manual-gradient" gradientUnits="userSpaceOnUse" x1="120.5459" y1="45.8633" x2="154.0596" y2="45.8633">
+      <stop  offset="0" style="stop-color:#DBB6FC"/>
+      <stop  offset="0.1387" style="stop-color:#CBB1FC"/>
+      <stop  offset="0.4095" style="stop-color:#A1A5FB"/>
+      <stop  offset="0.7821" style="stop-color:#5F91FA"/>
+      <stop  offset="1" style="stop-color:#3585F9"/>
+    </linearGradient>
+    <polygon fill="url(#user-manual-gradient)" points="154.1,29 120.5,29 154.1,62.7"/>
+    <polygon fill="#3585F9" points="154.1,62.8 154.1,62.7 154.1,62.8"/>
+    <polygon fill="#3585F9" points="120.5,62.6 120.5,29 45.9,29 45.9,183 154.1,183 154.1,62.8"/>
+    <rect x="93.2" y="81.4" fill="#050505" width="42.7" height="4"/>
+    <polygon fill="#050505" points="71.9,91.4 62.6,82.2 65.5,79.4 71.9,85.8 86,71.7 88.8,74.5"/>
+    <rect x="93.2" y="112.8" fill="#050505" width="42.7" height="4"/>
+    <polygon fill="#050505" points="71.9,122.8 62.6,113.6 65.5,110.8 71.9,117.2 86,103.1 88.8,105.9"/>
+    <rect x="93.2" y="144.2" fill="#050505" width="42.7" height="4"/>
+    <polygon fill="#050505" points="71.9,154.2 62.6,145 65.5,142.2 71.9,148.6 86,134.5 88.8,137.3"/>
+  </g>
+  <g transform="translate(880, 0)">
+    <rect x="93.8" y="140.4" fill="#3585F9" width="12.3" height="36.7"/>
+    <rect x="66.1" y="171" fill="#3585F9" width="67.8" height="12.3"/>
+    <linearGradient id="deployment-gradient" gradientUnits="userSpaceOnUse" x1="56.2504" y1="34.5484" x2="143.9184" y2="34.5484">
+      <stop  offset="0" style="stop-color:#DBB6FC"/>
+      <stop  offset="0.1387" style="stop-color:#CBB1FC"/>
+      <stop  offset="0.4095" style="stop-color:#A1A5FB"/>
+      <stop  offset="0.7821" style="stop-color:#5F91FA"/>
+      <stop  offset="1" style="stop-color:#3585F9"/>
+    </linearGradient>
+    <path fill="url(#deployment-gradient)" d="M100.8,12.6c-0.2,0-0.5,0-0.7,0c-24.2,0-43.8,19.6-43.8,43.8h44.5h43.1
+      C143.9,32.5,124.7,13,100.8,12.6z"/>
+    <path fill="#3585F9" d="M154.6,56.5h-8.3h-2.4c0,24-19.2,43.4-43.1,43.8c-0.2,0-0.5,0-0.7,0c-24.2,0-43.8-19.6-43.8-43.8h-2.4h-11
+      h-11v86.2h96.9h39.7V103V56.5H154.6z"/>
+    <polygon fill-rule="evenodd" clip-rule="evenodd" points="100.1,47.6 118.7,65 121.6,61.9 100.1,41.7   "/>
+    <polygon fill-rule="evenodd" clip-rule="evenodd" points="100.1,47.6 81.5,65 78.5,61.9 100.1,41.7   "/>
+  </g>
+  <g transform="translate(1100, 0)">
+    <path fill="#3585F9" d="M153.8,76.9l-24.9-23.6h-12.8c-5.3,15.4-15.4,29.3-30.1,36.3l-1.2,0.5l-0.1,0.1l-0.1-0.1l-1.2-0.5
+      c-14.7-7-24.8-20.9-30.1-36.3h-7.2v136.3h107.6V76.9z"/>
+    <polygon fill-rule="evenodd" clip-rule="evenodd" fill="#EBD1F8" points="153.8,76.9 128.9,53.3 128.8,76.9   "/>
+    <rect x="60.4" y="101.1" fill-rule="evenodd" clip-rule="evenodd" width="79.9" height="4.4"/>
+    <rect x="60.4" y="117.1" fill-rule="evenodd" clip-rule="evenodd" width="79.9" height="4.4"/>
+    <rect x="60.4" y="133.5" fill-rule="evenodd" clip-rule="evenodd" width="79.9" height="4.4"/>
+    <rect x="60.4" y="149.6" fill-rule="evenodd" clip-rule="evenodd" width="79.9" height="4.4"/>
+    <polygon points="84.7,79.5 73.6,68.4 76.2,65.8 84.7,74.3 100.6,58.4 103.2,61     "/>
+    <linearGradient id="compliance-gradient" gradientUnits="userSpaceOnUse" x1="48.9871" y1="31.8553" x2="120.4287" y2="31.8553">
+      <stop  offset="0" style="stop-color:#DBB6FC"/>
+      <stop  offset="0.1387" style="stop-color:#CBB1FC"/>
+      <stop  offset="0.4095" style="stop-color:#A1A5FB"/>
+      <stop  offset="0.7821" style="stop-color:#5F91FA"/>
+      <stop  offset="1" style="stop-color:#3585F9"/>
+    </linearGradient>
+    <path fill="url(#compliance-gradient)" d="M120.2,33.1c0.2-2.4,0.2-3,0.2-3.1c0-0.1,0-0.1-0.1-0.1c-0.2-0.1-1.2-0.6-5.7-3.1
+      c-5.7-3.1-17.3-9.5-23.2-12.7c-6-3.3-6.5-3.5-6.7-3.6l0,0c0,0,0,0,0,0c0,0,0,0,0,0l0,0C84.4,10.6,84,10.8,78,14
+      c-6,3.3-17.5,9.6-23.2,12.7c-4.5,2.5-5.5,3-5.7,3.1c-0.1,0-0.1,0-0.1,0.1c0,0.2,0.1,0.8,0.2,3.1c0.5,6.7,1.8,13.6,4.1,20.1h62.8
+      C118.4,46.7,119.8,39.8,120.2,33.1z"/>
+  </g>
+  <g transform="translate(1320, 0)">
+    <rect x="93.7" y="145.9" fill="#3585F9" width="12.3" height="36.7"/>
+    <rect x="66" y="176.5" fill="#3585F9" width="67.8" height="12.3"/>
+    <linearGradient id="monitoring-gradient" gradientUnits="userSpaceOnUse" x1="56.166" y1="40.0629" x2="143.834" y2="40.0629">
+      <stop  offset="0" style="stop-color:#DBB6FC"/>
+      <stop  offset="0.1387" style="stop-color:#CBB1FC"/>
+      <stop  offset="0.4095" style="stop-color:#A1A5FB"/>
+      <stop  offset="0.7821" style="stop-color:#5F91FA"/>
+      <stop  offset="1" style="stop-color:#3585F9"/>
+    </linearGradient>
+    <path fill="url(#monitoring-gradient)" d="M100.7,18.2c-0.2,0-0.5,0-0.7,0c-24.2,0-43.8,19.6-43.8,43.8h44.5h43.1
+      C143.8,38,124.6,18.5,100.7,18.2z"/>
+    <path fill="#3585F9" d="M154.5,62h-8.3h-2.4c0,24-19.2,43.4-43.1,43.8c-0.2,0-0.5,0-0.7,0c-24.2,0-43.8-19.6-43.8-43.8h-2.4h-11
+      h-11v86.2h96.9h39.7v-39.7V62H154.5z"/>
+    <path d="M126.4,83l-11.5-11.5c2.7-3.4,4.3-7.6,4.3-12.3c0-10.8-8.8-19.5-19.5-19.5s-19.5,8.8-19.5,19.5S89,78.8,99.7,78.8
+      c4.6,0,8.9-1.6,12.3-4.3l11.5,11.5c0.4,0.4,0.9,0.6,1.5,0.6s1.1-0.2,1.5-0.6C127.2,85.1,127.2,83.8,126.4,83z M99.7,74.7
+      c-8.5,0-15.4-6.9-15.4-15.4s6.9-15.4,15.4-15.4s15.4,6.9,15.4,15.4S108.2,74.7,99.7,74.7z"/>
+  </g>
+  <g transform="translate(1540, 0)">
+    <rect x="39.9" y="97.8" fill-rule="evenodd" clip-rule="evenodd" fill="#3585F9" width="120.3" height="0"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" fill="#3585F9" d="M100,39c33.2,0,60.1,26.3,60.1,58.7V23.2H39.9v74.5
+      C39.9,65.3,66.8,39,100,39z"/>
+    <rect x="81.2" y="164.3" fill-rule="evenodd" clip-rule="evenodd" fill="#3585F9" width="37.6" height="11.1"/>
+    <rect x="86.7" y="180.5" fill-rule="evenodd" clip-rule="evenodd" fill="#3585F9" width="26.6" height="8.3"/>
+    <line fill="none" stroke="#050505" stroke-width="4" stroke-miterlimit="10" x1="99.7" y1="12.2" x2="99.7" y2="24.8"/>
+    <line fill="none" stroke="#050505" stroke-width="4" stroke-miterlimit="10" x1="59.9" y1="27.2" x2="68.9" y2="36.2"/>
+    <line fill="none" stroke="#050505" stroke-width="4" stroke-miterlimit="10" x1="139.6" y1="27.2" x2="130.6" y2="36.2"/>
+    <defs>
+      <path id="learning-clipping" d="M160.1,97.8c0,32.5-26.9,58.8-60.1,58.8c-33.2,0-60.1-26.3-60.1-58.8H160.1z"/>
+    </defs>
+    <linearGradient id="learning-gradient" gradientUnits="userSpaceOnUse" x1="-2091.1978" y1="892.8731" x2="-2091.1978" y2="1013.1671" gradientTransform="matrix(0 -1 1 0 -853.0201 -1963.963)">
+      <stop  offset="0" style="stop-color:#DBB6FC"/>
+      <stop  offset="0.1387" style="stop-color:#CBB1FC"/>
+      <stop  offset="0.4095" style="stop-color:#A1A5FB"/>
+      <stop  offset="0.7821" style="stop-color:#5F91FA"/>
+      <stop  offset="1" style="stop-color:#3585F9"/>
+    </linearGradient>
+    <use xlink:href="#learning-clipping"  overflow="visible" fill-rule="evenodd" clip-rule="evenodd" fill="url(#learning-gradient)"/>
+  </g>
+  <g transform="translate(1760, 0)">
+    <path fill="#3585F9" d="M142.5,51.5C142.5,75,123.5,94,100,94c-23.4,0-42.5-19-42.5-42.4h-12v138.2h109.1V51.5L142.5,51.5z"/>
+    <rect x="57.3" y="107.4" fill-rule="evenodd" clip-rule="evenodd" width="81" height="4.5"/>
+    <rect x="57.3" y="124" fill-rule="evenodd" clip-rule="evenodd" width="81" height="4.5"/>
+    <rect x="57.3" y="140.2" fill-rule="evenodd" clip-rule="evenodd" width="81" height="4.5"/>
+    <polygon points="88.3,56.3 85.9,53.7 100.3,40.2 114.3,53.3 111.9,55.8 100.3,45"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" fill="#3585F9" d="M122,51.7c0,0.1,0,0.2,0,0.3c0,11.5-9.3,20.8-20.8,20.8
+      c-11.5,0-20.8-9.3-20.8-20.8c0-0.1,0-0.2,0-0.3H66.4v5c0,0.7,0.5,1.2,1.2,1.2h5c0.7,3.5,2.1,6.8,4,9.8L73,71.2
+      c-0.5,0.5-0.5,1.2,0,1.7l6.7,6.8c0.5,0.5,1.2,0.5,1.7,0l3.5-3.5c3.2,2.2,6.8,3.7,10.8,4.5l0.1,4.9c0,0.7,0.6,1.2,1.2,1.2l9.5-0.2
+      c0.7,0,1.2-0.6,1.2-1.2l-0.1-4.8c3.7-0.8,7.1-2.3,10.1-4.3l3.4,3.3c0.5,0.5,1.2,0.4,1.7,0l6.6-6.9c0.5-0.5,0.4-1.2,0-1.7
+      l-3.4-3.3c1.9-2.9,3.2-6.2,4-9.8h4.7c0.7,0,1.2-0.5,1.2-1.2v-5H122z"/>
+    <defs>
+      <rect id="SVGID_10_" x="52.9" y="0.4" width="93.3" height="51.3"/>
+    </defs>
+    <clipPath id="SVGID_2_">
+      <use xlink:href="#SVGID_10_"  overflow="visible"/>
+    </clipPath>
+    <linearGradient id="SVGID_3_" gradientUnits="userSpaceOnUse" x1="57.433" y1="52.043" x2="144.2942" y2="52.043">
+      <stop  offset="0" style="stop-color:#DBB6FC"/>
+      <stop  offset="0.1385" style="stop-color:#CBB1FC"/>
+      <stop  offset="0.4087" style="stop-color:#A2A5FB"/>
+      <stop  offset="0.7803" style="stop-color:#5F92FA"/>
+      <stop  offset="1" style="stop-color:#3585F9"/>
+    </linearGradient>
+    <path clip-path="url(#SVGID_2_)" fill-rule="evenodd" clip-rule="evenodd" fill="url(#SVGID_3_)" d="M100.9,8.6
+      c-24,0-43.4,19.4-43.4,43.4s19.4,43.4,43.4,43.4S144.3,76,144.3,52S124.8,8.6,100.9,8.6z M134.4,57.8h-4.7
+      c-0.7,3.5-2.1,6.8-4,9.8l3.4,3.3c0.5,0.5,0.5,1.2,0,1.7l-6.6,6.9c-0.5,0.5-1.2,0.5-1.7,0l-3.4-3.3c-3,2-6.4,3.5-10.1,4.3
+      l0.1,4.8c0,0.7-0.5,1.2-1.2,1.2l-9.5,0.2c-0.7,0-1.2-0.5-1.2-1.2l-0.1-4.9c-3.9-0.8-7.6-2.3-10.8-4.5l-3.5,3.5
+      c-0.5,0.5-1.2,0.5-1.7,0l-6.7-6.8c-0.5-0.5-0.5-1.2,0-1.7l3.6-3.5c-1.9-2.9-3.2-6.2-4-9.8h-5c-0.7,0-1.2-0.5-1.2-1.2v-9.5
+      c0-0.7,0.5-1.2,1.2-1.2h5c0.7-3.4,2-6.7,3.8-9.6l-3.6-3.5c-0.5-0.5-0.5-1.2,0-1.7l6.6-6.9c0.5-0.5,1.2-0.5,1.7,0l3.6,3.4
+      c3-2,6.3-3.6,9.9-4.4l-0.1-4.9c0-0.7,0.5-1.2,1.2-1.2L105,17c0.7,0,1.2,0.5,1.2,1.2l0.1,4.8c4,0.7,7.7,2.2,10.9,4.4l3.4-3.3
+      c0.5-0.5,1.2-0.5,1.7,0l6.7,6.8c0.5,0.5,0.5,1.2,0,1.7l-3.4,3.3c1.9,3,3.4,6.4,4.1,10h4.7c0.7,0,1.2,0.5,1.2,1.2v9.5
+      C135.6,57.3,135,57.8,134.4,57.8z"/>
+  </g>
+</svg>

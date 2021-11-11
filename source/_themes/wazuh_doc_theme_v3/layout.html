@@ -31,6 +31,10 @@
     {%- set titlesuffix = "" -%}
   {%- endif -%}
 {%- endif -%}
+{%- if pagename == 'index' -%}
+  {%- set pagetitle = docstitle -%}
+  {%- set titlesuffix = '' -%}
+{%- endif -%}
 
 {#- Remove sphinx_tabs assets from templates where they are not used -#}
 {%- if pagename in special_pages %}
@@ -90,13 +94,17 @@
     {%- if "_static/js/" in scriptfile %}
       {{- theme_script_files.append(scriptfile)|default("", True) -}}
     {%- else -%}
-      {{- extensions_script_files.append(scriptfile)|default("", True) -}}
+      {%- if pagename not in special_pages %}
+        {# Extension files disabled from special pages #}
+        {{- extensions_script_files.append(scriptfile)|default("", True) -}}
+      {%- endif -%}
     {%- endif -%}
   {%- endif -%}
 {% endfor -%}
 
 {#- Add specific files -#}
-{% set specific_js_files = get_js_by_page(pagename) %}
+  {% set specific_js_files = get_js_by_page(pagename) %}
+
 
 {% set script_files = theme_script_files + specific_js_files + extensions_script_files %}
 

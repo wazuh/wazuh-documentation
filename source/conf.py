@@ -608,7 +608,9 @@ def manage_assets(app, pagename, templatename, context, doctree):
     def get_js_by_page(pagename):
         js_map = {
             'index': [
-                individual_js_files['index'],
+                individual_js_files['index']
+            ],
+            'index-redirect': [
                 individual_js_files['index-redirect']
             ],
             'search': [

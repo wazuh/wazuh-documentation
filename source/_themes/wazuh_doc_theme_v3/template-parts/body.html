@@ -44,11 +44,13 @@
         {% include "template-parts/navigation.html" %}
         {% endif %}
         </main>
-        {%- block footer %}
-        {% include "template-parts/footer.html" %}
-        {% endblock footer -%}
       </div>
       {%- endblock main_column -%}
+      {%- block footer %}
+      <footer class="d-flex justify-content-between align-items-center">
+        {% include "template-parts/footer.html" %}
+      </footer>
+      {% endblock footer -%}
       
       {%- block sidebar2 -%}
       {% include "template-parts/sidebar-right.html" %}
