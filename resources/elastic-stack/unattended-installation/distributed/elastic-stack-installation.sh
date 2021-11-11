@@ -13,17 +13,15 @@ char="."
 debug='> /dev/null 2>&1'
 password=""
 passwords=""
-WAZUH_VER="4.1.5"
-ELK_VER="7.11.2"
-if [ -n "$(command -v yum)" ]; then
+if [ -n "$(command -v yum)" ]
+then
     sys_type="yum"
-    sep="-"
-elif [ -n "$(command -v zypper)" ]; then
-    sys_type="zypper"   
-    sep="-"  
-elif [ -n "$(command -v apt-get)" ]; then
-    sys_type="apt-get"   
-    sep="="
+elif [ -n "$(command -v zypper)" ]
+then
+    sys_type="zypper"
+elif [ -n "$(command -v apt-get)" ]
+then
+    sys_type="apt-get"
 fi
 
 ## Prints information
@@ -217,13 +215,13 @@ installElasticsearch() {
 
     if [ $sys_type == "yum" ]
     then
-        eval "yum install elasticsearch-${ELK_VER} -y -q $debug"
+        eval "yum install elasticsearch-7.11.2 -y -q $debug"
     elif [ $sys_type == "apt-get" ] 
     then
-        eval "apt-get install elasticsearch=${ELK_VER} -y -q $debug"
+        eval "apt-get install elasticsearch=7.11.2 -y -q $debug"
     elif [ $sys_type == "zypper" ] 
     then
-        eval "zypper -n install elasticsearch-${ELK_VER} $debug"
+        eval "zypper -n install elasticsearch-7.11.2 $debug"
     fi
 
     if [  "$?" != 0  ]
@@ -421,13 +419,13 @@ installKibana() {
     logger "Installing Kibana..."
     if [ $sys_type == "yum" ]
     then
-        eval "yum install kibana-${ELK_VER} -y -q  $debug"    
+        eval "yum install kibana-7.11.2 -y -q  $debug"    
     elif [ $sys_type == "zypper" ] 
     then
-        eval "zypper -n install kibana-${ELK_VER} $debug"
+        eval "zypper -n install kibana-7.11.2 $debug"
     elif [ $sys_type == "apt-get" ] 
         then
-        eval "apt-get install kibana=${ELK_VER} -y -q  $debug"
+        eval "apt-get install kibana=7.11.2 -y -q  $debug"
     fi
     if [  "$?" != 0  ]
     then
