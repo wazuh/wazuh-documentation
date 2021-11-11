@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: This guide describes the necessary steps to deploy Wazuh on a local Kubernetes environment (Microk8s, Minikube, Kind). Learn more about it here. 
+  
 .. _kubernetes_local_env:
 
 Deployment on local environment
