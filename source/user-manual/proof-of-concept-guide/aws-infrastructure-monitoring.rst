@@ -64,7 +64,7 @@ Configure your environment as follows to test the POC.
 Steps to generate the alerts
 ----------------------------
 
-No action is required. Alerts are automatically generated from AWS logs when using out-of-the-box rules; they appear as soon as they are fetched from the AWS S3 bucket.
+- No action is required. Alerts are automatically generated from AWS logs when using out-of-the-box rules; they appear as soon as they are fetched from the AWS S3 bucket.
 
 Query the alerts
 ----------------

@@ -3,9 +3,9 @@
 Network IDS integration - Suricata
 ==================================
 
-Suricata is a NIDS solution that can detect threats by monitoring the network traffic. This intrusion detection system is capable of generating JSON logs of NIDS events and provides additional insight into your security with its network traffic inspection capabilities.
+Suricata is a network-based intrusion detection system (NIDS) that can detect threats by monitoring network traffic. This solution is capable of generating JSON logs of NIDS events and provides additional insight into your security with its network traffic inspection capabilities.
 
-To see an example use case of a NIDS integration with Wazuh, go to the `Catch suspicious network traffic <learning_wazuh_suricata>`_ section.
+To see an example use case of a NIDS integration with Wazuh, go to the `Catch suspicious network traffic <learning_wazuh_suricata>`_ section of the documentation.
 
 
 Configuration
@@ -13,7 +13,7 @@ Configuration
 
 Configure your environment as follows to test the POC.
 
-#. Install Suricata on the RHEL 7 monitored endpoint from the EPEL repository. Take into account that Suricata was tested with version 5.0.4 and that the EPEL repository depends on your operating system version:
+#. Install Suricata (with version 5.0.4) on the RHEL 7 monitored endpoint. This requires EPEL repository that depends on your operating system version.
 
     .. code-block:: XML
 
@@ -69,7 +69,7 @@ Configure your environment as follows to test the POC.
 Steps to generate the alerts
 ----------------------------
 
-#. No action is required. Wazuh automatically parses data from ``/var/log/suricata/eve.json`` and generates related alerts.
+- No action is required. Wazuh automatically parses data from ``/var/log/suricata/eve.json`` and generates related alerts.
 
 Query the alerts
 ----------------
