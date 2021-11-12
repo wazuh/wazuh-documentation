@@ -14,7 +14,7 @@ Deploying a Wazuh cluster
 
     basics
     advanced-settings
-    cluster_management
+    cluster-management
 
 .. title:: Getting started
 

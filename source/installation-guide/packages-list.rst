@@ -19,8 +19,10 @@ This download page contains packages required for the Wazuh installation with th
    - `Solaris`_
    - `Windows`_
 - `MSU`_
-- `Wazuh Kibana plugin and Wazuh Splunk app`_
+- `Wazuh Kibana plugin`_
+- `Wazuh Splunk app`_
 - `Virtual machine`_
+- `Amazon Machine Image`_
 - `Open Distro for Elasticsearch`_
 
    - `Elasticsearch`_
@@ -37,7 +39,7 @@ AIX
 +-----------------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Version         | Architecture | Package                                                                                                                                                                                                                                     |
 +=================+==============+=============================================================================================================================================================================================================================================+
-| 5.3 or greater  |    PowerPC   | `wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_AIX|.aix.ppc.rpm <https://packages.wazuh.com/|CURRENT_MAJOR|/aix/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_AIX|.aix.ppc.rpm>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_AIX|.aix.ppc.rpm.sha512>`__)                          |
+| 6.1 or greater  |    PowerPC   | `wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_AIX|.aix.ppc.rpm <https://packages.wazuh.com/|CURRENT_MAJOR|/aix/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_AIX|.aix.ppc.rpm>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_AIX|.aix.ppc.rpm.sha512>`__)                          |
 +-----------------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -231,18 +233,29 @@ MSU
 |  4.0.0 or greater |   32/64bits  | `msu-updates.json.gz <https://feed.wazuh.com/vulnerability-detector/windows/msu-updates.json.gz>`_ (`sha256 <https://feed.wazuh.com/vulnerability-detector/windows/msu-updates.meta>`__)                                              |
 +-------------------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-Wazuh Kibana plugin and Wazuh Splunk app
-----------------------------------------
+Wazuh Kibana plugin
+-------------------
 
-+----------------------+---------------------------+---------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Product              |  Kibana Version           | Open Distro Version | Wazuh version | Package                                                                                                                                                                                                                                                     |
-+======================+===========================+=====================+===============+=============================================================================================================================================================================================================================================================+
-| Wazuh Kibana plugin  |   |ELASTICSEARCH_LATEST|                  |  |OPEN_DISTRO_LATEST|             |     |WAZUH_LATEST|     | `wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|-1.zip>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|-1.zip.sha512>`__)                                      |  
-+                      +---------------------------+---------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|                      |   |ELASTICSEARCH_ELK_LATEST|                  |                     |     |WAZUH_LATEST|     | `wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_ELK_LATEST|.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_ELK_LATEST|-1.zip>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_ELK_LATEST|-1.zip.sha512>`__)                                      |
-+----------------------+---------------------------+---------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Splunk               |    |SPLUNK_LATEST|                  |                     |     |WAZUH_SPLUNK_LATEST|     | `wazuh_splunk-|WAZUH_SPLUNK_LATEST|_|SPLUNK_LATEST|.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_|SPLUNK_LATEST|-1.tar.gz>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_SPLUNK_LATEST|/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_|SPLUNK_LATEST|-1.tar.gz.sha512>`__)                                |
-+----------------------+---------------------------+---------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++---------------------------+---------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|  Kibana Version           | Open Distro Version | Wazuh version | Package                                                                                                                                                                                                                                                     |
++===========================+=====================+===============+=============================================================================================================================================================================================================================================================+
+|   |ELASTICSEARCH_LATEST|                  |  |OPEN_DISTRO_LATEST|             |     |WAZUH_LATEST|     | `wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|-1.zip>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|-1.zip.sha512>`__)                                      |  
++---------------------------+---------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|   7.11.2                  |                     |     |WAZUH_LATEST|     | `wazuh_kibana-|WAZUH_LATEST|_7.11.2.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_7.11.2-1.zip>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_7.11.2-1.zip.sha512>`__)                                      |   
++---------------------------+---------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|   |ELASTICSEARCH_ELK_LATEST|                  |                     |     |WAZUH_LATEST|     | `wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_ELK_LATEST|.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_ELK_LATEST|-1.zip>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_ELK_LATEST|-1.zip.sha512>`__)                                      |   
++---------------------------+---------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+Wazuh Splunk app
+----------------
+
++---------------------------+---------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|  Splunk version           |   Wazuh version     | Package                                                                                                                                                                                                                                                                     |
++===========================+=====================+===============+=============================================================================================================================================================================================================================================================+
+|    8.1.4                  |     |WAZUH_SPLUNK_LATEST|           | `wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.4.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.4-1.tar.gz>`_ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_LATEST|/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.4-1.tar.gz.sha512>`__)                                                |
++---------------------------+---------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|    |SPLUNK_LATEST|                  |     |WAZUH_SPLUNK_LATEST|           | `wazuh_splunk-|WAZUH_SPLUNK_LATEST|_|SPLUNK_LATEST|.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_|SPLUNK_LATEST|-1.tar.gz>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_SPLUNK_LATEST|/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_|SPLUNK_LATEST|-1.tar.gz.sha512>`__)                                                |
++---------------------------+---------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 Virtual machine
@@ -254,6 +267,15 @@ Virtual machine
 |   CentOS 7   |    64bits    |      OVA     |  |WAZUH_LATEST_OVA|  | `wazuh-|WAZUH_LATEST_OVA|_|OPEN_DISTRO_LATEST|.ova <https://packages.wazuh.com/|CURRENT_MAJOR|/vm/wazuh-|WAZUH_LATEST_OVA|_|OPEN_DISTRO_LATEST|.ova>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST_OVA|/wazuh-|WAZUH_LATEST_OVA|_|OPEN_DISTRO_LATEST|.ova.sha512>`__)             |
 +--------------+--------------+--------------+---------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
+Amazon Machine Image
+--------------------
+
++--------------------+--------------+------------------+----------------------+------------------------------------+
+| Distribution       | Architecture | VM Format        | Version              | Package                            |
++====================+==============+==================+======================+====================================+
+|   Amazon Linux 2   |    64bits    |      AWS AMI     |  |WAZUH_LATEST_AMI|               | Wazuh  |WAZUH_LATEST_AMI|                       |
++--------------------+--------------+------------------+----------------------+------------------------------------+
+
 
 Open Distro for Elasticsearch
 ------------------------------
@@ -261,13 +283,13 @@ Open Distro for Elasticsearch
 Elasticsearch
 ^^^^^^^^^^^^^
 
-+----------------------------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Product                          | Package type | Package                                                                                                                                                                                                                                                                                                      |
-+==================================+==============+==============================================================================================================================================================================================================================================================================================================+
-|                                  |     RPM      | `opendistroforelasticsearch-|OPEN_DISTRO_LATEST|.rpm <https://packages.wazuh.com/4.x/yum/opendistroforelasticsearch-|OPEN_DISTRO_LATEST|-linux-x64.rpm>`_ (`sha512 <https://packages.wazuh.com/4.x/checksums/opendistro/|OPEN_DISTRO_LATEST|/opendistroforelasticsearch-|OPEN_DISTRO_LATEST|-linux-x64.rpm.sha512>`__)                                               |
-+ Open Distro for Elasticsearch    +--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|                                  |     DEB      | `opendistroforelasticsearch-|OPEN_DISTRO_LATEST|.deb <https://packages.wazuh.com/4.x/apt/pool/main/o/opendistroforelasticsearch/opendistroforelasticsearch_|OPEN_DISTRO_LATEST|-1_amd64.deb>`_ (`sha512 <https://packages.wazuh.com/4.x/checksums/opendistro/|OPEN_DISTRO_LATEST|/opendistroforelasticsearch_|OPEN_DISTRO_LATEST|-1_amd64.deb.sha512>`__)            |
-+----------------------------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Package type | Package                                                                                                                                                                                                                                                                                                      |
++==============+==============================================================================================================================================================================================================================================================================================================+
+|     RPM      | `opendistroforelasticsearch-|OPEN_DISTRO_LATEST|.rpm <https://packages.wazuh.com/4.x/yum/opendistroforelasticsearch-|OPEN_DISTRO_LATEST|-linux-x64.rpm>`_ (`sha512 <https://packages.wazuh.com/4.x/checksums/opendistro/|OPEN_DISTRO_LATEST|/opendistroforelasticsearch-|OPEN_DISTRO_LATEST|-linux-x64.rpm.sha512>`__)                                               |
++--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|     DEB      | `opendistroforelasticsearch-|OPEN_DISTRO_LATEST|.deb <https://packages.wazuh.com/4.x/apt/pool/main/o/opendistroforelasticsearch/opendistroforelasticsearch_|OPEN_DISTRO_LATEST|-1_amd64.deb>`_ (`sha512 <https://packages.wazuh.com/4.x/checksums/opendistro/|OPEN_DISTRO_LATEST|/opendistroforelasticsearch_|OPEN_DISTRO_LATEST|-1_amd64.deb.sha512>`__)            |
++--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 Kibana

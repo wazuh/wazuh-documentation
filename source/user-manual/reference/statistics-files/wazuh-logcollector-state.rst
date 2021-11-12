@@ -11,7 +11,7 @@ The statistics file for **wazuh-logcollector** is located at ``/var/ossec/var/ru
 
 It can be helpful to identify and measure if Wazuh is collecting and sending logs consistently.
 
-By default, this file is updated every 5 seconds. This interval can be changed by modifying the ``logcollector.state_interval`` value from the :ref:`internal configuration <reference_internal_options>` file.
+By default, this file is updated every 60 seconds. This interval can be changed by modifying the ``logcollector.state_interval`` value from the :ref:`internal configuration <reference_internal_options>` file.
 
 Below there is an example of the file content:
 
@@ -21,7 +21,7 @@ Below there is an example of the file content:
     {
     "global": {
         "start": "2021-01-27 12:07:29",
-        "end": "2021-01-27 12:08:34",
+        "end": "2021-01-27 12:09:29",
         "files": [
         {
             "location": "df -P",
@@ -104,7 +104,7 @@ Below there is an example of the file content:
     },
     "interval": {
         "start": "2021-01-27 12:08:29",
-        "end": "2021-01-27 12:08:34",
+        "end": "2021-01-27 12:09:29",
         "files": [
         {
             "location": "df -P",
