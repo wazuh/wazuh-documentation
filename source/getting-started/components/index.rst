@@ -32,6 +32,6 @@ In this section of the documentation you will find a description of the three Wa
     :maxdepth: 1
     :hidden:
 
-    wazuh_agent
-    wazuh_server
-    elastic_stack
+    wazuh-agent
+    wazuh-server
+    elastic-stack
