@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _aws_cloudwatchlogs:
 
@@ -34,7 +34,7 @@ Wazuh configuration
         <interval>5m</interval>
         <run_on_start>yes</run_on_start>
         <service type="cloudwatchlogs">
-        <aws_profile>default</aws_profile>
+          <aws_profile>default</aws_profile>
           <aws_log_groups>example_log_group</aws_log_groups>
           <regions>us-east-1</regions>
         </service>
@@ -74,3 +74,16 @@ Wazuh configuration
       .. code-block:: console
 
         # service wazuh-agent restart
+
+
+CloudWatch Logs use cases
+-------------------------
+
+Check the :ref:`Amazon ECR Image scanning <amazon_image_scanning>` section to learn how to use the CloudWatch Logs integration to pull logs from Amazon ECR Image scans.
+
+.. topic:: Contents
+
+  .. toctree::
+    :maxdepth: 1
+
+    ecr-image-scanning
