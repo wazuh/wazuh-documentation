@@ -1,13 +1,13 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: This section guides you through an installation of the Wazuh server and Elastic stack components in an all-in-one configuration. 
+  :description: This section guides you through an installation of the Wazuh server and Elastic Stack components in an all-in-one configuration. 
 
 .. _basic_all_in_one:
 
 Step-by-step installation
 =========================
-This document guides through an installation of the Wazuh server and Elastic stack components in an all-in-one configuration. This guide provides instructions to configure the official repositories to do the installations, alternatively, all the available packages can be found :ref:`here <packages>`. 
+This document guides through an installation of the Wazuh server and Elastic Stack components in an all-in-one configuration. This guide provides instructions to configure the official repositories to do the installations, alternatively, all the available packages can be found :ref:`here <packages>`. 
 
 .. note:: Root user privileges are required to execute all the commands described below.
 
