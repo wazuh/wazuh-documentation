@@ -40,6 +40,8 @@ Follow these steps to quickly set up and run your environment:
 
    #. Choose the support plan that best suits your needs. 
 
+   #. Complete your user profile. This step will only show when there is missing information on your profile.
+
 #. Click **View the summary** and then **Create** to build your environment. This process might take a moment.
 
 Once the environment is ready, you can :ref:`access the Wazuh WUI <cloud_wui_access>`  and register the agents. 
