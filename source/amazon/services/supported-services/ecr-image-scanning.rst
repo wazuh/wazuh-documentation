@@ -9,7 +9,7 @@ Amazon ECR Image scanning
 
 `Amazon ECR image scanning <https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html>`_ uses the Common Vulnerabilities and Exposures (CVEs) database from the open-source `Clair project <https://github.com/quay/clair>`_ to detect software vulnerabilities in container images and provide a list of scan findings, which can be easily integrated into Wazuh thanks to the :ref:`AWS CloudWatch Logs integration <aws_cloudwatchlogs>`.
 
-Amazon ECR sends an event to Amazon EventBridge when an image scan is completed. The event itself is only a summary and does not contain the details of the scan findings. However, it is possible to configure a Lambda function to request the scan findings details and store them in CloudWatch Logs. Here is a quick resume on how the workflow looks like:
+Amazon ECR sends an event to Amazon EventBridge when an image scan is completed. The event itself is only a summary and does not contain the details of the scan findings. However, it is possible to configure a Lambda function to request the scan findings details and store them in CloudWatch Logs. Here is a quick summary of how the workflow looks like:
 
 #. An image scan is triggered.
 #. Once the scan is completed Amazon ECR will send an event to EventBridge.
@@ -18,7 +18,7 @@ Amazon ECR sends an event to Amazon EventBridge when an image scan is completed.
 #. The Lambda function will create a log group and a log stream in CloudWatch Logs to store the response received.
 #. Wazuh will pull the logs from the CloudWatch log groups using the CloudWatch Logs integration.
 
-This section covers how to configure AWS to store the scan findings in CloudWatch Logs so they can be integrated into Wazuh.
+The following sections cover how to configure AWS to store the scan findings in CloudWatch Logs and how to ingest them into Wazuh.
 
 
 AWS configuration
@@ -50,7 +50,7 @@ How to create the CloudFormation Stack
     :width: 100%
 
 
-6. Once the Stack configuration is completed this can be tested by manually triggering an image Scan. The scan will result in the creation of a CloudWatch log group called ``/aws/ecr/image-scan-findings/<name of the ECR repository>`` containing the scan results. For every new scan the corresponding log streams will be created inside the log group.
+Once the Stack configuration is completed, the Lambda can be tested by manually triggering an image scan. The scan will result in the creation of a CloudWatch log group called ``/aws/ecr/image-scan-findings/<name of the ECR repository>`` containing the scan results. For every new scan the corresponding log streams will be created inside the log group.
 
 .. thumbnail:: ../../../images/aws/aws_findings1.png
     :title: Stack creation completed
