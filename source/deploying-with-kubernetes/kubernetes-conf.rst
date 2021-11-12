@@ -87,7 +87,7 @@ Kibana pod, the frontend for Elasticsearch, it also includes the Wazuh app.
 Services
 ^^^^^^^^
 
-**Elastic stack**
+**Elastic Stack**
 
 +----------------------+-------------------------------------------------------------------------------------+
 | Name                 | Description                                                                         |
