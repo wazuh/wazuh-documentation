@@ -22,7 +22,8 @@ Options
 - `enabled`_
 - `interval`_
 - `run_on_start`_
-- `ignore_time`_
+- `min_full_scan_interval`_
+- `retry_interval`_
 - `provider`_
 
 +---------------------------+-----------------------------+
@@ -34,7 +35,9 @@ Options
 +---------------------------+-----------------------------+
 | `run_on_start`_           | yes, no                     |
 +---------------------------+-----------------------------+
-| `ignore_time`_            | A positive number (seconds) |
+| `min_full_scan_interval`_ | A positive number (seconds) |
++---------------------------+-----------------------------+
+| `retry_interval`_         | A positive number (seconds) |
 +---------------------------+-----------------------------+
 | `provider`_               | A valid vulnerability vendor|
 +---------------------------+-----------------------------+
@@ -77,12 +80,12 @@ Runs updates and vulnerabilities scans immediately when service is started.
 | **Allowed values**   | yes, no   |
 +----------------------+-----------+
 
-.. _vuln_det_ignore_time:
+.. _vuln_det_min_full_scan_interval:
 
-ignore_time
-^^^^^^^^^^^^
+min_full_scan_interval
+^^^^^^^^^^^^^^^^^^^^^^^
 
-Time during which vulnerabilities that have already been alerted will be ignored. When this time hasn't passed yet, only :ref:`partial scans <vuln_det_scan_types>` will be performed.
+The time during which a full scan will not be performed even if the database of vulnerabilities is updated. When this time expires, a :ref:`full scan <vuln_det_scan_types>` will be performed only if the CVEs database has changed.
 
 +----------------------+------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**    | 6 hours                                                                                                                            |
@@ -90,8 +93,18 @@ Time during which vulnerabilities that have already been alerted will be ignored
 | **Allowed values**   | A positive number that should contain a suffix character indicating a time unit: s (seconds), m (minutes), h (hours) or d (days).  |
 +----------------------+------------------------------------------------------------------------------------------------------------------------------------+
 
-.. note:: In a partial scan new packages are scanned, but only a full scan removes the CVEs related to old packages that are not present anymore.
+.. _retry_interval:
 
+retry_interval
+^^^^^^^^^^^^^^
+
+The time to wait after a scan completes to retry the agents that had a problem to be scanned.
+
++----------------------+------------------------------------------------------------------------------------------------------------------------------------+
+| **Default value**    | 30 seconds                                                                                                                         |
++----------------------+------------------------------------------------------------------------------------------------------------------------------------+
+| **Allowed values**   | A positive number that should contain a suffix character indicating a time unit: s (seconds), m (minutes), h (hours), or d (days). |
++----------------------+------------------------------------------------------------------------------------------------------------------------------------+
 
 provider
 ^^^^^^^^
@@ -278,7 +291,7 @@ The following configuration will update the vulnerability database for Ubuntu, D
     <vulnerability-detector>
         <enabled>no</enabled>
         <interval>5m</interval>
-        <ignore_time>6h</ignore_time>
+        <min_full_scan_interval>6h</min_full_scan_interval>
         <run_on_start>yes</run_on_start>
 
         <!-- Ubuntu OS vulnerabilities -->
