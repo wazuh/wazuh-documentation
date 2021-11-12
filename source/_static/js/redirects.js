@@ -217,7 +217,7 @@ newUrls['4.2'] = [
   '/docker-monitor/monitoring-containers-activity.html',
   '/docker-monitor/monitoring-docker-server.html',
   '/upgrade-guide/compatibility-matrix/index.html',
-  '/upgrade-guide/legacy/upgrading-wazuh-server/restore-alerts-from-2.x-to-3.x.html'
+  '/upgrade-guide/legacy/upgrading-wazuh-server/restore-alerts-from-2.x-to-3.x.html',
   '/user-manual/registering/agent-enrollment.html',
 ];
 
