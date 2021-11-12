@@ -29,6 +29,8 @@ This download page contains packages required for the Wazuh installation with th
    - `Kibana`_
    - `Filebeat`_
 
+.. _Wazuh_manager_agent_packages_list:
+
 Wazuh manager and Wazuh agent
 -----------------------------
 
