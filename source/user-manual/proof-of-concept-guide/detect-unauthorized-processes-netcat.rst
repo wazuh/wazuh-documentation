@@ -59,7 +59,7 @@ Configure your environment as follows to test the POC.
 Steps to generate alerts
 ------------------------
 
-- Log in to the monitored RHEL 7 system and run ``nc -l 8000`` for 30 seconds.
+#. Log in to the monitored RHEL 7 system and run ``nc -l 8000`` for 30 seconds.
 
 Query the alerts
 ----------------

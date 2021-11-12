@@ -30,7 +30,7 @@ Optionally, you can install Suricata in the RHEL 7 agent endpoint and configure 
 Steps to generate the alerts
 ----------------------------
 
-- Replace ``<your_web_server_address>`` with the appropriate value and execute the following command from a system external to your RHEL7 endpoint (the attacker).
+#. Replace ``<your_web_server_address>`` with the appropriate value and execute the following command from a system external to your RHEL7 endpoint (the attacker).
 
     .. code-block:: console
 

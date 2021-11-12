@@ -34,7 +34,7 @@ As an alternative to local configurations, you can :ref:`centrally configure gro
 Steps to generate the alerts
 ----------------------------
 
-- Create, remove, or modify a file in the monitored directories.
+#. Create, remove, or modify a file in the monitored directories.
 
 Query the alerts
 ----------------

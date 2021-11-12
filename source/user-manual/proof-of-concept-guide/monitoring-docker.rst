@@ -36,7 +36,7 @@ Configure your environment as follows to test the POC.
 Steps to generate the alerts
 ----------------------------
 
-- Pull a Docker image, start the container, run a Docker command and delete the container.
+#. Pull a Docker image, start the container, run a Docker command and delete the container.
 
     .. code-block:: console
 
@@ -53,7 +53,7 @@ Query the alerts
 
 Related alerts can be found with:
 
-* ``rule.groups: "docker"``. 
+* ``rule.groups: "docker"``
 * Additionally, the ``data.docker.Action`` field states which action was performed.
 
 Affected endpoints

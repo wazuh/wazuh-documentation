@@ -21,7 +21,7 @@ Configure your environment as follows to test the POC.
 Steps to generate the alerts
 ----------------------------
 
-- Replace ``<username@rhel.agent.endpoint>`` for Linux and ``<username@win.agent.endpoint>`` for Windows with the appropriate destination in the following commands and run multiple failed authentication failure attempts against the monitored endpoints.
+#. Replace ``<username@rhel.agent.endpoint>`` for Linux and ``<username@win.agent.endpoint>`` for Windows with the appropriate destination in the following commands and run multiple failed authentication failure attempts against the monitored endpoints.
 
     - For the monitored Linux endpoint:
 
