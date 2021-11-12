@@ -117,7 +117,11 @@ Configure your environment as follows to test the POC.
 Steps to generate the alerts
 ----------------------------
 
-- Log in to the attacker's system (the monitored Windows endpoint) and connect to the victim's (the Apache server in the monitored RHEL7 endpoint) from a web browser. The custom firewall rule will temporarily block any connection from the attacker system for 60 seconds.
+#. Log in to the attacker's system (the monitored Windows endpoint).
+
+#. Connect to the victim's system (the Apache server in the monitored RHEL 7 endpoint) from a web browser. 
+
+    The custom firewall rule will temporarily block any connection from the attacker system for 60 seconds.
 
 Query the alerts
 ----------------
