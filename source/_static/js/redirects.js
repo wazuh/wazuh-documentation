@@ -465,11 +465,6 @@ redirections.push(
       '4.2': '/user-manual/reference/tools/wazuh-regex.html',
     },
     {
-      'target': ['4.2=>4.1'],
-      '4.1': '/installation-guide/more-installation-alternatives/index.html',
-      '4.2': '/installation-guide/more-installation-alternatives/offline-all-in-one.html',
-    },
-    {
       'target': ['4.1=>4.2', '4.2=>4.1'],
       '4.1': '/getting-started/use_cases/index.html',
       '4.2': '/getting-started/use-cases/index.html',
