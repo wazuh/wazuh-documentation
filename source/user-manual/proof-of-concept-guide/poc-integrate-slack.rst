@@ -3,12 +3,13 @@
 Slack integration
 =================
 
-Wazuh can report alerts to `Slack <https://slack.com/>`_ by using the :ref:`wazuh-integratord <wazuh-integratord>` deamon. 
+Wazuh allows connection to external APIs and alerting tools such as `Slack <https://slack.com/>`_. By using the :ref:`wazuh-integratord <wazuh-integratord>` deamon, the solution can report alerts to this app through messages sent to the platform in real time. 
 
-Check our :ref:`manual_integration` for detailed information about integrations.
+For more information about integrations, check the :ref:`manual_integration` section of the documentation.
 
 Configuration
 -------------
+
 Configure your environment as follows to test the POC.
 
 #. `Create a Slack webhook <https://api.slack.com/messaging/webhooks>`_. This is a unique URL to which Wazuh will send messages with the alerts.
@@ -32,7 +33,7 @@ Steps to generate the alerts
 Query the alerts
 ----------------
 
-The Slack channel you associated with your Slack webhook will show the alerts in real time.
+The Slack channel you associated your Slack webhook with will show the alerts in real time.
 
 Affected endpoints
 ------------------

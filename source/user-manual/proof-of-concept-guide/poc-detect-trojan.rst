@@ -3,10 +3,11 @@
 Detecting suspicious binaries - Trojan
 ======================================
 
-Wazuh can detect trojaned system binaries by using signatures in the ``/var/ossec/etc/shared/rootkit_trojans.txt`` file.
+With Wazuh anomaly and malware detection capabilities, you can detect trojaned system binaries by using signatures in the ``/var/ossec/etc/shared/rootkit_trojans.txt`` file. 
 
 Configuration
 -------------
+
 Configure your environment as follows to test the POC.
 
 No additional configuration is required since trojan detection is configured out-of-the-box. Check your configuration in the ``/var/ossec/etc/ossec.conf`` file at the RHEL 7 monitored endpoint.
