@@ -1,7 +1,7 @@
 .. meta::
       :description: Wazuh 4.2.5 has been released. Check out our release notes to discover the changes and additions of this release.
 
-.. _release_4_2_4:
+.. _release_4_2_5:
 
 4.2.5 Release notes
 ===================
