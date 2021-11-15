@@ -58,7 +58,7 @@ Reference                                                         Description
 `#3670 <https://github.com/wazuh/wazuh-kibana-app/pull/3670>`_    This fix resolves Wazuh API token removal after logout with Kibana 7.13 and 7.14. 
 `#3672 <https://github.com/wazuh/wazuh-kibana-app/pull/3672>`_    A Group Configuration and Management Configuration error is now fixed when the user tries to go back after saving.
 `#3674 <https://github.com/wazuh/wazuh-kibana-app/pull/3674>`_    This fix resolves that the Panels and their titles are correctly displayed in the Welcome Overview and the Management Directory. In addition, it resolves that in All the Wazuh menus are consistent without titles in gray. 
-`#3676 <https://github.com/wazuh/wazuh-kibana-app/pull/3676>`_    Fixing double flyout clicking in a policy 
+`#3676 <https://github.com/wazuh/wazuh-kibana-app/pull/3676>`_    An issue with double flyout appearing when clicking a policy is now fixed.
 `#3678 <https://github.com/wazuh/wazuh-kibana-app/pull/3678>`_    Fixed error conflict setting kibana settings from the health check 
 `#3681 <https://github.com/wazuh/wazuh-kibana-app/pull/3681>`_    Fixed compatibility to get the valid index patterns and refresh fields for Kibana 7.10.2-7.13.4 
 ==============================================================    =============
