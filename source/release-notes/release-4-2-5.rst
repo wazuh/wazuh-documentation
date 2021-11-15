@@ -52,7 +52,7 @@ Wazuh Kibana plugin
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#3653 <https://github.com/wazuh/wazuh-kibana-app/pull/3653>`_    Fixed compatibility Wazuh 4.2 - Kibana 7.13.4 
+`#3653 <https://github.com/wazuh/wazuh-kibana-app/pull/3653>`_    A compatibility issue between Wazuh 4.2 and the kibana 7.13.4 is now fixed. In addition, this fix is compatible with kibana 7.10. 
 `#3654 <https://github.com/wazuh/wazuh-kibana-app/pull/3654>`_    Fixed interactive register windows agent screen error 
 `#3668 <https://github.com/wazuh/wazuh-kibana-app/pull/3668>`_    Fixed breadcrumbs style compatibility for Kibana 7.14.2 
 `#3670 <https://github.com/wazuh/wazuh-kibana-app/pull/3670>`_    Fixed Wazuh token is not removed after logout in Kibana 7.13 
