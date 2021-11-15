@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Wazuh helps to implement PCI DSS by performing file integrity checking, among other capabilities. Check out some use cases in this section of our documentation.
+  :description: Wazuh helps to implement PCI DSS by performing file integrity checking, among other capabilities. Check out some use cases in this section.
   
 .. _pci_dss_file_integrity_monitoring:
 
