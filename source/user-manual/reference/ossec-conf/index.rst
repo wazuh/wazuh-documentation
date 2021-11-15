@@ -92,6 +92,8 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +---------------------------------------------------------------------+------------------------+
 | :doc:`wodle name="aws-s3" <wodle-s3>`                               | manager, agent         |
 +---------------------------------------------------------------------+------------------------+
+| :doc:`wodle name="agent-key-polling" <wodle-agent-key-polling>`     | manager                |
++---------------------------------------------------------------------+------------------------+
 | :doc:`wodle name="azure-logs" <wodle-azure-logs>`                   | manager                |
 +---------------------------------------------------------------------+------------------------+
 | :doc:`wodle name="cis-cat" <wodle-ciscat>`                          | manager, agent         |
@@ -156,4 +158,5 @@ All of the above sections must be located within the top-level ``<ossec_config>`
    wodle-osquery
    wodle-docker
    wodle-azure-logs
+   wodle-agent-key-polling
    verifying-configuration

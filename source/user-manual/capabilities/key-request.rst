@@ -1,14 +1,16 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Find out more about key request, that allows you to fetch keys stored in an external database.
+  :description: Find out more about key request, the Wazuh feature that allows you to fetch keys stored in an external database.
   
 .. _key-request:
 
 Key request
 =================
 
-.. versionadded:: 3.8.0
+.. versionadded:: 4.4.0
+
+.. note:: Since v4.4.0, the key-request feature deprecates the old :doc:`agent-key-polling <../reference/ossec-conf/wodle-agent-key-polling>` wodle.
 
 Key-request allows fetching the keys stored on an external database.
 
