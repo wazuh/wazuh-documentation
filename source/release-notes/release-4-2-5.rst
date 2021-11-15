@@ -56,8 +56,8 @@ Reference                                                         Description
 `#3654 <https://github.com/wazuh/wazuh-kibana-app/pull/3654>`_    Fixed error that produced the interactive screen of a new agent to break when selecting the windowsOS option. This fix is compatible with Kibana 7.10. 
 `#3668 <https://github.com/wazuh/wazuh-kibana-app/pull/3668>`_    This fix resolves a style compatibility issue of the breadcrumb navigation inside Kibana 7.14.2. 
 `#3670 <https://github.com/wazuh/wazuh-kibana-app/pull/3670>`_    This fix resolves Wazuh API token removal after logout with Kibana 7.13 and 7.14. 
-`#3672 <https://github.com/wazuh/wazuh-kibana-app/pull/3672>`_    Fixed Group Configuration and Management configuration error after trying to going back after you save 
-`#3674 <https://github.com/wazuh/wazuh-kibana-app/pull/3674>`_    Fixing EuiPanels in Overview Sections and disabled text in WzMenu 
+`#3672 <https://github.com/wazuh/wazuh-kibana-app/pull/3672>`_    A Group Configuration and Management Configuration error is now fixed when the user tries to go back after saving.
+`#3674 <https://github.com/wazuh/wazuh-kibana-app/pull/3674>`_    This fix resolves that the Panels and their titles are correctly displayed in the Welcome Overview and the Management Directory. In addition, it resolves that in All the Wazuh menus are consistent without titles in gray. 
 `#3676 <https://github.com/wazuh/wazuh-kibana-app/pull/3676>`_    Fixing double flyout clicking in a policy 
 `#3678 <https://github.com/wazuh/wazuh-kibana-app/pull/3678>`_    Fixed error conflict setting kibana settings from the health check 
 `#3681 <https://github.com/wazuh/wazuh-kibana-app/pull/3681>`_    Fixed compatibility to get the valid index patterns and refresh fields for Kibana 7.10.2-7.13.4 
