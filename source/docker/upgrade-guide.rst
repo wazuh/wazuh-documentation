@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Docker is an open source project that automates the deployment of different applications inside software containers. Learn more about the upgrade guide here. 
+  :description: Docker, an open source project that automates the deployment of different applications inside software containers. Learn more about it here. 
   
 .. _upgrade-scenario:
 
