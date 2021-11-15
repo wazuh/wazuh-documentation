@@ -40,11 +40,6 @@ removedUrls['x.y'] = [
 
 newUrls['4.2'] = [
   '/amazon-machine-images/amazon-machine-images.html',
-  '/release-notes/release-4-2-4.html',
-  '/release-notes/release-4-2-3.html',
-  '/release-notes/release-4-2-2.html',
-  '/release-notes/release_4_2_1.html',
-  '/release-notes/release_4_2_0.html',
   '/user-manual/capabilities/active-response/ar-use-cases/removing-malware.html',
   '/user-manual/capabilities/active-response/ar-use-cases/wazuh-with-yara.html',
   '/user-manual/capabilities/active-response/ar-use-cases/blocking-attacks.html',
@@ -187,6 +182,9 @@ newUrls['4.2'] = [
   '/release-notes/release-4-1-5.html',
   '/release-notes/release-4-2-0.html',
   '/release-notes/release-4-2-1.html',
+  '/release-notes/release-4-2-2.html',
+  '/release-notes/release-4-2-3.html',
+  '/release-notes/release-4-2-4.html',
   '/user-manual/api/securing-api.html',
   '/user-manual/configuring-cluster/cluster-management.html',
   '/user-manual/manager/manual-email-report/smtp-authentication.html',
