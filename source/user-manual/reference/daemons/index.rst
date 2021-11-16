@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: In this section of the Wazuh documentation, you can check out the daemons, its descriptions, and supported installations. 
+  :description: In this section of the Wazuh documentation, you can check out the daemons, their descriptions, and supported installations. 
   
 .. _daemons:
 
