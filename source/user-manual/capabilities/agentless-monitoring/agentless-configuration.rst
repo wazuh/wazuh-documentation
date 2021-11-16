@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about the agentless monitoring configuration: integrity check BSD, integrity check Linux, generic diff, and pix config. Learn more here.  
+  :description: Learn how agentless monitoring can help you monitor systems with no agent via SSH, such as routers, firewalls, switches, and Linux/BSD systems.  
   
 .. _agentless-examples:
 
