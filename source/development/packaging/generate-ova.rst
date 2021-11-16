@@ -48,15 +48,15 @@ Generating the virtual machine
 
     #. Execute one of the following scripts depending on the preferred set of packages.
     
-        -  You can run the following command to create a virtual machine image with Wazuh manager |WAZUH_LATEST|, Open Distro for Elasticsearch |OPEN_DISTRO_LATEST|, and ELK |ELASTICSEARCH_LATEST_OVA| installed using production packages.
+        *  You can run the following command to create a virtual machine image installed using production packages.
 
             .. code-block:: console
 
-              # ./generate_ova.sh -w |WAZUH_LATEST| -o |OPEN_DISTRO_LATEST| -e |ELASTICSEARCH_LATEST_OVA|
+              # ./generate_ova.sh
 
    
-         - You can run the following command to generate the virtual machine image using development packages.
+         * You can run the following command to generate the virtual machine image using development packages.
 
              .. code-block:: console
 
-               # ./generate_ova.sh  -w |WAZUH_LATEST| -o |OPEN_DISTRO_LATEST| -e |ELASTICSEARCH_LATEST_OVA| -r dev
+               # ./generate_ova.sh -r dev
