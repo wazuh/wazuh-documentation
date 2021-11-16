@@ -1,7 +1,7 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about AWS CloudWatch logs, a service that allows users to centralize the logs from all their systems, applications, and AWS services in a single place. 
+  :description: Learn more about AWS CloudWatch logs, a service that allows users to centralize the logs from all their AWS services in a single place. 
   
 .. _aws_cloudwatchlogs:
 
