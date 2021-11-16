@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: PCI DSS is a proprietary information security standard for organizations that handle branded credit cards. Learn more about rootkit detection to use Wazuh for PCI DSS compliance.
+  :description: Wazuh rootkit detection helps you to meet PCI DSS requirements related to intrusions and malware in general. Learn more about this subject here.
   
 .. _pci_dss_rootkit_detection:
 
