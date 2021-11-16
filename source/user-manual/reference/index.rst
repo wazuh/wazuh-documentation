@@ -23,3 +23,4 @@ This part of the user manual will cover the configuration files used by Wazuh an
        tools/index
        unattended-installation
        statistics-files/index
+       Wazuh Kibana plugin <../kibana-app/reference/index>

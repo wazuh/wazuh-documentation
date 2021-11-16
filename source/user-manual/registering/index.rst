@@ -162,5 +162,4 @@ In case of problems during registration, visit the :ref:`registering Wazuh agent
     password-authorization-registration
     host-verification-registration
     registering-agents-theory
-    registering-agents-troubleshooting
     deployment_variables/deployment_variables

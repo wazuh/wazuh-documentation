@@ -18,6 +18,5 @@ In case of having any doubt about operating system compatibility, as well as the
 
         upgrading-wazuh
         elasticsearch-kibana-filebeat/index
-        upgrading-agent
         legacy/index
         compatibility_matrix/index

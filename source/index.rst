@@ -318,6 +318,22 @@ Wazuh is a free and open source platform for threat detection, security monitori
    Getting started <getting-started/index>
    Quickstart <quickstart>
    installation-guide/index
+   deployment-guide
+   upgrade-guide/index
+   Uninstalling guide <user-manual/uninstall/index>
+   migrating-from-ossec/index
+   agents-guide
+   User guide <user-manual/index>
+   Cloud services guide <cloud-services>
+   Ruleset guide <user-manual/ruleset/index>
+   user-manual/kibana-app/index
+   development/index
+   Reference guide <user-manual/reference/index>
+   user-manual/api/index
+   troubleshooting
+   FAQ
+   learning-wazuh/index
+   release-notes/index
 
 .. raw:: html
 

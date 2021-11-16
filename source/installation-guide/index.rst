@@ -135,5 +135,5 @@ The :ref:`Wazuh agent <wazuh_agent>` is a single and lightweight monitoring soft
     elasticsearch/index
     wazuh-server/index
     kibana/index
-    wazuh-agent/index
+    more-installation-alternatives/index
     packages-list

@@ -21,4 +21,3 @@ This module requires dependencies in order to work, and also the right credentia
 
     prerequisites/index
     supported-services/index
-    troubleshooting
