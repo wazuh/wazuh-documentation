@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about how to migrate from the Wazuh API 3.X in this section of our documentation. 
+  :description: Wazuh API v4 introduced several changes. ​Learn more about how to migrate from the Wazuh API 3.X in this section of our documentation. 
 
 .. Migrating from the Wazuh API 3.X
 
