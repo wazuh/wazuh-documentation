@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Learn more about how to generate a report of the current section with Wazuh.  
+  
 .. _kibana_reporting:
 
 Reporting
