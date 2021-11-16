@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Learn how to install the Elastic Stack components in a multi-node cluster. The installation process for a multi-node cluster will be explained in three parts.
+  :description: Learn how to install the Elastic Stack components in a multi-node cluster. In this section, we explain the process you need to follow.
   
 .. _basic_elasticsearch_multi_node_cluster:
 
