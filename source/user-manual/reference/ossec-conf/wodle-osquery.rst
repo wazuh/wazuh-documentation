@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Check out more about the local configuration of Wazuh in this section of our documentation. 
+  
 .. _wodle-osquery:
 
 wodle name="osquery"
