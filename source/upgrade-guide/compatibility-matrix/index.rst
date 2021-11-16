@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Check out the compatibility matrix of the upgrade process of the Wazuh server, Open Distro for Elasticsearch, Elastic Stack, and the Wazuh agents.
+  
 .. _compatibility_matrix:
 
 Compatibility matrix
@@ -123,15 +126,19 @@ The Wazuh app for Kibana requires compatibility between two different components
   - With the **Wazuh manager**, it requires the same ``major.minor`` version.
   - With the **Elastic Stack**, it is only compatible with the exact same version.
 
-+-----------------------------------+------------------------------------+---------------------------+
-|        Wazuh version              |      Elastic Stack version         |   Open Distro version     |
-+-----------------------------------+------------------------------------+---------------------------+
-|              |WAZUH_LATEST|                | |ELASTICSEARCH_LATEST|                             | |OPEN_DISTRO_LATEST|                    |
-+-----------------------------------+------------------------------------+---------------------------+
-|              |WAZUH_LATEST|                | 7.11.2                             |                           |
-+-----------------------------------+------------------------------------+---------------------------+
-|              |WAZUH_LATEST|                | |ELASTICSEARCH_ELK_LATEST|                             |                           |
-+-----------------------------------+------------------------------------+---------------------------+
++-----------------------------------+----------------------------------------+---------------------------+
+|        Wazuh version              |      Elastic Stack version             |   Open Distro version     |
++-----------------------------------+----------------------------------------+---------------------------+
+|              |WAZUH_LATEST|                | |ELASTICSEARCH_LATEST|                                 | |OPEN_DISTRO_LATEST|                    |
++-----------------------------------+----------------------------------------+---------------------------+
+|              |WAZUH_LATEST|                | 7.11.2                                 |                           |
++-----------------------------------+----------------------------------------+---------------------------+
+|              |WAZUH_LATEST|                | 7.12.1                                 |                           |
++-----------------------------------+----------------------------------------+---------------------------+
+|              4.2.5                | 7.13.0, 7.13.1, 7.13.2, 7.13.3, 7.13.4 |                           |
++-----------------------------------+----------------------------------------+---------------------------+
+|              4.2.5                | 7.14.0, 7.14.1, 7.14.2                 |                           |
++-----------------------------------+----------------------------------------+---------------------------+
 
 
 You can find more information on the `Wazuh app for Kibana repository <https://github.com/wazuh/wazuh-kibana-app#installation>`_, where you can check a more detailed compatibility matrix between the Wazuh app and Elastic Stack versions.

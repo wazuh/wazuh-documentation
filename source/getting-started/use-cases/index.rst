@@ -1,8 +1,8 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about how the Wazuh capabilities work and check out some common Wazuh use cases in this section of our documentation. 
-  
+  :description: Learn more about how the Wazuh capabilities work and check out some common Wazuh use cases in this section of our documentation.
+
 .. _use_cases:
 
 Use cases
@@ -35,13 +35,13 @@ In this section of the documentation you will find a brief example of some of th
    :hidden:
    :maxdepth: 1
 
-   log_analysis
-   file_integrity
-   rootkits_detection
-   active_response
-   configuration_assessment
-   system_inventory
-   vulnerability_detection
-   cloud_security
-   containers_security
-   regulatory_compliance
+   log-analysis
+   file-integrity
+   rootkits-detection
+   active-response
+   configuration-assessment
+   system-inventory
+   vulnerability-detection
+   cloud-security
+   containers-security
+   regulatory-compliance

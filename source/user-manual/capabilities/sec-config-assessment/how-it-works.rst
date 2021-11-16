@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Learn more about how the Security Configuration Assessment capability of Wazuh works in this section of the documentation. 
+  
 How SCA works
 =============
 
