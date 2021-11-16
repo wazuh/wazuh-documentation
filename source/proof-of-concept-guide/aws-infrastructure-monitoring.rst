@@ -1,5 +1,8 @@
 .. _poc_aws_monitoring:
 
+.. meta::
+  :description: This POC shows how the Wazuh module for AWS (aws-s3) enables log data gathering from different AWS sources. Learn more about it in our documentation.
+
 Amazon AWS infrastructure monitoring
 ====================================
 

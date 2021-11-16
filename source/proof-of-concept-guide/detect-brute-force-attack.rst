@@ -1,5 +1,9 @@
 .. _poc_detect_bruteforce:
 
+.. meta::
+  :description: This POC shows how Wazuh provides out-of-the-box rules capable of identifying brute-force attacks by correlating multiple authentication failure events. Learn more in this section.
+
+
 Detecting a brute-force attack
 ==============================
 
@@ -12,7 +16,7 @@ Configure your environment as follows to test the POC.
 
 - Make sure you have SSH installed and enabled in a system chosen to play as an attacker.
 
-- Install *Hydra* if you want to execute automated RDP connections. 
+- Install Hydra if you want to execute automated RDP connections. 
 
     .. code-block:: XML
 

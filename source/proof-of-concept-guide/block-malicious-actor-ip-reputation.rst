@@ -1,5 +1,8 @@
 .. _poc_block_actor_IP_reputation:
 
+.. meta::
+  :description: In this POC, you identify the monitored Windows endpoint IP address as a bad reputation one. Learn more about it in our documentation.
+
 Blocking a malicious actor - IP Reputation
 ==========================================
 
@@ -37,19 +40,19 @@ Configure your environment as follows to test the POC.
 
         # echo "<your_windows_ip_address>" >> /var/ossec/etc/lists/alienvault_reputation.ipset
 
-#. Download the script to convert from the `ipset` format to the `cdb` list format.
+#. Download the script to convert from the ipset format to the cdb list format.
 
     .. code-block:: console
 
         # wget https://wazuh.com/resources/iplist-to-cdblist.py -O /tmp/iplist-to-cdblist.py
 
-#. Convert the `alienvault_reputation.ipset` file to a `.cdb` format using the previously downloaded script.
+#. Convert the ``alienvault_reputation.ipset`` file to a .cdb format using the previously downloaded script.
 
     .. code-block:: console
 
         # python /tmp/iplist-to-cdblist.py /var/ossec/etc/lists/alienvault_reputation.ipset /var/ossec/etc/lists/blacklist-alienvault
 
-#. Optionally, remove the `alienvault_reputation.ipset` file and the `iplist-to-cdblist.py` script, as they are no longer needed.
+#. Optionally, remove the ``alienvault_reputation.ipset`` file and the ``iplist-to-cdblist.py`` script, as they are no longer needed.
 
     .. code-block:: console
 
