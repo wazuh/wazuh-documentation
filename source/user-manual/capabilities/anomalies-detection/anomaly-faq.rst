@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
- .. meta::
-  :description: Check out the Frequently Asked Questions (FAQ) section on anomaly and malware detection with Wazuh.
+.. meta::
+  :description: Check out the Frequently Asked Questions (FAQ) section on anomaly and malware detection with Wazuh in this section of our documentation.
   
 .. _intrusion-faq:
 
