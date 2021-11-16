@@ -3,7 +3,7 @@
 .. _azure_monitoring_instances:
 
 .. meta::
-  :description: Discover the numerous ways that Wazuh provides to monitor your Microsoft Azure instances.
+  :description: Learn more about how to use Wazuh to monitor Microsoft Azure. In this section, we will show you how to monitor your instances. 
 
 Monitoring Instances
 ====================
