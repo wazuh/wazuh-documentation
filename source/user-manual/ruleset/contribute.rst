@@ -1,12 +1,12 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about how to contribute to the ruleset in this section of our documentation. 
+  :description: In this section of our documentation, learn more about contributing to the ruleset if you have created new rules, decoders, or rootchecks. 
   
 .. _ruleset_contribute:
 
 Contribute to the ruleset
-===========================
+=========================
 
 If you have created new rules, decoders or rootchecks and you would like to contribute to our repository, please fork our `GitHub repository <https://github.com/wazuh/wazuh>`_ and submit a pull request.
 
