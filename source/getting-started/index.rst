@@ -56,4 +56,4 @@ This document provides an overview of the Wazuh platform components and architec
 
    components/index
    architecture
-   use_cases/index
+   use-cases/index

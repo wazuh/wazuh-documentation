@@ -17,5 +17,5 @@ This section provides instructions for monitoring Docker servers and container e
     .. toctree::
        :maxdepth: 2
 
-       monitoring_docker_server
-       monitoring_containers_activity
+       monitoring-docker-server
+       monitoring-containers-activity

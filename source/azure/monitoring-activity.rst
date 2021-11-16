@@ -3,7 +3,7 @@
 .. _azure_monitoring_activity:
 
 .. meta::
-  :description: Discover the numerous ways that Wazuh provides to monitor your Microsoft Azure infrastructure activity.
+    :description: Learn more about how to use Wazuh to monitor Microsoft Azure and check out which relevant information provides the Activity Log. 
 
 Monitoring Activity
 ===================
