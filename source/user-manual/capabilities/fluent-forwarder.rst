@@ -1,5 +1,8 @@
 .. Copyright (C) 2018 Wazuh, Inc.
 
+.. meta::
+  :description: The Fluentd forwarder module allows Wazuh to forward messages to a Fluentd server. Learn more about it here. 
+  
 .. _fluent-forwarder:
 
 Fluentd forwarder
