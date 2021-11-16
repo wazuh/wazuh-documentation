@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: The Wazuh app provides a section for the ruleset on the Management tab. Learn more about it in this section of our documentation. 
+  
 .. _kibana_ruleset:
 
 Ruleset
