@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about how to generate a report of the current section with Wazuh.  
+  :description: Learn how to generate reports with the Wazuh Kibana plugin, where are these stored, and the available formats, ​in this section of our documentation.  
   
 .. _kibana_reporting:
 
