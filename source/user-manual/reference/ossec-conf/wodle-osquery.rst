@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Check out more about the local configuration of Wazuh in this section of our documentation. 
+  :description: Osquery is an operating system monitoring and analytics framework. Check out more about the configuration options of the osquery wodle here. 
   
 .. _wodle-osquery:
 
