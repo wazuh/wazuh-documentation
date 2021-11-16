@@ -53,7 +53,7 @@ Wazuh Kibana plugin
 Reference                                                         Description
 ==============================================================    =============
 `#3653 <https://github.com/wazuh/wazuh-kibana-app/pull/3653>`_    A compatibility issue between Wazuh 4.2 and the kibana 7.13.4 is now fixed. In addition, this fix is compatible with Kibana 7.10. 
-`#3654 <https://github.com/wazuh/wazuh-kibana-app/pull/3654>`_    Fixed error that produced the interactive screen of a new agent to break when selecting the windowsOS option. This fix is compatible with Kibana 7.10. 
+`#3654 <https://github.com/wazuh/wazuh-kibana-app/pull/3654>`_    Fixed an error that produced the interactive screen of a new agent to break when selecting the windowsOS option. This fix is compatible with Kibana 7.10. 
 `#3668 <https://github.com/wazuh/wazuh-kibana-app/pull/3668>`_    This fix resolves a style compatibility issue of the breadcrumb navigation inside Kibana 7.14.2. 
 `#3670 <https://github.com/wazuh/wazuh-kibana-app/pull/3670>`_    This fix resolves Wazuh API token removal after logout with Kibana 7.13 and 7.14. 
 `#3672 <https://github.com/wazuh/wazuh-kibana-app/pull/3672>`_    A Group Configuration and Management Configuration error is now fixed when the user tries to go back after saving.
