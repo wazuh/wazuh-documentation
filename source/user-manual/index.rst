@@ -22,7 +22,6 @@ Welcome to the Wazuh user manual. Use it as your Wazuh reference library once yo
         agents/index
         configuring-cluster/index
         capabilities/index
-        Proof of Concept guide <proof-of-concept-guide/index>
         ruleset/index
         api/index
         kibana-app/index
