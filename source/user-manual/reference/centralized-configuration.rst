@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Learn how to remotely configure agents using agent.conf. In this section you will find which capabilities can be configured remotely.
+  :description: Learn how to remotely configure agents using agent.conf. In this section of the Wazuh documentation, you will find which capabilities can be configured remotely.
 
 .. _reference_agent_conf:
 

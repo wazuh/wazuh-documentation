@@ -1,6 +1,6 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 .. meta::
-  :description: Learn more about client configuration, connection to the manager, and its configuring options in this section of the Wazuh user manual.
+  :description: Learn more about client configuration, connection to the manager, and its configuring options in this section of the Wazuh documentation.
 
 .. _reference_ossec_client:
 
@@ -17,7 +17,7 @@ client
 This section explains how to configure the connection to the manager.
 
 .. note::
-  To avoid a permanent lost of communication with the manager, the only setting included in the shared configuration of this section is **force_reconnect_interval**
+  To avoid a permanent lost of communication with the manager, the only setting included in the shared configuration of this section is **force_reconnect_interval**.
 
 Subsections
 -----------
