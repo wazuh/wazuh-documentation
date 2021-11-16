@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Check out the Frequently Asked Questions (FAQ) section on installing and configuring the Wazuh deployment on Docker. 
+  :description: If you are installing and configuring the Wazuh deployment on Docker, you need to check out this Frequently Asked Questions (FAQ) section.
   
 .. _wazuh-container_faq:
 
