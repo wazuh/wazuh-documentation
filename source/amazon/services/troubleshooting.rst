@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: If you want help with troubleshooting, visit this section of the Wazuh documentation. Here you can see how to test the integration, common errors, and more.
+  
 .. _amazon_troubleshooting:
 
 Troubleshooting
