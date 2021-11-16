@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Learn how to install the Elastic Stack components in a single-node cluster in this section of our documentation. 
+  :description: Learn how to install the Elastic Stack components in a single-node cluster. In this section, we explain the process you need to follow.
 
 .. _basic_elasticsearch_single_node_cluster:
 
