@@ -34,15 +34,9 @@ Generating the virtual machine
             $ ./generate_ova.sh -h
 
             General usage: ./generate_ova.sh [OPTIONS]
-              -w,    --wazuh            [Required] Version of wazuh to install on VM.
-              -o,    --opendistro       [Required] Version of Open Distro for Elasticsearch.
-              -e,    --elk              [Required] Versions of Elasticsearch, Logstash and Kibana.
-              -r,    --repository       [Optional] Select the software repository [dev/prod]. By default: prod
-              -b,    --branch           [Optional] Branch/tag of the Wazuh development repository. By default: 4.2
-              -d,    --doc              [Optional] Branch/tag of the Wazuh documentation development repository. By default: 4.2
-              -s,    --store <path>     [Optional] Set the destination absolute path where the ova file will be stored.
+              -r,    --repository       [Optional] Select the software repository [prod/dev]. By default: prod
+              -s,    --store <path>     [Optional] Set the destination absolute path where the OVA file will be stored.
               -c,    --checksum         [Optional] Generate checksum [yes/no]. By default: no
-              -u,    --ui-revision      [Optional] Revision of the UI package. By default: 1
               -g,    --debug            [Optional] Set debug mode on [yes/no]. By default: no
               -h,    --help             [  Util  ] Show this help.
 
