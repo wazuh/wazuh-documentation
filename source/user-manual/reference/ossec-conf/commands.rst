@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about the command configuration section. Check out the options and a sample configuration in this section of our documentation.  
+  :description: In the command configuration section, a command is defined that will be used by one or more active responses. Check out the options here.  
   
 .. _reference_ossec_commands:
 
