@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Check out this section of our documentation if you are deploying Wazuh with Ansible, the open source platform designed for automating tasks.
+  
 .. _setup_ansible_hosts:
 
 Remote Hosts Connection
