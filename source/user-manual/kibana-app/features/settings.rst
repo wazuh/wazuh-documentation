@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: The Wazuh Kibana plugin gives you a quick view of your cluster, agents and alerts. Learn more about the Settings page in this section. This page allows you to configure and customize your Wazuh app experience. 
+  :description: The Wazuh Kibana plugin gives you a quick view of your agents, alerts, and cluster. Learn more about the Settings page in this section. 
   
 .. _kibana_settings:
 
