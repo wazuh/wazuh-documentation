@@ -46,9 +46,9 @@ Generating the virtual machine
           * ``dev``: The OVA uses pre-release packages.
 
 
-    #. Execute one of the following scripts depending on the preferred set of packages.
+    #. Execute one of the following commands depending on the preferred set of packages.
     
-        *  You can run the following command to create a virtual machine image installed using production packages.
+        *  You can run the following command to generate the virtual machine image using production packages.
 
             .. code-block:: console
 
