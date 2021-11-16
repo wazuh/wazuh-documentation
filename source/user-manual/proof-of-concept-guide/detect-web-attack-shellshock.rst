@@ -25,12 +25,12 @@ Configuration
             <location>/var/log/httpd/access_log</location>
         </localfile>
 
-Optionally, you can install Suricata in the RHEL 7 agent endpoint and configure it to monitor the endpoint's network traffic.
+Optionally, you can install Suricata on the RHEL 7 agent endpoint and configure it to monitor the endpoint's network traffic.
 
 Steps to generate the alerts
 ----------------------------
 
-#. Replace ``<your_web_server_address>`` with the appropriate value and execute the following command from a system external to your RHEL7 endpoint (the attacker).
+#. Replace ``<your_web_server_address>`` with the appropriate value and execute the following command from a system external to your RHEL 7 endpoint (the attacker).
 
     .. code-block:: console
 

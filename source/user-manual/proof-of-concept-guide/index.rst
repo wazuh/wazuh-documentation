@@ -12,7 +12,7 @@ The Proof of Concept (POC) guide explores how to set up the Wazuh environment to
 Prerequisites
 -------------
 
-You need to have these components already installed and to test the POCs. For this, we recommend downloading our ready-to-use :ref:`OVA <virtual_machine>` or launching an EC2 Instance with our :ref:`AMI <amazon-machine-images>` for an easy all-in-one, unattended installation. To test the different POCs, you might need a RHEL 7 agent, a Windows agent, or both, depending on the scenario. 
+You need to have these components already installed and to test the POCs. For this, we recommend downloading our ready-to-use :ref:`OVA <virtual_machine>` or launching an EC2 Instance with our :ref:`AMI <amazon-machine-images>` for an easy all-in-one, unattended installation. You might also need a RHEL 7 agent, a Windows agent, or both, depending on the scenario. 
 
   * Elasticsearch, Kibana, and Wazuh Kibana plugin
   * Wazuh manager and Filebeat (for integration with Elasticsearch)
