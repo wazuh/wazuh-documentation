@@ -2,6 +2,6 @@
 
 .. code-block:: console
 
-  # zypper install elasticsearch-7.11.2
+  # zypper install elasticsearch-7.12.1
 
 .. End of include file

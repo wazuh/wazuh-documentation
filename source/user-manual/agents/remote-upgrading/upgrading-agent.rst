@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Learn how to upgrade a Wazuh agent remotely using the command line or the RESTful API. 
+  :description: Upgrading an agent remotely can be performed at the command line and through the Wazuh API. Learn more about it in this section. 
 
 .. _upgrading-agent:
 
@@ -18,7 +18,7 @@ Upgrading an agent remotely can be performed at the command line and through the
 Using the command line
 ----------------------
 
-To upgrade agents using the command line, use the :doc:`agent_upgrade <../../reference/tools/agent_upgrade>` tool as follows:
+To upgrade agents using the command line, use the :doc:`agent_upgrade <../../reference/tools/agent-upgrade>` tool as follows:
 
 1. List all outdated agents using the *'-l'* parameter:
 
@@ -194,11 +194,11 @@ Using the RESTful API
             "affected_items": [
               {
                 "id": "002",
-                "version": "Wazuh v4.2.0"
+                "version": "Wazuh v4.2.5"
               },
               {
                 "id": "003",
-                "version": "Wazuh v4.2.0"
+                "version": "Wazuh v4.2.5"
               }
             ],
             "total_affected_items": 2,

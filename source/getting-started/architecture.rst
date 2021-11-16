@@ -66,7 +66,7 @@ For the communication of Wazuh components several services are used. Below is th
 +               + Elasticsearch +-----------+---------------+----------------------------------------------+
 | Elastic Stack |               | 9300-9400 | TCP           | Elasticsearch cluster communication          |
 +               +---------------+-----------+---------------+----------------------------------------------+
-|               | Kibana        | 5601      | TCP           | Kibana web interface                         |
+|               | Kibana        | 443       | TCP           | Kibana web interface                         |
 +---------------+---------------+-----------+---------------+----------------------------------------------+
 
 Archival data storage

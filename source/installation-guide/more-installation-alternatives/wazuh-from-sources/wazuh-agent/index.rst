@@ -1,6 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. meta:: :description: Wazuh agent sources installation
+.. meta::
+  :description: Learn more about how to install the Wazuh agent from sources. Wazuh can be installed on all major operating systems, including Linux, Windows, macOS, among others.
 
 .. _wazuh_agent_source_installation:
 
@@ -47,10 +48,10 @@ Installing Wazuh agent from sources
 
             .. code-block:: console
 
-              # yum install make gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool openssl-devel
+              # yum install make gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool openssl-devel cmake
               # rpm -i $(rpm --eval https://packages.wazuh.com/utils/libstdc%2B%2B/libstdc%2B%2B-static-8.4.1-1.el8.'%{_arch}'.rpm)
 
-            CMake 3.18 installation
+            **Optional** CMake 3.18 installation from sources
 
             .. code-block:: console
 

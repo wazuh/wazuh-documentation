@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Learn how to install Wazuh on a single host by using a script that will automatically detect whether the operating system uses rpm or deb packages.
+  
 Unattended installation
 =======================
 

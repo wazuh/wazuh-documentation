@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: You can list and see basic information about all registered agents by going to the Agents tab in the Wazuh app.
+  :description: You can list and see basic information about registered agents in the Agent tab. Learn more about listing agents using the Wazuh Kibana plugin in our documentation. 
 
 .. _wazuh-app:
 
