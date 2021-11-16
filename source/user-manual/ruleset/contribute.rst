@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Learn more about how to contribute to the ruleset in this section of our documentation. 
+  
 .. _ruleset_contribute:
 
 Contribute to the ruleset
