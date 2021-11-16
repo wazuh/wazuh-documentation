@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Check out this guide to learn how to deploy Wazuh with Ansible. Learn more about the Wazuh agent here. 
+
 .. _ansible-wazuh-agent:
 
 Wazuh Agent
