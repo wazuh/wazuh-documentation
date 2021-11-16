@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Check out more about the local configuration of Wazuh. In this section, you can learn more about the email options configured in the <global> section. 
+  :description: Check out more about the local configuration of Wazuh. You can learn more about the email options configured in the <global> section in this section. 
   
 .. _reference_ossec_email_alerts:
 
