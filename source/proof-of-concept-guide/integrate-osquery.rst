@@ -12,7 +12,7 @@ Configuration
 
 Configure your environment as follows to test the POC.
 
-#. Install Osquery on the monitored RHEL 7 endpoint.
+#. Install Osquery on the monitored CentOS 8 endpoint.
 
     .. code-block:: console
 
@@ -56,7 +56,7 @@ Configure your environment as follows to test the POC.
             }
         }
 
-#. Edit ``/var/ossec/etc/ossec.conf`` on the monitored RHEL 7 endpoint and enable the Osquery wodle. 
+#. Edit ``/var/ossec/etc/ossec.conf`` on the monitored CentOS 8 endpoint and enable the Osquery wodle. 
   
     .. code-block:: XML
 

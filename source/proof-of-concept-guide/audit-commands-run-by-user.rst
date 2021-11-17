@@ -8,7 +8,7 @@ Auditing commands run by a user
 
 In this POC, you create specific rules to alert about commands run by the user. To do this, you have to first enable Audit logging for it to capture and log execve system calls so the Wazuh agent can read these logs. 
 
-For more information on Linux auditd system, see the :ref:`Audit configuration guide <learning_wazuh_audit_commands>` section. In addition, `RHEL Audit documentation <https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/security_guide/chap-system_auditing>`_ has extended information about the Audit kernel subsystem.
+For more information on Linux auditd system, see the :ref:`Audit configuration guide <learning_wazuh_audit_commands>` section. In addition, `CentOS Audit documentation <https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/security_hardening/auditing-the-system_security-hardening>`_ has extended information about the Audit kernel subsystem.
 
 Configuration
 -------------

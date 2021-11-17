@@ -13,7 +13,7 @@ Configuration
 
 Configure your environment as follows to test the POC.
 
-#. Install Suricata (with version 5.0.4) on the RHEL 7 monitored endpoint. This requires EPEL repository that depends on your operating system version.
+#. Install Suricata (with version 5.0.4) on the CentOS 8 monitored endpoint. This requires EPEL repository that depends on your operating system version.
 
     .. code-block:: XML
 
@@ -50,7 +50,7 @@ Configure your environment as follows to test the POC.
         systemctl daemon-reload
         systemctl start suricata
 
-#. Configure the Wazuh agent to read Suricata logs file. The following settings need to be added to the ``/var/ossec/etc/ossec.conf`` file of the monitored RHEL 7 endpoint.
+#. Configure the Wazuh agent to read Suricata logs file. The following settings need to be added to the ``/var/ossec/etc/ossec.conf`` file of the monitored CentOS 8 endpoint.
 
     .. code-block:: XML
 
