@@ -12,7 +12,7 @@ Configuration
 
 Configure your environment as follows to test the POC.
 
-#. Add the following configuration block under the `<localfile>` section of the ``/var/ossec/etc/ossec.conf`` file at the monitored RHEL 7 endpoint. This is to periodically get a list of running processes.
+#. Add the following configuration block under the `<localfile>` section of the ``/var/ossec/etc/ossec.conf`` file at the monitored CentOS 8 endpoint. This is to periodically get a list of running processes.
 
     .. code-block:: XML
 
@@ -31,7 +31,7 @@ Configure your environment as follows to test the POC.
 
         # systemctl restart wazuh-agent
 
-#. Install Netcat and required dependencies on the RHEL 7 agent endpoint.
+#. Install Netcat and required dependencies on the CentOS 8 agent endpoint.
 
     .. code-block:: console
 
@@ -59,7 +59,7 @@ Configure your environment as follows to test the POC.
 Steps to generate alerts
 ------------------------
 
-#. Log in to the monitored RHEL 7 system and run ``nc -l 8000`` for 30 seconds.
+#. Log in to the monitored CentOS 8 system and run ``nc -l 8000`` for 30 seconds.
 
 Query the alerts
 ----------------
