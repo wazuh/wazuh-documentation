@@ -13,19 +13,19 @@ Configuration
 
 Configure your environment as follows to test the POC.
 
-#. Install Suricata (with version 5.0.4) on the RHEL 7 monitored endpoint. This requires EPEL repository that depends on your operating system version.
+#. Install Suricata (with version 5.0.4) on the CentOS 8 monitored endpoint. This requires EPEL repository that depends on your operating system version.
 
     .. code-block:: XML
 
         yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
-        yum -y install suricata-5.0.4
+        yum -y install suricata-5.0.7
 
 #. Download and extract Emerging rules.
 
     .. code-block:: console
 
         cd /tmp/
-        curl -LO https://rules.emergingthreats.net/open/suricata-5.0.4/emerging.rules.tar.gz
+        curl -LO https://rules.emergingthreats.net/open/suricata-5.0.7/emerging.rules.tar.gz
         tar -xvzf emerging.rules.tar.gz && mv rules/*.rules /etc/suricata/rules/
         chown suricata:suricata /etc/suricata/rules/*.rules
         chmod 640 /etc/suricata/rules/*.rules
@@ -50,7 +50,7 @@ Configure your environment as follows to test the POC.
         systemctl daemon-reload
         systemctl start suricata
 
-#. Configure the Wazuh agent to read Suricata logs file. The following settings need to be added to the ``/var/ossec/etc/ossec.conf`` file of the monitored RHEL 7 endpoint.
+#. Configure the Wazuh agent to read Suricata logs file. The following settings need to be added to the ``/var/ossec/etc/ossec.conf`` file of the monitored CentOS 8 endpoint.
 
     .. code-block:: XML
 
@@ -81,4 +81,9 @@ Related alerts can be found with:
 Affected endpoint
 -----------------
 
-- Linux RHEL 7
+- Linux CentOS 8
+
+Troubleshooting
+---------------
+
+* In case of getting errors concerning network interface in suricata log file /var/log/suricata/suricata.log. Don't forget to check the name of your network interface and configure accordingly, here ``/etc/sysconfig/suricata`` and here ``/etc/suricata/suricata.yaml``.

@@ -12,7 +12,7 @@ Configuration
 
 Configure your environment as follows to test the POC.
 
-#. Install Osquery on the monitored RHEL 7 endpoint.
+#. Install Osquery on the monitored CentOS 8 endpoint.
 
     .. code-block:: console
 
@@ -56,7 +56,7 @@ Configure your environment as follows to test the POC.
             }
         }
 
-#. Edit ``/var/ossec/etc/ossec.conf`` on the monitored RHEL 7 endpoint and enable the Osquery wodle. 
+#. Edit ``/var/ossec/etc/ossec.conf`` on the monitored CentOS 8 endpoint and enable the Osquery wodle. 
   
     .. code-block:: XML
 
@@ -71,7 +71,12 @@ Configure your environment as follows to test the POC.
             </wodle>
         </ossec_config>
 
-    There is no need to start `Osqueryd`. The Wazuh module runs the service when needed.
+#. Don't forget to start `Osqueryd` service: 
+
+    .. code-block:: console
+
+        # systemctl start osqueryd
+
 
 #. Restart the Wazuh agent to apply changes.
   
@@ -94,4 +99,4 @@ Related alerts can be found with:
 Affected endpoints
 ------------------
 
-* RHEL 7 agent host
+* CentOS 8 agent host

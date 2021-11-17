@@ -9,7 +9,8 @@ Amazon AWS infrastructure monitoring
 
 This POC shows how the Wazuh module for AWS (aws-s3) enables log data gathering from different AWS sources. 
 
-To learn more about monitoring AWS resources, see the `Using Wazuh to monitor AWS <amazon>`_ section of the documentation.
+To learn more about monitoring AWS resources, see the :ref:`Using Wazuh to monitor AWS <amazon>`  section of the documentation.
+
 
 Configuration
 -------------

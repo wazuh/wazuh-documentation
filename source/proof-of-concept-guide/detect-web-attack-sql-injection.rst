@@ -10,12 +10,12 @@ If Suricata integration is configured to monitor the endpoint's network traffic,
 Prerequisites
 -------------
 
-- You need an Apache server running on the monitored RHEL 7 agent system.
+- You need an Apache server running on the monitored CentOS 8 agent system.
 
 Configuration
 -------------
 
-#. Add the following lines to ``/var/ossec/etc/ossec.conf`` at the Wazuh RHEL 7 agent host. This sets the Linux agent to monitor the access logs of your Apache server.
+#. Add the following lines to ``/var/ossec/etc/ossec.conf`` at the Wazuh CentOS 8 agent host. This sets the Linux agent to monitor the access logs of your Apache server.
 
     .. code-block:: XML
 
@@ -24,16 +24,16 @@ Configuration
         <location>/var/log/httpd/access_log</location>
         </localfile>
 
-Optionally, you can install Suricata in the RHEL 7 agent endpoint and configure it to monitor the endpoint's network traffic.
+Optionally, you can install Suricata in the CentOS 8 agent endpoint and configure it to monitor the endpoint's network traffic.
 
 Steps to generate the alerts
 ----------------------------
 
-#. Replace ``<your_web_server_address>`` with the appropriate value and execute the following command from a system external to your RHEL7 endpoint (the attacker).
+#. Replace ``<your_web_server_address>`` with the appropriate value and execute the following command from a system external to your CentOS 8 endpoint (the attacker).
 
     .. code-block:: console
 
-        # curl -XGET "http://${replace_by_your_web_server_address}/?id=SELECT+*+FROM+users";
+        # curl -XGET "http://replace_by_your_web_server_address/?id=SELECT+*+FROM+users";
 
 Query the alerts
 ----------------
@@ -47,4 +47,4 @@ If you have Suricata monitoring the endpoint's traffic you can also query ``data
 Affected endpoints
 ------------------
 
-* RHEL 7 agent host
+* CentOS 8 agent host

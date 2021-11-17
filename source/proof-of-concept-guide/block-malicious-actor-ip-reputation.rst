@@ -13,11 +13,11 @@ In this POC you identify the monitored Windows endpoint IP address as a bad repu
 Prerequisites
 -------------
 
-- You need an Apache server running on the monitored RHEL 7 agent system.
+- You need an Apache server running on the monitored CentOS 8 agent system.
 
-- Configure the Wazuh RHEL 7 agent host to monitor the Apache access logs in the ``/var/ossec/etc/ossec.conf`` configuration file.
+- Configure the Wazuh CentOS 8 agent host to monitor the Apache access logs in the ``/var/ossec/etc/ossec.conf`` configuration file.
 
-    .. code-block:: none
+    .. code-block:: XML
 
         <localfile>
         <log_format>apache</log_format>
@@ -123,7 +123,7 @@ Steps to generate the alerts
 
 #. Log in to the attacker's system (the monitored Windows endpoint).
 
-#. Connect to the victim's system (the Apache server in the monitored RHEL 7 endpoint) from a web browser. 
+#. Connect to the victim's system (the Apache server in the monitored CentOS 8 endpoint) from a web browser. 
 
     The custom firewall rule will temporarily block any connection from the attacker system for 60 seconds.
 
@@ -137,4 +137,14 @@ Related alerts can be found with:
 Affected endpoints
 ------------------
 
-* RHEL 7 agent host
+* CentOS 8 agent host
+
+
+Troubleshooting
+----------------
+
+* In case of Python command not working during step 4, create a symbolic link to solve the issue.
+
+    .. code-block:: console
+        
+        # ln -s /usr/bin/python3 /usr/bin/python

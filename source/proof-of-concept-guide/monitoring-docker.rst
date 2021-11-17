@@ -45,6 +45,7 @@ Steps to generate the alerts
         # docker run -d -P --name nginx_container nginx
         # docker exec -ti nginx_container cat /etc/passwd
         # docker exec -ti nginx_container /bin/bash
+        # exit
         # docker stop nginx_container
         # docker rm nginx_container
 
@@ -59,4 +60,28 @@ Related alerts can be found with:
 Affected endpoints
 ------------------
 
-* RHEL 7 agent host
+* CentOS 8 agent host
+
+Troubleshooting
+---------------
+
+* In case of getting the following error in the agent log file ``/var/ossec/logs/ossec.log``: 
+
+    ``wazuh-modulesd:docker-listener: ERROR: /usr/bin/env: ‘python’: No such file or directory`` 
+
+    This can be solved by creating a symbolic link.
+
+        .. code-block:: console
+            
+            # ln -s /usr/bin/python3 /usr/bin/python
+
+* In case of getting the following error in the agent log file ``/var/ossec/logs/ossec.log``: 
+
+    ``wazuh-modulesd:docker-listener: ERROR: 'docker' module needs to be installed. Execute 'pip install docker' to do it.`` 
+
+    This can be solved by running the following command.
+        
+        .. code-block:: console
+            
+            # pip3 install docker
+

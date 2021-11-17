@@ -37,7 +37,7 @@ Steps to generate the alerts
   
         .. code-block:: console
 
-            # hydra -l Administrator -p wrong_password <username@win.agent.endpoint> rdp
+            # hydra -l Administrator -p wrong_password <win.agent.endpoint> rdp
 
 
 Query the alerts
@@ -51,5 +51,5 @@ Related alerts can be found with:
 Affected endpoints
 ------------------
 
-- RHEL 7 agent host
+- CentOS 8 agent host
 - Windows agent host
