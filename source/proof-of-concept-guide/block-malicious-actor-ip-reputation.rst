@@ -15,9 +15,9 @@ Prerequisites
 
 - You need an Apache server running on the monitored RHEL 7 agent system.
 
-- Configure the Wazuh RHEL 7 agent host to monitor the Apache access logs in the ``/var/ossec/etc/ossec.conf`` configuration file.
+- Configure the Wazuh CentOS 8 agent host to monitor the Apache access logs in the ``/var/ossec/etc/ossec.conf`` configuration file.
 
-    .. code-block:: none
+    .. code-block:: XML
 
         <localfile>
         <log_format>apache</log_format>
@@ -137,4 +137,12 @@ Related alerts can be found with:
 Affected endpoints
 ------------------
 
-* RHEL 7 agent host
+* CentOS 8 agent host
+
+
+Troubleshooting
+----------------
+
+* In case of python command not working during step 4, this can be solved by creating a symbolic link:
+
+         # ln -s /usr/bin/python3 /usr/bin/python

@@ -71,4 +71,4 @@ Related alerts can be found with:
 Affected endpoints
 ------------------
 
-- RHEL 7 agent host
+- CentOS 8 agent host

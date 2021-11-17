@@ -18,14 +18,14 @@ Configure your environment as follows to test the POC.
     .. code-block:: XML
 
         yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
-        yum -y install suricata-5.0.4
+        yum -y install suricata-5.0.7
 
 #. Download and extract Emerging rules.
 
     .. code-block:: console
 
         cd /tmp/
-        curl -LO https://rules.emergingthreats.net/open/suricata-5.0.4/emerging.rules.tar.gz
+        curl -LO https://rules.emergingthreats.net/open/suricata-5.0.7/emerging.rules.tar.gz
         tar -xvzf emerging.rules.tar.gz && mv rules/*.rules /etc/suricata/rules/
         chown suricata:suricata /etc/suricata/rules/*.rules
         chmod 640 /etc/suricata/rules/*.rules
@@ -81,4 +81,9 @@ Related alerts can be found with:
 Affected endpoint
 -----------------
 
-- Linux RHEL 7
+- Linux CentOS 8
+
+Troubleshooting
+---------------
+
+* In case of getting errors concerning network interface in suricata log file /var/log/suricata/suricata.log. Don't forget to check the name of your network interface and configure accordingly, here ``/etc/sysconfig/suricata`` and here ``/etc/suricata/suricata.yaml``.

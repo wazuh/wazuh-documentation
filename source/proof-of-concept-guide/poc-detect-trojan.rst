@@ -10,7 +10,7 @@ Configuration
 
 Configure your environment as follows to test the POC.
 
-No additional configuration is required since trojan detection is configured out-of-the-box. Check your configuration in the ``/var/ossec/etc/ossec.conf`` file at the RHEL 7 monitored endpoint.
+No additional configuration is required since trojan detection is configured out-of-the-box. Check your configuration in the ``/var/ossec/etc/ossec.conf`` file at the CentOS 8 monitored endpoint.
 
     .. code-block:: none
 
@@ -63,4 +63,4 @@ Related alerts can be found with the following query once the next rootcheck sca
 Affected endpoints
 ------------------
 
-* RHEL 7 agent host
+* CentOS 8 agent host

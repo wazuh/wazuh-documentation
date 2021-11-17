@@ -15,9 +15,9 @@ Configuration
 
 Configure your environment as follows to test the POC.
 
-#. Run ``systemctl status auditd.service`` to check that the Linux Auditing System is installed and running on your RHEL7 agent endpoint.
+#. Run ``systemctl status auditd.service`` to check that the Linux Auditing System is installed and running on your CentOS 8 agent endpoint.
 
-#. Check that ``/var/ossec/etc/ossec.conf`` in your RHEL7 agent endpoint is configured for the agent to read the ``audit.log`` file. This configuration is included by default.
+#. Check that ``/var/ossec/etc/ossec.conf`` in your CentOS 8 agent endpoint is configured for the agent to read the ``audit.log`` file. This configuration is included by default.
 
    .. code-block:: XML
 
@@ -26,7 +26,7 @@ Configure your environment as follows to test the POC.
         <location>/var/log/audit/audit.log</location>
       </localfile>
 
-#. Get your current euid in the RHEL 7 agent endpoint. This is needed to monitor the actions of your user. Root user monitoring is not recommended for this test, as it can be quite noisy.
+#. Get your current euid in the CentOS 8 agent endpoint. This is needed to monitor the actions of your user. Root user monitoring is not recommended for this test, as it can be quite noisy.
 
     .. code-block:: console
 
@@ -36,8 +36,8 @@ Configure your environment as follows to test the POC.
 
     .. code-block:: XML
 
-       -a exit,always -F euid=${<your_user_id>} -F arch=b32 -S execve -k audit-wazuh-c
-       -a exit,always -F euid=${<your_user_id>} -F arch=b64 -S execve -k audit-wazuh-c
+       -a exit,always -F euid=your_user_id -F arch=b32 -S execve -k audit-wazuh-c
+       -a exit,always -F euid=your_user_id -F arch=b64 -S execve -k audit-wazuh-c
 
 #. Optionally, you can delete old rules.
 
@@ -55,7 +55,7 @@ Configure your environment as follows to test the POC.
 Steps to generate the alerts
 ----------------------------
 
-#. Log in to the RHEL 7 agent endpoint as the monitored user.
+#. Log in to the CentOS 8 agent endpoint as the monitored user.
 
 #. Execute a ping to *www.google.com*
 
@@ -69,4 +69,4 @@ Related alerts can be found with:
 Affected endpoints
 ------------------
 
-* RHEL 7 agent host
+* CentOS 8 agent host

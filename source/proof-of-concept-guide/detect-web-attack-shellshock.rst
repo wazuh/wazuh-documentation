@@ -11,12 +11,12 @@ In addition, for further detection, the attack can also be detected at a network
 Prerequisites
 -------------
 
-- You need an Apache server running on the monitored RHEL 7 agent system.
+- You need an Apache server running on the monitored CentOS 8 agent system.
 
 Configuration
 -------------
 
-#. Add the following lines to the ``/var/ossec/etc/ossec.conf`` configuration file at the Wazuh RHEL 7 agent host. This sets the Linux agent to monitor the access logs of your Apache server.
+#. Add the following lines to the ``/var/ossec/etc/ossec.conf`` configuration file at the Wazuh CentOS 8 agent host. This sets the Linux agent to monitor the access logs of your Apache server.
 
     .. code-block:: XML
 
@@ -25,12 +25,12 @@ Configuration
             <location>/var/log/httpd/access_log</location>
         </localfile>
 
-Optionally, you can install Suricata on the RHEL 7 agent endpoint and configure it to monitor the endpoint's network traffic.
+Optionally, you can install Suricata on the CentOS 8 agent endpoint and configure it to monitor the endpoint's network traffic.
 
 Steps to generate the alerts
 ----------------------------
 
-#. Replace ``<your_web_server_address>`` with the appropriate value and execute the following command from a system external to your RHEL 7 endpoint (the attacker).
+#. Replace ``<your_web_server_address>`` with the appropriate value and execute the following command from a system external to your CentOS 8 endpoint (the attacker).
 
     .. code-block:: console
 
@@ -48,4 +48,4 @@ Related alerts, based on the web server log analysis, can be found with:
 Affected endpoints
 ------------------
 
--  RHEL 7 agent host
+-  CentOS 8 agent host

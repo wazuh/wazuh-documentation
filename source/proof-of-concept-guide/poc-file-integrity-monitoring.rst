@@ -15,19 +15,23 @@ Configure your environment as follows to test the POC.
 #. Edit ``/var/ossec/etc/ossec.conf`` in the monitored RHEL 7 endpoint and enable `whodata` by adding ``whodata="yes"`` to the monitored directories. 
 
     .. code-block:: XML
-
+        
+        <syscheck>
         <directories check_all="yes" whodata="yes">/usr/bin,/usr/sbin</directories>
         <directories check_all="yes" whodata="yes">/bin,/sbin,/boot</directories>
         <directories check_all="yes" report_changes="yes" whodata="yes" tags="cron">/etc/cron*</directories>
         <directories check_all="yes" report_changes="yes" whodata="yes" recursion_level="2">/home,/root</directories>
+        </syscheck>
 
 #. Edit ``C:\Program Files (x86)\ossec-agent\ossec.conf`` in the monitored Windows endpoint and add directories for monitoring including the ``whodata="yes"`` switch.
 
     .. code-block:: XML
         
+        <syscheck>
         <scan_on_start>yes</scan_on_start>
         <directories check_all="yes" report_changes="yes" whodata="yes">C:\\Users\\Administrator\\Desktop</directories>
         <directories check_all="yes" report_changes="yes" whodata="yes">C:\\Wazuh</directories>
+        </syscheck>
 
 As an alternative to local configurations, you can :ref:`centrally configure group of agents <reference_agent_conf>`.
 
@@ -46,5 +50,5 @@ Related alerts can be found with:
 Affected endpoints
 ------------------
 
-- RHEL 7 agent host
+- CentOS 8 agent host
 - Windows agent host
