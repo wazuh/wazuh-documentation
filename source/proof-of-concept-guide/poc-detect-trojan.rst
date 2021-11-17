@@ -1,9 +1,12 @@
+.. meta::
+  :description: Wazuh provides you with powerful anomaly and malware detection capabilities to detect trojaned system binaries by using signatures. Learn more about this in this POC.
+
 .. _poc_trojan_detection:
 
-Detecting suspicious binaries - Trojan
-======================================
+Detecting suspicious binaries
+=============================
 
-With Wazuh anomaly and malware detection capabilities, you can detect trojaned system binaries by using signatures in the ``/var/ossec/etc/shared/rootkit_trojans.txt`` file. 
+Wazuh provides you with powerful anomaly and malware detection capabilities capable of detecting suspicious binaries. In this POC, you detect trojaned system binaries by using signatures in the ``/var/ossec/etc/shared/rootkit_trojans.txt`` file. 
 
 Configuration
 -------------
@@ -63,4 +66,4 @@ Related alerts can be found with the following query once the next rootcheck sca
 Affected endpoints
 ------------------
 
-* CentOS 8 agent host
+* CentOS 8 endpoint

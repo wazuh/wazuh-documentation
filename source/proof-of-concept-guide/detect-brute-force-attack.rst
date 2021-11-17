@@ -9,6 +9,9 @@ Detecting a brute-force attack
 
 Brute forcing SSH (on Linux) or RDP (on Windows) are common attack vectors. Wazuh provides out-of-the-box rules capable of identifying brute-force attacks by correlating multiple authentication failure events.
 
+To see an example use case where you configure an active response to block the IP of an attacker, check the :ref:`Blocking attacks with Active Response <blocking_attacks_active_response>` section of the documentation.
+
+
 Configuration
 -------------
 
@@ -51,5 +54,5 @@ Related alerts can be found with:
 Affected endpoints
 ------------------
 
-- CentOS 8 agent host
-- Windows agent host
+- CentOS 8 endpoint
+- Windows endpoint

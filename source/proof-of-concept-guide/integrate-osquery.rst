@@ -1,3 +1,7 @@
+.. meta::
+  :description: Wazuh agent can be integrated with Osquery, making it easy to capture additional information from the endpoint. Learn more about this in this POC.
+
+
 .. _poc_integrate_osquery:
 
 Osquery integration
@@ -99,4 +103,4 @@ Related alerts can be found with:
 Affected endpoints
 ------------------
 
-* CentOS 8 agent host
+* CentOS 8 endpoint

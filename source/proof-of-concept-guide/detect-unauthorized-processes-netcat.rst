@@ -1,7 +1,11 @@
+
+.. meta::
+  :description: This POC shows how Wazuh is capable of detecting if Netcat is running on a monitored host. Learn more about this in this section of the documentation.
+
 .. _poc_detect_unauthorized_process_netcat:
 
-Detecting unauthorized processes - Netcat
-=========================================
+Detecting unauthorized processes
+================================
 
 This POC shows how Wazuh is capable of detecting if Netcat is running on a monitored host.
 
@@ -31,7 +35,7 @@ Configure your environment as follows to test the POC.
 
         # systemctl restart wazuh-agent
 
-#. Install Netcat and required dependencies on the CentOS 8 agent endpoint.
+#. Install Netcat and required dependencies on the CentOS 8 endpoint.
 
     .. code-block:: console
 
@@ -59,7 +63,7 @@ Configure your environment as follows to test the POC.
 Steps to generate alerts
 ------------------------
 
-#. Log in to the monitored CentOS 8 system and run ``nc -l 8000`` for 30 seconds.
+#. Log into the monitored CentOS 8 system and run ``nc -l 8000`` for 30 seconds.
 
 Query the alerts
 ----------------
@@ -71,4 +75,4 @@ Related alerts can be found with:
 Affected endpoints
 ------------------
 
-- CentOS 8 agent host
+- CentOS 8 endpoint

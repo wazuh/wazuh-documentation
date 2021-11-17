@@ -1,11 +1,15 @@
+.. meta::
+  :description: The Wazuh module for Docker can be used to identify security incidents across containers, alerting in real time. Learn more about this in this POC.
+
+
 .. _poc_monitoring_docker:
 
 Monitoring Docker
 =================
 
-The Wazuh module for Docker can be used to identify security incidents across containers, alerting in real-time. It acts as a subscriber to the Docker Engine API.
+The Wazuh module for Docker can be used to identify security incidents across containers, alerting in real time. It acts as a subscriber to the Docker Engine API.
 
-Learn more about monitoring Docker and the Docker wodle, see the :ref:`Monitoring containers activity <docker-monitor-index>` section of the documentation.
+Learn more about monitoring Docker and the Docker wodle, see the :ref:`Monitoring container activity <docker-monitor-index>` section of the documentation.
 
 
 Configuration
@@ -13,7 +17,7 @@ Configuration
 
 Configure your environment as follows to test the POC.
 
-#. Configure the Docker listener in the ``/var/ossec/etc/ossec.conf`` configuration file at the CentOS 8 Agent endpoint.
+#. Configure the Docker listener in the ``/var/ossec/etc/ossec.conf`` configuration file at the CentOS 8 endpoint.
 
     .. code-block:: XML
 
@@ -60,7 +64,7 @@ Related alerts can be found with:
 Affected endpoints
 ------------------
 
-* CentOS 8 agent host
+* CentOS 8 endpoint
 
 Troubleshooting
 ---------------
