@@ -31,6 +31,9 @@ Generating the virtual machine
 
         $ ./generate_ova.sh -h
 
+      .. code-block:: none
+        :class: output
+      
         General usage: ./generate_ova.sh [OPTIONS]
           -r,    --repository       [Optional] Select the software repository [prod/dev]. By default: prod
           -s,    --store <path>     [Optional] Set the destination absolute path where the OVA file will be stored.
@@ -38,7 +41,7 @@ Generating the virtual machine
           -g,    --debug            [Optional] Set debug mode on [yes/no]. By default: no
           -h,    --help             [  Util  ] Show this help.
 
-      The ``--repository`` option indicates whether to use the production or the development packages to install Wazuh.
+      The ``--repository`` option indicates whether to use production or development packages to install Wazuh.
 
       * ``prod``: The OVA uses release packages.
       * ``dev``: The OVA uses pre-release packages.
