@@ -16,7 +16,7 @@ Configuration
 
 Configure your environment as follows to test the POC.
 
-#. Add the following configuration block under the `<localfile>` section of the ``/var/ossec/etc/ossec.conf`` file at the monitored CentOS 8 endpoint. This is to periodically get a list of running processes.
+#. Add the following configuration block under the ``<localfile>`` section of the ``/var/ossec/etc/ossec.conf`` file at the monitored CentOS 8 endpoint. This is to periodically get a list of running processes.
 
     .. code-block:: XML
 

@@ -75,7 +75,7 @@ Configure your environment as follows to test the POC.
             </wodle>
         </ossec_config>
 
-#. Don't forget to start `Osqueryd` service: 
+#. Start Osqueryd service. 
 
     .. code-block:: console
 
