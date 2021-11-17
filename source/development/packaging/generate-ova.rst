@@ -25,38 +25,36 @@ Generating the virtual machine
 
       $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/ova && git checkout v|WAZUH_LATEST|
 
-#. To generate the virtual machine, check the available options for the script and choose your preferred set of packages to install Wazuh.
+#. Check the full list of available options for the ``generate_ova.sh`` script using the ``-h`` parameter.
 
-    #. Execute the ``generate_ova.sh`` script using ``-h`` option to see a list of available options.
+      .. code-block:: console
 
-          .. code-block:: console
+        $ ./generate_ova.sh -h
 
-            $ ./generate_ova.sh -h
+        General usage: ./generate_ova.sh [OPTIONS]
+          -r,    --repository       [Optional] Select the software repository [prod/dev]. By default: prod
+          -s,    --store <path>     [Optional] Set the destination absolute path where the OVA file will be stored.
+          -c,    --checksum         [Optional] Generate checksum [yes/no]. By default: no
+          -g,    --debug            [Optional] Set debug mode on [yes/no]. By default: no
+          -h,    --help             [  Util  ] Show this help.
 
-            General usage: ./generate_ova.sh [OPTIONS]
-              -r,    --repository       [Optional] Select the software repository [prod/dev]. By default: prod
-              -s,    --store <path>     [Optional] Set the destination absolute path where the OVA file will be stored.
-              -c,    --checksum         [Optional] Generate checksum [yes/no]. By default: no
-              -g,    --debug            [Optional] Set debug mode on [yes/no]. By default: no
-              -h,    --help             [  Util  ] Show this help.
+      The ``--repository`` option indicates whether to use the production or the development packages to install Wazuh.
 
-          The ``--repository`` option indicates whether to use the production or the development packages to install Wazuh.
-
-          * ``prod``: The OVA uses release packages.
-          * ``dev``: The OVA uses pre-release packages.
+      * ``prod``: The OVA uses release packages.
+      * ``dev``: The OVA uses pre-release packages.
 
 
-    #. Execute one of the following commands depending on the preferred set of packages to generate the virtual machine image.
-    
-        * Using production packages.
+#. Run one of the following commands depending on your choice of a set of packages to generate the virtual machine image.
 
-            .. code-block:: console
+    * Using production packages.
 
-              # ./generate_ova.sh
+        .. code-block:: console
 
-   
-         * Using development packages.
+          # ./generate_ova.sh
 
-             .. code-block:: console
 
-               # ./generate_ova.sh -r dev
+     * Using development packages.
+
+         .. code-block:: console
+
+           # ./generate_ova.sh -r dev
