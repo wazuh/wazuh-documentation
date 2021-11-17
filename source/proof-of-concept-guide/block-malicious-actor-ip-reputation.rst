@@ -143,6 +143,8 @@ Affected endpoints
 Troubleshooting
 ----------------
 
-* In case of python command not working during step 4, this can be solved by creating a symbolic link:
+* In case of Python command not working during step 4, create a symbolic link to solve the issue.
 
-         # ln -s /usr/bin/python3 /usr/bin/python
+    .. code-block:: console
+        
+        # ln -s /usr/bin/python3 /usr/bin/python

@@ -65,19 +65,23 @@ Affected endpoints
 Troubleshooting
 ---------------
 
-* In case of getting the following error in the agent log file /var/ossec/logs/ossec.log: 
+* In case of getting the following error in the agent log file ``/var/ossec/logs/ossec.log``: 
 
-``wazuh-modulesd:docker-listener: ERROR: /usr/bin/env: ‘python’: No such file or directory`` 
+    ``wazuh-modulesd:docker-listener: ERROR: /usr/bin/env: ‘python’: No such file or directory`` 
 
-This can be solved by creating a symbolic link:
+    This can be solved by creating a symbolic link.
 
-         # ln -s /usr/bin/python3 /usr/bin/python
+        .. code-block:: console
+            
+            # ln -s /usr/bin/python3 /usr/bin/python
 
-* In case of getting the following error in the agent log file /var/ossec/logs/ossec.log: 
+* In case of getting the following error in the agent log file ``/var/ossec/logs/ossec.log``: 
 
-``wazuh-modulesd:docker-listener: ERROR: 'docker' module needs to be installed. Execute 'pip install docker' to do it.`` 
+    ``wazuh-modulesd:docker-listener: ERROR: 'docker' module needs to be installed. Execute 'pip install docker' to do it.`` 
 
-This can be solved by running the follwing command:
-     
-         # pip3 install docker
+    This can be solved by running the following command.
+        
+        .. code-block:: console
+            
+            # pip3 install docker
 
