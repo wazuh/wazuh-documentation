@@ -95,13 +95,7 @@ The **xml labels** used to configure ``rules`` are listed here.
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `same_id`_              | None.                                                         | The decoded ``id`` must be the same.                                                                 |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `not_same_id`_          | None.                                                         | The decoded ``id`` must be different.                                                                |
-+-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `different_id`_         | None.                                                         | The decoded ``id`` must be different.                                                                |
-+-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `same_source_ip`_       | None.                                                         | The decoded ``srcip`` must be the same.                                                              |
-+-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `not_same_source_ip`_   | None.                                                         | The decoded ``srcip`` must be different.                                                             |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `same_srcip`_           | None.                                                         | The decoded ``srcip`` must be the same.                                                              |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
@@ -129,15 +123,11 @@ The **xml labels** used to configure ``rules`` are listed here.
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `same_user`_            | None.                                                         | The decoded ``user`` must be the same.                                                               |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `not_same_user`_        | None.                                                         | The decoded ``user`` must be different.                                                              |
-+-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `different_user`_       | None.                                                         | The decoded ``user`` must be different.                                                              |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `not_same_agent`_       | None.                                                         | The decoded ``agent`` must be different.                                                             |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `same_field`_           | None.                                                         | The decoded ``field`` must be the same as the previous ones.                                         |
-+-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `not_same_field`_       | None.                                                         | The decoded ``field`` must be different than the previous ones.                                      |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `different_field`_      | None.                                                         | The decoded ``field`` must be different than the previous ones.                                      |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
@@ -1408,18 +1398,6 @@ This option is used in conjunction with ``frequency`` and ``timeframe``.
 | **Example of use** | <same_id />        |
 +--------------------+--------------------+
 
-not_same_id
-^^^^^^^^^^^
-
-.. deprecated:: 3.13.0 Use `different_id`_ instead.
-
-Specifies that the decoded id must be different.
-This option is used in conjunction with ``frequency`` and ``timeframe``.
-
-+--------------------+--------------------+
-| **Example of use** | <not_same_id />    |
-+--------------------+--------------------+
-
 different_id
 ^^^^^^^^^^^^
 
@@ -1429,30 +1407,6 @@ This option is used in conjunction with ``frequency`` and ``timeframe``.
 +--------------------+-------------------+
 | **Example of use** | <different_id />  |
 +--------------------+-------------------+
-
-same_source_ip
-^^^^^^^^^^^^^^
-
-.. deprecated:: 3.13.0 Use `same_srcip`_ instead.
-
-Specifies that the decoded source ip must be the same.
-This option is used in conjunction with ``frequency`` and ``timeframe``.
-
-+--------------------+--------------------+
-| **Example of use** | <same_source_ip /> |
-+--------------------+--------------------+
-
-not_same_source_ip
-^^^^^^^^^^^^^^^^^^
-
-Specifies that the decoded source ip must be different.
-This option is used in conjunction with ``frequency`` and ``timeframe``.
-
-.. deprecated:: 3.13.0 Use `different_srcip`_ instead.
-
-+--------------------+------------------------+
-| **Example of use** | <not_same_source_ip /> |
-+--------------------+------------------------+
 
 same_srcip
 ^^^^^^^^^^
@@ -1584,18 +1538,6 @@ This option is used in conjunction with ``frequency`` and ``timeframe``.
 | **Example of use** | <same_user />      |
 +--------------------+--------------------+
 
-not_same_user
-^^^^^^^^^^^^^
-
-.. deprecated:: 3.13.0 Use `different_user`_ instead.
-
-Specifies that the decoded user must be different.
-This option is used in conjunction with ``frequency`` and ``timeframe``.
-
-+--------------------+--------------------+
-| **Example of use** | <not_same_user />  |
-+--------------------+--------------------+
-
 different_user
 ^^^^^^^^^^^^^^
 
@@ -1690,83 +1632,6 @@ The last event will fire rule 100002 instead of 100001 because it found the valu
     "data": {
       "key": "value",
       "key2": "AAAA"
-    },
-    "location": "/root/test.log"
-  }
-
-not_same_field
-^^^^^^^^^^^^^^
-
-.. deprecated:: 3.13.0 Use `different_field`_ instead.
-
-It is the opposite setting of ``same_field``. The value of the dynamic field specified in this option must be different than the ones found in previous events a ``frequency`` number of times within the required ``timeframe``.
-
-+--------------------+----------------------------------------+
-| **Example of use** | <not_same_field>key2</not_same_field>  |
-+--------------------+----------------------------------------+
-
-As an example of this option, check these rules:
-
-.. code-block:: xml
-
-  <!-- {"key":"value", "key2":"AAAA"} -->
-  <rule id="100001" level="3">
-    <decoded_as>json</decoded_as>
-    <field name="key">value</field>
-    <description>Testing JSON alert</description>
-  </rule>
-
-  <rule id="100002" level="10" frequency="4" timeframe="300">
-    <if_matched_sid>100001</if_matched_sid>
-    <not_same_field>key2</not_same_field>
-    <description>Testing not_same_field option</description>
-  </rule>
-
-Rule 100002 will fire when ``key2`` in the currently considered event has a different value that the same field in four previous events that matched rule 100001 before within the last 300 seconds. Therefore, for the following events sequence:
-
-.. code-block:: json
-  :emphasize-lines: 4
-
-  {"key":"value", "key2":"AAAA"}
-  {"key":"value", "key2":"AAAA"}
-  {"key":"value", "key2":"BBBB"}
-  {"key":"value", "key2":"CCCC"}
-
-The last event will fire rule 100002 instead of 100001 due to the value ``CCCC`` does not appear in three previous events. The corresponding alert looks like this one:
-
-.. code-block:: json
-  :emphasize-lines: 5
-  :class: output
-
-  {
-    "timestamp": "2020-03-04T03:02:21.973-0800",
-    "rule": {
-      "level": 10,
-      "description": "Testing not_same_field option",
-      "id": "100002",
-      "frequency": 4,
-      "firedtimes": 1,
-      "mail": false,
-      "groups": [
-        "local"
-      ]
-    },
-    "agent": {
-      "id": "000",
-      "name": "ubuntu"
-    },
-    "manager": {
-      "name": "ubuntu"
-    },
-    "id": "1583319633.14426",
-    "previous_output": "{\"key\":\"value\",\"key2\":\"BBBB\"}\n{\"key\":\"value\",\"key2\":\"AAAA\"}\n{\"key\":\"value\",\"key2\":\"AAAA\"}",
-    "full_log": "{\"key\":\"value\",\"key2\":\"CCCC\"}",
-    "decoder": {
-      "name": "json"
-    },
-    "data": {
-      "key": "value",
-      "key2": "CCCC"
     },
     "location": "/root/test.log"
   }
