@@ -13,7 +13,7 @@ Configuration
 
 Configure your environment as follows to test the POC.
 
-#. Configure the Docker listener in the ``/var/ossec/etc/ossec.conf`` configuration file at the RHEL 7 Agent endpoint.
+#. Configure the Docker listener in the ``/var/ossec/etc/ossec.conf`` configuration file at the CentOS 8 Agent endpoint.
 
     .. code-block:: XML
 

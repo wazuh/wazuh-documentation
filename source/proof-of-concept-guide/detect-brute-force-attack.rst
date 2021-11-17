@@ -25,13 +25,13 @@ Configure your environment as follows to test the POC.
 Steps to generate the alerts
 ----------------------------
 
-#. Replace ``<username@rhel.agent.endpoint>`` for Linux and ``<username@win.agent.endpoint>`` for Windows with the appropriate destination in the following commands and run multiple failed authentication failure attempts against the monitored endpoints.
+#. Replace ``<username@centos.agent.endpoint>`` for Linux and ``<username@win.agent.endpoint>`` for Windows with the appropriate destination in the following commands and run multiple failed authentication failure attempts against the monitored endpoints.
 
     - For the monitored Linux endpoint:
 
         .. code-block:: console
 
-            # for i in `seq 1 10`; do sshpass -p 'wrong_password' ssh -o StrictHostKeyChecking=no <username@rhel.agent.endpoint>; done
+            # for i in `seq 1 10`; do sshpass -p 'wrong_password' ssh -o StrictHostKeyChecking=no <username@centos.agent.endpoint>; done
 
     - For the monitored Windows endpoint:
   
