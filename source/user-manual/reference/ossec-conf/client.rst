@@ -25,8 +25,6 @@ Subsections
 server
 ^^^^^^
 
-.. versionadded:: 3.0.0
-
 Configures the connection parameters for each server an agent connects to.
 
 Server subsection options
@@ -82,8 +80,6 @@ Specifies the protocol to use when connecting to the manager.
 max_retries
 ^^^^^^^^^^^
 
-.. versionadded:: 3.13.1
-
 Number of connection retries.
 
 +--------------------+--------------------+
@@ -96,8 +92,6 @@ Number of connection retries.
 
 retry_interval
 ^^^^^^^^^^^^^^
-
-.. versionadded:: 3.13.1
 
 Time interval between connection attempts (seconds).
 
@@ -294,8 +288,6 @@ Toggles on and off the automatic restart of agents when a new valid configuratio
 
 crypto_method
 ^^^^^^^^^^^^^
-
-.. versionadded:: 3.5.0
 
 Choose the encryption of the messages that the agent sends to the manager.
 

@@ -5,8 +5,6 @@
 gcp-pubsub
 ==========
 
-.. versionadded:: 3.13.0
-
 .. topic:: XML section name
 
 	.. code-block:: xml

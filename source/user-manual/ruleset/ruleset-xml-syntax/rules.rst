@@ -1023,8 +1023,6 @@ If ``url`` label is declared multiple times within the rule, the following rules
 location
 ^^^^^^^^
 
-.. versionadded:: 3.5.0
-
 Used as a requisite to trigger the rule. It will check the content of the field location and trying to find a match.
 
 +--------------------+---------------------------------------------------------------+
@@ -1428,8 +1426,6 @@ different_id
 Specifies that the decoded id must be different.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
 
-.. versionadded:: 3.13.0
-
 +--------------------+-------------------+
 | **Example of use** | <different_id />  |
 +--------------------+-------------------+
@@ -1464,8 +1460,6 @@ same_srcip
 Specifies that the decoded source ip must be the same.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
 
-.. versionadded:: 3.13.0
-
 +--------------------+----------------+
 | **Example of use** | <same_srcip /> |
 +--------------------+----------------+
@@ -1475,8 +1469,6 @@ different_srcip
 
 Specifies that the decoded source ip must be different.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
-
-.. versionadded:: 3.13.0
 
 +--------------------+----------------------+
 | **Example of use** | <different_srcip />  |
@@ -1488,8 +1480,6 @@ same_dstip
 Specifies that the decoded destination ip must be the same.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
 
-.. versionadded:: 3.13.0
-
 +--------------------+----------------+
 | **Example of use** | <same_dstip /> |
 +--------------------+----------------+
@@ -1499,8 +1489,6 @@ different_dstip
 
 Specifies that the decoded destination ip must be different.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
-
-.. versionadded:: 3.13.0
 
 +--------------------+----------------------+
 | **Example of use** | <different_dstip />  |
@@ -1522,8 +1510,6 @@ different_srcport
 Specifies that the decoded source port must be different.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
 
-.. versionadded:: 3.13.0
-
 +--------------------+------------------------+
 | **Example of use** | <different_srcport />  |
 +--------------------+------------------------+
@@ -1543,8 +1529,6 @@ different_dstport
 
 Specifies that the decoded destination port must be different.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
-
-.. versionadded:: 3.13.0
 
 +--------------------+------------------------+
 | **Example of use** | <different_dstport />  |
@@ -1566,8 +1550,6 @@ different_location
 Specifies that the decoded location must be different.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
 
-.. versionadded:: 3.13.0
-
 +--------------------+-------------------------+
 | **Example of use** | <different_location />  |
 +--------------------+-------------------------+
@@ -1578,8 +1560,6 @@ same_srcuser
 Specifies that the decoded source user must be the same.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
 
-.. versionadded:: 3.13.0
-
 +--------------------+-------------------+
 | **Example of use** | <same_srcuser />  |
 +--------------------+-------------------+
@@ -1589,8 +1569,6 @@ different_srcuser
 
 Specifies that the decoded source user must be different.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
-
-.. versionadded:: 3.13.0
 
 +--------------------+------------------------+
 | **Example of use** | <different_srcuser />  |
@@ -1624,16 +1602,12 @@ different_user
 Specifies that the decoded user must be different.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
 
-.. versionadded:: 3.13.0
-
 +--------------------+---------------------+
 | **Example of use** | <different_user />  |
 +--------------------+---------------------+
 
 not_same_agent
 ^^^^^^^^^^^^^^
-
-.. deprecated:: 3.13.0
 
 Specifies that the decoded agent must be different.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
@@ -1644,8 +1618,6 @@ This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 same_field
 ^^^^^^^^^^
-
-.. versionadded:: 3.9.0
 
 The value of the dynamic field specified in this option must appear in previous events a ``frequency`` number of times within the required ``timeframe``.
 
@@ -1725,7 +1697,6 @@ The last event will fire rule 100002 instead of 100001 because it found the valu
 not_same_field
 ^^^^^^^^^^^^^^
 
-.. versionadded:: 3.9.0
 .. deprecated:: 3.13.0 Use `different_field`_ instead.
 
 It is the opposite setting of ``same_field``. The value of the dynamic field specified in this option must be different than the ones found in previous events a ``frequency`` number of times within the required ``timeframe``.
@@ -1803,8 +1774,6 @@ The last event will fire rule 100002 instead of 100001 due to the value ``CCCC``
 different_field
 ^^^^^^^^^^^^^^^
 
-.. versionadded:: 3.13.0
-
 It is the opposite setting of ``same_field``. The value of the dynamic field specified in this option must be different than the ones found in previous events a ``frequency`` number of times within the required ``timeframe``.
 
 +--------------------+------------------------------------------+
@@ -1813,8 +1782,6 @@ It is the opposite setting of ``same_field``. The value of the dynamic field spe
 
 global_frequency
 ^^^^^^^^^^^^^^^^
-
-.. versionadded:: 3.11.0
 
 Specifies that the events of all agents will be contemplated when using the
 frequency and ``timeframe`` options. By default, only the events generated by
@@ -1833,8 +1800,6 @@ same_protocol
 Specifies that the decoded protocol must be the same.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
 
-.. versionadded:: 3.13.0
-
 +--------------------+-------------------+
 | **Example of use** | <same_protocol /> |
 +--------------------+-------------------+
@@ -1844,8 +1809,6 @@ different_protocol
 
 Specifies that the decoded protocol must be different.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
-
-.. versionadded:: 3.13.0
 
 +--------------------+-------------------------+
 | **Example of use** | <different_protocol />  |
@@ -1857,8 +1820,6 @@ same_action
 Specifies that the decoded action must be the same.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
 
-.. versionadded:: 3.13.0
-
 +--------------------+-----------------+
 | **Example of use** | <same_action /> |
 +--------------------+-----------------+
@@ -1868,8 +1829,6 @@ different_action
 
 Specifies that the decoded action must be different.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
-
-.. versionadded:: 3.13.0
 
 +--------------------+-----------------------+
 | **Example of use** | <different_action />  |
@@ -1881,8 +1840,6 @@ same_data
 Specifies that the decoded data must be the same.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
 
-.. versionadded:: 3.13.0
-
 +--------------------+---------------+
 | **Example of use** | <same_data /> |
 +--------------------+---------------+
@@ -1892,8 +1849,6 @@ different_data
 
 Specifies that the decoded data must be different.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
-
-.. versionadded:: 3.13.0
 
 +--------------------+---------------------+
 | **Example of use** | <different_data />  |
@@ -1905,8 +1860,6 @@ same_extra_data
 Specifies that the decoded extra data must be the same.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
 
-.. versionadded:: 3.13.0
-
 +--------------------+---------------------+
 | **Example of use** | <same_extra_data /> |
 +--------------------+---------------------+
@@ -1916,8 +1869,6 @@ different_extra_data
 
 Specifies that the decoded extra data must be different.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
-
-.. versionadded:: 3.13.0
 
 +--------------------+---------------------------+
 | **Example of use** | <different_extra_data />  |
@@ -1929,8 +1880,6 @@ same_status
 Specifies that the decoded status must be the same.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
 
-.. versionadded:: 3.13.0
-
 +--------------------+-----------------+
 | **Example of use** | <same_status /> |
 +--------------------+-----------------+
@@ -1940,8 +1889,6 @@ different_status
 
 Specifies that the decoded status must be different.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
-
-.. versionadded:: 3.13.0
 
 +--------------------+-----------------------+
 | **Example of use** | <different_status />  |
@@ -1953,8 +1900,6 @@ same_system_name
 Specifies that the decoded system name must be the same.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
 
-.. versionadded:: 3.13.0
-
 +--------------------+----------------------+
 | **Example of use** | <same_system_name /> |
 +--------------------+----------------------+
@@ -1965,8 +1910,6 @@ different_system_name
 Specifies that the decoded system name must be different.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
 
-.. versionadded:: 3.13.0
-
 +--------------------+---------------------------+
 | **Example of use** | <different_system_name /> |
 +--------------------+---------------------------+
@@ -1976,8 +1919,6 @@ same_url
 
 Specifies that the decoded url must be the same.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
-
-.. versionadded:: 3.13.0
 
 +--------------------+--------------+
 | **Example of use** | <same_url /> |
@@ -1998,8 +1939,6 @@ same_srcgeoip
 
 Specifies that the source geoip location must be the same.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
-
-.. versionadded:: 3.13.0
 
 +--------------------+-------------------+
 | **Example of use** | <same_srcgeoip /> |
@@ -2033,8 +1972,6 @@ Example:
 same_dstgeoip
 ^^^^^^^^^^^^^
 
-.. versionadded:: 3.13.0
-
 Specifies that the destination geoip location must be the same.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
 
@@ -2047,8 +1984,6 @@ different_dstgeoip
 
 Specifies that the destination geoip location must be different.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
-
-.. versionadded:: 3.13.0
 
 +--------------------+------------------------+
 | **Example of use** | <different_dstgeoip /> |
@@ -2263,7 +2198,6 @@ It's a very useful label to keep the rules ordered.
 
 mitre
 ^^^^^
-.. versionadded:: 3.13.0
 
 Specifies the `MITRE ATT&CK <https://attack.mitre.org>`_ technique ID or IDs that fit in well with the rule.
 
