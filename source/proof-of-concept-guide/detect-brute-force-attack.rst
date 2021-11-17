@@ -1,8 +1,8 @@
-.. _poc_detect_bruteforce:
 
 .. meta::
   :description: This POC shows how Wazuh provides out-of-the-box rules capable of identifying brute-force attacks by correlating multiple authentication failure events. Learn more in this section.
 
+.. _poc_detect_bruteforce:
 
 Detecting a brute-force attack
 ==============================

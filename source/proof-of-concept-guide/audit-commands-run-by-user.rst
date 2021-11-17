@@ -1,7 +1,7 @@
-.. _poc_audit_commands:
-
 .. meta::
   :description: In this proof of concept, you create specific rules to alert about commands run by the user. Learn more about it in our documentation.
+
+.. _poc_audit_commands:
 
 Auditing commands run by a user
 ===============================

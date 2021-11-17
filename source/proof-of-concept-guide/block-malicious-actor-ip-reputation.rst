@@ -1,7 +1,8 @@
-.. _poc_block_actor_IP_reputation:
 
 .. meta::
   :description: In this POC, you identify the monitored Windows endpoint IP address as a bad reputation one. Learn more about it in our documentation.
+
+.. _poc_block_actor_IP_reputation:
 
 Blocking a malicious actor - IP Reputation
 ==========================================
