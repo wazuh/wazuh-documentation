@@ -8,21 +8,21 @@
 Establish access to your EC2 instances
 ======================================
 
-Before you can actually access your new EC2 instances you must first set up public IPs through which to reach them, as well as use
+Before you can actually access your new EC2 instances you must first set up public IP addresses through which to reach them, as well as use
 your Wazuh Lab key pair for authentication.
 
 
 Elastic IPs
 -----------
 
-We will set up an Elastic IP address for each new EC2 instance.  You will use these IPs only for reaching your EC2 instances from outside
+We will set up an Elastic IP address for each new EC2 instance.  You will use these IP addresses only for reaching your EC2 instances from outside
 of the VPC, like for SSH, RDP, or HTTPS.  The instances will communicate with each other exclusively via their
 VPC private IPs.
 
 For each of the new EC2 instances (Wazuh Server, Linux Agent, Elastic Server,
 Windows Agent), do the following:
 
-- Access `Elastic IPs <https://console.aws.amazon.com/ec2/home#Addresses>`_ from your `EC2 Dashboard <https://console.aws.amazon.com/ec2/v2/home>`_.
+- Access `Elastic IP addresses <https://console.aws.amazon.com/ec2/home#Addresses>`_ from your `EC2 Dashboard <https://console.aws.amazon.com/ec2/v2/home>`_.
 - Click on **[Allocate new address]**, choose "VPC", "Amazon pool", click on **[Allocate]** and on **[Close]**.
 
 .. thumbnail:: ../../images/learning-wazuh/build-lab/alloc_address.png

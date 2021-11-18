@@ -376,7 +376,7 @@ removed across all agents.
 We hope you enjoyed getting a taste of the Wazuh **Active Response** capability.
 While blocking an attacking IP address is probably the most popular use made of Wazuh AR,
 it is far more broadly useful than that.  In addition to countermeasures taken
-against attacking IPs or targeted account names, AR can also be used to take
+against attacking IP addresses or targeted account names, AR can also be used to take
 any kind of custom action in response to any kind of rule firing.
 
 - **Custom alerting**: Collect additional context and send a detailed custom

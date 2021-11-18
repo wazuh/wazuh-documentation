@@ -370,7 +370,7 @@ You may have noticed that there were no Geolocation fields in the Kibana records
 
         curl ``http://testmyids.com``.
 
-#. Look through the new Suricata events in Kibana, observing they now have source geoip fields populated.  Private IPs of course cannot be geolocated.
+#. Look through the new Suricata events in Kibana, observing they now have source geoip fields populated.  Private IP addresses of course cannot be geolocated.
 
 .. thumbnail:: ../images/learning-wazuh/labs/suricata-geoip.png
     :title: Flood

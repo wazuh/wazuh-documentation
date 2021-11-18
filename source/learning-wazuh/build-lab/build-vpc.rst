@@ -21,7 +21,7 @@ already have an AWS account, sign up for one
   should be small.  Most costs only apply when your  instances are actually
   running.  It should cost you an estimated USD $3-4 per day to operate this
   lab with all EC2 instances running.  When all instances are shut down, and
-  all Elastic IPs are released, a dormant lab would only cost around $3 per month
+  all Elastic IP addresses are released, a dormant lab would only cost around $3 per month
   (just the cost of EC2 block storage).  These are only estimates. See `this page
   <https://aws.amazon.com/ec2/pricing/>`_ for authoritative details on Amazon EC2
   pricing.

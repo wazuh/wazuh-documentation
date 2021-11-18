@@ -403,7 +403,7 @@ Upgrading Kibana
       uiSettings.overrides.defaultRoute: "/app/wazuh"
       elasticsearch.ssl.verificationMode: certificate
 
-   - ``elasticsearch.hosts:`` In case of having an IP, replace it with a DNS name (Starting Elasticsearch 7.11.0, IPs are not allowed). For example, ``https://localhost:9200``
+   - ``elasticsearch.hosts:`` In case of having an IP, replace it with a DNS name (Starting Elasticsearch 7.11.0, IP addresses are not allowed). For example, ``https://localhost:9200``
    - Replace ``server.defaultRoute: /app/wazuh`` with ``uiSettings.overrides.defaultRoute: "/app/wazuh"``
    - Add the following line to select ``certificate`` as verification mode: ``elasticsearch.ssl.verificationMode: certificate``
 
