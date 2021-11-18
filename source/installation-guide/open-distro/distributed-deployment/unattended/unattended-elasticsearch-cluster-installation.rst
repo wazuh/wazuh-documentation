@@ -57,7 +57,7 @@ Choose the cluster mode between single-node or multi-node:
       
       Edit the ``config.yml`` file to specify the IP address you want the Elasticsearch service to bind to. 
 
-      .. note:: To create valid certificates for the communication between the various components of Wazuh and the Elastic Stack, external IPs must be used.
+      .. note:: To create valid certificates for the communication between the various components of Wazuh and the Elastic Stack, external IP addresses must be used.
 
       .. code-block:: yaml
         :emphasize-lines: 5, 18, 21

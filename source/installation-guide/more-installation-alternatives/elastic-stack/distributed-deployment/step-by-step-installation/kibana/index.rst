@@ -84,7 +84,7 @@ Kibana installation and configuration
 
    .. Note::
 
-     Starting Elasticsearch 7.11.0, a DNS name must be specified in the ``elasticsearch.hosts`` field since IPs are no longer allowed. 
+     Starting Elasticsearch 7.11.0, a DNS name must be specified in the ``elasticsearch.hosts`` field since IP addresses are no longer allowed. 
 
    .. include:: ../../../../../../_templates/installations/basic/elastic/common/configure_kibana.rst
 
