@@ -101,7 +101,7 @@ Recommended changes to securize Wazuh API
 
 #. Set maximum number of login attempts:
 
-    To avoid brute force attacks, it is possible to set the number of times that a login attempt can occur from the same IP during a certain period of time. Once said number is exceeded, the IP will be blocked for that period of time.
+    To avoid brute force attacks, it is possible to set the number of times that a login attempt can occur from the same IP address during a certain period of time. Once said number is exceeded, the IP address will be blocked for that period of time.
 
     The default number of login attempts allowed is *50* for each period of time, which by default is *300* seconds. To change these values, modify the ``max_login_attempts`` and/or the ``block_time`` settings in ``WAZUH_PATH/api/configuration/api.yaml``.
 

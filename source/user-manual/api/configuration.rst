@@ -147,11 +147,11 @@ API configuration options
 
 host
 ^^^^^^^^^^^^^^^^^^^^^^
-+--------------------------+---------------+-----------------------------------------------------------------------+
-| Allowed values           | Default value | Description                                                           |
-+==========================+===============+=======================================================================+
-| Any valid IP or hostname | 0.0.0.0       | IP or hostname of the Wazuh manager where the Wazuh API is running.   |
-+--------------------------+---------------+-----------------------------------------------------------------------+
++----------------------------------+---------------+-------------------------------------------------------------------------------+
+| Allowed values                   | Default value | Description                                                                   |
++==================================+===============+===============================================================================+
+| Any valid IP address or hostname | 0.0.0.0       | IP address or hostname of the Wazuh manager where the Wazuh API is running.   |
++----------------------------------+---------------+-------------------------------------------------------------------------------+
 
 port
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -248,7 +248,7 @@ access
 +========================+======================+===============+=================================================================================================================================================================================================================================================================================================================================+
 | max_login_attempts     | Any positive integer | 50            | Set a maximum number of login attempts during a specified ``block_time`` number of seconds.                                                                                                                                                                                                                                     |
 +------------------------+----------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| block_time             | Any positive integer | 300           | Established period of time (in seconds) to attempt login requests. If the established number of requests (``max_login_attempts``) is exceeded within this time limit, the IP is blocked until the end of the block time period.                                                                                                 |
+| block_time             | Any positive integer | 300           | Established period of time (in seconds) to attempt login requests. If the established number of requests (``max_login_attempts``) is exceeded within this time limit, the IP address is blocked until the end of the block time period.                                                                                         |
 +------------------------+----------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | max_request_per_minute | Any positive integer | 300           | Establish a maximum number of requests the Wazuh API can handle per minute (does not include authentication requests). If the number of requests for a given minute is exceeded, all incoming requests (from any user) will be blocked for the remaining of the minute. This feature can be disabled by setting its value to 0. |
 +------------------------+----------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
