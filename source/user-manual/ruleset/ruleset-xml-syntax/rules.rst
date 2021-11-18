@@ -2117,11 +2117,11 @@ Perform a CDB lookup using an ossec list.  This is a fast on-disk database which
 +-----------------+-------------------------+---------------------------------------------------------------------------------------------------------+
 |                 | match_key_value         | searched for in the cdb. It will be compared with regex from attribute check_value.                     |
 +-----------------+-------------------------+---------------------------------------------------------------------------------------------------------+
-|                 | address_match_key       | IP and the key to search within the cdb and will match if they key is present.                          |
+|                 | address_match_key       | IP address and the key to search within the cdb and will match if they key is present.                  |
 +-----------------+-------------------------+---------------------------------------------------------------------------------------------------------+
-|                 | not_address_match_key   | IP the key to search and will match if it IS NOT present in the database                                |
+|                 | not_address_match_key   | IP address and the key to search and will match if it IS NOT present in the database.                   |
 +-----------------+-------------------------+---------------------------------------------------------------------------------------------------------+
-|                 | address_match_key_value | IP to search in the cdb. It will be compared with regex from attribute check_value.                     |
+|                 | address_match_key_value | IP address to search in the cdb. It will be compared with regex from attribute check_value.             |
 +-----------------+-------------------------+---------------------------------------------------------------------------------------------------------+
 | **check_value** | regex for matching on the value pulled out of the cdb when using types: address_match_key_value, match_key_value                  |
 +-----------------+-----------------------------------------------------------------------------------------------------------------------------------+

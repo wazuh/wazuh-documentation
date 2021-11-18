@@ -162,4 +162,4 @@ CDB lists examples
     <group>list1,list2,</group>
   </rule>
 
-In this example, the described rules check if an IP is in the *List-one*, in the *List-two* or in both.
+In this example, the described rules check if an IP address is in the *List-one*, in the *List-two* or in both.
