@@ -7,7 +7,7 @@ Kibana
 
 This is similar to the Elasticsearch role and is intended to deploy Kibana with the correct Wazuh APP version, you can customize the installation with the following:
 
-- **elasticsearch_network_host:** defines Elasticsearch node ip address (default: ``127.0.0.1``).
+- **elasticsearch_network_host:** defines Elasticsearch node IP address (default: ``127.0.0.1``).
 - **elasticsearch_http_port:** defines Elasticsearch node port (default: ``9200``).
 - **kibana_server_host**: defines Kibana listen address (default: ``0.0.0.0``).
 - **elastic_stack_version**: defines Kibana version to be installed.

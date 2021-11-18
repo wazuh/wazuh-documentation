@@ -68,7 +68,7 @@ $wazuh_enrollment_enabled
   `Default undef`
 
 $wazuh_enrollment_manager_address
-  Hostname or IP of the manager where the agent will be enrolled.
+  Hostname or IP address of the manager where the agent will be enrolled.
 
   `Default undef`
 
@@ -88,7 +88,7 @@ $wazuh_enrollment_groups
   `Default undef`
 
 $wazuh_enrollment_agent_address
-  Force IP address from the agent. If this is not set manager will extract source IP from enrollment message.
+  Force IP address from the agent. If this is not set manager will extract source IP address from enrollment message.
 
   `Default undef`
 
@@ -133,7 +133,7 @@ $wazuh_delay_after_enrollment
   `Default undef`
 
 $wazuh_enrollment_use_source_ip
-  Force manager to compute IP from agent message.
+  Force manager to compute IP address from agent message.
 
   `Default undef`
 
