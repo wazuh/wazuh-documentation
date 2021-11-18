@@ -413,7 +413,7 @@ Groups name to which the agent belongs.
 agent_address
 ^^^^^^^^^^^^^
 
-Force IP address from the agent. If this is not set manager will extract source IP from enrollment message.
+Force IP address from the agent. If this is not set manager will extract source IP address from enrollment message.
 
 +--------------------+---------------------------------------------+
 | **Default value**  | src                                         |
@@ -505,7 +505,7 @@ Time that agentd should wait after a successful registration.
 use_source_ip
 ^^^^^^^^^^^^^
 
-Force manager to compute IP from agent message.
+Force manager to compute IP address from agent message.
 
 +--------------------+-------------------------------------+
 | **Default value**  | no                                  |
