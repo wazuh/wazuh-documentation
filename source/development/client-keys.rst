@@ -59,7 +59,7 @@ This file contains one line per each agent entry. In the case of agents, only on
 
 **Address**
 
-    Allowed source address range in CIDR format. If specified, the manager will only accept the agent if its source IP matches this address.
+    Allowed source address range in CIDR format. If specified, the manager will only accept the agent if its source IP address matches this address.
 
     +--------------------+----------------------------+
     | Format             | CIDR. Netmask is optional. |

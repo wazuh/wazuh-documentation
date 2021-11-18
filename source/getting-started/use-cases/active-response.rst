@@ -10,7 +10,7 @@ Active response
 
 :ref:`Wazuh agent <wazuh_agent>` automates the response to threats by running actions when they are detected. The agent has the ability to block network connections, stop running processes or delete malicious files, among other actions. In addition, it can also run customized scripts developed by the user (for example, Python, Bash or PowerShell).
 
-In order to use this feature, users define the conditions that will trigger the scripted actions, which usually involve threat detection and assessment. For example, a user could use log analysis rules to detect an intrusion attempt, and an IP reputation database to assess the threat by looking for the source IP address of the attempted connection.
+In order to use this feature, users define the conditions that will trigger the scripted actions, which usually involve threat detection and assessment. For example, a user could use log analysis rules to detect an intrusion attempt, and an IP address reputation database to assess the threat by looking for the source IP address of the attempted connection.
 
 In the scenario described above, when the source IP address is recognized as malicious (low reputation), the monitored system is protected by automatically setting up a firewall rule to drop all traffic from the attacker. Depending on the active response, this firewall rule is temporary or permanent.
 
@@ -43,7 +43,7 @@ On top of the defined commands, active responses set the conditions that need to
       <timeout>60</timeout>
     </active-response>
 
-In this case, rule ``100100`` is used to look for alerts where the source IP address is part of a well-known IP reputation database:
+In this case, rule ``100100`` is used to look for alerts where the source IP address is part of a well-known IP address reputation database:
 
   .. code-block:: xml
 
