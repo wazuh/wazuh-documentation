@@ -86,7 +86,7 @@ One option is for Wazuh to receive syslog logs by a custom port:
 - ``<connection>syslog</connection>`` indicates that the manager will accept incoming syslog messages from across the network.
 - ``<port>513</port>`` defines the port that Wazuh will listen to retrieve the logs. The port must be free.
 - ``<protocol>tcp</protocol>`` defines the protocol to listen the port. It can be UDP or TCP.
-- ``<allowed-ips>192.168.2.0/24</allowed-ips>`` defines the network or IP from which syslog messages will be accepted.
+- ``<allowed-ips>192.168.2.0/24</allowed-ips>`` defines the network or IP address from which syslog messages will be accepted.
 
 The other option store the logs in a plaintext file and monitor that file with Wazuh. If a ``/etc/rsyslog.conf`` configuration file is being used and we have defined where to store the syslog logs we can monitor them in Wazuh ``ossec.conf`` using a ``<localfile>`` block with ``syslog`` as the log format.
 

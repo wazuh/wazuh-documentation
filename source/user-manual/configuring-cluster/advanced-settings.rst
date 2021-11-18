@@ -50,7 +50,7 @@ Pointing agents to the cluster with a load balancer
           # service wazuh-agent restart
 
 
-    3. Include in the ``Load Balancer`` the IP of every instance of the cluster we want to deliver events.
+    3. Include in the ``Load Balancer`` the IP address of every instance of the cluster we want to deliver events.
 
         - This configuration will depend of the load balancer service chosen.
 

@@ -85,7 +85,7 @@ Indicates which system(s) the command should be executed on.
 
 Example:
 
-If the application that interfaces with your edge firewall runs on one of your agents, you might have a firewall-block-edge command that runs a script on that agent to blacklist an offending IP on the edge firewall.
+If the application that interfaces with your edge firewall runs on one of your agents, you might have a firewall-block-edge command that runs a script on that agent to blacklist an offending IP address on the edge firewall.
 
 agent_id
 ^^^^^^^^
