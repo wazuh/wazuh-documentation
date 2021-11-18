@@ -38,6 +38,5 @@ In this section you will find:
     vulnerability-detection/index
     virustotal-scan/index
     osquery
-    key-request
     fluent-forwarder
     wazuh-logtest/index

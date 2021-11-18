@@ -34,6 +34,24 @@ removedUrls['x.y'] = [
 ];
 */
 
+/* *** RELEASE 4.4 ****/
+
+newUrls['4.4'] = [
+  '/user-manual/registering/key-request.html',
+]
+
+removedUrls['4.4'] = [
+  '/user-manual/capabilities/agent-key-polling.html',
+]
+
+redirections.push(
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/agent-key-polling.html',
+      '4.4': '/user-manual/registering/key-request.html',
+    },
+);
+
 /* Pages added in 4.3 */
 
 newUrls['4.3'] = [

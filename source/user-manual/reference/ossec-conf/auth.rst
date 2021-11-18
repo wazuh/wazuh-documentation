@@ -201,6 +201,8 @@ In older systems, where the **manager does not support TLS v1.2**, this option w
 ciphers
 ^^^^^^^
 
+.. versionadded:: 3.0.0
+
 Sets the list of ciphers for network communication using SSL.
 
 +--------------------+----------------------------------------------------+
@@ -209,12 +211,12 @@ Sets the list of ciphers for network communication using SSL.
 
 The format of this parameter is described in `SSL ciphers <https://www.openssl.org/docs/man1.1.0/apps/ciphers.html>`_.
 
-.. versionadded:: 3.0.0
-
 key_request
 ^^^^^^^^^^^
 
-The key request settings are configured inside this tag.
+.. versionadded:: 4.4.0
+
+The key request settings are configured inside this tag. Read more about this feature at :doc:`agent key request <../../registering/key-request>`.
 
 .. code-block:: xml
     
@@ -227,7 +229,7 @@ The key request settings are configured inside this tag.
       <queue_size>1024</queue_size>
     </key_request>
 
-Configuration options of the key request.
+Configuration options of the ``key request`` feature.
 
 Options
 -------
@@ -245,7 +247,7 @@ enabled
 Enable the key request.
 
 +--------------------+-----------------------------+
-| **Default value**  | yes                         |
+| **Default value**  | no                          |
 +--------------------+-----------------------------+
 | **Allowed values** | yes, no                     |
 +--------------------+-----------------------------+
@@ -286,7 +288,7 @@ Full path to the unix domain socket.
 threads
 ^^^^^^^
 
-Number of threads for polling external keys.
+Number of threads for dispatching the external keys requests.
 
 +--------------------+------------------------------------------------------------+
 | **Default value**  | 1                                                          |
@@ -297,7 +299,7 @@ Number of threads for polling external keys.
 queue_size
 ^^^^^^^^^^
 
-Indicates the maximum size of the queue for polling external keys.
+Indicates the maximum size of the queue for fetching external keys.
 
 +--------------------+------------------------------------------------------------+
 | **Default value**  | 1024                                                       |
