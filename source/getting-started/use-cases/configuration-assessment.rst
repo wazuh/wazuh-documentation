@@ -21,7 +21,7 @@ Linux SCA rule example:
   :emphasize-lines: 2
 
   - id: 5546
-    title: "Ensure IP forwarding is disabled"
+    title: "Ensure IP address forwarding is disabled"
     description: "The net.ipv4.ip_forward flag is used to tell the system whether it can forward packets or not."
     rationale: "Setting the flag to 0 ensures that a system with multiple interfaces (for example, a hard proxy), will never be able to forward packets, and therefore, never serve as a router."
     remediation: "Set the following parameter in /etc/sysctl.conf or a /etc/sysctl.d/* file: net.ipv4.ip_forward = 0 and set the active kernel parameters."
