@@ -15,7 +15,7 @@ Prerequisites
 
 - ``curl``, ``tar``, and ``setcap`` need to be installed in the target system where the offline installation will be carried out. ``gnupg`` might need to be installed as well for some Debian-based systems.
 
-- You can use ``unalias cp`` to avoid confirmation to overwrite files. In some systems, the command "cp" is an alias for "cp -i". Check it running ``alias cp``.
+- In some systems, the command ``cp`` is an alias for ``cp -i`` — you can check this by running ``alias cp``. If this is your case, use ``unalias cp`` to avoid being asked for confirmation to overwrite files.
 
 Download the packages and configuration files
 ---------------------------------------------
