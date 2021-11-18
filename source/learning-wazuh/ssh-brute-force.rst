@@ -11,7 +11,7 @@ Detect an SSH brute-force attack
 Here you will wage a small SSH brute force attack against your Linux Agent instance.
 
 You will see how Wazuh detects and alerts on each login failure, and how a higher severity alert
-is produced when enough login failures from the same source IP are detected in the same time window.
+is produced when enough login failures from the same source IP address are detected in the same time window.
 
 You will also inspect the actual rules that fire as well as the enriched alert records
 that subsequently can be seen in Kibana.
@@ -242,7 +242,7 @@ Let's look into this new rule **5712** and see why was it triggered.
 
 The rule **5712** is a special kind of child rule to rule **5710**.
 
-It is only triggered if its parent rule, **5710**, fires on events involving the same source IP at least eight
+It is only triggered if its parent rule, **5710**, fires on events involving the same source IP address at least eight
 times in a **120** second period.
 
 The severity level of this rule is higher (10) than the previous one (only 5) because a cluster of SSH

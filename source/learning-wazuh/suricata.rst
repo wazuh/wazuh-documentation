@@ -335,7 +335,7 @@ Spice things up with a little GeoIP
 You may have noticed that there were no Geolocation fields in the Kibana records for Suricata events.  In Wazuh's default configuration, Geolocation is only performed on fields ``data.srcip``, ``data.win.eventdata.ipAddress`` and ``data.aws.sourceIPAddress`` , while with Suricata events we would need to act on fields
 ``data.src_ip`` and ``data.dest_ip``.  We are going to change our configuration to show more information from ``data.src_ip``:
 
-#. On wazuh-manager, edit ``/usr/share/filebeat/module/wazuh/alerts/ingest/pipeline.json`` adding the new IP field inside ``processors``, along the other Geolocation fields:
+#. On wazuh-manager, edit ``/usr/share/filebeat/module/wazuh/alerts/ingest/pipeline.json`` adding the new IP address field inside ``processors``, along the other Geolocation fields:
 
     .. code-block:: none
 
