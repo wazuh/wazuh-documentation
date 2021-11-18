@@ -135,23 +135,24 @@ This command should have an output like this:
 .. code-block:: console
   :class: output
   
-  {
-    "name" : "elasticsearch",
-    "cluster_name" : "elasticsearch",
-    "cluster_uuid" : "4AgWSXskREu4aSlW9W-WjA",
-    "version" : {
-      "number" : "7.12.1",
-      "build_flavor" : "default",
-      "build_type" : "rpm",
-      "build_hash" : "3186837139b9c6b6d23c3200870651f10d3343b7",
-      "build_date" : "2021-04-20T20:56:39.040728659Z",
-      "build_snapshot" : false,
-      "lucene_version" : "8.8.0",
-      "minimum_wire_compatibility_version" : "6.8.0",
-      "minimum_index_compatibility_version" : "6.0.0-beta1"
-    },
-    "tagline" : "You Know, for Search"
-  }
+   {
+     "name" : "elasticsearch",
+     "cluster_name" : "elasticsearch",
+     "cluster_uuid" : "upF9h1afQN2TfHtt0h3Kuw",
+     "version" : {
+       "number" : "7.14.2",
+       "build_flavor" : "default",
+       "build_type" : "rpm",
+       "build_hash" : "6bc13727ce758c0e943c3c21653b3da82f627f75",
+       "build_date" : "2021-09-15T10:18:09.722761972Z",
+       "build_snapshot" : false,
+       "lucene_version" : "8.9.0",
+       "minimum_wire_compatibility_version" : "6.8.0",
+       "minimum_index_compatibility_version" : "6.0.0-beta1"
+     },
+     "tagline" : "You Know, for Search"
+   }
+
   
   
   
@@ -305,27 +306,6 @@ To ensure that Filebeat has been successfully installed, run the following comma
     .. code-block:: console
 
       # filebeat test output
-
-An example response should look as follows:
-
-.. code-block:: none
-  :class: output
-
-  elasticsearch: https://127.0.0.1:9200...
-    parse url... OK
-    connection...
-      parse host... OK
-      dns lookup... OK
-      addresses: 127.0.0.1
-      dial up... OK
-    TLS...
-      security: server's certificate chain verification is enabled
-      handshake... OK
-      TLS version: TLSv1.3
-      dial up... OK
-    talk to server... OK
-    version: 7.12.1
-   
 
 
 Kibana installation and configuration
