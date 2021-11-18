@@ -491,8 +491,8 @@ $vulnerability_detector_interval
 
   `Default 5m`
 
-$vulnerability_detector_ignore_time
-  Time during which vulnerabilities that have already been alerted will be ignored.
+$vulnerability_detector_min_full_scan_interval
+  Time interval after which a full scan will be triggered if the vulnerabilities database is updated with new CVEs information.
 
   `Default 6h`
 
@@ -692,11 +692,6 @@ $wazuh_api_access_max_request_per_minute
   Establish a maximum number of requests the Wazuh API can handle per minute (does not include authentication requests). If the number of requests for a given minute is exceeded, all incoming requests (from any user) will be blocked. This feature can be disabled by setting its value to 0.
 
   `Default 300`
-
-$wazuh_api_use_only_authd
-  Forces the use of wazuh-authd when registering and removing agents.
-
-  `Default false`
 
 $wazuh_api_drop_privileges
   Run wazuh-api process as wazuh user

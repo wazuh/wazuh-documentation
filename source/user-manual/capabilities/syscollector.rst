@@ -1,8 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: The Wazuh Syscollector module is in charge of collecting system information and store it into an SQLite database for each agent on the manager side.
-  
+  :description: The Wazuh Syscollector module is in charge of collecting system information and storing it into an SQLite database for each agent on the manager side.
+
 .. _syscollector:
 
 System inventory
@@ -123,6 +123,8 @@ Retrieve basic information about the operating system.
 | **version**            | Release version                 | #31~16.04.1-Ubuntu SMP Wed Jul 18 08:54:04 UTC 2018 | All               |
 +------------------------+---------------------------------+-----------------------------------------------------+-------------------+
 | **checksum**           | Integrity synchronization value | 503709147600c8e0023cf2b9995772280eee30              | All               |
++------------------------+---------------------------------+-----------------------------------------------------+-------------------+
+| **reference**          | Unified primary key             | 94b6f7b3c1d905aae22a652448df6372da98e5b8            | All               |
 +------------------------+---------------------------------+-----------------------------------------------------+-------------------+
 
 .. _syscollector_packages:
@@ -442,13 +444,15 @@ The following table shows the operating systems that this module currently suppo
 Using Syscollector information to trigger alerts
 ------------------------------------------------
 
-  Since Wazuh 3.9 version, ``Syscollector`` module information can be used to trigger alerts and show that information in the alerts' description.
+.. note:: This capability is not available in Wazuh 4.2 but will be included in a future version.
 
-  To allow this configuration, in a rule declaration set the ``<decoded_as>`` field as **syscollector**.
+Since Wazuh 3.9 version, ``Syscollector`` module information can be used to trigger alerts and show that information in the alerts' description.
 
-  As an example, this rule will be triggered when the interface ``eth0`` of an agent is enabled and will show what IPv4 has that interface.
+To allow this configuration, in a rule declaration set the ``<decoded_as>`` field as **syscollector**.
 
-  .. code-block:: xml
+As an example, this rule will be triggered when the interface ``eth0`` of an agent is enabled and will show what IPv4 has that interface.
+
+.. code-block:: xml
 
     <rule id="100001" level="5">
       <if_sid>221</if_sid>
@@ -457,11 +461,11 @@ Using Syscollector information to trigger alerts
       <description>eth0 interface enabled. IP: $(netinfo.iface.ipv4.address)</description>
     </rule>
 
-  .. warning::
+.. warning::
 
     The tag ``<if_sid>221</if_sid>`` is necessary because the events from Syscollector are muted by default with that rule.
 
-  When the alerts are triggered they will be displayed in Kibana this way:
+When the alerts are triggered they will be displayed in Kibana this way:
 
     .. thumbnail:: ../../images/manual/internal-capabilities/syscollector_alerts.png
       :title: Information from syscollector for "port" value.
