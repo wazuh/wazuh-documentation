@@ -299,7 +299,7 @@ Installing Kibana
        # cp ./opendistro_files/kibana/kibana.yml /etc/kibana/
 
     .. note::
-      ``server.host: 0.0.0.0`` in ``/etc/kibana/kibana.yml`` means that Kibana can be accessed from the outside and accepts all the available IPs of the host. This value can be changed for a specific IP if needed.
+      ``server.host: 0.0.0.0`` in ``/etc/kibana/kibana.yml`` means that Kibana can be accessed from the outside and accepts all the available IP addresses of the host. This value can be changed for a specific IP address if needed.
   
 #. Create the ``/usr/share/kibana/data`` directory.
 
