@@ -132,7 +132,7 @@ Install the Wazuh app for Splunk on the ``deployer`` machine and follow the step
       The ``indexerDiscovery`` attribute is used for setting the connection to peer nodes. More information about the ``indexerDiscovery`` attribute can be found `here <https://docs.splunk.com/Documentation/Splunk/7.1.3/Indexer/indexerdiscovery>`_.
 
     .. note::
-      ``<master_ip>`` references to the indexers master ip.
+      ``<master_ip>`` references to the indexers master IP address.
 
     .. warning::
       The ``https`` is required by default and the default port is 8089.

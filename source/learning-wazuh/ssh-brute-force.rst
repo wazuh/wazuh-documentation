@@ -172,7 +172,7 @@ by clicking on the triangle to the left of the record.
 
 Notice there is even more information here than in the original JSON record, due to enrichment by **Filebeat**,
 most notably including GeoLocation fields that are based on the "attacker's" IP address if this was done over
-an external IP.
+an external IP address.
 
 .. thumbnail:: ../images/learning-wazuh/labs/brute-2.png
     :title: brute

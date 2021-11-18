@@ -37,7 +37,7 @@ Define the command in the ``ossec.conf`` of your Wazuh manager:
   </command>
 
 
-Set the command name and the path of the script to execute. It's also possible to set a defined timeout to unblock the IP.
+Set the command name and the path of the script to execute. It's also possible to set a defined timeout to unblock the IP address.
 
 
 Defining the active response

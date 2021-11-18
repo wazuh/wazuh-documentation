@@ -875,7 +875,7 @@ This enumerates 2 **active** agents:
     }
 
 
-Adding an agent is now easier than ever. Simply send a request with the agent name and its IP.
+Adding an agent is now easier than ever. Simply send a request with the agent name and its IP address.
 
 .. code-block:: console
 

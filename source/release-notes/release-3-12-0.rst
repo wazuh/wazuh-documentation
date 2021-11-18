@@ -48,7 +48,7 @@ Wazuh core
 - Fixed a small memory leak in clustered.
 - Fixed a crash in the fluent forwarder when SSL is not enabled.
 - Replaced non-reentrant functions to avoid race condition hazards.
-- Fixed the registration of more than one agent as any when forcing to use the source IP.
+- Fixed the registration of more than one agent as any when forcing to use the source IP address.
 - Fixed Windows upgrades in custom directories.
 - Fixed the format of the alert payload passed to the Slack integration.
 

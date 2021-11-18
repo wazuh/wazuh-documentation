@@ -242,7 +242,7 @@ ip_update_interval
 
 .. versionadded:: 4.2.0
 
-Specifies how often an agent will query the control module for its main IP.
+Specifies how often an agent will query the control module for its main IP address.
 
 
 Any value equal to or lower than the configured ``notify_time`` will cause the IP address to be queried on each keep-alive message.
@@ -418,7 +418,7 @@ Force IP address from the agent. If this is not set manager will extract source 
 +--------------------+---------------------------------------------+
 | **Default value**  | src                                         |
 +--------------------+---------------------------------------------+
-| **Allowed values** | string - Valid IP.                          |
+| **Allowed values** | string - Valid IP address                   |
 +--------------------+---------------------------------------------+
 
 ssl_cipher

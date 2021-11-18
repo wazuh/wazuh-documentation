@@ -294,7 +294,7 @@ agents will block the attacker even when only one of them is targeted.
     </active-response>
 
 Run the same malicious ``curl`` probe as before, and then confirm
-that all Linux systems configured are blocking the attacker's IP.
+that all Linux systems configured are blocking the attacker's IP address.
 
 
 AR Scenario 3 - Make windows null route the attacker
@@ -371,7 +371,7 @@ removed across all agents.
     while an active response null routing block is in place, has the undesirable
     effect of making the block permanent such that it will not be cleared
     automatically.  In that case it it necessary to clear the orphaned null route
-    with a `route  delete N.N.N.N` command where N.N.N.N is the null routed IP.
+    with a `route  delete N.N.N.N` command where N.N.N.N is the null routed IP address.
 
 We hope you enjoyed getting a taste of the Wazuh **Active Response** capability.
 While blocking an attacking IP address is probably the most popular use made of Wazuh AR,
