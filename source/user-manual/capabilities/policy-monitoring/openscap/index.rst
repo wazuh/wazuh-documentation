@@ -10,6 +10,8 @@ OpenSCAP
 
 .. deprecated:: 4.0
 
+Since OpenSCAP was deprecated since version 4.0 we recommend that you use :ref:`Security Configuration Assessment (SCA) <manual_sec_config_assessment>` instead. The SCA was specially created by Wazuh to overcome limitations that were inherent to the other integrations.
+
 The **OpenSCAP wodle** is an integration of `OpenSCAP <https://www.open-scap.org/>`_ with *Wazuh HIDS* that provides the ability to perform configuration and vulnerability scans of an agent. It is primarily used for:
 
  - Verifying **security compliance**:  OpenSCAP policies define the requirements that all systems in an organization must meet in order to be in line with applicable *security policies* and/or *security benchmarks*.
