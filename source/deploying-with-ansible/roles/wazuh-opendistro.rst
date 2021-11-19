@@ -5,7 +5,7 @@
 Open Distro
 -----------
 
-This role is intended to deploy Open Distro node, you have some variables that can be used to customize the installation:
+This role is intended to deploy the Open Distro node. The following variables can be used to customize the installation:
 
 - **elasticsearch_network_host:** defines listen ip address (default: ``127.0.0.1``).
 - **elasticsearch_http_port:** defines listen port (default: ``9200``).
