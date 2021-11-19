@@ -714,6 +714,8 @@ $wazuh_api_experimental_features
 Wodle OpenSCAP variables
 ------------------------
 
+.. deprecated:: 4.0
+
 $configure_wodle_openscap
   Enables Wodle OpenSCAP section render on this host.
 
