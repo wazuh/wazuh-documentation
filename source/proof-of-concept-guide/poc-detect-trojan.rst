@@ -60,6 +60,11 @@ Related alerts can be found with the following query once the next rootcheck sca
 
 * ``location:rootcheck AND rule.id:510 AND data.title:Trojan*``
 
+.. thumbnail:: ../images/poc/Detecting_suspicious_binaries.png
+          :title: Detecting suspicious binaries - Trojan
+          :align: center
+          :wrap_image: No
+
 Affected endpoints
 ------------------
 

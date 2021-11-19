@@ -96,6 +96,11 @@ Related alerts can be found with:
 
 * ``rule.groups:osquery``
 
+.. thumbnail:: ../images/poc/Osquery_integration.png
+          :title: Osquery integration
+          :align: center
+          :wrap_image: No
+
 Affected endpoints
 ------------------
 

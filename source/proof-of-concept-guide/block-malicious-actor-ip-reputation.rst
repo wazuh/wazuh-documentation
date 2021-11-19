@@ -134,6 +134,11 @@ Related alerts can be found with:
 
 * ``rule.id:(601 OR 100100)``
 
+.. thumbnail:: ../images/poc/Blocking_a_malicious_actor.png
+          :title: Blocking a malicious actor - IP Reputation
+          :align: center
+          :wrap_image: No
+
 Affected endpoints
 ------------------
 

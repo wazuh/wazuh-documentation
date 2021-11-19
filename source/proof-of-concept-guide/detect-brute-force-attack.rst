@@ -48,6 +48,11 @@ Related alerts can be found with:
 - Linux: ``rule.id:(5710 OR 5712)``. Other related rules are ``5711``, ``5716``, ``5720``, ``5503``, ``5504``.
 - Windows: ``rule.id:(60122 OR 60137)``
 
+.. thumbnail:: ../images/poc/Detecting_a_brute_force_attack.png
+          :title: Detecting a brute-force attack
+          :align: center
+          :wrap_image: No
+
 Affected endpoints
 ------------------
 

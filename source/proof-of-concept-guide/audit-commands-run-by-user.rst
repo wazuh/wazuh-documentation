@@ -66,6 +66,12 @@ Related alerts can be found with:
 
 * ``data.audit.exe: "/usr/bin/ping"``
 
+
+.. thumbnail:: ../images/poc/Auditing_commands_run_by_a_user.png
+          :title: Auditing commands run by a user
+          :align: center
+          :wrap_image: No
+
 Affected endpoints
 ------------------
 

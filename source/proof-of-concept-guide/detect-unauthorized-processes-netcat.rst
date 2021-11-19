@@ -68,6 +68,11 @@ Related alerts can be found with:
 
 - ``rule.id:(601 OR 100051)``
 
+.. thumbnail:: ../images/poc/Detecting_unauthorized_processes.png
+          :title: Detecting unauthorized processes - Netcat
+          :align: center
+          :wrap_image: No
+
 Affected endpoints
 ------------------
 

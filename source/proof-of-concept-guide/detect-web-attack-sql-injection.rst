@@ -42,6 +42,11 @@ Related alerts, based on the web server log analysis, can be found with:
 
 * ``rule.id:31103``
 
+.. thumbnail:: ../images/poc/Detecting_an_SQL_Injection_attack.png
+          :title: Detecting a web attack - SQL injection
+          :align: center
+          :wrap_image: No
+
 If you have Suricata monitoring the endpoint's traffic you can also query ``data.alert.signature_id:2006445`` for the related Suricata's alerts.
 
 Affected endpoints

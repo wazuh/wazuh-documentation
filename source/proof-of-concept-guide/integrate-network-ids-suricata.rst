@@ -78,6 +78,11 @@ Related alerts can be found with:
 
 - ``rule.groups:*suricata*``
 
+.. thumbnail:: ../images/poc/Network_IDS_integration.png
+          :title: Network IDS integration - Suricata
+          :align: center
+          :wrap_image: No
+
 Affected endpoint
 -----------------
 

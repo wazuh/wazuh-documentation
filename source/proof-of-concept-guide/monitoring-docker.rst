@@ -57,6 +57,11 @@ Related alerts can be found with:
 * ``rule.groups: "docker"``
 * Additionally, the ``data.docker.Action`` field states which action was performed.
 
+.. thumbnail:: ../images/poc/Monitoring_Docker.png
+          :title: Monitoring Docker
+          :align: center
+          :wrap_image: No
+
 Affected endpoints
 ------------------
 

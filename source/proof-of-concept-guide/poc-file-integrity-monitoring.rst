@@ -47,6 +47,11 @@ Related alerts can be found with:
 
 - ``syscheck.path: "{path_to_the_modified_file}"``
 
+.. thumbnail:: ../images/poc/File_integrity_monitoring.png
+          :title: File integrity monitoring
+          :align: center
+          :wrap_image: No
+
 Affected endpoints
 ------------------
 
