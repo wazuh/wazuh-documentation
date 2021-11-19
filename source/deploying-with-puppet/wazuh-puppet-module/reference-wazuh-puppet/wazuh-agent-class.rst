@@ -521,6 +521,8 @@ $ossec_syscheck_skip_nfs
 Wodle OpenSCAP
 --------------
 
+.. deprecated:: 4.0
+
 $configure_wodle_openscap
   Enables Wodle OpenSCAP section render on this host.
 
