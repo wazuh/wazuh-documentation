@@ -39,6 +39,8 @@ removedUrls['x.y'] = [
 /* Pages added in 4.2 */
 
 newUrls['4.2'] = [
+  '/deploying-with-ansible/guide/install-opendistro-server.html',
+  '/deploying-with-ansible/roles/wazuh-opendistro.rst',
   '/release-notes/release-4-2-5.html',
   '/amazon-machine-images/amazon-machine-images.html',
   '/release-notes/release-4-2-4.html',
@@ -224,6 +226,8 @@ newUrls['4.2'] = [
 ];
 
 removedUrls['4.2'] = [
+  '/deploying-with-ansible/guide/install-elk-server.html',
+  '/deploying-with-ansible/roles/wazuh-elasticsearch.rst',
   '/user-manual/kibana-app/connect-kibana-app.html',
   '/user-manual/reference/daemons/ossec-agentd.html',
   '/user-manual/reference/daemons/ossec-agentlessd.html',
@@ -370,6 +374,16 @@ removedUrls['4.2'] = [
 ];
 
 redirections.push(
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/deploying-with-ansible/roles/wazuh-elasticsearch.rst',
+      '4.2': '/deploying-with-ansible/roles/wazuh-opendistro.rst',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/deploying-with-ansible/guide/install-elk-server.html',
+      '4.2': '/deploying-with-ansible/guide/install-opendistro-server.html',
+    },
     {
       'target': ['4.1=>4.2', '4.2=>4.1'],
       '4.1': '/user-manual/reference/daemons/ossec-agentd.html',
