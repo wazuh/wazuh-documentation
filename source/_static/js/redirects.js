@@ -74,7 +74,7 @@ newUrls['4.2'] = [
   '/cloud-service/index.html',
   '/cloud-service/glossary.html',
   '/cloud-service/account-billing/index.html',
-  '/cloud-service/account-billing/add-billing-details.html',
+  '/cloud-service/account-billing/manage-billing-details.html',
   '/cloud-service/account-billing/billing-faq.html',
   '/cloud-service/account-billing/update-billing.html',
   '/cloud-service/account-billing/billing-history.html',
