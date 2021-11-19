@@ -8,7 +8,7 @@
 Install Open Distro for Elasticsearch Server
 ============================================
 
-The deployment of the Open Distro for the Elasticsearch server involves the installation of Opendistro and Kibana services. In the repository of Ansible that Wazuh has, we can find the playbooks and roles necessary to carry out the installation. The Ansible server must have access to the Open Distro for Elasticsearch server.
+The deployment of the Open Distro for the Elasticsearch server involves the installation of Open Distro for Elasticsearch and Kibana services. In the Wazuh Ansible repository, we can find the playbooks and roles necessary to carry out the installation. The Ansible server must have access to the Open Distro for Elasticsearch server.
 
 - `1 - Access to wazuh-ansible`_
 - `2 - Preparing the playbook`_
