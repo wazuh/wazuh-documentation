@@ -359,6 +359,8 @@ Wazuh Manager
 
 **wazuh_manager_openscap**
 
+  .. deprecated:: 4.0
+
   Configures the :ref:`wodle<wodle_openscap>` item named ``open-scap`` from ``ossec.conf``.
 
   *Default:*
