@@ -5,6 +5,11 @@ Detecting a web attack - SQL injection
 
 Wazuh is able to detect a `SQL Injection attack <https://portswigger.net/web-security/sql-injection>`_ from web server logs showing patterns like ``select``, ``union``, and other common SQL patterns of attack in a monitored endpoint.
 
+In this scenario you will need:
+
+* CentOS Linux 8 with Wazuh agent installed
+* An extra system to simulate the attacker
+
 If Suricata integration is configured to monitor the endpoint's network traffic, the attack can additionally be detected at a network level.
 
 Prerequisites
@@ -38,7 +43,7 @@ Steps to generate the alerts
 Query the alerts
 ----------------
 
-Related alerts, based on the web server log analysis, can be found with:
+At the Kibana menu go to the Discover option, from there you will be able to add filters and search-related alerts using the following filter:
 
 * ``rule.id:31103``
 
@@ -49,7 +54,4 @@ Related alerts, based on the web server log analysis, can be found with:
 
 If you have Suricata monitoring the endpoint's traffic you can also query ``data.alert.signature_id:2006445`` for the related Suricata's alerts.
 
-Affected endpoints
-------------------
 
-* CentOS 8 agent host

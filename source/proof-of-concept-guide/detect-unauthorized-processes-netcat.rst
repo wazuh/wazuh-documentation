@@ -5,6 +5,11 @@ Detecting unauthorized processes - Netcat
 
 This POC shows how Wazuh is capable of detecting if Netcat is running on a monitored host.
 
+In this scenario you will need:
+
+* CentOS Linux 8 with Wazuh manager up and running
+* CentOS Linux 8 with Wazuh agent installed
+
 You can learn more about the :ref:`command monitoring capability <manual_command_monitoring>` in the documentation.
 
 Configuration
@@ -64,7 +69,7 @@ Steps to generate alerts
 Query the alerts
 ----------------
 
-Related alerts can be found with:
+At the Kibana menu go to the Discover option, from there you will be able to add filters and search-related alerts using the following filter:
 
 - ``rule.id:(601 OR 100051)``
 
@@ -73,7 +78,4 @@ Related alerts can be found with:
           :align: center
           :wrap_image: No
 
-Affected endpoints
-------------------
 
-- CentOS 8 agent host

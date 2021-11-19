@@ -5,6 +5,11 @@ Monitoring Docker
 
 The Wazuh module for Docker can be used to identify security incidents across containers, alerting in real-time. It acts as a subscriber to the Docker Engine API.
 
+In this scenario you will need:
+
+* CentOS Linux 8 with Wazuh manager up and running
+* CentOS Linux 8 with Wazuh agent installed
+
 Learn more about monitoring Docker and the Docker wodle, see the :ref:`Monitoring containers activity <docker-monitor-index>` section of the documentation.
 
 
@@ -52,7 +57,7 @@ Steps to generate the alerts
 Query the alerts
 ----------------
 
-Related alerts can be found with:
+At the Kibana menu go to the Discover option, from there you will be able to add filters and search-related alerts using the following filters:
 
 * ``rule.groups: "docker"``
 * Additionally, the ``data.docker.Action`` field states which action was performed.
@@ -61,11 +66,6 @@ Related alerts can be found with:
           :title: Monitoring Docker
           :align: center
           :wrap_image: No
-
-Affected endpoints
-------------------
-
-* CentOS 8 agent host
 
 Troubleshooting
 ---------------

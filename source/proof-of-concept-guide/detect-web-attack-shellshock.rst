@@ -6,6 +6,12 @@ Detecting a web attack - Shellshock
 Wazuh is capable of detecting a Shellshock attack by analyzing web server logs collected from a monitored endpoint.
 Check the :ref:`Wazuh Shellshock Attack documentation <learning_wazuh_shellshock>` section for further information.
 
+
+In this scenario you will need:
+
+* CentOS Linux 8 with Wazuh manager up and running
+* CentOS Linux 8 with Wazuh agent installed
+
 In addition, for further detection, the attack can also be detected at a network level when Suricata integration is configured.
 
 Prerequisites
@@ -45,7 +51,4 @@ Related alerts, based on the web server log analysis, can be found with:
 
 - If you have Suricata monitoring the endpoint's traffic, you can also query ``rule.description:*CVE-2014-6271*`` for the related Suricata's alerts.
 
-Affected endpoints
-------------------
 
--  CentOS 8 agent host

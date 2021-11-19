@@ -5,6 +5,10 @@ Network IDS integration - Suricata
 
 Suricata is a network-based intrusion detection system (NIDS) that can detect threats by monitoring network traffic. This solution is capable of generating JSON logs of NIDS events and provides additional insight into your security with its network traffic inspection capabilities.
 
+In this scenario you will need:
+
+* CentOS Linux 8 with Wazuh agent installed
+
 To see an example use case of a NIDS integration with Wazuh, go to the `Catch suspicious network traffic <learning_wazuh_suricata>`_ section of the documentation.
 
 
@@ -74,7 +78,7 @@ Steps to generate the alerts
 Query the alerts
 ----------------
 
-Related alerts can be found with:
+At the Kibana menu go to the Discover option, from there you will be able to add filters and search-related alerts using the following filter:
 
 - ``rule.groups:*suricata*``
 
@@ -82,11 +86,6 @@ Related alerts can be found with:
           :title: Network IDS integration - Suricata
           :align: center
           :wrap_image: No
-
-Affected endpoint
------------------
-
-- Linux CentOS 8
 
 Troubleshooting
 ---------------

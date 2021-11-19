@@ -5,6 +5,11 @@ Detecting suspicious binaries - Trojan
 
 With Wazuh anomaly and malware detection capabilities, you can detect trojaned system binaries by using signatures in the ``/var/ossec/etc/shared/rootkit_trojans.txt`` file. 
 
+In this scenario you will need:
+
+* CentOS Linux 8 with Wazuh agent installed
+
+
 Configuration
 -------------
 
@@ -56,7 +61,7 @@ Steps to generate the alerts
 Query the alerts
 ----------------
 
-Related alerts can be found with the following query once the next rootcheck scan has been completed:
+At the Kibana menu go to the Discover option, from there you will be able to add filters and search-related alerts using the following filter:
 
 * ``location:rootcheck AND rule.id:510 AND data.title:Trojan*``
 
@@ -65,7 +70,3 @@ Related alerts can be found with the following query once the next rootcheck sca
           :align: center
           :wrap_image: No
 
-Affected endpoints
-------------------
-
-* CentOS 8 agent host
