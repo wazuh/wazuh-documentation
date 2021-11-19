@@ -19,7 +19,7 @@ The deployment of the Open Distro for the Elasticsearch server involves the inst
 
 	In previous versions of this guide, playbooks were used pointing to roles to install Elasticsearch.
 	Currently, the roles for the installation following guides from previous versions are preserved.
-	Since version 4.2.4 the installation steps of this guide point to the roles that install Open Distro for Elasticsearch.
+	Starting Wazuh v4.2.5, the installation steps of this guide point to the roles that install Open Distro for Elasticsearch.
 
 .. warning::
 
