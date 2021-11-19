@@ -23,7 +23,7 @@ The deployment of the Open Distro for the Elasticsearch server involves the inst
 
 .. warning::
 
-    About the nomenclatures:
+    About the nomenclature:
        - We refer with Open Distro for Elasticsearch to:
          - https://opendistro.github.io/for-elasticsearch-docs/
        - We refer with Elasticsearch to:
