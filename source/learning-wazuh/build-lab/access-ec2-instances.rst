@@ -15,7 +15,7 @@ your Wazuh Lab key pair for authentication.
 Elastic IPs
 -----------
 
-We will set up an Elastic IP address for each new EC2 instance.  You will use these IP addresses only for reaching your EC2 instances from outside
+We will set up an Elastic IP address for each new EC2 instance. You will use these IP addresses only for reaching your EC2 instances from outside
 of the VPC, like for SSH, RDP, or HTTPS.  The instances will communicate with each other exclusively via their
 VPC private IPs.
 
