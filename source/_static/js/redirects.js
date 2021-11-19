@@ -41,6 +41,7 @@ removedUrls['x.y'] = [
 newUrls['4.2'] = [
   '/deploying-with-ansible/guide/install-opendistro-server.html',
   '/deploying-with-ansible/roles/wazuh-opendistro.rst',
+  '/release-notes/release-4-2-5.html',
   '/amazon-machine-images/amazon-machine-images.html',
   '/release-notes/release-4-2-4.html',
   '/release-notes/release-4-2-3.html',
@@ -116,7 +117,7 @@ newUrls['4.2'] = [
   '/getting-started/components/elastic-stack.html',
   '/getting-started/components/wazuh-agent.html',
   '/getting-started/components/wazuh-server.html',
-  '/installation-guide/more-installation-alternatives/offline-all-in-one.html',
+  '/installation-guide/more-installation-alternatives/offline-installation.html',
   '/installation-guide/more-installation-alternatives/elastic-stack/all-in-one-deployment/all-in-one.html',
   '/installation-guide/more-installation-alternatives/elastic-stack/distributed-deployment/step-by-step-installation/wazuh-cluster/wazuh-single-node-cluster.html',
   '/installation-guide/more-installation-alternatives/elastic-stack/distributed-deployment/step-by-step-installation/wazuh-cluster/wazuh-multi-node-cluster.html',

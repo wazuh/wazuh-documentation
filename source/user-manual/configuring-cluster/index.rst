@@ -105,7 +105,7 @@ Deploying a Wazuh cluster
 .. topic:: Forwarder installation
 
     - The apps must be configured to point to the master's API.
-    - All manager nodes need an event forwarder in order to send data to Elasticsearch or Splunk. Install **Filebeat** if you're using the **Elastic stack** or **Splunk forwarder** if you're using **Splunk**. This is only necessary if the node is in a separated instance from Elasticsearch or Splunk.
+    - All manager nodes need an event forwarder in order to send data to Elasticsearch or Splunk. Install **Filebeat** if you're using the **Elastic Stack** or **Splunk forwarder** if you're using **Splunk**. This is only necessary if the node is in a separated instance from Elasticsearch or Splunk.
 
     **Installing Filebeat:**
 
