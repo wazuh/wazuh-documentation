@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Learn how to remotely configure agents using agent.conf. In this section you will find which capabilities can be configured remotely. 
+  :description: Learn how to remotely configure agents using agent.conf. In this section of the Wazuh documentation, you will find which capabilities can be configured remotely.
 
 .. _reference_agent_conf:
 
@@ -23,6 +23,7 @@ Agents can be configured remotely by using the ``agent.conf`` file. The followin
 - :doc:`System inventory <../capabilities/syscollector>` (**syscollector**)
 - :doc:`Avoid events flooding <ossec-conf/client_buffer>` (**client_buffer**)
 - :doc:`Configure osquery wodle <ossec-conf/wodle-osquery>` (**wodle name="osquery"**)
+- :doc:`force_reconnect_interval setting <ossec-conf/client>` (**client**)
 
 .. note::
   When setting up remote commands in the shared agent configuration, **you must enable remote commands for Agent Modules**. This is enabled by adding the following line to the ``/var/ossec/etc/local_internal_options.conf`` file in the agent:
