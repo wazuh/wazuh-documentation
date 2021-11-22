@@ -9,10 +9,6 @@ Slack integration
 
 Wazuh allows connection to external APIs and alerting tools such as `Slack <https://slack.com/>`_. By using the :ref:`wazuh-integratord <wazuh-integratord>` deamon, the solution can report alerts through messages sent to the platform. 
 
-In this scenario you will need:
-
-* CentOS Linux 8 with Wazuh manager up and running
-
 For more information about integrations, check the :ref:`manual_integration` section of the documentation.
 
 Configuration

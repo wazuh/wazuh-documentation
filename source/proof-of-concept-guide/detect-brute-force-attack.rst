@@ -2,10 +2,6 @@
 .. meta::
   :description: This POC shows how Wazuh provides out-of-the-box rules capable of identifying brute-force attacks by correlating multiple authentication failure events. Learn more in this section.
 
-In this scenario you will need:
-
-* An external Linux system for simulate the attacker
-
 .. _poc_detect_bruteforce:
 
 Detecting a brute-force attack
@@ -38,7 +34,7 @@ Steps to generate the alerts
 
         .. code-block:: console
 
-            # for i in `seq 1 10`; do sshpass -p 'wrong_password' ssh -o StrictHostKeyChecking=no <username@centos.agent.endpoint>; done
+            # hydra -l root -p wrong_password <centos.agent.endpoint> ssh
 
     - For the monitored Windows endpoint:
   
@@ -50,7 +46,7 @@ Steps to generate the alerts
 Query the alerts
 ----------------
 
-At the Kibana menu go to the Discover option, from there you will be able to add filters and search-related alerts using the following filters:
+Click on the upper-left menu icon to open the options, and under the **Kibana** option menu, select **Discover**. On the search bar add filters to query the alerts.
 
 - Linux: ``rule.id:(5710 OR 5712)``. Other related rules are ``5711``, ``5716``, ``5720``, ``5503``, ``5504``.
 - Windows: ``rule.id:(60122 OR 60137)``

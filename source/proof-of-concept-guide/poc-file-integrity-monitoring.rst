@@ -9,12 +9,6 @@ File integrity monitoring
 
 In this POC, the Wazuh File Integrity Monitoring (FIM) system watches for modification of files in selected directories. Then, it triggers alerts when these files are modified. Additionally, FIM enriches alert data by fetching information about the user who made the changes and the process at play.
 
-In this scenario you will need:
-
-* CentOS Linux 8 with Wazuh manager up and running
-* CentOS Linux 8 with Wazuh agent installed
-* Windows system with Wazuh agent installed
-
 For more information about FIM functionality and configuration, see the `File integrity monitoring <manual_file_integrity>`_ section.
 
 Configuration
@@ -53,7 +47,7 @@ Steps to generate the alerts
 Query the alerts
 ----------------
 
-At the Kibana menu go to the Discover option, from there you will be able to add filters and search-related alerts using the following filter:
+Click on the upper-left menu icon to open the options, and under the **Kibana** option menu, select **Discover**. On the search bar add filters to query the alerts.
 
 - ``syscheck.path: "{path_to_the_modified_file}"``
 

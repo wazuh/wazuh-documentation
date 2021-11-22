@@ -1,11 +1,6 @@
 .. meta::
   :description: In this proof of concept, you create specific rules to alert about commands run by the user. Learn more about it in our documentation.
   
-In this scenario you will need:
-
-* CentOS Linux 8 with Wazuh agent installed
-
-
 .. _poc_audit_commands:
 
 Auditing commands run by a user
@@ -67,7 +62,7 @@ Steps to generate the alerts
 Query the alerts
 ----------------
 
-At the Kibana menu go to the Discover option, from there you will be able to add filters and search-related alerts using the following filter:
+Click on the upper-left menu icon to open the options, and under the **Kibana** option menu, select **Discover**. On the search bar add filters to query the alerts.
 
 * ``data.audit.exe: "/usr/bin/ping"``
 

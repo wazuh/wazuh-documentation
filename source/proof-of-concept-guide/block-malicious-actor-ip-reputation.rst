@@ -2,12 +2,6 @@
 .. meta::
   :description: In this POC, you identify the monitored Windows endpoint IP address as a bad reputation one. Learn more about it in our documentation.
 
-In this scenario you will need:
-
-* CentOS Linux 8 with Wazuh manager up and running
-* CentOS Linux 8 with Wazuh agent installed
-
-
 .. _poc_block_actor_IP_reputation:
 
 Blocking a malicious actor
@@ -136,7 +130,7 @@ Steps to generate the alerts
 Query the alerts
 ----------------
 
-Related alerts can be found with:
+Click on the upper-left menu icon to open the options, and under the **Kibana** option menu, select **Discover**. On the search bar add filters to query the alerts.
 
 * ``rule.id:(601 OR 100100)``
 
