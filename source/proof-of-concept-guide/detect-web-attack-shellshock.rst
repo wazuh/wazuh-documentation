@@ -1,3 +1,6 @@
+.. meta::
+  :description: Wazuh is capable of detecting a Shellshock attack by analyzing web server logs collected from a monitored endpoint. Learn more about this in this POC.
+
 .. _poc_detect_web_attack_shellshock:
 
 Detecting a Shellshock attack

@@ -1,3 +1,6 @@
+.. meta::
+  :description: The Wazuh module for Docker can be used to identify security incidents across containers, alerting in real time. Learn more about this in this POC.
+  
 .. _poc_monitoring_docker:
 
 Monitoring Docker
