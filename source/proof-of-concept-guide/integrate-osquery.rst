@@ -1,3 +1,7 @@
+.. meta::
+  :description: Wazuh agent can be integrated with Osquery, making it easy to capture additional information from the endpoint. Learn more about this in this POC.
+
+
 .. _poc_integrate_osquery:
 
 Osquery integration
@@ -75,7 +79,7 @@ Configure your environment as follows to test the POC.
             </wodle>
         </ossec_config>
 
-#. Don't forget to start `Osqueryd` service: 
+#. Start Osqueryd service. 
 
     .. code-block:: console
 
@@ -104,5 +108,4 @@ At the Kibana menu go to the Discover option, from there you will be able to add
           :title: Osquery integration
           :align: center
           :wrap_image: No
-
 

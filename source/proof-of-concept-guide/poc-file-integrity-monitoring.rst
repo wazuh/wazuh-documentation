@@ -1,9 +1,13 @@
+.. meta::
+  :description: The Wazuh File Integrity Monitoring system watches for modification of files in selected directories and triggers alerts when these files are modified. Learn more about it in this POC.
+
+
 .. _poc_fim:
 
 File integrity monitoring
 =========================
 
-In this POC, the Wazuh File integrity monitoring (FIM) system watches for modification of files in selected directories and then triggers alerts when these files are modified. Additionally, FIM enriches alert data by fetching information about the user who made the changes and the process at play.
+In this POC, the Wazuh File Integrity Monitoring (FIM) system watches for modification of files in selected directories. Then, it triggers alerts when these files are modified. Additionally, FIM enriches alert data by fetching information about the user who made the changes and the process at play.
 
 In this scenario you will need:
 
@@ -57,5 +61,4 @@ At the Kibana menu go to the Discover option, from there you will be able to add
           :title: File integrity monitoring
           :align: center
           :wrap_image: No
-
 

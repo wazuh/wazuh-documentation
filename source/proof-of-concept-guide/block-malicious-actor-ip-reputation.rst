@@ -10,18 +10,18 @@ In this scenario you will need:
 
 .. _poc_block_actor_IP_reputation:
 
-Blocking a malicious actor - IP Reputation
-==========================================
+Blocking a malicious actor
+==========================
 
-In this POC you identify the monitored Windows endpoint IP address as a bad reputation one. To do this, you log in to the Windows endpoint as the attacker and try connecting to the victim's Apache server.
+In this POC, you identify the monitored Windows endpoint IP address as a bad reputation one. To do this, you log into the Windows endpoint as the attacker and try connecting to the victim's Apache server running on a CentOS 8 system.
 
 
 Prerequisites
 -------------
 
-- You need an Apache server running on the monitored CentOS 8 agent system.
+- You need an Apache server running on the monitored CentOS 8 system.
 
-- Configure the Wazuh CentOS 8 agent host to monitor the Apache access logs in the ``/var/ossec/etc/ossec.conf`` configuration file.
+- Configure the Wazuh CentOS 8 host to monitor the Apache access logs in the ``/var/ossec/etc/ossec.conf`` configuration file.
 
     .. code-block:: XML
 
@@ -127,7 +127,7 @@ Configure your environment as follows to test the POC.
 Steps to generate the alerts
 ----------------------------
 
-#. Log in to the attacker's system (the monitored Windows endpoint).
+#. Log into the attacker's system (the monitored Windows endpoint).
 
 #. Connect to the victim's system (the Apache server in the monitored CentOS 8 endpoint) from a web browser. 
 
@@ -136,7 +136,7 @@ Steps to generate the alerts
 Query the alerts
 ----------------
 
-At the Kibana menu go to the Discover option, from there you will be able to add filters and search-related alerts using the following filter:
+Related alerts can be found with:
 
 * ``rule.id:(601 OR 100100)``
 

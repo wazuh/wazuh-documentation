@@ -1,14 +1,13 @@
+
+.. meta::
+  :description: This POC shows how Wazuh is capable of detecting if Netcat is running on a monitored host. Learn more about this in this section of the documentation.
+
 .. _poc_detect_unauthorized_process_netcat:
 
-Detecting unauthorized processes - Netcat
-=========================================
+Detecting unauthorized processes
+================================
 
 This POC shows how Wazuh is capable of detecting if Netcat is running on a monitored host.
-
-In this scenario you will need:
-
-* CentOS Linux 8 with Wazuh manager up and running
-* CentOS Linux 8 with Wazuh agent installed
 
 You can learn more about the :ref:`command monitoring capability <manual_command_monitoring>` in the documentation.
 
@@ -17,7 +16,7 @@ Configuration
 
 Configure your environment as follows to test the POC.
 
-#. Add the following configuration block under the `<localfile>` section of the ``/var/ossec/etc/ossec.conf`` file at the monitored CentOS 8 endpoint. This is to periodically get a list of running processes.
+#. Add the following configuration block under the ``<localfile>`` section of the ``/var/ossec/etc/ossec.conf`` file at the monitored CentOS 8 endpoint. This is to periodically get a list of running processes.
 
     .. code-block:: XML
 
@@ -36,7 +35,7 @@ Configure your environment as follows to test the POC.
 
         # systemctl restart wazuh-agent
 
-#. Install Netcat and required dependencies on the CentOS 8 agent endpoint.
+#. Install Netcat and required dependencies on the CentOS 8 endpoint.
 
     .. code-block:: console
 
@@ -64,7 +63,7 @@ Configure your environment as follows to test the POC.
 Steps to generate alerts
 ------------------------
 
-#. Log in to the monitored CentOS 8 system and run ``nc -l 8000`` for 30 seconds.
+#. Log into the monitored CentOS 8 system and run ``nc -l 8000`` for 30 seconds.
 
 Query the alerts
 ----------------
@@ -77,5 +76,4 @@ At the Kibana menu go to the Discover option, from there you will be able to add
           :title: Detecting unauthorized processes - Netcat
           :align: center
           :wrap_image: No
-
 

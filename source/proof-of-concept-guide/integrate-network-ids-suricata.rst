@@ -1,9 +1,12 @@
+.. meta::
+  :description: Wazuh can be integrated with Suricata, a NIDS that can detect threats by monitoring network traffic. Learn more about this in this POC.
+
 .. _poc_ids_integration_suricata:
 
-Network IDS integration - Suricata
-==================================
+Network IDS integration
+=======================
 
-Suricata is a network-based intrusion detection system (NIDS) that can detect threats by monitoring network traffic. This solution is capable of generating JSON logs of NIDS events and provides additional insight into your security with its network traffic inspection capabilities.
+Wazuh can be integrated with Suricata, a network-based intrusion detection system (NIDS) that can detect threats by monitoring network traffic. This solution is capable of generating JSON logs of NIDS events and provides additional insight into your security with its network traffic inspection capabilities.
 
 In this scenario you will need:
 

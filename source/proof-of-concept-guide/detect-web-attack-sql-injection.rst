@@ -1,26 +1,24 @@
+.. meta::
+  :description: Wazuh is capable of detecting an SQL Injection attack from web server logs showing common SQL patterns of attack in a monitored endpoint. Learn more about this in this POC.
+
 .. _poc_detect_web_attack_sql_injection:
 
-Detecting a web attack - SQL injection
-======================================
+Detecting an SQL Injection attack
+=================================
 
-Wazuh is able to detect a `SQL Injection attack <https://portswigger.net/web-security/sql-injection>`_ from web server logs showing patterns like ``select``, ``union``, and other common SQL patterns of attack in a monitored endpoint.
-
-In this scenario you will need:
-
-* CentOS Linux 8 with Wazuh agent installed
-* An extra system to simulate the attacker
+Wazuh is able to detect an `SQL Injection attack <https://portswigger.net/web-security/sql-injection>`_ from web server logs showing patterns like ``select``, ``union``, and other common SQL patterns of attack in a monitored endpoint.
 
 If Suricata integration is configured to monitor the endpoint's network traffic, the attack can additionally be detected at a network level.
 
 Prerequisites
 -------------
 
-- You need an Apache server running on the monitored CentOS 8 agent system.
+- You need an Apache server running on the monitored CentOS 8 system.
 
 Configuration
 -------------
 
-#. Add the following lines to ``/var/ossec/etc/ossec.conf`` at the Wazuh CentOS 8 agent host. This sets the Linux agent to monitor the access logs of your Apache server.
+#. Add the following lines to ``/var/ossec/etc/ossec.conf`` at the Wazuh CentOS 8 host. This sets the Linux agent to monitor the access logs of your Apache server.
 
     .. code-block:: XML
 
@@ -29,7 +27,7 @@ Configuration
         <location>/var/log/httpd/access_log</location>
         </localfile>
 
-Optionally, you can install Suricata in the CentOS 8 agent endpoint and configure it to monitor the endpoint's network traffic.
+Optionally, you can install Suricata in the CentOS 8 endpoint and configure it to monitor the endpoint's network traffic.
 
 Steps to generate the alerts
 ----------------------------
@@ -47,11 +45,5 @@ At the Kibana menu go to the Discover option, from there you will be able to add
 
 * ``rule.id:31103``
 
-.. thumbnail:: ../images/poc/Detecting_an_SQL_Injection_attack.png
-          :title: Detecting a web attack - SQL injection
-          :align: center
-          :wrap_image: No
-
 If you have Suricata monitoring the endpoint's traffic you can also query ``data.alert.signature_id:2006445`` for the related Suricata's alerts.
-
 

@@ -13,16 +13,16 @@ Auditing commands run by a user
 
 In this POC, you create specific rules to alert about commands run by the user. To do this, you have to first enable Audit logging for it to capture and log execve system calls so the Wazuh agent can read these logs. 
 
-For more information on Linux auditd system, see the :ref:`Audit configuration guide <learning_wazuh_audit_commands>` section. In addition, `CentOS Audit documentation <https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/security_hardening/auditing-the-system_security-hardening>`_ has extended information about the Audit kernel subsystem.
+Check our documentation to learn more about the :ref:`Linux auditd system <learning_wazuh_audit_commands>`. In addition, `CentOS Audit documentation <https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/security_hardening/auditing-the-system_security-hardening>`_ has extended information about the Audit kernel subsystem.
 
 Configuration
 -------------
 
 Configure your environment as follows to test the POC.
 
-#. Run ``systemctl status auditd.service`` to check that the Linux Auditing System is installed and running on your CentOS 8 agent endpoint.
+#. Run ``systemctl status auditd.service`` to check that the Linux Auditing System is installed and running on your CentOS 8 endpoint.
 
-#. Check that ``/var/ossec/etc/ossec.conf`` in your CentOS 8 agent endpoint is configured for the agent to read the ``audit.log`` file. This configuration is included by default.
+#. Check that ``/var/ossec/etc/ossec.conf`` in your CentOS 8 endpoint is configured for the agent to read the ``audit.log`` file. This configuration is included by default.
 
    .. code-block:: XML
 
@@ -31,7 +31,7 @@ Configure your environment as follows to test the POC.
         <location>/var/log/audit/audit.log</location>
       </localfile>
 
-#. Get your current euid in the CentOS 8 agent endpoint. This is needed to monitor the actions of your user. Root user monitoring is not recommended for this test, as it can be quite noisy.
+#. Get your current euid in the CentOS 8 endpoint. This is needed to monitor the actions of your user. Root user monitoring is not recommended for this test, as it can be quite noisy.
 
     .. code-block:: console
 
@@ -60,7 +60,7 @@ Configure your environment as follows to test the POC.
 Steps to generate the alerts
 ----------------------------
 
-#. Log in to the CentOS 8 agent endpoint as the monitored user.
+#. Log into the CentOS 8 endpoint as the monitored user.
 
 #. Execute a ping to *www.google.com*
 
