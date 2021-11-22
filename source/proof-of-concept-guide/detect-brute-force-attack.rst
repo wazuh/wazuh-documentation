@@ -46,7 +46,7 @@ Steps to generate the alerts
 Query the alerts
 ----------------
 
-Click on the upper-left menu icon to open the options, and under the **Kibana** option menu, select **Discover**. On the search bar add filters to query the alerts.
+In Kibana, click on the upper-left menu icon to open the options, and under the **Kibana** section select **Discover**. On the search bar add filters to query the alerts.
 
 - Linux: ``rule.id:(5710 OR 5712)``. Other related rules are ``5711``, ``5716``, ``5720``, ``5503``, ``5504``.
 - Windows: ``rule.id:(60122 OR 60137)``
