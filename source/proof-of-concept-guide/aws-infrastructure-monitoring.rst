@@ -9,10 +9,6 @@ Amazon AWS infrastructure monitoring
 
 This POC shows how the Wazuh module for AWS (aws-s3) enables log data gathering from different AWS sources. 
 
-In this scenario you will need:
-
-* CentOS Linux 8 with Wazuh manager up and running
-
 To learn more about monitoring AWS resources, see the :ref:`Using Wazuh to monitor AWS <amazon>`  section of the documentation.
 
 
