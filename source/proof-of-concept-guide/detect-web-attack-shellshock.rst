@@ -11,11 +11,6 @@ Check the :ref:`Wazuh Shellshock Attack documentation <learning_wazuh_shellshock
 
 Check the :ref:`Wazuh Shellshock attack <learning_wazuh_shellshock>` section for further information. In addition, for further detection, the attack can also be detected at a network level when Suricata integration is configured.
 
-In this scenario you will need:
-
-* CentOS Linux 8 with Wazuh manager up and running
-* CentOS Linux 8 with Wazuh agent installed
-
 In addition, for further detection, the attack can also be detected at a network level when Suricata integration is configured.
 
 
