@@ -70,7 +70,7 @@ Query the alerts
 
 In Kibana, click on the upper-left menu icon to open the options and select **Discover**. On the search bar, add filters to query the alerts.
 
-- ``rule.id:(601 OR 100051)``
+- ``rule.id:(533 OR 100051)``
 
 .. thumbnail:: ../images/poc/Detecting_unauthorized_processes.png
           :title: Detecting unauthorized processes - Netcat
