@@ -16,7 +16,7 @@ Configuration
 
 Configure your environment as follows to test the POC.
 
-#. Edit ``/var/ossec/etc/ossec.conf`` in the monitored CentOS 8 endpoint and enable `whodata` by adding ``whodata="yes"`` to the monitored directories. 
+#. Edit ``/var/ossec/etc/ossec.conf`` in the monitored CentOS 8 endpoint and enable whodata by adding ``whodata="yes"`` to the monitored directories. 
 
     .. code-block:: XML
         
