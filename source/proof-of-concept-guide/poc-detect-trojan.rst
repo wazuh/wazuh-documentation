@@ -59,11 +59,12 @@ Steps to generate the alerts
 Query the alerts
 ----------------
 
-Related alerts can be found with the following query once the next rootcheck scan has been completed:
+In Kibana, click on the upper-left menu icon to open the options and select **Discover**. On the search bar, add filters to query the alerts.
 
 * ``location:rootcheck AND rule.id:510 AND data.title:Trojan*``
 
-Affected endpoints
-------------------
+.. thumbnail:: ../images/poc/Detecting_suspicious_binaries.png
+          :title: Detecting suspicious binaries - Trojan
+          :align: center
+          :wrap_image: No
 
-* CentOS 8 endpoint

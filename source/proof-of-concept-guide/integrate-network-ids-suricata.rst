@@ -77,14 +77,14 @@ Steps to generate the alerts
 Query the alerts
 ----------------
 
-Related alerts can be found with:
+In Kibana, click on the upper-left menu icon to open the options and select **Discover**. On the search bar, add filters to query the alerts.
 
 - ``rule.groups:*suricata*``
 
-Affected endpoint
------------------
-
-- Linux CentOS 8
+.. thumbnail:: ../images/poc/Network_IDS_integration.png
+          :title: Network IDS integration - Suricata
+          :align: center
+          :wrap_image: No
 
 Troubleshooting
 ---------------

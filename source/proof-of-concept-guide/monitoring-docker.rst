@@ -1,7 +1,6 @@
 .. meta::
   :description: The Wazuh module for Docker can be used to identify security incidents across containers, alerting in real time. Learn more about this in this POC.
-
-
+  
 .. _poc_monitoring_docker:
 
 Monitoring Docker
@@ -56,15 +55,15 @@ Steps to generate the alerts
 Query the alerts
 ----------------
 
-Related alerts can be found with:
+In Kibana, click on the upper-left menu icon to open the options and select **Discover**. On the search bar, add filters to query the alerts.
 
 * ``rule.groups: "docker"``
 * Additionally, the ``data.docker.Action`` field states which action was performed.
 
-Affected endpoints
-------------------
-
-* CentOS 8 endpoint
+.. thumbnail:: ../images/poc/Monitoring_Docker.png
+          :title: Monitoring Docker
+          :align: center
+          :wrap_image: No
 
 Troubleshooting
 ---------------

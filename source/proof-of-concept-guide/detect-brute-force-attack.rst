@@ -34,7 +34,7 @@ Steps to generate the alerts
 
         .. code-block:: console
 
-            # for i in `seq 1 10`; do sshpass -p 'wrong_password' ssh -o StrictHostKeyChecking=no <username@centos.agent.endpoint>; done
+            # hydra -l root -p wrong_password <centos.agent.endpoint> ssh
 
     - For the monitored Windows endpoint:
   
@@ -46,13 +46,13 @@ Steps to generate the alerts
 Query the alerts
 ----------------
 
-Related alerts can be found with:
+In Kibana, click on the upper-left menu icon to open the options and select **Discover**. On the search bar, add filters to query the alerts.
 
 - Linux: ``rule.id:(5710 OR 5712)``. Other related rules are ``5711``, ``5716``, ``5720``, ``5503``, ``5504``.
 - Windows: ``rule.id:(60122 OR 60137)``
 
-Affected endpoints
-------------------
+.. thumbnail:: ../images/poc/Detecting_a_brute_force_attack.png
+          :title: Detecting a brute-force attack
+          :align: center
+          :wrap_image: No
 
-- CentOS 8 endpoint
-- Windows endpoint

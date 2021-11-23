@@ -96,11 +96,12 @@ Steps to generate the alerts
 Query the alerts
 ----------------
 
-Related alerts can be found with:
+In Kibana, click on the upper-left menu icon to open the options and select **Discover**. On the search bar, add filters to query the alerts.
 
 * ``rule.groups:osquery``
 
-Affected endpoints
-------------------
+.. thumbnail:: ../images/poc/Osquery_integration.png
+          :title: Osquery integration
+          :align: center
+          :wrap_image: No
 
-* CentOS 8 endpoint

@@ -68,11 +68,12 @@ Steps to generate alerts
 Query the alerts
 ----------------
 
-Related alerts can be found with:
+In Kibana, click on the upper-left menu icon to open the options and select **Discover**. On the search bar, add filters to query the alerts.
 
 - ``rule.id:(601 OR 100051)``
 
-Affected endpoints
-------------------
+.. thumbnail:: ../images/poc/Detecting_unauthorized_processes.png
+          :title: Detecting unauthorized processes - Netcat
+          :align: center
+          :wrap_image: No
 
-- CentOS 8 endpoint

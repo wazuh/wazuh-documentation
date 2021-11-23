@@ -1,6 +1,6 @@
 .. meta::
   :description: In this proof of concept, you create specific rules to alert about commands run by the user. Learn more about it in our documentation.
-
+  
 .. _poc_audit_commands:
 
 Auditing commands run by a user
@@ -62,11 +62,14 @@ Steps to generate the alerts
 Query the alerts
 ----------------
 
-Related alerts can be found with:
+In Kibana, click on the upper-left menu icon to open the options and select **Discover**. On the search bar, add filters to query the alerts.
 
 * ``data.audit.exe: "/usr/bin/ping"``
 
-Affected endpoints
-------------------
 
-* CentOS 8 endpoint
+.. thumbnail:: ../images/poc/Auditing_commands_run_by_a_user.png
+          :title: Auditing commands run by a user
+          :align: center
+          :wrap_image: No
+
+

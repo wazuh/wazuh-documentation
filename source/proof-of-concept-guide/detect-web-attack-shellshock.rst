@@ -10,6 +10,7 @@ Wazuh is capable of detecting a Shellshock attack by analyzing web server logs c
 
 Check the :ref:`Wazuh Shellshock attack <learning_wazuh_shellshock>` section for further information. In addition, for further detection, the attack can also be detected at a network level when Suricata integration is configured.
 
+
 Prerequisites
 -------------
 
@@ -41,13 +42,9 @@ Steps to generate the alerts
 Query the alerts
 ----------------
 
-Related alerts, based on the web server log analysis, can be found with:
+In Kibana, click on the upper-left menu icon to open the options and select **Discover**. On the search bar, add filters to query the alerts.
 
 - ``rule.description:*shellshock*``
 
 - If you have Suricata monitoring the endpoint's traffic, you can also query ``rule.description:*CVE-2014-6271*`` for the related Suricata's alerts.
 
-Affected endpoints
-------------------
-
--  CentOS 8 endpoint

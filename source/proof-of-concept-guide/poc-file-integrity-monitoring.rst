@@ -47,12 +47,12 @@ Steps to generate the alerts
 Query the alerts
 ----------------
 
-Related alerts can be found with:
+In Kibana, click on the upper-left menu icon to open the options and select **Discover**. On the search bar, add filters to query the alerts.
 
 - ``syscheck.path: "{path_to_the_modified_file}"``
 
-Affected endpoints
-------------------
+.. thumbnail:: ../images/poc/File_integrity_monitoring.png
+          :title: File integrity monitoring
+          :align: center
+          :wrap_image: No
 
-- CentOS 8 endpoint
-- Windows endpoint
