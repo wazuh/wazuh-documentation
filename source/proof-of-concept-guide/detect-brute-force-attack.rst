@@ -46,13 +46,20 @@ Steps to generate the alerts
 Query the alerts
 ----------------
 
-In Kibana, click on the upper-left menu icon to open the options and select **Discover**. On the search bar, add filters to query the alerts.
+In the **Wazuh Kibana Plugin**, at **Security events** module. On the search bar, add filters to query the alerts.
 
 - Linux: ``rule.id:(5710 OR 5712)``. Other related rules are ``5711``, ``5716``, ``5720``, ``5503``, ``5504``.
-- Windows: ``rule.id:(60122 OR 60137)``
 
-.. thumbnail:: ../images/poc/Detecting_a_brute_force_attack.png
-          :title: Detecting a brute-force attack
+
+.. thumbnail:: ../images/poc/Detecting_a_brute_force_attack-1.png
+          :title: Detecting a brute-force attack on Linux
           :align: center
           :wrap_image: No
 
+
+- Windows: ``rule.id:(60122 OR 60137)``
+
+.. thumbnail:: ../images/poc/Detecting_a_brute_force_attack-2.png
+          :title: Detecting a brute-force attack on Windows
+          :align: center
+          :wrap_image: No

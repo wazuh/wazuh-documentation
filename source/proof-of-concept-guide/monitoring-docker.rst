@@ -55,7 +55,7 @@ Steps to generate the alerts
 Query the alerts
 ----------------
 
-In Kibana, click on the upper-left menu icon to open the options and select **Discover**. On the search bar, add filters to query the alerts.
+In the **Wazuh Kibana Plugin**, at **Security events** module. On the search bar, add filters to query the alerts.
 
 * ``rule.groups: "docker"``
 * Additionally, the ``data.docker.Action`` field states which action was performed.
