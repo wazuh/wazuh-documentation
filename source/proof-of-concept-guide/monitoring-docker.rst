@@ -68,23 +68,23 @@ You can visualize the alert data in the Wazuh Kibana plugin. To do this, go to t
 Troubleshooting
 ---------------
 
-* In case of getting the following error in the agent log file ``/var/ossec/logs/ossec.log``: 
+* Error in the agent log file ``/var/ossec/logs/ossec.log``: 
 
     ``wazuh-modulesd:docker-listener: ERROR: /usr/bin/env: ‘python’: No such file or directory`` 
 
-    This can be solved by creating a symbolic link.
+This can be solved by creating a symbolic link.
 
-        .. code-block:: console
-            
-            # ln -s /usr/bin/python3 /usr/bin/python
+    .. code-block:: console
+        
+        # ln -s /usr/bin/python3 /usr/bin/python
 
-* In case of getting the following error in the agent log file ``/var/ossec/logs/ossec.log``: 
+* Error in the agent log file ``/var/ossec/logs/ossec.log``: 
 
     ``wazuh-modulesd:docker-listener: ERROR: 'docker' module needs to be installed. Execute 'pip install docker' to do it.`` 
 
-    This can be solved by running the following command.
+This can be solved by running the following command.
+    
+    .. code-block:: console
         
-        .. code-block:: console
-            
-            # pip3 install docker
+        # pip3 install docker
 

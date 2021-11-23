@@ -142,7 +142,9 @@ You can visualize the alert data in the Wazuh Kibana plugin. To do this, go to t
 Troubleshooting
 ----------------
 
-* In case of Python command not working during step 4, create a symbolic link to solve the issue.
+* Python command not working during step 4.
+ 
+This can be solved by creating a symbolic link.
 
     .. code-block:: console
         

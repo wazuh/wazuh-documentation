@@ -89,4 +89,6 @@ You can visualize the alert data in the Wazuh Kibana plugin. To do this, go to t
 Troubleshooting
 ---------------
 
-In case of getting errors concerning network interface in Suricata log file ``/var/log/suricata/suricata.log``, don't forget to check the name of your network interface and configure it accordingly in the files ``/etc/sysconfig/suricata`` and ``/etc/suricata/suricata.yaml``.
+* Error concerning network interface in Suricata log file ``/var/log/suricata/suricata.log``.
+  
+To solve this issue, check the name of your network interface and configure it accordingly in the files ``/etc/sysconfig/suricata`` and ``/etc/suricata/suricata.yaml``.
