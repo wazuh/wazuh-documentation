@@ -41,7 +41,7 @@ Configure your environment as follows to test the POC.
 
         # yum install nmap-ncat
 
-#. Add following rules to ``/var/ossec/etc/rules/local_rules.xml`` at the Wazuh manager's endpoint.
+#. Add following rules to ``/var/ossec/etc/rules/local_rules.xml`` at the Wazuh manager.
 
     .. code-block:: XML
 

@@ -18,7 +18,7 @@ Configure your environment as follows to test the POC.
 
 #. `Create a Slack webhook <https://api.slack.com/messaging/webhooks>`_. This is a unique URL to which Wazuh will send messages with the alerts.
 
-#. Replace ``YOUR_SLACK_WEBHOOK`` in the below configuration with the URL obtained in the previous step. Set this Slack integration configuration in ``/var/ossec/etc/ossec.conf`` at the Wazuh manager endpoint.
+#. Replace ``YOUR_SLACK_WEBHOOK`` in the below configuration with the URL obtained in the previous step. Set this Slack integration configuration in ``/var/ossec/etc/ossec.conf`` at the Wazuh manager.
 
     .. code-block:: XML
 

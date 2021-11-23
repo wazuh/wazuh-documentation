@@ -29,13 +29,13 @@ Configuration
 
 Configure your environment as follows to test the POC.
 
-#. Download the Alienvault IP reputation database to your Wazuh manager endpoint.
+#. Download the Alienvault IP reputation database to your Wazuh manager.
 
     .. code-block:: console
 
         # wget https://raw.githubusercontent.com/firehol/blocklist-ipsets/master/alienvault_reputation.ipset -O /var/ossec/etc/lists/alienvault_reputation.ipset
 
-#. Run the following command at the Wazuh manager endpoint (the attacker) replacing ``<your_windows_ip_address>`` with the monitored Windows endpoint's IP address.
+#. Run the following command at the Wazuh manager (the attacker), replacing ``<your_windows_ip_address>`` with the monitored Windows endpoint's IP address.
 
     .. code-block:: console
 
@@ -67,7 +67,7 @@ Configure your environment as follows to test the POC.
         # chown ossec:ossec /var/ossec/etc/lists/blacklist-alienvault
         # chmod 660 /var/ossec/etc/lists/blacklist-alienvault
 
-#. Add a custom rule to trigger the active response. This can be done in the ``/var/ossec/etc/rules/local_rules.xml`` file at the Wazuh manager endpoint.
+#. Add a custom rule to trigger the active response. This can be done in the ``/var/ossec/etc/rules/local_rules.xml`` file at the Wazuh manager.
 
     .. code-block:: XML
 
@@ -80,7 +80,7 @@ Configure your environment as follows to test the POC.
         </group>
         
 
-#. Add the appropriate active response settings to the  ``ruleset`` section of the  ``/var/ossec/etc/ossec.conf`` file at the Wazuh manager endpoint.
+#. Add the appropriate active response settings to the  ``ruleset`` section of the  ``/var/ossec/etc/ossec.conf`` file at the Wazuh manager.
 
     .. code-block:: XML
 

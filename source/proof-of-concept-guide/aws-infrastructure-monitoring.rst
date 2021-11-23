@@ -17,7 +17,7 @@ Configuration
 
 Configure your environment as follows to test the POC.
 
-#. Enable ``aws-s3`` wodle in the ``/var/ossec/etc/ossec.conf`` configuration file at the Wazuh manager endpoint.
+#. Enable ``aws-s3`` wodle in the ``/var/ossec/etc/ossec.conf`` configuration file at the Wazuh manager.
 
    .. code-block:: XML
 
