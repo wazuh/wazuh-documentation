@@ -47,7 +47,7 @@ Steps to generate the alerts
 Query the alerts
 ----------------
 
-In Kibana, click on the upper-left menu icon to open the options, and under the **Kibana** section select **Discover**. On the search bar add filters to query the alerts.
+In Kibana, click on the upper-left menu icon to open the options and select **Discover**. On the search bar, add filters to query the alerts.
 
 - ``syscheck.path: "{path_to_the_modified_file}"``
 
