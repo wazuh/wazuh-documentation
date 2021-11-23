@@ -42,9 +42,9 @@ Steps to generate the alerts
 Query the alerts
 ----------------
 
-In the **Wazuh Kibana Plugin**, at **Security events** module. On the search bar, add filters to query the alerts.
+You can visualize the alert data in the Wazuh Kibana plugin. To do this, go to the **Security events** module and add the filters in the search bar to query the alerts.
 
-- ``rule.description:*shellshock*``
+- ``rule.description:Shellshock attack attempt``
 
 - If you have Suricata monitoring the endpoint's traffic, you can also query ``rule.description:*CVE-2014-6271*`` for the related Suricata's alerts.
 

@@ -77,9 +77,9 @@ Steps to generate the alerts
 Query the alerts
 ----------------
 
-In the **Wazuh Kibana Plugin**, at **Security events** module. On the search bar, add filters to query the alerts.
+You can visualize the alert data in the Wazuh Kibana plugin. To do this, go to the **Security events** module and add the filters in the search bar to query the alerts.
 
-- ``rule.groups:*suricata*``
+- ``rule.groups:suricata``
 
 .. thumbnail:: ../images/poc/Network_IDS_integration.png
           :title: Network IDS integration - Suricata
