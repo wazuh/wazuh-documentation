@@ -38,7 +38,7 @@ Configure your environment as follows to test the POC.
 Steps to generate the alerts
 ----------------------------
 
-#. No action is required. Wazuh automatically forwards alerts level 10 or higher to the provided Slack webhook.
+No action is required. Wazuh automatically forwards alerts level 10 or higher to the provided Slack webhook.
 
 Query the alerts
 ----------------

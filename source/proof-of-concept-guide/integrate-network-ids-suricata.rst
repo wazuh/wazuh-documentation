@@ -72,7 +72,7 @@ Configure your environment as follows to test the POC.
 Steps to generate the alerts
 ----------------------------
 
-#. No action is required. Wazuh automatically parses data from ``/var/log/suricata/eve.json`` and generates related alerts.
+No action is required. Wazuh automatically parses data from ``/var/log/suricata/eve.json`` and generates related alerts.
 
 Query the alerts
 ----------------
