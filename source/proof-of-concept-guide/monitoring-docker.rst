@@ -8,7 +8,7 @@ Monitoring Docker
 
 The Wazuh module for Docker can be used to identify security incidents across containers, alerting in real time. It acts as a subscriber to the Docker Engine API.
 
-Learn more about monitoring Docker and the Docker wodle, see the :ref:`Monitoring container activity <docker-monitor-index>` section of the documentation.
+To learn more about monitoring Docker and the Docker wodle, see the :ref:`Monitoring container activity <docker-monitor-index>` section of the documentation.
 
 
 Configuration
