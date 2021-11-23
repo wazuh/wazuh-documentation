@@ -41,9 +41,14 @@ Steps to generate the alerts
 Query the alerts
 ----------------
 
-In Kibana, click on the upper-left menu icon to open the options and select **Discover**. On the search bar, add filters to query the alerts.
+In the **Wazuh Kibana Plugin**, at **Security events** module. On the search bar, add filters to query the alerts.
 
 * ``rule.id:31103``
 
-If you have Suricata monitoring the endpoint's traffic you can also query ``data.alert.signature_id:2006445`` for the related Suricata's alerts.
+You can visualize the alert data in the Wazuh Kibana plugin. To do this, go to the **Security events** module and add the filters in the search bar to query the alerts.
 
+
+.. thumbnail:: ../images/poc/Detecting_an_SQL_Injection_attack.png
+          :title: Detecting an SQL Injection attack
+          :align: center
+          :wrap_image: No
