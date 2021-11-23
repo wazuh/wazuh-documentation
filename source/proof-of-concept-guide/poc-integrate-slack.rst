@@ -29,6 +29,12 @@ Configure your environment as follows to test the POC.
             <alert_format>json</alert_format>
         </integration>
 
+#. Restart the Wazuh manager to apply the configuration changes.
+
+    .. code-block:: console
+
+        # systemctl restart wazuh-manager        
+
 Steps to generate the alerts
 ----------------------------
 
