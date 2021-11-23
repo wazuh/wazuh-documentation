@@ -34,7 +34,7 @@ Steps to generate the alerts
 
         .. code-block:: console
 
-            # hydra -l root -p wrong_password <centos.agent.endpoint> ssh
+            # hydra -l badguy -p wrong_password <centos.agent.endpoint> ssh
 
     - For the monitored Windows endpoint:
   
