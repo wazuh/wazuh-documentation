@@ -132,7 +132,7 @@ Query the alerts
 
 In Kibana, click on the upper-left menu icon to open the options and select **Discover**. On the search bar, add filters to query the alerts.
 
-* ``rule.id:(601 OR 100100)``
+* ``rule.id:(651 OR 100100)``
 
 .. thumbnail:: ../images/poc/Blocking_a_malicious_actor.png
           :title: Blocking a malicious actor - IP Reputation
