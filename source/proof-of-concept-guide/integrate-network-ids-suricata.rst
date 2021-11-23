@@ -16,7 +16,7 @@ Configuration
 
 Configure your environment as follows to test the POC.
 
-#. Install Suricata (with version 5.0.4) on the CentOS 8 monitored endpoint. This requires EPEL repository that depends on your operating system version.
+#. Install Suricata (tested with version 5.0.7) on the CentOS 8 monitored endpoint. This requires EPEL repository that depends on your operating system version.
 
     .. code-block:: XML
 
@@ -89,4 +89,4 @@ In Kibana, click on the upper-left menu icon to open the options and select **Di
 Troubleshooting
 ---------------
 
-* In case of getting errors concerning network interface in suricata log file /var/log/suricata/suricata.log. Don't forget to check the name of your network interface and configure accordingly, here ``/etc/sysconfig/suricata`` and here ``/etc/suricata/suricata.yaml``.
+In case of getting errors concerning network interface in Suricata log file ``/var/log/suricata/suricata.log``, don't forget to check the name of your network interface and configure it accordingly in the files ``/etc/sysconfig/suricata`` and ``/etc/suricata/suricata.yaml``.
