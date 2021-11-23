@@ -19,7 +19,7 @@ Configure your environment as follows to test the POC.
 
 - Make sure you have SSH installed and enabled in a system chosen to play as an attacker.
 
-- Install Hydra if you want to execute automated RDP connections. 
+- Install Hydra on an external Linux system to execute the brute-force attacks. 
 
     .. code-block:: XML
 
@@ -28,7 +28,7 @@ Configure your environment as follows to test the POC.
 Steps to generate the alerts
 ----------------------------
 
-#. Replace ``<username@centos.agent.endpoint>`` for Linux and ``<username@win.agent.endpoint>`` for Windows with the appropriate destination in the following commands and run multiple failed authentication failure attempts against the monitored endpoints.
+#. Replace ``<centos.agent.endpoint>`` for Linux and ``<win.agent.endpoint>`` for Windows with the appropriate destination in the following commands and run multiple failed authentication failure attempts against the monitored endpoints.
 
     - For the monitored Linux endpoint:
 
