@@ -7,7 +7,7 @@
 Proof of Concept guide
 ======================
 
-The Proof of Concept (POC) guide explores how to set up the Wazuh environment to test or demo the different product capabilities. Each POC represents real-world scenarios for which a specific configuration is needed to set up different use cases. To verify the feasibility of the product, further information is provided on how to generate and query the alerts, and the affected endpoints resulting from each POC.
+The Proof of Concept (POC) guide explores how to set up the Wazuh environment to test or demo the different product capabilities. Each POC represents real-world scenarios that users can deploy using specific configurations. In addition, further information is provided to verify the feasibility of the product on how to generate and query the alerts, and the affected endpoints resulting from each POC.
 
 
 Prerequisites
