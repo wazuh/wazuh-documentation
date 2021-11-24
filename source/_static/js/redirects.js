@@ -38,7 +38,24 @@ removedUrls['x.y'] = [
 
 /* Pages added in 4.2 */
 
-newUrls['4.2'] = [
+
+  '/proof-of-concept-guide/detect-malware-yara-integration.html',
+  '/proof-of-concept-guide/poc-vulnerability-detection.html',
+  '/proof-of-concept-guide/detect-remove-malware-virustotal.html',
+  '/proof-of-concept-guide/poc-detect-trojan.html',
+  '/proof-of-concept-guide/poc-integrate-slack.html',
+  '/proof-of-concept-guide/detect-web-attack-sql-injection.html',
+  '/proof-of-concept-guide/detect-web-attack-shellshock.html',
+  '/proof-of-concept-guide/integrate-network-ids-suricata.html',
+  '/proof-of-concept-guide/integrate-osquery.html',
+  '/proof-of-concept-guide/detect-unauthorized-processes-netcat.html',
+  '/proof-of-concept-guide/block-malicious-actor-ip-reputation.html',
+  '/proof-of-concept-guide/poc-file-integrity-monitoring.html',
+  '/proof-of-concept-guide/monitoring-docker.html',
+  '/proof-of-concept-guide/detect-brute-force-attack.html',
+  '/proof-of-concept-guide/aws-infrastructure-monitoring.html',
+  '/proof-of-concept-guide/audit-commands-run-by-user.htm',
+  '/proof-of-concept-guide/index.html',
   '/deploying-with-ansible/guide/install-opendistro-server.html',
   '/deploying-with-ansible/roles/wazuh-opendistro.rst',
   '/release-notes/release-4-2-5.html',

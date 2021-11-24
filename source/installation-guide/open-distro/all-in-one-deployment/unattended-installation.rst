@@ -2,6 +2,8 @@
 
 .. meta::
   :description: Learn how to install Wazuh through an unattended installation using an automated script in this section of our documentation. 
+
+.. _unattended_all_in_one:
   
 Unattended installation
 =======================
