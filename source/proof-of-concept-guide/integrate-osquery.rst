@@ -91,7 +91,7 @@ Configure your environment as follows to test the POC.
 Steps to generate the alerts
 ----------------------------
 
-No action is required. Wazuh automatically reads the ``/var/log/osquery/osqueryd.results.log`` file and generates alerts based on the these logs.
+No action is required. Wazuh automatically reads the ``/var/log/osquery/osqueryd.results.log`` file and generates alerts based on these logs.
 
 Query the alerts
 ----------------
