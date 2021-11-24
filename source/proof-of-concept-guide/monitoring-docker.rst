@@ -6,7 +6,7 @@
 Monitoring Docker
 =================
 
-Docker automates the deployment of different applications inside software containers. The Wazuh module for Docker is a subscriber to the Docker Engine API. It can identify security incidents across containers and alert in real time.
+Docker automates the deployment of different applications inside software containers. The Wazuh module for Docker is a subscriber to the Docker Engine API that identifies security incidents across containers and alerts in real time.
 
 See the :ref:`Monitoring container activity <docker-monitor-index>` section of the documentation to learn more about monitoring Docker and the Docker wodle.
 
