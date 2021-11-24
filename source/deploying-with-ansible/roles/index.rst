@@ -3,7 +3,7 @@
 .. _ansible_wazuh_roles:
 
 Roles
-======
+=====
 
 You can use these roles to deploy Elastic Stack components, Wazuh Manager and Wazuh Agents, first clone our `GitHub repository <https://github.com/wazuh/wazuh-ansible>`_ directly to your Ansible roles folder:
 
@@ -21,6 +21,6 @@ Below we explain briefly how to use these roles, please check out `Ansible Playb
 
         wazuh-manager
         wazuh-filebeat
-        wazuh-elasticsearch
+        wazuh-opendistro
         wazuh-kibana
         wazuh-agent
