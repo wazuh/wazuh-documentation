@@ -7,8 +7,9 @@
 Detecting unauthorized processes
 ================================
 
-Netcat is a computer networking utility that functions as a back-end tool that allows for port scanning and port listening. This POC shows how Wazuh is capable of detecting if Netcat is running on a monitored host. Check our documentation to learn more about the :ref:`command monitoring capability <manual_command_monitoring>`.
+Netcat is a computer networking utility that functions as a back-end tool that allows for port scanning and port listening. This POC shows how Wazuh is capable of detecting if Netcat is running on a monitored host. 
 
+Check our documentation to learn more about the :ref:`command monitoring <manual_command_monitoring>` capabilities of Wazuh.
 
 Configuration
 -------------
