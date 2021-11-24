@@ -7,9 +7,10 @@
 Slack integration
 =================
 
-Wazuh allows connection to external APIs and alerting tools such as `Slack <https://slack.com/>`_. By using the :ref:`wazuh-integratord <wazuh-integratord>` deamon, the solution can report alerts through messages sent to the platform. 
+You can connect Wazuh to external APIs and alerting tools such as `Slack <https://slack.com/>`_. This integration allows reporting alerts through messages sent to the platform by using the :ref:`wazuh-integratord <wazuh-integratord>` deamon. 
 
 For more information about integrations, check the :ref:`manual_integration` section of the documentation.
+
 
 Configuration
 -------------
