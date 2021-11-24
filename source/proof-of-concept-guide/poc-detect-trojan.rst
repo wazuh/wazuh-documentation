@@ -6,7 +6,7 @@
 Detecting suspicious binaries
 =============================
 
-Wazuh provides you with powerful anomaly and malware detection capabilities capable of detecting suspicious binaries. In this POC, you detect trojaned system binaries by using signatures in the ``/var/ossec/etc/shared/rootkit_trojans.txt`` file. 
+Wazuh provides you with powerful anomaly and malware detection capabilities to detect suspicious binaries. In this POC, you detect trojaned system binaries by using signatures in the ``/var/ossec/etc/shared/rootkit_trojans.txt`` file. 
 
 Configuration
 -------------
