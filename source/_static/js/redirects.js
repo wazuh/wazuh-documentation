@@ -47,6 +47,7 @@ newUrls['4.3'] = [
   '/user-manual/reference/ossec-conf/office365-module.html',
   '/user-manual/capabilities/file-integrity/fim-fields-rule-mapping.html',
   '/user-manual/capabilities/log-data-collection/how-to-collect-macoslogs.html',
+  '/development/selinux-wazuh-context.html',
 ];
 
 /* *** RELEASE 4.2 ****/
