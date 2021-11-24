@@ -7,7 +7,7 @@
 Osquery integration
 ===================
 
-Wazuh agent can be integrated with Osquery, making it easy to capture additional information from the endpoint. This can be useful for telemetry and threat hinging.
+Wazuh agent can be integrated with Osquery, making it easy to capture additional information from the endpoint. This integration can be helpful for telemetry and threat hinging.
 
 More information about using Osquery with Wazuh can be found in the :ref:`Osquery <osquery>` section of our documentation.
 
