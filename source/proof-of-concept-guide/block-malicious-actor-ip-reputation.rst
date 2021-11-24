@@ -7,8 +7,7 @@
 Blocking a malicious actor
 ==========================
 
-In this POC, you identify the monitored Windows endpoint IP address as a bad reputation one. To do this, you log into the Windows endpoint as the attacker and try connecting to the victim's Apache server running on a CentOS 8 system.
-
+In this POC, you are able to identify the monitored Windows endpoint IP address as a bad reputation one. To do this, you need to log into the Windows endpoint as the attacker and try connecting to the victim's Apache server running on a CentOS 8 system.
 
 Prerequisites
 -------------
