@@ -57,7 +57,7 @@ Reference                                                         Description
 `#3668 <https://github.com/wazuh/wazuh-kibana-app/pull/3668>`_    A style compatibility issue of the breadcrumb navigation inside Kibana 7.14.2 is now fixed. 
 `#3670 <https://github.com/wazuh/wazuh-kibana-app/pull/3670>`_    This fix resolves the Wazuh API token not being deprecated after logout with Kibana 7.13 and 7.14. 
 `#3672 <https://github.com/wazuh/wazuh-kibana-app/pull/3672>`_    A Group Configuration and Management Configuration error is now fixed when the user tries to go back after saving.
-`#3674 <https://github.com/wazuh/wazuh-kibana-app/pull/3674>`_    This fix resolves that the panels and their titles are correctly displayed in the Welcome Overview and the Management Directory. In addition, it resolves that all the Wazuh menus are consistent without titles in gray. 
+`#3674 <https://github.com/wazuh/wazuh-kibana-app/pull/3674>`_    With this fix, the Panels and their titles are correctly displayed in the Welcome Overview and the Management Directory. In addition, it resolves that all the Wazuh menus are consistent without titles in gray. 
 `#3676 <https://github.com/wazuh/wazuh-kibana-app/pull/3676>`_    An issue with double flyout appearing when clicking a policy is now fixed.
 `#3678 <https://github.com/wazuh/wazuh-kibana-app/pull/3678>`_    Kibana settings conflict in health check is now fixed.
 `#3681 <https://github.com/wazuh/wazuh-kibana-app/pull/3681>`_    Compatibility to get the valid index patterns and refresh fields for Kibana 7.10.2-7.13.4 is now fixed.
