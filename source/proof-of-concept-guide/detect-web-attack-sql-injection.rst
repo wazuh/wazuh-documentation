@@ -6,9 +6,8 @@
 Detecting an SQL Injection attack
 =================================
 
-Wazuh is able to detect an `SQL Injection attack <https://portswigger.net/web-security/sql-injection>`_ from web server logs showing patterns like ``select``, ``union``, and other common SQL patterns of attack in a monitored endpoint.
+Wazuh is able to detect an `SQL Injection attack <https://portswigger.net/web-security/sql-injection>`_ from web server logs showing patterns like ``select``, ``union``, and other common SQL patterns of attack in a monitored endpoint. The attack can also be detected at a network level if you configure a :ref:`Suricata integration <learning_wazuh_suricata>` to monitor the endpoint's network traffic.
 
-If Suricata integration is configured to monitor the endpoint's network traffic, the attack can additionally be detected at a network level.
 
 Prerequisites
 -------------
