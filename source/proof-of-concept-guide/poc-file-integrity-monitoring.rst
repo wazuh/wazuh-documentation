@@ -7,9 +7,10 @@
 File integrity monitoring
 =========================
 
-In this POC, the Wazuh File Integrity Monitoring (FIM) system watches for modification of files in selected directories. Then, it triggers alerts when these files are modified. Additionally, FIM enriches alert data by fetching information about the user who made the changes and the process at play.
+In this POC, the Wazuh File Integrity Monitoring (FIM) system watches for the modification of files in the monitored directories to then trigger alerts when these files are modified. Additionally, FIM enriches alert data by fetching information about the user who made the changes and the process at play.
 
-For more information about FIM functionality and configuration, see the `File integrity monitoring <manual_file_integrity>`_ section.
+See the `File integrity monitoring <manual_file_integrity>`_ section of our documentation for more information about FIM functionality and configuration.
+
 
 Configuration
 -------------
