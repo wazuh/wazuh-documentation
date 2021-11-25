@@ -159,7 +159,7 @@ Choose the tab corresponding to the Wazuh agent host operating system:
 
          .. code-block:: console
 
-          # 'C:\Program Files (x86)\ossec-agent\manage_agents' -i <key>
+          # & "C:\Program Files (x86)\ossec-agent\manage_agents.exe" -i <key>
 
          An example output of the command looks as follows:
 

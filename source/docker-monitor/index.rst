@@ -18,5 +18,5 @@ This section provides instructions for monitoring Docker servers and container e
        :maxdepth: 2
 
        dependencies
-       monitoring_docker_server
-       monitoring_containers_activity
+       monitoring-docker-server
+       monitoring-containers-activity
