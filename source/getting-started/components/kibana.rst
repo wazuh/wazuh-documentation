@@ -35,7 +35,7 @@ Moreover, the application is flexible and allows users to create their own visua
    <div class="col-12 col-lg-6">
 
 
-.. thumbnail::  ../../images/getting_started/mudule_policy.png 
+.. thumbnail::  ../../images/getting_started/module_policy.png 
     :align: center
     :title: Modules directory
 
