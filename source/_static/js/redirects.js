@@ -38,7 +38,7 @@ removedUrls['x.y'] = [
 
 /* Pages added in 4.2 */
 
-
+newUrls['4.2'] = [
   '/proof-of-concept-guide/detect-malware-yara-integration.html',
   '/proof-of-concept-guide/poc-vulnerability-detection.html',
   '/proof-of-concept-guide/detect-remove-malware-virustotal.html',
