@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: The Wazuh Kibana plugin gives you a quick view of your agents, alerts, and cluster. Learn more about the Settings page in this section. 
+  :description: The Wazuh Kibana plugin gives you a quick view of your agents, alerts, and cluster. Learn how to configure its features in this section. 
   
 .. _kibana_settings:
 
