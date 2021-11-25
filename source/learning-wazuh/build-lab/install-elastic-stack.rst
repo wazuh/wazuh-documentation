@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Check out how to install the Elastic Stack to run Elasticsearch, Kibana, and the Wazuh plugin for Kibana. Learn more about it in this section. 
+  
 .. _build_lab_install_elastic_stack:
 
 Install the Elastic Stack
