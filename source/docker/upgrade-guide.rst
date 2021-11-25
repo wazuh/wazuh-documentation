@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: With Docker, you can automate the deployment of applications inside containers. Learn about the upgrade of a cluster running version previous to 4.x. here. 
+  :description: With Docker, you can automate the deployment of applications inside containers. Learn about the upgrade of a cluster running version previous to 4.0 here. 
   
 .. _upgrade-scenario:
 
