@@ -4,6 +4,12 @@
   Style for the release version selector.
 ----------------------------------------------------------------------------- */
 
+header {
+  .tooltip {
+    font-family: Manrope, sans-serif;
+  }
+}
+
 #version-selector {
 
   &.show {
@@ -16,16 +22,12 @@
     box-sizing: border-box;
     display: flex;
     align-items: center;
+    transition: color 0s;
     justify-content: space-between;
     width: calc((#{$leftSidebarWidth} + 32px) / 2);
     height: 40px;
-    background-color: $wuiColorEmptyShade;
-    border: 2px solid $wuiMainColorAccent;
-    border-radius: $roundedCorners;
-
-    &[aria-expanded="false"]:focus {
-      box-shadow: inset 0 0 2px 2px rgba($wuiColorMediumShade, .2);
-    }
+    border: 2px solid;
+    border-radius: $roundedCorners;    
     &:focus  {
       box-shadow: none;
     }
@@ -34,20 +36,109 @@
     top: 52px;
     box-sizing: border-box;
     width: 100%;
-    border: 2px solid $wuiMainColorAccent;
+    border: 2px solid;
     border-radius: 10px;
 
     > li > a {
       display: inline-block;
       width: 100%;
       padding: .16rem .75rem;
-      color: $wuiColorDarkestShade;
       text-decoration: none;
 
       &:hover,
       &:focus {
         font-weight: 700;
-        background-color: $wuiColorLightestShade;
+      }
+      
+      &.disabled {
+        font-weight: 500;
+        
+        &:hover,
+        &:focus {
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}
+
+/* Light theme -------------------------------------------------------------- */
+
+body {
+  header {
+    .tooltip {
+      .arrow::before {
+        border-left-color: $light_ColorHighlightBackground;
+      }
+      .tooltip-inner {
+        color: $light_ColorMainText;
+        background-color: $light_ColorHighlightBackground;
+      }
+    }
+  }
+  
+  #version-selector {
+    .dropdown-btn {
+      background-color: $light_ColorBaseSpace;
+      border-color:  $light_ColorAccent;
+      color: $light_ColorMainText;
+      &[aria-expanded="false"]:focus {
+        box-shadow: inset 0 0 2px 2px rgba($light_ColorFocusShade, .2);
+      }
+    }
+    .dropdown-menu {
+      background-color: $light_ColorBaseSpace;
+      border-color:  $light_ColorAccent;
+      > li > a {
+        color: $light_ColorMainText;
+        &:hover,
+        &:focus {
+          background-color: $light_ColorHighlightBackground;
+        }
+        &.disabled {
+          color: $light_ColorBorderDeeper;
+        }
+      }
+    }
+  }
+}
+
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme {
+  header {
+    .tooltip {
+      .arrow::before {
+        border-left-color: $dark_ColorHighlightBackground;
+      }
+      .tooltip-inner {
+        color: $dark_ColorMainText;
+        background-color: $dark_ColorHighlightBackground;
+      }
+    }
+  }
+  
+  #version-selector {
+    .dropdown-btn {
+      background-color: $dark_ColorBaseSpace;
+      border-color:  $dark_ColorAccent;
+      color: $dark_ColorMainText;
+      &[aria-expanded="false"]:focus {
+        box-shadow: inset 0 0 2px 2px rgba($dark_ColorFocusShade, .5);
+      }
+    }
+    .dropdown-menu {
+      background-color: $dark_ColorBaseSpace;
+      border-color:  $dark_ColorAccent;
+      > li > a {
+        color: $dark_ColorMainText;
+        &:hover,
+        &:focus {
+          background-color: $dark_ColorHighlightBackground;
+        }
+        &.disabled {
+          color: $dark_ColorInputPlaceholder;
+        }
       }
     }
   }

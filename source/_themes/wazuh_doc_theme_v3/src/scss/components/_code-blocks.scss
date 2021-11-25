@@ -22,7 +22,7 @@ main {
     display: flex;
     height: 48px;
     align-items: center;
-    border: 2px solid $inlineHighlightBackground;
+    border-radius: $roundedCorners $roundedCorners 0 0;
     padding: 5px 10px;
     justify-content: space-between;
     margin-top: 1rem;
@@ -37,7 +37,6 @@ main {
         display: inline-block;
         width: 1rem;
         height: 1rem;
-        color: $wuiColorDarkShade;
         font: normal bold normal 0.95rem/1 FontAwesome;
         text-align: right;
         opacity: 0;
@@ -52,37 +51,63 @@ main {
       }
     }
   }
+
+  tbody tr td {
+    padding: 0;
+    border: none;
+  }
 }
 
 [class*="highlight-"] {
   max-width: 100%;
+  max-height: 100vh;
   margin-bottom: 1rem;
   position: relative;
+  transition: max-height .2s;
+  overflow-y: hidden;
 
-  &.output.highlight-console .output-title {
-    height: 40px;
-    display: flex;
-    align-items: center;
-    background-color: $wuiColorLightestShade;
-    border-radius: $roundedCorners $roundedCorners 0 0;
-    font-weight: 700;
-    width: 100%;
-
-    &::before {
-      content: '';
+  &.output {
+    .output-title {
       height: 40px;
-      width: 40px;
-      background-image: url('#{$icoPath}svg-icons.svg#chevron-blue');
-      background-repeat: no-repeat;
-      background-size: 18px 18px;
-      background-position: center;
+      display: flex;
+      align-items: center;
+      border-radius: $roundedCorners $roundedCorners 0 0;
+      font-weight: 700;
+      width: 100%;
+      cursor: pointer;
+      
+      &::before {
+        content: '';
+        height: 40px;
+        width: 40px;
+        background-repeat: no-repeat;
+        background-size: 18px 18px;
+        background-position: center;
+        transition: transform .1s;
+      }
+    }
+    .linenodiv {
+      top: 60px;
+    }
+    &.collapsed {
+      max-height: 40px;
+      transition: max-height .2s;
+      
+      .output-title {
+        border-radius: $roundedCorners;
+        transition: border-radius 0.05s .2s;
+        &::before {
+          transform: rotateZ(-90deg);
+          transition: transform .1s;
+        }
+      }
     }
   }
 
   .highlighttable {
-    background-color: $codeBlockBG;
     table-layout:fixed;
     width: 100%;
+    margin-bottom: 0;
 
     .highlight {
       position: unset;
@@ -94,8 +119,45 @@ main {
     }
   }
 
-  td.code {
+  &:hover {
+    .copy-to-clipboard {
+      opacity: 1;
+    }
+  }
 
+  .copy-to-clipboard {
+    position: absolute;
+    z-index: 10;
+    top: 7px;
+    right: 7px;
+    cursor: pointer;
+    opacity: 0;
+    padding: 8px;
+    font: normal normal normal 14px/1 FontAwesome;
+    border: 0;
+    border-radius: $roundedCorners;
+    transition: all 0.2s ease;
+    
+    &:focus {
+      opacity: 1;
+    }
+    
+    &.copied {
+      opacity: 1;
+    }
+    
+    span {
+      display: none;
+      font-size: 0.9rem;
+      font-family: Manrope, sans-serif;
+    }
+  }
+
+  .no-select {
+    user-select: none;
+  }
+
+  td.code {
     pre {
       padding: 0 20px;
       overflow: visible;
@@ -106,7 +168,7 @@ main {
 
   .linenodiv {
     display: inline-flex;
-    border-right: 1px solid $wuiColorNeutralLight;
+    border-right: 1px solid;
     position: absolute;
     top: 20px;
     z-index: 10;
@@ -117,18 +179,16 @@ main {
 
   .linenos {
     width: 48px;
-    
   }
 
   .highlight {
-    background-color: $codeBlockBG;
     font-family: "Fira Mono", monospace;
-    color: $codeDefault;
     position: relative;
     padding: 20px 0 0;
     display: flex;
     overflow-x: auto;
     z-index: 0;
+    line-height: 24px;
 
     pre {
       margin: 0;
@@ -140,11 +200,10 @@ main {
       display: block;
 
       &::before {
-        background-color: $inlineHighlightBackground;
         position: absolute;
         left: 0;
         right: 0;
-        height: 23px;
+        height: 24px;
         display: block;
         content: '';
         z-index: -20;
@@ -167,89 +226,245 @@ main {
 
     .k,
     .kn {
-      color: $codeKeyword;
       font-weight: 700;
-    }
-
-    .c,
-    .c1,
-    .cp,
-    .ch,
-    .go {
-      color: $codeComment; 
-    }
-
-    .m,
-    .mi {
-      color: $codeNumber; 
-    }
-
-    .s,
-    .s1,
-    .s2,
-    .sb,
-    .se,
-    .sh,
-    .si {
-      color: $codeString; 
-    }
-
-    .vm,
-    .n,
-    .nb,
-    .bp,
-    .nf {
-      color: $codeFunction; 
-    }
-
-    .nt,
-    .na,
-    .no {
-      color: $codeVariable; 
     }
   }
 }
 
-.highlight-default {
-  .k,
-  .kn {
-    font-weight: 700;
-  }
+/* Light theme -------------------------------------------------------------- */
 
-  .c,
-  .c1,
-  .cp,
-  .ch,
-  .go {
-    color: $codeComment; 
+body {
+  .literal-block-wrapper.docutils.container {
+    .code-block-caption {
+      background-color: $light_ColorSidebarSpace;
+      .headerlink {
+        &::after {
+          color: $light_ColorShadedText;
+        }
+      }
+    }
   }
+  [class*="highlight-"] {
+    &.output {
+      .output-title {
+        background-color: $light_ColorSidebarSpace;
+        &::before {
+          background-image: url('#{$icoPath}svg-icons.svg#chevron-blue-lt');
+        }
+      }
+    }
+    .highlighttable {
+      background-color: $light_ColorCodeBlockBackground;
+    }
+    .copy-to-clipboard {
+      color: $light_ColorMainText;
+      background-color: $light_ColorSidebarSpace;
+      &:hover {
+        background-color: $light_ColorPrimaryLighter;
+        color: $light_ColorBaseSpace;
+      }
+      &.copied {
+        background-color: $light_ColorPrimary;
+        color: $light_ColorBaseSpace;
+      }
+    }
+    .linenodiv {
+      border-right-color: $light_ColorTableBorder;
+      pre {
+        color: $light_ColorShadedText;
+      }
+    }
+    .highlight {
+      background-color: $light_ColorCodeBlockBackground;
+      color: $light_ColorCodeDefault;
+      .hll::before {
+        background-color: $light_ColorHighlightBackground;
+      }
+      .k,
+      .kn {
+        color: $light_ColorCodeKeyword;
+      }
+      .c,
+      .c1,
+      .cp,
+      .ch,
+      .go {
+        color: $light_ColorCodeComment; 
+      }
 
-  .m,
-  .mi {
-    color: $codeNumber; 
+      .m,
+      .mi {
+        color: $light_ColorCodeNumber; 
+      }
+
+      .s,
+      .s1,
+      .s2,
+      .sb,
+      .se,
+      .sh,
+      .si,
+      .heredoc,
+      .heredoc span {
+        color: $light_ColorCodeString; 
+      }
+
+      .vm,
+      .n,
+      .nb,
+      .bp,
+      .nf {
+        color: $light_ColorCodeFunction; 
+      }
+
+      .nt,
+      .na,
+      .no {
+        color: $light_ColorCodeVariable; 
+      }
+    }
   }
+}
 
-  .s,
-  .s1,
-  .s2,
-  .sb,
-  .se,
-  .sh,
-  .si {
-    color: $codeString; 
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme {
+  .literal-block-wrapper.docutils.container {
+    .code-block-caption {
+      background-color: $dark_ColorSidebarSpace;
+      .headerlink {
+        &::after {
+          color: $dark_ColorShadedText;
+        }
+      }
+    }
   }
+  [class*="highlight-"] {
+    &.output {
+      .output-title {
+        background-color: $dark_ColorCodeBlockBackground;
+        color: $dark_ColorMainText;
+        &::before {
+          background-image: url('#{$icoPath}svg-icons.svg#chevron-blue-dt');
+        }
+      }
+    }
+    .highlighttable {
+      background-color: $dark_ColorCodeBlockBackground;
+    }
+    .copy-to-clipboard {
+      color: $dark_ColorMainText;
+      background-color: $dark_ColorSidebarSpace;
+      &:hover {
+        background-color: $dark_ColorPrimaryLighter;
+        color: $dark_ColorBaseSpace;
+      }
+      &.copied {
+        background-color: $dark_ColorPrimary;
+        color: $dark_ColorBaseSpace;
+      }
+    }
+    .linenodiv {
+      border-right-color: $dark_ColorTableBorder;
+      pre {
+        color: $dark_ColorShadedText;
+      }
+    }
+    .highlight {
+      background-color: $dark_ColorCodeBlockBackground;
+      pre {
+        color: $dark_ColorCodeDefault;
+      }
+      .hll {
+        color: $light_ColorCodeDefault;  
+        &::before {
+          background-color: $light_ColorHighlightBackground;
+        }
+        .k,
+        .kn {
+          color: $light_ColorCodeKeyword;
+        }
+        .c,
+        .c1,
+        .cp,
+        .ch,
+        .go {
+          color: $light_ColorCodeComment; 
+        }
 
-  .vm,
-  .n,
-  .nb,
-  .bp,
-  .nf {
-    color: $codeFunction; 
-  }
+        .m,
+        .mi {
+          color: $light_ColorCodeNumber; 
+        }
 
-  .nt,
-  .na,
-  .no {
-    color: $codeVariable; 
+        .s,
+        .s1,
+        .s2,
+        .sb,
+        .se,
+        .sh,
+        .si,
+        .heredoc,
+        .heredoc span {
+          color: $light_ColorCodeString; 
+        }
+
+        .vm,
+        .n,
+        .nb,
+        .bp,
+        .nf {
+          color: $light_ColorCodeFunction; 
+        }
+
+        .nt,
+        .na,
+        .no {
+          color: $light_ColorCodeVariable; 
+        }
+      }
+      .k,
+      .kn {
+        color: $dark_ColorCodeKeyword;
+      }
+      .c,
+      .c1,
+      .cp,
+      .ch,
+      .go {
+        color: $dark_ColorCodeComment; 
+      }
+
+      .m,
+      .mi {
+        color: $dark_ColorCodeNumber; 
+      }
+
+      .s,
+      .s1,
+      .s2,
+      .sb,
+      .se,
+      .sh,
+      .si,
+      .heredoc,
+      .heredoc span {
+        color: $dark_ColorCodeString; 
+      }
+
+      .vm,
+      .n,
+      .nb,
+      .bp,
+      .nf {
+        color: $dark_ColorCodeFunction; 
+      }
+
+      .nt,
+      .na,
+      .no {
+        color: $dark_ColorCodeVariable; 
+      }
+    }
   }
 }

@@ -19,7 +19,7 @@
   .link-boxes-item {
     min-width: 70px;
     max-width: 150px;
-    border: 2px solid $wuiColorLightShade;
+    border: 2px solid;
     box-sizing: border-box;
     border-radius: 10px;
     padding: 0;
@@ -28,6 +28,7 @@
 
     img {
       display: inline-block;
+      margin-bottom: 0;
     }
 
     a {
@@ -47,7 +48,7 @@
       line-height: 25px;
       letter-spacing: 0em;
       text-align: center;
-      color: white;
+      color: #fff;
       width: 100%;
       top: 0;
       bottom: 0;
@@ -56,11 +57,44 @@
     }
 
     &:hover {
-      border-color: $wuiColorPrimary;
       .link-boxes-label {
         opacity: 1;
-        background-color: $wuiColorPrimary;
       }
     }
   }
+}
+
+/* Light theme -------------------------------------------------------------- */
+
+body {
+  .link-boxes-group {
+    .link-boxes-item {
+      border-color: $light_ColorBorderDeeper;
+      &:hover {
+        border-color: $light_ColorPrimary;
+        box-shadow: 0 0 0px 10px $light_ColorPrimary inset;
+        .link-boxes-label {
+          background-color: $light_ColorPrimary;
+        }
+      }
+    }
+  }
+}
+
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme {
+    .link-boxes-group {
+      .link-boxes-item {
+        background-color: #fff;
+        border-color: $dark_ColorBorderDeeper;
+        &:hover {
+          border-color: $dark_ColorPrimary;
+          box-shadow: 0 0 0px 10px $dark_ColorPrimary inset;
+          .link-boxes-label {
+            background-color: $dark_ColorPrimary;
+          }
+        }
+      }
+    }
 }

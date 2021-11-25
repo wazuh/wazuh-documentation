@@ -23,7 +23,6 @@
     width: $leftSidebarWidth;
     height: calc(100vh - #{$headerHeight});
     padding: 30px 0;
-    background-color: $wuiColorLightestShade;
 
     & > nav {
       margin-top: 20px;
@@ -32,6 +31,26 @@
     .search-box {
       margin-right: 40px;
       margin-left: 40px;
+    }
+  }
+}
+
+/* Light theme -------------------------------------------------------------- */
+
+body {
+  #left-sidebar {
+    .sidebar-container {
+      background-color: $light_ColorSidebarSpace;
+    }
+  }
+}
+
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme {
+  #left-sidebar {
+    .sidebar-container {
+      background-color: $dark_ColorSidebarSpace;
     }
   }
 }

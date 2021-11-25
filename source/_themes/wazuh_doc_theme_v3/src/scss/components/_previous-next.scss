@@ -5,7 +5,7 @@
 ----------------------------------------------------------------------------- */
 
 .navigation-buttons {
-  border-top: 1px solid $wuiColorLighterShade;
+  border-top: 1px solid;
   padding-top: 20px;
   padding-bottom: 15px;
   display: flex;
@@ -22,19 +22,13 @@
     font-weight: 400px;
 
     &:hover {
-      color: $wuiColorPrimaryLighter;
       text-decoration: none;
-
-      .chevron {
-        background: url('#{$icoPath}svg-icons.svg#chevron-blue-light');
-      }
     }
   }
 
   .chevron {
     width: 1.55em;
     height: 1.55em;
-    background: url('#{$icoPath}svg-icons.svg#chevron-blue');
     background-position: center;
     background-size: contain;
 
@@ -46,6 +40,40 @@
     &.right {
       margin-left: 5px;
       transform: rotate(-90deg);
+    }
+  }
+}
+
+/* Light theme -------------------------------------------------------------- */
+
+body {
+  .navigation-buttons {
+    border-top-color: $light_ColorBorderDetails;
+    a:hover {
+      color: $light_ColorPrimaryLighter;
+      .chevron {
+        background: url('#{$icoPath}svg-icons.svg#chevron-blue-light-lt');
+      }
+    }
+    .chevron {
+      background: url('#{$icoPath}svg-icons.svg#chevron-blue-lt');
+    }
+  }
+}
+
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme {
+  .navigation-buttons {
+    border-top-color: $dark_ColorBorderDetails;
+    a:hover {
+      color: $dark_ColorPrimaryLighter;
+      .chevron {
+        background: url('#{$icoPath}svg-icons.svg#chevron-blue-light-dt');
+      }
+    }
+    .chevron {
+      background: url('#{$icoPath}svg-icons.svg#chevron-blue-dt');
     }
   }
 }

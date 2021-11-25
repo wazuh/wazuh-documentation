@@ -55,27 +55,7 @@ jQuery(function($) {
   */
 
   /* Versions main constants */
-  const currentVersion = '4.2';
-  const versions = [
-    {name: '4.2 (current)', url: '/current'},
-    {name: '4.1', url: '/4.1'},
-    {name: '4.0', url: '/4.0'},
-    {name: '3.13', url: '/3.13'},
-    {name: '3.12', url: '/3.12'},
-    {name: '3.11', url: '/3.11'},
-    {name: '3.10', url: '/3.10'},
-    {name: '3.9', url: '/3.9'},
-    {name: '3.8', url: '/3.8'},
-    {name: '3.7', url: '/3.7'},
-    {name: '3.6', url: '/3.6'},
-    {name: '3.5', url: '/3.5'},
-    {name: '3.4', url: '/3.4'},
-    {name: '3.3', url: '/3.3'},
-    {name: '3.2', url: '/3.2'},
-    {name: '3.1', url: '/3.1'},
-    {name: '3.0', url: '/3.0'},
-    {name: '2.1', url: '/2.1'},
-  ];
+  const thisVersion = DOCUMENTATION_OPTIONS.VERSION;
 
   /* Adds the current version to the selector button */
   checkCurrentVersion();
@@ -93,7 +73,7 @@ jQuery(function($) {
   const documentInReleases = Object.keys(documentHistory);
   let canonicalRelease = documentInReleases[documentInReleases.length-1];
   const canonicalPath = documentHistory[canonicalRelease];
-  if ( canonicalRelease == currentVersion ) {
+  if ( canonicalRelease == versions[0] ) {
     canonicalRelease = 'current';
   }
 
@@ -104,28 +84,15 @@ jQuery(function($) {
   document.head.appendChild(canonicalTag);
 
   /* Initialize the tooltip of bootstrap */
-  $('#version-selector [data-toggle="tooltip"]').tooltip();
+  $('#version-selector [data-toggle="tooltip"]').tooltip({container: 'header'});
 
   /**
    * Add the current version to the version selector
    */
   function checkCurrentVersion() {
-    let selected = -1;
-    let thisVersion = DOCUMENTATION_OPTIONS.VERSION;
     const selectVersionCurrent = $('#version-selector .current');
-    if ( thisVersion == currentVersion ) {
-      thisVersion = 'current';
-    }
-    for (let i = 0; i < versions.length; i++) {
-      if ( versions[i].url.indexOf('/' + thisVersion) > -1 ) {
-        selected = i;
-      }
-    }
-    if ( versions[selected] ) {
-      selectVersionCurrent.html(versions[selected].name);
-    } else {
-      selectVersionCurrent.html(DOCUMENTATION_OPTIONS.VERSION);
-    }
+    const thisVersion = DOCUMENTATION_OPTIONS.VERSION;
+    selectVersionCurrent.html('Version ' + thisVersion + (thisVersion == versions[0] ? ' (current)' : ''));
   }
 
   /**
@@ -136,7 +103,7 @@ jQuery(function($) {
     */
   function checkLatestDocs(redirHistory) {
     const thisVersion = DOCUMENTATION_OPTIONS.VERSION;
-    const latestVersion = currentVersion;
+    const latestVersion = versions[0];
     let page = '';
     if ( thisVersion !== latestVersion ) {
       const pageElement = document.querySelector('#page');
@@ -153,10 +120,10 @@ jQuery(function($) {
       }
 
       const link = document.querySelector('.link-latest');
-			let targetURL = 'https://' + window.location.hostname + '/current';
-			if ( documentHistory.hasOwnProperty(latestVersion) ) {
-				targetURL = targetURL + redirHistory[latestVersion];
-			}
+      let targetURL = 'https://' + window.location.hostname + '/current';
+      if ( documentHistory.hasOwnProperty(latestVersion) ) {
+        targetURL = targetURL + redirHistory[latestVersion];
+      }
       link.setAttribute('href', targetURL);
     }
   }
@@ -166,21 +133,16 @@ jQuery(function($) {
    * @return {Object} Object with the URL history for the current path
    */
   function addVersions() {
-    let ele = '';
     const selectVersionUl = $('#version-selector .dropdown-menu');
-    const thisVersion = DOCUMENTATION_OPTIONS.VERSION;
-    let fullUrl = window.location.href;
-    let page = '';
+    const fullUrl = window.location.href || document.URL; /* Use document.URL as fix for Firefox */
+    const hasHttpProtocol = fullUrl.indexOf('http') >= 0;
     let paramDivision = [];
+    let ele = '';
+    let page = '';
     let param = '';
-    if (fullUrl == null) {
-      fullUrl = document.URL; /* Firefox fix */
-    }
 
-    page = fullUrl.split(document.location.host)[1];
-    if ( page[page.length-1] == '/' ) {
-      page = page+'index.html';
-    }
+    page = hasHttpProtocol ? fullUrl.split(document.location.host)[1] : fullUrl.split('/html')[1];
+    page = page[page.length-1] == '/' ? page+'index.html' : page;
     if ( page.indexOf(thisVersion) != -1 ) {
       page = page.split('/'+thisVersion)[1];
     } else if ( page.indexOf('current') != -1 ) {
@@ -194,19 +156,16 @@ jQuery(function($) {
     let href;
     let tooltip;
     let ver;
-    let versionsClean = versions.map(function(i) {
-      return (i.name).split(' (current)')[0];
-    });
-
+    let versionsCopy = versions;
     /* Normalize URLs in arrays */
-    for (let i = 0; i < versionsClean.length; i++) {
-      if ( newUrls[versionsClean[i]] ) {
-        newUrls[versionsClean[i]] = newUrls[versionsClean[i]].map(function(url) {
+    for (let i = 0; i < versionsCopy.length; i++) {
+      if ( newUrls[versionsCopy[i]] ) {
+        newUrls[versionsCopy[i]] = newUrls[versionsCopy[i]].map(function(url) {
           return normalizeUrl(url);
         });
       }
-      if ( removedUrls[versionsClean[i]] ) {
-        removedUrls[versionsClean[i]] = removedUrls[versionsClean[i]].map(function(url) {
+      if ( removedUrls[versionsCopy[i]] ) {
+        removedUrls[versionsCopy[i]] = removedUrls[versionsCopy[i]].map(function(url) {
           return normalizeUrl(url);
         });
       }
@@ -221,25 +180,28 @@ jQuery(function($) {
     }
 
     /* Get the redirection history */
-    const redirHistory = getRedirectionHistory(versionsClean, thisVersion, page, newUrls, redirections, removedUrls);
-    versionsClean = versionsClean.reverse();
+    const redirHistory = getRedirectionHistory(versionsCopy, thisVersion, page, newUrls, redirections, removedUrls);
+    versionsCopy = versionsCopy.reverse();
 
     /* Print the correct links in the selector */
     for (let i = 0; i < versions.length; i++) {
       href = '';
       tooltip = '';
-      ver = versionsClean[i];
+      ver = versionsCopy[i];
       if ( redirHistory[ver] != null && redirHistory[ver].length ) {
-        if ( ver == currentVersion ) {
+        if ( i == 0 ) { // the latest release version
           href = '/current'+redirHistory[ver]+param;
         } else {
           href = '/'+ver+redirHistory[ver]+param;
         }
       } else {
-        tooltip = 'class="disable" data-toggle="tooltip" data-placement="left" title="This page is not available in version ' + versions[i].name +'"';
+        tooltip = 'class="disabled" data-toggle="tooltip" data-placement="left" title="This page is not available in version ' + versions[i] + ((versions[0] == thisVersion && thisVersion == versions[i]) ? ' (current)' : '') +'"';
       }
-      ele += '<li><a href="' + href + '" '+ tooltip +'>'+versions[i].name+'</a></li>';
-      if (ver == currentVersion) {
+      if ( !hasHttpProtocol && href.length > 0 ) {
+        href = 'https://documentation.wazuh.com' + href;
+      }
+      ele += '<li><a href="' + href + '" '+ tooltip +'> Version '+versions[i] + ((versions[0] == thisVersion && thisVersion == versions[i]) ? ' (current)' : '') +'</a></li>';
+      if (ver == versions[0]) {
         $('.no-latest-notice .link-latest').attr('href', href);
       }
     }
@@ -632,3 +594,10 @@ jQuery(function($) {
 function checkEncodeURI(str) {
   return /\%/i.test(str);
 }
+
+/* Avoid page reload when selecting a non-available release -----------------*/
+$('#version-selector a.disable').click(function(e) {
+  e.preventDefault();
+  e.stopPropagation();
+  return false;
+});

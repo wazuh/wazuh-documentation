@@ -21,12 +21,6 @@
     display: inline-block;
     background-size: contain;
     background-position: center;
-    &.icon-sun {
-      background: url('#{$icoPath}svg-icons.svg#sun');
-    }
-    &.icon-moon {
-      background: url('#{$icoPath}svg-icons.svg#moon');
-    }
   }
 }
 
@@ -40,8 +34,7 @@
   height: 16px;
   padding: 0;
   margin: 0 5px;
-  background-color: $wuiColorPrimaryLighter;
-  border: 1px solid $wuiColorPrimaryLighter;
+  border: 1px solid;
   border-radius: 25px;
 
   &.dark {
@@ -58,8 +51,48 @@
     width: 16px;
     height: 16px;
     content: "";
-    background-color: $wuiColorEmptyShade;
     border-radius: 50%;
-    transition: left ease-in .2s;
+    transition: left ease-in .075s;
+    background-color: #fff;
+  }
+}
+
+/* Light theme -------------------------------------------------------------- */
+
+body {
+  #light-dark-switch {
+    color: $light_ColorMainText;
+    .switch-icon {
+      &.icon-sun {
+        background: url('#{$icoPath}svg-icons.svg#sun-lt');
+      }
+      &.icon-moon {
+        background: url('#{$icoPath}svg-icons.svg#moon-lt');
+      }
+    }
+  }
+  #mode-switch {
+    background-color: $light_ColorPrimaryLighter;
+    border-color: $light_ColorPrimaryLighter;
+  }
+}
+
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme {
+  #light-dark-switch {
+    color: $dark_ColorMainText;
+    .switch-icon {
+      &.icon-sun {
+        background: url('#{$icoPath}svg-icons.svg#sun-dt');
+      }
+      &.icon-moon {
+        background: url('#{$icoPath}svg-icons.svg#moon-dt');
+      }
+    }
+  }
+  #mode-switch {
+    background-color: $dark_ColorPrimary;
+    border-color: $dark_ColorPrimary;
   }
 }

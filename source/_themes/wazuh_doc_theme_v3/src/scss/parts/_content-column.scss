@@ -41,70 +41,6 @@
   }
 
   h1,
-  .rubric.h1 {
-    display: block;
-    width: fit-content;
-    margin-top: 1.2rem;
-    margin-bottom: 1rem;
-    font-size: 34px;
-    font-weight: 800;
-    letter-spacing: .03em;
-  }
-
-  h2,
-  .rubric.h2 {
-    display: block;
-    width: fit-content;
-    margin-top: 1.2rem;
-    margin-bottom: 1rem;
-    font-size: 28px;
-    font-weight: 800;
-    letter-spacing: .03em;
-  }
-
-  h3,
-  .rubric.h3 {
-    display: block;
-    width: fit-content;
-    margin-top: 1.2rem;
-    margin-bottom: 1rem;
-    font-size: 22px;
-    font-weight: 800;
-    letter-spacing: .03em;
-  }
-
-  h4,
-  .rubric.h4 {
-    display: block;
-    width: fit-content;
-    margin-top: 1.2rem;
-    margin-bottom: 1rem;
-    font-size: 18px;
-    font-weight: 800;
-    letter-spacing: .03em;
-  }
-
-  h5,
-  .rubric.h5 {
-    display: block;
-    width: fit-content;
-    margin-top: 1.2rem;
-    margin-bottom: 1rem;
-    font-weight: 800;
-    letter-spacing: .03em;
-  }
-
-  h6,
-  .rubric.h6 {
-    display: block;
-    width: fit-content;
-    margin-top: 1.2rem;
-    margin-bottom: 1rem;
-    font-weight: 800;
-    letter-spacing: .03em;
-  }
-
-  h1,
   h2,
   h3,
   h4,
@@ -121,7 +57,6 @@
         height: 1rem;
         padding-left: 10px;
         font: normal 700 normal .95rem/1 FontAwesome, sans-serif;
-        color: $wuiColorDarkShade;
         text-align: right;
         vertical-align: middle;
         content: "\f0c1";
@@ -146,8 +81,6 @@
     display: inline-block;
     padding: 1px 2px;
     font-family: "Fira Mono", monospace;
-    color: $inlineHighlightText;
-    background-color: $inlineHighlightBackground;
   }
 
   .arabic {
@@ -168,12 +101,9 @@
 
   caption {
     padding: 8px;
-    border: 1px solid $tableBorderColor;
+    border: 1px solid;
     border-top: none;
     border-radius: 0 0 $roundedCorners $roundedCorners;
-    .caption-text {
-      color: $wuiColorDarkShade;
-    }
   }
 
   .align-cells-top {
@@ -229,37 +159,29 @@
     thead {
       position: relative;
       z-index: 10;
-      background-color: $wuiColorPrimary;
     }
 
     th {
       padding: 8px;
       font-size: 18px;
       font-weight: 700;
-      color: $wuiColorEmptyShade;
-      border: 1px solid $wuiColorPrimary;
+      border: 1px solid;
     }
 
     .stub:not(.head) {
       font-size: 16px;
-      color: $wuiColorFullShade;
     }
 
     tbody {
       position: relative;
 
-      > :nth-of-type(even) td,
-      > :nth-of-type(even) th {
-        background-color: $wuiColorLightestShade;
-      }
       th {
         padding: 8px;
-        background-color: $wuiColorEmptyShade;
-        border: 1px solid $tableBorderColor;
+        border: 1px solid;
       }
       td {
         padding: 8px;
-        border: 1px solid $tableBorderColor;
+        border: 1px solid;
       }
       p {
         margin-bottom: .15rem;
@@ -276,7 +198,7 @@
       overflow-x: auto;
       border-spacing: 0;
       border-collapse: separate;
-      border: 1px solid $tableBorderColor;
+      border: 1px solid;
       border-radius: $roundedCorners;
       perspective: 1px;
 
@@ -292,7 +214,7 @@
           & > td:first-child,
           & > th:first-child {
             padding-left: 0;
-            border-right: 1px solid $tableBorderColor;
+            border-right: 1px solid;
           }
         }
         td,
@@ -301,7 +223,6 @@
           padding-bottom: 0;
           padding-left: 1rem;
           border: none;
-          background-color: $wuiColorEmptyShade;
         }
         
         p {
@@ -331,6 +252,151 @@
               }
             }
           }
+        }
+      }
+    }
+  }
+}
+
+
+/* Light theme -------------------------------------------------------------- */
+
+body {
+  [role="main"] {
+    .headerlink {
+      &:after {
+        color: $light_ColorShadedText;
+      }
+    }
+    
+    code {
+      color: $light_ColorHighlightInlineText;
+      background-color: $light_ColorHighlightBackground;
+    }
+    
+    caption {
+      border-color:  $light_ColorTableBorder;
+    }
+    .caption-text {
+      color: $light_ColorShadedText;
+    }
+    
+    .docutils:not(.list-rows) {
+      thead {
+        background-color: $light_ColorPrimary;
+      }
+      
+      th {
+        color: $light_ColorBaseSpace;
+        border-color: $light_ColorPrimary;
+      }
+      
+      .stub:not(.head) {
+        color: $light_ColorMainText;
+      }
+      
+      tbody {
+        > :nth-of-type(even) td,
+        > :nth-of-type(even) th {
+          background-color: $light_ColorBaseSpace;
+        }
+        th {
+          background-color: $light_ColorBaseSpace;
+          border-color: $light_ColorTableBorder;
+        }
+        td {
+          
+          
+          border-color: $light_ColorTableBorder;
+        }
+      }
+    }
+    
+    table.docutils:not(.list-rows) {
+      border-color: $light_ColorTableBorder;
+      
+      &.release-notes {
+        tr {
+          & > td:first-child,
+          & > th:first-child {
+            border-color: $light_ColorTableBorder;
+          }
+        }
+        td,
+        th {
+          background-color: $light_ColorBaseSpace;
+        }
+      }
+    }
+  }
+}
+
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme {
+  [role="main"] {
+    .headerlink {
+      &:after {
+        color: $dark_ColorShadedText;
+      }
+    }
+    
+    code {
+      color: $dark_ColorHighlightInlineText;
+      background-color: $dark_ColorHighlightBackground;
+    }
+    
+    caption {
+      border-color:  $dark_ColorTableBorder;
+    }
+    .caption-text {
+      color: $dark_ColorShadedText;
+    }
+    
+    .docutils:not(.list-rows) {
+      thead {
+        background-color: $dark_ColorPrimary;
+      }
+      
+      th {
+        color: $dark_ColorBaseSpace;
+        border-color: $dark_ColorPrimary;
+      }
+      
+      .stub:not(.head) {
+        color: $dark_ColorMainText;
+      }
+      
+      tbody {
+        > :nth-of-type(even) td,
+        > :nth-of-type(even) th {
+          background-color: $dark_ColorBaseSpace;
+        }
+        th {
+          background-color: $dark_ColorBaseSpace;
+          border-color: $dark_ColorTableBorder;
+        }
+        td {
+          
+          
+          border-color: $dark_ColorTableBorder;
+        }
+      }
+    }
+    
+    table.docutils:not(.list-rows) {
+      border-color: $dark_ColorTableBorder;
+      
+      &.release-notes {
+        tr {
+          & > td:first-child,
+          & > th:first-child {
+            border-color: $dark_ColorTableBorder;
+          }
+        }
+        td,
+        th {
+          background-color: $dark_ColorBaseSpace;
         }
       }
     }

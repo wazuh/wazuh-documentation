@@ -1,0 +1,38 @@
+/**
+ * --------------------------------------------------------------------------
+ * Wazuh documentation (v3.0): light-dark-mode.js
+ * --------------------------------------------------------------------------
+ */
+
+const switchButton = $('#mode-switch');
+const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+let currentTheme = localStorage.getItem('theme');
+
+if (currentTheme == 'dark') {
+  document.body.classList.toggle('dark-theme');
+} else if (currentTheme == 'light') {
+  document.body.classList.toggle('light-theme');
+} else if ( prefersDarkScheme.matches ) {
+  document.body.classList.toggle('dark-theme');
+  currentTheme = 'dark';
+} else {
+  document.body.classList.toggle('light-theme');
+  currentTheme = 'light';
+}
+
+/* Update button status */
+switchButton.attr('class', currentTheme);
+
+switchButton.on('click', function() {
+  let theme;
+
+  if ( this.classList[0] == 'dark' ) {
+    theme = 'light';
+  } else {
+    theme = 'dark';
+  }
+  switchButton.attr('class', theme);
+  localStorage.setItem('theme', theme);
+  document.body.classList.toggle('light-theme');
+  document.body.classList.toggle('dark-theme');
+});

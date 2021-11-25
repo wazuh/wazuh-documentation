@@ -13,7 +13,6 @@
 
 body {
   margin-top: $indexHeaderHeight;
-  background: $codeBlockBG;
 }
 
 main {
@@ -44,30 +43,21 @@ main {
         margin-bottom: 60px;
         position: relative;
         min-height: 133px;
-        border-left: 3px solid $wuiColorPrimary;
+        border-left: 3px solid;
 
         &.collapsible {
-
-          ul {
-            // position: absolute;
-          }
           .toggle {
             display: inline-block;
-            // position: absolute;
-            // bottom: -40px;
             left: -3px;
             font-size: 18px;
-            color: $wuiColorPrimary;
             font-weight: 700;
             padding: 10px 0;
-            border-left-color: $codeBlockBG;
 
             &::after {
               content: '';
               display: inline-block;
               width: 24px;
               height: 12px;
-              background-image: url('#{$icoPath}svg-icons.svg#chevron-blue');
               background-repeat: no-repeat;
               background-size: 20px 15px;
               background-position: center;
@@ -91,17 +81,15 @@ main {
         } 
 
         a {
-          border-left: 3px solid $wuiColorPrimary;
+          border-left: 3px solid;
           position: relative;
           left: -3px;
           padding-left: 15px;
           display: inline-block;
-          color: $wuiColorFullShade;
           line-height: 32px;
           font-weight: 400;
 
           &:hover {
-            color: $wuiColorPrimaryLighter;
             text-decoration: none;
           }
         }
@@ -127,7 +115,6 @@ main {
 
 #header {
   height: $indexHeaderHeight;
-  background: $wuiColorEmptyShade;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -148,10 +135,6 @@ main {
     max-width: 850px;
     margin-left: auto;
     margin-right: auto;
-    background: $wuiColorEmptyShade;
-  }
-  .form-control {
-    background: $wuiColorEmptyShade;
   }
 }
 
@@ -219,5 +202,87 @@ main {
   /* Release notes */
   [href$="release-notes/index.html"]::before {
     background-image: url('#{$icoPath}index-icons.svg#release-notes');
+  }
+}
+
+/* Light theme -------------------------------------------------------------- */
+
+body {
+  background: $light_ColorCodeBlockBackground;
+  color: $light_ColorMainText;
+
+  .toctree-wrapper {
+    > ul {
+      .toctree-l1 {
+        border-left-color: $light_ColorPrimary;
+        &.collapsible {
+          .toggle {
+            color: $light_ColorPrimary;
+            border-left-color: $light_ColorCodeBlockBackground;
+            &::after {
+              background-image: url('#{$icoPath}svg-icons.svg#chevron-blue-lt');
+            }
+          }
+        }
+        a {
+          color: $light_ColorMainText;
+          border-left-color: $light_ColorPrimary;
+          &:hover {
+            color: $light_ColorPrimaryLighter;
+          }
+        }
+      }
+    }
+  }
+  
+  #header {
+    background: $light_ColorIndexHeaderBackground;
+    .search-box {
+      background: $light_ColorIndexHeaderBackground;
+    }
+    .form-control {
+      background: $light_ColorIndexHeaderBackground;
+    }
+  }
+}
+
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme {
+  background: $dark_ColorBaseSpace;
+  color: $dark_ColorMainText;
+
+  .toctree-wrapper {
+    > ul {
+      .toctree-l1 {
+        border-left-color: $dark_ColorHighlightInlineText;
+        &.collapsible {
+          .toggle {
+            color: $dark_ColorPrimary;
+            border-left-color: $dark_ColorBaseSpace;
+            &::after {
+              background-image: url('#{$icoPath}svg-icons.svg#chevron-blue-dt');
+            }
+          }
+        }
+        a {
+          color: $dark_ColorMainText;
+          border-left-color: $dark_ColorHighlightInlineText;
+          &:hover {
+            color: $dark_ColorPrimaryLighter;
+          }
+        }
+      }
+    }
+  }
+  
+  #header {
+    background: $dark_ColorIndexHeaderBackground;
+    .search-box {
+      background: $dark_ColorIndexHeaderBackground;
+    }
+    .form-control {
+      background: $dark_ColorIndexHeaderBackground;
+    }
   }
 }

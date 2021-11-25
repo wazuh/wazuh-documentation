@@ -1,6 +1,4 @@
 <svg id="wazuh-icons-sprite" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve">
-  <defs>
-  </defs>
   <view id="getting-started" viewBox="0 0 200 200"/>
   <view id="installation-guide" viewBox="220 0 200 200"/>
   <view id="upgrade-guide" viewBox="440 0 200 200"/>
@@ -11,6 +9,7 @@
   <view id="learning" viewBox="1540 0 200 200"/>
   <view id="release-notes" viewBox="1760 0 200 200"/>
   <g>
+    <circle fill="#FFFFFF" cx="100.2" cy="81.8" r="58.2"/>
     <defs>
     <path id="getting-started-def" d="M158.4,80.7c0,32.3-26.2,58.4-58.4,58.4S41.6,113,41.6,80.7c0,0,0,0.1,0,0.1h0v99.1l58.9-24.9
       l57.9,24.9V80.7L158.4,80.7C158.4,80.8,158.4,80.7,158.4,80.7z"/>
@@ -195,6 +194,7 @@
           c0-2.6,0-5.1,0-7.7C100.8,53.5,98.9,53.5,97.2,53.4z"/>
   </g>
   <g transform="translate(220, 0)">
+    <circle fill="#FFFFFF" cx="100.4" cy="98.4" r="57.9"/>
     <defs>
       <path id="installation-guide-def" d="M52.9,98.2h13.4c0-8.6,3.3-17.3,9.9-23.9c13.2-13.2,34.7-13.2,47.9,0c6.6,6.6,9.9,15.2,9.9,23.9h13h11.2
         h11V87.4h-12.2c-1.4-7.5-4.4-14.9-8.9-21.4l8.6-8.6l-15.7-15.7l-8.6,8.6c-6.6-4.5-13.9-7.4-21.4-8.9V29.2H88.9v12.3
@@ -379,8 +379,12 @@
           c-6.5,4.4-13.8,7.3-21.2,8.7v12.5H89.1v-12.6c-7.4-1.5-14.6-4.4-21.1-8.8l-8.7,8.7l-15.7-15.7l8.7-8.7c-4.4-6.4-7.3-13.6-8.8-20.9
           H30.7V98.2h-6v81.1H30.7z"/>
     <polygon fill="#050505" points="97,113.3 80,101.1 82.6,97.6 96,107.2 114,82.2 117.5,84.8 "/>
+    <rect x="89" y="143.6" fill="#FFFFFF" width="22.1" height="23.5"/>
+    <rect x="130.1" y="127.3" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -56.9667 140.5572)" fill="#FFFFFF" width="22.1" height="23.5"/>
+		<rect x="48.7" y="126.7" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 4.1555 278.7029)" fill="#FFFFFF" width="22.1" height="23.5"/>
   </g>
   <g transform="translate(440, 0)">
+    <circle fill="#FFFFFF" cx="99.6" cy="90.6" r="70.6"/>
     <linearGradient id="upgrade-guide-gradient" gradientUnits="userSpaceOnUse" x1="29.6447" y1="55.2853" x2="170.3323" y2="55.2853">
       <stop  offset="0" style="stop-color:#DBB6FC"/>
       <stop  offset="0.1387" style="stop-color:#CBB1FC"/>
@@ -421,6 +425,7 @@
     <polygon fill="#050505" points="71.9,154.2 62.6,145 65.5,142.2 71.9,148.6 86,134.5 88.8,137.3"/>
   </g>
   <g transform="translate(880, 0)">
+    <circle fill="#FFFFFF" cx="100.1" cy="56.8" r="43.7"/>
     <rect x="93.8" y="140.4" fill="#3585F9" width="12.3" height="36.7"/>
     <rect x="66.1" y="171" fill="#3585F9" width="67.8" height="12.3"/>
     <linearGradient id="deployment-gradient" gradientUnits="userSpaceOnUse" x1="56.2504" y1="34.5484" x2="143.9184" y2="34.5484">
@@ -438,6 +443,7 @@
     <polygon fill-rule="evenodd" clip-rule="evenodd" points="100.1,47.6 81.5,65 78.5,61.9 100.1,41.7   "/>
   </g>
   <g transform="translate(1100, 0)">
+    <rect x="53.1" y="52.9" fill="#FFFFFF" width="63" height="41"/>
     <path fill="#3585F9" d="M153.8,76.9l-24.9-23.6h-12.8c-5.3,15.4-15.4,29.3-30.1,36.3l-1.2,0.5l-0.1,0.1l-0.1-0.1l-1.2-0.5
       c-14.7-7-24.8-20.9-30.1-36.3h-7.2v136.3h107.6V76.9z"/>
     <polygon fill-rule="evenodd" clip-rule="evenodd" fill="#EBD1F8" points="153.8,76.9 128.9,53.3 128.8,76.9   "/>
@@ -459,24 +465,42 @@
       C118.4,46.7,119.8,39.8,120.2,33.1z"/>
   </g>
   <g transform="translate(1320, 0)">
-    <rect x="93.7" y="145.9" fill="#3585F9" width="12.3" height="36.7"/>
-    <rect x="66" y="176.5" fill="#3585F9" width="67.8" height="12.3"/>
-    <linearGradient id="monitoring-gradient" gradientUnits="userSpaceOnUse" x1="56.166" y1="40.0629" x2="143.834" y2="40.0629">
+    <circle fill="#FFFFFF" cx="100.7" cy="54" r="43.3"/>
+    <path fill="#3585F9" d="M142.5,51.5C142.5,75,123.5,94,100,94c-23.4,0-42.5-19-42.5-42.4h-12v138.2h109.1V51.5L142.5,51.5z"/>
+    <rect x="57.3" y="107.4" fill-rule="evenodd" clip-rule="evenodd" width="81" height="4.5"/>
+    <rect x="57.3" y="124" fill-rule="evenodd" clip-rule="evenodd" width="81" height="4.5"/>
+    <rect x="57.3" y="140.2" fill-rule="evenodd" clip-rule="evenodd" width="81" height="4.5"/>
+    <polygon points="88.3,56.3 85.9,53.7 100.3,40.2 114.3,53.3 111.9,55.8 100.3,45"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" fill="#3585F9" d="M122,51.7c0,0.1,0,0.2,0,0.3c0,11.5-9.3,20.8-20.8,20.8
+      c-11.5,0-20.8-9.3-20.8-20.8c0-0.1,0-0.2,0-0.3H66.4v5c0,0.7,0.5,1.2,1.2,1.2h5c0.7,3.5,2.1,6.8,4,9.8L73,71.2
+      c-0.5,0.5-0.5,1.2,0,1.7l6.7,6.8c0.5,0.5,1.2,0.5,1.7,0l3.5-3.5c3.2,2.2,6.8,3.7,10.8,4.5l0.1,4.9c0,0.7,0.6,1.2,1.2,1.2l9.5-0.2
+      c0.7,0,1.2-0.6,1.2-1.2l-0.1-4.8c3.7-0.8,7.1-2.3,10.1-4.3l3.4,3.3c0.5,0.5,1.2,0.4,1.7,0l6.6-6.9c0.5-0.5,0.4-1.2,0-1.7
+      l-3.4-3.3c1.9-2.9,3.2-6.2,4-9.8h4.7c0.7,0,1.2-0.5,1.2-1.2v-5H122z"/>
+    <defs>
+      <rect id="monitoring-rect" x="52.9" y="0.4" width="93.3" height="51.3"/>
+    </defs>
+    <clipPath id="monitoring-clip">
+      <use xlink:href="#monitoring-rect"  overflow="visible"/>
+    </clipPath>
+    <linearGradient id="monitoring-gradient" gradientUnits="userSpaceOnUse" x1="57.433" y1="52.043" x2="144.2942" y2="52.043">
       <stop  offset="0" style="stop-color:#DBB6FC"/>
-      <stop  offset="0.1387" style="stop-color:#CBB1FC"/>
-      <stop  offset="0.4095" style="stop-color:#A1A5FB"/>
-      <stop  offset="0.7821" style="stop-color:#5F91FA"/>
+      <stop  offset="0.1385" style="stop-color:#CBB1FC"/>
+      <stop  offset="0.4087" style="stop-color:#A2A5FB"/>
+      <stop  offset="0.7803" style="stop-color:#5F92FA"/>
       <stop  offset="1" style="stop-color:#3585F9"/>
     </linearGradient>
-    <path fill="url(#monitoring-gradient)" d="M100.7,18.2c-0.2,0-0.5,0-0.7,0c-24.2,0-43.8,19.6-43.8,43.8h44.5h43.1
-      C143.8,38,124.6,18.5,100.7,18.2z"/>
-    <path fill="#3585F9" d="M154.5,62h-8.3h-2.4c0,24-19.2,43.4-43.1,43.8c-0.2,0-0.5,0-0.7,0c-24.2,0-43.8-19.6-43.8-43.8h-2.4h-11
-      h-11v86.2h96.9h39.7v-39.7V62H154.5z"/>
-    <path d="M126.4,83l-11.5-11.5c2.7-3.4,4.3-7.6,4.3-12.3c0-10.8-8.8-19.5-19.5-19.5s-19.5,8.8-19.5,19.5S89,78.8,99.7,78.8
-      c4.6,0,8.9-1.6,12.3-4.3l11.5,11.5c0.4,0.4,0.9,0.6,1.5,0.6s1.1-0.2,1.5-0.6C127.2,85.1,127.2,83.8,126.4,83z M99.7,74.7
-      c-8.5,0-15.4-6.9-15.4-15.4s6.9-15.4,15.4-15.4s15.4,6.9,15.4,15.4S108.2,74.7,99.7,74.7z"/>
+    <path clip-path="url(#monitoring-clip)" fill-rule="evenodd" clip-rule="evenodd" fill="url(#monitoring-gradient)" d="M100.9,8.6
+      c-24,0-43.4,19.4-43.4,43.4s19.4,43.4,43.4,43.4S144.3,76,144.3,52S124.8,8.6,100.9,8.6z M134.4,57.8h-4.7
+      c-0.7,3.5-2.1,6.8-4,9.8l3.4,3.3c0.5,0.5,0.5,1.2,0,1.7l-6.6,6.9c-0.5,0.5-1.2,0.5-1.7,0l-3.4-3.3c-3,2-6.4,3.5-10.1,4.3
+      l0.1,4.8c0,0.7-0.5,1.2-1.2,1.2l-9.5,0.2c-0.7,0-1.2-0.5-1.2-1.2l-0.1-4.9c-3.9-0.8-7.6-2.3-10.8-4.5l-3.5,3.5
+      c-0.5,0.5-1.2,0.5-1.7,0l-6.7-6.8c-0.5-0.5-0.5-1.2,0-1.7l3.6-3.5c-1.9-2.9-3.2-6.2-4-9.8h-5c-0.7,0-1.2-0.5-1.2-1.2v-9.5
+      c0-0.7,0.5-1.2,1.2-1.2h5c0.7-3.4,2-6.7,3.8-9.6l-3.6-3.5c-0.5-0.5-0.5-1.2,0-1.7l6.6-6.9c0.5-0.5,1.2-0.5,1.7,0l3.6,3.4
+      c3-2,6.3-3.6,9.9-4.4l-0.1-4.9c0-0.7,0.5-1.2,1.2-1.2L105,17c0.7,0,1.2,0.5,1.2,1.2l0.1,4.8c4,0.7,7.7,2.2,10.9,4.4l3.4-3.3
+      c0.5-0.5,1.2-0.5,1.7,0l6.7,6.8c0.5,0.5,0.5,1.2,0,1.7l-3.4,3.3c1.9,3,3.4,6.4,4.1,10h4.7c0.7,0,1.2,0.5,1.2,1.2v9.5
+      C135.6,57.3,135,57.8,134.4,57.8z"/>
   </g>
   <g transform="translate(1540, 0)">
+    <circle fill="#FFFFFF" cx="99.9" cy="96.3" r="60.1"/>
     <rect x="39.9" y="97.8" fill-rule="evenodd" clip-rule="evenodd" fill="#3585F9" width="120.3" height="0"/>
     <path fill-rule="evenodd" clip-rule="evenodd" fill="#3585F9" d="M100,39c33.2,0,60.1,26.3,60.1,58.7V23.2H39.9v74.5
       C39.9,65.3,66.8,39,100,39z"/>
@@ -498,37 +522,22 @@
     <use xlink:href="#learning-clipping"  overflow="visible" fill-rule="evenodd" clip-rule="evenodd" fill="url(#learning-gradient)"/>
   </g>
   <g transform="translate(1760, 0)">
-    <path fill="#3585F9" d="M142.5,51.5C142.5,75,123.5,94,100,94c-23.4,0-42.5-19-42.5-42.4h-12v138.2h109.1V51.5L142.5,51.5z"/>
-    <rect x="57.3" y="107.4" fill-rule="evenodd" clip-rule="evenodd" width="81" height="4.5"/>
-    <rect x="57.3" y="124" fill-rule="evenodd" clip-rule="evenodd" width="81" height="4.5"/>
-    <rect x="57.3" y="140.2" fill-rule="evenodd" clip-rule="evenodd" width="81" height="4.5"/>
-    <polygon points="88.3,56.3 85.9,53.7 100.3,40.2 114.3,53.3 111.9,55.8 100.3,45"/>
-    <path fill-rule="evenodd" clip-rule="evenodd" fill="#3585F9" d="M122,51.7c0,0.1,0,0.2,0,0.3c0,11.5-9.3,20.8-20.8,20.8
-      c-11.5,0-20.8-9.3-20.8-20.8c0-0.1,0-0.2,0-0.3H66.4v5c0,0.7,0.5,1.2,1.2,1.2h5c0.7,3.5,2.1,6.8,4,9.8L73,71.2
-      c-0.5,0.5-0.5,1.2,0,1.7l6.7,6.8c0.5,0.5,1.2,0.5,1.7,0l3.5-3.5c3.2,2.2,6.8,3.7,10.8,4.5l0.1,4.9c0,0.7,0.6,1.2,1.2,1.2l9.5-0.2
-      c0.7,0,1.2-0.6,1.2-1.2l-0.1-4.8c3.7-0.8,7.1-2.3,10.1-4.3l3.4,3.3c0.5,0.5,1.2,0.4,1.7,0l6.6-6.9c0.5-0.5,0.4-1.2,0-1.7
-      l-3.4-3.3c1.9-2.9,3.2-6.2,4-9.8h4.7c0.7,0,1.2-0.5,1.2-1.2v-5H122z"/>
-    <defs>
-      <rect id="SVGID_10_" x="52.9" y="0.4" width="93.3" height="51.3"/>
-    </defs>
-    <clipPath id="SVGID_2_">
-      <use xlink:href="#SVGID_10_"  overflow="visible"/>
-    </clipPath>
-    <linearGradient id="SVGID_3_" gradientUnits="userSpaceOnUse" x1="57.433" y1="52.043" x2="144.2942" y2="52.043">
+    <circle fill="#FFFFFF" cx="100" cy="62.8" r="43.7"/>
+    <rect x="93.7" y="145.9" fill="#3585F9" width="12.3" height="36.7"/>
+    <rect x="66" y="176.5" fill="#3585F9" width="67.8" height="12.3"/>
+    <linearGradient id="monitoring-gradient" gradientUnits="userSpaceOnUse" x1="56.166" y1="40.0629" x2="143.834" y2="40.0629">
       <stop  offset="0" style="stop-color:#DBB6FC"/>
-      <stop  offset="0.1385" style="stop-color:#CBB1FC"/>
-      <stop  offset="0.4087" style="stop-color:#A2A5FB"/>
-      <stop  offset="0.7803" style="stop-color:#5F92FA"/>
+      <stop  offset="0.1387" style="stop-color:#CBB1FC"/>
+      <stop  offset="0.4095" style="stop-color:#A1A5FB"/>
+      <stop  offset="0.7821" style="stop-color:#5F91FA"/>
       <stop  offset="1" style="stop-color:#3585F9"/>
     </linearGradient>
-    <path clip-path="url(#SVGID_2_)" fill-rule="evenodd" clip-rule="evenodd" fill="url(#SVGID_3_)" d="M100.9,8.6
-      c-24,0-43.4,19.4-43.4,43.4s19.4,43.4,43.4,43.4S144.3,76,144.3,52S124.8,8.6,100.9,8.6z M134.4,57.8h-4.7
-      c-0.7,3.5-2.1,6.8-4,9.8l3.4,3.3c0.5,0.5,0.5,1.2,0,1.7l-6.6,6.9c-0.5,0.5-1.2,0.5-1.7,0l-3.4-3.3c-3,2-6.4,3.5-10.1,4.3
-      l0.1,4.8c0,0.7-0.5,1.2-1.2,1.2l-9.5,0.2c-0.7,0-1.2-0.5-1.2-1.2l-0.1-4.9c-3.9-0.8-7.6-2.3-10.8-4.5l-3.5,3.5
-      c-0.5,0.5-1.2,0.5-1.7,0l-6.7-6.8c-0.5-0.5-0.5-1.2,0-1.7l3.6-3.5c-1.9-2.9-3.2-6.2-4-9.8h-5c-0.7,0-1.2-0.5-1.2-1.2v-9.5
-      c0-0.7,0.5-1.2,1.2-1.2h5c0.7-3.4,2-6.7,3.8-9.6l-3.6-3.5c-0.5-0.5-0.5-1.2,0-1.7l6.6-6.9c0.5-0.5,1.2-0.5,1.7,0l3.6,3.4
-      c3-2,6.3-3.6,9.9-4.4l-0.1-4.9c0-0.7,0.5-1.2,1.2-1.2L105,17c0.7,0,1.2,0.5,1.2,1.2l0.1,4.8c4,0.7,7.7,2.2,10.9,4.4l3.4-3.3
-      c0.5-0.5,1.2-0.5,1.7,0l6.7,6.8c0.5,0.5,0.5,1.2,0,1.7l-3.4,3.3c1.9,3,3.4,6.4,4.1,10h4.7c0.7,0,1.2,0.5,1.2,1.2v9.5
-      C135.6,57.3,135,57.8,134.4,57.8z"/>
+    <path fill="url(#monitoring-gradient)" d="M100.7,18.2c-0.2,0-0.5,0-0.7,0c-24.2,0-43.8,19.6-43.8,43.8h44.5h43.1
+      C143.8,38,124.6,18.5,100.7,18.2z"/>
+    <path fill="#3585F9" d="M154.5,62h-8.3h-2.4c0,24-19.2,43.4-43.1,43.8c-0.2,0-0.5,0-0.7,0c-24.2,0-43.8-19.6-43.8-43.8h-2.4h-11
+      h-11v86.2h96.9h39.7v-39.7V62H154.5z"/>
+    <path d="M126.4,83l-11.5-11.5c2.7-3.4,4.3-7.6,4.3-12.3c0-10.8-8.8-19.5-19.5-19.5s-19.5,8.8-19.5,19.5S89,78.8,99.7,78.8
+      c4.6,0,8.9-1.6,12.3-4.3l11.5,11.5c0.4,0.4,0.9,0.6,1.5,0.6s1.1-0.2,1.5-0.6C127.2,85.1,127.2,83.8,126.4,83z M99.7,74.7
+      c-8.5,0-15.4-6.9-15.4-15.4s6.9-15.4,15.4-15.4s15.4,6.9,15.4,15.4S108.2,74.7,99.7,74.7z"/>
   </g>
 </svg>

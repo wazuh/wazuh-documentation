@@ -11,17 +11,19 @@ if ( $('.index') ) {
 
   $('.loading').removeClass('loading');
 
+  /* Add click event fuctionality for dropdown toggle button to uncollapse the index blocks */
   $(document).delegate('.toctree-l1 .toggle', 'click', function(e) {
     e.preventDefault();
     const indexBlock = $(e.target).closest('.collapsible');
     const position = $('.toctree-l1').index(indexBlock);
     let increase;
-    console.log(deltaOverflow);
     if ( indexBlock.hasClass('collapsed') ) {
+      /* Toggle uncollapse */
       indexBlock.removeClass('collapsed');
       indexBlock.css('margin-bottom', (bottomMargin - deltaOverflow[position]) + 'px');
       increase = true;
     } else {
+      /* Toggle collapse */
       indexBlock.addClass('collapsed');
       indexBlock.css('margin-bottom', bottomMargin + 'px');
       increase = false;
@@ -31,8 +33,9 @@ if ( $('.index') ) {
 
   /* Set collapsible index blocks */
   setCollapsibleIndexBlocks();
+
   /**
-  * Checks the index blocks marks the ones with exceeding number of items.
+  * Checks the index blocks and marks the ones with exceeding number of items.
   */
   function setCollapsibleIndexBlocks() {
     const indexBlocks = $('.toctree-l1');
@@ -43,7 +46,7 @@ if ( $('.index') ) {
     a.setAttribute('class', 'toggle');
     a.innerHTML = 'More';
 
-    // Mark collapsible blocks and add button
+    // Mark collapsible blocks and add the button
     indexBlocks.each( function() {
       const singleIndexBlock = $(this);
       const childList = singleIndexBlock.find('ul');
@@ -58,7 +61,7 @@ if ( $('.index') ) {
       }
     });
 
-    // Calculate the overflow difference and init offsets
+    // Calculate the overflow difference and initiate offsets
     let position;
     indexBlocks.each( function() {
       const singleIndexBlock = $(this);

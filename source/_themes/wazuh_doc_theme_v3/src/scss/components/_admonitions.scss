@@ -5,130 +5,273 @@
 ----------------------------------------------------------------------------- */
 
 #central-column .admonition {
-  padding: 0 30px 1px;
-  background-color: $lightestBG;
-  border-radius: $roundedCorners;
+  padding: 0 20px 1px;
   margin-bottom: 2rem;
-
+  border-left: 5px solid;
+  
+  &:not(.long) p {
+    display: inline-block;
+    margin-bottom: 0;
+  }
+  
+  &.long {
+    .admonition-title {
+      &::after {
+        vertical-align: middle;
+        content: '';
+        display: inline-block;
+        width: 1.75rem;
+        height: 1.75rem;
+        position: absolute;
+        left: 0;
+        top: 18px;
+      }
+    }
+    
+    &.note,
+    &.warning, 
+    &.attention,
+    &.caution,
+    &.danger,
+    &.error, 
+    &.hint,
+    &.important,
+    &.tip {
+      .admonition-title {
+        padding-left: 38px;
+      }
+    }
+  }
+  
   .admonition-title {
-    border-bottom: 1px solid $wuiColorLightShade;
-    margin-left: -8px;
-    margin-right: -8px;
-    padding: 16px 10px 10px 42px;
+    padding: 16px 16px 16px 0;
     font-weight: 700;
     font-size: 18px;
     position: relative;
     line-height: 28px;
-
-    &::after {
-      vertical-align: middle;
-      content: '';
-      display: inline-block;
-      width: 1.5rem;
-      height: 1.5rem;
-      position: absolute;
-      left: 8px;
-      bottom: 10px;
-    }
+    margin-bottom: 0;
   }
+}
 
-  &.note {
+/* Light theme -------------------------------------------------------------- */
+
+body {
+  #central-column .admonition {
+    background-color: $light_ColorCodeBlockBackground;
+    border-color: $light_ColorShadedText;
+    color: $light_ColorMainText;
     .admonition-title {
-      color: $wuiColorPrimary;
+      color: $light_ColorShadedText;
+    }
+    
+    &.note {
+      border-color: $light_ColorPrimaryLighter;
+      .admonition-title {
+        color: $light_ColorPrimary;
 
-      &::after {
-        background: url('#{$icoPath}svg-icons.svg#circle-check');
+        &::after {
+          background: url('#{$icoPath}svg-icons.svg#circle-check-lt');
+        }
+      }
+    }
+
+    &.warning {
+      border-color: $light_ColorWarning;
+      .admonition-title {
+        color: $light_ColorWarningDark;
+        
+        &::after {
+          background: url('#{$icoPath}svg-icons.svg#circle-exclamation-orange');
+        }
+      }
+    }
+
+    &.attention {
+      border-color: $light_ColorPrimary;
+      .admonition-title {
+        color: $light_ColorPrimary;
+
+        &::after {
+          background: url('#{$icoPath}svg-icons.svg#circle-bell-lt');
+        }
+      }
+    }
+
+    &.caution {
+      border-color: $light_ColorWarningDark;
+      .admonition-title {
+        color: $light_ColorWarningDark;
+
+        &::after {
+          background: url('#{$icoPath}svg-icons.svg#circle-exclamation-orange');
+        }
+      }
+    }
+
+    &.danger {
+      border-color: $light_ColorDanger;
+      .admonition-title {
+        color: $light_ColorDanger;
+
+        &::after {
+          background: url('#{$icoPath}svg-icons.svg#circle-exclamation-red');
+        }
+      }
+    }
+
+    &.error {
+      border-color: $light_ColorDanger;
+      .admonition-title {
+        color: $light_ColorDanger;
+
+        &::after {
+          background: url('#{$icoPath}svg-icons.svg#circle-x');
+        }
+      }
+    }
+
+    &.hint {
+      border-color: $light_ColorSuccessDark;
+      .admonition-title {
+        color: $light_ColorSuccessDark;
+
+        &::after {
+          background: url('#{$icoPath}svg-icons.svg#circle-bulb');
+        }
+      }
+    }
+
+    &.important {
+      border-color: $light_ColorPrimary;
+      .admonition-title {
+        color: $light_ColorPrimary;
+
+        &::after {
+          background: url('#{$icoPath}svg-icons.svg#circle-exclamation-blue-lt');
+        }
+      }
+    }
+
+    &.tip {
+      border-color: $light_ColorSuccessDark;
+      .admonition-title {
+        color: $light_ColorSuccessDark;
+
+        &::after {
+          background: url('#{$icoPath}svg-icons.svg#circle-bulb');
+        }
       }
     }
   }
+}
 
-  &.warning {
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme {
+  #central-column .admonition {
+    background-color: $dark_ColorCodeBlockBackground;
+    border-color: $dark_ColorShadedText;
+    color: $dark_ColorMainText;
     .admonition-title {
-      color: $wuiColorWarningDark;
-      
-      &::after {
-        background: url('#{$icoPath}svg-icons.svg#circle-exclamation-orange');
+      color: $dark_ColorShadedText;
+    }
+    
+    &.note {
+      border-color: $dark_ColorPrimaryLighter;
+      .admonition-title {
+        color: $dark_ColorPrimary;
+
+        &::after {
+          background: url('#{$icoPath}svg-icons.svg#circle-check-dt');
+        }
       }
     }
-  }
 
-  &.attention {
-    .admonition-title {
-      color: $wuiColorPrimary;
-
-      &::after {
-        background: url('#{$icoPath}svg-icons.svg#circle-bell');
+    &.warning {
+      border-color: $dark_ColorWarning;
+      .admonition-title {
+        color: $dark_ColorWarningDark;
+        
+        &::after {
+          background: url('#{$icoPath}svg-icons.svg#circle-exclamation-orange');
+        }
       }
     }
-  }
 
-  &.caution {
-    .admonition-title {
-      color: $wuiColorWarningDark;
+    &.attention {
+      border-color: $dark_ColorPrimary;
+      .admonition-title {
+        color: $dark_ColorPrimary;
 
-      &::after {
-        background: url('#{$icoPath}svg-icons.svg#circle-exclamation-orange');
+        &::after {
+          background: url('#{$icoPath}svg-icons.svg#circle-bell-dt');
+        }
       }
     }
-  }
 
-  &.danger {
-    .admonition-title {
-      color: $wuiColorDanger;
+    &.caution {
+      border-color: $dark_ColorWarningDark;
+      .admonition-title {
+        color: $dark_ColorWarningDark;
 
-      &::after {
-        background: url('#{$icoPath}svg-icons.svg#circle-exclamation-red');
+        &::after {
+          background: url('#{$icoPath}svg-icons.svg#circle-exclamation-orange');
+        }
       }
     }
-  }
 
-  &.error {
-    .admonition-title {
-      color: $wuiColorDanger;
+    &.danger {
+      border-color: $dark_ColorDanger;
+      .admonition-title {
+        color: $dark_ColorDanger;
 
-      &::after {
-        background: url('#{$icoPath}svg-icons.svg#circle-x');
+        &::after {
+          background: url('#{$icoPath}svg-icons.svg#circle-exclamation-red');
+        }
       }
     }
-  }
 
-  &.hint {
-    .admonition-title {
-      color: $wuiColorSuccessDark;
+    &.error {
+      border-color: $dark_ColorDanger;
+      .admonition-title {
+        color: $dark_ColorDanger;
 
-      &::after {
-        background: url('#{$icoPath}svg-icons.svg#circle-bulb');
+        &::after {
+          background: url('#{$icoPath}svg-icons.svg#circle-x');
+        }
       }
     }
-  }
 
-  &.important {
-    .admonition-title {
-      color: $wuiColorPrimary;
+    &.hint {
+      border-color: $dark_ColorSuccessDark;
+      .admonition-title {
+        color: $dark_ColorSuccessDark;
 
-      &::after {
-        background: url('#{$icoPath}svg-icons.svg#circle-exclamation-blue');
+        &::after {
+          background: url('#{$icoPath}svg-icons.svg#circle-bulb');
+        }
       }
     }
-  }
 
-  &.tip {
-    .admonition-title {
-      color: $wuiColorSuccessDark;
+    &.important {
+      border-color: $dark_ColorPrimary;
+      .admonition-title {
+        color: $dark_ColorPrimary;
 
-      &::after {
-        background: url('#{$icoPath}svg-icons.svg#circle-bulb');
+        &::after {
+          background: url('#{$icoPath}svg-icons.svg#circle-exclamation-blue-dt');
+        }
       }
     }
-  }
 
-  &.admonition-generic-admonition {
-    .admonition-title {
-      color: $wuiColorFullShade;
-      padding-left: 10px;
+    &.tip {
+      border-color: $dark_ColorSuccessDark;
+      .admonition-title {
+        color: $dark_ColorSuccessDark;
 
-      &::after {
-        content: none;
+        &::after {
+          background: url('#{$icoPath}svg-icons.svg#circle-bulb');
+        }
       }
     }
   }

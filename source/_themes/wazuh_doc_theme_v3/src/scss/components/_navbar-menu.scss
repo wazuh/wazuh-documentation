@@ -9,11 +9,8 @@
   .nav-link {
     padding: 0 10px;
     font-size: 18px;
-    color: $wuiColorDarkestShade;
     &:hover,
     &:focus {
-      fill: $wuiColorPrimary;
-      color: $wuiColorPrimary;
       text-decoration: none;
     }
     &:active {
@@ -30,18 +27,17 @@
         }
       }
       &::after {
-          content: '';
-          display: inline-block;
-          width: 13px;
-          height: 8px;
-          background: url('#{$icoPath}svg-icons.svg#menu-chevron');
-          background-size: contain;
-          background-position: center;
-          position: absolute;
-          right: 8px;
-          bottom: .7rem;
-          border: none;
-          transition: transform ease-in .1s;
+        content: '';
+        display: inline-block;
+        width: 13px;
+        height: 8px;
+        background-size: contain;
+        background-position: center;
+        position: absolute;
+        right: 8px;
+        bottom: .7rem;
+        border: none;
+        transition: transform ease-in .1s;
       }
     }
   }
@@ -51,15 +47,12 @@
     margin-top: 20px;
     border: 0;
     border-radius: 10px;
-    box-shadow: 0 -2px 8px rgba($wuiColorFullShade, .05);
     &::before {
       position: absolute;
       top: -9px;
       width: 18px;
       height: 18px;
       content: "";
-      background-color: $wuiColorEmptyShade;
-      box-shadow: 0 -2px 8px rgba($wuiColorFullShade, .05);
       clip-path: inset(-15px 0 0 -15px);
       transform: rotate(45deg);
     }
@@ -67,4 +60,86 @@
       padding: .25rem .75rem;
     }
   }
+}
+
+/* Light theme -------------------------------------------------------------- */
+
+body {
+  .navbar-nav {
+    background-color: $light_ColorBaseSpace;
+    .nav-link {
+      color: $light_ColorMainText;
+      &:hover,
+      &:focus {
+        color: $light_ColorPrimary;
+      }
+      &.dropdown-toggle {
+        &[aria-expanded="true"],
+        &:hover {
+          &::after {
+            background: url('#{$icoPath}svg-icons.svg#menu-chevron-blue-lt');
+          }
+        }
+        &::after {
+          background: url('#{$icoPath}svg-icons.svg#menu-chevron-default-lt');
+        }
+      }
+    }
+    .dropdown-menu {
+      background-color: $light_ColorBaseSpace;
+      box-shadow: 0 -2px 8px rgba($light_ColorShadow, .2);
+      &::before {
+        background-color: $light_ColorBaseSpace;
+        box-shadow: 0 -2px 8px rgba($light_ColorShadow, .2);
+      }
+      .dropdown-item {
+        color: $light_ColorPrimary;
+        &:hover {
+          background-color: $light_ColorBaseSpace;
+          color: $light_ColorPrimary;
+        }
+      }
+    }
+  }
+}
+
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme {
+    .navbar-nav {
+      background-color: $dark_ColorIndexHeaderBackground;
+      .nav-link {
+        color: $dark_ColorMainText;
+        &:hover,
+        &:focus {
+          color: $dark_ColorPrimary;
+        }
+        &.dropdown-toggle {
+          &[aria-expanded="true"],
+          &:hover {
+            &::after {
+              background: url('#{$icoPath}svg-icons.svg#menu-chevron-blue-dt');
+            }
+          }
+          &::after {
+            background: url('#{$icoPath}svg-icons.svg#menu-chevron-default-dt');
+          }
+        }
+      }
+      .dropdown-menu {
+        background-color: $dark_ColorIndexHeaderBackground;
+        box-shadow: 0 -2px 8px rgba($dark_ColorShadow, .35);
+        &::before {
+          background-color: $dark_ColorIndexHeaderBackground;
+          box-shadow: 0 -2px 8px rgba($dark_ColorShadow, .35);
+        }
+        .dropdown-item {
+          color: $dark_ColorMainText;
+          &:hover {
+            background-color: $dark_ColorIndexHeaderBackground;
+            color: $dark_ColorPrimary;
+          }
+        }
+      }
+    }  
 }

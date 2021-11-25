@@ -1,6 +1,26 @@
 const removedUrls = [];
 const newUrls = [];
 const redirections = [];
+const versions = [
+  '4.2',
+  '4.1',
+  '4.0',
+  '3.13',
+  '3.12',
+  '3.11',
+  '3.10',
+  '3.9',
+  '3.8',
+  '3.7',
+  '3.6',
+  '3.5',
+  '3.4',
+  '3.3',
+  '3.2',
+  '3.1',
+  '3.0',
+  '2.1',
+];
 
 /* Data structure for every release
 

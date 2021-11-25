@@ -15,10 +15,45 @@
     &.docs {
       margin-left: 5px;
       line-height: 2.15;
-      color: $wuiColorDarkestShade;
 
       &:hover {
         text-decoration: none;
+      }
+    }
+  }
+}
+
+/* Light theme -------------------------------------------------------------- */
+
+body {
+  .navbar-brand {
+    .logo-link {
+      &.docs {
+        color: $light_ColorMainText;
+      }
+      .logo-light {
+        display: inline-block;
+      }
+      .logo-dark {
+        display: none;
+      }
+    }
+  }  
+}
+
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme {
+  .navbar-brand {
+    .logo-link {
+      &.docs {
+        color: $dark_ColorMainText;
+      }
+      .logo-light {
+        display: none;
+      }
+      .logo-dark {
+        display: inline-block;
       }
     }
   }

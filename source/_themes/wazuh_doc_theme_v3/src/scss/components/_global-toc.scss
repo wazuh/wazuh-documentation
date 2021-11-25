@@ -13,10 +13,11 @@
     list-style: none;
 
     .current-toc-node {
-      color: $wuiColorPrimary;
-
       &:hover {
-        color: $wuiColorPrimaryLighter;
+        
+        .toc-toggle-btn {
+          display: block;
+        }
       }
 
       &::before {
@@ -27,7 +28,7 @@
         height: 6px;
         pointer-events: none;
         content: "";
-        border: 5px solid $wuiColorPrimary;
+        border: 5px solid;
         border-right-color: transparent;
         border-bottom: 0;
         border-left-color: transparent;
@@ -51,11 +52,12 @@
     font-size: 18px;
     font-weight: 400;
     line-height: 32px;
-    color: $wuiColorDarkestShade;
     text-decoration: none;
 
     &:hover {
-      color: $wuiColorPrimaryLighter;
+      .toc-toggle-btn {
+        display: block;
+      }
     }
   }
 
@@ -67,8 +69,16 @@
         font-weight: 700;
       }
 
-      &.show > ul {
-        display: block;
+      &.show {
+        > ul {
+          display: block;
+        }
+      } 
+    }
+    
+    &.show {
+      > a .toc-toggle-btn {
+        transform: rotateZ(180deg);
       }
     }
 
@@ -84,12 +94,99 @@
         left: 25px;
       }
     }
-    &.show > a {
-      background-color: $globalTocHighlight;
-    }
     > ul {
       margin-left: 40px;
-      border-left: 1px solid $wuiColorPrimary;
+      border-left: 1px solid;
+    }
+  }
+
+  .toc-toggle-btn {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 32px;
+    width: 42px;
+    height: 42px;
+    background-color: transparent;
+    background-size: 17px 10px;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: none;
+  }
+}
+
+/* Light theme -------------------------------------------------------------- */
+
+body {
+  #global-toc {
+    ul {
+      .current-toc-node {
+        color: $light_ColorPrimary;
+        &:hover {
+          color: $light_ColorPrimaryLighter;
+          .toc-toggle-btn {
+            background-image: url(#{$icoPath}svg-icons.svg#menu-chevron-blue-lt);
+          }
+        }
+        &::before {
+          border-top-color: $light_ColorPrimary;
+        }
+      }
+    }
+    a {
+      color: $light_ColorMainText;
+      &:hover {
+        color: $light_ColorPrimaryLighter;
+        .toc-toggle-btn {
+          background-image: url(#{$icoPath}svg-icons.svg#menu-chevron-blue-light-lt);
+        }
+      }
+    }
+    .toctree-l1 {
+      &.show > a {
+        background-color: $light_ColorGlobalTocHighlight;
+      }
+      > ul {
+        border-left-color: $light_ColorPrimary;
+      }
+    }
+  }
+}
+
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme {
+  #global-toc {
+    ul {
+      .current-toc-node {
+        color: $dark_ColorPrimary;
+        &:hover {
+          color: $dark_ColorPrimaryLighter;
+          .toc-toggle-btn {
+            background-image: url(#{$icoPath}svg-icons.svg#menu-chevron-blue-dt);
+          }
+        }
+        &::before {
+          border-top-color: $dark_ColorPrimary;
+        }
+      }
+    }
+    a {
+      color: $dark_ColorMainText;
+      &:hover {
+        color: $dark_ColorPrimaryLighter;
+        .toc-toggle-btn {
+          background-image: url(#{$icoPath}svg-icons.svg#menu-chevron-blue-light-dt);
+        }
+      }
+    }
+    .toctree-l1 {
+      &.show > a {
+        background-color: rgba($dark_ColorGlobalTocHighlight, .1);
+      }
+      > ul {
+        border-left-color: $dark_ColorPrimary;
+      }
     }
   }
 }

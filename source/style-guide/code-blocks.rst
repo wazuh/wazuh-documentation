@@ -19,6 +19,16 @@ Linenos
   code-block attributes
   # curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/elastic-stack/elasticsearch/7.x/elasticsearch_cluster_initial_node.yml
 
+.. code-block::
+  :linenos: 
+  :class: output collapsed
+  
+  This code-block
+  only contains text,
+  to test the 
+  code-block attributes
+  # curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/elastic-stack/elasticsearch/7.x/elasticsearch_cluster_initial_node.yml
+
 Emphasize lines
 ---------------
 
@@ -34,6 +44,27 @@ Emphasize lines
 
 .. code-block::
   :emphasize-lines: 3,4
+
+  This code-block
+  only contains text,
+  to test the 
+  code-block attributes
+  # curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/elastic-stack/elasticsearch/7.x/elasticsearch_cluster_initial_node.yml
+
+.. code-block::
+  :emphasize-lines: 3,4
+  :linenos: 
+  :class: output
+  
+  This code-block
+  only contains text,
+  to test the 
+  code-block attributes
+  # curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/elastic-stack/elasticsearch/7.x/elasticsearch_cluster_initial_node.yml
+
+.. code-block::
+  :emphasize-lines: 3,4
+  :class: output
 
   This code-block
   only contains text,

@@ -5,8 +5,7 @@
 ----------------------------------------------------------------------------- */
 
 .search-box {
-  background-color: $wuiColorLightestShade;
-  border: 2px solid $wuiColorLighterShade;
+  border: 2px solid;
   border-radius: $roundedCorners;
 
   .search-form {
@@ -23,7 +22,6 @@
       width: 100%;
       font-size: 18px;
       font-weight: 400;
-      background-color: $wuiColorLightestShade;
       border: none;
     }
 
@@ -38,6 +36,36 @@
       background-size: 41px 41px;
       background-position: center;
       border: none;
+    }
+  }
+}
+
+/* Light theme -------------------------------------------------------------- */
+
+body {
+  .search-box {
+    background-color: $light_ColorSidebarSpace;
+    border-color: $light_ColorBorderDetails;
+    .form-control {
+      background-color: $light_ColorSidebarSpace;
+    }
+    ::placeholder { 
+      color: $light_ColorInputPlaceholder;
+    }
+  }
+}
+
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme {
+  .search-box {
+    background-color: $dark_ColorSidebarSpace;
+    border-color: $dark_ColorBorderDetails;
+    .form-control {
+      background-color: $dark_ColorSidebarSpace;
+    }
+    ::placeholder { 
+      color: $dark_ColorInputPlaceholder;
     }
   }
 }

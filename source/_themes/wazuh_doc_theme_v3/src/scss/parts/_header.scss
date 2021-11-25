@@ -10,10 +10,25 @@
 
 header {
   height: $headerHeight;
-  background: $wuiColorEmptyShade;
-  box-shadow: 0 4px 12px 0 rgba($wuiColorPrimaryLighter, .15);
+  box-shadow: 0 4px 12px 0 rgba(#000, .1);
 
   .navbar {
     height: $headerHeight;
+  }
+}
+
+/* Light theme -------------------------------------------------------------- */
+
+body {
+  header {
+    background: $light_ColorBaseSpace;
+  }
+}
+
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme {
+  header {
+    background: $dark_ColorIndexHeaderBackground;
   }
 }

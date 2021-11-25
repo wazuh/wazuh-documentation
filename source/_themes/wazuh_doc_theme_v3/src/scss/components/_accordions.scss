@@ -8,7 +8,7 @@
   display: flex;
   width: 100%;
   align-items: center;
-  border-bottom: 2px solid $wuiColorLightShade;
+  border-bottom: 2px solid $light_ColorBorderDeeper;
   height: 1.5em;
 
   &::before {
@@ -21,5 +21,13 @@
     background-repeat: no-repeat;
     background-size: 20px 20px;
     background-position: center;
+    transition: transform .2s;
+  }
+  
+  &.collapsed {
+    &::before {
+      transform: rotateZ(-90deg);
+      transition: transform .2s;
+    }
   }
 }
