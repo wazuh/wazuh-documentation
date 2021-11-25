@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about the different options for the configuration of daily reports based on alerts in this section of the Wazuh documentation.  
+  :description: Learn more about the different options for configuring daily reports based on alerts in this section of the Wazuh documentation.  
   
 .. _reference_ossec_reports:
 

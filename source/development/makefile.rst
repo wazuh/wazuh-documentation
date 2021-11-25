@@ -1,7 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: This section contains instructions to customize the installation from Wazuh by compiling the source code before executing the installation script. 
+  :description: This section contains instructions to customize the installation of Wazuh by compiling the source code before executing the installation script. 
   
 .. _wazuh_makefile:
 
