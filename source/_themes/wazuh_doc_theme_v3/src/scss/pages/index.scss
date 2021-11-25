@@ -183,6 +183,14 @@ main {
   [href$="user-manual/index.html"]::before {
     background-image: url('#{$icoPath}index-icons.svg#user-manual');
   }
+  /* Cloud service */
+  [href$="cloud-service/index.html"]::before {
+    background-image: url('#{$icoPath}index-icons.svg#cloud-service');
+  }
+  /* Containers */
+  [href$="containers.html"]::before {
+    background-image: url('#{$icoPath}index-icons.svg#containers');
+  }
   /* Deployment */
   [href$="deployment.html"]::before {
     background-image: url('#{$icoPath}index-icons.svg#deployment');

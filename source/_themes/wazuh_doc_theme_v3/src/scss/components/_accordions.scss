@@ -8,7 +8,7 @@
   display: flex;
   width: 100%;
   align-items: center;
-  border-bottom: 2px solid $light_ColorBorderDeeper;
+  border-bottom: 2px solid;
   height: 1.5em;
 
   &::before {
@@ -17,7 +17,6 @@
     height: 20px;
     margin-right: 10px;
     content: '';
-    background-image: url('#{$icoPath}svg-icons.svg#chevron-blue');
     background-repeat: no-repeat;
     background-size: 20px 20px;
     background-position: center;
@@ -28,6 +27,29 @@
     &::before {
       transform: rotateZ(-90deg);
       transition: transform .2s;
+    }
+  }
+}
+
+
+/* Light theme -------------------------------------------------------------- */
+
+body {
+  .accordion-title {
+    border-bottom-color: $light_ColorBorderDeeper;
+    &::before {
+      background-image: url('#{$icoPath}svg-icons.svg#chevron-blue-lt');
+    }
+  }
+}
+
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme {
+  .accordion-title {
+    border-bottom-color: $dark_ColorBorderDeeper;
+    &::before {
+      background-image: url('#{$icoPath}svg-icons.svg#chevron-blue-dt');
     }
   }
 }

@@ -11,6 +11,22 @@ if ( $('.index') ) {
 
   $('.loading').removeClass('loading');
 
+  /* Hide specific subtrees from the index */
+  const nodesToHide = [
+    'development/index.html',
+    'migrating-from-ossec/index.html',
+  ];
+  hideSectionsFromIndex(nodesToHide);
+  /**
+   * Hides particular nodes and their subrees from the index page only
+   * @param  {Array} nodesToHide               List of nondes that must be hidden.
+   */
+  function hideSectionsFromIndex(nodesToHide) {
+    for ( let i = 0; i < nodesToHide.length; i++ ) {
+      $('.index [href="' + nodesToHide[i] + '"]').parent().remove();
+    }
+  }
+
   /* Add click event fuctionality for dropdown toggle button to uncollapse the index blocks */
   $(document).delegate('.toctree-l1 .toggle', 'click', function(e) {
     e.preventDefault();
