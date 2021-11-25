@@ -8,7 +8,7 @@
 Makefile options
 ================
 
-This section contains instructions to customize the installation from Wazuh by compiling the source code before executing the installation script.
+This section contains instructions to customize the installation of Wazuh by compiling the source code before executing the installation script.
 
 You can also find here the different settings available for the ``Makefile``. Each setting is described and includes the default and allowed values that you can use.
 
