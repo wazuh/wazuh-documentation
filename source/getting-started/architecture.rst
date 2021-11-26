@@ -8,7 +8,7 @@
 Architecture
 ============
 
-The Wazuh architecture is based on :ref:`agents <wazuh_agent>`, running on the monitored endpoints, that forward security data to a central :ref:`server <wazuh_server>`. Moreover, agentless devices such as firewalls, switches, routers, and access points are supported and can actively submit log data via Syslog, SSH, or using their own API. The central server decodes and analyzes the incoming information, and passes the results along to an Elasticsearch cluster for indexing and storage.
+The Wazuh architecture is based on :ref:`agents <wazuh_agent>`, running on the monitored endpoints, that forward security data to a central :ref:`server <wazuh_server>`. Moreover, agentless devices such as firewalls, switches, routers, and access points are supported and can actively submit log data via Syslog, SSH, or using their own API. The central server decodes and analyzes the incoming information and passes the results along to an Elasticsearch cluster for indexing and storage.
 
 An Elasticsearch cluster is a collection of one or more nodes that communicate with each other to perform read and write operations on indexes. Small Wazuh deployments, which do not require processing large amounts of data, can easily be handled by a single-node cluster. Multi-node clusters are recommended when there is a large number of monitored endpoints, when a large volume of data is anticipated, or when high availability is required.
 
