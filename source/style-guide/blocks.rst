@@ -345,8 +345,9 @@ Per-line quoting can also be used on unindented literal blocks::
 > for Haskell literate programming.
 
 .. warning::
+  :class: long
 
-	We recommend against the use of ``::`` since, once parsed, the result might not be the one expected. Instead, we prefer the use of code-blocks. For example, this one doesn't contain highlighted keywords:
+  We recommend against the use of ``::`` since, once parsed, the result might not be the one expected. Instead, we prefer the use of code-blocks. For example, this one doesn't contain highlighted keywords:
 
   .. code-block:: none
 

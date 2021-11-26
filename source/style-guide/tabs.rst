@@ -31,7 +31,10 @@ Tabs
   .. group-tab:: Linux
 
 
-    .. note:: All the commands described below need to be executed with root user privileges. Since Wazuh 3.5 it is necessary to have internet connection when following this process.
+    .. note::
+      :class: long
+      
+      All the commands described below need to be executed with root user privileges. Since Wazuh 3.5 it is necessary to have internet connection when following this process.
 
     .. note:: CMake 3.12.4 is the minimal library version required to build the Wazuh agent solution.
 
@@ -113,7 +116,10 @@ Tabs
           # make -j$(nproc) && make install
           # cd .. && rm -rf cmake-*
 
-        .. note:: For Suse 11, it is possible that some of the tools are not found in the package manager, in that case you can add the following official repository:
+        .. note:: 
+          :class: long
+          
+          For Suse 11, it is possible that some of the tools are not found in the package manager, in that case you can add the following official repository:
 
         .. code-block:: console
 
@@ -143,7 +149,10 @@ Tabs
         # make -C src clean
         # make -C src clean-deps
 
-     .. note:: During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``. When choosing a different path than the default, if the directory already exist the installer will ask if delete the directory or if installing Wazuh inside. You can also run an unattended-installation.
+     .. note::
+       :class: long
+       
+       During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``. When choosing a different path than the default, if the directory already exist the installer will ask if delete the directory or if installing Wazuh inside. You can also run an unattended-installation.
 
 
     4. The script will ask about what kind of installation you want. Type ``agent`` in order to install a Wazuh agent:
@@ -212,7 +221,10 @@ Tabs
 
   .. group-tab:: Windows
 
-    .. note:: The following procedure has been tested on Ubuntu 16.04 and other Debian based distributions and may work with other Debian/Ubuntu versions as well.
+    .. note::
+      :class: long
+      
+      The following procedure has been tested on Ubuntu 16.04 and other Debian based distributions and may work with other Debian/Ubuntu versions as well.
 
     1. Set up the Ubuntu build environment. Install these dependencies to build the Windows Wazuh agent installer on Ubuntu:
 
@@ -268,7 +280,10 @@ Tabs
 
        :: signtool sign /a /tr http://rfc3161timestamp.globalsign.com/advanced /d "%MSI_NAME%" /td SHA256 "%MSI_NAME%"
 
-    .. note:: Once the Agent is deployed wazuh_agent_package_windows, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit register_agents.
+    .. note::
+      :class: long
+      
+      Once the Agent is deployed wazuh_agent_package_windows, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit register_agents.
 
     .. raw:: html
 
@@ -309,7 +324,10 @@ Tabs
       # cd wazuh-*
       # USER_DIR="/Library/Ossec" ./install.sh
 
-     .. note:: Note that with the variable `USER_DIR` it has been indicated that the agent installation path is ``/Library/Ossec``
+     .. note::
+       :class: long
+       
+       Note that with the variable `USER_DIR` it has been indicated that the agent installation path is ``/Library/Ossec``
 
      If you have previously compiled for another platform, you must clean the build using the Makefile in ``src``:
 
@@ -319,7 +337,10 @@ Tabs
         # make -C src clean
         # make -C src clean-deps
 
-     .. note:: During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``. When choosing a different path than the default, if the directory already exist the installer will ask if delete the directory or if installing Wazuh inside. You can also run an unattended-installation.
+     .. note::
+       :class: long
+       
+       During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``. When choosing a different path than the default, if the directory already exist the installer will ask if delete the directory or if installing Wazuh inside. You can also run an unattended-installation.
 
      .. note:: Since Wazuh 3.5 it is necessary to have internet connection when following this step.
 
@@ -381,7 +402,10 @@ Tabs
   .. group-tab:: AIX
 
 
-    .. note:: All the commands described below need to be executed with root user privileges. Since Wazuh 3.5 it is necessary to have internet connection when following this process.
+    .. note::
+      :class: long
+      
+      All the commands described below need to be executed with root user privileges. Since Wazuh 3.5 it is necessary to have internet connection when following this process.
 
     1. Install development tools and compilers.
 
@@ -437,7 +461,10 @@ Tabs
         # gmake -C src clean-deps
         # gmake -C src clean
 
-    .. note:: During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``. When choosing a different path than the default, if the directory already exist the installer will ask if delete the directory or if installing Wazuh inside. You can also run an unattended-installation.
+    .. note::
+      :class: long
+      
+      During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``. When choosing a different path than the default, if the directory already exist the installer will ask if delete the directory or if installing Wazuh inside. You can also run an unattended-installation.
 
     5. Finally apply the following configuration:
 
@@ -446,7 +473,10 @@ Tabs
         # sed '/System inventory/,/^$/{/^$/!d;}' /var/ossec/etc/ossec.conf > /var/ossec/etc/ossec.conf.tmp
         # mv /var/ossec/etc/ossec.conf.tmp /var/ossec/etc/ossec.conf
 
-     .. note:: Note that the above commands have been executed for the default installation path /var/ossec. If you have installed the agent in another path, you will have to modify the path of those commands.
+     .. note::
+       :class: long
+       
+       Note that the above commands have been executed for the default installation path /var/ossec. If you have installed the agent in another path, you will have to modify the path of those commands.
 
     Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: register_agents.
 
@@ -497,7 +527,10 @@ Tabs
 
   .. group-tab:: HP-UX
 
-    .. note:: All the commands described below need to be executed with root user privileges. Since Wazuh 3.5 it is necessary to have internet connection when following this process.
+    .. note::
+      :class: long
+      
+      All the commands described below need to be executed with root user privileges. Since Wazuh 3.5 it is necessary to have internet connection when following this process.
 
     1. Install development tools and compilers.
 
@@ -567,7 +600,10 @@ Tabs
       # /usr/local/bin/gmake -C src clean-deps
       # /usr/local/bin/gmake -C src clean
 
-    .. note:: During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``. When choosing a different path than the default, if the directory already exist the installer will ask if delete the directory or if installing Wazuh inside. You can also run an unattended-installation.
+    .. note::
+      :class: long
+      
+      During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``. When choosing a different path than the default, if the directory already exist the installer will ask if delete the directory or if installing Wazuh inside. You can also run an unattended-installation.
 
     Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: register_agents.
 
@@ -628,7 +664,10 @@ Tabs
 
       .. tab:: Solaris 10
 
-        .. note:: All the commands described below need to be executed with root user privileges. Since Wazuh 3.5 it is necessary to have internet connection when following this process.
+        .. note::
+          :class: long
+          
+          All the commands described below need to be executed with root user privileges. Since Wazuh 3.5 it is necessary to have internet connection when following this process.
 
         1. Install development tools and compilers.
 
@@ -748,7 +787,10 @@ Tabs
           # gmake -C src clean
           # gmake -C src clean-deps
 
-         .. note:: During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``. When choosing a different path than the default, if the directory already exist the installer will ask if delete the directory or if installing Wazuh inside. You can also run an unattended-installation.
+         .. note::
+           :class: long
+           
+           During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``. When choosing a different path than the default, if the directory already exist the installer will ask if delete the directory or if installing Wazuh inside. You can also run an unattended-installation.
 
         8. The script will ask about what kind of installation you want. Type ``agent`` in order to install a Wazuh agent:
 
@@ -805,7 +847,10 @@ Tabs
 
       .. tab:: Solaris 11
 
-        .. note:: All the commands described below need to be executed with root user privileges. Since Wazuh 3.5 it is necessary to have internet connection when following this process.
+        .. note::
+          :class: long
+          
+          All the commands described below need to be executed with root user privileges. Since Wazuh 3.5 it is necessary to have internet connection when following this process.
 
         1. Install development tools and build the needed compilers.
 
@@ -887,7 +932,10 @@ Tabs
           # gmake -C src clean
           # gmake -C src clean-deps
 
-         .. note:: During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``. When choosing a different path than the default, if the directory already exist the installer will ask if delete the directory or if installing Wazuh inside. You can also run an unattended-installation.
+         .. note::
+           :class: long
+           
+           During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``. When choosing a different path than the default, if the directory already exist the installer will ask if delete the directory or if installing Wazuh inside. You can also run an unattended-installation.
 
         .. note:: Since Wazuh 3.5 it is necessary to have internet connection when following this process.
 
