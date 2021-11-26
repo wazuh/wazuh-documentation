@@ -9,7 +9,7 @@ Elasticsearch is a highly scalable, full-text search and analytics engine. This 
 
 Elasticsearch stores data as JSON documents. Each document correlates a set of keys, field names or properties, with their corresponding values which can be strings, numbers, Booleans, dates, arrays of values, geolocations, or other types of data.
 
-The documents stored in Elasticsearch are distributed across different containers known as shards. By distributing the documents across multiple shards, and distributing those shards across multiple nodes, Elasticsearch can ensure redundancy, which both protects against hardware failures and increases query capacity as nodes are added to a cluster. 
+The documents stored in Elasticsearch are distributed across different containers known as shards. By distributing the documents across multiple shards, and distributing those shards across multiple nodes, Elasticsearch can ensure redundancy. This protects your system against hardware failures and increases query capacity as nodes are added to a cluster. 
 
 .. thumbnail:: ../../images/getting_started/elasticsearch.png
     :alt: Elasticsearch cluster
