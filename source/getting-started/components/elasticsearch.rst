@@ -19,7 +19,7 @@ The documents stored in Elasticsearch are distributed across different container
 
 An Elasticsearch index is a collection of documents that are related to each other. Wazuh uses different indices for alert data, raw events, status monitoring information, and performance-related data. 
 
-Elasticsearch uses a data structure called inverted index, which is designed to allow quick full-text searches. An inverted index lists every unique word that appears in any document and identifies all of the documents that contain each particular word. During the indexing process, Elasticsearch stores documents and builds an inverted index to make the document data searchable in near real-time. Indexing is initiated with the index API, through which you can add or update a JSON document in a specific index.
+Elasticsearch uses a data structure called inverted index, which is designed to allow quick full-text searches. An inverted index lists every unique word that appears in any document and identifies all the documents that contain each particular word. During the indexing process, Elasticsearch stores documents and builds an inverted index to make the document data searchable in near real-time. Indexing is initiated with the index API, through which you can add or update a JSON document in a specific index.
 
 Wazuh uses four different index patterns to store different event types.
 
