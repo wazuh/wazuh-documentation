@@ -7,5 +7,60 @@
 @import "../inc/root";
 
 @import "../parts/header";
+@import "../parts/footer";
 @import "../parts/left-sidebar";
+@import "../parts/central-column";
 @import "../parts/right-sidebar";
+
+.not_found {
+
+  main {
+    padding-top: 4rem;
+    padding-bottom: 3rem;
+  }
+  .error-background {
+    max-width: 992px;
+    margin-left: auto;
+    margin-right: auto;
+    min-height: 370px;
+    background-image: url('#{$imgPath}wazuh_404_bg_desktop.png');
+    background-repeat: no-repeat;
+    background-size: 90%;
+    background-position: center top;
+  }
+  .error-message {
+    text-align: center;
+    
+    h1 {
+      width: 100%;
+      font-size: 30px;
+    }
+    .btn {
+      border-radius: $roundedCorners;
+      font-weight: 700;
+      padding: 10px 40px;
+    }
+  }
+}
+
+/* Light theme -------------------------------------------------------------- */
+
+.not_found {
+  .error-message {
+    .btn {
+      background-color: $light_ColorAccent;
+      color: $light_ColorMainText;
+    }
+  }
+}
+
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme.not_found {
+  .error-message {
+    .btn {
+      background-color: $dark_ColorAccent;
+      color: $light_ColorMainText;
+    }
+  }
+}

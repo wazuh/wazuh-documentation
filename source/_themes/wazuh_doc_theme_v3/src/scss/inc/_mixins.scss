@@ -36,7 +36,7 @@
 
 @mixin global-toc-nested-padding($min, $max, $delta, $default) {
   @for $level from $min through $max {
-    .current {
+    ul {
       .toctree-l#{$level} > a {
         padding-left: $delta * ($level - 1);
         &.current-toc-node::before {

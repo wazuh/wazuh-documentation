@@ -83,7 +83,7 @@ h6,
 main {
   padding-left: 30px;
   padding-right: 15px;
-  min-height: calc(100vh - #{$headerHeight} - #{$breadcrumbsHeight} - #{$footerHeight});
+  min-height: calc(100vh - #{$headerHeight} - #{$footerHeight});
 
   img {
     max-width: 100%;

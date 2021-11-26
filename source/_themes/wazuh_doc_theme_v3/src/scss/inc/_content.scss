@@ -1,7 +1,8 @@
 /* -----------------------------------------------------------------------------
-  PART: CONTENT COLUMN
+  Defaults for content (inc)
 
-  Style for the content column containing the element main.
+  General complete style specifically required for the content, including
+  lists, tables, etc. that is not necessarily need in all pages.
 ----------------------------------------------------------------------------- */
 
 @import "../components/accordions";
@@ -13,15 +14,8 @@
 @import "../components/link-boxes";
 @import "../components/previous-next";
 
-#central-column * {
-  scroll-margin-top: calc(#{$headerHeight} + #{$breadcrumbsHeight});
-}
-
 #central-column {
-  width: 100%;
   padding-top: $breadcrumbsHeight;
-  padding-right: $rightSidebarWidth;
-  padding-left: $leftSidebarWidth;
 
   dl {
     dt {
@@ -35,11 +29,8 @@
 }
 
 [role="main"] {
-
-  .no-margins {
-    margin: 0;
-  }
-
+  min-height: calc(100vh - #{$headerHeight} - #{$breadcrumbsHeight} - #{$footerHeight});
+  
   h1,
   h2,
   h3,
@@ -50,7 +41,7 @@
       display: inline-block;
       line-height: 1;
       text-decoration: none;
-
+      
       &::after {
         display: inline-block;
         width: 1rem;
@@ -64,7 +55,7 @@
         transition: opacity ease-in .1s;
       }
     }
-
+    
     &:hover {
       .headerlink::after {
         opacity: 1;
@@ -72,40 +63,7 @@
       }
     }
   }
-
-  strong {
-    font-weight: 800;
-  }
-
-  code {
-    display: inline-block;
-    padding: 1px 2px;
-    font-family: "Fira Mono", monospace;
-  }
-
-  .arabic {
-    list-style-type: decimal;
-  }
-  .loweralpha {
-    list-style-type: lower-alpha;
-  }
-  .lowerroman {
-    list-style-type: lower-roman;
-  }
-  .upperalpha {
-    list-style-type: upper-alpha;
-  }
-  .upperroman {
-    list-style-type: upper-roman;
-  }
-
-  caption {
-    padding: 8px;
-    border: 1px solid;
-    border-top: none;
-    border-radius: 0 0 $roundedCorners $roundedCorners;
-  }
-
+    
   .align-cells-top {
     th,
     td {
@@ -258,7 +216,6 @@
   }
 }
 
-
 /* Light theme -------------------------------------------------------------- */
 
 body {
@@ -268,19 +225,10 @@ body {
         color: $light_ColorShadedText;
       }
     }
-    
     code {
       color: $light_ColorHighlightInlineText;
       background-color: $light_ColorHighlightBackground;
     }
-    
-    caption {
-      border-color:  $light_ColorTableBorder;
-    }
-    .caption-text {
-      color: $light_ColorShadedText;
-    }
-    
     .docutils:not(.list-rows) {
       thead {
         background-color: $light_ColorPrimary;
@@ -340,19 +288,10 @@ body {
         color: $dark_ColorShadedText;
       }
     }
-    
     code {
       color: $dark_ColorHighlightInlineText;
       background-color: $dark_ColorHighlightBackground;
     }
-    
-    caption {
-      border-color:  $dark_ColorTableBorder;
-    }
-    .caption-text {
-      color: $dark_ColorShadedText;
-    }
-    
     .docutils:not(.list-rows) {
       thead {
         background-color: $dark_ColorPrimary;
