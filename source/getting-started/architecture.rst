@@ -12,7 +12,7 @@ The Wazuh architecture is based on :ref:`agents <wazuh_agent>`, running on the m
 
 An Elasticsearch cluster is a collection of one or more nodes that communicate with each other to perform read and write operations on indexes. Small Wazuh deployments, which do not require processing large amounts of data, can easily be handled by a single-node cluster. Multi-node clusters are recommended when there is a large number of monitored endpoints, when a large volume of data is anticipated, or when high availability is required.
 
-For production environments it is recommended to deploy the Wazuh server and Elasticsearch to different hosts. In this scenario, Filebeat is used to securely forward Wazuh alerts and/or archived events to the Elasticsearch cluster (single-node or multi-node) using TLS encryption.
+For production environments, it is recommended to deploy the Wazuh server and Elasticsearch to different hosts. In this scenario, Filebeat is used to securely forward Wazuh alerts and/or archived events to the Elasticsearch cluster (single-node or multi-node) using TLS encryption.
 
 The diagram below represents a Wazuh deployment architecture. It shows the solution components and how the :ref:`Wazuh servers <wazuh_server>` and :ref:`Elasticsearch <components_elasticsearch>` can be configured as a cluster, providing load balancing and high availability.
 
