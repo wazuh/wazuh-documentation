@@ -20,4 +20,4 @@ In case of having any doubt about operating system compatibility, as well as the
         elasticsearch-kibana-filebeat/index
         upgrading-agent
         legacy/index
-        compatibility_matrix/index
+        compatibility-matrix/index
