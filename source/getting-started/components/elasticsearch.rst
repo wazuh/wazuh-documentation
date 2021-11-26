@@ -41,5 +41,5 @@ Wazuh uses four different index patterns to store different event types.
 
 Elasticsearch is well suited for time-sensitive use cases like security analytics and infrastructure monitoring as it's a near real-time search platform. The latency from the time a document is indexed until it becomes searchable is very short — typically one second.
 
-You interact with the Elasticsearch clusters using the REST API, which offers a lot of flexibility. You can perform searches, add or delete documents, modify indices, and more. Elasticsearch comes with a wide set of features. In addition to its speed, scalability, and resiliency, Elasticsearch has several powerful built-in features that make storing and searching data even more efficient, such as data rollups, alerting, anomaly detection and index lifecycle management.
+You interact with the Elasticsearch clusters using the REST API, which offers a lot of flexibility. You can perform searches, add or delete documents, modify indices, and more. Elasticsearch comes with a wide set of features. In addition to its speed, scalability, and resiliency, Elasticsearch has several powerful built-in features that make storing and searching data even more efficient, such as data rollups, alerting, anomaly detection, and index lifecycle management.
 
