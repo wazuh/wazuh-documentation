@@ -14,7 +14,6 @@ The documents stored in Elasticsearch are distributed across different container
 .. thumbnail:: ../../images/getting_started/elasticsearch.png
     :alt: Elasticsearch cluster
     :align: center
-    :wrap_image: No
 
 
 An Elasticsearch index is a collection of documents that are related to each other. Wazuh uses different indices for alert data, raw events, status monitoring information, and performance-related data. 
