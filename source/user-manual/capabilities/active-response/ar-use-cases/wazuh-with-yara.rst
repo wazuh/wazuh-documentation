@@ -65,7 +65,7 @@ It defines the criteria used to execute a specific command:
 
 - You can write a list of rule IDs that will trigger the active response in the ``rules_id`` setting. This example uses:
    * Rule ``550``, file modified in the system.
-   * Rule ``554``, new file added to the system.
+   * Rule ``554``: new file added to the system
 
 Rules and decoders
 ^^^^^^^^^^^^^^^^^^
