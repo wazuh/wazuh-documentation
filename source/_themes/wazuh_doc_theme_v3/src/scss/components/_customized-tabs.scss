@@ -85,7 +85,7 @@ body {
   .sphinx-tabs {
     .docutils.container {
       .item {
-        background-color: $light_ColorSidebarSpace;
+        background-color: $light_ColorCodeBlockBackground;
         color: $light_ColorMainText;
         &.active {
           border-color: $light_ColorPrimary;
@@ -125,7 +125,7 @@ body {
   .sphinx-tabs {
     .docutils.container {
       .item {
-        background-color: $dark_ColorSidebarSpace;
+        background-color: $dark_ColorCodeBlockBackground;
         color: $dark_ColorMainText;
         &.active {
           border-color: $dark_ColorPrimary;

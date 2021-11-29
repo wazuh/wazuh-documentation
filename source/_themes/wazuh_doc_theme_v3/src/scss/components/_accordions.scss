@@ -4,6 +4,13 @@
   Style for the accordion sections.
 ----------------------------------------------------------------------------- */
 
+.section.accordion-parent {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
 .accordion-title {
   display: flex;
   width: 100%;
