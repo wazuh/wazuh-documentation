@@ -319,7 +319,7 @@ Wazuh is a free and open source platform for threat detection, security monitori
    installation-guide/index
    upgrade-guide/index
    user-manual/index
-   cloud-service/index
+   Wazuh cloud service <cloud-service/index>
    development/index
    containers
    deployment

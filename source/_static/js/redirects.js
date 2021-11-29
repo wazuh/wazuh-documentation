@@ -53,7 +53,7 @@ newUrls['4.3'] = [
 
 /* Pages added in 4.2 */
 
-
+newUrls['4.2'] = [
   '/proof-of-concept-guide/detect-malware-yara-integration.html',
   '/proof-of-concept-guide/poc-vulnerability-detection.html',
   '/proof-of-concept-guide/detect-remove-malware-virustotal.html',
@@ -75,11 +75,6 @@ newUrls['4.3'] = [
   '/deploying-with-ansible/roles/wazuh-opendistro.rst',
   '/release-notes/release-4-2-5.html',
   '/amazon-machine-images/amazon-machine-images.html',
-  '/release-notes/release-4-2-4.html',
-  '/release-notes/release-4-2-3.html',
-  '/release-notes/release-4-2-2.html',
-  '/release-notes/release_4_2_1.html',
-  '/release-notes/release_4_2_0.html',
   '/user-manual/capabilities/active-response/ar-use-cases/removing-malware.html',
   '/user-manual/capabilities/active-response/ar-use-cases/wazuh-with-yara.html',
   '/user-manual/capabilities/active-response/ar-use-cases/blocking-attacks.html',
@@ -121,6 +116,9 @@ newUrls['4.3'] = [
   '/cloud-service/apis/index.html',
   '/cloud-service/apis/reference.html',
   '/cloud-service/cold-storage/index.html',
+  '/cloud-service/cold-storage/access.rst',
+  '/cloud-service/cold-storage/configuration.rst',
+  '/cloud-service/cold-storage/filename-format.rst',
   '/cloud-service/getting-started/index.html',
   '/cloud-service/getting-started/starting-faq.html',
   '/cloud-service/your-environment/index.html',
@@ -222,6 +220,9 @@ newUrls['4.3'] = [
   '/release-notes/release-4-1-5.html',
   '/release-notes/release-4-2-0.html',
   '/release-notes/release-4-2-1.html',
+  '/release-notes/release-4-2-2.html',
+  '/release-notes/release-4-2-3.html',
+  '/release-notes/release-4-2-4.html',
   '/user-manual/api/securing-api.html',
   '/user-manual/configuring-cluster/cluster-management.html',
   '/user-manual/manager/manual-email-report/smtp-authentication.html',

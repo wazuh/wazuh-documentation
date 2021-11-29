@@ -1,9 +1,12 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Check out the main configuration options and the allowed values of the command wodle in this section of our documentation. 
+  
 .. _wodle_command:
 
 wodle name="command"
-========================
+====================
 
 .. versionadded:: 3.1.0
 

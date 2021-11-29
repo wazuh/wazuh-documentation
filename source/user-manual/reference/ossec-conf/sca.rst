@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Learn more about the configuration of the Security Configuration Assessment module. Check out the options and a sample configuration in this section.
+  
 .. _reference_sec_config_assessment:
 
 sca
