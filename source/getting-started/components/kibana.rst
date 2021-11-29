@@ -5,12 +5,12 @@
 Kibana
 ======
 
-Kibana is a flexible and intuitive web interface for mining, analyzing, and visualizing data. In combination with the Wazuh Kibana plugin, it is also used for management and monitoring of the Wazuh infrastructure. From the Wazuh user interface, identity and access management can be controlled by creating and managing users, and assigning roles as needed. 
+Kibana is a flexible and intuitive web interface for mining, analyzing, and visualizing data. In combination with the Wazuh Kibana plugin, it is also used for the management and monitoring of the Wazuh infrastructure. From the Wazuh user interface, identity and access management can be controlled by creating and managing users, and assigning roles as needed. 
 
 Data visualization, mining, and analysis
 ----------------------------------------
 
-You can search alerts classified by modules and filter them using the different views. Users are be able to explore the alerts at the Wazuh cluster level and on a specific agent. Wazuh provides out-of-the-box dashboards, allowing you to seamlessly navigate through the user interface. Users can quickly visualize security events, detected vulnerable applications, file integrity monitoring data, configuration assessment results, cloud infrastructure monitoring events, and regulatory compliance, such as PCI DSS, GDPR, CIS, HIPAA, and NIST 800-53 standards. It can also be used for other data visibility purposes.
+You can search alerts classified by modules and filter them using the different views. Users are able to explore the alerts at the Wazuh cluster level and on a specific agent. Wazuh provides out-of-the-box dashboards, allowing you to seamlessly navigate through the user interface. Users can quickly visualize security events, detected vulnerable applications, file integrity monitoring data, configuration assessment results, cloud infrastructure monitoring events, and regulatory compliance, such as PCI DSS, GDPR, CIS, HIPAA, and NIST 800-53 standards. It can also be used for other data visibility purposes.
 
 Moreover, the application is flexible and allows users to create their own visualizations and dashboards. With Wazuh, customizing data visualization according to the environment needs gets users enhanced visibility of their infrastructure.
 
