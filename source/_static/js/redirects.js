@@ -39,6 +39,26 @@ removedUrls['x.y'] = [
 /* Pages added in 4.2 */
 
 newUrls['4.2'] = [
+  '/proof-of-concept-guide/detect-malware-yara-integration.html',
+  '/proof-of-concept-guide/poc-vulnerability-detection.html',
+  '/proof-of-concept-guide/detect-remove-malware-virustotal.html',
+  '/proof-of-concept-guide/poc-detect-trojan.html',
+  '/proof-of-concept-guide/poc-integrate-slack.html',
+  '/proof-of-concept-guide/detect-web-attack-sql-injection.html',
+  '/proof-of-concept-guide/detect-web-attack-shellshock.html',
+  '/proof-of-concept-guide/integrate-network-ids-suricata.html',
+  '/proof-of-concept-guide/integrate-osquery.html',
+  '/proof-of-concept-guide/detect-unauthorized-processes-netcat.html',
+  '/proof-of-concept-guide/block-malicious-actor-ip-reputation.html',
+  '/proof-of-concept-guide/poc-file-integrity-monitoring.html',
+  '/proof-of-concept-guide/monitoring-docker.html',
+  '/proof-of-concept-guide/detect-brute-force-attack.html',
+  '/proof-of-concept-guide/aws-infrastructure-monitoring.html',
+  '/proof-of-concept-guide/audit-commands-run-by-user.htm',
+  '/proof-of-concept-guide/index.html',
+  '/deploying-with-ansible/guide/install-opendistro-server.html',
+  '/deploying-with-ansible/roles/wazuh-opendistro.rst',
+  '/release-notes/release-4-2-5.html',
   '/amazon-machine-images/amazon-machine-images.html',
   '/user-manual/capabilities/active-response/ar-use-cases/removing-malware.html',
   '/user-manual/capabilities/active-response/ar-use-cases/wazuh-with-yara.html',
@@ -68,7 +88,7 @@ newUrls['4.2'] = [
   '/cloud-service/index.html',
   '/cloud-service/glossary.html',
   '/cloud-service/account-billing/index.html',
-  '/cloud-service/account-billing/add-billing-details.html',
+  '/cloud-service/account-billing/manage-billing-details.html',
   '/cloud-service/account-billing/billing-faq.html',
   '/cloud-service/account-billing/update-billing.html',
   '/cloud-service/account-billing/billing-history.html',
@@ -109,7 +129,7 @@ newUrls['4.2'] = [
   '/getting-started/components/elastic-stack.html',
   '/getting-started/components/wazuh-agent.html',
   '/getting-started/components/wazuh-server.html',
-  '/installation-guide/more-installation-alternatives/offline-all-in-one.html',
+  '/installation-guide/more-installation-alternatives/offline-installation.html',
   '/installation-guide/more-installation-alternatives/elastic-stack/all-in-one-deployment/all-in-one.html',
   '/installation-guide/more-installation-alternatives/elastic-stack/distributed-deployment/step-by-step-installation/wazuh-cluster/wazuh-single-node-cluster.html',
   '/installation-guide/more-installation-alternatives/elastic-stack/distributed-deployment/step-by-step-installation/wazuh-cluster/wazuh-multi-node-cluster.html',
@@ -221,6 +241,8 @@ newUrls['4.2'] = [
 ];
 
 removedUrls['4.2'] = [
+  '/deploying-with-ansible/guide/install-elk-server.html',
+  '/deploying-with-ansible/roles/wazuh-elasticsearch.rst',
   '/user-manual/kibana-app/connect-kibana-app.html',
   '/user-manual/reference/daemons/ossec-agentd.html',
   '/user-manual/reference/daemons/ossec-agentlessd.html',
@@ -367,6 +389,16 @@ removedUrls['4.2'] = [
 ];
 
 redirections.push(
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/deploying-with-ansible/roles/wazuh-elasticsearch.rst',
+      '4.2': '/deploying-with-ansible/roles/wazuh-opendistro.rst',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/deploying-with-ansible/guide/install-elk-server.html',
+      '4.2': '/deploying-with-ansible/guide/install-opendistro-server.html',
+    },
     {
       'target': ['4.1=>4.2', '4.2=>4.1'],
       '4.1': '/user-manual/reference/daemons/ossec-agentd.html',
