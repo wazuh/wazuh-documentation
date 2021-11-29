@@ -122,7 +122,7 @@ User can easily access developer tools integrated directly into the Wazuh Kibana
 
 The Ruleset Test tool provides an input box for reading sample logs and an output box to visualize the test results. This feature of the Wazuh Kibana plugin allows you to test sample logs directly on the web user interface and see how the ruleset reacts to specific log messages.
 
-The Wazuh Kibana plugin also includes an API console for users to interact with the Wazuh API. This API accommodates complete remote management of the Wazuh infrastructure and, from the API Console, you can easily perform everyday actions such as adding agents, restarting components, creating roles, or looking up syscheck details.
+The Wazuh Kibana plugin also includes an API Console for users to interact with the Wazuh API. This API accommodates complete remote management of the Wazuh infrastructure and, from the API Console, you can easily perform everyday actions such as adding agents, restarting components, creating roles, or looking up syscheck details.
 
 
 .. raw:: html
