@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Wazuh agentless monitoring allows you to run integrity checks on systems without an agent installed. Check out this section of the documentation. 
+  
 .. _reference_ossec_agentless:
 
 agentless
