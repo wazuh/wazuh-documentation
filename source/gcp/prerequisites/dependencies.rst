@@ -52,22 +52,24 @@ b) For Debian/Ubuntu operating systems:
 Google cloud pip dependencies
 -----------------------------
 
-`google-cloud-pubsub <https://pypi.org/project/google-cloud-pubsub//>`_ is the official python library supported by Google to manage Google Cloud Pub/Sub resources. It will be used to pull the log messages from the Pub/Sub queue. Depending on the Wazuh version used, it is necessary to install a different ``google-cloud-pubsub`` version.
+`google-cloud-pubsub <https://pypi.org/project/google-cloud-pubsub//>`_ is the official python library supported by Google to manage Google Cloud Pub/Sub resources. It will be used to pull the log messages from the Pub/Sub queue. 
 
-1. For Wazuh versions greater or equal to ``4.2.2``:
+- Depending on the Wazuh version used, it is necessary to install a different ``google-cloud-pubsub`` version.
 
-.. code-block:: console
+    - For Wazuh versions later or equal to 4.2.2:
 
-  # pip install google-cloud-pubsub==2.7.1
+    .. code-block:: console
 
-2. For older versions:
+      # pip install google-cloud-pubsub==2.7.1
 
-.. code-block:: console
+    - For older versions:
 
-  # pip install google-cloud-pubsub==1.4.3
+    .. code-block:: console
 
-To install the rest of the dependencies, execute the following command:
+      # pip install google-cloud-pubsub==1.4.3
 
-.. code-block:: console
+- To install the rest of the dependencies, execute the following command:
 
-  # pip3 install google-api-core==1.30.0 google-auth==1.28.0 google-cloud-core==1.7.1 google-cloud-storage==1.39.0 google-crc32c==1.1.2 google-resumable-media==1.3.1 googleapis-common-protos==1.51.0 grpc-google-iam-v1==0.12.3 grpcio==1.38.1 pytz==2020.1
+  .. code-block:: console
+
+    # pip3 install google-api-core==1.30.0 google-auth==1.28.0 google-cloud-core==1.7.1 google-cloud-storage==1.39.0 google-crc32c==1.1.2 google-resumable-media==1.3.1 googleapis-common-protos==1.51.0 grpc-google-iam-v1==0.12.3 grpcio==1.38.1 pytz==2020.1
