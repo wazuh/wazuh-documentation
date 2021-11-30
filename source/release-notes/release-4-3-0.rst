@@ -86,8 +86,8 @@ Reference                                                         Description
 `#8422 <https://github.com/wazuh/wazuh/pull/8422>`_               Fixed wrong exceptions with wdb pagination mechanism.
 `#8747 <https://github.com/wazuh/wazuh/pull/8747>`_               Fixed error when loading some rules with the \ character.
 `#9216 <https://github.com/wazuh/wazuh/pull/9216>`_               Changed WazuhDBQuery class to properly close socket connections and prevent file descriptor leaks.
-`#10320 <https://github.com/wazuh/wazuh/pull/10320>`              Fixed error in the api configuration when using the agent_upgrade script.
-`#10341 <https://github.com/wazuh/wazuh/pull/10341>`              Handle JSONDecodeError in Distributed API class methods.
+`#10320 <https://github.com/wazuh/wazuh/pull/10320>`_             Fixed error in the api configuration when using the agent_upgrade script.
+`#10341 <https://github.com/wazuh/wazuh/pull/10341>`_             Handle JSONDecodeError in Distributed API class methods.
 `#9738 <https://github.com/wazuh/wazuh/pull/9738>`_               Fixed an issue with duplicated logs in Azure-logs module and applied several improvements to it.
 `#10680 <https://github.com/wazuh/wazuh/pull/10680>`_             Fixed the query parameter validation to allow usage of special chars in Azure module.
 `#8394 <https://github.com/wazuh/wazuh/pull/8394>`_               Fix a bug running wazuh-clusterd process when it was already running.
@@ -103,16 +103,6 @@ Reference                                                         Description
 `#10866 <https://github.com/wazuh/wazuh/pull/10866>`_             Fixed a bug that caused cluster agent-groups files to be synchronized multiple times unnecessarily.
 `#10922 <https://github.com/wazuh/wazuh/pull/10922>`_             Fixed an issue in Wazuh DB that compiled the SQL statements multiple times unnecessarily.
 `#10948 <https://github.com/wazuh/wazuh/pull/10948>`_             Fixed a crash in Analysisd when setting Active Response with agent_id = 0.
-==============================================================    =============
-
-
-^^^^^^^^^^^^^^^^^^^
-
-==============================================================    =============
-Reference                                                         Description
-==============================================================    =============
-
-
 ==============================================================    =============
 
 
