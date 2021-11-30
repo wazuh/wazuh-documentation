@@ -152,7 +152,8 @@ RESTful API
 - `#10745 <https://github.com/wazuh/wazuh/pull/10745>`_ Improved API validators and related unit tests.
 - `#10905 <https://github.com/wazuh/wazuh/pull/10905>`_ Improved specific module healthchecks in API integration tests environment.
 - `#10916 <https://github.com/wazuh/wazuh/pull/10916>`_ Changed thread pool executors for process pool executors to improve API availability.
-
+- `#8599 <https://github.com/wazuh/wazuh/pull/8599>`_ Removed select parameter from GET /agents/stats/distinct endpoint.
+- `#8099 <https://github.com/wazuh/wazuh/pull/8099>`_ Removed GET /mitre endpoint.
 
 Resolved issues
 ---------------
@@ -225,7 +226,36 @@ Reference                                                         Description
 ==============================================================    =============
 
 
+RESTful API
+^^^^^^^^^^^
 
+==============================================================    =============
+Reference                                                         Description
+==============================================================    =============
+`#8196 <https://github.com/wazuh/wazuh/pull/8196>`_               Fixed inconsistency in RBAC resources for group:create, decoders:update, and rules:update actions.
+`#0000 <https://github.com/wazuh/wazuh/pull/0000>`_               Fixed the handling of an API error message occurring when Wazuh is started with a wrong ossec.conf. Now the execution continues and raises a warning. (8378)
+`#0000 <https://github.com/wazuh/wazuh/pull/0000>`_               Fixed a bug with sort parameter that caused a wrong response when sorting by several fields.(#8548)
+`#0000 <https://github.com/wazuh/wazuh/pull/0000>`_               Fixed the description of force_time parameter in the API spec reference. (#8597)
+`#0000 <https://github.com/wazuh/wazuh/pull/0000>`_               Fixed API incorrect path in remediation message when maximum number of requests per minute is reached. (#8537)
+`#0000 <https://github.com/wazuh/wazuh/pull/0000>`_               Fixed agents' healthcheck error in the API integration test environment. (#9071)
+`#0000 <https://github.com/wazuh/wazuh/pull/0000>`_               Fixed a bug with wazuh-apid process handling of pidfiles when running in foreground mode. (#9077)
+`#0000 <https://github.com/wazuh/wazuh/pull/0000>`_               Fixed a bug with RBAC group_id matching. (#9192)
+`#0000 <https://github.com/wazuh/wazuh/pull/0000>`_               Removed temporal development keys and values from GET /cluster/healthcheck response. (#9147)
+`#0000 <https://github.com/wazuh/wazuh/pull/0000>`_               Fixed several errors when filtering by dates. (#9227)
+`#0000 <https://github.com/wazuh/wazuh/pull/0000>`_               Fixed limit in some endpoints like PUT /agents/group/{group_id}/restart and added a pagination method. (#9262)
+`#0000 <https://github.com/wazuh/wazuh/pull/0000>`_               Fixed bug with the search parameter resulting in invalid results. (#9320)
+`#0000 <https://github.com/wazuh/wazuh/pull/0000>`_               Fixed wrong values of external_id field in MITRE resources. (#9368)
+`#0000 <https://github.com/wazuh/wazuh/pull/0000>`_               Fixed how the API integration testing environment checks that wazuh-apid daemon is running before starting the tests. (#9399)
+`#0000 <https://github.com/wazuh/wazuh/pull/0000>`_               Add healthcheck to verify that logcollector stats are ready before starting the API integration test. (#9777)
+`#0000 <https://github.com/wazuh/wazuh/pull/0000>`_               Fixed API integration test healthcheck used in the vulnerability test cases. (#10159)
+`#0000 <https://github.com/wazuh/wazuh/pull/0000>`_               Fixed an error with PUT /agents/node/{node_id}/restart endpoint when no agents are present in selected node. (#10179)
+`#0000 <https://github.com/wazuh/wazuh/pull/0000>`_               Fixed RBAC experimental API integration tests expecting a 1760 code in implicit requests. (#10322)
+`#0000 <https://github.com/wazuh/wazuh/pull/0000>`_               Fixed cluster race condition that caused API integration test to randomly fail. (#10289)
+`#0000 <https://github.com/wazuh/wazuh/pull/0000>`_               Fixed PUT /agents/node/{node_id}/restart endpoint to exclude exception codes properly. (#10619)
+`#0000 <https://github.com/wazuh/wazuh/pull/0000>`_               Fixed PUT /agents/group/{group_id}/restart endpoint to exclude exception codes properly. (#10666)
+`#0000 <https://github.com/wazuh/wazuh/pull/0000>`_               Fixed agent endpoints q parameter to allow more operators when filtering by groups. (#10656)
+`#0000 <https://github.com/wazuh/wazuh/pull/0000>`_               Fixed API integration tests related to rule, decoder and task endpoints. (#10830)
+==============================================================    =============
 
 
 Changelogs
