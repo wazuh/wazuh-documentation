@@ -66,10 +66,52 @@ Manager
 - `#8846 <https://github.com/wazuh/wazuh/pull/8846>`_ Removed old framework functions used to calculate agent status.
 
 
+Agent
+^^^^^
+
+- `#8016 <https://github.com/wazuh/wazuh/pull/8016>`_ Added an option to allow the agent to refresh the connection to the manager. (#8016)
+- `#8532 <https://github.com/wazuh/wazuh/pull/8532>`_ Introduced a new module to collect audit logs from GitHub. (#8532)
+- `#8461 <https://github.com/wazuh/wazuh/pull/8461>`_ FIM now expands wildcarded paths in the configuration on Windows agents. (8461)
+- `#8754 <https://github.com/wazuh/wazuh/pull/8754>`_ FIM reloads wildcarded paths on full scans. (8754)
+- `#8306 <https://github.com/wazuh/wazuh/pull/8306>`_ Added new path_suffix option to AWS module configuration. (#8306)
+- `#8331 <https://github.com/wazuh/wazuh/pull/8331>`_ Added new discard_regex option to AWS module configuration. (8331)
+- `#8482 <https://github.com/wazuh/wazuh/pull/8482>`_ Added support for the S3 Server Access bucket type in AWS module. (#8482)
+- `#9119 <https://github.com/wazuh/wazuh/pull/9119>`_ Added support for Google Cloud Storage buckets using a new GCP module called gcp-bucket. (#9119)
+- `#9119 <https://github.com/wazuh/wazuh/pull/9119>`_ Added support for Google Cloud Storage access logs to the gcp-bucket module. (#9119)
+- `#9420 <https://github.com/wazuh/wazuh/pull/9420>`_ Added support for VPC endpoints in AWS module. (#9420)
+- `#9279 <https://github.com/wazuh/wazuh/pull/9279>`_ Added support for GCS access logs in the GCP module. (#9279)
+- `#10198 <https://github.com/wazuh/wazuh/pull/10198>`_ Added an iam role session duration parameter to AWS module. (#10198)
+- `#8826 <https://github.com/wazuh/wazuh/pull/8826>`_ Added support for variables in SCA policies. (#8826)
+- `#7721 <https://github.com/wazuh/wazuh/pull/7721>`_ FIM now fills an audit rule file to support who-data although Audit is in immutable mode. (#7721)
+- `#8957 <https://github.com/wazuh/wazuh/pull/8957>`_ Introduced an integration to collect audit logs from Office365. (#8957)
+- `#10168 <https://github.com/wazuh/wazuh/pull/10168>`_ Added a new field DisplayVersion to Syscollector to help Vulnerability Detector match vulnerabilities for Windows. (#10168)
+- `#10148 <https://github.com/wazuh/wazuh/pull/10148>`_ Added support for macOS agent upgrade via WPK. (#10148)
+- `#8632 <https://github.com/wazuh/wazuh/pull/8632>`_ Added Logcollector support for macOS logs (Unified Logging System). (#8632)
+- `#8381 <https://github.com/wazuh/wazuh/pull/8381>`_ The agent now reports the version of the running AIX operating system to the manager. (#8381)
+- `#8604 <https://github.com/wazuh/wazuh/pull/8604>`_ Improved the reliability of the user ID parsing in FIM who-data mode on Linux. (#8604)
+- `#10230 <https://github.com/wazuh/wazuh/pull/10230>`_ Reword AWS service_endpoint parameter description to suit FIPS endpoints too. (#10230)
+- `#5047 <https://github.com/wazuh/wazuh/pull/5047>`_ Extended support of Logcollector for MySQL 4.7 logs. Thanks to @YoyaYOSHIDA. (#5047)
+- `#9887 <https://github.com/wazuh/wazuh/pull/9887>`_ Agents running on FreeBSD and OpenBSD now report their IP address. (#9887)
+- `#8202 <https://github.com/wazuh/wazuh/pull/8202>`_ Reduced verbosity of FIM debugging logs. (#8202)
+- `#9992 <https://github.com/wazuh/wazuh/pull/9992>`_ The agent's IP resolution frequency has been limited to prevent high CPU load. (#9992)
+- `#10236 <https://github.com/wazuh/wazuh/pull/10236>`_ Syscollector has been optimized to use lees memory. (#10236)
+- `#10337 <https://github.com/wazuh/wazuh/pull/10337>`_ Added support of ZscalerOS system information in the agent. (#10337)
+- `#10259 <https://github.com/wazuh/wazuh/pull/10259>`_ Syscollector has been extended to collect missing Microsoft product hotfixes. (#10259)
+- `#10396 <https://github.com/wazuh/wazuh/pull/10396>`_ Updated the osquery integration to find the new osqueryd location as of version 5.0. (#10396)
+- `#9123 <https://github.com/wazuh/wazuh/pull/9123>`_ The internal FIM data handling has been simplified to find files by their path instead of their inode. (#9123)
+- `#9764 <https://github.com/wazuh/wazuh/pull/9764>`_ Reimplemented the WPK installer rollback on Windows. (#9764)
+- `#10208 <https://github.com/wazuh/wazuh/pull/10208>`_ Active responses for Windows agents now support native fields from Eventchannel. (#10208)
+- `#10651 <https://github.com/wazuh/wazuh/pull/10651>`_ Error logs by Logcollector when a file is missing have been changed to info logs. (#10651)
+- `#8724 <https://github.com/wazuh/wazuh/pull/8724>`_ The agent MSI installer for Windows now detects the platform version to install the default configuration. (#8724)
+- `#3659 <https://github.com/wazuh/wazuh/pull/3659>`_ Agent logs for inability to resolve the manager hostname now have info level. (#3659)
+- `#10900 <https://github.com/wazuh/wazuh/pull/10900>`_ Removed oscap module files as it was already deprecated since v4.0.0. (#10900)
+
+
 Resolved issues
 ---------------
 
 This release resolves known issues. 
+
 
 Manager
 ^^^^^^^
@@ -105,6 +147,38 @@ Reference                                                         Description
 `#10922 <https://github.com/wazuh/wazuh/pull/10922>`_             Fixed an issue in Wazuh DB that compiled the SQL statements multiple times unnecessarily.
 `#10948 <https://github.com/wazuh/wazuh/pull/10948>`_             Fixed a crash in Analysisd when setting Active Response with agent_id = 0.
 ==============================================================    =============
+
+
+Agent
+^^^^^
+
+==============================================================    =============
+Reference                                                         Description
+==============================================================    =============
+`#0000 <https://github.com/wazuh/wazuh/pull/0000>`_               Fixed a bug in FIM that did not allow monitoring new directories in real-time mode if the limit was reached at some point. (#8784)
+`#0000 <https://github.com/wazuh/wazuh/pull/0000>`_               Fixed a bug in FIM that threw an error when a query to the internal database returned no data. (#8941)
+`#0000 <https://github.com/wazuh/wazuh/pull/0000>`_               Fixed an error where the IP address was being returned along with the port for Amazon NLB service.(#8362)
+`#0000 <https://github.com/wazuh/wazuh/pull/0000>`_               Fixed AWS module to properly handle the exception raised when processing a folder without logs. (#8372
+`#0000 <https://github.com/wazuh/wazuh/pull/0000>`_               Fixed a bug with AWS module when pagination is needed in the bucket. (#8433)
+`#0000 <https://github.com/wazuh/wazuh/pull/0000>`_               Fixed an error with the ipGeoLocation field in AWS Macie logs. (#8672)
+`#0000 <https://github.com/wazuh/wazuh/pull/0000>`_               Changed an incorrect debug message in the GCloud integration module. (#10333)
+`#0000 <https://github.com/wazuh/wazuh/pull/0000>`_               Data race conditions have been fixed in FIM. (#7848)
+`#0000 <https://github.com/wazuh/wazuh/pull/0000>`_               Fixed wrong command line display in the Syscollector process report on Windows. (#10011)
+`#0000 <https://github.com/wazuh/wazuh/pull/0000>`_               Prevented Modulesd from freezing if Analysisd or Agentd get stopped before it. (#10249)
+`#0000 <https://github.com/wazuh/wazuh/pull/0000>`_               Fixed wrong keepalive message from the agent when file merged.mg is missing. (#10405)
+`#0000 <https://github.com/wazuh/wazuh/pull/0000>`_               Fixed missing logs from the Windows agent when it's getting stopped. (#10381)
+`#0000 <https://github.com/wazuh/wazuh/pull/0000>`_               Fixed missing packages reporting in Syscollector for macOS due to empty architecture data. (#10524)
+`#0000 <https://github.com/wazuh/wazuh/pull/0000>`_               Fixed FIM on Linux to parse audit rules with multiple keys for who-data. (#7506)
+`#0000 <https://github.com/wazuh/wazuh/pull/0000>`_               Fixed Windows 11 version collection in the agent. (#10639)
+`#0000 <https://github.com/wazuh/wazuh/pull/0000>`_               Fixed missing Eventchannel location in Logcollector configuration reporting. (#10602)
+`#0000 <https://github.com/wazuh/wazuh/pull/0000>`_               Updated CloudWatch Logs integration to avoid crashing when AWS raises Throttling errors. (#10794)
+`#0000 <https://github.com/wazuh/wazuh/pull/0000>`_               Fixed AWS modules' log file filtering when there are logs with and without a prefix mixed in a bucket. (#10718)
+`#0000 <https://github.com/wazuh/wazuh/pull/0000>`_               Fixed a bug on the installation script that made upgrades not to update the code of the external integration modules. (#10884)
+`#0000 <https://github.com/wazuh/wazuh/pull/0000>`_               Fixed issue with AWS integration module trying to parse manually created folders as if they were files. (#10921)
+==============================================================    =============
+
+
+
 
 
 Changelogs
