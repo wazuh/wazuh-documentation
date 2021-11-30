@@ -16,40 +16,40 @@ This release includes new features or enhancements.
 Manager
 ^^^^^^^
 
-- Changed the internal handling of agent keys in Remoted and Remoted to speed up key reloading. `#8083 <https://github.com/wazuh/wazuh/pull/8083>`_
-- The option <server> of the Syslog output now supports hostname resolution. `#7885 <https://github.com/wazuh/wazuh/pull/7885>`_
-- The product's UNIX user and group have been renamed to "wazuh". `#7763 <https://github.com/wazuh/wazuh/pull/7763>`_
-- The MITRE database has been redesigned to provide full and searchable data. `#7865 <https://github.com/wazuh/wazuh/pull/7865>`_
-- The static fields related to FIM have been ported to dynamic fields in Analysisd. `#7358 <https://github.com/wazuh/wazuh/pull/7358>`_
-- Changed all randomly generated IDs used for cluster tasks. Now, uuid4 is used to ensure IDs are not repeated. `#8351 <https://github.com/wazuh/wazuh/pull/8351>`_
-- Improved sendsync error log to provide more details of the used parameters. `#8873 <https://github.com/wazuh/wazuh/pull/8873>`_
-- Changed walk_dir function to be iterative instead of recursive. `#7763 <https://github.com/wazuh/wazuh/pull/7763>`_ (#9708)
-- Refactored Integrity sync behavior so that new synchronizations do not start until extra-valid files are processed. `#7763 <https://github.com/wazuh/wazuh/pull/7763>`_ (#10183)
-- Changed cluster synchronization, now the content of the etc/shared folder is synchronized. `#7763 <https://github.com/wazuh/wazuh/pull/7763>`_ (#10101)
-- Changed all XML file loads. Now, defusedxml library is used to avoid possible XML-based attacks. `#7763 <https://github.com/wazuh/wazuh/pull/7763>`_ (8351)
-- Changed configuration validation from execq socket to com socket. `#7763 <https://github.com/wazuh/wazuh/pull/7763>`_ (#8535)
-- Updated utils unittest to improve process_array function coverage. `#7763 <https://github.com/wazuh/wazuh/pull/7763>`_ (#8392)
-- Changed request_slice calculation to improve efficiency when accessing wazuh-db data. `#7763 <https://github.com/wazuh/wazuh/pull/7763>`_ (#8885)
-- Improved the retrieval of information from wazuh-db so it reaches the optimum size in a single iteration. `#7763 <https://github.com/wazuh/wazuh/pull/7763>`_ (#9273)
-- Optimized the way framework uses context cached functions and added a note on context_cached docstring. `#7763 <https://github.com/wazuh/wazuh/pull/7763>`_ (#9234)
-- Improved framework regexes to be more specific and less vulnerable. `#7763 <https://github.com/wazuh/wazuh/pull/7763>`_ (#9332)
-- Unified framework exceptions for non-active agents. `#7763 <https://github.com/wazuh/wazuh/pull/7763>`_ (#9423)
-- Changed RBAC policies to case insensitive. `#7763 <https://github.com/wazuh/wazuh/pull/7763>`_ (#9433)
-- Refactored framework stats module into SDK and core components to comply with Wazuh framework code standards. `#7763 <https://github.com/wazuh/wazuh/pull/7763>`_ (#9548)
-- Changed the size of the agents chunks sent to the upgrade socket to make the upgrade endpoints faster. `#7763 <https://github.com/wazuh/wazuh/pull/7763>`_ (#10309)
-- Refactored rootcheck and syscheck SDK code to make it clearer. `#7763 <https://github.com/wazuh/wazuh/pull/7763>`_ (#9408)
-- Adapted Azure-logs module to use Microsoft Graph API instead of Active Directory Graph API. `#7763 <https://github.com/wazuh/wazuh/pull/7763>`_ (#9738)
-- Analysisd now reconnects to Active Response if Remoted or Execd get restarted. `#7763 <https://github.com/wazuh/wazuh/pull/7763>`_ (#8060)
-- Agent key polling now supports cluster environments. `#7763 <https://github.com/wazuh/wazuh/pull/7763>`_ (#10335)
-- Extended support of Vulnerability Detector for Debian 11 (Bullseye). `#7763 <https://github.com/wazuh/wazuh/pull/7763>`_ (#10357)
-- Improved Remoted performance with an agent TCP connection sending queue. `#7763 <https://github.com/wazuh/wazuh/pull/7763>`_ (#10326)
-- Agent DB synchronization has been boosted by caching the last data checksum in Wazuh DB. `#7763 <https://github.com/wazuh/wazuh/pull/7763>`_ (#9093)
-- Logtest now scans new ruleset files when loading a new session. `#7763 <https://github.com/wazuh/wazuh/pull/7763>`_ (#8892)
-- CVE alerts by Vulnerability Detector now include the time of detection, severity, and score. `#7763 <https://github.com/wazuh/wazuh/pull/7763>`_ (#8237)
-- Fixed manager startup when <database_output> is enabled. `#7763 <https://github.com/wazuh/wazuh/pull/7763>`_ (#10849)
-- Changed the cluster "local_integrity" task to run in a separate process to improve overall performance. `#7763 <https://github.com/wazuh/wazuh/pull/7763>`_ (#10767)
-- The cluster communication with the database for agent information synchronization runs in a parallel separate process. `#7763 <https://github.com/wazuh/wazuh/pull/7763>`_ (#10807)
-- The cluster processing of the extra-valid files in the master node is carried out in a parallel separate process. `#7763 <https://github.com/wazuh/wazuh/pull/7763>`_ (#10920)
+- `#8083 <https://github.com/wazuh/wazuh/pull/8083>`_ Changed the internal handling of agent keys in Remoted and Remoted to speed up key reloading.
+- `#7885 <https://github.com/wazuh/wazuh/pull/7885>`_ The option <server> of the Syslog output now supports hostname resolution. 
+- `#7763 <https://github.com/wazuh/wazuh/pull/7763>`_ The product's UNIX user and group have been renamed to "wazuh".
+- `#7865 <https://github.com/wazuh/wazuh/pull/7865>`_ The MITRE database has been redesigned to provide full and searchable data.
+- `#7358 <https://github.com/wazuh/wazuh/pull/7358>`_ The static fields related to FIM have been ported to dynamic fields in Analysisd.
+- `#8351 <https://github.com/wazuh/wazuh/pull/8351>`_ Changed all randomly generated IDs used for cluster tasks. Now, uuid4 is used to ensure IDs are not repeated.
+- `#8873 <https://github.com/wazuh/wazuh/pull/8873>`_ Improved sendsync error log to provide more details of the used parameters.
+- `#9708 <https://github.com/wazuh/wazuh/pull/9708>`_ Changed walk_dir function to be iterative instead of recursive.
+- `#10183 <https://github.com/wazuh/wazuh/pull/10183>`_ Refactored Integrity sync behavior so that new synchronizations do not start until extra-valid files are processed.
+- `#10101 <https://github.com/wazuh/wazuh/pull/10101>`_ Changed cluster synchronization, now the content of the etc/shared folder is synchronized.
+- `#8351 <https://github.com/wazuh/wazuh/pull/8351>`_ Changed all XML file loads. Now, defusedxml library is used to avoid possible XML-based attacks.
+- `#8535 <https://github.com/wazuh/wazuh/pull/8535>`_ Changed configuration validation from execq socket to com socket.
+- `#8392 <https://github.com/wazuh/wazuh/pull/8392>`_ Updated utils unittest to improve process_array function coverage.
+- `#8885 <https://github.com/wazuh/wazuh/pull/8885>`_ Changed request_slice calculation to improve efficiency when accessing wazuh-db data.
+- `#9273 <https://github.com/wazuh/wazuh/pull/9273>`_ Improved the retrieval of information from wazuh-db so it reaches the optimum size in a single iteration.
+- `#9234 <https://github.com/wazuh/wazuh/pull/9234>`_ Optimized the way framework uses context cached functions and added a note on context_cached docstring.
+- `#9332 <https://github.com/wazuh/wazuh/pull/9332>`_ Improved framework regexes to be more specific and less vulnerable.
+- `#9423 <https://github.com/wazuh/wazuh/pull/9423>`_ Unified framework exceptions for non-active agents.
+- `#9433 <https://github.com/wazuh/wazuh/pull/9433>`_ Changed RBAC policies to case insensitive.
+- `#9548 <https://github.com/wazuh/wazuh/pull/9548>`_ Refactored framework stats module into SDK and core components to comply with Wazuh framework code standards.
+- `#10309 <https://github.com/wazuh/wazuh/pull/10309>`_ Changed the size of the agents chunks sent to the upgrade socket to make the upgrade endpoints faster.
+- `#9408 <https://github.com/wazuh/wazuh/pull/9408>`_ Refactored rootcheck and syscheck SDK code to make it clearer.
+- `#9738 <https://github.com/wazuh/wazuh/pull/9738>`_ Adapted Azure-logs module to use Microsoft Graph API instead of Active Directory Graph API.
+- `#8060 <https://github.com/wazuh/wazuh/pull/8060>`_ Analysisd now reconnects to Active Response if Remoted or Execd get restarted.
+- `#10335 <https://github.com/wazuh/wazuh/pull/10335>`_ Agent key polling now supports cluster environments.
+- `#10357 <https://github.com/wazuh/wazuh/pull/10357>`_ Extended support of Vulnerability Detector for Debian 11 (Bullseye).
+- `#10326 <https://github.com/wazuh/wazuh/pull/10326>`_ Improved Remoted performance with an agent TCP connection sending queue.
+- `#9093 <https://github.com/wazuh/wazuh/pull/9093>`_ Agent DB synchronization has been boosted by caching the last data checksum in Wazuh DB.
+- `#8892 <https://github.com/wazuh/wazuh/pull/8892>`_ Logtest now scans new ruleset files when loading a new session.
+- `#8237 <https://github.com/wazuh/wazuh/pull/8237>`_ CVE alerts by Vulnerability Detector now include the time of detection, severity, and score.
+- `#10849 <https://github.com/wazuh/wazuh/pull/10849>`_ Fixed manager startup when <database_output> is enabled.
+- `#10767 <https://github.com/wazuh/wazuh/pull/10767>`_ Changed the cluster "local_integrity" task to run in a separate process to improve overall performance.
+- `#10807 <https://github.com/wazuh/wazuh/pull/10807>`_ The cluster communication with the database for agent information synchronization runs in a parallel separate process.
+- `#10920 <https://github.com/wazuh/wazuh/pull/10920>`_ The cluster processing of the extra-valid files in the master node is carried out in a parallel separate process.
 
 
 
