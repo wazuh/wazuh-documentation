@@ -13,8 +13,8 @@ What's new
 
 This release includes new features or enhancements.
 
-Manager added
-^^^^^^^^^^^^^
+Manager
+^^^^^^^
 
 - `#8178 <https://github.com/wazuh/wazuh/pull/8178>`_ Added support for Arch Linux OS in Vulnerability Detector. Thanks to Aviel Warschawski (@avielw).
 - `#8749 <https://github.com/wazuh/wazuh/pull/8749>`_ Added a log message in the `cluster.log` file to notify that wazuh-clusterd has been stopped.
