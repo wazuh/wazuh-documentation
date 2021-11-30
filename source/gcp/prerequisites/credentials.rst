@@ -27,7 +27,7 @@ Within the **Service Accounts** section, create a new service account and add th
 Create private key
 ------------------
 
-After creating a service account, add a key for it. Save it as **JSON**:
+After creating a service account, add a key to it. To do this, click **Create Key**, select  **JSON**, and click **Create** to complete the action.
 
 .. thumbnail:: ../../images/gcp/gcp-account-key.png
     :align: center
