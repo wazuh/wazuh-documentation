@@ -13,6 +13,7 @@ Wazuh is a free, open source and enterprise-ready security monitoring solution f
 The Wazuh central components include the Wazuh server, Elasticsearch and Kibana. With this guided installation, you install each component on the same server, as an all-in-one deployment, or on different servers as a distributed deployment depending on the environment needs. A distributed deployment provides high availability and scalability of the product.
 
 Alternatively, you can check our :ref:`Wazuh quickstart <quickstart>` to learn how to install all the central components on the same host using the unattended installation script. With Wazuh quickstart, you install and configure the Wazuh in just a few minutes.
+- :ref:`All-in-one <all_in_one_index>`: The Wazuh server and Elastic Stack are installed on the same host directly on your system. Alternatively, you can also download our ready-to-use :ref:`OVA <virtual_machine>` or launch an EC2 Instance with our :ref:`AMI <amazon-machine-images>`.
 
 Installing the Wazuh central components
 ---------------------------------------
@@ -61,7 +62,7 @@ The :ref:`Wazuh agent <wazuh_agent>` is a single and lightweight monitoring soft
 
   <div class="agent-os">
       <div class="item-agent">
-          <a href="./wazuh-agent/wazuh_agent_package_linux.html" class="d-flex align-items-center">
+          <a href="./wazuh-agent/wazuh-agent-package-linux.html" class="d-flex align-items-center">
             <p>Linux</p>
 
 .. image:: ../images/installation/linux.png
@@ -72,7 +73,7 @@ The :ref:`Wazuh agent <wazuh_agent>` is a single and lightweight monitoring soft
         </a>
     </div>
     <div class="item-agent">
-        <a href="./wazuh-agent/wazuh_agent_package_windows.html" class="d-flex align-items-center">
+        <a href="./wazuh-agent/wazuh-agent-package-windows.html" class="d-flex align-items-center">
                     <p>Windows</p>
 
 .. image:: ../images/installation/windows_icon.png
@@ -83,7 +84,7 @@ The :ref:`Wazuh agent <wazuh_agent>` is a single and lightweight monitoring soft
         </a>
     </div>
     <div class="item-agent">
-        <a href="./wazuh-agent/wazuh_agent_package_macos.html" class="d-flex align-items-center">
+        <a href="./wazuh-agent/wazuh-agent-package-macos.html" class="d-flex align-items-center">
             <p>macOS</p>
 
 .. image:: ../images/installation/macOS_logo.png
@@ -105,7 +106,7 @@ The :ref:`Wazuh agent <wazuh_agent>` is a single and lightweight monitoring soft
         </a>
     </div>
     <div class="item-agent">
-        <a href="./wazuh-agent/wazuh_agent_package_aix.html" class="d-flex align-items-center">
+        <a href="./wazuh-agent/wazuh-agent-package-aix.html" class="d-flex align-items-center">
             <p>AIX</p>
 
 .. image:: ../images/installation/AIX.png
@@ -116,10 +117,21 @@ The :ref:`Wazuh agent <wazuh_agent>` is a single and lightweight monitoring soft
         </a>
     </div>
     <div class="item-agent">
-        <a href="./wazuh-agent/wazuh_agent_package_hpux.html" class="d-flex align-items-center">
+        <a href="./wazuh-agent/wazuh-agent-package-hpux.html" class="d-flex align-items-center">
             <p>HP-UX</p>
 
 .. image:: ../images/installation/hpux.png
+      :align: center
+
+.. raw:: html
+
+        </a>
+    </div>
+    <div class="item-agent" id="solaris-logo">
+        <a href="./wazuh-agent/wazuh-agent-package-solaris.html" class="d-flex align-items-center">
+            <p>Solaris</p>
+
+.. image:: ../images/installation/solaris.png
       :align: center
 
 .. raw:: html

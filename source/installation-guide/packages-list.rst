@@ -25,7 +25,15 @@ This download page contains packages required for the Wazuh installation with th
 - `Wazuh Splunk app`_
 - `Filebeat`_
 - `Virtual machine`_
+- `Amazon Machine Image`_
+- `Open Distro for Elasticsearch`_
+
+   - `Elasticsearch`_
+   - `Kibana`_
+   - `Filebeat`_
 - `MSU`_
+
+.. _Wazuh_manager_agent_packages_list:
 
 Wazuh manager and Wazuh agent
 -----------------------------
@@ -253,8 +261,14 @@ Wazuh Kibana plugin
 +---------------------------+---------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |   7.11.2                  |                     |     |WAZUH_LATEST|     | `wazuh_kibana-|WAZUH_LATEST|_7.11.2.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_7.11.2-1.zip>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_7.11.2-1.zip.sha512>`__)                                      |   
 +---------------------------+---------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   |ELASTICSEARCH_ELK_LATEST|                  |                     |     |WAZUH_LATEST|     | `wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_ELK_LATEST|.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_ELK_LATEST|-1.zip>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_ELK_LATEST|-1.zip.sha512>`__)                                      |   
+|   7.12.1                  |                     |     |WAZUH_LATEST|     | `wazuh_kibana-|WAZUH_LATEST|_7.12.1.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_7.12.1-1.zip>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_7.12.1-1.zip.sha512>`__)                                      |   
 +---------------------------+---------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|   7.13.4                  |                     |     |WAZUH_LATEST|     | `wazuh_kibana-|WAZUH_LATEST|_7.13.4.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_7.13.4-1.zip>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_7.13.4-1.zip.sha512>`__)                                      |   
++---------------------------+---------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|   7.14.2                  |                     |     |WAZUH_LATEST|     | `wazuh_kibana-|WAZUH_LATEST|_7.14.2.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_7.14.2-1.zip>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_7.14.2-1.zip.sha512>`__)                                      |   
++---------------------------+---------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+For a complete list of the available versions, see the `Wazuh Kibana plugin compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/tree/v4.2.5-7.10.2#wazuh---kibana---open-distro-version-compatibility-matrix>`_. 
 
 Wazuh Splunk app
 ----------------
@@ -287,6 +301,15 @@ Virtual machine
 +==============+==============+==============+=========+====================================================================================================================================================================================================+
 |   CentOS 7   |    64bits    |      OVA     |  |WAZUH_LATEST_OVA|  | `wazuh-|WAZUH_LATEST_OVA|_|OPEN_DISTRO_LATEST|.ova <https://packages.wazuh.com/|CURRENT_MAJOR|/vm/wazuh-|WAZUH_LATEST_OVA|_|OPEN_DISTRO_LATEST|.ova>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST_OVA|/wazuh-|WAZUH_LATEST_OVA|_|OPEN_DISTRO_LATEST|.ova.sha512>`__)             |
 +--------------+--------------+--------------+---------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+Amazon Machine Image
+--------------------
+
++--------------------+--------------+------------------+----------------------+------------------------------------+
+| Distribution       | Architecture | VM Format        | Version              | Package                            |
++====================+==============+==================+======================+====================================+
+|   Amazon Linux 2   |    64bits    |      AWS AMI     |  |WAZUH_LATEST_AMI|               | Wazuh  |WAZUH_LATEST_AMI|                       |
++--------------------+--------------+------------------+----------------------+------------------------------------+
 
 
 MSU
