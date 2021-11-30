@@ -28,11 +28,6 @@ Manager added
 - `#9099 <https://github.com/wazuh/wazuh/pull/9099>`_ Added saniziters to the unit tests execution.
 - `#8237 <https://github.com/wazuh/wazuh/pull/8237>`_ Vulnerability Detector introduces vulnerability inventory.
   - The manager will only deliver alerts when new vulnerabilities are detected in agents or when they stop applying.
-
-
-Manager changed
-^^^^^^^^^^^^^^^
-
 - `#8083 <https://github.com/wazuh/wazuh/pull/8083>`_ Changed the internal handling of agent keys in Remoted and Remoted to speed up key reloading.
 - `#7885 <https://github.com/wazuh/wazuh/pull/7885>`_ The option <server> of the Syslog output now supports hostname resolution. 
 - `#7763 <https://github.com/wazuh/wazuh/pull/7763>`_ The product's UNIX user and group have been renamed to "wazuh".
@@ -116,6 +111,7 @@ Reference                                                         Description
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
+
 
 ==============================================================    =============
 
