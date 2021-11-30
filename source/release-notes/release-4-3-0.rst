@@ -22,7 +22,7 @@ Manager
 - The MITRE database has been redesigned to provide full and searchable data. `#7865 <https://github.com/wazuh/wazuh/pull/7865>`_
 - The static fields related to FIM have been ported to dynamic fields in Analysisd. `#7358 <https://github.com/wazuh/wazuh/pull/7358>`_
 - Changed all randomly generated IDs used for cluster tasks. Now, uuid4 is used to ensure IDs are not repeated. `#8351 <https://github.com/wazuh/wazuh/pull/8351>`_
-- Improved sendsync error log to provide more details of the used parameters. `#7763 <https://github.com/wazuh/wazuh/pull/7763>`_ (#8873)
+- Improved sendsync error log to provide more details of the used parameters. `#8873 <https://github.com/wazuh/wazuh/pull/8873>`_
 - Changed walk_dir function to be iterative instead of recursive. `#7763 <https://github.com/wazuh/wazuh/pull/7763>`_ (#9708)
 - Refactored Integrity sync behavior so that new synchronizations do not start until extra-valid files are processed. `#7763 <https://github.com/wazuh/wazuh/pull/7763>`_ (#10183)
 - Changed cluster synchronization, now the content of the etc/shared folder is synchronized. `#7763 <https://github.com/wazuh/wazuh/pull/7763>`_ (#10101)
@@ -63,19 +63,18 @@ This release resolves known issues.
 Manager
 ^^^^^^^
 
-
-- Added support for Arch Linux OS in Vulnerability Detector. Thanks to Aviel Warschawski (@avielw). `#8178 <https://github.com/wazuh/wazuh/pull/8178>`_
-- Added a log message in the `cluster.log` file to notify that wazuh-clusterd has been stopped. `#8749 <https://github.com/wazuh/wazuh/pull/8749>`_
-- Added message with the PID of `wazuh-clusterd` process when launched in foreground mode. `#9077 <https://github.com/wazuh/wazuh/pull/9077>`_
-- Added time calculation when extra information is requested to the `cluster_control` binary. `#10492 <https://github.com/wazuh/wazuh/pull/10492>`_
-- Added a context variable to indicate origin module in socket communication messages. `#9209 <https://github.com/wazuh/wazuh/pull/9209>`_
-- Added unit tests for framework/core files to increase coverage. `#9733 <https://github.com/wazuh/wazuh/pull/9733>`_
-- Added a verbose mode in the wazuh-logtest tool. `#9204 <https://github.com/wazuh/wazuh/pull/9204>`_
-- Added Vulnerability Detector support for Amazon Linux. `#8830 <https://github.com/wazuh/wazuh/pull/8830>`_
-- Introduced new option `<force>` to set the behavior when Authd finds conflicts on agent enrollment requests. `#10693 <https://github.com/wazuh/wazuh/pull/10693>`_
-- Added saniziters to the unit tests execution. `#9099 <https://github.com/wazuh/wazuh/pull/9099>`_
-- Vulnerability Detector introduces vulnerability inventory. `#8237 <https://github.com/wazuh/wazuh/pull/8237>`_
-- The manager will only deliver alerts when new vulnerabilities are detected in agents or when they stop applying.
+- `#8178 <https://github.com/wazuh/wazuh/pull/8178>`_ Added support for Arch Linux OS in Vulnerability Detector. Thanks to Aviel Warschawski (@avielw).
+- `#8749 <https://github.com/wazuh/wazuh/pull/8749>`_ Added a log message in the `cluster.log` file to notify that wazuh-clusterd has been stopped.
+- `#9077 <https://github.com/wazuh/wazuh/pull/9077>`_ Added message with the PID of `wazuh-clusterd` process when launched in foreground mode.
+- `#10492 <https://github.com/wazuh/wazuh/pull/10492>`_ Added time calculation when extra information is requested to the `cluster_control` binary.
+- `#9209 <https://github.com/wazuh/wazuh/pull/9209>`_ Added a context variable to indicate origin module in socket communication messages.
+- `#9733 <https://github.com/wazuh/wazuh/pull/9733>`_ Added unit tests for framework/core files to increase coverage.
+- `#9204 <https://github.com/wazuh/wazuh/pull/9204>`_ Added a verbose mode in the wazuh-logtest tool.
+- `#8830 <https://github.com/wazuh/wazuh/pull/8830>`_ Added Vulnerability Detector support for Amazon Linux.
+- `#10693 <https://github.com/wazuh/wazuh/pull/10693>`_ Introduced new option `<force>` to set the behavior when Authd finds conflicts on agent enrollment requests.
+- `#9099 <https://github.com/wazuh/wazuh/pull/9099>`_ Added saniziters to the unit tests execution.
+- `#8237 <https://github.com/wazuh/wazuh/pull/8237>`_ Vulnerability Detector introduces vulnerability inventory.
+  - The manager will only deliver alerts when new vulnerabilities are detected in agents or when they stop applying.
 
 
 
