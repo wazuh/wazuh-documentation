@@ -50,4 +50,4 @@ Your key should have this format:
 	   "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/wazuh-gcloud-acc%40wazuh-gcloud-258815.iam.gserviceaccount.com"
 	}
 
-Please follow this `link <https://cloud.google.com/pubsub/docs/quickstart-py-mac#create_service_account_credentials>`_ if you need help configuring your GCP credentials JSON file for Google Cloud Pub/Sub.
+You can follow the `Google Cloud Pub/Sub <https://cloud.google.com/pubsub/docs/quickstart-py-mac#create_service_account_credentials>`_ documentation if you need help configuring your GCP credentials JSON file.
