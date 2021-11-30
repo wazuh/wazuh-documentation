@@ -62,7 +62,8 @@ Manager
 - `#10767 <https://github.com/wazuh/wazuh/pull/10767>`_ Changed the cluster "local_integrity" task to run in a separate process to improve overall performance.
 - `#10807 <https://github.com/wazuh/wazuh/pull/10807>`_ The cluster communication with the database for agent information synchronization runs in a parallel separate process.
 - `#10920 <https://github.com/wazuh/wazuh/pull/10920>`_ The cluster processing of the extra-valid files in the master node is carried out in a parallel separate process.
-
+- `#8399 <https://github.com/wazuh/wazuh/pull/8399>`_ The data reporting for Rootcheck scans in the agent_control tool has been deprecated.
+- `#8846 <https://github.com/wazuh/wazuh/pull/8846>`_ Removed old framework functions used to calculate agent status.
 
 
 Resolved issues
