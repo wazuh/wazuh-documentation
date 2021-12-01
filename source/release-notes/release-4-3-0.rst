@@ -171,6 +171,39 @@ Ruleset
 - `#10558 <https://github.com/wazuh/wazuh/pull/10558>`_ Updated macOS Big Sur SCA up to 1.2.0 version.
 
 
+Wazuh Kibana plugin
+^^^^^^^^^^^^^^^^^^^
+
+- `#3639 <https://github.com/wazuh/wazuh-kibana-app/pull/3639>`_ Added ability to filter the results fo the Network Ports table in the Inventory data section.
+- `#3324 <https://github.com/wazuh/wazuh-kibana-app/pull/3324>`_ Added new endpoint service to collect the frontend logs into a file.
+- `#3327 <https://github.com/wazuh/wazuh-kibana-app/pull/3327>`_ `#3321 <https://github.com/wazuh/wazuh-kibana-app/pull/3321>`_ `#3367 <https://github.com/wazuh/wazuh-kibana-app/pull/3367>`_ `#3373 <https://github.com/wazuh/wazuh-kibana-app/pull/3373>`_ `#3374 <https://github.com/wazuh/wazuh-kibana-app/pull/3374>`_ `#3390 <https://github.com/wazuh/wazuh-kibana-app/pull/3390>`_ `#3410 <https://github.com/wazuh/wazuh-kibana-app/pull/3410>`_ `#3408 <https://github.com/wazuh/wazuh-kibana-app/pull/3408>`_ `#3429 <https://github.com/wazuh/wazuh-kibana-app/pull/3429>`_ `#3427 <https://github.com/wazuh/wazuh-kibana-app/pull/3427>`_ `#3417 <https://github.com/wazuh/wazuh-kibana-app/pull/3417>`_ `#3462 <https://github.com/wazuh/wazuh-kibana-app/pull/3462>`_ `#3451 <https://github.com/wazuh/wazuh-kibana-app/pull/3451>`_ `#3442 <https://github.com/wazuh/wazuh-kibana-app/pull/3442>`_ `#3480 <https://github.com/wazuh/wazuh-kibana-app/pull/3480>`_ `#3472 <https://github.com/wazuh/wazuh-kibana-app/pull/3472>`_ `#3434 <https://github.com/wazuh/wazuh-kibana-app/pull/3434>`_ `#3392 <https://github.com/wazuh/wazuh-kibana-app/pull/3392>`_ `#3404 <https://github.com/wazuh/wazuh-kibana-app/pull/3404>`_ `#3432 <https://github.com/wazuh/wazuh-kibana-app/pull/3432>`_ `#3415 <https://github.com/wazuh/wazuh-kibana-app/pull/3415>`_ `#3469 <https://github.com/wazuh/wazuh-kibana-app/pull/3469>`_ `#3448 <https://github.com/wazuh/wazuh-kibana-app/pull/3448>`_ `#3465 <https://github.com/wazuh/wazuh-kibana-app/pull/3465>`_ `#3464 <https://github.com/wazuh/wazuh-kibana-app/pull/3464>`_ `#3478 <https://github.com/wazuh/wazuh-kibana-app/pull/3478>`_ Improved the frontend handle errors strategy: UI, Toasts, console log and log in file.
+- `#3196 <https://github.com/wazuh/wazuh-kibana-app/pull/3196>`_ Added fields status and type in vulnerabilities table.
+- `#3368 <https://github.com/wazuh/wazuh-kibana-app/pull/3368>`_ `#3344 <https://github.com/wazuh/wazuh-kibana-app/pull/3344>`_ Added Intelligence tab to Mitre Att&ck module.
+- `#3424 <https://github.com/wazuh/wazuh-kibana-app/pull/3424>`_ Added sample data for office365 events.
+- `#3475 <https://github.com/wazuh/wazuh-kibana-app/pull/3475>`_ Created a separate component to check for sample data.
+- `#3506 <https://github.com/wazuh/wazuh-kibana-app/pull/3506>`_ Added a new hook for getting value suggestions.
+- `#3531 <https://github.com/wazuh/wazuh-kibana-app/pull/3531>`_ Added dinamic simple filters and adding simple GitHub filters fields
+- `#3524 <https://github.com/wazuh/wazuh-kibana-app/pull/3524>`_ Added configuration viewer for Module Office365 on Management > Configuration.
+- `#3518 <https://github.com/wazuh/wazuh-kibana-app/pull/3518>`_ Added base Module Panel view with Office365 setup.
+- `#3533 <https://github.com/wazuh/wazuh-kibana-app/pull/3533>`_ Added specifics and custom filters for Office365 search bar.
+- `#3544 <https://github.com/wazuh/wazuh-kibana-app/pull/3544>`_ Adding Pagination and filter to drilldown tables at Office pannel.
+- `#3568 <https://github.com/wazuh/wazuh-kibana-app/pull/3568>`_ Simple filters change between panel and drilldown panel.
+- `#3525 <https://github.com/wazuh/wazuh-kibana-app/pull/3525>`_ Added new fields in Inventory table and Flyout Details.
+- `#3691 <https://github.com/wazuh/wazuh-kibana-app/pull/3691>`_ Added columns selector in agents table.
+- `#3121 <https://github.com/wazuh/wazuh-kibana-app/pull/3121>`_ Changed ossec to wazuh in sample-data.
+- `#3279 <https://github.com/wazuh/wazuh-kibana-app/pull/3279>`_ Changed empty fields in FIM tables and syscheck.value_name in discovery now show an empty tag for visual clarity.
+- `#3346 <https://github.com/wazuh/wazuh-kibana-app/pull/3346>`_ Adapted the Mitre tactics and techniques resources to use the API endpoints.
+- `#3517 <https://github.com/wazuh/wazuh-kibana-app/pull/3517>`_ Moved the filterManager subscription to the hook useFilterManager.
+- `#3529 <https://github.com/wazuh/wazuh-kibana-app/pull/3529>`_ Change filter from is to is one of in custom searchbar.
+- `#3494 <https://github.com/wazuh/wazuh-kibana-app/pull/3494>`_ Refactored as module tabs and buttons are rendered.
+- `#3663 <https://github.com/wazuh/wazuh-kibana-app/pull/3663>`_ Updated depracated and new references authd.
+- `#3549 <https://github.com/wazuh/wazuh-kibana-app/pull/3549>`_ Added time subscription to Discover component.
+- `#3494 <https://github.com/wazuh/wazuh-kibana-app/pull/3494>`_ Refactored as module tabs and buttons are rendered.
+- `#3446 <https://github.com/wazuh/wazuh-kibana-app/pull/3446>`_ Testing logs using the Ruletest Test don't display the rule information if not matching a rule.
+- `#3649 <https://github.com/wazuh/wazuh-kibana-app/pull/3649>`_ Changed format permissions in FIM inventory.
+- `#3686 <https://github.com/wazuh/wazuh-kibana-app/pull/3686>`_ Changed of request for one that does not return data that is not necessary to optimize times.
+
+
 Others
 ^^^^^^
 
@@ -294,6 +327,45 @@ Reference                                                         Description
 `#10406 <https://github.com/wazuh/wazuh/pull/10406>`_             Fixed typos and not working tests for Centos 7 SCA. Thanks to RonnyMaas (@RonnyMaas).
 `#10707 <https://github.com/wazuh/wazuh/pull/10707>`_             Fixed YML syntax problems in Solaris 11.4 SCA.
 `#10375 <https://github.com/wazuh/wazuh/pull/10375>`_             Fixed a typo in the Xbox Live Networking Service check for SCA.
+==============================================================    =============
+
+
+Wazuh Kibana plugin
+^^^^^^^^^^^^^^^^^^^
+
+==============================================================    =============
+Reference                                                         Description
+==============================================================    =============
+`#3384 <https://github.com/wazuh/wazuh-kibana-app/pull/3384>`_    Fixed creation of log files.
+`#3484 <https://github.com/wazuh/wazuh-kibana-app/pull/3484>`_    Fixed double fetching alerts count when pinnin/unpinning the agent in Mitre Att&ck/Framework.
+`#3490 <https://github.com/wazuh/wazuh-kibana-app/pull/3490>`_    Query config refactor.
+`#3412 <https://github.com/wazuh/wazuh-kibana-app/pull/3412>`_    Fixed rules and decoders test flyout clickout event.
+`#3430 <https://github.com/wazuh/wazuh-kibana-app/pull/3430>`_    Notify when you are registering an agent without permissions.
+`#3438 <https://github.com/wazuh/wazuh-kibana-app/pull/3438>`_    Remove not used redirectRule query param when clicking the row table on CDB Lists/Decoders.
+`#3439 <https://github.com/wazuh/wazuh-kibana-app/pull/3439>`_    Fixed the code overflows over the line numbers in the API Console editor.
+`#3440 <https://github.com/wazuh/wazuh-kibana-app/pull/3440>`_    Don't open the main menu when changing the seleted API or index pattern.
+`#3443 <https://github.com/wazuh/wazuh-kibana-app/pull/3443>`_    Fix error message in conf managment.
+`#3445 <https://github.com/wazuh/wazuh-kibana-app/pull/3445>`_    Fix size api selector when name is too long.
+`#3456 <https://github.com/wazuh/wazuh-kibana-app/pull/3456>`_    Fixed error when edit a rule or decoder.
+`#3458 <https://github.com/wazuh/wazuh-kibana-app/pull/3458>`_    Fixed index pattern selector doesn't display the ignored index patterns.
+`#3553 <https://github.com/wazuh/wazuh-kibana-app/pull/3553>`_    Fixed error in /Management/Configuration when cluster is disabled.
+`#3565 <https://github.com/wazuh/wazuh-kibana-app/pull/3565>`_    Fix the pinned filters were removed when accessing to the Panel tab of a module.
+`#3645 <https://github.com/wazuh/wazuh-kibana-app/pull/3645>`_    Fixed multi-select component searcher handler.
+`#3609 <https://github.com/wazuh/wazuh-kibana-app/pull/3609>`_    Fixed order logs properly in Management/Logs.
+`#3661 <https://github.com/wazuh/wazuh-kibana-app/pull/3661>`_    Fixed the Wazuh API requests to GET //.
+`#3675 <https://github.com/wazuh/wazuh-kibana-app/pull/3675>`_    Fixed missing mitre tactics.
+`#3488 <https://github.com/wazuh/wazuh-kibana-app/pull/3488>`_    Fix CDB list view not working with IPv6.
+`#3466 <https://github.com/wazuh/wazuh-kibana-app/pull/3466>`_    Fixed the bad requests using Console tool to PUT /active-response API endpoint.
+`#3605 <https://github.com/wazuh/wazuh-kibana-app/pull/3605>`_    Fixed group agent management table does not update on error.
+`#3651 <https://github.com/wazuh/wazuh-kibana-app/pull/3651>`_    Fixed not showing packages details in agent inventory for a freeBSD agent SO.
+`#3652 <https://github.com/wazuh/wazuh-kibana-app/pull/3652>`_    Fixed wazuh token deleted twice.
+`#3687 <https://github.com/wazuh/wazuh-kibana-app/pull/3687>`_    Fixed handler of error on dev-tools.
+`#3685 <https://github.com/wazuh/wazuh-kibana-app/pull/3685>`_    Fixed compatibility wazuh 4.3 - kibana 7.13.4.
+`#3689 <https://github.com/wazuh/wazuh-kibana-app/pull/3689>`_    Fixed registry values without agent pinned in FIM>Events.
+`#3688 <https://github.com/wazuh/wazuh-kibana-app/pull/3688>`_    Fixed breadcrumbs style compatibility for Kibana 7.14.2.
+`#3682 <https://github.com/wazuh/wazuh-kibana-app/pull/3682>`_    Fixed security alerts table when filters change.
+`#3692 <https://github.com/wazuh/wazuh-kibana-app/pull/3692>`_    Fixed error that shows we're using X-Pack when we have Basic.
+`#3700 <https://github.com/wazuh/wazuh-kibana-app/pull/3700>`_    Fixed blank screen in Kibana 7.10.2.
 ==============================================================    =============
 
 
