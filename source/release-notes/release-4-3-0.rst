@@ -168,12 +168,12 @@ RESTful API
 - `#10009 <https://github.com/wazuh/wazuh/pull/10009>`_ Removed limit of agents to upgrade using the API upgrade endpoints.
 - `#10158 <https://github.com/wazuh/wazuh/pull/10158>`_ Changed Windows agents FIM responses to return permissions as JSON.
 - `#10389 <https://github.com/wazuh/wazuh/pull/10389>`_ Adapted API endpoints to changes in ``wazuh-authd`` daemon ``force`` parameter.
-- `#10512 <https://github.com/wazuh/wazuh/pull/10512>`_ Deprecated use_only_authd API configuration option and related functionality. wazuh-authd will always be required for creating and removing agents.
+- `#10512 <https://github.com/wazuh/wazuh/pull/10512>`_ Deprecated ``use_only_authd`` API configuration option and related functionality. ``wazuh-authd`` will always be required for creating and removing agents.
 - `#10745 <https://github.com/wazuh/wazuh/pull/10745>`_ Improved API validators and related unit tests.
 - `#10905 <https://github.com/wazuh/wazuh/pull/10905>`_ Improved specific module healthchecks in API integration tests environment.
 - `#10916 <https://github.com/wazuh/wazuh/pull/10916>`_ Changed thread pool executors for process pool executors to improve API availability.
 - `#8599 <https://github.com/wazuh/wazuh/pull/8599>`_ Removed select parameter from GET /agents/stats/distinct endpoint.
-- `#8099 <https://github.com/wazuh/wazuh/pull/8099>`_ Removed GET /mitre endpoint.
+- `#8099 <https://github.com/wazuh/wazuh/pull/8099>`_ Removed ``GET /mitre`` endpoint.
 
 
 Ruleset
@@ -194,7 +194,7 @@ Ruleset
 Wazuh Kibana plugin
 ^^^^^^^^^^^^^^^^^^^
 
-- `#3639 <https://github.com/wazuh/wazuh-kibana-app/pull/3639>`_ Added ability to filter the results fo the Network Ports table in the Inventory data section.
+- `#3639 <https://github.com/wazuh/wazuh-kibana-app/pull/3639>`_ Added ability to filter the results fo the ``Network Ports`` table in the ``Inventory data`` section.
 - `#3324 <https://github.com/wazuh/wazuh-kibana-app/pull/3324>`_ Added new endpoint service to collect the frontend logs into a file.
 - `#3327 <https://github.com/wazuh/wazuh-kibana-app/pull/3327>`_ `#3321 <https://github.com/wazuh/wazuh-kibana-app/pull/3321>`_ `#3367 <https://github.com/wazuh/wazuh-kibana-app/pull/3367>`_ `#3373 <https://github.com/wazuh/wazuh-kibana-app/pull/3373>`_ `#3374 <https://github.com/wazuh/wazuh-kibana-app/pull/3374>`_ `#3390 <https://github.com/wazuh/wazuh-kibana-app/pull/3390>`_ `#3410 <https://github.com/wazuh/wazuh-kibana-app/pull/3410>`_ `#3408 <https://github.com/wazuh/wazuh-kibana-app/pull/3408>`_ `#3429 <https://github.com/wazuh/wazuh-kibana-app/pull/3429>`_ `#3427 <https://github.com/wazuh/wazuh-kibana-app/pull/3427>`_ `#3417 <https://github.com/wazuh/wazuh-kibana-app/pull/3417>`_ `#3462 <https://github.com/wazuh/wazuh-kibana-app/pull/3462>`_ `#3451 <https://github.com/wazuh/wazuh-kibana-app/pull/3451>`_ `#3442 <https://github.com/wazuh/wazuh-kibana-app/pull/3442>`_ `#3480 <https://github.com/wazuh/wazuh-kibana-app/pull/3480>`_ `#3472 <https://github.com/wazuh/wazuh-kibana-app/pull/3472>`_ `#3434 <https://github.com/wazuh/wazuh-kibana-app/pull/3434>`_ `#3392 <https://github.com/wazuh/wazuh-kibana-app/pull/3392>`_ `#3404 <https://github.com/wazuh/wazuh-kibana-app/pull/3404>`_ `#3432 <https://github.com/wazuh/wazuh-kibana-app/pull/3432>`_ `#3415 <https://github.com/wazuh/wazuh-kibana-app/pull/3415>`_ `#3469 <https://github.com/wazuh/wazuh-kibana-app/pull/3469>`_ `#3448 <https://github.com/wazuh/wazuh-kibana-app/pull/3448>`_ `#3465 <https://github.com/wazuh/wazuh-kibana-app/pull/3465>`_ `#3464 <https://github.com/wazuh/wazuh-kibana-app/pull/3464>`_ `#3478 <https://github.com/wazuh/wazuh-kibana-app/pull/3478>`_ Improved the frontend handle errors strategy: UI, Toasts, console log and log in file.
 - `#3196 <https://github.com/wazuh/wazuh-kibana-app/pull/3196>`_ Added fields status and type in vulnerabilities table.
@@ -211,7 +211,7 @@ Wazuh Kibana plugin
 - `#3525 <https://github.com/wazuh/wazuh-kibana-app/pull/3525>`_ Added new fields in Inventory table and Flyout Details.
 - `#3691 <https://github.com/wazuh/wazuh-kibana-app/pull/3691>`_ Added columns selector in agents table.
 - `#3121 <https://github.com/wazuh/wazuh-kibana-app/pull/3121>`_ Changed ossec to wazuh in sample-data.
-- `#3279 <https://github.com/wazuh/wazuh-kibana-app/pull/3279>`_ Changed empty fields in FIM tables and syscheck.value_name in discovery now show an empty tag for visual clarity.
+- `#3279 <https://github.com/wazuh/wazuh-kibana-app/pull/3279>`_ Changed empty fields in FIM tables and ``syscheck.value_name`` in discovery now show an empty tag for visual clarity.
 - `#3346 <https://github.com/wazuh/wazuh-kibana-app/pull/3346>`_ Adapted the Mitre tactics and techniques resources to use the API endpoints.
 - `#3517 <https://github.com/wazuh/wazuh-kibana-app/pull/3517>`_ Moved the filterManager subscription to the hook useFilterManager.
 - `#3529 <https://github.com/wazuh/wazuh-kibana-app/pull/3529>`_ Change filter from is to is one of in custom searchbar.
@@ -310,27 +310,27 @@ RESTful API
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#8196 <https://github.com/wazuh/wazuh/pull/8196>`_               Fixed inconsistency in RBAC resources for group:create, decoders:update, and rules:update actions.
-`#8378 <https://github.com/wazuh/wazuh/pull/8378>`_               Fixed the handling of an API error message occurring when Wazuh is started with a wrong ossec.conf. Now the execution continues and raises a warning.
-`#8548 <https://github.com/wazuh/wazuh/pull/8548>`_               Fixed a bug with sort parameter that caused a wrong response when sorting by several fields.
-`#8597 <https://github.com/wazuh/wazuh/pull/8597>`_               Fixed the description of force_time parameter in the API spec reference.
+`#8196 <https://github.com/wazuh/wazuh/pull/8196>`_               Fixed inconsistency in RBAC resources for ``group:create``, ``decoders:update``, and ``rules:update`` actions.
+`#8378 <https://github.com/wazuh/wazuh/pull/8378>`_               Fixed the handling of an API error message occurring when Wazuh is started with a wrong ``ossec.conf``. Now the execution continues and raises a warning.
+`#8548 <https://github.com/wazuh/wazuh/pull/8548>`_               Fixed a bug with ``sort`` parameter that caused a wrong response when sorting by several fields.
+`#8597 <https://github.com/wazuh/wazuh/pull/8597>`_               Fixed the description of ``force_time`` parameter in the API spec reference.
 `#8537 <https://github.com/wazuh/wazuh/pull/8537>`_               Fixed API incorrect path in remediation message when maximum number of requests per minute is reached.
 `#9071 <https://github.com/wazuh/wazuh/pull/9071>`_               Fixed agents' healthcheck error in the API integration test environment.
-`#9077 <https://github.com/wazuh/wazuh/pull/9077>`_               Fixed a bug with wazuh-apid process handling of pidfiles when running in foreground mode.
-`#9192 <https://github.com/wazuh/wazuh/pull/9192>`_               Fixed a bug with RBAC group_id matching.
-`#9147 <https://github.com/wazuh/wazuh/pull/9147>`_               Removed temporal development keys and values from GET /cluster/healthcheck response.
+`#9077 <https://github.com/wazuh/wazuh/pull/9077>`_               Fixed a bug with ``wazuh-apid`` process handling of pidfiles when running in foreground mode.
+`#9192 <https://github.com/wazuh/wazuh/pull/9192>`_               Fixed a bug with RBAC ``group_id`` matching.
+`#9147 <https://github.com/wazuh/wazuh/pull/9147>`_               Removed temporal development keys and values from ``GET /cluster/healthcheck`` response.
 `#9227 <https://github.com/wazuh/wazuh/pull/9227>`_               Fixed several errors when filtering by dates.
-`#9262 <https://github.com/wazuh/wazuh/pull/9262>`_               Fixed limit in some endpoints like PUT /agents/group/{group_id}/restart and added a pagination method.
-`#9320 <https://github.com/wazuh/wazuh/pull/9320>`_               Fixed bug with the search parameter resulting in invalid results.
-`#9368 <https://github.com/wazuh/wazuh/pull/9368>`_               Fixed wrong values of external_id field in MITRE resources.
+`#9262 <https://github.com/wazuh/wazuh/pull/9262>`_               Fixed limit in some endpoints like ``PUT /agents/group/{group_id}/restart`` and added a pagination method.
+`#9320 <https://github.com/wazuh/wazuh/pull/9320>`_               Fixed bug with the ``search`` parameter resulting in invalid results.
+`#9368 <https://github.com/wazuh/wazuh/pull/9368>`_               Fixed wrong values of ``external_id`` field in MITRE resources.
 `#9399 <https://github.com/wazuh/wazuh/pull/9399>`_               Fixed how the API integration testing environment checks that wazuh-apid daemon is running before starting the tests.
-`#9777 <https://github.com/wazuh/wazuh/pull/9777>`_               Add healthcheck to verify that logcollector stats are ready before starting the API integration test.
-`#10159 <https://github.com/wazuh/wazuh/pull/10159>`_             Fixed API integration test healthcheck used in the vulnerability test cases.
-`#10179 <https://github.com/wazuh/wazuh/pull/10179>`_             Fixed an error with PUT /agents/node/{node_id}/restart endpoint when no agents are present in selected node.
+`#9777 <https://github.com/wazuh/wazuh/pull/9777>`_               Add healthcheck to verify that ``logcollector`` stats are ready before starting the API integration test.
+`#10159 <https://github.com/wazuh/wazuh/pull/10159>`_             Fixed API integration test healthcheck used in the ``vulnerability`` test cases.
+`#10179 <https://github.com/wazuh/wazuh/pull/10179>`_             Fixed an error with ``PUT /agents/node/{node_id}/restart`` endpoint when no agents are present in selected node.
 `#10322 <https://github.com/wazuh/wazuh/pull/10322>`_             Fixed RBAC experimental API integration tests expecting a 1760 code in implicit requests.
 `#10289 <https://github.com/wazuh/wazuh/pull/10289>`_             Fixed cluster race condition that caused API integration test to randomly fail.
-`#10619 <https://github.com/wazuh/wazuh/pull/10619>`_             Fixed PUT /agents/node/{node_id}/restart endpoint to exclude exception codes properly.
-`#10666 <https://github.com/wazuh/wazuh/pull/10666>`_             Fixed PUT /agents/group/{group_id}/restart endpoint to exclude exception codes properly.
+`#10619 <https://github.com/wazuh/wazuh/pull/10619>`_             Fixed ``PUT /agents/node/{node_id}/restart`` endpoint to exclude exception codes properly.
+`#10666 <https://github.com/wazuh/wazuh/pull/10666>`_             Fixed ``PUT /agents/group/{group_id}/restart`` endpoint to exclude exception codes properly.
 `#10656 <https://github.com/wazuh/wazuh/pull/10656>`_             Fixed agent endpoints q parameter to allow more operators when filtering by groups.
 `#10830 <https://github.com/wazuh/wazuh/pull/10830>`_             Fixed API integration tests related to rule, decoder and task endpoints.
 ==============================================================    =============
@@ -361,7 +361,7 @@ Reference                                                         Description
 `#3490 <https://github.com/wazuh/wazuh-kibana-app/pull/3490>`_    Query config refactor.
 `#3412 <https://github.com/wazuh/wazuh-kibana-app/pull/3412>`_    Fixed rules and decoders test flyout clickout event.
 `#3430 <https://github.com/wazuh/wazuh-kibana-app/pull/3430>`_    Notify when you are registering an agent without permissions.
-`#3438 <https://github.com/wazuh/wazuh-kibana-app/pull/3438>`_    Remove not used redirectRule query param when clicking the row table on CDB Lists/Decoders.
+`#3438 <https://github.com/wazuh/wazuh-kibana-app/pull/3438>`_    Remove not used ``redirectRule`` query param when clicking the row table on CDB Lists/Decoders.
 `#3439 <https://github.com/wazuh/wazuh-kibana-app/pull/3439>`_    Fixed the code overflows over the line numbers in the API Console editor.
 `#3440 <https://github.com/wazuh/wazuh-kibana-app/pull/3440>`_    Don't open the main menu when changing the seleted API or index pattern.
 `#3443 <https://github.com/wazuh/wazuh-kibana-app/pull/3443>`_    Fix error message in conf managment.
@@ -369,13 +369,13 @@ Reference                                                         Description
 `#3456 <https://github.com/wazuh/wazuh-kibana-app/pull/3456>`_    Fixed error when edit a rule or decoder.
 `#3458 <https://github.com/wazuh/wazuh-kibana-app/pull/3458>`_    Fixed index pattern selector doesn't display the ignored index patterns.
 `#3553 <https://github.com/wazuh/wazuh-kibana-app/pull/3553>`_    Fixed error in /Management/Configuration when cluster is disabled.
-`#3565 <https://github.com/wazuh/wazuh-kibana-app/pull/3565>`_    Fix the pinned filters were removed when accessing to the Panel tab of a module.
+`#3565 <https://github.com/wazuh/wazuh-kibana-app/pull/3565>`_    Fix the pinned filters were removed when accessing to the ``Panel`` tab of a module.
 `#3645 <https://github.com/wazuh/wazuh-kibana-app/pull/3645>`_    Fixed multi-select component searcher handler.
 `#3609 <https://github.com/wazuh/wazuh-kibana-app/pull/3609>`_    Fixed order logs properly in Management/Logs.
-`#3661 <https://github.com/wazuh/wazuh-kibana-app/pull/3661>`_    Fixed the Wazuh API requests to GET //.
+`#3661 <https://github.com/wazuh/wazuh-kibana-app/pull/3661>`_    Fixed the Wazuh API requests to ``GET //``.
 `#3675 <https://github.com/wazuh/wazuh-kibana-app/pull/3675>`_    Fixed missing mitre tactics.
 `#3488 <https://github.com/wazuh/wazuh-kibana-app/pull/3488>`_    Fix CDB list view not working with IPv6.
-`#3466 <https://github.com/wazuh/wazuh-kibana-app/pull/3466>`_    Fixed the bad requests using Console tool to PUT /active-response API endpoint.
+`#3466 <https://github.com/wazuh/wazuh-kibana-app/pull/3466>`_    Fixed the bad requests using Console tool to ``PUT /active-response`` API endpoint.
 `#3605 <https://github.com/wazuh/wazuh-kibana-app/pull/3605>`_    Fixed group agent management table does not update on error.
 `#3651 <https://github.com/wazuh/wazuh-kibana-app/pull/3651>`_    Fixed not showing packages details in agent inventory for a freeBSD agent SO.
 `#3652 <https://github.com/wazuh/wazuh-kibana-app/pull/3652>`_    Fixed wazuh token deleted twice.
