@@ -405,6 +405,6 @@ Changelogs
 
 More details about these changes are provided in the changelog of each component:
 
-- `wazuh/wazuh <xxxx>`_
-- `wazuh/wazuh-kibana-app <xxx>`_
-- `wazuh/wazuh-splunk <xxxx>`_
+- `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v4.3.0-rc1/CHANGELOG.md>`_
+- `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/4.3-7.10---RC1/CHANGELOG.md>`_
+- `wazuh/wazuh-splunk`_
