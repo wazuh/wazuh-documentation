@@ -18,6 +18,8 @@ By running the automated script, you install and configure the Wazuh in just a f
 
 Alternatively, you can check our :ref:`Installation guide <installation_guide>` to learn how to install each component individually on the same server, as an all-in-one deployment, or on different servers as a distributed deployment depending on the environment needs. 
 
+.. _installation_requirements:
+
 Requirements
 ------------
 Check the supported operating systems and the recommended hardware requirements for the Wazuh installation.
@@ -73,7 +75,7 @@ Hardware requirements
   For example, for an environment with 80 workstations, 10 servers, and 10 network devices, the storage needed for 90 days of alerts is 236 GB approximately. 
  
 
-   
+.. _unattended_all_in_one:
 
 Installing Wazuh
 ----------------

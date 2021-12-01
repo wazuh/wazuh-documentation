@@ -30,4 +30,4 @@ The user can choose between step-by-step installation, a manual way of carrying 
     :glob:
 
     unattended-installation
-    all-in-one
+    all_in_one
