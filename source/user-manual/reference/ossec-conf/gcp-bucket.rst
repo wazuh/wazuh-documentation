@@ -161,7 +161,7 @@ Interval between module executions.
 +--------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | 1h                                                                                                                                                             |
 +--------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days), w (weeks), M (months) |
+| **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as s (seconds), m (minutes), h (hours), d (days), w (weeks), M (months)  |
 +--------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 day
