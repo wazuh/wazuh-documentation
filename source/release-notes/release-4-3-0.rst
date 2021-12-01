@@ -37,32 +37,32 @@ Manager
 ^^^^^^^
 
 - `#8178 <https://github.com/wazuh/wazuh/pull/8178>`_ Added support for Arch Linux OS in Vulnerability Detector. Thanks to Aviel Warschawski (@avielw).
-- `#8749 <https://github.com/wazuh/wazuh/pull/8749>`_ Added a log message in the `cluster.log` file to notify that wazuh-clusterd has been stopped.
-- `#9077 <https://github.com/wazuh/wazuh/pull/9077>`_ Added message with the PID of `wazuh-clusterd` process when launched in foreground mode.
+- `#8749 <https://github.com/wazuh/wazuh/pull/8749>`_ Added a log message in the ``cluster.log`` file to notify that wazuh-clusterd has been stopped.
+- `#9077 <https://github.com/wazuh/wazuh/pull/9077>`_ Added message with the PID of ``wazuh-clusterd`` process when launched in foreground mode.
 - `#10492 <https://github.com/wazuh/wazuh/pull/10492>`_ Added time calculation when extra information is requested to the `cluster_control` binary.
 - `#9209 <https://github.com/wazuh/wazuh/pull/9209>`_ Added a context variable to indicate origin module in socket communication messages.
 - `#9733 <https://github.com/wazuh/wazuh/pull/9733>`_ Added unit tests for framework/core files to increase coverage.
 - `#9204 <https://github.com/wazuh/wazuh/pull/9204>`_ Added a verbose mode in the wazuh-logtest tool.
 - `#8830 <https://github.com/wazuh/wazuh/pull/8830>`_ Added Vulnerability Detector support for Amazon Linux.
-- `#10693 <https://github.com/wazuh/wazuh/pull/10693>`_ Introduced new option `<force>` to set the behavior when Authd finds conflicts on agent enrollment requests.
+- `#10693 <https://github.com/wazuh/wazuh/pull/10693>`_ Introduced new option ``<force>`` to set the behavior when Authd finds conflicts on agent enrollment requests.
 - `#9099 <https://github.com/wazuh/wazuh/pull/9099>`_ Added saniziters to the unit tests execution.
 - `#8237 <https://github.com/wazuh/wazuh/pull/8237>`_ Vulnerability Detector introduces vulnerability inventory.
   - The manager will only deliver alerts when new vulnerabilities are detected in agents or when they stop applying.
 - `#8083 <https://github.com/wazuh/wazuh/pull/8083>`_ Changed the internal handling of agent keys in Remoted and Remoted to speed up key reloading.
-- `#7885 <https://github.com/wazuh/wazuh/pull/7885>`_ The option `<server>` of the Syslog output now supports hostname resolution. 
+- `#7885 <https://github.com/wazuh/wazuh/pull/7885>`_ The option ``<server>`` of the Syslog output now supports hostname resolution. 
 - `#7763 <https://github.com/wazuh/wazuh/pull/7763>`_ The product's UNIX user and group have been renamed to "wazuh".
 - `#7865 <https://github.com/wazuh/wazuh/pull/7865>`_ The MITRE database has been redesigned to provide full and searchable data.
 - `#7358 <https://github.com/wazuh/wazuh/pull/7358>`_ The static fields related to FIM have been ported to dynamic fields in Analysisd.
 - `#8351 <https://github.com/wazuh/wazuh/pull/8351>`_ Changed all randomly generated IDs used for cluster tasks. Now, uuid4 is used to ensure IDs are not repeated.
 - `#8873 <https://github.com/wazuh/wazuh/pull/8873>`_ Improved sendsync error log to provide more details of the used parameters.
-- `#9708 <https://github.com/wazuh/wazuh/pull/9708>`_ Changed `walk_dir` function to be iterative instead of recursive.
+- `#9708 <https://github.com/wazuh/wazuh/pull/9708>`_ Changed ``walk_dir`` function to be iterative instead of recursive.
 - `#10183 <https://github.com/wazuh/wazuh/pull/10183>`_ Refactored Integrity sync behavior so that new synchronizations do not start until extra-valid files are processed.
 - `#10101 <https://github.com/wazuh/wazuh/pull/10101>`_ Changed cluster synchronization, now the content of the etc/shared folder is synchronized.
-- `#8351 <https://github.com/wazuh/wazuh/pull/8351>`_ Changed all XML file loads. Now, `defusedxml` library is used to avoid possible XML-based attacks.
+- `#8351 <https://github.com/wazuh/wazuh/pull/8351>`_ Changed all XML file loads. Now, ``defusedxml`` library is used to avoid possible XML-based attacks.
 - `#8535 <https://github.com/wazuh/wazuh/pull/8535>`_ Changed configuration validation from execq socket to com socket.
-- `#8392 <https://github.com/wazuh/wazuh/pull/8392>`_ Updated utils unittest to improve `process_array` function coverage.
-- `#8885 <https://github.com/wazuh/wazuh/pull/8885>`_ Changed `request_slice` calculation to improve efficiency when accessing wazuh-db data.
-- `#9273 <https://github.com/wazuh/wazuh/pull/9273>`_ Improved the retrieval of information from `wazuh-db` so it reaches the optimum size in a single iteration.
+- `#8392 <https://github.com/wazuh/wazuh/pull/8392>`_ Updated utils unittest to improve ``process_array`` function coverage.
+- `#8885 <https://github.com/wazuh/wazuh/pull/8885>`_ Changed ``request_slice`` calculation to improve efficiency when accessing wazuh-db data.
+- `#9273 <https://github.com/wazuh/wazuh/pull/9273>`_ Improved the retrieval of information from ``wazuh-db`` so it reaches the optimum size in a single iteration.
 - `#9234 <https://github.com/wazuh/wazuh/pull/9234>`_ Optimized the way framework uses context cached functions and added a note on context_cached docstring.
 - `#9332 <https://github.com/wazuh/wazuh/pull/9332>`_ Improved framework regexes to be more specific and less vulnerable.
 - `#9423 <https://github.com/wazuh/wazuh/pull/9423>`_ Unified framework exceptions for non-active agents.
@@ -78,7 +78,7 @@ Manager
 - `#9093 <https://github.com/wazuh/wazuh/pull/9093>`_ Agent DB synchronization has been boosted by caching the last data checksum in Wazuh DB.
 - `#8892 <https://github.com/wazuh/wazuh/pull/8892>`_ Logtest now scans new ruleset files when loading a new session.
 - `#8237 <https://github.com/wazuh/wazuh/pull/8237>`_ CVE alerts by Vulnerability Detector now include the time of detection, severity, and score.
-- `#10849 <https://github.com/wazuh/wazuh/pull/10849>`_ Fixed manager startup when `<database_output>` is enabled.
+- `#10849 <https://github.com/wazuh/wazuh/pull/10849>`_ Fixed manager startup when ``<database_output>`` is enabled.
 - `#10767 <https://github.com/wazuh/wazuh/pull/10767>`_ Changed the cluster "local_integrity" task to run in a separate process to improve overall performance.
 - `#10807 <https://github.com/wazuh/wazuh/pull/10807>`_ The cluster communication with the database for agent information synchronization runs in a parallel separate process.
 - `#10920 <https://github.com/wazuh/wazuh/pull/10920>`_ The cluster processing of the extra-valid files in the master node is carried out in a parallel separate process.
@@ -93,22 +93,22 @@ Agent
 - `#8532 <https://github.com/wazuh/wazuh/pull/8532>`_ Introduced a new module to collect audit logs from GitHub.
 - `#8461 <https://github.com/wazuh/wazuh/pull/8461>`_ FIM now expands wildcarded paths in the configuration on Windows agents.
 - `#8754 <https://github.com/wazuh/wazuh/pull/8754>`_ FIM reloads wildcarded paths on full scans.
-- `#8306 <https://github.com/wazuh/wazuh/pull/8306>`_ Added new path_suffix option to AWS module configuration.
-- `#8331 <https://github.com/wazuh/wazuh/pull/8331>`_ Added new discard_regex option to AWS module configuration.
+- `#8306 <https://github.com/wazuh/wazuh/pull/8306>`_ Added new ``path_suffix`` option to AWS module configuration.
+- `#8331 <https://github.com/wazuh/wazuh/pull/8331>`_ Added new ``discard_regex`` option to AWS module configuration.
 - `#8482 <https://github.com/wazuh/wazuh/pull/8482>`_ Added support for the S3 Server Access bucket type in AWS module.
-- `#9119 <https://github.com/wazuh/wazuh/pull/9119>`_ Added support for Google Cloud Storage buckets using a new GCP module called gcp-bucket.
-- `#9119 <https://github.com/wazuh/wazuh/pull/9119>`_ Added support for Google Cloud Storage access logs to the gcp-bucket module.
+- `#9119 <https://github.com/wazuh/wazuh/pull/9119>`_ Added support for Google Cloud Storage buckets using a new GCP module called ``gcp-bucket``.
+- `#9119 <https://github.com/wazuh/wazuh/pull/9119>`_ Added support for Google Cloud Storage access logs to the ``gcp-bucket`` module.
 - `#9420 <https://github.com/wazuh/wazuh/pull/9420>`_ Added support for VPC endpoints in AWS module.
 - `#9279 <https://github.com/wazuh/wazuh/pull/9279>`_ Added support for GCS access logs in the GCP module.
 - `#10198 <https://github.com/wazuh/wazuh/pull/10198>`_ Added an iam role session duration parameter to AWS module.
 - `#8826 <https://github.com/wazuh/wazuh/pull/8826>`_ Added support for variables in SCA policies.
 - `#7721 <https://github.com/wazuh/wazuh/pull/7721>`_ FIM now fills an audit rule file to support who-data although Audit is in immutable mode.
 - `#8957 <https://github.com/wazuh/wazuh/pull/8957>`_ Introduced an integration to collect audit logs from Office365.
-- `#10168 <https://github.com/wazuh/wazuh/pull/10168>`_ Added a new field DisplayVersion to Syscollector to help Vulnerability Detector match vulnerabilities for Windows.
+- `#10168 <https://github.com/wazuh/wazuh/pull/10168>`_ Added a new field ``DisplayVersion`` to Syscollector to help Vulnerability Detector match vulnerabilities for Windows.
 - `#10148 <https://github.com/wazuh/wazuh/pull/10148>`_ Added support for macOS agent upgrade via WPK.
 - `#8632 <https://github.com/wazuh/wazuh/pull/8632>`_ Added Logcollector support for macOS logs (Unified Logging System).
 - `#8381 <https://github.com/wazuh/wazuh/pull/8381>`_ The agent now reports the version of the running AIX operating system to the manager. - `#8604 <https://github.com/wazuh/wazuh/pull/8604>`_ Improved the reliability of the user ID parsing in FIM who-data mode on Linux.
-- `#10230 <https://github.com/wazuh/wazuh/pull/10230>`_ Reword AWS service_endpoint parameter description to suit FIPS endpoints too.
+- `#10230 <https://github.com/wazuh/wazuh/pull/10230>`_ Reword AWS ``service_endpoint`` parameter description to suit FIPS endpoints too.
 - `#5047 <https://github.com/wazuh/wazuh/pull/5047>`_ Extended support of Logcollector for MySQL 4.7 logs. Thanks to @YoyaYOSHIDA.
 - `#9887 <https://github.com/wazuh/wazuh/pull/9887>`_ Agents running on FreeBSD and OpenBSD now report their IP address.
 - `#8202 <https://github.com/wazuh/wazuh/pull/8202>`_ Reduced verbosity of FIM debugging logs.
@@ -129,45 +129,45 @@ Agent
 RESTful API
 ^^^^^^^^^^^
 
-- `#7988 <https://github.com/wazuh/wazuh/pull/7988>`_ Added new PUT /agents/reconnect endpoint to force agents reconnection to the manager.
-- `#6761 <https://github.com/wazuh/wazuh/pull/6761>`_ Added select parameter to the GET /security/users, GET /security/roles, GET /security/rules and GET /security/policies endpoints.
-- `#8100 <https://github.com/wazuh/wazuh/pull/8100>`_ Added type and status filters to GET /vulnerability/{agent_id} endpoint.
+- `#7988 <https://github.com/wazuh/wazuh/pull/7988>`_ Added new ``PUT /agents/reconnect`` endpoint to force agents reconnection to the manager.
+- `#6761 <https://github.com/wazuh/wazuh/pull/6761>`_ Added ``select`` parameter to the ``GET /security/users``, ``GET /security/roles``, ``GET /security/rules`` and ``GET /security/policies`` endpoints.
+- `#8100 <https://github.com/wazuh/wazuh/pull/8100>`_ Added type and status filters to ``GET /vulnerability/{agent_id}`` endpoint.
 - `#7490 <https://github.com/wazuh/wazuh/pull/7490>`_ Added an option to configure SSL ciphers.
 - `#8919 <https://github.com/wazuh/wazuh/pull/8919>`_ Added an option to configure the maximum response time of the API.
-- `#8945 <https://github.com/wazuh/wazuh/pull/8945>`_ Added new DELETE /rootcheck/{agent_id} endpoint.
-- `#9028 <https://github.com/wazuh/wazuh/pull/9028>`_ Added new GET /vulnerability/{agent_id}/last_scan endpoint to check the latest vulnerability scan of an agent.
-- `#9028 <https://github.com/wazuh/wazuh/pull/9028>`_ Added new cvss and severity fields and filters to GET /vulnerability/{agent_id} endpoint.
+- `#8945 <https://github.com/wazuh/wazuh/pull/8945>`_ Added new ``DELETE /rootcheck/{agent_id}`` endpoint.
+- `#9028 <https://github.com/wazuh/wazuh/pull/9028>`_ Added new ``GET /vulnerability/{agent_id}/last_scan`` endpoint to check the latest vulnerability scan of an agent.
+- `#9028 <https://github.com/wazuh/wazuh/pull/9028>`_ Added new ``cvss`` and ``severity`` fields and filters to ``GET /vulnerability/{agent_id}`` endpoint.
 - `#9100 <https://github.com/wazuh/wazuh/pull/9100>`_ Added an option to configure the maximum allowed API upload size.
 - `#9142 <https://github.com/wazuh/wazuh/pull/9142>`_ Added new unit and integration tests for API models.
-- `#9077 <https://github.com/wazuh/wazuh/pull/9077>`_ Added message with the PID of wazuh-apid process when launched in foreground mode.
-- `#9144 <https://github.com/wazuh/wazuh/pull/9144>`_ Added external id, source and url to the MITRE endpoints responses.
+- `#9077 <https://github.com/wazuh/wazuh/pull/9077>`_ Added message with the PID of ``wazuh-apid`` process when launched in foreground mode.
+- `#9144 <https://github.com/wazuh/wazuh/pull/9144>`_ Added ``external id``, ``source`` and ``url`` to the MITRE endpoints responses.
 - `#9297 <https://github.com/wazuh/wazuh/pull/9297>`_ Added custom healthchecks for legacy agents in API integration tests, improving maintainability.
 - `#9914 <https://github.com/wazuh/wazuh/pull/9914>`_ Added new unit tests for the API python module to increase coverage.
 - `#10238 <https://github.com/wazuh/wazuh/pull/10238>`_ Added docker logs separately in API integration tests environment to get cleaner reports.
-- `#10437 <https://github.com/wazuh/wazuh/pull/10437>`_ Added new disconnection_time field to GET /agents response.
+- `#10437 <https://github.com/wazuh/wazuh/pull/10437>`_ Added new ``disconnection_time`` field to ``GET /agents`` response.
 - `#10457 <https://github.com/wazuh/wazuh/pull/10457>`_ Added new filters to agents upgrade endpoints.
 - `#8288 <https://github.com/wazuh/wazuh/pull/8288>`_ Added new API endpoints to access all the MITRE information.
-- `#10947 <https://github.com/wazuh/wazuh/pull/10947>`_ Show agent-info permissions flag when using cluster_control and in the GET /cluster/healthcheck API endpoint.
+- `#10947 <https://github.com/wazuh/wazuh/pull/10947>`_ Show agent-info permissions flag when using cluster_control and in the ``GET /cluster/healthcheck`` API endpoint.
 - `#7490 <https://github.com/wazuh/wazuh/pull/7490>`_ Renamed SSL protocol configuration parameter.
 - `#8827 <https://github.com/wazuh/wazuh/pull/8827>`_ Reviewed and updated API spec examples and JSON body examples.
 - Improved the performance of several API endpoints. This is specially appreciable in environments with a big number of agents:
-  - `#8937 <https://github.com/wazuh/wazuh/pull/8937>`_ Improved PUT /agents/group endpoint.
-  - `#8938 <https://github.com/wazuh/wazuh/pull/8938>`_ Improved PUT /agents/restart endpoint.
-  - `#8950 <https://github.com/wazuh/wazuh/pull/8950>`_ Improved DELETE /agents endpoint.
-  - `#8959 <https://github.com/wazuh/wazuh/pull/8959>`_ Improved PUT /rootcheck endpoint.
-  - `#8966 <https://github.com/wazuh/wazuh/pull/8966>`_ Improved PUT /syscheck endpoint.
-  - `#9046 <https://github.com/wazuh/wazuh/pull/9046>`_ Improved DELETE /groups endpoint and changed API response to be more consistent.
-- `#8945 <https://github.com/wazuh/wazuh/pull/8945>`_ Changed DELETE /rootcheck endpoint to DELETE /experimental/rootcheck.
-- `#9012 <https://github.com/wazuh/wazuh/pull/9012>`_ Reduced the time it takes for wazuh-apid process to check its configuration when using the -t parameter.
-- `#9019 <https://github.com/wazuh/wazuh/pull/9019>`_ Fixed malfunction in the sort parameter of syscollector endpoints.
+  - `#8937 <https://github.com/wazuh/wazuh/pull/8937>`_ Improved ``PUT /agents/group`` endpoint.
+  - `#8938 <https://github.com/wazuh/wazuh/pull/8938>`_ Improved ``PUT /agents/restart`` endpoint.
+  - `#8950 <https://github.com/wazuh/wazuh/pull/8950>`_ Improved ``DELETE /agents`` endpoint.
+  - `#8959 <https://github.com/wazuh/wazuh/pull/8959>`_ Improved ``PUT /rootcheck`` endpoint.
+  - `#8966 <https://github.com/wazuh/wazuh/pull/8966>`_ Improved ``PUT /syscheck`` endpoint.
+  - `#9046 <https://github.com/wazuh/wazuh/pull/9046>`_ Improved ``DELETE /groups`` endpoint and changed API response to be more consistent.
+- `#8945 <https://github.com/wazuh/wazuh/pull/8945>`_ Changed ``DELETE /rootcheck`` endpoint to ``DELETE /experimental/rootcheck``.
+- `#9012 <https://github.com/wazuh/wazuh/pull/9012>`_ Reduced the time it takes for ``wazuh-apid`` process to check its configuration when using the -t parameter.
+- `#9019 <https://github.com/wazuh/wazuh/pull/9019>`_ Fixed malfunction in the ``sort`` parameter of syscollector endpoints.
 - `#9113 <https://github.com/wazuh/wazuh/pull/9113>`_ Improved API integration tests stability when failing in entrypoint.
 - `#9228 <https://github.com/wazuh/wazuh/pull/9228>`_ Made SCA API integration tests dynamic to validate responses coming from any agent version.
 - `#9227 <https://github.com/wazuh/wazuh/pull/9227>`_ Refactored and standardized all the date fields in the API responses to use ISO8601.
-- `#9263 <https://github.com/wazuh/wazuh/pull/9263>`_ Removed Server header from API HTTP responses.
+- `#9263 <https://github.com/wazuh/wazuh/pull/9263>`_ Removed ``Server`` header from API HTTP responses.
 - `#9371 <https://github.com/wazuh/wazuh/pull/9371>`_ Improved JWT implementation by replacing HS256 signing algorithm with RS256.
 - `#10009 <https://github.com/wazuh/wazuh/pull/10009>`_ Removed limit of agents to upgrade using the API upgrade endpoints.
 - `#10158 <https://github.com/wazuh/wazuh/pull/10158>`_ Changed Windows agents FIM responses to return permissions as JSON.
-- `#10389 <https://github.com/wazuh/wazuh/pull/10389>`_ Adapted API endpoints to changes in wazuh-authd daemon force parameter.
+- `#10389 <https://github.com/wazuh/wazuh/pull/10389>`_ Adapted API endpoints to changes in ``wazuh-authd`` daemon ``force`` parameter.
 - `#10512 <https://github.com/wazuh/wazuh/pull/10512>`_ Deprecated use_only_authd API configuration option and related functionality. wazuh-authd will always be required for creating and removing agents.
 - `#10745 <https://github.com/wazuh/wazuh/pull/10745>`_ Improved API validators and related unit tests.
 - `#10905 <https://github.com/wazuh/wazuh/pull/10905>`_ Improved specific module healthchecks in API integration tests environment.
@@ -251,20 +251,20 @@ Reference                                                         Description
 `#8902 <https://github.com/wazuh/wazuh/pull/8902>`_               Prevented the manager from leaving dangling agent database files.
 `#8254 <https://github.com/wazuh/wazuh/pull/8254>`_               Corrected remediation message for error code 6004.
 `#8157 <https://github.com/wazuh/wazuh/pull/8157>`_               Fixed a bug when deleting non-existing users or roles in the security SDK.
-`#8418 <https://github.com/wazuh/wazuh/pull/8418>`_               Fixed a bug with agent.conf file permissions when creating an agent group.
+`#8418 <https://github.com/wazuh/wazuh/pull/8418>`_               Fixed a bug with `agent.conf` file permissions when creating an agent group.
 `#8422 <https://github.com/wazuh/wazuh/pull/8422>`_               Fixed wrong exceptions with wdb pagination mechanism.
-`#8747 <https://github.com/wazuh/wazuh/pull/8747>`_               Fixed error when loading some rules with the \ character.
-`#9216 <https://github.com/wazuh/wazuh/pull/9216>`_               Changed WazuhDBQuery class to properly close socket connections and prevent file descriptor leaks.
-`#10320 <https://github.com/wazuh/wazuh/pull/10320>`_             Fixed error in the api configuration when using the agent_upgrade script.
-`#10341 <https://github.com/wazuh/wazuh/pull/10341>`_             Handle JSONDecodeError in Distributed API class methods.
+`#8747 <https://github.com/wazuh/wazuh/pull/8747>`_               Fixed error when loading some rules with the `\` character.
+`#9216 <https://github.com/wazuh/wazuh/pull/9216>`_               Changed `WazuhDBQuery` class to properly close socket connections and prevent file descriptor leaks.
+`#10320 <https://github.com/wazuh/wazuh/pull/10320>`_             Fixed error in the api configuration when using the `agent_upgrade` script.
+`#10341 <https://github.com/wazuh/wazuh/pull/10341>`_             Handle `JSONDecodeError` in Distributed API class methods.
 `#9738 <https://github.com/wazuh/wazuh/pull/9738>`_               Fixed an issue with duplicated logs in Azure-logs module and applied several improvements to it.
 `#10680 <https://github.com/wazuh/wazuh/pull/10680>`_             Fixed the query parameter validation to allow usage of special chars in Azure module.
-`#8394 <https://github.com/wazuh/wazuh/pull/8394>`_               Fix a bug running wazuh-clusterd process when it was already running.
+`#8394 <https://github.com/wazuh/wazuh/pull/8394>`_               Fix a bug running `wazuh-clusterd` process when it was already running.
 `#8732 <https://github.com/wazuh/wazuh/pull/8732>`_               Allow cluster to send and receive messages with size higher than request_chunk.
-`#9077 <https://github.com/wazuh/wazuh/pull/9077>`_               Fixed a bug that caused wazuh-clusterd process to not delete its pidfile when running in foreground mode and it is stopped.
+`#9077 <https://github.com/wazuh/wazuh/pull/9077>`_               Fixed a bug that caused `wazuh-clusterd` process to not delete its pidfile when running in foreground mode and it is stopped.
 `#10376 <https://github.com/wazuh/wazuh/pull/10376>`_             Fixed race condition due to lack of atomicity in the cluster synchronization mechanism.
-`#10492 <https://github.com/wazuh/wazuh/pull/10492>`_             Fixed bug when displaying the dates of the cluster tasks that have not finished yet. Now n/a is displayed in these cases.
-`#9196 <https://github.com/wazuh/wazuh/pull/9196>`_               Fixed missing field value_type in FIM alerts.
+`#10492 <https://github.com/wazuh/wazuh/pull/10492>`_             Fixed bug when displaying the dates of the cluster tasks that have not finished yet. Now `n/a` is displayed in these cases.
+`#9196 <https://github.com/wazuh/wazuh/pull/9196>`_               Fixed missing field `value_type` in FIM alerts.
 `#9292 <https://github.com/wazuh/wazuh/pull/9292>`_               Fixed a typo in the SSH Integrity Check script for Agentless.
 `#10421 <https://github.com/wazuh/wazuh/pull/10421>`_             Fixed multiple race conditions in Remoted.
 `#10390 <https://github.com/wazuh/wazuh/pull/10390>`_             The manager's agent database has been fixed to prevent dangling entries from removed agents.
