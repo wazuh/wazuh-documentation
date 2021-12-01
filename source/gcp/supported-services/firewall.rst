@@ -16,13 +16,13 @@ Firewall Rules Logging
 Enabling Firewall Rules Logging
 -------------------------------
 
-Firewall Rules Logging can be enabled in the Firewall page in the Google Cloud Console. Follow its `official documentation <https://cloud.google.com/vpc/docs/using-firewall-rules-logging#enable>`__ for the most up-to-date instructions on how to enable this feature.
+Firewall Rules Logging can be enabled on the Firewall page in the Google Cloud Console. Follow the `Google Virtual Private Cloud <https://cloud.google.com/vpc/docs/using-firewall-rules-logging#enable>`__ documentation for the most up-to-date instructions on how to enable this feature.
 
 
 Exporting Firewall Rules Logging logs to Pub/Sub
 ------------------------------------------------
 
-In the :ref:`Pub/Sub <pubsub>` page, it was explained how to set up a sink to logs for a Pub/Sub topic. However, this would export every single log available, and not only the Firewall Rules Logging logs. It is possible to configure the sink to export Firewall Rules Logging logs only to a topic, ignoring logs coming from other services, by adding a filtering condition to the sink. To do so, follow the same instructions as explained in the :ref:`Pub/Sub <pubsub>` section but adding the following filter in **Step 3 - Choose logs to include in sink**:
+The :ref:`Pub/Sub <pubsub>` page explains how to set up a sink to logs for a Pub/Sub topic. However, this would export every single log available, and not only the Firewall Rules Logging logs. It is possible to configure the sink to export Firewall Rules Logging logs only to a topic, ignoring logs coming from other services, by adding a filtering condition to the sink. To do so, follow the same instructions as explained in the :ref:`Pub/Sub <pubsub>` section but add the following filter in **Step 3 - Choose logs to include in sink**:
 
 .. code-block:: console
 
