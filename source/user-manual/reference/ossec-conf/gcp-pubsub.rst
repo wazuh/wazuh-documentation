@@ -86,7 +86,7 @@ This setting specifies the path to the Google Cloud credentials file in JW Token
 | **Allowed values** | Any path to a credentials file |
 +--------------------+--------------------------------+
 
-For example ``<credentials_file>wodles/gcp-pubsub/credentials.json</credentials_file>``.
+For example, ``<credentials_file>wodles/gcp-pubsub/credentials.json</credentials_file>``.
 
 max_messages
 ^^^^^^^^^^^^
@@ -147,7 +147,7 @@ Interval between module executions.
 +--------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | 1h                                                                                                                                                             |
 +--------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days), w (weeks), M (months) |
+| **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as s (seconds), m (minutes), h (hours), d (days), w (weeks), M (months)  |
 +--------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 day
