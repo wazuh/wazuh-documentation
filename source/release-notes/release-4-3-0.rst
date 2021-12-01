@@ -156,6 +156,21 @@ RESTful API
 - `#8099 <https://github.com/wazuh/wazuh/pull/8099>`_ Removed GET /mitre endpoint.
 
 
+Ruleset
+^^^^^^^
+
+- `#10428 <https://github.com/wazuh/wazuh/pull/10428>`_ Added Rules and Decoders for Wazuh API.
+- `#10458 <https://github.com/wazuh/wazuh/pull/10458>`_ Added Rules and Decoders for TrendMicro Cloud One.
+- `#10496 <https://github.com/wazuh/wazuh/pull/10496>`_ Added Rules for Sophos UTM Firewall.
+- `#10369 <https://github.com/wazuh/wazuh/pull/10369>`_ Added SCA policy for Solaris 11.4.
+- `#10658 <https://github.com/wazuh/wazuh/pull/10658>`_ Added Rules for Cloudflare WAF.
+- `#10667 <https://github.com/wazuh/wazuh/pull/10667>`_ Added Rules and Decoders for FortiAuth.
+- `#10315 <https://github.com/wazuh/wazuh/pull/10315>`_ Updated Amazon Linux 2 SCA up to version 2.0.0.
+- `#10354 <https://github.com/wazuh/wazuh/pull/10354>`_ Updated RedHat Enterprise Linux 8 SCA up to version 1.0.1.
+- `#10507 <https://github.com/wazuh/wazuh/pull/10507>`_ Updated Amazon rules to add more granularity.
+- `#10558 <https://github.com/wazuh/wazuh/pull/10558>`_ Updated macOS Big Sur SCA up to 1.2.0 version.
+
+
 Resolved issues
 ---------------
 
@@ -256,6 +271,20 @@ Reference                                                         Description
 `#10666 <https://github.com/wazuh/wazuh/pull/10666>`_             Fixed PUT /agents/group/{group_id}/restart endpoint to exclude exception codes properly.
 `#10656 <https://github.com/wazuh/wazuh/pull/10656>`_             Fixed agent endpoints q parameter to allow more operators when filtering by groups.
 `#10830 <https://github.com/wazuh/wazuh/pull/10830>`_             Fixed API integration tests related to rule, decoder and task endpoints.
+==============================================================    =============
+
+
+Ruleset
+^^^^^^^
+
+==============================================================    =============
+Reference                                                         Description
+==============================================================    =============
+`#10315 <https://github.com/wazuh/wazuh/pull/10315>`_             Fixed enabled-like checks for Amazon Linux 2 SCA.
+`#10354 <https://github.com/wazuh/wazuh/pull/10354>`_             Fixed enabled-like checks for RedHat Enterprise Linux 8 SCA.
+`#10406 <https://github.com/wazuh/wazuh/pull/10406>`_             Fixed typos and not working tests for Centos 7 SCA. Thanks to RonnyMaas (@RonnyMaas).
+`#10707 <https://github.com/wazuh/wazuh/pull/10707>`_             Fixed YML syntax problems in Solaris 11.4 SCA.
+`#10375 <https://github.com/wazuh/wazuh/pull/10375>`_             Fixed a typo in the Xbox Live Networking Service check for SCA.
 ==============================================================    =============
 
 
