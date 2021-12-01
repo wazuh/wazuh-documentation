@@ -36,7 +36,7 @@ Highlights
 .. thumbnail::  ../images/release-notes/4.3.0/Office 365-General.png
       :align: center
       :title: Office 365 / General
-      
+
 .. raw:: html
 
     </div>  
@@ -44,9 +44,9 @@ Highlights
 - `#3327 <https://github.com/wazuh/wazuh-kibana-app/pull/3327>`_ `#3321 <https://github.com/wazuh/wazuh-kibana-app/pull/3321>`_ `#3367 <https://github.com/wazuh/wazuh-kibana-app/pull/3367>`_ `#3373 <https://github.com/wazuh/wazuh-kibana-app/pull/3373>`_ `#3374 <https://github.com/wazuh/wazuh-kibana-app/pull/3374>`_ `#3390 <https://github.com/wazuh/wazuh-kibana-app/pull/3390>`_ `#3410 <https://github.com/wazuh/wazuh-kibana-app/pull/3410>`_ `#3408 <https://github.com/wazuh/wazuh-kibana-app/pull/3408>`_ `#3429 <https://github.com/wazuh/wazuh-kibana-app/pull/3429>`_ `#3427 <https://github.com/wazuh/wazuh-kibana-app/pull/3427>`_ `#3417 <https://github.com/wazuh/wazuh-kibana-app/pull/3417>`_ `#3462 <https://github.com/wazuh/wazuh-kibana-app/pull/3462>`_ `#3451 <https://github.com/wazuh/wazuh-kibana-app/pull/3451>`_ `#3442 <https://github.com/wazuh/wazuh-kibana-app/pull/3442>`_ `#3480 <https://github.com/wazuh/wazuh-kibana-app/pull/3480>`_ `#3472 <https://github.com/wazuh/wazuh-kibana-app/pull/3472>`_ `#3434 <https://github.com/wazuh/wazuh-kibana-app/pull/3434>`_ `#3392 <https://github.com/wazuh/wazuh-kibana-app/pull/3392>`_ `#3404 <https://github.com/wazuh/wazuh-kibana-app/pull/3404>`_ `#3432 <https://github.com/wazuh/wazuh-kibana-app/pull/3432>`_ `#3415 <https://github.com/wazuh/wazuh-kibana-app/pull/3415>`_ `#3469 <https://github.com/wazuh/wazuh-kibana-app/pull/3469>`_ `#3448 <https://github.com/wazuh/wazuh-kibana-app/pull/3448>`_ `#3465 <https://github.com/wazuh/wazuh-kibana-app/pull/3465>`_ `#3464 <https://github.com/wazuh/wazuh-kibana-app/pull/3464>`_ `#3478 <https://github.com/wazuh/wazuh-kibana-app/pull/3478>`_ Improved the frontend handle errors strategy: UI, Toasts, console log and log in file:
    - The first attempt to Logger Service (orchestrator) is added, this service is responsible for application logs and for the error orchestration (business rules for errors). Not all errors are sent to the backend, only logs categorized with a certain level or higher.
    - Now the implementation of the ErrorBoundary component and HOC are included to catch components with errors on rendering. In addition, ``loglevel`` dependency to log errors, warnings, etc is also added.
+   - The ErrorBoundary HOC to react components was added in his version. It implements error handling HOC in each main react-component (pre-migration).
+   - Now try catch strategy is Implemented on WzLog by executing Wazuh new error handling strategy on the front-end side. This development was made in order to improve better error handling in the front-end.
 
-
-The errors displayed in the UI are clear to the user and not prevent the use of the app.
 - `#3368 <https://github.com/wazuh/wazuh-kibana-app/pull/3368>`_ - `#3344 <https://github.com/wazuh/wazuh-kibana-app/pull/3344>`_ Added Intelligence tab to Mitre Att&ck module.
 - `#3518 <https://github.com/wazuh/wazuh-kibana-app/pull/3518>`_ Added base Module Panel view with Office365 setup.
 
