@@ -39,7 +39,7 @@ Manager
 - `#8178 <https://github.com/wazuh/wazuh/pull/8178>`_ Added support for Arch Linux OS in Vulnerability Detector. Thanks to Aviel Warschawski (@avielw).
 - `#8749 <https://github.com/wazuh/wazuh/pull/8749>`_ Added a log message in the ``cluster.log`` file to notify that wazuh-clusterd has been stopped.
 - `#9077 <https://github.com/wazuh/wazuh/pull/9077>`_ Added message with the PID of ``wazuh-clusterd`` process when launched in foreground mode.
-- `#10492 <https://github.com/wazuh/wazuh/pull/10492>`_ Added time calculation when extra information is requested to the `cluster_control` binary.
+- `#10492 <https://github.com/wazuh/wazuh/pull/10492>`_ Added time calculation when extra information is requested to the ``cluster_control`` binary.
 - `#9209 <https://github.com/wazuh/wazuh/pull/9209>`_ Added a context variable to indicate origin module in socket communication messages.
 - `#9733 <https://github.com/wazuh/wazuh/pull/9733>`_ Added unit tests for framework/core files to increase coverage.
 - `#9204 <https://github.com/wazuh/wazuh/pull/9204>`_ Added a verbose mode in the wazuh-logtest tool.
@@ -107,7 +107,8 @@ Agent
 - `#10168 <https://github.com/wazuh/wazuh/pull/10168>`_ Added a new field ``DisplayVersion`` to Syscollector to help Vulnerability Detector match vulnerabilities for Windows.
 - `#10148 <https://github.com/wazuh/wazuh/pull/10148>`_ Added support for macOS agent upgrade via WPK.
 - `#8632 <https://github.com/wazuh/wazuh/pull/8632>`_ Added Logcollector support for macOS logs (Unified Logging System).
-- `#8381 <https://github.com/wazuh/wazuh/pull/8381>`_ The agent now reports the version of the running AIX operating system to the manager. - `#8604 <https://github.com/wazuh/wazuh/pull/8604>`_ Improved the reliability of the user ID parsing in FIM who-data mode on Linux.
+- `#8381 <https://github.com/wazuh/wazuh/pull/8381>`_ The agent now reports the version of the running AIX operating system to the manager. 
+- `#8604 <https://github.com/wazuh/wazuh/pull/8604>`_ Improved the reliability of the user ID parsing in FIM who-data mode on Linux.
 - `#10230 <https://github.com/wazuh/wazuh/pull/10230>`_ Reword AWS ``service_endpoint`` parameter description to suit FIPS endpoints too.
 - `#5047 <https://github.com/wazuh/wazuh/pull/5047>`_ Extended support of Logcollector for MySQL 4.7 logs. Thanks to @YoyaYOSHIDA.
 - `#9887 <https://github.com/wazuh/wazuh/pull/9887>`_ Agents running on FreeBSD and OpenBSD now report their IP address.
@@ -251,20 +252,20 @@ Reference                                                         Description
 `#8902 <https://github.com/wazuh/wazuh/pull/8902>`_               Prevented the manager from leaving dangling agent database files.
 `#8254 <https://github.com/wazuh/wazuh/pull/8254>`_               Corrected remediation message for error code 6004.
 `#8157 <https://github.com/wazuh/wazuh/pull/8157>`_               Fixed a bug when deleting non-existing users or roles in the security SDK.
-`#8418 <https://github.com/wazuh/wazuh/pull/8418>`_               Fixed a bug with `agent.conf` file permissions when creating an agent group.
+`#8418 <https://github.com/wazuh/wazuh/pull/8418>`_               Fixed a bug with ``agent.conf`` file permissions when creating an agent group.
 `#8422 <https://github.com/wazuh/wazuh/pull/8422>`_               Fixed wrong exceptions with wdb pagination mechanism.
-`#8747 <https://github.com/wazuh/wazuh/pull/8747>`_               Fixed error when loading some rules with the `\` character.
-`#9216 <https://github.com/wazuh/wazuh/pull/9216>`_               Changed `WazuhDBQuery` class to properly close socket connections and prevent file descriptor leaks.
-`#10320 <https://github.com/wazuh/wazuh/pull/10320>`_             Fixed error in the api configuration when using the `agent_upgrade` script.
-`#10341 <https://github.com/wazuh/wazuh/pull/10341>`_             Handle `JSONDecodeError` in Distributed API class methods.
+`#8747 <https://github.com/wazuh/wazuh/pull/8747>`_               Fixed error when loading some rules with the ``\`` character.
+`#9216 <https://github.com/wazuh/wazuh/pull/9216>`_               Changed ``WazuhDBQuery`` class to properly close socket connections and prevent file descriptor leaks.
+`#10320 <https://github.com/wazuh/wazuh/pull/10320>`_             Fixed error in the api configuration when using the ``agent_upgrade`` script.
+`#10341 <https://github.com/wazuh/wazuh/pull/10341>`_             Handle ``JSONDecodeError`` in Distributed API class methods.
 `#9738 <https://github.com/wazuh/wazuh/pull/9738>`_               Fixed an issue with duplicated logs in Azure-logs module and applied several improvements to it.
 `#10680 <https://github.com/wazuh/wazuh/pull/10680>`_             Fixed the query parameter validation to allow usage of special chars in Azure module.
-`#8394 <https://github.com/wazuh/wazuh/pull/8394>`_               Fix a bug running `wazuh-clusterd` process when it was already running.
+`#8394 <https://github.com/wazuh/wazuh/pull/8394>`_               Fix a bug running ``wazuh-clusterd`` process when it was already running.
 `#8732 <https://github.com/wazuh/wazuh/pull/8732>`_               Allow cluster to send and receive messages with size higher than request_chunk.
-`#9077 <https://github.com/wazuh/wazuh/pull/9077>`_               Fixed a bug that caused `wazuh-clusterd` process to not delete its pidfile when running in foreground mode and it is stopped.
+`#9077 <https://github.com/wazuh/wazuh/pull/9077>`_               Fixed a bug that caused ``wazuh-clusterd`` process to not delete its pidfile when running in foreground mode and it is stopped.
 `#10376 <https://github.com/wazuh/wazuh/pull/10376>`_             Fixed race condition due to lack of atomicity in the cluster synchronization mechanism.
-`#10492 <https://github.com/wazuh/wazuh/pull/10492>`_             Fixed bug when displaying the dates of the cluster tasks that have not finished yet. Now `n/a` is displayed in these cases.
-`#9196 <https://github.com/wazuh/wazuh/pull/9196>`_               Fixed missing field `value_type` in FIM alerts.
+`#10492 <https://github.com/wazuh/wazuh/pull/10492>`_             Fixed bug when displaying the dates of the cluster tasks that have not finished yet. Now ``n/a`` is displayed in these cases.
+`#9196 <https://github.com/wazuh/wazuh/pull/9196>`_               Fixed missing field ``value_type`` in FIM alerts.
 `#9292 <https://github.com/wazuh/wazuh/pull/9292>`_               Fixed a typo in the SSH Integrity Check script for Agentless.
 `#10421 <https://github.com/wazuh/wazuh/pull/10421>`_             Fixed multiple race conditions in Remoted.
 `#10390 <https://github.com/wazuh/wazuh/pull/10390>`_             The manager's agent database has been fixed to prevent dangling entries from removed agents.
@@ -407,4 +408,4 @@ More details about these changes are provided in the changelog of each component
 
 - `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v4.3.0-rc1/CHANGELOG.md>`_
 - `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/4.3-7.10---RC1/CHANGELOG.md>`_
-- `wazuh/wazuh-splunk`_
+- `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v4.2.5-8.1.4/CHANGELOG.md>`_
