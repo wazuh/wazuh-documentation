@@ -171,6 +171,15 @@ Ruleset
 - `#10558 <https://github.com/wazuh/wazuh/pull/10558>`_ Updated macOS Big Sur SCA up to 1.2.0 version.
 
 
+Others
+^^^^^^
+
+- `#10247 <https://github.com/wazuh/wazuh/pull/10247>`_ Upgraded external SQLite library dependency version to 3.36.
+- `#10247 <https://github.com/wazuh/wazuh/pull/10247>`_ Upgraded external BerkeleyDB library dependency version to 18.1.40.
+- `#10247 <https://github.com/wazuh/wazuh/pull/10247>`_ Upgraded external OpenSSL library dependency version to 1.1.1l.
+- `#10927 <https://github.com/wazuh/wazuh/pull/10927>`_ Upgraded external Google Test library dependency version to 1.11.
+
+
 Resolved issues
 ---------------
 
@@ -224,7 +233,7 @@ Reference                                                         Description
 `#8362 <https://github.com/wazuh/wazuh/pull/8362>`_               Fixed an error where the IP address was being returned along with the port for Amazon NLB service.
 `#8372 <https://github.com/wazuh/wazuh/pull/8372>`_               Fixed AWS module to properly handle the exception raised when processing a folder without logs.
 `#8433 <https://github.com/wazuh/wazuh/pull/8433>`_               Fixed a bug with AWS module when pagination is needed in the bucket.
-`#8672 <https://github.com/wazuh/wazuh/pull/8672>`_               Fixed an error with the ipGeoLocation field in AWS Macie logs. (#8672)
+`#8672 <https://github.com/wazuh/wazuh/pull/8672>`_               Fixed an error with the ipGeoLocation field in AWS Macie logs.
 `#10333 <https://github.com/wazuh/wazuh/pull/10333>`_               Changed an incorrect debug message in the GCloud integration module.
 `#7848 <https://github.com/wazuh/wazuh/pull/7848>`_               Data race conditions have been fixed in FIM.
 `#10011 <https://github.com/wazuh/wazuh/pull/10011>`_             Fixed wrong command line display in the Syscollector process report on Windows.
@@ -285,6 +294,17 @@ Reference                                                         Description
 `#10406 <https://github.com/wazuh/wazuh/pull/10406>`_             Fixed typos and not working tests for Centos 7 SCA. Thanks to RonnyMaas (@RonnyMaas).
 `#10707 <https://github.com/wazuh/wazuh/pull/10707>`_             Fixed YML syntax problems in Solaris 11.4 SCA.
 `#10375 <https://github.com/wazuh/wazuh/pull/10375>`_             Fixed a typo in the Xbox Live Networking Service check for SCA.
+==============================================================    =============
+
+
+Others
+^^^^^^
+
+==============================================================    =============
+Reference                                                         Description
+==============================================================    =============
+`#9168 <https://github.com/wazuh/wazuh/pull/9168>`_               Fixed error detection in the CURL helper library.
+`#10899 <https://github.com/wazuh/wazuh/pull/10899>`_             Fixed external BerkeleyDB library support for GCC 11.
 ==============================================================    =============
 
 
