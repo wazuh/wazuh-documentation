@@ -20,7 +20,7 @@ Configure your environment as follows to test the POC.
 
     .. code-block:: console
 
-        # yum install -y https://pkg.osquery.io/rpm/osquery-4.5.1-1.linux.x86_64.rpm
+        yum install -y https://pkg.osquery.io/rpm/osquery-5.0.1-1.linux.x86_64.rpm
 
 #. Add this content block to the Osquery configuration file ``/etc/osquery/osquery.conf``.
 
@@ -51,14 +51,20 @@ Configure your environment as follows to test the POC.
         },
 
         "packs": {
-            "osquery-monitoring": "/usr/share/osquery/packs/osquery-monitoring.conf",
-            "incident-response": "/usr/share/osquery/packs/incident-response.conf",
-            "it-compliance": "/usr/share/osquery/packs/it-compliance.conf",
-            "vuln-management": "/usr/share/osquery/packs/vuln-management.conf",
-            "hardware-monitoring": "/usr/share/osquery/packs/hardware-monitoring.conf",
-            "ossec-rootkit": "/usr/share/osquery/packs/ossec-rootkit.conf"
+            "osquery-monitoring": "/opt/osquery/share/osquery/packs/osquery-monitoring.conf",
+            "incident-response": "/opt/osquery/share/osquery/packs/incident-response.conf",
+            "it-compliance": "/opt/osquery/share/osquery/packs/it-compliance.conf",
+            "vuln-management": "/opt/osquery/share/osquery/packs/vuln-management.conf",
+            "hardware-monitoring": "/opt/osquery/share/osquery/packs/hardware-monitoring.conf",
+            "ossec-rootkit": "/opt/osquery/share/osquery/packs/ossec-rootkit.conf"
             }
         }
+
+#. Start Osqueryd service. 
+
+    .. code-block:: console
+
+        service osqueryd start
 
 #. Edit ``/var/ossec/etc/ossec.conf`` on the monitored CentOS 8 endpoint and enable the Osquery wodle. 
   
@@ -74,12 +80,6 @@ Configure your environment as follows to test the POC.
                 <add_labels>no</add_labels>
             </wodle>
         </ossec_config>
-
-#. Start Osqueryd service. 
-
-    .. code-block:: console
-
-        # systemctl start osqueryd
 
 
 #. Restart the Wazuh agent to apply changes.
