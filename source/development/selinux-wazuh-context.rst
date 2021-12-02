@@ -10,24 +10,32 @@ SELinux Wazuh context
 - `Create custom SELinux module`_
 - `Troubleshooting`_
 
+
 Introduction
 ------------
+
 Security-Enhanced Linux (SELinux) defines access controls for the applications, processes, and files on a system.
-SELinux is based on "security contexts", assigning one to every element under supervision and a policy that defines what access and operations are allowed.
-The default SELinux behavior is context inheritance, so if there is no SELinux policy specifying otherwise, every process created will inherit the context of its parent. That said, as Wazuh does not have a defined context it inherits the context from systemd which is in charge of starting the service, this context is of type ``unconfined_t``, which means that it is not under any security restriction, so only the standard Linux DAC restrictions will be applied to it.
+
+SELinux is based on "security contexts", assigning one to every element under supervision and a policy that defines what access and operations are allowed. The default SELinux behavior is context inheritance, so if there is no SELinux policy specifying otherwise, every process created will inherit the context of its parent.
+
+That said, as Wazuh does not have a defined context, it inherits the context from ``systemd`` which is in charge of starting the service. This context is of type ``unconfined_t``, which means that it is not under any security restriction, so only the standard Linux DAC restrictions will be applied to it.
+
 
 Create wazuh context
 --------------------
-In case of having the need to run Wazuh as a confined process, we propose to create a new SELinux policy module which allows the transition to a Wazuh own context which we will call ``wazuh_t``, we will also create a set of rules assigning the necessary permissions to run.
+
+In case of having the need to run Wazuh as a confined process, we propose to create a new SELinux policy module which allows the transition to a Wazuh own context which we will call ``wazuh_t``. Besides, we will create a set of rules assigning the necessary permissions to run.
 
 .. note::
 
-    For the following example we used the Wazuh OVA image based on centOS 7 and the default Wazuh configuration. Also, in case of an upgrade, rules will probably have to be added according to Wazuh's new functionalities.
+    For the following example we used the Wazuh OVA image based on centOS 7 and the default Wazuh configuration. Also, in case of an upgrade, rules will probably have to be updated according to Wazuh's new functionalities.
+
 
 .. _SELinux-module-example:
 
 SELinux module example to confine Wazuh
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 To create a new module that allows Wazuh to transition to the new context we need the following files:
 
 .. tabs::
@@ -146,29 +154,29 @@ To create a new module that allows Wazuh to transition to the new context we nee
                     type wazuh_tmp_t;
                     type wazuh_var_t;
 
-                    # ports label
+                    # Ports label
                     type wazuh_port_t;
                     corenet_port(wazuh_port_t)
 
-                    # domain_type macro specifies the type wazuh_t to be a domain.
+                    # domain_type macro specifies the type wazuh_t to be a domain
                     domain_type(wazuh_t)
 
-                    # domain_entry_file specifies an entry point to the wazuh_t domain for the executable file of type wazuh_exec_t.
+                    # domain_entry_file specifies an entry point to the wazuh_t domain for the executable file of type wazuh_exec_t
                     domain_entry_file(wazuh_t, wazuh_exec_t)
 
                     # logging_log_file macro makes wazuh_log_t become the type of log file with the necessary groups and rules
                     logging_log_file(wazuh_log_t)
 
-                    # allow domain wazuh_t to manipulate log files
+                    # Allow domain wazuh_t to manipulate log files
                     allow wazuh_t wazuh_log_t:file append_file_perms;
 
-                    # files_tmp_file takes the type of wazuh_tmp_t to the necessary groups so that it becomes the type of temp file
+                    # files_tmp_file takes the type of wazuh_tmp_t to the necessary groups so that it becomes the type of tmp file
                     files_tmp_file(wazuh_tmp_t)
 
-                    # allow the wazuh_t domain write privileges into the tmp_t labeled directory, but with an automatic file transition towards wazuh_tmp_t for every file written
+                    # Allow the wazuh_t domain write privileges into the tmp_t labeled directory, but with an automatic file transition towards wazuh_tmp_t for every file written
                     files_tmp_filetrans(wazuh_t,wazuh_tmp_t,file)
 
-                    # allow domain wazuh_t to manipulate tmp files
+                    # Allow domain wazuh_t to manipulate tmp files
                     allow wazuh_t wazuh_tmp_t:file manage_file_perms;
 
                     #============== Allow transition
@@ -207,7 +215,7 @@ To create a new module that allows Wazuh to transition to the new context we nee
                     allow wazuh_var_t fs_t:filesystem { associate};
                     allow wazuh_etc_t fs_t:filesystem { associate};
 
-                    #============== Permissions to read /proc
+                    # Permissions to read /proc
                     allow wazuh_t proc_t:dir read;
                     domain_read_all_domains_state(wazuh_t)
                     domain_getpgid_all_domains( wazuh_t )
@@ -234,7 +242,7 @@ To create a new module that allows Wazuh to transition to the new context we nee
                     allow wazuh_t wazuh_t:udp_socket {accept name_bind create read write connect recvfrom sendto send_msg setopt ioctl setattr getattr};
                     allow wazuh_t wazuh_t:unix_dgram_socket { read write create ioctl sendto bind getopt connect};
 
-                    #============== Permissions for wazuh-syscheckd to monitor files and directories and for wazuh-logcollector to read logs files.
+                    #============== Permissions for wazuh-syscheckd to monitor files and directories and for wazuh-logcollector to read logs files
                     files_read_all_files(wazuh_t)
                     files_read_all_chr_files(wazuh_t)
                     files_read_all_symlinks(wazuh_t)
@@ -252,7 +260,8 @@ To create a new module that allows Wazuh to transition to the new context we nee
                     allow wazuh_t sysfs_t:lnk_file read;
                     allow wazuh_t proc_net_t:file { getattr open read };
                     allow wazuh_t self:netlink_route_socket {create getattr open read bind nlmsg_read write};
-                    #============== Permissions for wazuh-modulesd to run sca scans
+
+                    # Permissions for wazuh-modulesd to run SCA scans
                     allow wazuh_t sshd_exec_t:file { execute execute_no_trans };
                     allow wazuh_t useradd_exec_t:file { execute execute_no_trans};
                     allow wazuh_t rpm_exec_t:file { execute execute_no_trans ioctl};
@@ -344,7 +353,7 @@ To create a new module that allows Wazuh to transition to the new context we nee
                     /var/ossec/wodles(/.*)?                     gen_context(system_u:object_r:wazuh_exec_t,s0)
 
             .. collapse:: wazuhT.te
-                
+
                 .. code-block:: console
 
                     policy_module(wazuhT,1.0)
@@ -431,29 +440,29 @@ To create a new module that allows Wazuh to transition to the new context we nee
                     type wazuh_tmp_t;
                     type wazuh_var_t;
 
-                    # ports label
+                    # Ports label
                     type wazuh_port_t;
                     corenet_port(wazuh_port_t)
 
-                    # domain_type macro specifies the type wazuh_t to be a domain.
+                    # domain_type macro specifies the type wazuh_t to be a domain
                     domain_type(wazuh_t)
 
-                    # domain_entry_file specifies an entry point to the wazuh_t domain for the executable file of type wazuh_exec_t.
+                    # domain_entry_file specifies an entry point to the wazuh_t domain for the executable file of type wazuh_exec_t
                     domain_entry_file(wazuh_t, wazuh_exec_t)
 
                     # logging_log_file macro makes wazuh_log_t become the type of log file with the necessary groups and rules
                     logging_log_file(wazuh_log_t)
 
-                    # allow domain wazuh_t to manipulate log files
+                    # Allow domain wazuh_t to manipulate log files
                     allow wazuh_t wazuh_log_t:file append_file_perms;
 
-                    # files_tmp_file takes the type of wazuh_tmp_t to the necessary groups so that it becomes the type of temp file
+                    # files_tmp_file takes the type of wazuh_tmp_t to the necessary groups so that it becomes the type of tmp file
                     files_tmp_file(wazuh_tmp_t)
 
-                    # allow the wazuh_t domain write privileges into the tmp_t labeled directory, but with an automatic file transition towards wazuh_tmp_t for every file written
+                    # Allow the wazuh_t domain write privileges into the tmp_t labeled directory, but with an automatic file transition towards wazuh_tmp_t for every file written
                     files_tmp_filetrans(wazuh_t,wazuh_tmp_t,file)
 
-                    # allow domain wazuh_t to manipulate tmp files
+                    # Allow domain wazuh_t to manipulate tmp files
                     allow wazuh_t wazuh_tmp_t:file manage_file_perms;
 
                     #============== Allow transition
@@ -494,7 +503,7 @@ To create a new module that allows Wazuh to transition to the new context we nee
                     allow wazuh_etc_t fs_t:filesystem { associate};
                     allow wazuh_t self:process { getattr getpgid getsession setrlimit setsched };
 
-                    #============== Permissions to read /proc
+                    # Permissions to read /proc
                     allow wazuh_t proc_t:dir read;
                     domain_read_all_domains_state(wazuh_t)
                     domain_getpgid_all_domains( wazuh_t )
@@ -515,7 +524,7 @@ To create a new module that allows Wazuh to transition to the new context we nee
                     allow wazuh_t node_t:tcp_socket node_bind;
                     allow wazuh_t node_t:udp_socket node_bind;
 
-                    #============== Permissions for wazuh-syscheckd to monitor files and directories and for wazuh-logcollector to read logs files.
+                    #============== Permissions for wazuh-syscheckd to monitor files and directories and for wazuh-logcollector to read logs files
                     files_read_all_files(wazuh_t)
                     files_read_all_chr_files(wazuh_t)
                     files_read_all_symlinks(wazuh_t)
@@ -533,7 +542,8 @@ To create a new module that allows Wazuh to transition to the new context we nee
                     allow wazuh_t sysfs_t:lnk_file read;
                     allow wazuh_t proc_net_t:file { getattr open read };
                     allow wazuh_t self:netlink_route_socket {create getattr open read bind nlmsg_read write};
-                    #============== Permissions for wazuh-modulesd to run sca scans
+
+                    # Permissions for wazuh-modulesd to run SCA scans
                     allow wazuh_t sshd_exec_t:file { execute execute_no_trans };
                     allow wazuh_t useradd_exec_t:file { execute execute_no_trans};
                     allow wazuh_t rpm_exec_t:file { execute execute_no_trans ioctl};
@@ -603,11 +613,12 @@ To create a new module that allows Wazuh to transition to the new context we nee
                     allow unconfined_t wazuh_etc_t:dir {getattr open read search relabelto};
                     allow unconfined_t wazuh_etc_t:file {getattr open read write relabelto};
 
-Next we will present the content of the ``wazuhT.fc`` and ``wazuhT.te`` files, we will take as reference the files corresponding to **Wazuh Manager**.
+Next, we will present the content of the ``wazuhT.fc`` and ``wazuhT.te`` files. We will take as reference the files corresponding to **Wazuh Manager**.
 
-**wazuh.fc file**
 
-    In this file the security contexts for each folder and file within the Wazuh folder are declared. For example, we assign the context ``wazuh_exec_t`` to executable files, including ``/ossec/active-response/bin/*`` and ``/ossec/bin/*``, we also define the context ``wazuh_log_t`` to log files; in this way, we declare a Wazuh context for each file in the ``/var/ossec`` directory.
+**wazuh.fc**
+
+    In this file, the security contexts for each folder and file within the Wazuh folder are declared. For example, we assign the context ``wazuh_exec_t`` to executable files, including ``/ossec/active-response/bin/*`` and ``/ossec/bin/*``. In this way, we declare a Wazuh context for each file in the ``/var/ossec`` directory:
 
     .. code-block:: console
 
@@ -635,11 +646,12 @@ Next we will present the content of the ``wazuhT.fc`` and ``wazuhT.te`` files, w
 
     Note that in the definition of the contexts for each Wazuh folder the default installation folder (``/var/ossec/``) was used.
 
-**wazuh.te file**
+
+**wazuh.te**
 
     The ``wazuhT.te`` file is the main file of the module, where it is defined:
 
-- The name and version of the module. The module and the ``.te`` and ``.fc`` files must have the same name.
+- The name and version of the module. The module, the ``.te`` file, and the ``.fc`` file must have the same name.
 
     .. code-block:: console
 
@@ -674,7 +686,7 @@ Next we will present the content of the ``wazuhT.fc`` and ``wazuhT.te`` files, w
         # domain_entry_file specifies an entry point to the wazuh_t domain for the executable file of type wazuh_exec_t.
         domain_entry_file(wazuh_t, wazuh_exec_t)
 
-- Creation of the necessary rules to allow the transition from an ``unconfined`` context to the ``wazuh_t`` context.
+- Creation of the necessary rules to allow the transition from an ``unconfined_t`` context to the ``wazuh_t`` context.
 
     .. code-block:: console
 
@@ -699,7 +711,7 @@ Next we will present the content of the ``wazuhT.fc`` and ``wazuhT.te`` files, w
     +---------------------------------------------------+-----------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------+
     | Module                                            | Rules                                                                             | Description                                                                                                       |
     +===================================================+===================================================================================+===================================================================================================================+
-    | wazuh-control                                     | allow wazuh_t shell_exec_t:file { execute execute_no_trans };                     | These rules allow **wazuh-control** and startup scripts to perform the necessary tasks to start Wazuh.            |
+    | **wazuh-control**                                 | allow wazuh_t shell_exec_t:file { execute execute_no_trans };                     | These rules allow **wazuh-control** and startup scripts to perform the necessary tasks to start Wazuh.            |
     |                                                   |                                                                                   |                                                                                                                   |
     |                                                   | allow wazuh_t bin_t:file execute_no_trans;                                        |                                                                                                                   |
     |                                                   |                                                                                   |                                                                                                                   |
@@ -753,7 +765,7 @@ Next we will present the content of the ``wazuhT.fc`` and ``wazuhT.te`` files, w
     |                                                   |                                                                                   |                                                                                                                   |
     |                                                   | domain_signull_all_domains( wazuh_t )                                             |                                                                                                                   |
     +---------------------------------------------------+-----------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------+
-    | Framework & API                                   | allow wazuh_t self:tcp_socket { bind connect create getopt listen setopt };       | These rules allow the **API** to listen for requests.                                                             |
+    | **Framework & API**                               | allow wazuh_t self:tcp_socket { bind connect create getopt listen setopt };       | These rules allow the **API** to listen for requests.                                                             |
     |                                                   |                                                                                   |                                                                                                                   |
     |                                                   | allow wazuh_t self:udp_socket { bind connect create getattr ioctl setopt };       |                                                                                                                   |
     |                                                   |                                                                                   |                                                                                                                   |
@@ -761,12 +773,12 @@ Next we will present the content of the ``wazuhT.fc`` and ``wazuhT.te`` files, w
     |                                                   |                                                                                   |                                                                                                                   |
     |                                                   | allow wazuh_t node_t:udp_socket node_bind;                                        |                                                                                                                   |
     +---------------------------------------------------+-----------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------+
-    | wazuh-analysisd                                   | allow wazuh_t self:process { getattr getpgid getsession setrlimit setsched };     | These rules allow **wazuh-analysisd**, for example, to set the necessary permissions, read rules files            |
+    | **wazuh-analysisd**                               | allow wazuh_t self:process { getattr getpgid getsession setrlimit setsched };     | These rules allow **wazuh-analysisd**, for example, to set the necessary permissions, read rules files            |
     |                                                   |                                                                                   | and cdb lists.                                                                                                    |
     |                                                   | allow wazuh_t wazuh_etc_t:file { create getattr open read append rename           |                                                                                                                   |
     |                                                   | setattr link unlink write ioctl lock map};                                        |                                                                                                                   |
     +---------------------------------------------------+-----------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------+
-    | wazuh-remoted                                     | allow wazuh_t wazuh_var_t:sock_file { read write getattr create setattr unlink};  | These rules allow **wazuh-remoted** to use ``tcp/udp`` sockets to communicate with agents.                        |
+    | **wazuh-remoted**                                 | allow wazuh_t wazuh_var_t:sock_file { read write getattr create setattr unlink};  | These rules allow **wazuh-remoted** to use ``tcp/udp`` sockets to communicate with agents.                        |
     |                                                   |                                                                                   |                                                                                                                   |
     |                                                   | allow wazuh_t wazuh_t:unix_stream_socket {connectto ioctl};                       |                                                                                                                   |
     |                                                   |                                                                                   |                                                                                                                   |
@@ -785,7 +797,7 @@ Next we will present the content of the ``wazuhT.fc`` and ``wazuhT.te`` files, w
     |                                                   | allow wazuh_t wazuh_t:unix_dgram_socket { read write create ioctl sendto bind     |                                                                                                                   |
     |                                                   | getopt connect};                                                                  |                                                                                                                   |
     +---------------------------------------------------+-----------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------+
-    | wazuh-syscheckd & wazuh-logcollector              | files_read_all_files(wazuh_t)                                                     | These rules allow **wazuh-syscheckd** to monitor files and folders inside the ``/etc`` ``/usr`` or ``/bin``       |
+    | **wazuh-syscheckd** & **wazuh-logcollector**      | files_read_all_files(wazuh_t)                                                     | These rules allow **wazuh-syscheckd** to monitor files and folders inside the ``/etc``, ``/usr`` or ``/bin``      |
     |                                                   |                                                                                   | directories present in Wazuh's default configuration; they also allow **wazuh-logcollector** to read log files.   |
     |                                                   | files_read_all_chr_files(wazuh_t)                                                 |                                                                                                                   |
     |                                                   |                                                                                   |                                                                                                                   |
@@ -801,11 +813,11 @@ Next we will present the content of the ``wazuhT.fc`` and ``wazuhT.te`` files, w
     |                                                   |                                                                                   |                                                                                                                   |
     |                                                   | allow wazuh_t devlog_t:sock_file { read write getattr create setattr unlink};     |                                                                                                                   |
     +---------------------------------------------------+-----------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------+
-    | rootcheck                                         | corenet_udp_bind_all_ports(wazuh_t)                                               | These rules allow **rootcheck** to check which ports are open.                                                    |
+    | **rootcheck**                                     | corenet_udp_bind_all_ports(wazuh_t)                                               | These rules allow **rootcheck** to check which ports are open.                                                    |
     |                                                   |                                                                                   |                                                                                                                   |
     |                                                   | corenet_tcp_bind_all_ports(wazuh_t)                                               |                                                                                                                   |
     +---------------------------------------------------+-----------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------+
-    | wazuh-modulesd                                    | allow wazuh_t sysfs_t:lnk_file read;                                              | These are some of the rules that allow **wazuh-modulesd** to, for example, run a sca scan.                        |
+    | **wazuh-modulesd**                                | allow wazuh_t sysfs_t:lnk_file read;                                              | These are some of the rules that allow **wazuh-modulesd** to, for example, run a SCA scan.                        |
     |                                                   |                                                                                   |                                                                                                                   |
     |                                                   | allow wazuh_t proc_net_t:file { getattr open read };                              |                                                                                                                   |
     |                                                   |                                                                                   |                                                                                                                   |
@@ -831,8 +843,10 @@ Next we will present the content of the ``wazuhT.fc`` and ``wazuhT.te`` files, w
     |                                                   | allow wazuh_t mount_exec_t:file { execute execute_no_trans getattr};              |                                                                                                                   |
     |                                                   |                                                                                   |                                                                                                                   |
     |                                                   | allow wazuh_t rpm_log_t:file { getattr open read append};                         |                                                                                                                   |
+    |                                                   |                                                                                   |                                                                                                                   |
+    |                                                   | ...                                                                               |                                                                                                                   |
     +---------------------------------------------------+-----------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------+
-    | wazuh-execd                                       | allow wazuh_t self:capability { chown dac_override fowner fsetid kill             | These rules were added to allow **wazuh-execd** to run ARs such as ``firewall-drop``, ``host-deny``               |
+    | **wazuh-execd**                                   | allow wazuh_t self:capability { chown dac_override fowner fsetid kill             | These rules were added to allow **wazuh-execd** to run ARs such as ``firewall-drop``, ``host-deny``               |
     |                                                   | net_bind_service net_raw setgid setuid sys_chroot sys_resource sys_ptrace};       | or ``wazuh-slack``.                                                                                               |
     |                                                   |                                                                                   |                                                                                                                   |
     |                                                   | allow wazuh_t etc_t:dir { getattr open read search write add_name remove_name};   |                                                                                                                   |
@@ -860,6 +874,7 @@ Next we will present the content of the ``wazuhT.fc`` and ``wazuhT.te`` files, w
 
 Steps to build and load the new SELinux policy module
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 #. Install required dependencies:
 
     .. code-block:: bash
@@ -872,14 +887,14 @@ Steps to build and load the new SELinux policy module
 
         # systemctl stop wazuh-manager
 
-#. Verify current ``SELinux`` state:
+#. Verify current SELinux state:
 
     .. code-block:: bash
 
         # getenforce
         Permissive
 
-    In case the ``SELinux`` status is ``Enforcing`` we must change it to ``Permissive`` momentarily:
+    In case the SELinux status is ``Enforcing`` we must change it to ``Permissive`` momentarily:
 
         .. code-block:: bash
 
@@ -922,7 +937,7 @@ Steps to build and load the new SELinux policy module
 
         # ls -lZ /var/ossec/bin/
 
-#. Assign the port numbers used by wazuh to the context wazuh_port_t:
+#. Assign the port numbers used by wazuh to the context ``wazuh_port_t``:
 
     .. code-block:: bash
 
@@ -932,7 +947,6 @@ Steps to build and load the new SELinux policy module
     .. note::
 
         In case of manager you must add port 1515 used by **wazuh-authd** and 1516 which is used by **wazuh-clusterd**.
-    
 
 #. Change SELinux to Enforcing:
 
@@ -962,14 +976,15 @@ By running the command ``ps auxZ | grep wazuh`` we can see that Wazuh is running
         system_u:system_r:wazuh_t:s0   wazuh    18429  0.0  0.2  35860  1192 ?        Sl   18:50   0:00 /var/ossec/bin/wazuh-monitord
         system_u:system_r:wazuh_t:s0   root     18442  5.1  1.3 714180  6840 ?        Sl   18:50   0:05 /var/ossec/bin/wazuh-modulesd
 
+
 Create custom SELinux module
 ----------------------------
 
-    In this section we will see how to create a set of rules with the audit2allow tool in any SELinux environment.
+In this section we will see how to create a set of rules with the **audit2allow** tool in any SELinux environment.
 
-    .. note::
+.. note::
 
-        For this example we assume that Wazuh has already been transitioned to a proper context other than ``unconfined_t``, you can see :ref:`SELinux-module-example`.
+    For this example we assume that Wazuh has already been transitioned to a proper context other than ``unconfined_t``, you can see :ref:`SELinux-module-example`.
 
 #. Change SELinux to Permissive, this will allow denial events to be logged but will not block the required action:
 
@@ -989,7 +1004,7 @@ Create custom SELinux module
 
         # systemctl stop wazuh-manager
 
-#. Use the audit2allow tool to create a set of rules:
+#. Use the **audit2allow** tool to create a set of rules:
 
     .. note::
 
@@ -1017,12 +1032,14 @@ Create custom SELinux module
 
         # systemctl start wazuh-manager
 
+
 Troubleshooting
 ---------------
 
 Create missing rules
 ^^^^^^^^^^^^^^^^^^^^
-It is possible that more rules may need to be added, as it depends on what applications are installed in the environment as well as what is being monitored.
+
+It is possible that more rules may need to be added, as it depends on what applications are installed in the environment as well as what is being monitored. To do this, you need to follow these steps:
 
 #. Check which action is being blocked:
 
@@ -1034,9 +1051,9 @@ It is possible that more rules may need to be added, as it depends on what appli
         ...
 
 #. Create the rule to allow the blocked action:
-    
-    **Manually:**
-        - It is possible to create a new rule and add it to the wazuhT.te file:
+
+    Manually:
+        - It is possible to create a new rule and add it to the ``wazuhT.te`` file, for example:
 
             .. code-block:: console
 
@@ -1049,8 +1066,8 @@ It is possible that more rules may need to be added, as it depends on what appli
                 # make -f /usr/share/selinux/devel/Makefile
                 # semodule -i wazuhT.pp
 
-    **Using audit2allow tool:**
-        - It is also possible to create the rules with the ``audit2allow tool``, this tool takes the logged AVCs in the ``/var/log/audit/audit.log`` file and creates the necessary rules. It is possible to filter the logs, for example by date and time:
+    Using **audit2allow** tool:
+        - It is also possible to create the rules with the **audit2allow** tool. This tool takes the logged AVCs in the ``/var/log/audit/audit.log`` file and creates the necessary rules. It is possible to filter the logs, for example by date and time:
 
             .. code-block:: bash
 
@@ -1064,7 +1081,8 @@ It is possible that more rules may need to be added, as it depends on what appli
 
 Delete module and restore context
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-In case you need to restore the file context to the state prior to the installation of the wazuhT module
+
+In case you need to restore the file context to the state prior to the installation of the ``wazuhT`` module, you need to follow these steps:
 
 #. Delete assigned ports:
 
@@ -1079,7 +1097,7 @@ In case you need to restore the file context to the state prior to the installat
 
         # semodule -d wazuhT
 
-#. Execute restorecon:
+#. Execute ``restorecon``:
 
     .. code-block:: bash
 
