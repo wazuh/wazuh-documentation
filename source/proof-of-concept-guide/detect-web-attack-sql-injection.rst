@@ -22,9 +22,9 @@ Configuration
     .. code-block:: XML
 
         <localfile>
-        <log_format>apache</log_format>
-        <location>/var/log/httpd/access_log</location>
-        </localfile>
+              <log_format>apache</log_format>
+              <location>/var/log/httpd/access_log</location>
+            </localfile>
 
 Optionally, you can install Suricata in the CentOS 8 endpoint and configure it to monitor the endpoint's network traffic.
 
@@ -35,7 +35,7 @@ Steps to generate the alerts
 
     .. code-block:: console
 
-        # curl -XGET "http://replace_by_your_web_server_address/?id=SELECT+*+FROM+users";
+        curl -XGET "http://${replace_by_your_web_server_address}/?id=SELECT+*+FROM+users";
 
 Query the alerts
 ----------------
