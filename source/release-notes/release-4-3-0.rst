@@ -26,7 +26,7 @@ Wazuh Kibana plugin
 ^^^^^^^^^^^^^^^^^^^
 
 - `#3424 <https://github.com/wazuh/wazuh-kibana-app/pull/3424>`_ Sample data for Office 365 was added to this new version. Now Wazuh Kibana plugin includes events from Office 365 to the sample data module to cover the cases described in the Office 365 schemas.
-- `#3524 <https://github.com/wazuh/wazuh-kibana-app/pull/3524>`_ Configuration viewer for the new Office365 module was added to this version on Management > Configuration. This module is only configurable for managers.
+- `#3524 <https://github.com/wazuh/wazuh-kibana-app/pull/3524>`_ Configuration viewer for the new Office365 module was added to this version on the Configuration section of the Management menu. This module is only configurable for managers.
 
 .. raw:: html
     
@@ -231,7 +231,7 @@ Wazuh Kibana plugin
 - `#3475 <https://github.com/wazuh/wazuh-kibana-app/pull/3475>`_ Created a separate component to check for sample data.
 - `#3506 <https://github.com/wazuh/wazuh-kibana-app/pull/3506>`_ Added a new hook for getting value suggestions.
 - `#3531 <https://github.com/wazuh/wazuh-kibana-app/pull/3531>`_ Added dinamic simple filters and adding simple GitHub filters fields
-- `#3524 <https://github.com/wazuh/wazuh-kibana-app/pull/3524>`_ Added configuration viewer for Module Office365 on Management > Configuration.
+- `#3524 <https://github.com/wazuh/wazuh-kibana-app/pull/3524>`_ Added configuration viewer for Module Office365 on the Configuration section of the Management menu.
 - `#3518 <https://github.com/wazuh/wazuh-kibana-app/pull/3518>`_ Added base Module Panel view with Office365 setup.
 - `#3533 <https://github.com/wazuh/wazuh-kibana-app/pull/3533>`_ Added specifics and custom filters for Office365 search bar.
 - `#3544 <https://github.com/wazuh/wazuh-kibana-app/pull/3544>`_ Adding Pagination and filter to drilldown tables at Office pannel.
