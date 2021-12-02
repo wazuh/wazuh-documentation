@@ -28,7 +28,14 @@ Configuration
             <location>/var/log/httpd/access_log</location>
         </localfile>
 
-Optionally, you can install Suricata on the CentOS 8 endpoint and configure it to monitor the endpoint's network traffic.
+    Optionally, you can install Suricata on the CentOS 8 endpoint and configure it to monitor the endpoint's network traffic.
+
+#. Restart the Wazuh agent to apply the changes. 
+
+    .. code-block:: console
+
+        systemctl restart wazuh-agent
+
 
 Steps to generate the alerts
 ----------------------------
