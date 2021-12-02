@@ -52,8 +52,9 @@ Wazuh Kibana plugin
    - Now try catch strategy is implemented on WzLog by executing Wazuh new error handling strategy on the front-end side. This development was made in order to improve better error handling in the front-end.
 
 - `#3368 <https://github.com/wazuh/wazuh-kibana-app/pull/3368>`_ - `#3344 <https://github.com/wazuh/wazuh-kibana-app/pull/3344>`_ Added Intelligence tab to Mitre Att&ck module:
-   - New Intelligence tab to the Mitre Att&ck module was added with information about the Mitre resources: groups, mitigations, tactics, techniques using the new Wazuh API endpoints. In addition, the Framework tab was adapted to the new Wazuh API endpoints.
-- `#3518 <https://github.com/wazuh/wazuh-kibana-app/pull/3518>`_ Added base Module Panel view with Office365 setup.
+   - A new Intelligence tab to the Mitre Att&ck module was added with information about the Mitre resources: groups, mitigations, tactics, techniques using the new Wazuh API endpoints. In addition, the Framework tab was adapted to the new Wazuh API endpoints.
+- `#3518 <https://github.com/wazuh/wazuh-kibana-app/pull/3518>`_ Added base Module Panel view with Office365 setup:
+   - A base Module Panel view with Office 365 setup was added to this new version. In addition, the Module Panel displays information about the active module. A drill-down table is in charge of doing the drill-down of the parent view, with a search bar and the filtered graphs and table.
 
 
 What's new
