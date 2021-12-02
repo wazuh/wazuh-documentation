@@ -25,10 +25,10 @@ Agent
 Wazuh Kibana plugin
 ^^^^^^^^^^^^^^^^^^^
 
-- `#3424 <https://github.com/wazuh/wazuh-kibana-app/pull/3424>`_ Sample data for Office 365 was added to this new version. Now Wazuh Kibana plugin includes events from Office 365 to the sample data module to cover the cases described in the Office 365 schemas.
+- `#3424 <https://github.com/wazuh/wazuh-kibana-app/pull/3424>`_ Sample data for Office 365 was added to this new version. Now Wazuh Kibana plugin includes events from Office 365 so that the sample data module covers the cases described in the Office 365 schemas.
 - `#3524 <https://github.com/wazuh/wazuh-kibana-app/pull/3524>`_ `#3518 <https://github.com/wazuh/wazuh-kibana-app/pull/3518>`_ Base Module Panel view and a new configuration viewer for the new Office 365 module has been added to Wazuh:
-  - A base Module Panel view with Office 365 setup was added to this new version. In addition, the Module Panel displays information about the active module. A drill-down table is in charge of doing the drill-down of the parent view, with a search bar and the filtered graphs and table.
-  - Configuration viewer for the new Office365 module was added on the Configuration section of the Management menu. This module is only configurable for managers.
+   - A base Module Panel view with Office 365 setup was added to this new version. In addition, the Module Panel displays information about the active module. A drill-down table is in charge of doing the drill-down of the parent view, with a search bar and the filtered graphs and table.
+   - Configuration viewer for the new Office365 module was added to the Configuration section of the Management menu. This module is only configurable for managers.
 
 .. raw:: html
     
