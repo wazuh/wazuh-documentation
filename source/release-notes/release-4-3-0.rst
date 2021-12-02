@@ -14,12 +14,16 @@ This section lists the changes in version 4.3.0. Every update of the Wazuh solut
 Highlights
 ----------
 
-**Core**
+Manager
+^^^^^^^
 
 
+Agent
+^^^^^
 
 
-**Wazuh Kibana plugin**
+Wazuh Kibana plugin
+^^^^^^^^^^^^^^^^^^^
 
 - `#3424 <https://github.com/wazuh/wazuh-kibana-app/pull/3424>`_ Sample data for Office 365 was added to this new version. Now Wazuh Kibana plugin includes events from Office 365 to the sample data module to cover the cases described in the Office 365 schemas.
 - `#3524 <https://github.com/wazuh/wazuh-kibana-app/pull/3524>`_ Configuration viewer for the new Office365 module was added to this version on Management > Configuration. This module is only configurable for managers.
