@@ -26,11 +26,6 @@ This download page contains packages required for the Wazuh installation with th
 - `Filebeat`_
 - `Virtual machine`_
 - `Amazon Machine Image`_
-- `Open Distro for Elasticsearch`_
-
-   - `Elasticsearch`_
-   - `Kibana`_
-   - `Filebeat`_
 - `MSU`_
 
 .. _Wazuh_manager_agent_packages_list:

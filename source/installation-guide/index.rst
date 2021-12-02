@@ -91,17 +91,6 @@ The :ref:`Wazuh agent <wazuh_agent>` is a single and lightweight monitoring soft
 
 .. raw:: html
 
-      </a>
-  </div>
-  <div class="item-agent" id="solaris-logo">
-      <a href="./wazuh-agent/wazuh_agent_package_solaris.html" class="d-flex align-items-center">
-          <p>Solaris</p>
-
-.. image:: ../images/installation/solaris.png
-    :align: center      
-
-.. raw:: html
-
         </a>
     </div>
     <div class="item-agent">
