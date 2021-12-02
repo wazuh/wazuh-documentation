@@ -87,9 +87,9 @@ Manager
 - `#8873 <https://github.com/wazuh/wazuh/pull/8873>`_ The sendsync error log is Improved to provide more details of the used parameters.
 - `#9708 <https://github.com/wazuh/wazuh/pull/9708>`_ The ``walk_dir`` function is changed to be iterative instead of recursive.
 - `#10183 <https://github.com/wazuh/wazuh/pull/10183>`_ The Integrity sync behavior is refactored so that new synchronizations do not start until extra-valid files are processed.
-- `#10101 <https://github.com/wazuh/wazuh/pull/10101>`_ Changed cluster synchronization, now the content of the etc/shared folder is synchronized.
-- `#8351 <https://github.com/wazuh/wazuh/pull/8351>`_ Changed all XML file loads. Now, ``defusedxml`` library is used to avoid possible XML-based attacks.
-- `#8535 <https://github.com/wazuh/wazuh/pull/8535>`_ Changed configuration validation from execq socket to com socket.
+- `#10101 <https://github.com/wazuh/wazuh/pull/10101>`_ Cluster synchronization is changed so that the content of the etc/shared folder is synchronized.
+- `#8351 <https://github.com/wazuh/wazuh/pull/8351>`_ All XML file loads are changed. Now, ``defusedxml`` library is used to avoid possible XML-based attacks.
+- `#8535 <https://github.com/wazuh/wazuh/pull/8535>`_ Configuration validation from execq socket is changed to com socket.
 - `#8392 <https://github.com/wazuh/wazuh/pull/8392>`_ Updated utils unittest to improve ``process_array`` function coverage.
 - `#8885 <https://github.com/wazuh/wazuh/pull/8885>`_ Changed ``request_slice`` calculation to improve efficiency when accessing wazuh-db data.
 - `#9273 <https://github.com/wazuh/wazuh/pull/9273>`_ Improved the retrieval of information from ``wazuh-db`` so it reaches the optimum size in a single iteration.
