@@ -66,8 +66,8 @@ This release includes new features or enhancements.
 Manager
 ^^^^^^^
 
-- `#8178 <https://github.com/wazuh/wazuh/pull/8178>`_ Added support for Arch Linux OS in Vulnerability Detector. Thanks to Aviel Warschawski (@avielw).
-- `#8749 <https://github.com/wazuh/wazuh/pull/8749>`_ Added a log message in the ``cluster.log`` file to notify that wazuh-clusterd has been stopped.
+- `#8178 <https://github.com/wazuh/wazuh/pull/8178>`_ Wazuh adds support for Arch Linux OS in Vulnerability Detector.
+- `#8749 <https://github.com/wazuh/wazuh/pull/8749>`_ A log message in the ``cluster.log`` file is added to notify that wazuh-clusterd has been stopped.
 - `#9077 <https://github.com/wazuh/wazuh/pull/9077>`_ Added message with the PID of ``wazuh-clusterd`` process when launched in foreground mode.
 - `#10492 <https://github.com/wazuh/wazuh/pull/10492>`_ Added time calculation when extra information is requested to the ``cluster_control`` binary.
 - `#9209 <https://github.com/wazuh/wazuh/pull/9209>`_ Added a context variable to indicate origin module in socket communication messages.
