@@ -26,7 +26,9 @@ Wazuh Kibana plugin
 ^^^^^^^^^^^^^^^^^^^
 
 - `#3424 <https://github.com/wazuh/wazuh-kibana-app/pull/3424>`_ Sample data for Office 365 was added to this new version. Now Wazuh Kibana plugin includes events from Office 365 to the sample data module to cover the cases described in the Office 365 schemas.
-- `#3524 <https://github.com/wazuh/wazuh-kibana-app/pull/3524>`_ Configuration viewer for the new Office365 module was added to this version on the Configuration section of the Management menu. This module is only configurable for managers.
+- `#3524 <https://github.com/wazuh/wazuh-kibana-app/pull/3524>`_ `#3518 <https://github.com/wazuh/wazuh-kibana-app/pull/3518>`_ Base Module Panel view and a new configuration viewer for the new Office 365 module has been added to Wazuh:
+  - Configuration viewer for the new Office365 module was added to this version on the Configuration section of the Management menu. This module is only configurable for managers.
+  - A base Module Panel view with Office 365 setup was added to this new version. In addition, the Module Panel displays information about the active module. A drill-down table is in charge of doing the drill-down of the parent view, with a search bar and the filtered graphs and table.
 
 .. raw:: html
     
@@ -53,8 +55,7 @@ Wazuh Kibana plugin
 
 - `#3368 <https://github.com/wazuh/wazuh-kibana-app/pull/3368>`_ - `#3344 <https://github.com/wazuh/wazuh-kibana-app/pull/3344>`_ Added Intelligence tab to Mitre Att&ck module:
    - A new Intelligence tab to the Mitre Att&ck module was added with information about the Mitre resources: groups, mitigations, tactics, techniques using the new Wazuh API endpoints. In addition, the Framework tab was adapted to the new Wazuh API endpoints.
-- `#3518 <https://github.com/wazuh/wazuh-kibana-app/pull/3518>`_ Added base Module Panel view with Office365 setup:
-   - A base Module Panel view with Office 365 setup was added to this new version. In addition, the Module Panel displays information about the active module. A drill-down table is in charge of doing the drill-down of the parent view, with a search bar and the filtered graphs and table.
+
 
 
 What's new
