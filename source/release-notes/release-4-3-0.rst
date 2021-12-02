@@ -45,7 +45,7 @@ Wazuh Kibana plugin
 
     </div>  
 
-- `#3262 <https://github.com/wazuh/wazuh-kibana-app/issues/3262>`_ Improved the frontend handle errors strategy: UI, Toasts, console log and log in file:
+- `#3262 <https://github.com/wazuh/wazuh-kibana-app/issues/3262>`_ `#3327 <https://github.com/wazuh/wazuh-kibana-app/pull/3327>`_ `#3321 <https://github.com/wazuh/wazuh-kibana-app/pull/3321>`_ `#3367 <https://github.com/wazuh/wazuh-kibana-app/pull/3367>`_ `#3373 <https://github.com/wazuh/wazuh-kibana-app/pull/3373>`_ Improved the frontend handle errors strategy: UI, Toasts, console log and log in file:
    - The first attempt to Logger Service (orchestrator) is added, this service is responsible for application logs and for the error orchestration (business rules for errors). Not all errors are sent to the backend, only logs categorized with a certain level or higher.
    - Now the implementation of the ErrorBoundary component and HOC are included to catch components with errors on rendering. In addition, ``loglevel`` dependency to log errors, warnings, etc is also added.
    - The ErrorBoundary HOC to react components was added in his version. It implements error handling HOC in each main react-component (pre-migration).
