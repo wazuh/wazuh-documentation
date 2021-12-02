@@ -16,34 +16,33 @@ Configuration
 
 Configure your environment as follows to test the POC.
 
-#. Install Suricata (tested with version 5.0.7) on the CentOS 8 monitored endpoint. This requires EPEL repository that depends on your operating system version.
+#. Install Suricata (tested with version 6.0.3) on the CentOS 8 monitored endpoint. This requires an EPEL repository that depends on your operating system version.
 
     .. code-block:: XML
 
-        yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
-        yum -y install suricata-5.0.7
+        yum install epel-release yum-plugin-copr
+        yum copr enable @oisf/suricata-6.0
+        yum install suricata
+
 
 #. Download and extract Emerging rules.
 
     .. code-block:: console
 
         cd /tmp/
-        curl -LO https://rules.emergingthreats.net/open/suricata-5.0.7/emerging.rules.tar.gz
+        curl -LO https://rules.emergingthreats.net/open/suricata-6.0.3/emerging.rules.tar.gz
         tar -xvzf emerging.rules.tar.gz && mv rules/*.rules /etc/suricata/rules/
         chown suricata:suricata /etc/suricata/rules/*.rules
         chmod 640 /etc/suricata/rules/*.rules
 
 #. Modify Suricata settings in the ``/etc/suricata/suricata.yaml`` file.
 
-    .. code-block:: XML
+    .. code-block:: console
 
-        EXTERNAL_NET: "any"
+        cd /etc/suricata/
+        mv suricata.yaml suricata.yaml.bak
+        curl -OL http://www.branchnetconsulting.com/wazuh/suricata.yaml
 
-    .. code-block:: XML
-
-        default-rule-path: /etc/suricata/rules
-        rule-files:
-        - "*.rules"
 
 #. Start Suricata.
 
@@ -53,14 +52,15 @@ Configure your environment as follows to test the POC.
         systemctl daemon-reload
         systemctl start suricata
 
-#. Configure the Wazuh agent to read Suricata logs file. The following settings need to be added to the ``/var/ossec/etc/ossec.conf`` file of the monitored CentOS 8 endpoint.
+#. Configure the Wazuh agent to read the Suricata logs file. The following settings need to be added to the ``/var/ossec/etc/ossec.conf`` file of the monitored CentOS 8 endpoint.
 
     .. code-block:: XML
 
-        <localfile>
+       <localfile>
             <log_format>syslog</log_format>
             <location>/var/log/suricata/eve.json</location>
         </localfile>
+
 
 #. Restart the Wazuh agent to apply the changes. 
 
