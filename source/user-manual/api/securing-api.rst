@@ -19,7 +19,7 @@ Recommended changes to securize Wazuh API
 
 #. Modify HTTPS parameters:
 
-    The Wazuh API has HTTPS enabled by default. In case there is no available certificate in ``WAZUH_PATH/api/configuration/ssl``, the Wazuh API will generate the private key and a self-signed certificate. If that is the case, the following lines will appear in ``WAZUH_PATH/logs/api.log``:
+    The Wazuh API has HTTPS enabled by default. In case there is no available certificate in ``WAZUH_PATH/api/configuration/ssl``, the Wazuh API will generate the private key and a self-signed certificate. If that is the case and the API log format is set as ``plain``, the following lines will appear in ``WAZUH_PATH/logs/api.log``:
 
     .. code-block:: console
 
