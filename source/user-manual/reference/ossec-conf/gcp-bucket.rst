@@ -121,10 +121,10 @@ If defined, the path or prefix for the bucket.
 bucket\\only_logs_after
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-A valid date, in YYYY-MMM-DD format, that only logs from after that date will be parsed. All logs from before that date will be skipped.
+A valid date, in YYYY-MMM-DD format. Only logs from that date onwards will be parsed.
 
 +--------------------+-------------+
-| **Default value**  | 1970-JAN-01 |
+| **Default value**  | None        |
 +--------------------+-------------+
 | **Allowed values** | Valid date  |
 +--------------------+-------------+

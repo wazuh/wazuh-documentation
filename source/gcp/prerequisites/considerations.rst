@@ -5,10 +5,15 @@
 Considerations for configuration
 ================================
 
+First execution
+---------------
+
+If no ``only_logs_after`` value was provided, the module will only fetch the logs of the date of the execution.
+
 Older logs
 ----------
 
-The ``gcp-pubsub`` Wazuh module only looks for new logs based upon the key for last processed log object, which includes the datetime stamp. If older logs are loaded into the Cloud Storage or the ``only_logs_after`` option date is set to a datetime earlier than previous executions of the module, the older log files will be ignored and not ingested into Wazuh.
+The ``Google Cloud Platform`` Wazuh module only looks for new logs in buckets based upon the key of the last processed log object, which includes the datetime stamp. If older logs are loaded or the ``only_logs_after`` option date is set to a datetime earlier than previous executions of the module, the older log files will be ignored and not ingested into Wazuh.
 
 
 Creation time in Google Cloud Storage bucket contents
