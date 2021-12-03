@@ -43,14 +43,13 @@ Steps to generate the alerts
 
     .. code-block:: console
 
-        # docker stop `docker ps -a -q` && docker rm `docker ps -a -q`
-        # docker pull nginx
-        # docker run -d -P --name nginx_container nginx
-        # docker exec -ti nginx_container cat /etc/passwd
-        # docker exec -ti nginx_container /bin/bash
-        # exit
-        # docker stop nginx_container
-        # docker rm nginx_container
+        docker stop `docker ps -a -q` && docker rm `docker ps -a -q`
+        docker pull nginx
+        docker run -d -P --name nginx_container nginx
+        docker exec nginx_container cat /etc/passwd
+        docker exec nginx_container /bin/bash
+        docker stop nginx_container
+        docker rm nginx_container
 
 Query the alerts
 ----------------
