@@ -21,15 +21,15 @@ Configure your environment as follows to test the POC.
     .. code-block:: XML
 
         <ossec_config>
-            <wodle name="docker-listener">
+          <wodle name="docker-listener">
             <interval>10m</interval>
             <attempts>5</attempts>
             <run_on_start>yes</run_on_start>
             <disabled>no</disabled>
-            </wodle>
+          </wodle>
         </ossec_config>
 
-#. Restart the Wazuh agent to apply the changes.
+#. Restart the Wazuh agent to apply the configuration changes.
 
     .. code-block:: console
 
