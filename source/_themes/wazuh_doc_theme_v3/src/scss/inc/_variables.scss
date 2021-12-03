@@ -23,7 +23,8 @@ $light_ColorBorderDetails: #c1ccd9 !default; // search-box and navigation border
 $light_ColorBorderDeeper: #b7c6d7 !default;
 $light_ColorSidebarSpace: #ebf2fb !default;
 $light_ColorFooter: #f5f6f7 !default;
-$light_ColorMainText: #000 !default;
+$light_ColorMainTextExtra: #000 !default;
+$light_ColorMainText: #292929 !default;
 $light_ColorInputPlaceholder: #a6b5c8 !default;
 $light_ColorShadedText: #545f73 !default; // header-links
 $light_ColorHighlightInlineText: #7c3db2 !default;
@@ -35,9 +36,11 @@ $light_ColorAccent: #fedd0b !default;
 $light_ColorFocusShade: #657c97 !default;
 $light_ColorShadow: #000 !default;
 $light_ColorGlobalTocHighlight: #dcebff !default;
-$light_ColorDanger: #bd271e !default;
+$light_ColorDanger: #f86b63 !default;
+$light_ColorDangerDark: #bd271e !default;
 $light_ColorWarning: #f97d37 !default;
 $light_ColorWarningDark: #B35621 !default;
+$light_ColorSuccess: #0899a2 !default;
 $light_ColorSuccessDark: #207D82 !default;
 $light_ColorAdmonitionBackground: #f9fcff !default;
 
@@ -70,9 +73,11 @@ $dark_ColorAccent: #ffe853 !default;
 $dark_ColorFocusShade: #98a2b3 !default;
 $dark_ColorShadow: #000 !default;
 $dark_ColorGlobalTocHighlight: #dcebff !default;
-$dark_ColorDanger: #bd271e !default;
+$dark_ColorDanger: #f86b63 !default;
+$dark_ColorDangerDark: #bd271e !default;
 $dark_ColorWarning: #f97d37 !default;
 $dark_ColorWarningDark: #B35621 !default;
+$dark_ColorSuccess: #0899a2 !default;
 $dark_ColorSuccessDark: #207D82 !default;
 
 // Code-blocks - Dark theme
@@ -95,6 +100,9 @@ $breadcrumbsHeight: 60px !default;
 $footerHeight: 70px !default;
 $leftSidebarWidth: 385px !default;
 $rightSidebarWidth: 290px !default;
+$leftRedocSidebarWidth: 294px !default;
+$rightRedocSidebarWidth: 40% !default;
+$redocHeaderHeight: 110px !default;
 $roundedCorners: 10px !default;
 
 /* -- Others ------------------------------------------------------------------------------------ */

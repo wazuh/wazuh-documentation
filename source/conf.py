@@ -631,7 +631,7 @@ def manage_assets(app, pagename, templatename, context, doctree):
                 individual_js_files['api-reference']
             ],
             'cloud-service/apis/reference': [
-                # individual_js_files['redoc-standalone'],
+                individual_js_files['redoc-standalone'],
                 individual_js_files['redirects'],
                 individual_js_files['api-reference']
             ],

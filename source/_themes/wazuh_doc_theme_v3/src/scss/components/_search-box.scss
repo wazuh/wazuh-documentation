@@ -32,7 +32,7 @@
       width: 46px;
       height: 46px;
       padding: 5px;
-      background: url('#{$icoPath}svg-icons.svg#search');
+      background-repeat: no-repeat;
       background-size: 41px 41px;
       background-position: center;
       border: none;
@@ -49,6 +49,9 @@ body {
     .form-control {
       background-color: $light_ColorSidebarSpace;
     }
+    .btn-search {
+      background: url('#{$icoPath}svg-icons.svg#search-lt');
+    }
     ::placeholder { 
       color: $light_ColorInputPlaceholder;
     }
@@ -63,6 +66,9 @@ body {
     border-color: $dark_ColorBorderDetails;
     .form-control {
       background-color: $dark_ColorSidebarSpace;
+    }
+    .btn-search {
+      background: url('#{$icoPath}svg-icons.svg#search-dt');
     }
     ::placeholder { 
       color: $dark_ColorInputPlaceholder;

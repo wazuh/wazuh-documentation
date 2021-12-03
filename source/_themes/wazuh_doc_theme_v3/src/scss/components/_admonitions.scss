@@ -109,9 +109,9 @@ body {
     }
 
     &.danger {
-      border-color: $light_ColorDanger;
+      border-color: $light_ColorDangerDark;
       .admonition-title {
-        color: $light_ColorDanger;
+        color: $light_ColorDangerDark;
 
         &::after {
           background: url('#{$icoPath}svg-icons.svg#circle-exclamation-red');
@@ -120,9 +120,9 @@ body {
     }
 
     &.error {
-      border-color: $light_ColorDanger;
+      border-color: $light_ColorDangerDark;
       .admonition-title {
-        color: $light_ColorDanger;
+        color: $light_ColorDangerDark;
 
         &::after {
           background: url('#{$icoPath}svg-icons.svg#circle-x');
@@ -221,9 +221,9 @@ body {
     }
 
     &.danger {
-      border-color: $dark_ColorDanger;
+      border-color: $dark_ColorDangerDark;
       .admonition-title {
-        color: $dark_ColorDanger;
+        color: $dark_ColorDangerDark;
 
         &::after {
           background: url('#{$icoPath}svg-icons.svg#circle-exclamation-red');
@@ -232,9 +232,9 @@ body {
     }
 
     &.error {
-      border-color: $dark_ColorDanger;
+      border-color: $dark_ColorDangerDark;
       .admonition-title {
-        color: $dark_ColorDanger;
+        color: $dark_ColorDangerDark;
 
         &::after {
           background: url('#{$icoPath}svg-icons.svg#circle-x');

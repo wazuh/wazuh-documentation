@@ -1,0 +1,62 @@
+{%- set titlesuffix = " · "|safe + docstitle|e %}
+{%- set pagetitle = "API reference" %}
+
+{%- extends "!wazuh_doc_theme_v3/template-parts/body.html" -%}
+
+{% block body %}
+<div class="loading">
+{{ super() }}
+  <footer id="footer-redoc">
+    <div class="powered-by-badge">
+      Powered by
+      <a href="https://github.com/Rebilly/ReDoc" target="_blank" title="Swagger-generated API Reference Documentation">
+        <strong>ReDoc</strong>
+      </a>
+    </div>
+  </footer>
+</div>
+{% endblock %}
+
+{%- block header %}
+    <header>
+      <div class="header-left">
+        {% include "template-parts/brand.html" %}
+        {% include "template-parts/light-dark-switch.html" %}
+      </div>
+      {% if theme_display_version_selector %}
+      <div class="header-right">
+        {% include "template-parts/version-selector.html" %}
+      </div>
+      {% endif %}
+    </header>
+{% endblock header -%}
+
+{% block sidebar1 -%}{% endblock sidebar1 -%}
+{% block sidebar2 -%}{% endblock sidebar2 -%}
+{%- block footer %}{% endblock footer -%}
+{%- block light_box_display %}{% endblock light_box_display -%}
+
+{%- block main_column -%}
+<div id="central-column">
+  {%- block latest %}
+    {%- set nav_version = version %}
+    {% if current_version %}
+      {%- set nav_version = current_version %}
+    {% endif %}
+    {% if nav_version and not is_latest_release %}
+    <div class="no-latest-notice-wrapper">
+      <div class="no-latest-notice">
+        <div class="no-latest-icon-wrapper"><i class="fas fa-exclamation-triangle"></i></div>
+        <div class="no-latest-text-wrapper"><span class="font-weight-bold d-none d-sm-inline-block">Warning:</span> This is the documentation for Wazuh {{ nav_version }}. Check out the docs for <a class="link-latest" href="#">the latest version of Wazuh</a>!</div>
+      </div>
+    </div>
+    {% endif %}
+  {% endblock latest %}
+  
+  {# Main content #}
+  <main role="main">
+    {%- block redoc %}
+    {% endblock redoc %}
+  </main>
+</div>
+{%- endblock main_column -%}
