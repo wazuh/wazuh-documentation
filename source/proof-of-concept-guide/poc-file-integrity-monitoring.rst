@@ -38,7 +38,13 @@ Configure your environment as follows to test the POC.
         <directories check_all="yes" report_changes="yes" whodata="yes">C:\\Wazuh</directories>
         </syscheck>
 
-As an alternative to local configurations, you can :ref:`centrally configure groups of agents <reference_agent_conf>`.
+    As an alternative to local configurations, you can :ref:`centrally configure groups of agents <reference_agent_conf>`.
+
+#. Restart the Wazuh agent to apply the configuration changes.
+
+    .. code-block:: console
+
+        # systemctl restart wazuh-agent
 
 Steps to generate the alerts
 ----------------------------
