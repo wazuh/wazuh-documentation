@@ -51,11 +51,13 @@ Query the alerts
 
 You can visualize the alert data in the Wazuh Kibana plugin. To do this, go to the **Security events** module and add the filters in the search bar to query the alerts.
 
-- ``rule.description:Shellshock attack attempt``
+- ``rule.description:"Shellshock"``
 
-- If you have Suricata monitoring the endpoint's traffic, you can also query ``rule.description:*CVE-2014-6271*`` for the related Suricata's alerts.
+- If you have Suricata monitoring the endpoint's traffic, you can also query ``*suricata* AND rule.description: "Suricata: Alert - GPL WEB_SERVER 403 Forbidden"`` for the related Suricata's alerts.
 
 .. thumbnail:: ../images/poc/Detecting_Shellshock_Attack.png
           :title: Detecting a Shellshock attack
           :align: center
           :wrap_image: No
+
+
