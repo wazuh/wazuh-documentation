@@ -1,5 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
-
+.. meta::
+  :description: Learn more about how to generate your own Wazuh packages for different platforms, such as Debian, macOS, Windows, Splunk app, and others.
+  
 .. -package-creation:
 
 Wazuh packages generation guide
