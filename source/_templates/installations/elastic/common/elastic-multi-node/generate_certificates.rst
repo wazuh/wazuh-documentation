@@ -46,11 +46,11 @@
 
      #  bash ~/wazuh-cert-tool.sh
 
-#. Replace ``elasticsearch-node-name`` with your Elasticsearch node name, the same used in ``instances.yml`` to create the certificates, and move the certificates to their corresponding location.
+#. Replace ``<elasticsearch-node-name>`` with the name of your current Elasticsearch node, the same used in ``instances.yml`` to create the certificates, and move the certificates to their corresponding location.
 
    .. code-block:: console
 
-     # NODE_NAME=elasticsearch-node-name
+     # NODE_NAME=<elasticsearch-node-name>
 
    .. code-block:: console 
      
@@ -65,12 +65,10 @@
 
    .. code-block:: console
 
-     # cd ~/certs/  
-     # tar -cvf certs.tar *
-     # mv ~/certs/certs.tar ~/
+     # tar -cvf ~/certs.tar -C ~/certs/ .
 
 #. Copy ``certs.tar`` to all the servers of the distributed deployment, including the Elasticsearch, Wazuh server, and Kibana nodes. This can be done by using, for example, ``scp``. 
 
-#. If you want to later install other Wazuh components on this node, keep the certificates file. Otherwise, if the file is already copied to all the instances of the distributed deployment, remove it with ``rm -f certs.tar`` to increase security.
+#. If you want to later install other Wazuh components on this node, keep the certificates file. Otherwise, if the file is already copied to all the instances of the distributed deployment, remove it with ``rm -f ~/certs.tar`` to increase security.
 
 .. End of include file

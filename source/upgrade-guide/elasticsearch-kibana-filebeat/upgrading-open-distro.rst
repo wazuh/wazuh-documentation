@@ -253,7 +253,7 @@ Upgrading Filebeat
             output.elasticsearch:
               hosts: ["<elasticsearch_ip>:9200"]
 
-          Replace ``elasticsearch_ip`` with the IP address or the hostname of the Elasticsearch server.
+          Replace ``<elasticsearch_ip>`` with the IP address or the hostname of the Elasticsearch server.
 
         .. group-tab:: Elasticsearch multi-node
 

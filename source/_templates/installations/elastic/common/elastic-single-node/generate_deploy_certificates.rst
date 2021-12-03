@@ -58,12 +58,10 @@
 
    .. code-block:: console
 
-     # cd ~/certs/  
-     # tar -cvf certs.tar *
-     # mv ~/certs/certs.tar ~/
+     # tar -cvf ~/certs.tar -C ~/certs/ .
 
 #. Copy ``certs.tar`` to all the servers of the distributed deployment. This can be done by using, for example, ``scp``. 
 
-#. If Kibana will be installed on this node, keep the certificates file. Otherwise, if the file is already copied to all the instances of the distributed deployment, remove it to increase security  ``rm -f certs.tar``.
+#. If Kibana will be installed on this node, keep the certificates file. Otherwise, if the file is already copied to all the instances of the distributed deployment, remove it to increase security  ``rm -f ~/certs.tar``.
 
 .. End of include file

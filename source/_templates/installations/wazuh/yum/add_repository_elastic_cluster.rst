@@ -4,7 +4,7 @@
 
     .. code-block:: console
 
-      # yum install curl unzip wget
+      # yum install -y curl unzip wget
 
 #. Import the GPG key.
 

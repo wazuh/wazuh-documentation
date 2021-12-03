@@ -6,7 +6,7 @@
 
             .. code-block:: console
 
-                # yum install opendistroforelasticsearch
+                # yum install -y opendistroforelasticsearch
 
 
 

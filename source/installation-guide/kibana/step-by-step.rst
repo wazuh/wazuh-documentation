@@ -74,15 +74,16 @@ Installing and configuring Kibana
 
     .. include:: ../../_templates/installations/elastic/common/configure_kibana.rst
 
-#. Edit the ``/etc/kibana/kibana.yml`` file to replace ``server.host`` and ``elasticsearch.host`` if necessary. 
+#. Edit the ``/etc/kibana/kibana.yml`` file and replace ``<kibana_ip>`` and ``<elasticsearch_ip>`` with the IP address values.
 
     .. code-block:: yaml
-    
-        server.host: 0.0.0.0
-        elasticsearch.hosts: "https://127.0.0.1:9200"
-       
-    - ``server.host: 0.0.0.0``: Kibana is available from the outside and accepts all the available IPs of the host.
-    - ``elasticsearch.hosts: "https://127.0.0.1:9200"``: Elasticsearch host is set to localhost by default, replace this value if necessary. If you have more than one Elasticsearch node, Kibana can be configured to connect to multiple Elasticsearch nodes in the same cluster. To do this, you need to separate the IPs of the nodes with commas as in ``["https://10.0.0.2:9200", "https://10.0.0.3:9200","https://10.0.0.4:9200"]``.
+
+        server.host: <kibana_ip>
+        elasticsearch.hosts: "https://<elasticsearch_ip>:9200"
+
+    - By default, Kibana only listens on the loopback interface (localhost), which means that it can be only accessed from the same host. To access Kibana from the outside it may be configured to listen on its network IP by replacing ``<kibana_ip>`` with Kibana's host IP. The value ``0.0.0.0`` will accept all the available IPs of the host.
+
+    - ``<elasticsearch_ip>``: the host's IP. In case of having more than one Elasticsearch node, Kibana can be configured to connect to multiple Elasticsearch nodes in the same cluster. The IPs of the nodes can be separated with commas. Eg. ``["https://10.0.0.2:9200", "https://10.0.0.3:9200","https://10.0.0.4:9200"]``
 
 #. Create the ``/usr/share/kibana/data`` directory.
 
@@ -119,7 +120,7 @@ Installing and configuring Kibana
     
     - **Only for distributed deployments**  
   
-      Edit the file ``/usr/share/kibana/data/wazuh/config/wazuh.yml`` and replace the ``url`` with the Wazuh server IP address or hostname.
+      Edit the file ``/usr/share/kibana/data/wazuh/config/wazuh.yml`` and replace the ``url`` value with the Wazuh server IP address or hostname.
       
         .. code-block:: yaml
         
@@ -134,7 +135,7 @@ Installing and configuring Kibana
 
 #. Access the Wazuh web interface with your credentials.
 
-    - URL: *https://<wazuh_server_ip>*
+    - URL: *https://<kibana_ip>*
     - **Username**: *wazuh*
     - **Password**: *<wazuh_user_password>*
 

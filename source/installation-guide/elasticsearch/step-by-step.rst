@@ -203,11 +203,11 @@ You now have installed a subsequent node of your Elasticsearch multi-node cluste
 
 The final stage of the process for installing an Elasticsearch consists in running the security admin script. 
 
-#. On the initial node, configure ELASTICSEARCH_IP as an environment variable.
+#. Run the following command on the initial node replacing ``<initial_node_IP>`` with your Elasticsearch initial node IP address.
   
    .. code-block:: console
 
-    # export ELASTICSEARCH_IP="Put here your Elasticsearch initial node IP address"
+    # export ELASTICSEARCH_IP="<initial_node_IP>"
 
 
 #. Run the Elasticsearch ``securityadmin`` script on the initial node to load the new certificates information and start the cluster. Run the following command.
@@ -251,5 +251,4 @@ If you want to uninstall Elasticsearch, see the :ref:`Uninstalling <uninstall_el
 Next steps
 ----------
 
-Elasticsearch is now successfully installed and you can proceed with installing the Wazuh server. To perform this action, see the :ref:`Wazuh server <wazuh_server_step_by_step>` section.
-
+Elasticsearch is now successfully installed and you can proceed with installing the Wazuh server. To perform this action, see the :ref:`wazuh_server_step_by_step` section.

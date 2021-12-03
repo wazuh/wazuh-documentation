@@ -9,14 +9,11 @@
     .. code-block:: console
       
       # mkdir /etc/elasticsearch/certs
-      # mv ~/certs.tar /etc/elasticsearch/certs/
-      # tar -xf certs.tar $NODE_NAME.pem $NODE_NAME-key.pem root-ca.pem
+      # tar -xf ~/certs.tar -C /etc/elasticsearch/certs/ ./$NODE_NAME.pem ./$NODE_NAME-key.pem ./root-ca.pem
       # mv /etc/elasticsearch/certs/$NODE_NAME.pem /etc/elasticsearch/certs/elasticsearch.pem
       # mv /etc/elasticsearch/certs/$NODE_NAME-key.pem /etc/elasticsearch/certs/elasticsearch-key.pem
 
-#. If you want to later install Kibana on this node, keep the certificates file. Otherwise, remove it with ``rm -f certs.tar`` to increase security.
+#. If you want to later install Kibana on this node, keep the certificates file. Otherwise, remove it with ``rm -f ~/certs.tar`` to increase security.
 
 
 .. End of include file
-
-
