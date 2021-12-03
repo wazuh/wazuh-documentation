@@ -42,7 +42,9 @@ Query the alerts
 
 You can visualize the alert data in the Wazuh Kibana plugin. To do this, go to the **Security events** module and add the filters in the search bar to query the alerts.
 
-* ``rule.id:31103``
+- ``rule.id:31103``
+
+- If you have Suricata monitoring the endpoint's traffic, you can also query ``*suricata* AND rule.description: "Suricata: Alert - ET WEB_SERVER Possible SQL Injection Attempt SELECT FROM"`` for the related Suricata's alerts.
 
 
 .. thumbnail:: ../images/poc/Detecting_an_SQL_Injection_attack.png
