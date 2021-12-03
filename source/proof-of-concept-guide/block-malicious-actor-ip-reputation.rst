@@ -40,7 +40,7 @@ Configure your environment as follows to test the POC.
 
         # echo "<your_windows_ip_address>" >> /var/ossec/etc/lists/alienvault_reputation.ipset
 
-#. Download the script to convert from the ipset format to the cdb list format.
+#. Download the script to convert from the ipset format to the CDB list format.
 
     .. code-block:: console
 
@@ -71,13 +71,13 @@ Configure your environment as follows to test the POC.
     .. code-block:: XML
 
         <group name="attack,">
-        <rule id="100100" level="10">
+          <rule id="100100" level="10">
             <if_group>web|attack|attacks</if_group>
             <list field="srcip" lookup="address_match_key">etc/lists/blacklist-alienvault</list>
             <description>IP address found in AlienVault reputation database.</description>
-        </rule>
+          </rule>
         </group>
-        
+
 
 #. Add the appropriate active response settings to the  ``ruleset`` section of the  ``/var/ossec/etc/ossec.conf`` file at the Wazuh manager.
 
@@ -110,7 +110,7 @@ Configure your environment as follows to test the POC.
             </active-response>
         </ossec_config>
 
-#. Restart the Wazuh Manager.
+#. Restart the Wazuh manager to apply the configuration changes.
 
     .. code-block:: console
 
