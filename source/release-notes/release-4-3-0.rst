@@ -90,13 +90,13 @@ Manager
 - `#10101 <https://github.com/wazuh/wazuh/pull/10101>`_ Cluster synchronization is changed so that the content of the etc/shared folder is synchronized.
 - `#8351 <https://github.com/wazuh/wazuh/pull/8351>`_ All XML file loads are changed. Now, ``defusedxml`` library is used to avoid possible XML-based attacks.
 - `#8535 <https://github.com/wazuh/wazuh/pull/8535>`_ Configuration validation from execq socket is changed to com socket.
-- `#8392 <https://github.com/wazuh/wazuh/pull/8392>`_ Updated utils unittest to improve ``process_array`` function coverage.
-- `#8885 <https://github.com/wazuh/wazuh/pull/8885>`_ Changed ``request_slice`` calculation to improve efficiency when accessing wazuh-db data.
-- `#9273 <https://github.com/wazuh/wazuh/pull/9273>`_ Improved the retrieval of information from ``wazuh-db`` so it reaches the optimum size in a single iteration.
-- `#9234 <https://github.com/wazuh/wazuh/pull/9234>`_ Optimized the way framework uses context cached functions and added a note on context_cached docstring.
-- `#9332 <https://github.com/wazuh/wazuh/pull/9332>`_ Improved framework regexes to be more specific and less vulnerable.
-- `#9423 <https://github.com/wazuh/wazuh/pull/9423>`_ Unified framework exceptions for non-active agents.
-- `#9433 <https://github.com/wazuh/wazuh/pull/9433>`_ Changed RBAC policies to case insensitive.
+- `#8392 <https://github.com/wazuh/wazuh/pull/8392>`_ The utils unittest is updated to improve ``process_array`` function coverage.
+- `#8885 <https://github.com/wazuh/wazuh/pull/8885>`_ The ``request_slice`` calculation is changed to improve efficiency when accessing wazuh-db data.
+- `#9273 <https://github.com/wazuh/wazuh/pull/9273>`_ The retrieval of information from ``wazuh-db`` is improved so it reaches the optimum size in a single iteration.
+- `#9234 <https://github.com/wazuh/wazuh/pull/9234>`_ The way framework uses context cached functions and added a note on context_cached docstring is optimized.
+- `#9332 <https://github.com/wazuh/wazuh/pull/9332>`_ The framework regexes is improved to be more specific and less vulnerable.
+- `#9423 <https://github.com/wazuh/wazuh/pull/9423>`_ The framework exceptions is unified for non-active agents.
+- `#9433 <https://github.com/wazuh/wazuh/pull/9433>`_ The RBAC policies are changed to case insensitive.
 - `#9548 <https://github.com/wazuh/wazuh/pull/9548>`_ Refactored framework stats module into SDK and core components to comply with Wazuh framework code standards.
 - `#10309 <https://github.com/wazuh/wazuh/pull/10309>`_ Changed the size of the agents chunks sent to the upgrade socket to make the upgrade endpoints faster.
 - `#9408 <https://github.com/wazuh/wazuh/pull/9408>`_ Refactored rootcheck and syscheck SDK code to make it clearer.
