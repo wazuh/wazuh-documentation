@@ -97,9 +97,9 @@ Manager
 - `#9332 <https://github.com/wazuh/wazuh/pull/9332>`_ The framework regexes is improved to be more specific and less vulnerable.
 - `#9423 <https://github.com/wazuh/wazuh/pull/9423>`_ The framework exceptions is unified for non-active agents.
 - `#9433 <https://github.com/wazuh/wazuh/pull/9433>`_ The RBAC policies are changed to case insensitive.
-- `#9548 <https://github.com/wazuh/wazuh/pull/9548>`_ Refactored framework stats module into SDK and core components to comply with Wazuh framework code standards.
-- `#10309 <https://github.com/wazuh/wazuh/pull/10309>`_ Changed the size of the agents chunks sent to the upgrade socket to make the upgrade endpoints faster.
-- `#9408 <https://github.com/wazuh/wazuh/pull/9408>`_ Refactored rootcheck and syscheck SDK code to make it clearer.
+- `#9548 <https://github.com/wazuh/wazuh/pull/9548>`_ Framework stats module is refactored into SDK and core components to comply with Wazuh framework code standards.
+- `#10309 <https://github.com/wazuh/wazuh/pull/10309>`_ The size of the agents' chunks sent to the upgrade socket is changed to make the upgrade endpoints faster.
+- `#9408 <https://github.com/wazuh/wazuh/pull/9408>`_ The rootcheck and syscheck SDK code are refactored to make it clearer.
 - `#9738 <https://github.com/wazuh/wazuh/pull/9738>`_ Adapted Azure-logs module to use Microsoft Graph API instead of Active Directory Graph API.
 - `#8060 <https://github.com/wazuh/wazuh/pull/8060>`_ Analysisd now reconnects to Active Response if Remoted or Execd get restarted.
 - `#10335 <https://github.com/wazuh/wazuh/pull/10335>`_ Agent key polling now supports cluster environments.
