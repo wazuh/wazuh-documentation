@@ -13,7 +13,7 @@ Configuration
 
 Configure your environment as follows to test the POC.
 
-No additional configuration is required since trojan detection is configured out-of-the-box. Check your configuration in the ``/var/ossec/etc/ossec.conf`` file at the CentOS 8 monitored endpoint.
+No additional configuration is required since Trojan detection is configured out-of-the-box. Check your configuration in the ``/var/ossec/etc/ossec.conf`` file at the CentOS 8 monitored endpoint.
 
     .. code-block:: none
 
@@ -44,7 +44,7 @@ Steps to generate the alerts
 
     .. code-block:: console
 
-        # cp -p /usr/bin/w /usr/bin/w.copy
+        # cp /usr/bin/w /usr/bin/w.copy
 
 #. Replace the original system binary ``/usr/bin/w`` with the following shell script.
   
@@ -56,12 +56,19 @@ Steps to generate the alerts
         #Now running original binary
         /usr/bin/w.copy
 
+#. Execute the following command to run the Trojan that will trigger the alerts.
+
+    .. code-block:: console
+
+        # chmod +x /usr/bin/w
+        # /usr/bin/w
+
 Query the alerts
 ----------------
 
 You can visualize the alert data in the Wazuh Kibana plugin. To do this, go to the **Security events** module and add the filters in the search bar to query the alerts.
 
-* ``location:rootcheck AND rule.id:510 AND data.title:Trojaned version of file detected``
+* ``location:rootcheck AND rule.id:510 AND data.title:Trojan*``
 
 .. thumbnail:: ../images/poc/Detecting_suspicious_binaries.png
           :title: Detecting suspicious binaries - Trojan
