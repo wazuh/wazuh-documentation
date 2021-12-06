@@ -18,7 +18,8 @@ Check the :ref:`Getting started <getting_started>` section to learn more about t
 Installing the Wazuh central components
 ---------------------------------------
 
-Follow this installation workflow to install Wazuh. 
+Central components of Wazuh include the Wazuh server, Elasticsearch, and Kibana. Follow this installation workflow to install Wazuh.
+
 
 .. thumbnail:: ../images/installation/Wazuh-Installation-workflow.png
   :title: Wazuh installation workflow
