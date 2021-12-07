@@ -7,3 +7,9 @@ let currentPath = window.location.pathname;
         newUrl = currentPath.replaceAll('_', '-');
         window.location.replace(newUrl);   
     }
+
+/* Remove element from navigation */
+
+let releaseNoteNavLink = document.querySelectorAll("a[href='release_4_2_0.html']")[0];
+let releaseNoteNavLinkParent = releaseNoteNavLink.parentNode;
+releaseNoteNavLinkParent.remove();
