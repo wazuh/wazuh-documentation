@@ -17,9 +17,16 @@ Highlights
 Manager
 ^^^^^^^
 
+- `#8830 <https://github.com/wazuh/wazuh/pull/8830>`_ `#8178 <https://github.com/wazuh/wazuh/pull/8178>`_ Syscollector and Vulnerability Detector have been extended to support agents running on Amazon Linux and Arch Linux.
+- `#7749 <https://github.com/wazuh/wazuh/pull/7749>`_ Vulnerability Detector now manages a vulnerability inventory, and produces alerts based on changes on it: when a new vulnerability is either found or solved.
+
 
 Agent
 ^^^^^
+
+- `#4983 <https://github.com/wazuh/wazuh/pull/4983>`_ `#7660 <https://github.com/wazuh/wazuh/pull/7660>`_ New integrations to collect auditing logs from Office365 and GitHub have been introduced in the agent.
+- `#8632 <https://github.com/wazuh/wazuh/pull/8632>`_ Logcollector can now collect native logs from macOS (Unified Logging System).
+- `#8461 <https://github.com/wazuh/wazuh/pull/8461>`_ File Integrity Monitoring has been improved to fully support wilcarded file paths in the configuration.
 
 
 Wazuh Kibana plugin
