@@ -5,7 +5,7 @@
 Kibana
 ======
 
-Kibana is a flexible and intuitive web interface for mining, analyzing, and visualizing data. In combination with the Wazuh Kibana plugin, it is also used for the management and monitoring of the Wazuh infrastructure. From the Wazuh user interface, identity and access management can be controlled by creating and managing users, and assigning roles as needed. 
+Kibana is a flexible and intuitive web interface for mining, analyzing, and visualizing data. In combination with the Wazuh Kibana plugin, it is also used for the management and monitoring of the Wazuh infrastructure. From the Wazuh user interface, identity and access management can be controlled by creating and managing users and assigning roles as needed. 
 
 Data visualization, mining, and analysis
 ----------------------------------------
@@ -76,7 +76,7 @@ Moreover, the application is flexible and allows users to create their own visua
 Monitoring deployed agents
 --------------------------
 
-From the web interface you manage your agents, their configuration, and data inventory. Inspecting the status, statistics, and health of any agent deployed to your system is streamlined with filters for fine-tuning and quick access to data. You can also create deployment commands to install and configure new Wazuh agents. 
+From the web interface, you manage the agents, their configuration, and data inventory. Inspecting the status, statistics, and health of any agent deployed to your system is streamlined with filters for fine-tuning and quick access to data. You can also create deployment commands to install and configure new Wazuh agents. 
 
 Additionally, agent groups and centralized configuration can be managed and edited through the interface as well.
 
