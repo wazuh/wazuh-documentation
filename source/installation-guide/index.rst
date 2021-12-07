@@ -50,8 +50,8 @@ The diagram below represents a Wazuh deployment architecture. It shows the solut
 Installation alternatives: Wazuh can also be installed with commercial options like Elastic Stack basic license or Splunk. To learn more about these options and other installation alternatives, see the :ref:`More installation alternatives <more_installation_alternatives>` section.
 
 
-Wazuh agent installation
-------------------------
+Installing the Wazuh agent
+--------------------------
 
 The :ref:`Wazuh agent <wazuh_agent>` is a single and lightweight monitoring software that runs on most operating systems and provides visibility into the endpoint's security by collecting critical system and application records, inventory data, and detecting potential anomalies. If the Wazuh central components are already installed on your environment, select your operating system and follow the installation steps to deploy the agent to the endpoints. 
 
