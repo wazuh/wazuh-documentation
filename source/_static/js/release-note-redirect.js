@@ -11,5 +11,7 @@ let currentPath = window.location.pathname;
 /* Remove element from navigation */
 
 let releaseNoteNavLink = document.querySelectorAll("a[href='release_4_2_0.html']")[0];
-let releaseNoteNavLinkParent = releaseNoteNavLink.parentNode;
-releaseNoteNavLinkParent.remove();
+if(releaseNoteNavLink) {
+    let releaseNoteNavLinkParent = releaseNoteNavLink.parentNode;
+    releaseNoteNavLinkParent.remove();
+}
