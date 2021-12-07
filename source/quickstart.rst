@@ -137,7 +137,7 @@ Next steps
 
 The Wazuh environment is now ready and you can proceed with installing the Wazuh agent on the endpoints to be monitored.
 
-The :ref:`Wazuh agent <wazuh_agent>` is a single and lightweight monitoring software that runs on most operating systems and provides visibility into the endpoint's security by collecting critical system and application records, inventory data, and detecting potential anomalies. Now that your environment is ready, select your operating system and follow the installation steps to deploy the agent to the endpoints. 
+The :ref:`Wazuh agent <wazuh_agent>` is a single and lightweight monitoring software that runs on most operating systems. It provides visibility of the endpoints by collecting critical system and application records, inventory data, and detecting potential anomalies. Now that your environment is ready, select your operating system and follow the installation steps to deploy the agent to the endpoints. 
 
 .. raw:: html
 
