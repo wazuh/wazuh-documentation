@@ -7,8 +7,10 @@
   :description: Install and configure Wazuh, the open source security platform, in just a few minutes using the unattended installation script. 
 
 
-Wazuh quickstart V3.0
-=====================
+Wazuh quickstart
+================
+
+**Version 3.0**
 
 Wazuh is a free, open source and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response, and regulatory compliance. To learn more about the Wazuh solution, its components, architecture, and capabilities, check the :ref:`Getting started <getting_started>` section. 
 
