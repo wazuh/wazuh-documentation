@@ -126,19 +126,19 @@ Manager
 Agent
 ^^^^^
 
-- `#8016 <https://github.com/wazuh/wazuh/pull/8016>`_ Added an option to allow the agent to refresh the connection to the manager.
-- `#8532 <https://github.com/wazuh/wazuh/pull/8532>`_ Introduced a new module to collect audit logs from GitHub.
+- `#8016 <https://github.com/wazuh/wazuh/pull/8016>`_ An option to allow the agent to refresh the connection to the manager is added.
+- `#8532 <https://github.com/wazuh/wazuh/pull/8532>`_ A new module to collect audit logs from GitHub is introduced.
 - `#8461 <https://github.com/wazuh/wazuh/pull/8461>`_ FIM now expands wildcarded paths in the configuration on Windows agents.
 - `#8754 <https://github.com/wazuh/wazuh/pull/8754>`_ FIM reloads wildcarded paths on full scans.
-- `#8306 <https://github.com/wazuh/wazuh/pull/8306>`_ Added new ``path_suffix`` option to AWS module configuration.
-- `#8331 <https://github.com/wazuh/wazuh/pull/8331>`_ Added new ``discard_regex`` option to AWS module configuration.
-- `#8482 <https://github.com/wazuh/wazuh/pull/8482>`_ Added support for the S3 Server Access bucket type in AWS module.
-- `#9119 <https://github.com/wazuh/wazuh/pull/9119>`_ Added support for Google Cloud Storage buckets using a new GCP module called ``gcp-bucket``.
-- `#9119 <https://github.com/wazuh/wazuh/pull/9119>`_ Added support for Google Cloud Storage access logs to the ``gcp-bucket`` module.
-- `#9420 <https://github.com/wazuh/wazuh/pull/9420>`_ Added support for VPC endpoints in AWS module.
-- `#9279 <https://github.com/wazuh/wazuh/pull/9279>`_ Added support for GCS access logs in the GCP module.
-- `#10198 <https://github.com/wazuh/wazuh/pull/10198>`_ Added an iam role session duration parameter to AWS module.
-- `#8826 <https://github.com/wazuh/wazuh/pull/8826>`_ Added support for variables in SCA policies.
+- `#8306 <https://github.com/wazuh/wazuh/pull/8306>`_ Wazuh adds a new ``path_suffix`` option to AWS module configuration.
+- `#8331 <https://github.com/wazuh/wazuh/pull/8331>`_ A new ``discard_regex`` option to AWS module configuration is added.
+- `#8482 <https://github.com/wazuh/wazuh/pull/8482>`_ Wazuh adds support for the S3 Server Access bucket type in AWS module.
+- `#9119 <https://github.com/wazuh/wazuh/pull/9119>`_ Wazuh adds support for Google Cloud Storage buckets using a new GCP module called ``gcp-bucket``.
+- `#9119 <https://github.com/wazuh/wazuh/pull/9119>`_ Wazuh adds support for Google Cloud Storage access logs to the ``gcp-bucket`` module.
+- `#9420 <https://github.com/wazuh/wazuh/pull/9420>`_ Wazuh adds support for VPC endpoints in AWS module.
+- `#9279 <https://github.com/wazuh/wazuh/pull/9279>`_ Wazuh adds support for GCS access logs in the GCP module.
+- `#10198 <https://github.com/wazuh/wazuh/pull/10198>`_ An iam role session duration parameter to AWS module is added.
+- `#8826 <https://github.com/wazuh/wazuh/pull/8826>`_ Wazuh adds support for variables in SCA policies.
 - `#7721 <https://github.com/wazuh/wazuh/pull/7721>`_ FIM now fills an audit rule file to support who-data although Audit is in immutable mode.
 - `#8957 <https://github.com/wazuh/wazuh/pull/8957>`_ Introduced an integration to collect audit logs from Office365.
 - `#10168 <https://github.com/wazuh/wazuh/pull/10168>`_ Added a new field ``DisplayVersion`` to Syscollector to help Vulnerability Detector match vulnerabilities for Windows.
