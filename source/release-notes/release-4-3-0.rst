@@ -140,21 +140,21 @@ Agent
 - `#10198 <https://github.com/wazuh/wazuh/pull/10198>`_ An iam role session duration parameter to AWS module is added.
 - `#8826 <https://github.com/wazuh/wazuh/pull/8826>`_ Wazuh adds support for variables in SCA policies.
 - `#7721 <https://github.com/wazuh/wazuh/pull/7721>`_ FIM now fills an audit rule file to support who-data although Audit is in immutable mode.
-- `#8957 <https://github.com/wazuh/wazuh/pull/8957>`_ Introduced an integration to collect audit logs from Office365.
-- `#10168 <https://github.com/wazuh/wazuh/pull/10168>`_ Added a new field ``DisplayVersion`` to Syscollector to help Vulnerability Detector match vulnerabilities for Windows.
-- `#10148 <https://github.com/wazuh/wazuh/pull/10148>`_ Added support for macOS agent upgrade via WPK.
-- `#8632 <https://github.com/wazuh/wazuh/pull/8632>`_ Added Logcollector support for macOS logs (Unified Logging System).
+- `#8957 <https://github.com/wazuh/wazuh/pull/8957>`_ An integration to collect audit logs from Office365 is introduced.
+- `#10168 <https://github.com/wazuh/wazuh/pull/10168>`_ A new field ``DisplayVersion`` to Syscollector to help Vulnerability Detector match vulnerabilities for Windows is added.
+- `#10148 <https://github.com/wazuh/wazuh/pull/10148>`_ Wazuh adds support for macOS agent upgrade via WPK.
+- `#8632 <https://github.com/wazuh/wazuh/pull/8632>`_ Wazuh adds Logcollector support for macOS logs (Unified Logging System).
 - `#8381 <https://github.com/wazuh/wazuh/pull/8381>`_ The agent now reports the version of the running AIX operating system to the manager. 
-- `#8604 <https://github.com/wazuh/wazuh/pull/8604>`_ Improved the reliability of the user ID parsing in FIM who-data mode on Linux.
-- `#10230 <https://github.com/wazuh/wazuh/pull/10230>`_ Reword AWS ``service_endpoint`` parameter description to suit FIPS endpoints too.
-- `#5047 <https://github.com/wazuh/wazuh/pull/5047>`_ Extended support of Logcollector for MySQL 4.7 logs. Thanks to @YoyaYOSHIDA.
+- `#8604 <https://github.com/wazuh/wazuh/pull/8604>`_ The reliability of the user ID parsing in FIM who-data mode on Linux is improved.
+- `#10230 <https://github.com/wazuh/wazuh/pull/10230>`_ AWS ``service_endpoint`` parameter description to suit FIPS endpoints too is reworded.
+- `#5047 <https://github.com/wazuh/wazuh/pull/5047>`_ The support of Logcollector for MySQL 4.7 logs is extended.
 - `#9887 <https://github.com/wazuh/wazuh/pull/9887>`_ Agents running on FreeBSD and OpenBSD now report their IP address.
-- `#8202 <https://github.com/wazuh/wazuh/pull/8202>`_ Reduced verbosity of FIM debugging logs.
+- `#8202 <https://github.com/wazuh/wazuh/pull/8202>`_ The verbosity of FIM debugging logs is reduced.
 - `#9992 <https://github.com/wazuh/wazuh/pull/9992>`_ The agent's IP resolution frequency has been limited to prevent high CPU load.
-- `#10236 <https://github.com/wazuh/wazuh/pull/10236>`_ Syscollector has been optimized to use lees memory.
-- `#10337 <https://github.com/wazuh/wazuh/pull/10337>`_ Added support of ZscalerOS system information in the agent.
-- `#10259 <https://github.com/wazuh/wazuh/pull/10259>`_ Syscollector has been extended to collect missing Microsoft product hotfixes.
-- `#10396 <https://github.com/wazuh/wazuh/pull/10396>`_ Updated the osquery integration to find the new osqueryd location as of version 5.0.
+- `#10236 <https://github.com/wazuh/wazuh/pull/10236>`_ Syscollector is optimized to use lees memory.
+- `#10337 <https://github.com/wazuh/wazuh/pull/10337>`_ Wazuh adds support of ZscalerOS system information in the agent.
+- `#10259 <https://github.com/wazuh/wazuh/pull/10259>`_ Syscollector is extended to collect missing Microsoft product hotfixes.
+- `#10396 <https://github.com/wazuh/wazuh/pull/10396>`_ The osquery integration is updated to find the new osqueryd location as of version 5.0.
 - `#9123 <https://github.com/wazuh/wazuh/pull/9123>`_ The internal FIM data handling has been simplified to find files by their path instead of their inode.
 - `#9764 <https://github.com/wazuh/wazuh/pull/9764>`_ Reimplemented the WPK installer rollback on Windows.
 - `#10208 <https://github.com/wazuh/wazuh/pull/10208>`_ Active responses for Windows agents now support native fields from Eventchannel.
