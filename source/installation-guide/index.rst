@@ -49,8 +49,6 @@ The diagram below represents a Wazuh deployment architecture. It shows the solut
 
 Installation alternatives: Wazuh can also be installed with commercial options like Elastic Stack basic license or Splunk. To learn more about these options and other installation alternatives, see the :ref:`More installation alternatives <more_installation_alternatives>` section.
 
-.. note:: Wazuh also offers the `Wazuh Cloud <https://wazuh.com/cloud/>`_, where all components are hosted on our PCI-DSS and SOC 2 Type 2 certified SaaS solution, which is maintained by our team. With Wazuh cloud, no dedicated hardware is required and everything is ready to use. This service offers a highly flexible infrastructure to match your enterprise needs.
-
 
 Wazuh agent installation
 ------------------------
@@ -131,6 +129,10 @@ The :ref:`Wazuh agent <wazuh_agent>` is a single and lightweight monitoring soft
 .. toctree::
     :hidden:
     :maxdepth: 1
+
+
+.. note:: Wazuh also offers the `Wazuh Cloud <https://wazuh.com/cloud/>`_, where all components are hosted on our PCI-DSS and SOC 2 Type 2 certified SaaS solution, which is maintained by our team. With Wazuh cloud, no dedicated hardware is required and everything is ready to use. This service offers a highly flexible infrastructure to match your enterprise needs.
+
 
     elasticsearch/index
     wazuh-server/index
