@@ -5,8 +5,10 @@
   
 .. _installation_guide:
 
-Installation guide V1.0
-=======================
+Installation guide
+==================
+
+**Version 1.0**
 
 This section is a guide for installing Wazuh, a security monitoring solution for threat detection, integrity monitoring, incident response, and regulatory compliance. Below you can find the instructions for installing the Wazuh central components and the Wazuh agent, a single and lightweight monitoring software.
 

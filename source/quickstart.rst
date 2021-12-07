@@ -7,8 +7,10 @@
   :description: Install and configure Wazuh, the open source security platform, in just a few minutes using the unattended installation script. 
 
 
-Wazuh quickstart V1.0
-=====================
+Wazuh quickstart
+================
+
+**Version 1.0**
 
 This section of the Wazuh documentation is meant to allow users to easily install the Wazuh server, Elasticsearch, and Kibana on the same host using the unattended installation script. By running the automated script, you install and configure the Wazuh in just a few minutes.
 
