@@ -10,11 +10,12 @@ Installation guide
 
 **Version 3.0**
 
-Wazuh is a free, open source and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response, and regulatory compliance. To learn more about the Wazuh solution, its components, architecture, and capabilities, check the :ref:`Getting started <getting_started>` section. 
+This section gives you access to a comprehensive guide for installing Wazuh. It is your best choice as a security monitoring solution for threat detection, integrity monitoring, incident response, and regulatory compliance. Below you can find the instructions for installing the Wazuh central components and the Wazuh agent, a single and lightweight monitoring software.
 
-The Wazuh central components include the Wazuh server, Elasticsearch and Kibana. With this guided installation, you install each component on the same server, as an all-in-one deployment, or on different servers as a distributed deployment depending on the environment needs. A distributed deployment provides high availability and scalability of the product.
+This guide was made so that users can easily install each of the central components and all the needed agents as an all-in-one deployment or on different servers as a distributed deployment depending on your environment needs.
 
-Alternatively, you can check our :ref:`Wazuh quickstart <quickstart>` to learn how to install all the central components on the same host using the unattended installation script. With Wazuh quickstart, you install and configure the Wazuh in just a few minutes.
+Check the :ref:`Getting started <getting_started>` section to learn more about the Wazuh solution, its components, architecture, and capabilities. You can also check our :ref:`Wazuh quickstart <quickstart>` to learn how to install all the central components on the same host using the unattended installation script. You can install and configure the Wazuh in just a few minutes with the Wazuh quickstart.
+
 
 Installing the Wazuh central components
 ---------------------------------------
