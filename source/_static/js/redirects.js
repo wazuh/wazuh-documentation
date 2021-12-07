@@ -356,8 +356,6 @@ removedUrls['4.2'] = [
   '/release-notes/release_4_1_3.html',
   '/release-notes/release_4_1_4.html',
   '/release-notes/release_4_1_5.html',
-  '/release-notes/release_4_2_0.html',
-  '/release-notes/release_4_2_1.html',
   '/user-manual/api/securing_api.html',
   '/user-manual/configuring-cluster/cluster_management.html',
   '/user-manual/manager/manual-email-report/smtp_authentication.html',
