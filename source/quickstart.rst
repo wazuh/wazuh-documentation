@@ -12,13 +12,12 @@ Wazuh quickstart
 
 **Version 3.0**
 
-Wazuh is a free, open source and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response, and regulatory compliance. To learn more about the Wazuh solution, its components, architecture, and capabilities, check the :ref:`Getting started <getting_started>` section. 
+In this section of the documentation, you will learn how to install the Wazuh server, Elasticsearch, and Kibana on the same host using the unattended installation script. You will be able to install and configure the Wazuh in just a few minutes just by running the automated script.
 
-With Wazuh quickstart, you install the Wazuh server, Elasticsearch and Kibana on the same host using the unattended installation script. These central components are in charge of analyzing the data gathered by the Wazuh agents, providing a search engine and data visualization tool that allow users to navigate through their security alerts.
+These central components are in charge of analyzing the data gathered by the Wazuh agents, providing a search engine and data visualization tool that allow users to navigate through their security alerts.
 
-By running the automated script, you install and configure the Wazuh in just a few minutes.
-
-Alternatively, you can check our :ref:`Installation guide <installation_guide>` to learn how to install each component individually on the same server, as an all-in-one deployment, or on different servers as a distributed deployment depending on the environment needs. 
+Check the :ref:`Getting started <getting_started>` section to learn more about the Wazuh solution, its components, architecture, and capabilities. Alternatively, you can check our :ref:`Installation guide <installation_guide>` to learn how to install each component individually on the same server, as an all-in-one deployment, or on different servers as a distributed deployment depending on the environment needs.
+ 
 
 .. _installation_requirements:
 
