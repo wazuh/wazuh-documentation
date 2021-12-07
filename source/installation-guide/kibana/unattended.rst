@@ -20,7 +20,7 @@ You can install and configure Kibana using an automated script.
 
     .. code-block:: console
 
-      # curl -so ./unattended-installation.sh https://packages.wazuh.com/resources/|WAZUH_LATEST_MINOR|/unattended-installation/unattended-installation.sh
+      # curl -sO https://s3.us-west-1.amazonaws.com/packages-dev.wazuh.com/resources/4.2/unattended_installation.sh
 
 
 #. Replace ``node_name`` with the instance name and run the script. 
@@ -29,7 +29,7 @@ You can install and configure Kibana using an automated script.
 
     .. code-block:: console
 
-      # sudo bash ~/elastic-stack-installation.sh -k -kn <node_name>
+      # bash ./unattended_installation.sh -k
 
     
     Options available when running the script:
