@@ -34,7 +34,7 @@ Configuration
 
     .. code-block:: console
 
-        systemctl restart wazuh-agent
+        # systemctl restart wazuh-agent
 
 
 Steps to generate the alerts
@@ -59,5 +59,3 @@ You can visualize the alert data in the Wazuh Kibana plugin. To do this, go to t
           :title: Detecting a Shellshock attack
           :align: center
           :wrap_image: No
-
-

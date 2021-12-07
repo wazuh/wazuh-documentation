@@ -22,20 +22,20 @@ Configuration
     .. code-block:: XML
 
         <localfile>
-              <log_format>apache</log_format>
-              <location>/var/log/httpd/access_log</location>
-            </localfile>
+          <log_format>apache</log_format>
+          <location>/var/log/httpd/access_log</location>
+        </localfile>
 
 Optionally, you can install Suricata in the CentOS 8 endpoint and configure it to monitor the endpoint's network traffic.
 
 Steps to generate the alerts
 ----------------------------
 
-#. Replace ``<your_web_server_address>`` with the appropriate value and execute the following command from a system external to your CentOS 8 endpoint (the attacker).
+#. Replace ``<YOUR_WEB_SERVER_ADDRESS>`` with the appropriate value and execute the following command from a system external to your CentOS 8 endpoint (the attacker).
 
     .. code-block:: console
 
-        curl -XGET "http://${replace_by_your_web_server_address}/?id=SELECT+*+FROM+users";
+        # curl -XGET "http://<YOUR_WEB_SERVER_ADDRESS>/?id=SELECT+*+FROM+users";
 
 Query the alerts
 ----------------

@@ -20,7 +20,7 @@ Configure your environment as follows to test the POC.
 
     .. code-block:: console
 
-        yum install -y https://pkg.osquery.io/rpm/osquery-5.0.1-1.linux.x86_64.rpm
+        # yum install -y https://pkg.osquery.io/rpm/osquery-5.0.1-1.linux.x86_64.rpm
 
 #. Add this content block to the Osquery configuration file ``/etc/osquery/osquery.conf``.
 
@@ -64,7 +64,7 @@ Configure your environment as follows to test the POC.
 
     .. code-block:: console
 
-        service osqueryd start
+        # service osqueryd start
 
 #. Edit ``/var/ossec/etc/ossec.conf`` on the monitored CentOS 8 endpoint and enable the Osquery wodle. 
   
@@ -104,4 +104,3 @@ You can visualize the alert data in the Wazuh Kibana plugin. To do this, go to t
           :title: Osquery integration
           :align: center
           :wrap_image: No
-

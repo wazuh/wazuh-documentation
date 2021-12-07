@@ -18,39 +18,39 @@ Configure your environment as follows to test the POC.
 
 #. Install Suricata (tested with version 6.0.3) on the CentOS 8 monitored endpoint. This requires an EPEL repository that depends on your operating system version.
 
-    .. code-block:: XML
+    .. code-block:: console
 
-        yum install epel-release yum-plugin-copr
-        yum copr enable @oisf/suricata-6.0
-        yum install suricata
+        # yum install epel-release yum-plugin-copr
+        # yum copr enable @oisf/suricata-6.0
+        # yum install suricata
 
 
 #. Download and extract Emerging rules.
 
     .. code-block:: console
 
-        cd /tmp/
-        curl -LO https://rules.emergingthreats.net/open/suricata-6.0.3/emerging.rules.tar.gz
-        tar -xvzf emerging.rules.tar.gz && mv rules/*.rules /etc/suricata/rules/
-        chown suricata:suricata /etc/suricata/rules/*.rules
-        chmod 640 /etc/suricata/rules/*.rules
+        # cd /tmp/
+        # curl -LO https://rules.emergingthreats.net/open/suricata-6.0.3/emerging.rules.tar.gz
+        # tar -xvzf emerging.rules.tar.gz && mv rules/*.rules /etc/suricata/rules/
+        # chown suricata:suricata /etc/suricata/rules/*.rules
+        # chmod 640 /etc/suricata/rules/*.rules
 
 #. Modify Suricata settings in the ``/etc/suricata/suricata.yaml`` file.
 
     .. code-block:: console
 
-        cd /etc/suricata/
-        mv suricata.yaml suricata.yaml.bak
-        curl -OL http://www.branchnetconsulting.com/wazuh/suricata.yaml
+        # cd /etc/suricata/
+        # mv suricata.yaml suricata.yaml.bak
+        # curl -OL http://www.branchnetconsulting.com/wazuh/suricata.yaml
 
 
 #. Start Suricata.
 
     .. code-block:: console
 
-        systemctl enable suricata
-        systemctl daemon-reload
-        systemctl start suricata
+        # systemctl enable suricata
+        # systemctl daemon-reload
+        # systemctl start suricata
 
 #. Configure the Wazuh agent to read the Suricata logs file. The following settings need to be added to the ``/var/ossec/etc/ossec.conf`` file of the monitored CentOS 8 endpoint.
 
@@ -66,7 +66,7 @@ Configure your environment as follows to test the POC.
 
     .. code-block:: console
 
-        systemctl restart wazuh-agent
+        # systemctl restart wazuh-agent
 
 
 Steps to generate the alerts
