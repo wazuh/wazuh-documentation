@@ -100,6 +100,10 @@ installPrerequisites() {
     if [ ${sys_type} == "yum" ]; then
         eval "yum install curl unzip wget libcap -y -q ${debug}"
         eval "yum install java-11-openjdk-devel -y -q ${debug}"
+        jv_temp=$(java -version 2>&1 | grep -o -m1 '1.8.0' )
+        if [ "${jv_temp}" == "1.8.0" ]; then
+            eval "yum install java-openjdk-devel -y -q ${debug}"
+        fi
         if [ "$?" != 0 ]; then
             os=$(cat /etc/os-release | awk -F"ID=" '/ID=/{print $2; exit}' | tr -d \")
             if [ -z "${os}" ]; then
