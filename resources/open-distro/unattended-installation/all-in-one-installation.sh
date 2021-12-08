@@ -141,7 +141,7 @@ installPrerequisites() {
         export JAVA_HOME=/usr/
     elif [ ${sys_type} == "apt-get" ]; then
         eval "apt-get update -q ${debug}"
-        eval "apt-get install apt-transport-https curl unzip wget libcap2-bin -y -q ${debug}"
+        eval "apt-get install apt-transport-https curl unzip wget libcap2-bin gpg -y -q ${debug}"
 
         if [ -n "$(command -v add-apt-repository)" ]; then
             eval "add-apt-repository ppa:openjdk-r/ppa -y ${debug}"
