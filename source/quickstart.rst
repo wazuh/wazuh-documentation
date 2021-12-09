@@ -28,7 +28,7 @@ Below you can check the supported operating systems and the recommended hardware
 Supported operating systems
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh can be installed on the 64-bit Linux operating system detailed in the list below:
+Wazuh can be installed on the 64-bit Linux operating systems detailed in the list below:
 
 .. list-table::
    :width: 50%
@@ -62,7 +62,7 @@ Hardware requirements
 
 - **Disk space**
 
-  The amount of data depends on the generated alerts per second (APS). This table details the estimated disk space needed per agent to store 90 days of alerts on a Wazuh server, depending on the type of monitored endpoints.
+  The amount of data depends on the generated alerts per second (APS). The table below details the estimated disk space needed per agent to store 90 days of alerts on a Wazuh server, depending on the type of monitored endpoints:
 
   +-------------------------------------------------+-----+---------------------------+
   | Monitored endpoints                             | APS | Storage                   |
