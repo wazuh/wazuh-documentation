@@ -167,21 +167,21 @@ Agent
 RESTful API
 ^^^^^^^^^^^
 
-- `#7988 <https://github.com/wazuh/wazuh/pull/7988>`_ Added new ``PUT /agents/reconnect`` endpoint to force agents reconnection to the manager.
-- `#6761 <https://github.com/wazuh/wazuh/pull/6761>`_ Added ``select`` parameter to the ``GET /security/users``, ``GET /security/roles``, ``GET /security/rules`` and ``GET /security/policies`` endpoints.
-- `#8100 <https://github.com/wazuh/wazuh/pull/8100>`_ Added type and status filters to ``GET /vulnerability/{agent_id}`` endpoint.
-- `#7490 <https://github.com/wazuh/wazuh/pull/7490>`_ Added an option to configure SSL ciphers.
-- `#8919 <https://github.com/wazuh/wazuh/pull/8919>`_ Added an option to configure the maximum response time of the API.
-- `#8945 <https://github.com/wazuh/wazuh/pull/8945>`_ Added new ``DELETE /rootcheck/{agent_id}`` endpoint.
-- `#9028 <https://github.com/wazuh/wazuh/pull/9028>`_ Added new ``GET /vulnerability/{agent_id}/last_scan`` endpoint to check the latest vulnerability scan of an agent.
-- `#9028 <https://github.com/wazuh/wazuh/pull/9028>`_ Added new ``cvss`` and ``severity`` fields and filters to ``GET /vulnerability/{agent_id}`` endpoint.
-- `#9100 <https://github.com/wazuh/wazuh/pull/9100>`_ Added an option to configure the maximum allowed API upload size.
-- `#9142 <https://github.com/wazuh/wazuh/pull/9142>`_ Added new unit and integration tests for API models.
-- `#9077 <https://github.com/wazuh/wazuh/pull/9077>`_ Added message with the PID of ``wazuh-apid`` process when launched in foreground mode.
-- `#9144 <https://github.com/wazuh/wazuh/pull/9144>`_ Added ``external id``, ``source`` and ``url`` to the MITRE endpoints responses.
-- `#9297 <https://github.com/wazuh/wazuh/pull/9297>`_ Added custom healthchecks for legacy agents in API integration tests, improving maintainability.
-- `#9914 <https://github.com/wazuh/wazuh/pull/9914>`_ Added new unit tests for the API python module to increase coverage.
-- `#10238 <https://github.com/wazuh/wazuh/pull/10238>`_ Added docker logs separately in API integration tests environment to get cleaner reports.
+- `#7988 <https://github.com/wazuh/wazuh/pull/7988>`_ A new ``PUT /agents/reconnect`` endpoint is added to force agents reconnection to the manager.
+- `#6761 <https://github.com/wazuh/wazuh/pull/6761>`_ The ``select`` parameter is added to the ``GET /security/users``, ``GET /security/roles``, ``GET /security/rules`` and ``GET /security/policies`` endpoints.
+- `#8100 <https://github.com/wazuh/wazuh/pull/8100>`_ The type and status filters is added to ``GET /vulnerability/{agent_id}`` endpoint.
+- `#7490 <https://github.com/wazuh/wazuh/pull/7490>`_ An option is added to configure SSL ciphers.
+- `#8919 <https://github.com/wazuh/wazuh/pull/8919>`_ An option is added to configure the maximum response time of the API.
+- `#8945 <https://github.com/wazuh/wazuh/pull/8945>`_ A new ``DELETE /rootcheck/{agent_id}`` endpoint is added.
+- `#9028 <https://github.com/wazuh/wazuh/pull/9028>`_ A new ``GET /vulnerability/{agent_id}/last_scan`` endpoint is added to check the latest vulnerability scan of an agent.
+- `#9028 <https://github.com/wazuh/wazuh/pull/9028>`_ A new ``cvss`` and ``severity`` fields and filters is added to ``GET /vulnerability/{agent_id}`` endpoint.
+- `#9100 <https://github.com/wazuh/wazuh/pull/9100>`_ An option  is added to configure the maximum allowed API upload size.
+- `#9142 <https://github.com/wazuh/wazuh/pull/9142>`_ A new unit and integration tests for API models is added.
+- `#9077 <https://github.com/wazuh/wazuh/pull/9077>`_ A message with the PID of ``wazuh-apid`` process when launched in foreground mode  is added.
+- `#9144 <https://github.com/wazuh/wazuh/pull/9144>`_ Wazuh adds ``external id``, ``source`` and ``url`` to the MITRE endpoints responses.
+- `#9297 <https://github.com/wazuh/wazuh/pull/9297>`_ A custom healthchecks for legacy agents in API integration tests, improving maintainability is added.
+- `#9914 <https://github.com/wazuh/wazuh/pull/9914>`_ A new unit tests for the API python module  is added to increase coverage.
+- `#10238 <https://github.com/wazuh/wazuh/pull/10238>`_ A docker logs separately in API integration tests environment is added to get cleaner reports.
 - `#10437 <https://github.com/wazuh/wazuh/pull/10437>`_ Added new ``disconnection_time`` field to ``GET /agents`` response.
 - `#10457 <https://github.com/wazuh/wazuh/pull/10457>`_ Added new filters to agents upgrade endpoints.
 - `#8288 <https://github.com/wazuh/wazuh/pull/8288>`_ Added new API endpoints to access all the MITRE information.
