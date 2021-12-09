@@ -27,6 +27,7 @@ Options
 - `disabled`_
 - `remote_enrollment`_
 - `port`_
+- `ipv6`_
 - `use_source_ip`_
 - `force`_
 - `purge`_
@@ -74,6 +75,19 @@ Defines the TCP port number for listening to connections.
 +--------------------+---------------------+
 
 .. _auth_use_source_ip:
+
+ipv6
+^^^^^^^^^^^
+
+.. versionadded:: 4.4.0
+
+Enable IPv6 support.
+
++--------------------+------------------+
+| **Default value**  | no               |
++--------------------+------------------+
+| **Allowed values** | yes, no          |
++--------------------+------------------+
 
 use_source_ip
 ^^^^^^^^^^^^^
