@@ -156,12 +156,12 @@ Agent
 - `#10259 <https://github.com/wazuh/wazuh/pull/10259>`_ Syscollector is extended to collect missing Microsoft product hotfixes.
 - `#10396 <https://github.com/wazuh/wazuh/pull/10396>`_ The osquery integration is updated to find the new osqueryd location as of version 5.0.
 - `#9123 <https://github.com/wazuh/wazuh/pull/9123>`_ The internal FIM data handling has been simplified to find files by their path instead of their inode.
-- `#9764 <https://github.com/wazuh/wazuh/pull/9764>`_ Reimplemented the WPK installer rollback on Windows.
+- `#9764 <https://github.com/wazuh/wazuh/pull/9764>`_  The WPK installer rollback on Windows is reimplemented.
 - `#10208 <https://github.com/wazuh/wazuh/pull/10208>`_ Active responses for Windows agents now support native fields from Eventchannel.
 - `#10651 <https://github.com/wazuh/wazuh/pull/10651>`_ Error logs by Logcollector when a file is missing have been changed to info logs.
 - `#8724 <https://github.com/wazuh/wazuh/pull/8724>`_ The agent MSI installer for Windows now detects the platform version to install the default configuration.
 - `#3659 <https://github.com/wazuh/wazuh/pull/3659>`_ Agent logs for inability to resolve the manager hostname now have info level.
-- `#10900 <https://github.com/wazuh/wazuh/pull/10900>`_ Removed oscap module files as it was already deprecated since v4.0.0.
+- `#10900 <https://github.com/wazuh/wazuh/pull/10900>`_ The oscap module files are removed as it was already deprecated since v4.0.0.
 
 
 RESTful API
