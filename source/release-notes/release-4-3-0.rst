@@ -182,21 +182,21 @@ RESTful API
 - `#9297 <https://github.com/wazuh/wazuh/pull/9297>`_ A custom healthchecks for legacy agents in API integration tests, improving maintainability is added.
 - `#9914 <https://github.com/wazuh/wazuh/pull/9914>`_ A new unit tests for the API python module  is added to increase coverage.
 - `#10238 <https://github.com/wazuh/wazuh/pull/10238>`_ A docker logs separately in API integration tests environment is added to get cleaner reports.
-- `#10437 <https://github.com/wazuh/wazuh/pull/10437>`_ Added new ``disconnection_time`` field to ``GET /agents`` response.
-- `#10457 <https://github.com/wazuh/wazuh/pull/10457>`_ Added new filters to agents upgrade endpoints.
-- `#8288 <https://github.com/wazuh/wazuh/pull/8288>`_ Added new API endpoints to access all the MITRE information.
-- `#10947 <https://github.com/wazuh/wazuh/pull/10947>`_ Show agent-info permissions flag when using cluster_control and in the ``GET /cluster/healthcheck`` API endpoint.
-- `#7490 <https://github.com/wazuh/wazuh/pull/7490>`_ Renamed SSL protocol configuration parameter.
-- `#8827 <https://github.com/wazuh/wazuh/pull/8827>`_ Reviewed and updated API spec examples and JSON body examples.
-- Improved the performance of several API endpoints. This is specially appreciable in environments with a big number of agents:
-  - `#8937 <https://github.com/wazuh/wazuh/pull/8937>`_ Improved ``PUT /agents/group`` endpoint.
-  - `#8938 <https://github.com/wazuh/wazuh/pull/8938>`_ Improved ``PUT /agents/restart`` endpoint.
-  - `#8950 <https://github.com/wazuh/wazuh/pull/8950>`_ Improved ``DELETE /agents`` endpoint.
-  - `#8959 <https://github.com/wazuh/wazuh/pull/8959>`_ Improved ``PUT /rootcheck`` endpoint.
-  - `#8966 <https://github.com/wazuh/wazuh/pull/8966>`_ Improved ``PUT /syscheck`` endpoint.
-  - `#9046 <https://github.com/wazuh/wazuh/pull/9046>`_ Improved ``DELETE /groups`` endpoint and changed API response to be more consistent.
-- `#8945 <https://github.com/wazuh/wazuh/pull/8945>`_ Changed ``DELETE /rootcheck`` endpoint to ``DELETE /experimental/rootcheck``.
-- `#9012 <https://github.com/wazuh/wazuh/pull/9012>`_ Reduced the time it takes for ``wazuh-apid`` process to check its configuration when using the -t parameter.
+- `#10437 <https://github.com/wazuh/wazuh/pull/10437>`_ A new ``disconnection_time`` field is added to ``GET /agents`` response.
+- `#10457 <https://github.com/wazuh/wazuh/pull/10457>`_ A new filters is added to agents upgrade endpoints.
+- `#8288 <https://github.com/wazuh/wazuh/pull/8288>`_ A new API endpoints is added to access all the MITRE information.
+- `#10947 <https://github.com/wazuh/wazuh/pull/10947>`_ Show agent-info permissions flag is added when using cluster_control and in the ``GET /cluster/healthcheck`` API endpoint.
+- `#7490 <https://github.com/wazuh/wazuh/pull/7490>`_ The SSL protocol configuration parameter is renamed.
+- `#8827 <https://github.com/wazuh/wazuh/pull/8827>`_ The API spec examples and JSON body examples is reviewed and updated.
+- The performance of several API endpoints is improved. This is specially appreciable in environments with a big number of agents:
+  - `#8937 <https://github.com/wazuh/wazuh/pull/8937>`_ The endpoint parameter ``PUT /agents/group`` is improved.
+  - `#8938 <https://github.com/wazuh/wazuh/pull/8938>`_ The endpoint parameter ``PUT /agents/restart`` is improved.
+  - `#8950 <https://github.com/wazuh/wazuh/pull/8950>`_ The endpoint parameter ``DELETE /agents`` is improved.
+  - `#8959 <https://github.com/wazuh/wazuh/pull/8959>`_ The endpoint parameter ``PUT /rootcheck`` is improved.
+  - `#8966 <https://github.com/wazuh/wazuh/pull/8966>`_ The endpoint parameter ``PUT /syscheck`` is improved.
+  - `#9046 <https://github.com/wazuh/wazuh/pull/9046>`_ The endpoint parameter ``DELETE /groups`` is improved and API response is changed to be more consistent.
+- `#8945 <https://github.com/wazuh/wazuh/pull/8945>`_ The endpoint parameter ``DELETE /rootcheck`` is changed to ``DELETE /experimental/rootcheck``.
+- `#9012 <https://github.com/wazuh/wazuh/pull/9012>`_ The time it takes for ``wazuh-apid`` process is reduced to check its configuration when using the -t parameter.
 - `#9019 <https://github.com/wazuh/wazuh/pull/9019>`_ Fixed malfunction in the ``sort`` parameter of syscollector endpoints.
 - `#9113 <https://github.com/wazuh/wazuh/pull/9113>`_ Improved API integration tests stability when failing in entrypoint.
 - `#9228 <https://github.com/wazuh/wazuh/pull/9228>`_ Made SCA API integration tests dynamic to validate responses coming from any agent version.
