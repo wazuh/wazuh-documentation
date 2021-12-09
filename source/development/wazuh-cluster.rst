@@ -119,7 +119,7 @@ Integrity thread
 
 This thread is in charge of synchronizing master's integrity information among all worker nodes. The communication is started by the worker node and it has the following stages:
 
-1. The worker asks the master for permission. This is important to prevent a new synchronization process to start if there is already one synchronization process at the moment (i.e. overlapping).
+1. The worker asks the master for permission. This is important to prevent a new synchronization process to start if there is already one synchronization process at the moment (i.e. overlapping). The permission will be re-granted when the sync is finished or if it has been locked for more than 1000 seconds. This is done to avoid that the synchronization in a worker stay blocked after any error. Its default time can be modified at the ``max_locked_integrity_time`` variable of the `cluster.json <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/framework/wazuh/core/cluster/cluster.json>`_ file.
 2. The worker sends the master a JSON file containing the following information:
 
     * Path
