@@ -10,7 +10,7 @@
 Quickstart
 ==========
 
-**Version v.2**
+**Version 2.0**
 
 Wazuh is a free, open source and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response, and regulatory compliance. The solution is widely used by thousands of organizations around the world, from small businesses to large enterprises. You can start using Wazuh as well with our Quickstart that installs and configures the Wazuh components in just a few minutes.
 
