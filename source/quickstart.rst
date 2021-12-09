@@ -213,3 +213,14 @@ The :ref:`Wazuh agent <wazuh_agent>` is a single and lightweight monitoring soft
           </a>
       </div>
   </div>
+
+==============================================================================================================================    =============
+Operating systems                                                                                                                 Description
+==============================================================================================================================    =============
+`Linux systems <https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-linux.html>`_          The deployment of a Wazuh agent on a Linux system uses deployment variables that facilitate the task of installing, registering, and configuring the agent.
+`Windows systems <https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-windows.html>`_      Monitor your Windows systems with Wazuh, from Windows XP to the latest available versions including Windows 11 and Windows Server 2022.
+`macOS systems <https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-macos.html>`_          Monitor your macOS systems with Wazuh, the package is suitable for macOS Sierra or later.
+`AIX systems <https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-aix.html>`_              The deployment of a Wazuh agent on an AIX system uses deployment variables that facilitate the task of installing, registering, and configuring the agent.
+`HP-UX systems <https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-hpux.html>`_           Monitor your HP-UX systems with Wazuh.
+`Solaris systems <https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-solaris.html>`_      Monitor your Solaris systems with Wazuh, to start the installation process, select your architecture: i386 or Sparc. 
+==============================================================================================================================    =============
