@@ -7,16 +7,27 @@
   :description: Install and configure Wazuh, the open source security platform, in just a few minutes using the unattended installation script. 
 
 
-Wazuh quickstart
-================
+Quickstart
+==========
 
-Wazuh is a free, open source and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response, and regulatory compliance. To learn more about the Wazuh solution, its components, architecture, and capabilities, check the :ref:`Getting started <getting_started>` section. 
+**Version v.2**
 
-With Wazuh quickstart, you install the Wazuh server, Elasticsearch and Kibana on the same host using the unattended installation script. These central components are in charge of analyzing the data gathered by the Wazuh agents, providing a search engine and data visualization tool that allow users to navigate through their security alerts.
+Wazuh is a free, open source and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response, and regulatory compliance. The solution is widely used by thousands of organizations around the world, from small businesses to large enterprises. You can start using Wazuh as well with our Quickstart that installs and configures the Wazuh components in just a few minutes.
 
-By running the automated script, you install and configure the Wazuh in just a few minutes.
+This Quickstart only requires you to run the unattended script which quickly installs all the :ref:`Wazuh central components <components>` on the same host. These central components are in charge of analyzing the data gathered by the Wazuh agents, providing a search engine and data visualization tool that allow users to navigate through their security alerts.
 
-Alternatively, you can check our :ref:`Installation guide <installation_guide>` to learn how to install each component individually on the same server, as an all-in-one deployment, or on different servers as a distributed deployment depending on the environment needs. 
+Alternatively, you can install each component on the same server, one by one, or on different servers as a distributed deployment, depending on the environment needs. Check our :ref:`Installation guide <installation_guide>` to learn more about these deployment alternatives. 
+
+
+Community and support
+---------------------
+
+Wazuh is quick and easy to install, but if you have any questions, our developers and contributors are more than happy to answer them. You can join our community to learn from other users, participate in discussions, talk to our development team, and contribute to the project. The following resources are easily available:
+
+- `Slack channel <https://wazuh.com/community/join-us-on-slack>`_: Join our community channel to chat with our developers and technical team in a close to real-time experience.
+- `Google group <https://groups.google.com/forum/#!forum/wazuh>`_: Here you can share questions and learn from other Wazuh users. It is easy to subscribe via `email <wazuh+subscribe@googlegroups.com>`_.
+- `GitHub repositories <https://github.com/wazuh>`_: Get access to the Wazuh source code, report issues, and contribute to the project. We happily review and accept pull requests.
+
 
 .. _installation_requirements:
 
@@ -42,11 +53,8 @@ Wazuh can be installed on a 64-bit Linux operating system.
    * - SUSE Linux enterprise server 11 LTSS and later
    * - Ubuntu 14.04 ESM and later
 
-
-
 Hardware requirements
 ^^^^^^^^^^^^^^^^^^^^^
-
 - Hardware
   
   +-------------------------+-------------------------------+
@@ -80,7 +88,7 @@ Hardware requirements
 Installing Wazuh
 ----------------
 
-#. Download and run the Wazuh unattended installation. 
+#. Download and run the Wazuh unattended installation script. 
 
    .. code-block:: console
 
@@ -121,24 +129,23 @@ Installing Wazuh
       
       You can access the web interface https://<server_ip>. The credentials are wazuh:vhDpq7YcwA08BLTmcdeYeJmXPU_VD31f
 
-   You now have installed and configured Wazuh. Access the web interface and start securing your systems with Wazuh.       
+   You now have installed and configured Wazuh.
 
-#. Access the Wazuh web interface with your credentials. 
+#. Access the Wazuh web interface with ``https://<server_ip>`` and the credentials shown below.
 
-    - URL: *https://<server_ip>*
-    - **Username**: *wazuh*
-    - **Password**: *<wazuh_password>*
+.. thumbnail:: images/quickstart/welcome-to-wazuh_v2.png
+  :title: Wazuh web interface credentials
+  :align: center
+  :width: 100%
 
-  When you access Kibana for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or, for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser. Alternatively, a certificate from a trusted authority can be configured. 
+When you access Kibana for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. You can make an exception for this in the advanced options of the web browser or, for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser. Alternatively, a certificate from a trusted authority can be configured. 
 
-If you want to uninstall the components of the all-in-one installation, run the unattended installation script and use the option ``-r / --uninstall``.  
+If you want to uninstall Wazuh, run the unattended installation script and use the option ``-r / --uninstall``.  
 
 Next steps
 ----------
 
-The Wazuh environment is now ready and you can proceed with installing the Wazuh agent on the endpoints to be monitored.
-
-The :ref:`Wazuh agent <wazuh_agent>` is a single and lightweight monitoring software that runs on most operating systems and provides visibility into the endpoint's security by collecting critical system and application records, inventory data, and detecting potential anomalies. Now that your environment is ready, select your operating system and follow the installation steps to deploy the agent to the endpoints. 
+Now that your environment is ready, select your operating system and follow the installation steps to deploy the :ref:`Wazuh agent <wazuh_agent>` to the endpoints. The agent is a single and lightweight monitoring software that runs on most operating systems. It provides visibility into the endpoint's security by collecting critical system and application records, inventory data, and detecting potential anomalies. 
 
 .. raw:: html
 
