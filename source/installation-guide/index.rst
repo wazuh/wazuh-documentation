@@ -141,20 +141,22 @@ Operating systems                                                               
 Installation guide FAQ
 ----------------------
 
-**How do I install Wazuh?**
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+How do I install Wazuh?
+^^^^^^^^^^^^^^^^^^^^^^^
 
 Install Wazuh by following the installation workflow that best suits your needs. To learn more about each component and its capabilities, check the :ref:`Components <components>` section.
 
-**Wazuh server**
 
-You can now choose an installation method and start installing the Wazuh server.
+**Installing Wazuh server**
+
+You can choose an installation method and start installing the Wazuh server:
 
 - :ref:`Unattended installation <wazuh_server_unattended>`: Install this component by using a script that automates the installation process.  
 - :ref:`Step-by-step installation <wazuh_server_step_by_step>`: Install this component manually following detailed step-by-step instructions.
 
 
-**Elasticsearch**
+
+**Installing Elasticsearch**
 
 You can choose an installation method and start installing Elasticsearch: 
 
@@ -162,20 +164,25 @@ You can choose an installation method and start installing Elasticsearch:
 - :ref:`Step-by-step installation <wazuh_indexer_step_by_step>`: Install this component manually following detailed step-by-step instructions.
 
 
-**Kibana**
+
+**Installing Kibana**
 
 You can choose an installation method and start installing Kibana: 
 
 - :ref:`Unattended installation <wazuh_dashboard_unattended_installation>`: Install this component by using a script that automates the installation process. 
 - :ref:`Step-by-step installation <wazuh_dashboard_step_by_step>`: Install this component manually following detailed step-by-step instructions.
 
-**Wazuh agent**
+
+
+**Installing Wazuh agent**
 
 To install a Wazuh agent, select your operating system from the list of operating system above and follow the instructions.
 
 
-**How do I install Wazuh agents on Linux?**
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+How do I install Wazuh agents on Linux?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Open a terminal in the Linux/Unix Wazuh agent's host as a ``root`` user:
 
@@ -186,8 +193,8 @@ Open a terminal in the Linux/Unix Wazuh agent's host as a ``root`` user:
 
 
 
-**How do I install Wazuh agents on Windows?**
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+How do I install Wazuh agents on Windows?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Monitor your Windows systems with Wazuh, from Windows XP to the latest available versions including Windows 11 and Windows Server 2022:
 
