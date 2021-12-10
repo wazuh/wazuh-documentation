@@ -1,16 +1,17 @@
 .. Copyright (C) 2021 Wazuh, Inc.
+.. meta::
+  :description: The Wazuh GCP Storage module allows you to fetch logs from Google Storage. Learn more about the module's usage in this section.
 
 .. _gcp_access_logs:
 
 Usage logs & storage logs
 =========================
 
-.. note::
-    This service is supported by Wazuh using the **gcp-bucket** module. Details on how to configure this module can be found :ref:`here <gcp-bucket>`.
-
 Google Cloud Storage offers `usage logs and storage logs <https://cloud.google.com/storage/docs/access-logs>`__, also known as access logs, in the form of CSV files that can be downloaded. Usage logs provide information for all of the requests made on a specified bucket and are created hourly. Storage logs provide information about the storage consumption of that bucket for the last day and are created daily. Once set up, usage logs and storage logs are automatically created as new objects in the specified bucket.
 
-.. note:: To be able to send VPC Flow logs to Wazuh, Cloud Logging must be configured to export these logs to Pub/Sub first. More information about how Pub/Sub works and how to configure it :ref:`here <pubsub>`.
+To process Storage and Acces logs, Wazuh makes use of the **gcp-bucket** module. Information regarding the configuration of this module can be found in the :ref:`gcp-bucket configuration reference <gcp-bucket>`.
+
+.. note:: To be able to send VPC Flow logs to Wazuh, Cloud Logging must be configured to export these logs to Pub/Sub first. More information about how Pub/Sub works and how to configure it can be found in the :ref:`setting-up Pub/Sub section <pubsub>`.
 
 
 Setting up log delivery to a Google Cloud Storage bucket

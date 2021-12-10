@@ -1,4 +1,6 @@
 .. Copyright (C) 2021 Wazuh, Inc.
+.. meta::
+  :description: The Wazuh GCP module allows you to fetch logs from Google Pub/Sub and Google Storage. Learn more about installing the required dependencies in this section.
 
 .. _gcp_dependencies:
 
@@ -52,7 +54,7 @@ b) For Debian/Ubuntu operating systems:
 Google Cloud pip dependencies
 -----------------------------
 
-`google-cloud-pubsub <https://pypi.org/project/google-cloud-pubsub//>`_ is the official python library supported by Google to manage Google Cloud Pub/Sub resources. It will be used to pull the log messages from the Pub/Sub queue. 
+`google-cloud-pubsub <https://pypi.org/project/google-cloud-pubsub/>`_ is the official python library supported by Google to manage Google Cloud Pub/Sub resources. It is used to pull the log messages from the Pub/Sub queue. 
 
 - Depending on the Wazuh version used, it is necessary to install a different ``google-cloud-pubsub`` version.
 
