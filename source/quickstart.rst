@@ -19,64 +19,6 @@ These central components are in charge of analyzing the data gathered by the Waz
 Check the :ref:`Getting started <getting_started>` section to learn more about the Wazuh solution, its components, architecture, and capabilities. Alternatively, you can check our :ref:`Installation guide <installation_guide>` to learn how to install each component individually on the same server, as an all-in-one deployment, or on different servers as a distributed deployment depending on the environment needs.
  
 
-.. _installation_requirements:
-
-Requirements
-------------
-Below you can check the supported operating systems and the recommended hardware requirements for the Wazuh installation.
-
-Supported operating systems
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Wazuh can be installed on the 64-bit Linux operating systems detailed in the list below:
-
-.. list-table::
-   :width: 50%
-   
-   * - Amazon Linux 2
-   * - CentOS 7 and later
-   * - Debian 8 ELTS and later
-   * - Fedora Linux 33 and later
-   * - openSUSE Tumbleweed, Leap 15.2 and later
-   * - Oracle Linux 6 Extended and later
-   * - Red Hat Enterprise Linux 6 ELS and later
-   * - SUSE Linux enterprise server 11 LTSS and later
-   * - Ubuntu 14.04 ESM and later
-
-
-
-Hardware requirements
-^^^^^^^^^^^^^^^^^^^^^
-
-- **Memory and CPU**
-  
-  Minimum and recommended memory and CPU configurations:
-  
-  +-------------------------+-------------------------------+
-  |        Minimum          |         Recommended           |
-  +----------+--------------+--------------+----------------+
-  |  RAM (GB)|  CPU (cores) |  RAM (GB)    |   CPU (cores)  |
-  +==========+==============+==============+================+
-  |     4    |     2        |     16       |       8        |
-  +----------+--------------+--------------+----------------+
-
-- **Disk space**
-
-  The amount of data depends on the generated alerts per second (APS). The table below details the estimated disk space needed per agent to store 90 days of alerts on a Wazuh server, depending on the type of monitored endpoints:
-
-  +-------------------------------------------------+-----+---------------------------+
-  | Monitored endpoints                             | APS | Storage                   |
-  |                                                 |     |  (GB/90 days)             |
-  +=================================================+=====+===========================+
-  | Servers                                         | 0.25|           3.8             |
-  +-------------------------------------------------+-----+---------------------------+
-  | Workstations                                    | 0.1 |           1.5             |
-  +-------------------------------------------------+-----+---------------------------+
-  | Network devices                                 | 0.5 |           7.6             |
-  +-------------------------------------------------+-----+---------------------------+
-
-  For example, for an environment with 80 workstations, 10 servers, and 10 network devices, the storage needed for 90 days of alerts is 236 GB approximately. 
- 
 
 .. _unattended_all_in_one:
 
@@ -142,17 +84,6 @@ Next steps
 The Wazuh environment is now ready and you can proceed with installing the Wazuh agent on the endpoints to be monitored.
 
 The :ref:`Wazuh agent <wazuh_agent>` is a single and lightweight monitoring software that runs on most operating systems and provides visibility into the endpoint's security by collecting critical system and application records, inventory data, and detecting potential anomalies. Now that your environment is ready, select your operating system and follow the installation steps to deploy the agent to the endpoints. 
-
-==============================================================================================================================    =============
-Operating systems                                                                                                                 Description
-==============================================================================================================================    =============
-`Linux systems <https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-linux.html>`_          The deployment of a Wazuh agent on a Linux system uses deployment variables that facilitate installing, registering, and configuring the agent.
-`Windows systems <https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-windows.html>`_      You can monitor your Windows systems with Wazuh, from Windows XP to the latest versions, including Windows 11 and Windows Server 2022.
-`macOS systems <https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-macos.html>`_          Wazuh allows you to monitor your macOS systems and our package is suitable for macOS Sierra or later.
-`Solaris systems <https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-solaris.html>`_      You can monitor your Solaris systems with Wazuh. To start the installation process, all you need to do is select your architecture between i386 or Sparc. 
-`AIX systems <https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-aix.html>`_              The deployment of a Wazuh agent on an AIX system uses variables that facilitate installing, registering, and configuring the agent.
-`HP-UX systems <https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-hpux.html>`_           You can monitor your HP-UX systems with Wazuh.  Wazuh allows you to monitor your HP-UX systems with Wazuh. You only need to start the installation process by downloading the `HP-UX installer <https://packages.wazuh.com/|CURRENT_MAJOR|/hp-ux/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar>`_. 
-==============================================================================================================================    =============
 
 .. raw:: html
 
@@ -224,3 +155,65 @@ Operating systems                                                               
           </a>
       </div>
   </div>
+
+
+
+.. _installation_requirements:
+
+Requirements
+------------
+Below you can check the supported operating systems and the recommended hardware requirements for the Wazuh installation.
+
+Supported operating systems
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Wazuh can be installed on the 64-bit Linux operating systems detailed in the list below:
+
+.. list-table::
+   :width: 50%
+   
+   * - Amazon Linux 2
+   * - CentOS 7 and later
+   * - Debian 8 ELTS and later
+   * - Fedora Linux 33 and later
+   * - openSUSE Tumbleweed, Leap 15.2 and later
+   * - Oracle Linux 6 Extended and later
+   * - Red Hat Enterprise Linux 6 ELS and later
+   * - SUSE Linux enterprise server 11 LTSS and later
+   * - Ubuntu 14.04 ESM and later
+
+
+
+Hardware requirements
+^^^^^^^^^^^^^^^^^^^^^
+
+- **Memory and CPU**
+  
+  Minimum and recommended memory and CPU configurations:
+  
+  +-------------------------+-------------------------------+
+  |        Minimum          |         Recommended           |
+  +----------+--------------+--------------+----------------+
+  |  RAM (GB)|  CPU (cores) |  RAM (GB)    |   CPU (cores)  |
+  +==========+==============+==============+================+
+  |     4    |     2        |     16       |       8        |
+  +----------+--------------+--------------+----------------+
+
+- **Disk space**
+
+  The amount of data depends on the generated alerts per second (APS). The table below details the estimated disk space needed per agent to store 90 days of alerts on a Wazuh server, depending on the type of monitored endpoints:
+
+  +-------------------------------------------------+-----+---------------------------+
+  | Monitored endpoints                             | APS | Storage                   |
+  |                                                 |     |  (GB/90 days)             |
+  +=================================================+=====+===========================+
+  | Servers                                         | 0.25|           3.8             |
+  +-------------------------------------------------+-----+---------------------------+
+  | Workstations                                    | 0.1 |           1.5             |
+  +-------------------------------------------------+-----+---------------------------+
+  | Network devices                                 | 0.5 |           7.6             |
+  +-------------------------------------------------+-----+---------------------------+
+
+  For example, for an environment with 80 workstations, 10 servers, and 10 network devices, the storage needed for 90 days of alerts is 236 GB approximately. 
+ 
+
