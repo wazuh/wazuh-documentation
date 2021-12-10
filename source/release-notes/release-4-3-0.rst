@@ -197,21 +197,21 @@ RESTful API
    - `#9046 <https://github.com/wazuh/wazuh/pull/9046>`_ The endpoint parameter ``DELETE /groups`` is improved and API response is changed to be more consistent.
 - `#8945 <https://github.com/wazuh/wazuh/pull/8945>`_ The endpoint parameter ``DELETE /rootcheck`` is changed to ``DELETE /experimental/rootcheck``.
 - `#9012 <https://github.com/wazuh/wazuh/pull/9012>`_ The time it takes for ``wazuh-apid`` process is reduced to check its configuration when using the -t parameter.
-- `#9019 <https://github.com/wazuh/wazuh/pull/9019>`_ Fixed malfunction in the ``sort`` parameter of syscollector endpoints.
-- `#9113 <https://github.com/wazuh/wazuh/pull/9113>`_ Improved API integration tests stability when failing in entrypoint.
-- `#9228 <https://github.com/wazuh/wazuh/pull/9228>`_ Made SCA API integration tests dynamic to validate responses coming from any agent version.
-- `#9227 <https://github.com/wazuh/wazuh/pull/9227>`_ Refactored and standardized all the date fields in the API responses to use ISO8601.
-- `#9263 <https://github.com/wazuh/wazuh/pull/9263>`_ Removed ``Server`` header from API HTTP responses.
-- `#9371 <https://github.com/wazuh/wazuh/pull/9371>`_ Improved JWT implementation by replacing HS256 signing algorithm with RS256.
-- `#10009 <https://github.com/wazuh/wazuh/pull/10009>`_ Removed limit of agents to upgrade using the API upgrade endpoints.
-- `#10158 <https://github.com/wazuh/wazuh/pull/10158>`_ Changed Windows agents FIM responses to return permissions as JSON.
-- `#10389 <https://github.com/wazuh/wazuh/pull/10389>`_ Adapted API endpoints to changes in ``wazuh-authd`` daemon ``force`` parameter.
-- `#10512 <https://github.com/wazuh/wazuh/pull/10512>`_ Deprecated ``use_only_authd`` API configuration option and related functionality. ``wazuh-authd`` will always be required for creating and removing agents.
-- `#10745 <https://github.com/wazuh/wazuh/pull/10745>`_ Improved API validators and related unit tests.
-- `#10905 <https://github.com/wazuh/wazuh/pull/10905>`_ Improved specific module healthchecks in API integration tests environment.
-- `#10916 <https://github.com/wazuh/wazuh/pull/10916>`_ Changed thread pool executors for process pool executors to improve API availability.
-- `#8599 <https://github.com/wazuh/wazuh/pull/8599>`_ Removed select parameter from GET /agents/stats/distinct endpoint.
-- `#8099 <https://github.com/wazuh/wazuh/pull/8099>`_ Removed ``GET /mitre`` endpoint.
+- `#9019 <https://github.com/wazuh/wazuh/pull/9019>`_ The malfunction in the ``sort`` parameter of syscollector endpoints is fixed.
+- `#9113 <https://github.com/wazuh/wazuh/pull/9113>`_ The API integration tests stability when failing in entrypoint is improved.
+- `#9228 <https://github.com/wazuh/wazuh/pull/9228>`_ The SCA API integration tests dynamic to validate responses coming from any agent version is fixed.
+- `#9227 <https://github.com/wazuh/wazuh/pull/9227>`_ All the date fields in the API responses to use ISO8601 is refactored and standardized.
+- `#9263 <https://github.com/wazuh/wazuh/pull/9263>`_ The ``Server`` header from API HTTP responses is removed.
+- `#9371 <https://github.com/wazuh/wazuh/pull/9371>`_ The JWT implementation by replacing HS256 signing algorithm with RS256 is improved.
+- `#10009 <https://github.com/wazuh/wazuh/pull/10009>`_ The limit of agents to upgrade using the API upgrade endpoints is removed.
+- `#10158 <https://github.com/wazuh/wazuh/pull/10158>`_ The Windows agents FIM responses is changed to return permissions as JSON.
+- `#10389 <https://github.com/wazuh/wazuh/pull/10389>`_ The API endpoints is adapted to changes in ``wazuh-authd`` daemon ``force`` parameter.
+- `#10512 <https://github.com/wazuh/wazuh/pull/10512>`_ The ``use_only_authd`` API configuration option and related functionality is deprecated. ``wazuh-authd`` will always be required for creating and removing agents.
+- `#10745 <https://github.com/wazuh/wazuh/pull/10745>`_ The API validators and related unit tests is improved.
+- `#10905 <https://github.com/wazuh/wazuh/pull/10905>`_ The specific module healthchecks in API integration tests environment is improved.
+- `#10916 <https://github.com/wazuh/wazuh/pull/10916>`_ The thread pool executors for process pool executors to improve API availability is changed.
+- `#8599 <https://github.com/wazuh/wazuh/pull/8599>`_ The select parameter from GET /agents/stats/distinct endpoint is removed.
+- `#8099 <https://github.com/wazuh/wazuh/pull/8099>`_ The ``GET /mitre`` endpoint is removed.
 
 
 Ruleset
