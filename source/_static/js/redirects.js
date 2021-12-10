@@ -58,7 +58,6 @@ newUrls['4.2'] = [
   '/proof-of-concept-guide/index.html',
   '/deploying-with-ansible/guide/install-opendistro-server.html',
   '/deploying-with-ansible/roles/wazuh-opendistro.rst',
-  '/release-notes/release-4-2-5.html',
   '/amazon-machine-images/amazon-machine-images.html',
   '/user-manual/capabilities/active-response/ar-use-cases/removing-malware.html',
   '/user-manual/capabilities/active-response/ar-use-cases/wazuh-with-yara.html',
@@ -208,6 +207,7 @@ newUrls['4.2'] = [
   '/release-notes/release-4-2-2.html',
   '/release-notes/release-4-2-3.html',
   '/release-notes/release-4-2-4.html',
+  '/release-notes/release-4-2-5.html',
   '/user-manual/api/securing-api.html',
   '/user-manual/configuring-cluster/cluster-management.html',
   '/user-manual/manager/manual-email-report/smtp-authentication.html',
@@ -914,16 +914,6 @@ redirections.push(
       'target': ['4.1=>4.2', '4.2=>4.1'],
       '4.1': '/release-notes/release_4_1_5.html',
       '4.2': '/release-notes/release-4-1-5.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_4_2_0.html',
-      '4.2': '/release-notes/release-4-2-0.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_4_2_1.html',
-      '4.2': '/release-notes/release-4-2-1.html',
     },
     {
       'target': ['4.1=>4.2', '4.2=>4.1'],
