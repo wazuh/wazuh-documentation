@@ -32,15 +32,12 @@ Central components of Wazuh include the Wazuh server, Elasticsearch, and Kibana.
 Wazuh central components
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-==============================================================    =============
-Component                                                         Description
-==============================================================    =============
-:ref:`Elasticsearch <wazuh_indexer_installation>`                 It is a highly scalable, full-text search and analytics engine. During the installation of Elasticsearch, the Wazuh certificates tool is used to create certificates needed for encrypting the communication between the components. These certificates must be distributed to all the servers in the Wazuh installation and random passwords are also generated for the system users. 
+:ref:`Elasticsearch <wazuh_indexer_installation>` is a highly scalable, full-text search and analytics engine. During the installation of Elasticsearch, the Wazuh certificates tool is used to create certificates needed for encrypting the communication between the components. These certificates must be distributed to all the servers in the Wazuh installation and random passwords are also generated for the system users. 
 
-:ref:`Wazuh server <wazuh_server_installation>`                   It is in charge of analyzing the data received from the Wazuh agents and triggering alerts when threats or anomalies are detected. It is also used to manage the agents' configuration and monitor their status remotely. This component includes the Wazuh manager and Filebeat. 
+:ref:`Wazuh server <wazuh_server_installation>` is in charge of analyzing the data received from the Wazuh agents and triggering alerts when threats or anomalies are detected. It is also used to manage the agents' configuration and monitor their status remotely. This component includes the Wazuh manager and Filebeat. 
 
-:ref:`Kibana <wazuh_dashboard_installation>`                      It is a flexible and intuitive web interface for mining, analyzing, and visualizing data. It includes out-of-the-box dashboards for security events, detected vulnerable applications, file integrity monitoring data, configuration assessment results, and cloud infrastructure monitoring events. Kibana also helps organizations with regulatory compliance such as PCI DSS, GDPR, CIS, HIPAA, and NIST 800-53 standards.
-==============================================================    =============
+:ref:`Kibana <wazuh_dashboard_installation>` is a flexible and intuitive web interface for mining, analyzing, and visualizing data. It includes out-of-the-box dashboards for security events, detected vulnerable applications, file integrity monitoring data, configuration assessment results, and cloud infrastructure monitoring events. Kibana also helps organizations with regulatory compliance such as PCI DSS, GDPR, CIS, HIPAA, and NIST 800-53 standards.
+
 
 The Wazuh server and Elasticsearch can be installed as a single-node or multi-node cluster depending on the environment needs. Small Wazuh deployments, which do not require processing large amounts of data, can easily be handled by a single-node cluster. Multi-node clusters are recommended when there are many monitored endpoints, when a large volume of data is anticipated, or when high availability is required.
 
@@ -61,17 +58,6 @@ Installing the Wazuh agent
 --------------------------
 
 The :ref:`Wazuh agent <wazuh_agent>` is a single and lightweight monitoring software that runs on most operating systems. It provides visibility of the endpoints by collecting critical system and application records, inventory data, and detecting potential anomalies. If the Wazuh central components are already installed in your environment, select your operating system and follow the installation steps to deploy the agent to the endpoints.
-
-==============================================================================================================================    =============
-Operating systems                                                                                                                 Description
-==============================================================================================================================    =============
-`Linux systems <https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-linux.html>`_          The deployment of a Wazuh agent on a Linux system uses deployment variables that facilitate installing, registering, and configuring the agent.
-`Windows systems <https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-windows.html>`_      You can monitor your Windows systems with Wazuh, from Windows XP to the latest versions, including Windows 11 and Windows Server 2022.
-`macOS systems <https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-macos.html>`_          Wazuh allows you to monitor your macOS systems and our package is suitable for macOS Sierra or later.
-`Solaris systems <https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-solaris.html>`_      You can monitor your Solaris systems with Wazuh. To start the installation process, all you need to do is select your architecture between i386 or Sparc. 
-`AIX systems <https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-aix.html>`_              The deployment of a Wazuh agent on an AIX system uses variables that facilitate installing, registering, and configuring the agent.
-`HP-UX systems <https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-hpux.html>`_           You can monitor your HP-UX systems with Wazuh.  Wazuh allows you to monitor your HP-UX systems with Wazuh. You only need to start the installation process by downloading the `HP-UX installer <https://packages.wazuh.com/|CURRENT_MAJOR|/hp-ux/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar>`_. 
-==============================================================================================================================    =============
 
 .. raw:: html
 
