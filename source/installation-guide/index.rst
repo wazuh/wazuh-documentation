@@ -151,14 +151,14 @@ Installation guide FAQ
 How do I install Wazuh?
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Install Wazuh by following the installation methods listed below that best suits your needs. To learn more about each component and its capabilities, check the :ref:`Components <components>` section.
+Install Wazuh by following the installation methods listed below that best suit your needs. Check the :ref:`Components <components>` section to learn more about each component and its capabilities.
 
 
 **Installing Wazuh server**
 
 You can choose an installation method and start installing the Wazuh server:
 
-- :ref:`Unattended installation <wazuh_server_unattended>`: Install this component by using a script that automates the installation process.  
+- :ref:`Unattended installation <wazuh_server_unattended>`: Install this component using a script that automates the installation process.  
 - :ref:`Step-by-step installation <wazuh_server_step_by_step>`: Install this component manually following detailed step-by-step instructions.
 
 
@@ -167,7 +167,7 @@ You can choose an installation method and start installing the Wazuh server:
 
 You can choose an installation method and start installing Elasticsearch: 
 
-- :ref:`Unattended installation <wazuh_indexer_unattended>`: Install this component by using a script that automates the installation process. 
+- :ref:`Unattended installation <wazuh_indexer_unattended>`: Install this component using a script that automates the installation process. 
 - :ref:`Step-by-step installation <wazuh_indexer_step_by_step>`: Install this component manually following detailed step-by-step instructions.
 
 
@@ -176,14 +176,14 @@ You can choose an installation method and start installing Elasticsearch:
 
 You can choose an installation method and start installing Kibana: 
 
-- :ref:`Unattended installation <wazuh_dashboard_unattended_installation>`: Install this component by using a script that automates the installation process. 
+- :ref:`Unattended installation <wazuh_dashboard_unattended_installation>`: Install this component using a script that automates the installation process. 
 - :ref:`Step-by-step installation <wazuh_dashboard_step_by_step>`: Install this component manually following detailed step-by-step instructions.
 
 
 
 **Installing Wazuh agent**
 
-To install a Wazuh agent, select your operating system from the list of operating system above and follow the instructions.
+To install a Wazuh agent, select your operating system from the list above and follow the instructions.
 
 
 
@@ -194,7 +194,7 @@ How do I install Wazuh agents on Linux?
 Open a terminal in the Linux/Unix Wazuh agent's host as a ``root`` user:
 
 - Run the ``agent-auth`` utility, using the Wazuh manager’s IP address to register the Wazuh agent.
-- To enable the communication with the Wazuh manager, edit the Wazuh agent’s configuration file placed at ``/var/ossec/etc/ossec.conf``.
+- To enable communication with the Wazuh manager, edit the Wazuh agent’s configuration file placed at ``/var/ossec/etc/ossec.conf``.
 - Restart the Wazuh agent.
 - Read the :ref:`Registering Wazuh agents <register_agents>` section for more information.  
 
@@ -203,10 +203,10 @@ Open a terminal in the Linux/Unix Wazuh agent's host as a ``root`` user:
 How do I install Wazuh agents on Windows?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Monitor your Windows systems with Wazuh, from Windows XP to the latest available versions including Windows 11 and Windows Server 2022:
+Monitor your Windows systems with Wazuh, from Windows XP to the latest available versions, including Windows 11 and Windows Server 2022:
 
-- To perform the installation, administrator privileges are required.
-- To start the installation process, download the `Windows installer <https://packages.wazuh.com/|CURRENT_MAJOR|/windows/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi>`_.
+- - To start the installation process, download the `Windows installer <https://packages.wazuh.com/|CURRENT_MAJOR|/windows/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi>`_.
+- Administrator privileges are required to perform the installation.
 - Select the installation method you want to follow: command line interface (CLI) or graphical user interface (GUI).
 - By default, all agent files are stored in ``C:\Program Files (x86)\ossec-agent`` after the installation.
 - Read the :ref:`Installing Wazuh agents on Windows systems <wazuh_agent_package_windows>` section for more information.  
