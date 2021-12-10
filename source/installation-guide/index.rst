@@ -51,7 +51,7 @@ The diagram below represents a Wazuh deployment architecture. It shows the solut
     :align: center
     :wrap_image: No
 
-Installation alternatives: Wazuh can also be installed with commercial options like Elastic Stack basic license or Splunk. To learn more about these options and other installation alternatives, see the :ref:`More installation alternatives <more_installation_alternatives>` section.
+**Installation alternatives:** Wazuh can also be installed with commercial options like Elastic Stack basic license or Splunk. To learn more about these options and other installation alternatives, see the :ref:`More installation alternatives <more_installation_alternatives>` section.
 
 .. note:: Wazuh also offers the `Wazuh Cloud <https://wazuh.com/cloud/>`_, where all components are maintained by our team and hosted on our PCI-DSS, and SOC 2 Type 2 certified SaaS solution. This service offers a highly flexible infrastructure to match your enterprise needs. With Wazuh cloud, everything is ready to use, and you don't need any dedicated hardware.
 
