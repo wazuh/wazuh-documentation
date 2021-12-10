@@ -49,7 +49,7 @@ b) For Debian/Ubuntu operating systems:
   # apt-get update && apt-get install python3-pip
 
 
-Google cloud pip dependencies
+Google Cloud pip dependencies
 -----------------------------
 
 `google-cloud-pubsub <https://pypi.org/project/google-cloud-pubsub//>`_ is the official python library supported by Google to manage Google Cloud Pub/Sub resources. It will be used to pull the log messages from the Pub/Sub queue. 

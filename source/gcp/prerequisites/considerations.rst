@@ -19,9 +19,9 @@ The ``Google Cloud Platform`` Wazuh module only looks for new logs in buckets ba
 Creation time in Google Cloud Storage bucket contents
 -----------------------------------------------------
 
-The ``gcp-bucket`` Wazuh module will use the creation time for each blob inside the provided Cloud Storage bucket to determine the date to which each log file corresponds. This means if the user manually moves any file inside the specified bucket its creation time will be updated and the ``gcp-module`` will assume the file is new.
+When using the ``only_logs_after`` tag, the Wazuh module uses the creation time of each blob in the Google Cloud Storage bucket to determine if a file should be processed or not. This means that if the user manually moves any blob inside the specified bucket, its creation date changes and the ``gcp-module`` Wazuh module processes it again as it is considered a new blob.
 
-When using the ``only_logs_after`` tag the Wazuh module will use the creation time of each blob to determine if it should be processed. Any date in the file's name will be ignored. Only creation date is used to determine whether a file should be processed.
+Any date in the file's name is ignored and only the creation date is used to determine whether or not a file should be processed.
 
 
 Configuring multiple Google Cloud Storage bucket
@@ -55,4 +55,4 @@ Below there is an example of a configuration that uses more than one bucket:
         <remove_from_bucket>no</remove_from_bucket>
     </bucket>
 
-</gcp-bucket>
+  </gcp-bucket>

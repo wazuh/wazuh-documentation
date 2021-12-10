@@ -61,7 +61,7 @@ Toggle between the different logging levels.
 bucket type
 ^^^^^^^^^^^
 
-Defines a bucket to process. It must have its ``type`` attribute defined. (Supports multiple instances of this option).
+Defines a bucket to process. It must have its ``type`` attribute defined. It supports multiple instances of this option.
 
 Bucket options
 ~~~~~~~~~~~~~~

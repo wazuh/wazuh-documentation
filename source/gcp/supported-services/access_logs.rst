@@ -2,7 +2,7 @@
 
 .. _gcp_access_logs:
 
-Usage logs & Storage logs
+Usage logs & storage logs
 =========================
 
 .. note::
@@ -16,7 +16,7 @@ Google Cloud Storage offers `usage logs and storage logs <https://cloud.google.c
 Setting up log delivery to a Google Cloud Storage bucket
 --------------------------------------------------------
 
-The log delivery for any bucket must be set up manually using the gsutil tool, the XML API or the JSON API. Follow its `official documentation <https://cloud.google.com/storage/docs/access-logs#delivery>`__ for the most up-to-date instructions on how to enable this feature.
+The log delivery for any bucket must be set up manually using the gsutil tool, the XML API, or the JSON API. Follow the `Google Cloud Storage <https://cloud.google.com/storage/docs/access-logs#delivery>`__  documentation for the most up-to-date instructions on how to enable this feature.
 
 
 Example of configuration
