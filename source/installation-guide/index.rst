@@ -133,15 +133,23 @@ How do I download Wazuh?
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 Follow these steps to download the latest stable version of Wazuh and get started:
+
 - Install :ref:`Elasticsearch <wazuh_indexer_installation>`. 
 - Install :ref:`Wazuh server <wazuh_server_installation>`. 
 - Install :ref:`Kibana <wazuh_dashboard_installation>`.
 - Install :ref:`Wazuh agent <wazuh_agent>`.
-- Read the :ref:`guide above <_installation_guide>`
+- Read the :ref:`guide above <_installation_guide>` for more information.
+
 
 How do I install Wazuh agent?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Open a terminal in the Linux/Unix Wazuh agent's host as a ``root`` user:
+
+- Run the ``agent-auth`` utility, using the Wazuh manager’s IP address to register the Wazuh agent.
+- To enable the communication with the Wazuh manager, edit the Wazuh agent’s configuration file placed at ``/var/ossec/etc/ossec.conf``.
+- Restart the Wazuh agent.
+- Read the :ref:`Registering Wazuh agents <_register_agents>` section for more information.  
 
 Where is Wazuh installed?
 ^^^^^^^^^^^^^^^^^^^^^^^^^
