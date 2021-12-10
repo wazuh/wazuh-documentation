@@ -129,36 +129,36 @@ The :ref:`Wazuh agent <wazuh_agent>` is a single and lightweight monitoring soft
 FAQ (Frequently asked questions)
 --------------------------------
 
-How do I download Wazuh?
-^^^^^^^^^^^^^^^^^^^^^^^^
+**How do I download Wazuh?**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 - Follow these steps to download the latest stable version of Wazuh and get started:
    - Install :ref:`Elasticsearch <wazuh_indexer_installation>`. 
    - Install :ref:`Wazuh server <wazuh_server_installation>`. 
    - Install :ref:`Kibana <wazuh_dashboard_installation>`.
    - Install :ref:`Wazuh agent <wazuh_agent>`.
-   - Read the :ref:`guide above <_installation_guide>` for more information.
+   - Read the :ref:`guide above <installation_guide>` for more information.
 
 
-How do I install Wazuh agent?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**How do I install Wazuh agent?**
 
 - Open a terminal in the Linux/Unix Wazuh agent's host as a ``root`` user:
    - Run the ``agent-auth`` utility, using the Wazuh manager’s IP address to register the Wazuh agent.
    - To enable the communication with the Wazuh manager, edit the Wazuh agent’s configuration file placed at ``/var/ossec/etc/ossec.conf``.
    - Restart the Wazuh agent.
-   - Read the :ref:`Registering Wazuh agents <_register_agents>` section for more information.  
+   - Read the :ref:`Registering Wazuh agents <register_agents>` section for more information.  
 
 
 
-How do I install Wazuh agent on Windows?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+**How do I install Wazuh agent on Windows?**
+
 - Monitor your Windows systems with Wazuh, from Windows XP to the latest available versions including Windows 11 and Windows Server 2022.
    - To perform the installation, administrator privileges are required.
    - To start the installation process, download the `Windows installer <https://packages.wazuh.com/|CURRENT_MAJOR|/windows/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi>`_.
    - Select the installation method you want to follow: command line interface (CLI) or graphical user interface (GUI).
    - By default, all agent files are stored in ``C:\Program Files (x86)\ossec-agent`` after the installation.
-   -  Read the :ref:`Installing Wazuh agents on Windows systems <_wazuh_agent_package_windows>` section for more information.  
+   -  Read the :ref:`Installing Wazuh agents on Windows systems <wazuh_agent_package_windows>` section for more information.  
 
 
 
