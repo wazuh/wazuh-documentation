@@ -29,11 +29,18 @@ Central components of Wazuh include the Wazuh server, Elasticsearch, and Kibana.
   :width: 100%
 
 
-#. :ref:`Elasticsearch <wazuh_indexer_installation>` is a highly scalable, full-text search and analytics engine. During the installation of Elasticsearch, the Wazuh certificates tool is used to create certificates needed for encrypting the communication between the components. These certificates must be distributed to all the servers in the Wazuh installation and random passwords are also generated for the system users.
+Wazuh central components
+^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. :ref:`Wazuh server <wazuh_server_installation>` is in charge of analyzing the data received from the Wazuh agents and triggering alerts when threats or anomalies are detected. It is also used to manage the agents' configuration and monitor their status remotely. This component includes the Wazuh manager and Filebeat. 
+==============================================================    =============
+Component                                                         Description
+==============================================================    =============
+:ref:`Elasticsearch <wazuh_indexer_installation>`                 It is a highly scalable, full-text search and analytics engine. During the installation of Elasticsearch, the Wazuh certificates tool is used to create certificates needed for encrypting the communication between the components. These certificates must be distributed to all the servers in the Wazuh installation and random passwords are also generated for the system users. 
 
-#. :ref:`Kibana <wazuh_dashboard_installation>` is a flexible and intuitive web interface for mining, analyzing, and visualizing data. It includes out-of-the-box dashboards for security events, detected vulnerable applications, file integrity monitoring data, configuration assessment results, and cloud infrastructure monitoring events. Kibana also helps organizations with regulatory compliance such as PCI DSS, GDPR, CIS, HIPAA, and NIST 800-53 standards.
+:ref:`Wazuh server <wazuh_server_installation>`                   It is in charge of analyzing the data received from the Wazuh agents and triggering alerts when threats or anomalies are detected. It is also used to manage the agents' configuration and monitor their status remotely. This component includes the Wazuh manager and Filebeat. 
+
+:ref:`Kibana <wazuh_dashboard_installation>`                      It is a flexible and intuitive web interface for mining, analyzing, and visualizing data. It includes out-of-the-box dashboards for security events, detected vulnerable applications, file integrity monitoring data, configuration assessment results, and cloud infrastructure monitoring events. Kibana also helps organizations with regulatory compliance such as PCI DSS, GDPR, CIS, HIPAA, and NIST 800-53 standards.
+==============================================================    =============
 
 The Wazuh server and Elasticsearch can be installed as a single-node or multi-node cluster depending on the environment needs. Small Wazuh deployments, which do not require processing large amounts of data, can easily be handled by a single-node cluster. Multi-node clusters are recommended when there are many monitored endpoints, when a large volume of data is anticipated, or when high availability is required.
 
@@ -144,7 +151,7 @@ Installation guide FAQ
 How do I install Wazuh?
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Install Wazuh by following the installation workflow that best suits your needs. To learn more about each component and its capabilities, check the :ref:`Components <components>` section.
+Install Wazuh by following the installation methods listed below that best suits your needs. To learn more about each component and its capabilities, check the :ref:`Components <components>` section.
 
 
 **Installing Wazuh server**
