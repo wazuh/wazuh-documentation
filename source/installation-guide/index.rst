@@ -11,7 +11,9 @@ Installation guide
 **Version 2.0**
 
 Wazuh is a free, open source and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response, and regulatory compliance. 
-The solution is widely used by thousands of organizations around the world, from small businesses to large enterprises as it offers scalability and high availability of the product. You can start using Wazuh as well by following the Wazuh installation guide which allows you to install and configure its central components as needed. Alternatively, you can check our :ref:`Quickstart <quickstart>` to learn how to run the unattended script which quickly installs and configures all the Wazuh central components on the same host.
+The solution is widely used by thousands of organizations around the world, from small businesses to large enterprises as it offers scalability and high availability of the product. You can start using Wazuh as well by following the Wazuh installation guide which allows you to install and configure its central components as needed. 
+
+Alternatively, you can check our :ref:`Quickstart <quickstart>` to get started with Wazuh in just a few minutes. This deployment option only requires you to run the unattended script which quickly installs and configures all the Wazuh central components on the same host.
 
 The Wazuh central components include the Wazuh server, Elasticsearch, and Kibana. 
 
