@@ -132,13 +132,14 @@ Installation guide FAQ
 **How do I download Wazuh?**
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Install Wazuh by following the installation workflow that best suits your needs. To learn more about each component and its capabilities, check the :ref:`Components <components>` section.
-
+Install Wazuh by following the installation workflow that best suits your needs. To learn more about each component and its capabilities, check the :ref:`Components <components>` section. 
 Follow these steps to download the latest stable version of Wazuh and get started:
-   - There are two different options for deploying Wazuh.
-      - :ref:`All-in-one <all_in_one_index>`: The Wazuh server and Elastic Stack are installed on the same host directly on your system. 
-      - :ref:`Distributed <distributed_index>`: Each component is installed on a separate host as a single-node or multi-node cluster. 
-      - Alternatively, you can also download our ready-to-use :ref:`OVA <virtual_machine>` or launch an EC2 Instance with our :ref:`AMI <amazon-machine-images>`.
+
+- There are two different options for deploying Wazuh.
+    - :ref:`All-in-one <all_in_one_index>`: The Wazuh server and Elastic Stack are installed on the same host directly on your system. 
+    - :ref:`Distributed <distributed_index>`: Each component is installed on a separate host as a single-node or multi-node cluster. 
+    - Alternatively, you can also download our ready-to-use :ref:`OVA <virtual_machine>` or launch an EC2 Instance with our :ref:`AMI <amazon-machine-images>`.
+
 
 
 **How do I install Wazuh agent?**
