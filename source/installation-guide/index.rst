@@ -147,14 +147,15 @@ Installation guide FAQ
 Install Wazuh by following the installation workflow that best suits your needs. To learn more about each component and its capabilities, check the :ref:`Components <components>` section.
 
 **Wazuh server**
-You can choose an installation method and start installing the Wazuh server:
 
-- :ref:`Installing the Wazuh server in step-by-step mode <wazuh_server_step_by_step>`: Install the Wazuh server as a single-node or multi-node cluster according to your environment needs. If you want to install a single-node cluster, follow the instructions to install the Wazuh manager and Filebeat and proceed directly with :ref:`installing Kibana <wazuh_dashboard_installation>`.
-- :ref:`Installing the Wazuh server in unattended mode <wazuh_server_unattended>`: Install the Wazuh server as a single-node or multi-node cluster according to your environment needs.  If you want to install a single-node cluster, follow the instructions to install the Wazuh master node and proceed directly with :ref:`installing Kibana <wazuh_dashboard_installation>`.
-- Alternatively, you can also download our ready-to-use :ref:`OVA <virtual_machine>` or launch an EC2 Instance with our :ref:`AMI <amazon-machine-images>`.
+You can now choose an installation method and start installing the Wazuh server.
+
+- :ref:`Unattended installation <wazuh_server_unattended>`: Install this component by using a script that automates the installation process.  
+- :ref:`Step-by-step installation <wazuh_server_step_by_step>`: Install this component manually following detailed step-by-step instructions.
 
 
 **Elasticsearch**
+
 You can choose an installation method and start installing Elasticsearch: 
 
 - :ref:`Unattended installation <wazuh_indexer_unattended>`: Install this component by using a script that automates the installation process. 
@@ -162,19 +163,22 @@ You can choose an installation method and start installing Elasticsearch:
 
 
 **Kibana**
+
 You can choose an installation method and start installing Kibana: 
 
 - :ref:`Unattended installation <wazuh_dashboard_unattended_installation>`: Install this component by using a script that automates the installation process. 
 - :ref:`Step-by-step installation <wazuh_dashboard_step_by_step>`: Install this component manually following detailed step-by-step instructions.
 
 **Wazuh agent**
+
 To install a Wazuh agent, select your operating system from the list of operating system above and follow the instructions.
 
 
-**How do I install Wazuh agent?**
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+**How do I install Wazuh agents on Linux?**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Open a terminal in the Linux/Unix Wazuh agent's host as a ``root`` user:
+
 - Run the ``agent-auth`` utility, using the Wazuh manager’s IP address to register the Wazuh agent.
 - To enable the communication with the Wazuh manager, edit the Wazuh agent’s configuration file placed at ``/var/ossec/etc/ossec.conf``.
 - Restart the Wazuh agent.
@@ -182,10 +186,11 @@ Open a terminal in the Linux/Unix Wazuh agent's host as a ``root`` user:
 
 
 
-**How do I install Wazuh agent on Windows?**
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+**How do I install Wazuh agents on Windows?**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Monitor your Windows systems with Wazuh, from Windows XP to the latest available versions including Windows 11 and Windows Server 2022.
+Monitor your Windows systems with Wazuh, from Windows XP to the latest available versions including Windows 11 and Windows Server 2022:
+
 - To perform the installation, administrator privileges are required.
 - To start the installation process, download the `Windows installer <https://packages.wazuh.com/|CURRENT_MAJOR|/windows/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi>`_.
 - Select the installation method you want to follow: command line interface (CLI) or graphical user interface (GUI).
