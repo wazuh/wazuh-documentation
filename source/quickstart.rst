@@ -22,7 +22,7 @@ Alternatively, you can install each component on the same server, one by one, or
 Community and support
 ---------------------
 
-Wazuh is quick and easy to install, but if you have any questions, our developers and contributors are more than happy to answer them. You can join our community to learn from other users, participate in discussions, talk to our development team, and contribute to the project. The following resources are easily available:
+Wazuh is quick and easy to install, but if you have any questions, our developers are more than happy to answer them. You can join our community to learn from other users, participate in discussions, talk to our development team, and contribute to the project. The following resources are easily available:
 
 - `Slack channel <https://wazuh.com/community/join-us-on-slack>`_: Join our community channel to chat with our developers and technical team in a close to real-time experience.
 - `Google group <https://groups.google.com/forum/#!forum/wazuh>`_: Here you can share questions and learn from other Wazuh users and developers. It is easy to subscribe via `email <wazuh+subscribe@googlegroups.com>`_.
