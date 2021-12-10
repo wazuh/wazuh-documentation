@@ -1,10 +1,10 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-#. Replace ``elasticsearch-node-name`` with your Elasticsearch node name, the same used in ``instances.yml`` to create the certificates, and move the certificates to their corresponding location. We assume that you placed a copy of ``certs.tar`` in the root home folder (``~/``).
+#. Replace ``<elasticsearch-node-name>`` with your Elasticsearch node name, the same used in ``instances.yml`` to create the certificates, and move the certificates to their corresponding location. We assume that you placed a copy of ``certs.tar`` in your current folder (``~/``).
 
     .. code-block:: console
 
-      # NODE_NAME=elasticsearch-node-name
+      # NODE_NAME=<elasticsearch-node-name>
       
     .. code-block:: console
       
