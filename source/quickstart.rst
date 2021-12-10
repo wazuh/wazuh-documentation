@@ -16,7 +16,7 @@ Wazuh is a free, open source and enterprise-ready security monitoring solution f
 
 This Quickstart only requires you to run the unattended script which quickly installs all the :ref:`Wazuh central components <components>` on the same host. These central components are in charge of analyzing the data gathered by the Wazuh agents, providing a search engine and data visualization tool that allow users to navigate through their security alerts.
 
-Alternatively, you can install each component on the same server, one by one, or on different servers as a distributed deployment, depending on the environment needs. Check our :ref:`Installation guide <installation_guide>` to learn more about these deployment alternatives. 
+Alternatively, you can install each component on the same server, one by one, or on different servers as a distributed deployment for scalability and high availability, depending on the environment needs. Check our :ref:`Installation guide <installation_guide>` to learn more about these deployment alternatives. 
 
 
 Community and support
@@ -25,7 +25,7 @@ Community and support
 Wazuh is quick and easy to install, but if you have any questions, our developers and contributors are more than happy to answer them. You can join our community to learn from other users, participate in discussions, talk to our development team, and contribute to the project. The following resources are easily available:
 
 - `Slack channel <https://wazuh.com/community/join-us-on-slack>`_: Join our community channel to chat with our developers and technical team in a close to real-time experience.
-- `Google group <https://groups.google.com/forum/#!forum/wazuh>`_: Here you can share questions and learn from other Wazuh users. It is easy to subscribe via `email <wazuh+subscribe@googlegroups.com>`_.
+- `Google group <https://groups.google.com/forum/#!forum/wazuh>`_: Here you can share questions and learn from other Wazuh users and developers. It is easy to subscribe via `email <wazuh+subscribe@googlegroups.com>`_.
 - `GitHub repositories <https://github.com/wazuh>`_: Get access to the Wazuh source code, report issues, and contribute to the project. We happily review and accept pull requests.
 
 
