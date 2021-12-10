@@ -125,6 +125,37 @@ The :ref:`Wazuh agent <wazuh_agent>` is a single and lightweight monitoring soft
       </div>
   </div>
 
+
+FAQ (Frequently asked questions)
+--------------------------------
+
+How do I download Wazuh?
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Follow these steps to download the latest stable version of Wazuh and get started:
+- Install :ref:`Elasticsearch <wazuh_indexer_installation>`. 
+- Install :ref:`Wazuh server <wazuh_server_installation>`. 
+- Install :ref:`Kibana <wazuh_dashboard_installation>`.
+- Install :ref:`Wazuh agent <wazuh_agent>`.
+- Read the :ref:`guide above <_installation_guide>`
+
+How do I install Wazuh agent?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+Where is Wazuh installed?
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+How do I install Wazuh agent on Windows?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+How do I start Wazuh API?
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
 .. toctree::
     :hidden:
     :maxdepth: 1
