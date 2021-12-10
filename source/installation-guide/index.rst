@@ -205,12 +205,11 @@ How do I install Wazuh agents on Windows?
 
 Monitor your Windows systems with Wazuh, from Windows XP to the latest available versions, including Windows 11 and Windows Server 2022:
 
-- - To start the installation process, download the `Windows installer <https://packages.wazuh.com/|CURRENT_MAJOR|/windows/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi>`_.
+- To start the installation process, download the `Windows installer <https://packages.wazuh.com/|CURRENT_MAJOR|/windows/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi>`_.
 - Administrator privileges are required to perform the installation.
 - Select the installation method you want to follow: command line interface (CLI) or graphical user interface (GUI).
 - By default, all agent files are stored in ``C:\Program Files (x86)\ossec-agent`` after the installation.
 - Read the :ref:`Installing Wazuh agents on Windows systems <wazuh_agent_package_windows>` section for more information.  
-
 
 
 .. toctree::
