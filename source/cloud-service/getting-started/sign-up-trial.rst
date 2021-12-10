@@ -17,7 +17,7 @@ To sign up for a free trial, all you need is an email address:
 
 #. Go to our `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_ page.
 
-#. Enter your email address and password, or sign up with a Google account.
+#. Enter your email address and password.
 
 Now you are ready to create your first :ref:`environment <cloud_glossary_environment>`.
 
