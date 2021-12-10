@@ -102,57 +102,62 @@ Choose the tab corresponding to the Wazuh agent host operating system:
 
     #. Add the Wazuh agent to the Wazuh manager.
 
-         If the Wazuh API is running over HTTPS and it is using a self-signed certificate, the function below has to be executed in Powershell:
+         If the Wazuh API is running over HTTPS and it is using a self-signed certificate, the function below has to be executed in Powershell. Values in angle brackets have to be replaced:
 
          .. code-block:: powershell
 
-          > function Ignore-SelfSignedCerts {
-              add-type @"
-                  using System.Net;
-                  using System.Security.Cryptography.X509Certificates;
-                  public class PolicyCert : ICertificatePolicy {
-                      public PolicyCert() {}
-                      public bool CheckValidationResult(
-                          ServicePoint sPoint, X509Certificate cert,
-                          WebRequest wRequest, int certProb) {
-                          return true;
-                      }
-                  }
-          "@
-              [System.Net.ServicePointManager]::CertificatePolicy = new-object PolicyCert
-              [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12;
-          }
+           function Ignore-SelfSignedCerts {
+               add-type @"
+                   using System.Net;
+                   using System.Security.Cryptography.X509Certificates;
 
-          > Ignore-SelfSignedCerts
+                   public class PolicyCert : ICertificatePolicy {
+                       public PolicyCert() {}
+                       public bool CheckValidationResult(
+                           ServicePoint sPoint, X509Certificate cert,
+                           WebRequest wRequest, int certProb) {
+                           return true;
+                       }
+                   }
+           "@
+               [System.Net.ServicePointManager]::CertificatePolicy = new-object PolicyCert
+           }
 
-         Use ``Invoke-WebRequest`` to execute the Wazuh API request to register the Wazuh agent. Values in the angle brackets have to be replaced:
+           $protocol = "https"
+           $host_name = "<MANAGER_IP>"
+           $port = "55000"
+           $username = "<API_USERNAME>"
+           $password = "<API_PASSWORD>"
+           $endpoint = "/agents"
+           $body_json = @{name = "<AGENT_NAME>"} | ConvertTo-Json
 
-         .. code-block:: console
+           $base_url = $protocol + "://" + $host_name + ":" + $port
+           $endpoint_url = $base_url + $endpoint
+           $login_url = $base_url + "/security/user/authenticate"
+           $base64AuthInfo = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(("{0}:{1}" -f $username, $password)))
+           $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
+           $headers.Add("Content-Type", 'application/json')
+           $headers.Add("Authorization", "Basic " + $base64AuthInfo)
 
-          # $base64AuthInfo = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(("{0}:{1}" -f <API_username>, <API_password>)))
-          # Invoke-WebRequest -Headers @{Authorization=("Basic {0}" -f $base64AuthInfo)} -Method POST -Uri https://<manager_IP>:55000/agents -Body @{name=<agent_name>} | ConvertFrom-Json
+           Ignore-SelfSignedCerts
+           $token_response = Invoke-RestMethod -Uri $login_url -Headers $headers
+           $headers["Authorization"] = "Bearer " + $token_response.data.token
 
-         The command above returns the Wazuh agent's ``ID``.
+           $agent_ref = Invoke-RestMethod -Method POST -Uri $endpoint_url -Body $body_json -Headers $headers
+           echo $agent_ref | ConvertTo-Json
 
-
-    #. Extract the Wazuh agent's key using the Wazuh agent's ID. Values in the angle brackets have to be replaced:
-
-         .. code-block:: console
-
-          # Invoke-WebRequest -Headers @{Authorization=("Basic {0}" -f $base64AuthInfo)} -Method GET -Uri https://<manager_IP>:55000/agents/<agent_ID>/key | ConvertFrom-Json
-
-         The output of the request returns the registration key:
+         The commands above return the Wazuh agent's ID and registration key.
 
          .. code-block:: none
-                :class: output
+          :class: output
 
-                {
-                  "error": 0,
-                  "data": {
-                      "id": "001",
-                      "key": "MDAxIE5ld0FnZW50IDEwLjAuMC44IDM0MGQ1NjNkODQyNjcxMWIyYzUzZTE1MGIzYjEyYWVlMTU1ODgxMzVhNDE3MWQ1Y2IzZDY4M2Y0YjA0ZWVjYzM="
-                 }
-                }
+            {
+              "data": {
+                        "id": "001",
+                        "key": "MDAxIE5ld0FnZW50IDEwLjAuMC44IDM0MGQ1NjNkODQyNjcxMWIyYzUzZTE1MGIzYjEyYWVlMTU1ODgxMzVhNDE3MWQ1Y2IzZDY4M2Y0YjA0ZWVjYzM="
+                      },
+              "error": 0
+            }
 
 
     #. Import the registration key to the Wazuh agent using ``manage_agents`` utility:
