@@ -54,6 +54,18 @@ Wazuh agent installation
 
 The :ref:`Wazuh agent <wazuh_agent>` is a single and lightweight monitoring software that runs on most operating systems. It provides visibility of the endpoints by collecting critical system and application records, inventory data, and detecting potential anomalies. If the Wazuh central components are already installed in your environment, select your operating system and follow the installation steps to deploy the agent to the endpoints. 
 
+==============================================================================================================================    =============
+Operating systems                                                                                                                 Description
+==============================================================================================================================    =============
+`Linux systems <https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-linux.html>`_          The deployment of a Wazuh agent on a Linux system uses deployment variables that facilitate installing, registering, and configuring the agent.
+`Windows systems <https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-windows.html>`_      You can monitor your Windows systems with Wazuh, from Windows XP to the latest versions, including Windows 11 and Windows Server 2022.
+`macOS systems <https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-macos.html>`_          Wazuh allows you to monitor your macOS systems and our package is suitable for macOS Sierra or later.
+`Solaris systems <https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-solaris.html>`_      You can monitor your Solaris systems with Wazuh. To start the installation process, all you need to do is select your architecture between i386 or Sparc. 
+`AIX systems <https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-aix.html>`_              The deployment of a Wazuh agent on an AIX system uses variables that facilitate installing, registering, and configuring the agent.
+`HP-UX systems <https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-hpux.html>`_           You can monitor your HP-UX systems with Wazuh.  Wazuh allows you to monitor your HP-UX systems with Wazuh. You only need to start the installation process by downloading the `HP-UX installer <https://packages.wazuh.com/|CURRENT_MAJOR|/hp-ux/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar>`_. 
+==============================================================================================================================    =============
+
+
 .. raw:: html
 
   <div class="agent-os">
@@ -133,12 +145,11 @@ Installation guide FAQ
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Install Wazuh by following the installation workflow that best suits your needs. To learn more about each component and its capabilities, check the :ref:`Components <components>` section. 
-Follow these steps to download the latest stable version of Wazuh and get started:
 
-- There are two different options for deploying Wazuh.
-    - :ref:`All-in-one <all_in_one_index>`: The Wazuh server and Elastic Stack are installed on the same host directly on your system. 
-    - :ref:`Distributed <distributed_index>`: Each component is installed on a separate host as a single-node or multi-node cluster. 
-    - Alternatively, you can also download our ready-to-use :ref:`OVA <virtual_machine>` or launch an EC2 Instance with our :ref:`AMI <amazon-machine-images>`.
+- There are two different options for deploying Wazuh. Follow these steps to download the latest stable version of Wazuh and get started:
+   - :ref:`All-in-one <all_in_one_index>`: The Wazuh server and Elastic Stack are installed on the same host directly on your system. 
+   - :ref:`Distributed <distributed_index>`: Each component is installed on a separate host as a single-node or multi-node cluster. 
+   - Alternatively, you can also download our ready-to-use :ref:`OVA <virtual_machine>` or launch an EC2 Instance with our :ref:`AMI <amazon-machine-images>`.
 
 
 
