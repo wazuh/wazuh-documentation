@@ -57,12 +57,12 @@ The :ref:`Wazuh agent <wazuh_agent>` is a single and lightweight monitoring soft
 ==============================================================================================================================    =============
 Operating systems                                                                                                                 Description
 ==============================================================================================================================    =============
-`Linux systems <https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-linux.html>`_          The deployment of a Wazuh agent on a Linux system uses deployment variables that facilitate installing, registering, and configuring the agent.
-`Windows systems <https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-windows.html>`_      You can monitor your Windows systems with Wazuh, from Windows XP to the latest versions, including Windows 11 and Windows Server 2022.
-`macOS systems <https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-macos.html>`_          Wazuh allows you to monitor your macOS systems and our package is suitable for macOS Sierra or later.
-`Solaris systems <https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-solaris.html>`_      You can monitor your Solaris systems with Wazuh. To start the installation process, all you need to do is select your architecture between i386 or Sparc. 
-`AIX systems <https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-aix.html>`_              The deployment of a Wazuh agent on an AIX system uses variables that facilitate installing, registering, and configuring the agent.
-`HP-UX systems <https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-hpux.html>`_           You can monitor your HP-UX systems with Wazuh.  Wazuh allows you to monitor your HP-UX systems with Wazuh. You only need to start the installation process by downloading the `HP-UX installer <https://packages.wazuh.com/|CURRENT_MAJOR|/hp-ux/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar>`_. 
+`Linux  <https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-linux.html>`_                 The deployment of a Wazuh agent on a Linux system uses deployment variables that facilitate installing, registering, and configuring the agent.
+`Windows <https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-windows.html>`_              You can monitor your Windows systems with Wazuh, from Windows XP to the latest versions, including Windows 11 and Windows Server 2022.
+`macOS <https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-macos.html>`_                  Wazuh allows you to monitor your macOS systems and our package is suitable for macOS Sierra or later.
+`Solaris <https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-solaris.html>`_              You can monitor your Solaris systems with Wazuh. To start the installation process, all you need to do is select your architecture between i386 or Sparc. 
+`AIX <https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-aix.html>`_                      The deployment of a Wazuh agent on an AIX system uses variables that facilitate installing, registering, and configuring the agent.
+`HP-UX <https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-hpux.html>`_                   You can monitor your HP-UX systems with Wazuh.  Wazuh allows you to monitor your HP-UX systems with Wazuh. You only need to start the installation process by downloading the `HP-UX installer <https://packages.wazuh.com/|CURRENT_MAJOR|/hp-ux/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar>`_. 
 ==============================================================================================================================    =============
 
 
@@ -141,38 +141,56 @@ Operating systems                                                               
 Installation guide FAQ
 ----------------------
 
-**How do I download Wazuh?**
+**How do I install Wazuh?**
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Install Wazuh by following the installation workflow that best suits your needs. To learn more about each component and its capabilities, check the :ref:`Components <components>` section. 
+Install Wazuh by following the installation workflow that best suits your needs. To learn more about each component and its capabilities, check the :ref:`Components <components>` section.
 
-- There are two different options for deploying Wazuh. Follow these steps to download the latest stable version of Wazuh and get started:
-   - :ref:`All-in-one <all_in_one_index>`: The Wazuh server and Elastic Stack are installed on the same host directly on your system. 
-   - :ref:`Distributed <distributed_index>`: Each component is installed on a separate host as a single-node or multi-node cluster. 
-   - Alternatively, you can also download our ready-to-use :ref:`OVA <virtual_machine>` or launch an EC2 Instance with our :ref:`AMI <amazon-machine-images>`.
+**Wazuh server**
+You can choose an installation method and start installing the Wazuh server:
 
+- :ref:`Installing the Wazuh server in step-by-step mode <wazuh_server_step_by_step>`: Install the Wazuh server as a single-node or multi-node cluster according to your environment needs. If you want to install a single-node cluster, follow the instructions to install the Wazuh manager and Filebeat and proceed directly with :ref:`installing Kibana <wazuh_dashboard_installation>`.
+- :ref:`Installing the Wazuh server in unattended mode <wazuh_server_unattended>`: Install the Wazuh server as a single-node or multi-node cluster according to your environment needs.  If you want to install a single-node cluster, follow the instructions to install the Wazuh master node and proceed directly with :ref:`installing Kibana <wazuh_dashboard_installation>`.
+- Alternatively, you can also download our ready-to-use :ref:`OVA <virtual_machine>` or launch an EC2 Instance with our :ref:`AMI <amazon-machine-images>`.
+
+
+**Elasticsearch**
+You can choose an installation method and start installing Elasticsearch: 
+
+- :ref:`Unattended installation <wazuh_indexer_unattended>`: Install this component by using a script that automates the installation process. 
+- :ref:`Step-by-step installation <wazuh_indexer_step_by_step>`: Install this component manually following detailed step-by-step instructions.
+
+
+**Kibana**
+You can choose an installation method and start installing Kibana: 
+
+- :ref:`Unattended installation <wazuh_dashboard_unattended_installation>`: Install this component by using a script that automates the installation process. 
+- :ref:`Step-by-step installation <wazuh_dashboard_step_by_step>`: Install this component manually following detailed step-by-step instructions.
+
+**Wazuh agent**
+To install a Wazuh agent, select your operating system from the list of operating system above and follow the instructions.
 
 
 **How do I install Wazuh agent?**
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- Open a terminal in the Linux/Unix Wazuh agent's host as a ``root`` user:
-   - Run the ``agent-auth`` utility, using the Wazuh manager’s IP address to register the Wazuh agent.
-   - To enable the communication with the Wazuh manager, edit the Wazuh agent’s configuration file placed at ``/var/ossec/etc/ossec.conf``.
-   - Restart the Wazuh agent.
-   - Read the :ref:`Registering Wazuh agents <register_agents>` section for more information.  
+Open a terminal in the Linux/Unix Wazuh agent's host as a ``root`` user:
+- Run the ``agent-auth`` utility, using the Wazuh manager’s IP address to register the Wazuh agent.
+- To enable the communication with the Wazuh manager, edit the Wazuh agent’s configuration file placed at ``/var/ossec/etc/ossec.conf``.
+- Restart the Wazuh agent.
+- Read the :ref:`Registering Wazuh agents <register_agents>` section for more information.  
 
 
 
 **How do I install Wazuh agent on Windows?**
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- Monitor your Windows systems with Wazuh, from Windows XP to the latest available versions including Windows 11 and Windows Server 2022.
-   - To perform the installation, administrator privileges are required.
-   - To start the installation process, download the `Windows installer <https://packages.wazuh.com/|CURRENT_MAJOR|/windows/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi>`_.
-   - Select the installation method you want to follow: command line interface (CLI) or graphical user interface (GUI).
-   - By default, all agent files are stored in ``C:\Program Files (x86)\ossec-agent`` after the installation.
-   - Read the :ref:`Installing Wazuh agents on Windows systems <wazuh_agent_package_windows>` section for more information.  
+Monitor your Windows systems with Wazuh, from Windows XP to the latest available versions including Windows 11 and Windows Server 2022.
+- To perform the installation, administrator privileges are required.
+- To start the installation process, download the `Windows installer <https://packages.wazuh.com/|CURRENT_MAJOR|/windows/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi>`_.
+- Select the installation method you want to follow: command line interface (CLI) or graphical user interface (GUI).
+- By default, all agent files are stored in ``C:\Program Files (x86)\ossec-agent`` after the installation.
+- Read the :ref:`Installing Wazuh agents on Windows systems <wazuh_agent_package_windows>` section for more information.  
 
 
 
