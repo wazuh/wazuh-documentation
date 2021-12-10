@@ -205,7 +205,7 @@ Your Wazuh server is now successfully installed and the Wazuh manager is configu
 
 - If you want a Wazuh server single-node cluster, everything is set and you can proceed directly with :ref:`wazuh_dashboard_step_by_step`. 
   
-- If you want a Wazuh server multi-node cluster,  install the Wazuh server on every node and carry on with configuring the Wazuh cluster.
+- If you want a Wazuh server multi-node cluster, repeat step 1 to install the Wazuh server on every node and carry on with configuring the Wazuh cluster.
 
 3. Configure the Wazuh cluster
 ------------------------------

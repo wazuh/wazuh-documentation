@@ -98,10 +98,10 @@ Installing and configuring Kibana
     .. code-block:: console
 
         # cd /usr/share/kibana
-        # sudo -u kibana bin/kibana-plugin install https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|-1.zip
+        # sudo -u kibana bin/kibana-plugin install https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|-1.zip && cd -
         
 
-#. Replace ``kibana-node-name`` with your Kibana node name, the same used in ``instances.yml`` to create the certificates, and move the certificates to their corresponding location. We assume that you placed a copy of ``certs.tar``, created during the Elasticsearch installation, in the root home folder (``~/``).
+#. Replace ``kibana-node-name`` with your Kibana node name, the same used in ``instances.yml`` to create the certificates, and move the certificates to their corresponding location. We assume that you placed a copy of ``certs.tar``, created during the Elasticsearch installation, in your working directory (``./``).
 
     .. include:: ../../_templates/installations/elastic/common/generate_new_kibana_certificates.rst
 
