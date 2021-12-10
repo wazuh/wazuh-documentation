@@ -23,7 +23,7 @@ Check the :ref:`Getting started <getting_started>` section to learn more about t
 
 Requirements
 ------------
-Check the supported operating systems and the recommended hardware requirements for the Wazuh installation.
+Below you can check the supported operating systems and the recommended hardware requirements for the Wazuh installation.
 
 Supported operating systems
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
