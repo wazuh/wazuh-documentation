@@ -13,6 +13,8 @@ Elasticsearch is a highly scalable, full-text search and analytics engine. Elast
 
 This central component can be installed as a single-node or multi-node cluster depending on the environment needs. Small Wazuh deployments, which do not require processing large amounts of data, can easily be handled by a single-node cluster. Multi-node clusters are recommended when there is a large number of monitored endpoints, when a large volume of data is anticipated, or when high availability is required.
 
+During the installation of Elasticsearch, the Wazuh certificates tool is used to create certificates needed for encrypting the communication between the components. These certificates must be distributed to all the servers in the Wazuh installation. Random passwords are also generated for the system users.
+
 You can now choose an installation method and start installing Elasticsearch.
 
 - :ref:`Unattended installation <wazuh_indexer_unattended>`: Install this component by using a script that automates the installation process.  
