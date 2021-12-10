@@ -162,14 +162,12 @@ You can choose an installation method and start installing the Wazuh server:
 - :ref:`Step-by-step installation <wazuh_server_step_by_step>`: Install this component manually following detailed step-by-step instructions.
 
 
-
 **Installing Elasticsearch**
 
 You can choose an installation method and start installing Elasticsearch: 
 
 - :ref:`Unattended installation <wazuh_indexer_unattended>`: Install this component using a script that automates the installation process. 
 - :ref:`Step-by-step installation <wazuh_indexer_step_by_step>`: Install this component manually following detailed step-by-step instructions.
-
 
 
 **Installing Kibana**
@@ -180,23 +178,9 @@ You can choose an installation method and start installing Kibana:
 - :ref:`Step-by-step installation <wazuh_dashboard_step_by_step>`: Install this component manually following detailed step-by-step instructions.
 
 
-
 **Installing Wazuh agent**
 
 To install a Wazuh agent, select your operating system from the list above and follow the instructions.
-
-
-
-
-How do I install Wazuh agents on Linux?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Open a terminal in the Linux/Unix Wazuh agent's host as a ``root`` user:
-
-- Run the ``agent-auth`` utility, using the Wazuh manager’s IP address to register the Wazuh agent.
-- To enable communication with the Wazuh manager, edit the Wazuh agent’s configuration file placed at ``/var/ossec/etc/ossec.conf``.
-- Restart the Wazuh agent.
-- Read the :ref:`Registering Wazuh agents <register_agents>` section for more information.  
 
 
 
@@ -210,6 +194,19 @@ Monitor your Windows systems with Wazuh, from Windows XP to the latest available
 - Select the installation method you want to follow: command line interface (CLI) or graphical user interface (GUI).
 - By default, all agent files are stored in ``C:\Program Files (x86)\ossec-agent`` after the installation.
 - Read the :ref:`Installing Wazuh agents on Windows systems <wazuh_agent_package_windows>` section for more information.  
+
+
+
+How do I register Wazuh agents?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Open a terminal in the Linux/Unix Wazuh agent's host as a ``root`` user:
+
+- Run the ``agent-auth`` utility, using the Wazuh manager’s IP address to register the Wazuh agent.
+- To enable communication with the Wazuh manager, edit the Wazuh agent’s configuration file placed at ``/var/ossec/etc/ossec.conf``.
+- Restart the Wazuh agent.
+- Read the :ref:`Registering Wazuh agents <register_agents>` section for more information.  
+
 
 
 .. toctree::
