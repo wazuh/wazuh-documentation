@@ -145,7 +145,7 @@ If you want to uninstall Wazuh, run the unattended installation script and use t
 Next steps
 ----------
 
-Now that your environment is ready, select your operating system and follow the installation steps to deploy the :ref:`Wazuh agent <wazuh_agent>` to the endpoints. The agent is a single and lightweight monitoring software that runs on most operating systems. It provides visibility into the endpoint's security by collecting critical system and application records, inventory data, and detecting potential anomalies. 
+Now that your environment is ready, select your endpoint's operating system and follow the installation steps to deploy the :ref:`Wazuh agent <wazuh_agent>`. The agent is a single and lightweight monitoring software that runs on most operating systems. It provides visibility into the endpoint's security by collecting critical system and application records, inventory data, and detecting potential anomalies. 
 
 .. raw:: html
 
