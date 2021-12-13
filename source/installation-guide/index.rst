@@ -10,9 +10,11 @@ Installation guide
 
 Wazuh is a free, open source and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response, and regulatory compliance. To learn more about the Wazuh solution, its components, architecture, and capabilities, check the :ref:`Getting started <getting_started>` section. 
 
-The Wazuh central components include the Wazuh server, Elasticsearch and Kibana. With this guided installation, you install each component on the same server, as an all-in-one deployment, or on different servers as a distributed deployment depending on the environment needs. A distributed deployment provides high availability and scalability of the product.
+The Wazuh central components include the Wazuh server, Elasticsearch and Kibana. With this guided installation, you install each component on the same server, as an all-in-one deployment, or on different servers as a distributed deployment depending on the environment needs.
 
-Alternatively, you can check our :ref:`Wazuh quickstart <quickstart>` to learn how to install all the central components on the same host using the unattended installation script. With Wazuh quickstart, you install and configure the Wazuh in just a few minutes.
+All installed components are open source. Wazuh server and Wazuh agent are `GNU GPL version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_. Elasticsearch and Kibana are under `Apache License 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_. 
+
+Alternatively, you can check our :ref:`Wazuh quickstart <quickstart>` to learn how to install all the central components on the same host using the unattended installation script. With Wazuh quickstart, you can install and configure the Wazuh in just a few minutes.
 
 
 On-premises wazuh deployment
@@ -20,7 +22,7 @@ On-premises wazuh deployment
 
 There are two different options for deploying Wazuh:
 
-- **All-in-one deployment**: Wazuh and Open Distro for Elasticsearch are installed on the same host. 
+- **All-in-one deployment**: All Wazuh central components are installed on the same host. 
 
 - **Distributed deployment**: Each component is installed on a separate host as a single-node or multi-node cluster. This type of deployment provides high availability and scalability of the product, and it is convenient for large working environments.
   
@@ -38,6 +40,11 @@ The following components are installed:
 
 - Elastic Stack, including Open Distro for Elasticsearch as a single-node cluster, as well as Filebeat, Kibana, and the Wazuh Kibana plugin.
 
+Wazuh offers the following options:
+:ref:`Wazuh quickstart <quickstart>`: To install on a Linux server.
+:ref:`Virtual Machine (OVA) <virtual_machine>`: To install on a virtual machine.
+:ref:`Amazon Machine Images (AMI) <amazon-machine-images>`: To install on an AWS cloud instance.
+
 
 Distributed deployment
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -50,6 +57,14 @@ The following components are installed:
 
 - Elastic Stack, including Open Distro for Elasticsearch as a single-node cluster or as a multi-node cluster. Installing Elastic Stack also includes the installation of Kibana, and the Wazuh Kibana plugin, on the same host as the Elasticsearch node or on a separate one.
 
+
+
+Wazuh Cloud
+-----------
+
+Wazuh protects your enterprise with *Security Information and Event Management* (SIEM) and *Endpoint Detection and Response* (EDR). Wazuh offers `Wazuh Cloud <https://wazuh.com/cloud/>`_, where all components are hosted on our PCI-DSS and SOC 2 Type 2 certified SaaS solution, which is maintained by our team. With Wazuh cloud, no dedicated hardware is required and everything is ready to use. This service offers a highly flexible infrastructure to match your enterprise needs.
+
+You can create and tailor your cloud environment to meet specific needs and upgrade it to the most appropriate tier. The setting up of a Wazuh Cloud environment is streamlined: installing and updating the Wazuh components, and defining scalability is all handled by Wazuh Cloud. You can check our :ref:`Requirements <cloud_service>` to learn how to create a cloud environment and explore the Wazuh Cloud services.
 
 
 More deployment options
@@ -76,22 +91,12 @@ Installation from sources
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
-
 Upgrade instructions
 --------------------
 
 
-
-
-Wazuh Cloud
------------
-Wazuh offers `Wazuh Cloud <https://wazuh.com/cloud/>`_, where all components are hosted on our PCI-DSS and SOC 2 Type 2 certified SaaS solution, which is maintained by our team. With Wazuh cloud, no dedicated hardware is required and everything is ready to use. This service offers a highly flexible infrastructure to match your enterprise needs.
-
-
-
 Installation alternatives
 -------------------------
-
 
 
 Integration with Elastic Stack
@@ -101,6 +106,7 @@ Integration with Elastic Stack
 
 Integration with Splunk
 ^^^^^^^^^^^^^^^^^^^^^^^
+
 
 
 
