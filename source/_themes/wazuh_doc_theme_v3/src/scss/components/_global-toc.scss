@@ -113,6 +113,14 @@
     background-repeat: no-repeat;
     border: none;
   }
+  
+  /* Hide toctree-l7 and its branch */
+  .toctree-l6.toc-toggle a .toc-toggle-btn {
+    display: none;
+  }
+  .toctree-l7 {
+    display: none;
+  } 
 }
 
 /* Light theme -------------------------------------------------------------- */

@@ -48,6 +48,7 @@ body {
     border-color: $light_ColorBorderDetails;
     .form-control {
       background-color: $light_ColorSidebarSpace;
+      color: $light_ColorMainText;
     }
     .btn-search {
       background: url('#{$icoPath}svg-icons.svg#search-lt');
@@ -66,6 +67,7 @@ body {
     border-color: $dark_ColorBorderDetails;
     .form-control {
       background-color: $dark_ColorSidebarSpace;
+      color: $dark_ColorMainText;
     }
     .btn-search {
       background: url('#{$icoPath}svg-icons.svg#search-dt');

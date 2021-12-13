@@ -9,6 +9,7 @@
   top: $headerHeight;
   display: inline-flex;
   flex-direction: row;
+  flex-wrap: wrap;
   align-items: flex-end;
   width: calc(100% - #{$leftSidebarWidth} - #{$rightSidebarWidth});
   height: $breadcrumbsHeight;
@@ -20,7 +21,7 @@
 
 .breadcrumb-separator::after {
   display: inline-block;
-  margin: 0 15px;
+  margin: 0 7px;
   content: "/";
   font-size: 1.1rem;
 }
