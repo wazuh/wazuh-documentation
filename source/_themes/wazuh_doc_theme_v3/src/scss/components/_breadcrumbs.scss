@@ -16,13 +16,13 @@
   margin: 0;
   list-style: none;
   z-index: 99;
+}
 
-  .breadcrumb-separator::after {
-    display: inline-block;
-    margin: 0 15px;
-    content: "/";
-    font-size: 1.1rem;
-  }
+.breadcrumb-separator::after {
+  display: inline-block;
+  margin: 0 15px;
+  content: "/";
+  font-size: 1.1rem;
 }
 
 /* Light theme -------------------------------------------------------------- */
@@ -31,9 +31,9 @@ body {
   #breadcrumbs {
     color: $light_ColorMainText;
     background-color: $light_ColorBaseSpace;
-    .breadcrumb-separator::after {
-      color: $light_ColorMainText;
-    }
+  }
+  .breadcrumb-separator::after {
+    color: $light_ColorMainText;
   }
 }
 
@@ -43,8 +43,8 @@ body {
   #breadcrumbs {
     color: $dark_ColorMainText;
     background-color: $dark_ColorBaseSpace;
-    .breadcrumb-separator::after {
-      color: $dark_ColorMainText;
-    }
+  }
+  .breadcrumb-separator::after {
+    color: $dark_ColorMainText;
   }
 }

@@ -1,55 +1,46 @@
 {#
-    basic/search.html
-    ~~~~~~~~~~~~~~~~~
+    wazuh_doc_theme_v3/search.html
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     Template for the search page.
 
-    :copyright: Copyright 2007-2013 by the Sphinx team, see AUTHORS.
-    :license: BSD, see LICENSE for details.
 #}
-
-<!-- TODO: search -->
 {%- extends "!wazuh_doc_theme_v3/template-parts/body.html" -%}
 {% set title = _('Search') %}
 
-{% block body %}
-  <noscript>
-  <div id="fallback" class="admonition warning">
-    <p class="last">
-      {% trans %}Please activate JavaScript to enable the search
-      functionality.{% endtrans %}
-    </p>
-  </div>
-  </noscript>
-
-  {% if search_performed %}
-    <h2>{{ _('Search Results') }}</h2>
-    {% if not search_results %}
-      <p>{{ _('Your search did not match any documents. Please make sure that all words are spelled correctly and that you\'ve selected enough categories.') }}</p>
+{%- block main_column -%}
+<div id="central-column">
+  {%- block latest %}
+    {%- set nav_version = version %}
+    {% if current_version %}
+      {%- set nav_version = current_version %}
     {% endif %}
-  {% endif %}
-  {{ super() }}
-  <div id="search-results">
-  {% if search_results %}
-    <ul>
-    {% for href, caption, context in search_results %}
-      <li>
-        <a href="{{ pathto(item.href) }}">{{ caption }}</a>
-        <p class="context">{{ context|e }}</p>
-      </li>
-    {% endfor %}
-    </ul>
-  {% endif %}
-  </div>
-{% endblock %}
+    {% if nav_version and not is_latest_release %}
+    <div class="no-latest-notice-wrapper">
+      <div class="no-latest-notice">
+        <div class="no-latest-icon-wrapper"><i class="fas fa-exclamation-triangle"></i></div>
+        <div class="no-latest-text-wrapper"><span class="font-weight-bold d-none d-sm-inline-block">Warning:</span> This is the documentation for Wazuh {{ nav_version }}. Check out the docs for <a class="link-latest" href="#">the latest version of Wazuh</a>!</div>
+      </div>
+    </div>
+    {% endif %}
+  {% endblock latest %}
+  
+  {# Main content #}
+  <main role="main">
+    <noscript>
+    <div id="fallback" class="admonition warning">
+      <p class="last">
+        {% trans %}Please activate JavaScript to enable the search
+        functionality.{% endtrans %}
+      </p>
+    </div>
+    </noscript>
+
+    <div id="search-results"></div>
+  </main>
+</div>
+{%- endblock main_column -%}
 
 {%- block after_footer %}
 {{ super() }}
-{{ pathto('searchindex.js', 1) }}
-{# this is used when loading the search index using $.ajax fails,
-   such as on Chrome for documents on localhost #}
-<script type="text/javascript" id="searchindexloader"></script>
-<script type="text/javascript">
-  $(function() { Search.loadIndex("{{ pathto('searchindex.js', 1) }}"); });
-</script>
 {% endblock after_footer %}

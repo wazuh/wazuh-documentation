@@ -133,7 +133,7 @@ var Search = {
   performSearch : function(query) {
     // create the required interface elements
     this.out = $('#search-results');
-    this.title = $('<h2>' + _('Searching') + '</h2>').appendTo(this.out);
+    this.title = $('<h1>' + _('Searching') + '</h1>').appendTo(this.out);
     this.dots = $('<span></span>').appendTo(this.title);
     this.status = $('<p class="search-summary">&nbsp;</p>').appendTo(this.out);
     this.output = $('<ul class="search"/>').appendTo(this.out);
@@ -270,7 +270,7 @@ var Search = {
         }
         listItem.append($('<a/>').attr('href',
             linkUrl +
-            highlightstring + item[2]).html(item[1]));
+            highlightstring + item[2]).html(item[1]).addClass('result-link'));
         if (item[3]) {
           listItem.append($('<span> (' + item[3] + ')</span>'));
           Search.output.append(listItem);
@@ -301,11 +301,14 @@ var Search = {
       // search finished, update title and status message
       else {
         Search.stopPulse();
-        Search.title.text(_('Search Results'));
-        if (!resultCount)
-          Search.status.text(_('Your search did not match any documents. Please make sure that all words are spelled correctly and that you\'ve selected enough categories.'));
-        else
-            Search.status.text(_('Search finished, found %s page(s) matching the search query.').replace('%s', resultCount));
+        Search.title.text(query);
+        Search.title.html(_('Search results for: ') + '<span class="query-term">' + Search.title.text() + '</span>');
+        if (!resultCount) {
+          Search.status.append('<p>No results.</p>');
+          Search.status.append('<p>' + _('Please make sure that all words are spelled correctly.') + '</p>');
+        } else {
+          Search.status.text(_('Found %s page(s) matching the search query.').replace('%s', resultCount));
+        }
         Search.status.fadeIn(500);
       }
     }
