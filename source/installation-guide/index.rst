@@ -8,11 +8,9 @@
 Installation guide
 ==================
 
-Wazuh is a free, open source and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response, and regulatory compliance. To learn more about the Wazuh solution, its components, architecture, and capabilities, check the :ref:`Getting started <getting_started>` section. 
+Wazuh is a free, open source and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response, and regulatory compliance. All installed components are open source. Wazuh server and Wazuh agent are under `GNU GPL version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_ license. Elasticsearch and Kibana are under `Apache License 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_. 
 
-The Wazuh central components include the Wazuh server, Elasticsearch and Kibana. With this guided installation, you install each component on the same server, as an all-in-one deployment, or on different servers as a distributed deployment depending on the environment needs.
-
-All installed components are open source. Wazuh server and Wazuh agent are `GNU GPL version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_. Elasticsearch and Kibana are under `Apache License 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_. 
+The Wazuh central components include the Wazuh server, Elasticsearch and Kibana. With this guided installation, you install each component on the same server, as an all-in-one deployment, or on different servers as a distributed deployment depending on the environment needs. To learn more about the Wazuh solution, its components, architecture, and capabilities, check the :ref:`Getting started <getting_started>` section.
 
 Alternatively, you can check our :ref:`Wazuh quickstart <quickstart>` to learn how to install all the central components on the same host using the unattended installation script. With Wazuh quickstart, you can install and configure the Wazuh in just a few minutes.
 
@@ -20,7 +18,7 @@ Alternatively, you can check our :ref:`Wazuh quickstart <quickstart>` to learn h
 On-premises wazuh deployment
 ----------------------------
 
-There are two different options for deploying Wazuh:
+There are two different options for deploying Wazuh on-premises:
 
 - **All-in-one deployment**: All Wazuh central components are installed on the same host. 
 
@@ -41,22 +39,21 @@ The following components are installed:
 - Elastic Stack, including Open Distro for Elasticsearch as a single-node cluster, as well as Filebeat, Kibana, and the Wazuh Kibana plugin.
 
 Wazuh offers the following options:
-:ref:`Wazuh quickstart <quickstart>`: To install on a Linux server.
-:ref:`Virtual Machine (OVA) <virtual_machine>`: To install on a virtual machine.
-:ref:`Amazon Machine Images (AMI) <amazon-machine-images>`: To install on an AWS cloud instance.
+- :ref:`Wazuh quickstart <quickstart>`: To install on a Linux server.
+- :ref:`Virtual Machine (OVA) <virtual_machine>`: To install on a virtual machine.
+- :ref:`Amazon Machine Images (AMI) <amazon-machine-images>`: To install on an AWS cloud instance.
 
 
 Distributed deployment
 ^^^^^^^^^^^^^^^^^^^^^^
 
-You install and configure the Wazuh server and Elastic Stack, following a distributed deployment process. In this type of deployment, the components are installed on separate hosts. Kibana can be installed either on the same server of an Elasticsearch node or on a separate one.
+You can install and configure the Wazuh server and Elastic Stack, following a distributed deployment process. In this type of deployment, the components are installed on separate hosts. Kibana can be installed either on the same server of an Elasticsearch node or on a separate one. The Wazuh server can be installed as a single-node cluster or as a multi-node cluster. 
 
-The following components are installed:
+- **Single-node cluster**: The single-node installation is performed on only one host where the Wazuh manager, the Wazuh API, and Filebeat are installed. This method is easy to maintain, requires few resources, does not require a network load balancer.
 
-- The Wazuh server, including the Wazuh manager as a single-node cluster or as a multi-node cluster, the Wazuh API, and Filebeat.
+- **Multi-node cluster**: The multi-node installation process consists of installing several Wazuh server nodes on different hosts that communicate among them. This kind of installation provides high availability and requires a network load balancer.
 
-- Elastic Stack, including Open Distro for Elasticsearch as a single-node cluster or as a multi-node cluster. Installing Elastic Stack also includes the installation of Kibana, and the Wazuh Kibana plugin, on the same host as the Elasticsearch node or on a separate one.
-
+For information following a distributed deployment process, check the :ref:`Wazuh cluster <wazuh_cluster>` section. 
 
 
 Wazuh Cloud
@@ -71,43 +68,8 @@ More deployment options
 -----------------------
 
 
-Deploying with Kubernetes
-^^^^^^^^^^^^^^^^^^^^^^^^^
-
-
-Deploying with Ansible
-^^^^^^^^^^^^^^^^^^^^^^
-
-
-Deploying with Puppet
-^^^^^^^^^^^^^^^^^^^^^
-
-
-Offline deployment
-^^^^^^^^^^^^^^^^^^
-
-
-Installation from sources
-^^^^^^^^^^^^^^^^^^^^^^^^^
-
-
 Upgrade instructions
 --------------------
-
-
-Installation alternatives
--------------------------
-
-
-Integration with Elastic Stack
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-
-
-Integration with Splunk
-^^^^^^^^^^^^^^^^^^^^^^^
-
-
 
 
 
