@@ -80,8 +80,10 @@ Wazuh allows others deployment options such as Kubernetes, Ansible, Puppet, Offl
 Wazuh can also be installed with commercial options like Elastic Stack basic license or Splunk. To learn more about these options and other installation alternatives, see the :ref:`More installation alternatives <more_installation_alternatives>` section.
 
 
-.. note:: 
-  To upgrade any of the Wazuh components you need to check the :ref:`Upgrade guide <upgrade_guide>`​.
+Upgrade instructions
+^^^^^^^^^^^^^^^^^^^^
+
+To upgrade any of the Wazuh components you need to check the :ref:`Upgrade guide <upgrade_guide>`​.
 
 
 Wazuh agent deployment
