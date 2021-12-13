@@ -51,10 +51,93 @@ The diagram below represents a Wazuh deployment architecture. It shows the solut
 Installation alternatives: Wazuh can also be installed with commercial options like Elastic Stack basic license or Splunk. To learn more about these options and other installation alternatives, see the :ref:`More installation alternatives <more_installation_alternatives>` section.
 
 
+On-premises wazuh deployment
+----------------------------
+
+There are two different options for deploying Wazuh:
+
+- **All-in-one deployment**: Wazuh and Open Distro for Elasticsearch are installed on the same host. 
+
+- **Distributed deployment**: Each component is installed on a separate host as a single-node or multi-node cluster. This type of deployment provides high availability and scalability of the product, and it is convenient for large working environments.
+  
+For information on the minimum hardware requirements for the different types of deployment, check the :ref:`Requirements <installation_requirements>` section. 
+
+
+All-in-one deployment
+^^^^^^^^^^^^^^^^^^^^^
+
+With all-in-one deployment, you install and configure the Wazuh server and Elastic Stack on the same host. 
+
+The following components are installed:
+
+- The Wazuh server, including the Wazuh manager as a single-node cluster, and the Wazuh API.
+
+- Elastic Stack, including Open Distro for Elasticsearch as a single-node cluster, as well as Filebeat, Kibana, and the Wazuh Kibana plugin.
+
+
+Distributed deployment
+^^^^^^^^^^^^^^^^^^^^^^
+
+You install and configure the Wazuh server and Elastic Stack, following a distributed deployment process. In this type of deployment, the components are installed on separate hosts. Kibana can be installed either on the same server of an Elasticsearch node or on a separate one.
+
+The following components are installed:
+
+- The Wazuh server, including the Wazuh manager as a single-node cluster or as a multi-node cluster, the Wazuh API, and Filebeat.
+
+- Elastic Stack, including Open Distro for Elasticsearch as a single-node cluster or as a multi-node cluster. Installing Elastic Stack also includes the installation of Kibana, and the Wazuh Kibana plugin, on the same host as the Elasticsearch node or on a separate one.
+
+
+
+More deployment options
+-----------------------
+
+
+Deploying with Kubernetes
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+Deploying with Ansible
+^^^^^^^^^^^^^^^^^^^^^^
+
+
+Deploying with Puppet
+^^^^^^^^^^^^^^^^^^^^^
+
+
+Offline deployment
+^^^^^^^^^^^^^^^^^^
+
+
+Installation from sources
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+Upgrade instructions
+--------------------
+
+
+
 
 Wazuh Cloud
 -----------
 Wazuh offers `Wazuh Cloud <https://wazuh.com/cloud/>`_, where all components are hosted on our PCI-DSS and SOC 2 Type 2 certified SaaS solution, which is maintained by our team. With Wazuh cloud, no dedicated hardware is required and everything is ready to use. This service offers a highly flexible infrastructure to match your enterprise needs.
+
+
+
+Installation alternatives
+-------------------------
+
+
+
+Integration with Elastic Stack
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+Integration with Splunk
+^^^^^^^^^^^^^^^^^^^^^^^
+
 
 
 
