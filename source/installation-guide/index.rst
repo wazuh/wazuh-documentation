@@ -14,6 +14,7 @@ The Wazuh central components include the Wazuh server, Elasticsearch and Kibana.
 
 Alternatively, you can check our :ref:`Wazuh quickstart <quickstart>` to learn how to install all the central components on the same host using the unattended installation script. With Wazuh quickstart, you install and configure the Wazuh in just a few minutes.
 
+
 Installing the Wazuh central components
 ---------------------------------------
 
@@ -49,7 +50,12 @@ The diagram below represents a Wazuh deployment architecture. It shows the solut
 
 Installation alternatives: Wazuh can also be installed with commercial options like Elastic Stack basic license or Splunk. To learn more about these options and other installation alternatives, see the :ref:`More installation alternatives <more_installation_alternatives>` section.
 
-.. note:: Wazuh also offers `Wazuh Cloud <https://wazuh.com/cloud/>`_, where all components are hosted on our PCI-DSS and SOC 2 Type 2 certified SaaS solution, which is maintained by our team. With Wazuh cloud, no dedicated hardware is required and everything is ready to use. This service offers a highly flexible infrastructure to match your enterprise needs.
+
+
+Wazuh Cloud
+-----------
+Wazuh offers `Wazuh Cloud <https://wazuh.com/cloud/>`_, where all components are hosted on our PCI-DSS and SOC 2 Type 2 certified SaaS solution, which is maintained by our team. With Wazuh cloud, no dedicated hardware is required and everything is ready to use. This service offers a highly flexible infrastructure to match your enterprise needs.
+
 
 
 Wazuh agent installation
