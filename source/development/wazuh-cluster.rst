@@ -385,7 +385,8 @@ Processes are only created when a task needs them, but once created they are not
 
 * **File integrity thread**: It takes care of calculating the hash of all the files to be synchronized, which requires high CPU usage. This calculation is done in a different process.
 * **Agent info thread**: This task has a section in charge of communicating with wazuh-db to send it all the information of the agents. The communication is done in small chunks so as not to saturate the service socket, which made it a somewhat slow process and not a good candidate for the use of asyncio. Therefore, this section is delegated to a child process.
-* **Integrity thread**: The processing of files received in the master from the workers (extra-valid) is prone to be interleaved for the different nodes and to be very slow when using asyncio. Therefore, this part makes use of multiprocessing to execute this action in parallel without blocking the parent cluster process.
+* **Integrity thread**: The function in charge of compressing files is fully synchronous, which can block the parent cluster process. For this reason, the `compress_files` function is executed in a child process. This way the parent process can continue with other tasks.
+* **Integrity thread - Extra-valid files**: The processing of files received in the master from the workers (extra-valid) is prone to be interleaved for the different nodes and to be very slow when using asyncio. Therefore, this part makes use of multiprocessing to execute this action in parallel without blocking the parent cluster process.
 
 Below you can see a diagram of the process pool creation flow and how the necessary children are created and reused for each task:
 
