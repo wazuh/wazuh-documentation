@@ -60,7 +60,7 @@ You can install and configure the Wazuh server and Elastic Stack, following a di
 
 The Wazuh server and Elasticsearch can each be installed as a single-node or multi-node cluster depending on the environment needs. Small Wazuh deployments, which do not require processing large amounts of data, can easily be handled by a single-node cluster. Multi-node clusters are recommended when there is a large number of monitored endpoints, when a large volume of data is anticipated, or when high availability is required.
 
-- **Single-node cluster**: The single-node installation is performed on only one host where the Wazuh manager, the Wazuh API, and Filebeat are installed. This method is easy to maintain, requires few resources, does not require a network load balancer.
+- **Single-node cluster**: The single-node installation is performed on only one host where the Wazuh manager, the Wazuh API, and Filebeat are installed. This method is easy to maintain, requires few resources, and does not require a network load balancer.
 
 - **Multi-node cluster**: The multi-node installation process consists of installing several Wazuh server nodes on different hosts that communicate among them. This kind of installation provides high availability and requires a network load balancer.
 
@@ -81,7 +81,7 @@ Wazuh can also be installed with commercial options like Elastic Stack basic lic
 
 
 .. note:: 
-  If you need to upgrade any of the Wazuh components you need to check the :ref:`Upgrade guide <upgrade_guide>`​.
+  To upgrade any of the Wazuh components you need to check the :ref:`Upgrade guide <upgrade_guide>`​.
 
 
 Wazuh agent deployment
@@ -91,7 +91,7 @@ The :ref:`Wazuh agent <wazuh_agent>` is a single and lightweight monitoring soft
 
 It can be deployed to laptops, desktops, servers, cloud instances, containers, or virtual machines. The agent helps to protect your system by providing threat prevention, detection, and response capabilities. It is also used to collect different types of system and application data that it forwards to the :ref:`Wazuh server <wazuh_server>` through an encrypted and authenticated channel.
 
-If the Wazuh central components are already installed on your environment, select your operating system and follow the installation steps to deploy the agent to the endpoints. 
+If the Wazuh central components are already installed on your environment, select your operating system below and follow the installation steps to deploy the agent to the endpoints: 
 
 .. raw:: html
 
