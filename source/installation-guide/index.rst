@@ -83,7 +83,7 @@ Wazuh can also be installed with commercial options like Elastic Stack basic lic
 Upgrade instructions
 ^^^^^^^^^^^^^^^^^^^^
 
-To upgrade any of the Wazuh components you need to check the :ref:`Upgrade guide <upgrade_guide>`​.
+To upgrade any of the Wazuh components you need to check the​ :ref:`Upgrade guide <upgrade_guide>`.
 
 
 Wazuh agent deployment
