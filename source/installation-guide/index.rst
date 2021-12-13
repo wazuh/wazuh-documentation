@@ -15,6 +15,14 @@ The Wazuh central components include the Wazuh server, Elasticsearch and Kibana.
 Alternatively, you can check our :ref:`Wazuh quickstart <quickstart>` to learn how to install all the central components on the same host using the unattended installation script. With Wazuh quickstart, you can install and configure the Wazuh in just a few minutes.
 
 
+Wazuh Cloud
+-----------
+
+Wazuh protects your enterprise with *Security Information and Event Management* (SIEM) and *Endpoint Detection and Response* (EDR). Wazuh offers `Wazuh Cloud <https://wazuh.com/cloud/>`_, where all components are hosted on our PCI-DSS and SOC 2 Type 2 certified SaaS solution, which is maintained by our team. With Wazuh cloud, no dedicated hardware is required and everything is ready to use. This service offers a highly flexible infrastructure to match your enterprise needs.
+
+You can create and tailor your cloud environment to meet specific needs and upgrade it to the most appropriate tier. The setting up of a Wazuh Cloud environment is streamlined: installing and updating the Wazuh components, and defining scalability is all handled by Wazuh Cloud. You can check our :ref:`Requirements <cloud_service>` to learn how to create a cloud environment and explore the Wazuh Cloud services.
+
+
 On-premises wazuh deployment
 ----------------------------
 
@@ -62,7 +70,7 @@ The diagram below represents a Wazuh deployment architecture. It shows the solut
     :alt: Wazuh deployment
     :align: center
     :wrap_image: No
-    
+
 
 More deployment options
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -72,19 +80,8 @@ Wazuh allows others deployment options such as Kubernetes, Ansible, Puppet, Offl
 Wazuh can also be installed with commercial options like Elastic Stack basic license or Splunk. To learn more about these options and other installation alternatives, see the :ref:`More installation alternatives <more_installation_alternatives>` section.
 
 
-
-
 .. note:: 
   If you need to upgrade any of the Wazuh components you need to check the :ref:`Upgrade guide <upgrade_guide>`​.
-
-
-Wazuh Cloud
------------
-
-Wazuh protects your enterprise with *Security Information and Event Management* (SIEM) and *Endpoint Detection and Response* (EDR). Wazuh offers `Wazuh Cloud <https://wazuh.com/cloud/>`_, where all components are hosted on our PCI-DSS and SOC 2 Type 2 certified SaaS solution, which is maintained by our team. With Wazuh cloud, no dedicated hardware is required and everything is ready to use. This service offers a highly flexible infrastructure to match your enterprise needs.
-
-You can create and tailor your cloud environment to meet specific needs and upgrade it to the most appropriate tier. The setting up of a Wazuh Cloud environment is streamlined: installing and updating the Wazuh components, and defining scalability is all handled by Wazuh Cloud. You can check our :ref:`Requirements <cloud_service>` to learn how to create a cloud environment and explore the Wazuh Cloud services.
-
 
 
 Wazuh agent deployment
