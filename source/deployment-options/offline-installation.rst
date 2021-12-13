@@ -1,5 +1,7 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. _wazuh-offline-installation:
+
 .. meta::
   :description: Discover the offline step-by-step process to install Wazuh and OpenDistro components for Elasticsearch in an all-in-one deployment without connection to the Internet.
 
