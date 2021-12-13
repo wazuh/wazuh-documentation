@@ -5,8 +5,8 @@
   
 .. _more_installation_alternatives:
 
-More installation alternatives
-==============================
+Installation alternatives
+=========================
 
 This section will provide alternative installation configurations to the ones given in the installation guide.
 

@@ -5,8 +5,8 @@
 
 .. _installation_splunk:
 
-Wazuh with Splunk
-=================
+Integration with Splunk
+=======================
 
 To learn more about how Splunk works, here is their documentation: `Splunk <https://docs.splunk.com/Documentation>`_
 
