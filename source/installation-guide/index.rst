@@ -76,9 +76,6 @@ Options                                                           Description
 ==============================================================    =============
 
 
-
-
-
 The diagram below represents a Wazuh deployment architecture. It shows the solution components and how the Wazuh servers and Elasticsearch can be configured as a cluster, providing load balancing and high-availability.
 
 .. thumbnail:: ../images/installation/distributed.png
@@ -109,6 +106,18 @@ The :ref:`Wazuh agent <wazuh_agent>` is a single and lightweight monitoring soft
 It can be deployed to laptops, desktops, servers, cloud instances, containers, or virtual machines. The agent helps to protect your system by providing threat prevention, detection, and response capabilities. It is also used to collect different types of system and application data that it forwards to the :ref:`Wazuh server <wazuh_server>` through an encrypted and authenticated channel.
 
 If the Wazuh central components are already installed on your environment, select your operating system below and follow the installation steps to deploy the agent to the endpoints: 
+
+==============================================================================================================================    =============
+Operating systems                                                                                                                 Description
+==============================================================================================================================    =============
+`Linux  <https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-linux.html>`_                 The deployment of a Wazuh agent on a Linux system uses deployment variables that facilitate installing, registering, and configuring the agent.
+`Windows <https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-windows.html>`_              You can monitor your Windows systems with Wazuh, from Windows XP to the latest versions, including Windows 11 and Windows Server 2022.
+`macOS <https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-macos.html>`_                  Wazuh allows you to monitor your macOS systems and our package is suitable for macOS Sierra or later.
+`Solaris <https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-solaris.html>`_              You can monitor your Solaris systems with Wazuh. To start the installation process, all you need to do is select your architecture between i386 or Sparc. 
+`AIX <https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-aix.html>`_                      The deployment of a Wazuh agent on an AIX system uses variables that facilitate installing, registering, and configuring the agent.
+`HP-UX <https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-hpux.html>`_                   You can monitor your HP-UX systems with Wazuh.  Wazuh allows you to monitor your HP-UX systems with Wazuh. You only need to start the installation process by downloading the `HP-UX installer <https://packages.wazuh.com/|CURRENT_MAJOR|/hp-ux/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar>`_. 
+==============================================================================================================================    =============
+
 
 .. raw:: html
 
