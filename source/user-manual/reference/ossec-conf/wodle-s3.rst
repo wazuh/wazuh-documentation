@@ -609,7 +609,7 @@ Service\\only_logs_after
 
 .. versionadded:: 4.0.0
 
-A valid date, in YYYY-MMM-DD format. Only logs from that date onwards will be parsed. Only works with the CloudWatch Logs service.
+A valid date, in YYYY-MMM-DD format. Only logs from that date onwards will be parsed. This option is only available for the CloudWatch Logs service.
 
 +--------------------+-------------+
 | **Default value**  | None        |
