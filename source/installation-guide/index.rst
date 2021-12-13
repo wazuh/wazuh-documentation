@@ -38,9 +38,6 @@ Options                                                           Description
 ==============================================================    =============
 
 
-For information on the minimum hardware requirements for the different types of deployment, check the :ref:`Requirements <installation_requirements>` section. 
-
-
 All-in-one deployment
 ^^^^^^^^^^^^^^^^^^^^^
 
@@ -75,6 +72,7 @@ Options                                                           Description
 **Multi-node cluster**                                            The multi-node installation process consists of installing several Wazuh server nodes on different hosts that communicate among them. This kind of installation provides high availability and requires a network load balancer.
 ==============================================================    =============
 
+For information on the minimum hardware requirements for the different types of deployment, check the :ref:`Requirements <installation_requirements>` section. 
 
 The diagram below represents a Wazuh deployment architecture. It shows the solution components and how the Wazuh servers and Elasticsearch can be configured as a cluster, providing load balancing and high-availability.
 
@@ -90,7 +88,6 @@ More deployment options
 Wazuh allows others deployment options such as Kubernetes, Ansible, Puppet, Offline and installation from sources. For information about the different types of deployment, check the :ref:`Deployment options <deployment>` section. 
 
 Wazuh can also be installed with commercial options like Elastic Stack basic license or Splunk. To learn more about these options and other installation alternatives, see the :ref:`More installation alternatives <more_installation_alternatives>` section.
-
 
 Upgrade instructions
 ^^^^^^^^^^^^^^^^^^^^
