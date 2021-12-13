@@ -7,7 +7,7 @@
 
 
 Installing Elasticsearch in step-by-step mode
-=================================================
+=============================================
 
 Install and configure Elasticsearch, a highly scalable full-text search engine. It offers advanced security, alerting, index management, deep performance analysis, and several other features.
 
