@@ -1,5 +1,8 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
+.. meta::
+  :description: Learn more about how to monitor Google Cloud Platform services with Wazuh in this section of our documentation. 
+  
 .. _gcp:
 
 Using Wazuh to monitor GCP services
@@ -7,7 +10,6 @@ Using Wazuh to monitor GCP services
 
 .. meta::
   :description: Discover how Wazuh can help you to monitor your Google Cloud Platform (GCP) infrastructure.
-
 
 Wazuh helps to increase the security of a GCP infrastructure by collecting and analyzing log data. This can be achieved by using the Pub/Sub and Storage integration modules.
 

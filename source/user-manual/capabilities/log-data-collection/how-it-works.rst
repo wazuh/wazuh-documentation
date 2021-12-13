@@ -63,6 +63,26 @@ Wazuh can monitor classic Windows event logs, as well as the newer Windows event
       <log_format>eventchannel</log_format>
     </localfile>
 
+
+MacOS ULS logs
+^^^^^^^^^^^^^^
+
+.. versionadded:: 4.3.0
+
+Wazuh can monitor logs from the macOS Unified Logging System.
+
+  .. code-block:: xml
+
+    <localfile>
+      <location>macos</location>
+      <log_format>macos</log_format>
+      <query type="log,activity" level="debug">process == "sshd" OR message CONTAINS "invalid"</query>
+    </localfile>
+
+.. note::
+
+  These logs are acquired in `Syslog` format. For more information, see the :ref:`How to collect macOS ULS logs <how-to-collect-macoslogs>`.
+
 .. _remote_syslog:
 
 Remote syslog
@@ -99,6 +119,10 @@ The other option store the logs in a plaintext file and monitor that file with W
 
 - ``<log_format>syslog</log_format>`` indicates the source log format, in this case, syslog format.
 - ``<location>/custom/file/path</location>`` indicates where we have stored the syslog logs.
+
+.. note::
+
+  For more information about the ``localfile`` label, see the :ref:`Local configuration's localfile <reference_ossec_localfile>`.
 
 Analysis
 --------

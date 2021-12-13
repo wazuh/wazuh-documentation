@@ -11,3 +11,4 @@ Deployment
    deploying-with-puppet/index
    deploying-with-ansible/index
    virtual-machine/virtual-machine
+   amazon-machine-images/amazon-machine-images

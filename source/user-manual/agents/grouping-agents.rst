@@ -19,7 +19,7 @@ Unless otherwise assigned, all new connected agents automatically belong to the 
 
 Below are the steps to assign agents to a group with a specific configuration:
 
-1. Once an agent has been added and connected to the manager, assign it to a group using the :doc:`agent_groups <../reference/tools/agent_groups>` tool or the
+1. Once an agent has been added and connected to the manager, assign it to a group using the :doc:`agent_groups <../reference/tools/agent-groups>` tool or the
    Wazuh API. Below are examples of how to assign an agent with ID 002 to the group *'dbms'* using these methods:
 
    Using **agent_groups**:
@@ -341,7 +341,7 @@ Finally, to check the synchronization status of the group configuration for a si
             "message": "Sync info was returned for all selected agents"
         }
 
-The rest of the capabilities of **agent_groups** can be found at its :doc:`reference section <../reference/tools/agent_groups>`. The same for the :doc:`Wazuh API <../api/reference>` which offers calls with the similar behavior.
+The rest of the capabilities of **agent_groups** can be found at its :doc:`reference section <../reference/tools/agent-groups>`. The same for the :doc:`Wazuh API <../api/reference>` which offers calls with the similar behavior.
 
 Shared files behavior
 ^^^^^^^^^^^^^^^^^^^^^
