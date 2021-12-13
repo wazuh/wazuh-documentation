@@ -21,5 +21,4 @@ In the installation guide, is explained how to install Wazuh from packages. Alte
 
     elastic-stack/index
     splunk/index
-    wazuh-from-sources/index
-    offline-installation
+

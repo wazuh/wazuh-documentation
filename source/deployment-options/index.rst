@@ -2,13 +2,16 @@
 
 .. _deployment:
 
-Deployment
-==========
+Deployment options
+==================
 
 .. toctree::
    :maxdepth: 2
 
-   deploying-with-puppet/index
+   deploying-with-kubernetes/index
    deploying-with-ansible/index
+   deploying-with-puppet/index
    virtual-machine/virtual-machine
    amazon-machine-images/amazon-machine-images
+   offline-installation
+   wazuh-from-sources/index

@@ -9,4 +9,4 @@ Containers
    :maxdepth: 2
 
    docker/index
-   deploying-with-kubernetes/index
+
