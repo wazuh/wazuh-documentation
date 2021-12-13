@@ -4,7 +4,7 @@
 
     .. code-block:: console
 
-      # yum install curl
+      # yum install -y curl
 
 #. Import the GPG key.
 

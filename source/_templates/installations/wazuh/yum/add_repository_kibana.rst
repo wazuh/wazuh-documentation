@@ -4,7 +4,7 @@
 
     .. code-block:: console
 
-      # yum install curl libcap
+      # yum install -y curl libcap
 
 #. Import the GPG key.
 

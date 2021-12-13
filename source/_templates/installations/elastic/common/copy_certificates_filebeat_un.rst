@@ -4,9 +4,6 @@ During the Elasticsearch installation, the ``certs.tar`` file was created. This 
 
 .. code-block:: console
 
-  # mv ~/certs.tar /etc/filebeat/certs/
-  # cd /etc/filebeat/certs/
-  # tar -xf certs.tar filebeat.pem filebeat.key root-ca.pem
-
+  # tar -xf ~/certs.tar -C /etc/filebeat/certs/ ./filebeat.pem ./filebeat.key ./root-ca.pem
 
 .. End of copy_certificates_filebeat.rst

@@ -5,7 +5,7 @@
   output.elasticsearch.hosts: <elasticsearch_ip>:9200
   output.elasticsearch.password: <elasticsearch_password>
 
-``elasticsearch_ip`` must be replaced with the IP address or the hostname of the Elasticsearch server and ``elasticsearch_password`` with the password previously generated for the ``elastic`` user.
+``<elasticsearch_ip>`` must be replaced with the IP address or the hostname of the Elasticsearch server and ``<elasticsearch_password>`` with the password previously generated for the ``elastic`` user.
 
 The following settings must be changed:
 

@@ -36,7 +36,7 @@ Install and configure the Wazuh master node. Make sure that a copy of ``certs.ta
 
    .. code-block:: console
    
-       # curl -so ~/unattended-installation.sh https://packages.wazuh.com/resources/4.2/unattended-installation/unattended-installation.sh 
+       # curl -sO https://s3.us-west-1.amazonaws.com/packages-dev.wazuh.com/resources/4.2/unattended_installation.sh
 
 #. Run the script with the options ``-w`` and ``-wn <node_name>`` to install the Wazuh server. The node name must be the same used in ``config.yml`` for the certificate creation, for example, ``wazuh-master``.
  
@@ -44,7 +44,7 @@ Install and configure the Wazuh master node. Make sure that a copy of ``certs.ta
 
   .. code-block:: console
   
-         # bash ~/wazuh-server-installation.sh -w -wn <node_name>
+         # bash ./unattended_installation.sh -w -wn nodeW-1
 
   Options available when running the script:
   
@@ -70,7 +70,7 @@ Install and configure the Wazuh master node. Make sure that a copy of ``certs.ta
 
 Your Wazuh server is now successfully installed. 
 
-- If you want a Wazuh server single-node cluster, everything is set and you can proceed directly with :ref:`installing Kibana <wazuh_dashboard_installation>`. 
+- If you want a Wazuh server single-node cluster, everything is set and you can proceed directly with :ref:`wazuh_dashboard_unattended_installation`.
       
 - If you want a Wazuh server multi-node cluster, expand the instructions below to install and configure Wazuh worker nodes. 
 
@@ -102,4 +102,4 @@ Your Wazuh server is now successfully installed. Repeat this process on every Wa
 Next steps
 ----------
   
-The Wazuh server installation is now complete and you can proceed with installing Kibana. To perform this action, see the :ref:`Kibana <wazuh_dashboard_installation>` section.  
+The Wazuh server installation is now complete and you can proceed with installing Kibana. To perform this action, see the :ref:`wazuh_dashboard_unattended_installation` section.  

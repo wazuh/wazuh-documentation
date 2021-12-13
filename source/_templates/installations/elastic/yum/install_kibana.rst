@@ -2,6 +2,6 @@
 
 .. code-block:: console
 
-  # yum install opendistroforelasticsearch-kibana
+  # yum install -y opendistroforelasticsearch-kibana
 
 .. End of include file

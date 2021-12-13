@@ -32,15 +32,16 @@ The installation process is divided into three stages.
 
 Install and configure the initial node. During this stage, the SSL certificates to encrypt communications between the Wazuh components are generated. These certificates are later deployed to other Wazuh instances. 
 
-#. Download the unattended installation script and the configuration file. 
+#. Download the unattended installation script and the configuration files. 
 
       .. code-block:: console
 
-          # curl -so ~/unattended-installation.sh https://packages.wazuh.com/resources/4.2/unattended-installation/unattended-installation.sh      
-          # curl -so ~/config.yml https://packages.wazuh.com/resources/4.2/unattended-installation/templates/config.yml
+          # curl -sO https://s3.us-west-1.amazonaws.com/packages-dev.wazuh.com/resources/4.2/unattended_installation.sh
+          # curl -sO https://raw.githubusercontent.com/wazuh/wazuh-packages/unify-unattended/unattended_scripts/config.yml
+          # curl -sO https://raw.githubusercontent.com/wazuh/wazuh-packages/unify-unattended/unattended_scripts/instances.yml
 
     
-#. Edit ``~/config.yml`` and replace the node names and IP values with the corresponding names and IP addresses, including all the Wazuh server, Elasticsearch, and Kibana nodes. Add as many node fields as needed.
+#. Edit ``./config.yml`` and replace the node names and IP values with the corresponding names and IP addresses, including all the Wazuh server, Elasticsearch, and Kibana nodes. Add as many node fields as needed.
 
       .. code-block:: yaml
         :emphasize-lines: 4, 8, 15, 17, 27, 29
@@ -77,11 +78,14 @@ Install and configure the initial node. During this stage, the SSL certificates 
 
 
 
+#. Edit ``./instances.yml``.
+
+
 #. Run the script with the options ``-e``, ``-en <node_name>``, and ``-c`` to install Open Distro for Elasticsearch and generate the SSL certificates. The node name must be the same used in ``config.yml`` for the certificate creation, for example, ``master-node-1``.
 
       .. code-block:: console
 
-        # bash ~/unattended-installation.sh -e -en <node_name> -c
+        # bash ./unattended_installation.sh -e -en <node_name> -c
 
 
     Options available when running the script:
@@ -106,11 +110,11 @@ Install and configure the initial node. During this stage, the SSL certificates 
     | -h / --help                   | Shows *help*.                                                                                                  |
     +-------------------------------+----------------------------------------------------------------------------------------------------------------+        
 
-#.  Copy ``~/certs.tar`` to all the servers of the distributed deployment, including the Wazuh server, Elasticsearch and Kibana nodes. This can be done by using, for example, ``scp``.
+#.  Copy the ``certs/`` folder and the ``config.yml`` file to all the servers of the distributed deployment, including the Wazuh server, Elasticsearch and Kibana nodes. This can be done by using, for example, ``scp``.
 
 You now have installed and configured the initial Elasticsearch node. 
 
-    - If you want a single-node cluster, everything is set and you can proceed directly with :ref:`installing the Wazuh server <wazuh_server_installation>`.
+    - If you want a single-node cluster, everything is set and you can proceed directly with :ref:`wazuh_server_unattended`.
  
     - If you want to install a multi-node cluster, expand the instructions below to install and configure subsequent nodes, and then initialize the cluster. 
 
@@ -120,21 +124,21 @@ You now have installed and configured the initial Elasticsearch node.
 
     <div class="accordion-section">
 
-Install and configure subsequent nodes of your multi-node cluster. Make sure that a copy of ``certs.tar``, created during the initial node installation, is placed in the root home folder ``(~/)``.
+Install and configure subsequent nodes of your multi-node cluster. Make sure that a copy of ``certs/`` and a copy of ``config.yml``, created during the initial node installation, is placed in your working directory (``./certs/`` and ``./config.yml``).
 
 
 #. Download the script.
 
       .. code-block:: console
 
-        # curl -so ~/unattended-installation.sh https://packages.wazuh.com/resources/4.2/unattended-installation/unattended-installation.sh   
+        # curl -sO https://s3.us-west-1.amazonaws.com/packages-dev.wazuh.com/resources/4.2/unattended_installation.sh
 
 
 #. Run the script with the options ``-e`` and ``-en <node_name>`` to install Open Distro for Elasticsearch. The node name must be the same used in ``config.yml`` for the certificate creation, for example, ``master-node-2``.
 
       .. code-block:: console
 
-        # bash ~/unattended-installation.sh -e -en <node_name> 
+        # bash ./unattended_installation.sh -e -en <node_name> 
 
 
 Repeat this process on each Elasticsearch node and proceed with initializing the cluster.             
@@ -158,5 +162,4 @@ Run the ``securityadmin`` script on the initial node to load the new certificate
 Next steps
 ----------
 
-Elasticsearch is now successfully installed and you can proceed with installing the Wazuh server. To perform this action, see the :ref:`Wazuh server <wazuh_server_unattended>` section.
-
+Elasticsearch is now successfully installed and you can proceed with installing the Wazuh server. To perform this action, see the :ref:`wazuh_server_unattended` section.
