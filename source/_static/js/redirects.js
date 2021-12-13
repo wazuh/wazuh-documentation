@@ -47,6 +47,23 @@ newUrls['4.3'] = [
   '/user-manual/reference/ossec-conf/office365-module.html',
   '/user-manual/capabilities/file-integrity/fim-fields-rule-mapping.html',
   '/user-manual/capabilities/log-data-collection/how-to-collect-macoslogs.html',
+  '/azure/activity-services/index.html',
+  '/azure/activity-services/active-directory/index.html',
+  '/azure/activity-services/active-directory/graph.html',
+  '/azure/activity-services/active-directory/graph.html',
+  '/azure/activity-services/prerequisites/dependencies.html',
+  '/azure/activity-services/active-directory/index.html',
+  '/azure/activity-services/prerequisites/considerations.html',
+  '/azure/activity-services/prerequisites/credentials.html',
+  '/azure/activity-services/prerequisites/index.html',
+  '/azure/activity-services/services/index.html',
+  '/azure/activity-services/services/log-analytics.html',
+  '/azure/activity-services/services/storage.html',
+];
+
+removedUrls['4.3'] = [
+  '/azure/monitoring-activity.html',
+  '/azure/monitoring-services.html',
 ];
 
 /* *** RELEASE 4.2 ****/
