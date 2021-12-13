@@ -388,7 +388,7 @@ log_analytics\\request\\time_offset
 This option sets the time delay in which we will perform the query. For example, if we establish this option with the value "1d", the integration will perform the query on the events that have been generated in the interval of time defined between the current date of the system minus one day (1d) and the current date of the system.
 
 +--------------------+----------------------------------------------------------------------------------------------------------------------------+
-| **Default value**  | 1d                                                                                                                         |
+| **Default value**  | Date of execution at ``00:00:00``                                                                                          |
 +--------------------+----------------------------------------------------------------------------------------------------------------------------+
 | **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, m (minutes), h (hours), d (days) |
 +--------------------+----------------------------------------------------------------------------------------------------------------------------+
@@ -550,10 +550,10 @@ Timeout for each request evaluation. This option overwrites the general `timeout
 graph\\request\\time_offset
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This option sets the time-lapse that the query will request. For example, if this option is set to the value "1d", the integration will request the events generated in the interval of time defined between the current system's date minus one day (1d) and the current system's date. If the ``time_offset`` tag is not present in the configuration the module will try to obtain every log from the current day, starting from ``00:00:00``.
+This option sets the time-lapse that the query will request. For example, if this option is set to the value "1d", the integration will request the events generated in the interval of time defined between the current system's date minus one day (1d) and the current system's date.
 
 +--------------------+----------------------------------------------------------------------------------------------------------------------------+
-| **Default value**  | 1d                                                                                                                         |
+| **Default value**  | Date of execution at ``00:00:00``                                                                                          |
 +--------------------+----------------------------------------------------------------------------------------------------------------------------+
 | **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, m (minutes), h (hours), d (days) |
 +--------------------+----------------------------------------------------------------------------------------------------------------------------+
@@ -686,14 +686,14 @@ Specifies the name of the container. Enter ``*`` to access all account container
 storage\\container\\blobs
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Specifies the extension of the blobs, like ``.json``. Enter "*" to access all blobs of the container/s.
+Specifies the extension of the blobs, like ``.json``. Enter "*" to access all the containers' blobs. 
 
 .. note::
 
     This option is related to option ``content_type``, because if any blob has a different content to the one we have indicated, it will not be read correctly. Therefore, we need to be aware of what content we are trying to obtain and take it into consideration when using this option with ``"*"``.
 
 +--------------------+--------------------+
-| **Default value**  | N/A                |
+| **Default value**  | \*                 |
 +--------------------+--------------------+
 | **Allowed values** | Extension/"*"      |
 +--------------------+--------------------+
@@ -701,7 +701,7 @@ Specifies the extension of the blobs, like ``.json``. Enter "*" to access all bl
 storage\\container\\content_type
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Specifies the content of the blobs.
+This parameter indicates the format of the blobs' content. The available values are:
 
 - **text**. Plain text. Each line is a log.
 - **json_file**. The blob contain records of logs in standard json format.
@@ -715,7 +715,7 @@ Specifies the content of the blobs.
 	When the ``day`` option is set, the interval value must be a multiple of months. By default, the interval is set to a month.
 
 +--------------------+----------------------------+
-| **Default value**  | N/A                        |
+| **Default value**  | json_inline                |
 +--------------------+----------------------------+
 | **Allowed values** | text/json_file/json_inline |
 +--------------------+----------------------------+
@@ -738,7 +738,7 @@ storage\\container\\time_offset
 This option sets the time delay in which we will perform the query. For example, if we establish this option with the value "1d", the integration will perform the query on the events that have been generated in the interval of time defined between the current date of the system minus one day (1d) and the current date of the system.
 
 +--------------------+----------------------------------------------------------------------------------------------------------------------------+
-| **Default value**  | 1d                                                                                                                         |
+| **Default value**  | Date of execution at ``00:00:00``                                                                                          |
 +--------------------+----------------------------------------------------------------------------------------------------------------------------+
 | **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, m (minutes), h (hours), d (days) |
 +--------------------+----------------------------------------------------------------------------------------------------------------------------+
@@ -764,6 +764,8 @@ Example of storage configuration
                 <content_type>json_inline</content_type>
                 <time_offset>24h</time_offset>
             </container>
+
+	    <container name="audit-logs"/>
 
         </storage>
     </wodle>
@@ -821,6 +823,8 @@ Example of all integration
                 <content_type>json_inline</content_type>
                 <time_offset>24h</time_offset>
             </container>
+
+	    <container name="audit-logs"/>
 
         </storage>
     </wodle>
