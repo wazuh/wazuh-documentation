@@ -561,6 +561,7 @@ We can check the status of our new services in our Open Distro for Elasticsearch
 
 Once the Wazuh API is registered we can access it through our Kibana portal.
 
-.. thumbnail:: ../../images/ansible/wazuh-dashboard-main.png
+.. thumbnail:: ../../../images/ansible/wazuh-dashboard-main.png
     :align: center
     :width: 100%
+

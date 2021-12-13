@@ -275,11 +275,11 @@ We can check the status of our new services in our Wazuh agent.
 
 We can see the agent connection in Kibana.
 
-.. thumbnail:: ../../images/ansible/ansible-agent2.png
+.. thumbnail:: ../../../images/ansible/ansible-agent2.png
     :align: center
     :width: 100%
 
-.. thumbnail:: ../../images/ansible/ansible-agent.png
+.. thumbnail:: ../../../images/ansible/ansible-agent.png
     :align: center
     :width: 100%
 
