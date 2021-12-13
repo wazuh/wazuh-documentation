@@ -28,10 +28,16 @@ On-premises wazuh deployment
 
 There are two different options for deploying Wazuh on-premises:
 
-- **All-in-one deployment**: All Wazuh central components are installed on the same host. 
 
-- **Distributed deployment**: Each component is installed on a separate host as a single-node or multi-node cluster. This type of deployment provides high availability and scalability of the product, and it is convenient for large working environments.
-  
+==============================================================    =============
+Options                                                           Description
+==============================================================    =============
+- **All-in-one deployment**                                       All Wazuh central components are installed on the same host. 
+
+- **Distributed deployment**                                      Each component is installed on a separate host as a single-node or multi-node cluster. This type of deployment provides high availability and scalability of the product, and it is convenient for large working environments.
+==============================================================    =============
+
+
 For information on the minimum hardware requirements for the different types of deployment, check the :ref:`Requirements <installation_requirements>` section. 
 
 
@@ -60,9 +66,18 @@ You can install and configure the Wazuh server and Elastic Stack, following a di
 
 The Wazuh server and Elasticsearch can each be installed as a single-node or multi-node cluster depending on the environment needs. Small Wazuh deployments, which do not require processing large amounts of data, can easily be handled by a single-node cluster. Multi-node clusters are recommended when there is a large number of monitored endpoints, when a large volume of data is anticipated, or when high availability is required.
 
-- **Single-node cluster**: The single-node installation is performed on only one host where the Wazuh manager, the Wazuh API, and Filebeat are installed. This method is easy to maintain, requires few resources, and does not require a network load balancer.
 
-- **Multi-node cluster**: The multi-node installation process consists of installing several Wazuh server nodes on different hosts that communicate among them. This kind of installation provides high availability and requires a network load balancer.
+==============================================================    =============
+Options                                                           Description
+==============================================================    =============
+- **Single-node cluster**                                         The single-node installation is performed on only one host where the Wazuh manager, the Wazuh API, and Filebeat are installed. This method is easy to maintain, requires few resources, and does not require a network load balancer.
+
+- **Multi-node cluster**                                          The multi-node installation process consists of installing several Wazuh server nodes on different hosts that communicate among them. This kind of installation provides high availability and requires a network load balancer.
+==============================================================    =============
+
+
+
+
 
 The diagram below represents a Wazuh deployment architecture. It shows the solution components and how the Wazuh servers and Elasticsearch can be configured as a cluster, providing load balancing and high-availability.
 
