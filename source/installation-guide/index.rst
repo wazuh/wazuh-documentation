@@ -57,6 +57,12 @@ The Wazuh server and Elasticsearch can each be installed as a single-node or mul
 - **Multi-node cluster**: The multi-node installation process consists of installing several Wazuh server nodes on different hosts that communicate among them. This kind of installation provides high availability and requires a network load balancer.
 
 
+More deployment options
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Wazuh allows others deployment options such as Kubernetes, Ansible, Puppet, Offline and installation from sources. For information about the different types of deployment, check the :ref:`Deployment options <deployment>` section. 
+
+
 Wazuh Cloud
 -----------
 
@@ -65,24 +71,15 @@ Wazuh protects your enterprise with *Security Information and Event Management* 
 You can create and tailor your cloud environment to meet specific needs and upgrade it to the most appropriate tier. The setting up of a Wazuh Cloud environment is streamlined: installing and updating the Wazuh components, and defining scalability is all handled by Wazuh Cloud. You can check our :ref:`Requirements <cloud_service>` to learn how to create a cloud environment and explore the Wazuh Cloud services.
 
 
-More deployment options
------------------------
 
-Installation alternatives: Wazuh can also be installed with commercial options like Elastic Stack basic license or Splunk. To learn more about these options and other installation alternatives, see the :ref:`More installation alternatives <more_installation_alternatives>` section.
+Wazuh agent deployment
+----------------------
 
+The :ref:`Wazuh agent <wazuh_agent>` is a single and lightweight monitoring software. It is a multi-platform component that runs on Linux, Windows, macOS, Solaris, AIX, and other operating systems. It provides visibility into the endpoint's security by collecting critical system and application records, inventory data, and detecting potential anomalies. 
 
-Upgrade instructions
---------------------
+It can be deployed to laptops, desktops, servers, cloud instances, containers, or virtual machines. The agent helps to protect your system by providing threat prevention, detection, and response capabilities. It is also used to collect different types of system and application data that it forwards to the :ref:`Wazuh server <wazuh_server>` through an encrypted and authenticated channel.
 
-
-
-
-
-
-Wazuh agent installation
-------------------------
-
-The :ref:`Wazuh agent <wazuh_agent>` is a single and lightweight monitoring software that runs on most operating systems and provides visibility into the endpoint's security by collecting critical system and application records, inventory data, and detecting potential anomalies. If the Wazuh central components are already installed on your environment, select your operating system and follow the installation steps to deploy the agent to the endpoints. 
+If the Wazuh central components are already installed on your environment, select your operating system and follow the installation steps to deploy the agent to the endpoints. 
 
 .. raw:: html
 
