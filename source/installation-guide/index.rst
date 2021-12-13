@@ -63,6 +63,10 @@ More deployment options
 Wazuh allows others deployment options such as Kubernetes, Ansible, Puppet, Offline and installation from sources. For information about the different types of deployment, check the :ref:`Deployment options <deployment>` section. 
 
 
+.. note::
+    If you need to upgrade any of the Wazuh components you need to check the :ref:`Upgrade guide <upgrade_guide>`​.
+
+
 Wazuh Cloud
 -----------
 
