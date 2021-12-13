@@ -66,7 +66,7 @@ to Kibana. For more information, please see `Elasticsearch
 
   .. warning::
 
-    Add the following configuration to mitigate Apache Log4j2 Remote Code Execution (RCE) Vulnerability - CVE-2021-44228 - ESA-2021-31.
+    Add the following configuration to mitigate Apache Log4j2 Remote Code Execution (RCE) vulnerability - CVE-2021-44228 - ESA-2021-31.
     
     .. code-block:: console
 
