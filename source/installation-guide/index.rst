@@ -8,11 +8,11 @@
 Installation guide
 ==================
 
-Wazuh is a free, open source and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response, and regulatory compliance. All installed components are open source. Wazuh server and Wazuh agent are under `GNU GPL version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_ license, and Elasticsearch and Kibana are under `Apache License 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_. 
+Wazuh is a free and open source host-based intrusion detection system. All installed components are open source. Wazuh server and Wazuh agent are under `GNU GPL version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_ license, and Elasticsearch and Kibana are under `Apache License 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_. 
 
-The Wazuh central components include the Wazuh server, Elasticsearch and Kibana. With this guided installation, you install each component on the same server, as an all-in-one deployment, or on different servers as a distributed deployment depending on the environment needs. To learn more about the Wazuh solution, its components, architecture, and capabilities, check the :ref:`Getting started <getting_started>` section.
+The Wazuh central components include the Wazuh server, Elasticsearch and Kibana. Thanks to this guided installation, you will learn how to install each component on the same server, as an all-in-one deployment, or on different servers as a distributed deployment, depending on the environment needs. 
 
-Alternatively, you can check our :ref:`Wazuh quickstart <quickstart>` to learn how to install all the central components on the same host using the unattended installation script. With Wazuh quickstart, you can install and configure the Wazuh in just a few minutes.
+To learn more about the Wazuh solution, its components, architecture, and capabilities, check the :ref:`Getting started <getting_started>` section. Alternatively, you can check our :ref:`Wazuh quickstart <quickstart>` to learn how to install all the central components on the same host using the unattended installation script. With Wazuh quickstart, you can install and configure the Wazuh in just a few minutes.
 
 
 On-premises Wazuh deployment
@@ -24,9 +24,7 @@ For deploying Wazuh on-premises youca can choose between two different options. 
 All-in-one deployment
 ^^^^^^^^^^^^^^^^^^^^^
 
-With all-in-one deployment, you install and configure all the Wazuh central components on the same host. 
-
-The following components are installed:
+With all-in-one deployment, you install and configure all the Wazuh central components on the same host. These central components are the following:  
 
 - :ref:`Elasticsearch <wazuh_indexer_installation>`: A highly scalable, full-text search and analytics engine.  
 - :ref:`Wazuh server <wazuh_server_installation>`: This component includes the Wazuh manager and Filebeat. It is in charge of analyzing the data received from the Wazuh agents and triggering alerts when threats or anomalies are detected.  
