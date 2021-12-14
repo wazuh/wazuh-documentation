@@ -15,7 +15,7 @@ You can deploy Wazuh to your environments using multiple deployment options. The
 
 **Containers:**
 
-- Docker
+- :ref:`Docker <wazuh_docker>`: You can install Wazuh with a single-host architecture using a set of Docker images that contains `Wazuh Manager <https://github.com/wazuh/wazuh>`_, `Filebeat <https://www.elastic.co/products/beats/filebeat>`_, `Elasticsearch <https://registry.hub.docker.com/_/elasticsearch/>`_, `Kibana <https://registry.hub.docker.com/_/kibana/>`_ and optionally `Nginx <https://hub.docker.com/_/nginx/>`_. `Open Distro for Elasticsearch <https://opendistro.github.io/for-elasticsearch/>`_ is fully supported as well.
   
 - :ref:`Deployment on Kubernetes <wazuh_kubernetes>`: Kubernetes is an open-source system for automating deployment, scaling, and management of containerized applications. This deployment type uses Wazuh images from Docker and allows you to build an environment composed of a Wazuh cluster integrated with the Elastic Stack. 
 
@@ -37,11 +37,12 @@ You can deploy Wazuh to your environments using multiple deployment options. The
 .. toctree::
     :hidden:
     :maxdepth: 1
-
+    
+    virtual-machine/virtual-machine
+    amazon-machine-images/amazon-machine-images
+    docker/index 
     deploying-with-kubernetes/index
     deploying-with-ansible/index
     deploying-with-puppet/index
-    virtual-machine/virtual-machine
-    amazon-machine-images/amazon-machine-images
     offline-installation
     wazuh-from-sources/index
