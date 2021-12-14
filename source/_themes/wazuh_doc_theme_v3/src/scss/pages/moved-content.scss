@@ -10,9 +10,10 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   padding: 50px 15px;
-  font-family: "Open Sans", sans-serif;
-  color: #333;
+  font-family: Manrope, sans-serif;
+  color: $light_ColorMainText;
   text-align: center;
 }
 
@@ -21,7 +22,9 @@ h1 {
   font-size: 26px;
   font-weight: 400;
   line-height: 1.2;
-  color: #404040;
+  color: $light_ColorMainText;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #spinner-wrapper {
@@ -36,40 +39,57 @@ h1 {
 #spinner {
   position: relative;
   display: block;
-  width: 60px;
-  height: 60px;
-  border-top: 8px solid #00a9e5;
-  border-right: 8px solid #00a9e5;
-  border-bottom: 8px solid #00a9e5;
-  border-left: 8px solid transparent;
+  width: 65px;
+  height: 65px;
+  border-top: 4px solid $light_ColorPrimary;
+  border-right: 4px solid $light_ColorPrimary;
+  border-bottom: 4px solid $light_ColorPrimary;
+  border-left: 4px solid transparent;
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
 
 #spinner::before {
   position: absolute;
-  top: 3px;
-  left: 1px;
-  width: 8px;
-  height: 8px;
+  top: 6px;
+  left: 6px;
+  width: 4px;
+  height: 4px;
   content: "";
-  background-color: #00a9e5;
+  background-color: $light_ColorPrimary;
   border-radius: 50%;
 }
 
 #spinner::after {
   position: absolute;
-  bottom: 3px;
-  left: 1px;
-  width: 8px;
-  height: 8px;
+  bottom: 6px;
+  left: 6px;
+  width: 4px;
+  height: 4px;
   content: "";
-  background-color: #00a9e5;
+  background-color: $light_ColorPrimary;
   border-radius: 50%;
 }
 
 @keyframes spin {
   100% {
     transform: rotate(360deg);
+  }
+}
+
+.home-btn {
+  display: inline-block;
+  background-color: $light_ColorAccent;
+  border: 2px solid $light_ColorAccent;
+  color: $light_ColorMainText;
+  border-radius: $roundedCorners;
+  padding: 10px 20px;
+  min-width: 200px;
+  margin: 30px auto;
+  text-decoration: none;
+  &:hover,
+  &:focus {
+    background-color: $light_ColorBaseSpace;
+    color: $light_ColorMainText;
   }
 }

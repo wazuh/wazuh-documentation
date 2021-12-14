@@ -599,7 +599,7 @@ def manage_assets(app, pagename, templatename, context, doctree):
             'user-manual/api/reference': "css/min/api-reference.min.css?ver=%s" % os.stat(os.path.join(theme_dir, "static/css/min/api-reference.min.css")).st_mtime,
             'cloud-service/apis/reference': "css/min/api-reference.min.css?ver=%s" % os.stat(os.path.join(theme_dir, "static/css/min/api-reference.min.css")).st_mtime,
             'search': "css/min/search-results.min.css?ver=%s" % os.stat(os.path.join(theme_dir, "static/css/min/search-results.min.css")).st_mtime,
-            # 'moved-content.html': "css/min/moved-content.min.css?ver=%s" % os.stat(os.path.join(theme_dir, "static/css/min/moved-content.min.css")).st_mtime,
+            'moved-content': "css/min/moved-content.min.css?ver=%s" % os.stat(os.path.join(theme_dir, "static/css/min/moved-content.min.css")).st_mtime,
             'not_found': "css/min/not-found.min.css?ver=%s" % os.stat(os.path.join(theme_dir, "static/css/min/not-found.min.css")).st_mtime
         }
         default = "css/min/wazuh-documentation.min.css?ver=%s" % os.stat(os.path.join(theme_dir, "static/css/min/wazuh-documentation.min.css")).st_mtime

@@ -1,21 +1,4 @@
-const listOfReleases = [
-  '2.1',
-  '3.0',
-  '3.1',
-  '3.2',
-  '3.3',
-  '3.4',
-  '3.5',
-  '3.6',
-  '3.7',
-  '3.8',
-  '3.9',
-  '3.10',
-  '3.11',
-  '3.12',
-  '3.13',
-  '4.0',
-];
+versions.reverse();
 
 /* Get path from query string */
 let [domain, path] = document.location.href.split('moved-content.html?path=');
@@ -27,7 +10,7 @@ finalUrl = domain;
 
 if ( path !== undefined ) {
   [path, anchor] = path.split('#');
-  finalUrl = getRedirectionUrl(domain, path, anchor, listOfReleases);
+  finalUrl = getRedirectionUrl(domain, path, anchor, versions);
 }
 
 document.location = finalUrl;
@@ -38,10 +21,10 @@ document.location = finalUrl;
 * @param {string} domain current domain of the documentation
 * @param {string} path path of the original URL
 * @param {string} anchor anchor of the original URL
-* @param {string} listOfReleases ordered list with all the releases available
+* @param {string} versions ordered list with all the releases available
 * @return {string} The most recent URL to the content that was located in the original URL
 */
-function getRedirectionUrl(domain, path, anchor, listOfReleases) {
+function getRedirectionUrl(domain, path, anchor, versions) {
   const notFoundUrl = domain + '/not_found.html';
   let finalPath = '';
   let removed = false;
@@ -98,7 +81,7 @@ function getRedirectionUrl(domain, path, anchor, listOfReleases) {
       }
     });
     if ( removed !== false ) {
-      const lastseen = listOfReleases[listOfReleases.indexOf(removed)-1];
+      const lastseen = versions[versions.indexOf(removed)-1];
       finalPath = domain + '/' + lastseen + finalPath;
     } else {
       finalPath = domain + '/current' + finalPath;
