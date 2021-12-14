@@ -24,14 +24,7 @@ For deploying Wazuh on-premises, you can choose between two different options. W
 All-in-one deployment
 ^^^^^^^^^^^^^^^^^^^^^
 
-With all-in-one deployment, you install and configure all the Wazuh central components on the same host. These central components are the following:  
-
-- :ref:`Elasticsearch <wazuh_indexer_installation>`: A highly scalable, full-text search and analytics engine.  
-- :ref:`Wazuh server <wazuh_server_installation>`: This component includes the Wazuh manager and Filebeat. It is in charge of analyzing the data received from the Wazuh agents and triggering alerts when threats or anomalies are detected.  
-- :ref:`Kibana <wazuh_dashboard_installation>`: A flexible and intuitive web interface for mining, analyzing, and visualizing data.
-
-
-Wazuh offers different environment installation options such as:
+With all-in-one deployment, you install and configure all the Wazuh central components on the same host. Wazuh offers different all-in-one deployment options such as:
 
 - :ref:`Wazuh quickstart <quickstart>`: To install all the central components on the same host using the unattended installation script.
 - :ref:`Virtual Machine (OVA) <virtual_machine>`: It is a pre-built virtual machine with all Wazuh central components that you can directly import using VirtualBox or other OVA compatible virtualization systems..
@@ -76,7 +69,7 @@ The diagram below represents a Wazuh deployment architecture. It shows the solut
 More deployment options
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh allows others deployment options:
+Wazuh allows others deployment options such as the listed below:
 
 - Ready to use machines like OVA or AMI. 
 - Containers such as Docker or Kubernetes. 
