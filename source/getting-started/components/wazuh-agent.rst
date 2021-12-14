@@ -45,7 +45,7 @@ All agent modules are configurable and perform different security tasks. This mo
 
 - **Active response:** This module runs automatic actions when threats are detected, triggering responses to block a network connection, stop a running process, or delete a malicious file. Users can also create custom responses when necessary and customize, for example, responses for running a binary in a sandbox, capturing a network connection traffic, and scanning a file with an antivirus.
 
-- **Containers security monitoring:** This agent module is integrated with the Docker Engine API in order to monitor changes in a containerized environment. For example, it detects changes to container images, network configuration, or data volumes. Besides, it alerts on containers running in privileged mode and on users executing commands in a running container.
+- **Container security monitoring:** This agent module is integrated with the Docker Engine API in order to monitor changes in a containerized environment. For example, it detects changes to container images, network configuration, or data volumes. Besides, it alerts on containers running in privileged mode and on users executing commands in a running container.
 
 - **Cloud security monitoring:** This component monitors cloud providers (Amazon AWS, Microsoft Azure, or Google GCP), and it natively communicates with their APIs. It is capable of detecting changes to the cloud infrastructure and alerts when a new user is created, a security group is modified, a cloud instance is stopped, as well as other anomalous behavior. Moreover, this component is in charge of collecting cloud services log data, including AWS Cloudtrail, AWS Macie, AWS GuardDuty, and Azure Active Directory.
 
@@ -54,6 +54,6 @@ Communication with Wazuh server
 
 The Wazuh agent communicates with the :ref:`Wazuh server <wazuh_server>` in order to ship collected data and security-related events. Besides, the agent sends operational data, reporting its configuration and status. Once connected, the agent can be upgraded, monitored, and configured remotely from the Wazuh server.
 
-The communication of the agent with the server takes place through a secure channel (TCP or UDP), providing data encryption and compression in real time. Additionally, it includes flow control mechanisms to avoid flooding, queueing events when necessary, and protecting the network bandwidth.
+The communication of the agent with the server takes place through a secure channel (TCP or UDP), providing data encryption and compression in real time. Additionally, it includes flow control mechanisms to avoid flooding, queueing events when necessary and protecting the network bandwidth.
 
 You need to register the agent before connecting it to the server for the first time. This process provisions the agent with a unique pre-shared key that is used for authentication and data encryption. 

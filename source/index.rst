@@ -9,7 +9,7 @@
 Welcome to Wazuh
 ================
 
-Wazuh is a free and open source platform for threat detection, security monitoring, incident response and regulatory compliance. It can be used to monitor endpoints, cloud services and containers, and to aggregate and analyze data from external sources. Wazuh provides the following capabilities:
+Wazuh is a free and open source platform for threat detection, security monitoring, incident response and regulatory compliance. It can be used to monitor endpoints, cloud services, and containers and to aggregate and analyze data from external sources. Wazuh provides the following capabilities:
 
 .. raw:: html
 
@@ -87,7 +87,7 @@ Wazuh is a free and open source platform for threat detection, security monitori
 
   In addition, Wazuh lightweight and multi-platform agents are commonly used to monitor cloud environments at the instance level.
 
-.. topic:: Containers Security
+.. topic:: Container Security
   :class: docker
 
   Wazuh provides security visibility into your Docker hosts and containers, monitoring their behavior and detecting threats, vulnerabilities, and anomalies. The Wazuh agent has native integration with the Docker engine allowing users to monitor images, volumes, network settings, and running containers.
@@ -170,7 +170,7 @@ Wazuh is a free and open source platform for threat detection, security monitori
 
    Furthermore, Wazuh lightweight and multi-platform agents are commonly used to monitor cloud environments at the instance level.
 
-.. topic:: Containers Security
+.. topic:: Container Security
    :class: docker
 
    Wazuh provides security visibility into hosts and Docker containers, monitoring their behavior and detecting threats, vulnerabilities, and anomalies. The Wazuh agent has native integration with the Docker engine that allows users to monitor images, volumes, network configurations, and running containers.
@@ -279,7 +279,7 @@ Wazuh is a free and open source platform for threat detection, security monitori
           <div class="carousel-item">
 
 .. thumbnail:: images/screenshots/10-Wazuh-Containers-Security.png
-   :title: Containers Security
+   :title: Container Security
    :align: center
 
 .. raw:: html
