@@ -49,7 +49,6 @@ Each component is installed on a separate host as a single-node or multi-node cl
 
 The Wazuh server and Elasticsearch can each be installed as a single-node or multi-node cluster depending on the environment needs. Small Wazuh deployments, which do not require processing large amounts of data, can easily be handled by a single-node cluster. Multi-node clusters are recommended when there is a large number of monitored endpoints, when a large volume of data is anticipated, or when high availability is required.
 
-
 ==============================================================    =============
 Options                                                           Description
 ==============================================================    =============
@@ -58,7 +57,31 @@ Options                                                           Description
 **Multi-node cluster**                                            The multi-node installation process consists of installing several Wazuh server nodes on different hosts that communicate among them. This kind of installation provides high availability and requires a network load balancer.
 ==============================================================    =============
 
-For information on the minimum hardware requirements for the different types of deployment, check the :ref:`Requirements <installation_requirements>` section. 
+Install Wazuh by following the installation methods listed below that best suit your needs. Check the :ref:`Components <components>` section to learn more about each component and its capabilities.
+
+**Installing Wazuh server**
+
+You can choose an installation method and start installing the Wazuh server:
+
+- :ref:`Unattended installation <wazuh_server_unattended>`: Install this component using a script that automates the installation process.  
+- :ref:`Step-by-step installation <wazuh_server_step_by_step>`: Install this component manually following detailed step-by-step instructions.
+
+
+**Installing Elasticsearch**
+
+You can choose an installation method and start installing Elasticsearch: 
+
+- :ref:`Unattended installation <wazuh_indexer_unattended>`: Install this component using a script that automates the installation process. 
+- :ref:`Step-by-step installation <wazuh_indexer_step_by_step>`: Install this component manually following detailed step-by-step instructions.
+
+
+**Installing Kibana**
+
+You can choose an installation method and start installing Kibana: 
+
+- :ref:`Unattended installation <wazuh_dashboard_unattended_installation>`: Install this component using a script that automates the installation process. 
+- :ref:`Step-by-step installation <wazuh_dashboard_step_by_step>`: Install this component manually following detailed step-by-step instructions.
+
 
 The diagram below represents a Wazuh deployment architecture. It shows the solution components and how the Wazuh servers and Elasticsearch can be configured as a cluster, providing load balancing and high-availability.
 
