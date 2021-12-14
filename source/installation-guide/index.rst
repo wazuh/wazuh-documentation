@@ -8,17 +8,17 @@
 Installation guide
 ==================
 
-Wazuh is a free and open source host-based intrusion detection system. All installed components are open source. Wazuh server and Wazuh agent are under `GNU GPL version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_ license, and Elasticsearch and Kibana are under `Apache License 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_. 
+Wazuh is a free and open source host-based intrusion detection system. Wazuh server and Wazuh agent are under `GNU GPL version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_ license. Elasticsearch and Kibana are under `Apache License 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_. 
 
 The Wazuh central components include the Wazuh server, Elasticsearch and Kibana. Thanks to this guided installation, you will learn how to install each component on the same server, as an all-in-one deployment, or on different servers as a distributed deployment, depending on the environment needs. 
 
-To learn more about the Wazuh solution, its components, architecture, and capabilities, check the :ref:`Getting started <getting_started>` section. Alternatively, you can check our :ref:`Wazuh quickstart <quickstart>` to learn how to install all the central components on the same host using the unattended installation script. With Wazuh quickstart, you can install and configure the Wazuh in just a few minutes.
+To learn more about the Wazuh solution, its components, architecture, and capabilities, check the :ref:`Getting started <getting_started>` section. Alternatively, you can check our :ref:`Wazuh quickstart <quickstart>` to learn how to install all the central components on the same host using the unattended installation script. 
 
 
 On-premises Wazuh deployment
 ----------------------------
 
-For deploying Wazuh on-premises you can choose between two different options. With an **all-in-one deployment** all Wazuh central components are installed on the same host. On the other hand, with a **distributed deployment** each component is installed on a separate host as a single-node or multi-node cluster. 
+For deploying Wazuh on-premises, you can choose between two different options. With an **all-in-one deployment** all Wazuh central components are installed on the same host. On the other hand, with a **distributed deployment** each component is installed on a separate host as a single-node or multi-node cluster. 
 
 
 All-in-one deployment
@@ -57,7 +57,7 @@ Wazuh server                                                      Description
 
 
 ==============================================================    =============
-Elasticsearch cluster                                             Description
+Elasticsearch                                                     Description
 ==============================================================    =============
 **Single-node cluster**                                           With the single-node installation method, the Elasticsearch cluster is executed on one host. This kind of approach requires few resources, does not demand a network load balancer, and is easier to maintain.
 
