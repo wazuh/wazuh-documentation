@@ -36,11 +36,11 @@ With all-in-one deployment, you install and configure all the Wazuh central comp
 
 The following components are installed:
 
-- :ref:`Elasticsearch <wazuh_indexer_installation>`                 It is a highly scalable, full-text search and analytics engine. This central component can be installed as a single-node or multi-node cluster depending on the environment needs. Small Wazuh deployments, which do not require processing large amounts of data, can easily be handled by a single-node cluster. 
+- :ref:`Elasticsearch <wazuh_indexer_installation>`: A highly scalable, full-text search and analytics engine.  
 
-- :ref:`Wazuh server <wazuh_server_installation>`                   It is in charge of analyzing the data received from the Wazuh agents and triggering alerts when threats or anomalies are detected. It is also used to manage the agents' configuration and monitor their status remotely. This component includes the Wazuh manager and Filebeat. 
+- :ref:`Wazuh server <wazuh_server_installation>`: It is in charge of analyzing the data received from the Wazuh agents and triggering alerts when threats or anomalies are detected.
 
-- :ref:`Kibana <wazuh_dashboard_installation>`                      It is a flexible and intuitive web interface for mining, analyzing, and visualizing data. It includes out-of-the-box dashboards for security events, detected vulnerable applications, file integrity monitoring data, configuration assessment results, and cloud infrastructure monitoring events. Kibana also helps organizations with regulatory compliance such as PCI DSS, GDPR, CIS, HIPAA, and NIST 800-53 standards.
+- :ref:`Kibana <wazuh_dashboard_installation>`: A flexible and intuitive web interface for mining, analyzing, and visualizing data.
 
 
 Wazuh offers the following options:
