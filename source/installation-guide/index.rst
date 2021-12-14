@@ -46,8 +46,8 @@ The following components are installed:
 Wazuh offers the following options:
 
 - :ref:`Wazuh quickstart <quickstart>`: To install all the central components on the same host using the unattended installation script.
-- :ref:`Virtual Machine (OVA) <virtual_machine>`: To install on a virtual machine.
-- :ref:`Amazon Machine Images (AMI) <amazon-machine-images>`: To install on an AWS cloud instance.
+- :ref:`Virtual Machine (OVA) <virtual_machine>`: It is a pre-built virtual machine with all Wazuh central components that you can directly import using VirtualBox or other OVA compatible virtualization systems..
+- :ref:`Amazon Machine Images (AMI) <amazon-machine-images>`: It is a pre-built Amazon Machine Image with all Wazuh core components to be installed on an AWS cloud instance.
 
 
 Distributed deployment
