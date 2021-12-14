@@ -8,11 +8,11 @@
 Installation guide
 ==================
 
-The Wazuh central components include the Wazuh server, Elasticsearch and Kibana. Thanks to this guided installation, you will learn how to install each component on the same server, as an all-in-one deployment, or on different servers as a distributed deployment, depending on the environment needs. 
+The Wazuh central components include the Wazuh server, Wazuh indexer and Wazuh dashboard. Thanks to this guided installation, you will learn how to install each component on the same server, as an all-in-one deployment, or on different servers as a distributed deployment, depending on the environment needs. 
 
 To learn more about the Wazuh solution, its components, architecture, and capabilities, check the :ref:`Getting started <getting_started>` section. Alternatively, you can check our :ref:`Wazuh quickstart <quickstart>` to learn how to install all the central components on the same host using the unattended installation script. 
 
-Wazuh is a free and open source host-based intrusion detection system. Wazuh server and Wazuh agent are under `GNU GPL version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_ license. Elasticsearch and Kibana are under `Apache License 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_. 
+Wazuh is a free and open source host-based intrusion detection system. Wazuh server and Wazuh agent are under `GNU GPL version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_ license. Wazuh indexer and Wazuh dashboard are under `Apache License 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_. 
 
 
 On-premises Wazuh deployment
@@ -34,9 +34,9 @@ With all-in-one deployment, you install and configure all the Wazuh central comp
 Distributed deployment
 ^^^^^^^^^^^^^^^^^^^^^^
 
-You can install and configure the Wazuh server, Elasticsearch, and Kibana following a distributed deployment process. In this type of deployment, the components are installed on separate hosts. Kibana can be installed either on the same server of an Elasticsearch node or on a separate one. 
+You can install and configure the Wazuh server, Wazuh indexer, and Wazuh dashboard following a distributed deployment process. In this type of deployment, the components are installed on separate hosts. Wazuh dashboard can be installed either on the same server of an Wazuh indexer node or on a separate one. 
 
-The Wazuh server and Elasticsearch can each be installed as a single-node or multi-node cluster depending on the environment needs. This type of deployment provides high availability and scalability of the product, and it is convenient for large working environments.
+The Wazuh server and Wazuh indexer can each be installed as a single-node or multi-node cluster depending on the environment needs. This type of deployment provides high availability and scalability of the product, and it is convenient for large working environments.
 
 Small Wazuh deployments, which do not require processing large amounts of data, can easily be handled by a single-node cluster. Multi-node clusters are recommended when there is a large number of monitored endpoints, when a large volume of data is anticipated, or when high availability is required.
 
@@ -50,15 +50,15 @@ Wazuh server                                                      Description
 
 
 ==============================================================    =============
-Elasticsearch                                                     Description
+Wazuh indexer                                                     Description
 ==============================================================    =============
-**Single-node cluster**                                           The Elasticsearch cluster is installed on one host with the single-node installation method. This kind of approach requires few resources, does not demand a network load balancer, and is easier to maintain.
+**Single-node cluster**                                           The Wazuh indexer cluster is installed on one host with the single-node installation method. This kind of approach requires few resources, does not demand a network load balancer, and is easier to maintain.
 
-**Multi-node cluster**                                            With the multi-node installation method, several Elasticsearch are installers on different nodes that communicate among them. A multi-node cluster provides high availability, scalability, and load balancing for data indexing and searching.
+**Multi-node cluster**                                            With the multi-node installation method, several Wazuh indexers are installers on different nodes that communicate among them. A multi-node cluster provides high availability, scalability, and load balancing for data indexing and searching.
 ==============================================================    =============
 
 
-The diagram below represents a Wazuh deployment architecture. It shows the solution components and how the Wazuh servers and Elasticsearch can be configured as a cluster, providing load balancing and high-availability.
+The diagram below represents a Wazuh deployment architecture. It shows the solution components and how the Wazuh servers and Wazuh indexer can be configured as a cluster, providing load balancing and high-availability.
 
 .. thumbnail:: ../images/installation/distributed.png
     :alt: Wazuh deployment
