@@ -50,7 +50,7 @@ Each component is installed on a separate host as a single-node or multi-node cl
 The Wazuh server and Elasticsearch can each be installed as a single-node or multi-node cluster depending on the environment needs. Small Wazuh deployments, which do not require processing large amounts of data, can easily be handled by a single-node cluster. Multi-node clusters are recommended when there is a large number of monitored endpoints, when a large volume of data is anticipated, or when high availability is required.
 
 ==============================================================    =============
-Wazuh server instalation options                                  Description
+Wazuh server                                                      Description
 ==============================================================    =============
 **Single-node cluster**                                           The Wazuh server single-node installation is performed on only one host. This method is easy to maintain, requires few resources, and does not require a network load balancer.
 
@@ -59,11 +59,11 @@ Wazuh server instalation options                                  Description
 
 
 ==============================================================    =============
-Elasticsearch cluster instalation options                         Description
+Elasticsearch cluster                                             Description
 ==============================================================    =============
-**Single-node cluster**                                           The Elasticsearch cluster single-node installation is performed on only one host. This method is easy to maintain, requires few resources, and does not require a network load balancer.
+**Single-node cluster**                                           With the single-node installation method, the Elasticsearch cluster is executed on one host. This kind of approach requires few resources, does not demand a network load balancer, and is easier to maintain.
 
-**Multi-node cluster**                                            The multi-node installation process consists of installing several Elasticsearch cluster on different nodes that communicate among them. This kind of installation provides high availability and requires a network load balancer.
+**Multi-node cluster**                                            With the multi-node installation methodology, several Elasticsearch are installers on different nodes that communicate among them. A multi-node cluster provides high availability, scalability, and load balancing for data indexing and searching.
 ==============================================================    =============
 
 
