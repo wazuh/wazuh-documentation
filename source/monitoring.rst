@@ -2,13 +2,12 @@
 
 .. _monitoring:
 
-Monitoring with Wazuh
-=====================
+Cloud security
+==============
 
 .. toctree::
    :maxdepth: 2
 
    amazon/index
    azure/index
-   docker-monitor/index
    gcp/index
