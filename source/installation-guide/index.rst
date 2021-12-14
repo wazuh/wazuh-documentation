@@ -31,7 +31,7 @@ With all-in-one deployment, you install and configure all the Wazuh central comp
 - :ref:`Kibana <wazuh_dashboard_installation>`: A flexible and intuitive web interface for mining, analyzing, and visualizing data.
 
 
-Wazuh offers different environment installation options like the following:
+Wazuh offers different environment installation options such as:
 
 - :ref:`Wazuh quickstart <quickstart>`: To install all the central components on the same host using the unattended installation script.
 - :ref:`Virtual Machine (OVA) <virtual_machine>`: It is a pre-built virtual machine with all Wazuh central components that you can directly import using VirtualBox or other OVA compatible virtualization systems..
@@ -41,27 +41,27 @@ Wazuh offers different environment installation options like the following:
 Distributed deployment
 ^^^^^^^^^^^^^^^^^^^^^^
 
-You can install and configure Wazuh server, Elasticsearch and Kibana following a distributed deployment process. In this type of deployment, the components are installed on separate hosts. Kibana can be installed either on the same server of an Elasticsearch node or on a separate one. 
+You can install and configure the Wazuh server, Elasticsearch, and Kibana following a distributed deployment process. In this type of deployment, the components are installed on separate hosts. Kibana can be installed either on the same server of an Elasticsearch node or on a separate one. 
 
-Each component is installed on a separate host as a single-node or multi-node cluster. This type of deployment provides high availability and scalability of the product, and it is convenient for large working environments.
+The Wazuh server and Elasticsearch can each be installed as a single-node or multi-node cluster depending on the environment needs. This type of deployment provides high availability and scalability of the product, and it is convenient for large working environments.
 
-The Wazuh server and Elasticsearch can each be installed as a single-node or multi-node cluster depending on the environment needs. Small Wazuh deployments, which do not require processing large amounts of data, can easily be handled by a single-node cluster. Multi-node clusters are recommended when there is a large number of monitored endpoints, when a large volume of data is anticipated, or when high availability is required.
+Small Wazuh deployments, which do not require processing large amounts of data, can easily be handled by a single-node cluster. Multi-node clusters are recommended when there is a large number of monitored endpoints, when a large volume of data is anticipated, or when high availability is required.
 
 ==============================================================    =============
 Wazuh server                                                      Description
 ==============================================================    =============
-**Single-node cluster**                                           The Wazuh server single-node installation is performed on only one host. This method is easy to maintain, requires few resources, and does not require a network load balancer.
+**Single-node cluster**                                           The Wazuh server single-node installation is performed on one host. This method is easy to maintain, requires few resources, and does not require a network load balancer.
 
-**Multi-node cluster**                                            The multi-node installation process consists of installing several Wazuh server on different nodes that communicate among them. This kind of installation provides high availability and requires a network load balancer.
+**Multi-node cluster**                                            The multi-node installation process involves installing several Wazuh servers on different nodes that communicate among them. This kind of installation provides high availability and requires a network load balancer.
 ==============================================================    =============
 
 
 ==============================================================    =============
 Elasticsearch                                                     Description
 ==============================================================    =============
-**Single-node cluster**                                           With the single-node installation method, the Elasticsearch cluster is executed on one host. This kind of approach requires few resources, does not demand a network load balancer, and is easier to maintain.
+**Single-node cluster**                                           The Elasticsearch cluster is installed on one host with the single-node installation method. This kind of approach requires few resources, does not demand a network load balancer, and is easier to maintain.
 
-**Multi-node cluster**                                            With the multi-node installation methodology, several Elasticsearch are installers on different nodes that communicate among them. A multi-node cluster provides high availability, scalability, and load balancing for data indexing and searching.
+**Multi-node cluster**                                            With the multi-node installation method, several Elasticsearch are installers on different nodes that communicate among them. A multi-node cluster provides high availability, scalability, and load balancing for data indexing and searching.
 ==============================================================    =============
 
 
@@ -76,7 +76,13 @@ The diagram below represents a Wazuh deployment architecture. It shows the solut
 More deployment options
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh allows others deployment options such as Kubernetes, Ansible, Puppet, Offline and installation from sources. For information about the different types of deployment, check the :ref:`Deployment options <deployment>` section. 
+Wazuh allows others deployment options:
+
+- Ready to use machines like OVA or AMI. 
+- Containers such as Docker or Kubernetes. 
+- Orchestration tools like Puppet or Ansible. 
+
+Finally, you can perform an Offline installation or an installation from sources.For information about the different deployment types, check the :ref:`Deployment options <deployment>` section.
 
 Wazuh can also be installed with commercial options like Elastic Stack basic license or Splunk. To learn more about these options and other installation alternatives, see the :ref:`Installation alternatives <more_installation_alternatives>` section.
 
@@ -84,9 +90,9 @@ Wazuh can also be installed with commercial options like Elastic Stack basic lic
 Wazuh Cloud
 -----------
 
-Wazuh offers `Wazuh Cloud <https://wazuh.com/cloud/>`_, where all components are hosted on our PCI-DSS and SOC 2 Type 2 certified SaaS solution, which is maintained by our team. With Wazuh cloud, no dedicated hardware is required and everything is ready to use. This service offers a highly flexible infrastructure to match your enterprise needs.
+Wazuh offers the `Wazuh Cloud <https://wazuh.com/cloud/>`_, where all components are hosted on our PCI-DSS and SOC 2 Type 2 certified SaaS solution, which is maintained by our team. With Wazuh cloud, no dedicated hardware is required and everything is ready to use. This service offers a highly flexible infrastructure to match your enterprise needs.
 
-You can create and tailor your cloud environment to meet specific needs and upgrade it to the most appropriate tier. The setting up of a Wazuh Cloud environment is streamlined: installing and updating the Wazuh components, and defining scalability is all handled by Wazuh Cloud. You can check our :ref:`Requirements <cloud_service>` to learn how to create a cloud environment and explore the Wazuh Cloud services.
+You can create and tailor your cloud environment to meet specific needs and upgrade it to the most appropriate tier. The setting up of the Wazuh Cloud environment is streamlined: installing and updating the Wazuh components, and defining scalability is all handled by the Wazuh Cloud. You can check our :ref:`Requirements <cloud_service>` to learn how to create a cloud environment and explore the Wazuh Cloud services.
 
 
 Upgrade instructions
