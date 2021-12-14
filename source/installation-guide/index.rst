@@ -18,7 +18,7 @@ To learn more about the Wazuh solution, its components, architecture, and capabi
 On-premises Wazuh deployment
 ----------------------------
 
-For deploying Wazuh on-premises youca can choose between two different options. With an **all-in-one deployment** all Wazuh central components are installed on the same host. On the other hand, with a **distributed deployment** each component is installed on a separate host as a single-node or multi-node cluster. 
+For deploying Wazuh on-premises you can choose between two different options. With an **all-in-one deployment** all Wazuh central components are installed on the same host. On the other hand, with a **distributed deployment** each component is installed on a separate host as a single-node or multi-node cluster. 
 
 
 All-in-one deployment
