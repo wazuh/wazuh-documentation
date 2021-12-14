@@ -8,11 +8,11 @@
 Installation guide
 ==================
 
-Wazuh is a free and open source host-based intrusion detection system. Wazuh server and Wazuh agent are under `GNU GPL version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_ license. Elasticsearch and Kibana are under `Apache License 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_. 
-
 The Wazuh central components include the Wazuh server, Elasticsearch and Kibana. Thanks to this guided installation, you will learn how to install each component on the same server, as an all-in-one deployment, or on different servers as a distributed deployment, depending on the environment needs. 
 
 To learn more about the Wazuh solution, its components, architecture, and capabilities, check the :ref:`Getting started <getting_started>` section. Alternatively, you can check our :ref:`Wazuh quickstart <quickstart>` to learn how to install all the central components on the same host using the unattended installation script. 
+
+Wazuh is a free and open source host-based intrusion detection system. Wazuh server and Wazuh agent are under `GNU GPL version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_ license. Elasticsearch and Kibana are under `Apache License 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_. 
 
 
 On-premises Wazuh deployment
