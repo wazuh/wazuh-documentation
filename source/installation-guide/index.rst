@@ -64,7 +64,7 @@ The diagram below represents a Wazuh deployment architecture. It shows the solut
     :alt: Wazuh deployment
     :align: center
     :wrap_image: No
-    :scale: 50 %
+    :scale: 100 %
 
 
 More deployment options
