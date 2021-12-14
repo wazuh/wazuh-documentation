@@ -64,7 +64,7 @@ The diagram below represents a Wazuh deployment architecture. It shows the solut
     :alt: Wazuh deployment
     :align: center
     :wrap_image: No
-    :scale: 80 %
+    :scale: 50 %
 
 
 More deployment options
@@ -76,7 +76,7 @@ Wazuh allows others deployment options such as the listed below:
 - Containers such as Docker or Kubernetes. 
 - Orchestration tools like Puppet or Ansible. 
 
-Finally, you can perform an Offline installation or an installation from sources.For information about the different deployment types, check the :ref:`Deployment options <deployment>` section.
+Finally, you can perform an Offline installation or an installation from sources. For information about the different deployment types, check the :ref:`Deployment options <deployment>` section.
 
 Wazuh can also be installed with commercial options like Elastic Stack basic license or Splunk. To learn more about these options and other installation alternatives, see the :ref:`Installation alternatives <more_installation_alternatives>` section.
 
