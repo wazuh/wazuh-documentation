@@ -12,7 +12,7 @@ The Wazuh central components include the Wazuh server, Wazuh indexer, and Wazuh 
 
 Check the :ref:`Getting started <getting_started>` section to learn more about the Wazuh solution, its components, architecture, and capabilities. Alternatively, you can check our :ref:`Wazuh quickstart <quickstart>` to learn how to install all the central components on the same host using the unattended installation script. 
 
-Wazuh is a free and open source host-based intrusion detection system. Wazuh server and Wazuh agent are under `GNU GPL version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_ license. Wazuh indexer and Wazuh dashboard are under `Apache License 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_. 
+Wazuh is a free and open source host-based intrusion detection system (HIDS). Wazuh server and Wazuh agent are under `GNU GPL version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_ license. Wazuh indexer and Wazuh dashboard are under `Apache License 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_. 
 
 
 On-premises Wazuh deployment
@@ -73,7 +73,7 @@ More deployment options
 Wazuh allows other deployment options such as the listed below:
 
 +----------------------------------------------+
-|          **Deployment options**              |
+| **Deployment options**                       |
 +------------------------+--------+------------+
 | Ready to use machines  | OVA    | AMI        |
 +------------------------+--------+------------+
