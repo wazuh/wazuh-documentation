@@ -62,7 +62,6 @@ Wazuh dashboard doesn't need to be installed in a cluster mode because this comp
 .. thumbnail:: ../images/installation/distributed.png
     :alt: Wazuh deployment
     :align: center
-    :wrap_image: No
     :scale: 100 %
 
 
@@ -200,8 +199,8 @@ If the Wazuh central components are already installed on your environment, selec
     :hidden:
     :maxdepth: 1
 
-    elasticsearch/index
+    wazuh-indexer/index
     wazuh-server/index
-    kibana/index
+    wazuh-dashboard/index
     wazuh-agent/index
     packages-list
