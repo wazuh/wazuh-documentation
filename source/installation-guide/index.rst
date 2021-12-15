@@ -57,7 +57,7 @@ Wazuh indexer                                                     Description
 **Multi-node cluster**                                            With the multi-node installation method, several Wazuh indexers are installers on different nodes that communicate among them. A multi-node cluster provides high availability, scalability, and load balancing for data indexing and searching.
 ==============================================================    =============
 
-The Wazuh dashboard doesn't need to be installed in a cluster mode because this component doesn't need to be escalated. The diagram below represents a Wazuh deployment architecture. It shows the solution components and how the Wazuh server and the Wazuh indexer can be configured as a cluster, providing load balancing and high availability.
+The Wazuh dashboard is not installed in a cluster mode because this component doesn't require to be escalated. The diagram below represents a Wazuh deployment architecture. It shows the solution components and how the Wazuh server and the Wazuh indexer can be configured as a cluster, providing load balancing and high availability.
 
 .. thumbnail:: ../images/installation/distributed.png
     :alt: Wazuh deployment
@@ -72,8 +72,8 @@ Wazuh allows other deployment options such as the listed below:
 
 - Containers:
   
-  - :ref:`Deployment on Docker <wazuh_docker>`: Allows you to install Wazuh with a single-host architecture using a set of Docker images.
-  - :ref:`Deployment on Kubernetes <wazuh_kubernetes>`: You can build an environment with a Wazuh cluster that offers high availability and securing all the data. 
+  - :ref:`Deployment on Docker <wazuh_docker>`: This allows you to install Wazuh with a single-host architecture using a set of Docker images.
+  - :ref:`Deployment on Kubernetes <wazuh_kubernetes>`: You can build an environment with a Wazuh cluster that offers high availability while securing your data. 
 
 
 - Orchestration tools:
@@ -89,7 +89,7 @@ Wazuh allows other deployment options such as the listed below:
 
 - From sources:
   
-  - :ref:`Installation from sources <installation_from_sources>`:Install the Wazuh manager and agent without using a package manager by compiling the source code and copying the binaries to your computer.
+  - :ref:`Installation from sources <installation_from_sources>`: Install the Wazuh manager and agent without using a package manager by compiling the source code and copying the binaries to your computer.
 
 
 For information about the different deployment types, check the :ref:`Deployment options <deployment>` section. Wazuh can also be installed with commercial options like Elastic Stack basic license or Splunk. See the :ref:`Installation alternatives <more_installation_alternatives>` section to learn more about these options.
