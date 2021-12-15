@@ -20,7 +20,43 @@ Check the :ref:`Getting started <getting_started>` section to learn more about t
 
 Requirements
 ------------
-Check the supported operating systems and the recommended hardware requirements for the Wazuh installation.
+**Check the hardware requirements and the supported operating systems for the Wazuh installation.**
+
+
+Hardware requirements
+^^^^^^^^^^^^^^^^^^^^^
+
+- **Memory and CPU**
+  
+  Minimum and recommended memory and CPU configurations:
+    
+  +-------------------------+-------------------------------+
+  |  Minimum                |   Recommended                 |
+  +----------+--------------+--------------+----------------+
+  |  RAM (GB)|  CPU (cores) |  RAM (GB)    |   CPU (cores)  |
+  +==========+==============+==============+================+
+  |     4    |     2        |     16       |       8        |
+  +----------+--------------+--------------+----------------+
+
+
+- **Disk space**
+
+  The amount of data depends on the generated alerts per second (APS). This table details the estimated disk space needed per agent to store 90 days of alerts on a Wazuh server, depending on the type of monitored endpoints.
+
+  +------------------------------+-----+---------------------------+
+  | Monitored endpoints          | APS | Storage                   |
+  |                              |     |  (GB/90 days)             |
+  +==============================+=====+===========================+
+  | Servers                      | 0.25|           3.8             |
+  +------------------------------+-----+---------------------------+
+  | Workstations                 | 0.1 |           1.5             |
+  +------------------------------+-----+---------------------------+
+  | Network devices              | 0.5 |           7.6             |
+  +------------------------------+-----+---------------------------+
+
+  For example, for an environment with 80 workstations, 10 servers, and 10 network devices, the storage needed for 90 days of alerts is 236 GB approximately. 
+
+
 
 Supported operating systems
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -42,39 +78,6 @@ Wazuh can be installed on a 64-bit Linux operating system. Wazuh supports all th
      - SUSE Linux enterprise server 11 LTSS
    * - Ubuntu 14.04 ESM
      - 
-
-
-Hardware requirements
-^^^^^^^^^^^^^^^^^^^^^
-
-- **Memory and CPU**
-  
-  Minimum and recommended memory and CPU configurations:
-    
-  +-------------------------+-------------------------------+
-  |  Minimum                |   Recommended                 |
-  +----------+--------------+--------------+----------------+
-  |  RAM (GB)|  CPU (cores) |  RAM (GB)    |   CPU (cores)  |
-  +==========+==============+==============+================+
-  |     4    |     2        |     16       |       8        |
-  +----------+--------------+--------------+----------------+
-
-- **Disk space**
-
-  The amount of data depends on the generated alerts per second (APS). This table details the estimated disk space needed per agent to store 90 days of alerts on a Wazuh server, depending on the type of monitored endpoints.
-
-  +------------------------------+-----+---------------------------+
-  | Monitored endpoints          | APS | Storage                   |
-  |                              |     |  (GB/90 days)             |
-  +==============================+=====+===========================+
-  | Servers                      | 0.25|           3.8             |
-  +------------------------------+-----+---------------------------+
-  | Workstations                 | 0.1 |           1.5             |
-  +------------------------------+-----+---------------------------+
-  | Network devices              | 0.5 |           7.6             |
-  +------------------------------+-----+---------------------------+
-
-  For example, for an environment with 80 workstations, 10 servers, and 10 network devices, the storage needed for 90 days of alerts is 236 GB approximately. 
  
 
 .. _unattended_all_in_one:
