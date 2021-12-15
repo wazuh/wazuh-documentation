@@ -57,12 +57,12 @@ Wazuh indexer                                                     Description
 **Multi-node cluster**                                            With the multi-node installation method, several Wazuh indexers are installers on different nodes that communicate among them. A multi-node cluster provides high availability, scalability, and load balancing for data indexing and searching.
 ==============================================================    =============
 
-
-The diagram below represents a Wazuh deployment architecture. It shows the solution components and how the Wazuh servers and Wazuh indexer can be configured as a cluster, providing load balancing and high availability.
+Wazuh dashboard doesn't need to be installed in a cluster mode because this component doesn't need to be escalated. The diagram below represents a Wazuh deployment architecture. It shows the solution components and how the Wazuh servers and Wazuh indexer can be configured as a cluster, providing load balancing and high availability.
 
 .. thumbnail:: ../images/installation/distributed.png
     :alt: Wazuh deployment
     :align: center
+    :wrap_image: No
     :scale: 100 %
 
 
@@ -71,19 +71,19 @@ More deployment options
 
 Wazuh allows other deployment options such as the listed below:
 
-+------------------------------------------------+
-| **Deployment options**                         |
-+------------------------+----------+------------+
-| Ready to use machines  | OVA      | AMI        |
-+------------------------+----------+------------+
-| Containers             | Docker   | Kubernetes |
-+------------------------+----------+------------+
-| Orchestration tools    | Puppet   | Ansible    |
-+------------------------+----------+------------+
-| Offline installation                           |
-+------------------------------------------------+
-| Installation from sources                      |
-+------------------------------------------------+
+- **Containers:**
+  - :ref:`Docker <wazuh_docker>`: You can install Wazuh with a single-host architecture using a set of Docker images.
+  - :ref:`Deployment on Kubernetes <wazuh_kubernetes>`: You can build an environment with a Wazuh cluster that offers high availability and securing all the data. 
+
+- **Orchestration tools:**
+  - :ref:`Deployment with Ansible <wazuh_ansible>`: Ansible is an open source platform designed for automating tasks. Its deployment tool is used to deploy the Wazuh infrastructure on AWS.
+  - :ref:`Deployment with Puppet <wazuh_puppet>`: Puppet is an open-source software tool that allows you to install and configure Wazuh in an easy way by letting you inspect, deliver, operate, and proof your software, no matter where it is executed.
+
+- **Offline:**
+  - :ref:`Offline installation <wazuh-offline-installation>`: Installing the solution offline involves downloading the Wazuh components to later install them on a system with no internet connection. 
+
+- **From sources:**
+  - :ref:`Installation from sources <installation_from_sources>`: Installing Wazuh from source means installing the Wazuh manager and agent without using a package manager. You compile the source code and copy the binaries to your computer instead.
 
 For information about the different deployment types, check the :ref:`Deployment options <deployment>` section. Wazuh can also be installed with commercial options like Elastic Stack basic license or Splunk. To learn more about these options and other installation alternatives, see the :ref:`Installation alternatives <more_installation_alternatives>` section.
 
@@ -99,7 +99,9 @@ You can create and tailor your cloud environment to meet specific needs and upgr
 Upgrade instructions
 --------------------
 
-To upgrade any of the Wazuh components you need to check the​ :ref:`Upgrade guide <upgrade_guide>`.
+To upgrade any of the Wazuh components you need to check the​ :ref:`Upgrade guide <upgrade_guide>`. There you can find significant information about the upgrade process of the Wazuh server, Open Distro for Elasticsearch, Elastic Stack, and the Wazuh agents. 
+
+In addition, you can check the :ref:`compatibility matrix <compatibility_matrix>` section if you have any doubt about operating system compatibility, as well as the compatibility between the different Wazuh components.
 
 
 
@@ -190,8 +192,8 @@ If the Wazuh central components are already installed on your environment, selec
     :hidden:
     :maxdepth: 1
 
-    wazuh-indexer/index
+    elasticsearch/index
     wazuh-server/index
-    wazuh-dashboard/index
+    kibana/index
     wazuh-agent/index
     packages-list
