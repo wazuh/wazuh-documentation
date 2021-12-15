@@ -100,7 +100,7 @@ Wazuh Cloud
 
 Wazuh offers the `Wazuh Cloud <https://wazuh.com/cloud/>`_, where all components are hosted on our PCI-DSS, and SOC 2 Type 2 certified SaaS solution, which is maintained by our team. With Wazuh cloud, no dedicated hardware is required and everything is ready to use. This service offers a highly flexible infrastructure to match your enterprise needs.
 
-You can create and tailor your cloud environment to meet specific needs and upgrade it to the most appropriate tier. The setting up of the Wazuh Cloud environment is streamlined. Installing and updating the Wazuh components, and defining scalability is all handled by the Wazuh Cloud. You can check our :ref:`Requirements <cloud_service>` to learn how to create a cloud environment and explore the Wazuh Cloud services.
+You can create and tailor your cloud environment to meet specific needs and upgrade it to the most appropriate tier. The setting up of the Wazuh Cloud environment is streamlined. Installing and updating the Wazuh components, and defining scalability is all handled by the Wazuh Cloud. You can check our :ref:`Wazuh Cloud environment <cloud_your_environment>` section to learn how to create a cloud environment and explore the Wazuh Cloud services.
 
 
 Upgrade instructions
