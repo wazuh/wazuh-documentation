@@ -26,7 +26,7 @@ All-in-one deployment
 
 With all-in-one deployment, you install and configure all the Wazuh central components on the same host. Wazuh offers different all-in-one deployment options such as:
 
-- :ref:`Wazuh quickstart <quickstart>`: To install all the central components on the same host using the unattended installation script.
+- :ref:`Wazuh quickstart <quickstart>`: Install all the central components on the same host using the unattended installation script.
 - :ref:`Virtual Machine (OVA) <virtual_machine>`: It is a pre-built virtual machine with all Wazuh central components that you can directly import using VirtualBox or other OVA compatible virtualization systems.
 - :ref:`Amazon Machine Images (AMI) <amazon-machine-images>`: It is a pre-built Amazon Machine Image with all Wazuh core components to be installed on an AWS cloud instance.
 
@@ -72,7 +72,7 @@ Wazuh allows other deployment options such as the listed below:
 
 - **Containers:**
   
-  - :ref:`Docker <wazuh_docker>`: You can install Wazuh with a single-host architecture using a set of Docker images.
+  - :ref:`Docker <wazuh_docker>`: You are able to install Wazuh with a single-host architecture using a set of Docker images.
   - :ref:`Deployment on Kubernetes <wazuh_kubernetes>`: You can build an environment with a Wazuh cluster that offers high availability and securing all the data. 
 
 
@@ -84,23 +84,23 @@ Wazuh allows other deployment options such as the listed below:
 
 - **Offline:**
     
-  - :ref:`Offline installation <wazuh-offline-installation>`: Installing the solution offline involves downloading the Wazuh components to later install them on a system with no internet connection. 
+  - :ref:`Offline installation <wazuh-offline-installation>`: This offline solution involves downloading the Wazuh components to then install them on a system with no internet connection.
 
 
 - **From sources:**
   
-  - :ref:`Installation from sources <installation_from_sources>`: Installing Wazuh from source means installing the Wazuh manager and agent without using a package manager. You compile the source code and copy the binaries to your computer instead.
+  - :ref:`Installation from sources <installation_from_sources>`:Install the Wazuh manager and agent without using a package manager by compiling the source code and copying the binaries to your computer.
 
 
-For information about the different deployment types, check the :ref:`Deployment options <deployment>` section. Wazuh can also be installed with commercial options like Elastic Stack basic license or Splunk. To learn more about these options and other installation alternatives, see the :ref:`Installation alternatives <more_installation_alternatives>` section.
+For information about the different deployment types, check the :ref:`Deployment options <deployment>` section. Wazuh can also be installed with commercial options like Elastic Stack basic license or Splunk. See the :ref:`Installation alternatives <more_installation_alternatives>` section to learn more about these options and other installation alternatives.
 
 
 Wazuh Cloud
 -----------
 
-Wazuh offers the `Wazuh Cloud <https://wazuh.com/cloud/>`_, where all components are hosted on our PCI-DSS and SOC 2 Type 2 certified SaaS solution, which is maintained by our team. With Wazuh cloud, no dedicated hardware is required and everything is ready to use. This service offers a highly flexible infrastructure to match your enterprise needs.
+Wazuh offers the `Wazuh Cloud <https://wazuh.com/cloud/>`_, where all components are hosted on our PCI-DSS, and SOC 2 Type 2 certified SaaS solution, which is maintained by our team. With Wazuh cloud, no dedicated hardware is required and everything is ready to use. This service offers a highly flexible infrastructure to match your enterprise needs.
 
-You can create and tailor your cloud environment to meet specific needs and upgrade it to the most appropriate tier. The setting up of the Wazuh Cloud environment is streamlined: installing and updating the Wazuh components, and defining scalability is all handled by the Wazuh Cloud. You can check our :ref:`Requirements <cloud_service>` to learn how to create a cloud environment and explore the Wazuh Cloud services.
+You can create and tailor your cloud environment to meet specific needs and upgrade it to the most appropriate tier. The setting up of the Wazuh Cloud environment is streamlined. Installing and updating the Wazuh components, and defining scalability is all handled by the Wazuh Cloud. You can check our :ref:`Requirements <cloud_service>` to learn how to create a cloud environment and explore the Wazuh Cloud services.
 
 
 Upgrade instructions

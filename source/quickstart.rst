@@ -10,13 +10,11 @@
 Wazuh quickstart
 ================
 
-Wazuh is a free, open source and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response, and regulatory compliance. To learn more about the Wazuh solution, its components, architecture, and capabilities, check the :ref:`Getting started <getting_started>` section. 
+This section of the Wazuh documentation is meant to allow users to easily install the Wazuh server, Wazuh indexer, and Wazuh dashboard on the same host using the unattended installation script. By running the automated script, you install and configure the Wazuh in just a few minutes.
 
-With Wazuh quickstart, you install the Wazuh server, Elasticsearch and Kibana on the same host using the unattended installation script. These central components are in charge of analyzing the data gathered by the Wazuh agents, providing a search engine and data visualization tool that allow users to navigate through their security alerts.
+These central components are in charge of analyzing the data gathered by the Wazuh agents, providing a search engine and data visualization tool that allow users to navigate through their security alerts. 
 
-By running the automated script, you install and configure the Wazuh in just a few minutes.
-
-Alternatively, you can check our :ref:`Installation guide <installation_guide>` to learn how to install each component individually on the same server, as an all-in-one deployment, or on different servers as a distributed deployment depending on the environment needs. 
+Check the :ref:`Getting started <getting_started>` section to learn more about the Wazuh solution, its components, architecture, and capabilities. Alternatively, you can check our :ref:`Installation guide <installation_guide>` to learn how to install each component individually on the same server, as an all-in-one deployment, or on different servers as a distributed deployment depending on the environment needs.
 
 .. _installation_requirements:
 
@@ -27,28 +25,32 @@ Check the supported operating systems and the recommended hardware requirements 
 Supported operating systems
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh can be installed on a 64-bit Linux operating system.
+Wazuh can be installed on a 64-bit Linux operating system. Wazuh supports all the operating system versions listed below and their later versions too:
+
 
 .. list-table::
-   :width: 50%
-   
-   * - Amazon Linux 2
-   * - CentOS 7 and later
-   * - Debian 8 ELTS and later
-   * - Fedora Linux 33 and later
-   * - openSUSE Tumbleweed, Leap 15.2 and later
-   * - Oracle Linux 6 Extended and later
-   * - Red Hat Enterprise Linux 6 ELS and later
-   * - SUSE Linux enterprise server 11 LTSS and later
-   * - Ubuntu 14.04 ESM and later
+   :width: 100%
+   :widths: 50 50
 
+   * - Amazon Linux 2
+     - CentOS 7
+   * - Debian 8 ELTS
+     - Fedora Linux 33
+   * - openSUSE Tumbleweed, Leap 15.2
+     - Oracle Linux 6 Extended
+   * - Red Hat Enterprise Linux 6 ELS
+     - SUSE Linux enterprise server 11 LTSS
+   * - Ubuntu 14.04 ESM
+     - 
 
 
 Hardware requirements
 ^^^^^^^^^^^^^^^^^^^^^
 
-- Hardware
+- **Memory and CPU**
   
+  Minimum and recommended memory and CPU configurations:
+    
   +-------------------------+-------------------------------+
   |  Minimum                |   Recommended                 |
   +----------+--------------+--------------+----------------+
@@ -57,20 +59,20 @@ Hardware requirements
   |     4    |     2        |     16       |       8        |
   +----------+--------------+--------------+----------------+
 
-- Disk space
+- **Disk space**
 
   The amount of data depends on the generated alerts per second (APS). This table details the estimated disk space needed per agent to store 90 days of alerts on a Wazuh server, depending on the type of monitored endpoints.
 
-  +-------------------------------------------------+-----+---------------------------+
-  | Monitored endpoints                             | APS | Storage                   |
-  |                                                 |     |  (GB/90 days)             |
-  +=================================================+=====+===========================+
-  | Servers                                         | 0.25|           3.8             |
-  +-------------------------------------------------+-----+---------------------------+
-  | Workstations                                    | 0.1 |           1.5             |
-  +-------------------------------------------------+-----+---------------------------+
-  | Network devices                                 | 0.5 |           7.6             |
-  +-------------------------------------------------+-----+---------------------------+
+  +------------------------------+-----+---------------------------+
+  | Monitored endpoints          | APS | Storage                   |
+  |                              |     |  (GB/90 days)             |
+  +==============================+=====+===========================+
+  | Servers                      | 0.25|           3.8             |
+  +------------------------------+-----+---------------------------+
+  | Workstations                 | 0.1 |           1.5             |
+  +------------------------------+-----+---------------------------+
+  | Network devices              | 0.5 |           7.6             |
+  +------------------------------+-----+---------------------------+
 
   For example, for an environment with 80 workstations, 10 servers, and 10 network devices, the storage needed for 90 days of alerts is 236 GB approximately. 
  
@@ -129,7 +131,7 @@ Installing Wazuh
     - **Username**: *wazuh*
     - **Password**: *<wazuh_password>*
 
-  When you access Kibana for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or, for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser. Alternatively, a certificate from a trusted authority can be configured. 
+   When you access Wazuh dashboard for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or, for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser. Alternatively, a certificate from a trusted authority can be configured. 
 
 If you want to uninstall the components of the all-in-one installation, run the unattended installation script and use the option ``-r / --uninstall``.  
 
