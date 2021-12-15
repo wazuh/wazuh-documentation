@@ -1,23 +1,23 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. meta:: :description: Learn how to install Kibana, a flexible and intuitive web interface for mining and visualizing the events and archives. 
+.. meta:: :description: Learn how to install Wazuh dashboard, a flexible and intuitive web interface for mining and visualizing the events and archives. 
 
 .. _wazuh_dashboard_step_by_step:
 
-Installing Kibana in step-by-step mode
-======================================
+Installing the Wazuh dashboard in step-by-step mode
+===================================================
 
-Kibana is a flexible and intuitive web interface for mining and visualizing the events and archives. 
+The Wazuh dashboard is a flexible and intuitive web interface for mining and visualizing the events and archives. 
 
 .. note:: Root user privileges are required to run the commands described below.
 
-Install Kibana
---------------
+Install the Wazuh dashboard
+----------------------------
 
 Adding the Wazuh repository
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Add the Wazuh repository if you are installing Kibana on a dedicated server. Skip this step to install it on the same host as the Wazuh server or Elasticsearch. 
+Add the Wazuh repository if you are installing the Wazuh dashboard on a dedicated server. Skip this step to install it on the same host as the Wazuh server or the Wazuh indexer. 
 
   .. tabs::
   
@@ -42,10 +42,10 @@ Add the Wazuh repository if you are installing Kibana on a dedicated server. Ski
   
   
 
-Installing and configuring Kibana
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Installing and configuring the Wazuh dashboard
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Install the Kibana package.
+#. Install the Wazuh dashboard package.
 
     .. tabs::
 
@@ -70,7 +70,7 @@ Installing and configuring Kibana
 
 
 
-#. Download the Kibana configuration file.
+#. Download the Wazuh dashboard configuration file.
 
     .. include:: ../../_templates/installations/elastic/common/configure_kibana.rst
 
@@ -81,9 +81,9 @@ Installing and configuring Kibana
         server.host: <kibana_ip>
         elasticsearch.hosts: "https://<elasticsearch_ip>:9200"
 
-    - By default, Kibana only listens on the loopback interface (localhost), which means that it can be only accessed from the same host. To access Kibana from the outside it may be configured to listen on its network IP by replacing ``<kibana_ip>`` with Kibana's host IP. The value ``0.0.0.0`` will accept all the available IPs of the host.
+    - By default, the Wazuh dashboard only listens on the loopback interface (localhost), which means that it can be only accessed from the same host. To access the Wazuh dashboard from the outside it may be configured to listen on its network IP by replacing ``<kibana_ip>`` with Wazuh dashboard's host IP. The value ``0.0.0.0`` will accept all the available IPs of the host.
 
-    - ``<elasticsearch_ip>``: the host's IP. In case of having more than one Elasticsearch node, Kibana can be configured to connect to multiple Elasticsearch nodes in the same cluster. The IPs of the nodes can be separated with commas. Eg. ``["https://10.0.0.2:9200", "https://10.0.0.3:9200","https://10.0.0.4:9200"]``
+    - ``<elasticsearch_ip>``: the host's IP. In case of having more than one Wazuh indexer node, the Wazuh dashboard can be configured to connect to multiple Wazuh indexer nodes in the same cluster. The IPs of the nodes can be separated with commas. Eg. ``["https://10.0.0.2:9200", "https://10.0.0.3:9200","https://10.0.0.4:9200"]``
 
 #. Create the ``/usr/share/kibana/data`` directory.
 
@@ -101,19 +101,19 @@ Installing and configuring Kibana
         # sudo -u kibana bin/kibana-plugin install https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|-1.zip && cd -
         
 
-#. Replace ``kibana-node-name`` with your Kibana node name, the same used in ``instances.yml`` to create the certificates, and move the certificates to their corresponding location. We assume that you placed a copy of ``certs.tar``, created during the Elasticsearch installation, in your working directory (``./``).
+#. Replace ``kibana-node-name`` with your Wazuh dashboard node name, the same used in ``instances.yml`` to create the certificates, and move the certificates to their corresponding location. We assume that you placed a copy of ``certs.tar``, created during the Elasticsearch installation, in your working directory (``./``).
 
     .. include:: ../../_templates/installations/elastic/common/generate_new_kibana_certificates.rst
 
 
-#. Link the Kibana socket to privileged port 443.
+#. Link socket to privileged port 443.
 
     .. code-block:: console
 
         # setcap 'cap_net_bind_service=+ep' /usr/share/kibana/node/bin/node
 
 
-#. Enable and start the Kibana service.
+#. Enable and start the Wazuh dashboard service.
 
     .. include:: ../../_templates/installations/elastic/common/enable_kibana.rst
 
@@ -139,10 +139,10 @@ Installing and configuring Kibana
     - **Username**: *wazuh*
     - **Password**: *<wazuh_user_password>*
 
-  When you access Kibana for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or, for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser. Alternatively, a certificate from a trusted authority can be configured. 
+  When you access the Wazuh dashboard for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or, for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser. Alternatively, a certificate from a trusted authority can be configured. 
 
 
-If you want to uninstall Kibana, see the :ref:`uninstalling <uninstall_kibana>` section. 
+If you want to uninstall the Wazuh dashboard, see the :ref:`uninstalling <uninstall_kibana>` section. 
 
 Next steps
 ----------

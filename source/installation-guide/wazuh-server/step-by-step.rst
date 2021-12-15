@@ -38,7 +38,7 @@ Adding the Wazuh repository
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Add the Wazuh repository to download the official Wazuh packages. As an alternative, you can download the Wazuh packages directly from our :ref:`Package list <packages>`. 
-Skip this step to install it on the same host as Elasticsearch.
+Skip this step to install it on the same host as the Wazuh indexer.
     
    .. tabs::
    
@@ -112,7 +112,7 @@ Installing the Wazuh manager
 
   <div class="accordion-section open">
 
-Filebeat securely forwards alerts and archived events to Elasticsearch.  
+Filebeat securely forwards alerts and archived events to the Wazuh indexer.  
 
 
 Installing and configuring Filebeat 
@@ -145,13 +145,13 @@ Installing and configuring Filebeat
 
 
 
-#. Download the preconfigured Filebeat configuration file used to forward the Wazuh alerts to Elasticsearch.
+#. Download the preconfigured Filebeat configuration file used to forward the Wazuh alerts to the Wazuh indexer.
 
     .. code-block:: console
 
       # curl -so /etc/filebeat/filebeat.yml https://packages.wazuh.com/resources/|WAZUH_LATEST_MINOR|/open-distro/filebeat/7.x/filebeat_elastic_cluster.yml
 
-#. Download the alerts template for Elasticsearch.
+#. Download the alerts template for the Wazuh indexer.
 
     .. include:: ../../_templates/installations/elastic/common/load_filebeat_template.rst
 
@@ -166,7 +166,7 @@ Installing and configuring Filebeat
 
     .. include:: ../../_templates/installations/elastic/common/configure_filebeat.rst
 
-#. Replace ``wazuh-node-name`` with your Wazuh server node name, the same used in ``instances.yml`` to create the certificates, and move the certificates to their corresponding location. We assume that you placed a copy of ``certs.tar``, created during the Elasticsearch installation, in the root home folder (``~/``).
+#. Replace ``wazuh-node-name`` with your Wazuh server node name, the same used in ``instances.yml`` to create the certificates, and move the certificates to their corresponding location. We assume that you placed a copy of ``certs.tar``, created during the Wazuh indexer installation, in the root home folder (``~/``).
 
     .. include:: ../../_templates/installations/elastic/common/copy_certificates_filebeat_wazuh_cluster.rst
 
@@ -247,4 +247,4 @@ If you want to uninstall the Wazuh server, see the :ref:`uninstalling section <u
 Next steps
 ----------
 
-The Wazuh server installation is now complete and you can proceed with installing Kibana. To perform this action, see the :ref:`wazuh_dashboard_step_by_step` section.
+The Wazuh server installation is now complete and you can proceed with installing Wazuh dashboard. To perform this action, see the :ref:`wazuh_dashboard_step_by_step` section.

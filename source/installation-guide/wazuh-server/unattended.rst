@@ -30,7 +30,7 @@ The installation process is divided into two stages.
   <div class="accordion-section open">
 
 
-Install and configure the Wazuh master node. Make sure that a copy of ``certs.tar``, created during the Elasticsearch installation, is placed in the root home folder ``(~/)``.
+Install and configure the Wazuh master node. Make sure that a copy of ``certs.tar``, created during the Wazuh indexer installation, is placed in the root home folder ``(~/)``.
 
 #. Download the unattended installation script. 
 
@@ -83,7 +83,7 @@ Your Wazuh server is now successfully installed.
   <div class="accordion-section">
 
 
-Install and configure the Wazuh worker nodes. Make sure that a copy of ``certs.tar``, created during the Elasticsearch installation, is placed in the root home folder ``(~/)``.
+Install and configure the Wazuh worker nodes. Make sure that a copy of ``certs.tar``, created during the Wazuh indexer installation, is placed in the root home folder ``(~/)``.
 
 #. Download the unattended installation script. 
 
@@ -102,4 +102,4 @@ Your Wazuh server is now successfully installed. Repeat this process on every Wa
 Next steps
 ----------
   
-The Wazuh server installation is now complete and you can proceed with installing Kibana. To perform this action, see the :ref:`wazuh_dashboard_unattended_installation` section.  
+The Wazuh server installation is now complete and you can proceed with installing the Wazuh dashboard. To perform this action, see the :ref:`wazuh_dashboard_unattended_installation` section.  
