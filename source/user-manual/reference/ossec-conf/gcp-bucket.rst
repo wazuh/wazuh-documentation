@@ -125,11 +125,11 @@ bucket\\only_logs_after
 
 A valid date, in YYYY-MMM-DD format. Only logs from that date onwards will be parsed.
 
-+--------------------+-------------+
-| **Default value**  | None        |
-+--------------------+-------------+
-| **Allowed values** | Valid date  |
-+--------------------+-------------+
++--------------------+-----------------------------------+
+| **Default value**  | Date of execution at ``00:00:00`` |
++--------------------+-----------------------------------+
+| **Allowed values** | Valid date                        |
++--------------------+-----------------------------------+
 
 bucket\\remove_from_bucket
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
