@@ -20,15 +20,12 @@ Check the :ref:`Getting started <getting_started>` section to learn more about t
 
 Requirements
 ------------
-**Check the hardware requirements and the supported operating systems for the Wazuh installation.**
-
+Check the hardware requirements and the supported operating systems for the Wazuh installation.
 
 Hardware requirements
 ^^^^^^^^^^^^^^^^^^^^^
 
-- **Memory and CPU**
-  
-  Minimum and recommended memory and CPU configurations:
+- **Memory and CPU**: Minimum and recommended memory and CPU configurations.
     
   +-------------------------+-------------------------------+
   |  Minimum                |   Recommended                 |
@@ -39,9 +36,7 @@ Hardware requirements
   +----------+--------------+--------------+----------------+
 
 
-- **Disk space**
-
-  The amount of data depends on the generated alerts per second (APS). This table details the estimated disk space needed per agent to store 90 days of alerts on a Wazuh server, depending on the type of monitored endpoints.
+- **Disk space**: The amount of data depends on the generated alerts per second (APS). This table details the estimated disk space needed per agent to store 90 days of alerts on a Wazuh server, depending on the type of monitored endpoints.
 
   +------------------------------+-----+---------------------------+
   | Monitored endpoints          | APS | Storage                   |
