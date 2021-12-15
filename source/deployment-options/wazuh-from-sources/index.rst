@@ -5,8 +5,8 @@
     
 .. _installation_from_sources:
 
-Wazuh installation from sources
-===============================
+Installation from sources
+=========================
 The Wazuh manager and agent can be installed via sources as an alternative to the installation from packages.
 
 .. toctree::
