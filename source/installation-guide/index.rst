@@ -106,7 +106,7 @@ You can create and tailor your cloud environment to meet specific needs and upgr
 Upgrade instructions
 --------------------
 
-To upgrade any of the Wazuh components you need to check the​ :ref:`Upgrade guide <upgrade_guide>`. There you can find significant information about the upgrade process of the Wazuh server, Open Distro for Elasticsearch, Elastic Stack, and the Wazuh agents. 
+To upgrade any of the Wazuh components, you need to check the​ :ref:`Upgrade guide <upgrade_guide>`. There you can find significant information about the upgrade process of the Wazuh server, Open Distro for Elasticsearch, Elastic Stack, and the Wazuh agents. 
 
 In addition, you can check the :ref:`compatibility matrix <compatibility_matrix>` section if you have any doubt about operating system compatibility, as well as the compatibility between the different Wazuh components.
 
@@ -119,7 +119,7 @@ The :ref:`Wazuh agent <wazuh_agent>` is a single and lightweight monitoring soft
 
 The Wazuh agent can be deployed to laptops, desktops, servers, cloud instances, containers, or virtual machines. The agent helps to protect your system by providing threat prevention, detection, and response capabilities. It is also used to collect different types of system and application data that it forwards to the :ref:`Wazuh server <wazuh_server>` through an encrypted and authenticated channel.
 
-If the Wazuh central components are already installed in your environment, select your operating system below and follow the installation steps to deploy the agent into the endpoints: 
+If the Wazuh central components are already installed in your environment, select your operating system below and follow the installation steps to deploy the agent into the endpoints. 
 
 
 .. raw:: html
