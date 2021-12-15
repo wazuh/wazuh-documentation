@@ -88,7 +88,7 @@ Installing Wazuh
 
      # curl -sO https://s3.us-west-1.amazonaws.com/packages-dev.wazuh.com/resources/4.2/unattended_installation.sh && sudo bash ./unattended_installation.sh -A
 
-   After executing the script, the output prompts all the users' passwords and a message confirms that the installation was successful.
+   After executing the script, the output prompts all the users' passwords, and a message confirms that the installation was successful.
 
    Expand the output to see an example response.
    
@@ -138,7 +138,7 @@ If you want to uninstall the components of the all-in-one installation, run the 
 Next steps
 ----------
 
-The Wazuh environment is now ready and you can proceed with installing the Wazuh agent on the endpoints to be monitored.
+The Wazuh environment is now ready, and you can proceed with installing the Wazuh agent on the endpoints to be monitored.
 
 The :ref:`Wazuh agent <wazuh_agent>` is a single and lightweight monitoring software that runs on most operating systems. It provides visibility into the endpoint's security by collecting critical system and application records, inventory data, and detecting potential anomalies. Now that your environment is ready, select the operating system of your endpoint and follow the installation steps to deploy the agent. 
 
