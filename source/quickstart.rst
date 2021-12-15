@@ -27,12 +27,14 @@ Check the supported operating systems and the recommended hardware requirements 
 Supported operating systems
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh can be installed on the 64-bit Linux operating system listed below. Wazuh supports all the listed and later versions:
+Wazuh can be installed on a 64-bit Linux operating system. Wazuh supports all the operating system versions listed below and later versions too:
+
 
 .. list-table::
     :width: 100%
     :widths: 50 50
    
+
    * - Amazon Linux 2
    * - CentOS 7
    * - Debian 8 ELTS
@@ -42,6 +44,22 @@ Wazuh can be installed on the 64-bit Linux operating system listed below. Wazuh 
    * - Red Hat Enterprise Linux 6 ELS
    * - SUSE Linux enterprise server 11 LTSS
    * - Ubuntu 14.04 ESM
+
+
+.. list-table::
+    :width: 100%
+    :widths: 50 50
+   
+
+   - Amazon Linux 2
+   - CentOS 7
+   - Debian 8 ELTS
+   - Fedora Linux 33
+   - openSUSE Tumbleweed, Leap 15.2
+   - Oracle Linux 6 Extended
+   - Red Hat Enterprise Linux 6 ELS
+   - SUSE Linux enterprise server 11 LTSS
+   - Ubuntu 14.04 ESM
 
 
 Hardware requirements
