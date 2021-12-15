@@ -156,60 +156,16 @@ main {
 .index main {
   .toctree-l1 > a::before {
     background-repeat: no-repeat;
-    background-size: 60px 60px;
-    background-position: center;
+    background-size: 80px 80px;
+    background-position: right center;
     content: '';
     display: block;
-    width: 60px;
-    height: 60px;
+    width: 67px;
+    height: 75px;
     position: absolute;
     left: -70px;
     top: -7px;
     pointer-events: none;
-  }
-  /* Getting started */
-  [href$="getting-started/index.html"]::before {
-    background-image: url('#{$icoPath}index-icons.svg#getting-started');
-  }
-  /* Installation guide */
-  [href$="installation-guide/index.html"]::before {
-    background-image: url('#{$icoPath}index-icons.svg#installation-guide');
-  }
-  /* Upgrade guide */
-  [href$="upgrade-guide/index.html"]::before {
-    background-image: url('#{$icoPath}index-icons.svg#upgrade-guide');
-  }
-  /* User manual */
-  [href$="user-manual/index.html"]::before {
-    background-image: url('#{$icoPath}index-icons.svg#user-manual');
-  }
-  /* Cloud service */
-  [href$="cloud-service/index.html"]::before {
-    background-image: url('#{$icoPath}index-icons.svg#cloud-service');
-  }
-  /* Containers */
-  [href$="containers.html"]::before {
-    background-image: url('#{$icoPath}index-icons.svg#containers');
-  }
-  /* Deployment */
-  [href$="deployment.html"]::before {
-    background-image: url('#{$icoPath}index-icons.svg#deployment');
-  }
-  /* Compliance */
-  [href$="compliance.html"]::before {
-    background-image: url('#{$icoPath}index-icons.svg#compliance');
-  }
-  /* Monitorin with Wazuh */
-  [href$="monitoring.html"]::before {
-    background-image: url('#{$icoPath}index-icons.svg#monitoring');
-  }
-  /* Learning Wazuh */
-  [href$="learning-wazuh/index.html"]::before {
-    background-image: url('#{$icoPath}index-icons.svg#learning');
-  }
-  /* Release notes */
-  [href$="release-notes/index.html"]::before {
-    background-image: url('#{$icoPath}index-icons.svg#release-notes');
   }
 }
 
@@ -252,6 +208,51 @@ body {
       background: $light_ColorIndexHeaderBackground;
     }
   }
+  
+  /* Getting started */
+  [href$="getting-started/index.html"]::before {
+    background-image: url('#{$icoPath}index-icons.svg#getting-started-lt');
+  }
+  /* Installation guide */
+  [href$="installation-guide/index.html"]::before {
+    background-image: url('#{$icoPath}index-icons.svg#installation-guide-lt');
+  }
+  /* Upgrade guide */
+  [href$="upgrade-guide/index.html"]::before {
+    background-image: url('#{$icoPath}index-icons.svg#upgrade-guide-lt');
+  }
+  /* User manual */
+  [href$="user-manual/index.html"]::before {
+    background-image: url('#{$icoPath}index-icons.svg#user-manual-lt');
+  }
+  /* Cloud service */
+  [href$="cloud-service/index.html"]::before {
+    background-image: url('#{$icoPath}index-icons.svg#cloud-service-lt');
+  }
+  /* Containers */
+  [href$="containers.html"]::before {
+    background-image: url('#{$icoPath}index-icons.svg#containers-lt');
+  }
+  /* Deployment */
+  [href$="deployment.html"]::before {
+    background-image: url('#{$icoPath}index-icons.svg#deployment-lt');
+  }
+  /* Compliance */
+  [href$="compliance.html"]::before {
+    background-image: url('#{$icoPath}index-icons.svg#compliance-lt');
+  }
+  /* Monitorin with Wazuh */
+  [href$="monitoring.html"]::before {
+    background-image: url('#{$icoPath}index-icons.svg#monitoring-lt');
+  }
+  /* Learning Wazuh */
+  [href$="learning-wazuh/index.html"]::before {
+    background-image: url('#{$icoPath}index-icons.svg#learning-lt');
+  }
+  /* Release notes */
+  [href$="release-notes/index.html"]::before {
+    background-image: url('#{$icoPath}index-icons.svg#release-notes-lt');
+  }
 }
 
 /* Dark- theme -------------------------------------------------------------- */
@@ -292,5 +293,50 @@ body {
     .form-control {
       background: $dark_ColorIndexHeaderBackground;
     }
+  }
+
+  /* Getting started */
+  [href$="getting-started/index.html"]::before {
+    background-image: url('#{$icoPath}index-icons.svg#getting-started-dt');
+  }
+  /* Installation guide */
+  [href$="installation-guide/index.html"]::before {
+    background-image: url('#{$icoPath}index-icons.svg#installation-guide-dt');
+  }
+  /* Upgrade guide */
+  [href$="upgrade-guide/index.html"]::before {
+    background-image: url('#{$icoPath}index-icons.svg#upgrade-guide-dt');
+  }
+  /* User manual */
+  [href$="user-manual/index.html"]::before {
+    background-image: url('#{$icoPath}index-icons.svg#user-manual-dt');
+  }
+  /* Cloud service */
+  [href$="cloud-service/index.html"]::before {
+    background-image: url('#{$icoPath}index-icons.svg#cloud-service-dt');
+  }
+  /* Containers */
+  [href$="containers.html"]::before {
+    background-image: url('#{$icoPath}index-icons.svg#containers-dt');
+  }
+  /* Deployment */
+  [href$="deployment.html"]::before {
+    background-image: url('#{$icoPath}index-icons.svg#deployment-dt');
+  }
+  /* Compliance */
+  [href$="compliance.html"]::before {
+    background-image: url('#{$icoPath}index-icons.svg#compliance-dt');
+  }
+  /* Monitorin with Wazuh */
+  [href$="monitoring.html"]::before {
+    background-image: url('#{$icoPath}index-icons.svg#monitoring-dt');
+  }
+  /* Learning Wazuh */
+  [href$="learning-wazuh/index.html"]::before {
+    background-image: url('#{$icoPath}index-icons.svg#learning-dt');
+  }
+  /* Release notes */
+  [href$="release-notes/index.html"]::before {
+    background-image: url('#{$icoPath}index-icons.svg#release-notes-dt');
   }
 }
