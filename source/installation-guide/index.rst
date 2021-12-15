@@ -8,11 +8,11 @@
 Installation guide
 ==================
 
-The Wazuh central components include the Wazuh server, Wazuh indexer, and Wazuh dashboard. With this installation guide, you will learn how to install each component on the same server, as an all-in-one deployment, or on different servers as a distributed deployment, depending on the environment needs.
+The Wazuh central components include the Wazuh server, the Wazuh indexer, and the Wazuh dashboard. With this installation guide, you will learn how to install each component on the same server, as an all-in-one deployment, or on different servers as a distributed deployment, depending on your environment needs.
 
 Check the :ref:`Getting started <getting_started>` section to learn more about the Wazuh solution, its components, architecture, and capabilities. Alternatively, you can check our :ref:`Wazuh quickstart <quickstart>` to learn how to install all the central components on the same host using the unattended installation script. 
 
-Wazuh is a free and open source host-based intrusion detection system (HIDS). Wazuh server and Wazuh agent are under `GNU GPL version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_ license. Wazuh indexer and Wazuh dashboard are under `Apache License 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_. 
+Wazuh is a free and open source host-based intrusion detection system (HIDS). The Wazuh server and the Wazuh agent are under `GNU GPL version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_ license. The Wazuh indexer and the Wazuh dashboard are under `Apache License 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_. 
 
 
 On-premises Wazuh deployment
@@ -27,16 +27,16 @@ All-in-one deployment
 With all-in-one deployment, you install and configure all the Wazuh central components on the same host. Wazuh offers different all-in-one deployment options such as:
 
 - :ref:`Wazuh quickstart <quickstart>`: Install all the central components on the same host using the unattended installation script.
-- :ref:`Virtual Machine (OVA) <virtual_machine>`: It is a pre-built virtual machine with all Wazuh central components that you can directly import using VirtualBox or other OVA compatible virtualization systems.
+- :ref:`Virtual Machine (OVA) <virtual_machine>`: It is a pre-built virtual machine with all Wazuh central components that you can directly import using `VirtualBox <https://www.virtualbox.org/>`_ or other OVA compatible virtualization systems.
 - :ref:`Amazon Machine Images (AMI) <amazon-machine-images>`: It is a pre-built Amazon Machine Image with all Wazuh core components to be installed on an AWS cloud instance.
 
 
 Distributed deployment
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Following a distributed deployment process, you can install and configure the Wazuh server, Wazuh indexer, and Wazuh dashboard. In this type of deployment, the components are installed on separate hosts. Wazuh dashboard can be installed either on the same server of a Wazuh indexer node or a separate one.
+Following a distributed deployment process, you can install and configure the Wazuh central components on separate hosts. The Wazuh dashboard can be installed either on the same server of the Wazuh indexer node or a separate one.
 
-The Wazuh server and Wazuh indexer can each be installed as a single-node or multi-node cluster depending on the environment needs. This type of deployment provides high availability and scalability of the product, and it is convenient for large working environments.
+The Wazuh server and the Wazuh indexer can each be installed as a single-node or multi-node cluster depending on the environment needs. This type of deployment provides high availability and scalability of the product, and it is convenient for large working environments.
 
 Small Wazuh deployments, which do not require processing large amounts of data, can easily be handled by a single-node cluster. Multi-node clusters are recommended when there is a large number of monitored endpoints, when a large volume of data is anticipated, or when high availability is required.
 
@@ -57,7 +57,7 @@ Wazuh indexer                                                     Description
 **Multi-node cluster**                                            With the multi-node installation method, several Wazuh indexers are installers on different nodes that communicate among them. A multi-node cluster provides high availability, scalability, and load balancing for data indexing and searching.
 ==============================================================    =============
 
-Wazuh dashboard doesn't need to be installed in a cluster mode because this component doesn't need to be escalated. The diagram below represents a Wazuh deployment architecture. It shows the solution components and how the Wazuh servers and Wazuh indexer can be configured as a cluster, providing load balancing and high availability.
+The Wazuh dashboard doesn't need to be installed in a cluster mode because this component doesn't need to be escalated. The diagram below represents a Wazuh deployment architecture. It shows the solution components and how the Wazuh server and the Wazuh indexer can be configured as a cluster, providing load balancing and high availability.
 
 .. thumbnail:: ../images/installation/distributed.png
     :alt: Wazuh deployment
@@ -72,7 +72,7 @@ Wazuh allows other deployment options such as the listed below:
 
 - **Containers:**
   
-  - :ref:`Docker <wazuh_docker>`: You are able to install Wazuh with a single-host architecture using a set of Docker images.
+  - :ref:`Docker <wazuh_docker>`: Allows you to install Wazuh with a single-host architecture using a set of Docker images.
   - :ref:`Deployment on Kubernetes <wazuh_kubernetes>`: You can build an environment with a Wazuh cluster that offers high availability and securing all the data. 
 
 
