@@ -14,11 +14,11 @@ Wazuh provides a pre-built virtual machine image (OVA) that you can directly imp
 Download the `virtual appliance (OVA) <https://packages.wazuh.com/|CURRENT_MAJOR|/vm/wazuh-|WAZUH_LATEST_OVA|_|OPEN_DISTRO_LATEST|.ova>`_ which contains the following components:
 
     - CentOS 7
-    - Wazuh manager: |WAZUH_LATEST_OVA|
-    - Open Distro for Elasticsearch: |OPEN_DISTRO_LATEST|
-    - Filebeat-OSS: |ELASTICSEARCH_LATEST_OVA|
-    - Kibana: |ELASTICSEARCH_LATEST_OVA|
-    - Wazuh Kibana plugin: |WAZUH_LATEST_OVA|-|ELASTICSEARCH_LATEST_OVA|
+    - Wazuh manager |WAZUH_LATEST_OVA|
+    - Open Distro for Elasticsearch |OPEN_DISTRO_LATEST|
+    - Filebeat-OSS |ELASTICSEARCH_LATEST_OVA|
+    - Kibana |ELASTICSEARCH_LATEST_OVA|
+    - Wazuh Kibana plugin |WAZUH_LATEST_OVA|-|ELASTICSEARCH_LATEST_OVA|
 
 First, import the OVA in the virtualization platform and run the virtual machine. The password of the user ``root`` is ``wazuh`` and the username and password for the ``wazuh`` user is ``wazuh``.
 
