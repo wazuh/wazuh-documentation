@@ -11,7 +11,7 @@ You can deploy Wazuh to your environments using multiple deployment options. The
 
 - :ref:`Virtual Machine (OVA) <virtual_machine>`: Wazuh provides a pre-built virtual machine image (OVA) that you can directly import using VirtualBox or other OVA compatible virtualization systems. 
   
-- :ref:`Amazon Machine Images (AMI) <amazon-machine-images>`: This is a pre-built Amazon Machine Image that can be directly launched on an AWS cloud instance.
+- :ref:`Amazon Machine Images (AMI) <amazon-machine-images>`: This is a pre-built Amazon Machine Image (AMI) you can directly launch on an AWS cloud instance.
 
 **Containers:**
 
