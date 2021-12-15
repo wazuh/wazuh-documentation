@@ -31,35 +31,19 @@ Wazuh can be installed on a 64-bit Linux operating system. Wazuh supports all th
 
 
 .. list-table::
-    :width: 100%
-    :widths: 50 50
-   
+   :width: 100%
+   :widths: 50 50
 
    * - Amazon Linux 2
-   * - CentOS 7
+     - CentOS 7
    * - Debian 8 ELTS
-   * - Fedora Linux 33
+     - Fedora Linux 33
    * - openSUSE Tumbleweed, Leap 15.2
-   * - Oracle Linux 6 Extended
+     - Oracle Linux 6 Extended
    * - Red Hat Enterprise Linux 6 ELS
-   * - SUSE Linux enterprise server 11 LTSS
+     - SUSE Linux enterprise server 11 LTSS
    * - Ubuntu 14.04 ESM
-
-
-.. list-table::
-    :width: 100%
-    :widths: 50 50
-   
-
-   - Amazon Linux 2
-   - CentOS 7
-   - Debian 8 ELTS
-   - Fedora Linux 33
-   - openSUSE Tumbleweed, Leap 15.2
-   - Oracle Linux 6 Extended
-   - Red Hat Enterprise Linux 6 ELS
-   - SUSE Linux enterprise server 11 LTSS
-   - Ubuntu 14.04 ESM
+     - 
 
 
 Hardware requirements
