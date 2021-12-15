@@ -8,7 +8,7 @@
 Installation guide
 ==================
 
-The Wazuh central components include the Wazuh server, Wazuh indexer, and Wazuh dashboard. Thanks to this guided installation, you will learn how to install each component on the same server, as an all-in-one deployment, or on different servers as a distributed deployment, depending on the environment needs. 
+The Wazuh central components include the Wazuh server, Wazuh indexer, and Wazuh dashboard. With this installation guide, you will learn how to install each component on the same server, as an all-in-one deployment, or on different servers as a distributed deployment, depending on the environment needs.
 
 Check the :ref:`Getting started <getting_started>` section to learn more about the Wazuh solution, its components, architecture, and capabilities. Alternatively, you can check our :ref:`Wazuh quickstart <quickstart>` to learn how to install all the central components on the same host using the unattended installation script. 
 
@@ -71,19 +71,19 @@ More deployment options
 
 Wazuh allows other deployment options such as the listed below:
 
-+----------------------------------------------+
-| **Deployment options**                       |
-+------------------------+--------+------------+
-| Ready to use machines  | OVA    | AMI        |
-+------------------------+--------+------------+
-| Containers             | Docker | Kubernetes |
-+------------------------+--------+------------+
-| Orchestration tools    | Puppet | Ansible    |
-+------------------------+--------+------------+
-| Offline installation                         |
-+----------------------------------------------+
-| Installation from sources                    |
-+----------------------------------------------+
++------------------------------------------------+
+| **Deployment options**                         |
++------------------------+----------+------------+
+| Ready to use machines  | OVA      | AMI        |
++------------------------+----------+------------+
+| Containers             | Docker   | Kubernetes |
++------------------------+----------+------------+
+| Orchestration tools    | Puppet   | Ansible    |
++------------------------+----------+------------+
+| Offline installation                           |
++------------------------------------------------+
+| Installation from sources                      |
++------------------------------------------------+
 
 For information about the different deployment types, check the :ref:`Deployment options <deployment>` section. Wazuh can also be installed with commercial options like Elastic Stack basic license or Splunk. To learn more about these options and other installation alternatives, see the :ref:`Installation alternatives <more_installation_alternatives>` section.
 
