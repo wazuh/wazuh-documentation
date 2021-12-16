@@ -66,6 +66,19 @@ Wazuh indexer cluster              Description
 ===============================    =============
 
 
+===============================    ====================    ================
+Component                          Cluster types           Description
+===============================    ====================    ================
+Wazuh server                       Single-node cluster     This installation is performed on one host; it is easy to maintain, requires few resources, and does not demand a network load balancer.
+
+Wazuh server                       Multi-node cluster      This process involves installing several Wazuh servers on different nodes that communicate among them. This kind of installation provides high availability and requires a network load balancer.
+
+Wazuh indexer                      Single-node cluster     Wazuh indexer cluster is installed on one host with the single-node installation method. This approach requires few resources, does not demand a network load balancer, and is easier to maintain.
+
+Wazuh indexer                      Multi-node cluster      With this installation method, several Wazuh indexers are installers on different nodes that communicate among them. A multi-node cluster provides high availability, scalability, and load balancing for data indexing and searching.
+===============================    ====================    ================
+
+
 The diagram below represents a Wazuh deployment architecture. It shows the solution components and how the Wazuh server and the Wazuh indexer can be configured as a cluster, providing load balancing and high availability.
 
 .. thumbnail:: ../images/installation/distributed.png
@@ -100,7 +113,6 @@ Wazuh allows other deployment options such as the listed below:
   
 - :ref:`Installation from sources <installation_from_sources>`: Install the Wazuh manager and agent without using a package manager by compiling the source code and copying the binaries to your computer.
 
-
 For information about the different deployment types, check the :ref:`Deployment options <deployment>` section. Wazuh can also be installed with commercial options like Elastic Stack basic license or Splunk. See the :ref:`Installation alternatives <more_installation_alternatives>` section to learn more about these options.
 
 
@@ -118,7 +130,6 @@ Upgrade instructions
 To upgrade any of the Wazuh components, you need to check the​ :ref:`Upgrade guide <upgrade_guide>`. There you can find information about the upgrade process of the Wazuh server, Open Distro for Elasticsearch, Elastic Stack, and the Wazuh agents. 
 
 In addition, you can check the :ref:`compatibility matrix <compatibility_matrix>` section if you have any doubt about operating system compatibility, as well as the compatibility between the different Wazuh components.
-
 
 
 Wazuh agent deployment
