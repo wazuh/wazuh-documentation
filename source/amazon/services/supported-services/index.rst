@@ -10,10 +10,10 @@ Supported services
 
 All the services except ``Inspector`` and ``CloudWatch Logs`` get their data from log files stored in an ``S3`` bucket. These services store their data into log files which are configured inside ``<bucket type='TYPE'> </bucket>`` tags, while ``Inspector`` and ``CloudWatch Logs`` services are configured inside ``<service type='inspector'> </service>`` and ``<service type='cloudwatchlogs'> </service>`` tags, respectively.
 
-The next table contains the most relevant information about configuring each service in ``ossec.conf``:
+The next table contains the most relevant information about configuring each service in the ``ossec.conf`` file, as well as the path where the logs will be stored in the bucket if the corresponding service uses them as its storage medium:
 
 +--------------+----------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
-| **Provider** | **Service**                                              | **Configuration tag** | **Type**       | **Path to logs** [#path]_                                                                                        |
+| **Provider** | **Service**                                              | **Configuration tag** | **Type**       | **Path to logs**                                                                                                 |
 +--------------+----------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
 | Amazon       | :ref:`CloudTrail <amazon_cloudtrail>`                    | bucket                | cloudtrail     | <bucket_name>/<prefix>/AWSLogs/<suffix>/<organization_id>/<account_id>/CloudTrail/<region>/<year>/<month>/<day>  |
 +--------------+----------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
@@ -47,9 +47,6 @@ The next table contains the most relevant information about configuring each ser
 +--------------+----------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
 | Cisco        | :ref:`Umbrella <cisco_umbrella>`                         | bucket                | cisco_umbrella | <bucket_name>/<prefix>/<year>-<month>-<day>                                                                      |
 +--------------+----------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
-
-.. [#path]
-    The **Path to logs** column is the path where the logs will be stored in the bucket if the corresponding service uses them as its storage medium.
 
 .. toctree::
     :maxdepth: 1
