@@ -32,11 +32,11 @@ The following table establishes a correspondence between the decoded FIM fields 
 +----------------------+-----------------------------+-------------------------------------------------------------------------+
 |  gname               |  gname_after                |  Group name of the group that shares ownership of the file              |
 +----------------------+-----------------------------+-------------------------------------------------------------------------+
-|  md5                 |  md5_after                  |  md5 hash of the file in the current event (after changes)              |
+|  md5                 |  md5_after                  |  MD5 hash of the file in the current event (after changes)              |
 +----------------------+-----------------------------+-------------------------------------------------------------------------+
-|  sha1                |  sha1_after                 |  sha1 hash of the file in the current event (after changes)             |
+|  sha1                |  sha1_after                 |  SHA1 hash of the file in the current event (after changes)             |
 +----------------------+-----------------------------+-------------------------------------------------------------------------+
-|  sha256              |  sha256_after               |  sha256 hash of the file in the current event (after changes)           |
+|  sha256              |  sha256_after               |  SHA256 hash of the file in the current event (after changes)           |
 +----------------------+-----------------------------+-------------------------------------------------------------------------+
 |  mtime               |  mtime_after                |  Timestamp of the file changes                                          |
 +----------------------+-----------------------------+-------------------------------------------------------------------------+
