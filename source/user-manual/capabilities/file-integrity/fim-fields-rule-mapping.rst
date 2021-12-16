@@ -3,7 +3,7 @@
 FIM fields rule mapping
 =======================
 
-This guide aims to help to understand how FIM fields can be mapped into rules.
+This guide aims to help you understand how FIM fields can be mapped into rules.
 
 
 FIM - Alerts: fields correspondence
