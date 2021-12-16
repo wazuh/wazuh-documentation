@@ -51,11 +51,8 @@ The Wazuh dashboard is not installed in a cluster mode because this component do
 Component                          Cluster types           Description
 ===============================    ====================    ================
 Wazuh server                       Single-node             This installation is performed on one host; it is easy to maintain, requires few resources, and does not demand a network load balancer.
-
 Wazuh server                       Multi-node              This process involves installing several Wazuh servers on different nodes that communicate among them. This kind of installation provides high availability and requires a network load balancer.
- 
 Wazuh indexer                      Single-node             Wazuh indexer cluster is installed on one host with the single-node installation method. This approach requires few resources, does not demand a network load balancer, and is easier to maintain.
-
 Wazuh indexer                      Multi-node              With this installation method, several Wazuh indexers are installers on different nodes that communicate among them. A multi-node cluster provides high availability, scalability, and load balancing for data indexing and searching.
 ===============================    ====================    ================
 
@@ -93,6 +90,19 @@ Wazuh allows other deployment options such as the listed below:
 **From sources:**
   
 - :ref:`Installation from sources <installation_from_sources>`: Install the Wazuh manager and agent without using a package manager by compiling the source code and copying the binaries to your computer.
+
+
+
+===============================    =============================================================    ================
+Options                            Types                                                            Description
+===============================    =============================================================    ================
+Containers                         :ref:`Deployment on Docker <wazuh_docker>`                       This allows you to install Wazuh with a single-host architecture using a set of Docker images.
+Containers                         :ref:`Deployment on Kubernetes <wazuh_kubernetes>`               You can build an environment with a Wazuh cluster that offers high availability while securing your data. 
+Orchestration tools                :ref:`Deployment with Ansible <wazuh_ansible>`                   Ansible is an open source platform designed for automating tasks. Its deployment tool is used to deploy the Wazuh infrastructure on AWS.
+Orchestration tools                :ref:`Deployment with Puppet <wazuh_puppet>`                     Puppet is an open-source software tool that allows you to install and configure Wazuh in an easy way by letting you inspect, deliver, operate, and proof your software, no matter where it is executed.
+Offline                            :ref:`Offline installation <wazuh-offline-installation>`         This offline solution involves downloading the Wazuh components to then install them on a system with no internet connection.
+From sources                       :ref:`Installation from sources <installation_from_sources>`     Install the Wazuh manager and agent without using a package manager by compiling the source code and copying the binaries to your computer.
+===============================    =============================================================    ================
 
 For information about the different deployment types, check the :ref:`Deployment options <deployment>` section. Wazuh can also be installed with commercial options like Elastic Stack basic license or Splunk. See the :ref:`Installation alternatives <more_installation_alternatives>` section to learn more about these options.
 
