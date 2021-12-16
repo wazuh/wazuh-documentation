@@ -10,9 +10,7 @@ Installation guide
 
 The Wazuh solution is based on three central components and the Wazuh agent. The Wazuh server, the Wazuh indexer, and the Wazuh dashboard are the three central components in charge of analyzing, processing, and storing the data. The Wazuh agent is a single and lightweight monitoring software that is deployed on the monitored endpoints to provide prevention, detection, and response capabilities.
 
-With this installation guide, you will learn how to install each component on the same server, as an all-in-one deployment, or on different servers as a distributed deployment. 
-
-If you are new to Wazuh and want to learn more about its components, architecture, and capabilities, you can check the :ref:`Getting started <getting_started>` section.  
+With this installation guide, you will learn how to install each component on the same server, as an all-in-one deployment, or on different servers as a distributed deployment.If you are new to Wazuh and want to learn more about its components, architecture, and capabilities, you can check the :ref:`Getting started <getting_started>` section.  
 
 For a quick and unattended installation, you can use the :ref:`Wazuh quickstart guide <quickstart>`. It will help you deploy the solution as an all-in-one, running all the central components in the same system.
 
