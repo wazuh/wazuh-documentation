@@ -48,7 +48,7 @@ Small Wazuh deployments, which do not require processing large amounts of data, 
 The Wazuh dashboard is not installed in a cluster mode because this component doesn't require to be escalated. 
 
 ===============================    ====================    ================
-Component                          Cluster types           Description
+Component                          Cluster type            Description
 ===============================    ====================    ================
 Wazuh server                       Single-node             This installation is performed on one host; it is easy to maintain, requires few resources, and does not demand a network load balancer.
 Wazuh server                       Multi-node              This process involves installing several Wazuh servers on different nodes that communicate among them. This kind of installation provides high availability and requires a network load balancer.
@@ -71,7 +71,7 @@ More deployment options
 Wazuh allows other deployment options such as the listed below:
 
 ===============================    =============================================================    ================
-Options                            Types                                                            Description
+Option                             Deployment type                                                  Description
 ===============================    =============================================================    ================
 Containers                         :ref:`Deployment on Docker <wazuh_docker>`                       This allows you to install Wazuh with a single-host architecture using a set of Docker images.
 Containers                         :ref:`Deployment on Kubernetes <wazuh_kubernetes>`               You can build an environment with a Wazuh cluster that offers high availability while securing your data. 
