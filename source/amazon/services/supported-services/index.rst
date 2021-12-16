@@ -13,7 +13,7 @@ All the services except ``Inspector`` and ``CloudWatch Logs`` get their data fro
 The next table contains the most relevant information about configuring each service in ``ossec.conf``:
 
 +--------------+----------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
-| **Provider** | **Service**                                              | **Configuration tag** | **Type**       | **Path to logs**                                                                                                 |
+| **Provider** | **Service**                                              | **Configuration tag** | **Type**       | **Path to logs** [#path]_                                                                                        |
 +--------------+----------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
 | Amazon       | :ref:`CloudTrail <amazon_cloudtrail>`                    | bucket                | cloudtrail     | <bucket_name>/<prefix>/AWSLogs/<suffix>/<organization_id>/<account_id>/CloudTrail/<region>/<year>/<month>/<day>  |
 +--------------+----------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
@@ -21,7 +21,7 @@ The next table contains the most relevant information about configuring each ser
 +--------------+----------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
 | Amazon       | :ref:`Config <amazon_config>`                            | bucket                | config         | <bucket_name>/<prefix>/AWSLogs/<suffix>/<account_id>/Config/<region>/<year>/<month>/<day>                        |
 +--------------+----------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
-| Amazon       | :ref:`ALB <amazon_alb>`                                  | bucket                | alb            | <bucket_name>/<prefix>/AWSLogs//<account_id>/elasticloadbalancing/<region>/<year>/<month>/<day>                  |
+| Amazon       | :ref:`ALB <amazon_alb>`                                  | bucket                | alb            | <bucket_name>/<prefix>/AWSLogs/<account_id>/elasticloadbalancing/<region>/<year>/<month>/<day>                   |
 +--------------+----------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
 | Amazon       | :ref:`CLB <amazon_clb>`                                  | bucket                | clb            | <bucket_name>/<prefix>/AWSLogs/<account_id>/elasticloadbalancing/<region>/<year>/<month>/<day>                   |
 +--------------+----------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
@@ -47,6 +47,9 @@ The next table contains the most relevant information about configuring each ser
 +--------------+----------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
 | Cisco        | :ref:`Umbrella <cisco_umbrella>`                         | bucket                | cisco_umbrella | <bucket_name>/<prefix>/<year>-<month>-<day>                                                                      |
 +--------------+----------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
+
+.. [#path]
+    The **Path to logs** column is the path where the logs will be stored in the bucket if the corresponding service uses them as its storage medium.
 
 .. toctree::
     :maxdepth: 1
