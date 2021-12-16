@@ -10,11 +10,11 @@ Installation guide
 
 The Wazuh solution is based on three central components and the Wazuh agent. The Wazuh server, the Wazuh indexer, and the Wazuh dashboard are the three central components in charge of analyzing, processing, and storing the data. The Wazuh agent is a single and lightweight monitoring software that is deployed on the monitored endpoints to provide prevention, detection, and response capabilities.
 
-With this installation guide, you will learn how to install each component on the same server, as an all-in-one deployment, or on different servers as a distributed deployment.If you are new to Wazuh and want to learn more about its components, architecture, and capabilities, you can check the :ref:`Getting started <getting_started>` section.  
+With this installation guide, you will learn how to install each component on the same server, as an all-in-one deployment, or on different servers as a distributed deployment. If you are new to Wazuh and want to learn more about its components, architecture, and capabilities, you can check the :ref:`Getting started <getting_started>` section.  
 
-For a quick and unattended installation, you can use the :ref:`Wazuh quickstart guide <quickstart>`. It will help you deploy the solution as an all-in-one, running all the central components in the same system.
+Wazuh is a free and open source security platform that unifies XDR and SIEM capabilities. The Wazuh server and the Wazuh agent are licensed as `GNU GPL version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_. The Wazuh indexer and the Wazuh dashboard are licensed as `Apache License 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_. 
 
-Wazuh is a free and open source security platform that unifies XDR and SIEM capabilities. The Wazuh server and the Wazuh agent are licensed as `GNU GPL version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_ license. The Wazuh indexer and the Wazuh dashboard are licensed as `Apache License 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_. 
+You can use the  :ref:`Wazuh quickstart guide <quickstart>` for a quick and unattended installation. It will help you deploy the solution as an all-in-one, running all the central components in the same system.
 
 
 On-premises Wazuh deployment
