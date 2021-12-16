@@ -47,35 +47,16 @@ Small Wazuh deployments, which do not require processing large amounts of data, 
 
 The Wazuh dashboard is not installed in a cluster mode because this component doesn't require to be escalated. 
 
-
-===============================    =============
-Wazuh server cluster               Description
-===============================    =============
-**Single-node**                    This installation is performed on one host; it is easy to maintain, requires few resources, and does not demand a network load balancer.
-
-**Multi-node**                     This process involves installing several Wazuh servers on different nodes that communicate among them. This kind of installation provides high availability and requires a network load balancer.
-===============================    =============
-
-
-===============================    =============
-Wazuh indexer cluster              Description
-===============================    =============
-**Single-node**                    The Wazuh indexer cluster is installed on one host with the single-node installation method. This approach requires few resources, does not demand a network load balancer, and is easier to maintain.
-
-**Multi-node**                     With this installation method, several Wazuh indexers are installers on different nodes that communicate among them. A multi-node cluster provides high availability, scalability, and load balancing for data indexing and searching.
-===============================    =============
-
-
 ===============================    ====================    ================
 Component                          Cluster types           Description
 ===============================    ====================    ================
-Wazuh server                       Single-node cluster     This installation is performed on one host; it is easy to maintain, requires few resources, and does not demand a network load balancer.
+Wazuh server                       Single-node             This installation is performed on one host; it is easy to maintain, requires few resources, and does not demand a network load balancer.
 
-Wazuh server                       Multi-node cluster      This process involves installing several Wazuh servers on different nodes that communicate among them. This kind of installation provides high availability and requires a network load balancer.
+Wazuh server                       Multi-node              This process involves installing several Wazuh servers on different nodes that communicate among them. This kind of installation provides high availability and requires a network load balancer.
+ 
+Wazuh indexer                      Single-node             Wazuh indexer cluster is installed on one host with the single-node installation method. This approach requires few resources, does not demand a network load balancer, and is easier to maintain.
 
-Wazuh indexer                      Single-node cluster     Wazuh indexer cluster is installed on one host with the single-node installation method. This approach requires few resources, does not demand a network load balancer, and is easier to maintain.
-
-Wazuh indexer                      Multi-node cluster      With this installation method, several Wazuh indexers are installers on different nodes that communicate among them. A multi-node cluster provides high availability, scalability, and load balancing for data indexing and searching.
+Wazuh indexer                      Multi-node              With this installation method, several Wazuh indexers are installers on different nodes that communicate among them. A multi-node cluster provides high availability, scalability, and load balancing for data indexing and searching.
 ===============================    ====================    ================
 
 
