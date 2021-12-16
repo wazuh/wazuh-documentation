@@ -5,6 +5,7 @@
   
 .. _installation_guide:
 
+
 Installation guide
 ==================
 
@@ -17,8 +18,10 @@ Wazuh is a free and open source security platform that unifies XDR and SIEM capa
 You can use the  :ref:`Wazuh quickstart guide <quickstart>` for a quick and unattended installation. It will help you deploy the solution as an all-in-one, running all the central components in the same system.
 
 
-On-premises Wazuh deployment
-----------------------------
+Installing Wazuh in your own infrastructure
+-------------------------------------------
+
+You can use Wazuh as an on-premise software installed locally on your business’ computers and servers. Alternatively, you can use our Cloud solution delivered as-a-service (SaaS) where no dedicated hardware is required, and everything is ready to use.
 
 For deploying Wazuh on-premises, you can choose between two different options. All Wazuh central components are installed on the same host with an **all-in-one deployment**. On the other hand, each component is installed on a separate host as a single-node or multi-node cluster with a **distributed deployment**.
 
@@ -97,8 +100,8 @@ Wazuh allows other deployment options such as the listed below:
 For information about the different deployment types, check the :ref:`Deployment options <deployment>` section. Wazuh can also be installed with commercial options like Elastic Stack basic license or Splunk. See the :ref:`Installation alternatives <more_installation_alternatives>` section to learn more about these options.
 
 
-Wazuh Cloud
------------
+Using Wazuh cloud
+-----------------
 
 Wazuh offers the `Wazuh Cloud <https://wazuh.com/cloud/>`_, where all components are hosted on our PCI-DSS, and SOC 2 Type 2 certified SaaS solution, which is maintained by our team. With Wazuh cloud, no dedicated hardware is required and everything is ready to use. This service offers a highly flexible infrastructure to match your enterprise needs.
 
