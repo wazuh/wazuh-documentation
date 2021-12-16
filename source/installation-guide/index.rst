@@ -18,8 +18,8 @@ Wazuh is a free and open source security platform that unifies XDR and SIEM capa
 You also have the option of using the :ref:`Wazuh quickstart guide <quickstart>` for a quick and unattended installation. It will help you deploy Wazuh as an all-in-one, running all the central components in the same system.
 
 
-Installing Wazuh in your own infrastructure
--------------------------------------------
+Installing Wazuh in a local infrastructure
+------------------------------------------
 
 You can install Wazuh locally on your business’ computers and servers as on-premise software. Alternatively, you can use our Cloud solution delivered as a service (SaaS) where no dedicated hardware is required, and everything is ready to use.
 
