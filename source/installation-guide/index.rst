@@ -11,19 +11,19 @@ Installation guide
 
 The Wazuh solution is based on three central components and the Wazuh agent. The Wazuh server, the Wazuh indexer, and the Wazuh dashboard are the three central components in charge of analyzing, processing, and storing the data. The Wazuh agent is a single and lightweight monitoring software that is deployed on the monitored endpoints to provide prevention, detection, and response capabilities.
 
-With this guide, you will learn how to install each component on the same server, as an all-in-one deployment, or on different servers as a distributed deployment. If you are new to Wazuh and want to learn more about its components, architecture, and capabilities, you can check the :ref:`Getting started <getting_started>` section.  
+With this guide, you will learn how to install Wazuh, having the option to install all the central components in the same server with an all-in-one deployment, or on different servers as a distributed deployment. If you are new to Wazuh and want to learn more about its components, architecture, and capabilities, you can check the :ref:`Getting started <getting_started>` section.  
 
-Wazuh is a free and open source security platform that unifies XDR and SIEM capabilities. The Wazuh server and the Wazuh agent are licensed as `GNU GPL version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_. The Wazuh indexer and the Wazuh dashboard are licensed as `Apache License 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_. 
+Wazuh is a free and open source security platform that unifies XDR and SIEM capabilities. The Wazuh server and the Wazuh agent are licensed as `GNU GPL version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_, and the Wazuh indexer and the Wazuh dashboard are licensed as `Apache License 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_. 
 
-You can use the  :ref:`Wazuh quickstart guide <quickstart>` for a quick and unattended installation. It will help you deploy the solution as an all-in-one, running all the central components in the same system.
+You also have the option of using the :ref:`Wazuh quickstart guide <quickstart>` for a quick and unattended installation. It will help you deploy Wazuh as an all-in-one, running all the central components in the same system.
 
 
 Installing Wazuh in your own infrastructure
 -------------------------------------------
 
-You can use Wazuh as an on-premise software installed locally on your business’ computers and servers. Alternatively, you can use our Cloud solution delivered as-a-service (SaaS) where no dedicated hardware is required, and everything is ready to use.
+You can intall Wazuh locally on your business’ computers and servers as an on-premise software. Alternatively, you can use our Cloud solution delivered as a service (SaaS) where no dedicated hardware is required, and everything is ready to use.
 
-For deploying Wazuh on-premises, you can choose between two different options. All Wazuh central components are installed on the same host with an **all-in-one deployment**. On the other hand, each component is installed on a separate host as a single-node or multi-node cluster with a **distributed deployment**.
+For deploying Wazuh locally, you can choose between two different options. All Wazuh central components are installed on the same host with an **all-in-one deployment**. On the other hand, each component is installed on a separate host as a single-node or multi-node cluster with a **distributed deployment**.
 
 
 All-in-one deployment
@@ -46,20 +46,20 @@ The Wazuh server and the Wazuh indexer can each be installed as a single-node or
 Small Wazuh deployments, which do not require processing large amounts of data, can easily be handled by a single-node cluster. Multi-node clusters are recommended when there is a large number of monitored endpoints, when a large volume of data is anticipated, or when high availability is required.
 
 ==============================================================    =============
-Wazuh server                                                      Description
+Wazuh server cluster                                              Description
 ==============================================================    =============
-**Single-node cluster**                                           This installation is performed on one host. This method is easy to maintain, requires few resources, and does not require a network load balancer.
+**Single-node**                                                   This installation is performed on one host; it is easy to maintain, requires few resources, and does not demand a network load balancer.
 
-**Multi-node cluster**                                            This process involves installing several Wazuh servers on different nodes that communicate among them. This kind of installation provides high availability and requires a network load balancer.
+**Multi-node**                                                    This process involves installing several Wazuh servers on different nodes that communicate among them. This kind of installation provides high availability and requires a network load balancer.
 ==============================================================    =============
 
 
 ==============================================================    =============
-Wazuh indexer                                                     Description
+Wazuh indexer cluster                                             Description
 ==============================================================    =============
-**Single-node cluster**                                           The Wazuh indexer cluster is installed on one host with the single-node installation method. This approach requires few resources, does not demand a network load balancer, and is easier to maintain.
+**Single-node**                                                   The Wazuh indexer cluster is installed on one host with the single-node installation method. This approach requires few resources, does not demand a network load balancer, and is easier to maintain.
 
-**Multi-node cluster**                                            With this installation method, several Wazuh indexers are installers on different nodes that communicate among them. A multi-node cluster provides high availability, scalability, and load balancing for data indexing and searching.
+**Multi-node**                                                    With this installation method, several Wazuh indexers are installers on different nodes that communicate among them. A multi-node cluster provides high availability, scalability, and load balancing for data indexing and searching.
 ==============================================================    =============
 
 The Wazuh dashboard is not installed in a cluster mode because this component doesn't require to be escalated. The diagram below represents a Wazuh deployment architecture. It shows the solution components and how the Wazuh server and the Wazuh indexer can be configured as a cluster, providing load balancing and high availability.
