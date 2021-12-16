@@ -46,7 +46,7 @@ The following table establishes a correspondence between the decoded FIM fields 
 +----------------------+-----------------------------+-------------------------------------------------------------------------+
 |  changed_fields      |  changed_attributes         |  Changed fields in the file (permissions, content, etc...)              |
 +----------------------+-----------------------------+-------------------------------------------------------------------------+
-|  win_attributes      |  attrs_after                |  File attributtes (hidden, read-only, etc...)                           |
+|  win_attributes      |  attrs_after                |  File attributes (hidden, read-only, etc...)                            |
 +----------------------+-----------------------------+-------------------------------------------------------------------------+
 |  tag                 |  tag                        |  Custom tags to be added to one specific event                          |
 +----------------------+-----------------------------+-------------------------------------------------------------------------+
@@ -58,9 +58,9 @@ The following table establishes a correspondence between the decoded FIM fields 
 +----------------------+-----------------------------+-------------------------------------------------------------------------+
 |  group_name          |  audit.group.name           |  The actual group name of the user that triggered the event             |
 +----------------------+-----------------------------+-------------------------------------------------------------------------+
-|  process_name        |  audit.process.name         |  The name of the process ran by a user that triggered the event         |
+|  process_name        |  audit.process.name         |  The name of the process run by a user that triggered the event         |
 +----------------------+-----------------------------+-------------------------------------------------------------------------+
-|  process_id          |  audit.process.id           |  The ID of the process ran by a user that triggered the event           |
+|  process_id          |  audit.process.id           |  The ID of the process run by a user that triggered the event           |
 +----------------------+-----------------------------+-------------------------------------------------------------------------+
 |  ppid                |  audit.process.ppid         |  The parent ID of the process that triggered the event                  |
 +----------------------+-----------------------------+-------------------------------------------------------------------------+
