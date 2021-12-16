@@ -83,7 +83,7 @@ newUrls['4.2'] = [
   '/user-manual/reference/statistics-files/wazuh-remoted-state.html',
   '/user-manual/reference/statistics-files/wazuh-logcollector-state.html',
   '/user-manual/reference/tools/wazuh-control.html',
-  '/user-manual/reference/tools/wazuh-regex.html',  
+  '/user-manual/reference/tools/wazuh-regex.html',
   '/cloud-service/index.html',
   '/cloud-service/glossary.html',
   '/cloud-service/account-billing/index.html',
@@ -116,7 +116,7 @@ newUrls['4.2'] = [
   '/cloud-service/your-environment/understanding-storage.html',
   '/cloud-service/getting-started/sign-up-trial.html',
   '/cloud-service/getting-started/access-wazuh-wui.html',
-  '/cloud-service/getting-started/register-agents.html', 
+  '/cloud-service/getting-started/register-agents.html',
   '/getting-started/use-cases/index.html',
   '/getting-started/use-cases/cloud-security.html',
   '/getting-started/use-cases/configuration-assessment.html',
@@ -222,6 +222,7 @@ newUrls['4.2'] = [
   '/user-manual/capabilities/vulnerability-detection/compatibility-matrix.html',
   '/user-manual/capabilities/vulnerability-detection/cpe-helper.html',
   '/user-manual/capabilities/vulnerability-detection/how-it-works.html',
+  '/user-manual/capabilities/file-integrity/fim-fields-rule-mapping.html',
   '/user-manual/reference/ossec-conf/rule-test.html',
   '/user-manual/reference/ossec-conf/client-buffer.html',
   '/user-manual/reference/ossec-conf/email-alerts.html',
@@ -1134,7 +1135,7 @@ redirections.push(
     'target': ['4.0=>4.1', '4.1=>4.0'],
     '4.0': '/installation-guide/wazuh-agent/deployment_variables/linux/deployment_variables_zypper.html',
     '4.1': '/installation-guide/wazuh-agent/deployment_variables/deployment_variables_linux.html',
-  },  
+  },
   {
     'target': ['4.1=>4.0'],
     '4.0':  '/installation-guide/more-installation-alternatives/index.html',
@@ -2050,7 +2051,7 @@ redirections.push(
       '3.13': '/installation-guide/installing-wazuh-agent/linux/oracle5/wazuh_agent_package_oracle5.html',
       '4.0':  '/installation-guide/wazuh-agent/index.html',
     },
-); 
+);
 
 /* *** RELEASE 3.13 ****/
 
