@@ -33,7 +33,7 @@ With all-in-one deployment, you install and configure all the Wazuh central comp
 
 - :ref:`Wazuh quickstart <quickstart>`: Install all the central components on the same host using the unattended installation script.
 - :ref:`Virtual Machine (OVA) <virtual_machine>`: It is a pre-built virtual machine with all Wazuh central components that you can directly import using `VirtualBox <https://www.virtualbox.org/>`_ or other OVA compatible virtualization systems.
-- :ref:`Amazon Machine Images (AMI) <amazon-machine-images>`: It is a pre-built Amazon Machine Image with all Wazuh core components to be installed on an AWS cloud instance.
+- :ref:`Amazon Machine Images (AMI) <amazon-machine-images>`: It is a pre-built Amazon Machine Image with all Wazuh central components to be installed on an AWS cloud instance.
 
 
 Distributed deployment
@@ -75,26 +75,26 @@ More deployment options
 
 Wazuh allows other deployment options such as the listed below:
 
-- Containers:
+**Containers:**
   
-  - :ref:`Deployment on Docker <wazuh_docker>`: This allows you to install Wazuh with a single-host architecture using a set of Docker images.
-  - :ref:`Deployment on Kubernetes <wazuh_kubernetes>`: You can build an environment with a Wazuh cluster that offers high availability while securing your data. 
+- :ref:`Deployment on Docker <wazuh_docker>`: This allows you to install Wazuh with a single-host architecture using a set of Docker images.
+- :ref:`Deployment on Kubernetes <wazuh_kubernetes>`: You can build an environment with a Wazuh cluster that offers high availability while securing your data. 
 
 
-- Orchestration tools:
+**Orchestration tools:**
   
-  - :ref:`Deployment with Ansible <wazuh_ansible>`: Ansible is an open source platform designed for automating tasks. Its deployment tool is used to deploy the Wazuh infrastructure on AWS.
-  - :ref:`Deployment with Puppet <wazuh_puppet>`: Puppet is an open-source software tool that allows you to install and configure Wazuh in an easy way by letting you inspect, deliver, operate, and proof your software, no matter where it is executed.
+- :ref:`Deployment with Ansible <wazuh_ansible>`: Ansible is an open source platform designed for automating tasks. Its deployment tool is used to deploy the Wazuh infrastructure on AWS.
+- :ref:`Deployment with Puppet <wazuh_puppet>`: Puppet is an open-source software tool that allows you to install and configure Wazuh in an easy way by letting you inspect, deliver, operate, and proof your software, no matter where it is executed.
 
 
-- Offline:
+**Offline:**
     
-  - :ref:`Offline installation <wazuh-offline-installation>`: This offline solution involves downloading the Wazuh components to then install them on a system with no internet connection.
+- :ref:`Offline installation <wazuh-offline-installation>`: This offline solution involves downloading the Wazuh components to then install them on a system with no internet connection.
 
 
-- From sources:
+**From sources:**
   
-  - :ref:`Installation from sources <installation_from_sources>`: Install the Wazuh manager and agent without using a package manager by compiling the source code and copying the binaries to your computer.
+- :ref:`Installation from sources <installation_from_sources>`: Install the Wazuh manager and agent without using a package manager by compiling the source code and copying the binaries to your computer.
 
 
 For information about the different deployment types, check the :ref:`Deployment options <deployment>` section. Wazuh can also be installed with commercial options like Elastic Stack basic license or Splunk. See the :ref:`Installation alternatives <more_installation_alternatives>` section to learn more about these options.
@@ -103,15 +103,15 @@ For information about the different deployment types, check the :ref:`Deployment
 Using Wazuh cloud
 -----------------
 
-Wazuh offers the `Wazuh Cloud <https://wazuh.com/cloud/>`_, where all components are hosted on our PCI-DSS, and SOC 2 Type 2 certified SaaS solution, which is maintained by our team. With Wazuh cloud, no dedicated hardware is required and everything is ready to use. This service offers a highly flexible infrastructure to match your enterprise needs.
+`Wazuh Cloud <https://wazuh.com/cloud/>`_ hosts and manages all the Wazuh components in one integrated platform. This service offers a highly flexible infrastructure to match your enterprise needs. The setting up of the Wazuh Cloud environment is streamlined. With Wazuh cloud, no dedicated hardware is required, and everything is ready to use. 
 
-You can create and tailor your cloud environment to meet specific needs and upgrade it to the most appropriate tier. The setting up of the Wazuh Cloud environment is streamlined. Installing and updating the Wazuh components, and defining scalability is all handled by the Wazuh Cloud. You can check our :ref:`Wazuh Cloud environment <cloud_your_environment>` section to learn how to create a cloud environment and explore the Wazuh Cloud services.
+Wazuh offers the Wazuh Cloud, where all components are hosted on our PCI-DSS, and SOC 2 Type 2 certified SaaS solution, which is maintained by our team. Installing and updating the Wazuh components and defining scalability is all handled by the Wazuh Cloud. You can check our :ref:`Wazuh Cloud environment <cloud_your_environment>` section to learn how to create a cloud environment and explore the Wazuh Cloud services.
 
 
 Upgrade instructions
 --------------------
 
-To upgrade any of the Wazuh components, you need to check the​ :ref:`Upgrade guide <upgrade_guide>`. There you can find significant information about the upgrade process of the Wazuh server, Open Distro for Elasticsearch, Elastic Stack, and the Wazuh agents. 
+To upgrade any of the Wazuh components, you need to check the​ :ref:`Upgrade guide <upgrade_guide>`. There you can find information about the upgrade process of the Wazuh server, Open Distro for Elasticsearch, Elastic Stack, and the Wazuh agents. 
 
 In addition, you can check the :ref:`compatibility matrix <compatibility_matrix>` section if you have any doubt about operating system compatibility, as well as the compatibility between the different Wazuh components.
 
