@@ -5,18 +5,18 @@
 
 .. _wazuh_dashboard_unattended_installation:
 
-Installing Kibana in unattended mode
-====================================
+Installing the Wazuh dashboard in unattended mode
+=================================================
 
-Kibana is a flexible and intuitive web interface for mining and visualizing the events and archives.
+The Wazuh dashboard is a flexible and intuitive web interface for mining and visualizing the events and archives.
 
-Install Kibana
---------------
+Install the Wazuh dashboard
+---------------------------
 
-You can install and configure Kibana using an automated script. 
+You can install and configure the Wazuh dashboard using an automated script. 
 
 
-#. Download the script. Skip this step if you are installing Kibana on the same server as Elasticsearch. 
+#. Download the script. Skip this step if you are installing the Wazuh dashboard on the same server as the Wazuh indexer. 
 
     .. code-block:: console
 
@@ -61,7 +61,7 @@ You can install and configure Kibana using an automated script.
      - **Password**: *<wazuh_password>*
   
 
-    When you access Kibana for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or, for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser. Alternatively, a certificate from a trusted authority can be configured. 
+    When you access the Wazuh dashboard for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or, for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser. Alternatively, a certificate from a trusted authority can be configured. 
 
 
 Next steps
