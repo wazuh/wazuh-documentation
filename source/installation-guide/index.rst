@@ -41,13 +41,13 @@ With this deployment, you install and configure all the Wazuh central components
 Distributed deployment
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Following this process, you can install and configure the Wazuh central components on separate hosts. The Wazuh dashboard can be installed either on the same server of the Wazuh indexer node or a separate one.
+Following this process, you can install and configure the Wazuh central components on separate hosts. The Wazuh dashboard can be installed either on the same server of the Wazuh indexer node or a separate one. The Wazuh dashboard is not installed in a cluster mode because this component doesn't require to be escalated.
 
 The Wazuh server and the Wazuh indexer can each be installed as a single-node or multi-node cluster depending on the environment needs. This type of deployment provides high availability and scalability of the product, and it is convenient for large working environments.
 
 Small Wazuh deployments, which do not require processing large amounts of data, can easily be handled by a single-node cluster. Multi-node clusters are recommended when there is a large number of monitored endpoints, when a large volume of data is anticipated, or when high availability is required.
 
-The Wazuh dashboard is not installed in a cluster mode because this component doesn't require to be escalated. 
+In the table below, you can see the single-node or multi-node clusters available for a distributed deployment:
 
 ===============================    ====================    ================
 Component                          Cluster type            Description
