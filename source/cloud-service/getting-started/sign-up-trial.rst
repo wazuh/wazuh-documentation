@@ -17,7 +17,7 @@ To sign up for a free trial, all you need is an email address:
 
 #. Go to our `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_ page.
 
-#. Enter your email address and password, or sign up with a Google account.
+#. Enter your email address and password.
 
 Now you are ready to create your first :ref:`environment <cloud_glossary_environment>`.
 
@@ -39,6 +39,10 @@ Follow these steps to quickly set up and run your environment:
    #. Select the :ref:`region <cloud_glossary_region>` where your environment gets hosted. If you are not sure what to pick, select one that is the closest to your location since this typically reduces latency for indexing and search requests.
 
    #. Choose the support plan that best suits your needs. 
+
+   #. Complete your user profile. This step is only shown when there is missing information on your profile. 
+   
+      To edit your user profile information, see the :ref:`Edit user settings <cloud_user_settings>` section.
 
 #. Click **View the summary** and then **Create** to build your environment. This process might take a moment.
 

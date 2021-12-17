@@ -18,7 +18,7 @@ Index
    installation-guide/index
    upgrade-guide/index
    user-manual/index
-   cloud-service/index
+   Wazuh cloud service <cloud-service/index>
    development/index
    containers
    deployment
@@ -26,6 +26,7 @@ Index
    monitoring
    migrating-from-ossec/index
    learning-wazuh/index
+   proof-of-concept-guide/index
    release-notes/index
    
    style-guide/index

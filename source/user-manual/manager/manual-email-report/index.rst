@@ -214,4 +214,4 @@ This configuration will send an email every time rule 502 is triggered regardles
    :hidden:
    :maxdepth: 1
 
-   smtp_authentication
+   smtp-authentication

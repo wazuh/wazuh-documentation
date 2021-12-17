@@ -37,4 +37,4 @@ You can choose between unattended installation, an automated way of installing W
     :glob:
 
     unattended-installation
-    all_in_one
+    all-in-one

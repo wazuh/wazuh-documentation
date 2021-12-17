@@ -35,7 +35,7 @@ is_latest_release = True
 # The full version, including alpha/beta/rc tags
 # Important: use a valid branch (4.0) or, preferably, tag name (v4.0.0)
 release = '4.2'
-api_tag = 'v4.2.4'
+api_tag = 'v4.2.5'
 apiURL = 'https://raw.githubusercontent.com/wazuh/wazuh/'+api_tag+'/api/api/spec/spec.yaml'
 
 # -- General configuration ------------------------------------------------
@@ -387,6 +387,7 @@ def minification(current_path):
         ['accordions','css'],
         ['version-selector','js'],
         ['redirects','js'],
+        ['release-note-redirect','js'],
         ['style','js'],
         ['custom-redoc','js'],
         ['accordion', 'js']
@@ -444,15 +445,15 @@ def customReplacements(app, docname, source):
 
 custom_replacements = {
     "|CURRENT_MAJOR|" : "4.x",
-    "|WAZUH_LATEST|" : "4.2.4",
+    "|WAZUH_LATEST|" : "4.2.5",
     "|WAZUH_LATEST_MINOR|" : "4.2",
     "|WAZUH_PACKAGES_BRANCH|" : "4.2",
-    "|WAZUH_LATEST_ANSIBLE|" : "4.2.4",
-    "|WAZUH_LATEST_KUBERNETES|" : "4.2.4",
-    "|WAZUH_LATEST_PUPPET|" : "4.2.4",
-    "|WAZUH_LATEST_OVA|" : "4.2.4",
-    "|WAZUH_LATEST_AMI|" : "4.2.4",
-    "|WAZUH_LATEST_DOCKER|" : "4.2.4",
+    "|WAZUH_LATEST_ANSIBLE|" : "4.2.5",
+    "|WAZUH_LATEST_KUBERNETES|" : "4.2.5",
+    "|WAZUH_LATEST_PUPPET|" : "4.2.5",
+    "|WAZUH_LATEST_OVA|" : "4.2.5",
+    "|WAZUH_LATEST_AMI|" : "4.2.5",
+    "|WAZUH_LATEST_DOCKER|" : "4.2.5",
     "|OPEN_DISTRO_LATEST|" : "1.13.2",
     "|ELASTICSEARCH_LATEST|" : "7.10.2",
     "|ELASTICSEARCH_LATEST_OVA|" : "7.10.2",
@@ -467,7 +468,7 @@ custom_replacements = {
     "|OPENDISTRO_LATEST_KUBERNETES|" : "1.13.2",
     "|DOCKER_COMPOSE_VERSION|" : "1.28.3",
     "|SPLUNK_LATEST|" : "8.2.2",
-    "|WAZUH_SPLUNK_LATEST|" : "4.2.4",
+    "|WAZUH_SPLUNK_LATEST|" : "4.2.5",
     "|ELASTIC_6_LATEST|" : "6.8.8",
     "|WAZUH_REVISION_YUM_AGENT_I386|" : "1",
     "|WAZUH_REVISION_YUM_MANAGER_I386|" : "1",
@@ -504,7 +505,7 @@ custom_replacements = {
     "|DEB_MANAGER|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-manager/wazuh-manager",
     "|DEB_API|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-api/wazuh-api",
     # Variables for Elastic's Elasticsearch
-    "|ELASTICSEARCH_ELK_LATEST|" : "7.12.1",
+    "|ELASTICSEARCH_ELK_LATEST|" : "7.14.2",
     "|ELASTICSEARCH_ELK_LATEST_ANSIBLE|" : "7.10.2",
     "|ELASTICSEARCH_ELK_LATEST_KUBERNETES|" : "7.10.2",
     "|ELASTICSEARCH_ELK_LATEST_PUPPET|" : "7.10.2",
@@ -518,6 +519,9 @@ compilation_time = str(time.time())
 def setup(app):
 
     current_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), theme_assets_path)
+    
+    if not os.path.exists(app.srcdir + '/' + html_static_path[0] + '/'):
+        os.mkdir(app.srcdir + '/' + html_static_path[0] + '/')
     
     if html_theme == 'wazuh_doc_theme_v3':
         # CSS files
@@ -556,6 +560,8 @@ def setup(app):
             os.path.join(current_path, "js-src/accordion.js")).st_mtime)
         app.add_js_file("js/dist/redirects.min.js?ver=%s" % os.stat(
             os.path.join(current_path, "js-src/redirects.js")).st_mtime)
+        app.add_js_file("js/dist/release-note-redirect.min.js?ver=%s" % os.stat(
+            os.path.join(current_path, "js-src/release-note-redirect.js")).st_mtime)
 
     app.add_config_value('custom_replacements', {}, True)
     app.connect('source-read', customReplacements)
