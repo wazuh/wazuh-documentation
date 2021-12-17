@@ -14,7 +14,7 @@ Wazuh is a free and open source security platform that unifies XDR and SIEM capa
 The Wazuh server and the Wazuh agent abide by the `GNU General Public License, version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_ and the Wazuh indexer and the Wazuh dashboard by the `Apache License 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_. These make sure the software is free for all its users and that they do not have to worry about infringing any patents by using it. 
 
 
-With this installation guide, you will learn how to install in your system each central component on the same server, as an all-in-one deployment, or on different servers as a distributed deployment. Alternatively, Wazuh also offers Wazuh Cloud, our software as a service (SaaS) solution, where installing and updating the Wazuh components is all handled by Wazuh Cloud.
+With this installation guide, you will learn how to install in your system each central component on the same server, as an all-in-one deployment, or on different servers as a distributed deployment. Alternatively, Wazuh also offers Wazuh Cloud, our software as a service (SaaS) solution.
 
 Installing Wazuh in your infrastructure
 ---------------------------------------
@@ -30,6 +30,8 @@ This is the installation workflow you need to follow to install the Wazuh centra
   :title: Wazuh installation workflow
   :align: center
   :width: 100%
+
+This installation guide provides instructions for you to install each Wazuh central component in unattended mode or following a step-by-step installation. 
 
 All-in-one deployment
 ^^^^^^^^^^^^^^^^^^^^^
@@ -96,17 +98,16 @@ For information about the different deployment types, check the :ref:`Deployment
 Wazuh Cloud
 -----------
 
-Wazuh offers `Wazuh Cloud <https://wazuh.com/cloud/>`_, our software as a service (SaaS) solution. This means that instead of installing and maintaining software, you simply access it via the Internet. This service provides a highly flexible infrastructure to match your enterprise needs. With Wazuh Cloud, no dedicated hardware is required, maintenance is done by the Wazuh team, and everything is ready to use.  
+Wazuh offers `Wazuh Cloud <https://wazuh.com/cloud/>`_, our software as a service (SaaS) solution. This means that instead of installing and maintaining software, you simply access it via the Wazuh Cloud Console, a web application to manage Wazuh where all processes are greatly simplified. This service provides a highly flexible infrastructure to match your enterprise needs. With Wazuh Cloud, no dedicated hardware is required, the Wazuh components maintenance is done by the Wazuh team, and everything is ready to use. 
 
-
-The Wazuh Cloud service also includes the Wazuh Cloud Console, a web application to manage Wazuh where all processes are greatly simplified. Installing and updating the Wazuh components and defining scalability is all handled by the Wazuh Cloud. Wazuh provides a :ref:`14-day free trial <cloud_sign_up>` for you to create a cloud environment and explore the Wazuh Cloud service.
+To get the most out of the Wazuh Cloud service, we provide a `14-day free trial <https://console.cloud.wazuh.com/sign-up?landing=trial>`_ for you to create a cloud environment, a deployment that contains all the Wazuh components ready to be used.
 
 Upgrade instructions
 --------------------
 
 To upgrade any of the Wazuh components, you need to check the​ :ref:`Upgrade guide <upgrade_guide>`. There you can find information about the upgrade process of the Wazuh server, Open Distro for Elasticsearch, Elastic Stack, and the Wazuh agents. 
 
-In addition, you can check the :ref:`compatibility matrix <compatibility_matrix>` section if you have any doubt about operating system compatibility as well as the compatibility between the different Wazuh components.
+In addition, you can check the :ref:`compatibility matrix <compatibility_matrix>` section for information on operating system compatibility.
 
 
 Wazuh agent deployment
