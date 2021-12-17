@@ -46,12 +46,13 @@ header {
   flex-direction: row;
   height: $redocHeaderHeight;
   width: calc(#{$leftRedocSidebarWidth} + (100% - #{$leftRedocSidebarWidth}) * .6);
-  pointer-events: none;
   z-index: 100;
   .header-left {
     width: $leftRedocSidebarWidth;
     padding: 7px 24px;
     pointer-events: all;
+    position: relative;
+    z-index: 20;
     
     .navbar-brand {
       justify-content: flex-start;
@@ -70,9 +71,6 @@ header {
     padding-bottom: 15px;
     margin-left: 40px;
     border-bottom: 1px solid;
-    #version-selector {
-      pointer-events: all;
-    }
   }
 }
 #footer-redoc {
@@ -89,6 +87,47 @@ header {
     a {
       color: $light_ColorShadedText;
       text-decoration: none;
+    }
+  }
+}
+
+.no-latest-notice-wrapper {
+  padding-left: 0;
+  padding-right: 0;
+  position: fixed;
+  margin: 0;
+  left: 0;
+  top: 0;
+  z-index: 10;
+  right: 0;
+  
+  .no-latest-notice {
+    padding: 0 40px;
+    margin-left: $leftRedocSidebarWidth;
+    
+    .no-latest-title {
+      display: inline-block;
+      position: relative;
+      font-weight: 700;
+      padding: 4px 10px 4px 38px;
+      line-height: 32px;
+      
+      &::after {
+        vertical-align: middle;
+        content: '';
+        display: inline-block;
+        width: 1.75rem;
+        height: 1.75rem;
+        position: absolute;
+        left: 0;
+        top: 6px;
+        background: url('#{$icoPath}svg-icons.svg#circle-exclamation-orange');
+      }
+    }
+    
+    .no-latest-text-wrapper {
+      display: inline-block;
+      padding: 0 0.5em 0 0;
     }
   }
 }
@@ -585,6 +624,15 @@ redoc[spec-url] .beRszf {
 
 body {
   color: $light_ColorMainText;
+  .no-latest-notice-wrapper {
+    background-color: $light_ColorBaseSpace;
+    .no-latest-notice {
+      background-color: rgba($light_ColorWarning, 0.1);
+     .no-latest-title {
+        color: $light_ColorWarningDark;
+      }
+    }
+  }
   .loading {
     redoc {
       div {
@@ -928,6 +976,15 @@ body {
 
 .dark-theme {
   color: $dark_ColorMainText;
+  .no-latest-notice-wrapper {
+    background-color: $dark_ColorBaseSpace;
+    .no-latest-notice {
+      background-color: rgba($dark_ColorWarning, 0.1);
+      .no-latest-title {
+        color: $dark_ColorWarning;
+      }
+    }
+  }
   .loading {
     redoc {
       div {

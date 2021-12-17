@@ -202,9 +202,17 @@
   </head>
 
   {%- if pagename in special_pages -%}
-  {%- set body_class = pagename -%}
+    {%- if 'api' in pagename and '/reference' in pagename -%}
+      {%- set body_class = 'api-reference' -%}
+    {%- else -%}
+      {%- set body_class = pagename -%}
+    {% endif -%}
   {%- else -%}
   {%- set body_class = 'document' -%}
+  {% endif -%}
+  
+  {%- if not is_latest_release %}
+    {%- set body_class = body_class + ' no-latest-docs' -%}
   {% endif -%}
 
   <body class="{{ body_class }}" data-spy="scroll" data-target="#local-toc" data-offset="200">

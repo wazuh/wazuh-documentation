@@ -23,7 +23,6 @@ const pageSpecificJS = {
     SRC_PATH + "components/accordions.js",
     SRC_PATH + "components/doctools.js",
     SRC_PATH + "components/version-selector.js",
-    SRC_PATH + "components/search-box.js",
     SRC_PATH + "components/global-toc.js",
     SRC_PATH + "components/local-toc.js",
     SRC_PATH + "components/code-blocks.js",
@@ -37,7 +36,6 @@ const pageSpecificJS = {
   "search-results": [
     SRC_PATH + "components/doctools.js",
     SRC_PATH + "components/version-selector.js",
-    SRC_PATH + "components/search-box.js",
     SRC_PATH + "components/global-toc.js",
     SRC_PATH + "components/sphinx-search/language_data.js",
     SRC_PATH + "components/sphinx-search/searchtools.js",
@@ -47,7 +45,6 @@ const pageSpecificJS = {
   "not-found": [
     SRC_PATH + "components/doctools.js",
     SRC_PATH + "components/version-selector.js",
-    SRC_PATH + "components/search-box.js",
     SRC_PATH + "components/global-toc.js"
     // + JS files only for page "Not found"
   ],

@@ -19,18 +19,7 @@
       {%- block main_column -%}
       <div id="central-column">
         {%- block latest %}
-          {%- set nav_version = version %}
-          {% if current_version %}
-            {%- set nav_version = current_version %}
-          {% endif %}
-          {% if nav_version and not is_latest_release %}
-          <div class="no-latest-notice-wrapper">
-            <div class="no-latest-notice">
-              <div class="no-latest-icon-wrapper"><i class="fas fa-exclamation-triangle"></i></div>
-              <div class="no-latest-text-wrapper"><span class="font-weight-bold d-none d-sm-inline-block">Warning:</span> This is the documentation for Wazuh {{ nav_version }}. Check out the docs for <a class="link-latest" href="#">the latest version of Wazuh</a>!</div>
-            </div>
-          </div>
-          {% endif %}
+          {% include "template-parts/no-latest-notice.html" %}
         {% endblock latest %}
 
         {% if pagename not in special_pages %}

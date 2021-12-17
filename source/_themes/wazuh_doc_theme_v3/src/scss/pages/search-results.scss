@@ -11,7 +11,9 @@
 @import "../parts/left-sidebar";
 @import "../parts/central-column";
 @import "../parts/right-sidebar";
+
 @import "../components/breadcrumbs";
+@import "../components/version-notice";
 
 main {
   padding-top: 10px;

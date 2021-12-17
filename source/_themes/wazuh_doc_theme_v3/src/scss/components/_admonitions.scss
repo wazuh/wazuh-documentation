@@ -169,7 +169,7 @@ body {
 
 .dark-theme {
   #central-column .admonition {
-    background-color: $dark_ColorCodeBlockBackground;
+    background-color: $dark_ColorAdmonitionBackground;
     border-color: $dark_ColorShadedText;
     color: $dark_ColorMainText;
     .admonition-title {
