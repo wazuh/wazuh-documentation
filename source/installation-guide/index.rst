@@ -9,7 +9,9 @@
 Installation guide
 ==================
 
-In this section of our documentation, you will learn how to install Wazuh in your local infrastructure, having the option to install the central components in the same server with an all-in-one deployment or on different servers as a distributed deployment. 
+In this section of our documentation, you will learn how to install Wazuh in your infrastructure, having the option to install the central components in the same server with an all-in-one deployment or on different servers as a distributed deployment. 
+
+You can install Wazuh to protects workloads across on-premises, virtualized, containerized and cloud-based environments. Alternatively, you can use our Cloud solution that delivers like software as a service (or SaaS) where no dedicated hardware is required, and everything is ready to use.
 
 The Wazuh solution is based on three central components and the Wazuh agent. The :ref:`Wazuh server <wazuh_server_installation>`, the :ref:`Wazuh indexer <wazuh_indexer_installation>`, and the :ref:`Wazuh dashboard <wazuh_dashboard_installation>` are the three central components in charge of analyzing, processing, and storing the data. The :ref:`Wazuh agent <installation_agents>` is a single and lightweight monitoring software deployed on the monitored endpoints to provide prevention, detection, and response capabilities.
 
@@ -20,12 +22,10 @@ Wazuh is a free and open source security platform that unifies XDR and SIEM capa
 You have the option of using the :ref:`Wazuh quickstart guide <quickstart>` for a quick and unattended installation. It will help you deploy Wazuh as an all-in-one, running all the central components in the same system.
 
 
-Installing Wazuh in a local infrastructure
+Installing Wazuh in your infrastructure
 ------------------------------------------
 
-You can install Wazuh locally on your organization's computers and servers as on-premise software. Alternatively, you can use our Cloud solution delivered like software as a service (or SaaS) where no dedicated hardware is required, and everything is ready to use.
-
-For deploying Wazuh locally, you can choose between two different options. All Wazuh central components are installed on the same host with an **all-in-one deployment**. On the other hand, each component is installed on a separate host as a single-node or multi-node cluster with a **distributed deployment**.
+For deploying Wazuh in your infrastructure, you can choose between two different options. All Wazuh central components are installed on the same host with an **all-in-one deployment**. On the other hand, each component is installed on a separate host as a single-node or multi-node cluster with a **distributed deployment**.
 
 
 All-in-one deployment
