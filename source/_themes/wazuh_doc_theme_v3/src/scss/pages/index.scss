@@ -245,9 +245,9 @@ body {
   [href$="monitoring.html"]::before {
     background-image: url('#{$icoPath}index-icons.svg#monitoring-lt');
   }
-  /* Learning Wazuh */
-  [href$="learning-wazuh/index.html"]::before {
-    background-image: url('#{$icoPath}index-icons.svg#learning-lt');
+  /* Proof of Concept guide */
+  [href$="proof-of-concept-guide/index.html"]::before {
+    background-image: url('#{$icoPath}index-icons.svg#poc-guide-lt');
   }
   /* Release notes */
   [href$="release-notes/index.html"]::before {
@@ -331,9 +331,9 @@ body {
   [href$="monitoring.html"]::before {
     background-image: url('#{$icoPath}index-icons.svg#monitoring-dt');
   }
-  /* Learning Wazuh */
-  [href$="learning-wazuh/index.html"]::before {
-    background-image: url('#{$icoPath}index-icons.svg#learning-dt');
+  /* Proof of Concept guide */
+  [href$="proof-of-concept-guide/index.html"]::before {
+    background-image: url('#{$icoPath}index-icons.svg#poc-guide-dt');
   }
   /* Release notes */
   [href$="release-notes/index.html"]::before {

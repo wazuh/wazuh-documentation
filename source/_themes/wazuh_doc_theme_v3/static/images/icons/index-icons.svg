@@ -15,7 +15,7 @@
     .user-manual-01-lt{fill:none;stroke:#256BD1;stroke-miterlimit:10;stroke-width:2.5}
     .user-manual-01-dt{fill:none;stroke:#499CFE;stroke-miterlimit:10;stroke-width:2.5}
     .cloud-service-01-lt{fill:none;stroke:#000000;stroke-miterlimit:10;stroke-width:2}
-    .learning-01-lt{fill-rule:evenodd;clip-rule:evenodd;fill:none;stroke:#000000;stroke-miterlimit:10;stroke-width:2}
+    .poc-guide-01-lt{fill-rule:evenodd;clip-rule:evenodd;fill:none;stroke:#000000;stroke-miterlimit:10;stroke-width:2}
     .monitoring-01-lt{fill:none;stroke:#050505;stroke-miterlimit:10;stroke-width:1}
     .monitoring-01-dt{fill:none;stroke:#FFFFFF;stroke-miterlimit:10;stroke-width:1}
     .monitoring-02-lt{fill:none;stroke:#050505;stroke-width:1.5;stroke-miterlimit:10;}
@@ -41,8 +41,8 @@
   <view id="compliance-dt" viewBox="1540 220 200 200"/>
   <view id="monitoring-lt" viewBox="1760 0 200 200"/>
   <view id="monitoring-dt" viewBox="1760 220 200 200"/>
-  <view id="learning-lt" viewBox="1980 0 200 200"/>
-  <view id="learning-dt" viewBox="1980 220 200 200"/>
+  <view id="poc-guide-lt" viewBox="1980 0 200 200"/>
+  <view id="poc-guide-dt" viewBox="1980 220 200 200"/>
   <view id="release-notes-lt" viewBox="2200 0 200 200"/>
   <view id="release-notes-dt" viewBox="2200 220 200 200"/>
   <g>
@@ -308,12 +308,12 @@
     <ellipse class="getting-started-03-dt" cx="98.612" cy="64.975" rx="32.371" ry="33.145"/>
   </g>
   <g transform="translate(1980, 0)">
-    <rect x="83.901" y="152.527" class="learning-01-lt" width="32.198" height="9.548"/>
-    <rect x="88.601" y="166.442" class="learning-01-lt" width="22.798" height="7.087"/>
+    <rect x="83.901" y="152.527" class="poc-guide-01-lt" width="32.198" height="9.548"/>
+    <rect x="88.601" y="166.442" class="poc-guide-01-lt" width="22.798" height="7.087"/>
     <line class="installation-guide-01-lt" x1="100" y1="26.471" x2="100" y2="37.262"/>
     <line class="installation-guide-01-lt" x1="65.851" y1="39.303" x2="73.559" y2="47.011"/>
     <line class="installation-guide-01-lt" x1="134.149" y1="39.303" x2="126.441" y2="47.011"/>
-    <path class="learning-01-lt" d="M149.962,96.879c0,26.988-22.369,48.867-49.962,48.867c-27.593,0-49.962-21.879-49.962-48.867"/>
+    <path class="poc-guide-01-lt" d="M149.962,96.879c0,26.988-22.369,48.867-49.962,48.867c-27.593,0-49.962-21.879-49.962-48.867"/>
     <path class="getting-started-03-lt" d="M50.038,98.041c0-26.988,22.369-48.867,49.962-48.867c27.593,0,49.962,21.879,49.962,48.867"/>
   </g>
   <g transform="translate(1980, 220)">
