@@ -11,7 +11,7 @@ Installation guide
 
 In this section of our documentation, you will learn how to install Wazuh in your local infrastructure, having the option to install all its central components in the same server with an all-in-one deployment or on different servers as a distributed deployment. 
 
-The Wazuh solution is based on three central components and the Wazuh agent. The :ref:`Wazuh server <wazuh_server_installation>`, the :ref:`Wazuh indexer <wazuh_indexer_installation>`, and the :ref:`Wazuh dashboard <wazuh_dashboard_installation>`. are the three central components in charge of analyzing, processing, and storing the data. Complementary, the :ref:`Wazuh agent <wazuh_installation_agents>` is a single and lightweight monitoring software deployed on the monitored endpoints to provide prevention, detection, and response capabilities.
+The Wazuh solution is based on three central components and the Wazuh agent. The :ref:`Wazuh server <wazuh_server_installation>`, the :ref:`Wazuh indexer <wazuh_indexer_installation>`, and the :ref:`Wazuh dashboard <wazuh_dashboard_installation>` are the three central components in charge of analyzing, processing, and storing the data. Complementary, the :ref:`Wazuh agent <installation_agents>` is a single and lightweight monitoring software deployed on the monitored endpoints to provide prevention, detection, and response capabilities.
 
 The Wazuh server and the Wazuh indexer can each be installed as a single-node or multi-node cluster. If you are new to Wazuh and want to learn more about its components, architecture, and capabilities, you can check the :ref:`Getting started <getting_started>` section.  
 
