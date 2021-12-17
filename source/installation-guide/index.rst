@@ -13,7 +13,6 @@ Wazuh is a free and open source security platform that unifies XDR and SIEM capa
 
 The Wazuh server and the Wazuh agent abide by the `GNU General Public License, version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_ and the Wazuh indexer and the Wazuh dashboard by the `Apache License 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_. These make sure the software is free for all its users and that they do not have to worry about infringing any patents by using it. 
 
-
 With this installation guide, you will learn how to install in your system each central component on the same server, as an all-in-one deployment, or on different servers as a distributed deployment. Alternatively, Wazuh also offers Wazuh Cloud, our software as a service (SaaS) solution.
 
 Installing Wazuh in your infrastructure
@@ -48,28 +47,9 @@ Distributed deployment
 
 This type of deployment provides high availability and scalability of the product, and it is convenient for large working environments. Following a distributed deployment process, you can install and configure the Wazuh central components on separate hosts. 
 
-The Wazuh indexer and the Wazuh server can each be installed as a single-node or multi-node cluster depending on the environment needs. Small Wazuh deployments, which do not require processing large amounts of data, can easily be handled by a single-node cluster. Multi-node clusters are recommended when there is a large number of monitored endpoints, when a large volume of data is anticipated, or when high availability is required. 
+The Wazuh indexer and the Wazuh server can each be installed as a single-node or multi-node cluster. Small Wazuh deployments, which do not require processing large amounts of data, can easily be handled by a single-node cluster. Multi-node clusters are recommended when there is a large number of monitored endpoints, when a large volume of data is anticipated, or when high availability is required. 
 
 The Wazuh dashboard can be installed either on the same server of the Wazuh indexer node or a separate one. This component is not installed in cluster mode because it doesn't require to be escalated. 
-
-
-==============================================================    =============
-Wazuh indexer                                                     Description
-==============================================================    =============
-Single-node cluster                                               The Wazuh indexer cluster is installed on one host with the single-node installation method. This approach requires few resources, does not demand a network load balancer, and is easier to maintain.
-
-Multi-node cluster                                                With the multi-node installation method, several Wazuh indexers are installers on different nodes that communicate among them. A multi-node cluster provides high availability, scalability, and load balancing for data indexing and searching.
-==============================================================    =============
-
-==============================================================    =============
-Wazuh server                                                      Description
-==============================================================    =============
-Single-node cluster                                               The Wazuh server single-node installation is performed on one host. This method is easy to maintain, requires few resources, and does not require a network load balancer.
-
-Multi-node cluster                                                The multi-node installation process involves installing several Wazuh servers on different nodes that communicate among them. This kind of installation provides high availability and requires a network load balancer.
-==============================================================    =============
-
-
 
 The diagram below represents a Wazuh deployment architecture. It shows the solution components and how the Wazuh server and the Wazuh indexer can be configured as a cluster, providing load balancing and high availability.
 
