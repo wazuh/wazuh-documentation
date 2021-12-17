@@ -24,14 +24,14 @@ For deploying Wazuh on-premises, you can choose between two different options:
 - All-in-one deployment: all Wazuh central components are installed on the same host.
 - Distributed deployment: each component is installed on a separate host as a single-node or multi-node cluster.
 
-This is the installation workflow you need to follow to install the Wazuh central components. 
+This installation guide provides instructions for you to install each Wazuh central component in unattended mode or following a step-by-step installation. 
+
+This is the installation workflow you need to follow:
 
 .. thumbnail:: ../images/installation/Wazuh-Installation-workflow.png
   :title: Wazuh installation workflow
   :align: center
   :width: 100%
-
-This installation guide provides instructions for you to install each Wazuh central component in unattended mode or following a step-by-step installation. 
 
 All-in-one deployment
 ^^^^^^^^^^^^^^^^^^^^^
@@ -105,7 +105,7 @@ To get the most out of the Wazuh Cloud service, we provide a `14-day free trial 
 Upgrade instructions
 --------------------
 
-To upgrade any of the Wazuh components, you need to check the​ :ref:`Upgrade guide <upgrade_guide>`. There you can find information about the upgrade process of the Wazuh server, Open Distro for Elasticsearch, Elastic Stack, and the Wazuh agents. 
+To upgrade any of the Wazuh components, you need to check the​ :ref:`Upgrade guide <upgrade_guide>`. There you can find information about the upgrade process of the Wazuh server, the Wazuh agents and how to upgrade from a legacy version. 
 
 In addition, you can check the :ref:`compatibility matrix <compatibility_matrix>` section for information on operating system compatibility.
 
