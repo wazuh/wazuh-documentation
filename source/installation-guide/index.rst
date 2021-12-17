@@ -98,14 +98,12 @@ Wazuh Cloud
 
 Wazuh offers `Wazuh Cloud <https://wazuh.com/cloud/>`_, our software as a service (SaaS) solution. This means that instead of installing and maintaining software, you simply access it via the Wazuh Cloud Console, a web application to manage Wazuh where all processes are greatly simplified. This service provides a highly flexible infrastructure to match your enterprise needs. With Wazuh Cloud, no dedicated hardware is required, the Wazuh components maintenance is done by the Wazuh team, and everything is ready to use. 
 
-To get the most out of the Wazuh Cloud service, we provide a `14-day free trial <https://console.cloud.wazuh.com/sign-up?landing=trial>`_ for you to create a cloud environment, a deployment that contains all the Wazuh components ready to be used.
+We provide a `14-day free trial <https://console.cloud.wazuh.com/sign-up?landing=trial>`_ for you to create a cloud environment, a deployment that contains all the Wazuh components ready to be used.
 
 Upgrade instructions
 --------------------
 
-To upgrade any of the Wazuh components, you need to check the​ :ref:`Upgrade guide <upgrade_guide>`. There you can find information about the upgrade process of the Wazuh server, the Wazuh agents and how to upgrade from a legacy version. 
-
-In addition, you can check the :ref:`compatibility matrix <compatibility_matrix>` section for information on operating system compatibility.
+To upgrade the Wazuh components, you can go to the​ :ref:`Upgrade guide <upgrade_guide>`. In addition, you can check the :ref:`compatibility matrix <compatibility_matrix>` section for information on operating system compatibility.
 
 
 Wazuh agent deployment
