@@ -97,7 +97,7 @@ Within the Wazuh Cloud all components are hosted on our PCI-DSS, and SOC 2 Type 
 Upgrade instructions
 --------------------
 
-To upgrade any of the Wazuh components, you need to check the​ :ref:`Upgrade guide <upgrade_guide>`. There you can find information about the upgrade process of the Wazuh server, Open Distro for Elasticsearch, Elastic Stack, and the Wazuh agents. 
+To upgrade any of the Wazuh components, you need to check the​ :ref:`Upgrade guide <upgrade_guide>`. There you can find information about the upgrade process of the Wazuh central components and the Wazuh agent. 
 
 In addition, you can check the :ref:`compatibility matrix <compatibility_matrix>` section if you have any doubt about operating system compatibility, as well as the compatibility between the different Wazuh components.
 
