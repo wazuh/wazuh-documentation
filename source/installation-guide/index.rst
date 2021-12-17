@@ -11,7 +11,7 @@ Installation guide
 
 In this section of our documentation, you will learn how to install Wazuh in your local infrastructure, having the option to install all its central components in the same server with an all-in-one deployment or on different servers as a distributed deployment. 
 
-The Wazuh solution is based on three central components and the Wazuh agent. The :ref:`Wazuh server <wazuh_server_installation>`, the :ref:`Wazuh indexer <wazuh_indexer_installation>`, and the :ref:`Wazuh dashboard <wazuh_dashboard_installation>`. are the three central components in charge of analyzing, processing, and storing the data. The :ref:`Wazuh agent <wazuh_installation_agents>` is a single and lightweight monitoring software deployed on the monitored endpoints to provide prevention, detection, and response capabilities.
+The Wazuh solution is based on three central components and the Wazuh agent. The :ref:`Wazuh server <wazuh_server_installation>`, the :ref:`Wazuh indexer <wazuh_indexer_installation>`, and the :ref:`Wazuh dashboard <wazuh_dashboard_installation>`. are the three central components in charge of analyzing, processing, and storing the data. Complementary, the :ref:`Wazuh agent <wazuh_installation_agents>` is a single and lightweight monitoring software deployed on the monitored endpoints to provide prevention, detection, and response capabilities.
 
 The Wazuh server and the Wazuh indexer can each be installed as a single-node or multi-node cluster. If you are new to Wazuh and want to learn more about its components, architecture, and capabilities, you can check the :ref:`Getting started <getting_started>` section.  
 
@@ -23,7 +23,7 @@ You also have the option of using the :ref:`Wazuh quickstart guide <quickstart>`
 Installing Wazuh in a local infrastructure
 ------------------------------------------
 
-You can install Wazuh locally on your business’ computers and servers as on-premise software. Alternatively, you can use our Cloud solution delivered as a service (SaaS) where no dedicated hardware is required, and everything is ready to use.
+You can install Wazuh locally on your organization computers and servers as on-premise software. Alternatively, you can use our Cloud solution delivered as a service (SaaS) where no dedicated hardware is required, and everything is ready to use.
 
 For deploying Wazuh locally, you can choose between two different options. All Wazuh central components are installed on the same host with an **all-in-one deployment**. On the other hand, each component is installed on a separate host as a single-node or multi-node cluster with a **distributed deployment**.
 
@@ -89,9 +89,9 @@ For information about the different deployment types, check the :ref:`Deployment
 Using Wazuh cloud
 -----------------
 
-`Wazuh Cloud <https://wazuh.com/cloud/>`_ hosts and manages all the Wazuh components in one integrated platform. This service offers a highly flexible infrastructure to match your enterprise needs. The setting up of the Wazuh Cloud environment is streamlined. With Wazuh cloud, no dedicated hardware is required, and everything is ready to use. 
+Wazuh offers the `Wazuh Cloud <https://wazuh.com/cloud/>`_ that hosts and manages all the Wazuh components in one integrated platform. This service offers a highly flexible infrastructure to match your enterprise needs. The setting up of the Wazuh Cloud environment is streamlined. With Wazuh cloud, no dedicated hardware is required, and everything is ready to use. 
 
-Wazuh offers the Wazuh Cloud, where all components are hosted on our PCI-DSS, and SOC 2 Type 2 certified SaaS solution, which is maintained by our team. Installing and updating the Wazuh components and defining scalability is all handled by the Wazuh Cloud. You can check our :ref:`Wazuh Cloud environment <cloud_your_environment>` section to learn how to create a cloud environment and explore the Wazuh Cloud services.
+Within the Wazuh Cloud all components are hosted on our PCI-DSS, and SOC 2 Type 2 certified SaaS solution, which is maintained by our team. Installing and updating the Wazuh components and defining scalability is all handled by the Wazuh Cloud. You can check our :ref:`Wazuh Cloud environment <cloud_your_environment>` section to learn how to create a cloud environment and explore the Wazuh Cloud services.
 
 
 Upgrade instructions
