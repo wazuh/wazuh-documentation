@@ -24,9 +24,7 @@ For deploying Wazuh on-premises, you can choose between two different options:
 - All-in-one deployment: all Wazuh central components are installed on the same host.
 - Distributed deployment: each component is installed on a separate host as a single-node or multi-node cluster.
 
-This installation guide provides instructions for you to install each Wazuh central component in unattended mode or following a step-by-step installation. 
-
-This is the installation workflow you need to follow:
+This installation guide provides instructions for you to install each Wazuh central component in unattended mode or following a step-by-step installation. When intalling, you will follow this standard installation workflow:
 
 .. thumbnail:: ../images/installation/Wazuh-Installation-workflow.png
   :title: Wazuh installation workflow
