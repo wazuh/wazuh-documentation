@@ -2,8 +2,8 @@
 
 .. _deployment:
 
-Deployment options
-==================
+Deployment alternatives
+=======================
 
 You can deploy Wazuh to your environments using multiple deployment options. These alternatives are complementary to the standard deployment types that you can find in the :ref:`Installation guide <installation_guide>`.
 
@@ -33,6 +33,13 @@ You can deploy Wazuh to your environments using multiple deployment options. The
 
 - :ref:`Installation from sources <installation_from_sources>`: Installing Wazuh from source means installing the Wazuh manager and agent without using a package manager. You compile the source code and copy the binaries to your computer instead.
 
+**Integrations:**
+
+- :ref:`Integration with Elastic Stack basic license <basic_installation_guide>`: As an alternative to Open Distro for Elasticsearch, you can install Wazuh using the Elastic Stack basic license option. It contains everything included in the open source version under the Apache 2.0 license, plus some additional capabilities such as Elastic Stack Security features, Kibana alerting, and others. According to your chosen configuration, Wazuh and Elastic Stack are installed on the same host, as an all-in-one deployment, on a separate host as a single-node or multi-node cluster.
+
+
+- :ref:`Integration with Splunk <installation_splunk>`: You install Wazuh along with Splunk Enterprise, including the Splunk forwarder and the Wazuh Splunk app. This can be done as a single instance or as a multi-instance cluster, depending on the size of your environment.
+
 
 .. toctree::
     :hidden:
@@ -46,3 +53,5 @@ You can deploy Wazuh to your environments using multiple deployment options. The
     deploying-with-puppet/index
     offline-installation
     wazuh-from-sources/index
+    elastic-stack/index
+    splunk/index
