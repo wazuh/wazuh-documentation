@@ -11,6 +11,14 @@ const newTabNodes = [
   'cloud-service/apis/reference',
 ];
 
+/* Open external links in a new tab ========================================= */
+
+$('a.reference.external').each(function() {
+  if ( $(this).attr('href').indexOf('documentation.wazuh.com') == -1 ) {
+    $(this).attr('target', '_blank').attr('rel', 'noreferrer noopener');
+  }
+});
+
 /* Helpful functions ======================================================== */
 
 /**
