@@ -24,9 +24,7 @@ Community and support
 How to install Wazuh
 --------------------
 
-The Wazuh solution is based on three central components and the Wazuh agent. The :ref:`Wazuh server <wazuh_server_installation>`, the :ref:`Wazuh indexer <wazuh_indexer_installation>`, and the :ref:`Wazuh dashboard <wazuh_dashboard_installation>` are the three central components in charge of analyzing, processing, and storing the data. 
-
-The :ref:`Wazuh agent <installation_agents>` is a single and lightweight monitoring software deployed on the monitored endpoints to provide prevention, detection, and response capabilities.
+The Wazuh solution is based on three central components and the Wazuh agent. The :ref:`Wazuh server <wazuh_server_installation>`, the :ref:`Wazuh indexer <wazuh_indexer_installation>`, and the :ref:`Wazuh dashboard <wazuh_dashboard_installation>` are the three central components in charge of analyzing, processing, and storing the data. The :ref:`Wazuh agent <installation_agents>` is a single and lightweight monitoring software deployed on the monitored endpoints to provide prevention, detection, and response capabilities.
 
 For deploying Wazuh in your infrastructure, you can choose between two different options. All Wazuh central components are installed on the same host with an **all-in-one deployment**. On the other hand, each component is installed on a separate host as a single-node or multi-node cluster with a **distributed deployment**.
 
@@ -44,7 +42,7 @@ Standard installation
 
 The Wazuh three central components are in charge of analyzing the data gathered by the Wazuh agents. Users are able to navigate through their security alerts thanks to the search engine and data visualization tool provided by the Wazuh solution.
 
-Each of the central component can be installed as a single-node or multi-node cluster and you can choose between two installation method. The **Unattended installation** method where you install each component by using a script that automates the installation process.Then the **Step-by-step installation** method where you install each component manually following detailed step-by-step instructions.
+Each of the central component can be installed as a single-node or multi-node cluster and you can choose between two installation method. The first method is the **Unattended installation**, where you install each component by using a script that automates the installation process.The second method is the **Step-by-step installation**, where you install each component manually following detailed step-by-step instructions.
 
 
 Wazuh Cloud
