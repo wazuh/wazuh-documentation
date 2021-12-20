@@ -10,7 +10,7 @@ Getting started with Wazuh
 
 Wazuh is a free and open source platform used for threat prevention, detection, and response. It protects workloads across on-premises, virtualized, containerized, and cloud-based environments. Wazuh is widely used by thousands of organizations around the world, from small businesses to large enterprises.
 
-Wazuh solution consists of an :ref:`endpoint security agent <wazuh_agent>`, deployed to the monitored systems, and a :ref:`management server <wazuh_server>`, which collects and analyzes data gathered by the agents. Moreover, Wazuh provides a search engine and data visualization tool that allows users to navigate through their security alerts.
+Wazuh solution consists of an :ref:`endpoint security agent <wazuh_agent>` deployed to the monitored systems and a :ref:`management server <wazuh_server>`, which collects and analyzes data gathered by the agents. Moreover, Wazuh provides a search engine and data visualization tool that allows users to navigate through their security alerts.
 
 You can also use our software as a service (SaaS), `Wazuh Cloud <https://wazuh.com/cloud/>`_ solution, where no dedicated hardware is required, and everything is ready to use.
 
@@ -32,7 +32,7 @@ For deploying Wazuh in your infrastructure, you can choose between two different
 Quickstart
 ^^^^^^^^^^
 
-The :ref:`Wazuh quickstart <quickstart>` allows you to easily install all the central components on the same host using the unattended installation script. By running the automated script, you install and configure the Wazuh in just a few minutes.
+The :ref:`Wazuh quickstart <quickstart>` lets you install all the central components on the same host using the unattended installation script. By running the automated script, you install and configure the Wazuh in just a few minutes.
 
 The unattended installation will help you deploy Wazuh as an all-in-one, running all the central components in the same system.
 
@@ -42,13 +42,13 @@ Standard installation
 
 The Wazuh three central components are in charge of analyzing the data gathered by the Wazuh agents. Users are able to navigate through their security alerts thanks to the search engine and data visualization tool provided by the Wazuh solution.
 
-Each of the central component can be installed as a single-node or multi-node cluster and you can choose between two installation method. The first method is the **Unattended installation**, where you install each component by using a script that automates the installation process.The second method is the **Step-by-step installation**, where you install each component manually following detailed step-by-step instructions.
+Each of the central components can be installed as a single-node or multi-node cluster, and you can choose between two installation methods. The first method is the **Unattended installation**, where you install each component by using a script that automates the installation process. The second method is the **Step-by-step installation**, where you install each component manually following detailed step-by-step instructions.
 
 
 Wazuh Cloud
 ^^^^^^^^^^^
 
-Wazuh offers `Wazuh Cloud <https://wazuh.com/cloud/>`_, our software as a service (SaaS) solution. This means that instead of installing and maintaining software, you simply access it via the Wazuh Cloud Console, a web application to manage Wazuh where all processes are greatly simplified. 
+Wazuh offers `Wazuh Cloud <https://wazuh.com/cloud/>`_, our software as a service (SaaS) solution. This way, instead of installing and maintaining software, you simply access it via the Wazuh Cloud Console, a web application to manage Wazuh where all processes are greatly simplified. 
 
 This service provides a highly flexible infrastructure to match your enterprise needs. With Wazuh Cloud, no dedicated hardware is required, the Wazuh components maintenance is done by the Wazuh team, and everything is ready to use. We provide a `14-day free trial <https://console.cloud.wazuh.com/sign-up?landing=trial>`_ for you to create a cloud environment, a deployment that contains all the Wazuh components ready to be used.
 
