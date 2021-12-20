@@ -54,6 +54,37 @@ Wazuh offers `Wazuh Cloud <https://wazuh.com/cloud/>`_, our software as a servic
 We provide a `14-day free trial <https://console.cloud.wazuh.com/sign-up?landing=trial>`_ for you to create a cloud environment, a deployment that contains all the Wazuh components ready to be used.
 
 
+More deployment options
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Wazuh allows other deployment options such as the listed below:
+
+
+**Containers**        
+
+- :ref:`Deployment on Docker <wazuh_docker>`: This allows you to install Wazuh with a single-host architecture using a set of Docker images.
+- :ref:`Deployment on Kubernetes <wazuh_kubernetes>`: You can build an environment with a Wazuh cluster that offers high availability while securing your data. 
+
+
+**Orchestration tools**
+
+- :ref:`Deployment with Ansible <wazuh_ansible>`: Ansible is an open source platform designed for automating tasks. Its deployment tool is used to deploy the Wazuh infrastructure on AWS.
+- :ref:`Deployment with Puppet <wazuh_puppet>`: Puppet is an open-source software tool that allows you to install and configure Wazuh in an easy way by letting you inspect, deliver, operate, and proof your software, no matter where it is executed.
+
+
+**Offline**
+
+- :ref:`Offline installation <wazuh-offline-installation>`: This offline solution involves downloading the Wazuh components to then install them on a system with no internet connection.
+
+
+**From sources**
+
+- :ref:`Installation from sources <installation_from_sources>`: Install the Wazuh manager and agent without using a package manager by compiling the source code and copying the binaries to your computer.
+
+
+For information about the different deployment types, check the :ref:`Deployment options <deployment>` section. Wazuh can also be installed with commercial options like Elastic Stack basic license or Splunk. See the :ref:`Installation alternatives <more_installation_alternatives>` section to learn more about these options.
+
+
 Screenshots
 -----------
 
