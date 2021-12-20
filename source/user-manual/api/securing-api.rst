@@ -33,10 +33,10 @@ Recommended changes to securize Wazuh API
 
       https:
         enabled: yes
-        key: "api/configuration/ssl/server.key"
-        cert: "api/configuration/ssl/server.crt"
+        key: "server.key"
+        cert: "server.crt"
         use_ca: False
-        ca: "api/configuration/ssl/ca.crt"
+        ca: "ca.crt"
         ssl_protocol: "TLSv1.2"
         ssl_ciphers: ""
 
