@@ -9,7 +9,7 @@ Getting started with Wazuh
 ==========================
 
 
-Wazuh is a free and open source platform used for threat prevention, detection, and response. It protects workloads across on-premises, virtualized, containerized, and cloud-based environments. Wazuh is widely used by thousands of organizations around the world, from small businesses to large enterprises.
+Wazuh is a free and open source security solution used for threat prevention, detection, and response. It protects workloads across on-premises, virtualized, containerized, and cloud-based environments. Wazuh is widely used by thousands of organizations around the world, from small businesses to large enterprises.
 
 Wazuh solution consists of an :ref:`endpoint security agent <wazuh_agent>` deployed to the monitored systems and a :ref:`management server <wazuh_server>`, which collects and analyzes data gathered by the agents. It is a high-performance host-based intrusion detection system (HIDS) that helps organizations and individuals to protect their data assets against security threats. 
 
@@ -35,7 +35,7 @@ Quickstart
 
 The :ref:`Wazuh quickstart <quickstart>` lets you install all the central components on the same host using the unattended installation script. You can easily deploy and configure the Wazuh solution in just minutes by running our automated script. The unattended installation will help you run all the central components in the same system with an all-in-one deployment.
 
-In the quickstart section, you can also check the hardware requirements and the supported operating systems, to make sure you have everything you need when it's time to get started and install.
+In the quickstart section, you can also check the hardware requirements and the supported operating systems. To make sure you have everything you need when it is time to start installing.
 
 
 Unattended or Step-by-step
