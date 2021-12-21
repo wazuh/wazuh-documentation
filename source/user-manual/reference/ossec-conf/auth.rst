@@ -81,7 +81,7 @@ ipv6
 
 .. versionadded:: 4.4.0
 
-Enable IPv6 support.
+Enables IPv6 support.
 
 +--------------------+------------------+
 | **Default value**  | no               |
