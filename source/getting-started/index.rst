@@ -37,20 +37,14 @@ The :ref:`Wazuh quickstart <quickstart>` lets you install all the central compon
 The unattended installation will help you deploy Wazuh as an all-in-one, running all the central components in the same system.
 
 
-Standard installation
-^^^^^^^^^^^^^^^^^^^^^
+Unattended or Step-by-step
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The Wazuh three central components are in charge of analyzing the data gathered by the Wazuh agents. Users are able to navigate through their security alerts thanks to the search engine and data visualization tool provided by the Wazuh solution.
 
-Each of the central components can be installed as a single-node or multi-node cluster, and you can choose between two installation methods. The first method is the **Unattended installation**, where you install each component by using a script that automates the installation process. The second method is the **Step-by-step installation**, where you install each component manually following detailed step-by-step instructions.
+Each of the central components can be installed as a single-node or multi-node cluster, and you can choose between two installation methods. The first method is the **Unattended installation**, where you install each component by using a script that automates the installation process. 
 
-
-Wazuh Cloud
-^^^^^^^^^^^
-
-Wazuh offers `Wazuh Cloud <https://wazuh.com/cloud/>`_, our software as a service (SaaS) solution. This way, instead of installing and maintaining software, you simply access it via the Wazuh Cloud Console, a web application to manage Wazuh where all processes are greatly simplified. 
-
-This service provides a highly flexible infrastructure to match your enterprise needs. With Wazuh Cloud, no dedicated hardware is required, the Wazuh components maintenance is done by the Wazuh team, and everything is ready to use. We provide a `14-day free trial <https://console.cloud.wazuh.com/sign-up?landing=trial>`_ for you to create a cloud environment, a deployment that contains all the Wazuh components ready to be used.
+The second method is the **Step-by-step installation**, where you install each component manually following detailed step-by-step instructions. For more information about these installation methods you can check our :ref:`Installation guide <installation_guide>` section.
 
 
 More deployment options
@@ -82,6 +76,14 @@ Wazuh allows other deployment options such as the listed below:
 
 
 For information about the different deployment types, check the :ref:`Deployment options <deployment>` section. Wazuh can also be installed with commercial options like Elastic Stack basic license or Splunk. See the :ref:`Installation alternatives <more_installation_alternatives>` section to learn more about these options.
+
+
+Wazuh Cloud
+-----------
+
+Wazuh offers `Wazuh Cloud <https://wazuh.com/cloud/>`_, our software as a service (SaaS) solution. This way, instead of installing and maintaining software, you simply access it via the Wazuh Cloud Console, a web application to manage Wazuh where all processes are greatly simplified. 
+
+This service provides a highly flexible infrastructure to match your enterprise needs. With Wazuh Cloud, no dedicated hardware is required, the Wazuh components maintenance is done by the Wazuh team, and everything is ready to use. We provide a `14-day free trial <https://console.cloud.wazuh.com/sign-up?landing=trial>`_ for you to create a cloud environment, a deployment that contains all the Wazuh components ready to be used.
 
 
 Screenshots
