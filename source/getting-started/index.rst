@@ -8,11 +8,12 @@
 Getting started with Wazuh
 ==========================
 
+
 Wazuh is a free and open source platform used for threat prevention, detection, and response. It protects workloads across on-premises, virtualized, containerized, and cloud-based environments. Wazuh is widely used by thousands of organizations around the world, from small businesses to large enterprises.
 
-Wazuh solution consists of an :ref:`endpoint security agent <wazuh_agent>` deployed to the monitored systems and a :ref:`management server <wazuh_server>`, which collects and analyzes data gathered by the agents. Moreover, Wazuh provides a search engine and data visualization tool that allows users to navigate through their security alerts.
+Wazuh solution consists of an :ref:`endpoint security agent <wazuh_agent>` deployed to the monitored systems and a :ref:`management server <wazuh_server>`, which collects and analyzes data gathered by the agents. It is a high-performance host-based intrusion detection system (HIDS) that helps organizations and individuals to protect their data assets against security threats. 
 
-You can also use our software as a service (SaaS), `Wazuh Cloud <https://wazuh.com/cloud/>`_ solution, where no dedicated hardware is required, and everything is ready to use.
+If you prefer to work in a cloud environment you only need to try `Wazuh Cloud <https://wazuh.com/cloud/>`_, our software as a service (SaaS). No dedicated hardware is needed and you can work easily within a ready-to-use cloud setting.
 
 
 Community and support
@@ -69,9 +70,13 @@ For information about the different deployment types, check the :ref:`Deployment
 Wazuh Cloud
 -----------
 
-Wazuh offers `Wazuh Cloud <https://wazuh.com/cloud/>`_, our software as a service (SaaS) solution. This way, instead of installing and maintaining software, you simply access it via the Wazuh Cloud Console, a web application to manage Wazuh where all processes are greatly simplified. 
+If you prefer to work in a cloud environment with a deployment containing all the Wazuh components ready to be used, `Wazuh Cloud <https://wazuh.com/cloud/>`_ may be the right solution for you. This service provides a highly flexible infrastructure to match all the requirements of your organization.
 
-This service provides a highly flexible infrastructure to match your enterprise needs. With Wazuh Cloud, no dedicated hardware is required, the Wazuh components maintenance is done by the Wazuh team, and everything is ready to use. We provide a `14-day free trial <https://console.cloud.wazuh.com/sign-up?landing=trial>`_ for you to create a cloud environment, a deployment that contains all the Wazuh components ready to be used.
+Wazuh Cloud is our software as a service (SaaS) solution. You don't need to install and maintain any kind of software. You only need to access the Wazuh Cloud Console, a web application that will help you manage Wazuh in a simple way, where all processes are greatly simplified. 
+
+No more dedicated hardware. Let our team keep in charge of maintaining the Wazuh components while you enjoy this ready-to-use cloud environment. 
+
+Feel free to try our `14-day free trial <https://console.cloud.wazuh.com/sign-up?landing=trial>`_. There, you can create your cloud environment with a deployment that contains all the Wazuh components ready to work.
 
 
 Screenshots
