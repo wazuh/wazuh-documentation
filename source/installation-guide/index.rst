@@ -16,8 +16,8 @@ The Wazuh server and the Wazuh agent abide by the `GNU General Public License, v
 In this installation guide, you will learn how to install Wazuh in your infrastructure. Alternatively, We offer `Wazuh Cloud <https://wazuh.com/cloud/>`_, our software as a service (SaaS) solution. 
 
 
-Installing Wazuh central components
------------------------------------
+Installing Wazuh in your infrastructure
+---------------------------------------
 
 You can install all the Wazuh central components on a single host in an unattended way by following the :ref:`Quickstart <quickstart>` section,  or you can manually install each component following step-by-step directions.  Small Wazuh deployments, which do not require processing large amounts of data, can easily be handled by an all-in-one deployment. 
 
