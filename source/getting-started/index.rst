@@ -78,7 +78,7 @@ If you prefer to work in a cloud environment with a deployment containing all th
 
 Wazuh Cloud is our software as a service (SaaS) solution. You don't need to install and maintain any kind of software. You only need to access the Wazuh Cloud Console, a web application that will help you manage Wazuh in a simple way, where all processes are greatly simplified. 
 
-No more dedicated hardware. Let our team keep in charge of maintaining the Wazuh components while you enjoy this ready-to-use cloud environment. 
+No more dedicated hardware. Let our team be in charge of maintaining the Wazuh components while you enjoy this ready-to-use cloud environment. 
 
 Feel free to try our `14-day free trial <https://console.cloud.wazuh.com/sign-up?landing=trial>`_. Here you can create your cloud environment with a deployment that contains all the Wazuh components ready to work.
 
