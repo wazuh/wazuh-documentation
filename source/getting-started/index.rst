@@ -9,11 +9,11 @@ Getting started with Wazuh
 ==========================
 
 
-Wazuh is a free and open source security solution used for threat prevention, detection, and response. It protects workloads across on-premises, virtualized, containerized, and cloud-based environments. Wazuh is widely used by thousands of organizations around the world, from small businesses to large enterprises.
+Wazuh is a free and open source security solution used for threat prevention, detection, and response. It protects workloads across on-premises, virtualized, containerized, and cloud-based environments. Wazuh is widely used by thousands of organizations worldwide, from small businesses to large enterprises.
 
 Wazuh solution consists of an :ref:`endpoint security agent <wazuh_agent>` deployed to the monitored systems and a :ref:`management server <wazuh_server>`, which collects and analyzes data gathered by the agents. It is a high-performance host-based intrusion detection system (HIDS) that helps organizations and individuals to protect their data assets against security threats. 
 
-If you prefer to work in a cloud environment you only need to try `Wazuh Cloud <https://wazuh.com/cloud/>`_, our software as a service (SaaS). No dedicated hardware is needed and you can work easily within a ready-to-use cloud setting.
+If you prefer to work in a cloud environment, you only need to try `Wazuh Cloud <https://wazuh.com/cloud/>`_, our software as a service (SaaS). No dedicated hardware is required, and you can work efficiently within a ready-to-use cloud setting.
 
 
 Community and support
@@ -35,7 +35,7 @@ Quickstart
 
 The :ref:`Wazuh quickstart <quickstart>` lets you install all the central components on the same host using the unattended installation script. You can easily deploy and configure the Wazuh solution in just minutes by running our automated script. The unattended installation will help you run all the central components in the same system with an all-in-one deployment.
 
-In the quickstart section, you can also check the hardware requirements and the supported operating systems. To make sure you have everything you need when it is time to start installing.
+In the quickstart section, you can also check the hardware requirements and the supported operating systems. Ensure you have everything you need when it is time to start installing.
 
 
 Unattended or Step-by-step
@@ -45,13 +45,13 @@ The Wazuh three central components are in charge of analyzing the data gathered 
 
 Each of the central components can be installed as a single-node or multi-node cluster, and you can choose between two installation methods. The first method is the **Unattended installation**, where you install each component by using a script that automates the installation process. 
 
-The second method is the **Step-by-step installation**, where you install each component manually following detailed step-by-step instructions. For more information about these installation methods you can check our :ref:`Installation guide <installation_guide>` section.
+The second method is the **Step-by-step installation**, where you install each component manually following detailed step-by-step instructions. You can check our :ref:`Installation guide <installation_guide>` section for more information about these installation methods.
 
 
 More deployment and integration options
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh count with multiple deployment alternatives to adapt to the needs of your environment. These alternatives are complementary to the standard deployment options described in the :ref:`Installation guide <installation_guide>`. 
+Wazuh count with multiple deployment alternatives to adapt to the needs of your environment. These alternatives complement the standard deployment options described in the :ref:`Installation guide <installation_guide>`. 
 
 Below we present a list of different deployment and integration options:
 
