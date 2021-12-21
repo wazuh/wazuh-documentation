@@ -51,26 +51,6 @@ Each of the central components can be installed as a single-node or multi-node c
 
 The second method is the **Step-by-step installation**, where you install each component manually following detailed step-by-step instructions. You can check our :ref:`Installation guide <installation_guide>` section for more information about these installation methods.
 
-
-More deployment and integration options
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Wazuh count with multiple deployment alternatives to adapt to the needs of your environment. These alternatives complement the standard deployment options described in the :ref:`Installation guide <installation_guide>`. 
-
-Below we present a list of different deployment and integration options:
-
-- :ref:`Deployment on Docker <wazuh_docker>`
-- :ref:`Deployment on Kubernetes <wazuh_kubernetes>`
-- :ref:`Deployment with Ansible <wazuh_ansible>`
-- :ref:`Deployment with Puppet <wazuh_puppet>`
-- :ref:`Offline installation <wazuh-offline-installation>`
-- :ref:`Installation from sources <installation_from_sources>`
-- :ref:`Integration with Elastic Stack basic license <basic_installation_guide>`
-- :ref:`Integration with Splunk <installation_splunk>`
-
-For information about the different deployment types, check the :ref:`Deployment options <deployment>` section. 
-
-
 Wazuh Cloud
 -----------
 
@@ -82,6 +62,12 @@ No more dedicated hardware. Let our team be in charge of maintaining the Wazuh c
 
 Feel free to try our `14-day free trial <https://console.cloud.wazuh.com/sign-up?landing=trial>`_. Here you can create your cloud environment with a deployment that contains all the Wazuh components ready to work.
 
+Useful resources
+----------------
+
+- :ref:`Deployment options <deployment>`: Here you will find complementary deployment alternatives for our solution. 
+- :ref:`Capabilities <capabilities>`: Learn more about Wazuh capabilities, how they work, their configuration, FAQs, and practical examples on how to use our solution.
+- :ref:`Proof of Concept guide <poc_guide>`: Here you get to explore how to set up the Wazuh environment to test or demo the different product capabilities.
 
 Table of contents
 -----------------
