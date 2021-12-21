@@ -13,7 +13,7 @@ Wazuh is a free and open source security platform that unifies XDR and SIEM capa
 
 The Wazuh server and the Wazuh agent abide by the `GNU General Public License, version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_ and the Wazuh indexer and the Wazuh dashboard by the `Apache License 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_. These make sure the software is free for all its users and that they do not have to worry about infringing any patents by using it. 
 
-This installation guide includes instructions for installing each of the Wazuh central components: the Wazuh indexer, the Wazuh server, and the Wazuh dashboard, as well as the Wazuh agent. On the deployment alternatives section, you will find instructions on how to deploy Wazuh using ready-to-use machines, using containers, using orchestration tools, installing offline, for installing from sources, and integrations with commercial options. There is also a packages list where the users can directly download the packages they need. 
+This installation guide includes instructions for installing each of the Wazuh central components: the Wazuh indexer, the Wazuh server, and the Wazuh dashboard, as well as the Wazuh agent. In the deployment alternatives section, you will find instructions on how to deploy Wazuh using ready-to-use machines, using containers, using orchestration tools, installing offline, installing from sources, and integrations with commercial options. There is also a packages list where the users can directly download the packages they need. 
 
 Wazuh also offers the `Wazuh Cloud <https://wazuh.com/cloud/>`_, our software as a service (SaaS) solution. This means that instead of installing and maintaining software, you simply access it via the Wazuh Cloud Console, a web application to manage Wazuh where all processes are greatly simplified. This service provides a highly flexible infrastructure to match your enterprise needs. With Wazuh Cloud, no dedicated hardware is required, the Wazuh components maintenance is done by the Wazuh team, and everything is ready to use.
 
@@ -22,7 +22,7 @@ Installing Wazuh central components
 
 You can install all the Wazuh central components on a single host in an unattended way by following the :ref:`Quickstart <quickstart>` section,  or you can manually install each component following step-by-step directions.  Small Wazuh deployments, which do not require processing large amounts of data, can easily be handled by an all-in-one deployment. 
 
-The Wazuh central components can also be install on separate hosts in a distributed deployment. The Wazuh server and the Wazuh indexer can each be install as a single-node or multi-node cluster. This type of deployment provides high availability and scalability of the product, and it is convenient for large working environments. 
+The Wazuh central components can also be installed on separate hosts in a distributed deployment. The Wazuh server and the Wazuh indexer can each be installed as a single-node or multi-node cluster. This type of deployment provides high availability and scalability of the product, and it is convenient for large working environments. 
  
 You can choose between two installation methods for each Wazuh central component. Use wazuh-install, a script that automates the installation and configuration process or do the installation manually by following detailed step-by-step instructions.
 

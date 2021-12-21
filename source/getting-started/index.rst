@@ -65,7 +65,7 @@ Feel free to try our `14-day free trial <https://console.cloud.wazuh.com/sign-up
 Useful resources
 ----------------
 
-- :ref:`Deployment options <deployment>`: Here you will find instructions on how to deploy Wazuh using ready-to-use machines, using containers, using orchestration tools, installing offline, for installing from sources, and integrations with commercial options.  
+- :ref:`Deployment options <deployment>`: Here you will find instructions on how to deploy Wazuh using ready-to-use machines, using containers, using orchestration tools, installing offline, installing from sources, and integrations with commercial options.  
 - :ref:`Capabilities <capabilities>`: Learn more about Wazuh capabilities, how they work, their configuration, FAQs, and practical examples on how to use our solution.
 - :ref:`Proof of Concept guide <poc_guide>`: Here you get to explore how to set up the Wazuh environment to test or demo the different product capabilities.
 
