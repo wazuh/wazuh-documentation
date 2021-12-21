@@ -9,13 +9,12 @@
 Installation guide
 ==================
 
-Wazuh is a free and open source security platform that unifies XDR and SIEM capabilities. It is based on the Wazuh agent, which is deployed on the monitored endpoints, and on three central components in charge of analyzing, processing, and storing the data: the Wazuh server, the Wazuh indexer, and the Wazuh dashboard. If you are new to Wazuh and want to learn more about its components, architecture, and capabilities, you can check the :ref:`Getting started <getting_started>` section.  
+Wazuh is a free and open source security platform that unifies XDR and SIEM capabilities. The solution is composed of a single universal agent and three central components: the Wazuh server, the Wazuh indexer, and the Wazuh dashboard. For more information about its components, architecture, and capabilities, you can check the :ref:`Getting started <getting_started>` section.  
 
-The Wazuh server and the Wazuh agent abide by the `GNU General Public License, version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_ and the Wazuh indexer and the Wazuh dashboard by the `Apache License 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_. These make sure the software is free for all its users and that they do not have to worry about infringing any patents by using it. 
+The Wazuh server and the Wazuh agent abide by the `GNU General Public License, version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_ and the Wazuh indexer and the Wazuh dashboard by the `Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_ (ALv2). 
 
-This installation guide includes instructions for installing each of the Wazuh central components: the Wazuh indexer, the Wazuh server, and the Wazuh dashboard, as well as the Wazuh agent. In the deployment alternatives section, you will find instructions on how to deploy Wazuh using ready-to-use machines, using containers, using orchestration tools, installing offline, installing from sources, and integrations with commercial options. There is also a packages list where the users can directly download the packages they need. 
+In this installation guide, you will learn how to install Wazuh in your infrastructure. Alternatively, We offer `Wazuh Cloud <https://wazuh.com/cloud/>`_, our software as a service (SaaS) solution. 
 
-Wazuh also offers the `Wazuh Cloud <https://wazuh.com/cloud/>`_, our software as a service (SaaS) solution. This means that instead of installing and maintaining software, you simply access it via the Wazuh Cloud Console, a web application to manage Wazuh where all processes are greatly simplified. This service provides a highly flexible infrastructure to match your enterprise needs. With Wazuh Cloud, no dedicated hardware is required, the Wazuh components maintenance is done by the Wazuh team, and everything is ready to use.
 
 Installing Wazuh central components
 -----------------------------------
