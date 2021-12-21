@@ -13,32 +13,20 @@ Wazuh is a free and open source security platform that unifies XDR and SIEM capa
 
 The Wazuh server and the Wazuh agent abide by the `GNU General Public License, version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_ and the Wazuh indexer and the Wazuh dashboard by the `Apache License 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_. These make sure the software is free for all its users and that they do not have to worry about infringing any patents by using it. 
 
-With this installation guide, you will learn how to install in your system each central component on the same server, as an single-node deployment, or on different servers as a distributed deployment. The latter provides high availability and scalability of the product, and it is convenient for large working environments. Small Wazuh deployments, which do not require processing large amounts of data, can easily be handled by a single-node cluster.
+This installation guide includes instructions for installing each of the Wazuh central components: the Wazuh indexer, the Wazuh server, and the Wazuh dashboard, as well as the Wazuh agent. On the deployment alternatives section, you will find instructions on how to deploy Wazuh using ready-to-use machines, using containers, using orchestration tools, installing offline and for installing from sources. There is also a packages list where the users can directly download the packages they need. 
 
-Installing Wazuh in your infrastructure
----------------------------------------
+Wazuh also offers the `Wazuh Cloud <https://wazuh.com/cloud/>`_, our software as a service (SaaS) solution. This means that instead of installing and maintaining software, you simply access it via the Wazuh Cloud Console, a web application to manage Wazuh where all processes are greatly simplified. This service provides a highly flexible infrastructure to match your enterprise needs. With Wazuh Cloud, no dedicated hardware is required, the Wazuh components maintenance is done by the Wazuh team, and everything is ready to use.
 
-Installation methods
-^^^^^^^^^^^^^^^^^^^^
-You can choose between two installation methods for each Wazuh central component.
+Installing Wazuh central components
+-----------------------------------
 
-**Unattended**: You can install Wazuh using scripts that automate the installation process. The scripts also perform health checks to verify that the available system resources meet the minimal requirements.
+You can install all the Wazuh central components on a single host in an unattended way by following the :ref:`Quickstart <quickstart>` section,  or you can manually install each component following step-by-step directions.  Small Wazuh deployments, which do not require processing large amounts of data, can easily be handled by an all-in-one deployment. 
 
-**Step by step**:This is a manual way of carrying out the installation that includes a detailed description of each step of the process.
+The Wazuh central components can also be install on separate hosts in a distributed deployment. The Wazuh server and the Wazuh indexer can each be install as a single-node or multi-node cluster. This type of deployment provides high availability and scalability of the product, and it is convenient for large working environments. 
+ 
+You can choose between two installation methods for each Wazuh central component. Use wazuh-install, a script that automates the installation and configuration process or do the installation manually by following detailed step-by-step instructions.
 
-Deployment types
-^^^^^^^^^^^^^^^^
-
-With either installation method, the instructions guide you to intall Wazuh as a single-node and a multi-node cluster. You just need to follow the steps depending on the chosen configuration.
-
-**Single-node deployment**: You install and configure all the Wazuh central components on the same host to later deploy the Wazuh agent to your endpoints. Small Wazuh deployments, which do not require processing large amounts of data, can easily be handled by a single-node cluster.
-
-**Multi-node deployment**: This type of deployment provides high availability and scalability of the product, and it is convenient for large working environments. Following a distributed deployment process, you can install and configure the Wazuh central components on separate hosts. 
-
-Start installing Wazuh 
-^^^^^^^^^^^^^^^^^^^^^^
-
-The standard installation provides instructions for you to install each Wazuh central component in unattended mode or following a step-by-step installation. Either way, you will follow this standard installation workflow: 
+The standard installation provides instructions for you to install each Wazuh central component following this standard installation workflow: 
 
 .. thumbnail:: ../images/installation/Wazuh-Installation-workflow.png
   :title: Wazuh installation workflow
@@ -47,23 +35,7 @@ The standard installation provides instructions for you to install each Wazuh ce
 
 To check the requirements and start installing Wazuh, go to the :ref:`Wazuh indexer <wazuh_indexer_installation>` section. 
 
-More deployment options
------------------------
-Wazuh allows other deployment options such as the listed below. These are complementary to the standard installation of the Wazuh components.
-  
-- :ref:`Deployment on Docker <wazuh_docker>`
-- :ref:`Deployment on Kubernetes <wazuh_kubernetes>`
-- :ref:`Deployment with Ansible <wazuh_ansible>`
-- :ref:`Deployment with Puppet <wazuh_puppet>`
-- :ref:`Offline installation <wazuh-offline-installation>`
-- :ref:`Installation from sources <installation_from_sources>`
-- :ref:`Integration with Elastic Stack basic license <basic_installation_guide>`
-- :ref:`Integration with Splunk <installation_splunk>`
-
-
-For information about the different deployment types, check the :ref:`Deployment alternatives <deployment>` section.
-
-Wazuh agent deployment
+Installing Wazuh agent
 ----------------------
 
 The :ref:`Wazuh agent <wazuh_agent>` is a single and lightweight monitoring software. It is a multi-platform component that can be deployed to laptops, desktops, servers, cloud instances, containers, or virtual machines. It provides visibility into the endpoint's security by collecting critical system and application records, inventory data, and detecting potential anomalies. 
@@ -142,6 +114,24 @@ If the Wazuh central components are already installed in your environment, selec
       </div>
   </div>
 
+Deployment alternatives
+-----------------------
+Wazuh allows other deployment options such as the listed below. These are complementary to the standard installation of the Wazuh components.
+  
+- :ref:`Deployment on Docker <wazuh_docker>`
+- :ref:`Deployment on Kubernetes <wazuh_kubernetes>`
+- :ref:`Deployment with Ansible <wazuh_ansible>`
+- :ref:`Deployment with Puppet <wazuh_puppet>`
+- :ref:`Offline installation <wazuh-offline-installation>`
+- :ref:`Installation from sources <installation_from_sources>`
+- :ref:`Integration with Elastic Stack basic license <basic_installation_guide>`
+- :ref:`Integration with Splunk <installation_splunk>`
+
+
+For information about the different deployment types, check the :ref:`Deployment alternatives <deployment>` section.
+
+
+
 
 
 Packages list
@@ -157,6 +147,6 @@ In the :ref:`Packages list <packages>` section you will find all the packages re
     wazuh-indexer/index
     wazuh-server/index
     wazuh-dashboard/index
-    deployment-options/index
     wazuh-agent/index
+    deployment-options/index
     packages-list
