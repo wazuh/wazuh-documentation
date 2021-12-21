@@ -110,7 +110,7 @@ Local ip address to use to listen for connections.
 ipv6
 ^^^^^^^^^^^
 
-Enable IPv6 support.
+Enables IPv6 support.
 
 +--------------------+------------------+
 | **Default value**  | no               |
