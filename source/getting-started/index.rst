@@ -33,9 +33,9 @@ For deploying Wazuh in your infrastructure, you can choose between two different
 Quickstart
 ^^^^^^^^^^
 
-The :ref:`Wazuh quickstart <quickstart>` lets you install all the central components on the same host using the unattended installation script. By running the automated script, you install and configure the Wazuh in just a few minutes.
+The :ref:`Wazuh quickstart <quickstart>` lets you install all the central components on the same host using the unattended installation script. You can easily deploy and configure the Wazuh solution in just minutes by running our automated script. The unattended installation will help you run all the central components in the same system with an all-in-one deployment.
 
-The unattended installation will help you deploy Wazuh as an all-in-one, running all the central components in the same system.
+In the quickstart section, you can also check the hardware requirements and the supported operating systems, to make sure you have everything you need when it's time to get started and install.
 
 
 Unattended or Step-by-step
