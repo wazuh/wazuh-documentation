@@ -52,10 +52,10 @@ More deployment and integration options
 
 Wazuh allows other and integration options such as the listed below:
 
-- :ref:`Containers: Deployment on Docker <wazuh_docker>`
-- :ref:`Containers: Deployment on Kubernetes <wazuh_kubernetes>`
-- :ref:`Orchestration tools: Deployment with Ansible <wazuh_ansible>`
-- :ref:`Orchestration tools: Deployment with Puppet <wazuh_puppet>`
+- :ref:`Deployment on Docker <wazuh_docker>`
+- :ref:`Deployment on Kubernetes <wazuh_kubernetes>`
+- :ref:`Deployment with Ansible <wazuh_ansible>`
+- :ref:`Deployment with Puppet <wazuh_puppet>`
 - :ref:`Offline installation <wazuh-offline-installation>`
 - :ref:`Installation from sources <installation_from_sources>`
 - :ref:`Integration with Elastic Stack basic license <basic_installation_guide>`
