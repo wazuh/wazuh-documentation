@@ -50,7 +50,9 @@ The second method is the **Step-by-step installation**, where you install each c
 More deployment and integration options
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh allows other and integration options such as the listed below:
+Wazuh count with multiple deployment alternatives to adapt to the needs of your environment. These alternatives are complementary to the standard deployment options described in the :ref:`Installation guide <installation_guide>`. 
+
+Below we present a list of different deployment and integration options:
 
 - :ref:`Deployment on Docker <wazuh_docker>`
 - :ref:`Deployment on Kubernetes <wazuh_kubernetes>`
