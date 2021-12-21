@@ -83,34 +83,6 @@ No more dedicated hardware. Let our team be in charge of maintaining the Wazuh c
 Feel free to try our `14-day free trial <https://console.cloud.wazuh.com/sign-up?landing=trial>`_. Here you can create your cloud environment with a deployment that contains all the Wazuh components ready to work.
 
 
-Screenshots
------------
-
-.. list-table::
-   :width: 100%
-   :widths: 50 50
-
-   * - .. thumbnail:: ../images/getting_started/screenshot_01_security_analytics.png
-          :title: Security analytics
-     - .. thumbnail:: ../images/getting_started/screenshot_02_intrusion_detection.png
-          :title: Intrusion detection
-   * - .. thumbnail:: ../images/getting_started/screenshot_03_log_data_analysis.png
-          :title: Log data analysis
-     - .. thumbnail:: ../images/getting_started/screenshot_04_file_integrity_monitoring.png
-          :title: File integrity monitoring
-   * - .. thumbnail:: ../images/getting_started/screenshot_05_vulnerability_detection.png
-          :title: Vulnerability detection
-     - .. thumbnail:: ../images/getting_started/screenshot_06_configuration_assessment.png
-          :title: Configuration assessment
-   * - .. thumbnail:: ../images/getting_started/screenshot_07_incident_response.png
-          :title: Incident response
-     - .. thumbnail:: ../images/getting_started/screenshot_08_regulatory_compliance.png
-          :title: Regulatory compliance
-   * - .. thumbnail:: ../images/getting_started/screenshot_09_cloud_security.png
-          :title: Cloud security
-     - .. thumbnail:: ../images/getting_started/screenshot_10_containers_security.png
-          :title: Containers security
-
 Table of contents
 -----------------
 
