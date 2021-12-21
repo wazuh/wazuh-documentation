@@ -13,6 +13,7 @@ This guide summarizes the relevant settings that enable Elasticsearch optimizati
 - `Change users' password`_
 - `Memory locking`_
 - `Shards and replicas`_
+- `Mitigate Log4j2 vulnerability`_
 
 .. _change_elastic_pass:
 
@@ -317,6 +318,7 @@ If the output of the ``"mlockall"`` field is **false**, the request has failed. 
   Unable to lock JVM Memory
 
 References:
+^^^^^^^^^^^
 
   - `Memory lock check <https://www.elastic.co/guide/en/elasticsearch/reference/current/_memory_lock_check.html>`_.
   - `bootstrap.memory_lock <https://www.elastic.co/guide/en/elasticsearch/reference/current/important-settings.html#bootstrap.memory_lock>`_.
@@ -457,6 +459,48 @@ The number of replicas can be changed dynamically using the Elasticsearch API. I
 
 More information about configuring shards and replicas can be found in the :ref:`Kibana configuration section <kibana_config_file>`.
 
-Reference:
+References:
+^^^^^^^^^^^
 
   - `Shards & Replicas <https://www.elastic.co/guide/en/elasticsearch/reference/6.x/getting-started-concepts.html#getting-started-shards-and-replicas>`_.
+
+
+.. _mitigate_Log4j2:
+
+Mitigate Log4j2 vulnerability
+-----------------------------
+
+Although Wazuh is not affected by the Apache Log4j2 Remote Code Execution vulnerability (CVE-2021-44228), we still recommend to apply a workaround.
+
+To mitigate the Log4Shell vulnerability, take the following steps on each one of the Elasticsearch/ODfE nodes.
+
+  #. Create the custom JVM options files folder.
+
+      .. code-block:: console
+
+        # mkdir -p /etc/elasticsearch/jvm.options.d
+
+  #. Create a custom JVM options file with content ``-Dlog4j2.formatMsgNoLookups=true``.
+    
+      .. code-block:: console
+
+        # echo '-Dlog4j2.formatMsgNoLookups=true' > /etc/elasticsearch/jvm.options.d/disabledlog4j.options
+
+  #. Set file's users and permissions.
+    
+      .. code-block:: console
+
+        # chmod 2750 /etc/elasticsearch/jvm.options.d/disabledlog4j.options
+        # chown root:elasticsearch /etc/elasticsearch/jvm.options.d/disabledlog4j.options
+
+  #. Restart the Elasticsearch service
+
+      .. include:: ../../_templates/common/restart-elasticsearch.rst
+
+To learn how to detect this vulnerability with Wazuh, you can read `Detecting Log4Shell with Wazuh <https://wazuh.com/blog/detecting-log4shell-with-wazuh/>`_.
+
+References:
+^^^^^^^^^^^
+
+  * `National Vulnerability Database - CVE-2021-44228 Detail  <https://nvd.nist.gov/vuln/detail/CVE-2021-44228>`_
+  * `Apache Log4j2 Remote Code Execution (RCE) Vulnerability - CVE-2021-44228 - ESA-2021-31 <https://discuss.elastic.co/t/apache-log4j2-remote-code-execution-rce-vulnerability-cve-2021-44228-esa-2021-31/291476>`_
