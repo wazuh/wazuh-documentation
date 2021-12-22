@@ -5,11 +5,11 @@
 Deployment alternatives
 =======================
 
-You can deploy Wazuh to your environments using multiple deployment options. These alternatives are complementary to the standard deployment types that you can find in the :ref:`Installation guide <installation_guide>`.
+You can deploy Wazuh to your environments using multiple deployment options. These alternatives complement to the standard deployment types that you can find in the :ref:`Installation guide <installation_guide>`.
 
 **Ready-to-use machines:**
 
-- :ref:`Virtual Machine (OVA) <virtual_machine>`: Wazuh provides a pre-built virtual machine image (OVA) that you can directly import using VirtualBox or other OVA compatible virtualization systems. 
+- :ref:`Virtual Machine (OVA) <virtual_machine>`: Wazuh provides a pre-built virtual machine image (OVA) that you can directly import using `VirtualBox <https://www.virtualbox.org/>`_ or other OVA compatible virtualization systems. 
   
 - :ref:`Amazon Machine Images (AMI) <amazon-machine-images>`: This is a pre-built Amazon Machine Image (AMI) you can directly launch on an AWS cloud instance.
 
