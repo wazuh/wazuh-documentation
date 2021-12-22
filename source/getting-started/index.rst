@@ -25,19 +25,27 @@ Community and support
 How to install Wazuh
 --------------------
 
-For deploying Wazuh in your infrastructure, you can choose between two different options. All Wazuh central components are installed on the same host with an **all-in-one deployment**. Alternatively, you can choose to install each component on a separate host as a single-node or multi-node cluster with a **distributed deployment**.
-
-The Wazuh solution is composed of :ref:`three central components <_components>` and the :ref:`Wazuh agent <installation_agents>`:
+The Wazuh solution is composed of :ref:`three central components <components>` and the :ref:`Wazuh agent <installation_agents>`:
 
 - The Wazuh server, the Wazuh indexer, and the Wazuh dashboard are the three central components which collects and analyzes the data gathered by the agents. 
 - The Wazuh agent is a single and lightweight monitoring software deployed on the monitored endpoints to provide prevention, detection, and response capabilities.
 
+
+For deploying Wazuh in your infrastructure, you can choose between two different options:
+
+- **all-in-one deployment**: All Wazuh central components are installed on the same host.
+- **distributed deployment**: Install each component on a separate host as a single-node or multi-node cluster. 
+
+
+You can choose between the installation method listed below to install the Wazuh server and the Wazuh indexer:
+
+- **Unattended installation**: Lets you install each component using a script that automates the installation process. 
+- **Step-by-step installation**: Lets you install each component manually following detailed step-by-step instructions.
+
+Check our :ref:`Installation guide <installation_guide>` section to learn about Wazuh installation methods.
+
+
 The :ref:`Wazuh quickstart <quickstart>` lets you install all the central components on the same host using the unattended installation script with an all-in-one deployment. You can also check the :ref:`installation requirements <installation_requirements>` to access the hardware requirements and the supported operating systems to ensure you meet the minimum requirements before installing.
-
-Check our :ref:`Installation guide <installation_guide>` section to learn about Wazuh installation methods:
-
-- The **Unattended installation** lets you install each component using a script that automates the installation process. 
-- The **Step-by-step installation** lets you install each component manually following detailed step-by-step instructions.
 
 
 Wazuh Cloud
