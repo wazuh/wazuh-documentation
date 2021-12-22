@@ -493,7 +493,7 @@ To mitigate the Log4Shell vulnerability, take the following steps on each one of
         # chmod 2750 /etc/elasticsearch/jvm.options.d/disabledlog4j.options
         # chown root:elasticsearch /etc/elasticsearch/jvm.options.d/disabledlog4j.options
 
-  #. Restart the Elasticsearch service
+  #. Restart the Elasticsearch service.
 
       .. include:: ../../_templates/common/restart-elasticsearch.rst
 
