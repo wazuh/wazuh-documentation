@@ -1,5 +1,13 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. Section marks used on this document:
+.. h0 ======================================
+.. h1 --------------------------------------
+.. h2 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. h3 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. h4 ######################################
+.. h5 ::::::::::::::::::::::::::::::::::::::
+
 .. meta::
     :description: Learn more about how to deploy a Wazuh cluster: introduction, architecture overview, code structure and troubleshooting.
 
@@ -375,20 +383,34 @@ One of those tasks, which is defined as a class, is the task created to receive 
 
 Multiprocessing
 ~~~~~~~~~~~~~~~
-While the use of asynchronous tasks is a good solution to optimize work and avoid waiting times for I/O, there is something that they are not good at solving: executing multiple tasks that require intensive use of CPU. The reason is the way in which Python works, specifically because of the application of its Global Interpreter Lock (GIL), which is a lock that allows a single thread to take control of the Python interpreter at a time. Therefore, asynchronous tasks run concurrently, not in parallel. Following the example of the previous section, it is as if there is effectively only one chef who has to do all the tasks. He can only do one at a time so if one task requires all his attention, the others are delayed.
+.. versionadded:: 4.3.0
 
-The master node in a cluster supports a heavy workload, especially in large environments. Although the tasks are asynchronous, there are sections that require high CPU usage, such as calculating the hash of the files to be synchronized in the Integrity thread. To avoid other tasks waiting for the Python interpreter to complete the CPU-bound parts, multiprocessing is used. Following the same example again, multiprocessing would be equivalent to having more chefs working.
+While the use of asynchronous tasks is a good solution to optimize work and avoid waiting times for I/O, there is something which it is not good at solving: executing multiple tasks that require intensive use of CPU. The reason is the way in which Python works, specifically because of the application of its Global Interpreter Lock (GIL), which is a lock that allows a single thread to take control of the Python interpreter at a time. Therefore, asynchronous tasks run concurrently, not in parallel. Following the example of the previous section, it is as if there is effectively only one chef who has to do all the tasks. He can only do one at a time so if one task requires all his attention, the others are delayed.
 
-Multiprocessing is only implemented in the cluster process of the master node, and `concurrent.futures.ProcessPoolExecutor <https://docs.python.org/3/library/concurrent.futures.html#concurrent.futures.ProcessPoolExecutor>`_ is used for this purpose. Cluster tasks can use any free process in the process pool to delegate and execute in parallel those parts of their logic that are more CPU intensive. With this, it is possible to take advantage of more cores of a CPU and increase the overall performance of the cluster process. When combined with asyncio, best results are obtained.
+The master node in a cluster supports a heavy workload, especially in large environments. Although the tasks are asynchronous, there are sections that require high CPU usage, such as calculating the hash of the files to be synchronized in the Integrity thread. To avoid other tasks waiting for the Python interpreter to complete the CPU-bound parts, multiprocessing is used. Following the same example again, multiprocessing would be equivalent to having more chefs working in the same kitchen.
 
-Processes are only created when a task needs them, but once created they are not destroyed. They stay in the process pool waiting for new jobs to be assigned to them. There is a limit on the number of processes that can exist within the pool, which is defined inside the `process_pool_size` variable of the `cluster.json <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/framework/wazuh/core/cluster/cluster.json>`_ file. The threads/tasks that use multiprocessing in the cluster are:
+Multiprocessing is implemented in the cluster process of both the master node and the worker nodes, and `concurrent.futures.ProcessPoolExecutor <https://docs.python.org/3/library/concurrent.futures.html#concurrent.futures.ProcessPoolExecutor>`_ is used for this purpose. Cluster tasks can use any free process in the process pool to delegate and execute in parallel those parts of their logic that are more CPU intensive. With this, it is possible to take advantage of more cores of a CPU and increase the overall performance of the cluster process. When combined with asyncio, best results are obtained.
 
+Child processes are created when the parent `wazuh-clusterd` starts. They stay in the process pool waiting for new jobs to be assigned to them. There are two child processes by default within the master node pool, but it can be changed inside the `process_pool_size` variable of the `cluster.json <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/framework/wazuh/core/cluster/cluster.json>`_ file. The worker nodes, on the other hand, create a single child process and this number is not modifiable. The threads/tasks that use multiprocessing in the cluster are:
+
+Master node
+###########
 * **File integrity thread**: It takes care of calculating the hash of all the files to be synchronized, which requires high CPU usage. This calculation is done in a different process.
 * **Agent info thread**: This task has a section in charge of communicating with wazuh-db to send it all the information of the agents. The communication is done in small chunks so as not to saturate the service socket, which made it a somewhat slow process and not a good candidate for the use of asyncio. Therefore, this section is delegated to a child process.
-* **Integrity thread**: The function in charge of compressing files is fully synchronous, which can block the parent cluster process. For this reason, the `compress_files` function is executed in a child process. This way the parent process can continue with other tasks.
-* **Integrity thread - Extra-valid files**: The processing of files received in the master from the workers (extra-valid) is prone to be interleaved for the different nodes and to be very slow when using asyncio. Therefore, this part makes use of multiprocessing to execute this action in parallel without blocking the parent cluster process.
+* **Integrity thread**:
 
-Below you can see a diagram of the process pool creation flow and how the necessary children are created and reused for each task:
+   * **Compress files**: The function in charge of compressing files is fully synchronous, which can block the parent cluster process. For this reason, the `compress_files` function is executed in a child process. This way the parent process can continue with other tasks.
+   * **Process extra-valid files**: The processing of files received in the master from the workers (extra-valid) is prone to be interleaved for the different nodes and to be very slow when using asyncio. Therefore, this part makes use of multiprocessing to execute this action in parallel without blocking the parent cluster process.
+
+Worker nodes
+############
+* **Integrity thread**: In workers, this is the only task that uses multiprocessing to carry out certain actions:
+
+   * **Hash calculation**: Calculating the hash of all the files to be synchronized every time Integrity check is started.
+   * **Unzip files**: Unzipping files could be blocking for too long if the zip was large. By running this action in a child process, the worker can take care of other tasks in the meantime.
+   * **Process master files**: A child process is in charge of processing and moving to the correct destination all the files that were received from the master node.
+
+Below is an example diagram of how the process pool is used in the master node:
 
 .. image:: ../images/development/cluster_process_pool.png
   :align: center
