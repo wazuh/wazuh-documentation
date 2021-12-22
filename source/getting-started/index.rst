@@ -27,25 +27,25 @@ How to install Wazuh
 
 The Wazuh solution is composed of :ref:`three central components <components>` and the :ref:`Wazuh agent <installation_agents>`:
 
-- The Wazuh server, the Wazuh indexer, and the Wazuh dashboard are the three central components which collects and analyzes the data gathered by the agents. 
+- The Wazuh server, the Wazuh indexer, and the Wazuh dashboard are the three central components that collect and analyze the data gathered by the agents.
 - The Wazuh agent is a single and lightweight monitoring software deployed on the monitored endpoints to provide prevention, detection, and response capabilities.
 
 
-For deploying Wazuh in your infrastructure, you can choose between two different options:
+For deploying Wazuh in your infrastructure, you can choose between the following two options:
 
-- **all-in-one deployment**: All Wazuh central components are installed on the same host.
-- **distributed deployment**: Install each component on a separate host as a single-node or multi-node cluster. 
+- **All-in-one deployment**: All Wazuh central components are installed on the same host.
+- **Distributed deployment**: Install each component on a separate host as a single-node or multi-node cluster. 
 
 
-You can choose between the installation method listed below to install the Wazuh server and the Wazuh indexer:
+You can also choose between the installation methods listed below to install the Wazuh server and the Wazuh indexer:
 
-- **Unattended installation**: Lets you install each component using a script that automates the installation process. 
-- **Step-by-step installation**: Lets you install each component manually following detailed step-by-step instructions.
+- **Unattended installation**: This lets you install each component using a script that automates the installation process. 
+- **Step-by-step installation**: This other lets you install each component manually following detailed step-by-step instructions.
 
 Check our :ref:`Installation guide <installation_guide>` section to learn about Wazuh installation methods.
 
 
-The :ref:`Wazuh quickstart <quickstart>` lets you install all the central components on the same host using the unattended installation script with an all-in-one deployment. You can also check the :ref:`installation requirements <installation_requirements>` to access the hardware requirements and the supported operating systems to ensure you meet the minimum requirements before installing.
+In addition, the :ref:`Wazuh quickstart <quickstart>` lets you install all the central components on the same host using the unattended installation script with an all-in-one deployment. You can also check the :ref:`installation requirements <installation_requirements>` to access the hardware requirements and the supported operating systems to ensure you meet the minimum requirements before installing.
 
 
 Wazuh Cloud
@@ -61,9 +61,9 @@ You don't need more dedicated hardware. Let our team be in charge of maintaining
 More valuable resources
 -----------------------
 
-- :ref:`Deployment options <deployment>`: Here you will find instructions on how to deploy Wazuh using ready-to-use machines, using containers, using orchestration tools, installing offline, installing from sources, and integrations with commercial options.  
+- :ref:`Deployment options <deployment>`: Here, you will find instructions on how to deploy Wazuh using ready-to-use machines, using containers, using orchestration tools, installing offline, installing from sources, and integrations with commercial options.  
 - :ref:`Capabilities <capabilities>`: Learn more about Wazuh capabilities, how they work, their configuration, FAQs, and practical examples on how to use our solution.
-- :ref:`Proof of Concept guide <poc_guide>`: Here you get to explore how to set up the Wazuh environment to test or demo the different product capabilities.
+- :ref:`Proof of Concept guide <poc_guide>`: Here, you get to explore how to set up the Wazuh environment to test or demo the different product capabilities.
 
 
 Other items in this section
