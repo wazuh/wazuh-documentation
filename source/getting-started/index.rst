@@ -58,16 +58,16 @@ Wazuh Cloud is our software as a service (SaaS) solution. You don't need to inst
 You don't need more dedicated hardware. Let our team be in charge of maintaining the Wazuh components while you take advantage of this ready-to-use cloud environment. Feel free to try our `14-day free trial <https://console.cloud.wazuh.com/sign-up?landing=trial>`_. Here you can create your cloud environment with a deployment that contains all the Wazuh components ready to work.
 
 
-Useful resources
-----------------
+More valuable resources
+-----------------------
 
 - :ref:`Deployment options <deployment>`: Here you will find instructions on how to deploy Wazuh using ready-to-use machines, using containers, using orchestration tools, installing offline, installing from sources, and integrations with commercial options.  
 - :ref:`Capabilities <capabilities>`: Learn more about Wazuh capabilities, how they work, their configuration, FAQs, and practical examples on how to use our solution.
 - :ref:`Proof of Concept guide <poc_guide>`: Here you get to explore how to set up the Wazuh environment to test or demo the different product capabilities.
 
 
-Table of contents
------------------
+Other items in this section
+---------------------------
 
 This document provides an overview of the Wazuh platform components and architecture. It also includes a brief description of some of the most common use cases of the solution.
 
