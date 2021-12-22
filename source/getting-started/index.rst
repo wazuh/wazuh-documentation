@@ -27,8 +27,8 @@ How to install Wazuh
 
 The Wazuh solution is composed of :ref:`three central components <components>` and the :ref:`Wazuh agent <installation_agents>`:
 
-- The Wazuh server, the Wazuh indexer, and the Wazuh dashboard are the three central components that collect and analyze the data gathered by the agents.
-- The Wazuh agent is a single and lightweight monitoring software deployed on the monitored endpoints to provide prevention, detection, and response capabilities.
+- **The Wazuh server, the Wazuh indexer, and the Wazuh dashboard** are the three central components that collect and analyze the data gathered by the agents.
+- **The Wazuh agent** is a single and lightweight monitoring software deployed on the monitored endpoints to provide prevention, detection, and response capabilities.
 
 
 For deploying Wazuh in your infrastructure, you can choose between the following two options:
@@ -45,7 +45,7 @@ You can also choose between the installation methods listed below to install the
 Check our :ref:`Installation guide <installation_guide>` section to learn about Wazuh installation methods.
 
 
-In addition, the :ref:`Wazuh quickstart <quickstart>` lets you install all the central components on the same host using the unattended installation script with an all-in-one deployment. You can also check the :ref:`installation requirements <installation_requirements>` to access the hardware requirements and the supported operating systems to ensure you meet the minimum requirements before installing.
+In addition, the :ref:`Wazuh quickstart <quickstart>` lets you install all the central components on the same host using the unattended installation script with an all-in-one deployment. You can also check the :ref:`installation requirements <installation_requirements>` section to access the hardware requirements and the supported operating systems to ensure you meet the minimum prerequisites before installing.
 
 
 Wazuh Cloud
@@ -53,7 +53,7 @@ Wazuh Cloud
 
 `Wazuh Cloud <https://wazuh.com/cloud/>`_ is the right solution when you prefer to work in a cloud environment with a deployment containing all the Wazuh components ready to be used. This service provides a highly flexible infrastructure to match the requirements of your organization.
 
-Wazuh Cloud is our software as a service (SaaS) solution. You don't need to install and maintain any kind of software. You only need to access the Wazuh Cloud Console, a web application that will help you manage Wazuh in a simple way, where all processes are greatly simplified. 
+Wazuh Cloud is our software as a service (SaaS) solution. With this option, you don't need to install and maintain any kind of software. You only need to access the Wazuh Cloud Console, a web application that will help you manage Wazuh in a simple way, where all processes are greatly simplified. 
 
 You don't need more dedicated hardware. Let our team be in charge of maintaining the Wazuh components while you take advantage of this ready-to-use cloud environment. Feel free to try our `14-day free trial <https://console.cloud.wazuh.com/sign-up?landing=trial>`_. Here you can create your cloud environment with a deployment that contains all the Wazuh components ready to work.
 
