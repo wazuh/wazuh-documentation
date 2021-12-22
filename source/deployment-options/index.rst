@@ -14,6 +14,11 @@ You can deploy Wazuh to your environments using multiple deployment options. The
   
 - :ref:`Amazon Machine Images (AMI) <amazon-machine-images>`: This is a pre-built Amazon Machine Image (AMI) you can directly launch on an AWS cloud instance.
 
+
+.. raw:: html
+
+  <hr>
+
 **Containers:**
 
 - :ref:`Deployment on Docker <wazuh_docker>`: You can install Wazuh with a single-host architecture using a set of Docker images that contains the `Wazuh manager <https://github.com/wazuh/wazuh>`_, `Filebeat <https://www.elastic.co/products/beats/filebeat>`_, `Elasticsearch <https://registry.hub.docker.com/_/elasticsearch/>`_, `Kibana <https://registry.hub.docker.com/_/kibana/>`_, and optionally `Nginx <https://hub.docker.com/_/nginx/>`_. `Open Distro for Elasticsearch <https://opendistro.github.io/for-elasticsearch/>`_ is fully supported as well.
