@@ -25,27 +25,19 @@ Community and support
 How to install Wazuh
 --------------------
 
-For deploying Wazuh in your infrastructure, you can choose between two different options. With an **all-in-one deployment** all Wazuh central components are installed on the same host. On the other hand, each component is installed on a separate host as a single-node or multi-node cluster with a **distributed deployment**.
+For deploying Wazuh in your infrastructure, you can choose between two different options. All Wazuh central components are installed on the same host with an **all-in-one deployment**. Alternatively, you can choose to install each component on a separate host as a single-node or multi-node cluster with a **distributed deployment**.
 
-The Wazuh solution is composed of three central platform components and a single universal agent. The :ref:`Wazuh server <wazuh_server_installation>`, the :ref:`Wazuh indexer <wazuh_indexer_installation>`, and the :ref:`Wazuh dashboard <wazuh_dashboard_installation>` are the three central components which collects and analyzes the data gathered by the agents. The :ref:`Wazuh agent <installation_agents>` is a single and lightweight monitoring software deployed on the monitored endpoints to provide prevention, detection, and response capabilities.
+The Wazuh solution is composed of :ref:`three central components <_components>` and the :ref:`Wazuh agent <installation_agents>`:
 
+- The Wazuh server, the Wazuh indexer, and the Wazuh dashboard are the three central components which collects and analyzes the data gathered by the agents. 
+- The Wazuh agent is a single and lightweight monitoring software deployed on the monitored endpoints to provide prevention, detection, and response capabilities.
 
-Quickstart
-^^^^^^^^^^
+The :ref:`Wazuh quickstart <quickstart>` lets you install all the central components on the same host using the unattended installation script with an all-in-one deployment. You can also check the :ref:`installation requirements <installation_requirements>` to access the hardware requirements and the supported operating systems to ensure you meet the minimum requirements before installing.
 
-The :ref:`Wazuh quickstart <quickstart>` lets you install all the central components on the same host using the unattended installation script. You can easily deploy and configure the Wazuh solution in just minutes. This installation method will help you run all the central components in the same system with an all-in-one deployment.
+Check our :ref:`Installation guide <installation_guide>` section to learn about Wazuh installation methods:
 
-In the quickstart section, you can also check the :ref:`installation requirements <installation_requirements>`. Here you can access the hardware requirements and the supported operating systems to ensure you meet the minimum requirements before installing.
-
-
-Unattended or Step-by-step
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-The Wazuh three central components are in charge of analyzing the data gathered by the Wazuh agents. Users are able to navigate through their security alerts thanks to the search engine and data visualization tool provided by the Wazuh solution.
-
-Each of the central components can be installed as a single-node or multi-node cluster, and you can choose between two installation methods. The first method is the **Unattended installation**, where you install each component by using a script that automates the installation process. 
-
-The second method is the **Step-by-step installation**, where you install each component manually following detailed step-by-step instructions. You can check our :ref:`Installation guide <installation_guide>` section for more information about these installation methods.
+- The **Unattended installation** lets you install each component using a script that automates the installation process. 
+- The **Step-by-step installation** lets you install each component manually following detailed step-by-step instructions.
 
 
 Wazuh Cloud
