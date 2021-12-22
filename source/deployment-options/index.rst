@@ -14,10 +14,15 @@ You can deploy Wazuh to your environments using multiple deployment options. The
   
 - :ref:`Amazon Machine Images (AMI) <amazon-machine-images>`: This is a pre-built Amazon Machine Image (AMI) you can directly launch on an AWS cloud instance.
 
-
 .. raw:: html
 
-  <hr>
+    <html>
+        <body>
+
+            <hr>
+
+        </body>
+    </html>
 
 **Containers:**
 
