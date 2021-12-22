@@ -19,7 +19,7 @@ In this installation guide, you will learn how to install Wazuh in your infrastr
 Installing Wazuh in your infrastructure
 ---------------------------------------
 
-You can choose between two installation methods for each Wazuh central component. Both installation methods provide you with instructions to install the central components on a single host or on separate hosts, following a distributed deployment. 
+You can choose between two installation methods for each Wazuh central component. Both installation methods provide you with instructions to install the central components on a single host or on separate hosts. 
 
 - Unattended: You can install Wazuh using a script that automates the installation and configuration process. This script also performs a health check to verify that the available system resources meet the minimal requirements.
 
@@ -120,7 +120,7 @@ If the Wazuh central components are already installed in your environment, selec
 Packages list
 -------------
 
-In the :ref:`Packages list <packages>` section you will find all the packages required for the installation of Wazuh |WAZUH_LATEST|.
+In the :ref:`Packages list <packages>` section, you will find all the packages required for the installation of Wazuh |WAZUH_LATEST|.
 
 
 .. toctree::

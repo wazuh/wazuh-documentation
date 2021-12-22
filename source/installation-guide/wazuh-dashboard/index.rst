@@ -13,7 +13,7 @@ This central component is a flexible and intuitive web interface for mining, ana
 
 You can now choose an installation method and start installing Wazuh dashboard.
 
-- :ref:`Unattended installation <wazuh_dashboard_unattended_installation>`: Install this component by using a script that automates the installation process.  
+- :ref:`Unattended installation <wazuh_dashboard_unattended_installation>`: You install this component by running a script that automates the installation and configuration process. 
 
 - :ref:`Step-by-step installation <wazuh_dashboard_step_by_step>`: Install this component manually following detailed step-by-step instructions.
 
@@ -32,22 +32,22 @@ Check the supported operating systems and the recommended hardware requirements 
 Supported operating systems
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh dashboard can be installed on a 64-bit Linux operating system.
+Wazuh can be installed on a 64-bit Linux operating system. Wazuh supports all the operating systems listed below as well as their later versions:
 
 .. list-table::
-   :width: 50%
-   
+   :width: 100%
+   :widths: 50 50
+
    * - Amazon Linux 2
-   * - CentOS 7 and later
-   * - Debian 8 ELTS and later
-   * - Fedora Linux 33 and later
-   * - openSUSE Tumbleweed, Leap 15.2 and later
-   * - Oracle Linux 6 Extended and later
-   * - Red Hat Enterprise Linux 6 ELS and later
-   * - SUSE Linux enterprise server 11 LTSS and later
-   * - Ubuntu 14.04 ESM and later
-
-
+     - CentOS 7
+   * - Debian 8 ELTS
+     - Fedora Linux 33
+   * - openSUSE Tumbleweed, Leap 15.2
+     - Oracle Linux 6 Extended
+   * - Red Hat Enterprise Linux 6 ELS
+     - SUSE Linux enterprise server 11 LTSS
+   * - Ubuntu 14.04 ESM
+     - 
 
 
 Hardware requirements
