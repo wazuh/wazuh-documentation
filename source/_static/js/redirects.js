@@ -39,6 +39,8 @@ removedUrls['x.y'] = [
 /* Pages added in 4.2 */
 
 newUrls['4.2'] = [
+  '/getting-started/components/elasticsearch.html',
+  '/getting-started/components/kibana.html',
   '/proof-of-concept-guide/detect-malware-yara-integration.html',
   '/proof-of-concept-guide/poc-vulnerability-detection.html',
   '/proof-of-concept-guide/detect-remove-malware-virustotal.html',
@@ -244,6 +246,7 @@ newUrls['4.2'] = [
 ];
 
 removedUrls['4.2'] = [
+  '/getting-started/components/elastic-stack.html',
   '/deploying-with-ansible/guide/install-elk-server.html',
   '/deploying-with-ansible/roles/wazuh-elasticsearch.rst',
   '/user-manual/kibana-app/connect-kibana-app.html',
@@ -392,6 +395,21 @@ removedUrls['4.2'] = [
 ];
 
 redirections.push(
+    {
+    'target': ['4.1=>4.2'],
+    '4.1': '/getting-started/components/elastic-stack.html',
+    '4.2': '/getting-started/components/index.html',
+    },
+    {
+    'target': ['4.2=>4.1'],
+    '4.2': '/getting-started/components/elasticsearch.html',
+    '4.1': '/getting-started/components/elastic-stack.html',
+    },
+    {
+      'target': ['4.2=>4.1'],
+      '4.2': '/getting-started/components/kibana.html',
+      '4.1': '/getting-started/components/elastic-stack.html',      
+    },
     {
       'target': ['4.1=>4.2', '4.2=>4.1'],
       '4.1': '/deploying-with-ansible/roles/wazuh-elasticsearch.rst',
