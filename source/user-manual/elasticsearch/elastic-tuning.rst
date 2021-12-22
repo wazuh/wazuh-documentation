@@ -472,7 +472,7 @@ Mitigate Log4j2 vulnerability
 
 Although Wazuh is not affected by the Apache Log4j2 Remote Code Execution vulnerability (CVE-2021-44228), we still recommend to apply a workaround.
 
-To mitigate the Log4Shell vulnerability, take the following steps on each one of the Elasticsearch/ODfE nodes.
+To mitigate the Log4Shell vulnerability, take the following steps on each one of the Elasticsearch nodes.
 
   #. Create the custom JVM options files folder.
 
