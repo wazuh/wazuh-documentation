@@ -8,10 +8,11 @@
 Getting started with Wazuh
 ==========================
 
+Wazuh is a free and open source security platform used for threat prevention, detection, and response. It protects workloads across on-premises, virtualized, containerized, and cloud-based environments. 
 
-Wazuh is a free and open source security solution used for threat prevention, detection, and response. It protects workloads across on-premises, virtualized, containerized, and cloud-based environments. Wazuh is widely used by thousands of organizations worldwide, from small businesses to large enterprises.
+Wazuh is a high-performance host-based intrusion detection system (HIDS) that helps organizations and individuals to protect their data assets against security threats. It is widely used by thousands of organizations worldwide, from small businesses to large enterprises.
 
-Wazuh solution consists of an :ref:`endpoint security agent <wazuh_agent>` deployed to the monitored systems and a :ref:`management server <wazuh_server>`, which collects and analyzes data gathered by the agents. It is a high-performance host-based intrusion detection system (HIDS) that helps organizations and individuals to protect their data assets against security threats. 
+Wazuh solution consists on a :ref:`single universal agent <wazuh_agent>` deployed into the monitored endpoints and a :ref:`management server <wazuh_server>`, which collects and analyzes data gathered by the agents. 
 
 If you prefer to work in a cloud environment, you only need to try `Wazuh Cloud <https://wazuh.com/cloud/>`_, our software as a service (SaaS). No dedicated hardware is required, and you can work efficiently within a ready-to-use cloud setting.
 
