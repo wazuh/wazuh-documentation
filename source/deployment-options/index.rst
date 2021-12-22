@@ -16,7 +16,7 @@ You can deploy Wazuh to your environments using multiple deployment options. The
 
 .. raw:: html
 
-    <hr>
+    :hr:
     :width: 100%;
     :border-color: black;
     :clear: both;
