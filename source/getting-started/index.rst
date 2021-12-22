@@ -11,9 +11,9 @@ Getting started with Wazuh
 
 Wazuh is a free and open source security platform used for threat prevention, detection, and response. It protects workloads across on-premises, virtualized, containerized, and cloud-based environments. 
 
-With Wazuh you get a high-performance host-based intrusion detection system (HIDS) that helps organizations and individuals to protect their data assets against security threats. It is widely used by thousands of organizations worldwide, from small businesses to large enterprises.
+With Wazuh, you get a high-performance host-based intrusion detection system (HIDS) that helps organizations and individuals to protect their data assets against security threats. It is widely used by thousands of organizations worldwide, from small businesses to large enterprises.
 
-You can also try `Wazuh Cloud <https://wazuh.com/cloud/>`_, our software as a service (SaaS). Where no dedicated hardware is required, and you can work efficiently within a ready-to-use cloud environment.
+You can also try `Wazuh Cloud <https://wazuh.com/cloud/>`_, our software as a service (SaaS) where no dedicated hardware is required, and you can work efficiently within a ready-to-use cloud environment.
 
 
 Community and support
@@ -55,9 +55,7 @@ Wazuh Cloud
 
 Wazuh Cloud is our software as a service (SaaS) solution. You don't need to install and maintain any kind of software. You only need to access the Wazuh Cloud Console, a web application that will help you manage Wazuh in a simple way, where all processes are greatly simplified. 
 
-You don't need more dedicated hardware. Let our team be in charge of maintaining the Wazuh components while you take advantage of this ready-to-use cloud environment.
-
-Feel free to try our `14-day free trial <https://console.cloud.wazuh.com/sign-up?landing=trial>`_. Here you can create your cloud environment with a deployment that contains all the Wazuh components ready to work.
+You don't need more dedicated hardware. Let our team be in charge of maintaining the Wazuh components while you take advantage of this ready-to-use cloud environment. Feel free to try our `14-day free trial <https://console.cloud.wazuh.com/sign-up?landing=trial>`_. Here you can create your cloud environment with a deployment that contains all the Wazuh components ready to work.
 
 
 Useful resources
