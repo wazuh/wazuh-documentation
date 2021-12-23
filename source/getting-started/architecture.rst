@@ -72,7 +72,7 @@ Several services are used for the communication of Wazuh components. Below is th
 Archival data storage
 ---------------------
 
-Both alerts and non-alert events are stored in files on the Wazuh server, in addition to being sent to Wazuh indexer. These files can be written in JSON format, ``.json``,  and/or in plain text format as ``.log``, which contains no decoded fields but is more compact. These files are daily compressed and signed using MD5, SHA1, and SHA256 checksums. The directory and filename structure is as follows:
+Both alerts and non-alert events are stored in files on the Wazuh server, in addition to being sent to the Wazuh indexer. These files can be written in JSON format, ``.json``,  and/or in plain text format as ``.log``, which contains no decoded fields but is more compact. These files are daily compressed and signed using MD5, SHA1, and SHA256 checksums. The directory and filename structure is as follows:
 
 .. code-block:: bash
 
