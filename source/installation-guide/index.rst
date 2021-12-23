@@ -32,7 +32,7 @@ When installing, you will follow this workflow:
   :align: center
   :width: 100%
 
-Wazuh indexer and Wazuh server can be installed in a single host or be distributed in cluster configurations. To check the requirements and start installing the first of the Wazuh central components, go to the :ref:`Wazuh indexer <wazuh_indexer_installation>` section.
+Wazuh indexer and Wazuh server can be installed in a single host or be distributed in cluster configurations. To check the requirements and start installing the first of the Wazuh central components, go to the :doc:`Wazuh indexer <wazuh-indexer/index>` section.
 
 Deployment alternatives
 ^^^^^^^^^^^^^^^^^^^^^^^
