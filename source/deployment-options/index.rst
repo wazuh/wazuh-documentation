@@ -7,6 +7,9 @@ Deployment alternatives
 
 You can deploy Wazuh to your environments using multiple deployment options. These alternatives complement to the standard deployment types that you can find in the :ref:`Installation guide <installation_guide>`.
 
+.. raw:: html
+
+    <h2>Ready-to-use machines</h2>
 
 **Ready-to-use machines:**
 
