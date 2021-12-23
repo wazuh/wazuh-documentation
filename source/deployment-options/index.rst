@@ -9,7 +9,7 @@ You can deploy Wazuh to your environments using multiple deployment options. The
 
 .. raw:: html
 
-    <h2>Ready-to-use machines</h2>
+    <h3>Ready-to-use machines</h3>
 
 **Ready-to-use machines:**
 
