@@ -213,7 +213,7 @@ Download the script and the configuration file. After downloading them, configur
 
       Once the installation process is done in all the servers of the Elasticsearch cluster, run the following command on the **initial node** to generate credentials for all the Elastic Stack pre-built roles and users:
 
-      .. include:: ../../../../../_templates/installations/basic/elastic/common/generate_elastic_credentials.rst        
+      .. include:: ../../../../_templates/installations/basic/elastic/common/generate_elastic_credentials.rst        
 
 
 

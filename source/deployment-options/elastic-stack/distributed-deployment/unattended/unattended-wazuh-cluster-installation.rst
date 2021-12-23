@@ -70,24 +70,24 @@ After the installation of all the components of the node, some steps must be don
 
     **Master node:**
 
-    #. .. include:: ../../../../../_templates/installations/wazuh/common/configure_wazuh_master_node.rst
+    #. .. include:: ../../../../_templates/installations/wazuh/common/configure_wazuh_master_node.rst
 
 
     #. Once the ``/var/ossec/etc/ossec.conf`` configuration file is edited, the Wazuh manager needs to be restarted:
 
-      .. include:: ../../../../../_templates/installations/wazuh/common/restart_wazuh_manager.rst
+      .. include:: ../../../../_templates/installations/wazuh/common/restart_wazuh_manager.rst
 
 
     **Worker node:**
 
-    #. .. include:: ../../../../../_templates/installations/wazuh/common/configure_wazuh_worker_node.rst
+    #. .. include:: ../../../../_templates/installations/wazuh/common/configure_wazuh_worker_node.rst
 
 
     #. Once the ``/var/ossec/etc/ossec.conf`` configuration file is edited, the Wazuh manager needs to be restarted:
 
-        .. include:: ../../../../../_templates/installations/wazuh/common/restart_wazuh_manager.rst
+        .. include:: ../../../../_templates/installations/wazuh/common/restart_wazuh_manager.rst
 
-    #. .. include:: ../../../../../_templates/installations/wazuh/common/check_wazuh_cluster.rst 
+    #. .. include:: ../../../../_templates/installations/wazuh/common/check_wazuh_cluster.rst 
 
 
 To uninstall Wazuh and Filebeat, visit the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_basic>`.
