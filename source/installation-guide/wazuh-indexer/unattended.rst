@@ -11,152 +11,131 @@ Install and configure the Wazuh indexer, a highly scalable full-text search engi
 Wazuh indexer cluster installation
 ----------------------------------
 
-Install and configure the Wazuh indexer as a single-node or multi-node cluster according to your environment needs. If you want to install a single-node cluster, follow the instructions to install the initial node.
+Install and configure the Wazuh indexer as a single-node or multi-node cluster according to your environment needs. 
 
 The installation process is divided into three stages. 
 
-#. Initial node 
+#. Certificates creation 
 
-#. Subsequent nodes  
+#. Wazuh indexer nodes installation
 
 #. Cluster initialization
 
 .. note:: Root user privileges are required to run the commands described below.
 
 
-1. Initial node 
----------------
-.. raw:: html
+1. Certificates creation
+-------------------------
 
-    <div class="accordion-section open">
 
-Install and configure the initial node. During this stage, the SSL certificates to encrypt communications between the Wazuh components are generated. These certificates are later deployed to other Wazuh instances. 
+Create the SSL certificates to encrypt communications between the Wazuh components. These certificates are later deployed to other Wazuh instances. 
 
-#. Download the unattended installation script and the configuration files. 
+#. Download the unattended installation script and the configuration file. 
 
       .. code-block:: console
 
-          # curl -sO https://s3.us-west-1.amazonaws.com/packages-dev.wazuh.com/resources/4.2/unattended_installation.sh
-          # curl -sO https://raw.githubusercontent.com/wazuh/wazuh-packages/unify-unattended/unattended_scripts/config.yml
-          # curl -sO https://raw.githubusercontent.com/wazuh/wazuh-packages/unify-unattended/unattended_scripts/instances.yml
-
-    
+          # curl -sO https://packages.wazuh.com/resources/wazuh_install.sh 
+          # curl -sO https://packages.wazuh.com/resources/config.yml
+       
 #. Edit ``./config.yml`` and replace the node names and IP values with the corresponding names and IP addresses, including all the Wazuh server, the Wazuh indexer, and the Wazuh dashboard nodes. Add as many node fields as needed.
 
       .. code-block:: yaml
-        :emphasize-lines: 4, 8, 15, 17, 27, 29
 
-        ## Elasticsearch configuration
-        Elasticsearch nodes:
-          cluster.initial_master_nodes:
-                  - <master_node_1>
-                  # - <master_node_2>
-                  # - <master_node_3>
-          discovery.seed_hosts:
-                  - <elasticsearch_ip_node1>
-                  # - <elasticsearch_ip_node2>
-                  # - <elasticsearch_ip_node3>
-
-        # Wazuh servers configuration
-        Wazuh servers IPs:
-          name:
-            - <node_name>
-          ip:
-            - <wazuh_master_server_IP>
-          master: true
-          # name:
-          #   - <node_name>
-          # ip:
-          #   - <wazuh_worker_server_IP>
-
-        # Kibana configuration
-        Kibana IP:
-          name:
-            - <node-name>
-          ip:
-            - <kibana_ip>
+         nodes:
+           # Wazuh indexer nodes
+           wazuh_indexer:
+             name: <wazuh-indexer-node-name>
+             ip: <wazuh-indexer-node-ip>
+             # name: <wazuh-indexer-node-name>
+             # ip: <wazuh-indexer-node-ip>
+         
+           # Wazuh server nodes
+           # Use node_type only with more than one Wazuh manager
+           wazuh_servers:
+             name: <wazuh-server-node-name>
+             ip: <wazuh-server-node-ip>
+             # node_type: master
+             # name: <wazuh-server-node-name>
+             # ip: <wazuh-server-node-ip>
+             # node_type: worker
+         
+           # Wazuh dashboard node
+           wazuh_dashboard:
+             name: <wazuh-dashboard-node-name>
+             ip: <wazuh-dashboard-node-ip>
 
 
 
-#. Edit ``./instances.yml``.
-
-
-#. Run the script with the options ``-e``, ``-en <node_name>``, and ``-c`` to install the Wazuh indexer and generate the SSL certificates. The node name must be the same used in ``config.yml`` for the certificate creation, for example, ``master-node-1``.
+#. Run the script with the options ``-c`` to generate the SSL certificates. 
 
       .. code-block:: console
 
-        # bash ./unattended_installation.sh -e -en <node_name> -c
+        # bash ./wazuh_install.sh -c
 
 
     Options available when running the script:
 
-    +-------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | Options                       | Purpose                                                                                                        |
-    +===============================+================================================================================================================+
-    | -e / --install-elasticsearch  | Installs Open Distro for Elasticsearch. Must be used with option ``-ename <node-name>``.                       |
-    +-------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -en / --elastic-node-name     | Indicates the name of the Elasticsearch instance.                                                              |
-    +-------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -c / --create-certificates    | Generates the certificates for all the indicated nodes.                                                        |
-    +-------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -o / --overwrite              | Overwrites the existing installation.                                                                          |
-    +-------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -r / --uninstall              | Removes the installation.                                                                                      |
-    +-------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -v / --verbose                | Shows the complete installation output.                                                                        |
-    +-------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -i / --ignore-health-check    | Ignores the health check.                                                                                      |
-    +-------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -h / --help                   | Shows *help*.                                                                                                  |
-    +-------------------------------+----------------------------------------------------------------------------------------------------------------+        
+    +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
+    | Options                                         | Purpose                                                                                                        |
+    +=================================================+================================================================================================================+
+    | -I / --wazuh-indexer <wazuh-indexer-node-name>  | Installs the Wazuh indexer. You need to indicate the Wazuh indexer node name.                                  |
+    +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
+    | -c / --create-certificates                      | Create certificates from config.yml file.                                                                      |
+    +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
+    | -s / --start-cluster                            | Starts the Wazuh indexer cluster.                                                                              |
+    +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
+    | -o / --overwrite                                | Overwrites the existing installation.                                                                          |
+    +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
+    | -r / --uninstall                                | Removes the installation.                                                                                      |
+    +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
+    | -v / --verbose                                  | Shows the complete installation output.                                                                        |
+    +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
+    | -i / --ignore-health-check                      | Ignores the health check.                                                                                      |
+    +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
+    | -l / --local                                    | Use local files.                                                                                               |
+    +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+ 
+    | -d / --development                              | Use development repository.                                                                                    |
+    +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
+    | -h / --help                                     | Shows *help*.                                                                                                  |
+    +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+        
 
-#.  Copy the ``certs/`` folder and the ``config.yml`` file to all the servers of the distributed deployment, including the Wazuh server, the Wazuh indexer and the Wazuh dashboard nodes. This can be done by using, for example, ``scp``.
+#.  Copy the ``certs/`` folder to all the servers of the distributed deployment, including the Wazuh server, the Wazuh indexer and the Wazuh dashboard nodes. This can be done by using, for example, ``scp``.
 
-You now have installed and configured the initial Wazuh indexer node. 
 
-    - If you want a single-node cluster, everything is set and you can proceed directly with :ref:`wazuh_server_unattended`.
- 
-    - If you want to install a multi-node cluster, expand the instructions below to install and configure subsequent nodes, and then initialize the cluster. 
+2. Wazuh indexer nodes installation
+------------------------------------
 
-2. Subsequent nodes
--------------------
-.. raw:: html
-
-    <div class="accordion-section">
-
-Install and configure subsequent nodes of your multi-node cluster. Make sure that a copy of ``certs/`` and a copy of ``config.yml``, created during the initial node installation, is placed in your working directory (``./certs/`` and ``./config.yml``).
+Install and configure the Wazuh indexer nodes. Make sure that a copy of ``certs/``, created during the previous step, is placed in your working directory.
 
 
 #. Download the script.
 
       .. code-block:: console
 
-        # curl -sO https://s3.us-west-1.amazonaws.com/packages-dev.wazuh.com/resources/4.2/unattended_installation.sh
+        # curl -sO https://packages.wazuh.com/resources/wazuh_install.sh
 
 
-#. Run the script with the options ``-e`` and ``-en <node_name>`` to install the Wazuh indexer. The node name must be the same used in ``config.yml`` for the certificate creation, for example, ``master-node-2``.
+#. Run the script with the options ``-I`` and the node name to install and configure the Wazuh indexer. The node name must be the same used in ``config.yml`` for the certificate creation, for example, ``node-1``.
 
       .. code-block:: console
 
-        # bash ./unattended_installation.sh -e -en <node_name> 
+        # bash ./wazuh_install.sh -I node-1 
 
 
 Repeat this process on each Wazuh indexer node and proceed with initializing the cluster.             
 
 
-3. Cluster initialization
+3. Cluster initialization 
 -------------------------
-.. raw:: html
 
-    <div class="accordion-section">
 
-The final stage of the process for installing Wazuh indexer multi-node cluster consists in running the security admin script. 
+The final stage of the process for installing Wazuh indexer cluster consists in running the security admin script. 
 
-Run the ``securityadmin`` script on the initial node to load the new certificates information and start the cluster. Replace ``<elasticsearch_IP>`` with the Wazuh indexer installation IP and run the command.
+Run the unattended script with option ``-s`` to load the new certificates information and start the cluster. Replace ``<elasticsearch_IP>`` with the Wazuh indexer installation IP and run the command.
 
   .. code-block:: console
 
-    # export JAVA_HOME=/usr/share/elasticsearch/jdk/ && /usr/share/elasticsearch/plugins/opendistro_security/tools/securityadmin.sh -cd /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/ -icl -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin-key.pem -h <elasticsearch_IP>
+    # bash ./wazuh_install.sh -s <elasticsearch_IP>
 
 
 Next steps
