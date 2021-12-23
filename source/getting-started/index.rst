@@ -27,14 +27,10 @@ How to install Wazuh
 
 The Wazuh solution is composed of :ref:`three central components <components>` called the Wazuh server, the Wazuh indexer, the Wazuh dashboard, and a single component called the :ref:`Wazuh agent <installation_agents>`. 
 
-For deploying Wazuh in your infrastructure, you can choose between the two installation methods listed below:
+For deploying Wazuh in your infrastructure, you can read the following sections of our documentation:
 
-- **Unattended installation**: This lets you install each component using a script that automates the installation process. 
-- **Step-by-step installation**: This other lets you install each component manually following detailed step-by-step instructions.
-
-In addition, the :ref:`Wazuh quickstart <quickstart>` lets you install all the central components on the same host using the unattended installation script with an all-in-one deployment. 
-
-Check our :ref:`Installation guide <installation_guide>` section to learn more about Wazuh installation methods.
+- The :ref:`Wazuh quickstart <quickstart>` shows you how to install all the central components on the same host using the unattended installation script with an all-in-one deployment. 
+- The :ref:`Installation guide <installation_guide>` section shows you how to install each component using the Unattended and Step-by-step installation methods.
 
 
 Wazuh Cloud
