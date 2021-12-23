@@ -29,8 +29,8 @@ The Wazuh solution is composed of :ref:`three central platform components <compo
 
 For deploying Wazuh in your infrastructure, you can read the following sections of our documentation:
 
-- The :ref:`Wazuh quickstart <quickstart>` shows you how to install all the central components on the same host using the unattended installation script with an all-in-one deployment. 
-- The :ref:`Installation guide <installation_guide>` section shows you how to install each component using the Unattended or the Step-by-step installation methods.
+- The :ref:`Wazuh quickstart <quickstart>` shows you how to install Wazuh automatically in just a few minutes. -  
+- The :ref:`Installation guide <installation_guide>` section shows you how to install each component using the unattended or the step-by-step installation method.
 
 
 Wazuh Cloud
