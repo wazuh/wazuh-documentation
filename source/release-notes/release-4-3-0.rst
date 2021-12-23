@@ -217,16 +217,16 @@ RESTful API
 Ruleset
 ^^^^^^^
 
-- `#10428 <https://github.com/wazuh/wazuh/pull/10428>`_ Added Rules and Decoders for Wazuh API.
-- `#10458 <https://github.com/wazuh/wazuh/pull/10458>`_ Added Rules and Decoders for TrendMicro Cloud One.
-- `#10496 <https://github.com/wazuh/wazuh/pull/10496>`_ Added Rules for Sophos UTM Firewall.
-- `#10369 <https://github.com/wazuh/wazuh/pull/10369>`_ Added SCA policy for Solaris 11.4.
-- `#10658 <https://github.com/wazuh/wazuh/pull/10658>`_ Added Rules for Cloudflare WAF.
-- `#10667 <https://github.com/wazuh/wazuh/pull/10667>`_ Added Rules and Decoders for FortiAuth.
-- `#10315 <https://github.com/wazuh/wazuh/pull/10315>`_ Updated Amazon Linux 2 SCA up to version 2.0.0.
-- `#10354 <https://github.com/wazuh/wazuh/pull/10354>`_ Updated RedHat Enterprise Linux 8 SCA up to version 1.0.1.
-- `#10507 <https://github.com/wazuh/wazuh/pull/10507>`_ Updated Amazon rules to add more granularity.
-- `#10558 <https://github.com/wazuh/wazuh/pull/10558>`_ Updated macOS Big Sur SCA up to 1.2.0 version.
+- `#10428 <https://github.com/wazuh/wazuh/pull/10428>`_ The Rules and Decoders for Wazuh API are added.
+- `#10458 <https://github.com/wazuh/wazuh/pull/10458>`_ Rules and Decoders for TrendMicro Cloud One are added.
+- `#10496 <https://github.com/wazuh/wazuh/pull/10496>`_ Rules for Sophos UTM Firewall are added.
+- `#10369 <https://github.com/wazuh/wazuh/pull/10369>`_ SCA policy for Solaris 11.4 is added.
+- `#10658 <https://github.com/wazuh/wazuh/pull/10658>`_ Rules for Cloudflare WAF are added.
+- `#10667 <https://github.com/wazuh/wazuh/pull/10667>`_ Rules and Decoders for FortiAuth are added.
+- `#10315 <https://github.com/wazuh/wazuh/pull/10315>`_ Amazon Linux 2 SCA up to version 2.0.0 is updated.
+- `#10354 <https://github.com/wazuh/wazuh/pull/10354>`_ RedHat Enterprise Linux 8 SCA up to version 1.0.1 is updated.
+- `#10507 <https://github.com/wazuh/wazuh/pull/10507>`_ Amazon rules to add more granularity are updated.
+- `#10558 <https://github.com/wazuh/wazuh/pull/10558>`_ macOS Big Sur SCA up to 1.2.0 version is updated.
 
 
 Wazuh Kibana plugin
