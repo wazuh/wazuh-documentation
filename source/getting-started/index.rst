@@ -15,11 +15,6 @@ With Wazuh, you get a high-performance host-based intrusion detection system (HI
 
 You can also try `Wazuh Cloud <https://wazuh.com/cloud/>`_, our software as a service (SaaS) where no dedicated hardware is required, and you can work efficiently within a ready-to-use cloud environment.
 
-The Wazuh solution is composed of :ref:`three central components <components>` and the :ref:`Wazuh agent <installation_agents>`:
-
-- **The Wazuh server, the Wazuh indexer, and the Wazuh dashboard** are the three central components that collect and analyze the data gathered by the agents.
-- **The Wazuh agent** is a single and lightweight monitoring software deployed on the monitored endpoints to provide prevention, detection, and response capabilities.
-
 
 Community and support
 ---------------------
@@ -30,14 +25,16 @@ Community and support
 How to install Wazuh
 --------------------
 
+The Wazuh solution is composed of :ref:`three central components <components>` called the the Wazuh server, the Wazuh indexer, the Wazuh dashboard, and a single component called the :ref:`Wazuh agent <installation_agents>`. 
+
 For deploying Wazuh in your infrastructure, you can choose between the two installation methods listed below:
 
 - **Unattended installation**: This lets you install each component using a script that automates the installation process. 
 - **Step-by-step installation**: This other lets you install each component manually following detailed step-by-step instructions.
 
-Check our :ref:`Installation guide <installation_guide>` section to learn about Wazuh installation methods.
+In addition, the :ref:`Wazuh quickstart <quickstart>` lets you install all the central components on the same host using the unattended installation script with an all-in-one deployment. 
 
-The :ref:`Wazuh quickstart <quickstart>` lets you install all the central components on the same host using the unattended installation script with an all-in-one deployment. 
+Check our :ref:`Installation guide <installation_guide>` section to learn about Wazuh installation methods.
 
 
 Wazuh Cloud
