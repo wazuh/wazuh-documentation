@@ -223,10 +223,10 @@ Ruleset
 - `#10369 <https://github.com/wazuh/wazuh/pull/10369>`_ SCA policy for Solaris 11.4 is added.
 - `#10658 <https://github.com/wazuh/wazuh/pull/10658>`_ Rules for Cloudflare WAF are added.
 - `#10667 <https://github.com/wazuh/wazuh/pull/10667>`_ Rules and Decoders for FortiAuth are added.
-- `#10315 <https://github.com/wazuh/wazuh/pull/10315>`_ Amazon Linux 2 SCA up to version 2.0.0 is updated.
-- `#10354 <https://github.com/wazuh/wazuh/pull/10354>`_ RedHat Enterprise Linux 8 SCA up to version 1.0.1 is updated.
-- `#10507 <https://github.com/wazuh/wazuh/pull/10507>`_ Amazon rules to add more granularity are updated.
-- `#10558 <https://github.com/wazuh/wazuh/pull/10558>`_ macOS Big Sur SCA up to 1.2.0 version is updated.
+- `#10315 <https://github.com/wazuh/wazuh/pull/10315>`_ Amazon Linux 2 SCA is updated up to version 2.0.0.
+- `#10354 <https://github.com/wazuh/wazuh/pull/10354>`_ RedHat Enterprise Linux 8 SCA is updated up to version 1.0.1.
+- `#10507 <https://github.com/wazuh/wazuh/pull/10507>`_ Amazon rules are updated to add more granularity.
+- `#10558 <https://github.com/wazuh/wazuh/pull/10558>`_ macOS Big Sur SCA is updated up to version 1.2.0.
 
 
 Wazuh Kibana plugin
