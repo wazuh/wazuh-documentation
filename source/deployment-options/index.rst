@@ -5,7 +5,7 @@
 Deployment alternatives
 =======================
 
-You can deploy Wazuh to your environments using multiple deployment options. These alternatives complement the installation methods you find in the :ref:`Installation guide <installation_guide>`.
+You can deploy Wazuh to your environments using other deployment options. These alternatives complement the installation methods you can find in the :ref:`Quickstart <quickstart>` and the :ref:`Installation guide <installation_guide>`.
 
 .. raw:: html
 
@@ -22,7 +22,7 @@ You can deploy Wazuh to your environments using multiple deployment options. The
 
 - :ref:`Deployment on Docker <wazuh_docker>`: You can install Wazuh with a single-host architecture using a set of Docker images that contains the `Wazuh manager <https://github.com/wazuh/wazuh>`_, `Filebeat <https://www.elastic.co/products/beats/filebeat>`_, `Elasticsearch <https://registry.hub.docker.com/_/elasticsearch/>`_, `Kibana <https://registry.hub.docker.com/_/kibana/>`_, and optionally `Nginx <https://hub.docker.com/_/nginx/>`_. `Open Distro for Elasticsearch <https://opendistro.github.io/for-elasticsearch/>`_ is fully supported as well.
   
-- :ref:`Deployment on Kubernetes <wazuh_kubernetes>`: Kubernetes is an open-source system for automating deployment, scaling, and managing containerized applications. This deployment type uses Wazuh images from Docker and allows you to build an environment composed of a Wazuh cluster integrated with the Elastic Stack. 
+- :ref:`Deployment on Kubernetes <wazuh_kubernetes>`: Kubernetes is an open-source system for automating deployment, scaling, and managing containerized applications. This deployment type uses Wazuh images from Docker and allows you to build an environment composed of a Wazuh cluster integrated with Elastic Stack. 
 
 
 
@@ -53,10 +53,10 @@ You can deploy Wazuh to your environments using multiple deployment options. The
 
     <h3>Integrations</h3>
 
-- :ref:`Integration with Elastic Stack basic license <basic_installation_guide>`: As an alternative to Open Distro for Elasticsearch, you can install Wazuh using the Elastic Stack basic license option. It contains everything included in the open source version under the Apache 2.0 license, plus some additional capabilities such as Elastic Stack Security features, Kibana alerting, and others. According to your chosen configuration, Wazuh and Elastic Stack are installed on the same host, as an all-in-one deployment, on a separate host as a single-node or multi-node cluster.
+- :ref:`Integration with Elastic Stack basic license <basic_installation_guide>`: As an alternative to Open Distro for Elasticsearch, you can install Wazuh using the Elastic Stack basic license option. It contains everything included in the open source version under the `Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_, plus some additional capabilities such as Elastic Stack Security features, Kibana alerting, and others. According to your chosen configuration, Wazuh and Elastic Stack are installed on the same host, as an all-in-one deployment, on a separate host as a single-node or multi-node cluster.
 
 
-- :ref:`Integration with Splunk <installation_splunk>`: You install Wazuh along with Splunk Enterprise, including the Splunk forwarder and the Wazuh Splunk app. This can be done as a single instance or as a multi-instance cluster, depending on the size of your environment.
+- :ref:`Integration with Splunk <installation_splunk>`: You install Wazuh along with Splunk Enterprise, including the Splunk forwarder and the Wazuh Splunk app. This can be done as a single instance or as a multi-instance cluster.
 
 
 .. toctree::
