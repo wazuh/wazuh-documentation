@@ -9,7 +9,7 @@ Install the Wazuh app for Splunk
 
 Wazuh app for Splunk offers a UI to visualize Wazuh alerts and Wazuh API data. Wazuh helps you to gain deeper security visibility into your infrastructure by monitoring hosts at an operating system and application level.
 
-.. thumbnail:: ../../../images/splunk-app/splunk-app.png
+.. thumbnail:: ../../images/splunk-app/splunk-app.png
   :title: Splunk app - Overview > Security events tab
   :align: center
   :width: 90%
@@ -49,7 +49,7 @@ Installation
 
 #. Open Splunk in your desired browser and click on the Wazuh app icon:
 
-    .. image:: ../../../images/splunk-app/app-icon.png
+    .. image:: ../../images/splunk-app/app-icon.png
       :align: center
 
 #. The app will redirect you to the *Settings* tab, where fill the form with your **Wazuh API credentials**. Use the URL and port from your Wazuh API server.
@@ -61,7 +61,7 @@ Installation
     .. note::
       You can get more information about how to set up the credentials at :ref:`securing_api`.
 
-    .. thumbnail:: ../../../images/splunk-app/app-setup.png
+    .. thumbnail:: ../../images/splunk-app/app-setup.png
       :title: App initial configuration
       :align: center
       :width: 100%
@@ -75,19 +75,19 @@ Installation
     .. note::
        The Wazuh app considers as a valid index all indices that contain the word ``wazuh`` in the source type, the default value from the installation guide for source type is ``wazuh``.
 
-    .. thumbnail:: ../../../images/splunk-app/app-index-sourcetype.png
+    .. thumbnail:: ../../images/splunk-app/app-index-sourcetype.png
       :title: Index and Source Type configuration
       :align: center
       :width: 100%
 
     You can also select the API, Index and Source Type using the *Quick settings* menu. 
 
-    .. thumbnail:: ../../../images/splunk-app/quick-settings.png
+    .. thumbnail:: ../../images/splunk-app/quick-settings.png
       :title: Index and Source Type configuration
       :align: center
       :width: 100%
 
-    .. thumbnail:: ../../../images/splunk-app/quick-settings-open.png
+    .. thumbnail:: ../../images/splunk-app/quick-settings-open.png
       :title: Index and Source Type configuration
       :align: center
       :width: 100%
