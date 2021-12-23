@@ -232,14 +232,14 @@ Ruleset
 Wazuh Kibana plugin
 ^^^^^^^^^^^^^^^^^^^
 
-- `#3639 <https://github.com/wazuh/wazuh-kibana-app/pull/3639>`_ Added ability to filter the results fo the ``Network Ports`` table in the ``Inventory data`` section.
-- `#3324 <https://github.com/wazuh/wazuh-kibana-app/pull/3324>`_ Added new endpoint service to collect the frontend logs into a file.
-- `#3262 <https://github.com/wazuh/wazuh-kibana-app/issues/3262>`_ `#3327 <https://github.com/wazuh/wazuh-kibana-app/pull/3327>`_ `#3321 <https://github.com/wazuh/wazuh-kibana-app/pull/3321>`_ `#3367 <https://github.com/wazuh/wazuh-kibana-app/pull/3367>`_ `#3373 <https://github.com/wazuh/wazuh-kibana-app/pull/3373>`_ Improved the frontend handle errors strategy: UI, Toasts, console log and log in file.
-- `#3196 <https://github.com/wazuh/wazuh-kibana-app/pull/3196>`_ Added fields status and type in vulnerabilities table.
-- `#3368 <https://github.com/wazuh/wazuh-kibana-app/pull/3368>`_ `#3344 <https://github.com/wazuh/wazuh-kibana-app/pull/3344>`_ Added Intelligence tab to Mitre Att&ck module.
-- `#3424 <https://github.com/wazuh/wazuh-kibana-app/pull/3424>`_ Added sample data for office365 events.
-- `#3475 <https://github.com/wazuh/wazuh-kibana-app/pull/3475>`_ Created a separate component to check for sample data.
-- `#3506 <https://github.com/wazuh/wazuh-kibana-app/pull/3506>`_ Added a new hook for getting value suggestions.
+- `#3639 <https://github.com/wazuh/wazuh-kibana-app/pull/3639>`_ Wazuh adds the ability to filter the results fo the ``Network Ports`` table in the ``Inventory data`` section.
+- `#3324 <https://github.com/wazuh/wazuh-kibana-app/pull/3324>`_ A new endpoint service is added to collect the frontend logs into a file.
+- `#3262 <https://github.com/wazuh/wazuh-kibana-app/issues/3262>`_ `#3327 <https://github.com/wazuh/wazuh-kibana-app/pull/3327>`_ `#3321 <https://github.com/wazuh/wazuh-kibana-app/pull/3321>`_ `#3367 <https://github.com/wazuh/wazuh-kibana-app/pull/3367>`_ `#3373 <https://github.com/wazuh/wazuh-kibana-app/pull/3373>`_  The frontend handle errors strategy is improved: UI, Toasts, console log and log in file.
+- `#3196 <https://github.com/wazuh/wazuh-kibana-app/pull/3196>`_ Fields status and type are added in vulnerabilities table.
+- `#3368 <https://github.com/wazuh/wazuh-kibana-app/pull/3368>`_ `#3344 <https://github.com/wazuh/wazuh-kibana-app/pull/3344>`_ Intelligence tab is added to Mitre Att&ck module.
+- `#3424 <https://github.com/wazuh/wazuh-kibana-app/pull/3424>`_ Sample data for office365 events is added.
+- `#3475 <https://github.com/wazuh/wazuh-kibana-app/pull/3475>`_ A separate component to check for sample data is created.
+- `#3506 <https://github.com/wazuh/wazuh-kibana-app/pull/3506>`_ A new hook for getting value suggestions is added.
 - `#3531 <https://github.com/wazuh/wazuh-kibana-app/pull/3531>`_ Added dinamic simple filters and adding simple GitHub filters fields
 - `#3524 <https://github.com/wazuh/wazuh-kibana-app/pull/3524>`_ Added configuration viewer for Module Office365 on the Configuration section of the Management menu.
 - `#3518 <https://github.com/wazuh/wazuh-kibana-app/pull/3518>`_ Added base Module Panel view with Office365 setup.
