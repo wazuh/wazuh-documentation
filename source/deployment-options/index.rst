@@ -51,11 +51,6 @@ You can deploy Wazuh to your environments using multiple deployment options. The
 
 .. raw:: html
 
-    <hr>
-    </hr>
-
-.. raw:: html
-
     <h3>Integrations</h3>
 
 - :ref:`Integration with Elastic Stack basic license <basic_installation_guide>`: As an alternative to Open Distro for Elasticsearch, you can install Wazuh using the Elastic Stack basic license option. It contains everything included in the open source version under the Apache 2.0 license, plus some additional capabilities such as Elastic Stack Security features, Kibana alerting, and others. According to your chosen configuration, Wazuh and Elastic Stack are installed on the same host, as an all-in-one deployment, on a separate host as a single-node or multi-node cluster.
