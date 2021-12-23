@@ -17,7 +17,7 @@ Prerequisites
 
 Before installing the Wazuh servers and Filebeat, some extra packages must be installed:
 
-.. include:: ../../../../../../_templates/installations/basic/before_installation_elastic.rst
+.. include:: ../../../../../_templates/installations/basic/before_installation_elastic.rst
 
 Installing Wazuh server
 -----------------------
@@ -35,21 +35,21 @@ This section describes how to add the Wazuh repository. It will be used for Wazu
   .. group-tab:: Yum
 
 
-    .. include:: ../../../../../../_templates/installations/basic/wazuh/yum/add_repository.rst
+    .. include:: ../../../../../_templates/installations/basic/wazuh/yum/add_repository.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../../../../../_templates/installations/basic/wazuh/deb/add_repository.rst
+    .. include:: ../../../../../_templates/installations/basic/wazuh/deb/add_repository.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../../../../_templates/installations/basic/wazuh/zypp/add_repository.rst
+    .. include:: ../../../../../_templates/installations/basic/wazuh/zypp/add_repository.rst
 
 
 
@@ -64,21 +64,21 @@ Installing the Wazuh manager
   .. group-tab:: Yum
 
 
-    .. include:: ../../../../../../_templates/installations/basic/wazuh/yum/install_wazuh_manager.rst
+    .. include:: ../../../../../_templates/installations/basic/wazuh/yum/install_wazuh_manager.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../../../../../_templates/installations/basic/wazuh/deb/install_wazuh_manager.rst
+    .. include:: ../../../../../_templates/installations/basic/wazuh/deb/install_wazuh_manager.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../../../../_templates/installations/basic/wazuh/zypp/install_wazuh_manager.rst
+    .. include:: ../../../../../_templates/installations/basic/wazuh/zypp/install_wazuh_manager.rst
 
 
 
@@ -90,34 +90,34 @@ One server has to be chosen as a master, the rest will be workers. So, the secti
 Wazuh server master node
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. .. include:: ../../../../../../_templates/installations/basic/wazuh/common/configure_wazuh_master_node.rst
+#. .. include:: ../../../../../_templates/installations/basic/wazuh/common/configure_wazuh_master_node.rst
 
 
 #. Once the ``/var/ossec/etc/ossec.conf`` configuration file is edited, enable and start the Wazuh manager service:
 
-    .. include:: ../../../../../../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
+    .. include:: ../../../../../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
 
 #. Run the following command to check if the Wazuh manager is active: 
 
-    .. include:: ../../../../../../_templates/installations/wazuh/common/check_wazuh_manager.rst
+    .. include:: ../../../../../_templates/installations/wazuh/common/check_wazuh_manager.rst
 
 
 Wazuh server worker nodes
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-#. .. include:: ../../../../../../_templates/installations/basic/wazuh/common/configure_wazuh_worker_node.rst
+#. .. include:: ../../../../../_templates/installations/basic/wazuh/common/configure_wazuh_worker_node.rst
 
 
 #. Once the ``/var/ossec/etc/ossec.conf`` configuration file is edited, enable and start the Wazuh manager service:
 
-    .. include:: ../../../../../../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
+    .. include:: ../../../../../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
 
 #. Run the following command to check if the Wazuh manager is active: 
 
-    .. include:: ../../../../../../_templates/installations/wazuh/common/check_wazuh_manager.rst
+    .. include:: ../../../../../_templates/installations/wazuh/common/check_wazuh_manager.rst
 
-#. .. include:: ../../../../../../_templates/installations/basic/wazuh/common/check_wazuh_cluster.rst
+#. .. include:: ../../../../../_templates/installations/basic/wazuh/common/check_wazuh_cluster.rst
 
 
 .. _basic_wazuh_server_multi_node_filebeat:
@@ -136,21 +136,21 @@ Adding the Elastic Stack repository
   .. group-tab:: Yum
 
 
-    .. include:: ../../../../../../_templates/installations/basic/elastic/yum/add_repository.rst
+    .. include:: ../../../../../_templates/installations/basic/elastic/yum/add_repository.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../../../../../_templates/installations/basic/elastic/deb/add_repository.rst
+    .. include:: ../../../../../_templates/installations/basic/elastic/deb/add_repository.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../../../../_templates/installations/basic/elastic/zypp/add_repository.rst
+    .. include:: ../../../../../_templates/installations/basic/elastic/zypp/add_repository.rst
 
 
 Filebeat installation and configuration
@@ -165,21 +165,21 @@ Filebeat installation and configuration
       .. group-tab:: Yum
 
 
-        .. include:: ../../../../../../_templates/installations/basic/elastic/yum/install_filebeat.rst
+        .. include:: ../../../../../_templates/installations/basic/elastic/yum/install_filebeat.rst
 
 
 
       .. group-tab:: APT
 
 
-        .. include:: ../../../../../../_templates/installations/basic/elastic/deb/install_filebeat.rst
+        .. include:: ../../../../../_templates/installations/basic/elastic/deb/install_filebeat.rst
 
 
 
       .. group-tab:: ZYpp
 
 
-        .. include:: ../../../../../../_templates/installations/basic/elastic/zypp/install_filebeat.rst
+        .. include:: ../../../../../_templates/installations/basic/elastic/zypp/install_filebeat.rst
 
 
 #. Download the pre-configured Filebeat config file used to forward Wazuh alerts to Elasticsearch:
@@ -203,16 +203,16 @@ Filebeat installation and configuration
 
 #. Configure Filebeat certificates:
 
-    .. include:: ../../../../../../_templates/installations/basic/elastic/common/copy_certificates_filebeat_wazuh_cluster.rst
+    .. include:: ../../../../../_templates/installations/basic/elastic/common/copy_certificates_filebeat_wazuh_cluster.rst
 
 #. Edit ``/etc/filebeat/filebeat.yml`` file:
 
-    .. include:: ../../../../../../_templates/installations/basic/elastic/common/configure_filebeat.rst
+    .. include:: ../../../../../_templates/installations/basic/elastic/common/configure_filebeat.rst
 
 
 #. Enable and start the Filebeat service:
 
-    .. include:: ../../../../../../_templates/installations/basic/elastic/common/enable_filebeat.rst
+    .. include:: ../../../../../_templates/installations/basic/elastic/common/enable_filebeat.rst
 
 To ensure that Filebeat has been successfully installed, run the following command:
 
@@ -224,7 +224,7 @@ To ensure that Filebeat has been successfully installed, run the following comma
 Disabling repositories
 ----------------------
 
-.. include:: ../../../../../../_templates/installations/basic/elastic/common/disabling_repositories_explanation.rst
+.. include:: ../../../../../_templates/installations/basic/elastic/common/disabling_repositories_explanation.rst
 
 
 .. tabs::
@@ -233,20 +233,20 @@ Disabling repositories
   .. group-tab:: Yum
 
 
-    .. include:: ../../../../../../_templates/installations/basic/wazuh/yum/disabling_repositories.rst
+    .. include:: ../../../../../_templates/installations/basic/wazuh/yum/disabling_repositories.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../../../../../_templates/installations/basic/wazuh/deb/disabling_repositories.rst
+    .. include:: ../../../../../_templates/installations/basic/wazuh/deb/disabling_repositories.rst
 
 
 
   .. group-tab:: ZYpp
 
-    .. include:: ../../../../../../_templates/installations/basic/wazuh/zypp/disabling_repositories.rst
+    .. include:: ../../../../../_templates/installations/basic/wazuh/zypp/disabling_repositories.rst
 
 
 To uninstall Wazuh and Filebeat, visit the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_open_distro>`.
