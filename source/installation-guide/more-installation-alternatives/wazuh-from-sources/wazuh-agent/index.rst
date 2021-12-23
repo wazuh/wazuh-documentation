@@ -632,7 +632,7 @@ Installing Wazuh agent from sources
 
           .. code-block:: console
 
-            # curl -k -O https://packages.wazuh.com/utils/gcc/gcc-5.5.0/gcc-5.5.0.tar.gz && gtar xzf gcc-5.5.0.tar.gz
+            # curl -k -O https://packages.wazuh.com/utils/gcc/gcc-5.5.0.tar.gz && gtar xzf gcc-5.5.0.tar.gz
             # ln -sf gcc-5.5.0 gcc
             # cd gcc
             # wget https://packages.wazuh.com/utils/gcc/mpfr-2.4.2.tar.bz2 && gtar xjf mpfr-2.4.2.tar.bz2 && ln -sf mpfr-2.4.2 mpfr
@@ -822,7 +822,7 @@ Installing Wazuh agent from sources
 
            .. code-block:: console
 
-            # curl -O https://packages.wazuh.com/utils/gcc/gcc-5.5.0/gcc-5.5.0.tar.gz && gtar xzf gcc-5.5.0.tar.gz
+            # curl -O https://packages.wazuh.com/utils/gcc/gcc-5.5.0.tar.gz && gtar xzf gcc-5.5.0.tar.gz
             # ln -sf gcc-5.5.0 gcc
             # cd gcc && ./contrib/download_prerequisites
             # cd .. && mkdir -p gcc-build && cd gcc-build
