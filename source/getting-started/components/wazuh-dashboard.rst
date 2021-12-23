@@ -74,7 +74,7 @@ Moreover, the application is flexible and allows users to create their own visua
 Monitoring deployed agents
 --------------------------
 
-From Wazuh dashboard, you manage the agents, their configuration, and data inventory. Inspecting the status, statistics, and health of any agent deployed to your system is streamlined with filters for fine-tuning and quick access to data. You can also create deployment commands to install and configure new Wazuh agents. 
+From the Wazuh dashboard, you manage the agents, their configuration, and data inventory. Inspecting the status, statistics, and health of any agent deployed to your system is streamlined with filters for fine-tuning and quick access to data. You can also create deployment commands to install and configure new Wazuh agents. 
 
 Additionally, agent groups and centralized configuration can be managed and edited through the interface as well.
 
