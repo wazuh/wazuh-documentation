@@ -22,7 +22,7 @@ Prerequisites
 -------------
 Some extra packages are needed for the installation, such us ``curl`` or ``unzip``, that will be used in further steps: 
 
-.. include:: ../../../../../../_templates/installations/basic/before_installation_elastic.rst
+.. include:: ../../../../../_templates/installations/basic/before_installation_elastic.rst
 
 Adding the Elastic Stack repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -33,21 +33,21 @@ Adding the Elastic Stack repository
   .. group-tab:: Yum
 
 
-    .. include:: ../../../../../../_templates/installations/basic/elastic/yum/add_repository.rst
+    .. include:: ../../../../../_templates/installations/basic/elastic/yum/add_repository.rst
     
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../../../../../_templates/installations/basic/elastic/deb/add_repository.rst
+    .. include:: ../../../../../_templates/installations/basic/elastic/deb/add_repository.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../../../../_templates/installations/basic/elastic/zypp/add_repository.rst
+    .. include:: ../../../../../_templates/installations/basic/elastic/zypp/add_repository.rst
 
 
 
@@ -63,31 +63,31 @@ Elasticsearch installation and configuration
       .. group-tab:: Yum
 
 
-        .. include:: ../../../../../../_templates/installations/basic/elastic/yum/install_elasticsearch.rst
+        .. include:: ../../../../../_templates/installations/basic/elastic/yum/install_elasticsearch.rst
 
 
 
       .. group-tab:: APT
 
 
-        .. include:: ../../../../../../_templates/installations/basic/elastic/deb/install_elasticsearch.rst
+        .. include:: ../../../../../_templates/installations/basic/elastic/deb/install_elasticsearch.rst
 
 
 
       .. group-tab:: ZYpp
 
 
-        .. include:: ../../../../../../_templates/installations/basic/elastic/zypp/install_elasticsearch.rst
+        .. include:: ../../../../../_templates/installations/basic/elastic/zypp/install_elasticsearch.rst
 
 
-#. .. include:: ../../../../../../_templates/installations/basic/elastic/common/elastic-single-node/configure_elasticsearch.rst
+#. .. include:: ../../../../../_templates/installations/basic/elastic/common/elastic-single-node/configure_elasticsearch.rst
 
 Certificates creation and deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #. This step implies the selection of the Wazuh cluster mode. Choose between ``Wazuh single-node cluster``, if having only one Wazuh server, and ``Wazuh multi-node cluster`` in case of having two or more Wazuh servers.
 
-    .. include:: ../../../../../../_templates/installations/basic/elastic/common/elastic-single-node/generate_deploy_certificates.rst
+    .. include:: ../../../../../_templates/installations/basic/elastic/common/elastic-single-node/generate_deploy_certificates.rst
 
 #. Copy ``~/certs.zip`` to all the servers of the distributed deployment. This can be done by using, for example,  ``scp.``
 
@@ -107,16 +107,16 @@ Certificates creation and deployment
 
 #. Enable and start the Elasticsearch service:
 
-    .. include:: ../../../../../../_templates/installations/basic/elastic/common/enable_elasticsearch.rst
+    .. include:: ../../../../../_templates/installations/basic/elastic/common/enable_elasticsearch.rst
 
 #. Generate credentials for all the Elastic Stack pre-built roles and users:
 
-    .. include:: ../../../../../../_templates/installations/basic/elastic/common/generate_elastic_credentials.rst
+    .. include:: ../../../../../_templates/installations/basic/elastic/common/generate_elastic_credentials.rst
 
 Disabling repositories
 ----------------------
 
-.. include:: ../../../../../../_templates/installations/basic/elastic/common/disabling_repositories_explanation.rst
+.. include:: ../../../../../_templates/installations/basic/elastic/common/disabling_repositories_explanation.rst
 
 
 .. tabs::
@@ -125,21 +125,21 @@ Disabling repositories
   .. group-tab:: Yum
 
 
-    .. include:: ../../../../../../_templates/installations/basic/elastic/yum/disabling_repositories.rst
+    .. include:: ../../../../../_templates/installations/basic/elastic/yum/disabling_repositories.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../../../../../_templates/installations/basic/elastic/deb/disabling_repositories.rst
+    .. include:: ../../../../../_templates/installations/basic/elastic/deb/disabling_repositories.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../../../../_templates/installations/basic/elastic/zypp/disabling_repositories.rst
+    .. include:: ../../../../../_templates/installations/basic/elastic/zypp/disabling_repositories.rst
 
 
 To uninstall Elasticsearch, visit the :ref:`uninstalling section <basic_uninstall_elasticsearch>`.
