@@ -36,8 +36,8 @@ Server components
 
 - **Analysis engine:** This is the server component that performs the data analysis. It employs *decoders* to identify the type of information being processed (Windows events, SSHD logs, web server logs, and others). These decoders also extract relevant data elements from the log messages such as source IP address, event ID, or username. Then, by using *rules*, the engine identifies specific patterns in the decoded events that could trigger alerts and possibly even call for automated countermeasures, like banning an IP on the firewall, for example.
 
-- **Wazuh RESTful API:** This service provides an interface to interact with the Wazuh infrastructure. It is used to manage configuration settings of agents and servers, to monitor the infrastructure status and overall health, to manage and edit Wazuh decoders and rules, and to query about the state of the monitored endpoints. It is also used by the Wazuh Kibana plugin. 
+- **Wazuh RESTful API:** This service provides an interface to interact with the Wazuh infrastructure. It is used to manage configuration settings of agents and servers, to monitor the infrastructure status and overall health, to manage and edit Wazuh decoders and rules, and to query about the state of the monitored endpoints. It is also used by the Wazuh dashboard.
 
 - **Wazuh cluster daemon:** This service is used to scale Wazuh servers horizontally, deploying them as a cluster. This kind of configuration, in combination with a network load balancer, provides high availability and load balancing. The Wazuh cluster daemon is what Wazuh servers use to communicate with each other and to keep synchronized.
 
-- **Filebeat:** It is used to send events and alerts to Elasticsearch. It reads the output of the Wazuh analysis engine and ships events in real time. It also provides load balancing when connected to a multi-node Elasticsearch cluster.
+- **Filebeat:** It is used to send events and alerts to Wazuh indexer. It reads the output of the Wazuh analysis engine and ships events in real time. It also provides load balancing when connected to a multi-node Wazuh indexer cluster.

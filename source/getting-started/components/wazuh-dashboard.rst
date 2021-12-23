@@ -1,11 +1,9 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. _components_kibana:
+Wazuh dashboard
+===============
 
-Kibana
-======
-
-Kibana is a flexible and intuitive web interface for mining, analyzing, and visualizing data. In combination with the Wazuh Kibana plugin, it is also used for the management and monitoring of the Wazuh infrastructure. From the Wazuh user interface, identity and access management can be controlled by creating and managing users and assigning roles as needed. 
+Wazuh dashboard is a flexible and intuitive web interface for mining, analyzing, and visualizing data. It is also used for the management and monitoring of the Wazuh infrastructure. From the Wazuh dashboard, identity and access management can be controlled by creating and managing users and assigning roles as needed. 
 
 Data visualization, mining, and analysis
 ----------------------------------------
@@ -76,7 +74,7 @@ Moreover, the application is flexible and allows users to create their own visua
 Monitoring deployed agents
 --------------------------
 
-From the web interface, you manage the agents, their configuration, and data inventory. Inspecting the status, statistics, and health of any agent deployed to your system is streamlined with filters for fine-tuning and quick access to data. You can also create deployment commands to install and configure new Wazuh agents. 
+From the Wazuh dashboard, you manage the agents, their configuration, and data inventory. Inspecting the status, statistics, and health of any agent deployed to your system is streamlined with filters for fine-tuning and quick access to data. You can also create deployment commands to install and configure new Wazuh agents. 
 
 Additionally, agent groups and centralized configuration can be managed and edited through the interface as well.
 
@@ -91,7 +89,7 @@ Additionally, agent groups and centralized configuration can be managed and edit
 Management of Wazuh infrastructure
 ----------------------------------
 
-The Wazuh Kibana plugin provides you with a directory dedicated to administrate and monitor your infrastructure. From there, you can manage and configure your Wazuh cluster rules and decoders, and CDB lists. 
+The Wazuh dashboard provides you with a directory dedicated to administrate and monitor your infrastructure. From there, you can manage and configure your Wazuh cluster rules and decoders, and CDB lists. 
 
 Data analysis visualization gives you full visibility into your cluster infrastructure for fast threat detection and remediation. Users can check the status, logs, and statistics of Wazuh clusters and create their own downloadable reports using predefined templates, or personalize their own if required. Wazuh provides the tools for comprehensive and efficient security analytics.
 
@@ -118,11 +116,11 @@ Data analysis visualization gives you full visibility into your cluster infrastr
 Dev tools
 ---------
 
-User can easily access developer tools integrated directly into the Wazuh Kibana plugin. 
+User can easily access developer tools integrated directly into the Wazuh dashboard. 
 
-The Ruleset Test tool provides an input box for reading sample logs and an output box to visualize the test results. This feature of the Wazuh Kibana plugin allows you to test sample logs directly on the web user interface and see how the ruleset reacts to specific log messages.
+The Ruleset Test tool provides an input box for reading sample logs and an output box to visualize the test results. This feature of the Wazuh dashboard allows you to test sample logs directly on the web user interface and see how the ruleset reacts to specific log messages.
 
-The Wazuh Kibana plugin also includes an API Console for users to interact with the Wazuh API. This API accommodates complete remote management of the Wazuh infrastructure and, from the API Console, you can easily perform everyday actions such as adding agents, restarting components, creating roles, or looking up syscheck details.
+The Wazuh dashboard also includes an API Console for users to interact with the Wazuh API. This API accommodates complete remote management of the Wazuh infrastructure and, from the API Console, you can easily perform everyday actions such as adding agents, restarting components, creating roles, or looking up syscheck details.
 
 
 .. raw:: html
