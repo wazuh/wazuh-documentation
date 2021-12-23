@@ -34,7 +34,7 @@ For deploying Wazuh in your infrastructure, you can choose between the two insta
 
 In addition, the :ref:`Wazuh quickstart <quickstart>` lets you install all the central components on the same host using the unattended installation script with an all-in-one deployment. 
 
-Check our :ref:`Installation guide <installation_guide>` section to learn about Wazuh installation methods.
+Check our :ref:`Installation guide <installation_guide>` section to learn more about Wazuh installation methods.
 
 
 Wazuh Cloud
