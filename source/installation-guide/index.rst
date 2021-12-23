@@ -147,5 +147,4 @@ In the :ref:`Packages list <packages>` section you will find all the packages re
     wazuh-server/index
     wazuh-dashboard/index
     wazuh-agent/index
-    deployment-options/index
     packages-list
