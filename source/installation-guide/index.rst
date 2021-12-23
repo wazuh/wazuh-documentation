@@ -19,18 +19,20 @@ In this installation guide, you will learn how to install Wazuh in your infrastr
 Installing Wazuh in your infrastructure
 ---------------------------------------
 
-You can choose between two installation methods for each Wazuh central component. Both installation methods provide you with instructions to install the central components on a single host or on separate hosts. 
+You install one by one the central components choosing between two installation methods: Unattended or Step-by-step.
 
 - Unattended: You can install Wazuh using a script that automates the installation and configuration process. This script also performs a health check to verify that the available system resources meet the minimal requirements.
 
-- Step by step: This is a manual way of carrying out the installation that includes a detailed description of each step of the process.
+- Step by step: This is a manual, supervised way of carrying out the installation that includes a detailed description of each step of the process.
 
-To check the requirements and start installing the first of the Wazuh central components, go to the :ref:`Wazuh indexer <wazuh_indexer_installation>` section. When installing, you will follow this workflow:
+When installing, you will follow this workflow:
 
 .. thumbnail:: ../images/installation/Wazuh-Installation-workflow.png
   :title: Wazuh installation workflow
   :align: center
   :width: 100%
+
+Wazuh indexer and Wazuh server can be installed in a single host or be distributed in cluster configurations. To check the requirements and start installing the first of the Wazuh central components, go to the :ref:`Wazuh indexer <wazuh_indexer_installation>` section.
 
 Deployment alternatives
 ^^^^^^^^^^^^^^^^^^^^^^^
