@@ -14,7 +14,7 @@ An index is a collection of documents that are related to each other. The docume
     :align: center
 
 
-Wazuh indexer uses a data structure called inverted index, which is designed to allow quick full-text searches. An inverted index lists every unique word that appears in any document and identifies all the documents that contain each particular word. During the indexing process, Wazuh indexer stores documents and builds an inverted index to make the document data searchable in near real-time. Indexing is initiated with the Wazuh-indexer API, through which you can add or update a JSON document in a specific index.
+The Wazuh indexer uses a data structure called inverted index, which is designed to allow quick full-text searches. An inverted index lists every unique word that appears in any document and identifies all the documents that contain each particular word. During the indexing process, Wazuh indexer stores documents and builds an inverted index to make the document data searchable in near real-time. Indexing is initiated with the Wazuh indexer API, through which you can add or update a JSON document in a specific index.
 
 Wazuh uses four different indices to store different event types.
 
