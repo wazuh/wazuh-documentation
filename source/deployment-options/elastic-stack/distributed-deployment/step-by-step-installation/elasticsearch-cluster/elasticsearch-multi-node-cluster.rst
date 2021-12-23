@@ -32,7 +32,7 @@ The following instructions are meant to be performed on the **first** Elasticsea
 Prerequisites
 ~~~~~~~~~~~~~
 
-.. include:: ../../../../../../_templates/installations/basic/before_installation_elastic.rst
+.. include:: ../../../../../_templates/installations/basic/before_installation_elastic.rst
 
 
 Adding the Elastic Stack repository
@@ -46,21 +46,21 @@ The addition of Elastic Stack repository must be done in all Elasticsearch clust
   .. group-tab:: Yum
 
 
-    .. include:: ../../../../../../_templates/installations/basic/elastic/yum/add_repository.rst
+    .. include:: ../../../../../_templates/installations/basic/elastic/yum/add_repository.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../../../../../_templates/installations/basic/elastic/deb/add_repository.rst
+    .. include:: ../../../../../_templates/installations/basic/elastic/deb/add_repository.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../../../../_templates/installations/basic/elastic/zypp/add_repository.rst
+    .. include:: ../../../../../_templates/installations/basic/elastic/zypp/add_repository.rst
 
 
 Elasticsearch installation and configuration
@@ -73,27 +73,27 @@ Install the Elasticsearch package:
       .. group-tab:: Yum
 
 
-        .. include:: ../../../../../../_templates/installations/basic/elastic/yum/install_elasticsearch.rst
+        .. include:: ../../../../../_templates/installations/basic/elastic/yum/install_elasticsearch.rst
 
 
 
       .. group-tab:: APT
 
 
-        .. include:: ../../../../../../_templates/installations/basic/elastic/deb/install_elasticsearch.rst
+        .. include:: ../../../../../_templates/installations/basic/elastic/deb/install_elasticsearch.rst
 
 
 
       .. group-tab:: ZYpp
 
 
-        .. include:: ../../../../../../_templates/installations/basic/elastic/zypp/install_elasticsearch.rst
+        .. include:: ../../../../../_templates/installations/basic/elastic/zypp/install_elasticsearch.rst
 
 
 
 Once Elasticsearch is installed it has to be configured by downloading and editing the file ``/etc/elasticsearch/elasticsearch.yml`` as follows:
 
-.. include:: ../../../../../../_templates/installations/basic/elastic/common/elastic-multi-node/configure_elasticsearch_initial_node.rst
+.. include:: ../../../../../_templates/installations/basic/elastic/common/elastic-multi-node/configure_elasticsearch_initial_node.rst
 
 
 Certificates creation and deployment
@@ -101,13 +101,13 @@ Certificates creation and deployment
 
 #.  This step implies the selection of the Wazuh cluster mode. Choose between ``Wazuh single-node cluster``, if having only one Wazuh server, and ``Wazuh multi-node cluster`` in case of having two or more Wazuh servers.
 
-    .. include:: ../../../../../../_templates/installations/basic/elastic/common/elastic-multi-node/generate_certificates.rst
+    .. include:: ../../../../../_templates/installations/basic/elastic/common/elastic-multi-node/generate_certificates.rst
 
 #. Copy ``~/certs.zip`` to all the servers of the distributed deployment. This can be done by using, for example,  ``scp.``. 
 
 #.  The next step is to create the directory ``/etc/elasticsearch/certs``, and then copy the CA file, the certificate and the key there.  
 
-    .. include:: ../../../../../../_templates/installations/basic/elastic/common/elastic-multi-node/deploy_certificates_initial_node.rst
+    .. include:: ../../../../../_templates/installations/basic/elastic/common/elastic-multi-node/deploy_certificates_initial_node.rst
 
 
 #. If Kibana will be installed in this node, keep the certificates file. Otherwise, if the file has been copied already to all the instances of the distributed deployment, remove it to increase security  ``rm -f ~/certs.zip``. 
@@ -115,7 +115,7 @@ Certificates creation and deployment
 
 #. Enable and start the Elasticsearch service:
 
-    .. include:: ../../../../../../_templates/installations/basic/elastic/common/enable_elasticsearch.rst
+    .. include:: ../../../../../_templates/installations/basic/elastic/common/enable_elasticsearch.rst
 
 
 **Subsequent nodes**
@@ -127,7 +127,7 @@ The following steps **should be executed in each of the subsequent nodes** of th
 Prerequisites
 ~~~~~~~~~~~~~
 
-.. include:: ../../../../../../_templates/installations/basic/before_installation_elastic.rst
+.. include:: ../../../../../_templates/installations/basic/before_installation_elastic.rst
 
 
 Adding the Elastic Stack repository
@@ -141,21 +141,21 @@ The addition of Elastic Stack repository must be done in all Elasticsearch clust
   .. group-tab:: Yum
 
 
-    .. include:: ../../../../../../_templates/installations/basic/elastic/yum/add_repository.rst
+    .. include:: ../../../../../_templates/installations/basic/elastic/yum/add_repository.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../../../../../_templates/installations/basic/elastic/deb/add_repository.rst
+    .. include:: ../../../../../_templates/installations/basic/elastic/deb/add_repository.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../../../../_templates/installations/basic/elastic/zypp/add_repository.rst
+    .. include:: ../../../../../_templates/installations/basic/elastic/zypp/add_repository.rst
 
 
 Elasticsearch installation and configuration
@@ -168,26 +168,26 @@ Elasticsearch installation and configuration
     .. group-tab:: Yum
 
 
-      .. include:: ../../../../../../_templates/installations/basic/elastic/yum/install_elasticsearch.rst
+      .. include:: ../../../../../_templates/installations/basic/elastic/yum/install_elasticsearch.rst
 
 
 
     .. group-tab:: APT
 
 
-      .. include:: ../../../../../../_templates/installations/basic/elastic/deb/install_elasticsearch.rst
+      .. include:: ../../../../../_templates/installations/basic/elastic/deb/install_elasticsearch.rst
 
 
 
     .. group-tab:: ZYpp
 
 
-      .. include:: ../../../../../../_templates/installations/basic/elastic/zypp/install_elasticsearch.rst
+      .. include:: ../../../../../_templates/installations/basic/elastic/zypp/install_elasticsearch.rst
 
 
  Once Elasticsearch is installed it has to be configured by downloading and editing the file ``/etc/elasticsearch/elasticsearch.yml`` as follows:
 
-.. include:: ../../../../../../_templates/installations/basic/elastic/common/elastic-multi-node/configure_elasticsearch_subsequent_nodes.rst
+.. include:: ../../../../../_templates/installations/basic/elastic/common/elastic-multi-node/configure_elasticsearch_subsequent_nodes.rst
 
 Certificates deployment
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -195,13 +195,13 @@ Certificates deployment
 
 #.  The next step is to create the directory ``/etc/elasticsearch/certs``, and then copy the CA file, the certificate and the key there. The ``X`` must be replaced according to the defined data in ``instances.yml`` file:
 
-    .. include:: ../../../../../../_templates/installations/basic/elastic/common/elastic-multi-node/deploy_certificates_subsequent_nodes.rst
+    .. include:: ../../../../../_templates/installations/basic/elastic/common/elastic-multi-node/deploy_certificates_subsequent_nodes.rst
 
 #. If Kibana will be installed in this node, keep the certificates file. Otherwise, remove it to increase security ``rm -f ~/certs.zip``.  
 
 #.  Enable and start the Elasticsearch service:
 
-    .. include:: ../../../../../../_templates/installations/basic/elastic/common/enable_elasticsearch.rst
+    .. include:: ../../../../../_templates/installations/basic/elastic/common/enable_elasticsearch.rst
 
 
 **Initializing the cluster**
@@ -209,13 +209,13 @@ Certificates deployment
 
 Once the installation process is done in all the servers of the Elasticsearch cluster, run the following command on the **initial node** to generate credentials for all the Elastic Stack pre-built roles and users: 
 
-.. include:: ../../../../../../_templates/installations/basic/elastic/common/generate_elastic_credentials.rst
+.. include:: ../../../../../_templates/installations/basic/elastic/common/generate_elastic_credentials.rst
 
 
 Disabling repositories
 ----------------------
 
-.. include:: ../../../../../../_templates/installations/basic/elastic/common/disabling_repositories_explanation.rst
+.. include:: ../../../../../_templates/installations/basic/elastic/common/disabling_repositories_explanation.rst
 
 
 .. tabs::
@@ -224,21 +224,21 @@ Disabling repositories
   .. group-tab:: Yum
 
 
-    .. include:: ../../../../../../_templates/installations/basic/elastic/yum/disabling_repositories.rst
+    .. include:: ../../../../../_templates/installations/basic/elastic/yum/disabling_repositories.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../../../../../_templates/installations/basic/elastic/deb/disabling_repositories.rst
+    .. include:: ../../../../../_templates/installations/basic/elastic/deb/disabling_repositories.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../../../../_templates/installations/basic/elastic/zypp/disabling_repositories.rst
+    .. include:: ../../../../../_templates/installations/basic/elastic/zypp/disabling_repositories.rst
 
 
 To uninstall Elasticsearch, visit the :ref:`uninstalling section <basic_uninstall_elasticsearch>`.
