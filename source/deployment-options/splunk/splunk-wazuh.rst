@@ -17,7 +17,7 @@ Prerequisites
 
 Before installing the Wazuh server and the Splunk forwarder, some extra packages must be installed:
 
-.. include:: ../../../_templates/installations/elastic/common/before_installation_kibana_filebeat.rst
+.. include:: ../../_templates/installations/elastic/common/before_installation_kibana_filebeat.rst
 
 Installing the Wazuh server
 ---------------------------
@@ -33,21 +33,21 @@ Adding the Wazuh repository
   .. group-tab:: Yum
 
 
-    .. include:: ../../../_templates/installations/wazuh/yum/add_repository.rst
+    .. include:: ../../_templates/installations/wazuh/yum/add_repository.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../../_templates/installations/wazuh/deb/add_repository.rst
+    .. include:: ../../_templates/installations/wazuh/deb/add_repository.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../_templates/installations/wazuh/zypp/add_repository.rst
+    .. include:: ../../_templates/installations/wazuh/zypp/add_repository.rst
 
 
 
@@ -62,21 +62,21 @@ Install the Wazuh manager package:
     .. group-tab:: Yum
 
 
-        .. include:: ../../../_templates/installations/wazuh/yum/install_wazuh_manager.rst
+        .. include:: ../../_templates/installations/wazuh/yum/install_wazuh_manager.rst
 
 
 
     .. group-tab:: APT
 
 
-        .. include:: ../../../_templates/installations/wazuh/deb/install_wazuh_manager.rst
+        .. include:: ../../_templates/installations/wazuh/deb/install_wazuh_manager.rst
 
 
 
     .. group-tab:: ZYpp
 
 
-        .. include:: ../../../_templates/installations/wazuh/zypp/install_wazuh_manager.rst
+        .. include:: ../../_templates/installations/wazuh/zypp/install_wazuh_manager.rst
 
 
 Choose the corresponding tab to configure the installation as a single-node or multi-node clustes: 
@@ -87,11 +87,11 @@ Choose the corresponding tab to configure the installation as a single-node or m
 
         #. Enable and start the Wazuh manager service:
 
-            .. include:: ../../../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
+            .. include:: ../../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
 
         #. Run the following command to check if the Wazuh manager is active: 
 
-            .. include:: ../../../_templates/installations/wazuh/common/check_wazuh_manager.rst
+            .. include:: ../../_templates/installations/wazuh/common/check_wazuh_manager.rst
 
             
 
@@ -102,29 +102,29 @@ Choose the corresponding tab to configure the installation as a single-node or m
 
         **Wazuh server master node**
 
-        #. .. include:: ../../../_templates/installations/wazuh/common/configure_wazuh_master_node.rst
+        #. .. include:: ../../_templates/installations/wazuh/common/configure_wazuh_master_node.rst
 
 
         #. Once the ``/var/ossec/etc/ossec.conf`` configuration file is edited, enable and start the Wazuh manager service:
 
-            .. include:: ../../../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
+            .. include:: ../../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
 
         #. Run the following command to check if the Wazuh manager is active: 
 
-            .. include:: ../../../_templates/installations/wazuh/common/check_wazuh_manager.rst
+            .. include:: ../../_templates/installations/wazuh/common/check_wazuh_manager.rst
 
         **Wazuh server worker nodes**
 
-        #. .. include:: ../../../_templates/installations/wazuh/common/configure_wazuh_worker_node.rst
+        #. .. include:: ../../_templates/installations/wazuh/common/configure_wazuh_worker_node.rst
 
 
         #. Once the ``/var/ossec/etc/ossec.conf`` configuration file is edited, enable and start the Wazuh manager service:
 
-            .. include:: ../../../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
+            .. include:: ../../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
 
         #. Run the following command to check if the Wazuh manager is active: 
 
-            .. include:: ../../../_templates/installations/wazuh/common/check_wazuh_manager.rst
+            .. include:: ../../_templates/installations/wazuh/common/check_wazuh_manager.rst
 
 
 .. _splunk_forwarder:
@@ -150,21 +150,21 @@ Depending on the type of architecture that you're installing, the Splunk Forward
     .. group-tab:: Yum
 
 
-        .. include:: ../../../_templates/installations/wazuh/yum/install_splunk.rst
+        .. include:: ../../_templates/installations/wazuh/yum/install_splunk.rst
 
 
 
     .. group-tab:: APT
 
 
-        .. include:: ../../../_templates/installations/wazuh/deb/install_splunk.rst
+        .. include:: ../../_templates/installations/wazuh/deb/install_splunk.rst
 
 
 
     .. group-tab:: ZYpp
 
 
-        .. include:: ../../../_templates/installations/wazuh/zypp/install_splunk.rst
+        .. include:: ../../_templates/installations/wazuh/zypp/install_splunk.rst
 
 3. Ensure Splunk Forwarder v|SPLUNK_LATEST| is installed in ``/opt/splunkforwarder``.
 
