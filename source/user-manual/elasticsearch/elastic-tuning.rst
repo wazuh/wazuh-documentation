@@ -13,7 +13,7 @@ This guide summarizes the relevant settings that enable Elasticsearch optimizati
 - `Change users' password`_
 - `Memory locking`_
 - `Shards and replicas`_
-- `Mitigate Log4j2 vulnerability`_
+- `Mitigate Log4j 2 vulnerability`_
 
 .. _change_elastic_pass:
 
@@ -467,10 +467,10 @@ References:
 
 .. _mitigate_Log4j2:
 
-Mitigate Log4j2 vulnerability
------------------------------
+Mitigate Log4j 2 vulnerability
+------------------------------ 
 
-Although Wazuh is not affected by the Apache Log4j2 Remote Code Execution vulnerability (CVE-2021-44228), we still recommend applying a workaround.
+Although Wazuh is not affected by the Apache Log4j 2 Remote Code Execution vulnerability (CVE-2021-44228), we still recommend applying a workaround.
 
 To mitigate the Log4Shell vulnerability, take the following steps on each one of the Elasticsearch nodes.
 
