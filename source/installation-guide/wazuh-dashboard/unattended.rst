@@ -8,52 +8,50 @@
 Installing the Wazuh dashboard in unattended mode
 =================================================
 
-The Wazuh dashboard is a flexible and intuitive web interface for mining and visualizing the events and archives.
+Install and configure the Wazuh dashboard, a flexible and intuitive web interface for mining and visualizing the events and archives.
 
-Install the Wazuh dashboard
----------------------------
+Wazuh dashboard installation
+-----------------------------
 
 You can install and configure the Wazuh dashboard using an automated script. 
 
 
-#. Download the script. Skip this step if you are installing the Wazuh dashboard on the same server as the Wazuh indexer. 
+#. Download the script. This step can be skipped if you have already installed Wazuh indexer on the same server.
 
     .. code-block:: console
 
-      # curl -sO https://s3.us-west-1.amazonaws.com/packages-dev.wazuh.com/resources/4.2/unattended_installation.sh
+      # curl -sO https://packages.wazuh.com/resources/wazuh_install.sh
 
 
-#. Replace ``node_name`` with the instance name and run the script. 
+#. Run the script with the option for installing Wazuh dashboard.
    
-   The ``node_name`` must be the same used in ``config.yml`` for the certificate creation, e.g. ``kibana``.
-
     .. code-block:: console
 
-      # bash ./unattended_installation.sh -k
+      # bash ./wazuh_install.sh -D
 
     
     Options available when running the script:
 
-    +-------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | Options                       | Purpose                                                                                                        |
-    +===============================+================================================================================================================+
-    | -k / --install-kibana         | Installs Kibana. Must be used with option ``-kname <node-name>``.                                              |
-    +-------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -kn / --kibana-node-name      | Indicates the name of the Kibana instance.                                                                     |
-    +-------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -o / --overwrite              | Overwrites the existing installation.                                                                          |
-    +-------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -r / --uninstall              | Removes the installation.                                                                                      |
-    +-------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -v / --verbose                | Shows the complete installation output.                                                                        |
-    +-------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -i / --ignore-health-check    | Ignores the health check.                                                                                      |
-    +-------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -h / --help                   | Shows *help*.                                                                                                  |
-    +-------------------------------+----------------------------------------------------------------------------------------------------------------+
-    
+    +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
+    | Options                                         | Purpose                                                                                                        |
+    +=================================================+================================================================================================================+
+    | -D / --wazuh-dashboard                          | Installs the Wazuh dashboard.                                                                                  |
+    +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
+    | -o / --overwrite                                | Overwrites the existing installation.                                                                          |
+    +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
+    | -r / --uninstall                                | Removes the installation.                                                                                      |
+    +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
+    | -v / --verbose                                  | Shows the complete installation output.                                                                        |
+    +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
+    | -i / --ignore-health-check                      | Ignores the health check.                                                                                      |
+    +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
+    | -l / --local                                    | Use local files.                                                                                               |
+    +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+ 
+    | -d / --development                              | Use development repository.                                                                                    |
+    +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
+    | -h / --help                                     | Shows *help*.                                                                                                  |
+    +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+        
 
-    
 #. Access the Wazuh web interface with your credentials. 
 
      - URL: *https://<server_ip>*
