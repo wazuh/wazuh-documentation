@@ -10,7 +10,7 @@
 Quickstart
 ==========
 
-This documentation section allows users to easily install the Wazuh server, the Wazuh indexer, and the Wazuh dashboard on the same host using the unattended installation script. By running the automated script, you install and configure the Wazuh in just a few minutes.
+This section provides instructions to easily install the Wazuh server, the Wazuh indexer, and the Wazuh dashboard on the same host using the unattended installation script. By running the automated script, you install and configure the Wazuh in just a few minutes.
 
 These central components are in charge of analyzing the data gathered by the Wazuh agents, providing a search engine and data visualization tool that allow users to navigate through their security alerts. 
 
