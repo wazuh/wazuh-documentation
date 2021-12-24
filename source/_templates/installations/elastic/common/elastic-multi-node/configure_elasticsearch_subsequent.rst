@@ -35,7 +35,6 @@
       ``CN=<common_name>,OU=<operational_unit>,O=<organization_name>,L=<locality>,C=<country_code>``
   
         .. code-block:: yaml
-            :emphasize-lines: 5
 
             opendistro_security.nodes_dn:
                 - CN=node-1,OU=Docu,O=Wazuh,L=California,C=US

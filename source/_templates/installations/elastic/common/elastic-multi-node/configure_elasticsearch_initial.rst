@@ -35,7 +35,6 @@
   
 
     .. code-block:: yaml
-        :emphasize-lines: 5
 
         opendistro_security.nodes_dn:
             - CN=node-1,OU=Docu,O=Wazuh,L=California,C=US
