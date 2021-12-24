@@ -9,11 +9,12 @@
 Wazuh dashboard
 ===============
 
-This central component is a flexible and intuitive web interface for mining, analyzing, and visualizing data. It includes out-of-the-box dashboards for security events, detected vulnerable applications, file integrity monitoring data, configuration assessment results, cloud infrastructure monitoring events, regulatory compliance, such as PCI DSS, GDPR, CIS, HIPAA, and NIST 800-53 standards, as well as other data visibility purposes.
 
-You can now choose an installation method and start installing Wazuh dashboard.
+This central component is a flexible and intuitive web interface for mining, analyzing, and visualizing data. It provides out-of-the-box dashboards, allowing you to seamlessly navigate through the user interface. Users can quickly visualize security events, detected vulnerable applications, file integrity monitoring data, configuration assessment results, cloud infrastructure monitoring events, and regulatory compliance, such as PCI DSS, GDPR, CIS, HIPAA, and NIST 800-53 standards. If you want to learn more about Wazuh components, check the :doc:`Getting started section <../../getting-started/components/index>`.
 
-- :ref:`Unattended installation <wazuh_dashboard_unattended_installation>`: Install this component by using a script that automates the installation process.  
+Check the requirements below and choose an installation method to start installing Wazuh dashboard.
+
+- :ref:`Unattended installation <wazuh_dashboard_unattended_installation>`: You install this component by running a script that automates the installation and configuration process. 
 
 - :ref:`Step-by-step installation <wazuh_dashboard_step_by_step>`: Install this component manually following detailed step-by-step instructions.
 
@@ -32,22 +33,22 @@ Check the supported operating systems and the recommended hardware requirements 
 Supported operating systems
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh dashboard can be installed on a 64-bit Linux operating system.
+Wazuh can be installed on a 64-bit Linux operating system. Wazuh supports all the operating systems listed below as well as their later versions:
 
 .. list-table::
-   :width: 50%
-   
+   :width: 100%
+   :widths: 50 50
+
    * - Amazon Linux 2
-   * - CentOS 7 and later
-   * - Debian 8 ELTS and later
-   * - Fedora Linux 33 and later
-   * - openSUSE Tumbleweed, Leap 15.2 and later
-   * - Oracle Linux 6 Extended and later
-   * - Red Hat Enterprise Linux 6 ELS and later
-   * - SUSE Linux enterprise server 11 LTSS and later
-   * - Ubuntu 14.04 ESM and later
-
-
+     - CentOS 7
+   * - Debian 8 ELTS
+     - Fedora Linux 33
+   * - openSUSE Tumbleweed, Leap 15.2
+     - Oracle Linux 6 Extended
+   * - Red Hat Enterprise Linux 6 ELS
+     - SUSE Linux enterprise server 11 LTSS
+   * - Ubuntu 14.04 ESM
+     - 
 
 
 Hardware requirements

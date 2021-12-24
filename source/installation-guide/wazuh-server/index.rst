@@ -9,14 +9,13 @@
 Wazuh server
 ============
 
-The Wazuh server is in charge of analyzing the data received from the Wazuh agents, triggering alerts when threats or anomalies are detected. It is also used to manage the agents' configuration remotely and to monitor their status. 
 
-This central component can be installed as a single-node or multi-node cluster depending on the environment needs. Small Wazuh deployments, which do not require processing large amounts of data, can easily be handled by a single-node cluster. Multi-node clusters are recommended when there is a large number of monitored endpoints, when a large volume of data is anticipated, or when high availability is required.
+The Wazuh server is in charge of analyzing the data received from the Wazuh agents, triggering alerts when threats or anomalies are detected. It is also used to manage the agents' configuration remotely and to monitor their status. If you want to learn more about Wazuh components, check the :doc:`Getting started section <../../getting-started/components/index>`.
 
-You can now choose an installation method and start installing the Wazuh server.
+You can install Wazuh server in a single host. Alternatively, you can install it distributed in multiple nodes in a cluster configuration. Multi-node configurations provide high availability and improved performance. And if combined with a network load balancer an efficient use of its capacity can be achieved. Check the requirements below and choose an installation method to start installing the Wazuh server.
 
-- :ref:`Unattended installation <wazuh_server_unattended>`: Install this component by using a script that automates the installation process.  
-
+- :ref:`Unattended installation <wazuh_server_unattended>`: You install this component by running a script that automates the installation and configuration process.
+ 
 - :ref:`Step-by-step installation <wazuh_server_step_by_step>`: Install this component manually following detailed step-by-step instructions.
 
 
@@ -35,21 +34,22 @@ Check the supported operating systems and the recommended hardware requirements 
 Supported operating systems
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Wazuh server can be installed on a 64-bit Linux operating system.
+Wazuh can be installed on a 64-bit Linux operating system. Wazuh supports all the operating systems listed below as well as their later versions:
 
 .. list-table::
-   :width: 50%
-   
-   * - Amazon Linux 2
-   * - CentOS 7 and later
-   * - Debian 8 ELTS and later
-   * - Fedora Linux 33 and later
-   * - openSUSE Tumbleweed, Leap 15.2 and later
-   * - Oracle Linux 6 Extended and later
-   * - Red Hat Enterprise Linux 6 ELS and later
-   * - SUSE Linux enterprise server 11 LTSS and later
-   * - Ubuntu 14.04 ESM and later
+   :width: 100%
+   :widths: 50 50
 
+   * - Amazon Linux 2
+     - CentOS 7
+   * - Debian 8 ELTS
+     - Fedora Linux 33
+   * - openSUSE Tumbleweed, Leap 15.2
+     - Oracle Linux 6 Extended
+   * - Red Hat Enterprise Linux 6 ELS
+     - SUSE Linux enterprise server 11 LTSS
+   * - Ubuntu 14.04 ESM
+     - 
 
 
 Hardware requirements
