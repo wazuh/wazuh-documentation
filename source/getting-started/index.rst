@@ -25,7 +25,7 @@ Community and support
 How to install Wazuh
 --------------------
 
-The Wazuh solution is composed of a single universal agent called the :ref:`Wazuh agent <installation_agents>` and three :ref:`central platform components <components>` called the Wazuh server, the Wazuh indexer, the Wazuh dashboard. 
+The Wazuh solution is composed of a single universal agent called the :ref:`Wazuh agent <installation_agents>` and three :ref:`central platform components <components>` called the Wazuh server, the Wazuh indexer, and the Wazuh dashboard. 
 
 For deploying Wazuh in your infrastructure, you can read the following sections of our documentation:
 
