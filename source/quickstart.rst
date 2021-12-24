@@ -7,8 +7,8 @@
   :description: Install and configure Wazuh, the open source security platform, in just a few minutes using the unattended installation script. 
 
 
-Wazuh quickstart
-================
+Quickstart
+==========
 
 This section of our documentation allows users to easily install the Wazuh server, the Wazuh indexer, and the Wazuh dashboard on the same host using the unattended installation script. By running the automated script, you install and configure the Wazuh in just a few minutes.
 

@@ -21,7 +21,7 @@ Installing Wazuh in your infrastructure
 
 You install one by one the central components choosing between two installation methods: Unattended or Step-by-step.
 
-- Unattended: You can install Wazuh using a script that automates the installation and configuration process. This script also performs a health check to verify that the available system resources meet the minimal requirements.
+- Unattended: You can install Wazuh using a script that automates the installation and configuration process. 
 
 - Step by step: This is a manual, supervised way of carrying out the installation that includes a detailed description of each step of the process.
 
@@ -36,10 +36,8 @@ Wazuh indexer and Wazuh server can be installed in a single host or be distribut
 
 Deployment alternatives
 ^^^^^^^^^^^^^^^^^^^^^^^
-Wazuh allows other deployment options. These are complementary to the installation methods found in the installation guide. The :ref:`Wazuh quickstart <quickstart>` allows you to easily deploy and configure the Wazuh solution in just minutes. This installation method will help you run all the central components in the same system. 
 
-In the :ref:`Deployment alternatives <deployment>` section, you will find instructions on how to deploy Wazuh using ready-to-use machines, containers, and orchestration tools. There is also information on how to install the solution offline, from sources, and using integrations with commercial options.
-
+Wazuh allows other deployment options. These are complementary to the installation methods found in the installation guide. The :ref:`Quickstart <quickstart>` provides instructions for you to easily deploy and configure the Wazuh solution in just minutes. This installation method will help you run all the central components in the same system. In the :ref:`Deployment alternatives <deployment>` section, you will find instructions on how to deploy Wazuh using ready-to-use machines, containers, and orchestration tools. There is also information on how to install the solution offline, from sources, and using integrations with commercial options.
 
 Installing Wazuh agent
 ----------------------
