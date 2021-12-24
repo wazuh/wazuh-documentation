@@ -2,7 +2,7 @@
 
 .. warning::
 
-  Follow these steps to mitigate Apache Log4j2 Remote Code Execution (RCE) Vulnerability - CVE-2021-44228.
+  Run these commands to mitigate Apache Log4j 2 Remote Code Execution (RCE) Vulnerability - CVE-2021-44228. 
   
   .. code-block:: console
 
