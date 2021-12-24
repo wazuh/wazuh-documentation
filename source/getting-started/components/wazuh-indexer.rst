@@ -1,5 +1,10 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Wazuh indexer is a highly scalable, full-text search and analytics engine.
+
+.. _wazuh_indexer:
+
 Wazuh indexer
 =============
 
