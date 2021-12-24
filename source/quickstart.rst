@@ -10,7 +10,7 @@
 Quickstart
 ==========
 
-This section of our documentation allows users to easily install the Wazuh server, the Wazuh indexer, and the Wazuh dashboard on the same host using the unattended installation script. By running the automated script, you install and configure the Wazuh in just a few minutes.
+This documentation section allows users to easily install the Wazuh server, the Wazuh indexer, and the Wazuh dashboard on the same host using the unattended installation script. By running the automated script, you install and configure the Wazuh in just a few minutes.
 
 These central components are in charge of analyzing the data gathered by the Wazuh agents, providing a search engine and data visualization tool that allow users to navigate through their security alerts. 
 
@@ -138,7 +138,7 @@ Next steps
 
 The Wazuh environment is now ready, and you can proceed with installing the Wazuh agent on the endpoints to be monitored.
 
-The :ref:`Wazuh agent <wazuh_agent>` is a single and lightweight monitoring software that runs on most operating systems. It provides visibility into the endpoint's security by collecting critical system and application records, inventory data, and detecting potential anomalies. Now that your environment is ready, select the operating system of your endpoint and follow the installation steps to deploy the agent. 
+The :ref:`Wazuh agent <wazuh_agent>` is a single and lightweight monitoring software that runs on most operating systems. It provides visibility into the endpoint's security by collecting critical system and application records, inventory data, and detecting potential anomalies. Now that your environment is ready select the operating system of your endpoint and follow the installation steps to deploy the agent. 
 
 .. raw:: html
 
