@@ -25,7 +25,7 @@ Community and support
 How to install Wazuh
 --------------------
 
-The Wazuh solution is composed of :ref:`three central platform components <components>` called the Wazuh server, the Wazuh indexer, the Wazuh dashboard, and a single universal agent called the :ref:`Wazuh agent <installation_agents>`. 
+The Wazuh solution is composed of a single universal agent called the :ref:`Wazuh agent <installation_agents>` and three :ref:`central platform components <components>` called the Wazuh server, the Wazuh indexer, the Wazuh dashboard. 
 
 For deploying Wazuh in your infrastructure, you can read the following sections of our documentation:
 
@@ -40,7 +40,7 @@ Wazuh Cloud
 
 Wazuh Cloud is our software as a service (SaaS) solution. With this option, you don't need to install and maintain any kind of software. You only need to access the Wazuh Cloud Console, a web application that will help you manage Wazuh in a simple way, where all processes are greatly simplified. 
 
-You don't need more dedicated hardware. Let our team be in charge of maintaining the Wazuh components while you take advantage of this ready-to-use cloud environment. Feel free to try our `14-day free trial <https://console.cloud.wazuh.com/sign-up?landing=trial>`_. Here you can create your cloud environment with a deployment that contains all the Wazuh components ready to work.
+Feel free to try our `14-day free trial <https://console.cloud.wazuh.com/sign-up?landing=trial>`_. Here you can create your cloud environment with a deployment that contains all the Wazuh components ready to work. You don't need more dedicated hardware. Let our team be in charge of maintaining the Wazuh components while you take advantage of this ready-to-use cloud environment. 
 
 
 More valuable resources
@@ -54,7 +54,7 @@ More valuable resources
 Other items in this section
 ---------------------------
 
-This document provides an overview of the Wazuh platform components and architecture. It also includes a brief description of some of the most common use cases of the solution.
+This section provides an overview of the Wazuh platform components and architecture. It also includes a brief description of some of the most common use cases of the solution.
 
 .. toctree::
    :maxdepth: 1
