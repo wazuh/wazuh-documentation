@@ -474,28 +474,43 @@ Although Wazuh is not affected by the Apache Log4j2 Remote Code Execution vulner
 
 To mitigate the Log4Shell vulnerability, take the following steps on each one of the Elasticsearch nodes.
 
-  #. Create the custom JVM options files folder.
+  #. Download the new 2.17.0 version of the Apache Log4j files.
 
       .. code-block:: console
 
-        # mkdir -p /etc/elasticsearch/jvm.options.d
+        # curl -so /tmp/apache-log4j-2.17.0-bin.tar.gz https://dlcdn.apache.org/logging/log4j/2.17.0/apache-log4j-2.17.0-bin.tar.gz
+        # tar -xf /tmp/apache-log4j-2.17.0-bin.tar.gz -C /tmp/
 
-  #. Create a custom JVM options file with content ``-Dlog4j2.formatMsgNoLookups=true``.
-    
+  #. Place each file in their corresponding folder.
+  
       .. code-block:: console
 
-        # echo '-Dlog4j2.formatMsgNoLookups=true' > /etc/elasticsearch/jvm.options.d/disabledlog4j.options
+        # cp /tmp/apache-log4j-2.17.0-bin/log4j-api-2.17.0.jar /usr/share/elasticsearch/lib/
+        # cp /tmp/apache-log4j-2.17.0-bin/log4j-core-2.17.0.jar /usr/share/elasticsearch/lib/
+        # cp /tmp/apache-log4j-2.17.0-bin/log4j-slf4j-impl-2.17.0.jar /usr/share/elasticsearch/plugins/opendistro_security/
+        # cp /tmp/apache-log4j-2.17.0-bin/log4j-api-2.17.0.jar /usr/share/elasticsearch/performance-analyzer-rca/lib/
+        # cp /tmp/apache-log4j-2.17.0-bin/log4j-core-2.17.0.jar /usr/share/elasticsearch/performance-analyzer-rca/lib/
 
-  #. Set file's users and permissions.
-    
+  #. Remove the old version of the Apache Log4j files.
+  
       .. code-block:: console
 
-        # chmod 2750 /etc/elasticsearch/jvm.options.d/disabledlog4j.options
-        # chown root:elasticsearch /etc/elasticsearch/jvm.options.d/disabledlog4j.options
+        # rm -f /usr/share/elasticsearch/lib//log4j-api-2.11.1.jar
+        # rm -f /usr/share/elasticsearch/lib/log4j-core-2.11.1.jar
+        # rm -f /usr/share/elasticsearch/plugins/opendistro_security/log4j-slf4j-impl-2.11.1.jar
+        # rm -f /usr/share/elasticsearch/performance-analyzer-rca/lib/log4j-api-2.13.0.jar
+        # rm -f /usr/share/elasticsearch/performance-analyzer-rca/lib/log4j-core-2.13.0.jar
+
+  #. Remove temporary files.
+  
+      .. code-block:: console
+
+        # rm -rf /tmp/apache-log4j-2.17.0-bin
+        # rm -f /tmp/apache-log4j-2.17.0-bin.tar.gz
 
   #. Restart the Elasticsearch service.
 
-      .. include:: ../../_templates/common/restart-elasticsearch.rst
+      .. include:: /_templates/common/restart-elasticsearch.rst
 
 To learn how to detect this vulnerability with Wazuh, you can read `Detecting Log4Shell with Wazuh <https://wazuh.com/blog/detecting-log4shell-with-wazuh/>`_.
 
