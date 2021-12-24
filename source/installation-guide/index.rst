@@ -9,7 +9,7 @@
 Installation guide
 ==================
 
-Wazuh is a free and open source security platform that unifies XDR and SIEM capabilities. The solution is composed of a single universal agent and three central components: the Wazuh server, the Wazuh indexer, and the Wazuh dashboard. For more information about its components, architecture, and capabilities, you can check the :ref:`Getting started <getting_started>` section.  
+Wazuh is a free and open source security platform that unifies XDR and SIEM capabilities. The solution is composed of a single universal agent and three central components: the :ref:`Wazuh server <wazuh_server>`, the :ref:`Wazuh indexer <wazuh_indexer>`, and the :ref:`Wazuh dashboard <wazuh_dashboard>`. For more information about its components, architecture, and capabilities, you can check the :ref:`Getting started <getting_started>` section.  
 
 The Wazuh server and the Wazuh agent abide by the `GNU General Public License, version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_ and the Wazuh indexer and the Wazuh dashboard by the `Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_ (ALv2). 
 
@@ -37,7 +37,9 @@ Wazuh indexer and Wazuh server can be installed in a single host or be distribut
 Deployment alternatives
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh allows other deployment options. These are complementary to the installation methods found in the installation guide. The :ref:`Quickstart <quickstart>` provides instructions for you to easily deploy and configure the Wazuh solution in just minutes. This installation method will help you run all the central components in the same system. In the :ref:`Deployment alternatives <deployment>` section, you will find instructions on how to deploy Wazuh using ready-to-use machines, containers, and orchestration tools. There is also information on how to install the solution offline, from sources, and using integrations with commercial options.
+Wazuh allows other deployment options. These are complementary to the installation methods found in the installation guide. The :ref:`Quickstart <quickstart>` provides instructions for you to easily deploy and configure the Wazuh solution in just minutes. This installation method will help you run all the central components in the same system. 
+
+In the :ref:`Deployment alternatives <deployment>` section, you will find instructions on how to deploy Wazuh using ready-to-use machines, containers, and orchestration tools. There is also information on how to install the solution offline, from sources, and using integrations with commercial options.
 
 Installing Wazuh agent
 ----------------------
