@@ -8,11 +8,11 @@
 Wazuh server
 ============
 
-The Wazuh server component is in charge of analyzing the data received from the :ref:`agents <wazuh_agent>`, triggering alerts when threats or anomalies are detected. It is also used to manage the agents configuration remotely and to monitor their status.
+The Wazuh server component analyzes the data received from the :ref:`agents <wazuh_agent>`, triggering alerts when threats or anomalies are detected. It is also used to manage the agents configuration remotely and to monitor their status.
 
-The Wazuh server uses threat intelligence sources to improve its detection capabilities. It also enriches alert data by making use of the `MITRE ATT&CK <https://attack.mitre.org//>`_ framework and regulatory compliance requirements such as PCI DSS, GDPR, HIPAA, CIS, and NIST 800-53, providing useful context for threat detection.
+The Wazuh server uses threat intelligence sources to improve its detection capabilities. It also enriches alert data by making use of the `MITRE ATT&CK <https://attack.mitre.org//>`_ framework and regulatory compliance requirements such as PCI DSS, GDPR, HIPAA, CIS, and NIST 800-53, providing helpful context for threat detection.
 
-Additionally, the Wazuh server can be integrated with external software, including ticketing systems such as `ServiceNow <https://www.servicenow.com/>`_, `Jira <https://www.atlassian.com/software/jira>`_, and `PagerDuty <https://www.pagerduty.com/>`_ as well as instant messaging platforms like `Slack <https://slack.com//>`_. This is convenient for streamlining security operations.
+Additionally, the Wazuh server can be integrated with external software, including ticketing systems such as `ServiceNow <https://www.servicenow.com/>`_, `Jira <https://www.atlassian.com/software/jira>`_, and `PagerDuty <https://www.pagerduty.com/>`_ as well as instant messaging platforms like `Slack <https://slack.com//>`_. These integrations are convenient for streamlining security operations.
 
 Server architecture
 -------------------
@@ -32,7 +32,7 @@ Server components
 
 - **Agents registration service:** It is used to register new agents by provisioning and distributing pre-shared authentication keys that are unique to each agent. This process runs as a network service and supports authentication via TLS/SSL certificates or by providing a fixed password.
 
-- **Agents connection service:** This is the service that receives data from the agents. It makes use of the pre-shared keys to validate each agent's identity and to encrypt the communications between the agent and the Wazuh server. Additionally, this service is used to provide centralized configuration management, enabling you to push new agent settings remotely.
+- **Agents connection service:** This is the service that receives data from the agents. It uses the pre-shared keys to validate each agent’s identity and encrypt the communications between the agent and the Wazuh server. Additionally, this service is used to provide centralized configuration management, enabling you to push new agent settings remotely.
 
 - **Analysis engine:** This is the server component that performs the data analysis. It employs *decoders* to identify the type of information being processed (Windows events, SSHD logs, web server logs, and others). These decoders also extract relevant data elements from the log messages such as source IP address, event ID, or username. Then, by using *rules*, the engine identifies specific patterns in the decoded events that could trigger alerts and possibly even call for automated countermeasures, like banning an IP on the firewall, for example.
 
