@@ -37,7 +37,9 @@ Wazuh indexer and Wazuh server can be installed in a single host or be distribut
 Deployment alternatives
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh allows other deployment options. These are complementary to the installation methods found in the installation guide. The :ref:`Quickstart <quickstart>` provides instructions for you to easily deploy and configure the Wazuh solution in just minutes. This installation method will help you run all the central components in the same system. In the :ref:`Deployment alternatives <deployment>` section, you will find instructions on how to deploy Wazuh using ready-to-use machines, containers, and orchestration tools. There is also information on how to install the solution offline, from sources, and using integrations with commercial options.
+Wazuh allows other deployment options. These are complementary to the installation methods found in the installation guide. The :ref:`Quickstart <quickstart>` provides instructions for you to easily deploy and configure the Wazuh solution in just minutes. This installation method will help you run all the central components in the same system. 
+
+In the :ref:`Deployment alternatives <deployment>` section, you will find instructions on how to deploy Wazuh using ready-to-use machines, containers, and orchestration tools. There is also information on how to install the solution offline, from sources, and using integrations with commercial options.
 
 Installing Wazuh agent
 ----------------------
