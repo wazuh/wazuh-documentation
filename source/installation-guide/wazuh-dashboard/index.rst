@@ -9,9 +9,10 @@
 Wazuh dashboard
 ===============
 
-This central component is a flexible and intuitive web interface for mining, analyzing, and visualizing data. It provides out-of-the-box dashboards, allowing you to navigate through the user interface seamlessly. Users can quickly visualize security events, detected vulnerable applications, file integrity monitoring data, configuration assessment results, cloud infrastructure monitoring events, and regulatory compliance, such as PCI DSS, GDPR, CIS, HIPAA, and NIST 800-53 standards. Check the :ref:`Components <components>` if you want to learn more about the Wazuh dashboard.
 
-You can now choose an installation method and start installing Wazuh dashboard.
+This central component is a flexible and intuitive web interface for mining, analyzing, and visualizing data. It provides out-of-the-box dashboards, allowing you to seamlessly navigate through the user interface. Users can quickly visualize security events, detected vulnerable applications, file integrity monitoring data, configuration assessment results, cloud infrastructure monitoring events, and regulatory compliance, such as PCI DSS, GDPR, CIS, HIPAA, and NIST 800-53 standards. If you want to learn more about Wazuh components, check the :doc:`Getting started section <../../getting-started/components/index>`.
+
+Check the requirements below and choose an installation method to start installing Wazuh dashboard.
 
 - :ref:`Unattended installation <wazuh_dashboard_unattended_installation>`: You install this component by running a script that automates the installation and configuration process. 
 
