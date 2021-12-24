@@ -13,7 +13,7 @@ Wazuh dashboard is a flexible and intuitive web interface for mining, analyzing,
 Data visualization, mining, and analysis
 ----------------------------------------
 
-Wazuh provides out-of-the-box dashboards, allowing you to seamlessly navigate through the user interface. Users can quickly visualize security events, detected vulnerable applications, file integrity monitoring data, configuration assessment results, cloud infrastructure monitoring events, and regulatory compliance, such as PCI DSS, GDPR, CIS, HIPAA, and NIST 800-53 standards.  Users are able to explore the alerts at the Wazuh cluster level and on a specific agent.
+Wazuh provides out-of-the-box dashboards, allowing you to seamlessly navigate through the user interface. Users can quickly visualize security events, detect vulnerable applications, file integrity monitoring data, configuration assessment results, cloud infrastructure monitoring events, and regulatory compliance, such as PCI DSS, GDPR, CIS, HIPAA, and NIST 800-53 standards.  Users are able to explore the alerts at the Wazuh cluster level and on a specific agent.
 
 Moreover, the application is flexible and allows users to create their own visualizations and dashboards. With Wazuh, customizing data visualization according to the environment needs gets users enhanced visibility of their infrastructure.
 
@@ -94,7 +94,7 @@ Additionally, agent groups and centralized configuration can be managed and edit
 Management of Wazuh infrastructure
 ----------------------------------
 
-The Wazuh dashboard provides you with a directory dedicated to administrate and monitor your infrastructure. From there, you can manage and configure your Wazuh cluster rules and decoders, and CDB lists. 
+The Wazuh dashboard provides you with a directory dedicated to administrating and monitoring your infrastructure. From there, you can manage and configure your Wazuh cluster rules and decoders, and CDB lists. 
 
 Data analysis visualization gives you full visibility into your cluster infrastructure for fast threat detection and remediation. Users can check the status, logs, and statistics of Wazuh clusters and create their own downloadable reports using predefined templates, or personalize their own if required. Wazuh provides the tools for comprehensive and efficient security analytics.
 
@@ -121,7 +121,7 @@ Data analysis visualization gives you full visibility into your cluster infrastr
 Dev tools
 ---------
 
-User can easily access developer tools integrated directly into the Wazuh dashboard. 
+Users can easily access developer tools integrated directly into the Wazuh dashboard. 
 
 The Ruleset Test tool provides an input box for reading sample logs and an output box to visualize the test results. This feature of the Wazuh dashboard allows you to test sample logs directly on the web user interface and see how the ruleset reacts to specific log messages.
 
