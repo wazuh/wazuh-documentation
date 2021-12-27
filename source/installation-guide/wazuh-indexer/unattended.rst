@@ -37,7 +37,7 @@ Create the SSL certificates to encrypt communications between the Wazuh componen
           # curl -sO https://packages.wazuh.com/resources/wazuh_install.sh 
           # curl -sO https://packages.wazuh.com/resources/config.yml
        
-#. Edit ``./config.yml`` and replace the node names and IP values with the corresponding names and IP addresses, including all the Wazuh server, the Wazuh indexer, and the Wazuh dashboard nodes. Add as many node fields as needed.
+#. Edit ``./config.yml`` and replace the node names and IP values with the corresponding names and IP addresses. You need to do this for all the Wazuh server, the Wazuh indexer, and the Wazuh dashboard nodes. Add as many node fields as needed.
 
       .. code-block:: yaml
 
@@ -66,7 +66,7 @@ Create the SSL certificates to encrypt communications between the Wazuh componen
 
 
 
-#. Run the script with the options ``-c`` to generate the SSL certificates. 
+#. Run the script with the option ``-c`` to generate the SSL certificates. 
 
       .. code-block:: console
 
@@ -80,26 +80,26 @@ Create the SSL certificates to encrypt communications between the Wazuh componen
     +=================================================+================================================================================================================+
     | -I / --wazuh-indexer <wazuh-indexer-node-name>  | Installs the Wazuh indexer. You need to indicate the Wazuh indexer node name.                                  |
     +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -c / --create-certificates                      | Create certificates from config.yml file.                                                                      |
+    | -c / --create-certificates                      | Creates certificates from ``config.yml`` file                                                                  |
     +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -s / --start-cluster                            | Starts the Wazuh indexer cluster.                                                                              |
+    | -s / --start-cluster                            | Starts the Wazuh indexer cluster                                                                               |
     +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -o / --overwrite                                | Overwrites the existing installation.                                                                          |
+    | -o / --overwrite                                | Overwrites the existing installation                                                                           |
     +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -r / --uninstall                                | Removes the installation.                                                                                      |
+    | -r / --uninstall                                | Removes the installation                                                                                       |
     +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -v / --verbose                                  | Shows the complete installation output.                                                                        |
+    | -v / --verbose                                  | Shows the complete installation output                                                                         |
     +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
     | -i / --ignore-health-check                      | Ignores the health check.                                                                                      |
     +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -l / --local                                    | Use local files.                                                                                               |
+    | -l / --local                                    | Uses local files                                                                                               |
     +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+ 
-    | -d / --development                              | Use development repository.                                                                                    |
+    | -d / --development                              | Uses development repository                                                                                    |
     +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -h / --help                                     | Shows *help*.                                                                                                  |
+    | -h / --help                                     | Shows help                                                                                                     |
     +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+        
 
-#.  Copy the ``certs/`` folder to all the servers of the distributed deployment, including the Wazuh server, the Wazuh indexer and the Wazuh dashboard nodes. This can be done by using, for example, ``scp``.
+#.  Copy the ``certs/`` folder to all the servers of the distributed deployment, including the Wazuh server, the Wazuh indexer, and the Wazuh dashboard nodes. This can be done by using, for example, ``scp``.
 
 
 2. Wazuh indexer nodes installation
@@ -131,7 +131,7 @@ Repeat this process on each Wazuh indexer node and proceed with initializing the
 
 The final stage of the process for installing Wazuh indexer cluster consists in running the security admin script. 
 
-Run the unattended script with option ``-s`` to load the new certificates information and start the cluster. Replace ``<elasticsearch_IP>`` with the Wazuh indexer installation IP and run the command.
+Run the unattended script with option ``-s`` to load the new certificates information and start the cluster. Replace ``<elasticsearch_IP>`` with the Wazuh indexer installation IP address and run the command.
 
   .. code-block:: console
 
