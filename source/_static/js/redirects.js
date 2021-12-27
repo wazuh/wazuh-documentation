@@ -47,6 +47,14 @@ newUrls['4.3'] = [
   '/user-manual/reference/ossec-conf/office365-module.html',
   '/user-manual/capabilities/file-integrity/fim-fields-rule-mapping.html',
   '/user-manual/capabilities/log-data-collection/how-to-collect-macoslogs.html',
+  '/user-manual/reference/ossec-conf/gcp-bucket.html',
+  '/gcp/supported-services/access_logs.html',
+  '/gcp/supported-services/cloud_audit_logs.html',
+  '/gcp/supported-services/dns_queries.html',
+  '/gcp/supported-services/load_balancing.html',
+  '/user-manual/reference/ossec-conf/gcp-bucket.html',
+  '/gcp/supported-services/vpc_flow.html',
+  '/gcp/supported-services/firewall.html',
 ];
 
 /* *** RELEASE 4.2 ****/

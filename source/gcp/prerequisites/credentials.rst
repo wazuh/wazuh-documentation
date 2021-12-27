@@ -1,7 +1,6 @@
 .. Copyright (C) 2021 Wazuh, Inc.
-
 .. meta::
-  :description: The Wazuh GCP module allows you to pull log data from Google Pub/Sub. Learn more about GCP credentials configuration in this section.
+  :description: The Wazuh GCP module allows you to fetch logs from Google Pub/Sub and Google Storage. Learn more about GCP credentials configuration in this section.
 
 
 .. _gcp_credentials:
@@ -16,7 +15,10 @@ To do this, we will need to create a service account with the Pub/Sub permission
 Create a service account
 ------------------------
 
-Within the **Service Accounts** section, create a new service account and add two roles with *Pub/Sub* permissions: **publisher** and **subscriber**.
+Within the **Service Accounts** section, create a new service account and add the following roles depending on which module to use: ``gcp-pubsub``, ``gcp-bucket``, or both.
+
+- For ``gcp-pubsub``, add two roles with *Pub/Sub* permissions: **Pub/Sub Publisher** and **Pub/Sub Subscriber**.
+- For ``gcp-bucket``, add the following role with *Google Cloud Storage bucket* permissions: **Storage Legacy Bucket Writer**
 
 .. thumbnail:: ../../images/gcp/gcp-service-account.png
     :align: center
@@ -25,7 +27,7 @@ Within the **Service Accounts** section, create a new service account and add tw
 Create private key
 ------------------
 
-After creating a service account, add a key for it. Save it as **JSON**:
+After creating a service account, add a key to it. To do this, click **Create Key**, select  **JSON**, and click **Create** to complete the action.
 
 .. thumbnail:: ../../images/gcp/gcp-account-key.png
     :align: center
@@ -48,4 +50,4 @@ Your key should have this format:
 	   "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/wazuh-gcloud-acc%40wazuh-gcloud-258815.iam.gserviceaccount.com"
 	}
 
-Please follow this `link <https://cloud.google.com/pubsub/docs/quickstart-py-mac#create_service_account_credentials>`_ if you need help configuring your GCP credentials JSON file for Google Cloud Pub/Sub.
+You can follow the `Google Cloud Pub/Sub <https://cloud.google.com/pubsub/docs/quickstart-py-mac#create_service_account_credentials>`_ documentation if you need help configuring your GCP credentials JSON file.
