@@ -357,7 +357,7 @@ Examples
 
 The following sections cover each rule type, illustrating them with several examples. It is also recommended to check
 the actual policies and, for minimalistic although complete examples, the `SCA test suite policies
-<https://github.com/wazuh/wazuh-qa/tree/master/tests/integration/test_sca/test_basic_usage/data>`_.
+<https://github.com/wazuh/wazuh-qa/tree/master/tests/legacy/test_sca/test_basic_usage/data>`_.
 
 Rule syntax for files
 :::::::::::::::::::::::::::::::::::
