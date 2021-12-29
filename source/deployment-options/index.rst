@@ -2,10 +2,13 @@
 
 .. _deployment:
 
-Deployment alternatives
-=======================
+Installation alternatives
+=========================
 
-You can deploy Wazuh to your environments using other deployment options. These alternatives complement the installation methods you can find in the :ref:`Quickstart <quickstart>` and the :ref:`Installation guide <installation_guide>`.
+You can install Wazuh using other deployment options. These are complementary to the installation methods you can find in the  :ref:`Installation guide <installation_guide>` and the :ref:`Quickstart <quickstart>`. All the alternatives here include instructions on how to install the Wazuh central components. After installing the :ref:`components <components>`, you then need to deploy the agent to your endponts.  
+
+Installing the Wazuh central components
+---------------------------------------
 
 .. raw:: html
 
@@ -51,13 +54,95 @@ You can deploy Wazuh to your environments using other deployment options. These 
 
 .. raw:: html
 
-    <h3>Integrations</h3>
+    <h3>With Elastic Stack basic license</h3>
 
-- :ref:`Integration with Elastic Stack basic license <basic_installation_guide>`: As an alternative to Open Distro for Elasticsearch, you can install Wazuh using the Elastic Stack basic license option. It contains everything included in the open source version under the `Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_, plus some additional capabilities such as Elastic Stack Security features, Kibana alerting, and others. According to your chosen configuration, Wazuh and Elastic Stack are installed on the same host, as an all-in-one deployment, on a separate host as a single-node or multi-node cluster.
+- :ref:`Installation with Elastic Stack basic license <basic_installation_guide>`: As an alternative to Open Distro for Elasticsearch, you can install Wazuh using the Elastic Stack basic license option. It contains everything included in the open source version under the `Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_, plus some additional capabilities such as Elastic Stack Security features, Kibana alerting, and others. According to your chosen configuration, Wazuh and Elastic Stack are installed on the same host, as an all-in-one deployment, on a separate host as a single-node or multi-node cluster.
+
+.. raw:: html
+
+    <h3>With Splunk</h3>
+
+- :ref:`Installation with Splunk <installation_splunk>`: You install Wazuh along with Splunk Enterprise, including the Splunk forwarder and the Wazuh Splunk app. This can be done as a single instance or as a multi-instance cluster.
 
 
-- :ref:`Integration with Splunk <installation_splunk>`: You install Wazuh along with Splunk Enterprise, including the Splunk forwarder and the Wazuh Splunk app. This can be done as a single instance or as a multi-instance cluster.
+Installing the Wazuh agent
+--------------------------
 
+The :ref:`Wazuh agent <wazuh_agent>` is a single and lightweight monitoring software. It is a multi-platform component that can be deployed to laptops, desktops, servers, cloud instances, containers, or virtual machines. It provides visibility into the endpoint's security by collecting critical system and application records, inventory data, and detecting potential anomalies. 
+
+If the Wazuh central components are already installed in your environment, select your operating system below and follow the installation steps to deploy the agent into the endpoints. 
+
+
+.. raw:: html
+
+  <div class="agent-os">
+      <div class="item-agent">
+          <a href="./wazuh-agent/wazuh-agent-package-linux.html" class="d-flex align-items-center">
+            <p>Linux</p>
+
+.. image:: ../images/installation/linux.png
+      :align: center
+
+.. raw:: html
+
+        </a>
+    </div>
+    <div class="item-agent">
+        <a href="./wazuh-agent/wazuh-agent-package-windows.html" class="d-flex align-items-center">
+                    <p>Windows</p>
+
+.. image:: ../images/installation/windows_icon.png
+      :align: center
+
+.. raw:: html
+
+        </a>
+    </div>
+    <div class="item-agent">
+        <a href="./wazuh-agent/wazuh-agent-package-macos.html" class="d-flex align-items-center">
+            <p>macOS</p>
+
+.. image:: ../images/installation/macOS_logo.png
+      :align: center
+
+.. raw:: html
+
+        </a>
+    </div>
+    <div class="item-agent" id="solaris-logo">
+        <a href="./wazuh-agent/wazuh-agent-package-solaris.html" class="d-flex align-items-center">
+            <p>Solaris</p>
+
+.. image:: ../images/installation/solaris.png
+      :align: center      
+
+.. raw:: html
+
+        </a>
+    </div>
+    <div class="item-agent">
+        <a href="./wazuh-agent/wazuh-agent-package-aix.html" class="d-flex align-items-center">
+            <p>AIX</p>
+
+.. image:: ../images/installation/AIX.png
+      :align: center
+
+.. raw:: html
+
+        </a>
+    </div>
+    <div class="item-agent">
+        <a href="./wazuh-agent/wazuh-agent-package-hpux.html" class="d-flex align-items-center">
+            <p>HP-UX</p>
+
+.. image:: ../images/installation/hpux.png
+      :align: center
+
+.. raw:: html
+
+          </a>
+      </div>
+  </div>
 
 .. toctree::
     :hidden:
