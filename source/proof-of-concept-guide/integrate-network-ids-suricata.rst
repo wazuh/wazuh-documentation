@@ -35,7 +35,7 @@ Configure your environment as follows to test the POC.
         # chown suricata:suricata /etc/suricata/rules/*.rules
         # chmod 640 /etc/suricata/rules/*.rules
 
-#. Modify Suricata settings in the ``/etc/suricata/suricata.yaml`` file.
+#. Download modified Suricata settings to ``/etc/suricata/suricata.yaml``.
 
     .. code-block:: console
 
@@ -52,11 +52,11 @@ Configure your environment as follows to test the POC.
         # systemctl daemon-reload
         # systemctl start suricata
 
-#. Configure the Wazuh agent to read the Suricata logs file. The following settings need to be added to the ``/var/ossec/etc/ossec.conf`` file of the monitored CentOS 8 endpoint.
+#. Add the following settings to the ``/var/ossec/etc/ossec.conf`` file of the monitored CentOS 8 endpoint. This is to configure the Wazuh agent to read the Suricata logs file.
 
     .. code-block:: XML
 
-       <localfile>
+        <localfile>
             <log_format>syslog</log_format>
             <location>/var/log/suricata/eve.json</location>
         </localfile>
@@ -72,7 +72,11 @@ Configure your environment as follows to test the POC.
 Steps to generate the alerts
 ----------------------------
 
-No action is required. Wazuh automatically parses data from ``/var/log/suricata/eve.json`` and generates related alerts.
+#. Run the following command from the CentOS 8 monitored system. This web request is known to trip NIDS rules.
+
+    .. code-block:: console
+
+        # curl http://testmyids.com
 
 Query the alerts
 ----------------
@@ -86,9 +90,10 @@ You can visualize the alert data in the Wazuh Kibana plugin. To do this, go to t
           :align: center
           :wrap_image: No
 
-Troubleshooting
----------------
+..
+  Troubleshooting
+  ---------------
 
-* Error concerning network interface in Suricata log file ``/var/log/suricata/suricata.log``.
-  
-To solve this issue, check the name of your network interface and configure it accordingly in the files ``/etc/sysconfig/suricata`` and ``/etc/suricata/suricata.yaml``.
+  * Error concerning network interface in Suricata log file ``/var/log/suricata/suricata.log``.
+    
+  To solve this issue, check the name of your network interface and configure it accordingly in the files ``/etc/sysconfig/suricata`` and ``/etc/suricata/suricata.yaml``.

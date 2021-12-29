@@ -64,13 +64,16 @@ Configure your environment as follows to test the POC.
 
     .. code-block:: console
 
-        # service osqueryd start
+        # systemctl start osqueryd
 
 #. Edit ``/var/ossec/etc/ossec.conf`` on the monitored CentOS 8 endpoint and enable the Osquery wodle. 
   
     .. code-block:: XML
+      :emphasize-lines: 5
 
         <ossec_config>
+            ...
+            <!-- Osquery integration -->
             <wodle name="osquery">
                 <disabled>no</disabled>
                 <run_daemon>yes</run_daemon>
@@ -79,6 +82,7 @@ Configure your environment as follows to test the POC.
                 <config_path>/etc/osquery/osquery.conf</config_path>
                 <add_labels>no</add_labels>
             </wodle>
+            ...
         </ossec_config>
 
 

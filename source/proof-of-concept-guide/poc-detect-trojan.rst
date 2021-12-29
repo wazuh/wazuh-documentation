@@ -11,9 +11,7 @@ Wazuh provides you with powerful anomaly and malware detection capabilities to d
 Configuration
 -------------
 
-Configure your environment as follows to test the POC.
-
-No additional configuration is required since Trojan detection is configured out-of-the-box. Check your configuration in the ``/var/ossec/etc/ossec.conf`` file at the CentOS 8 monitored endpoint.
+No additional configuration is required to test the POC. Trojan detection is configured out-of-the-box. You can check your configuration in the ``/var/ossec/etc/ossec.conf`` file at the CentOS 8 monitored endpoint.
 
     .. code-block:: none
 
@@ -44,7 +42,7 @@ Steps to generate the alerts
 
     .. code-block:: console
 
-        # cp /usr/bin/w /usr/bin/w.copy
+        # cp -p /usr/bin/w /usr/bin/w.copy
 
 #. Replace the original system binary ``/usr/bin/w`` with the following shell script.
   

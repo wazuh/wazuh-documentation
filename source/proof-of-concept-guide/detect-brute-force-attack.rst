@@ -19,12 +19,22 @@ Configure your environment as follows to test the POC.
 
 - Make sure you have SSH installed and enabled in a system chosen to play as an attacker.
 
-- Install Hydra on an external Linux system to execute brute-force attacks. 
+- Install Hydra on this external Linux system to execute brute-force attacks. 
 
-    .. code-block:: XML
+    .. tabs::
 
-        yum install -y hydra
+      .. group-tab:: Yum
 
+        .. code-block:: console
+
+            # yum install -y hydra
+            
+      .. group-tab:: Apt
+
+        .. code-block:: console
+
+            # apt install -y hydra
+            
 Steps to generate the alerts
 ----------------------------
 
