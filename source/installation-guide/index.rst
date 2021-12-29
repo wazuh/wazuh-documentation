@@ -13,33 +13,29 @@ Wazuh is a free and open source security platform that unifies XDR and SIEM capa
 
 The Wazuh server and the Wazuh agent abide by the `GNU General Public License, version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_ and the Wazuh indexer and the Wazuh dashboard by the `Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_ (ALv2). 
 
-In this installation guide, you will learn how to install Wazuh in your infrastructure. Alternatively, We offer `Wazuh Cloud <https://wazuh.com/cloud/>`_, our software as a service (SaaS) solution. 
 
-
-Installing Wazuh in your infrastructure
+Installing the Wazuh central components
 ---------------------------------------
+
+In this installation guide, you will learn how to install Wazuh in your infrastructure. You can choose between two installation modes for each Wazuh central component. Both options provide you with instructions to install the central components on a single host or on separate hosts. You can also check our :ref:`Quickstart <quickstart>` to get started with Wazuh in just a few minutes.
 
 You install one by one the central components choosing between two installation methods: Unattended or Step-by-step.
 
 - Unattended: You can install Wazuh using a script that automates the installation and configuration process. 
 
-- Step by step: This is a manual, supervised way of carrying out the installation that includes a detailed description of each step of the process.
+- Step by step: This is a manual, supervised way of carrying out the installation.
 
-When installing, you will follow this workflow:
+The Wazuh indexer and Wazuh server can be installed on a single host or be distributed in cluster configurations. To check the requirements and start installing the first of the Wazuh central components, go to the :doc:`Wazuh indexer <wazuh-indexer/index>` section.
+
+This is the installation workflow you will follow:
 
 .. thumbnail:: ../images/installation/Wazuh-Installation-workflow.png
   :title: Wazuh installation workflow
   :align: center
   :width: 100%
 
-Wazuh indexer and Wazuh server can be installed in a single host or be distributed in cluster configurations. To check the requirements and start installing the first of the Wazuh central components, go to the :doc:`Wazuh indexer <wazuh-indexer/index>` section.
 
-Deployment alternatives
-^^^^^^^^^^^^^^^^^^^^^^^
-
-Wazuh allows other deployment options. These are complementary to the installation methods found in the installation guide. The :ref:`Quickstart <quickstart>` provides instructions for you to easily deploy and configure the Wazuh solution in just minutes. This installation method will help you run all the central components in the same system. 
-
-In the :ref:`Deployment alternatives <deployment>` section, you will find instructions on how to deploy Wazuh using ready-to-use machines, containers, and orchestration tools. There is also information on how to install the solution offline, from sources, and using integrations with commercial options.
+Wazuh also offers `Wazuh Cloud <https://wazuh.com/cloud/>`_, our software as a service (SaaS) solution. This means that instead of installing and maintaining software, you simply access it via the Wazuh Cloud Console, a web application to manage Wazuh easily. This service provides a highly flexible infrastructure to match your enterprise needs. With Wazuh Cloud, no dedicated hardware is required, the Wazuh components maintenance is done by the Wazuh team, and everything is ready to use.
 
 Installing Wazuh agent
 ----------------------
@@ -126,6 +122,11 @@ Packages list
 -------------
 
 In the :ref:`Packages list <packages>` section, you will find all the packages required for the installation of Wazuh |WAZUH_LATEST|.
+
+Other installation methods
+--------------------------
+
+Wazuh allows other deployment options inthe :ref:`Deployment alternatives <deployment>` section. These are complementary to the installation methods found in this installation guide. You will find instructions on how to deploy Wazuh using ready-to-use machines, containers, and orchestration tools. There is also information on how to install the solution offline, from sources, and with commercial options.
 
 
 .. toctree::
