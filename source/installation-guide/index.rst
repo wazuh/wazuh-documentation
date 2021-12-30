@@ -9,9 +9,10 @@
 Installation guide
 ==================
 
-Wazuh is a free and open source security platform that unifies XDR and SIEM capabilities. The solution is composed of a single universal agent and three central components: the :ref:`Wazuh server <wazuh_server>`, the :ref:`Wazuh indexer <wazuh_indexer>`, and the :ref:`Wazuh dashboard <wazuh_dashboard>`. For more information about its components, architecture, and capabilities, you can check the :ref:`Getting started <getting_started>` section.  
+Wazuh is a free and open source security platform that unifies XDR and SIEM capabilities. The solution is composed of a :ref:`single universal agent <wazuh_agent>` and three central components: the :ref:`Wazuh server <wazuh_server>`, the :ref:`Wazuh indexer <wazuh_indexer>`, and the :ref:`Wazuh dashboard <wazuh_dashboard>`. For more information about its components, architecture, and capabilities, you can check the :ref:`Getting started <getting_started>` section.  
 
 The Wazuh server and the Wazuh agent abide by the `GNU General Public License, version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_ and the Wazuh indexer and the Wazuh dashboard by the `Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_ (ALv2). 
+
 
 
 Installing the Wazuh central components
@@ -35,14 +36,18 @@ This is the installation workflow you will follow:
   :width: 100%
 
 
-Wazuh also offers `Wazuh Cloud <https://wazuh.com/cloud/>`_, our software as a service (SaaS) solution. This means that instead of installing and maintaining software, you simply access it via the Wazuh Cloud Console, a web application to manage Wazuh. This service provides a highly flexible infrastructure to match your enterprise needs. With Wazuh Cloud, no dedicated hardware is required, the Wazuh components maintenance is done by the Wazuh team, and everything is ready to use.
+.. raw:: html
+
+    <h3>Wazuh Cloud</h3>
+    
+We also offer `Wazuh Cloud <https://wazuh.com/cloud/>`_, our software as a service (SaaS) solution. This means that instead of installing and maintaining software, you simply access it via the Wazuh Cloud Console, a web application designed to manage the solution. This service provides a highly flexible infrastructure to match your enterprise needs. With Wazuh Cloud, no dedicated hardware is required, the Wazuh components maintenance is done by the Wazuh team, and everything is ready to use.
 
 Installing the Wazuh agent
 --------------------------
 
 The :ref:`Wazuh agent <wazuh_agent>` is a single and lightweight monitoring software. It is a multi-platform component that can be deployed to laptops, desktops, servers, cloud instances, containers, or virtual machines. It provides visibility into the endpoint's security by collecting critical system and application records, inventory data, and detecting potential anomalies. 
 
-If the Wazuh central components are already installed in your environment, select your operating system below and follow the installation steps to deploy the agent into the endpoints. 
+If the Wazuh central components are already installed in your environment, select your operating system below and follow the installation steps to deploy the agent on the endpoints. 
 
 
 .. raw:: html

@@ -10,11 +10,11 @@
 Quickstart
 ==========
 
-This section provides instructions to easily install the Wazuh server, the Wazuh indexer, and the Wazuh dashboard on the same host using the unattended installation script. By running the automated script, you install and configure the Wazuh in just a few minutes.
+Wazuh is a free and open source security platform that unifies XDR and SIEM capabilities. The solution is composed of a :ref:`single universal agent <wazuh_agent>` and three central components: the :ref:`Wazuh server <wazuh_server>`, the :ref:`Wazuh indexer <wazuh_indexer>`, and the :ref:`Wazuh dashboard <wazuh_dashboard>`. For more information about its components, architecture, and capabilities, you can check the :ref:`Getting started <getting_started>` section.  
 
-These central components are in charge of analyzing the data gathered by the Wazuh agents, providing a search engine and data visualization tool that allow users to navigate through their security alerts. 
+The Wazuh server and the Wazuh agent abide by the `GNU General Public License, version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_ and the Wazuh indexer and the Wazuh dashboard by the `Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_ (ALv2). 
 
-Check the :ref:`Getting started <getting_started>` section to learn more about the Wazuh solution, its components, architecture, and capabilities. Alternatively, you can check our :ref:`Installation guide <installation_guide>` to learn how to install each component individually on the same server, as an all-in-one deployment, or on different servers as a distributed deployment depending on the environment needs.
+In this section, you install and configure the central components in just a few minutes. All the components are installed on the same host using a single, automated installation script. Alternatively, you can check our :ref:`Installation guide <installation_guide>` to learn how to install and configure each component in single or cluster configurations.
 
 .. _installation_requirements:
 
@@ -121,24 +121,21 @@ Installing Wazuh
       
       You can access the web interface https://<server_ip>. The credentials are wazuh:vhDpq7YcwA08BLTmcdeYeJmXPU_VD31f
 
-   You now have installed and configured Wazuh. Access the web interface and start securing your systems with Wazuh.       
+   You now have installed and configured Wazuh. 
 
-#. Access the Wazuh web interface with your credentials. 
+#. Access the Wazuh web interface with ``https://<server_ip>`` and your credentias:
 
-    - URL: *https://<server_ip>*
-    - **Username**: *wazuh*
-    - **Password**: *<wazuh_password>*
+    - **Username**: wazuh
+    - **Password**: <wazuh_password>
 
    When you access the Wazuh dashboard for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or, for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser. Alternatively, a certificate from a trusted authority can be configured. 
 
-If you want to uninstall the components of the all-in-one installation, run the unattended installation script and use the option ``-r / --uninstall``.  
+If you want to uninstall the Wazuh central components, run the unattended installation script and use the option ``-r / --uninstall``.  
 
 Next steps
 ----------
 
-The Wazuh environment is now ready, and you can proceed with installing the Wazuh agent on the endpoints to be monitored.
-
-The :ref:`Wazuh agent <wazuh_agent>` is a single and lightweight monitoring software that runs on most operating systems. It provides visibility into the endpoint's security by collecting critical system and application records, inventory data, and detecting potential anomalies. Now that your environment is ready select the operating system of your endpoint and follow the installation steps to deploy the agent. 
+Now that your environment is ready, select your endpoint’s operating system and follow the installation steps to deploy the :ref:`Wazuh agent <wazuh_agent>`. The agent is a single, universal and lightweight monitoring software that runs on most operating systems. It provides visibility into the endpoint’s security by collecting critical system and application records, inventory data, and detecting potential anomalies.
 
 .. raw:: html
 
