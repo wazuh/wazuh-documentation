@@ -29,9 +29,8 @@ Configure your environment as follows to test the POC.
 
     .. code-block:: console
 
-        # cd /tmp/
-        # curl -LO https://rules.emergingthreats.net/open/suricata-6.0.3/emerging.rules.tar.gz
-        # tar -xvzf emerging.rules.tar.gz && mv rules/*.rules /etc/suricata/rules/
+        # curl -L https://rules.emergingthreats.net/open/suricata-6.0.3/emerging.rules.tar.gz -o /tmp/emerging.rules.tar.gz
+        # tar -C /etc/suricata/ -xvzf /tmp/emerging.rules.tar.gz *.rules
         # chown suricata:suricata /etc/suricata/rules/*.rules
         # chmod 640 /etc/suricata/rules/*.rules
 
@@ -39,10 +38,8 @@ Configure your environment as follows to test the POC.
 
     .. code-block:: console
 
-        # cd /etc/suricata/
-        # mv suricata.yaml suricata.yaml.bak
-        # curl -OL http://www.branchnetconsulting.com/wazuh/suricata.yaml
-
+        # mv /etc/suricata/suricata.yaml /etc/suricata/suricata.yaml.bak
+        # curl -L http://www.branchnetconsulting.com/wazuh/suricata.yaml -o /etc/suricata/suricata.yaml
 
 #. Start Suricata.
 
@@ -56,10 +53,14 @@ Configure your environment as follows to test the POC.
 
     .. code-block:: XML
 
-        <localfile>
+        <ossec_config>
+        
+          <localfile>
             <log_format>syslog</log_format>
             <location>/var/log/suricata/eve.json</location>
-        </localfile>
+          </localfile>
+          
+        </ossec_config>
 
 
 #. Restart the Wazuh agent to apply the changes. 
