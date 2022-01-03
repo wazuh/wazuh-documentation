@@ -8,7 +8,7 @@
 Offline installation
 ====================
 
-You can install Wazuh even when there is no connection to the Internet. Installing the solution offline involves downloading the Wazuh components to later install them on a system with no internet connection. Although in this section the Wazuh server and Elastic Stack are installed and configured on the same host in an all-in-one deployment, each component can also be installed on a separate host as a distributed deployment, depending on your environment needs. For more information, check the :ref:`Requirements <installation_requirements>` section.
+You can install Wazuh even when there is no connection to the Internet. Installing the solution offline involves downloading the Wazuh central components to later install them on a system with no internet connection. Although in this section the Wazuh indexer, the Wazuh server, and the Wazuh dashboard are installed and configured on the same host in an all-in-one deployment, each component can also be installed on separate hosts as a distributed deployment, depending on your environment needs. For more information, check the :ref:`Requirements <installation_requirements>` section.
 
 .. note:: Root privileges are required to execute all the commands.
 
@@ -34,13 +34,13 @@ Download the packages and configuration files
 #. Copy or move the ``./wazuh-offline/`` folder contents to a folder accessible to the host from where the offline installation will be carried out.
 
 
-Install Wazuh components from local files
------------------------------------------
+Install Wazuh central components from local files
+-------------------------------------------------
 
 .. note:: In the host where the installation is taking place, make sure to change the working directory to the folder where the downloaded installation files were placed.
 
-Installing the Wazuh manager
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Installing the Wazuh server
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #. Run the following commands to import the Wazuh key and install the Wazuh manager.
 
@@ -68,10 +68,10 @@ Installing the Wazuh manager
 
     .. include:: /_templates/installations/wazuh/common/check_wazuh_manager.rst    
 
-Installing Elasticsearch
-~~~~~~~~~~~~~~~~~~~~~~~~
+Installing the Wazuh indexer
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Run the following command to install Open Distro for Elasticsearch.
+#. Run the following command to install the Wazuh indexer.
 
     .. tabs::
 
@@ -79,13 +79,13 @@ Installing Elasticsearch
 
         .. code-block:: console
         
-          # rpm -ivh ./opendistro-packages/*.rpm > opendistro_output.txt
+          # rpm -ivh ./opendistro-packages/*.rpm > Wazuh_indexer_output.txt
 
       .. group-tab:: DEB
 
         .. code-block:: console
         
-          # dpkg -i ./opendistro-packages/*.deb > opendistro_output.txt
+          # dpkg -i ./opendistro-packages/*.deb > Wazuh_indexer_output.txt
 
 #. Move a copy of the configuration files to the appropriate location.
 
@@ -108,7 +108,7 @@ Installing Elasticsearch
     
       # bash ~/wazuh-cert-tool.sh
 
-#. Move the certificates to the appropriate location.
+#. Move certificates to the appropriate location.
 
     .. code-block:: console
 
@@ -125,7 +125,7 @@ Installing Elasticsearch
 
       # /usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer
 
-#. Enable and start the Elasticsearch service.
+#. Enable and start the indexer service.
 
     .. include:: /_templates/installations/elastic/common/enable_elasticsearch.rst
 
@@ -214,7 +214,7 @@ Installing Filebeat
     
       # tar -xzf ./wazuh_files/filebeat/wazuh-filebeat-module.tar.gz -C /usr/share/filebeat/module
 
-#. Copy the Elasticsearch certificates into ``/etc/filebeat/certs``.
+#. Copy certificates into ``/etc/filebeat/certs``.
 
     .. code-block:: console
 
@@ -275,10 +275,10 @@ Installing Filebeat
      }
 
 
-Installing Kibana
-~~~~~~~~~~~~~~~~~
+Installing the Wazuh dashboard
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Run the following command to install Kibana.
+#. Run the following command to install the Wazuh dashboard.
 
    .. tabs::
 
@@ -301,7 +301,7 @@ Installing Kibana
        # cp ./opendistro_files/kibana/kibana.yml /etc/kibana/
 
     .. note::
-      ``server.host: 0.0.0.0`` in ``/etc/kibana/kibana.yml`` means that Kibana can be accessed from the outside and accepts all the available IPs of the host. This value can be changed for a specific IP if needed.
+      ``server.host: 0.0.0.0`` in ``/etc/kibana/kibana.yml`` means that the Wazuh dashboard can be accessed from the outside and accepts all the available IP addresses of the host. This value can be changed for a specific IP if needed.
   
 #. Create the ``/usr/share/kibana/data`` directory.
 
@@ -310,13 +310,13 @@ Installing Kibana
       # mkdir /usr/share/kibana/data
       # chown -R kibana:kibana /usr/share/kibana/data
 
-#. Replace ``</path/to/installation/folder/>`` with your installation folder path and run the following command to install the Wazuh Kibana plugin.
+#. Replace ``</path/to/installation/folder/>`` with your installation folder path and run the following command to install the Wazuh dashboard Kibana plugin.
 
     .. code-block:: console
 
         # /usr/share/kibana/bin/kibana-plugin install --allow-root file://</path/to/installation/folder/>wazuh_files/kibana/wazuh_kibana.zip
 
-#. Copy the Elasticsearch certificates into ``/etc/kibana/certs``.
+#. Copy certificates into ``/etc/kibana/certs``.
 
     .. code-block:: console
 
@@ -331,7 +331,7 @@ Installing Kibana
 
       # setcap 'cap_net_bind_service=+ep' /usr/share/kibana/node/bin/node
 
-#. Enable and start the Kibana service.
+#. Enable and start the dashboard service.
 
     .. include:: /_templates/installations/elastic/common/enable_kibana.rst
 
@@ -341,13 +341,13 @@ Installing Kibana
     - **Username**: admin
     - **Password**: admin
 
-Upon the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or, for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser. Alternatively, a certificate from a trusted authority can be configured. 
+Upon the first access to the Wazuh dashboard, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or, for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser. Alternatively, a certificate from a trusted authority can be configured. 
 
 
 .. note::
   
-  * It is highly recommended to change the default passwords of Elasticsearch for the users' passwords. To perform this action, see the :ref:`Change users' password <change_elastic_pass>` section.
-  * It is also recommended to customize the file ``/etc/elasticsearch/jvm.options`` to improve the performance of Elasticsearch. Learn more about this process in the :ref:`memory_locking` section.
+  * It is highly recommended to change the default users' passwords. To perform this action, see the :ref:`Change users' password <change_elastic_pass>` section.
+  * It is also recommended to customize the file ``/etc/elasticsearch/jvm.options`` to improve the performance of the indexer. Learn more about this process in the :ref:`memory_locking` section.
 
 To uninstall all the components of the all-in-one installation, see the :ref:`Uninstalling Wazuh <user_manual_uninstall_wazuh_installation_open_distro>` section.
 
