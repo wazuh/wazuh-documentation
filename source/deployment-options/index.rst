@@ -5,44 +5,44 @@
 Installation alternatives
 =========================
 
-You can install Wazuh using other deployment options. These are complementary to the installation methods you can find in the  :ref:`Installation guide <installation_guide>` and the :ref:`Quickstart <quickstart>`. 
+You can install Wazuh using other deployment options. These are complementary to the installation methods you can find in the  :doc:`/installation-guide/index` and the :doc:`/quickstart`. 
 
 Installing the Wazuh central components
 ---------------------------------------
 
-All the alternatives include instructions on how to install the Wazuh central components. After installing the :ref:`components <components>`, you then need to deploy the agent to your endponts.  
+All the alternatives include instructions on how to install the Wazuh central components. After installing the :doc:`central components </getting-started/components/index>`, you then need to deploy agents to your endpoints.  
 
 .. raw:: html
 
     <h3>Ready-to-use machines</h3>
 
-- :ref:`Virtual Machine (OVA) <virtual_machine>`: Wazuh provides a pre-built virtual machine image (OVA) that you can directly import using `VirtualBox <https://www.virtualbox.org/>`_ or other OVA compatible virtualization systems. 
+- :doc:`virtual-machine/virtual-machine`: Wazuh provides a pre-built virtual machine image (OVA) that you can directly import using `VirtualBox <https://www.virtualbox.org/>`_ or other OVA compatible virtualization systems. 
   
-- :ref:`Amazon Machine Images (AMI) <amazon-machine-images>`: This is a pre-built Amazon Machine Image (AMI) you can directly launch on an AWS cloud instance.
+- :doc:`amazon-machine-images/amazon-machine-images`: This is a pre-built Amazon Machine Image (AMI) you can directly launch on an AWS cloud instance.
 
 
 .. raw:: html
 
     <h3>Containers</h3>
 
-- :ref:`Deployment on Docker <wazuh_docker>`: Docker is a set of platform-as-a-service (PaaS) products that delivers software in packages called containers. Using Docker, you can install and configure the Wazuh deployment as a single-host architecture. 
+- :doc:`docker/index`: Docker is a set of platform-as-a-service (PaaS) products that delivers software in packages called containers. Using Docker, you can install and configure the Wazuh deployment as a single-host architecture. 
 
   
-- :ref:`Deployment on Kubernetes <wazuh_kubernetes>`: Kubernetes is an open-source system for automating deployment, scaling, and managing containerized applications. This deployment type uses Wazuh images from Docker and allows you to build an environment composed of a Wazuh cluster integrated with Elastic Stack. 
+- :doc:`deploying-with-kubernetes/index`: Kubernetes is an open-source system for automating deployment, scaling, and managing containerized applications. This deployment type uses Wazuh images from Docker and allows you to build the Wazuh environment. 
 
 
 .. raw:: html
 
     <h3>Offline</h3>
     
-- :ref:`Offline installation <wazuh-offline-installation>`: Installing the solution offline involves downloading the Wazuh components to later install them on a system with no internet connection. 
+- :doc:`offline-installation`: Installing the solution offline involves downloading the Wazuh components to later install them on a system with no internet connection. 
 
 
 .. raw:: html
 
     <h3>From sources</h3>
 
-- :ref:`Installing the Wazuh server from sources <wazuh_server_source_installation>`: Installing Wazuh from source means installing the Wazuh manager without using a package manager. You compile the source code and copy the binaries to your computer instead.
+- :doc:`Installing the Wazuh server from sources <wazuh-from-sources/index>`: Installing Wazuh from source means installing the Wazuh manager without using a package manager. You compile the source code and copy the binaries to your computer instead.
 
 
 
@@ -50,15 +50,15 @@ All the alternatives include instructions on how to install the Wazuh central co
 
     <h3>Commercial options</h3>
 
-- :ref:`Installation with Elastic Stack basic license <basic_installation_guide>`: As an alternative to Open Distro for Elasticsearch, you can install Wazuh using the Elastic Stack basic license option. It contains everything included in the open source version under the `Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_, plus some additional capabilities such as Elastic Stack Security features, Kibana alerting, and others. According to your chosen configuration, Wazuh and Elastic Stack are installed on the same host, as an all-in-one deployment, on a separate host as a single-node or multi-node cluster.
+- :doc:`elastic-stack/index`: As an alternative to Open Distro for Elasticsearch, you can install Wazuh using the Elastic Stack basic license option. It contains everything included in the open source version under the `Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_, plus some additional capabilities such as Elastic Stack Security features, Kibana alerting, and others. According to your chosen configuration, Wazuh and Elastic Stack are installed on the same host, as an all-in-one deployment, on a separate host as a single-node or multi-node cluster.
 
-- :ref:`Installation with Splunk <installation_splunk>`: You install Wazuh along with Splunk Enterprise, including the Splunk forwarder and the Wazuh Splunk app. This can be done as a single instance or as a multi-instance cluster.
+- :doc:`Installation with Splunk <splunk/index>`: You install Wazuh along with Splunk Enterprise, including the Splunk forwarder and the Wazuh Splunk app. This can be done as a single instance or as a multi-instance cluster.
 
 
 Installing the Wazuh agent
 --------------------------
 
-The :ref:`Wazuh agent <wazuh_agent>` is a single and lightweight monitoring software. It is a multi-platform component that can be deployed to laptops, desktops, servers, cloud instances, containers, or virtual machines. It provides visibility into the endpoint's security by collecting critical system and application records, inventory data, and detecting potential anomalies. 
+The :doc:`/getting-started/components/wazuh-agent` is a single and lightweight monitoring software. It is a multi-platform component that can be deployed to laptops, desktops, servers, cloud instances, containers, or virtual machines. It provides visibility into the endpoint's security by collecting critical system and application records, inventory data, and detecting potential anomalies. 
 
 If the Wazuh central components are already installed in your environment, select your operating system below and follow the installation steps to deploy the agent on the endpoints. 
 
@@ -67,7 +67,7 @@ If the Wazuh central components are already installed in your environment, selec
 
   <div class="agent-os">
       <div class="item-agent">
-          <a href="./wazuh-agent/wazuh-agent-package-linux.html" class="d-flex align-items-center">
+          <a href="/installation-guide/wazuh-agent/wazuh-agent-package-linux.html" class="d-flex align-items-center">
             <p>Linux</p>
 
 .. image:: ../images/installation/linux.png
@@ -78,7 +78,7 @@ If the Wazuh central components are already installed in your environment, selec
         </a>
     </div>
     <div class="item-agent">
-        <a href="./wazuh-agent/wazuh-agent-package-windows.html" class="d-flex align-items-center">
+        <a href="/installation-guide/wazuh-agent/wazuh-agent-package-windows.html" class="d-flex align-items-center">
                     <p>Windows</p>
 
 .. image:: ../images/installation/windows_icon.png
@@ -89,7 +89,7 @@ If the Wazuh central components are already installed in your environment, selec
         </a>
     </div>
     <div class="item-agent">
-        <a href="./wazuh-agent/wazuh-agent-package-macos.html" class="d-flex align-items-center">
+        <a href="/installation-guide/wazuh-agent/wazuh-agent-package-macos.html" class="d-flex align-items-center">
             <p>macOS</p>
 
 .. image:: ../images/installation/macOS_logo.png
@@ -100,7 +100,7 @@ If the Wazuh central components are already installed in your environment, selec
         </a>
     </div>
     <div class="item-agent" id="solaris-logo">
-        <a href="./wazuh-agent/wazuh-agent-package-solaris.html" class="d-flex align-items-center">
+        <a href="/installation-guide/wazuh-agent/wazuh-agent-package-solaris.html" class="d-flex align-items-center">
             <p>Solaris</p>
 
 .. image:: ../images/installation/solaris.png
@@ -111,7 +111,7 @@ If the Wazuh central components are already installed in your environment, selec
         </a>
     </div>
     <div class="item-agent">
-        <a href="./wazuh-agent/wazuh-agent-package-aix.html" class="d-flex align-items-center">
+        <a href="/installation-guide/wazuh-agent/wazuh-agent-package-aix.html" class="d-flex align-items-center">
             <p>AIX</p>
 
 .. image:: ../images/installation/AIX.png
@@ -122,7 +122,7 @@ If the Wazuh central components are already installed in your environment, selec
         </a>
     </div>
     <div class="item-agent">
-        <a href="./wazuh-agent/wazuh-agent-package-hpux.html" class="d-flex align-items-center">
+        <a href="/installation-guide/wazuh-agent/wazuh-agent-package-hpux.html" class="d-flex align-items-center">
             <p>HP-UX</p>
 
 .. image:: ../images/installation/hpux.png
@@ -139,7 +139,7 @@ If the Wazuh central components are already installed in your environment, selec
 
     <h3>From sources</h3>
 
-- :ref:`Installing the Wazuh agent from sources <wazuh_agent_source_installation>`: Installing Wazuh from source means installing the Wazuh agent without using a package manager. You compile the source code and copy the binaries to your computer instead.
+- :doc:`Installing the Wazuh agent from sources <wazuh-from-sources/wazuh-agent/index>`: Installing Wazuh from source means installing the Wazuh agent without using a package manager. You compile the source code and copy the binaries to your computer instead.
 
 Orchestration tools
 -------------------
@@ -147,9 +147,9 @@ Orchestration tools
 These alternatives guide you to install the Wazuh central components along with the single universal agent.
 
 
-- :ref:`Deployment with Ansible <wazuh_ansible>`: Ansible is an open source platform designed for automating tasks. Its deployment tool is used to deploy the Wazuh infrastructure on AWS. The Wazuh environment consists of a Wazuh server, an Elastic Stack server, and a Wazuh agent.
+- :doc:`deploying-with-ansible/index`: Ansible is an open source platform designed for automating tasks. Its deployment tool is used to deploy the Wazuh infrastructure on AWS. The Wazuh environment consists of the Wazuh central components and a Wazuh agent.
 
-- :ref:`Deployment with Puppet <wazuh_puppet>`: Puppet is an open-source software tool that gives you an automatic way to inspect, deliver, operate, and future-proof all of your software, no matter where it is executed. It is very simple to use and allows you to install and configure Wazuh easily.
+- :doc:`deploying-with-puppet/index`: Puppet is an open-source software tool that gives you an automatic way to inspect, deliver, operate, and future-proof all of your software, no matter where it is executed. It is very simple to use and allows you to install and configure Wazuh easily.
 
 
 
