@@ -15,67 +15,37 @@ Installing dependencies
 Python
 ------
 
-The GCP module requires python 3. It is compatible with python versions from `3.6.0` to `3.9.5`.  Future python releases should maintain compatibility although it cannot be guaranteed.
-
-a) For **CentOS/RHEL/Fedora** systems:
-
-.. code-block:: console
-
-  # yum update && yum install python3
-
-b) For **Debian/Ubuntu** systems:
-
-.. code-block:: console
-
-  # apt-get update && apt-get install python3
-
+The module requires python 3.6 or superior compatibility.
 
 Pip
 ---
 
 The required Python modules can be installed with Pip, the Python package manager. Most of UNIX distributions have this tool available in their software repositories, but it can be compiled from sources too:
 
-A) For **CentOS/RHEL/Fedora** systems:
-
-a. Using ``yum``:
+a) For **CentOS/RHEL/Fedora** systems:
 
 .. code-block:: console
 
-  # yum update && yum install python3-pip
+  # yum install python-pip
 
-b. From sources:
+b) For **Debian/Ubuntu** systems:
 
 .. code-block:: console
 
-  # yum update && yum install curl python3-distutils
+  # apt-get update && apt-get install python-pip
+
+c) From sources:
+
+.. code-block:: console
+
   # curl -O https://bootstrap.pypa.io/get-pip.py
-  # python3 get-pip.py
+  # python get-pip.py
 
+google-cloud-pubsub
+-------------------
 
-B) For **Debian/Ubuntu** systems:
-
-a. Using ``apt-get``:
-
-.. code-block:: console
-
-  # apt-get update && apt-get install python3-pip
-
-b. From sources:
+`google-cloud-pubsub <https://pypi.org/project/google-cloud-pubsub//>`_ is the official python library supported by Google to manage Google Cloud Pub/Sub resources. It will be used to pull the log messages from the Pub/Sub queue. To install this package, execute the following command:
 
 .. code-block:: console
 
-  # apt-get update && apt-get install curl python3-distutils
-  # curl -O https://bootstrap.pypa.io/get-pip.py
-  # python3 get-pip.py
-
-
-Google cloud pip dependencies
------------------------------
-
-`google-cloud-pubsub <https://pypi.org/project/google-cloud-pubsub//>`_ is the official python library supported by Google to manage Google Cloud Pub/Sub resources. It will be used to pull the log messages from the Pub/Sub queue. Wazuh supports google-cloud-pubsub up to 1.4.3.
-
-To install this package, along with its dependencies, execute the following command:
-
-.. code-block:: console
-
-  # pip install google-cloud-pubsub==1.4.3 google-api-core==1.16.0 google-auth==1.30.1 grpc-google-iam-v1==0.12.3 grpcio==1.38.0
+  # pip install google-cloud-pubsub

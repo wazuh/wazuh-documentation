@@ -38,36 +38,22 @@ Pip
 
 The required modules can be installed with Pip, the Python package manager. Most of UNIX distributions have this tool available in their software repositories, but it can be compiled from sources too:
 
-A) For **CentOS/RHEL/Fedora** systems:
-
-a. Using ``yum``:
+a) For **CentOS/RHEL/Fedora** systems:
 
 .. code-block:: console
 
   # yum update && yum install python3-pip
 
-b. From sources:
-
-.. code-block:: console
-
-  # yum update && yum install curl python3-distutils
-  # curl -O https://bootstrap.pypa.io/get-pip.py
-  # python3 get-pip.py
-
-
-B) For **Debian/Ubuntu** systems:
-
-a. Using ``apt-get``:
+b) For **Debian/Ubuntu** systems:
 
 .. code-block:: console
 
   # apt-get update && apt-get install python3-pip
 
-b. From sources:
+c) From sources:
 
 .. code-block:: console
 
-  # apt-get update && apt-get install curl python3-distutils
   # curl -O https://bootstrap.pypa.io/get-pip.py
   # python3 get-pip.py
 
@@ -81,4 +67,4 @@ To install boto3, execute the following command:
 
 .. code-block:: console
 
-  # pip install boto3==1.17.76
+  # pip3 install boto3==1.17.76

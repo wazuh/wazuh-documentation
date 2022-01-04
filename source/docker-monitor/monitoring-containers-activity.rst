@@ -11,6 +11,17 @@ Monitoring containers activity
 The :doc:`Docker wodle <../user-manual/reference/ossec-conf/wodle-docker>` collects events on Docker containers such as starting, stopping or pausing.
 
 
+Requirements
+^^^^^^^^^^^^^
+
+The following dependencies are required by the wodle:
+
+- Linux system.
+- Python 2.7 or newer.
+- `Python Docker library <https://pypi.org/project/docker/>`_: It can be installed with ``pip install docker`` command.
+- Starting with Wazuh v3.9.0 this requirement is met by default by the Wazuh manager and must only be installed in previous versions or Wazuh agents.
+
+
 Configuration
 ^^^^^^^^^^^^^^
 
