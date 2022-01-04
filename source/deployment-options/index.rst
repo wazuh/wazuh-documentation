@@ -157,12 +157,12 @@ These alternatives guide you to install the Wazuh central components along with 
     :hidden:
     :maxdepth: 1
     
-    docker/index 
-    deploying-with-kubernetes/index
+    ready-to-use-machines/index
+    containers/index 
     deploying-with-ansible/index
     deploying-with-puppet/index
     offline-installation
     wazuh-from-sources/index
     elastic-stack/index
     splunk/index
-    ready-to-use-machines/index
+    
