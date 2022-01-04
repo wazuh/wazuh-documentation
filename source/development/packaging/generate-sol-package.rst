@@ -111,8 +111,7 @@ Bring the machine up ``vagrant [OPTION] ... up solaris10/solaris11/both``:
 Preparation
 ^^^^^^^^^^^
 
-Download our wazuh-packages repository from GitHub, enter into the solaris directory, change to the desired branch, copy the desired solaris directory into the ``package_generation/src`` directory and enter in the ``package_generation`` directorty.
-
+Download our wazuh-packages repository from GitHub, enter into the solaris directory, change to the desired branch, copy the desired solaris directory into the ``package_generation/src`` directory and enter in the ``package_generation`` directory.
 .. code-block:: console
 
   $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/solaris && git checkout |WAZUH_PACKAGES_BRANCH|
