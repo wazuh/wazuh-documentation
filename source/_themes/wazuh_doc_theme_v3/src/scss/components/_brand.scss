@@ -6,18 +6,25 @@
 
 .navbar-brand {
   display: flex;
-  justify-content: flex-end;
+  align-content: flex-end;
 
   .logo-link {
-    &.web {
-      padding-bottom: .3rem;
-    }
+    display: flex;
+    align-items: flex-end;
     &.docs {
       margin-left: 5px;
-      line-height: 2.15;
+      line-height: 1rem;
 
       &:hover {
         text-decoration: none;
+      }
+    }
+    img {
+      width: auto;
+      height: 28px;
+      
+      @include media-max(sm){
+        height: 24px;
       }
     }
   }
@@ -26,35 +33,31 @@
 /* Light theme -------------------------------------------------------------- */
 
 body {
-  .navbar-brand {
-    .logo-link {
-      &.docs {
-        color: $light_ColorMainText;
-      }
-      .logo-light {
-        display: inline-block;
-      }
-      .logo-dark {
-        display: none;
-      }
+  .logo-link {
+    &.docs {
+      color: $light_ColorMainText;
     }
-  }  
+    .logo-light {
+      display: inline-block;
+    }
+    .logo-dark {
+      display: none;
+    }
+  }
 }
 
 /* Dark- theme -------------------------------------------------------------- */
 
 .dark-theme {
-  .navbar-brand {
-    .logo-link {
-      &.docs {
-        color: $dark_ColorMainText;
-      }
-      .logo-light {
-        display: none;
-      }
-      .logo-dark {
-        display: inline-block;
-      }
+  .logo-link {
+    &.docs {
+      color: $dark_ColorMainText;
+    }
+    .logo-light {
+      display: none;
+    }
+    .logo-dark {
+      display: inline-block;
     }
   }
 }

@@ -44,10 +44,10 @@
 
 body {
   .search-box {
-    background-color: $light_ColorSidebarSpace;
+    background-color: $light_ColorBaseSpace;
     border-color: $light_ColorBorderDetails;
     .form-control {
-      background-color: $light_ColorSidebarSpace;
+      background-color: $light_ColorBaseSpace;
       color: $light_ColorMainText;
     }
     .btn-search {
@@ -63,10 +63,10 @@ body {
 
 .dark-theme {
   .search-box {
-    background-color: $dark_ColorSidebarSpace;
+    background-color: $dark_ColorBaseSpace;
     border-color: $dark_ColorBorderDetails;
     .form-control {
-      background-color: $dark_ColorSidebarSpace;
+      background-color: $dark_ColorBaseSpace;
       color: $dark_ColorMainText;
     }
     .btn-search {

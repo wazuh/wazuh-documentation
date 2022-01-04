@@ -8,9 +8,30 @@
 ----------------------------------------------------------------------------- */
 
 #global-toc {
+  @include media-max(xl) {
+    position: fixed;
+    top: $headerHeightXs;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    margin-bottom: 0;
+    padding-bottom: 10px;
+  }
+  
+  &.collapse:not(.show) {
+    @include media-min(xl) {
+      display: block;
+    }
+  }
+  
   ul {
     padding: 0;
     list-style: none;
+    
+    a {
+      padding-right: 60px;
+    }
 
     .current-toc-node {
       &:hover {
@@ -50,7 +71,7 @@
     width: 100%;
     padding: 5px 0;
     font-size: 18px;
-    font-weight: 400;
+    font-weight: 300;
     line-height: 32px;
     text-decoration: none;
 
@@ -66,7 +87,7 @@
   [class*="toctree-l"] {
     &.current {
       > a {
-        font-weight: 700;
+        font-weight: 500;
       }
 
       &.show {
@@ -89,13 +110,13 @@
 
   .toctree-l1 {
     > a {
-      padding-left: 40px;
+      padding-left: 20px;
       &::before {
-        left: 25px;
+        left: 10px;
       }
     }
     > ul {
-      margin-left: 40px;
+      margin-left: 20px;
       border-left: 1px solid;
     }
   }
@@ -103,15 +124,19 @@
   .toc-toggle-btn {
     display: none;
     position: absolute;
-    top: 0;
-    right: 32px;
+    top: calc(50% - 21px);
+    right: 15px;
     width: 42px;
     height: 42px;
     background-color: transparent;
-    background-size: 17px 10px;
+    background-size: 24px;
     background-position: center;
     background-repeat: no-repeat;
     border: none;
+    padding: 0;
+    @media (hover: none) {
+      display: block;
+    }
   }
   
   /* Hide toctree-l7 and its branch */
@@ -120,7 +145,7 @@
   }
   .toctree-l7 {
     display: none;
-  } 
+  }
 }
 
 /* Light theme -------------------------------------------------------------- */
@@ -132,9 +157,6 @@ body {
         color: $light_ColorPrimary;
         &:hover {
           color: $light_ColorPrimaryLighter;
-          .toc-toggle-btn {
-            background-image: url(#{$icoPath}svg-icons.svg#menu-chevron-blue-lt);
-          }
         }
         &::before {
           border-top-color: $light_ColorPrimary;
@@ -143,10 +165,13 @@ body {
     }
     a {
       color: $light_ColorMainText;
+      .toc-toggle-btn {
+        background-image: url(#{$icoPath}svg-icons.svg#chevron-blue-light-lt);
+      }
       &:hover {
         color: $light_ColorPrimaryLighter;
         .toc-toggle-btn {
-          background-image: url(#{$icoPath}svg-icons.svg#menu-chevron-blue-light-lt);
+          background-image: url(#{$icoPath}svg-icons.svg#chevron-blue-lt);
         }
       }
     }
@@ -170,9 +195,6 @@ body {
         color: $dark_ColorPrimary;
         &:hover {
           color: $dark_ColorPrimaryLighter;
-          .toc-toggle-btn {
-            background-image: url(#{$icoPath}svg-icons.svg#menu-chevron-blue-dt);
-          }
         }
         &::before {
           border-top-color: $dark_ColorPrimary;
@@ -181,10 +203,13 @@ body {
     }
     a {
       color: $dark_ColorMainText;
+      .toc-toggle-btn {
+        background-image: url(#{$icoPath}svg-icons.svg#chevron-blue-light-dt);
+      }
       &:hover {
         color: $dark_ColorPrimaryLighter;
         .toc-toggle-btn {
-          background-image: url(#{$icoPath}svg-icons.svg#menu-chevron-blue-light-dt);
+          background-image: url(#{$icoPath}svg-icons.svg#chevron-blue-dt);
         }
       }
     }

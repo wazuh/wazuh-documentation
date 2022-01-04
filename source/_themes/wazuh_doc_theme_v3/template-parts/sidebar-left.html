@@ -1,8 +1,10 @@
-<div id="left-sidebar" class="sidebar collapse navbar-collapse">
+<div id="left-sidebar" class="sidebar">
   <div class="sidebar-container">
-    {% include "template-parts/search-box.html" %}
+    <div id="search-box-wrapper" class="collapse navbar-collapse">
+      {% include "template-parts/search-box.html" %}
+    </div>
     {% block menu_toc -%}
-    <nav id="global-toc">
+    <nav id="global-toc" class="collapse navbar-collapse">
       {% set toctree = toctree(maxdepth=theme_globaltoc_depth|toint, collapse=theme_collapse_navigation|tobool, includehidden=theme_include_hidden|tobool) -%}
       {% if toctree -%}
       {% set toctree = toctree.replace('toctree-l1 current', 'toctree-l1 current show') -%}

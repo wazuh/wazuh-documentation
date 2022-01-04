@@ -20,13 +20,24 @@
 }
 
 #central-column * {
-  scroll-margin-top: calc(#{$headerHeight} + #{$breadcrumbsHeight});
+  @include media-max(sm){
+    scroll-margin-top: calc(#{$headerHeightXs} + #{$secondaryMobileBar});
+  }
+  @include media-only(sm, xl){
+    scroll-margin-top: calc(#{$headerHeightXs} + #{$secondaryMobileBar} + #{$breadcrumbsHeightXs});
+  }
+  @include media-min(xl){
+    scroll-margin-top: calc(#{$headerHeightXl} + #{$breadcrumbsHeightXl});
+  }
 }
 
 #central-column {
   width: 100%;
-  padding-right: $rightSidebarWidth;
-  padding-left: $leftSidebarWidth;
+  
+  @include media-min(xl) {
+    padding-left: $leftSidebarWidth;
+    padding-right: $rightSidebarWidth;
+  }
 }
 
 [role="main"] {
@@ -35,7 +46,7 @@
   }
 
   strong {
-    font-weight: 800;
+    font-weight: 500;
   }
 
   code {

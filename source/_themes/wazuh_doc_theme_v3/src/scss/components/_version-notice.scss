@@ -22,7 +22,7 @@
     .no-latest-title {
       display: inline-block;
       position: relative;
-      font-weight: 700;
+      font-weight: 500;
       padding: 4px 15px 4px 0;
       line-height: 32px;
     }
@@ -39,23 +39,23 @@
   &.document {
     
     #central-column {
-      padding-top: calc(#{$breadcrumbsHeight} + #{$noLatestNoticeHeightXl});
+      padding-top: calc(#{$breadcrumbsHeightXl} + #{$noLatestNoticeHeightXl});
       * {
-        scroll-margin-top: calc(#{$headerHeight} + #{$breadcrumbsHeight} + #{$noLatestNoticeHeightXl});
+        scroll-margin-top: calc(#{$headerHeightXl} + #{$breadcrumbsHeightXl} + #{$noLatestNoticeHeightXl});
       }
     }
     
     [role="main"] {
-      min-height: calc(100vh - #{$headerHeight} - #{$breadcrumbsHeight} - #{$footerHeight} - #{$noLatestNoticeHeightXl});
+      min-height: calc(100vh - #{$headerHeightXl} - #{$breadcrumbsHeightXl} - #{$footerHeight} - #{$noLatestNoticeHeightXl});
     }
     
     .no-latest-notice-wrapper {
-      top: calc(#{$headerHeight} + #{$breadcrumbsHeight});
+      top: calc(#{$headerHeightXl} + #{$breadcrumbsHeightXl});
     }
   }
   &.search {
     .no-latest-notice-wrapper {
-      top: calc(#{$headerHeight});
+      top: calc(#{$headerHeightXl});
     }
     #central-column {
       padding-top: $noLatestNoticeHeightXl;

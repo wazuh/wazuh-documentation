@@ -16,12 +16,12 @@
     margin-top: 20px;
     height: 30px;
     font-size: 18px;
-    font-weight: 700;
+    font-weight: 500;
     text-transform: uppercase;
   }
 
   > ul {
-    height: calc(100vh - #{$headerHeight} - #{$breadcrumbsHeight} - 40px - 30px - 30px - #{$footerHeight});
+    height: calc(100vh - #{$headerHeightXl} - #{$breadcrumbsHeightXl} - 40px - 30px - 30px - #{$footerHeight});
     overflow-y: auto;
   }
 
@@ -42,12 +42,12 @@
         outline: none;
       }
       &:active {
-        font-weight: 700;
+        font-weight: 500;
       }
     }
 
     .active {
-      font-weight: 700;
+      font-weight: 500;
     }
   }
 }

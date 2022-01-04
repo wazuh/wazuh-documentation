@@ -19,18 +19,27 @@
     flex-direction: row;
     align-items: center;
     font-size: 14px;
-    font-weight: 400px;
+    font-weight: 400;
 
     &:hover {
       text-decoration: none;
     }
+    
+    &:first-of-type {
+      padding-right: 15px;
+    }
+    
+    &:last-of-type {
+      padding-left: 15px;
+    }
   }
 
   .chevron {
-    width: 1.55em;
-    height: 1.55em;
+    width: 25px;
+    height: 25px;
     background-position: center;
-    background-size: contain;
+    background-size: 22px 22px;
+    flex-shrink: 0;
 
     &.left {
       margin-right: 5px;
@@ -52,11 +61,11 @@ body {
     a:hover {
       color: $light_ColorPrimaryLighter;
       .chevron {
-        background: url('#{$icoPath}svg-icons.svg#chevron-blue-light-lt');
+        background-image: url('#{$icoPath}svg-icons.svg#chevron-blue-light-lt');
       }
     }
     .chevron {
-      background: url('#{$icoPath}svg-icons.svg#chevron-blue-lt');
+      background-image: url('#{$icoPath}svg-icons.svg#chevron-blue-lt');
     }
   }
 }
@@ -69,11 +78,11 @@ body {
     a:hover {
       color: $dark_ColorPrimaryLighter;
       .chevron {
-        background: url('#{$icoPath}svg-icons.svg#chevron-blue-light-dt');
+        background-image: url('#{$icoPath}svg-icons.svg#chevron-blue-light-dt');
       }
     }
     .chevron {
-      background: url('#{$icoPath}svg-icons.svg#chevron-blue-dt');
+      background-image: url('#{$icoPath}svg-icons.svg#chevron-blue-dt');
     }
   }
 }

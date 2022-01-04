@@ -72,7 +72,7 @@ main {
       display: flex;
       align-items: center;
       border-radius: $roundedCorners $roundedCorners 0 0;
-      font-weight: 700;
+      font-weight: 500;
       width: 100%;
       cursor: pointer;
       
@@ -226,7 +226,7 @@ main {
 
     .k,
     .kn {
-      font-weight: 700;
+      font-weight: 500;
     }
   }
 }

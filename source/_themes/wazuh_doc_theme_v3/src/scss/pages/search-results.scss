@@ -20,6 +20,10 @@ main {
   padding-bottom: 30px;
 }
 
+h1 {
+  font-size: 22px;
+}
+
 #search-results {
   .search-summary {
     font-weight: 400;
@@ -28,7 +32,7 @@ main {
   #toggle-results {
     text-decoration: none;
     &:focus {
-      font-weight: 500;
+      font-weight: 400;
     }
   }
   
@@ -54,7 +58,7 @@ main {
       font-size: 22px;
       text-decoration: none;
       &:focus {
-        font-weight: 500;
+        font-weight: 400;
       }
     }
     .context {

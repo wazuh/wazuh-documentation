@@ -9,28 +9,70 @@
 
 #left-sidebar {
   position: fixed;
-  top: $headerHeight;
+  top: $headerHeightXs;
   flex-basis: $leftSidebarWidth;
   flex-shrink: 0;
   flex-grow: 0;
   width: $leftSidebarWidth;
+  z-index: 110;
+  
+  @include media-max(xl) {
+    height: 0;
+  }
 
-  @include media-min(lg) {
+  @include media-min(xl) {
+    top: $headerHeightXl;
     display: block;
   }
 
   .sidebar-container {
     width: $leftSidebarWidth;
-    height: calc(100vh - #{$headerHeight});
-    padding: 30px 0;
-
-    & > nav {
-      margin-top: 20px;
+    @include media-max(xl) {
+      height: 0;
+      position: fixed;
+      top: $headerHeightXs;
+      left: 0;
+      width: 100%;
+      bottom: 0;
+    }
+    @include media-min(xl) {
+      padding: 30px 0;
+      top: $headerHeightXl;
+      height: calc(100vh - #{$headerHeightXl});
     }
 
-    .search-box {
-      margin-right: 40px;
-      margin-left: 40px;
+    & > nav {
+      padding-top: 10px;
+    }
+
+    #search-box-wrapper {
+      padding-top: 20px;
+      padding-left: 15px;
+      padding-right: 15px;
+      padding-bottom: 15px;
+      @include media-max(xl) {
+        position: fixed;
+        z-index: 10;
+        width: 100%;
+      }
+      @include media-min(xl) {
+        padding-top: 0px;
+        width: $leftSidebarWidth;
+      }
+      
+      &.collapse:not(.show) {
+        @include media-min(xl) {
+          display: block;
+        }
+      }
+      
+      &.show + #global-toc,
+      &.collapsing + #global-toc {
+        @include media-max(xl) {
+          padding-top: 90px;
+          transition: padding-top .3s;
+        }
+      }
     }
   }
 }
@@ -40,6 +82,12 @@
 body {
   #left-sidebar {
     .sidebar-container {
+      @include media-min(xl) {
+        background-color: $light_ColorSidebarSpace;
+      }
+    }
+    #global-toc,
+    #search-box-wrapper {
       background-color: $light_ColorSidebarSpace;
     }
   }
@@ -50,6 +98,12 @@ body {
 .dark-theme {
   #left-sidebar {
     .sidebar-container {
+      @include media-min(xl) {
+        background-color: $dark_ColorSidebarSpace;
+      }
+    }
+    #global-toc,
+    #search-box-wrapper {
       background-color: $dark_ColorSidebarSpace;
     }
   }

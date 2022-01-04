@@ -7,10 +7,18 @@
 #light-dark-switch {
   display: flex;
   flex-direction: row;
-  padding-bottom: 8px;
+  @include media-min(xl) {
+    padding-bottom: 8px;
+  }
 
   > span:first-child {
     margin-left: 8px;
+  }
+  
+  .text {
+    @include media-max(sm) {
+      display: none;
+    }
   }
 
   .switch-icon {

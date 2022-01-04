@@ -93,11 +93,14 @@ $dark_ColorCodeVariable: #b677dc !default;
 /* -- Theme elements fixed dimensions ------------------------------------------------------------------------------------ */
 
 // Fixed dimensions
-$indexHeaderHeight: 215px !default;
+$indexHeaderHeightXs: 215px !default;
+$indexHeaderHeightXl: 215px !default;
 $indexIconSize: 60px !default;
 $IndexMaxShowItems: 3 !default;
-$headerHeight: 77px !default;
-$breadcrumbsHeight: 60px !default;
+$headerHeightXs: 70px !default;
+$headerHeightXl: 77px !default;
+$breadcrumbsHeightXs: 70px !default;
+$breadcrumbsHeightXl: 60px !default;
 $footerHeight: 70px !default;
 $leftSidebarWidth: 385px !default;
 $rightSidebarWidth: 290px !default;
@@ -106,6 +109,7 @@ $rightRedocSidebarWidth: 40% !default;
 $redocHeaderHeight: 110px !default;
 $roundedCorners: 10px !default;
 $noLatestNoticeHeightXl: 60px !default;
+$secondaryMobileBar: 54px !default;
 
 /* -- Others ------------------------------------------------------------------------------------ */
 $imgPath: "../../images/" !default;

@@ -221,8 +221,10 @@
     <script id="documentation_options" data-url_root="{{ pathto('', 1) }}" src="{{ pathto('_static/js/documentation_options.js', 1) }}"></script>
   {{- js() }}
   {% endblock after_footer -%}
-  {%- block light_box_display %}
-    {{- add_wazuh_light_box() }}
-  {%- endblock light_box_display -%}
+  {%- if pagename not in special_pages -%}
+    {%- block light_box_display %}
+      {{- add_wazuh_light_box() }}
+    {%- endblock light_box_display -%}
+  {% endif -%}
   </body>
 </html>

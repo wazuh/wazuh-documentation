@@ -27,9 +27,22 @@ header {
     width: calc((#{$leftSidebarWidth} + 32px) / 2);
     height: 40px;
     border: 2px solid;
-    border-radius: $roundedCorners;    
+    border-radius: $roundedCorners;
+    @include media-max(sm) {
+      font-size: 14px;
+    }
+    @include media-max(xl) {
+      border: none;
+      padding: 0;
+      width: auto;
+    }
     &:focus  {
       box-shadow: none;
+    }
+    span {
+      @include media-max(xl) {
+        padding-right: 5px;
+      }
     }
   }
   .dropdown-menu {
@@ -38,6 +51,17 @@ header {
     width: 100%;
     border: 2px solid;
     border-radius: 10px;
+    @include media-max(sm) {
+      font-size: 14px;
+    }
+    
+    @include media-max(xl) {
+      border: none;
+      padding: 0;
+      max-height: calc(100vh - 70px - 56px);
+      overflow-y: auto;
+      left: -10px!important;
+    }
 
     > li > a {
       display: inline-block;
@@ -47,15 +71,15 @@ header {
 
       &:hover,
       &:focus {
-        font-weight: 700;
+        font-weight: 400;
       }
       
       &.disabled {
-        font-weight: 500;
+        font-weight: 400;
         
         &:hover,
         &:focus {
-          font-weight: 500;
+          font-weight: 400;
         }
       }
     }
@@ -79,16 +103,21 @@ body {
   
   #version-selector {
     .dropdown-btn {
-      background-color: $light_ColorBaseSpace;
-      border-color:  $light_ColorAccent;
       color: $light_ColorMainText;
+      @include media-min(xl) {
+        background-color: $light_ColorBaseSpace;
+        border-color:  $light_ColorAccent;
+      }
       &[aria-expanded="false"]:focus {
         box-shadow: inset 0 0 2px 2px rgba($light_ColorFocusShade, .2);
       }
     }
     .dropdown-menu {
-      background-color: $light_ColorBaseSpace;
-      border-color:  $light_ColorAccent;
+      background-color: $light_ColorSidebarSpace;
+      @include media-min(xl) {
+        background-color: $light_ColorBaseSpace;
+        border-color:  $light_ColorAccent;
+      }
       > li > a {
         color: $light_ColorMainText;
         &:hover,
@@ -120,16 +149,22 @@ body {
   
   #version-selector {
     .dropdown-btn {
-      background-color: $dark_ColorBaseSpace;
-      border-color:  $dark_ColorAccent;
       color: $dark_ColorMainText;
+      background-color: $dark_ColorSidebarSpace;
+      @include media-min(xl) {
+        background-color: $dark_ColorBaseSpace;
+        border-color:  $dark_ColorAccent;
+      }
       &[aria-expanded="false"]:focus {
         box-shadow: inset 0 0 2px 2px rgba($dark_ColorFocusShade, .5);
       }
     }
     .dropdown-menu {
-      background-color: $dark_ColorBaseSpace;
-      border-color:  $dark_ColorAccent;
+      background-color: $dark_ColorSidebarSpace;
+      @include media-min(xl) {
+        background-color: $dark_ColorBaseSpace;
+        border-color:  $dark_ColorAccent;
+      }
       > li > a {
         color: $dark_ColorMainText;
         &:hover,

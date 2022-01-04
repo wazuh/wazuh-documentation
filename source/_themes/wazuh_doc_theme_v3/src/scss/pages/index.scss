@@ -12,13 +12,13 @@
 @import "../parts/footer";
 
 body {
-  margin-top: $indexHeaderHeight;
+  margin-top: $indexHeaderHeightXl;
 }
 
 main {
-  padding-left: 15px;
-  padding-right: 15px;
-  min-height: calc(100vh - #{$indexHeaderHeight} - #{$footerHeight});
+  padding-left: 0;
+  padding-right: 0;
+  min-height: calc(100vh - #{$indexHeaderHeightXl} - #{$footerHeight});
   padding-top: 60px;
 
   h1 {
@@ -44,13 +44,22 @@ main {
         position: relative;
         min-height: 133px;
         border-left: 3px solid;
+        @include media-max(lg){
+          margin-left: #{$indexIconSize - 10};
+        }
+        @include media-max(md) {
+          width: calc(100% - #{$indexIconSize + 10});
+        }
+        @include media-only(md, xl) {
+          width: calc(50% - #{$indexIconSize + 10});
+        }
 
         &.collapsible {
           .toggle {
             display: inline-block;
             left: -3px;
             font-size: 18px;
-            font-weight: 700;
+            font-weight: 500;
             padding: 10px 0;
 
             &::after {
@@ -97,8 +106,11 @@ main {
         > a {
           font-size: 22px;
           line-height: 22px;
-          font-weight: 700;
+          font-weight: 500;
           padding-bottom: 15px;
+          @include media-max(xl){
+            font-size: 20px;
+          }
         }
       }
       .toctree-l2 {
@@ -114,7 +126,7 @@ main {
 }
 
 #header {
-  height: $indexHeaderHeight;
+  height: $indexHeaderHeightXl;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -140,11 +152,14 @@ main {
 
 #right-sidebar {
   position: fixed;
-  top: $indexHeaderHeight;
+  top: $indexHeaderHeightXl;
   right: 0;
   width: calc((100% - 1140px)/2);
-  min-width: 150px;
+  min-width: 160px;
   padding-top: 15px;
+  @include media-max(sm){
+    min-width: 115px;
+  }
 }
 
 .index footer {
@@ -166,6 +181,12 @@ main {
     left: -70px;
     top: -7px;
     pointer-events: none;
+    @include media-max(lg){
+      left: -50px;
+      width: 50px;
+      height: 55px;
+      background-size: 60px 60px;
+    }
   }
 }
 

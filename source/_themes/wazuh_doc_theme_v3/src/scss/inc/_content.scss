@@ -16,7 +16,10 @@
 @import "../components/previous-next";
 
 #central-column {
-  padding-top: $breadcrumbsHeight;
+  padding-top: $breadcrumbsHeightXl;
+  @include media-max(sm){
+    padding-top: 0;
+  }
 
   dl {
     dt {
@@ -30,7 +33,9 @@
 }
 
 [role="main"] {
-  min-height: calc(100vh - #{$headerHeight} - #{$breadcrumbsHeight} - #{$footerHeight});
+  @include media-min(xl){
+    min-height: calc(100vh - #{$headerHeightXl} - #{$breadcrumbsHeightXl} - #{$footerHeight});
+  }
   
   h1,
   h2,
@@ -123,7 +128,7 @@
     th {
       padding: 8px;
       font-size: 18px;
-      font-weight: 700;
+      font-weight: 500;
       border: 1px solid;
     }
 

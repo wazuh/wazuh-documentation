@@ -23,7 +23,9 @@
         {% endblock latest %}
 
         {% if pagename not in special_pages %}
-          {% include "template-parts/breadcrumbs.html" %}
+          <div class="breadcrumb-wrapper">
+            {% include "template-parts/breadcrumbs.html" %}
+          </div>
         {% endif %}
         
         {# Main content #}
@@ -36,7 +38,7 @@
       </div>
       {%- endblock main_column -%}
       {%- block footer %}
-      <footer class="d-flex justify-content-between align-items-center">
+      <footer>
         {% include "template-parts/footer.html" %}
       </footer>
       {% endblock footer -%}

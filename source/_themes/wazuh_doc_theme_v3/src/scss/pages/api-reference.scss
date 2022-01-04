@@ -29,7 +29,7 @@ $dark_ColorReDocDanger: #E31B0F !default;
 
 body {
   font-family: 'Manrope', sans-serif;
-  font-weight: 400;
+  font-weight: 300;
   font-size: 16px;
   line-height: 32px;
   padding-top: $redocHeaderHeight;
@@ -47,12 +47,22 @@ header {
   height: $redocHeaderHeight;
   width: calc(#{$leftRedocSidebarWidth} + (100% - #{$leftRedocSidebarWidth}) * .6);
   z-index: 100;
+  @media screen and (max-width: 50rem){
+    flex-direction: column;
+    width: 100%;
+    height: $redocHeaderHeight;
+  }
   .header-left {
     width: $leftRedocSidebarWidth;
-    padding: 7px 24px;
+    padding: 7px 40px;
     pointer-events: all;
     position: relative;
     z-index: 20;
+    @media screen and (max-width: 50rem){
+      height: $redocHeaderHeight / 2;
+      padding: 10px 40px;
+      width: 100%;
+    }
     
     .navbar-brand {
       justify-content: flex-start;
@@ -60,6 +70,15 @@ header {
     #light-dark-switch {
       padding-top: 10px;
       border-top: 2px solid;
+      @media screen and (max-width: 50rem){
+        position: absolute;
+        bottom: -($redocHeaderHeight / 2);
+        border: none;
+        padding-top: 0;
+        height: $redocHeaderHeight / 2;
+        right: 26px;
+        align-items: center;
+      }
     }
   }
   .header-right {
@@ -71,6 +90,18 @@ header {
     padding-bottom: 15px;
     margin-left: 40px;
     border-bottom: 1px solid;
+    @media screen and (max-width: 50rem){
+      height: $redocHeaderHeight / 2;
+      position: absolute;    
+      z-index: 20;
+      width: auto;
+      margin: 0;
+      justify-content: flex-start;
+      align-items: center;
+      bottom: 0;
+      padding: 0 0 0 22px;
+      border: none;
+    }
   }
 }
 #footer-redoc {
@@ -108,7 +139,7 @@ header {
     .no-latest-title {
       display: inline-block;
       position: relative;
-      font-weight: 700;
+      font-weight: 500;
       padding: 4px 10px 4px 38px;
       line-height: 32px;
       
@@ -141,6 +172,12 @@ redoc[spec-url] .beRszf {
   line-height: 32px;
   letter-spacing: .03em;
   
+  // Responosive tables
+  .eCjbJc {
+    overflow-x: auto;
+    display: block;
+  }
+  
   // Right column dark background only
   .cObJOV {
     top: calc(-60px - #{$redocHeaderHeight});
@@ -150,92 +187,15 @@ redoc[spec-url] .beRszf {
   
   // API menu toggle
   .sc-bMVAic.llQIcF {
-    // top: 6px;
-    // padding: 10px;
-    // box-shadow: none;
-    // border-radius: 4px;
-    // background-color: #ffffff;
-    // right: 15px;
-    &.btn-close {
-      // background-color: transparent;
-      // padding: 5px 10px;
-      // border: 1px solid transparent;
-      // outline: 0;
-      // height: 40px;
-      // width: 40px;
-      &:focus {
-        // 	border-color: rgba(255, 255, 255, 0.7);
-      }
-      .x {
-        //   display: block;
-        //   height: 100%;
-        //   width: 100%;
-        //   position: absolute;
-      }
-      .x::before,
-      .x::after,
-      &::before {
-        //   content: '';
-        //   display: block;
-        //   background-color: #ffffff;
-        //   width: 17px;
-        //   height: 3px;
-        //   border-radius: 20px;
-        //   position: absolute;
-        //   border-bottom: 0;
-      }
-      .x::before {
-        // top: 5px;
-      }
-      
-      .x::after {
-        // top: 19px;
-      }
-      &.collapsed {
-        &::before {
-          //   opacity: 1;
-          //   top: 17px;
-          //   transition: all ease .4s;
-        }
-        .x::before {
-          //   -webkit-transform: rotate(0);
-          //           transform: rotate(0);
-          //   width: 17px;
-          //   transition: all ease .4s;
-        }
-        &.x::after {
-        //   -webkit-transform: rotate(0);
-        //           transform: rotate(0);
-        //   width: 17px;
-        //   transition: all ease .4s;
-        }
-      }
-      &:not(.collapsed) {
-        &::before {
-        //   opacity: 0;
-        // 	top: 17px;
-        //   transition: all ease .4s;
-        }
-        .x::before {
-          //   -webkit-transform: rotate(45deg);
-          //           transform: rotate(45deg);
-          //   width: 21px;
-          //   left: 2px;
-          //   -webkit-transform-origin: top left;
-          //           transform-origin: top left;
-          //   transition: all ease .4s;
-        }
-        .x::after {
-          //   -webkit-transform: rotate(-45deg);
-          //           transform: rotate(-45deg);
-          //   width: 21px;
-          //   left: 2px;
-          //   -webkit-transform-origin: bottom left;
-          //           transform-origin: bottom left;
-          //   transition: all ease .4s;
-        }
-      }
-    }
+    top: 6px;
+    padding: .4rem;
+    box-shadow: none;
+    border-radius: 4px;
+    background-color: #ffffff;
+    right: 15px;
+    width: 45px;
+    height: 45px;
+    background: transparent;
   }
 
   // Tag sections:
@@ -320,7 +280,7 @@ redoc[spec-url] .beRszf {
     &.gxJjxJ,
     &.dUFXgZ {
       strong {
-        font-weight: 600;
+        font-weight: 500;
       }
     }
   }
@@ -424,7 +384,7 @@ redoc[spec-url] .beRszf {
         margin-top: 7px;
         
         & > [role="tab"].react-tabs__tab--selected {
-          font-weight: 500;
+          font-weight: 400;
         }
         &.tab-success:before,
         &.tab-error:before,
@@ -491,6 +451,9 @@ redoc[spec-url] .beRszf {
     position: fixed;
     height: calc(100vh - 110px)!important;
     width: $leftRedocSidebarWidth;
+    @media screen and (max-width: 50rem){
+      width: 100%;
+    }
     label[role="menuitem"] {
       font-family: Manrope, sans-serif;
       font-size: 16px;
@@ -532,16 +495,19 @@ redoc[spec-url] .beRszf {
     }
   }
 
-  // Central and right conten columns
+  // Central and right content columns
   .api-content {
     scroll-margin-top: $redocHeaderHeight;
     margin-left: $leftRedocSidebarWidth;
+    @media screen and (max-width: 50rem){
+      margin-left: 0;
+    }
     h1,
     h2,
     h3,
     h4 {
       font-family: Manrope, sans-serif;
-      font-weight: 600;
+      font-weight: 500;
       letter-spacing: .03em;
       position: relative;
       .sc-VigVT.jrPOYQ {
@@ -645,6 +611,9 @@ body {
   }
   header {
     background: $light_ColorBaseSpace;
+    @media screen and (max-width: 50rem){
+      background-color: $light_ColorAdmonitionBackground;
+    }
     .header-left {
       background-color: $light_ColorAdmonitionBackground;
       #light-dark-switch {
@@ -757,6 +726,10 @@ body {
     .eCjbJc .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX, 
     .eCjbJc .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX {
       background-color: $light_ColorBaseSpace;
+    }
+    // API menu toggle
+    .imibLw {
+      color: $light_ColorPrimaryLighter;
     }
     // Properties connecting line 
     tr:first-of-type > .eAybih,
@@ -998,6 +971,9 @@ body {
   background-color: $dark_ColorReDocBaseSpace;
   header {
     background: $dark_ColorReDocBaseSpace;
+    @media screen and (max-width: 50rem){
+      background-color: $dark_ColorSidebarSpace;
+    }
     .header-left {
       background-color: $dark_ColorSidebarSpace;
       #light-dark-switch {
@@ -1120,6 +1096,10 @@ body {
     .eCjbJc .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX, 
     .eCjbJc .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX {
       background-color: $dark_ColorReDocBaseSpace;
+    }
+    // API menu toggle
+    .imibLw {
+      color: $dark_ColorPrimaryLighter;
     }
     // Properties connecting line 
     // Doesn't change
