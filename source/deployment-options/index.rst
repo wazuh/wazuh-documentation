@@ -159,10 +159,10 @@ These alternatives guide you to install the Wazuh central components along with 
     
     ready-to-use-machines/index
     containers-options/index 
-    deploying-with-ansible/index
-    deploying-with-puppet/index
     offline-installation
     wazuh-from-sources/index
-    elastic-stack/index
-    splunk/index
+    commercial-options/index
+    deploying-with-ansible/index
+    deploying-with-puppet/index
+    
     
