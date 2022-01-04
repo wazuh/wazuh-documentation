@@ -15,8 +15,10 @@ Wazuh provides a pre-built virtual machine image such as Virtual Machine (OVA) a
 - :ref:`Amazon Machine Images (AMI) <amazon-machine-images>`: This is a pre-built Amazon Machine Image (AMI) you can directly launch on an AWS cloud instance.
 
 
-.. toctree::
-    :maxdepth: 2
 
-    amazon-machine-images
-    virtual_machine
+.. toctree::
+    :hidden:
+    :maxdepth: 1
+    
+    virtual-machine/virtual-machine
+    amazon-machine-images/amazon-machine-images
