@@ -1,0 +1,100 @@
+/* -----------------------------------------------------------------------------
+  Component: Link boxes
+
+  Style for the element containing the link boxes with logo images (agent-os).
+----------------------------------------------------------------------------- */
+
+.link-boxes-group {
+  display: flex;
+  display: grid;
+  justify-content: space-between;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 2rem auto;
+  grid-gap: 1rem;
+
+  @include media-min(lg) {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .link-boxes-item {
+    min-width: 70px;
+    max-width: 150px;
+    border: 2px solid;
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+
+    img {
+      display: inline-block;
+      margin-bottom: 0;
+    }
+
+    a {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      align-items: center;
+      justify-content: center;
+    }
+    .link-boxes-label {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 25px;
+      letter-spacing: 0em;
+      text-align: center;
+      color: #fff;
+      width: 100%;
+      top: 0;
+      bottom: 0;
+      margin: 0;
+      opacity: 0;
+    }
+
+    &:hover {
+      .link-boxes-label {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+/* Light theme -------------------------------------------------------------- */
+
+body {
+  .link-boxes-group {
+    .link-boxes-item {
+      border-color: $light_ColorBorderDeeper;
+      &:hover {
+        border-color: $light_ColorPrimary;
+        box-shadow: 0 0 0px 10px $light_ColorPrimary inset;
+        .link-boxes-label {
+          background-color: $light_ColorPrimary;
+        }
+      }
+    }
+  }
+}
+
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme {
+    .link-boxes-group {
+      .link-boxes-item {
+        background-color: #fff;
+        border-color: $dark_ColorBorderDeeper;
+        &:hover {
+          border-color: $dark_ColorPrimary;
+          box-shadow: 0 0 0px 10px $dark_ColorPrimary inset;
+          .link-boxes-label {
+            background-color: $dark_ColorPrimary;
+          }
+        }
+      }
+    }
+}

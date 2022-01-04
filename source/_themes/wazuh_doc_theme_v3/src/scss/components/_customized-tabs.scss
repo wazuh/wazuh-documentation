@@ -1,0 +1,153 @@
+/* -----------------------------------------------------------------------------
+  Component: Customization for tabs
+
+  Style adjustments for the elements created by sphinx-tabs.
+----------------------------------------------------------------------------- */
+
+#central-column {
+  .sphinx-tabs {
+    .menu {
+      p {
+        margin-bottom: 0;
+      }
+    }
+    .bottom {
+      border: 1px solid;
+    }
+    p {
+      font-family: "Manrope", sans-serif;
+    }
+  }
+}
+
+.sphinx-tabs {
+  padding: 0;
+  margin-bottom: 1rem;
+
+  .docutils.container {
+    padding-left: 0;
+    padding-right: 0;
+    width: auto;
+    font-family: "Manrope", sans-serif;
+
+    &.menu {
+      padding: 0;
+      border: none;
+      position: relative;
+      z-index: 1;
+    }
+
+    &.bottom {
+      padding-left: 15px;
+      padding-right: 15px;
+      margin-bottom: 0;
+      border-radius: $roundedCorners;
+    }
+
+    .item {
+      margin: 0;
+      font-weight: 400;
+      border-radius: $roundedCorners $roundedCorners 0 0!important;
+      padding: 1.42857em calc(1.42857em + .15%);
+
+      &.active {
+        font-weight: 500;
+        padding: 1.42857em;
+        border-radius: $roundedCorners $roundedCorners 0 0!important;
+  
+        &:first-child ::after {
+          /* This hides the fact that the element .bottom has all corners round */
+          content: '';
+          display: block;
+          position: absolute;
+          bottom: -8px;
+          left: -1px;
+          width: $roundedCorners;
+          height: $roundedCorners;
+          border-left: 1px solid;
+          pointer-events: none;
+        }
+      }
+    }
+  }
+}
+
+/* Light theme -------------------------------------------------------------- */
+
+body {
+  #central-column {
+    .sphinx-tabs {
+      .bottom {
+        border-color: $light_ColorPrimary;
+      }
+    }
+  }
+  .sphinx-tabs {
+    .docutils.container {
+      .item {
+        background-color: $light_ColorCodeBlockBackground;
+        color: $light_ColorMainText;
+        &.active {
+          border-color: $light_ColorPrimary;
+          background-color: $light_ColorBaseSpace;
+          color: $light_ColorPrimary;
+          &:hover {
+            background-color: $light_ColorBaseSpace;
+          }
+          &:first-child ::after {
+            background: $light_ColorBaseSpace;
+            border-left-color: $light_ColorPrimary;
+          }
+        }
+        &:hover {
+          background-color: $light_ColorSidebarSpace;
+          color: $light_ColorPrimary;
+        }
+      }
+    }
+    .sphinx-tab.ui.segment {
+      background-color: $light_ColorBaseSpace;
+      color: $light_ColorMainText;
+    }
+  }
+}
+
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme {
+  #central-column {
+    .sphinx-tabs {
+      .bottom {
+        border-color: $dark_ColorPrimary;
+      }
+    }
+  }
+  .sphinx-tabs {
+    .docutils.container {
+      .item {
+        background-color: $dark_ColorCodeBlockBackground;
+        color: $dark_ColorMainText;
+        &.active {
+          border-color: $dark_ColorPrimary;
+          background-color: $dark_ColorBaseSpace;
+          color: $dark_ColorPrimary;
+          &:hover {
+            background-color: $dark_ColorBaseSpace;
+          }
+          &:first-child ::after {
+            background: $dark_ColorBaseSpace;
+            border-left-color: $dark_ColorPrimary;
+          }
+        }
+        &:hover {
+          background-color: $dark_ColorSidebarSpace;
+          color: $dark_ColorPrimary;
+        }
+      }
+    }
+    .sphinx-tab.ui.segment {
+      background-color: $dark_ColorBaseSpace;
+      color: $dark_ColorMainText;
+    }
+  }
+}

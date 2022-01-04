@@ -1,0 +1,84 @@
+/* -----------------------------------------------------------------------------
+  Component: Step cards
+
+  Style for the new component that highlights the sections marked with the class
+  'step-card'.
+----------------------------------------------------------------------------- */
+
+#central-column .step-card {
+  border-radius: $roundedCorners;
+  padding: 30px;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .rubric.h1,
+  .rubric.h2,
+  .rubric.h3,
+  .rubric.h4,
+  .rubric.h5,
+  .rubric.h6 {
+    margin-top: 0;
+    padding-bottom: 5px;
+    border-bottom: 1px solid;
+    display: inline-block;
+    width: 100%;
+  }
+  
+  &.section {
+    margin-top: 0;
+    &::before {
+      content: none;
+    }
+  }
+  .section.accordion-parent {
+    margin-top: 1rem;
+  }
+}
+
+/* Light theme -------------------------------------------------------------- */
+
+body {
+  #central-column .step-card {
+    background-color: $light_ColorSidebarSpace;
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    .rubric.h1,
+    .rubric.h2,
+    .rubric.h3,
+    .rubric.h4,
+    .rubric.h5,
+    .rubric.h6 {
+      color: $light_ColorPrimary;
+      border-color: $light_ColorBorderDeeper;
+    }
+  }
+}
+
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme {
+  #central-column .step-card {
+    background-color: $dark_ColorSidebarSpace;
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    .rubric.h1,
+    .rubric.h2,
+    .rubric.h3,
+    .rubric.h4,
+    .rubric.h5,
+    .rubric.h6 {
+      color: $dark_ColorPrimary;
+    }
+  }
+}

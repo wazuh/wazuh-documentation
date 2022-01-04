@@ -1,0 +1,54 @@
+{#
+    wazuh_doc_theme_v3/index.html
+    ~~~~~~~~~~~~~~~~~
+
+    Index template for Wazuh Documentation Sphinx theme v3.0.
+    
+-#}
+
+{% if is_latest_release %}
+
+  {%- extends "!wazuh_doc_theme_v3/template-parts/body.html" -%}
+  
+  {#- Change the header -#}
+  {%- block header %}
+  <header id="header" class="fixed-top">
+    <nav class="navbar">
+      <div class="navbar-brand mx-auto">
+        <a class="logo-link web" href="{{ theme_wazuh_web_url }}">
+          <img class="logo-light" src="{{ pathto('_static/images/wazuh-logo.png', 1) }}" width="172" height="35" alt="Wazuh">
+          <img class="logo-dark" src="{{ pathto('_static/images/wazuh-logo-white.png', 1) }}" width="172" height="35" alt="Wazuh">
+        </a>
+        <a class="logo-link docs" href="{{ pathto(master_doc) }}" alt="Wazuh documentation">Documentation</a>
+      </div>
+    </nav>
+    <div class="container">
+      {% include "template-parts/search-box.html" %}
+    </div>
+  </header>
+  {% endblock %}
+  
+  {%- block main_column -%}
+  <div class="container loading">
+  {{ super () }}
+  </div>
+  {%- endblock main_column -%}
+  
+  {%- block footer %}
+  <footer class="d-flex align-items-center">
+    <div class="container d-flex justify-content-center">
+      {% include "template-parts/footer.html" %}
+    </div>
+  </footer>
+  {%- endblock footer -%}
+  
+  {#- Remove blocks: left-sidebar, edit-repo and light_box_display -#}
+  {%- block sidebar1 -%}{%- endblock sidebar1 -%}
+  {%- block light_box_display %}{%- endblock light_box_display -%}  
+
+{%- else -%}
+  <body>
+    {% set index_redirect_js = get_js_by_page(pagename+'-redirect')[0] %}
+    <script src="{{ pathto( index_redirect_js, 1) }}"></script>
+  </body>
+{%- endif %}
