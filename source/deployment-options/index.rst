@@ -158,7 +158,7 @@ These alternatives guide you to install the Wazuh central components along with 
     :maxdepth: 1
     
     ready-to-use-machines/index
-    containers/index 
+    containers-options/index 
     deploying-with-ansible/index
     deploying-with-puppet/index
     offline-installation
