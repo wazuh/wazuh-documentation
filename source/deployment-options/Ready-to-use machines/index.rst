@@ -18,5 +18,5 @@ Wazuh provides a pre-built virtual machine image such as Virtual Machine (OVA) a
 .. toctree::
     :maxdepth: 2
 
-    amazon-machine-images/index
-    virtual_machine/index
+    amazon-machine-images
+    virtual_machine
