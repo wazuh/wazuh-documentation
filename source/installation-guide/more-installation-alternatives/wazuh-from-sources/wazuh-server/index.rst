@@ -51,7 +51,7 @@ Installing Wazuh manager
           .. code-block:: console
 
             # yum install make cmake gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool openssl-devel cmake
-            # rpm -i $(rpm -q libstdc++-devel --queryformat "http://mirror.centos.org/centos/8/PowerTools/x86_64/os/Packages/libstdc++-static-%{VERSION}-%{RELEASE}.%{arch}.rpm")
+            # rpm -i $(rpm -q libstdc++-devel --queryformat "http://mirror.centos.org/centos/8/PowerTools/x86_64/os/Packages/libstdc++-static-%{VERSION}-%{RELEASE}.%{arch}.rpm\n")
 
 
           **Optional** CMake 3.18 installation from sources
