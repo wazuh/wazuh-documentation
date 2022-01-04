@@ -3,7 +3,7 @@
 .. meta::
   :description: Wazuh provides a pre-built virtual machine image such as Virtual Machine (OVA) and Amazon Machine Images (AMI).  
 
-.. _Ready-to-use_machines:
+.. _ready-to-use-machines:
 
 Ready-to-use machines
 =====================

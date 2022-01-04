@@ -165,4 +165,4 @@ These alternatives guide you to install the Wazuh central components along with 
     wazuh-from-sources/index
     elastic-stack/index
     splunk/index
-    Ready-to-use_machines/index
+    ready-to-use-machines/index
