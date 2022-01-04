@@ -162,6 +162,6 @@ These alternatives guide you to install the Wazuh central components along with 
     offline-installation
     wazuh-from-sources/index
     commercial-options/index
-
+    orchestration-tools/index
     
     
