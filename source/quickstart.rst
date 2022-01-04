@@ -139,10 +139,10 @@ Now that your environment is ready, select your endpoint’s operating system an
 
 .. raw:: html
 
-  <div class="agent-os">
-      <div class="item-agent">
-          <a href="./installation-guide/wazuh-agent/wazuh_agent_package_linux.html" class="d-flex align-items-center">
-            <p>Linux</p>
+  <div class="link-boxes-group">
+    <div class="link-boxes-item">
+      <a class="link-boxes-link" href="./installation-guide/wazuh-agent/wazuh_agent_package_linux.html" class="d-flex align-items-center">
+        <p class="link-boxes-label">Linux</p>
 
 .. image:: /images/installation/linux.png
       :align: center
@@ -151,9 +151,9 @@ Now that your environment is ready, select your endpoint’s operating system an
 
         </a>
     </div>
-    <div class="item-agent">
-        <a href="./installation-guide/wazuh-agent/wazuh_agent_package_windows.html" class="d-flex align-items-center">
-                    <p>Windows</p>
+    <div class="link-boxes-item">
+      <a class="link-boxes-link" href="./installation-guide/wazuh-agent/wazuh_agent_package_windows.html" class="d-flex align-items-center">
+        <p class="link-boxes-label">Windows</p>
 
 .. image:: /images/installation/windows_icon.png
       :align: center
@@ -162,9 +162,9 @@ Now that your environment is ready, select your endpoint’s operating system an
 
         </a>
     </div>
-    <div class="item-agent">
-        <a href="./installation-guide/wazuh-agent/wazuh_agent_package_macos.html" class="d-flex align-items-center">
-            <p>macOS</p>
+    <div class="link-boxes-item">
+      <a class="link-boxes-link" href="./installation-guide/wazuh-agent/wazuh_agent_package_macos.html" class="d-flex align-items-center">
+        <p class="link-boxes-label">macOS</p>
 
 .. image:: /images/installation/macOS_logo.png
       :align: center
@@ -173,9 +173,9 @@ Now that your environment is ready, select your endpoint’s operating system an
 
       </a>
   </div>
-  <div class="item-agent" id="solaris-logo">
-      <a href="./installation-guide/wazuh-agent/wazuh_agent_package_solaris.html" class="d-flex align-items-center">
-          <p>Solaris</p>
+  <div class="link-boxes-item">
+    <a class="link-boxes-link" href="./installation-guide/wazuh-agent/wazuh_agent_package_solaris.html" class="d-flex align-items-center">
+      <p class="link-boxes-label">Solaris</p>
 
 .. image:: /images/installation/solaris.png
     :align: center      
@@ -184,9 +184,9 @@ Now that your environment is ready, select your endpoint’s operating system an
 
         </a>
     </div>
-    <div class="item-agent">
-        <a href="./installation-guide/wazuh-agent/wazuh_agent_package_aix.html" class="d-flex align-items-center">
-            <p>AIX</p>
+    <div class="link-boxes-item">
+      <a class="link-boxes-link" href="./installation-guide/wazuh-agent/wazuh_agent_package_aix.html" class="d-flex align-items-center">
+        <p class="link-boxes-label">AIX</p>
 
 .. image:: /images/installation/AIX.png
       :align: center
@@ -195,9 +195,9 @@ Now that your environment is ready, select your endpoint’s operating system an
 
         </a>
     </div>
-    <div class="item-agent">
-        <a href="./installation-guide/wazuh-agent/wazuh_agent_package_hpux.html" class="d-flex align-items-center">
-            <p>HP-UX</p>
+    <div class="link-boxes-item">
+      <a class="link-boxes-link" href="./installation-guide/wazuh-agent/wazuh_agent_package_hpux.html" class="d-flex align-items-center">
+        <p class="link-boxes-label">HP-UX</p>
 
 .. image:: /images/installation/hpux.png
       :align: center
