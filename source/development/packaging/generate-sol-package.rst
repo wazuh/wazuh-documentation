@@ -62,7 +62,7 @@ Download and build the sources:
 
 To build a SPARC package you just need to run the same script in a SPARC system.
 
-We also provide an automated way of building packages for i386 Solaris systems using vagrant
+We also provide an automated way of building packages for i386 Solaris systems using vagrant:
 
 Requirements
 ^^^^^^^^^^^^^
@@ -111,7 +111,7 @@ Bring the machine up ``vagrant [OPTION] ... up solaris10/solaris11/both``:
 Preparation
 ^^^^^^^^^^^
 
-Download out wazuh-packages repository from GitHub, enter into the solaris directory, change to the desired branch, copy the desired solaris directory into the ``package_generation/src`` directory and enter in the ``package_generation`` directorty.
+Download our wazuh-packages repository from GitHub, enter into the solaris directory, change to the desired branch, copy the desired solaris directory into the ``package_generation/src`` directory and enter in the ``package_generation`` directorty.
 
 .. code-block:: console
 
