@@ -31,6 +31,9 @@
     
     a {
       padding-right: 60px;
+      @include media-only(xl, xxl) {
+        padding-right: 48px;
+      }
     }
 
     .current-toc-node {
@@ -70,7 +73,6 @@
     display: inline-block;
     width: 100%;
     padding: 5px 0;
-    font-size: 18px;
     font-weight: 300;
     line-height: 32px;
     text-decoration: none;

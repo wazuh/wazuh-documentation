@@ -7,25 +7,26 @@
 .navbar-brand {
   display: flex;
   align-content: flex-end;
+  position: relative;
 
   .logo-link {
-    display: flex;
-    align-items: flex-end;
+    height: 28px;
+    position: absolute;
     &.docs {
-      margin-left: 5px;
-      line-height: 1rem;
-
-      &:hover {
-        text-decoration: none;
-      }
+      right: 0;
+      padding-right: 32%;
     }
-    img {
-      width: auto;
-      height: 28px;
-      
-      @include media-max(sm){
-        height: 24px;
-      }
+    &.web {
+      left: 0;
+      padding-left: 65%;
+    }
+  }
+  img {
+    width: auto;
+    height: 28px;
+    
+    @include media-max(sm){
+      height: 24px;
     }
   }
 }
@@ -37,12 +38,12 @@ body {
     &.docs {
       color: $light_ColorMainText;
     }
-    .logo-light {
-      display: inline-block;
-    }
-    .logo-dark {
-      display: none;
-    }
+  }
+  .logo-light {
+    display: inline-block;
+  }
+  .logo-dark {
+    display: none;
   }
 }
 
@@ -53,11 +54,11 @@ body {
     &.docs {
       color: $dark_ColorMainText;
     }
-    .logo-light {
-      display: none;
-    }
-    .logo-dark {
-      display: inline-block;
-    }
+  }
+  .logo-light {
+    display: none;
+  }
+  .logo-dark {
+    display: inline-block;
   }
 }

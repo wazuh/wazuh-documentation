@@ -10,8 +10,14 @@
   padding-right: 15px;
   position: fixed;
   height: $noLatestNoticeHeightXl;
-  left: $leftSidebarWidth;
-  right: $rightSidebarWidth;
+  @include media-only(xl, xxl) {
+    left: $leftSidebarWidthNarrow;
+    right: $rightSidebarWidthNarrow;
+  }
+  @include media-min(xxl) {
+    left: $leftSidebarWidth;
+    right: $rightSidebarWidth;
+  }
   
   .no-latest-notice {
     margin: .6em 0;

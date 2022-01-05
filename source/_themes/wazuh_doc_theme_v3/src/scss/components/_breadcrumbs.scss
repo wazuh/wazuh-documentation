@@ -24,7 +24,12 @@
   }
   @include media-min(xl){
     align-items: flex-end;
-    max-height: $breadcrumbsHeightXl * 1.5;
+    max-height: $breadcrumbsHeightXl * 1.5;  
+  }
+  @include media-only(xl, xxl) {
+    width: calc(100% - #{$leftSidebarWidthNarrow} - #{$rightSidebarWidthNarrow});
+  }
+  @include media-min(xxl) {
     width: calc(100% - #{$leftSidebarWidth} - #{$rightSidebarWidth});
   }
 }

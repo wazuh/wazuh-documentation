@@ -197,6 +197,8 @@
 
     &.hlist {
       margin-bottom: 1rem;
+      display: block;
+      overflow-x: auto;
 
       & > tbody > tr > td {
         vertical-align: top;

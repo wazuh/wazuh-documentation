@@ -15,6 +15,17 @@ body {
   margin-top: $indexHeaderHeightXl;
 }
 
+.navbar {
+  margin: 0 auto 27px auto;
+  .navbar-brand {
+    margin: 0;
+    padding: 0;
+    img {
+      height: 35px;
+    }
+  }
+}
+
 main {
   padding-left: 0;
   padding-right: 0;
@@ -135,7 +146,7 @@ main {
     font-size: 22px;
 
     .logo-link.web {
-      padding: 0;
+      padding-bottom: 0;
       margin-right: 10px;
     }
     .logo-link.docs {

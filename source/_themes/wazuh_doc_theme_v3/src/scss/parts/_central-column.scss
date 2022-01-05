@@ -33,8 +33,11 @@
 
 #central-column {
   width: 100%;
-  
-  @include media-min(xl) {
+  @include media-only(xl, xxl) {
+    padding-left: $leftSidebarWidthNarrow;
+    padding-right: $rightSidebarWidthNarrow;
+  }
+  @include media-min(xxl) {
     padding-left: $leftSidebarWidth;
     padding-right: $rightSidebarWidth;
   }
