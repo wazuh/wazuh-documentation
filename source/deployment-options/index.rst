@@ -143,12 +143,11 @@ If the Wazuh central components are already installed in your environment, selec
 Orchestration tools
 -------------------
 
-These alternatives guide you to install the Wazuh central components along with the single universal agent.
+These alternatives guide you to install the Wazuh central components and the single universal agent. 
 
+- :ref:`Deployment with Ansible <wazuh_ansible>`: You can deploy the Wazuh infrastructure on AWS with Ansible. It is an open source platform designed for automating tasks. In this Deployment, the Wazuh environment consists of a Wazuh server, an Elastic Stack server, and a Wazuh agent.
 
-- :ref:`Deployment with Ansible <wazuh_ansible>`: Ansible is an open source platform designed for automating tasks. Its deployment tool is used to deploy the Wazuh infrastructure on AWS. The Wazuh environment consists of a Wazuh server, an Elastic Stack server, and a Wazuh agent.
-
-- :ref:`Deployment with Puppet <wazuh_puppet>`: Puppet is an open-source software tool that gives you an automatic way to inspect, deliver, operate, and future-proof all of your software, no matter where it is executed. It is very simple to use and allows you to install and configure Wazuh easily.
+- :ref:`Deployment with Puppet <wazuh_puppet>`: Alternatively, you can deploy the Wazuh infrastructure with Puppet. It is an open-source software tool that gives you an automatic way to inspect, deliver, operate, and future-proof all of your software, no matter where it is executed. ​It is very simple to use and allows you to install and configure Wazuh easily
 
 
 
