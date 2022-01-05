@@ -58,7 +58,7 @@ All the alternatives include instructions on how to install the Wazuh central co
 Installing the Wazuh agent
 --------------------------
 
-The :doc:`/getting-started/components/wazuh-agent` is a single and lightweight monitoring software. It is a multi-platform component that can be deployed to laptops, desktops, servers, cloud instances, containers, or virtual machines. It provides visibility into the endpoint's security by collecting critical system and application records, inventory data, and detecting potential anomalies. 
+The :doc:`/installation-guide/wazuh-agent/index` is a single and lightweight monitoring software. It is a multi-platform component that can be deployed to laptops, desktops, servers, cloud instances, containers, or virtual machines. It provides visibility into the endpoint's security by collecting critical system and application records, inventory data, and detecting potential anomalies. 
 
 If the Wazuh central components are already installed in your environment, select your operating system below and follow the installation steps to deploy the agent on the endpoints. 
 
@@ -67,7 +67,7 @@ If the Wazuh central components are already installed in your environment, selec
 
   <div class="agent-os">
       <div class="item-agent">
-          <a href="/installation-guide/wazuh-agent/wazuh-agent-package-linux.html" class="d-flex align-items-center">
+          <a href="../installation-guide/wazuh-agent/wazuh-agent-package-linux.html" class="d-flex align-items-center">
             <p>Linux</p>
 
 .. image:: ../images/installation/linux.png
@@ -78,7 +78,7 @@ If the Wazuh central components are already installed in your environment, selec
         </a>
     </div>
     <div class="item-agent">
-        <a href="/installation-guide/wazuh-agent/wazuh-agent-package-windows.html" class="d-flex align-items-center">
+        <a href="../installation-guide/wazuh-agent/wazuh-agent-package-windows.html" class="d-flex align-items-center">
                     <p>Windows</p>
 
 .. image:: ../images/installation/windows_icon.png
@@ -89,7 +89,7 @@ If the Wazuh central components are already installed in your environment, selec
         </a>
     </div>
     <div class="item-agent">
-        <a href="/installation-guide/wazuh-agent/wazuh-agent-package-macos.html" class="d-flex align-items-center">
+        <a href="../installation-guide/wazuh-agent/wazuh-agent-package-macos.html" class="d-flex align-items-center">
             <p>macOS</p>
 
 .. image:: ../images/installation/macOS_logo.png
@@ -100,7 +100,7 @@ If the Wazuh central components are already installed in your environment, selec
         </a>
     </div>
     <div class="item-agent" id="solaris-logo">
-        <a href="/installation-guide/wazuh-agent/wazuh-agent-package-solaris.html" class="d-flex align-items-center">
+        <a href="../installation-guide/wazuh-agent/wazuh-agent-package-solaris.html" class="d-flex align-items-center">
             <p>Solaris</p>
 
 .. image:: ../images/installation/solaris.png
@@ -111,7 +111,7 @@ If the Wazuh central components are already installed in your environment, selec
         </a>
     </div>
     <div class="item-agent">
-        <a href="/installation-guide/wazuh-agent/wazuh-agent-package-aix.html" class="d-flex align-items-center">
+        <a href="../installation-guide/wazuh-agent/wazuh-agent-package-aix.html" class="d-flex align-items-center">
             <p>AIX</p>
 
 .. image:: ../images/installation/AIX.png
@@ -122,7 +122,7 @@ If the Wazuh central components are already installed in your environment, selec
         </a>
     </div>
     <div class="item-agent">
-        <a href="/installation-guide/wazuh-agent/wazuh-agent-package-hpux.html" class="d-flex align-items-center">
+        <a href="../installation-guide/wazuh-agent/wazuh-agent-package-hpux.html" class="d-flex align-items-center">
             <p>HP-UX</p>
 
 .. image:: ../images/installation/hpux.png
