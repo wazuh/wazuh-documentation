@@ -10,11 +10,17 @@ footer {
   @include media-min(xl){
     position: absolute;
     right: 0;
-    left: $leftSidebarWidth;
     height: $footerHeight;
     padding: 15px 0 15px 30px;
     display: flex;
     align-items: center;
+    
+    @include media-only(xl, xxl) {
+      left: $leftSidebarWidthNarrow;
+    }
+    @include media-min(xxl) {
+      left: $leftSidebarWidth;
+    }
   }
   
   & > .container {

@@ -17,6 +17,10 @@
   align-items: center;
   border-bottom: 2px solid;
   height: 1.5em;
+  @include media-max(xl){
+    display: inline-block;
+    height: auto;
+  }
 
   &::before {
     display: inline-block;
@@ -28,6 +32,10 @@
     background-size: 20px 20px;
     background-position: center;
     transition: transform .2s;
+    @include media-max(xl){
+      width: 14px;
+      height: 14px;
+    }
   }
   
   &.collapsed {

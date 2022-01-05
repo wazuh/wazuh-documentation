@@ -14,13 +14,7 @@
   {%- block header %}
   <header id="header" class="fixed-top">
     <nav class="navbar">
-      <div class="navbar-brand mx-auto">
-        <a class="logo-link web" href="{{ theme_wazuh_web_url }}">
-          <img class="logo-light" src="{{ pathto('_static/images/wazuh-logo.png', 1) }}" width="172" height="35" alt="Wazuh">
-          <img class="logo-dark" src="{{ pathto('_static/images/wazuh-logo-white.png', 1) }}" width="172" height="35" alt="Wazuh">
-        </a>
-        <a class="logo-link docs" href="{{ pathto(master_doc) }}" alt="Wazuh documentation">Documentation</a>
-      </div>
+      {% include "template-parts/brand.html" %}
     </nav>
     <div class="container">
       {% include "template-parts/search-box.html" %}

@@ -12,6 +12,7 @@
   &:not(.long) p {
     display: inline-block;
     margin-bottom: 0;
+    padding-bottom: 1rem;
   }
   
   &.long {

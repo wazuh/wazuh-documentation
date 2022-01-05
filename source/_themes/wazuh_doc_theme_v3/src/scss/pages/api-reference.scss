@@ -38,6 +38,12 @@ body {
 }
 main {
   padding: 0;
+  strong {
+    font-weight: 500;
+  }
+}
+#light-dark-switch {
+  padding: 0;
 }
 header {
   position: fixed;
@@ -47,10 +53,27 @@ header {
   height: $redocHeaderHeight;
   width: calc(#{$leftRedocSidebarWidth} + (100% - #{$leftRedocSidebarWidth}) * .6);
   z-index: 100;
+  @media screen and (min-width: 50rem) and (max-width: 75rem){
+    width: 100%;
+  }
   @media screen and (max-width: 50rem){
     flex-direction: column;
     width: 100%;
     height: $redocHeaderHeight;
+  }
+  #version-selector {
+    .dropdown-btn {
+      @media screen and (min-width: 50.01rem) and (max-width: 75rem) {
+        border: 2px solid;
+        padding: 5px 10px;
+      }
+    }
+    .dropdown-menu {
+      @media screen and (min-width: 50.01rem) and (max-width: 75rem) {
+        border: 2px solid;
+        left: 0!important;
+      }
+    }
   }
   .header-left {
     width: $leftRedocSidebarWidth;
@@ -58,6 +81,9 @@ header {
     pointer-events: all;
     position: relative;
     z-index: 20;
+    @media screen and (min-width: 50rem){
+      padding: 10px 15px;
+    }
     @media screen and (max-width: 50rem){
       height: $redocHeaderHeight / 2;
       padding: 10px 40px;
@@ -66,18 +92,24 @@ header {
     
     .navbar-brand {
       justify-content: flex-start;
+      @media screen and (min-width: 50rem){
+        height: 50px;
+        align-items: center;
+      }
     }
     #light-dark-switch {
-      padding-top: 10px;
+      padding-top: 0;
       border-top: 2px solid;
+      align-items: center;
+      @media screen and (min-width: 50rem){
+        height: 50px;
+      }
       @media screen and (max-width: 50rem){
         position: absolute;
         bottom: -($redocHeaderHeight / 2);
         border: none;
-        padding-top: 0;
         height: $redocHeaderHeight / 2;
         right: 26px;
-        align-items: center;
       }
     }
   }
@@ -281,6 +313,7 @@ redoc[spec-url] .beRszf {
     &.dUFXgZ {
       strong {
         font-weight: 500;
+        margin-right: 10px;
       }
     }
   }
@@ -622,6 +655,33 @@ body {
     }
     .header-right {
       border-bottom-color: $light_ColorGlobalTocHighlight;
+    }
+  }
+  #version-selector {
+    .dropdown-btn,
+    .dropdown-menu {
+      color: $light_ColorMainText;
+      @media screen and (min-width: 50.01rem) {
+        background-color: $light_ColorBaseSpace;
+        border-color:  $light_ColorAccent;
+      }
+    }
+    .dropdown-menu {
+      background-color: $light_ColorSidebarSpace;
+      @media screen and (min-width: 50.01rem) {
+        background-color: $light_ColorBaseSpace;
+        border-color:  $light_ColorAccent;
+      }
+      > li > a {
+        color: $light_ColorMainText;
+        &:hover,
+        &:focus {
+          background-color: $light_ColorHighlightBackground;
+        }
+        &.disabled {
+          color: $light_ColorBorderDeeper;
+        }
+      }
     }
   }
   redoc[spec-url] .beRszf {
