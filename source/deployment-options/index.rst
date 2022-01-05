@@ -25,9 +25,9 @@ All the alternatives include instructions on how to install the Wazuh central co
 
     <h3>Containers</h3>
 
-- :ref:`Deployment on Docker <wazuh_docker>`: Docker is a set of platform-as-a-service (PaaS) products that deliver software in packages called containers. Using Docker, you can install and configure the Wazuh deployment as a single-host architecture. 
-  
-- :ref:`Deployment on Kubernetes <wazuh_kubernetes>`: Kubernetes is an open-source system for automating deployment, scaling, and managing containerized applications. This deployment type uses Wazuh images from Docker and allows you to build an environment composed of a Wazuh cluster integrated with Elastic Stack. 
+- :ref:`Deployment on Docker <wazuh_docker>`: You can install and configure the Wazuh deployment as a single-host architecture using Docker. It is a set of platform-as-a-service (PaaS) products that deliver software in packages called containers. 
+
+- :ref:`Deployment on Kubernetes <wazuh_kubernetes>`: This deployment uses Wazuh images from Docker and allows you to build an environment composed of a Wazuh cluster integrated with Elastic Stack.
 
 
 .. raw:: html
