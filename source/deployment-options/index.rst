@@ -5,12 +5,12 @@
 Installation alternatives
 =========================
 
-You can install Wazuh using other deployment options. These are complementary to the installation methods you can find in the  :ref:`Installation guide <installation_guide>` and the :ref:`Quickstart <quickstart>`. 
+You can install Wazuh using the other deployment options listed below. These options complement the installation methods you can find in the  :ref:`Installation guide <installation_guide>` and the :ref:`Quickstart <quickstart>`. 
 
 Installing the Wazuh central components
 ---------------------------------------
 
-All the alternatives include instructions on how to install the Wazuh central components. After installing the :ref:`components <components>`, you then need to deploy the agent to your endpoints.  
+All the alternatives include instructions on how to install the Wazuh central components. After installing the :ref:`components <components>`, you need to deploy the agent to your endpoints.  
 
 .. raw:: html
 
@@ -147,7 +147,7 @@ These alternatives guide you to install the Wazuh central components and the sin
 
 - :ref:`Deployment with Ansible <wazuh_ansible>`: You can deploy the Wazuh infrastructure on AWS with Ansible. It is an open source platform designed for automating tasks. In this Deployment, the Wazuh environment consists of a Wazuh server, an Elastic Stack server, and a Wazuh agent.
 
-- :ref:`Deployment with Puppet <wazuh_puppet>`: Alternatively, you can deploy the Wazuh infrastructure with Puppet. It is an open-source software tool that gives you an automatic way to inspect, deliver, operate, and future-proof all of your software, no matter where it is executed. ​It is very simple to use and allows you to install and configure Wazuh easily
+- :ref:`Deployment with Puppet <wazuh_puppet>`: Alternatively, you can deploy the Wazuh infrastructure with Puppet. It is an open-source software tool that gives you an automatic way to inspect, deliver, operate, and future-proof all of your software, no matter where it is executed. ​It is very simple to use and allows you to install and configure Wazuh easily.
 
 
 
