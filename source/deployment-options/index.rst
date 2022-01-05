@@ -49,9 +49,9 @@ All the alternatives include instructions on how to install the Wazuh central co
 
     <h3>Commercial options</h3>
 
-- :ref:`Installation with Elastic Stack basic license <basic_installation_guide>`: As an alternative to Open Distro for Elasticsearch, you can install Wazuh using the Elastic Stack basic license option. It contains everything included in the open source version under the `Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_, plus some additional capabilities such as Elastic Stack Security features, Kibana alerting, and others. According to your chosen configuration, Wazuh and Elastic Stack are installed on the same host, as an all-in-one deployment, on a separate host as a single-node or multi-node cluster.
+- :ref:`Installation with Elastic Stack basic license <basic_installation_guide>`: As an alternative to Open Distro for Elasticsearch, you can install Wazuh using the Elastic Stack basic license option. According to your chosen configuration, Wazuh and Elastic Stack are installed on the same host, as an all-in-one deployment, on a separate host as a single-node or multi-node cluster. This option contains the same as the open source version under the `Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_, plus additional capabilities such as Elastic Stack Security features, Kibana alerting, etc. 
 
-- :ref:`Installation with Splunk <installation_splunk>`: You install Wazuh along with Splunk Enterprise, including the Splunk forwarder and the Wazuh Splunk app. This can be done as a single instance or as a multi-instance cluster.
+- :ref:`Installation with Splunk <installation_splunk>`: You can install Wazuh along with Splunk Enterprise, including the Splunk forwarder and the Wazuh Splunk app. This Installation can be done as a single instance or as a multi-instance cluster.
 
 
 Installing the Wazuh agent
