@@ -16,7 +16,7 @@ All the alternatives include instructions on how to install the Wazuh central co
 
     <h3>Ready-to-use machines</h3>
 
-- :doc:`virtual-machine/virtual-machine`: Wazuh provides a pre-built virtual machine image (OVA) that you can directly import using `VirtualBox <https://www.virtualbox.org/>`_ or other OVA compatible virtualization systems. 
+- :doc:`virtual-machine/virtual-machine`: Wazuh provides a pre-built virtual machine image (OVA) that you can directly import using VirtualBox or other OVA compatible virtualization systems. 
   
 - :doc:`amazon-machine-images/amazon-machine-images`: This is a pre-built Amazon Machine Image (AMI) you can directly launch on an AWS cloud instance.
 
