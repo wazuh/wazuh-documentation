@@ -13,7 +13,7 @@ Wazuh dashboard is a flexible and intuitive web interface for mining, analyzing,
 Data visualization, mining, and analysis
 ----------------------------------------
 
-Wazuh provides out-of-the-box dashboards, allowing you to seamlessly navigate through the user interface. Users can quickly visualize security events, detected vulnerable applications, file integrity monitoring data, configuration assessment results, cloud infrastructure monitoring events, and regulatory compliance, such as PCI DSS, GDPR, CIS, HIPAA, and NIST 800-53 standards.  Users are able to explore the alerts at the Wazuh cluster level and on a specific agent.
+Wazuh provides out-of-the-box dashboards, allowing you to seamlessly navigate through the user interface. Users can quickly visualize security events, detected vulnerable applications, file integrity monitoring data, configuration assessment results, cloud infrastructure monitoring events, and regulatory compliance data, such as PCI DSS, GDPR, CIS, HIPAA, and NIST 800-53 standards.  Users are able to explore the alerts at the Wazuh cluster level and on a specific agent.
 
 Moreover, the application is flexible and allows users to create their own visualizations and dashboards. With Wazuh, customizing data visualization according to the environment needs gets users enhanced visibility of their infrastructure.
 

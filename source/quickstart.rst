@@ -10,9 +10,9 @@
 Quickstart
 ==========
 
-Wazuh is a free and open source security platform that unifies XDR and SIEM capabilities. The solution is composed of a :ref:`single universal agent <wazuh_agent>` and three central components: the :ref:`Wazuh server <wazuh_server>`, the :ref:`Wazuh indexer <wazuh_indexer>`, and the :ref:`Wazuh dashboard <wazuh_dashboard>`. For more information about its components, architecture, and capabilities, you can check the :ref:`Getting started <getting_started>` section.  
+Wazuh is a security platform that provides unified XDR and SIEM protection for endpoints and cloud workloads. The solution is composed of a single universal agent and three central components: the Wazuh server, the Wazuh indexer, and the Wazuh dashboard. For more information, check the :doc:`Getting Started </getting-started/index>` documentation. 
 
-The Wazuh server and the Wazuh agent abide by the `GNU General Public License, version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_ and the Wazuh indexer and the Wazuh dashboard by the `Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_ (ALv2). 
+Wazuh is free and open source. Its components abide by the `GNU General Public License, version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_ and the `Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_ (ALv2). 
 
 In this section, you install and configure the central components in just a few minutes. All the components are installed on the same host using a single, automated installation script. Alternatively, you can check our :ref:`Installation guide <installation_guide>` to learn how to install and configure each component in single or cluster configurations.
 
@@ -135,13 +135,14 @@ If you want to uninstall the Wazuh central components, run the unattended instal
 Next steps
 ----------
 
-Now that your environment is ready, select your endpoint’s operating system and follow the installation steps to deploy the :ref:`Wazuh agent <wazuh_agent>`. The agent is a single, universal and lightweight monitoring software that runs on most operating systems. It provides visibility into the endpoint’s security by collecting critical system and application records, inventory data, and detecting potential anomalies.
+Now that your environment is ready, select your endpoint’s operating system and follow the installation steps to deploy the :doc:`/installation-guide/wazuh-agent/index`. The agent is a single, universal and lightweight monitoring software that runs on most operating systems. It provides visibility into the endpoint’s security by collecting critical system and application records, inventory data, and detecting potential anomalies.
+
 
 .. raw:: html
 
   <div class="agent-os">
       <div class="item-agent">
-          <a href="./installation-guide/wazuh-agent/wazuh_agent_package_linux.html" class="d-flex align-items-center">
+          <a href="./installation-guide/wazuh-agent/wazuh-agent-package-linux.html" class="d-flex align-items-center">
             <p>Linux</p>
 
 .. image:: /images/installation/linux.png
@@ -152,7 +153,7 @@ Now that your environment is ready, select your endpoint’s operating system an
         </a>
     </div>
     <div class="item-agent">
-        <a href="./installation-guide/wazuh-agent/wazuh_agent_package_windows.html" class="d-flex align-items-center">
+        <a href="./installation-guide/wazuh-agent/wazuh-agent-package-windows.html" class="d-flex align-items-center">
                     <p>Windows</p>
 
 .. image:: /images/installation/windows_icon.png
@@ -163,7 +164,7 @@ Now that your environment is ready, select your endpoint’s operating system an
         </a>
     </div>
     <div class="item-agent">
-        <a href="./installation-guide/wazuh-agent/wazuh_agent_package_macos.html" class="d-flex align-items-center">
+        <a href="./installation-guide/wazuh-agent/wazuh-agent-package-macos.html" class="d-flex align-items-center">
             <p>macOS</p>
 
 .. image:: /images/installation/macOS_logo.png
@@ -171,21 +172,21 @@ Now that your environment is ready, select your endpoint’s operating system an
 
 .. raw:: html
 
-      </a>
-  </div>
-  <div class="item-agent" id="solaris-logo">
-      <a href="./installation-guide/wazuh-agent/wazuh_agent_package_solaris.html" class="d-flex align-items-center">
-          <p>Solaris</p>
+        </a>
+    </div>
+    <div class="item-agent" id="solaris-logo">
+        <a href="./installation-guide/wazuh-agent/wazuh-agent-package-solaris.html" class="d-flex align-items-center">
+            <p>Solaris</p>
 
 .. image:: /images/installation/solaris.png
-    :align: center      
+      :align: center      
 
 .. raw:: html
 
         </a>
     </div>
     <div class="item-agent">
-        <a href="./installation-guide/wazuh-agent/wazuh_agent_package_aix.html" class="d-flex align-items-center">
+        <a href="./installation-guide/wazuh-agent/wazuh-agent-package-aix.html" class="d-flex align-items-center">
             <p>AIX</p>
 
 .. image:: /images/installation/AIX.png
@@ -196,7 +197,7 @@ Now that your environment is ready, select your endpoint’s operating system an
         </a>
     </div>
     <div class="item-agent">
-        <a href="./installation-guide/wazuh-agent/wazuh_agent_package_hpux.html" class="d-flex align-items-center">
+        <a href="./installation-guide/wazuh-agent/wazuh-agent-package-hpux.html" class="d-flex align-items-center">
             <p>HP-UX</p>
 
 .. image:: /images/installation/hpux.png
@@ -207,3 +208,4 @@ Now that your environment is ready, select your endpoint’s operating system an
           </a>
       </div>
   </div>
+
