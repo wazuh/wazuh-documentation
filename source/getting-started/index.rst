@@ -33,7 +33,7 @@ The Wazuh solution is composed of three :ref:`central platform components <compo
 Wazuh Cloud
 -----------
 
-The `Wazuh Cloud <https://wazuh.com/cloud/>`_ is our software as a service (SaaS) solution. We provide a `14-day free trial <https://console.cloud.wazuh.com/sign-up?landing=trial>`_ for you to create a cloud environment and get the best out of our SaaS solution.
+The `Wazuh Cloud <https://wazuh.com/cloud/>`_ is our software as a service (SaaS) solution. We provide a `14-day free trial <https://console.cloud.wazuh.com/sign-up?landing=trial>`_ for you to create a cloud environment and get the best out of our SaaS solution. Check the :ref:`Cloud service <cloud_service>` documentation for more information.
 
 More resources
 ---------------

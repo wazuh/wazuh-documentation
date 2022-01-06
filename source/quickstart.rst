@@ -123,7 +123,7 @@ Installing Wazuh
 
    You now have installed and configured Wazuh. 
 
-#. Access the Wazuh web interface with ``https://<server_ip>`` and your credentias:
+#. Access the Wazuh web interface with ``https://<server_ip>`` and your credentials:
 
     - **Username**: wazuh
     - **Password**: <wazuh_password>
