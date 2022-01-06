@@ -42,7 +42,7 @@ All the alternatives include instructions on how to install the :doc:`Wazuh cent
 
     <h3>From sources</h3>
 
-- :doc:`Installing the Wazuh server from sources <wazuh-from-sources/index>`: Installing Wazuh from source means installing the Wazuh manager without using a package manager. You compile the source code and copy the binaries to your computer instead.
+- :doc:`Installing the Wazuh server from sources <wazuh-from-sources/index>`: Installing Wazuh from sources means installing the Wazuh manager without using a package manager. You compile the source code and copy the binaries to your computer instead.
 
 
 
@@ -50,7 +50,7 @@ All the alternatives include instructions on how to install the :doc:`Wazuh cent
 
     <h3>Commercial options</h3>
 
-- :doc:`elastic-stack/index`: As an alternative to Open Distro for Elasticsearch, you can install Wazuh using the Elastic Stack basic license option. It contains everything included in the open source version under the `Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_, plus some additional capabilities such as Elastic Stack Security features, Kibana alerting, and others. According to your chosen configuration, Wazuh and Elastic Stack are installed on the same host, as an all-in-one deployment, on a separate host as a single-node or multi-node cluster.
+- :doc:`Installation with Elastic Stack basic license <elastic-stack/index>`: As an alternative to Open Distro for Elasticsearch, you can install Wazuh using the Elastic Stack basic license option. It contains everything included in the open source version under the `Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_, plus some additional capabilities such as Elastic Stack Security features, Kibana alerting, and others. According to your chosen configuration, Wazuh and Elastic Stack are installed on the same host, as an all-in-one deployment, on a separate host as a single-node or multi-node cluster.
 
 - :doc:`Installation with Splunk <splunk/index>`: You install Wazuh along with Splunk Enterprise, including the Splunk forwarder and the Wazuh Splunk app. This can be done as a single instance or as a multi-instance cluster.
 
@@ -139,7 +139,7 @@ If the Wazuh central components are already installed in your environment, selec
 
     <h3>From sources</h3>
 
-- :doc:`Installing the Wazuh agent from sources <wazuh-from-sources/wazuh-agent/index>`: Installing Wazuh from source means installing the Wazuh agent without using a package manager. You compile the source code and copy the binaries to your computer instead.
+- :doc:`Installing the Wazuh agent from sources <wazuh-from-sources/wazuh-agent/index>`: Installing Wazuh from sources means installing the Wazuh agent without using a package manager. You compile the source code and copy the binaries to your computer instead.
 
 Orchestration tools
 -------------------
