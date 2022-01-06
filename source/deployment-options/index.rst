@@ -16,18 +16,18 @@ All the alternatives include instructions on how to install the :doc:`Wazuh cent
 
     <h3>Ready-to-use machines</h3>
 
-- :doc:`virtual-machine/virtual-machine`: Wazuh provides a pre-built virtual machine image (OVA) that you can directly import using VirtualBox or other OVA compatible virtualization systems. 
+- :ref:`Virtual Machine (OVA) <virtual_machine>`: Wazuh provides a pre-built virtual machine image (OVA) that you can directly import using VirtualBox or other OVA compatible virtualization systems. 
   
-- :doc:`amazon-machine-images/amazon-machine-images`: This is a pre-built Amazon Machine Image (AMI) you can directly launch on an AWS cloud instance.
+- :ref:`Amazon Machine Images (AMI) <amazon-machine-images>`: This is a pre-built Amazon Machine Image (AMI) you can directly launch on an AWS cloud instance.
 
 
 .. raw:: html
 
     <h3>Containers</h3>
 
-- :doc:`docker/index`: Docker is a set of platform-as-a-service (PaaS) products that delivers software in packages called containers. Using Docker, you can install and configure the Wazuh deployment as a single-host architecture. 
+- :ref:`Deployment on Docker <wazuh_docker>`: Docker is a set of platform-as-a-service (PaaS) products that delivers software in packages called containers. Using Docker, you can install and configure the Wazuh deployment as a single-host architecture. 
   
-- :doc:`deploying-with-kubernetes/index`: Kubernetes is an open-source system for automating deployment, scaling, and managing containerized applications. This deployment type uses Wazuh images from Docker and allows you to build the Wazuh environment. 
+- :ref:`Deployment on Kubernetes <wazuh_kubernetes>`: Kubernetes is an open-source system for automating deployment, scaling, and managing containerized applications. This deployment type uses Wazuh images from Docker and allows you to build the Wazuh environment. 
 
 
 .. raw:: html
@@ -49,9 +49,9 @@ All the alternatives include instructions on how to install the :doc:`Wazuh cent
 
     <h3>Commercial options</h3>
 
-- :doc:`elastic-stack/index`: As an alternative to Open Distro for Elasticsearch, you can install Wazuh using the Elastic Stack basic license option. It contains everything included in the open source version under the `Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_, plus some additional capabilities such as Elastic Stack Security features, Kibana alerting, and others. According to your chosen configuration, Wazuh and Elastic Stack are installed on the same host, as an all-in-one deployment, on a separate host as a single-node or multi-node cluster.
+- :ref:`Installation with Elastic Stack basic license <basic_installation_guide>`: As an alternative to Open Distro for Elasticsearch, you can install Wazuh using the Elastic Stack basic license option. It contains everything included in the open source version under the `Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_, plus some additional capabilities such as Elastic Stack Security features, Kibana alerting, and others. According to your chosen configuration, Wazuh and Elastic Stack are installed on the same host, as an all-in-one deployment, on a separate host as a single-node or multi-node cluster.
 
-- :doc:`Installation with Splunk <splunk/index>`: You install Wazuh along with Splunk Enterprise, including the Splunk forwarder and the Wazuh Splunk app. This can be done as a single instance or as a multi-instance cluster.
+- :ref:`Installation with Splunk <installation_splunk>`: You install Wazuh along with Splunk Enterprise, including the Splunk forwarder and the Wazuh Splunk app. This can be done as a single instance or as a multi-instance cluster.
 
 
 Installing the Wazuh agent
@@ -145,9 +145,9 @@ Orchestration tools
 
 These alternatives guide you to install the Wazuh central components and the single universal agent. 
 
-- :doc:`deploying-with-ansible/index`: Ansible is an open source platform designed for automating tasks. Its deployment tool is used to deploy the Wazuh infrastructure on AWS. The Wazuh environment consists of the Wazuh central components and a Wazuh agent.
+- :ref:`Deployment with Ansible <wazuh_ansible>`: Ansible is an open source platform designed for automating tasks. Its deployment tool is used to deploy the Wazuh infrastructure on AWS. The Wazuh environment consists of the Wazuh central components and a Wazuh agent.
 
-- :doc:`deploying-with-puppet/index`: Puppet is an open-source software tool that gives you an automatic way to inspect, deliver, operate, and future-proof all of your software, no matter where it is executed. It is very simple to use and allows you to install and configure Wazuh easily.
+- :ref:`Deployment with Puppet <wazuh_puppet>`: Puppet is an open-source software tool that gives you an automatic way to inspect, deliver, operate, and future-proof all of your software, no matter where it is executed. It is very simple to use and allows you to install and configure Wazuh easily.
 
 
 
