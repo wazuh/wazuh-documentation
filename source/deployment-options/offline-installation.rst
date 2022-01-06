@@ -8,7 +8,7 @@
 Offline installation
 ====================
 
-You can install Wazuh even when there is no connection to the Internet. Installing the solution offline involves downloading the Wazuh central components to later install them on a system with no internet connection. Although in this section the Wazuh indexer, the Wazuh server, and the Wazuh dashboard are installed and configured on the same host in an all-in-one deployment, each component can also be installed on separate hosts as a distributed deployment, depending on your environment needs. For more information, check the :ref:`Requirements <installation_requirements>` section.
+You can install Wazuh even when there is no connection to the Internet. Installing the solution offline involves downloading the Wazuh central components to later install them on a system with no internet connection. Although in this section the Wazuh indexer, the Wazuh server, and the Wazuh dashboard are installed and configured on the same host in an all-in-one deployment, each component can also be installed on separate hosts as a distributed deployment, depending on your environment needs. For more information on the solution, check the :doc:`Getting Started </getting-started/index>` documentation. 
 
 .. note:: Root privileges are required to execute all the commands.
 
@@ -17,7 +17,7 @@ Prerequisites
 
 - ``curl``, ``tar``, and ``setcap`` need to be installed in the target system where the offline installation will be carried out. ``gnupg`` might need to be installed as well for some Debian-based systems.
 
-- In some systems, the command ``cp`` is an alias for ``cp -i`` — you can check this by running ``alias cp``. If this is your case, use ``unalias cp`` to avoid being asked for confirmation to overwrite files.
+- In some systems, the command ``cp`` is an alias for ``cp -i``. You can check this by running ``alias cp``. If this is your case, use ``unalias cp`` to avoid being asked for confirmation to overwrite files.
 
 Download the packages and configuration files
 ---------------------------------------------
