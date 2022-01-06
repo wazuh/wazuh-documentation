@@ -12,7 +12,6 @@ Commercial options
 
 
 .. toctree::
-    :hidden:
     :maxdepth: 1
     
     elastic-stack/index

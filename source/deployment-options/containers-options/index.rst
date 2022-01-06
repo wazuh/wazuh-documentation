@@ -5,15 +5,14 @@
   :description: Check out the Wazuh documentation to learn how to deploy Wazuh with Containers.
   
 
-.. _containers-options:
+.. _container-options:
 
-Containers options
-==================
+Deployment on containers
+========================
 
 
 .. toctree::
-    :hidden:
     :maxdepth: 1
     
-    docker/index 
-    deploying-with-kubernetes/index
+        On Docker <docker/index> 
+        On Kubernetes <deploying-with-kubernetes/index>
