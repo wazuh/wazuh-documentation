@@ -10,6 +10,19 @@ You can install Wazuh using other deployment options. These are complementary to
 Installing the Wazuh central components
 ---------------------------------------
 
+Installing the Wazuh central
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Installing the Wazuh
+~~~~~~~~~~~~~~~~~~~~
+
+Installing the central
+######################
+
+Installing the components
+:::::::::::::::::::::::::
+
+
 All the alternatives include instructions on how to install the :doc:`Wazuh central components </getting-started/components/index>`. After these are installed, you then need to deploy agents to your endpoints.  
 
 .. raw:: html
