@@ -1,13 +1,5 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. Section marks used on this document:
-.. h0 ======================================
-.. h1 --------------------------------------
-.. h2 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. h3 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-.. h4 ######################################
-.. h5 ::::::::::::::::::::::::::::::::::::::
-
 .. meta::
     :description: Learn more about how to deploy a Wazuh cluster: introduction, architecture overview, code structure and troubleshooting.
 
@@ -94,25 +86,25 @@ The image below shows a schema of how a master node and a worker node interact w
 
 Threads
 ^^^^^^^
-The following tasks/threads can be found in the cluster, depending on the type of node they are running at:
+The following tasks can be found in the cluster, depending on the type of node they are running on:
 
-+--------------------------------+--------------+
-| Name                           | Node running |
-+================================+==============+
-| Check worker's last keep alive | Master       |
-+--------------------------------+              |
-| Local integrity                |              |
-+--------------------------------+              |
-| Sendsync                       |              |
-+--------------------------------+--------------+
-| Sync integrity                 | Worker       |
-+--------------------------------+              |
-| Sync agent info                |              |
-+--------------------------------+              |
-| Send last keep alive to master |              |
-+--------------------------------+--------------+
-| Distributed API                | Both         |
-+--------------------------------+--------------+
++--------------------------------+--------+
+| Thread name                    | Node   |
++================================+========+
+| Keep alive - Send to master    | Worker |
++--------------------------------+        |
+| Integrity sync                 |        |
++--------------------------------+        |
+| Agent info sync                |        |
++--------------------------------+--------+
+| Keep alive - Check workers     | Master |
++--------------------------------+        |
+| Local integrity                |        |
++--------------------------------+        |
+| Sendsync                       |        |
++--------------------------------+--------+
+| Distributed API                | Both   |
++--------------------------------+--------+
 
 Keep alive thread
 ~~~~~~~~~~~~~~~~~
@@ -127,7 +119,7 @@ Integrity thread
 
 This thread is in charge of synchronizing master's integrity information among all worker nodes. The communication is started by the worker node and it has the following stages:
 
-1. The worker asks the master for permission. This is important to prevent a new synchronization process to start if there is already one synchronization process at the moment (i.e. overlapping). The permission will be re-granted when the sync is finished or if it has been locked for more than 1000 seconds. This is done to avoid that the synchronization in a worker stay blocked after any error. Its default time can be modified at the ``max_locked_integrity_time`` variable of the `cluster.json <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/framework/wazuh/core/cluster/cluster.json>`_ file.
+1. The worker asks the master for permission. The permission will be granted only after any previous synchronization process is finished. This is important to prevent overlapping, where a new synchronization process starts while another one is still running. Synchronization processes taking too long are considered locked due to errors. Once the process is flagged as locked, new integrity synchronization permissions can be granted. The maximum time a synchronization process is allowed to run is 1000 seconds by default. This can be modified with the ``max_locked_integrity_time`` variable in the `cluster.json <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/framework/wazuh/core/cluster/cluster.json>`_ file.
 2. The worker sends the master a JSON file containing the following information:
 
     * Path
@@ -171,7 +163,7 @@ This thread is only executed by the master. It periodically reads all its integr
 Sendsync thread
 ~~~~~~~~~~~~~~~
 
-The sendsync thread is only executed by the master and it isn't shown in the schema. Allows direct redirection of messages coming from worker nodes to master services. This is the process that allows agents, for example, to register pointing to the IP of a worker node. The request in that case would be redirected directly to the master's Authd service.
+Although not shown in the workflow schema above, Sendsync is another Wazuh cluster task. It is only executed on the master and allows redirection of messages coming from worker nodes to master services. For example, this process makes possible pointing to the IP address of a worker node when registering an agent. In this case, Sendsync takes the registration request from the worker node and redirects it to the master's Authd service.
 
 Distributed API thread
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -385,30 +377,30 @@ Multiprocessing
 ~~~~~~~~~~~~~~~
 .. versionadded:: 4.3.0
 
-While the use of asynchronous tasks is a good solution to optimize work and avoid waiting times for I/O, there is something which it is not good at solving: executing multiple tasks that require intensive use of CPU. The reason is the way in which Python works, specifically because of the application of its Global Interpreter Lock (GIL), which is a lock that allows a single thread to take control of the Python interpreter at a time. Therefore, asynchronous tasks run concurrently, not in parallel. Following the example of the previous section, it is as if there is effectively only one chef who has to do all the tasks. He can only do one at a time so if one task requires all his attention, the others are delayed.
+While the use of asynchronous tasks is a good solution to optimize work and avoid waiting times for I/O, it is not a good solution to execute multiple tasks that require intensive use of CPU. The reason is the way in which Python works. Python allows a single thread to take control over the Python interpreter through the Global Interpreter Lock (GIL). Therefore, asynchronous tasks run concurrently and not in parallel. Following the analogy of the previous section, it is as if there is effectively only one chef who has to do all the tasks. He can only do one at a time so if one task requires all his attention, the other ones are delayed.
 
-The master node in a cluster supports a heavy workload, especially in large environments. Although the tasks are asynchronous, there are sections that require high CPU usage, such as calculating the hash of the files to be synchronized in the Integrity thread. To avoid other tasks waiting for the Python interpreter to complete the CPU-bound parts, multiprocessing is used. Following the same example again, multiprocessing would be equivalent to having more chefs working in the same kitchen.
+The master node in the cluster is under a heavy workload, especially in large environments. Although the tasks are asynchronous, they have sections that require high CPU usage, such as calculating the hash of the files to be synchronized with the Local integrity thread. To avoid other tasks to wait for the Python interpreter to complete the CPU-bound parts, multiprocessing is used. Using the same analogy again, multiprocessing would be equivalent to having more chefs working in the same kitchen.
 
-Multiprocessing is implemented in the cluster process of both the master node and the worker nodes, and `concurrent.futures.ProcessPoolExecutor <https://docs.python.org/3/library/concurrent.futures.html#concurrent.futures.ProcessPoolExecutor>`_ is used for this purpose. Cluster tasks can use any free process in the process pool to delegate and execute in parallel those parts of their logic that are more CPU intensive. With this, it is possible to take advantage of more cores of a CPU and increase the overall performance of the cluster process. When combined with asyncio, best results are obtained.
+Multiprocessing is implemented in the cluster process of both the master node and the worker nodes, and `concurrent.futures.ProcessPoolExecutor <https://docs.python.org/3/library/concurrent.futures.html#concurrent.futures.ProcessPoolExecutor>`_ is used for this purpose. Cluster tasks can use any free process in the process pool to delegate and execute in parallel those parts of their logic that are more CPU intensive. With this, it is possible to take advantage of more CPU cores and increase the overall performance of the cluster process. When combined with asyncio, best results are obtained.
 
-Child processes are created when the parent `wazuh-clusterd` starts. They stay in the process pool waiting for new jobs to be assigned to them. There are two child processes by default within the master node pool, but it can be changed inside the `process_pool_size` variable of the `cluster.json <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/framework/wazuh/core/cluster/cluster.json>`_ file. The worker nodes, on the other hand, create a single child process and this number is not modifiable. The threads/tasks that use multiprocessing in the cluster are:
+Child processes are created when the parent `wazuh-clusterd` starts. They stay in the process pool waiting for new jobs to be assigned to them. There are two child processes by default within the master node pool. This value can be changed in the `process_pool_size` variable in the `cluster.json <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/framework/wazuh/core/cluster/cluster.json>`_ file. The worker nodes, on the other hand, create a single child process and this number is not modifiable. The tasks that use multiprocessing in the cluster are the following.
 
 Master node
 ###########
-* **File integrity thread**: It takes care of calculating the hash of all the files to be synchronized, which requires high CPU usage. This calculation is done in a different process.
-* **Agent info thread**: This task has a section in charge of communicating with wazuh-db to send it all the information of the agents. The communication is done in small chunks so as not to saturate the service socket, which made it a somewhat slow process and not a good candidate for the use of asyncio. Therefore, this section is delegated to a child process.
+* **Local integrity thread**: Calculates the hash of all the files to be synchronized. This requires high CPU usage.
+* **Agent info thread**: A section of this task sends all the agents information to the wazuh-db. The communication is done in small chunks so as not to saturate the service socket. This turned this task into a somewhat slow process and not a good candidate for asyncio.
 * **Integrity thread**:
 
-   * **Compress files**: The function in charge of compressing files is fully synchronous, which can block the parent cluster process. For this reason, the `compress_files` function is executed in a child process. This way the parent process can continue with other tasks.
-   * **Process extra-valid files**: The processing of files received in the master from the workers (extra-valid) is prone to be interleaved for the different nodes and to be very slow when using asyncio. Therefore, this part makes use of multiprocessing to execute this action in parallel without blocking the parent cluster process.
+   * **Compress files**: Compressing files is fully synchronous and can block the parent cluster process.
+   * **Process extra-valid files**: The workers send the extra-valid files to the master. Processing these files is prone to interleaving and can be very slow when using asyncio.
 
 Worker nodes
 ############
-* **Integrity thread**: In workers, this is the only task that uses multiprocessing to carry out certain actions:
+* **Integrity thread**: This is the only task in workers that uses multiprocessing. It carries out the following CPU-intensive actions.
 
-   * **Hash calculation**: Calculating the hash of all the files to be synchronized every time Integrity check is started.
-   * **Unzip files**: Unzipping files could be blocking for too long if the zip was large. By running this action in a child process, the worker can take care of other tasks in the meantime.
-   * **Process master files**: A child process is in charge of processing and moving to the correct destination all the files that were received from the master node.
+   * **Hash calculation**: Calculates the hash of all the files to be synchronized every time Integrity check is started.
+   * **Unzip files**: Extracts files and can take too long when the zip is large.
+   * **Process master files**: Processes and moves all the files that were received from the master node to the appropriate destination.
 
 Below is an example diagram of how the process pool is used in the master node:
 
