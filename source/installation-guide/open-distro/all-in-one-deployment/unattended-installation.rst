@@ -75,7 +75,7 @@ On the first access to Kibana, the browser displays a warning message indicating
 Customizing the installation
 ----------------------------
 
-The Kibana configuration found at the ``/etc/kibana/kibana.yml`` file has the ``server.host`` parameter set to ``0.0.0.0``. This means that Kibana can be accessed from the outside and accepts all the available IPs of the host. This value can be changed for a specific IP if needed.
+The Kibana configuration found at the ``/etc/kibana/kibana.yml`` file has the ``server.host`` parameter set to ``0.0.0.0``. This means that Kibana can be accessed from the outside and accepts all the available IP addresses of the host. This value can be changed for a specific IP address if needed.
 
 To uninstall the components of the all-in-one installation, you can use the option ``-r / --uninstall`` to remove all the components installed.
  

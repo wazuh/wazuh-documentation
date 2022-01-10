@@ -260,7 +260,7 @@ Deployment script
 
 It is typically a bash script that tries to download the malware itself by connecting to an SFTP server. This script even updates the malware if the host was already compromised.
 
-The main IoCs to look for in this component are the IP and files that it copies to the system:
+The main IoCs to look for in this component are the IP addresses and files that it copies to the system:
 
 .. code-block:: none
 

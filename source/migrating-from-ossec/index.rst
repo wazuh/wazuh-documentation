@@ -47,7 +47,7 @@ Intrusion detection
 * Updated ruleset with new log analysis rules and decoders.
 * Native rules for Suricata, making use of JSON decoder.
 * Integration with `OwlH project <https://www.owlh.net>`_ for unified NIDS management.
-* Support for IP reputation databases (e.g. `AlienVault OTX <https://www.alienvault.com/open-threat-exchange>`_).
+* Support for IP addresses reputation databases (e.g. `AlienVault OTX <https://www.alienvault.com/open-threat-exchange>`_).
 * Native integration with Linux auditing kernel subsystem and Windows audit policies to capture who-data for FIM events.
 
 Integration with cloud providers

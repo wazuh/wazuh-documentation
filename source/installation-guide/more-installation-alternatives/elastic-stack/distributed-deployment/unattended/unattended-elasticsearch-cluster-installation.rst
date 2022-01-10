@@ -51,9 +51,9 @@ Download the script and the configuration file. After downloading them, configur
 
     **Configure the installation** 
       
-      Edit the ``~/config.yml`` file to specify the IP you want the Elasticsearch service to bind to. 
+      Edit the ``~/config.yml`` file to specify the IP address you want the Elasticsearch service to bind to. 
 
-      .. note:: In order to create valid certificates for the communication between the various components of Wazuh and the Elastic Stack, external IPs must be used.
+      .. note:: In order to create valid certificates for the communication between the various components of Wazuh and the Elastic Stack, external IP addresses must be used.
 
       .. code-block:: yaml
         :emphasize-lines: 5, 10, 13
@@ -169,9 +169,9 @@ Download the script and the configuration file. After downloading them, configur
 
         - ``<elastic_cluster>``: Name of the cluster. 
         - ``<master_node_x>``: Name of the node ``X``.
-        - ``<elasticsearch_ip_nodeX>``: Elasticsearch IP of the node ``X``.
-        - ``<kibana_ip>``: Kibana server IP.
-        - ``<wazuh_master_server_IP>``: Wazuh Server IP.
+        - ``<elasticsearch_ip_nodeX>``: Elasticsearch IP address of the node ``X``.
+        - ``<kibana_ip>``: Kibana server IP address.
+        - ``<wazuh_master_server_IP>``: Wazuh Server IP address.
 
       There can be added as many Elasticsearch nodes as needed. To generate certificates for them, the ``instances`` section must be also updated, adding the information of these new certificates. There must be the same number of certificates rows as nodes will be on the installation.
 
