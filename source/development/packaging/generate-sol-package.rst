@@ -56,7 +56,7 @@ Download and build the sources:
 
 To build a SPARC package you just need to run the same script in a SPARC system.
 
-We also provide an automated way of building packages for i386 Solaris systems using vagrant:
+We also provide an automated way of building packages for i386 Solaris systems using Vagrant. Follow these steps to build a Solaris package using Vagrant.
 
 Requirements
 ^^^^^^^^^^^^^
@@ -102,12 +102,25 @@ Bring the machine up ``vagrant [OPTION] ... up solaris10/solaris11/both``:
       -v, --version                    Print the version and exit.
       -h, --help                       Print this help.
 
-Download our wazuh-packages repository from GitHub, enter into the solaris directory, change to the desired branch, copy the desired solaris directory into the ``package_generation/src`` directory and enter in the ``package_generation`` directory.
-.. code-block:: console
+Clone our wazuh-packages repository from GitHub and switch to your target branch. Copy the source files for your Solaris 10 or Solaris 11 target system into ``wazuh-packages/solaris/package_generation/src``. Change to the ``wazuh-packages/solaris/package_generation`` directory before building the package.
 
-  $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/solaris && git checkout |WAZUH_PACKAGES_BRANCH|
-  $ cp solarisXX package_generation/src/
-  $ cd package_generation
+.. tabs::
+
+  .. group-tab:: Solaris 10
+
+    .. code-block:: console
+
+      $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/solaris && git checkout |WAZUH_PACKAGES_BRANCH|
+      $ cp solaris10 package_generation/src/
+      $ cd package_generation
+
+  .. group-tab:: Solaris 11
+
+    .. code-block:: console
+
+      $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/solaris && git checkout |WAZUH_PACKAGES_BRANCH|
+      $ cp solaris11 package_generation/src/
+      $ cd package_generation
 
 Below, you will find some examples of how to build a Solaris package using this tool.
 
