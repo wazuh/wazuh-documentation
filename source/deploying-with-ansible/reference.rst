@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Ansible is an open source platform designed for automating tasks. Learn more about the variable references in this section of the Wazuh documentation.
+  
 .. _wazuh_ansible_reference:
 
 Variables references
@@ -7,8 +10,8 @@ Variables references
 
 .. _wazuh_ansible_reference_elasticsearch:
 
-Elasticsearch
-===================
+Elasticsearch / Opendistro
+==========================
 
 **elasticsearch_cluster_name**
 
@@ -67,7 +70,7 @@ Elasticsearch
 .. _wazuh_ansible_reference_kibana:
 
 Kibana
-=========
+======
 
 **elasticsearch_http_port**
 
@@ -132,7 +135,7 @@ Kibana
 .. _wazuh_ansible_reference_filebeat:
 
 Filebeat
-===================
+========
 
 **filebeat_version:**
 
@@ -1075,7 +1078,7 @@ Wazuh Manager
 .. _wazuh_ansible_reference_agent:
 
 Wazuh Agent
-===================
+===========
 
 **wazuh_managers:**
 

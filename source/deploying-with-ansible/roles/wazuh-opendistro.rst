@@ -1,24 +1,24 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. _ansible-wazuh-elasticsearch:
+.. _ansible-wazuh-opendistro:
 
-Elasticsearch
---------------
+Open Distro
+-----------
 
-This role is intended to deploy Elasticsearch node, you have some variables that can be used to customize the installation:
+This role is intended to deploy the Open Distro node. The following variables can be used to customize the installation:
 
 - **elasticsearch_network_host:** defines listen IP address (default: ``127.0.0.1``).
 - **elasticsearch_http_port:** defines listen port (default: ``9200``).
 - **elasticsearch_jvm_xms**: amount of memory for java (default: ``null``).
 - **elastic_stack_version**: defines elk version to be installed.
 
-You can create a YAML file ``wazuh-elastic.yml`` to be used by Ansible playbook:
+You can create a YAML file ``wazuh-opendistro.yml`` to be used by Ansible playbook:
 
 .. code-block:: yaml
 
-  - hosts: elasticsearch
+  - hosts: opendistro
     roles:
-    - ansible-role-elasticsearch
+    - ansible-role-opendistro
 
 You can set your custom variable definitions for different environments, for example:
 
@@ -38,6 +38,6 @@ Next, run the ansible playbook: ::
 
   $ ansible-playbook wazuh-elastic.yml -e@vars-production.yml
 
-The example above will install Elasticsearch and set the listen address to: ``10.1.1.10`` using ``vars-production.yml``.
+The example above will install Open Distro and set the listen address to: ``10.1.1.10`` using ``vars-production.yml``.
 
 Please review the :ref:`references <wazuh_ansible_reference_elasticsearch>` section to see all variables available for this role.

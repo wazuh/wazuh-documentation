@@ -387,6 +387,7 @@ def minification(actual_path):
         ['css/accordions','css'],
         ['js/version-selector','js'],
         ['js/redirects','js'],
+        ['js/release-note-redirect','js'],
         ['js/style','js'],
         ['js/custom-redoc','js'],
         ['js/accordion', 'js']
@@ -505,7 +506,7 @@ custom_replacements = {
     "|DEB_MANAGER|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-manager/wazuh-manager",
     "|DEB_API|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-api/wazuh-api",
     # Variables for Elastic's Elasticsearch
-    "|ELASTICSEARCH_ELK_LATEST|" : "7.12.1",
+    "|ELASTICSEARCH_ELK_LATEST|" : "7.14.2",
     "|ELASTICSEARCH_ELK_LATEST_ANSIBLE|" : "7.10.2",
     "|ELASTICSEARCH_ELK_LATEST_KUBERNETES|" : "7.10.2",
     "|ELASTICSEARCH_ELK_LATEST_PUPPET|" : "7.10.2",
@@ -537,6 +538,8 @@ def setup(app):
         os.path.join(actual_path, "_static/js/accordion.js")).st_mtime)
     app.add_js_file("js/redirects.min.js?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/js/redirects.js")).st_mtime)
+    app.add_js_file("js/release-note-redirect.min.js?ver=%s" % os.stat(
+        os.path.join(actual_path, "_static/js/release-note-redirect.js")).st_mtime)
     app.add_config_value('custom_replacements', {}, True)
     app.connect('source-read', customReplacements)
 
@@ -613,6 +616,7 @@ exclude_patterns = [
     "css/style.css",
     "js/version-selector.js",
     "js/redirects.js",
+    "js/release-note-redirect.js",
     "js/style.js"
 ]
 

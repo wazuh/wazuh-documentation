@@ -63,7 +63,9 @@ It defines the criteria used to execute a specific command:
 
 - The ``location`` setting as ``local``. It means that the active response is executed on the agent that generates the alert.
 
-- You can write a list of rule IDs that will trigger the active response in the ``rules_id`` setting. This example uses rule ``550``, new file added to the system, and rule ``554``, file modified in the system.
+- You can write a list of rule IDs that will trigger the active response in the ``rules_id`` setting. This example uses the following rule IDs.
+   * Rule ``550``: file modified in the system
+   * Rule ``554``: new file added to the system
 
 Rules and decoders
 ^^^^^^^^^^^^^^^^^^

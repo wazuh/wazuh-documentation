@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Wazuh allows you to configure commands to be used by one or more active responses. Check out the options in this section of the documentation. 
+  
 .. _reference_ossec_commands:
 
 command

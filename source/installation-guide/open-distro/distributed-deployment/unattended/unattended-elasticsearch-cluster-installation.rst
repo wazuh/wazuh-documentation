@@ -20,19 +20,19 @@ The script allows installing both Elasticsearch and Kibana, either together or o
 +-------------------------------+----------------------------------------------------------------------------------------------------------------+
 | Options                       | Purpose                                                                                                        |
 +===============================+================================================================================================================+
-| -e / --install-elasticsearch  | It installs Open Distro for Elasticsearch. It cannot be used together with option ``-k``.                      |
+| -e / --install-elasticsearch  | Installs Open Distro for Elasticsearch (cannot be used together with option ``-k``)                            |
 +-------------------------------+----------------------------------------------------------------------------------------------------------------+
-| -k / --install-kibana         | It installs Open Distro for Kibana. It cannot be used together with option ``-e``.                             |
+| -k / --install-kibana         | Installs Open Distro for Kibana (cannot be used together with option ``-e``)                                   |
 +-------------------------------+----------------------------------------------------------------------------------------------------------------+
-| -n / --node-name              | It indicates the name of the instance.                                                                         |
+| -n / --node-name              | Name of the node                                                                                               |
 +-------------------------------+----------------------------------------------------------------------------------------------------------------+
-| -c / --create-certificates    | It generates the certificates for all the nodes indicated on the configuration file (only for multi-node mode).|
+| -c / --create-certificates    | Generates the certificates for all the indicated nodes                                                         |
 +-------------------------------+----------------------------------------------------------------------------------------------------------------+
-| -d / --debug                  | It shows the complete installation output.                                                                     |
+| -d / --debug                  | Shows the complete installation output                                                                         |
 +-------------------------------+----------------------------------------------------------------------------------------------------------------+
-| -i / --ignore-healthcheck     | It ignores the health check.                                                                                   |
+| -i / --ignore-healthcheck     | It ignores the health-check                                                                                    |
 +-------------------------------+----------------------------------------------------------------------------------------------------------------+
-| -h / --help                   | It shows help.                                                                                                 |
+| -h / --help                   | Shows help                                                                                                     |
 +-------------------------------+----------------------------------------------------------------------------------------------------------------+
 
 Installing Open Distro for Elasticsearch

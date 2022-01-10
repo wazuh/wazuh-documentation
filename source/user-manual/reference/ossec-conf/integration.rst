@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Learn how to configure the manager to connect Wazuh to external APIs. Check out the options, optional filters, and configuration examples. 
+  
 .. _reference_ossec_integration:
 
 integration
