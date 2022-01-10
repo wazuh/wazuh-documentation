@@ -69,6 +69,12 @@
       }
     }
   }
+  
+  .toctree-wrapper ul {
+    @include media-max(sm){
+      padding-left: 20px;
+    }
+  }
     
   .align-cells-top {
     th,
@@ -217,6 +223,11 @@
                 list-style: square;
               }
             }
+          }
+        }
+        &:last-child {
+          & > ul {
+            padding: 0;
           }
         }
       }

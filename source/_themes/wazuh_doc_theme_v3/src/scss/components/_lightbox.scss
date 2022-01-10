@@ -4,3 +4,23 @@
   Style adjustments for the elements created by our custom extension:
   wazuh_doc_images.
 ----------------------------------------------------------------------------- */
+
+#wazuh-light-box-overlay {
+  z-index: 2000;
+}
+#wazuh-light-box {
+  z-index: 2100;
+}
+
+.wazuh-image-wrapper {
+  align-self: center;
+  &.align-right {
+    align-self: flex-end;
+  }
+  .align-left {
+    align-self: flex-start;
+  }
+  .align-center {
+    align-self: center;
+  }
+}

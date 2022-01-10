@@ -8,6 +8,9 @@
 #central-column .step-card {
   border-radius: $roundedCorners;
   padding: 30px;
+  @include media-max(sm){
+    padding: 10px;
+  }
   h1,
   h2,
   h3,

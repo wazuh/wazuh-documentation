@@ -35,6 +35,7 @@
       border: none;
       position: relative;
       z-index: 1;
+      flex-wrap: wrap-reverse;
     }
 
     &.bottom {
@@ -49,11 +50,17 @@
       font-weight: 400;
       border-radius: $roundedCorners $roundedCorners 0 0!important;
       padding: 1.42857em calc(1.42857em + .15%);
+      @include media-max(sm){
+        padding: .8em calc(.8em + .15%);
+      }
 
       &.active {
         font-weight: 500;
         padding: 1.42857em;
         border-radius: $roundedCorners $roundedCorners 0 0!important;
+        @include media-max(sm){
+          padding: .8em;
+        }
   
         &:first-child ::after {
           /* This hides the fact that the element .bottom has all corners round */
