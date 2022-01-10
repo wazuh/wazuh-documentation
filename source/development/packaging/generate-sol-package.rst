@@ -56,7 +56,7 @@ Download and build the sources:
 
 To build a SPARC package you just need to run the same script in a SPARC system.
 
-We also provide an automated way of building packages for i386 Solaris systems using Vagrant. Follow these steps to build a Solaris package using Vagrant.
+We also provide an automated way of building packages for i386 Solaris systems using Vagrant. Follow the following steps to learn how to do it.
 
 Requirements
 ^^^^^^^^^^^^^
