@@ -5,18 +5,18 @@
 
 .. _dev-wazuh-cluster:
 
-Wazuh Cluster
+Wazuh cluster
 =============
 
 - `Introduction`_
-- `Architecture Overview`_
+- `Architecture overview`_
 - `Code structure`_
 - `Troubleshooting`_
 
 Introduction
 ------------
 
-Recommended reading: :ref:`Wazuh Cluster <configuring-cluster>`.
+Recommended reading: :ref:`Deploying a Wazuh cluster <configuring-cluster>`.
 
 Today's environments usually have thousands of new agents every day. A single manager architecture is not capable of managing so many events and, in consequence, the workload needs to be balanced among multiple nodes. Therefore, horizontal scaling arises as the proper approach to balance the load for a large number of agents.
 
@@ -30,7 +30,7 @@ Wazuh's main workload is processing events from the agents and raise alerts. Thi
 
 Having all this information synchronized, any cluster node is capable of processing and raising alerts from the agents, making it possible to horizontally scale a Wazuh environment when new agents are added.
 
-Architecture Overview
+Architecture overview
 ---------------------
 
 The following diagram shows a typical Wazuh cluster architecture:
@@ -81,8 +81,9 @@ Workflow
 
 The image below shows a schema of how a master node and a worker node interact with each other in the synchronization process. Every dotted square represents a synchronization task and they all work in parallel:
 
-.. image:: ../images/manual/cluster/cluster_flow.png
-  :align: center
+.. thumbnail:: ../images/manual/cluster/cluster_flow.png
+    :title: Wazuh cluster workflow
+    :align: center
 
 Threads
 ^^^^^^^
@@ -127,14 +128,14 @@ This thread is in charge of synchronizing master's integrity information among a
     * MD5 checksum
     * Whether the file is a merged file or not. And if it's merged:
     
-        * The merge type.
+        * The merge type
         * The filename
 
 3. The master compares the received checksums with its own and creates three different groups of files:
 
     * Missing: Files that are present in the master node but missing in the worker. They must be created in the worker.
     * Extra: Files that are present in the worker node but missing in the master. They must be removed in the worker node as well.
-    * Extra valid: Extra files that, instead of being removed in the worker, must be created in the master. This is a special type of file created for agent-groups files. These files can be created in worker nodes when an agent is re-registered and was previously assigned to a group.
+    * Extra valid: Extra files that, instead of being removed in the worker, must be created in the master. This is a special type of file created for agent-group files. These files can be created in worker nodes when an agent is re-registered and was previously assigned to a group.
     * Shared: Files that are present in both master and worker but have a different checksum. They must be updated in the worker node.
 
    Then the master prepares a zip package with a JSON containing all this information and the required files the worker needs to update.
@@ -146,7 +147,7 @@ If there is no data to synchronize or there has been an error reading data from 
 Agent info thread
 ~~~~~~~~~~~~~~~~~
 
-This thread is in charge of synchronizing the agent's last keepalives and OS information with the master. The communication here is also started by the worker and it has the following stages:
+This thread is in charge of synchronizing the agent's last keepalives and operating system information with the master. The communication here is also started by the worker and it has the following stages:
 
 1. The worker asks the master for permission. This is important to prevent a new synchronization process to start if there is already one synchronization process at the moment.
 2. The worker asks to its local :ref:`wazuh-db <wazuh-db>` service for the information of agents marked as not synchronized.
@@ -362,11 +363,11 @@ Asynchronous tasks
 ~~~~~~~~~~~~~~~~~~
 Part of the magic behind the cluster performance is using asynchronous tasks. An asynchronous task is like a thread in Python, because it will be executed concurrently with the main task and other ones, but it is much more lightweight than a thread and it's faster to create. Asynchronous tasks take advantage of how slow I/O is to do its concurrent execution: while a task is waiting for some data to be fetched/sent from/to a socket, another one is executing. Imagine a chef who's cooking multiple meals at the same time to better picture the idea of "asynchronous" in your head.
 
-Each of the "threads" described in the `Workflow`_ section are implemented as asynchronous tasks. These tasks are started in ``wazuh.core.cluster.client.AbstractClientManager.start``, ``wazuh.core.cluster.server.AbstractServer.start`` and ``wazuh.core.cluster.local_server.LocalServer.start`` and they are all implemented using infinite loops.
+Each of the "threads" described in the `Workflow`_ section are implemented as asynchronous tasks. These tasks are started in ``wazuh.core.cluster.client.AbstractClientManager.start``, ``wazuh.core.cluster.server.AbstractServer.start``, and ``wazuh.core.cluster.local_server.LocalServer.start`` and they are all implemented using infinite loops.
 
 In addition to those already mentioned, there are more tasks that are created when a received request requires a complex process to be solved. These tasks are created to solve the received request and destroyed once the response has been sent. This type of architecture is necessary to prevent the server to be busy serving a single request.
 
-One of those tasks, which is defined as a class, is the task created to receive and process a file from the other peer. This class is instanciated when a synchronization process is started and it's destroyed once the synchronization process ends. It creates an asynchronous task that waits until the necessary files to do the synchronization process are received. This asynchronous task has a `callback <https://docs.python.org/3/library/asyncio-task.html#asyncio.Task.add_done_callback>`_ that checks if there was an error during the synchronization process.
+One of those tasks, which is defined as a class, is the task created to receive and process a file from the other peer. This class is instantiated when a synchronization process is started and it is destroyed once the synchronization process ends. It creates an asynchronous task that waits until the necessary files to do the synchronization process are received. This asynchronous task has a `callback <https://docs.python.org/3/library/asyncio-task.html#asyncio.Task.add_done_callback>`_ that checks if there was an error during the synchronization process.
 
 .. thumbnail:: ../images/development/receive_file_task_cluster.png
     :title: Receive file class inheritance
@@ -377,7 +378,7 @@ Multiprocessing
 ~~~~~~~~~~~~~~~
 .. versionadded:: 4.3.0
 
-While the use of asynchronous tasks is a good solution to optimize work and avoid waiting times for I/O, it is not a good solution to execute multiple tasks that require intensive use of CPU. The reason is the way in which Python works. Python allows a single thread to take control over the Python interpreter through the Global Interpreter Lock (GIL). Therefore, asynchronous tasks run concurrently and not in parallel. Following the analogy of the previous section, it is as if there is effectively only one chef who has to do all the tasks. He can only do one at a time so if one task requires all his attention, the other ones are delayed.
+While the use of asynchronous tasks is a good solution to optimize work and avoid waiting times for I/O, it is not a good solution to execute multiple tasks that require intensive use of CPU. The reason is the way in which Python works. Python allows a single thread to take control over the Python interpreter through the Global Interpreter Lock (GIL). Therefore, asynchronous tasks run concurrently and not in parallel. Following the analogy of the previous section, it is as if there is effectively only one chef who has to do all the tasks. The chef can only do one at a time so if one task requires all his/her attention, the other ones are delayed.
 
 The master node in the cluster is under a heavy workload, especially in large environments. Although the tasks are asynchronous, they have sections that require high CPU usage, such as calculating the hash of the files to be synchronized with the Local integrity thread. To avoid other tasks to wait for the Python interpreter to complete the CPU-bound parts, multiprocessing is used. Using the same analogy again, multiprocessing would be equivalent to having more chefs working in the same kitchen.
 
@@ -388,7 +389,7 @@ Child processes are created when the parent `wazuh-clusterd` starts. They stay i
 Master node
 ###########
 * **Local integrity thread**: Calculates the hash of all the files to be synchronized. This requires high CPU usage.
-* **Agent info thread**: A section of this task sends all the agents information to the wazuh-db. The communication is done in small chunks so as not to saturate the service socket. This turned this task into a somewhat slow process and not a good candidate for asyncio.
+* **Agent info thread**: A section of this task sends all the agents' information to the wazuh-db. The communication is done in small chunks so as not to saturate the service socket. This turned this task into a somewhat slow process and not a good candidate for asyncio.
 * **Integrity thread**:
 
    * **Compress files**: Compressing files is fully synchronous and can block the parent cluster process.
