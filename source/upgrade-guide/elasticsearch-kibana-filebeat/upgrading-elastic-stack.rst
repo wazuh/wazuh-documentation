@@ -77,7 +77,7 @@ Upgrading Elasticsearch
 This guide explains how to perform a rolling upgrade, which allows you to shut down one node at a time for minimal disruption of service.
 The cluster remains available throughout the process.
 
-In the commands below ``127.0.0.1`` IP address is used. If Elasticsearch is bound to a specific IP address, replace ``127.0.0.1`` with your Elasticsearch IP. If using ``http``, the option ``-k`` must be omitted and if not using user/password authentication, ``-u`` must be omitted.
+In the commands below ``127.0.0.1`` IP address is used. If Elasticsearch is bound to a specific IP address, replace ``127.0.0.1`` with your Elasticsearch IP address. If using ``http``, the option ``-k`` must be omitted and if not using user/password authentication, ``-u`` must be omitted.
 
 #. Disable shard allocation:
 
@@ -403,7 +403,7 @@ Upgrading Kibana
       uiSettings.overrides.defaultRoute: "/app/wazuh"
       elasticsearch.ssl.verificationMode: certificate
 
-   - ``elasticsearch.hosts:`` In case of having an IP, replace it with a DNS name (Starting Elasticsearch 7.11.0, IPs are not allowed). For example, ``https://localhost:9200``
+   - ``elasticsearch.hosts:`` In case of having an IP, replace it with a DNS name (Starting Elasticsearch 7.11.0, IP addresses are not allowed). For example, ``https://localhost:9200``
    - Replace ``server.defaultRoute: /app/wazuh`` with ``uiSettings.overrides.defaultRoute: "/app/wazuh"``
    - Add the following line to select ``certificate`` as verification mode: ``elasticsearch.ssl.verificationMode: certificate``
 

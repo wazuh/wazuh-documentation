@@ -315,9 +315,9 @@ It defines what the parenthesis groups contain and the order in which they were 
 +                    +------------+-------------------------------------------------------+
 |                    | user       | An alias to dstuser (only one of the two can be used) |
 +                    +------------+-------------------------------------------------------+
-|                    | srcip      | Source ip                                             |
+|                    | srcip      | Source IP address                                     |
 +                    +------------+-------------------------------------------------------+
-|                    | dstip      | Destination ip                                        |
+|                    | dstip      | Destination IP address                                |
 +                    +------------+-------------------------------------------------------+
 |                    | srcport    | Source port                                           |
 +                    +------------+-------------------------------------------------------+
@@ -358,9 +358,9 @@ It is used to designate a decoder as one in which the first time it matches the 
 +                    +------------+-------------------------------------------------------+
 |                    | user       | An alias to dstuser (only one of the two can be used) |
 +                    +------------+-------------------------------------------------------+
-|                    | srcip      | Source ip                                             |
+|                    | srcip      | Source IP address                                     |
 +                    +------------+-------------------------------------------------------+
-|                    | dstip      | Destination ip                                        |
+|                    | dstip      | Destination  IP address                               |
 +                    +------------+-------------------------------------------------------+
 |                    | srcport    | Source port                                           |
 +                    +------------+-------------------------------------------------------+
@@ -389,7 +389,7 @@ The following decoder will extract the user who generated the alert and the loca
 
 .. code-block:: xml
 
-  </decoder>
+  <decoder name="fts-decoder">
     <fts>srcuser, location</fts>
     ...
   </decoder>

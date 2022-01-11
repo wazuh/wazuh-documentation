@@ -116,7 +116,7 @@ Indicates the maximum size of the queue for polling external keys.
 force_insert
 ^^^^^^^^^^^^
 
-Defines whether the module must insert the agent, even if another agent with the same ID or IP already exists. If enabled, the existing agent will be removed.
+Defines whether the module must insert the agent, even if another agent with the same ID or IP address already exists. If enabled, the existing agent will be removed.
 
 +--------------------+------------------------------------------------------------+
 | **Default value**  | yes                                                        |

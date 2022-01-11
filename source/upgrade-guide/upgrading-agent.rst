@@ -177,7 +177,7 @@ To perform the upgrade locally, follow the instructions for the operating system
 
   .. group-tab:: Solaris 11
 
-    The Wazuh agent upgrading process for Solaris 11 systems requires to download the latest `Solaris 11 i386 installer <https://packages.wazuh.com/|CURRENT_MAJOR|/solaris/i386/11/wazuh-agent_v|WAZUH_LATEST|-sol11-i386.pkg>`_ or `Solaris 11 sparc installer <https://packages.wazuh.com/|CURRENT_MAJOR|/solaris/sparc/11/wazuh-agent_v|WAZUH_LATEST|-sol11-sparc.pkg>`_ depending on the Solaris 11 host architecture. 
+    The Wazuh agent upgrading process for Solaris 11 systems requires to download the latest `Solaris 11 i386 installer <https://packages.wazuh.com/|CURRENT_MAJOR|/solaris/i386/11/wazuh-agent_v|WAZUH_LATEST|-sol11-i386.p5p>`_ or `Solaris 11 sparc installer <https://packages.wazuh.com/|CURRENT_MAJOR|/solaris/sparc/11/wazuh-agent_v|WAZUH_LATEST|-sol11-sparc.p5p>`_ depending on the Solaris 11 host architecture. 
 
     #. Stop the Wazuh agent:
 
@@ -192,13 +192,13 @@ To perform the upgrade locally, follow the instructions for the operating system
 
             .. code-block:: console
               
-              # pkg install -g wazuh-agent_v|WAZUH_LATEST|-sol11-i386.pkg wazuh-agent
+              # pkg install -g wazuh-agent_v|WAZUH_LATEST|-sol11-i386.p5p wazuh-agent
 
         * Solaris 11 sparc:
 
             .. code-block:: console
               
-              # pkg install -g wazuh-agent_v|WAZUH_LATEST|-sol11-sparc.pkg wazuh-agent
+              # pkg install -g wazuh-agent_v|WAZUH_LATEST|-sol11-sparc.p5p wazuh-agent
 
 
     #. Start the Wazuh agent: 

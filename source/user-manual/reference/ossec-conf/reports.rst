@@ -93,7 +93,7 @@ Filter by the log location or agent name.
 srcip
 ^^^^^
 
-Filter by the source IP of the event.
+Filter by the source IP address of the event.
 
 +--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | n/a                                                                                                                                              |

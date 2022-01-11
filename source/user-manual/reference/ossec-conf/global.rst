@@ -259,7 +259,7 @@ This sets the memory size for the event correlation engine.
 white_list
 ^^^^^^^^^^
 
-This specifies an IP for which Active Responses will not be triggered. Only one IP may be specified for each ``<while_list>`` tag, but several IPs may be used by including multiple ``<white_list>`` tags.
+This specifies an IP address for which Active Responses will not be triggered. Only one IP address may be specified for each ``<while_list>`` tag, but several IP addresses may be used by including multiple ``<white_list>`` tags.
 
 +--------------------+----------------------------+
 | **Default value**  | n/a                        |

@@ -134,7 +134,7 @@ events and archives stored in Elasticsearch. More info at `Kibana
 
 4. Kibana will only listen on the loopback interface (localhost) by default,
    which means that it can be only accessed from the same machine. To access
-   Kibana from the any IP set the ``server.host: "0.0.0.0"`` variable, and
+   Kibana from the any IP address set the ``server.host: "0.0.0.0"`` variable, and
    set the port to be the standard port for HTTPS: ``server.port: 443``
 
 
