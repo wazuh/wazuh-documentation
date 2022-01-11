@@ -32,19 +32,19 @@ On both agents as root, install Suricata and its dependencies, along with the Em
 
 .. code-block:: console
 
-    cd /root
-    yum -y install epel-release wget jq
-    curl -O https://copr.fedorainfracloud.org/coprs/jasonish/suricata-6.0/repo/epel-7/jasonish-suricata-6.0-epel-7.repo
-    yum -y install suricata
-    wget https://rules.emergingthreats.net/open/suricata-6.0.3/emerging.rules.tar.gz
-    tar zxvf emerging.rules.tar.gz
-    rm /etc/suricata/rules/* -f
-    mv rules/*.rules /etc/suricata/rules/
-    rm -f /etc/suricata/suricata.yaml
-    wget -O /etc/suricata/suricata.yaml http://www.branchnetconsulting.com/wazuh/suricata.yaml
-    systemctl daemon-reload
-    systemctl enable suricata
-    systemctl start suricata
+    # cd /root
+    # yum -y install epel-release wget jq
+    # curl -O https://copr.fedorainfracloud.org/coprs/jasonish/suricata-6.0/repo/epel-7/jasonish-suricata-6.0-epel-7.repo
+    # yum -y install suricata
+    # wget https://rules.emergingthreats.net/open/suricata-6.0.3/emerging.rules.tar.gz
+    # tar zxvf emerging.rules.tar.gz
+    # rm /etc/suricata/rules/* -f
+    # mv rules/*.rules /etc/suricata/rules/
+    # rm -f /etc/suricata/suricata.yaml
+    # wget -O /etc/suricata/suricata.yaml http://www.branchnetconsulting.com/wazuh/suricata.yaml
+    # systemctl daemon-reload
+    # systemctl enable suricata
+    # systemctl start suricata
 
 
 Trigger NIDS alerts on both agents and see the output
@@ -54,14 +54,14 @@ Trigger NIDS alerts on both agents and see the output
 
     .. code-block:: console
 
-        curl http://testmyids.com
+        # curl http://testmyids.com
 
 #. On the agent, look at the latest alert in both the standard Suricata alert log and also in the JSON alert log.
 
     .. code-block:: console
 
-        tail -n1 /var/log/suricata/fast.log
-        tail -n1 /var/log/suricata/eve.json | jq .
+        # tail -n1 /var/log/suricata/fast.log
+        # tail -n1 /var/log/suricata/eve.json | jq .
 
 #. Observe that the standard log is fairly simple with limited information.
 
@@ -128,7 +128,7 @@ Trigger NIDS alerts on both agents and see the output
 
 #. You might also be interested to see the actual NIDS rule that we triggered (found in ``/etc/suricata/rules/emerging-policy.rules``):
 
-    .. code-block:: console
+    .. code-block:: none
 
         alert http $HOME_NET any -> $EXTERNAL_NET any (msg:"ET POLICY curl User-Agent Outbound"; flow:established,to_server; http.user_agent; content:"curl/"; nocase; startswith;  reference:url,www.useragentstring.com/pages/useragentstring.php; classtype:attempted-recon; sid:2013028; rev:6; metadata:created_at 2011_06_14, updated_at 2021_12_01;)
 
@@ -168,8 +168,7 @@ the shared configuration with their local configuration.
 
    - List the registered agents on wazuh-manager with the ``manage_agents -l`` command.  Note the id numbers of the Linux agents.
 
-     .. code-block:: none
-            :class: output
+     .. code-block:: console
 
             [root@wazuh-manager centos]# /var/ossec/bin/manage_agents -l
 
@@ -229,17 +228,7 @@ the shared configuration with their local configuration.
 
 #. Since the config is proven valid, restart Wazuh manager to deploy the new configuration to the agents.
 
-   a. For Systemd:
-
-      .. code-block:: console
-
-        # systemctl restart wazuh-manager
-
-   b. For SysV Init:
-
-      .. code-block:: console
-
-        # service wazuh-manager restart
+   .. include:: /_templates/common/restart_manager.rst
 
    Each agent should pull down and apply this additional configuration almost immediately. You can find the fetched configuration on each agent at ``/var/ossec/etc/shared/agent.conf``.
 
@@ -285,7 +274,6 @@ Observe how Wazuh decodes Suricata events
 #. Run ``wazuh-logtest`` on wazuh-manager and paste in the copied Suricata alert record, observing how it is analyzed:
 
     .. code-block:: none
-        :class: output
 
         Type one log per line
 
@@ -350,7 +338,7 @@ You may have noticed that there were no Geolocation fields in the Kibana records
 
 #. On wazuh-manager, edit ``/usr/share/filebeat/module/wazuh/alerts/ingest/pipeline.json`` adding the new IP address field inside ``processors``, along the other Geolocation fields:
 
-    .. code-block:: none
+    .. code-block:: json
 
         {
            "geoip": {
@@ -381,7 +369,7 @@ You may have noticed that there were no Geolocation fields in the Kibana records
 
     .. code-block:: console
 
-        curl ``http://testmyids.com``.
+        # curl ``http://testmyids.com``.
 
 #. Look through the new Suricata events in Kibana, observing they now have source geoip fields populated.  Private IP addresses of course cannot be geolocated.
 
