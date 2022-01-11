@@ -34,9 +34,9 @@ On both agents as root, install Suricata and its dependencies, along with the Em
 
     cd /root
     yum -y install epel-release wget jq
-    curl -O https://copr.fedorainfracloud.org/coprs/jasonish/suricata-stable/repo/epel-7/jasonish-suricata-stable-epel-7.repo
+    curl -O https://copr.fedorainfracloud.org/coprs/jasonish/suricata-6.0/repo/epel-7/jasonish-suricata-6.0-epel-7.repo
     yum -y install suricata
-    wget https://rules.emergingthreats.net/open/suricata-4.0/emerging.rules.tar.gz
+    wget https://rules.emergingthreats.net/open/suricata-6.0.3/emerging.rules.tar.gz
     tar zxvf emerging.rules.tar.gz
     rm /etc/suricata/rules/* -f
     mv rules/*.rules /etc/suricata/rules/
@@ -68,7 +68,7 @@ Trigger NIDS alerts on both agents and see the output
     .. code-block:: none
         :class: output
 
-        22:02/09/2018-21:32:13.120749  [**] [1:2100498:7] GPL ATTACK_RESPONSE id check returned root [**] [Classification: Potentially Bad Traffic] [Priority: 2] {TCP} 82.165.177.154:80 -> 172.30.0.30:45504
+        01/11/2022-18:57:14.198005  [**] [1:2013028:6] ET POLICY curl User-Agent Outbound [**] [Classification: Attempted Information Leak] [Priority: 2] {TCP} 10.0.2.15:59010 -> 31.3.245.133:80
 
 #. See how much more data is provided in the JSON output, and how field names are provided.
 
@@ -76,52 +76,61 @@ Trigger NIDS alerts on both agents and see the output
         :class: output
 
         {
-        "timestamp": "2018-02-09T21:32:13.120749+0000",
-        "flow_id": 659410948727787,
-        "in_iface": "eth0",
-        "event_type": "alert",
-        "src_ip": "82.165.177.154",
-        "src_port": 80,
-        "dest_ip": "172.30.0.30",
-        "dest_port": 45504,
-        "proto": "TCP",
-        "alert": {
+          "timestamp": "2022-01-11T18:57:14.198005+0000",
+          "flow_id": 1154611008869142,
+          "in_iface": "eth0",
+          "event_type": "alert",
+          "src_ip": "10.0.2.15",
+          "src_port": 59010,
+          "dest_ip": "31.3.245.133",
+          "dest_port": 80,
+          "proto": "TCP",
+          "tx_id": 0,
+          "alert": {
             "action": "allowed",
             "gid": 1,
-            "signature_id": 2100498,
-            "rev": 7,
-            "signature": "GPL ATTACK_RESPONSE id check returned root",
-            "category": "Potentially Bad Traffic",
-            "severity": 2
+            "signature_id": 2013028,
+            "rev": 6,
+            "signature": "ET POLICY curl User-Agent Outbound",
+            "category": "Attempted Information Leak",
+            "severity": 2,
+            "metadata": {
+              "created_at": [
+                "2011_06_14"
+              ],
+              "updated_at": [
+                "2021_12_01"
+              ]
+            }
           },
-        "http": {
+          "http": {
             "hostname": "testmyids.com",
             "url": "/",
-            "http_user_agent": "curl/7.29.0",
+            "http_user_agent": "curl/7.61.1",
             "http_content_type": "text/html",
             "http_method": "GET",
             "protocol": "HTTP/1.1",
-            "status": 200,
-            "length": 39
+            "status": 301,
+            "redirect": "https://testmyids.com/",
+            "length": 169
           },
-        "app_proto": "http",
-        "flow": {
-            "pkts_toserver": 5,
-            "pkts_toclient": 4,
-            "bytes_toserver": 415,
-            "bytes_toclient": 522,
-            "start": "2018-02-09T21:32:12.861163+0000"
+          "app_proto": "http",
+          "flow": {
+            "pkts_toserver": 4,
+            "pkts_toclient": 3,
+            "bytes_toserver": 313,
+            "bytes_toclient": 540,
+            "start": "2022-01-11T18:57:13.561942+0000"
           }
         }
 
     Not only do we get the basic NIDS alert details, but Suricata also includes http metadata and flow details that can be very helpful for alert assessment.
 
-#. You might also be interested to see the actual NIDS rule that we triggered (found in ``/etc/suricata/rules/emerging-attack_response.rules``):
+#. You might also be interested to see the actual NIDS rule that we triggered (found in ``/etc/suricata/rules/emerging-policy.rules``):
 
     .. code-block:: console
 
-        alert ip any any -> any any (msg:"GPL ATTACK_RESPONSE id check returned root"; content:"uid=0|28|root|29|"; classtype:bad-unknown; sid:2100498; rev:7; metadata:created_at 2010_09_23, updated_at 2010_09_23;)
-
+        alert http $HOME_NET any -> $EXTERNAL_NET any (msg:"ET POLICY curl User-Agent Outbound"; flow:established,to_server; http.user_agent; content:"curl/"; nocase; startswith;  reference:url,www.useragentstring.com/pages/useragentstring.php; classtype:attempted-recon; sid:2013028; rev:6; metadata:created_at 2011_06_14, updated_at 2021_12_01;)
 
 
 Get the Suricata JSON data to Wazuh
@@ -270,7 +279,7 @@ Observe how Wazuh decodes Suricata events
     .. code-block:: json
         :class: output
 
-        {"timestamp":"2018-02-09T21:32:13.120749+0000","flow_id":659410948727787,"in_iface":"eth0","event_type":"alert","src_ip":"82.165.177.154","src_port":80,"dest_ip":"172.30.0.30","dest_port":45504,"proto":"TCP","alert":{"action":"allowed","gid":1,"signature_id":2100498,"rev":7,"signature":"GPL ATTACK_RESPONSE id check returned root","category":"Potentially Bad Traffic","severity":2},"http":{"hostname":"testmyids.com","url":"/","http_user_agent":"curl/7.29.0","http_content_type":"text/html","http_method":"GET","protocol":"HTTP/1.1","status":200,"length":39},"app_proto":"http","flow":{"pkts_toserver":5,"pkts_toclient":4,"bytes_toserver":415,"bytes_toclient":522,"start":"2018-02-09T21:32:12.861163+0000"}}
+        {"timestamp":"2022-01-11T18:57:14.198005+0000","flow_id":1154611008869142,"in_iface":"eth0","event_type":"alert","src_ip":"10.0.2.15","src_port":59010,"dest_ip":"31.3.245.133","dest_port":80,"proto":"TCP","tx_id":0,"alert":{"action":"allowed","gid":1,"signature_id":2013028,"rev":6,"signature":"ET POLICY curl User-Agent Outbound","category":"Attempted Information Leak","severity":2,"metadata":{"created_at":["2011_06_14"],"updated_at":["2021_12_01"]}},"http":{"hostname":"testmyids.com","url":"/","http_user_agent":"curl/7.61.1","http_content_type":"text/html","http_method":"GET","protocol":"HTTP/1.1","status":301,"redirect":"https://testmyids.com/","length":169},"app_proto":"http","flow":{"pkts_toserver":4,"pkts_toclient":3,"bytes_toserver":313,"bytes_toclient":540,"start":"2022-01-11T18:57:13.561942+0000"}}
 
 
 #. Run ``wazuh-logtest`` on wazuh-manager and paste in the copied Suricata alert record, observing how it is analyzed:
@@ -280,50 +289,54 @@ Observe how Wazuh decodes Suricata events
 
         Type one log per line
 
-        {"timestamp":"2018-02-09T21:32:13.120749+0000","flow_id":659410948727787,"in_iface":"eth0","event_type":"alert","src_ip":"82.165.177.154","src_port":80,"dest_ip":"172.30.0.30","dest_port":45504,"proto":"TCP","alert":{"action":"allowed","gid":1,"signature_id":2100498,"rev":7,"signature":"GPL ATTACK_RESPONSE id check returned root","category":"Potentially Bad Traffic","severity":2},"http":{"hostname":"testmyids.com","url":"/","http_user_agent":"curl/7.29.0","http_content_type":"text/html","http_method":"GET","protocol":"HTTP/1.1","status":200,"length":39},"app_proto":"http","flow":{"pkts_toserver":5,"pkts_toclient":4,"bytes_toserver":415,"bytes_toclient":522,"start":"2018-02-09T21:32:12.861163+0000"}}
+        {"timestamp":"2022-01-11T18:57:14.198005+0000","flow_id":1154611008869142,"in_iface":"eth0","event_type":"alert","src_ip":"10.0.2.15","src_port":59010,"dest_ip":"31.3.245.133","dest_port":80,"proto":"TCP","tx_id":0,"alert":{"action":"allowed","gid":1,"signature_id":2013028,"rev":6,"signature":"ET POLICY curl User-Agent Outbound","category":"Attempted Information Leak","severity":2,"metadata":{"created_at":["2011_06_14"],"updated_at":["2021_12_01"]}},"http":{"hostname":"testmyids.com","url":"/","http_user_agent":"curl/7.61.1","http_content_type":"text/html","http_method":"GET","protocol":"HTTP/1.1","status":301,"redirect":"https://testmyids.com/","length":169},"app_proto":"http","flow":{"pkts_toserver":4,"pkts_toclient":3,"bytes_toserver":313,"bytes_toclient":540,"start":"2022-01-11T18:57:13.561942+0000"}}
 
         **Phase 1: Completed pre-decoding.
 
         **Phase 2: Completed decoding.
                 name: 'json'
-                alert.action: 'allowed'
-                alert.category: 'Potentially Bad Traffic'
-                alert.gid: '1'
-                alert.rev: '7'
-                alert.severity: '2'
-                alert.signature: 'GPL ATTACK_RESPONSE id check returned root'
-                alert.signature_id: '2100498'
-                app_proto: 'http'
-                dest_ip: '172.30.0.30'
-                dest_port: '45504'
-                event_type: 'alert'
-                flow.bytes_toclient: '522'
-                flow.bytes_toserver: '415'
-                flow.pkts_toclient: '4'
-                flow.pkts_toserver: '5'
-                flow.start: '2018-02-09T21:32:12.861163+0000'
-                flow_id: '659410948727787.000000'
-                http.hostname: 'testmyids.com'
-                http.http_content_type: 'text/html'
-                http.http_method: 'GET'
-                http.http_user_agent: 'curl/7.29.0'
-                http.length: '39'
-                http.protocol: 'HTTP/1.1'
-                http.status: '200'
-                http.url: '/'
-                in_iface: 'eth0'
-                proto: 'TCP'
-                src_ip: '82.165.177.154'
-                src_port: '80'
-                timestamp: '2018-02-09T21:32:13.120749+0000'
+              	alert.action: 'allowed'
+              	alert.category: 'Attempted Information Leak'
+              	alert.gid: '1'
+              	alert.metadata.created_at: '['2011_06_14']'
+              	alert.metadata.updated_at: '['2021_12_01']'
+              	alert.rev: '6'
+              	alert.severity: '2'
+              	alert.signature: 'ET POLICY curl User-Agent Outbound'
+              	alert.signature_id: '2013028'
+              	app_proto: 'http'
+              	dest_ip: '31.3.245.133'
+              	dest_port: '80'
+              	event_type: 'alert'
+              	flow.bytes_toclient: '540'
+              	flow.bytes_toserver: '313'
+              	flow.pkts_toclient: '3'
+              	flow.pkts_toserver: '4'
+              	flow.start: '2022-01-11T18:57:13.561942+0000'
+              	flow_id: '1154611008869142.000000'
+              	http.hostname: 'testmyids.com'
+              	http.http_content_type: 'text/html'
+              	http.http_method: 'GET'
+              	http.http_user_agent: 'curl/7.61.1'
+              	http.length: '169'
+              	http.protocol: 'HTTP/1.1'
+              	http.redirect: 'https://testmyids.com/'
+              	http.status: '301'
+              	http.url: '/'
+              	in_iface: 'eth0'
+              	proto: 'TCP'
+              	src_ip: '10.0.2.15'
+              	src_port: '59010'
+              	timestamp: '2022-01-11T18:57:14.198005+0000'
+              	tx_id: '0'
 
         **Phase 3: Completed filtering (rules).
                 id: '86601'
-                level: '3'
-                description: 'Suricata: Alert - GPL ATTACK_RESPONSE id check returned root'
-                groups: '['ids', 'suricata']'
-                firedtimes: '1'
-                mail: 'False'
+              	level: '3'
+              	description: 'Suricata: Alert - ET POLICY curl User-Agent Outbound'
+              	groups: '['ids', 'suricata']'
+              	firedtimes: '1'
+              	mail: 'False'
         **Alert to be generated.
 
 #. Notice the decoder used is just called "json".  This decoder is used whenever Wazuh detects JSON records.  With Wazuh's ability to natively decode incoming JSON log records, you do not have to build your own decoders for applications that support JSON logging.
