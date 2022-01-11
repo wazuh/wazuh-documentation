@@ -109,7 +109,7 @@ Wazuh is preconfigured with the following scripts for Linux, located at ``/var/o
 +---------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
 | `restart-wazuh <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/restart-wazuh.c>`_                                        | Automatically restarts Wazuh when ossec.conf has been changed |
 +---------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
-| `route-null <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/route-null.c>`_                                              | Adds an IP to null route                                      |
+| `route-null <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/route-null.c>`_                                              | Adds an IP address to null route                              |
 +---------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
 
 The following preconfigured scripts for Windows are located at ``C:\Program Files\ossec-agent\active-response\bin``. Click each script name to see its source code.

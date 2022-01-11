@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Learn more about the different options for configuring daily reports based on alerts in this section of the Wazuh documentation.  
+  
 .. _reference_ossec_reports:
 
 reports
@@ -90,7 +93,7 @@ Filter by the log location or agent name.
 srcip
 ^^^^^
 
-Filter by the source IP of the event.
+Filter by the source IP address of the event.
 
 +--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | n/a                                                                                                                                              |

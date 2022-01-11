@@ -190,28 +190,6 @@ To ensure that Filebeat has been successfully installed, run the following comma
 
       # filebeat test output
 
-An example response should look as follows:
-
-.. code-block:: none
-  :class: output
-
-  elasticsearch: https://127.0.0.1:9200...
-    parse url... OK
-    connection...
-      parse host... OK
-      dns lookup... OK
-      addresses: 127.0.0.1
-      dial up... OK
-    TLS...
-      security: server's certificate chain verification is enabled
-      handshake... OK
-      TLS version: TLSv1.3
-      dial up... OK
-    talk to server... OK
-    version: 7.12.1
-   
-
-
 
 Disabling repositories
 ----------------------

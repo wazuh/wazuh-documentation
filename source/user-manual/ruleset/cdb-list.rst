@@ -8,7 +8,7 @@
 Using CDB lists
 ===============
 
-Wazuh is able to check if a field extracted during the decoding phase is in a CDB list (constant database). The main use case of this feature is to create a white/black list of users, file hashes, IPs or domain names.
+Wazuh is able to check if a field extracted during the decoding phase is in a CDB list (constant database). The main use case of this feature is to create a white/black list of users, file hashes, IP addresses or domain names.
 
 Creating a CDB list
 -------------------
@@ -160,4 +160,4 @@ CDB lists examples
     <group>list1,list2,</group>
   </rule>
 
-In this example, the described rules check if an IP is in the *List-one*, in the *List-two* or in both.
+In this example, the described rules check if an IP address is in the *List-one*, in the *List-two* or in both.

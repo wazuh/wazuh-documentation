@@ -12,7 +12,7 @@ Registering Wazuh agents - Troubleshooting
 The Wazuh agent registers successfully but disappears after another Wazuh agent is being registered
 ---------------------------------------------------------------------------------------------------
 
-By default, the Wazuh manager attaches the Wazuh agent to the visible IP of the Wazuh agent. If the Wazuh manager or the Wazuh agents are, for example, behind a NAT, the Wazuh agent should be registered with IP address ``any``, which works as ``0.0.0.0/0``.
+By default, the Wazuh manager attaches the Wazuh agent to the visible IP address of the Wazuh agent. If the Wazuh manager or the Wazuh agents are, for example, behind a NAT, the Wazuh agent should be registered with IP address ``any``, which works as ``0.0.0.0/0``.
 
 
 #. To set up this behavior for a single registration:

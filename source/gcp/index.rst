@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
   :description: Learn more about how to monitor Google Cloud Platform services with Wazuh in this section of our documentation. 

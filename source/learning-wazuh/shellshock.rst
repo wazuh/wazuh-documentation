@@ -200,8 +200,8 @@ Run the same curl probe just like last time:
         # curl --insecure $ShellshockTarget -H "User-Agent: () { :; }; /bin/cat /etc/passwd"
 
 The command will quickly download the webpage to ``/dev/null``.  Now repeat the same curl command.
-This time the command seems to hang, because the agent has added the attacking IP to
-its firewall's drop list.  If you have used the agent's IP instead of ``localhost``
+This time the command seems to hang, because the agent has added the attacking IP address to
+its firewall's drop list.  If you have used the agent's IP address instead of ``localhost``
 you may confirm this with an iptables command on the attacked server:
 
     .. code-block:: console
@@ -243,7 +243,7 @@ this event 5 minutes apart.
 
 
 
-Observe that the attacked server is no longer blocking the offending IP by
+Observe that the attacked server is no longer blocking the offending IP address by
 requesting the webpage again, or by using an iptables command on the attacked server:
 
     .. code-block:: console
@@ -294,7 +294,7 @@ agents will block the attacker even when only one of them is targeted.
     </active-response>
 
 Run the same malicious ``curl`` probe as before, and then confirm
-that all Linux systems configured are blocking the attacker's IP.
+that all Linux systems configured are blocking the attacker's IP address.
 
 
 AR Scenario 3 - Make windows null route the attacker
@@ -331,7 +331,7 @@ Restart the manager:
         # service wazuh-manager restart
 
 Run the same probe again to the web server.  Observe that the output of the
-Windows command line `route print /4` now shows a null route for the IP of the
+Windows command line `route print /4` now shows a null route for the IP address of the
 attacker.  It will be in the "Persistent Routes:" section of the output.
 
     .. code-block:: none
@@ -371,12 +371,12 @@ removed across all agents.
     while an active response null routing block is in place, has the undesirable
     effect of making the block permanent such that it will not be cleared
     automatically.  In that case it it necessary to clear the orphaned null route
-    with a `route  delete N.N.N.N` command where N.N.N.N is the null routed IP.
+    with a `route  delete N.N.N.N` command where N.N.N.N is the null routed IP address.
 
 We hope you enjoyed getting a taste of the Wazuh **Active Response** capability.
-While blocking an attacking IP is probably the most popular use made of Wazuh AR,
+While blocking an attacking IP address is probably the most popular use made of Wazuh AR,
 it is far more broadly useful than that.  In addition to countermeasures taken
-against attacking IPs or targeted account names, AR can also be used to take
+against attacking IP addresses or targeted account names, AR can also be used to take
 any kind of custom action in response to any kind of rule firing.
 
 - **Custom alerting**: Collect additional context and send a detailed custom

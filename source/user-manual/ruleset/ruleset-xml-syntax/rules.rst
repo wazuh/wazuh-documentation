@@ -1023,7 +1023,7 @@ Used as a requisite to trigger the rule. It will check the content of the field 
 |                    | `pcre2 <regex.html#pcre2-syntax>`_ expression.                |
 +--------------------+---------------------------------------------------------------+
 
-The location identifies the origin of the input. If the event comes from an agent, its name and registered IP (as it was added) is appended to the location.
+The location identifies the origin of the input. If the event comes from an agent, its name and registered IP address (as it was added) is appended to the location.
 
 Example of a location for a log pulled from "/var/log/syslog" in an agent with name "dbserver" and registered with IP "any":
 
@@ -1411,7 +1411,7 @@ This option is used in conjunction with ``frequency`` and ``timeframe``.
 same_srcip
 ^^^^^^^^^^
 
-Specifies that the decoded source ip must be the same.
+Specifies that the decoded source IP address must be the same.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+----------------+
@@ -1421,7 +1421,7 @@ This option is used in conjunction with ``frequency`` and ``timeframe``.
 different_srcip
 ^^^^^^^^^^^^^^^
 
-Specifies that the decoded source ip must be different.
+Specifies that the decoded source IP address must be different.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+----------------------+
@@ -1431,7 +1431,7 @@ This option is used in conjunction with ``frequency`` and ``timeframe``.
 same_dstip
 ^^^^^^^^^^
 
-Specifies that the decoded destination ip must be the same.
+Specifies that the decoded destination IP address must be the same.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+----------------+
@@ -1441,7 +1441,7 @@ This option is used in conjunction with ``frequency`` and ``timeframe``.
 different_dstip
 ^^^^^^^^^^^^^^^
 
-Specifies that the decoded destination ip must be different.
+Specifies that the decoded destination IP address must be different.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+----------------------+
@@ -1917,11 +1917,11 @@ Perform a CDB lookup using an ossec list.  This is a fast on-disk database which
 +-----------------+-------------------------+---------------------------------------------------------------------------------------------------------+
 |                 | match_key_value         | searched for in the cdb. It will be compared with regex from attribute check_value.                     |
 +-----------------+-------------------------+---------------------------------------------------------------------------------------------------------+
-|                 | address_match_key       | IP and the key to search within the cdb and will match if they key is present.                          |
+|                 | address_match_key       | IP address and the key to search within the cdb and will match if they key is present.                  |
 +-----------------+-------------------------+---------------------------------------------------------------------------------------------------------+
-|                 | not_address_match_key   | IP the key to search and will match if it IS NOT present in the database                                |
+|                 | not_address_match_key   | IP address and the key to search and will match if it IS NOT present in the database.                   |
 +-----------------+-------------------------+---------------------------------------------------------------------------------------------------------+
-|                 | address_match_key_value | IP to search in the cdb. It will be compared with regex from attribute check_value.                     |
+|                 | address_match_key_value | IP address to search in the cdb. It will be compared with regex from attribute check_value.             |
 +-----------------+-------------------------+---------------------------------------------------------------------------------------------------------+
 | **check_value** | regex for matching on the value pulled out of the cdb when using types: address_match_key_value, match_key_value                  |
 +-----------------+-----------------------------------------------------------------------------------------------------------------------------------+

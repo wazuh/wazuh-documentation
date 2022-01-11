@@ -63,7 +63,9 @@ It defines the criteria used to execute a specific command:
 
 - The ``location`` setting as ``local``. It means that the active response is executed on the agent that generates the alert.
 
-- You can write a list of rule IDs that will trigger the active response in the ``rules_id`` setting. This example uses rule ``550``, new file added to the system, and rule ``554``, file modified in the system.
+- You can write a list of rule IDs that will trigger the active response in the ``rules_id`` setting. This example uses the following rule IDs.
+   * Rule ``550``: file modified in the system
+   * Rule ``554``: new file added to the system
 
 Rules and decoders
 ^^^^^^^^^^^^^^^^^^
@@ -258,7 +260,7 @@ Deployment script
 
 It is typically a bash script that tries to download the malware itself by connecting to an SFTP server. This script even updates the malware if the host was already compromised.
 
-The main IoCs to look for in this component are the IP and files that it copies to the system:
+The main IoCs to look for in this component are the IP addresses and files that it copies to the system:
 
 .. code-block:: none
 

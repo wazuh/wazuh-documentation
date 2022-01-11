@@ -137,7 +137,7 @@ On success example:
 
 **address**
 
-    Allowed source address range in CIDR format. If specified, the manager will only accept the agent if its source IP matches this address.
+    Allowed source address range in CIDR format. If specified, the manager will only accept the agent if its source IP address matches this address.
 
     +--------------------+----------------------------+
     | Format             | CIDR. Netmask is optional. |

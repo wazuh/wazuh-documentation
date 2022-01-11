@@ -39,13 +39,26 @@ removedUrls['x.y'] = [
 /* Pages added in 4.2 */
 
 newUrls['4.2'] = [
-  '/release-notes/release-4-2-5.html',
+  '/proof-of-concept-guide/detect-malware-yara-integration.html',
+  '/proof-of-concept-guide/poc-vulnerability-detection.html',
+  '/proof-of-concept-guide/detect-remove-malware-virustotal.html',
+  '/proof-of-concept-guide/poc-detect-trojan.html',
+  '/proof-of-concept-guide/poc-integrate-slack.html',
+  '/proof-of-concept-guide/detect-web-attack-sql-injection.html',
+  '/proof-of-concept-guide/detect-web-attack-shellshock.html',
+  '/proof-of-concept-guide/integrate-network-ids-suricata.html',
+  '/proof-of-concept-guide/integrate-osquery.html',
+  '/proof-of-concept-guide/detect-unauthorized-processes-netcat.html',
+  '/proof-of-concept-guide/block-malicious-actor-ip-reputation.html',
+  '/proof-of-concept-guide/poc-file-integrity-monitoring.html',
+  '/proof-of-concept-guide/monitoring-docker.html',
+  '/proof-of-concept-guide/detect-brute-force-attack.html',
+  '/proof-of-concept-guide/aws-infrastructure-monitoring.html',
+  '/proof-of-concept-guide/audit-commands-run-by-user.htm',
+  '/proof-of-concept-guide/index.html',
+  '/deploying-with-ansible/guide/install-opendistro-server.html',
+  '/deploying-with-ansible/roles/wazuh-opendistro.rst',
   '/amazon-machine-images/amazon-machine-images.html',
-  '/release-notes/release-4-2-4.html',
-  '/release-notes/release-4-2-3.html',
-  '/release-notes/release-4-2-2.html',
-  '/release-notes/release_4_2_1.html',
-  '/release-notes/release_4_2_0.html',
   '/user-manual/capabilities/active-response/ar-use-cases/removing-malware.html',
   '/user-manual/capabilities/active-response/ar-use-cases/wazuh-with-yara.html',
   '/user-manual/capabilities/active-response/ar-use-cases/blocking-attacks.html',
@@ -70,11 +83,11 @@ newUrls['4.2'] = [
   '/user-manual/reference/statistics-files/wazuh-remoted-state.html',
   '/user-manual/reference/statistics-files/wazuh-logcollector-state.html',
   '/user-manual/reference/tools/wazuh-control.html',
-  '/user-manual/reference/tools/wazuh-regex.html',  
+  '/user-manual/reference/tools/wazuh-regex.html',
   '/cloud-service/index.html',
   '/cloud-service/glossary.html',
   '/cloud-service/account-billing/index.html',
-  '/cloud-service/account-billing/add-billing-details.html',
+  '/cloud-service/account-billing/manage-billing-details.html',
   '/cloud-service/account-billing/billing-faq.html',
   '/cloud-service/account-billing/update-billing.html',
   '/cloud-service/account-billing/billing-history.html',
@@ -87,6 +100,9 @@ newUrls['4.2'] = [
   '/cloud-service/apis/index.html',
   '/cloud-service/apis/reference.html',
   '/cloud-service/cold-storage/index.html',
+  '/cloud-service/cold-storage/access.rst',
+  '/cloud-service/cold-storage/configuration.rst',
+  '/cloud-service/cold-storage/filename-format.rst',
   '/cloud-service/getting-started/index.html',
   '/cloud-service/getting-started/starting-faq.html',
   '/cloud-service/your-environment/index.html',
@@ -100,7 +116,7 @@ newUrls['4.2'] = [
   '/cloud-service/your-environment/understanding-storage.html',
   '/cloud-service/getting-started/sign-up-trial.html',
   '/cloud-service/getting-started/access-wazuh-wui.html',
-  '/cloud-service/getting-started/register-agents.html', 
+  '/cloud-service/getting-started/register-agents.html',
   '/getting-started/use-cases/index.html',
   '/getting-started/use-cases/cloud-security.html',
   '/getting-started/use-cases/configuration-assessment.html',
@@ -115,7 +131,7 @@ newUrls['4.2'] = [
   '/getting-started/components/elastic-stack.html',
   '/getting-started/components/wazuh-agent.html',
   '/getting-started/components/wazuh-server.html',
-  '/installation-guide/more-installation-alternatives/offline-all-in-one.html',
+  '/installation-guide/more-installation-alternatives/offline-installation.html',
   '/installation-guide/more-installation-alternatives/elastic-stack/all-in-one-deployment/all-in-one.html',
   '/installation-guide/more-installation-alternatives/elastic-stack/distributed-deployment/step-by-step-installation/wazuh-cluster/wazuh-single-node-cluster.html',
   '/installation-guide/more-installation-alternatives/elastic-stack/distributed-deployment/step-by-step-installation/wazuh-cluster/wazuh-multi-node-cluster.html',
@@ -188,6 +204,10 @@ newUrls['4.2'] = [
   '/release-notes/release-4-1-5.html',
   '/release-notes/release-4-2-0.html',
   '/release-notes/release-4-2-1.html',
+  '/release-notes/release-4-2-2.html',
+  '/release-notes/release-4-2-3.html',
+  '/release-notes/release-4-2-4.html',
+  '/release-notes/release-4-2-5.html',
   '/user-manual/api/securing-api.html',
   '/user-manual/configuring-cluster/cluster-management.html',
   '/user-manual/manager/manual-email-report/smtp-authentication.html',
@@ -202,6 +222,7 @@ newUrls['4.2'] = [
   '/user-manual/capabilities/vulnerability-detection/compatibility-matrix.html',
   '/user-manual/capabilities/vulnerability-detection/cpe-helper.html',
   '/user-manual/capabilities/vulnerability-detection/how-it-works.html',
+  '/user-manual/capabilities/file-integrity/fim-fields-rule-mapping.html',
   '/user-manual/reference/ossec-conf/rule-test.html',
   '/user-manual/reference/ossec-conf/client-buffer.html',
   '/user-manual/reference/ossec-conf/email-alerts.html',
@@ -224,6 +245,8 @@ newUrls['4.2'] = [
 ];
 
 removedUrls['4.2'] = [
+  '/deploying-with-ansible/guide/install-elk-server.html',
+  '/deploying-with-ansible/roles/wazuh-elasticsearch.rst',
   '/user-manual/kibana-app/connect-kibana-app.html',
   '/user-manual/reference/daemons/ossec-agentd.html',
   '/user-manual/reference/daemons/ossec-agentlessd.html',
@@ -334,8 +357,6 @@ removedUrls['4.2'] = [
   '/release-notes/release_4_1_3.html',
   '/release-notes/release_4_1_4.html',
   '/release-notes/release_4_1_5.html',
-  '/release-notes/release_4_2_0.html',
-  '/release-notes/release_4_2_1.html',
   '/user-manual/api/securing_api.html',
   '/user-manual/configuring-cluster/cluster_management.html',
   '/user-manual/manager/manual-email-report/smtp_authentication.html',
@@ -370,6 +391,16 @@ removedUrls['4.2'] = [
 ];
 
 redirections.push(
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/deploying-with-ansible/roles/wazuh-elasticsearch.rst',
+      '4.2': '/deploying-with-ansible/roles/wazuh-opendistro.rst',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/deploying-with-ansible/guide/install-elk-server.html',
+      '4.2': '/deploying-with-ansible/guide/install-opendistro-server.html',
+    },
     {
       'target': ['4.1=>4.2', '4.2=>4.1'],
       '4.1': '/user-manual/reference/daemons/ossec-agentd.html',
@@ -887,16 +918,6 @@ redirections.push(
     },
     {
       'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_4_2_0.html',
-      '4.2': '/release-notes/release-4-2-0.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_4_2_1.html',
-      '4.2': '/release-notes/release-4-2-1.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
       '4.1': '/user-manual/api/securing_api.html',
       '4.2': '/user-manual/api/securing-api.html',
     },
@@ -1114,7 +1135,7 @@ redirections.push(
     'target': ['4.0=>4.1', '4.1=>4.0'],
     '4.0': '/installation-guide/wazuh-agent/deployment_variables/linux/deployment_variables_zypper.html',
     '4.1': '/installation-guide/wazuh-agent/deployment_variables/deployment_variables_linux.html',
-  },  
+  },
   {
     'target': ['4.1=>4.0'],
     '4.0':  '/installation-guide/more-installation-alternatives/index.html',
@@ -2030,7 +2051,7 @@ redirections.push(
       '3.13': '/installation-guide/installing-wazuh-agent/linux/oracle5/wazuh_agent_package_oracle5.html',
       '4.0':  '/installation-guide/wazuh-agent/index.html',
     },
-); 
+);
 
 /* *** RELEASE 3.13 ****/
 

@@ -167,10 +167,10 @@ ip_update_interval
 
 .. versionadded:: 4.2.0
 
-Specifies how often an agent will query the control module for its main IP.
+Specifies how often an agent will query the control module for its main IP address.
 
 
-Any value equal to or lower than the configured ``notify_time`` will cause the IP to be queried on each keep-alive message.
+Any value equal to or lower than the configured ``notify_time`` will cause the IP address to be queried on each keep-alive message.
 
 +--------------------+-----------------------------+
 | **Default value**  | 0                           |
@@ -275,7 +275,7 @@ Enables/disables agent enrollment.
 manager_address
 ^^^^^^^^^^^^^^^
 
-Hostname or IP of the manager where the agent will be enrolled. If no value is set, the agent will try enrolling to the same manager that was specified for connection.
+Hostname or IP address of the manager where the agent will be enrolled. If no value is set, the agent will try enrolling to the same manager that was specified for connection.
 
 +--------------------+---------------------------------------+
 | **Default value**  | n/a                                   |
@@ -321,12 +321,12 @@ Groups name to which the agent belongs.
 agent_address
 ^^^^^^^^^^^^^
 
-Force IP address from the agent. If this is not set manager will extract source IP from enrollment message.
+Force IP address from the agent. If this is not set manager will extract source IP address from enrollment message.
 
 +--------------------+---------------------------------------------+
 | **Default value**  | src                                         |
 +--------------------+---------------------------------------------+
-| **Allowed values** | string - Valid IP.                          |
+| **Allowed values** | string - Valid IP address                   |
 +--------------------+---------------------------------------------+
 
 ssl_cipher
@@ -413,7 +413,7 @@ Time that agentd should wait after a successful registration.
 use_source_ip
 ^^^^^^^^^^^^^
 
-Force manager to compute IP from agent message.
+Force manager to compute IP address from agent message.
 
 +--------------------+-------------------------------------+
 | **Default value**  | no                                  |

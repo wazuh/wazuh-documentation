@@ -46,8 +46,8 @@ In order to register Wazuh agent, it is necessary to provide the name and the IP
 
 There are several ways to set the Wazuh agent's IP:
 
- - ``Any IP``: Allows the Wazuh agent to connect with any IP address. Example: ``Server1`` has ``any`` IP.
- - ``Fixed IP``: Allows the Wazuh agent to connect only with the specified IP. Example: ``ServerProd`` has the IP ``192.246.247.247``.
- - ``Range IP``: Allows the Wazuh agent to connect with the IP within the specified range. Example: ``DBServer`` has the IP range ``192.168.0.1/24``.
+ - ``Any IP``: Allows the Wazuh agent to connect with any IP address. Example: ``Server1`` has ``any`` IP address.
+ - ``Fixed IP``: Allows the Wazuh agent to connect only with the specified IP address. Example: ``ServerProd`` has the IP address ``192.246.247.247``.
+ - ``Range IP``: Allows the Wazuh agent to connect with the IP address within the specified range. Example: ``DBServer`` has the IP address range ``192.168.0.1/24``.
 
-Registration methods using ``agent-auth`` utility can automatically detect the IP of the Wazuh agent during the registration process.
+Registration methods using ``agent-auth`` utility can automatically detect the IP address of the Wazuh agent during the registration process.

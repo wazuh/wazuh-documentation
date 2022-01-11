@@ -33,7 +33,7 @@ Wazuh core
 **Log collection**
 
 - Allowed JSON escaping for logs in the output format.
-- Added the host's primary IP in the output format.
+- Added the host's primary IP address in the output format.
 - Wildcards don't detect directories as log files any more.
 
 **Analysis engine**

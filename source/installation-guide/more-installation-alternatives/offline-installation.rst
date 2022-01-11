@@ -3,8 +3,8 @@
 .. meta::
   :description: Discover the offline step-by-step process to install Wazuh and OpenDistro components for Elasticsearch in an all-in-one deployment without connection to the Internet.
 
-Offline all-in-one installation
-===============================
+Offline installation
+====================
 
 You can install Wazuh even when there is no connection to the Internet. Installing the solution offline involves downloading the Wazuh components to later install them on a system with no internet connection. Although in this section the Wazuh server and Elastic Stack are installed and configured on the same host in an all-in-one deployment, each component can also be installed on a separate host as a distributed deployment, depending on your environment needs. For more information, check the :ref:`Requirements <installation_requirements>` section.
 
@@ -15,7 +15,7 @@ Prerequisites
 
 - ``curl``, ``tar``, and ``setcap`` need to be installed in the target system where the offline installation will be carried out. ``gnupg`` might need to be installed as well for some Debian-based systems.
 
-- You can use ``unalias cp`` to avoid being asked for confirmation to overwrite files if the `alias cp` command showed `cp` as an alias for the `cp -i` command.
+- In some systems, the command ``cp`` is an alias for ``cp -i`` — you can check this by running ``alias cp``. If this is your case, use ``unalias cp`` to avoid being asked for confirmation to overwrite files.
 
 Download the packages and configuration files
 ---------------------------------------------
@@ -299,7 +299,7 @@ Installing Kibana
        # cp ./opendistro_files/kibana/kibana.yml /etc/kibana/
 
     .. note::
-      ``server.host: 0.0.0.0`` in ``/etc/kibana/kibana.yml`` means that Kibana can be accessed from the outside and accepts all the available IPs of the host. This value can be changed for a specific IP if needed.
+      ``server.host: 0.0.0.0`` in ``/etc/kibana/kibana.yml`` means that Kibana can be accessed from the outside and accepts all the available IP addresses of the host. This value can be changed for a specific IP address if needed.
   
 #. Create the ``/usr/share/kibana/data`` directory.
 

@@ -99,7 +99,7 @@ The following fields are received in FIM alerts when who-data is enabled:
 Alert examples
 ^^^^^^^^^^^^^^
 
-In the following example we can see how the user *Smith* added a new IP to the file ``/etc/hosts.allow`` using the *nano* editor with **sudo** privileges:
+In the following example we can see how the user *Smith* added a new IP address to the file ``/etc/hosts.allow`` using the *nano* editor with **sudo** privileges:
 
 
 Alert in log format:

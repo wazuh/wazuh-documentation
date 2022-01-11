@@ -20,19 +20,19 @@ The script allows installing both Elasticsearch and Kibana, either together or o
 +-------------------------------+----------------------------------------------------------------------------------------------------------------+
 | Options                       | Purpose                                                                                                        |
 +===============================+================================================================================================================+
-| -e / --install-elasticsearch  | It installs Open Distro for Elasticsearch. It cannot be used together with option ``-k``.                      |
+| -e / --install-elasticsearch  | Installs Open Distro for Elasticsearch (cannot be used together with option ``-k``)                            |
 +-------------------------------+----------------------------------------------------------------------------------------------------------------+
-| -k / --install-kibana         | It installs Open Distro for Kibana. It cannot be used together with option ``-e``.                             |
+| -k / --install-kibana         | Installs Open Distro for Kibana (cannot be used together with option ``-e``)                                   |
 +-------------------------------+----------------------------------------------------------------------------------------------------------------+
-| -n / --node-name              | It indicates the name of the instance.                                                                         |
+| -n / --node-name              | Name of the node                                                                                               |
 +-------------------------------+----------------------------------------------------------------------------------------------------------------+
-| -c / --create-certificates    | It generates the certificates for all the nodes indicated on the configuration file (only for multi-node mode).|
+| -c / --create-certificates    | Generates the certificates for all the indicated nodes                                                         |
 +-------------------------------+----------------------------------------------------------------------------------------------------------------+
-| -d / --debug                  | It shows the complete installation output.                                                                     |
+| -d / --debug                  | Shows the complete installation output                                                                         |
 +-------------------------------+----------------------------------------------------------------------------------------------------------------+
-| -i / --ignore-healthcheck     | It ignores the health check.                                                                                   |
+| -i / --ignore-healthcheck     | It ignores the health-check                                                                                    |
 +-------------------------------+----------------------------------------------------------------------------------------------------------------+
-| -h / --help                   | It shows help.                                                                                                 |
+| -h / --help                   | Shows help                                                                                                     |
 +-------------------------------+----------------------------------------------------------------------------------------------------------------+
 
 Installing Open Distro for Elasticsearch
@@ -55,9 +55,9 @@ Choose the cluster mode between single-node or multi-node:
 
     **Configure the installation** 
       
-      Edit the ``config.yml`` file to specify the IP you want the Elasticsearch service to bind to. 
+      Edit the ``config.yml`` file to specify the IP address you want the Elasticsearch service to bind to. 
 
-      .. note:: To create valid certificates for the communication between the various components of Wazuh and the Elastic Stack, external IPs must be used.
+      .. note:: To create valid certificates for the communication between the various components of Wazuh and the Elastic Stack, external IP addresses must be used.
 
       .. code-block:: yaml
         :emphasize-lines: 5, 18, 21
@@ -157,9 +157,9 @@ Choose the cluster mode between single-node or multi-node:
 
         - ``<elastic_cluster>``: Name of the cluster 
         - ``<master_node_x>``: Name of the node ``X``
-        - ``<elasticsearch_ip_nodeX>``: Elasticsearch IP of the node ``X``
-        - ``<kibana_ip>``: Kibana server IP
-        - ``<wazuh_master_server_IP>``: Wazuh Server IP
+        - ``<elasticsearch_ip_nodeX>``: Elasticsearch IP address of the node ``X``
+        - ``<kibana_ip>``: Kibana server IP address
+        - ``<wazuh_master_server_IP>``: Wazuh Server IP address
 
       You can add as many Elasticsearch nodes as needed. To generate certificates for them, the ``opendistro_security.nodes_dn`` must be also updated, adding the information of the new certificates. There must be the same number of certificates rows as nodes are on the installation.
 
