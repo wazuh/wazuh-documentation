@@ -250,15 +250,14 @@ Wazuh Kibana plugin
 - `#3691 <https://github.com/wazuh/wazuh-kibana-app/pull/3691>`_ Columns selector in agents table are added.
 - `#3121 <https://github.com/wazuh/wazuh-kibana-app/pull/3121>`_ Ossec to wazuh is changed in all sample-data files.
 - `#3279 <https://github.com/wazuh/wazuh-kibana-app/pull/3279>`_ Empty fields are modified in FIM tables and ``syscheck.value_name`` in discovery now show an empty tag for visual clarity.
-- `#3346 <https://github.com/wazuh/wazuh-kibana-app/pull/3346>`_ Adapted the Mitre tactics and techniques resources to use the API endpoints.
-- `#3517 <https://github.com/wazuh/wazuh-kibana-app/pull/3517>`_ Moved the filterManager subscription to the hook useFilterManager.
-- `#3529 <https://github.com/wazuh/wazuh-kibana-app/pull/3529>`_ Change filter from is to is one of in custom searchbar.
-- `#3494 <https://github.com/wazuh/wazuh-kibana-app/pull/3494>`_ Refactored as module tabs and buttons are rendered.
-- `#3663 <https://github.com/wazuh/wazuh-kibana-app/pull/3663>`_ Updated depracated and new references authd.
-- `#3549 <https://github.com/wazuh/wazuh-kibana-app/pull/3549>`_ Added time subscription to Discover component.
-- `#3494 <https://github.com/wazuh/wazuh-kibana-app/pull/3494>`_ Refactored as module tabs and buttons are rendered.
+- `#3346 <https://github.com/wazuh/wazuh-kibana-app/pull/3346>`_ The Mitre tactics and techniques resources are adapted to use the API endpoints.
+- `#3517 <https://github.com/wazuh/wazuh-kibana-app/pull/3517>`_ The filterManager subscription are moved to the hook useFilterManager.
+- `#3529 <https://github.com/wazuh/wazuh-kibana-app/pull/3529>`_ Filter is changed from "is" to "is one of" in custom searchbar.
+- `#3494 <https://github.com/wazuh/wazuh-kibana-app/pull/3494>`_ Refactor ``modules-defaults.js`` to define what buttons and components are rendered in each module tab.
+- `#3663 <https://github.com/wazuh/wazuh-kibana-app/pull/3663>`_ Depracated and new references ``authd`` is updated.
+- `#3549 <https://github.com/wazuh/wazuh-kibana-app/pull/3549>`_ Time subscription is added to Discover component.
 - `#3446 <https://github.com/wazuh/wazuh-kibana-app/pull/3446>`_ Testing logs using the Ruletest Test don't display the rule information if not matching a rule.
-- `#3649 <https://github.com/wazuh/wazuh-kibana-app/pull/3649>`_ Changed format permissions in FIM inventory.
+- `#3649 <https://github.com/wazuh/wazuh-kibana-app/pull/3649>`_ The format permissions is changed in FIM inventory.
 - `#3686 <https://github.com/wazuh/wazuh-kibana-app/pull/3686>`_ Changed of request for one that does not return data that is not necessary to optimize times.
 
 
