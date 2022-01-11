@@ -8,9 +8,6 @@
 Using Wazuh to monitor Microsoft Azure
 ======================================
 
-
-.. versionadded:: 3.7.0
-
 This section provides instructions for monitoring **Microsoft Azure** infrastructures, such as:
 
 - How to **monitor all the activity happening in the infrastructure**, for instance, changes that occur in virtual machines, activation of alerts, health data information as well as control data.

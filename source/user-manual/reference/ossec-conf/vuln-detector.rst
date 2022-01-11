@@ -8,8 +8,6 @@
 vulnerability-detector
 ======================
 
-.. versionadded:: 3.2.0
-
 This section covers the configuration for the :ref:`vulnerability-detection` module.
 
 .. topic:: XML section name

@@ -460,10 +460,6 @@ Specifies how to treat the `NULL` fields coming from the JSON events. Only for t
 | **Allowed values** | string (It shows the NULL value as string)                              |
 +                    +-------------------------------------------------------------------------+
 |                    | discard (It discards NULL fields and doesn't store them into the alert) |
-+                    +-------------------------------------------------------------------------+
-|                    | empty (It shows the NULL field as an empty field)                       |
-|                    |                                                                         |
-|                    | .. deprecated:: 3.7                                                     |
 +--------------------+-------------------------------------------------------------------------+
 
 json_array_structure

@@ -73,8 +73,6 @@ A good example is the firewall-block command which expects the ``srcip`` field i
 extra_args
 ^^^^^^^^^^
 
-.. versionadded:: 3.5.0
-
 Allows the user to customize the parameters sent to the active response script living on the agent side.
 
 +--------------------+----------------------------------------------------------------+

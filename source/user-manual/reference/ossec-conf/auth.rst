@@ -19,8 +19,6 @@ auth
 
 This section shows the options for the registration service.
 
-.. versionadded:: 2.1
-
 Options
 -------
 
@@ -207,8 +205,6 @@ Sets the list of ciphers for network communication using SSL.
 +--------------------+----------------------------------------------------+
 
 The format of this parameter is described in `SSL ciphers <https://www.openssl.org/docs/man1.1.0/apps/ciphers.html>`_.
-
-.. versionadded:: 3.0.0
 
 Default configuration
 ---------------------

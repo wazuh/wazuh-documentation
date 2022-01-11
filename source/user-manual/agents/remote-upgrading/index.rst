@@ -8,8 +8,6 @@
 Remote upgrading
 ==================
 
-.. versionadded:: 3.0.0
-
 .. topic:: Contents
 
     .. toctree::

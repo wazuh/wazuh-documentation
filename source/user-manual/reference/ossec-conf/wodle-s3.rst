@@ -8,8 +8,6 @@
 wodle name="aws-s3"
 ===================
 
-.. versionadded:: 3.2.0
-
 .. topic:: XML section name
 
 	.. code-block:: xml
@@ -28,9 +26,6 @@ Main options
 
 - `disabled`_
 - `interval`_
-- `access_key`_
-- `secret_key`_
-- `remove_from_bucket`_
 - `run_on_start`_
 - `skip_on_error`_
 - `bucket type`_
@@ -41,14 +36,6 @@ Main options
 | Main options          | Allowed values              | Mandatory/Optional |
 +=======================+=============================+====================+
 | `disabled`_           | yes, no                     | Mandatory          |
-+-----------------------+-----------------------------+--------------------+
-| `bucket`_             | Any valid bucket name       | Deprecated         |
-+-----------------------+-----------------------------+--------------------+
-| `access_key`_         | Alphanumerical key          | Deprecated         |
-+-----------------------+-----------------------------+--------------------+
-| `secret_key`_         | Alphanumerical key          | Deprecated         |
-+-----------------------+-----------------------------+--------------------+
-| `remove_from_bucket`_ | yes, no                     | Optional           |
 +-----------------------+-----------------------------+--------------------+
 | `skip_on_error`_      | yes, no                     | Optional           |
 +-----------------------+-----------------------------+--------------------+
@@ -74,58 +61,6 @@ Disables the AWS-S3 wodle.
 +--------------------+-----------------------------+
 | **Allowed values** | yes, no                     |
 +--------------------+-----------------------------+
-
-bucket
-^^^^^^
-
-.. deprecated::3.6.0
-
-Name of the S3 bucket from where logs are read.
-
-+--------------------+-----------------------------+
-| **Default value**  | N/A                         |
-+--------------------+-----------------------------+
-| **Allowed values** | Any valid bucket name       |
-+--------------------+-----------------------------+
-
-access_key
-^^^^^^^^^^
-
-.. deprecated::3.6.0
-
-The access key ID for the IAM user with the permission to read logs from the bucket.
-
-+--------------------+--------------------------+
-| **Default value**  | N/A                      |
-+--------------------+--------------------------+
-| **Allowed values** | Any alphanumerical key.  |
-+--------------------+--------------------------+
-
-secret_key
-^^^^^^^^^^
-
-.. deprecated::3.6.0
-
-The secret key created for the IAM user with the permission to read logs from the bucket.
-
-+--------------------+--------------------------+
-| **Default value**  | N/A                      |
-+--------------------+--------------------------+
-| **Allowed values** | Any alphanumerical key.  |
-+--------------------+--------------------------+
-
-remove_from_bucket
-^^^^^^^^^^^^^^^^^^
-
-.. deprecated::3.6.0
-
-Define if you want to remove logs from your S3 bucket after they are read by the wodle.
-
-+--------------------+---------+
-| **Default value**  | no      |
-+--------------------+---------+
-| **Allowed values** | yes, no |
-+--------------------+---------+
 
 skip_on_error
 ^^^^^^^^^^^^^
