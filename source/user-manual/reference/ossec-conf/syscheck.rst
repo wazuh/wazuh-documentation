@@ -31,8 +31,6 @@ Configuration options for file integrity monitoring:
 - `prefilter_cmd`_
 - `process_priority`_
 - `registry_ignore`_
-- `remove_old_diff`_
-- `restart_audit`_
 - `scan_day`_
 - `scan_on_start`_
 - `scan_time`_
