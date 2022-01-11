@@ -242,14 +242,14 @@ Wazuh Kibana plugin
 - `#3506 <https://github.com/wazuh/wazuh-kibana-app/pull/3506>`_ A new hook for getting value suggestions is added.
 - `#3531 <https://github.com/wazuh/wazuh-kibana-app/pull/3531>`_ Dinamic simple filters and simple GitHub filters fields are added.
 - `#3524 <https://github.com/wazuh/wazuh-kibana-app/pull/3524>`_ Configuration viewer for Module Office365 is added on the Configuration section of the Management menu.
-- `#3518 <https://github.com/wazuh/wazuh-kibana-app/pull/3518>`_ Added base Module Panel view with Office365 setup.
-- `#3533 <https://github.com/wazuh/wazuh-kibana-app/pull/3533>`_ Added specifics and custom filters for Office365 search bar.
-- `#3544 <https://github.com/wazuh/wazuh-kibana-app/pull/3544>`_ Adding Pagination and filter to drilldown tables at Office pannel.
+- `#3518 <https://github.com/wazuh/wazuh-kibana-app/pull/3518>`_ Base Module Panel view with Office365 setup is added.
+- `#3533 <https://github.com/wazuh/wazuh-kibana-app/pull/3533>`_ Specifics and custom filters for Office365 search bar are added.
+- `#3544 <https://github.com/wazuh/wazuh-kibana-app/pull/3544>`_ Pagination and filter are added to drilldown tables at Office pannel.
 - `#3568 <https://github.com/wazuh/wazuh-kibana-app/pull/3568>`_ Simple filters change between panel and drilldown panel.
-- `#3525 <https://github.com/wazuh/wazuh-kibana-app/pull/3525>`_ Added new fields in Inventory table and Flyout Details.
-- `#3691 <https://github.com/wazuh/wazuh-kibana-app/pull/3691>`_ Added columns selector in agents table.
-- `#3121 <https://github.com/wazuh/wazuh-kibana-app/pull/3121>`_ Changed ossec to wazuh in sample-data.
-- `#3279 <https://github.com/wazuh/wazuh-kibana-app/pull/3279>`_ Changed empty fields in FIM tables and ``syscheck.value_name`` in discovery now show an empty tag for visual clarity.
+- `#3525 <https://github.com/wazuh/wazuh-kibana-app/pull/3525>`_ New fields in Inventory table and Flyout Details are added.
+- `#3691 <https://github.com/wazuh/wazuh-kibana-app/pull/3691>`_ Columns selector in agents table are added.
+- `#3121 <https://github.com/wazuh/wazuh-kibana-app/pull/3121>`_ Ossec to wazuh is changed in all sample-data files.
+- `#3279 <https://github.com/wazuh/wazuh-kibana-app/pull/3279>`_ Empty fields are modified in FIM tables and ``syscheck.value_name`` in discovery now show an empty tag for visual clarity.
 - `#3346 <https://github.com/wazuh/wazuh-kibana-app/pull/3346>`_ Adapted the Mitre tactics and techniques resources to use the API endpoints.
 - `#3517 <https://github.com/wazuh/wazuh-kibana-app/pull/3517>`_ Moved the filterManager subscription to the hook useFilterManager.
 - `#3529 <https://github.com/wazuh/wazuh-kibana-app/pull/3529>`_ Change filter from is to is one of in custom searchbar.
