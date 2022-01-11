@@ -16,7 +16,6 @@ Deploying a Wazuh cluster
     advanced-settings
     cluster-management
 
-.. title:: Getting started
 
 .. _gt-cluster:
 
