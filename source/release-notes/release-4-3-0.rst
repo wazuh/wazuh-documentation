@@ -18,7 +18,7 @@ Manager
 ^^^^^^^
 
 - `#8830 <https://github.com/wazuh/wazuh/pull/8830>`_ `#8178 <https://github.com/wazuh/wazuh/pull/8178>`_ Syscollector and Vulnerability Detector have been extended to support agents running on Amazon Linux and Arch Linux.
-- `#7749 <https://github.com/wazuh/wazuh/pull/7749>`_ Vulnerability Detector now manages a vulnerability inventory, and produces alerts based on changes on it: when a new vulnerability is either found or solved.
+- `#7749 <https://github.com/wazuh/wazuh/pull/7749>`_ Vulnerability Detector now manages a vulnerability inventory and produces alerts based on changes on it: when a new vulnerability is either found or solved.
 
 
 Agent
@@ -54,10 +54,10 @@ Wazuh Kibana plugin
 
     </div>  
 
-- `#3262 <https://github.com/wazuh/wazuh-kibana-app/issues/3262>`_ `#3327 <https://github.com/wazuh/wazuh-kibana-app/pull/3327>`_ `#3321 <https://github.com/wazuh/wazuh-kibana-app/pull/3321>`_ `#3367 <https://github.com/wazuh/wazuh-kibana-app/pull/3367>`_ `#3373 <https://github.com/wazuh/wazuh-kibana-app/pull/3373>`_ Improved the frontend handle errors strategy: UI, Toasts, console log and log in file:
+- `#3262 <https://github.com/wazuh/wazuh-kibana-app/issues/3262>`_ `#3327 <https://github.com/wazuh/wazuh-kibana-app/pull/3327>`_ `#3321 <https://github.com/wazuh/wazuh-kibana-app/pull/3321>`_ `#3367 <https://github.com/wazuh/wazuh-kibana-app/pull/3367>`_ `#3373 <https://github.com/wazuh/wazuh-kibana-app/pull/3373>`_ Improved the frontend handle errors strategy: UI, Toasts, console log, and log in file:
    - The first attempt to Logger Service (orchestrator) is added, this service is responsible for application logs and for the error orchestration (business rules for errors). Not all errors are sent to the backend, only logs categorized with a certain level or higher.
    - Now the implementation of the ErrorBoundary component and HOC are included to catch components with errors on rendering. In addition, ``loglevel`` dependency to log errors, warnings, etc is also added.
-   - The ErrorBoundary HOC to react components was added in his version. It implements error handling HOC in each main react-component (pre-migration).
+   - The ErrorBoundary HOC to react components were added in his version. It implements error handling HOC in each main react-component (pre-migration).
    - Now try catch strategy is implemented on WzLog by executing Wazuh new error handling strategy on the front-end side. This development was made in order to improve better error handling in the front-end.
 
 - `#3368 <https://github.com/wazuh/wazuh-kibana-app/pull/3368>`_ - `#3344 <https://github.com/wazuh/wazuh-kibana-app/pull/3344>`_ Added Intelligence tab to Mitre Att&ck module:
@@ -77,19 +77,19 @@ Manager
 - `#8749 <https://github.com/wazuh/wazuh/pull/8749>`_ A log message in the ``cluster.log`` file is added to notify that wazuh-clusterd has been stopped.
 - `#9077 <https://github.com/wazuh/wazuh/pull/9077>`_ Wazuh improves API and cluster processes behavior by adding the PID of the ``wazuh-clusterd`` processes and the API when these processes are started in foreground mode.
 - `#10492 <https://github.com/wazuh/wazuh/pull/10492>`_ Time calculation is added when extra information is requested to the ``cluster_control`` binary.
-- `#9209 <https://github.com/wazuh/wazuh/pull/9209>`_ Wazuh adds a context variable to indicate origin module in socket communication messages.
+- `#9209 <https://github.com/wazuh/wazuh/pull/9209>`_ Wazuh adds a context variable to indicate the origin module in socket communication messages.
 - `#9733 <https://github.com/wazuh/wazuh/pull/9733>`_ A unit tests for framework/core files is added to increase coverage.
 - `#9204 <https://github.com/wazuh/wazuh/pull/9204>`_ A verbose mode is added in the wazuh-logtest tool.
 - `#8830 <https://github.com/wazuh/wazuh/pull/8830>`_ Wazuh adds Vulnerability Detector support for Amazon Linux.
 - `#10693 <https://github.com/wazuh/wazuh/pull/10693>`_ The new option ``<force>`` to set the behavior is introduced when Authd finds conflicts on agent enrollment requests.
-- `#9099 <https://github.com/wazuh/wazuh/pull/9099>`_ Wazuh adds saniziters to the unit tests execution.
+- `#9099 <https://github.com/wazuh/wazuh/pull/9099>`_ Wazuh adds sanitizers to the unit tests execution.
 - `#8237 <https://github.com/wazuh/wazuh/pull/8237>`_ Vulnerability Detector introduces vulnerability inventory.
   - The manager will only deliver alerts when new vulnerabilities are detected in agents or when they stop applying.
-- `#8083 <https://github.com/wazuh/wazuh/pull/8083>`_ The internal handling of agent keys is changed in Remoted to speed up key reloading.
+- `#8083 <https://github.com/wazuh/wazuh/pull/8083>`_ The internal handling of agent keys are changed in Remoted to speed up key reloading.
 - `#7885 <https://github.com/wazuh/wazuh/pull/7885>`_ The option ``<server>`` of the Syslog output now supports hostname resolution. 
-- `#7763 <https://github.com/wazuh/wazuh/pull/7763>`_ The product's UNIX user and group is renamed to "wazuh".
+- `#7763 <https://github.com/wazuh/wazuh/pull/7763>`_ The product's UNIX user and group are renamed to "wazuh".
 - `#7865 <https://github.com/wazuh/wazuh/pull/7865>`_ The MITRE database is redesigned to provide full and searchable data.
-- `#7358 <https://github.com/wazuh/wazuh/pull/7358>`_ The static fields related to FIM is ported to dynamic fields in Analysisd.
+- `#7358 <https://github.com/wazuh/wazuh/pull/7358>`_ The static fields related to FIM are ported to dynamic fields in Analysisd.
 - `#8351 <https://github.com/wazuh/wazuh/pull/8351>`_ All randomly generated IDs used for cluster tasks are changed. Now, uuid4 is used to ensure IDs are not repeated.
 - `#8873 <https://github.com/wazuh/wazuh/pull/8873>`_ The sendsync error log is Improved to provide more details of the used parameters.
 - `#9708 <https://github.com/wazuh/wazuh/pull/9708>`_ The ``walk_dir`` function is changed to be iterative instead of recursive.
@@ -102,7 +102,7 @@ Manager
 - `#9273 <https://github.com/wazuh/wazuh/pull/9273>`_ The retrieval of information from ``wazuh-db`` is improved so it reaches the optimum size in a single iteration.
 - `#9234 <https://github.com/wazuh/wazuh/pull/9234>`_ The way framework uses context cached functions and added a note on context_cached docstring is optimized.
 - `#9332 <https://github.com/wazuh/wazuh/pull/9332>`_ The framework regexes is improved to be more specific and less vulnerable.
-- `#9423 <https://github.com/wazuh/wazuh/pull/9423>`_ The framework exceptions is unified for non-active agents.
+- `#9423 <https://github.com/wazuh/wazuh/pull/9423>`_ The framework exceptions are unified for non-active agents.
 - `#9433 <https://github.com/wazuh/wazuh/pull/9433>`_ The RBAC policies are changed to case insensitive.
 - `#9548 <https://github.com/wazuh/wazuh/pull/9548>`_ Framework stats module is refactored into SDK and core components to comply with Wazuh framework code standards.
 - `#10309 <https://github.com/wazuh/wazuh/pull/10309>`_ The size of the agents' chunks sent to the upgrade socket is changed to make the upgrade endpoints faster.
@@ -148,10 +148,10 @@ Agent
 - `#8604 <https://github.com/wazuh/wazuh/pull/8604>`_ The reliability of the user ID parsing in FIM who-data mode on Linux is improved.
 - `#10230 <https://github.com/wazuh/wazuh/pull/10230>`_ AWS ``service_endpoint`` parameter description to suit FIPS endpoints too is reworded.
 - `#5047 <https://github.com/wazuh/wazuh/pull/5047>`_ The support of Logcollector for MySQL 4.7 logs is extended.
-- `#9887 <https://github.com/wazuh/wazuh/pull/9887>`_ Agents running on FreeBSD and OpenBSD now report their IP address.
+- `#9887 <https://github.com/wazuh/wazuh/pull/9887>`_ Agents running on FreeBSD and OpenBSD now report their IP addresses.
 - `#8202 <https://github.com/wazuh/wazuh/pull/8202>`_ The verbosity of FIM debugging logs is reduced.
 - `#9992 <https://github.com/wazuh/wazuh/pull/9992>`_ The agent's IP resolution frequency has been limited to prevent high CPU load.
-- `#10236 <https://github.com/wazuh/wazuh/pull/10236>`_ Syscollector is optimized to use lees memory.
+- `#10236 <https://github.com/wazuh/wazuh/pull/10236>`_ Syscollector is optimized to use less memory.
 - `#10337 <https://github.com/wazuh/wazuh/pull/10337>`_ Wazuh adds support of ZscalerOS system information in the agent.
 - `#10259 <https://github.com/wazuh/wazuh/pull/10259>`_ Syscollector is extended to collect missing Microsoft product hotfixes.
 - `#10396 <https://github.com/wazuh/wazuh/pull/10396>`_ The osquery integration is updated to find the new osqueryd location as of version 5.0.
@@ -169,22 +169,22 @@ RESTful API
 
 - `#7988 <https://github.com/wazuh/wazuh/pull/7988>`_ A new ``PUT /agents/reconnect`` endpoint is added to force agents reconnection to the manager.
 - `#6761 <https://github.com/wazuh/wazuh/pull/6761>`_ The ``select`` parameter is added to the ``GET /security/users``, ``GET /security/roles``, ``GET /security/rules`` and ``GET /security/policies`` endpoints.
-- `#8100 <https://github.com/wazuh/wazuh/pull/8100>`_ The type and status filters is added to ``GET /vulnerability/{agent_id}`` endpoint.
+- `#8100 <https://github.com/wazuh/wazuh/pull/8100>`_ The type and status filters are added to ``GET /vulnerability/{agent_id}`` endpoint.
 - `#7490 <https://github.com/wazuh/wazuh/pull/7490>`_ An option is added to configure SSL ciphers.
 - `#8919 <https://github.com/wazuh/wazuh/pull/8919>`_ An option is added to configure the maximum response time of the API.
 - `#8945 <https://github.com/wazuh/wazuh/pull/8945>`_ A new ``DELETE /rootcheck/{agent_id}`` endpoint is added.
 - `#9028 <https://github.com/wazuh/wazuh/pull/9028>`_ A new ``GET /vulnerability/{agent_id}/last_scan`` endpoint is added to check the latest vulnerability scan of an agent.
-- `#9028 <https://github.com/wazuh/wazuh/pull/9028>`_ A new ``cvss`` and ``severity`` fields and filters is added to ``GET /vulnerability/{agent_id}`` endpoint.
+- `#9028 <https://github.com/wazuh/wazuh/pull/9028>`_ A new ``cvss`` and ``severity`` fields and filters are added to ``GET /vulnerability/{agent_id}`` endpoint.
 - `#9100 <https://github.com/wazuh/wazuh/pull/9100>`_ An option  is added to configure the maximum allowed API upload size.
-- `#9142 <https://github.com/wazuh/wazuh/pull/9142>`_ A new unit and integration tests for API models is added.
+- `#9142 <https://github.com/wazuh/wazuh/pull/9142>`_ A new unit and integration tests for API models are added.
 - `#9077 <https://github.com/wazuh/wazuh/pull/9077>`_ A message with the PID of ``wazuh-apid`` process when launched in foreground mode  is added.
-- `#9144 <https://github.com/wazuh/wazuh/pull/9144>`_ Wazuh adds ``external id``, ``source`` and ``url`` to the MITRE endpoints responses.
+- `#9144 <https://github.com/wazuh/wazuh/pull/9144>`_ Wazuh adds ``external id``, ``source``, and ``url`` to the MITRE endpoints responses.
 - `#9297 <https://github.com/wazuh/wazuh/pull/9297>`_ A custom healthchecks for legacy agents in API integration tests, improving maintainability is added.
 - `#9914 <https://github.com/wazuh/wazuh/pull/9914>`_ A new unit tests for the API python module  is added to increase coverage.
-- `#10238 <https://github.com/wazuh/wazuh/pull/10238>`_ A docker logs separately in API integration tests environment is added to get cleaner reports.
+- `#10238 <https://github.com/wazuh/wazuh/pull/10238>`_ A docker logs separately in API integration tests environment are added to get cleaner reports.
 - `#10437 <https://github.com/wazuh/wazuh/pull/10437>`_ A new ``disconnection_time`` field is added to ``GET /agents`` response.
-- `#10457 <https://github.com/wazuh/wazuh/pull/10457>`_ A new filters is added to agents upgrade endpoints.
-- `#8288 <https://github.com/wazuh/wazuh/pull/8288>`_ A new API endpoints is added to access all the MITRE information.
+- `#10457 <https://github.com/wazuh/wazuh/pull/10457>`_ New filters are added to agents upgrade endpoints.
+- `#8288 <https://github.com/wazuh/wazuh/pull/8288>`_ New MITRE API endpoints and framework functions are added to access all the MITRE information.
 - `#10947 <https://github.com/wazuh/wazuh/pull/10947>`_ Show agent-info permissions flag is added when using cluster_control and in the ``GET /cluster/healthcheck`` API endpoint.
 - `#7490 <https://github.com/wazuh/wazuh/pull/7490>`_ The SSL protocol configuration parameter is renamed.
 - `#8827 <https://github.com/wazuh/wazuh/pull/8827>`_ The API spec examples and JSON body examples is reviewed and updated.
@@ -240,8 +240,8 @@ Wazuh Kibana plugin
 - `#3424 <https://github.com/wazuh/wazuh-kibana-app/pull/3424>`_ Sample data for office365 events is added.
 - `#3475 <https://github.com/wazuh/wazuh-kibana-app/pull/3475>`_ A separate component to check for sample data is created.
 - `#3506 <https://github.com/wazuh/wazuh-kibana-app/pull/3506>`_ A new hook for getting value suggestions is added.
-- `#3531 <https://github.com/wazuh/wazuh-kibana-app/pull/3531>`_ Added dinamic simple filters and adding simple GitHub filters fields
-- `#3524 <https://github.com/wazuh/wazuh-kibana-app/pull/3524>`_ Added configuration viewer for Module Office365 on the Configuration section of the Management menu.
+- `#3531 <https://github.com/wazuh/wazuh-kibana-app/pull/3531>`_ Dinamic simple filters and simple GitHub filters fields are added.
+- `#3524 <https://github.com/wazuh/wazuh-kibana-app/pull/3524>`_ Configuration viewer for Module Office365 is added on the Configuration section of the Management menu.
 - `#3518 <https://github.com/wazuh/wazuh-kibana-app/pull/3518>`_ Added base Module Panel view with Office365 setup.
 - `#3533 <https://github.com/wazuh/wazuh-kibana-app/pull/3533>`_ Added specifics and custom filters for Office365 search bar.
 - `#3544 <https://github.com/wazuh/wazuh-kibana-app/pull/3544>`_ Adding Pagination and filter to drilldown tables at Office pannel.
