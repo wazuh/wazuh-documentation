@@ -8,8 +8,7 @@ Detecting a Shellshock attack
 
 Wazuh is capable of detecting a Shellshock attack by analyzing web server logs collected from a monitored endpoint. In addition, the attack can also be identified at a network level by configuring a Suricata integration. 
 
-Check the :ref:`Shellshock attack <learning_wazuh_shellshock>` section of our documentation for further information. Additionally, the :ref:`Catch suspicious network traffic <learning_wazuh_suricata>` section provides information on how to configure a Suricata integration.
-
+Check the :doc:`/learning-wazuh/shellshock` section of our documentation for further information. Additionally, the :doc:`integrate-network-ids-suricata` POC  and the :doc:`/learning-wazuh/suricata` section provide information on how to configure a Suricata integration.
 
 Prerequisites
 -------------
@@ -51,7 +50,7 @@ Query the alerts
 
 You can visualize the alert data in the Wazuh Kibana plugin. To do this, go to the **Security events** module and add the filters in the search bar to query the alerts.
 
-- ``rule.description:"Shellshock"``
+- ``rule.description:Shellshock*``
 
 - If you have Suricata monitoring the endpoint's traffic, you can also query ``*suricata* AND rule.description: "Suricata: Alert - GPL WEB_SERVER 403 Forbidden"`` for the related Suricata's alerts.
 
