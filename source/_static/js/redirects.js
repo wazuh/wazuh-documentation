@@ -54,6 +54,7 @@ newUrls['4.3'] = [
   '/user-manual/reference/ossec-conf/gcp-bucket.html',
   '/gcp/supported-services/vpc_flow.html',
   '/gcp/supported-services/firewall.html',
+  '/amazon/services/supported-services/ecr-image-scanning.html',
 ];
 
 /* *** RELEASE 4.2 ****/

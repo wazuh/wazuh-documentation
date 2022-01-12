@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Learn how to configure Amazon ECR Image scanning to export the scan results to CloudWatch Logs.
+
 .. _amazon_image_scanning:
 
 Amazon ECR Image scanning
@@ -12,11 +15,11 @@ Amazon ECR Image scanning
 Amazon ECR sends an event to Amazon EventBridge when an image scan is completed. The event itself is only a summary and does not contain the details of the scan findings. However, it is possible to configure a Lambda function to request the scan findings details and store them in CloudWatch Logs. Here is a quick summary of how the workflow looks like:
 
 #. An image scan is triggered.
-#. Once the scan is completed Amazon ECR will send an event to EventBridge.
-#. The "Scan completed" event will trigger a Lambda function.
-#. The lambda function will take the data from the "Scan completed" event and will request the scan details.
-#. The Lambda function will create a log group and a log stream in CloudWatch Logs to store the response received.
-#. Wazuh will pull the logs from the CloudWatch log groups using the CloudWatch Logs integration.
+#. Once the scan is completed Amazon ECR sends an event to EventBridge.
+#. The "Scan completed" event triggers a Lambda function.
+#. The lambda function takes the data from the "Scan completed" event and requests the scan details.
+#. The Lambda function creates a log group and a log stream in CloudWatch Logs to store the response received.
+#. Wazuh pulls the logs from the CloudWatch log groups using the CloudWatch Logs integration.
 
 The following sections cover how to configure AWS to store the scan findings in CloudWatch Logs and how to ingest them into Wazuh.
 
@@ -24,16 +27,16 @@ The following sections cover how to configure AWS to store the scan findings in 
 AWS configuration
 -----------------
 
-AWS provides a `template <https://github.com/aws-samples/ecr-image-scan-findings-logger/blob/main/Template-ECR-SFL.yml>`_ for creating a Stack in CloudFormation that loads the image scan findings from Amazon ECR in CloudWatch using an AWS Lambda function.
+AWS provides a `template <https://github.com/aws-samples/ecr-image-scan-findings-logger/blob/main/Template-ECR-SFL.yml>`_ for creating a stack in CloudFormation that loads the image scan findings from Amazon ECR in CloudWatch using an AWS Lambda function.
 
 How to create the CloudFormation Stack
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1. Download the ECR Image Scan findings logger `template <https://github.com/aws-samples/ecr-image-scan-findings-logger/blob/main/Template-ECR-SFL.yml>`_ from the official `aws-samples <https://github.com/aws-samples/>`_ GitHub repository.
 
-2. Access `CloudFormation <https://console.aws.amazon.com/cloudformation/home>`_ and click on "Create stack"
+2. Access `CloudFormation <https://console.aws.amazon.com/cloudformation/home>`_ and click on **Create stack**.
 
-3. Create a new Stack using the template from step 1
+3. Create a new stack using the template from step 1.
 
 .. thumbnail:: ../../../images/aws/aws_create_stack.png
     :title: Create new stack
@@ -50,7 +53,7 @@ How to create the CloudFormation Stack
     :width: 100%
 
 
-Once the Stack configuration is completed, the Lambda can be tested by manually triggering an image scan. The scan will result in the creation of a CloudWatch log group called ``/aws/ecr/image-scan-findings/<name of the ECR repository>`` containing the scan results. For every new scan the corresponding log streams will be created inside the log group.
+Once the stack configuration is completed, the Lambda can be tested by manually triggering an image scan. The scan results in the creation of a CloudWatch log group called ``/aws/ecr/image-scan-findings/<name of the ECR repository>`` containing the scan results. For every new scan the corresponding log streams are created inside the log group.
 
 .. thumbnail:: ../../../images/aws/aws_findings1.png
     :title: Stack creation completed
@@ -83,7 +86,7 @@ Wazuh configuration
     .. note::
       Check the :ref:`AWS CloudWatch Logs integration <aws_cloudwatchlogs>` to learn more about how the CloudWatch Logs integration works.
 
-#. Restart Wazuh in order to apply the changes:
+#. Restart Wazuh to apply the configuration changes.
 
     * If you are configuring a Wazuh manager:
 

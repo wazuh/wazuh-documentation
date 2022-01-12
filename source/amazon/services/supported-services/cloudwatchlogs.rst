@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: The Wazuh module for AWS provides capabilities to monitor AWS based services. See more about how to configure CloudWatch Logs and some practical use cases.
+
 .. _aws_cloudwatchlogs:
 
 AWS CloudWatch Logs
@@ -80,10 +83,3 @@ CloudWatch Logs use cases
 -------------------------
 
 Check the :ref:`Amazon ECR Image scanning <amazon_image_scanning>` section to learn how to use the CloudWatch Logs integration to pull logs from Amazon ECR Image scans.
-
-.. topic:: Contents
-
-  .. toctree::
-    :maxdepth: 1
-
-    ecr-image-scanning
