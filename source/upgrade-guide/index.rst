@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Find out more about the process of upgrading the Wazuh server, Open Distro for Elasticsearch, Elastic Stack, and Wazuh agents in this section.

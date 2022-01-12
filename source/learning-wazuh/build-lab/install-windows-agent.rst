@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
     :description: Learn more about how to prepare your Wazuh Lab Environment. In this section, we show you how to install the Windows Wazuh agent. 

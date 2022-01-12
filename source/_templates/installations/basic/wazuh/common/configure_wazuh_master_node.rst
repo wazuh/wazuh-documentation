@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 Configure the cluster node by editing the following settings in ``/var/ossec/etc/ossec.conf``:
 

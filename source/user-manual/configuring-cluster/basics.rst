@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
     :description: A Wazuh cluster is a group of Wazuh managers that work together to enhance the availability and scalability of the service. Learn more about it here. 

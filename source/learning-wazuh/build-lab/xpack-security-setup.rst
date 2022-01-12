@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
     :description: Learn more about how to prepare your Wazuh Lab environment. In this section, we explain how to configure X-Pack Security. 

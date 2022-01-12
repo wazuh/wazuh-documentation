@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Filebeat is used in conjunction with the Wazuh manager to send events and alerts to Elasticsearch. Learn how to customize the installation here.

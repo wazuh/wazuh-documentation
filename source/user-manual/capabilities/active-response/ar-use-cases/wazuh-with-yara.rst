@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. _wazuh_with_yara:
 
@@ -79,7 +79,7 @@ Create a decoder file, for example, ``/var/ossec/etc/decoders/yara_decoders.xml`
   <!--
    - YARA decoders
    - Created by Wazuh, Inc.
-   - Copyright (C) 2015-2021, Wazuh Inc.
+   - Copyright (C) 2015-2022, Wazuh Inc.
    - This program is a free software; you can redistribute it and/or modify it under the terms of GPLv2.
   -->
  
@@ -107,7 +107,7 @@ Similarly create a rule file, ``/var/ossec/etc/rules/yara_rules.xml``, with the 
   <!-- 
    - YARA rules 
    - Created by Wazuh, Inc. 
-   - Copyright (C) 2015-2021, Wazuh Inc. 
+   - Copyright (C) 2015-2022, Wazuh Inc. 
    - This program is a free software; you can redistribute it and/or modify it under the terms of GPLv2. 
   -->
 
@@ -143,7 +143,7 @@ The script configured to run as part of the active response settings defined on 
   
   #!/bin/bash
   # Wazuh - Yara active response
-  # Copyright (C) 2015-2021, Wazuh Inc.
+  # Copyright (C) 2015-2022, Wazuh Inc.
   #
   # This program is free software; you can redistribute it
   # and/or modify it under the terms of the GNU General Public

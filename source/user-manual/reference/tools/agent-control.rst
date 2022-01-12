@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
     :description: Learn how the agent_control program allows you to query the manager for information about any agent and initiate a syscheck/rootcheck scan on an agent. 

@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: You can list and see basic information about registered agents in the Agent tab. Learn more about listing agents using the Wazuh Kibana plugin in our documentation. 

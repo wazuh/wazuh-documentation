@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
     :description: Learn more about the who-data monitoring functionality of Wazuh: how to audit who-data in Linux, how to configure it, and alert examples. 
