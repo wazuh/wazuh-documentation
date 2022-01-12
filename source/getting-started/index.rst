@@ -9,7 +9,7 @@
 Getting started with Wazuh
 ==========================
 
-Wazuh is an industry-leading security platform that provides XDR and SIEM capabilities. You can protect your workloads across on-premises, virtualized, containerized, and cloud-based environments.
+Wazuh is a security platform that provides XDR and SIEM capabilities. You can protect your workloads across on-premises, virtualized, containerized, and cloud-based environments.
 
 It is a free and open source security solution that helps enterprises and individuals to protect their data assets against security threats. Wazuh is widely used by thousands of organizations worldwide, from small businesses to large enterprises.
 
