@@ -46,7 +46,7 @@ Configuration block to define the wazuh-db databases backup behavior.
 |                    |           +--------------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
 |                    |           | **Allowed values**             | A positive number that should contain a suffix character indicating a time unit: s (seconds), m (minutes), h (hours) or d (days). |
 |                    +-----------+--------------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
-|                    | max_files | The maximum number of simultaneous backups to store before deleting the oldest ones. The pre-restore snapshot, if present, is not considered in this limit.        |
+|                    | max_files | The maximum number of simultaneous backups to store before deleting the oldest ones.                                                                               |
 |                    |           +--------------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
 |                    |           | **Default value**              | 3                                                                                                                                 |
 |                    |           +--------------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
