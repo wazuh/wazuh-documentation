@@ -13,7 +13,7 @@ Wazuh is a security platform that provides unified XDR and SIEM protection for e
 
 Wazuh is free and open source. Its components abide by the `GNU General Public License, version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_ and the `Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_ (ALv2). 
 
-In this installation guide, you will learn how to install Wazuh in your infrastructure. We also offer `Wazuh Cloud <https://wazuh.com/cloud/>`_, our software as a service (SaaS) solution. Check the :ref:`Cloud service <cloud_service>` documentation for more information.
+In this installation guide, you will learn how to install Wazuh in your infrastructure.
 
 
 .. admonition:: Wazuh Cloud
