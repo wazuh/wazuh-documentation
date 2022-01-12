@@ -198,7 +198,7 @@ Installing Wazuh agent from sources
 
   .. group-tab:: Windows
 
-    .. note:: The following procedure has been tested on Ubuntu 16.04 and other Debian based distributions and may work with other Debian/Ubuntu versions as well.
+    .. note:: The following procedure has been tested on Ubuntu 20.04 and other Debian based distributions and may work with other Debian/Ubuntu versions as well.
 
     1. Set up the Ubuntu build environment. Install these dependencies to build the Windows Wazuh agent installer on Ubuntu:
 
