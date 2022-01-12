@@ -64,13 +64,34 @@ newUrls['4.3'] = [
 removedUrls['4.3'] = [
   '/azure/monitoring-activity.html',
   '/azure/monitoring-services.html',
+  '/azure/dependencies.html',
 ];
+
+
+redirections.push(
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': 'azure/monitoring-activity.html',
+    '4.3': 'azure/activity-services/index.html',
+  },
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': 'azure/monitoring-services.html',
+    '4.3': 'azure/activity-services/index.html',
+  },
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': 'azure/dependencies.html',
+    '4.3': 'azure/activity-services/prerequisites/dependencies.html',
+  },
+);
 
 /* *** RELEASE 4.2 ****/
 
 /* Pages added in 4.2 */
 
 newUrls['4.2'] = [
+  '/azure/dependencies.html',
   '/proof-of-concept-guide/detect-malware-yara-integration.html',
   '/proof-of-concept-guide/poc-vulnerability-detection.html',
   '/proof-of-concept-guide/detect-remove-malware-virustotal.html',
