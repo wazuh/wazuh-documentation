@@ -159,8 +159,8 @@ These alternatives guide you to install the Wazuh central components and the sin
     containers-options/index 
     offline-installation
     wazuh-from-sources/index
-    basic_installation_guide/index
-    installation_splunk/index
+    elastic-stack/index
+    splunk/index
     orchestration-tools/index
     
     
