@@ -269,10 +269,21 @@ Remove users:
 Installing Wazuh agent from sources
 -----------------------------------
 
-.. tabs::
+- `Linux`_
 
-  .. group-tab:: Linux
+- `Windows`_
 
+- `macOS`_
+  
+- `AIX`_
+  
+- `HP-UX`_
+  
+- `Solaris`_
+
+
+Linux
+-----
 
     .. note:: All the commands described below need to be executed with root user privileges. Since Wazuh 3.5 it is necessary to have internet connection when following this process.
 
@@ -453,7 +464,8 @@ Installing Wazuh agent from sources
 
 
 
-  .. group-tab:: Windows
+Windows
+-------
 
     .. note:: The following procedure has been tested on Ubuntu 16.04 and other Debian based distributions and may work with other Debian/Ubuntu versions as well.
 
@@ -525,7 +537,8 @@ Installing Wazuh agent from sources
 
 
 
-  .. group-tab:: macOS
+macOS
+-----
 
     1. Install development tools and compilers. In macOS, this can be easily done by installing brew, a package manager for macOS:
 
@@ -621,7 +634,8 @@ Installing Wazuh agent from sources
 
 
 
-  .. group-tab:: AIX
+AIX
+---
 
 
     .. note:: All the commands described below need to be executed with root user privileges. Since Wazuh 3.5 it is necessary to have internet connection when following this process.
@@ -738,7 +752,8 @@ Installing Wazuh agent from sources
 
 
 
-  .. group-tab:: HP-UX
+HP-UX
+-----
 
     .. note:: All the commands described below need to be executed with root user privileges. Since Wazuh 3.5 it is necessary to have internet connection when following this process.
 
@@ -859,7 +874,8 @@ Installing Wazuh agent from sources
 
 
 
-  .. group-tab:: Solaris
+Solaris
+-------
 
     This section describes how to download and build the Wazuh HIDS Solaris agent from sources for the following versions:
 
