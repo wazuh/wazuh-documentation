@@ -16,10 +16,11 @@ Wazuh is free and open source. Its components abide by the `GNU General Public L
 In this installation guide, you will learn how to install Wazuh in your infrastructure. We also offer `Wazuh Cloud <https://wazuh.com/cloud/>`_, our software as a service (SaaS) solution. Check the :ref:`Cloud service <cloud_service>` documentation for more information.
 
 
-.. _admonition: Wazuh Cloud
+.. admonition:: Wazuh Cloud
   :class: note
 
   We also offer `Wazuh Cloud <https://wazuh.com/cloud/>`_, our software as a service (SaaS) solution. Check the :ref:`Cloud service <cloud_service>` documentation for more information.
+
 
 
 Installing the Wazuh central components
