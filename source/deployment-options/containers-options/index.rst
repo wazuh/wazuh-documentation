@@ -10,10 +10,10 @@
 Deployment on containers
 ========================
 
-.. topic:: Contents
 
-    .. toctree::
-        :maxdepth: 2
-        
-            On Docker <docker/index> 
-            On Kubernetes <deploying-with-kubernetes/index>
+.. toctree::
+    :hidden:
+    :maxdepth: 1
+    
+        On Docker <docker/index> 
+        On Kubernetes <deploying-with-kubernetes/index>
