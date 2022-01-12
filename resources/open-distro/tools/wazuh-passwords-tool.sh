@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Tool to change the passwords of Open Distro internal users
-# Copyright (C) 2015-2021, Wazuh Inc.
+# Copyright (C) 2015-2022, Wazuh Inc.
 #
 # This program is a free software; you can redistribute it
 # and/or modify it under the terms of the GNU General Public

@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 In this section definitions will be grouped depending on the granularity of the component, starting from the unique components and finishing in clusters.
 

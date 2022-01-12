@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Puppet is an open source software tool that allows you to install and configure Wazuh easily. Learn more about it in this section of the Wazuh documentation.

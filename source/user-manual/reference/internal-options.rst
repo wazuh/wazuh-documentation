@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: In this section of the Wazuh documentation, you will find all the information related to the internal configuration of Wazuh. 

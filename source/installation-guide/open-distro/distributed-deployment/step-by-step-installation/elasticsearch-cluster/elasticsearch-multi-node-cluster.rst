@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Learn how to install Elasticsearch on a multi-node cluster with Wazuh. This deployment type provides high availability and scalability of the product. 

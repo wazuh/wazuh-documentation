@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Wazuh is used to monitor containers security and protect containers workloads at both the infrastructure and container level. Learn more here. 

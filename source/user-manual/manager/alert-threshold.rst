@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 .. meta::
   :description: The Wazuh manager is the system that analyzes the data received from all registered agents. Find out more about how to define an alert level threshold.
   

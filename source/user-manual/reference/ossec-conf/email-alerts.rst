@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Email configuration is necessary to use granular email options. Check out how to extend the email options to send email alerts in this section.
