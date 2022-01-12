@@ -1,18 +1,14 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Discover the tools Wazuh provides to monitor Azure Active Directory.
+
 .. _azure_monitoring_services:
 
 Monitoring Azure Active Directory
 =================================
 
-.. meta::
-  :description: Discover the tools Wazuh provides to monitor Azure Active Directory.
-
-.. note::
-  The Wazuh ``azure-logs`` module requires dependencies in order to work, and also the right credentials in order to access to the logs. Take a look at the :ref:`prerequisites <azure_prerequisites>` section before proceeding.
-
-
-`Azure Active Directory <https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-whatis>`_ is the identity and directory management service that combines basic directory services, application access management, and identity protection in a single solution.
+`Azure Active Directory <https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-whatis>`_ is the identity and directory management service that combines basic directory services, application access management, and identity protection in a single solution. The Wazuh ``azure-logs`` module requires dependencies to work as well as the right credentials to access the logs. Take a look at the :ref:`prerequisites <azure_prerequisites>` section before proceeding. 
 
 .. thumbnail:: ../../../images/azure/graph_intro.png
     :title: AAD
