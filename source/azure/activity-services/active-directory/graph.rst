@@ -1,13 +1,20 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Learn how the Wazuh Azure module works in conjunction with the Microsoft Graph REST API in this section of the documentation.
+
 .. _azure_graph:
 
 Using Microsoft Graph
 =====================
 
-This section shows how to configure an application from the Microsoft Azure portal to be able to use the **Microsoft Graph REST API**.
+Learn how to configure an application from the Microsoft Azure portal to be able to use the **Microsoft Graph REST API**. In this section you will find:
 
-In order to know how the Wazuh Azure module works in conjunction with the **Microsoft Graph REST API**, first, it is important to understand what are the Azure AD activity reports and what kind of information can they provide. Wazuh can process the logs from the following Azure AD activity reports, each one of them requiring a different query to be executed:
+- `Azure configuration`_
+- `Wazuh configuration`_
+- `Microsoft Graph Use Case`_
+
+In order to know how the Wazuh Azure module works in conjunction with the **Microsoft Graph REST API**, it is important to understand first what are the Azure AD activity reports and what kind of information they provide. Wazuh can process the logs from the following Azure AD activity reports, each one of them requiring a different query to be executed:
 
 +---------------------------------------------------------------------------------------------------------------------------+-------------------------------+
 | **Report type**                                                                                                           | **Query**                     |
@@ -26,9 +33,11 @@ Azure configuration
 Creating the application
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. note:: This section explains the creation of an application that will use the of Azure Log Analytics REST API. It is also possible to configure an existing application. If this is the case, skip this step.
+This section explains the creation of an application that will use the Azure Log Analytics REST API.
 
-In the ``Azure Active Directory`` section select the option ``App registrations`` and once inside, select ``New registration``.
+.. note::  It is also possible to configure an existing application. If this is the case, skip this step.
+
+In the **Azure Active Directory** section, select the option **App registrations**. Then, select **New registration**.
 
 .. thumbnail:: ../../../images/azure/graph1.png
     :title: Log Analytics App
@@ -38,35 +47,35 @@ In the ``Azure Active Directory`` section select the option ``App registrations`
 Giving permissions to the application
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1 - Access the ``Overview`` section. Save the ``application id`` for later authentication.
+1. Go to the **Overview** section and save the **Application (client) ID** for later authentication.
 
 .. thumbnail:: ../../../images/azure/graph2.png
     :title: AAD
     :align: center
     :width: 75%
 
-2 - In the ``API permissions`` section select the ``Add a permission`` option.
+2. Go to the **API permissions** section and select the **Add a permission** option.
 
 .. thumbnail:: ../../../images/azure/graph3.png
     :title: AAD
     :align: center
     :width: 100%
 
-3 - Select the API by searching for "Microsoft Graph".
+3. Select the API by searching for "Microsoft Graph".
 
 .. thumbnail:: ../../../images/azure/graph4.png
     :title: AAD
     :align: center
     :width: 100%
 
-4 - Select the permissions in "Applications permissions" section that adapt to our infrastructure. In this case "AuditLogs" permissions will be granted.
+4. Select the permissions in **Applications permissions** section that adapt to our infrastructure. In this case, **AuditLog** permissions will be granted. Then, click **Add permissions**.
 
 .. thumbnail:: ../../../images/azure/graph5.png
     :title: AAD
     :align: center
     :width: 100%
 
-5 - Grant admin consent for the tenant domain used for the permission added in the previous step. This must be done by an admin user.
+5. Grant admin consent for the tenant domain used for the permission added in the previous step. This must be done by an admin user.
 
 .. thumbnail:: ../../../images/azure/graph6.png
     :title: AAD
@@ -81,7 +90,7 @@ Giving permissions to the application
 Obtaining the application key for authentication
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Select ``Keys`` and fill in the ``DESCRIPTION`` and ``EXPIRES`` fields. Copy the ``value`` once the key is saved. This is required to authenticate the application in order to use the Log Analytics API.
+Select **Certificates & secrets** and fill in the **Description** and **Expires** fields. Copy the **value** once the key is saved. This is required to authenticate the application in order to use the Log Analytics API.
 
 .. thumbnail:: ../../../images/azure/la_create_key.png
     :title: Log Analytics App
@@ -100,9 +109,9 @@ Wazuh configuration
 azure-logs module configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Proceed to configure the ``azure-logs`` module in the local configuration (``ossec.conf``). The **key and ID of the application** saved during the previous steps will be used here. In this case, both fields were saved in a **file** for authentication.
+Proceed with configuring the ``azure-logs`` module in the local configuration (``ossec.conf``). The **key and ID of the application** saved during the previous steps will be used here. In this case, both fields were saved in a **file** for authentication.
 
-Here is an example on how to get the audit log of the Azure Active Directory using Microsoft Graph. This example configuration includes a representative ``tag`` and will be scheduled for every Monday at 02:00, using an offset of one days, which means only the log data from the last day will be parsed:
+Here is an example of how to get the audit log of the Azure Active Directory using Microsoft Graph. This example configuration includes a representative ``tag`` and is scheduled for every Monday at 02:00, using an offset of one day, which means only the log data from the last day is be parsed:
 
 .. code-block:: xml
 
@@ -137,17 +146,17 @@ Check the :ref:`azure-logs <wodle_azure_logs>` module reference for more informa
     application_id = 317...764
     application_key = wUj...9cj
 
-.. warning:: The field ``tenantdomain`` is mandatory. It can be obtain from the ``Overview`` section in the ``Azure Active Directory``
+.. warning:: The field ``tenantdomain`` is mandatory. It can be obtain from the **Overview** section in the Azure Active Directory.
 
 Microsoft Graph Use Case
 ------------------------
 
-Here is an example of monitoring the Azure ADD activity using the previously mentioned configuration.
+Here is an example of monitoring the Azure ADD activity using the configuration described above.
 
 Wazuh Rules
 ^^^^^^^^^^^
 
-In this example the records will be in ``.json`` format. The following rules are already included in Wazuh which means alerts will be generated for the logs in this example.
+In this example, the records are in ``.json`` format. The following rules are already included in Wazuh which means alerts will be generated for the logs in this example.
 
 .. code-block:: xml
 
@@ -170,7 +179,7 @@ Create a new user in Azure. If the creation is successful, a log will be written
 Azure portal visualization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The resulting log from the user creation can be checked in the ``Audit logs`` section of ``Azure Active Directory``.
+The resulting log from the user creation can be checked in the **Audit logs** section of Azure Active Directory.
 
 .. thumbnail:: ../../../images/azure/portal_services.png
     :title: AAD
@@ -180,7 +189,7 @@ The resulting log from the user creation can be checked in the ``Audit logs`` se
 Kibana visualization
 ^^^^^^^^^^^^^^^^^^^^
 
-Once the integration runs the results will be available in the Wazuh UI.
+Once the integration is running, the results will be available in the Wazuh UI.
 
 .. thumbnail:: ../../../images/azure/kibana_services1.png
     :title: AAD
