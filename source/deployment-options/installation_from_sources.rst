@@ -204,7 +204,7 @@ To install the required dependencies to build the python interpreter, follow the
 
 
 Installing Filebeat
--------------------
+~~~~~~~~~~~~~~~~~~~
 
 Filebeat is a data shipping tool that is installed on the Wazuh server to securely forward alerts and archived events to Elasticsearch.Once the Wazuh manager is installed, you may install Filebeat as well as the other Elastic Stack components from `sources <https://www.elastic.co/guide/en/beats/devguide/current/beats-contributing.html>`_ or using :ref:`packages  <packages>`.
 
@@ -283,7 +283,7 @@ Installing Wazuh agent from sources
 
 
 Linux
------
+^^^^^
 
     .. note:: All the commands described below need to be executed with root user privileges. Since Wazuh 3.5 it is necessary to have internet connection when following this process.
 
@@ -465,7 +465,7 @@ Linux
 
 
 Windows
--------
+^^^^^^^
 
     .. note:: The following procedure has been tested on Ubuntu 16.04 and other Debian based distributions and may work with other Debian/Ubuntu versions as well.
 
@@ -538,7 +538,7 @@ Windows
 
 
 macOS
------
+^^^^^
 
     1. Install development tools and compilers. In macOS, this can be easily done by installing brew, a package manager for macOS:
 
@@ -633,9 +633,8 @@ macOS
 
 
 
-
 AIX
----
+^^^
 
 
     .. note:: All the commands described below need to be executed with root user privileges. Since Wazuh 3.5 it is necessary to have internet connection when following this process.
@@ -753,7 +752,7 @@ AIX
 
 
 HP-UX
------
+^^^^^
 
     .. note:: All the commands described below need to be executed with root user privileges. Since Wazuh 3.5 it is necessary to have internet connection when following this process.
 
@@ -875,7 +874,7 @@ HP-UX
 
 
 Solaris
--------
+^^^^^^^
 
     This section describes how to download and build the Wazuh HIDS Solaris agent from sources for the following versions:
 
