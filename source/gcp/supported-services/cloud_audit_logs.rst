@@ -1,11 +1,13 @@
 .. Copyright (C) 2021 Wazuh, Inc.
+.. meta::
+  :description: The Wazuh GCP Pub/Sub module allows you to fetch logs from Google Audit Logs. Learn more about the module's usage in this section.
 
 .. _gcp_cloud_audit_logs:
 
 Audited resources
 =================
 
-Google Cloud maintains three `audit logs <https://cloud.google.com/monitoring/api/resources#tag_audited_resource>`__ for each Google Cloud project, folder and organization: **Admin Activity**, **Data Access** and **System Event**.
+Google Cloud maintains three `audit logs <https://cloud.google.com/monitoring/api/resources#tag_audited_resource>`__ for each Google Cloud project, folder, and organization: **Admin Activity**, **Data Access**, and **System Event**. Wazuh supports collecting those logs by using the **gcp-pubsub** module. Details on how to configure the module can be found :ref:`gcp-pubsub configuration reference <gcp-pubsub>`.
 
 .. thumbnail:: ../../images/gcp/gcp-overview.png
     :align: center

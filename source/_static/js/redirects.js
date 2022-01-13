@@ -45,7 +45,6 @@ newUrls['4.3'] = [
   '/office365/index.html',
   '/office365/monitoring-office365-activity.html',
   '/user-manual/reference/ossec-conf/office365-module.html',
-  '/user-manual/capabilities/file-integrity/fim-fields-rule-mapping.html',
   '/user-manual/capabilities/log-data-collection/how-to-collect-macoslogs.html',
   '/azure/activity-services/index.html',
   '/azure/activity-services/active-directory/index.html',
@@ -59,6 +58,15 @@ newUrls['4.3'] = [
   '/azure/activity-services/services/index.html',
   '/azure/activity-services/services/log-analytics.html',
   '/azure/activity-services/services/storage.html',
+  '/user-manual/reference/ossec-conf/gcp-bucket.html',
+  '/gcp/supported-services/access_logs.html',
+  '/gcp/supported-services/cloud_audit_logs.html',
+  '/gcp/supported-services/dns_queries.html',
+  '/gcp/supported-services/load_balancing.html',
+  '/user-manual/reference/ossec-conf/gcp-bucket.html',
+  '/gcp/supported-services/vpc_flow.html',
+  '/gcp/supported-services/firewall.html',
+  '/amazon/services/supported-services/ecr-image-scanning.html',
 ];
 
 removedUrls['4.3'] = [
@@ -137,7 +145,7 @@ newUrls['4.2'] = [
   '/user-manual/reference/statistics-files/wazuh-remoted-state.html',
   '/user-manual/reference/statistics-files/wazuh-logcollector-state.html',
   '/user-manual/reference/tools/wazuh-control.html',
-  '/user-manual/reference/tools/wazuh-regex.html',  
+  '/user-manual/reference/tools/wazuh-regex.html',
   '/cloud-service/index.html',
   '/cloud-service/glossary.html',
   '/cloud-service/account-billing/index.html',
@@ -170,7 +178,7 @@ newUrls['4.2'] = [
   '/cloud-service/your-environment/understanding-storage.html',
   '/cloud-service/getting-started/sign-up-trial.html',
   '/cloud-service/getting-started/access-wazuh-wui.html',
-  '/cloud-service/getting-started/register-agents.html', 
+  '/cloud-service/getting-started/register-agents.html',
   '/getting-started/use-cases/index.html',
   '/getting-started/use-cases/cloud-security.html',
   '/getting-started/use-cases/configuration-assessment.html',
@@ -1199,7 +1207,7 @@ redirections.push(
     'target': ['4.0=>4.1', '4.1=>4.0'],
     '4.0': '/installation-guide/wazuh-agent/deployment_variables/linux/deployment_variables_zypper.html',
     '4.1': '/installation-guide/wazuh-agent/deployment_variables/deployment_variables_linux.html',
-  },  
+  },
   {
     'target': ['4.1=>4.0'],
     '4.0':  '/installation-guide/more-installation-alternatives/index.html',
@@ -2115,7 +2123,7 @@ redirections.push(
       '3.13': '/installation-guide/installing-wazuh-agent/linux/oracle5/wazuh_agent_package_oracle5.html',
       '4.0':  '/installation-guide/wazuh-agent/index.html',
     },
-); 
+);
 
 /* *** RELEASE 3.13 ****/
 
