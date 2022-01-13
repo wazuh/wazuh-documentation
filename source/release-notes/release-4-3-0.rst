@@ -318,26 +318,26 @@ Agent
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#8784 <https://github.com/wazuh/wazuh/pull/8784>`_               Fixed a bug in FIM that did not allow monitoring new directories in real-time mode if the limit was reached at some point.
-`#8941 <https://github.com/wazuh/wazuh/pull/8941>`_               Fixed a bug in FIM that threw an error when a query to the internal database returned no data.
-`#8362 <https://github.com/wazuh/wazuh/pull/8362>`_               Fixed an error where the IP address was being returned along with the port for Amazon NLB service.
-`#8372 <https://github.com/wazuh/wazuh/pull/8372>`_               Fixed AWS module to properly handle the exception raised when processing a folder without logs.
-`#8433 <https://github.com/wazuh/wazuh/pull/8433>`_               Fixed a bug with AWS module when pagination is needed in the bucket.
-`#8672 <https://github.com/wazuh/wazuh/pull/8672>`_               Fixed an error with the ipGeoLocation field in AWS Macie logs.
-`#10333 <https://github.com/wazuh/wazuh/pull/10333>`_               Changed an incorrect debug message in the GCloud integration module.
-`#7848 <https://github.com/wazuh/wazuh/pull/7848>`_               Data race conditions have been fixed in FIM.
-`#10011 <https://github.com/wazuh/wazuh/pull/10011>`_             Fixed wrong command line display in the Syscollector process report on Windows.
-`#10249 <https://github.com/wazuh/wazuh/pull/10249>`_             Prevented Modulesd from freezing if Analysisd or Agentd get stopped before it.
-`#10405 <https://github.com/wazuh/wazuh/pull/10405>`_             Fixed wrong keepalive message from the agent when file merged.mg is missing.
-`#10381 <https://github.com/wazuh/wazuh/pull/10381>`_             Fixed missing logs from the Windows agent when it's getting stopped.
-`#10524 <https://github.com/wazuh/wazuh/pull/10524>`_             Fixed missing packages reporting in Syscollector for macOS due to empty architecture data.
-`#7506 <https://github.com/wazuh/wazuh/pull/7506>`_               Fixed FIM on Linux to parse audit rules with multiple keys for who-data.
-`#10639 <https://github.com/wazuh/wazuh/pull/10639>`_             Fixed Windows 11 version collection in the agent.
-`#10602 <https://github.com/wazuh/wazuh/pull/10602>`_             Fixed missing Eventchannel location in Logcollector configuration reporting.
-`#10794 <https://github.com/wazuh/wazuh/pull/10794>`_             Updated CloudWatch Logs integration to avoid crashing when AWS raises Throttling errors.
-`#10718 <https://github.com/wazuh/wazuh/pull/10718>`_             Fixed AWS modules' log file filtering when there are logs with and without a prefix mixed in a bucket.
-`#10884 <https://github.com/wazuh/wazuh/pull/10884>`_             Fixed a bug on the installation script that made upgrades not to update the code of the external integration modules.
-`#10921 <https://github.com/wazuh/wazuh/pull/10921>`_             Fixed issue with AWS integration module trying to parse manually created folders as if they were files.
+`#8784 <https://github.com/wazuh/wazuh/pull/8784>`_               A bug in FIM that did not allow monitoring new directories in real-time mode if the limit was reached at some point is fixed.
+`#8941 <https://github.com/wazuh/wazuh/pull/8941>`_               A bug in FIM that threw an error when a query to the internal database returned no data is fixed.
+`#8362 <https://github.com/wazuh/wazuh/pull/8362>`_               An error where the IP address was being returned along with the port for Amazon NLB service is fixed.
+`#8372 <https://github.com/wazuh/wazuh/pull/8372>`_               AWS module is fixed to properly handle the exception raised when processing a folder without logs.
+`#8433 <https://github.com/wazuh/wazuh/pull/8433>`_               A bug with AWS module when pagination is needed in the bucket is fixed.
+`#8672 <https://github.com/wazuh/wazuh/pull/8672>`_               An error with the ipGeoLocation field in AWS Macie logs id fixed.
+`#10333 <https://github.com/wazuh/wazuh/pull/10333>`_             An incorrect debug message in the GCloud integration module is changed.
+`#7848 <https://github.com/wazuh/wazuh/pull/7848>`_               Data race conditions is fixed in FIM.
+`#10011 <https://github.com/wazuh/wazuh/pull/10011>`_             Wrong command line display in the Syscollector process report on Windows is fixed.
+`#10249 <https://github.com/wazuh/wazuh/pull/10249>`_             Modulesd freezing if Analysisd or Agentd get stopped before it is fixed.
+`#10405 <https://github.com/wazuh/wazuh/pull/10405>`_             Wrong keepalive message from the agent when file merged.mg is missing is fixed.
+`#10381 <https://github.com/wazuh/wazuh/pull/10381>`_             Missing logs from the Windows agent when it's getting stopped is fixed.
+`#10524 <https://github.com/wazuh/wazuh/pull/10524>`_             Missing packages reporting in Syscollector for macOS due to empty architecture data is fixed.
+`#7506 <https://github.com/wazuh/wazuh/pull/7506>`_               FIM on Linux to parse audit rules with multiple keys for who-data is fixed.
+`#10639 <https://github.com/wazuh/wazuh/pull/10639>`_             Windows 11 version collection in the agent is fixed.
+`#10602 <https://github.com/wazuh/wazuh/pull/10602>`_             Missing Eventchannel location in Logcollector configuration reporting is fixed.
+`#10794 <https://github.com/wazuh/wazuh/pull/10794>`_             CloudWatch Logs integration is updated to avoid crashing when AWS raises Throttling errors.
+`#10718 <https://github.com/wazuh/wazuh/pull/10718>`_             AWS modules' log file filtering is fixed when there are logs with and without a prefix mixed in a bucket.
+`#10884 <https://github.com/wazuh/wazuh/pull/10884>`_             A bug on the installation script that made upgrades not to update the code of the external integration modules id fixed.
+`#10921 <https://github.com/wazuh/wazuh/pull/10921>`_             An issue with AWS integration module trying to parse manually created folders as if they were files is fixed.
 ==============================================================    =============
 
 
