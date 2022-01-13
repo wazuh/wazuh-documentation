@@ -330,16 +330,18 @@ If defined, the suffix for the bucket. Only works with buckets which contain the
 | **Allowed values** | Valid path    |
 +--------------------+---------------+
 
+.. _only_logs_aws_buckets:
+
 bucket\\only_logs_after
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-A valid date, in YYYY-MMM-DD format, that only logs from after that date will be parsed.  All logs from before that date will be skipped.
+A valid date, in YYYY-MMM-DD format. Only logs from that date onwards will be parsed.
 
-+--------------------+-------------+
-| **Default value**  | 1970-JAN-01 |
-+--------------------+-------------+
-| **Allowed values** | Valid date  |
-+--------------------+-------------+
++--------------------+-----------------------------------+
+| **Default value**  | Date of execution at ``00:00:00`` |
++--------------------+-----------------------------------+
+| **Allowed values** | Valid date                        |
++--------------------+-----------------------------------+
 
 bucket\\regions
 ^^^^^^^^^^^^^^^
@@ -609,13 +611,13 @@ Service\\only_logs_after
 
 .. versionadded:: 4.0.0
 
-A valid date, in YYYY-MMM-DD format. Only those logs from after that date will be parsed, the logs from before that date will be skipped. Only works for CloudWatch Logs service.
+A valid date, in YYYY-MMM-DD format. Only logs from that date onwards will be parsed. This option is only available for the CloudWatch Logs service.
 
-+--------------------+-------------+
-| **Default value**  | 1970-JAN-01 |
-+--------------------+-------------+
-| **Allowed values** | Valid date  |
-+--------------------+-------------+
++--------------------+-----------------------------------+
+| **Default value**  | Date of execution at ``00:00:00`` |
++--------------------+-----------------------------------+
+| **Allowed values** | Valid date                        |
++--------------------+-----------------------------------+
 
 Service\\regions
 ^^^^^^^^^^^^^^^^

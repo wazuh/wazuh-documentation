@@ -8,6 +8,11 @@
 Considerations for configuration
 ================================
 
+First execution
+---------------
+
+If no :ref:`only_logs_after <only_logs_aws_buckets>` value was provided, the module will only fetch the logs of the date of the execution.
+
 Filtering
 ---------
 
@@ -22,8 +27,30 @@ If the S3 bucket contains a long history of logs and its directory structure is 
 Older logs
 ----------
 
-The ``aws-s3`` Wazuh module only looks for new logs based upon the key for last processed log object, which includes the datetime stamp. If older logs are loaded into the S3 bucket or the ``only_logs_after`` option date is set to a datetime earlier than previous executions of the module, the older log files will be ignored and not ingested into Wazuh.
+The ``aws-s3`` Wazuh module only looks for new logs in buckets based upon the key of the last processed log object, which includes the datetime stamp. If older logs are loaded into the S3 bucket or the :ref:`only_logs_after <only_logs_aws_buckets>` option date is set to a datetime earlier than previous executions of the module, the older log files will be ignored and not ingested into Wazuh.
 
+On the other hand, the ``CloudWatch Logs`` module can process logs older than the first one processed. To do so, specify an older ``only_logs_after`` value, and the module will process all logs between the value set for ``only_logs_after`` and the first log executed without generating duplicate alerts.
+
+
+Reparse
+~~~~~~~
+
+.. note::
+  Option not available for CloudWatch Logs.
+
+.. warning::
+  Using the ``reparse`` option will fetch and process every log from the starting date until the present. This process may generate duplicate alerts.
+
+To process older logs, it's necessary to manually execute the module using the ``--reparse`` or ``-o`` option. Executing the module with this option will use the ``only_logs_after`` value provided to fetch and process every log from that date until the present. If no ``only_logs_after`` value was provided, it will use the date of the first file processed.
+
+Below there is an example of a manual execution of the module using the ``--reparse`` option on a manager, being ``/var/ossec`` the Wazuh installation path:
+
+.. code-block:: console
+
+  # cd /var/ossec/wodles/aws
+  # ./aws-s3 -b 'wazuh-example-bucket' --reparse --only_logs_after '2021-Jun-10' --debug 2
+
+The ``--debug 2`` parameter was used to get a verbose output since by default the script won't print anything on the terminal, and it could seem like it's not working when it could be handling a great amount of data instead.
 
 Configuring multiple services
 -----------------------------
