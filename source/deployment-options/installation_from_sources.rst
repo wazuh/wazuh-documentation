@@ -282,46 +282,44 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
     .. note:: CMake 3.12.4 is the minimal library version required to build the Wazuh agent solution.
 
     1. Install development tools and compilers. In Linux this can easily be done using your distribution's package manager:
-
-     .. tabs::
+     
       
-        .. tabs::
+        
+        .. tab:: CentOS 6/7
 
-          .. tab:: CentOS 6/7
+          .. code-block:: console
 
-            .. code-block:: console
+            # yum update
+            # yum install make gcc gcc-c++ policycoreutils-python automake autoconf libtool centos-release-scl openssl-devel
+            # yum update
+            # yum install devtoolset-7
+            # scl enable devtoolset-7 bash
 
-              # yum update
-              # yum install make gcc gcc-c++ policycoreutils-python automake autoconf libtool centos-release-scl openssl-devel
-              # yum update
-              # yum install devtoolset-7
-              # scl enable devtoolset-7 bash
+          CMake 3.18 installation
 
-            CMake 3.18 installation
+          .. code-block:: console
 
-            .. code-block:: console
+            # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
+            # cd cmake-3.18.3 && ./bootstrap --no-system-curl
+            # make -j$(nproc) && make install
+            # cd .. && rm -rf cmake-*
 
-              # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
-              # cd cmake-3.18.3 && ./bootstrap --no-system-curl
-              # make -j$(nproc) && make install
-              # cd .. && rm -rf cmake-*
+        .. tab:: CentOS 8
 
-          .. tab:: CentOS 8
+          .. code-block:: console
 
-            .. code-block:: console
+            # yum install make gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool openssl-devel cmake
+            # rpm -i $(rpm --eval https://packages.wazuh.com/utils/libstdc%2B%2B/libstdc%2B%2B-static-8.4.1-1.el8.'%{_arch}'.rpm)
 
-              # yum install make gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool openssl-devel cmake
-              # rpm -i $(rpm --eval https://packages.wazuh.com/utils/libstdc%2B%2B/libstdc%2B%2B-static-8.4.1-1.el8.'%{_arch}'.rpm)
+          **Optional** CMake 3.18 installation from sources
 
-            **Optional** CMake 3.18 installation from sources
+          .. code-block:: console
 
-            .. code-block:: console
-
-              # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
-              # cd cmake-3.18.3 && ./bootstrap --no-system-curl
-              # make -j$(nproc) && make install
-              # cd .. && rm -rf cmake-*
-              # export PATH=/usr/local/bin:$PATH
+            # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
+            # cd cmake-3.18.3 && ./bootstrap --no-system-curl
+            # make -j$(nproc) && make install
+            # cd .. && rm -rf cmake-*
+            # export PATH=/usr/local/bin:$PATH
 
 
 
@@ -420,23 +418,21 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
     .. note:: CMake 3.12.4 is the minimal library version required to build the Wazuh agent solution.
 
     1. Install development tools and compilers. In Linux this can easily be done using your distribution's package manager:
+          
 
-     .. tabs::
-      
+      .. code-block:: console
 
-        .. code-block:: console
-
-         # apt-get install python gcc g++ make libc6-dev curl policycoreutils automake autoconf libtool
+        # apt-get install python gcc g++ make libc6-dev curl policycoreutils automake autoconf libtool
 
 
-        CMake 3.18 installation
+      CMake 3.18 installation
 
-        .. code-block:: console
+      .. code-block:: console
 
-          # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
-          # cd cmake-3.18.3 && ./bootstrap --no-system-curl
-          # make -j$(nproc) && make install
-          # cd .. && rm -rf cmake-*
+        # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
+        # cd cmake-3.18.3 && ./bootstrap --no-system-curl
+        # make -j$(nproc) && make install
+        # cd .. && rm -rf cmake-*
       
 
 
@@ -535,29 +531,26 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
     .. note:: CMake 3.12.4 is the minimal library version required to build the Wazuh agent solution.
 
     1. Install development tools and compilers. In Linux this can easily be done using your distribution's package manager:
+           
 
-     .. tabs::
-  
-      
+      .. code-block:: console
 
-        .. code-block:: console
+        # zypper install make gcc gcc-c++ policycoreutils-python automake autoconf libtool
 
-         # zypper install make gcc gcc-c++ policycoreutils-python automake autoconf libtool
+      CMake 3.18 installation
 
-        CMake 3.18 installation
+      .. code-block:: console
 
-        .. code-block:: console
+        # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
+        # cd cmake-3.18.3 && ./bootstrap --no-system-curl
+        # make -j$(nproc) && make install
+        # cd .. && rm -rf cmake-*
 
-          # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
-          # cd cmake-3.18.3 && ./bootstrap --no-system-curl
-          # make -j$(nproc) && make install
-          # cd .. && rm -rf cmake-*
+      .. note:: For Suse 11, it is possible that some of the tools are not found in the package manager, in that case you can add the following official repository:
 
-        .. note:: For Suse 11, it is possible that some of the tools are not found in the package manager, in that case you can add the following official repository:
+      .. code-block:: console
 
-        .. code-block:: console
-
-         # zypper addrepo http://download.opensuse.org/distribution/11.4/repo/oss/ oss
+        # zypper addrepo http://download.opensuse.org/distribution/11.4/repo/oss/ oss
 
 
 
