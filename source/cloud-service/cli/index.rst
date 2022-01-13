@@ -17,7 +17,7 @@ To use ``wcloud-cli``, you need to install the following components:
 
 - Python 3.x
 - ``boto3`` Python package
-- ``request`` Python package
+- ``requests`` Python package
   
 Installation
 ------------
