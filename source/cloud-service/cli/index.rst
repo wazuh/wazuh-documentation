@@ -32,12 +32,12 @@ Installation
 
   .. code-block:: console
 
-    # wcloud-cli version
+    # ./wcloud-cli version
 
   .. code-block:: none
     :class: output
 
-    Wazuh Cloud CLI - "version": "1.1.1"
+    Wazuh Cloud CLI - "version": "1.0.0"
 
 
 Configuration
