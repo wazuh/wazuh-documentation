@@ -379,11 +379,11 @@ Ruleset
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#10315 <https://github.com/wazuh/wazuh/pull/10315>`_             Fixed enabled-like checks for Amazon Linux 2 SCA.
-`#10354 <https://github.com/wazuh/wazuh/pull/10354>`_             Fixed enabled-like checks for RedHat Enterprise Linux 8 SCA.
-`#10406 <https://github.com/wazuh/wazuh/pull/10406>`_             Fixed typos and not working tests for Centos 7 SCA. Thanks to RonnyMaas (@RonnyMaas).
-`#10707 <https://github.com/wazuh/wazuh/pull/10707>`_             Fixed YML syntax problems in Solaris 11.4 SCA.
-`#10375 <https://github.com/wazuh/wazuh/pull/10375>`_             Fixed a typo in the Xbox Live Networking Service check for SCA.
+`#10315 <https://github.com/wazuh/wazuh/pull/10315>`_             The enabled-like checks for Amazon Linux 2 SCA are fixed.
+`#10354 <https://github.com/wazuh/wazuh/pull/10354>`_             The enabled-like checks for RedHat Enterprise Linux 8 SCA are fixed.
+`#10406 <https://github.com/wazuh/wazuh/pull/10406>`_             Some typos and not working tests for Centos 7 SCA are fixed. Thanks to RonnyMaas (@RonnyMaas).
+`#10707 <https://github.com/wazuh/wazuh/pull/10707>`_             Some YML syntax problems in Solaris 11.4 SCA are fixed.
+`#10375 <https://github.com/wazuh/wazuh/pull/10375>`_             A typo in the Xbox Live Networking Service check for SCA is fixed.
 ==============================================================    =============
 
 
@@ -393,36 +393,36 @@ Wazuh Kibana plugin
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#3384 <https://github.com/wazuh/wazuh-kibana-app/pull/3384>`_    Fixed creation of log files.
-`#3484 <https://github.com/wazuh/wazuh-kibana-app/pull/3484>`_    Fixed double fetching alerts count when pinnin/unpinning the agent in Mitre Att&ck/Framework.
-`#3490 <https://github.com/wazuh/wazuh-kibana-app/pull/3490>`_    Query config refactor.
-`#3412 <https://github.com/wazuh/wazuh-kibana-app/pull/3412>`_    Fixed rules and decoders test flyout clickout event.
-`#3430 <https://github.com/wazuh/wazuh-kibana-app/pull/3430>`_    Notify when you are registering an agent without permissions.
-`#3438 <https://github.com/wazuh/wazuh-kibana-app/pull/3438>`_    Remove not used ``redirectRule`` query param when clicking the row table on CDB Lists/Decoders.
-`#3439 <https://github.com/wazuh/wazuh-kibana-app/pull/3439>`_    Fixed the code overflows over the line numbers in the API Console editor.
-`#3440 <https://github.com/wazuh/wazuh-kibana-app/pull/3440>`_    Don't open the main menu when changing the seleted API or index pattern.
-`#3443 <https://github.com/wazuh/wazuh-kibana-app/pull/3443>`_    Fix error message in conf managment.
-`#3445 <https://github.com/wazuh/wazuh-kibana-app/pull/3445>`_    Fix size api selector when name is too long.
-`#3456 <https://github.com/wazuh/wazuh-kibana-app/pull/3456>`_    Fixed error when edit a rule or decoder.
-`#3458 <https://github.com/wazuh/wazuh-kibana-app/pull/3458>`_    Fixed index pattern selector doesn't display the ignored index patterns.
-`#3553 <https://github.com/wazuh/wazuh-kibana-app/pull/3553>`_    Fixed error in /Management/Configuration when cluster is disabled.
-`#3565 <https://github.com/wazuh/wazuh-kibana-app/pull/3565>`_    Fix the pinned filters were removed when accessing to the ``Panel`` tab of a module.
-`#3645 <https://github.com/wazuh/wazuh-kibana-app/pull/3645>`_    Fixed multi-select component searcher handler.
-`#3609 <https://github.com/wazuh/wazuh-kibana-app/pull/3609>`_    Fixed order logs properly in Management/Logs.
-`#3661 <https://github.com/wazuh/wazuh-kibana-app/pull/3661>`_    Fixed the Wazuh API requests to ``GET //``.
-`#3675 <https://github.com/wazuh/wazuh-kibana-app/pull/3675>`_    Fixed missing mitre tactics.
-`#3488 <https://github.com/wazuh/wazuh-kibana-app/pull/3488>`_    Fix CDB list view not working with IPv6.
-`#3466 <https://github.com/wazuh/wazuh-kibana-app/pull/3466>`_    Fixed the bad requests using Console tool to ``PUT /active-response`` API endpoint.
-`#3605 <https://github.com/wazuh/wazuh-kibana-app/pull/3605>`_    Fixed group agent management table does not update on error.
-`#3651 <https://github.com/wazuh/wazuh-kibana-app/pull/3651>`_    Fixed not showing packages details in agent inventory for a freeBSD agent SO.
-`#3652 <https://github.com/wazuh/wazuh-kibana-app/pull/3652>`_    Fixed wazuh token deleted twice.
-`#3687 <https://github.com/wazuh/wazuh-kibana-app/pull/3687>`_    Fixed handler of error on dev-tools.
-`#3685 <https://github.com/wazuh/wazuh-kibana-app/pull/3685>`_    Fixed compatibility wazuh 4.3 - kibana 7.13.4.
-`#3689 <https://github.com/wazuh/wazuh-kibana-app/pull/3689>`_    Fixed registry values without agent pinned in FIM>Events.
-`#3688 <https://github.com/wazuh/wazuh-kibana-app/pull/3688>`_    Fixed breadcrumbs style compatibility for Kibana 7.14.2.
-`#3682 <https://github.com/wazuh/wazuh-kibana-app/pull/3682>`_    Fixed security alerts table when filters change.
-`#3692 <https://github.com/wazuh/wazuh-kibana-app/pull/3692>`_    Fixed error that shows we're using X-Pack when we have Basic.
-`#3700 <https://github.com/wazuh/wazuh-kibana-app/pull/3700>`_    Fixed blank screen in Kibana 7.10.2.
+`#3384 <https://github.com/wazuh/wazuh-kibana-app/pull/3384>`_    The creation of log files is fixed.
+`#3484 <https://github.com/wazuh/wazuh-kibana-app/pull/3484>`_    The double fetching alerts count when pinnin/unpinning the agent in Mitre Att&ck/Framework is fixed.
+`#3490 <https://github.com/wazuh/wazuh-kibana-app/pull/3490>`_    A refactor of the query Config is changed from Angular to React.
+`#3412 <https://github.com/wazuh/wazuh-kibana-app/pull/3412>`_    Rules and decoders test flyout clickout event is fixed.
+`#3430 <https://github.com/wazuh/wazuh-kibana-app/pull/3430>`_    Now Wazuh notifies when you are registering an agent without permissions.
+`#3438 <https://github.com/wazuh/wazuh-kibana-app/pull/3438>`_    Not used ``redirectRule`` query param when clicking the row table on CDB Lists/Decoders is removed.
+`#3439 <https://github.com/wazuh/wazuh-kibana-app/pull/3439>`_    The code overflows over the line numbers in the API Console editor is fixed.
+`#3440 <https://github.com/wazuh/wazuh-kibana-app/pull/3440>`_    The issue that avoids opening the main menu when changing the selected API or index pattern is fixed.
+`#3443 <https://github.com/wazuh/wazuh-kibana-app/pull/3443>`_    An error message in conf managment is fixed.
+`#3445 <https://github.com/wazuh/wazuh-kibana-app/pull/3445>`_    An issue related to the size api selector when name is too long is fixed.
+`#3456 <https://github.com/wazuh/wazuh-kibana-app/pull/3456>`_    An error when edit a rule or decoder is fixed.
+`#3458 <https://github.com/wazuh/wazuh-kibana-app/pull/3458>`_    An issue about the index pattern selector doesn't display the ignored index patterns is fixed.
+`#3553 <https://github.com/wazuh/wazuh-kibana-app/pull/3553>`_    An error in /Management/Configuration when cluster is disabled is fixed.
+`#3565 <https://github.com/wazuh/wazuh-kibana-app/pull/3565>`_    The pinned filters were removed when accessing to the ``Panel`` tab of a module is fixed.
+`#3645 <https://github.com/wazuh/wazuh-kibana-app/pull/3645>`_    Multi-select component searcher handler is fixed.
+`#3609 <https://github.com/wazuh/wazuh-kibana-app/pull/3609>`_    The order logs properly in Management/Logs is fixed.
+`#3661 <https://github.com/wazuh/wazuh-kibana-app/pull/3661>`_    The Wazuh API requests to ``GET //`` is fixed.
+`#3675 <https://github.com/wazuh/wazuh-kibana-app/pull/3675>`_    Missing mitre tactics are  fixed.
+`#3488 <https://github.com/wazuh/wazuh-kibana-app/pull/3488>`_    The CDB list view not working with IPv6 is fixed.
+`#3466 <https://github.com/wazuh/wazuh-kibana-app/pull/3466>`_    The bad requests using Console tool to ``PUT /active-response`` API endpoint is fixed.
+`#3605 <https://github.com/wazuh/wazuh-kibana-app/pull/3605>`_    An issue related to the group agent management table does not update on error is fixed.
+`#3651 <https://github.com/wazuh/wazuh-kibana-app/pull/3651>`_    An issue about not showing packages details in agent inventory for a freeBSD agent SO is fixed.
+`#3652 <https://github.com/wazuh/wazuh-kibana-app/pull/3652>`_    Wazuh token deleted twice is fixed.
+`#3687 <https://github.com/wazuh/wazuh-kibana-app/pull/3687>`_    The handler of an error on dev-tools is fixed.
+`#3685 <https://github.com/wazuh/wazuh-kibana-app/pull/3685>`_    The compatibility with wazuh 4.3 - kibana 7.13.4 is fixed.
+`#3689 <https://github.com/wazuh/wazuh-kibana-app/pull/3689>`_    The registry values without agent pinned in FIM>Events are fixed.
+`#3688 <https://github.com/wazuh/wazuh-kibana-app/pull/3688>`_    The breadcrumbs style compatibility for Kibana 7.14.2 i fixed.
+`#3682 <https://github.com/wazuh/wazuh-kibana-app/pull/3682>`_    The security alerts table when filters change is fixed.
+`#3692 <https://github.com/wazuh/wazuh-kibana-app/pull/3692>`_    An error that shows we're using X-Pack when we have Basic is fixed.
+`#3700 <https://github.com/wazuh/wazuh-kibana-app/pull/3700>`_    Blank screen in Kibana 7.10.2 is fixed.
 ==============================================================    =============
 
 
@@ -432,8 +432,8 @@ Others
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#9168 <https://github.com/wazuh/wazuh/pull/9168>`_               Fixed error detection in the CURL helper library.
-`#10899 <https://github.com/wazuh/wazuh/pull/10899>`_             Fixed external BerkeleyDB library support for GCC 11.
+`#9168 <https://github.com/wazuh/wazuh/pull/9168>`_               An error detection in the CURL helper library is fixed.
+`#10899 <https://github.com/wazuh/wazuh/pull/10899>`_             External BerkeleyDB library support for GCC 11 is fixed.
 ==============================================================    =============
 
 
