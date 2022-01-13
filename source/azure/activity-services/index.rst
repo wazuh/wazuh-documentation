@@ -1,15 +1,14 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Discover how Wazuh can help you to monitor your Microsoft Azure activity and services in this section of our documentation.
+
 .. _azure_activity_services:
 
-Monitoring Activity and Services
+Monitoring activity and services
 ================================
 
-.. meta::
-  :description: Discover how Wazuh can help you to monitor your Microsoft Azure activity and services.
-
-
-The Wazuh module for Azure (``azure-logs``) provides capabilities to monitor all the activity and the services of our infrastructure.
+The Wazuh ``azure-logs`` module for Azure provides capabilities to monitor all the activity and the services of our infrastructure.
 
 From a wider perspective, the Microsoft Azure infrastructure resources can be divided into three types of logs:
 
