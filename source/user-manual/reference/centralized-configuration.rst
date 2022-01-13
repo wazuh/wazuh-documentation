@@ -317,21 +317,11 @@ The ``files.yml`` has the following structure as shown in the following example:
                 agent.conf: https://example.com/agent.conf
             poll: 200
 
-    agents:
-        001: my_group_1
-        002: my_group_2
-        003: another_group
-
-Here we can distinct the two main blocks: ``groups`` and ``agents``.
-
-
-1. In the ``groups`` block we define the group name from which we want to download the files.
+The ``groups`` block is used to define the group name from which we want to download the files.
 
     - If the group doesn't exists, it will be created.
     - If a file has the name ``merged.mg``, only this file will be downloaded. Then it will be validated.
     - The ``poll`` label indicates the download rate in seconds of the specified files.
-
-2. In the ``agents`` block, we define for each agent the group to which we want it to belong.
 
     This configuration can be changed on the fly. The **manager** will reload the file and parse it again so there is no need to restart the **manager** every time.
 
