@@ -6,9 +6,7 @@
 Installing dependencies
 =======================
 
-.. note::
-  The Wazuh manager includes all dependencies installed, these steps are only necessary when configuring the integration in a Wazuh agent.
-
+These steps are only necessary when configuring the integration in a **Wazuh agent**. The Wazuh manager includes all dependencies installed.
 
 Python
 ------
