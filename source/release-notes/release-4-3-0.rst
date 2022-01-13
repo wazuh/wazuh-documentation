@@ -46,7 +46,7 @@ Wazuh Kibana plugin
       :align: center
       :title: Management / Configuration
 
-.. thumbnail::  ../images/release-notes/4.3.0/Office 365-General.png
+.. thumbnail::  ../images/release-notes/4.3.0/Office-365-General.png
       :align: center
       :title: Office 365 / General
 
