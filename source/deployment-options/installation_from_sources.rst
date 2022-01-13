@@ -274,7 +274,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
 .. tabs::
 
-  .. group-tab:: Linux
+  .. group-tab:: Linux Yum
 
 
     .. note:: All the commands described below need to be executed with root user privileges. Since Wazuh 3.5 it is necessary to have internet connection when following this process.
@@ -324,47 +324,6 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
               # make -j$(nproc) && make install
               # cd .. && rm -rf cmake-*
               # export PATH=/usr/local/bin:$PATH
-
-
-      .. tab:: APT
-
-        .. code-block:: console
-
-         # apt-get install python gcc g++ make libc6-dev curl policycoreutils automake autoconf libtool
-
-
-        CMake 3.18 installation
-
-        .. code-block:: console
-
-          # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
-          # cd cmake-3.18.3 && ./bootstrap --no-system-curl
-          # make -j$(nproc) && make install
-          # cd .. && rm -rf cmake-*
-
-
-
-      .. tab:: ZYpp
-
-        .. code-block:: console
-
-         # zypper install make gcc gcc-c++ policycoreutils-python automake autoconf libtool
-
-        CMake 3.18 installation
-
-        .. code-block:: console
-
-          # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
-          # cd cmake-3.18.3 && ./bootstrap --no-system-curl
-          # make -j$(nproc) && make install
-          # cd .. && rm -rf cmake-*
-
-        .. note:: For Suse 11, it is possible that some of the tools are not found in the package manager, in that case you can add the following official repository:
-
-        .. code-block:: console
-
-         # zypper addrepo http://download.opensuse.org/distribution/11.4/repo/oss/ oss
-
 
 
 
@@ -454,6 +413,248 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
      # userdel ossecr 2> /dev/null
      # groupdel ossec 2> /dev/null
 
+
+  .. group-tab:: Linux APT
+
+
+    .. note:: All the commands described below need to be executed with root user privileges. Since Wazuh 3.5 it is necessary to have internet connection when following this process.
+
+    .. note:: CMake 3.12.4 is the minimal library version required to build the Wazuh agent solution.
+
+    1. Install development tools and compilers. In Linux this can easily be done using your distribution's package manager:
+
+     .. tabs::
+
+
+      .. tab:: APT
+
+        .. code-block:: console
+
+         # apt-get install python gcc g++ make libc6-dev curl policycoreutils automake autoconf libtool
+
+
+        CMake 3.18 installation
+
+        .. code-block:: console
+
+          # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
+          # cd cmake-3.18.3 && ./bootstrap --no-system-curl
+          # make -j$(nproc) && make install
+          # cd .. && rm -rf cmake-*
+
+
+
+      
+
+
+    2. Download and extract the latest version:
+
+     .. code-block:: console
+
+      # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_LATEST|.tar.gz | tar zx
+
+    3. Run the ``install.sh`` script. This will run a wizard that will guide you through the installation process using the Wazuh sources:
+
+     .. code-block:: console
+
+      # cd wazuh-*
+      # ./install.sh
+
+     If you have previously compiled for another platform, you must clean the build using the Makefile in ``src``:
+
+      .. code-block:: console
+
+        # cd wazuh-*
+        # make -C src clean
+        # make -C src clean-deps
+
+     .. note:: During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``. When choosing a different path than the default, if the directory already exist the installer will ask if delete the directory or if installing Wazuh inside. You can also run an :ref:`unattended installation <unattended-installation>`.
+
+
+    4. The script will ask about what kind of installation you want. Type ``agent`` in order to install a Wazuh agent:
+
+     .. code-block:: none
+       :class: output
+
+       1- What kind of installation do you want (manager, agent, local, hybrid or help)? agent
+
+    Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :ref:`user manual<register_agents>`.
+
+    .. raw:: html
+
+       <h2>Uninstall</h2>
+
+    To uninstall Wazuh agent, set WAZUH_HOME with the current installation path:
+
+    .. code-block:: console
+
+      # WAZUH_HOME="/WAZUH/INSTALLATION/PATH"
+
+    Stop the service:
+
+    .. code-block:: console
+
+      # service wazuh-agent stop 2> /dev/null
+
+    Stop the daemon:
+
+    .. code-block:: console
+
+     # $WAZUH_HOME/bin/wazuh-control stop 2> /dev/null
+
+    Remove the installation folder and all its content:
+
+    .. code-block:: console
+
+     # rm -rf $WAZUH_HOME
+
+    Delete the service:
+
+    For SysV Init:
+
+    .. code-block:: console
+
+      # [ -f /etc/rc.local ] && sed -i'' '/wazuh-control start/d' /etc/rc.local
+      # find /etc/{init.d,rc*.d} -name "*wazuh*" | xargs rm -f
+
+    For Systemd:
+
+    .. code-block:: console
+
+        # find /etc/systemd/system -name "wazuh*" | xargs rm -f
+        # systemctl daemon-reload
+
+    Remove users:
+
+    .. code-block:: console
+
+     # userdel ossec 2> /dev/null
+     # userdel ossecm 2> /dev/null
+     # userdel ossecr 2> /dev/null
+     # groupdel ossec 2> /dev/null
+
+
+  .. group-tab:: Linux ZYpp
+
+
+    .. note:: All the commands described below need to be executed with root user privileges. Since Wazuh 3.5 it is necessary to have internet connection when following this process.
+
+    .. note:: CMake 3.12.4 is the minimal library version required to build the Wazuh agent solution.
+
+    1. Install development tools and compilers. In Linux this can easily be done using your distribution's package manager:
+
+     .. tabs::
+
+      
+      .. tab:: ZYpp
+
+        .. code-block:: console
+
+         # zypper install make gcc gcc-c++ policycoreutils-python automake autoconf libtool
+
+        CMake 3.18 installation
+
+        .. code-block:: console
+
+          # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
+          # cd cmake-3.18.3 && ./bootstrap --no-system-curl
+          # make -j$(nproc) && make install
+          # cd .. && rm -rf cmake-*
+
+        .. note:: For Suse 11, it is possible that some of the tools are not found in the package manager, in that case you can add the following official repository:
+
+        .. code-block:: console
+
+         # zypper addrepo http://download.opensuse.org/distribution/11.4/repo/oss/ oss
+
+
+
+    2. Download and extract the latest version:
+
+     .. code-block:: console
+
+      # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_LATEST|.tar.gz | tar zx
+
+    3. Run the ``install.sh`` script. This will run a wizard that will guide you through the installation process using the Wazuh sources:
+
+     .. code-block:: console
+
+      # cd wazuh-*
+      # ./install.sh
+
+     If you have previously compiled for another platform, you must clean the build using the Makefile in ``src``:
+
+      .. code-block:: console
+
+        # cd wazuh-*
+        # make -C src clean
+        # make -C src clean-deps
+
+     .. note:: During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``. When choosing a different path than the default, if the directory already exist the installer will ask if delete the directory or if installing Wazuh inside. You can also run an :ref:`unattended installation <unattended-installation>`.
+
+
+    4. The script will ask about what kind of installation you want. Type ``agent`` in order to install a Wazuh agent:
+
+     .. code-block:: none
+       :class: output
+
+       1- What kind of installation do you want (manager, agent, local, hybrid or help)? agent
+
+    Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :ref:`user manual<register_agents>`.
+
+    .. raw:: html
+
+       <h2>Uninstall</h2>
+
+    To uninstall Wazuh agent, set WAZUH_HOME with the current installation path:
+
+    .. code-block:: console
+
+      # WAZUH_HOME="/WAZUH/INSTALLATION/PATH"
+
+    Stop the service:
+
+    .. code-block:: console
+
+      # service wazuh-agent stop 2> /dev/null
+
+    Stop the daemon:
+
+    .. code-block:: console
+
+     # $WAZUH_HOME/bin/wazuh-control stop 2> /dev/null
+
+    Remove the installation folder and all its content:
+
+    .. code-block:: console
+
+     # rm -rf $WAZUH_HOME
+
+    Delete the service:
+
+    For SysV Init:
+
+    .. code-block:: console
+
+      # [ -f /etc/rc.local ] && sed -i'' '/wazuh-control start/d' /etc/rc.local
+      # find /etc/{init.d,rc*.d} -name "*wazuh*" | xargs rm -f
+
+    For Systemd:
+
+    .. code-block:: console
+
+        # find /etc/systemd/system -name "wazuh*" | xargs rm -f
+        # systemctl daemon-reload
+
+    Remove users:
+
+    .. code-block:: console
+
+     # userdel ossec 2> /dev/null
+     # userdel ossecm 2> /dev/null
+     # userdel ossecr 2> /dev/null
+     # groupdel ossec 2> /dev/null
+  
 
 
   .. group-tab:: Windows
