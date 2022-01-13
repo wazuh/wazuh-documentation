@@ -284,9 +284,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
     1. Install development tools and compilers. In Linux this can easily be done using your distribution's package manager:
 
      .. tabs::
-
-      .. tab:: Yum
-
+      
         .. tabs::
 
           .. tab:: CentOS 6/7
@@ -424,9 +422,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
     1. Install development tools and compilers. In Linux this can easily be done using your distribution's package manager:
 
      .. tabs::
-
-
-      .. tab:: APT
+      
 
         .. code-block:: console
 
@@ -441,9 +437,6 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
           # cd cmake-3.18.3 && ./bootstrap --no-system-curl
           # make -j$(nproc) && make install
           # cd .. && rm -rf cmake-*
-
-
-
       
 
 
@@ -544,9 +537,8 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
     1. Install development tools and compilers. In Linux this can easily be done using your distribution's package manager:
 
      .. tabs::
-
+  
       
-      .. tab:: ZYpp
 
         .. code-block:: console
 
