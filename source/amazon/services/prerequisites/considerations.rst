@@ -29,7 +29,7 @@ Older logs
 
 The ``aws-s3`` Wazuh module only looks for new logs in buckets based upon the key of the last processed log object, which includes the datetime stamp. If older logs are loaded into the S3 bucket or the :ref:`only_logs_after <only_logs_aws_buckets>` option date is set to a datetime earlier than previous executions of the module, the older log files will be ignored and not ingested into Wazuh.
 
-On the other hand, the ``CloudWatch Logs`` module can process logs older than the first one processed. To do that it is only necessary to specify an older ``only_logs_after`` value, and the module will process all logs between the value set for ``only_logs_after`` and the first log executed without generating duplicate alerts.
+On the other hand, the ``CloudWatch Logs`` module can process logs older than the first one processed. To do so, specify an older ``only_logs_after`` value, and the module will process all logs between the value set for ``only_logs_after`` and the first log executed without generating duplicate alerts.
 
 
 Reparse
@@ -39,7 +39,7 @@ Reparse
   Option not available for CloudWatch Logs.
 
 .. warning::
-  Using the ``reparse`` option will fetch and process every log from the beginning date until the present. It will most likely generate duplicate alerts.
+  Using the ``reparse`` option will fetch and process every log from the starting date until the present. This process may generate duplicate alerts.
 
 To process older logs, it's necessary to manually execute the module using the ``--reparse`` or ``-o`` option. Executing the module with this option will use the ``only_logs_after`` value provided to fetch and process every log from that date until the present. If no ``only_logs_after`` value was provided, it will use the date of the first file processed.
 
