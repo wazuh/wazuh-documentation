@@ -5,7 +5,7 @@
 .. meta::
   :description: Discover the numerous ways that Wazuh provides to monitor your Microsoft Azure instances.
 
-Monitoring Instances
+Monitoring instances
 ====================
 
 In order to know what happens on the virtual machines of our infrastructure, we will carry out the installation of the Wazuh agent in those we want to monitor.
