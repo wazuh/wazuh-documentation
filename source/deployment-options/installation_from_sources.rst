@@ -420,23 +420,21 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
     1. Install development tools and compilers. In Linux this can easily be done using your distribution's package manager:
 
-     .. tabs::
+     
 
-      .. tab:: APT
+      .. code-block:: console
 
-        .. code-block:: console
-
-         # apt-get install python gcc g++ make libc6-dev curl policycoreutils automake autoconf libtool
+        # apt-get install python gcc g++ make libc6-dev curl policycoreutils automake autoconf libtool
 
 
-        CMake 3.18 installation
+      CMake 3.18 installation
 
-        .. code-block:: console
+      .. code-block:: console
 
-          # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
-          # cd cmake-3.18.3 && ./bootstrap --no-system-curl
-          # make -j$(nproc) && make install
-          # cd .. && rm -rf cmake-*
+        # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
+        # cd cmake-3.18.3 && ./bootstrap --no-system-curl
+        # make -j$(nproc) && make install
+        # cd .. && rm -rf cmake-*
       
 
 
@@ -536,28 +534,26 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
     1. Install development tools and compilers. In Linux this can easily be done using your distribution's package manager:
 
-     .. tabs::
-      
-      .. tab:: ZYpp
+     
 
-        .. code-block:: console
+      .. code-block:: console
 
-         # zypper install make gcc gcc-c++ policycoreutils-python automake autoconf libtool
+        # zypper install make gcc gcc-c++ policycoreutils-python automake autoconf libtool
 
-        CMake 3.18 installation
+      CMake 3.18 installation
 
-        .. code-block:: console
+      .. code-block:: console
 
-          # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
-          # cd cmake-3.18.3 && ./bootstrap --no-system-curl
-          # make -j$(nproc) && make install
-          # cd .. && rm -rf cmake-*
+        # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
+        # cd cmake-3.18.3 && ./bootstrap --no-system-curl
+        # make -j$(nproc) && make install
+        # cd .. && rm -rf cmake-*
 
-        .. note:: For Suse 11, it is possible that some of the tools are not found in the package manager, in that case you can add the following official repository:
+      .. note:: For Suse 11, it is possible that some of the tools are not found in the package manager, in that case you can add the following official repository:
 
-        .. code-block:: console
+      .. code-block:: console
 
-         # zypper addrepo http://download.opensuse.org/distribution/11.4/repo/oss/ oss
+        # zypper addrepo http://download.opensuse.org/distribution/11.4/repo/oss/ oss
 
 
 
