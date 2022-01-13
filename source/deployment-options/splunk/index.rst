@@ -5,8 +5,8 @@
 
 .. _installation_splunk:
 
-Installing Wazuh with Splunk
-============================
+Wazuh with Splunk
+=================
 
 This guide describes how to install Splunk Enterprise as a single instance or as a multi-instance cluster along with the Splunk forwarder and the Wazuh Splunk app.
 
