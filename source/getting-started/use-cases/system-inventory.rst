@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
     :description: The Wazuh agent system inventory module collects hardware and software information from the monitored system. Learn more about this capability here.

@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Learn more about how to upgrade Elasticsearch, Filebeat, and Kibana, depending on the distribution in this section of the Wazuh documentation.

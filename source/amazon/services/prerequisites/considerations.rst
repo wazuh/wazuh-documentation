@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: In this section, we show you some considerations that must be taken into account when configuring the Wazuh module for AWS.

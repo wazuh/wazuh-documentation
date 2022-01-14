@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 Wazuh and Elastic Stack components can be installed, deployed and used in the following platforms:
 

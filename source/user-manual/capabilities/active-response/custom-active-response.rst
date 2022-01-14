@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. _custom-active-response:
 
@@ -211,7 +211,7 @@ The following is a stateful AR in which the Python script creates a file contain
 .. code-block:: Python
 
         #!/usr/bin/python3
-        # Copyright (C) 2015-2021, Wazuh Inc.
+        # Copyright (C) 2015-2022, Wazuh Inc.
         # All rights reserved.
 
         # This program is free software; you can redistribute it

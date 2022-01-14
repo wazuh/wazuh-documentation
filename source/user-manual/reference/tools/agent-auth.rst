@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: The agent-auth program is the client application used along with ossec-authd to automatically add agents to a Wazuh manager. Learn more about it here.

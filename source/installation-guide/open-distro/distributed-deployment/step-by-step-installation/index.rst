@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: The Wazuh server can be installed as a single-node cluster or as a multi-node cluster. Learn more about these two types of installation in our documentation. 

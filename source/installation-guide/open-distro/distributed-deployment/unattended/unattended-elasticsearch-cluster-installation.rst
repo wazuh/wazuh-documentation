@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 .. meta::
   :description: Check out how to install Open Distro for Elasticsearch and Open Distro for Kibana using a script that automates the installation process.
   

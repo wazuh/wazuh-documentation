@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
     :description: The Linux Audit system provides a way to track security-relevant information on your machine. Learn more about how to monitor system calls with Wazuh in this section. 

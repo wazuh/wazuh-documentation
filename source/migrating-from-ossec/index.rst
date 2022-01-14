@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Wazuh was born as a fork of OSSEC. In this section we explain the value we add to the OSSEC project and how to move to Wazuh from OSSEC.

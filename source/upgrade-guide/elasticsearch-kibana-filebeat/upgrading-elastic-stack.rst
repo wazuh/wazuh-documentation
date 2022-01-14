@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 .. meta::
   :description: Check out more about how to upgrade the Elastic Stack basic license: preparing and upgrading Elastic Stack, upgrading Filebeat and Kibana, and next steps. 
   

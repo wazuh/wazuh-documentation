@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Wazuh provides an automated way of building our Wazuh Kibana plugin packages. Check out this step-by-step guide and learn how to create this package. 

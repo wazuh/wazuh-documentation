@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Wazuh integrates with Elastic Stack, providing a feed of decoded messages to be indexed by Elasticsearch as well as a real-time console for alert and LDA. 

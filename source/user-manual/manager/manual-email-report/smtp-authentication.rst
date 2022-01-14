@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: In this section of the Wazuh documentation on how to configure email alerts, we show you the minimum configuration needed to use Postfix to send emails.  
