@@ -44,6 +44,7 @@ $(function() {
     'installation-guide/distributed-deployment/step-by-step-installation/wazuh-cluster/index',
     'user-manual/capabilities/active-response/ar-use-cases/index',
     'deployment-options/containers-options/index',
+    'deployment-options/orchestration-tools/index',
   ];
 
   /* List of nodes in the toctree that should be open in a new tab */
