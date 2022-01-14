@@ -352,7 +352,7 @@ Defines a tag that we will add to the query. This entry is optional and can be u
 log_analytics\\request\\query
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This is the query we will make to the Azure Log Analytics API. This option is ready to use any query we can make in the Log Analytics portal. You can find a reference of the language used. `Reference <https://docs.microsoft.com/en-us/azure/azure-monitor/logs/get-started-queries>`_.
+This is the query made to the Azure Log Analytics API. This option is ready to use any query that we can make in the Log Analytics portal. For more information on the language, check the `Azure documentation <https://docs.microsoft.com/en-us/azure/azure-monitor/logs/get-started-queries>`_.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -473,7 +473,7 @@ Key to the application we will use for authentication and to be able to make use
 graph\\auth_path
 ^^^^^^^^^^^^^^^^
 
-Path of the file that contains the application identifier and the application key for authentication in order to use the AAD Graph API. Incompatible with ``application_id`` and ``application_key`` options. Check the :ref:`credentials <azure_credentials>` reference for more information about this topic.
+Path of the file that contains the application identifier and the application key for authentication in order to use the AAD Graph API. Incompatible with the ``application_id`` and ``application_key`` options. Check the :ref:`credentials <azure_credentials>` reference for more information about this topic.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -506,7 +506,7 @@ request options
 +=========================================+=============================================================================================================================================+
 | `graph\\request\\tag`_                  | Any string                                                                                                                                  |
 +-----------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-| `graph\\request\\query`_                | Any string containing ``auditLogs/directoryaudits``, ``auditLogs/signIns`` or ``auditLogs/provisioning`` plus any optional query parameter. |
+| `graph\\request\\query`_                | Any string containing ``auditLogs/directoryaudits``, ``auditLogs/signIns`` or ``auditLogs/provisioning`` plus any optional query parameter  |
 +-----------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
 | `graph\\request\\timeout`_              | A positive number (seconds)                                                                                                                 |
 +-----------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
@@ -527,12 +527,12 @@ Defines a tag that we will add to the query. This entry is optional and can be u
 graph\\request\\query
 ^^^^^^^^^^^^^^^^^^^^^
 
-The query used to obtain the logs from the Microsoft Graph API. The query value must be ``auditLogs/directoryaudits``, ``auditLogs/signIns`` or ``auditLogs/provisioning`` in conjunction with the desired optional parameters and filters available for these report types. Check this `Microsoft Activity reports <https://docs.microsoft.com/en-us/graph/api/resources/azure-ad-auditlog-overview?view=graph-rest-1.0>`_ reference page to learn more about how the activity reports work and the available query parameters for each one.
+The query used to obtain the logs from the Microsoft Graph API. The query value must be ``auditLogs/directoryaudits``, ``auditLogs/signIns``, or ``auditLogs/provisioning`` in conjunction with the desired optional parameters and filters available for these report types. Check this `Microsoft Activity reports <https://docs.microsoft.com/en-us/graph/api/resources/azure-ad-auditlog-overview?view=graph-rest-1.0>`_ reference page to learn more about how the activity reports work and the available query parameters for each one.
 
 +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | N/A                                                                                                                                         |
 +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values** | Any string containing ``auditLogs/directoryaudits``, ``auditLogs/signIns`` or ``auditLogs/provisioning`` plus any optional query parameter. |
+| **Allowed values** | Any string containing ``auditLogs/directoryaudits``, ``auditLogs/signIns`` or ``auditLogs/provisioning`` plus any optional query parameter  |
 +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
 
 graph\\request\\timeout
@@ -686,7 +686,7 @@ Specifies the name of the container. Enter ``*`` to access all account container
 storage\\container\\blobs
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Specifies the extension of the blobs, like ``.json``. Enter "*" to access all the containers' blobs. 
+Specifies the extension of the blobs like ``.json``. Enter "*" to access all the containers' blobs. 
 
 .. note::
 
@@ -707,8 +707,7 @@ This parameter indicates the format of the blobs' content. The available values 
 - **json_file**. The blob contain records of logs in standard json format.
 - **json_inline**. Each line is a log in json format.
 
-.. note::
-	As of November 1st 2018, the format of logs stored in Azure accounts became **inline JSON** instead of **JSON file**.
+The format of logs stored in Azure accounts is **inline JSON**.
 	
 .. note::
 
