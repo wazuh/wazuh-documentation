@@ -17,20 +17,22 @@ The Log Analytics solution helps you to analyze and search the Azure activity lo
     :align: center
     :width: 60%
 
-The data collected by Log Analytics can be consulted through the **Azure Log Analytics REST API**. The Azure Log Analytics API uses the Azure Active Directory authentication scheme. Part of the installation guide is based on this `tutorial <https://dev.logsanalytics.io/documentation/1-Tutorials/Direct-API>`_.
+The data collected by Log Analytics can be consulted through the **Azure Log Analytics REST API**. The Azure Log Analytics API uses the Azure Active Directory authentication scheme.
 
-An qualified application or client is required to use the Azure Log Analytics REST API. This must be configured manually on the Microsoft Azure portal.
+A qualified application or client is required to use the Azure Log Analytics REST API. This must be configured manually on the Microsoft Azure portal.
 
-.. note:: The process explained below details the creation of an application that will use the of Azure Log Analytics REST API. It is also possible to configure an existing application. If this is the case, skip the ``Creating the application`` step.
-
+- `Setting up the application`_
+- `Azure Log Analytics use case`_
 
 Setting up the application
 ---------------------------
 
+The process explained below details the creation of an application that will use the of Azure Log Analytics REST API. It is also possible to configure an existing application. If this is the case, skip the **Creating the application** step.
+
 Creating the application
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-In the ``Azure Active Directory`` section select the option ``App registrations`` and once inside, select ``New registration``.
+In the **Azure Active Directory** panel, select the option **App registrations**. Then, select **New registration**.
 
 .. thumbnail:: ../../../images/azure/logsanalytics1.png
     :title: Log Analytics App
@@ -40,35 +42,35 @@ In the ``Azure Active Directory`` section select the option ``App registrations`
 Giving permissions to the application
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1 - Access the desired application and copy it's ``Application ID`` as this will be required to authenticate the application later. This information can be found in the ``Overview`` section.
+1. Go to the **Overview** section and save the **Application (client) ID** for later authentication.
 
 .. thumbnail:: ../../../images/azure/logsanalytics2.png
     :title: Log Analytics App
     :align: center
     :width: 100%
 
-2 - Access the ``API permissions`` section and add the required permissions to the application.
+2. Go to the **API permissions** section and add the required permissions to the application.
 
 .. thumbnail:: ../../../images/azure/logsanalytics3.png
     :title: Log Analytics App
     :align: center
     :width: 100%
 
-3 - Look for the ``Log Analytics API``.
+3. Search for the **Log Analytics API**.
 
 .. thumbnail:: ../../../images/azure/logsanalytics4.png
     :title: Log Analytics App
     :align: center
     :width: 100%
 
-4 - Select the ``Read Log Analytics data`` permission from the ``Application permissions``.
+4. Select the **Read Log Analytics data** permission from **Applications permissions**.
 
 .. thumbnail:: ../../../images/azure/logsanalytics5.png
     :title: Log Analytics App
     :align: center
     :width: 100%
 
-5 - Grant admin consent for the tenant domain used for the permission added in the previous step. This must be done by an admin user.
+5. Grant admin consent for the tenant domain used for the permission added in the previous step. This must be done by an admin user.
 
 .. thumbnail:: ../../../images/azure/logsanalytics6.png
     :title: Log Analytics App
@@ -78,7 +80,7 @@ Giving permissions to the application
 Obtaining the application key for authentication
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Select ``Keys`` and fill in the ``DESCRIPTION`` and ``EXPIRES`` fields. Copy the ``value`` once the key is saved. This is required to authenticate the application in order to use the Log Analytics API.
+Select **Certificates & secrets** and fill in the **Description** and **Expires** fields. Copy the **value** once the key is saved. This is required to authenticate the application in order to use the Log Analytics API.
 
 .. thumbnail:: ../../../images/azure/la_create_key.png
     :title: Log Analytics App
@@ -90,10 +92,10 @@ Select ``Keys`` and fill in the ``DESCRIPTION`` and ``EXPIRES`` fields. Copy the
     :align: center
     :width: 100%
 
-Giving access to our application to the Log Analytics API
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Giving our application access to the Log Analytics API
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1 - Access ``Log Analytics Workspaces`` and create a new workspace or choose an existing one. Then, copy the ``Workspace Id`` value from the ``Overview`` section. This will be used in the Wazuh configuration to allow making requests to the API.
+1. Access **Log Analytics workspaces** and create a new workspace or choose an existing one. Then, copy the ``Workspace Id`` value from the **Overview** section. This will be used in the Wazuh configuration to allow making requests to the API.
 
 .. thumbnail:: ../../../images/azure/la_workspace_1.png
     :title: Log Analytics App
@@ -105,14 +107,14 @@ Giving access to our application to the Log Analytics API
     :align: center
     :width: 100%
 
-2 - Add the required role to the application in the ``Access control (IAM)`` by clicking the ``add`` button and selecting ``add role assignment``
+2. Add the required role to the application in the **Access control (IAM)** section by clicking the **Add** and selecting **add role assignment**.
 
 .. thumbnail:: ../../../images/azure/la_workspace_3.png
     :title: Log Analytics App
     :align: center
     :width: 100%
 
-3 - Fill in the fields as in the following screenshot and click on ``save``. It is important choose the ``User, group, or service principal`` option in the drop down menu and to type the full application name in the ``Select`` field.
+3. Fill in the required fields and click **save**. It is important choose the ``User, group, or service principal`` option in the drop down menu and to type the full application name in the **Select** field.
 
 .. thumbnail:: ../../../images/azure/la_workspace_4.png
     :title: Log Analytics App
@@ -127,7 +129,7 @@ Here is an example of monitoring the activity of the infrastructure using the pr
 Creating a user
 ^^^^^^^^^^^^^^^
 
-An easy way to test this is to create a new user in Azure Active Directory. A few minutes after the creation of the user a new log will be available for Log Analytics reflecting this change. The log can be checked using the ``AuditLogs`` query as shown in this screenshot, by accessing ``Log Analytics`` and running the ``AuditLogs`` query.
+An easy way to test this is to create a new user in Azure Active Directory. A few minutes after the creation of the user, a new log will be available for Log Analytics reflecting this change. The log can be checked using the ``AuditLogs`` query, by accessing **Log Analytics** and running the ``AuditLogs`` query.
 
 .. thumbnail:: ../../../images/azure/la_new_user.png
     :title: Log Analytics App
@@ -137,7 +139,7 @@ An easy way to test this is to create a new user in Azure Active Directory. A fe
 Wazuh configuration
 ^^^^^^^^^^^^^^^^^^^
 
-Proceed to configure the ``azure-logs`` module in the local configuration (``ossec.conf``). The **key and ID of the application** saved during the configuration of the application will be used here, as well as **workspace ID**. In this case, both fields were saved in a **file** for authentication. Check the :ref:`credentials <azure_credentials>` reference for more information about this topic.
+Proceed with configuring the ``azure-logs`` module in the local configuration (``ossec.conf``). The **key and ID of the application** saved during the configuration of the application will be used here, as well as **workspace ID**. In this case, both fields were saved in a **file** for authentication. Check the :ref:`credentials <azure_credentials>` reference for more information about this topic.
 
 Through the following configuration, Wazuh is ready to search for any query accepted by Azure Log Analytics. This example configuration includes a representative ``tag`` and will be scheduled for every Monday at 02:00, using an offset of one day, which means only the log data from the last day will be parsed:
 
@@ -165,12 +167,12 @@ Through the following configuration, Wazuh is ready to search for any query acce
 
 Check the reference for more information about the azure module :ref:`here <wodle_azure_logs>`.
 
-.. warning:: The field ``tenantdomain`` is mandatory. It can be obtain from the ``Overview`` section in the ``Azure Active Directory``
+.. warning:: The field ``tenantdomain`` is mandatory. It can be obtain from the **Overview** section in the Azure Active Directory.
 
 Wazuh Rules
 ^^^^^^^^^^^
 
-Thanks to the following rules, already included in Wazuh by default, it it possible to monitor the infrastructure activity and get the related alerts:
+The following rules are already included in Wazuh by default. With them, it it possible to monitor the infrastructure activity and get the related alerts.
 
 .. code-block:: xml
 
@@ -196,7 +198,7 @@ Thanks to the following rules, already included in Wazuh by default, it it possi
 Alert visualization
 ^^^^^^^^^^^^^^^^^^^
 
-Once the Wazuh configuration is set and the ``azure-logs`` module run using the previous configuration the event will be processed. The results can be check in Wazuh UI:
+Once the Wazuh configuration is set and the ``azure-logs`` module is running using the previous configuration, the event will be processed. The results can be check in the Wazuh UI:
 
 .. thumbnail:: ../../../images/azure/new_user_event.png
     :title: Log Analytics App
