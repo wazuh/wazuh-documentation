@@ -9,6 +9,8 @@ Installation from sources
 =========================
 The Wazuh manager and agent can be installed via sources as an alternative to the installation from packages.
 
+ .. note:: All the commands described below need to be executed with root user privileges.
+
 - :ref:`Installing Wazuh server from sources <wazuh_server_source_installation>`
 - :ref:`Installing Wazuh agent from sources <wazuh_agent_source_installation>`
 
@@ -277,8 +279,6 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
   .. group-tab:: Linux Yum
 
 
-    .. note:: All the commands described below need to be executed with root user privileges.
-
     .. note:: CMake 3.12.4 is the minimal library version required to build the Wazuh agent solution.
 
     1. Install development tools and compilers. In Linux this can easily be done using your distribution's package manager:
@@ -414,8 +414,6 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
   .. group-tab:: Linux APT
 
 
-    .. note:: All the commands described below need to be executed with root user privileges.
-
     .. note:: CMake 3.12.4 is the minimal library version required to build the Wazuh agent solution.
 
     1. Install development tools and compilers. In Linux this can easily be done using your distribution's package manager:
@@ -527,8 +525,6 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
   .. group-tab:: Linux ZYpp
 
-
-    .. note:: All the commands described below need to be executed with root user privileges.
 
     .. note:: CMake 3.12.4 is the minimal library version required to build the Wazuh agent solution.
 
@@ -735,8 +731,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
       $ curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_LATEST|.tar.gz | tar zx
 
-     .. note:: All the commands described below need to be executed with root user privileges.
-
+     
     3. Run the ``install.sh`` script. This will run a wizard that will guide you through the installation process using the Wazuh sources:
 
      .. code-block:: console
@@ -815,8 +810,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
   .. group-tab:: AIX
 
 
-    .. note:: All the commands described below need to be executed with root user privileges.
-
+  
     1. Install development tools and compilers.
 
      1.1 Download the ``wget`` tool.
@@ -931,7 +925,6 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
   .. group-tab:: HP-UX
 
-    .. note:: All the commands described below need to be executed with root user privileges.
 
     1. Install development tools and compilers.
 
@@ -1062,7 +1055,6 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
       .. tab:: Solaris 10
 
-        .. note:: All the commands described below need to be executed with root user privileges.
 
         1. Install development tools and compilers.
 
@@ -1239,7 +1231,6 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
       .. tab:: Solaris 11
 
-        .. note:: All the commands described below need to be executed with root user privileges.
 
         1. Install development tools and build the needed compilers.
 
