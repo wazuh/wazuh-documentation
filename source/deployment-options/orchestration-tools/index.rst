@@ -12,7 +12,6 @@ Orchestration tools
 
 
 .. toctree::
-    :hidden:
     :maxdepth: 1
     
     deploying-with-ansible/index
