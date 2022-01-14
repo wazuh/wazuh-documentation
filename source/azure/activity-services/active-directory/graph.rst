@@ -12,7 +12,7 @@ Learn how to configure an application from the Microsoft Azure portal to be able
 
 - `Azure configuration`_
 - `Wazuh configuration`_
-- `Microsoft Graph Use Case`_
+- `Microsoft Graph use case`_
 
 In order to know how the Wazuh Azure module works in conjunction with the **Microsoft Graph REST API**, it is important to understand first what are the Azure AD activity reports and what kind of information they provide. Wazuh can process the logs from the following Azure AD activity reports, each one of them requiring a different query to be executed:
 
@@ -33,11 +33,9 @@ Azure configuration
 Creating the application
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-This section explains the creation of an application that will use the Azure Log Analytics REST API.
+This section explains the creation of an application that will use the Azure Log Analytics REST API. It is also possible to configure an existing application. If this is the case, skip this step.
 
-.. note::  It is also possible to configure an existing application. If this is the case, skip this step.
-
-In the **Azure Active Directory** section, select the option **App registrations**. Then, select **New registration**.
+In the **Azure Active Directory** panel, select the option **App registrations**. Then, select **New registration**.
 
 .. thumbnail:: ../../../images/azure/graph1.png
     :title: Log Analytics App
@@ -68,7 +66,7 @@ Giving permissions to the application
     :align: center
     :width: 100%
 
-4. Select the permissions in **Applications permissions** section that adapt to our infrastructure. In this case, **AuditLog** permissions will be granted. Then, click **Add permissions**.
+1. Select the permissions in **Applications permissions** that adapt to our infrastructure. In this case, **AuditLog** permissions will be granted. Then, click **Add permissions**.
 
 .. thumbnail:: ../../../images/azure/graph5.png
     :title: AAD
@@ -148,7 +146,7 @@ Check the :ref:`azure-logs <wodle_azure_logs>` module reference for more informa
 
 .. warning:: The field ``tenantdomain`` is mandatory. It can be obtain from the **Overview** section in the Azure Active Directory.
 
-Microsoft Graph Use Case
+Microsoft Graph use case
 ------------------------
 
 Here is an example of monitoring the Azure ADD activity using the configuration described above.
