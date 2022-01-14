@@ -117,12 +117,12 @@ Manager
 - `#8237 <https://github.com/wazuh/wazuh/pull/8237>`_ CVE alerts by Vulnerability Detector now include the time of detection, severity, and score.
 - `#10849 <https://github.com/wazuh/wazuh/pull/10849>`_ The manager startup is fixed when ``<database_output>`` is enabled.
 - Improved cluster performance using multiprocessing:
-   - `#10767 <https://github.com/wazuh/wazuh/pull/10767>`_ The cluster "local_integrity" task is changed to run in a separate process to improve overall performance.
+   - `#10767 <https://github.com/wazuh/wazuh/pull/10767>`_ The cluster ``local_integrity`` task is changed to run in a separate process to improve overall performance.
    - `#10807 <https://github.com/wazuh/wazuh/pull/10807>`_ The cluster communication with the database for agent information synchronization runs now in a separate parallel process.
    - `#10920 <https://github.com/wazuh/wazuh/pull/10920>`_ Now the cluster processing of the extra-valid files in the master node is carried out in a separate parallel process.
    - `#11328 <https://github.com/wazuh/wazuh/pull/11328>`_ The cluster's file compression task in the master node is carried out in a parallel separate process.
    - `#11364 <https://github.com/wazuh/wazuh/pull/11364>`_ Now the processing of Integrity files in worker nodes is carried out in a parallel separate process.
-   - `#11386 <https://github.com/wazuh/wazuh/pull/11386>`_ Use cluster and API single processing when the wazuh user doesn't have permissions to access /dev/shm.
+   - `#11386 <https://github.com/wazuh/wazuh/pull/11386>`_ Use cluster and API single processing when the wazuh user doesn't have permissions to access ``/dev/shm``.
 
 
 
@@ -172,7 +172,7 @@ Agent
 - `#3659 <https://github.com/wazuh/wazuh/pull/3659>`_ Agent logs for inability to resolve the manager hostname now have info level.
 - `#10900 <https://github.com/wazuh/wazuh/pull/10900>`_ The oscap module files are removed as it was already deprecated since v4.0.0.
 - `#11276 <https://github.com/wazuh/wazuh/pull/11276>`_ Added ID number to connection enrollment logs.
-- `#10838 <https://github.com/wazuh/wazuh/pull/10838>`_ Standardized the use of the only_logs_after parameter in the external integration modules.
+- `#10838 <https://github.com/wazuh/wazuh/pull/10838>`_ Standardized the use of the ``only_logs_after`` parameter in the external integration modules.
 
 
 RESTful API
@@ -366,7 +366,7 @@ Reference                                                         Description
 `#10942 <https://github.com/wazuh/wazuh/pull/10942>`_             Fixed Windows agent compilation warnings.
 `#11207 <https://github.com/wazuh/wazuh/pull/11207>`_             Fixed the OS version reported by the agent on OpenSUSE Tumbleweed.
 `#11329 <https://github.com/wazuh/wazuh/pull/11329>`_             Prevented Syscollector from truncating the open port inode numbers on Linux.
-`#11365 <https://github.com/wazuh/wazuh/pull/11365>`_             Fixed agent auto-restart on configuration changes when started via wazuh-control on a Systemd based Linux OS.
+`#11365 <https://github.com/wazuh/wazuh/pull/11365>`_             Fixed agent auto-restart on configuration changes when started via ``wazuh-control`` on a Systemd based Linux OS.
 `#10952 <https://github.com/wazuh/wazuh/pull/10952>`_             Fixed a bug in the AWS module resulting in unnecessary API calls when trying to obtain the different Account IDs for the bucket.
 `#11194 <https://github.com/wazuh/wazuh/pull/11194>`_             Fixed reparse option in the AWS VPCFlow integration.
 `#11278 <https://github.com/wazuh/wazuh/pull/11278>`_             Fixed Azure integration's configuration parsing to allow omitting optional parameters.
@@ -479,6 +479,7 @@ Changelogs
 
 More details about these changes are provided in the changelog of each component:
 
-- `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v4.3.0-rc1/CHANGELOG.md>`_
+- `wazuh/wazuh v4.3.0-rc1 <https://github.com/wazuh/wazuh/blob/v4.3.0-rc1/CHANGELOG.md>`_
+- `wazuh/wazuh v4.3.0-rc2 <https://github.com/wazuh/wazuh/blob/v4.3.0-rc2/CHANGELOG.md>`_
 - `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/4.3-7.10---RC1/CHANGELOG.md>`_
 - `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v4.2.5-8.1.4/CHANGELOG.md>`_
