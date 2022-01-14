@@ -269,7 +269,7 @@ Remove users:
 Installing Wazuh agent from sources
 -----------------------------------
 
-The Wazuh agent is a single and lightweight monitoring software. It is a multi-platform component that provides visibility into the endpoint’s security by collecting critical system and application records and detecting potential anomalies.
+The Wazuh agent is a single and lightweight monitoring software. It is a multi-platform component that provides visibility into the endpoint’s security by collecting critical system and application records. Below you will learn to install it from sources.
 
 
 .. tabs::
