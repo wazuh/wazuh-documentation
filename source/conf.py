@@ -49,8 +49,8 @@ needs_sphinx = '1.8'
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.extlinks', # Sphinx built-in extension
-    'sphinx_tabs.tabs',
-    'wazuh-doc-images' # Custom extension
+    'wazuh-doc-images',  # Custom extension
+    'sphinx_tabs.tabs'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -89,7 +89,7 @@ language = 'en-US'
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path .
-exclude_patterns = []
+exclude_patterns = ['redirects.js']
 
 # The reST default role (used for this markup: `text`) to use for all
 # documents.
@@ -119,7 +119,7 @@ pygments_style = 'sphinx'
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'wazuh_doc_theme_v3'
+html_theme = 'wazuh_doc_theme'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -127,11 +127,12 @@ html_theme = 'wazuh_doc_theme_v3'
 html_theme_options = {
     'wazuh_web_url': 'https://wazuh.com',
     'wazuh_doc_url': 'https://documentation.wazuh.com',
-    'globaltoc_depth': 7, # TODO: remove
-    'includehidden': True, # TODO: remove
-    'collapse_navigation': False, # TODO: remove
-    'prev_next_buttons_location': 'bottom' # TODO: remove
+    'globaltoc_depth': 5, # Only for Wazuh documentation theme v2.0
+    'includehidden': True, # Only for Wazuh documentation theme v2.0v
+    'collapse_navigation': False, # Only for Wazuh documentation theme v2.0v
+    'prev_next_buttons_location': 'bottom' # Only for Wazuh documentation theme v2.0v
 }
+
 
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = ['_themes']
@@ -187,8 +188,7 @@ html_static_path = ['_static']
 # template names.
 html_additional_pages = {}
 
-if html_theme == 'wazuh_doc_theme_v3':
-    html_additional_pages['not_found'] = 'not-found.html'
+html_additional_pages['not_found'] = 'not-found.html'
 
 if version >= '4.0':
     html_additional_pages['user-manual/api/reference'] = 'api-redoc.html'
@@ -359,8 +359,6 @@ wazuh_images_config = {
   'show_caption': True
 }
 
-html_scaled_image_link = False
-
 # -- Options for intersphinx extension ---------------------------------------
 
 # Example configuration for intersphinx: refer to the Python standard library.
@@ -407,7 +405,12 @@ def minification(current_path):
             with open(min_file, 'r') as f_min:
                 min_file_content = f_min.read()
 
-        with open(os.path.join(current_path, file[1]+'-src', file[0]+'.'+file[1]), 'r') as f:
+        if file[0]+'.'+file[1] in exclude_patterns:
+            source_file = os.path.join(os.path.dirname(os.path.realpath(__file__)), html_static_path[0], file[1], file[0]+'.'+file[1])
+        else:
+            source_file = os.path.join(current_path, file[1]+'-src', file[0]+'.'+file[1])
+
+        with open(source_file, 'r') as f:
 
             output = f.read()
 
@@ -519,6 +522,7 @@ compilation_time = str(time.time())
 def setup(app):
 
     current_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), theme_assets_path)
+    static_path_str = os.path.join(os.path.dirname(os.path.realpath(__file__)), html_static_path[0])
     
     if not os.path.exists(app.srcdir + '/' + html_static_path[0] + '/'):
         os.mkdir(app.srcdir + '/' + html_static_path[0] + '/')
@@ -559,7 +563,7 @@ def setup(app):
         app.add_js_file("js/dist/accordion.min.js?ver=%s" % os.stat(
             os.path.join(current_path, "js-src/accordion.js")).st_mtime)
         app.add_js_file("js/dist/redirects.min.js?ver=%s" % os.stat(
-            os.path.join(current_path, "js-src/redirects.js")).st_mtime)
+            os.path.join(static_path_str, "js/redirects.js")).st_mtime)
         app.add_js_file("js/dist/release-note-redirect.min.js?ver=%s" % os.stat(
             os.path.join(current_path, "js-src/release-note-redirect.js")).st_mtime)
 
@@ -569,13 +573,14 @@ def setup(app):
 	# List of compiled documents
     app.connect('html-page-context', collect_compiled_pagename)
     app.connect('html-page-context', insert_inline_style)
-    app.connect('html-page-context', manage_assets)
+    if html_theme == 'wazuh_doc_theme_v3':
+        app.connect('html-page-context', manage_assets)
     app.connect('build-finished', finish_and_clean)
 
 
 def insert_inline_style(app, pagename, templatename, context, doctree):
     ''' Runs once per page, inserting the content of the compiled style for Google Fonts into the context '''
-    google_fonts_path = os.path.join('source/',theme_assets_path, 'static', 'css', 'inline', 'google-fonts.min.css')
+    google_fonts_path = os.path.join('source/',theme_assets_path, 'static', 'css', 'google-fonts.min.css')
     # Fonts to be preloaded
     with open(google_fonts_path, 'r') as reader:
         google_fonts = reader.read()
