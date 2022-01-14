@@ -277,7 +277,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
   .. group-tab:: Linux Yum
 
 
-    .. note:: All the commands described below need to be executed with root user privileges. Since Wazuh 3.5 it is necessary to have internet connection when following this process.
+    .. note:: All the commands described below need to be executed with root user privileges.
 
     .. note:: CMake 3.12.4 is the minimal library version required to build the Wazuh agent solution.
 
@@ -414,7 +414,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
   .. group-tab:: Linux APT
 
 
-    .. note:: All the commands described below need to be executed with root user privileges. Since Wazuh 3.5 it is necessary to have internet connection when following this process.
+    .. note:: All the commands described below need to be executed with root user privileges.
 
     .. note:: CMake 3.12.4 is the minimal library version required to build the Wazuh agent solution.
 
@@ -528,7 +528,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
   .. group-tab:: Linux ZYpp
 
 
-    .. note:: All the commands described below need to be executed with root user privileges. Since Wazuh 3.5 it is necessary to have internet connection when following this process.
+    .. note:: All the commands described below need to be executed with root user privileges.
 
     .. note:: CMake 3.12.4 is the minimal library version required to build the Wazuh agent solution.
 
@@ -756,8 +756,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
      .. note:: During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``. When choosing a different path than the default, if the directory already exist the installer will ask if delete the directory or if installing Wazuh inside. You can also run an :ref:`unattended installation <unattended-installation>`.
 
-     .. note:: Since Wazuh 3.5 it is necessary to have internet connection when following this step.
-
+    
     4. The script will ask about what kind of installation you want. Type ``agent`` in order to install a Wazuh agent:
 
      .. code-block:: none
@@ -816,7 +815,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
   .. group-tab:: AIX
 
 
-    .. note:: All the commands described below need to be executed with root user privileges. Since Wazuh 3.5 it is necessary to have internet connection when following this process.
+    .. note:: All the commands described below need to be executed with root user privileges.
 
     1. Install development tools and compilers.
 
@@ -932,7 +931,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
   .. group-tab:: HP-UX
 
-    .. note:: All the commands described below need to be executed with root user privileges. Since Wazuh 3.5 it is necessary to have internet connection when following this process.
+    .. note:: All the commands described below need to be executed with root user privileges.
 
     1. Install development tools and compilers.
 
@@ -1063,7 +1062,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
       .. tab:: Solaris 10
 
-        .. note:: All the commands described below need to be executed with root user privileges. Since Wazuh 3.5 it is necessary to have internet connection when following this process.
+        .. note:: All the commands described below need to be executed with root user privileges.
 
         1. Install development tools and compilers.
 
@@ -1240,7 +1239,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
       .. tab:: Solaris 11
 
-        .. note:: All the commands described below need to be executed with root user privileges. Since Wazuh 3.5 it is necessary to have internet connection when following this process.
+        .. note:: All the commands described below need to be executed with root user privileges.
 
         1. Install development tools and build the needed compilers.
 
@@ -1324,8 +1323,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
          .. note:: During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``. When choosing a different path than the default, if the directory already exist the installer will ask if delete the directory or if installing Wazuh inside. You can also run an :ref:`unattended installation <unattended-installation>`.
 
-        .. note:: Since Wazuh 3.5 it is necessary to have internet connection when following this process.
-
+       
         4. The script will ask about what kind of installation you want. Type ``agent`` in order to install a Wazuh agent:
 
          .. code-block:: none
