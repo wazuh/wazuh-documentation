@@ -54,7 +54,7 @@ Trigger NIDS alerts on both agents and see the output
 
     .. code-block:: console
 
-        curl http://testmyids.com
+        curl http://testmynids.org/uid/index.html
 
 #. On the agent, look at the latest alert in both the standard Suricata alert log and also in the JSON alert log.
 
@@ -95,8 +95,8 @@ Trigger NIDS alerts on both agents and see the output
             "severity": 2
           },
         "http": {
-            "hostname": "testmyids.com",
-            "url": "/",
+            "hostname": "testmynids.org",
+            "url": "/uid/index.html",
             "http_user_agent": "curl/7.29.0",
             "http_content_type": "text/html",
             "http_method": "GET",
@@ -237,7 +237,7 @@ the shared configuration with their local configuration.
 See Suricata NIDS events in Kibana
 ----------------------------------
 
-#. On each Linux agent, rerun the NIDS-tripping curl command again: ``curl http://testmyids.com``
+#. On each Linux agent, rerun the NIDS-tripping curl command again: ``curl http://testmynids.org/uid/index.html``
 
 #. Search Kibana for ``rule.id:86601``.  That is the rule that notices Suricata alerts.  Pick these fields for readability:
 
@@ -270,7 +270,7 @@ Observe how Wazuh decodes Suricata events
     .. code-block:: json
         :class: output
 
-        {"timestamp":"2018-02-09T21:32:13.120749+0000","flow_id":659410948727787,"in_iface":"eth0","event_type":"alert","src_ip":"82.165.177.154","src_port":80,"dest_ip":"172.30.0.30","dest_port":45504,"proto":"TCP","alert":{"action":"allowed","gid":1,"signature_id":2100498,"rev":7,"signature":"GPL ATTACK_RESPONSE id check returned root","category":"Potentially Bad Traffic","severity":2},"http":{"hostname":"testmyids.com","url":"/","http_user_agent":"curl/7.29.0","http_content_type":"text/html","http_method":"GET","protocol":"HTTP/1.1","status":200,"length":39},"app_proto":"http","flow":{"pkts_toserver":5,"pkts_toclient":4,"bytes_toserver":415,"bytes_toclient":522,"start":"2018-02-09T21:32:12.861163+0000"}}
+        {"timestamp":"2018-02-09T21:32:13.120749+0000","flow_id":659410948727787,"in_iface":"eth0","event_type":"alert","src_ip":"82.165.177.154","src_port":80,"dest_ip":"172.30.0.30","dest_port":45504,"proto":"TCP","alert":{"action":"allowed","gid":1,"signature_id":2100498,"rev":7,"signature":"GPL ATTACK_RESPONSE id check returned root","category":"Potentially Bad Traffic","severity":2},"http":{"hostname":"testmynids.org","url":"/uid/index.html","http_user_agent":"curl/7.29.0","http_content_type":"text/html","http_method":"GET","protocol":"HTTP/1.1","status":200,"length":39},"app_proto":"http","flow":{"pkts_toserver":5,"pkts_toclient":4,"bytes_toserver":415,"bytes_toclient":522,"start":"2018-02-09T21:32:12.861163+0000"}}
 
 
 #. Run ``wazuh-logtest`` on wazuh-manager and paste in the copied Suricata alert record, observing how it is analyzed:
@@ -280,7 +280,7 @@ Observe how Wazuh decodes Suricata events
 
         Type one log per line
 
-        {"timestamp":"2018-02-09T21:32:13.120749+0000","flow_id":659410948727787,"in_iface":"eth0","event_type":"alert","src_ip":"82.165.177.154","src_port":80,"dest_ip":"172.30.0.30","dest_port":45504,"proto":"TCP","alert":{"action":"allowed","gid":1,"signature_id":2100498,"rev":7,"signature":"GPL ATTACK_RESPONSE id check returned root","category":"Potentially Bad Traffic","severity":2},"http":{"hostname":"testmyids.com","url":"/","http_user_agent":"curl/7.29.0","http_content_type":"text/html","http_method":"GET","protocol":"HTTP/1.1","status":200,"length":39},"app_proto":"http","flow":{"pkts_toserver":5,"pkts_toclient":4,"bytes_toserver":415,"bytes_toclient":522,"start":"2018-02-09T21:32:12.861163+0000"}}
+        {"timestamp":"2018-02-09T21:32:13.120749+0000","flow_id":659410948727787,"in_iface":"eth0","event_type":"alert","src_ip":"82.165.177.154","src_port":80,"dest_ip":"172.30.0.30","dest_port":45504,"proto":"TCP","alert":{"action":"allowed","gid":1,"signature_id":2100498,"rev":7,"signature":"GPL ATTACK_RESPONSE id check returned root","category":"Potentially Bad Traffic","severity":2},"http":{"hostname":"testmynids.org","url":"/uid/index.html","http_user_agent":"curl/7.29.0","http_content_type":"text/html","http_method":"GET","protocol":"HTTP/1.1","status":200,"length":39},"app_proto":"http","flow":{"pkts_toserver":5,"pkts_toclient":4,"bytes_toserver":415,"bytes_toclient":522,"start":"2018-02-09T21:32:12.861163+0000"}}
 
         **Phase 1: Completed pre-decoding.
 
@@ -303,14 +303,14 @@ Observe how Wazuh decodes Suricata events
                 flow.pkts_toserver: '5'
                 flow.start: '2018-02-09T21:32:12.861163+0000'
                 flow_id: '659410948727787.000000'
-                http.hostname: 'testmyids.com'
+                http.hostname: 'testmynids.org'
                 http.http_content_type: 'text/html'
                 http.http_method: 'GET'
                 http.http_user_agent: 'curl/7.29.0'
                 http.length: '39'
                 http.protocol: 'HTTP/1.1'
                 http.status: '200'
-                http.url: '/'
+                http.url: '/uid/index.html'
                 in_iface: 'eth0'
                 proto: 'TCP'
                 src_ip: '82.165.177.154'
@@ -368,7 +368,7 @@ You may have noticed that there were no Geolocation fields in the Kibana records
 
     .. code-block:: console
 
-        curl ``http://testmyids.com``.
+        curl ``http://testmynids.org/uid/index.html``.
 
 #. Look through the new Suricata events in Kibana, observing they now have source geoip fields populated.  Private IPs of course cannot be geolocated.
 
