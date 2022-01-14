@@ -1,0 +1,99 @@
+/* -----------------------------------------------------------------------------
+  Component: Version notice
+
+  Style for the component that notifies that the documentation visited is not
+  the latest one.
+----------------------------------------------------------------------------- */
+
+.no-latest-notice-wrapper {
+  padding-left: 30px;
+  padding-right: 15px;
+  position: fixed;
+  height: $noLatestNoticeHeightXl;
+  @include media-only(xl, xxl) {
+    left: $leftSidebarWidthNarrow;
+    right: $rightSidebarWidthNarrow;
+  }
+  @include media-min(xxl) {
+    left: $leftSidebarWidth;
+    right: $rightSidebarWidth;
+  }
+  
+  .no-latest-notice {
+    margin: .6em 0;
+    padding: 0 20px 1px;
+    display: inline-block;
+    border-left: 5px solid;
+    
+    .no-latest-title {
+      display: inline-block;
+      position: relative;
+      font-weight: 500;
+      padding: 4px 15px 4px 0;
+      line-height: 32px;
+    }
+  
+    .no-latest-text-wrapper {
+      padding: 4px 15px 4px 0;
+      line-height: 32px;
+    }
+  }
+}
+
+.no-latest-docs {
+  
+  &.document {
+    
+    #central-column {
+      padding-top: calc(#{$breadcrumbsHeightXl} + #{$noLatestNoticeHeightXl});
+      * {
+        scroll-margin-top: calc(#{$headerHeightXl} + #{$breadcrumbsHeightXl} + #{$noLatestNoticeHeightXl});
+      }
+    }
+    
+    [role="main"] {
+      min-height: calc(100vh - #{$headerHeightXl} - #{$breadcrumbsHeightXl} - #{$footerHeight} - #{$noLatestNoticeHeightXl});
+    }
+    
+    .no-latest-notice-wrapper {
+      top: calc(#{$headerHeightXl} + #{$breadcrumbsHeightXl});
+    }
+  }
+  &.search {
+    .no-latest-notice-wrapper {
+      top: calc(#{$headerHeightXl});
+    }
+    #central-column {
+      padding-top: $noLatestNoticeHeightXl;
+    }
+  }
+}
+
+/* Light theme -------------------------------------------------------------- */
+body {
+  .no-latest-notice-wrapper {
+    background-color: $light_ColorBaseSpace;
+    .no-latest-notice {
+      border-left-color: $light_ColorWarning;
+      background-color: $light_ColorAdmonitionBackground;
+      .no-latest-title {
+        color: $light_ColorWarningDark;
+      }
+    }
+  }
+}
+
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme {
+  .no-latest-notice-wrapper {
+    background-color: $dark_ColorBaseSpace;
+    .no-latest-notice {
+      border-left-color: $dark_ColorWarning;
+      background-color: $dark_ColorAdmonitionBackground;
+      .no-latest-title {
+        color: $dark_ColorWarningDark;
+      }
+    }
+  }
+}

@@ -1,0 +1,79 @@
+/* -----------------------------------------------------------------------------
+  Component: Search box
+
+  Style for the searchbox in general.
+----------------------------------------------------------------------------- */
+
+.search-box {
+  border: 2px solid;
+  border-radius: $roundedCorners;
+
+  .search-form {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 46px;
+
+    .form-control {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      font-size: 18px;
+      font-weight: 400;
+      border: none;
+    }
+
+    .btn-search {
+      position: absolute;
+      right: 0;
+      z-index: 10;
+      width: 46px;
+      height: 46px;
+      padding: 5px;
+      background-repeat: no-repeat;
+      background-size: 41px 41px;
+      background-position: center;
+      border: none;
+    }
+  }
+}
+
+/* Light theme -------------------------------------------------------------- */
+
+body {
+  .search-box {
+    background-color: $light_ColorBaseSpace;
+    border-color: $light_ColorBorderDetails;
+    .form-control {
+      background-color: $light_ColorBaseSpace;
+      color: $light_ColorMainText;
+    }
+    .btn-search {
+      background: url('#{$icoPath}svg-icons.svg#search-lt');
+    }
+    ::placeholder { 
+      color: $light_ColorInputPlaceholder;
+    }
+  }
+}
+
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme {
+  .search-box {
+    background-color: $dark_ColorBaseSpace;
+    border-color: $dark_ColorBorderDetails;
+    .form-control {
+      background-color: $dark_ColorBaseSpace;
+      color: $dark_ColorMainText;
+    }
+    .btn-search {
+      background: url('#{$icoPath}svg-icons.svg#search-dt');
+    }
+    ::placeholder { 
+      color: $dark_ColorInputPlaceholder;
+    }
+  }
+}

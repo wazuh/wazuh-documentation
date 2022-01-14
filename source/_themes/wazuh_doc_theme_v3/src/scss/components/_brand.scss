@@ -1,0 +1,64 @@
+/* -----------------------------------------------------------------------------
+  Component: Brand and logo
+
+  Style for the element containing the logo in the header.
+----------------------------------------------------------------------------- */
+
+.navbar-brand {
+  display: flex;
+  align-content: flex-end;
+  position: relative;
+
+  .logo-link {
+    height: 28px;
+    position: absolute;
+    &.docs {
+      right: 0;
+      padding-right: 32%;
+    }
+    &.web {
+      left: 0;
+      padding-left: 65%;
+    }
+  }
+  img {
+    width: auto;
+    height: 28px;
+    
+    @include media-max(sm){
+      height: 24px;
+    }
+  }
+}
+
+/* Light theme -------------------------------------------------------------- */
+
+body {
+  .logo-link {
+    &.docs {
+      color: $light_ColorMainText;
+    }
+  }
+  .logo-light {
+    display: inline-block;
+  }
+  .logo-dark {
+    display: none;
+  }
+}
+
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme {
+  .logo-link {
+    &.docs {
+      color: $dark_ColorMainText;
+    }
+  }
+  .logo-light {
+    display: none;
+  }
+  .logo-dark {
+    display: inline-block;
+  }
+}
