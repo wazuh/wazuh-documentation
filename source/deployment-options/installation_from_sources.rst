@@ -5,11 +5,11 @@
     
 .. _installation_from_sources:
 
+
 Installation from sources
 =========================
 The Wazuh manager and agent can be installed via sources as an alternative to the installation from packages.
 
- .. note:: All the commands described below need to be executed with root user privileges.
 
 - :ref:`Installing Wazuh server from sources <wazuh_server_source_installation>`
 - :ref:`Installing Wazuh agent from sources <wazuh_agent_source_installation>`
