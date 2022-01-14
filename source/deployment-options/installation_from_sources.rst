@@ -48,7 +48,7 @@ Installing Wazuh manager
             # scl enable devtoolset-7 bash
 
 
-          CMake 3.18 installation. CMake 3.12.4 is the minimal library version required to build the Wazuh server solution.
+          Install CMake 3.18. CMake 3.12.4 is the minimal library version required to build the Wazuh server solution.
 
           .. code-block:: console
 
