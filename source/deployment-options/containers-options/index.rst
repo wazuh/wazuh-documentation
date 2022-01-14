@@ -12,7 +12,6 @@ Deployment on containers
 
 
 .. toctree::
-    :hidden:
     :maxdepth: 1
     
         On Docker <docker/index> 
