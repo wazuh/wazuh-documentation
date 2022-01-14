@@ -13,8 +13,8 @@ Using Wazuh to monitor Microsoft Azure
 
 As a built-in Wazuh feature, it is possible to analyze and trigger alerts from Microsoft Azure log data. Wazuh helps to increase the security of an Azure infrastructure in three different, complementary ways:
 
-- **Monitoring instances** installing the Wazuh agent on them, which will send events to the Wazuh manager for analysis in order to classify the events within a range of alerts that can be easily viewed.
-- **Monitoring the Azure Portal and its services**, including platform logs from Azure services, logs and performance data from virtual machines and usage and performance data from the applications.
+- **Monitoring instances** by installing the Wazuh agent on them. This will send events to the Wazuh manager for analysis in order to classify the events within a range of alerts that can be easily viewed.
+- **Monitoring the Azure Portal and its services**, including platform logs from Azure services, logs, and performance data from virtual machines and usage and performance data from the applications.
 - **Monitoring the Azure Active Directory (Azure AD) activity** to discover how the Azure AD services are accessed and used.
 
 .. topic:: Contents
