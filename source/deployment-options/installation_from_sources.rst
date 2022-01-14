@@ -48,7 +48,7 @@ Installing Wazuh manager
             # scl enable devtoolset-7 bash
 
 
-          Install CMake 3.18. CMake 3.12.4 is the minimal library version required to build the Wazuh server solution.
+          CMake 3.18 installation.
 
           .. code-block:: console
 
@@ -279,7 +279,6 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
   .. group-tab:: Linux Yum
 
 
-    .. note:: CMake 3.12.4 is the minimal library version required to build the Wazuh agent solution.
 
     1. Install development tools and compilers. In Linux this can easily be done using your distribution's package manager:
 
@@ -414,7 +413,6 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
   .. group-tab:: Linux APT
 
 
-    .. note:: CMake 3.12.4 is the minimal library version required to build the Wazuh agent solution.
 
     1. Install development tools and compilers. In Linux this can easily be done using your distribution's package manager:
 
@@ -526,7 +524,6 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
   .. group-tab:: Linux ZYpp
 
 
-    .. note:: CMake 3.12.4 is the minimal library version required to build the Wazuh agent solution.
 
     1. Install development tools and compilers. In Linux this can easily be done using your distribution's package manager:
 
