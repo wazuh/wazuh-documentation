@@ -449,7 +449,7 @@ redoc[spec-url] .scrollbar-container [role="menuitem"]:focus {
 	height:52px;
   color: #fff;
 	background-color: #00a9e5;
-  background: url(../img/wazuh_bg_head.png), no-repeat center center #00a9e5;
+  background: url(../../images/wazuh_bg_head.png), no-repeat center center #00a9e5;
   background-size: cover;
 }
 
