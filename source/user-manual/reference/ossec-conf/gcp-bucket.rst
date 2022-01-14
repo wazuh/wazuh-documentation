@@ -1,22 +1,22 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 .. meta::
-  :description: The Wazuh GCP Pub/Sub module allows you to pull log data from Google Pub/Sub. Learn more about how to configure the module in this section.
+  :description: The Wazuh GCP Storage module allows you to process logs stored in Google Cloud Storage buckets. Learn more about how to configure the module in this section.
 
-.. _gcp-pubsub:
+.. _gcp-bucket:
 
-gcp-pubsub
+gcp-bucket
 ==========
 
-.. versionadded:: 3.13.0
+.. versionadded:: 4.3.0
 
 .. topic:: XML section name
 
 	.. code-block:: xml
 
-		<gcp-pubsub>
-		</gcp-pubsub>
+		<gcp-bucket>
+		</gcp-bucket>
 
-This configuration section is used to configure the Google Cloud Pub/Sub module.
+This configuration section is used to configure the Google Cloud Storage bucket module.
 
 Options
 -------
@@ -25,16 +25,13 @@ Main options
 ^^^^^^^^^^^^
 
 - `enabled`_
-- `project_id`_
-- `subscription_name`_
-- `credentials_file`_
-- `max_messages`_
-- `num_threads`_
 - `logging`_
+- `bucket type`_
 
 Scheduling options
 ^^^^^^^^^^^^^^^^^^
-- `pull_on_start`_
+
+- `run_on_start`_
 - `interval`_
 - `day`_
 - `wday`_
@@ -51,72 +48,6 @@ This indicates if the module is enabled or disabled.
 | **Allowed values** | yes, no      |
 +--------------------+--------------+
 
-project_id
-^^^^^^^^^^^
-
-This tag indicates the Google Cloud project ID.
-
-+--------------------+--------------------------------------------------+
-| **Default value**  | n/a                                              |
-+--------------------+--------------------------------------------------+
-| **Allowed values** | Any string indicating the project ID             |
-+--------------------+--------------------------------------------------+
-
-For example ``<project_id>wazuh-dev</project_id>``.
-
-subscription_name
-^^^^^^^^^^^^^^^^^
-
-This string specifies the name of the subscription to read from.
-
-+--------------------+------------+
-| **Default value**  | n/a        |
-+--------------------+------------+
-| **Allowed values** | Any string |
-+--------------------+------------+
-
-For example ``<subscription_name>wazuh-name</subscription_name>``.
-
-credentials_file
-^^^^^^^^^^^^^^^^
-
-This setting specifies the path to the Google Cloud credentials file in JW Tokens. It allows both relative (to $HOME_INSTALLATION) and absolute paths.
-
-+--------------------+--------------------------------+
-| **Default value**  | n/a                            |
-+--------------------+--------------------------------+
-| **Allowed values** | Any path to a credentials file |
-+--------------------+--------------------------------+
-
-For example, ``<credentials_file>wodles/gcp-pubsub/credentials.json</credentials_file>``.
-
-max_messages
-^^^^^^^^^^^^
-Number of maximum messages pulled in each iteration. This value does not depend on the number of threads used.
-
-+--------------------+-------------+
-| **Default value**  | 100         |
-+--------------------+-------------+
-| **Allowed values** | Any integer |
-+--------------------+-------------+
-
-.. _num_threads:
-
-num_threads
-^^^^^^^^^^^^
-.. versionadded:: 4.2.2
-
-Number of threads used to pull in each iteration. The number of maximum messages will be divided between all the configured threads.
-
-+--------------------+-------------+
-| **Default value**  | 1           |
-+--------------------+-------------+
-| **Allowed values** | Any integer |
-+--------------------+-------------+
-
-.. note::
-
-  The number of threads will be truncated to the maximum allowed, depending on the number of CPU cores. The maximum value is ``number_of_physical_cores * 5``.
 
 logging
 ^^^^^^^^
@@ -129,11 +60,94 @@ Toggle between the different logging levels.
 | **Allowed values** | disabled/info/debug/warning/error/critical |
 +--------------------+--------------------------------------------+
 
+bucket type
+^^^^^^^^^^^
 
-pull_on_start
+Defines a bucket to process. It must have its ``type`` attribute defined. It supports multiple instances of this option.
+
+Bucket options
+~~~~~~~~~~~~~~
+
+- `bucket\\name`_
+- `bucket\\credentials_file`_
+- `bucket\\path`_
+- `bucket\\only_logs_after`_
+- `bucket\\remove_from_bucket`_
+
+type
+^^^^
+
+Specifies type of bucket. It is an attribute of the ``bucket`` tag.
+
++--------------------+-------------+
+| **Default value**  | N/A         |
++--------------------+-------------+
+| **Allowed values** | access_logs |
++--------------------+-------------+
+
+bucket\\name
+^^^^^^^^^^^^
+
+Name of the Google Cloud Storage bucket from where logs are read.
+
++--------------------+-----------------------------+
+| **Default value**  | N/A                         |
++--------------------+-----------------------------+
+| **Allowed values** | Any valid bucket name       |
++--------------------+-----------------------------+
+
+bucket\\credentials_file
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+This setting specifies the path to the Google Cloud credentials file in JW Tokens. It allows both relative (to $HOME_INSTALLATION) and absolute paths.
+
++--------------------+--------------------------------+
+| **Default value**  | n/a                            |
++--------------------+--------------------------------+
+| **Allowed values** | Any path to a credentials file |
++--------------------+--------------------------------+
+
+For example ``<credentials_file>wodles/gcp-bucket/credentials.json</credentials_file>``.
+
+bucket\\path
+^^^^^^^^^^^^
+
+If defined, the path or prefix for the bucket.
+
++--------------------+---------------+
+| **Default value**  | N/A           |
++--------------------+---------------+
+| **Allowed values** | Valid path    |
++--------------------+---------------+
+
+bucket\\only_logs_after
+^^^^^^^^^^^^^^^^^^^^^^^
+
+A valid date, in YYYY-MMM-DD format. Only logs from that date onwards will be parsed.
+
++--------------------+-----------------------------------+
+| **Default value**  | Date of execution at ``00:00:00`` |
++--------------------+-----------------------------------+
+| **Allowed values** | Valid date                        |
++--------------------+-----------------------------------+
+
+bucket\\remove_from_bucket
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Define if logs from the Google Cloud Storage bucket should be removed after they are read by the module.
+
++--------------------+---------+
+| **Default value**  | no      |
++--------------------+---------+
+| **Allowed values** | yes, no |
++--------------------+---------+
+
+
+
+run_on_start
 ^^^^^^^^^^^^^
 
-Trigger the pulling in case of an agent start or restart.
+Trigger the module in case the Wazuh service starts or restarts.
 
 +--------------------+---------+
 | **Default value**  | yes     |
@@ -204,7 +218,6 @@ Time of the day to retrieve logs from GCP. It has to be represented in the forma
 
 	When only the ``time`` option is set, the interval value must be a multiple of days or weeks. By default, the interval is set to a day.
 
-
 Configuration example
 ---------------------
 
@@ -212,11 +225,11 @@ Linux configuration:
 
 .. code-block:: xml
 
-    <gcp-pubsub>
+    <gcp-bucket>
         <pull_on_start>yes</pull_on_start>
         <interval>1m</interval>
         <project_id>wazuh-dev</project_id>
         <subscription_name>wazuhdns</subscription_name>
         <logging>debug</logging>
-        <credentials_file>wodles/gcp-pubsub/credentials.json</credentials_file>
-    </gcp-pubsub>
+        <credentials_file>wodles/gcp-bucket/credentials.json</credentials_file>
+    </gcp-bucket>

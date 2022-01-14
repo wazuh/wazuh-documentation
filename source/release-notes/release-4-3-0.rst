@@ -46,7 +46,7 @@ Wazuh Kibana plugin
       :align: center
       :title: Management / Configuration
 
-.. thumbnail::  ../images/release-notes/4.3.0/Office 365-General.png
+.. thumbnail::  ../images/release-notes/4.3.0/Office-365-General.png
       :align: center
       :title: Office 365 / General
 
@@ -258,16 +258,16 @@ Wazuh Kibana plugin
 - `#3549 <https://github.com/wazuh/wazuh-kibana-app/pull/3549>`_ Time subscription is added to Discover component.
 - `#3446 <https://github.com/wazuh/wazuh-kibana-app/pull/3446>`_ Testing logs using the Ruletest Test don't display the rule information if not matching a rule.
 - `#3649 <https://github.com/wazuh/wazuh-kibana-app/pull/3649>`_ The format permissions is changed in FIM inventory.
-- `#3686 <https://github.com/wazuh/wazuh-kibana-app/pull/3686>`_ Changed of request for one that does not return data that is not necessary to optimize times.
+- `#3686 <https://github.com/wazuh/wazuh-kibana-app/pull/3686>`_ `#3728 <https://github.com/wazuh/wazuh-kibana-app/pull/3728>`_ The request to agents that do not return data is now changed to avoid unnecessary heavy load requests.
 
 
 Others
 ^^^^^^
 
-- `#10247 <https://github.com/wazuh/wazuh/pull/10247>`_ Upgraded external SQLite library dependency version to 3.36.
-- `#10247 <https://github.com/wazuh/wazuh/pull/10247>`_ Upgraded external BerkeleyDB library dependency version to 18.1.40.
-- `#10247 <https://github.com/wazuh/wazuh/pull/10247>`_ Upgraded external OpenSSL library dependency version to 1.1.1l.
-- `#10927 <https://github.com/wazuh/wazuh/pull/10927>`_ Upgraded external Google Test library dependency version to 1.11.
+- `#10247 <https://github.com/wazuh/wazuh/pull/10247>`_ External SQLite library dependency is upgraded to version to 3.36.
+- `#10247 <https://github.com/wazuh/wazuh/pull/10247>`_ External BerkeleyDB library dependency is upgraded to version to 18.1.40.
+- `#10247 <https://github.com/wazuh/wazuh/pull/10247>`_ External OpenSSL library dependency is upgraded to version to 1.1.1l.
+- `#10927 <https://github.com/wazuh/wazuh/pull/10927>`_ External Google Test library  dependency is upgraded to version to 1.11.
 
 
 Resolved issues
@@ -282,33 +282,33 @@ Manager
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#8223 <https://github.com/wazuh/wazuh/pull/8223>`_               Fixed a memory defect in Remoted when closing connection handles.
-`#7625 <https://github.com/wazuh/wazuh/pull/7625>`_               Fixed a timing problem in the manager that might prevent Analysisd from sending Active responses to agents.
-`#8210 <https://github.com/wazuh/wazuh/pull/8210>`_               Fixed a bug in Analysisd that did not apply field lookup in rules that overwrite other ones.
-`#8902 <https://github.com/wazuh/wazuh/pull/8902>`_               Prevented the manager from leaving dangling agent database files.
-`#8254 <https://github.com/wazuh/wazuh/pull/8254>`_               Corrected remediation message for error code 6004.
-`#8157 <https://github.com/wazuh/wazuh/pull/8157>`_               Fixed a bug when deleting non-existing users or roles in the security SDK.
-`#8418 <https://github.com/wazuh/wazuh/pull/8418>`_               Fixed a bug with ``agent.conf`` file permissions when creating an agent group.
-`#8422 <https://github.com/wazuh/wazuh/pull/8422>`_               Fixed wrong exceptions with wdb pagination mechanism.
-`#8747 <https://github.com/wazuh/wazuh/pull/8747>`_               Fixed error when loading some rules with the ``\`` character.
-`#9216 <https://github.com/wazuh/wazuh/pull/9216>`_               Changed ``WazuhDBQuery`` class to properly close socket connections and prevent file descriptor leaks.
-`#10320 <https://github.com/wazuh/wazuh/pull/10320>`_             Fixed error in the api configuration when using the ``agent_upgrade`` script.
-`#10341 <https://github.com/wazuh/wazuh/pull/10341>`_             Handle ``JSONDecodeError`` in Distributed API class methods.
-`#9738 <https://github.com/wazuh/wazuh/pull/9738>`_               Fixed an issue with duplicated logs in Azure-logs module and applied several improvements to it.
-`#10680 <https://github.com/wazuh/wazuh/pull/10680>`_             Fixed the query parameter validation to allow usage of special chars in Azure module.
-`#8394 <https://github.com/wazuh/wazuh/pull/8394>`_               Fix a bug running ``wazuh-clusterd`` process when it was already running.
-`#8732 <https://github.com/wazuh/wazuh/pull/8732>`_               Allow cluster to send and receive messages with size higher than request_chunk.
-`#9077 <https://github.com/wazuh/wazuh/pull/9077>`_               Fixed a bug that caused ``wazuh-clusterd`` process to not delete its pidfile when running in foreground mode and it is stopped.
-`#10376 <https://github.com/wazuh/wazuh/pull/10376>`_             Fixed race condition due to lack of atomicity in the cluster synchronization mechanism.
-`#10492 <https://github.com/wazuh/wazuh/pull/10492>`_             Fixed bug when displaying the dates of the cluster tasks that have not finished yet. Now ``n/a`` is displayed in these cases.
-`#9196 <https://github.com/wazuh/wazuh/pull/9196>`_               Fixed missing field ``value_type`` in FIM alerts.
-`#9292 <https://github.com/wazuh/wazuh/pull/9292>`_               Fixed a typo in the SSH Integrity Check script for Agentless.
-`#10421 <https://github.com/wazuh/wazuh/pull/10421>`_             Fixed multiple race conditions in Remoted.
-`#10390 <https://github.com/wazuh/wazuh/pull/10390>`_             The manager's agent database has been fixed to prevent dangling entries from removed agents.
-`#9765 <https://github.com/wazuh/wazuh/pull/9765>`_               Fixed the alerts generated by FIM when a lookup operation on an SID fails.
-`#10866 <https://github.com/wazuh/wazuh/pull/10866>`_             Fixed a bug that caused cluster agent-groups files to be synchronized multiple times unnecessarily.
-`#10922 <https://github.com/wazuh/wazuh/pull/10922>`_             Fixed an issue in Wazuh DB that compiled the SQL statements multiple times unnecessarily.
-`#10948 <https://github.com/wazuh/wazuh/pull/10948>`_             Fixed a crash in Analysisd when setting Active Response with agent_id = 0.
+`#8223 <https://github.com/wazuh/wazuh/pull/8223>`_               A memory defect is fixed in Remoted when closing connection handles.
+`#7625 <https://github.com/wazuh/wazuh/pull/7625>`_               A timing problem is fixed in the manager that might prevent Analysisd from sending Active responses to agents.
+`#8210 <https://github.com/wazuh/wazuh/pull/8210>`_               A bug in Analysisd that did not apply field lookup in rules that overwrite other ones is fixed.
+`#8902 <https://github.com/wazuh/wazuh/pull/8902>`_               The manager is now prevented from leaving dangling agent database files.
+`#8254 <https://github.com/wazuh/wazuh/pull/8254>`_               The remediation message for error code 6004 was updated.
+`#8157 <https://github.com/wazuh/wazuh/pull/8157>`_               A bug when deleting non-existing users or roles in the security SDK is now fixed.
+`#8418 <https://github.com/wazuh/wazuh/pull/8418>`_               A bug with ``agent.conf`` file permissions when creating an agent group is now fixed.
+`#8422 <https://github.com/wazuh/wazuh/pull/8422>`_               Wrong exceptions with wdb pagination mechanism is fixed.
+`#8747 <https://github.com/wazuh/wazuh/pull/8747>`_               An error when loading some rules with the ``\`` character is fixed.
+`#9216 <https://github.com/wazuh/wazuh/pull/9216>`_               The ``WazuhDBQuery`` class is changed to properly close socket connections and prevent file descriptor leaks.
+`#10320 <https://github.com/wazuh/wazuh/pull/10320>`_             An error in the api configuration when using the ``agent_upgrade`` script is fixed.
+`#10341 <https://github.com/wazuh/wazuh/pull/10341>`_             The ``JSONDecodeError`` in Distributed API class methods is handle.
+`#9738 <https://github.com/wazuh/wazuh/pull/9738>`_               An issue with duplicated logs in Azure-logs module is fixed and several improvements are applied to it.
+`#10680 <https://github.com/wazuh/wazuh/pull/10680>`_             The query parameter validation is fixed to allow usage of special chars in Azure module.
+`#8394 <https://github.com/wazuh/wazuh/pull/8394>`_               A bug running ``wazuh-clusterd`` process when it was already running is fixed.
+`#8732 <https://github.com/wazuh/wazuh/pull/8732>`_               Cluster is now allowed to send and receive messages with size higher than request_chunk.
+`#9077 <https://github.com/wazuh/wazuh/pull/9077>`_               A bug that caused ``wazuh-clusterd`` process to not delete its pidfile when running in foreground mode and it is stopped is fixed.
+`#10376 <https://github.com/wazuh/wazuh/pull/10376>`_             Race condition due to lack of atomicity in the cluster synchronization mechanism is fixed.
+`#10492 <https://github.com/wazuh/wazuh/pull/10492>`_             A bug when displaying the dates of the cluster tasks that have not finished yet is fixed. Now ``n/a`` is displayed in these cases.
+`#9196 <https://github.com/wazuh/wazuh/pull/9196>`_               Missing field ``value_type`` in FIM alerts is fixed.
+`#9292 <https://github.com/wazuh/wazuh/pull/9292>`_               A typo in the SSH Integrity Check script for Agentless is fixed.
+`#10421 <https://github.com/wazuh/wazuh/pull/10421>`_             Multiple race conditions in Remoted is fixed.
+`#10390 <https://github.com/wazuh/wazuh/pull/10390>`_             The manager's agent database is fixed to prevent dangling entries from removed agents.
+`#9765 <https://github.com/wazuh/wazuh/pull/9765>`_               The alerts generated by FIM when a lookup operation on an SID fails are fixed.
+`#10866 <https://github.com/wazuh/wazuh/pull/10866>`_             A bug that caused cluster agent-groups files to be synchronized multiple times unnecessarily is fixed.
+`#10922 <https://github.com/wazuh/wazuh/pull/10922>`_             An issue in Wazuh DB that compiled the SQL statements multiple times unnecessarily is fixed.
+`#10948 <https://github.com/wazuh/wazuh/pull/10948>`_             A crash in Analysisd when setting Active Response with agent_id = 0 is fixed.
 ==============================================================    =============
 
 
@@ -318,26 +318,26 @@ Agent
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#8784 <https://github.com/wazuh/wazuh/pull/8784>`_               Fixed a bug in FIM that did not allow monitoring new directories in real-time mode if the limit was reached at some point.
-`#8941 <https://github.com/wazuh/wazuh/pull/8941>`_               Fixed a bug in FIM that threw an error when a query to the internal database returned no data.
-`#8362 <https://github.com/wazuh/wazuh/pull/8362>`_               Fixed an error where the IP address was being returned along with the port for Amazon NLB service.
-`#8372 <https://github.com/wazuh/wazuh/pull/8372>`_               Fixed AWS module to properly handle the exception raised when processing a folder without logs.
-`#8433 <https://github.com/wazuh/wazuh/pull/8433>`_               Fixed a bug with AWS module when pagination is needed in the bucket.
-`#8672 <https://github.com/wazuh/wazuh/pull/8672>`_               Fixed an error with the ipGeoLocation field in AWS Macie logs.
-`#10333 <https://github.com/wazuh/wazuh/pull/10333>`_               Changed an incorrect debug message in the GCloud integration module.
-`#7848 <https://github.com/wazuh/wazuh/pull/7848>`_               Data race conditions have been fixed in FIM.
-`#10011 <https://github.com/wazuh/wazuh/pull/10011>`_             Fixed wrong command line display in the Syscollector process report on Windows.
-`#10249 <https://github.com/wazuh/wazuh/pull/10249>`_             Prevented Modulesd from freezing if Analysisd or Agentd get stopped before it.
-`#10405 <https://github.com/wazuh/wazuh/pull/10405>`_             Fixed wrong keepalive message from the agent when file merged.mg is missing.
-`#10381 <https://github.com/wazuh/wazuh/pull/10381>`_             Fixed missing logs from the Windows agent when it's getting stopped.
-`#10524 <https://github.com/wazuh/wazuh/pull/10524>`_             Fixed missing packages reporting in Syscollector for macOS due to empty architecture data.
-`#7506 <https://github.com/wazuh/wazuh/pull/7506>`_               Fixed FIM on Linux to parse audit rules with multiple keys for who-data.
-`#10639 <https://github.com/wazuh/wazuh/pull/10639>`_             Fixed Windows 11 version collection in the agent.
-`#10602 <https://github.com/wazuh/wazuh/pull/10602>`_             Fixed missing Eventchannel location in Logcollector configuration reporting.
-`#10794 <https://github.com/wazuh/wazuh/pull/10794>`_             Updated CloudWatch Logs integration to avoid crashing when AWS raises Throttling errors.
-`#10718 <https://github.com/wazuh/wazuh/pull/10718>`_             Fixed AWS modules' log file filtering when there are logs with and without a prefix mixed in a bucket.
-`#10884 <https://github.com/wazuh/wazuh/pull/10884>`_             Fixed a bug on the installation script that made upgrades not to update the code of the external integration modules.
-`#10921 <https://github.com/wazuh/wazuh/pull/10921>`_             Fixed issue with AWS integration module trying to parse manually created folders as if they were files.
+`#8784 <https://github.com/wazuh/wazuh/pull/8784>`_               A bug in FIM that did not allow monitoring new directories in real-time mode if the limit was reached at some point is fixed.
+`#8941 <https://github.com/wazuh/wazuh/pull/8941>`_               A bug in FIM that threw an error when a query to the internal database returned no data is fixed.
+`#8362 <https://github.com/wazuh/wazuh/pull/8362>`_               An error where the IP address was being returned along with the port for Amazon NLB service is fixed.
+`#8372 <https://github.com/wazuh/wazuh/pull/8372>`_               AWS module is fixed to properly handle the exception raised when processing a folder without logs.
+`#8433 <https://github.com/wazuh/wazuh/pull/8433>`_               A bug with AWS module when pagination is needed in the bucket is fixed.
+`#8672 <https://github.com/wazuh/wazuh/pull/8672>`_               An error with the ipGeoLocation field in AWS Macie logs id fixed.
+`#10333 <https://github.com/wazuh/wazuh/pull/10333>`_             An incorrect debug message in the GCloud integration module is changed.
+`#7848 <https://github.com/wazuh/wazuh/pull/7848>`_               Data race conditions is fixed in FIM.
+`#10011 <https://github.com/wazuh/wazuh/pull/10011>`_             Wrong command line display in the Syscollector process report on Windows is fixed.
+`#10249 <https://github.com/wazuh/wazuh/pull/10249>`_             Modulesd freezing if Analysisd or Agentd get stopped before it is fixed.
+`#10405 <https://github.com/wazuh/wazuh/pull/10405>`_             Wrong keepalive message from the agent when file merged.mg is missing is fixed.
+`#10381 <https://github.com/wazuh/wazuh/pull/10381>`_             Missing logs from the Windows agent when it's getting stopped is fixed.
+`#10524 <https://github.com/wazuh/wazuh/pull/10524>`_             Missing packages reporting in Syscollector for macOS due to empty architecture data is fixed.
+`#7506 <https://github.com/wazuh/wazuh/pull/7506>`_               FIM on Linux to parse audit rules with multiple keys for who-data is fixed.
+`#10639 <https://github.com/wazuh/wazuh/pull/10639>`_             Windows 11 version collection in the agent is fixed.
+`#10602 <https://github.com/wazuh/wazuh/pull/10602>`_             Missing Eventchannel location in Logcollector configuration reporting is fixed.
+`#10794 <https://github.com/wazuh/wazuh/pull/10794>`_             CloudWatch Logs integration is updated to avoid crashing when AWS raises Throttling errors.
+`#10718 <https://github.com/wazuh/wazuh/pull/10718>`_             AWS modules' log file filtering is fixed when there are logs with and without a prefix mixed in a bucket.
+`#10884 <https://github.com/wazuh/wazuh/pull/10884>`_             A bug on the installation script that made upgrades not to update the code of the external integration modules id fixed.
+`#10921 <https://github.com/wazuh/wazuh/pull/10921>`_             An issue with AWS integration module trying to parse manually created folders as if they were files is fixed.
 ==============================================================    =============
 
 
@@ -347,29 +347,29 @@ RESTful API
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#8196 <https://github.com/wazuh/wazuh/pull/8196>`_               Fixed inconsistency in RBAC resources for ``group:create``, ``decoders:update``, and ``rules:update`` actions.
-`#8378 <https://github.com/wazuh/wazuh/pull/8378>`_               Fixed the handling of an API error message occurring when Wazuh is started with a wrong ``ossec.conf``. Now the execution continues and raises a warning.
-`#8548 <https://github.com/wazuh/wazuh/pull/8548>`_               Fixed a bug with ``sort`` parameter that caused a wrong response when sorting by several fields.
-`#8597 <https://github.com/wazuh/wazuh/pull/8597>`_               Fixed the description of ``force_time`` parameter in the API spec reference.
-`#8537 <https://github.com/wazuh/wazuh/pull/8537>`_               Fixed API incorrect path in remediation message when maximum number of requests per minute is reached.
-`#9071 <https://github.com/wazuh/wazuh/pull/9071>`_               Fixed agents' healthcheck error in the API integration test environment.
-`#9077 <https://github.com/wazuh/wazuh/pull/9077>`_               Fixed a bug with ``wazuh-apid`` process handling of pidfiles when running in foreground mode.
-`#9192 <https://github.com/wazuh/wazuh/pull/9192>`_               Fixed a bug with RBAC ``group_id`` matching.
-`#9147 <https://github.com/wazuh/wazuh/pull/9147>`_               Removed temporal development keys and values from ``GET /cluster/healthcheck`` response.
-`#9227 <https://github.com/wazuh/wazuh/pull/9227>`_               Fixed several errors when filtering by dates.
-`#9262 <https://github.com/wazuh/wazuh/pull/9262>`_               Fixed limit in some endpoints like ``PUT /agents/group/{group_id}/restart`` and added a pagination method.
-`#9320 <https://github.com/wazuh/wazuh/pull/9320>`_               Fixed bug with the ``search`` parameter resulting in invalid results.
-`#9368 <https://github.com/wazuh/wazuh/pull/9368>`_               Fixed wrong values of ``external_id`` field in MITRE resources.
-`#9399 <https://github.com/wazuh/wazuh/pull/9399>`_               Fixed how the API integration testing environment checks that wazuh-apid daemon is running before starting the tests.
-`#9777 <https://github.com/wazuh/wazuh/pull/9777>`_               Add healthcheck to verify that ``logcollector`` stats are ready before starting the API integration test.
-`#10159 <https://github.com/wazuh/wazuh/pull/10159>`_             Fixed API integration test healthcheck used in the ``vulnerability`` test cases.
-`#10179 <https://github.com/wazuh/wazuh/pull/10179>`_             Fixed an error with ``PUT /agents/node/{node_id}/restart`` endpoint when no agents are present in selected node.
-`#10322 <https://github.com/wazuh/wazuh/pull/10322>`_             Fixed RBAC experimental API integration tests expecting a 1760 code in implicit requests.
-`#10289 <https://github.com/wazuh/wazuh/pull/10289>`_             Fixed cluster race condition that caused API integration test to randomly fail.
-`#10619 <https://github.com/wazuh/wazuh/pull/10619>`_             Fixed ``PUT /agents/node/{node_id}/restart`` endpoint to exclude exception codes properly.
-`#10666 <https://github.com/wazuh/wazuh/pull/10666>`_             Fixed ``PUT /agents/group/{group_id}/restart`` endpoint to exclude exception codes properly.
-`#10656 <https://github.com/wazuh/wazuh/pull/10656>`_             Fixed agent endpoints q parameter to allow more operators when filtering by groups.
-`#10830 <https://github.com/wazuh/wazuh/pull/10830>`_             Fixed API integration tests related to rule, decoder and task endpoints.
+`#8196 <https://github.com/wazuh/wazuh/pull/8196>`_               An inconsistency in RBAC resources for ``group:create``, ``decoders:update``, and ``rules:update`` actions is fixed.
+`#8378 <https://github.com/wazuh/wazuh/pull/8378>`_               The handling of an API error message occurring when Wazuh is started with a wrong ``ossec.conf`` is fixed. Now the execution continues and raises a warning.
+`#8548 <https://github.com/wazuh/wazuh/pull/8548>`_               A bug with ``sort`` parameter that caused a wrong response when sorting by several fields is fixed.
+`#8597 <https://github.com/wazuh/wazuh/pull/8597>`_               The description of ``force_time`` parameter in the API spec reference is fixed.
+`#8537 <https://github.com/wazuh/wazuh/pull/8537>`_               API incorrect path in remediation message when maximum number of requests per minute is reached is fixed.
+`#9071 <https://github.com/wazuh/wazuh/pull/9071>`_               Agents' healthcheck error in the API integration test environment is fixed.
+`#9077 <https://github.com/wazuh/wazuh/pull/9077>`_               A bug with ``wazuh-apid`` process handling of pidfiles when running in foreground mode is fixed.
+`#9192 <https://github.com/wazuh/wazuh/pull/9192>`_               A bug with RBAC ``group_id`` matching is fixed.
+`#9147 <https://github.com/wazuh/wazuh/pull/9147>`_               Temporal development keys and values from ``GET /cluster/healthcheck`` response are removed.
+`#9227 <https://github.com/wazuh/wazuh/pull/9227>`_               Several errors when filtering by dates are fixed.
+`#9262 <https://github.com/wazuh/wazuh/pull/9262>`_               The limit in some endpoints like ``PUT /agents/group/{group_id}/restart`` and added a pagination method is fixed.
+`#9320 <https://github.com/wazuh/wazuh/pull/9320>`_               A bug with the ``search`` parameter resulting in invalid results is fixed.
+`#9368 <https://github.com/wazuh/wazuh/pull/9368>`_               Wrong values of ``external_id`` field in MITRE resources are fixed.
+`#9399 <https://github.com/wazuh/wazuh/pull/9399>`_               The way how the API integration testing environment checks that wazuh-apid daemon is running before starting the tests is fixed.
+`#9777 <https://github.com/wazuh/wazuh/pull/9777>`_               A healthcheck is added to verify that ``logcollector`` stats are ready before starting the API integration test.
+`#10159 <https://github.com/wazuh/wazuh/pull/10159>`_             The API integration test healthcheck used in the ``vulnerability`` test cases is fixed.
+`#10179 <https://github.com/wazuh/wazuh/pull/10179>`_             An error with ``PUT /agents/node/{node_id}/restart`` endpoint when no agents are present in selected node is fixed.
+`#10322 <https://github.com/wazuh/wazuh/pull/10322>`_             An RBAC experimental API integration tests expecting a 1760 code in implicit requests is fixed.
+`#10289 <https://github.com/wazuh/wazuh/pull/10289>`_             A cluster race condition that caused API integration test to randomly fail is fixed.
+`#10619 <https://github.com/wazuh/wazuh/pull/10619>`_             The ``PUT /agents/node/{node_id}/restart`` endpoint to exclude exception codes properly is fixed.
+`#10666 <https://github.com/wazuh/wazuh/pull/10666>`_             The ``PUT /agents/group/{group_id}/restart`` endpoint to exclude exception codes properly is fixed.
+`#10656 <https://github.com/wazuh/wazuh/pull/10656>`_             The agent endpoints q parameter to allow more operators when filtering by groups is fixed.
+`#10830 <https://github.com/wazuh/wazuh/pull/10830>`_             The API integration tests related to rule, decoder and task endpoints is fixed.
 ==============================================================    =============
 
 
@@ -379,11 +379,11 @@ Ruleset
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#10315 <https://github.com/wazuh/wazuh/pull/10315>`_             Fixed enabled-like checks for Amazon Linux 2 SCA.
-`#10354 <https://github.com/wazuh/wazuh/pull/10354>`_             Fixed enabled-like checks for RedHat Enterprise Linux 8 SCA.
-`#10406 <https://github.com/wazuh/wazuh/pull/10406>`_             Fixed typos and not working tests for Centos 7 SCA. Thanks to RonnyMaas (@RonnyMaas).
-`#10707 <https://github.com/wazuh/wazuh/pull/10707>`_             Fixed YML syntax problems in Solaris 11.4 SCA.
-`#10375 <https://github.com/wazuh/wazuh/pull/10375>`_             Fixed a typo in the Xbox Live Networking Service check for SCA.
+`#10315 <https://github.com/wazuh/wazuh/pull/10315>`_             The enabled-like checks for Amazon Linux 2 SCA are fixed.
+`#10354 <https://github.com/wazuh/wazuh/pull/10354>`_             The enabled-like checks for RedHat Enterprise Linux 8 SCA are fixed.
+`#10406 <https://github.com/wazuh/wazuh/pull/10406>`_             Some typos and not working tests for Centos 7 SCA are fixed. Thanks to RonnyMaas (@RonnyMaas).
+`#10707 <https://github.com/wazuh/wazuh/pull/10707>`_             Some YML syntax problems in Solaris 11.4 SCA are fixed.
+`#10375 <https://github.com/wazuh/wazuh/pull/10375>`_             A typo in the Xbox Live Networking Service check for SCA is fixed.
 ==============================================================    =============
 
 
@@ -393,36 +393,36 @@ Wazuh Kibana plugin
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#3384 <https://github.com/wazuh/wazuh-kibana-app/pull/3384>`_    Fixed creation of log files.
-`#3484 <https://github.com/wazuh/wazuh-kibana-app/pull/3484>`_    Fixed double fetching alerts count when pinnin/unpinning the agent in Mitre Att&ck/Framework.
-`#3490 <https://github.com/wazuh/wazuh-kibana-app/pull/3490>`_    Query config refactor.
-`#3412 <https://github.com/wazuh/wazuh-kibana-app/pull/3412>`_    Fixed rules and decoders test flyout clickout event.
-`#3430 <https://github.com/wazuh/wazuh-kibana-app/pull/3430>`_    Notify when you are registering an agent without permissions.
-`#3438 <https://github.com/wazuh/wazuh-kibana-app/pull/3438>`_    Remove not used ``redirectRule`` query param when clicking the row table on CDB Lists/Decoders.
-`#3439 <https://github.com/wazuh/wazuh-kibana-app/pull/3439>`_    Fixed the code overflows over the line numbers in the API Console editor.
-`#3440 <https://github.com/wazuh/wazuh-kibana-app/pull/3440>`_    Don't open the main menu when changing the seleted API or index pattern.
-`#3443 <https://github.com/wazuh/wazuh-kibana-app/pull/3443>`_    Fix error message in conf managment.
-`#3445 <https://github.com/wazuh/wazuh-kibana-app/pull/3445>`_    Fix size api selector when name is too long.
-`#3456 <https://github.com/wazuh/wazuh-kibana-app/pull/3456>`_    Fixed error when edit a rule or decoder.
-`#3458 <https://github.com/wazuh/wazuh-kibana-app/pull/3458>`_    Fixed index pattern selector doesn't display the ignored index patterns.
-`#3553 <https://github.com/wazuh/wazuh-kibana-app/pull/3553>`_    Fixed error in /Management/Configuration when cluster is disabled.
-`#3565 <https://github.com/wazuh/wazuh-kibana-app/pull/3565>`_    Fix the pinned filters were removed when accessing to the ``Panel`` tab of a module.
-`#3645 <https://github.com/wazuh/wazuh-kibana-app/pull/3645>`_    Fixed multi-select component searcher handler.
-`#3609 <https://github.com/wazuh/wazuh-kibana-app/pull/3609>`_    Fixed order logs properly in Management/Logs.
-`#3661 <https://github.com/wazuh/wazuh-kibana-app/pull/3661>`_    Fixed the Wazuh API requests to ``GET //``.
-`#3675 <https://github.com/wazuh/wazuh-kibana-app/pull/3675>`_    Fixed missing mitre tactics.
-`#3488 <https://github.com/wazuh/wazuh-kibana-app/pull/3488>`_    Fix CDB list view not working with IPv6.
-`#3466 <https://github.com/wazuh/wazuh-kibana-app/pull/3466>`_    Fixed the bad requests using Console tool to ``PUT /active-response`` API endpoint.
-`#3605 <https://github.com/wazuh/wazuh-kibana-app/pull/3605>`_    Fixed group agent management table does not update on error.
-`#3651 <https://github.com/wazuh/wazuh-kibana-app/pull/3651>`_    Fixed not showing packages details in agent inventory for a freeBSD agent SO.
-`#3652 <https://github.com/wazuh/wazuh-kibana-app/pull/3652>`_    Fixed wazuh token deleted twice.
-`#3687 <https://github.com/wazuh/wazuh-kibana-app/pull/3687>`_    Fixed handler of error on dev-tools.
-`#3685 <https://github.com/wazuh/wazuh-kibana-app/pull/3685>`_    Fixed compatibility wazuh 4.3 - kibana 7.13.4.
-`#3689 <https://github.com/wazuh/wazuh-kibana-app/pull/3689>`_    Fixed registry values without agent pinned in FIM>Events.
-`#3688 <https://github.com/wazuh/wazuh-kibana-app/pull/3688>`_    Fixed breadcrumbs style compatibility for Kibana 7.14.2.
-`#3682 <https://github.com/wazuh/wazuh-kibana-app/pull/3682>`_    Fixed security alerts table when filters change.
-`#3692 <https://github.com/wazuh/wazuh-kibana-app/pull/3692>`_    Fixed error that shows we're using X-Pack when we have Basic.
-`#3700 <https://github.com/wazuh/wazuh-kibana-app/pull/3700>`_    Fixed blank screen in Kibana 7.10.2.
+`#3384 <https://github.com/wazuh/wazuh-kibana-app/pull/3384>`_    The creation of log files is fixed.
+`#3484 <https://github.com/wazuh/wazuh-kibana-app/pull/3484>`_    The double fetching alerts count when pinnin/unpinning the agent in Mitre Att&ck/Framework is fixed.
+`#3490 <https://github.com/wazuh/wazuh-kibana-app/pull/3490>`_    A refactor of the query Config is changed from Angular to React.
+`#3412 <https://github.com/wazuh/wazuh-kibana-app/pull/3412>`_    Rules and decoders test flyout clickout event is fixed.
+`#3430 <https://github.com/wazuh/wazuh-kibana-app/pull/3430>`_    Now Wazuh notifies when you are registering an agent without permissions.
+`#3438 <https://github.com/wazuh/wazuh-kibana-app/pull/3438>`_    Not used ``redirectRule`` query param when clicking the row table on CDB Lists/Decoders is removed.
+`#3439 <https://github.com/wazuh/wazuh-kibana-app/pull/3439>`_    The code overflows over the line numbers in the API Console editor is fixed.
+`#3440 <https://github.com/wazuh/wazuh-kibana-app/pull/3440>`_    The issue that avoids opening the main menu when changing the selected API or index pattern is fixed.
+`#3443 <https://github.com/wazuh/wazuh-kibana-app/pull/3443>`_    An error message in conf managment is fixed.
+`#3445 <https://github.com/wazuh/wazuh-kibana-app/pull/3445>`_    An issue related to the size api selector when name is too long is fixed.
+`#3456 <https://github.com/wazuh/wazuh-kibana-app/pull/3456>`_    An error when edit a rule or decoder is fixed.
+`#3458 <https://github.com/wazuh/wazuh-kibana-app/pull/3458>`_    An issue about the index pattern selector doesn't display the ignored index patterns is fixed.
+`#3553 <https://github.com/wazuh/wazuh-kibana-app/pull/3553>`_    An error in /Management/Configuration when cluster is disabled is fixed.
+`#3565 <https://github.com/wazuh/wazuh-kibana-app/pull/3565>`_    The pinned filters were removed when accessing to the ``Panel`` tab of a module is fixed.
+`#3645 <https://github.com/wazuh/wazuh-kibana-app/pull/3645>`_    Multi-select component searcher handler is fixed.
+`#3609 <https://github.com/wazuh/wazuh-kibana-app/pull/3609>`_    The order logs properly in Management/Logs is fixed.
+`#3661 <https://github.com/wazuh/wazuh-kibana-app/pull/3661>`_    The Wazuh API requests to ``GET //`` is fixed.
+`#3675 <https://github.com/wazuh/wazuh-kibana-app/pull/3675>`_    Missing mitre tactics are  fixed.
+`#3488 <https://github.com/wazuh/wazuh-kibana-app/pull/3488>`_    The CDB list view not working with IPv6 is fixed.
+`#3466 <https://github.com/wazuh/wazuh-kibana-app/pull/3466>`_    The bad requests using Console tool to ``PUT /active-response`` API endpoint is fixed.
+`#3605 <https://github.com/wazuh/wazuh-kibana-app/pull/3605>`_    An issue related to the group agent management table does not update on error is fixed.
+`#3651 <https://github.com/wazuh/wazuh-kibana-app/pull/3651>`_    An issue about not showing packages details in agent inventory for a freeBSD agent SO is fixed.
+`#3652 <https://github.com/wazuh/wazuh-kibana-app/pull/3652>`_    Wazuh token deleted twice is fixed.
+`#3687 <https://github.com/wazuh/wazuh-kibana-app/pull/3687>`_    The handler of an error on dev-tools is fixed.
+`#3685 <https://github.com/wazuh/wazuh-kibana-app/pull/3685>`_    The compatibility with wazuh 4.3 - kibana 7.13.4 is fixed.
+`#3689 <https://github.com/wazuh/wazuh-kibana-app/pull/3689>`_    The registry values without agent pinned in FIM>Events are fixed.
+`#3688 <https://github.com/wazuh/wazuh-kibana-app/pull/3688>`_    The breadcrumbs style compatibility for Kibana 7.14.2 i fixed.
+`#3682 <https://github.com/wazuh/wazuh-kibana-app/pull/3682>`_    The security alerts table when filters change is fixed.
+`#3692 <https://github.com/wazuh/wazuh-kibana-app/pull/3692>`_    An error that shows we're using X-Pack when we have Basic is fixed.
+`#3700 <https://github.com/wazuh/wazuh-kibana-app/pull/3700>`_    Blank screen in Kibana 7.10.2 is fixed.
 ==============================================================    =============
 
 
@@ -432,8 +432,8 @@ Others
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#9168 <https://github.com/wazuh/wazuh/pull/9168>`_               Fixed error detection in the CURL helper library.
-`#10899 <https://github.com/wazuh/wazuh/pull/10899>`_             Fixed external BerkeleyDB library support for GCC 11.
+`#9168 <https://github.com/wazuh/wazuh/pull/9168>`_               An error detection in the CURL helper library is fixed.
+`#10899 <https://github.com/wazuh/wazuh/pull/10899>`_             External BerkeleyDB library support for GCC 11 is fixed.
 ==============================================================    =============
 
 
