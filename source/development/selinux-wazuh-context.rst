@@ -38,585 +38,611 @@ SELinux module example to confine Wazuh
 
 To create a new module that allows Wazuh to transition to the new context we need the following files:
 
-.. tabs::
-
-        .. group-tab:: Wazuh Manager
-
-            .. collapse:: wazuhT.fc
-
-                .. code-block:: console
-
-                    /var/ossec/active-response                  gen_context(system_u:object_r:wazuh_var_t,s0)
-                    /var/ossec/active-response/bin(/.*)?        gen_context(system_u:object_r:wazuh_exec_t,s0)
-                    /var/ossec/agentless(/.*)?                  gen_context(system_u:object_r:wazuh_exec_t,s0)
-                    /var/ossec/api                              gen_context(system_u:object_r:wazuh_var_t,s0)
-                    /var/ossec/api/configuration(/.*)?          gen_context(system_u:object_r:wazuh_etc_t,s0)
-                    /var/ossec/api/scripts(/.*)?                gen_context(system_u:object_r:wazuh_exec_t,s0)
-                    /var/ossec/backup(/.*)?                     gen_context(system_u:object_r:wazuh_var_t,s0)
-                    /var/ossec/bin(/.*)?                        gen_context(system_u:object_r:wazuh_exec_t,s0)
-                    /var/ossec/etc(/.*)?                        gen_context(system_u:object_r:wazuh_etc_t,s0)
-                    /var/ossec/framework(/.*)?                  gen_context(system_u:object_r:wazuh_exec_t,s0)
-                    /var/ossec/integrations(/.*)?               gen_context(system_u:object_r:wazuh_exec_t,s0)
-                    /var/ossec/lib(/.*)?                        gen_context(system_u:object_r:wazuh_lib_t,s0)
-                    /var/ossec/logs(/.*)?                       gen_context(system_u:object_r:wazuh_log_t,s0)
-                    /var/ossec/queue(/.*)?                      gen_context(system_u:object_r:wazuh_var_t,s0)
-                    /var/ossec/ruleset(/.*)?                    gen_context(system_u:object_r:wazuh_var_t,s0)
-                    /var/ossec/stats(/.*)?                      gen_context(system_u:object_r:wazuh_var_t,s0)
-                    /var/ossec/tmp(/.*)?                        gen_context(system_u:object_r:wazuh_tmp_t,s0)
-                    /var/ossec/var(/.*)?                        gen_context(system_u:object_r:wazuh_var_t,s0)
-                    /var/ossec/wodles(/.*)?                     gen_context(system_u:object_r:wazuh_exec_t,s0)
-
-            .. collapse:: wazuhT.te
-
-                .. code-block:: console
-
-                    policy_module(wazuhT,1.0)
-
-                    require {
-                    type bin_t;
-                    type tmp_t;
-                    type unconfined_t;
-                    type initrc_t;
-                    type unconfined_service_t;
-                    type shell_exec_t;
-                    type var_t;
-                    type cert_t;
-                    type node_t;
-                    type init_t;
-                    type kernel_t;
-                    type system_dbusd_t;
-                    type sshd_t;
-                    type fs_t;
-                    type unlabeled_t;
-                    type sysctl_net_t;
-                    type systemd_unit_file_t;
-                    type cgroup_t;
-                    type hugetlbfs_t;
-                    type sysfs_t;
-                    type iptables_exec_t;
-                    type sshd_exec_t;
-                    type device_t;
-                    type fixed_disk_device_t;
-                    type useradd_exec_t;
-                    type journalctl_exec_t;
-                    type proc_net_t;
-                    type pstore_t;
-                    type mount_exec_t;
-                    type insmod_exec_t;
-                    type systemd_systemctl_exec_t;
-                    type crontab_exec_t;
-                    type devlog_t;
-                    type rpm_exec_t;
-                    type proc_t;
-                    type configfs_t;
-                    type http_port_t;
-                    type tmpfs_t;
-                    type gssproxy_var_lib_t;
-                    type rpm_log_t;
-                    type auditd_unit_file_t;
-                    type crond_unit_file_t;
-                    type mount_var_run_t;
-                    type rpm_var_lib_t;
-                    type usermodehelper_t;
-                    type var_run_t;
-                    type etc_t;
-                    type security_t;
-                    type firewalld_t;
-                    type iptables_t;
-                    type dhcpc_t;
-                    role system_r;
-                    role unconfined_r;
-                    class process { transition getattr getpgid getsession setrlimit setsched signull open read};
-                    class rawip_socket {bind setopt getopt create open};
-                    class netlink_route_socket {bind setopt create open write read nlmsg_read};
-                    class netlink_audit_socket {bind setopt create open write read nlmsg_read};
-                    class lnk_file {getattr open read};
-                    class file { getattr open read execute getattr read};
-                    class dir { getattr open read search };
-                    class tcp_socket { bind connect create getopt listen name_bind name_connect node_bind setopt };
-                    class capability { chown dac_override fowner fsetid kill net_bind_service net_raw setgid setuid sys_chroot sys_resource sys_ptrace};
-                    class unix_dgram_socket { read write create ioctl sendto bind getopt connect};
-                    class netlink_tcpdiag_socket {create getattr setopt read bind nlmsg_read write};
-                    class filesystem { getattr open read };
-                    class sock_file { getattr open read };
-                    class blk_file { getattr open read };
-                    class udp_socket name_bind;
-                    class unix_stream_socket {connectto ioctl getattr};
-                    class dbus send_msg;
-                    }
-
-                    # Private type declarations
-                    type wazuh_t;
-                    type wazuh_exec_t;
-                    type wazuh_etc_t;
-                    type wazuh_lib_t;
-                    type wazuh_log_t;
-                    type wazuh_tmp_t;
-                    type wazuh_var_t;
-
-                    # Ports label
-                    type wazuh_port_t;
-                    corenet_port(wazuh_port_t)
-
-                    # domain_type macro specifies the type wazuh_t to be a domain
-                    domain_type(wazuh_t)
-
-                    # domain_entry_file specifies an entry point to the wazuh_t domain for the executable file of type wazuh_exec_t
-                    domain_entry_file(wazuh_t, wazuh_exec_t)
-
-                    # logging_log_file macro makes wazuh_log_t become the type of log file with the necessary groups and rules
-                    logging_log_file(wazuh_log_t)
-
-                    # Allow domain wazuh_t to manipulate log files
-                    allow wazuh_t wazuh_log_t:file append_file_perms;
-
-                    # files_tmp_file takes the type of wazuh_tmp_t to the necessary groups so that it becomes the type of tmp file
-                    files_tmp_file(wazuh_tmp_t)
-
-                    # Allow the wazuh_t domain write privileges into the tmp_t labeled directory, but with an automatic file transition towards wazuh_tmp_t for every file written
-                    files_tmp_filetrans(wazuh_t,wazuh_tmp_t,file)
-
-                    # Allow domain wazuh_t to manipulate tmp files
-                    allow wazuh_t wazuh_tmp_t:file manage_file_perms;
-
-                    #============== Allow transition
-                    role unconfined_r types wazuh_t;
-                    role system_r types wazuh_t;
-
-                    allow wazuh_t bin_t : file execute;
-                    allow unconfined_t wazuh_t : process transition;
-                    allow initrc_t wazuh_t : process transition;
-                    allow unconfined_service_t wazuh_t : process transition;
-                    allow unconfined_t wazuh_exec_t : file execute;
-                    allow initrc_t wazuh_exec_t : file execute;
-                    allow unconfined_service_t wazuh_exec_t : file execute;
-                    allow wazuh_t wazuh_exec_t : file entrypoint;
-
-                    type_transition unconfined_t wazuh_exec_t : process wazuh_t;
-                    type_transition initrc_t wazuh_exec_t : process wazuh_t;
-                    type_transition unconfined_service_t wazuh_exec_t : process wazuh_t;
-
-                    #============== Permissions for wazuh-control to run Wazuh
-                    allow wazuh_t shell_exec_t:file { execute execute_no_trans };
-                    allow wazuh_t bin_t:file execute_no_trans;
-
-                    allow wazuh_t wazuh_var_t:dir { create rmdir open add_name read remove_name write getattr setattr search};
-                    allow wazuh_t wazuh_var_t:file { create getattr open read append rename setattr unlink write ioctl lock};
-                    allow wazuh_t wazuh_exec_t:dir { create rmdir open getattr add_name read remove_name write setattr search};
-                    allow wazuh_t wazuh_exec_t:file { create getattr open read append rename setattr link unlink write ioctl lock execute execute_no_trans};
-                    allow wazuh_t wazuh_log_t:dir { create rmdir open getattr add_name read remove_name write setattr search};
-                    allow wazuh_t wazuh_log_t:file { create getattr open read append rename setattr link unlink write ioctl lock};
-                    allow wazuh_t wazuh_etc_t:dir { create rmdir open getattr add_name read remove_name write setattr search};
-                    allow wazuh_t wazuh_tmp_t:dir { create rmdir open getattr add_name read remove_name write setattr search rmdir};
-                    allow wazuh_t wazuh_tmp_t:file { create getattr open read append rename setattr link unlink write ioctl lock};
-                    allow wazuh_t wazuh_lib_t:dir { create rmdir open getattr add_name read remove_name write setattr search};
-                    allow wazuh_t wazuh_lib_t:file { getattr open read map execute};
-                    allow wazuh_t wazuh_var_t:filesystem { associate};
-                    allow wazuh_var_t fs_t:filesystem { associate};
-                    allow wazuh_etc_t fs_t:filesystem { associate};
-
-                    # Permissions to read /proc
-                    allow wazuh_t proc_t:dir read;
-                    domain_read_all_domains_state(wazuh_t)
-                    domain_getpgid_all_domains( wazuh_t )
-                    domain_getattr_all_domains( wazuh_t )
-                    domain_getsession_all_domains( wazuh_t )
-                    domain_signull_all_domains( wazuh_t )
-
-                    #============== Permissions for Framework and API
-                    allow wazuh_t self:tcp_socket { bind connect create getopt listen setopt };
-                    allow wazuh_t self:udp_socket { bind connect create getattr ioctl setopt };
-                    allow wazuh_t node_t:tcp_socket node_bind;
-                    allow wazuh_t node_t:udp_socket node_bind;
-
-                    #============== Permissions for wazuh-analysisd to run
-                    allow wazuh_t self:process { getattr getpgid getsession setrlimit setsched };
-                    allow wazuh_t wazuh_etc_t:file { create getattr open read append rename setattr link unlink write ioctl lock map};
-
-                    #============== Permissions for wazuh-remoted to use sockets
-                    allow wazuh_t wazuh_var_t:sock_file { read write getattr create setattr unlink} ;
-                    allow wazuh_t wazuh_t:unix_stream_socket {connectto ioctl};
-                    allow wazuh_t wazuh_port_t:tcp_socket {name_connect name_bind create read write connect recvfrom sendto send_msg setopt ioctl setattr getattr};
-                    allow wazuh_t wazuh_t:tcp_socket {accept bind name_connect name_bind create read write connect recvfrom sendto send_msg setopt ioctl setattr getattr};
-                    allow wazuh_t wazuh_port_t:udp_socket {name_bind create read write connect recvfrom sendto send_msg setopt ioctl setattr getattr};
-                    allow wazuh_t wazuh_t:udp_socket {accept name_bind create read write connect recvfrom sendto send_msg setopt ioctl setattr getattr};
-                    allow wazuh_t wazuh_t:unix_dgram_socket { read write create ioctl sendto bind getopt connect};
-
-                    #============== Permissions for wazuh-syscheckd to monitor files and directories and for wazuh-logcollector to read logs files
-                    files_read_all_files(wazuh_t)
-                    files_read_all_chr_files(wazuh_t)
-                    files_read_all_symlinks(wazuh_t)
-                    fs_getattr_all_chr_files(wazuh_t)
-                    dev_getattr_all_chr_files(wazuh_t)
-                    allow wazuh_t gssproxy_var_lib_t:sock_file { getattr open read };
-                    allow wazuh_t fixed_disk_device_t:blk_file { getattr open read };
-                    allow wazuh_t devlog_t:sock_file { read write getattr create setattr unlink};
-
-                    #============== Permissions for rootcheck to monitor ports
-                    corenet_udp_bind_all_ports(wazuh_t)
-                    corenet_tcp_bind_all_ports(wazuh_t)
-
-                    #============== Permissions for wazuh-modulesd to run
-                    allow wazuh_t sysfs_t:lnk_file read;
-                    allow wazuh_t proc_net_t:file { getattr open read };
-                    allow wazuh_t self:netlink_route_socket {create getattr open read bind nlmsg_read write};
-
-                    # Permissions for wazuh-modulesd to run SCA scans
-                    allow wazuh_t sshd_exec_t:file { execute execute_no_trans };
-                    allow wazuh_t useradd_exec_t:file { execute execute_no_trans};
-                    allow wazuh_t rpm_exec_t:file { execute execute_no_trans ioctl};
-                    allow wazuh_t systemd_systemctl_exec_t:file { execute execute_no_trans};
-                    allow wazuh_t insmod_exec_t:file { execute execute_no_trans };
-                    allow wazuh_t iptables_exec_t:file { execute execute_no_trans };
-                    allow wazuh_t crontab_exec_t:file { execute execute_no_trans };
-                    allow wazuh_t journalctl_exec_t:file { execute execute_no_trans};
-                    allow wazuh_t mount_exec_t:file { execute execute_no_trans getattr};
-                    allow wazuh_t rpm_log_t:file { getattr open read append};
-                    allow wazuh_t rpm_var_lib_t:file { write create setattr unlink rename};
-                    allow wazuh_t rpm_var_lib_t:dir { write add_name remove_name};
-                    allow wazuh_t cert_t:dir { search write create add_name remove_name rmdir};
-                    allow wazuh_t cert_t:file { lock write};
-                    allow wazuh_t tmp_t:dir { search write create add_name remove_name rmdir};
-                    allow wazuh_t unlabeled_t:file { getattr open read };
-                    allow wazuh_t security_t:security compute_av;
-                    allow wazuh_t security_t:file {write};
-                    allow wazuh_t security_t:dir {write};
-                    allow wazuh_t init_t:unix_stream_socket {connectto ioctl getattr};
-                    allow wazuh_t init_t:system { status };
-                    allow wazuh_t init_t:service { status };
-                    allow wazuh_t system_dbusd_t:dbus send_msg;
-                    allow wazuh_t tmpfs_t:dir read;
-                    allow wazuh_t tmpfs_t:filesystem { getattr open read };
-                    allow wazuh_t cgroup_t:filesystem { getattr open read };
-                    allow wazuh_t configfs_t:filesystem { getattr open read };
-                    allow wazuh_t device_t:filesystem { getattr open read };
-                    allow wazuh_t hugetlbfs_t:filesystem { getattr open read };
-                    allow wazuh_t proc_t:filesystem { getattr open read };
-                    allow wazuh_t pstore_t:filesystem { getattr open read };
-                    allow wazuh_t sysfs_t:filesystem { getattr open read };
-                    allow wazuh_t fs_t:filesystem { getattr open read };
-                    allow wazuh_t self:rawip_socket {bind setopt getopt create open};
-                    allow wazuh_t kernel_t:unix_dgram_socket sendto;
-                    allow wazuh_t auditd_unit_file_t:service { status };
-                    allow wazuh_t crond_unit_file_t:service { status };
-                    allow wazuh_t systemd_unit_file_t:service { status start};
-                    allow wazuh_t mount_var_run_t:dir { getattr open read write search write};
-                    allow wazuh_t var_run_t:dir { getattr open read search write add_name remove_name};
-                    allow wazuh_t var_run_t:file { getattr open read write lock create unlink};
-                    allow wazuh_t sysctl_net_t:dir search;
-                    allow wazuh_t sysctl_net_t:file { getattr open read };
-                    allow wazuh_t usermodehelper_t:file { getattr open read };
-                    allow wazuh_t self:netlink_audit_socket {create setopt open read bind nlmsg_read write};
-                    allow wazuh_t self:netlink_tcpdiag_socket {create getattr setopt read bind nlmsg_read write};
-                    allow wazuh_t kernel_t:system module_request;
-                    allow dhcpc_t unlabeled_t:file {getattr open read};
-
-                    #============== Permissions for wazuh-execd to run AR
-                    allow wazuh_t self:capability { chown dac_override fowner fsetid kill net_bind_service net_raw setgid setuid sys_chroot sys_resource sys_ptrace};
-                    allow wazuh_t etc_t:dir { getattr open read search write add_name remove_name};
-                    allow sshd_t var_t:file { getattr create open append ioctl lock read setattr write};
-                    allow wazuh_t firewalld_t:dbus send_msg;
-                    allow firewalld_t wazuh_t:dbus send_msg;
-                    allow wazuh_t firewalld_t:process { getattr getpgid getsession signull };
-                    allow iptables_t var_run_t:file {open read lock};
-                    allow wazuh_t system_dbusd_t:unix_stream_socket connectto;
-                    allow wazuh_t http_port_t:tcp_socket {name_bind name_connect write read};
-
-                    #============== Permissions to assign new contexts
-                    allow unconfined_t wazuh_var_t:dir {getattr open read search relabelto};
-                    allow unconfined_t wazuh_var_t:file {getattr relabelto};
-                    allow unconfined_t wazuh_var_t:sock_file {getattr open read relabelto};
-                    allow unconfined_t wazuh_lib_t:dir {getattr open read search relabelto};
-                    allow unconfined_t wazuh_lib_t:file {getattr relabelto};
-                    allow unconfined_t wazuh_etc_t:dir {getattr open read search relabelto};
-                    allow unconfined_t wazuh_etc_t:file {getattr open read write relabelto};
-
-
-        .. group-tab:: Wazuh Agent
-
-            .. collapse:: wazuhT.fc
-
-                .. code-block:: console
-
-                    /var/ossec/active-response                  gen_context(system_u:object_r:wazuh_var_t,s0)
-                    /var/ossec/active-response/bin(/.*)?        gen_context(system_u:object_r:wazuh_exec_t,s0)
-                    /var/ossec/agentless(/.*)?                  gen_context(system_u:object_r:wazuh_exec_t,s0)
-                    /var/ossec/backup(/.*)?                     gen_context(system_u:object_r:wazuh_var_t,s0)
-                    /var/ossec/bin(/.*)?                        gen_context(system_u:object_r:wazuh_exec_t,s0)
-                    /var/ossec/etc(/.*)?                        gen_context(system_u:object_r:wazuh_etc_t,s0)
-                    /var/ossec/lib(/.*)?                        gen_context(system_u:object_r:wazuh_lib_t,s0)
-                    /var/ossec/logs(/.*)?                       gen_context(system_u:object_r:wazuh_log_t,s0)
-                    /var/ossec/queue(/.*)?                      gen_context(system_u:object_r:wazuh_var_t,s0)
-                    /var/ossec/ruleset(/.*)?                    gen_context(system_u:object_r:wazuh_var_t,s0)
-                    /var/ossec/tmp(/.*)?                        gen_context(system_u:object_r:wazuh_tmp_t,s0)
-                    /var/ossec/var(/.*)?                        gen_context(system_u:object_r:wazuh_var_t,s0)
-                    /var/ossec/wodles(/.*)?                     gen_context(system_u:object_r:wazuh_exec_t,s0)
-
-            .. collapse:: wazuhT.te
-
-                .. code-block:: console
-
-                    policy_module(wazuhT,1.0)
-
-                    require {
-                    type bin_t;
-                    type tmp_t;
-                    type unconfined_t;
-                    type initrc_t;
-                    type unconfined_service_t;
-                    type shell_exec_t;
-                    type var_t;
-                    type cert_t;
-                    type node_t;
-                    type init_t;
-                    type kernel_t;
-                    type system_dbusd_t;
-                    type sshd_t;
-                    type fs_t;
-                    type unlabeled_t;
-                    type sysctl_net_t;
-                    type systemd_unit_file_t;
-                    type cgroup_t;
-                    type hugetlbfs_t;
-                    type sysfs_t;
-                    type iptables_exec_t;
-                    type sshd_exec_t;
-                    type device_t;
-                    type fixed_disk_device_t;
-                    type useradd_exec_t;
-                    type journalctl_exec_t;
-                    type proc_net_t;
-                    type pstore_t;
-                    type mount_exec_t;
-                    type insmod_exec_t;
-                    type systemd_systemctl_exec_t;
-                    type crontab_exec_t;
-                    type devlog_t;
-                    type rpm_exec_t;
-                    type proc_t;
-                    type configfs_t;
-                    type http_port_t;
-                    type tmpfs_t;
-                    type gssproxy_var_lib_t;
-                    type rpm_log_t;
-                    type auditd_unit_file_t;
-                    type crond_unit_file_t;
-                    type mount_var_run_t;
-                    type rpm_var_lib_t;
-                    type usermodehelper_t;
-                    type var_run_t;
-                    type etc_t;
-                    type security_t;
-                    type firewalld_t;
-                    type iptables_t;
-                    type dhcpc_t;
-                    role system_r;
-                    role unconfined_r;
-                    class process { transition getattr getpgid getsession setrlimit setsched signull open read};
-                    class rawip_socket {bind setopt getopt create open};
-                    class netlink_route_socket {bind setopt create open write read nlmsg_read};
-                    class netlink_audit_socket {bind setopt create open write read nlmsg_read};
-                    class lnk_file {getattr open read};
-                    class file { getattr open read execute getattr read};
-                    class dir { getattr open read search };
-                    class tcp_socket { bind connect create getopt listen name_bind name_connect node_bind setopt };
-                    class capability { chown dac_override fowner fsetid kill net_bind_service net_raw setgid setuid sys_chroot sys_resource sys_ptrace};
-                    class unix_dgram_socket { read write create ioctl sendto bind getopt connect};
-                    class netlink_tcpdiag_socket {create getattr setopt read bind nlmsg_read write};
-                    class filesystem { getattr open read };
-                    class sock_file { getattr open read };
-                    class blk_file { getattr open read };
-                    class udp_socket name_bind;
-                    class unix_stream_socket {connectto ioctl getattr};
-                    class dbus send_msg;
-                    }
-
-                    # Private type declarations
-                    type wazuh_t;
-                    type wazuh_exec_t;
-                    type wazuh_etc_t;
-                    type wazuh_lib_t;
-                    type wazuh_log_t;
-                    type wazuh_tmp_t;
-                    type wazuh_var_t;
-
-                    # Ports label
-                    type wazuh_port_t;
-                    corenet_port(wazuh_port_t)
-
-                    # domain_type macro specifies the type wazuh_t to be a domain
-                    domain_type(wazuh_t)
-
-                    # domain_entry_file specifies an entry point to the wazuh_t domain for the executable file of type wazuh_exec_t
-                    domain_entry_file(wazuh_t, wazuh_exec_t)
-
-                    # logging_log_file macro makes wazuh_log_t become the type of log file with the necessary groups and rules
-                    logging_log_file(wazuh_log_t)
-
-                    # Allow domain wazuh_t to manipulate log files
-                    allow wazuh_t wazuh_log_t:file append_file_perms;
-
-                    # files_tmp_file takes the type of wazuh_tmp_t to the necessary groups so that it becomes the type of tmp file
-                    files_tmp_file(wazuh_tmp_t)
-
-                    # Allow the wazuh_t domain write privileges into the tmp_t labeled directory, but with an automatic file transition towards wazuh_tmp_t for every file written
-                    files_tmp_filetrans(wazuh_t,wazuh_tmp_t,file)
-
-                    # Allow domain wazuh_t to manipulate tmp files
-                    allow wazuh_t wazuh_tmp_t:file manage_file_perms;
-
-                    #============== Allow transition
-                    role unconfined_r types wazuh_t;
-                    role system_r types wazuh_t;
-
-                    allow wazuh_t bin_t : file execute;
-                    allow unconfined_t wazuh_t : process transition;
-                    allow initrc_t wazuh_t : process transition;
-                    allow unconfined_service_t wazuh_t : process transition;
-                    allow unconfined_t wazuh_exec_t : file execute;
-                    allow initrc_t wazuh_exec_t : file execute;
-                    allow unconfined_service_t wazuh_exec_t : file execute;
-                    allow wazuh_t wazuh_exec_t : file entrypoint;
-
-                    type_transition unconfined_t wazuh_exec_t : process wazuh_t;
-                    type_transition initrc_t wazuh_exec_t : process wazuh_t;
-                    type_transition unconfined_service_t wazuh_exec_t : process wazuh_t;
-
-                    #============== Permissions for wazuh-control to run Wazuh
-                    allow wazuh_t shell_exec_t:file { execute execute_no_trans };
-                    allow wazuh_t bin_t:file execute_no_trans;
-
-                    allow wazuh_t wazuh_var_t:dir { create rmdir open add_name read remove_name write getattr setattr search};
-                    allow wazuh_t wazuh_var_t:file { create getattr open read append rename setattr unlink write ioctl lock};
-                    allow wazuh_t wazuh_exec_t:dir { create rmdir open getattr add_name read remove_name write setattr search};
-                    allow wazuh_t wazuh_exec_t:file { create getattr open read append rename setattr link unlink write ioctl lock execute execute_no_trans};
-                    allow wazuh_t wazuh_log_t:dir { create rmdir open getattr add_name read remove_name write setattr search};
-                    allow wazuh_t wazuh_log_t:file { create getattr open read append rename setattr link unlink write ioctl lock};
-                    allow wazuh_t wazuh_etc_t:dir { create rmdir open getattr add_name read remove_name write setattr search};
-                    allow wazuh_t wazuh_etc_t:file { create getattr open read append rename setattr link unlink write ioctl lock map};
-                    allow wazuh_t wazuh_tmp_t:dir { create rmdir open getattr add_name read remove_name write setattr search rmdir};
-                    allow wazuh_t wazuh_tmp_t:file { create getattr open read append rename setattr link unlink write ioctl lock};
-                    allow wazuh_t wazuh_lib_t:dir { create rmdir open getattr add_name read remove_name write setattr search};
-                    allow wazuh_t wazuh_lib_t:file { getattr open read map execute};
-                    allow wazuh_t wazuh_var_t:filesystem { associate};
-                    allow wazuh_var_t fs_t:filesystem { associate};
-                    allow wazuh_etc_t fs_t:filesystem { associate};
-                    allow wazuh_t self:process { getattr getpgid getsession setrlimit setsched };
-
-                    # Permissions to read /proc
-                    allow wazuh_t proc_t:dir read;
-                    domain_read_all_domains_state(wazuh_t)
-                    domain_getpgid_all_domains( wazuh_t )
-                    domain_getattr_all_domains( wazuh_t )
-                    domain_getsession_all_domains( wazuh_t )
-                    domain_signull_all_domains( wazuh_t )
-
-                    #============== Permissions for wazuh-agentd to use sockets
-                    allow wazuh_t wazuh_var_t:sock_file { read write getattr create setattr unlink};
-                    allow wazuh_t wazuh_t:unix_stream_socket {connectto ioctl};
-                    allow wazuh_t wazuh_port_t:tcp_socket {name_connect name_bind create read write connect recvfrom sendto send_msg setopt ioctl setattr getattr};
-                    allow wazuh_t wazuh_t:tcp_socket {accept bind name_connect name_bind create read write connect recvfrom sendto send_msg setopt ioctl setattr getattr};
-                    allow wazuh_t wazuh_port_t:udp_socket {name_bind create read write connect recvfrom sendto send_msg setopt ioctl setattr getattr};
-                    allow wazuh_t wazuh_t:udp_socket {accept name_bind create read write connect recvfrom sendto send_msg setopt ioctl setattr getattr};
-                    allow wazuh_t wazuh_t:unix_dgram_socket { read write create ioctl sendto bind getopt connect};
-                    allow wazuh_t self:tcp_socket { bind connect create getopt listen setopt };
-                    allow wazuh_t self:udp_socket { bind connect create getattr ioctl setopt };
-                    allow wazuh_t node_t:tcp_socket node_bind;
-                    allow wazuh_t node_t:udp_socket node_bind;
-
-                    #============== Permissions for wazuh-syscheckd to monitor files and directories and for wazuh-logcollector to read logs files
-                    files_read_all_files(wazuh_t)
-                    files_read_all_chr_files(wazuh_t)
-                    files_read_all_symlinks(wazuh_t)
-                    fs_getattr_all_chr_files(wazuh_t)
-                    dev_getattr_all_chr_files(wazuh_t)
-                    allow wazuh_t gssproxy_var_lib_t:sock_file { getattr open read };
-                    allow wazuh_t fixed_disk_device_t:blk_file { getattr open read };
-                    allow wazuh_t devlog_t:sock_file { read write getattr create setattr unlink};
-
-                    #============== Permissions for rootcheck to monitor ports
-                    corenet_udp_bind_all_ports(wazuh_t)
-                    corenet_tcp_bind_all_ports(wazuh_t)
-
-                    #============== Permissions for wazuh-modulesd to run
-                    allow wazuh_t sysfs_t:lnk_file read;
-                    allow wazuh_t proc_net_t:file { getattr open read };
-                    allow wazuh_t self:netlink_route_socket {create getattr open read bind nlmsg_read write};
-
-                    # Permissions for wazuh-modulesd to run SCA scans
-                    allow wazuh_t sshd_exec_t:file { execute execute_no_trans };
-                    allow wazuh_t useradd_exec_t:file { execute execute_no_trans};
-                    allow wazuh_t rpm_exec_t:file { execute execute_no_trans ioctl};
-                    allow wazuh_t systemd_systemctl_exec_t:file { execute execute_no_trans};
-                    allow wazuh_t insmod_exec_t:file { execute execute_no_trans };
-                    allow wazuh_t iptables_exec_t:file { execute execute_no_trans };
-                    allow wazuh_t crontab_exec_t:file { execute execute_no_trans };
-                    allow wazuh_t journalctl_exec_t:file { execute execute_no_trans};
-                    allow wazuh_t mount_exec_t:file { execute execute_no_trans getattr};
-                    allow wazuh_t rpm_log_t:file { getattr open read append};
-                    allow wazuh_t rpm_var_lib_t:file { write create setattr unlink rename};
-                    allow wazuh_t rpm_var_lib_t:dir { write add_name remove_name};
-                    allow wazuh_t cert_t:dir { search write create add_name remove_name rmdir};
-                    allow wazuh_t cert_t:file { lock write};
-                    allow wazuh_t tmp_t:dir { search write create add_name remove_name rmdir};
-                    allow wazuh_t unlabeled_t:file { getattr open read };
-                    allow wazuh_t security_t:security compute_av;
-                    allow wazuh_t security_t:file {write};
-                    allow wazuh_t security_t:dir {write};
-                    allow wazuh_t init_t:unix_stream_socket {connectto ioctl getattr};
-                    allow wazuh_t init_t:system { status };
-                    allow wazuh_t init_t:service { status };
-                    allow wazuh_t system_dbusd_t:dbus send_msg;
-                    allow wazuh_t tmpfs_t:dir read;
-                    allow wazuh_t tmpfs_t:filesystem { getattr open read };
-                    allow wazuh_t cgroup_t:filesystem { getattr open read };
-                    allow wazuh_t configfs_t:filesystem { getattr open read };
-                    allow wazuh_t device_t:filesystem { getattr open read };
-                    allow wazuh_t hugetlbfs_t:filesystem { getattr open read };
-                    allow wazuh_t proc_t:filesystem { getattr open read };
-                    allow wazuh_t pstore_t:filesystem { getattr open read };
-                    allow wazuh_t sysfs_t:filesystem { getattr open read };
-                    allow wazuh_t fs_t:filesystem { getattr open read };
-                    allow wazuh_t self:rawip_socket {bind setopt getopt create open};
-                    allow wazuh_t kernel_t:unix_dgram_socket sendto;
-                    allow wazuh_t auditd_unit_file_t:service { status };
-                    allow wazuh_t crond_unit_file_t:service { status };
-                    allow wazuh_t systemd_unit_file_t:service { status start};
-                    allow wazuh_t mount_var_run_t:dir { getattr open read write search write};
-                    allow wazuh_t var_run_t:dir { getattr open read search write add_name remove_name};
-                    allow wazuh_t var_run_t:file { getattr open read write lock create unlink};
-                    allow wazuh_t sysctl_net_t:dir search;
-                    allow wazuh_t sysctl_net_t:file { getattr open read };
-                    allow wazuh_t usermodehelper_t:file { getattr open read };
-                    allow wazuh_t self:netlink_audit_socket {create setopt open read bind nlmsg_read write};
-                    allow wazuh_t self:netlink_tcpdiag_socket {create getattr setopt read bind nlmsg_read write};
-                    allow wazuh_t kernel_t:system module_request;
-                    allow dhcpc_t unlabeled_t:file {getattr open read};
-
-                    #============== Permissions for wazuh-execd to run AR
-                    allow wazuh_t self:capability { chown dac_override fowner fsetid kill net_bind_service net_raw setgid setuid sys_chroot sys_resource sys_ptrace};
-                    allow wazuh_t etc_t:dir { getattr open read search write add_name remove_name};
-                    allow sshd_t var_t:file { getattr create open append ioctl lock read setattr write};
-                    allow wazuh_t firewalld_t:dbus send_msg;
-                    allow firewalld_t wazuh_t:dbus send_msg;
-                    allow wazuh_t firewalld_t:process { getattr getpgid getsession signull };
-                    allow iptables_t var_run_t:file {open read lock};
-                    allow wazuh_t system_dbusd_t:unix_stream_socket connectto;
-                    allow wazuh_t http_port_t:tcp_socket {name_bind name_connect write read};
-
-                    #============== Permissions to assign new contexts
-                    allow unconfined_t wazuh_var_t:dir {getattr open read search relabelto};
-                    allow unconfined_t wazuh_var_t:file {getattr relabelto};
-                    allow unconfined_t wazuh_var_t:sock_file {getattr open read relabelto};
-                    allow unconfined_t wazuh_lib_t:dir {getattr open read search relabelto};
-                    allow unconfined_t wazuh_lib_t:file {getattr relabelto};
-                    allow unconfined_t wazuh_etc_t:dir {getattr open read search relabelto};
-                    allow unconfined_t wazuh_etc_t:file {getattr open read write relabelto};
-
-Next, we will present the content of the ``wazuhT.fc`` and ``wazuhT.te`` files. We will take as reference the files corresponding to **Wazuh Manager**.
-
-
-**wazuh.fc**
+
+Wazuh manager
+*************
+
+wazuhT.fc
+"""""""""
+
+.. raw:: html
+
+  <div class="accordion-section">
+
+.. code-block:: console
+
+     /var/ossec/active-response                  gen_context(system_u:object_r:wazuh_var_t,s0)
+     /var/ossec/active-response/bin(/.*)?        gen_context(system_u:object_r:wazuh_exec_t,s0)
+     /var/ossec/agentless(/.*)?                  gen_context(system_u:object_r:wazuh_exec_t,s0)
+     /var/ossec/api                              gen_context(system_u:object_r:wazuh_var_t,s0)
+     /var/ossec/api/configuration(/.*)?          gen_context(system_u:object_r:wazuh_etc_t,s0)
+     /var/ossec/api/scripts(/.*)?                gen_context(system_u:object_r:wazuh_exec_t,s0)
+     /var/ossec/backup(/.*)?                     gen_context(system_u:object_r:wazuh_var_t,s0)
+     /var/ossec/bin(/.*)?                        gen_context(system_u:object_r:wazuh_exec_t,s0)
+     /var/ossec/etc(/.*)?                        gen_context(system_u:object_r:wazuh_etc_t,s0)
+     /var/ossec/framework(/.*)?                  gen_context(system_u:object_r:wazuh_exec_t,s0)
+     /var/ossec/integrations(/.*)?               gen_context(system_u:object_r:wazuh_exec_t,s0)
+     /var/ossec/lib(/.*)?                        gen_context(system_u:object_r:wazuh_lib_t,s0)
+     /var/ossec/logs(/.*)?                       gen_context(system_u:object_r:wazuh_log_t,s0)
+     /var/ossec/queue(/.*)?                      gen_context(system_u:object_r:wazuh_var_t,s0)
+     /var/ossec/ruleset(/.*)?                    gen_context(system_u:object_r:wazuh_var_t,s0)
+     /var/ossec/stats(/.*)?                      gen_context(system_u:object_r:wazuh_var_t,s0)
+     /var/ossec/tmp(/.*)?                        gen_context(system_u:object_r:wazuh_tmp_t,s0)
+     /var/ossec/var(/.*)?                        gen_context(system_u:object_r:wazuh_var_t,s0)
+     /var/ossec/wodles(/.*)?                     gen_context(system_u:object_r:wazuh_exec_t,s0)
+
+
+wazuhT.te
+"""""""""
+
+.. raw:: html
+
+  <div class="accordion-section">
+           
+
+.. code-block:: console
+
+    policy_module(wazuhT,1.0)
+
+    require {
+    type bin_t;
+    type tmp_t;
+    type unconfined_t;
+    type initrc_t;
+    type unconfined_service_t;
+    type shell_exec_t;
+    type var_t;
+    type cert_t;
+    type node_t;
+    type init_t;
+    type kernel_t;
+    type system_dbusd_t;
+    type sshd_t;
+    type fs_t;
+    type unlabeled_t;
+    type sysctl_net_t;
+    type systemd_unit_file_t;
+    type cgroup_t;
+    type hugetlbfs_t;
+    type sysfs_t;
+    type iptables_exec_t;
+    type sshd_exec_t;
+    type device_t;
+    type fixed_disk_device_t;
+    type useradd_exec_t;
+    type journalctl_exec_t;
+    type proc_net_t;
+    type pstore_t;
+    type mount_exec_t;
+    type insmod_exec_t;
+    type systemd_systemctl_exec_t;
+    type crontab_exec_t;
+    type devlog_t;
+    type rpm_exec_t;
+    type proc_t;
+    type configfs_t;
+    type http_port_t;
+    type tmpfs_t;
+    type gssproxy_var_lib_t;
+    type rpm_log_t;
+    type auditd_unit_file_t;
+    type crond_unit_file_t;
+    type mount_var_run_t;
+    type rpm_var_lib_t;
+    type usermodehelper_t;
+    type var_run_t;
+    type etc_t;
+    type security_t;
+    type firewalld_t;
+    type iptables_t;
+    type dhcpc_t;
+    role system_r;
+    role unconfined_r;
+    class process { transition getattr getpgid getsession setrlimit setsched signull open read};
+    class rawip_socket {bind setopt getopt create open};
+    class netlink_route_socket {bind setopt create open write read nlmsg_read};
+    class netlink_audit_socket {bind setopt create open write read nlmsg_read};
+    class lnk_file {getattr open read};
+    class file { getattr open read execute getattr read};
+    class dir { getattr open read search };
+    class tcp_socket { bind connect create getopt listen name_bind name_connect node_bind setopt };
+    class capability { chown dac_override fowner fsetid kill net_bind_service net_raw setgid setuid sys_chroot sys_resource sys_ptrace};
+    class unix_dgram_socket { read write create ioctl sendto bind getopt connect};
+    class netlink_tcpdiag_socket {create getattr setopt read bind nlmsg_read write};
+    class filesystem { getattr open read };
+    class sock_file { getattr open read };
+    class blk_file { getattr open read };
+    class udp_socket name_bind;
+    class unix_stream_socket {connectto ioctl getattr};
+    class dbus send_msg;
+    }
+
+    # Private type declarations
+    type wazuh_t;
+    type wazuh_exec_t;
+    type wazuh_etc_t;
+    type wazuh_lib_t;
+    type wazuh_log_t;
+    type wazuh_tmp_t;
+    type wazuh_var_t;
+
+    # Ports label
+    type wazuh_port_t;
+    corenet_port(wazuh_port_t)
+
+    # domain_type macro specifies the type wazuh_t to be a domain
+    domain_type(wazuh_t)
+
+    # domain_entry_file specifies an entry point to the wazuh_t domain for the executable file of type wazuh_exec_t
+    domain_entry_file(wazuh_t, wazuh_exec_t)
+
+    # logging_log_file macro makes wazuh_log_t become the type of log file with the necessary groups and rules
+    logging_log_file(wazuh_log_t)
+
+    # Allow domain wazuh_t to manipulate log files
+    allow wazuh_t wazuh_log_t:file append_file_perms;
+
+    # files_tmp_file takes the type of wazuh_tmp_t to the necessary groups so that it becomes the type of tmp file
+    files_tmp_file(wazuh_tmp_t)
+
+    # Allow the wazuh_t domain write privileges into the tmp_t labeled directory, but with an automatic file transition towards wazuh_tmp_t for every file written
+    files_tmp_filetrans(wazuh_t,wazuh_tmp_t,file)
+
+    # Allow domain wazuh_t to manipulate tmp files
+    allow wazuh_t wazuh_tmp_t:file manage_file_perms;
+
+    #============== Allow transition
+    role unconfined_r types wazuh_t;
+    role system_r types wazuh_t;
+
+    allow wazuh_t bin_t : file execute;
+    allow unconfined_t wazuh_t : process transition;
+    allow initrc_t wazuh_t : process transition;
+    allow unconfined_service_t wazuh_t : process transition;
+    allow unconfined_t wazuh_exec_t : file execute;
+    allow initrc_t wazuh_exec_t : file execute;
+    allow unconfined_service_t wazuh_exec_t : file execute;
+    allow wazuh_t wazuh_exec_t : file entrypoint;
+
+    type_transition unconfined_t wazuh_exec_t : process wazuh_t;
+    type_transition initrc_t wazuh_exec_t : process wazuh_t;
+    type_transition unconfined_service_t wazuh_exec_t : process wazuh_t;
+
+    #============== Permissions for wazuh-control to run Wazuh
+    allow wazuh_t shell_exec_t:file { execute execute_no_trans };
+    allow wazuh_t bin_t:file execute_no_trans;
+
+    allow wazuh_t wazuh_var_t:dir { create rmdir open add_name read remove_name write getattr setattr search};
+    allow wazuh_t wazuh_var_t:file { create getattr open read append rename setattr unlink write ioctl lock};
+    allow wazuh_t wazuh_exec_t:dir { create rmdir open getattr add_name read remove_name write setattr search};
+    allow wazuh_t wazuh_exec_t:file { create getattr open read append rename setattr link unlink write ioctl lock execute execute_no_trans};
+    allow wazuh_t wazuh_log_t:dir { create rmdir open getattr add_name read remove_name write setattr search};
+    allow wazuh_t wazuh_log_t:file { create getattr open read append rename setattr link unlink write ioctl lock};
+    allow wazuh_t wazuh_etc_t:dir { create rmdir open getattr add_name read remove_name write setattr search};
+    allow wazuh_t wazuh_tmp_t:dir { create rmdir open getattr add_name read remove_name write setattr search rmdir};
+    allow wazuh_t wazuh_tmp_t:file { create getattr open read append rename setattr link unlink write ioctl lock};
+    allow wazuh_t wazuh_lib_t:dir { create rmdir open getattr add_name read remove_name write setattr search};
+    allow wazuh_t wazuh_lib_t:file { getattr open read map execute};
+    allow wazuh_t wazuh_var_t:filesystem { associate};
+    allow wazuh_var_t fs_t:filesystem { associate};
+    allow wazuh_etc_t fs_t:filesystem { associate};
+
+    # Permissions to read /proc
+    allow wazuh_t proc_t:dir read;
+    domain_read_all_domains_state(wazuh_t)
+    domain_getpgid_all_domains( wazuh_t )
+    domain_getattr_all_domains( wazuh_t )
+    domain_getsession_all_domains( wazuh_t )
+    domain_signull_all_domains( wazuh_t )
+
+    #============== Permissions for Framework and API
+    allow wazuh_t self:tcp_socket { bind connect create getopt listen setopt };
+    allow wazuh_t self:udp_socket { bind connect create getattr ioctl setopt };
+    allow wazuh_t node_t:tcp_socket node_bind;
+    allow wazuh_t node_t:udp_socket node_bind;
+
+    #============== Permissions for wazuh-analysisd to run
+    allow wazuh_t self:process { getattr getpgid getsession setrlimit setsched };
+    allow wazuh_t wazuh_etc_t:file { create getattr open read append rename setattr link unlink write ioctl lock map};
+
+    #============== Permissions for wazuh-remoted to use sockets
+    allow wazuh_t wazuh_var_t:sock_file { read write getattr create setattr unlink} ;
+    allow wazuh_t wazuh_t:unix_stream_socket {connectto ioctl};
+    allow wazuh_t wazuh_port_t:tcp_socket {name_connect name_bind create read write connect recvfrom sendto send_msg setopt ioctl setattr getattr};
+    allow wazuh_t wazuh_t:tcp_socket {accept bind name_connect name_bind create read write connect recvfrom sendto send_msg setopt ioctl setattr getattr};
+    allow wazuh_t wazuh_port_t:udp_socket {name_bind create read write connect recvfrom sendto send_msg setopt ioctl setattr getattr};
+    allow wazuh_t wazuh_t:udp_socket {accept name_bind create read write connect recvfrom sendto send_msg setopt ioctl setattr getattr};
+    allow wazuh_t wazuh_t:unix_dgram_socket { read write create ioctl sendto bind getopt connect};
+
+    #============== Permissions for wazuh-syscheckd to monitor files and directories and for wazuh-logcollector to read logs files
+    files_read_all_files(wazuh_t)
+    files_read_all_chr_files(wazuh_t)
+    files_read_all_symlinks(wazuh_t)
+    fs_getattr_all_chr_files(wazuh_t)
+    dev_getattr_all_chr_files(wazuh_t)
+    allow wazuh_t gssproxy_var_lib_t:sock_file { getattr open read };
+    allow wazuh_t fixed_disk_device_t:blk_file { getattr open read };
+    allow wazuh_t devlog_t:sock_file { read write getattr create setattr unlink};
+
+    #============== Permissions for rootcheck to monitor ports
+    corenet_udp_bind_all_ports(wazuh_t)
+    corenet_tcp_bind_all_ports(wazuh_t)
+
+    #============== Permissions for wazuh-modulesd to run
+    allow wazuh_t sysfs_t:lnk_file read;
+    allow wazuh_t proc_net_t:file { getattr open read };
+    allow wazuh_t self:netlink_route_socket {create getattr open read bind nlmsg_read write};
+
+    # Permissions for wazuh-modulesd to run SCA scans
+    allow wazuh_t sshd_exec_t:file { execute execute_no_trans };
+    allow wazuh_t useradd_exec_t:file { execute execute_no_trans};
+    allow wazuh_t rpm_exec_t:file { execute execute_no_trans ioctl};
+    allow wazuh_t systemd_systemctl_exec_t:file { execute execute_no_trans};
+    allow wazuh_t insmod_exec_t:file { execute execute_no_trans };
+    allow wazuh_t iptables_exec_t:file { execute execute_no_trans };
+    allow wazuh_t crontab_exec_t:file { execute execute_no_trans };
+    allow wazuh_t journalctl_exec_t:file { execute execute_no_trans};
+    allow wazuh_t mount_exec_t:file { execute execute_no_trans getattr};
+    allow wazuh_t rpm_log_t:file { getattr open read append};
+    allow wazuh_t rpm_var_lib_t:file { write create setattr unlink rename};
+    allow wazuh_t rpm_var_lib_t:dir { write add_name remove_name};
+    allow wazuh_t cert_t:dir { search write create add_name remove_name rmdir};
+    allow wazuh_t cert_t:file { lock write};
+    allow wazuh_t tmp_t:dir { search write create add_name remove_name rmdir};
+    allow wazuh_t unlabeled_t:file { getattr open read };
+    allow wazuh_t security_t:security compute_av;
+    allow wazuh_t security_t:file {write};
+    allow wazuh_t security_t:dir {write};
+    allow wazuh_t init_t:unix_stream_socket {connectto ioctl getattr};
+    allow wazuh_t init_t:system { status };
+    allow wazuh_t init_t:service { status };
+    allow wazuh_t system_dbusd_t:dbus send_msg;
+    allow wazuh_t tmpfs_t:dir read;
+    allow wazuh_t tmpfs_t:filesystem { getattr open read };
+    allow wazuh_t cgroup_t:filesystem { getattr open read };
+    allow wazuh_t configfs_t:filesystem { getattr open read };
+    allow wazuh_t device_t:filesystem { getattr open read };
+    allow wazuh_t hugetlbfs_t:filesystem { getattr open read };
+    allow wazuh_t proc_t:filesystem { getattr open read };
+    allow wazuh_t pstore_t:filesystem { getattr open read };
+    allow wazuh_t sysfs_t:filesystem { getattr open read };
+    allow wazuh_t fs_t:filesystem { getattr open read };
+    allow wazuh_t self:rawip_socket {bind setopt getopt create open};
+    allow wazuh_t kernel_t:unix_dgram_socket sendto;
+    allow wazuh_t auditd_unit_file_t:service { status };
+    allow wazuh_t crond_unit_file_t:service { status };
+    allow wazuh_t systemd_unit_file_t:service { status start};
+    allow wazuh_t mount_var_run_t:dir { getattr open read write search write};
+    allow wazuh_t var_run_t:dir { getattr open read search write add_name remove_name};
+    allow wazuh_t var_run_t:file { getattr open read write lock create unlink};
+    allow wazuh_t sysctl_net_t:dir search;
+    allow wazuh_t sysctl_net_t:file { getattr open read };
+    allow wazuh_t usermodehelper_t:file { getattr open read };
+    allow wazuh_t self:netlink_audit_socket {create setopt open read bind nlmsg_read write};
+    allow wazuh_t self:netlink_tcpdiag_socket {create getattr setopt read bind nlmsg_read write};
+    allow wazuh_t kernel_t:system module_request;
+    allow dhcpc_t unlabeled_t:file {getattr open read};
+
+    #============== Permissions for wazuh-execd to run AR
+    allow wazuh_t self:capability { chown dac_override fowner fsetid kill net_bind_service net_raw setgid setuid sys_chroot sys_resource sys_ptrace};
+    allow wazuh_t etc_t:dir { getattr open read search write add_name remove_name};
+    allow sshd_t var_t:file { getattr create open append ioctl lock read setattr write};
+    allow wazuh_t firewalld_t:dbus send_msg;
+    allow firewalld_t wazuh_t:dbus send_msg;
+    allow wazuh_t firewalld_t:process { getattr getpgid getsession signull };
+    allow iptables_t var_run_t:file {open read lock};
+    allow wazuh_t system_dbusd_t:unix_stream_socket connectto;
+    allow wazuh_t http_port_t:tcp_socket {name_bind name_connect write read};
+
+    #============== Permissions to assign new contexts
+    allow unconfined_t wazuh_var_t:dir {getattr open read search relabelto};
+    allow unconfined_t wazuh_var_t:file {getattr relabelto};
+    allow unconfined_t wazuh_var_t:sock_file {getattr open read relabelto};
+    allow unconfined_t wazuh_lib_t:dir {getattr open read search relabelto};
+    allow unconfined_t wazuh_lib_t:file {getattr relabelto};
+    allow unconfined_t wazuh_etc_t:dir {getattr open read search relabelto};
+    allow unconfined_t wazuh_etc_t:file {getattr open read write relabelto}; 
+
+Wazuh agent
+***********
+
+wazuhT.fc
+"""""""""
+
+.. raw:: html
+
+  <div class="accordion-section">
+
+.. code-block:: console
+
+    /var/ossec/active-response                  gen_context(system_u:object_r:wazuh_var_t,s0)
+    /var/ossec/active-response/bin(/.*)?        gen_context(system_u:object_r:wazuh_exec_t,s0)
+    /var/ossec/agentless(/.*)?                  gen_context(system_u:object_r:wazuh_exec_t,s0)
+    /var/ossec/backup(/.*)?                     gen_context(system_u:object_r:wazuh_var_t,s0)
+    /var/ossec/bin(/.*)?                        gen_context(system_u:object_r:wazuh_exec_t,s0)
+    /var/ossec/etc(/.*)?                        gen_context(system_u:object_r:wazuh_etc_t,s0)
+    /var/ossec/lib(/.*)?                        gen_context(system_u:object_r:wazuh_lib_t,s0)
+    /var/ossec/logs(/.*)?                       gen_context(system_u:object_r:wazuh_log_t,s0)
+    /var/ossec/queue(/.*)?                      gen_context(system_u:object_r:wazuh_var_t,s0)
+    /var/ossec/ruleset(/.*)?                    gen_context(system_u:object_r:wazuh_var_t,s0)
+    /var/ossec/tmp(/.*)?                        gen_context(system_u:object_r:wazuh_tmp_t,s0)
+    /var/ossec/var(/.*)?                        gen_context(system_u:object_r:wazuh_var_t,s0)
+    /var/ossec/wodles(/.*)?                     gen_context(system_u:object_r:wazuh_exec_t,s0)
+
+wazuhT.te
+"""""""""
+.. raw:: html
+
+  <div class="accordion-section">
+
+.. code-block:: console
+
+    policy_module(wazuhT,1.0)
+
+    require {
+    type bin_t;
+    type tmp_t;
+    type unconfined_t;
+    type initrc_t;
+    type unconfined_service_t;
+    type shell_exec_t;
+    type var_t;
+    type cert_t;
+    type node_t;
+    type init_t;
+    type kernel_t;
+    type system_dbusd_t;
+    type sshd_t;
+    type fs_t;
+    type unlabeled_t;
+    type sysctl_net_t;
+    type systemd_unit_file_t;
+    type cgroup_t;
+    type hugetlbfs_t;
+    type sysfs_t;
+    type iptables_exec_t;
+    type sshd_exec_t;
+    type device_t;
+    type fixed_disk_device_t;
+    type useradd_exec_t;
+    type journalctl_exec_t;
+    type proc_net_t;
+    type pstore_t;
+    type mount_exec_t;
+    type insmod_exec_t;
+    type systemd_systemctl_exec_t;
+    type crontab_exec_t;
+    type devlog_t;
+    type rpm_exec_t;
+    type proc_t;
+    type configfs_t;
+    type http_port_t;
+    type tmpfs_t;
+    type gssproxy_var_lib_t;
+    type rpm_log_t;
+    type auditd_unit_file_t;
+    type crond_unit_file_t;
+    type mount_var_run_t;
+    type rpm_var_lib_t;
+    type usermodehelper_t;
+    type var_run_t;
+    type etc_t;
+    type security_t;
+    type firewalld_t;
+    type iptables_t;
+    type dhcpc_t;
+    role system_r;
+    role unconfined_r;
+    class process { transition getattr getpgid getsession setrlimit setsched signull open read};
+    class rawip_socket {bind setopt getopt create open};
+    class netlink_route_socket {bind setopt create open write read nlmsg_read};
+    class netlink_audit_socket {bind setopt create open write read nlmsg_read};
+    class lnk_file {getattr open read};
+    class file { getattr open read execute getattr read};
+    class dir { getattr open read search };
+    class tcp_socket { bind connect create getopt listen name_bind name_connect node_bind setopt };
+    class capability { chown dac_override fowner fsetid kill net_bind_service net_raw setgid setuid sys_chroot sys_resource sys_ptrace};
+    class unix_dgram_socket { read write create ioctl sendto bind getopt connect};
+    class netlink_tcpdiag_socket {create getattr setopt read bind nlmsg_read write};
+    class filesystem { getattr open read };
+    class sock_file { getattr open read };
+    class blk_file { getattr open read };
+    class udp_socket name_bind;
+    class unix_stream_socket {connectto ioctl getattr};
+    class dbus send_msg;
+    }
+
+    # Private type declarations
+    type wazuh_t;
+    type wazuh_exec_t;
+    type wazuh_etc_t;
+    type wazuh_lib_t;
+    type wazuh_log_t;
+    type wazuh_tmp_t;
+    type wazuh_var_t;
+
+    # Ports label
+    type wazuh_port_t;
+    corenet_port(wazuh_port_t)
+
+    # domain_type macro specifies the type wazuh_t to be a domain
+    domain_type(wazuh_t)
+
+    # domain_entry_file specifies an entry point to the wazuh_t domain for the executable file of type wazuh_exec_t
+    domain_entry_file(wazuh_t, wazuh_exec_t)
+
+    # logging_log_file macro makes wazuh_log_t become the type of log file with the necessary groups and rules
+    logging_log_file(wazuh_log_t)
+
+    # Allow domain wazuh_t to manipulate log files
+    allow wazuh_t wazuh_log_t:file append_file_perms;
+
+    # files_tmp_file takes the type of wazuh_tmp_t to the necessary groups so that it becomes the type of tmp file
+    files_tmp_file(wazuh_tmp_t)
+
+    # Allow the wazuh_t domain write privileges into the tmp_t labeled directory, but with an automatic file transition towards wazuh_tmp_t for every file written
+    files_tmp_filetrans(wazuh_t,wazuh_tmp_t,file)
+
+    # Allow domain wazuh_t to manipulate tmp files
+    allow wazuh_t wazuh_tmp_t:file manage_file_perms;
+
+    #============== Allow transition
+    role unconfined_r types wazuh_t;
+    role system_r types wazuh_t;
+
+    allow wazuh_t bin_t : file execute;
+    allow unconfined_t wazuh_t : process transition;
+    allow initrc_t wazuh_t : process transition;
+    allow unconfined_service_t wazuh_t : process transition;
+    allow unconfined_t wazuh_exec_t : file execute;
+    allow initrc_t wazuh_exec_t : file execute;
+    allow unconfined_service_t wazuh_exec_t : file execute;
+    allow wazuh_t wazuh_exec_t : file entrypoint;
+
+    type_transition unconfined_t wazuh_exec_t : process wazuh_t;
+    type_transition initrc_t wazuh_exec_t : process wazuh_t;
+    type_transition unconfined_service_t wazuh_exec_t : process wazuh_t;
+
+    #============== Permissions for wazuh-control to run Wazuh
+    allow wazuh_t shell_exec_t:file { execute execute_no_trans };
+    allow wazuh_t bin_t:file execute_no_trans;
+
+    allow wazuh_t wazuh_var_t:dir { create rmdir open add_name read remove_name write getattr setattr search};
+    allow wazuh_t wazuh_var_t:file { create getattr open read append rename setattr unlink write ioctl lock};
+    allow wazuh_t wazuh_exec_t:dir { create rmdir open getattr add_name read remove_name write setattr search};
+    allow wazuh_t wazuh_exec_t:file { create getattr open read append rename setattr link unlink write ioctl lock execute execute_no_trans};
+    allow wazuh_t wazuh_log_t:dir { create rmdir open getattr add_name read remove_name write setattr search};
+    allow wazuh_t wazuh_log_t:file { create getattr open read append rename setattr link unlink write ioctl lock};
+    allow wazuh_t wazuh_etc_t:dir { create rmdir open getattr add_name read remove_name write setattr search};
+    allow wazuh_t wazuh_etc_t:file { create getattr open read append rename setattr link unlink write ioctl lock map};
+    allow wazuh_t wazuh_tmp_t:dir { create rmdir open getattr add_name read remove_name write setattr search rmdir};
+    allow wazuh_t wazuh_tmp_t:file { create getattr open read append rename setattr link unlink write ioctl lock};
+    allow wazuh_t wazuh_lib_t:dir { create rmdir open getattr add_name read remove_name write setattr search};
+    allow wazuh_t wazuh_lib_t:file { getattr open read map execute};
+    allow wazuh_t wazuh_var_t:filesystem { associate};
+    allow wazuh_var_t fs_t:filesystem { associate};
+    allow wazuh_etc_t fs_t:filesystem { associate};
+    allow wazuh_t self:process { getattr getpgid getsession setrlimit setsched };
+
+    # Permissions to read /proc
+    allow wazuh_t proc_t:dir read;
+    domain_read_all_domains_state(wazuh_t)
+    domain_getpgid_all_domains( wazuh_t )
+    domain_getattr_all_domains( wazuh_t )
+    domain_getsession_all_domains( wazuh_t )
+    domain_signull_all_domains( wazuh_t )
+
+    #============== Permissions for wazuh-agentd to use sockets
+    allow wazuh_t wazuh_var_t:sock_file { read write getattr create setattr unlink};
+    allow wazuh_t wazuh_t:unix_stream_socket {connectto ioctl};
+    allow wazuh_t wazuh_port_t:tcp_socket {name_connect name_bind create read write connect recvfrom sendto send_msg setopt ioctl setattr getattr};
+    allow wazuh_t wazuh_t:tcp_socket {accept bind name_connect name_bind create read write connect recvfrom sendto send_msg setopt ioctl setattr getattr};
+    allow wazuh_t wazuh_port_t:udp_socket {name_bind create read write connect recvfrom sendto send_msg setopt ioctl setattr getattr};
+    allow wazuh_t wazuh_t:udp_socket {accept name_bind create read write connect recvfrom sendto send_msg setopt ioctl setattr getattr};
+    allow wazuh_t wazuh_t:unix_dgram_socket { read write create ioctl sendto bind getopt connect};
+    allow wazuh_t self:tcp_socket { bind connect create getopt listen setopt };
+    allow wazuh_t self:udp_socket { bind connect create getattr ioctl setopt };
+    allow wazuh_t node_t:tcp_socket node_bind;
+    allow wazuh_t node_t:udp_socket node_bind;
+
+    #============== Permissions for wazuh-syscheckd to monitor files and directories and for wazuh-logcollector to read logs files
+    files_read_all_files(wazuh_t)
+    files_read_all_chr_files(wazuh_t)
+    files_read_all_symlinks(wazuh_t)
+    fs_getattr_all_chr_files(wazuh_t)
+    dev_getattr_all_chr_files(wazuh_t)
+    allow wazuh_t gssproxy_var_lib_t:sock_file { getattr open read };
+    allow wazuh_t fixed_disk_device_t:blk_file { getattr open read };
+    allow wazuh_t devlog_t:sock_file { read write getattr create setattr unlink};
+
+    #============== Permissions for rootcheck to monitor ports
+    corenet_udp_bind_all_ports(wazuh_t)
+    corenet_tcp_bind_all_ports(wazuh_t)
+
+    #============== Permissions for wazuh-modulesd to run
+    allow wazuh_t sysfs_t:lnk_file read;
+    allow wazuh_t proc_net_t:file { getattr open read };
+    allow wazuh_t self:netlink_route_socket {create getattr open read bind nlmsg_read write};
+
+    # Permissions for wazuh-modulesd to run SCA scans
+    allow wazuh_t sshd_exec_t:file { execute execute_no_trans };
+    allow wazuh_t useradd_exec_t:file { execute execute_no_trans};
+    allow wazuh_t rpm_exec_t:file { execute execute_no_trans ioctl};
+    allow wazuh_t systemd_systemctl_exec_t:file { execute execute_no_trans};
+    allow wazuh_t insmod_exec_t:file { execute execute_no_trans };
+    allow wazuh_t iptables_exec_t:file { execute execute_no_trans };
+    allow wazuh_t crontab_exec_t:file { execute execute_no_trans };
+    allow wazuh_t journalctl_exec_t:file { execute execute_no_trans};
+    allow wazuh_t mount_exec_t:file { execute execute_no_trans getattr};
+    allow wazuh_t rpm_log_t:file { getattr open read append};
+    allow wazuh_t rpm_var_lib_t:file { write create setattr unlink rename};
+    allow wazuh_t rpm_var_lib_t:dir { write add_name remove_name};
+    allow wazuh_t cert_t:dir { search write create add_name remove_name rmdir};
+    allow wazuh_t cert_t:file { lock write};
+    allow wazuh_t tmp_t:dir { search write create add_name remove_name rmdir};
+    allow wazuh_t unlabeled_t:file { getattr open read };
+    allow wazuh_t security_t:security compute_av;
+    allow wazuh_t security_t:file {write};
+    allow wazuh_t security_t:dir {write};
+    allow wazuh_t init_t:unix_stream_socket {connectto ioctl getattr};
+    allow wazuh_t init_t:system { status };
+    allow wazuh_t init_t:service { status };
+    allow wazuh_t system_dbusd_t:dbus send_msg;
+    allow wazuh_t tmpfs_t:dir read;
+    allow wazuh_t tmpfs_t:filesystem { getattr open read };
+    allow wazuh_t cgroup_t:filesystem { getattr open read };
+    allow wazuh_t configfs_t:filesystem { getattr open read };
+    allow wazuh_t device_t:filesystem { getattr open read };
+    allow wazuh_t hugetlbfs_t:filesystem { getattr open read };
+    allow wazuh_t proc_t:filesystem { getattr open read };
+    allow wazuh_t pstore_t:filesystem { getattr open read };
+    allow wazuh_t sysfs_t:filesystem { getattr open read };
+    allow wazuh_t fs_t:filesystem { getattr open read };
+    allow wazuh_t self:rawip_socket {bind setopt getopt create open};
+    allow wazuh_t kernel_t:unix_dgram_socket sendto;
+    allow wazuh_t auditd_unit_file_t:service { status };
+    allow wazuh_t crond_unit_file_t:service { status };
+    allow wazuh_t systemd_unit_file_t:service { status start};
+    allow wazuh_t mount_var_run_t:dir { getattr open read write search write};
+    allow wazuh_t var_run_t:dir { getattr open read search write add_name remove_name};
+    allow wazuh_t var_run_t:file { getattr open read write lock create unlink};
+    allow wazuh_t sysctl_net_t:dir search;
+    allow wazuh_t sysctl_net_t:file { getattr open read };
+    allow wazuh_t usermodehelper_t:file { getattr open read };
+    allow wazuh_t self:netlink_audit_socket {create setopt open read bind nlmsg_read write};
+    allow wazuh_t self:netlink_tcpdiag_socket {create getattr setopt read bind nlmsg_read write};
+    allow wazuh_t kernel_t:system module_request;
+    allow dhcpc_t unlabeled_t:file {getattr open read};
+
+    #============== Permissions for wazuh-execd to run AR
+    allow wazuh_t self:capability { chown dac_override fowner fsetid kill net_bind_service net_raw setgid setuid sys_chroot sys_resource sys_ptrace};
+    allow wazuh_t etc_t:dir { getattr open read search write add_name remove_name};
+    allow sshd_t var_t:file { getattr create open append ioctl lock read setattr write};
+    allow wazuh_t firewalld_t:dbus send_msg;
+    allow firewalld_t wazuh_t:dbus send_msg;
+    allow wazuh_t firewalld_t:process { getattr getpgid getsession signull };
+    allow iptables_t var_run_t:file {open read lock};
+    allow wazuh_t system_dbusd_t:unix_stream_socket connectto;
+    allow wazuh_t http_port_t:tcp_socket {name_bind name_connect write read};
+
+    #============== Permissions to assign new contexts
+    allow unconfined_t wazuh_var_t:dir {getattr open read search relabelto};
+    allow unconfined_t wazuh_var_t:file {getattr relabelto};
+    allow unconfined_t wazuh_var_t:sock_file {getattr open read relabelto};
+    allow unconfined_t wazuh_lib_t:dir {getattr open read search relabelto};
+    allow unconfined_t wazuh_lib_t:file {getattr relabelto};
+    allow unconfined_t wazuh_etc_t:dir {getattr open read search relabelto};
+    allow unconfined_t wazuh_etc_t:file {getattr open read write relabelto};
+ 
+
+wazuhT.fc and wazuhT.te file content descriptions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Below there is a description of the ``wazuhT.fc`` and ``wazuhT.te`` files. These descriptions are based on the Wazuh manager files. 
+
+
+wazuhT.fc
+*********
 
     In this file, the security contexts for each folder and file within the Wazuh folder are declared. For example, we assign the context ``wazuh_exec_t`` to executable files, including ``/ossec/active-response/bin/*`` and ``/ossec/bin/*``. In this way, we declare a Wazuh context for each file in the ``/var/ossec`` directory:
 
@@ -647,7 +673,8 @@ Next, we will present the content of the ``wazuhT.fc`` and ``wazuhT.te`` files. 
     Note that in the definition of the contexts for each Wazuh folder the default installation folder (``/var/ossec/``) was used.
 
 
-**wazuh.te**
+wazuhT.te
+*********
 
     The ``wazuhT.te`` file is the main file of the module, where it is defined:
 
@@ -948,7 +975,7 @@ Steps to build and load the new SELinux policy module
 
     .. note::
 
-        In case of manager you must add port 1515 used by **wazuh-authd** and 1516 which is used by **wazuh-clusterd**.
+        For the Wazuh manager, you must add port 1515 used by **wazuh-authd** and 1516 which is used by **wazuh-clusterd**.
 
 #. Change SELinux to Enforcing:
 

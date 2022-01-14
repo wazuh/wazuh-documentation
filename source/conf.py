@@ -51,7 +51,6 @@ extensions = [
     'sphinx.ext.extlinks', # Sphinx built-in extension
     'wazuh-doc-images',
     'sphinx_tabs.tabs',
-    'sphinx_toolbox.collapse',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
