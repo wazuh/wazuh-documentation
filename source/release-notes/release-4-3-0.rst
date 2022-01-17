@@ -140,7 +140,7 @@ Manager
 - `#8399 <https://github.com/wazuh/wazuh/pull/8399>`_ The data reporting for Rootcheck scans in the agent_control tool has been deprecated.
 - `#8846 <https://github.com/wazuh/wazuh/pull/8846>`_ The old framework functions used to calculate agent status are now removed.
 
-- `#11031 <https://github.com/wazuh/wazuh/pull/11031>`_ Added a mechanism to ensure the worker synchronization permissions is reset after a fixed period of time.
+- `#11031 <https://github.com/wazuh/wazuh/pull/11031>`_ A mechanism to ensure the worker synchronization permissions is reset after a fixed period of time is added.
 
 
 Agent
@@ -182,7 +182,7 @@ Agent
 - `#8724 <https://github.com/wazuh/wazuh/pull/8724>`_ The agent MSI installer for Windows now detects the platform version to install the default configuration.
 - `#3659 <https://github.com/wazuh/wazuh/pull/3659>`_ Agent logs for inability to resolve the manager hostname now have info level.
 - `#10900 <https://github.com/wazuh/wazuh/pull/10900>`_ The oscap module files are removed as it was already deprecated since v4.0.0.
-- `#11276 <https://github.com/wazuh/wazuh/pull/11276>`_ Added ID number to connection enrollment logs.
+- `#11276 <https://github.com/wazuh/wazuh/pull/11276>`_ An ID number to connection enrollment logs is added.
 - `#10838 <https://github.com/wazuh/wazuh/pull/10838>`_ Standardized the use of the ``only_logs_after`` parameter in the external integration modules.
 
 
@@ -235,7 +235,7 @@ RESTful API
 - `#8599 <https://github.com/wazuh/wazuh/pull/8599>`_ The select parameter from GET /agents/stats/distinct endpoint is removed.
 - `#8099 <https://github.com/wazuh/wazuh/pull/8099>`_ The ``GET /mitre`` endpoint is removed.
 - `#11410 <https://github.com/wazuh/wazuh/pull/11410>`_ Changed HTTPS options to use files instead of relative paths.
-- `#11410 <https://github.com/wazuh/wazuh/pull/11410>`_ Deprecated the option to set log ``path`` in the configuration.
+- `#11410 <https://github.com/wazuh/wazuh/pull/11410>`_ The option to set log ``path`` in the configuration is deprecated.
 
 
 Ruleset
@@ -279,7 +279,7 @@ Wazuh Kibana plugin
 - `#3517 <https://github.com/wazuh/wazuh-kibana-app/pull/3517>`_ The filterManager subscription are moved to the hook useFilterManager.
 - `#3529 <https://github.com/wazuh/wazuh-kibana-app/pull/3529>`_ Filter is changed from "is" to "is one of" in custom searchbar.
 - `#3494 <https://github.com/wazuh/wazuh-kibana-app/pull/3494>`_ Refactor ``modules-defaults.js`` to define what buttons and components are rendered in each module tab.
-- `#3663 <https://github.com/wazuh/wazuh-kibana-app/pull/3663>`_ Depracated and new references ``authd`` is updated.
+- `#3663 <https://github.com/wazuh/wazuh-kibana-app/pull/3663>`_ The deprecated and new references for the ``authd`` configuration are updated.
 - `#3549 <https://github.com/wazuh/wazuh-kibana-app/pull/3549>`_ Time subscription is added to Discover component.
 - `#3446 <https://github.com/wazuh/wazuh-kibana-app/pull/3446>`_ Testing logs using the Ruletest Test don't display the rule information if not matching a rule.
 - `#3649 <https://github.com/wazuh/wazuh-kibana-app/pull/3649>`_ The format permissions is changed in FIM inventory.
@@ -293,9 +293,9 @@ Others
 - `#10247 <https://github.com/wazuh/wazuh/pull/10247>`_ External BerkeleyDB library dependency is upgraded to version to 18.1.40.
 - `#10247 <https://github.com/wazuh/wazuh/pull/10247>`_ External OpenSSL library dependency is upgraded to version to 1.1.1l.
 - `#10927 <https://github.com/wazuh/wazuh/pull/10927>`_ External Google Test library  dependency is upgraded to version to 1.11.
-- `#11436 <https://github.com/wazuh/wazuh/pull/11436>`_ Upgraded external Aiohttp library dependency version to 3.8.1.
-- `#11436 <https://github.com/wazuh/wazuh/pull/11436>`_ Upgraded external Werkzeug library dependency version to 2.0.2.
-- `#11436 <https://github.com/wazuh/wazuh/pull/11436>`_ Upgraded embedded Python version to 3.9.9.
+- `#11436 <https://github.com/wazuh/wazuh/pull/11436>`_ External Aiohttp library dependency is upgraded to version to 3.8.1.
+- `#11436 <https://github.com/wazuh/wazuh/pull/11436>`_ External Werkzeug library dependency is upgraded to version to 2.0.2.
+- `#11436 <https://github.com/wazuh/wazuh/pull/11436>`_ Embedded Python is upgraded to version to 3.9.9.
 
 
 
@@ -341,7 +341,7 @@ Reference                                                         Description
 `#11161 <https://github.com/wazuh/wazuh/pull/11161>`_             An uninitialized Blowfish encryption structure warning is fixed.
 `#11262 <https://github.com/wazuh/wazuh/pull/11262>`_             A memory overrun hazard in Vulnerability Detector is fixed.
 `#11282 <https://github.com/wazuh/wazuh/pull/11282>`_             A bug when using a limit parameter higher than the total number of objects in the wazuh-db queries is fixed.
-`#11440 <https://github.com/wazuh/wazuh/pull/11440>`_             Prevented a false positive for MySQL in Vulnerability Detector.
+`#11440 <https://github.com/wazuh/wazuh/pull/11440>`_             A false positive for MySQL in Vulnerability Detector is prevented.
 `#11448 <https://github.com/wazuh/wazuh/pull/11448>`_             The segmentation fault when wrong configuration is set is fixed.
 ==============================================================    =============
 
@@ -417,7 +417,7 @@ Reference                                                         Description
 `#10666 <https://github.com/wazuh/wazuh/pull/10666>`_             The ``PUT /agents/group/{group_id}/restart`` endpoint to exclude exception codes properly is fixed.
 `#10656 <https://github.com/wazuh/wazuh/pull/10656>`_             The agent endpoints q parameter to allow more operators when filtering by groups is fixed.
 `#10830 <https://github.com/wazuh/wazuh/pull/10830>`_             The API integration tests related to rule, decoder and task endpoints is fixed.
-`#11411 <https://github.com/wazuh/wazuh/pull/11411>`_             Improved exceptions handling when starting the Wazuh API service.
+`#11411 <https://github.com/wazuh/wazuh/pull/11411>`_             Exceptions handling when starting the Wazuh API service is improved.
 ==============================================================    =============
 
 
