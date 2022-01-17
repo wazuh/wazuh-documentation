@@ -338,11 +338,11 @@ Reference                                                         Description
 `#10866 <https://github.com/wazuh/wazuh/pull/10866>`_             A bug that caused cluster agent-groups files to be synchronized multiple times unnecessarily is fixed.
 `#10922 <https://github.com/wazuh/wazuh/pull/10922>`_             An issue in Wazuh DB that compiled the SQL statements multiple times unnecessarily is fixed.
 `#10948 <https://github.com/wazuh/wazuh/pull/10948>`_             A crash in Analysisd when setting Active Response with agent_id = 0 is fixed.
-`#11161 <https://github.com/wazuh/wazuh/pull/11161>`_             Fixed an uninitialized Blowfish encryption structure warning.
-`#11262 <https://github.com/wazuh/wazuh/pull/11262>`_             Fixed a memory overrun hazard in Vulnerability Detector.
-`#11282 <https://github.com/wazuh/wazuh/pull/11282>`_             Fixed a bug when using a limit parameter higher than the total number of objects in the wazuh-db queries.
+`#11161 <https://github.com/wazuh/wazuh/pull/11161>`_             An uninitialized Blowfish encryption structure warning is fixed.
+`#11262 <https://github.com/wazuh/wazuh/pull/11262>`_             A memory overrun hazard in Vulnerability Detector is fixed.
+`#11282 <https://github.com/wazuh/wazuh/pull/11282>`_             A bug when using a limit parameter higher than the total number of objects in the wazuh-db queries is fixed.
 `#11440 <https://github.com/wazuh/wazuh/pull/11440>`_             Prevented a false positive for MySQL in Vulnerability Detector.
-`#11448 <https://github.com/wazuh/wazuh/pull/11448>`_             Fixed segmentation fault when wrong configuration is set.
+`#11448 <https://github.com/wazuh/wazuh/pull/11448>`_             The segmentation fault when wrong configuration is set is fixed.
 ==============================================================    =============
 
 
@@ -372,19 +372,19 @@ Reference                                                         Description
 `#10718 <https://github.com/wazuh/wazuh/pull/10718>`_             AWS modules' log file filtering is fixed when there are logs with and without a prefix mixed in a bucket.
 `#10884 <https://github.com/wazuh/wazuh/pull/10884>`_             A bug on the installation script that made upgrades not to update the code of the external integration modules id fixed.
 `#10921 <https://github.com/wazuh/wazuh/pull/10921>`_             An issue with AWS integration module trying to parse manually created folders as if they were files is fixed.
-`#11086 <https://github.com/wazuh/wazuh/pull/11086>`_             Fixed installation errors in OS with no subversion.
-`#11115 <https://github.com/wazuh/wazuh/pull/11115>`_             Fixed a typo in an error log about enrollment SSL certificate.
-`#11121 <https://github.com/wazuh/wazuh/pull/11121>`_             Fixed unit tests for Windows agent when built on MinGW 10.
-`#10942 <https://github.com/wazuh/wazuh/pull/10942>`_             Fixed Windows agent compilation warnings.
-`#11207 <https://github.com/wazuh/wazuh/pull/11207>`_             Fixed the OS version reported by the agent on OpenSUSE Tumbleweed.
-`#11329 <https://github.com/wazuh/wazuh/pull/11329>`_             Prevented Syscollector from truncating the open port inode numbers on Linux.
-`#11365 <https://github.com/wazuh/wazuh/pull/11365>`_             Fixed agent auto-restart on configuration changes when started via ``wazuh-control`` on a Systemd based Linux OS.
-`#10952 <https://github.com/wazuh/wazuh/pull/10952>`_             Fixed a bug in the AWS module resulting in unnecessary API calls when trying to obtain the different Account IDs for the bucket.
-`#11194 <https://github.com/wazuh/wazuh/pull/11194>`_             Fixed reparse option in the AWS VPCFlow integration.
-`#11278 <https://github.com/wazuh/wazuh/pull/11278>`_             Fixed Azure integration's configuration parsing to allow omitting optional parameters.
-`#11296 <https://github.com/wazuh/wazuh/pull/11296>`_             Fixed Azure Storage credentials validation bug.
-`#11455 <https://github.com/wazuh/wazuh/pull/11455>`_             Fixed the read of the hostname in the installation process for openSUSE.
-`#11425 <https://github.com/wazuh/wazuh/pull/11425>`_             Fixed the graceful shutdown when agent loses connection.
+`#11086 <https://github.com/wazuh/wazuh/pull/11086>`_             Some installation errors in OS with no subversion are fixed.
+`#11115 <https://github.com/wazuh/wazuh/pull/11115>`_             A typo in an error log about enrollment SSL certificate is fixed.
+`#11121 <https://github.com/wazuh/wazuh/pull/11121>`_             A unit tests for Windows agent when built on MinGW 10 is fixed.
+`#10942 <https://github.com/wazuh/wazuh/pull/10942>`_             A Windows agent compilation warnings is fixed.
+`#11207 <https://github.com/wazuh/wazuh/pull/11207>`_             The OS version reported by the agent on OpenSUSE Tumbleweed is fixed.
+`#11329 <https://github.com/wazuh/wazuh/pull/11329>`_             The Syscollector is prevented from truncating the open port inode numbers on Linux.
+`#11365 <https://github.com/wazuh/wazuh/pull/11365>`_             An agent auto-restart on configuration changes when started via ``wazuh-control`` on a Systemd based Linux OS is fixed.
+`#10952 <https://github.com/wazuh/wazuh/pull/10952>`_             A bug in the AWS module resulting in unnecessary API calls when trying to obtain the different Account IDs for the bucket is fixed.
+`#11194 <https://github.com/wazuh/wazuh/pull/11194>`_             The reparse option in the AWS VPCFlow integration is fixed.
+`#11278 <https://github.com/wazuh/wazuh/pull/11278>`_             Azure integration's configuration parsing to allow omitting optional parameters is fixed.
+`#11296 <https://github.com/wazuh/wazuh/pull/11296>`_             Azure Storage credentials validation bug is fixed.
+`#11455 <https://github.com/wazuh/wazuh/pull/11455>`_             The read of the hostname in the installation process for openSUSE is fixed.
+`#11425 <https://github.com/wazuh/wazuh/pull/11425>`_             The graceful shutdown when agent loses connection is fixed.
 ==============================================================    =============
 
 
@@ -458,7 +458,7 @@ Reference                                                         Description
 `#3645 <https://github.com/wazuh/wazuh-kibana-app/pull/3645>`_    Multi-select component searcher handler is fixed.
 `#3609 <https://github.com/wazuh/wazuh-kibana-app/pull/3609>`_    The order logs properly in Management/Logs is fixed.
 `#3661 <https://github.com/wazuh/wazuh-kibana-app/pull/3661>`_    The Wazuh API requests to ``GET //`` is fixed.
-`#3675 <https://github.com/wazuh/wazuh-kibana-app/pull/3675>`_    Missing mitre tactics are  fixed.
+`#3675 <https://github.com/wazuh/wazuh-kibana-app/pull/3675>`_    Missing mitre tactics are fixed.
 `#3488 <https://github.com/wazuh/wazuh-kibana-app/pull/3488>`_    The CDB list view not working with IPv6 is fixed.
 `#3466 <https://github.com/wazuh/wazuh-kibana-app/pull/3466>`_    The bad requests using Console tool to ``PUT /active-response`` API endpoint is fixed.
 `#3605 <https://github.com/wazuh/wazuh-kibana-app/pull/3605>`_    An issue related to the group agent management table does not update on error is fixed.
@@ -471,20 +471,20 @@ Reference                                                         Description
 `#3682 <https://github.com/wazuh/wazuh-kibana-app/pull/3682>`_    The security alerts table when filters change is fixed.
 `#3692 <https://github.com/wazuh/wazuh-kibana-app/pull/3692>`_    An error that shows we're using X-Pack when we have Basic is fixed.
 `#3700 <https://github.com/wazuh/wazuh-kibana-app/pull/3700>`_    Blank screen in Kibana 7.10.2 is fixed.
-`#3704 <https://github.com/wazuh/wazuh-kibana-app/pull/3704>`_    Fixed related decoder link undefined parameters error.
-`#3708 <https://github.com/wazuh/wazuh-kibana-app/pull/3708>`_    Fixing Flyouts in Kibana 7.14.2.
-`#3707 <https://github.com/wazuh/wazuh-kibana-app/pull/3707>`_    Fixing the bug of index patterns in health-check due to bad copy of a PR.
-`#3733 <https://github.com/wazuh/wazuh-kibana-app/pull/3733>`_    Fixed styles and behaviour of button filter in the flyout of ``Inventory`` section for ``Integrity monitoring`` and ``Vulnerabilities`` modules.
-`#3733 <https://github.com/wazuh/wazuh-kibana-app/pull/3733>`_    Fixed height of ``Evolution`` card in the ``Agents`` section when has no data for the selected time range.
-`#3722 <https://github.com/wazuh/wazuh-kibana-app/pull/3722>`_    Fix clearing the query filter doesn't update the data in Office 365 and GitHub Panel tab.
-`#3710 <https://github.com/wazuh/wazuh-kibana-app/pull/3710>`_    Fix wrong deamons in filter list.
-`#3724 <https://github.com/wazuh/wazuh-kibana-app/pull/3724>`_    Fixing bug when create filename with spaces and throws a bad error.
-`#3731 <https://github.com/wazuh/wazuh-kibana-app/pull/3731>`_    Fixing bug in security User flyout nonexistant unsubmitted changes warning.
-`#3732 <https://github.com/wazuh/wazuh-kibana-app/pull/3732>`_    Fixing redirect to new tab when click in a link.
-`#3737 <https://github.com/wazuh/wazuh-kibana-app/pull/3737>`_    Fixed missing settings in ``Management/Configuration/Global configuration/Global/Main settings``.
-`#3738 <https://github.com/wazuh/wazuh-kibana-app/pull/3738>`_    Fixed ``Maximum call stack size exceeded`` error exporting key-value pairs of a CDB List.
-`#3741 <https://github.com/wazuh/wazuh-kibana-app/pull/3741>`_    Fixed regex lookahead and lookbehind for safari.
-`#3744 <https://github.com/wazuh/wazuh-kibana-app/pull/3744>`_    Fixed Vulnerabilities Inventory flyout details filters.
+`#3704 <https://github.com/wazuh/wazuh-kibana-app/pull/3704>`_    Related decoder link undefined parameters error are fixed.
+`#3708 <https://github.com/wazuh/wazuh-kibana-app/pull/3708>`_    Flyouts in Kibana 7.14.2 is fixed.
+`#3707 <https://github.com/wazuh/wazuh-kibana-app/pull/3707>`_    The bug of index patterns in health-check due to bad copy of a PR is fixed.
+`#3733 <https://github.com/wazuh/wazuh-kibana-app/pull/3733>`_    Styles and behaviour of button filter in the flyout of ``Inventory`` section for ``Integrity monitoring`` and ``Vulnerabilities`` modules are fixed.
+`#3733 <https://github.com/wazuh/wazuh-kibana-app/pull/3733>`_    Height of ``Evolution`` card in the ``Agents`` section when has no data for the selected time range is fixed.
+`#3722 <https://github.com/wazuh/wazuh-kibana-app/pull/3722>`_    The clearing of the query filter that doesn't update the data in Office 365 and GitHub Panel tab is updated.
+`#3710 <https://github.com/wazuh/wazuh-kibana-app/pull/3710>`_    A wrong deamons in filter list is fixed.
+`#3724 <https://github.com/wazuh/wazuh-kibana-app/pull/3724>`_    A bug when create filename with spaces and throws a bad error is fixed.
+`#3731 <https://github.com/wazuh/wazuh-kibana-app/pull/3731>`_    A bug in security User flyout nonexistant unsubmitted changes warning is fixed.
+`#3732 <https://github.com/wazuh/wazuh-kibana-app/pull/3732>`_    The redirect to new tab when click in a link is fixed.
+`#3737 <https://github.com/wazuh/wazuh-kibana-app/pull/3737>`_    Missing settings in ``Management/Configuration/Global configuration/Global/Main settings`` is fixed.
+`#3738 <https://github.com/wazuh/wazuh-kibana-app/pull/3738>`_    The ``Maximum call stack size exceeded`` error exporting key-value pairs of a CDB List is fixed.
+`#3741 <https://github.com/wazuh/wazuh-kibana-app/pull/3741>`_    The regex lookahead and lookbehind for safari are fixed.
+`#3744 <https://github.com/wazuh/wazuh-kibana-app/pull/3744>`_    Vulnerabilities Inventory flyout details filters are fixed.
 ==============================================================    =============
 
 
@@ -496,7 +496,7 @@ Reference                                                         Description
 ==============================================================    =============
 `#9168 <https://github.com/wazuh/wazuh/pull/9168>`_               An error detection in the CURL helper library is fixed.
 `#10899 <https://github.com/wazuh/wazuh/pull/10899>`_             External BerkeleyDB library support for GCC 11 is fixed.
-`#11086 <https://github.com/wazuh/wazuh/pull/11086>`_             Fixed an installation error due to missing OS minor version on CentOS Stream.
+`#11086 <https://github.com/wazuh/wazuh/pull/11086>`_             An installation error due to missing OS minor version on CentOS Stream is fixed.
 ==============================================================    =============
 
 
