@@ -14,6 +14,7 @@ This section lists the changes in version 4.3.0. Every update of the Wazuh solut
 Highlights
 ----------
 
+
 Manager
 ^^^^^^^
 
@@ -27,6 +28,16 @@ Agent
 - `#4983 <https://github.com/wazuh/wazuh/pull/4983>`_ `#7660 <https://github.com/wazuh/wazuh/pull/7660>`_ New integrations to collect auditing logs from Office365 and GitHub have been introduced in the agent.
 - `#8632 <https://github.com/wazuh/wazuh/pull/8632>`_ Logcollector can now collect native logs from macOS (Unified Logging System).
 - `#8461 <https://github.com/wazuh/wazuh/pull/8461>`_ File Integrity Monitoring has been improved to fully support wilcarded file paths in the configuration.
+
+
+
+RESTful API
+^^^^^^^^^^^
+
+- `#8100 <https://github.com/wazuh/wazuh/pull/8100>`_ `#9028 <https://github.com/wazuh/wazuh/pull/9028>`_ `#10457 <https://github.com/wazuh/wazuh/pull/10457>`_ Improved The agent batch upgrade with an increased limit of agents per request and a new set of filters is improved.
+- `#7490 <https://github.com/wazuh/wazuh/pull/7490>`_ New configurations such as SSL ciphers, maximum response time and maximum upload size is added.
+- `#8919 <https://github.com/wazuh/wazuh/pull/8919>`_ `#10916 <https://github.com/wazuh/wazuh/pull/10916>`_ The API availability and response times in overloaded setups is improved. This is specially appreciable in environments with a big number of agents.
+
 
 
 Wazuh Kibana plugin
