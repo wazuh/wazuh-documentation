@@ -34,9 +34,9 @@ Agent
 RESTful API
 ^^^^^^^^^^^
 
-- `#8100 <https://github.com/wazuh/wazuh/pull/8100>`_ `#9028 <https://github.com/wazuh/wazuh/pull/9028>`_ `#10457 <https://github.com/wazuh/wazuh/pull/10457>`_ Improved The agent batch upgrade with an increased limit of agents per request and a new set of filters is improved.
-- `#7490 <https://github.com/wazuh/wazuh/pull/7490>`_ New configurations such as SSL ciphers, maximum response time and maximum upload size is added.
-- `#8919 <https://github.com/wazuh/wazuh/pull/8919>`_ `#10916 <https://github.com/wazuh/wazuh/pull/10916>`_ The API availability and response times in overloaded setups is improved. This is specially appreciable in environments with a big number of agents.
+- `#8100 <https://github.com/wazuh/wazuh/pull/8100>`_ `#9028 <https://github.com/wazuh/wazuh/pull/9028>`_ `#10457 <https://github.com/wazuh/wazuh/pull/10457>`_ The agent batch upgrade with an increased limit of agents per request and a new set of filters is improved.
+- `#7490 <https://github.com/wazuh/wazuh/pull/7490>`_ New configurations such as SSL ciphers, maximum response time, and maximum upload size are added.
+- `#8919 <https://github.com/wazuh/wazuh/pull/8919>`_ `#10916 <https://github.com/wazuh/wazuh/pull/10916>`_ The API availability and response times in overloaded setups are improved, which is especially palpable in environments with a significant number of agents.
 
 
 
