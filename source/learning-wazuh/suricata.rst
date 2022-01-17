@@ -348,7 +348,7 @@ You may have noticed that there were no Geolocation fields in the Kibana records
              "ignore_missing": true,
              "ignore_failure": true
            }
-         },
+         }
 
 
 #. We now need to delete the current pipeline. In Kibana, go to ``Dev Tools`` clicking on the Wrench icon. Then execute the following:
