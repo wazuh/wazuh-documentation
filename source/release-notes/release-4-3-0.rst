@@ -261,6 +261,7 @@ Wazuh Kibana plugin
 - `#3568 <https://github.com/wazuh/wazuh-kibana-app/pull/3568>`_ Simple filters change between panel and drilldown panel.
 - `#3525 <https://github.com/wazuh/wazuh-kibana-app/pull/3525>`_ New fields in Inventory table and Flyout Details are added.
 - `#3691 <https://github.com/wazuh/wazuh-kibana-app/pull/3691>`_ Columns selector in agents table are added.
+- `#3742 <https://github.com/wazuh/wazuh-kibana-app/pull/3742>`_ A new workflow for create wazuh packages is added.
 - `#3121 <https://github.com/wazuh/wazuh-kibana-app/pull/3121>`_ Ossec to wazuh is changed in all sample-data files.
 - `#3279 <https://github.com/wazuh/wazuh-kibana-app/pull/3279>`_ Empty fields are modified in FIM tables and ``syscheck.value_name`` in discovery now show an empty tag for visual clarity.
 - `#3346 <https://github.com/wazuh/wazuh-kibana-app/pull/3346>`_ The Mitre tactics and techniques resources are adapted to use the API endpoints.
@@ -459,6 +460,20 @@ Reference                                                         Description
 `#3682 <https://github.com/wazuh/wazuh-kibana-app/pull/3682>`_    The security alerts table when filters change is fixed.
 `#3692 <https://github.com/wazuh/wazuh-kibana-app/pull/3692>`_    An error that shows we're using X-Pack when we have Basic is fixed.
 `#3700 <https://github.com/wazuh/wazuh-kibana-app/pull/3700>`_    Blank screen in Kibana 7.10.2 is fixed.
+`#3704 <https://github.com/wazuh/wazuh-kibana-app/pull/3704>`_    Fixed related decoder link undefined parameters error.
+`#3708 <https://github.com/wazuh/wazuh-kibana-app/pull/3708>`_    Fixing Flyouts in Kibana 7.14.2.
+`#3707 <https://github.com/wazuh/wazuh-kibana-app/pull/3707>`_    Fixing the bug of index patterns in health-check due to bad copy of a PR.
+`#3733 <https://github.com/wazuh/wazuh-kibana-app/pull/3733>`_    Fixed styles and behaviour of button filter in the flyout of Inventory section for Integrity monitoring and Vulnerabilities modules.
+`#3733 <https://github.com/wazuh/wazuh-kibana-app/pull/3733>`_    Fixed height of Evolution card in the Agents section when has no data for the selected time range.
+`#3722 <https://github.com/wazuh/wazuh-kibana-app/pull/3722>`_    Fix clearing the query filter doesn't update the data in Office 365 and GitHub Panel tab.
+`#3710 <https://github.com/wazuh/wazuh-kibana-app/pull/3710>`_    Fix wrong deamons in filter list.
+`#3724 <https://github.com/wazuh/wazuh-kibana-app/pull/3724>`_    Fixing bug when create filename with spaces and throws a bad error.
+`#3731 <https://github.com/wazuh/wazuh-kibana-app/pull/3731>`_    Fixing bug in security User flyout nonexistant unsubmitted changes warning.
+`#3732 <https://github.com/wazuh/wazuh-kibana-app/pull/3732>`_    Fixing redirect to new tab when click in a link.
+`#3737 <https://github.com/wazuh/wazuh-kibana-app/pull/3737>`_    Fixed missing settings in Management/Configuration/Global configuration/Global/Main settings.
+`#3738 <https://github.com/wazuh/wazuh-kibana-app/pull/3738>`_    Fixed Maximum call stack size exceeded error exporting key-value pairs of a CDB List.
+`#3741 <https://github.com/wazuh/wazuh-kibana-app/pull/3741>`_    Fixed regex lookahead and lookbehind for safari.
+`#3744 <https://github.com/wazuh/wazuh-kibana-app/pull/3744>`_    Fixed Vulnerabilities Inventory flyout details filters.
 ==============================================================    =============
 
 
