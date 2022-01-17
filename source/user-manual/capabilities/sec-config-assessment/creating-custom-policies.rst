@@ -410,7 +410,7 @@ Other examples
 - Check if a file exists: ``f:/proc/sys/net/ipv4/ip_forward``
 - Check if a process is running: ``p:avahi-daemon``
 - Check value of registry: ``r:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters -> MaximumPasswordAge -> 0``
-- Check if a directory contains files: ``d:/home/* -> ^.mysql_history$``
+- Check if a directory contains files: ``d:/home -> ^.mysql_history$``
 - Check if a directory exists: ``d:/etc/mysql``
 - Check the running configuration of sshd for the maximum authentication tries allowed: ``c:sshd -T -> !r:^\s*maxauthtries\s+4\s*$``
 - Check if root is the only account with UID 0: ``f:/etc/passwd -> !r:^# && !r:^root: && r:^\w+:\w+:0:``
