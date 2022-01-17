@@ -125,7 +125,7 @@ Installing the Wazuh indexer
 
       # /usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro-performance-analyzer
 
-#. Enable and start the indexer service.
+#. Enable and start the Wazuh indexer service.
 
     .. include:: /_templates/installations/elastic/common/enable_elasticsearch.rst
 
@@ -301,7 +301,7 @@ Installing the Wazuh dashboard
        # cp ./opendistro_files/kibana/kibana.yml /etc/kibana/
 
     .. note::
-      ``server.host: 0.0.0.0`` in ``/etc/kibana/kibana.yml`` means that the Wazuh dashboard can be accessed from the outside and accepts all the available IP addresses of the host. This value can be changed for a specific IP if needed.
+      ``server.host: 0.0.0.0`` in ``/etc/kibana/kibana.yml`` means that the Wazuh dashboard can be accessed from the outside and accepts all the available IP addresses of the host. This value can be changed for a specific IP address if needed.
   
 #. Create the ``/usr/share/kibana/data`` directory.
 
@@ -331,7 +331,7 @@ Installing the Wazuh dashboard
 
       # setcap 'cap_net_bind_service=+ep' /usr/share/kibana/node/bin/node
 
-#. Enable and start the dashboard service.
+#. Enable and start the Wazuh dashboard service.
 
     .. include:: /_templates/installations/elastic/common/enable_kibana.rst
 
@@ -347,7 +347,7 @@ Upon the first access to the Wazuh dashboard, the browser shows a warning messag
 .. note::
   
   * It is highly recommended to change the default users' passwords. To perform this action, see the :ref:`Change users' password <change_elastic_pass>` section.
-  * It is also recommended to customize the file ``/etc/elasticsearch/jvm.options`` to improve the performance of the indexer. Learn more about this process in the :ref:`memory_locking` section.
+  * It is also recommended to customize the file ``/etc/elasticsearch/jvm.options`` to improve the performance of the Wazuh indexer. Learn more about this process in the :ref:`memory_locking` section.
 
 To uninstall all the components of the all-in-one installation, see the :ref:`Uninstalling Wazuh <user_manual_uninstall_wazuh_installation_open_distro>` section.
 
