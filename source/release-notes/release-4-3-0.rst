@@ -356,14 +356,14 @@ Reference                                                         Description
 `#8941 <https://github.com/wazuh/wazuh/pull/8941>`_               A bug in FIM that threw an error when a query to the internal database returned no data is fixed.
 `#8362 <https://github.com/wazuh/wazuh/pull/8362>`_               An error where the IP address was being returned along with the port for Amazon NLB service is fixed.
 `#8372 <https://github.com/wazuh/wazuh/pull/8372>`_               AWS module is fixed to properly handle the exception raised when processing a folder without logs.
-`#8433 <https://github.com/wazuh/wazuh/pull/8433>`_               A bug with AWS module when pagination is needed in the bucket is fixed.
+`#8433 <https://github.com/wazuh/wazuh/pull/8433>`_               A bug with the AWS module when pagination is needed in the bucket is fixed.
 `#8672 <https://github.com/wazuh/wazuh/pull/8672>`_               An error with the ipGeoLocation field in AWS Macie logs id fixed.
 `#10333 <https://github.com/wazuh/wazuh/pull/10333>`_             An incorrect debug message in the GCloud integration module is changed.
-`#7848 <https://github.com/wazuh/wazuh/pull/7848>`_               Data race conditions is fixed in FIM.
-`#10011 <https://github.com/wazuh/wazuh/pull/10011>`_             Wrong command line display in the Syscollector process report on Windows is fixed.
-`#10249 <https://github.com/wazuh/wazuh/pull/10249>`_             Modulesd freezing if Analysisd or Agentd get stopped before it is fixed.
+`#7848 <https://github.com/wazuh/wazuh/pull/7848>`_               Data race conditions are fixed in FIM.
+`#10011 <https://github.com/wazuh/wazuh/pull/10011>`_             A wrong command line display in the Syscollector process report on Windows is fixed.
+`#10249 <https://github.com/wazuh/wazuh/pull/10249>`_             An issue that causes shutdown when agentd or analysisd is stopped is fixed.
 `#10405 <https://github.com/wazuh/wazuh/pull/10405>`_             Wrong keepalive message from the agent when file merged.mg is missing is fixed.
-`#10381 <https://github.com/wazuh/wazuh/pull/10381>`_             Missing logs from the Windows agent when it's getting stopped is fixed.
+`#10381 <https://github.com/wazuh/wazuh/pull/10381>`_             Missing logs from the Windows agent when it's getting stopped are fixed.
 `#10524 <https://github.com/wazuh/wazuh/pull/10524>`_             Missing packages reporting in Syscollector for macOS due to empty architecture data is fixed.
 `#7506 <https://github.com/wazuh/wazuh/pull/7506>`_               FIM on Linux to parse audit rules with multiple keys for who-data is fixed.
 `#10639 <https://github.com/wazuh/wazuh/pull/10639>`_             Windows 11 version collection in the agent is fixed.
@@ -371,20 +371,20 @@ Reference                                                         Description
 `#10794 <https://github.com/wazuh/wazuh/pull/10794>`_             CloudWatch Logs integration is updated to avoid crashing when AWS raises Throttling errors.
 `#10718 <https://github.com/wazuh/wazuh/pull/10718>`_             AWS modules' log file filtering is fixed when there are logs with and without a prefix mixed in a bucket.
 `#10884 <https://github.com/wazuh/wazuh/pull/10884>`_             A bug on the installation script that made upgrades not to update the code of the external integration modules id fixed.
-`#10921 <https://github.com/wazuh/wazuh/pull/10921>`_             An issue with AWS integration module trying to parse manually created folders as if they were files is fixed.
+`#10921 <https://github.com/wazuh/wazuh/pull/10921>`_             An issue with the AWS integration module trying to parse manually created folders as if they were files is fixed.
 `#11086 <https://github.com/wazuh/wazuh/pull/11086>`_             Some installation errors in OS with no subversion are fixed.
 `#11115 <https://github.com/wazuh/wazuh/pull/11115>`_             A typo in an error log about enrollment SSL certificate is fixed.
 `#11121 <https://github.com/wazuh/wazuh/pull/11121>`_             A unit tests for Windows agent when built on MinGW 10 is fixed.
-`#10942 <https://github.com/wazuh/wazuh/pull/10942>`_             A Windows agent compilation warnings is fixed.
+`#10942 <https://github.com/wazuh/wazuh/pull/10942>`_             Windows agent compilation warnings are fixed.
 `#11207 <https://github.com/wazuh/wazuh/pull/11207>`_             The OS version reported by the agent on OpenSUSE Tumbleweed is fixed.
 `#11329 <https://github.com/wazuh/wazuh/pull/11329>`_             The Syscollector is prevented from truncating the open port inode numbers on Linux.
-`#11365 <https://github.com/wazuh/wazuh/pull/11365>`_             An agent auto-restart on configuration changes when started via ``wazuh-control`` on a Systemd based Linux OS is fixed.
-`#10952 <https://github.com/wazuh/wazuh/pull/10952>`_             A bug in the AWS module resulting in unnecessary API calls when trying to obtain the different Account IDs for the bucket is fixed.
+`#11365 <https://github.com/wazuh/wazuh/pull/11365>`_             An agent auto-restart on configuration changes, when started via ``wazuh-control`` on a Systemd based Linux OS is fixed.
+`#10952 <https://github.com/wazuh/wazuh/pull/10952>`_             A bug in the AWS module resulting in unnecessary API calls when trying to obtain the different Account IDs for the bucket, is fixed.
 `#11194 <https://github.com/wazuh/wazuh/pull/11194>`_             The reparse option in the AWS VPCFlow integration is fixed.
 `#11278 <https://github.com/wazuh/wazuh/pull/11278>`_             Azure integration's configuration parsing to allow omitting optional parameters is fixed.
 `#11296 <https://github.com/wazuh/wazuh/pull/11296>`_             Azure Storage credentials validation bug is fixed.
 `#11455 <https://github.com/wazuh/wazuh/pull/11455>`_             The read of the hostname in the installation process for openSUSE is fixed.
-`#11425 <https://github.com/wazuh/wazuh/pull/11425>`_             The graceful shutdown when agent loses connection is fixed.
+`#11425 <https://github.com/wazuh/wazuh/pull/11425>`_             The graceful shutdown when the agent loses connection is fixed.
 ==============================================================    =============
 
 
