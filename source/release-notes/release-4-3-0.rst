@@ -71,8 +71,8 @@ Wazuh Kibana plugin
    - The ErrorBoundary HOC to react components were added in his version. It implements error handling HOC in each main react-component (pre-migration).
    - Now try catch strategy is implemented on WzLog by executing Wazuh new error handling strategy on the front-end side. This development was made in order to improve better error handling in the front-end.
 
-- `#3368 <https://github.com/wazuh/wazuh-kibana-app/pull/3368>`_ - `#3344 <https://github.com/wazuh/wazuh-kibana-app/pull/3344>`_ Added Intelligence tab to Mitre Att&ck module:
-   - A new Intelligence tab to the Mitre Att&ck module was added with information about the Mitre resources: groups, mitigations, tactics, techniques using the new Wazuh API endpoints. In addition, the Framework tab was adapted to the new Wazuh API endpoints.
+- `#3368 <https://github.com/wazuh/wazuh-kibana-app/pull/3368>`_ - `#3344 <https://github.com/wazuh/wazuh-kibana-app/pull/3344>`_ Added Intelligence tab to MITRE Att&ck module:
+   - A new Intelligence tab to the MITRE Att&ck module was added with information about the MITRE resources: groups, mitigations, tactics, techniques using the new Wazuh API endpoints. In addition, the Framework tab was adapted to the new Wazuh API endpoints.
 
 
 
@@ -394,13 +394,13 @@ RESTful API
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#8196 <https://github.com/wazuh/wazuh/pull/8196>`_               An inconsistency in RBAC resources for ``group:create``, ``decoders:update``, and ``rules:update`` actions is fixed.
+`#8196 <https://github.com/wazuh/wazuh/pull/8196>`_               An inconsistency in RBAC resources for ``group:create``, ``decoders:update``, and ``rules:update`` actions are fixed.
 `#8378 <https://github.com/wazuh/wazuh/pull/8378>`_               The handling of an API error message occurring when Wazuh is started with a wrong ``ossec.conf`` is fixed. Now the execution continues and raises a warning.
 `#8548 <https://github.com/wazuh/wazuh/pull/8548>`_               A bug with ``sort`` parameter that caused a wrong response when sorting by several fields is fixed.
 `#8597 <https://github.com/wazuh/wazuh/pull/8597>`_               The description of ``force_time`` parameter in the API spec reference is fixed.
-`#8537 <https://github.com/wazuh/wazuh/pull/8537>`_               API incorrect path in remediation message when maximum number of requests per minute is reached is fixed.
+`#8537 <https://github.com/wazuh/wazuh/pull/8537>`_               API incorrect path in remediation message when a maximum number of requests per minute is reached is fixed.
 `#9071 <https://github.com/wazuh/wazuh/pull/9071>`_               Agents' healthcheck error in the API integration test environment is fixed.
-`#9077 <https://github.com/wazuh/wazuh/pull/9077>`_               A bug with ``wazuh-apid`` process handling of pidfiles when running in foreground mode is fixed.
+`#9077 <https://github.com/wazuh/wazuh/pull/9077>`_               A bug with ``wazuh-apid`` process handling of PID files when running in foreground mode is fixed.
 `#9192 <https://github.com/wazuh/wazuh/pull/9192>`_               A bug with RBAC ``group_id`` matching is fixed.
 `#9147 <https://github.com/wazuh/wazuh/pull/9147>`_               Temporal development keys and values from ``GET /cluster/healthcheck`` response are removed.
 `#9227 <https://github.com/wazuh/wazuh/pull/9227>`_               Several errors when filtering by dates are fixed.
@@ -411,12 +411,12 @@ Reference                                                         Description
 `#9777 <https://github.com/wazuh/wazuh/pull/9777>`_               A healthcheck is added to verify that ``logcollector`` stats are ready before starting the API integration test.
 `#10159 <https://github.com/wazuh/wazuh/pull/10159>`_             The API integration test healthcheck used in the ``vulnerability`` test cases is fixed.
 `#10179 <https://github.com/wazuh/wazuh/pull/10179>`_             An error with ``PUT /agents/node/{node_id}/restart`` endpoint when no agents are present in selected node is fixed.
-`#10322 <https://github.com/wazuh/wazuh/pull/10322>`_             An RBAC experimental API integration tests expecting a 1760 code in implicit requests is fixed.
-`#10289 <https://github.com/wazuh/wazuh/pull/10289>`_             A cluster race condition that caused API integration test to randomly fail is fixed.
+`#10322 <https://github.com/wazuh/wazuh/pull/10322>`_             An RBAC experimental API integration test expecting a 1760 code in implicit requests is fixed.
+`#10289 <https://github.com/wazuh/wazuh/pull/10289>`_             A cluster race condition that caused the API integration test to randomly fail is fixed.
 `#10619 <https://github.com/wazuh/wazuh/pull/10619>`_             The ``PUT /agents/node/{node_id}/restart`` endpoint to exclude exception codes properly is fixed.
 `#10666 <https://github.com/wazuh/wazuh/pull/10666>`_             The ``PUT /agents/group/{group_id}/restart`` endpoint to exclude exception codes properly is fixed.
 `#10656 <https://github.com/wazuh/wazuh/pull/10656>`_             The agent endpoints q parameter to allow more operators when filtering by groups is fixed.
-`#10830 <https://github.com/wazuh/wazuh/pull/10830>`_             The API integration tests related to rule, decoder and task endpoints is fixed.
+`#10830 <https://github.com/wazuh/wazuh/pull/10830>`_             The API integration tests related to rule, decoder, and task endpoints are fixed.
 `#11411 <https://github.com/wazuh/wazuh/pull/11411>`_             Exceptions handling when starting the Wazuh API service is improved.
 ==============================================================    =============
 
@@ -442,45 +442,45 @@ Wazuh Kibana plugin
 Reference                                                         Description
 ==============================================================    =============
 `#3384 <https://github.com/wazuh/wazuh-kibana-app/pull/3384>`_    The creation of log files is fixed.
-`#3484 <https://github.com/wazuh/wazuh-kibana-app/pull/3484>`_    The double fetching alerts count when pinnin/unpinning the agent in Mitre Att&ck/Framework is fixed.
+`#3484 <https://github.com/wazuh/wazuh-kibana-app/pull/3484>`_    The double fetching alerts count when pinning/unpinning the agent in Mitre Att&ck/Framework is fixed.
 `#3490 <https://github.com/wazuh/wazuh-kibana-app/pull/3490>`_    A refactor of the query Config is changed from Angular to React.
-`#3412 <https://github.com/wazuh/wazuh-kibana-app/pull/3412>`_    Rules and decoders test flyout clickout event is fixed.
-`#3430 <https://github.com/wazuh/wazuh-kibana-app/pull/3430>`_    Now Wazuh notifies when you are registering an agent without permissions.
+`#3412 <https://github.com/wazuh/wazuh-kibana-app/pull/3412>`_    The flyout closing when dragging and releasing mouse event outside the Rule-test and Decoder-test flyout is fixed.
+`#3430 <https://github.com/wazuh/wazuh-kibana-app/pull/3430>`_    Now Wazuh notifies when you are registering an agent without permission.
 `#3438 <https://github.com/wazuh/wazuh-kibana-app/pull/3438>`_    Not used ``redirectRule`` query param when clicking the row table on CDB Lists/Decoders is removed.
 `#3439 <https://github.com/wazuh/wazuh-kibana-app/pull/3439>`_    The code overflows over the line numbers in the API Console editor is fixed.
 `#3440 <https://github.com/wazuh/wazuh-kibana-app/pull/3440>`_    The issue that avoids opening the main menu when changing the selected API or index pattern is fixed.
-`#3443 <https://github.com/wazuh/wazuh-kibana-app/pull/3443>`_    An error message in conf managment is fixed.
-`#3445 <https://github.com/wazuh/wazuh-kibana-app/pull/3445>`_    An issue related to the size api selector when name is too long is fixed.
-`#3456 <https://github.com/wazuh/wazuh-kibana-app/pull/3456>`_    An error when edit a rule or decoder is fixed.
+`#3443 <https://github.com/wazuh/wazuh-kibana-app/pull/3443>`_    An error message in conf management is fixed.
+`#3445 <https://github.com/wazuh/wazuh-kibana-app/pull/3445>`_    An issue related to the size API selector when the name is too long is fixed.
+`#3456 <https://github.com/wazuh/wazuh-kibana-app/pull/3456>`_    An error when editing a rule or decoder is fixed.
 `#3458 <https://github.com/wazuh/wazuh-kibana-app/pull/3458>`_    An issue about the index pattern selector doesn't display the ignored index patterns is fixed.
-`#3553 <https://github.com/wazuh/wazuh-kibana-app/pull/3553>`_    An error in /Management/Configuration when cluster is disabled is fixed.
-`#3565 <https://github.com/wazuh/wazuh-kibana-app/pull/3565>`_    The pinned filters were removed when accessing to the ``Panel`` tab of a module is fixed.
+`#3553 <https://github.com/wazuh/wazuh-kibana-app/pull/3553>`_    An error in /Management/Configuration when the cluster is disabled is fixed.
+`#3565 <https://github.com/wazuh/wazuh-kibana-app/pull/3565>`_    An issue related to pinned filters removed when accessing the ``Panel`` tab of a module is fixed.
 `#3645 <https://github.com/wazuh/wazuh-kibana-app/pull/3645>`_    Multi-select component searcher handler is fixed.
-`#3609 <https://github.com/wazuh/wazuh-kibana-app/pull/3609>`_    The order logs properly in Management/Logs is fixed.
-`#3661 <https://github.com/wazuh/wazuh-kibana-app/pull/3661>`_    The Wazuh API requests to ``GET //`` is fixed.
-`#3675 <https://github.com/wazuh/wazuh-kibana-app/pull/3675>`_    Missing mitre tactics are fixed.
+`#3609 <https://github.com/wazuh/wazuh-kibana-app/pull/3609>`_    The order logs properly in Management/Logs are fixed.
+`#3661 <https://github.com/wazuh/wazuh-kibana-app/pull/3661>`_    The Wazuh API requests to ``GET //`` are fixed.
+`#3675 <https://github.com/wazuh/wazuh-kibana-app/pull/3675>`_    Missing MITRE tactics are fixed.
 `#3488 <https://github.com/wazuh/wazuh-kibana-app/pull/3488>`_    The CDB list view not working with IPv6 is fixed.
-`#3466 <https://github.com/wazuh/wazuh-kibana-app/pull/3466>`_    The bad requests using Console tool to ``PUT /active-response`` API endpoint is fixed.
+`#3466 <https://github.com/wazuh/wazuh-kibana-app/pull/3466>`_    The bad requests using Console tool to ``PUT /active-response`` API endpoint are fixed.
 `#3605 <https://github.com/wazuh/wazuh-kibana-app/pull/3605>`_    An issue related to the group agent management table does not update on error is fixed.
-`#3651 <https://github.com/wazuh/wazuh-kibana-app/pull/3651>`_    An issue about not showing packages details in agent inventory for a freeBSD agent SO is fixed.
+`#3651 <https://github.com/wazuh/wazuh-kibana-app/pull/3651>`_    An issue about not showing packages details in agent inventory for a FreeBSD agent SO is fixed.
 `#3652 <https://github.com/wazuh/wazuh-kibana-app/pull/3652>`_    Wazuh token deleted twice is fixed.
 `#3687 <https://github.com/wazuh/wazuh-kibana-app/pull/3687>`_    The handler of an error on dev-tools is fixed.
 `#3685 <https://github.com/wazuh/wazuh-kibana-app/pull/3685>`_    The compatibility with wazuh 4.3 - kibana 7.13.4 is fixed.
 `#3689 <https://github.com/wazuh/wazuh-kibana-app/pull/3689>`_    The registry values without agent pinned in FIM>Events are fixed.
-`#3688 <https://github.com/wazuh/wazuh-kibana-app/pull/3688>`_    The breadcrumbs style compatibility for Kibana 7.14.2 i fixed.
+`#3688 <https://github.com/wazuh/wazuh-kibana-app/pull/3688>`_    The breadcrumbs style compatibility for Kibana 7.14.2 is fixed.
 `#3682 <https://github.com/wazuh/wazuh-kibana-app/pull/3682>`_    The security alerts table when filters change is fixed.
 `#3692 <https://github.com/wazuh/wazuh-kibana-app/pull/3692>`_    An error that shows we're using X-Pack when we have Basic is fixed.
 `#3700 <https://github.com/wazuh/wazuh-kibana-app/pull/3700>`_    Blank screen in Kibana 7.10.2 is fixed.
-`#3704 <https://github.com/wazuh/wazuh-kibana-app/pull/3704>`_    Related decoder link undefined parameters error are fixed.
-`#3708 <https://github.com/wazuh/wazuh-kibana-app/pull/3708>`_    Flyouts in Kibana 7.14.2 is fixed.
-`#3707 <https://github.com/wazuh/wazuh-kibana-app/pull/3707>`_    The bug of index patterns in health-check due to bad copy of a PR is fixed.
-`#3733 <https://github.com/wazuh/wazuh-kibana-app/pull/3733>`_    Styles and behaviour of button filter in the flyout of ``Inventory`` section for ``Integrity monitoring`` and ``Vulnerabilities`` modules are fixed.
+`#3704 <https://github.com/wazuh/wazuh-kibana-app/pull/3704>`_    Related decoders file link errors when one clicked on it are fixed.
+`#3708 <https://github.com/wazuh/wazuh-kibana-app/pull/3708>`_    Flyouts in Kibana 7.14.2 are fixed.
+`#3707 <https://github.com/wazuh/wazuh-kibana-app/pull/3707>`_    The bug of index patterns in health-check due to a bad copy of a PR is fixed.
+`#3733 <https://github.com/wazuh/wazuh-kibana-app/pull/3733>`_    Styles and behavior of button filter in the flyout of ``Inventory`` section for ``Integrity monitoring`` and ``Vulnerabilities`` modules are fixed.
 `#3733 <https://github.com/wazuh/wazuh-kibana-app/pull/3733>`_    Height of ``Evolution`` card in the ``Agents`` section when has no data for the selected time range is fixed.
 `#3722 <https://github.com/wazuh/wazuh-kibana-app/pull/3722>`_    The clearing of the query filter that doesn't update the data in Office 365 and GitHub Panel tab is updated.
-`#3710 <https://github.com/wazuh/wazuh-kibana-app/pull/3710>`_    A wrong deamons in filter list is fixed.
-`#3724 <https://github.com/wazuh/wazuh-kibana-app/pull/3724>`_    A bug when create filename with spaces and throws a bad error is fixed.
-`#3731 <https://github.com/wazuh/wazuh-kibana-app/pull/3731>`_    A bug in security User flyout nonexistant unsubmitted changes warning is fixed.
-`#3732 <https://github.com/wazuh/wazuh-kibana-app/pull/3732>`_    The redirect to new tab when click in a link is fixed.
+`#3710 <https://github.com/wazuh/wazuh-kibana-app/pull/3710>`_    Wrong daemons in the filter list are fixed.
+`#3724 <https://github.com/wazuh/wazuh-kibana-app/pull/3724>`_    A bug when creating filename with spaces that throws a bad error is fixed.
+`#3731 <https://github.com/wazuh/wazuh-kibana-app/pull/3731>`_    A bug in security User flyout nonexistent unsubmitted changes warning is fixed.
+`#3732 <https://github.com/wazuh/wazuh-kibana-app/pull/3732>`_    The redirect to a new tab when clicking on a link is fixed.
 `#3737 <https://github.com/wazuh/wazuh-kibana-app/pull/3737>`_    Missing settings in ``Management/Configuration/Global configuration/Global/Main settings`` is fixed.
 `#3738 <https://github.com/wazuh/wazuh-kibana-app/pull/3738>`_    The ``Maximum call stack size exceeded`` error exporting key-value pairs of a CDB List is fixed.
 `#3741 <https://github.com/wazuh/wazuh-kibana-app/pull/3741>`_    The regex lookahead and lookbehind for safari are fixed.
