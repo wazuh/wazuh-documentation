@@ -222,7 +222,7 @@ RESTful API
 - `#9019 <https://github.com/wazuh/wazuh/pull/9019>`_ The malfunction in the ``sort`` parameter of syscollector endpoints is fixed.
 - `#9113 <https://github.com/wazuh/wazuh/pull/9113>`_ The API integration tests stability when failing in entrypoint is improved.
 - `#9228 <https://github.com/wazuh/wazuh/pull/9228>`_ The SCA API integration tests dynamic to validate responses coming from any agent version is fixed.
-- `#9227 <https://github.com/wazuh/wazuh/pull/9227>`_ All the date fields in the API responses to use ISO8601 is refactored and standardized.
+- `#9227 <https://github.com/wazuh/wazuh/pull/9227>`_ All the date fields in the API responses to use ISO8601 are refactored and standardized.
 - `#9263 <https://github.com/wazuh/wazuh/pull/9263>`_ The ``Server`` header from API HTTP responses is removed.
 - `#9371 <https://github.com/wazuh/wazuh/pull/9371>`_ The JWT implementation by replacing HS256 signing algorithm with RS256 is improved.
 - `#10009 <https://github.com/wazuh/wazuh/pull/10009>`_ The limit of agents to upgrade using the API upgrade endpoints is removed.
@@ -258,7 +258,7 @@ Wazuh Kibana plugin
 
 - `#3639 <https://github.com/wazuh/wazuh-kibana-app/pull/3639>`_ Wazuh adds the ability to filter the results fo the ``Network Ports`` table in the ``Inventory data`` section.
 - `#3324 <https://github.com/wazuh/wazuh-kibana-app/pull/3324>`_ A new endpoint service is added to collect the frontend logs into a file.
-- `#3262 <https://github.com/wazuh/wazuh-kibana-app/issues/3262>`_ `#3327 <https://github.com/wazuh/wazuh-kibana-app/pull/3327>`_ `#3321 <https://github.com/wazuh/wazuh-kibana-app/pull/3321>`_ `#3367 <https://github.com/wazuh/wazuh-kibana-app/pull/3367>`_ `#3373 <https://github.com/wazuh/wazuh-kibana-app/pull/3373>`_  The frontend handle errors strategy is improved: UI, Toasts, console log and log in file.
+- `#3262 <https://github.com/wazuh/wazuh-kibana-app/issues/3262>`_ `#3327 <https://github.com/wazuh/wazuh-kibana-app/pull/3327>`_ `#3321 <https://github.com/wazuh/wazuh-kibana-app/pull/3321>`_ `#3367 <https://github.com/wazuh/wazuh-kibana-app/pull/3367>`_ `#3373 <https://github.com/wazuh/wazuh-kibana-app/pull/3373>`_  The frontend handle errors strategy is improved: UI, Toasts, console log, and log in file.
 - `#3196 <https://github.com/wazuh/wazuh-kibana-app/pull/3196>`_ Fields status and type are added in vulnerabilities table.
 - `#3368 <https://github.com/wazuh/wazuh-kibana-app/pull/3368>`_ `#3344 <https://github.com/wazuh/wazuh-kibana-app/pull/3344>`_ Intelligence tab is added to Mitre Att&ck module.
 - `#3424 <https://github.com/wazuh/wazuh-kibana-app/pull/3424>`_ Sample data for office365 events is added.
@@ -274,28 +274,28 @@ Wazuh Kibana plugin
 - `#3691 <https://github.com/wazuh/wazuh-kibana-app/pull/3691>`_ Columns selector in agents table are added.
 - `#3742 <https://github.com/wazuh/wazuh-kibana-app/pull/3742>`_ A new workflow for create wazuh packages is added.
 - `#3121 <https://github.com/wazuh/wazuh-kibana-app/pull/3121>`_ Ossec to wazuh is changed in all sample-data files.
-- `#3279 <https://github.com/wazuh/wazuh-kibana-app/pull/3279>`_ Empty fields are modified in FIM tables and ``syscheck.value_name`` in discovery now show an empty tag for visual clarity.
+- `#3279 <https://github.com/wazuh/wazuh-kibana-app/pull/3279>`_ Empty fields are modified in FIM tables and ``syscheck.value_name`` in discovery now shows an empty tag for visual clarity.
 - `#3346 <https://github.com/wazuh/wazuh-kibana-app/pull/3346>`_ The Mitre tactics and techniques resources are adapted to use the API endpoints.
-- `#3517 <https://github.com/wazuh/wazuh-kibana-app/pull/3517>`_ The filterManager subscription are moved to the hook useFilterManager.
-- `#3529 <https://github.com/wazuh/wazuh-kibana-app/pull/3529>`_ Filter is changed from "is" to "is one of" in custom searchbar.
+- `#3517 <https://github.com/wazuh/wazuh-kibana-app/pull/3517>`_ The filterManager subscription is moved to the hook useFilterManager.
+- `#3529 <https://github.com/wazuh/wazuh-kibana-app/pull/3529>`_ Filter is changed from "is" to "is one of" in the custom searchbar.
 - `#3494 <https://github.com/wazuh/wazuh-kibana-app/pull/3494>`_ Refactor ``modules-defaults.js`` to define what buttons and components are rendered in each module tab.
 - `#3663 <https://github.com/wazuh/wazuh-kibana-app/pull/3663>`_ The deprecated and new references for the ``authd`` configuration are updated.
 - `#3549 <https://github.com/wazuh/wazuh-kibana-app/pull/3549>`_ Time subscription is added to Discover component.
 - `#3446 <https://github.com/wazuh/wazuh-kibana-app/pull/3446>`_ Testing logs using the Ruletest Test don't display the rule information if not matching a rule.
-- `#3649 <https://github.com/wazuh/wazuh-kibana-app/pull/3649>`_ The format permissions is changed in FIM inventory.
+- `#3649 <https://github.com/wazuh/wazuh-kibana-app/pull/3649>`_ The format permissions are changed in the FIM inventory.
 - `#3686 <https://github.com/wazuh/wazuh-kibana-app/pull/3686>`_ `#3728 <https://github.com/wazuh/wazuh-kibana-app/pull/3728>`_ The request to agents that do not return data is now changed to avoid unnecessary heavy load requests.
 
 
 Others
 ^^^^^^
 
-- `#10247 <https://github.com/wazuh/wazuh/pull/10247>`_ External SQLite library dependency is upgraded to version to 3.36.
-- `#10247 <https://github.com/wazuh/wazuh/pull/10247>`_ External BerkeleyDB library dependency is upgraded to version to 18.1.40.
-- `#10247 <https://github.com/wazuh/wazuh/pull/10247>`_ External OpenSSL library dependency is upgraded to version to 1.1.1l.
-- `#10927 <https://github.com/wazuh/wazuh/pull/10927>`_ External Google Test library  dependency is upgraded to version to 1.11.
-- `#11436 <https://github.com/wazuh/wazuh/pull/11436>`_ External Aiohttp library dependency is upgraded to version to 3.8.1.
-- `#11436 <https://github.com/wazuh/wazuh/pull/11436>`_ External Werkzeug library dependency is upgraded to version to 2.0.2.
-- `#11436 <https://github.com/wazuh/wazuh/pull/11436>`_ Embedded Python is upgraded to version to 3.9.9.
+- `#10247 <https://github.com/wazuh/wazuh/pull/10247>`_ External SQLite library dependency is upgraded to version 3.36.
+- `#10247 <https://github.com/wazuh/wazuh/pull/10247>`_ External BerkeleyDB library dependency is upgraded to version 18.1.40.
+- `#10247 <https://github.com/wazuh/wazuh/pull/10247>`_ External OpenSSL library dependency is upgraded to version 1.1.1l.
+- `#10927 <https://github.com/wazuh/wazuh/pull/10927>`_ External Google Test library  dependency is upgraded to version 1.11.
+- `#11436 <https://github.com/wazuh/wazuh/pull/11436>`_ External Aiohttp library dependency is upgraded to version 3.8.1.
+- `#11436 <https://github.com/wazuh/wazuh/pull/11436>`_ External Werkzeug library dependency is upgraded to version 2.0.2.
+- `#11436 <https://github.com/wazuh/wazuh/pull/11436>`_ Embedded Python is upgraded to version 3.9.9.
 
 
 
