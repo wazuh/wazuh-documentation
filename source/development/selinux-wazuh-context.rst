@@ -906,69 +906,68 @@ Steps to build and load the new SELinux policy module
 
 #. Install required dependencies:
 
-    .. code-block:: bash
+    .. code-block:: console
 
         # yum install -y selinux-policy-devel gcc make
 
 #. Stop Wazuh:
 
-    .. code-block:: bash
+    .. code-block:: console
 
         # systemctl stop wazuh-manager
 
 #. Verify current SELinux state:
 
-    .. code-block:: bash
+    .. code-block:: console
 
         # getenforce
-        Permissive
 
     In case the SELinux status is ``Enforcing`` we must change it to ``Permissive`` momentarily:
 
-        .. code-block:: bash
+        .. code-block:: console
 
             # setenforce 0
 
 #. Create the directory for the files ``wazuhT.te`` and ``wazuhT.fc``:
 
-    .. code-block:: bash
+    .. code-block:: console
 
         # mkdir selinux-wazuh && cd selinux-wazuh
 
 #. Create the files ``wazuhT.te`` and ``wazuhT.fc`` and compile the module:
 
-    .. code-block:: bash
+    .. code-block:: console
 
         # make -f /usr/share/selinux/devel/Makefile
 
 #. Install the new policy module:
 
-    .. code-block:: bash
+    .. code-block:: console
 
         # semodule -i wazuhT.pp
 
 #. Check that it has been loaded correctly:
 
-    .. code-block:: bash
+    .. code-block:: console
 
         # semodule -l | grep wazuhT
         wazuhT 1.0
 
 #. Run ``restorecon`` to assign the new tags defined in the ``wazuhT.fc`` file to existing files in the Wazuh directory:
 
-    .. code-block:: bash
+    .. code-block:: console
 
         # restorecon -RFvv /var/ossec/
 
 #. Verify that the files have the appropriate contexts:
 
-    .. code-block:: bash
+    .. code-block:: console
 
         # ls -lZ /var/ossec/bin/
 
 #. Assign the port numbers used by wazuh to the context ``wazuh_port_t``:
 
-    .. code-block:: bash
+    .. code-block:: console
 
         # semanage port -a -t wazuh_port_t -p tcp 1514
         # semanage port -a -t wazuh_port_t -p udp 1514
@@ -979,19 +978,19 @@ Steps to build and load the new SELinux policy module
 
 #. Change SELinux to Enforcing:
 
-    .. code-block:: bash
+    .. code-block:: console
 
         # setenforce 1
 
 #. Start Wazuh:
 
-    .. code-block:: bash
+    .. code-block:: console
 
         # systemctl start wazuh-manager
 
 By running the command ``ps auxZ | grep wazuh`` we can see that Wazuh is running with the new context ``wazuh_t``:
 
-    .. code-block:: bash
+    .. code-block:: console
 
         ps auxZ | grep wazuh
         system_u:system_r:wazuh_t:s0   wazuh    18239  8.2 16.5 435332 82744 ?        Sl   18:50   0:09 /var/ossec/framework/python/bin/python3 /var/ossec/api/scripts/wazuh-apid.py
@@ -1017,19 +1016,19 @@ In this section we will see how to create a set of rules with the **audit2allow*
 
 #. Change SELinux to Permissive, this will allow denial events to be logged but will not block the required action:
 
-    .. code-block:: bash
+    .. code-block:: console
 
         # setenforce 0
 
 #. Start Wazuh and use it for a while:
 
-    .. code-block:: bash
+    .. code-block:: console
 
         # systemctl start wazuh-manager
 
 #. Stop Wazuh:
 
-    .. code-block:: bash
+    .. code-block:: console
 
         # systemctl stop wazuh-manager
 
@@ -1039,25 +1038,25 @@ In this section we will see how to create a set of rules with the **audit2allow*
 
         Note that you must change the ``--start`` and ``--end`` dates to the length of time your test lasted.
 
-    .. code-block:: bash
+    .. code-block:: console
 
         # ausearch -m AVC --start 11/08/2021 19:58:19 --end 11/08/2021 23:58:19 | audit2allow -a -M test_audit
 
 #. Install the new module:
 
-    .. code-block:: bash
+    .. code-block:: console
 
         # semodule -i test_audit.pp
 
 #. Change SELinux to Enforcing:
 
-    .. code-block:: bash
+    .. code-block:: console
 
         # setenforce 1
 
 #. Start Wazuh:
 
-    .. code-block:: bash
+    .. code-block:: console
 
         # systemctl start wazuh-manager
 
@@ -1072,7 +1071,7 @@ It is possible that more rules may need to be added, as it depends on what appli
 
 #. Check which action is being blocked:
 
-    .. code-block:: bash
+    .. code-block:: console
 
         # grep denied /var/log/audit/audit.log | ausearch -i
         ...
@@ -1090,7 +1089,7 @@ It is possible that more rules may need to be added, as it depends on what appli
 
         - Re-compile and install the policy module:
 
-            .. code-block:: bash
+            .. code-block:: console
 
                 # make -f /usr/share/selinux/devel/Makefile
                 # semodule -i wazuhT.pp
@@ -1098,13 +1097,13 @@ It is possible that more rules may need to be added, as it depends on what appli
     Using **audit2allow** tool:
         - It is also possible to create the rules with the **audit2allow** tool. This tool takes the logged AVCs in the ``/var/log/audit/audit.log`` file and creates the necessary rules. It is possible to filter the logs, for example by date and time:
 
-            .. code-block:: bash
+            .. code-block:: console
 
                 # ausearch -m AVC --start 11/19/2021 13:45:00 --end 11/19/2021 13:46:00 | audit2allow -a -M test_audit
 
         - Install the new module:
 
-            .. code-block:: bash
+            .. code-block:: console
 
                 # semodule -i test_audit.pp
 
@@ -1115,19 +1114,19 @@ In case you need to restore the file context to the state prior to the installat
 
 #. Delete assigned ports:
 
-    .. code-block:: bash
+    .. code-block:: console
 
         # semanage port -d -p tcp 1514
         # semanage port -d -p udp 1514
 
 #. Delete the loaded module:
 
-    .. code-block:: bash
+    .. code-block:: console
 
         # semodule -d wazuhT
 
 #. Execute ``restorecon``:
 
-    .. code-block:: bash
+    .. code-block:: console
 
         # restorecon -RFvv /var/ossec/
