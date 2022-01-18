@@ -13,19 +13,19 @@ SELinux is based on "security contexts", assigning one to every element under su
 That said, as Wazuh does not have a defined context, it inherits the context from ``systemd`` which is in charge of starting the service. This context is of type ``unconfined_t``, which means that it is not under any security restriction, so only the standard Linux DAC restrictions will be applied to it.
 
 
-- `Create wazuh context`_
+- `Create Wazuh context`_
 - `Create custom SELinux module`_
 - `Troubleshooting`_
 
 
-Create wazuh context
+Create Wazuh context
 --------------------
 
-In case of having the need to run Wazuh as a confined process, we propose to create a new SELinux policy module which allows the transition to a Wazuh own context which we will call ``wazuh_t``. Besides, we will create a set of rules assigning the necessary permissions to run.
+In case of having the need to run Wazuh as a confined process, we propose to create a new SELinux policy module which allows the transition to a Wazuh context which we will call ``wazuh_t``. Besides, we will create a set of rules assigning the necessary permissions to run.
 
 .. note::
 
-    For the following example we used the Wazuh OVA image based on centOS 7 and the default Wazuh configuration. Also, in case of an upgrade, rules will probably have to be updated according to Wazuh's new functionalities.
+    For the following example we used the Wazuh OVA image based on centOS 7 and the default Wazuh configuration. In case of an upgrade, rules will probably have to be updated according to Wazuh's new functionalities.
 
 
 .. _SELinux-module-example:
@@ -46,7 +46,7 @@ wazuhT.fc
 
   <div class="accordion-section">
 
-.. code-block:: console
+.. code-block:: bash
 
      /var/ossec/active-response                  gen_context(system_u:object_r:wazuh_var_t,s0)
      /var/ossec/active-response/bin(/.*)?        gen_context(system_u:object_r:wazuh_exec_t,s0)
@@ -77,7 +77,7 @@ wazuhT.te
   <div class="accordion-section">
            
 
-.. code-block:: console
+.. code-block:: bash
 
     policy_module(wazuhT,1.0)
 
@@ -350,7 +350,7 @@ wazuhT.fc
 
   <div class="accordion-section">
 
-.. code-block:: console
+.. code-block:: bash
 
     /var/ossec/active-response                  gen_context(system_u:object_r:wazuh_var_t,s0)
     /var/ossec/active-response/bin(/.*)?        gen_context(system_u:object_r:wazuh_exec_t,s0)
@@ -372,7 +372,7 @@ wazuhT.te
 
   <div class="accordion-section">
 
-.. code-block:: console
+.. code-block:: bash
 
     policy_module(wazuhT,1.0)
 
@@ -643,7 +643,7 @@ wazuhT.fc
 
     In this file, the security contexts for each folder and file within the Wazuh folder are declared. For example, we assign the context ``wazuh_exec_t`` to executable files, including ``/ossec/active-response/bin/*`` and ``/ossec/bin/*``. In this way, we declare a Wazuh context for each file in the ``/var/ossec`` directory:
 
-    .. code-block:: console
+    .. code-block:: bash
 
         /var/ossec/active-response                  gen_context(system_u:object_r:wazuh_var_t,s0)
         /var/ossec/active-response/bin(/.*)?        gen_context(system_u:object_r:wazuh_exec_t,s0)
@@ -901,68 +901,72 @@ wazuhT.te
 Steps to build and load the new SELinux policy module
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Install required dependencies:
+#. Install required dependencies.
 
     .. code-block:: console
 
         # yum install -y selinux-policy-devel gcc make
 
-#. Stop Wazuh:
+#. Stop Wazuh.
 
     .. code-block:: console
 
         # systemctl stop wazuh-manager
 
-#. Verify current SELinux state:
+#. Verify current SELinux state.
 
     .. code-block:: console
 
         # getenforce
 
-    In case the SELinux status is ``Enforcing`` we must change it to ``Permissive`` momentarily:
+    In case the SELinux status is ``Enforcing`` we must change it to ``Permissive`` momentarily.
 
         .. code-block:: console
 
             # setenforce 0
 
-#. Create the directory for the files ``wazuhT.te`` and ``wazuhT.fc``:
+#. Create the directory for the files ``wazuhT.te`` and ``wazuhT.fc``.
 
     .. code-block:: console
 
         # mkdir selinux-wazuh && cd selinux-wazuh
 
-#. Create the files ``wazuhT.te`` and ``wazuhT.fc`` and compile the module:
+#. Create the files ``wazuhT.te`` and ``wazuhT.fc`` and compile the module.
 
     .. code-block:: console
 
         # make -f /usr/share/selinux/devel/Makefile
 
-#. Install the new policy module:
+#. Install the new policy module.
 
     .. code-block:: console
 
         # semodule -i wazuhT.pp
 
-#. Check that it has been loaded correctly:
+#. Check that it has been loaded correctly.
 
     .. code-block:: console
 
         # semodule -l | grep wazuhT
+
+    .. code-block:: console
+      :class: output
+
         wazuhT 1.0
 
-#. Run ``restorecon`` to assign the new tags defined in the ``wazuhT.fc`` file to existing files in the Wazuh directory:
+#. Run ``restorecon`` to assign the new tags defined in the ``wazuhT.fc`` file to existing files in the Wazuh directory.
 
     .. code-block:: console
 
         # restorecon -RFvv /var/ossec/
 
-#. Verify that the files have the appropriate contexts:
+#. Verify that the files have the appropriate contexts.
 
     .. code-block:: console
 
         # ls -lZ /var/ossec/bin/
 
-#. Assign the port numbers used by wazuh to the context ``wazuh_port_t``:
+#. Assign the port numbers used by wazuh to the context ``wazuh_port_t``.
 
     .. code-block:: console
 
@@ -973,13 +977,13 @@ Steps to build and load the new SELinux policy module
 
         For the Wazuh manager, you must add port 1515 used by **wazuh-authd** and 1516 which is used by **wazuh-clusterd**.
 
-#. Change SELinux to Enforcing:
+#. Change SELinux to Enforcing.
 
     .. code-block:: console
 
         # setenforce 1
 
-#. Start Wazuh:
+#. Start Wazuh.
 
     .. code-block:: console
 
@@ -1011,25 +1015,25 @@ In this section we will see how to create a set of rules with the **audit2allow*
 
     For this example we assume that Wazuh has already been transitioned to a proper context other than ``unconfined_t``, you can see :ref:`SELinux-module-example`.
 
-#. Change SELinux to Permissive, this will allow denial events to be logged but will not block the required action:
+#. Change SELinux to Permissive, this will allow denial events to be logged but will not block the required action.
 
     .. code-block:: console
 
         # setenforce 0
 
-#. Start Wazuh and use it for a while:
+#. Start Wazuh and use it for a while.
 
     .. code-block:: console
 
         # systemctl start wazuh-manager
 
-#. Stop Wazuh:
+#. Stop Wazuh.
 
     .. code-block:: console
 
         # systemctl stop wazuh-manager
 
-#. Use the **audit2allow** tool to create a set of rules:
+#. Use the **audit2allow** tool to create a set of rules.
 
     .. note::
 
@@ -1039,19 +1043,19 @@ In this section we will see how to create a set of rules with the **audit2allow*
 
         # ausearch -m AVC --start 11/08/2021 19:58:19 --end 11/08/2021 23:58:19 | audit2allow -a -M test_audit
 
-#. Install the new module:
+#. Install the new module.
 
     .. code-block:: console
 
         # semodule -i test_audit.pp
 
-#. Change SELinux to Enforcing:
+#. Change SELinux to Enforcing.
 
     .. code-block:: console
 
         # setenforce 1
 
-#. Start Wazuh:
+#. Start Wazuh.
 
     .. code-block:: console
 
@@ -1066,7 +1070,7 @@ Create missing rules
 
 It is possible that more rules may need to be added, as it depends on what applications are installed in the environment as well as what is being monitored. To do this, you need to follow these steps:
 
-#. Check which action is being blocked:
+#. Check which action is being blocked.
 
     .. code-block:: console
 
@@ -1075,7 +1079,7 @@ It is possible that more rules may need to be added, as it depends on what appli
         type=AVC msg=audit(11/19/2021 13:45:23.239:486) : avc:  denied  { search } for  pid=1944 comm=wazuh-modulesd name=960 dev="proc" ino=17328 scontext=system_u:system_r:wazuh_t:s0 tcontext=system_u:system_r:sshd_net_t:s0-s0:c0.c1023 tclass=dir permissive=0
         ...
 
-#. Create the rule to allow the blocked action:
+#. Create the rule to allow the blocked action.
 
     Manually:
         - It is possible to create a new rule and add it to the ``wazuhT.te`` file, for example:
@@ -1092,13 +1096,13 @@ It is possible that more rules may need to be added, as it depends on what appli
                 # semodule -i wazuhT.pp
 
     Using **audit2allow** tool:
-        - It is also possible to create the rules with the **audit2allow** tool. This tool takes the logged AVCs in the ``/var/log/audit/audit.log`` file and creates the necessary rules. It is possible to filter the logs, for example by date and time:
+        - It is also possible to create the rules with the **audit2allow** tool. This tool takes the logged AVCs in the ``/var/log/audit/audit.log`` file and creates the necessary rules. It is possible to filter the logs, for example by date and time.
 
             .. code-block:: console
 
                 # ausearch -m AVC --start 11/19/2021 13:45:00 --end 11/19/2021 13:46:00 | audit2allow -a -M test_audit
 
-        - Install the new module:
+        - Install the new module.
 
             .. code-block:: console
 
@@ -1109,20 +1113,20 @@ Delete module and restore context
 
 In case you need to restore the file context to the state prior to the installation of the ``wazuhT`` module, you need to follow these steps:
 
-#. Delete assigned ports:
+#. Delete the assigned ports.
 
     .. code-block:: console
 
         # semanage port -d -p tcp 1514
         # semanage port -d -p udp 1514
 
-#. Delete the loaded module:
+#. Delete the loaded module.
 
     .. code-block:: console
 
         # semodule -d wazuhT
 
-#. Execute ``restorecon``:
+#. Execute ``restorecon``.
 
     .. code-block:: console
 
