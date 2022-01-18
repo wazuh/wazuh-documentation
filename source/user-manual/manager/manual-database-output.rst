@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: In order to configure Wazuh so it outputs alerts to a database, users must compile Wazuh with the database type desired. Learn more about this process here.

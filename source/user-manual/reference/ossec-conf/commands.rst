@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Wazuh allows you to configure commands to be used by one or more active responses. Check out the options in this section of the documentation. 
@@ -72,8 +72,6 @@ A good example is the firewall-block command which expects the ``srcip`` field i
 
 extra_args
 ^^^^^^^^^^
-
-.. versionadded:: 3.5.0
 
 Allows the user to customize the parameters sent to the active response script living on the agent side.
 

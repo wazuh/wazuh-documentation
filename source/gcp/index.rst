@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Learn more about how to monitor Google Cloud Platform services with Wazuh in this section of our documentation. 
@@ -7,8 +7,6 @@
 
 Using Wazuh to monitor GCP services
 ===================================
-
-.. versionadded:: 3.13.0
 
 Wazuh helps to increase the security of a GCP infrastructure by collecting and analyzing log data. Wazuh uses the Google Cloud Pub/Sub messaging and ingestion service. It is widely used for event-driven systems and streaming analytics. It allows to send and receive messages between applications. The Wazuh module uses it to fetch different kinds of events (Data access, Admin activity, System events, DNS queries, etc.) from the Google Cloud infrastructure. Once events are collected, Wazuh processes them using its `threat detection rules <../user-manual/ruleset/index.html>`__.
 

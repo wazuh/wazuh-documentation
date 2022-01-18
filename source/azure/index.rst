@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Learn more about how to use Wazuh to monitor Microsoft Azure infrastructures in this section of the Wazuh documentation. 
@@ -7,9 +7,6 @@
 
 Using Wazuh to monitor Microsoft Azure
 ======================================
-
-
-.. versionadded:: 3.7.0
 
 This section provides instructions for monitoring **Microsoft Azure** infrastructures, such as:
 
@@ -37,6 +34,7 @@ As a built-in Wazuh feature, now you can search, analyze and trigger alerts from
     .. toctree::
        :maxdepth: 2
 
+       dependencies
        monitoring-instances
        monitoring-activity
        monitoring-services

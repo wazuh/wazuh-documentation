@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
     :description: Learn more about how to use Wazuh to monitor Microsoft Azure. In this section, you can learn more about the monitoring services. 

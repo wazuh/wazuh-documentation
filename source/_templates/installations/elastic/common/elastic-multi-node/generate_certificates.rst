@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 #. Download the ``wazuh-cert-tool.sh`` to create the certificates.
 

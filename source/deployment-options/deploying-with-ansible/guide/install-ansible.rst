@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
    :description: Learn how to install the Ansible server in this section of the Wazuh documentation. Check out this step-by-step guide. 
@@ -297,7 +297,7 @@ Test Connection
 
 #. Add hosts to control
 
-   Adding hosts is easy, just put the hostname or IP Address on ``/etc/ansible/hosts`` in our Ansible server. Our Wazuh server Ip is ``192.168.0.180`` and the user is ``centos`` in this example. We have to add ``192.168.0.180 ansible_ssh_user=centos``.
+   Adding hosts is easy, just put the hostname or IP Address on ``/etc/ansible/hosts`` in our Ansible server. Our Wazuh server IP Address is ``192.168.0.180`` and the user is ``centos`` in this example. We have to add ``192.168.0.180 ansible_ssh_user=centos``.
 
    .. code-block:: yaml
 
@@ -308,7 +308,7 @@ Test Connection
     #   - Comments begin with the '#' character
     #   - Blank lines are ignored
     #   - Groups of hosts are delimited by [header] elements
-    #   - You can enter hostnames or ip addresses
+    #   - You can enter hostnames or IP addresses
     #   - A hostname/ip can be a member of multiple groups
 
     # Ex 1: Ungrouped hosts, specify before any group headers.

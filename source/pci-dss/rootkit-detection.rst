@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Wazuh rootkit detection helps you to meet PCI DSS requirements related to intrusions and malware in general. Learn more about this subject here.

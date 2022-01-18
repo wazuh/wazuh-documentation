@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Learn how to remotely configure agents using agent.conf. In this section you will find which capabilities can be configured remotely. 
@@ -33,8 +33,6 @@ Agents can be configured remotely by using the ``agent.conf`` file. The followin
 
 Agent groups
 ------------
-
-.. versionadded:: 3.0.0
 
 Agents can be grouped together in order to send them unique centralized configuration that is group specific. Each agent can belong to more than one group and unless otherwise configured, all agents belong to a group called ``default``.
 

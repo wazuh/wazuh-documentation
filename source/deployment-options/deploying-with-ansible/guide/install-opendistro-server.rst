@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Deploying the Open Distro for Elasticsearch server involves installing the Open Distro and Kibana services. Find out how to do it step by step in this section.

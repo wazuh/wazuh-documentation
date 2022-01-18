@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Learn more about the Wazuh Anomaly Detection capability and the checks performed to find the anomalies caused by an intruder or malware.

@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Learn about local configuration (ossec.conf) and how to configure the active response. Check out the options and a sample configuration in this section of the Wazuh documentation.
@@ -85,7 +85,7 @@ Indicates which system(s) the command should be executed on.
 
 Example:
 
-If the application that interfaces with your edge firewall runs on one of your agents, you might have a firewall-block-edge command that runs a script on that agent to blacklist an offending IP on the edge firewall.
+If the application that interfaces with your edge firewall runs on one of your agents, you might have a firewall-block-edge command that runs a script on that agent to blacklist an offending IP address on the edge firewall.
 
 agent_id
 ^^^^^^^^

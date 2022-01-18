@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
     :description: Check out in this section how the Wazuh manager and agent can be installed via sources as an alternative to the installation from packages.

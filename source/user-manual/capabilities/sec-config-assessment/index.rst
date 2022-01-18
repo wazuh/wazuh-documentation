@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Find out more about the Wazuh Security Configuration Assessment capability. What is SCA, how it works and how to configure it, a use case and more.
@@ -15,8 +15,6 @@
 
 Security Configuration Assessment
 =================================
-
-.. versionadded:: 3.9.0
 
 There are multiple Wazuh integrations that perform configuration assessment scans (see :ref:`Policy monitoring section <manual_policy_monitoring>`) including CIS-CAT and more recently the Security Configuration Assessment (SCA). The SCA was created by the Wazuh development team to overcome limitations that were inherent to the other integrations, to name a few:
 

@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Learn more about the cluster node configuration in Wazuh: master and worker nodes, labels, Filebeat, Splunk forwarder installation, and more. 
@@ -16,7 +16,6 @@ Deploying a Wazuh cluster
     advanced-settings
     cluster-management
 
-.. title:: Getting started
 
 .. _gt-cluster:
 
@@ -35,7 +34,7 @@ Deploying a Wazuh cluster
 
         - :ref:`node_type <cluster_node_type>`: Set the node type (master/worker)
         - :ref:`port <cluster_port>`: Destination port for cluster communication
-        - :ref:`bind_addr <cluster_bind_addr>`: IP where this node is listening to (0.0.0.0 any IP)
+        - :ref:`bind_addr <cluster_bind_addr>`: IP address where this node is listening to (0.0.0.0 any IP)
         - :ref:`nodes <cluster_nodes>`: The address of the **master** , it must be specified in all nodes (including the master itself). The address can be either an IP or a DNS.
         - :ref:`hidden <cluster_hidden>`: Toggles whether or not to show information about the cluster that generated an alert.
         - :ref:`disabled <cluster_disabled>`: Indicates whether the node will be enabled or not in the cluster.
@@ -132,7 +131,7 @@ Deploying a Wazuh cluster
 .. topic:: Pointing agents to the cluster nodes
 
     Finally, the configuration of the agents has to be modified in order to report to the cluster.
-    In this case the agent 001 will report to the worker01-node node. To achieve this we must modify the information contained in the labels ``<client><server>`` in the file ``/var/ossec/etc/ossec.conf``, where we will place the IP of the node we want to report to, in our case it would look like this:
+    In this case the agent 001 will report to the worker01-node node. To achieve this we must modify the information contained in the labels ``<client><server>`` in the file ``/var/ossec/etc/ossec.conf``, where we will place the IP address of the node we want to report to, in our case it would look like this:
 
         .. code-block:: xml
 
@@ -149,7 +148,7 @@ Deploying a Wazuh cluster
 
             # systemctl restart wazuh-agent
 
-    The second agent will report to the master-node node, for this we will place the IP of our master in the agent configuration, as we have seen in the previous case:
+    The second agent will report to the master-node node, for this we will place the IP address of our master in the agent configuration, as we have seen in the previous case:
 
         .. code-block:: xml
 

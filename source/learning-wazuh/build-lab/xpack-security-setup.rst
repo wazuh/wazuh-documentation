@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
     :description: Learn more about how to prepare your Wazuh Lab environment. In this section, we explain how to configure X-Pack Security. 
@@ -155,7 +155,7 @@ Configure SSL for Filebeat
 
       # scp -i Wazuh_Lab.pem Wazuh_Lab.pem centos@N.N.N.N:
 
-   Where N.N.N.N must be replaced with the Elastic IP of your Elastic Server.
+   Where N.N.N.N must be replaced with the Elastic IP address of your Elastic Server.
 
   b. Alternatively you may copy and paste the content of this file onto this file
      on the Elasticsearch instance.
@@ -276,7 +276,7 @@ Log in to Kibana to verify it is working
 ------------------------------------------------
 
 1. Now use your local web browser to surf to ``https://SERVER_IP`` where SERVER_IP
-   is the Elastic IP assigned to your Elastic Server instance.  Bypass the
+   is the Elastic IP address assigned to your Elastic Server instance.  Bypass the
    security warnings caused by the fact that we are using a self-signed
    certificate.  You should then be prompted to authenticate with the
    "elastic" username, and the password you just created.

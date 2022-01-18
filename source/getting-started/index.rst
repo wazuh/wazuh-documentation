@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Get started with Wazuh. Learn about our open source community of developers, the Wazuh components, architecture, and deployment.

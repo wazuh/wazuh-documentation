@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Get to know more about the labels section of the OSSEC local configuration in this section of the Wazuh documentation. 
@@ -50,8 +50,6 @@ Attributes:
     In ``internal_options.conf``, hidden labels can be set to be displayed in alerts.
 
 .. note::
-    
-    .. versionadded:: 3.9.0
 
       Keys starting with an underscore character are reserved for the system labels. These labels are invisible and contain internal information of the agents.
 

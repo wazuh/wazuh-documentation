@@ -2,6 +2,28 @@ const removedUrls = [];
 const newUrls = [];
 const redirections = [];
 
+/* Note: new release versions must always be inserted in the first position of the array "versions" */
+const versions = [
+  '4.2',
+  '4.1',
+  '4.0',
+  '3.13',
+  '3.12',
+  '3.11',
+  '3.10',
+  '3.9',
+  '3.8',
+  '3.7',
+  '3.6',
+  '3.5',
+  '3.4',
+  '3.3',
+  '3.2',
+  '3.1',
+  '3.0',
+  '2.1',
+];
+
 /* Data structure for every release
 
 /* *** RELEASE X.Y ****/
@@ -60,7 +82,6 @@ newUrls['4.2'] = [
   '/proof-of-concept-guide/index.html',
   '/deploying-with-ansible/guide/install-opendistro-server.html',
   '/deploying-with-ansible/roles/wazuh-opendistro.rst',
-  '/release-notes/release-4-2-5.html',
   '/amazon-machine-images/amazon-machine-images.html',
   '/user-manual/capabilities/active-response/ar-use-cases/removing-malware.html',
   '/user-manual/capabilities/active-response/ar-use-cases/wazuh-with-yara.html',
@@ -86,7 +107,7 @@ newUrls['4.2'] = [
   '/user-manual/reference/statistics-files/wazuh-remoted-state.html',
   '/user-manual/reference/statistics-files/wazuh-logcollector-state.html',
   '/user-manual/reference/tools/wazuh-control.html',
-  '/user-manual/reference/tools/wazuh-regex.html',  
+  '/user-manual/reference/tools/wazuh-regex.html',
   '/cloud-service/index.html',
   '/cloud-service/glossary.html',
   '/cloud-service/account-billing/index.html',
@@ -119,7 +140,7 @@ newUrls['4.2'] = [
   '/cloud-service/your-environment/understanding-storage.html',
   '/cloud-service/getting-started/sign-up-trial.html',
   '/cloud-service/getting-started/access-wazuh-wui.html',
-  '/cloud-service/getting-started/register-agents.html', 
+  '/cloud-service/getting-started/register-agents.html',
   '/getting-started/use-cases/index.html',
   '/getting-started/use-cases/cloud-security.html',
   '/getting-started/use-cases/configuration-assessment.html',
@@ -210,6 +231,7 @@ newUrls['4.2'] = [
   '/release-notes/release-4-2-2.html',
   '/release-notes/release-4-2-3.html',
   '/release-notes/release-4-2-4.html',
+  '/release-notes/release-4-2-5.html',
   '/user-manual/api/securing-api.html',
   '/user-manual/configuring-cluster/cluster-management.html',
   '/user-manual/manager/manual-email-report/smtp-authentication.html',
@@ -224,6 +246,7 @@ newUrls['4.2'] = [
   '/user-manual/capabilities/vulnerability-detection/compatibility-matrix.html',
   '/user-manual/capabilities/vulnerability-detection/cpe-helper.html',
   '/user-manual/capabilities/vulnerability-detection/how-it-works.html',
+  '/user-manual/capabilities/file-integrity/fim-fields-rule-mapping.html',
   '/user-manual/reference/ossec-conf/rule-test.html',
   '/user-manual/reference/ossec-conf/client-buffer.html',
   '/user-manual/reference/ossec-conf/email-alerts.html',
@@ -359,8 +382,6 @@ removedUrls['4.2'] = [
   '/release-notes/release_4_1_3.html',
   '/release-notes/release_4_1_4.html',
   '/release-notes/release_4_1_5.html',
-  '/release-notes/release_4_2_0.html',
-  '/release-notes/release_4_2_1.html',
   '/user-manual/api/securing_api.html',
   '/user-manual/configuring-cluster/cluster_management.html',
   '/user-manual/manager/manual-email-report/smtp_authentication.html',
@@ -937,16 +958,6 @@ redirections.push(
     },
     {
       'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_4_2_0.html',
-      '4.2': '/release-notes/release-4-2-0.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_4_2_1.html',
-      '4.2': '/release-notes/release-4-2-1.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
       '4.1': '/user-manual/api/securing_api.html',
       '4.2': '/user-manual/api/securing-api.html',
     },
@@ -1164,7 +1175,7 @@ redirections.push(
     'target': ['4.0=>4.1', '4.1=>4.0'],
     '4.0': '/installation-guide/wazuh-agent/deployment_variables/linux/deployment_variables_zypper.html',
     '4.1': '/installation-guide/wazuh-agent/deployment_variables/deployment_variables_linux.html',
-  },  
+  },
   {
     'target': ['4.1=>4.0'],
     '4.0':  '/installation-guide/more-installation-alternatives/index.html',
@@ -2080,7 +2091,7 @@ redirections.push(
       '3.13': '/installation-guide/installing-wazuh-agent/linux/oracle5/wazuh_agent_package_oracle5.html',
       '4.0':  '/installation-guide/wazuh-agent/index.html',
     },
-); 
+);
 
 /* *** RELEASE 3.13 ****/
 

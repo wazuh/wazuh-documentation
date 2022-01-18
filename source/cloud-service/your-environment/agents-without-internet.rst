@@ -68,7 +68,7 @@ To achieve this configuration, follow these steps:
 	
    #. Restart NGINX with ``systemctl restart nginx``.
 
-   #. Register your agent but replace the *WAZUH_MANAGER_IP* value (``nginx_ip``) with the NGINX instance IP. To learn more on how to register agents, see the :ref:`Register agents <cloud_register_agents>` section.
+   #. Register your agent but replace the *WAZUH_MANAGER_IP* value (``nginx_ip``) with the NGINX instance IP address. To learn more on how to register agents, see the :ref:`Register agents <cloud_register_agents>` section.
 
       Example:
 
