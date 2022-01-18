@@ -5,20 +5,17 @@
 SELinux Wazuh context
 ======================
 
-- `Introduction`_
-- `Create wazuh context`_
-- `Create custom SELinux module`_
-- `Troubleshooting`_
-
-
-Introduction
-------------
 
 Security-Enhanced Linux (SELinux) defines access controls for the applications, processes, and files on a system.
 
 SELinux is based on "security contexts", assigning one to every element under supervision and a policy that defines what access and operations are allowed. The default SELinux behavior is context inheritance, so if there is no SELinux policy specifying otherwise, every process created will inherit the context of its parent.
 
 That said, as Wazuh does not have a defined context, it inherits the context from ``systemd`` which is in charge of starting the service. This context is of type ``unconfined_t``, which means that it is not under any security restriction, so only the standard Linux DAC restrictions will be applied to it.
+
+
+- `Create wazuh context`_
+- `Create custom SELinux module`_
+- `Troubleshooting`_
 
 
 Create wazuh context
