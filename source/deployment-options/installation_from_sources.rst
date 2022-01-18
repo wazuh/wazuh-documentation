@@ -276,7 +276,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
 .. tabs::
 
-  .. group-tab:: Linux Yum
+  .. group-tab:: Linux - Yum
 
 
 
@@ -410,7 +410,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
      # groupdel ossec 2> /dev/null
 
 
-  .. group-tab:: Linux APT
+  .. group-tab:: Linux - APT
 
 
 
@@ -521,7 +521,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
      # groupdel ossec 2> /dev/null
 
 
-  .. group-tab:: Linux ZYpp
+  .. group-tab:: Linux - ZYpp
 
 
 
