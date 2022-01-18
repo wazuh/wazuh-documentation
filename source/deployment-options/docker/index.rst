@@ -3,21 +3,21 @@
 .. meta::
   :description: Learn more about the process of installing and configuring the Wazuh deployment on Docker in this section of our documentation. 
 
-.. _wazuh_docker:
-
 Deployment on Docker
 ====================
 
-`Docker <https://www.docker.com/>`_ is an open-source project that automates the deployment of different applications inside software containers. Docker containers wrap up a piece of software in a complete filesystem that contains everything it needs to run like: code, system tools, libraries, etc. This process guarantees that the system will always run the same, regardless the environment it is running.
+This section shows the process of installing Wazuh on Docker.
 
-We have created our own fork based on `"deviantony" dockerfiles <https://github.com/deviantony/docker-elk>`_ and `"xetus-oss" dockerfiles <https://github.com/xetus-oss/docker-ossec-server>`_. Thank you, Anthony Lapenna, for your contribution to the community. If you want to contribute to the Wazuh fork, please go to our `Docker repository <https://github.com/wazuh/wazuh-docker>`_.
+`Docker <https://www.docker.com/>`_ is an open platform to build, deliver, and run applications inside software containers. Docker containers package up software including everything needed to run: code, runtime, system tools, system libraries, and settings. Docker enables separating applications from infrastructure. This guarantees that the application will always run the same, regardless of the environment the container is running on. Containers can run in the cloud or on-premises.
 
-The images we created are in the `Docker hub <https://hub.docker.com>`_. You can install Wazuh with a single-host architecture using a set of Docker images that contains `Wazuh Manager <https://github.com/wazuh/wazuh>`_, `Filebeat <https://www.elastic.co/products/beats/filebeat>`_, `Elasticsearch <https://registry.hub.docker.com/_/elasticsearch/>`_, `Kibana <https://registry.hub.docker.com/_/kibana/>`_ and optionally `Nginx <https://hub.docker.com/_/nginx/>`_. `Open Distro for Elasticsearch <https://opendistro.github.io/for-elasticsearch/>`_ is fully supported as well.
+You can install Wazuh using the Docker images we have created, such as wazuh/wazuh-odfe and wazuh/wazuh-kibana-odfe. All the Wazuh Docker images are found in the `Docker hub <https://hub.docker.com/u/wazuh>`_.
 
-This section will show you the process of installing and configuring the Wazuh deployment on Docker:
+In the :doc:`/deployment-options/docker/docker-installation` subsection you will see how to install Docker. You will see how to install Wazuh on Docker in the :doc:`/deployment-options/docker/wazuh-container` subsection. Read the :doc:`/deployment-options/docker/container-usage` subsection to learn how to access the services and containers, manage data volumes, and execute a shell. In the :doc:`/deployment-options/docker/upgrade-guide` subsection you can learn how to upgrade Wazuh 3.x on Docker. Finally, you can find answers to some frequent questions in :doc:`/deployment-options/docker/faq-wazuh-container`.
+
 
 .. toctree::
    :maxdepth: 1
+   :hidden:
 
    docker-installation
    wazuh-container
