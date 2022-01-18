@@ -29,7 +29,7 @@ $dark_ColorReDocDanger: #E31B0F !default;
 
 body {
   font-family: 'Manrope', sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   font-size: 16px;
   line-height: 32px;
   padding-top: $redocHeaderHeight;
@@ -39,7 +39,7 @@ body {
 main {
   padding: 0;
   strong {
-    font-weight: 500;
+    font-weight: 600;
   }
 }
 #light-dark-switch {
@@ -171,7 +171,7 @@ header {
     .no-latest-title {
       display: inline-block;
       position: relative;
-      font-weight: 500;
+      font-weight: 600;
       padding: 4px 10px 4px 38px;
       line-height: 32px;
       
@@ -199,7 +199,7 @@ header {
 
 redoc[spec-url] .beRszf {
   font-family: Manrope, sans-serif;
-  font-weight: 400;
+  font-weight: 500;
   font-size: 16px;
   line-height: 32px;
   letter-spacing: .03em;
@@ -247,7 +247,7 @@ redoc[spec-url] .beRszf {
 
   // Simple table style
   .dCnGCn table th {
-    font-weight: 400;
+    font-weight: 500;
   }
   .dCnGCn table th, 
   .dCnGCn table td {
@@ -269,7 +269,7 @@ redoc[spec-url] .beRszf {
       border-radius: $roundedCorners $roundedCorners 0 0;
       th {
         border: 2px solid;
-        font-weight: 400;
+        font-weight: 500;
       }
       td {
         border: 2px solid;
@@ -312,7 +312,7 @@ redoc[spec-url] .beRszf {
     &.gxJjxJ,
     &.dUFXgZ {
       strong {
-        font-weight: 500;
+        font-weight: 600;
         margin-right: 10px;
       }
     }
@@ -410,14 +410,14 @@ redoc[spec-url] .beRszf {
     .react-tabs__tab-list {
       [role="tab"] {
         width: 5em;
-        font-weight: 400;
+        font-weight: 500;
         font-size: 1rem;
         border-radius: 3px;
         padding: 3px 10px;
         margin-top: 7px;
         
         & > [role="tab"].react-tabs__tab--selected {
-          font-weight: 400;
+          font-weight: 500;
         }
         &.tab-success:before,
         &.tab-error:before,
@@ -490,7 +490,7 @@ redoc[spec-url] .beRszf {
     label[role="menuitem"] {
       font-family: Manrope, sans-serif;
       font-size: 16px;
-      font-weight: 400;
+      font-weight: 500;
       padding-left: 26px;
       padding-right: 26px;
       > span.operation-type {
@@ -515,7 +515,7 @@ redoc[spec-url] .beRszf {
     input {
       font-family: Manrope, sans-serif;
       font-size: 16px;
-      font-weight: 400;
+      font-weight: 500;
       border-bottom: 2px solid;
       background-repeat: no-repeat;
       background-size: 25px 25px;
@@ -540,7 +540,7 @@ redoc[spec-url] .beRszf {
     h3,
     h4 {
       font-family: Manrope, sans-serif;
-      font-weight: 500;
+      font-weight: 600;
       letter-spacing: .03em;
       position: relative;
       .sc-VigVT.jrPOYQ {
@@ -582,7 +582,7 @@ redoc[spec-url] .beRszf {
         font-size: 16px;
         color: $dark_ColorMainText;
         text-transform: uppercase;
-        font-weight: 400;
+        font-weight: 500;
       }
       
       .http-verb {

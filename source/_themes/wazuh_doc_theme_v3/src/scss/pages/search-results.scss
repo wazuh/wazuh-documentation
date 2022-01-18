@@ -26,13 +26,13 @@ h1 {
 
 #search-results {
   .search-summary {
-    font-weight: 400;
+    font-weight: 500;
   }
   
   #toggle-results {
     text-decoration: none;
     &:focus {
-      font-weight: 400;
+      font-weight: 500;
     }
   }
   
@@ -58,7 +58,7 @@ h1 {
       font-size: 22px;
       text-decoration: none;
       &:focus {
-        font-weight: 400;
+        font-weight: 500;
       }
     }
     .context {

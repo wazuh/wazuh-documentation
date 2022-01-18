@@ -47,7 +47,7 @@
 
     .item {
       margin: 0;
-      font-weight: 400;
+      font-weight: 500;
       border-radius: $roundedCorners $roundedCorners 0 0!important;
       padding: 1.42857em calc(1.42857em + .15%);
       @include media-max(sm){
@@ -55,7 +55,7 @@
       }
 
       &.active {
-        font-weight: 500;
+        font-weight: 600;
         padding: 1.42857em;
         border-radius: $roundedCorners $roundedCorners 0 0!important;
         @include media-max(sm){

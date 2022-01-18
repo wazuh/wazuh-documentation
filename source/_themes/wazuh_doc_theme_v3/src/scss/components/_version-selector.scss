@@ -71,15 +71,15 @@ header {
 
       &:hover,
       &:focus {
-        font-weight: 400;
+        font-weight: 500;
       }
       
       &.disabled {
-        font-weight: 400;
+        font-weight: 500;
         
         &:hover,
         &:focus {
-          font-weight: 400;
+          font-weight: 500;
         }
       }
     }

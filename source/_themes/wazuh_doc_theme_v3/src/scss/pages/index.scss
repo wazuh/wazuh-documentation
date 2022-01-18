@@ -70,7 +70,7 @@ main {
             display: inline-block;
             left: -3px;
             font-size: 18px;
-            font-weight: 500;
+            font-weight: 600;
             padding: 10px 0;
 
             &::after {
@@ -107,7 +107,7 @@ main {
           padding-left: 15px;
           display: inline-block;
           line-height: 32px;
-          font-weight: 400;
+          font-weight: 500;
 
           &:hover {
             text-decoration: none;
@@ -117,7 +117,7 @@ main {
         > a {
           font-size: 22px;
           line-height: 22px;
-          font-weight: 500;
+          font-weight: 600;
           padding-bottom: 15px;
           @include media-max(xl){
             font-size: 20px;

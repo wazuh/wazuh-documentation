@@ -7,7 +7,7 @@ body {
   margin-top: calc(#{$headerHeightXs} + #{$secondaryMobileBar});
   font-family: Manrope, sans-serif;
   font-size: 16px;
-  font-weight: 300;
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   @include media-min(xl){
@@ -27,7 +27,7 @@ h1,
   margin-top: 1.2rem;
   margin-bottom: 1rem;
   font-size: 34px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: .03em;
   @include media-max(xl){
     font-size: 28px;
@@ -41,7 +41,7 @@ h2,
   margin-top: 1.2rem;
   margin-bottom: 1rem;
   font-size: 28px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: .03em;
   @include media-max(xl){
     font-size: 23px;
@@ -55,7 +55,7 @@ h3,
   margin-top: 1.2rem;
   margin-bottom: 1rem;
   font-size: 22px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: .03em;
   @include media-max(xl){
     font-size: 18px;
@@ -69,7 +69,7 @@ h4,
   margin-top: 1.2rem;
   margin-bottom: 1rem;
   font-size: 18px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: .03em;
   @include media-max(xl){
     font-size: 17px;
@@ -83,7 +83,7 @@ h5,
   margin-top: 1.2rem;
   margin-bottom: 1rem;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: .03em;
 }
 
@@ -94,7 +94,7 @@ h6,
   margin-top: 1.2rem;
   margin-bottom: 1rem;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: .03em;
 }
 
@@ -142,13 +142,13 @@ main {
 }
 
 a:active {
-  font-weight: 500;
+  font-weight: 600;
 }
 
 th p {
   margin: 0;
   font-weight: inherit;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 /* Light theme -------------------------------------------------------------- */
