@@ -218,7 +218,7 @@ dt {
   width: 100%;
   height: 52px;
   color: #fff;
-  background: url(../img/wazuh_bg_head.png), no-repeat center center #00a9e5;
+  background: url(../../images/wazuh_bg_head.png), no-repeat center center #00a9e5;
   background-size: cover;
 }
 
@@ -235,7 +235,7 @@ dt {
   width: 100%;
   height: 100px;
   padding-top: 5px;
-  background: url(../img/wazuh_bg_head.png), no-repeat center center #00a9e5;
+  background: url(../../images/wazuh_bg_head.png), no-repeat center center #00a9e5;
   background-size: cover;
 }
 
@@ -1820,7 +1820,7 @@ table tr p {
   position: relative;
   width: 100%;
   height: calc(100vh - 149px);
-  background-image: url('../img/wazuh_404_bg_xs.png');
+  background-image: url('../../images/wazuh_404_bg_xs.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
@@ -2992,7 +2992,7 @@ div.highlight pre {
 } 
 
 #rst-content.deprecated-content:after {
-  background: url(../img/deprecated-pic.png) no-repeat;
+  background: url(../../images/deprecated-pic.png) no-repeat;
   background-size: contain;
   opacity: 1;
   height: auto;
@@ -3205,7 +3205,7 @@ div.highlight pre {
     }
     
     #page.page-404 #main-content #rst-content {
-      background-image: url('../img/wazuh_404_bg_desktop.png');
+      background-image: url('../../images/wazuh_404_bg_desktop.png');
     }
     
     #page.page-404 #main-content h1 {
@@ -4007,7 +4007,7 @@ div.highlight pre {
 
 @media (min-width: 1921px) {
   #page.page-404 #main-content #rst-content {
-    background-image: url('../img/wazuh_404_bg_4k.png');
+    background-image: url('../../images/wazuh_404_bg_4k.png');
     background-position-y: top;
   }
 }
