@@ -48,8 +48,8 @@ needs_sphinx = '1.8'
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.extlinks', # Sphinx built-in extension
-    'wazuh-doc-images',
-    'sphinx_tabs.tabs',
+    'wazuh-doc-images',  # Custom extension
+    'sphinx_tabs.tabs'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -85,7 +85,7 @@ language = 'en-US'
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path .
-exclude_patterns = []
+exclude_patterns = ['redirects.js']
 
 # The reST default role (used for this markup: `text`) to use for all
 # documents.
@@ -123,15 +123,18 @@ html_theme = 'wazuh_doc_theme'
 html_theme_options = {
     'wazuh_web_url': 'https://wazuh.com',
     'wazuh_doc_url': 'https://documentation.wazuh.com',
-    'globaltoc_depth': 5,
-    'includehidden': True,
-    'collapse_navigation': False,
-    'prev_next_buttons_location': 'bottom'
+    'globaltoc_depth': 5, # Only for Wazuh documentation theme v2.0
+    'includehidden': True, # Only for Wazuh documentation theme v2.0v
+    'collapse_navigation': False, # Only for Wazuh documentation theme v2.0v
+    'prev_next_buttons_location': 'bottom' # Only for Wazuh documentation theme v2.0v
 }
 
 
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = ['_themes']
+
+# Custom variable to store the path to the selected theme assets
+theme_assets_path = html_theme_path[0] + '/' + html_theme
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
@@ -142,12 +145,12 @@ html_title = project + ' documentation'
 
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
-html_logo = '_static/img/wazuh_logo.png'
+html_logo = theme_assets_path + '/static/images/wazuh-logo.png'
 
 # The name of an image file (within the static path) to use as favicon of the
 # docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
 # pixels large.
-html_favicon = '_static/favicon.ico'
+html_favicon = theme_assets_path + '/static/images/favicon.ico'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -179,10 +182,12 @@ html_static_path = ['_static']
 
 # Additional templates that should be rendered to pages, maps page names to
 # template names.
+html_additional_pages = {}
+
+html_additional_pages['not_found'] = 'not-found.html'
+
 if version >= '4.0':
-    html_additional_pages = {
-        'user-manual/api/reference': 'api-redoc.html',
-    }
+    html_additional_pages['user-manual/api/reference'] = 'api-redoc.html'
 
 # If false, no module index is generated.
 #html_domain_indices = True
@@ -356,25 +361,23 @@ todo_include_todos = False
 
 # -- Minify ------------------------------------------------------------------
 
-extra_assets = []
+extra_assets = [
+    'style-redirect.css',
+    'moved-content.js'
+]
 
-# Fonts to be preloaded
-google_fonts_path = os.path.join(html_theme_path[0], html_theme, 'static', 'css', 'google-fonts.css')
-with open(google_fonts_path, 'r') as reader:
-    google_fonts = reader.read()
-
-def minification(actual_path):
+def minification(current_path):
 
     files = [
-        ['css/style','css'],
-        ['css/wazuh-icons','css'],
-        ['css/custom-redoc','css'],
-        ['css/accordions','css'],
-        ['js/version-selector','js'],
-        ['js/redirects','js'],
-        ['js/style','js'],
-        ['js/custom-redoc','js'],
-        ['js/accordion', 'js']
+        ['style','css'],
+        ['wazuh-icons','css'],
+        ['custom-redoc','css'],
+        ['accordions','css'],
+        ['version-selector','js'],
+        ['redirects','js'],
+        ['style','js'],
+        ['custom-redoc','js'],
+        ['accordion', 'js']
     ]
     
     if is_latest_release == True:
@@ -383,8 +386,7 @@ def minification(actual_path):
 
     for file in files:
 
-        path_end = actual_path+'/_static/'
-        min_file = os.path.join(path_end, file[0]+'.min.'+file[1])
+        min_file = os.path.join(current_path, 'static', file[1], 'dist', file[0]+'.min.'+file[1])
         minify = True
         min_file_content = ''
 
@@ -392,7 +394,12 @@ def minification(actual_path):
             with open(min_file, 'r') as f_min:
                 min_file_content = f_min.read()
 
-        with open(os.path.join(path_end, file[0]+'.'+file[1]), 'r') as f:
+        if file[0]+'.'+file[1] in exclude_patterns:
+            source_file = os.path.join(os.path.dirname(os.path.realpath(__file__)), html_static_path[0], file[1], file[0]+'.'+file[1])
+        else:
+            source_file = os.path.join(current_path, file[1]+'-src', file[0]+'.'+file[1])
+
+        with open(source_file, 'r') as f:
 
             output = f.read()
 
@@ -495,35 +502,155 @@ custom_replacements = {
 
 # -- Setup -------------------------------------------------------------------
 
+compilation_time = str(time.time())
+
 def setup(app):
 
-    actual_path = os.path.dirname(os.path.realpath(__file__))
+    current_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), theme_assets_path)
+    static_path_str = os.path.join(os.path.dirname(os.path.realpath(__file__)), html_static_path[0])
+    
+    if not os.path.exists(app.srcdir + '/' + html_static_path[0] + '/'):
+        os.mkdir(app.srcdir + '/' + html_static_path[0] + '/')
+    
+    if html_theme == 'wazuh_doc_theme_v3':
+        # CSS files
+        app.add_css_file("css/min/bootstrap.min.css?ver=%s" % os.stat(
+            os.path.join(current_path, "static/css/min/bootstrap.min.css")).st_mtime)
+        app.add_css_file("css/fontawesome.min.css?ver=%s" % os.stat(
+            os.path.join(current_path, "static/css/fontawesome.min.css")).st_mtime)
 
-    minification(actual_path)
+        # JS files
+        app.add_js_file("js/jquery.js?ver=%s" % os.stat(
+            os.path.join(current_path, "static/js/jquery.js")).st_mtime)
+        app.add_js_file("js/min/bootstrap.bundle.min.js?ver=%s" % os.stat(
+            os.path.join(current_path, "static/js/min/bootstrap.bundle.min.js")).st_mtime)
+        app.add_js_file("js/underscore.js?ver=%s" % os.stat(
+            os.path.join(current_path, "static/js/underscore.js")).st_mtime)
+    
+    if html_theme == 'wazuh_doc_theme':
+        minification(current_path)
 
-    app.add_css_file("css/fontawesome.min.css?ver=%s" % os.stat(
-        os.path.join(actual_path, "_static/css/fontawesome.min.css")).st_mtime)
-    app.add_css_file("css/wazuh-icons.min.css?ver=%s" % os.stat(
-        os.path.join(actual_path, "_static/css/wazuh-icons.css")).st_mtime)
-    app.add_css_file("css/style.min.css?ver=%s" % os.stat(
-        os.path.join(actual_path, "_static/css/style.css")).st_mtime)
-    app.add_css_file("css/accordions.min.css?ver=%s" % os.stat(
-        os.path.join(actual_path, "_static/css/accordions.css")).st_mtime)
+        # CSS files
+        app.add_css_file("css/fontawesome.min.css?ver=%s" % os.stat(
+            os.path.join(current_path, "static/css/fontawesome.min.css")).st_mtime)
+        app.add_css_file("css/dist/wazuh-icons.min.css?ver=%s" % os.stat(
+            os.path.join(current_path, "css-src/wazuh-icons.css")).st_mtime)
+        app.add_css_file("css/dist/style.min.css?ver=%s" % os.stat(
+            os.path.join(current_path, "css-src/style.css")).st_mtime)
+        app.add_css_file("css/dist/accordions.min.css?ver=%s" % os.stat(
+            os.path.join(current_path, "css-src/accordions.css")).st_mtime)
 
-    app.add_js_file("js/version-selector.min.js?ver=%s" % os.stat(
-        os.path.join(actual_path, "_static/js/version-selector.js")).st_mtime)
-    app.add_js_file("js/style.min.js?ver=%s" % os.stat(
-        os.path.join(actual_path, "_static/js/style.js")).st_mtime)
-    app.add_js_file("js/accordion.min.js?ver=%s" % os.stat(
-        os.path.join(actual_path, "_static/js/accordion.js")).st_mtime)
-    app.add_js_file("js/redirects.min.js?ver=%s" % os.stat(
-        os.path.join(actual_path, "_static/js/redirects.js")).st_mtime)
+        # JS files
+        app.add_js_file("js/dist/version-selector.min.js?ver=%s" % os.stat(
+            os.path.join(current_path, "js-src/version-selector.js")).st_mtime)
+        app.add_js_file("js/dist/style.min.js?ver=%s" % os.stat(
+            os.path.join(current_path, "js-src/style.js")).st_mtime)
+        app.add_js_file("js/dist/accordion.min.js?ver=%s" % os.stat(
+            os.path.join(current_path, "js-src/accordion.js")).st_mtime)
+        app.add_js_file("js/dist/redirects.min.js?ver=%s" % os.stat(
+            os.path.join(static_path_str, "js/redirects.js")).st_mtime)
+
     app.add_config_value('custom_replacements', {}, True)
     app.connect('source-read', customReplacements)
 
 	# List of compiled documents
     app.connect('html-page-context', collect_compiled_pagename)
+    app.connect('html-page-context', insert_inline_style)
+    if html_theme == 'wazuh_doc_theme_v3':
+        app.connect('html-page-context', manage_assets)
     app.connect('build-finished', finish_and_clean)
+
+
+def insert_inline_style(app, pagename, templatename, context, doctree):
+    ''' Runs once per page, inserting the content of the compiled style for Google Fonts into the context '''
+    google_fonts_path = os.path.join('source/',theme_assets_path, 'static', 'css', 'google-fonts.min.css')
+    # Fonts to be preloaded
+    with open(google_fonts_path, 'r') as reader:
+        google_fonts = reader.read()
+        context['inline_fonts'] = google_fonts
+
+def manage_assets(app, pagename, templatename, context, doctree):
+    theme_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), theme_assets_path)
+    static = '_static/'
+    # Full list of non-common javascript files
+    individual_js_files = {
+        "redirects": static + "js/min/redirects.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/redirects.min.js")).st_mtime,
+        "wazuh-documentation": static + "js/min/wazuh-documentation.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/wazuh-documentation.min.js")).st_mtime,
+        "index": static + "js/min/index.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/index.min.js")).st_mtime,
+        "index-redirect": static + "js/min/index-redirect.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/index-redirect.min.js")).st_mtime,
+        "search-results": static + "js/min/search-results.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/search-results.min.js")).st_mtime,
+        "searchIndex": "searchindex.js",
+        "not-found": static + "js/min/not-found.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/not-found.min.js")).st_mtime,
+        "api-reference": static + "js/min/api-reference.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/api-reference.min.js")).st_mtime,
+        "redoc-standalone": static + "js/redoc.standalone.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/redoc.standalone.js")).st_mtime,
+        "moved-content": static + "js/min/moved-content.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/moved-content.min.js")).st_mtime
+    }
+    
+    # The template function
+    def get_css_by_page(pagename):
+        css_map = {
+            'index': "css/min/index.min.css?ver=%s" % os.stat(os.path.join(theme_dir, "static/css/min/index.min.css")).st_mtime,
+            'user-manual/api/reference': "css/min/api-reference.min.css?ver=%s" % os.stat(os.path.join(theme_dir, "static/css/min/api-reference.min.css")).st_mtime,
+            'cloud-service/apis/reference': "css/min/api-reference.min.css?ver=%s" % os.stat(os.path.join(theme_dir, "static/css/min/api-reference.min.css")).st_mtime,
+            'search': "css/min/search-results.min.css?ver=%s" % os.stat(os.path.join(theme_dir, "static/css/min/search-results.min.css")).st_mtime,
+            'moved-content': "css/min/moved-content.min.css?ver=%s" % os.stat(os.path.join(theme_dir, "static/css/min/moved-content.min.css")).st_mtime,
+            'not_found': "css/min/not-found.min.css?ver=%s" % os.stat(os.path.join(theme_dir, "static/css/min/not-found.min.css")).st_mtime
+        }
+        default = "css/min/wazuh-documentation.min.css?ver=%s" % os.stat(os.path.join(theme_dir, "static/css/min/wazuh-documentation.min.css")).st_mtime
+        
+        if pagename in css_map.keys():
+            return css_map[pagename]
+        else:
+            return default
+
+    # The template function
+    def get_js_by_page(pagename):
+        js_map = {
+            'index': [
+                individual_js_files['index']
+            ],
+            'index-redirect': [
+                individual_js_files['index-redirect']
+            ],
+            'search': [
+                individual_js_files['redirects'],
+                individual_js_files['search-results'],
+                individual_js_files['searchIndex']
+            ],
+            'not_found': [
+                individual_js_files['redirects'],
+                individual_js_files['not-found']
+            ],
+            'user-manual/api/reference': [
+                individual_js_files['redoc-standalone'],
+                individual_js_files['redirects'],
+                individual_js_files['api-reference']
+            ],
+            'cloud-service/apis/reference': [
+                individual_js_files['redoc-standalone'],
+                individual_js_files['redirects'],
+                individual_js_files['api-reference']
+            ],
+            'moved-content': [
+                individual_js_files['redirects'],
+                individual_js_files['moved-content']
+            ]
+        }
+        default = [
+            individual_js_files['redirects'],
+            individual_js_files['wazuh-documentation']
+            # tabs (extension)
+            # lightbox (extension)
+        ]
+        
+        if pagename in js_map.keys():
+            return js_map[pagename]
+        else:
+            return default
+
+    # Add it to the page's context
+    context['get_css_by_page'] = get_css_by_page
+    context['get_js_by_page'] = get_js_by_page
 
 exclude_doc = ["not_found"]
 list_compiled_html = []
@@ -533,26 +660,13 @@ def finish_and_clean(app, exception):
 
     # Create additional files such as the `.doclist` and the sitemap
     creating_file_list(app, exception)
-
-    # Remove extra minified files
-    for asset in extra_assets:
-        mini_asset = '.min.'.join(asset.split('.'))
-        if os.path.exists(app.srcdir + '/_static/' + mini_asset):
-            os.remove(app.srcdir + '/_static/' + mini_asset)
-
-    # Manage the guide-assets
-    if os.path.isdir(app.outdir + '/_static/guide-assets'):
-        file_names = os.listdir(app.outdir + '/_static/guide-assets')
-        if is_latest_release == True:
-            # Move the folder 'guide-assets' to the root folder defined as outdir
-            os.mkdir(app.outdir + '/guide-assets')
-            for file_name in file_names:
-                os.rename(app.outdir + '/_static/guide-assets/' + file_name, app.outdir + '/guide-assets/' + file_name,)
-        else:
-            # Remove the folder 'guide-assets'
-            for file_name in file_names:
-                os.remove(app.outdir + '/_static/guide-assets/' + file_name)
-            os.rmdir(app.outdir + '/_static/guide-assets')
+    
+    if html_theme == 'wazuh_doc_theme':
+        # Remove extra minified files
+        for asset in extra_assets:
+            mini_asset = '.min.'.join(asset.split('.'))
+            if os.path.exists(app.srcdir + '/_static/' + mini_asset):
+                os.remove(app.srcdir + '/_static/' + mini_asset)
 
 def collect_compiled_pagename(app, pagename, templatename, context, doctree):
     ''' Runs once per page, storing the pagename (full page path) extracted from the context '''
@@ -588,16 +702,6 @@ def creating_file_list(app, exception):
         with open(build_path+'/'+sitemap_version+'-sitemap.xml', 'w') as sitemap_file:
             sitemap_file.write(sitemap)
 
-exclude_patterns = [
-    "css/wazuh-icons.css",
-    "css/style.css",
-    "js/version-selector.js",
-    "js/redirects.js",
-    "js/style.js"
-]
-
-exclude_patterns = exclude_patterns + extra_assets
-
 # -- Additional configuration ------------------------------------------------
 
 if (tags.has("production")):
@@ -613,8 +717,7 @@ html_context = {
     "github_version": version,
     "production": production,
     "apiURL": apiURL,
-    "compilation_ts": str(time.time()),
-    "is_latest_release": is_latest_release,
-    "inline_fonts": google_fonts
+    "compilation_ts": compilation_time,
+    "is_latest_release": is_latest_release
 }
 sphinx_tabs_nowarn = True
