@@ -146,12 +146,12 @@ Manager
 Agent
 ^^^^^
 
-- `#8016 <https://github.com/wazuh/wazuh/pull/8016>`_ An option to allow the agent to refresh the connection to the manager is added.
+- `#8016 <https://github.com/wazuh/wazuh/pull/8016>`_ An option is added to allow the agent to refresh the connection to the manager.
 - `#8532 <https://github.com/wazuh/wazuh/pull/8532>`_ A new module to collect audit logs from GitHub is introduced.
 - `#8461 <https://github.com/wazuh/wazuh/pull/8461>`_ FIM now expands wildcarded paths in the configuration on Windows agents.
 - `#8754 <https://github.com/wazuh/wazuh/pull/8754>`_ FIM reloads wildcarded paths on full scans.
 - `#8306 <https://github.com/wazuh/wazuh/pull/8306>`_ Wazuh adds a new ``path_suffix`` option to AWS module configuration.
-- `#8331 <https://github.com/wazuh/wazuh/pull/8331>`_ A new ``discard_regex`` option to AWS module configuration is added.
+- `#8331 <https://github.com/wazuh/wazuh/pull/8331>`_ A new ``discard_regex`` option  is added to AWS module configuration.
 - `#8482 <https://github.com/wazuh/wazuh/pull/8482>`_ Wazuh adds support for the S3 Server Access bucket type in the AWS module.
 - `#9119 <https://github.com/wazuh/wazuh/pull/9119>`_ Wazuh adds support for Google Cloud Storage buckets using a new GCP module called ``gcp-bucket``.
 - `#9119 <https://github.com/wazuh/wazuh/pull/9119>`_ Wazuh adds support for Google Cloud Storage access logs to the ``gcp-bucket`` module.
@@ -227,9 +227,9 @@ RESTful API
 - `#9371 <https://github.com/wazuh/wazuh/pull/9371>`_ The JWT implementation by replacing HS256 signing algorithm with RS256 is improved.
 - `#10009 <https://github.com/wazuh/wazuh/pull/10009>`_ The limit of agents to upgrade using the API upgrade endpoints is removed.
 - `#10158 <https://github.com/wazuh/wazuh/pull/10158>`_ The Windows agent's FIM responses are changed to return permissions as JSON.
-- `#10389 <https://github.com/wazuh/wazuh/pull/10389>`_ The API endpoints is adapted to changes in ``wazuh-authd`` daemon ``force`` parameter.
-- `#10512 <https://github.com/wazuh/wazuh/pull/10512>`_ The ``use_only_authd`` API configuration option and related functionality is deprecated. ``wazuh-authd`` will always be required for creating and removing agents.
-- `#10745 <https://github.com/wazuh/wazuh/pull/10745>`_ The API validators and related unit tests is improved.
+- `#10389 <https://github.com/wazuh/wazuh/pull/10389>`_ The API endpoints are adapted to changes in ``wazuh-authd`` daemon ``force`` parameter.
+- `#10512 <https://github.com/wazuh/wazuh/pull/10512>`_ The ``use_only_authd`` API configuration option and related functionality are deprecated. ``wazuh-authd`` will always be required for creating and removing agents.
+- `#10745 <https://github.com/wazuh/wazuh/pull/10745>`_ The API validators and related unit tests are improved.
 - `#10905 <https://github.com/wazuh/wazuh/pull/10905>`_ The specific module healthchecks in API integration tests environment is improved.
 - `#10916 <https://github.com/wazuh/wazuh/pull/10916>`_ The thread pool executors for process pool executors to improve API availability is changed.
 - `#8599 <https://github.com/wazuh/wazuh/pull/8599>`_ The select parameter from GET /agents/stats/distinct endpoint is removed.
@@ -241,12 +241,12 @@ RESTful API
 Ruleset
 ^^^^^^^
 
-- `#10428 <https://github.com/wazuh/wazuh/pull/10428>`_ The Rules and Decoders for Wazuh API are added.
-- `#10458 <https://github.com/wazuh/wazuh/pull/10458>`_ Rules and Decoders for TrendMicro Cloud One are added.
-- `#10496 <https://github.com/wazuh/wazuh/pull/10496>`_ Rules for Sophos UTM Firewall are added.
+- `#10428 <https://github.com/wazuh/wazuh/pull/10428>`_ The Rules and Decoders are added for Wazuh API.
+- `#10458 <https://github.com/wazuh/wazuh/pull/10458>`_ Rules and Decoders are added for TrendMicro Cloud One.
+- `#10496 <https://github.com/wazuh/wazuh/pull/10496>`_ Rules are added for Sophos UTM Firewall.
 - `#10369 <https://github.com/wazuh/wazuh/pull/10369>`_ SCA policy for Solaris 11.4 is added.
-- `#10658 <https://github.com/wazuh/wazuh/pull/10658>`_ Rules for Cloudflare WAF are added.
-- `#10667 <https://github.com/wazuh/wazuh/pull/10667>`_ Rules and Decoders for FortiAuth are added.
+- `#10658 <https://github.com/wazuh/wazuh/pull/10658>`_ Rules are added for Cloudflare WAF.
+- `#10667 <https://github.com/wazuh/wazuh/pull/10667>`_ Rules and Decoders are added for FortiAuth.
 - `#10315 <https://github.com/wazuh/wazuh/pull/10315>`_ Amazon Linux 2 SCA is updated up to version 2.0.0.
 - `#10354 <https://github.com/wazuh/wazuh/pull/10354>`_ RedHat Enterprise Linux 8 SCA is updated up to version 1.0.1.
 - `#10507 <https://github.com/wazuh/wazuh/pull/10507>`_ Amazon rules are updated to add more granularity.
@@ -256,23 +256,23 @@ Ruleset
 Wazuh Kibana plugin
 ^^^^^^^^^^^^^^^^^^^
 
-- `#3639 <https://github.com/wazuh/wazuh-kibana-app/pull/3639>`_ Wazuh adds the ability to filter the results fo the ``Network Ports`` table in the ``Inventory data`` section.
+- `#3639 <https://github.com/wazuh/wazuh-kibana-app/pull/3639>`_ Wazuh adds the ability to filter the results for the ``Network Ports`` table in the ``Inventory data`` section.
 - `#3324 <https://github.com/wazuh/wazuh-kibana-app/pull/3324>`_ A new endpoint service is added to collect the frontend logs into a file.
 - `#3262 <https://github.com/wazuh/wazuh-kibana-app/issues/3262>`_ `#3327 <https://github.com/wazuh/wazuh-kibana-app/pull/3327>`_ `#3321 <https://github.com/wazuh/wazuh-kibana-app/pull/3321>`_ `#3367 <https://github.com/wazuh/wazuh-kibana-app/pull/3367>`_ `#3373 <https://github.com/wazuh/wazuh-kibana-app/pull/3373>`_  The frontend handle errors strategy is improved: UI, Toasts, console log, and log in file.
 - `#3196 <https://github.com/wazuh/wazuh-kibana-app/pull/3196>`_ Fields status and type are added in vulnerabilities table.
 - `#3368 <https://github.com/wazuh/wazuh-kibana-app/pull/3368>`_ `#3344 <https://github.com/wazuh/wazuh-kibana-app/pull/3344>`_ Intelligence tab is added to Mitre Att&ck module.
-- `#3424 <https://github.com/wazuh/wazuh-kibana-app/pull/3424>`_ Sample data for office365 events is added.
+- `#3424 <https://github.com/wazuh/wazuh-kibana-app/pull/3424>`_ Sample data for office365 events are added.
 - `#3475 <https://github.com/wazuh/wazuh-kibana-app/pull/3475>`_ A separate component to check for sample data is created.
 - `#3506 <https://github.com/wazuh/wazuh-kibana-app/pull/3506>`_ A new hook for getting value suggestions is added.
-- `#3531 <https://github.com/wazuh/wazuh-kibana-app/pull/3531>`_ Dinamic simple filters and simple GitHub filters fields are added.
+- `#3531 <https://github.com/wazuh/wazuh-kibana-app/pull/3531>`_ Dynamic simple filters and simple GitHub filters fields are added.
 - `#3524 <https://github.com/wazuh/wazuh-kibana-app/pull/3524>`_ Configuration viewer for Module Office365 is added on the Configuration section of the Management menu.
 - `#3518 <https://github.com/wazuh/wazuh-kibana-app/pull/3518>`_ Base Module Panel view with Office365 setup is added.
 - `#3533 <https://github.com/wazuh/wazuh-kibana-app/pull/3533>`_ Specifics and custom filters for Office365 search bar are added.
-- `#3544 <https://github.com/wazuh/wazuh-kibana-app/pull/3544>`_ Pagination and filter are added to drilldown tables at Office pannel.
+- `#3544 <https://github.com/wazuh/wazuh-kibana-app/pull/3544>`_ Pagination and filter are added to drilldown tables at the Office pannel.
 - `#3568 <https://github.com/wazuh/wazuh-kibana-app/pull/3568>`_ Simple filters change between panel and drilldown panel.
-- `#3525 <https://github.com/wazuh/wazuh-kibana-app/pull/3525>`_ New fields in Inventory table and Flyout Details are added.
-- `#3691 <https://github.com/wazuh/wazuh-kibana-app/pull/3691>`_ Columns selector in agents table are added.
-- `#3742 <https://github.com/wazuh/wazuh-kibana-app/pull/3742>`_ A new workflow for create wazuh packages is added.
+- `#3525 <https://github.com/wazuh/wazuh-kibana-app/pull/3525>`_ New fields are added in the Inventory table and Flyout Details.
+- `#3691 <https://github.com/wazuh/wazuh-kibana-app/pull/3691>`_ Columns selector are added in agents table.
+- `#3742 <https://github.com/wazuh/wazuh-kibana-app/pull/3742>`_ A new workflow is added for creating wazuh packages.
 - `#3121 <https://github.com/wazuh/wazuh-kibana-app/pull/3121>`_ Ossec to wazuh is changed in all sample-data files.
 - `#3279 <https://github.com/wazuh/wazuh-kibana-app/pull/3279>`_ Empty fields are modified in FIM tables and ``syscheck.value_name`` in discovery now shows an empty tag for visual clarity.
 - `#3346 <https://github.com/wazuh/wazuh-kibana-app/pull/3346>`_ The Mitre tactics and techniques resources are adapted to use the API endpoints.
@@ -318,7 +318,7 @@ Reference                                                         Description
 `#8254 <https://github.com/wazuh/wazuh/pull/8254>`_               The remediation message for error code 6004 was updated.
 `#8157 <https://github.com/wazuh/wazuh/pull/8157>`_               A bug when deleting non-existing users or roles in the security SDK is now fixed.
 `#8418 <https://github.com/wazuh/wazuh/pull/8418>`_               A bug with ``agent.conf`` file permissions when creating an agent group is now fixed.
-`#8422 <https://github.com/wazuh/wazuh/pull/8422>`_               Wrong exceptions with wdb pagination mechanism is fixed.
+`#8422 <https://github.com/wazuh/wazuh/pull/8422>`_               Wrong exceptions with wdb pagination mechanism are fixed.
 `#8747 <https://github.com/wazuh/wazuh/pull/8747>`_               An error when loading some rules with the ``\`` character is fixed.
 `#9216 <https://github.com/wazuh/wazuh/pull/9216>`_               The ``WazuhDBQuery`` class is changed to properly close socket connections and prevent file descriptor leaks.
 `#10320 <https://github.com/wazuh/wazuh/pull/10320>`_             An error in the API configuration when using the ``agent_upgrade`` script is fixed.
@@ -379,7 +379,7 @@ Reference                                                         Description
 `#11207 <https://github.com/wazuh/wazuh/pull/11207>`_             The OS version reported by the agent on OpenSUSE Tumbleweed is fixed.
 `#11329 <https://github.com/wazuh/wazuh/pull/11329>`_             The Syscollector is prevented from truncating the open port inode numbers on Linux.
 `#11365 <https://github.com/wazuh/wazuh/pull/11365>`_             An agent auto-restart on configuration changes, when started via ``wazuh-control`` on a Systemd based Linux OS is fixed.
-`#10952 <https://github.com/wazuh/wazuh/pull/10952>`_             A bug in the AWS module resulting in unnecessary API calls when trying to obtain the different Account IDs for the bucket, is fixed.
+`#10952 <https://github.com/wazuh/wazuh/pull/10952>`_             A bug in the AWS module resulting in unnecessary API calls when trying to obtain the different Account IDs for the bucket is fixed.
 `#11194 <https://github.com/wazuh/wazuh/pull/11194>`_             The reparse option in the AWS VPCFlow integration is fixed.
 `#11278 <https://github.com/wazuh/wazuh/pull/11278>`_             Azure integration's configuration parsing to allow omitting optional parameters is fixed.
 `#11296 <https://github.com/wazuh/wazuh/pull/11296>`_             Azure Storage credentials validation bug is fixed.
@@ -396,7 +396,7 @@ Reference                                                         Description
 ==============================================================    =============
 `#8196 <https://github.com/wazuh/wazuh/pull/8196>`_               An inconsistency in RBAC resources for ``group:create``, ``decoders:update``, and ``rules:update`` actions are fixed.
 `#8378 <https://github.com/wazuh/wazuh/pull/8378>`_               The handling of an API error message occurring when Wazuh is started with a wrong ``ossec.conf`` is fixed. Now the execution continues and raises a warning.
-`#8548 <https://github.com/wazuh/wazuh/pull/8548>`_               A bug with ``sort`` parameter that caused a wrong response when sorting by several fields is fixed.
+`#8548 <https://github.com/wazuh/wazuh/pull/8548>`_               A bug with the ``sort`` parameter that caused a wrong response when sorting by several fields is fixed.
 `#8597 <https://github.com/wazuh/wazuh/pull/8597>`_               The description of ``force_time`` parameter in the API spec reference is fixed.
 `#8537 <https://github.com/wazuh/wazuh/pull/8537>`_               API incorrect path in remediation message when a maximum number of requests per minute is reached is fixed.
 `#9071 <https://github.com/wazuh/wazuh/pull/9071>`_               Agents' healthcheck error in the API integration test environment is fixed.
@@ -470,15 +470,15 @@ Reference                                                         Description
 `#3688 <https://github.com/wazuh/wazuh-kibana-app/pull/3688>`_    The breadcrumbs style compatibility for Kibana 7.14.2 is fixed.
 `#3682 <https://github.com/wazuh/wazuh-kibana-app/pull/3682>`_    The security alerts table when filters change is fixed.
 `#3692 <https://github.com/wazuh/wazuh-kibana-app/pull/3692>`_    An error that shows we're using X-Pack when we have Basic is fixed.
-`#3700 <https://github.com/wazuh/wazuh-kibana-app/pull/3700>`_    Blank screen in Kibana 7.10.2 is fixed.
+`#3700 <https://github.com/wazuh/wazuh-kibana-app/pull/3700>`_    The blank screen in Kibana 7.10.2 is fixed.
 `#3704 <https://github.com/wazuh/wazuh-kibana-app/pull/3704>`_    Related decoders file link errors when one clicked on it are fixed.
 `#3708 <https://github.com/wazuh/wazuh-kibana-app/pull/3708>`_    Flyouts in Kibana 7.14.2 are fixed.
 `#3707 <https://github.com/wazuh/wazuh-kibana-app/pull/3707>`_    The bug of index patterns in health-check due to a bad copy of a PR is fixed.
 `#3733 <https://github.com/wazuh/wazuh-kibana-app/pull/3733>`_    Styles and behavior of button filter in the flyout of ``Inventory`` section for ``Integrity monitoring`` and ``Vulnerabilities`` modules are fixed.
-`#3733 <https://github.com/wazuh/wazuh-kibana-app/pull/3733>`_    Height of ``Evolution`` card in the ``Agents`` section when has no data for the selected time range is fixed.
+`#3733 <https://github.com/wazuh/wazuh-kibana-app/pull/3733>`_    The height of ``Evolution`` card in the ``Agents`` section when has no data for the selected time range is fixed.
 `#3722 <https://github.com/wazuh/wazuh-kibana-app/pull/3722>`_    The clearing of the query filter that doesn't update the data in Office 365 and GitHub Panel tab is updated.
 `#3710 <https://github.com/wazuh/wazuh-kibana-app/pull/3710>`_    Wrong daemons in the filter list are fixed.
-`#3724 <https://github.com/wazuh/wazuh-kibana-app/pull/3724>`_    A bug when creating filename with spaces that throws a bad error is fixed.
+`#3724 <https://github.com/wazuh/wazuh-kibana-app/pull/3724>`_    A bug when creating a filename with spaces that throws a bad error is fixed.
 `#3731 <https://github.com/wazuh/wazuh-kibana-app/pull/3731>`_    A bug in security User flyout nonexistent unsubmitted changes warning is fixed.
 `#3732 <https://github.com/wazuh/wazuh-kibana-app/pull/3732>`_    The redirect to a new tab when clicking on a link is fixed.
 `#3737 <https://github.com/wazuh/wazuh-kibana-app/pull/3737>`_    Missing settings in ``Management/Configuration/Global configuration/Global/Main settings`` is fixed.
