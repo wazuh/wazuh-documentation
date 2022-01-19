@@ -11,33 +11,16 @@ Using Wazuh to monitor Microsoft Azure
 
 .. versionadded:: 3.7.0
 
-This section provides instructions for monitoring **Microsoft Azure** infrastructures, such as:
+As a built-in Wazuh feature, it is possible to analyze and trigger alerts from Microsoft Azure log data. Wazuh helps to increase the security of an Azure infrastructure in three different, complementary ways:
 
-- How to **monitor all the activity happening in the infrastructure**, for instance, changes that occur in virtual machines, activation of alerts, health data information as well as control data.
-- How to install Wazuh agents to **monitor the virtual machines that form the infrastructure**, which will send events to the Wazuh manager for analysis in order to classify the event with a range of alerts that can be easily viewed.
-- How to monitor services of our infrastructure such as **Azure Active Directory (AAD)**.
-
-From a wider perspective, the Microsoft Azure infrastructure resources can be divided into two types of logs, the **Activity logs** and the **Diagnostic logs**.
-
-.. image:: ../images/azure/Resources.png
-    :align: center
-
-The operations performed on a resource outside of the infrastructure are stored in the Activity logs, providing information on those operations. On the other hand, the data referring to the operation of a resource is stored in the Diagnostic logs.
-
-Wazuh has the ability to obtain and read Microsoft Azure logs through:
-
-- **Azure Log Analytics**
-- **Azure Active Directory Graph**
-- **Azure Storage**
-
-As a built-in Wazuh feature, now you can search, analyze and trigger alerts from Microsoft Azure log data.
+- **Monitoring instances** by installing the Wazuh agent on them. This will send events to the Wazuh manager for analysis in order to classify the events within a range of alerts that can be easily viewed.
+- **Monitoring the Azure Portal and its services**, including platform logs from Azure services, logs, and performance data from virtual machines and usage and performance data from the applications.
+- **Monitoring the Azure Active Directory (Azure AD) activity** to discover how the Azure AD services are accessed and used.
 
 .. topic:: Contents
 
     .. toctree::
        :maxdepth: 2
 
-       dependencies
        monitoring-instances
-       monitoring-activity
-       monitoring-services
+       activity-services/index
