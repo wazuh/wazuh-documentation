@@ -685,14 +685,14 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
     6. Decompress the repository on the Windows machine, run the `wazuh-installer-build-msi.bat` script from the `win32` folder.
 
-     .. code-block:: console
+     .. code-block:: powershell
 
       cd wazuh-|WAZUH_LATEST|\src\win32
       .\wazuh-installer-build-msi.bat
 
     If you do not want to sign the installer, you will have to comment or delete the signtool line in the previous script.
 
-     .. code-block:: console
+     .. code-block:: powershell
 
       :: signtool sign /a /tr http://rfc3161timestamp.globalsign.com/advanced /d "%MSI_NAME%" /td SHA256 "%MSI_NAME%"
 
