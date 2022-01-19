@@ -1,9 +1,6 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2015-2022 Wazuh, Inc.
 
-.. meta:: :description: Elasticsearch is a highly scalable full-text search engine. Install  Elasticsearch in a single-node or multi-node configuration according to your environment needs. 
-
-
-.. _wazuh_indexer_step_by_step:
+.. meta:: :description: Wazuh indexer is a highly scalable full-text search engine. Install  Wazuh indexer in a single-node or multi-node configuration according to your environment needs. 
 
 
 Installing the Wazuh indexer in step-by-step mode
@@ -40,65 +37,60 @@ Adding the Wazuh repository
 
 
   .. tabs::
-  
-  
+
+
     .. group-tab:: Yum
-  
-  
-      .. include:: ../../_templates/installations/wazuh/yum/add_repository_elastic_cluster.rst
-  
-  
-  
+
+
+      .. include:: /_templates/installations/indexer/yum/add_repository.rst
+
+
+
     .. group-tab:: APT
-  
-  
-      .. include:: ../../_templates/installations/wazuh/deb/add_repository_elastic_cluster.rst
-  
-  
-  
+
+
+      .. include:: /_templates/installations/indexer/deb/add_repository.rst
+
+
+
     .. group-tab:: ZYpp
-  
-  
-      .. include:: ../../_templates/installations/wazuh/zypp/add_repository_elastic_cluster.rst
+
+
+      .. include:: /_templates/installations/indexer/zypp/add_repository.rst
+
 
 
 
 Installing the Wazuh indexer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Install Open Distro for Elasticsearch.
-
-  .. include:: ../../_templates/installations/elastic/common/install_elastic.rst
+  .. include:: /_templates/installations/indexer/common/install-indexer.rst
 
 Configuring the Wazuh indexer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
 
-  .. include:: ../../_templates/installations/elastic/common/elastic-multi-node/configure_elasticsearch_initial.rst
+  .. include:: /_templates/installations/indexer/common/configure_indexer_initial.rst
 
 Adding Wazuh indexer roles and users
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Add new users and roles in the Wazuh indexer. 
-
+..
   .. include:: ../../_templates/installations/elastic/common/add_roles_and_users.rst
 
 Creating and deploying certificates
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Create and deploy SSL certificates to encrypt communications between the Wazuh central components. 
-
 #. Remove the demo certificates.
 
-    .. include:: ../../_templates/installations/elastic/common/remove_demo_certs.rst
+    .. include:: /_templates/installations/indexer/common/remove_demo_certs.rst
 
-#. Generate and deploy the certificates.
+#. Generate and deploy the SSL certificates to encrypt communications between the Wazuh central components.
 
-    .. include:: ../../_templates/installations/elastic/common/elastic-multi-node/generate_certificates.rst
+    .. include:: /_templates/installations/indexer/common/generate_certificates.rst
 
      
 #. Enable and start the Wazuh indexer service.
 
-        .. include:: ../../_templates/installations/elastic/common/enable_elasticsearch.rst
+        .. include:: /_templates/installations/indexer/common/enable_indexer.rst
 
  
 You now have installed and configured the initial Wazuh indexer node. 
