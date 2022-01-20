@@ -18,7 +18,7 @@ Installing dependencies
 Python
 ------
 
-The AWS S3 integration requires python 3. It is compatible with python versions from `3.6.0` to `3.9.5`. Future python releases should maintain compatibility although it cannot be guaranteed.
+The AWS module requires Python 3.9. Future Python releases should maintain compatibility although it cannot be guaranteed.
 
 a) For CentOS/RHEL/Fedora operating systems:
 

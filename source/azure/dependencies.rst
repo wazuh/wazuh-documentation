@@ -17,7 +17,7 @@ Installing dependencies
 Python
 ------
 
-The Azure monitoring module requires python 3. It is compatible with python versions from `3.6.0` to `3.9.5`. Future python releases should maintain compatibility although it cannot be guaranteed.
+The Azure module requires Python 3.9. Future Python releases should maintain compatibility although it cannot be guaranteed.
 
 a) For CentOS/RHEL/Fedora operating systems:
 
