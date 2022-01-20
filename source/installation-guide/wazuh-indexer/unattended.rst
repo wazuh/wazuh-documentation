@@ -5,7 +5,7 @@
 Installing the Wazuh indexer in unattended mode
 ===============================================
 
-Install and configure the Wazuh indexer, a highly scalable full-text search engine. It offers advanced security, alerting, index management, deep performance analysis, and several other features.
+Install and configure the Wazuh indexer using the Wazuh installer. Wazuh indexer is a highly scalable full-text search engine and offers advanced security, alerting, index management, deep performance analysis, and several other features.
 
 
 Wazuh indexer cluster installation

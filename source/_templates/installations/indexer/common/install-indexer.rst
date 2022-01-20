@@ -1,27 +1,29 @@
 .. Copyright (C) 2015-2022 Wazuh, Inc.
 
-.. tabs::
+#. Install the Wazuh indexer package.
 
-    .. group-tab:: Yum
+    .. tabs::
 
-            .. code-block:: console
+        .. group-tab:: Yum
 
-                # yum install -y wazuh-indexer
+                .. code-block:: console
 
-
-
-    .. group-tab:: APT
-
-            .. code-block:: console
-
-                # apt install wazuh-indexer
+                    # yum install -y wazuh-indexer
 
 
 
-    .. group-tab:: ZYpp
+        .. group-tab:: APT
 
-            .. code-block:: console
+                .. code-block:: console
 
-                # zypper install wazuh-indexer
+                    # apt install wazuh-indexer
+
+
+
+        .. group-tab:: ZYpp
+
+                .. code-block:: console
+
+                    # zypper install wazuh-indexer
 
 .. End of include file
