@@ -176,8 +176,11 @@ body {
       }
     }
     .toctree-l1 {
-      &.show > a {
-        background-color: $light_ColorGlobalTocHighlight;
+      &.show {
+        background-color: rgba($light_ColorBaseSpace, .3);
+        > a {
+          background-color: $light_ColorGlobalTocHighlight;
+        }
       }
       > ul {
         border-left-color: $light_ColorPrimary;
@@ -214,8 +217,11 @@ body {
       }
     }
     .toctree-l1 {
-      &.show > a {
-        background-color: rgba($dark_ColorGlobalTocHighlight, .1);
+      &.show {
+        background-color: rgba($dark_ColorBaseSpace, .3);
+        > a {
+          background-color: rgba($dark_ColorGlobalTocHighlight, .1);
+        }
       }
       > ul {
         border-left-color: $dark_ColorPrimary;
