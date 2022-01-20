@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Check out the Wazuh documentation to learn how to deploy Wazuh with Ansible, an open source platform designed for automating tasks.

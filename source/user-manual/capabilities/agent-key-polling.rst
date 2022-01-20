@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Find out more about agent key polling, the Wazuh module that allows you to fetch keys stored in an external database.
@@ -7,8 +7,6 @@
 
 Agent key polling
 =================
-
-.. versionadded:: 3.8.0
 
 Wazuh module that allows fetching the keys stored on an external database.
 
@@ -139,7 +137,7 @@ On success example:
 
 **address**
 
-    Allowed source address range in CIDR format. If specified, the manager will only accept the agent if its source IP matches this address.
+    Allowed source address range in CIDR format. If specified, the manager will only accept the agent if its source IP address matches this address.
 
     +--------------------+----------------------------+
     | Format             | CIDR. Netmask is optional. |

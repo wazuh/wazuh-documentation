@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. _reference_wazuh_manager_class:
 
@@ -204,7 +204,7 @@ $ossec_remote_protocol
   `Default tcp`
 
 $ossec_remote_local_ip
-  Local ip address to use to listen for connections.
+  Local IP address to use to listen for connections.
 
   `Default undef`
 
@@ -461,7 +461,7 @@ $syslog_output_port
   `Default 514`
 
 $syslog_output_server
-  The IP Address of the syslog server.
+  The IP address of the syslog server.
 
   `Default undef`
 
@@ -599,7 +599,7 @@ Wazuh API variables
 -------------------
 
 $wazuh_api_host
-  IP or hostname of the Wazuh manager where the Wazuh API is running.
+  IP address or hostname of the Wazuh manager where the Wazuh API is running.
 
   `Default 0.0.0.0`
 
@@ -679,7 +679,7 @@ $wazuh_api_access_max_login_attempts
   `Default 5`
 
 $wazuh_api_access_block_time
-  Established period of time (in seconds) to attempt login requests. If the established number of requests (`max_login_attempts`) is exceeded within this time limit, the IP is blocked until the end of the block time period.
+  Established period of time (in seconds) to attempt login requests. If the established number of requests (`max_login_attempts`) is exceeded within this time limit, the IP address is blocked until the end of the block time period.
 
   `Default 300`
 

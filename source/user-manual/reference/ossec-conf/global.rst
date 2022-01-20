@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: The ossec.conf file is the main configuration file on the Wazuh manager and plays an important role on the agents. Learn more about the global configuration here. 
@@ -391,8 +391,6 @@ For example:
 rotate_interval
 ^^^^^^^^^^^^^^^
 
-.. versionadded:: 3.1.0
-
 This option sets the interval between file rotation. The range of possible values is from ``10m`` (10 minutes) to ``1d`` (1 day).
 
 +-------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
@@ -414,8 +412,6 @@ Example:
 max_output_size
 ^^^^^^^^^^^^^^^
 
-.. versionadded:: 3.1.0
-
 This sets the size limit of alert files with a maximum allowed value of 1TiB and a minimum allowed value of 1MiB.
 
 +-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
@@ -432,8 +428,6 @@ Example:
 
 queue_size
 ^^^^^^^^^^
-
-.. versionadded:: 3.3.0
 
 This sets the size of the message input buffer in Analysisd (number of events).
 

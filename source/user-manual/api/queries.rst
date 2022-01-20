@@ -1,11 +1,9 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. _queries:
 
 Filtering data using queries
 ============================
-
-.. versionadded:: 3.7.0
 
 Advance filtering is possible using the Wazuh API's queries. Queries are specified using the ``q`` parameter. A query has the following structure:
 

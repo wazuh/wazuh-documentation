@@ -1,11 +1,9 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. _wodle_docker:
 
 wodle name="docker-listener"
 ============================
-
-.. versionadded:: 3.7.0
 
 .. topic:: XML section name
 

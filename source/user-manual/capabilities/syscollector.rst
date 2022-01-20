@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: The Wazuh Syscollector module is in charge of collecting system information and storing it into an SQLite database for each agent on the manager side.
@@ -48,8 +48,6 @@ At present, this module is available for Linux, Windows, MacOS, OpenBS and FreeB
 Hardware
 ^^^^^^^^
 
-.. versionadded:: 3.2.0
-
 Retrieve basic information about the hardware components of a system.
 
 +------------------+---------------------------------+-------------------------------------------+-------------------+
@@ -80,8 +78,6 @@ Retrieve basic information about the hardware components of a system.
 
 Operating system
 ^^^^^^^^^^^^^^^^
-
-.. versionadded:: 3.2.0
 
 Retrieve basic information about the operating system.
 
@@ -132,8 +128,6 @@ Retrieve basic information about the operating system.
 Packages
 ^^^^^^^^
 
-.. versionadded:: 3.2.0
-
 The current packages inventory of each Wazuh agent. On Linux systems, retrieved packages can be `deb`, `pacman` or `rpm` types.
 
 +------------------+----------------------------------------+---------------------------------------------------+--------------------+
@@ -178,8 +172,6 @@ The current packages inventory of each Wazuh agent. On Linux systems, retrieved 
 
 Network interfaces
 ^^^^^^^^^^^^^^^^^^
-
-.. versionadded:: 3.5.0
 
 The network interfaces scan retrieves information about the existing network interface of a system (up and down interfaces) as well as their routing configuration,
 it is composed of three tables to ensure that the information is as structured as possible.
@@ -286,8 +278,6 @@ Referencing interfaces described at `sys_netiface`, this table shows the routing
 Ports
 ^^^^^
 
-.. versionadded:: 3.5.0
-
 List the opened ports of a system.
 
 +------------------+----------------------------------------+---------------------------------------------------+-------------------+
@@ -299,11 +289,11 @@ List the opened ports of a system.
 +------------------+----------------------------------------+---------------------------------------------------+-------------------+
 | **protocol**     | Protocol of the port                   | tcp                                               | All               |
 +------------------+----------------------------------------+---------------------------------------------------+-------------------+
-| **local_ip**     | Local IP                               | 0.0.0.0                                           | All               |
+| **local_ip**     | Local IP address                       | 0.0.0.0                                           | All               |
 +------------------+----------------------------------------+---------------------------------------------------+-------------------+
 | **local_port**   | Local port                             | 22                                                | All               |
 +------------------+----------------------------------------+---------------------------------------------------+-------------------+
-| **remote_ip**    | Remote IP                              | 0.0.0.0                                           | All               |
+| **remote_ip**    | Remote IP address                      | 0.0.0.0                                           | All               |
 +------------------+----------------------------------------+---------------------------------------------------+-------------------+
 | **remote_port**  | Remote port                            | 0                                                 | All               |
 +------------------+----------------------------------------+---------------------------------------------------+-------------------+
@@ -328,8 +318,6 @@ List the opened ports of a system.
 
 Processes
 ^^^^^^^^^
-
-.. versionadded:: 3.5.0
 
 List the current processes running in a system host.
 
@@ -403,8 +391,6 @@ List the current processes running in a system host.
 
 Windows updates
 ^^^^^^^^^^^^^^^
-
-.. versionadded:: 3.11.0
 
 List the Windows updates installed on Windows agents, also known as hotfixes. They are used as feed for the Vulnerability detector to find out Windows vulnerabilities.
 

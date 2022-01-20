@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 .. meta::
   :description: Learn more about Kubernetes configuration for Wazuh: prerequisites, overview, how to verify the deployment, and more. 
 
@@ -287,8 +287,8 @@ Wazuh agents are designed to monitor hosts. To start using them:
 
 #. Register the agent following these steps:
 
-   -  Modify the file ``/var/ossec/etc/ossec.conf``, changing the "transport protocol" to *TCP* and replacing the ``MANAGER_IP`` with the external IP of the service pointing to port 1514 or with the DNS provided by *AWS Route 53* if you are using it.
+   -  Modify the file ``/var/ossec/etc/ossec.conf``, changing the "transport protocol" to *TCP* and replacing the ``MANAGER_IP`` with the external IP address of the service pointing to port 1514 or with the DNS provided by *AWS Route 53* if you are using it.
 
-   - Alternatively, use the `authd <https://documentation.wazuh.com/current/user-manual/reference/daemons/wazuh-authd.html?highlight=authd>`_ daemon with option *-m* specifying the external IP of the Wazuh service that takes to the port 1515, or its DNS if using *AWS Route 53*.
+   - Alternatively, use the `authd <https://documentation.wazuh.com/current/user-manual/reference/daemons/wazuh-authd.html?highlight=authd>`_ daemon with option *-m* specifying the external IP address of the Wazuh service that takes to the port 1515, or its DNS if using *AWS Route 53*.
 
 To learn more about registering agents, see the :ref:`Registering Wazuh agents <register_agents>` section of the documentation.

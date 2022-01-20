@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: The Wazuh module for AWS provides capabilities to monitor AWS based services. See more about how to configure CloudWatch Logs and some practical use cases.

@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 .. meta::
   :description: The Wazuh GCP Pub/Sub module allows you to pull log data from Google Pub/Sub. Learn more about how to configure the module in this section.
 
@@ -6,8 +6,6 @@
 
 gcp-pubsub
 ==========
-
-.. versionadded:: 3.13.0
 
 .. topic:: XML section name
 

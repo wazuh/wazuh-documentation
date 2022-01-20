@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: CBD lists are used to create a white/black list of users, file hashes, IPs, or domain names. Learn more about how to create CBD lists with Wazuh. 
@@ -8,7 +8,7 @@
 Using CDB lists
 ===============
 
-Wazuh is able to check if a field extracted during the decoding phase is in a CDB list (constant database). The main use case of this feature is to create a white/black list of users, file hashes, IPs or domain names.
+Wazuh is able to check if a field extracted during the decoding phase is in a CDB list (constant database). The main use case of this feature is to create a white/black list of users, file hashes, IP addresses or domain names.
 
 Creating a CDB list
 -------------------
@@ -44,8 +44,6 @@ Example of IP address list file::
     10.1.1.1: Matches 10.1.1.1
 
 We recommend to store the lists on ``/var/ossec/etc/lists``.
-
-.. versionadded:: 3.11.0
 
 Since Wazuh v3.11.0, CDB lists are built and loaded automatically when the analysis engine is started. Therefore, when adding or modifying CDB lists just restart the manager.
 
@@ -162,4 +160,4 @@ CDB lists examples
     <group>list1,list2,</group>
   </rule>
 
-In this example, the described rules check if an IP is in the *List-one*, in the *List-two* or in both.
+In this example, the described rules check if an IP address is in the *List-one*, in the *List-two* or in both.

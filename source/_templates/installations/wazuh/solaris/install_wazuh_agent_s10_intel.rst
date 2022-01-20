@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 #. Download the `Wazuh agent for Solaris 10 i386 <https://packages.wazuh.com/4.x/solaris/i386/10/wazuh-agent_v4.2.5-sol10-i386.pkg>`_ package. 
 

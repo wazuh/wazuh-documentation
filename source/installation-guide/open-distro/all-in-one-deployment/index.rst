@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Find out in this section how to install Wazuh and OpenDistro components for Elasticsearch on the same host, following an all-in-one deployment process.

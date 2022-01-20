@@ -69,6 +69,18 @@ newUrls['4.3'] = [
   '/office365/monitoring-office365-activity.html',
   '/user-manual/reference/ossec-conf/office365-module.html',
   '/user-manual/capabilities/log-data-collection/how-to-collect-macoslogs.html',
+  '/azure/activity-services/index.html',
+  '/azure/activity-services/active-directory/index.html',
+  '/azure/activity-services/active-directory/graph.html',
+  '/azure/activity-services/active-directory/graph.html',
+  '/azure/activity-services/prerequisites/dependencies.html',
+  '/azure/activity-services/active-directory/index.html',
+  '/azure/activity-services/prerequisites/considerations.html',
+  '/azure/activity-services/prerequisites/credentials.html',
+  '/azure/activity-services/prerequisites/index.html',
+  '/azure/activity-services/services/index.html',
+  '/azure/activity-services/services/log-analytics.html',
+  '/azure/activity-services/services/storage.html',
   '/user-manual/reference/ossec-conf/gcp-bucket.html',
   '/gcp/supported-services/access_logs.html',
   '/gcp/supported-services/cloud_audit_logs.html',
@@ -80,11 +92,37 @@ newUrls['4.3'] = [
   '/amazon/services/supported-services/ecr-image-scanning.html',
 ];
 
+removedUrls['4.3'] = [
+  '/azure/monitoring-activity.html',
+  '/azure/monitoring-services.html',
+  '/azure/dependencies.html',
+];
+
+
+redirections.push(
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': 'azure/monitoring-activity.html',
+    '4.3': 'azure/activity-services/index.html',
+  },
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': 'azure/monitoring-services.html',
+    '4.3': 'azure/activity-services/index.html',
+  },
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': 'azure/dependencies.html',
+    '4.3': 'azure/activity-services/prerequisites/dependencies.html',
+  },
+);
+
 /* *** RELEASE 4.2 ****/
 
 /* Pages added in 4.2 */
 
 newUrls['4.2'] = [
+  '/azure/dependencies.html',
   '/proof-of-concept-guide/detect-malware-yara-integration.html',
   '/proof-of-concept-guide/poc-vulnerability-detection.html',
   '/proof-of-concept-guide/detect-remove-malware-virustotal.html',
@@ -104,7 +142,6 @@ newUrls['4.2'] = [
   '/proof-of-concept-guide/index.html',
   '/deploying-with-ansible/guide/install-opendistro-server.html',
   '/deploying-with-ansible/roles/wazuh-opendistro.rst',
-  '/release-notes/release-4-2-5.html',
   '/amazon-machine-images/amazon-machine-images.html',
   '/user-manual/capabilities/active-response/ar-use-cases/removing-malware.html',
   '/user-manual/capabilities/active-response/ar-use-cases/wazuh-with-yara.html',
@@ -254,6 +291,7 @@ newUrls['4.2'] = [
   '/release-notes/release-4-2-2.html',
   '/release-notes/release-4-2-3.html',
   '/release-notes/release-4-2-4.html',
+  '/release-notes/release-4-2-5.html',
   '/user-manual/api/securing-api.html',
   '/user-manual/configuring-cluster/cluster-management.html',
   '/user-manual/manager/manual-email-report/smtp-authentication.html',
@@ -268,6 +306,7 @@ newUrls['4.2'] = [
   '/user-manual/capabilities/vulnerability-detection/compatibility-matrix.html',
   '/user-manual/capabilities/vulnerability-detection/cpe-helper.html',
   '/user-manual/capabilities/vulnerability-detection/how-it-works.html',
+  '/user-manual/capabilities/file-integrity/fim-fields-rule-mapping.html',
   '/user-manual/reference/ossec-conf/rule-test.html',
   '/user-manual/reference/ossec-conf/client-buffer.html',
   '/user-manual/reference/ossec-conf/email-alerts.html',
@@ -402,8 +441,6 @@ removedUrls['4.2'] = [
   '/release-notes/release_4_1_3.html',
   '/release-notes/release_4_1_4.html',
   '/release-notes/release_4_1_5.html',
-  '/release-notes/release_4_2_0.html',
-  '/release-notes/release_4_2_1.html',
   '/user-manual/api/securing_api.html',
   '/user-manual/configuring-cluster/cluster_management.html',
   '/user-manual/manager/manual-email-report/smtp_authentication.html',
@@ -962,16 +999,6 @@ redirections.push(
       'target': ['4.1=>4.2', '4.2=>4.1'],
       '4.1': '/release-notes/release_4_1_5.html',
       '4.2': '/release-notes/release-4-1-5.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_4_2_0.html',
-      '4.2': '/release-notes/release-4-2-0.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_4_2_1.html',
-      '4.2': '/release-notes/release-4-2-1.html',
     },
     {
       'target': ['4.1=>4.2', '4.2=>4.1'],

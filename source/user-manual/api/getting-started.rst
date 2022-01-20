@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: This guide provides the basic information needed to get started with the Wazuh API, including some practical use cases. 
@@ -871,7 +871,7 @@ This enumerates 2 **active** agents:
     }
 
 
-Adding an agent is now easier than ever. Simply send a request with the agent name and its IP.
+Adding an agent is now easier than ever. Simply send a request with the agent name and its IP address.
 
 .. code-block:: console
 
