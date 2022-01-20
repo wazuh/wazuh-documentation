@@ -931,10 +931,12 @@ Steps to build and load the new SELinux policy module
 
         # mkdir selinux-wazuh && cd selinux-wazuh
 
-#. Create the files ``wazuhT.te`` and ``wazuhT.fc`` and compile the module.
+#. Download the ``wazuhT.te`` and ``wazuhT.fc`` files and compile the module.
 
     .. code-block:: console
 
+        # curl -sO https://raw.githubusercontent.com/wazuh/wazuh-documentation/|WAZUH_LATEST_MINOR|/resources/selinux/manager/wazuhT.fc
+        # curl -sO https://raw.githubusercontent.com/wazuh/wazuh-documentation/|WAZUH_LATEST_MINOR|/resources/selinux/manager/wazuhT.te
         # make -f /usr/share/selinux/devel/Makefile
 
 #. Install the new policy module.
