@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. _custom-active-response:
 
@@ -130,7 +130,7 @@ A stateful AR undoes its original action after the period of time specified in t
 
 .. note::
 
-    The *keys* are those fields extracted from the alert that the AR script uses to execute its action. They must be sufficient to identify an execution instance, for example, to block a specific host, for which case the IP is enough.
+    The *keys* are those fields extracted from the alert that the AR script uses to execute its action. They must be sufficient to identify an execution instance, for example, to block a specific host, for which case the IP address is enough.
 
 The control message format is as follows:
 
@@ -173,11 +173,11 @@ This section provides an example AR Python script which can be used as a templat
 
 It is possible to customize the behavior of the script by modifying 3 sections:
 
-- **Start/end custom key**: Select the necessary parameters to use from the alert. For example, select ``srcip`` to block the IP or ``processname`` to stop the process.
+- **Start/end custom key**: Select the necessary parameters to use from the alert. For example, select ``srcip`` to block the IP address or ``processname`` to stop the process.
 
 - **Start/end custom action Add**: Execute the main action. For example, call the system function: ``pkill <processname>``.
 
-- **Start/end custom action Delete**: Execute the secondary action, which is usually a recovery section after a time period. For example, wait a period of time to unblock an IP after the main action blocked it.
+- **Start/end custom action Delete**: Execute the secondary action, which is usually a recovery section after a time period. For example, wait a period of time to unblock an IP address after the main action blocked it.
 
 
 Stateless AR configuration
@@ -211,7 +211,7 @@ The following is a stateful AR in which the Python script creates a file contain
 .. code-block:: Python
 
         #!/usr/bin/python3
-        # Copyright (C) 2015-2021, Wazuh Inc.
+        # Copyright (C) 2015-2022, Wazuh Inc.
         # All rights reserved.
 
         # This program is free software; you can redistribute it

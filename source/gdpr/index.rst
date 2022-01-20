@@ -1,12 +1,12 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+  :description: Check out this section to learn more about how to use Wazuh for GDPR (The General Data Protection Regulation of the European Union). 
+  
 .. _gdpr:
 
 Using Wazuh for GDPR
 ====================
-
-.. meta::
-  :description: Learn about the GDPR compliance and how Wazuh helps you to implement it.
 
 The **General Data Protection Regulation** of the European Union (GDPR) has been drawn up in order to agree on data privacy legislation throughout Europe, focusing mainly on the protection of the data of all citizens of the European Union.
 

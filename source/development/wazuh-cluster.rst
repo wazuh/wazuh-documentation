@@ -1,19 +1,22 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
+
+.. meta::
+    :description: Learn more about how to deploy a Wazuh cluster: introduction, architecture overview, code structure and troubleshooting.
 
 .. _dev-wazuh-cluster:
 
-Wazuh Cluster
+Wazuh cluster
 =============
 
 - `Introduction`_
-- `Architecture Overview`_
+- `Architecture overview`_
 - `Code structure`_
 - `Troubleshooting`_
 
 Introduction
 ------------
 
-Recommended reading: :ref:`Wazuh Cluster <configuring-cluster>`.
+Recommended reading: :ref:`Deploying a Wazuh cluster <configuring-cluster>`.
 
 Today's environments usually have thousands of new agents every day. A single manager architecture is not capable of managing so many events and, in consequence, the workload needs to be balanced among multiple nodes. Therefore, horizontal scaling arises as the proper approach to balance the load for a large number of agents.
 
@@ -27,7 +30,7 @@ Wazuh's main workload is processing events from the agents and raise alerts. Thi
 
 Having all this information synchronized, any cluster node is capable of processing and raising alerts from the agents, making it possible to horizontally scale a Wazuh environment when new agents are added.
 
-Architecture Overview
+Architecture overview
 ---------------------
 
 The following diagram shows a typical Wazuh cluster architecture:
@@ -78,23 +81,46 @@ Workflow
 
 The image below shows a schema of how a master node and a worker node interact with each other in the synchronization process. Every dotted square represents a synchronization task and they all work in parallel:
 
-.. image:: ../images/manual/cluster/cluster_flow.png
-  :align: center
-  
-Keep alive
-~~~~~~~~~~
+.. thumbnail:: ../images/manual/cluster/cluster_flow.png
+    :title: Wazuh cluster workflow
+    :align: center
+
+Threads
+^^^^^^^
+The following tasks can be found in the cluster, depending on the type of node they are running on:
+
++--------------------------------+--------+
+| Thread name                    | Node   |
++================================+========+
+| Keep alive - Send to master    | Worker |
++--------------------------------+        |
+| Integrity sync                 |        |
++--------------------------------+        |
+| Agent info sync                |        |
++--------------------------------+--------+
+| Keep alive - Check workers     | Master |
++--------------------------------+        |
+| Local integrity                |        |
++--------------------------------+        |
+| Sendsync                       |        |
++--------------------------------+--------+
+| Distributed API                | Both   |
++--------------------------------+--------+
+
+Keep alive thread
+~~~~~~~~~~~~~~~~~
 
 The worker nodes send a keep-alive message to the master every so often. The master keeps the date of the last received keep alive and knows the interval the worker is using to send its keepalives. If the last keep alive received by a worker is older than a determined amount of time, the master considers the worker is disconnected and immediately closes the connection. When a worker realizes the connection has been closed, it automatically tries to reconnect again.
 
 This feature is very useful to drop nodes that are facing a network issue or aren't available at the moment.  It was implemented  `here <https://github.com/wazuh/wazuh/issues/1355>`_.
 
 
-Integrity Thread
+Integrity thread
 ~~~~~~~~~~~~~~~~
 
 This thread is in charge of synchronizing master's integrity information among all worker nodes. The communication is started by the worker node and it has the following stages:
 
-1. The worker asks the master for permission. This is important to prevent a new synchronization process to start if there is already one synchronization process at the moment (i.e. overlapping).
+1. The worker asks the master for permission. The permission will be granted only after any previous synchronization process is finished. This is important to prevent overlapping, where a new synchronization process starts while another one is still running. Synchronization processes taking too long are considered locked due to errors. Once the process is flagged as locked, new integrity synchronization permissions can be granted. The maximum time a synchronization process is allowed to run is 1000 seconds by default. This can be modified with the ``max_locked_integrity_time`` variable in the `cluster.json <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/framework/wazuh/core/cluster/cluster.json>`_ file.
 2. The worker sends the master a JSON file containing the following information:
 
     * Path
@@ -102,14 +128,14 @@ This thread is in charge of synchronizing master's integrity information among a
     * MD5 checksum
     * Whether the file is a merged file or not. And if it's merged:
     
-        * The merge type.
+        * The merge type
         * The filename
 
 3. The master compares the received checksums with its own and creates three different groups of files:
 
     * Missing: Files that are present in the master node but missing in the worker. They must be created in the worker.
     * Extra: Files that are present in the worker node but missing in the master. They must be removed in the worker node as well.
-    * Extra valid: Extra files that, instead of being removed in the worker, must be created in the master. This is a special type of file created for agent-groups files. These files can be created in worker nodes when an agent is re-registered and was previously assigned to a group.
+    * Extra valid: Extra files that, instead of being removed in the worker, must be created in the master. This is a special type of file created for agent-group files. These files can be created in worker nodes when an agent is re-registered and was previously assigned to a group.
     * Shared: Files that are present in both master and worker but have a different checksum. They must be updated in the worker node.
 
    Then the master prepares a zip package with a JSON containing all this information and the required files the worker needs to update.
@@ -118,10 +144,10 @@ This thread is in charge of synchronizing master's integrity information among a
 
 If there is no data to synchronize or there has been an error reading data from the worker, the worker is always notified about it.
 
-Agent info
-~~~~~~~~~~
+Agent info thread
+~~~~~~~~~~~~~~~~~
 
-This thread is in charge of synchronizing the agent's last keepalives and OS information with the master. The communication here is also started by the worker and it has the following stages:
+This thread is in charge of synchronizing the agent's last keepalives and operating system information with the master. The communication here is also started by the worker and it has the following stages:
 
 1. The worker asks the master for permission. This is important to prevent a new synchronization process to start if there is already one synchronization process at the moment.
 2. The worker asks to its local :ref:`wazuh-db <wazuh-db>` service for the information of agents marked as not synchronized.
@@ -130,32 +156,20 @@ This thread is in charge of synchronizing the agent's last keepalives and OS inf
 
 If there is an error during the update process of one of the chunks in the master's database, the worker is notified.
 
-File integrity thread
-~~~~~~~~~~~~~~~~~~~~~
+Local integrity thread
+~~~~~~~~~~~~~~~~~~~~~~
 
 This thread is only executed by the master. It periodically reads all its integrity files and calculates their checksums. Calculating a checksum is a slow process, and it can reduce performance when there are multiple workers in the cluster since the checksums would need to be calculated for every worker. To fix that problem, this thread calculates the necessary integrity checksums and stores it in a global variable which is periodically updated.
 
+Sendsync thread
+~~~~~~~~~~~~~~~
+
+Although not shown in the workflow schema above, Sendsync is another Wazuh cluster task. It is only executed on the master and allows redirection of messages coming from worker nodes to master services. For example, this process makes possible pointing to the IP address of a worker node when registering an agent. In this case, Sendsync takes the registration request from the worker node and redirects it to the master's Authd service.
+
 Distributed API thread
 ~~~~~~~~~~~~~~~~~~~~~~
-This thread isn't shown in the schema. It runs in both master and worker since it's independent of the node type. It's used to receive API requests and forward them to the most suitable node to process the request. The operation of this thread will be explained later.
 
-To sum up, these are the threads run in the cluster:
-
-+--------------------------------+--------------+
-| Name                           | Node running |
-+================================+==============+
-| Check worker's last keep alive | Master       |
-+--------------------------------+              |
-| Update file checksums          |              |
-+--------------------------------+--------------+
-| Sync integrity                 | Worker       |
-+--------------------------------+              |
-| Sync agent info                |              |
-+--------------------------------+              |
-| Send last keep alive to master |              |
-+--------------------------------+--------------+
-| Distributed API                | Both         |
-+--------------------------------+--------------+
+This thread isn't shown in the schema either. It runs in both master and worker since it's independent of the node type. It's used to receive API requests and forward them to the most suitable node to process the request. The operation of this thread will be explained later.
 
 Code structure
 --------------
@@ -343,21 +357,56 @@ As said before, all protocols are built from a common abstract base. This base d
 +---------------+-------------+--------------------+--------------------------------------------------------------------------+
 
 
+Cluster performance
+^^^^^^^^^^^^^^^^^^^
 Asynchronous tasks
-^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~
+Part of the magic behind the cluster performance is using asynchronous tasks. An asynchronous task is like a thread in Python, because it will be executed concurrently with the main task and other ones, but it is much more lightweight than a thread and it's faster to create. Asynchronous tasks take advantage of how slow I/O is to do its concurrent execution: while a task is waiting for some data to be fetched/sent from/to a socket, another one is executing. Imagine a chef who's cooking multiple meals at the same time to better picture the idea of "asynchronous" in your head.
 
-The magic behind the cluster performance is using asynchronous tasks. An asynchronous task is like a thread, because it will be executed in "parallel" with the main task and other ones, but it is much more lightweight than a thread and it's faster to create. Asynchronous tasks take advantage of how slow I/O is to do its "parallel" execution: while a task is waiting for some data to be fetched/sent from/to a socket, another one is executing. Imagine a chef who's cooking multiple meals at the same time to better picture the idea of "asynchronous" in your head.
-
-Each of the "threads" described in the `Workflow`_ section are implemented as asynchronous tasks. These tasks are started in ``wazuh.core.cluster.client.AbstractClientManager.start``, ``wazuh.core.cluster.server.AbstractServer.start`` and ``wazuh.core.cluster.local_server.LocalServer.start`` and they are all implemented using infinite loops.
+Each of the "threads" described in the `Workflow`_ section are implemented as asynchronous tasks. These tasks are started in ``wazuh.core.cluster.client.AbstractClientManager.start``, ``wazuh.core.cluster.server.AbstractServer.start``, and ``wazuh.core.cluster.local_server.LocalServer.start`` and they are all implemented using infinite loops.
 
 In addition to those already mentioned, there are more tasks that are created when a received request requires a complex process to be solved. These tasks are created to solve the received request and destroyed once the response has been sent. This type of architecture is necessary to prevent the server to be busy serving a single request.
 
-One of those tasks, which is defined as a class, is the task created to receive and process a file from the other peer. This class is instanciated when a synchronization process is started and it's destroyed once the synchronization process ends. It creates an asynchronous task that waits until the necessary files to do the synchronization process are received. This asynchronous task has a `callback <https://docs.python.org/3/library/asyncio-task.html#asyncio.Task.add_done_callback>`_ that checks if there was an error during the synchronization process.
+One of those tasks, which is defined as a class, is the task created to receive and process a file from the other peer. This class is instantiated when a synchronization process is started and it is destroyed once the synchronization process ends. It creates an asynchronous task that waits until the necessary files to do the synchronization process are received. This asynchronous task has a `callback <https://docs.python.org/3/library/asyncio-task.html#asyncio.Task.add_done_callback>`_ that checks if there was an error during the synchronization process.
 
 .. thumbnail:: ../images/development/receive_file_task_cluster.png
     :title: Receive file class inheritance
     :align: center
     :width: 80%
+
+Multiprocessing
+~~~~~~~~~~~~~~~
+.. versionadded:: 4.3.0
+
+While the use of asynchronous tasks is a good solution to optimize work and avoid waiting times for I/O, it is not a good solution to execute multiple tasks that require intensive use of CPU. The reason is the way in which Python works. Python allows a single thread to take control over the Python interpreter through the Global Interpreter Lock (GIL). Therefore, asynchronous tasks run concurrently and not in parallel. Following the analogy of the previous section, it is as if there is effectively only one chef who has to do all the tasks. The chef can only do one at a time so if one task requires all his/her attention, the other ones are delayed.
+
+The master node in the cluster is under a heavy workload, especially in large environments. Although the tasks are asynchronous, they have sections that require high CPU usage, such as calculating the hash of the files to be synchronized with the Local integrity thread. To avoid other tasks to wait for the Python interpreter to complete the CPU-bound parts, multiprocessing is used. Using the same analogy again, multiprocessing would be equivalent to having more chefs working in the same kitchen.
+
+Multiprocessing is implemented in the cluster process of both the master node and the worker nodes, and `concurrent.futures.ProcessPoolExecutor <https://docs.python.org/3/library/concurrent.futures.html#concurrent.futures.ProcessPoolExecutor>`_ is used for this purpose. Cluster tasks can use any free process in the process pool to delegate and execute in parallel those parts of their logic that are more CPU intensive. With this, it is possible to take advantage of more CPU cores and increase the overall performance of the cluster process. When combined with asyncio, best results are obtained.
+
+Child processes are created when the parent `wazuh-clusterd` starts. They stay in the process pool waiting for new jobs to be assigned to them. There are two child processes by default within the master node pool. This value can be changed in the `process_pool_size` variable in the `cluster.json <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/framework/wazuh/core/cluster/cluster.json>`_ file. The worker nodes, on the other hand, create a single child process and this number is not modifiable. The tasks that use multiprocessing in the cluster are the following.
+
+Master node
+###########
+* **Local integrity thread**: Calculates the hash of all the files to be synchronized. This requires high CPU usage.
+* **Agent info thread**: A section of this task sends all the agents' information to the wazuh-db. The communication is done in small chunks so as not to saturate the service socket. This turned this task into a somewhat slow process and not a good candidate for asyncio.
+* **Integrity thread**:
+
+   * **Compress files**: Compressing files is fully synchronous and can block the parent cluster process.
+   * **Process extra-valid files**: The workers send the extra-valid files to the master. Processing these files is prone to interleaving and can be very slow when using asyncio.
+
+Worker nodes
+############
+* **Integrity thread**: This is the only task in workers that uses multiprocessing. It carries out the following CPU-intensive actions.
+
+   * **Hash calculation**: Calculates the hash of all the files to be synchronized every time Integrity check is started.
+   * **Unzip files**: Extracts files and can take too long when the zip is large.
+   * **Process master files**: Processes and moves all the files that were received from the master node to the appropriate destination.
+
+Below is an example diagram of how the process pool is used in the master node:
+
+.. image:: ../images/development/cluster_process_pool.png
+  :align: center
 
 Integrity synchronization process
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -367,7 +416,7 @@ Let's review the integrity synchronization process to see how asyncio tasks are 
 .. image:: ../images/development/sync_integrity_diagram.png
   :align: center
 
-* **1**: The worker's ``sync_integrity`` task wakes up after sleeping during *interval* seconds (which is defined in the `cluster.json <https://github.com/wazuh/wazuh/blob/v|WAZUH_LATEST|/framework/wazuh/core/cluster/cluster.json>`_ file). The first thing it does is checking whether the previous synchronization process is finished or not using the ``syn_i_w_m_p`` command. The master replies with a boolean value specifying that the previous synchronization process is finished and, therefore, the worker can start a new one.
+* **1**: The worker's ``sync_integrity`` task wakes up after sleeping during *interval* seconds (which is defined in the `cluster.json <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/framework/wazuh/core/cluster/cluster.json>`_ file). The first thing it does is checking whether the previous synchronization process is finished or not using the ``syn_i_w_m_p`` command. The master replies with a boolean value specifying that the previous synchronization process is finished and, therefore, the worker can start a new one.
 * **2**: The worker starts the synchronization process using ``syn_i_w_m`` command. When the master receives the command, it creates an asyncio task to process the received integrity from the worker node. But since no file has been received yet, the task keeps waiting until the worker sends the file. The master sends the worker the task ID so the worker can notify the master to wake it up once the file has been sent.
 * **3**: The worker starts the sending file process. Which has three steps: ``new_file``, ``file_upd`` and ``file_end``.
 * **4**: The worker notifies the master that the integrity file has already been sent. In that moment, the master wakes the previously created task up and compares the worker files with its own. In this example the master finds out the worker integrity is outdated.
@@ -386,7 +435,7 @@ Another example that can show how asynchronous tasks are used is Distributed API
 * ``local_master``: The request can be solved by the master node. These requests are usually information about the global status/management of the cluster such as agent information/status/management, agent groups management, cluster information, etc.
 * ``distributed_master``: The master must forward the request to the most suitable node to solve it.
 
-The type association with every endpoint can be found in the `requests_list.py <https://github.com/wazuh/wazuh/blob/stable/framework/wazuh/cluster/dapi/requests_list.py>`_ file.
+The type association with every endpoint can be found here: `API controllers <https://github.com/wazuh/wazuh/tree/|WAZUH_LATEST_MINOR|/api/api/controllers>`_.
 
 Imagine a cluster with two nodes, where there is an agent reporting to the worker node with id *020*. The following diagram shows the process of requesting ``GET/syscollector/020/os`` API endpoint:
 

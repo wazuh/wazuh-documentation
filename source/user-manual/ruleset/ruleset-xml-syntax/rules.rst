@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: The Wazuh Ruleset is used to analyze incoming events and generate alerts when appropriate. Learn more about it in the Wazuh documentation.
@@ -95,13 +95,7 @@ The **xml labels** used to configure ``rules`` are listed here.
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `same_id`_              | None.                                                         | The decoded ``id`` must be the same.                                                                 |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `not_same_id`_          | None.                                                         | The decoded ``id`` must be different.                                                                |
-+-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `different_id`_         | None.                                                         | The decoded ``id`` must be different.                                                                |
-+-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `same_source_ip`_       | None.                                                         | The decoded ``srcip`` must be the same.                                                              |
-+-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `not_same_source_ip`_   | None.                                                         | The decoded ``srcip`` must be different.                                                             |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `same_srcip`_           | None.                                                         | The decoded ``srcip`` must be the same.                                                              |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
@@ -129,15 +123,11 @@ The **xml labels** used to configure ``rules`` are listed here.
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `same_user`_            | None.                                                         | The decoded ``user`` must be the same.                                                               |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `not_same_user`_        | None.                                                         | The decoded ``user`` must be different.                                                              |
-+-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `different_user`_       | None.                                                         | The decoded ``user`` must be different.                                                              |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `not_same_agent`_       | None.                                                         | The decoded ``agent`` must be different.                                                             |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `same_field`_           | None.                                                         | The decoded ``field`` must be the same as the previous ones.                                         |
-+-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `not_same_field`_       | None.                                                         | The decoded ``field`` must be different than the previous ones.                                      |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `different_field`_      | None.                                                         | The decoded ``field`` must be different than the previous ones.                                      |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
@@ -1023,8 +1013,6 @@ If ``url`` label is declared multiple times within the rule, the following rules
 location
 ^^^^^^^^
 
-.. versionadded:: 3.5.0
-
 Used as a requisite to trigger the rule. It will check the content of the field location and trying to find a match.
 
 +--------------------+---------------------------------------------------------------+
@@ -1035,7 +1023,7 @@ Used as a requisite to trigger the rule. It will check the content of the field 
 |                    | `pcre2 <regex.html#pcre2-syntax>`_ expression.                |
 +--------------------+---------------------------------------------------------------+
 
-The location identifies the origin of the input. If the event comes from an agent, its name and registered IP (as it was added) is appended to the location.
+The location identifies the origin of the input. If the event comes from an agent, its name and registered IP address (as it was added) is appended to the location.
 
 Example of a location for a log pulled from "/var/log/syslog" in an agent with name "dbserver" and registered with IP "any":
 
@@ -1410,61 +1398,21 @@ This option is used in conjunction with ``frequency`` and ``timeframe``.
 | **Example of use** | <same_id />        |
 +--------------------+--------------------+
 
-not_same_id
-^^^^^^^^^^^
-
-.. deprecated:: 3.13.0 Use `different_id`_ instead.
-
-Specifies that the decoded id must be different.
-This option is used in conjunction with ``frequency`` and ``timeframe``.
-
-+--------------------+--------------------+
-| **Example of use** | <not_same_id />    |
-+--------------------+--------------------+
-
 different_id
 ^^^^^^^^^^^^
 
 Specifies that the decoded id must be different.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
 
-.. versionadded:: 3.13.0
-
 +--------------------+-------------------+
 | **Example of use** | <different_id />  |
 +--------------------+-------------------+
 
-same_source_ip
-^^^^^^^^^^^^^^
-
-.. deprecated:: 3.13.0 Use `same_srcip`_ instead.
-
-Specifies that the decoded source ip must be the same.
-This option is used in conjunction with ``frequency`` and ``timeframe``.
-
-+--------------------+--------------------+
-| **Example of use** | <same_source_ip /> |
-+--------------------+--------------------+
-
-not_same_source_ip
-^^^^^^^^^^^^^^^^^^
-
-Specifies that the decoded source ip must be different.
-This option is used in conjunction with ``frequency`` and ``timeframe``.
-
-.. deprecated:: 3.13.0 Use `different_srcip`_ instead.
-
-+--------------------+------------------------+
-| **Example of use** | <not_same_source_ip /> |
-+--------------------+------------------------+
-
 same_srcip
 ^^^^^^^^^^
 
-Specifies that the decoded source ip must be the same.
+Specifies that the decoded source IP address must be the same.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
-
-.. versionadded:: 3.13.0
 
 +--------------------+----------------+
 | **Example of use** | <same_srcip /> |
@@ -1473,10 +1421,8 @@ This option is used in conjunction with ``frequency`` and ``timeframe``.
 different_srcip
 ^^^^^^^^^^^^^^^
 
-Specifies that the decoded source ip must be different.
+Specifies that the decoded source IP address must be different.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
-
-.. versionadded:: 3.13.0
 
 +--------------------+----------------------+
 | **Example of use** | <different_srcip />  |
@@ -1485,10 +1431,8 @@ This option is used in conjunction with ``frequency`` and ``timeframe``.
 same_dstip
 ^^^^^^^^^^
 
-Specifies that the decoded destination ip must be the same.
+Specifies that the decoded destination IP address must be the same.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
-
-.. versionadded:: 3.13.0
 
 +--------------------+----------------+
 | **Example of use** | <same_dstip /> |
@@ -1497,10 +1441,8 @@ This option is used in conjunction with ``frequency`` and ``timeframe``.
 different_dstip
 ^^^^^^^^^^^^^^^
 
-Specifies that the decoded destination ip must be different.
+Specifies that the decoded destination IP address must be different.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
-
-.. versionadded:: 3.13.0
 
 +--------------------+----------------------+
 | **Example of use** | <different_dstip />  |
@@ -1522,8 +1464,6 @@ different_srcport
 Specifies that the decoded source port must be different.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
 
-.. versionadded:: 3.13.0
-
 +--------------------+------------------------+
 | **Example of use** | <different_srcport />  |
 +--------------------+------------------------+
@@ -1543,8 +1483,6 @@ different_dstport
 
 Specifies that the decoded destination port must be different.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
-
-.. versionadded:: 3.13.0
 
 +--------------------+------------------------+
 | **Example of use** | <different_dstport />  |
@@ -1566,8 +1504,6 @@ different_location
 Specifies that the decoded location must be different.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
 
-.. versionadded:: 3.13.0
-
 +--------------------+-------------------------+
 | **Example of use** | <different_location />  |
 +--------------------+-------------------------+
@@ -1578,8 +1514,6 @@ same_srcuser
 Specifies that the decoded source user must be the same.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
 
-.. versionadded:: 3.13.0
-
 +--------------------+-------------------+
 | **Example of use** | <same_srcuser />  |
 +--------------------+-------------------+
@@ -1589,8 +1523,6 @@ different_srcuser
 
 Specifies that the decoded source user must be different.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
-
-.. versionadded:: 3.13.0
 
 +--------------------+------------------------+
 | **Example of use** | <different_srcuser />  |
@@ -1606,25 +1538,11 @@ This option is used in conjunction with ``frequency`` and ``timeframe``.
 | **Example of use** | <same_user />      |
 +--------------------+--------------------+
 
-not_same_user
-^^^^^^^^^^^^^
-
-.. deprecated:: 3.13.0 Use `different_user`_ instead.
-
-Specifies that the decoded user must be different.
-This option is used in conjunction with ``frequency`` and ``timeframe``.
-
-+--------------------+--------------------+
-| **Example of use** | <not_same_user />  |
-+--------------------+--------------------+
-
 different_user
 ^^^^^^^^^^^^^^
 
 Specifies that the decoded user must be different.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
-
-.. versionadded:: 3.13.0
 
 +--------------------+---------------------+
 | **Example of use** | <different_user />  |
@@ -1632,8 +1550,6 @@ This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 not_same_agent
 ^^^^^^^^^^^^^^
-
-.. deprecated:: 3.13.0
 
 Specifies that the decoded agent must be different.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
@@ -1644,8 +1560,6 @@ This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 same_field
 ^^^^^^^^^^
-
-.. versionadded:: 3.9.0
 
 The value of the dynamic field specified in this option must appear in previous events a ``frequency`` number of times within the required ``timeframe``.
 
@@ -1722,88 +1636,8 @@ The last event will fire rule 100002 instead of 100001 because it found the valu
     "location": "/root/test.log"
   }
 
-not_same_field
-^^^^^^^^^^^^^^
-
-.. versionadded:: 3.9.0
-.. deprecated:: 3.13.0 Use `different_field`_ instead.
-
-It is the opposite setting of ``same_field``. The value of the dynamic field specified in this option must be different than the ones found in previous events a ``frequency`` number of times within the required ``timeframe``.
-
-+--------------------+----------------------------------------+
-| **Example of use** | <not_same_field>key2</not_same_field>  |
-+--------------------+----------------------------------------+
-
-As an example of this option, check these rules:
-
-.. code-block:: xml
-
-  <!-- {"key":"value", "key2":"AAAA"} -->
-  <rule id="100001" level="3">
-    <decoded_as>json</decoded_as>
-    <field name="key">value</field>
-    <description>Testing JSON alert</description>
-  </rule>
-
-  <rule id="100002" level="10" frequency="4" timeframe="300">
-    <if_matched_sid>100001</if_matched_sid>
-    <not_same_field>key2</not_same_field>
-    <description>Testing not_same_field option</description>
-  </rule>
-
-Rule 100002 will fire when ``key2`` in the currently considered event has a different value that the same field in four previous events that matched rule 100001 before within the last 300 seconds. Therefore, for the following events sequence:
-
-.. code-block:: json
-  :emphasize-lines: 4
-
-  {"key":"value", "key2":"AAAA"}
-  {"key":"value", "key2":"AAAA"}
-  {"key":"value", "key2":"BBBB"}
-  {"key":"value", "key2":"CCCC"}
-
-The last event will fire rule 100002 instead of 100001 due to the value ``CCCC`` does not appear in three previous events. The corresponding alert looks like this one:
-
-.. code-block:: json
-  :emphasize-lines: 5
-  :class: output
-
-  {
-    "timestamp": "2020-03-04T03:02:21.973-0800",
-    "rule": {
-      "level": 10,
-      "description": "Testing not_same_field option",
-      "id": "100002",
-      "frequency": 4,
-      "firedtimes": 1,
-      "mail": false,
-      "groups": [
-        "local"
-      ]
-    },
-    "agent": {
-      "id": "000",
-      "name": "ubuntu"
-    },
-    "manager": {
-      "name": "ubuntu"
-    },
-    "id": "1583319633.14426",
-    "previous_output": "{\"key\":\"value\",\"key2\":\"BBBB\"}\n{\"key\":\"value\",\"key2\":\"AAAA\"}\n{\"key\":\"value\",\"key2\":\"AAAA\"}",
-    "full_log": "{\"key\":\"value\",\"key2\":\"CCCC\"}",
-    "decoder": {
-      "name": "json"
-    },
-    "data": {
-      "key": "value",
-      "key2": "CCCC"
-    },
-    "location": "/root/test.log"
-  }
-
 different_field
 ^^^^^^^^^^^^^^^
-
-.. versionadded:: 3.13.0
 
 It is the opposite setting of ``same_field``. The value of the dynamic field specified in this option must be different than the ones found in previous events a ``frequency`` number of times within the required ``timeframe``.
 
@@ -1813,8 +1647,6 @@ It is the opposite setting of ``same_field``. The value of the dynamic field spe
 
 global_frequency
 ^^^^^^^^^^^^^^^^
-
-.. versionadded:: 3.11.0
 
 Specifies that the events of all agents will be contemplated when using the
 frequency and ``timeframe`` options. By default, only the events generated by
@@ -1833,8 +1665,6 @@ same_protocol
 Specifies that the decoded protocol must be the same.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
 
-.. versionadded:: 3.13.0
-
 +--------------------+-------------------+
 | **Example of use** | <same_protocol /> |
 +--------------------+-------------------+
@@ -1844,8 +1674,6 @@ different_protocol
 
 Specifies that the decoded protocol must be different.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
-
-.. versionadded:: 3.13.0
 
 +--------------------+-------------------------+
 | **Example of use** | <different_protocol />  |
@@ -1857,8 +1685,6 @@ same_action
 Specifies that the decoded action must be the same.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
 
-.. versionadded:: 3.13.0
-
 +--------------------+-----------------+
 | **Example of use** | <same_action /> |
 +--------------------+-----------------+
@@ -1868,8 +1694,6 @@ different_action
 
 Specifies that the decoded action must be different.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
-
-.. versionadded:: 3.13.0
 
 +--------------------+-----------------------+
 | **Example of use** | <different_action />  |
@@ -1881,8 +1705,6 @@ same_data
 Specifies that the decoded data must be the same.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
 
-.. versionadded:: 3.13.0
-
 +--------------------+---------------+
 | **Example of use** | <same_data /> |
 +--------------------+---------------+
@@ -1892,8 +1714,6 @@ different_data
 
 Specifies that the decoded data must be different.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
-
-.. versionadded:: 3.13.0
 
 +--------------------+---------------------+
 | **Example of use** | <different_data />  |
@@ -1905,8 +1725,6 @@ same_extra_data
 Specifies that the decoded extra data must be the same.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
 
-.. versionadded:: 3.13.0
-
 +--------------------+---------------------+
 | **Example of use** | <same_extra_data /> |
 +--------------------+---------------------+
@@ -1916,8 +1734,6 @@ different_extra_data
 
 Specifies that the decoded extra data must be different.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
-
-.. versionadded:: 3.13.0
 
 +--------------------+---------------------------+
 | **Example of use** | <different_extra_data />  |
@@ -1929,8 +1745,6 @@ same_status
 Specifies that the decoded status must be the same.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
 
-.. versionadded:: 3.13.0
-
 +--------------------+-----------------+
 | **Example of use** | <same_status /> |
 +--------------------+-----------------+
@@ -1940,8 +1754,6 @@ different_status
 
 Specifies that the decoded status must be different.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
-
-.. versionadded:: 3.13.0
 
 +--------------------+-----------------------+
 | **Example of use** | <different_status />  |
@@ -1953,8 +1765,6 @@ same_system_name
 Specifies that the decoded system name must be the same.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
 
-.. versionadded:: 3.13.0
-
 +--------------------+----------------------+
 | **Example of use** | <same_system_name /> |
 +--------------------+----------------------+
@@ -1965,8 +1775,6 @@ different_system_name
 Specifies that the decoded system name must be different.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
 
-.. versionadded:: 3.13.0
-
 +--------------------+---------------------------+
 | **Example of use** | <different_system_name /> |
 +--------------------+---------------------------+
@@ -1976,8 +1784,6 @@ same_url
 
 Specifies that the decoded url must be the same.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
-
-.. versionadded:: 3.13.0
 
 +--------------------+--------------+
 | **Example of use** | <same_url /> |
@@ -1998,8 +1804,6 @@ same_srcgeoip
 
 Specifies that the source geoip location must be the same.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
-
-.. versionadded:: 3.13.0
 
 +--------------------+-------------------+
 | **Example of use** | <same_srcgeoip /> |
@@ -2033,8 +1837,6 @@ Example:
 same_dstgeoip
 ^^^^^^^^^^^^^
 
-.. versionadded:: 3.13.0
-
 Specifies that the destination geoip location must be the same.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
 
@@ -2047,8 +1849,6 @@ different_dstgeoip
 
 Specifies that the destination geoip location must be different.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
-
-.. versionadded:: 3.13.0
 
 +--------------------+------------------------+
 | **Example of use** | <different_dstgeoip /> |
@@ -2117,11 +1917,11 @@ Perform a CDB lookup using an ossec list.  This is a fast on-disk database which
 +-----------------+-------------------------+---------------------------------------------------------------------------------------------------------+
 |                 | match_key_value         | searched for in the cdb. It will be compared with regex from attribute check_value.                     |
 +-----------------+-------------------------+---------------------------------------------------------------------------------------------------------+
-|                 | address_match_key       | IP and the key to search within the cdb and will match if they key is present.                          |
+|                 | address_match_key       | IP address and the key to search within the cdb and will match if they key is present.                  |
 +-----------------+-------------------------+---------------------------------------------------------------------------------------------------------+
-|                 | not_address_match_key   | IP the key to search and will match if it IS NOT present in the database                                |
+|                 | not_address_match_key   | IP address and the key to search and will match if it IS NOT present in the database.                   |
 +-----------------+-------------------------+---------------------------------------------------------------------------------------------------------+
-|                 | address_match_key_value | IP to search in the cdb. It will be compared with regex from attribute check_value.                     |
+|                 | address_match_key_value | IP address to search in the cdb. It will be compared with regex from attribute check_value.             |
 +-----------------+-------------------------+---------------------------------------------------------------------------------------------------------+
 | **check_value** | regex for matching on the value pulled out of the cdb when using types: address_match_key_value, match_key_value                  |
 +-----------------+-----------------------------------------------------------------------------------------------------------------------------------+
@@ -2263,7 +2063,6 @@ It's a very useful label to keep the rules ordered.
 
 mitre
 ^^^^^
-.. versionadded:: 3.13.0
 
 Specifies the `MITRE ATT&CK <https://attack.mitre.org>`_ technique ID or IDs that fit in well with the rule.
 

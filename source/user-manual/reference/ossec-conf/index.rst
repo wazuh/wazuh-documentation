@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 .. meta::
   :description: Learn more about the Wazuh local configuration, including configuration sections and supported installations, in this section of our documentation. 
   
@@ -42,7 +42,7 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +---------------------------------------------------------------------+------------------------+
 | :doc:`client <client>`                                              | agent                  |
 +---------------------------------------------------------------------+------------------------+
-| :doc:`client_buffer <client_buffer>`                                | agent                  |
+| :doc:`client_buffer <client-buffer>`                                | agent                  |
 +---------------------------------------------------------------------+------------------------+
 | :doc:`cluster <cluster>`                                            | manager                |
 +---------------------------------------------------------------------+------------------------+
@@ -50,7 +50,7 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +---------------------------------------------------------------------+------------------------+
 | :doc:`database_output <database-output>`                            | manager                |
 +---------------------------------------------------------------------+------------------------+
-| :doc:`email_alerts <email_alerts>`                                  | manager                |
+| :doc:`email_alerts <email-alerts>`                                  | manager                |
 +---------------------------------------------------------------------+------------------------+
 | :doc:`fluent-forward <fluent-forward>`                              | manager, agent         |
 +---------------------------------------------------------------------+------------------------+
@@ -74,7 +74,7 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +---------------------------------------------------------------------+------------------------+
 | :doc:`rootcheck <rootcheck>`                                        | manager, agent         |
 +---------------------------------------------------------------------+------------------------+
-| :doc:`rule_test <rule_test>`                                        | manager                |
+| :doc:`rule_test <rule-test>`                                        | manager                |
 +---------------------------------------------------------------------+------------------------+
 | :doc:`ruleset <ruleset>`                                            | manager                |
 +---------------------------------------------------------------------+------------------------+
@@ -110,6 +110,8 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +---------------------------------------------------------------------+------------------------+
 | :doc:`gcp-pubsub <gcp-pubsub>`                                      | manager, agent         |
 +---------------------------------------------------------------------+------------------------+
+| :doc:`gcp-bucket <gcp-bucket>`                                      | manager, agent         |
++---------------------------------------------------------------------+------------------------+
 
 All of the above sections must be located within the top-level ``<ossec_config>`` tag. In case of adding another ``<ossec_config>`` tag, it may override the values set on the previous tag.
 
@@ -125,11 +127,11 @@ All of the above sections must be located within the top-level ``<ossec_config>`
    alerts
    auth
    client
-   client_buffer
+   client-buffer
    cluster
    commands
    database-output
-   email_alerts
+   email-alerts
    global
    github-module
    integration
@@ -141,7 +143,7 @@ All of the above sections must be located within the top-level ``<ossec_config>`
    reports
    rootcheck
    sca
-   rule_test
+   rule-test
    ruleset
    socket
    syscheck
@@ -149,6 +151,7 @@ All of the above sections must be located within the top-level ``<ossec_config>`
    task-manager
    fluent-forward
    gcp-pubsub
+   gcp-bucket
    wodle-openscap
    wodle-command
    wodle-ciscat

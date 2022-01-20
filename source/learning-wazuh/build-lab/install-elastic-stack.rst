@@ -1,5 +1,8 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+  :description: Check out how to install the Elastic Stack to run Elasticsearch, Kibana, and the Wazuh plugin for Kibana. Learn more about it in this section. 
+  
 .. _build_lab_install_elastic_stack:
 
 Install the Elastic Stack
@@ -61,6 +64,17 @@ to Kibana. For more information, please see `Elasticsearch
 
 2. Enable and start the Elasticsearch service:
 
+  .. warning::
+
+    Add the following configuration to mitigate Apache Log4j2 Remote Code Execution (RCE) vulnerability - CVE-2021-44228 - ESA-2021-31.
+    
+    .. code-block:: console
+
+      # mkdir -p /etc/elasticsearch/jvm.options.d
+      # echo '-Dlog4j2.formatMsgNoLookups=true' > /etc/elasticsearch/jvm.options.d/disabledlog4j.options
+      # chmod 2750 /etc/elasticsearch/jvm.options.d/disabledlog4j.options
+      # chown root:elasticsearch /etc/elasticsearch/jvm.options.d/disabledlog4j.options
+
   .. code-block:: console
 
   	# systemctl daemon-reload
@@ -120,7 +134,7 @@ events and archives stored in Elasticsearch. More info at `Kibana
 
 4. Kibana will only listen on the loopback interface (localhost) by default,
    which means that it can be only accessed from the same machine. To access
-   Kibana from the any IP set the ``server.host: "0.0.0.0"`` variable, and
+   Kibana from the any IP address set the ``server.host: "0.0.0.0"`` variable, and
    set the port to be the standard port for HTTPS: ``server.port: 443``
 
 

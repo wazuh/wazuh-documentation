@@ -1,7 +1,7 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
-  :description: Wazuh can be integrated with Splunk Enterprise to visualize alerts using our app. Learn more about how to install it.
+  :description: Learn how to install Splunk Enterprise as a single or multi-instance cluster along with the Splunk forwarder and the Wazuh Splunk app. 
 
 .. _installation_splunk:
 

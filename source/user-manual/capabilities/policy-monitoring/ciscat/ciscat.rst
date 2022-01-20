@@ -1,14 +1,12 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
-  :description: The CIS-CAT wodle is used to integrate CIS benchmark assessments into Wazuh agents. See how it works and some use cases here.
+  :description: The CIS-CAT wodle has been developed in order to integrate CIS benchmark assessments into Wazuh agents. Learn more about it. 
 
 .. _ciscat_module:
 
 CIS-CAT integration
 ===================
-
-.. versionadded:: 3.1.0
 
 The **CIS-CAT wodle** has been developed for the purpose of integrating CIS benchmark assessments into Wazuh agents.
 
@@ -176,8 +174,6 @@ Information about a specific result
 
 Use case: Scheduling CIS-CAT executions
 ---------------------------------------
-
-.. versionadded:: 3.5.0
 
 New scheduling options have been added for the CIS-CAT module which allows the user to decide when to launch CIS scans in every agent.
 

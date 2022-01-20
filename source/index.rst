@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Welcome to the Wazuh documentation. Here you can find the installation guide, the user manual, and everything you need to deploy Wazuh.
@@ -319,7 +319,7 @@ Wazuh is a free and open source platform for threat detection, security monitori
    installation-guide/index
    upgrade-guide/index
    user-manual/index
-   cloud-service/index
+   Wazuh cloud service <cloud-service/index>
    development/index
    containers
    deployment
@@ -327,6 +327,7 @@ Wazuh is a free and open source platform for threat detection, security monitori
    monitoring
    migrating-from-ossec/index
    learning-wazuh/index
+   proof-of-concept-guide/index
    release-notes/index
 
 .. raw:: html

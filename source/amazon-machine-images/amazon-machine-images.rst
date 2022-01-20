@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: The pre-built Wazuh Amazon Machine Image includes all Wazuh components ready-to-use. Test all Wazuh capabilities with our AMI.  
@@ -40,7 +40,7 @@ Deploy a predefined instance
  
 #. Configure the software by selecting a **Software Version** and the **Region** where the instance will be deployed. Once configured, click **Continue to Launch**.
 
-#. Review your configuration before launching the software and make sure that all default settings are correct. When selecting the **EC2 Instance Type**, we recommend that you use an instance type ``t3a.xlarge`` or similar, and check the `minimum and recommended requirements <https://documentation.wazuh.com/current/installation-guide/requirements.html#all-in-one-deployment>`_ for this type of instance. 
+#. Review your configuration before launching the software and make sure that all default settings are correct. When selecting the **EC2 Instance Type**, we recommend that you use an instance type ``c5.2xlarge`` or similar, and check the `minimum and recommended requirements <https://documentation.wazuh.com/current/installation-guide/requirements.html#all-in-one-deployment>`_ for this type of instance. 
 
 #. Click **Launch** to generate the instance. 
 
@@ -56,7 +56,7 @@ Deploy and configure the instance manually
    
 #. Review the Server Product characteristics, then click **Continue**.
 
-#. Select the instance type according to your needs, then click **Next: Configure Instance Details**. We recommend that you use an instance type ``t3a.xlarge`` or similar, and check the `minimum and recommended requirements <https://documentation.wazuh.com/current/installation-guide/requirements.html#all-in-one-deployment>`_ for this type of instance. 
+#. Select the instance type according to your needs, then click **Next: Configure Instance Details**. We recommend that you use an instance type ``c5.2xlarge`` or similar, and check the `minimum and recommended requirements <https://documentation.wazuh.com/current/installation-guide/requirements.html#all-in-one-deployment>`_ for this type of instance. 
 
 #. Configure your instance as needed, then click **Next: Add Storage**.
 

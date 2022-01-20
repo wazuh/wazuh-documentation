@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 If the new Wazuh agent’s name is not provided, it is set automatically using hostname. To specify the Wazuh agent's name add ``-A <agent_name>`` to the command above.
 

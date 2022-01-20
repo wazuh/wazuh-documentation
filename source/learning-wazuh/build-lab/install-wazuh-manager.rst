@@ -1,5 +1,8 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+  :description: Check out how to install the Wazuh server components in this section of the Wazuh documentation in this step-by-step guide. 
+  
 .. _build_lab_install_wazuh_server:
 
 Install Wazuh server Components

@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. _blocking_attacks_active_response:
 
@@ -8,7 +8,7 @@ Blocking attacks with Active Response
 .. meta::
   :description: Active Response allows to run commands on an agent in response to certain triggers. Learn how to block an sshd brute force attack using Wazuh.
 
-Active response allows Wazuh to run commands on an agent in response to certain triggers. In this use case, we simulate an SSH Brute Force attack and configure an active response to block the IP of the attacker. 
+Active response allows Wazuh to run commands on an agent in response to certain triggers. In this use case, we simulate an SSH Brute Force attack and configure an active response to block the IP address of the attacker. 
 
 Detecting the attack
 --------------------
@@ -19,12 +19,12 @@ First of all, we need to know when to execute the response. We can use one of t
 - Rule group: The response will be executed on any event in the defined group.
 - Level: The response will be executed on any event with this level or higher.
 
-In this use case, we want to prevent ``SSH brute force attacks`` so when the rule ``5712 - SSHD brute force trying to get access to the system`` is triggered, it will execute the proper active response to block the IP of the attacker.
+In this use case, we want to prevent ``SSH brute force attacks`` so when the rule ``5712 - SSHD brute force trying to get access to the system`` is triggered, it will execute the proper active response to block the IP address of the attacker.
 
 Defining the command
 --------------------
 
-We know when the active response will be executed, now we have to define what it will do. You can create your own script to block an IP, or any other action, but Wazuh comes with a set of common scripts used in active response. These scripts are in ``/var/ossec/active-response/bin/``. We are going to use the ``firewall-drop`` script that works with common Linux/Unix operating systems and it allows blocking of a malicious IP using the local firewall.
+We know when the active response will be executed, now we have to define what it will do. You can create your own script to block an IP, or any other action, but Wazuh comes with a set of common scripts used in active response. These scripts are in ``/var/ossec/active-response/bin/``. We are going to use the ``firewall-drop`` script that works with common Linux/Unix operating systems and it allows blocking of a malicious IP address using the local firewall.
 
 Define the command in the ``ossec.conf`` of your Wazuh manager:
 
@@ -37,7 +37,7 @@ Define the command in the ``ossec.conf`` of your Wazuh manager:
   </command>
 
 
-Set the command name and the path of the script to execute. It's also possible to set a defined timeout to unblock the IP.
+Set the command name and the path of the script to execute. It's also possible to set a defined timeout to unblock the IP address.
 
 
 Defining the active response
@@ -51,7 +51,7 @@ Configure Wazuh to run the active response. The main fields are:
 
 - ``rules_id``: The command is executed if the rule 5712 is fired.
 
-- ``timeout``: Block the IP for 1800 seconds on the firewall (iptables, ipfilter, etc).
+- ``timeout``: Block the IP address for 1800 seconds on the firewall (iptables, ipfilter, etc).
 
 Define the active response in the ``ossec.conf`` of your Wazuh manager:
 
@@ -120,7 +120,7 @@ If we try to ping the agent from the attacker, we see that it's not possible:
   12 packets transmitted, 0 received, 100% packet loss, time 11000ms
 
 
-Active response has blocked the IP so it is working properly.
+Active response has blocked the IP address so it is working properly.
 
 Generating an alert when an active response is fired
 ----------------------------------------------------
@@ -171,6 +171,6 @@ We set up a blocking time of 30 minutes for our active response, but in case you
     <repeated_offenders>60,120,180</repeated_offenders>
   </active-response>
 
-The first time that the active response is triggered, it will block the IP for 30 minutes, the second time for 60 minutes, the third time for 120 minutes, and finally the fourth time for 180 minutes.
+The first time that the active response is triggered, it will block the IP address for 30 minutes, the second time for 60 minutes, the third time for 120 minutes, and finally the fourth time for 180 minutes.
 
 Thanks to active response you can perform actions responding to several scenarios and restricting malicious activities and blocking attacks. Be aware any automated response has an implicit risk, so define your responses carefully.

@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: This guide provides the basic information needed to get started with the Wazuh API, including some practical use cases. 
@@ -417,7 +417,7 @@ Here are some of the basic concepts related to making API requests and understan
 - Responses containing collections of data will return a maximum of 500 elements by default. The *offset* and *limit* parameters may be used to iterate through large collections. The *limit* parameter accepts up to 100000 items, although it is recommended not to exceed the default value (500 items). Doing so can lead to unexpected behaviors (timeouts, large responses, etc.). Use with caution.
 - All responses have an HTTP status code: 2xx (success), 4xx (client error), 5xx (server error), etc.
 - All requests (except ``GET /security/user/authenticate`` and ``POST /security/user/authenticate/run_as``) accept the parameter ``pretty`` to convert the JSON response to a more human-readable format.
-- The Wazuh API log is stored on the manager as ``/var/ossec/logs/api.log`` (the path and verbosity level can be changed in the Wazuh API configuration file). The Wazuh API logs are rotated daily. Rotated logs are stored in ``/var/ossec/logs/api/<year>/<month>`` and compressed using ``gzip``.
+- The Wazuh API log is stored on the manager as ``WAZUH_PATH/logs/api.log`` (the verbosity level can be changed in the Wazuh API configuration file). The Wazuh API logs are rotated daily. Rotated logs are stored in ``WAZUH_PATH/logs/api/<year>/<month>`` and compressed using ``gzip``.
 - All Wazuh API requests will be aborted if no response is received after a certain amount of time. The parameter ``wait_for_complete`` can be used to disable this timeout. This is useful for calls that could take more time than expected, such as :api-ref:`PUT /agents/upgrade <operation/api.controllers.agent_controller.put_upgrade_agents>`.
 
 .. note:: The maximum API response time can be modified in the :ref:`API configuration <api_configuration_options>`.
@@ -871,7 +871,7 @@ This enumerates 2 **active** agents:
     }
 
 
-Adding an agent is now easier than ever. Simply send a request with the agent name and its IP.
+Adding an agent is now easier than ever. Simply send a request with the agent name and its IP address.
 
 .. code-block:: console
 

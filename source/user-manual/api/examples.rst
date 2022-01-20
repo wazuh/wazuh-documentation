@@ -1,5 +1,8 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+    :description: Check out some examples of the Wazuh API, an open source RESTful API that allows interaction with the Wazuh manager.
+    
 .. _api_examples:
 
 Examples

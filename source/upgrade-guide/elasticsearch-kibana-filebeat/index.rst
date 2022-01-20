@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Learn more about how to upgrade Elasticsearch, Filebeat, and Kibana, depending on the distribution in this section of the Wazuh documentation.
@@ -8,7 +8,7 @@
 Upgrade Elasticsearch, Filebeat and Kibana
 ==========================================
 
-There are two installation types: Wazuh Elastic stack and Wazuh Open Distro for Elasticsearch stack. Choose one of the options depending on your installation type:
+Depending on your installation, choose between Open Distro for Elasticsearch or Elastic Stack basic license, and follow the instructions to upgrade to the latest compatible version.
 
 .. toctree::
     :maxdepth: 1

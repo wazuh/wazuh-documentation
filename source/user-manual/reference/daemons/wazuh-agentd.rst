@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: The wazuh-agentd program is the client-side daemon that handles communications with the server. Find out more in this section. 
@@ -18,10 +18,6 @@ The wazuh-agentd program is the client-side daemon that communicates with the se
 | **-c <config>** | Run using <config> as the configuration file.                                                   |
 +                 +-------------------------------------------+-----------------------------------------------------+
 |                 | Default value                             | /var/ossec/etc/ossec.conf                           |
-+-----------------+-------------------------------------------+-----------------------------------------------------+
-| **-D <dir>**    | Chroot to <dir>. **Deprecated since v3.12.0.**                                                  |
-+                 +-------------------------------------------+-----------------------------------------------------+
-|                 | Default value                             | /var/ossec                                          |
 +-----------------+-------------------------------------------+-----------------------------------------------------+
 | **-d**          | Run in debug mode. This option may be repeated to increase the verbosity of the debug messages. |
 +-----------------+-------------------------------------------------------------------------------------------------+

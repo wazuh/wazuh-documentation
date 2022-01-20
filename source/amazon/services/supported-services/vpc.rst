@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. _amazon_vpc:
 
@@ -121,7 +121,7 @@ These alerts can be easily analyzed using visualizations like the following one:
   :align: center
   :width: 70%
 
-On that visualization users can look for peaks in their network, once they found a peak they can filter, the alerts generated on that time and check which IPs were communicating. Since IP address is a field used in many AWS alerts, they'll probably found other alerts and find out what happened.
+On that visualization users can look for peaks in their network, once they found a peak they can filter, the alerts generated on that time and check which IP addresses were communicating. Since IP address is a field used in many AWS alerts, they'll probably found other alerts and find out what happened.
 
 .. note::
   If while configuring the permissions policy we're asked for special permissions, we need to add the next block into the policy file:

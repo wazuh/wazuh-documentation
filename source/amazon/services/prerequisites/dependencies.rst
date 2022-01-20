@@ -1,5 +1,8 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+  :description: Learn more about how to monitor AWS based services with Wazuh. In this section, you will learn more about installing dependencies. 
+  
 .. _amazon_dependencies:
 
 Installing dependencies

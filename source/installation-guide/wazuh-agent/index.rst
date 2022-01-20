@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Find out in this section more about the Wazuh agent, its capabilities, and the options for installing the agent on different operating systems.
@@ -35,7 +35,7 @@ To install a Wazuh agent, select your operating system and follow the instructio
 
   <div class="agent-os">
       <div class="item-agent">
-          <a href="./wazuh_agent_package_linux.html" class="d-flex align-items-center">
+          <a href="./wazuh-agent-package-linux.html" class="d-flex align-items-center">
             <p>Linux</p>
 
 .. image:: ../../images/installation/linux.png
@@ -46,7 +46,7 @@ To install a Wazuh agent, select your operating system and follow the instructio
         </a>
     </div>
     <div class="item-agent">
-        <a href="./wazuh_agent_package_windows.html" class="d-flex align-items-center">
+        <a href="./wazuh-agent-package-windows.html" class="d-flex align-items-center">
                     <p>Windows</p>
 
 .. image:: ../../images/installation/windows_icon.png
@@ -57,7 +57,7 @@ To install a Wazuh agent, select your operating system and follow the instructio
         </a>
     </div>
     <div class="item-agent">
-        <a href="./wazuh_agent_package_macos.html" class="d-flex align-items-center">
+        <a href="./wazuh-agent-package-macos.html" class="d-flex align-items-center">
             <p>macOS</p>
 
 .. image:: ../../images/installation/macOS_logo.png
@@ -68,7 +68,7 @@ To install a Wazuh agent, select your operating system and follow the instructio
         </a>
     </div>
     <div class="item-agent">
-        <a href="./wazuh_agent_package_aix.html" class="d-flex align-items-center">
+        <a href="./wazuh-agent-package-aix.html" class="d-flex align-items-center">
             <p>AIX</p>
 
 .. image:: ../../images/installation/AIX.png
@@ -79,7 +79,7 @@ To install a Wazuh agent, select your operating system and follow the instructio
         </a>
     </div>
     <div class="item-agent">
-        <a href="./wazuh_agent_package_hpux.html" class="d-flex align-items-center">
+        <a href="./wazuh-agent-package-hpux.html" class="d-flex align-items-center">
             <p>HP-UX</p>
 
 .. image:: ../../images/installation/hpux.png
@@ -90,7 +90,7 @@ To install a Wazuh agent, select your operating system and follow the instructio
         </a>
     </div>
     <div class="item-agent" id="solaris-logo">
-        <a href="./wazuh_agent_package_solaris.html" class="d-flex align-items-center">
+        <a href="./wazuh-agent-package-solaris.html" class="d-flex align-items-center">
             <p>Solaris</p>
 
 .. image:: ../../images/installation/solaris.png
@@ -113,10 +113,10 @@ If you are deploying Wazuh in a large environment, with a high number of servers
     :hidden:
     :maxdepth: 2
 
-    Linux <wazuh_agent_package_linux>
-    Windows <wazuh_agent_package_windows>
-    macOS <wazuh_agent_package_macos>
-    AIX <wazuh_agent_package_aix>
-    HP-UX <wazuh_agent_package_hpux>
-    Solaris <wazuh_agent_package_solaris>   
-    deployment_variables/deployment_variables
+    Linux <wazuh-agent-package-linux>
+    Windows <wazuh-agent-package-windows>
+    macOS <wazuh-agent-package-macos>
+    AIX <wazuh-agent-package-aix>
+    HP-UX <wazuh-agent-package-hpux>
+    Solaris <wazuh-agent-package-solaris>   
+    deployment-variables/deployment-variables
