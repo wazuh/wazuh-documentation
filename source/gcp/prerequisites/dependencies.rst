@@ -31,11 +31,6 @@ b) For Debian/Ubuntu operating systems:
 
   # apt-get update && apt-get install python3
 
-
-a) For CentOS/RHEL/Fedora operating systems:
-
-.. code-block:: console
-
 The required modules can be installed with Pip, the Python package manager. Most of UNIX distributions have this tool available in their software repositories:
 
 a) For CentOS/RHEL/Fedora operating systems:
