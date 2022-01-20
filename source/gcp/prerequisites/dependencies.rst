@@ -58,13 +58,13 @@ Google Cloud pip dependencies
 
     .. code-block:: console
 
-      # pip install google-cloud-pubsub==2.7.1
+      # pip3 install google-cloud-pubsub==2.7.1
 
     - For older versions:
 
     .. code-block:: console
 
-      # pip install google-cloud-pubsub==1.4.3
+      # pip3 install google-cloud-pubsub==1.4.3
 
 - To install the rest of the dependencies, execute the following command:
 
