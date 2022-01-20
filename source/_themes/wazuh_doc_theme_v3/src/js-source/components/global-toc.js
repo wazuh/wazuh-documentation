@@ -14,14 +14,6 @@ if ( $('#global-toc').length > 0 ) {
     }
   });
 
-  /* Behavior of the empty nodes: toggle */
-  $('#global-toc .empty-toc-node').each(function() {
-    $(this).on('click', function(e) {
-      e.preventDefault();
-      $(this).find('.toc-toggle-btn').click();
-    });
-  });
-
   /* Behavior when clicking current toctree node: scroll up  */
   $('#global-toc .current-toc-node').each(function() {
     $(this).on('click', function(e) {
@@ -75,30 +67,39 @@ if ( $('#global-toc').length > 0 ) {
 
   /* Empty Nodes ------------------------------------------------------------ */
   /* List of empty nodes, containing only a toctree */
-  // const emptyTocNodes = [
-  //   'amazon/configuration/index',
-  //   'compliance',
-  //   'containers',
-  //   'deployment',
-  //   'development/index',
-  //   'docker-monitor/index',
-  //   'installation-guide/elasticsearch-cluster/index',
-  //   'installation-guide/wazuh-cluster/index',
-  //   'installation-guide/upgrading/legacy/index',
-  //   'installation-guide/packages-list/linux/linux-index',
-  //   'installation-guide/packages-list/solaris/solaris-index',
-  //   'monitoring',
-  //   'user-manual/index',
-  //   'user-manual/agents/index',
-  //   'user-manual/agents/remove-agents/index',
-  //   'user-manual/agents/listing/index',
-  //   'user-manual/kibana-app/reference/index',
-  //   'user-manual/ruleset/ruleset-xml-syntax/index',
-  //   'installation-guide/distributed-deployment/step-by-step-installation/elasticsearch-cluster/index',
-  //   'installation-guide/distributed-deployment/step-by-step-installation/wazuh-cluster/index',
-  // ];
+  const emptyTocNodes = [
+    'amazon/configuration/index',
+    'compliance',
+    'containers',
+    'deployment',
+    'development/index',
+    'docker-monitor/index',
+    'installation-guide/elasticsearch-cluster/index',
+    'installation-guide/wazuh-cluster/index',
+    'installation-guide/upgrading/legacy/index',
+    'installation-guide/packages-list/linux/linux-index',
+    'installation-guide/packages-list/solaris/solaris-index',
+    'monitoring',
+    'user-manual/index',
+    'user-manual/agents/index',
+    'user-manual/agents/remove-agents/index',
+    'user-manual/agents/listing/index',
+    'user-manual/kibana-app/reference/index',
+    'user-manual/ruleset/ruleset-xml-syntax/index',
+    'installation-guide/distributed-deployment/step-by-step-installation/elasticsearch-cluster/index',
+    'installation-guide/distributed-deployment/step-by-step-installation/wazuh-cluster/index',
+    'user-manual/capabilities/active-response/ar-use-cases/index',
+  ];
 
-  // markTocNodesWithClass(emptyTocNodes, 'empty-toc-node');
+  markTocNodesWithClass(emptyTocNodes, 'empty-toc-node');
+
+  /* Behavior of the empty nodes: toggle */
+  $('#global-toc .empty-toc-node').each(function() {
+    $(this).on('click', function(e) {
+      e.preventDefault();
+      $(this).find('.toc-toggle-btn').click();
+    });
+  });
 
   /* Nodes to open in a new tab --------------------------------------------- */
   if ( useApiRedoc ) {
@@ -106,7 +107,7 @@ if ( $('#global-toc').length > 0 ) {
     $('.js-new-tab').attr('target', '_blank');
   }
 
-  /* Nodes with hiddes subtrees --------------------------------------------- */
+  /* Nodes with hidden subtrees --------------------------------------------- */
   /* list of nodes (by title) which will not show their subtree */
   // const hideSubtreeNodes = [
   //   'Install Wazuh manager on Linux',
