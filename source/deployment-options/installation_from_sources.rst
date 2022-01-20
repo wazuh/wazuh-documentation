@@ -182,9 +182,9 @@ To install the required dependencies to build the python interpreter, follow the
       During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``manager``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``.
 
     .. warning::
-      Be extremely careful not to select a critical installation directory if you choose a different path than the default. If the directory already exist the installer will ask if delete the directory or if installing Wazuh inside.
+      Be extremely careful not to select a critical installation directory if you choose a different path than the default. If the directory already exists, the installer will ask to delete the directory or install Wazuh inside.
 
-#. The installer asks if you want to start Wazuh at the end of the installation. If you choosed not to, you can start it later with:
+#. The installer asks if you want to start Wazuh at the end of the installation. If you choose not to, you can start it later with:
 
 .. tabs::
 
@@ -344,7 +344,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
         # make -C src clean
         # make -C src clean-deps
 
-     .. note:: During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``. When choosing a different path than the default, if the directory already exist the installer will ask if delete the directory or if installing Wazuh inside. You can also run an :ref:`unattended installation <unattended-installation>`.
+     .. note:: During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``. When choosing a different path than the default, if the directory already exists, the installer will ask to delete the directory or install Wazuh inside. You can also run an :ref:`unattended installation <unattended-installation>`.
 
 
     4. The script will ask about what kind of installation you want. Type ``agent`` in order to install a Wazuh agent:
@@ -455,7 +455,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
         # make -C src clean
         # make -C src clean-deps
 
-     .. note:: During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``. When choosing a different path than the default, if the directory already exist the installer will ask if delete the directory or if installing Wazuh inside. You can also run an :ref:`unattended installation <unattended-installation>`.
+     .. note:: During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``. When choosing a different path than the default, if the directory already exists, the installer will ask to delete the directory or install Wazuh inside. You can also run an :ref:`unattended installation <unattended-installation>`.
 
 
     4. The script will ask about what kind of installation you want. Type ``agent`` in order to install a Wazuh agent:
@@ -571,7 +571,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
         # make -C src clean
         # make -C src clean-deps
 
-     .. note:: During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``. When choosing a different path than the default, if the directory already exist the installer will ask if delete the directory or if installing Wazuh inside. You can also run an :ref:`unattended installation <unattended-installation>`.
+     .. note:: During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``. When choosing a different path than the default, if the directory already exists, the installer will ask to delete the directory or install Wazuh inside. You can also run an :ref:`unattended installation <unattended-installation>`.
 
 
     4. The script will ask about what kind of installation you want. Type ``agent`` in order to install a Wazuh agent:
@@ -746,7 +746,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
         # make -C src clean
         # make -C src clean-deps
 
-     .. note:: During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``. When choosing a different path than the default, if the directory already exist the installer will ask if delete the directory or if installing Wazuh inside. You can also run an :ref:`unattended installation <unattended-installation>`.
+     .. note:: During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``. When choosing a different path than the default, if the directory already exists, the installer will ask to delete the directory or install Wazuh inside. You can also run an :ref:`unattended installation <unattended-installation>`.
 
     
     4. The script will ask about what kind of installation you want. Type ``agent`` in order to install a Wazuh agent:
@@ -862,7 +862,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
         # gmake -C src clean-deps
         # gmake -C src clean
 
-    .. note:: During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``. When choosing a different path than the default, if the directory already exist the installer will ask if delete the directory or if installing Wazuh inside. You can also run an :ref:`unattended installation <unattended-installation>`.
+    .. note:: During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``. When choosing a different path than the default, if the directory already exists, the installer will ask to delete the directory or install Wazuh inside. You can also run an :ref:`unattended installation <unattended-installation>`.
 
     5. Finally apply the following configuration:
 
@@ -991,7 +991,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
       # /usr/local/bin/gmake -C src clean-deps
       # /usr/local/bin/gmake -C src clean
 
-    .. note:: During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``. When choosing a different path than the default, if the directory already exist the installer will ask if delete the directory or if installing Wazuh inside. You can also run an :ref:`unattended installation <unattended-installation>`.
+    .. note:: During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``. When choosing a different path than the default, if the directory already exists, the installer will ask to delete the directory or install Wazuh inside. You can also run an :ref:`unattended installation <unattended-installation>`.
 
     Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :ref:`user manual<register_agents>`.
 
@@ -1171,7 +1171,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
           # gmake -C src clean
           # gmake -C src clean-deps
 
-         .. note:: During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``. When choosing a different path than the default, if the directory already exist the installer will ask if delete the directory or if installing Wazuh inside. You can also run an :ref:`unattended installation <unattended-installation>`.
+         .. note:: During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``. When choosing a different path than the default, if the directory already exists, the installer will ask to delete the directory or install Wazuh inside. You can also run an :ref:`unattended installation <unattended-installation>`.
 
         8. The script will ask about what kind of installation you want. Type ``agent`` in order to install a Wazuh agent:
 
@@ -1309,7 +1309,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
           # gmake -C src clean
           # gmake -C src clean-deps
 
-         .. note:: During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``. When choosing a different path than the default, if the directory already exist the installer will ask if delete the directory or if installing Wazuh inside. You can also run an :ref:`unattended installation <unattended-installation>`.
+         .. note:: During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``. When choosing a different path than the default, if the directory already exists, the installer will ask to delete the directory or install Wazuh inside. You can also run an :ref:`unattended installation <unattended-installation>`.
 
        
         4. The script will ask about what kind of installation you want. Type ``agent`` in order to install a Wazuh agent:
