@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Learn how to install Elasticsearch as a single-node cluster. This kind of installation provides high availability and load balancing.

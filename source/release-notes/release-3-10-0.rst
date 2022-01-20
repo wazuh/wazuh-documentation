@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Wazuh 3.10.0 has been released. Check out our release notes to discover the changes and additions of this release.
@@ -60,7 +60,7 @@ Thanks to this additions, the app includes new ``HIPAA`` and ``NIST 800 53`` com
 
 **IPv6 Compatibility**
 
-- Increased the IP internal representation size to support IPv6.
+- Increased the IP address internal representation size to support IPv6.
 - IPv6 loopback address has been added to localhosts list in the DB output module.
 
 **Other fixes and improvements**

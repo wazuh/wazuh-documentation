@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Learn more about how to install the Wazuh agent from sources. Wazuh can be installed on all major operating systems, including Linux, Windows, macOS, among others.
@@ -49,7 +49,7 @@ Installing Wazuh agent from sources
             .. code-block:: console
 
               # yum install make gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool openssl-devel cmake
-              # rpm -i $(rpm --eval https://packages.wazuh.com/utils/libstdc%2B%2B/libstdc%2B%2B-static-8.4.1-1.el8.'%{_arch}'.rpm)
+              # rpm -i $(rpm -q libstdc++-devel --queryformat "http://mirror.centos.org/centos/8/PowerTools/x86_64/os/Packages/libstdc++-static-%{VERSION}-%{RELEASE}.%{arch}.rpm\n")
 
             **Optional** CMake 3.18 installation from sources
 
@@ -630,7 +630,7 @@ Installing Wazuh agent from sources
 
           .. code-block:: console
 
-            # curl -k -O https://packages.wazuh.com/utils/gcc/gcc-5.5.0/gcc-5.5.0.tar.gz && gtar xzf gcc-5.5.0.tar.gz
+            # curl -k -O https://packages.wazuh.com/utils/gcc/gcc-5.5.0.tar.gz && gtar xzf gcc-5.5.0.tar.gz
             # ln -sf gcc-5.5.0 gcc
             # cd gcc
             # wget https://packages.wazuh.com/utils/gcc/mpfr-2.4.2.tar.bz2 && gtar xjf mpfr-2.4.2.tar.bz2 && ln -sf mpfr-2.4.2 mpfr
@@ -818,7 +818,7 @@ Installing Wazuh agent from sources
 
            .. code-block:: console
 
-            # curl -O https://packages.wazuh.com/utils/gcc/gcc-5.5.0/gcc-5.5.0.tar.gz && gtar xzf gcc-5.5.0.tar.gz
+            # curl -O https://packages.wazuh.com/utils/gcc/gcc-5.5.0.tar.gz && gtar xzf gcc-5.5.0.tar.gz
             # ln -sf gcc-5.5.0 gcc
             # cd gcc && ./contrib/download_prerequisites
             # cd .. && mkdir -p gcc-build && cd gcc-build

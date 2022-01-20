@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 .. meta::
   :description: Learn more about client configuration, connection to the manager, and its configuring options in this section of the Wazuh documentation.
 
@@ -27,8 +27,6 @@ Subsections
 
 server
 ^^^^^^
-
-.. versionadded:: 3.0.0
 
 Configures the connection parameters for each server an agent connects to.
 
@@ -85,8 +83,6 @@ Specifies the protocol to use when connecting to the manager.
 max_retries
 ^^^^^^^^^^^
 
-.. versionadded:: 3.13.1
-
 Number of connection retries.
 
 +--------------------+--------------------+
@@ -100,8 +96,6 @@ Number of connection retries.
 retry_interval
 ^^^^^^^^^^^^^^
 
-.. versionadded:: 3.13.1
-
 Time interval between connection attempts (seconds).
 
 +--------------------+--------------------+
@@ -113,83 +107,14 @@ Time interval between connection attempts (seconds).
 Options
 -------
 
-- :ref:`server-ip <legacy_server-ip>`
-- :ref:`server-hostname <legacy_server-hostname>`
-- :ref:`port <legacy_port>`
-- :ref:`protocol <legacy_protocol>`
 - `config-profile`_
 - `notify_time`_
 - `time-reconnect`_
 - `force_reconnect_interval`_
 - `ip_update_interval`_
 - `local_ip`_
-- `disable-active-response`_
 - `auto_restart`_
 - `crypto_method`_
-
-.. _legacy_server-ip:
-
-server-ip
-^^^^^^^^^
-
-.. deprecated:: 3.0.0
-
-Specifies the IP address of the Wazuh manager.
-
-+--------------------+----------------------------------+
-| **Default value**  | n/a                              |
-+--------------------+----------------------------------+
-| **Allowed values** | Any valid IP address is allowed. |
-+--------------------+----------------------------------+
-
-
-.. _legacy_server-hostname:
-
-server-hostname
-^^^^^^^^^^^^^^^
-
-.. deprecated:: 3.0.0
-
-Specifies the hostname of the Wazuh manager.
-
-+--------------------+-------------------------------------+
-| **Default value**  | n/a                                 |
-+--------------------+-------------------------------------+
-| **Allowed values** | Any resolvable hostname is allowed. |
-+--------------------+-------------------------------------+
-
-.. warning::
-		This parameter is incompatible with `server-ip`_. Since version 3.0, these fields have been merged into a single field called `address` that accepts both formats.
-
-.. _legacy_port:
-
-port
-^^^^
-
-.. deprecated:: 3.0.0
-
-Specifies the port on the manager to send events to.  This must match the associated listening port configured on the Wazuh manager.
-
-+--------------------+---------------------------------------------+
-| **Default value**  | 1514                                        |
-+--------------------+---------------------------------------------+
-| **Allowed values** | Any port number from 1 to 65535 is allowed. |
-+--------------------+---------------------------------------------+
-
-.. _legacy_protocol:
-
-protocol
-^^^^^^^^
-
-.. deprecated:: 3.0.0
-
-Specifies the protocol to use when connecting to manager.
-
-+--------------------+----------+
-| **Default value**  | tcp      |
-+--------------------+----------+
-| **Allowed values** | udp, tcp |
-+--------------------+----------+
 
 .. _reference_ossec_client_config_profile:
 
@@ -261,10 +186,10 @@ ip_update_interval
 
 .. versionadded:: 4.2.0
 
-Specifies how often an agent will query the control module for its main IP.
+Specifies how often an agent will query the control module for its main IP address.
 
 
-Any value equal to or lower than the configured ``notify_time`` will cause the IP to be queried on each keep-alive message.
+Any value equal to or lower than the configured ``notify_time`` will cause the IP address to be queried on each keep-alive message.
 
 +--------------------+-----------------------------+
 | **Default value**  | 0                           |
@@ -285,21 +210,6 @@ Specifies which IP address will be used to communicate with the manager when the
 | **Allowed values** | Any valid IP address is allowed. |
 +--------------------+----------------------------------+
 
-disable-active-response
-^^^^^^^^^^^^^^^^^^^^^^^
-
-**Deprecated:**
-
-.. warning::
-
-        This is an obsolete method to disable active response. The recommended way is by configuring as shown in the :doc:`active-response <active-response>` section.
-
-+--------------------+---------------------+
-| **Default value**  | no                  |
-+--------------------+---------------------+
-| **Allowed values** | yes, no             |
-+--------------------+---------------------+
-
 auto_restart
 ^^^^^^^^^^^^
 
@@ -313,8 +223,6 @@ Toggles on and off the automatic restart of agents when a new valid configuratio
 
 crypto_method
 ^^^^^^^^^^^^^
-
-.. versionadded:: 3.5.0
 
 Choose the encryption of the messages that the agent sends to the manager.
 
@@ -386,7 +294,7 @@ Enables/disables agent enrollment.
 manager_address
 ^^^^^^^^^^^^^^^
 
-Hostname or IP of the manager where the agent will be enrolled. If no value is set, the agent will try enrolling to the same manager that was specified for connection.
+Hostname or IP address of the manager where the agent will be enrolled. If no value is set, the agent will try enrolling to the same manager that was specified for connection.
 
 +--------------------+---------------------------------------+
 | **Default value**  | n/a                                   |
@@ -432,12 +340,12 @@ Groups name to which the agent belongs.
 agent_address
 ^^^^^^^^^^^^^
 
-Force IP address from the agent. If this is not set manager will extract source IP from enrollment message.
+Force IP address from the agent. If this is not set manager will extract source IP address from enrollment message.
 
 +--------------------+---------------------------------------------+
 | **Default value**  | src                                         |
 +--------------------+---------------------------------------------+
-| **Allowed values** | string - Valid IP.                          |
+| **Allowed values** | string - Valid IP address                   |
 +--------------------+---------------------------------------------+
 
 ssl_cipher
@@ -524,7 +432,7 @@ Time that agentd should wait after a successful registration.
 use_source_ip
 ^^^^^^^^^^^^^
 
-Force manager to compute IP from agent message.
+Force manager to compute IP address from agent message.
 
 +--------------------+-------------------------------------+
 | **Default value**  | no                                  |

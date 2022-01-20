@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
     :description: Learn more about how to monitor commands with Wazuh: how this feature works, its configuration, and frequently asked questions about this capability

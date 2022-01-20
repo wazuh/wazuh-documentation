@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: In this section of the Wazuh documentation, you will find more information on how to tune Elasticsearch: changing user passwords, memory locking, and shards and replicas.
@@ -182,7 +182,7 @@ Changing the default passwords of Elasticsearch is highly recommended in order t
 
     During the installation of Elasticsearch, the passwords for the different users were automatically generated. These passwords can be changed afterwards using API requests. Replace the following variables and execute the corresponding API call: 
 
-      - ``<elasticsearch_ip>``: The IP of the Elasticsearch node.
+      - ``<elasticsearch_ip>``: The IP address of the Elasticsearch node.
       - ``<username>``: The name of the user whose password is going to be changed.
       - ``<user_password>``: Current user's password. 
       - ``<new_password>``: The new password that will be assigned to the ``<username>`` user.

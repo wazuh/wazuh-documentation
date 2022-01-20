@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
    :description: The client.keys file stores the data used to authenticate secure agents. For more information and examples, check this section of the Wazuh documentation.
@@ -59,7 +59,7 @@ This file contains one line per each agent entry. In the case of agents, only on
 
 **Address**
 
-    Allowed source address range in CIDR format. If specified, the manager will only accept the agent if its source IP matches this address.
+    Allowed source address range in CIDR format. If specified, the manager will only accept the agent if its source IP address matches this address.
 
     +--------------------+----------------------------+
     | Format             | CIDR. Netmask is optional. |

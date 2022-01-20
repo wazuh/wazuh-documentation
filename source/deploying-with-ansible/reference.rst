@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Ansible is an open source platform designed for automating tasks. Learn more about the variable references in this section of the Wazuh documentation.
@@ -33,7 +33,7 @@ Elasticsearch / Opendistro
 
 **elasticsearch_network_host**
 
-  ElasticSearch, listening ip address
+  ElasticSearch, listening IP address
 
   *Default 127.0.0.1*
 
@@ -110,7 +110,7 @@ Kibana
 
 **elasticsearch_network_host**
 
-  Ip address or hostname of Elasticsearch node.
+  IP address or hostname of Elasticsearch node.
 
   *Default 127.0.0.1*
 

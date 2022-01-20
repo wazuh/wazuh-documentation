@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 .. meta::
   :description: Check out all the Wazuh release notes. Every update of the solution is cumulative and includes all enhancements and fixes from previous releases.
   
@@ -74,3 +74,9 @@ This section summarizes the most important features of each Wazuh release.
         release-3-1-0
         release-3-0-0
         release-2-1
+
+    .. toctree::
+        :maxdepth: 1
+        :hidden:
+        
+        release_4_2_0

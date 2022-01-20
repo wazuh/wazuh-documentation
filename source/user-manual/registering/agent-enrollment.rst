@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Wazuh agent's registration process provides the user with an automated mechanism to enroll agents with minimal configuration steps.
@@ -10,7 +10,7 @@ Registration using the enrollment method
 
 Wazuh includes a registration process that provides the user with an automated mechanism to enroll agents with minimal configuration steps. This feature is available for Wazuh 4.0.0 and later.
 
-To register an agent using the enrollment method, a manager with a valid IP needs to be configured first. The agent then checks for the registration key in the ``client.keys`` file, and when the file is empty, it automatically requests the key from the configured manager the agent is reporting to.
+To register an agent using the enrollment method, a manager with a valid IP address needs to be configured first. The agent then checks for the registration key in the ``client.keys`` file, and when the file is empty, it automatically requests the key from the configured manager the agent is reporting to.
 
 In the same way, if the communication with the manager gets lost, the agent requests a new key providing a hash of the current key. However, if the hash sent by the agent matches with one of the keys registered by the manager, authd rejects the request. This function allows the recovery of agents' communication even if the manager deletes, loses, corrupts, or replaces the agents' keys file.
 
@@ -50,8 +50,8 @@ Other configurations
 
 - *Disabled*: The enrollment method can be disabled by setting ``<enrollment><enabled>`` as ``no``. This prevents any registration through the Wazuh Agent, needing the use of ``agent-auth`` as in previous versions of Wazuh.
 - *Delay after enrollment*: After successful enrollment, the agent waits before communicating with the manager to guarantee synchronization between all Wazuh modules and cluster nodes. The waiting time is set to 20 seconds by default and can be modified in ``<enrollment><delay_after_enrollment>``.
-- *Use source IP*: The agent can request the manager to be registered using the IP of the connection instead of being registered with the option ``any``. This can be done by setting ``<enrollment><use_source_ip>`` as ``yes``. This option isn’t compatible with ``agent_address``.
-- *Agent address*: The agent can request the manager to be registered with a specified IP by setting ``<enrollment><agent_address>`` to any desired address. This option isn’t compatible with ``use_source_ip``.
+- *Use source IP*: The agent can request the manager to be registered using the IP address of the connection instead of being registered with the option ``any``. This can be done by setting ``<enrollment><use_source_ip>`` as ``yes``. This option isn’t compatible with ``agent_address``.
+- *Agent address*: The agent can request the manager to be registered with a specified IP address by setting ``<enrollment><agent_address>`` to any desired address. This option isn’t compatible with ``use_source_ip``.
 
 
 
@@ -98,7 +98,7 @@ In the following example, we show how an Ubuntu Wazuh agent can be installed, co
           # apt-get install wazuh-agent
 
 
-#. Edit ``/var/ossec/etc/ossec.conf`` to include the manager IP and, optional, any desired enrollment configuration:
+#. Edit ``/var/ossec/etc/ossec.conf`` to include the manager IP address and, optional, any desired enrollment configuration:
 
     .. code-block:: xml
 

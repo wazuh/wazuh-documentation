@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 You can run Wazuh and Elastic Stack on your own hardware, or use our hosted Wazuh Service on Wazuh Cloud. Our SaaS offers the easiest, fastest and comprehensible way to monitor your infrastructure. Wazuh Cloud is a scalable, highly available and customizable service that allows you to focus only on the deployment of Wazuh agents, which is very simple thanks to the Wazuh automated deployment variables.
 

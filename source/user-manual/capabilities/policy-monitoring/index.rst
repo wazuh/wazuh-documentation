@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
     :description: Wazuh uses three components to perform policy monitoring: Rootcheck, OpenSCAP and CIS-CAT. Learn more about these components here. 

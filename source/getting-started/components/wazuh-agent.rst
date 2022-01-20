@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: The Wazuh agent is one of the components of our solution. Learn about its architecture, modules, and how it communicates with the Wazuh manager.

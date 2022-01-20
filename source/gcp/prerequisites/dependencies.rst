@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 .. meta::
   :description: The Wazuh GCP module allows you to fetch logs from Google Pub/Sub and Google Storage. Learn more about installing the required dependencies in this section.
 
@@ -32,8 +32,9 @@ b) For Debian/Ubuntu operating systems:
   # apt-get update && apt-get install python3
 
 
-Pip
----
+a) For CentOS/RHEL/Fedora operating systems:
+
+.. code-block:: console
 
 The required modules can be installed with Pip, the Python package manager. Most of UNIX distributions have this tool available in their software repositories:
 
