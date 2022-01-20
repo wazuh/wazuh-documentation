@@ -23,10 +23,9 @@ You can also join our [users mailing list](https://groups.google.com/d/forum/waz
 ## Software and libraries used
 
 - [Python](https://www.python.org/) 3.5+
-- [Sphinx](http://www.sphinx-doc.org/) 3.2.0
+- [Sphinx](http://www.sphinx-doc.org/) 3.0.4
 - [sphinxcontrib-images](https://pypi.org/project/sphinxcontrib-images/) 0.9.2
-- [sphinx-tabs](https://github.com/djungelorm/sphinx-tabs) 1.2.1
-- [sphinx-toolbox](https://pypi.org/project/sphinx-toolbox/) 2.15.0
+- [sphinx-tabs](https://github.com/djungelorm/sphinx-tabs) 1.1.13
 
 ## Copyright & License
 
