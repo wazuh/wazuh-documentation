@@ -931,7 +931,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
         # /usr/local/bin/wget https://github.com/wazuh/wazuh-packages/raw/master/hp-ux/depothelper-2.10-hppa_32-11.31.depot --no-check-certificate
 
-      .. note:: If you can't download the script this way, then you should copy it through the scp utility.
+      .. note:: If you can't download the script this way, then you should copy it through the ``scp`` utility.
 
      1.2 Install the package manager.
 
@@ -1094,7 +1094,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
             # cd .. && rm -rf gcc-build && rm -rf gcc-5.5.0.tar.gz
             # rm -rf mpfr-2.4.2.tar.bz2 && rm -rf gmp-4.3.2.tar.bz2 && rm -rf mpc-0.8.1.tar.gz && rm -rf isl-0.14.tar.bz2
 
-          .. note:: The ``gmake`` step will take several minutes to complete. This is a normal behavior.
+          .. note:: The ``gmake`` step will take several minutes to complete, and this behavior is completely normal.
 
          1.4  Install cmake library:
 
@@ -1116,7 +1116,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
            # /opt/csw/bin/git clone -b v|WAZUH_LATEST| https://github.com/wazuh/wazuh.git
            # wget -P wazuh https://raw.githubusercontent.com/wazuh/wazuh-packages/master/solaris/solaris10/solaris10_patch.sh
 
-        3. Create an user and group called `ossec` needed for installation.
+        3. Create a user and group called `ossec` needed for installation.
 
          .. code-block:: console
 
@@ -1252,7 +1252,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
             # pkgutil -y -i git gmake cmake gcc5core gcc5g++
 
-          1.4  Install a gcc version to include all files needed in the next step:
+          1.4  Install a ``gcc`` version to include all files needed in the next step:
 
            .. code-block:: console
 
@@ -1274,7 +1274,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
             # export LD_LIBRARY_PATH=/usr/local/gcc-5.5.0/lib/
             # cd ..
 
-          .. note:: The ``gmake`` step will take several minutes to complete. This is a normal behavior.
+          .. note:: The ``gmake`` step will take several minutes to complete, and this behavior is completely normal.
 
           1.6  Install cmake library:
 
