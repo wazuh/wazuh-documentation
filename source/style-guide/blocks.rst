@@ -398,7 +398,7 @@ Grid table:
 +------------+------------+-----------+
 | body row 3 | Cells may  | - Cells   |
 +------------+ span rows. | - contain |
-| body row 4 |            | - blocks. |
+| body row 4 | [#fn1]_    | - blocks. |
 +------------+------------+-----------+
 
 Simple table:
@@ -570,6 +570,17 @@ Transition marker is a horizontal line of 4 or more repeated punctuation charact
 ------------
 
 A transition should not begin or end a section or document, nor should two transitions be immediately adjacent.
+
+Footnotes
+==========
+
+The text can contain **footnotes** [#fn2]_.
+
+.. [#fn1]
+    This is a **footnote**. You can find its reference inside a table some sections above (click the link in this line).
+    
+.. [#fn2]
+    This is another **footnote**.
 
 Images
 ======

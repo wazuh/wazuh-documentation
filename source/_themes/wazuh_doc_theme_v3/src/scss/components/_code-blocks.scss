@@ -117,6 +117,9 @@ main {
       padding-right: 0;
       padding-bottom: 20px;
     }
+    .code {
+      background-color: transparent;
+    }
   }
 
   &:hover {
@@ -178,6 +181,7 @@ main {
   }
 
   .linenos {
+    background-color: transparent;
     width: 48px;
   }
 
@@ -351,6 +355,9 @@ body {
     }
     .highlighttable {
       background-color: $dark_ColorCodeBlockBackground;
+      .linenos {
+        background-color: transparent;
+      }
     }
     .copy-to-clipboard {
       color: $dark_ColorMainText;

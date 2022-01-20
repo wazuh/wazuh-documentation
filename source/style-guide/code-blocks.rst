@@ -830,8 +830,8 @@ Bash
   $ sudo du -h /var/ossec | tail -n1
   $ sudo df -h /var
 
-  $ sudo rm -f /etc/ossec-init.conf
-  $ sudo rm -rf /var/ossec
+  # sudo rm -f /etc/ossec-init.conf
+  # sudo rm -rf /var/ossec
 
 .. code-block:: bash
 

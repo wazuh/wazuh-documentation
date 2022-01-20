@@ -70,58 +70,69 @@
     }
   }
   
-  .toctree-wrapper ul {
-    @include media-max(sm){
-      padding-left: 20px;
+  .toctree-wrapper {
+    padding-top: 1rem;
+    ul {
+      padding-left: 28px;
+      @include media-max(sm){
+        padding-left: 20px;
+      }
+      
+      li a {
+        display: inline-block;
+        padding-top: 0.2rem;
+        padding-bottom: 0.6rem;
+        line-height: 32px;
+      }
     }
   }
     
   .align-cells-top {
     th,
     td {
-      vertical-align: top;
+      vertical-align: top!important;
     }
   }
   .align-cells-middle {
     th,
     td {
-      vertical-align: middle;
+      vertical-align: middle!important;
     }
   }
   .align-cells-bottom {
     th,
     td {
-      vertical-align: bottom;
+      vertical-align: bottom!important;
     }
   }
   .align-data-top {
     td {
-      vertical-align: top;
+      vertical-align: top!important;
     }
   }
   .align-data-middle {
     td {
-      vertical-align: middle;
+      vertical-align: middle!important;
     }
   }
   .align-data-bottom {
     td {
-      vertical-align: bottom;
+      vertical-align: bottom!important;
     }
   }
   .align-header-top {
     th {
-      vertical-align: top;
+      vertical-align: top!important;
     }
   }
   .align-header-middle {
     th {
-      vertical-align: middle;
+      vertical-align: middle!important;
     }
   }
   .align-header-bottom {
     th {
-      vertical-align: bottom;
+      vertical-align: bottom!important;
     }
   }
 
@@ -135,7 +146,6 @@
       padding: 8px;
       font-size: 18px;
       font-weight: 600;
-      border: 1px solid;
     }
 
     .stub:not(.head) {
@@ -147,13 +157,12 @@
 
       th {
         padding: 8px;
-        border: 1px solid;
       }
       td {
         padding: 8px;
-        border: 1px solid;
       }
-      p {
+      p,
+      ul {
         margin-bottom: .15rem;
       }
     }
@@ -164,13 +173,19 @@
     &.docutils:not(.list-rows) {
       display: inline-block;
       max-width: 100%;
+      width: fit-content;
       overflow: hidden;
       overflow-x: auto;
       border-spacing: 0;
       border-collapse: separate;
-      border: 1px solid;
-      border-radius: $roundedCorners;
+      margin-bottom: -6px;
+      border-radius: calc(#{$roundedCorners} + 1px);
       perspective: 1px;
+      
+      td,
+      th {
+        border: 1px solid;
+      }
 
       &.release-notes {
         border-spacing: 0 2rem;
@@ -193,6 +208,7 @@
           padding-bottom: 0;
           padding-left: 1rem;
           border: none;
+          vertical-align: baseline;
         }
         
         p {
@@ -248,9 +264,19 @@ body {
       color: $light_ColorHighlightInlineText;
       background-color: $light_ColorHighlightBackground;
     }
+    td, 
+    th,
+    caption {
+      background-color: $light_ColorBaseSpace;
+    }
+    
     .docutils:not(.list-rows) {
       thead {
         background-color: $light_ColorPrimary;
+        
+        th {
+          background-color: $light_ColorPrimary;
+        }
       }
       
       th {
@@ -272,8 +298,6 @@ body {
           border-color: $light_ColorTableBorder;
         }
         td {
-          
-          
           border-color: $light_ColorTableBorder;
         }
       }
@@ -289,12 +313,18 @@ body {
             border-color: $light_ColorTableBorder;
           }
         }
-        td,
-        th {
-          background-color: $light_ColorBaseSpace;
-        }
       }
     }
+  }
+  .table-wrapper {
+    border-radius: $roundedCorners;
+    overflow: hidden;
+    width: fit-content;
+    height: fit-content;
+    max-width: 100%;
+    border: 1px solid transparent;
+    background: $light_ColorTableBorder;
+    margin-bottom: 1rem;
   }
 }
 
@@ -311,9 +341,18 @@ body {
       color: $dark_ColorHighlightInlineText;
       background-color: $dark_ColorHighlightBackground;
     }
+    td,
+    th,
+    caption {
+      background-color: $dark_ColorBaseSpace;
+    }
     .docutils:not(.list-rows) {
       thead {
         background-color: $dark_ColorPrimary;
+        
+        th {
+          background-color: $dark_ColorPrimary;
+        }
       }
       
       th {
@@ -335,8 +374,6 @@ body {
           border-color: $dark_ColorTableBorder;
         }
         td {
-          
-          
           border-color: $dark_ColorTableBorder;
         }
       }
@@ -344,6 +381,8 @@ body {
     
     table.docutils:not(.list-rows) {
       border-color: $dark_ColorTableBorder;
+      margin-bottom: -6px;
+      border-radius: calc(#{$roundedCorners} + 2px);
       
       &.release-notes {
         tr {
@@ -352,11 +391,24 @@ body {
             border-color: $dark_ColorTableBorder;
           }
         }
-        td,
-        th {
-          background-color: $dark_ColorBaseSpace;
-        }
       }
+    }
+  }
+  
+  .table-wrapper {
+    border-radius: $roundedCorners;
+    overflow: hidden;
+    width: fit-content;
+    height: fit-content;
+    max-width: 100%;
+    border-width: 0;
+    background-color: $dark_ColorTableBorder;
+    margin-bottom: 1rem;
+    padding: 1px;
+    &.w-header {
+      background-image: linear-gradient(to bottom, $dark_ColorPrimary 18%, $dark_ColorTableBorder 33%, $dark_ColorTableBorder 100% );
+      background-size: 100%;
+      background-repeat: no-repeat;
     }
   }
 }

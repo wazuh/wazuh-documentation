@@ -183,4 +183,15 @@ if ( $('.document') ) {
       }
     });
   });
+
+  /* Code related to the pages based on ReDoc ------------------------------- */
+  $('table.docutils:not(.list-rows)').each(function() {
+    if ( !$(this).hasClass('release-notes') ) {
+      if ( $(this).find('thead').length > 0 ) {
+        $(this).wrap('<div class="table-wrapper w-header"/>');
+      } else {
+        $(this).wrap('<div class="table-wrapper"/>');
+      }
+    }
+  });
 }

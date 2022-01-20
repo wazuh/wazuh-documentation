@@ -29,7 +29,7 @@ if ( $('.index') ) {
     }
   }
 
-  /* Add click event fuctionality for dropdown toggle button to uncollapse the index blocks */
+  /* Add click event functionality for dropdown toggle button to uncollapse the index blocks */
   $(document).delegate('.toctree-l1 .toggle', 'click', function(e) {
     e.preventDefault();
     const indexBlock = $(e.target).closest('.collapsible');
