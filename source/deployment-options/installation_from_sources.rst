@@ -176,7 +176,7 @@ To install the required dependencies to build the python interpreter, follow the
 
     .. code-block:: none
 
-      1- What kind of installation do you want (manager, agent, local, hybrid or help)? manager
+      1- What kind of installation do you want (manager, agent, local, hybrid, or help)? manager
 
     .. note::
       During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``manager``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``.
@@ -208,7 +208,7 @@ To install the required dependencies to build the python interpreter, follow the
 Installing Filebeat
 ~~~~~~~~~~~~~~~~~~~
 
-Filebeat is a data shipping tool that is installed on the Wazuh server to securely forward alerts and archived events to Elasticsearch.Once the Wazuh manager is installed, you may install Filebeat as well as the other Elastic Stack components from `sources <https://www.elastic.co/guide/en/beats/devguide/current/beats-contributing.html>`_ or using :ref:`packages  <packages>`.
+Filebeat is a data shipping tool that is installed on the Wazuh server to securely forward alerts and archived events to Elasticsearch. Once the Wazuh manager is installed, you may install Filebeat as well as the other Elastic Stack components from `sources <https://www.elastic.co/guide/en/beats/devguide/current/beats-contributing.html>`_ or using :ref:`packages  <packages>`.
 
 
 Uninstall
@@ -352,15 +352,15 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
      .. code-block:: none
        :class: output
 
-       1- What kind of installation do you want (manager, agent, local, hybrid or help)? agent
+       1- What kind of installation do you want (manager, agent, local, hybrid, or help)? agent
 
-    Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :ref:`user manual<register_agents>`.
+    Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the :ref:`user manual<register_agents>`.
 
     .. raw:: html
 
        <h2>Uninstall</h2>
 
-    To uninstall Wazuh agent, set WAZUH_HOME with the current installation path:
+    To uninstall the Wazuh agent, set WAZUH_HOME with the current installation path:
 
     .. code-block:: console
 
@@ -463,15 +463,15 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
      .. code-block:: none
        :class: output
 
-       1- What kind of installation do you want (manager, agent, local, hybrid or help)? agent
+       1- What kind of installation do you want (manager, agent, local, hybrid, or help)? agent
 
-    Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :ref:`user manual<register_agents>`.
+    Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the :ref:`user manual<register_agents>`.
 
     .. raw:: html
 
        <h2>Uninstall</h2>
 
-    To uninstall Wazuh agent, set WAZUH_HOME with the current installation path:
+    To uninstall the Wazuh agent, set WAZUH_HOME with the current installation path:
 
     .. code-block:: console
 
@@ -542,7 +542,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
         # make -j$(nproc) && make install
         # cd .. && rm -rf cmake-*
 
-      .. note:: For Suse 11, it is possible that some of the tools are not found in the package manager, in that case you can add the following official repository:
+      .. note:: For Suse 11, it is possible that some of the tools are not found in the package manager, in that case, you can add the following official repository:
 
       .. code-block:: console
 
@@ -579,15 +579,15 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
      .. code-block:: none
        :class: output
 
-       1- What kind of installation do you want (manager, agent, local, hybrid or help)? agent
+       1- What kind of installation do you want (manager, agent, local, hybrid, or help)? agent
 
-    Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :ref:`user manual<register_agents>`.
+    Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the :ref:`user manual<register_agents>`.
 
     .. raw:: html
 
        <h2>Uninstall</h2>
 
-    To uninstall Wazuh agent, set WAZUH_HOME with the current installation path:
+    To uninstall the Wazuh agent, set WAZUH_HOME with the current installation path:
 
     .. code-block:: console
 
@@ -696,7 +696,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
       :: signtool sign /a /tr http://rfc3161timestamp.globalsign.com/advanced /d "%MSI_NAME%" /td SHA256 "%MSI_NAME%"
 
-    .. note:: Once the Agent is deployed :ref:`with a normal or unattended installation <wazuh_agent_package_windows>`, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit :ref:`user manual<register_agents>`.
+    .. note:: Once the Agent is deployed :ref:`with a normal or unattended installation <wazuh_agent_package_windows>`, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the :ref:`user manual<register_agents>`.
 
     .. raw:: html
 
@@ -754,15 +754,15 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
      .. code-block:: none
       :class: output
 
-      1- What kind of installation do you want (manager, agent, local, hybrid or help)? agent
+      1- What kind of installation do you want (manager, agent, local, hybrid, or help)? agent
 
-    Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :ref:`user manual<register_agents>`.
+    Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the :ref:`user manual<register_agents>`.
 
     .. raw:: html
 
         <h2>Uninstall</h2>
 
-    To uninstall Wazuh agent, set WAZUH_HOME with the current installation path:
+    To uninstall the Wazuh agent, set WAZUH_HOME with the current installation path:
 
     .. code-block:: console
 
@@ -873,13 +873,13 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
      .. note:: Note that the above commands have been executed for the default installation path /var/ossec. If you have installed the agent in another path, you will have to modify the path of those commands.
 
-    Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :ref:`user manual<register_agents>`.
+    Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the :ref:`user manual<register_agents>`.
 
     .. raw:: html
 
         <h2>Uninstall</h2>
 
-    To uninstall Wazuh agent, set WAZUH_HOME with the current installation path:
+    To uninstall the Wazuh agent, set WAZUH_HOME with the current installation path:
 
     .. code-block:: console
 
@@ -993,13 +993,13 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
     .. note:: During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``. When choosing a different path than the default, if the directory already exists, the installer will ask to delete the directory or install Wazuh inside. You can also run an :ref:`unattended installation <unattended-installation>`.
 
-    Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :ref:`user manual<register_agents>`.
+    Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the :ref:`user manual<register_agents>`.
 
     .. raw:: html
 
        <h2>Uninstall</h2>
 
-    To uninstall Wazuh agent, set WAZUH_HOME with the current installation path:
+    To uninstall the Wazuh agent, set WAZUH_HOME with the current installation path:
 
     .. code-block:: console
 
@@ -1178,15 +1178,15 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
          .. code-block:: none
            :class: output
 
-           1- What kind of installation do you want (manager, agent, local, hybrid or help)? agent
+           1- What kind of installation do you want (manager, agent, local, hybrid, or help)? agent
 
-        Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :ref:`user manual<register_agents>`.
+        Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the :ref:`user manual<register_agents>`.
 
         .. raw:: html
 
            <h2>Uninstall</h2>
 
-        To uninstall Wazuh agent, set WAZUH_HOME with the current installation path:
+        To uninstall the Wazuh agent, set WAZUH_HOME with the current installation path:
 
         .. code-block:: console
 
@@ -1317,16 +1317,16 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
          .. code-block:: none
           :class: output
 
-          1- What kind of installation do you want (manager, agent, local, hybrid or help)? agent
+          1- What kind of installation do you want (manager, agent, local, hybrid, or help)? agent
 
-        Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :ref:`user manual<register_agents>`.
+        Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the :ref:`user manual<register_agents>`.
 
 
         .. raw:: html
 
            <h2>Uninstall</h2>
 
-        To uninstall Wazuh agent, set WAZUH_HOME with the current installation path:
+        To uninstall the Wazuh agent, set WAZUH_HOME with the current installation path:
 
         .. code-block:: console
 
