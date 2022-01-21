@@ -84,53 +84,31 @@ Installing Wazuh
 
    .. code-block:: console
 
-     # curl -sO https://s3.us-west-1.amazonaws.com/packages-dev.wazuh.com/resources/4.2/unattended_installation.sh && sudo bash ./unattended_installation.sh -A
+     # curl -sO https://s3.us-west-1.amazonaws.com/packages-dev.wazuh.com/wazuh_install/4.3/wazuh_install.sh && sudo bash ./wazuh_install.sh -a
 
-   After executing the script, the output prompts all the users' passwords, and a message confirms that the installation was successful.
+   After executing the script, the output prompts the access credentials and a message that confirms that the installation was successful.
 
-   Expand the output to see an example response.
    
-   .. code-block:: none
-     :class: output accordion-output
-     :emphasize-lines: 1,26
+   .. code-block:: console
+     :emphasize-lines: 4
+     
+     INFO: Passwords changed.
+     INFO: Starting Wazuh dashboard (this may take a while).
+     INFO: Wazuh dashboard started.
+     INFO: You can access the web interface https://<wazuh-dashboard-ip>. The credentials are admin:DARNUVMF1ptnUE9hhXpM55QBmSi7MHa2
+     INFO: Installation finished.
 
-      The password for wazuh is vhDpq7YcwA08BLTmcdeYeJmXPU_VD31f
-
-      The password for admin is uLo9SBKCE80B8OSE8zNbOWlVvHlOjQ00
-      
-      The password for kibanaserver is -A452dUzB8gnk3ed7nSuci_kNiSZ0y6z
-      
-      The password for kibanaro is yyNBlV28VzJHKnYVPNLgoAEssgics9d4
-      
-      The password for logstash is Hm86wUT7paLDPNhtq-I6Q1H8Weh7tX-g
-      
-      The password for readall is ZDqyYqvV5moE60k_X5580-4US6CIjBmi
-      
-      The password for snapshotrestore is FCHX-YhCV_o6IE8x_AA6lFQsjzlmCVe7
-      
-      The password for wazuh_admin is rkDgTQEnyw8Li3hYXfhD9td-voCw1awm
-      
-      The password for wazuh_user is _9JE9cY2nMWdR5GRb_Gda8ikrRRvsASH
-      
-      Checking the installation...
-      Elasticsearch installation succeeded.
-      Filebeat installation succeeded.
-      Initializing Kibana (this may take a while)
-      .
-      Installation finished
-      
-      You can access the web interface https://<server_ip>. The credentials are wazuh:vhDpq7YcwA08BLTmcdeYeJmXPU_VD31f
 
    You now have installed and configured Wazuh. 
 
-#. Access the Wazuh web interface with ``https://<server_ip>`` and your credentials:
+#. Access the Wazuh web interface with ``https://<wazuh-dashboard-ip>`` and your credentials:
 
-    - **Username**: wazuh
-    - **Password**: <wazuh_password>
+    - **Username**: admin
+    - **Password**: <admin_password>
 
    When you access the Wazuh dashboard for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or, for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser. Alternatively, a certificate from a trusted authority can be configured. 
 
-If you want to uninstall the Wazuh central components, run the unattended installation script and use the option ``-r / --uninstall``.  
+If you want to uninstall the Wazuh central components, run the unattended installation script and use the option ``-u / --uninstall``.  
 
 Next steps
 ----------

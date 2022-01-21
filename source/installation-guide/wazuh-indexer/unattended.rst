@@ -34,8 +34,8 @@ Create the SSL certificates to encrypt communications between the Wazuh componen
 
       .. code-block:: console
 
-          # curl -sO https://packages.wazuh.com/resources/wazuh_install.sh 
-          # curl -sO https://packages.wazuh.com/resources/config.yml
+          # curl -sO https://s3.us-west-1.amazonaws.com/packages-dev.wazuh.com/wazuh_install/4.3/wazuh_install.sh
+          # curl -sO https://s3.us-west-1.amazonaws.com/packages-dev.wazuh.com/wazuh_install/4.3/config.yml
        
 #. Edit ``./config.yml`` and replace the node names and IP values with the corresponding names and IP addresses. You need to do this for all the Wazuh server, the Wazuh indexer, and the Wazuh dashboard nodes. Add as many node fields as needed.
 
@@ -80,13 +80,13 @@ Create the SSL certificates to encrypt communications between the Wazuh componen
     +=================================================+================================================================================================================+
     | -I / --wazuh-indexer <wazuh-indexer-node-name>  | Installs the Wazuh indexer. You need to indicate the Wazuh indexer node name.                                  |
     +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -c / --create-certificates                      | Creates certificates from ``config.yml`` file                                                                  |
+    | -c / --create-configurations                    | Creates ``configurations.tar`` file containing config.yml, certificates, passwords and cluster key.            |
     +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
     | -s / --start-cluster                            | Starts the Wazuh indexer cluster                                                                               |
     +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -o / --overwrite                                | Overwrites the existing installation                                                                           |
+    | -o / --overwrite                                | Overwrites the existing installation. Note: This will erase all the existing configuration and data.           |
     +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -r / --uninstall                                | Removes the installation                                                                                       |
+    | -u / --uninstall                                | Uninstalls all Wazuh components. Note: This will erase all the existing configuration and data.                |
     +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
     | -v / --verbose                                  | Shows the complete installation output                                                                         |
     +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
@@ -99,20 +99,20 @@ Create the SSL certificates to encrypt communications between the Wazuh componen
     | -h / --help                                     | Shows help                                                                                                     |
     +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+        
 
-#.  Copy the ``certs/`` folder to all the servers of the distributed deployment, including the Wazuh server, the Wazuh indexer, and the Wazuh dashboard nodes. This can be done by using, for example, ``scp``.
+#.  Copy the ``configurations.tar`` folder to all the servers of the distributed deployment, including the Wazuh server, the Wazuh indexer, and the Wazuh dashboard nodes. This can be done by using, for example, ``scp``.
 
 
 2. Wazuh indexer nodes installation
 ------------------------------------
 
-Install and configure the Wazuh indexer nodes. Make sure that a copy of ``certs/``, created during the previous step, is placed in your working directory.
+Install and configure the Wazuh indexer nodes. Make sure that a copy of ``configurations.tar``, created during the previous step, is placed in your working directory.
 
 
 #. Download the script.
 
       .. code-block:: console
 
-        # curl -sO https://packages.wazuh.com/resources/wazuh_install.sh
+        # curl -sO https://s3.us-west-1.amazonaws.com/packages-dev.wazuh.com/wazuh_install/4.3/wazuh_install.sh
 
 
 #. Run the script with the options ``-I`` and the node name to install and configure the Wazuh indexer. The node name must be the same used in ``config.yml`` for the certificate creation, for example, ``node-1``.
@@ -131,11 +131,11 @@ Repeat this process on each Wazuh indexer node and proceed with initializing the
 
 The final stage of the process for installing Wazuh indexer cluster consists in running the security admin script. 
 
-Run the unattended script with option ``-s`` to load the new certificates information and start the cluster. Replace ``<elasticsearch_IP>`` with the Wazuh indexer installation IP address and run the command.
+Run the unattended script with option ``-s`` to load the new certificates information and start the cluster. 
 
   .. code-block:: console
 
-    # bash ./wazuh_install.sh -s <elasticsearch_IP>
+    # bash ./wazuh_install.sh -s
 
 
 Next steps
