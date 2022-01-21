@@ -47,21 +47,21 @@ Adding the Wazuh repository
       .. group-tab:: Yum
 
 
-        .. include:: /_templates/installations/indexer/yum/add_repository.rst
+        .. include:: /_templates/installations/common/yum/add_repository.rst
 
 
 
       .. group-tab:: APT
 
 
-        .. include:: /_templates/installations/indexer/deb/add_repository.rst
+        .. include:: /_templates/installations/common/deb/add_repository.rst
 
 
 
       .. group-tab:: ZYpp
 
 
-        .. include:: /_templates/installations/indexer/zypp/add_repository.rst
+        .. include:: /_templates/installations/common/zypp/add_repository.rst
 
 
 

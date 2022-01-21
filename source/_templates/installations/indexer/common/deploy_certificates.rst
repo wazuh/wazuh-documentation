@@ -23,15 +23,15 @@
      # mv /etc/wazuh-indexer/certs/$NODE_NAME.pem /etc/wazuh-indexer/certs/elasticsearch.pem
      # mv /etc/wazuh-indexer/certs/$NODE_NAME-key.pem /etc/wazuh-indexer/certs/elasticsearch-key.pem     
 
-#. Copy ``certs/`` to all the remaining nodes of the distributed deployment, including Wazuh indexer, Wazuh server, and Wazuh dashboard nodes. This can be done by using ``scp``. 
+#. Compress all the necessary files to be sent to all the instances.
 
-#. **Recommended action** - To increase security, remove ``certs/`` running ``rm -r ./certs`` unless you want to install other Wazuh components on this node.
+    .. code-block:: console
 
-..
-  #. Compress all the necessary files to be sent to all the instances.
+      # tar -cvf ./certs.tar -C ./certs/ .
+      # rm -r ./certs/
 
-     .. code-block:: console
+#. Copy ``certs.tar`` to all the remaining nodes of the distributed deployment, including Wazuh indexer, Wazuh server, and Wazuh dashboard nodes. This can be done by using ``scp``. 
 
-       # tar -cvf ./certs.tar -C ./certs/ .
+#. **Recommended action** - To increase security, remove ``certs.tar`` running ``rm -f certs.tar`` unless you want to install other Wazuh components on this node.
 
 .. End of include file

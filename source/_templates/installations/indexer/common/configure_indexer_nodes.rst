@@ -4,11 +4,12 @@
 
    .. code-block:: console
 
-      # curl -so /etc/wazuh-indexer/opensearch.yml https://packages.wazuh.com/resources/4.3/wazuh-indexer/opensearch/7.x/opensearch_cluster_initial_node.yml
+      # curl -so /etc/wazuh-indexer/opensearch.yml https://packages.wazuh.com/resources/|WAZUH_LATEST_MINOR|/wazuh-indexer/opensearch/7.x/opensearch_cluster_initial_node.yml
 
 #. Edit ``/etc/wazuh-indexer/opensearch.yml``.
 
     .. code-block:: yaml
+      :emphasize-lines: 1,2,4-7,11
 
       network.host: "<indexer_ip>"
       node.name: "<indexer_node_name>"
@@ -27,6 +28,7 @@
       ...
 
     .. code-block:: yaml
+      :emphasize-lines: 3,4,6,7
 
         ...
        
@@ -40,6 +42,7 @@
         ...
 
     .. code-block:: yaml
+      :emphasize-lines: 4-6
 
         ...
 

@@ -4,8 +4,8 @@
 
    .. code-block:: console
 
-     # curl -sO https://packages.wazuh.com/resources/4.3/indexer/tools/certificate-utility/wazuh-cert-tool.sh
-     # curl -sO https://packages.wazuh.com/resources/4.3/indexer/tools/certificate-utility/instances.yml
+     # curl -sO https://packages.wazuh.com/resources/|WAZUH_LATEST_MINOR|/indexer/tools/certificate-utility/wazuh-cert-tool.sh
+     # curl -sO https://packages.wazuh.com/resources/|WAZUH_LATEST_MINOR|/indexer/tools/certificate-utility/instances.yml
 
 #. Edit ``./instances.yml`` and replace the node certificate names and IP values with the corresponding certificate names and IP addresses. Add or remove as many node fields as needed.
 
