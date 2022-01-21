@@ -90,6 +90,7 @@ newUrls['4.3'] = [
   '/gcp/supported-services/vpc_flow.html',
   '/gcp/supported-services/firewall.html',
   '/amazon/services/supported-services/ecr-image-scanning.html',
+  '/development/selinux-wazuh-context.html',
 ];
 
 removedUrls['4.3'] = [
