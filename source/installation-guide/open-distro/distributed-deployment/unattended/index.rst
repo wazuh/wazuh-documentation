@@ -168,8 +168,6 @@ Installing Kibana
 
     .. note:: If Kibana is accessed before installing the Wazuh server, the Wazuh Kibana plugin indicates that it cannot establish a connection with the Wazuh API. Proceed with the Wazuh server installation to remediate this.
 
-    .. note:: It is highly recommended to change the passwords of the Elasticsearch users' passwords. To perform this action, see the :ref:`Elasticsearch tuning <change_elastic_pass>` section.
-
 Next steps
 ----------
 
