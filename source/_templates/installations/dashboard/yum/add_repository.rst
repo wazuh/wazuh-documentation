@@ -1,4 +1,4 @@
-.. Copyright (C) 2015-2022 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 #. Install the necessary packages for the installation.
 
@@ -7,7 +7,7 @@
       # yum install -y curl
 
     ..
-      # yum install -y curl unzip wget
+      # yum install -y curl libcap
 
 #. Import the GPG key.
 

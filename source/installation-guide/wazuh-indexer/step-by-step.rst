@@ -47,21 +47,21 @@ Adding the Wazuh repository
       .. group-tab:: Yum
 
 
-        .. include:: /_templates/installations/indexer/yum/add_repository.rst
+        .. include:: /_templates/installations/wazuh/yum/add_repository.rst
 
 
 
       .. group-tab:: APT
 
 
-        .. include:: /_templates/installations/indexer/deb/add_repository.rst
+        .. include:: /_templates/installations/wazuh/deb/add_repository.rst
 
 
 
       .. group-tab:: ZYpp
 
 
-        .. include:: /_templates/installations/indexer/zypp/add_repository.rst
+        .. include:: /_templates/installations/wazuh/zypp/add_repository.rst
 
 
 
@@ -85,7 +85,7 @@ Deploying certificates
 ^^^^^^^^^^^^^^^^^^^^^^
 
   .. note::
-    Make sure that a copy of ``certs/``, created during the previous step, is placed in your working directory.
+    Make sure that a copy of ``certs.tar``, created in the previous stage, is placed in your working directory.
 
   .. include:: /_templates/installations/indexer/common/deploy_certificates.rst
 
@@ -105,8 +105,6 @@ Testing the installation
 
         # curl -k -u admin:admin https://localhost:9700
 
-
-      Expand the output to see an example response.
 
       .. code-block:: none
           :class: output accordion-output
@@ -132,8 +130,6 @@ Testing the installation
 
         # curl -k -u admin:admin https://localhost:9700/_cluster/health?pretty
 
-
-      Expand the output to see an example response.
 
       .. code-block:: none
           :class: output accordion-output
@@ -162,15 +158,13 @@ Testing the installation
         # curl -k -u admin:admin https://localhost:9700/_cat/indices?pretty
 
 
-      Expand the output to see an example response.
-
       .. code-block:: none
           :class: output accordion-output
 
           green  open .opendistro_security         tgoKvr_0Rw61EF62F7XFOQ 1 0    9 0  60.3kb  60.3kb
 
  
-You now have installed and configured a Wazuh indexer node. Repeat this process for every Wazuh indexer node in your cluster.
+You now have installed and configured a Wazuh indexer node. Repeat this stage of the installation process for every Wazuh indexer node in your cluster.
 
 
 3. Cluster initialization

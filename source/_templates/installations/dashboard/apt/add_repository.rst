@@ -1,4 +1,4 @@
-.. Copyright (C) 2015-2022 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 #. Install the necessary packages for the installation.
 
@@ -7,7 +7,7 @@
       # apt install curl
 
     ..
-      # apt install curl apt-transport-https unzip wget software-properties-common
+      # apt install curl apt-transport-https libcap2-bin
 
 #. Install the GPG key.
 

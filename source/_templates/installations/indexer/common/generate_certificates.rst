@@ -40,11 +40,21 @@
   
    To learn more about how to create and configure the certificates, see the :doc:`/user-manual/certificates` section.
 
-#. Run the ``./wazuh-cert-tool.sh`` to create the certificates. These certificates are later deployed to all Wazuh instances.
+#. Run the ``./wazuh-cert-tool.sh`` to create the certificates. These certificates need to be later deployed to all Wazuh instances.
 
    .. code-block:: console
 
      #  bash ./wazuh-cert-tool.sh
 
    
+#. Compress all the necessary files to be sent to all the instances.
+
+   .. code-block:: console
+
+     # tar -cvf ./certs.tar -C ./certs/ .
+     # rm -r ./certs
+
+
+#. Copy ``certs.tar`` to all the nodes of the distributed deployment, including Wazuh indexer, Wazuh server, and Wazuh dashboard nodes. This can be done by using ``scp``. 
+
 .. End of include file
