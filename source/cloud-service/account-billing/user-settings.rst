@@ -65,8 +65,3 @@ To enable multi-factor authentication:
 4. Click **Enable MFA** to complete the process.
 
   If your device is lost or stolen, contact support through the **Help** section of the Wazuh Cloud Console.
-
-Configure your login method
----------------------------
-
-You can log in to your `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_ using password-based login or Google Sign-In. It is not possible to switch between them.

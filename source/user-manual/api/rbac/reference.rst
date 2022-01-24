@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. Section marks used on this document:
 .. h0 ======================================
@@ -327,9 +327,9 @@ agent:restart
 
 agent:upgrade
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`GET /agents/{agent_id}/upgrade_result <operation/api.controllers.agent_controller.get_agent_upgrade>` (`agent:id`_, `agent:group`_)
-- :api-ref:`PUT /agents/{agent_id}/upgrade <operation/api.controllers.agent_controller.put_upgrade_agent>` (`agent:id`_, `agent:group`_)
-- :api-ref:`PUT /agents/{agent_id}/upgrade_custom <operation/api.controllers.agent_controller.put_upgrade_custom_agent>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /agents/upgrade_result <operation/api.controllers.agent_controller.get_agent_upgrade>` (`agent:id`_, `agent:group`_)
+- :api-ref:`PUT /agents/upgrade <operation/api.controllers.agent_controller.put_upgrade_agents>` (`agent:id`_, `agent:group`_)
+- :api-ref:`PUT /agents/upgrade_custom <operation/api.controllers.agent_controller.put_upgrade_custom_agents>` (`agent:id`_, `agent:group`_)
 
 
 Ciscat

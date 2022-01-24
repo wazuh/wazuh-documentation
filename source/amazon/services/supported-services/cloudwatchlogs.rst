@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. _aws_cloudwatchlogs:
 

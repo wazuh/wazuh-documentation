@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: This section guides you through an installation of the Wazuh server and Elastic Stack components in an all-in-one configuration. 

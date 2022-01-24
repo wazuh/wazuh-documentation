@@ -1,11 +1,9 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. _cluster_control:
 
 cluster_control
 ===============
-
-.. versionadded:: 3.0.0
 
 The cluster_control program allows you to manage the cluster from any manager. It is necessary that ``wazuh-clusterd`` is running
 in order to use this tool.

@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Wazuh 3.11.0 has been released. Check out our release notes to discover the changes and additions of this release.
@@ -33,7 +33,7 @@ Wazuh core
 **Log collection**
 
 - Allowed JSON escaping for logs in the output format.
-- Added the host's primary IP in the output format.
+- Added the host's primary IP address in the output format.
 - Wildcards don't detect directories as log files any more.
 
 **Analysis engine**

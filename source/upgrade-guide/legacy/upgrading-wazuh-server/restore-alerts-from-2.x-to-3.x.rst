@@ -1,11 +1,9 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. _restore_alerts_2.x_3.x:
 
 Restore the Wazuh alerts from Wazuh 2.x
 =======================================
-
-.. versionadded:: 3.1.0
 
 After upgrading Wazuh from 2.x to 3.x, the old alerts will not be lost, however, they cannot be visualized in Kibana due to a change in the Wazuh alerts' template. In order to access the old alerts and visualize them along with the new ones, the indices need to be reindexed to apply the new mapping.
 

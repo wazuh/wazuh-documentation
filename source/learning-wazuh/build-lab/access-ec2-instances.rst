@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: One of the steps in preparing your Wazuh Lab Environment involves establishing access to your EC2 instances. Learn how to do it in this section.
@@ -8,21 +8,21 @@
 Establish access to your EC2 instances
 ======================================
 
-Before you can actually access your new EC2 instances you must first set up public IPs through which to reach them, as well as use
+Before you can actually access your new EC2 instances you must first set up public IP addresses through which to reach them, as well as use
 your Wazuh Lab key pair for authentication.
 
 
 Elastic IPs
 -----------
 
-We will set up an Elastic IP for each new EC2 instance.  You will use these IPs only for reaching your EC2 instances from outside
+We will set up an Elastic IP address for each new EC2 instance. You will use these IP addresses only for reaching your EC2 instances from outside
 of the VPC, like for SSH, RDP, or HTTPS.  The instances will communicate with each other exclusively via their
 VPC private IPs.
 
 For each of the new EC2 instances (Wazuh Server, Linux Agent, Elastic Server,
 Windows Agent), do the following:
 
-- Access `Elastic IPs <https://console.aws.amazon.com/ec2/home#Addresses>`_ from your `EC2 Dashboard <https://console.aws.amazon.com/ec2/v2/home>`_.
+- Access `Elastic IP addresses <https://console.aws.amazon.com/ec2/home#Addresses>`_ from your `EC2 Dashboard <https://console.aws.amazon.com/ec2/v2/home>`_.
 - Click on **[Allocate new address]**, choose "VPC", "Amazon pool", click on **[Allocate]** and on **[Close]**.
 
 .. thumbnail:: ../../images/learning-wazuh/build-lab/alloc_address.png
@@ -30,11 +30,11 @@ Windows Agent), do the following:
         :align: center
         :width: 75%
 
-- Select the newly created Elastic IP (which has no Instance yet).
+- Select the newly created Elastic IP address (which has no Instance yet).
 - Click on **[Actions]** and choose "Associate address".
 - Click on the empty *Instance* field select your EC2 instance (Wazuh Server, Linux Agent, Elastic Server, Windows Agent) to assign this
-  Elastic IP to it.
-- Click on the empty *Private IP* field and pick the IP that pops up.  There
+  Elastic IP address to it.
+- Click on the empty *Private IP* field and pick the IP address that pops up.  There
   will only be one.
 - Click on **[Associate]**.
 
@@ -54,7 +54,7 @@ Then log in to the linux EC2 instances:
 
     ssh -i Wazuh_Lab.pem centos@N.N.N.N
 
-Replace ``N.N.N.N`` with the Elastic IP of your Linux instance (Wazuh Server, Linux Agent or Elastic Server).
+Replace ``N.N.N.N`` with the Elastic IP address of your Linux instance (Wazuh Server, Linux Agent or Elastic Server).
 
 The exact syntax of this command may vary depending on your operating system and
 specific SSH client.  Consult your system's and/or SSH client's documentation
@@ -86,7 +86,7 @@ Use PuTTYgen to convert your key file into a form Putty can authenticate with
       .ppk file extension.
     - Close PuTTYgen.
     - Run PuTTY (**C:\\Program Files (x86)\\PuTTY\\putty.exe**)
-    - Under *Host Name* put the Elastic IP associated with the Linux EC2 instance.
+    - Under *Host Name* put the Elastic IP address associated with the Linux EC2 instance.
     - Under *Saved Session* put the instance name (i.e. Wazuh Server)
 
     .. thumbnail:: ../../images/learning-wazuh/build-lab/putty.png
@@ -137,6 +137,6 @@ RDP access to Windows instance
 
 - Click on **[Decrypt Password]**.
 - Save the Administrator password somewhere so you don't lose it.
-- Open an RDP session with the Elastic IP you associated with your Windows
+- Open an RDP session with the Elastic IP address you associated with your Windows
   instance, using the Administrator account and the password you just acquired.
 - When prompted in Windows about making your PC be discoverable, choose "No".

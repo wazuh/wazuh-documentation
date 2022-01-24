@@ -1,11 +1,9 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. _agent_upgrade:
 
 agent_upgrade
 ==============
-
-.. versionadded:: 3.0.0
 
 The agent_upgrade program allows you to list outdated agents and upgrade them.
 
