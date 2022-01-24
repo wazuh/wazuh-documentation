@@ -76,16 +76,12 @@ Configuring the Wazuh indexer
 
   .. include:: /_templates/installations/indexer/common/configure_indexer_nodes.rst
 
-Adding Wazuh indexer roles and users
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-..
-  .. include:: ../../_templates/installations/elastic/common/add_roles_and_users.rst
 
 Deploying certificates
 ^^^^^^^^^^^^^^^^^^^^^^
 
   .. note::
-    Make sure that a copy of ``certs/``, created during the previous step, is placed in your working directory.
+    Make sure that a copy of ``certs.tar``, created during the previous step, is placed in your working directory.
 
   .. include:: /_templates/installations/indexer/common/deploy_certificates.rst
 
