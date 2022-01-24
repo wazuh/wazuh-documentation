@@ -1,0 +1,70 @@
+/* -----------------------------------------------------------------------------
+  Component: accordions
+
+  Style for the accordion sections.
+----------------------------------------------------------------------------- */
+
+.section.accordion-parent {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.accordion-title {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  border-bottom: 2px solid;
+  height: 1.5em;
+  @include media-max(xl){
+    display: inline-block;
+    height: auto;
+  }
+
+  &::before {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    content: '';
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    background-position: center;
+    transition: transform .2s;
+    @include media-max(xl){
+      width: 14px;
+      height: 14px;
+    }
+  }
+  
+  &.collapsed {
+    &::before {
+      transform: rotateZ(-90deg);
+      transition: transform .2s;
+    }
+  }
+}
+
+
+/* Light theme -------------------------------------------------------------- */
+
+body {
+  .accordion-title {
+    border-bottom-color: $light_ColorBorderDeeper;
+    &::before {
+      background-image: url('#{$icoPath}svg-icons.svg#chevron-blue-lt');
+    }
+  }
+}
+
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme {
+  .accordion-title {
+    border-bottom-color: $dark_ColorBorderDeeper;
+    &::before {
+      background-image: url('#{$icoPath}svg-icons.svg#chevron-blue-dt');
+    }
+  }
+}

@@ -1,0 +1,180 @@
+/* -----------------------------------------------------------------------------
+  Component: Version selector
+
+  Style for the release version selector.
+----------------------------------------------------------------------------- */
+
+header {
+  .tooltip {
+    font-family: Manrope, sans-serif;
+  }
+}
+
+#version-selector {
+
+  &.show {
+    .dropdown-toggle::after {
+      transform: rotate(180deg);
+    }
+  }
+
+  .dropdown-btn {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    transition: color 0s;
+    justify-content: space-between;
+    width: calc((#{$leftSidebarWidth} + 32px) / 2);
+    height: 40px;
+    border: 2px solid;
+    border-radius: $roundedCorners;
+    @include media-max(sm) {
+      font-size: 14px;
+    }
+    @include media-max(xl) {
+      border: none;
+      padding: 0;
+      width: auto;
+    }
+    &:focus  {
+      box-shadow: none;
+    }
+    span {
+      @include media-max(xl) {
+        padding-right: 5px;
+      }
+    }
+  }
+  .dropdown-menu {
+    top: 52px;
+    box-sizing: border-box;
+    width: 100%;
+    border: 2px solid;
+    border-radius: 10px;
+    @include media-max(sm) {
+      font-size: 14px;
+    }
+    
+    @include media-max(xl) {
+      border: none;
+      padding: 0;
+      max-height: calc(100vh - 70px - 56px);
+      overflow-y: auto;
+      left: -10px!important;
+    }
+
+    > li > a {
+      display: inline-block;
+      width: 100%;
+      padding: .16rem .75rem;
+      text-decoration: none;
+
+      &:hover,
+      &:focus {
+        font-weight: 500;
+      }
+      
+      &.disabled {
+        font-weight: 500;
+        
+        &:hover,
+        &:focus {
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}
+
+/* Light theme -------------------------------------------------------------- */
+
+body {
+  header {
+    .tooltip {
+      .arrow::before {
+        border-left-color: $light_ColorHighlightBackground;
+      }
+      .tooltip-inner {
+        color: $light_ColorMainText;
+        background-color: $light_ColorHighlightBackground;
+      }
+    }
+  }
+  
+  #version-selector {
+    .dropdown-btn {
+      color: $light_ColorMainText;
+      @include media-min(xl) {
+        background-color: $light_ColorBaseSpace;
+        border-color:  $light_ColorAccent;
+      }
+      &[aria-expanded="false"]:focus {
+        box-shadow: inset 0 0 2px 2px rgba($light_ColorFocusShade, .2);
+      }
+    }
+    .dropdown-menu {
+      background-color: $light_ColorSidebarSpace;
+      @include media-min(xl) {
+        background-color: $light_ColorBaseSpace;
+        border-color:  $light_ColorAccent;
+      }
+      > li > a {
+        color: $light_ColorMainText;
+        &:hover,
+        &:focus {
+          background-color: $light_ColorHighlightBackground;
+        }
+        &.disabled {
+          color: $light_ColorBorderDeeper;
+        }
+      }
+    }
+  }
+}
+
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme {
+  header {
+    .tooltip {
+      .arrow::before {
+        border-left-color: $dark_ColorHighlightBackground;
+      }
+      .tooltip-inner {
+        color: $dark_ColorMainText;
+        background-color: $dark_ColorHighlightBackground;
+      }
+    }
+  }
+  
+  #version-selector {
+    .dropdown-btn {
+      color: $dark_ColorMainText;
+      background-color: $dark_ColorSidebarSpace;
+      @include media-min(xl) {
+        background-color: $dark_ColorBaseSpace;
+        border-color:  $dark_ColorAccent;
+      }
+      &[aria-expanded="false"]:focus {
+        box-shadow: inset 0 0 2px 2px rgba($dark_ColorFocusShade, .5);
+      }
+    }
+    .dropdown-menu {
+      background-color: $dark_ColorSidebarSpace;
+      @include media-min(xl) {
+        background-color: $dark_ColorBaseSpace;
+        border-color:  $dark_ColorAccent;
+      }
+      > li > a {
+        color: $dark_ColorMainText;
+        &:hover,
+        &:focus {
+          background-color: $dark_ColorHighlightBackground;
+        }
+        &.disabled {
+          color: $dark_ColorInputPlaceholder;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,414 @@
+/* -----------------------------------------------------------------------------
+  Defaults for content (inc)
+
+  General complete style specifically required for the content, including
+  lists, tables, etc. that is not necessarily need in all pages.
+----------------------------------------------------------------------------- */
+
+@import "../components/accordions";
+@import "../components/admonitions";
+@import "../components/step-cards";
+@import "../components/breadcrumbs";
+@import "../components/code-blocks";
+@import "../components/customized-tabs";
+@import "../components/lightbox";
+@import "../components/link-boxes";
+@import "../components/previous-next";
+
+#central-column {
+  padding-top: $breadcrumbsHeightXl;
+  @include media-max(sm){
+    padding-top: 0;
+  }
+
+  dl {
+    dt {
+      padding: .2rem .5rem .2rem 0;
+    }
+    dd {
+      padding: .5rem .5rem .2rem 40px;
+      margin-bottom: .2rem;
+    }
+  }
+}
+
+[role="main"] {
+  @include media-min(xl){
+    min-height: calc(100vh - #{$headerHeightXl} - #{$breadcrumbsHeightXl} - #{$footerHeight});
+  }
+  
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    .headerlink {
+      display: inline-block;
+      line-height: 1;
+      text-decoration: none;
+      
+      &::after {
+        display: inline-block;
+        width: 1rem;
+        height: 1rem;
+        padding-left: 10px;
+        font: normal 700 normal .95rem/1 FontAwesome, sans-serif;
+        text-align: right;
+        vertical-align: middle;
+        content: "\f0c1";
+        opacity: 0;
+        transition: opacity ease-in .1s;
+      }
+    }
+    
+    &:hover {
+      .headerlink::after {
+        opacity: 1;
+        transition: opacity ease-in .1s;
+      }
+    }
+  }
+  
+  .toctree-wrapper {
+    padding-top: 1rem;
+    ul {
+      padding-left: 28px;
+      @include media-max(sm){
+        padding-left: 20px;
+      }
+      
+      li a {
+        display: inline-block;
+        padding-top: 0.2rem;
+        padding-bottom: 0.6rem;
+        line-height: 32px;
+      }
+    }
+  }
+    
+  .align-cells-top {
+    th,
+    td {
+      vertical-align: top!important;
+    }
+  }
+  .align-cells-middle {
+    th,
+    td {
+      vertical-align: middle!important;
+    }
+  }
+  .align-cells-bottom {
+    th,
+    td {
+      vertical-align: bottom!important;
+    }
+  }
+  .align-data-top {
+    td {
+      vertical-align: top!important;
+    }
+  }
+  .align-data-middle {
+    td {
+      vertical-align: middle!important;
+    }
+  }
+  .align-data-bottom {
+    td {
+      vertical-align: bottom!important;
+    }
+  }
+  .align-header-top {
+    th {
+      vertical-align: top!important;
+    }
+  }
+  .align-header-middle {
+    th {
+      vertical-align: middle!important;
+    }
+  }
+  .align-header-bottom {
+    th {
+      vertical-align: bottom!important;
+    }
+  }
+
+  .docutils:not(.list-rows) {
+    thead {
+      position: relative;
+      z-index: 10;
+    }
+
+    th {
+      padding: 8px;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .stub:not(.head) {
+      font-size: 16px;
+    }
+
+    tbody {
+      position: relative;
+
+      th {
+        padding: 8px;
+      }
+      td {
+        padding: 8px;
+      }
+      p,
+      ul {
+        margin-bottom: .15rem;
+      }
+    }
+  }
+
+  table {
+
+    &.docutils:not(.list-rows) {
+      display: inline-block;
+      max-width: 100%;
+      width: fit-content;
+      overflow: hidden;
+      overflow-x: auto;
+      border-spacing: 0;
+      border-collapse: separate;
+      margin-bottom: -6px;
+      border-radius: calc(#{$roundedCorners} + 1px);
+      perspective: 1px;
+      
+      td,
+      th {
+        border: 1px solid;
+      }
+
+      &.release-notes {
+        border-spacing: 0 2rem;
+        border: none;
+        border-radius: unset;
+        &::after {
+          content: none;
+        }
+
+        tr {
+          & > td:first-child,
+          & > th:first-child {
+            padding-left: 0;
+            border-right: 1px solid;
+          }
+        }
+        td,
+        th {
+          padding-top: 0;
+          padding-bottom: 0;
+          padding-left: 1rem;
+          border: none;
+          vertical-align: baseline;
+        }
+        
+        p {
+          margin-bottom: 1rem;
+        }
+      }
+    }
+
+    &.hlist {
+      margin-bottom: 1rem;
+      display: block;
+      overflow-x: auto;
+
+      & > tbody > tr > td {
+        vertical-align: top;
+        & > ul {
+          padding: 0 15px 0 0;
+          margin: 0;
+          list-style: none;
+
+          & > li > ul {
+            list-style: disc;
+
+            & > li > ul {
+              list-style: circle;
+
+              & > li > ul {
+                list-style: square;
+              }
+            }
+          }
+        }
+        &:last-child {
+          & > ul {
+            padding: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Light theme -------------------------------------------------------------- */
+
+body {
+  [role="main"] {
+    .headerlink {
+      &:after {
+        color: $light_ColorShadedText;
+      }
+    }
+    code {
+      color: $light_ColorHighlightInlineText;
+      background-color: $light_ColorHighlightBackground;
+    }
+    td, 
+    th,
+    caption {
+      background-color: $light_ColorBaseSpace;
+    }
+    
+    .docutils:not(.list-rows) {
+      thead {
+        background-color: $light_ColorPrimary;
+        
+        th {
+          background-color: $light_ColorPrimary;
+        }
+      }
+      
+      th {
+        color: $light_ColorBaseSpace;
+        border-color: $light_ColorPrimary;
+      }
+      
+      .stub:not(.head) {
+        color: $light_ColorMainText;
+      }
+      
+      tbody {
+        > :nth-of-type(even) td,
+        > :nth-of-type(even) th {
+          background-color: $light_ColorBaseSpace;
+        }
+        th {
+          background-color: $light_ColorBaseSpace;
+          border-color: $light_ColorTableBorder;
+        }
+        td {
+          border-color: $light_ColorTableBorder;
+        }
+      }
+    }
+    
+    table.docutils:not(.list-rows) {
+      border-color: $light_ColorTableBorder;
+      
+      &.release-notes {
+        tr {
+          & > td:first-child,
+          & > th:first-child {
+            border-color: $light_ColorTableBorder;
+          }
+        }
+      }
+    }
+  }
+  .table-wrapper {
+    border-radius: $roundedCorners;
+    overflow: hidden;
+    width: fit-content;
+    height: fit-content;
+    max-width: 100%;
+    border: 1px solid transparent;
+    background: $light_ColorTableBorder;
+    margin-bottom: 1rem;
+  }
+}
+
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme {
+  [role="main"] {
+    .headerlink {
+      &:after {
+        color: $dark_ColorShadedText;
+      }
+    }
+    code {
+      color: $dark_ColorHighlightInlineText;
+      background-color: $dark_ColorHighlightBackground;
+    }
+    td,
+    th,
+    caption {
+      background-color: $dark_ColorBaseSpace;
+    }
+    .docutils:not(.list-rows) {
+      thead {
+        background-color: $dark_ColorPrimary;
+        
+        th {
+          background-color: $dark_ColorPrimary;
+        }
+      }
+      
+      th {
+        color: $dark_ColorBaseSpace;
+        border-color: $dark_ColorPrimary;
+      }
+      
+      .stub:not(.head) {
+        color: $dark_ColorMainText;
+      }
+      
+      tbody {
+        > :nth-of-type(even) td,
+        > :nth-of-type(even) th {
+          background-color: $dark_ColorBaseSpace;
+        }
+        th {
+          background-color: $dark_ColorBaseSpace;
+          border-color: $dark_ColorTableBorder;
+        }
+        td {
+          border-color: $dark_ColorTableBorder;
+        }
+      }
+    }
+    
+    table.docutils:not(.list-rows) {
+      border-color: $dark_ColorTableBorder;
+      margin-bottom: -6px;
+      border-radius: calc(#{$roundedCorners} + 2px);
+      
+      &.release-notes {
+        tr {
+          & > td:first-child,
+          & > th:first-child {
+            border-color: $dark_ColorTableBorder;
+          }
+        }
+      }
+    }
+  }
+  
+  .table-wrapper {
+    border-radius: $roundedCorners;
+    overflow: hidden;
+    width: fit-content;
+    height: fit-content;
+    max-width: 100%;
+    border-width: 0;
+    background-color: $dark_ColorTableBorder;
+    margin-bottom: 1rem;
+    padding: 1px;
+    &.w-header {
+      background-image: linear-gradient(to bottom, $dark_ColorPrimary 18%, $dark_ColorTableBorder 33%, $dark_ColorTableBorder 100% );
+      background-size: 100%;
+      background-repeat: no-repeat;
+    }
+  }
+}
