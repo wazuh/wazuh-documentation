@@ -349,14 +349,14 @@ As said before, all protocols are built from a common abstract base. This base d
 | ``cancel_task`` | Both        | Task name<str>,    | Used to cancel the task in progress in the sending node.                 |
 |                 |             | Error msg<str>     |                                                                          |
 +-----------------+-------------+--------------------+--------------------------------------------------------------------------+
-| ``echo``        | Both        | Message<str>       | Used to send keep alives to the peer. Replies the same received message. |
+| ``echo``        | Both        | Message<str>       | Used to send keepalives to the peer. Replies the same received message.  |
 +-----------------+-------------+--------------------+--------------------------------------------------------------------------+
-| ``echo-c``      | Server      | Message<str>       | Used by the client to send keep alives to the server.                    |
+| ``echo-c``      | Server      | Message<str>       | Used by the client to send keepalives to the server.                     |
 +-----------------+-------------+--------------------+--------------------------------------------------------------------------+
-| ``echo-m``      | Client      | Message<str>       | Used by the server to send keep alives to the client.                    |
+| ``echo-m``      | Client      | Message<str>       | Used by the server to send keepalives to the client.                     |
 +-----------------+-------------+--------------------+--------------------------------------------------------------------------+
 | ``hello``       | Server      | Client name<str>   | First message sent by a client to the server on its first connection.    |
-|                 |             |                    | The wazuh protocol modifies this command to add extra arguments.         |
+|                 |             |                    | The Wazuh protocol modifies this command to add extra arguments.         |
 +-----------------+-------------+--------------------+--------------------------------------------------------------------------+
 
 
