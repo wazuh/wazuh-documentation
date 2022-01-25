@@ -14,7 +14,6 @@
 
    .. code-block:: console 
      
-     # mkdir /etc/wazuh-indexer/certs/
      # tar -xf ./certs.tar -C /etc/wazuh-indexer/certs/ ./$NODE_NAME.pem ./$NODE_NAME-key.pem ./admin.pem ./root-ca.pem
 
    ..
