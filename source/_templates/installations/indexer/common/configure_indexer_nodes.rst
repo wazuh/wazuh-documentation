@@ -4,20 +4,18 @@
 
    .. code-block:: console
 
-      # curl -so /etc/wazuh-indexer/opensearch.yml https://packages.wazuh.com/resources/4.3/wazuh-indexer/opensearch/7.x/opensearch_cluster_initial_node.yml
+      # curl -so /etc/wazuh-indexer/opensearch.yml https://s3.us-west-1.amazonaws.com/packages-dev.wazuh.com/resources/4.3/config/opendistro/elasticsearch/elasticsearch_cluster_initial_node.yml
 
 #. Edit ``/etc/wazuh-indexer/opensearch.yml``.
 
     .. code-block:: yaml
       :emphasize-lines: 1,2,4-7,11
 
-      network.host: "<indexer_ip>"
-      node.name: "<indexer_node_name>"
+      network.host: "0.0.0.0"
+      node.name: "node-1"
       cluster.initial_master_nodes:
-      - "<indexer_node_1_name>"
-      - "<indexer_node_2_name>"
-      - "<indexer_node_3_name>"
-      cluster.name: "<indexer_cluster_name>"
+      - "node-1"
+      cluster.name: "wazuh-cluster"
       
       http.port: 9700-9799
       transport.tcp.port: 9800-9899
@@ -28,29 +26,27 @@
       ...
 
     .. code-block:: yaml
-      :emphasize-lines: 3,4,6,7
+      :emphasize-lines: 4,5,6,7,8,9
 
       ...
      
-      plugins.security.ssl.http.pemcert_filepath: /etc/wazuh-indexer/certs/<indexer_node_certificate_name>.pem
-      plugins.security.ssl.http.pemkey_filepath: /etc/wazuh-indexer/certs/<indexer_node_certificate_name>-key.pem
+      plugins.security.ssl.http.pemcert_filepath: /etc/wazuh-indexer/certs/demo-indexer.pem
+      plugins.security.ssl.http.pemkey_filepath: /etc/wazuh-indexer/certs/demo-indexer-key.pem
       plugins.security.ssl.http.pemtrustedcas_filepath: /etc/wazuh-indexer/certs/root-ca.pem
-      plugins.security.ssl.transport.pemcert_filepath: /etc/wazuh-indexer/certs/<indexer_node_certificate_name>.pem
-      plugins.security.ssl.transport.pemkey_filepath: /etc/wazuh-indexer/certs/<indexer_node_certificate_name>-key.pem
+      plugins.security.ssl.transport.pemcert_filepath: /etc/wazuh-indexer/certs/demo-indexer.pem
+      plugins.security.ssl.transport.pemkey_filepath: /etc/wazuh-indexer/certs/demo-indexer-key.pem
       plugins.security.ssl.transport.pemtrustedcas_filepath: /etc/wazuh-indexer/certs/root-ca.pem
+
 
       ...
 
     .. code-block:: yaml
-      :emphasize-lines: 4-6
+      :emphasize-lines: 4-5
 
       ...
 
       plugins.security.nodes_dn:
-      - "CN=<indexer_node_1_certificate_name>,OU=Docu,O=Wazuh,L=California,C=US"
-      - "CN=<indexer_node_2_certificate_name>,OU=Docu,O=Wazuh,L=California,C=US"
-      - "CN=<indexer_node_3_certificate_name>,OU=Docu,O=Wazuh,L=California,C=US"
-
+      - "CN=demo-indexer,OU=Docu,O=Wazuh,L=California,C=US"
       ...
 
 
