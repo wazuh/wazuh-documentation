@@ -19,7 +19,7 @@
 
     .. code-block:: console
 
-      # echo "deb https://packages.wazuh.com/4.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
+      # echo "deb https://packages-dev.wazuh.com/pre-release/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
 
 #. Update the package information.
 
