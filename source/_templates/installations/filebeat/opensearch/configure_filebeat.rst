@@ -34,7 +34,7 @@
             enabled: false
 
     - Replace ``<indexer_ip>`` with the IP address or the hostname of the Opensearch server.
-    - Replace ``<filebeat-node-certificate-name>`` with the certificate name for your Filebeat node, for example, ``filebeat``.
+    - Replace ``<filebeat-node-certificate-name>`` with the certificate name for your Filebeat node. For example, ``filebeat``.
 
   .. group-tab:: Wazuh indexer multi-node cluster
 
