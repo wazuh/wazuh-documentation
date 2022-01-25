@@ -1,5 +1,8 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+  :description: Learn how to configure the format of the internal log file ("ossec.log") of Wazuh in this section of our documentation. 
+  
 .. _reference_ossec_logging:
 
 logging

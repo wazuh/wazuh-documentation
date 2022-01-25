@@ -1,7 +1,7 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
-  :description: Wazuh allows you to monitor the output of specific commands. Learn more about how to configure them in this section.
+  :description: Learn more about the command monitoring configuration. Check out the basic usage, how to monitor running Windows processes, and more. 
 
 .. _command-examples:
 

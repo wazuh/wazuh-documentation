@@ -16,7 +16,7 @@ This section describes the actions you can perform in your account using the Waz
       :maxdepth: 1
 
       user-settings
-      add-billing-details
+      manage-billing-details
       billing-history
       update-billing
       stop-charges

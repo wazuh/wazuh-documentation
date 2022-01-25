@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 .. meta::
   :description: The Wazuh API is an open source RESTful API that allows for interaction with the Wazuh manager. Check out the list of the Wazuh API capabilities.
   
@@ -36,7 +36,7 @@ For more details, check out the :ref:`Use Cases <wazuh_api_use_cases>`.
 
        getting-started
        configuration
-       securing_api
+       securing-api
        equivalence
        rbac/index
        queries

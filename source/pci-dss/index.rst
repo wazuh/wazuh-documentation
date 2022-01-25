@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Wazuh helps organizations meet technical compliance requirements, including PCI DSS. Learn how our capabilities assist with each of PCI standard requirements.

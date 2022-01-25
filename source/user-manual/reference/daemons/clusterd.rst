@@ -1,11 +1,9 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. _clusterd:
 
 wazuh-clusterd
 ==============
-
-.. versionadded:: 3.0.0
 
 The wazuh-clusterd program manages the Wazuh cluster communications between the managers belonging to the cluster and synchronizes all files.
 

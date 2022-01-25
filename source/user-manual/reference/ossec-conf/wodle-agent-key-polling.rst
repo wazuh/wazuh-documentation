@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Learn more about the configuration options of the key polling wodle in this section of the Wazuh documentation.
@@ -120,7 +120,7 @@ Indicates the maximum size of the queue for polling external keys.
 force_insert
 ^^^^^^^^^^^^
 
-Defines whether the module must insert the agent, even if another agent with the same ID or IP already exists. If enabled, the existing agent will be removed.
+Defines whether the module must insert the agent, even if another agent with the same ID or IP address already exists. If enabled, the existing agent will be removed.
 
 +--------------------+------------------------------------------------------------+
 | **Default value**  | yes                                                        |

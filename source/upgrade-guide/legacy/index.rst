@@ -1,5 +1,8 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+    :description: This section guides through the process of upgrading the Wazuh server and the Wazuh agent installations from a version prior to 3.0.
+    
 .. _upgrading_wazuh_legacy:
 
 Upgrading from a legacy version

@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. _reference_ossec_cluster:
 
@@ -88,21 +88,6 @@ Defines the key used to encrypt the communication between the nodes. This key mu
 +--------------------+---------------------------------------------+
 | **Allowed values** | Any alphanumeric string of 32 characters.   |
 +--------------------+---------------------------------------------+
-
-.. _cluster_interval:
-
-interval
-^^^^^^^^
-
-.. deprecated:: 3.2.3
-
-Sets the interval between cluster synchronizations.
-
-+--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
-| **Default value**  | 2m                                                                                                                                       |
-+--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values** | A positive number ending with a character that indicates a time unit, such as s (seconds) or m (minutes).                                |
-+--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 
 .. _cluster_port:
 

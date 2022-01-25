@@ -1,5 +1,8 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+    :description: The new SCA module replaces Rootcheck when performing policy monitoring. Learn more about how the rootcheck works and its configuration. 
+    
 .. _rootcheck_introduction:
 
 Rootcheck

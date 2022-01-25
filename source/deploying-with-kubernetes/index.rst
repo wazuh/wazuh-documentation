@@ -1,7 +1,7 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
-   :description: Check out this guide to learn how to build an environment composed of a Wazuh cluster integrated with the Elastic stack using Kubernetes. 
+   :description: Check out this guide to learn how to build an environment composed of a Wazuh cluster integrated with the Elastic Stack using Kubernetes. 
    
 .. _wazuh_kubernetes:
 
@@ -12,7 +12,7 @@ Kubernetes is a portable, extensible open-source platform for managing container
 
 You can read more about Kubernetes services on its `official site <https://kubernetes.io/>`_.
 
-By following this guide, you will learn how to build an environment composed of a Wazuh cluster integrated with the Elastic stack using Kubernetes, offering high availability and securing all the data.
+By following this guide, you will learn how to build an environment composed of a Wazuh cluster integrated with the Elastic Stack using Kubernetes, offering high availability and securing all the data.
 
 
 .. toctree::

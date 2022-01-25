@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 Wazuh has one of the largest open source security communities in the world. You can become part of it to learn from other users, participate in discussions, talk to our development team, and contribute to the project. The following resources are easily available:
 

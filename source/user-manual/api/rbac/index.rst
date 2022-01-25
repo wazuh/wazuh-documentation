@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. _api_rbac:
 
@@ -16,5 +16,5 @@ Role-based access control (RBAC) adds the capability to control access to differ
 
         how-it-works
         configuration
-        auth_context
+        auth-context
         reference
