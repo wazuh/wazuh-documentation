@@ -1,0 +1,67 @@
+{#-
+    wazuh_doc_theme_v3/template-parts/footer.html
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    General footer to be included within every page of Wazuh Documentation.
+-#}
+
+  <div class="row d-xl-none">
+    <div class="col-12">
+      <a class="logo-link web" href="{{ theme_wazuh_web_url }}" target="_blank" rel="noreferrer noopener">
+        <img class="logo-light" src="{{ pathto('_static/images/wazuh-logo.png', 1) }}" width="138" height="28" alt="Wazuh">
+        <img class="logo-dark" src="{{ pathto('_static/images/wazuh-logo-white.png', 1) }}" width="138" height="28" alt="Wazuh">
+      </a>
+    </div>
+  </div>
+  <nav class="website-links row d-xl-none">
+    <div class="footer-section col-6 col-sm-5 col-md-3">
+      <div class="footer-title">Platform</div>
+      <ul>
+        <li><a href="{{ theme_wazuh_web_url + '/product/' }}" target="_blank" rel="noreferrer noopener">Product</a></li>
+        <li><a href="{{ theme_wazuh_web_url + '/cloud/' }}" target="_blank" rel="noreferrer noopener">Cloud</a></li>
+        <li><a href="{{ theme_wazuh_web_url + '/partners/' }}" target="_blank" rel="noreferrer noopener">Our partners</a></li>
+      </ul>
+    </div>
+    <div class="footer-section col-6 col-sm-7 col-md-3">
+      <div class="footer-title">Services</div>
+      <ul>
+        <li><a href="{{ theme_wazuh_web_url + '/professional-services/#support' }}" target="_blank" rel="noreferrer noopener">Support and maintenance</a></li>
+        <li><a href="{{ theme_wazuh_web_url + '/professional-services/#training' }}" target="_blank" rel="noreferrer noopener">Training</a></li>
+      </ul>
+    </div>
+    <div class="footer-section col-6 col-sm-5 col-md-3">
+      <div class="footer-title">Company</div>
+      <ul>
+        <li><a href="{{ theme_wazuh_web_url + '/our-customers/' }}" target="_blank" rel="noreferrer noopener">Our customers</a></li>
+        <li><a href="{{ theme_wazuh_web_url + '/about-us/' }}" target="_blank" rel="noreferrer noopener">About us</a></li>
+        <li><a href="{{ theme_wazuh_web_url + '/our-team/' }}" target="_blank" rel="noreferrer noopener">Our team</a></li>
+        <li><a href="{{ theme_wazuh_web_url + '/careers/' }}" target="_blank" rel="noreferrer noopener">Careers</a></li>
+        <li><a href="{{ theme_wazuh_web_url + '/contact-us/' }}" target="_blank" rel="noreferrer noopener">Contact us</a></li>
+      </ul>
+    </div>
+    <div class="footer-section col-6 col-sm-7 col-md-3">
+      <div class="footer-title">Resources</div>
+      <ul>
+        <li><a href="{{ theme_wazuh_doc_url }}" target="_blank" rel="noreferrer noopener">Documentation</a></li>
+        <li><a href="{{ theme_wazuh_web_url + '/blog/' }}" target="_blank" rel="noreferrer noopener">Blog</a></li>
+        <li><a href="{{ theme_wazuh_web_url + '/faq/' }}" target="_blank" rel="noreferrer noopener">FAQ</a></li>
+        <li><a href="{{ theme_wazuh_web_url + '/use-cases/' }}" target="_blank" rel="noreferrer noopener">Use cases</a></li>
+        <li><a href="{{ theme_wazuh_web_url + '/community/' }}" target="_blank" rel="noreferrer noopener">Community</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="desktop-footer row">
+    <ul class="social-links col-12 col-sm-8 col-xl-9 order-sm-2">
+      <li class="nav-item d-none d-xl-inline-block"><a class="nav-link" href="{{ theme_wazuh_web_url + '/community/' }}" target="_blank" rel="noreferrer noopener">Community</a></li>
+      <li class="nav-item d-none d-xl-inline-block"><a class="nav-link" href="{{ theme_wazuh_web_url + '/contact-us/' }}" target="_blank" rel="noreferrer noopener">Contact us</a></li>
+      <li class="rrss nav-item d-inline-block"><a class="nav-link" title="Wazuh on Twitter" aria-label="Wazuh on Twitter" target="_blank" href="https://twitter.com/wazuh" rel="noreferrer noopener"><i class="fab fa-twitter"></i></a></li>
+      <li class="rrss nav-item d-inline-block"><a class="nav-link" title="Wazuh on LinkedIn" aria-label="Wazuh on LinkedIn" target="_blank" href="https://www.linkedin.com/company/wazuh" rel="noreferrer noopener"><i class="fab fa-linkedin-in"></i></a></li>
+      <li class="rrss nav-item d-inline-block"><a class="nav-link" title="Wazuh on Youtube" aria-label="Wazuh on Youtube" target="_blank" href="https://www.youtube.com/c/wazuhsecurity" rel="noreferrer noopener"><i class="fab fa-youtube"></i></a></li>
+      <li class="rrss nav-item d-inline-block"><a class="nav-link" title="Wazuh on Reddit" aria-label="Wazuh on Reddi" target="_blank" href="https://www.reddit.com/r/Wazuh/" rel="noreferrer noopener"><i class="fab fa-reddit-alien"></i></a></li>
+      <li class="rrss nav-item d-inline-block"><a class="nav-link" title="Join us on Slack" aria-label="Join us on Slack" target="_blank" href="https://wazuh.com/community/join-us-on-slack/" rel="noreferrer noopener"><i class="fab fa-slack"></i></a></li>
+      <li class="rrss nav-item d-inline-block"><a class="nav-link" title="Wazuh on Github" aria-label="Wazuh on Github" target="_blank" href="https://github.com/wazuh" rel="noreferrer noopener"><i class="fab fa-github"></i></a></li>
+    </ul>
+    <div class="copyright col-12 col-sm-4 col-xl-3 order-sm-1">
+      {{copyright}}
+    </div>
+  </div>
