@@ -6,7 +6,7 @@
 
     # rm /etc/wazuh-indexer/demo-indexer-key.pem /etc/wazuh-indexer/demo-indexer.pem /etc/wazuh-indexer/admin-key.pem /etc/wazuh-indexer/admin.pem /etc/wazuh-indexer/root-ca.pem -f
 
-#. Replace ``<indexer-node-name>`` with the name of your current Wazuh indexer node, the same used in ``config.yml``. Then, move the certificates to their corresponding location. This is to deploy  the SSL certificates to encrypt communications between the Wazuh central components.
+#. Replace ``<indexer-node-certificate-name>`` with the name of the certificate for your current Wazuh indexer node, the same used in ``config.yml``. Then, move the certificates to their corresponding location. This is to deploy  the SSL certificates to encrypt communications between the Wazuh central components.
 
    .. code-block:: console
 
@@ -15,22 +15,21 @@
    .. code-block:: console 
      
      # mkdir /etc/wazuh-indexer/certs/
-     # mv ./certs/$NODE_NAME* /etc/wazuh-indexer/certs/
-     # cp ./certs/admin* /etc/wazuh-indexer/certs/
-     # cp ./certs/root-ca* /etc/wazuh-indexer/certs/
+     # tar -xf ./certs.tar -C /etc/wazuh-indexer/certs/ ./$NODE_NAME.pem ./$NODE_NAME-key.pem ./admin.pem ./root-ca.pem
 
    ..
      # mv /etc/wazuh-indexer/certs/$NODE_NAME.pem /etc/wazuh-indexer/certs/elasticsearch.pem
      # mv /etc/wazuh-indexer/certs/$NODE_NAME-key.pem /etc/wazuh-indexer/certs/elasticsearch-key.pem     
 
+#. Compress the files to be sent to all the instances.
 
-#. **Recommended action** - To increase security, remove ``certs/`` running ``rm -r ./certs`` unless you want to install other Wazuh components on this node.
+    .. code-block:: console
 
-..
-  #. Compress all the necessary files to be sent to all the instances.
+      # tar -cvf ./certs.tar -C ./certs/ .
+      # rm -r ./certs/
 
-     .. code-block:: console
+#. Copy ``certs.tar`` to all the remaining nodes of the distributed deployment, including Wazuh indexer, Wazuh server, and Wazuh dashboard nodes. This can be done by using ``scp``. 
 
-       # tar -cvf ./certs.tar -C ./certs/ .
+#. **Recommended action** - To increase security, remove ``certs.tar`` running ``rm -f ./certs.tar`` unless you want to install other Wazuh components on this node.
 
 .. End of include file

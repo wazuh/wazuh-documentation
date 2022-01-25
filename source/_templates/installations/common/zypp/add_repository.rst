@@ -1,13 +1,13 @@
-.. Copyright (C) 2015-2022 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 #. Install the necessary packages for the installation.
 
     .. code-block:: console
 
-      # yum install -y curl
+      # zypper install curl
 
     ..
-      # yum install -y curl unzip wget
+      # zypper install libcap-progs || zypper install libcap2
 
 #. Import the GPG key.
 
@@ -19,14 +19,14 @@
 
     .. code-block:: console
 
-      # cat > /etc/yum.repos.d/wazuh.repo << EOF
+      # cat > /etc/zypp/repos.d/wazuh.repo <<\EOF
       [wazuh]
       gpgcheck=1
       gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
       enabled=1
-      name=EL-\$releasever - Wazuh
+      name=EL-$releasever - Wazuh
       baseurl=https://packages.wazuh.com/4.x/yum/
-      protect=1 
+      protect=1
       EOF 
-      
+
 .. End of include file

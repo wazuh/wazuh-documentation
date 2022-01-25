@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. _wazuh_server_installation:
 
@@ -18,7 +18,7 @@ Check the requirements below and choose an installation method to start installi
 
 - :ref:`Unattended installation <wazuh_server_unattended>`: You install this component by running a script that automates the installation and configuration process.
  
-- :ref:`Step-by-step installation <wazuh_server_step_by_step>`: Install this component manually following detailed step-by-step instructions.
+- :doc:`Step-by-step installation <./step-by-step>`: Install this component manually following detailed step-by-step instructions.
 
 
 .. thumbnail:: /images/installation/Wazuh-Server-Installation-2.png
