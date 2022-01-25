@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 #. Execute the following command to verify that the Wazuh cluster is enabled and all the nodes are connected.
 
