@@ -1,7 +1,7 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
-  :description: Learn how to remotely configure agents using agent.conf. In this section you will find which capabilities can be configured remotely. 
+  :description: Learn how to remotely configure agents using agent.conf. In this section of the Wazuh documentation, you will find which capabilities can be configured remotely.
 
 .. _reference_agent_conf:
 
@@ -23,6 +23,7 @@ Agents can be configured remotely by using the ``agent.conf`` file. The followin
 - :doc:`System inventory <../capabilities/syscollector>` (**syscollector**)
 - :doc:`Avoid events flooding <ossec-conf/client-buffer>` (**client_buffer**)
 - :doc:`Configure osquery wodle <ossec-conf/wodle-osquery>` (**wodle name="osquery"**)
+- :doc:`force_reconnect_interval setting <ossec-conf/client>` (**client**)
 
 .. note::
   When setting up remote commands in the shared agent configuration, **you must enable remote commands for Agent Modules**. This is enabled by adding the following line to the ``/var/ossec/etc/local_internal_options.conf`` file in the agent:
@@ -111,7 +112,7 @@ The ``agent.conf`` is only valid on server installations.
 
 The ``agent.conf`` may exist in each group folder at ``/var/ossec/etc/shared``.
 
-For example, for the ``group1`` group, it is in ``/var/ossec/etc/shared/group1``.  Each of these files should be readable by the ossec user.
+For example, for the ``group1`` group, it is in ``/var/ossec/etc/shared/group1``.  Each of these files should be readable by the ``wazuh`` user.
 
 Options
 -------
@@ -152,7 +153,7 @@ The following is an example of how a centralized configuration can be done.
     .. code-block:: console
 
         # touch /var/ossec/etc/shared/default/agent.conf
-        # chown ossec:ossec /var/ossec/etc/shared/default/agent.conf
+        # chown wazuh:wazuh /var/ossec/etc/shared/default/agent.conf
         # chmod 640 /var/ossec/etc/shared/default/agent.conf
 
     Several configurations may be created based on the ``name``, ``OS`` or ``profile`` of an agent.

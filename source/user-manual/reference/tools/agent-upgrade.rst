@@ -41,7 +41,7 @@ Examples
 
 .. code-block:: console
 
-    # agent_upgrade -l
+    # /var/ossec/bin/agent_upgrade -l
 
 .. code-block:: none
     :class: output
@@ -58,7 +58,7 @@ Examples
 
 .. code-block:: console
 
-    # agent_upgrade -a 002
+    # /var/ossec/bin/agent_upgrade -a 002
 
 .. code-block:: none
     :class: output
@@ -66,14 +66,14 @@ Examples
     Upgrading...
 
     Upgraded agents:
-        Agent 002 upgraded: Wazuh v3.13.2 -> 4.0.0
+        Agent 002 upgraded: Wazuh v3.13.2 -> |WAZUH_LATEST|
 
 
 * Downgrade agent using a custom repository:
 
 .. code-block:: console
 
-    # agent_upgrade -a 002 -dF -v v4.0.0 -r http://mycompany.wpkrepo.com/
+    # /var/ossec/bin/agent_upgrade -a 002 -dF -v v4.0.0 -r http://mycompany.wpkrepo.com/
 
 .. code-block:: none
     :class: output
@@ -88,7 +88,7 @@ Examples
 
 .. code-block:: console
 
-    # agent_upgrade -a 002 -d -f /root/upgrade_openscap_debian.wpk -x install.sh
+    # /var/ossec/bin/agent_upgrade -a 002 -d -f /root/upgrade_openscap_debian.wpk -x install.sh
 
 .. code-block:: none
     :class: output

@@ -1,4 +1,6 @@
 .. Copyright (C) 2022 Wazuh, Inc.
+.. meta::
+  :description: The Wazuh GCP Pub/Sub module allows you to pull log data from Google Pub/Sub. Learn more about how to configure the module in this section.
 
 .. _gcp-pubsub:
 
@@ -76,7 +78,7 @@ For example ``<subscription_name>wazuh-name</subscription_name>``.
 credentials_file
 ^^^^^^^^^^^^^^^^
 
-This setting specifies the path to the Google Cloud credentials file in JW Tokens. Allows both relative (to $HOME_INSTALLATION) and absolute paths.
+This setting specifies the path to the Google Cloud credentials file in JW Tokens. It allows both relative (to $HOME_INSTALLATION) and absolute paths.
 
 +--------------------+--------------------------------+
 | **Default value**  | n/a                            |
@@ -84,7 +86,7 @@ This setting specifies the path to the Google Cloud credentials file in JW Token
 | **Allowed values** | Any path to a credentials file |
 +--------------------+--------------------------------+
 
-For example ``<credentials_file>wodles/gcp-pubsub/credentials.json</credentials_file>``.
+For example, ``<credentials_file>wodles/gcp-pubsub/credentials.json</credentials_file>``.
 
 max_messages
 ^^^^^^^^^^^^
@@ -145,13 +147,13 @@ Interval between module executions.
 +--------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | 1h                                                                                                                                                             |
 +--------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days), w (weeks), M (months) |
+| **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as s (seconds), m (minutes), h (hours), d (days), w (weeks), M (months)  |
 +--------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 day
 ^^^
 
-Day of the month to run the fetch logs from GCP.
+Day of the month to run the script to fetch logs from GCP.
 
 +--------------------+--------------------------+
 | **Default value**  | n/a                      |

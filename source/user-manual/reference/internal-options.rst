@@ -552,6 +552,21 @@ Logcollector
 +                                          +               +----------------------------------------------------------------------------+
 |                                          |               | Any other integer between 1 and 3600.                                      |
 +------------------------------------------+---------------+----------------------------------------------------------------------------+
+| **logcollector.ip_update_interval**      | Description   | IP update interval, in seconds. This specifies how often the system        |
+|                                          |               | IP is obtained when the                                                    |
+|                                          |               | :ref:`out_format<ossec_localfile_out_format>` option is used.              |
+|                                          |               |                                                                            |
+|                                          |               | .. versionadded:: 4.3                                                      |
++                                          +---------------+----------------------------------------------------------------------------+
+|                                          | Default value | 60                                                                         |
++                                          +---------------+----------------------------------------------------------------------------+
+|                                          | Allowed values| 0: Obtain the IP on demand.                                                |
+|                                          |               |                                                                            |
+|                                          |               | **Warning:** Systems with extensive routing tables                         |
+|                                          |               | can suffer from high CPU usage.                                            |
++                                          +               +----------------------------------------------------------------------------+
+|                                          |               | Any other integer between 1 and 3600.                                      |
++------------------------------------------+---------------+----------------------------------------------------------------------------+
 
 Maild
 -----
@@ -753,13 +768,6 @@ Remoted
 +                                   +---------------+--------------------------------------------------------------+
 |                                   | Allowed value | Any integer between 1 and 60.                                |
 +-----------------------------------+---------------+--------------------------------------------------------------+
-|   **remoted.send_timeout**        | Description   | Maximum number of seconds to wait for message delivery in    |
-|                                   |               | TCP.                                                         |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Default value | 1                                                            |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed value | Any integer between 1 and 60.                                |
-+-----------------------------------+---------------+--------------------------------------------------------------+
 |         **remoted.debug**         | Description   | Debug level (manager installation)                           |
 +                                   +---------------+--------------------------------------------------------------+
 |                                   | Default value | 0                                                            |
@@ -812,6 +820,36 @@ Remoted
 +                                   +---------------+--------------------------------------------------------------+
 |                                   | Allowed value | | Any other integer between 1024 and 16384.                  |
 |                                   |               | | Powers of two are suggested.                               |
++-----------------------------------+---------------+--------------------------------------------------------------+
+| **remoted.send_chunk**            | Description   | | Send buffer size for TCP (bytes).                          |
+|                                   |               | | Amount of data that Remoted can send per operation.        |
+|                                   |               |                                                              |
+|                                   |               | .. versionadded:: 4.3.0                                      |
++                                   +---------------+--------------------------------------------------------------+
+|                                   | Default value | 4096                                                         |
++                                   +---------------+--------------------------------------------------------------+
+|                                   | Allowed value | | Any other integer between 512 and 16384.                   |
+|                                   |               | | Powers of two are suggested.                               |
++-----------------------------------+---------------+--------------------------------------------------------------+
+| **remoted.send_buffer_size**      | Description   | | Send queue size for TCP (bytes).                           |
+|                                   |               | | Amount of data that Remoted can queue to send              |
+|                                   |               | | (one queue per agent).                                     |
+|                                   |               |                                                              |
+|                                   |               | .. versionadded:: 4.3.0                                      |
++                                   +---------------+--------------------------------------------------------------+
+|                                   | Default value | 131072                                                       |
++                                   +---------------+--------------------------------------------------------------+
+|                                   | Allowed value | | Any other integer between 65536 and 1048576.               |
+|                                   |               | | Powers of two are suggested.                               |
++-----------------------------------+---------------+--------------------------------------------------------------+
+| **remoted.send_timeout_to_retry** | Description   | | Maximum number of seconds to wait before retrying to       |
+|                                   |               | | queue a packet to send in TCP.                             |
+|                                   |               |                                                              |
+|                                   |               | .. versionadded:: 4.3.0                                      |
++                                   +---------------+--------------------------------------------------------------+
+|                                   | Default value | 1                                                            |
++                                   +---------------+--------------------------------------------------------------+
+|                                   | Allowed value | | Any integer between 1 and 60.                              |
 +-----------------------------------+---------------+--------------------------------------------------------------+
 | **remoted.buffer_relax**          | Description   | | Method for memory deallocation after accepting input data. |
 |                                   |               | | This option applies in TCP mode only.                      |

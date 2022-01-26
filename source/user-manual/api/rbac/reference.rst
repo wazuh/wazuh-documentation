@@ -42,6 +42,7 @@ This reference also contains a set of default roles and policies that can be imm
         - `agent:delete`_
         - `agent:modify_group`_
         - `agent:read`_
+        - `agent:reconnect`_
         - `agent:restart`_
         - `agent:upgrade`_
 
@@ -318,6 +319,10 @@ agent:read
 - :api-ref:`GET /agents/{agent_id}/stats/{component} <operation/api.controllers.agent_controller.get_component_stats>` (`agent:id`_, `agent:group`_)
 - :api-ref:`GET /overview/agents <operation/api.controllers.overview_controller.get_overview_agents>` (`agent:id`_, `agent:group`_)
 
+agent:reconnect
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+- :api-ref:`PUT /agents/reconnect <operation/api.controllers.agent_controller.reconnect_agents>` (`agent:id`_, `agent:group`_)
+
 agent:restart
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 - :api-ref:`PUT /agents/group/{group_id}/restart <operation/api.controllers.agent_controller.restart_agents_by_group>` (`agent:id`_, `agent:group`_)
@@ -495,16 +500,23 @@ manager:update_config
 - :api-ref:`PUT /manager/configuration <operation/api.controllers.manager_controller.update_configuration>` (`*:*`_)
 
 Mitre
-^^^^^^^^^^^^^^^
+^^^^^^
 mitre:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`GET /mitre <operation/api.controllers.mitre_controller.get_attack>` (`*:*`_)
+- :api-ref:`GET /mitre/metadata <operation/api.controllers.mitre_controller.get_metadata>` (`*:*`_)
+- :api-ref:`GET /mitre/tactics <operation/api.controllers.mitre_controller.get_tactics>` (`*:*`_)
+- :api-ref:`GET /mitre/techniques <operation/api.controllers.mitre_controller.get_techniques>` (`*:*`_)
+- :api-ref:`GET /mitre/groups <operation/api.controllers.mitre_controller.get_groups>` (`*:*`_)
+- :api-ref:`GET /mitre/mitigations <operation/api.controllers.mitre_controller.get_mitigations>` (`*:*`_)
+- :api-ref:`GET /mitre/software <operation/api.controllers.mitre_controller.get_software>` (`*:*`_)
+- :api-ref:`GET /mitre/references <operation/api.controllers.mitre_controller.get_references>` (`*:*`_)
 
 Rootcheck
 ^^^^^^^^^^^^^^^
 rootcheck:clear
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`DELETE /rootcheck <operation/api.controllers.rootcheck_controller.delete_rootcheck>` (`agent:id`_, `agent:group`_)
+- :api-ref:`DELETE /rootcheck/{agent_id} <operation/api.controllers.rootcheck_controller.delete_rootcheck>` (`agent:id`_, `agent:group`_)
+- :api-ref:`DELETE /experimental/rootcheck <operation/api.controllers.experimental_controller.clear_rootcheck_database>` (`agent:id`_, `agent:group`_)
 
 rootcheck:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -650,6 +662,7 @@ Vulnerability
 vulnerability:read
 ~~~~~~~~~~~~~~~~~~
 - :api-ref:`GET /vulnerability/{agent_id} <operation/api.controllers.vulnerability_controller.get_vulnerability_agent>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /vulnerability/{agent_id}/last_scan <operation/api.controllers.vulnerability_controller.get_last_scan_agent>` (`agent:id`_, `agent:group`_)
 
 .. _api_rbac_reference_default_policies:
 
@@ -673,6 +686,7 @@ Grant full access to all agents related functionalities.
         - agent:read
         - agent:delete
         - agent:modify_group
+        - agent:reconnect
         - agent:restart
         - agent:upgrade
       resources:

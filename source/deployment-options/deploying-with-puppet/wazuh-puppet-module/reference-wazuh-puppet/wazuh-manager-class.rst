@@ -491,8 +491,8 @@ $vulnerability_detector_interval
 
   `Default 5m`
 
-$vulnerability_detector_ignore_time
-  Time during which vulnerabilities that have already been alerted will be ignored.
+$vulnerability_detector_min_full_scan_interval
+  Time interval after which a full scan will be triggered if the vulnerabilities database is updated with new CVEs information.
 
   `Default 6h`
 
@@ -614,14 +614,14 @@ $wazuh_api_https_enabled
   `Default true`
 
 $wazuh_api_https_key
-  Path of the file with the private key.
+  File with the private key.
 
-  `Default api/configuration/ssl/server.key`
+  `Default server.key (in api/configuration/ssl)`
 
 $wazuh_api_https_cert
-  Path to the file with the certificate.
+  File with the certificate.
 
-  `Default api/configuration/ssl/server.crt`
+  `Default server.crt (in api/configuration/ssl)`
 
 $wazuh_api_https_use_ca
   Whether to use a certificate from a Certificate Authority.
@@ -629,19 +629,14 @@ $wazuh_api_https_use_ca
   `Default false`
 
 $wazuh_api_https_ca
-  Path to the certificate of the Certificate Authority (CA).
+  Certificate of the Certificate Authority (CA).
 
-  `Default api/configuration/ssl/ca.crt`
+  `Default ca.crt (in api/configuration/ssl)`
 
 $wazuh_api_logs_level
   Sets the verbosity level of the Wazuh API logs.
 
   `Default info`
-
-$wazuh_api_logs_path
-  Path where to save the Wazuh API logs.
-
-  `Default logs/api.log`
 
 $wazuh_api_cors_enabled
   Enable or disable the use of CORS in the Wazuh API.
@@ -693,13 +688,8 @@ $wazuh_api_access_max_request_per_minute
 
   `Default 300`
 
-$wazuh_api_use_only_authd
-  Forces the use of wazuh-authd when registering and removing agents.
-
-  `Default false`
-
 $wazuh_api_drop_privileges
-  Run wazuh-api process as ossec user
+  Run wazuh-api process as wazuh user
 
   `Default true`
 

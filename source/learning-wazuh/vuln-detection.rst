@@ -88,7 +88,7 @@ In the ``/var/ossec/etc/ossec.conf`` file of the Wazuh manager, scroll down to t
     <vulnerability-detector>
       <enabled>yes</enabled>
       <interval>5m</interval>
-      <ignore_time>6h</ignore_time>
+      <min_full_scan_interval>6h</min_full_scan_interval>
       <run_on_start>yes</run_on_start>
       <provider name="canonical">
         <enabled>no</enabled>
@@ -100,14 +100,31 @@ In the ``/var/ossec/etc/ossec.conf`` file of the Wazuh manager, scroll down to t
       </provider>
       <provider name="debian">
         <enabled>no</enabled>
-        <os>wheezy</os>
         <os>stretch</os>
-        <os>jessie</os>
+        <os>buster</os>
+        <os>bullseye</os>
         <update_interval>1h</update_interval>
       </provider>
       <provider name="redhat">
         <enabled>yes</enabled>
-        <update_from_year>2010</update_from_year>
+        <os>5</os>
+        <os>6</os>
+        <os>7</os>
+        <os>8</os>
+        <update_interval>1h</update_interval>
+      </provider>
+      <provider name="arch">
+        <enabled>no</enabled>
+        <update_interval>1h</update_interval>
+      </provider>
+      <provider name="alas">
+        <enabled>no</enabled>
+        <os>amazon-linux</os>
+        <os>amazon-linux-2</os>
+        <update_interval>1h</update_interval>
+      </provider>
+      <provider name="msu">
+        <enabled>yes</enabled>
         <update_interval>1h</update_interval>
       </provider>
       <provider name="nvd">

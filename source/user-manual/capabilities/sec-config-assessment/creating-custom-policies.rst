@@ -130,6 +130,16 @@ Variables are set in the **variables** section. Their names are preceded by ``$`
 
     $list_of_files: /etc/ssh/sshd_config,/etc/sysctl.conf,/var/log/dmesg
     $list_of_folders: /etc,/var,/tmp
+    $program_name: apache2
+
+Variables can be placed anywhere in the left part of the rule. Therefore, regarding the variables above, the following rules could be built:
+
+.. code-block:: yaml
+
+    f:$list_of_files -> r:^Content to be found
+    c:systemctl is-enabled $program_name -> r:^enabled
+
+There is no limit on the number of variables to add within a rule.
 
 Checks
 ^^^^^^^^^

@@ -91,8 +91,8 @@ To uninstall the agent, follow these steps:
 
     .. code-block:: console
 
-      # /usr/bin/dscl . -delete "/Users/ossec"
-      # /usr/bin/dscl . -delete "/Groups/ossec"
+      # /usr/bin/dscl . -delete "/Users/wazuh"
+      # /usr/bin/dscl . -delete "/Groups/wazuh"
 
 #. Remove from ``pkgutil``.
 

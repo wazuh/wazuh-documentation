@@ -2,7 +2,7 @@
 
 .. meta::
   :description: Learn more about how to register Wazuh agents on Linux, Windows, or macOS X in this section of our documentation.
-  
+
 .. _register_agents:
 
 Registering Wazuh agents
@@ -67,26 +67,26 @@ To register the Wazuh agent, choose the tab corresponding to the Wazuh agent's h
   .. group-tab:: Windows host
 
 
-    Open a Powershell or CMD session in the Wazuh agent's host as an ``Administrator``.
+    Open a PowerShell or CMD session in the Wazuh agent's host as an ``Administrator``.
 
     .. include:: ../../_templates/windows/installation_directory.rst
 
 
     #. To register the Wazuh agent, run the ``agent-auth.exe`` utility, using the Wazuh manager's IP address:
-    
-    
+
+
         .. tabs::
-    
-          .. group-tab:: Powershell
-    
+
+          .. group-tab:: PowerShell
+
            .. code-block:: console
-    
-              # &'C:\Program Files (x86)\ossec-agent\agent-auth.exe' -m <manager_IP> 
-    
+
+              # &'C:\Program Files (x86)\ossec-agent\agent-auth.exe' -m <manager_IP>
+
           .. group-tab:: Windows cmd
-    
+
            .. code-block:: console
-    
+
               # "C:\Program Files (x86)\ossec-agent\agent-auth.exe" -m <manager_IP>
 
 
@@ -141,9 +141,9 @@ There are also other easy registration methods. The choice depends on the partic
 +-----------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Registration method                                                                                 | Description                                                                                                                                                         |
 +=====================================================================================================+=====================================================================================================================================================================+
-| :ref:`Using command line (CLI) <command-line-registration>`                                         | Manual registeration using ``manage_agents`` utility. Requires extracting the registration key from the Wazuh manager and inserting it manually in the Wazuh agent. |
+| :ref:`Using command line (CLI) <command-line-registration>`                                         | Manual registration using ``manage_agents`` utility. Requires extracting the registration key from the Wazuh manager and inserting it manually in the Wazuh agent.  |
 +-----------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| :ref:`Using Wazuh API <restful-api-registration>`                                                   | Uses a simple Wazuh API request from any host. Requires adding returned registration key manually to the Wazuh agent using ``manage_agents`` utility.               |
+| :ref:`Using Wazuh API <restful-api-registration>`                                                   | Uses a simple Wazuh API request from any host. Requires adding returned registration key manually to the Wazuh agent.                                               |
 +-----------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | :ref:`Using registration service with password authorization <password-authorization-registration>` | Registration using ``agent-auth`` utility. Allows additional protection of the Wazuh manager from unauthorized registrations by using a password.                   |
 +-----------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+

@@ -47,7 +47,7 @@ All agent modules are configurable and perform different security tasks. This mo
 
 - **Container security monitoring:** This agent module is integrated with the Docker Engine API in order to monitor changes in a containerized environment. For example, it detects changes to container images, network configuration, or data volumes. Besides, it alerts on containers running in privileged mode and on users executing commands in a running container.
 
-- **Cloud security monitoring:** This component monitors cloud providers (Amazon AWS, Microsoft Azure, or Google GCP), and it natively communicates with their APIs. It is capable of detecting changes to the cloud infrastructure and alerts when a new user is created, a security group is modified, a cloud instance is stopped, as well as other anomalous behavior. Moreover, this component is in charge of collecting cloud services log data, including AWS Cloudtrail, AWS Macie, AWS GuardDuty, and Azure Active Directory.
+- **Cloud security monitoring:** This component monitors cloud providers such as Amazon AWS, GitHub, Microsoft Azure, Office 365, or Google GCP. It natively communicates with their APIs. It is capable of detecting changes to the cloud infrastructure (e.g. a new user is created, a security group is modified, a cloud instance is stopped, etc.), and collecting cloud services log data (e.g. AWS Cloudtrail, AWS Macie, AWS GuardDuty, Azure Active Directory, etc.)
 
 Communication with Wazuh server
 -------------------------------

@@ -1,5 +1,8 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+  :description: The Wazuh module for AWS provides capabilities to monitor AWS based services. See more about how to configure CloudWatch Logs and some practical use cases.
+
 .. _aws_cloudwatchlogs:
 
 AWS CloudWatch Logs
@@ -34,7 +37,7 @@ Wazuh configuration
         <interval>5m</interval>
         <run_on_start>yes</run_on_start>
         <service type="cloudwatchlogs">
-        <aws_profile>default</aws_profile>
+          <aws_profile>default</aws_profile>
           <aws_log_groups>example_log_group</aws_log_groups>
           <regions>us-east-1</regions>
         </service>
@@ -74,3 +77,9 @@ Wazuh configuration
       .. code-block:: console
 
         # service wazuh-agent restart
+
+
+CloudWatch Logs use cases
+-------------------------
+
+Check the :ref:`Amazon ECR Image scanning <amazon_image_scanning>` section to learn how to use the CloudWatch Logs integration to pull logs from Amazon ECR Image scans.

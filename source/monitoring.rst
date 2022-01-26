@@ -10,4 +10,6 @@ Cloud security
 
    amazon/index
    azure/index
+   github/index
    gcp/index
+   office365/index

@@ -44,6 +44,21 @@ By default, syscheck scans selected directories, whose list depends on the :ref:
     <directories check_all="yes">/root/users.txt,/bsd,/root/db.html</directories>
   </syscheck>
 
+.. versionadded:: 4.3.0
+
+FIM directories can be configured using ``*`` and ``?`` wildcards in the same way you would use them in a shell or cmd terminal for listing files.
+
+.. code-block:: xml
+
+  <syscheck>
+    <directories check_all="yes">/home/*/Downloads</directories>
+  </syscheck>
+
+.. note::
+
+  Directories and files that match the configured pattern and are created after the initial FIM scan will be added for monitoring after the next scheduled scan is run.
+
+
 Configuring scheduled scans
 ---------------------------
 

@@ -76,7 +76,7 @@ When unable to process and parse a CloudTrail log, skip the log and continue pro
 bucket type
 ^^^^^^^^^^^
 
-Defines a bucket to process. Must have its attribute ``type`` defined. (Supports multiple instances of this option).
+Defines a bucket to process. It must have its ``type`` attribute defined. It supports multiple instances of this option.
 
 Bucket options
 ~~~~~~~~~~~~~~
@@ -88,43 +88,60 @@ Bucket options
 - `bucket\\secret_key`_
 - `bucket\\aws_profile`_
 - `bucket\\iam_role_arn`_
+- `bucket\\iam_role_duration`_
 - `bucket\\path`_
+- `bucket\\path_suffix`_
 - `bucket\\only_logs_after`_
 - `bucket\\regions`_
 - `bucket\\aws_organization_id`_
+- `bucket\\discard_regex`_
+- `bucket\\sts_endpoint`_
+- `bucket\\service_endpoint`_
 
-+----------------------------------+------------------------------------------------+-----------------------------------------------+
-| Options                          | Allowed values                                 | Mandatory/Optional                            |
-+==================================+================================================+===============================================+
-| `type`_                          | cloudtrail, guardduty, vpcflow, config, custom | Mandatory                                     |
-+----------------------------------+------------------------------------------------+-----------------------------------------------+
-| `bucket\\name`_                  | Any valid bucket name                          | Mandatory                                     |
-+----------------------------------+------------------------------------------------+-----------------------------------------------+
-| `bucket\\aws_account_id`_        | Comma list of AWS Accounts                     | Optional (only works with CloudTrail buckets) |
-+----------------------------------+------------------------------------------------+-----------------------------------------------+
-| `bucket\\aws_account_alias`_     | Any string                                     | Optional                                      |
-+----------------------------------+------------------------------------------------+-----------------------------------------------+
-| `bucket\\access_key`_            | Alphanumerical key                             | Optional                                      |
-+----------------------------------+------------------------------------------------+-----------------------------------------------+
-| `bucket\\secret_key`_            | Alphanumerical key                             | Optional                                      |
-+----------------------------------+------------------------------------------------+-----------------------------------------------+
-| `bucket\\aws_profile`_           | Any string                                     | Optional                                      |
-+----------------------------------+------------------------------------------------+-----------------------------------------------+
-| `bucket\\iam_role_arn`_          | IAM role ARN                                   | Optional                                      |
-+----------------------------------+------------------------------------------------+-----------------------------------------------+
-| `bucket\\path`_                  | Prefix for S3 bucket key                       | Optional                                      |
-+----------------------------------+------------------------------------------------+-----------------------------------------------+
-| `bucket\\only_logs_after`_       | Date (YYYY-MMM-DDD, for example 2018-AUG-21)   | Optional                                      |
-+----------------------------------+------------------------------------------------+-----------------------------------------------+
-| `bucket\\regions`_               | Comma list of AWS regions                      | Optional (only works with CloudTrail buckets) |
-+----------------------------------+------------------------------------------------+-----------------------------------------------+
-| `bucket\\aws_organization_id`_   | Name of AWS organization                       | Optional (only works with CloudTrail buckets) |
-+----------------------------------+------------------------------------------------+-----------------------------------------------+
+
++----------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+| Options                          | Allowed values                                              | Mandatory/Optional                            |
++==================================+=============================================================+===============================================+
+| `type`_                          | cloudtrail, guardduty, vpcflow, config, custom              | Mandatory                                     |
++----------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+| `bucket\\name`_                  | Any valid bucket name                                       | Mandatory                                     |
++----------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+| `bucket\\aws_account_id`_        | Comma list of AWS Accounts                                  | Optional (only works with CloudTrail buckets) |
++----------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+| `bucket\\aws_account_alias`_     | Any string                                                  | Optional                                      |
++----------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+| `bucket\\access_key`_            | Alphanumerical key                                          | Optional                                      |
++----------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+| `bucket\\secret_key`_            | Alphanumerical key                                          | Optional                                      |
++----------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+| `bucket\\aws_profile`_           | Any string                                                  | Optional                                      |
++----------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+| `bucket\\iam_role_arn`_          | IAM role ARN                                                | Optional                                      |
++----------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+| `bucket\\iam_role_duration`_     | Number of seconds between 900 and 3600                      | Optional (if set, it requires an iam_role_arn |
+|                                  |                                                             | to be provided)                               |
++----------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+| `bucket\\path`_                  | Prefix for S3 bucket key                                    | Optional                                      |
++----------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+| `bucket\\path_suffix`_           | Suffix for S3 bucket key                                    | Optional                                      |
++----------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+| `bucket\\only_logs_after`_       | Date (YYYY-MMM-DDD, for example 2018-AUG-21)                | Optional                                      |
++----------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+| `bucket\\regions`_               | Comma list of AWS regions                                   | Optional (only works with CloudTrail buckets) |
++----------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+| `bucket\\aws_organization_id`_   | Name of AWS organization                                    | Optional (only works with CloudTrail buckets) |
++----------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+| `bucket\\discard_regex`_         | A regex value to determine if an event should be discarded. | Optional                                      |
++----------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+| `bucket\\sts_endpoint`_          | The AWS Security Token Service VPC endpoint URL.            | Optional                                      |
++----------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+| `bucket\\service_endpoint`_      | The AWS S3 endpoint URL.                                    | Optional                                      |
++----------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 
 type
 ^^^^
 
-Specifies type of bucket. Is an attribute of the ``bucket`` tag.
+Specifies type of bucket. It is an attribute of the ``bucket`` tag.
 
 +--------------------+------------------------------------------------+
 | **Default value**  | N/A                                            |
@@ -202,6 +219,8 @@ A valid profile name from a Shared Credential File or AWS Config File with the p
 | **Allowed values** | Valid profile name |
 +--------------------+--------------------+
 
+.. _bucket_iam_role_arn:
+
 bucket\\iam_role_arn
 ^^^^^^^^^^^^^^^^^^^^
 
@@ -212,6 +231,17 @@ A valid role arn with permission to read logs from the bucket.
 +--------------------+----------------+
 | **Allowed values** | Valid role arn |
 +--------------------+----------------+
+
+bucket\\iam_role_duration
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+A valid number of seconds that defines the duration of the session assumed when using the provided :ref:`iam_role_arn<bucket_iam_role_arn>`.
+
++--------------------+------------------------------------------+
+| **Default value**  | N/A                                      |
++--------------------+------------------------------------------+
+| **Allowed values** | Number of seconds between 900 and 3600   |
++--------------------+------------------------------------------+
 
 bucket\\path
 ^^^^^^^^^^^^
@@ -224,16 +254,29 @@ If defined, the path or prefix for the bucket.
 | **Allowed values** | Valid path    |
 +--------------------+---------------+
 
+bucket\\path_suffix
+^^^^^^^^^^^^^^^^^^^
+
+If defined, the suffix for the bucket. Only works with buckets which contain the folder named AWSLogs (Cloudtrail, VPC and Macie).
+
++--------------------+---------------+
+| **Default value**  | N/A           |
++--------------------+---------------+
+| **Allowed values** | Valid path    |
++--------------------+---------------+
+
+.. _only_logs_aws_buckets:
+
 bucket\\only_logs_after
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-A valid date, in YYYY-MMM-DD format, that only logs from after that date will be parsed.  All logs from before that date will be skipped.
+A valid date, in YYYY-MMM-DD format. Only logs from that date onwards will be parsed.
 
-+--------------------+-------------+
-| **Default value**  | 1970-JAN-01 |
-+--------------------+-------------+
-| **Allowed values** | Valid date  |
-+--------------------+-------------+
++--------------------+-----------------------------------+
+| **Default value**  | Date of execution at ``00:00:00`` |
++--------------------+-----------------------------------+
+| **Allowed values** | Valid date                        |
++--------------------+-----------------------------------+
 
 bucket\\regions
 ^^^^^^^^^^^^^^^
@@ -255,6 +298,56 @@ Name of AWS organization. Only works with CloudTrail buckets.
 | **Default value**  | N/A                                    |
 +--------------------+----------------------------------------+
 | **Allowed values** | Valid AWS organization name            |
++--------------------+----------------------------------------+
+
+bucket\\discard_regex
+^^^^^^^^^^^^^^^^^^^^^
+
+A regex value to determine if an event should be discarded. It requires a `field` attribute used to specify the field of the event where the regex should be applied.
+
++--------------------+----------------------------------------+
+| **Default value**  | N/A                                    |
++--------------------+----------------------------------------+
+| **Allowed values** | Any regex or sregex expression         |
++--------------------+----------------------------------------+
+
+Attributes:
+
++-----------+------------------------------------------------------------------------------------------------------+
+| **field** | The event's field on which the regex should be applied to determine if the event should be skipped.  |
+|           +------------------+-----------------------------------------------------------------------------------+
+|           | Default value    | N/A                                                                               |
+|           +------------------+-----------------------------------------------------------------------------------+
+|           | Allowed values   | A str containing the full field name path                                         |
++-----------+------------------+-----------------------------------------------------------------------------------+
+
+Usage example:
+
+.. code-block:: console
+
+    <discard_regex field="data.configurationItemStatus">REJECT</discard_regex>
+
+
+bucket\\sts_endpoint
+^^^^^^^^^^^^^^^^^^^^
+
+The AWS Security Token Service VPC endpoint URL to be used when an IAM role is provided as the authentication method. Check the :ref:`Considerations for configuration <amazon_considerations>` page to learn more about VPC endpoints.
+
++--------------------+----------------------------------------+
+| **Default value**  | N/A                                    |
++--------------------+----------------------------------------+
+| **Allowed values** | Any valid VPC endpoint URL for STS     |
++--------------------+----------------------------------------+
+
+bucket\\service_endpoint
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+The AWS S3 endpoint URL to be used to download the data from the bucket. Check the :ref:`Considerations for configuration <amazon_considerations>` page to learn more about VPC and FIPS endpoints.
+
++--------------------+----------------------------------------+
+| **Default value**  | N/A                                    |
++--------------------+----------------------------------------+
+| **Allowed values** | Any valid endpoint URL for S3          |
 +--------------------+----------------------------------------+
 
 run_on_start
@@ -303,13 +396,13 @@ Day of the week to run the scan. This option is **not compatible** with the ``da
 | **Default value**  | n/a                      |
 +--------------------+--------------------------+
 | **Allowed values** | Day of the week:         |
-|                    |   - sunday/sun           |
-|                    |   - monday/mon           |
-|                    |   - tuesday/tue          |
-|                    |   - wednesday/wed        |
-|                    |   - thursday/thu         |
-|                    |   - friday/fri           |
-|                    |   - saturday/sat         |
+|                    |  - sunday/sun            |
+|                    |  - monday/mon            |
+|                    |  - tuesday/tue           |
+|                    |  - wednesday/wed         |
+|                    |  - thursday/thu          |
+|                    |  - friday/fri            |
+|                    |  - saturday/sat          |
 +--------------------+--------------------------+
 
 .. note::
@@ -347,9 +440,12 @@ Service options
 - `Service\\secret_key`_
 - `Service\\aws_profile`_
 - `Service\\iam_role_arn`_
+- `Service\\iam_role_duration`_
 - `Service\\only_logs_after`_
 - `Service\\regions`_
 - `Service\\remove_log_streams`_
+- `Service\\sts_endpoint`_
+- `Service\\service_endpoint`_
 
 
 Service\\aws_account_id
@@ -421,6 +517,8 @@ A valid profile name from a Shared Credential File or AWS Config File with the p
 | **Allowed values** | Valid profile name |
 +--------------------+--------------------+
 
+.. _service_iam_role_arn:
+
 Service\\iam_role_arn
 ^^^^^^^^^^^^^^^^^^^^^
 
@@ -432,18 +530,29 @@ A valid role arn with permission to access the service.
 | **Allowed values** | Valid role arn |
 +--------------------+----------------+
 
+Service\\iam_role_duration
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+A valid number of seconds that defines the duration of the session assumed when using the provided :ref:`iam_role_arn<service_iam_role_arn>`.
+
++--------------------+------------------------------------------+
+| **Default value**  | N/A                                      |
++--------------------+------------------------------------------+
+| **Allowed values** | Number of seconds between 900 and 3600   |
++--------------------+------------------------------------------+
+
 Service\\only_logs_after
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. versionadded:: 4.0.0
 
-A valid date, in YYYY-MMM-DD format. Only those logs from after that date will be parsed, the logs from before that date will be skipped. Only works for CloudWatch Logs service.
+A valid date, in YYYY-MMM-DD format. Only logs from that date onwards will be parsed. This option is only available for the CloudWatch Logs service.
 
-+--------------------+-------------+
-| **Default value**  | 1970-JAN-01 |
-+--------------------+-------------+
-| **Allowed values** | Valid date  |
-+--------------------+-------------+
++--------------------+-----------------------------------+
+| **Default value**  | Date of execution at ``00:00:00`` |
++--------------------+-----------------------------------+
+| **Allowed values** | Valid date                        |
++--------------------+-----------------------------------+
 
 Service\\regions
 ^^^^^^^^^^^^^^^^
@@ -491,6 +600,7 @@ Example of configuration
           <path>/dev1/</path>
           <aws_account_id>123456789012</aws_account_id>
           <aws_account_alias>dev1-account</aws_account_alias>
+          <discard_regex field="data.configurationItemStatus">REJECT</discard_regex>
       </bucket>
       <bucket type="cloudtrail">
           <name>s3-dev-bucket</name>
@@ -501,18 +611,23 @@ Example of configuration
           <path>/dev2/</path>
           <aws_account_id>112233445566</aws_account_id>
           <aws_account_alias>dev2-account</aws_account_alias>
+          <discard_regex field="data.configurationItemStatus">REJECT</discard_regex>
+          <service_endpoint>https://bucket.xxxxxx.s3.us-east-2.vpce.amazonaws.com</service_endpoint>
       </bucket>
       <bucket type="custom">
           <name>s3-stage-bucket</name>
           <aws_profile>stage-creds</aws_profile>
           <aws_account_id>111222333444</aws_account_id>
           <aws_account_alias>stage-account</aws_account_alias>
+          <discard_regex field="data.configurationItemStatus">REJECT</discard_regex>
       </bucket>
       <bucket type="custom">
           <name>s3-prod-bucket</name>
           <iam_role_arn>arn:aws:iam::010203040506:role/ROLE_SVC_Log-Parser</iam_role_arn>
+          <iam_role_duration>1300</iam_role_duration>
           <aws_account_id>11112222333</aws_account_id>
           <aws_account_alias>prod-account</aws_account_alias>
+          <discard_regex field="data.configurationItemStatus">REJECT</discard_regex>
       </bucket>
       <service type="cloudwatchlogs">
           <access_key>insert_access_key</access_key>
@@ -520,5 +635,30 @@ Example of configuration
           <aws_log_groups>log_group1,log_group2</aws_log_groups>
           <only_logs_after>2018-JUN-01</only_logs_after>
           <regions>us-east-1,us-west-1,eu-central-1</regions>
+          <discard_regex field="data.configurationItemStatus">REJECT</discard_regex>
       </service>
   </wodle>
+
+
+Service\\sts_endpoint
+^^^^^^^^^^^^^^^^^^^^^
+
+The AWS Security Token Service VPC endpoint URL to be used when an IAM role is provided as the authentication method. Check the :ref:`Considerations for configuration <amazon_considerations>` page to learn more about VPC endpoints.
+
++--------------------+----------------------------------------+
+| **Default value**  | N/A                                    |
++--------------------+----------------------------------------+
+| **Allowed values** | Any valid VPC endpoint URL for STS     |
++--------------------+----------------------------------------+
+
+Service\\service_endpoint
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The endpoint URL for the required AWS Service to be used to download the data from it. Check the :ref:`Considerations for configuration <amazon_considerations>` page to learn more about VPC and FIPS endpoints.
+
++--------------------+------------------------------------------------+
+| **Default value**  | N/A                                            |
++--------------------+------------------------------------------------+
+| **Allowed values** | Any valid endpoint URL for the AWS Service     |
++--------------------+------------------------------------------------+
+

@@ -93,6 +93,9 @@ Below we have some Windows wildcard examples.
   * On Windows systems, only character ``*`` is supported as a wildcard. For instance ``*ANY_STRING*``, will match all files that have ``ANY_STRING`` inside its name, another example is ``*.log`` this will match any log file.
   * The maximum amount of files monitored at same time is limited to 1000.
 
+.. warning::
+  * If using ``macos`` as ``log_format``, then ``location`` must be set to ``macos`` as well.
+
 .. _command:
 
 command
@@ -170,6 +173,9 @@ The attributes below are optional.
 |             | .. versionadded:: 4.2.0               |              |               |
 +-------------+---------------------------------------+--------------+---------------+
 
+.. warning::
+  If collecting logs with ``<log_format>`` set as ``macos``, then ``max-size`` is ignored. 
+
 .. note::
   If the log rotates while ``wazuh-logcollector`` is stopped and ``only-future-events`` is set to ``no``, it will start reading from the beginning of the log. 
 
@@ -177,7 +183,9 @@ The attributes below are optional.
 query
 ^^^^^
 
-Filter ``eventchannel`` events that Wazuh will process by using an *XPATH* query following the event schema.
+This label can be used to filter *Windows* ``eventchannel`` events or *macOS* ULS logs (``macos``) that Wazuh will process. 
+
+To filter *Windows* ``eventchannel`` events, *XPATH* format is used to make the queries following the event schema.
 
 Example:
 
@@ -189,11 +197,44 @@ Example:
     <query>Event[System/EventID = 4624 and (EventData/Data[@Name='LogonType'] = 2 or EventData/Data[@Name='LogonType'] = 10)]</query>
   </localfile>
 
-+--------------------+----------------------------------------------------------------------------------------------------------------------------------+
-| **Default value**  | n/a                                                                                                                              |
-+--------------------+----------------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values** | Any XPATH query following the `event schema <https://msdn.microsoft.com/en-us/library/windows/desktop/aa385201(v=vs.85).aspx>`_  |
-+--------------------+----------------------------------------------------------------------------------------------------------------------------------+
+To filter *macOS* ULS logs (``macos``), *Predicates* format is used to make the queries.
+
+Example:
+
+.. code-block:: xml
+
+  <localfile>
+    <location>macos</location>
+    <log_format>macos</log_format>
+    <query type="log,trace" level="debug">process == "sshd" OR message CONTAINS "invalid"</query>
+  </localfile>
+
++--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Default value**  | n/a                                                                                                                                                       |
++--------------------+----------------------+------------------------------------------------------------------------------------------------------------------------------------+
+| **Allowed values** | Windows Eventchannel | XPATH query format, follows the `event schema <https://msdn.microsoft.com/en-us/library/windows/desktop/aa385201(v=vs.85).aspx>`_  |
+|                    +----------------------+------------------------------------------------------------------------------------------------------------------------------------+
+|                    | macOS ULS            | Predicate query format, see :ref:`How to collect macOS ULS logs <how-to-collect-macoslogs>`                                        |
++--------------------+----------------------+------------------------------------------------------------------------------------------------------------------------------------+
+
+The attributes below are optional and only valid for macOS ULS (``macos``).
+
++-------------+---------------------------------------+--------------+----------------+
+| Attribute   |              Description              | Value range  | Default value  |
++=============+=======================================+==============+================+
+|  **level**  | Indicates the level of verbosity,     |   default    |    default     |
+|             | `default` is the less verbose and     +--------------+                |
+|             | `debug` is the most verbose.          |   info       |                |
+|             |                                       +--------------+                |
+|             |                                       |   debug      |                |
++-------------+---------------------------------------+--------------+----------------+
+|  **type**   | Limits the type of logs that are      |  activity    |    all         |
+|             | intended to be acquired to the ones   +--------------+                |
+|             | listed and sepparated by commas.      |   log        |                |
+|             |                                       +--------------+                |
+|             |                                       |   trace      |                |
++-------------+---------------------------------------+--------------+----------------+
+
 
 label
 ^^^^^
@@ -285,6 +326,13 @@ Set the format of the log to be read. **field is required**
 |                    |                    |                                                                                                  |
 |                    |                    | This can be used to monitor standard “Windows” event logs and "Application and Services" logs.   |
 +                    +--------------------+--------------------------------------------------------------------------------------------------+
+|                    | macos              | Used for macOS ULS logs, returns the logs in syslog format.                                      |
+|                    |                    |                                                                                                  |
+|                    |                    | Monitors all the logs that match the query filter.                                               |
+|                    |                    | See :ref:`How to collect macOS ULS logs <how-to-collect-macoslogs>`.                             |
+|                    |                    |                                                                                                  |
+|                    |                    | .. versionadded:: 4.3.0                                                                          |
++                    +--------------------+--------------------------------------------------------------------------------------------------+
 |                    | audit              | Used for events from Auditd.                                                                     |
 |                    |                    |                                                                                                  |
 |                    |                    | This format chains consecutive logs with the same ID into a single event.                        |
@@ -325,6 +373,10 @@ Set the format of the log to be read. **field is required**
 |                    |                    |                                                                                                  |
 |                    |                    | .. versionadded:: 4.2.0                                                                          |
 +--------------------+--------------------+--------------------------------------------------------------------------------------------------+
+
+.. warning::
+
+    Only one configuration block with ``log_format`` set as ``macos`` is allowed.
 
 .. warning::
 
@@ -584,3 +636,14 @@ Windows configuration:
       <query>Event/System[EventID != 5145 and EventID != 5156]</query>
       <reconnect_time>10s</reconnect_time>
     </localfile>
+
+MacOS configuration:
+
+.. code-block:: xml
+
+  <!-- For monitoring macOS ULS Logs -->
+  <localfile>
+    <location>macos</location>
+    <log_format>macos</log_format>
+    <query type="trace,log,activity" level="info">process == "sshd" OR message CONTAINS "invalid"</query>
+  </localfile>

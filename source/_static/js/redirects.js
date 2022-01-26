@@ -4,6 +4,7 @@ const redirections = [];
 
 /* Note: new release versions must always be inserted in the first position of the array "versions" */
 const versions = [
+  '4.3',
   '4.2',
   '4.1',
   '4.0',
@@ -56,13 +57,73 @@ removedUrls['x.y'] = [
 ];
 */
 
+/* *** RELEASE 4.3 ****/
+
+/* Pages added in 4.3 */
+
+newUrls['4.3'] = [
+  '/github/index.html',
+  '/github/monitoring-github-activity.html',
+  '/user-manual/reference/ossec-conf/github-module.html',
+  '/office365/index.html',
+  '/office365/monitoring-office365-activity.html',
+  '/user-manual/reference/ossec-conf/office365-module.html',
+  '/user-manual/capabilities/log-data-collection/how-to-collect-macoslogs.html',
+  '/azure/activity-services/index.html',
+  '/azure/activity-services/active-directory/index.html',
+  '/azure/activity-services/active-directory/graph.html',
+  '/azure/activity-services/active-directory/graph.html',
+  '/azure/activity-services/prerequisites/dependencies.html',
+  '/azure/activity-services/active-directory/index.html',
+  '/azure/activity-services/prerequisites/considerations.html',
+  '/azure/activity-services/prerequisites/credentials.html',
+  '/azure/activity-services/prerequisites/index.html',
+  '/azure/activity-services/services/index.html',
+  '/azure/activity-services/services/log-analytics.html',
+  '/azure/activity-services/services/storage.html',
+  '/user-manual/reference/ossec-conf/gcp-bucket.html',
+  '/gcp/supported-services/access_logs.html',
+  '/gcp/supported-services/cloud_audit_logs.html',
+  '/gcp/supported-services/dns_queries.html',
+  '/gcp/supported-services/load_balancing.html',
+  '/user-manual/reference/ossec-conf/gcp-bucket.html',
+  '/gcp/supported-services/vpc_flow.html',
+  '/gcp/supported-services/firewall.html',
+  '/amazon/services/supported-services/ecr-image-scanning.html',
+  '/development/selinux-wazuh-context.html',
+];
+
+removedUrls['4.3'] = [
+  '/azure/monitoring-activity.html',
+  '/azure/monitoring-services.html',
+  '/azure/dependencies.html',
+];
+
+
+redirections.push(
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': 'azure/monitoring-activity.html',
+    '4.3': 'azure/activity-services/index.html',
+  },
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': 'azure/monitoring-services.html',
+    '4.3': 'azure/activity-services/index.html',
+  },
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': 'azure/dependencies.html',
+    '4.3': 'azure/activity-services/prerequisites/dependencies.html',
+  },
+);
+
 /* *** RELEASE 4.2 ****/
 
 /* Pages added in 4.2 */
 
 newUrls['4.2'] = [
-  '/getting-started/components/elasticsearch.html',
-  '/getting-started/components/kibana.html',
+  '/azure/dependencies.html',
   '/proof-of-concept-guide/detect-malware-yara-integration.html',
   '/proof-of-concept-guide/poc-vulnerability-detection.html',
   '/proof-of-concept-guide/detect-remove-malware-virustotal.html',

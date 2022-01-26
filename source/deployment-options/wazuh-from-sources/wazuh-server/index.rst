@@ -98,6 +98,15 @@ Installing Wazuh manager
       # make -j$(nproc) && make install
       # cd .. && rm -rf cmake-*
 
+  .. group-tab:: Pacman
+
+
+    .. code-block:: console
+
+        # pacman --noconfirm -Syu curl gcc make sudo wget expect gnupg perl-base \
+        perl fakeroot python brotli automake autoconf libtool gawk libsigsegv nodejs \
+        base-devel inetutils cmake
+
 
 **Optional**. Install the following dependencies **only when compiling the CPython from sources**. Since v4.2.0, ``make deps TARGET=server`` will download a portable version of CPython ready to be installed. Nevertheless, you can download the CPython sources adding the ``PYTHON_SOURCE`` flag when running ``make deps``.
 
@@ -119,9 +128,9 @@ To install the required dependencies to build the python interpreter, follow the
 
     .. code-block:: console
 
-        # echo "deb-src http://deb.debian.org/debian $(lsb_release -cs) main" >> /etc/apt/sources.list
+        # sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
         # apt-get update
-        # apt-get build-dep python3.5 -y
+        # apt-get build-dep python3.9 -y
 
 
   .. group-tab:: ZYpp
@@ -152,7 +161,7 @@ To install the required dependencies to build the python interpreter, follow the
       # cd wazuh-*
       # ./install.sh
 
-    If you have previously compiled for another platform, you must clean the build using the Makefile in ``src``:
+    If you have previously compiled for another platform or **you want to install Wazuh in a custom path**, you must clean the build using the Makefile in ``src``:
 
     .. code-block:: console
 
@@ -246,7 +255,5 @@ Remove users:
 
   .. code-block:: console
 
-    # userdel ossec 2> /dev/null
-    # userdel ossecm 2> /dev/null
-    # userdel ossecr 2> /dev/null
-    # groupdel ossec 2> /dev/null
+    # userdel wazuh 2> /dev/null
+    # groupdel wazuh 2> /dev/null

@@ -13,18 +13,12 @@ The Wazuh security platform provides threat detection, configuration compliance,
 
 - **Endpoint level**: monitoring cloud instances or virtual machines using the lightweight :ref:`Wazuh security agent <wazuh_agent>`.
 
-- **Cloud infrastructure level**: monitoring cloud services and activity by collecting and analyzing data from the provider API. Amazon AWS, Microsoft Azure, and Google Cloud Platform are supported.
-
-.. thumbnail:: /images/getting_started/use-cases/wazuh-use-cases-cloud.png
-   :title: Cloud events dashboard
-   :align: center
-   :width: 100%
-   :wrap_image: No
+- **Cloud infrastructure level**: monitoring cloud services and activity by collecting and analyzing data from the provider API. Amazon AWS, Microsoft Azure, Office 365, Google Cloud Platform and GitHub are supported.
 
 Amazon Web Services
 -------------------
 
-The :ref:`Wazuh agent <wazuh_agent>` also provides a module to monitor and secure your AWS cloud infrastructure. This module collects AWS services log data from S3 buckets, and forwards collected log messages to the :ref:`Wazuh server <wazuh_server>`, where events are analyzed using out-of-the-box Wazuh rules for AWS.
+The :ref:`Wazuh agent <wazuh_agent>` also provides a module to monitor and secure your AWS cloud infrastructure. This module collects AWS services log data from S3 buckets, and forwards collected log messages to the :ref:`Wazuh server <wazuh_server>`, where events are analyzed using out-of-the-box Wazuh rules for AWS. 
 
 The following list describes the AWS services that Wazuh is capable of monitoring:
 
@@ -119,11 +113,11 @@ Microsoft Azure
 
 The :ref:`Wazuh agent <wazuh_agent>` module for Microsoft Azure makes it easy to pull Azure platform logs. In particular, it is designed to obtain data from the following services:
 
-- :ref:`Log Analytics API <azure_monitoring_activity>`: The Log Analytics API is a core component of the Azure Monitor service, which is used to aggregate and analyze log data. The sources of such data are cloud applications, operating systems, and Azure resources. The Wazuh module for Azure is capable of querying the Log Analytics API, pulling the logs collected by the Azure monitor service.
+- :ref:`Log Analytics API <azure_log_analytics>`: The Log Analytics API is a core component of the Azure Monitor service, which is used to aggregate and analyze log data. The sources of such data are cloud applications, operating systems and Azure resources. The Wazuh module for Azure is capable of querying the Log Analytics API, pulling the logs that are collected by the Azure monitor service.
 
-- :ref:`Blob Storage API <azure_monitoring_activity>`: Logs from Azure services are optionally pushed to Azure Blob Storage. Specifically, it is possible to configure an Azure service to export logs to a container in a storage account created for that purpose. Afterward, the Wazuh agent will download those logs via its integration with the Blob Storage API.
+- :ref:`Blob Storage API <azure_storage>`: Logs from Azure services are optionally pushed to Azure Blob Storage. Specifically, it is possible to configure an Azure service to export logs to a container in a storage account created for that purpose. Afterwards, the Wazuh agent will download those logs via its integration with the Blob Storage API.
 
-- :ref:`Active Directory Graph API <azure_monitoring_services>`: The Azure Active Directory Graph API provides access to AZURE AD through REST API endpoints. It is used by Wazuh to monitor Active Directory events (e.g., creation of a new user, update of a user's properties, disable of a user's account, etc.)
+- :ref:`Active Directory Graph API <azure_graph>`: The Azure Active Directory Graph API provides access to AZURE AD through REST API endpoints. It is used by Wazuh to monitor Active Directory events (e.g. creation of a new user, update of a user's properties, disable of a user's account, etc.)
 
 Expand the output to see an example of a rule that Azure alerts.
 
@@ -166,6 +160,74 @@ Expand the output to see an example of a rule that Azure alerts.
   }
 
 More information about how to use Wazuh to monitor Microsoft Azure can be found in our :ref:`documentation <azure>`.
+
+Office 365
+----------
+
+Wazuh monitors Office 365 by extracting events from audit logs, which is used as a middleware for event ingestion and delivery. This integration helps detect threats targeting your Office 365 organizations.
+
+The following example shows an alert when a ``Communication site`` is modified in ``SharePoint``:
+
+.. code-block:: json
+  :emphasize-lines: 5
+  :class: output
+
+    {
+        "timestamp":"2021-06-09T22:12:54.301+0000",
+        "rule":{
+            "level":3,
+            "description":"Office 365: SharePoint file operation events.",
+            "id":"91537",
+            "firedtimes":2,
+            "mail":false,
+            "groups":["office365","SharePointFileOperation"]
+        },
+        "agent":{
+            "id":"001",
+            "name":"ubuntu-bionic"
+        },
+        "manager":{
+            "name":"ubuntu-bionic"
+        },
+        "id":"1623276774.47272",
+        "decoder":{
+            "name":"json"
+        },
+        "data":{
+            "integration":"office365",
+            "office365":{
+                "CreationTime":"2021-06-09T22:10:45",
+                "Id":"xxxx-xxxx-xxxx-xxxx-xxxx",
+                "Operation":"FileModified",
+                "OrganizationId":"xxxx-xxxx-xxxx-xxxx-xxxx",
+                "RecordType":"6",
+                "UserKey":"i:xx.f|membership|xxxx@live.com",
+                "UserType":"0",
+                "Version":"1",
+                "Workload":"SharePoint",
+                "ClientIP":"xxx.xx.x.xxx",
+                "ObjectId":"https://xxxx.sharepoint.com/SitePages/xxxx.aspx",
+                "UserId":"xxx.xxx@xxx.com",
+                "CorrelationId":"0b50d09f-e0f2-2000-d9c7-a5b468efc712",
+                "DoNotDistributeEvent":"true",
+                "EventSource":"SharePoint",
+                "ItemType":"File",
+                "ListId":"xxxx-xxxx-xxxx-xxxx-xxxx",
+                "ListItemUniqueId":"xxxx-xxxx-xxxx-xxxx-xxxx",
+                "Site":"xxxx-xxxx-xxxx-xxxx-xxxx",
+                "UserAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36",
+                "WebId":"xxxx-xxxx-xxxx-xxxx-xxxx",
+                "SourceFileExtension":"aspx",
+                "SiteUrl":"https://xxxx.sharepoint.com/",
+                "SourceFileName":"xxxx.aspx",
+                "SourceRelativeUrl":"SitePages",
+                "Subscription":"Audit.SharePoint"
+            }
+        },
+        "location":"office365"
+    }
+
+More information on how to use Wazuh to monitor GitHub can be found in our :ref:`documentation <office365>`.
 
 Google Cloud Platform
 ---------------------
@@ -238,4 +300,53 @@ Expand the output to see an example of an alert generated when a known bad actor
     "timestamp": "2020-08-17T17:09:25.832+0000"
   }
 
-More information on how to use Wazuh to monitor the Google cloud platform can be found in our :ref:`documentation <gcp>`.
+More information on how to use Wazuh to monitor the Google cloud platform can be found in our :ref:`documentation <gcp>`. 
+
+GitHub
+------
+
+Wazuh monitors GitHub by extracting events from audit logs, which is used as a middleware for event ingestion and delivery. This integration helps detect threats targeting your GitHub organizations.
+
+The following example shows an alert generated when GitHub creates a Dependabot alert for a repository that uses a vulnerable dependency:
+
+.. code-block:: json
+  :emphasize-lines: 4,23
+  :class: output
+
+  {
+    "timestamp":"2021-04-29T16:40:33.955+0000",
+    "rule": {
+        "level":12,
+        "description":"GitHub Repository vulnerability alert create.",
+        "id":"91362",
+        "firedtimes":8,
+        "mail":false,
+        "groups": ["git_repository_vulnerability_alert"]
+    },
+    "agent": {
+        "id":"000",
+        "name":"ubuntu"
+    },
+    "manager": {
+        "name":"ubuntu-bionic"
+    },
+    "id":"1619714433.146108",
+    "decoder": {
+        "name":"json"
+    },
+    "data": {
+        "github": {
+            "action":"repository_vulnerability_alert.create",
+            "actor":"member_name",
+            "@timestamp":"1619031743300.000000",
+            "org":"org_name",
+            "created_at":"1619031743300.000000",
+            "user":"User",
+            "_document_id":"9Z1pUC7N0GBf4ZzZFQEXpA",
+            "source":"github"
+        }
+    },
+    "location":"github"
+  }
+
+More information on how to use Wazuh to monitor GitHub can be found in our :ref:`documentation <github>`.

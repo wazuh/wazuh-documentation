@@ -16,7 +16,7 @@ Usage
 
 .. code-block:: none
 
-    manage_agents -[VhljL] [-a <ip> -n <name>] [-F sec] [-e id] [-r id] [-i id] [-f file]
+    manage_agents -[VhljL] [-a <ip> -n <name>] [-R sec] [-D sec] [-e id] [-r id] [-i id] [-f file]
 
 Options
 -------
@@ -53,9 +53,15 @@ Options
 |               +-----------------------------+-----------------------------------------+
 |               | **Supported installations** | Agent                                   |
 +---------------+-----------------------------+-----------------------------------------+
-| **-F <sec>**  | Remove agents with duplicated IP if disconnected since <sec> seconds. |
+| **-R <sec>**  | Remove agents with duplicated IP if registered since <sec> seconds.   |
 |               |                                                                       |
-|               | With ``-F 0`` it will **always** remove duplicated agents.            |
+|               | Using ``-R 0`` removes **any** duplicate of an agent.                 |
+|               +-----------------------------+-----------------------------------------+
+|               | **Supported installations** | Manager                                 |
++---------------+-----------------------------+-----------------------------------------+
+| **-D <sec>**  | Remove agents with duplicated IP if disconnected since <sec> seconds. |
+|               |                                                                       |
+|               | Using ``-D 0`` removes **any** duplicate of a disconnected agent.     |
 |               +-----------------------------+-----------------------------------------+
 |               | **Supported installations** | Manager                                 |
 +---------------+-----------------------------+-----------------------------------------+

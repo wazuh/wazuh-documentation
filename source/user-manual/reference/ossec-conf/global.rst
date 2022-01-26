@@ -259,17 +259,20 @@ This sets the memory size for the event correlation engine.
 white_list
 ^^^^^^^^^^
 
-This specifies an IP address for which Active Responses will not be triggered. Only one IP address may be specified for each ``<while_list>`` tag, but several IP addresses may be used by including multiple ``<white_list>`` tags.
+This specifies an IPv4 address, netblock, or hostname for which Active Responses will not be triggered. Only one of those
+values may be specified for each ``<while_list>`` tag, but several values may be used by including multiple
+``<white_list>`` tags. This configuration is compared against the extracted **srcip** field in the alert.
 
-+--------------------+----------------------------+
-| **Default value**  | n/a                        |
-+--------------------+----------------------------+
-| **Allowed values** | Any IP address or netblock |
-+--------------------+----------------------------+
++--------------------+---------------------------------------------------------------+
+| **Default value**  | n/a                                                           |
++--------------------+---------------------------------------------------------------+
+| **Allowed values** | Any IPv4 address, netblock (i.e.: 192.168.0.0/16) or hostname |
++--------------------+---------------------------------------------------------------+
 
 .. note::
 
-  This option is only valid in server and local installs.
+  This option is only valid in server and local installs. IPv4-mapped IPv6 addresses will be compared against any configured
+  IPv4 or netblock.
 
 host_information
 ^^^^^^^^^^^^^^^^
@@ -499,7 +502,7 @@ Default configuration
       <logall_json>no</logall_json>
       <email_notification>yes</email_notification>
       <smtp_server>smtp.example.wazuh.com</smtp_server>
-      <email_from>ossecm@example.wazuh.com</email_from>
+      <email_from>wazuh@example.wazuh.com</email_from>
       <email_to>recipient@example.wazuh.com</email_to>
       <email_maxperhour>12</email_maxperhour>
       <agents_disconnection_time>10m</agents_disconnection_time>

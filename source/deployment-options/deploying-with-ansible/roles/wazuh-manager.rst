@@ -12,7 +12,7 @@ This role will install and configure Wazuh Manager and Wazuh API, there are seve
 - **wazuh_manager_email_notification:** enabling email notifications (default: ``no``)
 - **wazuh_manager_mailto:** email notifications recipients (array, defaults: ``admin@example.net``)
 - **wazuh_manager_email_smtp_server:** SMTP server to be used by email notifications ( defaults: ``localhost``)
-- **wazuh_manager_email_from:** email notification sender ( defaults: ``ossec@example.com``)
+- **wazuh_manager_email_from:** email notification sender ( defaults: ``wazuh@example.com``)
 
 By creating a YAML file ``wazuh-manager.yml`` you can specify the usage of this role:
 
@@ -46,8 +46,13 @@ Setting the variables in a separate YAML file is recommended when configuring th
     enable: true
     port: 1515
     use_source_ip: 'no'
-    force_insert: 'no'
-    force_time: 0
+    force:
+      - enabled: 'yes'
+        disconnected_time:
+          enabled: yes
+          value: '1h'
+        after_registration_time: '1h'
+        key_mismatch: 'yes'
     purge: 'no'
     use_password: 'no'
     ssl_agent_ca: null

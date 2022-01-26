@@ -7,7 +7,7 @@ wazuh-remoted
 
 .. versionadded:: 4.2
 
-The wazuh-remoted program is the server side daemon that communicates with the agents.  It runs as ``ossecr`` and is chrooted to ``/var/ossec`` by default.
+The wazuh-remoted program is the server side daemon that communicates with the agents.  It runs as ``wazuh`` and is chrooted to ``/var/ossec`` by default.
 
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-c <config>** | Run using <config> as the configuration file.                                                   |
@@ -30,7 +30,7 @@ The wazuh-remoted program is the server side daemon that communicates with the a
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-u <user>**   | Run as a specific user.                                                                         |
 +                 +-------------------------------------------+-----------------------------------------------------+
-|                 | Default value                             | ossecm                                              |
+|                 | Default value                             | wazuh                                               |
 +-----------------+-------------------------------------------+-----------------------------------------------------+
 | **-V**          | Display the version and license information                                                     |
 +-----------------+-------------------------------------------------------------------------------------------------+

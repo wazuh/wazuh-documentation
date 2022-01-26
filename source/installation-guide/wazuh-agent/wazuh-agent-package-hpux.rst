@@ -58,12 +58,12 @@ To uninstall the agent, follow these steps:
 
       # /var/ossec/bin/wazuh-control stop
 
-2. Delete ``ossec`` user and group.
+2. Delete ``wazuh`` user and group:
 
     .. code-block:: console
 
-        # groupdel ossec
-        # userdel ossec
+        # groupdel wazuh
+        # userdel wazuh
 
 3. Remove Wazuh files.
 

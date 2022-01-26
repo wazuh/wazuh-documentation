@@ -238,7 +238,7 @@ Wazuh Manager
 
   Configures the :ref:`email_from<reference_ossec_global>` section from ``ossec.conf``.
 
-  *Default ossecm@example.wazuh.com*
+  *Default wazuh@example.wazuh.com*
 
 
 **wazuh_manager_email_maxperhour**
@@ -475,7 +475,7 @@ Wazuh Manager
     wazuh_manager_vulnerability_detector:
       enabled: 'no'
       interval: '5m'
-      ignore_time: '6h'
+      min_full_scan_interval: '6h'
       run_on_start: 'yes'
       providers:
         - enabled: 'no'
@@ -757,12 +757,11 @@ Wazuh Manager
       bind_addr: 0.0.0.0
       port: 55000
       https: yes
-      https_key: "api/configuration/ssl/server.key"
-      https_cert: "api/configuration/ssl/server.crt"
+      https_key: "server.key"
+      https_cert: "server.crt"
       https_use_ca: False
-      https_ca: "api/configuration/ssl/ca.crt"
+      https_ca: "ca.crt"
       logging_level: "info"
-      logging_path: "logs/api.log"
       cors: no
       cors_source_route: "*"
       cors_expose_headers: "*"
@@ -773,7 +772,6 @@ Wazuh Manager
       access_max_login_attempts: 5
       access_block_time: 300
       access_max_request_per_minute: 300
-      use_only_authd: no
       drop_privileges: yes
       experimental_features: no
 

@@ -22,5 +22,6 @@ The memory and CPU requirements of the Wazuh agent are insignificant since its p
 
         how-it-works
         how-to-collect-wlogs
+        how-to-collect-macoslogs
         log-data-configuration
         log-data-faq
