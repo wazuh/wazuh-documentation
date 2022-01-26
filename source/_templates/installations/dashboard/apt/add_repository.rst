@@ -1,13 +1,11 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015-2022 Wazuh, Inc.
 
-#. Install the necessary packages for the installation.
+..
+    #. Install the necessary packages for the installation.
 
-    .. code-block:: console
+        .. code-block:: console
 
-      # apt install curl
-
-    ..
-      # apt install curl apt-transport-https libcap2-bin
+          # apt install curl apt-transport-https libcap2-bin
 
 #. Install the GPG key.
 

@@ -1,11 +1,5 @@
 .. Copyright (C) 2015-2022 Wazuh, Inc.
 
-#. Download the ``opensearch.yml`` configuration file into ``/etc/wazuh-indexer/``.
-
-   .. code-block:: console
-
-      # curl -so /etc/wazuh-indexer/opensearch.yml https://packages.wazuh.com/resources/4.3/wazuh-indexer/opensearch/7.x/opensearch_cluster_initial_node.yml
-
 #. Edit ``/etc/wazuh-indexer/opensearch.yml``.
 
     .. code-block:: yaml

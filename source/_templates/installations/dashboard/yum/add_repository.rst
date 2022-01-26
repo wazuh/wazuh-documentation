@@ -1,13 +1,11 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015-2022 Wazuh, Inc.
 
-#. Install the necessary packages for the installation.
+..
+    #. Install the necessary packages for the installation.
 
-    .. code-block:: console
+        .. code-block:: console
 
-      # yum install -y curl
-
-    ..
-      # yum install -y curl libcap
+          # yum install -y curl libcap
 
 #. Import the GPG key.
 

@@ -1,13 +1,11 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015-2022 Wazuh, Inc.
 
-#. Install the necessary packages for the installation.
+..
+    #. Install the necessary packages for the installation.
 
-    .. code-block:: console
+        .. code-block:: console
 
-      # zypper install curl
-
-    ..
-      # zypper install libcap-progs || zypper install libcap2
+          # zypper install curl libcap-progs || zypper install libcap2
 
 #. Import the GPG key.
 

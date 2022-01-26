@@ -6,11 +6,11 @@
 
     # rm /etc/wazuh-indexer/demo-indexer-key.pem /etc/wazuh-indexer/demo-indexer.pem /etc/wazuh-indexer/admin-key.pem /etc/wazuh-indexer/admin.pem /etc/wazuh-indexer/root-ca.pem -f
 
-#. Replace ``<indexer-node-certificate-name>`` with the name of the certificate for your current Wazuh indexer node, the same used in ``config.yml``. Then, move the certificates to their corresponding location. This is to deploy  the SSL certificates to encrypt communications between the Wazuh central components.
+#. Run the following commands replacing ``<indexer-node-name>`` with the name of the Wazuh indexer node you are configuring, for example ``node-1``, as defined in ``config.yml``. This is to deploy  the SSL certificates to encrypt communications between the Wazuh central components.
 
    .. code-block:: console
 
-     # NODE_NAME=<indexer-node-certificate-name>
+     # NODE_NAME=<indexer-node-name>
 
    .. code-block:: console 
      
@@ -19,16 +19,6 @@
      # mv /etc/wazuh-indexer/certs/$NODE_NAME.pem /etc/wazuh-indexer/certs/wazuh-indexer.pem
      # mv /etc/wazuh-indexer/certs/$NODE_NAME-key.pem /etc/wazuh-indexer/certs/wazuh-indexer-key.pem     
 
-
-#. Compress the files to be sent to all the instances.
-
-    .. code-block:: console
-
-      # tar -cvf ./certs.tar -C ./certs/ .
-      # rm -r ./certs/
-
-#. Copy ``certs.tar`` to all the remaining nodes of the distributed deployment, including Wazuh indexer, Wazuh server, and Wazuh dashboard nodes. This can be done by using ``scp``. 
-
-#. **Recommended action** - To increase security, remove ``certs.tar`` running ``rm -f ./certs.tar`` unless you want to install other Wazuh components on this node.
+#. **Recommended action** - If deploying Wazuh as a multi-node cluster and no other Wazuh componentes ware going to be installed on this node, remove ``certs.tar`` running ``rm -f ./certs.tar`` to increase security.
 
 .. End of include file

@@ -1,37 +1,35 @@
 .. Copyright (C) 2015-2022 Wazuh, Inc.
 
-#. Enable and start the Wazuh indexer service.
-
-    .. tabs::
+.. tabs::
 
 
-      .. group-tab:: Systemd
+  .. group-tab:: Systemd
 
 
-        .. code-block:: console
+    .. code-block:: console
 
-          # systemctl daemon-reload
-          # systemctl enable wazuh-indexer
-          # systemctl start wazuh-indexer
+      # systemctl daemon-reload
+      # systemctl enable wazuh-indexer
+      # systemctl start wazuh-indexer
 
 
 
-      .. group-tab:: SysV Init
+  .. group-tab:: SysV Init
 
-        Choose one option according to the operating system used.
+    Choose one option according to the operating system used.
 
-        a) RPM-based operating system:
+    a) RPM-based operating system:
 
-          .. code-block:: console
+      .. code-block:: console
 
-            # chkconfig --add wazuh-indexer
-            # service wazuh-indexer start
-        
-        b) Debian-based operating system:
+        # chkconfig --add wazuh-indexer
+        # service wazuh-indexer start
+    
+    b) Debian-based operating system:
 
-          .. code-block:: console
+      .. code-block:: console
 
-            # update-rc.d wazuh-indexer defaults 95 10
-            # service wazuh-indexer start
+        # update-rc.d wazuh-indexer defaults 95 10
+        # service wazuh-indexer start
 
 .. End of include file
