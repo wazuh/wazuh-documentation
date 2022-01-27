@@ -110,7 +110,7 @@ Initializing a multi-node cluster
 
       .. code-block:: console
 
-        # sudo -u wazuh-indexer OPENSEARCH_PATH_CONF=/etc/wazuh-indexer JAVA_HOME=/usr/share/wazuh-indexer/jdk /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig -icl -p 9800 -cd /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig -nhnv -cacert /etc/wazuh-indexer/certs/root-ca.pem -cert /etc/wazuh-indexer/certs/admin.pem -key /etc/wazuh-indexer/certs/admin-key.pem -h WAZUH_INDEXER_IP
+        # sudo -u wazuh-indexer OPENSEARCH_PATH_CONF=/etc/wazuh-indexer JAVA_HOME=/usr/share/wazuh-indexer/jdk /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig -icl -p 9800 -cd /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig -nhnv -cacert /etc/wazuh-indexer/certs/root-ca.pem -cert /etc/wazuh-indexer/certs/admin.pem -key /etc/wazuh-indexer/certs/admin-key.pem -h $WAZUH_INDEXER_IP
         
   #. Remove index data from worker nodes.
 
@@ -126,7 +126,7 @@ Starting the service
 
       .. include:: /_templates/installations/indexer/common/enable_indexer.rst
     
-  #. Wait for the initial node to push the changes if deploying a multi-node cluster.
+  #. Wait for the initial node to push the changes if deploying a multi-node Wazuh indexer cluster.
 
 
   #. Run the following commands to confirm that the installation is successful.
@@ -193,12 +193,12 @@ Starting the service
 
           green  open .opendistro_security         tgoKvr_0Rw61EF62F7XFOQ 1 0    9 0  60.3kb  60.3kb
 
-  Repeat this steps to start the service, for every Wazuh indexer node, if deploying a multi-node cluster.
+  If deploying a multi-node Wazuh indexer cluster, repeat this steps to start the service, for every Wazuh indexer node, .
 
 Testing the cluster installation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-  #. Run the following command replacing <WAZUH_INDEXER_IP> with your Wazuh indexer IP address to check the cluster is working succesfully.
+  #. Run the following command replacing <WAZUH_INDEXER_IP> with your Wazuh indexer IP address to check the cluster is working correctly.
   
       .. code-block:: console
 
