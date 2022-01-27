@@ -130,7 +130,7 @@ Configuring Filebeat
 
       .. code-block:: console
 
-        # curl -so /etc/filebeat/filebeat.yml https://packages.wazuh.com/resources/|WAZUH_LATEST_MINOR|/open-distro/filebeat/7.x/filebeat_indexer_cluster.yml
+        # curl -so /etc/filebeat/filebeat.yml https://s3.us-west-1.amazonaws.com/packages-dev.wazuh.com/resources/4.3/config/opendistro/filebeat/filebeat_elastic_cluster.yml
         
         
   #. Edit the file ``/etc/filebeat/filebeat.yml``.

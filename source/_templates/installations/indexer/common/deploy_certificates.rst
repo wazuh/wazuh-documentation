@@ -19,6 +19,8 @@
    ..
      # mv /etc/wazuh-indexer/certs/$NODE_NAME.pem /etc/wazuh-indexer/certs/elasticsearch.pem
      # mv /etc/wazuh-indexer/certs/$NODE_NAME-key.pem /etc/wazuh-indexer/certs/elasticsearch-key.pem     
+     # chmod 600 /etc/wazuh-indexer/certs/*
+     # chown wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/certs/*
 
 #. Compress the files to be sent to all the instances.
 
