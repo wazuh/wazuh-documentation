@@ -1,6 +1,6 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 .. meta::
-  :description: The ossec.conf file is the main configuration file on the Wazuh manager and it also plays an important role on the agents. Learn more about it and check out an example here. 
+  :description: The ossec.conf file is the main configuration file on the Wazuh manager and it also plays an important role on the agents. Learn more about it and check out an example here.
 
 
 .. _reference_ossec_syscheck:
@@ -37,6 +37,7 @@ Configuration options for file integrity monitoring:
 - `skip_proc`_
 - `skip_sys`_
 - `file_limit`_
+- `db_entry_limit`_
 - `synchronization`_
 - `whodata`_
 - `windows_audit_interval`_
@@ -651,6 +652,8 @@ Example:
 file_limit
 ----------
 
+.. deprecated:: 4.4
+
 Specifies a limit on the number of files that will be monitored by syscheck. Files created when the database has reached the limit will be ignored.
 
 .. code-block:: xml
@@ -664,6 +667,8 @@ Specifies a limit on the number of files that will be monitored by syscheck. Fil
 
 **enabled**
 
+.. deprecated:: 4.4
+
 Specifies whether there will be a limit on the number of monitored files or not.
 
 +--------------------+---------------------------------------+
@@ -675,7 +680,66 @@ Specifies whether there will be a limit on the number of monitored files or not.
 
 **entries**
 
+.. deprecated:: 4.4
+
 Specifies the number of files to be monitored.
+
++--------------------+------------------------------------------+
+| **Default value**  | 100000                                   |
++--------------------+------------------------------------------+
+| **Allowed values** | Integer number between 1 and 2147483647. |
++--------------------+------------------------------------------+
+
+
+db_entry_limit
+--------------
+
+.. versionadded:: 4.4
+
+Specifies a limit on the number of entries that will be monitored by syscheck. Entries created when the database has reached the limit will be ignored.
+There is a specific limit for the number of files that can be inserted into the database, and a different limit for the number of registry values.
+
+.. code-block:: xml
+
+    <!-- Maximum entries in the FIM database -->
+    <db_entry_limit>
+      <enabled>yes</enabled>
+      <files>100000</files>
+      <registries>100000</registries>
+    </db_entry_limit>
+
+
+**enabled**
+
+.. versionadded:: 4.4
+
+Specifies whether there will be a limit on the number of monitored files or not.
+
++--------------------+---------------------------------------+
+| **Default value**  | yes                                   |
++--------------------+---------------------------------------+
+| **Allowed values** | yes/no                                |
++--------------------+---------------------------------------+
+
+
+**files**
+
+.. versionadded:: 4.4
+
+Specifies the maximun number of files to be monitored.
+
++--------------------+------------------------------------------+
+| **Default value**  | 100000                                   |
++--------------------+------------------------------------------+
+| **Allowed values** | Integer number between 1 and 2147483647. |
++--------------------+------------------------------------------+
+
+
+**registry**
+
+.. versionadded:: 4.4
+
+Specifies the maximun number of registry values to be monitored.
 
 +--------------------+------------------------------------------+
 | **Default value**  | 100000                                   |
