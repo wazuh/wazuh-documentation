@@ -36,7 +36,7 @@ There are two options to register the Wazuh agent using host verification. Pleas
 
    To verify the Wazuh manager using SSL, create an SSL certificate and sign it using the Certificate of Authority (CA) created in the previous section. This will allow the Wazuh agents to ensure that they are connected to the correct Wazuh manager during the registration service.
 
-   .. thumbnail:: ../../images/manual/managing-agents/SSLregister1.png
+   .. thumbnail:: ../../images/manual/managing-agents/SSL-registration-1.png
       :align: center
       :wrap_image: No
 

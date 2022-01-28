@@ -54,17 +54,17 @@ By default, each Wazuh agent has the syscheck enabled and preconfigured but it i
 
 File integrity monitoring results for the whole environment can be observed in :ref:`Kibana app<kibana_app>` in the *Overview > Integrity monitoring* section:
 
-.. thumbnail:: ../../../images/manual/fim/fim-kibana-overview1.png
+.. thumbnail:: ../../../images/manual/fim/fim-kibana-overview-1.png
   :title: Kibana app: Fim overview
   :align: center
   :width: 100%
 
-.. thumbnail:: ../../../images/manual/fim/fim-kibana-overview2.png
+.. thumbnail:: ../../../images/manual/fim/fim-kibana-overview-2.png
   :title: Kibana app: Fim overview2
   :align: center
   :width: 100%
 
-.. thumbnail:: ../../../images/manual/fim/fim-kibana-overview3.png
+.. thumbnail:: ../../../images/manual/fim/fim-kibana-overview-3.png
   :title: Kibana app: Fim overview3
   :align: center
   :width: 100%

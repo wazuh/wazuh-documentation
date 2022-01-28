@@ -51,7 +51,7 @@ You can visualize the alert data in the Wazuh Kibana plugin. To do this, go to t
 - Linux: ``rule.id:(5710 OR 5712)``. Other related rules are ``5711``, ``5716``, ``5720``, ``5503``, ``5504``.
 
 
-.. thumbnail:: ../images/poc/Detecting_a_brute_force_attack-1.png
+.. thumbnail:: ../images/poc/Detecting-a-brute-force-attack-1.png
           :title: Detecting a brute-force attack on Linux
           :align: center
           :wrap_image: No
@@ -59,7 +59,7 @@ You can visualize the alert data in the Wazuh Kibana plugin. To do this, go to t
 
 - Windows: ``rule.id:(60122 OR 60137)``
 
-.. thumbnail:: ../images/poc/Detecting_a_brute_force_attack-2.png
+.. thumbnail:: ../images/poc/Detecting-a-brute-force-attack-2.png
           :title: Detecting a brute-force attack on Windows
           :align: center
           :wrap_image: No

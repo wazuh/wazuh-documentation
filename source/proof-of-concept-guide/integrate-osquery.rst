@@ -100,7 +100,7 @@ You can visualize the alert data in the Wazuh Kibana plugin. To do this, go to t
 
 * ``rule.groups:osquery``
 
-.. thumbnail:: ../images/poc/Osquery_integration.png
+.. thumbnail:: ../images/poc/Osquery-integration.png
           :title: Osquery integration
           :align: center
           :wrap_image: No

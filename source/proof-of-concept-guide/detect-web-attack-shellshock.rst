@@ -48,7 +48,7 @@ You can visualize the alert data in the Wazuh Kibana plugin. To do this, go to t
 
 - If you have Suricata monitoring the endpoint's traffic, you can also query ``rule.description:*CVE-2014-6271*`` for the related Suricata's alerts.
 
-.. thumbnail:: ../images/poc/Detecting_Shellshock_Attack.png
+.. thumbnail:: ../images/poc/Detecting-Shellshock-Attack.png
           :title: Detecting a Shellshock attack
           :align: center
           :wrap_image: No

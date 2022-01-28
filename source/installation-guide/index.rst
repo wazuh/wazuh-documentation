@@ -27,13 +27,9 @@ There are two different options for deploying Wazuh:
     <div class="item-deployment" id="aio">
       <h3>All-in-one deployment</h3>
 
-.. thumbnail:: ../images/installation/all_in_one.png
+.. thumbnail:: ../images/installation/all-in-one-deployment.png
+      :title: All-in-one deployment
       :align: center
-      :class: detailed
-
-.. image:: ../images/installation/all_in_one_no_title.png
-      :align: center
-      :class: front
 
 .. raw:: html
 
@@ -42,12 +38,8 @@ There are two different options for deploying Wazuh:
       <h3>Distributed deployment</h3>
 
 .. thumbnail:: ../images/installation/distributed.png
+      :title: Distributed deployment
       :align: center
-      :class: detailed
-
-.. image:: ../images/installation/distributed_no_title.png
-      :align: center
-      :class: front
 
 .. raw:: html
 
@@ -84,7 +76,7 @@ The :ref:`Wazuh agent <wazuh_agent>` is a single, light-weight monitoring softwa
         <a href="./wazuh-agent/wazuh-agent-package-windows.html" class="d-flex align-items-center">
                     <p>Windows</p>
 
-.. image:: ../images/installation/windows_icon.png
+.. image:: ../images/installation/windows-logo.png
       :align: center
 
 .. raw:: html
@@ -95,7 +87,7 @@ The :ref:`Wazuh agent <wazuh_agent>` is a single, light-weight monitoring softwa
         <a href="./wazuh-agent/wazuh-agent-package-macos.html" class="d-flex align-items-center">
             <p>macOS</p>
 
-.. image:: ../images/installation/macOS_logo.png
+.. image:: ../images/installation/macOS-logo.png
       :align: center
 
 .. raw:: html

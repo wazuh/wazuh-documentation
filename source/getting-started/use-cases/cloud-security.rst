@@ -100,7 +100,7 @@ Example of an alert when an AWS security group is deleted:
 
 Example of AWS dashboard:
 
-.. thumbnail:: ../../images/getting_started/use_case_cloud.png
+.. thumbnail:: ../../images/getting-started/use-case-cloud.png
    :align: center
    :wrap_image: No
 

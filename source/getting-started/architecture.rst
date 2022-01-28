@@ -16,7 +16,7 @@ For production environments it is recommended to deploy the Wazuh server and Ela
 
 The diagram below represents a Wazuh deployment architecture. It shows the solution components and how the :ref:`Wazuh servers <wazuh_server>` and :ref:`Elasticsearch <elastic_stack>` can be configured as a cluster, providing load balancing and high-availability.
 
-.. thumbnail:: ../images/getting_started/deployment.png
+.. thumbnail:: ../images/getting-started/deployment.png
     :alt: Wazuh deployment
     :align: center
     :wrap_image: No

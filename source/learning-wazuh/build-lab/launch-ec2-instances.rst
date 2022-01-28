@@ -27,7 +27,7 @@ Launch a Wazuh Server instance
 - Select the General purpose **t2.micro** image and click on **[Next: Configure Instance Details]**
 - For *Network*, choose your VPC, and for the *Primary IP* of eth0, put in "172.30.0.10".
 
-.. thumbnail:: ../../images/learning-wazuh/build-lab/config-inst-details.png
+.. thumbnail:: ../../images/learning-wazuh/build-lab/configure-instance-details.png
     :title: Config instance
     :align: center
     :width: 80%
@@ -66,7 +66,7 @@ Launch a Wazuh Server instance
 
 - Click on **[Next: Add Tags]** and then on **[Add Tag]**.
 
-.. thumbnail:: ../../images/learning-wazuh/build-lab/add-tag-waz-svr.png
+.. thumbnail:: ../../images/learning-wazuh/build-lab/add-tag-wazuh-sever.png
     :title: Add tag
     :align: center
     :width: 75%

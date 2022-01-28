@@ -81,7 +81,7 @@ You can visualize the alert data in the Wazuh Kibana plugin. To do this, go to t
 
 - ``rule.groups:suricata``
 
-.. thumbnail:: ../images/poc/Network_IDS_integration.png
+.. thumbnail:: ../images/poc/Network-IDS-integration.png
           :title: Network IDS integration - Suricata
           :align: center
           :wrap_image: No

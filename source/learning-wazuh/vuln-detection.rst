@@ -200,7 +200,7 @@ See the alerts in Kibana
 Search Kibana for ``vulnerability-detector``, selecting some of the more helpful
 fields for viewing like below:
 
-.. thumbnail:: ../images/learning-wazuh/labs/vuln-found-list.png
+.. thumbnail:: ../images/learning-wazuh/labs/vulnerabilities-found-list.png
     :title: Found Vulnerabilities
     :align: center
     :width: 100%
@@ -208,7 +208,7 @@ fields for viewing like below:
 
 Expand one of the records to see all the information available:
 
-.. thumbnail:: ../images/learning-wazuh/labs/vuln-found.png
+.. thumbnail:: ../images/learning-wazuh/labs/vulnerability-found.png
     :title: Vulnerability event
     :align: center
     :width: 100%
@@ -507,7 +507,7 @@ when you have drilled down into a specific agent, you can open the **Vulnerabili
 tab to see a nice dashboard of this information:
 
 
-.. thumbnail:: ../images/learning-wazuh/labs/vuln-dash.png
+.. thumbnail:: ../images/learning-wazuh/labs/vulnerabilities-dashboard.png
     :title: Flood
     :align: left
     :width: 100%

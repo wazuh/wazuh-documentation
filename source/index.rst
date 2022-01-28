@@ -188,7 +188,7 @@ Wazuh is a free and open source platform for threat detection, security monitori
         <div class="carousel-inner">
           <div class="carousel-item active">
 
-.. thumbnail:: images/screenshots/01-Wazuh-Security-Analytics.png
+.. thumbnail:: images/getting-started/screenshot-01-Wazuh-Security-Analytics.png
    :title: Security Analytics
    :align: center
 
@@ -198,7 +198,7 @@ Wazuh is a free and open source platform for threat detection, security monitori
 
           <div class="carousel-item">
 
-.. thumbnail:: images/screenshots/02-Wazuh-Intrusion-Detection.png
+.. thumbnail:: images/getting-started/screenshot-02-Wazuh-Intrusion-Detection.png
    :title: Wazuh Intrusion Detection
    :align: center
 
@@ -208,7 +208,7 @@ Wazuh is a free and open source platform for threat detection, security monitori
 
           <div class="carousel-item">
 
-.. thumbnail:: images/screenshots/03-Wazuh-Log-Data-Analysis.png
+.. thumbnail:: images/getting-started/screenshot-03-Wazuh-Log-Data-Analysis.png
    :title: Log Data Analysis
    :align: center
 
@@ -218,7 +218,7 @@ Wazuh is a free and open source platform for threat detection, security monitori
 
           <div class="carousel-item">
 
-.. thumbnail:: images/screenshots/04-Wazuh-File-Integrity-Monitoring.png
+.. thumbnail:: images/getting-started/screenshot-04-Wazuh-File-Integrity-Monitoring.png
    :title: File Integrity Monitoring
    :align: center
 
@@ -228,7 +228,7 @@ Wazuh is a free and open source platform for threat detection, security monitori
 
           <div class="carousel-item">
 
-.. thumbnail:: images/screenshots/05-Wazuh-Vulnerability-Detection.png
+.. thumbnail:: images/getting-started/screenshot-05-Wazuh-Vulnerability-Detection.png
    :title: Vulnerability Detection
    :align: center
 
@@ -238,7 +238,7 @@ Wazuh is a free and open source platform for threat detection, security monitori
 
           <div class="carousel-item">
 
-.. thumbnail:: images/screenshots/06-Wazuh-Configuration-Assessment.png
+.. thumbnail:: images/getting-started/screenshot-06-Wazuh-Configuration-Assessment.png
    :title: Configuration Assessment
    :align: center
 
@@ -248,7 +248,7 @@ Wazuh is a free and open source platform for threat detection, security monitori
 
           <div class="carousel-item">
 
-.. thumbnail:: images/screenshots/07-Wazuh-Incident-Response.png
+.. thumbnail:: images/getting-started/screenshot-07-Wazuh-Incident-Response.png
    :title: Incident Response
    :align: center
 
@@ -258,7 +258,7 @@ Wazuh is a free and open source platform for threat detection, security monitori
 
           <div class="carousel-item">
 
-.. thumbnail:: images/screenshots/08-Wazuh-Regulatory-Compliance.png
+.. thumbnail:: images/getting-started/screenshot-08-Wazuh-Regulatory-Compliance.png
    :title: Regulatory Compliance
    :align: center
 
@@ -268,7 +268,7 @@ Wazuh is a free and open source platform for threat detection, security monitori
 
           <div class="carousel-item">
 
-.. thumbnail:: images/screenshots/09-Wazuh-Cloud-Security.png
+.. thumbnail:: images/getting-started/screenshot-09-Wazuh-Cloud-Security.png
    :title: Cloud Security
    :align: center
 
@@ -278,7 +278,7 @@ Wazuh is a free and open source platform for threat detection, security monitori
 
           <div class="carousel-item">
 
-.. thumbnail:: images/screenshots/10-Wazuh-Containers-Security.png
+.. thumbnail:: images/getting-started/screenshot-10-Wazuh-Containers-Security.png
    :title: Containers Security
    :align: center
 
