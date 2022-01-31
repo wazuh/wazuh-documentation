@@ -228,6 +228,10 @@ Added
 - `#10457 <https://github.com/wazuh/wazuh/pull/10457>`_ New filters are added to agents' upgrade endpoints.
 - `#8288 <https://github.com/wazuh/wazuh/pull/8288>`_ New MITRE API endpoints and framework functions are added to access all the MITRE information.
 - `#10947 <https://github.com/wazuh/wazuh/pull/10947>`_ Show agent-info permissions flag is added when using cluster_control and in the ``GET /cluster/healthcheck`` API endpoint.
+
+Changed
+~~~~~~~
+
 - `#7490 <https://github.com/wazuh/wazuh/pull/7490>`_ The SSL protocol configuration parameter is renamed.
 - `#8827 <https://github.com/wazuh/wazuh/pull/8827>`_ The API spec examples and JSON body examples are reviewed and updated.
 - The performance of several API endpoints is improved. This is specially appreciable in environments with a big number of agents:
@@ -252,9 +256,13 @@ Added
 - `#10745 <https://github.com/wazuh/wazuh/pull/10745>`_ The API validators and related unit tests are improved.
 - `#10905 <https://github.com/wazuh/wazuh/pull/10905>`_ The specific module healthchecks in API integration tests environment is improved.
 - `#10916 <https://github.com/wazuh/wazuh/pull/10916>`_ The thread pool executors for process pool executors to improve API availability is changed.
+- `#11410 <https://github.com/wazuh/wazuh/pull/11410>`_ Changed HTTPS options to use files instead of relative paths.
+
+Removed
+~~~~~~~
+
 - `#8599 <https://github.com/wazuh/wazuh/pull/8599>`_ The select parameter from GET /agents/stats/distinct endpoint is removed.
 - `#8099 <https://github.com/wazuh/wazuh/pull/8099>`_ The ``GET /mitre`` endpoint is removed.
-- `#11410 <https://github.com/wazuh/wazuh/pull/11410>`_ Changed HTTPS options to use files instead of relative paths.
 - `#11410 <https://github.com/wazuh/wazuh/pull/11410>`_ The option to set log ``path`` in the configuration is deprecated.
 
 
@@ -272,47 +280,66 @@ Added
 - `#11323 <https://github.com/wazuh/wazuh/pull/11323>`_ GitLab 12.0 ruleset
 - `#11289 <https://github.com/wazuh/wazuh/pull/11289>`_ Microsoft Exchange Server rules and decoders
 - `#11390 <https://github.com/wazuh/wazuh/pull/11390>`_ Microsoft Windows persistence by using registry keys detection
-
 - `#11274 <https://github.com/wazuh/wazuh/pull/11274>`_ Oracle Database 12c rules and decoders
-- `#8476 <https://github.com/wazuh/wazuh/pull/8476>`_ Added rules for Carbanak step 1.A - User Execution: Malicious File
-- `#11212 <https://github.com/wazuh/wazuh/pull/11212>`_ Added rules for Carbanak step 2.A - Local Discovery. 
-- `#9075 <https://github.com/wazuh/wazuh/pull/9075>`_ Added rules for Carbanak step 2.B - Screen Capture. 
-- `#9097 <https://github.com/wazuh/wazuh/pull/9097>`_ Added rules for Carbanak step 5.B - Lateral Movement via SSH. 
-- `#11342 <https://github.com/wazuh/wazuh/pull/11342>`_ Added rules for Carbanak step 9.A - User Monitoring. 
-- `#11373 <https://github.com/wazuh/wazuh/pull/11373>`_ Added rules for Cloudflare WAF. 
-- `#11013 <https://github.com/wazuh/wazuh/pull/11013>`_ Added ruleset for ESET Remote console. 
-- `#8532 <https://github.com/wazuh/wazuh/pull/8532>`_ Added ruleset for GITHUB audit logs. 
-- `#11137 <https://github.com/wazuh/wazuh/pull/11137>`_ Added ruleset for Palo Alto v8.X - v10.X. 
-- `#11431 <https://github.com/wazuh/wazuh/pull/11431>`_ Added SCA policy for Amazon Linux 1. 
-- `#11480 <https://github.com/wazuh/wazuh/pull/11480>`_ Added SCA policy for Amazon Linux 2. 
-- `#7035 <https://github.com/wazuh/wazuh/pull/7035>`_ Added SCA policy for apple macOS 10.14 Mojave. 
-- `#7036 <https://github.com/wazuh/wazuh/pull/7036>`_ Added SCA policy for apple macOS 10.15 Catalina. 
-- `#11454 <https://github.com/wazuh/wazuh/pull/11454>`_ Added SCA policy for macOS Big Sur. 
-- `#11250 <https://github.com/wazuh/wazuh/pull/11250>`_ Added SCA policy for Microsoft IIS 10. 
-- `#11249 <https://github.com/wazuh/wazuh/pull/11249>`_ Added SCA policy for Microsoft SQL 2016. 
-- `#11247 <https://github.com/wazuh/wazuh/pull/11247>`_ Added SCA policy for Mongo Database 3.6. 
-- `#11248 <https://github.com/wazuh/wazuh/pull/11248>`_ Added SCA policy for NGINX. 
-- `#11245 <https://github.com/wazuh/wazuh/pull/11245>`_ Added SCA policy for Oracle Database 19c. 
-- `#11154 <https://github.com/wazuh/wazuh/pull/11154>`_ Added SCA policy for PostgreSQL 13.
-- `#11223 <https://github.com/wazuh/wazuh/pull/11223>`_ Added SCA policy for SUSE Linux Enterprise Server 15. 
-- `#11432 <https://github.com/wazuh/wazuh/pull/11432>`_ Added SCA policy for Ubuntu 14. 
-- `#11452 <https://github.com/wazuh/wazuh/pull/11452>`_ Added SCA policy for Ubuntu 16. 
-- `#11453 <https://github.com/wazuh/wazuh/pull/11453>`_ Added SCA policy for Ubuntu 18. 
-- `#11430 <https://github.com/wazuh/wazuh/pull/11430>`_ Added SCA policy for Ubuntu 20. 
-- `#11286 <https://github.com/wazuh/wazuh/pull/11286>`_ Added SCA policy for. Solaris 11.4. 
-- `#11122 <https://github.com/wazuh/wazuh/pull/11122>`_ Added Sophos UTM Firewall ruleset. 
-- `#11357 <https://github.com/wazuh/wazuh/pull/11357>`_ Added Wazuh-api ruleset. 
+- `#8476 <https://github.com/wazuh/wazuh/pull/8476>`_ Rules for Carbanak step 1.A - User Execution: Malicious File
+- `#11212 <https://github.com/wazuh/wazuh/pull/11212>`_ Rules for Carbanak step 2.A - Local Discovery
+- `#9075 <https://github.com/wazuh/wazuh/pull/9075>`_ Rules for Carbanak step 2.B - Screen Capture 
+- `#9097 <https://github.com/wazuh/wazuh/pull/9097>`_ Rules for Carbanak step 5.B - Lateral Movement via SSH 
+- `#11342 <https://github.com/wazuh/wazuh/pull/11342>`_ Rules for Carbanak step 9.A - User Monitoring 
+- `#11373 <https://github.com/wazuh/wazuh/pull/11373>`_ Rules for Cloudflare WAF
+- `#11013 <https://github.com/wazuh/wazuh/pull/11013>`_ Ruleset for ESET Remote console
+- `#8532 <https://github.com/wazuh/wazuh/pull/8532>`_ Ruleset for GitHub audit logs 
+- `#11137 <https://github.com/wazuh/wazuh/pull/11137>`_ Ruleset for Palo Alto v8.X - v10.X
+- `#11431 <https://github.com/wazuh/wazuh/pull/11431>`_ SCA policy for Amazon Linux 1
+- `#11480 <https://github.com/wazuh/wazuh/pull/11480>`_ SCA policy for Amazon Linux 2
+- `#7035 <https://github.com/wazuh/wazuh/pull/7035>`_ SCA policy for apple macOS 10.14 Mojave
+- `#7036 <https://github.com/wazuh/wazuh/pull/7036>`_ SCA policy for apple macOS 10.15 Catalina
+- `#11454 <https://github.com/wazuh/wazuh/pull/11454>`_ SCA policy for macOS Big Sur
+- `#11250 <https://github.com/wazuh/wazuh/pull/11250>`_ SCA policy for Microsoft IIS 10 
+- `#11249 <https://github.com/wazuh/wazuh/pull/11249>`_ SCA policy for Microsoft SQL 2016 
+- `#11247 <https://github.com/wazuh/wazuh/pull/11247>`_ SCA policy for Mongo Database 3.6 
+- `#11248 <https://github.com/wazuh/wazuh/pull/11248>`_ SCA policy for NGINX
+- `#11245 <https://github.com/wazuh/wazuh/pull/11245>`_ SCA policy for Oracle Database 19c 
+- `#11154 <https://github.com/wazuh/wazuh/pull/11154>`_ SCA policy for PostgreSQL 13
+- `#11223 <https://github.com/wazuh/wazuh/pull/11223>`_ SCA policy for SUSE Linux Enterprise Server 15
+- `#11432 <https://github.com/wazuh/wazuh/pull/11432>`_ SCA policy for Ubuntu 14
+- `#11452 <https://github.com/wazuh/wazuh/pull/11452>`_ SCA policy for Ubuntu 16
+- `#11453 <https://github.com/wazuh/wazuh/pull/11453>`_ SCA policy for Ubuntu 18
+- `#11430 <https://github.com/wazuh/wazuh/pull/11430>`_ SCA policy for Ubuntu 20
+- `#11286 <https://github.com/wazuh/wazuh/pull/11286>`_ SCA policy for Solaris 11.4
+- `#11122 <https://github.com/wazuh/wazuh/pull/11122>`_ Sophos UTM Firewall ruleset
+- `#11357 <https://github.com/wazuh/wazuh/pull/11357>`_ Wazuh-api ruleset
 
-- `#10428 <https://github.com/wazuh/wazuh/pull/10428>`_ Decoders for AWS EKS service
-- `#10458 <https://github.com/wazuh/wazuh/pull/10458>`_ Rules and Decoders are added for TrendMicro Cloud One.
-- `#10496 <https://github.com/wazuh/wazuh/pull/10496>`_ Rules are added for Sophos UTM Firewall.
-- `#10369 <https://github.com/wazuh/wazuh/pull/10369>`_ SCA policy for Solaris 11.4 is added.
-- `#10658 <https://github.com/wazuh/wazuh/pull/10658>`_ Rules are added for Cloudflare WAF.
-- `#10667 <https://github.com/wazuh/wazuh/pull/10667>`_ Rules and Decoders are added for FortiAuth.
-- `#10315 <https://github.com/wazuh/wazuh/pull/10315>`_ Amazon Linux 2 SCA is updated up to version 2.0.0.
-- `#10354 <https://github.com/wazuh/wazuh/pull/10354>`_ RedHat Enterprise Linux 8 SCA is updated up to version 1.0.1.
-- `#10507 <https://github.com/wazuh/wazuh/pull/10507>`_ Amazon rules are updated to add more granularity.
-- `#10558 <https://github.com/wazuh/wazuh/pull/10558>`_ macOS Big Sur SCA is updated up to version 1.2.0.
+Changed
+~~~~~~~
+
+- `#11016 <https://github.com/wazuh/wazuh/pull/11016>`_ Updated audit rules.
+- `#11177 <https://github.com/wazuh/wazuh/pull/11177>`_ Updated AWS s3 ruleset.
+- `#11344 <https://github.com/wazuh/wazuh/pull/11344>`_  Updated Exim 4 decoder and rules to latest format.
+- `#8738 <https://github.com/wazuh/wazuh/pull/8738>`_ Updated MITRE DB with latest MITRE JSON specification.
+- `#11255 <https://github.com/wazuh/wazuh/pull/11255>`_ Updated multiple rules to remove alert_by_email option.
+- `#11795 <https://github.com/wazuh/wazuh/pull/11795>`_ Updated NextCloud ruleset.
+- `#11232 <https://github.com/wazuh/wazuh/pull/11232>`_ Updated ProFTPD decoder.
+- `#11242 <https://github.com/wazuh/wazuh/pull/11242>`_ Updated RedHat Enterprise Linux 8 SCA up to version 1.0.1.
+- `#11100 <https://github.com/wazuh/wazuh/pull/11100>`_ Updated rules and decoders for FortiNet products.
+- `#11429 <https://github.com/wazuh/wazuh/pull/11429>`_ Updated SCA policy for CentOS 7.
+- `#8751 <https://github.com/wazuh/wazuh/pull/8751>`_ Updated SCA policy for CentOS 8.
+- `#11263 <https://github.com/wazuh/wazuh/pull/11263>`_ Updated SonicWall rules decoder.
+- `#11388 <https://github.com/wazuh/wazuh/pull/11388>`_ Updated SSHD ruleset.
+
+Other
+^^^^^
+
+Changed
+~~~~~~~
+
+- `#10247 <https://github.com/wazuh/wazuh/pull/10247>`_ Upgraded external SQLite library dependency version to 3.36.
+- `#10247 <https://github.com/wazuh/wazuh/pull/10247>`_ Upgraded external BerkeleyDB library dependency version to 18.1.40.
+- `#10247 <https://github.com/wazuh/wazuh/pull/10247>`_ Upgraded external OpenSSL library dependency version to 1.1.1l.
+- `#10927 <https://github.com/wazuh/wazuh/pull/10927>`_ Upgraded external Google Test library dependency version to 1.11.
+- `11436 <https://github.com/wazuh/wazuh/pull/11436>`_ Upgraded external Aiohttp library dependency version to 3.8.1.
+- `11436 <https://github.com/wazuh/wazuh/pull/11436>`_ Upgraded external Werkzeug library dependency version to 2.0.2.
+- `11436 <https://github.com/wazuh/wazuh/pull/11436>`_ Upgraded embedded Python version to 3.9.9.
 
 
 Wazuh Kibana plugin
