@@ -84,6 +84,9 @@ This release includes new features or enhancements.
 Manager
 ^^^^^^^
 
+Added
+~~~~~
+
 - `#8178 <https://github.com/wazuh/wazuh/pull/8178>`_ Wazuh adds support for Arch Linux OS in Vulnerability Detector.
 - `#8749 <https://github.com/wazuh/wazuh/pull/8749>`_ A log message in the ``cluster.log`` file is added to notify that wazuh-clusterd has been stopped.
 - `#9077 <https://github.com/wazuh/wazuh/pull/9077>`_ Wazuh improves API and cluster processes behavior by adding the PID of the ``wazuh-clusterd`` processes and the API when these processes are started in foreground mode.
@@ -96,6 +99,12 @@ Manager
 - `#9099 <https://github.com/wazuh/wazuh/pull/9099>`_ Wazuh adds sanitizers to the unit tests execution.
 - `#8237 <https://github.com/wazuh/wazuh/pull/8237>`_ Vulnerability Detector introduces vulnerability inventory.
   - The manager will only deliver alerts when new vulnerabilities are detected in agents or when they stop applying.
+- `#11031 <https://github.com/wazuh/wazuh/pull/11031>`_ A mechanism to ensure the worker synchronization permissions are reset after a fixed period of time is added.
+- `#11799 <https://github.com/wazuh/wazuh/pull/11799>`_ A new mechanism is now added to create and handle PID files for each child process of the API and cluster. 
+
+Changed
+~~~~~~~
+
 - `#8083 <https://github.com/wazuh/wazuh/pull/8083>`_ The internal handling of agent keys are changed in Remoted to speed up key reloading.
 - `#7885 <https://github.com/wazuh/wazuh/pull/7885>`_ The option ``<server>`` of the Syslog output now supports hostname resolution. 
 - `#7763 <https://github.com/wazuh/wazuh/pull/7763>`_ The product's UNIX user and group are renamed to "wazuh".
@@ -135,16 +144,17 @@ Manager
    - `#11364 <https://github.com/wazuh/wazuh/pull/11364>`_ Now the processing of Integrity files in worker nodes is carried out in a separate parallel process.
    - `#11386 <https://github.com/wazuh/wazuh/pull/11386>`_ Use cluster and API single processing when the wazuh user doesn't have permissions to access ``/dev/shm``.
 
-
+Removed
+~~~~~~~
 
 - `#8399 <https://github.com/wazuh/wazuh/pull/8399>`_ The data reporting for Rootcheck scans in the agent_control tool has been deprecated.
 - `#8846 <https://github.com/wazuh/wazuh/pull/8846>`_ The old framework functions used to calculate agent status are now removed.
 
-- `#11031 <https://github.com/wazuh/wazuh/pull/11031>`_ A mechanism to ensure the worker synchronization permissions are reset after a fixed period of time is added.
-
-
 Agent
 ^^^^^
+
+Added
+~~~~~
 
 - `#8016 <https://github.com/wazuh/wazuh/pull/8016>`_ An option is added to allow the agent to refresh the connection to the manager.
 - `#8532 <https://github.com/wazuh/wazuh/pull/8532>`_ A new module to collect audit logs from GitHub is introduced.
@@ -164,6 +174,10 @@ Agent
 - `#10168 <https://github.com/wazuh/wazuh/pull/10168>`_ A new field ``DisplayVersion`` to Syscollector to help Vulnerability Detector match vulnerabilities for Windows is added.
 - `#10148 <https://github.com/wazuh/wazuh/pull/10148>`_ Wazuh adds support for macOS agent upgrade via WPK.
 - `#8632 <https://github.com/wazuh/wazuh/pull/8632>`_ Wazuh adds Logcollector support for macOS logs (Unified Logging System).
+
+Changed
+~~~~~~~
+
 - `#8381 <https://github.com/wazuh/wazuh/pull/8381>`_ The agent now reports the version of the running AIX operating system to the manager. 
 - `#8604 <https://github.com/wazuh/wazuh/pull/8604>`_ The reliability of the user ID parsing in FIM who-data mode on Linux is improved.
 - `#10230 <https://github.com/wazuh/wazuh/pull/10230>`_ AWS ``service_endpoint`` parameter description to suit FIPS endpoints too is reworded.
@@ -181,13 +195,19 @@ Agent
 - `#10651 <https://github.com/wazuh/wazuh/pull/10651>`_ Error logs by Logcollector when a file is missing have been changed to info logs.
 - `#8724 <https://github.com/wazuh/wazuh/pull/8724>`_ The agent MSI installer for Windows now detects the platform version to install the default configuration.
 - `#3659 <https://github.com/wazuh/wazuh/pull/3659>`_ Agent logs for inability to resolve the manager hostname now have info level.
-- `#10900 <https://github.com/wazuh/wazuh/pull/10900>`_ The oscap module files are removed as it was already deprecated since v4.0.0.
 - `#11276 <https://github.com/wazuh/wazuh/pull/11276>`_ An ID number to connection enrollment logs is added.
 - `#10838 <https://github.com/wazuh/wazuh/pull/10838>`_ Standardized the use of the ``only_logs_after`` parameter in the external integration modules.
 
+Removed
+~~~~~~~
+
+- `#10900 <https://github.com/wazuh/wazuh/pull/10900>`_ The oscap module files are removed as it was already deprecated in version 4.0.0.
 
 RESTful API
 ^^^^^^^^^^^
+
+Added
+~~~~~
 
 - `#7988 <https://github.com/wazuh/wazuh/pull/7988>`_ A new ``PUT /agents/reconnect`` endpoint is added to force agents reconnection to the manager.
 - `#6761 <https://github.com/wazuh/wazuh/pull/6761>`_ The ``select`` parameter is added to the ``GET /security/users``, ``GET /security/roles``, ``GET /security/rules`` and ``GET /security/policies`` endpoints.
@@ -241,7 +261,49 @@ RESTful API
 Ruleset
 ^^^^^^^
 
-- `#10428 <https://github.com/wazuh/wazuh/pull/10428>`_ The Rules and Decoders are added for Wazuh API.
+Added
+~~~~~
+
+- `#11306 <https://github.com/wazuh/wazuh/pull/11306>`_ Carbanak detection rules
+- `#11309 <https://github.com/wazuh/wazuh/pull/11309>`_ Cisco FTD rules and decoders
+- `#11284 <https://github.com/wazuh/wazuh/pull/11284>`_ Decoders for AWS EKS service
+- `#11394 <https://github.com/wazuh/wazuh/pull/11394>`_ F5 BIG IP ruleset
+- `#11191 <https://github.com/wazuh/wazuh/pull/11191>`_ GCP VPC storage, firewall, and flow rules
+- `#11323 <https://github.com/wazuh/wazuh/pull/11323>`_ GitLab 12.0 ruleset
+- `#11289 <https://github.com/wazuh/wazuh/pull/11289>`_ Microsoft Exchange Server rules and decoders
+- `#11390 <https://github.com/wazuh/wazuh/pull/11390>`_ Microsoft Windows persistence by using registry keys detection
+
+- `#11274 <https://github.com/wazuh/wazuh/pull/11274>`_ Oracle Database 12c rules and decoders
+- `#8476 <https://github.com/wazuh/wazuh/pull/8476>`_ Added rules for Carbanak step 1.A - User Execution: Malicious File
+- `#11212 <https://github.com/wazuh/wazuh/pull/11212>`_ Added rules for Carbanak step 2.A - Local Discovery. 
+- `#9075 <https://github.com/wazuh/wazuh/pull/9075>`_ Added rules for Carbanak step 2.B - Screen Capture. 
+- `#9097 <https://github.com/wazuh/wazuh/pull/9097>`_ Added rules for Carbanak step 5.B - Lateral Movement via SSH. 
+- `#11342 <https://github.com/wazuh/wazuh/pull/11342>`_ Added rules for Carbanak step 9.A - User Monitoring. 
+- `#11373 <https://github.com/wazuh/wazuh/pull/11373>`_ Added rules for Cloudflare WAF. 
+- `#11013 <https://github.com/wazuh/wazuh/pull/11013>`_ Added ruleset for ESET Remote console. 
+- `#8532 <https://github.com/wazuh/wazuh/pull/8532>`_ Added ruleset for GITHUB audit logs. 
+- `#11137 <https://github.com/wazuh/wazuh/pull/11137>`_ Added ruleset for Palo Alto v8.X - v10.X. 
+- `#11431 <https://github.com/wazuh/wazuh/pull/11431>`_ Added SCA policy for Amazon Linux 1. 
+- `#11480 <https://github.com/wazuh/wazuh/pull/11480>`_ Added SCA policy for Amazon Linux 2. 
+- `#7035 <https://github.com/wazuh/wazuh/pull/7035>`_ Added SCA policy for apple macOS 10.14 Mojave. 
+- `#7036 <https://github.com/wazuh/wazuh/pull/7036>`_ Added SCA policy for apple macOS 10.15 Catalina. 
+- `#11454 <https://github.com/wazuh/wazuh/pull/11454>`_ Added SCA policy for macOS Big Sur. 
+- `#11250 <https://github.com/wazuh/wazuh/pull/11250>`_ Added SCA policy for Microsoft IIS 10. 
+- `#11249 <https://github.com/wazuh/wazuh/pull/11249>`_ Added SCA policy for Microsoft SQL 2016. 
+- `#11247 <https://github.com/wazuh/wazuh/pull/11247>`_ Added SCA policy for Mongo Database 3.6. 
+- `#11248 <https://github.com/wazuh/wazuh/pull/11248>`_ Added SCA policy for NGINX. 
+- `#11245 <https://github.com/wazuh/wazuh/pull/11245>`_ Added SCA policy for Oracle Database 19c. 
+- `#11154 <https://github.com/wazuh/wazuh/pull/11154>`_ Added SCA policy for PostgreSQL 13.
+- `#11223 <https://github.com/wazuh/wazuh/pull/11223>`_ Added SCA policy for SUSE Linux Enterprise Server 15. 
+- `#11432 <https://github.com/wazuh/wazuh/pull/11432>`_ Added SCA policy for Ubuntu 14. 
+- `#11452 <https://github.com/wazuh/wazuh/pull/11452>`_ Added SCA policy for Ubuntu 16. 
+- `#11453 <https://github.com/wazuh/wazuh/pull/11453>`_ Added SCA policy for Ubuntu 18. 
+- `#11430 <https://github.com/wazuh/wazuh/pull/11430>`_ Added SCA policy for Ubuntu 20. 
+- `#11286 <https://github.com/wazuh/wazuh/pull/11286>`_ Added SCA policy for. Solaris 11.4. 
+- `#11122 <https://github.com/wazuh/wazuh/pull/11122>`_ Added Sophos UTM Firewall ruleset. 
+- `#11357 <https://github.com/wazuh/wazuh/pull/11357>`_ Added Wazuh-api ruleset. 
+
+- `#10428 <https://github.com/wazuh/wazuh/pull/10428>`_ Decoders for AWS EKS service
 - `#10458 <https://github.com/wazuh/wazuh/pull/10458>`_ Rules and Decoders are added for TrendMicro Cloud One.
 - `#10496 <https://github.com/wazuh/wazuh/pull/10496>`_ Rules are added for Sophos UTM Firewall.
 - `#10369 <https://github.com/wazuh/wazuh/pull/10369>`_ SCA policy for Solaris 11.4 is added.
