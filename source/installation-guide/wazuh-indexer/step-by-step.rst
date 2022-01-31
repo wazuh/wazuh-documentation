@@ -12,9 +12,9 @@ The installation process is divided into three stages.
 
 #. Certificates creation 
 
-#. Wazuh indexer nodes installation
+#. Installation
 
-#. Cluster initialization
+#. Initialization
 
 
 .. note:: Root user privileges are required to run the commands described below.
@@ -31,8 +31,8 @@ Generating the SSL certificates
     .. include:: /_templates/installations/indexer/common/generate_certificates.rst
 
 
-2. Wazuh indexer nodes installation
------------------------------------
+2. Installation
+---------------
 .. raw:: html
 
     <div class="accordion-section open">
@@ -47,21 +47,21 @@ Adding the Wazuh repository
       .. group-tab:: Yum
 
 
-        .. include:: /_templates/installations/common/yum/add_repository.rst
+        .. include:: /_templates/installations/common/yum/add-repository.rst
 
 
 
       .. group-tab:: APT
 
 
-        .. include:: /_templates/installations/common/deb/add_repository.rst
+        .. include:: /_templates/installations/common/deb/add-repository.rst
 
 
 
       .. group-tab:: ZYpp
 
 
-        .. include:: /_templates/installations/common/zypp/add_repository.rst
+        .. include:: /_templates/installations/common/yum/add-repository.rst
 
 
 
@@ -86,14 +86,48 @@ Deploying certificates
   .. include:: /_templates/installations/indexer/common/deploy_certificates.rst
 
 
+You now have installed and configured Wazuh indexer in a single node. Repeat this stage of the installation process for every Wazuh indexer node in your multi-node cluster. Then proceed to the initialization stage.
+
+
+3. Initialization
+-----------------
+.. raw:: html
+
+    <div class="accordion-section open">
+
+
+Initializing a multi-node cluster
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  #. Run the following command on the initial node if deploying Wazuh indexer in a distributed configuration. Replace ``<initial_node_IP>`` with your Wazuh indexer initial node IP address.
+    
+     .. code-block:: console
+
+      # export WAZUH_INDEXER_IP="<initial_node_IP>"
+
+
+  #. Run the Wazuh indexer ``securityadmin.sh`` script on the initial node to load the new certificates information and start the multi-node cluster.
+
+      .. code-block:: console
+
+        # sudo -u wazuh-indexer OPENSEARCH_PATH_CONF=/etc/wazuh-indexer JAVA_HOME=/usr/share/wazuh-indexer/jdk /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig -icl -p 9800 -cd /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig -nhnv -cacert /etc/wazuh-indexer/certs/root-ca.pem -cert /etc/wazuh-indexer/certs/admin.pem -key /etc/wazuh-indexer/certs/admin-key.pem -h $WAZUH_INDEXER_IP
+        
+  #. Remove index data from worker nodes.
+
+      .. code-block:: console
+
+        # rm -rf /var/lib/wazuh-indexer/*
+
+
 Starting the service
 ^^^^^^^^^^^^^^^^^^^^
 
-  .. include:: /_templates/installations/indexer/common/enable_indexer.rst
+  #. Enable and start the Wazuh indexer service.
 
+      .. include:: /_templates/installations/indexer/common/enable_indexer.rst
+    
+  #. Wait for the initial node to push the changes if deploying a multi-node Wazuh indexer cluster.
 
-Testing the installation
-^^^^^^^^^^^^^^^^^^^^^^^^
 
   #. Run the following commands to confirm that the installation is successful.
 
@@ -159,36 +193,21 @@ Testing the installation
 
           green  open .opendistro_security         tgoKvr_0Rw61EF62F7XFOQ 1 0    9 0  60.3kb  60.3kb
 
- 
-You now have installed and configured a Wazuh indexer node. Repeat this stage of the installation process for every Wazuh indexer node in your cluster.
+  If deploying a multi-node Wazuh indexer cluster, repeat this steps to start the service, for every Wazuh indexer node, .
 
+Testing the cluster installation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-3. Cluster initialization
--------------------------
-.. raw:: html
-
-    <div class="accordion-section">
-
-..
-  The final stage of the process for installing the Wazuh indexer consists in running the security admin script. 
-
-  #. Run the following command on the initial node replacing ``<initial_node_IP>`` with your Wazuh indexer initial node IP address.
-    
-     .. code-block:: console
-
-      # export ELASTICSEARCH_IP="<initial_node_IP>"
-
-
-  #. Run the Wazuh indexer ``securityadmin`` script on the initial node to load the new certificates information and start the cluster. Run the following command.
-
+  #. Run the following command replacing <WAZUH_INDEXER_IP> with your Wazuh indexer IP address to check the cluster is working correctly.
+  
       .. code-block:: console
 
-        # export JAVA_HOME=/usr/share/elasticsearch/jdk/ && /usr/share/elasticsearch/plugins/opendistro_security/tools/securityadmin.sh -cd /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/ -icl -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin-key.pem -h $ELASTICSEARCH_IP
+        # curl -k -u admin:admin https://<WAZUH_INDEXER_IP>:9700/_cat/nodes?v
 
 
 Next steps
 ----------
 
-The Wazuh indexer is now successfully installed on your cluster and you can proceed with installing the Wazuh server. To perform this action, see the :doc:`../wazuh-server/step-by-step` section.
+The Wazuh indexer is now successfully installed on your single-node or multi-node cluster and you can proceed with installing the Wazuh server. To perform this action, see the :doc:`../wazuh-server/step-by-step` section.
 
 If you want to uninstall the Wazuh indexer, see the :ref:`Uninstalling <uninstall_elasticsearch>` section.

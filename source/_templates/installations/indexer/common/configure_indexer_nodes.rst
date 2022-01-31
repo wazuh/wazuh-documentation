@@ -1,24 +1,18 @@
 .. Copyright (C) 2015-2022 Wazuh, Inc.
 
-#. Download the ``opensearch.yml`` configuration file into ``/etc/wazuh-indexer/``.
-
-   .. code-block:: console
-
-      # curl -so /etc/wazuh-indexer/opensearch.yml https://packages.wazuh.com/resources/4.3/wazuh-indexer/opensearch/7.x/opensearch_cluster_initial_node.yml
-
 #. Edit ``/etc/wazuh-indexer/opensearch.yml``.
 
     .. code-block:: yaml
-      :emphasize-lines: 1,2,4-7,11
+      :emphasize-lines: 2,4,7
 
-      network.host: "<indexer_ip>"
-      node.name: "<indexer_node_name>"
+      network.host: "0.0.0.0"
+      node.name: "node-1"
       cluster.initial_master_nodes:
-      - "<indexer_node_1_name>"
-      - "<indexer_node_2_name>"
-      - "<indexer_node_3_name>"
-      cluster.name: "<indexer_cluster_name>"
-      
+      - "node-1"
+      # - "node-2"
+      # - "node-3"
+      cluster.name: "wazuh-cluster"
+
       http.port: 9700-9799
       transport.tcp.port: 9800-9899
       node.max_local_storage_nodes: "3"
@@ -28,39 +22,30 @@
       ...
 
     .. code-block:: yaml
-      :emphasize-lines: 3,4,6,7
-
-      ...
-     
-      plugins.security.ssl.http.pemcert_filepath: /etc/wazuh-indexer/certs/<indexer_node_certificate_name>.pem
-      plugins.security.ssl.http.pemkey_filepath: /etc/wazuh-indexer/certs/<indexer_node_certificate_name>-key.pem
-      plugins.security.ssl.http.pemtrustedcas_filepath: /etc/wazuh-indexer/certs/root-ca.pem
-      plugins.security.ssl.transport.pemcert_filepath: /etc/wazuh-indexer/certs/<indexer_node_certificate_name>.pem
-      plugins.security.ssl.transport.pemkey_filepath: /etc/wazuh-indexer/certs/<indexer_node_certificate_name>-key.pem
-      plugins.security.ssl.transport.pemtrustedcas_filepath: /etc/wazuh-indexer/certs/root-ca.pem
+      :emphasize-lines: 9
 
       ...
 
-    .. code-block:: yaml
-      :emphasize-lines: 4-6
-
-      ...
-
+      plugins.security.audit.type: internal_opensearch
+      plugins.security.authcz.admin_dn:
+      - "CN=admin,OU=Docu,O=Wazuh,L=California,C=US"
+      plugins.security.check_snapshot_restore_write_privileges: true
+      plugins.security.enable_snapshot_restore_privilege: true
       plugins.security.nodes_dn:
-      - "CN=<indexer_node_1_certificate_name>,OU=Docu,O=Wazuh,L=California,C=US"
-      - "CN=<indexer_node_2_certificate_name>,OU=Docu,O=Wazuh,L=California,C=US"
-      - "CN=<indexer_node_3_certificate_name>,OU=Docu,O=Wazuh,L=California,C=US"
+      - "CN=demo-indexer,OU=Docu,O=Wazuh,L=California,C=US"
+      #- "CN=demo-indexer,OU=Docu,O=Wazuh,L=California,C=US"
+      #- "CN=demo-indexer,OU=Docu,O=Wazuh,L=California,C=US"
+      plugins.security.restapi.roles_enabled:
+      - "all_access"
+      - "security_rest_api_access"
 
       ...
-
 
     Values to be replaced:
   
-    - ``<indexer_ip>``: Host's IP address; for example, ``172.16.1.21`` or ``0.0.0.0``. 
-    - ``<indexer_node_name>``: Node name; for example, ``node-1``. 
-    - ``<indexer_node_X_name>``: Name of all the master-eligible nodes in the Wazuh indexer cluster; for example, ``node-1``, ``node-2``, ``node-3``. 
-    - ``<indexer_cluster_name>``: Wazuh indexer cluster name; for example, ``wazuh-cluster``.
-    - ``<indexer_node_certificate_name>``: Wazuh indexer node certificate name; for example, ``node-1``.
-    - ``<indexer_node_X_certificate_name>``: Each node certificate name; for example, ``node-1``, ``node-2``, ``node-3``. Make sure to use the same names when creating the certificates.
+    - ``node-1`` in ``node.name``: This value must be the Wazuh indexer node name you are configuring, as defined in the ``config.yml`` file.
+    - ``node-1`` in the ``cluster.initial_master_nodes`` list: This value must be the name of your Wazuh indexer master node, as it is defined in ``config.yml``. If you are configuring Wazuh indexer in a cluster distribution, you can add more master-elegible indexer nodes to this list. Uncomment the commented lines and  similarly replace ``node-2`` and ``node-3`` with your Wazuh indexer master nodes names.
+    - ``wazuh-cluster`` in ``cluster.name``: This value is your Wazuh indexer cluster name and can be replaced with your own single-node or multi-node Wazuh indexer cluster name.
+    - ``demo-indexer`` in ``plugins.security.nodes_dn``:
 
 .. End of include file
