@@ -46,6 +46,6 @@
     - ``node-1`` in ``node.name``: This value must be the Wazuh indexer node name you are configuring, as defined in the ``config.yml`` file.
     - ``node-1`` in the ``cluster.initial_master_nodes`` list: This value must be the name of your Wazuh indexer master node, as it is defined in ``config.yml``. If you are configuring Wazuh indexer in a cluster distribution, you can add more master-elegible indexer nodes to this list. Uncomment the commented lines and  similarly replace ``node-2`` and ``node-3`` with your Wazuh indexer master nodes names.
     - ``wazuh-cluster`` in ``cluster.name``: This value is your Wazuh indexer cluster name and can be replaced with your own single-node or multi-node Wazuh indexer cluster name.
-    - ``demo-indexer`` in ``plugins.security.nodes_dn``:
+    - ``demo-indexer`` in ``plugins.security.nodes_dn``: 
 
 .. End of include file

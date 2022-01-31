@@ -72,32 +72,6 @@ Indicate your deployment configuration, create the SSL certificates to encrypt c
         # bash ./wazuh_install.sh -c
 
 
-    Options available when running the script:
-
-    +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | Options                                         | Purpose                                                                                                        |
-    +=================================================+================================================================================================================+
-    | -I / --wazuh-indexer <wazuh-indexer-node-name>  | Installs the Wazuh indexer. You need to indicate the Wazuh indexer node name.                                  |
-    +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -c / --create-configurations                    | Creates ``configurations.tar`` file containing config.yml, certificates, passwords and cluster key.            |
-    +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -s / --start-cluster                            | Starts the Wazuh indexer cluster                                                                               |
-    +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -o / --overwrite                                | Overwrites the existing installation. Note: This will erase all the existing configuration and data.           |
-    +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -u / --uninstall                                | Uninstalls all Wazuh components. Note: This will erase all the existing configuration and data.                |
-    +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -v / --verbose                                  | Shows the complete installation output                                                                         |
-    +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -i / --ignore-health-check                      | Ignores the health check.                                                                                      |
-    +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -l / --local                                    | Uses local files                                                                                               |
-    +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+ 
-    | -d / --development                              | Uses development repository                                                                                    |
-    +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -h / --help                                     | Shows help                                                                                                     |
-    +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+        
-
 #.  Copy the ``configurations.tar`` file to all the servers of the distributed deployment, including the Wazuh server, the Wazuh indexer, and the Wazuh dashboard nodes. This can be done by using, for example, ``scp``.
 
 
@@ -114,11 +88,11 @@ Install and configure the Wazuh indexer nodes. Make sure that a copy of ``config
         # curl -sO https://s3.us-west-1.amazonaws.com/packages-dev.wazuh.com/wazuh_install/4.3/wazuh_install.sh
 
 
-#. Run the script with the options ``-I`` and the node name to install and configure the Wazuh indexer. The node name must be the same used in ``config.yml`` for the certificate creation, for example, ``node-1``.
+#. Run the script with the options ``-wi`` and the node name to install and configure the Wazuh indexer. The node name must be the same used in ``config.yml`` for the initial configuration, for example, ``node-1``.
 
       .. code-block:: console
 
-        # bash ./wazuh_install.sh -I node-1 
+        # bash ./wazuh_install.sh -wi node-1 
 
 
 Repeat this process on each Wazuh indexer node and proceed with initializing the cluster.             
