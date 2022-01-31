@@ -88,7 +88,7 @@ There are several ways to monitor the Azure instances:
   - **Monitoring the instances activity through Azure APIs.** This includes data about all resource operations (creation, update, and deletion), Azure notifications about the instances, suspicious file executions, health checks, autoscaling events, and so on.
   - **Monitoring the Azure Active Directory service.** Monitoring management actions such as creation, update or deletion of users. It's possible to receive alerts on the Wazuh manager when some of these events occur on the Azure infrastructure.
 
-.. thumbnail:: ../images/release-notes/3.7.0/azure-integration-diagram.svg
+.. thumbnail:: ../images/release-notes/3.7.0/azure-integration-diagram.png
   :title: Azure module diagram
   :align: center
   :width: 80%
