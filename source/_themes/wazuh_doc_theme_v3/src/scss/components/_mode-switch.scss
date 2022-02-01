@@ -1,0 +1,106 @@
+/* -----------------------------------------------------------------------------
+  Component: Mode switch
+
+  Style for the component that switches the theme style to light or dark mmode.
+----------------------------------------------------------------------------- */
+
+#light-dark-switch {
+  display: flex;
+  flex-direction: row;
+  @include media-min(xl) {
+    padding-bottom: 8px;
+  }
+
+  > span:first-child {
+    margin-left: 8px;
+  }
+  
+  .text {
+    @include media-max(sm) {
+      display: none;
+    }
+  }
+
+  .switch-icon {
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+    display: inline-block;
+    background-size: contain;
+    background-position: center;
+  }
+}
+
+#mode-switch {
+  box-sizing: content-box;
+  position: relative;
+  top: 1px;
+  display: flex;
+  flex-direction: row;
+  width: 26px;
+  height: 16px;
+  padding: 0;
+  margin: 0 5px;
+  border: 1px solid;
+  border-radius: 25px;
+
+  &.dark {
+    justify-content: flex-end;
+    span {
+      left: calc(100% - 16px);
+    }
+  }
+
+  span {
+    position: absolute;
+    left: 0;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    content: "";
+    border-radius: 50%;
+    transition: left ease-in .075s;
+    background-color: #fff;
+  }
+}
+
+/* Light theme -------------------------------------------------------------- */
+
+body {
+  #light-dark-switch {
+    color: $light_ColorMainText;
+    .switch-icon {
+      &.icon-sun {
+        background: url('#{$icoPath}svg-icons.svg#sun-lt');
+      }
+      &.icon-moon {
+        background: url('#{$icoPath}svg-icons.svg#moon-lt');
+      }
+    }
+  }
+  #mode-switch {
+    background-color: $light_ColorPrimaryLighter;
+    border-color: $light_ColorPrimaryLighter;
+  }
+}
+
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme {
+  #light-dark-switch {
+    color: $dark_ColorMainText;
+    .switch-icon {
+      &.icon-sun {
+        background: url('#{$icoPath}svg-icons.svg#sun-dt');
+      }
+      &.icon-moon {
+        background: url('#{$icoPath}svg-icons.svg#moon-dt');
+      }
+    }
+  }
+  #mode-switch {
+    background-color: $dark_ColorPrimary;
+    border-color: $dark_ColorPrimary;
+  }
+}

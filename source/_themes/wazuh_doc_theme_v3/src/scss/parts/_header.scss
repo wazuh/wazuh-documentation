@@ -1,0 +1,161 @@
+/* -----------------------------------------------------------------------------
+  PART: HEADER
+
+  Style for the header/top bar of the page.
+----------------------------------------------------------------------------- */
+
+@import "../components/brand";
+@import "../components/navbar-menu";
+@import "../components/version-selector";
+
+header {
+  height: $headerHeightXs;
+  @include media-min(xl){
+    box-shadow: 0 4px 12px 0 rgba(#000, .1);
+    height: $headerHeightXl;
+  }
+  
+  &.fixed-top {
+    @include media-max(xl){
+      z-index: 100;
+    }
+  }
+
+  .navbar {
+    height: $headerHeightXs;
+    @include media-min(xl){
+      height: $headerHeightXl;
+    }
+  }
+  
+  .mobile-primary-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    @include media-min(xl){
+      width: auto;
+    }
+  }
+
+  .mobile-secondary-header {
+    height: $secondaryMobileBar;
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar-toggler {
+    padding: .4rem;
+    .navbar-toggler-icon,
+    .navbar-toggler-icon::before,
+    .navbar-toggler-icon::after {
+      width: 24px;
+      height: 3px;
+      border-radius: 6px;
+      border: 1px solid;
+    }
+    .navbar-toggler-icon {
+      position: relative;
+      &::before,
+      &::after {
+        position: absolute;
+        content: "";
+        display: block;
+        left: -1px;
+      }
+    }
+    &[aria-expanded="false"] {
+      .navbar-toggler-icon {
+        transition: background-color .5s .3s, border-color .5s .3s;
+        &::before {
+          top: -8px;
+          transform: rotateZ(0deg);
+          transition: all .5s;
+        }
+        &::after {
+          bottom: -8px;
+          transform: rotateZ(0deg);
+          transition: all .5s;
+        }
+      }
+    }
+    &[aria-expanded="true"] {
+      .navbar-toggler-icon {
+        background-color: transparent;
+        border-color: transparent;
+        &::before {
+          top: -1px;
+          transform: rotateZ(45deg);
+          transition: all .5s;
+        }
+        &::after {
+          bottom: -1px;
+          transform: rotateZ(-45deg);
+          transition: all .5s;
+        }
+      }
+    }
+  }
+  
+  .search-toggler {
+    margin-right: 3px;
+    .search-toggler-icon {
+      display: block;
+      width: 32px;
+      height: 32px;
+    }
+  }
+}
+
+/* Light theme -------------------------------------------------------------- */
+
+body {
+  header {
+    background: $light_ColorBaseSpace;
+    .navbar-toggler {
+      &[aria-expanded="false"] .navbar-toggler-icon,
+      .navbar-toggler-icon::before,
+      .navbar-toggler-icon::after {
+        background-color: $light_ColorPrimaryLighter;
+        border-color: $light_ColorPrimaryLighter;
+      }
+    }
+    .mobile-secondary-header {
+      padding-right: 15px;
+      @include media-max(xl){
+        background-color: $light_ColorSidebarSpace;
+      }
+    }
+    .search-toggler {
+      .search-toggler-icon {
+        background: url('#{$icoPath}svg-icons.svg#search-lt');
+      }
+    }
+  }
+}
+
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme {
+  header {
+    background: $dark_ColorIndexHeaderBackground;
+    .navbar-toggler {
+      &[aria-expanded="false"] .navbar-toggler-icon,
+      .navbar-toggler-icon::before,
+      .navbar-toggler-icon::after {
+        background-color: $dark_ColorPrimary;
+        border-color: $dark_ColorPrimary;
+      }
+    }
+    .mobile-secondary-header {
+      @include media-max(xl){
+        background-color: $dark_ColorSidebarSpace;
+      }
+    }
+    .search-toggler {
+      .search-toggler-icon {
+        background: url('#{$icoPath}svg-icons.svg#search-dt');
+      }
+    }
+  }
+}

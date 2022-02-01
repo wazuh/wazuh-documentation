@@ -1,0 +1,35 @@
+{#
+    wazuh_doc_theme_v3/search.html
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    Template for the search page.
+
+#}
+{%- extends "!wazuh_doc_theme_v3/template-parts/body.html" -%}
+{% set title = _('Search') %}
+
+{%- block main_column -%}
+<div id="central-column">
+  {%- block latest %}
+    {% include "template-parts/no-latest-notice.html" %}
+  {% endblock latest %}
+  
+  {# Main content #}
+  <main role="main">
+    <noscript>
+    <div id="fallback" class="admonition warning">
+      <p class="last">
+        {% trans %}Please activate JavaScript to enable the search
+        functionality.{% endtrans %}
+      </p>
+    </div>
+    </noscript>
+
+    <div id="search-results"></div>
+  </main>
+</div>
+{%- endblock main_column -%}
+
+{%- block after_footer %}
+{{ super() }}
+{% endblock after_footer %}
