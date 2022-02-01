@@ -37,7 +37,7 @@ Then, provide a descriptive name for the sink and click on the ``NEXT`` button.
     :align: center
     :width: 100%
 
-Once the name for the sink is chosen, it is necessary to select the sink destination. As sink service, choose **Cloud Pub/Sub topic**, and then create or choose a topic to be used as a destination. Then click on the ``NEXT`` button.
+Once the name for the sink is chosen, it is necessary to select the sink destination. As sink service, choose **Cloud Pub/Sub topic**, and then create or choose a topic to be used as destination. Then click on the ``NEXT`` button.
 
 .. thumbnail:: ../../images/gcp/gcp-sink-destination.png
     :align: center
