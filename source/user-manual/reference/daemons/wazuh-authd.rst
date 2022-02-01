@@ -63,4 +63,4 @@ The ``wazuh-authd`` program can automatically add a Wazuh agent to a Wazuh manag
 .. note::
   Paths can be referred to relative paths under the Wazuh installation directory, or full paths.
 
-.. _`SSL ciphers`: https://www.openssl.org/docs/man1.1.0/apps/ciphers.html
+.. _`SSL ciphers`: https://www.openssl.org/docs/man1.1.1/man1/ciphers.html
