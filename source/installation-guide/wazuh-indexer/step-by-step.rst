@@ -12,7 +12,7 @@ The installation process is divided into three stages.
 
 #. Certificates creation
 
-#. Wazuh indexer nodes installation
+#. Nodes installation
 
 #. Cluster initialization
 
@@ -31,8 +31,8 @@ Generating the SSL certificates
     .. include:: /_templates/installations/indexer/common/generate_certificates.rst
 
 
-2. Wazuh indexer nodes installation
------------------------------------
+2. Nodes installation
+---------------------
 .. raw:: html
 
     <div class="accordion-section open">
@@ -88,13 +88,6 @@ Deploying certificates
 Starting the service
 ^^^^^^^^^^^^^^^^^^^^
 
-  #. Remove index data.
-
-      .. code-block:: console
-
-        # rm -rf /var/lib/wazuh-indexer/*
-
-
   #. Enable and start the Wazuh indexer service.
 
       .. include:: /_templates/installations/indexer/common/enable_indexer.rst
@@ -109,21 +102,15 @@ Repeat this stage of the installation process for every Wazuh indexer node in yo
     <div class="accordion-section open">
 
 
-Initializing a multi-node cluster
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-  #. Run the following command on any Wazuh indexer node to initialize your cluster. Replace ``<node_IP>`` with your Wazuh indexer node IP address.
+#. Run the Wazuh indexer ``securityadmin.sh`` script on any Wazuh indexer node to load the new certificates information and start the cluster. Replace ``<node_IP>`` with your Wazuh indexer node IP address.
     
-     .. code-block:: console
+    .. code-block:: console
 
       # export WAZUH_INDEXER_IP="<node_IP>"
 
+    .. code-block:: console
 
-  #. Run the Wazuh indexer ``securityadmin.sh`` script on the initial node to load the new certificates information and start the multi-node cluster.
-
-      .. code-block:: console
-
-        # sudo -u wazuh-indexer OPENSEARCH_PATH_CONF=/etc/wazuh-indexer JAVA_HOME=/usr/share/wazuh-indexer/jdk /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig -icl -p 9800 -cd /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig -nhnv -cacert /etc/wazuh-indexer/certs/root-ca.pem -cert /etc/wazuh-indexer/certs/admin.pem -key /etc/wazuh-indexer/certs/admin-key.pem -h $WAZUH_INDEXER_IP
+      # sudo -u wazuh-indexer OPENSEARCH_PATH_CONF=/etc/wazuh-indexer JAVA_HOME=/usr/share/wazuh-indexer/jdk /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig -icl -p 9800 -cd /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig -nhnv -cacert /etc/wazuh-indexer/certs/root-ca.pem -cert /etc/wazuh-indexer/certs/admin.pem -key /etc/wazuh-indexer/certs/admin-key.pem -h $WAZUH_INDEXER_IP
         
        
 
