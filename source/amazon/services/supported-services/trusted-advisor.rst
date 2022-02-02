@@ -5,97 +5,130 @@
 AWS Trusted Advisor
 ===================
 
-`AWS Trusted Advisor <https://aws.amazon.com/premiumsupport/trustedadvisor/>`_ is an online resource to help users reduce cost, increase performance, and improve security by optimizing their AWS environment, Trusted Advisor provides real time guidance to help users provision their resources following AWS best practices.
+`AWS Trusted Advisor <https://aws.amazon.com/premiumsupport/trustedadvisor/>`_ provides real time guidance to help users reduce cost, increase performance, and improve security by optimizing their AWS environment following AWS best practices. Trusted Advisor logs can be stored into a S3 bucket thanks to `Amazon EventBridge <https://aws.amazon.com/eventbridge/>`_ and `Amazon Kinesis Data Firehose <https://aws.amazon.com/kinesis/data-firehose/>`_, allowing Wazuh to process them and generate alerts using the built-in rules Wazuh provides, as well as any :ref:`custom rules <ruleset_custom>` available.
 
 Amazon configuration
 --------------------
 
+Learn how to configure the different services required to integrate Trusted Advisor into Wazuh:
+
+    .. thumbnail:: ../../../images/aws/trusted-advisor.png
+      :align: center
+      :width: 100%
+
+Amazon Kinesis configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Create an Amazon Kinesis Data Firehose delivery stream to be able to store the Trusted Advisor logs into the desired S3 bucket so Wazuh can process them.
+
 #. :ref:`Create a new <S3_bucket>` S3 bucket. (If you want to use an already created one, skip this step).
 
-#. Go to Services > Analytics > Kinesis:
+#. Search for ``kinesis`` in the search bar at the top of the page or go to ``Services`` > ``Analytics`` > ``Kinesis``:
 
-    .. thumbnail:: ../../../images/aws/aws-create-firehose-4.png
+    .. thumbnail:: ../../../images/aws/trusted-kinesis-0.png
+      :align: center
+      :width: 100%
+
+#. Select the ``Kinesis Data Firehose`` option and then click in the ``Create delivery stream`` button:
+
+    .. thumbnail:: ../../../images/aws/trusted-kinesis-1.png
+      :align: center
+      :width: 100%
+
+#. Select ``Direct PUT`` and ``Amazon S3`` as the desired Source and Destination, respectively:
+
+    .. thumbnail:: ../../../images/aws/trusted-kinesis-2.png
+      :align: center
+      :width: 100%
+
+#. Choose an appropriate ``Delivery stream name``:
+
+    .. thumbnail:: ../../../images/aws/trusted-kinesis-3.png
+      :align: center
+      :width: 100%
+
+#. Leave both ``Transform`` and ``convert records`` options disabled:
+
+    .. thumbnail:: ../../../images/aws/trusted-kinesis-4.png
+      :align: center
+      :width: 100%
+
+#. Select the desired S3 bucket as the destination. It if possible to specify a custom prefix to alter the path where AWS store the logs. AWS Firehose creates a file structure ``YYYY/MM/DD/HH``, if a prefix is used the created file structure would be ``prefix-name/YYYY/MM/DD/HH``. If a prefix is used it must be specified under the Wazuh Bucket configuration:
+
+    .. thumbnail:: ../../../images/aws/trusted-kinesis-5.png
+      :align: center
+      :width: 100%
+
+#. Create or choose an existing IAM role to be used by Kinesis Data Firehose to access within the ``Advanced settings`` section, if required:
+
+    .. thumbnail:: ../../../images/aws/trusted-kinesis-6.png
+      :align: center
+      :width: 100%
+
+#. Click on the ``Create delivery stream`` button at the end of the page. The new Delivery stream will be created and it's details will be shown as follows:
+
+    .. thumbnail:: ../../../images/aws/trusted-kinesis-7.png
+      :align: center
+      :width: 100%
+
+
+Amazon EventBridge configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Configure an Amazon EventBridge rule to send Trusted Advisor events to the Amazon Kinesis Data Firehose delivery stream created in the previous step.
+
+#. Search for ``EventBridge`` in the search bar at the top of the page or go to ``Services`` > ``Application Integration`` > ``EventBridge``:
+
+    .. thumbnail:: ../../../images/aws/trusted-eventbridge-1.png
+      :align: center
+      :width: 100%
+
+#. Click on the ``Create rule`` button:
+
+    .. thumbnail:: ../../../images/aws/trusted-eventbridge-2.png
       :align: center
       :width: 70%
 
-    #. If it's the first time you're using this service, you'll see the following screen. Just click on *Get started*:
+#. Give an appropriated name for the EventBridge rule:
 
-    .. thumbnail:: ../../../images/aws/aws-create-firehose-4.1.png
+    .. thumbnail:: ../../../images/aws/trusted-eventbridge-3.png
+      :align: center
+      :width: 100%
+
+#. In the ``Define pattern`` section choose ``Event pattern``, then ``Pre-defined pattern by service``. Select ``AWS`` and ``Trusted Advisor`` as the ``Service provider`` and ``Service name``, respectively. Choose ``All Events`` as the desired ``Event type``:
+
+    .. thumbnail:: ../../../images/aws/trusted-eventbridge-4.png
+      :align: center
+      :width: 100%
+
+#. Select the Firehose delivery stream created following the Kinesis steps as the ``Target`` for this EventBridge rule. Create a new role or specify an existing one for this resource if required:
+
+    .. thumbnail:: ../../../images/aws/trusted-eventbridge-5.png
+      :align: center
+      :width: 100%
+
+
+#. Scroll down and click on the ``Create rule``. The new rule will now be present in the ``Amazon EventBridge`` > ``Rules`` section, ready to be used. From now on, every time a Trusted Advisor event is sent, it will be stored in our S3 bucket. Remember to first enable the service to monitor, otherwise no data will be processed:
+
+    .. thumbnail:: ../../../images/aws/trusted-eventbridge-6.png
       :align: center
       :width: 70%
 
-#. Click on *Create delivery stream* button:
-
-    .. thumbnail:: ../../../images/aws/aws-create-firehose-5.png
-      :align: center
-      :width: 70%
-
-#. Put a name to your delivery stream and click on the *Next* button at the bottom of the page:
-
-    .. thumbnail:: ../../../images/aws/aws-create-firehose-6.png
-      :align: center
-      :width: 70%
-
-#. On the next page, leave both options as *Disabled* and click on *Next*:
-
-    .. thumbnail:: ../../../images/aws/aws-create-firehose-7.png
-      :align: center
-      :width: 70%
-
-#. Select *Amazon S3* as destination, then select the previously created S3 bucket and add a prefix where logs will be stored. AWS Firehose creates a file structure *YYYY/MM/DD/HH*, if a prefix is used the created file structure would be *firehose/YYYY/MM/DD/HH*. If a prefix is used it must be specified under the Wazuh Bucket configuration:
-
-    .. thumbnail:: ../../../images/aws/aws-create-firehose-8.png
-      :align: center
-      :width: 70%
-
-#. Users can select which compression do they prefer. Wazuh supports any kind of compression but Snappy. After that, click on *Create new or choose*:
-
-    .. thumbnail:: ../../../images/aws/aws-create-firehose-9.png
-      :align: center
-      :width: 70%
-
-#. Give a proper name to the role and click on the *Allow* button:
-
-    .. thumbnail:: ../../../images/aws/aws-create-firehose-10.png
-      :align: center
-      :width: 70%
-
-#. The following page is just a summary about the Firehose stream created, go to the bottom of the page and click on the *Create delivery stream* button:
-
-    .. thumbnail:: ../../../images/aws/aws-create-firehose-11.png
-      :align: center
-      :width: 70%
-
-#. Go to Services > Management Tools > CloudWatch:
-
-    .. thumbnail:: ../../../images/aws/aws-create-firehose-12.png
-      :align: center
-      :width: 70%
-
-#. Select *Rules* on the left menu and click on the *Create rule* button:
-
-    .. thumbnail:: ../../../images/aws/aws-create-firehose-13.png
-      :align: center
-      :width: 70%
-
-#. Select which service do you want to get logs from using the *Service name* slider, then, click on the *Add target* button and add the previously created Firehose delivery stream there. Also, create a new role to access the delivery stream:
-
-    .. thumbnail:: ../../../images/aws/aws-create-firehose-14.png
-      :align: center
-      :width: 70%
-
-#. Give the rule some name and click on the *Create rule* button:
-
-    .. thumbnail:: ../../../images/aws/aws-create-firehose-15.png
-      :align: center
-      :width: 70%
-
-#. Once the rule is created, data will start to be sent to the previously created S3 bucket. Remember to first enable the service you want to monitor, otherwise you won't get any data.
 
 Wazuh configuration
 -------------------
 
-#. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following block:
+#. Access the Wazuh configuration in ``Wazuh`` > ``Management`` > ``Configuration`` using the Wazuh UI or by manually editing the ``/var/ossec/etc/ossec.conf`` file in the host:
+
+    .. thumbnail:: ../../../images/aws/trusted-ui-1.png
+      :align: center
+      :width: 100%
+
+    .. thumbnail:: ../../../images/aws/trusted-ui-2.png
+      :align: center
+      :width: 100%
+
+#. Add the following :ref:`AWS S3 module <wodle_s3>` configuration to the file, replacing ``wazuh-aws-wodle`` with the name of the S3 bucket:
 
     .. code-block:: xml
 
@@ -106,15 +139,14 @@ Wazuh configuration
         <skip_on_error>yes</skip_on_error>
         <bucket type="custom">
           <name>wazuh-aws-wodle</name>
-          <path>trustedadvisor</path>
           <aws_profile>default</aws_profile>
         </bucket>
       </wodle>
 
     .. note::
-      Check the :ref:`AWS S3 module <wodle_s3>` reference manual to learn more about each setting.
+      In this example the ``aws_profile`` authentication parameter was used. Check the :ref:`credentials <amazon_credentials>` section to learn more about the different authentication options and how to use them.
 
-#. Restart Wazuh in order to apply the changes:
+#. Save the changes and restart Wazuh in order to apply the changes. The service can be manually restarted using the following command outside the Wazuh UI:
 
     * If you're configuring a Wazuh manager:
 
@@ -143,3 +175,9 @@ Wazuh configuration
       .. code-block:: console
 
         # service wazuh-agent restart
+
+The :ref:`AWS S3 module <wodle_s3>` configuration can be accessed and modified from the ``Wazuh`` > ``Management`` > ``Configuration`` > ``Cloud security monitoring`` once add it in the :ref:`Local configuration <reference_ossec_conf>`
+
+    .. thumbnail:: ../../../images/aws/trusted-ui-3.png
+      :align: center
+      :width: 70%
