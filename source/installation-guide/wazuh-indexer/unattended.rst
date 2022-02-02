@@ -85,10 +85,10 @@ Install and configure the Wazuh indexer nodes. Make sure that a copy of ``config
 
       .. code-block:: console
 
-        # curl -sO https://s3.us-west-1.amazonaws.com/packages-dev.wazuh.com/wazuh_install/4.3/wazuh_install.sh
+        # curl -sO https://s3.us-west-1.amazonaws.com/packages-dev.wazuh.com/resources/4.3/wazuh_install.sh
 
 
-#. Run the script with the options ``-wi`` and the node name to install and configure the Wazuh indexer. The node name must be the same used in ``config.yml`` for the initial configuration, for example, ``node-1``.
+#. Run the script with the option ``-wi`` and the node name to install and configure the Wazuh indexer. The node name must be the same used in ``config.yml`` for the initial configuration, for example, ``node-1``.
 
       .. code-block:: console
 

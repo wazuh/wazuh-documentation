@@ -1,6 +1,6 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
-.. meta:: :description: Learn how to install Kibana in unattended mode, a flexible and intuitive web interface for mining and visualizing the events and archives. 
+.. meta:: :description: Learn how to install the Wazuh dashboard in unattended mode, a flexible and intuitive web interface for mining and visualizing the events and archives. 
 
 
 .. _wazuh_dashboard_unattended_installation:
@@ -20,43 +20,23 @@ You can install and configure the Wazuh dashboard using an automated script.
 
     .. code-block:: console
 
-      # curl -sO https://packages.wazuh.com/resources/wazuh_install.sh
+      # curl -sO https://s3.us-west-1.amazonaws.com/packages-dev.wazuh.com/resources/4.3/wazuh_install.sh
 
 
-#. Run the script with the option for installing Wazuh dashboard.
+
+#. Run the script with the option ``-wd`` and the node name to install and configure the Wazuh dashboard. The node name must be the same used in ``config.yml`` for the initial configuration, for example, ``dashboard``.
    
     .. code-block:: console
 
-      # bash ./wazuh_install.sh -D
+      # bash ./wazuh_install.sh -wd dashboard
 
     
-    Options available when running the script:
-
-    +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | Options                                         | Purpose                                                                                                        |
-    +=================================================+================================================================================================================+
-    | -D / --wazuh-dashboard                          | Installs the Wazuh dashboard.                                                                                  |
-    +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -o / --overwrite                                | Overwrites the existing installation.                                                                          |
-    +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -r / --uninstall                                | Removes the installation.                                                                                      |
-    +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -v / --verbose                                  | Shows the complete installation output.                                                                        |
-    +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -i / --ignore-health-check                      | Ignores the health check.                                                                                      |
-    +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -l / --local                                    | Use local files.                                                                                               |
-    +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+ 
-    | -d / --development                              | Use development repository.                                                                                    |
-    +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | -h / --help                                     | Shows *help*.                                                                                                  |
-    +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------+        
 
 #. Access the Wazuh web interface with your credentials. 
 
      - URL: *https://<server_ip>*
-     - **Username**: *wazuh*
-     - **Password**: *<wazuh_password>*
+     - **Username**: *admin*
+     - **Password**: *<admin_password>*
   
 
     When you access the Wazuh dashboard for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or, for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser. Alternatively, a certificate from a trusted authority can be configured. 
