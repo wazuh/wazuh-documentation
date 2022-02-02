@@ -114,6 +114,23 @@ Configure an Amazon EventBridge rule to send Trusted Advisor events to the Amazo
       :align: center
       :width: 70%
 
+AWS Trusted Advisor configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#. Search for ``Trusted Advisor`` in the search bar at the top of the page or go to ``Services`` > ``Management & Governance`` > ``Trusted Advisor``:
+
+    .. thumbnail:: ../../../images/aws/trusted-advisor-1.png
+      :align: center
+      :width: 70%
+
+#. Go to ``Preferences`` in the left menu and click on the ``Enable Trusted Advisor`` button:
+
+    .. thumbnail:: ../../../images/aws/trusted-advisor-2.png
+      :align: center
+      :width: 70%
+
+Once enabled, Trusted Advisor reviews the different checks for the AWS account. Check the `official AWS documentation <https://docs.aws.amazon.com/awssupport/latest/user/get-started-with-aws-trusted-advisor.html>`_ to learn more about the different Trusted Advisor Checks available.
+
 
 Wazuh configuration
 -------------------
