@@ -29,6 +29,20 @@
       padding: .5rem .5rem .2rem 40px;
       margin-bottom: .2rem;
     }
+    &.footnote {
+      dt {
+        width: 2em;
+        font-weight: 400;
+        padding: 0;
+        &::after {
+          content: ".";
+        }
+      }
+      dd {
+        width: calc(100% - 2em);
+        padding: 0 0 0 6px;
+      }
+    }
   }
 }
 
@@ -249,6 +263,33 @@
       }
     }
   }
+  
+  .footnote-reference {
+    vertical-align: super;
+    font-size: .7em;
+    text-decoration: underline;
+    &::before {
+      content: "[";
+    }
+    &.footnote-reference::after {
+      content: "]";
+    }
+  }
+  .footnote.brackets {
+    border-top: 1px solid;
+    padding-top: 50px;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    &::before {
+      content: "Footnotes";
+      font-size: 20px;
+      font-weight: 600;
+      position: absolute;
+      top: 10px;
+    }
+  }
 }
 
 /* Light theme -------------------------------------------------------------- */
@@ -314,6 +355,9 @@ body {
           }
         }
       }
+    }
+    .footnote.brackets {
+      border-color: rgba(0,0,0,.1);
     }
   }
   .table-wrapper {
@@ -392,6 +436,9 @@ body {
           }
         }
       }
+    }
+    .footnote.brackets {
+      border-color: rgba(255,255,255,.1);
     }
   }
   
