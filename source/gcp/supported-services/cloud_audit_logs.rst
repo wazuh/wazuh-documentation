@@ -10,7 +10,7 @@ Audited resources
 Google audit logs
 -----------------
 
-Google Cloud maintains four `audit logs <https://cloud.google.com/logging/docs/audit>`__ for each Google Cloud project, folder, and organization: **Admin Activity**, **Data Access**, **System Event**, and **Policy Denied**.
+Google Cloud provides four types of `audit logs <https://cloud.google.com/logging/docs/audit>`__ for each Google Cloud project, folder, and organization:
 
 * **Admin Activity** audit logs contain log entries for API calls or other administrative actions that modify the configuration or metadata of resources.
 
@@ -20,36 +20,38 @@ Google Cloud maintains four `audit logs <https://cloud.google.com/logging/docs/a
 
 * **Policy Denied** audit logs are recorded when a Google Cloud service denies access to a user or service account because of a security policy violation.
 
-Wazuh is able to collect and analyze those logs using the :ref:`GCP Pub/Sub integration <pubsub>`.
+Wazuh is able to collect and analyze these log types using the :ref:`GCP Pub/Sub integration <pubsub>`.
 
 Configure Google audit logs collection
 --------------------------------------
 
-To enable Google audit logs collection, it is necessary to first ingest the audit logs into a Pub/Sub topic defining a custom log router. To do that, visit the `Google Cloud Logging section  <https://console.cloud.google.com/logs/router>`_ and click on the ``CREATE SINK`` button.
+To enable Google audit logs collection, it is necessary to first ingest the audit logs into a Pub/Sub topic defining a custom log router. 
+
+#. Visit the `Google Cloud Logging section  <https://console.cloud.google.com/logs/router>`_ and click on the ``CREATE SINK`` button.
 
 .. thumbnail:: ../../images/gcp/gcp-create-sink-button.png
     :align: center
     :width: 100%
 
-Then, provide a descriptive name for the sink and click on the ``NEXT`` button.
+#. Provide a descriptive name for the sink and click on the ``NEXT`` button.
 
 .. thumbnail:: ../../images/gcp/gcp-sink-name.png
     :align: center
     :width: 100%
 
-Once the name for the sink is chosen, it is necessary to select the sink destination. As sink service, choose **Cloud Pub/Sub topic**, and then create or choose a topic to be used as destination. Then click on the ``NEXT`` button.
+#. Once the name for the sink is chosen, it is necessary to select the sink destination. As sink service, choose **Cloud Pub/Sub topic**, and then create or choose a topic to be used as destination. Then click on the ``NEXT`` button.
 
 .. thumbnail:: ../../images/gcp/gcp-sink-destination.png
     :align: center
     :width: 100%
 
-Finally, use the following query to collect all the audit logs from every project. It is possible to edit it to only collect audit logs from a particular project.
+#. Use the following query to collect all the audit logs from every project. It is possible to edit it to only collect audit logs from a particular project.
 
 .. code-block:: none
 
     logName=~("projects/.*/logs/cloudaudit.googleapis.com%2F(activity|data_access|system_event|policy)")
 
-If it is not necessary to filter any logs out of the sink, click on the ``CREATE SINK`` button to create it.
+#. If it is not necessary to filter any logs out of the sink, click on the ``CREATE SINK`` button to create it.
 
 .. thumbnail:: ../../images/gcp/gcp-create-sink.png
     :align: center
@@ -79,4 +81,4 @@ After selecting the ``Exists in`` button, only Google Cloud-related events will 
     :align: center
     :width: 100%
 
-If you need information about all the Google services with audit logs that the Wazuh GCP module could analyze, visit `the Google Cloud documentation <https://cloud.google.com/logging/docs/audit/services>`__.
+Visit the `the Google Cloud documentation <https://cloud.google.com/logging/docs/audit/services>`__ to learn more about the different Google services capable of writing audit logs.

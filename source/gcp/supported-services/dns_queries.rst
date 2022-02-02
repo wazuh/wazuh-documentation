@@ -16,32 +16,32 @@ To collect the DNS queries made to the Google DNS service it is necessary to ena
 
 Once DNS Cloud logging is configured, the generated logs must be ingested into a Pub/Sub topic so that Wazuh is able to collect them using the `Pub/Sub integration <pubsub>`. To achieve that, it is necessary to define a custom log router.
 
-Visit the `Google Cloud Logging section  <https://console.cloud.google.com/logs/router>`_ and click on the ``CREATE SINK`` button.
+#. Visit the `Google Cloud Logging section  <https://console.cloud.google.com/logs/router>`_ and click on the ``CREATE SINK`` button.
 
 .. thumbnail:: ../../images/gcp/gcp-create-sink-button.png
     :align: center
     :width: 100%
 
-Then, provide a descriptive name for the sink and click on the ``NEXT`` button.
+#. Provide a descriptive name for the sink and click on the ``NEXT`` button.
 
 .. thumbnail:: ../../images/gcp/gcp-sink-dns-name.png
     :align: center
     :width: 100%
 
-Once the name for the sink is chosen, it is necessary to select the sink destination. As sink service, choose **Cloud Pub/Sub topic**, and then create or choose a topic to be used as destination. Then click on the ``NEXT`` button.
+#. Once the name for the sink is chosen, it is necessary to select the sink destination. As sink service, choose **Cloud Pub/Sub topic**, and then create or choose a topic to be used as destination. Then click on the ``NEXT`` button.
 
 .. thumbnail:: ../../images/gcp/gcp-sink-dns-destination.png
     :align: center
     :width: 100%
 
-Finally, use the following query to collect all the DNS queries.
+#. Use the following query to collect all the DNS queries.
 
 .. code-block:: none
 
     resource.type = "dns_query"
 
 
-If it is not necessary to filter any logs out of the sink, click on the ``CREATE SINK`` button to create it.
+#. If it is not necessary to filter any logs out of the sink, click on the ``CREATE SINK`` button to create it.
 
 .. thumbnail:: ../../images/gcp/gcp-create-sink-dns.png
     :align: center
