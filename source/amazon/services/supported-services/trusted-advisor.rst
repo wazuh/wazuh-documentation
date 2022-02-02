@@ -21,7 +21,7 @@ Amazon Kinesis configuration
 
 Create an Amazon Kinesis Data Firehose delivery stream to be able to store the Trusted Advisor logs into the desired S3 bucket so Wazuh can process them.
 
-#. :ref:`Create a new <S3_bucket>` S3 bucket. (If you want to use an already created one, skip this step).
+#. :ref:`Create a new <S3_bucket>` S3 bucket. (If you want to use an already existing one, skip this step).
 
 #. Search for ``kinesis`` in the search bar at the top of the page or go to ``Services`` > ``Analytics`` > ``Kinesis``:
 
@@ -47,13 +47,13 @@ Create an Amazon Kinesis Data Firehose delivery stream to be able to store the T
       :align: center
       :width: 100%
 
-#. Leave both ``Transform`` and ``convert records`` options disabled:
+#. Leave both ``Data transformation`` and ``Record format conversion`` options disabled:
 
     .. thumbnail:: ../../../images/aws/trusted-kinesis-4.png
       :align: center
       :width: 100%
 
-#. Select the desired S3 bucket as the destination. It if possible to specify a custom prefix to alter the path where AWS store the logs. AWS Firehose creates a file structure ``YYYY/MM/DD/HH``, if a prefix is used the created file structure would be ``prefix-name/YYYY/MM/DD/HH``. If a prefix is used it must be specified under the Wazuh Bucket configuration:
+#. Select the desired S3 bucket as the destination. It is possible to specify a custom prefix to alter the path where AWS store the logs. AWS Firehose creates a file structure ``YYYY/MM/DD/HH``, if a prefix is used the created file structure would be ``prefix-name/YYYY/MM/DD/HH``. If a prefix is used it must be specified under the Wazuh Bucket configuration:
 
     .. thumbnail:: ../../../images/aws/trusted-kinesis-5.png
       :align: center
@@ -65,7 +65,7 @@ Create an Amazon Kinesis Data Firehose delivery stream to be able to store the T
       :align: center
       :width: 100%
 
-#. Click on the ``Create delivery stream`` button at the end of the page. The new Delivery stream will be created and it's details will be shown as follows:
+#. Click on the ``Create delivery stream`` button at the end of the page. The new Delivery stream will be created and its details will be shown as follows:
 
     .. thumbnail:: ../../../images/aws/trusted-kinesis-7.png
       :align: center
@@ -108,7 +108,7 @@ Configure an Amazon EventBridge rule to send Trusted Advisor events to the Amazo
       :width: 100%
 
 
-#. Scroll down and click on the ``Create rule``. The new rule will now be present in the ``Amazon EventBridge`` > ``Rules`` section, ready to be used. From now on, every time a Trusted Advisor event is sent, it will be stored in our S3 bucket. Remember to first enable the service to monitor, otherwise no data will be processed:
+#. Scroll down and click on ``Create rule``. The new rule will now be present in the ``Amazon EventBridge`` > ``Rules`` section, ready to be used. From now on, every time a Trusted Advisor event is sent, it will be stored in the specified S3 bucket. Remember to enable the Trusted Advisor service first, otherwise no data will be processed:
 
     .. thumbnail:: ../../../images/aws/trusted-eventbridge-6.png
       :align: center
