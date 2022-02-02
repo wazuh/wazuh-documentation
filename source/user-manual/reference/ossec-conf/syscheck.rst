@@ -696,8 +696,8 @@ db_entry_limit
 
 .. versionadded:: 4.4
 
-Specifies a limit on the number of entries that will be monitored by syscheck. Entries created when the database has reached the limit will be ignored.
-There is a specific limit for the number of files that can be inserted into the database, and a different limit for the number of registry values.
+Specifies a limit on the number of entries that will be monitored by FIM. Entries created when the database has reached the limit will be ignored.
+In Windows agents, the monitored files and registries are handled by different limits.
 
 .. code-block:: xml
 
@@ -713,7 +713,7 @@ There is a specific limit for the number of files that can be inserted into the 
 
 .. versionadded:: 4.4
 
-Specifies whether there will be a limit on the number of monitored files or not.
+Specifies whether there will be a limit on the number of monitored entries.
 
 +--------------------+---------------------------------------+
 | **Default value**  | yes                                   |
