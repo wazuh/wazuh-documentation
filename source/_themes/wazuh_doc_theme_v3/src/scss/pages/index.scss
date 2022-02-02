@@ -182,14 +182,14 @@ main {
 .index main {
   .toctree-l1 > a::before {
     background-repeat: no-repeat;
-    background-size: 80px 80px;
+    background-size: 70px 70px;
     background-position: right center;
     content: '';
     display: block;
-    width: 67px;
-    height: 75px;
+    width: 70px;
+    height: 70px;
     position: absolute;
-    left: -70px;
+    left: -75px;
     top: -7px;
     pointer-events: none;
     @include media-max(lg){
