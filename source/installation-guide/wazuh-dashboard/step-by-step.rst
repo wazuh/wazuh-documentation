@@ -18,28 +18,28 @@ Adding the Wazuh repository
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
   .. note::
-    If you are installing Wazuh dashboard on the same host as the Wazuh indexer or the Wazuh server, you may skip this step as you may have added the Wazuh repository already.
+    If you are installing Wazuh dashboard on the same host as the Wazuh indexer or the Wazuh server, you may skip these steps as you may have added the Wazuh repository already.
 
   .. tabs::
   
     .. group-tab:: Yum
   
   
-      .. include:: /_templates/installations/dashboard/yum/add_repository.rst
+      .. include:: /_templates/installations/common/yum/add-repository.rst
   
   
   
     .. group-tab:: APT
   
   
-      .. include:: /_templates/installations/dashboard/apt/add_repository.rst
+      .. include:: /_templates/installations/common/deb/add-repository.rst
   
   
   
     .. group-tab:: Zypp
   
   
-      .. include:: /_templates/installations/dashboard/zypp/add_repository.rst
+      .. include:: /_templates/installations/common/yum/add-repository.rst
   
   
 
@@ -101,9 +101,13 @@ Configuring the Wazuh dashboard
       - ``opensearch.hosts``: the host's IP. In case of having more than one Wazuh indexer node, the Wazuh dashboard can be configured to connect to multiple Wazuh indexer nodes in the same cluster. The IPs of the nodes can be separated with commas. Eg. ``["https://10.0.0.2:900", "https://10.0.0.3:900","https://10.0.0.4:900"]``
 
 
-  #. Replace ``wazuh-dashboard-node-name`` with your Wazuh dashboard node name, the same used in ``config.yml`` to create the certificates, and move the certificates to their corresponding location. 
+Deploying certificates
+^^^^^^^^^^^^^^^^^^^^^^
 
-      .. include:: ../../_templates/installations/elastic/common/generate_new_kibana_certificates.rst
+  .. note::
+    Make sure that a copy of ``certs.tar``, created in the previous stage of the installation process, is placed in your working directory.
+
+  .. include:: /_templates/installations/dashboard/deploy_certificates.rst
 
 
 Starting the Wazuh dashboard service
