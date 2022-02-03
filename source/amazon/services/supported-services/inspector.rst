@@ -40,19 +40,23 @@ Amazon configuration
 	:align: center
 	:width: 100%
 
-#. Choose a name for the assessment target and select if you are going to include all EC2 instances in the scans or if you prefer to filter them based on a tag by enabling or disabling the ``Include all EC2 instances in this AWS account and region`` checkbox.
+#. Configure the assessment target:
 
-   If you prefer to install the agents by hand, disable the ``Install the Amazon Inspector Agent on all EC2 instances in this assessment target`` checkbox.
+    #. Choose a name for the assessment target.
 
-   Then, click on ``Next``.
+    #. Select if you are going to include all EC2 instances in the scans or if you prefer to filter them based on a tag by enabling or disabling the ``Include all EC2 instances in this AWS account and region`` checkbox.
 
-    .. thumbnail:: ../../../images/aws/aws-inspector-assessment-target.png
-	:align: center
-	:width: 100%
+    #. If you prefer to install the agents by hand, disable the ``Install the Amazon Inspector Agent on all EC2 instances in this assessment target`` checkbox.
+
+    #. Click on ``Next``.
+
+	.. thumbnail:: ../../../images/aws/aws-inspector-assessment-target.png
+	    :align: center
+	    :width: 100%
 
     .. note:: If you prefer to install the Inspector Classic agents by hand follow the instructions on the `AWS documentation's agent installation section <https://docs.aws.amazon.com/inspector/v1/userguide/inspector_installing-uninstalling-agents.html>`_.
 
-#. Choose the name, duration, and periodicity of the analysis and click on ``Next``.
+#. Configure the assessment template. Choose the name, duration, and periodicity of the analysis and click on ``Next``.
 
     .. thumbnail:: ../../../images/aws/aws-inspector-assessment-template.png
 	:align: center
