@@ -14,38 +14,38 @@ Configure Google DNS logs collection
 
 To collect the DNS queries made to the Google DNS service it is necessary to enable DNS logging. To do that, follow the `Google Cloud DNS logging guide <https://cloud.google.com/dns/docs/monitoring>`_.
 
-Once DNS Cloud logging is configured, the generated logs must be ingested into a Pub/Sub topic so that Wazuh is able to collect them using the `Pub/Sub integration <pubsub>`. To achieve that, it is necessary to define a custom log router.
+Once DNS Cloud logging is configured, the generated logs must be ingested into a Pub/Sub topic so that Wazuh is able to collect them using the :ref:`Pub/Sub integration <pubsub>`. To achieve that, it is necessary to define a custom log router.
 
-#. Visit the `Google Cloud Logging section  <https://console.cloud.google.com/logs/router>`_ and click on the ``CREATE SINK`` button.
+#. Visit the `Google Cloud Logging section  <https://console.cloud.google.com/logs/router>`_ and click on ``CREATE SINK``.
 
-.. thumbnail:: ../../images/gcp/gcp-create-sink-button.png
-    :align: center
-    :width: 100%
+    .. thumbnail:: ../../images/gcp/gcp-create-sink-button.png
+	:align: center
+	:width: 100%
 
-#. Provide a descriptive name for the sink and click on the ``NEXT`` button.
+#. Provide a descriptive name for the sink and click on ``NEXT``.
 
-.. thumbnail:: ../../images/gcp/gcp-sink-dns-name.png
-    :align: center
-    :width: 100%
+    .. thumbnail:: ../../images/gcp/gcp-sink-dns-name.png
+	:align: center
+	:width: 100%
 
-#. Once the name for the sink is chosen, it is necessary to select the sink destination. As sink service, choose **Cloud Pub/Sub topic**, and then create or choose a topic to be used as destination. Then click on the ``NEXT`` button.
+#. Once the name for the sink is chosen, it is necessary to select the sink destination. As sink service, choose **Cloud Pub/Sub topic**, and then create or choose a topic to be used as destination. Then click on ``NEXT``.
 
-.. thumbnail:: ../../images/gcp/gcp-sink-dns-destination.png
-    :align: center
-    :width: 100%
+    .. thumbnail:: ../../images/gcp/gcp-sink-dns-destination.png
+	:align: center
+	:width: 100%
 
 #. Use the following query to collect all the DNS queries.
 
-.. code-block:: none
+    .. code-block:: none
 
-    resource.type = "dns_query"
+	resource.type = "dns_query"
 
 
-#. If it is not necessary to filter any logs out of the sink, click on the ``CREATE SINK`` button to create it.
+#. If it is not necessary to filter any logs out of the sink, click on ``CREATE SINK``.
 
-.. thumbnail:: ../../images/gcp/gcp-create-sink-dns.png
-    :align: center
-    :width: 100%
+    .. thumbnail:: ../../images/gcp/gcp-create-sink-dns.png
+	:align: center
+	:width: 100%
 
 Once this process is finished, you can configure the :ref:`Wazuh GCP Pub/Sub integration <pubsub>` to process the audit logs of the selected resources as usual.
 
@@ -70,4 +70,3 @@ After selecting the ``Exists in`` button, only Google Cloud-related events will 
     :align: center
     :width: 100%
 
-If you need information about all the Google services with audit logs that the Wazuh GCP module could analyze, visit `the Google Cloud documentation <https://cloud.google.com/logging/docs/audit/services>`__.

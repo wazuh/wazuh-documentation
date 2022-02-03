@@ -27,35 +27,35 @@ Configure Google audit logs collection
 
 To enable Google audit logs collection, it is necessary to first ingest the audit logs into a Pub/Sub topic defining a custom log router. 
 
-#. Visit the `Google Cloud Logging section  <https://console.cloud.google.com/logs/router>`_ and click on the ``CREATE SINK`` button.
+#. Visit the `Google Cloud Logging section  <https://console.cloud.google.com/logs/router>`_ and click on ``CREATE SINK``.
 
-.. thumbnail:: ../../images/gcp/gcp-create-sink-button.png
-    :align: center
-    :width: 100%
+    .. thumbnail:: ../../images/gcp/gcp-create-sink-button.png
+	:align: center
+	:width: 100%
 
-#. Provide a descriptive name for the sink and click on the ``NEXT`` button.
+#. Provide a descriptive name for the sink and click on ``NEXT``.
 
-.. thumbnail:: ../../images/gcp/gcp-sink-name.png
-    :align: center
-    :width: 100%
+    .. thumbnail:: ../../images/gcp/gcp-sink-name.png
+	:align: center
+	:width: 100%
 
-#. Once the name for the sink is chosen, it is necessary to select the sink destination. As sink service, choose **Cloud Pub/Sub topic**, and then create or choose a topic to be used as destination. Then click on the ``NEXT`` button.
+#. Once the name for the sink is chosen, it is necessary to select the sink destination. As sink service, choose ``Cloud Pub/Sub topic``, and then create or choose a topic to be used as destination. Then click on ``NEXT``.
 
-.. thumbnail:: ../../images/gcp/gcp-sink-destination.png
-    :align: center
-    :width: 100%
+    .. thumbnail:: ../../images/gcp/gcp-sink-destination.png
+	:align: center
+	:width: 100%
 
 #. Use the following query to collect all the audit logs from every project. It is possible to edit it to only collect audit logs from a particular project.
 
-.. code-block:: none
+    .. code-block:: none
 
-    logName=~("projects/.*/logs/cloudaudit.googleapis.com%2F(activity|data_access|system_event|policy)")
+	logName=~("projects/.*/logs/cloudaudit.googleapis.com%2F(activity|data_access|system_event|policy)")
 
-#. If it is not necessary to filter any logs out of the sink, click on the ``CREATE SINK`` button to create it.
+#. If it is not necessary to filter any logs out of the sink, click on ``CREATE SINK``.
 
-.. thumbnail:: ../../images/gcp/gcp-create-sink.png
-    :align: center
-    :width: 100%
+    .. thumbnail:: ../../images/gcp/gcp-create-sink.png
+	:align: center
+	:width: 100%
 
 Once this process is finished, you can configure the :ref:`Wazuh GCP Pub/Sub integration <pubsub>` to process the audit logs of the selected resources as usual.
 
@@ -65,20 +65,19 @@ Kibana dashboard visualization
 
 After configuring the GCP Pub/Sub module to fetch the audit logs from Google Cloud, it is possible to visualize the alerts generated in the Kibana dashboard.
 
-.. thumbnail:: ../../images/gcp/gcp-overview.png
-    :align: center
-    :width: 100%
+    .. thumbnail:: ../../images/gcp/gcp-overview.png
+	:align: center
+	:width: 100%
 
 Google Cloud logs can be filtered on Kibana by the ``data.gcp.logName`` field:
 
-.. thumbnail:: ../../images/gcp/gcp-kibana-log-filter.png
-    :align: center
-    :width: 100%
-
+    .. thumbnail:: ../../images/gcp/gcp-kibana-log-filter.png
+	:align: center
+	:width: 100%
 After selecting the ``Exists in`` button, only Google Cloud-related events will appear in the Kibana dashboard.
 
-.. thumbnail:: ../../images/gcp/gcp-kibana-filtered-logs.png
-    :align: center
-    :width: 100%
+    .. thumbnail:: ../../images/gcp/gcp-kibana-filtered-logs.png
+	:align: center
+	:width: 100%
 
 Visit the `the Google Cloud documentation <https://cloud.google.com/logging/docs/audit/services>`__ to learn more about the different Google services capable of writing audit logs.
