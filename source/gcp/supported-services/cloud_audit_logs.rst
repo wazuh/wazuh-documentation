@@ -74,6 +74,7 @@ Google Cloud logs can be filtered on Kibana by the ``data.gcp.logName`` field:
     .. thumbnail:: ../../images/gcp/gcp-kibana-log-filter.png
 	:align: center
 	:width: 100%
+
 After selecting the ``Exists in`` button, only Google Cloud-related events will appear in the Kibana dashboard.
 
     .. thumbnail:: ../../images/gcp/gcp-kibana-filtered-logs.png
