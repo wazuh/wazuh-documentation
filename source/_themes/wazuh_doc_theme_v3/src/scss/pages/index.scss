@@ -47,6 +47,9 @@ main {
       display: flex;
       flex-wrap: wrap;
       align-items: flex-start;
+      @include media-max(sm){
+        width: calc(100% - 20px);
+      }
 
       .toctree-l1 {
         margin-left: #{$indexIconSize + 10};
@@ -54,7 +57,6 @@ main {
         margin-bottom: 60px;
         position: relative;
         min-height: 133px;
-        border-left: 3px solid;
         @include media-max(lg){
           margin-left: #{$indexIconSize - 10};
         }
@@ -173,14 +175,73 @@ main {
   }
 }
 
-.index footer {
-  position: static;
-  padding-left: 0;
-  padding-right: 0;
-}
+.index {
+  .container {
+    @include media-min(xxl){
+      max-width: 1400px;
+    }
+  }
 
-.index main {
-  .toctree-l1 > a::before {
+  #quickstart {
+    position: fixed;
+    right: 0;
+    top: calc(#{$indexHeaderHeightXs} + 90px);
+    height: 188px;
+    width: 70px;
+    border-radius: $roundedCorners;
+    flex-direction: row;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 200;
+    @include media-max(sm){
+      width: 50px;
+    }
+    & > a {
+      display: inline-flex;
+      width: 188px;
+      height: 70px;
+      transform: rotate(-90deg);
+      font-size: 20px;
+      font-weight: 400;
+      color: #fff;
+      padding-left: 70px;
+      align-items: center;
+      position: absolute;
+      @include media-max(sm){
+        height: 50px;
+      }
+      &:hover {
+        text-decoration: none;
+      }
+    }
+    &::after {
+      background-repeat: no-repeat;
+      background-size: 50px 50px;
+      background-position: right center;
+      content: '';
+      display: block;
+      width: 50px;
+      height: 50px;
+      position: absolute;
+      bottom: 10px;
+      z-index: 1;
+      pointer-events: none;
+      @include media-max(sm){
+        background-size: 40px 40px;
+        width: 40px;
+        height: 40px;
+      }
+    }
+    &:hover {
+      &::after {
+        background-size: 52px 52px;
+        width: 52px;
+        height: 52px;
+      }
+    }
+  } 
+  .toctree-l1 > a.reference::before {
     background-repeat: no-repeat;
     background-size: 70px 70px;
     background-position: right center;
@@ -193,11 +254,16 @@ main {
     top: -7px;
     pointer-events: none;
     @include media-max(lg){
-      left: -50px;
+      left: -55px;
       width: 50px;
-      height: 55px;
-      background-size: 60px 60px;
+      height: 50px;
+      background-size: 50px 50px;
     }
+  }
+  footer {
+    position: static;
+    padding-left: 0;
+    padding-right: 0;
   }
 }
 
@@ -210,11 +276,10 @@ body {
   .toctree-wrapper {
     > ul {
       .toctree-l1 {
-        border-left-color: $light_ColorPrimary;
         &.collapsible {
           .toggle {
             color: $light_ColorPrimary;
-            border-left-color: $light_ColorCodeBlockBackground;
+            border: none;
             &::after {
               background-image: url('#{$icoPath}svg-icons.svg#chevron-blue-lt');
             }
@@ -245,9 +310,17 @@ body {
   [href$="getting-started/index.html"]::before {
     background-image: url('#{$icoPath}index-icons.svg#getting-started-lt');
   }
+  /* Quickstart */
+  [href="quickstart.html"]::before {
+    background-image: url('#{$icoPath}index-icons.svg#quickstart-lt');
+  }
   /* Installation guide */
   [href$="installation-guide/index.html"]::before {
     background-image: url('#{$icoPath}index-icons.svg#installation-guide-lt');
+  }
+  /* Installation alternatives */
+  [href$="deployment-options/index.html"]::before {
+    background-image: url('#{$icoPath}index-icons.svg#installation-alternatives-lt');
   }
   /* Upgrade guide */
   [href$="upgrade-guide/index.html"]::before {
@@ -265,6 +338,10 @@ body {
   [href$="containers.html"]::before {
     background-image: url('#{$icoPath}index-icons.svg#containers-lt');
   }
+  /* Container security */
+  [href$="container-security/index.html"]::before {
+    background-image: url('#{$icoPath}index-icons.svg#containers-lt');
+  }
   /* Deployment */
   [href$="deployment.html"]::before {
     background-image: url('#{$icoPath}index-icons.svg#deployment-lt');
@@ -273,9 +350,9 @@ body {
   [href$="compliance.html"]::before {
     background-image: url('#{$icoPath}index-icons.svg#compliance-lt');
   }
-  /* Monitorin with Wazuh */
+  /* Cloud security */
   [href$="monitoring.html"]::before {
-    background-image: url('#{$icoPath}index-icons.svg#monitoring-lt');
+    background-image: url('#{$icoPath}index-icons.svg#cloud-security-lt');
   }
   /* Proof of Concept guide */
   [href$="proof-of-concept-guide/index.html"]::before {
@@ -284,6 +361,13 @@ body {
   /* Release notes */
   [href$="release-notes/index.html"]::before {
     background-image: url('#{$icoPath}index-icons.svg#release-notes-lt');
+  }
+  
+  &.index #quickstart {
+    background-color: $light_ColorPrimary;
+    &::after {
+      background-image: url('#{$icoPath}index-icons.svg#quickstart');
+    }
   }
 }
 
@@ -296,7 +380,6 @@ body {
   .toctree-wrapper {
     > ul {
       .toctree-l1 {
-        border-left-color: $dark_ColorHighlightInlineText;
         &.collapsible {
           .toggle {
             color: $dark_ColorPrimary;
@@ -331,9 +414,17 @@ body {
   [href$="getting-started/index.html"]::before {
     background-image: url('#{$icoPath}index-icons.svg#getting-started-dt');
   }
+  /* Quickstart */
+  [href="quickstart.html"]::before {
+    background-image: url('#{$icoPath}index-icons.svg#quickstart-dt');
+  }
   /* Installation guide */
   [href$="installation-guide/index.html"]::before {
     background-image: url('#{$icoPath}index-icons.svg#installation-guide-dt');
+  }
+  /* Installation alternatives */
+  [href$="deployment-options/index.html"]::before {
+    background-image: url('#{$icoPath}index-icons.svg#installation-alternatives-dt');
   }
   /* Upgrade guide */
   [href$="upgrade-guide/index.html"]::before {
@@ -351,6 +442,10 @@ body {
   [href$="containers.html"]::before {
     background-image: url('#{$icoPath}index-icons.svg#containers-dt');
   }
+  /* Container security */
+  [href$="container-security/index.html"]::before {
+    background-image: url('#{$icoPath}index-icons.svg#containers-dt');
+  }
   /* Deployment */
   [href$="deployment.html"]::before {
     background-image: url('#{$icoPath}index-icons.svg#deployment-dt');
@@ -359,9 +454,9 @@ body {
   [href$="compliance.html"]::before {
     background-image: url('#{$icoPath}index-icons.svg#compliance-dt');
   }
-  /* Monitorin with Wazuh */
+  /* Cloud security */
   [href$="monitoring.html"]::before {
-    background-image: url('#{$icoPath}index-icons.svg#monitoring-dt');
+    background-image: url('#{$icoPath}index-icons.svg#cloud-security-dt');
   }
   /* Proof of Concept guide */
   [href$="proof-of-concept-guide/index.html"]::before {
@@ -370,5 +465,12 @@ body {
   /* Release notes */
   [href$="release-notes/index.html"]::before {
     background-image: url('#{$icoPath}index-icons.svg#release-notes-dt');
+  }
+  
+  &.index #quickstart {
+    background-color: $dark_ColorPrimary;
+    &::after {
+      background-image: url('#{$icoPath}index-icons.svg#quickstart');
+    }
   }
 }

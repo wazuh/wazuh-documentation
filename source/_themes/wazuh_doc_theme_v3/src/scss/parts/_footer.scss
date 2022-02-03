@@ -14,13 +14,12 @@ footer {
     padding: 15px 0 15px 30px;
     display: flex;
     align-items: center;
-    
-    @include media-only(xl, xxl) {
-      left: $leftSidebarWidthNarrow;
-    }
-    @include media-min(xxl) {
-      left: $leftSidebarWidth;
-    }
+  }
+  @include media-only(xl, xxl) {
+    left: $leftSidebarWidthNarrow;
+  }
+  @include media-min(xxl) {
+    left: $leftSidebarWidth;
   }
   
   & > .container {
@@ -81,6 +80,32 @@ footer {
 
   .nav-link {
     padding: 0 15px;
+  }
+}
+
+.index footer {
+  & > div {
+    @include media-max(sm){
+      width: calc(100% - 50px);
+      margin-right: auto;
+      margin-left: 0;
+    }
+  }
+  .desktop-footer.row {
+    @include media-max(xl) {
+      flex-direction: column;
+    }
+  }
+  .social-links {
+    @include media-max(xl) {
+      order: 0;
+      justify-content: flex-start;
+    }
+    .nav-link {
+      @include media-max(sm) {
+        padding: 0 11px;
+      }
+    }
   }
 }
 
