@@ -84,9 +84,6 @@ This release includes new features or enhancements.
 Manager
 ^^^^^^^
 
-Added
-~~~~~
-
 - `#8178 <https://github.com/wazuh/wazuh/pull/8178>`_ Wazuh adds support for Arch Linux OS in Vulnerability Detector.
 - `#8749 <https://github.com/wazuh/wazuh/pull/8749>`_ A log message in the ``cluster.log`` file is added to notify that wazuh-clusterd has been stopped.
 - `#9077 <https://github.com/wazuh/wazuh/pull/9077>`_ Wazuh improves API and cluster processes behavior by adding the PID of the ``wazuh-clusterd`` processes and the API when these processes are started in foreground mode.
@@ -101,10 +98,6 @@ Added
   - The manager will only deliver alerts when new vulnerabilities are detected in agents or when they stop applying.
 - `#11031 <https://github.com/wazuh/wazuh/pull/11031>`_ A mechanism to ensure the worker synchronization permissions are reset after a fixed period of time is added.
 - `#11799 <https://github.com/wazuh/wazuh/pull/11799>`_ A new mechanism is now added to create and handle PID files for each child process of the API and cluster. 
-
-Changed
-~~~~~~~
-
 - `#8083 <https://github.com/wazuh/wazuh/pull/8083>`_ The internal handling of agent keys are changed in Remoted to speed up key reloading.
 - `#7885 <https://github.com/wazuh/wazuh/pull/7885>`_ The option ``<server>`` of the Syslog output now supports hostname resolution. 
 - `#7763 <https://github.com/wazuh/wazuh/pull/7763>`_ The product's UNIX user and group are renamed to "wazuh".
@@ -143,18 +136,11 @@ Changed
    - `#11328 <https://github.com/wazuh/wazuh/pull/11328>`_ The cluster's file compression task in the master node is carried out in a separate parallel process.
    - `#11364 <https://github.com/wazuh/wazuh/pull/11364>`_ Now the processing of Integrity files in worker nodes is carried out in a separate parallel process.
    - `#11386 <https://github.com/wazuh/wazuh/pull/11386>`_ Use cluster and API single processing when the wazuh user doesn't have permissions to access ``/dev/shm``.
-
-Removed
-~~~~~~~
-
 - `#8399 <https://github.com/wazuh/wazuh/pull/8399>`_ The data reporting for Rootcheck scans in the agent_control tool has been deprecated.
 - `#8846 <https://github.com/wazuh/wazuh/pull/8846>`_ The old framework functions used to calculate agent status are now removed.
 
 Agent
 ^^^^^
-
-Added
-~~~~~
 
 - `#8016 <https://github.com/wazuh/wazuh/pull/8016>`_ An option is added to allow the agent to refresh the connection to the manager.
 - `#8532 <https://github.com/wazuh/wazuh/pull/8532>`_ A new module to collect audit logs from GitHub is introduced.
@@ -174,10 +160,6 @@ Added
 - `#10168 <https://github.com/wazuh/wazuh/pull/10168>`_ A new field ``DisplayVersion`` to Syscollector to help Vulnerability Detector match vulnerabilities for Windows is added.
 - `#10148 <https://github.com/wazuh/wazuh/pull/10148>`_ Wazuh adds support for macOS agent upgrade via WPK.
 - `#8632 <https://github.com/wazuh/wazuh/pull/8632>`_ Wazuh adds Logcollector support for macOS logs (Unified Logging System).
-
-Changed
-~~~~~~~
-
 - `#8381 <https://github.com/wazuh/wazuh/pull/8381>`_ The agent now reports the version of the running AIX operating system to the manager. 
 - `#8604 <https://github.com/wazuh/wazuh/pull/8604>`_ The reliability of the user ID parsing in FIM who-data mode on Linux is improved.
 - `#10230 <https://github.com/wazuh/wazuh/pull/10230>`_ AWS ``service_endpoint`` parameter description to suit FIPS endpoints too is reworded.
@@ -197,17 +179,10 @@ Changed
 - `#3659 <https://github.com/wazuh/wazuh/pull/3659>`_ Agent logs for inability to resolve the manager hostname now have info level.
 - `#11276 <https://github.com/wazuh/wazuh/pull/11276>`_ An ID number to connection enrollment logs is added.
 - `#10838 <https://github.com/wazuh/wazuh/pull/10838>`_ Standardized the use of the ``only_logs_after`` parameter in the external integration modules.
-
-Removed
-~~~~~~~
-
 - `#10900 <https://github.com/wazuh/wazuh/pull/10900>`_ The oscap module files are removed as it was already deprecated in version 4.0.0.
 
 RESTful API
 ^^^^^^^^^^^
-
-Added
-~~~~~
 
 - `#7988 <https://github.com/wazuh/wazuh/pull/7988>`_ A new ``PUT /agents/reconnect`` endpoint is added to force agents reconnection to the manager.
 - `#6761 <https://github.com/wazuh/wazuh/pull/6761>`_ The ``select`` parameter is added to the ``GET /security/users``, ``GET /security/roles``, ``GET /security/rules`` and ``GET /security/policies`` endpoints.
@@ -228,10 +203,6 @@ Added
 - `#10457 <https://github.com/wazuh/wazuh/pull/10457>`_ New filters are added to agents' upgrade endpoints.
 - `#8288 <https://github.com/wazuh/wazuh/pull/8288>`_ New MITRE API endpoints and framework functions are added to access all the MITRE information.
 - `#10947 <https://github.com/wazuh/wazuh/pull/10947>`_ Show agent-info permissions flag is added when using cluster_control and in the ``GET /cluster/healthcheck`` API endpoint.
-
-Changed
-~~~~~~~
-
 - `#7490 <https://github.com/wazuh/wazuh/pull/7490>`_ The SSL protocol configuration parameter is renamed.
 - `#8827 <https://github.com/wazuh/wazuh/pull/8827>`_ The API spec examples and JSON body examples are reviewed and updated.
 - The performance of several API endpoints is improved. This is specially appreciable in environments with a big number of agents:
@@ -257,10 +228,6 @@ Changed
 - `#10905 <https://github.com/wazuh/wazuh/pull/10905>`_ The specific module healthchecks in API integration tests environment is improved.
 - `#10916 <https://github.com/wazuh/wazuh/pull/10916>`_ The thread pool executors for process pool executors to improve API availability is changed.
 - `#11410 <https://github.com/wazuh/wazuh/pull/11410>`_ Changed HTTPS options to use files instead of relative paths.
-
-Removed
-~~~~~~~
-
 - `#8599 <https://github.com/wazuh/wazuh/pull/8599>`_ The select parameter from GET /agents/stats/distinct endpoint is removed.
 - `#8099 <https://github.com/wazuh/wazuh/pull/8099>`_ The ``GET /mitre`` endpoint is removed.
 - `#11410 <https://github.com/wazuh/wazuh/pull/11410>`_ The option to set log ``path`` in the configuration is deprecated.
@@ -268,9 +235,6 @@ Removed
 
 Ruleset
 ^^^^^^^
-
-Added
-~~~~~
 
 - `#11306 <https://github.com/wazuh/wazuh/pull/11306>`_ Carbanak detection rules
 - `#11309 <https://github.com/wazuh/wazuh/pull/11309>`_ Cisco FTD rules and decoders
@@ -309,10 +273,6 @@ Added
 - `#11286 <https://github.com/wazuh/wazuh/pull/11286>`_ SCA policy for Solaris 11.4
 - `#11122 <https://github.com/wazuh/wazuh/pull/11122>`_ Sophos UTM Firewall ruleset
 - `#11357 <https://github.com/wazuh/wazuh/pull/11357>`_ Wazuh-api ruleset
-
-Changed
-~~~~~~~
-
 - `#11016 <https://github.com/wazuh/wazuh/pull/11016>`_ Updated audit rules.
 - `#11177 <https://github.com/wazuh/wazuh/pull/11177>`_ Updated AWS s3 ruleset.
 - `#11344 <https://github.com/wazuh/wazuh/pull/11344>`_  Updated Exim 4 decoder and rules to latest format.
@@ -330,9 +290,6 @@ Changed
 Other
 ^^^^^
 
-Changed
-~~~~~~~
-
 - `#10247 <https://github.com/wazuh/wazuh/pull/10247>`_ External SQLite library dependency is upgraded to version 3.36.
 - `#10247 <https://github.com/wazuh/wazuh/pull/10247>`_ External BerkeleyDB library dependency is upgraded to version 18.1.40.
 - `#10247 <https://github.com/wazuh/wazuh/pull/10247>`_ External OpenSSL library dependency is upgraded to version 1.1.1l.
@@ -344,9 +301,6 @@ Changed
 
 Wazuh Kibana plugin
 ^^^^^^^^^^^^^^^^^^^
-
-Added
-~~~~~
 
 - `#3639 <https://github.com/wazuh/wazuh-kibana-app/pull/3639>`_ Wazuh adds the ability to filter the results for the ``Network Ports`` table in the ``Inventory data`` section.
 - `#3324 <https://github.com/wazuh/wazuh-kibana-app/pull/3324>`_ A new endpoint service is added to collect the frontend logs into a file.
@@ -376,9 +330,6 @@ Added
 - `#3446 <https://github.com/wazuh/wazuh-kibana-app/pull/3446>`_ Testing logs using the Ruletest Test don't display the rule information if not matching a rule.
 - `#3649 <https://github.com/wazuh/wazuh-kibana-app/pull/3649>`_ The format permissions are changed in the FIM inventory.
 - `#3686 <https://github.com/wazuh/wazuh-kibana-app/pull/3686>`_ `#3728 <https://github.com/wazuh/wazuh-kibana-app/pull/3728>`_ The request to agents that do not return data is now changed to avoid unnecessary heavy load requests.
-
-Changed
-~~~~~~~
 
 
 Resolved issues
@@ -536,9 +487,9 @@ Reference                                                         Description
 Wazuh Kibana plugin
 ^^^^^^^^^^^^^^^^^^^
 
-==============================================================    =============
+================================================================  =============
 Reference                                                         Description
-==============================================================    =============
+================================================================  =============
 `#3384 <https://github.com/wazuh/wazuh-kibana-app/pull/3384>`_    The creation of log files is fixed.
 `#3484 <https://github.com/wazuh/wazuh-kibana-app/pull/3484>`_    The double fetching alerts count when pinning/unpinning the agent in Mitre Att&ck/Framework is fixed.
 `#3490 <https://github.com/wazuh/wazuh-kibana-app/pull/3490>`_    A refactor of the query Config is changed from Angular to React.
@@ -583,21 +534,21 @@ Reference                                                         Description
 `#3738 <https://github.com/wazuh/wazuh-kibana-app/pull/3738>`_    The ``Maximum call stack size exceeded`` error exporting key-value pairs of a CDB List is fixed.
 `#3741 <https://github.com/wazuh/wazuh-kibana-app/pull/3741>`_    The regex lookahead and lookbehind for safari are fixed.
 `#3744 <https://github.com/wazuh/wazuh-kibana-app/pull/3744>`_    Vulnerabilities Inventory flyout details filters are fixed.
-`#3748 <https://github.com/wazuh/wazuh-kibana-app/pull/3748 >`_   Fixed Dashboard PDF report error when switching pinned agent state 
-`#3753 <https://github.com/wazuh/wazuh-kibana-app/pull/3753 >`_   Fixed the rendering of the command to deploy new Windows agent not working in some Kibana versions 
-`#3772 <https://github.com/wazuh/wazuh-kibana-app/pull/3772 >`_   Fixed action buttons overlaying to the request text in Tools/API Console 
-`#3774 <https://github.com/wazuh/wazuh-kibana-app/issues/3774 >`_ Fix `Rule ID` value in reporting tables related to top results  
-`#3787 <https://github.com/wazuh/wazuh-kibana-app/pull/3787 >`_   Fixed github/office365 multi-select filters suggested values 
-`#3790 <https://github.com/wazuh/wazuh-kibana-app/pull/3790 >`_   Fix updating the aggregation data of Panel section when changing the time filter 
-`#3804 <https://github.com/wazuh/wazuh-kibana-app/pull/3804 >`_   Removed the button to remove an agent for a group in the agents' table when it is the default group
-`#3776 <https://github.com/wazuh/wazuh-kibana-app/pull/3776 >`_   Fixed add single agent to group
-`#3777 <https://github.com/wazuh/wazuh-kibana-app/pull/3777 >`_   Fix the implicit filters from the search bar can be removables 
-`#3778 <https://github.com/wazuh/wazuh-kibana-app/pull/3778 >`_   Fixed Office365/Github module the side pa nel tab 
-`#3780 <https://github.com/wazuh/wazuh-kibana-app/pull/3780 >`_   Fixed no wrap text in MITRE ATT&CK intelligence table 
-`#3781 <https://github.com/wazuh/wazuh-kibana-app/pull/3781 >`_   Fixed visualization tooltip position 
-`#3787 <https://github.com/wazuh/wazuh-kibana-app/pull/3787 >`_   Fixed github/office365 multi-select filters suggested values 
-`#3796 <https://github.com/wazuh/wazuh-kibana-app/pull/3796 >`_   Fixed the styles on the evolution card 
-==============================================================    =============
+`#3748 <https://github.com/wazuh/wazuh-kibana-app/pull/3748>`_    Fixed Dashboard PDF report error when switching pinned agent state 
+`#3753 <https://github.com/wazuh/wazuh-kibana-app/pull/3753>`_    Fixed the rendering of the command to deploy new Windows agent not working in some Kibana versions 
+`#3772 <https://github.com/wazuh/wazuh-kibana-app/pull/3772>`_    Fixed action buttons overlaying to the request text in Tools/API Console 
+`#3774 <https://github.com/wazuh/wazuh-kibana-app/issues/3774>`_  Fix `Rule ID` value in reporting tables related to top results  
+`#3787 <https://github.com/wazuh/wazuh-kibana-app/pull/3787>`_    Fixed github/office365 multi-select filters suggested values 
+`#3790 <https://github.com/wazuh/wazuh-kibana-app/pull/3790>`_    Fix updating the aggregation data of Panel section when changing the time filter 
+`#3804 <https://github.com/wazuh/wazuh-kibana-app/pull/3804>`_    Removed the button to remove an agent for a group in the agents' table when it is the default group
+`#3776 <https://github.com/wazuh/wazuh-kibana-app/pull/3776>`_    Fixed add single agent to group
+`#3777 <https://github.com/wazuh/wazuh-kibana-app/pull/3777>`_    Fix the implicit filters from the search bar can be removables 
+`#3778 <https://github.com/wazuh/wazuh-kibana-app/pull/3778>`_    Fixed Office365/Github module the side pa nel tab 
+`#3780 <https://github.com/wazuh/wazuh-kibana-app/pull/3780>`_    Fixed no wrap text in MITRE ATT&CK intelligence table 
+`#3781 <https://github.com/wazuh/wazuh-kibana-app/pull/3781>`_    Fixed visualization tooltip position 
+`#3787 <https://github.com/wazuh/wazuh-kibana-app/pull/3787>`_    Fixed github/office365 multi-select filters suggested values 
+`#3796 <https://github.com/wazuh/wazuh-kibana-app/pull/3796>`_    Fixed the styles on the evolution card 
+================================================================  =============
 
 
 Changelogs
