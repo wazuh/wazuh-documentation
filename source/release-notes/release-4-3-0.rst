@@ -287,24 +287,13 @@ Ruleset
 - `#11263 <https://github.com/wazuh/wazuh/pull/11263>`_ Updated SonicWall rules decoder.
 - `#11388 <https://github.com/wazuh/wazuh/pull/11388>`_ Updated SSHD ruleset.
 
-Other
-^^^^^
-
-- `#10247 <https://github.com/wazuh/wazuh/pull/10247>`_ External SQLite library dependency is upgraded to version 3.36.
-- `#10247 <https://github.com/wazuh/wazuh/pull/10247>`_ External BerkeleyDB library dependency is upgraded to version 18.1.40.
-- `#10247 <https://github.com/wazuh/wazuh/pull/10247>`_ External OpenSSL library dependency is upgraded to version 1.1.1l.
-- `#10927 <https://github.com/wazuh/wazuh/pull/10927>`_ External Google Test library  dependency is upgraded to version 1.11.
-- `#11436 <https://github.com/wazuh/wazuh/pull/11436>`_ External Aiohttp library dependency is upgraded to version 3.8.1.
-- `#11436 <https://github.com/wazuh/wazuh/pull/11436>`_ External Werkzeug library dependency is upgraded to version 2.0.2.
-- `#11436 <https://github.com/wazuh/wazuh/pull/11436>`_ Embedded Python is upgraded to version 3.9.9.
-
 
 Wazuh Kibana plugin
 ^^^^^^^^^^^^^^^^^^^
 
 - `#3639 <https://github.com/wazuh/wazuh-kibana-app/pull/3639>`_ Wazuh adds the ability to filter the results for the ``Network Ports`` table in the ``Inventory data`` section.
 - `#3324 <https://github.com/wazuh/wazuh-kibana-app/pull/3324>`_ A new endpoint service is added to collect the frontend logs into a file.
-- `#3262 <https://github.com/wazuh/wazuh-kibana-app/issues/3262>`_ `#3327 <https://github.com/wazuh/wazuh-kibana-app/pull/3327>`_ `#3321 <https://github.com/wazuh/wazuh-kibana-app/pull/3321>`_ `#3367 <https://github.com/wazuh/wazuh-kibana-app/pull/3367>`_ `#3373 <https://github.com/wazuh/wazuh-kibana-app/pull/3373>`_ `#3374 <https://github.com/wazuh/wazuh-kibana-app/pull/3374>`_ `#3390 <https://github.com/wazuh/wazuh-kibana-app/pull/3390>`_ `#3410 <https://github.com/wazuh/wazuh-kibana-app/pull/3410>`_ `#3408 <https://github.com/wazuh/wazuh-kibana-app/pull/3408>`_ `#3429 <https://github.com/wazuh/wazuh-kibana-app/pull/3429>`_ `#3427 <https://github.com/wazuh/wazuh-kibana-app/pull/3427>`_ `#3417 <https://github.com/wazuh/wazuh-kibana-app/pull/3417>`_ `#3462 <https://github.com/wazuh/wazuh-kibana-app/pull/3462>`_ `#3451 <https://github.com/wazuh/wazuh-kibana-app/pull/3451>`_ `#3442 <https://github.com/wazuh/wazuh-kibana-app/pull/3442>`_ `#3480 <https://github.com/wazuh/wazuh-kibana-app/pull/3480>`_ `#3472 <https://github.com/wazuh/wazuh-kibana-app/pull/3472>`_ `#3434 <https://github.com/wazuh/wazuh-kibana-app/pull/3434>`_ `#3392 <https://github.com/wazuh/wazuh-kibana-app/pull/3392>`_ `#3404 <https://github.com/wazuh/wazuh-kibana-app/pull/3404>`_ `#3432 <https://github.com/wazuh/wazuh-kibana-app/pull/3432>`_ `#3415 <https://github.com/wazuh/wazuh-kibana-app/pull/3415>`_ `#3469 <https://github.com/wazuh/wazuh-kibana-app/pull/3469>`_ `#3448 <https://github.com/wazuh/wazuh-kibana-app/pull/3448>`_ `#3465 <https://github.com/wazuh/wazuh-kibana-app/pull/3465>`_ `#3464 <https://github.com/wazuh/wazuh-kibana-app/pull/3464>`_ `#3478 <https://github.com/wazuh/wazuh-kibana-app/pull/3478>`_ The frontend handle errors strategy is improved: UI, Toasts, console log, and log in file.
+- `#3327 <https://github.com/wazuh/wazuh-kibana-app/pull/3327>`_ `#3321 <https://github.com/wazuh/wazuh-kibana-app/pull/3321>`_ `#3367 <https://github.com/wazuh/wazuh-kibana-app/pull/3367>`_ `#3373 <https://github.com/wazuh/wazuh-kibana-app/pull/3373>`_ `#3374 <https://github.com/wazuh/wazuh-kibana-app/pull/3374>`_ `#3390 <https://github.com/wazuh/wazuh-kibana-app/pull/3390>`_ `#3410 <https://github.com/wazuh/wazuh-kibana-app/pull/3410>`_ `#3408 <https://github.com/wazuh/wazuh-kibana-app/pull/3408>`_ `#3429 <https://github.com/wazuh/wazuh-kibana-app/pull/3429>`_ `#3427 <https://github.com/wazuh/wazuh-kibana-app/pull/3427>`_ `#3417 <https://github.com/wazuh/wazuh-kibana-app/pull/3417>`_ `#3462 <https://github.com/wazuh/wazuh-kibana-app/pull/3462>`_ `#3451 <https://github.com/wazuh/wazuh-kibana-app/pull/3451>`_ `#3442 <https://github.com/wazuh/wazuh-kibana-app/pull/3442>`_ `#3480 <https://github.com/wazuh/wazuh-kibana-app/pull/3480>`_ `#3472 <https://github.com/wazuh/wazuh-kibana-app/pull/3472>`_ `#3434 <https://github.com/wazuh/wazuh-kibana-app/pull/3434>`_ `#3392 <https://github.com/wazuh/wazuh-kibana-app/pull/3392>`_ `#3404 <https://github.com/wazuh/wazuh-kibana-app/pull/3404>`_ `#3432 <https://github.com/wazuh/wazuh-kibana-app/pull/3432>`_ `#3415 <https://github.com/wazuh/wazuh-kibana-app/pull/3415>`_ `#3469 <https://github.com/wazuh/wazuh-kibana-app/pull/3469>`_ `#3448 <https://github.com/wazuh/wazuh-kibana-app/pull/3448>`_ `#3465 <https://github.com/wazuh/wazuh-kibana-app/pull/3465>`_ `#3464 <https://github.com/wazuh/wazuh-kibana-app/pull/3464>`_ `#3478 <https://github.com/wazuh/wazuh-kibana-app/pull/3478>`_ The frontend handle errors strategy is improved: UI, Toasts, console log, and log in file.
 - `#3196 <https://github.com/wazuh/wazuh-kibana-app/pull/3196>`_ Fields status and type are added in vulnerabilities table.
 - `#3368 <https://github.com/wazuh/wazuh-kibana-app/pull/3368>`_ `#3344 <https://github.com/wazuh/wazuh-kibana-app/pull/3344>`_ `#3726 <https://github.com/wazuh/wazuh-kibana-app/pull/3726>`_ Intelligence tab is added to Mitre Att&ck module.
 - `#3424 <https://github.com/wazuh/wazuh-kibana-app/pull/3424>`_ Sample data for office365 events are added.
@@ -319,18 +308,58 @@ Wazuh Kibana plugin
 - `#3525 <https://github.com/wazuh/wazuh-kibana-app/pull/3525>`_ New fields are added in the Inventory table and Flyout Details.
 - `#3691 <https://github.com/wazuh/wazuh-kibana-app/pull/3691>`_ Columns selector are added in agents table.
 - `#3742 <https://github.com/wazuh/wazuh-kibana-app/pull/3742>`_ A new workflow is added for creating wazuh packages.
+- `#3783 <https://github.com/wazuh/wazuh-kibana-app/pull/3783>`_ ``template`` and ``fields`` checks in the health check run correctly according to the app configuration.
+- `#3804 <https://github.com/wazuh/wazuh-kibana-app/pull/3804>`_ A toast message let's you know when there is an error creating a new group.
 - `#3121 <https://github.com/wazuh/wazuh-kibana-app/pull/3121>`_ Ossec to wazuh is changed in all sample-data files.
 - `#3279 <https://github.com/wazuh/wazuh-kibana-app/pull/3279>`_ Empty fields are modified in FIM tables and ``syscheck.value_name`` in discovery now shows an empty tag for visual clarity.
 - `#3346 <https://github.com/wazuh/wazuh-kibana-app/pull/3346>`_ The Mitre tactics and techniques resources are adapted to use the API endpoints.
 - `#3517 <https://github.com/wazuh/wazuh-kibana-app/pull/3517>`_ The filterManager subscription is moved to the hook useFilterManager.
 - `#3529 <https://github.com/wazuh/wazuh-kibana-app/pull/3529>`_ Filter is changed from "is" to "is one of" in the custom searchbar.
 - `#3494 <https://github.com/wazuh/wazuh-kibana-app/pull/3494>`_ Refactor ``modules-defaults.js`` to define what buttons and components are rendered in each module tab.
-- `#3663 <https://github.com/wazuh/wazuh-kibana-app/pull/3663>`_ The deprecated and new references for the ``authd`` configuration are updated.
+- `#3663 <https://github.com/wazuh/wazuh-kibana-app/pull/3663>`_ `#3806 <https://github.com/wazuh/wazuh-kibana-app/pull/3806>`_ The deprecated and new references for the ``authd`` configuration are updated.
 - `#3549 <https://github.com/wazuh/wazuh-kibana-app/pull/3549>`_ Time subscription is added to Discover component.
 - `#3446 <https://github.com/wazuh/wazuh-kibana-app/pull/3446>`_ Testing logs using the Ruletest Test don't display the rule information if not matching a rule.
 - `#3649 <https://github.com/wazuh/wazuh-kibana-app/pull/3649>`_ The format permissions are changed in the FIM inventory.
 - `#3686 <https://github.com/wazuh/wazuh-kibana-app/pull/3686>`_ `#3728 <https://github.com/wazuh/wazuh-kibana-app/pull/3728>`_ The request to agents that do not return data is now changed to avoid unnecessary heavy load requests.
+- `#3788 <https://github.com/wazuh/wazuh-kibana-app/pull/3788>`_ Rebranding. Replaced the brand logos, set module icons with brand colors
+- `#3795 <https://github.com/wazuh/wazuh-kibana-app/pull/3795>`_ Changed user for sample data management
+- `#3792 <https://github.com/wazuh/wazuh-kibana-app/pull/3792>`_ Changed agent install codeblock copy button and powershell terminal warning
+- `#3811 <https://github.com/wazuh/wazuh-kibana-app/pull/3811>`_ Refactored as the plugin platform name and references is managed.
 
+
+Wazuh Splunk app
+^^^^^^^^^^^^^^^^
+
+- Support for Wazuh 4.3.0
+- `#1166 <https://github.com/wazuh/wazuh-splunk/pull/1166>`_ Added Alias field to API to facilitate distinguishing between different managers  
+- `#1126 <https://github.com/wazuh/wazuh-splunk/pull/1226>`_ Ensure backwards compatibility 
+- `#1148 <https://github.com/wazuh/wazuh-splunk/issues/1148>`_ Added a Security Section to manage security related configurations 
+- `#1171 <https://github.com/wazuh/wazuh-splunk/pull/1171>`_ Added Crud Policies on security section.
+- `#1168 <https://github.com/wazuh/wazuh-splunk/pull/1168>`_ Added Crud Roles on security section. 
+- `#1169 <https://github.com/wazuh/wazuh-splunk/pull/1169>`_ Added Crud Role Mapping on security section.  
+- `#1173 <https://github.com/wazuh/wazuh-splunk/pull/1173>`_ Added Crud Users on security section.
+- `#1147 <https://github.com/wazuh/wazuh-splunk/issues/1147>`_ Created a permissions validation service. 
+- `#1164 <https://github.com/wazuh/wazuh-splunk/issues/1164>`_ Implemented the access control on the App's views. 
+- `#1155 <https://github.com/wazuh/wazuh-splunk/issues/1155>`_ Implemented a service to fetch Wazuh's users and its roles. 
+- `#1156 <https://github.com/wazuh/wazuh-splunk/issues/1156>`_ Implemented a server to fetch Splunk's users and its roles. 
+- `#1149 <https://github.com/wazuh/wazuh-splunk/issues/1149>`_ Added a run_as checkbox to the API configuration  
+- `#1174 <https://github.com/wazuh/wazuh-splunk/pull/1174>`_ Added the ability to use the Authorization Context login method. 
+- `#1228 <https://github.com/wazuh/wazuh-splunk/issues/1228>`_  Extensions now can only be changed by Splunk Admins 
+- `#1186 <https://github.com/wazuh/wazuh-splunk/pull/1186>`_ Wazuh rebranding 
+- `#1172 <https://github.com/wazuh/wazuh-splunk/pull/1172>`_ Updated deprecated authd options 
+- `#1236 <https://github.com/wazuh/wazuh-splunk/pull/1236>`_ Refactored branding color styles to improve maintainability  
+
+
+Other
+^^^^^
+
+- `#10247 <https://github.com/wazuh/wazuh/pull/10247>`_ External SQLite library dependency is upgraded to version 3.36.
+- `#10247 <https://github.com/wazuh/wazuh/pull/10247>`_ External BerkeleyDB library dependency is upgraded to version 18.1.40.
+- `#10247 <https://github.com/wazuh/wazuh/pull/10247>`_ External OpenSSL library dependency is upgraded to version 1.1.1l.
+- `#10927 <https://github.com/wazuh/wazuh/pull/10927>`_ External Google Test library  dependency is upgraded to version 1.11.
+- `#11436 <https://github.com/wazuh/wazuh/pull/11436>`_ External Aiohttp library dependency is upgraded to version 3.8.1.
+- `#11436 <https://github.com/wazuh/wazuh/pull/11436>`_ External Werkzeug library dependency is upgraded to version 2.0.2.
+- `#11436 <https://github.com/wazuh/wazuh/pull/11436>`_ Embedded Python is upgraded to version 3.9.9.
 
 Resolved issues
 ---------------
@@ -472,18 +501,6 @@ Reference                                                         Description
 `#11214 <https://github.com/wazuh/wazuh/pull/11214>`_             Fixed rules id for Microsoft Windows PowerShell.
 ==============================================================    =============
 
-Others
-^^^^^^
-
-==============================================================    =============
-Reference                                                         Description
-==============================================================    =============
-`#9168 <https://github.com/wazuh/wazuh/pull/9168>`_               Error detection in the CURL helper library is fixed.
-`#10899 <https://github.com/wazuh/wazuh/pull/10899>`_             External BerkeleyDB library support for GCC 11 is fixed.
-`#11086 <https://github.com/wazuh/wazuh/pull/11086>`_             An installation error due to missing OS minor version on CentOS Stream is fixed.
-`#11455 <https://github.com/wazuh/wazuh/pull/11455>`_             Fixed an installation error due to missing command hostname on OpenSUSE Tumbleweed.
-==============================================================    =============
-
 Wazuh Kibana plugin
 ^^^^^^^^^^^^^^^^^^^
 
@@ -534,6 +551,7 @@ Reference                                                         Description
 `#3738 <https://github.com/wazuh/wazuh-kibana-app/pull/3738>`_    The ``Maximum call stack size exceeded`` error exporting key-value pairs of a CDB List is fixed.
 `#3741 <https://github.com/wazuh/wazuh-kibana-app/pull/3741>`_    The regex lookahead and lookbehind for safari are fixed.
 `#3744 <https://github.com/wazuh/wazuh-kibana-app/pull/3744>`_    Vulnerabilities Inventory flyout details filters are fixed.
+`#3604 <https://github.com/wazuh/wazuh-kibana-app/pull/3604>`_    Removed api selector toggle from settings menu since it performed no useful function
 `#3748 <https://github.com/wazuh/wazuh-kibana-app/pull/3748>`_    Fixed Dashboard PDF report error when switching pinned agent state 
 `#3753 <https://github.com/wazuh/wazuh-kibana-app/pull/3753>`_    Fixed the rendering of the command to deploy new Windows agent not working in some Kibana versions 
 `#3772 <https://github.com/wazuh/wazuh-kibana-app/pull/3772>`_    Fixed action buttons overlaying to the request text in Tools/API Console 
@@ -541,14 +559,40 @@ Reference                                                         Description
 `#3787 <https://github.com/wazuh/wazuh-kibana-app/pull/3787>`_    Fixed github/office365 multi-select filters suggested values 
 `#3790 <https://github.com/wazuh/wazuh-kibana-app/pull/3790>`_    Fix updating the aggregation data of Panel section when changing the time filter 
 `#3804 <https://github.com/wazuh/wazuh-kibana-app/pull/3804>`_    Removed the button to remove an agent for a group in the agents' table when it is the default group
-`#3776 <https://github.com/wazuh/wazuh-kibana-app/pull/3776>`_    Fixed add single agent to group
-`#3777 <https://github.com/wazuh/wazuh-kibana-app/pull/3777>`_    Fix the implicit filters from the search bar can be removables 
-`#3778 <https://github.com/wazuh/wazuh-kibana-app/pull/3778>`_    Fixed Office365/Github module the side pa nel tab 
-`#3780 <https://github.com/wazuh/wazuh-kibana-app/pull/3780>`_    Fixed no wrap text in MITRE ATT&CK intelligence table 
-`#3781 <https://github.com/wazuh/wazuh-kibana-app/pull/3781>`_    Fixed visualization tooltip position 
-`#3787 <https://github.com/wazuh/wazuh-kibana-app/pull/3787>`_    Fixed github/office365 multi-select filters suggested values 
-`#3796 <https://github.com/wazuh/wazuh-kibana-app/pull/3796>`_    Fixed the styles on the evolution card 
 ================================================================  =============
+
+
+Wazuh Splunk app
+^^^^^^^^^^^^^^^^
+
+==============================================================    =============
+Reference                                                         Description
+==============================================================    =============
+`#91137 <https://github.com/wazuh/wazuh-splunk/pull/1137>`_       Fixed agent's name overflow in the overview
+`#1138 <https://github.com/wazuh/wazuh-splunk/pull/1138>`_        Fixed on save rules or decoders files
+`#1141 <https://github.com/wazuh/wazuh-splunk/pull/1141>`_        Fixed unnecessary table requests when resizing browser window
+`#1215 <https://github.com/wazuh/wazuh-splunk/pull/1215>`_        Agent counters are now centered
+`#1216 <https://github.com/wazuh/wazuh-splunk/pull/1216>`_        Fixed being able to add an agent without create permissions  
+`#1217 <https://github.com/wazuh/wazuh-splunk/pull/1217>`_        Fixed the underlapping navigation bar for Security options
+`#1223 <https://github.com/wazuh/wazuh-splunk/pull/1223>`_        Fixed error when agents view is re-initialized 
+`#1230 <https://github.com/wazuh/wazuh-splunk/pull/1230>`_        Fixed not being able to see actions after adding first API
+`#1232 <https://github.com/wazuh/wazuh-splunk/pull/1232>`_        Fixed agent status chart data disappearing
+`#1237 <https://github.com/wazuh/wazuh-splunk/pull/1237>`_        Fixed the agent status graph so that it shows the correct amount of agents 
+==============================================================    =============
+
+
+Others
+^^^^^^
+
+==============================================================    =============
+Reference                                                         Description
+==============================================================    =============
+`#9168 <https://github.com/wazuh/wazuh/pull/9168>`_               Error detection in the CURL helper library is fixed.
+`#10899 <https://github.com/wazuh/wazuh/pull/10899>`_             External BerkeleyDB library support for GCC 11 is fixed.
+`#11086 <https://github.com/wazuh/wazuh/pull/11086>`_             An installation error due to missing OS minor version on CentOS Stream is fixed.
+`#11455 <https://github.com/wazuh/wazuh/pull/11455>`_             Fixed an installation error due to missing command hostname on OpenSUSE Tumbleweed.
+==============================================================    =============
+
 
 
 Changelogs
