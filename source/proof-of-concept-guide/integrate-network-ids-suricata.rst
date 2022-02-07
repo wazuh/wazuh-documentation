@@ -77,7 +77,7 @@ No action is required. Wazuh automatically parses data from ``/var/log/suricata/
 Query the alerts
 ----------------
 
-You can visualize the alert data in the Wazuh Kibana plugin. To do this, go to the **Security events** module and add the filters in the search bar to query the alerts.
+You can visualize the alert data in the Wazuh dashboard. To do this, go to the **Security events** module and add the filters in the search bar to query the alerts.
 
 - ``rule.groups:suricata``
 

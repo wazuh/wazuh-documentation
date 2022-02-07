@@ -68,7 +68,7 @@ Steps to generate alerts
 Query the alerts
 ----------------
 
-You can visualize the alert data in the Wazuh Kibana plugin. To do this, go to the **Security events** module and add the filters in the search bar to query the alerts.
+You can visualize the alert data in the Wazuh dashboard. To do this, go to the **Security events** module and add the filters in the search bar to query the alerts.
 
 - ``rule.id:(533 OR 100051)``
 
@@ -76,4 +76,3 @@ You can visualize the alert data in the Wazuh Kibana plugin. To do this, go to t
           :title: Detecting unauthorized processes - Netcat
           :align: center
           :wrap_image: No
-

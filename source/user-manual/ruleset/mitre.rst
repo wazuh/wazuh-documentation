@@ -12,7 +12,7 @@ This feature allows the user to customize the alert information to include speci
 
 - `Configuration example`_
 - `Alert example`_
-- `Moving on to Kibana`_
+- `Moving on to Wazuh dashboard`_
 
 Configuration example
 ---------------------
@@ -131,10 +131,10 @@ You have to see an alert similar to this one :
 
 MITRE information appears inside rule information, as we are seeing. The alert displays the MITRE ATT&CK ID and their associated tactics and technique.
 
-Moving on to Kibana
--------------------
+Moving on to Wazuh dashboard
+----------------------------
 
-We will check the alert is shown correctly on Kibana. Open it and add a filter as shown in the figure.
+We will check the alert is shown correctly on Wazuh dashboard. Open it and add a filter as shown in the figure.
 
 .. thumbnail:: ../../images/manual/mitre/mitre-1.png
     :title: mitre

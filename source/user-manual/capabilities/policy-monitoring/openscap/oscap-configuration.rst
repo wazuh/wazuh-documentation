@@ -107,7 +107,7 @@ When the evaluation is complete you will see the results as OSSEC alerts:
   Rule: 81542 (level 4) -> 'OpenSCAP Report overview: Score less than 80'
   oscap: msg: "report-overview", id: "47T7_Qd08gm4y8TSoD53", policy: "ssg-rhel7-ds.xml", profile: "xccdf_org.ssgproject.content_profile_pci-dss", score: "56.835060" / "100.000000", severity of failed rules: "high": "1", "medium": "9", "low": "34", "n/a": "0".
 
-``Kibana``
+``Wazuh dashboard``
 
 Note that each field is extracted to facilitate searches and analysis.
 
@@ -117,7 +117,7 @@ Note that each field is extracted to facilitate searches and analysis.
 
 **Step 4: Dashboards**
 
-Finally, you can explore all results using the OpenSCAP dashboards for Kibana.
+Finally, you can explore all results using the OpenSCAP module.
 
 .. thumbnail:: ../../../../images/wodles-oscap/pci-dashboard.png
     :align: center
@@ -197,7 +197,7 @@ When the evaluation is completed you will see the results as OSSEC alerts:
   oscap: msg: "report-overview", id: "I0iLEGFi4iTkxjnL9LWQ", policy: "com.redhat.rhsa-RHEL7.ds.xml", profile: "no-profiles", score: "92.617447" / "100.000000", severity of failed rules: "high": "8", "medium": "14", "low": "0", "n/a": "0".
 
 
-``Kibana``
+``Wazuh dashboard``
 
 Note that each field is extracted to facilitate searches and analysis.
 
@@ -212,7 +212,7 @@ Note that each field is extracted to facilitate searches and analysis.
 
 **Step 4: Dashboards**
 
-Finally, you can explore all scan results using the OpenSCAP dashboards for Kibana.
+Finally, you can explore all scan results using the OpenSCAP module.
 
 .. thumbnail:: ../../../../images/wodles-oscap/dashboard.png
     :align: center

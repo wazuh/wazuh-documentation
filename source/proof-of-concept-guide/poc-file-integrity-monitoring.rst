@@ -48,7 +48,7 @@ Steps to generate the alerts
 Query the alerts
 ----------------
 
-You can visualize the alert data in the Wazuh Kibana plugin. To do this, go to the **Security events** module and add the filters in the search bar to query the alerts.
+You can visualize the alert data in the Wazuh dashboard. To do this, go to the **Security events** module and add the filters in the search bar to query the alerts.
 
 - ``syscheck.path: "{path_to_the_modified_file}"``
 
@@ -56,4 +56,3 @@ You can visualize the alert data in the Wazuh Kibana plugin. To do this, go to t
           :title: File integrity monitoring
           :align: center
           :wrap_image: No
-
