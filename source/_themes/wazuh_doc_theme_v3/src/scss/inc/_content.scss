@@ -22,6 +22,27 @@
     padding-top: 0;
   }
   
+  .container {
+    &[class*="align-"] {
+      padding: 0;
+      display: block;
+      max-width: 100%;
+    }
+    &.align-left {
+      text-align: left;
+    }
+    &.align-center {
+      text-align: center;
+    }
+    &.align-right {
+      text-align: right;
+    }
+    &.spaced > * {
+      display: inline-block;
+      margin: 5px;
+    }
+  }
+  
   .align-center {
     margin-left: auto;
     margin-right: auto;

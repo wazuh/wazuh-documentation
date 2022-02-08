@@ -13,14 +13,5 @@
 }
 
 .wazuh-image-wrapper {
-  align-self: center;
-  &.align-right {
-    align-self: flex-end;
-  }
-  .align-left {
-    align-self: flex-start;
-  }
-  .align-center {
-    align-self: center;
-  }
+  display: inline;
 }
