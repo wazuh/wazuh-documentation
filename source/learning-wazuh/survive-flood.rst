@@ -16,7 +16,7 @@ an unstopping stream of log messages rushing at your logging system at a rate of
 thousands of events per second.  When such a device or devices suddenly take up vastly more than their fair
 share of network and log processing resources, it can become widely disruptive.
 
-Log flooding can saturate your network bandwidth and/or overtax your Wazuh and Elastic system components
+Log flooding can saturate your network bandwidth and/or overtax your Wazuh central components
 while one gigabyte after another of (often repetitive) log messages are being reanalyzed and churned to disk.
 
 Thankfully the Wazuh agent has a flood protection mechanism to prevent one system from creating
@@ -99,7 +99,7 @@ Wazuh manager does not record alerts on rules of severity levels less than 3,
 so for this lab we will lower the threshold:
 
 #. Edit ``/var/ossec/etc/ossec.conf`` and change ``<log_alert_level>`` from 3 to 1 so that the ``<alerts>``
-   section looks like the one below.  Now alerts of all severity levels except level 0 will show up in Kibana.
+   section looks like the one below.  Now alerts of all severity levels except level 0 will show up in Wazuh dashboard.
 
     .. code-block:: xml
 
@@ -169,10 +169,10 @@ Generate a log flood on linux-agent
    screen at a rate well above our 50 EPS limit.
 
 
-See what happened according to Kibana
--------------------------------------
+See what happened according to Wazuh dashboard
+----------------------------------------------
 
-#. Query Kibana for "firehose".  Click on **[Add]** next to "full_log" for readability.
+#. Query Wazuh dashboard for "firehose".  Click on **[Add]** next to "full_log" for readability.
    Change the scale from "Auto" to "Second".
 
    .. thumbnail:: ../images/learning-wazuh/labs/flood-1.png
@@ -194,7 +194,7 @@ See what happened according to Kibana
     :width: 100%
 
 
-#. Query Kibana for "agent_flooding".  Click **[Add]** additionally next to "rule.description" and "data.level" for readability.
+#. Query Wazuh dashboard for "agent_flooding".  Click **[Add]** additionally next to "rule.description" and "data.level" for readability.
 
    .. thumbnail:: ../images/learning-wazuh/labs/flood-2.png
     :title: Flood

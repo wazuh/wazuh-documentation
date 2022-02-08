@@ -24,7 +24,7 @@ In this lab, we will see how ``syscollector`` is configured by default to run on
 the Wazuh Manager and on the agents. We will also configure ``vulnerability-detector``
 on the Wazuh Manager to periodically scan the collected inventory data for known
 vulnerable packages.
-We will observe relevant log messages and vulnerability alerts in Kibana including
+We will observe relevant log messages and vulnerability alerts in Wazuh dashboard including
 a dashboard dedicated to this.  We will also interact with the Wazuh API to more
 deeply mine the inventory data, and even take a look at the databases where it is
 stored.
@@ -194,10 +194,10 @@ and try ``grep vulnerability-detector: /var/ossec/logs/ossec.log`` on the manage
 
 
 
-See the alerts in Kibana
-------------------------
+See the alerts in Wazuh dashboard
+---------------------------------
 
-Search Kibana for ``vulnerability-detector``, selecting some of the more helpful
+Search Wazuh dashboard for ``vulnerability-detector``, selecting some of the more helpful
 fields for viewing like below:
 
 .. thumbnail:: ../images/learning-wazuh/labs/vuln-found-list.png
@@ -216,7 +216,7 @@ Expand one of the records to see all the information available:
 
 Note all the available fields and remember that the different components of Wazuh
 may be configured to act differently depending on the fields of each alert, as
-well as the ability to create visualizations and filtering search results in Kibana.
+well as the ability to create visualizations and filtering search results in Wazuh dashboard.
 
 .. note::
 
@@ -228,7 +228,7 @@ well as the ability to create visualizations and filtering search results in Kib
 Look deeper with the Wazuh API
 ------------------------------
 
-Up to now we have only seen the Wazuh API enable the Wazuh Kibana plugin to
+Up to now we have only seen the Wazuh API enable the Wazuh dashboard to
 interface directly with the Wazuh manager.  However, you can also access the
 Wazuh API directly from your own scripts or from the command line with curl.  This is
 especially helpful here to obtain environment-wide package information.
@@ -497,12 +497,12 @@ The ``sys_`` table are populated by ``syscollector``.
 
         ...
 
-Wazuh Kibana Plugin
--------------------
+Wazuh dashboard
+---------------
 
 While the Wazuh API and SQLite databases let you get at the nitty-gritty data,
 usually the most beautiful place to see your vulnerability detection results
-is in the Wazuh Kibana plugin itself.  Both in the **Overview** section as well as
+is in the Wazuh dashboard.  Both in the **Overview** section as well as
 when you have drilled down into a specific agent, you can open the **Vulnerabilities**
 tab to see a nice dashboard of this information:
 

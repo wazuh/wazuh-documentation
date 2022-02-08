@@ -91,7 +91,7 @@ Execute the following request to the web server:
 
 Notice the maliciously crafted User-Agent header to be sent, including injected shell commands.
 
-Search Kibana for **rule.id:31166** (the Shellshock rule).  You should find a record like this:
+Search Wazuh dashboard for **rule.id:31166** (the Shellshock rule).  You should find a record like this:
 
 .. thumbnail:: ../images/learning-wazuh/labs/shellshock.png
     :title: Flood
@@ -351,10 +351,10 @@ attacker.  It will be in the "Persistent Routes:" section of the output.
             ===========================================================================
 
 
-Use Kibana to review active response actions taken on all agents during this lab
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+Use Wazuh dashboard to review active response actions taken on all agents during this lab
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-Search Kibana for "active_response" over a large enough time window to encompass
+Search Wazuh dashboard for "active_response" over a large enough time window to encompass
 this lab.  Observe firewall blocks and null routes being repeatedly applied and
 removed across all agents.
 

@@ -18,10 +18,10 @@ In order to change a default rule, then the ``overwrite="yes"`` option must be u
 In this lab you will raise the severity level of a specific rule in the Wazuh Ruleset.
 This can be achieved using the Web Interface or directly editing the files on the Wazuh Manager.
 
-Using the Kibana Wazuh plugin
------------------------------
+Using Wazuh dashboard
+---------------------
 
-1. Open the Wazuh User Interface in Kibana, go into the Management Tab and select the Ruleset
+1. Open the Wazuh dashboard, go into the Management Tab and select the Ruleset
 
 .. thumbnail:: ../images/learning-wazuh/labs/rules-1.png
     :title: Management
@@ -83,7 +83,7 @@ Notice how the web interface will automatically display an error if the xml synt
 
 
 7. After this is done attempt to log in to the **linux-agent** using SSH and incorrect credentials.
-   Then look for the event on Kibana by searching for **5716** and you will see the the level of the
+   Then look for the event on Wazuh dashboard by searching for **5716** and you will see the the level of the
    alert for the most recent event will be **7**:
 
 .. thumbnail:: ../images/learning-wazuh/labs/rules-5.png

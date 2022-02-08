@@ -19,7 +19,7 @@ monitoring one or more transit points on your network, or directly on existing U
 traffic.  Because Suricata is capable of generating JSON logs of NIDS events, it integrates beautifully with Wazuh.
 
 In this lab we will deploy Suricata on linux-agent and elastic-server such that Wazuh picks up the Suricata NIDS events
-so can be seen in Kibana.  Instead of making the same Wazuh config changes to both Linux agents, we
+so can be seen in Wazuh dashboard.  Instead of making the same Wazuh config changes to both Linux agents, we
 will make use of Wazuh's centralized configuration feature to push out the extra Suricata-related Wazuh configuration
 to the appropriate agents. Lastly, we will do a little GeoIP enrichment of the Suricata NIDS events with Logstash, showing
 how easily we can augment existing log records with additional context information to make them more valuable.
@@ -232,12 +232,12 @@ the shared configuration with their local configuration.
 
    Each agent should pull down and apply this additional configuration almost immediately. You can find the fetched configuration on each agent at ``/var/ossec/etc/shared/agent.conf``.
 
-See Suricata NIDS events in Kibana
-----------------------------------
+See Suricata NIDS events in Wazuh dashboard
+-------------------------------------------
 
 #. On each Linux agent, rerun the NIDS-tripping curl command again: ``curl http://testmyids.com``
 
-#. Search Kibana for ``rule.id:86601``.  That is the rule that notices Suricata alerts.  Pick these fields for readability:
+#. Search Wazuh dashboard for ``rule.id:86601``.  That is the rule that notices Suricata alerts.  Pick these fields for readability:
 
     - agent.name
     - data.alert.signature
@@ -250,7 +250,7 @@ See Suricata NIDS events in Kibana
 #. Expand one of the events and look over the vast amount of information available.
 
 .. note::
-    Yellow warning triangles on Kibana fields indicate that Kibana has never seen these new fields before and needs its field list refreshed.
+    Yellow warning triangles on Wazuh dashboard fields indicate that Wazuh dashboard has never seen these new fields before and needs its field list refreshed.
     Click on the Management gear icon on the left, then on "Index Patterns", and then on the circular double arrow button in the upper
     right, and then on **[Refresh fields]**.  Click back on the Discover icon on the upper left to return to your search and notice that when
     you expand a record, the warning triangles on the new fields are gone.
@@ -333,7 +333,7 @@ Observe how Wazuh decodes Suricata events
 Spice things up with a little GeoIP
 -----------------------------------
 
-You may have noticed that there were no Geolocation fields in the Kibana records for Suricata events.  In Wazuh's default configuration, Geolocation is only performed on fields ``data.srcip``, ``data.win.eventdata.ipAddress`` and ``data.aws.sourceIPAddress`` , while with Suricata events we would need to act on fields
+You may have noticed that there were no Geolocation fields in the Wazuh dashboard records for Suricata events.  In Wazuh's default configuration, Geolocation is only performed on fields ``data.srcip``, ``data.win.eventdata.ipAddress`` and ``data.aws.sourceIPAddress`` , while with Suricata events we would need to act on fields
 ``data.src_ip`` and ``data.dest_ip``.  We are going to change our configuration to show more information from ``data.src_ip``:
 
 #. On wazuh-manager, edit ``/usr/share/filebeat/module/wazuh/alerts/ingest/pipeline.json`` adding the new IP address field inside ``processors``, along the other Geolocation fields:
@@ -351,7 +351,7 @@ You may have noticed that there were no Geolocation fields in the Kibana records
          }
 
 
-#. We now need to delete the current pipeline. In Kibana, go to ``Dev Tools`` clicking on the Wrench icon. Then execute the following:
+#. We now need to delete the current pipeline. In Wazuh dashboard, go to ``Dev Tools`` clicking on the Wrench icon. Then execute the following:
 
     .. code-block:: none
 
@@ -371,7 +371,7 @@ You may have noticed that there were no Geolocation fields in the Kibana records
 
         # curl ``http://testmyids.com``.
 
-#. Look through the new Suricata events in Kibana, observing they now have source geoip fields populated.  Private IP addresses of course cannot be geolocated.
+#. Look through the new Suricata events in Wazuh dashboard, observing they now have source geoip fields populated.  Private IP addresses of course cannot be geolocated.
 
 .. thumbnail:: ../images/learning-wazuh/labs/suricata-geoip.png
     :title: Flood
@@ -386,4 +386,4 @@ If you have time, you could also...
 
 #. Build another CDB list of signature_id values of rules you choose to classify as "noise" and want to suppress entirely.  Then make another child rule with a severity level of 0.
 
-#. Experiment with making Suricata-specific visualization in Kibana.  Create a new dashboard to pull them all together.
+#. Experiment with making Suricata-specific visualization in Wazuh dashboard.  Create a new dashboard to pull them all together.
