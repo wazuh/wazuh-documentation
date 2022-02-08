@@ -2,6 +2,8 @@
 
 .. meta::
   :description: Learn more about how to register Wazuh agents on Linux, Windows, or macOS X in this section of our documentation.
+
+:orphan:
   
 .. _register_agents:
 
