@@ -26,6 +26,17 @@ body {
   }
 }
 
+.search-box {
+  .search-form {
+    height: 46px;
+    .btn-search {
+      width: 44px;
+      height: 44px;
+      background-size: 41px 41px;
+    }
+  }
+}
+
 main {
   padding-left: 0;
   padding-right: 0;
@@ -143,6 +154,10 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  
+  .form-control {
+    box-shadow: none;
+  }
 
   .navbar-brand {
     font-size: 22px;
