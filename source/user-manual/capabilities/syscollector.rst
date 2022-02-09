@@ -401,7 +401,7 @@ The following table shows the operating systems that this module currently suppo
 Using Syscollector information to trigger alerts
 ------------------------------------------------
 
-.. note:: This capability is not available in Wazuh 4.2 but it does in greater versions.
+.. note:: This capability is not available in Wazuh 4.2 and 4.3 but it does in greater versions.
 
 Since Wazuh 3.9 version, ``Syscollector`` module information can be used to trigger alerts and show that information in the alerts' description.
 
