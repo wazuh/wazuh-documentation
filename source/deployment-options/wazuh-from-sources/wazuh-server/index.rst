@@ -205,7 +205,7 @@ To install the required dependencies to build the python interpreter, follow the
 Installing Filebeat
 -------------------
 
-Filebeat is a data shipping tool that is installed on the Wazuh server to securely forward alerts and archived events to Elasticsearch.Once the Wazuh manager is installed, you may install Filebeat as well as the other Elastic Stack components from `sources <https://www.elastic.co/guide/en/beats/devguide/current/beats-contributing.html>`_ or using :ref:`packages  <packages>`.
+Filebeat is a data shipping tool that is installed on the Wazuh server to securely forward alerts and archived events to Wazuh indexer. Once the Wazuh manager is installed, you may install Filebeat as well as the other Wazuh central components from `sources <https://www.elastic.co/guide/en/beats/devguide/current/beats-contributing.html>`_ or using :ref:`packages  <packages>`.
 
 
 Uninstall
