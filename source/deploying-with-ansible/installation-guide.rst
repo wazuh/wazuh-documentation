@@ -1,5 +1,9 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+    :description: Check out this installation guide to create an environment consisting of a Wazuh server, an Elastic Stack server, and a Wazuh agent. 
+  
+  
 .. _wazuh_ansible_guide:
 
 Installation Guide
@@ -22,5 +26,5 @@ The main objective of this section is to guide any user in the installation of a
 
     guide/install-ansible
     guide/install-wazuh-manager
-    guide/install-elk-server
+    guide/install-opendistro-server
     guide/install-wazuh-agent

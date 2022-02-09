@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Wazuh was born as a fork of OSSEC. In this section we explain the value we add to the OSSEC project and how to move to Wazuh from OSSEC.
@@ -47,7 +47,7 @@ Intrusion detection
 * Updated ruleset with new log analysis rules and decoders.
 * Native rules for Suricata, making use of JSON decoder.
 * Integration with `OwlH project <https://www.owlh.net>`_ for unified NIDS management.
-* Support for IP reputation databases (e.g. `AlienVault OTX <https://www.alienvault.com/open-threat-exchange>`_).
+* Support for IP addresses reputation databases (e.g. `AlienVault OTX <https://www.alienvault.com/open-threat-exchange>`_).
 * Native integration with Linux auditing kernel subsystem and Windows audit policies to capture who-data for FIM events.
 
 Integration with cloud providers
@@ -103,7 +103,7 @@ The following guides describe how to migrate your existing OSSEC installation to
    Server, OSSEC 2.8.3 or higher, Wazuh 3.x, :ref:`Upgrade OSSEC server <ossec_server>`
    Agent, OSSEC 2.8.3 or higher, Wazuh 3.x, :ref:`Upgrade OSSEC agent <ossec_agent>`
 
-The migration of Elastic stack, in the case that you already have it installed, is beyond the scope of Wazuh documentation. We recommend you visit our guides for :ref:`Installing Elastic Stack <elasticsearch_cluster>`.
+The migration of Elastic Stack, in the case that you already have it installed, is beyond the scope of Wazuh documentation. We recommend you visit our guides for :ref:`Installing Elastic Stack <elasticsearch_cluster>`.
 
 .. note::
     OSSEC agents are compatible with the Wazuh server. You can even have different versions of Wazuh and OSSEC agents reporting to a centralized Wazuh server. Having said that, it is recommended to keep both server and agents updated to the latest version. For interactive help, our `mailing list <https://groups.google.com/d/forum/wazuh>`_ is available. You can subscribe by sending an email to ``wazuh+subscribe@googlegroups.com``.

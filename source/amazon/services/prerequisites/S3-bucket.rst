@@ -1,5 +1,8 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+  :description: Learn how to configure an Amazon S3, an object storage service that delivers scalability, data availability, security, and performance.
+  
 .. _s3_bucket:
 
 Configuring an S3 Bucket

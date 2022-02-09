@@ -1,8 +1,8 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Learn more about how to register Wazuh agents on Linux, Windows, or macOS X in this section of our documentation.
-  
+
 .. _register_agents:
 
 Registering Wazuh agents
@@ -10,7 +10,8 @@ Registering Wazuh agents
 
 .. note::
 
-	Since Wazuh 4.0, by default, the agent registers automatically with the manager through enrollment. Configuration details can be found on the :ref:`Enrollment section <reference_ossec_client>`.
+	Since Wazuh 4.0, by default, the agent registers automatically with the manager through enrollment. Configuration details can be found on the :ref:`Enrollment section <agent-enrollment>`.
+
 
 The security event data collection from the Wazuh agent requires enabling the communication with the Wazuh manager.
 
@@ -66,26 +67,26 @@ To register the Wazuh agent, choose the tab corresponding to the Wazuh agent's h
   .. group-tab:: Windows host
 
 
-    Open a Powershell or CMD session in the Wazuh agent's host as an ``Administrator``.
+    Open a PowerShell or CMD session in the Wazuh agent's host as an ``Administrator``.
 
     .. include:: ../../_templates/windows/installation_directory.rst
 
 
     #. To register the Wazuh agent, run the ``agent-auth.exe`` utility, using the Wazuh manager's IP address:
-    
-    
+
+
         .. tabs::
-    
-          .. group-tab:: Powershell
-    
+
+          .. group-tab:: PowerShell
+
            .. code-block:: console
-    
-              # &'C:\Program Files (x86)\ossec-agent\agent-auth.exe' -m <manager_IP> 
-    
+
+              # &'C:\Program Files (x86)\ossec-agent\agent-auth.exe' -m <manager_IP>
+
           .. group-tab:: Windows cmd
-    
+
            .. code-block:: console
-    
+
               # "C:\Program Files (x86)\ossec-agent\agent-auth.exe" -m <manager_IP>
 
 
@@ -140,14 +141,18 @@ There are also other easy registration methods. The choice depends on the partic
 +-----------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Registration method                                                                                 | Description                                                                                                                                                         |
 +=====================================================================================================+=====================================================================================================================================================================+
-| :ref:`Using command line (CLI) <command-line-registration>`                                         | Manual registeration using ``manage_agents`` utility. Requires extracting the registration key from the Wazuh manager and inserting it manually in the Wazuh agent. |
+| :ref:`Using command line (CLI) <command-line-registration>`                                         | Manual registration using ``manage_agents`` utility. Requires extracting the registration key from the Wazuh manager and inserting it manually in the Wazuh agent.  |
 +-----------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| :ref:`Using Wazuh API <restful-api-registration>`                                                   | Uses a simple Wazuh API request from any host. Requires adding returned registration key manually to the Wazuh agent using ``manage_agents`` utility.               |
+| :ref:`Using Wazuh API <restful-api-registration>`                                                   | Uses a simple Wazuh API request from any host. Requires adding returned registration key manually to the Wazuh agent.                                               |
 +-----------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | :ref:`Using registration service with password authorization <password-authorization-registration>` | Registration using ``agent-auth`` utility. Allows additional protection of the Wazuh manager from unauthorized registrations by using a password.                   |
 +-----------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | :ref:`Using registration service with host verification <host-verification-registration>`           | Registration using ``agent-auth`` utility. Ensures that the connection between the right Wazuh agent and the right Wazuh manager is established.                    |
 +-----------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| :ref:`Using the enrollment method <agent-enrollment>`                                               | Registration process that provides the user with an automated mechanism to enroll agents with minimal configuration steps.                                          |
++-----------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
 
 To learn more about the Wazuh agent registration process, please read the :ref:`registering Wazuh agents - additional information <registering_agent_theory>`.
 
@@ -161,5 +166,7 @@ In case of problems during registration, visit the :ref:`registering Wazuh agent
     restful-api-registration
     password-authorization-registration
     host-verification-registration
+    agent-enrollment
     registering-agents-theory
     registering-agents-troubleshooting
+    

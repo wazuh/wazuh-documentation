@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: The pre-built Wazuh Virtual Machine includes all Wazuh components ready-to-use. Test all Wazuh capabilities with our OVA.  
@@ -15,7 +15,7 @@ Download the `virtual appliance (OVA) <https://packages.wazuh.com/|CURRENT_MAJOR
 
     - CentOS 7
     - Wazuh manager: |WAZUH_LATEST_OVA|
-    - Open Distro for Elasticsearch: |ELASTICSEARCH_LATEST_OVA|
+    - Open Distro for Elasticsearch: |OPEN_DISTRO_LATEST|
     - Filebeat-OSS: |ELASTICSEARCH_LATEST_OVA|
     - Kibana: |ELASTICSEARCH_LATEST_OVA|
     - Wazuh Kibana plugin: |WAZUH_LATEST_OVA|-|ELASTICSEARCH_LATEST_OVA|
@@ -36,6 +36,7 @@ All components included in this virtual image are configured to work out-of-the-
   - Open Distro for Elasticsearch: ``/etc/elasticsearch/elasticsearch.yml``
   - Filebeat-OSS: ``/etc/filebeat/filebeat.yml``
   - Kibana: ``/etc/kibana/kibana.yml``
+  - Wazuh Kibana plugin: ``/usr/share/kibana/data/wazuh/config/wazuh.yml``  
 
 In case of using VirtualBox, once the virtual machine is imported it may run into issues caused by time skew when VirtualBox synchronizes the time of the guest machine. To avoid this situation, enable the ``Hardware Clock in UTC Time`` option in the ``System`` tab of the virtual machine configuration.
 

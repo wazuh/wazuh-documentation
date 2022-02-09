@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. Section marks used on this document:
 .. h0 ======================================
@@ -332,9 +332,9 @@ agent:restart
 
 agent:upgrade
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`GET /agents/{agent_id}/upgrade_result <operation/api.controllers.agent_controller.get_agent_upgrade>` (`agent:id`_, `agent:group`_)
-- :api-ref:`PUT /agents/{agent_id}/upgrade <operation/api.controllers.agent_controller.put_upgrade_agent>` (`agent:id`_, `agent:group`_)
-- :api-ref:`PUT /agents/{agent_id}/upgrade_custom <operation/api.controllers.agent_controller.put_upgrade_custom_agent>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /agents/upgrade_result <operation/api.controllers.agent_controller.get_agent_upgrade>` (`agent:id`_, `agent:group`_)
+- :api-ref:`PUT /agents/upgrade <operation/api.controllers.agent_controller.put_upgrade_agents>` (`agent:id`_, `agent:group`_)
+- :api-ref:`PUT /agents/upgrade_custom <operation/api.controllers.agent_controller.put_upgrade_custom_agents>` (`agent:id`_, `agent:group`_)
 
 
 Ciscat
@@ -664,7 +664,7 @@ vulnerability:read
 - :api-ref:`GET /vulnerability/{agent_id} <operation/api.controllers.vulnerability_controller.get_vulnerability_agent>` (`agent:id`_, `agent:group`_)
 - :api-ref:`GET /vulnerability/{agent_id}/last_scan <operation/api.controllers.vulnerability_controller.get_last_scan_agent>` (`agent:id`_, `agent:group`_)
 
-
+.. _api_rbac_reference_default_policies:
 
 Default policies
 ----------------
@@ -1096,6 +1096,8 @@ Allow reading agents' vulnerabilities information.
         - agent:id:*
       effect: allow
 
+
+.. _api_rbac_reference_default_roles:
 
 Default roles
 -------------

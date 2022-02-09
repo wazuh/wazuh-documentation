@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 .. meta::
   :description: Check out our documentation to learn about registering Wazuh agents and the registration service with password authorization. 
   
@@ -7,11 +7,11 @@
 Registration service with password authorization
 ================================================
 
-This method is similar to the :ref:`simple registration service <simple-registration-service>`, except that it provides additional protection of the Wazuh manager from unauthorized registrations by using a password.
+This method is similar to the :ref:`simple registration service <simple-registration-service>`, except that it provides protection from unauthorized registrations by requiring a password during the registration process.
 
-Before the registration process, enabling the password authorization option and creating the registration password has to be done on the Wazuh manager. This password can be used for the subsequent agent registrations with the same Wazuh manager.
+Password protected registration is enabled in the Wazuh manager configuration. To protect a multi-node cluster from unauthorized agent registrations, password authorization must be enabled on every one of the Wazuh manager nodes. Doing this on every node prevents unauthorized registrations to the cluster through a node not properly configured.
 
-When those steps are completed, the Wazuh agent can be registered using the ``agent-auth`` utility and providing the password. After the registration, the Wazuh agent has to be configured to indicate the destination where the collected security events will be sent.
+When the configuration is complete, running the ``agent-auth`` utility providing the appropriate password will register the Wazuh agent. After the registration, the Wazuh agent has to be configured to indicate the destination where the collected security events will be sent.
 
 Enabling the password authorization option and creating a registration password on the Wazuh manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

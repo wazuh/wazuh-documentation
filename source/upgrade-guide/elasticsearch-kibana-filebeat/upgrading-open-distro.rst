@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: This section of the Wazuh documentation guides through the upgrade process of Elasticsearch, Filebeat, and Kibana for Open Distro for Elasticsearch distribution.
@@ -111,7 +111,7 @@ Upgrading Elasticsearch
 This guide explains how to perform a rolling upgrade, which allows you to shut down one node at a time for minimal disruption of service.
 The cluster remains available throughout the process.
 
-In the commands below ``127.0.0.1`` IP address is used. If Elasticsearch is bound to a specific IP address, replace ``127.0.0.1`` with your Elasticsearch IP. If using ``http``, the option ``-k`` must be omitted and if not using user/password authentication, ``-u`` must be omitted.
+In the commands below ``127.0.0.1`` IP address is used. If Elasticsearch is bound to a specific IP address, replace ``127.0.0.1`` with your Elasticsearch IP address. If using ``http``, the option ``-k`` must be omitted and if not using user/password authentication, ``-u`` must be omitted.
 
 #. Disable shard allocation:
 

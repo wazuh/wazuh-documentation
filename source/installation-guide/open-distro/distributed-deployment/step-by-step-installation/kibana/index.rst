@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Learn more about Kibana prerequisites, instalation and configuration, and how to add it to the Wazuh repository.
@@ -134,7 +134,6 @@ With the first access attempt, the Wazuh Kibana plugin may prompt a message that
        password: wazuh-wui
        run_as: false
 
-Once Kibana is running it is necessary to assign each user its corresponding role. To learn more visit the :ref:`Setting up the Wazuh Kibana plugin <connect_kibana_app>` section. 
 
 To uninstall Kibana, visit the :ref:`uninstalling section <uninstall_kibana>`.
 

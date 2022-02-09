@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Know more about the Wazuh Log Data Collection capability in this section of our documentation: how it works, how to configure it, FAQs, and more. 
@@ -22,5 +22,6 @@ The memory and CPU requirements of the Wazuh agent are insignificant since its p
 
         how-it-works
         how-to-collect-wlogs
+        how-to-collect-macoslogs
         log-data-configuration
         log-data-faq

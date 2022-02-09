@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. _ansible-wazuh-manager:
 
@@ -46,8 +46,13 @@ Setting the variables in a separate YAML file is recommended when configuring th
     enable: true
     port: 1515
     use_source_ip: 'no'
-    force_insert: 'no'
-    force_time: 0
+    force:
+      - enabled: 'yes'
+        disconnected_time:
+          enabled: yes
+          value: '1h'
+        after_registration_time: '1h'
+        key_mismatch: 'yes'
     purge: 'no'
     use_password: 'no'
     ssl_agent_ca: null

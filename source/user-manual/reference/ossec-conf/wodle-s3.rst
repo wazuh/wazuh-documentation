@@ -1,11 +1,12 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
+
+.. meta::
+    :description: Learn more about the local configuration of Wazuh. In this section of the documentation you can check out more about the wodle name “aws-s3”. 
 
 .. _wodle_s3:
 
 wodle name="aws-s3"
 ===================
-
-.. versionadded:: 3.2.0
 
 .. topic:: XML section name
 
@@ -25,9 +26,6 @@ Main options
 
 - `disabled`_
 - `interval`_
-- `access_key`_
-- `secret_key`_
-- `remove_from_bucket`_
 - `run_on_start`_
 - `skip_on_error`_
 - `bucket type`_
@@ -38,14 +36,6 @@ Main options
 | Main options          | Allowed values              | Mandatory/Optional |
 +=======================+=============================+====================+
 | `disabled`_           | yes, no                     | Mandatory          |
-+-----------------------+-----------------------------+--------------------+
-| `bucket`_             | Any valid bucket name       | Deprecated         |
-+-----------------------+-----------------------------+--------------------+
-| `access_key`_         | Alphanumerical key          | Deprecated         |
-+-----------------------+-----------------------------+--------------------+
-| `secret_key`_         | Alphanumerical key          | Deprecated         |
-+-----------------------+-----------------------------+--------------------+
-| `remove_from_bucket`_ | yes, no                     | Optional           |
 +-----------------------+-----------------------------+--------------------+
 | `skip_on_error`_      | yes, no                     | Optional           |
 +-----------------------+-----------------------------+--------------------+
@@ -72,58 +62,6 @@ Disables the AWS-S3 wodle.
 | **Allowed values** | yes, no                     |
 +--------------------+-----------------------------+
 
-bucket
-^^^^^^
-
-.. deprecated::3.6.0
-
-Name of the S3 bucket from where logs are read.
-
-+--------------------+-----------------------------+
-| **Default value**  | N/A                         |
-+--------------------+-----------------------------+
-| **Allowed values** | Any valid bucket name       |
-+--------------------+-----------------------------+
-
-access_key
-^^^^^^^^^^
-
-.. deprecated::3.6.0
-
-The access key ID for the IAM user with the permission to read logs from the bucket.
-
-+--------------------+--------------------------+
-| **Default value**  | N/A                      |
-+--------------------+--------------------------+
-| **Allowed values** | Any alphanumerical key.  |
-+--------------------+--------------------------+
-
-secret_key
-^^^^^^^^^^
-
-.. deprecated::3.6.0
-
-The secret key created for the IAM user with the permission to read logs from the bucket.
-
-+--------------------+--------------------------+
-| **Default value**  | N/A                      |
-+--------------------+--------------------------+
-| **Allowed values** | Any alphanumerical key.  |
-+--------------------+--------------------------+
-
-remove_from_bucket
-^^^^^^^^^^^^^^^^^^
-
-.. deprecated::3.6.0
-
-Define if you want to remove logs from your S3 bucket after they are read by the wodle.
-
-+--------------------+---------+
-| **Default value**  | no      |
-+--------------------+---------+
-| **Allowed values** | yes, no |
-+--------------------+---------+
-
 skip_on_error
 ^^^^^^^^^^^^^
 
@@ -138,7 +76,7 @@ When unable to process and parse a CloudTrail log, skip the log and continue pro
 bucket type
 ^^^^^^^^^^^
 
-Defines a bucket to process. Must have its attribute ``type`` defined. (Supports multiple instances of this option).
+Defines a bucket to process. It must have its ``type`` attribute defined. It supports multiple instances of this option.
 
 Bucket options
 ~~~~~~~~~~~~~~
@@ -155,6 +93,7 @@ Bucket options
 - `bucket\\path_suffix`_
 - `bucket\\only_logs_after`_
 - `bucket\\regions`_
+- `bucket\\aws_organization_id`_
 - `bucket\\discard_regex`_
 - `bucket\\sts_endpoint`_
 - `bucket\\service_endpoint`_
@@ -202,7 +141,7 @@ Bucket options
 type
 ^^^^
 
-Specifies type of bucket. Is an attribute of the ``bucket`` tag.
+Specifies type of bucket. It is an attribute of the ``bucket`` tag.
 
 +--------------------+------------------------------------------------+
 | **Default value**  | N/A                                            |
@@ -326,16 +265,18 @@ If defined, the suffix for the bucket. Only works with buckets which contain the
 | **Allowed values** | Valid path    |
 +--------------------+---------------+
 
+.. _only_logs_aws_buckets:
+
 bucket\\only_logs_after
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-A valid date, in YYYY-MMM-DD format, that only logs from after that date will be parsed.  All logs from before that date will be skipped.
+A valid date, in YYYY-MMM-DD format. Only logs from that date onwards will be parsed.
 
-+--------------------+-------------+
-| **Default value**  | 1970-JAN-01 |
-+--------------------+-------------+
-| **Allowed values** | Valid date  |
-+--------------------+-------------+
++--------------------+-----------------------------------+
+| **Default value**  | Date of execution at ``00:00:00`` |
++--------------------+-----------------------------------+
+| **Allowed values** | Valid date                        |
++--------------------+-----------------------------------+
 
 bucket\\regions
 ^^^^^^^^^^^^^^^
@@ -605,13 +546,13 @@ Service\\only_logs_after
 
 .. versionadded:: 4.0.0
 
-A valid date, in YYYY-MMM-DD format. Only those logs from after that date will be parsed, the logs from before that date will be skipped. Only works for CloudWatch Logs service.
+A valid date, in YYYY-MMM-DD format. Only logs from that date onwards will be parsed. This option is only available for the CloudWatch Logs service.
 
-+--------------------+-------------+
-| **Default value**  | 1970-JAN-01 |
-+--------------------+-------------+
-| **Allowed values** | Valid date  |
-+--------------------+-------------+
++--------------------+-----------------------------------+
+| **Default value**  | Date of execution at ``00:00:00`` |
++--------------------+-----------------------------------+
+| **Allowed values** | Valid date                        |
++--------------------+-----------------------------------+
 
 Service\\regions
 ^^^^^^^^^^^^^^^^
@@ -720,3 +661,4 @@ The endpoint URL for the required AWS Service to be used to download the data fr
 +--------------------+------------------------------------------------+
 | **Allowed values** | Any valid endpoint URL for the AWS Service     |
 +--------------------+------------------------------------------------+
+

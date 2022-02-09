@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Upgrading an agent remotely can be performed at the command line and through the Wazuh API. Learn more about it in this section. 
@@ -18,13 +18,13 @@ Upgrading an agent remotely can be performed at the command line and through the
 Using the command line
 ----------------------
 
-To upgrade agents using the command line, use the :doc:`agent_upgrade <../../reference/tools/agent_upgrade>` tool as follows:
+To upgrade agents using the command line, use the :doc:`agent_upgrade <../../reference/tools/agent-upgrade>` tool as follows:
 
 1. List all outdated agents using the *'-l'* parameter:
 
     .. code-block:: console
 
-        # agent_upgrade -l
+        # /var/ossec/bin/agent_upgrade -l
 
     .. code-block:: none
         :class: output
@@ -40,7 +40,7 @@ To upgrade agents using the command line, use the :doc:`agent_upgrade <../../ref
 
     .. code-block:: console
 
-        # agent_upgrade -a 002
+        # /var/ossec/bin/agent_upgrade -a 002
 
     .. code-block:: none
         :class: output
@@ -48,7 +48,7 @@ To upgrade agents using the command line, use the :doc:`agent_upgrade <../../ref
         Upgrading...
 
         Upgraded agents:
-            Agent 002 upgraded: Wazuh v3.13.2 -> 4.0.0
+            Agent 002 upgraded: Wazuh v3.13.2 -> |WAZUH_LATEST|
 
 
 3. Following the upgrade, the agent is automatically restarted.  Check the agent version to ensure it has been properly upgraded as follows:
@@ -105,7 +105,15 @@ Using the RESTful API
         }
 
 
-2. Upgrade the agents with ID 002 and 003 using endpoint :api-ref:`PUT /agents/upgrade <operation/api.controllers.agent_controller.put_upgrade_agent>`:
+2. Upgrade the agents with ID 002 and 003 using endpoint :api-ref:`PUT /agents/upgrade <operation/api.controllers.agent_controller.put_upgrade_agents>`:
+
+    .. versionadded:: 4.3.0
+
+        The parameter `agents_list` of endpoints :api-ref:`PUT /agents/upgrade <operation/api.controllers.agent_controller.put_upgrade_agents>` and :api-ref:`PUT /agents/upgrade_custom <operation/api.controllers.agent_controller.put_upgrade_custom_agents>` allows the value `all`. When setting this value, an upgrade request will be sent to all agents.
+
+    When upgrading more than 3000 agents at the same time, it's highly recommended to use the parameter `wait_for_complete` set to `true` to avoid a possible API timeout.
+
+    This number of agents from which `wait_for_complete=true` is recommended, has been set after testing the endpoint in a Wazuh environment whose manager was installed in a host with specifications: 2.5 GHz AMD EPYC 7000 series processor and 4 GiB of memory. Using an agents list with size less than or equal to 3000 and a host with same or higher specs guarantees this endpoint to return a response before the API timeout.
 
     .. code-block:: console
 
@@ -131,7 +139,7 @@ Using the RESTful API
             "total_failed_items": 0,
             "failed_items": []
           },
-          "message": "All upgrade tasks have been created",
+          "message": "All upgrade tasks were created",
           "error": 0
         }
 
@@ -156,8 +164,8 @@ Using the RESTful API
                 "module": "upgrade_module",
                 "command": "upgrade",
                 "status": "Updated",
-                "create_time": "2020/10/21 17:13:45",
-                "update_time": "2020/10/21 17:14:07"
+                "create_time": "2020-10-21T17:13:45Z",
+                "update_time": "2020-10-21T17:14:07Z"
               },
               {
                 "message": "Success",
@@ -167,15 +175,15 @@ Using the RESTful API
                 "module": "upgrade_module",
                 "command": "upgrade",
                 "status": "Updated",
-                "create_time": "2020/10/21 17:13:45",
-                "update_time": "2020/10/21 17:14:11"
+                "create_time": "2020-10-21T17:13:45Z",
+                "update_time": "2020-10-21T17:14:11Z"
               }
             ],
             "total_affected_items": 2,
             "total_failed_items": 0,
             "failed_items": []
           },
-          "message": "All agents have been updated",
+          "message": "All upgrade tasks were returned",
           "error": 0
         }
 
@@ -194,11 +202,11 @@ Using the RESTful API
             "affected_items": [
               {
                 "id": "002",
-                "version": "Wazuh v4.2.4"
+                "version": "Wazuh |WAZUH_LATEST|"
               },
               {
                 "id": "003",
-                "version": "Wazuh v4.2.4"
+                "version": "Wazuh |WAZUH_LATEST|"
               }
             ],
             "total_affected_items": 2,

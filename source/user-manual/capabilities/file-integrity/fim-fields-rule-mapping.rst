@@ -1,9 +1,9 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 FIM fields rule mapping
 =======================
 
-This guide aims to help to understand how FIM fields can be mapped into rules.
+This guide aims to help you understand how FIM fields can be mapped into rules.
 
 
 FIM - Alerts: fields correspondence
@@ -32,11 +32,11 @@ The following table establishes a correspondence between the decoded FIM fields 
 +----------------------+-----------------------------+-------------------------------------------------------------------------+
 |  gname               |  gname_after                |  Group name of the group that shares ownership of the file              |
 +----------------------+-----------------------------+-------------------------------------------------------------------------+
-|  md5                 |  md5_after                  |  md5 hash of the file in the current event (after changes)              |
+|  md5                 |  md5_after                  |  MD5 hash of the file in the current event (after changes)              |
 +----------------------+-----------------------------+-------------------------------------------------------------------------+
-|  sha1                |  sha1_after                 |  sha1 hash of the file in the current event (after changes)             |
+|  sha1                |  sha1_after                 |  SHA1 hash of the file in the current event (after changes)             |
 +----------------------+-----------------------------+-------------------------------------------------------------------------+
-|  sha256              |  sha256_after               |  sha256 hash of the file in the current event (after changes)           |
+|  sha256              |  sha256_after               |  SHA256 hash of the file in the current event (after changes)           |
 +----------------------+-----------------------------+-------------------------------------------------------------------------+
 |  mtime               |  mtime_after                |  Timestamp of the file changes                                          |
 +----------------------+-----------------------------+-------------------------------------------------------------------------+
@@ -46,7 +46,7 @@ The following table establishes a correspondence between the decoded FIM fields 
 +----------------------+-----------------------------+-------------------------------------------------------------------------+
 |  changed_fields      |  changed_attributes         |  Changed fields in the file (permissions, content, etc...)              |
 +----------------------+-----------------------------+-------------------------------------------------------------------------+
-|  win_attributes      |  attrs_after                |  File attributtes (hidden, read-only, etc...)                           |
+|  win_attributes      |  attrs_after                |  File attributes (hidden, read-only, etc...)                            |
 +----------------------+-----------------------------+-------------------------------------------------------------------------+
 |  tag                 |  tag                        |  Custom tags to be added to one specific event                          |
 +----------------------+-----------------------------+-------------------------------------------------------------------------+
@@ -58,9 +58,9 @@ The following table establishes a correspondence between the decoded FIM fields 
 +----------------------+-----------------------------+-------------------------------------------------------------------------+
 |  group_name          |  audit.group.name           |  The actual group name of the user that triggered the event             |
 +----------------------+-----------------------------+-------------------------------------------------------------------------+
-|  process_name        |  audit.process.name         |  The name of the process ran by a user that triggered the event         |
+|  process_name        |  audit.process.name         |  The name of the process run by a user that triggered the event         |
 +----------------------+-----------------------------+-------------------------------------------------------------------------+
-|  process_id          |  audit.process.id           |  The ID of the process ran by a user that triggered the event           |
+|  process_id          |  audit.process.id           |  The ID of the process run by a user that triggered the event           |
 +----------------------+-----------------------------+-------------------------------------------------------------------------+
 |  ppid                |  audit.process.ppid         |  The parent ID of the process that triggered the event                  |
 +----------------------+-----------------------------+-------------------------------------------------------------------------+

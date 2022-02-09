@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: The Wazuh components are the Wazuh agent, the Wazuh server, and Elastic Stack. Learn more about them in this section of our documentation.
@@ -32,6 +32,6 @@ In this section of the documentation you will find a description of the three Wa
     :maxdepth: 1
     :hidden:
 
-    wazuh_agent
-    wazuh_server
-    elastic_stack
+    wazuh-agent
+    wazuh-server
+    elastic-stack

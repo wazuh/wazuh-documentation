@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Learn more about how to perform the offline update of the Wazuh Vulnerability Detector in this section of our documentation. 
@@ -88,7 +88,7 @@ In the ``/var/ossec/etc/ossec.conf`` file of the Wazuh manager, scroll down to t
     <vulnerability-detector>
       <enabled>yes</enabled>
       <interval>5m</interval>
-      <ignore_time>6h</ignore_time>
+      <min_full_scan_interval>6h</min_full_scan_interval>
       <run_on_start>yes</run_on_start>
       <provider name="canonical">
         <enabled>no</enabled>
@@ -115,6 +115,12 @@ In the ``/var/ossec/etc/ossec.conf`` file of the Wazuh manager, scroll down to t
       </provider>
       <provider name="arch">
         <enabled>no</enabled>
+        <update_interval>1h</update_interval>
+      </provider>
+      <provider name="alas">
+        <enabled>no</enabled>
+        <os>amazon-linux</os>
+        <os>amazon-linux-2</os>
         <update_interval>1h</update_interval>
       </provider>
       <provider name="msu">

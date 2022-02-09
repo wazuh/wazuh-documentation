@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Check the tasks that help you benefit the most from the installation of Wazuh after the installation of the Wazuh-Docker. 
@@ -18,7 +18,7 @@ After installing the Wazuh-Docker containers, there are several tasks that you c
 Access to services and containers
 ---------------------------------
 
-#. You may access the Kibana UI at the Docker host's IP address, for example: `https://localhost <http://localhost>`_ if you are in the Docker host.
+#. You may access the Kibana UI at the Docker host's IP address, for example: ``https://localhost`` if you are in the Docker host.
 
    .. note::
      The certificate used for Kibana by default is a self-signed certificate, because of this your browser will warn that it cannot verify its authenticity.

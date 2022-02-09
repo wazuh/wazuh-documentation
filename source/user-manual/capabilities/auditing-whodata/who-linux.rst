@@ -1,5 +1,8 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+    :description: Learn more about the who-data monitoring functionality of Wazuh: how to audit who-data in Linux, how to configure it, and alert examples. 
+    
 .. _who-linux:
 
 Auditing who-data in Linux
@@ -96,7 +99,7 @@ The following fields are received in FIM alerts when who-data is enabled:
 Alert examples
 ^^^^^^^^^^^^^^
 
-In the following example we can see how the user *Smith* added a new IP to the file ``/etc/hosts.allow`` using the *nano* editor with **sudo** privileges:
+In the following example we can see how the user *Smith* added a new IP address to the file ``/etc/hosts.allow`` using the *nano* editor with **sudo** privileges:
 
 
 Alert in log format:

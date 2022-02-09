@@ -1,7 +1,7 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
-  :description: Find information about the Wazuh Kibana plugin, its different features, configuration reference, and how to troubleshoot some of the most common problems.
+  :description:  The Wazuh Kibana plugin allows users to view and analyze Wazuh alerts stored in Elasticsearch. Learn more about it in this section.
   
 .. _kibana_app:
 
@@ -21,7 +21,8 @@ This manual describes the configuration process to start this plugin and the dif
     .. toctree::
         :maxdepth: 1
 
-        connect-kibana-app
         features/index
+        RBAC - create and map users <wazuh-rbac>
         troubleshooting
         reference/index
+        

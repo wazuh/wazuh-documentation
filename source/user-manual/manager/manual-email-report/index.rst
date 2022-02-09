@@ -1,6 +1,7 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
+
 .. meta::
-  :description: Wazuh can be configured to send email alerts to one or more email addresses when certain rules are triggered or for daily event reports. Learn more here. 
+  :description: Learn more about how to configure Wazuh to send email alerts to one or more email addresses when certain rules are triggered or for daily event reports.
   
 .. _manual_email_report:
 
@@ -213,4 +214,4 @@ This configuration will send an email every time rule 502 is triggered regardles
    :hidden:
    :maxdepth: 1
 
-   smtp_authentication
+   smtp-authentication

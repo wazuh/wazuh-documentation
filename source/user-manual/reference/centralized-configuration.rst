@@ -1,7 +1,7 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
-  :description: Learn how to remotely configure agents using agent.conf. In this section you will find which capabilities can be configured remotely. 
+  :description: Learn how to remotely configure agents using agent.conf. In this section of the Wazuh documentation, you will find which capabilities can be configured remotely.
 
 .. _reference_agent_conf:
 
@@ -21,8 +21,9 @@ Agents can be configured remotely by using the ``agent.conf`` file. The followin
 - :doc:`Labels for agent alerts <../capabilities/labels>` (**labels**)
 - :doc:`Security Configuration Assessment <../capabilities/sec-config-assessment/index>` (**sca**)
 - :doc:`System inventory <../capabilities/syscollector>` (**syscollector**)
-- :doc:`Avoid events flooding <ossec-conf/client_buffer>` (**client_buffer**)
+- :doc:`Avoid events flooding <ossec-conf/client-buffer>` (**client_buffer**)
 - :doc:`Configure osquery wodle <ossec-conf/wodle-osquery>` (**wodle name="osquery"**)
+- :doc:`force_reconnect_interval setting <ossec-conf/client>` (**client**)
 
 .. note::
   When setting up remote commands in the shared agent configuration, **you must enable remote commands for Agent Modules**. This is enabled by adding the following line to the ``/var/ossec/etc/local_internal_options.conf`` file in the agent:
@@ -34,12 +35,10 @@ Agents can be configured remotely by using the ``agent.conf`` file. The followin
 Agent groups
 ------------
 
-.. versionadded:: 3.0.0
-
 Agents can be grouped together in order to send them unique centralized configuration that is group specific. Each agent can belong to more than one group and unless otherwise configured, all agents belong to a group called ``default``.
 
 .. note::
-    Check the :doc:`agent_groups manual <./tools/agent_groups>` to learn how to add groups and assign agents to them.
+    Check the :doc:`agent_groups manual <./tools/agent-groups>` to learn how to add groups and assign agents to them.
 
 The manager pushes all files included in the group folder to the agents belonging to this group. For example, all files in ``/var/ossec/etc/shared/default`` will be pushed to all agents belonging to the ``default`` group.
 

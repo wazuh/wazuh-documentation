@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. _reference_wazuh_manager_class:
 
@@ -204,7 +204,7 @@ $ossec_remote_protocol
   `Default tcp`
 
 $ossec_remote_local_ip
-  Local ip address to use to listen for connections.
+  Local IP address to use to listen for connections.
 
   `Default undef`
 
@@ -461,7 +461,7 @@ $syslog_output_port
   `Default 514`
 
 $syslog_output_server
-  The IP Address of the syslog server.
+  The IP address of the syslog server.
 
   `Default undef`
 
@@ -491,8 +491,8 @@ $vulnerability_detector_interval
 
   `Default 5m`
 
-$vulnerability_detector_ignore_time
-  Time during which vulnerabilities that have already been alerted will be ignored.
+$vulnerability_detector_min_full_scan_interval
+  Time interval after which a full scan will be triggered if the vulnerabilities database is updated with new CVEs information.
 
   `Default 6h`
 
@@ -599,7 +599,7 @@ Wazuh API variables
 -------------------
 
 $wazuh_api_host
-  IP or hostname of the Wazuh manager where the Wazuh API is running.
+  IP address or hostname of the Wazuh manager where the Wazuh API is running.
 
   `Default 0.0.0.0`
 
@@ -614,14 +614,14 @@ $wazuh_api_https_enabled
   `Default true`
 
 $wazuh_api_https_key
-  Path of the file with the private key.
+  File with the private key.
 
-  `Default api/configuration/ssl/server.key`
+  `Default server.key (in api/configuration/ssl)`
 
 $wazuh_api_https_cert
-  Path to the file with the certificate.
+  File with the certificate.
 
-  `Default api/configuration/ssl/server.crt`
+  `Default server.crt (in api/configuration/ssl)`
 
 $wazuh_api_https_use_ca
   Whether to use a certificate from a Certificate Authority.
@@ -629,19 +629,14 @@ $wazuh_api_https_use_ca
   `Default false`
 
 $wazuh_api_https_ca
-  Path to the certificate of the Certificate Authority (CA).
+  Certificate of the Certificate Authority (CA).
 
-  `Default api/configuration/ssl/ca.crt`
+  `Default ca.crt (in api/configuration/ssl)`
 
 $wazuh_api_logs_level
   Sets the verbosity level of the Wazuh API logs.
 
   `Default info`
-
-$wazuh_api_logs_path
-  Path where to save the Wazuh API logs.
-
-  `Default logs/api.log`
 
 $wazuh_api_cors_enabled
   Enable or disable the use of CORS in the Wazuh API.
@@ -684,7 +679,7 @@ $wazuh_api_access_max_login_attempts
   `Default 5`
 
 $wazuh_api_access_block_time
-  Established period of time (in seconds) to attempt login requests. If the established number of requests (`max_login_attempts`) is exceeded within this time limit, the IP is blocked until the end of the block time period.
+  Established period of time (in seconds) to attempt login requests. If the established number of requests (`max_login_attempts`) is exceeded within this time limit, the IP address is blocked until the end of the block time period.
 
   `Default 300`
 
@@ -692,11 +687,6 @@ $wazuh_api_access_max_request_per_minute
   Establish a maximum number of requests the Wazuh API can handle per minute (does not include authentication requests). If the number of requests for a given minute is exceeded, all incoming requests (from any user) will be blocked. This feature can be disabled by setting its value to 0.
 
   `Default 300`
-
-$wazuh_api_use_only_authd
-  Forces the use of wazuh-authd when registering and removing agents.
-
-  `Default false`
 
 $wazuh_api_drop_privileges
   Run wazuh-api process as wazuh user

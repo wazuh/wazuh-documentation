@@ -1,5 +1,8 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+  :description: Ansible is an open source platform designed for automating tasks. Learn more about the variable references in this section of the Wazuh documentation.
+  
 .. _wazuh_ansible_reference:
 
 Variables references
@@ -7,8 +10,8 @@ Variables references
 
 .. _wazuh_ansible_reference_elasticsearch:
 
-Elasticsearch
-===================
+Elasticsearch / Opendistro
+==========================
 
 **elasticsearch_cluster_name**
 
@@ -30,7 +33,7 @@ Elasticsearch
 
 **elasticsearch_network_host**
 
-  ElasticSearch, listening ip address
+  ElasticSearch, listening IP address
 
   *Default 127.0.0.1*
 
@@ -67,7 +70,7 @@ Elasticsearch
 .. _wazuh_ansible_reference_kibana:
 
 Kibana
-=========
+======
 
 **elasticsearch_http_port**
 
@@ -107,7 +110,7 @@ Kibana
 
 **elasticsearch_network_host**
 
-  Ip address or hostname of Elasticsearch node.
+  IP address or hostname of Elasticsearch node.
 
   *Default 127.0.0.1*
 
@@ -132,7 +135,7 @@ Kibana
 .. _wazuh_ansible_reference_filebeat:
 
 Filebeat
-===================
+========
 
 **filebeat_version:**
 
@@ -472,7 +475,7 @@ Wazuh Manager
     wazuh_manager_vulnerability_detector:
       enabled: 'no'
       interval: '5m'
-      ignore_time: '6h'
+      min_full_scan_interval: '6h'
       run_on_start: 'yes'
       providers:
         - enabled: 'no'
@@ -754,12 +757,11 @@ Wazuh Manager
       bind_addr: 0.0.0.0
       port: 55000
       https: yes
-      https_key: "api/configuration/ssl/server.key"
-      https_cert: "api/configuration/ssl/server.crt"
+      https_key: "server.key"
+      https_cert: "server.crt"
       https_use_ca: False
-      https_ca: "api/configuration/ssl/ca.crt"
+      https_ca: "ca.crt"
       logging_level: "info"
-      logging_path: "logs/api.log"
       cors: no
       cors_source_route: "*"
       cors_expose_headers: "*"
@@ -770,7 +772,6 @@ Wazuh Manager
       access_max_login_attempts: 5
       access_block_time: 300
       access_max_request_per_minute: 300
-      use_only_authd: no
       drop_privileges: yes
       experimental_features: no
 
@@ -1075,7 +1076,7 @@ Wazuh Manager
 .. _wazuh_ansible_reference_agent:
 
 Wazuh Agent
-===================
+===========
 
 **wazuh_managers:**
 

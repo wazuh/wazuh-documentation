@@ -1,11 +1,12 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
+
+.. meta::
+    :description: From Wazuh 3.0.0 version onwards, agents can be upgraded remotely. Learn more about it in this section of the Wazuh documentation. 
 
 .. _remote-upgrading:
 
 Remote upgrading
 ==================
-
-.. versionadded:: 3.0.0
 
 .. topic:: Contents
 

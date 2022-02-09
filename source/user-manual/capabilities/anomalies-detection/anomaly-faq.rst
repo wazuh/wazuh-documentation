@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. _intrusion-faq:
 
@@ -13,7 +13,7 @@ FAQ
 
 How often does rootcheck run?
 -----------------------------
-The rootcheck scan frequency is configurable with :ref:`frequency <reference_ossec_rootcheck_frequency>`. By default it runs every 2 hours.
+The rootcheck scan frequency is configurable with :ref:`frequency <reference_ossec_rootcheck_frequency>`. By default it runs every 12 hours.
 
 How does rootcheck know the rootkit files to look for?
 ------------------------------------------------------

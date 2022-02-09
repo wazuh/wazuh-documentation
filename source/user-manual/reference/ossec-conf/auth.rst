@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: This section of the Wazuh Documentation shows the options for the agents registration service.
@@ -19,8 +19,6 @@ auth
 
 This section shows the options for the registration service.
 
-.. versionadded:: 2.1
-
 Options
 -------
 
@@ -28,8 +26,7 @@ Options
 - `remote_enrollment`_
 - `port`_
 - `use_source_ip`_
-- `force_insert`_
-- `force_time`_
+- `force`_
 - `purge`_
 - `use_password`_
 - `ssl_agent_ca`_
@@ -87,8 +84,23 @@ Toggles the use of the client's source IP address or the use of "any" to add an 
 | **Allowed values** | yes, no             |
 +--------------------+---------------------+
 
-force_insert
-^^^^^^^^^^^^
+force
+^^^^^
+
+.. versionadded:: 4.3.0
+
+The agent replacement options are configured inside this tag. All conditions must be satisfied to perform the replacement.
+
+.. code-block:: xml
+
+    <force>
+      <enabled>yes</enabled>
+      <disconnected_time enabled="yes">1h</disconnected_time>
+      <after_registration_time>1h</after_registration_time>
+      <key_mismatch>yes</key_mismatch>
+    </force>
+
+**enabled**
 
 Toggles whether or not to force the insertion of an agent if there is a duplicate name or IP address. This will remove the old agent with same name or IP address.
 
@@ -98,19 +110,49 @@ Toggles whether or not to force the insertion of an agent if there is a duplicat
 | **Allowed values** | yes, no             |
 +--------------------+---------------------+
 
-force_time
-^^^^^^^^^^
+**disconnected_time**
 
-When forcing to remove old agents with the same name or IP address, this options specifies that the deletion will be performed only if the agent's keepalive has more than the defined number of seconds.
+This option, when enabled, specifies that the replacement will be performed only for agents that have been disconnected longer than the value configured in the setting. This option should be disabled to replace any agent regardless of its state.
+
++--------------------+----------------------------------------------------------------------------+
+| **Default value**  | 1h                                                                         |
++--------------------+----------------------------------------------------------------------------+
+| **Allowed values** | Any number greater than or equal to zero. Allowed suffixes (s, m, h, d).   |
++--------------------+----------------------------------------------------------------------------+
+
+Attributes:
+
++-------------+----------------+---------+
+| **enabled** | Default value  | yes     |
++             +----------------+---------+
+|             | Allowed values | yes, no |
++-------------+----------------+---------+
+
+Value ``no`` means to force replacement even for active agents.
+
+Value ``0`` means to force the replacement of any disconnected agent.
+
+**after_registration_time**
+
+Specifies that the agent replacement will be performed only when the time passed since the agent registration is greater than the value configured in the setting.
+
++--------------------+----------------------------------------------------------------------------+
+| **Default value**  | 1h                                                                         |
++--------------------+----------------------------------------------------------------------------+
+| **Allowed values** | Any number greater than or equal to zero. Allowed suffixes (s, m, h, d).   |
++--------------------+----------------------------------------------------------------------------+
+
+Value ``0`` means to always force replacement.
+
+**key_mismatch**
+
+This option defines that the agent replacement occurs when the key held by the agent is different from the one registered by the manager.
 
 +--------------------+---------------------+
-| **Default value**  | 0                   |
+| **Default value**  | yes                 |
 +--------------------+---------------------+
-| **Allowed values** | - Positive number   |
-|                    | - 0                 |
+| **Allowed values** | yes, no             |
 +--------------------+---------------------+
-
-Value ``0`` means to always force the deletion.
 
 purge
 ^^^^^
@@ -208,8 +250,6 @@ Sets the list of ciphers for network communication using SSL.
 
 The format of this parameter is described in `SSL ciphers <https://www.openssl.org/docs/man1.1.0/apps/ciphers.html>`_.
 
-.. versionadded:: 3.0.0
-
 Default configuration
 ---------------------
 
@@ -220,8 +260,12 @@ Default configuration
     <remote_enrollment>yes<remote_enrollment>
     <port>1515</port>
     <use_source_ip>no</use_source_ip>
-    <force_insert>yes</force_insert>
-    <force_time>0</force_time>
+    <force>
+      <enabled>yes</enabled>
+      <disconnected_time enabled="yes">1h</disconnected_time>
+      <after_registration_time>1h</after_registration_time>
+      <key_mismatch>yes</key_mismatch>
+    </force>
     <purge>yes</purge>
     <use_password>no</use_password>
     <ciphers>HIGH:!ADH:!EXP:!MD5:!RC4:!3DES:!CAMELLIA:@STRENGTH</ciphers>
