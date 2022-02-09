@@ -25,7 +25,7 @@ Technical FAQ
 
 - `Can I send syslog data directly to the environment?`_
 
-- `Can I send data directly to the Wazuh indexer?`_
+- `Can I send data directly to the Elasticsearch of my environment?`_
 
 - `Can I integrate with my Single Sign-On (SSO) method (LDAP, Okta, Active Directories)?`_
 
@@ -79,7 +79,7 @@ Can I send syslog data directly to the environment?
 
 No, all the communications are performed through Wazuh agents once they are registered into the environment. However, you have alternative options. For more information on how to forward syslog events to your environment, see the :ref:`Forward syslog events <cloud_your_environment_send_syslog>` section.
 
-Can I send data directly to the Wazuh indexer?
+Can I send data directly to the Elasticsearch of my environment?
 ----------------------------------------------------------------------
 
 No, all the communications are performed through Wazuh agents.
