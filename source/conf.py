@@ -385,7 +385,6 @@ def minification(current_path):
         ['accordions','css'],
         ['version-selector','js'],
         ['redirects','js'],
-        ['release-note-redirect','js'],
         ['style','js'],
         ['custom-redoc','js'],
         ['accordion', 'js']
@@ -564,8 +563,6 @@ def setup(app):
             os.path.join(current_path, "js-src/accordion.js")).st_mtime)
         app.add_js_file("js/dist/redirects.min.js?ver=%s" % os.stat(
             os.path.join(static_path_str, "js/redirects.js")).st_mtime)
-        app.add_js_file("js/dist/release-note-redirect.min.js?ver=%s" % os.stat(
-            os.path.join(current_path, "js-src/release-note-redirect.js")).st_mtime)
 
     app.add_config_value('custom_replacements', {}, True)
     app.connect('source-read', customReplacements)
