@@ -1,0 +1,50 @@
+{#
+    wazuh_doc_theme_v3/template-parts/body.html
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    
+    Content template that defines the main layout of the body.
+
+-#}
+
+{%- extends "!wazuh_doc_theme_v3/layout.html" -%}
+{%- block body -%}
+{%- block header %}
+{% include "template-parts/header.html" %}
+{% endblock header -%}
+    <div class="inner-body">
+      {% block sidebar1 -%}
+        {% include "template-parts/sidebar-left.html" %}
+      {% endblock sidebar1 -%}
+      
+      {%- block main_column -%}
+      <div id="central-column">
+        {%- block latest %}
+          {% include "template-parts/no-latest-notice.html" %}
+        {% endblock latest %}
+
+        {% if pagename not in special_pages %}
+          <div class="breadcrumb-wrapper">
+            {% include "template-parts/breadcrumbs.html" %}
+          </div>
+        {% endif %}
+        
+        {# Main content #}
+        <main role="main">
+        {{ body }}
+        {% if pagename not in special_pages %}
+        {% include "template-parts/navigation.html" %}
+        {% endif %}
+        </main>
+      </div>
+      {%- endblock main_column -%}
+      {%- block footer %}
+      <footer>
+        {% include "template-parts/footer.html" %}
+      </footer>
+      {% endblock footer -%}
+      
+      {%- block sidebar2 -%}
+      {% include "template-parts/sidebar-right.html" %}
+      {% endblock sidebar2 -%}
+    </div>
+{%- endblock %}

@@ -1,0 +1,190 @@
+/* -----------------------------------------------------------------------------
+  Root (inc)
+----------------------------------------------------------------------------- */
+
+body {
+  position: relative;
+  margin-top: calc(#{$headerHeightXs} + #{$secondaryMobileBar});
+  font-family: Manrope, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  @include media-min(xl){
+    margin-top: $headerHeightXl;
+  }
+}
+
+.inner-body {
+  position: relative;
+  width: 100%;
+}
+
+h1,
+.rubric.h1 {
+  display: block;
+  width: fit-content;
+  margin-top: 1.2rem;
+  margin-bottom: 1rem;
+  font-size: 34px;
+  font-weight: 600;
+  letter-spacing: .03em;
+  @include media-max(xl){
+    font-size: 28px;
+  }
+}
+
+h2,
+.rubric.h2 {
+  display: block;
+  width: fit-content;
+  margin-top: 1.2rem;
+  margin-bottom: 1rem;
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: .03em;
+  @include media-max(xl){
+    font-size: 23px;
+  }
+}
+
+h3,
+.rubric.h3 {
+  display: block;
+  width: fit-content;
+  margin-top: 1.2rem;
+  margin-bottom: 1rem;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: .03em;
+  @include media-max(xl){
+    font-size: 18px;
+  }
+}
+
+h4,
+.rubric.h4 {
+  display: block;
+  width: fit-content;
+  margin-top: 1.2rem;
+  margin-bottom: 1rem;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: .03em;
+  @include media-max(xl){
+    font-size: 17px;
+  }
+}
+
+h5,
+.rubric.h5 {
+  display: block;
+  width: fit-content;
+  margin-top: 1.2rem;
+  margin-bottom: 1rem;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: .03em;
+}
+
+h6,
+.rubric.h6 {
+  display: block;
+  width: fit-content;
+  margin-top: 1.2rem;
+  margin-bottom: 1rem;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: .03em;
+}
+
+
+main {
+  min-height: calc(100vh - #{$headerHeightXs});
+  padding-left: 15px;
+  padding-right: 15px;
+  @include media-max(md) {
+    min-height: auto;
+  }
+  
+  @include media-min(xl) {
+    padding-left: 30px;
+    min-height: calc(100vh - #{$headerHeightXl} - #{$footerHeight});
+  }
+
+  img {
+    max-width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-family: Manrope, sans-serif;
+    font-style: normal;
+    letter-spacing: 0.03em;
+  }
+
+  table {
+    margin-bottom: 1rem;
+    td,
+    th {
+      vertical-align: middle;
+    }
+  }
+} 
+
+.sidebar {
+  flex-shrink: 0;
+
+  .sidebar-container {
+    top: 0;
+    overflow-y: auto;
+  }
+}
+
+a:active {
+  font-weight: 600;
+}
+
+th p {
+  margin: 0;
+  font-weight: inherit;
+  font-weight: 500;
+}
+
+/* Light theme -------------------------------------------------------------- */
+
+body {
+  background-color: $light_ColorBaseSpace;
+  color: $light_ColorMainText;
+  a {
+    color: $light_ColorPrimary;
+
+    &:hover,
+    &:focus {
+      color: $light_ColorPrimaryLighter;
+    }
+
+    &:active {
+      color: $light_ColorPrimary;
+    }
+  }
+}
+
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme {
+  background-color: $dark_ColorBaseSpace;
+  color: $dark_ColorMainText;
+    a {
+      color: $dark_ColorPrimary;
+
+      &:hover,
+      &:focus {
+        color: $dark_ColorPrimaryLighter;
+      }
+
+      &:active {
+        color: $dark_ColorPrimary;
+      }
+    }
+}
