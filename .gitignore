@@ -9,7 +9,6 @@ __pycache__
 package.json
 package-lock.json
 !source/_themes/wazuh_doc_theme_v3/package.json
-package-lock.json
 !source/_themes/wazuh_doc_theme_v3/package-lock.json
 source/_themes/wazuh_doc_theme/static/css/dist/*.min.css
 source/_themes/wazuh_doc_theme/static/js/dist/*.min.js
