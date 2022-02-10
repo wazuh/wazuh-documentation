@@ -580,7 +580,7 @@ def setup(app):
 
 def insert_inline_style(app, pagename, templatename, context, doctree):
     ''' Runs once per page, inserting the content of the compiled style for Google Fonts into the context '''
-    google_fonts_path = os.path.join('source/',theme_assets_path, 'static', 'css', 'google-fonts.min.css')
+    google_fonts_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), theme_assets_path, 'static', 'css', 'google-fonts.min.css')
     # Fonts to be preloaded
     with open(google_fonts_path, 'r') as reader:
         google_fonts = reader.read()
