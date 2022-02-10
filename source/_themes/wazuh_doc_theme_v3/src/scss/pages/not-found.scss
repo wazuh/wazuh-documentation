@@ -1,0 +1,77 @@
+/* -----------------------------------------------------------------------------
+  Not Found page
+----------------------------------------------------------------------------- */
+
+@import "../inc/variables";
+@import "../inc/mixins";
+@import "../inc/root";
+
+@import "../parts/header";
+@import "../parts/footer";
+@import "../parts/left-sidebar";
+@import "../parts/central-column";
+@import "../parts/right-sidebar";
+
+.not_found {
+
+  main {
+    padding-top: 4rem;
+    padding-bottom: 3rem;
+  }
+  .error-background {
+    max-width: 920px;
+    margin-left: auto;
+    margin-right: auto;
+    background-image: url('#{$imgPath}wazuh_404_bg_desktop.png');
+    background-repeat: no-repeat;
+    background-size: 90%;
+    background-position: center top;
+    @include media-max(md){
+      padding-bottom: 45%;
+    }
+    @include media-only(md, xl){
+      min-height: 350px;
+    }
+    @include media-only(xl, xxl){
+      padding-bottom: 45%;
+    }
+    @include media-min(xxl){
+      min-height: 370px;
+    }
+  }
+  .error-message {
+    text-align: center;
+    
+    h1 {
+      width: 100%;
+      font-size: 30px;
+    }
+    .btn {
+      border-radius: $roundedCorners;
+      font-weight: 600;
+      padding: 10px 40px;
+    }
+  }
+}
+
+/* Light theme -------------------------------------------------------------- */
+
+.not_found {
+  .error-message {
+    .btn {
+      background-color: $light_ColorAccent;
+      color: $light_ColorMainText;
+    }
+  }
+}
+
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme.not_found {
+  .error-message {
+    .btn {
+      background-color: $dark_ColorAccent;
+      color: $light_ColorMainText;
+    }
+  }
+}

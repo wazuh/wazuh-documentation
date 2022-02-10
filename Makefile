@@ -52,6 +52,20 @@ help:
 clean:
 	rm -rf $(BUILDDIR)/*
 
+redirects:
+	@cd source/_themes/wazuh_doc_theme_v3 && npm run js:build:redirects
+	@echo
+	@echo Build finished. The main theme assets has been updated.
+	@cd ../../..
+	@echo
+
+theme:
+	@cd source/_themes/wazuh_doc_theme_v3 && npm run build-all
+	@echo 
+	@echo Build finished. The main theme assets has been updated.
+	@cd ../../..
+	@echo
+
 html-prod:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html -t production
 	@echo
