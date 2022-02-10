@@ -14,7 +14,7 @@ This authentication method (:api-ref:`POST /security/user/authenticate/run_as <o
 
 In order to use this authentication method, a user allowed to use authorization context is needed (how to create and allow a user to use authorization context information :ref:`here <api_rbac_user>`). After that, and having created the necessary security rules, an authorization context with all the required information must be sent, it will be checked against the security rules and finally, the permissions associated with them will be granted:
 
-.. code-block:: 
+.. code-block:: bash
 
         # curl -k -u <user>:<password> -X POST https://localhost:55000/security/user/authenticate/run_as -H 'content-type: application/json' -d '{
                 "name": "Initial_auth",
@@ -29,7 +29,7 @@ In order to use this authentication method, a user allowed to use authorization 
 
         {
                 "data": {
-                        "token": "TOKEN"
+                        "token": "<YOUR_JWT_TOKEN>"
                 }
         }
 
@@ -37,6 +37,28 @@ In order to use this authentication method, a user allowed to use authorization 
     :title: Authorization context login method
     :align: center
     :width: 80%
+
+API log for authorization context login method
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+As it is explained in the last section, authorization context allows any authorized user to obtain extra permissions. To identify that a user has extra permissions due to an authorization context login, the API logs include an identifier after the string representing the username. This ID is unique and it corresponds to the authorization context used.
+
+API logs when using the authorization context login method:
+
+.. code-block:: none
+        :class: output
+
+        2022/02/10 11:23:14 INFO: wazuh (66a28efb5f8db2e93da2b5fb107bec35) 127.0.0.1 "POST /security/user/authenticate/run_as" with parameters {"raw": "true"} and body {"name": "Initial_auth", "auth": {"name": "Bill", "office": ["20", "21", "30"]}} done in 0.363s: 200
+        2022/02/10 11:23:18 INFO: wazuh (66a28efb5f8db2e93da2b5fb107bec35) 127.0.0.1 "GET /" with parameters {} and body {} done in 0.051s: 200
+
+API logs when using the :ref:`basic login method <api_log_in>`:
+
+.. code-block:: none
+        :class: output
+
+        2022/02/02 08:59:19 INFO: wazuh 127.0.0.1 "GET /security/user/authenticate" with parameters {"raw": "true"} and body {} done in 0.253s: 200
+        2022/02/02 08:59:23 INFO: wazuh 127.0.0.1 "GET /" with parameters {} and body {} done in 0.039s: 200
+
 
 Rules and roles
 ---------------
