@@ -163,6 +163,9 @@ To install the required dependencies to build the python interpreter, follow the
           # zypper install epel-release yum-utils -y
           # zypper-builddep python34 -y
 
+  .. group-tab:: Pacman
+
+        Arch-Linux-based operating systems do not require any additional steps.
 
 
 .. note:: The Python version from the previous command may change depending on the OS used to build the binaries. More information in `Install dependencies <https://devguide.python.org/setup/#install-dependencies>`_.
