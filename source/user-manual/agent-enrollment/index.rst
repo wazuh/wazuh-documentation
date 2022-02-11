@@ -31,7 +31,7 @@ There are two options for enrolling agents to the Wazuh manager.
 Requirements
 ------------
 
-The following has to be in place to ensure the Wazuh agent registers successfully:
+The following has to be in place to ensure the Wazuh agent enrollment is done:
 
 #. An installed and running Wazuh manager. 
 
