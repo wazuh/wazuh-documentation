@@ -58,8 +58,8 @@ Before an agent can be enrolled to the Wazuh manager using the password authenti
 
     The output below shows the recommended file owner and permissions.
 
-   .. code-block:: console
-      :class: output   
+   .. code-block:: console     
+       :class: output   
 
       -rw-r--r-- 1 root wazuh 9 Jan 11 12:50 /var/ossec/etc/authd.pass
 
@@ -85,7 +85,7 @@ Before an agent can be enrolled to the Wazuh manager using the password authenti
 
   
    .. code-block:: console
-      :class: output   
+       :class: output   
 
       2022/01/11 12:41:35 wazuh-authd: INFO: Accepting connections on port 1515. Random password chosen for agent authentication: 6258b4eb21550e4f182a08c10d94585e
 
