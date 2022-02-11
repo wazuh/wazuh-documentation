@@ -55,13 +55,13 @@ From Linux/Unix and macOS
 
    .. code-block:: console
       :class: output
-        {
-            "error": 0,
-            "data": {
-                "id": "001",
-                "key": "MDAxIE5ld0FnZW50IDEwLjAuMC44IDM0MGQ1NjNkODQyNjcxMWIyYzUzZTE1MGIzYjEyYWVlMTU1ODgxMzVhNDE3MWQ1Y2IzZDY4M2Y0YjA0ZWVjYzM=",
-            },
-        }
+          {
+              "error": 0,
+              "data": {
+                  "id": "001",
+                  "key": "MDAxIE5ld0FnZW50IDEwLjAuMC44IDM0MGQ1NjNkODQyNjcxMWIyYzUzZTE1MGIzYjEyYWVlMTU1ODgxMzVhNDE3MWQ1Y2IzZDY4M2Y0YjA0ZWVjYzM=",
+              },
+          }
 
 From Windows
 ^^^^^^^^^^^^
