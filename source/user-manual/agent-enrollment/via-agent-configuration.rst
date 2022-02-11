@@ -156,38 +156,38 @@ The Wazuh agent installation directory depends on the architecture of the host:
            </client>
    
     
-         This will allow the agent to connect to the Wazuh manager and automatically request a key.
-   
-   #. (Optional) Add enrollment parameters in the ``<client><enrollment>`` section. 
-   
-        .. code-block:: console
-   
-           <client>
-               .
-               .
-               .
-               <enrollment>
-                   <agent_name>EXAMPLE_NAME</agent_name>
-                   <groups>GROUP1,GROUP2,GROUP3</groups>
-                   .
-                   .  
-               </enrollment>
-           </client>
-   
-   These agent enrollment parameters are optional and they provide the agent with specific information that should be used during enrollment. Some common enrollment parameters are below:
+          This will allow the agent to connect to the Wazuh manager and automatically request a key.
+    
+    #. (Optional) Add enrollment parameters in the ``<client><enrollment>`` section. 
+    
+          .. code-block:: console
+    
+            <client>
+                .
+                .
+                .
+                <enrollment>
+                    <agent_name>EXAMPLE_NAME</agent_name>
+                    <groups>GROUP1,GROUP2,GROUP3</groups>
+                    .
+                    .  
+                </enrollment>
+            </client>
+    
+    These agent enrollment parameters are optional and they provide the agent with specific information that should be used during enrollment. Some common enrollment parameters are below:
 
-   - ``<agent_name>EXAMPLE_NAME</agent_name>``: This specifies the name the endpoint should be enrolled as. When this is not specified, it defaults to the endpoint hostname.
-   
-   - ``<groups>GROUP1,GROUP2,GROUP3</groups>``: This specifies the group(s) that the agent should be added to. An agent group is a collection of agents that would share the same configuration. This allows the manager to push configuration settings to a set of agents that belong to the same group. The agent enrollment will fail if a non-existent group is specified. Therefore, it is necessary to create the desired group on the manager before using the group parameter. Additional information on agent groups can be found :ref:`here <grouping-agents>`.
+    - ``<agent_name>EXAMPLE_NAME</agent_name>``: This specifies the name the endpoint should be enrolled as. When this is not specified, it defaults to the endpoint hostname.
+    
+    - ``<groups>GROUP1,GROUP2,GROUP3</groups>``: This specifies the group(s) that the agent should be added to. An agent group is a collection of agents that would share the same configuration. This allows the manager to push configuration settings to a set of agents that belong to the same group. The agent enrollment will fail if a non-existent group is specified. Therefore, it is necessary to create the desired group on the manager before using the group parameter. Additional information on agent groups can be found :ref:`here <grouping-agents>`.
 
-   More optional enrollment parameters and their usage are provided :ref:`here <enrollment>`.
+    More optional enrollment parameters and their usage are provided :ref:`here <enrollment>`.
 
 
-#. Check the agent status to find out if it is running.
+  #. Check the agent status to find out if it is running.
 
-    .. tabs::
-       
-       
+      .. tabs::
+        
+        
           .. group-tab:: PowerShell (as an administrator)
        
            .. code-block:: console
