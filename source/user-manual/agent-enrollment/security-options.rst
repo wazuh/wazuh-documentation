@@ -8,3 +8,88 @@
 Additional security options
 ===========================
 
+Additional security measures can be implemented in the enrollment process in order to authenticate  the endpoint to the Wazuh manager and vice versa. These security options are only available when enrolling agents :ref:`via the agent configuration method <enrollment_via_agent_automatic_request>`.
+
+
+The additional security options include:
+
+- Using password authentication.
+- Using certificates to:
+   - Verify the Wazuh manager.
+   - Verify the agents.
+
+
+Using password authentication
+-----------------------------
+
+This method requires a password during the enrollment process to ensure that agents enrolled to the Wazuh manager are authenticated.
+
+Prerequisites
+^^^^^^^^^^^^^
+
+Before an agent can be enrolled to the Wazuh manager using the password authentication method, the following must be done on the Wazuh manager:
+
+#. Enable the password authentication option by adding the configuration highlighted below to the ``<auth>`` section of the manager configuration file ``/var/ossec/etc/ossec.conf``.
+
+   .. code-block:: console
+
+      <auth>
+        <use_password>yes</use_password>
+      </auth>
+
+
+#. Create a password to be used for agent enrollment. This can be achieved in two ways:
+
+   - **Recommended** - By creating the file ``/var/ossec/etc/authd.pass`` on the manager and including your own password there. We recommended this method for creating the agent enrollment password. This can be done by running the line below in the terminal and subsequently restarting the Wazuh manager.
+
+   .. code-block:: console
+      echo "<custom_password>" > /var/ossec/etc/authd.pass
+
+      Note that you have to replace <custom_password> with your own agent enrollment password.
+
+      File permissions for the authd.pass file should be set to 644 and the owner should be root. The permissions and ownership can be configured by running the commands below:
+
+   .. code-block:: console
+
+      chmod 644 /var/ossec/etc/authd.pass
+      chown root:wazuh /var/ossec/etc/authd.pass
+
+
+      The output below shows the recommended file owner and permissions.
+
+   .. code-block:: console
+      :class: output   
+
+      -rw-r--r-- 1 root wazuh 9 Jan 11 12:50 /var/ossec/etc/authd.pass
+
+
+      After this, restart the Wazuh service for the changes to take effect.
+
+   .. code-block:: console
+
+      systemctl restart wazuh-manager
+
+
+   - By allowing the enrollment service to set a random password. Having added the ``<use_password>yes</use_password>`` configuration to the Wazuh manager, proceed to restart the manager.
+
+   .. code-block:: console
+
+      systemctl restart wazuh-manager
+      
+    This will cause the enrollment service to generate a random password. This password can then be found in /var/ossec/logs/ossec.log. Run the following command to get the agent enrollment password.
+
+   .. code-block:: console
+
+      grep "Random password" /var/ossec/logs/ossec.log
+
+   .. code-block:: console
+      :class: output   
+
+      2022/01/11 12:41:35 wazuh-authd: INFO: Accepting connections on port 1515. Random password chosen for agent authentication: 6258b4eb21550e4f182a08c10d94585e
+
+
+**Note**: In the case where the deployment architecture is using a multi-node cluster, ensure that password authorization is enabled on each manager node. This prevents unauthorized agent enrollment through an unsecured manager node. 
+
+Once the above prerequisites are fulfilled, agent enrollment can be done using the steps corresponding to the OS running on endpoints with the agent installed. 
+
+
