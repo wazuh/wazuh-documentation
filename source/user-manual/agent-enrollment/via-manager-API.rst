@@ -384,6 +384,7 @@ macOS endpoint
 
 The following steps serve as a guide on how to import the key to a macOS agent:
 
+
 #. From the Wazuh agent, launch the terminal as a root user and import the key.
 
    .. code-block:: console
@@ -418,6 +419,7 @@ The following steps serve as a guide on how to import the key to a macOS agent:
 #. Check the agent status to find out if it is running.
 
    .. code-block:: console
+
     # /Library/Ossec/bin/wazuh-control status
 
     
@@ -427,11 +429,13 @@ The following steps serve as a guide on how to import the key to a macOS agent:
    Start the agent if it is not running:
 
    .. code-block:: console
+
     # /Library/Ossec/bin/wazuh-control start
     
    Restart the agent if it is already running:
 
    .. code-block:: console
+
     # /Library/Ossec/bin/wazuh-control restart
 
 
