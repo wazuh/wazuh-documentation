@@ -297,6 +297,7 @@ The following steps serve as a guide on how to configure a macOS endpoint agent 
    
       More optional enrollment parameters and their usage are provided :ref:`here <enrollment>`.
 
+
 #. Check the agent status to find out if it is running.
 
    .. code-block:: console
