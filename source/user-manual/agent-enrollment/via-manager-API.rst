@@ -43,7 +43,7 @@ From Linux/Unix and macOS
    .. code-block:: console
       :class: output
    
-     eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YXp1aCIsImF1ZCI6IldhenVoIEFQSSBSRVNUIiwibmJmIjoxNjQzMDExMjQ0LCJleHAiOjE2NDMwMTIxNDQsInN1YiI6IndhenVoIiwicnVuX2FzIjpmYWxzZSwicmJhY19yb2xlcyI6WzFdLCJyYmFjX21vZGUiOiJ3aGl0ZSJ9.Ad6zOZvx0BEV7K0J6s3pIXAXTWB-zdVfxaX2fotLfZMQkiYPMkwDaQHUFiOInsWJ_7KZV3y2BbhEs9-kBqlJAMvMAD0NDBPhEQ2qBd_iutZ7QWZECd6eYfIP83xGqH9iqS7uMI6fXOKr3w4aFV13Q6qsHSUQ1A-1LgDnnDGGaqF5ITYo
+        eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YXp1aCIsImF1ZCI6IldhenVoIEFQSSBSRVNUIiwibmJmIjoxNjQzMDExMjQ0LCJleHAiOjE2NDMwMTIxNDQsInN1YiI6IndhenVoIiwicnVuX2FzIjpmYWxzZSwicmJhY19yb2xlcyI6WzFdLCJyYmFjX21vZGUiOiJ3aGl0ZSJ9.Ad6zOZvx0BEV7K0J6s3pIXAXTWB-zdVfxaX2fotLfZMQkiYPMkwDaQHUFiOInsWJ_7KZV3y2BbhEs9-kBqlJAMvMAD0NDBPhEQ2qBd_iutZ7QWZECd6eYfIP83xGqH9iqS7uMI6fXOKr3w4aFV13Q6qsHSUQ1A-1LgDnnDGGaqF5ITYo
 
 #. Request the key and agent ID. Replace ``<agent_name>`` with the desired agent name.
 
@@ -55,13 +55,13 @@ From Linux/Unix and macOS
 
    .. code-block:: console
       :class: output
-     {
-         "error": 0,
-         "data": {
-             "id": "001",
-             "key": "MDAxIE5ld0FnZW50IDEwLjAuMC44IDM0MGQ1NjNkODQyNjcxMWIyYzUzZTE1MGIzYjEyYWVlMTU1ODgxMzVhNDE3MWQ1Y2IzZDY4M2Y0YjA0ZWVjYzM=",
-         },
-     }
+        {
+            "error": 0,
+            "data": {
+                "id": "001",
+                "key": "MDAxIE5ld0FnZW50IDEwLjAuMC44IDM0MGQ1NjNkODQyNjcxMWIyYzUzZTE1MGIzYjEyYWVlMTU1ODgxMzVhNDE3MWQ1Y2IzZDY4M2Y0YjA0ZWVjYzM=",
+            },
+        }
 
 From Windows
 ^^^^^^^^^^^^
@@ -178,7 +178,7 @@ The following steps serve as a guide on how to import the key to a Linux/Unix ag
 The output should look like this:
 
    .. code-block:: console
-      :class: output 
+       :class: output 
 
         Agent information:
             ID:001
@@ -190,18 +190,17 @@ The output should look like this:
 #. Add the Wazuh manager IP address to the agent configuration file in ``/var/ossec/etc/ossec.conf``. 
 
    .. code-block:: console
-      <client>
-        <server>
-          <address>MANAGER_IP</address>
-          ...
-        </server>
-      </client>
+        <client>
+          <server>
+            <address>MANAGER_IP</address>
+            ...
+          </server>
+        </client>
 
 #. Check the agent status to find out if it is running.
 
 
-   .. tabs::
-   
+   .. tabs::   
    
       .. group-tab:: Systemd
    
