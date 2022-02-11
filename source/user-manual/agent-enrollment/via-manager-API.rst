@@ -191,6 +191,7 @@ The output should look like this:
 #. Add the Wazuh manager IP address to the agent configuration file in ``/var/ossec/etc/ossec.conf``. 
 
    .. code-block:: console
+
         <client>
           <server>
             <address>MANAGER_IP</address>
