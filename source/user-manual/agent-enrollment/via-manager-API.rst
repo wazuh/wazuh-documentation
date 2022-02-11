@@ -117,13 +117,13 @@ The following steps serve as a guide on how to send agent enrollment requests fr
 
 #. Create environment variables to hold the generated token and the agent variable.
 
-   #. Replace ``<token_generated>`` with the token generated in step 2.
+    - Replace ``<token_generated>`` with the token generated in step 2.
 
       .. code-block:: console
  
         # $TOKEN = “<token_generated>”  
 
-   #. Replace ``<agent_name>`` with the desired agent name.
+    - Replace ``<agent_name>`` with the desired agent name.
 
       .. code-block:: console
 

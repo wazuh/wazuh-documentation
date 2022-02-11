@@ -25,7 +25,7 @@ The following steps serve as a guide on how to configure a Linux/Unix endpoint a
 
 #. Launch the terminal as a root user, edit the agent configuration file ``/var/ossec/etc/ossec.conf``, and make the following changes:
 
-   #. Include the Wazuh manager IP address or DNS name in the ``<client><server><address>`` section:
+   - Include the Wazuh manager IP address or DNS name in the ``<client><server><address>`` section:
 
       .. code-block:: console
 
@@ -39,7 +39,7 @@ The following steps serve as a guide on how to configure a Linux/Unix endpoint a
  
       This will allow the agent to connect to the Wazuh manager and automatically request a key.
 
-   #. (Optional) Add enrollment parameters in the ``<client><enrollment>`` section. 
+   - (Optional) Add enrollment parameters in the ``<client><enrollment>`` section. 
 
       .. code-block:: console
 
@@ -145,7 +145,7 @@ The Wazuh agent installation directory depends on the architecture of the host:
 
 #. Using an administrator account, modify the Wazuh agent configuration file ``ossec.conf`` in the installation directory. For this guide, we are assuming a 64-bit architecture. Hence, ``C:\Program Files (x86)\ossec-agent\ossec.conf``
 
-   #. Include the Wazuh manager IP address or DNS name in the ``<client><server><address>`` section:
+   - Include the Wazuh manager IP address or DNS name in the ``<client><server><address>`` section:
    
          .. code-block:: console
    
@@ -159,7 +159,7 @@ The Wazuh agent installation directory depends on the architecture of the host:
     
           This will allow the agent to connect to the Wazuh manager and automatically request a key.
     
-   #. (Optional) Add enrollment parameters in the ``<client><enrollment>`` section. 
+   - (Optional) Add enrollment parameters in the ``<client><enrollment>`` section. 
     
           .. code-block:: console
     
@@ -184,7 +184,7 @@ The Wazuh agent installation directory depends on the architecture of the host:
    More optional enrollment parameters and their usage are provided :ref:`here <enrollment>`.
 
 
-  #. Check the agent status to find out if it is running.
+#. Check the agent status to find out if it is running.
 
       .. tabs::
         
@@ -260,7 +260,7 @@ The following steps serve as a guide on how to configure a macOS endpoint agent 
 
 #. Launch the terminal as a root user, edit the Wazuh agent configuration file /Library/Ossec/etc/ossec.conf, and make the following changes:
     
-   #. Include the Wazuh manager IP address or DNS name in the ``<client><server><address>`` section:
+   - Include the Wazuh manager IP address or DNS name in the ``<client><server><address>`` section:
       
             .. code-block:: console
       
@@ -274,7 +274,7 @@ The following steps serve as a guide on how to configure a macOS endpoint agent 
        
             This will allow the agent to connect to the Wazuh manager and automatically request a key.
       
-   #. (Optional) Add enrollment parameters in the ``<client><enrollment>`` section. 
+   - (Optional) Add enrollment parameters in the ``<client><enrollment>`` section. 
       
            .. code-block:: console
       
