@@ -55,6 +55,7 @@ From Linux/Unix and macOS
 
    .. code-block:: console
       :class: output
+
           {
               "error": 0,
               "data": {
@@ -112,7 +113,7 @@ The following steps serve as a guide on how to send agent enrollment requests fr
    .. code-block:: console
       :class: output
 
-    {"data":{"token": "eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YXp1aCIsImF1ZCI6IldhenVoIEFQSSBSRVNUIiwibmJmIjoxNjM5NjQ2Nzg0LCJleHAiOjE2Mzk2NDc2ODQsInN1YiI6IndhenVoIiwicnVuX2FzIjpmYWxzZSwicmJhY19yb2xlcyI6WzFdLCJyYmFjX21vZGUiOiJ3aGl0ZSJ9.ASonc7xinw6u4JUoUlkJ_52FvJz8ECPiI3ObDr-SOO0fWRfWq-uTnA432UnCDK86ypRG5fAY6paQkX3vjrXrvBFvADyCnNNCZ-eNzaUoEq5f38wCfbC1bZhRsz61s2PRRt3YD2rfzRASbSJk140Vx-XP-IDnqlgMgmIyJxb2iU1ZL8R7"}, "error": 0}
+      {"data":{"token": "eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YXp1aCIsImF1ZCI6IldhenVoIEFQSSBSRVNUIiwibmJmIjoxNjM5NjQ2Nzg0LCJleHAiOjE2Mzk2NDc2ODQsInN1YiI6IndhenVoIiwicnVuX2FzIjpmYWxzZSwicmJhY19yb2xlcyI6WzFdLCJyYmFjX21vZGUiOiJ3aGl0ZSJ9.ASonc7xinw6u4JUoUlkJ_52FvJz8ECPiI3ObDr-SOO0fWRfWq-uTnA432UnCDK86ypRG5fAY6paQkX3vjrXrvBFvADyCnNNCZ-eNzaUoEq5f38wCfbC1bZhRsz61s2PRRt3YD2rfzRASbSJk140Vx-XP-IDnqlgMgmIyJxb2iU1ZL8R7"}, "error": 0}
 
 #. Create environment variables to hold the generated token and the agent variable.
 
@@ -141,24 +142,24 @@ The following steps serve as a guide on how to send agent enrollment requests fr
    .. code-block:: console 
       :class: output     
 
-      StatusCode        : 200
-      StatusDescription : OK
-      Content           : {"data": {"id": "020", "key": "MDIwIGFwaS13aW5kb3dzIGFueSA3OTJmZTcwZDJiYzNhYzRiY2ZjOTc0MzAyNGZmMTc0ODA3ZGE5YjJjZjViZGQ4OGI3MjkxMTEzMmEwZGU3OGQ2"},
-                          "error": 0}
-      RawContent        : HTTP/1.1 200 OK
-                          Strict-Transport-Security: max-age=63072000; includeSubdomains
-                          X-Frame-Options: DENY
-                          X-XSS-Protection: 1; mode=block
-                          X-Content-Type-Options: nosniff
-                          Content-Security-Policy: none...
-      Forms             : {}
-      Headers           : {[Strict-Transport-Security, max-age=63072000; includeSubdomains], [X-Frame-Options, DENY], [X-XSS-Protection, 1;
-                          mode=block], [X-Content-Type-Options, nosniff]...}
-      Images            : {}
-      InputFields       : {}
-      Links             : {}
-      ParsedHtml        : System.__ComObject
-      RawContentLength  : 158
+        StatusCode        : 200
+        StatusDescription : OK
+        Content           : {"data": {"id": "020", "key": "MDIwIGFwaS13aW5kb3dzIGFueSA3OTJmZTcwZDJiYzNhYzRiY2ZjOTc0MzAyNGZmMTc0ODA3ZGE5YjJjZjViZGQ4OGI3MjkxMTEzMmEwZGU3OGQ2"},
+                            "error": 0}
+        RawContent        : HTTP/1.1 200 OK
+                            Strict-Transport-Security: max-age=63072000; includeSubdomains
+                            X-Frame-Options: DENY
+                            X-XSS-Protection: 1; mode=block
+                            X-Content-Type-Options: nosniff
+                            Content-Security-Policy: none...
+        Forms             : {}
+        Headers           : {[Strict-Transport-Security, max-age=63072000; includeSubdomains], [X-Frame-Options, DENY], [X-XSS-Protection, 1;
+                            mode=block], [X-Content-Type-Options, nosniff]...}
+        Images            : {}
+        InputFields       : {}
+        Links             : {}
+        ParsedHtml        : System.__ComObject
+        RawContentLength  : 158
          
 
 Importing the key to the agent
@@ -180,12 +181,12 @@ The output should look like this:
    .. code-block:: console
        :class: output 
 
-        Agent information:
-            ID:001
-            Name:agent_1
-            IP Address:any
-        Confirm adding it?(y/n): y
-        Added.
+          Agent information:
+              ID:001
+              Name:agent_1
+              IP Address:any
+          Confirm adding it?(y/n): y
+          Added.
 
 #. Add the Wazuh manager IP address to the agent configuration file in ``/var/ossec/etc/ossec.conf``. 
 
