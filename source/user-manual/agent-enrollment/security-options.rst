@@ -43,7 +43,7 @@ Before an agent can be enrolled to the Wazuh manager using the password authenti
    - **Recommended** - By creating the file ``/var/ossec/etc/authd.pass`` on the manager and including your own password there. We recommended this method for creating the agent enrollment password. This can be done by running the line below in the terminal and subsequently restarting the Wazuh manager.
 
    .. code-block:: console
-     
+
       echo "<custom_password>" > /var/ossec/etc/authd.pass
 
       Note that you have to replace <custom_password> with your own agent enrollment password.
@@ -89,7 +89,8 @@ Before an agent can be enrolled to the Wazuh manager using the password authenti
       2022/01/11 12:41:35 wazuh-authd: INFO: Accepting connections on port 1515. Random password chosen for agent authentication: 6258b4eb21550e4f182a08c10d94585e
 
 
-**Note**: In the case where the deployment architecture is using a multi-node cluster, ensure that password authorization is enabled on each manager node. This prevents unauthorized agent enrollment through an unsecured manager node. 
+.. note::
+   In the case where the deployment architecture is using a multi-node cluster, ensure that password authorization is enabled on each manager node. This prevents unauthorized agent enrollment through an unsecured manager node. 
 
 Once the above prerequisites are fulfilled, agent enrollment can be done using the steps corresponding to the OS running on endpoints with the agent installed. 
 
