@@ -1,6 +1,7 @@
 const removedUrls = [];
 const newUrls = [];
 const redirections = [];
+const redirectSameRelease = [];
 
 /* Note: new release versions must always be inserted in the first position of the array "versions" */
 const versions = [
@@ -25,6 +26,17 @@ const versions = [
 ];
 
 /* Data structure for every release
+
+/* Pages changed within the same release */
+
+/*
+redirectSameRelease['x.y'] = {
+  '/old/path/that/was/removed.html':
+    'new/path/replacing/the/old/one.html',
+  '/another-old/path/that/was/removed.html':
+    'another-new/path/replacing/the/old/one.html',
+};
+*/
 
 /* *** RELEASE X.Y ****/
 
@@ -57,6 +69,13 @@ removedUrls['x.y'] = [
 */
 
 /* *** RELEASE 4.2 ****/
+
+/* Pages changed within the same release */
+
+redirectSameRelease['4.2'] = {
+  '/release-notes/release_4_2_0.html':
+    '/release-notes/release-4-2-0.html',
+};
 
 /* Pages added in 4.2 */
 
