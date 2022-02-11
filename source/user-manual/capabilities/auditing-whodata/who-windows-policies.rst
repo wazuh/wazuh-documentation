@@ -1,5 +1,8 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+  :description: Learn more about the manual configuration of the Local Audit Policies in Windows in this section of the Wazuh documentation. 
+  
 .. _who-windows-policies:
 
 Manual configuration of the Local Audit Policies in Windows

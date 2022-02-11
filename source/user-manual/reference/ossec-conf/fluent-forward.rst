@@ -5,8 +5,6 @@
 fluent-forward
 ==============
 
-.. versionadded:: 3.9.0
-
 .. topic:: XML section name
 
 	.. code-block:: xml
@@ -72,8 +70,6 @@ For example ``<tag>debug.test</tag>``.
 
 object_key
 ^^^^^^^^^^
-
-.. versionadded:: 3.11.0
 
 Fluent Forward packs every log into an object. This option defines the key of that object, whose value is the log itself.
 
@@ -186,7 +182,6 @@ For example ``<timeout>10</timeout>``.
 
 poll_interval
 ^^^^^^^^^^^^^
-.. versionadded:: 3.11.0
 
 Defines the connection health check interval (in seconds). If the module keeps idle during the defined time, it will poll the connection. If the connection is broken, the module will reconnect to the Fluent server.
 
@@ -201,7 +196,6 @@ For instance: ``<poll_interval>60</poll_interval>``
 
 keepalive
 ^^^^^^^^^
-.. versionadded:: 3.11.0
 
 Enables TCP keepalive on the connection with the Fluent server. With the default configuration, the agent will wait indefinitely for the server to confirm a delivery. If ``<timeout>`` is disabled, or no data is available to send, the agent is unable to detect a broken connection.
 

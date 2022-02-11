@@ -1,5 +1,8 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+  :description: AWS CloudTrail is a service supported by Wazuh that enables auditing AWS accounts. Check out this section of our documentation to learn more about it. 
+  
 .. _amazon_cloudtrail:
 
 AWS CloudTrail
@@ -171,7 +174,7 @@ When a new security group is created, the following alert is shown on Kibana. It
 Allocate a new Elastic IP address
 +++++++++++++++++++++++++++++++++
 
-If a new Elastic IP is allocated, the following alert will be shown on Kibana:
+If a new Elastic IP address is allocated, the following alert will be shown on Kibana:
 
 .. thumbnail:: ../../../images/aws/aws-ec2-8.png
   :align: center

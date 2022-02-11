@@ -1,5 +1,8 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+  :description: Learn more about the distributed installation and configuration of the Wazuh server and Elastic Stack in this section of the Wazuh documentation. 
+  
 .. _basic_distributed_index:
 
 Distributed deployment

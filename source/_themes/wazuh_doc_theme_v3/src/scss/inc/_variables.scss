@@ -1,0 +1,119 @@
+/* -----------------------------------------------------------------------------
+  Variables (inc)
+----------------------------------------------------------------------------- */
+
+/* -- Device screens variables ---------------------------------------------------------------------------- */
+
+$breakpoints: (
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  wzh-xl: 1300px,
+  xxl: 1600px,
+) !default;
+
+/* -- Color variables ------------------------------------------------------------------------------------ */
+
+// Main colors - Light theme
+$light_ColorBaseSpace: #fff !default;
+$light_ColorPrimary: #256bd1 !default;
+$light_ColorPrimaryLighter: #3585f9 !default;
+$light_ColorBorderDetails: #c1ccd9 !default; // search-box and navigation borders
+$light_ColorBorderDeeper: #b7c6d7 !default;
+$light_ColorSidebarSpace: #ebf2fb !default;
+$light_ColorFooter: #f5f6f7 !default;
+$light_ColorMainTextExtra: #000 !default;
+$light_ColorMainText: #292929 !default;
+$light_ColorInputPlaceholder: #a6b5c8 !default;
+$light_ColorShadedText: #545f73 !default; // header-links
+$light_ColorHighlightInlineText: #7c3db2 !default;
+$light_ColorHighlightBackground: #e2eefe !default;
+$light_ColorTableBorder: #dce8f8 !default;
+$light_ColorCodeBlockBackground: #F8FAFD !default;
+$light_ColorIndexHeaderBackground: #fff !default;
+$light_ColorAccent: #fedd0b !default;
+$light_ColorFocusShade: #657c97 !default;
+$light_ColorShadow: #000 !default;
+$light_ColorGlobalTocHighlight: #dcebff !default;
+$light_ColorDanger: #f86b63 !default;
+$light_ColorDangerDark: #bd271e !default;
+$light_ColorWarning: #f97d37 !default;
+$light_ColorWarningDark: #B35621 !default;
+$light_ColorSuccess: #0899a2 !default;
+$light_ColorSuccessDark: #207D82 !default;
+$light_ColorAdmonitionBackground: #f9fcff !default;
+
+// Code-blocks - Light theme
+$light_ColorCodeDefault: #000 !default;
+$light_ColorCodeKeyword: #000 !default;
+$light_ColorCodeComment: #83720a !default;
+$light_ColorCodeNumber: #0e4a9f !default;
+$light_ColorCodeString: #bd3d9d !default;
+$light_ColorCodeFunction: #256bd1 !default;
+$light_ColorCodeVariable: #7c3db2 !default;
+
+// Main colors - Dark theme
+$dark_ColorBaseSpace: #2a2d34 !default;
+$dark_ColorPrimary: #499cfe !default;
+$dark_ColorPrimaryLighter: #6ca2f0 !default;
+$dark_ColorBorderDetails: #fff !default; // search-box and navigation borders
+$dark_ColorBorderDeeper: #e1e1e5 !default;
+$dark_ColorSidebarSpace: #343741 !default;
+$dark_ColorFooter: #242424 !default;
+$dark_ColorMainText: #fff !default;
+$dark_ColorInputPlaceholder: #a6b5c8 !default;
+$dark_ColorShadedText: #9298ab !default; // header-links
+$dark_ColorHighlightInlineText: #ebd0fc !default;
+$dark_ColorHighlightBackground: #242424 !default;
+$dark_ColorTableBorder: #b7c6d7 !default;
+$dark_ColorCodeBlockBackground: #242424 !default;
+$dark_ColorIndexHeaderBackground: #212121 !default;
+$dark_ColorAccent: #ffe853 !default;
+$dark_ColorFocusShade: #98a2b3 !default;
+$dark_ColorShadow: #000 !default;
+$dark_ColorGlobalTocHighlight: #dcebff !default;
+$dark_ColorDanger: #f86b63 !default;
+$dark_ColorDangerDark: #bd271e !default;
+$dark_ColorWarning: #f97d37 !default;
+$dark_ColorWarningDark: #B35621 !default;
+$dark_ColorSuccess: #0899a2 !default;
+$dark_ColorSuccessDark: #207D82 !default;
+$dark_ColorAdmonitionBackground: #242424 !default;
+
+// Code-blocks - Dark theme
+$dark_ColorCodeDefault: #fff !default;
+$dark_ColorCodeKeyword: #fff !default;
+$dark_ColorCodeComment: #ffe853 !default;
+$dark_ColorCodeNumber: #6ca2f0 !default;
+$dark_ColorCodeString: #f6b7f6 !default;
+$dark_ColorCodeFunction: #499cfe !default;
+$dark_ColorCodeVariable: #b677dc !default;
+
+/* -- Theme elements fixed dimensions ------------------------------------------------------------------------------------ */
+
+// Fixed dimensions
+$indexHeaderHeightXs: 215px !default;
+$indexHeaderHeightXl: 215px !default;
+$indexIconSize: 60px !default;
+$IndexMaxShowItems: 3 !default;
+$headerHeightXs: 70px !default;
+$headerHeightXl: 77px !default;
+$breadcrumbsHeightXs: 70px !default;
+$breadcrumbsHeightXl: 60px !default;
+$footerHeight: 70px !default;
+$leftSidebarWidth: 385px !default;
+$leftSidebarWidthNarrow: 320px !default;
+$rightSidebarWidth: 290px !default;
+$rightSidebarWidthNarrow: 240px !default;
+$leftRedocSidebarWidth: 294px !default;
+$rightRedocSidebarWidth: 40% !default;
+$redocHeaderHeight: 110px !default;
+$roundedCorners: 10px !default;
+$noLatestNoticeHeightXl: 60px !default;
+$secondaryMobileBar: 54px !default;
+
+/* -- Others ------------------------------------------------------------------------------------ */
+$imgPath: "../../images/" !default;
+$icoPath: $imgPath + "icons/" !default;
+$maxTocLevel: 6 !default;

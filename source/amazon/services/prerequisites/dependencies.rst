@@ -1,5 +1,8 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+  :description: Learn more about how to monitor AWS based services with Wazuh. In this section, you will learn more about installing dependencies. 
+  
 .. _amazon_dependencies:
 
 Installing dependencies
@@ -15,7 +18,7 @@ Installing dependencies
 Python
 ------
 
-The AWS S3 integration requires python 3. It is compatible with python versions from `3.6.0` to `3.9.5`. Future python releases should maintain compatibility although it cannot be guaranteed.
+The AWS module requires Python 3.9. Future Python releases should maintain compatibility although it cannot be guaranteed.
 
 a) For CentOS/RHEL/Fedora operating systems:
 
@@ -28,10 +31,6 @@ b) For Debian/Ubuntu operating systems:
 .. code-block:: console
 
   # apt-get update && apt-get install python3
-
-
-Pip
----
 
 The required modules can be installed with Pip, the Python package manager. Most of UNIX distributions have this tool available in their software repositories:
 

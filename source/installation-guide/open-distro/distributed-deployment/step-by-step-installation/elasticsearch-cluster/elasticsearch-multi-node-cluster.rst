@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Learn how to install Elasticsearch on a multi-node cluster with Wazuh. This deployment type provides high availability and scalability of the product. 
@@ -173,7 +173,7 @@ The final stage of the process for installing a multi-node cluster is performed 
 
       # export JAVA_HOME=/usr/share/elasticsearch/jdk/ && /usr/share/elasticsearch/plugins/opendistro_security/tools/securityadmin.sh -cd /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/ -icl -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin-key.pem -h <elasticsearch_IP>
 
-#. To confirm that the installation is successful, run the following command replacing the value ``<elasticsearch_IP>`` with the Elasticsearch installation IP.
+#. To confirm that the installation is successful, run the following command replacing the value ``<elasticsearch_IP>`` with the Elasticsearch installation IP address.
 
     .. code-block:: console
 

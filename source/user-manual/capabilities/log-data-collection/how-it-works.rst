@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Learn more about how the Log Data Collection capability of Wazuh works: how to collect log files and Windows event logs, how to receive log events through syslog, and more.
@@ -106,7 +106,7 @@ One option is for Wazuh to receive syslog logs by a custom port:
 - ``<connection>syslog</connection>`` indicates that the manager will accept incoming syslog messages from across the network.
 - ``<port>513</port>`` defines the port that Wazuh will listen to retrieve the logs. The port must be free.
 - ``<protocol>tcp</protocol>`` defines the protocol to listen the port. It can be UDP or TCP.
-- ``<allowed-ips>192.168.2.0/24</allowed-ips>`` defines the network or IP from which syslog messages will be accepted.
+- ``<allowed-ips>192.168.2.0/24</allowed-ips>`` defines the network or IP address from which syslog messages will be accepted.
 
 The other option stores the logs in a plaintext file and monitors that file with Wazuh. If a ``/etc/rsyslog.conf`` configuration file is being used and we have defined where to store the syslog logs, we can monitor them in Wazuh ``agent.conf`` using a ``<localfile>`` block with ``syslog`` as the log format.
 

@@ -1,11 +1,9 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. _wodle_azure_logs:
 
 wodle name="azure-logs"
 =======================
-
-.. versionadded:: 3.7.0
 
 .. topic:: XML section name
 
@@ -352,7 +350,7 @@ Defines a tag that we will add to the query. This entry is optional and can be u
 log_analytics\\request\\query
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This is the query we will make to the Azure Log Analytics API. This option is ready to use any query we can make in the Log Analytics portal. You can find a reference of the language used. `Reference <https://docs.loganalytics.io/docs/Language-Reference>`_.
+This is the query made to the Azure Log Analytics API. This option is ready to use any query that we can make in the Log Analytics portal. For more information on the language, check the `Azure documentation <https://docs.microsoft.com/en-us/azure/azure-monitor/logs/get-started-queries>`_.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -388,7 +386,7 @@ log_analytics\\request\\time_offset
 This option sets the time delay in which we will perform the query. For example, if we establish this option with the value "1d", the integration will perform the query on the events that have been generated in the interval of time defined between the current date of the system minus one day (1d) and the current date of the system.
 
 +--------------------+----------------------------------------------------------------------------------------------------------------------------+
-| **Default value**  | 1d                                                                                                                         |
+| **Default value**  | Date of execution at ``00:00:00``                                                                                          |
 +--------------------+----------------------------------------------------------------------------------------------------------------------------+
 | **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, m (minutes), h (hours), d (days) |
 +--------------------+----------------------------------------------------------------------------------------------------------------------------+
@@ -473,7 +471,7 @@ Key to the application we will use for authentication and to be able to make use
 graph\\auth_path
 ^^^^^^^^^^^^^^^^
 
-Path of the file that contains the application identifier and the application key for authentication in order to use the AAD Graph API. Incompatible with ``application_id`` and ``application_key`` options.
+Path of the file that contains the application identifier and the application key for authentication in order to use the AAD Graph API. Incompatible with the ``application_id`` and ``application_key`` options. Check the :ref:`credentials <azure_credentials>` reference for more information about this topic.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -481,12 +479,6 @@ Path of the file that contains the application identifier and the application ke
 | **Allowed values** | File path          |
 +--------------------+--------------------+
 
-File example:
-
-.. code-block:: shell
-
-    application_id = 8b7...c14
-    application_key = w22...91x
 
 graph\\tenantdomain
 ^^^^^^^^^^^^^^^^^^^
@@ -507,17 +499,17 @@ This option includes all the other options needed to make a query. We can have m
 request options
 ~~~~~~~~~~~~~~~
 
-+-----------------------------------------+----------------------------------------------+
-| Options                                 | Allowed values                               |
-+=========================================+==============================================+
-| `graph\\request\\tag`_                  | Any string                                   |
-+-----------------------------------------+----------------------------------------------+
-| `graph\\request\\query`_                | Any string                                   |
-+-----------------------------------------+----------------------------------------------+
-| `graph\\request\\timeout`_              | A positive number (seconds)                  |
-+-----------------------------------------+----------------------------------------------+
-| `graph\\request\\time_offset`_          | A positive number + suffix                   |
-+-----------------------------------------+----------------------------------------------+
++-----------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| Options                                 | Allowed values                                                                                                                              |
++=========================================+=============================================================================================================================================+
+| `graph\\request\\tag`_                  | Any string                                                                                                                                  |
++-----------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| `graph\\request\\query`_                | Any string containing ``auditLogs/directoryaudits``, ``auditLogs/signIns`` or ``auditLogs/provisioning`` plus any optional query parameter  |
++-----------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| `graph\\request\\timeout`_              | A positive number (seconds)                                                                                                                 |
++-----------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| `graph\\request\\time_offset`_          | A positive number + suffix                                                                                                                  |
++-----------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
 
 graph\\request\\tag
 ^^^^^^^^^^^^^^^^^^^
@@ -533,13 +525,13 @@ Defines a tag that we will add to the query. This entry is optional and can be u
 graph\\request\\query
 ^^^^^^^^^^^^^^^^^^^^^
 
-This is the query we will make to the Azure Log Analytics API. This option is ready to use any query we can make in the Log Analytics portal. You can find a reference of the language used `here <https://msdn.microsoft.com/en-us/library/azure/ad/graph/howto/azure-ad-graph-api-common-queries>`_.
+The query used to obtain the logs from the Microsoft Graph API. The query value must be ``auditLogs/directoryaudits``, ``auditLogs/signIns``, or ``auditLogs/provisioning`` in conjunction with the desired optional parameters and filters available for these report types. Check this `Microsoft Activity reports <https://docs.microsoft.com/en-us/graph/api/resources/azure-ad-auditlog-overview?view=graph-rest-1.0>`_ reference page to learn more about how the activity reports work and the available query parameters for each one.
 
-+--------------------+--------------------+
-| **Default value**  | N/A                |
-+--------------------+--------------------+
-| **Allowed values** | Any String         |
-+--------------------+--------------------+
++--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| **Default value**  | N/A                                                                                                                                         |
++--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| **Allowed values** | Any string containing ``auditLogs/directoryaudits``, ``auditLogs/signIns`` or ``auditLogs/provisioning`` plus any optional query parameter  |
++--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
 
 graph\\request\\timeout
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -556,10 +548,10 @@ Timeout for each request evaluation. This option overwrites the general `timeout
 graph\\request\\time_offset
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This option sets the time delay in which we will perform the query. For example, if we establish this option with the value "1d", the integration will perform the query on the events that have been generated in the interval of time defined between the current date of the system minus one day (1d) and the current date of the system.
+This option sets the time-lapse that the query will request. For example, if this option is set to the value "1d", the integration will request the events generated in the interval of time defined between the current system's date minus one day (1d) and the current system's date.
 
 +--------------------+----------------------------------------------------------------------------------------------------------------------------+
-| **Default value**  | 1d                                                                                                                         |
+| **Default value**  | Date of execution at ``00:00:00``                                                                                          |
 +--------------------+----------------------------------------------------------------------------------------------------------------------------+
 | **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, m (minutes), h (hours), d (days) |
 +--------------------+----------------------------------------------------------------------------------------------------------------------------+
@@ -692,14 +684,14 @@ Specifies the name of the container. Enter ``*`` to access all account container
 storage\\container\\blobs
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Specifies the extension of the blobs, like ``.json``. Enter "*" to access all blobs of the container/s.
+Specifies the extension of the blobs like ``.json``. Enter "*" to access all the containers' blobs. 
 
 .. note::
 
     This option is related to option ``content_type``, because if any blob has a different content to the one we have indicated, it will not be read correctly. Therefore, we need to be aware of what content we are trying to obtain and take it into consideration when using this option with ``"*"``.
 
 +--------------------+--------------------+
-| **Default value**  | N/A                |
+| **Default value**  | \*                 |
 +--------------------+--------------------+
 | **Allowed values** | Extension/"*"      |
 +--------------------+--------------------+
@@ -707,21 +699,20 @@ Specifies the extension of the blobs, like ``.json``. Enter "*" to access all bl
 storage\\container\\content_type
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Specifies the content of the blobs.
+This parameter indicates the format of the blobs' content. The available values are:
 
 - **text**. Plain text. Each line is a log.
 - **json_file**. The blob contain records of logs in standard json format.
 - **json_inline**. Each line is a log in json format.
 
-.. note::
-	As of November 1st 2018, the format of logs stored in Azure accounts became **inline JSON** instead of **JSON file**.
+The format of logs stored in Azure accounts is **inline JSON**.
 	
 .. note::
 
 	When the ``day`` option is set, the interval value must be a multiple of months. By default, the interval is set to a month.
 
 +--------------------+----------------------------+
-| **Default value**  | N/A                        |
+| **Default value**  | json_inline                |
 +--------------------+----------------------------+
 | **Allowed values** | text/json_file/json_inline |
 +--------------------+----------------------------+
@@ -744,7 +735,7 @@ storage\\container\\time_offset
 This option sets the time delay in which we will perform the query. For example, if we establish this option with the value "1d", the integration will perform the query on the events that have been generated in the interval of time defined between the current date of the system minus one day (1d) and the current date of the system.
 
 +--------------------+----------------------------------------------------------------------------------------------------------------------------+
-| **Default value**  | 1d                                                                                                                         |
+| **Default value**  | Date of execution at ``00:00:00``                                                                                          |
 +--------------------+----------------------------------------------------------------------------------------------------------------------------+
 | **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, m (minutes), h (hours), d (days) |
 +--------------------+----------------------------------------------------------------------------------------------------------------------------+
@@ -770,6 +761,8 @@ Example of storage configuration
                 <content_type>json_inline</content_type>
                 <time_offset>24h</time_offset>
             </container>
+
+	    <container name="audit-logs"/>
 
         </storage>
     </wodle>
@@ -827,6 +820,8 @@ Example of all integration
                 <content_type>json_inline</content_type>
                 <time_offset>24h</time_offset>
             </container>
+
+	    <container name="audit-logs"/>
 
         </storage>
     </wodle>

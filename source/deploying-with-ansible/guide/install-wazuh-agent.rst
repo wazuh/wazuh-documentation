@@ -1,4 +1,7 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
+
+.. meta::
+	:description: Check out this guide to learn how to install the Wazuh agent if you are deploying Wazuh with Ansible, an open source platform designed for automating tasks.
 
 .. _wazuh_ansible_wazuh_agent:
 
@@ -121,7 +124,14 @@ And we can see the preconfigured playbooks we have.
 	├── wazuh-elastic_stack-single.yml
 	├── wazuh-elastic.yml
 	├── wazuh-kibana.yml
-	└── wazuh-manager.yml
+	├── wazuh-manager-oss.yml
+	├── wazuh-manager.yml
+	├── wazuh-odfe-production-ready.yml
+	├── wazuh-odfe-single.yml
+	├── wazuh-opendistro-full.yml
+	├── wazuh-opendistro-kibana.yml
+	└── wazuh-opendistro.yml
+
 
 In this occasion we are going to use the role of **wazuh-agent**, which contains the necessary commands to install an agent and register it in our Wazuh environment. To consult the default configuration go to this :ref:`section <wazuh_ansible_reference>`.
 

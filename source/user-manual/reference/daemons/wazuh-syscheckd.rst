@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: The wazuh-syscheckd program checks files for changes to the checksums, permissions and ownership. Learn more in this section. 

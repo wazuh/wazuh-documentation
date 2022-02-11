@@ -1,11 +1,12 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
+
+.. meta::
+  :description: Learn more about the available options and how to configure the Vulnerability Detector module of Wazuh in this section of our documentation.
 
 .. _vuln_detector:
 
 vulnerability-detector
 ======================
-
-.. versionadded:: 3.2.0
 
 This section covers the configuration for the :ref:`vulnerability-detection` module.
 
@@ -22,7 +23,8 @@ Options
 - `enabled`_
 - `interval`_
 - `run_on_start`_
-- `ignore_time`_
+- `min_full_scan_interval`_
+- `retry_interval`_
 - `provider`_
 
 +---------------------------+-----------------------------+
@@ -34,7 +36,9 @@ Options
 +---------------------------+-----------------------------+
 | `run_on_start`_           | yes, no                     |
 +---------------------------+-----------------------------+
-| `ignore_time`_            | A positive number (seconds) |
+| `min_full_scan_interval`_ | A positive number (seconds) |
++---------------------------+-----------------------------+
+| `retry_interval`_         | A positive number (seconds) |
 +---------------------------+-----------------------------+
 | `provider`_               | A valid vulnerability vendor|
 +---------------------------+-----------------------------+
@@ -77,12 +81,12 @@ Runs updates and vulnerabilities scans immediately when service is started.
 | **Allowed values**   | yes, no   |
 +----------------------+-----------+
 
-.. _vuln_det_ignore_time:
+.. _vuln_det_min_full_scan_interval:
 
-ignore_time
-^^^^^^^^^^^^
+min_full_scan_interval
+^^^^^^^^^^^^^^^^^^^^^^^
 
-Time during which vulnerabilities that have already been alerted will be ignored. When this time hasn't passed yet, only :ref:`partial scans <vuln_det_scan_types>` will be performed.
+The time during which a full scan will not be performed even if the database of vulnerabilities is updated. When this time expires, a :ref:`full scan <vuln_det_scan_types>` will be performed only if the CVEs database has changed.
 
 +----------------------+------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**    | 6 hours                                                                                                                            |
@@ -90,8 +94,18 @@ Time during which vulnerabilities that have already been alerted will be ignored
 | **Allowed values**   | A positive number that should contain a suffix character indicating a time unit: s (seconds), m (minutes), h (hours) or d (days).  |
 +----------------------+------------------------------------------------------------------------------------------------------------------------------------+
 
-.. note:: In a partial scan new packages are scanned, but only a full scan removes the CVEs related to old packages that are not present anymore.
+.. _retry_interval:
 
+retry_interval
+^^^^^^^^^^^^^^
+
+The time to wait after a scan completes to retry the agents that had a problem to be scanned.
+
++----------------------+------------------------------------------------------------------------------------------------------------------------------------+
+| **Default value**    | 30 seconds                                                                                                                         |
++----------------------+------------------------------------------------------------------------------------------------------------------------------------+
+| **Allowed values**   | A positive number that should contain a suffix character indicating a time unit: s (seconds), m (minutes), h (hours), or d (days). |
++----------------------+------------------------------------------------------------------------------------------------------------------------------------+
 
 provider
 ^^^^^^^^
@@ -181,11 +195,11 @@ Configuration block to specify vulnerability updates.
 |                    |                           |                    +---------------------+--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                    |                           |                    |                     | Defines the link to an alternative OVAL or ALAS files.                                                                                                                                                                                                             |
 |                    |                           |                    | url                 +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|                    |                           |                    |                     | **Allowed values** | Link to the feed to be downloaded. See :doc:`offline update<../../capabilities/vulnerability-detection/offline_update>` for more information.                                                                                                 |
+|                    |                           |                    |                     | **Allowed values** | Link to the feed to be downloaded. See :doc:`offline update<../../capabilities/vulnerability-detection/offline-update>` for more information.                                                                                                 |
 |                    |                           |                    +---------------------+--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                    |                           |                    |                     | Defines the path to an alternative OVAL or ALAS file.                                                                                                                                                                                                              |
 |                    |                           |                    | path                +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|                    |                           |                    |                     | **Allowed values** | Path where the feed is located. See :doc:`offline update<../../capabilities/vulnerability-detection/offline_update>` for more information.                                                                                                    |
+|                    |                           |                    |                     | **Allowed values** | Path where the feed is located. See :doc:`offline update<../../capabilities/vulnerability-detection/offline-update>` for more information.                                                                                                    |
 |                    |                           |                    +---------------------+--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                    |                           |                    |                     | Defines the connection port when using the ``url`` attribute.                                                                                                                                                                                                      |
 |                    |                           |                    | port                +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -193,7 +207,7 @@ Configuration block to specify vulnerability updates.
 |                    |                           |                    +---------------------+--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                    |                           |                    |                     | Defines compatibility with unsupported systems.                                                                                                                                                                                                                    |
 |                    |                           |                    | allow               +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|                    |                           |                    |                     | **Allowed values** | A valid operating system not supported by default. You can find a guide on how to set it up :doc:`here<../../capabilities/vulnerability-detection/allow_os>`.                                                                                 |
+|                    |                           |                    |                     | **Allowed values** | A valid operating system not supported by default. You can find a guide on how to set it up :doc:`here<../../capabilities/vulnerability-detection/allow-os>`.                                                                                 |
 |                    +---------------------------+--------------------+---------------------+--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                    |                           | How often the vulnerabilities of the provider are updated. It can be overwritten by the attribute with the same name of ``<os>``.                                                                                                                                                                             |
 |                    |                           +--------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -231,15 +245,15 @@ Configuration block to specify vulnerability updates.
 |                    |                           +--------------------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                    |                           |                    | **provider** | **value**                                                                                                                                                                                                                                                                 |
 |                    |                           |                    +--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|                    |                           |                    | redhat       | Parameterized link to download the feed files obtained from `Red Hat Security Data API <https://access.redhat.com/labsinfo/securitydataapi>`_. You can find a guide on how to set it up :doc:`here<../../capabilities/vulnerability-detection/offline_update>`.           |
+|                    |                           |                    | redhat       | Parameterized link to download the feed files obtained from `Red Hat Security Data API <https://access.redhat.com/labsinfo/securitydataapi>`_. You can find a guide on how to set it up :doc:`here<../../capabilities/vulnerability-detection/offline-update>`.           |
 |                    |                           |                    +--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|                    |  url                      | **Allowed values** | nvd          | Parameterized link to download the feed files obtained from `National Vulnerability Database <https://nvd.nist.gov>`_. You can find a guide on how to set it up :doc:`here<../../capabilities/vulnerability-detection/offline_update>`.                                   |
+|                    |  url                      | **Allowed values** | nvd          | Parameterized link to download the feed files obtained from `National Vulnerability Database <https://nvd.nist.gov>`_. You can find a guide on how to set it up :doc:`here<../../capabilities/vulnerability-detection/offline-update>`.                                   |
 |                    |                           |                    +--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|                    |                           |                    | arch         | Parameterized link to download the feed file obtained from `Arch Security <https://security.archlinux.org>`_. You can find a guide on how to set it up :doc:`here<../../capabilities/vulnerability-detection/offline_update>`.                                            |
+|                    |                           |                    | arch         | Parameterized link to download the feed file obtained from `Arch Security <https://security.archlinux.org>`_. You can find a guide on how to set it up :doc:`here<../../capabilities/vulnerability-detection/offline-update>`.                                            |
 |                    |                           |                    +--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|                    |                           |                    | msu          | Parameterized link to download the feed file obtained from `Wazuh feed <https://feed.wazuh.com/vulnerability-detector/windows/msu-updates.json.gz>`_. You can find a guide on how to set it up :doc:`here<../../capabilities/vulnerability-detection/offline_update>`.    |
+|                    |                           |                    | msu          | Parameterized link to download the feed file obtained from `Wazuh feed <https://feed.wazuh.com/vulnerability-detector/windows/msu-updates.json.gz>`_. You can find a guide on how to set it up :doc:`here<../../capabilities/vulnerability-detection/offline-update>`.    |
 |                    |                           |                    +--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|                    |                           |                    | debian       | Parameterized link to download the feed files obtained from `Debian Security Tracker <https://security-tracker.debian.org>`_. You can find a guide on how to set it up :doc:`here<../../capabilities/vulnerability-detection/offline_update>`.                            |
+|                    |                           |                    | debian       | Parameterized link to download the feed files obtained from `Debian Security Tracker <https://security-tracker.debian.org>`_. You can find a guide on how to set it up :doc:`here<../../capabilities/vulnerability-detection/offline-update>`.                            |
 |                    |                           +--------------------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                    |                           |                    |              | Defines the first value which the tag will be substituted.                                                                                                                                                                                                                |
 |                    |                           |                    | start        +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -278,7 +292,7 @@ The following configuration will update the vulnerability database for Ubuntu, D
     <vulnerability-detector>
         <enabled>no</enabled>
         <interval>5m</interval>
-        <ignore_time>6h</ignore_time>
+        <min_full_scan_interval>6h</min_full_scan_interval>
         <run_on_start>yes</run_on_start>
 
         <!-- Ubuntu OS vulnerabilities -->
@@ -341,3 +355,4 @@ The following configuration will update the vulnerability database for Ubuntu, D
 
 
 .. note:: See the :doc:`Vulnerability detector section<../../capabilities/vulnerability-detection/index>` to obtain more information about this module.
+

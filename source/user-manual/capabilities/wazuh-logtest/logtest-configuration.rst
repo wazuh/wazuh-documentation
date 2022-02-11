@@ -1,5 +1,7 @@
-.. Copyright (C) 2021 Wazuh, Inc.
-
+.. Copyright (C) 2022 Wazuh, Inc.
+.. meta::
+  :description: The Wazuh-Logtest solution was designed to replace ossec-logtest. It allows you to test and verify rules and decoders remotely. Learn how it works here. 
+  
 .. _logtest_configuration:
 
 Configuration

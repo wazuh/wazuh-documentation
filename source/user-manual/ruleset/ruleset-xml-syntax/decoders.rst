@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. _decoders_syntax:
 
@@ -315,9 +315,9 @@ It defines what the parenthesis groups contain and the order in which they were 
 +                    +------------+-------------------------------------------------------+
 |                    | user       | An alias to dstuser (only one of the two can be used) |
 +                    +------------+-------------------------------------------------------+
-|                    | srcip      | Source ip                                             |
+|                    | srcip      | Source IP address                                     |
 +                    +------------+-------------------------------------------------------+
-|                    | dstip      | Destination ip                                        |
+|                    | dstip      | Destination IP address                                |
 +                    +------------+-------------------------------------------------------+
 |                    | srcport    | Source port                                           |
 +                    +------------+-------------------------------------------------------+
@@ -358,9 +358,9 @@ It is used to designate a decoder as one in which the first time it matches the 
 +                    +------------+-------------------------------------------------------+
 |                    | user       | An alias to dstuser (only one of the two can be used) |
 +                    +------------+-------------------------------------------------------+
-|                    | srcip      | Source ip                                             |
+|                    | srcip      | Source IP address                                     |
 +                    +------------+-------------------------------------------------------+
-|                    | dstip      | Destination ip                                        |
+|                    | dstip      | Destination  IP address                               |
 +                    +------------+-------------------------------------------------------+
 |                    | srcport    | Source port                                           |
 +                    +------------+-------------------------------------------------------+
@@ -389,7 +389,7 @@ The following decoder will extract the user who generated the alert and the loca
 
 .. code-block:: xml
 
-  </decoder>
+  <decoder name="fts-decoder">
     <fts>srcuser, location</fts>
     ...
   </decoder>
@@ -460,10 +460,6 @@ Specifies how to treat the `NULL` fields coming from the JSON events. Only for t
 | **Allowed values** | string (It shows the NULL value as string)                              |
 +                    +-------------------------------------------------------------------------+
 |                    | discard (It discards NULL fields and doesn't store them into the alert) |
-+                    +-------------------------------------------------------------------------+
-|                    | empty (It shows the NULL field as an empty field)                       |
-|                    |                                                                         |
-|                    | .. deprecated:: 3.7                                                     |
 +--------------------+-------------------------------------------------------------------------+
 
 json_array_structure

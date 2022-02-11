@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Find out more about how to check the connection to the Wazuh Manager in this section of our documentation. 
@@ -49,4 +49,4 @@ You can also check to see if an agent connected correctly by verifying if the TC
 
 The result should match the agent and manager IP addresses.
 
-In the :doc:`agent_control section <../reference/tools/agent_control>`, you can find information about the status of the agents that are registered with the manager.
+In the :doc:`agent_control section <../reference/tools/agent-control>`, you can find information about the status of the agents that are registered with the manager.

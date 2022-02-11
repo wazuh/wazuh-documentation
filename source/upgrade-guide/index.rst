@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Find out more about the process of upgrading the Wazuh server, Open Distro for Elasticsearch, Elastic Stack, and Wazuh agents in this section.
@@ -20,4 +20,4 @@ In case of having any doubt about operating system compatibility, as well as the
         elasticsearch-kibana-filebeat/index
         upgrading-agent
         legacy/index
-        compatibility_matrix/index
+        compatibility-matrix/index

@@ -1,5 +1,8 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+  :description: This section guides through the installation and configuration of the Wazuh server and Elastic Stack on the same host. Learn more here. 
+  
 .. _basic_all_in_one_index:
 
 All-in-one deployment
@@ -27,4 +30,4 @@ The user can choose between step-by-step installation, a manual way of carrying 
     :glob:
 
     unattended-installation
-    all_in_one
+    all-in-one

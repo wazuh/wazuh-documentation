@@ -1,8 +1,8 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
-  :description: Wazuh-Logtest solution allows the testing and verification of rules and decoders. Learn more about it in this section.
-
+  :description: The Wazuh-Logtest solution is distributed by different components of the Wazuh environment: core logtest, wazuh RESTful API, and wazuh-logtest tool. 
+  
 .. _dev-wazuh-logtest:
 
 

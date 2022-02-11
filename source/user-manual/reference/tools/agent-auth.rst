@@ -1,5 +1,8 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+  :description: The agent-auth program is the client application used along with ossec-authd to automatically add agents to a Wazuh manager. Learn more about it here.
+  
 .. note::
 
 	Since Wazuh 4.0, by default, the agent registers automatically with the manager through enrollment. Configuration details can be found on :ref:`Enrollment section <reference_ossec_client>`.
@@ -66,4 +69,4 @@ The ``agent-auth`` program is the client application used along with :ref:`wazuh
 | **-x <path>**       | Full path to the agent certificate.                                           |
 +---------------------+-------------------------------------------------------------------------------+
 
-.. _`SSL ciphers`: https://www.openssl.org/docs/man1.1.0/apps/ciphers.html
+.. _`SSL ciphers`: https://www.openssl.org/docs/man1.1.1/man1/ciphers.html

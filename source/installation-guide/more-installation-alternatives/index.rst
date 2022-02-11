@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Check out alternative Wazuh installation configurations, which include installation with Elastic Stack basic license, with Splunk, or from sources.  
@@ -22,3 +22,4 @@ In the installation guide, is explained how to install Wazuh from packages. Alte
     elastic-stack/index
     splunk/index
     wazuh-from-sources/index
+    offline-installation

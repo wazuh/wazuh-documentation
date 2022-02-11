@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Check the tasks that help you benefit the most from the installation of Wazuh after the installation of the Wazuh-Docker. 

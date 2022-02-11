@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. _development:
 
@@ -21,3 +21,4 @@ This section contains technical documentation for developers.
         wazuh-cluster
         packaging/index
         wazuh-logtest
+        selinux-wazuh-context

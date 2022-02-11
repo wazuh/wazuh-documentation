@@ -1,4 +1,7 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
+
+.. meta::
+  :description: Learn more about the Wazuh local configuration, including configuration sections and supported installations, in this section of our documentation. 
 
 .. _reference_manager_conf:
 
@@ -26,81 +29,87 @@ Here is an example of the proper location of the *alerts* configuration section:
 
 Wazuh can be installed in two ways: as a manager by using the "server/manager" installation type and as an agent by using the "agent" installation type.
 
-+---------------------------------------------------------------------+
-| Configuration sections                                              |
-+=====================================================================+
-| :doc:`active-response-manager <active-response-manager>`            |
-+---------------------------------------------------------------------+
-| :doc:`agentless <agentless>`                                        |
-+---------------------------------------------------------------------+
-| :doc:`agent-upgrade-manager <agent-upgrade-manager>`                |
-+---------------------------------------------------------------------+
-| :doc:`alerts <alerts>`                                              |
-+---------------------------------------------------------------------+
-| :doc:`auth <auth>`                                                  |
-+---------------------------------------------------------------------+
-| :doc:`cluster <cluster>`                                            |
-+---------------------------------------------------------------------+
-| :doc:`command <commands>`                                           |
-+---------------------------------------------------------------------+
-| :doc:`database_output <database-output>`                            |
-+---------------------------------------------------------------------+
-| :doc:`email_alerts <email_alerts>`                                  |
-+---------------------------------------------------------------------+
-| :doc:`fluent-forward <fluent-forward>`                              |
-+---------------------------------------------------------------------+
-| :doc:`global  <global>`                                             |
-+---------------------------------------------------------------------+
-| :doc:`integration  <integration>`                                   |
-+---------------------------------------------------------------------+
-| :doc:`labels-manager <labels-manager>`                              |
-+---------------------------------------------------------------------+
-| :doc:`localfile <localfile>`                                        |
-+---------------------------------------------------------------------+
-| :doc:`logging-manager <logging-manager>`                            |
-+---------------------------------------------------------------------+
-| :doc:`remote <remote>`                                              |
-+---------------------------------------------------------------------+
-| :doc:`reports <reports>`                                            |
-+---------------------------------------------------------------------+
-| :doc:`rootcheck <rootcheck>`                                        |
-+---------------------------------------------------------------------+
-| :doc:`rule_test <rule_test>`                                        |
-+---------------------------------------------------------------------+
-| :doc:`ruleset <ruleset>`                                            |
-+---------------------------------------------------------------------+
-| :doc:`sca <sca>`                                                    |
-+---------------------------------------------------------------------+
-| :doc:`socket <socket>`                                              |
-+---------------------------------------------------------------------+
-| :doc:`syscheck <syscheck>`                                          |
-+---------------------------------------------------------------------+
-| :doc:`syslog_output <syslog-output>`                                |
-+---------------------------------------------------------------------+
-| :doc:`task-manager <task-manager>`                                  |
-+---------------------------------------------------------------------+
-| :doc:`vulnerability-detector <vuln-detector>`                       |
-+---------------------------------------------------------------------+
-| :doc:`wodle name="agent-key-polling" <wodle-agent-key-polling>`     |
-+---------------------------------------------------------------------+
-| :doc:`wodle name="aws-s3" <wodle-s3>`                               |
-+---------------------------------------------------------------------+
-| :doc:`wodle name="azure-logs" <wodle-azure-logs>`                   |
-+---------------------------------------------------------------------+
-| :doc:`wodle name="cis-cat" <wodle-ciscat>`                          |
-+---------------------------------------------------------------------+
-| :doc:`wodle name="command" <wodle-command>`                         |
-+---------------------------------------------------------------------+
-| :doc:`wodle name="docker-listener" <wodle-docker>`                  |
-+---------------------------------------------------------------------+
-| :doc:`wodle name="open-scap" <wodle-openscap>`                      |
-+---------------------------------------------------------------------+
-| :doc:`wodle name="osquery" <wodle-osquery>`                         |
-+---------------------------------------------------------------------+
-| :doc:`wodle name="syscollector" <wodle-syscollector>`               |
-+---------------------------------------------------------------------+
-| :doc:`gcp-pubsub <gcp-pubsub>`                                      |
-+---------------------------------------------------------------------+
++-----------------------------------------------------------------+
+| Configuration sections                                          |
++=================================================================+
+| :doc:`active-response-manager <active-response-manager>`        |
++-----------------------------------------------------------------+
+| :doc:`agentless <agentless>`                                    |
++-----------------------------------------------------------------+
+| :doc:`agent-upgrade-manager <agent-upgrade-manager>`            |
++-----------------------------------------------------------------+
+| :doc:`alerts <alerts>`                                          |
++-----------------------------------------------------------------+
+| :doc:`auth <auth>`                                              |
++-----------------------------------------------------------------+
+| :doc:`cluster <cluster>`                                        |
++-----------------------------------------------------------------+
+| :doc:`command <commands>`                                       |
++-----------------------------------------------------------------+
+| :doc:`database_output <database-output>`                        |
++-----------------------------------------------------------------+
+| :doc:`email_alerts <email-alerts>`                              |
++-----------------------------------------------------------------+
+| :doc:`fluent-forward <fluent-forward>`                          |
++-----------------------------------------------------------------+
+| :doc:`global <global>`                                          |
++-----------------------------------------------------------------+
+| :doc:`github <github-module>`                                   |
++-----------------------------------------------------------------+
+| :doc:`integration <integration>`                                |
++-----------------------------------------------------------------+
+| :doc:`labels-manager <labels-manager>`                          |
++-----------------------------------------------------------------+
+| :doc:`localfile <localfile>`                                    |
++-----------------------------------------------------------------+
+| :doc:`logging-manager <logging-manager>`                        |
++-----------------------------------------------------------------+
+| :doc:`office365 <office365-module>`                             |
++-----------------------------------------------------------------+
+| :doc:`remote <remote>`                                          |
++-----------------------------------------------------------------+
+| :doc:`reports <reports>`                                        |
++-----------------------------------------------------------------+
+| :doc:`rootcheck <rootcheck>`                                    |
++-----------------------------------------------------------------+
+| :doc:`rule_test <rule-test>`                                    |
++-----------------------------------------------------------------+
+| :doc:`ruleset <ruleset>`                                        |
++-----------------------------------------------------------------+
+| :doc:`sca <sca>`                                                |
++-----------------------------------------------------------------+
+| :doc:`socket <socket>`                                          |
++-----------------------------------------------------------------+
+| :doc:`syscheck <syscheck>`                                      |
++-----------------------------------------------------------------+
+| :doc:`syslog_output <syslog-output>`                            |
++-----------------------------------------------------------------+
+| :doc:`task-manager <task-manager>`                              |
++-----------------------------------------------------------------+
+| :doc:`vulnerability-detector <vuln-detector>`                   |
++-----------------------------------------------------------------+
+| :doc:`wodle name="agent-key-polling" <wodle-agent-key-polling>` |
++-----------------------------------------------------------------+
+| :doc:`wodle name="aws-s3" <wodle-s3>`                           |
++-----------------------------------------------------------------+
+| :doc:`wodle name="azure-logs" <wodle-azure-logs>`               |
++-----------------------------------------------------------------+
+| :doc:`wodle name="cis-cat" <wodle-ciscat>`                      |
++-----------------------------------------------------------------+
+| :doc:`wodle name="command" <wodle-command>`                     |
++-----------------------------------------------------------------+
+| :doc:`wodle name="docker-listener" <wodle-docker>`              |
++-----------------------------------------------------------------+
+| :doc:`wodle name="open-scap" <wodle-openscap>`                  |
++-----------------------------------------------------------------+
+| :doc:`wodle name="osquery" <wodle-osquery>`                     |
++-----------------------------------------------------------------+
+| :doc:`wodle name="syscollector" <wodle-syscollector>`           |
++-----------------------------------------------------------------+
+| :doc:`gcp-pubsub <gcp-pubsub>`                                  |
++-----------------------------------------------------------------+
+| :doc:`gcp-bucket <gcp-bucket>`                                  |
++-----------------------------------------------------------------+
 
 All of the above sections must be located within the top-level ``<wazuh_config>`` tag. In case of adding another ``<wazuh_config>`` tag, it may override the values set on the previous tag.
 
@@ -117,10 +126,11 @@ All of the above sections must be located within the top-level ``<wazuh_config>`
    cluster
    commands
    database-output
-   email_alerts
+   email-alerts
    fluent-forward
    gcp-pubsub
    global
+   github-module
    integration
    labels-manager
    localfile
@@ -128,7 +138,7 @@ All of the above sections must be located within the top-level ``<wazuh_config>`
    remote
    reports
    rootcheck
-   rule_test
+   rule-test
    ruleset
    sca
    socket
@@ -145,3 +155,4 @@ All of the above sections must be located within the top-level ``<wazuh_config>`
    wodle-osquery
    wodle-s3
    wodle-syscollector
+   gcp-bucket

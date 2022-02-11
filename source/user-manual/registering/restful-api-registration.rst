@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: Check out how to register the Wazuh agents using the Wazuh API. This allows the Wazuh agent registration by running a single request from any host.
@@ -159,7 +159,7 @@ Choose the tab corresponding to the Wazuh agent host operating system:
 
          .. code-block:: console
 
-          # 'C:\Program Files (x86)\ossec-agent\manage_agents' -i <key>
+          # & "C:\Program Files (x86)\ossec-agent\manage_agents.exe" -i <key>
 
          An example output of the command looks as follows:
 

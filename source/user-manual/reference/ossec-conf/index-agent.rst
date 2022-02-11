@@ -28,53 +28,57 @@ The ``shared.conf`` file is very similar to ``agent.conf``, but ``shared.conf`` 
 
 Wazuh can be installed in two ways: as a manager by using the "server/manager" installation type and as an agent by using the "agent" installation type.
 
-+---------------------------------------------------------------------+
-| Configuration sections                                              |
-+=====================================================================+
-| :doc:`active-response-agent <active-response-agent>`                |
-+---------------------------------------------------------------------+
-| :doc:`agent-upgrade-agent <agent-upgrade-agent>`                    |
-+---------------------------------------------------------------------+
-| :doc:`client <client>`                                              |
-+---------------------------------------------------------------------+
-| :doc:`client_buffer <client_buffer>`                                |
-+---------------------------------------------------------------------+
-| :doc:`fluent-forward <fluent-forward>`                              |
-+---------------------------------------------------------------------+
-| :doc:`github <github-module>`                                       |
-+---------------------------------------------------------------------+
-| :doc:`labels-agent <labels-agent>`                                  |
-+---------------------------------------------------------------------+
-| :doc:`localfile <localfile>`                                        |
-+---------------------------------------------------------------------+
-| :doc:`logging-agent <logging-agent>`                                |
-+---------------------------------------------------------------------+
-| :doc:`office365 <office365-module>`                                 |
-+---------------------------------------------------------------------+
-| :doc:`rootcheck <rootcheck>`                                        |
-+---------------------------------------------------------------------+
-| :doc:`sca <sca>`                                                    |
-+---------------------------------------------------------------------+
-| :doc:`socket <socket>`                                              |
-+---------------------------------------------------------------------+
-| :doc:`syscheck <syscheck>`                                          |
-+---------------------------------------------------------------------+
-| :doc:`wodle name="aws-s3" <wodle-s3>`                               |
-+---------------------------------------------------------------------+
-| :doc:`wodle name="cis-cat" <wodle-ciscat>`                          |
-+---------------------------------------------------------------------+
-| :doc:`wodle name="command" <wodle-command>`                         |
-+---------------------------------------------------------------------+
-| :doc:`wodle name="docker-listener" <wodle-docker>`                  |
-+---------------------------------------------------------------------+
-| :doc:`wodle name="open-scap" <wodle-openscap>`                      |
-+---------------------------------------------------------------------+
-| :doc:`wodle name="osquery" <wodle-osquery>`                         |
-+---------------------------------------------------------------------+
-| :doc:`wodle name="syscollector" <wodle-syscollector>`               |
-+---------------------------------------------------------------------+
-| :doc:`gcp-pubsub <gcp-pubsub>`                                      |
-+---------------------------------------------------------------------+
++-------------------------------------------------------+
+| Configuration sections                                |
++=======================================================+
+| :doc:`active-response-agent <active-response-agent>`  |
++-------------------------------------------------------+
+| :doc:`agent-upgrade-agent <agent-upgrade-agent>`      |
++-------------------------------------------------------+
+| :doc:`client <client>`                                |
++-------------------------------------------------------+
+| :doc:`client_buffer <client-buffer>`                  |
++-------------------------------------------------------+
+| :doc:`fluent-forward <fluent-forward>`                |
++-------------------------------------------------------+
+| :doc:`github <github-module>`                         |
++-------------------------------------------------------+
+| :doc:`labels-agent <labels-agent>`                    |
++-------------------------------------------------------+
+| :doc:`localfile <localfile>`                          |
++-------------------------------------------------------+
+| :doc:`logging-agent <logging-agent>`                  |
++-------------------------------------------------------+
+| :doc:`office365 <office365-module>`                   |
++-------------------------------------------------------+
+| :doc:`rootcheck <rootcheck>`                          |
++-------------------------------------------------------+
+| :doc:`sca <sca>`                                      |
++-------------------------------------------------------+
+| :doc:`socket <socket>`                                |
++-------------------------------------------------------+
+| :doc:`syscheck <syscheck>`                            |
++-------------------------------------------------------+
+| :doc:`wodle name="aws-s3" <wodle-s3>`                 |
++-------------------------------------------------------+
+| :doc:`wodle name="azure-logs" <wodle-azure-logs>`     |
++-------------------------------------------------------+
+| :doc:`wodle name="cis-cat" <wodle-ciscat>`            |
++-------------------------------------------------------+
+| :doc:`wodle name="command" <wodle-command>`           |
++-------------------------------------------------------+
+| :doc:`wodle name="docker-listener" <wodle-docker>`    |
++-------------------------------------------------------+
+| :doc:`wodle name="open-scap" <wodle-openscap>`        |
++-------------------------------------------------------+
+| :doc:`wodle name="osquery" <wodle-osquery>`           |
++-------------------------------------------------------+
+| :doc:`wodle name="syscollector" <wodle-syscollector>` |
++-------------------------------------------------------+
+| :doc:`gcp-pubsub <gcp-pubsub>`                        |
++-------------------------------------------------------+
+| :doc:`gcp-bucket <gcp-bucket>`                        |
++-------------------------------------------------------+
 
 All of the above sections must be located within the top-level ``<wazuh_config>`` tag. Adding another ``<wazuh_config>`` tag might override the values set on the previous tag.
 
@@ -86,7 +90,7 @@ All of the above sections must be located within the top-level ``<wazuh_config>`
    active-response-agent
    agent-upgrade-agent
    client
-   client_buffer
+   client-buffer
    fluent-forward
    gcp-pubsub
    github-module

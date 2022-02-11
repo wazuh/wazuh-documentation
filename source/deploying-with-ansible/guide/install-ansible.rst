@@ -1,5 +1,8 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+   :description: Learn how to install the Ansible server in this section of the Wazuh documentation. Check out this step-by-step guide. 
+   
 .. _wazuh_ansible_installation:
 
 Install Ansible
@@ -9,10 +12,10 @@ In this section we will proceed to install the Ansible server. To be able to dep
 
 In the example we will follow in this guide, we will have the following infrastructure.
 
-- Ansible server.
-- Wazuh server.
-- Elastic Stack server.
-- Wazuh agent.
+- Ansible server
+- Wazuh server
+- Elastic Stack server
+- Wazuh agent
 
 .. note:: OpenSSH Compatibility
 
@@ -30,6 +33,12 @@ Windows hosts
 -------------
 
 Windows hosts are supported by Ansible from version 1.7 via the remote execution of PowerShell. As opposed to Linux hosts, it is necessary to do some pre-work before being able to use Ansible in Windows hosts. Please refer to `Windows Guide <https://docs.ansible.com/ansible/latest/user_guide/windows.html>`_ on Ansible official documentation. Consider the following minimum requirements:
+
+- Ansible can generally manage Windows versions under current and extended support from Microsoft. Ansible can manage desktop OSs including Windows 7, 8.1, and 10, and server OSs including Windows Server 2008, 2008 R2, 2012, 2012 R2, 2016, and 2019.
+- Ansible requires PowerShell 3.0 or newer and at least .NET 4.0 to be installed on the Windows host.
+- A WinRM listener should be created and activated.
+
+
 
 Installation on CentOS/RHEL/Fedora
 ----------------------------------
@@ -288,7 +297,7 @@ Test Connection
 
 #. Add hosts to control
 
-   Adding hosts is easy, just put the hostname or IP Address on ``/etc/ansible/hosts`` in our Ansible server. Our Wazuh server Ip is ``192.168.0.180`` and the user is ``centos`` in this example. We have to add ``192.168.0.180 ansible_ssh_user=centos``.
+   Adding hosts is easy, just put the hostname or IP Address on ``/etc/ansible/hosts`` in our Ansible server. Our Wazuh server IP Address is ``192.168.0.180`` and the user is ``centos`` in this example. We have to add ``192.168.0.180 ansible_ssh_user=centos``.
 
    .. code-block:: yaml
 
@@ -299,7 +308,7 @@ Test Connection
     #   - Comments begin with the '#' character
     #   - Blank lines are ignored
     #   - Groups of hosts are delimited by [header] elements
-    #   - You can enter hostnames or ip addresses
+    #   - You can enter hostnames or IP addresses
     #   - A hostname/ip can be a member of multiple groups
 
     # Ex 1: Ungrouped hosts, specify before any group headers.

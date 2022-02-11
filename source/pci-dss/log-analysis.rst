@@ -1,5 +1,8 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+  :description: Learn more about how to use Wazuh log collection and analysis capabilities to meet the following PCI DSS controls. 
+  
 .. _pci_dss_log_analysis:
 
 Log analysis

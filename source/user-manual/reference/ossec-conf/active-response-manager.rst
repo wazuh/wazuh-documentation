@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. _reference_ossec_active_response_manager:
 
@@ -75,7 +75,7 @@ Indicates which system(s) the command should be executed on.
 
 Example:
 
-If the application that interfaces with your edge firewall runs on one of your agents, you might have a firewall-block-edge command that runs a script on that agent to blacklist an offending IP on the edge firewall.
+If the application that interfaces with your edge firewall runs on one of your agents, you might have a firewall-block-edge command that runs a script on that agent to blacklist an offending IP address on the edge firewall.
 
 .. note::
     If it is desired to trigger a particular active response on every agent and

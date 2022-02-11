@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
     :description: Wazuh incorporates an integrated decoder for JSON logs that enables the extraction of data from any source in this format. Learn more about it here.
@@ -7,8 +7,6 @@
 
 JSON decoder
 ============
-
-.. versionadded:: 3.0.0
 
 Wazuh now incorporates an integrated decoder for JSON logs enabling the extraction of data from any source in this format.
 
@@ -131,8 +129,6 @@ The output of *wazuh-logtest* from the above JSON record is as follows:
     **Alert to be generated.
 
 .. _json_decoder_example_3.3:
-
-.. versionadded:: 3.3.0
 
 Lets see another example where we use the JSON decoder to extract a JSON included as a part of an incoming log. This is possible thanks to the new attribute ``offset`` introduced to the decoder options, that allows to discard some parts
 of the input string.

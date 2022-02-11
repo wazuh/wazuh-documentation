@@ -1,5 +1,8 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+  :description: Learn more about the anti-flooding mechanism that helps to avoid the loss of events or unexpected behavior from the Wazuh components. 
+  
 .. _antiflooding:
 
 Anti-flooding mechanism

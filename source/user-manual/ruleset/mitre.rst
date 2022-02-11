@@ -1,5 +1,8 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+  :description: Learn more about the enhancement of Wazuh with MITRE, a feature that allows the user to customize the alert information to include specific information related to MITRE ATT&CK techniques.
+  
 .. _mitre:
 
 Enhancing with MITRE

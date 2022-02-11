@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. _upgrading_wazuh_server_2.x_3.x:
 
@@ -115,4 +115,4 @@ It is recommended to disable the Wazuh repository in order to avoid undesired up
     :hidden:
     :maxdepth: 2
 
-    restore_alerts-from-2.x-to-3.x
+    restore-alerts-from-2.x-to-3.x

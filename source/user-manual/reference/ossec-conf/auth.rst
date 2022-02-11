@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
   :description: This section of the Wazuh Documentation shows the options for the agents registration service.
@@ -18,8 +18,6 @@ auth
 
 
 This section shows the options for the registration service.
-
-.. versionadded:: 2.1
 
 Options
 -------
@@ -250,9 +248,7 @@ Sets the list of ciphers for network communication using SSL.
 | **Default value**  | HIGH:!ADH:!EXP:!MD5:!RC4:!3DES:!CAMELLIA:@STRENGTH |
 +--------------------+----------------------------------------------------+
 
-The format of this parameter is described in `SSL ciphers <https://www.openssl.org/docs/man1.1.0/apps/ciphers.html>`_.
-
-.. versionadded:: 3.0.0
+The format of this parameter is described in `SSL ciphers <https://www.openssl.org/docs/man1.1.1/man1/ciphers.html>`_.
 
 Default configuration
 ---------------------

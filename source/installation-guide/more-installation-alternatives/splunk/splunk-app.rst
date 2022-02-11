@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta:: :description: Splunk for Wazuh installation guide
 
@@ -66,7 +66,31 @@ Installation
       :align: center
       :width: 100%
 
-When the Wazuh app for Splunk is installed, the next step consists on installing and configuring :ref:`Splunk forwarder <splunk_forwarder>`.
+    When the Wazuh app for Splunk is installed, the next step is installing and configuring :ref:`Splunk forwarder <splunk_forwarder>`.
+
+#. In order to configure the index and source type of the app, go to *Settings/Index* (view image).
+
+    The default values are for index ``wazuh`` and for source type ``*``.
+
+    .. note::
+       The Wazuh app considers as a valid index all indices that contain the word ``wazuh`` in the source type, the default value from the installation guide for source type is ``wazuh``.
+
+    .. thumbnail:: ../../../images/splunk-app/app-index-sourcetype.png
+      :title: Index and Source Type configuration
+      :align: center
+      :width: 100%
+
+    You can also select the API, Index and Source Type using the *Quick settings* menu. 
+
+    .. thumbnail:: ../../../images/splunk-app/quick-settings.png
+      :title: Index and Source Type configuration
+      :align: center
+      :width: 100%
+
+    .. thumbnail:: ../../../images/splunk-app/quick-settings-open.png
+      :title: Index and Source Type configuration
+      :align: center
+      :width: 100%
 
 Installing the Wazuh app for Splunk in a Splunk cluster
 -------------------------------------------------------
@@ -108,7 +132,7 @@ Install the Wazuh app for Splunk on the ``deployer`` machine and follow the step
       The ``indexerDiscovery`` attribute is used for setting the connection to peer nodes. More information about the ``indexerDiscovery`` attribute can be found `here <https://docs.splunk.com/Documentation/Splunk/7.1.3/Indexer/indexerdiscovery>`_.
 
     .. note::
-      ``<master_ip>`` references to the indexers master ip.
+      ``<master_ip>`` references to the indexers master IP address.
 
     .. warning::
       The ``https`` is required by default and the default port is 8089.
