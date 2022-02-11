@@ -377,3 +377,63 @@ The Wazuh agent installation directory depends on the architecture of the host:
 
 #. Check the agent status again to confirm that it has started.
 #. Select the “agents” tab to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successfully.
+
+
+macOS endpoint
+^^^^^^^^^^^^^^
+
+The following steps serve as a guide on how to import the key to a macOS agent:
+
+#. From the Wazuh agent, launch the terminal as a root user and import the key.
+
+   .. code-block:: console
+
+    # /Library/Ossec/bin/manage_agents -i <key>
+      
+    The output should look like this:
+
+   .. code-block:: console
+      :class: output
+
+      Agent information:
+          ID:001
+          Name:agent_1
+          IP Address:any
+
+      Confirm adding it?(y/n): y
+      Added.
+
+#. Add the Wazuh manager IP address to the agent configuration file in ``/Library/Ossec/etc/ossec.conf``.
+
+   .. code-block:: xml
+
+      <client>
+        <server>
+          <address>MANAGER_IP</address>
+          ...
+        </server>
+      </client>
+
+
+#. Check the agent status to find out if it is running.
+
+   .. code-block:: console
+    # /Library/Ossec/bin/wazuh-control status
+
+    
+#. Start or restart the agent depending on its current state (not running/running) to make the changes effective.
+
+
+   Start the agent if it is not running:
+
+   .. code-block:: console
+    # /Library/Ossec/bin/wazuh-control start
+    
+   Restart the agent if it is already running:
+
+   .. code-block:: console
+    # /Library/Ossec/bin/wazuh-control restart
+
+
+#. Check the agent status again to confirm that it has started.
+#. Select the “agents” tab to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successful.
