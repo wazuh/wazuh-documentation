@@ -14,7 +14,7 @@ This authentication method (:api-ref:`POST /security/user/authenticate/run_as <o
 
 In order to use this authentication method, a user allowed to use authorization context is needed (how to create and allow a user to use authorization context information :ref:`here <api_rbac_user>`). After that, and having created the necessary security rules, an authorization context with all the required information must be sent, it will be checked against the security rules and finally, the permissions associated with them will be granted:
 
-.. code-block:: bash
+.. code-block:: none
 
         # curl -k -u <user>:<password> -X POST https://localhost:55000/security/user/authenticate/run_as -H 'content-type: application/json' -d '{
                 "name": "Initial_auth",
