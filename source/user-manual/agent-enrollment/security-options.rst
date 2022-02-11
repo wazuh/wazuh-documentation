@@ -43,6 +43,7 @@ Before an agent can be enrolled to the Wazuh manager using the password authenti
    - **Recommended** - By creating the file ``/var/ossec/etc/authd.pass`` on the manager and including your own password there. We recommended this method for creating the agent enrollment password. This can be done by running the line below in the terminal and subsequently restarting the Wazuh manager.
 
    .. code-block:: console
+     
       echo "<custom_password>" > /var/ossec/etc/authd.pass
 
       Note that you have to replace <custom_password> with your own agent enrollment password.
