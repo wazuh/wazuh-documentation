@@ -41,6 +41,7 @@ From Linux/Unix and macOS
    Run the command ``echo $TOKEN`` to confirm that the token was successfully generated. You should get an output like this:
 
    .. code-block:: console
+      :class: output
    
      eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YXp1aCIsImF1ZCI6IldhenVoIEFQSSBSRVNUIiwibmJmIjoxNjQzMDExMjQ0LCJleHAiOjE2NDMwMTIxNDQsInN1YiI6IndhenVoIiwicnVuX2FzIjpmYWxzZSwicmJhY19yb2xlcyI6WzFdLCJyYmFjX21vZGUiOiJ3aGl0ZSJ9.Ad6zOZvx0BEV7K0J6s3pIXAXTWB-zdVfxaX2fotLfZMQkiYPMkwDaQHUFiOInsWJ_7KZV3y2BbhEs9-kBqlJAMvMAD0NDBPhEQ2qBd_iutZ7QWZECd6eYfIP83xGqH9iqS7uMI6fXOKr3w4aFV13Q6qsHSUQ1A-1LgDnnDGGaqF5ITYo
 
@@ -53,7 +54,7 @@ From Linux/Unix and macOS
    The output with the key looks like this:
 
    .. code-block:: console
-
+      :class: output
      {
          "error": 0,
          "data": {
@@ -109,6 +110,7 @@ The following steps serve as a guide on how to send agent enrollment requests fr
    The output looks like this: 
  
    .. code-block:: console
+      :class: output
 
     {"data":{"token": "eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YXp1aCIsImF1ZCI6IldhenVoIEFQSSBSRVNUIiwibmJmIjoxNjM5NjQ2Nzg0LCJleHAiOjE2Mzk2NDc2ODQsInN1YiI6IndhenVoIiwicnVuX2FzIjpmYWxzZSwicmJhY19yb2xlcyI6WzFdLCJyYmFjX21vZGUiOiJ3aGl0ZSJ9.ASonc7xinw6u4JUoUlkJ_52FvJz8ECPiI3ObDr-SOO0fWRfWq-uTnA432UnCDK86ypRG5fAY6paQkX3vjrXrvBFvADyCnNNCZ-eNzaUoEq5f38wCfbC1bZhRsz61s2PRRt3YD2rfzRASbSJk140Vx-XP-IDnqlgMgmIyJxb2iU1ZL8R7"}, "error": 0}
 
@@ -137,7 +139,8 @@ The following steps serve as a guide on how to send agent enrollment requests fr
    The output should look like this:
 
    .. code-block:: console 
-      
+      :class: output     
+
       StatusCode        : 200
       StatusDescription : OK
       Content           : {"data": {"id": "020", "key": "MDIwIGFwaS13aW5kb3dzIGFueSA3OTJmZTcwZDJiYzNhYzRiY2ZjOTc0MzAyNGZmMTc0ODA3ZGE5YjJjZjViZGQ4OGI3MjkxMTEzMmEwZGU3OGQ2"},
@@ -157,3 +160,126 @@ The following steps serve as a guide on how to send agent enrollment requests fr
       ParsedHtml        : System.__ComObject
       RawContentLength  : 158
          
+
+Importing the key to the agent
+------------------------------
+
+Linux/Unix endpoint
+^^^^^^^^^^^^^^^^^^^
+
+The following steps serve as a guide on how to import the key to a Linux/Unix agent:
+
+#. From the Wazuh agent, launch the terminal as a root user and import the key.
+
+   .. code-block:: console
+
+    #/var/ossec/bin/manage_agents -i <key>
+
+The output should look like this:
+
+   .. code-block:: console
+      :class: output 
+
+        Agent information:
+            ID:001
+            Name:agent_1
+            IP Address:any
+        Confirm adding it?(y/n): y
+        Added.
+
+#. Add the Wazuh manager IP address to the agent configuration file in ``/var/ossec/etc/ossec.conf``. 
+
+   .. code-block:: console
+      <client>
+        <server>
+          <address>MANAGER_IP</address>
+          ...
+        </server>
+      </client>
+
+#. Check the agent status to find out if it is running.
+
+
+   .. tabs::
+   
+   
+      .. group-tab:: Systemd
+   
+       .. code-block:: console
+   
+         # systemctl status wazuh-agent
+   
+   
+      .. group-tab:: SysV init
+   
+       .. code-block:: console
+   
+         # service wazuh-agent status
+
+
+      .. group-tab:: Other Unix based OS
+
+        .. code-block:: console
+
+         # /var/ossec/bin/wazuh-control status
+
+
+#. Start or restart the agent depending on its current state (not running/running) to make the changes effective.
+
+Start the agent if it is not running:
+
+
+   .. tabs::
+   
+   
+      .. group-tab:: Systemd
+   
+       .. code-block:: console
+   
+         # systemctl start wazuh-agent
+   
+   
+      .. group-tab:: SysV init
+   
+       .. code-block:: console
+   
+         # service wazuh-agent start
+
+
+      .. group-tab:: Other Unix based OS
+
+        .. code-block:: console
+
+         # /var/ossec/bin/wazuh-control start
+
+
+Restart the agent if it is already running:
+
+
+   .. tabs::
+   
+   
+      .. group-tab:: Systemd
+   
+       .. code-block:: console
+   
+         # systemctl restart wazuh-agent
+   
+   
+      .. group-tab:: SysV init
+   
+       .. code-block:: console
+   
+         # service wazuh-agent restart
+
+
+      .. group-tab:: Other Unix based OS
+
+        .. code-block:: console
+
+         # /var/ossec/bin/wazuh-control restart
+
+
+#. Check the agent status again to confirm that it has started.
+#. Select the “agents” tab to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successful.
+
