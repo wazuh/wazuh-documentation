@@ -232,7 +232,7 @@ The following steps serve as a guide on how to import the key to a Linux/Unix ag
 #. Start or restart the agent depending on its current state (not running/running) to make the changes effective.
 
 
-  Start the agent if it is not running:
+   Start the agent if it is not running:
 
 
    .. tabs::
@@ -259,7 +259,7 @@ The following steps serve as a guide on how to import the key to a Linux/Unix ag
          # /var/ossec/bin/wazuh-control start
 
 
-  Restart the agent if it is already running:
+   Restart the agent if it is already running:
 
 
    .. tabs::
@@ -287,7 +287,6 @@ The following steps serve as a guide on how to import the key to a Linux/Unix ag
 
 
 #. Check the agent status again to confirm that it has started.
-
 #. Select the “agents” tab to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successful.
 
 
@@ -374,6 +373,7 @@ The Wazuh agent installation directory depends on the architecture of the host:
 
      # net stop wazuh
      # net start wazuh
+
 
 #. Check the agent status again to confirm that it has started.
 #. Select the “agents” tab to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successfully.
