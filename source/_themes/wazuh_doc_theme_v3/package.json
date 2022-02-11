@@ -116,7 +116,7 @@
     "eol-converter-cli": "^1.0.8",
     "eslint": "^7.32.0",
     "eslint-config-google": "^0.14.0",
-    "node-sass": "^6.0.1",
+    "node-sass": "^7.0.0",
     "npm-run-all": "^4.1.5",
     "npm-watch": "^0.11.0",
     "popper.js": "^1.16.1",
