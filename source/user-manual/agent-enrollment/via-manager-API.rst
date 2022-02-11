@@ -172,23 +172,26 @@ The following steps serve as a guide on how to import the key to a Linux/Unix ag
 
 #. From the Wazuh agent, launch the terminal as a root user and import the key.
 
+
    .. code-block:: console
 
     #/var/ossec/bin/manage_agents -i <key>
 
-  The output should look like this:
+    The output should look like this:
 
    .. code-block:: console
-       :class: output 
+        :class: output 
 
-          Agent information:
-              ID:001
-              Name:agent_1
-              IP Address:any
-          Confirm adding it?(y/n): y
-          Added.
+            Agent information:
+                ID:001
+                Name:agent_1
+                IP Address:any
+            Confirm adding it?(y/n): y
+            Added.
+
 
 #. Add the Wazuh manager IP address to the agent configuration file in ``/var/ossec/etc/ossec.conf``. 
+
 
    .. code-block:: console
 
@@ -198,6 +201,7 @@ The following steps serve as a guide on how to import the key to a Linux/Unix ag
             ...
           </server>
         </client>
+
 
 #. Check the agent status to find out if it is running.
 
@@ -226,6 +230,7 @@ The following steps serve as a guide on how to import the key to a Linux/Unix ag
 
 
 #. Start or restart the agent depending on its current state (not running/running) to make the changes effective.
+
 
   Start the agent if it is not running:
 
@@ -282,7 +287,9 @@ The following steps serve as a guide on how to import the key to a Linux/Unix ag
 
 
 #. Check the agent status again to confirm that it has started.
+
 #. Select the “agents” tab to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successful.
+
 
 Windows endpoint
 ^^^^^^^^^^^^^^^^
