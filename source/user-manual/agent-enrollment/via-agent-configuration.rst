@@ -5,10 +5,10 @@
   
 .. _enrollment_via_agent_automatic_request:
 
-Enrollment via automatic agent request
-======================================
+Enrollment via agent configuration
+==================================
 
-In this option, the agent is automatically enrolled after the Wazuh manager IP address has been configured. Please note that, when using additional security options, other settings might need to be configured.
+In this option, the agent is automatically enrolled after the Wazuh manager IP address has been configured. Please note that, when using :ref:`additional security options <enrolloment_additional_security>`, other settings might need to be configured.
 
 The Wazuh manager IP address can be configured in one of two ways on the agent:
 
