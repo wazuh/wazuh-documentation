@@ -25,21 +25,21 @@ The following steps serve as a guide on how to configure a Linux/Unix endpoint a
 
 #. Launch the terminal as a root user, edit the agent configuration file ``/var/ossec/etc/ossec.conf``, and make the following changes:
 
-   - Include the Wazuh manager IP address or DNS name in the ``<client><server><address>`` section:
+   #. Include the Wazuh manager IP address or DNS name in the ``<client><server><address>`` section:
 
-      .. code-block:: xml
+        .. code-block:: xml
 
-        <client>
-          <server>
-            <address>MANAGER_IP</address>
-            ...
-          </server>
-        </client>
+          <client>
+            <server>
+              <address>MANAGER_IP</address>
+              ...
+            </server>
+          </client>
 
  
-      This will allow the agent to connect to the Wazuh manager and automatically request a key.
+     This will allow the agent to connect to the Wazuh manager and automatically request a key.
 
-   - (Optional) Add enrollment parameters in the ``<client><enrollment>`` section. 
+   #. (Optional) Add enrollment parameters in the ``<client><enrollment>`` section. 
 
       .. code-block:: xml
 
