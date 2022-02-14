@@ -267,7 +267,7 @@ Options
 
 - `enabled`_
 - `manager_address`_
-- :ref:`port <enrollment_port>`
+- :ref:`port <enrollment_manager_port>`
 - `agent_name`_
 - `groups`_
 - `agent_address`_
@@ -291,6 +291,8 @@ Enables/disables agent enrollment.
 | **Allowed values** | yes or no                        |
 +--------------------+----------------------------------+
 
+.. _enrollment_manager_address:
+
 manager_address
 ^^^^^^^^^^^^^^^
 
@@ -302,7 +304,7 @@ Hostname or IP address of the manager where the agent will be enrolled. If no va
 | **Allowed values** | string -  Should be valid IP/Hostname |
 +--------------------+---------------------------------------+
 
-.. _enrollment_port:
+.. _enrollment_manager_port:
 
 port
 ^^^^
@@ -315,6 +317,8 @@ Specifies the port on the manager to send enrollment request.  This must match t
 | **Allowed values** | Any port number from 0 to 65535 is allowed. |
 +--------------------+---------------------------------------------+
 
+.. _enrollment_agent_name:
+
 agent_name
 ^^^^^^^^^^
 
@@ -325,6 +329,8 @@ Agent name that will be used for enrollment. Only alphanumeric characters, "-", 
 +--------------------+---------------------------------------------+
 | **Allowed values** | string - Registration name for the agent.   |
 +--------------------+---------------------------------------------+
+
+.. _enrollment_agent_groups:
 
 groups
 ^^^^^^
@@ -337,6 +343,8 @@ Groups name to which the agent belongs.
 | **Allowed values** | string - Name of one or many valid groups.  |
 +--------------------+---------------------------------------------+
 
+.. _enrollment_agent_address:
+
 agent_address
 ^^^^^^^^^^^^^
 
@@ -348,6 +356,8 @@ Force IP address from the agent. If this is not set manager will extract source 
 | **Allowed values** | string - Valid IP address                   |
 +--------------------+---------------------------------------------+
 
+.. _enrollment_ssl_cipher:
+
 ssl_cipher
 ^^^^^^^^^^
 
@@ -358,6 +368,8 @@ Override SSL used ciphers.
 +--------------------+----------------------------------------------------+
 | **Allowed values** | Any valid ssl cipher.                              |
 +--------------------+----------------------------------------------------+
+
+.. _enrollment_server_ca_path:
 
 server_ca_path
 ^^^^^^^^^^^^^^
@@ -373,6 +385,8 @@ Used for manager verification. If no CA certificate is set server will not be ve
 .. note::
   Paths can be referred to relative paths under the Wazuh installation directory, or full paths.
 
+.. _enrollment_agent_certificate_path:
+
 agent_certificate_path
 ^^^^^^^^^^^^^^^^^^^^^^
 
@@ -384,6 +398,8 @@ Required when agent verification is enabled in the manager.
 | **Allowed values** | Path to a valid agent certificate file.     |
 +--------------------+---------------------------------------------+
 
+.. _enrollment_agent_key_path:
+
 agent_key_path
 ^^^^^^^^^^^^^^
 
@@ -394,6 +410,8 @@ Required when agent verification is enabled in the manager.
 +--------------------+---------------------------------------------+
 | **Allowed values** | Path to a valid agent key file.             |
 +--------------------+---------------------------------------------+
+
+.. _enrollment_authorization_pass_path:
 
 authorization_pass_path
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -407,6 +425,8 @@ Required when enrollment is using password verification.
 | **Allowed values** | Path to a valid password file               |
 +--------------------+---------------------------------------------+
 
+.. _enrollment_auto_method:
+
 auto_method
 ^^^^^^^^^^^
 
@@ -418,6 +438,8 @@ Auto negotiates the most secure common SSL/TLS method with the manager, use "yes
 | **Allowed values** | yes or no                                   |
 +--------------------+---------------------------------------------+
 
+.. _enrollment_delay_after_enrollment:
+
 delay_after_enrollment
 ^^^^^^^^^^^^^^^^^^^^^^
 
@@ -428,6 +450,8 @@ Time that agentd should wait after a successful registration.
 +--------------------+---------------------------------------------+
 | **Allowed values** | number of seconds                           |
 +--------------------+---------------------------------------------+
+
+.. _enrollment_use_source_ip:
 
 use_source_ip
 ^^^^^^^^^^^^^
