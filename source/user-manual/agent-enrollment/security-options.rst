@@ -694,3 +694,65 @@ Restart the agent if it is already running:
 
 #. Check the agent status again to confirm that it has started.
 #. Select the “agents” tab to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successful.
+
+
+
+macOS endpoint
+^^^^^^^^^^^^^^
+
+The following steps serve as a guide on how to enroll a macOS endpoint by using certificates to verify the manager identity:
+
+#. Ensure that the root certificate authority ``rootCA.pem`` file has been copied to the endpoint.
+
+#. As a root user, modify the Wazuh agent configuration file located at ``/Library/Ossec/etc/ossec.conf`` and include the following:
+
+  #. Wazuh manager IP address or DNS name in the ``<client><server><address>`` section.
+
+  #. Local path to root certificate in the ``<client><enrollment>`` section.
+
+  .. code-block:: xml
+
+      <client>
+         <server>
+            <address>MANAGER_IP</address>
+            ...
+         </server>
+            ...
+            <enrollment>
+               <server_ca_path>/path/to/rootCA.pem</server_ca_path>
+               ...
+            </enrollment>
+            ...
+      </client>
+
+
+
+#. Check the agent status to find out if it is running.
+ 
+ .. code-block:: console
+
+   # /Library/Ossec/bin/wazuh-control status
+
+
+#. Start or restart the agent depending on its current state (not running/running) to make the changes effective.
+
+Start the agent if it is not running:
+
+ .. code-block:: console
+
+   # /Library/Ossec/bin/wazuh-control start
+
+
+Restart the agent if it is already running:
+
+ .. code-block:: console
+
+   # /Library/Ossec/bin/wazuh-control restart
+
+
+#. Check the agent status again to confirm that it has started.
+#. Select the “agents” tab to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successful.
+
+
+Verify the Wazuh agent identity
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
