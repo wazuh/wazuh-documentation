@@ -32,32 +32,32 @@ The following default ports on the manager should be opened:
 - Replace ``<MANAGER_IP>`` with your Wazuh Manager IP address or DNS name.
 - On Linux and macOS systems (with netcat installed), open a terminal and run the following command:
 
-.. code-block:: console
+     .. code-block:: console
 
-   # nc -zv <MANAGER_IP> 1514 1515 55000
+        # nc -zv <MANAGER_IP> 1514 1515 55000
 
-      
-If there is connectivity, the output should be a connection success message:
+            
+      If there is connectivity, the output should be a connection success message:
 
-.. code-block:: console
+    .. code-block:: console
 
-    Connection to <MANAGER_IP> port 1514 [tcp] succeeded!
-    Connection to <MANAGER_IP> port 1515 [tcp] succeeded!
-    Connection to <MANAGER_IP> port 55000 [tcp] succeeded!
+          Connection to <MANAGER_IP> port 1514 [tcp] succeeded!
+          Connection to <MANAGER_IP> port 1515 [tcp] succeeded!
+          Connection to <MANAGER_IP> port 55000 [tcp] succeeded!
 
 - On Windows, open a PowerShell terminal and run the following command:
 
-  .. code-block:: console
+     .. code-block:: console
 
-    (new-object Net.Sockets.TcpClient).Connect("<MANAGER_IP>", 1514)
-    (new-object Net.Sockets.TcpClient).Connect("<MANAGER_IP>", 1515)
-    (new-object Net.Sockets.TcpClient).Connect("<MANAGER_IP>", 55000)
+        (new-object Net.Sockets.TcpClient).Connect("<MANAGER_IP>", 1514)
+        (new-object Net.Sockets.TcpClient).Connect("<MANAGER_IP>", 1515)
+        (new-object Net.Sockets.TcpClient).Connect("<MANAGER_IP>", 55000)
 
-If there is connectivity, there is no output, otherwise, an error is shown:
+      If there is connectivity, there is no output, otherwise, an error is shown:
 
-.. code-block:: console
+    .. code-block:: console
 
-   A connection attempt failed because the connected party did not properly respond after a period of time (...)
+      A connection attempt failed because the connected party did not properly respond after a period of time (...)
 
 
 Authentication error
@@ -67,7 +67,7 @@ Authentication error
 
 **Error log:**
 
-  .. code-block:: console
+.. code-block:: console
 
     2022/02/03 10:07:32 wazuh-remoted: WARNING: (1404): Authentication error. Wrong key or corrupt payload. Message received from agent '001' at 'any'.
 
@@ -83,7 +83,7 @@ Invalid agent name for enrollment
 
 **Error log:**
 
-  .. code-block:: console
+.. code-block:: console
 
     2022/01/26 08:59:10 wazuh-agentd: INFO: Using agent name as: localhost.localdomain
     2022/01/26 08:59:10 wazuh-agentd: INFO: Waiting for server reply
@@ -94,18 +94,18 @@ Invalid agent name for enrollment
 **Resolution:** 
 Ensure the agent hostname is unique and does not match an already enrolled agent. Alternatively, specify a unique agent name in the ``<client><enrollment><agent_name>`` section of the agent ossec.conf file.
 
-   .. code-block:: xml
+.. code-block:: xml
 
-      <client>
-          .
-          .
-          .
-          <enrollment>
-              <agent_name>EXAMPLE_NAME</agent_name>
-              .
-              .  
-          </enrollment>
-      </client>
+    <client>
+        .
+        .
+        .
+        <enrollment>
+            <agent_name>EXAMPLE_NAME</agent_name>
+            .
+            .  
+        </enrollment>
+    </client>
 
 
 Unable to read CA certificate file
@@ -115,7 +115,7 @@ Unable to read CA certificate file
 
 **Error log:**
 
-  .. code-block:: console
+.. code-block:: console
 
     2022/01/26 08:25:01 wazuh-authd: ERROR: Unable to read CA certificate file "/var/ossec/etc/rootCA.pem"
     2022/01/26 08:25:01 wazuh-authd: ERROR: SSL error. Exiting.
@@ -129,7 +129,7 @@ Ensure the certificate authority file is in the location specified in the ``<ssl
 
 **Error log:**
 
-  .. code-block:: console
+.. code-block:: console
 
     2022/01/26 08:25:01 wazuh-authd: ERROR: Unable to read CA certificate file "/var/ossec/etc/rootCA.pem"
     2022/01/26 08:25:01 wazuh-authd: ERROR: SSL error. Exiting.
@@ -147,7 +147,7 @@ Unable to read private key file
 
 **Error log:**
 
-  .. code-block:: console
+.. code-block:: console
 
     2022/01/26 08:57:18 wazuh-agentd: ERROR: Unable to read private key file: /var/ossec/etc/sslagent.key
     2022/01/26 08:57:18 wazuh-agentd: ERROR: Could not set up SSL connection! Check certification configuration.
@@ -166,7 +166,7 @@ Unable to read certificate file
 
 **Error log:**
 
-  .. code-block:: console
+.. code-block:: console
 
     2022/01/26 08:54:55 wazuh-agentd: ERROR: Unable to read certificate file (not found): /var/ossec/etc/sslagent.cert
     2022/01/26 08:54:55 wazuh-agentd: ERROR: Could not set up SSL connection! Check certification configuration.
@@ -185,7 +185,7 @@ Invalid password
 
 **Error log:**
 
-  .. code-block:: console
+.. code-block:: console
 
     2022/01/26 12:28:10 wazuh-agentd: INFO: Requesting a key from server: X.X.X.X
     2022/01/26 12:28:10 wazuh-agentd: INFO: No authentication password provided
