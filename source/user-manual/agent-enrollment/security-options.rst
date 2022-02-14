@@ -396,6 +396,7 @@ Using certificates
 ------------------
 
 This method uses SSL certificates to:
+
 - Verify manager: Verify the identity of the Wazuh manager before an agent sends the enrollment request.
 - Verify agent: Verify that an agent is authorized to enroll in the Wazuh manager.
 
