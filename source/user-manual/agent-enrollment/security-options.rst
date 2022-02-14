@@ -499,102 +499,100 @@ The following steps serve as a guide on how to enroll a Linux/Unix endpoint by u
 #. Ensure that the root certificate authority ``rootCA.pem`` file has been copied to the endpoint.
 #. As a root user, modify the Wazuh agent configuration file located at ``/var/ossec/etc/ossec.conf`` and include the following:
 
-  #. Wazuh manager IP address or DNS name in the <client><server><address> section.
-  #. Local path to root certificate in the <client><enrollment> section.
+    #. Wazuh manager IP address or DNS name in the <client><server><address> section.
+    #. Local path to root certificate in the <client><enrollment> section.
 
-  .. code-block:: xml
+   .. code-block:: xml
 
-      <client>
-         <server>
-            <address>MANAGER_IP</address>
-            ...
-         </server>
-            ...
-            <enrollment>
-               <server_ca_path>/path/to/rootCA.pem</server_ca_path>
+         <client>
+            <server>
+               <address>MANAGER_IP</address>
                ...
-            </enrollment>
-            ...
-      </client>
-
+            </server>
+               ...
+               <enrollment>
+                  <server_ca_path>/path/to/rootCA.pem</server_ca_path>
+                  ...
+               </enrollment>
+               ...
+         </client>
 
 
 #. Check the agent status to find out if it is running.
 
-   .. tabs::   
-   
-      .. group-tab:: Systemd
-   
-       .. code-block:: console
-   
-         # systemctl status wazuh-agent
-   
-   
-      .. group-tab:: SysV init
-   
-       .. code-block:: console
-   
-         # service wazuh-agent status
+      .. tabs::   
+      
+         .. group-tab:: Systemd
+      
+         .. code-block:: console
+      
+            # systemctl status wazuh-agent
+      
+      
+         .. group-tab:: SysV init
+      
+         .. code-block:: console
+      
+            # service wazuh-agent status
 
 
-      .. group-tab:: Other Unix based OS
+         .. group-tab:: Other Unix based OS
 
-        .. code-block:: console
+         .. code-block:: console
 
-         # /var/ossec/bin/wazuh-control status
+            # /var/ossec/bin/wazuh-control status
    
 
 #. Start or restart the agent depending on its current state (not running/running) to make the changes effective.
 
-Start the agent if it is not running:
+   Start the agent if it is not running:
 
-   .. tabs::   
-   
-      .. group-tab:: Systemd
-   
-       .. code-block:: console
-   
-         # systemctl start wazuh-agent
-   
-   
-      .. group-tab:: SysV init
-   
-       .. code-block:: console
-   
-         # service wazuh-agent start
-
-
-      .. group-tab:: Other Unix based OS
-
-        .. code-block:: console
-
-         # /var/ossec/bin/wazuh-control start
+      .. tabs::   
+      
+         .. group-tab:: Systemd
+      
+         .. code-block:: console
+      
+            # systemctl start wazuh-agent
+      
+      
+         .. group-tab:: SysV init
+      
+         .. code-block:: console
+      
+            # service wazuh-agent start
 
 
-Restart the agent if it is already running:
+         .. group-tab:: Other Unix based OS
 
-   .. tabs::   
-   
-      .. group-tab:: Systemd
-   
-       .. code-block:: console
-   
-         # systemctl restart wazuh-agent
-   
-   
-      .. group-tab:: SysV init
-   
-       .. code-block:: console
-   
-         # service wazuh-agent restart
+         .. code-block:: console
+
+            # /var/ossec/bin/wazuh-control start
 
 
-      .. group-tab:: Other Unix based OS
+   Restart the agent if it is already running:
 
-        .. code-block:: console
+      .. tabs::   
+      
+         .. group-tab:: Systemd
+      
+         .. code-block:: console
+      
+            # systemctl restart wazuh-agent
+      
+      
+         .. group-tab:: SysV init
+      
+         .. code-block:: console
+      
+            # service wazuh-agent restart
 
-         # /var/ossec/bin/wazuh-control restart
 
+         .. group-tab:: Other Unix based OS
+
+         .. code-block:: console
+
+            # /var/ossec/bin/wazuh-control restart
 
 
 #. Check the agent status again to confirm that it has started.
@@ -634,7 +632,6 @@ The Wazuh agent installation directory depends on the architecture of the host.
 
 #. Check the agent status to find out if it is running.
 
-
       .. tabs::
         
         
@@ -650,7 +647,6 @@ The Wazuh agent installation directory depends on the architecture of the host.
            .. code-block:: console
        
              # sc query WazuhSvc
-
 
 
 #. Start or restart the agent depending on its current state (not running/running) to make the changes effective.
@@ -673,7 +669,7 @@ Start the agent if it is not running:
              # net start wazuh
 
 
-Restart the agent if it is already running:
+   Restart the agent if it is already running:
 
 
       .. tabs::
@@ -708,48 +704,48 @@ The following steps serve as a guide on how to enroll a macOS endpoint by using 
 
 #. As a root user, modify the Wazuh agent configuration file located at ``/Library/Ossec/etc/ossec.conf`` and include the following:
 
-  #. Wazuh manager IP address or DNS name in the ``<client><server><address>`` section.
+    #. Wazuh manager IP address or DNS name in the ``<client><server><address>`` section.
 
-  #. Local path to root certificate in the ``<client><enrollment>`` section.
+    #. Local path to root certificate in the ``<client><enrollment>`` section.
 
-  .. code-block:: xml
+    .. code-block:: xml
 
-      <client>
-         <server>
-            <address>MANAGER_IP</address>
-            ...
-         </server>
-            ...
-            <enrollment>
-               <server_ca_path>/path/to/rootCA.pem</server_ca_path>
-               ...
-            </enrollment>
-            ...
-      </client>
+        <client>
+           <server>
+              <address>MANAGER_IP</address>
+              ...
+           </server>
+              ...
+              <enrollment>
+                 <server_ca_path>/path/to/rootCA.pem</server_ca_path>
+                 ...
+              </enrollment>
+              ...
+        </client>
 
 
 
 #. Check the agent status to find out if it is running.
  
-   .. code-block:: console
+      .. code-block:: console
 
-      # /Library/Ossec/bin/wazuh-control status
+         # /Library/Ossec/bin/wazuh-control status
 
 
 #. Start or restart the agent depending on its current state (not running/running) to make the changes effective.
 
-   Start the agent if it is not running:
+      Start the agent if it is not running:
 
-   .. code-block:: console
+      .. code-block:: console
 
-      # /Library/Ossec/bin/wazuh-control start
+         # /Library/Ossec/bin/wazuh-control start
 
 
-   Restart the agent if it is already running:
+      Restart the agent if it is already running:
 
-   .. code-block:: console
+      .. code-block:: console
 
-      # /Library/Ossec/bin/wazuh-control restart
+         # /Library/Ossec/bin/wazuh-control restart
 
 
 #. Check the agent status again to confirm that it has started.
