@@ -96,3 +96,157 @@ Before an agent can be enrolled to the Wazuh manager using the password authenti
 Once the above prerequisites are fulfilled, agent enrollment can be done using the steps corresponding to the OS running on endpoints with the agent installed. 
 
 
+Linux/Unix endpoint
+^^^^^^^^^^^^^^^^^^^
+
+The following steps serve as a guide on how to enroll a Linux/Unix endpoint with password authentication:
+
+#. Launch the terminal as a root user.
+#. Create the file ``/var/ossec/etc/authd.pass`` with the enrollment password in it.
+
+   .. code-block:: console
+
+    echo "<password>" > /var/ossec/etc/authd.pass
+
+
+.. note::
+  #. You have to replace ``<password>`` with the agents enrollment password created on the manager.
+  #. File permissions for the ``authd.pass`` file should be set to 644 and the owner should be root. The permissions and ownership can be configured by running the commands below:
+
+  .. code-block:: console
+
+    chmod 644 /var/ossec/etc/authd.pass
+    chown root:wazuh /var/ossec/etc/authd.pass
+
+   The output below shows the recommended file owner and permissions.
+
+   .. code-block:: console
+    :class: output 
+
+    -rw-r--r-- 1 root wazuh 18 Jan 11 13:03 /var/ossec/etc/authd.pass
+
+#. Add the Wazuh manager IP address or DNS name in the ``<client><server><address>`` section of the manager configuration file ``/var/ossec/etc/ossec.conf``.
+
+   .. code-block:: xml
+
+         <client>
+            <server>
+               <address>MANAGER_IP</address>
+            ...
+            </server>
+         </client>
+
+
+This will allow the agent to send logs to the manager specified.
+
+
+#. Check the agent status to find out if it is running.
+
+
+   - For systemd-based Linux endpoints
+  
+     .. code-block:: console
+       
+        # systemctl status wazuh-agent
+
+   - For SysV init-based Linux endpoints
+   
+     .. code-block:: console
+        
+        # service wazuh-agent status
+
+   - For other Unix-based OS
+   
+     .. code-block:: console
+         
+        # /var/ossec/bin/wazuh-control status
+
+
+#. Start or restart the agent depending on its current state (not running /running) to make the changes effective.
+
+   Start the agent if it is not running:
+
+   - For systemd-based Linux endpoints
+  
+     .. code-block:: console
+       
+        # systemctl start wazuh-agent
+
+   - For SysV init-based Linux endpoints
+  
+     .. code-block:: console
+       
+        # service wazuh-agent start
+
+   - For other Unix-based systems
+  
+     .. code-block:: console
+       
+        # /var/ossec/bin/wazuh-control start
+
+
+   Restart the agent if it is already running:
+
+   - For systemd-based Linux endpoints
+  
+     .. code-block:: console
+       
+        # systemctl restart wazuh-agent
+
+   - For SysV init-based Linux endpoints
+  
+     .. code-block:: console
+       
+        # service wazuh-agent restart
+
+   - For other Unix-based systems
+  
+     .. code-block:: console
+       
+        # /var/ossec/bin/wazuh-control restart
+
+#. Check the agent status again to confirm that it has started.
+#. Select the “agents” tab to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successful.
+
+
+Windows endpoint
+^^^^^^^^^^^^^^^^
+
+The following steps serve as a guide on how to enroll a Windows endpoint with password authentication:
+
+The Wazuh agent installation directory depends on the architecture of the host.
+
+- C:\Program Files (x86)\ossec-agent for 64-bit systems.
+- C:\Program Files\ossec-agent for 32-bit systems.
+
+#. Launch PowerShell as an administrator.
+Create a file called authd.pass and save the password to it, 
+echo “<custom_password>” > "C:\Program Files (x86)\ossec-agent\authd.pass"
+Note that you have to replace <password> with the agents enrollment password created on the manager.
+Add the Wazuh manager IP address or DNS name in the <client><server><address> section of C:\Program Files (x86)\ossec-agent\ossec.conf:
+<client>
+  <server>
+    <address>MANAGER_IP</address>
+    ...
+  </server>
+</client>
+
+Check the agent status to find out if it is running.
+PowerShell (as an administrator)
+Get-Service -name wazuh
+CMD (as an administrator)
+sc query WazuhSvc
+Start or restart the agent depending on its current state (not running/running) to make the changes effective.
+Start the agent if it is not running:
+PowerShell (as an administrator)
+Start-Service -Name wazuh
+CMD (as an administrator)
+net start wazuh
+Restart the agent if it is already running:
+PowerShell (as an administrator)
+Restart-Service -Name wazuh
+CMD (as an administrator)
+net stop wazuh
+net start wazuh
+Check the agent status again to confirm that it has started.
+Select the “agents” tab to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successful.
