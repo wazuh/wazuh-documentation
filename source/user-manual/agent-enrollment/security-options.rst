@@ -675,14 +675,14 @@ Restart the agent if it is already running:
 .. tabs::
    
    
-      .. group-tab:: PowerShell (as an administrator)
+   .. group-tab:: PowerShell (as an administrator)
    
       .. code-block:: console
    
          # Restart-Service -Name wazuh
    
    
-      .. group-tab:: CMD (as an administrator)
+   .. group-tab:: CMD (as an administrator)
    
       .. code-block:: console
    
