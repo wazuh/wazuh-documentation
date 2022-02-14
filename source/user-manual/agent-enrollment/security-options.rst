@@ -110,9 +110,8 @@ The following steps serve as a guide on how to enroll a Linux/Unix endpoint with
 
 
    .. note::
-
-   #. You have to replace ``<password>`` with the agents enrollment password created on the manager.
-   #. File permissions for the ``authd.pass`` file should be set to 644 and the owner should be root. The permissions and ownership can be configured by running the commands below:
+     #. You have to replace ``<password>`` with the agents enrollment password created on the manager.
+     #. File permissions for the ``authd.pass`` file should be set to 644 and the owner should be root. The permissions and ownership can be configured by running the commands below:
 
          .. code-block:: console
 
@@ -120,7 +119,7 @@ The following steps serve as a guide on how to enroll a Linux/Unix endpoint with
                # chown root:wazuh /var/ossec/etc/authd.pass
 
 
-   The output below shows the recommended file owner and permissions.
+    The output below shows the recommended file owner and permissions.
 
          .. code-block:: console
             :class: output 
