@@ -58,11 +58,10 @@ Before an agent can be enrolled to the Wazuh manager using the password authenti
 
    The output below shows the recommended file owner and permissions.
 
-
-         .. code-block:: console     
-          :class: output   
-
-      -rw-r--r-- 1 root wazuh 9 Jan 11 12:50 /var/ossec/etc/authd.pass
+        .. code-block:: console     
+         :class: output
+         
+           -rw-r--r-- 1 root wazuh 9 Jan 11 12:50 /var/ossec/etc/authd.pass
 
 
    After this, restart the Wazuh service for the changes to take effect.
@@ -352,7 +351,7 @@ The following steps serve as a guide on how to enroll a macOS endpoint with pass
        .. code-block:: console
          :class: output 
 
-         -rw-r--r-- 1 root wazuh 18 Jan 11 13:03 /Library/Ossec/etc/authd.pass
+          -rw-r--r-- 1 root wazuh 18 Jan 11 13:03 /Library/Ossec/etc/authd.pass
 
 #. Add the Wazuh manager IP address or DNS name in the ``<client><server><address>`` section of ``/Library/Ossec/etc/ossec.conf``:
 
