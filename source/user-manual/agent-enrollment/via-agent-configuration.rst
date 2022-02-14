@@ -27,7 +27,7 @@ The following steps serve as a guide on how to configure a Linux/Unix endpoint a
 
    - Include the Wazuh manager IP address or DNS name in the ``<client><server><address>`` section:
 
-      .. code-block:: console
+      .. code-block:: xml
 
         <client>
           <server>
@@ -41,7 +41,7 @@ The following steps serve as a guide on how to configure a Linux/Unix endpoint a
 
    - (Optional) Add enrollment parameters in the ``<client><enrollment>`` section. 
 
-      .. code-block:: console
+      .. code-block:: xml
 
         <client>
             .
@@ -147,7 +147,7 @@ The Wazuh agent installation directory depends on the architecture of the host:
 
    - Include the Wazuh manager IP address or DNS name in the ``<client><server><address>`` section:
    
-         .. code-block:: console
+         .. code-block:: xml
    
            <client>
              <server>
@@ -161,7 +161,7 @@ The Wazuh agent installation directory depends on the architecture of the host:
     
    - (Optional) Add enrollment parameters in the ``<client><enrollment>`` section. 
     
-          .. code-block:: console
+          .. code-block:: xml
     
             <client>
                 .
@@ -262,7 +262,7 @@ The following steps serve as a guide on how to configure a macOS endpoint agent 
     
    - Include the Wazuh manager IP address or DNS name in the ``<client><server><address>`` section:
       
-            .. code-block:: console
+            .. code-block:: xml
       
               <client>
                 <server>
@@ -276,7 +276,7 @@ The following steps serve as a guide on how to configure a macOS endpoint agent 
       
    - (Optional) Add enrollment parameters in the ``<client><enrollment>`` section. 
       
-           .. code-block:: console
+           .. code-block:: xml
       
               <client>
                   .
