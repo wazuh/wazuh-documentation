@@ -149,23 +149,23 @@ The following steps serve as a guide on how to enroll a Linux/Unix endpoint with
    
       .. group-tab:: Systemd
    
-       .. code-block:: console
+         .. code-block:: console
    
-         # systemctl status wazuh-agent
+           # systemctl status wazuh-agent
    
    
       .. group-tab:: SysV init
    
-       .. code-block:: console
-   
-         # service wazuh-agent status
+         .. code-block:: console
+      
+            # service wazuh-agent status
 
 
       .. group-tab:: Other Unix based OS
 
-        .. code-block:: console
+         .. code-block:: console
 
-         # /var/ossec/bin/wazuh-control status
+            # /var/ossec/bin/wazuh-control status
    
 
 
@@ -177,23 +177,23 @@ The following steps serve as a guide on how to enroll a Linux/Unix endpoint with
    
       .. group-tab:: Systemd
    
-       .. code-block:: console
-   
-         # systemctl start wazuh-agent
+         .. code-block:: console
+      
+            # systemctl start wazuh-agent
    
    
       .. group-tab:: SysV init
    
-       .. code-block:: console
-   
-         # service wazuh-agent start
+         .. code-block:: console
+      
+            # service wazuh-agent start
 
 
       .. group-tab:: Other Unix based OS
 
-        .. code-block:: console
+         .. code-block:: console
 
-         # /var/ossec/bin/wazuh-control start
+            # /var/ossec/bin/wazuh-control start
 
 
    Restart the agent if it is already running:
@@ -204,23 +204,23 @@ The following steps serve as a guide on how to enroll a Linux/Unix endpoint with
    
       .. group-tab:: Systemd
    
-       .. code-block:: console
-   
-         # systemctl restart wazuh-agent
+         .. code-block:: console
+      
+            # systemctl restart wazuh-agent
    
    
       .. group-tab:: SysV init
    
-       .. code-block:: console
-   
-         # service wazuh-agent restart
+         .. code-block:: console
+      
+            # service wazuh-agent restart
 
 
       .. group-tab:: Other Unix based OS
 
-        .. code-block:: console
+         .. code-block:: console
 
-         # /var/ossec/bin/wazuh-control restart
+            # /var/ossec/bin/wazuh-control restart
 
 
 #. Check the agent status again to confirm that it has started.
@@ -257,62 +257,62 @@ The Wazuh agent installation directory depends on the architecture of the host.
 
 #. Check the agent status to find out if it is running.
 
-    .. tabs::
-      
-      
-         .. group-tab:: PowerShell (as an administrator)
-      
-          .. code-block:: console
-      
-             # Get-Service -name wazuh
-      
-      
-         .. group-tab:: CMD (as an administrator)
-      
-          .. code-block:: console
-      
-             # sc query WazuhSvc
+   .. tabs::
+   
+   
+      .. group-tab:: PowerShell (as an administrator)
+   
+         .. code-block:: console
+   
+            # Get-Service -name wazuh
+   
+   
+      .. group-tab:: CMD (as an administrator)
+   
+         .. code-block:: console
+   
+            # sc query WazuhSvc
 
 
 #. Start or restart the agent depending on its current state (not running/running) to make the changes effective.
 
    Start the agent if it is not running:
 
-      .. tabs::
-        
-        
-          .. group-tab:: PowerShell (as an administrator)
-       
-           .. code-block:: console
-       
-             # Start-Service -Name wazuh
-       
-       
-          .. group-tab:: CMD (as an administrator)
-       
-           .. code-block:: console
-       
-             # net start wazuh
+   .. tabs::
+      
+      
+         .. group-tab:: PowerShell (as an administrator)
+      
+            .. code-block:: console
+         
+               # Start-Service -Name wazuh
+      
+      
+         .. group-tab:: CMD (as an administrator)
+      
+            .. code-block:: console
+         
+               # net start wazuh
 
 
    Restart the agent if it is already running:
 
-      .. tabs::
-        
-        
-          .. group-tab:: PowerShell (as an administrator)
-       
-           .. code-block:: console
-       
-             # Restart-Service -Name wazuh
-       
-       
-          .. group-tab:: CMD (as an administrator)
-       
-           .. code-block:: console
-       
-             # net stop wazuh
-             # net start wazuh
+   .. tabs::
+      
+      
+         .. group-tab:: PowerShell (as an administrator)
+      
+            .. code-block:: console
+         
+               # Restart-Service -Name wazuh
+      
+      
+         .. group-tab:: CMD (as an administrator)
+      
+            .. code-block:: console
+         
+               # net stop wazuh
+               # net start wazuh
 
 
 #. Check the agent status again to confirm that it has started.
@@ -520,77 +520,77 @@ The following steps serve as a guide on how to enroll a Linux/Unix endpoint by u
 
 #. Check the agent status to find out if it is running.
 
-      .. tabs::   
-      
-         .. group-tab:: Systemd
-      
-          .. code-block:: console
+   .. tabs::   
+   
+      .. group-tab:: Systemd
+   
+         .. code-block:: console
       
             # systemctl status wazuh-agent
-      
-      
-         .. group-tab:: SysV init
-      
-          .. code-block:: console
+   
+   
+      .. group-tab:: SysV init
+   
+         .. code-block:: console
       
             # service wazuh-agent status
 
 
-         .. group-tab:: Other Unix based OS
+      .. group-tab:: Other Unix based OS
 
           .. code-block:: console
 
             # /var/ossec/bin/wazuh-control status
-   
+      
 
 #. Start or restart the agent depending on its current state (not running/running) to make the changes effective.
 
    Start the agent if it is not running:
 
-      .. tabs::   
-      
-         .. group-tab:: Systemd
-      
+   .. tabs::   
+   
+      .. group-tab:: Systemd
+   
          .. code-block:: console
       
             # systemctl start wazuh-agent
-      
-      
-         .. group-tab:: SysV init
-      
-          .. code-block:: console
+   
+   
+      .. group-tab:: SysV init
+   
+            .. code-block:: console
       
             # service wazuh-agent start
 
 
-         .. group-tab:: Other Unix based OS
+      .. group-tab:: Other Unix based OS
 
-          .. code-block:: console
+            .. code-block:: console
 
             # /var/ossec/bin/wazuh-control start
 
 
    Restart the agent if it is already running:
 
-      .. tabs::   
-      
-         .. group-tab:: Systemd
-      
-          .. code-block:: console
+   .. tabs::   
+   
+      .. group-tab:: Systemd
+   
+            .. code-block:: console
       
             # systemctl restart wazuh-agent
-      
-      
-         .. group-tab:: SysV init
-      
-          .. code-block:: console
+   
+   
+      .. group-tab:: SysV init
+   
+            .. code-block:: console
       
             # service wazuh-agent restart
 
 
-         .. group-tab:: Other Unix based OS
+      .. group-tab:: Other Unix based OS
 
-          .. code-block:: console
+            .. code-block:: console
 
             # /var/ossec/bin/wazuh-control restart
 
@@ -632,62 +632,62 @@ The Wazuh agent installation directory depends on the architecture of the host.
 
 #. Check the agent status to find out if it is running.
 
-      .. tabs::
-        
-        
-          .. group-tab:: PowerShell (as an administrator)
-       
-           .. code-block:: console
-       
-             # Get-Service -name wazuh
-       
-       
-          .. group-tab:: CMD (as an administrator)
-       
-           .. code-block:: console
-       
-             # sc query WazuhSvc
+   .. tabs::
+      
+      
+         .. group-tab:: PowerShell (as an administrator)
+      
+            .. code-block:: console
+         
+               # Get-Service -name wazuh
+      
+      
+         .. group-tab:: CMD (as an administrator)
+      
+            .. code-block:: console
+         
+               # sc query WazuhSvc
 
 
 #. Start or restart the agent depending on its current state (not running/running) to make the changes effective.
 Start the agent if it is not running:
 
-      .. tabs::
-        
-        
-          .. group-tab:: PowerShell (as an administrator)
-       
-           .. code-block:: console
-       
-             # Start-Service -Name wazuh
-       
-       
-          .. group-tab:: CMD (as an administrator)
-       
-           .. code-block:: console
-       
-             # net start wazuh
+   .. tabs::
+      
+      
+         .. group-tab:: PowerShell (as an administrator)
+      
+            .. code-block:: console
+         
+               # Start-Service -Name wazuh
+      
+      
+         .. group-tab:: CMD (as an administrator)
+      
+            .. code-block:: console
+         
+               # net start wazuh
 
 
    Restart the agent if it is already running:
 
 
-      .. tabs::
-        
-        
-          .. group-tab:: PowerShell (as an administrator)
-       
-           .. code-block:: console
-       
-             # Restart-Service -Name wazuh
-       
-       
-          .. group-tab:: CMD (as an administrator)
-       
-           .. code-block:: console
-       
-             # net stop wazuh
-             # net start wazuh
+   .. tabs::
+      
+      
+         .. group-tab:: PowerShell (as an administrator)
+      
+            .. code-block:: console
+         
+               # Restart-Service -Name wazuh
+      
+      
+         .. group-tab:: CMD (as an administrator)
+      
+            .. code-block:: console
+         
+               # net stop wazuh
+               # net start wazuh
 
 
 #. Check the agent status again to confirm that it has started.
