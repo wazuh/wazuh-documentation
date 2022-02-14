@@ -68,20 +68,20 @@ Before an agent can be enrolled to the Wazuh manager using the password authenti
 
    .. code-block:: console
 
-      systemctl restart wazuh-manager
+       # systemctl restart wazuh-manager
 
 
    - By allowing the enrollment service to set a random password. Having added the ``<use_password>yes</use_password>`` configuration to the Wazuh manager, proceed to restart the manager.
 
    .. code-block:: console
 
-      systemctl restart wazuh-manager
+       # systemctl restart wazuh-manager
       
    This will cause the enrollment service to generate a random password. This password can then be found in /var/ossec/logs/ossec.log. Run the following command to get the agent enrollment password.
 
    .. code-block:: console
 
-      grep "Random password" /var/ossec/logs/ossec.log
+       # grep "Random password" /var/ossec/logs/ossec.log
 
   
    .. code-block:: console
@@ -106,7 +106,7 @@ The following steps serve as a guide on how to enroll a Linux/Unix endpoint with
 
    .. code-block:: console
 
-    echo "<password>" > /var/ossec/etc/authd.pass
+       # echo "<password>" > /var/ossec/etc/authd.pass
 
 
    .. note::
@@ -238,7 +238,11 @@ The Wazuh agent installation directory depends on the architecture of the host.
 - C:\Program Files\ossec-agent for 32-bit systems.
 
 #. Launch PowerShell as an administrator.
-#. Create a file called ``authd.pass`` and save the password to it, ``echo “<custom_password>” > "C:\Program Files (x86)\ossec-agent\authd.pass"``.
+#. Create a file called ``authd.pass`` and save the password to it.
+
+   .. code-block:: console
+      
+        # ``echo “<custom_password>” > "C:\Program Files (x86)\ossec-agent\authd.pass"``.
 
    Note that you have to replace ``<password>`` with the agents enrollment password created on the manager.
 
@@ -854,21 +858,21 @@ The following steps serve as a guide on how to enroll a Linux/Unix endpoint by u
    
          .. code-block:: console
    
-           # systemctl status wazuh-agent
+             # systemctl status wazuh-agent
    
    
       .. group-tab:: SysV init
    
          .. code-block:: console
       
-            # service wazuh-agent status
+             # service wazuh-agent status
 
 
       .. group-tab:: Other Unix based OS
 
          .. code-block:: console
 
-            # /var/ossec/bin/wazuh-control status
+             # /var/ossec/bin/wazuh-control status
   
 
 #. Start or restart the agent depending on its current state (not running/running) to make the changes effective.
@@ -876,54 +880,55 @@ The following steps serve as a guide on how to enroll a Linux/Unix endpoint by u
    Start the agent if it is not running:
 
 
-   .. tabs::   
+   .. tabs::  
+
    
       .. group-tab:: Systemd
    
          .. code-block:: console
       
-            # systemctl start wazuh-agent
+             # systemctl start wazuh-agent
    
    
       .. group-tab:: SysV init
    
          .. code-block:: console
       
-            # service wazuh-agent start
+             # service wazuh-agent start
 
 
       .. group-tab:: Other Unix based OS
 
          .. code-block:: console
 
-            # /var/ossec/bin/wazuh-control start
+             # /var/ossec/bin/wazuh-control start
 
 
    Restart the agent if it is already running:
 
 
    .. tabs::
-   
+         
    
       .. group-tab:: Systemd
    
          .. code-block:: console
       
-            # systemctl restart wazuh-agent
+             # systemctl restart wazuh-agent
    
    
       .. group-tab:: SysV init
    
-         .. code-block:: console
+        .. code-block:: console
       
-            # service wazuh-agent restart
+             # service wazuh-agent restart
 
 
       .. group-tab:: Other Unix based OS
 
-         .. code-block:: console
+        .. code-block:: console
 
-            # /var/ossec/bin/wazuh-control restart
+             # /var/ossec/bin/wazuh-control restart
 
 
 #. Check the agent status again to confirm that it has started.
