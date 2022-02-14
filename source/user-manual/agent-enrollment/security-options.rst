@@ -599,3 +599,95 @@ Restart the agent if it is already running:
 #. Select the “agents” tab to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successful.
 
 
+Windows endpoint
+^^^^^^^^^^^^^^^^
+
+The following steps serve as a guide on how to enroll a Windows endpoint by using certificates to verify the manager identity:
+
+The Wazuh agent installation directory depends on the architecture of the host.
+
+- C:\Program Files (x86)\ossec-agent for 64-bit systems.
+- C:\Program Files\ossec-agent for 32-bit systems.
+
+#. Ensure that the root certificate authority ``rootCA.pem`` file has been copied to the endpoint.
+#. As a root user, modify the Wazuh agent configuration file located at ``“C:\Program Files (x86)\ossec-agent\ossec.conf”`` and include the following:
+
+    #. Wazuh manager IP address or DNS name in the ``<client><server><address>`` section.
+    #. Local path to root certificate in the ``<client><enrollment><server_ca_path>`` section.
+
+  .. code-block:: xml
+
+      <client>
+         <server>
+            <address>MANAGER_IP</address>
+            ...
+         </server>
+            ...
+            <enrollment>
+               <server_ca_path>/path/to/rootCA.pem</server_ca_path>
+               ...
+            </enrollment>
+            ...
+      </client>
+
+#. Check the agent status to find out if it is running.
+
+.. tabs::
+   
+   
+      .. group-tab:: PowerShell (as an administrator)
+   
+      .. code-block:: console
+   
+         # Get-Service -name wazuh
+   
+   
+      .. group-tab:: CMD (as an administrator)
+   
+      .. code-block:: console
+   
+         # sc query WazuhSvc
+
+
+#. Start or restart the agent depending on its current state (not running/running) to make the changes effective.
+
+Start the agent if it is not running:
+
+.. tabs::
+   
+   
+      .. group-tab:: PowerShell (as an administrator)
+   
+      .. code-block:: console
+   
+         # Start-Service -Name wazuh
+   
+   
+      .. group-tab:: CMD (as an administrator)
+   
+      .. code-block:: console
+   
+         # net start wazuh
+
+
+Restart the agent if it is already running:
+
+.. tabs::
+   
+   
+      .. group-tab:: PowerShell (as an administrator)
+   
+      .. code-block:: console
+   
+         # Restart-Service -Name wazuh
+   
+   
+      .. group-tab:: CMD (as an administrator)
+   
+      .. code-block:: console
+   
+         # net stop wazuh
+         # net start wazuh
+
+#. Check the agent status again to confirm that it has started.
+#. Select the “agents” tab to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successful.
