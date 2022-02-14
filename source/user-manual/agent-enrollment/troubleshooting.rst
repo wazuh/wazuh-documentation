@@ -8,6 +8,109 @@
 Troubleshooting
 ===============
 
+As a general rule, it is recommended that the logs on the manager and agent are checked for errors when an agent fails to enroll.
+
+The location of the agent log file is dependent on the operating system:
+
+- For Linux-based systems, the log file is located at ``/var/ossec/logs/ossec.log``
+- For Windows endpoints, the location of the log file is dependent on its architecture:
+   - For a 64-bit endpoint, it is located at ``C:\Program Files (x86)\ossec-agent\ossec.log``
+   - For a 32-bit endpoint, it is located at ``C:\Program Files\ossec-agent\ossec.logs``
+- For a macOS endpoint, the log file is located at ``/Library/Ossec/logs/ossec.log``
+
+
+Testing communication with Wazuh manager
+----------------------------------------
+
+There are situations where the agents cannot be enrolled nor connection established to the manager because the necessary ports on the manager are not reachable.
+
+The following default ports on the manager should be opened: 
+
+- 1514/TCP for agent communication.
+- 1515/TCP for enrollment via agent configuration.
+- 55000/TCP for enrollment via manager API.
+- Replace ``<MANAGER_IP>`` with your Wazuh Manager IP address or DNS name.
+- On Linux and macOS systems (with netcat installed), open a terminal and run the following command:
+
+  .. code-block:: console
+
+      # nc -zv <MANAGER_IP> 1514 1515 55000
+
+      
+   If there is connectivity, the output should be a connection success message:
+
+  .. code-block:: console
+
+     Connection to <MANAGER_IP> port 1514 [tcp] succeeded!
+     Connection to <MANAGER_IP> port 1515 [tcp] succeeded!
+     Connection to <MANAGER_IP> port 55000 [tcp] succeeded!
+
+- On Windows, open a PowerShell terminal and run the following command:
+
+  .. code-block:: console
+
+    (new-object Net.Sockets.TcpClient).Connect("<MANAGER_IP>", 1514)
+    (new-object Net.Sockets.TcpClient).Connect("<MANAGER_IP>", 1515)
+    (new-object Net.Sockets.TcpClient).Connect("<MANAGER_IP>", 55000)
+
+   If there is connectivity, there is no output, otherwise, an error is shown:
+
+  .. code-block:: console
+
+   A connection attempt failed because the connected party did not properly respond after a period of time (...)
+
+
+Authentication error
+--------------------
+
+**Location:** Manager log.
+
+**Error log:**
+
+  .. code-block:: console
+
+    2022/02/03 10:07:32 wazuh-remoted: WARNING: (1404): Authentication error. Wrong key or corrupt payload. Message received from agent '001' at 'any'.
+
+
+**Resolution:** 
+Ensure that the client key on the agent matches the key in the manager client.keys file. The key file can be found at ``/var/ossec/etc/client.keys`` on both the manager and the agent.
+
+
+Invalid agent name for enrollment
+---------------------------------
+
+**Location:** Agent log.
+
+**Error log:**
+
+  .. code-block:: console
+
+    2022/01/26 08:59:10 wazuh-agentd: INFO: Using agent name as: localhost.localdomain
+    2022/01/26 08:59:10 wazuh-agentd: INFO: Waiting for server reply
+    2022/01/26 08:59:10 wazuh-agentd: ERROR: Invalid agent name: localhost.localdomain (from manager)
+    2022/01/26 08:59:10 wazuh-agentd: ERROR: Unable to add agent (from manager)
+
+
+**Resolution:** 
+Ensure the agent hostname is unique and does not match an already enrolled agent. Alternatively, specify a unique agent name in the ``<client><enrollment><agent_name>`` section of the agent ossec.conf file.
+
+   .. code-block:: xml
+
+      <client>
+          .
+          .
+          .
+          <enrollment>
+              <agent_name>EXAMPLE_NAME</agent_name>
+              .
+              .  
+          </enrollment>
+      </client>
+
+
+Unable to read CA certificate file
+----------------------------------
+
 
 
 

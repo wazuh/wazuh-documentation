@@ -46,7 +46,7 @@ Before an agent can be enrolled to the Wazuh manager using the password authenti
 
         echo "<custom_password>" > /var/ossec/etc/authd.pass
 
-   Note that you have to replace <custom_password> with your own agent enrollment password.
+   Note that you have to replace ``<custom_password>`` with your own agent enrollment password.
 
    File permissions for the authd.pass file should be set to 644 and the owner should be root. The permissions and ownership can be configured by running the commands below:
 
@@ -240,7 +240,7 @@ The Wazuh agent installation directory depends on the architecture of the host.
 #. Launch PowerShell as an administrator.
 #. Create a file called ``authd.pass`` and save the password to it, ``echo “<custom_password>” > "C:\Program Files (x86)\ossec-agent\authd.pass"``.
 
-   Note that you have to replace <password> with the agents enrollment password created on the manager.
+   Note that you have to replace ``<password>`` with the agents enrollment password created on the manager.
 
 
 #. Add the Wazuh manager IP address or DNS name in the ``<client><server><address>`` section of ``C:\Program Files (x86)\ossec-agent\ossec.conf``:
@@ -499,8 +499,8 @@ The following steps serve as a guide on how to enroll a Linux/Unix endpoint by u
 #. Ensure that the root certificate authority ``rootCA.pem`` file has been copied to the endpoint.
 #. As a root user, modify the Wazuh agent configuration file located at ``/var/ossec/etc/ossec.conf`` and include the following:
 
-    #. Wazuh manager IP address or DNS name in the <client><server><address> section.
-    #. Local path to root certificate in the <client><enrollment> section.
+    #. Wazuh manager IP address or DNS name in the ``<client><server><address>`` section.
+    #. Local path to root certificate in the ``<client><enrollment>`` section.
 
    .. code-block:: xml
 
