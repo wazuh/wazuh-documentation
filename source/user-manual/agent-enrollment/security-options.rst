@@ -57,10 +57,10 @@ Before an agent can be enrolled to the Wazuh manager using the password authenti
 
 
    The output below shows the recommended file owner and permissions.
-   
+
 
          .. code-block:: console     
-         :class: output   
+          :class: output   
 
       -rw-r--r-- 1 root wazuh 9 Jan 11 12:50 /var/ossec/etc/authd.pass
 
