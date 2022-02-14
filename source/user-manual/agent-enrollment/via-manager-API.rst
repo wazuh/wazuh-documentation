@@ -173,21 +173,21 @@ The following steps serve as a guide on how to import the key to a Linux/Unix ag
 #. From the Wazuh agent, launch the terminal as a root user and import the key.
 
 
-   .. code-block:: console
+      .. code-block:: console
 
-    #/var/ossec/bin/manage_agents -i <key>
+        #/var/ossec/bin/manage_agents -i <key>
 
-    The output should look like this:
+   The output should look like this:
 
-   .. code-block:: console
-        :class: output 
+      .. code-block:: console
+            :class: output 
 
-            Agent information:
-                ID:001
-                Name:agent_1
-                IP Address:any
-            Confirm adding it?(y/n): y
-            Added.
+                Agent information:
+                    ID:001
+                    Name:agent_1
+                    IP Address:any
+                Confirm adding it?(y/n): y
+                Added.
 
 
 #. Add the Wazuh manager IP address to the agent configuration file in ``/var/ossec/etc/ossec.conf``. 
@@ -400,22 +400,22 @@ The following steps serve as a guide on how to import the key to a macOS agent:
 
 #. From the Wazuh agent, launch the terminal as a root user and import the key.
 
-   .. code-block:: console
+      .. code-block:: console
 
-    # /Library/Ossec/bin/manage_agents -i <key>
+        # /Library/Ossec/bin/manage_agents -i <key>
       
-    The output should look like this:
+   The output should look like this:
 
-   .. code-block:: console
-      :class: output
+      .. code-block:: console
+          :class: output
 
-      Agent information:
-          ID:001
-          Name:agent_1
-          IP Address:any
+          Agent information:
+              ID:001
+              Name:agent_1
+              IP Address:any
 
-      Confirm adding it?(y/n): y
-      Added.
+          Confirm adding it?(y/n): y
+          Added.
 
 #. Add the Wazuh manager IP address to the agent configuration file in ``/Library/Ossec/etc/ossec.conf``.
 
