@@ -231,6 +231,7 @@ Windows endpoint
 ^^^^^^^^^^^^^^^^
 
 The following steps serve as a guide on how to enroll a Windows endpoint with password authentication:
+
 The Wazuh agent installation directory depends on the architecture of the host.
 
 - C:\Program Files (x86)\ossec-agent for 64-bit systems.
@@ -294,7 +295,7 @@ The Wazuh agent installation directory depends on the architecture of the host.
              # net start wazuh
 
 
-#. Restart the agent if it is already running:
+   Restart the agent if it is already running:
 
       .. tabs::
         
@@ -444,9 +445,10 @@ Manager configuration
 
 
       Where: 
-         ``C`` is the country where the organization making this request is domiciled.
-         ``CN`` is the common name on the certificate. This should be the Wazuh manager IP address or its DNS name. This field is not optional. In this case, the Wazuh manager DNS are wazuh and wazuh.com.
-         ``subjectAltName`` is optional and specifies the alternate subject names that can be used for the server. Note that to allow the enrollment of Wazuh agents with a SAN certificate, this should be included.
+
+         - ``C`` is the country where the organization making this request is domiciled.
+         - ``CN`` is the common name on the certificate. This should be the Wazuh manager IP address or its DNS name. This field is not optional. In this case, the Wazuh manager DNS are wazuh and wazuh.com.
+         - ``subjectAltName`` is optional and specifies the alternate subject names that can be used for the server. Note that to allow the enrollment of Wazuh agents with a SAN certificate, this should be included.
 
     #. Create a certificate signing request (CSR) on the Wazuh manager with the following command:
     
@@ -456,9 +458,10 @@ Manager configuration
   
   
       Where:
-         ``req.conf`` is the certificate request configuration file.
-         ``sslmanager.key`` is the private key for the certificate request.
-         ``sslmanager.csr`` is the CSR to be submitted to the certificate authority.
+
+         - ``req.conf`` is the certificate request configuration file.
+         - ``sslmanager.key`` is the private key for the certificate request.
+         - ``sslmanager.csr`` is the CSR to be submitted to the certificate authority.
 
     #. Issue and sign the certificate for the manager CSR with the following command:
 
@@ -467,11 +470,12 @@ Manager configuration
          # openssl x509 -req -days 365 -in sslmanager.csr -CA rootCA.pem -CAkey rootCA.key -out sslmanager.cert -CAcreateserial -extfile req. conf -extensions req_ext
 
       Where:
-         ``req.conf`` is the certificate request configuration file.
-         ``sslmanager.csr`` is the CSR to be submitted to the certificate authority.
-         ``sslmanager.cert`` is the signed SSL certificate from the CSR.
-         ``rootCA.pem`` is the root certificate for the CA.
-         The -extfile and -extensions options are required to copy the subject and the extensions from sslmanager.csr to sslmanager.cert.
+
+         - ``req.conf`` is the certificate request configuration file.
+         - ``sslmanager.csr`` is the CSR to be submitted to the certificate authority.
+         - ``sslmanager.cert`` is the signed SSL certificate from the CSR.
+         - ``rootCA.pem`` is the root certificate for the CA.
+         - The -extfile and -extensions options are required to copy the subject and the extensions from sslmanager.csr to sslmanager.cert.
 
     #. Copy the newly signed certificate and key files to ``/var/ossec/etc`` on the Wazuh manager:
 
@@ -780,8 +784,9 @@ Preparations on the Wazuh manager
         # openssl req -new -nodes -newkey rsa:4096 -keyout sslagent.key -out sslagent.csr -subj '/C=US/CN=<agent_IP>'
 
    Where:
-      ``sslagent.csr`` is the CSR to be submitted to the certificate authority.
-      ``sslagent.key`` is the generated CSR private key.
+
+     - ``sslagent.csr`` is the CSR to be submitted to the certificate authority.
+     - ``sslagent.key`` is the generated CSR private key.
 
 #. Sign the generated agent CSR using the CA keys:
 
@@ -791,10 +796,11 @@ Preparations on the Wazuh manager
 
 
    Where:
-   ``sslagent.csr`` is the CSR to be submitted to the certificate authority.
-   ``sslagent.cert`` is the signed SSL certificate from the CSR.
-   ``rootCA.pem`` is the root certificate for the CA.
-   ``rootCA.key`` is the root certificate private key for the CA.
+
+     - ``sslagent.csr`` is the CSR to be submitted to the certificate authority.
+     - ``sslagent.cert`` is the signed SSL certificate from the CSR.
+     - ``rootCA.pem`` is the root certificate for the CA.
+     - ``rootCA.key`` is the root certificate private key for the CA.
 
 
 #. Copy the signed SSL certificate and key (``sslagent.cert`` and ``sslagent.key`` in this case) to the agent. A tool like SCP can be used to copy the certificate to the endpoints. 
