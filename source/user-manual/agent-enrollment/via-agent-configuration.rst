@@ -5,10 +5,10 @@
   
 .. _enrollment_via_agent_automatic_request:
 
-Enrollment via automatic agent request
-======================================
+Enrollment via agent configuration
+==================================
 
-In this option, the agent is automatically enrolled after the Wazuh manager IP address has been configured. Please note that, when using additional security options, other settings might need to be configured.
+In this option, the agent is automatically enrolled after the Wazuh manager IP address has been configured. Please note that, when using :ref:`additional security options <enrolloment_additional_security>`, other settings might need to be configured.
 
 The Wazuh manager IP address can be configured in one of two ways on the agent:
 
@@ -25,9 +25,9 @@ The following steps serve as a guide on how to configure a Linux/Unix endpoint a
 
 #. Launch the terminal as a root user, edit the agent configuration file ``/var/ossec/etc/ossec.conf``, and make the following changes:
 
-   #. Include the Wazuh manager IP address or DNS name in the ``<client><server><address>`` section:
+   - Include the Wazuh manager IP address or DNS name in the ``<client><server><address>`` section:
 
-      .. code-block:: console
+      .. code-block:: xml
 
         <client>
           <server>
@@ -39,9 +39,9 @@ The following steps serve as a guide on how to configure a Linux/Unix endpoint a
  
       This will allow the agent to connect to the Wazuh manager and automatically request a key.
 
-   #. (Optional) Add enrollment parameters in the ``<client><enrollment>`` section. 
+   - (Optional) Add enrollment parameters in the ``<client><enrollment>`` section. 
 
-     .. code-block:: console
+      .. code-block:: xml
 
         <client>
             .
@@ -56,13 +56,14 @@ The following steps serve as a guide on how to configure a Linux/Unix endpoint a
         </client>
 
 
-   These agent enrollment parameters are optional and they provide the agent with specific information that can be used during enrollment. Some common enrollment parameters can be seen below:
+      These agent enrollment parameters are optional and they provide the agent with specific information that can be used during enrollment. Some common enrollment parameters can be seen below:
 
-   - ``<agent_name>EXAMPLE_NAME</agent_name>``: This specifies the name the agent should be enrolled as. When this is not specified, it defaults to the endpoint hostname.
+      - ``<agent_name>EXAMPLE_NAME</agent_name>``: This specifies the name the agent should be enrolled as. When this is not specified, it defaults to the endpoint hostname.
 
-   - ``<groups>GROUP1,GROUP2,GROUP3</groups>``: This specifies the group(s) that the agent should be added to. An agent group is a collection of agents that would share the same configuration. This allows the manager to push configuration settings to a set of agents that belong to the same group. The agent enrollment will fail if a non-existent group is specified. Therefore, it is necessary to create the desired group on the manager before using the group parameter. Additional information on agent groups can be found :ref:`here <grouping-agents>`.
-   
-   More optional enrollment parameters and their usage can be found :ref:`here <enrollment>`. 
+      - ``<groups>GROUP1,GROUP2,GROUP3</groups>``: This specifies the group(s) that the agent should be added to. An agent group is a collection of agents that would share the same configuration. This allows the manager to push configuration settings to a set of agents that belong to the same group. The agent enrollment will fail if a non-existent group is specified. Therefore, it is necessary to create the desired group on the manager before using the group parameter. Additional information on agent groups can be found :ref:`here <grouping-agents>`.
+      
+      More optional enrollment parameters and their usage can be found :ref:`here <enrollment>`. 
+
 
 #. Check the agent status to find out if it is running.
    
@@ -144,9 +145,9 @@ The Wazuh agent installation directory depends on the architecture of the host:
 
 #. Using an administrator account, modify the Wazuh agent configuration file ``ossec.conf`` in the installation directory. For this guide, we are assuming a 64-bit architecture. Hence, ``C:\Program Files (x86)\ossec-agent\ossec.conf``
 
-   #. Include the Wazuh manager IP address or DNS name in the ``<client><server><address>`` section:
+   - Include the Wazuh manager IP address or DNS name in the ``<client><server><address>`` section:
    
-         .. code-block:: console
+         .. code-block:: xml
    
            <client>
              <server>
@@ -156,28 +157,28 @@ The Wazuh agent installation directory depends on the architecture of the host:
            </client>
    
     
-         This will allow the agent to connect to the Wazuh manager and automatically request a key.
-   
-   #. (Optional) Add enrollment parameters in the ``<client><enrollment>`` section. 
-   
-        .. code-block:: console
-   
-           <client>
-               .
-               .
-               .
-               <enrollment>
-                   <agent_name>EXAMPLE_NAME</agent_name>
-                   <groups>GROUP1,GROUP2,GROUP3</groups>
-                   .
-                   .  
-               </enrollment>
-           </client>
-   
+          This will allow the agent to connect to the Wazuh manager and automatically request a key.
+    
+   - (Optional) Add enrollment parameters in the ``<client><enrollment>`` section. 
+    
+          .. code-block:: xml
+    
+            <client>
+                .
+                .
+                .
+                <enrollment>
+                    <agent_name>EXAMPLE_NAME</agent_name>
+                    <groups>GROUP1,GROUP2,GROUP3</groups>
+                    .
+                    .  
+                </enrollment>
+            </client>
+    
    These agent enrollment parameters are optional and they provide the agent with specific information that should be used during enrollment. Some common enrollment parameters are below:
 
    - ``<agent_name>EXAMPLE_NAME</agent_name>``: This specifies the name the endpoint should be enrolled as. When this is not specified, it defaults to the endpoint hostname.
-   
+    
    - ``<groups>GROUP1,GROUP2,GROUP3</groups>``: This specifies the group(s) that the agent should be added to. An agent group is a collection of agents that would share the same configuration. This allows the manager to push configuration settings to a set of agents that belong to the same group. The agent enrollment will fail if a non-existent group is specified. Therefore, it is necessary to create the desired group on the manager before using the group parameter. Additional information on agent groups can be found :ref:`here <grouping-agents>`.
 
    More optional enrollment parameters and their usage are provided :ref:`here <enrollment>`.
@@ -185,9 +186,9 @@ The Wazuh agent installation directory depends on the architecture of the host:
 
 #. Check the agent status to find out if it is running.
 
-    .. tabs::
-       
-       
+      .. tabs::
+        
+        
           .. group-tab:: PowerShell (as an administrator)
        
            .. code-block:: console
@@ -259,9 +260,9 @@ The following steps serve as a guide on how to configure a macOS endpoint agent 
 
 #. Launch the terminal as a root user, edit the Wazuh agent configuration file /Library/Ossec/etc/ossec.conf, and make the following changes:
     
-   #. Include the Wazuh manager IP address or DNS name in the ``<client><server><address>`` section:
+   - Include the Wazuh manager IP address or DNS name in the ``<client><server><address>`` section:
       
-            .. code-block:: console
+            .. code-block:: xml
       
               <client>
                 <server>
@@ -273,9 +274,9 @@ The following steps serve as a guide on how to configure a macOS endpoint agent 
        
             This will allow the agent to connect to the Wazuh manager and automatically request a key.
       
-   #. (Optional) Add enrollment parameters in the ``<client><enrollment>`` section. 
+   - (Optional) Add enrollment parameters in the ``<client><enrollment>`` section. 
       
-           .. code-block:: console
+           .. code-block:: xml
       
               <client>
                   .
@@ -296,6 +297,7 @@ The following steps serve as a guide on how to configure a macOS endpoint agent 
       - ``<groups>GROUP1,GROUP2,GROUP3</groups>``: This specifies the group(s) that the agent should be added to. An agent group is a collection of agents that would share the same configuration. This allows the manager to push configuration settings to a set of agents that belong to the same group. The agent enrollment will fail if a non-existent group is specified. Therefore, it is necessary to create the desired group on the manager before using the group parameter. Additional information on agent groups can be found :ref:`here <grouping-agents>`.
    
       More optional enrollment parameters and their usage are provided :ref:`here <enrollment>`.
+
 
 #. Check the agent status to find out if it is running.
 
