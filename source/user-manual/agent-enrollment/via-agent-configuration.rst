@@ -258,23 +258,23 @@ macOS endpoint
 
 The following steps serve as a guide on how to configure a macOS endpoint agent for automatic enrollment via the agent configuration method:
 
-#. Launch the terminal as a root user, edit the Wazuh agent configuration file /Library/Ossec/etc/ossec.conf, and make the following changes:
+#. Launch the terminal as a root user, edit the Wazuh agent configuration file ``/Library/Ossec/etc/ossec.conf``, and make the following changes:
     
-   - Include the Wazuh manager IP address or DNS name in the ``<client><server><address>`` section:
+   #. Include the Wazuh manager IP address or DNS name in the ``<client><server><address>`` section:
       
-            .. code-block:: xml
-      
-              <client>
-                <server>
-                  <address>MANAGER_IP</address>
-                  ...
-                </server>
-              </client>
+          .. code-block:: xml
+    
+            <client>
+              <server>
+                <address>MANAGER_IP</address>
+                ...
+              </server>
+            </client>
       
        
-            This will allow the agent to connect to the Wazuh manager and automatically request a key.
+       This will allow the agent to connect to the Wazuh manager and automatically request a key.
       
-   - (Optional) Add enrollment parameters in the ``<client><enrollment>`` section. 
+   #. (Optional) Add enrollment parameters in the ``<client><enrollment>`` section. 
       
            .. code-block:: xml
       
