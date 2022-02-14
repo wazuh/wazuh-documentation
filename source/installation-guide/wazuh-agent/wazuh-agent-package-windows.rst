@@ -37,7 +37,7 @@ The agent runs on the host you want to monitor and communicates with the Wazuh m
 
               For additional deployment options such as agent name, agent group, and registration password, see the :ref:`Deployment variables for Windows <deployment_variables_windows>` section.
 
-              The installation process is now complete and the Wazuh agent is successfully installed, registered, and configured, running on your Windows system.
+              The installation process is now complete and the Wazuh agent is successfully installed, registered, and configured.
 
               .. note:: Alternatively, if you want to install an agent without registering it, omit the deployment variables. To learn more about the different registration methods, see the :ref:`Registering Wazuh agents <register_agents>` section.
                
