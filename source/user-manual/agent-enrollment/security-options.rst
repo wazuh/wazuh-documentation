@@ -393,4 +393,99 @@ Restart the agent if it is already running:
 #. Select the “agents” tab to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successful.
 
 
+Using certificates
+------------------
+
+This method uses SSL certificates to:
+- Verify manager: Verify the identity of the Wazuh manager before an agent sends the enrollment request.
+- Verify agent: Verify that an agent is authorized to enroll in the Wazuh manager.
+
+The manager verification and the agent verification are independent of each other. However, it is possible to use a combination of both.
+
+
+Prerequisite
+^^^^^^^^^^^^
+
+A certificate authority to sign certificates for the Wazuh manager and agents is needed. In the absence of an already configured certificate authority, the Wazuh manager can be used as the certificate authority by running the below command:
+
+.. code-block:: console
+     
+    # openssl req -x509 -new -nodes -newkey rsa:4096 -keyout rootCA.key -out rootCA.pem -batch -subj "/C=US/ST=CA/O=Wazuh"
+
+
+The root certificate is created and saved as the ``rootCA.pem`` file.
+
+
+Manager identity validation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Here the Wazuh manager has issued an SSL certificate using the certificate authority. Then, during enrollment, the agent verifies the Wazuh manager certificate using the root certificate of the CA.
+
+
+Manager configuration
+~~~~~~~~~~~~~~~~~~~~~
+
+#. Generate an SSL certificate on the Wazuh manager signed by the certificate authority. The steps to generate an SSL certificate for the manager are as follows:
+
+    #. Create a certificate request configuration file ``req.conf`` on the manager. Replace ``<manager_IP>`` with the hostname or the IP address of the Wazuh manager where the Wazuh agents are going to be enrolled. The contents of the file can be as follows:
+
+    .. code-block:: console
+
+         [req]
+         distinguished_name = req_distinguished_name
+         req_extensions = req_ext
+         prompt = no
+         [req_distinguished_name]
+         C = US
+         CN = <manager_IP>
+         [req_ext]
+         subjectAltName = @alt_names
+         [alt_names]
+         DNS.1 = wazuh
+         DNS.2 = wazuh.com
+
+
+    **Where:** 
+    - ``C`` is the country where the organization making this request is domiciled.
+    - ``CN`` is the common name on the certificate. This should be the Wazuh manager IP address or its DNS name. This field is not optional. In this case, the Wazuh manager DNS are wazuh and wazuh.com.
+    - ``subjectAltName`` is optional and specifies the alternate subject names that can be used for the server. Note that to allow the enrollment of Wazuh agents with a SAN certificate, this should be included.
+
+    #. Create a certificate signing request (CSR) on the Wazuh manager with the following command:
+    
+    .. code-block:: console
+
+       # openssl req -new -nodes -newkey rsa:4096 -keyout sslmanager.key -out sslmanager.csr -config req.conf
+  
+  
+    **Where:**
+    - ``req.conf`` is the certificate request configuration file.
+    - ``sslmanager.key`` is the private key for the certificate request.
+    - ``sslmanager.csr`` is the CSR to be submitted to the certificate authority.
+
+    #. Issue and sign the certificate for the manager CSR with the following command:
+
+    .. code-block:: console
+
+      # openssl x509 -req -days 365 -in sslmanager.csr -CA rootCA.pem -CAkey rootCA.key -out sslmanager.cert -CAcreateserial -extfile req. conf -extensions req_ext
+
+    **Where:**
+    - ``req.conf`` is the certificate request configuration file.
+    - ``sslmanager.csr`` is the CSR to be submitted to the certificate authority.
+    - ``sslmanager.cert`` is the signed SSL certificate from the CSR.
+    - ``rootCA.pem`` is the root certificate for the CA.
+    - The -extfile and -extensions options are required to copy the subject and the extensions from sslmanager.csr to sslmanager.cert.
+
+    #. Copy the newly signed certificate and key files to ``/var/ossec/etc`` on the Wazuh manager:
+
+    .. code-block:: console
+
+      # cp sslmanager.cert sslmanager.key /var/ossec/etc
+
+
+    #. Restart the Wazuh manager to apply the changes made.
+
+    .. code-block:: console
+
+      # systemctl restart wazuh-manager
+
 
