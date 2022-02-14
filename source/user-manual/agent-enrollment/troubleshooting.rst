@@ -196,6 +196,7 @@ Invalid password
 
 
 **Resolution:** 
+
 #. Ensure the same password is used by the manager and the agent
 #. Ensure the ``“authd.pass”`` password file is in the right location and has the right permission
 #. If password authentication is not needed, it should be disabled in the ``<auth>`` section of the manager ``ossec.conf`` file.
