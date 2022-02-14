@@ -50,16 +50,17 @@ Before an agent can be enrolled to the Wazuh manager using the password authenti
 
    File permissions for the authd.pass file should be set to 644 and the owner should be root. The permissions and ownership can be configured by running the commands below:
 
-   .. code-block:: console
+         .. code-block:: console
 
-       chmod 644 /var/ossec/etc/authd.pass
-       chown root:wazuh /var/ossec/etc/authd.pass
+            chmod 644 /var/ossec/etc/authd.pass
+            chown root:wazuh /var/ossec/etc/authd.pass
 
 
    The output below shows the recommended file owner and permissions.
+   
 
-   .. code-block:: console     
-    :class: output   
+         .. code-block:: console     
+         :class: output   
 
       -rw-r--r-- 1 root wazuh 9 Jan 11 12:50 /var/ossec/etc/authd.pass
 
