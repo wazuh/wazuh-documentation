@@ -24,7 +24,7 @@
     flex-grow: 0;
     height: calc(100vh - #{$headerHeightXl} - #{$footerHeight});
   }
-  
+
   @include media-only(xl, xxl) {
     flex-basis: $rightSidebarWidthNarrow;
     width: $rightSidebarWidthNarrow;

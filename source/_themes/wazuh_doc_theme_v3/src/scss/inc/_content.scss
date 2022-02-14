@@ -21,7 +21,7 @@
   @include media-max(sm){
     padding-top: 0;
   }
-  
+
   .container {
     &[class*="align-"] {
       padding: 0;
@@ -42,7 +42,7 @@
       margin: 5px;
     }
   }
-  
+
   .align-center {
     margin-left: auto;
     margin-right: auto;
@@ -86,7 +86,7 @@
   @include media-min(xl){
     min-height: calc(100vh - #{$headerHeightXl} - #{$breadcrumbsHeightXl} - #{$footerHeight});
   }
-  
+
   h1,
   h2,
   h3,
@@ -97,7 +97,7 @@
       display: inline-block;
       line-height: 1;
       text-decoration: none;
-      
+
       &::after {
         display: inline-block;
         width: 1rem;
@@ -111,7 +111,7 @@
         transition: opacity ease-in .1s;
       }
     }
-    
+
     &:hover {
       .headerlink::after {
         opacity: 1;
@@ -119,12 +119,12 @@
       }
     }
   }
-  
+
   code.literal {
     line-height: 1rem;
     padding: 5px 7px 3px;
   }
-  
+
   .toctree-wrapper {
     padding-top: 1rem;
     ul {
@@ -132,7 +132,7 @@
       @include media-max(sm){
         padding-left: 20px;
       }
-      
+
       li a {
         display: inline-block;
         padding-top: 0.2rem;
@@ -141,7 +141,7 @@
       }
     }
   }
-    
+
   .align-cells-top {
     th,
     td {
@@ -236,7 +236,7 @@
       margin-bottom: -6px;
       border-radius: calc(#{$roundedCorners} + 1px);
       perspective: 1px;
-      
+
       td,
       th {
         border: 1px solid;
@@ -351,7 +351,7 @@ body {
     caption {
       background-color: $light_ColorBaseSpace;
     }
-    
+
     .docutils:not(.list-rows) {
       thead {
         background-color: $light_ColorPrimary;
@@ -360,16 +360,16 @@ body {
           background-color: $light_ColorPrimary;
         }
       }
-      
+
       th {
         color: $light_ColorBaseSpace;
         border-color: $light_ColorPrimary;
       }
-      
+
       .stub:not(.head) {
         color: $light_ColorMainText;
       }
-      
+
       tbody {
         > :nth-of-type(even) td,
         > :nth-of-type(even) th {
@@ -387,7 +387,7 @@ body {
     
     table.docutils:not(.list-rows) {
       border-color: $light_ColorTableBorder;
-      
+
       &.release-notes {
         tr {
           & > td:first-child,
@@ -439,16 +439,16 @@ body {
           background-color: $dark_ColorPrimary;
         }
       }
-      
+
       th {
         color: $dark_ColorBaseSpace;
         border-color: $dark_ColorPrimary;
       }
-      
+
       .stub:not(.head) {
         color: $dark_ColorMainText;
       }
-      
+
       tbody {
         > :nth-of-type(even) td,
         > :nth-of-type(even) th {
@@ -463,12 +463,12 @@ body {
         }
       }
     }
-    
+
     table.docutils:not(.list-rows) {
       border-color: $dark_ColorTableBorder;
       margin-bottom: -6px;
       border-radius: calc(#{$roundedCorners} + 2px);
-      
+
       &.release-notes {
         tr {
           & > td:first-child,
@@ -482,7 +482,7 @@ body {
       border-color: rgba(255,255,255,.1);
     }
   }
-  
+
   .table-wrapper {
     border-radius: $roundedCorners;
     overflow: hidden;

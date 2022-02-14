@@ -14,7 +14,7 @@
   > span:first-child {
     margin-left: 4px;
   }
-  
+
   .text {
     @include media-max(sm) {
       display: none;

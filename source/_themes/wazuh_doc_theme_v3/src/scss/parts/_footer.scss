@@ -21,13 +21,13 @@ footer {
   @include media-min(xxl) {
     left: $leftSidebarWidth;
   }
-  
+
   & > .container {
     @include media-max(xl) {
       flex-direction: column;
     }
   }
-  
+
   .desktop-footer {
     @include media-min(xl){
       width: 100%;
@@ -49,7 +49,7 @@ footer {
       padding: 15px;
     }
   }
-  
+
   .website-links {
     margin-bottom: 3rem;
     ul {
@@ -114,7 +114,7 @@ footer {
 body {
   footer {
     background: $light_ColorFooter;
-    
+
     .nav-link {
       color: $light_ColorMainText;
 
@@ -139,7 +139,7 @@ body {
 .dark-theme {
   footer {
     background: $dark_ColorFooter;
-    
+
     .nav-link {
       color: $dark_ColorMainText;
 

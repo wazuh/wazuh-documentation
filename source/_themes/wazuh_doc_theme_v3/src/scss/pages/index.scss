@@ -310,7 +310,7 @@ body {
       }
     }
   }
-  
+
   #header {
     background: $light_ColorIndexHeaderBackground;
     .search-box {
@@ -320,7 +320,7 @@ body {
       background: $light_ColorIndexHeaderBackground;
     }
   }
-  
+
   /* Getting started */
   [href$="getting-started/index.html"]::before {
     background-image: url('#{$icoPath}index-icons.svg#getting-started-lt');
@@ -377,7 +377,7 @@ body {
   [href$="release-notes/index.html"]::before {
     background-image: url('#{$icoPath}index-icons.svg#release-notes-lt');
   }
-  
+
   &.index #quickstart {
     background-color: $light_ColorPrimary;
     &::after {
@@ -414,7 +414,7 @@ body {
       }
     }
   }
-  
+
   #header {
     background: $dark_ColorIndexHeaderBackground;
     .search-box {

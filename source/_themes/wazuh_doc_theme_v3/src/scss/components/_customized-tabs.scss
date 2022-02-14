@@ -50,6 +50,8 @@
       font-weight: 500;
       border-radius: $roundedCorners $roundedCorners 0 0!important;
       padding: 1.42857em calc(1.42857em + .15%);
+      border: 1px solid;
+      border-bottom: none;
       @include media-max(sm){
         padding: .8em calc(.8em + .15%);
       }
@@ -92,8 +94,9 @@ body {
   .sphinx-tabs {
     .docutils.container {
       .item {
-        background-color: $light_ColorCodeBlockBackground;
+        background-color: $light_ColorSidebarSpace;
         color: $light_ColorMainText;
+        border-color: $light_ColorSidebarSpace;
         &.active {
           border-color: $light_ColorPrimary;
           background-color: $light_ColorBaseSpace;
@@ -109,6 +112,7 @@ body {
         &:hover {
           background-color: $light_ColorSidebarSpace;
           color: $light_ColorPrimary;
+          border-color: $light_ColorPrimary;
         }
       }
     }
@@ -132,28 +136,30 @@ body {
   .sphinx-tabs {
     .docutils.container {
       .item {
-        background-color: $dark_ColorCodeBlockBackground;
+        background-color: $dark_ColorHighlightBackground;
         color: $dark_ColorMainText;
+        border-color: $dark_ColorHighlightBackground;
         &.active {
           border-color: $dark_ColorPrimary;
-          background-color: $dark_ColorBaseSpace;
+          background-color: $dark_ColorTabBackground;
           color: $dark_ColorPrimary;
           &:hover {
-            background-color: $dark_ColorBaseSpace;
+            background-color: $dark_ColorTabBackground;
           }
           &:first-child ::after {
-            background: $dark_ColorBaseSpace;
+            background: $dark_ColorTabBackground;
             border-left-color: $dark_ColorPrimary;
           }
         }
         &:hover {
-          background-color: $dark_ColorSidebarSpace;
+          background-color: $dark_ColorHighlightBackground;
           color: $dark_ColorPrimary;
+          border-color: $dark_ColorPrimary;
         }
       }
     }
     .sphinx-tab.ui.segment {
-      background-color: $dark_ColorBaseSpace;
+      background-color: $dark_ColorTabBackground;
       color: $dark_ColorMainText;
     }
   }

@@ -8,7 +8,7 @@
   padding: 0 20px 1px;
   margin-bottom: 2rem;
   border-left: 5px solid;
-  
+
   &:not(.long){
     padding-top: 15px;
     padding-bottom: 15px;
@@ -18,7 +18,7 @@
       padding-bottom: 1rem;
     }
   } 
-  
+
   &.long {
     .admonition-title {
       &::after {
@@ -32,7 +32,7 @@
         top: 18px;
       }
     }
-    
+
     &.note,
     &.warning, 
     &.attention,
@@ -47,7 +47,7 @@
       }
     }
   }
-  
+
   .admonition-title {
     padding: 16px 5px 16px 0;
     font-weight: 600;
@@ -68,7 +68,7 @@ body {
     .admonition-title {
       color: $light_ColorShadedText;
     }
-    
+
     &.note {
       border-color: $light_ColorPrimaryLighter;
       .admonition-title {
@@ -84,7 +84,7 @@ body {
       border-color: $light_ColorWarning;
       .admonition-title {
         color: $light_ColorWarningDark;
-        
+
         &::after {
           background: url('#{$icoPath}svg-icons.svg#circle-exclamation-orange');
         }
@@ -180,7 +180,7 @@ body {
     .admonition-title {
       color: $dark_ColorShadedText;
     }
-    
+
     &.note {
       border-color: $dark_ColorPrimaryLighter;
       .admonition-title {
@@ -196,7 +196,7 @@ body {
       border-color: $dark_ColorWarning;
       .admonition-title {
         color: $dark_ColorWarningDark;
-        
+
         &::after {
           background: url('#{$icoPath}svg-icons.svg#circle-exclamation-orange');
         }

@@ -54,7 +54,7 @@ header {
     @include media-max(sm) {
       font-size: 14px;
     }
-    
+
     @include media-max(xl) {
       border: none;
       padding: 0;
@@ -73,10 +73,10 @@ header {
       &:focus {
         font-weight: 500;
       }
-      
+
       &.disabled {
         font-weight: 500;
-        
+
         &:hover,
         &:focus {
           font-weight: 500;
@@ -100,7 +100,7 @@ body {
       }
     }
   }
-  
+
   #version-selector {
     .dropdown-btn {
       color: $light_ColorMainText;
@@ -146,7 +146,7 @@ body {
       }
     }
   }
-  
+
   #version-selector {
     .dropdown-btn {
       color: $dark_ColorMainText;
