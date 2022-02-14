@@ -649,8 +649,7 @@ The Wazuh agent installation directory depends on the architecture of the host.
                # sc query WazuhSvc
 
 
-#. Start or restart the agent depending on its current state (not running/running) to make the changes effective.
-Start the agent if it is not running:
+#. Start or restart the agent depending on its current state (not running/running) to make the changes effective. Start the agent if it is not running:
 
    .. tabs::
       
