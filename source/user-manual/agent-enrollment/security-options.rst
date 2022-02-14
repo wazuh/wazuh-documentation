@@ -257,20 +257,20 @@ The Wazuh agent installation directory depends on the architecture of the host.
 
 #. Check the agent status to find out if it is running.
 
-      .. tabs::
-        
-        
-          .. group-tab:: PowerShell (as an administrator)
-       
-           .. code-block:: console
-       
+    .. tabs::
+      
+      
+         .. group-tab:: PowerShell (as an administrator)
+      
+          .. code-block:: console
+      
              # Get-Service -name wazuh
-       
-       
-          .. group-tab:: CMD (as an administrator)
-       
-           .. code-block:: console
-       
+      
+      
+         .. group-tab:: CMD (as an administrator)
+      
+          .. code-block:: console
+      
              # sc query WazuhSvc
 
 
@@ -524,21 +524,21 @@ The following steps serve as a guide on how to enroll a Linux/Unix endpoint by u
       
          .. group-tab:: Systemd
       
-         .. code-block:: console
+          .. code-block:: console
       
             # systemctl status wazuh-agent
       
       
          .. group-tab:: SysV init
       
-         .. code-block:: console
+          .. code-block:: console
       
             # service wazuh-agent status
 
 
          .. group-tab:: Other Unix based OS
 
-         .. code-block:: console
+          .. code-block:: console
 
             # /var/ossec/bin/wazuh-control status
    
@@ -558,14 +558,14 @@ The following steps serve as a guide on how to enroll a Linux/Unix endpoint by u
       
          .. group-tab:: SysV init
       
-         .. code-block:: console
+          .. code-block:: console
       
             # service wazuh-agent start
 
 
          .. group-tab:: Other Unix based OS
 
-         .. code-block:: console
+          .. code-block:: console
 
             # /var/ossec/bin/wazuh-control start
 
@@ -576,21 +576,21 @@ The following steps serve as a guide on how to enroll a Linux/Unix endpoint by u
       
          .. group-tab:: Systemd
       
-         .. code-block:: console
+          .. code-block:: console
       
             # systemctl restart wazuh-agent
       
       
          .. group-tab:: SysV init
       
-         .. code-block:: console
+          .. code-block:: console
       
             # service wazuh-agent restart
 
 
          .. group-tab:: Other Unix based OS
 
-         .. code-block:: console
+          .. code-block:: console
 
             # /var/ossec/bin/wazuh-control restart
 
