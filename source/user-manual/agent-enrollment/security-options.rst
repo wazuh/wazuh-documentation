@@ -52,8 +52,8 @@ Before an agent can be enrolled to the Wazuh manager using the password authenti
 
          .. code-block:: console
 
-            chmod 644 /var/ossec/etc/authd.pass
-            chown root:wazuh /var/ossec/etc/authd.pass
+            # chmod 644 /var/ossec/etc/authd.pass
+            # chown root:wazuh /var/ossec/etc/authd.pass
 
 
    The output below shows the recommended file owner and permissions.
@@ -139,7 +139,7 @@ The following steps serve as a guide on how to enroll a Linux/Unix endpoint with
          </client>
 
 
-This will allow the agent to send logs to the manager specified.
+   This will allow the agent to send logs to the manager specified.
 
 
 #. Check the agent status to find out if it is running.
@@ -240,7 +240,7 @@ The Wazuh agent installation directory depends on the architecture of the host.
 #. Launch PowerShell as an administrator.
 #. Create a file called ``authd.pass`` and save the password to it, ``echo “<custom_password>” > "C:\Program Files (x86)\ossec-agent\authd.pass"``.
 
-Note that you have to replace <password> with the agents enrollment password created on the manager.
+   Note that you have to replace <password> with the agents enrollment password created on the manager.
 
 
 #. Add the Wazuh manager IP address or DNS name in the ``<client><server><address>`` section of ``C:\Program Files (x86)\ossec-agent\ossec.conf``:
@@ -335,23 +335,24 @@ The following steps serve as a guide on how to enroll a macOS endpoint with pass
 
 
 
-.. note::
-  #. You have to replace ``<password>`` with the agents enrollment password created on the manager.
+   .. note::
 
-  #. File permissions for the ``authd.pass`` file should be set to 644 and the owner should be root. The permissions and ownership can be configured by running the commands below:
+   #. You have to replace ``<password>`` with the agents enrollment password created on the manager.
 
-       .. code-block:: console 
+   #. File permissions for the ``authd.pass`` file should be set to 644 and the owner should be root. The permissions and ownership can be configured by running the commands below:
 
-            # chmod 644 /Library/Ossec/etc/authd.pass
-            # chown root:wazuh /Library/Ossec/etc/authd.pass
+         .. code-block:: console 
+
+               # chmod 644 /Library/Ossec/etc/authd.pass
+               # chown root:wazuh /Library/Ossec/etc/authd.pass
 
 
- The output below shows the recommended file owner and permissions:
+   The output below shows the recommended file owner and permissions:
 
-        .. code-block:: console
-         :class: output 
+         .. code-block:: console
+            :class: output 
 
-           -rw-r--r-- 1 root wazuh 18 Jan 11 13:03 /Library/Ossec/etc/authd.pass
+            -rw-r--r-- 1 root wazuh 18 Jan 11 13:03 /Library/Ossec/etc/authd.pass
 
 #. Add the Wazuh manager IP address or DNS name in the ``<client><server><address>`` section of ``/Library/Ossec/etc/ossec.conf``:
 
@@ -364,7 +365,7 @@ The following steps serve as a guide on how to enroll a macOS endpoint with pass
          </server>
        </client>
 
-This will allow the agent to send logs to the specified manager.
+   This will allow the agent to send logs to the specified manager.
 
 #. Check the agent status to find out if it is running.
 
@@ -375,14 +376,14 @@ This will allow the agent to send logs to the specified manager.
 
 #. Start or restart the agent depending on its current state (not running /running) to make the changes effective.
 
-Start the agent if it is not running:
+   Start the agent if it is not running:
 
        .. code-block:: console
 
         # /Library/Ossec/bin/wazuh-control start
 
 
-Restart the agent if it is already running:
+   Restart the agent if it is already running:
 
        .. code-block:: console
 
@@ -429,64 +430,64 @@ Manager configuration
 
     #. Create a certificate request configuration file ``req.conf`` on the manager. Replace ``<manager_IP>`` with the hostname or the IP address of the Wazuh manager where the Wazuh agents are going to be enrolled. The contents of the file can be as follows:
 
-    .. code-block:: console
+      .. code-block:: console
 
-         [req]
-         distinguished_name = req_distinguished_name
-         req_extensions = req_ext
-         prompt = no
-         [req_distinguished_name]
-         C = US
-         CN = <manager_IP>
-         [req_ext]
-         subjectAltName = @alt_names
-         [alt_names]
-         DNS.1 = wazuh
-         DNS.2 = wazuh.com
+            [req]
+            distinguished_name = req_distinguished_name
+            req_extensions = req_ext
+            prompt = no
+            [req_distinguished_name]
+            C = US
+            CN = <manager_IP>
+            [req_ext]
+            subjectAltName = @alt_names
+            [alt_names]
+            DNS.1 = wazuh
+            DNS.2 = wazuh.com
 
 
-    **Where:** 
-    - ``C`` is the country where the organization making this request is domiciled.
-    - ``CN`` is the common name on the certificate. This should be the Wazuh manager IP address or its DNS name. This field is not optional. In this case, the Wazuh manager DNS are wazuh and wazuh.com.
-    - ``subjectAltName`` is optional and specifies the alternate subject names that can be used for the server. Note that to allow the enrollment of Wazuh agents with a SAN certificate, this should be included.
+      Where: 
+         ``C`` is the country where the organization making this request is domiciled.
+         ``CN`` is the common name on the certificate. This should be the Wazuh manager IP address or its DNS name. This field is not optional. In this case, the Wazuh manager DNS are wazuh and wazuh.com.
+         ``subjectAltName`` is optional and specifies the alternate subject names that can be used for the server. Note that to allow the enrollment of Wazuh agents with a SAN certificate, this should be included.
 
     #. Create a certificate signing request (CSR) on the Wazuh manager with the following command:
     
-    .. code-block:: console
+      .. code-block:: console
 
-       # openssl req -new -nodes -newkey rsa:4096 -keyout sslmanager.key -out sslmanager.csr -config req.conf
+         # openssl req -new -nodes -newkey rsa:4096 -keyout sslmanager.key -out sslmanager.csr -config req.conf
   
   
-    **Where:**
-    - ``req.conf`` is the certificate request configuration file.
-    - ``sslmanager.key`` is the private key for the certificate request.
-    - ``sslmanager.csr`` is the CSR to be submitted to the certificate authority.
+      Where:
+         ``req.conf`` is the certificate request configuration file.
+         ``sslmanager.key`` is the private key for the certificate request.
+         ``sslmanager.csr`` is the CSR to be submitted to the certificate authority.
 
     #. Issue and sign the certificate for the manager CSR with the following command:
 
-    .. code-block:: console
+      .. code-block:: console
 
-      # openssl x509 -req -days 365 -in sslmanager.csr -CA rootCA.pem -CAkey rootCA.key -out sslmanager.cert -CAcreateserial -extfile req. conf -extensions req_ext
+         # openssl x509 -req -days 365 -in sslmanager.csr -CA rootCA.pem -CAkey rootCA.key -out sslmanager.cert -CAcreateserial -extfile req. conf -extensions req_ext
 
-    **Where:**
-    - ``req.conf`` is the certificate request configuration file.
-    - ``sslmanager.csr`` is the CSR to be submitted to the certificate authority.
-    - ``sslmanager.cert`` is the signed SSL certificate from the CSR.
-    - ``rootCA.pem`` is the root certificate for the CA.
-    - The -extfile and -extensions options are required to copy the subject and the extensions from sslmanager.csr to sslmanager.cert.
+      Where:
+         ``req.conf`` is the certificate request configuration file.
+         ``sslmanager.csr`` is the CSR to be submitted to the certificate authority.
+         ``sslmanager.cert`` is the signed SSL certificate from the CSR.
+         ``rootCA.pem`` is the root certificate for the CA.
+         The -extfile and -extensions options are required to copy the subject and the extensions from sslmanager.csr to sslmanager.cert.
 
     #. Copy the newly signed certificate and key files to ``/var/ossec/etc`` on the Wazuh manager:
 
-    .. code-block:: console
+      .. code-block:: console
 
-      # cp sslmanager.cert sslmanager.key /var/ossec/etc
+         # cp sslmanager.cert sslmanager.key /var/ossec/etc
 
 
     #. Restart the Wazuh manager to apply the changes made.
 
-    .. code-block:: console
+      .. code-block:: console
 
-      # systemctl restart wazuh-manager
+         # systemctl restart wazuh-manager
 
 
 Linux/Unix endpoint
@@ -615,20 +616,20 @@ The Wazuh agent installation directory depends on the architecture of the host.
     #. Wazuh manager IP address or DNS name in the ``<client><server><address>`` section.
     #. Local path to root certificate in the ``<client><enrollment><server_ca_path>`` section.
 
-  .. code-block:: xml
+   .. code-block:: xml
 
-      <client>
-         <server>
-            <address>MANAGER_IP</address>
-            ...
-         </server>
-            ...
-            <enrollment>
-               <server_ca_path>/path/to/rootCA.pem</server_ca_path>
+         <client>
+            <server>
+               <address>MANAGER_IP</address>
                ...
-            </enrollment>
-            ...
-      </client>
+            </server>
+               ...
+               <enrollment>
+                  <server_ca_path>/path/to/rootCA.pem</server_ca_path>
+                  ...
+               </enrollment>
+               ...
+         </client>
 
 #. Check the agent status to find out if it is running.
 
@@ -729,25 +730,25 @@ The following steps serve as a guide on how to enroll a macOS endpoint by using 
 
 #. Check the agent status to find out if it is running.
  
- .. code-block:: console
+   .. code-block:: console
 
-   # /Library/Ossec/bin/wazuh-control status
+      # /Library/Ossec/bin/wazuh-control status
 
 
 #. Start or restart the agent depending on its current state (not running/running) to make the changes effective.
 
-Start the agent if it is not running:
+   Start the agent if it is not running:
 
- .. code-block:: console
+   .. code-block:: console
 
-   # /Library/Ossec/bin/wazuh-control start
+      # /Library/Ossec/bin/wazuh-control start
 
 
-Restart the agent if it is already running:
+   Restart the agent if it is already running:
 
- .. code-block:: console
+   .. code-block:: console
 
-   # /Library/Ossec/bin/wazuh-control restart
+      # /Library/Ossec/bin/wazuh-control restart
 
 
 #. Check the agent status again to confirm that it has started.
@@ -756,3 +757,64 @@ Restart the agent if it is already running:
 
 Verify the Wazuh agent identity
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+An SSL certificate is issued to the agent host by the CA in prerequisite 1.On attempts to enroll by the agent, the Wazuh manager verifies the certificate presented by the agent using the root certificate. Wazuh provides two Wazuh agent verification options:
+
+- Wazuh agent verification without host validation: The certificates for the agents are issued without specifying their host name or IP address.
+- Wazuh agent verification with host validation: The certificates for the agents are issued with their IP address or hostname specified as the common name.
+  
+The difference between these validation methods is that the certificate in the former method can be reused on multiple agents while the certificate created in the latter can only be used on the agent whose IP address or hostname was specified during certificate generation.
+
+Preparations on the Wazuh manager
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#. On the manager, generate a CSR for the Wazuh agent:
+
+   - Wazuh agent verification without host validation: This is done without specifying the agent IP address or hostname.
+
+     .. code-block:: console
+
+        # openssl req -new -nodes -newkey rsa:4096 -keyout sslagent.key -out sslagent.csr -batch
+
+   - Wazuh agent verification with host validation: This is done by specifying the agent IP or hostname.
+
+     .. code-block:: console
+
+        # openssl req -new -nodes -newkey rsa:4096 -keyout sslagent.key -out sslagent.csr -subj '/C=US/CN=<agent_IP>'
+
+   Where:
+      ``sslagent.csr`` is the CSR to be submitted to the certificate authority.
+      ``sslagent.key`` is the generated CSR private key.
+
+#. Sign the generated agent CSR using the CA keys:
+
+   .. code-block:: console
+
+        # openssl x509 -req -days 365 -in sslagent.csr -CA rootCA.pem -CAkey rootCA.key -out sslagent.cert -CAcreateserial
+
+
+   Where:
+   ``sslagent.csr`` is the CSR to be submitted to the certificate authority.
+   ``sslagent.cert`` is the signed SSL certificate from the CSR.
+   ``rootCA.pem`` is the root certificate for the CA.
+   ``rootCA.key`` is the root certificate private key for the CA.
+
+
+#. Copy the signed SSL certificate and key (``sslagent.cert`` and ``sslagent.key`` in this case) to the agent. A tool like SCP can be used to copy the certificate to the endpoints. 
+#. Ensure that the ``rootCA.pem`` file is in ``/var/ossec/etc/`` on the Wazuh manager.
+#. Update the ``/var/ossec/etc/ossec.conf`` file with the location of the ``rootCA.pem`` file to enable the use of certificates. This is done by uncommenting the ``<auth><ssl_agent_ca>`` section and specifying the path to the ``rootCA.pem`` file on the manager.
+
+   .. code-block:: xml
+
+      <auth>
+         .
+         .
+         <ssl_agent_ca>/var/ossec/etc/rootCA.pem</ssl_agent_ca>
+      </auth>
+
+
+#. Restart the Wazuh manager service to apply the changes.
+
+.. code-block:: console
+
+       #systemctl restart wazuh-manager
