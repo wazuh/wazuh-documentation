@@ -37,7 +37,7 @@ The following default ports on the manager should be opened:
         # nc -zv <MANAGER_IP> 1514 1515 55000
 
             
-      If there is connectivity, the output should be a connection success message:
+    If there is connectivity, the output should be a connection success message:
 
     .. code-block:: console
 
@@ -53,7 +53,7 @@ The following default ports on the manager should be opened:
         (new-object Net.Sockets.TcpClient).Connect("<MANAGER_IP>", 1515)
         (new-object Net.Sockets.TcpClient).Connect("<MANAGER_IP>", 55000)
 
-      If there is connectivity, there is no output, otherwise, an error is shown:
+    If there is connectivity, there is no output, otherwise, an error is shown:
 
     .. code-block:: console
 
