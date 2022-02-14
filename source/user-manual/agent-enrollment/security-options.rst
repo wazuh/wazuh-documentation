@@ -121,7 +121,7 @@ The following steps serve as a guide on how to enroll a Linux/Unix endpoint with
             # chown root:wazuh /var/ossec/etc/authd.pass
 
 
-       The output below shows the recommended file owner and permissions.
+ The output below shows the recommended file owner and permissions.
 
       .. code-block:: console
          :class: output 
@@ -318,3 +318,80 @@ Note that you have to replace <password> with the agents enrollment password cre
 
 #. Check the agent status again to confirm that it has started.
 #. Select the “agents” tab to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successful.
+
+
+macOS endpoint
+^^^^^^^^^^^^^^
+
+The following steps serve as a guide on how to enroll a macOS endpoint with password authentication:
+
+#. Launch the terminal as a root user.
+
+#. Create a file called ``/Library/Ossec/etc/authd.pass`` and save the password to it.
+
+
+   .. code-block:: console
+
+     # echo "<custom_password>" > /Library/Ossec/etc/authd.pass
+
+
+
+.. note::
+       #. You have to replace ``<password>`` with the agents enrollment password created on the manager.
+
+       #. File permissions for the ``authd.pass`` file should be set to 644 and the owner should be root. The permissions and ownership can be configured by running the commands below:
+
+          .. code-block:: console 
+
+            # chmod 644 /Library/Ossec/etc/authd.pass
+            # chown root:wazuh /Library/Ossec/etc/authd.pass
+
+
+The output below shows the recommended file owner and permissions:
+
+       .. code-block:: console
+         :class: output 
+
+         -rw-r--r-- 1 root wazuh 18 Jan 11 13:03 /Library/Ossec/etc/authd.pass
+
+#. Add the Wazuh manager IP address or DNS name in the ``<client><server><address>`` section of ``/Library/Ossec/etc/ossec.conf``:
+
+    .. code-block:: xml
+       
+       <client>
+         <server>
+            <address>MANAGER_IP</address>
+            ...
+         </server>
+       </client>
+
+This will allow the agent to send logs to the specified manager.
+
+#. Check the agent status to find out if it is running.
+
+       .. code-block:: console
+
+        # /Library/Ossec/bin/wazuh-control status
+
+
+#. Start or restart the agent depending on its current state (not running /running) to make the changes effective.
+
+Start the agent if it is not running:
+
+       .. code-block:: console
+
+        # /Library/Ossec/bin/wazuh-control start
+
+
+Restart the agent if it is already running:
+
+       .. code-block:: console
+
+        # /Library/Ossec/bin/wazuh-control restart
+
+
+#. Check the agent status again to confirm that it has started.
+#. Select the “agents” tab to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successful.
+
+
+
