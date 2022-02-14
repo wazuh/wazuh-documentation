@@ -337,17 +337,17 @@ The following steps serve as a guide on how to enroll a macOS endpoint with pass
 
 
 .. note::
-       #. You have to replace ``<password>`` with the agents enrollment password created on the manager.
+  #. You have to replace ``<password>`` with the agents enrollment password created on the manager.
 
-       #. File permissions for the ``authd.pass`` file should be set to 644 and the owner should be root. The permissions and ownership can be configured by running the commands below:
+  #. File permissions for the ``authd.pass`` file should be set to 644 and the owner should be root. The permissions and ownership can be configured by running the commands below:
 
-          .. code-block:: console 
+       .. code-block:: console 
 
             # chmod 644 /Library/Ossec/etc/authd.pass
             # chown root:wazuh /Library/Ossec/etc/authd.pass
 
 
-The output below shows the recommended file owner and permissions:
+ The output below shows the recommended file owner and permissions:
 
        .. code-block:: console
          :class: output 
