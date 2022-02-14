@@ -929,3 +929,153 @@ The following steps serve as a guide on how to enroll a Linux/Unix endpoint by u
 #. Select the “agents” tab to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successful.
 
 
+Windows endpoint
+^^^^^^^^^^^^^^^^
+
+The following steps serve as a guide on how to enroll a Windows endpoint by using certificates for agent verification:
+
+The Wazuh agent installation directory depends on the architecture of the host.
+
+- C:\Program Files (x86)\ossec-agent for 64-bit systems.
+- C:\Program Files\ossec-agent for 32-bit systems.
+
+#. Ensure that the signed SSL certificate and key files (``sslagent.cert`` and ``sslagent.key``) have been copied to the endpoint.
+#. As a root user, modify the Wazuh agent configuration file located at ``“C:\Program Files (x86)\ossec-agent\ossec.conf”`` and include the following:
+
+    #. The Wazuh manager IP address or DNS name in the ``<client><server><address>`` section.
+    #. The local path to the agent certificate and the agent key in the ``<client><enrollment>`` section.
+
+
+   .. code-block:: xml
+
+      <client>
+         <server>
+            <address>MANAGER_IP</address>
+         </server>
+
+         <enrollment>
+            <agent_certificate_path>CERTIFICATE_PATH</agent_certificate_path>
+            <agent_key_path>KEY_PATH</agent_key_path>
+         </enrollment>
+      </client>
+
+
+#. Check the agent status to find out if it is running.
+
+
+   .. tabs::
+   
+   
+      .. group-tab:: PowerShell (as an administrator)
+   
+         .. code-block:: console
+   
+            # Get-Service -name wazuh
+   
+   
+      .. group-tab:: CMD (as an administrator)
+   
+         .. code-block:: console
+   
+            # sc query WazuhSvc
+
+#. Start or restart the agent depending on its current state (not running/running) to make the changes effective.
+
+   Start the agent if it is not running:
+
+
+   .. tabs::
+      
+      
+         .. group-tab:: PowerShell (as an administrator)
+      
+            .. code-block:: console
+         
+               # Start-Service -Name wazuh
+      
+      
+         .. group-tab:: CMD (as an administrator)
+      
+            .. code-block:: console
+         
+               # net start wazuh
+
+
+   Restart the agent if it is already running:
+
+
+   .. tabs::
+      
+      
+         .. group-tab:: PowerShell (as an administrator)
+      
+            .. code-block:: console
+         
+               # Restart-Service -Name wazuh
+      
+      
+         .. group-tab:: CMD (as an administrator)
+      
+            .. code-block:: console
+         
+               # net stop wazuh
+               # net start wazuh
+
+
+
+#. Check the agent status again to confirm that it has started.
+#. Select the “agents” tab to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successful.
+
+
+macOS endpoint
+^^^^^^^^^^^^^^
+
+The following steps serve as a guide on how to enroll a macOS endpoint by using certificates for agent verification:
+
+#. Ensure that the signed SSL certificate and key files (``sslagent.cert`` and ``sslagent.key``) have been copied to the endpoint.
+#. As a root user, modify the Wazuh agent configuration file located at ``/Library/Ossec/etc/ossec.conf`` and include the following:
+
+    #. The Wazuh manager IP address or DNS name in the ``<client><server><address>`` section.
+    #. The local path to the agent certificate and agent key in the ``<client><enrollment>`` section.
+
+
+   .. code-block:: xml
+
+      <client>
+         <server>
+            <address>MANAGER_IP</address>
+         </server>
+
+         <enrollment>
+            <agent_certificate_path>CERTIFICATE_PATH</agent_certificate_path>
+            <agent_key_path>KEY_PATH</agent_key_path>
+         </enrollment>
+      </client>
+
+
+#. Check the agent status to find out if it is running.
+
+   .. code-block:: console
+
+      # /Library/Ossec/bin/wazuh-control status
+
+
+#. Start or restart the agent depending on its current state (not running/running) to make the changes effective.
+
+   Start the agent if it is not running:
+   
+   .. code-block:: console
+
+      # /Library/Ossec/bin/wazuh-control start
+
+#. Restart the agent if it is already running:
+   
+   .. code-block:: console
+
+      # /Library/Ossec/bin/wazuh-control restart
+
+#. Check the agent status again to confirm that it has started.
+#. Select the “agents” tab to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successful.
+
+
+
