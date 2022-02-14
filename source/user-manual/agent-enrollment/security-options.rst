@@ -489,3 +489,113 @@ Manager configuration
       # systemctl restart wazuh-manager
 
 
+Linux/Unix endpoint
+^^^^^^^^^^^^^^^^^^^
+
+The following steps serve as a guide on how to enroll a Linux/Unix endpoint by using certificates to verify the manager identity:
+
+#. Ensure that the root certificate authority ``rootCA.pem`` file has been copied to the endpoint.
+#. As a root user, modify the Wazuh agent configuration file located at ``/var/ossec/etc/ossec.conf`` and include the following:
+
+  #. Wazuh manager IP address or DNS name in the <client><server><address> section.
+  #. Local path to root certificate in the <client><enrollment> section.
+
+  .. code-block:: xml
+
+      <client>
+         <server>
+            <address>MANAGER_IP</address>
+            ...
+         </server>
+            ...
+            <enrollment>
+               <server_ca_path>/path/to/rootCA.pem</server_ca_path>
+               ...
+            </enrollment>
+            ...
+      </client>
+
+
+
+#. Check the agent status to find out if it is running.
+
+   .. tabs::   
+   
+      .. group-tab:: Systemd
+   
+       .. code-block:: console
+   
+         # systemctl status wazuh-agent
+   
+   
+      .. group-tab:: SysV init
+   
+       .. code-block:: console
+   
+         # service wazuh-agent status
+
+
+      .. group-tab:: Other Unix based OS
+
+        .. code-block:: console
+
+         # /var/ossec/bin/wazuh-control status
+   
+
+#. Start or restart the agent depending on its current state (not running/running) to make the changes effective.
+
+Start the agent if it is not running:
+
+   .. tabs::   
+   
+      .. group-tab:: Systemd
+   
+       .. code-block:: console
+   
+         # systemctl start wazuh-agent
+   
+   
+      .. group-tab:: SysV init
+   
+       .. code-block:: console
+   
+         # service wazuh-agent start
+
+
+      .. group-tab:: Other Unix based OS
+
+        .. code-block:: console
+
+         # /var/ossec/bin/wazuh-control start
+
+
+Restart the agent if it is already running:
+
+   .. tabs::   
+   
+      .. group-tab:: Systemd
+   
+       .. code-block:: console
+   
+         # systemctl restart wazuh-agent
+   
+   
+      .. group-tab:: SysV init
+   
+       .. code-block:: console
+   
+         # service wazuh-agent restart
+
+
+      .. group-tab:: Other Unix based OS
+
+        .. code-block:: console
+
+         # /var/ossec/bin/wazuh-control restart
+
+
+
+#. Check the agent status again to confirm that it has started.
+#. Select the “agents” tab to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successful.
+
+
