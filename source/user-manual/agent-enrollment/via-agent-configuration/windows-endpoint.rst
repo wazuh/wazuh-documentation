@@ -33,7 +33,7 @@ The Wazuh agent installation directory depends on the architecture of the host:
            </client>
    
     
-          This will allow the agent to connect to the Wazuh manager and automatically request a key.
+     This will allow the agent to connect to the Wazuh manager and automatically request a key.
     
    - (Optional) Add enrollment parameters in the ``<client><enrollment>`` section. 
     

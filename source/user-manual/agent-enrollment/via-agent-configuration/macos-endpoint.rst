@@ -26,8 +26,8 @@ The following steps serve as a guide on how to configure a macOS endpoint agent 
               </server>
             </client>
       
-       
-       This will allow the agent to connect to the Wazuh manager and automatically request a key.
+      
+      This will allow the agent to connect to the Wazuh manager and automatically request a key.
       
    #. (Optional) Add enrollment parameters in the ``<client><enrollment>`` section. 
       
