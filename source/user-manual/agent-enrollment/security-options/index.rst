@@ -10,12 +10,11 @@ Additional security options
 
 Additional security measures can be implemented in the enrollment process in order to authenticate  the endpoint to the Wazuh manager and vice versa. These security options are only available when enrolling agents :ref:`via the agent configuration method <enrollment_via_agent_automatic_request>`.
 
-
 The additional security options include:
 
 - :ref:`Using password authenticationg <using-password-authentication>`.  
-- :ref:`Using certificates <using-certificates>`to:
-  
+- :ref:`Using certificates <using-certificates>` to:
+
   - Verify the Wazuh manager.
   - Verify the agents.
 
