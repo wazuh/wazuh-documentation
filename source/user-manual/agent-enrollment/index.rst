@@ -58,7 +58,7 @@ Refer to the :ref:`Troubleshooting <troubleshooting>` section for details on how
 
     via-agent-configuration/index
     via-manager-API/index
-    security-options
+    security-options/index
     troubleshooting
     
     
