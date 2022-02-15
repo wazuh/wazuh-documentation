@@ -7,7 +7,7 @@
 
 
 Using password authentication
-===========================
+=============================
 
 This method requires a password during the enrollment process to ensure that agents enrolled to the Wazuh manager are authenticated.
 
