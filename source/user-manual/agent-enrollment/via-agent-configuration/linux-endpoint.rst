@@ -14,8 +14,8 @@ The following steps serve as a guide on how to configure a Linux/Unix endpoint a
 
    #. Include the Wazuh manager IP address or DNS name in the ``<client><server><address>`` section:
 
-        .. code-block:: xml
-            :emphasize-lines: 3
+   .. code-block:: xml
+       :emphasize-lines: 3
 
           <client>
             <server>

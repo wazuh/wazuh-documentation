@@ -348,8 +348,8 @@ The following steps serve as a guide on how to enroll a macOS endpoint with pass
 
 #. Add the Wazuh manager IP address or DNS name in the ``<client><server><address>`` section of ``/Library/Ossec/etc/ossec.conf``:
 
-    .. code-block:: xml
-        :emphasize-lines: 3      
+   .. code-block:: xml
+       :emphasize-lines: 3      
 
        <client>
          <server>

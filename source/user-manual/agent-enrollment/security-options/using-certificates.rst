@@ -116,9 +116,9 @@ The following steps serve as a guide on how to enroll a Linux/Unix endpoint by u
 
     #. Wazuh manager IP address or DNS name in the ``<client><server><address>`` section.
     #. Local path to root certificate in the ``<client><enrollment>`` section.
-
-   .. code-block:: xml
-       :emphasize-lines: 3 
+   
+    .. code-block:: xml
+        :emphasize-lines: 3 
 
          <client>
             <server>
@@ -231,8 +231,8 @@ The Wazuh agent installation directory depends on the architecture of the host.
     #. Wazuh manager IP address or DNS name in the ``<client><server><address>`` section.
     #. Local path to root certificate in the ``<client><enrollment><server_ca_path>`` section.
 
-   .. code-block:: xml
-       :emphasize-lines: 3 
+    .. code-block:: xml
+        :emphasize-lines: 3  
 
          <client>
             <server>
