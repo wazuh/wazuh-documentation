@@ -19,6 +19,7 @@ Before an agent can be enrolled to the Wazuh manager using the password authenti
 #. Enable the password authentication option by adding the configuration highlighted below to the ``<auth>`` section of the manager configuration file ``/var/ossec/etc/ossec.conf``.
 
    .. code-block:: xml
+       :emphasize-lines: 2
 
        <auth>
          <use_password>yes</use_password>
@@ -116,6 +117,7 @@ The following steps serve as a guide on how to enroll a Linux/Unix endpoint with
 #. Add the Wazuh manager IP address or DNS name in the ``<client><server><address>`` section of the manager configuration file ``/var/ossec/etc/ossec.conf``.
 
    .. code-block:: xml
+       :emphasize-lines: 3
 
          <client>
             <server>
@@ -237,6 +239,7 @@ The Wazuh agent installation directory depends on the architecture of the host.
 #. Add the Wazuh manager IP address or DNS name in the ``<client><server><address>`` section of ``C:\Program Files (x86)\ossec-agent\ossec.conf``:
 
    .. code-block:: xml
+       :emphasize-lines: 3
 
          <client>
             <server>
@@ -346,7 +349,8 @@ The following steps serve as a guide on how to enroll a macOS endpoint with pass
 #. Add the Wazuh manager IP address or DNS name in the ``<client><server><address>`` section of ``/Library/Ossec/etc/ossec.conf``:
 
     .. code-block:: xml
-       
+        :emphasize-lines: 3      
+
        <client>
          <server>
             <address>MANAGER_IP</address>

@@ -16,7 +16,8 @@ The following steps serve as a guide on how to configure a macOS endpoint agent 
    #. Include the Wazuh manager IP address or DNS name in the ``<client><server><address>`` section:
       
           .. code-block:: xml
-    
+              :emphasize-lines: 3
+
             <client>
               <server>
                 <address>MANAGER_IP</address>
@@ -30,7 +31,8 @@ The following steps serve as a guide on how to configure a macOS endpoint agent 
    #. (Optional) Add enrollment parameters in the ``<client><enrollment>`` section. 
       
            .. code-block:: xml
-      
+               :emphasize-lines: 4, 5
+                    
               <client>
                   ...
                   <enrollment>

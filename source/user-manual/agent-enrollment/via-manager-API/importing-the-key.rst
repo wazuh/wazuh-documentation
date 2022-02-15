@@ -38,6 +38,7 @@ The following steps serve as a guide on how to import the key to a Linux/Unix ag
 
 
    .. code-block:: xml
+       :emphasize-lines: 3
 
         <client>
           <server>
@@ -164,6 +165,7 @@ The Wazuh agent installation directory depends on the architecture of the host:
 #. Add the Wazuh manager IP address or DNS name to the agent configuration file in ``C:\Program Files (x86)\ossec-agent\ossec.conf``.
 
    .. code-block:: xml
+       :emphasize-lines: 3
      
       <client>
         <server>
@@ -264,6 +266,7 @@ The following steps serve as a guide on how to import the key to a macOS agent:
 #. Add the Wazuh manager IP address to the agent configuration file in ``/Library/Ossec/etc/ossec.conf``.
 
    .. code-block:: xml
+       :emphasize-lines: 3
 
       <client>
         <server>

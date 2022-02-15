@@ -23,6 +23,7 @@ The Wazuh agent installation directory depends on the architecture of the host:
    - Include the Wazuh manager IP address or DNS name in the ``<client><server><address>`` section:
    
          .. code-block:: xml
+             :emphasize-lines: 3           
    
            <client>
              <server>
@@ -37,7 +38,8 @@ The Wazuh agent installation directory depends on the architecture of the host:
    - (Optional) Add enrollment parameters in the ``<client><enrollment>`` section. 
     
           .. code-block:: xml
-    
+              :emphasize-lines: 4, 5
+              
             <client>
                 ...
                 <enrollment>

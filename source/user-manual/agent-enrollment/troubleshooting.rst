@@ -95,6 +95,7 @@ Invalid agent name for enrollment
 Ensure the agent hostname is unique and does not match an already enrolled agent. Alternatively, specify a unique agent name in the ``<client><enrollment><agent_name>`` section of the agent ossec.conf file.
 
 .. code-block:: xml
+    :emphasize-lines: 4  
 
     <client>
         ...
