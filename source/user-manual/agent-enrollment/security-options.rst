@@ -810,8 +810,7 @@ Preparations on the Wazuh manager
    .. code-block:: xml
 
       <auth>
-         .
-         .
+         ...
          <ssl_agent_ca>/var/ossec/etc/rootCA.pem</ssl_agent_ca>
       </auth>
 

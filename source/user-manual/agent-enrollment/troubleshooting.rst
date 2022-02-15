@@ -97,13 +97,10 @@ Ensure the agent hostname is unique and does not match an already enrolled agent
 .. code-block:: xml
 
     <client>
-        .
-        .
-        .
+        ...
         <enrollment>
             <agent_name>EXAMPLE_NAME</agent_name>
-            .
-            .  
+            ...
         </enrollment>
     </client>
 

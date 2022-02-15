@@ -44,14 +44,11 @@ The following steps serve as a guide on how to configure a Linux/Unix endpoint a
       .. code-block:: xml
 
         <client>
-            .
-            .
-            .
+            ...           
             <enrollment>
                 <agent_name>EXAMPLE_NAME</agent_name>
                 <groups>GROUP1,GROUP2,GROUP3</groups>
-                .
-                .  
+                ...  
             </enrollment>
         </client>
 
@@ -164,14 +161,11 @@ The Wazuh agent installation directory depends on the architecture of the host:
           .. code-block:: xml
     
             <client>
-                .
-                .
-                .
+                ...
                 <enrollment>
                     <agent_name>EXAMPLE_NAME</agent_name>
                     <groups>GROUP1,GROUP2,GROUP3</groups>
-                    .
-                    .  
+                    ...
                 </enrollment>
             </client>
     
@@ -279,14 +273,11 @@ The following steps serve as a guide on how to configure a macOS endpoint agent 
            .. code-block:: xml
       
               <client>
-                  .
-                  .
-                  .
+                  ...
                   <enrollment>
                       <agent_name>EXAMPLE_NAME</agent_name>
                       <groups>GROUP1,GROUP2,GROUP3</groups>
-                      .
-                      .  
+                      ...
                   </enrollment>
               </client>
       
