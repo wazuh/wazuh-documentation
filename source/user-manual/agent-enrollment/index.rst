@@ -49,6 +49,7 @@ Refer to the :ref:`Troubleshooting <troubleshooting>` section for details on how
 
 
 .. toctree::
+    :hidden:
     :maxdepth: 1
 
     via-agent-configuration
