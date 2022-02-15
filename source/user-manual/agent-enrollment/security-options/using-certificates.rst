@@ -568,15 +568,15 @@ The Wazuh agent installation directory depends on the architecture of the host.
    .. code-block:: xml
        :emphasize-lines: 3     
 
-      <client>
-         <server>
-            <address>MANAGER_IP</address>
-         </server>
-         <enrollment>
-            <agent_certificate_path>CERTIFICATE_PATH</agent_certificate_path>
-            <agent_key_path>KEY_PATH</agent_key_path>
-         </enrollment>
-      </client>
+         <client>
+            <server>
+               <address>MANAGER_IP</address>
+            </server>
+            <enrollment>
+               <agent_certificate_path>CERTIFICATE_PATH</agent_certificate_path>
+               <agent_key_path>KEY_PATH</agent_key_path>
+            </enrollment>
+         </client>
 
 
 #. Check the agent status to find out if it is running.
@@ -661,15 +661,15 @@ The following steps serve as a guide on how to enroll a macOS endpoint by using 
    .. code-block:: xml
        :emphasize-lines: 3
 
-      <client>
-         <server>
-            <address>MANAGER_IP</address>
-         </server>
-         <enrollment>
-            <agent_certificate_path>CERTIFICATE_PATH</agent_certificate_path>
-            <agent_key_path>KEY_PATH</agent_key_path>
-         </enrollment>
-      </client>
+         <client>
+            <server>
+               <address>MANAGER_IP</address>
+            </server>
+            <enrollment>
+               <agent_certificate_path>CERTIFICATE_PATH</agent_certificate_path>
+               <agent_key_path>KEY_PATH</agent_key_path>
+            </enrollment>
+         </client>
 
 
 #. Check the agent status to find out if it is running.
