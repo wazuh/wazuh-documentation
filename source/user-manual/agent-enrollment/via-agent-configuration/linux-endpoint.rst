@@ -32,14 +32,14 @@ The following steps serve as a guide on how to configure a Linux/Unix endpoint a
       .. code-block:: xml
           :emphasize-lines: 4, 5
 
-        <client>
-            ...           
-            <enrollment>
-                <agent_name>EXAMPLE_NAME</agent_name>
-                <groups>GROUP1,GROUP2,GROUP3</groups>
-                ...  
-            </enrollment>
-        </client>
+              <client>
+                  ...           
+                  <enrollment>
+                      <agent_name>EXAMPLE_NAME</agent_name>
+                      <groups>GROUP1,GROUP2,GROUP3</groups>
+                      ...  
+                  </enrollment>
+              </client>
 
 
    These agent enrollment parameters are optional and they provide the agent with specific information that can be used during enrollment. Some common enrollment parameters can be seen below:
