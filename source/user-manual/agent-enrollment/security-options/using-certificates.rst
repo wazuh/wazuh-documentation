@@ -18,7 +18,7 @@ The manager verification and the agent verification are independent of each othe
 
 
 Prerequisite
-^^^^^^^^^^^^
+------------
 
 A certificate authority to sign certificates for the Wazuh manager and agents is needed. In the absence of an already configured certificate authority, the Wazuh manager can be used as the certificate authority by running the below command:
 
@@ -31,13 +31,13 @@ The root certificate is created and saved as the ``rootCA.pem`` file.
 
 
 Manager identity validation
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+---------------------------
 
 Here the Wazuh manager has issued an SSL certificate using the certificate authority. Then, during enrollment, the agent verifies the Wazuh manager certificate using the root certificate of the CA.
 
 
 Manager configuration
-~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^
 
 #. Generate an SSL certificate on the Wazuh manager signed by the certificate authority. The steps to generate an SSL certificate for the manager are as follows:
 
@@ -367,7 +367,7 @@ The following steps serve as a guide on how to enroll a macOS endpoint by using 
 
 
 Verify the Wazuh agent identity
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------------
 
 An SSL certificate is issued to the agent host by the CA in prerequisite 1.On attempts to enroll by the agent, the Wazuh manager verifies the certificate presented by the agent using the root certificate. Wazuh provides two Wazuh agent verification options:
 
@@ -377,7 +377,7 @@ An SSL certificate is issued to the agent host by the CA in prerequisite 1.On at
 The difference between these validation methods is that the certificate in the former method can be reused on multiple agents while the certificate created in the latter can only be used on the agent whose IP address or hostname was specified during certificate generation.
 
 Preparations on the Wazuh manager
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 #. On the manager, generate a CSR for the Wazuh agent:
 
