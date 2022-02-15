@@ -421,7 +421,7 @@ Preparations on the Wazuh manager
 #. Update the ``/var/ossec/etc/ossec.conf`` file with the location of the ``rootCA.pem`` file to enable the use of certificates. This is done by uncommenting the ``<auth><ssl_agent_ca>`` section and specifying the path to the ``rootCA.pem`` file on the manager.
 
    .. code-block:: xml
-       :emphasize-lines: 3
+       :emphasize-lines: 3,
 
       <auth>
          ...
@@ -449,7 +449,7 @@ The following steps serve as a guide on how to enroll a Linux/Unix endpoint by u
 
 
     .. code-block:: xml
-        :emphasize-lines: 3
+        :emphasize-lines: 3,
 
          <client>
             <server>
@@ -567,7 +567,7 @@ The Wazuh agent installation directory depends on the architecture of the host.
 
 
    .. code-block:: xml
-       :emphasize-lines: 3      
+       :emphasize-lines: 3,      
 
       <client>
          <server>
