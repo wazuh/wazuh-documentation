@@ -22,8 +22,7 @@ The flow of an agent being enrolled via API is as follows:
    #. The user restarts the agent and the connection to the manager is established.
 
 
-.. toctree::
-    :hidden:
+.. toctree::    
     :maxdepth: 1
 
     requesting-the-key

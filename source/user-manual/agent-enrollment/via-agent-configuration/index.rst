@@ -20,8 +20,7 @@ Enrollment with additional security options involves the use of passwords for en
 
 
 
-.. toctree::
-    :hidden:
+.. toctree::    
     :maxdepth: 1
 
     linux-endpoint
