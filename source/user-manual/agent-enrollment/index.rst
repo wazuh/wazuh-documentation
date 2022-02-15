@@ -56,9 +56,9 @@ Refer to the :ref:`Troubleshooting <troubleshooting>` section for details on how
     :hidden:
     :maxdepth: 1
 
-    via-agent-configuration
+    via-agent-configuration/index
     via-manager-API
     security-options
     troubleshooting
-
+    
     
