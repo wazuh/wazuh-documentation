@@ -13,14 +13,15 @@ Additional security measures can be implemented in the enrollment process in ord
 
 The additional security options include:
 
-- Using password authentication.
-- Using certificates to:
+- :ref:`Using password authenticationg <using-password-authentication>`
+- :ref:`Using certificates <using-certificates>`to:
    - Verify the Wazuh manager.
    - Verify the agents.
 
 
 
-.. toctree::    
+.. toctree::  
+    :hidden:  
     :maxdepth: 1
 
     using-password-authentication
