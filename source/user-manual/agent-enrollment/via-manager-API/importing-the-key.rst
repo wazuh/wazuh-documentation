@@ -36,16 +36,15 @@ The following steps serve as a guide on how to import the key to a Linux/Unix ag
 
 #. Add the Wazuh manager IP address to the agent configuration file in ``/var/ossec/etc/ossec.conf``. 
 
-
    .. code-block:: xml
        :emphasize-lines: 3
 
-        <client>
-          <server>
-            <address>MANAGER_IP</address>
-            ...
-          </server>
-        </client>
+          <client>
+            <server>
+              <address>MANAGER_IP</address>
+              ...
+            </server>
+          </client>
 
 
 #. Check the agent status to find out if it is running.
@@ -167,12 +166,12 @@ The Wazuh agent installation directory depends on the architecture of the host:
    .. code-block:: xml
        :emphasize-lines: 3
      
-      <client>
-        <server>
-          <address>MANAGER_IP</address>
-          ...
-        </server>
-      </client>
+          <client>
+            <server>
+              <address>MANAGER_IP</address>
+              ...
+            </server>
+          </client>
 
 #. Check the agent status to find out if it is running.
 
@@ -246,13 +245,13 @@ The following steps serve as a guide on how to import the key to a macOS agent:
 
 #. From the Wazuh agent, launch the terminal as a root user and import the key.
 
-      .. code-block:: console
+   .. code-block:: console
 
         # /Library/Ossec/bin/manage_agents -i <key>
       
    The output should look like this:
 
-      .. code-block:: console
+   .. code-block:: console
           :class: output
 
           Agent information:
@@ -268,12 +267,12 @@ The following steps serve as a guide on how to import the key to a macOS agent:
    .. code-block:: xml
        :emphasize-lines: 3
 
-      <client>
-        <server>
-          <address>MANAGER_IP</address>
-          ...
-        </server>
-      </client>
+          <client>
+            <server>
+              <address>MANAGER_IP</address>
+              ...
+            </server>
+          </client>
 
 
 #. Check the agent status to find out if it is running.
