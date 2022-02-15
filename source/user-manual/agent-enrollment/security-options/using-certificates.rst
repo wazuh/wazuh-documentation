@@ -420,13 +420,14 @@ Preparations on the Wazuh manager
 #. Ensure that the ``rootCA.pem`` file is in ``/var/ossec/etc/`` on the Wazuh manager.
 #. Update the ``/var/ossec/etc/ossec.conf`` file with the location of the ``rootCA.pem`` file to enable the use of certificates. This is done by uncommenting the ``<auth><ssl_agent_ca>`` section and specifying the path to the ``rootCA.pem`` file on the manager.
 
+
    .. code-block:: xml
        :emphasize-lines: 3
 
-      <auth>
-         ...
-         <ssl_agent_ca>/var/ossec/etc/rootCA.pem</ssl_agent_ca>
-      </auth>
+         <auth>
+            ...
+            <ssl_agent_ca>/var/ossec/etc/rootCA.pem</ssl_agent_ca>
+         </auth>
 
 
 #. Restart the Wazuh manager service to apply the changes.
@@ -455,7 +456,6 @@ The following steps serve as a guide on how to enroll a Linux/Unix endpoint by u
             <server>
                <address>MANAGER_IP</address>
             </server>
-
             <enrollment>
                <agent_certificate_path>CERTIFICATE_PATH</agent_certificate_path>
                <agent_key_path>KEY_PATH</agent_key_path>
@@ -565,7 +565,6 @@ The Wazuh agent installation directory depends on the architecture of the host.
     #. The Wazuh manager IP address or DNS name in the ``<client><server><address>`` section.
     #. The local path to the agent certificate and the agent key in the ``<client><enrollment>`` section.
 
-
    .. code-block:: xml
        :emphasize-lines: 3     
 
@@ -573,7 +572,6 @@ The Wazuh agent installation directory depends on the architecture of the host.
          <server>
             <address>MANAGER_IP</address>
          </server>
-
          <enrollment>
             <agent_certificate_path>CERTIFICATE_PATH</agent_certificate_path>
             <agent_key_path>KEY_PATH</agent_key_path>
@@ -667,7 +665,6 @@ The following steps serve as a guide on how to enroll a macOS endpoint by using 
          <server>
             <address>MANAGER_IP</address>
          </server>
-
          <enrollment>
             <agent_certificate_path>CERTIFICATE_PATH</agent_certificate_path>
             <agent_key_path>KEY_PATH</agent_key_path>
