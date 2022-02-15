@@ -450,7 +450,7 @@ The following steps serve as a guide on how to enroll a Linux/Unix endpoint by u
 
 
     .. code-block:: xml
-        :emphasize-lines: 3
+        :emphasize-lines: 3, 7
 
          <client>
             <server>
@@ -566,7 +566,7 @@ The Wazuh agent installation directory depends on the architecture of the host.
     #. The local path to the agent certificate and the agent key in the ``<client><enrollment>`` section.
 
    .. code-block:: xml
-       :emphasize-lines: 3     
+       :emphasize-lines: 3, 7     
 
          <client>
             <server>
@@ -659,7 +659,7 @@ The following steps serve as a guide on how to enroll a macOS endpoint by using 
 
 
    .. code-block:: xml
-       :emphasize-lines: 3
+       :emphasize-lines: 3, 7
 
          <client>
             <server>
