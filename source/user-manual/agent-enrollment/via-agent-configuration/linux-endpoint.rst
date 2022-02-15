@@ -109,28 +109,28 @@ The following steps serve as a guide on how to configure a Linux/Unix endpoint a
 
    - Restart the agent if it is already running:
 
-  .. tabs::
-   
-   
-      .. group-tab:: Systemd
-   
-       .. code-block:: console
-   
-         # systemctl restart wazuh-agent
-   
-   
-      .. group-tab:: SysV init
-   
-       .. code-block:: console
-   
-         # service wazuh-agent restart
+   .. tabs::
+    
+    
+       .. group-tab:: Systemd
+    
+        .. code-block:: console
+    
+          # systemctl restart wazuh-agent
+    
+    
+       .. group-tab:: SysV init
+    
+        .. code-block:: console
+    
+          # service wazuh-agent restart
 
 
-      .. group-tab:: Other Unix based OS
+       .. group-tab:: Other Unix based OS
 
         .. code-block:: console
 
-         # /var/ossec/bin/wazuh-control restart
+          # /var/ossec/bin/wazuh-control restart
 
 
 #. Check the agent status again to confirm that it has started.
