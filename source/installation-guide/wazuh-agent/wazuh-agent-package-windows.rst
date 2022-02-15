@@ -20,7 +20,7 @@ The agent runs on the host you want to monitor and communicates with the Wazuh m
     
           .. group-tab:: CLI
 
-             To deploy the Wazuh agent to your system, choose one of the command shell alternatives and edit the ``WAZUH_MANAGER`` and ``WAZUH_REGISTRATION_SERVER`` variables so that they contain the Wazuh manager IP address or hostname.
+             To deploy the Wazuh agent to your system, choose one of the command shell alternatives and edit the ``WAZUH_MANAGER`` variable so that it contains the Wazuh manager IP address or hostname.
 
              - Using CMD:
 
@@ -43,7 +43,7 @@ The agent runs on the host you want to monitor and communicates with the Wazuh m
 
                 NET START WazuhSvc
 
-             Once started the Wazuh agent will start the enrollment process and register to the manager.
+             Once started, the Wazuh agent will start the enrollment process and register to the manager.
 
               .. note:: Alternatively, if you want to install an agent without registering it, omit the deployment variables. To learn more about the different registration methods, see the :ref:`Registering Wazuh agents <register_agents>` section.
 
