@@ -18,12 +18,4 @@
 
                     # apt install wazuh-indexer
 
-
-
-        .. group-tab:: ZYpp
-
-                .. code-block:: console
-
-                    # zypper install wazuh-indexer
-
 .. End of include file

@@ -47,13 +47,6 @@ Adding the Wazuh repository
 
 
 
-    .. group-tab:: ZYpp
-
-
-      .. include:: /_templates/installations/wazuh/zypp/add_repository.rst
-
-
-
 Installing the Wazuh manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -76,12 +69,6 @@ Installing the Wazuh manager
      
      
      
-       .. group-tab:: ZYpp
-       
-           
-         .. include:: /_templates/installations/wazuh/zypp/install_wazuh_manager.rst
-
-
   #. Enable and start the Wazuh manager service.
 
       .. include:: /_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
@@ -117,12 +104,6 @@ Installing Filebeat
 
 
 
-        .. group-tab:: ZYpp
-
-
-          .. include:: /_templates/installations/filebeat/common/zypp/install_filebeat.rst
-
-        
 Configuring Filebeat 
 ^^^^^^^^^^^^^^^^^^^^
 

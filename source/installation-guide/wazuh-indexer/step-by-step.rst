@@ -38,6 +38,11 @@ Generating the SSL certificates
     <div class="accordion-section open">
 
 
+Installing package dependencies
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. include:: /_templates/installations/indexer/common/install-dependencies.rst
+
 Adding the Wazuh repository
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -55,14 +60,6 @@ Adding the Wazuh repository
 
 
         .. include:: /_templates/installations/common/deb/add-repository.rst
-
-
-
-      .. group-tab:: ZYpp
-
-
-        .. include:: /_templates/installations/common/yum/add-repository.rst
-
 
 
 
