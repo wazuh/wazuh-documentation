@@ -23,7 +23,7 @@ From Linux/Unix and macOS
 
    Run the command ``echo $TOKEN`` to confirm that the token was successfully generated. You should get an output like this:
 
-   .. code-block:: console
+   .. code-block:: json
       :class: output
    
         eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YXp1aCIsImF1ZCI6IldhenVoIEFQSSBSRVNUIiwibmJmIjoxNjQzMDExMjQ0LCJleHAiOjE2NDMwMTIxNDQsInN1YiI6IndhenVoIiwicnVuX2FzIjpmYWxzZSwicmJhY19yb2xlcyI6WzFdLCJyYmFjX21vZGUiOiJ3aGl0ZSJ9.Ad6zOZvx0BEV7K0J6s3pIXAXTWB-zdVfxaX2fotLfZMQkiYPMkwDaQHUFiOInsWJ_7KZV3y2BbhEs9-kBqlJAMvMAD0NDBPhEQ2qBd_iutZ7QWZECd6eYfIP83xGqH9iqS7uMI6fXOKr3w4aFV13Q6qsHSUQ1A-1LgDnnDGGaqF5ITYo
@@ -36,7 +36,7 @@ From Linux/Unix and macOS
 
    The output with the key looks like this:
 
-   .. code-block:: console
+   .. code-block:: json
       :class: output
 
           {
