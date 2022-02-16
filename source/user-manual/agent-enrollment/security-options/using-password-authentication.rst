@@ -32,7 +32,7 @@ Before an agent can be enrolled to the Wazuh manager using the password authenti
 
      .. code-block:: console
 
-        echo "<custom_password>" > /var/ossec/etc/authd.pass
+        # echo "<custom_password>" > /var/ossec/etc/authd.pass
 
    Note that you have to replace ``<custom_password>`` with your own agent enrollment password.
 
@@ -46,7 +46,7 @@ Before an agent can be enrolled to the Wazuh manager using the password authenti
 
    The output below shows the recommended file owner and permissions.
 
-        .. code-block:: console     
+        .. code-block:: json     
          :class: output
 
            -rw-r--r-- 1 root wazuh 9 Jan 11 12:50 /var/ossec/etc/authd.pass
@@ -72,7 +72,7 @@ Before an agent can be enrolled to the Wazuh manager using the password authenti
        # grep "Random password" /var/ossec/logs/ossec.log
 
   
-   .. code-block:: console
+   .. code-block:: json
     :class: output   
 
       2022/01/11 12:41:35 wazuh-authd: INFO: Accepting connections on port 1515. Random password chosen for agent authentication: 6258b4eb21550e4f182a08c10d94585e
@@ -109,7 +109,7 @@ The following steps serve as a guide on how to enroll a Linux/Unix endpoint with
 
     The output below shows the recommended file owner and permissions.
 
-         .. code-block:: console
+         .. code-block:: json
             :class: output 
 
             -rw-r--r-- 1 root wazuh 18 Jan 11 13:03 /var/ossec/etc/authd.pass
@@ -341,7 +341,7 @@ The following steps serve as a guide on how to enroll a macOS endpoint with pass
 
       The output below shows the recommended file owner and permissions:
 
-            .. code-block:: console
+            .. code-block:: json
                :class: output 
 
                -rw-r--r-- 1 root wazuh 18 Jan 11 13:03 /Library/Ossec/etc/authd.pass

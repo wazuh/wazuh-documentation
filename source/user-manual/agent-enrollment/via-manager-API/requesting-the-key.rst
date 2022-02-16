@@ -54,7 +54,7 @@ The following steps serve as a guide on how to send agent enrollment requests fr
 
 #. Open PowerShell with administrative privileges. If the manager API is running over HTTPS and it is using a self-signed certificate, the function below has to be executed in PowerShell.
 
-   .. code-block:: console
+   .. code-block:: json
       
      function Ignore-SelfSignedCerts {
          add-type @"
@@ -93,7 +93,7 @@ The following steps serve as a guide on how to send agent enrollment requests fr
    
    The output looks like this: 
  
-   .. code-block:: console
+   .. code-block:: json
       :class: output
 
       {"data":{"token": "eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YXp1aCIsImF1ZCI6IldhenVoIEFQSSBSRVNUIiwibmJmIjoxNjM5NjQ2Nzg0LCJleHAiOjE2Mzk2NDc2ODQsInN1YiI6IndhenVoIiwicnVuX2FzIjpmYWxzZSwicmJhY19yb2xlcyI6WzFdLCJyYmFjX21vZGUiOiJ3aGl0ZSJ9.ASonc7xinw6u4JUoUlkJ_52FvJz8ECPiI3ObDr-SOO0fWRfWq-uTnA432UnCDK86ypRG5fAY6paQkX3vjrXrvBFvADyCnNNCZ-eNzaUoEq5f38wCfbC1bZhRsz61s2PRRt3YD2rfzRASbSJk140Vx-XP-IDnqlgMgmIyJxb2iU1ZL8R7"}, "error": 0}
@@ -122,7 +122,7 @@ The following steps serve as a guide on how to send agent enrollment requests fr
 
    The output should look like this:
 
-   .. code-block:: console 
+   .. code-block:: json 
       :class: output     
 
         StatusCode        : 200

@@ -23,7 +23,7 @@ The following steps serve as a guide on how to import the key to a Linux/Unix ag
 
    The output should look like this:
 
-      .. code-block:: console
+      .. code-block:: json
             :class: output 
 
                 Agent information:
@@ -147,11 +147,11 @@ The Wazuh agent installation directory depends on the architecture of the host:
 
    .. code-block:: console
 
-    & "C:\Program Files (x86)\ossec-agent\manage_agents.exe" -i <key>
+    # & "C:\Program Files (x86)\ossec-agent\manage_agents.exe" -i <key>
 
    The output should look like this:
 
-   .. code-block:: console
+   .. code-block:: json
       :class: output
 
         Agent information:
@@ -251,7 +251,7 @@ The following steps serve as a guide on how to import the key to a macOS agent:
       
    The output should look like this:
 
-   .. code-block:: console
+   .. code-block:: json
           :class: output
 
           Agent information:
