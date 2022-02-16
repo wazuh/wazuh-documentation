@@ -43,21 +43,21 @@ Manager configuration
 
     #. Create a certificate request configuration file ``req.conf`` on the manager. Replace ``<manager_IP>`` with the hostname or the IP address of the Wazuh manager where the Wazuh agents are going to be enrolled. The contents of the file can be as follows:
 
-    .. code-block:: json
-        :class: output
+         .. code-block:: json
+            :class: output
 
-            [req]
-            distinguished_name = req_distinguished_name
-            req_extensions = req_ext
-            prompt = no
-            [req_distinguished_name]
-            C = US
-            CN = <manager_IP>
-            [req_ext]
-            subjectAltName = @alt_names
-            [alt_names]
-            DNS.1 = wazuh
-            DNS.2 = wazuh.com
+                  [req]
+                  distinguished_name = req_distinguished_name
+                  req_extensions = req_ext
+                  prompt = no
+                  [req_distinguished_name]
+                  C = US
+                  CN = <manager_IP>
+                  [req_ext]
+                  subjectAltName = @alt_names
+                  [alt_names]
+                  DNS.1 = wazuh
+                  DNS.2 = wazuh.com
 
 
          Where: 
