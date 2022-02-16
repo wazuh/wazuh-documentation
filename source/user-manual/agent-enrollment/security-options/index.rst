@@ -12,8 +12,8 @@ Additional security measures can be implemented in the enrollment process in ord
 
 The additional security options include:
 
-- :ref:`Using password authentication <using-password-authentication>`.  
-- :ref:`Using certificates <using-certificates>` to:
+- :doc:`Using password authentication <using-password-authentication>`.  
+- :doc:`Using certificates <using-certificates>` to:
 
   - Verify the Wazuh manager.
   - Verify the agents.

@@ -97,13 +97,13 @@ Ensure the agent hostname is unique and does not match an already enrolled agent
 .. code-block:: xml
     :emphasize-lines: 4
 
-    <client>
-        ...
-        <enrollment>
-            <agent_name>EXAMPLE_NAME</agent_name>
+        <client>
             ...
-        </enrollment>
-    </client>
+            <enrollment>
+                <agent_name>EXAMPLE_NAME</agent_name>
+                ...
+            </enrollment>
+        </client>
 
 
 Unable to read CA certificate file
