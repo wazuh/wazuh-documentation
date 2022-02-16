@@ -21,9 +21,9 @@ Please note that, when following our :ref:`installation guide <installation_guid
 Enrollment methods
 ------------------
 
-There are two options for enrolling agents to the Wazuh manager. 
+There are two options for enrolling agents to the Wazuh manager.      
 
-#. :doc:`Enrollment via agent configuration <../agent-enrollment/via-agent-configuration>`: Once the IP address of the manager has been set, the agent will be able to automatically request the key and import it. This is the recommended enrollment method.
+#. :ref:`Enrollment via agent configuration <enrollment_via_agent_automatic_request>`: Once the IP address of the manager has been set, the agent will be able to automatically request the key and import it. This is the recommended enrollment method.
 
 #. :ref:`Enrollment via manager API <enrollment_via_manager_api>`: The user requests for the key from the manager API, and then manually imports it to the agent.
 
