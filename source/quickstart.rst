@@ -30,7 +30,7 @@ Hardware requirements
   +-------------------------+-------------------------------+
   |  Minimum                |   Recommended                 |
   +----------+--------------+--------------+----------------+
-  |  RAM (GB)|  CPU (cores) |  RAM (GB)    |   CPU (cores)  |
+  ||RAM (GB) |  CPU (cores) |  RAM (GB)    |   CPU (cores)  |
   +==========+==============+==============+================+
   |     4    |     2        |     16       |       8        |
   +----------+--------------+--------------+----------------+
@@ -39,8 +39,8 @@ Hardware requirements
 - **Disk space**: The amount of data depends on the generated alerts per second (APS). This table details the estimated disk space needed per agent to store 90 days of alerts on a Wazuh server, depending on the type of monitored endpoints.
 
   +------------------------------+-----+---------------------------+
-  | Monitored endpoints          | APS | Storage                   |
-  |                              |     |  (GB/90 days)             |
+  | Monitored endpoints          | APS | | Storage                 |
+  |                              |     | | (GB/90 days)            |
   +==============================+=====+===========================+
   | Servers                      | 0.25|           3.8             |
   +------------------------------+-----+---------------------------+
