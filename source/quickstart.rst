@@ -10,11 +10,11 @@
 Quickstart
 ==========
 
-Wazuh is a security platform that provides unified XDR and SIEM protection for endpoints and cloud workloads. The solution is composed of a single universal agent and three central components: the Wazuh server, the Wazuh indexer, and the Wazuh dashboard. For more information, check the :doc:`Getting Started </getting-started/index>` documentation. 
+Wazuh is a security platform that provides unified XDR and SIEM protection for endpoints and cloud workloads. The solution is composed of a single universal agent and three central components: the Wazuh server, the Wazuh indexer, and the Wazuh dashboard. For more information, check the :doc:`Getting Started </getting-started/index>` documentation.
 
-Wazuh is free and open source. Its components abide by the `GNU General Public License, version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_ and the `Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_ (ALv2). 
+Wazuh is free and open source. Its components abide by the `GNU General Public License, version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_, and the `Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_ (ALv2).
 
-In this section, you install and configure the central components in just a few minutes. All the components are installed on the same host using a single, automated installation script. Alternatively, you can check our :ref:`Installation guide <installation_guide>` to learn how to install and configure each component in single or cluster configurations.
+This document shows you how to install and configure the central components in just a few minutes. All the components are installed on the same host using the Wazuh unattended installer. Alternatively, you can check our :ref:`Installation guide <installation_guide>` to learn how to install and configure each component in cluster configurations.
 
 .. _installation_requirements:
 
@@ -72,14 +72,13 @@ Wazuh can be installed on a 64-bit Linux operating system. Wazuh supports the fo
 Installing Wazuh
 ----------------
 
-#. Download and run the Wazuh unattended installation. 
+#. Download and run the Wazuh unattended installer. 
 
    .. code-block:: console
 
      # curl -sO https://s3.us-west-1.amazonaws.com/packages-dev.wazuh.com/resources/4.3/wazuh_install.sh && sudo bash ./wazuh_install.sh -a
 
-   After executing the script, the output prompts the access credentials and a message that confirms that the installation was successful.
-
+   After executing the installer, the output shows the access credentials and a message that confirms that the installation was successful.
    
    .. code-block:: console
      :emphasize-lines: 4
@@ -87,7 +86,7 @@ Installing Wazuh
      INFO: Passwords changed.
      INFO: Starting Wazuh dashboard (this may take a while).
      INFO: Wazuh dashboard started.
-     INFO: You can access the web interface https://<wazuh-dashboard-ip>. The credentials are admin:DARNUVMF1ptnUE9hhXpM55QBmSi7MHa2
+     INFO: You can access the web interface https://<wazuh-dashboard-ip>. The credentials are admin:<admin_password>
      INFO: Installation finished.
 
 
@@ -98,14 +97,15 @@ Installing Wazuh
     - **Username**: admin
     - **Password**: <admin_password>
 
-   When you access the Wazuh dashboard for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or, for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser. Alternatively, a certificate from a trusted authority can be configured. 
+   When you access the Wazuh dashboard for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. This is expected and the user has the option to accept the certificate as an exception or, alternatively, configure the system to use a certificate from a trusted authority. 
 
-If you want to uninstall the Wazuh central components, run the unattended installation script and use the option ``-u / --uninstall``.  
+ 
+If you want to uninstall the Wazuh central components, run the Wazuh unattended installer using the option ``-u`` or ``--uninstall``.
 
 Next steps
 ----------
 
-Now that your environment is ready, select your endpoint’s operating system and follow the installation steps to deploy the :doc:`/installation-guide/wazuh-agent/index`. The agent is a single, universal and lightweight monitoring software that runs on most operating systems. It provides visibility into the endpoint’s security by collecting critical system and application records, inventory data, and detecting potential anomalies.
+Now that your Wazuh installation is ready, select your endpoint operating system and follow the installation steps to deploy the :doc:`/installation-guide/wazuh-agent/index`. The agent is a single, universal, and lightweight monitoring software that runs on most operating systems. It provides visibility into the endpoint by collecting critical system and application records, inventory data, and detecting potential anomalies.
 
 
 .. raw:: html
