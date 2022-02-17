@@ -23,7 +23,7 @@ The following steps serve as a guide on how to import the key to a Linux/Unix ag
 
    The output should look like this:
 
-      .. code-block:: json
+      .. code-block:: xml
             :class: output 
 
                 Agent information:
@@ -151,7 +151,7 @@ The Wazuh agent installation directory depends on the architecture of the host:
 
    The output should look like this:
 
-   .. code-block:: json
+   .. code-block:: xml
       :class: output
 
         Agent information:
@@ -251,7 +251,7 @@ The following steps serve as a guide on how to import the key to a macOS agent:
       
    The output should look like this:
 
-   .. code-block:: json
+   .. code-block:: xml
           :class: output
 
           Agent information:

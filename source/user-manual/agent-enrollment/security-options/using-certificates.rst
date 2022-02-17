@@ -43,7 +43,7 @@ Manager configuration
 
     #. Create a certificate request configuration file ``req.conf`` on the manager. Replace ``<manager_IP>`` with the hostname or the IP address of the Wazuh manager where the Wazuh agents are going to be enrolled. The contents of the file can be as follows:
 
-         .. code-block:: json
+         .. code-block:: xml
             :class: output
 
                   [req]
