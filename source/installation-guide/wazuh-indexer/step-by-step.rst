@@ -38,6 +38,11 @@ Generating the SSL certificates
     <div class="accordion-section open">
 
 
+Installing package dependencies
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. include:: /_templates/installations/indexer/common/install-dependencies.rst
+
 Adding the Wazuh repository
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -55,14 +60,6 @@ Adding the Wazuh repository
 
 
         .. include:: /_templates/installations/common/deb/add-repository.rst
-
-
-
-      .. group-tab:: ZYpp
-
-
-        .. include:: /_templates/installations/common/yum/add-repository.rst
-
 
 
 
@@ -121,7 +118,7 @@ Testing the cluster installation
 
       .. code-block:: console
 
-        # curl -k -u admin:admin https://localhost:9700
+        # curl -k -u admin:admin https://$WAZUH_INDEXER_IP:9700
 
 
       .. code-block:: none
@@ -144,11 +141,11 @@ Testing the cluster installation
             "tagline" : "The OpenSearch Project: https://opensearch.org/"
           }   
 
-  #. Run the following command replacing <WAZUH_INDEXER_IP> with your Wazuh indexer IP address to check the cluster is working correctly.
+  #. Run the following command to check if the cluster is working correctly.
   
       .. code-block:: console
 
-        # curl -k -u admin:admin https://<WAZUH_INDEXER_IP>:9700/_cat/nodes?v
+        # curl -k -u admin:admin https://$WAZUH_INDEXER_IP:9700/_cat/nodes?v
 
 
 Next steps

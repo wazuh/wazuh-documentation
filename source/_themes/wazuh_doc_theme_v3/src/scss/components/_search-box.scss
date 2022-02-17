@@ -7,6 +7,7 @@
 .search-box {
   border: 2px solid;
   border-radius: $roundedCorners;
+  overflow: hidden;
 
   .search-form {
     position: relative;
@@ -14,7 +15,7 @@
     flex-direction: row;
     align-items: center;
     width: 100%;
-    height: 46px;
+    height: 40px;
 
     .form-control {
       position: relative;
@@ -29,13 +30,14 @@
       position: absolute;
       right: 0;
       z-index: 10;
-      width: 46px;
-      height: 46px;
+      width: 38px;
+      height: 38px;
       padding: 5px;
       background-repeat: no-repeat;
-      background-size: 41px 41px;
+      background-size: 38px 38px;
       background-position: center;
       border: none;
+      border-radius: calc(#{$roundedCorners} - 2px);
     }
   }
 }
@@ -46,6 +48,9 @@ body {
   .search-box {
     background-color: $light_ColorBaseSpace;
     border-color: $light_ColorBorderDetails;
+    &:focus-within {
+      border-color: $light_ColorPrimaryLighter;
+    }
     .form-control {
       background-color: $light_ColorBaseSpace;
       color: $light_ColorMainText;
@@ -65,6 +70,9 @@ body {
   .search-box {
     background-color: $dark_ColorBaseSpace;
     border-color: $dark_ColorBorderDetails;
+    &:focus-within {
+      border-color: $dark_ColorPrimaryLighter;
+    }
     .form-control {
       background-color: $dark_ColorBaseSpace;
       color: $dark_ColorMainText;

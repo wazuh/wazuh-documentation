@@ -65,8 +65,11 @@ main {
   position: relative;
   transition: max-height .2s;
   overflow-y: hidden;
+  border: 1px solid;
 
   &.output {
+    border-radius: $roundedCorners;
+
     .output-title {
       height: 40px;
       display: flex;
@@ -75,7 +78,7 @@ main {
       font-weight: 600;
       width: 100%;
       cursor: pointer;
-      
+
       &::before {
         content: '';
         height: 40px;
@@ -92,7 +95,7 @@ main {
     &.collapsed {
       max-height: 40px;
       transition: max-height .2s;
-      
+
       .output-title {
         border-radius: $roundedCorners;
         transition: border-radius 0.05s .2s;
@@ -101,6 +104,9 @@ main {
           transition: transform .1s;
         }
       }
+    }
+    &.expanded {
+      max-height: unset;
     }
   }
 
@@ -111,7 +117,7 @@ main {
 
     .highlight {
       position: unset;
-      overflow-x: auto;
+      overflow: auto; /* Fix to remove occasional vertical scroll in Safari */
       max-width: 100%;
       padding-left: 0;
       padding-right: 0;
@@ -140,15 +146,15 @@ main {
     border: 0;
     border-radius: $roundedCorners;
     transition: all 0.2s ease;
-    
+
     &:focus {
       opacity: 1;
     }
-    
+
     &.copied {
       opacity: 1;
     }
-    
+
     span {
       display: none;
       font-size: 0.9rem;
@@ -164,7 +170,6 @@ main {
     pre {
       padding: 0 20px;
       overflow: visible;
-      position: relative;
       z-index: 6;
     }
   }
@@ -174,10 +179,11 @@ main {
     border-right: 1px solid;
     position: absolute;
     top: 20px;
-    z-index: 10;
+    z-index: 30;
     width: 50px;
     justify-content: center;
     user-select: none;
+    line-height: 24px;
   }
 
   .linenos {
@@ -205,12 +211,12 @@ main {
 
       &::before {
         position: absolute;
-        left: 0;
+        left: -50px;
         right: 0;
         height: 24px;
         display: block;
         content: '';
-        z-index: -20;
+        z-index: -1;
       }
 
       > span {
@@ -249,9 +255,11 @@ body {
     }
   }
   [class*="highlight-"] {
+    border-color: $light_ColorCodeBlockBorder;
     &.output {
+      background-color: $light_ColorCodeBlockBackground;
       .output-title {
-        background-color: $light_ColorSidebarSpace;
+        background-color: $light_ColorOutputTitleBackground;
         &::before {
           background-image: url('#{$icoPath}svg-icons.svg#chevron-blue-lt');
         }
@@ -259,6 +267,9 @@ body {
     }
     .highlighttable {
       background-color: $light_ColorCodeBlockBackground;
+      .linenos {
+        background-color: transparent;
+      }
     }
     .copy-to-clipboard {
       color: $light_ColorMainText;
@@ -344,9 +355,11 @@ body {
     }
   }
   [class*="highlight-"] {
+    border-color: $dark_ColorCodeBlockBorder;
     &.output {
+      background-color: $dark_ColorCodeBlockBackground;
       .output-title {
-        background-color: $dark_ColorCodeBlockBackground;
+        background-color: $dark_ColorOutputTitleBackground;
         color: $dark_ColorMainText;
         &::before {
           background-image: url('#{$icoPath}svg-icons.svg#chevron-blue-dt');
@@ -383,51 +396,8 @@ body {
         color: $dark_ColorCodeDefault;
       }
       .hll {
-        color: $light_ColorCodeDefault;  
         &::before {
-          background-color: $light_ColorHighlightBackground;
-        }
-        .k,
-        .kn {
-          color: $light_ColorCodeKeyword;
-        }
-        .c,
-        .c1,
-        .cp,
-        .ch,
-        .go {
-          color: $light_ColorCodeComment; 
-        }
-
-        .m,
-        .mi {
-          color: $light_ColorCodeNumber; 
-        }
-
-        .s,
-        .s1,
-        .s2,
-        .sb,
-        .se,
-        .sh,
-        .si,
-        .heredoc,
-        .heredoc span {
-          color: $light_ColorCodeString; 
-        }
-
-        .vm,
-        .n,
-        .nb,
-        .bp,
-        .nf {
-          color: $light_ColorCodeFunction; 
-        }
-
-        .nt,
-        .na,
-        .no {
-          color: $light_ColorCodeVariable; 
+          background-color: $dark_ColorOutputTitleBackground;
         }
       }
       .k,

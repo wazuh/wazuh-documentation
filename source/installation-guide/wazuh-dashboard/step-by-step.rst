@@ -14,6 +14,11 @@ Install and configure the Wazuh dashboard following step-by-step instructions. T
 Wazuh dashboard installation
 ----------------------------
 
+Installing package dependencies
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. include:: /_templates/installations/dashboard/install-dependencies.rst
+
 Adding the Wazuh repository
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -36,12 +41,6 @@ Adding the Wazuh repository
   
   
   
-    .. group-tab:: Zypp
-  
-  
-      .. include:: /_templates/installations/common/yum/add-repository.rst
-  
-  
 
 Installing the Wazuh dashboard
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -61,13 +60,6 @@ Installing the Wazuh dashboard
 
 
               .. include:: /_templates/installations/dashboard/apt/install_dashboard.rst
-
-
-
-          .. group-tab:: Zypp
-
-
-              .. include:: /_templates/installations/dashboard/zypp/install_dashboard.rst
 
 
 

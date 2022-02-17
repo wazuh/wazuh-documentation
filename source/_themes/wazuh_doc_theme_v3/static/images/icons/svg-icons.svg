@@ -86,7 +86,7 @@
   <view id="circle-x" viewBox="320 0 28 28"/>
   <view id="circle-bulb" viewBox="360 0 28 28"/>
   <g>
-    <use xlink:href="#search" fill="#3585f9"/>
+    <use xlink:href="#search" fill="#256bd1"/>
   </g>
   <g transform="translate(0, 40)">
     <use xlink:href="#search" fill="#499cfe"/>

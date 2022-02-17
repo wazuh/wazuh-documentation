@@ -14,7 +14,7 @@ Wazuh indexer stores data as JSON documents. Each document correlates a set of k
 
 An index is a collection of documents that are related to each other. The documents stored in Wazuh indexer are distributed across different containers known as shards. By distributing the documents across multiple shards, and distributing those shards across multiple nodes, Wazuh indexer can ensure redundancy. This protects your system against hardware failures and increases query capacity as nodes are added to a cluster. 
 
-.. thumbnail:: ../../images/getting_started/Wazuh-indexer.png
+.. thumbnail:: /images/getting_started/Wazuh-indexer.png
     :alt: Wazuh indexer cluster
     :align: center
 

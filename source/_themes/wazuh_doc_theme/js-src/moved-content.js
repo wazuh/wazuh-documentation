@@ -17,6 +17,7 @@ const listOfReleases = [
   '4.0',
   '4.1',
   '4.2',
+  '4.3',
 ];
 
 /* Get path from query string */
