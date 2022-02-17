@@ -89,7 +89,7 @@ Name it as below and click on **[Create]**.
     :align: center
     :width: 75%
 
-Next, click on **[Close]** then select the gate way and from the **[Action]** menu, select  **[Attach to VPC]**,
+Next, click on **[Close]** then select the gateway and from the **[Action]** menu, select  **[Attach to VPC]**,
 
 .. thumbnail:: ../../images/learning-wazuh/build-lab/create-gateway-2.png
     :title: Create gateway
