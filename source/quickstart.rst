@@ -52,27 +52,19 @@ Hardware requirements
   For example, for an environment with 80 workstations, 10 servers, and 10 network devices, the storage needed for 90 days of alerts is 236 GB approximately. 
 
 
+Recommended operating systems
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Supported operating systems
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Wazuh can be installed on a 64-bit Linux operating system. Wazuh supports all the operating system versions listed below and their later versions too:
+Wazuh can be installed on a 64-bit Linux operating system. Wazuh supports the following operating system versions:
 
 
 .. list-table::
    :width: 100%
-   :widths: 50 50
-
+   
    * - Amazon Linux 2
-     - CentOS 7
-   * - Debian 8 ELTS
-     - Fedora Linux 33
-   * - openSUSE Tumbleweed, Leap 15.2
-     - Oracle Linux 6 Extended
-   * - Red Hat Enterprise Linux 6 ELS
-     - SUSE Linux enterprise server 11 LTSS
-   * - Ubuntu 14.04 ESM
-     - 
+     - CentOS 7, 8
+   * - Red Hat Enterprise Linux 7, 8
+     - Ubuntu 16.04, 18.04, 20.04
  
 
 .. _unattended_all_in_one:
