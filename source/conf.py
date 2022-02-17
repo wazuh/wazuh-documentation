@@ -119,7 +119,7 @@ pygments_style = 'sphinx'
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'wazuh_doc_theme'
+html_theme = 'wazuh_doc_theme_v3'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -580,7 +580,7 @@ def setup(app):
 
 def insert_inline_style(app, pagename, templatename, context, doctree):
     ''' Runs once per page, inserting the content of the compiled style for Google Fonts into the context '''
-    google_fonts_path = os.path.join('source/',theme_assets_path, 'static', 'css', 'google-fonts.min.css')
+    google_fonts_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), theme_assets_path, 'static', 'css', 'google-fonts.min.css')
     # Fonts to be preloaded
     with open(google_fonts_path, 'r') as reader:
         google_fonts = reader.read()

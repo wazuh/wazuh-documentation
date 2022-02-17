@@ -1,0 +1,1396 @@
+/* -----------------------------------------------------------------------------
+  API reference pages (using ReDoc)
+----------------------------------------------------------------------------- */
+
+@import "../inc/variables";
+@import "../inc/mixins";
+@import "../inc/root";
+@import "../inc/content";
+
+@import "../components/brand";
+@import "../components/version-selector";
+@import "../components/mode-switch";
+
+// Variables used only for ReDoc
+$light_ColorRedocType: #b4b4b4 !default;
+$light_ColorRedocCodeBackground: #f6f6f6 !default;
+$dark_ColorReDocBaseSpace: #2b303a !default;
+$dark_ColorReDocTableHeading: #292929 !default;
+$dark_ColorReDocTableBackground: #2a2d34 !default;
+$dark_ColorReDocDanger: #E31B0F !default;
+
+
+.loading {
+  header,
+  footer {
+    display: none;
+  }
+}
+
+body {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 32px;
+  padding-top: $redocHeaderHeight;
+  margin-top: 0;
+  position: relative;
+}
+main {
+  padding: 0;
+  strong {
+    font-weight: 600;
+  }
+}
+#light-dark-switch {
+  padding: 0;
+}
+header {
+  position: fixed;
+  top: 0;
+  display: flex;
+  flex-direction: row;
+  height: $redocHeaderHeight;
+  width: calc(#{$leftRedocSidebarWidth} + (100% - #{$leftRedocSidebarWidth}) * .6);
+  z-index: 100;
+  @media screen and (min-width: 50rem) and (max-width: 75rem){
+    width: 100%;
+  }
+  @media screen and (max-width: 50rem){
+    flex-direction: column;
+    width: 100%;
+    height: $redocHeaderHeight;
+  }
+  #version-selector {
+    .dropdown-btn {
+      @media screen and (min-width: 50.01rem) and (max-width: 75rem) {
+        border: 2px solid;
+        padding: 5px 10px;
+      }
+    }
+    .dropdown-menu {
+      @media screen and (min-width: 50.01rem) and (max-width: 75rem) {
+        border: 2px solid;
+        left: 0!important;
+      }
+    }
+  }
+  .header-left {
+    width: $leftRedocSidebarWidth;
+    padding: 7px 40px;
+    pointer-events: all;
+    position: relative;
+    z-index: 20;
+    @media screen and (min-width: 50rem){
+      padding: 10px 15px;
+    }
+    @media screen and (max-width: 50rem){
+      height: $redocHeaderHeight / 2;
+      padding: 10px 40px;
+      width: 100%;
+    }
+
+    .navbar-brand {
+      justify-content: flex-start;
+      @media screen and (min-width: 50rem){
+        height: 50px;
+        align-items: center;
+      }
+    }
+    #light-dark-switch {
+      padding-top: 0;
+      border-top: 2px solid;
+      align-items: center;
+      @media screen and (min-width: 50rem){
+        height: 50px;
+      }
+      @media screen and (max-width: 50rem){
+        position: absolute;
+        bottom: -($redocHeaderHeight / 2);
+        border: none;
+        height: $redocHeaderHeight / 2;
+        right: 26px;
+      }
+    }
+  }
+  .header-right {
+    margin-right: 40px;
+    width: calc(100% - #{$leftRedocSidebarWidth} - 80px);
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding-bottom: 15px;
+    margin-left: 40px;
+    border-bottom: 1px solid;
+    @media screen and (max-width: 50rem){
+      height: $redocHeaderHeight / 2;
+      position: absolute;    
+      z-index: 20;
+      width: auto;
+      margin: 0;
+      justify-content: flex-start;
+      align-items: center;
+      bottom: 0;
+      padding: 0 0 0 22px;
+      border: none;
+    }
+  }
+}
+#footer-redoc {
+  .powered-by-badge {
+    text-align: right;
+    position: absolute;
+    z-index: 50;
+    right: 0;
+    bottom: 15px;
+    height: 40px;
+    padding: 0 40px;
+    color: $light_ColorShadedText;
+    font-size: 0.8rem;
+    a {
+      color: $light_ColorShadedText;
+      text-decoration: none;
+    }
+  }
+}
+
+.no-latest-notice-wrapper {
+  padding-left: 0;
+  padding-right: 0;
+  position: fixed;
+  margin: 0;
+  left: 0;
+  top: 0;
+  z-index: 10;
+  right: 0;
+
+  .no-latest-notice {
+    padding: 0 40px;
+    margin-left: $leftRedocSidebarWidth;
+
+    .no-latest-title {
+      display: inline-block;
+      position: relative;
+      font-weight: 600;
+      padding: 4px 10px 4px 38px;
+      line-height: 32px;
+
+      &::after {
+        vertical-align: middle;
+        content: '';
+        display: inline-block;
+        width: 1.75rem;
+        height: 1.75rem;
+        position: absolute;
+        left: 0;
+        top: 6px;
+        background: url('#{$icoPath}svg-icons.svg#circle-exclamation-orange');
+      }
+    }
+
+    .no-latest-text-wrapper {
+      display: inline-block;
+      padding: 0 0.5em 0 0;
+    }
+  }
+}
+
+/* Redoc Element styles ----------------------------------------------------- */
+
+redoc[spec-url] .beRszf {
+  font-family: Manrope, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 32px;
+  letter-spacing: .03em;
+
+  // Responosive tables
+  .eCjbJc {
+    overflow-x: auto;
+    display: block;
+  }
+
+  // Right column dark background only
+  .cObJOV {
+    top: calc(-60px - #{$redocHeaderHeight});
+    width: calc((100% - #{$leftRedocSidebarWidth}) * .4);
+    background-color: $dark_ColorBaseSpace;
+  }
+
+  // API menu toggle
+  .sc-bMVAic.llQIcF {
+    top: 6px;
+    padding: .4rem;
+    box-shadow: none;
+    border-radius: 4px;
+    background-color: #ffffff;
+    right: 15px;
+    width: 45px;
+    height: 45px;
+    background: transparent;
+  }
+
+  // Tag sections:
+  .cncswi {
+  	padding: 10px 0px 0px;
+    // Tag sections head:
+    .TPAYK {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  }
+
+  // Original "Powered by ReDoc" link
+  .bmRLPL {
+    display: none;
+  }
+
+  // Simple table style
+  .dCnGCn table th {
+    font-weight: 500;
+  }
+  .dCnGCn table th, 
+  .dCnGCn table td {
+    padding: 6px 20px;
+    border: 2px solid;
+  }
+
+  // Font inside the tables
+  .xNubs {
+    font-family: Manrope,sans-serif;
+    font-size: 1rem;
+    line-height: 32px
+  }
+  // Advanced table style
+  .table {
+    // Bordered table style
+    &.table-bordered {
+      border: none;
+      border-radius: $roundedCorners $roundedCorners 0 0;
+      th {
+        border: 2px solid;
+        font-weight: 500;
+      }
+      td {
+        border: 2px solid;
+      }
+    }
+  }
+
+  // AUTHORIZATIONS
+  .sc-epnACN {
+    padding-right: 10px;
+    .XrbXS {
+      font-size: 16px !important;
+    }
+  }
+
+  // QUERY PARAMETERS and REQUEST BODY SCHEMA
+  .sc-gqjmRU.LiUBH {
+    font-size: 16px !important;
+    width: 100%;
+    > .sc-hSdWYo.hoUoen {
+      font-size: 16px !important;
+    }
+  }
+
+  // Code blocks
+  code,
+  .sc-cHGsZl.sc-jbKcbu,
+  .sc-cHGsZl.sc-jqCOkK {
+    font-family: 'Fira Mono', monospace;
+    font-size: 14px;
+    line-height: 32px;
+    letter-spacing: .03em;
+  }
+  pre code {
+    background-color: $dark_ColorCodeBlockBackground;
+  }
+
+  // Responses (central column): 200, 400, etc
+  .sc-ibxdXY {
+    &.gxJjxJ,
+    &.dUFXgZ {
+      strong {
+        font-weight: 600;
+        margin-right: 10px;
+      }
+    }
+  }
+
+  // Content blocks
+  .sc-jWBwVP.sc-iRbamj.dCnGCn {
+    line-height: 32px;
+    pre {
+      background-color: $dark_ColorCodeBlockBackground;
+    }
+    p {
+      line-height: 32px;
+    }
+  }
+
+  // Inline code value
+ .bMfIUD {
+   border: 1px solid;
+  }
+  .xNubs code {
+    border: none;
+  }
+  .beUper {
+    border: none;
+  }
+
+  // Properties and property required
+  .sc-chPdSV.eAybih {
+    font-family: Manrope, sans-serif;
+    font-size: 16px;
+    line-height: 32px;
+    .sc-ksYbfQ.sc-hmzhuo.bGITIP {
+      text-transform: capitalize;
+      font-size: 14px;
+    }
+  }
+  // Fix error of the connecting line on sigle properties
+  tr.last:first-of-type > .eAybih,
+  tr.last:first-of-type > .jMEzIu {
+    background-image: none;
+  }
+  // Expandable property
+  .sc-kjoXOD.jMEzIu,
+  .sc-kjoXOD.QefOL {
+    button {
+      font-family: Manrope, sans-serif;
+      font-size: 16px;
+      line-height: 32px;
+    }
+  }
+
+  // Array of <Type>
+  .sc-TOsTZ.fKyGWc {
+    font-size: 15px;
+  }
+  // Array () []
+  .sc-hMqMXs.dDdNtD,
+  .sc-kEYyzF.cMefLx {
+    font-family: Manrope, sans-serif;
+    font-size: 15px;
+  }
+
+  // Types
+   .sc-kgAjT.hqYVjx {
+     font-size: 15px;
+  }
+
+  // Default 
+  .sc-cHGsZl.lpeYvY {
+    font-size: 15px;
+  }
+
+  // One of...
+  .sc-jKJlTe.eZZMfQ {
+    font-family: Manrope, sans-serif;
+    font-size: 16px;
+  }
+  .sc-eNQAEJ {
+    border-radius: 3px;
+    font-size: 15px;
+  }
+
+  // Parameters values and descriptions
+  .kGwPhO {
+  //   width: 100%;
+    font-size: 16px;
+  }
+  .edBCth {
+    font-size: 14px;
+  }
+
+  // Samples tabs (in dark background part)
+  .dOwpAS {
+    .react-tabs__tab-list {
+      [role="tab"] {
+        width: 5em;
+        font-weight: 500;
+        font-size: 1rem;
+        border-radius: 3px;
+        padding: 3px 10px;
+        margin-top: 7px;
+        
+        & > [role="tab"].react-tabs__tab--selected {
+          font-weight: 500;
+        }
+        &.tab-success:before,
+        &.tab-error:before,
+        &.tab-redirect:before,
+        &.tab-info:before {
+          content: "";
+          display: inline-block;
+          position: relative;
+          top: -2px;
+          height: 5px;
+          width: 5px;
+          border-radius: 50%;
+          margin-right: 0.5em;
+        }
+      }
+    }
+  }
+
+  // Samples endpoint boxes (in dark background part)
+  .gLTsd {
+    background-color: $dark_ColorCodeBlockBackground;
+
+    // Endpoint string
+    .sc-hwwEjo {
+      font-family: Manrope, sans-serif;
+      letter-spacing: .03em;
+    }
+  }
+  // Content type boxes  (in dark background part)
+  .sc-eqIVtm.ecxnvs {
+    display: none;
+  }
+
+  // Code block area container
+  .sc-gisBJw.gwfZGU {
+  	margin-top: 0;
+    // Code block content
+    .jCgylq {
+      a {
+        text-decoration: none !important;
+      }
+    }
+  }
+
+  // Code block buttons
+  .gsaTRZ > button {
+    font-family: Manrope, sans-serif;
+    font-size: 16px;
+    border-radius: 3px;
+  }
+
+  // API specs download button
+  a.sc-hEsumM.jrowNk {
+  	user-select: none;
+    border-radius: 8px;
+    border: 2px solid;
+    padding: 0 34px;
+    text-decoration: none;
+  }
+
+  // Left sidebar
+  .menu-content {
+    top: 110px!important;
+    position: fixed;
+    height: calc(100vh - 110px)!important;
+    width: $leftRedocSidebarWidth;
+    @media screen and (max-width: 50rem){
+      width: 100%;
+    }
+    label[role="menuitem"] {
+      font-family: Manrope, sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      padding-left: 26px;
+      padding-right: 26px;
+      > span.operation-type {
+        display: none;
+      }
+      &.-depth1 {
+        text-transform: uppercase;
+      }
+      &.active .hRqESd,
+      &.iTiWpH .hRqESd {
+        transform: rotateZ(-180deg);
+      }
+      &.-depth2 {
+        padding-left: 36px;
+      }
+    }
+  }
+
+  // Search box
+  .cziLoD {
+    padding: 30px 0px 5px;
+    input {
+      font-family: Manrope, sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      border-bottom: 2px solid;
+      background-repeat: no-repeat;
+      background-size: 25px 25px;
+      background-position: left center;
+      padding-left: 28px;
+      padding-bottom: 0;
+    }
+    svg {
+      display: none;
+    }
+  }
+
+  // Central and right content columns
+  .api-content {
+    scroll-margin-top: $redocHeaderHeight;
+    margin-left: $leftRedocSidebarWidth;
+    @media screen and (max-width: 50rem){
+      margin-left: 0;
+    }
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: Manrope, sans-serif;
+      font-weight: 600;
+      letter-spacing: .03em;
+      position: relative;
+      .sc-VigVT.jrPOYQ {
+        position: absolute;
+        right: -24px;
+        top: 0.3em;
+      }
+    }
+    // Main h1 heading
+    .sc-htoDjs.sc-tilXH.givSXQ {
+      font-size: 34px;
+      line-height: 46.44px;
+    }
+    h1 {
+      font-size: 28px;
+      line-height: 40px;
+    }
+    h2, 
+    h3 {
+      font-size: 22px;
+      line-height: 36px;
+    }
+
+    // Central column
+    .TPAYK {
+      // License
+      .sc-kafWEX.egTZxS {
+        margin-bottom: 1rem;
+      }
+
+    }
+    
+    // Right column (always dark)
+    .celZWI {
+      background-color: $dark_ColorBaseSpace;
+      color: $dark_ColorMainText;
+
+      h3 {
+        font-size: 16px;
+        color: $dark_ColorMainText;
+        text-transform: uppercase;
+        font-weight: 500;
+      }
+
+      .http-verb {
+        font-family: Manrope, sans-serif;
+        font-size: 16px;
+        &.get {
+          background-color: $dark_ColorSuccess;
+        }
+        &.post {
+          background-color: $dark_ColorPrimary;
+        }
+        &.put {
+          background-color: $dark_ColorCodeVariable;
+        }
+        &.delete {
+          background-color: $dark_ColorDanger;
+        }
+      }
+
+      .react-tabs__tab-panel > div{
+        padding-top: 10px;
+        margin-top: 10px;
+      }
+    }
+  }
+
+  // Remove the horizontal line between sections
+  .ddXLZs:not(:last-of-type)::after {
+    content: none;
+  }
+}
+/* End of ReDoc element styles */
+
+
+
+/* Light theme -------------------------------------------------------------- */
+
+
+body {
+  color: $light_ColorMainText;
+  .no-latest-notice-wrapper {
+    background-color: $light_ColorBaseSpace;
+    .no-latest-notice {
+      background-color: rgba($light_ColorWarning, 0.1);
+     .no-latest-title {
+        color: $light_ColorWarningDark;
+      }
+    }
+  }
+  .loading {
+    redoc {
+      div {
+        color: $light_ColorPrimary!important;
+        * {
+          fill: $light_ColorPrimary!important;
+        }
+      }
+    }
+  }
+  header {
+    background: $light_ColorBaseSpace;
+    @media screen and (max-width: 50rem){
+      background-color: $light_ColorAdmonitionBackground;
+    }
+    .header-left {
+      background-color: $light_ColorAdmonitionBackground;
+      #light-dark-switch {
+        border-top-color: $light_ColorBorderDeeper;
+      }
+    }
+    .header-right {
+      border-bottom-color: $light_ColorGlobalTocHighlight;
+    }
+  }
+  #version-selector {
+    .dropdown-btn,
+    .dropdown-menu {
+      color: $light_ColorMainText;
+      @media screen and (min-width: 50.01rem) {
+        background-color: $light_ColorBaseSpace;
+        border-color:  $light_ColorAccent;
+      }
+    }
+    .dropdown-menu {
+      background-color: $light_ColorSidebarSpace;
+      @media screen and (min-width: 50.01rem) {
+        background-color: $light_ColorBaseSpace;
+        border-color:  $light_ColorAccent;
+      }
+      > li > a {
+        color: $light_ColorMainText;
+        &:hover,
+        &:focus {
+          background-color: $light_ColorHighlightBackground;
+        }
+        &.disabled {
+          color: $light_ColorBorderDeeper;
+        }
+      }
+    }
+  }
+  redoc[spec-url] .beRszf {
+    color: $light_ColorMainText;
+    // Generic links
+    a {
+      color: $light_ColorPrimary;
+      &:hover,
+      &:focus {
+        color: $light_ColorPrimaryLighter;
+      }
+    }
+    p {
+      color: $light_ColorMainText;
+    }
+    .jCgylq {
+      // Code blocks tokens
+      .token {
+        &.boolean {
+          color: $dark_ColorDanger;
+        }
+        &.number {
+          color: $dark_ColorCodeNumber;
+        }
+      }
+    }
+    // Simple table style
+    .dCnGCn table th, 
+    .dCnGCn table td {
+      border-color: $light_ColorTableBorder;
+    }
+    .dCnGCn table tr:nth-child(2n) {
+      background-color: $light_ColorSidebarSpace;
+    }
+    // Advanced table style
+    .table {
+      // Bordered table style
+      &.table-bordered {
+        th {
+          border-color: $light_ColorPrimary;
+          background-color: $light_ColorPrimary;
+          color: $dark_ColorMainText;
+        }
+        td {
+          border-color: $light_ColorTableBorder;
+        }
+      }
+      // Striped table style
+      &.table-striped tbody {
+        tr:nth-of-type(odd) {
+          background-color: $light_ColorBaseSpace;
+        }
+        tr:nth-of-type(even) {
+          background-color: $light_ColorSidebarSpace;
+        }
+      }
+    }
+    // AUTHORIZATIONS
+    .sc-epnACN {
+      color: $light_ColorRedocType;
+    }
+    .XrbXS {
+      color: $light_ColorRedocType;
+      border-bottom-color: $light_ColorRedocType !important;
+    }
+    // QUERY PARAMETERS and REQUEST BODY SCHEMA
+    .sc-gqjmRU.LiUBH {
+      color: $light_ColorRedocType!important;
+      border-bottom-color: $light_ColorRedocType !important;
+      > .sc-hSdWYo.hoUoen {
+        color: $light_ColorMainText;
+      }
+    }
+    // Properties
+    .sc-chPdSV.eAybih {
+      color: $light_ColorMainText;
+      // Porperty required
+      .sc-ksYbfQ.sc-hmzhuo.bGITIP {
+        color: $light_ColorDangerDark;
+      }
+    }
+    // Expandable property
+    .sc-kjoXOD.jMEzIu,
+    .sc-kjoXOD.QefOL {
+      button {
+        color: $light_ColorMainText;
+        svg polygon {
+          fill: $light_ColorPrimary;
+        }
+      }
+    }
+    .jMEzIu {
+      border-left-color: $light_ColorPrimaryLighter;
+    }
+    // Nested expandable properties
+    .eCjbJc .sc-kpOJdX, 
+    .eCjbJc .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX, 
+    .eCjbJc .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX {
+      background: $light_ColorAdmonitionBackground;
+    }
+    .eCjbJc .sc-kpOJdX .sc-kpOJdX, 
+    .eCjbJc .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX, 
+    .eCjbJc .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX {
+      background-color: $light_ColorBaseSpace;
+    }
+    // API menu toggle
+    .imibLw {
+      color: $light_ColorPrimaryLighter;
+    }
+    // Properties connecting line 
+    tr:first-of-type > .eAybih,
+    tr:first-of-type > .jMEzIu {
+      background-image: linear-gradient(transparent 0%, transparent 28px, $light_ColorPrimaryLighter 28px, $light_ColorPrimaryLighter 100%);
+    }
+    .eAybih,
+    .gtEarq {
+      border-left-color: $light_ColorPrimaryLighter;
+    }
+    tr.last + tr > .gtEarq {
+      border-left-color: transparent;
+    }
+    tr.last > .eAybih,
+    tr.last > .jMEzIu {
+      background-image: linear-gradient($light_ColorPrimaryLighter 0%, $light_ColorPrimaryLighter 29px, transparent 29px, transparent 100%);
+    }
+    .bcLONg::before,
+    .bcLONg::after {
+      background-color: $light_ColorPrimaryLighter;
+    }
+    // Array of <Type>
+    .sc-TOsTZ.fKyGWc {
+      color: $light_ColorBorderDetails;
+    }
+    // Array () []
+    .sc-hMqMXs.dDdNtD,
+    .sc-kEYyzF.cMefLx {
+      color: $light_ColorMainText;
+    }
+    // Types
+    .sc-kgAjT.hqYVjx {
+      color: $light_ColorRedocType;
+    }
+    // Default 
+    .sc-cHGsZl.lpeYvY {
+      color: $light_ColorMainText;
+    }
+    // One of...
+    .sc-jKJlTe.eZZMfQ {
+      color: $light_ColorMainText;
+    }
+    .sc-eNQAEJ {
+      border-color: $light_ColorPrimaryLighter;
+      &.jdXjUh {
+        color: $light_ColorMainText;
+        background-color: $light_ColorBaseSpace;
+      }
+      &.gYsnwL {
+        color: $light_ColorBaseSpace;
+        background-color: $light_ColorPrimaryLighter;
+      }
+    }
+    // Parameters values and descriptions
+    .kGwPhO {
+      border-bottom-color: $light_ColorRedocType;
+    }
+    .edBCth {
+      color: $light_ColorInputPlaceholder;
+    }
+    // Value restrictions
+    .beUper {
+      color: $light_ColorPrimary;
+      background-color: $light_ColorHighlightBackground;
+    }
+    // Responses (central column): 200, 400, etc
+    .sc-ibxdXY {
+      &.gxJjxJ {
+        background-color: rgba($light_ColorSuccessDark, .2);
+        strong {
+          color: $light_ColorSuccessDark;
+        }
+        svg polygon {
+          fill: $light_ColorSuccessDark;
+        }
+      }
+      &.dUFXgZ {
+        background-color: rgba($light_ColorDangerDark, .2);
+        strong {
+          color: $light_ColorDangerDark;
+        }
+        svg polygon {
+          fill: $light_ColorDangerDark;
+        }
+      }
+    }
+    // Inline code value
+    .bMfIUD {
+     color: $light_ColorMainTextExtra;
+     border-color: $light_ColorRedocType;
+    }
+    // Samples tabs (in dark background part)
+    .dOwpAS {
+      .react-tabs__tab-list {
+        & > [role="tab"].react-tabs__tab--selected {
+          color: $light_ColorMainText;
+          background-color: $light_ColorBaseSpace;
+        }
+        [role="tab"] {
+          color: $dark_ColorMainText;
+          background-color: $dark_ColorCodeBlockBackground;
+          &.tab-success:before {
+            box-shadow: 0 0 3px 0 $dark_ColorSuccessDark;
+            background-color: $light_ColorSuccessDark;
+          }
+          &.tab-error:before {
+            box-shadow: 0 0 3px 0 $dark_ColorDanger;
+            background-color: $dark_ColorDanger;
+          }
+          &.tab-redirect:before {
+            box-shadow: 0 0 3px 0 $dark_ColorWarning;
+            background-color: $dark_ColorWarning;
+          }
+          &.tab-info:before {
+            box-shadow: 0 0 3px 0 $dark_ColorPrimary;
+            background-color: $dark_ColorPrimary;
+          }
+        }
+      }
+      // Samples tab content
+      & > .react-tabs__tab-panel {
+        background-color: $dark_ColorCodeBlockBackground;
+      }
+    }
+    // Code block area container
+    .sc-gisBJw.gwfZGU {
+      // Code block content
+      .jCgylq {
+        background-color: $dark_ColorCodeBlockBackground;
+        code {
+          background-color: $dark_ColorCodeBlockBackground;
+        }
+        a {
+          color: $dark_ColorPrimary;
+          &:hover,
+          &:focus {
+            color: $dark_ColorPrimaryLighter;
+          }
+        }
+        .hoverable {
+          color: $dark_ColorMainText;
+        }
+        // Code blocks tokens
+        .token {
+          color: $dark_ColorMainText;
+        }
+      }
+    }
+    // Download button
+    a.sc-hEsumM.jrowNk {
+      color: $light_ColorMainText;
+      border-color: $light_ColorPrimaryLighter;
+      &:hover,
+      &:focus {
+        color: $dark_ColorMainText;
+        background-color: $light_ColorPrimary;
+        border-color: $light_ColorPrimary;
+      }
+    }
+    // Left sidebar
+    .menu-content {
+      background-color: $light_ColorSidebarSpace;
+      // Menu items text
+      .hxqNKs,
+      .iTiWpH {
+        color: $light_ColorMainText;
+      }
+      label[role="menuitem"] {
+        &:hover {
+          color: $light_ColorPrimary;
+          background-color: $light_ColorSidebarSpace;
+        }
+        // Menu items text
+        .hxqNKs,
+        .iTiWpH,
+        .dttBLN,
+        &.idRuNa {
+          color: $light_ColorMainText;
+          &:hover {
+            color: $light_ColorPrimary;
+          }
+        }
+        svg polygon {
+          fill: $light_ColorPrimary;
+        }
+        &.active {
+          background-color: $light_ColorGlobalTocHighlight;
+        }
+      }
+    }
+    // Search box
+    .cziLoD {
+      input {
+        color: $light_ColorFocusShade;
+        border-bottom-color: $light_ColorBorderDeeper;
+        background-image: url('#{$icoPath}svg-icons.svg#search-lt');
+      }
+      ::placeholder {
+        color: $light_ColorFocusShade;
+      }
+    }
+
+    // Central and right conten columns
+    .api-content {
+      h1,
+      h2,
+      h3,
+      h4 {
+        color: $light_ColorMainTextExtra;
+      }
+    }
+
+  }
+}
+
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme {
+  color: $dark_ColorMainText;
+  .no-latest-notice-wrapper {
+    background-color: $dark_ColorBaseSpace;
+    .no-latest-notice {
+      background-color: rgba($dark_ColorWarning, 0.1);
+      .no-latest-title {
+        color: $dark_ColorWarning;
+      }
+    }
+  }
+  .loading {
+    redoc {
+      div {
+        color: $dark_ColorPrimary!important;
+        * {
+          fill: $dark_ColorPrimary!important;
+        }
+      }
+    }
+  }
+  background-color: $dark_ColorReDocBaseSpace;
+  header {
+    background: $dark_ColorReDocBaseSpace;
+    @media screen and (max-width: 50rem){
+      background-color: $dark_ColorSidebarSpace;
+    }
+    .header-left {
+      background-color: $dark_ColorSidebarSpace;
+      #light-dark-switch {
+        border-top-color: $light_ColorBorderDeeper;
+      }
+    }
+    .header-right {
+      border-bottom-color: $light_ColorGlobalTocHighlight;
+    }
+  }
+  redoc[spec-url] .beRszf {
+    color: $dark_ColorMainText;
+    // Generic links
+    a {
+      color: $dark_ColorPrimary;
+      &:hover,
+      &:focus {
+        color: $dark_ColorPrimaryLighter;
+      }
+    }
+    p {
+      color: $dark_ColorMainText;
+    }
+    .jCgylq {
+      // Code blocks tokens
+      .token {
+        &.boolean {
+          color: $dark_ColorDanger;
+        }
+        &.number {
+          color: $dark_ColorCodeNumber;
+        }
+      }
+    }
+    // Simple table style
+    .dCnGCn table th, 
+    .dCnGCn table td {
+      border-color: $light_ColorTableBorder;
+    }
+    .dCnGCn table tr {
+      background-color: $dark_ColorReDocTableBackground;
+      &:nth-child(2n) {
+        background-color: $dark_ColorHighlightBackground;
+      }
+    }
+    // Advanced table style
+    .table {
+      // Bordered table style
+      td,
+      th {
+        color: $dark_ColorMainText;    
+      }
+      &.table-bordered {
+        th {
+          border-color: $light_ColorTableBorder;
+          background-color: $dark_ColorReDocTableHeading;
+        }
+        td {
+          border-color: $light_ColorTableBorder;
+        }
+      }
+      // Striped table style
+      &.table-striped tbody {
+        tr:nth-of-type(odd) {
+          background-color: $dark_ColorReDocTableBackground;
+        }
+        tr:nth-of-type(even) {
+          background-color: $dark_ColorHighlightBackground;
+        }
+      }
+    }
+    // AUTHORIZATIONS
+    .sc-epnACN {
+      color: $light_ColorRedocType;
+    }
+    .XrbXS {
+      color: $light_ColorRedocType;
+      border-bottom-color: $light_ColorRedocType !important;
+    }
+    // QUERY PARAMETERS and REQUEST BODY SCHEMA
+    .sc-gqjmRU.LiUBH {
+      color: $light_ColorRedocType!important;
+      border-bottom-color: $light_ColorRedocType !important;
+      > .sc-hSdWYo.hoUoen {
+        color: $dark_ColorMainText;
+      }
+    }
+    // Properties
+    .sc-chPdSV.eAybih {
+      color: $dark_ColorMainText;
+      // Porperty required
+      .sc-ksYbfQ.sc-hmzhuo.bGITIP {
+        color: $dark_ColorReDocDanger;
+      }
+    }
+    tr.last:first-of-type > .eAybih,
+    tr.last:first-of-type > .jMEzIu {
+      background-image: none;
+    }
+    // Expandable property
+    .sc-kjoXOD.jMEzIu,
+    .sc-kjoXOD.QefOL {
+      button {
+        color: $dark_ColorMainText;
+        svg polygon {
+          fill: $dark_ColorPrimary;
+        }
+      }
+    }
+    .jMEzIu {
+      border-left-color: $light_ColorPrimaryLighter;
+    }
+    // Nested expandable properties
+    .eCjbJc .sc-kpOJdX, 
+    .eCjbJc .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX, 
+    .eCjbJc .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX {
+      background: $dark_ColorSidebarSpace;
+    }
+    .eCjbJc .sc-kpOJdX .sc-kpOJdX, 
+    .eCjbJc .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX, 
+    .eCjbJc .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX {
+      background-color: $dark_ColorReDocBaseSpace;
+    }
+    // API menu toggle
+    .imibLw {
+      color: $dark_ColorPrimaryLighter;
+    }
+    // Properties connecting line 
+    // Doesn't change
+    // tr:first-of-type > .eAybih,
+    // tr:first-of-type > .jMEzIu {
+    //   background-image: linear-gradient(transparent 0%, transparent 28px, $light_ColorPrimaryLighter 28px, $light_ColorPrimaryLighter 100%);
+    // }
+    // .eAybih,
+    // .gtEarq {
+    //   border-left-color: $light_ColorPrimaryLighter;
+    // }
+    // tr.last + tr > .gtEarq {
+    //   border-left-color: transparent;
+    // }
+    // tr.last > .eAybih,
+    // tr.last > .jMEzIu {
+    //   background-image: linear-gradient($light_ColorPrimaryLighter 0%, $light_ColorPrimaryLighter 29px, transparent 29px, transparent 100%);
+    // }
+    // .bcLONg::before,
+    // .bcLONg::after {
+    //   background-color: $light_ColorPrimaryLighter;
+    // }
+    // Array of <Type>
+    .sc-TOsTZ.fKyGWc {
+      color: $light_ColorBorderDetails;
+    }
+    // Array () []
+    .sc-hMqMXs.dDdNtD,
+    .sc-kEYyzF.cMefLx {
+      color: $dark_ColorMainText;
+    }
+    // Types
+    .sc-kgAjT.hqYVjx {
+      color: $light_ColorRedocType;
+    }
+    // Default 
+    .sc-cHGsZl.lpeYvY {
+      color: $dark_ColorMainText;
+    }
+    // One of...
+    .sc-jKJlTe.eZZMfQ {
+      color: $dark_ColorMainText;
+    }
+    .sc-eNQAEJ {
+      &.jdXjUh {
+        color: $light_ColorMainText;
+        background-color: $light_ColorBaseSpace;
+        border-color: $light_ColorBaseSpace;
+      }
+      &.gYsnwL {
+        border-color: $dark_ColorPrimaryLighter;
+        color: $light_ColorMainText;
+        background-color: $dark_ColorPrimaryLighter;
+      }
+    }
+    // Parameters values and descriptions
+    // Doesn't change
+    // .kGwPhO {
+    //   border-bottom-color: $light_ColorRedocType;
+    // }
+    // .edBCth {
+    //   color: $light_ColorInputPlaceholder;
+    // }
+    // Value restrictions
+    .beUper {
+      color: $dark_ColorPrimary;
+      background-color: $dark_ColorReDocBaseSpace;
+    }
+    // Responses (central column): 200, 400, etc
+    // Doesn't change
+    // .sc-ibxdXY {
+    //   &.gxJjxJ {
+    //     background-color: rgba($light_ColorSuccessDark, .2);
+    //     strong {
+    //       color: $light_ColorSuccessDark;
+    //     }
+    //     svg polygon {
+    //       fill: $light_ColorSuccessDark;
+    //     }
+    //   }
+    //   &.dUFXgZ {
+    //     background-color: rgba($light_ColorDangerDark, .2);
+    //     strong {
+    //       color: $light_ColorDangerDark;
+    //     }
+    //     svg polygon {
+    //       fill: $light_ColorDangerDark;
+    //     }
+    //   }
+    // }
+    // Inline code value
+    .bMfIUD {
+      color: $dark_ColorMainText;
+      border-color: $dark_ColorReDocTableHeading;
+      background-color: $dark_ColorReDocTableHeading;
+    }
+    // Samples tabs (in dark background part)
+    // Doesn't change
+    // .dOwpAS {
+    //   .react-tabs__tab-list {
+    //     & > [role="tab"].react-tabs__tab--selected {
+    //       color: $light_ColorMainText;
+    //       background-color: $light_ColorBaseSpace;
+    //     }
+    //     [role="tab"] {
+    //       color: $dark_ColorMainText;
+    //       background-color: $dark_ColorCodeBlockBackground;
+    //       &.tab-success:before {
+    //         box-shadow: 0 0 3px 0 $dark_ColorSuccessDark;
+    //         background-color: $light_ColorSuccessDark;
+    //       }
+    //       &.tab-error:before {
+    //         box-shadow: 0 0 3px 0 $dark_ColorDanger;
+    //         background-color: $dark_ColorDanger;
+    //       }
+    //       &.tab-redirect:before {
+    //         box-shadow: 0 0 3px 0 $dark_ColorWarning;
+    //         background-color: $dark_ColorWarning;
+    //       }
+    //       &.tab-info:before {
+    //         box-shadow: 0 0 3px 0 $dark_ColorPrimary;
+    //         background-color: $dark_ColorPrimary;
+    //       }
+    //     }
+    //   }
+    //   // Samples tab content
+    //   & > .react-tabs__tab-panel {
+    //     background-color: $dark_ColorCodeBlockBackground;
+    //   }
+    // }
+    // Code block area container
+    // Doesn't change
+    // .sc-gisBJw.gwfZGU {
+    //   // Code block content
+    //   .jCgylq {
+    //     background-color: $dark_ColorCodeBlockBackground;
+    //     code {
+    //       background-color: $dark_ColorCodeBlockBackground;
+    //     }
+    //     a {
+    //       color: $dark_ColorPrimary;
+    //       &:hover,
+    //       &:focus {
+    //         color: $dark_ColorPrimaryLighter;
+    //       }
+    //     }
+    //     .hoverable {
+    //       color: $dark_ColorMainText;
+    //     }
+    //     // Code blocks tokens
+    //     .token {
+    //       color: $dark_ColorMainText;
+    //     }
+    //   }
+    // }
+    // Download button
+    a.sc-hEsumM.jrowNk {
+      color: $dark_ColorMainText;
+      border-color: $dark_ColorPrimary;
+      &:hover,
+      &:focus {
+        color: $light_ColorMainText;
+        background-color: $dark_ColorPrimaryLighter;
+        border-color: $dark_ColorPrimaryLighter;
+      }
+    }
+    // Left sidebar
+    .menu-content {
+      background-color: $dark_ColorSidebarSpace;
+      // Menu items text
+      .hxqNKs,
+      .iTiWpH {
+        color: $dark_ColorMainText;
+      }
+      label[role="menuitem"] {
+        &:hover {
+          color: $dark_ColorPrimaryLighter;
+          background-color: $dark_ColorSidebarSpace;
+        }
+        // Menu items text
+        .hxqNKs,
+        .iTiWpH,
+        .dttBLN,
+        &.idRuNa {
+          color: $dark_ColorMainText;
+          &:hover {
+            color: $dark_ColorPrimary;
+          }
+        }
+        svg polygon {
+          fill: $dark_ColorPrimary;
+        }
+        &.active {
+          color: $dark_ColorPrimary;
+          background-color: $dark_ColorBaseSpace;
+        }
+      }
+    }
+    // Search box
+    .cziLoD {
+      input {
+        color: $light_ColorFocusShade;
+        border-bottom-color: $light_ColorBorderDeeper;
+        background-image: url('#{$icoPath}svg-icons.svg#search-dt');
+      }
+      ::placeholder {
+        color: $light_ColorFocusShade;
+      }
+    }
+    // Central and right conten columns
+    .api-content {
+      h1,
+      h2,
+      h3,
+      h4 {
+        color: $dark_ColorMainText;
+      }
+    }
+    .celZWI {
+      // Endpoint dropdown
+      .hvYMHo,
+      .fKwhsn {
+        background-color: $dark_ColorHighlightBackground;
+        .hmRbVC {
+          background-color: $dark_ColorCodeBlockBackground;
+          color: $dark_ColorMainText;
+          & > span {
+            color: $dark_ColorMainText;
+          }
+        }
+      }
+    }
+  }
+}

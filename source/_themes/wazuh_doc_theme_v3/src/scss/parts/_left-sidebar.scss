@@ -1,0 +1,123 @@
+/* -----------------------------------------------------------------------------
+  PART: LEFT SIDEBAR
+
+  Style for the left sidebar, which contains the global TOC.
+----------------------------------------------------------------------------- */
+
+@import "../components/search-box";
+@import "../components/global-toc";
+
+#left-sidebar {
+  position: fixed;
+  top: $headerHeightXs;
+  flex-shrink: 0;
+  flex-grow: 0;
+  
+  @include media-max(xl) {
+    z-index: 110;
+    height: 0;
+  }
+
+  @include media-min(xl) {
+    top: $headerHeightXl;
+    display: block;
+  }
+
+  @include media-only(xl, xxl) {
+    flex-basis: $leftSidebarWidthNarrow;
+    width: $leftSidebarWidthNarrow;
+  }
+  @include media-min(xxl) {
+    flex-basis: $leftSidebarWidth;
+    width: $leftSidebarWidth;
+  }
+
+  .sidebar-container {
+    @include media-max(xl) {
+      height: calc(100vh - #{$headerHeightXs});
+      position: fixed;
+      top: $headerHeightXs;
+      left: 0;
+      width: 100%;
+      bottom: 0;
+      pointer-events: none;
+    }
+    @include media-min(xl) {
+      padding: 30px 0;
+      top: $headerHeightXl;
+      height: calc(100vh - #{$headerHeightXl});
+    }
+    @include media-only(xl, xxl) {
+      width: $leftSidebarWidthNarrow;
+    }
+    @include media-min(xxl) {
+      width: $leftSidebarWidth;
+    }
+
+    & > nav {
+      padding-top: 10px;
+    }
+
+    #search-box-wrapper {
+      padding-top: 20px;
+      padding-left: 15px;
+      padding-right: 15px;
+      padding-bottom: 15px;
+      @include media-max(xl) {
+        position: fixed;
+        z-index: 10;
+        width: 100%;
+        pointer-events: all;
+      }
+      @include media-min(xl) {
+        padding-top: 0px;
+      }
+
+      &.collapse:not(.show) {
+        @include media-min(xl) {
+          display: block;
+        }
+      }
+
+      &.show + #global-toc,
+      &.collapsing + #global-toc {
+        @include media-max(xl) {
+          padding-top: 90px;
+          transition: padding-top .3s;
+        }
+      }
+    }
+  }
+}
+
+/* Light theme -------------------------------------------------------------- */
+
+body {
+  #left-sidebar {
+    .sidebar-container {
+      @include media-min(xl) {
+        background-color: $light_ColorSidebarSpace;
+      }
+    }
+    #global-toc,
+    #search-box-wrapper {
+      background-color: $light_ColorSidebarSpace;
+    }
+  }
+}
+
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme {
+  #left-sidebar {
+    .sidebar-container {
+      @include media-min(xl) {
+        background-color: $dark_ColorSidebarSpace;
+      }
+    }
+    #global-toc,
+    #search-box-wrapper {
+      background-color: $dark_ColorSidebarSpace;
+    }
+  }
+}

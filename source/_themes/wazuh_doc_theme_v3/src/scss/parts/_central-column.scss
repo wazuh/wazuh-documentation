@@ -1,0 +1,109 @@
+/* -----------------------------------------------------------------------------
+  PART: CENTRAL COLUMN
+
+  Style for the central column containing the element main in all documents.
+----------------------------------------------------------------------------- */
+
+/* Fixes the anchor */
+.section {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+
+  &::before {
+    content: '';
+    display: block;
+    position: relative;
+    width: 0;
+    height: 1rem;
+    margin-top: -1rem;
+  }
+}
+
+#central-column * {
+  @include media-max(sm){
+    scroll-margin-top: calc(#{$headerHeightXs} + #{$secondaryMobileBar});
+  }
+  @include media-only(sm, xl){
+    scroll-margin-top: calc(#{$headerHeightXs} + #{$secondaryMobileBar} + #{$breadcrumbsHeightXs});
+  }
+  @include media-min(xl){
+    scroll-margin-top: calc(#{$headerHeightXl} + #{$breadcrumbsHeightXl});
+  }
+}
+
+#central-column {
+  width: 100%;
+  @include media-only(xl, xxl) {
+    padding-left: $leftSidebarWidthNarrow;
+    padding-right: $rightSidebarWidthNarrow;
+  }
+  @include media-min(xxl) {
+    padding-left: $leftSidebarWidth;
+    padding-right: $rightSidebarWidth;
+  }
+}
+
+[role="main"] {
+  .no-margins {
+    margin: 0;
+  }
+
+  strong {
+    font-weight: 600;
+  }
+
+  code {
+    display: inline-block;
+    padding: 1px 2px;
+    font-family: "Fira Mono", monospace;
+  }
+
+  .arabic {
+    list-style-type: decimal;
+  }
+  .loweralpha {
+    list-style-type: lower-alpha;
+  }
+  .lowerroman {
+    list-style-type: lower-roman;
+  }
+  .upperalpha {
+    list-style-type: upper-alpha;
+  }
+  .upperroman {
+    list-style-type: upper-roman;
+  }
+
+  caption {
+    padding: 8px;
+    border: 1px solid;
+    border-top: none;
+    border-radius: 0 0 $roundedCorners $roundedCorners;
+  }
+}
+
+/* Light theme -------------------------------------------------------------- */
+
+body {
+  [role="main"] {    
+    caption {
+      border-color:  $light_ColorTableBorder;
+    }
+    .caption-text {
+      color: $light_ColorShadedText;
+    }
+  }
+}
+
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme {
+  [role="main"] {
+    caption {
+      border-color:  $dark_ColorTableBorder;
+    }
+    .caption-text {
+      color: $dark_ColorShadedText;
+    }
+  }
+}
