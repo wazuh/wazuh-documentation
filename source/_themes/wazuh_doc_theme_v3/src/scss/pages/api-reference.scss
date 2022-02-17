@@ -89,7 +89,7 @@ header {
       padding: 10px 40px;
       width: 100%;
     }
-    
+
     .navbar-brand {
       justify-content: flex-start;
       @media screen and (min-width: 50rem){
@@ -163,18 +163,18 @@ header {
   top: 0;
   z-index: 10;
   right: 0;
-  
+
   .no-latest-notice {
     padding: 0 40px;
     margin-left: $leftRedocSidebarWidth;
-    
+
     .no-latest-title {
       display: inline-block;
       position: relative;
       font-weight: 600;
       padding: 4px 10px 4px 38px;
       line-height: 32px;
-      
+
       &::after {
         vertical-align: middle;
         content: '';
@@ -187,7 +187,7 @@ header {
         background: url('#{$icoPath}svg-icons.svg#circle-exclamation-orange');
       }
     }
-    
+
     .no-latest-text-wrapper {
       display: inline-block;
       padding: 0 0.5em 0 0;
@@ -203,20 +203,20 @@ redoc[spec-url] .beRszf {
   font-size: 16px;
   line-height: 32px;
   letter-spacing: .03em;
-  
+
   // Responosive tables
   .eCjbJc {
     overflow-x: auto;
     display: block;
   }
-  
+
   // Right column dark background only
   .cObJOV {
     top: calc(-60px - #{$redocHeaderHeight});
     width: calc((100% - #{$leftRedocSidebarWidth}) * .4);
     background-color: $dark_ColorBaseSpace;
   }
-  
+
   // API menu toggle
   .sc-bMVAic.llQIcF {
     top: 6px;
@@ -254,7 +254,7 @@ redoc[spec-url] .beRszf {
     padding: 6px 20px;
     border: 2px solid;
   }
-  
+
   // Font inside the tables
   .xNubs {
     font-family: Manrope,sans-serif;
@@ -284,7 +284,7 @@ redoc[spec-url] .beRszf {
       font-size: 16px !important;
     }
   }
-  
+
   // QUERY PARAMETERS and REQUEST BODY SCHEMA
   .sc-gqjmRU.LiUBH {
     font-size: 16px !important;
@@ -317,7 +317,7 @@ redoc[spec-url] .beRszf {
       }
     }
   }
-  
+
   // Content blocks
   .sc-jWBwVP.sc-iRbamj.dCnGCn {
     line-height: 32px;
@@ -328,7 +328,7 @@ redoc[spec-url] .beRszf {
       line-height: 32px;
     }
   }
-  
+
   // Inline code value
  .bMfIUD {
    border: 1px solid;
@@ -339,7 +339,7 @@ redoc[spec-url] .beRszf {
   .beUper {
     border: none;
   }
-  
+
   // Properties and property required
   .sc-chPdSV.eAybih {
     font-family: Manrope, sans-serif;
@@ -364,7 +364,7 @@ redoc[spec-url] .beRszf {
       line-height: 32px;
     }
   }
-  
+
   // Array of <Type>
   .sc-TOsTZ.fKyGWc {
     font-size: 15px;
@@ -375,17 +375,17 @@ redoc[spec-url] .beRszf {
     font-family: Manrope, sans-serif;
     font-size: 15px;
   }
-  
+
   // Types
    .sc-kgAjT.hqYVjx {
      font-size: 15px;
   }
-  
+
   // Default 
   .sc-cHGsZl.lpeYvY {
     font-size: 15px;
   }
-  
+
   // One of...
   .sc-jKJlTe.eZZMfQ {
     font-family: Manrope, sans-serif;
@@ -439,7 +439,7 @@ redoc[spec-url] .beRszf {
   // Samples endpoint boxes (in dark background part)
   .gLTsd {
     background-color: $dark_ColorCodeBlockBackground;
-    
+
     // Endpoint string
     .sc-hwwEjo {
       font-family: Manrope, sans-serif;
@@ -461,7 +461,7 @@ redoc[spec-url] .beRszf {
       }
     }
   }
-  
+
   // Code block buttons
   .gsaTRZ > button {
     font-family: Manrope, sans-serif;
@@ -508,7 +508,7 @@ redoc[spec-url] .beRszf {
       }
     }
   }
-  
+
   // Search box
   .cziLoD {
     padding: 30px 0px 5px;
@@ -563,28 +563,28 @@ redoc[spec-url] .beRszf {
       font-size: 22px;
       line-height: 36px;
     }
-    
+
     // Central column
     .TPAYK {
       // License
       .sc-kafWEX.egTZxS {
         margin-bottom: 1rem;
-      }     
-      
+      }
+
     }
     
     // Right column (always dark)
     .celZWI {
       background-color: $dark_ColorBaseSpace;
       color: $dark_ColorMainText;
-      
+
       h3 {
         font-size: 16px;
         color: $dark_ColorMainText;
         text-transform: uppercase;
         font-weight: 500;
       }
-      
+
       .http-verb {
         font-family: Manrope, sans-serif;
         font-size: 16px;
@@ -608,7 +608,7 @@ redoc[spec-url] .beRszf {
       }
     }
   }
-  
+
   // Remove the horizontal line between sections
   .ddXLZs:not(:last-of-type)::after {
     content: none;
@@ -1001,7 +1001,7 @@ body {
         color: $light_ColorMainTextExtra;
       }
     }
-        
+
   }
 }
 

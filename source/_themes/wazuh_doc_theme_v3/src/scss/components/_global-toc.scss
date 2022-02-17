@@ -16,17 +16,17 @@
     max-height: calc(100vh - 70px);
     overflow-y: auto;
   }
-  
+
   &.collapse:not(.show) {
     @include media-min(xl) {
       display: block;
     }
   }
-  
+
   ul {
     padding: 0;
     list-style: none;
-    
+
     a {
       padding-right: 60px;
       @include media-only(xl, xxl) {
@@ -36,7 +36,7 @@
 
     .current-toc-node {
       &:hover {
-        
+
         .toc-toggle-btn {
           display: block;
         }

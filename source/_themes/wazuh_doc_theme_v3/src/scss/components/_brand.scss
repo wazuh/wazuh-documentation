@@ -24,7 +24,7 @@
   img {
     width: auto;
     height: 28px;
-    
+
     @include media-max(sm){
       height: 24px;
     }

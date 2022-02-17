@@ -24,7 +24,7 @@
     flex-grow: 0;
     height: calc(100vh - #{$headerHeightXl} - #{$footerHeight});
   }
-  
+
   @include media-only(xl, xxl) {
     flex-basis: $rightSidebarWidthNarrow;
     width: $rightSidebarWidthNarrow;
@@ -49,7 +49,7 @@
     .edit-repo {
       width: 100%;
       height: 40px;
-      padding: 8px  0;
+      padding: 8px 8px 8px 4px;
       border-top: 1px solid $light_ColorBorderDetails;
 
       a {

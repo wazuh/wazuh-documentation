@@ -18,13 +18,13 @@
     left: $leftSidebarWidth;
     right: $rightSidebarWidth;
   }
-  
+
   .no-latest-notice {
     margin: .6em 0;
     padding: 0 20px 1px;
     display: inline-block;
     border-left: 5px solid;
-    
+
     .no-latest-title {
       display: inline-block;
       position: relative;
@@ -32,7 +32,7 @@
       padding: 4px 15px 4px 0;
       line-height: 32px;
     }
-  
+
     .no-latest-text-wrapper {
       padding: 4px 15px 4px 0;
       line-height: 32px;
@@ -41,20 +41,18 @@
 }
 
 .no-latest-docs {
-  
   &.document {
-    
     #central-column {
       padding-top: calc(#{$breadcrumbsHeightXl} + #{$noLatestNoticeHeightXl});
       * {
         scroll-margin-top: calc(#{$headerHeightXl} + #{$breadcrumbsHeightXl} + #{$noLatestNoticeHeightXl});
       }
     }
-    
+
     [role="main"] {
       min-height: calc(100vh - #{$headerHeightXl} - #{$breadcrumbsHeightXl} - #{$footerHeight} - #{$noLatestNoticeHeightXl});
     }
-    
+
     .no-latest-notice-wrapper {
       top: calc(#{$headerHeightXl} + #{$breadcrumbsHeightXl});
     }

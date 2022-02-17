@@ -29,7 +29,7 @@
     display: inline-block;
     width: 100%;
   }
-  
+
   &.section {
     margin-top: 0;
     &::before {
@@ -45,7 +45,7 @@
 
 body {
   #central-column .step-card {
-    background-color: $light_ColorSidebarSpace;
+    background-color: $light_ColorStepCardBackground;
     h1,
     h2,
     h3,
@@ -68,7 +68,7 @@ body {
 
 .dark-theme {
   #central-column .step-card {
-    background-color: $dark_ColorSidebarSpace;
+    background-color: $dark_ColorStepCardkBackground;
     h1,
     h2,
     h3,
