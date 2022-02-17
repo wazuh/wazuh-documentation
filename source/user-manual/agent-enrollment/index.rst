@@ -16,7 +16,7 @@ Agent enrollment is the process of registering Wazuh agents as authorized member
 
 - Validation of the identity of the agents communicating with the manager.
 
-Please note that, when following our:doc:`Installation guide <../installation-guide/index>`, it is recommended to use environment variables to automatically configure the Wazuh agent. This allows the agent to enroll and connect to the Wazuh manager. This documentation provides additional information on the different enrollment options.
+Please note that, when following our :doc:`Installation guide </installation-guide/index>`, it is recommended to use environment variables to automatically configure the Wazuh agent. This allows the agent to enroll and connect to the Wazuh manager. This documentation provides additional information on the different enrollment options.
 
 
 Enrollment methods
@@ -24,9 +24,9 @@ Enrollment methods
 
 There are two options for enrolling agents to the Wazuh manager.      
 
-#.:doc:`Enrollment via agent configuration <../user-manual/agent-enrollment/via-agent-configuration/index>`: Once the IP address of the manager has been set, the agent will be able to automatically request the key and import it. This is the recommended enrollment method.
+#. :doc:`Enrollment via agent configuration <via-agent-configuration/index>`: Once the IP address of the manager has been set, the agent will be able to automatically request the key and import it. This is the recommended enrollment method.
 
-#.:doc:`Enrollment via manager API <../user-manual/agent-enrollment/via-manager-API/index>`: The user requests for the key from the manager API, and then manually imports it to the agent.
+#. :doc:`Enrollment via manager API <via-manager-API/index>`: The user requests for the key from the manager API, and then manually imports it to the agent.
 
 
 Requirements
