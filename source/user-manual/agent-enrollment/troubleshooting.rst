@@ -39,7 +39,7 @@ The following default ports on the manager should be opened:
             
     If there is connectivity, the output should be a connection success message:
 
-    .. code-block:: json
+    .. code-block:: xml
       :class: output
 
         Connection to <MANAGER_IP> port 1514 [tcp] succeeded!
@@ -56,7 +56,7 @@ The following default ports on the manager should be opened:
 
     If there is connectivity, there is no output, otherwise, an error is shown:
 
-    .. code-block:: json
+    .. code-block:: xml
       :class: output
 
       A connection attempt failed because the connected party did not properly respond after a period of time (...)
@@ -69,7 +69,7 @@ Authentication error
 
 **Error log:**
 
-.. code-block:: json
+.. code-block:: xml
     :class: output
 
     2022/02/03 10:07:32 wazuh-remoted: WARNING: (1404): Authentication error. Wrong key or corrupt payload. Message received from agent '001' at 'any'.
@@ -86,7 +86,7 @@ Invalid agent name for enrollment
 
 **Error log:**
 
-.. code-block:: json
+.. code-block:: xml
     :class: output
 
     2022/01/26 08:59:10 wazuh-agentd: INFO: Using agent name as: localhost.localdomain
@@ -117,7 +117,7 @@ Unable to read CA certificate file
 
 **Error log:**
 
-.. code-block:: json
+.. code-block:: xml
     :class: output
 
     2022/01/26 08:25:01 wazuh-authd: ERROR: Unable to read CA certificate file "/var/ossec/etc/rootCA.pem"
@@ -132,7 +132,7 @@ Ensure the certificate authority file is in the location specified in the ``<ssl
 
 **Error log:**
 
-.. code-block:: json
+.. code-block:: xml
     :class: output
 
     2022/01/26 08:25:01 wazuh-authd: ERROR: Unable to read CA certificate file "/var/ossec/etc/rootCA.pem"
@@ -151,7 +151,7 @@ Unable to read private key file
 
 **Error log:**
 
-.. code-block:: json
+.. code-block:: xml
     :class: output
 
     2022/01/26 08:57:18 wazuh-agentd: ERROR: Unable to read private key file: /var/ossec/etc/sslagent.key
@@ -171,7 +171,7 @@ Unable to read certificate file
 
 **Error log:**
 
-.. code-block:: json
+.. code-block:: xml
     :class: output
 
     2022/01/26 08:54:55 wazuh-agentd: ERROR: Unable to read certificate file (not found): /var/ossec/etc/sslagent.cert
@@ -191,7 +191,7 @@ Invalid password
 
 **Error log:**
 
-.. code-block:: json
+.. code-block:: xml
     :class: output
 
     2022/01/26 12:28:10 wazuh-agentd: INFO: Requesting a key from server: X.X.X.X
