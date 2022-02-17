@@ -42,28 +42,28 @@ Indicate your deployment configuration, create the SSL certificates to encrypt c
 
          nodes:
            # Wazuh indexer nodes
-           wazuh_indexer:
-             name: <wazuh-indexer-node-name>
-             ip: <wazuh-indexer-node-ip>
-             # name: <wazuh-indexer-node-name>
-             # ip: <wazuh-indexer-node-ip>
+           indexer:
+             name: node-1
+             ip: <indexer-node-ip>
+             # name: node-2
+             # ip: <indexer-node-ip>
+             # name: node-3
+             # ip: <indexer-node-ip>
          
            # Wazuh server nodes
            # Use node_type only with more than one Wazuh manager
-           wazuh_servers:
-             name: <wazuh-server-node-name>
-             ip: <wazuh-server-node-ip>
+           server:
+             name: wazuh-1
+             ip: <wazuh-manager-ip>
              # node_type: master
-             # name: <wazuh-server-node-name>
-             # ip: <wazuh-server-node-ip>
+             # name: wazuh-2
+             # ip: <wazuh-manager-ip>
              # node_type: worker
          
            # Wazuh dashboard node
-           wazuh_dashboard:
-             name: <wazuh-dashboard-node-name>
-             ip: <wazuh-dashboard-node-ip>
-
-
+           dashboard:
+             name: dashboard
+             ip: <dashboard-node-ip>
 
 #. Run the script with the option ``-c`` to generate the SSL certificates. 
 

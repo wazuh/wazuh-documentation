@@ -13,28 +13,30 @@
 
          nodes:
            # Wazuh indexer nodes
-           wazuh_indexer:
-             name: <wazuh-indexer-node-name>
-             ip: <wazuh-indexer-node-ip>
-             # name: <wazuh-indexer-node-name>
-             # ip: <wazuh-indexer-node-ip>
+           indexer:
+             name: node-1
+             ip: <indexer-node-ip>
+             # name: node-2
+             # ip: <indexer-node-ip>
+             # name: node-3
+             # ip: <indexer-node-ip>
          
            # Wazuh server nodes
            # Use node_type only with more than one Wazuh manager
-           wazuh_servers:
-             name: <wazuh-server-node-name>
-             ip: <wazuh-server-node-ip>
+           server:
+             name: wazuh-1
+             ip: <wazuh-manager-ip>
              # node_type: master
-             # name: <wazuh-server-node-name>
-             # ip: <wazuh-server-node-ip>
+             # name: wazuh-2
+             # ip: <wazuh-manager-ip>
              # node_type: worker
          
            # Wazuh dashboard node
-           wazuh_dashboard:
-             name: <wazuh-dashboard-node-name>
-             ip: <wazuh-dashboard-node-ip>
-  
-   To learn more about how to create and configure the certificates, see the :doc:`/user-manual/certificates` section.
+           dashboard:
+             name: dashboard
+             ip: <dashboard-node-ip>
+           
+      To learn more about how to create and configure the certificates, see the :doc:`/user-manual/certificates` section.
 
 #. Run the ``./wazuh-cert-tool.sh`` to create the certificates. For a multi-node cluster, these certificates need to be later deployed to all Wazuh instances in your cluster.
 
