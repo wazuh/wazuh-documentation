@@ -18,6 +18,7 @@ syscheck
 
 Configuration options for file integrity monitoring:
 
+- `alert_new_files`_
 - `allow_remote_prefilter_cmd`_
 - `database`_
 - `directories`_
@@ -41,6 +42,27 @@ Configuration options for file integrity monitoring:
 - `windows_audit_interval`_
 - `windows_registry`_
 - `diff`_
+
+.. _reference_ossec_syscheck_alert_new_files:
+
+alert_new_files
+---------------
+
+Specifies if FIM should alert when new files are created.
+
++--------------------+----------+
+| **Default value**  | yes      |
++--------------------+----------+
+| **Allowed values** | yes, no  |
++--------------------+----------+
+
+Example:
+
+.. code-block:: xml
+ <alert_new_files>yes</alert_new_files>
+.. note::
+
+	This setting only applies in managers.
 
 .. _reference_ossec_syscheck_allow_remote_prefilter_cmd:
 

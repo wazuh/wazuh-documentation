@@ -122,7 +122,7 @@ It sets a delay between real-time alerts in milliseconds. The value has to be de
 Configuring reporting new files
 -------------------------------
 
-To report new files added to the system, syscheck can be configured with the `alert_new_files` option. By default, this feature is enabled on the monitored Wazuh agent, but the option is not present in the syscheck section of the configuration:
+To report new files added to the system, syscheck can be configured with the :ref:`alert_new_files <reference_ossec_syscheck_alert_new_files>` option. By default, this feature is enabled on the monitored Wazuh agent, but the option is not present in the syscheck section of the configuration:
 
 .. code-block:: xml
 
