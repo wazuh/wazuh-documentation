@@ -2,7 +2,7 @@
 
 .. code-block:: console
 
-  # NODE_NAME=<server-node-certificate-name>
+  # NODE_NAME=<server-node-name>
 
 .. code-block:: console
   

@@ -25,7 +25,7 @@ Adding the Wazuh repository
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
   .. note::
-    If you are installing Wazuh server on the same host as the Wazuh indexer, you may skip this step as you may have added the Wazuh repository already.
+    If you are installing Wazuh server on the same host as the Wazuh indexer, you may skip these steps as you may have added the Wazuh repository already.
 
   ..
     Add the Wazuh repository to download the official Wazuh packages. As an alternative, you can download the Wazuh packages directly from :doc:`../packages-list`.
@@ -36,14 +36,15 @@ Adding the Wazuh repository
     .. group-tab:: Yum
 
 
-      .. include:: /_templates/installations/wazuh/yum/add_repository.rst
+      .. include:: /_templates/installations/common/yum/add-repository.rst
 
 
 
     .. group-tab:: APT
 
 
-      .. include:: /_templates/installations/wazuh/deb/add_repository.rst
+      .. include:: /_templates/installations/common/deb/add-repository.rst
+
 
 
 
@@ -111,7 +112,7 @@ Configuring Filebeat
 
       .. code-block:: console
 
-        # curl -so /etc/filebeat/filebeat.yml https://packages.wazuh.com/resources/|WAZUH_LATEST_MINOR|/open-distro/filebeat/7.x/filebeat_indexer_cluster.yml
+        # curl -so /etc/filebeat/filebeat.yml https://packages-dev.wazuh.com/resources/4.3/config/filebeat/filebeat.yml
         
         
   #. Edit the file ``/etc/filebeat/filebeat.yml``.
@@ -136,7 +137,7 @@ Deploying certificates
   .. note::
     Make sure that a copy of ``certs.tar``, created during the Wazuh indexer installation, is placed in your working directory.
 
-  #. Replace ``<server-node-certificate-name>`` with your Wazuh server node certificate name, the same used in ``instances.yml`` when creating the certificates. Then, move the certificates to their corresponding location.
+  #. Replace ``<server-node-name>`` with your Wazuh server node certificate name, the same used in ``config.yml`` when creating the certificates. Then, move the certificates to their corresponding location.
 
       .. include:: /_templates/installations/filebeat/opensearch/copy_certificates_filebeat_wazuh_cluster.rst
 
