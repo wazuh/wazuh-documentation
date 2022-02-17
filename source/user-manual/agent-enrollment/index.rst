@@ -50,7 +50,7 @@ The following has to be in place to ensure the Wazuh agent enrollment is done:
 Troubleshooting
 ---------------
 
-Refer to the :ref:`Troubleshooting <troubleshooting>` section for details on how to test the connectivity between the agent and the manager. 
+Refer to the :doc:`Troubleshooting <../agent-enrollment/troubleshooting>` section for details on how to test the connectivity between the agent and the manager. 
 
 
 .. toctree::
