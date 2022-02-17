@@ -22,7 +22,7 @@
     top: $headerHeightXl;
     display: block;
   }
-  
+
   @include media-only(xl, xxl) {
     flex-basis: $leftSidebarWidthNarrow;
     width: $leftSidebarWidthNarrow;
@@ -72,13 +72,13 @@
       @include media-min(xl) {
         padding-top: 0px;
       }
-      
+
       &.collapse:not(.show) {
         @include media-min(xl) {
           display: block;
         }
       }
-      
+
       &.show + #global-toc,
       &.collapsing + #global-toc {
         @include media-max(xl) {

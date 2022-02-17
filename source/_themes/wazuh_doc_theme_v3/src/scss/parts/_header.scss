@@ -14,7 +14,7 @@ header {
     box-shadow: 0 4px 12px 0 rgba(#000, .1);
     height: $headerHeightXl;
   }
-  
+
   &.fixed-top {
     @include media-max(xl){
       z-index: 100;
@@ -27,7 +27,7 @@ header {
       height: $headerHeightXl;
     }
   }
-  
+
   .mobile-primary-header {
     width: 100%;
     display: flex;
@@ -43,7 +43,7 @@ header {
     display: flex;
     align-items: center;
   }
-  
+
   .navbar-toggler {
     padding: .4rem;
     .navbar-toggler-icon,
@@ -96,7 +96,7 @@ header {
       }
     }
   }
-  
+
   .search-toggler {
     margin-right: 3px;
     .search-toggler-icon {

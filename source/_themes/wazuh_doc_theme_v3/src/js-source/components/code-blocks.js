@@ -13,15 +13,24 @@ if ( $('.document').length > 0 ) {
   $('[class*="highlight-"].output').each(function() {
     $(this).addClass('collapsible').attr('aria-expanded', 'false');
     $(this).prepend(outputTitleElement.cloneNode(true));
+    if ( !$(this).hasClass('collapsed') ) {
+      $(this).addClass('expanded').attr('aria-expanded', 'true');
+    }
   });
 
   /* Toggle collapse code-block, currently only for output code-blocks ----- */
   $('[class*="highlight-"].output.collapsible .output-title').on('click', function(e) {
     const codeBlock = $(e.target).closest('[class*="highlight-"]');
-    if ( codeBlock.hasClass('collapsed') ) {
+    if ( codeBlock.attr('aria-expanded') === 'false' ) {
       codeBlock.removeClass('collapsed').attr('aria-expanded', 'true');
+      setTimeout(function() {
+        codeBlock.addClass('expanded');
+      }, 300);
     } else {
-      codeBlock.addClass('collapsed').attr('aria-expanded', 'false');
+      codeBlock.removeClass('expanded').attr('aria-expanded', 'false');
+      setTimeout(function() {
+        codeBlock.addClass('collapsed');
+      }, 300);
     }
   });
 

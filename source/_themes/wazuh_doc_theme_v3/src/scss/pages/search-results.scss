@@ -28,18 +28,18 @@ h1 {
   .search-summary {
     font-weight: 500;
   }
-  
+
   #toggle-results {
     text-decoration: none;
     &:focus {
       font-weight: 500;
     }
   }
-  
+
   .search {
     padding-left: 0;
     list-style: none;
-    
+
     .breadcrumbs {
       padding: 10px 0 5px;
     }
@@ -49,11 +49,11 @@ h1 {
         text-decoration: none;
       }
     }
-    
+
     li {
       padding: 20px 0 30px;
     }
-    
+
     .result-link {
       font-size: 22px;
       text-decoration: none;
@@ -67,7 +67,7 @@ h1 {
         display: inline-block;
       }
     }
-    
+
     .hidden-result {
       display: none;
     }

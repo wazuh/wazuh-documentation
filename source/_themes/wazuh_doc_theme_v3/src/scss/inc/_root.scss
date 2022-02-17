@@ -121,6 +121,7 @@ main {
     font-family: Manrope, sans-serif;
     font-style: normal;
     letter-spacing: 0.03em;
+    line-height: 32px;
   }
 
   table {
@@ -145,7 +146,8 @@ a:active {
   font-weight: 600;
 }
 
-th p {
+th p,
+th .line {
   margin: 0;
   font-weight: inherit;
   font-weight: 500;
