@@ -1,5 +1,8 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+  :description: Amazon VPC is a service that allows user to launch AWS resources in a logically isolated section of the AWS Cloud. Learn how to configure and monitor its changes with Wazuh.
+
 .. _amazon_vpc:
 
 Amazon VPC
