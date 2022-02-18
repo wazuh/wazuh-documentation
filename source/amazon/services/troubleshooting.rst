@@ -6,7 +6,7 @@ Troubleshooting
 ===============
 
 .. meta::
-  :description: Frequently asked questions about the Wazuh module for Amazon.
+  :description: Learn more about how to fix the most frequent issues when using the Wazuh AWS integration.
 
 The below information is intended to assist in troubleshooting issues.
 
