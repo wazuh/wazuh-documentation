@@ -57,16 +57,17 @@ header {
 
     @include media-max(xl) {
       border: none;
-      padding: 0;
+      padding: 10px 0;
       max-height: calc(100vh - 70px - 56px);
+      min-width: 185px;
       overflow-y: auto;
-      left: -10px!important;
+      left: -5px!important;
     }
 
     > li > a {
       display: inline-block;
       width: 100%;
-      padding: .16rem .75rem;
+      padding: .4rem .75rem;
       text-decoration: none;
 
       &:hover,

@@ -50,8 +50,8 @@
 @mixin local-toc-nested-padding($min, $max, $delta, $default) {
   $elements: '& > ul > li > ul > li';
   @for $level from $min through $max {
-    #{$elements} > a {
-      padding-left: $delta * $level + $default;
+    #{$elements} {
+      padding-left: $delta;
     }
     $elements: $elements + ' > ul > li';
   }

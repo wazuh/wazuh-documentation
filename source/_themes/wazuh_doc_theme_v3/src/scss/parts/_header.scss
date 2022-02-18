@@ -116,8 +116,8 @@ body {
       &[aria-expanded="false"] .navbar-toggler-icon,
       .navbar-toggler-icon::before,
       .navbar-toggler-icon::after {
-        background-color: $light_ColorPrimaryLighter;
-        border-color: $light_ColorPrimaryLighter;
+        background-color: $light_ColorPrimary;
+        border-color: $light_ColorPrimary;
       }
     }
     .mobile-secondary-header {

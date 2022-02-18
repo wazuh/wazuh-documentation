@@ -11,10 +11,10 @@
   position: fixed;
   right: 0;
   @include media-max(xl) {
-    z-index: 100;
-    height: $secondaryMobileBar;
     top: $headerHeightXs;
+    z-index: 100;
     display: flex;
+    height: $secondaryMobileBar;
     align-items: center;
     padding-right: 15px;
   }
@@ -36,14 +36,14 @@
 
   .sidebar-container {
     @include media-min(xl) {
-      right: 0;
       position: fixed;
       top: $headerHeightXl;
+      bottom: $footerHeight;
+      right: 0;
       padding: 30px 16px;
       margin-left: auto;
-      overflow: hidden;
-      bottom: $footerHeight;
       width: calc((#{$leftSidebarWidth} / 2) + 30px);
+      overflow: hidden;
     }
 
     .edit-repo {

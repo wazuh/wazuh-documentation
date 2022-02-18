@@ -56,11 +56,15 @@ main {
     padding: 0;
     border: none;
   }
+  
+  [class*="highlight-"] {
+    margin-top: 0;
+  }
 }
 
 [class*="highlight-"] {
   max-width: 100%;
-  max-height: 100vh;
+  margin-top: 1rem;
   margin-bottom: 1rem;
   position: relative;
   transition: max-height .2s;
@@ -69,6 +73,7 @@ main {
 
   &.output {
     border-radius: $roundedCorners;
+    max-height: 100vh;
 
     .output-title {
       height: 40px;
@@ -113,6 +118,7 @@ main {
   .highlighttable {
     table-layout:fixed;
     width: 100%;
+    margin-top: 0;
     margin-bottom: 0;
 
     .highlight {
@@ -246,7 +252,7 @@ main {
 body {
   .literal-block-wrapper.docutils.container {
     .code-block-caption {
-      background-color: $light_ColorSidebarSpace;
+      background-color: $light_ColorOutputTitleBackground;
       .headerlink {
         &::after {
           color: $light_ColorShadedText;

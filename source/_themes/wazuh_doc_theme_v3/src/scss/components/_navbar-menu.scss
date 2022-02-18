@@ -8,13 +8,13 @@
 .navbar-nav {
   .nav-link {
     padding: 0 10px;
-    font-size: 18px;
+    font-size: 17px;
     &:hover,
     &:focus {
       text-decoration: none;
     }
     &:active {
-      font-weight: 500;
+      font-weight: 400;
     }
     &.dropdown-toggle {
       padding-right: 27px;
@@ -35,7 +35,7 @@
         background-position: center;
         position: absolute;
         right: 8px;
-        bottom: .7rem;
+        bottom: .5rem;
         border: none;
         transition: transform ease-in .1s;
       }
@@ -45,7 +45,7 @@
     min-width: 100%;
     padding: 15px;
     margin-top: 20px;
-    border: 0;
+    border: 1px solid;
     border-radius: 10px;
     &::before {
       position: absolute;
@@ -55,9 +55,12 @@
       content: "";
       clip-path: inset(-15px 0 0 -15px);
       transform: rotate(45deg);
+      border-left: 1px solid;
+      border-top: 1px solid;
     }
     .dropdown-item {
-      padding: .25rem .75rem;
+      font-size: 17px;
+      padding: .9rem .75rem;
     }
   }
 }
@@ -87,10 +90,10 @@ body {
     }
     .dropdown-menu {
       background-color: $light_ColorBaseSpace;
-      box-shadow: 0 -2px 8px rgba($light_ColorShadow, .2);
+      border-color: $light_ColorPrimaryLighter;
       &::before {
         background-color: $light_ColorBaseSpace;
-        box-shadow: 0 -2px 8px rgba($light_ColorShadow, .2);
+        border-color: $light_ColorPrimaryLighter;
       }
       .dropdown-item {
         color: $light_ColorMainText;
@@ -128,10 +131,10 @@ body {
       }
       .dropdown-menu {
         background-color: $dark_ColorIndexHeaderBackground;
-        box-shadow: 0 -2px 8px rgba($dark_ColorShadow, .35);
+        border-color: $dark_ColorPrimaryLighter;
         &::before {
           background-color: $dark_ColorIndexHeaderBackground;
-          box-shadow: 0 -2px 8px rgba($dark_ColorShadow, .35);
+          border-color: $dark_ColorPrimaryLighter;
         }
         .dropdown-item {
           color: $dark_ColorMainText;

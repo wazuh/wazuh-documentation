@@ -218,7 +218,8 @@
       }
       p,
       ul {
-        margin-bottom: .15rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
       }
     }
   }
@@ -226,20 +227,33 @@
   table {
 
     &.docutils:not(.list-rows) {
-      display: inline-block;
       max-width: 100%;
-      width: fit-content;
-      overflow: hidden;
+      overflow-y: hidden;
       overflow-x: auto;
       border-spacing: 0;
-      border-collapse: separate;
-      margin-bottom: -6px;
+      border-collapse: separate;;
+      margin-bottom: -1px;
+      margin-top: -1px;
+      margin-left: 0;
+      margin-right: 0;
       border-radius: calc(#{$roundedCorners} + 1px);
-      perspective: 1px;
+      transform: scale(1.005);
+      display: block;
 
       td,
       th {
         border: 1px solid;
+      }
+      
+      th > div,
+      th > p {
+        white-space: nowrap;
+      }
+      
+      p,
+      ul {
+        margin-top: .5rem;
+        margin-bottom: .5rem;
       }
 
       &.release-notes {
@@ -266,14 +280,17 @@
           vertical-align: baseline;
         }
         
-        p {
+        p,
+        ul {
+          margin-top: 1rem;
           margin-bottom: 1rem;
         }
       }
     }
 
     &.hlist {
-      margin-bottom: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
       display: block;
       overflow-x: auto;
 
@@ -305,6 +322,21 @@
     }
   }
   
+  .table-wrapper {
+    border-radius: $roundedCorners;
+    display: inline-block;
+    overflow: hidden;
+    height: fit-content;
+    max-width: 100%;
+    border: 1px solid transparent;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    &.w-header {
+      background-size: 100%;
+      background-repeat: no-repeat;
+    }
+  }
+  
   .footnote-reference {
     vertical-align: super;
     font-size: .7em;
@@ -319,6 +351,7 @@
   .footnote.brackets {
     border-top: 1px solid;
     padding-top: 50px;
+    line-height: 32px;
     position: relative;
     display: flex;
     flex-direction: row;
@@ -329,6 +362,15 @@
       font-weight: 600;
       position: absolute;
       top: 10px;
+    }
+    .label .brackets {
+      display: inline-block;
+      margin-top: .5rem;
+      margin-bottom: .5rem;
+    }
+    p {
+      margin-top: .5rem;
+      margin-bottom: .5rem;
     }
   }
 }
@@ -402,14 +444,10 @@ body {
     }
   }
   .table-wrapper {
-    border-radius: $roundedCorners;
-    overflow: hidden;
-    width: fit-content;
-    height: fit-content;
-    max-width: 100%;
-    border: 1px solid transparent;
     background: $light_ColorTableBorder;
-    margin-bottom: 1rem;
+    &.w-header {
+      background-image: linear-gradient(to bottom, $light_ColorPrimary 18%, $light_ColorTableBorder 33%, $light_ColorTableBorder 100% );
+    }
   }
 }
 
@@ -466,8 +504,6 @@ body {
 
     table.docutils:not(.list-rows) {
       border-color: $dark_ColorTableBorder;
-      margin-bottom: -6px;
-      border-radius: calc(#{$roundedCorners} + 2px);
 
       &.release-notes {
         tr {
@@ -484,19 +520,9 @@ body {
   }
 
   .table-wrapper {
-    border-radius: $roundedCorners;
-    overflow: hidden;
-    width: fit-content;
-    height: fit-content;
-    max-width: 100%;
-    border-width: 0;
     background-color: $dark_ColorTableBorder;
-    margin-bottom: 1rem;
-    padding: 1px;
     &.w-header {
       background-image: linear-gradient(to bottom, $dark_ColorPrimary 18%, $dark_ColorTableBorder 33%, $dark_ColorTableBorder 100% );
-      background-size: 100%;
-      background-repeat: no-repeat;
     }
   }
 }

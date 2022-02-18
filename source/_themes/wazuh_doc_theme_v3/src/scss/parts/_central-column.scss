@@ -58,6 +58,12 @@
     font-family: "Fira Mono", monospace;
   }
 
+  .figure {
+    p {
+      margin-top: 0;
+    }
+  }
+  
   .arabic {
     list-style-type: decimal;
   }
