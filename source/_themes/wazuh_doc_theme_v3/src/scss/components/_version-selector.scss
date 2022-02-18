@@ -22,19 +22,19 @@ header {
     box-sizing: border-box;
     display: flex;
     align-items: center;
-    transition: color 0s;
     justify-content: space-between;
-    width: calc((#{$leftSidebarWidth} + 32px) / 2);
+    width: calc((#{$left-sidebar-width} + 32px) / 2);
     height: 40px;
     border: 2px solid;
-    border-radius: $roundedCorners;
+    border-radius: $rounded-corners;
+    transition: color 0s;
     @include media-max(sm) {
       font-size: 14px;
     }
     @include media-max(xl) {
-      border: none;
-      padding: 0;
       width: auto;
+      padding: 0;
+      border: none;
     }
     &:focus  {
       box-shadow: none;
@@ -56,12 +56,12 @@ header {
     }
 
     @include media-max(xl) {
-      border: none;
-      padding: 10px 0;
-      max-height: calc(100vh - 70px - 56px);
+      left: -5px !important;/* stylelint-disable-line declaration-no-important */
       min-width: 185px;
+      max-height: calc(100vh - 70px - 56px);
+      padding: 10px 0;
       overflow-y: auto;
-      left: -5px!important;
+      border: none;
     }
 
     > li > a {
@@ -93,40 +93,40 @@ body {
   header {
     .tooltip {
       .arrow::before {
-        border-left-color: $light_ColorHighlightBackground;
+        border-left-color: $light-color-highlight-background;
       }
       .tooltip-inner {
-        color: $light_ColorMainText;
-        background-color: $light_ColorHighlightBackground;
+        color: $light-color-main-text;
+        background-color: $light-color-highlight-background;
       }
     }
   }
 
   #version-selector {
     .dropdown-btn {
-      color: $light_ColorMainText;
+      color: $light-color-main-text;
       @include media-min(xl) {
-        background-color: $light_ColorBaseSpace;
-        border-color:  $light_ColorAccent;
+        background-color: $light-color-base-space;
+        border-color: $light-color-accent;
       }
       &[aria-expanded="false"]:focus {
-        box-shadow: inset 0 0 2px 2px rgba($light_ColorFocusShade, .2);
+        box-shadow: inset 0 0 2px 2px rgba($light-color-focus-shade, .2);
       }
     }
     .dropdown-menu {
-      background-color: $light_ColorSidebarSpace;
+      background-color: $light-color-sidebar-space;
       @include media-min(xl) {
-        background-color: $light_ColorBaseSpace;
-        border-color:  $light_ColorAccent;
+        background-color: $light-color-base-space;
+        border-color: $light-color-accent;
       }
       > li > a {
-        color: $light_ColorMainText;
+        color: $light-color-main-text;
         &:hover,
         &:focus {
-          background-color: $light_ColorHighlightBackground;
+          background-color: $light-color-highlight-background;
         }
         &.disabled {
-          color: $light_ColorBorderDeeper;
+          color: $light-color-border-deeper;
         }
       }
     }
@@ -139,41 +139,41 @@ body {
   header {
     .tooltip {
       .arrow::before {
-        border-left-color: $dark_ColorHighlightBackground;
+        border-left-color: $dark-color-highlight-background;
       }
       .tooltip-inner {
-        color: $dark_ColorMainText;
-        background-color: $dark_ColorHighlightBackground;
+        color: $dark-color-main-text;
+        background-color: $dark-color-highlight-background;
       }
     }
   }
 
   #version-selector {
     .dropdown-btn {
-      color: $dark_ColorMainText;
-      background-color: $dark_ColorSidebarSpace;
+      color: $dark-color-main-text;
+      background-color: $dark-color-sidebar-space;
       @include media-min(xl) {
-        background-color: $dark_ColorBaseSpace;
-        border-color:  $dark_ColorAccent;
+        background-color: $dark-color-base-space;
+        border-color: $dark-color-accent;
       }
       &[aria-expanded="false"]:focus {
-        box-shadow: inset 0 0 2px 2px rgba($dark_ColorFocusShade, .5);
+        box-shadow: inset 0 0 2px 2px rgba($dark-color-focus-shade, .5);
       }
     }
     .dropdown-menu {
-      background-color: $dark_ColorSidebarSpace;
+      background-color: $dark-color-sidebar-space;
       @include media-min(xl) {
-        background-color: $dark_ColorBaseSpace;
-        border-color:  $dark_ColorAccent;
+        background-color: $dark-color-base-space;
+        border-color: $dark-color-accent;
       }
       > li > a {
-        color: $dark_ColorMainText;
+        color: $dark-color-main-text;
         &:hover,
         &:focus {
-          background-color: $dark_ColorHighlightBackground;
+          background-color: $dark-color-highlight-background;
         }
         &.disabled {
-          color: $dark_ColorInputPlaceholder;
+          color: $dark-color-input-placeholder;
         }
       }
     }

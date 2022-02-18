@@ -10,36 +10,36 @@
   margin-bottom: 1rem;
 
   &::before {
-    content: '';
-    display: block;
     position: relative;
+    display: block;
     width: 0;
     height: 1rem;
     margin-top: -1rem;
+    content: "";
   }
 }
 
 #central-column * {
   @include media-max(sm){
-    scroll-margin-top: calc(#{$headerHeightXs} + #{$secondaryMobileBar});
+    scroll-margin-top: calc(#{$header-height-xs} + #{$secondary-mobile-bar});
   }
   @include media-only(sm, xl){
-    scroll-margin-top: calc(#{$headerHeightXs} + #{$secondaryMobileBar} + #{$breadcrumbsHeightXs});
+    scroll-margin-top: calc(#{$header-height-xs} + #{$secondary-mobile-bar} + #{$breadcrumbs-height-xs});
   }
   @include media-min(xl){
-    scroll-margin-top: calc(#{$headerHeightXl} + #{$breadcrumbsHeightXl});
+    scroll-margin-top: calc(#{$header-height-xl} + #{$breadcrumbs-height-xl});
   }
 }
 
 #central-column {
   width: 100%;
   @include media-only(xl, xxl) {
-    padding-left: $leftSidebarWidthNarrow;
-    padding-right: $rightSidebarWidthNarrow;
+    padding-right: $right-sidebar-width-narrow;
+    padding-left: $left-sidebar-width-narrow;
   }
   @include media-min(xxl) {
-    padding-left: $leftSidebarWidth;
-    padding-right: $rightSidebarWidth;
+    padding-right: $right-sidebar-width;
+    padding-left: $left-sidebar-width;
   }
 }
 
@@ -63,7 +63,7 @@
       margin-top: 0;
     }
   }
-  
+
   .arabic {
     list-style-type: decimal;
   }
@@ -84,19 +84,19 @@
     padding: 8px;
     border: 1px solid;
     border-top: none;
-    border-radius: 0 0 $roundedCorners $roundedCorners;
+    border-radius: 0 0 $rounded-corners $rounded-corners;
   }
 }
 
 /* Light theme -------------------------------------------------------------- */
 
 body {
-  [role="main"] {    
+  [role="main"] {
     caption {
-      border-color:  $light_ColorTableBorder;
+      border-color: $light-color-table-border;
     }
     .caption-text {
-      color: $light_ColorShadedText;
+      color: $light-color-shaded-text;
     }
   }
 }
@@ -106,10 +106,10 @@ body {
 .dark-theme {
   [role="main"] {
     caption {
-      border-color:  $dark_ColorTableBorder;
+      border-color: $dark-color-table-border;
     }
     .caption-text {
-      color: $dark_ColorShadedText;
+      color: $dark-color-shaded-text;
     }
   }
 }

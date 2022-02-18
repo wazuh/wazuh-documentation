@@ -7,16 +7,16 @@
 .section.accordion-parent {
   display: inline-block;
   width: 100%;
-  margin-bottom: 0;
   margin-top: 0;
+  margin-bottom: 0;
 }
 
 .accordion-title {
   display: flex;
-  width: 100%;
   align-items: center;
-  border-bottom: 2px solid;
+  width: 100%;
   height: 1.5em;
+  border-bottom: 2px solid;
   @include media-max(xl){
     display: inline-block;
     height: auto;
@@ -27,21 +27,21 @@
     width: 20px;
     height: 20px;
     margin-right: 10px;
-    content: '';
+    content: "";
     background-repeat: no-repeat;
-    background-size: 20px 20px;
     background-position: center;
+    background-size: 20px 20px;
     transition: transform .2s;
     @include media-max(xl){
       width: 14px;
       height: 14px;
     }
   }
-  
+
   &.collapsed {
     &::before {
-      transform: rotateZ(-90deg);
       transition: transform .2s;
+      transform: rotateZ(-90deg);
     }
   }
 }
@@ -51,9 +51,9 @@
 
 body {
   .accordion-title {
-    border-bottom-color: $light_ColorBorderDeeper;
+    border-bottom-color: $light-color-border-deeper;
     &::before {
-      background-image: url('#{$icoPath}svg-icons.svg#chevron-blue-lt');
+      background-image: url("#{$ico-path}svg-icons.svg#chevron-blue-lt");
     }
   }
 }
@@ -62,9 +62,9 @@ body {
 
 .dark-theme {
   .accordion-title {
-    border-bottom-color: $dark_ColorBorderDeeper;
+    border-bottom-color: $dark-color-border-deeper;
     &::before {
-      background-image: url('#{$icoPath}svg-icons.svg#chevron-blue-dt');
+      background-image: url("#{$ico-path}svg-icons.svg#chevron-blue-dt");
     }
   }
 }

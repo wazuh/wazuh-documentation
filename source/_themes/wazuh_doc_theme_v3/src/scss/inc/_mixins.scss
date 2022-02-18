@@ -4,6 +4,7 @@
 
 /* -- Device screens mixins ---------------------------------------------------------------------------- */
 
+/* stylelint-disable scss/no-global-function-names */
 @mixin media-min($breakpoint) {
   @if map-has-key($breakpoints, $breakpoint) {
     $breakpoint-value: map-get($breakpoints, $breakpoint);
@@ -31,6 +32,7 @@
     }
   }
 }
+/* stylelint-enable scss/no-global-function-names */
 
 /* -- Sidebar ---------------------------------------------------------------------------- */
 
@@ -48,11 +50,12 @@
 }
 
 @mixin local-toc-nested-padding($min, $max, $delta, $default) {
-  $elements: '& > ul > li > ul > li';
+  $elements: "& > ul > li > ul > li";
   @for $level from $min through $max {
     #{$elements} {
       padding-left: $delta;
     }
-    $elements: $elements + ' > ul > li';
+
+    $elements: $elements + " > ul > li";
   }
 }

@@ -6,25 +6,25 @@
 
 main {
   .versionmodified {
-    font-weight: 600;
     position: relative;
     display: inline-block;
-    padding-left: 38px; 
+    padding-left: 38px;
+    font-weight: 600;
 
     &::before {
-      content: '';
-      display: block;
-      width: 24px;
-      height: 24px;
       position: absolute;
       top: 3px;
       left: 0;
+      display: block;
+      width: 24px;
+      height: 24px;
+      content: "";
     }
     &.changed::before {
-      background: url('#{$icoPath}svg-icons.svg#circle-exclamation-orange');
+      background: url("#{$ico-path}svg-icons.svg#circle-exclamation-orange");
     }
     &.deprecated::before {
-      background: url('#{$icoPath}svg-icons.svg#circle-exclamation-orange');
+      background: url("#{$ico-path}svg-icons.svg#circle-exclamation-orange");
     }
   }
 }
@@ -34,7 +34,7 @@ main {
 body {
   .versionmodified {
     &.added::before {
-      background: url('#{$icoPath}svg-icons.svg#circle-exclamation-blue-lt');
+      background: url("#{$ico-path}svg-icons.svg#circle-exclamation-blue-lt");
     }
   }
 }
@@ -44,7 +44,7 @@ body {
 .dark-theme {
   .versionmodified {
     &.added::before {
-      background: url('#{$icoPath}svg-icons.svg#circle-exclamation-blue-dt');
+      background: url("#{$ico-path}svg-icons.svg#circle-exclamation-blue-dt");
     }
   }
 }

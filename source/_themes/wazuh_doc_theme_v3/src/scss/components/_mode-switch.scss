@@ -22,20 +22,20 @@
   }
 
   .switch-icon {
+    display: inline-block;
     width: 20px;
     height: 20px;
-    margin-left: 5px;
     margin-right: 5px;
-    display: inline-block;
-    background-size: contain;
+    margin-left: 5px;
     background-position: center;
+    background-size: contain;
   }
 }
 
 #mode-switch {
-  box-sizing: content-box;
   position: relative;
   top: 1px;
+  box-sizing: content-box;
   display: flex;
   flex-direction: row;
   width: 26px;
@@ -48,8 +48,8 @@
   &.dark {
     justify-content: flex-end;
     span {
-      left: calc(100% - 16px);
       top: 0;
+      left: calc(100% - 16px);
     }
   }
 
@@ -60,9 +60,9 @@
     width: 16px;
     height: 16px;
     content: "";
+    background-color: #fff;
     border-radius: 50%;
     transition: left ease-in .075s;
-    background-color: #fff;
   }
 }
 
@@ -70,19 +70,19 @@
 
 body {
   #light-dark-switch {
-    color: $light_ColorMainText;
+    color: $light-color-main-text;
     .switch-icon {
       &.icon-sun {
-        background: url('#{$icoPath}svg-icons.svg#sun-lt');
+        background: url("#{$ico-path}svg-icons.svg#sun-lt");
       }
       &.icon-moon {
-        background: url('#{$icoPath}svg-icons.svg#moon-lt');
+        background: url("#{$ico-path}svg-icons.svg#moon-lt");
       }
     }
   }
   #mode-switch {
-    background-color: $light_ColorPrimary;
-    border-color: $light_ColorPrimary;
+    background-color: $light-color-primary;
+    border-color: $light-color-primary;
   }
 }
 
@@ -90,18 +90,18 @@ body {
 
 .dark-theme {
   #light-dark-switch {
-    color: $dark_ColorMainText;
+    color: $dark-color-main-text;
     .switch-icon {
       &.icon-sun {
-        background: url('#{$icoPath}svg-icons.svg#sun-dt');
+        background: url("#{$ico-path}svg-icons.svg#sun-dt");
       }
       &.icon-moon {
-        background: url('#{$icoPath}svg-icons.svg#moon-dt');
+        background: url("#{$ico-path}svg-icons.svg#moon-dt");
       }
     }
   }
   #mode-switch {
-    background-color: $dark_ColorPrimary;
-    border-color: $dark_ColorPrimary;
+    background-color: $dark-color-primary;
+    border-color: $dark-color-primary;
   }
 }

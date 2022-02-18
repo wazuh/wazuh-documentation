@@ -12,7 +12,7 @@
 @import "../parts/central-column";
 @import "../parts/right-sidebar";
 
-.not_found {
+.not_found { /* stylelint-disable-line selector-class-pattern */
 
   main {
     padding-top: 4rem;
@@ -20,12 +20,12 @@
   }
   .error-background {
     max-width: 920px;
-    margin-left: auto;
     margin-right: auto;
-    background-image: url('#{$imgPath}wazuh_404_bg_desktop.png');
+    margin-left: auto;
+    background-image: url("#{$img-path}wazuh_404_bg_desktop.png");
     background-repeat: no-repeat;
-    background-size: 90%;
     background-position: center top;
+    background-size: 90%;
     @include media-max(md){
       padding-bottom: 45%;
     }
@@ -47,31 +47,31 @@
       font-size: 30px;
     }
     .btn {
-      border-radius: $roundedCorners;
-      font-weight: 600;
       padding: 10px 40px;
+      font-weight: 600;
+      border-radius: $rounded-corners;
     }
   }
 }
 
 /* Light theme -------------------------------------------------------------- */
 
-.not_found {
+body {
   .error-message {
     .btn {
-      background-color: $light_ColorAccent;
-      color: $light_ColorMainText;
+      color: $light-color-main-text;
+      background-color: $light-color-accent;
     }
   }
 }
 
 /* Dark- theme -------------------------------------------------------------- */
 
-.dark-theme.not_found {
+.dark-theme {
   .error-message {
     .btn {
-      background-color: $dark_ColorAccent;
-      color: $light_ColorMainText;
+      color: $light-color-main-text;
+      background-color: $dark-color-accent;
     }
   }
 }
