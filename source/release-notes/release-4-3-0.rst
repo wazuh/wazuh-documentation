@@ -600,7 +600,6 @@ Changelogs
 
 More details about these changes are provided in the changelog of each component:
 
-- `wazuh/wazuh v4.3.0-rc1 <https://github.com/wazuh/wazuh/blob/v4.3.0-rc1/CHANGELOG.md>`_
-- `wazuh/wazuh v4.3.0-rc2 <https://github.com/wazuh/wazuh/blob/v4.3.0-rc2/CHANGELOG.md>`_
+- `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v4.3.0-rc4/CHANGELOG.md>`_
 - `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/4.3-7.10/CHANGELOG.md>`_
 - `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v4.2.5-8.1.4/CHANGELOG.md>`_
