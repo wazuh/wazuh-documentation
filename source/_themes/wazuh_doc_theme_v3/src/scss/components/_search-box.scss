@@ -5,9 +5,9 @@
 ----------------------------------------------------------------------------- */
 
 .search-box {
-  border: 2px solid;
-  border-radius: $roundedCorners;
   overflow: hidden;
+  border: 2px solid;
+  border-radius: $rounded-corners;
 
   .search-form {
     position: relative;
@@ -34,10 +34,10 @@
       height: 38px;
       padding: 5px;
       background-repeat: no-repeat;
-      background-size: 38px 38px;
       background-position: center;
+      background-size: 38px 38px;
       border: none;
-      border-radius: calc(#{$roundedCorners} - 2px);
+      border-radius: calc(#{$rounded-corners} - 2px);
     }
   }
 }
@@ -46,20 +46,20 @@
 
 body {
   .search-box {
-    background-color: $light_ColorBaseSpace;
-    border-color: $light_ColorBorderDetails;
+    background-color: $light-color-base-space;
+    border-color: $light-color-border-details;
     &:focus-within {
-      border-color: $light_ColorPrimaryLighter;
+      border-color: $light-color-primary-lighter;
     }
     .form-control {
-      background-color: $light_ColorBaseSpace;
-      color: $light_ColorMainText;
+      color: $light-color-main-text;
+      background-color: $light-color-base-space;
     }
     .btn-search {
-      background: url('#{$icoPath}svg-icons.svg#search-lt');
+      background: url("#{$ico-path}svg-icons.svg#search-lt");
     }
-    ::placeholder { 
-      color: $light_ColorInputPlaceholder;
+    ::placeholder {
+      color: $light-color-input-placeholder;
     }
   }
 }
@@ -68,20 +68,20 @@ body {
 
 .dark-theme {
   .search-box {
-    background-color: $dark_ColorBaseSpace;
-    border-color: $dark_ColorBorderDetails;
+    background-color: $dark-color-base-space;
+    border-color: $dark-color-border-details;
     &:focus-within {
-      border-color: $dark_ColorPrimaryLighter;
+      border-color: $dark-color-primary-lighter;
     }
     .form-control {
-      background-color: $dark_ColorBaseSpace;
-      color: $dark_ColorMainText;
+      color: $dark-color-main-text;
+      background-color: $dark-color-base-space;
     }
     .btn-search {
-      background: url('#{$icoPath}svg-icons.svg#search-dt');
+      background: url("#{$ico-path}svg-icons.svg#search-dt");
     }
-    ::placeholder { 
-      color: $dark_ColorInputPlaceholder;
+    ::placeholder {
+      color: $dark-color-input-placeholder;
     }
   }
 }

@@ -4,14 +4,14 @@
 
 body {
   position: relative;
-  margin-top: calc(#{$headerHeightXs} + #{$secondaryMobileBar});
+  margin-top: calc(#{$header-height-xs} + #{$secondary-mobile-bar});
   font-family: Manrope, sans-serif;
   font-size: 16px;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   @include media-min(xl){
-    margin-top: $headerHeightXl;
+    margin-top: $header-height-xl;
   }
 }
 
@@ -100,38 +100,42 @@ h6,
 
 
 main {
-  min-height: calc(100vh - #{$headerHeightXs});
-  padding-left: 15px;
+  min-height: calc(100vh - #{$header-height-xs});
   padding-right: 15px;
+  padding-left: 15px;
   @include media-max(md) {
     min-height: auto;
   }
-  
+
   @include media-min(xl) {
+    min-height: calc(100vh - #{$header-height-xl} - #{$footer-height});
     padding-left: 30px;
-    min-height: calc(100vh - #{$headerHeightXl} - #{$footerHeight});
   }
 
   img {
     max-width: 100%;
+    margin-top: 1rem;
     margin-bottom: 1rem;
   }
 
   p {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
     font-family: Manrope, sans-serif;
     font-style: normal;
-    letter-spacing: 0.03em;
     line-height: 32px;
+    letter-spacing: .03em;
   }
 
   table {
+    margin-top: 1rem;
     margin-bottom: 1rem;
     td,
     th {
       vertical-align: middle;
     }
   }
-} 
+}
 
 .sidebar {
   flex-shrink: 0;
@@ -155,19 +159,19 @@ th .line {
 
 /* Light theme -------------------------------------------------------------- */
 
-body {
-  background-color: $light_ColorBaseSpace;
-  color: $light_ColorMainText;
+body { /* stylelint-disable-line no-duplicate-selectors */
+  color: $light-color-main-text;
+  background-color: $light-color-base-space;
   a {
-    color: $light_ColorPrimary;
+    color: $light-color-primary;
 
     &:hover,
     &:focus {
-      color: $light_ColorPrimaryLighter;
+      color: $light-color-primary-lighter;
     }
 
     &:active {
-      color: $light_ColorPrimary;
+      color: $light-color-primary;
     }
   }
 }
@@ -175,18 +179,18 @@ body {
 /* Dark- theme -------------------------------------------------------------- */
 
 .dark-theme {
-  background-color: $dark_ColorBaseSpace;
-  color: $dark_ColorMainText;
-    a {
-      color: $dark_ColorPrimary;
+  color: $dark-color-main-text;
+  background-color: $dark-color-base-space;
+  a {
+    color: $dark-color-primary;
 
-      &:hover,
-      &:focus {
-        color: $dark_ColorPrimaryLighter;
-      }
-
-      &:active {
-        color: $dark_ColorPrimary;
-      }
+    &:hover,
+    &:focus {
+      color: $dark-color-primary-lighter;
     }
+
+    &:active {
+      color: $dark-color-primary;
+    }
+  }
 }

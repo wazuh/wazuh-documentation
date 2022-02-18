@@ -9,12 +9,12 @@
 
 #global-toc {
   @include media-max(xl) {
-    pointer-events: all;
     width: 100%;
-    margin-bottom: 0;
-    padding-bottom: 10px;
     max-height: calc(100vh - 70px);
+    padding-bottom: 10px;
+    margin-bottom: 0;
     overflow-y: auto;
+    pointer-events: all;
   }
 
   &.collapse:not(.show) {
@@ -82,7 +82,7 @@
     }
   }
 
-  @include global-toc-nested-padding(2, $maxTocLevel, 20px, 15px);
+  @include global-toc-nested-padding(2, $max-toc-level, 20px, 15px);
 
   [class*="toctree-l"] {
     &.current {
@@ -94,9 +94,9 @@
         > ul {
           display: block;
         }
-      } 
+      }
     }
-    
+
     &.show {
       > a .toc-toggle-btn {
         transform: rotateZ(180deg);
@@ -105,12 +105,17 @@
 
     > ul {
       display: none;
+
+      a {
+        font-size: 15px;
+      }
     }
   }
 
   .toctree-l1 {
     > a {
       padding-left: 20px;
+      font-size: 16px;
       &::before {
         left: 10px;
       }
@@ -122,23 +127,23 @@
   }
 
   .toc-toggle-btn {
-    display: none;
     position: absolute;
     top: calc(50% - 21px);
     right: 15px;
+    display: none;
     width: 42px;
     height: 42px;
-    background-color: transparent;
-    background-size: 24px;
-    background-position: center;
-    background-repeat: no-repeat;
-    border: none;
     padding: 0;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 24px;
+    border: none;
     @media (hover: none) {
       display: block;
     }
   }
-  
+
   /* Hide toctree-l7 and its branch */
   .toctree-l6.toc-toggle a .toc-toggle-btn {
     display: none;
@@ -154,36 +159,36 @@ body {
   #global-toc {
     ul {
       .current-toc-node {
-        color: $light_ColorPrimary;
+        color: $light-color-primary;
         &:hover {
-          color: $light_ColorPrimaryLighter;
+          color: $light-color-primary-lighter;
         }
         &::before {
-          border-top-color: $light_ColorPrimary;
+          border-top-color: $light-color-primary;
         }
       }
     }
     a {
-      color: $light_ColorMainText;
+      color: $light-color-main-text;
       .toc-toggle-btn {
-        background-image: url(#{$icoPath}svg-icons.svg#chevron-blue-light-lt);
+        background-image: url(#{$ico-path}svg-icons.svg#chevron-blue-light-lt);
       }
       &:hover {
-        color: $light_ColorPrimaryLighter;
+        color: $light-color-primary-lighter;
         .toc-toggle-btn {
-          background-image: url(#{$icoPath}svg-icons.svg#chevron-blue-lt);
+          background-image: url(#{$ico-path}svg-icons.svg#chevron-blue-lt);
         }
       }
     }
     .toctree-l1 {
       &.show {
-        background-color: rgba($light_ColorBaseSpace, .3);
+        background-color: rgba($light-color-base-space, .3);
         > a {
-          background-color: $light_ColorGlobalTocHighlight;
+          background-color: $light-color-global-toc-highlight;
         }
       }
       > ul {
-        border-left-color: $light_ColorPrimary;
+        border-left-color: $light-color-primary;
       }
     }
   }
@@ -195,36 +200,36 @@ body {
   #global-toc {
     ul {
       .current-toc-node {
-        color: $dark_ColorPrimary;
+        color: $dark-color-primary;
         &:hover {
-          color: $dark_ColorPrimaryLighter;
+          color: $dark-color-primary-lighter;
         }
         &::before {
-          border-top-color: $dark_ColorPrimary;
+          border-top-color: $dark-color-primary;
         }
       }
     }
     a {
-      color: $dark_ColorMainText;
+      color: $dark-color-main-text;
       .toc-toggle-btn {
-        background-image: url(#{$icoPath}svg-icons.svg#chevron-blue-light-dt);
+        background-image: url(#{$ico-path}svg-icons.svg#chevron-blue-light-dt);
       }
       &:hover {
-        color: $dark_ColorPrimaryLighter;
+        color: $dark-color-primary-lighter;
         .toc-toggle-btn {
-          background-image: url(#{$icoPath}svg-icons.svg#chevron-blue-dt);
+          background-image: url(#{$ico-path}svg-icons.svg#chevron-blue-dt);
         }
       }
     }
     .toctree-l1 {
       &.show {
-        background-color: rgba($dark_ColorBaseSpace, .3);
+        background-color: rgba($dark-color-base-space, .3);
         > a {
-          background-color: rgba($dark_ColorGlobalTocHighlight, .1);
+          background-color: rgba($dark-color-global-toc-highlight, .1);
         }
       }
       > ul {
-        border-left-color: $dark_ColorPrimary;
+        border-left-color: $dark-color-primary;
       }
     }
   }

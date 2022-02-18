@@ -5,9 +5,9 @@
 ----------------------------------------------------------------------------- */
 
 main {
-  code, 
-  kbd, 
-  pre, 
+  code,
+  kbd,
+  pre,
   samp {
     font-family: "Fira Mono", monospace;
   }
@@ -15,30 +15,30 @@ main {
 
 .literal-block-wrapper.docutils.container {
   max-width: 100%;
-  padding-left: 0;
   padding-right: 0;
+  padding-left: 0;
 
   .code-block-caption {
     display: flex;
-    height: 48px;
     align-items: center;
-    border-radius: $roundedCorners $roundedCorners 0 0;
-    padding: 5px 10px;
     justify-content: space-between;
+    height: 48px;
+    padding: 5px 10px;
     margin-top: 1rem;
+    border-radius: $rounded-corners $rounded-corners 0 0;
 
     .headerlink {
-      text-decoration: none;
       line-height: 1;
+      text-decoration: none;
 
       &::after {
-        vertical-align: middle;
-        content: '\f0c1';
         display: inline-block;
         width: 1rem;
         height: 1rem;
-        font: normal bold normal 0.95rem/1 FontAwesome;
+        font: 400 .95rem/1 FontAwesome, sans-serif;
         text-align: right;
+        vertical-align: middle;
+        content: "\f0c1";
         opacity: 0;
         transition: opacity ease-in .1s;
       }
@@ -56,36 +56,41 @@ main {
     padding: 0;
     border: none;
   }
+
+  [class*="highlight-"] {
+    margin-top: 0;
+  }
 }
 
 [class*="highlight-"] {
-  max-width: 100%;
-  max-height: 100vh;
-  margin-bottom: 1rem;
   position: relative;
-  transition: max-height .2s;
+  max-width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   overflow-y: hidden;
   border: 1px solid;
+  transition: max-height .2s;
 
   &.output {
-    border-radius: $roundedCorners;
+    max-height: 100vh;
+    border-radius: $rounded-corners;
 
     .output-title {
-      height: 40px;
       display: flex;
       align-items: center;
-      border-radius: $roundedCorners $roundedCorners 0 0;
-      font-weight: 600;
       width: 100%;
+      height: 40px;
+      font-weight: 600;
       cursor: pointer;
+      border-radius: $rounded-corners $rounded-corners 0 0;
 
       &::before {
-        content: '';
-        height: 40px;
         width: 40px;
+        height: 40px;
+        content: "";
         background-repeat: no-repeat;
-        background-size: 18px 18px;
         background-position: center;
+        background-size: 18px 18px;
         transition: transform .1s;
       }
     }
@@ -97,11 +102,11 @@ main {
       transition: max-height .2s;
 
       .output-title {
-        border-radius: $roundedCorners;
-        transition: border-radius 0.05s .2s;
+        border-radius: $rounded-corners;
+        transition: border-radius .05s .2s;
         &::before {
-          transform: rotateZ(-90deg);
           transition: transform .1s;
+          transform: rotateZ(-90deg);
         }
       }
     }
@@ -111,17 +116,18 @@ main {
   }
 
   .highlighttable {
-    table-layout:fixed;
     width: 100%;
+    margin-top: 0;
     margin-bottom: 0;
+    table-layout: fixed;
 
     .highlight {
       position: unset;
-      overflow: auto; /* Fix to remove occasional vertical scroll in Safari */
       max-width: 100%;
-      padding-left: 0;
       padding-right: 0;
       padding-bottom: 20px;
+      padding-left: 0;
+      overflow: auto; /* Fix to remove occasional vertical scroll in Safari */
     }
     .code {
       background-color: transparent;
@@ -136,16 +142,16 @@ main {
 
   .copy-to-clipboard {
     position: absolute;
-    z-index: 10;
     top: 7px;
     right: 7px;
-    cursor: pointer;
-    opacity: 0;
+    z-index: 10;
     padding: 8px;
-    font: normal normal normal 14px/1 FontAwesome;
+    font: 400 14px/1 FontAwesome, sans-serif;
+    cursor: pointer;
     border: 0;
-    border-radius: $roundedCorners;
-    transition: all 0.2s ease;
+    border-radius: $rounded-corners;
+    opacity: 0;
+    transition: all .2s ease;
 
     &:focus {
       opacity: 1;
@@ -157,8 +163,8 @@ main {
 
     span {
       display: none;
-      font-size: 0.9rem;
       font-family: Manrope, sans-serif;
+      font-size: .9rem;
     }
   }
 
@@ -168,42 +174,42 @@ main {
 
   td.code {
     pre {
+      z-index: 6;
       padding: 0 20px;
       overflow: visible;
-      z-index: 6;
     }
   }
 
   .linenodiv {
-    display: inline-flex;
-    border-right: 1px solid;
     position: absolute;
     top: 20px;
     z-index: 30;
-    width: 50px;
+    display: inline-flex;
     justify-content: center;
-    user-select: none;
+    width: 50px;
     line-height: 24px;
+    user-select: none;
+    border-right: 1px solid;
   }
 
   .linenos {
-    background-color: transparent;
     width: 48px;
+    background-color: transparent;
   }
 
   .highlight {
-    font-family: "Fira Mono", monospace;
     position: relative;
-    padding: 20px 0 0;
-    display: flex;
-    overflow-x: auto;
     z-index: 0;
+    display: flex;
+    padding: 20px 0 0;
+    overflow-x: auto;
+    font-family: "Fira Mono", monospace;
     line-height: 24px;
 
     pre {
-      margin: 0;
       position: unset;
       padding: 0 20px 20px;
+      margin: 0;
     }
 
     .hll {
@@ -211,21 +217,22 @@ main {
 
       &::before {
         position: absolute;
-        left: -50px;
         right: 0;
-        height: 24px;
-        display: block;
-        content: '';
+        left: -50px;
         z-index: -1;
+        display: block;
+        height: 24px;
+        content: "";
       }
 
       > span {
-        position:relative;
+        position: relative;
         z-index: 25;
       }
 
     }
 
+    /*
     .gp,
     .o,
     .ow,
@@ -233,7 +240,7 @@ main {
     .p.p-Indicator,
     .nn,
     .l.l-Scalar.l-Scalar-Plain {}
-
+    */
     .k,
     .kn {
       font-weight: 500;
@@ -246,70 +253,70 @@ main {
 body {
   .literal-block-wrapper.docutils.container {
     .code-block-caption {
-      background-color: $light_ColorSidebarSpace;
+      background-color: $light-color-output-title-background;
       .headerlink {
         &::after {
-          color: $light_ColorShadedText;
+          color: $light-color-shaded-text;
         }
       }
     }
   }
   [class*="highlight-"] {
-    border-color: $light_ColorCodeBlockBorder;
+    border-color: $light-color-code-block-border;
     &.output {
-      background-color: $light_ColorCodeBlockBackground;
+      background-color: $light-color-code-block-background;
       .output-title {
-        background-color: $light_ColorOutputTitleBackground;
+        background-color: $light-color-output-title-background;
         &::before {
-          background-image: url('#{$icoPath}svg-icons.svg#chevron-blue-lt');
+          background-image: url("#{$ico-path}svg-icons.svg#chevron-blue-lt");
         }
       }
     }
     .highlighttable {
-      background-color: $light_ColorCodeBlockBackground;
+      background-color: $light-color-code-block-background;
       .linenos {
         background-color: transparent;
       }
     }
     .copy-to-clipboard {
-      color: $light_ColorMainText;
-      background-color: $light_ColorSidebarSpace;
+      color: $light-color-main-text;
+      background-color: $light-color-sidebar-space;
       &:hover {
-        background-color: $light_ColorPrimaryLighter;
-        color: $light_ColorBaseSpace;
+        color: $light-color-base-space;
+        background-color: $light-color-primary-lighter;
       }
       &.copied {
-        background-color: $light_ColorPrimary;
-        color: $light_ColorBaseSpace;
+        color: $light-color-base-space;
+        background-color: $light-color-primary;
       }
     }
     .linenodiv {
-      border-right-color: $light_ColorTableBorder;
+      border-right-color: $light-color-table-border;
       pre {
-        color: $light_ColorShadedText;
+        color: $light-color-shaded-text;
       }
     }
     .highlight {
-      background-color: $light_ColorCodeBlockBackground;
-      color: $light_ColorCodeDefault;
+      color: $light-color-code-default;
+      background-color: $light-color-code-block-background;
       .hll::before {
-        background-color: $light_ColorHighlightBackground;
+        background-color: $light-color-highlight-background;
       }
       .k,
       .kn {
-        color: $light_ColorCodeKeyword;
+        color: $light-color-code-keyword;
       }
       .c,
       .c1,
       .cp,
       .ch,
       .go {
-        color: $light_ColorCodeComment; 
+        color: $light-color-code-comment;
       }
 
       .m,
       .mi {
-        color: $light_ColorCodeNumber; 
+        color: $light-color-code-number;
       }
 
       .s,
@@ -321,7 +328,7 @@ body {
       .si,
       .heredoc,
       .heredoc span {
-        color: $light_ColorCodeString; 
+        color: $light-color-code-string;
       }
 
       .vm,
@@ -329,13 +336,13 @@ body {
       .nb,
       .bp,
       .nf {
-        color: $light_ColorCodeFunction; 
+        color: $light-color-code-function;
       }
 
       .nt,
       .na,
       .no {
-        color: $light_ColorCodeVariable; 
+        color: $light-color-code-variable;
       }
     }
   }
@@ -346,75 +353,75 @@ body {
 .dark-theme {
   .literal-block-wrapper.docutils.container {
     .code-block-caption {
-      background-color: $dark_ColorSidebarSpace;
+      background-color: $dark-color-sidebar-space;
       .headerlink {
         &::after {
-          color: $dark_ColorShadedText;
+          color: $dark-color-shaded-text;
         }
       }
     }
   }
   [class*="highlight-"] {
-    border-color: $dark_ColorCodeBlockBorder;
+    border-color: $dark-color-code-block-border;
     &.output {
-      background-color: $dark_ColorCodeBlockBackground;
+      background-color: $dark-color-code-block-background;
       .output-title {
-        background-color: $dark_ColorOutputTitleBackground;
-        color: $dark_ColorMainText;
+        color: $dark-color-main-text;
+        background-color: $dark-color-output-title-background;
         &::before {
-          background-image: url('#{$icoPath}svg-icons.svg#chevron-blue-dt');
+          background-image: url("#{$ico-path}svg-icons.svg#chevron-blue-dt");
         }
       }
     }
     .highlighttable {
-      background-color: $dark_ColorCodeBlockBackground;
+      background-color: $dark-color-code-block-background;
       .linenos {
         background-color: transparent;
       }
     }
     .copy-to-clipboard {
-      color: $dark_ColorMainText;
-      background-color: $dark_ColorSidebarSpace;
+      color: $dark-color-main-text;
+      background-color: $dark-color-sidebar-space;
       &:hover {
-        background-color: $dark_ColorPrimaryLighter;
-        color: $dark_ColorBaseSpace;
+        color: $dark-color-base-space;
+        background-color: $dark-color-primary-lighter;
       }
       &.copied {
-        background-color: $dark_ColorPrimary;
-        color: $dark_ColorBaseSpace;
+        color: $dark-color-base-space;
+        background-color: $dark-color-primary;
       }
     }
     .linenodiv {
-      border-right-color: $dark_ColorTableBorder;
+      border-right-color: $dark-color-table-border;
       pre {
-        color: $dark_ColorShadedText;
+        color: $dark-color-shaded-text;
       }
     }
     .highlight {
-      background-color: $dark_ColorCodeBlockBackground;
+      background-color: $dark-color-code-block-background;
       pre {
-        color: $dark_ColorCodeDefault;
+        color: $dark-color-code-default;
       }
       .hll {
         &::before {
-          background-color: $dark_ColorOutputTitleBackground;
+          background-color: $dark-color-output-title-background;
         }
       }
       .k,
       .kn {
-        color: $dark_ColorCodeKeyword;
+        color: $dark-color-code-keyword;
       }
       .c,
       .c1,
       .cp,
       .ch,
       .go {
-        color: $dark_ColorCodeComment; 
+        color: $dark-color-code-comment;
       }
 
       .m,
       .mi {
-        color: $dark_ColorCodeNumber; 
+        color: $dark-color-code-number;
       }
 
       .s,
@@ -426,7 +433,7 @@ body {
       .si,
       .heredoc,
       .heredoc span {
-        color: $dark_ColorCodeString; 
+        color: $dark-color-code-string;
       }
 
       .vm,
@@ -434,13 +441,13 @@ body {
       .nb,
       .bp,
       .nf {
-        color: $dark_ColorCodeFunction; 
+        color: $dark-color-code-function;
       }
 
       .nt,
       .na,
       .no {
-        color: $dark_ColorCodeVariable; 
+        color: $dark-color-code-variable;
       }
     }
   }

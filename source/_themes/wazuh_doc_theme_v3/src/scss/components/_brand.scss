@@ -5,13 +5,13 @@
 ----------------------------------------------------------------------------- */
 
 .navbar-brand {
+  position: relative;
   display: flex;
   align-content: flex-end;
-  position: relative;
 
   .logo-link {
-    height: 28px;
     position: absolute;
+    height: 28px;
     &.docs {
       right: 0;
       padding-right: 32%;
@@ -36,7 +36,7 @@
 body {
   .logo-link {
     &.docs {
-      color: $light_ColorMainText;
+      color: $light-color-main-text;
     }
   }
   .logo-light {
@@ -52,7 +52,7 @@ body {
 .dark-theme {
   .logo-link {
     &.docs {
-      color: $dark_ColorMainText;
+      color: $dark-color-main-text;
     }
   }
   .logo-light {

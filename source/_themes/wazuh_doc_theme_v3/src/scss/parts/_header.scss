@@ -9,10 +9,10 @@
 @import "../components/version-selector";
 
 header {
-  height: $headerHeightXs;
+  height: $header-height-xs;
   @include media-min(xl){
+    height: $header-height-xl;
     box-shadow: 0 4px 12px 0 rgba(#000, .1);
-    height: $headerHeightXl;
   }
 
   &.fixed-top {
@@ -22,26 +22,26 @@ header {
   }
 
   .navbar {
-    height: $headerHeightXs;
+    height: $header-height-xs;
     @include media-min(xl){
-      height: $headerHeightXl;
+      height: $header-height-xl;
     }
   }
 
   .mobile-primary-header {
-    width: 100%;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+    width: 100%;
     @include media-min(xl){
       width: auto;
     }
   }
 
   .mobile-secondary-header {
-    height: $secondaryMobileBar;
     display: flex;
     align-items: center;
+    height: $secondary-mobile-bar;
   }
 
   .navbar-toggler {
@@ -51,17 +51,17 @@ header {
     .navbar-toggler-icon::after {
       width: 24px;
       height: 3px;
-      border-radius: 6px;
       border: 1px solid;
+      border-radius: 6px;
     }
     .navbar-toggler-icon {
       position: relative;
       &::before,
       &::after {
         position: absolute;
-        content: "";
-        display: block;
         left: -1px;
+        display: block;
+        content: "";
       }
     }
     &[aria-expanded="false"] {
@@ -69,13 +69,13 @@ header {
         transition: background-color .5s .3s, border-color .5s .3s;
         &::before {
           top: -8px;
-          transform: rotateZ(0deg);
           transition: all .5s;
+          transform: rotateZ(0deg);
         }
         &::after {
           bottom: -8px;
-          transform: rotateZ(0deg);
           transition: all .5s;
+          transform: rotateZ(0deg);
         }
       }
     }
@@ -85,13 +85,13 @@ header {
         border-color: transparent;
         &::before {
           top: -1px;
-          transform: rotateZ(45deg);
           transition: all .5s;
+          transform: rotateZ(45deg);
         }
         &::after {
           bottom: -1px;
-          transform: rotateZ(-45deg);
           transition: all .5s;
+          transform: rotateZ(-45deg);
         }
       }
     }
@@ -111,24 +111,24 @@ header {
 
 body {
   header {
-    background: $light_ColorBaseSpace;
+    background: $light-color-base-space;
     .navbar-toggler {
       &[aria-expanded="false"] .navbar-toggler-icon,
       .navbar-toggler-icon::before,
       .navbar-toggler-icon::after {
-        background-color: $light_ColorPrimaryLighter;
-        border-color: $light_ColorPrimaryLighter;
+        background-color: $light-color-primary;
+        border-color: $light-color-primary;
       }
     }
     .mobile-secondary-header {
       padding-right: 15px;
       @include media-max(xl){
-        background-color: $light_ColorSidebarSpace;
+        background-color: $light-color-sidebar-space;
       }
     }
     .search-toggler {
       .search-toggler-icon {
-        background: url('#{$icoPath}svg-icons.svg#search-lt');
+        background: url("#{$ico-path}svg-icons.svg#search-lt");
       }
     }
   }
@@ -138,23 +138,23 @@ body {
 
 .dark-theme {
   header {
-    background: $dark_ColorIndexHeaderBackground;
+    background: $dark-color-index-header-background;
     .navbar-toggler {
       &[aria-expanded="false"] .navbar-toggler-icon,
       .navbar-toggler-icon::before,
       .navbar-toggler-icon::after {
-        background-color: $dark_ColorPrimary;
-        border-color: $dark_ColorPrimary;
+        background-color: $dark-color-primary;
+        border-color: $dark-color-primary;
       }
     }
     .mobile-secondary-header {
       @include media-max(xl){
-        background-color: $dark_ColorSidebarSpace;
+        background-color: $dark-color-sidebar-space;
       }
     }
     .search-toggler {
       .search-toggler-icon {
-        background: url('#{$icoPath}svg-icons.svg#search-dt');
+        background: url("#{$ico-path}svg-icons.svg#search-dt");
       }
     }
   }
