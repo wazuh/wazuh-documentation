@@ -140,11 +140,11 @@ This thread is in charge of synchronizing master's integrity information among a
     * Extra valid: Extra files that, instead of being removed in the worker, must be created in the master. This is a special type of file created for agent-group files. These files can be created in worker nodes when an agent is re-registered and was previously assigned to a group.
     * Shared: Files that are present in both master and worker but have a different checksum. They must be updated in the worker node.
 
-   Then the master prepares a zip package with a JSON containing all this information and the required files the worker needs to update.
+   Then the master prepares a zip package with a JSON containing all this information and the required files the worker needs to update. The maximum zip size is specified in the ``max_zip_size`` variable of the `cluster.json <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/framework/wazuh/core/cluster/cluster.json>`_ file. In case it is exceeded, the remaining files will be synced in the next iteration of Integrity.
 
 4. Once the worker receives the package, it updates the necessary files and then it sends the master the required extra valid files.
 
-If there is no data to synchronize or there has been an error reading data from the worker, the worker is always notified about it.
+If there is no data to synchronize or there has been an error reading data from the worker, the worker is always notified about it. Also, if a timeout error occurs while the worker is waiting to receive the zip, the master will cancel the current task and reduce the zip size limit. The limit will gradually increase again if no new timeout errors occur.
 
 Agent info thread
 ~~~~~~~~~~~~~~~~~
