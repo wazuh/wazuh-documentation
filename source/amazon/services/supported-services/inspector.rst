@@ -1,5 +1,8 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+  :description: Amazon Inspector Classic is an automated security assessments service that improves the security of applications deployed on AWS. Learn how to configure and monitor its findings with Wazuh.
+
 .. _amazon_inspector:
 
 Amazon Inspector
