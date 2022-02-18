@@ -1,7 +1,7 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
-  :description: In this section, we show you some considerations that must be taken into account when configuring the Wazuh module for AWS.
+  :description: Learn about some considerations that must be taken into account when configuring the Wazuh module for AWS.
   
 .. _amazon_considerations:
 
