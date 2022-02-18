@@ -1,7 +1,7 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about how to monitor AWS based services with Wazuh. In this section, you will learn more about installing dependencies. 
+  :description: Learn about the required dependencies for using the AWS integration in a Wazuh agent.
   
 .. _amazon_dependencies:
 
