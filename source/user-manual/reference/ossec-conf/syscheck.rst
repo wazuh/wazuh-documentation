@@ -59,7 +59,9 @@ Specifies if FIM should alert when new files are created.
 Example:
 
 .. code-block:: xml
+
  <alert_new_files>yes</alert_new_files>
+ 
 .. note::
 
 	This setting only applies in managers.
