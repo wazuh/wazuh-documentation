@@ -10,16 +10,16 @@ footer {
   @include media-min(xl){
     position: absolute;
     right: 0;
-    height: $footerHeight;
-    padding: 15px 0 15px 30px;
     display: flex;
     align-items: center;
+    height: $footer-height;
+    padding: 15px 0 15px 30px;
   }
   @include media-only(xl, xxl) {
-    left: $leftSidebarWidthNarrow;
+    left: $left-sidebar-width-narrow;
   }
   @include media-min(xxl) {
-    left: $leftSidebarWidth;
+    left: $left-sidebar-width;
   }
 
   & > .container {
@@ -33,8 +33,8 @@ footer {
       width: 100%;
     }
     .social-links {
-      padding: 15px 0;
       display: flex;
+      padding: 15px 0;
       @include media-min(sm){
         justify-content: flex-end;
       }
@@ -53,9 +53,9 @@ footer {
   .website-links {
     margin-bottom: 3rem;
     ul {
-      list-style: none;
       padding-left: 0;
       margin-bottom: 0;
+      list-style: none;
     }
     a {
       &:hover,
@@ -98,8 +98,8 @@ footer {
   }
   .social-links {
     @include media-max(xl) {
-      order: 0;
       justify-content: flex-start;
+      order: 0;
     }
     .nav-link {
       @include media-max(sm) {
@@ -113,21 +113,21 @@ footer {
 
 body {
   footer {
-    background: $light_ColorFooter;
+    background: $light-color-footer;
 
     .nav-link {
-      color: $light_ColorMainText;
+      color: $light-color-main-text;
 
       &:hover {
-        color: $light_ColorPrimaryLighter;
+        color: $light-color-primary-lighter;
       }
     }
     .website-links {
       a {
-        color: $light_ColorMainText;
+        color: $light-color-main-text;
         &:hover,
         &:focus {
-          color: $light_ColorPrimaryLighter;
+          color: $light-color-primary-lighter;
         }
       }
     }
@@ -138,21 +138,21 @@ body {
 
 .dark-theme {
   footer {
-    background: $dark_ColorFooter;
+    background: $dark-color-footer;
 
     .nav-link {
-      color: $dark_ColorMainText;
+      color: $dark-color-main-text;
 
       &:hover {
-        color: $dark_ColorPrimaryLighter;
+        color: $dark-color-primary-lighter;
       }
     }
     .website-links {
       a {
-        color: $dark_ColorMainText;
+        color: $dark-color-main-text;
         &:hover,
         &:focus {
-          color: $dark_ColorPrimaryLighter;
+          color: $dark-color-primary-lighter;
         }
       }
     }
