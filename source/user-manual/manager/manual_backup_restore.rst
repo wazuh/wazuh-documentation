@@ -8,7 +8,7 @@ Wazuh-DB backup restoration
 ===========================
 
 Wazuh by default performs automatic backups of the **global.db** database. These snapshots may be useful to recover critical information.
-Wazuh-DB will restore the last backup available in case of an upgrade failure, but if this process also fails, the restore must be done manually.
+Wazuh-DB will restore the last backup available in case of failure during the upgrade. If this process also fails, the restoration must be done manually.
 
 Manual restore process
 ----------------------
@@ -30,9 +30,9 @@ The first step is to turn of Wazuh manager:
 Then, locate the backup to restore. It is stored in ``WAZUH_HOME/backup/db`` with a name format similar to ``global.db-backup-TIMESTAMP-pre_upgrade.gz``.
 
 .. note::
-  This process is valid for all the backups in the folder. Some snapshots names may contain special tags, like `pre_upgrade` or `pre_restore`.
+  This process is valid for all the backups in the folder. Snapshots names containing the special tag `pre_upgrade` were created right before upgrading the Wazuh server. Any other snapshot is a periodical backup created according to the :ref:`backup <wazuh-db-config>` setting.
 
-Decompress it. Always use the **-k** flag to preserve the original file and some special characters like ``:`` may have to be escaped in your terminal:
+Decompress it. Always use the **-k** flag to preserve the original file:
 
   .. code-block:: console
 
