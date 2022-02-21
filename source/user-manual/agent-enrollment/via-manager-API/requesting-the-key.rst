@@ -8,9 +8,17 @@
 Requesting the key
 ==================
 
+Below you can find the steps to request the agent keys in the different types of endpoint agents:
+
+- :ref:`from-linux-unix-and-macos`.
+- :ref:`from-windows`.
+
 When connecting to the manager API, a JSON Web Token (JWT) is needed to ensure secure and authorized communication between hosts. The JWT is generated and then used to request the agent key.
 
 The agent key can be requested from any system that has connectivity with the manager API. It can also be done from the Wazuh web user interface or from a browser by connecting directly to the API service. The default API port is 55000/TCP. The host making the enrollment request must have connectivity to the manager via this port or any other port that the API has been configured to listen on.
+
+.. _from-linux-unix-and-macos:
+
 
 From Linux/Unix and macOS
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -46,6 +54,10 @@ From Linux/Unix and macOS
                   "key": "MDAxIE5ld0FnZW50IDEwLjAuMC44IDM0MGQ1NjNkODQyNjcxMWIyYzUzZTE1MGIzYjEyYWVlMTU1ODgxMzVhNDE3MWQ1Y2IzZDY4M2Y0YjA0ZWVjYzM=",
               },
           }
+
+
+.. _from-windows:
+
 
 From Windows
 ^^^^^^^^^^^^

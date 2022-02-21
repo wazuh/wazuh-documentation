@@ -9,7 +9,15 @@
 Agent identity verification
 ===========================
 
-This method uses SSL certificates to verify that an agent is authorized to enroll in the Wazuh manager. The manager verification and the agent verification are independent of each other. However, it is possible to use a combination of both.
+This method uses SSL certificates to verify that an agent is authorized to enroll in the Wazuh manager. The manager verification and the agent verification are independent of each other, and however, it is possible to use a combination of both.
+
+Below you can find the different steps to verify that an agent is authorized to enroll in the different types of endpoint agents:
+
+
+- :ref:`agent-identity-manager-preparations`.
+- :ref:`agent-identity-linux-unix-endpoint`.
+- :ref:`agent-identity-this-windows-endpoint`.
+- :ref:`agent-identity-macos-endpoint`.
 
 
 Prerequisite
@@ -34,6 +42,10 @@ An SSL certificate is issued to the agent host by the CA in prerequisite 1.On at
 - Wazuh agent verification with host validation: The certificates for the agents are issued with their IP address or hostname specified as the common name.
   
 The difference between these validation methods is that the certificate in the former method can be reused on multiple agents while the certificate created in the latter can only be used on the agent whose IP address or hostname was specified during certificate generation.
+
+
+.. _agent-identity-manager-preparations:
+
 
 Preparations on the Wazuh manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -93,6 +105,9 @@ Preparations on the Wazuh manager
        #systemctl restart wazuh-manager
 
 
+.. _agent-identity-linux-unix-endpoint:
+
+
 Linux/Unix endpoint
 ^^^^^^^^^^^^^^^^^^^
 
@@ -150,6 +165,9 @@ The following steps serve as a guide on how to enroll a Linux/Unix endpoint by u
 #. Select the “agents” tab to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successful.
 
 
+.. _agent-identity-this-windows-endpoint:
+
+
 Windows endpoint
 ^^^^^^^^^^^^^^^^
 
@@ -203,6 +221,9 @@ The Wazuh agent installation directory depends on the architecture of the host.
 
 
 #. Select the “agents” tab to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successful.
+
+
+.. _agent-identity-macos-endpoint:
 
 
 macOS endpoint

@@ -9,8 +9,14 @@
 Manager identity verification
 =============================
 
-This method uses SSL certificates to verify the identity of the Wazuh manager before an agent sends the enrollment request.
-- Verify agent: Verify that an agent is authorized to enroll in the Wazuh manager. The manager verification and the agent verification are independent of each other. However, it is possible to use a combination of both.
+This method uses SSL certificates to verify the identity of the Wazuh manager before an agent sends the enrollment request. The manager verification and the agent verification are independent of each other, and however, it is possible to use a combination of both.
+
+Below you can find the different steps to verify the identity of the Wazuh manager in the different types of endpoint agents:
+
+- :ref:`manager-identity-manager-configuration`.
+- :ref:`manager-identity-linux-unix-endpoint`.
+- :ref:`manager-identity-this-windows-endpoint`.
+- :ref:`manager-identity-macos-endpoint`.
 
 
 Prerequisite
@@ -30,6 +36,9 @@ Manager identity validation
 ---------------------------
 
 Here the Wazuh manager has issued an SSL certificate using the certificate authority. Then, during enrollment, the agent verifies the Wazuh manager certificate using the root certificate of the CA.
+
+
+.. _manager-identity-manager-configuration:
 
 
 Manager configuration
@@ -103,6 +112,8 @@ Manager configuration
             # systemctl restart wazuh-manager
 
 
+.. _manager-identity-linux-unix-endpoint:
+
 Linux/Unix endpoint
 ^^^^^^^^^^^^^^^^^^^
 
@@ -162,6 +173,9 @@ The following steps serve as a guide on how to enroll a Linux/Unix endpoint by u
 #. Select the “agents” tab to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successful.
 
 
+.. _manager-identity-this-windows-endpoint:
+
+
 Windows endpoint
 ^^^^^^^^^^^^^^^^
 
@@ -217,6 +231,8 @@ The Wazuh agent installation directory depends on the architecture of the host.
 
 #. Select the “agents” tab to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successful.
 
+
+.. _manager-identity-macos-endpoint:
 
 
 macOS endpoint

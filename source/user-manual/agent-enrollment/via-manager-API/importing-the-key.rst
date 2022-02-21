@@ -9,7 +9,7 @@
 Importing the key to the agent
 ==============================
 
-Below you can find the steps to import the key to different endpoint agents:
+Below you can find the steps to import the key in the different types of endpoint agents:
 
 - :ref:`linux-unix-endpoint`.
 - :ref:`this-windows-endpoint`.
