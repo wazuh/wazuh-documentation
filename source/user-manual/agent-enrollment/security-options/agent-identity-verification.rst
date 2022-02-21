@@ -14,6 +14,7 @@ This method uses SSL certificates to verify that an agent is authorized to enrol
 Below you can find the steps to verify that an agent is authorized to enroll in the different types of endpoint agents:
 
 - :ref:`agent-identity-prerequisites`.
+- :ref:`agent-identity-verification-options`.
 - :ref:`agent-identity-manager-preparations`.
 - :ref:`agent-identity-linux-unix-endpoint`.
 - :ref:`agent-identity-this-windows-endpoint`.
@@ -34,6 +35,9 @@ A certificate authority to sign certificates for the Wazuh manager and agents is
 
 
 The root certificate is created and saved as the ``rootCA.pem`` file.
+
+
+.. _agent-identity-verification-options:
 
 
 Agent verification options

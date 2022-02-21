@@ -14,6 +14,7 @@ This method uses SSL certificates to verify the identity of the Wazuh manager be
 Below you can find the steps to verify the identity of the Wazuh manager in the different types of endpoint agents:
 
 - :ref:`manager-identity-prerequisites`.
+- :ref:`manager-identity-validation`.
 - :ref:`manager-identity-manager-configuration`.
 - :ref:`manager-identity-linux-unix-endpoint`.
 - :ref:`manager-identity-this-windows-endpoint`.
@@ -34,6 +35,9 @@ A certificate authority to sign certificates for the Wazuh manager and agents is
 
 
 The root certificate is created and saved as the ``rootCA.pem`` file.
+
+
+.. _manager-identity-validation:
 
 
 Manager identity validation
