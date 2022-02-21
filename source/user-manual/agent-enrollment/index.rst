@@ -41,9 +41,7 @@ The following has to be in place to ensure the Wazuh agent enrollment is done:
 #. Connectivity between the server in which the Wazuh manager is installed and the endpoint. This server should have the following default ports opened to allow the Wazuh manager to establish communication with the agents: 
 
    - 1514/TCP for agent communication.
-
    - 1515/TCP for enrollment via automatic agent request.
-   
    - 55000/TCP for enrollment via manager API.
 
 

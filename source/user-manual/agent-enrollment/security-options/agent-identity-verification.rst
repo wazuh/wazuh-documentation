@@ -11,17 +11,20 @@ Agent identity verification
 
 This method uses SSL certificates to verify that an agent is authorized to enroll in the Wazuh manager. The manager verification and the agent verification are independent of each other, and however, it is possible to use a combination of both.
 
-Below you can find the different steps to verify that an agent is authorized to enroll in the different types of endpoint agents:
+Below you can find the steps to verify that an agent is authorized to enroll in the different types of endpoint agents:
 
-
+- :ref:`agent-identity-prerequisites`.
 - :ref:`agent-identity-manager-preparations`.
 - :ref:`agent-identity-linux-unix-endpoint`.
 - :ref:`agent-identity-this-windows-endpoint`.
 - :ref:`agent-identity-macos-endpoint`.
 
 
-Prerequisite
-------------
+.. _agent-identity-prerequisites:
+
+
+prerequisites
+-------------
 
 A certificate authority to sign certificates for the Wazuh manager and agents is needed. In the absence of an already configured certificate authority, the Wazuh manager can be used as the certificate authority by running the below command:
 
