@@ -19,6 +19,20 @@ The location of the agent log file is dependent on the operating system:
 - For a macOS endpoint, the log file is located at ``/Library/Ossec/logs/ossec.log``
 
 
+In the list below you can access the different cases included in this troubleshooting section:
+
+- :ref:`troubleshooting-testing-communication`.
+- :ref:`troubleshooting-authentication-error`.
+- :ref:`troubleshooting-invalid-agent-name`.
+- :ref:`troubleshooting-unable-to-read-ca-certificate-file`.
+- :ref:`troubleshooting-unable-to-read-private-key-file`.
+- :ref:`troubleshooting-unable-to-read-certificate-file`.
+- :ref:`troubleshooting-invalid-password`.
+
+
+.. _troubleshooting-testing-communication:
+
+
 Testing communication with Wazuh manager
 ----------------------------------------
 
@@ -62,6 +76,9 @@ The following default ports on the manager should be opened:
       A connection attempt failed because the connected party did not properly respond after a period of time (...)
 
 
+.. _troubleshooting-authentication-error:
+
+
 Authentication error
 --------------------
 
@@ -77,6 +94,9 @@ Authentication error
 
 **Resolution:** 
 Ensure that the client key on the agent matches the key in the manager client.keys file. The key file can be found at ``/var/ossec/etc/client.keys`` on both the manager and the agent.
+
+
+.. _troubleshooting-invalid-agent-name:
 
 
 Invalid agent name for enrollment
@@ -108,6 +128,9 @@ Ensure the agent hostname is unique and does not match an already enrolled agent
                 ...
             </enrollment>
         </client>
+
+
+.. _troubleshooting-unable-to-read-ca-certificate-file:
 
 
 Unable to read CA certificate file
@@ -144,6 +167,9 @@ Ensure the certificate authority file is in the location specified in the ``<ssl
 Ensure the certificate authority file is in the location specified in the ``<server_ca_path>`` section of the agent ``ossec.conf`` file.
 
 
+.. _troubleshooting-unable-to-read-private-key-file:
+
+
 Unable to read private key file
 -------------------------------
 
@@ -160,6 +186,9 @@ Unable to read private key file
 
 **Resolution:** 
 Ensure the agent private key file is in the location specified in the ``<agent_key_path>`` section of the agent ``ossec.conf`` file.
+
+
+.. _troubleshooting-unable-to-read-certificate-file:
 
 
 Unable to read certificate file
@@ -180,6 +209,9 @@ Unable to read certificate file
 
 **Resolution:**  
 Ensure the agent certificate file is in the location specified in the ``<agent_certificate_path>`` section of the agent ``ossec.conf`` file.
+
+
+.. _troubleshooting-invalid-password:
 
 
 Invalid password
