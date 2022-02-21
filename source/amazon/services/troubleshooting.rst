@@ -40,8 +40,6 @@ Common errors
 
     When an error occurs when trying to collect and parse logs for an AWS service, the ``ossec.log`` will output an error such as below:
 
-    The number is the AWS Account ID provided for the CloudTrail, and the name in the parenthesis is the AWS Account Alias (if provided).
-
     .. code-block:: none
         :class: output
 
