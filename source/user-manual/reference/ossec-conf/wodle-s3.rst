@@ -364,7 +364,7 @@ Run evaluation immediately when service is started.
 interval
 ^^^^^^^^
 
-Time the module will wait for before being executed again.
+The amount of time the module will wait for before running again.
 
 +--------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | 10m                                                                                                                                                  |
