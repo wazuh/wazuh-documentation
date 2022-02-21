@@ -22,7 +22,7 @@ The flow of an agent being enrolled via API is as follows:
    #. The user restarts the agent and the connection to the manager is established.
 
 
-Below you can find a guide on how to requesting the key and importing the key to the agent:
+Below you can find the steps to requesting the key and importing the key to the agent:
 
 .. toctree::    
     :maxdepth: 1
