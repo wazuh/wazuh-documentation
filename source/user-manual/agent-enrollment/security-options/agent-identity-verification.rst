@@ -7,7 +7,26 @@
 
 
 Agent identity verification
----------------------------
+===========================
+
+This method uses SSL certificates to verify that an agent is authorized to enroll in the Wazuh manager. The manager verification and the agent verification are independent of each other. However, it is possible to use a combination of both.
+
+
+Prerequisite
+------------
+
+A certificate authority to sign certificates for the Wazuh manager and agents is needed. In the absence of an already configured certificate authority, the Wazuh manager can be used as the certificate authority by running the below command:
+
+.. code-block:: console
+     
+    # openssl req -x509 -new -nodes -newkey rsa:4096 -keyout rootCA.key -out rootCA.pem -batch -subj "/C=US/ST=CA/O=Wazuh"
+
+
+The root certificate is created and saved as the ``rootCA.pem`` file.
+
+
+Agent verification options
+--------------------------
 
 An SSL certificate is issued to the agent host by the CA in prerequisite 1.On attempts to enroll by the agent, the Wazuh manager verifies the certificate presented by the agent using the root certificate. Wazuh provides two Wazuh agent verification options:
 
