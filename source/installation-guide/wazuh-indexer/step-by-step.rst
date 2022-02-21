@@ -120,26 +120,26 @@ Testing the cluster installation
 
         # curl -k -u admin:admin https://$WAZUH_INDEXER_IP:9700
 
-
       .. code-block:: none
           :class: output accordion-output
 
           {
             "name" : "node-1",
             "cluster_name" : "wazuh-cluster",
-            "cluster_uuid" : "XXT8abZ5S8q1XAIYgOb3cg",
+            "cluster_uuid" : "cMeWTEWxQWeIPDaf1Wx4jw",
             "version" : {
               "number" : "7.10.2",
               "build_type" : "rpm",
-              "build_hash" : "8a529d77c7432bc45b005ac1c4ba3b2741b57d4a",
-              "build_date" : "2021-12-21T01:36:21.407473Z",
+              "build_hash" : "e505b10357c03ae8d26d675172402f2f2144ef0f",
+              "build_date" : "2022-01-14T03:38:06.881862Z",
               "build_snapshot" : false,
               "lucene_version" : "8.10.1",
               "minimum_wire_compatibility_version" : "6.8.0",
               "minimum_index_compatibility_version" : "6.0.0-beta1"
             },
             "tagline" : "The OpenSearch Project: https://opensearch.org/"
-          }   
+          }
+          
 
   #. Run the following command to check if the cluster is working correctly.
   
