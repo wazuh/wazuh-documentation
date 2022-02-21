@@ -9,8 +9,18 @@
 Importing the key to the agent
 ==============================
 
+Below you can find the steps to import the key to different endpoint agents:
+
+- :ref:`linux-unix-endpoint`.
+- :ref:`this-windows-endpoint`.
+- :ref:`this-macos-endpoint`.
+
+
+.. _linux-unix-endpoint:
+
+
 Linux/Unix endpoint
-^^^^^^^^^^^^^^^^^^^
+-------------------
 
 The following steps serve as a guide on how to import the key to a Linux/Unix agent:
 
@@ -76,8 +86,11 @@ The following steps serve as a guide on how to import the key to a Linux/Unix ag
 #. Select the “agents” tab to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successful.
 
 
+.. _this-windows-endpoint:
+
+
 Windows endpoint
-^^^^^^^^^^^^^^^^
+----------------
 
 The following steps serve as a guide on how to import the key to a Windows agent:
 The Wazuh agent installation directory depends on the architecture of the host:
@@ -140,8 +153,11 @@ The Wazuh agent installation directory depends on the architecture of the host:
 #. Select the “agents” tab to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successfully.
 
 
+.. _this-macos-endpoint:
+
+
 macOS endpoint
-^^^^^^^^^^^^^^
+--------------
 
 The following steps serve as a guide on how to import the key to a macOS agent:
 
