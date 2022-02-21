@@ -18,7 +18,7 @@ The Wazuh manager IP address can be configured in one of two ways on the agent:
 
 Enrollment with additional security options involves the use of passwords for enrollment authorization or certificates for identity validation of the agent and manager. See the :doc:`Additional security options<../security-options/index>` section for guidance on enrolling an agent to a manager with additional security options enabled.
 
-Below you can find a guide on how to configure different endpoint agents:
+Below you can find the steps to configure different endpoint agents:
 
 .. toctree::    
     :maxdepth: 1
