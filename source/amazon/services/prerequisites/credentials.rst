@@ -21,7 +21,7 @@ There are multiple ways to configure the AWS credentials:
 Create an IAM User
 ------------------
 
-Wazuh will need a user with permissions to pull log data from the different services. The easiest way to accomplish this is by creating a new IAM user in the account. This section will show how to create a sample user with permissions to only read data from a bucket.
+Wazuh requires a user with permissions to pull log data from the different services. The easiest way to accomplish this is by creating a new IAM user in the AWS account. This section shows how to create a sample user with read-only permissions to pull data from a bucket
 
 1. Create new user:
 
@@ -135,7 +135,7 @@ IAM Roles
 .. warning::
   This authentication method requires some credentials to be previously added to the configuration using any other authentication method.
 
-IAM Roles can also be used to interact with the different AWS services. This section will show how to create a sample IAM role with permissions to only read data from a bucket:
+IAM Roles can also be used to interact with the different AWS services. This section shows how to create a sample IAM role with read-only permissions to pull data from a bucket:
 
 1. Go to Services > Security, Identity & Compliance > IAM.
 
