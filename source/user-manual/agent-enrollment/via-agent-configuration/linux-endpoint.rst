@@ -51,65 +51,8 @@ The following steps serve as a guide on how to configure a Linux/Unix endpoint a
    More optional enrollment parameters and their usage can be found :ref:`here <enrollment>`. 
 
 
-#. Check the agent status to find out if it is running.
-   
 
-   .. tabs::
-   
-   
-      .. group-tab:: Systemd
-   
-       .. code-block:: console
-   
-         # systemctl status wazuh-agent
-   
-   
-      .. group-tab:: SysV init
-   
-       .. code-block:: console
-   
-         # service wazuh-agent status
-
-
-      .. group-tab:: Other Unix based OS
-
-        .. code-block:: console
-
-         # /var/ossec/bin/wazuh-control status
-   
-
-
-#. Start or restart the agent depending on its current state (not running/running) to make the changes effective.
-
-   - Start the agent if it is not running:
-
-   .. tabs::
-   
-   
-      .. group-tab:: Systemd
-   
-       .. code-block:: console
-   
-         # systemctl start wazuh-agent
-   
-   
-      .. group-tab:: SysV init
-   
-       .. code-block:: console
-   
-         # service wazuh-agent start
-
-
-      .. group-tab:: Other Unix based OS
-
-        .. code-block:: console
-
-         # /var/ossec/bin/wazuh-control start
-
-
-
-
-   - Restart the agent if it is already running:
+#. Restart the agent to make the changes effective.
 
    .. tabs::
     
@@ -135,6 +78,5 @@ The following steps serve as a guide on how to configure a Linux/Unix endpoint a
           # /var/ossec/bin/wazuh-control restart
 
 
-#. Check the agent status again to confirm that it has started.
 
 #. Select the “agents” tab to check for the newly enrolled agent, and its connection status in the Wazuh dashboard to confirm that enrollment was successful.         

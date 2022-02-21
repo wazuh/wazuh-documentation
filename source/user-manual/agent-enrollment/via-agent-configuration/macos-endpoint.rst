@@ -52,26 +52,11 @@ The following steps serve as a guide on how to configure a macOS endpoint agent 
       More optional enrollment parameters and their usage are provided :ref:`here <enrollment>`.
 
 
-#. Check the agent status to find out if it is running.
-
-   .. code-block:: console
-   
-     # /Library/Ossec/bin/wazuh-control status
-
-#. Start or restart the agent depending on its current state (not running/running) to make the changes effective.
+#. Restart the agent to make the changes effective.
   
-   - Start the agent if it is not running:
-
-   .. code-block:: console
-
-     # /Library/Ossec/bin/wazuh-control start
-  
-   - Restart the agent if it is already running:
-
    .. code-block:: console
 
      # /Library/Ossec/bin/wazuh-control restart
 
-#. Check the agent status again to confirm that it has started.
 
 #. Select the “agents” tab to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successful.

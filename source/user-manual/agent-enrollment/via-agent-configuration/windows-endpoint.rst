@@ -58,50 +58,8 @@ The Wazuh agent installation directory depends on the architecture of the host:
    More optional enrollment parameters and their usage are provided :ref:`here <enrollment>`.
 
 
-#. Check the agent status to find out if it is running.
 
-      .. tabs::
-        
-        
-          .. group-tab:: PowerShell (as an administrator)
-       
-           .. code-block:: console
-       
-             # Get-Service -name wazuh
-       
-       
-          .. group-tab:: CMD (as an administrator)
-       
-           .. code-block:: console
-       
-             # sc query WazuhSvc
-
-
-
-#. Start or restart the agent depending on its current state (not running/running) to make the changes effective.
-
-   - Start the agent if it is not running:
-
-    .. tabs::
-       
-       
-          .. group-tab:: PowerShell (as an administrator)
-       
-           .. code-block:: console
-       
-             # Start-Service -Name wazuh
-       
-       
-          .. group-tab:: CMD (as an administrator)
-       
-           .. code-block:: console
-       
-             # net start wazuh
-
-
-
-
-   - Restart the agent if it is already running:
+#. Restart the agent  to make the changes effective.
 
     .. tabs::
        
@@ -120,8 +78,5 @@ The Wazuh agent installation directory depends on the architecture of the host:
              # net stop wazuh
              # net start wazuh
 
-
-
-#. Check the agent status again to confirm that it has started.
 
 #. Select the “agents” tab to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successful.
