@@ -65,7 +65,7 @@ Disables the AWS-S3 wodle.
 skip_on_error
 ^^^^^^^^^^^^^
 
-When unable to process and parse a CloudTrail log, skip the log and continue processing
+When unable to process and parse a log, skip it and continue processing. If set to no, the module will abort the execution once it encounters an error.
 
 +--------------------+---------+
 | **Default value**  | yes     |
@@ -364,7 +364,7 @@ Run evaluation immediately when service is started.
 interval
 ^^^^^^^^
 
-Frequency for reading from the S3 bucket.
+Time the module will wait for before being executed again.
 
 +--------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | 10m                                                                                                                                                  |
