@@ -1,5 +1,8 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+  :description: Amazon Macie is a service that uses machine learning and pattern matching to protect sensitive data. Learn how to configure and monitor it with Wazuh.
+
 .. _amazon_macie:
 
 Amazon Macie

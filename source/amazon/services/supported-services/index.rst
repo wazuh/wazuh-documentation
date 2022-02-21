@@ -6,7 +6,7 @@ Supported services
 ==================
 
 .. meta::
-  :description: Supported services
+  :description: Learn more about all the different AWS services that Wazuh is able to monitor here.
 
 All the services except ``Inspector`` and ``CloudWatch Logs`` get their data from log files stored in an ``S3`` bucket. These services store their data into log files which are configured inside ``<bucket type='TYPE'> </bucket>`` tags, while ``Inspector`` and ``CloudWatch Logs`` services are configured inside ``<service type='inspector'> </service>`` and ``<service type='cloudwatchlogs'> </service>`` tags, respectively.
 
