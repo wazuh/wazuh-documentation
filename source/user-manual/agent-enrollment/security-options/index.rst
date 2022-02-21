@@ -25,3 +25,5 @@ The additional security options include:
 
     using-password-authentication
     using-certificates   
+    manager-identity-verification
+    agent-identity-verification
