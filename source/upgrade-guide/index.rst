@@ -17,6 +17,7 @@ In case of having any doubt about operating system compatibility, as well as the
         :maxdepth: 1
 
         upgrading-wazuh
+        migration-guide
         elasticsearch-kibana-filebeat/index
         upgrading-agent
         legacy/index
