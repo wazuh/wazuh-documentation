@@ -21,13 +21,13 @@ The location of the agent log file is dependent on the operating system:
 
 In the list below you can access the different cases included in this troubleshooting section:
 
-- :ref:`troubleshooting-testing-communication`
-- :ref:`troubleshooting-authentication-error`
-- :ref:`troubleshooting-invalid-agent-name`
-- :ref:`troubleshooting-unable-to-read-ca-certificate-file`
-- :ref:`troubleshooting-unable-to-read-private-key-file`
-- :ref:`troubleshooting-unable-to-read-certificate-file`
-- :ref:`troubleshooting-invalid-password`
+- :ref:`troubleshooting-testing-communication`.
+- :ref:`troubleshooting-authentication-error`.
+- :ref:`troubleshooting-invalid-agent-name`.
+- :ref:`troubleshooting-unable-to-read-ca-certificate-file`.
+- :ref:`troubleshooting-unable-to-read-private-key-file`.
+- :ref:`troubleshooting-unable-to-read-certificate-file`.
+- :ref:`troubleshooting-invalid-password`.
 
 
 .. _troubleshooting-testing-communication:
