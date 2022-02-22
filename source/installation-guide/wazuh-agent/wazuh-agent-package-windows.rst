@@ -39,7 +39,7 @@ The agent runs on the host you want to monitor and communicates with the Wazuh m
 
               The installation process is now complete and the Wazuh agent is successfully installed, registered, and configured, running on your Windows system.
 
-              .. note:: Alternatively, if you want to install an agent without registering it, omit the deployment variables. To learn more about the different registration methods, see the :ref:`Registering Wazuh agents <register_agents>` section.
+              .. note:: Alternatively, if you want to install an agent without registering it, omit the deployment variables. To learn more about the different registration methods, see the :ref:`Wazuh agent enrollment <agent_enrollment>` section.
                
 
             
@@ -51,7 +51,7 @@ The agent runs on the host you want to monitor and communicates with the Wazuh m
                         :align: center
                         :width: 50%
             
-              The installation process is now complete and the Wazuh agent is successfully installed on your Windows system. The next step is to register and configure the agent to communicate with the Wazuh manager. To perform this action, see the :ref:`Registering Wazuh agents <register_agents>` section.                 
+              The installation process is now complete and the Wazuh agent is successfully installed on your Windows system. The next step is to register and configure the agent to communicate with the Wazuh manager. To perform this action, see the :ref:`Wazuh agent enrollment <agent_enrollment>` section.                 
  
 
  By default, all agent files are stored in ``C:\Program Files (x86)\ossec-agent`` after the installation.

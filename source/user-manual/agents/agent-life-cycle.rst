@@ -10,7 +10,7 @@ Agent life cycle
 Registered agent
 ----------------
 
-Once an agent is installed on a machine to be monitored, it must be registered with the Wazuh server in order to establish communication. Take a look at :doc:`The registration process<../registering/index>`.
+Once an agent is installed on a machine to be monitored, it must be registered with the Wazuh server in order to establish communication. Take a look at :doc:`Wazuh agent enrollment </user-manual/agent-enrollment/index>`.
 
 A registered agent will remain in the manager until it is removed by the user. There are four different states that an agent may be in at any given time, as shown in the image below:
 
