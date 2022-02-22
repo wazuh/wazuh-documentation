@@ -5,8 +5,8 @@
 
 .. _amazon_kms:
 
-AWS Key Management Service
-==========================
+AWS Key Management Service (KMS)
+================================
 
 `AWS Key Management Service <https://aws.amazon.com/kms/>`_ (KMS) makes it easy for users to create and manage keys and control the use of encryption across a wide range of AWS services and in their applications. AWS KMS is a secure and resilient service that uses FIPS 140-2 validated hardware security modules to protect their keys. AWS KMS is integrated with AWS CloudTrail to provide users with logs of all key usage to help meet their regulatory and compliance needs.
 

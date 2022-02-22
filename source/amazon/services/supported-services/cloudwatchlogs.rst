@@ -5,8 +5,8 @@
 
 .. _aws_cloudwatchlogs:
 
-AWS CloudWatch Logs
-===================
+Amazon CloudWatch Logs
+======================
 
 .. versionadded:: 4.0.0
 

@@ -5,8 +5,8 @@
 
 .. _amazon_inspector:
 
-Amazon Inspector
-================
+Amazon Inspector Classic
+========================
 
 `Amazon Inspector <https://aws.amazon.com/inspector/>`_ is an automated security assessment service that helps improve the security and compliance of applications deployed on AWS. Amazon Inspector automatically assesses applications for exposure, vulnerabilities, and deviations from best practices. After performing an assessment, Amazon Inspector produces a detailed list of security findings prioritized by level of severity. These findings can be reviewed directly or as part of detailed assessment reports which are available via the Amazon Inspector console or API.
 

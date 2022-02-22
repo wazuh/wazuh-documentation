@@ -17,19 +17,19 @@ Amazon configuration
 
 #. Go to Services > Compute > EC2:
 
-    .. thumbnail:: ../../../images/aws/aws-create-vpc-1.png
+    .. thumbnail:: ../../../../images/aws/aws-create-vpc-1.png
       :align: center
       :width: 70%
 
 #. Go to Load Balancing > Load Balancers on the left menu. Create a new load balancer or select one or more load balancers and select *Edit attributes* on the *Actions* menu:
 
-    .. thumbnail:: ../../../images/aws/aws-create-elb-1.png
+    .. thumbnail:: ../../../../images/aws/aws-create-elb-1.png
       :align: center
       :width: 70%
 
 #. In this tab we will define our S3 and the path where the logs will be stored:
 
-    .. thumbnail:: ../../../images/aws/aws-create-elb-2.png
+    .. thumbnail:: ../../../../images/aws/aws-create-elb-2.png
       :align: center
       :width: 70%
 
