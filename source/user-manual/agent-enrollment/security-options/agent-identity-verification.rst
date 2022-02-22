@@ -24,7 +24,7 @@ Below you can find the steps to verify that an agent is authorized to enroll in 
 .. _agent-identity-prerequisites:
 
 
-prerequisites
+Prerequisites
 -------------
 
 A certificate authority to sign certificates for the Wazuh manager and agents is needed. In the absence of an already configured certificate authority, the Wazuh manager can be used as the certificate authority by running the below command:
