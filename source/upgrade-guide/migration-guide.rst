@@ -58,7 +58,21 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13.2 to Wazuh 
 
 #. Install Wazuh indexer. 
 
-    .. include:: /_templates/installations/indexer/common/install-indexer.rst
+    .. tabs::
+
+      .. group-tab:: Yum
+
+          .. code-block:: console
+
+            # yum install -y wazuh-indexer
+
+
+
+      .. group-tab:: APT
+
+          .. code-block:: console
+
+            # apt install wazuh-indexer
 
 
 #. Remove demo certificates, copy your old certificates to the new location and give them the right ownership and permissions.   
