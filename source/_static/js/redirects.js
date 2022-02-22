@@ -5,6 +5,7 @@ const redirectSameRelease = [];
 
 /* Note: new release versions must always be inserted in the first position of the array "versions" */
 const versions = [
+  '4.4',
   '4.3',
   '4.2',
   '4.1',
@@ -68,6 +69,35 @@ removedUrls['x.y'] = [
   '/old-url',
 ];
 */
+
+/* *** RELEASE 4.4 ****/
+
+/* Redirections from 4.3 to 4.4  */
+
+redirections.push(
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/amazon/services/supported-services/alb.html',
+      '4.4': '/amazon/services/supported-services/elastic-load-balancing/alb.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/amazon/services/supported-services/nlb.html',
+      '4.4': '/amazon/services/supported-services/elastic-load-balancing/nlb.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/amazon/services/supported-services/clb.html',
+      '4.4': '/amazon/services/supported-services/elastic-load-balancing/clb.html',
+    }
+);
+*/
+
+/* Pages added in 4.4 */
+
+newUrls['4.4'] = [
+  '/amazon/services/supported-services/elastic-load-balancing/index.html',
+];
 
 /* *** RELEASE 4.3 ****/
 
