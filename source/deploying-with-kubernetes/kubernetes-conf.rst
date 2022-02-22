@@ -291,4 +291,4 @@ Wazuh agents are designed to monitor hosts. To start using them:
 
    - Alternatively, use the `authd <https://documentation.wazuh.com/current/user-manual/reference/daemons/wazuh-authd.html?highlight=authd>`_ daemon with option *-m* specifying the external IP address of the Wazuh service that takes to the port 1515, or its DNS if using *AWS Route 53*.
 
-To learn more about registering agents, see the :ref:`Registering Wazuh agents <register_agents>` section of the documentation.
+To learn more about registering agents, see the :ref:`Wazuh agent enrollment <agent_enrollment>` section of the documentation.

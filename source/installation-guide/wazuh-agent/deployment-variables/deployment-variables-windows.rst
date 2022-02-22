@@ -70,7 +70,7 @@ Absolute paths to CA, certificate or key that contain spaces can be written as s
 The number "2" means that the file will be searched at the second occurrence of the "Progra" word, thus, the key and certificate would be searched at the folder "C:\\Program Files (x86)". In case this number was "1", it would be searched at "Program Files".
 
 .. note::
-    To verify agents via SSL, it's necessary to use both WAZUH_REGISTRATION_KEY and WAZUH_REGISTRATION_CERTIFICATE options. See the :ref:`verify hosts with SSL <host-verification-registration>` section.
+    To verify agents via SSL, it's necessary to use both WAZUH_REGISTRATION_KEY and WAZUH_REGISTRATION_CERTIFICATE options. See the :ref:`verify hosts with SSL <enrolloment_additional_security>` section.
 
 Registration with protocol::
 
