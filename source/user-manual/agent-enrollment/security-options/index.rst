@@ -12,9 +12,9 @@ Additional security measures can be implemented in the enrollment process in ord
 
 The additional security options include:
 
-- :doc:`Using password authentication <using-password-authentication>`.  
-- :doc:`Manager identity verification <manager-identity-verification>`.
-- :doc:`Agent identity verification <agent-identity-verification>`.
+- :doc:`Using password authentication <using-password-authentication>`
+- :doc:`Manager identity verification <manager-identity-verification>`
+- :doc:`Agent identity verification <agent-identity-verification>`
 
 
 .. toctree::  

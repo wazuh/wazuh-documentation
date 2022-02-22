@@ -11,9 +11,9 @@ Importing the key to the agent
 
 In this document, you will find the following information:
 
-- :ref:`linux-unix-endpoint`.
-- :ref:`this-windows-endpoint`.
-- :ref:`this-macos-endpoint`.
+- :ref:`linux-unix-endpoint`
+- :ref:`this-windows-endpoint`
+- :ref:`this-macos-endpoint`
 
 
 .. _linux-unix-endpoint:
