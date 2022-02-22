@@ -11,12 +11,12 @@ Using password authentication
 
 This method requires a password during the enrollment process to ensure that agents enrolled to the Wazuh manager are authenticated.
 
-Below you can find the steps to ensure that the different types of endpoint agents are authenticated:
+In this document, you will find the following information:
 
 - :ref:`password-authentication-prerequisites`
-    - :ref:`password-authentication-linux-unix-endpoint`
-    - :ref:`password-authentication-windows-endpoint`
-    - :ref:`password-authentication-macos-endpoint`
+- :ref:`password-authentication-linux-unix-endpoint`
+- :ref:`password-authentication-windows-endpoint`
+- :ref:`password-authentication-macos-endpoint`
 
 
 .. _password-authentication-prerequisites:
@@ -99,7 +99,7 @@ Once the above prerequisites are fulfilled, agent enrollment can be done using t
 
 
 Linux/Unix endpoint
-^^^^^^^^^^^^^^^^^^^
+-------------------
 
 The following steps serve as a guide on how to enroll a Linux/Unix endpoint with password authentication:
 
@@ -178,7 +178,7 @@ The following steps serve as a guide on how to enroll a Linux/Unix endpoint with
 
 
 Windows endpoint
-^^^^^^^^^^^^^^^^
+----------------
 
 The following steps serve as a guide on how to enroll a Windows endpoint with password authentication:
 
@@ -239,7 +239,7 @@ The Wazuh agent installation directory depends on the architecture of the host.
 
 
 macOS endpoint
-^^^^^^^^^^^^^^
+--------------
 
 The following steps serve as a guide on how to enroll a macOS endpoint with password authentication:
 

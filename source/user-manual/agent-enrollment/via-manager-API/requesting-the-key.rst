@@ -10,7 +10,7 @@ Requesting the key
 
 The agent key can be requested from any system that has connectivity with the manager API. It can also be done from the Wazuh web user interface or from a browser by connecting directly to the API service. The default API port is 55000/TCP. The host making the enrollment request must have connectivity to the manager via this port or any other port that the API has been configured to listen on.
 
-Below you can find the steps to request the agent keys in the different types of endpoint agents:
+In this document, you will find the following information:
 
 - :ref:`from-linux-unix-and-macos`.
 - :ref:`from-windows`.
