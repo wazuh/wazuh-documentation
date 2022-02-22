@@ -23,7 +23,7 @@ Below you can find the steps to ensure that the different types of endpoint agen
 
 
 Prerequisites
-^^^^^^^^^^^^^
+-------------
 
 Before an agent can be enrolled to the Wazuh manager using the password authentication method, the following must be done on the Wazuh manager:
 
