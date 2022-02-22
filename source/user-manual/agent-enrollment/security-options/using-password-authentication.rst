@@ -13,10 +13,10 @@ This method requires a password during the enrollment process to ensure that age
 
 Below you can find the steps to ensure that the different types of endpoint agents are authenticated:
 
-- :ref:`password-authentication-prerequisites`.
-- :ref:`password-authentication-linux-unix-endpoint`.
-- :ref:`password-authentication-windows-endpoint`.
-- :ref:`password-authentication-macos-endpoint`.
+- :ref:`password-authentication-prerequisites`
+    - :ref:`password-authentication-linux-unix-endpoint`
+    - :ref:`password-authentication-windows-endpoint`
+    - :ref:`password-authentication-macos-endpoint`
 
 
 .. _password-authentication-prerequisites:

@@ -13,12 +13,12 @@ This method uses SSL certificates to verify the identity of the Wazuh manager be
 
 Below you can find the steps to verify the identity of the Wazuh manager in the different types of endpoint agents:
 
-- :ref:`manager-identity-prerequisites`.
-- :ref:`manager-identity-validation`.
-- :ref:`manager-identity-manager-configuration`.
-- :ref:`manager-identity-linux-unix-endpoint`.
-- :ref:`manager-identity-this-windows-endpoint`.
-- :ref:`manager-identity-macos-endpoint`.
+- :ref:`manager-identity-prerequisites`
+- :ref:`manager-identity-validation`
+    - :ref:`manager-identity-manager-configuration`
+    - :ref:`manager-identity-linux-unix-endpoint`
+    - :ref:`manager-identity-this-windows-endpoint`
+    - :ref:`manager-identity-macos-endpoint`
 
 
 .. _manager-identity-prerequisites:
