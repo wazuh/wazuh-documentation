@@ -3,12 +3,12 @@
 .. meta::
   :description: AWS Classic Load Balancer is a service that distributes incoming application traffic across multiple targets. Learn how to configure and monitor it with Wazuh.
 
-.. _amazon_clb:
+.. _amazon_nlb:
 
-Amazon CLB
+Amazon NLB
 ==========
 
-`Classic Load Balancers <https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/introduction.html>`_ (Amazon CLB) Elastic Load Balancing automatically distributes the incoming traffic across multiple targets, such as EC2 instances, containers, and IP addresses, in one or more Availability Zones. It monitors the health of its registered targets and routes traffic only to the healthy targets. Users can select the type of load balancer that best suits their needs. A Classic Load Balancer makes routing decisions at either the transport layer (TCP/SSL) or the application layer (HTTP/HTTPS). Classic Load Balancers currently require a fixed relationship between the load balancer port and the container instance port.
+`Network Load Balancers <https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html>`_ (Amazon NLB) Elastic Load Balancing automatically distributes the incoming traffic across multiple targets, such as EC2 instances, containers, and IP addresses, in one or more Availability Zones. It monitors the health of its registered targets and routes traffic only to the healthy targets. Users can select the type of load balancer that best suits their needs. A Network Load Balancer functions at the fourth layer of the Open Systems Interconnection (OSI) model. It can handle millions of requests per second. After the load balancer receives a connection request, it selects a target from the target group for the default rule. It attempts to open a TCP connection to the selected target on the port specified in the listener configuration.
 
 Amazon configuration
 --------------------
@@ -17,32 +17,32 @@ Amazon configuration
 
 #. Go to Services > Compute > EC2:
 
-    .. thumbnail:: ../../../images/aws/aws-create-vpc-1.png
+    .. thumbnail:: ../../../../images/aws/aws-create-vpc-1.png
       :align: center
       :width: 70%
 
 #. Go to Load Balancing > Load Balancers on the left menu. Create a new load balancer or select one or more load balancers and select *Edit attributes* on the *Actions* menu:
 
-    .. thumbnail:: ../../../images/aws/aws-create-elb-1.png
+    .. thumbnail:: ../../../../images/aws/aws-create-elb-1.png
       :align: center
       :width: 70%
 
 #. In this tab we will define our S3 and the path where the logs will be stored:
 
-    .. thumbnail:: ../../../images/aws/aws-create-elb-2.png
+    .. thumbnail:: ../../../../images/aws/aws-create-elb-2.png
       :align: center
       :width: 70%
 
     .. note::
-      To enable access logs for CLB (Classic Load Balancers), check the following link:
+      To enable access logs for NLB (Network Load Balancers), check the following link:
 
-        * `Classic Load Balancer. <https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-access-logs.html>`_
+        * `Network Load Balancer. <https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-access-logs.html>`_
 
 
 Wazuh configuration
 -------------------
 
-#. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following block for CLB:
+#. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following block for NLB:
 
     .. code-block:: xml
 
@@ -51,9 +51,9 @@ Wazuh configuration
         <interval>10m</interval>
         <run_on_start>yes</run_on_start>
         <skip_on_error>yes</skip_on_error>
-        <bucket type="clb">
+        <bucket type="nlb">
           <name>wazuh-aws-wodle</name>
-          <path>CLB</path>
+          <path>NLB</path>
           <aws_profile>default</aws_profile>
         </bucket>
       </wodle>

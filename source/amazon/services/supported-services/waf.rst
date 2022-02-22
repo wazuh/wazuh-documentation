@@ -5,8 +5,8 @@
 
 .. _amazon_waf:
 
-Amazon WAF
-==========
+Amazon Web Application Firewall (WAF)
+=====================================
 
 `Amazon WAF <https://aws.amazon.com/waf/>`_ is a web application firewall that helps protect your web applications from common web exploits that could affect application availability, compromise security, or consume excessive resources. ``AWS WAF`` gives you control over which traffic to allow or block to your web applications by defining customizable web security rules. 
 
