@@ -55,9 +55,6 @@ The next table contains the most relevant information about configuring each ser
     cloudtrail
     vpc
     config
-    alb
-    clb
-    nlb
     kms
     macie
     trusted-advisor
@@ -68,3 +65,4 @@ The next table contains the most relevant information about configuring each ser
     cloudwatchlogs
     ecr-image-scanning
     cisco-umbrella
+    elastic-load-balancing/index

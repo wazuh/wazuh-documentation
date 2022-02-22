@@ -6,8 +6,8 @@
 
 .. _amazon_server_access:
 
-S3 Server Access
-================
+Amazon S3 Server Access
+=======================
 
 `Amazon S3 Server Access Logging <https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerLogs.html>`_ provides detailed records for the requests that are made to a bucket. Server access logs are useful for many applications. For example, access log information can be useful in security and access audits. It can also help you learn about your customer base and understand your Amazon S3 bill.
 

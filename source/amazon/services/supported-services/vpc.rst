@@ -5,8 +5,8 @@
 
 .. _amazon_vpc:
 
-Amazon VPC
-==========
+Amazon Virtual Private Cloud (VPC)
+==================================
 
 `Amazon Virtual Private Cloud <https://aws.amazon.com/vpc/?nc1=h_ls>`_ (Amazon VPC) lets users provision a logically isolated section of the AWS Cloud where they can launch AWS resources in a virtual network that they define. Users have complete control over their virtual networking environment, including selection of their own IP address range, creation of subnets, and configuration of route tables and network gateways. Users can use both IPv4 and IPv6 in their VPC for secure and easy access to resources and applications.
 
