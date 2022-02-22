@@ -11,7 +11,7 @@ Using password authentication
 
 This method requires a password during the enrollment process to ensure that agents enrolled to the Wazuh manager are authenticated.
 
-In this document, you will find the following information:
+Below you can find the steps to configure different endpoint agents:
 
 - :ref:`password-authentication-prerequisites`
 - :ref:`password-authentication-linux-unix-endpoint`
