@@ -1,8 +1,8 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
-  :description: In this section of the Wazuh documentation, you will find all the information related to the internal configuration of Wazuh. 
-  
+  :description: In this section of the Wazuh documentation, you will find all the information related to the internal configuration of Wazuh.
+
 .. _reference_internal_options:
 
 Internal configuration
@@ -1062,12 +1062,6 @@ Wazuh Command
 Wazuh-db
 --------
 
-+------------------------------------+---------------+-------------------------------------------------------------------------------------+
-|      **wazuh_db.sock_queue_size**  | Description   | Maximum number of pending connections                                               |
-|                                    +---------------+-------------------------------------------------------------------------------------+
-|                                    | Default value | 128                                                                                 |
-|                                    +---------------+-------------------------------------------------------------------------------------+
-|                                    | Allowed value | Any integer between 1 and 1024                                                      |
 +------------------------------------+---------------+-------------------------------------------------------------------------------------+
 |      **wazuh_db.worker_pool_size** | Description   | Number of worker threads                                                            |
 |                                    +---------------+-------------------------------------------------------------------------------------+
