@@ -38,7 +38,7 @@ The following has to be in place to ensure the Wazuh agent enrollment is done:
 
 #. An installed and running Wazuh agent on the endpoint that the user needs to enroll. 
 
-#. Outbound connectivity between the Wazuh agent and the Wazuh manager services. The following ports are configurable:
+#. Outbound connectivity from the Wazuh agent to the Wazuh manager services. The following ports are configurable:
 
    - 1514/TCP for agent communication.
    - 1515/TCP for enrollment via automatic agent request.
