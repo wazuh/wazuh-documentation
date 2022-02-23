@@ -124,10 +124,7 @@ html_theme = 'wazuh_doc_theme'
 html_theme_options = {
     'wazuh_web_url': 'https://wazuh.com',
     'wazuh_doc_url': 'https://documentation.wazuh.com',
-    'globaltoc_depth': 5, # Only for Wazuh documentation theme v2.0
-    'includehidden': True, # Only for Wazuh documentation theme v2.0v
     'collapse_navigation': False, # Only for Wazuh documentation theme v2.0v
-    'prev_next_buttons_location': 'bottom' # Only for Wazuh documentation theme v2.0v
 }
 
 
