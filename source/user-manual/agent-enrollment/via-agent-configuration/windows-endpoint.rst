@@ -13,9 +13,9 @@ The following steps serve as a guide on how to configure a Windows endpoint agen
 
 The Wazuh agent installation directory depends on the architecture of the host:
 
-- C:\Program Files (x86)\ossec-agent for 64-bit systems.
+- ``C:\Program Files (x86)\ossec-agent`` for 64-bit systems.
 
-- C:\Program Files\ossec-agent for 32-bit systems.
+- ``C:\Program Files\ossec-agent`` for 32-bit systems. 
 
 
 #. Using an administrator account, modify the Wazuh agent configuration file ``ossec.conf`` in the installation directory. For this guide, we are assuming a 64-bit architecture. Hence, ``C:\Program Files (x86)\ossec-agent\ossec.conf``

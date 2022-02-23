@@ -95,8 +95,8 @@ Windows endpoint
 The following steps serve as a guide on how to import the key to a Windows agent:
 The Wazuh agent installation directory depends on the architecture of the host:
 
-- C:\Program Files (x86)\ossec-agent for 64-bit systems.
-- C:\Program Files\ossec-agent for 32-bit systems.
+- ``C:\Program Files (x86)\ossec-agent`` for 64-bit systems.
+- ``C:\Program Files\ossec-agent`` for 32-bit systems.
 
 #. From the Wazuh agent, launch the CMD or PowerShell as an administrator and import the key.
 

@@ -184,8 +184,8 @@ The following steps serve as a guide on how to enroll a Windows endpoint with pa
 
 The Wazuh agent installation directory depends on the architecture of the host.
 
-- C:\Program Files (x86)\ossec-agent for 64-bit systems.
-- C:\Program Files\ossec-agent for 32-bit systems.
+- ``C:\Program Files (x86)\ossec-agent`` for 64-bit systems.
+- ``C:\Program Files\ossec-agent`` for 32-bit systems.
 
 #. Launch PowerShell as an administrator.
 #. Create a file called ``authd.pass`` and save the password to it.

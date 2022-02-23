@@ -182,8 +182,8 @@ The following steps serve as a guide on how to enroll a Windows endpoint by usin
 
 The Wazuh agent installation directory depends on the architecture of the host.
 
-- C:\Program Files (x86)\ossec-agent for 64-bit systems.
-- C:\Program Files\ossec-agent for 32-bit systems.
+- ``C:\Program Files (x86)\ossec-agent`` for 64-bit systems.
+- ``C:\Program Files\ossec-agent`` for 32-bit systems.
 
 #. Ensure that the signed SSL certificate and key files (``sslagent.cert`` and ``sslagent.key``) have been copied to the endpoint.
 #. As a root user, modify the Wazuh agent configuration file located at ``“C:\Program Files (x86)\ossec-agent\ossec.conf”`` and include the following:
