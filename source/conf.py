@@ -448,8 +448,8 @@ def customReplacements(app, docname, source):
 
 custom_replacements = {
     "|CURRENT_MAJOR|" : "4.x",
-    "|WAZUH_LATEST|" : "4.2.5",
-    "|WAZUH_LATEST_MINOR|" : "4.2",
+    "|WAZUH_LATEST|" : "4.3.0",
+    "|WAZUH_LATEST_MINOR|" : "4.3",
     "|WAZUH_PACKAGES_BRANCH|" : "4.2",
     "|WAZUH_LATEST_ANSIBLE|" : "4.2.5",
     "|WAZUH_LATEST_KUBERNETES|" : "4.2.5",
@@ -508,7 +508,7 @@ custom_replacements = {
     "|DEB_MANAGER|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-manager/wazuh-manager",
     "|DEB_API|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-api/wazuh-api",
     # Variables for Elastic's Elasticsearch
-    "|ELASTICSEARCH_ELK_LATEST|" : "7.14.2",
+    "|ELASTICSEARCH_ELK_LATEST|" : "7.17.0",
     "|ELASTICSEARCH_ELK_LATEST_ANSIBLE|" : "7.10.2",
     "|ELASTICSEARCH_ELK_LATEST_KUBERNETES|" : "7.10.2",
     "|ELASTICSEARCH_ELK_LATEST_PUPPET|" : "7.10.2",
