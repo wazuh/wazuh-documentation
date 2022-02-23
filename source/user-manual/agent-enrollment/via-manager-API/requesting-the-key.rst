@@ -12,8 +12,8 @@ The agent key can be requested from any system that has connectivity with the ma
 
 In this document, you will find the following information:
 
-- :ref:`from-linux-unix-and-macos`.
-- :ref:`from-windows`.
+- :ref:`from-linux-unix-and-macos`
+- :ref:`from-windows`
 
 
 .. _from-linux-unix-and-macos:
