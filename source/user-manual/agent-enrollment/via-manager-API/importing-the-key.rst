@@ -100,7 +100,7 @@ The Wazuh agent installation directory depends on the architecture of the host:
 
 #. From the Wazuh agent, launch the CMD or PowerShell as an administrator and import the key.
 
-   .. code-block:: console
+   .. code-block:: PowerShell
 
     # & "C:\Program Files (x86)\ossec-agent\manage_agents.exe" -i <key>
 
