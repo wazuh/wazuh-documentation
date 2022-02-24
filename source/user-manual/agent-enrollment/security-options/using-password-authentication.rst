@@ -191,7 +191,7 @@ The Wazuh agent installation directory depends on the architecture of the host.
 
    .. code-block:: console
       
-        # ``echo “<custom_password>” > "C:\Program Files (x86)\ossec-agent\authd.pass"``.
+        # echo “<custom_password>” > "C:\Program Files (x86)\ossec-agent\authd.pass"
 
    Note that you have to replace ``<custom_password>`` with the agents enrollment password created on the manager.
 
