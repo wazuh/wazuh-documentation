@@ -14,8 +14,8 @@ The location of the agent log file is dependent on the operating system:
 
 - For Linux-based systems, the log file is located at ``/var/ossec/logs/ossec.log``
 - For Windows endpoints, the location of the log file is dependent on its architecture:
-   - For a 64-bit endpoint, it is located at ``C:\Program Files (x86)\ossec-agent\ossec.log``
-   - For a 32-bit endpoint, it is located at ``C:\Program Files\ossec-agent\ossec.logs``
+     - For a 64-bit endpoint, it is located at ``C:\Program Files (x86)\ossec-agent\ossec.log``
+     - For a 32-bit endpoint, it is located at ``C:\Program Files\ossec-agent\ossec.logs``
 - For a macOS endpoint, the log file is located at ``/Library/Ossec/logs/ossec.log``
 
 

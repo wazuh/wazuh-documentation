@@ -106,27 +106,26 @@ The following steps serve as a guide on how to enroll a Linux/Unix endpoint with
 #. Launch the terminal as a root user.
 #. Create the file ``/var/ossec/etc/authd.pass`` with the enrollment password in it.
 
-   .. code-block:: console
+       .. code-block:: console
 
-       # echo "<password>" > /var/ossec/etc/authd.pass
+          # echo "<custom_password>" > /var/ossec/etc/authd.pass
 
 
-   .. note::
-     #. You have to replace ``<password>`` with the agents enrollment password created on the manager.
-     #. File permissions for the ``authd.pass`` file should be set to 644 and the owner should be root. The permissions and ownership can be configured by running the commands below:
+    #. You have to replace ``<custom_password>`` with the agents enrollment password created on the manager.
+    #. File permissions for the ``authd.pass`` file should be set to 644 and the owner should be root. The permissions and ownership can be configured by running the commands below:
 
-         .. code-block:: console
+       .. code-block:: console
 
-               # chmod 644 /var/ossec/etc/authd.pass
-               # chown root:wazuh /var/ossec/etc/authd.pass
+          # chmod 644 /var/ossec/etc/authd.pass
+          # chown root:wazuh /var/ossec/etc/authd.pass
 
 
     The output below shows the recommended file owner and permissions.
 
-         .. code-block:: xml
-            :class: output 
+       .. code-block:: xml
+        :class: output 
 
-            -rw-r--r-- 1 root wazuh 18 Jan 11 13:03 /var/ossec/etc/authd.pass
+          -rw-r--r-- 1 root wazuh 18 Jan 11 13:03 /var/ossec/etc/authd.pass
 
 #. Add the Wazuh manager IP address or DNS name in the ``<client><server><address>`` section of the manager configuration file ``/var/ossec/etc/ossec.conf``.
 
@@ -194,7 +193,7 @@ The Wazuh agent installation directory depends on the architecture of the host.
       
         # ``echo “<custom_password>” > "C:\Program Files (x86)\ossec-agent\authd.pass"``.
 
-   Note that you have to replace ``<password>`` with the agents enrollment password created on the manager.
+   Note that you have to replace ``<custom_password>`` with the agents enrollment password created on the manager.
 
 
 #. Add the Wazuh manager IP address or DNS name in the ``<client><server><address>`` section of ``C:\Program Files (x86)\ossec-agent\ossec.conf``:
@@ -247,29 +246,24 @@ The following steps serve as a guide on how to enroll a macOS endpoint with pass
 
 #. Create a file called ``/Library/Ossec/etc/authd.pass`` and save the password to it.
 
+       .. code-block:: console
 
-   .. code-block:: console
+          # echo "<custom_password>" > /Library/Ossec/etc/authd.pass
 
-     # echo "<custom_password>" > /Library/Ossec/etc/authd.pass
-
-
-
-   .. note::
-    #. You have to replace ``<password>`` with the agents enrollment password created on the manager.
+    #. You have to replace ``<custom_password>`` with the agents enrollment password created on the manager.
     #. File permissions for the ``authd.pass`` file should be set to 644 and the owner should be root. The permissions and ownership can be configured by running the commands below:
 
-            .. code-block:: console 
+       .. code-block:: console 
 
-                  # chmod 644 /Library/Ossec/etc/authd.pass
-                  # chown root:wazuh /Library/Ossec/etc/authd.pass
+          # chmod 644 /Library/Ossec/etc/authd.pass
+          # chown root:wazuh /Library/Ossec/etc/authd.pass
 
+    The output below shows the recommended file owner and permissions:
 
-      The output below shows the recommended file owner and permissions:
+       .. code-block:: xml
+           :class: output 
 
-            .. code-block:: xml
-               :class: output 
-
-               -rw-r--r-- 1 root wazuh 18 Jan 11 13:03 /Library/Ossec/etc/authd.pass
+            -rw-r--r-- 1 root wazuh 18 Jan 11 13:03 /Library/Ossec/etc/authd.pass
 
 #. Add the Wazuh manager IP address or DNS name in the ``<client><server><address>`` section of ``/Library/Ossec/etc/ossec.conf``:
 
