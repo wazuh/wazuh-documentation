@@ -40,6 +40,13 @@ Amazon configuration
 
       The structure may change depending on the different configuration of the services, and the user may only change the **bucket_name** & **prefix** values.
 
+Policy configuration
+^^^^^^^^^^^^^^^^^^^^
+
+.. include:: /_templates/cloud/amazon/create_policy.rst
+.. include:: /_templates/cloud/amazon/bucket_policies.rst
+.. include:: /_templates/cloud/amazon/attach_policy.rst
+
 Wazuh configuration
 -------------------
 

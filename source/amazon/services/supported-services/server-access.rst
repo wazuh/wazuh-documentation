@@ -51,6 +51,13 @@ Amazon configuration
 #. Finally, click on the *Save changes*. S3 Server Access logs will start to be stored in the specified path.
 
 
+Policy configuration
+++++++++++++++++++++
+
+.. include:: /_templates/cloud/amazon/create_policy.rst
+.. include:: /_templates/cloud/amazon/bucket_policies.rst
+.. include:: /_templates/cloud/amazon/attach_policy.rst
+
 Wazuh configuration
 -------------------
 
