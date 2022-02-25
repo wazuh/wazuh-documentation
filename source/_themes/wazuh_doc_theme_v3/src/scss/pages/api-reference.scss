@@ -12,7 +12,8 @@
 @import "../components/mode-switch";
 
 // Variables used only for ReDoc
-$light-color-redoc-type: #b4b4b4 !default;
+$light-color-redoc-type: #757575 !default;
+$light-color-redoc-type-border: #b4b4b4 !default;
 $light-color-redoc-code-background: #f6f6f6 !default;
 $dark-color-redoc-base-space: #2b303a !default;
 $dark-color-redoc-table-heading: #292929 !default;
@@ -195,6 +196,17 @@ header {
   }
 }
 
+.light-theme,
+.dark-theme {
+  [role=main] {
+    caption,
+    td,
+    th {
+      background-color: transparent;
+    }
+  } 
+}
+
 /* Redoc Element styles ----------------------------------------------------- */
 
 redoc[spec-url] .beRszf {
@@ -225,7 +237,7 @@ redoc[spec-url] .beRszf {
     height: 45px;
     padding: .4rem;
     background: transparent;
-    background-color: #fff;
+    background-color: transparent;
     border-radius: 4px;
     box-shadow: none;
   }
@@ -307,6 +319,31 @@ redoc[spec-url] .beRszf {
   }
   pre code {
     background-color: $dark-color-code-block-background;
+  }
+  .gbsZqp {
+    color: #fff;
+  }
+  .token {
+    font-family: "Fira mono", monospace;
+    font-size: 14px;
+    &.property, 
+    &.tag,
+    &.number,
+    &.constant,
+    &.symbol {
+      color: $dark-color-code-number;
+    }
+    &.comment,
+    &.prolog,
+    &.doctype,
+    &.cdata {
+      color: $dark-color-code-comment;
+    }
+    &.atrule, 
+    &.attr-value, 
+    &.keyword {
+      color: $dark-color-code-string;
+    }
   }
 
   // Responses (central column): 200, 400, etc
@@ -596,11 +633,12 @@ redoc[spec-url] .beRszf {
       .http-verb {
         font-family: Manrope, sans-serif;
         font-size: 16px;
+        color: #000;
         &.get {
           background-color: $dark-color-success;
         }
         &.post {
-          background-color: $dark-color-primary;
+          background-color: $dark-color-primary-lighter;
         }
         &.put {
           background-color: $dark-color-code-variable;
@@ -713,7 +751,7 @@ body {
           color: $dark-color-danger;
         }
         &.number {
-          color: $dark-color-code-number;
+          color: $light-color-primary-lighter;
         }
       }
     }
@@ -758,13 +796,13 @@ body {
     }
     .XrbXS {
       color: $light-color-redoc-type;
-      border-bottom-color: $light-color-redoc-type !important;
+      border-bottom-color: $light-color-redoc-type-border !important;
     }
 
     // QUERY PARAMETERS and REQUEST BODY SCHEMA
     .sc-gqjmRU.LiUBH {
       color: $light-color-redoc-type !important;
-      border-bottom-color: $light-color-redoc-type !important;
+      border-bottom-color: $light-color-redoc-type-border !important;
       > .sc-hSdWYo.hoUoen {
         color: $light-color-main-text;
       }
@@ -834,7 +872,7 @@ body {
 
     // Array of <Type>
     .sc-TOsTZ.fKyGWc {
-      color: $light-color-border-details;
+      color: $light-color-redoc-type;
     }
 
     // Array () []
@@ -871,15 +909,15 @@ body {
 
     // Parameters values and descriptions
     .kGwPhO {
-      border-bottom-color: $light-color-redoc-type;
+      border-bottom-color: $light-color-redoc-type-border;
     }
     .edBCth {
-      color: $light-color-input-placeholder;
+      color: $light-color-shaded-text;
     }
 
     // Value restrictions
     .beUper {
-      color: $light-color-primary;
+      color: $light-color-primary-alt;
       background-color: $light-color-highlight-background;
     }
 
@@ -908,7 +946,7 @@ body {
     // Inline code value
     .bMfIUD {
       color: $light-color-main-text-extra;
-      border-color: $light-color-redoc-type;
+      border-color: $light-color-redoc-type-border;
     }
 
     // Samples tabs (in dark background part)
@@ -1103,7 +1141,7 @@ body {
           color: $dark-color-danger;
         }
         &.number {
-          color: $dark-color-code-number;
+          color: $light-color-primary-lighter;
         }
       }
     }
@@ -1150,17 +1188,17 @@ body {
 
     // AUTHORIZATIONS
     .sc-epnACN {
-      color: $light-color-redoc-type;
+      color: $light-color-redoc-type-border;
     }
     .XrbXS {
-      color: $light-color-redoc-type;
-      border-bottom-color: $light-color-redoc-type !important;
+      color: $light-color-redoc-type-border;
+      border-bottom-color: $light-color-redoc-type-border !important;
     }
 
     // QUERY PARAMETERS and REQUEST BODY SCHEMA
     .sc-gqjmRU.LiUBH {
-      color: $light-color-redoc-type !important;
-      border-bottom-color: $light-color-redoc-type !important;
+      color: $light-color-redoc-type-border !important;
+      border-bottom-color: $light-color-redoc-type-border !important;
       > .sc-hSdWYo.hoUoen {
         color: $dark-color-main-text;
       }
@@ -1172,7 +1210,7 @@ body {
 
       // Porperty required
       .sc-ksYbfQ.sc-hmzhuo.bGITIP {
-        color: $dark-color-redoc-danger;
+        color: $dark-color-danger;
       }
     }
     tr.last:first-of-type > .eAybih,
@@ -1245,7 +1283,7 @@ body {
 
     // Types
     .sc-kgAjT.hqYVjx {
-      color: $light-color-redoc-type;
+      color: $light-color-redoc-type-border;
     }
 
     // Default
@@ -1273,11 +1311,11 @@ body {
     // Parameters values and descriptions
     // Doesn't change
     // .kGwPhO {
-    //   border-bottom-color: $light-color-redoc-type;
+    //   border-bottom-color: $light-color-redoc-type-border;
     // }
-    // .edBCth {
-    //   color: $light-color-input-placeholder;
-    // }
+    .edBCth {
+      color: $light-color-input-placeholder;
+    }
     // Value restrictions
     .beUper {
       color: $dark-color-primary;
