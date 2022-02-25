@@ -99,18 +99,13 @@ Repeat this stage of the installation process for every Wazuh indexer node in yo
     <div class="accordion-section open">
 
 
-#. Run the Wazuh indexer ``securityadmin.sh`` script on any Wazuh indexer node to load the new certificates information and start the cluster. Replace ``<node_IP>`` with your Wazuh indexer node IP address.
+#. Run the Wazuh indexer ``indexerSecurityInitializer.sh`` script on any Wazuh indexer node to load the new certificates information and start the cluster. 
     
     .. code-block:: console
 
-      # export WAZUH_INDEXER_IP="<node_IP>"
+      # /usr/share/wazuh-indexer/bin/indexerSecurityInitializer.sh
 
-    .. code-block:: console
-
-      # sudo -u wazuh-indexer OPENSEARCH_PATH_CONF=/etc/wazuh-indexer JAVA_HOME=/usr/share/wazuh-indexer/jdk /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig -icl -p 9800 -cd /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig -nhnv -cacert /etc/wazuh-indexer/certs/root-ca.pem -cert /etc/wazuh-indexer/certs/admin.pem -key /etc/wazuh-indexer/certs/admin-key.pem -h $WAZUH_INDEXER_IP
-        
-       
-
+      
 Testing the cluster installation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -118,7 +113,7 @@ Testing the cluster installation
 
       .. code-block:: console
 
-        # curl -k -u admin:admin https://$WAZUH_INDEXER_IP:9700
+        # curl -k -u admin:admin https://<WAZUH_INDEXER_IP>:9700
 
       .. code-block:: none
           :class: output accordion-output
@@ -145,7 +140,7 @@ Testing the cluster installation
   
       .. code-block:: console
 
-        # curl -k -u admin:admin https://$WAZUH_INDEXER_IP:9700/_cat/nodes?v
+        # curl -k -u admin:admin https://<WAZUH_INDEXER_IP>:9700/_cat/nodes?v
 
 
 Next steps
