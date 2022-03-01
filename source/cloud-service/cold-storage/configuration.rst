@@ -9,7 +9,6 @@ Configuration
 Your environment is configured by default to send the following data to cold storage:
 
 - `Wazuh output`_
-- `Wazuh configuration`_
 
 Wazuh output
 ------------
@@ -26,10 +25,3 @@ There is no limit on the amount of data stored in the cold storage, but the time
 .. note::
 
   Files with ``.log`` extension are never sent to cold storage.
-
-Wazuh configuration
--------------------
-
-Data corresponding to Wazuh configuration such us ``/var/ossec/etc`` or ``/var/ossec/api/configuration`` is compressed and backed up once a day.
-
-Configuration backup is stored in cold storage for up to 30 days, after which it is deleted.
