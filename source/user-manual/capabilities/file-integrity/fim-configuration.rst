@@ -2,7 +2,7 @@
 
 .. meta::
   :description: Learn more about File Integrity Monitoring, one of the Wazuh capabilities. We show you some configuration examples to get the best out of Wazuh.
-  
+
 .. _fim-examples:
 
 Configuration
@@ -456,9 +456,6 @@ Configuring synchronization
     <synchronization>
       <enabled>yes</enabled>
       <interval>5m</interval>
-      <max_interval>1h</max_interval>
-      <response_timeout>30</response_timeout>
-      <queue_size>16384</queue_size>
       <max_eps>10</max_eps>
     </synchronization>
   </syscheck>

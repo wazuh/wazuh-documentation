@@ -735,7 +735,7 @@ Specifies the maximun number of files to be monitored.
 +--------------------+------------------------------------------+
 
 
-**registry**
+**registries**
 
 .. versionadded:: 4.4
 
@@ -761,9 +761,6 @@ The database synchronization settings are configured inside this tag.
     <synchronization>
       <enabled>yes</enabled>
       <interval>5m</interval>
-      <max_interval>1h</max_interval>
-      <response_timeout>30</response_timeout>
-      <queue_size>16384</queue_size>
       <max_eps>10</max_eps>
     </synchronization>
 
@@ -801,38 +798,6 @@ the value will be duplicated until it reaches the value of ``max_interval``.
 +--------------------+----------------------------------------------------------------------+
 | **Allowed values** | Any number greater than or equal to 0. Allowed sufixes (s, m, h, d). |
 +--------------------+----------------------------------------------------------------------+
-
-**max_interval**
-
-Specifies the maximum number of seconds between every inventory synchronization.
-
-+--------------------+-----------------------------------------------------------------------------+
-| **Default value**  | 1 h                                                                         |
-+--------------------+-----------------------------------------------------------------------------+
-| **Allowed values** | Any number greater than or equal to interval. Allowed sufixes (s, m, h, d). |
-+--------------------+-----------------------------------------------------------------------------+
-
-**response_timeout**
-
-Specifies the time elapsed in seconds since the agent sends the message to the manager and receives the response.
-If the response is not received in this interval, the message is marked as unanswered (timed-out) and the agent
-may start a new synchronization session at the defined interval.
-
-+--------------------+---------------------------------------+
-| **Default value**  | 30                                    |
-+--------------------+---------------------------------------+
-| **Allowed values** | Any number greater than or equal to 0.|
-+--------------------+---------------------------------------+
-
-**queue_size**
-
-Specifies the queue size of the manager synchronization responses.
-
-+--------------------+---------------------------------------+
-| **Default value**  | 16384                                 |
-+--------------------+---------------------------------------+
-| **Allowed values** | Integer number between 2 and 1000000. |
-+--------------------+---------------------------------------+
 
 **max_eps**
 
