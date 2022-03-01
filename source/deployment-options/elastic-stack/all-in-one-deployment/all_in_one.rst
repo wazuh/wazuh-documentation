@@ -125,20 +125,20 @@ This command should have an output like this:
    {
      "name" : "elasticsearch",
      "cluster_name" : "elasticsearch",
-     "cluster_uuid" : "upF9h1afQN2TfHtt0h3Kuw",
+     "cluster_uuid" : "38phzvsUQDezIl5eMwgCYw",
      "version" : {
-       "number" : "7.14.2",
+       "number" : "7.17.0",
        "build_flavor" : "default",
-       "build_type" : "rpm",
-       "build_hash" : "6bc13727ce758c0e943c3c21653b3da82f627f75",
-       "build_date" : "2021-09-15T10:18:09.722761972Z",
+       "build_type" : "deb",
+       "build_hash" : "bee86328705acaa9a6daede7140defd4d9ec56bd",
+       "build_date" : "2022-01-28T08:36:04.875279988Z",
        "build_snapshot" : false,
-       "lucene_version" : "8.9.0",
+       "lucene_version" : "8.11.1",
        "minimum_wire_compatibility_version" : "6.8.0",
        "minimum_index_compatibility_version" : "6.0.0-beta1"
      },
      "tagline" : "You Know, for Search"
-   }
+   }   
 
   
   
