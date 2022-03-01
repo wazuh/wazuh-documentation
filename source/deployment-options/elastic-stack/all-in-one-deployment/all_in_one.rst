@@ -44,13 +44,6 @@ Adding the Elastic Stack repository
 
 
 
-  .. group-tab:: ZYpp
-
-
-    .. include:: ../../../_templates/installations/basic/elastic/zypp/add_repository.rst
-
-
-
 Elasticsearch installation and configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -70,12 +63,6 @@ Elasticsearch installation and configuration
 
         .. include:: ../../../_templates/installations/basic/elastic/deb/install_elasticsearch.rst
 
-
-
-      .. group-tab:: ZYpp
-
-
-        .. include:: ../../../_templates/installations/basic/elastic/zypp/install_elasticsearch.rst
 
 
 #. .. include:: ../../../_templates/installations/basic/elastic/common/elastic-single-node/configure_elasticsearch_aio.rst
@@ -185,13 +172,6 @@ Adding the Wazuh repository
 
 
 
-  .. group-tab:: ZYpp
-
-
-    .. include:: ../../../_templates/installations/basic/wazuh/zypp/add_repository_aio.rst
-
-
-
 Installing the Wazuh manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -211,12 +191,6 @@ Installing the Wazuh manager
 
         .. include:: ../../../_templates/installations/basic/wazuh/deb/install_wazuh_manager.rst
 
-
-
-      .. group-tab:: ZYpp
-
-
-        .. include:: ../../../_templates/installations/basic/wazuh/zypp/install_wazuh_manager.rst
 
 
 #. Enable and start the Wazuh manager service:
@@ -256,12 +230,6 @@ Filebeat installation and configuration
 
         .. include:: ../../../_templates/installations/basic/elastic/deb/install_filebeat.rst
 
-
-
-      .. group-tab:: ZYpp
-
-
-        .. include:: ../../../_templates/installations/basic/elastic/zypp/install_filebeat.rst
 
 
 #. Download the pre-configured Filebeat config file used to forward Wazuh alerts to Elasticsearch:
@@ -330,12 +298,6 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
 
 
-        .. group-tab:: ZYpp
-
-
-            .. include:: ../../../_templates/installations/basic/elastic/zypp/install_kibana.rst
-
-
 #. Copy the Elasticsearch certificates into the Kibana configuration folder:
 
     .. include:: ../../../_templates/installations/basic/elastic/common/copy_certificates_kibana_elastic_server.rst
@@ -402,11 +364,6 @@ Disabling repositories
 
     .. include:: ../../../_templates/installations/basic/wazuh/deb/disabling_repositories.rst
 
-
-
-  .. group-tab:: ZYpp
-
-    .. include:: ../../../_templates/installations/basic/wazuh/zypp/disabling_repositories.rst
 
 
 To uninstall all the components of the all in one installation, visit the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_basic>`.

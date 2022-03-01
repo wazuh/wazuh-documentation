@@ -41,13 +41,6 @@ Adding the Elastic Stack repository
 
 
 
-  .. group-tab:: ZYpp
-
-
-    .. include:: ../../../../../_templates/installations/basic/elastic/zypp/add_repository.rst
-
-
-
 Kibana installation and configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -67,12 +60,6 @@ Kibana installation and configuration
 
             .. include:: ../../../../../_templates/installations/basic/elastic/deb/install_kibana.rst
 
-
-
-        .. group-tab:: ZYpp
-
-
-            .. include:: ../../../../../_templates/installations/basic/elastic/zypp/install_kibana.rst
 
 
 #. The next step is the certificate placement, this guide assumes that a copy of ``certs.zip`` is placed in the root home folder (~/):
@@ -160,13 +147,6 @@ Disabling repositories
 
 
     .. include:: ../../../../../_templates/installations/basic/elastic/deb/disabling_repositories.rst
-
-
-
-  .. group-tab:: ZYpp
-
-
-    .. include:: ../../../../../_templates/installations/basic/elastic/zypp/disabling_repositories.rst
 
 
 

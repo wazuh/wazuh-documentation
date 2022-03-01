@@ -46,13 +46,6 @@ This section describes how to add the Wazuh repository. It will be used for Wazu
 
 
 
-  .. group-tab:: ZYpp
-
-
-    .. include:: ../../../../../_templates/installations/basic/wazuh/zypp/add_repository.rst
-
-
-
 Installing the Wazuh manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -72,13 +65,6 @@ Installing the Wazuh manager
 
 
     .. include:: ../../../../../_templates/installations/basic/wazuh/deb/install_wazuh_manager.rst
-
-
-
-  .. group-tab:: ZYpp
-
-
-    .. include:: ../../../../../_templates/installations/basic/wazuh/zypp/install_wazuh_manager.rst
 
 
 
@@ -147,12 +133,6 @@ Adding the Elastic Stack repository
 
 
 
-  .. group-tab:: ZYpp
-
-
-    .. include:: ../../../../../_templates/installations/basic/elastic/zypp/add_repository.rst
-
-
 Filebeat installation and configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -174,12 +154,6 @@ Filebeat installation and configuration
 
         .. include:: ../../../../../_templates/installations/basic/elastic/deb/install_filebeat.rst
 
-
-
-      .. group-tab:: ZYpp
-
-
-        .. include:: ../../../../../_templates/installations/basic/elastic/zypp/install_filebeat.rst
 
 
 #. Download the pre-configured Filebeat config file used to forward Wazuh alerts to Elasticsearch:
@@ -242,11 +216,6 @@ Disabling repositories
 
     .. include:: ../../../../../_templates/installations/basic/wazuh/deb/disabling_repositories.rst
 
-
-
-  .. group-tab:: ZYpp
-
-    .. include:: ../../../../../_templates/installations/basic/wazuh/zypp/disabling_repositories.rst
 
 
 To uninstall Wazuh and Filebeat, visit the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_open_distro>`.
