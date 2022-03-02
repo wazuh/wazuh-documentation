@@ -2,6 +2,8 @@
 
 .. meta::
   :description: Wazuh agent's registration process provides the user with an automated mechanism to enroll agents with minimal configuration steps.
+
+:orphan:
   
 .. _agent-enrollment:
 
