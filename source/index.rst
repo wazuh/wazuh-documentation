@@ -19,13 +19,13 @@ Index
    installation-guide/index
    deployment-options/index
    upgrade-guide/index
+   migration-guide/index
    Wazuh Cloud service <cloud-service/index>
    user-manual/index
    monitoring
    container-security/index
    development/index
    compliance
-   migrating-from-ossec/index
    learning-wazuh/index
    proof-of-concept-guide/index
    release-notes/index
