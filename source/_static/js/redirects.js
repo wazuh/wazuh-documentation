@@ -103,12 +103,22 @@ newUrls['4.3'] = [
   '/gcp/supported-services/firewall.html',
   '/amazon/services/supported-services/ecr-image-scanning.html',
   '/development/selinux-wazuh-context.html',
+  '/user-manual/deployment-variables/deployment-variables-linux.html',
+  '/user-manual/deployment-variables/deployment-variables-windows.html',
+  '/user-manual/deployment-variables/deployment-variables-macos.html',
+  '/user-manual/deployment-variables/deployment-variables-aix.html',
+  '/user-manual/deployment-variables/deployment-variables.html',
 ];
 
 removedUrls['4.3'] = [
   '/azure/monitoring-activity.html',
   '/azure/monitoring-services.html',
   '/azure/dependencies.html',
+  '/installation-guide/wazuh-agent/deployment-variables/deployment-variables-linux.html',
+  '/installation-guide/wazuh-agent/deployment-variables/deployment-variables-windows.html',
+  '/installation-guide/wazuh-agent/deployment-variables/deployment-variables-macos.html',
+  '/installation-guide/wazuh-agent/deployment-variables/deployment-variables-aix.html',
+  '/installation-guide/wazuh-agent/deployment-variables/deployment-variables.html',
 ];
 
 
