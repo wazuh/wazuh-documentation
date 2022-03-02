@@ -184,13 +184,23 @@ if ( $('.document') ) {
     });
   });
 
-  /* Code related to the pages based on ReDoc ------------------------------- */
+  /* Table adjustments----------------------- ------------------------------- */
   $('table.docutils:not(.list-rows)').each(function() {
+    /* Table wrapper and table with header */
     if ( !$(this).hasClass('release-notes') ) {
       if ( $(this).find('thead').length > 0 ) {
         $(this).wrap('<div class="table-wrapper w-header"/>');
       } else {
         $(this).wrap('<div class="table-wrapper"/>');
+      }
+    }
+
+    /* Table with caption */
+    const caption = $(this).find('caption');
+    if ( caption.length > 0 ) {
+      const parent = $(this).closest('.table-wrapper');
+      if ( parent.length > 0 ) {
+        parent.append(caption);
       }
     }
   });

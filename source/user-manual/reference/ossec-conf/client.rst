@@ -255,9 +255,10 @@ Sample configuration
       <auto_restart>yes</auto_restart>
     </client>
 
+.. _enrollment:
+
 enrollment
 ^^^^^^^^^^
-
 .. versionadded:: 4.0
 
 Configures the connection parameters for the agent enrollment.

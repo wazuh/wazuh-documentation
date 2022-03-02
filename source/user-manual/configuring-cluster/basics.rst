@@ -100,7 +100,7 @@ Integrity thread
 
     The *integrity thread* is in charge of synchronizing the files sent by the master node to the workers. Those files are:
 
-        - :ref:`agent-keys-registration` file.
+        - The Wazuh agent keys file.
         - :doc:`User defined rules, decoders <../ruleset/custom>` and :doc:`CDB lists <../ruleset/cdb-list>`.
         - :doc:`Agent groups files and assignments <../agents/grouping-agents>`.
 

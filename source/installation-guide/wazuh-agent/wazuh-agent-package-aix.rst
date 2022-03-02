@@ -22,7 +22,7 @@ The deployment of a Wazuh agent on an AIX system uses deployment variables that 
 
    For additional deployment options such as agent name, agent group, and registration password, see :ref:`Deployment variables for AIX <deployment_variables_aix>` section.   
    
-   .. note:: Alternatively, if you want to install an agent without registering it, omit the deployment variables.  To learn more about the different registration methods, see the :ref:`Registering Wazuh agents <register_agents>` section.
+   .. note:: Alternatively, if you want to install an agent without registering it, omit the deployment variables.  To learn more about the different registration methods, see the :ref:`Wazuh agent enrollment <agent_enrollment>` section.
 
 #. To complete the installation process, start the Wazuh agent.
 
