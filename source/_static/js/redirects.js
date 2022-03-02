@@ -128,6 +128,31 @@ redirections.push(
     '4.2': 'azure/dependencies.html',
     '4.3': 'azure/activity-services/prerequisites/dependencies.html',
   },
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': '/installation-guide/wazuh-agent/deployment-variables/deployment-variables-linux.html',
+    '4.3': '/user-manual/deployment-variables/deployment-variables-linux.rst',
+  },
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': '/installation-guide/wazuh-agent/deployment-variables/deployment-variables-windows.html',
+    '4.3': '/user-manual/deployment-variables/deployment-variables-windows.html',
+  },
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': '/installation-guide/wazuh-agent/deployment-variables/deployment-variables-macos.html',
+    '4.3': '/user-manual/deployment-variables/deployment-variables-macos.html',
+  },
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': '/installation-guide/wazuh-agent/deployment-variables/deployment-variables-aix.html',
+    '4.3': '/user-manual/deployment-variables/deployment-variables-aix.html',
+  },
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': '/installation-guide/wazuh-agent/deployment-variables/deployment-variables.html',
+    '4.3': '/user-manual/deployment-variables/deployment-variables.html',
+  },
 );
 
 /* *** RELEASE 4.2 ****/
