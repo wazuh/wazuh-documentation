@@ -21,6 +21,8 @@ Configuration options for file integrity monitoring:
 - `alert_new_files`_
 - `allow_remote_prefilter_cmd`_
 - `database`_
+- `db_entry_limit`_
+- `diff`_
 - `directories`_
 - `disabled`_
 - `frequency`_
@@ -36,13 +38,10 @@ Configuration options for file integrity monitoring:
 - `skip_nfs`_
 - `skip_proc`_
 - `skip_sys`_
-- `file_limit`_
-- `db_entry_limit`_
 - `synchronization`_
 - `whodata`_
 - `windows_audit_interval`_
 - `windows_registry`_
-- `diff`_
 
 .. _reference_ossec_syscheck_alert_new_files:
 
@@ -62,7 +61,7 @@ Example:
 .. code-block:: xml
 
  <alert_new_files>yes</alert_new_files>
- 
+
 .. note::
 
 	This setting only applies in managers.
@@ -649,52 +648,10 @@ Example:
 
 
 
-file_limit
-----------
-
-.. deprecated:: 4.4
-
-Specifies a limit on the number of files that will be monitored by syscheck. Files created when the database has reached the limit will be ignored.
-
-.. code-block:: xml
-
-    <!-- Maximum number of files to be monitored -->
-    <file_limit>
-      <enabled>yes</enabled>
-      <entries>100000</entries>
-    </file_limit>
-
-
-**enabled**
-
-.. deprecated:: 4.4
-
-Specifies whether there will be a limit on the number of monitored files or not.
-
-+--------------------+---------------------------------------+
-| **Default value**  | yes                                   |
-+--------------------+---------------------------------------+
-| **Allowed values** | yes/no                                |
-+--------------------+---------------------------------------+
-
-
-**entries**
-
-.. deprecated:: 4.4
-
-Specifies the number of files to be monitored.
-
-+--------------------+------------------------------------------+
-| **Default value**  | 100000                                   |
-+--------------------+------------------------------------------+
-| **Allowed values** | Integer number between 1 and 2147483647. |
-+--------------------+------------------------------------------+
-
-
 db_entry_limit
 --------------
 
-.. versionadded:: 4.4
+.. versionadded:: 4.5
 
 Specifies a limit on the number of entries that will be monitored by FIM. Entries created when the database has reached the limit will be ignored.
 In Windows agents, the monitored files and registries are handled by different limits.
@@ -711,7 +668,7 @@ In Windows agents, the monitored files and registries are handled by different l
 
 **enabled**
 
-.. versionadded:: 4.4
+.. versionadded:: 4.5
 
 Specifies whether there will be a limit on the number of monitored entries.
 
@@ -724,7 +681,7 @@ Specifies whether there will be a limit on the number of monitored entries.
 
 **files**
 
-.. versionadded:: 4.4
+.. versionadded:: 4.5
 
 Specifies the maximun number of files to be monitored.
 
@@ -737,7 +694,7 @@ Specifies the maximun number of files to be monitored.
 
 **registries**
 
-.. versionadded:: 4.4
+.. versionadded:: 4.5
 
 Specifies the maximun number of registry values to be monitored.
 
