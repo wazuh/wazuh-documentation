@@ -326,7 +326,8 @@ redoc[spec-url] .beRszf {
   .token {
     font-family: "Fira mono", monospace;
     font-size: 14px;
-    &.property, 
+    &.property,
+    &.property.string, 
     &.tag,
     &.number,
     &.constant,
@@ -342,7 +343,21 @@ redoc[spec-url] .beRszf {
     &.atrule, 
     &.attr-value, 
     &.keyword {
+      color: $dark-color-code-variable;
+    }
+    &.selector, 
+    &.attr-name, 
+    &.string, 
+    &.char, 
+    &.builtin, 
+    &.inserted {
       color: $dark-color-code-string;
+    }
+    &.operator, 
+    &.entity, 
+    &.url, 
+    &.variable {
+      color: $dark-color-code-default;
     }
   }
 
