@@ -64,7 +64,7 @@ Several services are used for the communication of Wazuh components. Below is th
 +-----------------+-----------+---------------+----------------------------------------------+
 |                 | 9200      | TCP           | Wazuh indexer RESTful API                    |
 + Wazuh indexer   +-----------+---------------+----------------------------------------------+
-|                 | 9300      | TCP           | Wazuh indexer cluster communication          |
+|                 | 9300-9400 | TCP           | Wazuh indexer cluster communication          |
 +-----------------+-----------+---------------+----------------------------------------------+
 | Wazuh dashboard | 443       | TCP           | Wazuh web interface                          |
 +-----------------+-----------+---------------+----------------------------------------------+
