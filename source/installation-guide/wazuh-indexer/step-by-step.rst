@@ -113,7 +113,7 @@ Testing the cluster installation
 
       .. code-block:: console
 
-        # curl -k -u admin:admin https://<WAZUH_INDEXER_IP>:9700
+        # curl -k -u admin:admin https://<WAZUH_INDEXER_IP>:9200
 
       .. code-block:: none
           :class: output accordion-output
@@ -140,7 +140,7 @@ Testing the cluster installation
   
       .. code-block:: console
 
-        # curl -k -u admin:admin https://<WAZUH_INDEXER_IP>:9700/_cat/nodes?v
+        # curl -k -u admin:admin https://<WAZUH_INDEXER_IP>:9200/_cat/nodes?v
 
 
 Next steps
