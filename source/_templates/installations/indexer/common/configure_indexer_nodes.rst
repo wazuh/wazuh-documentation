@@ -3,7 +3,7 @@
 #. Edit ``/etc/wazuh-indexer/opensearch.yml``.
 
     .. code-block:: yaml
-      :emphasize-lines: 2,4,7,26,27,29,30,42
+      :emphasize-lines: 2,4,7,24,25,27,28,40
 
        network.host: "0.0.0.0"
        node.name: "node-1"
@@ -16,8 +16,6 @@
        #  - "node-1-ip"
        #  - "node-2-ip"
        #  - "node-3-ip"
-       http.port: 9700-9799
-       transport.tcp.port: 9800-9899
        node.max_local_storage_nodes: "3"
        path.data: /var/lib/wazuh-indexer
        path.logs: /var/log/wazuh-indexer

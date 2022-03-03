@@ -36,7 +36,7 @@ The Wazuh messages protocol uses AES encryption by default, with 128 bits per bl
 Wazuh components communication
 ------------------------------
 
-The Wazuh server uses Filebeat to send alert and event data to the Wazuh indexer, using TLS encryption. Filebeat reads the Wazuh server output data and sends it to the Wazuh indexer (by default listening on port 9700/TCP). Once the data is indexed by the Wazuh indexer, the Wazuh dashboard is used to mine and visualize the information.
+The Wazuh server uses Filebeat to send alert and event data to the Wazuh indexer, using TLS encryption. Filebeat reads the Wazuh server output data and sends it to the Wazuh indexer (by default listening on port 9200/TCP). Once the data is indexed by the Wazuh indexer, the Wazuh dashboard is used to mine and visualize the information.
 
 The Wazuh dashboard queries the Wazuh RESTful API (by default listening on port 55000/TCP on the Wazuh server) to display configuration and status-related information of the :ref:`Wazuh server <wazuh_server>` and :ref:`agents <wazuh_agent>`. It can also modify, through API calls, agents or server configuration settings when desired. This communication is encrypted with TLS and authenticated with username and password.
 
@@ -62,9 +62,9 @@ Several services are used for the communication of Wazuh components. Below is th
 +                 +-----------+---------------+----------------------------------------------+
 |                 | 55000     | TCP           | Wazuh RESTful API                            |
 +-----------------+-----------+---------------+----------------------------------------------+
-|                 | 9700-9799 | TCP           | Wazuh-indexer RESTful API                    |
+|                 | 9200-9300 | TCP           | Wazuh indexer RESTful API                    |
 + Wazuh indexer   +-----------+---------------+----------------------------------------------+
-|                 | 9800-9899 | TCP           | Wazuh indexer cluster communication          |
+|                 | 9300-9400 | TCP           | Wazuh indexer cluster communication          |
 +-----------------+-----------+---------------+----------------------------------------------+
 | Wazuh dashboard | 443       | TCP           | Wazuh web interface                          |
 +-----------------+-----------+---------------+----------------------------------------------+
