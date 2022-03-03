@@ -79,7 +79,7 @@
   <view id="circle-check-dt" viewBox="200 40 28 28"/>
   <view id="circle-exclamation-blue-lt" viewBox="240 0 28 28"/>
   <view id="circle-exclamation-orange" viewBox="240 40 28 28"/>
-  <view id="circle-exclamation-red" viewBox="240 80 28 28"/>
+  <view id="circle-exclamation-red-lt" viewBox="240 80 28 28"/>
   <view id="circle-exclamation-blue-dt" viewBox="240 120 28 28"/>
   <view id="circle-exclamation-red-dt" viewBox="240 160 28 28"/>
   <view id="circle-bell-lt" viewBox="280 0 28 28"/>
