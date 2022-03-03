@@ -66,7 +66,7 @@ Installing the Wazuh dashboard
 Configuring the Wazuh dashboard
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-  #. Edit the ``/etc/wazuh-dashboard/dashboard.yml`` file.
+  #. Edit the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file.
 
     .. code-block:: yaml
       :emphasize-lines: 1,3
