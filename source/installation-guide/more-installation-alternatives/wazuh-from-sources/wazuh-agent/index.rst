@@ -141,7 +141,7 @@ Installing Wazuh agent from sources
 
        1- What kind of installation do you want (manager, agent, local, hybrid or help)? agent
 
-    Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :ref:`user manual<register_agents>`.
+    Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :ref:`Wazuh agent enrollment <agent_enrollment>`.
 
     .. raw:: html
 
@@ -254,7 +254,7 @@ Installing Wazuh agent from sources
 
       :: signtool sign /a /tr http://rfc3161timestamp.globalsign.com/advanced /d "%MSI_NAME%" /td SHA256 "%MSI_NAME%"
 
-    .. note:: Once the Agent is deployed :ref:`with a normal or unattended installation <wazuh_agent_package_windows>`, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit :ref:`user manual<register_agents>`.
+    .. note:: Once the Agent is deployed :ref:`with a normal or unattended installation <wazuh_agent_package_windows>`, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit :ref:`Wazuh agent enrollment <agent_enrollment>`.
 
     .. raw:: html
 
@@ -316,7 +316,7 @@ Installing Wazuh agent from sources
 
       1- What kind of installation do you want (manager, agent, local, hybrid or help)? agent
 
-    Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :ref:`user manual<register_agents>`.
+    Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :ref:`Wazuh agent enrollment <agent_enrollment>`.
 
     .. raw:: html
 
@@ -432,7 +432,7 @@ Installing Wazuh agent from sources
 
      .. note:: Note that the above commands have been executed for the default installation path /var/ossec. If you have installed the agent in another path, you will have to modify the path of those commands.
 
-    Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :ref:`user manual<register_agents>`.
+    Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :ref:`Wazuh agent enrollment <agent_enrollment>`.
 
     .. raw:: html
 
@@ -551,7 +551,7 @@ Installing Wazuh agent from sources
 
     .. note:: During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``. When choosing a different path than the default, if the directory already exist the installer will ask if delete the directory or if installing Wazuh inside. You can also run an :ref:`unattended installation <unattended-installation>`.
 
-    Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :ref:`user manual<register_agents>`.
+    Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :ref:`Wazuh agent enrollment <agent_enrollment>`.
 
     .. raw:: html
 
@@ -737,7 +737,7 @@ Installing Wazuh agent from sources
 
            1- What kind of installation do you want (manager, agent, local, hybrid or help)? agent
 
-        Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :ref:`user manual<register_agents>`.
+        Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :ref:`Wazuh agent enrollment <agent_enrollment>`.
 
         .. raw:: html
 
@@ -876,7 +876,7 @@ Installing Wazuh agent from sources
 
           1- What kind of installation do you want (manager, agent, local, hybrid or help)? agent
 
-        Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :ref:`user manual<register_agents>`.
+        Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :ref:`Wazuh agent enrollment <agent_enrollment>`.
 
 
         .. raw:: html

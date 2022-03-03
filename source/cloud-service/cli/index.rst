@@ -17,7 +17,7 @@ To use ``wcloud-cli``, you need to install the following components:
 
 - Python 3.x
 - ``boto3`` Python package
-- ``request`` Python package
+- ``requests`` Python package
   
 Installation
 ------------
@@ -32,12 +32,12 @@ Installation
 
   .. code-block:: console
 
-    # wcloud-cli version
+    # ./wcloud-cli version
 
   .. code-block:: none
     :class: output
 
-    Wazuh Cloud CLI - "version": "1.1.1"
+    Wazuh Cloud CLI - "version": "1.0.0"
 
 
 Configuration
