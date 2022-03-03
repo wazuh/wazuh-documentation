@@ -62,7 +62,7 @@ Several services are used for the communication of Wazuh components. Below is th
 +                 +-----------+---------------+----------------------------------------------+
 |                 | 55000     | TCP           | Wazuh RESTful API                            |
 +-----------------+-----------+---------------+----------------------------------------------+
-|                 | 9200      | TCP           | Wazuh indexer RESTful API                    |
+|                 | 9200-9300 | TCP           | Wazuh indexer RESTful API                    |
 + Wazuh indexer   +-----------+---------------+----------------------------------------------+
 |                 | 9300-9400 | TCP           | Wazuh indexer cluster communication          |
 +-----------------+-----------+---------------+----------------------------------------------+
