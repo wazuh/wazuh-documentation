@@ -125,10 +125,6 @@ Users can easily access developer tools integrated directly into the Wazuh dashb
 
 The Ruleset Test tool provides an input box for reading sample logs and an output box to visualize the test results. This feature of the Wazuh dashboard allows you to test sample logs directly on the web user interface and see how the ruleset reacts to specific log messages.
 
-.. raw:: html
-    <div class="images-rn-420-container">
-    <div class="images-rn-420">
-
 .. thumbnail::  ../../images/getting_started/dashboard_ruleset_test.png 
       :align: center
       :title: Ruleset test
