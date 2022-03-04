@@ -125,6 +125,11 @@ Users can easily access developer tools integrated directly into the Wazuh dashb
 
 The Ruleset Test tool provides an input box for reading sample logs and an output box to visualize the test results. This feature of the Wazuh dashboard allows you to test sample logs directly on the web user interface and see how the ruleset reacts to specific log messages.
 
+.. thumbnail::  ../../images/getting_started/dashboard_ruleset_test.png 
+      :align: center
+      :title: Ruleset test
+
+
 The Wazuh dashboard also includes an API Console for users to interact with the Wazuh API. This API accommodates complete remote management of the Wazuh infrastructure and, from the API Console, you can easily perform everyday actions such as adding agents, restarting components, creating roles, or looking up syscheck details.
 
 
