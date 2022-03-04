@@ -75,21 +75,15 @@ Below is an example of the results of a configuration assessment evaluation. The
    :title: Security configuration assessment inventory dashboard
    :align: center
 
-.. raw:: html
-   
-   <div class="images-rn-420-container">
-   <div class="images-rn-420">
+.. hlist::
+    :columns: 2
 
-.. thumbnail:: /images/getting_started/use-cases/wazuh-use-cases-sca2.png
-      :title: Security configuration assessment inventory
-      :align: center
-
-.. thumbnail:: /images/getting_started/use-cases/wazuh-use-cases-sca3.png
-      :title: Security configuration assessment inventory events
-      :align: center
-      
-.. raw:: html
-
-    </div> 
-
+    - .. thumbnail:: /images/getting_started/use-cases/wazuh-use-cases-sca2.png
+        :title: Security configuration assessment inventory
+        :align: center
+    
+    - .. thumbnail:: /images/getting_started/use-cases/wazuh-use-cases-sca3.png
+        :title: Security configuration assessment inventory events
+        :align: center
+          
 More information about security configuration assessment can be found in the :ref:`user manual <manual_sec_config_assessment>`.
