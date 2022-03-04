@@ -204,4 +204,9 @@ if ( $('.document') ) {
       }
     }
   });
+
+  /* Avoid table as layout (accessibility issue) */
+  $('table.docutils.list-rows').each(function() {
+    $(this).attr('role', 'presentation');
+  });
 }

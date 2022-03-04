@@ -159,7 +159,7 @@ body {
   #global-toc {
     ul {
       .current-toc-node {
-        color: $light-color-primary;
+        color: $light-color-primary-alt;
         &:hover {
           color: $light-color-primary-lighter;
         }

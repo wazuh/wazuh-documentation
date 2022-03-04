@@ -38,9 +38,11 @@ if ( $('.index') ) {
     if ( indexBlock.hasClass('collapsed') ) {
       /* Toggle uncollapse */
       indexBlock.removeClass('collapsed');
+      indexBlock.find('.toggle').attr('aria-label', `Collapse section`);
     } else {
       /* Toggle collapse */
       indexBlock.addClass('collapsed');
+      indexBlock.find('.toggle').attr('aria-label', `Expand section`);
     }
   });
 
@@ -57,7 +59,8 @@ if ( $('.index') ) {
     // Create dropdown toggle button
     a.setAttribute('href', '#');
     a.setAttribute('class', 'toggle');
-    a.innerHTML = 'More';
+    a.setAttribute('aria-label', 'Expand section');
+    a.innerHTML = '';
 
     // Mark collapsible blocks and add the button
     indexBlocks.each( function() {
