@@ -148,7 +148,7 @@ Delete each log file from the S3 bucket once it has been collected by the module
 Buckets
 ~~~~~~~
 
-It is necessary to specify the type as an attribute of the ``bucket`` tag, for example:
+It is necessary to specify the type as an attribute of the ``bucket`` tag to indicate the service configured. More information about the supported services and their associated types on :ref:`AWS supported services <amazon_supported_services>`.
 
 	.. code-block:: xml
 
@@ -157,9 +157,6 @@ It is necessary to specify the type as an attribute of the ``bucket`` tag, for e
 		</bucket>
 
 The available types are:  ``cloudtrail``, ``guardduty``, ``vpcflow``, ``config``, ``custom``, ``cisco_umbrella``, ``waf``, ``alb``, ``clb``, ``nlb``, and ``server_access``.
-
-.. note::
-    The type that must be used depends on the service configured. More information about the supported services and their associated types on :ref:`AWS supported services <amazon_supported_services>`.
 
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | Options                                | Allowed values                                              | Mandatory/Optional                            |
@@ -429,7 +426,7 @@ The AWS S3 endpoint URL to be used to download the data from the bucket. Check t
 Services
 ~~~~~~~~
 
-It is necessary to specify the type as an attribute of the ``service`` tag, for example:
+It is necessary to specify the type as an attribute of the ``service`` tag to indicate the service configured. More information about the supported services and their associated types on :ref:`AWS supported services <amazon_supported_services>`.
 
 	.. code-block:: xml
 
@@ -440,7 +437,6 @@ It is necessary to specify the type as an attribute of the ``service`` tag, for 
 The available types are: ``cloudwatchlogs``, and ``inspector``.
 
 .. note::
-    The type that must be used depends on the service configured. More information about the supported services and their associated types on :ref:`AWS supported services <amazon_supported_services>`.
 
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | Options                                | Allowed values                                              | Mandatory/Optional                            |
