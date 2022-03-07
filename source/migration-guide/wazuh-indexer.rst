@@ -155,38 +155,6 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13.2 to Wazuh 
 
    .. include:: /_templates/installations/indexer/common/enable_indexer.rst
 
-#. Edit filebeat configuration ``/etc/filebeat/filebeat.yml`` to point to the new Wazuh indexer node (port 9700).    
-
-   .. code-block:: yaml
-      :emphasize-lines: 3
-      
-      # Wazuh - Filebeat configuration file
-      output.elasticsearch.hosts:
-              - 127.0.0.1:9700
-      #        - <elasticsearch_ip_node_2>:9700 
-      #        - <elasticsearch_ip_node_3>:9700
-      
-      output.elasticsearch:
-        protocol: https
-        username: wazuh
-        password: 8UIHLfIY4iGlQNy_zOEvnzzvIq7B17TS
-        ssl.certificate_authorities:
-          - /etc/filebeat/certs/root-ca.pem
-        ssl.certificate: "/etc/filebeat/certs/filebeat.pem"
-        ssl.key: "/etc/filebeat/certs/filebeat-key.pem"
-      setup.template.json.enabled: true
-      setup.template.json.path: '/etc/filebeat/wazuh-template.json'
-      setup.template.json.name: 'wazuh'
-      setup.ilm.overwrite: true
-      setup.ilm.enabled: false
-      
-      filebeat.modules:
-        - module: wazuh
-          alerts:
-            enabled: true
-          archives:
-            enabled: false
-      
       
 #. Run the following command to verify that Filebeat is successfully configured.
 
@@ -197,7 +165,7 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13.2 to Wazuh 
      .. code-block:: none
           :class: output
      
-          elasticsearch: https://127.0.0.1:9700...
+          elasticsearch: https://127.0.0.1:9200...
             parse url... OK
             connection...
               parse host... OK
@@ -235,13 +203,13 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13.2 to Wazuh 
 
    .. code-block:: console
 
-     curl -X GET "https://127.0.0.1:9700/_cluster/health" -u admin:admin -k
+     curl -X GET "https://127.0.0.1:9200/_cluster/health" -u admin:admin -k
 
 #. Re-enable shard allocation:
 
    .. code-block:: console
 
-      curl -X PUT "https://127.0.0.1:9700/_cluster/settings"  -u admin:admin -k -H 'Content-Type: application/json' -d'
+      curl -X PUT "https://127.0.0.1:9200/_cluster/settings"  -u admin:admin -k -H 'Content-Type: application/json' -d'
       {
         "persistent": {
           "cluster.routing.allocation.enable": null
@@ -272,6 +240,6 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13.2 to Wazuh 
 
 
 
-You did it! Your cluster is now upgraded via a Restart Upgrade.
+You did it! Your cluster is now upgraded via a Restart Upgrade. 
 
 

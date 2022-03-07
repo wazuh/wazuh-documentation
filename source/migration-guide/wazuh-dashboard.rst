@@ -65,14 +65,14 @@ Follow this guide to migrate from Open Distro for Elasticsearch Kibana 1.13.2 to
      cp /etc/kibana/certs/root-ca.pem /etc/wazuh-dashboard/certs/root-ca.pem
      chown -R wazuh-dashboard:wazuh-dashboard /etc/wazuh-dashboard/certs/*
 
-#. Edit the ``/etc/wazuh-dashboard/dashboard.yml`` file.
+#. Edit the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file.
 
     .. code-block:: yaml
       :emphasize-lines: 1,3
 
           server.host: 0.0.0.0
           server.port: 443
-          opensearch.hosts: https://localhost:9700
+          opensearch.hosts: https://localhost:9200
           opensearch.ssl.verificationMode: certificate
           #opensearch.username: 
           #opensearch.password: 
