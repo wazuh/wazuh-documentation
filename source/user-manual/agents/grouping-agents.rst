@@ -351,7 +351,7 @@ In case of belonging to multiple groups, the configuration files of every group 
 - Custom shared files set from the user to a particular group are also joined to send them to the agents.
 
 
-.. thumbnail:: ../../images/manual/multigroups.png
+.. thumbnail:: ../../images/manual/multiple-groups.png
     :title: Multi-group shared files
     :align: center
     :width: 70%

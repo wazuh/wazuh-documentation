@@ -67,7 +67,7 @@ You can visualize the alert data in the Wazuh Kibana plugin. To do this, go to t
 * ``data.audit.exe: "/usr/bin/ping"``
 
 
-.. thumbnail:: ../images/poc/Auditing_commands_run_by_a_user.png
+.. thumbnail:: ../images/poc/Auditing-commands-run-by-a-user.png
           :title: Auditing commands run by a user
           :align: center
           :wrap_image: No

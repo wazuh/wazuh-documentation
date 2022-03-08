@@ -60,7 +60,7 @@ You can visualize the alert data in the Wazuh Kibana plugin. To do this, go to t
 * ``rule.groups: "docker"``
 * Additionally, the ``data.docker.Action`` field states which action was performed.
 
-.. thumbnail:: ../images/poc/Monitoring_Docker.png
+.. thumbnail:: ../images/poc/Monitoring-Docker.png
           :title: Monitoring Docker
           :align: center
           :wrap_image: No

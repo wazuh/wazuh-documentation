@@ -246,7 +246,7 @@ This event can be filtered field by field in case an alert is desired to trigger
 
 Finally, once the event is generated, the rule from above will be matched and therefore, trigger the next alert shown at the Kibana app:
 
-.. thumbnail:: ../../../images/manual/log_analysis/kibana-evtchannel-alert.png
+.. thumbnail:: ../../../images/manual/log-analysis/kibana-eventchannel-alert.png
     :title: Log analysis flow
     :align: center
     :width: 100%
@@ -254,14 +254,14 @@ Finally, once the event is generated, the rule from above will be matched and th
 The next images show a simple event collection with the eventchannel log format.
 The first one represents the number of events of each channel, filtered by provider name along the time.
 
-.. thumbnail:: ../../../images/manual/log_analysis/windows_alerts.png
+.. thumbnail:: ../../../images/manual/log-analysis/windows-alerts.png
     :title: Number of events by provider name along the time
     :align: center
     :width: 100%
 
 Some events from different channels are shown below with the associated provider name and severity value:
 
-.. thumbnail:: ../../../images/manual/log_analysis/windows_events.png
+.. thumbnail:: ../../../images/manual/log-analysis/windows-events.png
     :title: Windows events
     :align: center
     :width: 100%

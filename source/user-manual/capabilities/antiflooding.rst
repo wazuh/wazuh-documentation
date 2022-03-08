@@ -95,7 +95,7 @@ Use case: Leaky bucket
 
 In this section, it will be shown how the leaky bucket acts when faced with an extreme situation. For this purpose, the following graphic shows different phases of the buffer's usage when it is receiving more events than expected, and how it acts step by step to manage the situation.
 
-.. thumbnail:: /images/manual/internal-capabilities/graphic_with_flood.png
+.. thumbnail:: /images/manual/internal-capabilities/graphic-with-flood.png
     :title: buffer usage with flooding
     :align: center
     :width: 80%
@@ -145,7 +145,7 @@ At this point, two possible things could happen:
 
     This graphic illustrates this situation.
 
-    .. thumbnail:: /images/manual/internal-capabilities/graphic_without_flooding.png
+    .. thumbnail:: /images/manual/internal-capabilities/graphic-without-flooding.png
         :title: buffer usage without flooding
         :align: center
         :width: 70%

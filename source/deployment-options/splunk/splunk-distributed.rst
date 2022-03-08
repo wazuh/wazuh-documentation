@@ -26,7 +26,7 @@ This is the structure of a basic Splunk Cluster, that's formed by the next eleme
 - The **forwarder** runs on the Wazuh manager instance, it reads local data and sends it to the indexer.
 - The **deployer** instance installs and configures the Wazuh App into every **search head** instance at the same time.
 
-.. thumbnail:: ../../images/splunk_cluster/splunk_cluster.png
+.. thumbnail:: ../../images/splunk-cluster/splunk-cluster.png
     :title: Splunk Cluster with Wazuh installed architecture.
     :align: center
     :width: 80%
