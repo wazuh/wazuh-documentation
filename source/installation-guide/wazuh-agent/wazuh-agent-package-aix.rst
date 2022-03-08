@@ -28,7 +28,7 @@ The deployment of a Wazuh agent on an AIX system uses deployment variables that 
 
     .. code-block:: console
 
-      # startsrc -s wazuh-agent
+      # /var/ossec/bin/wazuh-control start
 
       
 The deployment process is now complete and the Wazuh agent is successfully running on your AIX system.

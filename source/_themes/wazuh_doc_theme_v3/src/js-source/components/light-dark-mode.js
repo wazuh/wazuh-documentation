@@ -5,6 +5,7 @@
  */
 
 const switchButton = $('#mode-switch');
+const switchButtonLabel = $('#mode-switch-label');
 const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
 let currentTheme = localStorage.getItem('theme');
 
@@ -28,8 +29,10 @@ switchButton.on('click', function() {
 
   if ( this.classList[0] == 'dark' ) {
     theme = 'light';
+    switchButtonLabel.text('Switch to dark mode');
   } else {
     theme = 'dark';
+    switchButtonLabel.text('Switch to light mode');
   }
   switchButton.attr('class', theme);
   localStorage.setItem('theme', theme);

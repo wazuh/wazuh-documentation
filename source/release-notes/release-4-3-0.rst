@@ -23,22 +23,12 @@ Wazuh 4.3.0 includes numerous new additions, such as some improvements in the Wa
 
 New integrations to collect auditing logs from Office 365 and GitHub are added to the agent in this new version. A base Module Panel view with Office 365 setup is introduced, and the Wazuh dashboard now includes events from Office 365. Moreover, Wazuh now supports Logcollector with native macOS logs (Unified Logging System), AWS S3 Server Access logs, and Google Cloud Storage buckets and access logs.
 
-.. raw:: html
-    
-    <div class="images-rn-420-container">
-    <div class="images-rn-420">
+.. hlist::
+    :columns: 2
 
-.. thumbnail::  ../images/release-notes/4.3.0/Management-Configuration.png 
-      :align: center
-      :title: Management / Configuration
+    - .. thumbnail:: ../images/release-notes/4.3.0/Management-Configuration.png
+    - .. thumbnail:: ../images/release-notes/4.3.0/Office-365-General.png
 
-.. thumbnail::  ../images/release-notes/4.3.0/Office-365-General.png
-      :align: center
-      :title: Office 365 / General
-
-.. raw:: html
-
-    </div>  
 
 
 The RESTful API presents some amazing changes. Its availability has been enhanced thanks to the API now using multiple processes. The performance of several API endpoints is also improved, which is especially palpable in large environments. Additionally, the agent batch is upgraded with an increased limit of agents per request and a new set of filters. 
@@ -172,6 +162,7 @@ Agent
 - `#11276 <https://github.com/wazuh/wazuh/pull/11276>`_ An ID number to connection enrollment logs is added.
 - `#10838 <https://github.com/wazuh/wazuh/pull/10838>`_ Standardized the use of the ``only_logs_after`` parameter in the external integration modules.
 - `#10900 <https://github.com/wazuh/wazuh/pull/10900>`_ The oscap module files are removed as it was already deprecated in version 4.0.0.
+- `#12150 <https://github.com/wazuh/wazuh/pull/12150>`_ Updated DockerListener integration shebang to python3 for Wazuh agents.
 
 RESTful API
 ^^^^^^^^^^^
@@ -195,6 +186,8 @@ RESTful API
 - `#10457 <https://github.com/wazuh/wazuh/pull/10457>`_ New filters are added to agents' upgrade endpoints.
 - `#8288 <https://github.com/wazuh/wazuh/pull/8288>`_ New MITRE API endpoints and framework functions are added to access all the MITRE information.
 - `#10947 <https://github.com/wazuh/wazuh/pull/10947>`_ Show agent-info permissions flag is added when using cluster_control and in the ``GET /cluster/healthcheck`` API endpoint.
+- `#11931 <https://github.com/wazuh/wazuh/pull/11931>`_ Save agents' ossec.log if an API integration test fails.
+- `#12085 <https://github.com/wazuh/wazuh/pull/12085>`_ Added POST /security/user/authenticate/run_as endpoint to API bruteforce blocking system.
 - `#7490 <https://github.com/wazuh/wazuh/pull/7490>`_ The SSL protocol configuration parameter is renamed.
 - `#8827 <https://github.com/wazuh/wazuh/pull/8827>`_ The API spec examples and JSON body examples are reviewed and updated.
 - The performance of several API endpoints is improved. This is specially appreciable in environments with a big number of agents:
@@ -400,6 +393,7 @@ Reference                                                         Description
 `#11440 <https://github.com/wazuh/wazuh/pull/11440>`_             Fixed false positives in Vulnerability Detector when scanning OVAl for Ubuntu Xenial and Bionic.
 `#11835 <https://github.com/wazuh/wazuh/pull/11835>`_             Fixed an argument injection hazard in the Pagerduty integration script.
 `#11863 <https://github.com/wazuh/wazuh/pull/11863>`_             Fixed memory leaks in the feed parser at Vulnerability Detector. Architecture data member from the RHEL 5 feed. RHSA items containing no CVEs. Unused RHSA data member when parsing Debian feeds.
+`#11974 <https://github.com/wazuh/wazuh/pull/11974>`_             Fixed an integer overflow hazard in ``wazuh-remoted`` that caused it to drop incoming data after receiving 2^31 messages.
 ==============================================================    =============
 
 
@@ -478,6 +472,7 @@ Reference                                                         Description
 `#10830 <https://github.com/wazuh/wazuh/pull/10830>`_             The API integration tests related to rule, decoder, and task endpoints are fixed.
 `#11411 <https://github.com/wazuh/wazuh/pull/11411>`_             Exceptions handling when starting the Wazuh API service is improved.
 `#11598 <https://github.com/wazuh/wazuh/pull/11598>`_             Fixed race condition while creating RBAC database. 
+`#12102 <https://github.com/wazuh/wazuh/pull/12102>`_             Fixed API integration tests failures caused by race conditions. 
 ==============================================================    =============
 
 

@@ -234,8 +234,15 @@
       overflow-y: hidden;
       border-spacing: 0;
       border-collapse: separate;
-      border-radius: calc(#{$rounded-corners} + 1px);
       transform: scale(1.005);
+
+      colgroup {
+        display: grid;
+      }
+
+      caption {
+        display: flex;
+      }
 
       td,
       th {
@@ -333,6 +340,10 @@
     &.w-header {
       background-repeat: no-repeat;
       background-size: 100%;
+    }
+    > caption {
+      display: block; 
+      border: none;
     }
   }
 
