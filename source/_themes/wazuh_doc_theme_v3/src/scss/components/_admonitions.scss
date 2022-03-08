@@ -104,7 +104,7 @@ body {
     }
 
     &.caution {
-      border-color: $light-color-warning-dark;
+      border-color: $light-color-warning;
       .admonition-title {
         color: $light-color-warning-dark;
 
@@ -120,7 +120,7 @@ body {
         color: $light-color-danger-dark;
 
         &::after {
-          background: url("#{$ico-path}svg-icons.svg#circle-exclamation-red");
+          background: url("#{$ico-path}svg-icons.svg#circle-exclamation-red-lt");
         }
       }
     }
@@ -131,7 +131,7 @@ body {
         color: $light-color-danger-dark;
 
         &::after {
-          background: url("#{$ico-path}svg-icons.svg#circle-x");
+          background: url("#{$ico-path}svg-icons.svg#circle-x-lt");
         }
       }
     }
@@ -194,9 +194,9 @@ body {
     }
 
     &.warning {
-      border-color: $dark-color-warning;
+      border-color: $dark-color-warning-dark;
       .admonition-title {
-        color: $dark-color-warning-dark;
+        color: $dark-color-warning;
 
         &::after {
           background: url("#{$ico-path}svg-icons.svg#circle-exclamation-orange");
@@ -218,7 +218,7 @@ body {
     &.caution {
       border-color: $dark-color-warning-dark;
       .admonition-title {
-        color: $dark-color-warning-dark;
+        color: $dark-color-warning;
 
         &::after {
           background: url("#{$ico-path}svg-icons.svg#circle-exclamation-orange");
@@ -229,10 +229,10 @@ body {
     &.danger {
       border-color: $dark-color-danger-dark;
       .admonition-title {
-        color: $dark-color-danger-dark;
+        color: $dark-color-danger;
 
         &::after {
-          background: url("#{$ico-path}svg-icons.svg#circle-exclamation-red");
+          background: url("#{$ico-path}svg-icons.svg#circle-exclamation-red-dt");
         }
       }
     }
@@ -240,10 +240,10 @@ body {
     &.error {
       border-color: $dark-color-danger-dark;
       .admonition-title {
-        color: $dark-color-danger-dark;
+        color: $dark-color-danger;
 
         &::after {
-          background: url("#{$ico-path}svg-icons.svg#circle-x");
+          background: url("#{$ico-path}svg-icons.svg#circle-x-dt");
         }
       }
     }
@@ -251,7 +251,7 @@ body {
     &.hint {
       border-color: $dark-color-success-dark;
       .admonition-title {
-        color: $dark-color-success-dark;
+        color: $dark-color-success;
 
         &::after {
           background: url("#{$ico-path}svg-icons.svg#circle-bulb");
@@ -273,7 +273,7 @@ body {
     &.tip {
       border-color: $dark-color-success-dark;
       .admonition-title {
-        color: $dark-color-success-dark;
+        color: $dark-color-success;
 
         &::after {
           background: url("#{$ico-path}svg-icons.svg#circle-bulb");

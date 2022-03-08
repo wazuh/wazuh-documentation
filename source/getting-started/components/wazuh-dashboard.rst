@@ -99,23 +99,17 @@ The Wazuh dashboard provides you with a directory dedicated to administrating an
 Data analysis visualization gives you full visibility into your cluster infrastructure for fast threat detection and remediation. Users can check the status, logs, and statistics of Wazuh clusters and create their own downloadable reports using predefined templates, or personalize their own if required. Wazuh provides the tools for comprehensive and efficient security analytics.
 
 
-.. raw:: html
-    
-    <div class="images-rn-420-container">
-    <div class="images-rn-420">
+.. hlist::
+    :columns: 2
 
-.. thumbnail::  ../../images/getting_started/dashboard_administration.png 
-      :align: center
-      :title: Administration
 
-.. thumbnail::  ../../images/getting_started/dashboard_status.png 
-      :align: center
-      :title: Status and reports
+    - .. thumbnail::  ../../images/getting_started/dashboard_administration.png 
+        :align: center
+        :title: Administration
 
-.. raw:: html
-
-    </div> 
-
+    - .. thumbnail::  ../../images/getting_started/dashboard_status.png 
+        :align: center
+        :title: Status and reports
 
 
 Dev tools
@@ -125,25 +119,24 @@ Users can easily access developer tools integrated directly into the Wazuh dashb
 
 The Ruleset Test tool provides an input box for reading sample logs and an output box to visualize the test results. This feature of the Wazuh dashboard allows you to test sample logs directly on the web user interface and see how the ruleset reacts to specific log messages.
 
+.. thumbnail::  ../../images/getting_started/dashboard_ruleset_test.png 
+      :align: center
+      :title: Ruleset test
+
+
 The Wazuh dashboard also includes an API Console for users to interact with the Wazuh API. This API accommodates complete remote management of the Wazuh infrastructure and, from the API Console, you can easily perform everyday actions such as adding agents, restarting components, creating roles, or looking up syscheck details.
 
 
-.. raw:: html
-    
-    <div class="images-rn-420-container">
-    <div class="images-rn-420">
+.. hlist::
+    :columns: 2
 
 
-.. thumbnail::  ../../images/getting_started/dashboard_API_console1.png 
-      :align: center
-      :title: API Console
+    - .. thumbnail::  ../../images/getting_started/dashboard_API_console1.png 
+            :align: center
+            :title: API Console
 
 
-.. thumbnail::  ../../images/getting_started/dashboard_API_console2.png 
-      :align: center
-      :title: API Console
+    - .. thumbnail::  ../../images/getting_started/dashboard_API_console2.png 
+            :align: center
+            :title: API Console
 
-
-.. raw:: html
-
-    </div> 

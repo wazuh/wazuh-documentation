@@ -44,15 +44,6 @@ Adding the Elastic Stack repository
 
 
 
-  .. group-tab:: ZYpp
-
-
-    .. include:: ../../../../../_templates/installations/basic/elastic/zypp/add_repository.rst
-
-
-
-
-
 Elasticsearch installation and configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -72,12 +63,6 @@ Elasticsearch installation and configuration
 
         .. include:: ../../../../../_templates/installations/basic/elastic/deb/install_elasticsearch.rst
 
-
-
-      .. group-tab:: ZYpp
-
-
-        .. include:: ../../../../../_templates/installations/basic/elastic/zypp/install_elasticsearch.rst
 
 
 #. .. include:: ../../../../../_templates/installations/basic/elastic/common/elastic-single-node/configure_elasticsearch.rst
@@ -134,12 +119,6 @@ Disabling repositories
 
     .. include:: ../../../../../_templates/installations/basic/elastic/deb/disabling_repositories.rst
 
-
-
-  .. group-tab:: ZYpp
-
-
-    .. include:: ../../../../../_templates/installations/basic/elastic/zypp/disabling_repositories.rst
 
 
 To uninstall Elasticsearch, visit the :ref:`uninstalling section <basic_uninstall_elasticsearch>`.

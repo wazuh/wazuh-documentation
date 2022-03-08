@@ -14,65 +14,47 @@ This section lists the changes in version 4.3.0. Every update of the Wazuh solut
 Highlights
 ----------
 
+Wazuh 4.3.0 includes numerous new additions, such as some improvements in the Wazuh manager. Now, the agent is able to collect the installed packages inventory on Amazon Linux and Arch Linux, giving support to Vulnerability Detector for reporting vulnerability exposures. It is an important point because these Linux distributions are proliferating fastly. In addition, the Vulnerability Detector now manages a vulnerability inventory and produces alerts when a new vulnerability is either found or solved.
 
-Manager
-^^^^^^^
-
-- `#8830 <https://github.com/wazuh/wazuh/pull/8830>`_ `#8178 <https://github.com/wazuh/wazuh/pull/8178>`_ Syscollector and Vulnerability Detector have been extended to support agents running on Amazon Linux and Arch Linux.
-- `#7749 <https://github.com/wazuh/wazuh/pull/7749>`_ Vulnerability Detector now manages a vulnerability inventory and produces alerts based on changes on it: when a new vulnerability is either found or solved.
-
-
-Agent
-^^^^^
-
-- `#4983 <https://github.com/wazuh/wazuh/pull/4983>`_ `#7660 <https://github.com/wazuh/wazuh/pull/7660>`_ New integrations to collect auditing logs from Office365 and GitHub have been introduced in the agent.
-- `#8632 <https://github.com/wazuh/wazuh/pull/8632>`_ Logcollector can now collect native logs from macOS (Unified Logging System).
-- `#8461 <https://github.com/wazuh/wazuh/pull/8461>`_ File Integrity Monitoring has been improved to fully support wilcarded file paths in the configuration.
+.. thumbnail::  ../images/release-notes/4.3.0/packages-inventory.png 
+      :align: center
+      :title: Packages inventory
 
 
+New integrations to collect auditing logs from Office 365 and GitHub are added to the agent in this new version. A base Module Panel view with Office 365 setup is introduced, and the Wazuh dashboard now includes events from Office 365. Moreover, Wazuh now supports Logcollector with native macOS logs (Unified Logging System), AWS S3 Server Access logs, and Google Cloud Storage buckets and access logs.
 
-RESTful API
-^^^^^^^^^^^
+.. hlist::
+    :columns: 2
 
-- `#8100 <https://github.com/wazuh/wazuh/pull/8100>`_ `#9028 <https://github.com/wazuh/wazuh/pull/9028>`_ `#10457 <https://github.com/wazuh/wazuh/pull/10457>`_ The agent batch upgrade with an increased limit of agents per request and a new set of filters is improved.
-- `#7490 <https://github.com/wazuh/wazuh/pull/7490>`_ New configurations such as SSL ciphers, maximum response time, and maximum upload size are added.
-- `#8919 <https://github.com/wazuh/wazuh/pull/8919>`_ `#10916 <https://github.com/wazuh/wazuh/pull/10916>`_ The API availability and response times in overloaded setups are improved, which is especially palpable in environments with a significant number of agents.
+    - .. thumbnail:: ../images/release-notes/4.3.0/Management-Configuration.png
+    - .. thumbnail:: ../images/release-notes/4.3.0/Office-365-General.png
 
 
 
-Wazuh Kibana plugin
-^^^^^^^^^^^^^^^^^^^
+The RESTful API presents some amazing changes. Its availability has been enhanced thanks to the API now using multiple processes. The performance of several API endpoints is also improved, which is especially palpable in large environments. Additionally, the agent batch is upgraded with an increased limit of agents per request and a new set of filters. 
 
-- `#3424 <https://github.com/wazuh/wazuh-kibana-app/pull/3424>`_ Sample data for Office 365 was added to this new version. Now Wazuh Kibana plugin includes events from Office 365 so that the sample data module covers the cases described in the Office 365 schemas.
-- `#3524 <https://github.com/wazuh/wazuh-kibana-app/pull/3524>`_ `#3518 <https://github.com/wazuh/wazuh-kibana-app/pull/3518>`_ Base Module Panel view and a new configuration viewer for the new Office 365 module was added to Wazuh:
-   - A base Module Panel view with Office 365 setup was added to this new version. In addition, the Module Panel displays information about the active module. A drill-down table is in charge of doing the drill-down of the parent view, with a search bar and the filtered graphs and table.
-   - Configuration viewer for the new Office365 module was added to the Configuration section of the Management menu. This module is only configurable for managers.
+.. thumbnail::  ../images/release-notes/4.3.0/agent-batch-upgraded.png 
+      :align: center
+      :title: The agent batch is upgraded
 
-.. raw:: html
+
+
+Wazuh v4.3.0 brings significant changes to the cluster, which now uses multiple processes to improve the performance. The results in the table below show a significant improvement for the cluster in this new version. The cluster tasks are performed 423% faster than in the previous version, approximately five times faster, while the RAM consumption decreased to a third. This performance is especially appreciable during the setup phase, where the cluster load is at its highest.
+
+.. thumbnail::  ../images/release-notes/4.3.0/cluster-tasks.png 
+      :align: center
+      :title: The cluster tasks are performed faster
+
+
+This new version brings some components name changes, such as the new Wazuh dashboard. This central component is a flexible and intuitive web interface for mining, analyzing, and visualizing data. It provides out-of-the-box dashboards, allowing users to navigate the interface that now presents a renewed design with a new palette of colors. In addition, the frontend error handling strategy is improved to deliver better error handling to the users.
+
+.. thumbnail::  ../images/release-notes/4.3.0/Wazuh-dashboard.png 
+      :align: center
+      :width: 60%
+      :title: This new version brings the new Wazuh dashboard
     
-    <div class="images-rn-420-container">
-    <div class="images-rn-420">
 
-.. thumbnail::  ../images/release-notes/4.3.0/Management-Configuration.png 
-      :align: center
-      :title: Management / Configuration
-
-.. thumbnail::  ../images/release-notes/4.3.0/Office-365-General.png
-      :align: center
-      :title: Office 365 / General
-
-.. raw:: html
-
-    </div>  
-
-- `#3262 <https://github.com/wazuh/wazuh-kibana-app/issues/3262>`_ `#3327 <https://github.com/wazuh/wazuh-kibana-app/pull/3327>`_ `#3321 <https://github.com/wazuh/wazuh-kibana-app/pull/3321>`_ `#3367 <https://github.com/wazuh/wazuh-kibana-app/pull/3367>`_ `#3373 <https://github.com/wazuh/wazuh-kibana-app/pull/3373>`_ Improved the frontend handle errors strategy: UI, Toasts, console log, and log in file:
-   - The first attempt to Logger Service (orchestrator) is added. This service is responsible for application logs and error orchestration (business rules for errors). Not all errors are sent to the backend, only logs categorized with a certain level or higher.
-   - Now the implementation of the ErrorBoundary component and HOC are included to catch components with errors on rendering. In addition, ``loglevel`` dependency to log errors, warnings are also added.
-   - The ErrorBoundary HOC to react components were added in his version. It implements error handling HOC in each main react-component (pre-migration).
-   - Now try catch strategy is implemented on WzLog by executing Wazuh new error handling strategy on the front-end side. This development was made in order to improve better error handling in the front-end.
-
-- `#3368 <https://github.com/wazuh/wazuh-kibana-app/pull/3368>`_ - `#3344 <https://github.com/wazuh/wazuh-kibana-app/pull/3344>`_ Added Intelligence tab to MITRE ATT&CK module:
-   - A new Intelligence tab to the MITRE ATT&CK module was added with information about the MITRE resources: groups, mitigations, tactics, techniques using the new Wazuh API endpoints. In addition, the Framework tab was adapted to the new Wazuh API endpoints.
+Finally, we want to mention another Wazuh 4.3.0 significant new feature. It is related to a new Intelligence tab added to the MITRE ATT&CK module. This tab provides further information about MITRE resources such as groups, mitigations, tactics, and techniques using the new Wazuh API endpoints. Additionally, the Framework tab is adapted to the new Wazuh API endpoints.
 
 
 
@@ -156,7 +138,7 @@ Agent
 - `#10198 <https://github.com/wazuh/wazuh/pull/10198>`_ An AIM role session duration parameter to the AWS module is added.
 - `#8826 <https://github.com/wazuh/wazuh/pull/8826>`_ Wazuh adds support for variables in SCA policies.
 - `#7721 <https://github.com/wazuh/wazuh/pull/7721>`_ FIM now fills an audit rule file to support who-data, although Audit is in immutable mode.
-- `#8957 <https://github.com/wazuh/wazuh/pull/8957>`_ An integration to collect audit logs from Office365 is introduced.
+- `#8957 <https://github.com/wazuh/wazuh/pull/8957>`_ An integration to collect audit logs from Office 365 is introduced.
 - `#10168 <https://github.com/wazuh/wazuh/pull/10168>`_ A new field ``DisplayVersion`` to Syscollector to help Vulnerability Detector match vulnerabilities for Windows is added.
 - `#10148 <https://github.com/wazuh/wazuh/pull/10148>`_ Wazuh adds support for macOS agent upgrade via WPK.
 - `#8632 <https://github.com/wazuh/wazuh/pull/8632>`_ Wazuh adds Logcollector support for macOS logs (Unified Logging System).
@@ -180,6 +162,7 @@ Agent
 - `#11276 <https://github.com/wazuh/wazuh/pull/11276>`_ An ID number to connection enrollment logs is added.
 - `#10838 <https://github.com/wazuh/wazuh/pull/10838>`_ Standardized the use of the ``only_logs_after`` parameter in the external integration modules.
 - `#10900 <https://github.com/wazuh/wazuh/pull/10900>`_ The oscap module files are removed as it was already deprecated in version 4.0.0.
+- `#12150 <https://github.com/wazuh/wazuh/pull/12150>`_ Updated DockerListener integration shebang to python3 for Wazuh agents.
 
 RESTful API
 ^^^^^^^^^^^
@@ -203,6 +186,8 @@ RESTful API
 - `#10457 <https://github.com/wazuh/wazuh/pull/10457>`_ New filters are added to agents' upgrade endpoints.
 - `#8288 <https://github.com/wazuh/wazuh/pull/8288>`_ New MITRE API endpoints and framework functions are added to access all the MITRE information.
 - `#10947 <https://github.com/wazuh/wazuh/pull/10947>`_ Show agent-info permissions flag is added when using cluster_control and in the ``GET /cluster/healthcheck`` API endpoint.
+- `#11931 <https://github.com/wazuh/wazuh/pull/11931>`_ Save agents' ossec.log if an API integration test fails.
+- `#12085 <https://github.com/wazuh/wazuh/pull/12085>`_ Added POST /security/user/authenticate/run_as endpoint to API bruteforce blocking system.
 - `#7490 <https://github.com/wazuh/wazuh/pull/7490>`_ The SSL protocol configuration parameter is renamed.
 - `#8827 <https://github.com/wazuh/wazuh/pull/8827>`_ The API spec examples and JSON body examples are reviewed and updated.
 - The performance of several API endpoints is improved. This is specially appreciable in environments with a big number of agents:
@@ -300,9 +285,9 @@ Wazuh Kibana plugin
 - `#3475 <https://github.com/wazuh/wazuh-kibana-app/pull/3475>`_ A separate component to check for sample data is created.
 - `#3506 <https://github.com/wazuh/wazuh-kibana-app/pull/3506>`_ A new hook for getting value suggestions is added.
 - `#3531 <https://github.com/wazuh/wazuh-kibana-app/pull/3531>`_ Dynamic simple filters and simple GitHub filters fields are added.
-- `#3524 <https://github.com/wazuh/wazuh-kibana-app/pull/3524>`_ Configuration viewer for Module Office365 is added on the Configuration section of the Management menu.
-- `#3518 <https://github.com/wazuh/wazuh-kibana-app/pull/3518>`_ Base Module Panel view with Office365 setup is added.
-- `#3533 <https://github.com/wazuh/wazuh-kibana-app/pull/3533>`_ Specifics and custom filters for Office365 search bar are added.
+- `#3524 <https://github.com/wazuh/wazuh-kibana-app/pull/3524>`_ Configuration viewer for Module Office 365 is added on the Configuration section of the Management menu.
+- `#3518 <https://github.com/wazuh/wazuh-kibana-app/pull/3518>`_ Base Module Panel view with Office 365 setup is added.
+- `#3533 <https://github.com/wazuh/wazuh-kibana-app/pull/3533>`_ Specifics and custom filters for Office 365 search bar are added.
 - `#3544 <https://github.com/wazuh/wazuh-kibana-app/pull/3544>`_ Pagination and filter are added to drilldown tables at the Office pannel.
 - `#3568 <https://github.com/wazuh/wazuh-kibana-app/pull/3568>`_ Simple filters change between panel and drilldown panel.
 - `#3525 <https://github.com/wazuh/wazuh-kibana-app/pull/3525>`_ New fields are added in the Inventory table and Flyout Details.
@@ -408,6 +393,7 @@ Reference                                                         Description
 `#11440 <https://github.com/wazuh/wazuh/pull/11440>`_             Fixed false positives in Vulnerability Detector when scanning OVAl for Ubuntu Xenial and Bionic.
 `#11835 <https://github.com/wazuh/wazuh/pull/11835>`_             Fixed an argument injection hazard in the Pagerduty integration script.
 `#11863 <https://github.com/wazuh/wazuh/pull/11863>`_             Fixed memory leaks in the feed parser at Vulnerability Detector. Architecture data member from the RHEL 5 feed. RHSA items containing no CVEs. Unused RHSA data member when parsing Debian feeds.
+`#11974 <https://github.com/wazuh/wazuh/pull/11974>`_             Fixed an integer overflow hazard in ``wazuh-remoted`` that caused it to drop incoming data after receiving 2^31 messages.
 ==============================================================    =============
 
 
@@ -486,6 +472,7 @@ Reference                                                         Description
 `#10830 <https://github.com/wazuh/wazuh/pull/10830>`_             The API integration tests related to rule, decoder, and task endpoints are fixed.
 `#11411 <https://github.com/wazuh/wazuh/pull/11411>`_             Exceptions handling when starting the Wazuh API service is improved.
 `#11598 <https://github.com/wazuh/wazuh/pull/11598>`_             Fixed race condition while creating RBAC database. 
+`#12102 <https://github.com/wazuh/wazuh/pull/12102>`_             Fixed API integration tests failures caused by race conditions. 
 ==============================================================    =============
 
 
@@ -600,7 +587,6 @@ Changelogs
 
 More details about these changes are provided in the changelog of each component:
 
-- `wazuh/wazuh v4.3.0-rc1 <https://github.com/wazuh/wazuh/blob/v4.3.0-rc1/CHANGELOG.md>`_
-- `wazuh/wazuh v4.3.0-rc2 <https://github.com/wazuh/wazuh/blob/v4.3.0-rc2/CHANGELOG.md>`_
+- `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v4.3.0-rc4/CHANGELOG.md>`_
 - `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/4.3-7.10/CHANGELOG.md>`_
 - `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v4.2.5-8.1.4/CHANGELOG.md>`_

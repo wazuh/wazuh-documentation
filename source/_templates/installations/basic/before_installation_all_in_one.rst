@@ -18,13 +18,6 @@
 
                     # apt-get install apt-transport-https zip unzip lsb-release curl gnupg
 
-        .. group-tab:: ZYpp
-
-            Install all the necessary packages:        
-
-                .. code-block:: console
-
-                    # zypper install zip unzip tar curl                 
+               
    
-
 .. End of include file

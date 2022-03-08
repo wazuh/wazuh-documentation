@@ -85,12 +85,19 @@ main {
             padding: 10px 0;
             font-size: 18px;
             font-weight: 600;
+            
+            &::before {
+              display: inline-block;
+              width: 48px;
+              height: 22px;
+              content: "More";
+            }
 
             &::after {
               display: inline-block;
               width: 24px;
               height: 12px;
-              margin-left: 7px;
+              margin-left: 3px;
               content: "";
               background-repeat: no-repeat;
               background-position: center;
@@ -221,7 +228,6 @@ main {
       padding-left: 70px;
       font-size: 20px;
       font-weight: 400;
-      color: #fff;
       transform: rotate(-90deg);
       @include media-max(sm){
         height: 50px;
@@ -287,6 +293,10 @@ main {
 body { /* stylelint-disable-line  no-duplicate-selectors */
   color: $light-color-main-text;
   background: $light-color-code-block-background;
+
+  #quickstart a {
+    color: #fff;
+  }
 
   .toctree-wrapper {
     > ul {
@@ -391,6 +401,11 @@ body { /* stylelint-disable-line  no-duplicate-selectors */
     background-image: url("#{$ico-path}index-icons.svg#release-notes-lt");
   }
 
+  /* Migration guide */
+  [href$="migration-guide/index.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#migration-guide-lt");
+  }
+
   &.index #quickstart {
     background-color: $light-color-primary;
     &::after {
@@ -404,6 +419,15 @@ body { /* stylelint-disable-line  no-duplicate-selectors */
 .dark-theme {
   color: $dark-color-main-text;
   background: $dark-color-base-space;
+
+  #quickstart {
+    &::after {
+      filter: invert(1);
+    }
+    a {
+      color: #000;
+    }
+  }
 
   .toctree-wrapper {
     > ul {
@@ -506,6 +530,11 @@ body { /* stylelint-disable-line  no-duplicate-selectors */
   /* Release notes */
   [href$="release-notes/index.html"]::before {
     background-image: url("#{$ico-path}index-icons.svg#release-notes-dt");
+  }
+  
+  /* Migration guide */
+  [href$="migration-guide/index.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#migration-guide-dt");
   }
 
   &.index #quickstart {

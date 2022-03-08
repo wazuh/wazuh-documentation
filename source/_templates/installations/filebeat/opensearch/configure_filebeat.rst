@@ -12,7 +12,7 @@
 
       # Wazuh - Filebeat configuration file
       output.elasticsearch:
-        hosts: ["<indexer_ip>:9700"]
+        hosts: ["<indexer_ip>:9200"]
         protocol: https
         username: "admin"
         password: "admin"
@@ -44,7 +44,7 @@
 
       # Wazuh - Filebeat configuration file
       output.elasticsearch:
-        hosts: ["<indexer_ip_node_1>:9700", "<indexer_ip_node_2>:9700", "<indexer_ip_node_3>:9700"]
+        hosts: ["<indexer_ip_node_1>:9200", "<indexer_ip_node_2>:9200", "<indexer_ip_node_3>:9200"]
         protocol: https
         username: "admin"
         password: "admin"

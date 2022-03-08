@@ -27,7 +27,7 @@ Execute the ``generate_ova.sh`` script, with the different options you desire.
 
 .. code-block:: console
 
-  $ ./generate_wazuh_packages.sh -h
+  $ ./generate_ova.sh -h
 
 .. code-block:: none
   :class: output

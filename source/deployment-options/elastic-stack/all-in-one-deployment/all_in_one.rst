@@ -44,13 +44,6 @@ Adding the Elastic Stack repository
 
 
 
-  .. group-tab:: ZYpp
-
-
-    .. include:: ../../../_templates/installations/basic/elastic/zypp/add_repository.rst
-
-
-
 Elasticsearch installation and configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -70,12 +63,6 @@ Elasticsearch installation and configuration
 
         .. include:: ../../../_templates/installations/basic/elastic/deb/install_elasticsearch.rst
 
-
-
-      .. group-tab:: ZYpp
-
-
-        .. include:: ../../../_templates/installations/basic/elastic/zypp/install_elasticsearch.rst
 
 
 #. .. include:: ../../../_templates/installations/basic/elastic/common/elastic-single-node/configure_elasticsearch_aio.rst
@@ -138,20 +125,20 @@ This command should have an output like this:
    {
      "name" : "elasticsearch",
      "cluster_name" : "elasticsearch",
-     "cluster_uuid" : "upF9h1afQN2TfHtt0h3Kuw",
+     "cluster_uuid" : "38phzvsUQDezIl5eMwgCYw",
      "version" : {
-       "number" : "7.14.2",
+       "number" : "7.17.0",
        "build_flavor" : "default",
-       "build_type" : "rpm",
-       "build_hash" : "6bc13727ce758c0e943c3c21653b3da82f627f75",
-       "build_date" : "2021-09-15T10:18:09.722761972Z",
+       "build_type" : "deb",
+       "build_hash" : "bee86328705acaa9a6daede7140defd4d9ec56bd",
+       "build_date" : "2022-01-28T08:36:04.875279988Z",
        "build_snapshot" : false,
-       "lucene_version" : "8.9.0",
+       "lucene_version" : "8.11.1",
        "minimum_wire_compatibility_version" : "6.8.0",
        "minimum_index_compatibility_version" : "6.0.0-beta1"
      },
      "tagline" : "You Know, for Search"
-   }
+   }   
 
   
   
@@ -185,13 +172,6 @@ Adding the Wazuh repository
 
 
 
-  .. group-tab:: ZYpp
-
-
-    .. include:: ../../../_templates/installations/basic/wazuh/zypp/add_repository_aio.rst
-
-
-
 Installing the Wazuh manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -211,12 +191,6 @@ Installing the Wazuh manager
 
         .. include:: ../../../_templates/installations/basic/wazuh/deb/install_wazuh_manager.rst
 
-
-
-      .. group-tab:: ZYpp
-
-
-        .. include:: ../../../_templates/installations/basic/wazuh/zypp/install_wazuh_manager.rst
 
 
 #. Enable and start the Wazuh manager service:
@@ -256,12 +230,6 @@ Filebeat installation and configuration
 
         .. include:: ../../../_templates/installations/basic/elastic/deb/install_filebeat.rst
 
-
-
-      .. group-tab:: ZYpp
-
-
-        .. include:: ../../../_templates/installations/basic/elastic/zypp/install_filebeat.rst
 
 
 #. Download the pre-configured Filebeat config file used to forward Wazuh alerts to Elasticsearch:
@@ -330,12 +298,6 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
 
 
-        .. group-tab:: ZYpp
-
-
-            .. include:: ../../../_templates/installations/basic/elastic/zypp/install_kibana.rst
-
-
 #. Copy the Elasticsearch certificates into the Kibana configuration folder:
 
     .. include:: ../../../_templates/installations/basic/elastic/common/copy_certificates_kibana_elastic_server.rst
@@ -402,11 +364,6 @@ Disabling repositories
 
     .. include:: ../../../_templates/installations/basic/wazuh/deb/disabling_repositories.rst
 
-
-
-  .. group-tab:: ZYpp
-
-    .. include:: ../../../_templates/installations/basic/wazuh/zypp/disabling_repositories.rst
 
 
 To uninstall all the components of the all in one installation, visit the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_basic>`.

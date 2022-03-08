@@ -126,15 +126,19 @@ Example of hardware inventory, network interfaces, open ports, and network setti
     :align: center
     :wrap_image: No
 
+.. thumbnail:: ../../images/getting_started/use_case_inventory_2.png
+    :align: center
+    :wrap_image: No
+
 Example of software inventory:
 
-.. thumbnail:: ../../images/getting_started/use_case_inventory_2.png
+.. thumbnail:: ../../images/getting_started/use_case_inventory_3.png
     :align: center
     :wrap_image: No
 
 Example of running processes:
 
-.. thumbnail:: ../../images/getting_started/use_case_inventory_3.png
+.. thumbnail:: ../../images/getting_started/use_case_inventory_4.png
     :align: center
     :wrap_image: No
 

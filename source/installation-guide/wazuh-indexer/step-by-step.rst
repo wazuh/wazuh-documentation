@@ -99,18 +99,13 @@ Repeat this stage of the installation process for every Wazuh indexer node in yo
     <div class="accordion-section open">
 
 
-#. Run the Wazuh indexer ``securityadmin.sh`` script on any Wazuh indexer node to load the new certificates information and start the cluster. Replace ``<node_IP>`` with your Wazuh indexer node IP address.
+#. Run the Wazuh indexer ``indexerSecurityInitializer.sh`` script on any Wazuh indexer node to load the new certificates information and start the cluster. 
     
     .. code-block:: console
 
-      # export WAZUH_INDEXER_IP="<node_IP>"
+      # /usr/share/wazuh-indexer/bin/indexerSecurityInitializer.sh
 
-    .. code-block:: console
-
-      # sudo -u wazuh-indexer OPENSEARCH_PATH_CONF=/etc/wazuh-indexer JAVA_HOME=/usr/share/wazuh-indexer/jdk /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig -icl -p 9800 -cd /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig -nhnv -cacert /etc/wazuh-indexer/certs/root-ca.pem -cert /etc/wazuh-indexer/certs/admin.pem -key /etc/wazuh-indexer/certs/admin-key.pem -h $WAZUH_INDEXER_IP
-        
-       
-
+      
 Testing the cluster installation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -118,8 +113,7 @@ Testing the cluster installation
 
       .. code-block:: console
 
-        # curl -k -u admin:admin https://$WAZUH_INDEXER_IP:9700
-
+        # curl -k -u admin:admin https://<WAZUH_INDEXER_IP>:9200
 
       .. code-block:: none
           :class: output accordion-output
@@ -127,25 +121,26 @@ Testing the cluster installation
           {
             "name" : "node-1",
             "cluster_name" : "wazuh-cluster",
-            "cluster_uuid" : "XXT8abZ5S8q1XAIYgOb3cg",
+            "cluster_uuid" : "cMeWTEWxQWeIPDaf1Wx4jw",
             "version" : {
               "number" : "7.10.2",
               "build_type" : "rpm",
-              "build_hash" : "8a529d77c7432bc45b005ac1c4ba3b2741b57d4a",
-              "build_date" : "2021-12-21T01:36:21.407473Z",
+              "build_hash" : "e505b10357c03ae8d26d675172402f2f2144ef0f",
+              "build_date" : "2022-01-14T03:38:06.881862Z",
               "build_snapshot" : false,
               "lucene_version" : "8.10.1",
               "minimum_wire_compatibility_version" : "6.8.0",
               "minimum_index_compatibility_version" : "6.0.0-beta1"
             },
             "tagline" : "The OpenSearch Project: https://opensearch.org/"
-          }   
+          }
+          
 
   #. Run the following command to check if the cluster is working correctly.
   
       .. code-block:: console
 
-        # curl -k -u admin:admin https://$WAZUH_INDEXER_IP:9700/_cat/nodes?v
+        # curl -k -u admin:admin https://<WAZUH_INDEXER_IP>:9200/_cat/nodes?v
 
 
 Next steps

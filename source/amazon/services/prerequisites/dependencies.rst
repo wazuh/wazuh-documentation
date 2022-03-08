@@ -18,7 +18,7 @@ Installing dependencies
 Python
 ------
 
-The AWS module requires Python 3.9. Future Python releases should maintain compatibility although it cannot be guaranteed.
+The AWS module requires Python 3. It is compatible with Python 3.6 to Python 3.9. Future Python releases should maintain compatibility although it cannot be guaranteed.
 
 a) For CentOS/RHEL/Fedora operating systems:
 
@@ -47,6 +47,11 @@ b) For Debian/Ubuntu operating systems:
 
   # apt-get update && apt-get install python3-pip
 
+It is recommended to use a pip version greater than or equal to 19.3 to ease the installation of the required dependencies.
+
+.. code-block:: console
+
+  # pip3 install --upgrade pip
 
 Boto3
 -----
