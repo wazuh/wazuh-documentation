@@ -12,25 +12,36 @@
 @import "../parts/footer";
 
 body {
-  margin-top: $indexHeaderHeightXl;
+  margin-top: $index-header-height-xl;
 }
 
 .navbar {
-  margin: 0 auto 27px auto;
+  margin: 0 auto 27px;
   .navbar-brand {
-    margin: 0;
     padding: 0;
+    margin: 0;
     img {
       height: 35px;
     }
   }
 }
 
+.search-box {
+  .search-form {
+    height: 46px;
+    .btn-search {
+      width: 44px;
+      height: 44px;
+      background-size: 41px 41px;
+    }
+  }
+}
+
 main {
-  padding-left: 0;
-  padding-right: 0;
-  min-height: calc(100vh - #{$indexHeaderHeightXl} - #{$footerHeight});
+  min-height: calc(100vh - #{$index-header-height-xl} - #{$footer-height});
   padding-top: 60px;
+  padding-right: 0;
+  padding-left: 0;
 
   h1 {
     width: 0;
@@ -47,41 +58,50 @@ main {
       display: flex;
       flex-wrap: wrap;
       align-items: flex-start;
+      @include media-max(sm){
+        width: calc(100% - 20px);
+      }
 
       .toctree-l1 {
-        margin-left: #{$indexIconSize + 10};
-        width: calc(33.333% - #{$indexIconSize + 10});
-        margin-bottom: 60px;
         position: relative;
+        width: calc(33.333% - #{$index-icon-size + 10});
         min-height: 133px;
-        border-left: 3px solid;
+        margin-bottom: 60px;
+        margin-left: #{$index-icon-size + 10};
         @include media-max(lg){
-          margin-left: #{$indexIconSize - 10};
+          margin-left: #{$index-icon-size - 10};
         }
         @include media-max(md) {
-          width: calc(100% - #{$indexIconSize + 10});
+          width: calc(100% - #{$index-icon-size + 10});
         }
         @include media-only(md, xl) {
-          width: calc(50% - #{$indexIconSize + 10});
+          width: calc(50% - #{$index-icon-size + 10});
         }
 
         &.collapsible {
           .toggle {
-            display: inline-block;
             left: -3px;
+            display: inline-block;
+            padding: 10px 0;
             font-size: 18px;
             font-weight: 600;
-            padding: 10px 0;
+            
+            &::before {
+              display: inline-block;
+              width: 48px;
+              height: 22px;
+              content: "More";
+            }
 
             &::after {
-              content: '';
               display: inline-block;
               width: 24px;
               height: 12px;
+              margin-left: 3px;
+              content: "";
               background-repeat: no-repeat;
-              background-size: 20px 15px;
               background-position: center;
-              margin-left: 7px;
+              background-size: 20px 15px;
               transform: rotateX(180deg);
             }
           }
@@ -94,20 +114,20 @@ main {
               transform: rotateX(0);
             }
 
-            .toctree-l2:nth-of-type(n+#{$IndexMaxShowItems+1}) {
+            .toctree-l2:nth-of-type(n + #{$index-max-show-items + 1}) {
               display: none;
             }
           }
-        } 
+        }
 
         a {
-          border-left: 3px solid;
           position: relative;
           left: -3px;
-          padding-left: 15px;
           display: inline-block;
-          line-height: 32px;
+          padding-left: 15px;
           font-weight: 500;
+          line-height: 32px;
+          border-left: 3px solid;
 
           &:hover {
             text-decoration: none;
@@ -115,10 +135,10 @@ main {
         }
 
         > a {
-          font-size: 22px;
-          line-height: 22px;
-          font-weight: 600;
           padding-bottom: 15px;
+          font-size: 22px;
+          font-weight: 600;
+          line-height: 22px;
           @include media-max(xl){
             font-size: 20px;
           }
@@ -137,10 +157,14 @@ main {
 }
 
 #header {
-  height: $indexHeaderHeightXl;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  height: $index-header-height-xl;
+
+  .form-control {
+    box-shadow: none;
+  }
 
   .navbar-brand {
     font-size: 22px;
@@ -156,16 +180,16 @@ main {
 
   .search-box {
     max-width: 850px;
-    margin-left: auto;
     margin-right: auto;
+    margin-left: auto;
   }
 }
 
 #right-sidebar {
   position: fixed;
-  top: $indexHeaderHeightXl;
+  top: $index-header-height-xl;
   right: 0;
-  width: calc((100% - 1140px)/2);
+  width: calc((100% - 1140px) / 2);
   min-width: 160px;
   padding-top: 15px;
   @include media-max(sm){
@@ -173,202 +197,340 @@ main {
   }
 }
 
-.index footer {
-  position: static;
-  padding-left: 0;
-  padding-right: 0;
-}
-
-.index main {
-  .toctree-l1 > a::before {
-    background-repeat: no-repeat;
-    background-size: 80px 80px;
-    background-position: right center;
-    content: '';
-    display: block;
-    width: 67px;
-    height: 75px;
-    position: absolute;
-    left: -70px;
-    top: -7px;
-    pointer-events: none;
-    @include media-max(lg){
-      left: -50px;
-      width: 50px;
-      height: 55px;
-      background-size: 60px 60px;
+.index {
+  .container {
+    @include media-min(xxl){
+      max-width: 1400px;
     }
+  }
+
+  #quickstart {
+    position: fixed;
+    top: calc(#{$index-header-height-xs} + 90px);
+    right: 0;
+    z-index: 200;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 188px;
+    border-radius: $rounded-corners;
+    @include media-max(sm){
+      width: 50px;
+    }
+    & > a {
+      position: absolute;
+      display: inline-flex;
+      align-items: center;
+      width: 188px;
+      height: 70px;
+      padding-left: 70px;
+      font-size: 20px;
+      font-weight: 400;
+      transform: rotate(-90deg);
+      @include media-max(sm){
+        height: 50px;
+      }
+      &:hover {
+        text-decoration: none;
+      }
+    }
+    &::after {
+      position: absolute;
+      bottom: 10px;
+      z-index: 1;
+      display: block;
+      width: 50px;
+      height: 50px;
+      pointer-events: none;
+      content: "";
+      background-repeat: no-repeat;
+      background-position: right center;
+      background-size: 50px 50px;
+      @include media-max(sm){
+        width: 40px;
+        height: 40px;
+        background-size: 40px 40px;
+      }
+    }
+    &:hover {
+      &::after {
+        width: 52px;
+        height: 52px;
+        background-size: 52px 52px;
+      }
+    }
+  }
+  .toctree-l1 > a.reference::before {
+    position: absolute;
+    top: -7px;
+    left: -75px;
+    display: block;
+    width: 70px;
+    height: 70px;
+    pointer-events: none;
+    content: "";
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: 70px 70px;
+    @include media-max(lg){
+      left: -55px;
+      width: 50px;
+      height: 50px;
+      background-size: 50px 50px;
+    }
+  }
+  footer {
+    position: static;
+    padding-right: 0;
+    padding-left: 0;
   }
 }
 
 /* Light theme -------------------------------------------------------------- */
 
-body {
-  background: $light_ColorCodeBlockBackground;
-  color: $light_ColorMainText;
+body { /* stylelint-disable-line  no-duplicate-selectors */
+  color: $light-color-main-text;
+  background: $light-color-code-block-background;
+
+  #quickstart a {
+    color: #fff;
+  }
 
   .toctree-wrapper {
     > ul {
       .toctree-l1 {
-        border-left-color: $light_ColorPrimary;
         &.collapsible {
           .toggle {
-            color: $light_ColorPrimary;
-            border-left-color: $light_ColorCodeBlockBackground;
+            color: $light-color-primary;
+            border: none;
             &::after {
-              background-image: url('#{$icoPath}svg-icons.svg#chevron-blue-lt');
+              background-image: url("#{$ico-path}svg-icons.svg#chevron-blue-lt");
             }
           }
         }
         a {
-          color: $light_ColorMainText;
-          border-left-color: $light_ColorPrimary;
+          color: $light-color-main-text;
+          border-left-color: $light-color-primary;
           &:hover {
-            color: $light_ColorPrimaryLighter;
+            color: $light-color-primary-lighter;
           }
         }
       }
     }
   }
-  
+
   #header {
-    background: $light_ColorIndexHeaderBackground;
+    background: $light-color-index-header-background;
     .search-box {
-      background: $light_ColorIndexHeaderBackground;
+      background: $light-color-index-header-background;
     }
     .form-control {
-      background: $light_ColorIndexHeaderBackground;
+      background: $light-color-index-header-background;
     }
   }
-  
+
   /* Getting started */
   [href$="getting-started/index.html"]::before {
-    background-image: url('#{$icoPath}index-icons.svg#getting-started-lt');
+    background-image: url("#{$ico-path}index-icons.svg#getting-started-lt");
   }
+
+  /* Quickstart */
+  [href="quickstart.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#quickstart-lt");
+  }
+
   /* Installation guide */
   [href$="installation-guide/index.html"]::before {
-    background-image: url('#{$icoPath}index-icons.svg#installation-guide-lt');
+    background-image: url("#{$ico-path}index-icons.svg#installation-guide-lt");
   }
+
+  /* Installation alternatives */
+  [href$="deployment-options/index.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#installation-alternatives-lt");
+  }
+
   /* Upgrade guide */
   [href$="upgrade-guide/index.html"]::before {
-    background-image: url('#{$icoPath}index-icons.svg#upgrade-guide-lt');
+    background-image: url("#{$ico-path}index-icons.svg#upgrade-guide-lt");
   }
+
   /* User manual */
   [href$="user-manual/index.html"]::before {
-    background-image: url('#{$icoPath}index-icons.svg#user-manual-lt');
+    background-image: url("#{$ico-path}index-icons.svg#user-manual-lt");
   }
+
   /* Cloud service */
   [href$="cloud-service/index.html"]::before {
-    background-image: url('#{$icoPath}index-icons.svg#cloud-service-lt');
+    background-image: url("#{$ico-path}index-icons.svg#cloud-service-lt");
   }
+
   /* Containers */
   [href$="containers.html"]::before {
-    background-image: url('#{$icoPath}index-icons.svg#containers-lt');
+    background-image: url("#{$ico-path}index-icons.svg#containers-lt");
   }
+
+  /* Container security */
+  [href$="container-security/index.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#containers-lt");
+  }
+
   /* Deployment */
   [href$="deployment.html"]::before {
-    background-image: url('#{$icoPath}index-icons.svg#deployment-lt');
+    background-image: url("#{$ico-path}index-icons.svg#deployment-lt");
   }
+
   /* Compliance */
   [href$="compliance.html"]::before {
-    background-image: url('#{$icoPath}index-icons.svg#compliance-lt');
+    background-image: url("#{$ico-path}index-icons.svg#compliance-lt");
   }
-  /* Monitorin with Wazuh */
+
+  /* Cloud security */
   [href$="monitoring.html"]::before {
-    background-image: url('#{$icoPath}index-icons.svg#monitoring-lt');
+    background-image: url("#{$ico-path}index-icons.svg#cloud-security-lt");
   }
+
   /* Proof of Concept guide */
   [href$="proof-of-concept-guide/index.html"]::before {
-    background-image: url('#{$icoPath}index-icons.svg#poc-guide-lt');
+    background-image: url("#{$ico-path}index-icons.svg#poc-guide-lt");
   }
+
   /* Release notes */
   [href$="release-notes/index.html"]::before {
-    background-image: url('#{$icoPath}index-icons.svg#release-notes-lt');
+    background-image: url("#{$ico-path}index-icons.svg#release-notes-lt");
+  }
+
+  &.index #quickstart {
+    background-color: $light-color-primary;
+    &::after {
+      background-image: url("#{$ico-path}index-icons.svg#quickstart");
+    }
   }
 }
 
 /* Dark- theme -------------------------------------------------------------- */
 
 .dark-theme {
-  background: $dark_ColorBaseSpace;
-  color: $dark_ColorMainText;
+  color: $dark-color-main-text;
+  background: $dark-color-base-space;
+
+  #quickstart {
+    &::after {
+      filter: invert(1);
+    }
+    a {
+      color: #000;
+    }
+  }
 
   .toctree-wrapper {
     > ul {
       .toctree-l1 {
-        border-left-color: $dark_ColorHighlightInlineText;
         &.collapsible {
           .toggle {
-            color: $dark_ColorPrimary;
-            border-left-color: $dark_ColorBaseSpace;
+            color: $dark-color-primary;
+            border-left-color: $dark-color-base-space;
             &::after {
-              background-image: url('#{$icoPath}svg-icons.svg#chevron-blue-dt');
+              background-image: url("#{$ico-path}svg-icons.svg#chevron-blue-dt");
             }
           }
         }
         a {
-          color: $dark_ColorMainText;
-          border-left-color: $dark_ColorHighlightInlineText;
+          color: $dark-color-main-text;
+          border-left-color: $dark-color-highlight-inline-text;
           &:hover {
-            color: $dark_ColorPrimaryLighter;
+            color: $dark-color-primary-lighter;
           }
         }
       }
     }
   }
-  
+
   #header {
-    background: $dark_ColorIndexHeaderBackground;
+    background: $dark-color-index-header-background;
     .search-box {
-      background: $dark_ColorIndexHeaderBackground;
+      background: $dark-color-index-header-background;
     }
     .form-control {
-      background: $dark_ColorIndexHeaderBackground;
+      background: $dark-color-index-header-background;
     }
   }
 
   /* Getting started */
   [href$="getting-started/index.html"]::before {
-    background-image: url('#{$icoPath}index-icons.svg#getting-started-dt');
+    background-image: url("#{$ico-path}index-icons.svg#getting-started-dt");
   }
+
+  /* Quickstart */
+  [href="quickstart.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#quickstart-dt");
+  }
+
   /* Installation guide */
   [href$="installation-guide/index.html"]::before {
-    background-image: url('#{$icoPath}index-icons.svg#installation-guide-dt');
+    background-image: url("#{$ico-path}index-icons.svg#installation-guide-dt");
   }
+
+  /* Installation alternatives */
+  [href$="deployment-options/index.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#installation-alternatives-dt");
+  }
+
   /* Upgrade guide */
   [href$="upgrade-guide/index.html"]::before {
-    background-image: url('#{$icoPath}index-icons.svg#upgrade-guide-dt');
+    background-image: url("#{$ico-path}index-icons.svg#upgrade-guide-dt");
   }
+
   /* User manual */
   [href$="user-manual/index.html"]::before {
-    background-image: url('#{$icoPath}index-icons.svg#user-manual-dt');
+    background-image: url("#{$ico-path}index-icons.svg#user-manual-dt");
   }
+
   /* Cloud service */
   [href$="cloud-service/index.html"]::before {
-    background-image: url('#{$icoPath}index-icons.svg#cloud-service-dt');
+    background-image: url("#{$ico-path}index-icons.svg#cloud-service-dt");
   }
+
   /* Containers */
   [href$="containers.html"]::before {
-    background-image: url('#{$icoPath}index-icons.svg#containers-dt');
+    background-image: url("#{$ico-path}index-icons.svg#containers-dt");
   }
+
+  /* Container security */
+  [href$="container-security/index.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#containers-dt");
+  }
+
   /* Deployment */
   [href$="deployment.html"]::before {
-    background-image: url('#{$icoPath}index-icons.svg#deployment-dt');
+    background-image: url("#{$ico-path}index-icons.svg#deployment-dt");
   }
+
   /* Compliance */
   [href$="compliance.html"]::before {
-    background-image: url('#{$icoPath}index-icons.svg#compliance-dt');
+    background-image: url("#{$ico-path}index-icons.svg#compliance-dt");
   }
-  /* Monitorin with Wazuh */
+
+  /* Cloud security */
   [href$="monitoring.html"]::before {
-    background-image: url('#{$icoPath}index-icons.svg#monitoring-dt');
+    background-image: url("#{$ico-path}index-icons.svg#cloud-security-dt");
   }
+
   /* Proof of Concept guide */
   [href$="proof-of-concept-guide/index.html"]::before {
-    background-image: url('#{$icoPath}index-icons.svg#poc-guide-dt');
+    background-image: url("#{$ico-path}index-icons.svg#poc-guide-dt");
   }
+
   /* Release notes */
   [href$="release-notes/index.html"]::before {
-    background-image: url('#{$icoPath}index-icons.svg#release-notes-dt');
+    background-image: url("#{$ico-path}index-icons.svg#release-notes-dt");
+  }
+
+  &.index #quickstart {
+    background-color: $dark-color-primary;
+    &::after {
+      background-image: url("#{$ico-path}index-icons.svg#quickstart");
+    }
   }
 }

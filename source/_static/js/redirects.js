@@ -1,6 +1,7 @@
 const removedUrls = [];
 const newUrls = [];
 const redirections = [];
+const redirectSameRelease = [];
 
 /* Note: new release versions must always be inserted in the first position of the array "versions" */
 const versions = [
@@ -26,6 +27,17 @@ const versions = [
 ];
 
 /* Data structure for every release
+
+/* Pages changed within the same release */
+
+/*
+redirectSameRelease['x.y'] = {
+  '/old/path/that/was/removed.html':
+    'new/path/replacing/the/old/one.html',
+  '/another-old/path/that/was/removed.html':
+    'another-new/path/replacing/the/old/one.html',
+};
+*/
 
 /* *** RELEASE X.Y ****/
 
@@ -182,6 +194,15 @@ redirections.push(
 
 /* *** RELEASE 4.2 ****/
 
+/* Pages changed within the same release */
+
+redirectSameRelease['4.2'] = {
+  '/release-notes/release_4_2_0.html':
+    '/release-notes/release-4-2-0.html',
+  '/user-manual/registering/agent-enrollment.html':  
+    '/user-manual/agent-enrollment/via-agent-configuration/index.html',
+};
+
 /* Pages added in 4.2 */
 
 newUrls['4.2'] = [
@@ -204,7 +225,7 @@ newUrls['4.2'] = [
   '/proof-of-concept-guide/audit-commands-run-by-user.htm',
   '/proof-of-concept-guide/index.html',
   '/deploying-with-ansible/guide/install-opendistro-server.html',
-  '/deploying-with-ansible/roles/wazuh-opendistro.rst',
+  '/deploying-with-ansible/roles/wazuh-opendistro.html',
   '/amazon-machine-images/amazon-machine-images.html',
   '/user-manual/capabilities/active-response/ar-use-cases/removing-malware.html',
   '/user-manual/capabilities/active-response/ar-use-cases/wazuh-with-yara.html',
@@ -247,9 +268,9 @@ newUrls['4.2'] = [
   '/cloud-service/apis/index.html',
   '/cloud-service/apis/reference.html',
   '/cloud-service/cold-storage/index.html',
-  '/cloud-service/cold-storage/access.rst',
-  '/cloud-service/cold-storage/configuration.rst',
-  '/cloud-service/cold-storage/filename-format.rst',
+  '/cloud-service/cold-storage/access.html',
+  '/cloud-service/cold-storage/configuration.html',
+  '/cloud-service/cold-storage/filename-format.html',
   '/cloud-service/getting-started/index.html',
   '/cloud-service/getting-started/starting-faq.html',
   '/cloud-service/your-environment/index.html',
@@ -388,12 +409,24 @@ newUrls['4.2'] = [
   '/docker-monitor/monitoring-docker-server.html',
   '/upgrade-guide/compatibility-matrix/index.html',
   '/upgrade-guide/legacy/upgrading-wazuh-server/restore-alerts-from-2.x-to-3.x.html',
-  '/user-manual/registering/agent-enrollment.html',
+  '/user-manual/agent-enrollment/index.html',
+  '/user-manual/agent-enrollment/via-agent-configuration/index.html',
+  '/user-manual/agent-enrollment/via-agent-configuration/linux-endpoint.html', 
+  '/user-manual/agent-enrollment/via-agent-configuration/windows-endpoint.html',
+  '/user-manual/agent-enrollment/via-agent-configuration/macos-endpoint.html',
+  '/user-manual/agent-enrollment/via-manager-API/index.html',
+  '/user-manual/agent-enrollment/via-manager-API/requesting-the-key.html',
+  '/user-manual/agent-enrollment/via-manager-API/importing-the-key.html',
+  '/user-manual/agent-enrollment/security-options/index.html',
+  '/user-manual/agent-enrollment/security-options/using-password-authentication.html',
+  '/user-manual/agent-enrollment/security-options/manager-identity-verification.html', 
+  '/user-manual/agent-enrollment/security-options/agent-identity-verification.html', 
+  '/user-manual/agent-enrollment/troubleshooting.html', 
 ];
 
 removedUrls['4.2'] = [
   '/deploying-with-ansible/guide/install-elk-server.html',
-  '/deploying-with-ansible/roles/wazuh-elasticsearch.rst',
+  '/deploying-with-ansible/roles/wazuh-elasticsearch.html',
   '/user-manual/kibana-app/connect-kibana-app.html',
   '/user-manual/reference/daemons/ossec-agentd.html',
   '/user-manual/reference/daemons/ossec-agentlessd.html',
@@ -534,14 +567,56 @@ removedUrls['4.2'] = [
   '/docker-monitor/monitoring_containers_activity.html',
   '/docker-monitor/monitoring_docker_server.html',
   '/upgrade-guide/compatibility_matrix/index.html',
-  '/upgrade-guide/legacy/upgrading-wazuh-server/restore_alerts-from-2.x-to-3.x.html'
+  '/upgrade-guide/legacy/upgrading-wazuh-server/restore_alerts-from-2.x-to-3.x.html',
+  '/user-manual/registering/index.html',
+  '/user-manual/registering/command-line-registration.html',
+  '/user-manual/registering/restful-api-registration.html',
+  '/user-manual/registering/password-authorization-registration.html', 
+  '/user-manual/registering/host-verification-registration.html',
+  '/user-manual/registering/registering-agents-theory.html',
+  '/user-manual/registering/registering-agents-troubleshooting.html',
 ];
 
 redirections.push(
     {
       'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/deploying-with-ansible/roles/wazuh-elasticsearch.rst',
-      '4.2': '/deploying-with-ansible/roles/wazuh-opendistro.rst',
+      '4.1': '/user-manual/registering/index.html',
+      '4.2': '/user-manual/agent-enrollment/index.html',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/user-manual/registering/command-line-registration.html',
+      '4.2': '/user-manual/agent-enrollment/index.html',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/user-manual/registering/restful-api-registration.html',
+      '4.2': '/user-manual/agent-enrollment/via-manager-API/index.html',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/user-manual/registering/password-authorization-registration.html',
+      '4.2': '/user-manual/agent-enrollment/security-options/using-password-authentication.html',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/user-manual/registering/host-verification-registration.html',
+      '4.2': '/user-manual/agent-enrollment/security-options/index.html',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/user-manual/registering/registering-agents-theory.html',
+      '4.2': '/user-manual/agent-enrollment/index.html',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/user-manual/registering/registering-agents-troubleshooting.html',
+      '4.2': '/user-manual/agent-enrollment/troubleshooting.html',
+    },   
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/deploying-with-ansible/roles/wazuh-elasticsearch.html',
+      '4.2': '/deploying-with-ansible/roles/wazuh-opendistro.html',
     },
     {
       'target': ['4.1=>4.2', '4.2=>4.1'],

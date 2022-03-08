@@ -23,7 +23,7 @@ Access to services and containers
    .. note::
      The certificate used for Kibana by default is a self-signed certificate, because of this your browser will warn that it cannot verify its authenticity.
 
-#. Agents may be registered by following the standard registration process and using the Docker host's address as the manager's address. For more information see: :ref:`Registering agents<register_agents>`
+#. Agents may be registered by following the standard registration process and using the Docker host's address as the manager's address. For more information see: :ref:`Wazuh agent enrollment <agent_enrollment>`
 
 #. We can list the containers we have created by executing `docker-compose ps` in the directory that contains the ``docker-compose.yml`` file:
 

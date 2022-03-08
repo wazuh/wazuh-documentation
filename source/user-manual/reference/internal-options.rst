@@ -1,8 +1,8 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
-  :description: In this section of the Wazuh documentation, you will find all the information related to the internal configuration of Wazuh. 
-  
+  :description: In this section of the Wazuh documentation, you will find all the information related to the internal configuration of Wazuh.
+
 .. _reference_internal_options:
 
 Internal configuration
@@ -805,14 +805,6 @@ Remoted
 +                                   +---------------+--------------------------------------------------------------+
 |                                   | Allowed values| 0, 1                                                         |
 +-----------------------------------+---------------+--------------------------------------------------------------+
-| **remoted.group_data_flush**      | Description   | Interval between multigroup residual file cleanups.          |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Default value | 86400                                                        |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed values| 0: Disable residual file cleanups                            |
-+                                   +               +--------------------------------------------------------------+
-|                                   |               | Any other integer between 1 and 2592000                      |
-+-----------------------------------+---------------+--------------------------------------------------------------+
 | **remoted.receive_chunk**         | Description   | | Reception buffer size for TCP (bytes).                     |
 |                                   |               | | Amount of data that Remoted can receive per operation.     |
 +                                   +---------------+--------------------------------------------------------------+
@@ -1070,12 +1062,6 @@ Wazuh Command
 Wazuh-db
 --------
 
-+------------------------------------+---------------+-------------------------------------------------------------------------------------+
-|      **wazuh_db.sock_queue_size**  | Description   | Maximum number of pending connections                                               |
-|                                    +---------------+-------------------------------------------------------------------------------------+
-|                                    | Default value | 128                                                                                 |
-|                                    +---------------+-------------------------------------------------------------------------------------+
-|                                    | Allowed value | Any integer between 1 and 1024                                                      |
 +------------------------------------+---------------+-------------------------------------------------------------------------------------+
 |      **wazuh_db.worker_pool_size** | Description   | Number of worker threads                                                            |
 |                                    +---------------+-------------------------------------------------------------------------------------+
