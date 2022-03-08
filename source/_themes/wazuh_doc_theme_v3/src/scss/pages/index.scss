@@ -401,6 +401,11 @@ body { /* stylelint-disable-line  no-duplicate-selectors */
     background-image: url("#{$ico-path}index-icons.svg#release-notes-lt");
   }
 
+  /* Migration guide */
+  [href$="migration-guide/index.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#migration-guide-lt");
+  }
+
   &.index #quickstart {
     background-color: $light-color-primary;
     &::after {
@@ -525,6 +530,11 @@ body { /* stylelint-disable-line  no-duplicate-selectors */
   /* Release notes */
   [href$="release-notes/index.html"]::before {
     background-image: url("#{$ico-path}index-icons.svg#release-notes-dt");
+  }
+  
+  /* Migration guide */
+  [href$="migration-guide/index.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#migration-guide-dt");
   }
 
   &.index #quickstart {
