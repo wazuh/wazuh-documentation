@@ -17,7 +17,7 @@ The following components are installed:
 - Elastic Stack, including Open Distro for Elasticsearch as a single-node cluster or as a multi-node cluster. Installing Elastic Stack also includes the installation of Kibana, and the Wazuh Kibana plugin, on the same host as the Elasticsearch node or on a separate one.
 
 
-   .. thumbnail:: ../../../images/installation/distributed.png
+   .. thumbnail:: ../../../images/installation/distributed-no-title.png
      :align: center
      :width: 100%
 
