@@ -18,7 +18,7 @@ In addition to agent-based monitoring capabilities, the Wazuh platform can monit
 
 The diagram below represents the Wazuh components and data flow. It shows the three main components of the solution, which are the :ref:`Wazuh agent <wazuh_agent>`, the :ref:`Wazuh server <wazuh_server>`, and the :ref:`Elastic Stack <elastic_stack>`.
 
-.. thumbnail:: ../../images/getting_started/data_flow.png
+.. thumbnail:: ../../images/getting-started/data-flow.png
     :alt: Data flow
     :align: center
     :wrap_image: No

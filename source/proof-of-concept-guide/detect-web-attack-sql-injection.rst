@@ -45,7 +45,7 @@ You can visualize the alert data in the Wazuh Kibana plugin. To do this, go to t
 * ``rule.id:31103``
 
 
-.. thumbnail:: ../images/poc/Detecting_an_SQL_Injection_attack.png
+.. thumbnail:: ../images/poc/Detecting-an-SQL-Injection-attack.png
           :title: Detecting an SQL Injection attack
           :align: center
           :wrap_image: No

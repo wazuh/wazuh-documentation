@@ -97,7 +97,7 @@ Example alert for rule ``Apache: Attempt to access forbidden directory index.``:
 
 Example of regulatory compliance dashboard for PCI DSS:
 
-.. thumbnail:: ../../images/getting_started/use_case_regulatory_compliance.png
+.. thumbnail:: ../../images/getting-started/use-case-regulatory-compliance.png
    :align: center
    :wrap_image: No
 

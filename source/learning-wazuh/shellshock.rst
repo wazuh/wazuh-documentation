@@ -93,7 +93,7 @@ Notice the maliciously crafted User-Agent header to be sent, including injected 
 
 Search Kibana for **rule.id:31166** (the Shellshock rule).  You should find a record like this:
 
-.. thumbnail:: ../images/learning-wazuh/labs/shellshock.png
+.. thumbnail:: ../images/learning-wazuh/labs/shellshock-1.png
     :title: Flood
     :align: center
     :width: 100%

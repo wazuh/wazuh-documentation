@@ -19,7 +19,7 @@ Server architecture
 
 The Wazuh server runs the analysis engine, the Wazuh RESTful API, the agents registration service, the agents connection service, the Wazuh cluster daemon, and Filebeat. The diagram below represents the server architecture and components:
 
-.. thumbnail:: ../../images/getting_started/architecture_server.png
+.. thumbnail:: ../../images/getting-started/architecture-server.png
    :alt: Wazuh server architecture
    :align: center
    :wrap_image: No

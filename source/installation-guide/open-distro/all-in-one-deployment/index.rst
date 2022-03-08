@@ -17,7 +17,7 @@ The following components are installed:
 - Elastic Stack, including Open Distro for Elasticsearch as a single-node cluster, as well as Filebeat, Kibana, and the Wazuh Kibana plugin.
 
 
-   .. thumbnail:: ../../../images/installation/all_in_one_no_title.png
+   .. thumbnail:: ../../../images/installation/all-in-one-deployment.png
      :align: center
      :width: 100%
 

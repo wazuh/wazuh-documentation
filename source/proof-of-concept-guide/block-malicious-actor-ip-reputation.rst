@@ -133,7 +133,7 @@ You can visualize the alert data in the Wazuh Kibana plugin. To do this, go to t
 
 * ``rule.id:(651 OR 100100)``
 
-.. thumbnail:: ../images/poc/Blocking_a_malicious_actor.png
+.. thumbnail:: ../images/poc/Blocking-a-malicious-actor.png
           :title: Blocking a malicious actor - IP Reputation
           :align: center
           :wrap_image: No

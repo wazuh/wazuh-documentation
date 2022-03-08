@@ -8,7 +8,7 @@
 
     #. Click the **Network** tab and then check the **Disable cache** option.
 
-      .. thumbnail:: ../../images/kibana-app/troubleshooting/disable_cache_chromium.png
+      .. thumbnail:: ../../images/kibana-app/troubleshooting/disable-cache-chromium.png
         :title: Disable cache Chromium
         :align: left
         :width: 100%
@@ -19,7 +19,7 @@
 
     #. Click the **Network** tab and then check the **Disable cache** option.
 
-      .. thumbnail:: ../../images/kibana-app/troubleshooting/disable_cache_firefox.png
+      .. thumbnail:: ../../images/kibana-app/troubleshooting/disable-cache-firefox.png
         :title: Disable cache Firefox
         :align: left
         :width: 100%
@@ -40,7 +40,7 @@
 
     #. Click the **Network** tab and then check the **Ignore cache when loading resources** option.
 
-      .. thumbnail:: ../../images/kibana-app/troubleshooting/disable_cache_safari.png
+      .. thumbnail:: ../../images/kibana-app/troubleshooting/disable-cache-safari.png
         :title: Disable cache Safari
         :align: left
         :width: 100%
