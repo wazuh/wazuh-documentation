@@ -18,6 +18,7 @@ $breakpoints: (
 // Main colors - Light theme
 $light-color-base-space: #fff !default;
 $light-color-primary: #256bd1 !default;
+$light-color-primary-alt: #1561D0 !default;
 $light-color-primary-lighter: #3585f9 !default;
 $light-color-border-details: #c1ccd9 !default; // search-box and navigation borders
 $light-color-border-deeper: #b7c6d7 !default;
@@ -51,9 +52,9 @@ $light-color-admonition-background: #f9fcff !default;
 // Code-blocks - Light theme
 $light-color-code-default: #000 !default;
 $light-color-code-keyword: #000 !default;
-$light-color-code-comment: #83720a !default;
+$light-color-code-comment: #80700a !default;
 $light-color-code-number: #0e4a9f !default;
-$light-color-code-string: #bd3d9d !default;
+$light-color-code-string: #bd3d9c !default;
 $light-color-code-function: #256bd1 !default;
 $light-color-code-variable: #7c3db2 !default;
 
@@ -68,6 +69,7 @@ $dark-color-footer: #242424 !default;
 $dark-color-main-text: #fff !default;
 $dark-color-input-placeholder: #a6b5c8 !default;
 $dark-color-shaded-text: #9298ab !default; // header-links
+$dark-color-shaded-text-lighter: #9a9fb1 !default; // header-links
 $dark-color-highlight-inline-text: #ebd0fc !default;
 $dark-color-highlight-background: #242424 !default;
 $dark-color-table-border: #b7c6d7 !default;

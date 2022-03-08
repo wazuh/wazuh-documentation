@@ -356,6 +356,8 @@ wazuh_images_config = {
   'show_caption': True
 }
 
+html_scaled_image_link = False
+
 # -- Options for intersphinx extension ---------------------------------------
 
 # Example configuration for intersphinx: refer to the Python standard library.
