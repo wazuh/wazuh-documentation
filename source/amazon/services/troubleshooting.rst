@@ -66,44 +66,10 @@ Follow these steps to enable debug mode:
 
 #. Restart the Wazuh service
 
-
-.. tabs::
-
-  .. group-tab:: Wazuh manager
-
-      .. tabs::
-
-        .. tab:: For Systemd
-
-          .. code-block:: console
-
-            systemctl restart wazuh-manager
-
-        .. tab:: For SysV Init
-
-          .. code-block:: console
-
-            service wazuh-manager restart
-
-  .. group-tab:: Wazuh agent
-
-      .. tabs::
-
-        .. tab:: For Systemd
-
-          .. code-block:: console
-
-            systemctl restart wazuh-agent
-
-        .. tab:: For SysV Init
-
-          .. code-block:: console
-
-            service wazuh-agent restart
-
+.. include:: ../../_templates/common/restart_manager_or_agent.rst
 
 .. Note::
-        Don't forget to disable debug mode once finished. Leaving debug mode enabled could result in the addition of large amounts of logs in the ``ossec.log`` file.
+        Don't forget to disable debug mode once the troubleshooting has finished. Leaving debug mode enabled could result in the addition of large amounts of logs in the ``ossec.log`` file.
 
 .. _aws_events_processed:
 
@@ -119,6 +85,9 @@ To understand how the :ref:`reference_ossec_global_logall_json` parameter works 
 #. The analysis engine evaluates these events and compares them with the different rules available. If the event matches any of the rules an alert is generated, which is what ultimately is shown in the Wazuh UI.
 
 With this in mind, it is possible to make use of the :ref:`reference_ossec_global_logall_json`. When this option is activated, Wazuh stores into ``WAZUH_PATH/logs/archives/archives.json`` file every event sent to the analysis engine whether they tripped a rule or not. By checking this file it is possible to determine if the AWS events are being sent to the analysis engine and therefore working properly.
+
+.. Note::
+        Don't forget to disable the :ref:`reference_ossec_global_logall_json` parameter once the troubleshooting has finished. Leaving it enabled could result in high disk space consumption.
 
 
 Common problems and solutions
@@ -153,7 +122,7 @@ The module does not work and the following error messages appears in the ``ossec
 
 **Solution**
 
-Make sure the credentials provided grant access to the requested S3 bucket and the bucket itself exists in the given region, if specified.
+Make sure the credentials provided grant access to the requested S3 bucket and the bucket itself exists.
 
 
 The config profile could not be found
@@ -195,7 +164,7 @@ The module is running but no alerts are displayed in the Wazuh UI.
 
 **Solution**
 
-First of all, make sure there is no ``ERROR`` or ``WARNING`` messages in the ``ossec.log`` file by :ref:`enabling debug mode <aws_debug_mode>`. If the module is running as expected but no alerts are being generated it could mean there is no reason for alerts to be raised in first place. Check the following to verify this:
+First of all, make sure there are ``ERROR`` or ``WARNING`` messages in the ``ossec.log`` file by :ref:`enabling debug mode <aws_debug_mode>`. If the module is running as expected but no alerts are being generated it could mean there is no reason for alerts to be raised in first place. Check the following to verify this:
 
 - **Make sure there is data available for the given date**
 
@@ -215,7 +184,7 @@ The module is running without any error or warning messages, but no alerts from 
 
 A common scenario is that no alerts are being generated because the events are not matching any of the available rules. Take a look to the :ref:`aws_events_processed` section to learn how to check if the AWS logs are being sent to the analysis engine.
 
-Take into account that Wazuh does not provide default rules for the different logs that can be found in CloudWatch Logs, since they can have any type of format and come from any source. Because of this, if a user wants to make use of this integration to be able to process any custom log they will most likely have to configure their own rules for them and even their own decoders, depending on the format of the logs. Take a look at the :ref:`ruleset_custom` section to learn more about this topic.
+Take into account that Wazuh does not provide default rules for the different logs that can be found in CloudWatch Logs, since they can have any type of format and come from any source. Because of this, if a user wants to make use of this integration to be able to process any custom log they will most likely have to configure their own rules for them. Take a look at the :ref:`ruleset_custom` section to learn more about this topic.
 
 
 Interval overtaken message is present in the ossec.log
@@ -225,7 +194,7 @@ The ``Interval overtaken`` message is present in the ossec.log
 
 **Solution**
 
-Not an issue but a warning. This means the time the module required to finished the last execution was greater than the interval value defined. It is important to note that the next run will not start until the previous run is finished.
+Not an issue but a warning. This means the time the module required to finished the last execution was greater than the interval value defined. It is important to note that the next run will not start until the previous one is finished.
 
 
 Error codes reference
