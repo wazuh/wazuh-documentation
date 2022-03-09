@@ -233,6 +233,8 @@ This toggles whether to store events even when they do not trip a rule with resu
 | **Allowed values** | yes, no |
 +--------------------+---------+
 
+.. _reference_ossec_global_logall_json:
+
 logall_json
 ^^^^^^^^^^^
 
