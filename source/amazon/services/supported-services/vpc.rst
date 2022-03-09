@@ -33,6 +33,24 @@ Amazon configuration
       :align: center
       :width: 70%
 
+Policy configuration
+^^^^^^^^^^^^^^^^^^^^
+
+.. include:: /_templates/cloud/amazon/create_policy.rst
+.. include:: /_templates/cloud/amazon/bucket_policies.rst
+.. include:: /_templates/cloud/amazon/attach_policy.rst
+    
+To allow an AWS user to execute the VPC integration, it must also have a policy like the following attached:
+
+    .. code-block:: json
+
+      {
+        "Sid": "VisualEditor0",
+        "Effect": "Allow",
+        "Action": "ec2:DescribeFlowLogs",
+        "Resource": "*"
+      }
+
 
 Wazuh configuration
 -------------------
@@ -125,17 +143,3 @@ These alerts can be easily analyzed using visualizations like the following one:
   :width: 70%
 
 On that visualization users can look for peaks in their network, once they found a peak they can filter, the alerts generated on that time and check which IP addresses were communicating. Since IP address is a field used in many AWS alerts, they'll probably found other alerts and find out what happened.
-
-.. note::
-  If while configuring the permissions policy we're asked for special permissions, we need to add the next block into the policy file:
-
-  Navigate to Services > VPC > Policies > Policy file.
-
-    .. code-block:: xml
-
-      {
-        "Sid": "VisualEditor0",
-        "Effect": "Allow",
-        "Action": "ec2:DescribeFlowLogs",
-        "Resource": "*"
-      }

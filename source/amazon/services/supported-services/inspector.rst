@@ -16,6 +16,32 @@ Amazon configuration
 Amazon Inspector does not need to store logs into a bucket, like the other AWS services.
 The inspector works as a searcher, so it retrieves information using the AWS API and provides an agent that analyzes it.
 
+Policy configuration
+^^^^^^^^^^^^^^^^^^^^
+
+.. include:: /_templates/cloud/amazon/create_policy.rst
+
+.. include:: /_templates/cloud/amazon/read_only_policy_description.rst
+
+.. code-block:: json
+
+    {
+	"Version": "2012-10-17",
+	"Statement": [
+	    {
+		"Sid": "VisualEditor0",
+		"Effect": "Allow",
+		"Action": [
+		    "inspector:ListFindings",
+		    "inspector:DescribeFindings"
+		],
+		"Resource": "*"
+	    }
+	]
+    }
+
+.. include:: /_templates/cloud/amazon/attach_policy.rst
+
 Wazuh configuration
 -------------------
 

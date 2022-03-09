@@ -38,6 +38,12 @@ Amazon configuration
 
         * `Classic Load Balancer. <https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-access-logs.html>`_
 
+Policy configuration
+++++++++++++++++++++
+
+.. include:: /_templates/cloud/amazon/create_policy.rst
+.. include:: /_templates/cloud/amazon/bucket_policies.rst
+.. include:: /_templates/cloud/amazon/attach_policy.rst
 
 Wazuh configuration
 -------------------
