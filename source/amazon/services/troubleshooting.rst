@@ -8,46 +8,201 @@ Troubleshooting
 .. meta::
   :description: Learn more about how to fix the most frequent issues when using the Wazuh AWS integration.
 
-The below information is intended to assist in troubleshooting issues.
 
+Checking if the module is running
+---------------------------------
 
-Testing the integration
------------------------
+When the module runs it writes its output to the ``ossec.log`` file. This log file can be found in ``WAZUH_PATH/logs/ossec.log`` or under ``Wazuh`` > ``Management`` > ``Logs`` if using the Wazuh UI.
 
-After configuring the module successfully users can expect to see the following log messages in their agent log file: ``/var/ossec/logs/ossec.log``
+It is possible to check if the module is running without issues by looking in the ``ossec.log`` file. These are the messages that are displayed in the ``ossec.log``, depending on how the module has been configured:
 
-#. Module starting:
-
-    .. code-block:: none
-        :class: output
-
-        2019/10/28 13:58:10 wazuh-modulesd:aws-s3[8184] wm_aws.c:48 at wm_aws_main(): INFO: Module AWS started
-
-
-#. Scheduled scan:
+- When the module is starting:
 
     .. code-block:: none
         :class: output
 
-        2019/10/28 13:58:10 wazuh-modulesd:aws-s3: INFO: Starting fetching of logs.
-        2019/10/28 13:38:11 wazuh-modulesd:aws-s3: INFO: Fetching logs finished.
+        2022/03/04 00:00:00 wazuh-modulesd:aws-s3: INFO: Module AWS started
+        2022/03/04 00:00:00 wazuh-modulesd:aws-s3: INFO: Starting fetching of logs.
 
 
-Common errors
--------------
+- When Scheduled scan is set:
+
+    .. code-block:: none
+        :class: output
+
+        2022/03/04 00:00:00 wazuh-modulesd:aws-s3: INFO: Starting fetching of logs.
+        2022/03/04 00:00:00 wazuh-modulesd:aws-s3: INFO: Fetching logs finished.
+
+
+- When the module has finished its execution and is waiting until the :ref:`aws_interval` condition is met:
+
+    .. code-block:: none
+        :class: output
+
+        2022/03/04 00:00:00 wazuh-modulesd:aws-s3: INFO: Fetching logs finished.
+
+.. _aws_debug_mode:
+
+Enabling debug mode
+-------------------
+
+It is possible to obtain additional information about the module's execution by enabling the debug mode. This is used to see ``INFO``or ``DEBUG`` messages. There are three different debug levels available:
+
+- **Debug level 0**: Only ``ERROR`` and ``WARNING`` messages are written in the ``ossec.log`` file. This is the default value.
+
+- **Debug level 1**: In addition to ``ERROR`` and ``WARNING`` messages, ``INFO`` messages are written in the ``ossec.log`` file too. They are useful to check the execution of the module without having to manage large amounts of ``DEBUG`` messages.
+
+- **Debug level 2**: This is the highest level of verbosity. Every message type is dump into the ``ossec.log`` file, including ``DEBUG`` messages which contain the details of the different operations performed by the module. This is the recommended mode when troubleshooting the module.
+
+
+Follow these steps to enable debug mode:
+
+#. Add the following line to the ``WAZUH_PATH/etc/local_internal_options.conf`` file, specifying the desired debug level:
+
+    .. code-block:: none
+
+        wazuh_modules.debug=2
+
+
+#. Restart the Wazuh service
+
+.. include:: ../../_templates/common/restart_manager_or_agent.rst
+
+.. Note::
+        Don't forget to disable debug mode once the troubleshooting has finished. Leaving debug mode enabled could result in the addition of large amounts of logs in the ``ossec.log`` file.
+
+.. _aws_events_processed:
+
+Checking if logs are being processed
+------------------------------------
+
+The easiest way to check if the logs are being processed, regardless of the type of bucket or service configured and regardless of whether alerts are being generated or not is by using the :ref:`reference_ossec_global_logall_json` parameter.
+
+To understand how the :ref:`reference_ossec_global_logall_json` parameter works it is necessary to learn about the flow that is followed when processing a log until the corresponding alert is displayed in the Wazuh UI. It is as follows:
+
+#. The module downloads the logs available in AWS for the requested date and path. Check the :ref:`amazon_considerations` page to learn more about how to properly filter the logs.
+#. The content of these logs is sent to the analysis engine in the form of an ``Event``.
+#. The analysis engine evaluates these events and compares them with the different rules available. If the event matches any of the rules an alert is generated, which is what ultimately is shown in the Wazuh UI.
+
+With this in mind, it is possible to make use of the :ref:`reference_ossec_global_logall_json`. When this option is activated, Wazuh stores into ``WAZUH_PATH/logs/archives/archives.json`` file every event sent to the analysis engine whether they tripped a rule or not. By checking this file it is possible to determine if the AWS events are being sent to the analysis engine and therefore working properly.
+
+.. Note::
+        Don't forget to disable the :ref:`reference_ossec_global_logall_json` parameter once the troubleshooting has finished. Leaving it enabled could result in high disk space consumption.
+
+
+Common problems and solutions
+-----------------------------
+
+Unable to locate credentials
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The module does not work and the following error messages appears in the ``ossec.log``:
+
+    .. code-block:: none
+        :class: output
+
+        2022/03/03 16:01:48 wazuh-modulesd:aws-s3: WARNING: Bucket:  -  Returned exit code 12
+        2022/03/03 16:01:48 wazuh-modulesd:aws-s3: WARNING: Bucket:  -  Unable to locate credentials
+
+**Solution**
+
+No authentication method was provided within the configuration of the module. Check the :ref:`Configuring AWS credentials <amazon_credentials>` section to learn more about the different options available and how to configure them.
+
+
+Invalid credentials to access S3 Bucket
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The module does not work and the following error messages appears in the ``ossec.log``:
+
+    .. code-block:: none
+        :class: output
+
+        2022/03/03 16:06:56 wazuh-modulesd:aws-s3: WARNING: Bucket:  -  Returned exit code 3
+        2022/03/03 16:06:56 wazuh-modulesd:aws-s3: WARNING: Bucket:  -  Invalid credentials to access S3 Bucket
+
+**Solution**
+
+Make sure the credentials provided grant access to the requested S3 bucket and the bucket itself exists.
+
+
+The config profile could not be found
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The module does not work and the following error messages appears in the ``ossec.log``:
+
+    .. code-block:: none
+        :class: output
+
+        2022/03/03 15:49:34 wazuh-modulesd:aws-s3: WARNING: Bucket:  -  Returned exit code 12
+        2022/03/03 15:49:34 wazuh-modulesd:aws-s3: WARNING: Bucket:  -  The config profile (default) could not be found
+
+**Solution**
+
+Make sure the profile value specified in the configuration matches with an existing one placed in the ``~/.aws/credentials`` file. Check the :ref:`Configuring AWS credentials <aws_profile>` section to learn more about how to configure a profile for authentication.
+
+
+The security token included in the request is invalid
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The module does not work and the following error messages appears in the ``ossec.log``:
+
+    .. code-block:: none
+        :class: output
+
+        2022/03/03 16:16:18 wazuh-modulesd:aws-s3: WARNING: Service: cloudwatchlogs  -  Returned exit code 12
+        2022/03/03 16:16:18 wazuh-modulesd:aws-s3: WARNING: Service: cloudwatchlogs  -  An error occurred (InvalidClientTokenId) when calling the GetCallerIdentity operation: The security token included in the request is invalid.
+
+**Solution**
+
+No credentials were provided to attempt to access to CloudWatch Logs or that the credentials provided don't grant access to CloudWatch Logs. Check the :ref:`Configuring AWS credentials <amazon_credentials>` section to learn more about the different options available and how to configure them.
+
+
+There are no AWS alerts present in the Wazuh UI
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The module is running but no alerts are displayed in the Wazuh UI.
+
+**Solution**
+
+First of all, make sure there are ``ERROR`` or ``WARNING`` messages in the ``ossec.log`` file by :ref:`enabling debug mode <aws_debug_mode>`. If the module is running as expected but no alerts are being generated it could mean there is no reason for alerts to be raised in first place. Check the following to verify this:
+
+- **Make sure there is data available for the given date**
+
+        When running, the module requests AWS for the logs corresponding to the date indicated using the :ref:`only_logs_aws_buckets` parameter. If this parameter is not specified, it will try to obtain the logs corresponding to the day of execution. Make sure you are specifying a value for :ref:`only_logs_aws_buckets` and that there is data available for that particular date. Check the :ref:`amazon_considerations` page to learn more about how to properly filter the logs using the ``only_logs_after`` parameter.
+
+- **Check if the events are being sent to the analysis engine:**
+
+        A common scenario is that no alerts are being generated because the events are not matching any of the available rules. Take a look to the :ref:`aws_events_processed` section to learn how to check if the AWS logs are being sent to the analysis engine.
+
+
+CloudWatch Logs integration is running but no alert is shown in the Wazuh UI
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The module is running without any error or warning messages, but no alerts from CloudWatch Logs are displayed in the Wazuh UI.
+
+**Solution**
+
+A common scenario is that no alerts are being generated because the events are not matching any of the available rules. Take a look to the :ref:`aws_events_processed` section to learn how to check if the AWS logs are being sent to the analysis engine.
+
+Take into account that Wazuh does not provide default rules for the different logs that can be found in CloudWatch Logs, since they can have any type of format and come from any source. Because of this, if a user wants to make use of this integration to be able to process any custom log they will most likely have to configure their own rules for them. Take a look at the :ref:`ruleset_custom` section to learn more about this topic.
+
+
+Interval overtaken message is present in the ossec.log
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The ``Interval overtaken`` message is present in the ossec.log
+
+**Solution**
+
+Not an issue but a warning. This means the time the module required to finished the last execution was greater than the interval value defined. It is important to note that the next run will not start until the previous one is finished.
+
+
+Error codes reference
+---------------------
 
 #. Errors in ``ossec.log``
 
-    When an error occurs when trying to collect and parse logs for an AWS service, the ``ossec.log`` will output an error such as below:
-
-    .. code-block:: none
-        :class: output
-
-        2019/10/28 13:58:11 wazuh-modulesd:aws-s3: WARNING: Bucket: wazuh-cloudtrail  -  Returned exit code 3
-        2019/10/28 13:58:11 wazuh-modulesd:aws-s3: WARNING: Bucket: wazuh-cloudtrail  -  Invalid credentials to access S3 Bucket
-
-    The exit codes and their possible remediations are the next:
-
+    The exit codes and their possible remediation are as follows:
 
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
     | **Code**  | **Description**                                                   | **Possible remediation**                                                                                                                             |
@@ -88,78 +243,3 @@ Common errors
     | 17        | Invalid file key format                                           | Ensure that the file path follows the format specified in the                                                                                        |
     |           |                                                                   | `Wazuh documentation <https://documentation.wazuh.com/current/amazon/services/supported-services/index.html>`_.                                      |
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-#. Debugging configuration:
-
-    If users are unable to determine the issues from the ``ossec.log``, users can run the modules in debug mode.  With Wazuh running, stop the moduled
-
-    .. code-block:: console
-
-        # pkill wazuh-modulesd
-
-    Start wazuh-modulesd in the foreground in debug mode
-
-    .. code-block:: console
-
-        # /var/ossec/bin/wazuh-modulesd -fd
-
-    +--------+-----------------------------------------------------------+
-    | Debug  | Description                                               |
-    +--------+-----------------------------------------------------------+
-    | -fd    | Basic debug                                               |
-    +--------+-----------------------------------------------------------+
-    | -fdd   | Verbose debug                                             |
-    +--------+-----------------------------------------------------------+
-    | -fddd  | Extremely verbose debug (Warning: generates logs of msgs) |
-    +--------+-----------------------------------------------------------+
-
-    This will print debug data to the console and log.  The debug will also output the command that the wodle is using to execute the Python script for each service.  If a particular service is causing problems, this command can be manually executed, increasing the debug level from 1 (basic) to 3 (extremely verbose)
-
-    .. code-block:: none
-        :class: output
-
-        # 2019/10/28 14:08:28 wazuh-modulesd:aws-s3[2557] wm_aws.c:409 at wm_aws_run_s3(): DEBUG: Launching S3 Command: /var/ossec/wodles/aws/aws-s3 --bucket wazuh-cloudtrail --access_key XXXXXXXX --secret_key XXXXXXXX --type cloudtrail --debug 2 --skip_on_error
-
-#. Time interval is shorter than the time taken to pull log data:
-
-    In this case a simple warning will be displayed. There is no impact in the event data fetching process and the module will keep running.
-
-    .. code-block:: none
-        :class: output
-
-        # 2019/10/28 14:08:31 wazuh-modulesd:aws-s3[2557] wm_aws.c:409 at wm_aws_run_s3(): WARNING: Interval overtaken.
-
-#. Wrong AWS service path:
-
-    If users get any trouble related to "paths", check if the AWS files path is correct:
-
-      **AWS Cloudtrail**
-
-        <bucket_name>/<prefix>/AWSLogs/<account_id>/CloudTrail/<region>/<year>/<month>/<day>
-
-      **AWS Config**
-
-        <bucket_name>/<prefix>/AWSLogs/<account_id>/Config/<region>/<year>/<month>/<day>/ConfigHistory
-        <bucket_name>/<prefix>/AWSLogs/<account_id>/Config/<region>/<year>/<month>/<day>/ConfigSnapshot
-
-      **AWS Guardduty**
-
-        <bucket_name>/<prefix>/<year>/<month>/<day>/<hh>
-
-      **AWS Custom bucket**
-
-        <bucket_name>/<prefix>/<year>/<month>/<day>
-
-      **AWS VPC**
-
-        <bucket_name>/<prefix>/AWSLogs/<account_id>/vpcflowlogs/<region>/<year>/<month>/<day>
-
-      **Cisco Umbrella**
-
-        <bucket_name>/<prefix>/<year>-<month>-<day>
-
-      **Use case**
-
-        AmazonS3/config/AWSLogs/1308927/Config/EU-West/2019/01/12/file.log
-
-        AmazonFirstBucket/store/2019/01/9/logs.log

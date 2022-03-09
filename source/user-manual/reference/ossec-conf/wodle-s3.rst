@@ -58,6 +58,8 @@ Run the module immediately after the Wazuh service starts.
 | **Mandatory**      | no      |
 +--------------------+---------+
 
+.. _aws_interval:
+
 interval
 ~~~~~~~~
 
@@ -435,8 +437,6 @@ It is necessary to specify the type as an attribute of the ``service`` tag to in
 		</service>
 
 The available types are: ``cloudwatchlogs``, and ``inspector``.
-
-.. note::
 
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | Options                                | Allowed values                                              | Mandatory/Optional                            |
