@@ -16,7 +16,7 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13.2 to Wazuh 
 
    .. code-block:: console
 
-     curl -X PUT "https://127.0.0.1:9200/_cluster/settings"  -u admin:admin -k -H 'Content-Type: application/json' -d'
+     curl -X PUT "https://127.0.0.1:9200/_cluster/settings"  -u <username>:<password> -k -H 'Content-Type: application/json' -d'
      {
        "persistent": {
          "cluster.routing.allocation.enable": "primaries"
@@ -28,7 +28,7 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13.2 to Wazuh 
 
    .. code-block:: console
 
-     curl -X POST "https://127.0.0.1:9200/_flush/synced" -u admin:admin -k
+     curl -X POST "https://127.0.0.1:9200/_flush/synced" -u <username>:<password> -k
 
 #. Shutdown all the nodes.
 
@@ -93,7 +93,7 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13.2 to Wazuh 
 
    .. code-block:: console
 
-      rmdir /var/lib/wazuh-indexer/ /var/log/wazuh-indexer/
+      rm -rf /var/lib/wazuh-indexer/ /var/log/wazuh-indexer/
       mv /var/lib/elasticsearch/ /var/lib/wazuh-indexer/
       mv /var/log/elasticsearch/ /var/log/wazuh-indexer/
       chown wazuh-indexer:wazuh-indexer -R /var/log/wazuh-indexer/
@@ -115,8 +115,6 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13.2 to Wazuh 
        #  - "node-1-ip"
        #  - "node-2-ip"
        #  - "node-3-ip"
-       http.port: 9700-9799
-       transport.tcp.port: 9800-9899
        node.max_local_storage_nodes: "3"
        path.data: /var/lib/wazuh-indexer
        path.logs: /var/log/wazuh-indexer
@@ -155,7 +153,23 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13.2 to Wazuh 
 
    .. include:: /_templates/installations/indexer/common/enable_indexer.rst
 
-      
+#. Restart Filebeat.   
+
+   .. tabs::
+   
+    .. group-tab:: Systemd
+   
+     .. code-block:: console
+   
+      # systemctl restart filebeat
+   
+    .. group-tab:: SysV init
+   
+     .. code-block:: console
+   
+      # service filebeat restart  
+
+
 #. Run the following command to verify that Filebeat is successfully configured.
 
      .. code-block:: console
@@ -180,22 +194,6 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13.2 to Wazuh 
             talk to server... OK
             version: 7.10.2
 
-#. Restart Filebeat.   
-
-   .. tabs::
-   
-    .. group-tab:: Systemd
-   
-     .. code-block:: console
-   
-      # systemctl restart filebeat
-   
-    .. group-tab:: SysV init
-   
-     .. code-block:: console
-   
-      # service filebeat restart  
-
 
 #. Verify that the existing cluster is still green and healthy.
 
@@ -203,13 +201,13 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13.2 to Wazuh 
 
    .. code-block:: console
 
-     curl -X GET "https://127.0.0.1:9200/_cluster/health" -u admin:admin -k
+     curl -X GET "https://127.0.0.1:9200/_cluster/health" -u <username>:<password> -k
 
 #. Re-enable shard allocation:
 
    .. code-block:: console
 
-      curl -X PUT "https://127.0.0.1:9200/_cluster/settings"  -u admin:admin -k -H 'Content-Type: application/json' -d'
+      curl -X PUT "https://127.0.0.1:9200/_cluster/settings"  -u <username>:<password> -k -H 'Content-Type: application/json' -d'
       {
         "persistent": {
           "cluster.routing.allocation.enable": null
