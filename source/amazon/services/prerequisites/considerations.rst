@@ -72,7 +72,7 @@ Below there is an example of different services configuration:
       <only_logs_after>2018-JAN-01</only_logs_after>
     </service>
 
-    <!-- GuarDuty, 'production' profile -->
+    <!-- GuardDuty, 'production' profile -->
     <bucket type="guardduty">
       <name>wazuh-aws-wodle</name>
       <path>guardduty</path>

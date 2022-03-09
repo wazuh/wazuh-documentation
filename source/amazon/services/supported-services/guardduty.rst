@@ -154,8 +154,8 @@ Wazuh configuration
 
         # service wazuh-agent restart
 
-GuarDuty use cases
-------------------
+GuardDuty use cases
+-------------------
 
 - `Brute force attacks`_
 - `EC2 API Calls made from unsual network`_
