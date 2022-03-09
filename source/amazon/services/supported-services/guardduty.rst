@@ -154,7 +154,7 @@ Wazuh configuration
 
         # service wazuh-agent restart
 
-GuarDuty use cases
+GuardDuty use cases
 ------------------
 
 - `Brute force attacks`_
