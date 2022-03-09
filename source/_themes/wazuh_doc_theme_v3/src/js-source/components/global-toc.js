@@ -82,6 +82,7 @@ if ( $('#global-toc').length > 0 ) {
     'installation-guide/upgrading/legacy/index',
     'installation-guide/packages-list/linux/linux-index',
     'installation-guide/packages-list/solaris/solaris-index',
+    'migration-guide/index',
     'monitoring',
     'user-manual/index',
     'user-manual/agents/index',
