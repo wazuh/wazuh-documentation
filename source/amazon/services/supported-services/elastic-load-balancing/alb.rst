@@ -38,6 +38,12 @@ Amazon configuration
 
         * `Application Load Balancer. <https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-access-logs.html>`_
 
+Policy configuration
+++++++++++++++++++++
+
+.. include:: /_templates/cloud/amazon/create_policy.rst
+.. include:: /_templates/cloud/amazon/bucket_policies.rst
+.. include:: /_templates/cloud/amazon/attach_policy.rst
 
 Wazuh configuration
 -------------------
