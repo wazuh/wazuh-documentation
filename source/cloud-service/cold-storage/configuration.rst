@@ -6,12 +6,8 @@
 Configuration
 =============
 
-Your environment is configured by default to send the following data to cold storage:
+Your environment is configured by default to send Wazuh output files to cold storage.
 
-- `Wazuh output`_
-
-Wazuh output
-------------
 
 There are two types of Wazuh output files:
 
