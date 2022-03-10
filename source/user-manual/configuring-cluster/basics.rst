@@ -70,9 +70,13 @@ How the cluster works
 
     There are different independent threads running and each one is framed in the image:
 
-        - **Keep alive thread**: Responsible for sending a keep alive to the master every so often.
-        - **Agent info thread**: Responsible for sending the statuses of the agents that are reporting to that node.
-        - **Integrity thread**: Responsible for synchronizing the files sent by the master.
+        - **Keep alive thread**: Responsible of sending a keep alive to the master every so often.
+        - **Agent info thread**: Responsible of sending the statuses of the agents that are reporting to that node.
+        - **Agent groups sync thread**: Responsible of sending information of agent groups assignment to master.
+        - **Agent groups send thread**: Responsible of sending information of agent groups assignment to workers.
+        - **Local agent-groups thread**: Responsible of reading all new agent groups information in the master.
+        - **Integrity thread**: Responsible of synchronizing files in the cluster.
+        - **Local integrity thread**: Responsible of calculating files' checksums in the master.
 
     All cluster logs are written in the file ``logs/cluster.log``.
 
@@ -93,6 +97,22 @@ Agent info thread
 
     The master also checks whether the agent exists or not before saving its status update. This is done to prevent the master from storing unnecessary information. For example, this situation is very common when an agent is removed but the master hasn't notified worker nodes yet.
 
+Agent groups sync thread
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+    The *agent groups sync thread* sends information to the master about the groups to which each agent belongs. This happens when a new agent connects for the first time to a worker and is repeated until the master sends back said information.
+
+
+Agent groups send thread
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+    The *agent groups send thread* sends information from the master to all the workers about the groups to which each agent belongs. This happens when the master receives agent-groups information from any worker, forwarding it to the same worker and to all the others.
+
+Local agent-groups thread
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    The master needs to get agent-groups information from the database before sending it to all the workers. To avoid requesting it once per each worker connection, the information is obtained and stored in a different thread called *Local agent-groups thread*, in the master node, every so often.
+
 .. _integrity-thread:
 
 Integrity thread
@@ -102,11 +122,11 @@ Integrity thread
 
         - The Wazuh agent keys file.
         - :doc:`User defined rules, decoders <../ruleset/custom>` and :doc:`CDB lists <../ruleset/cdb-list>`.
-        - :doc:`Agent groups files and assignments <../agents/grouping-agents>`.
+        - :doc:`Groups files <../agents/grouping-agents>`.
 
     Usually, the master is responsible for sending group assignments, but just in case a new agent starts reporting in a worker node, the worker will send the new agent's group assignment to the master.
 
-File Integrity Thread
-~~~~~~~~~~~~~~~~~~~~~
+Local integrity thread
+~~~~~~~~~~~~~~~~~~~~~~
 
-    The integrity of each file is calculated using its Blake2b checksum and its modification time. To avoid calculating the integrity with each worker connection, the integrity is calculated in a different thread, called *File integrity thread*, in the master node every so often.
+    The integrity of each file is calculated using its MD5 checksum and its modification time. To avoid calculating the integrity with each worker connection, the integrity is calculated in a different thread, called *File integrity thread*, in the master node every so often.

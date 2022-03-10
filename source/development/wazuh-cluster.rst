@@ -99,8 +99,14 @@ The following tasks can be found in the cluster, depending on the type of node t
 | Integrity sync                 |        |
 +--------------------------------+        |
 | Agent info sync                |        |
++--------------------------------+        |
+| Agent groups sync              |        |
 +--------------------------------+--------+
 | Keep alive - Check workers     | Master |
++--------------------------------+        |
+| Agent groups send              |        |
++--------------------------------+        |
+| Local agent-groups             |        |
 +--------------------------------+        |
 | Local integrity                |        |
 +--------------------------------+        |
@@ -146,6 +152,8 @@ This thread is in charge of synchronizing master's integrity information among a
 
 If there is no data to synchronize or there has been an error reading data from the worker, the worker is always notified about it. Also, if a timeout error occurs while the worker is waiting to receive the zip, the master will cancel the current task and reduce the zip size limit. The limit will gradually increase again if no new timeout errors occur.
 
+.. _agent-info:
+
 Agent info thread
 ~~~~~~~~~~~~~~~~~
 
@@ -157,6 +165,33 @@ This thread is in charge of synchronizing the agent's last keepalives and operat
 4. The master sends the received information to its local wazuh-db service, where it is updated.
 
 If there is an error during the update process of one of the chunks in the master's database, the worker is notified.
+
+.. _agent-groups-sync:
+
+Agent groups sync thread
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+This thread is in charge of sending information about agents' groups assignment (abbr. agent-groups) from each worker to the master. The communication is started by the worker and it follows the exact same stages as :ref:`agent-info <agent-info>`.
+
+However, unlike in :ref:`agent-info <agent-info>`, the same information is sent over and over again to the master. This happens until the master node stores it in its database and sends it back to all workers (including the worker it came from). This prevents losing any agent-group if an unsuccessful communication occurs. Once the worker receives the agent-groups information from the master, it will never send it to the master again.
+
+Agent groups send thread
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+This thread is in charge of synchronizing information of agents' groups assignment (abbr. agent-groups) in the master to all the workers. The aim is that every agent-group received in the master ends up in the database of all the worker nodes. The communication is started by the master node (behaving like a broadcast) and it follows these stages:
+
+1. When there is new agent-groups information, the master sends a JSON string with it to each worker. This is done only once per node.
+2. The workers send the received information to their local :ref:`wazuh-db <wazuh-db>` service, where it is updated.
+3. Workers stop sending information to the master (:ref:`Agent groups sync <agent-groups-sync>`) about any agent-group they have received in this task.
+4. The worker compares the checksum of its database with the checksum of the master's.
+5. If the checksum has been different for 10 consecutive times, the worker notifies the master.
+6. If notified, the master sends to the worker all the agent-groups information.
+7. The worker overwrites its database with the agent-groups information it has received from the master.
+
+Local agent-groups thread
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This thread is only executed by the master. It periodically asks to its local :ref:`wazuh-db <wazuh-db>` service new information (since the last time this task was run) of agent-groups. The task is not repeated until such information is sent to all worker nodes.
 
 Local integrity thread
 ~~~~~~~~~~~~~~~~~~~~~~
