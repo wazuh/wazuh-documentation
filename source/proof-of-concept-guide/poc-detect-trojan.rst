@@ -63,7 +63,7 @@ You can visualize the alert data in the Wazuh Kibana plugin. To do this, go to t
 
 * ``location:rootcheck AND rule.id:510 AND data.title:Trojaned version of file detected``
 
-.. thumbnail:: ../images/poc/Detecting_suspicious_binaries.png
+.. thumbnail:: ../images/poc/Detecting-suspicious-binaries.png
           :title: Detecting suspicious binaries - Trojan
           :align: center
           :wrap_image: No

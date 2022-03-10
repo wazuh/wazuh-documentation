@@ -36,7 +36,7 @@ This is where sibling decoders come in. Taking advantage of the simple parent-ch
 
 
 
-.. thumbnail:: ../../../images/manual/ruleset/ruleset-xml-syntax/sibling_decoders_tree.png
+.. thumbnail:: ../../../images/manual/ruleset/ruleset-xml-syntax/sibling-decoders-tree.png
     :title: Log analysis
     :align: center
     :width: 100%

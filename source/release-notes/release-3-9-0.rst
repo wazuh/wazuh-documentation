@@ -50,7 +50,7 @@ Here is an example that runs a scan the 15th of every month:
         </policies>
     </sca>
 
-.. thumbnail:: ../images/release-notes/3.9.0/app-01.png
+.. thumbnail:: ../images/release-notes/3.9.0/app-security-configuration-assessment-alert.png
   :title: Security configuration assessment alert
   :align: center
   :width: 100%
@@ -196,7 +196,7 @@ Wazuh app
 Edit the content of the configuration file for one or more nodes using the interface editor.
 
 
-.. thumbnail:: ../images/release-notes/3.9.0/app-03.png
+.. thumbnail:: ../images/release-notes/3.9.0/app-configuration-editor.png
   :title: Wazuh manager configuration editor
   :align: center
   :width: 100%
@@ -206,7 +206,7 @@ Edit the content of the configuration file for one or more nodes using the inter
 
 Thanks to the recently added Wazuh API endpoints, the app comes with multiple improvements for the ruleset section, including rules, decoders and CDB list management.
 
-.. thumbnail:: ../images/release-notes/3.9.0/app-04.png
+.. thumbnail:: ../images/release-notes/3.9.0/app-ruleset-editor.png
   :title: Ruleset editor
   :align: center
   :width: 100%
@@ -215,7 +215,7 @@ Thanks to the recently added Wazuh API endpoints, the app comes with multiple im
 
 For those cases you want to see a visualization bigger than it is, you can click the expand icon.
 
-.. thumbnail:: ../images/release-notes/3.9.0/app-02.png
+.. thumbnail:: ../images/release-notes/3.9.0/app-expand-visualizations.png
   :title: Expand visualizations
   :align: center
   :width: 100%

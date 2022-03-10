@@ -35,7 +35,7 @@ Architecture overview
 
 The following diagram shows a typical Wazuh cluster architecture:
 
-.. thumbnail:: ../images/manual/cluster/cluster_infrastructure.png
+.. thumbnail:: ../images/manual/cluster/cluster-infrastructure.png
     :title: Wazuh cluster infrastructure
     :align: center
     :width: 80%
@@ -81,7 +81,7 @@ Workflow
 
 The image below shows a schema of how a master node and a worker node interact with each other in the synchronization process. Every dotted square represents a synchronization task and they all work in parallel:
 
-.. thumbnail:: ../images/manual/cluster/cluster_flow.png
+.. thumbnail:: ../images/manual/cluster/cluster-flow.png
     :title: Wazuh cluster workflow
     :align: center
 
@@ -182,7 +182,7 @@ The cluster is built on top of `asyncio.Protocol <https://docs.python.org/3/libr
 
 The wazuh cluster protocol is defined on top of this framework. The following diagram shows all Python classes defined based on ``asyncio.Protocol``:
 
-.. thumbnail:: ../images/development/cluster_protocol_handler.png
+.. thumbnail:: ../images/development/cluster-protocol-handler.png
     :title: Wazuh cluster protocol class inheritance
     :align: center
     :width: 80%
@@ -191,12 +191,12 @@ The higher classes on the diagram (``wazuh.core.cluster.common.Handler``, ``wazu
 
 There are abstract server and client classes to handle multiple connections from multiple clients and connecting to the server. This way, all the logic to connect to a server or handling multiple clients can be shared between all types of servers and clients in the cluster. These classes are shown in the diagrams below:
 
-.. thumbnail:: ../images/development/cluster_clients.png
+.. thumbnail:: ../images/development/cluster-clients.png
     :title: Wazuh cluster protocol class inheritance
     :align: center
     :width: 80%
 
-.. thumbnail:: ../images/development/cluster_servers.png
+.. thumbnail:: ../images/development/cluster-servers.png
     :title: Wazuh cluster protocol class inheritance
     :align: center
     :width: 80%
@@ -213,7 +213,7 @@ Protocol definition
 
 The communication protocol used in all communications (both cluster and API) is defined in the ``wazuh.core.cluster.common.Handler``. Each message in the protocol has the following structure:
 
-.. thumbnail:: ../images/development/structure_message_protocol.png
+.. thumbnail:: ../images/development/structure-message-protocol.png
     :title: Structure for each message in the protocol
     :align: center
     :width: 80%
@@ -369,7 +369,7 @@ In addition to those already mentioned, there are more tasks that are created wh
 
 One of those tasks, which is defined as a class, is the task created to receive and process a file from the other peer. This class is instantiated when a synchronization process is started and it is destroyed once the synchronization process ends. It creates an asynchronous task that waits until the necessary files to do the synchronization process are received. This asynchronous task has a `callback <https://docs.python.org/3/library/asyncio-task.html#asyncio.Task.add_done_callback>`_ that checks if there was an error during the synchronization process.
 
-.. thumbnail:: ../images/development/receive_file_task_cluster.png
+.. thumbnail:: ../images/development/receive-file-task-cluster.png
     :title: Receive file class inheritance
     :align: center
     :width: 80%
@@ -405,7 +405,7 @@ Worker nodes
 
 Below is an example diagram of how the process pool is used in the master node:
 
-.. image:: ../images/development/cluster_process_pool.png
+.. image:: ../images/development/cluster-process-pool.png
   :align: center
 
 Integrity synchronization process
@@ -413,7 +413,7 @@ Integrity synchronization process
 
 Let's review the integrity synchronization process to see how asyncio tasks are created to process data from the peer. The following diagram shows the whole process of synchronizing integrity:
 
-.. image:: ../images/development/sync_integrity_diagram.png
+.. image:: ../images/development/sync-integrity-diagram.png
   :align: center
 
 * **1**: The worker's ``sync_integrity`` task wakes up after sleeping during *interval* seconds (which is defined in the `cluster.json <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/framework/wazuh/core/cluster/cluster.json>`_ file). The first thing it does is checking whether the previous synchronization process is finished or not using the ``syn_i_w_m_p`` command. The master replies with a boolean value specifying that the previous synchronization process is finished and, therefore, the worker can start a new one.
@@ -439,7 +439,7 @@ The type association with every endpoint can be found here: `API controllers <ht
 
 Imagine a cluster with two nodes, where there is an agent reporting to the worker node with id *020*. The following diagram shows the process of requesting ``GET/syscollector/020/os`` API endpoint:
 
-.. image:: ../images/development/distributed_dapi_worker.png
+.. image:: ../images/development/distributed-dapi-worker.png
   :align: center
 
 * **1**: The user does an API request. The API server receives the connection and calls ``distribute_function``. Since the requested endpoint is ``distributed_master`` the worker realizes it can't solve the request locally and proceeds to forward the request to the master node.

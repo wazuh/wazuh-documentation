@@ -22,7 +22,7 @@ Below you can see a list of these components:
 - **System inventory** runs regular scans, collecting inventory data including network interfaces, operating system version, installed applications, running processes, and a list of open ports. 
 - **Security configuration assessment (SCA)** provides a continuous evaluation based on the Center of Internet Security (CIS) benchmarks.
 
-.. thumbnail:: /images/getting_started/use-cases/wazuh-use-cases-security-analytics.png
+.. thumbnail:: /images/getting-started/use-cases/wazuh-use-cases-security-analytics.png
   :title: Wazuh security analytics dashboard
   :align: center
   :width: 100%

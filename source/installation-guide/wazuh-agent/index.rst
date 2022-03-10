@@ -49,7 +49,7 @@ To install a Wazuh agent, select your operating system and follow the instructio
       <a class="link-boxes-link" href="./wazuh-agent-package-windows.html">
         <p class="link-boxes-label">Windows</p>
 
-.. image:: /images/installation/windows_icon.png
+.. image:: /images/installation/windows-logo.png
       :align: center
 
 .. raw:: html
@@ -60,7 +60,7 @@ To install a Wazuh agent, select your operating system and follow the instructio
       <a class="link-boxes-link" href="./wazuh-agent-package-macos.html">
         <p class="link-boxes-label">macOS</p>
 
-.. image:: /images/installation/macOS_logo.png
+.. image:: /images/installation/macOS-logo.png
       :align: center
 
 .. raw:: html

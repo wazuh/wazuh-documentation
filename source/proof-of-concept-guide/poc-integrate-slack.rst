@@ -46,7 +46,7 @@ Query the alerts
 
 The Slack channel you associated your Slack webhook with will show the alerts in real time.
 
-.. thumbnail:: ../images/poc/Slack_integration.png
+.. thumbnail:: ../images/poc/Slack-integration.png
           :title: Slack integration
           :align: center
           :wrap_image: No

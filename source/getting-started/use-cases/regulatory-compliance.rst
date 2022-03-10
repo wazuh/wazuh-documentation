@@ -100,15 +100,15 @@ Example of regulatory compliance dashboards:
 .. hlist::
     :columns: 2
 
-    - .. thumbnail:: /images/getting_started/use-cases/wazuh-use-cases-regulatory3.png
+    - .. thumbnail:: /images/getting-started/use-cases/wazuh-use-cases-regulatory3.png
         :title: PCI DSS compliance
         :align: center
 
-    - .. thumbnail:: /images/getting_started/use-cases/wazuh-use-cases-regulatory2.png
+    - .. thumbnail:: /images/getting-started/use-cases/wazuh-use-cases-regulatory2.png
         :title: HIPAA compliance
         :align: center
                     
-.. thumbnail:: /images/getting_started/use-cases/wazuh-use-cases-regulatory1.png
+.. thumbnail:: /images/getting-started/use-cases/wazuh-use-cases-regulatory1.png
     :title: NIST 800-53 compliance
     :align: center
 
