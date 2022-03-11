@@ -663,6 +663,7 @@ vulnerability:read
 ~~~~~~~~~~~~~~~~~~
 - :api-ref:`GET /vulnerability/{agent_id} <operation/api.controllers.vulnerability_controller.get_vulnerability_agent>` (`agent:id`_, `agent:group`_)
 - :api-ref:`GET /vulnerability/{agent_id}/last_scan <operation/api.controllers.vulnerability_controller.get_last_scan_agent>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /vulnerability/{agent_id}/summary/{field} <operation/api.controllers.vulnerability_controller.get_vulnerabilities_field_summary>` (`agent:id`_, `agent:group`_)
 
 .. _api_rbac_reference_default_policies:
 
