@@ -108,7 +108,6 @@ This command lists the cold storage files of the environment `012345678ab` betwe
 
   Environment '012345678ab' files from 2021-05-07 to 2021-05-07:
   012345678ab/output/alerts/2021/05/07/012345678ab_output_alerts_20210507T1040_mXSoDTf5Pgyr8b8D.json.gz
-  012345678ab/config/2021/05/07/012345678ab_config_20210507T1021_TzLKCLZp4E8BUmPV.tar.gz
 
 Downloading cold storage
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -125,5 +124,3 @@ This command downloads in the `/home/test` directory the cold storage files of t
   Environment '012345678ab' files from 2021-05-07 to 2021-05-07:
   Downloading object 012345678ab/output/alerts/2021/05/07/012345678ab_output_alerts_20210507T1040_mXSoDTf5Pgyr8b8D.json.gz
   Downloaded object 012345678ab/output/alerts/2021/05/07/012345678ab_output_alerts_20210507T1040_mXSoDTf5Pgyr8b8D.json.gz
-  Downloading object 012345678ab/config/2021/05/07/012345678ab_config_20210507T1021_TzLKCLZp4E8BUmPV.tar.gz
-  Downloaded object 012345678ab/config/2021/05/07/012345678ab_config_20210507T1021_TzLKCLZp4E8BUmPV.tar.gz
