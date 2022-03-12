@@ -34,13 +34,13 @@ Below you can find examples of some of the most common use cases of the Wazuh so
 .. toctree::
    :hidden:
 
-   security_analytics
-   intrusion_detection
+   security-analytics
+   intrusion-detection
    log-analysis
    file-integrity
    vulnerability-detection
    configuration-assessment
-   incident_response
+   incident-response
    regulatory-compliance
    cloud-security
    containers-security
