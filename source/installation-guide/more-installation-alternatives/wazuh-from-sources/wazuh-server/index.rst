@@ -120,39 +120,39 @@ To install the required dependencies to build the python interpreter, follow the
 
     .. tabs::
 
-	.. tab:: CentOS 6/7
+    	.. tab:: CentOS 6/7
 
-	    .. code-block:: console
+  	    .. code-block:: console
 
-		# yum install epel-release yum-utils -y
-		# yum-builddep python34 -y
+      		# yum install epel-release yum-utils -y
+      		# yum-builddep python34 -y
 
-	.. tab:: CentOS 8
+    	.. tab:: CentOS 8
 
-	    .. code-block:: console
+  	    .. code-block:: console
 
-		# yum-builddep python3 -y
+      		# yum-builddep python3 -y
 
   .. group-tab:: APT
 
     .. tabs::
 
-       .. tab:: Ubuntu
+      .. tab:: Ubuntu
 
-	.. code-block:: console
+      	.. code-block:: console
 
-	    # sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
-	    # apt-get update
-	    # apt-get build-dep python3.9 -y
+      	    # sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
+      	    # apt-get update
+      	    # apt-get build-dep python3.9 -y
 
-       .. tab:: Debian
+      .. tab:: Debian
 
-	.. code-block:: console
+      	.. code-block:: console
 
-	    # apt-get install lsb-release -y
+      	    # apt-get install lsb-release -y
             # echo "deb-src http://deb.debian.org/debian $(lsb_release -cs) main" >> /etc/apt/sources.list
-	    # apt-get update
-	    # apt-get build-dep python3.9 -y
+      	    # apt-get update
+      	    # apt-get build-dep python3.9 -y
 
 
   .. group-tab:: ZYpp
@@ -160,8 +160,8 @@ To install the required dependencies to build the python interpreter, follow the
 
     .. code-block:: console
 
-          # zypper install epel-release yum-utils -y
-          # zypper-builddep python34 -y
+        # zypper install epel-release yum-utils -y
+        # zypper-builddep python34 -y
 
   .. group-tab:: Pacman
 
