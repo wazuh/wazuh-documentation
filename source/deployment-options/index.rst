@@ -161,9 +161,9 @@ These alternatives guide you to install the Wazuh central components along with 
     amazon-machine-images/amazon-machine-images
     docker/index 
     deploying-with-kubernetes/index
-    deploying-with-ansible/index
-    deploying-with-puppet/index
     offline-installation
     wazuh-from-sources/index
     elastic-stack/index
     splunk/index
+    deploying-with-ansible/index
+    deploying-with-puppet/index
