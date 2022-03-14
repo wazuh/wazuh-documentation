@@ -84,9 +84,7 @@ newUrls['4.3'] = [
   '/azure/activity-services/index.html',
   '/azure/activity-services/active-directory/index.html',
   '/azure/activity-services/active-directory/graph.html',
-  '/azure/activity-services/active-directory/graph.html',
   '/azure/activity-services/prerequisites/dependencies.html',
-  '/azure/activity-services/active-directory/index.html',
   '/azure/activity-services/prerequisites/considerations.html',
   '/azure/activity-services/prerequisites/credentials.html',
   '/azure/activity-services/prerequisites/index.html',
@@ -98,7 +96,6 @@ newUrls['4.3'] = [
   '/gcp/supported-services/cloud_audit_logs.html',
   '/gcp/supported-services/dns_queries.html',
   '/gcp/supported-services/load_balancing.html',
-  '/user-manual/reference/ossec-conf/gcp-bucket.html',
   '/gcp/supported-services/vpc_flow.html',
   '/gcp/supported-services/firewall.html',
   '/amazon/services/supported-services/ecr-image-scanning.html',
@@ -513,7 +510,7 @@ redirections.push(
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/deploying-with-puppet/setup-puppet/install-puppet-master.htmll',
+    '4.2': '/deploying-with-puppet/setup-puppet/install-puppet-master.html',
     '4.3': '/deployment-options/deploying-with-puppet/setup-puppet/install-puppet-master.html',
   },
   {
@@ -698,31 +695,6 @@ redirections.push(
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/installation-guide/wazuh-agent/deployment-variables/deployment-variables-linux.html',
-    '4.3': '/user-manual/deployment-variables/deployment-variables-linux.rst',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/installation-guide/wazuh-agent/deployment-variables/deployment-variables-windows.html',
-    '4.3': '/user-manual/deployment-variables/deployment-variables-windows.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/installation-guide/wazuh-agent/deployment-variables/deployment-variables-macos.html',
-    '4.3': '/user-manual/deployment-variables/deployment-variables-macos.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/installation-guide/wazuh-agent/deployment-variables/deployment-variables-aix.html',
-    '4.3': '/user-manual/deployment-variables/deployment-variables-aix.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/installation-guide/wazuh-agent/deployment-variables/deployment-variables.html',
-    '4.3': '/user-manual/deployment-variables/deployment-variables.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/docker-monitor/dependencies.html',
     '4.3': '/container-security/docker-monitor/dependencies.html',
   },
@@ -735,221 +707,6 @@ redirections.push(
     'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/docker-monitor/monitoring-docker-server.html',
     '4.3': '/container-security/docker-monitor/monitoring-docker-server.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/installation-guide/more-installation-alternatives/offline-installation.html',
-    '4.3': '/deployment-options/offline-installation.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/installation-guide/more-installation-alternatives/splunk/splunk-wazuh.html',
-    '4.3': '/deployment-options/splunk/splunk-wazuh.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/installation-guide/more-installation-alternatives/splunk/splunk-distributed.html',
-    '4.3': '/deployment-options/splunk/splunk-distributed.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/installation-guide/more-installation-alternatives/splunk/splunk-app.html',
-    '4.3': '/deployment-options/splunk/splunk-app.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/installation-guide/more-installation-alternatives/splunk/splunk-basic.html',
-    '4.3': '/deployment-options/splunk/splunk-basic.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/installation-guide/more-installation-alternatives/splunk/splunk-reverse-proxy.html',
-    '4.3': '/deployment-options/splunk/splunk-reverse-proxy.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/installation-guide/more-installation-alternatives/splunk/splunk-polling.html',
-    '4.3': '/deployment-options/splunk/splunk-polling.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/virtual-machine/virtual-machine.html',
-    '4.3': '/deployment-options/virtual-machine/virtual-machine.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/deploying-with-kubernetes/kubernetes-clean-up.html',
-    '4.3': '/deployment-options/deploying-with-kubernetes/kubernetes-clean-up.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/deploying-with-kubernetes/kubernetes-upgrade.html',
-    '4.3': '/deployment-options/deploying-with-kubernetes/kubernetes-upgrade.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/deploying-with-kubernetes/kubernetes-conf.html',
-    '4.3': '/deployment-options/deploying-with-kubernetes/kubernetes-conf.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/deploying-with-kubernetes/kubernetes-local-env.html',
-    '4.3': '/deployment-options/deploying-with-kubernetes/kubernetes-local-env.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/docker/faq-wazuh-container.html',
-    '4.3': '/deployment-options/docker/faq-wazuh-container.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/docker/container-usage.html',
-    '4.3': '/deployment-options/docker/container-usage.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/docker/wazuh-container.html',
-    '4.3': '/deployment-options/docker/wazuh-container.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/docker/docker-installation.html',
-    '4.3': '/deployment-options/docker/docker-installation.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/docker/upgrade-guide.html',
-    '4.3': '/deployment-options/docker/upgrade-guide.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/installation-guide/more-installation-alternatives/elastic-stack/distributed-deployment/step-by-step-installation/elasticsearch-cluster/elasticsearch-single-node-cluster.html',
-    '4.3': '/deployment-options/elastic-stack/distributed-deployment/step-by-step-installation/elasticsearch-cluster/elasticsearch-single-node-cluster.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/installation-guide/more-installation-alternatives/elastic-stack/distributed-deployment/step-by-step-installation/elasticsearch-cluster/elasticsearch-multi-node-cluster.html',
-    '4.3': '/deployment-options/elastic-stack/distributed-deployment/step-by-step-installation/elasticsearch-cluster/elasticsearch-multi-node-cluster.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/installation-guide/more-installation-alternatives/elastic-stack/distributed-deployment/step-by-step-installation/wazuh-cluster/wazuh_single_node_cluster.html',
-    '4.3': '/deployment-options/elastic-stack/distributed-deployment/step-by-step-installation/wazuh-cluster/wazuh-single-node-cluster.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/installation-guide/more-installation-alternatives/elastic-stack/distributed-deployment/step-by-step-installation/wazuh-cluster/wazuh_multi_node_cluster.html',
-    '4.3': '/deployment-options/elastic-stack/distributed-deployment/step-by-step-installation/wazuh-cluster/wazuh-multi-node-cluster.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/installation-guide/more-installation-alternatives/elastic-stack/distributed-deployment/unattended/unattended-wazuh-cluster-installation.html',
-    '4.3': '/deployment-options/elastic-stack/distributed-deployment/unattended/unattended-wazuh-cluster-installation.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/installation-guide/more-installation-alternatives/elastic-stack/distributed-deployment/unattended/unattended-elasticsearch-cluster-installation.html',
-    '4.3': '/deployment-options/elastic-stack/distributed-deployment/unattended/unattended-elasticsearch-cluster-installation.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/installation-guide/more-installation-alternatives/elastic-stack/all-in-one-deployment/unattended-installation.html',
-    '4.3': '/deployment-options/elastic-stack/all-in-one-deployment/unattended-installation.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/installation-guide/more-installation-alternatives/elastic-stack/all-in-one-deployment/all_in_one.html',
-    '4.3': '/deployment-options/elastic-stack/all-in-one-deployment/all-in-one.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/deploying-with-ansible/setup-remote-systems.html',
-    '4.3': '/deployment-options/deploying-with-ansible/setup-remote-systems.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/deploying-with-ansible/roles/wazuh-opendistro.html',
-    '4.3': '/deployment-options/deploying-with-ansible/roles/wazuh-opendistro.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/deploying-with-ansible/roles/wazuh-agent.html',
-    '4.3': '/deployment-options/deploying-with-ansible/roles/wazuh-agent.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/deploying-with-ansible/roles/wazuh-manager.html',
-    '4.3': '/deployment-options/deploying-with-ansible/roles/wazuh-manager.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/deploying-with-ansible/roles/wazuh-kibana.html',
-    '4.3': '/deployment-options/deploying-with-ansible/roles/wazuh-kibana.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/deploying-with-ansible/roles/wazuh-filebeat.html',
-    '4.3': '/deployment-options/deploying-with-ansible/roles/wazuh-filebeat.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/deploying-with-ansible/guide/install-ansible.html',
-    '4.3': '/deployment-options/deploying-with-ansible/guide/install-ansible.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/deploying-with-ansible/guide/install-opendistro-server.html',
-    '4.3': '/deployment-options/deploying-with-ansible/guide/install-opendistro-server.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/deploying-with-ansible/guide/install-wazuh-agent.html',
-    '4.3': '/deployment-options/deploying-with-ansible/guide/install-wazuh-agent.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/deploying-with-ansible/guide/install-wazuh-manager.html',
-    '4.3': '/deployment-options/deploying-with-ansible/guide/install-wazuh-manager.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/deploying-with-ansible/installation-guide.html',
-    '4.3': '/deployment-options/deploying-with-ansible/installation-guide.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/deploying-with-ansible/reference.html',
-    '4.3': '/deployment-options/deploying-with-ansible/reference.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/deploying-with-puppet/setup-puppet/install-puppet-db.html',
-    '4.3': '/deployment-options/deploying-with-puppet/setup-puppet/install-puppet-db.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/deploying-with-puppet/setup-puppet/install-puppet-agent.html',
-    '4.3': '/deployment-options/deploying-with-puppet/setup-puppet/install-puppet-agent.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/deploying-with-puppet/setup-puppet/install-puppet-master.html',
-    '4.3': '/deployment-options/deploying-with-puppet/setup-puppet/install-puppet-master.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/deploying-with-puppet/setup-puppet/setup-puppet-certificates.html',
-    '4.3': '/deployment-options/deploying-with-puppet/setup-puppet/setup-puppet-certificates.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/deploying-with-puppet/wazuh-puppet-module/reference-wazuh-puppet/wazuh-agent-class.html',
-    '4.3': '/deployment-options/deploying-with-puppet/wazuh-puppet-module/reference-wazuh-puppet/wazuh-agent-class.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/deploying-with-puppet/wazuh-puppet-module/reference-wazuh-puppet/wazuh-manager-class.html',
-    '4.3': '/deployment-options/deploying-with-puppet/wazuh-puppet-module/reference-wazuh-puppet/wazuh-manager-class.html',
   },
 );
 
