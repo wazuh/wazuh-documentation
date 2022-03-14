@@ -300,6 +300,11 @@ removedUrls['4.3'] = [
 redirections.push(
   {
     'target': ['4.2=>4.3'],
+    '4.2': ''/getting-started/use-cases/system-inventory.html',',
+    '4.3': '/getting-started/use-cases/index.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
     '4.2': '/installation-guide/requirements.html',
     '4.3': '/installation-guide/index.html',
   },
@@ -757,6 +762,11 @@ redirections.push(
     'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/docker-monitor/dependencies.html',
     '4.3': '/container-security/docker-monitor/dependencies.html',
+  },
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': '/docker-monitor/index.html',
+    '4.3': '/container-security/docker-monitor/index.html',
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
