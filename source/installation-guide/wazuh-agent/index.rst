@@ -33,73 +33,73 @@ To install a Wazuh agent, select your operating system and follow the instructio
 
 .. raw:: html
 
-  <div class="agent-os">
-      <div class="item-agent">
-          <a href="./wazuh-agent-package-linux.html" class="d-flex align-items-center">
-            <p>Linux</p>
+  <div class="link-boxes-group">
+    <div class="link-boxes-item">
+      <a class="link-boxes-link" href="./wazuh-agent-package-linux.html">
+        <p class="link-boxes-label">Linux</p>
 
-.. image:: ../../images/installation/linux.png
+.. image:: /images/installation/linux.png
       :align: center
 
 .. raw:: html
 
-        </a>
+      </a>
     </div>
-    <div class="item-agent">
-        <a href="./wazuh-agent-package-windows.html" class="d-flex align-items-center">
-                    <p>Windows</p>
+    <div class="link-boxes-item">
+      <a class="link-boxes-link" href="./wazuh-agent-package-windows.html">
+        <p class="link-boxes-label">Windows</p>
 
-.. image:: ../../images/installation/windows-logo.png
+.. image:: /images/installation/windows-logo.png
       :align: center
 
 .. raw:: html
 
-        </a>
+      </a>
     </div>
-    <div class="item-agent">
-        <a href="./wazuh-agent-package-macos.html" class="d-flex align-items-center">
-            <p>macOS</p>
+    <div class="link-boxes-item">
+      <a class="link-boxes-link" href="./wazuh-agent-package-macos.html">
+        <p class="link-boxes-label">macOS</p>
 
-.. image:: ../../images/installation/macOS-logo.png
+.. image:: /images/installation/macOS-logo.png
       :align: center
 
 .. raw:: html
 
-        </a>
+      </a>
     </div>
-    <div class="item-agent">
-        <a href="./wazuh-agent-package-aix.html" class="d-flex align-items-center">
-            <p>AIX</p>
+    <div class="link-boxes-item">
+      <a class="link-boxes-link" href="./wazuh-agent-package-solaris.html">
+        <p class="link-boxes-label">Solaris</p>
 
-.. image:: ../../images/installation/AIX.png
+.. image:: /images/installation/solaris.png
       :align: center
 
 .. raw:: html
 
-        </a>
+      </a>
     </div>
-    <div class="item-agent">
-        <a href="./wazuh-agent-package-hpux.html" class="d-flex align-items-center">
-            <p>HP-UX</p>
+    <div class="link-boxes-item">
+      <a class="link-boxes-link" href="./wazuh-agent-package-aix.html">
+        <p class="link-boxes-label">AIX</p>
 
-.. image:: ../../images/installation/hpux.png
+.. image:: /images/installation/AIX.png
       :align: center
 
 .. raw:: html
 
-        </a>
+      </a>
     </div>
-    <div class="item-agent" id="solaris-logo">
-        <a href="./wazuh-agent-package-solaris.html" class="d-flex align-items-center">
-            <p>Solaris</p>
+    <div class="link-boxes-item">
+      <a class="link-boxes-link" href="./wazuh-agent-package-hpux.html">
+        <p class="link-boxes-label">HP-UX</p>
 
-.. image:: ../../images/installation/solaris.png
+.. image:: /images/installation/hpux.png
       :align: center
 
 .. raw:: html
 
-          </a>
-      </div>
+      </a>
+    </div>
   </div>
 
 
@@ -116,7 +116,7 @@ If you are deploying Wazuh in a large environment, with a high number of servers
     Linux <wazuh-agent-package-linux>
     Windows <wazuh-agent-package-windows>
     macOS <wazuh-agent-package-macos>
+    Solaris <wazuh-agent-package-solaris>
     AIX <wazuh-agent-package-aix>
     HP-UX <wazuh-agent-package-hpux>
-    Solaris <wazuh-agent-package-solaris>   
-    deployment-variables/deployment-variables
+       

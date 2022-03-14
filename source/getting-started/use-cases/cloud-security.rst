@@ -6,8 +6,8 @@
 
 .. _cloud_security:
 
-Cloud security monitoring
-=========================
+Cloud security
+==============
 
 The Wazuh security platform provides threat detection, configuration compliance, and continuous monitoring for multicloud and hybrid environments. It protects cloud workloads by monitoring the infrastructure at two different levels:
 
@@ -30,9 +30,9 @@ The following list describes the AWS services that Wazuh is capable of monitorin
 
 - :ref:`Amazon Macie <amazon_macie>`: fully managed data security and data privacy service. It automatically detects unencrypted S3 buckets, publicly accessible buckets, and buckets shared with external AWS accounts.
 
-- :ref:`Amazon Virtual Private Cloud (VPC) <amazon_vpc>`: provisions a logically isolated section of the AWS Cloud where AWS resources can be launched on a virtual network define by the user.
+- :ref:`Amazon Virtual Private Cloud (VPC) <amazon_vpc>`: provisions a logically isolated section of the AWS Cloud where AWS resources can be launched on a virtual network defined by the user.
 
-- :ref:`AWS Config <amazon_config>`: assess, audit, and evaluate the configurations of your AWS resources. Config continuously monitors and records the AWS resource configurations enabling automation of the evaluation of recorded configurations against the desired ones.
+- :ref:`AWS Config <amazon_config>`: assess, audit, and evaluate the configurations of your AWS resources. AWS Config continuously monitors and records the AWS resource configurations enabling automation of the evaluation of recorded configurations against the desired ones.
 
 - :ref:`AWS Cloudtrail <amazon_cloudtrail>`: enables governance, compliance, operational auditing, and risk auditing of your AWS account. With CloudTrail, you can log, continuously monitor, and retain account activity related to actions across your AWS infrastructure.
 
@@ -40,11 +40,11 @@ The following list describes the AWS services that Wazuh is capable of monitorin
 
 - :ref:`AWS Web Application Firewall (WAF) <amazon_waf>`: helps protect your web applications or APIs against common web exploits that may affect availability, compromise security, or consume excessive resources.
 
-Example of an alert when an AWS security group is deleted:
+Expand the output to see an example of an alert generated when an AWS security group is deleted.
 
 .. code-block:: json
   :emphasize-lines: 11,19,29,40
-  :class: output
+  :class: output accordion-output
 
   {
     "agent": {
@@ -100,16 +100,18 @@ Example of an alert when an AWS security group is deleted:
 
 Example of AWS dashboard:
 
-.. thumbnail:: ../../images/getting-started/use-case-cloud.png
+.. thumbnail:: /images/getting-started/use-cases/wazuh-use-cases-cloud-geo.png
+   :title: AWS dashboard
    :align: center
+   :width: 100%
    :wrap_image: No
 
-More information on how Wazuh monitors AWS can be found at our :ref:`documentation <amazon>`.
+More information on how Wazuh monitors AWS can be found in our :ref:`documentation <amazon>`.
 
 Microsoft Azure
 ---------------
 
-The :ref:`Wazuh agent <wazuh_agent>` module for Microsoft Azure makes it easy to pull Azure platform logs.  In particular, it is designed to obtain data from the following services:
+The :ref:`Wazuh agent <wazuh_agent>` module for Microsoft Azure makes it easy to pull Azure platform logs. In particular, it is designed to obtain data from the following services:
 
 - :ref:`Log Analytics API <azure_log_analytics>`: The Log Analytics API is a core component of the Azure Monitor service, which is used to aggregate and analyze log data. The sources of such data are cloud applications, operating systems and Azure resources. The Wazuh module for Azure is capable of querying the Log Analytics API, pulling the logs that are collected by the Azure monitor service.
 
@@ -117,11 +119,11 @@ The :ref:`Wazuh agent <wazuh_agent>` module for Microsoft Azure makes it easy to
 
 - :ref:`Active Directory Graph API <azure_graph>`: The Azure Active Directory Graph API provides access to AZURE AD through REST API endpoints. It is used by Wazuh to monitor Active Directory events (e.g. creation of a new user, update of a user's properties, disable of a user's account, etc.)
 
-Here is an example of a rule that Azure alerts.
+Expand the output to see an example of a rule that Azure alerts.
 
 .. code-block:: json
   :emphasize-lines: 14,16
-  :class: output
+  :class: output accordion-output
 
   {
     "agent": {
@@ -157,7 +159,7 @@ Here is an example of a rule that Azure alerts.
     "timestamp": "2020-05-25T15:45:51.432+0000"
   }
 
-More information about how to use Wazuh to monitor Microsoft Azure can be found at our :ref:`documentation <azure>`.
+More information about how to use Wazuh to monitor Microsoft Azure can be found in our :ref:`documentation <azure>`.
 
 Office 365
 ----------
@@ -232,11 +234,13 @@ Google Cloud Platform
 
 Wazuh monitors Google Cloud services by pulling events from the Google Pub/Sub messaging service, which is used as a middleware for events ingestion and delivery. This integration helps detect threats targeting your Google Cloud assets.
 
-The following example shows an alert generated when a known bad actor (a source IP address with low reputation) tries to get a list of Pods running in Google Kubernetes Engine (GKE):
+Expand the output to see an example of an alert generated when a known bad actor (a source IP address with low reputation) tries to get a list of Pods running in Google Kubernetes Engine (GKE).
+
+
 
 .. code-block:: json
   :emphasize-lines: 32,34
-  :class: output
+  :class: output accordion-output
 
   {
     "agent": {

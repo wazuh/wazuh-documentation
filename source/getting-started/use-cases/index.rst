@@ -8,40 +8,39 @@
 Use cases
 =========
 
-The Wazuh platform is used to protect and monitor systems in different ways. Because of all of its capabilities, it is often used for threat prevention, detection, and response. Besides, the Wazuh platform is used to meet regulatory compliance requirements (such PCI DSS or HIPAA) and configuration standards (CIS hardening guides).
+The Wazuh platform is used to protect and monitor systems in different ways. Because of all of its capabilities, it is widely used for threat prevention, detection, and response. Besides, the Wazuh platform is used to meet regulatory compliance requirements, such as PCI DSS or HIPAA, and configuration standards like CIS hardening guides.
 
-Wazuh is a popular security solution among IaaS users (eg. Amazon AWS, Azure, or Google cloud), used to monitor virtual machines and cloud instances. This is done at a system level utilizing the :ref:`Wazuh security agent <wazuh_agent>`, and at an infrastructure level pulling data directly from the cloud provider API.
+Wazuh is a popular security solution among users of IaaS (Amazon AWS, Azure, or Google Cloud) to monitor virtual machines and cloud instances. This is done at a system level utilizing the :ref:`Wazuh security agent <wazuh_agent>`, and at an infrastructure level pulling data directly from the cloud provider API.
 
-Additionally, Wazuh is often used to protect containerized environments providing cloud-native runtime security. This feature is based on an integration with the Docker engine API and Kubernetes API. Besides, for better protection, Wazuh security agent can run on the Docker host providing a complete set of threat detection and response capabilities.
+Additionally, Wazuh is often employed to protect containerized environments providing cloud-native runtime security. This feature is based on an integration with the Docker engine API and Kubernetes API. Moreover, for better protection, the Wazuh security agent can run on the Docker host providing a complete set of threat detection and response capabilities.
 
-In this section of the documentation you will find a brief example of some of the more common use cases of the Wazuh solution.
+Below you can find examples of some of the most common use cases of the Wazuh solution.
 
 .. list-table::
    :width: 100%
    :widths: 50 50
 
-   * - :ref:`Log data analysis <log_analysis>`
-     - :ref:`File integrity monitoring <file_integrity>`
-   * - :ref:`Rootkits detection <rootkits_detection>`
-     - :ref:`Active response <active_response>`
-   * - :ref:`Configuration assessment <configuration_assessment>`
-     - :ref:`System inventory <system_inventory>`
-   * - :ref:`Vulnerability detection <vulnerability_detection>`
-     - :ref:`Cloud security monitoring <cloud_security>`
-   * - :ref:`Containers security monitoring <containers_security>`
-     - :ref:`Regulatory compliance <regulatory_compliance>`
+   * - :ref:`security_analytics`
+     - :ref:`intrusion_detection`
+   * - :ref:`log_analysis`
+     - :ref:`file_integrity`
+   * - :ref:`vulnerability_detection`
+     - :ref:`configuration_assessment`
+   * - :ref:`incident_response`
+     - :ref:`regulatory_compliance`
+   * - :ref:`cloud_security`
+     - :ref:`containers_security`
 
 .. toctree::
    :hidden:
-   :maxdepth: 1
 
+   security-analytics
+   intrusion-detection
    log-analysis
    file-integrity
-   rootkits-detection
-   active-response
-   configuration-assessment
-   system-inventory
    vulnerability-detection
+   configuration-assessment
+   incident-response
+   regulatory-compliance
    cloud-security
    containers-security
-   regulatory-compliance

@@ -44,25 +44,6 @@ To upgrade the Wazuh manager, choose your package manager and follow the instruc
         .. include:: ../_templates/installations/wazuh/zypp/add_repository.rst    
 
 
-#. Stop the Wazuh manager:
-
-    .. tabs::
-
- 
-      .. group-tab:: Systemd
-
-
-        .. code-block:: console
-
-          # systemctl stop wazuh-manager
-
-
-      .. group-tab:: SysV Init
-
-        .. code-block:: console
-
-          # service wazuh-manager stop
-
 
 #. Upgrade the Wazuh manager to the latest version:
 
@@ -94,11 +75,6 @@ To upgrade the Wazuh manager, choose your package manager and follow the instruc
 
               # zypper update wazuh-manager
     
-
-#. Restart the Wazuh manager:
-    
-   .. include:: ../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
-
 
 
 .. note::

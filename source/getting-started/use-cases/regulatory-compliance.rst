@@ -8,9 +8,9 @@
 Regulatory compliance
 =====================
 
-The Wazuh platform is often used to meet the technical aspects of regulatory compliance standards. Wazuh not only provides the necessary security controls such as intrusion detection, configuration assessment, log analysis, vulnerability detection, among others, to meet compliance requirements, but also uses its SIEM capabilities to centralize, analyze and enrich security data. 
+The Wazuh platform is often used to meet the technical aspects of regulatory compliance standards. Wazuh not only uses its SIEM capabilities to centralize, analyze and enrich security data, but also provides the necessary security controls, such as intrusion detection, configuration assessment, log analysis, and vulnerability detection to meet compliance requirements.
 
-In order to provide regulatory compliance support, the Wazuh rules have carefully been mapped against compliance requirements. This way, when an alert is generated (a rule condition has been matched), it automatically includes compliance information. Here is the list of currently supported standards:
+The Wazuh rules are carefully mapped against compliance requirements to provide regulatory compliance support. This way, when an alert is generated (a rule condition has been matched), it automatically includes compliance information. Here is the list of currently supported standards:
 
 - Payment Card Industry Data Security Standard (PCI DSS)
 - General Data Protection Regulation (GDPR)
@@ -19,7 +19,7 @@ In order to provide regulatory compliance support, the Wazuh rules have carefull
 - Trust Services Criteria (TSC SOC2)
 - Health Insurance Portability and Accountability Act (HIPAA)
 
-Besides, Wazuh rules include mapping with MITRE ATT&CK framework, which is used for alerts taxonomy and to provide better security context. Below is an example of a detection rule used to detect access to forbidden directories in Apache web servers:
+Wazuh rules also include mapping with the MITRE ATT&CK framework, which is used for alerts taxonomy and to provide better security context. Below is an example of a detection rule used to identify access to forbidden directories in Apache web servers.
 
 .. code-block:: xml
   :emphasize-lines: 6,8
@@ -34,11 +34,11 @@ Besides, Wazuh rules include mapping with MITRE ATT&CK framework, which is used 
     <group>access_denied,pci_dss_6.5.8,pci_dss_10.2.4,gdpr_IV_35.7.d,hipaa_164.312.b,nist_800_53_SA.11,nist_800_53_AU.14,nist_800_53_AC.7,tsc_CC6.6,tsc_CC7.1,tsc_CC6.1,tsc_CC6.8,tsc_CC7.2,tsc_CC7.3,</group>
   </rule>
 
-Example alert for rule ``Apache: Attempt to access forbidden directory index.``:
+Expand the output to see an example alert for rule ``Apache: Attempt to access forbidden directory index.``.
 
 .. code-block:: json
   :emphasize-lines: 18,29,32,35,40,44
-  :class: output
+  :class: output accordion-output
 
   {
     "agent": {
@@ -95,11 +95,22 @@ Example alert for rule ``Apache: Attempt to access forbidden directory index.``:
     "timestamp": "2020-09-04T06:08:53.878+0000"
   }
 
-Example of regulatory compliance dashboard for PCI DSS:
+Example of regulatory compliance dashboards:
 
-.. thumbnail:: ../../images/getting-started/use-case-regulatory-compliance.png
-   :align: center
-   :wrap_image: No
+.. hlist::
+    :columns: 2
+
+    - .. thumbnail:: /images/getting-started/use-cases/wazuh-use-cases-regulatory3.png
+        :title: PCI DSS compliance
+        :align: center
+
+    - .. thumbnail:: /images/getting-started/use-cases/wazuh-use-cases-regulatory2.png
+        :title: HIPAA compliance
+        :align: center
+                    
+.. thumbnail:: /images/getting-started/use-cases/wazuh-use-cases-regulatory1.png
+    :title: NIST 800-53 compliance
+    :align: center
 
 More information on how Wazuh helps meet compliance requirements can be found at:
 

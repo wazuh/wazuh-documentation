@@ -9,139 +9,126 @@
 Installation guide
 ==================
 
-Install Wazuh by following the installation workflow that best suits your needs.
-To learn more about each component and its capabilities, check the :ref:`Components <components>` section. 
+Wazuh is a security platform that provides unified XDR and SIEM protection for endpoints and cloud workloads. The solution is composed of a single universal agent and three central components: the Wazuh server, the Wazuh indexer, and the Wazuh dashboard. For more information, check the :doc:`Getting Started </getting-started/index>` documentation. 
 
-Wazuh server installation
--------------------------
+Wazuh is free and open source. Its components abide by the `GNU General Public License, version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_ and the `Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_ (ALv2). 
 
-There are two different options for deploying Wazuh:
+In this installation guide, you will learn how to install Wazuh in your infrastructure. We also offer `Wazuh Cloud <https://wazuh.com/cloud/>`_, our software as a service (SaaS) solution. Check the :ref:`Cloud service <cloud_service>` documentation for more information.
 
-- :ref:`All-in-one <all_in_one_index>`: The Wazuh server and Elastic Stack are installed on the same host directly on your system. Alternatively, you can also download our ready-to-use :ref:`OVA <virtual_machine>` or launch an EC2 Instance with our :ref:`AMI <amazon-machine-images>`.
 
-- :ref:`Distributed <distributed_index>`: Each component is installed on a separate host as a single-node or multi-node cluster. This type of deployment provides high availability and scalability of the product, and it is convenient for large working environments.
+Installing the Wazuh central components
+---------------------------------------
+
+You can choose between two installation methods for each Wazuh central component. Both options provide you with instructions to install the central components on a single host or on separate hosts. You can also check our :ref:`Quickstart <quickstart>` to get started with Wazuh in just a few minutes.
+
+The Wazuh indexer and Wazuh server can be installed on a single host or be distributed in cluster configurations. To check the requirements and start installing the first of the Wazuh central components, go to the :doc:`Wazuh indexer <wazuh-indexer/index>` section.
+
+This is the installation workflow you will follow:
+
+.. thumbnail:: ../images/installation/Wazuh-Installation-workflow.png
+  :title: Wazuh installation workflow
+  :align: center
+  :width: 100%
+
+
+Installing the Wazuh agent
+--------------------------
+
+The Wazuh agent is a single and lightweight monitoring software. It is a multi-platform component that can be deployed to laptops, desktops, servers, cloud instances, containers, or virtual machines. It provides visibility into the endpoint's security by collecting critical system and application records, inventory data, and detecting potential anomalies. 
+
+If the Wazuh central components are already installed in your environment, select your operating system below and follow the installation steps to deploy the agent on the endpoints. 
+
 
 .. raw:: html
 
-  <div class="deployment-types">
-    <div class="item-deployment" id="aio">
-      <h3>All-in-one deployment</h3>
+  <div class="link-boxes-group">
+    <div class="link-boxes-item">
+      <a class="link-boxes-link" href="./wazuh-agent/wazuh-agent-package-linux.html">
+        <p class="link-boxes-label">Linux</p>
 
-.. thumbnail:: ../images/installation/all-in-one-deployment.png
-      :title: All-in-one deployment
+.. image:: /images/installation/linux.png
       :align: center
 
 .. raw:: html
 
+      </a>
     </div>
-    <div class="item-deployment" id="distributed">
-      <h3>Distributed deployment</h3>
+    <div class="link-boxes-item">
+      <a class="link-boxes-link" href="./wazuh-agent/wazuh-agent-package-windows.html">
+        <p class="link-boxes-label">Windows</p>
 
-.. thumbnail:: ../images/installation/distributed.png
-      :title: Distributed deployment
+.. image:: /images/installation/windows-logo.png
       :align: center
 
 .. raw:: html
 
+      </a>
+    </div>
+    <div class="link-boxes-item">
+      <a class="link-boxes-link" href="./wazuh-agent/wazuh-agent-package-macos.html">
+        <p class="link-boxes-label">macOS</p>
+
+.. image:: /images/installation/macOS-logo.png
+      :align: center
+
+.. raw:: html
+
+      </a>
+    </div>
+    <div class="link-boxes-item">
+      <a class="link-boxes-link" href="./wazuh-agent/wazuh-agent-package-solaris.html">
+        <p class="link-boxes-label">Solaris</p>
+
+.. image:: /images/installation/solaris.png
+      :align: center
+
+.. raw:: html
+
+      </a>
+    </div>
+    <div class="link-boxes-item">
+      <a class="link-boxes-link" href="./wazuh-agent/wazuh-agent-package-aix.html">
+        <p class="link-boxes-label">AIX</p>
+
+.. image:: /images/installation/AIX.png
+      :align: center
+
+.. raw:: html
+
+      </a>
+    </div>
+    <div class="link-boxes-item">
+      <a class="link-boxes-link" href="./wazuh-agent/wazuh-agent-package-hpux.html">
+        <p class="link-boxes-label">HP-UX</p>
+
+.. image:: /images/installation/hpux.png
+      :align: center
+
+.. raw:: html
+
+      </a>
     </div>
   </div>
 
 
 
-Alternatively, Wazuh can also be installed with commercial options like Elastic Stack basic license or Splunk. To learn more about these options and other installation alternatives, see the :ref:`More installation alternatives <more_installation_alternatives>` section.
+Packages list
+-------------
 
-.. note:: Wazuh also offers the `Wazuh Cloud <https://wazuh.com/cloud/>`_, where all components are hosted on our PCI-DSS and SOC 2 certified SaaS solution and maintained by our team. With the Wazuh cloud, no dedicated hardware is required and everything is ready to use. This service offers a highly flexible infrastructure to match your enterprise needs.
+In the :ref:`Packages list <packages>` section, you will find all the packages required for the installation of Wazuh |WAZUH_LATEST|.
 
+Other installation alternatives
+-------------------------------
 
-Wazuh agent installation
-------------------------
+Wazuh provides other :ref:`installation alternatives <deployment>`. These are complementary to the installation methods of this installation guide. You will find instructions on how to deploy Wazuh using ready-to-use machines, containers, and orchestration tools. There is also information on how to install the solution offline, from sources, and with commercial options.
 
-The :ref:`Wazuh agent <wazuh_agent>` is a single, light-weight monitoring software that runs on most operating systems and provides visibility into the endpoint's security by collecting critical system and application records, inventory data, and detecting potential anomalies. If the Wazuh server and its components are already installed on your environment, select your operating system and follow the installation steps to deploy the agent to the endpoints:
-
-.. raw:: html
-
-  <div class="agent-os">
-      <div class="item-agent">
-          <a href="./wazuh-agent/wazuh-agent-package-linux.html" class="d-flex align-items-center">
-            <p>Linux</p>
-
-.. image:: ../images/installation/linux.png
-      :align: center
-
-.. raw:: html
-
-        </a>
-    </div>
-    <div class="item-agent">
-        <a href="./wazuh-agent/wazuh-agent-package-windows.html" class="d-flex align-items-center">
-                    <p>Windows</p>
-
-.. image:: ../images/installation/windows-logo.png
-      :align: center
-
-.. raw:: html
-
-        </a>
-    </div>
-    <div class="item-agent">
-        <a href="./wazuh-agent/wazuh-agent-package-macos.html" class="d-flex align-items-center">
-            <p>macOS</p>
-
-.. image:: ../images/installation/macOS-logo.png
-      :align: center
-
-.. raw:: html
-
-        </a>
-    </div>
-    <div class="item-agent">
-        <a href="./wazuh-agent/wazuh-agent-package-aix.html" class="d-flex align-items-center">
-            <p>AIX</p>
-
-.. image:: ../images/installation/AIX.png
-      :align: center
-
-.. raw:: html
-
-        </a>
-    </div>
-    <div class="item-agent">
-        <a href="./wazuh-agent/wazuh-agent-package-hpux.html" class="d-flex align-items-center">
-            <p>HP-UX</p>
-
-.. image:: ../images/installation/hpux.png
-      :align: center
-
-.. raw:: html
-
-        </a>
-    </div>
-    <div class="item-agent" id="solaris-logo">
-        <a href="./wazuh-agent/wazuh-agent-package-solaris.html" class="d-flex align-items-center">
-            <p>Solaris</p>
-
-.. image:: ../images/installation/solaris.png
-      :align: center
-
-.. raw:: html
-
-          </a>
-      </div>
-  </div>
-
-
-
-Requirements
-------------
-
-Check the :ref:`Requirements <installation_requirements>` section for information about supported operating systems and the minimum recommended hardware specifications to guarantee optimum performance.   
 
 .. toctree::
     :hidden:
     :maxdepth: 1
 
-    requirements
-    open-distro/index
+    wazuh-indexer/index
+    wazuh-server/index
+    wazuh-dashboard/index
     wazuh-agent/index
     packages-list
-    more-installation-alternatives/index
