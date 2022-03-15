@@ -228,7 +228,7 @@ Wazuh a very effective Linux rootkit detection application by looking for genera
             Process '741' hidden from /proc. Possible kernel level rootkit.
             title: Process '741' hidden from /proc.
 
-12. It is also possible to find the same event in Wazuh dashboard by searching for "rootkit".
+12. It is also possible to find the same event in the Wazuh dashboard by searching for "rootkit".
 
     .. thumbnail:: ../images/learning-wazuh/labs/kibana-rootkit.png
         :title: brute

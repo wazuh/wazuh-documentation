@@ -14,7 +14,7 @@ no auditd rules are active so we tend to miss out on this detailed history.
 In this lab, we will configure auditd on a Linux machine to account for all commands
 executed by a given user (it should be "centos" if you built the lab following this guide), including commands run by this user
 in a sudo command or after sudo-ing to root.  After causing some audit events
-to be generated, we will look them over in Wazuh dashboard.
+to be generated, we will look them over in the Wazuh dashboard.
 Then we will set up several custom Wazuh rules to alert on especially suspicious
 command calls, making use of the CDB list lookup capability that allows rules to
 look up decoded field values in various lists and to use the results as part of
@@ -130,7 +130,7 @@ Look over the audit events
    Auditd writes events here, but it is not very readable.  Thankfully the Linux Wazuh
    agents already monitors this file by default.
 
-#. Search Wazuh dashboard for ``rule.id:80792``.  That will
+#. Search the Wazuh dashboard for ``rule.id:80792``.  That will
    catch all auditd command audit events.
 
 #. Pick the following fields for columnar display:
@@ -275,7 +275,7 @@ will use to give us special alerts when executed.
         [root@linux-agent ~]# yum -y install tcpdump
         [root@linux-agent ~]# tcpdump --version
 
-#. Search Wazuh dashboard for ``data.audit.command:tcpdump`` and expand the record,
+#. Search the Wazuh dashboard for ``data.audit.command:tcpdump`` and expand the record,
    where you should see a ``rule.id`` of 100200.
 
 
@@ -342,7 +342,7 @@ alarmed we should be about a given program being run.
         [root@linux-agent ~]# yum -y install nmap-ncat
         [root@linux-agent ~]# nc -v
 
-#. Search Wazuh dashboard for ``data.audit.command:nc`` and expand the record, noting
+#. Search the Wazuh dashboard for ``data.audit.command:nc`` and expand the record, noting
    especially the rule.description of "Audit: Highly Suspicious Command executed: /usr/bin/ncat"
 
 
@@ -392,7 +392,7 @@ such an exception.
         [root@linux-agent ~]# ping -c1 8.8.8.8
         [root@linux-agent ~]# ping -c1 8.8.4.4
 
-#. Search Wazuh dashboard for ``data.audit.command:ping``.  Notice that only the ping
+#. Search the Wazuh dashboard for ``data.audit.command:ping``.  Notice that only the ping
    event involving 8.8.4.4 shows up, because the other one was ignored by this
    exception rule.
 
@@ -406,7 +406,7 @@ How to observe correct rules are evaluated
 
             [root@linux-agent ~]# sleep 1
 
-#. Search Wazuh dashboard for ``data.audit.command:sleep`` to find the resulting event.
+#. Search the Wazuh dashboard for ``data.audit.command:sleep`` to find the resulting event.
    Copy the ``full_log`` value.
 
 #. Run ``/var/ossec/bin/wazuh-logtest`` on the Wazuh Manager and paste in

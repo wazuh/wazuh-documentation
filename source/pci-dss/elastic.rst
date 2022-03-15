@@ -5,7 +5,7 @@
 Wazuh dashboard
 ===============
 
-Wazuh dashboard comes with out-of-the-box modules for PCI DSS compliance and CIS benchmarking. You can do forensic and historical analysis of your alerts and store your data for years using a reliable and scalable platform.  Optionally, this can even include your archived events rather than only your alert events.
+The Wazuh dashboard comes with out-of-the-box modules for PCI DSS compliance and CIS benchmarking. You can do forensic and historical analysis of your alerts and store your data for years using a reliable and scalable platform.  Optionally, this can even include your archived events rather than only your alert events.
 
 The following requirements can be met with Wazuh:
 

@@ -19,7 +19,7 @@ monitoring one or more transit points on your network, or directly on existing U
 traffic.  Because Suricata is capable of generating JSON logs of NIDS events, it integrates beautifully with Wazuh.
 
 In this lab we will deploy Suricata on linux-agent and elastic-server such that Wazuh picks up the Suricata NIDS events
-so can be seen in Wazuh dashboard.  Instead of making the same Wazuh config changes to both Linux agents, we
+so can be seen in the Wazuh dashboard.  Instead of making the same Wazuh config changes to both Linux agents, we
 will make use of Wazuh's centralized configuration feature to push out the extra Suricata-related Wazuh configuration
 to the appropriate agents. Lastly, we will do a little GeoIP enrichment of the Suricata NIDS events with Logstash, showing
 how easily we can augment existing log records with additional context information to make them more valuable.
@@ -149,7 +149,7 @@ Linux agents need an additional ``<localfile>`` config section like this:
 Instead of adding the above directly to ``ossec.conf`` on each Linux agent, this time let's use Wazuh manager's centralized agent
 configuration facility.  This is a powerful feature that makes it feasible to manage the varied configurations of a diverse fleet of systems running
 Wazuh agent.  Search the online documentation for "Centralized Configuration" for the full details about this.  In short, groups of agents share common
-configuration content served up to them by Wazuh manager.  Agents automatically pick up and apply changes made to this content on the manager, and merge
+configuration content served up to them by the Wazuh manager.  Agents automatically pick up and apply changes made to this content on the manager, and merge
 the shared configuration with their local configuration.
 
 #. Add elastic-server and linux-agent to a new agent group called "linux". Go to wazuh-manager and:
@@ -226,18 +226,18 @@ the shared configuration with their local configuration.
         verify-agent-conf: Verifying [/var/ossec/etc/shared/linux/agent.conf]
         verify-agent-conf: OK
 
-#. Since the config is proven valid, restart Wazuh manager to deploy the new configuration to the agents.
+#. Since the config is proven valid, restart the Wazuh manager to deploy the new configuration to the agents.
 
    .. include:: /_templates/common/restart_manager.rst
 
    Each agent should pull down and apply this additional configuration almost immediately. You can find the fetched configuration on each agent at ``/var/ossec/etc/shared/agent.conf``.
 
-See Suricata NIDS events in Wazuh dashboard
--------------------------------------------
+See Suricata NIDS events in the Wazuh dashboard
+-----------------------------------------------
 
 #. On each Linux agent, rerun the NIDS-tripping curl command again: ``curl http://testmyids.com``
 
-#. Search Wazuh dashboard for ``rule.id:86601``.  That is the rule that notices Suricata alerts.  Pick these fields for readability:
+#. Search the Wazuh dashboard for ``rule.id:86601``.  That is the rule that notices Suricata alerts.  Pick these fields for readability:
 
     - agent.name
     - data.alert.signature
@@ -250,7 +250,7 @@ See Suricata NIDS events in Wazuh dashboard
 #. Expand one of the events and look over the vast amount of information available.
 
 .. note::
-    Yellow warning triangles on Wazuh dashboard fields indicate that Wazuh dashboard has never seen these new fields before and needs its field list refreshed.
+    Yellow warning triangles on the Wazuh dashboard fields indicate that the Wazuh dashboard has never seen these new fields before and needs its field list refreshed.
     Click on the Management gear icon on the left, then on "Index Patterns", and then on the circular double arrow button in the upper
     right, and then on **[Refresh fields]**.  Click back on the Discover icon on the upper left to return to your search and notice that when
     you expand a record, the warning triangles on the new fields are gone.
@@ -351,7 +351,7 @@ You may have noticed that there were no Geolocation fields in the Wazuh dashboar
          }
 
 
-#. We now need to delete the current pipeline. In Wazuh dashboard, go to ``Dev Tools`` clicking on the Wrench icon. Then execute the following:
+#. We now need to delete the current pipeline. In the Wazuh dashboard, go to ``Dev Tools`` clicking on the Wrench icon. Then execute the following:
 
     .. code-block:: none
 
@@ -371,7 +371,7 @@ You may have noticed that there were no Geolocation fields in the Wazuh dashboar
 
         # curl ``http://testmyids.com``.
 
-#. Look through the new Suricata events in Wazuh dashboard, observing they now have source geoip fields populated.  Private IP addresses of course cannot be geolocated.
+#. Look through the new Suricata events in the Wazuh dashboard, observing they now have source geoip fields populated.  Private IP addresses of course cannot be geolocated.
 
 .. thumbnail:: ../images/learning-wazuh/labs/suricata-geoip.png
     :title: Flood
@@ -386,4 +386,4 @@ If you have time, you could also...
 
 #. Build another CDB list of signature_id values of rules you choose to classify as "noise" and want to suppress entirely.  Then make another child rule with a severity level of 0.
 
-#. Experiment with making Suricata-specific visualization in Wazuh dashboard.  Create a new dashboard to pull them all together.
+#. Experiment with making Suricata-specific visualization in the Wazuh dashboard.  Create a new dashboard to pull them all together.

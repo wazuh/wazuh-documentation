@@ -95,7 +95,7 @@ As you can see, syscheck alerts are tagged with the requirement 11.5.
     > User1 = card5
 
 .. thumbnail:: ../images/pci/fim_1.png
-    :title: Alert visualization at Wazuh dashboard
+    :title: Alert visualization at the Wazuh dashboard
     :align: center
     :width: 100%
 

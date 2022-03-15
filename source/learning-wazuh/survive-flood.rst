@@ -95,11 +95,11 @@ Decrease minimum log alert level
 
 We will generate a flood of messages with the word "fatal" so they will trigger
 generic Wazuh rule ``1002`` which has a low severity level (2).  By default,
-Wazuh manager does not record alerts on rules of severity levels less than 3,
+the Wazuh manager does not record alerts on rules of severity levels less than 3,
 so for this lab we will lower the threshold:
 
 #. Edit ``/var/ossec/etc/ossec.conf`` and change ``<log_alert_level>`` from 3 to 1 so that the ``<alerts>``
-   section looks like the one below.  Now alerts of all severity levels except level 0 will show up in Wazuh dashboard.
+   section looks like the one below.  Now alerts of all severity levels except level 0 will show up in the Wazuh dashboard.
 
     .. code-block:: xml
 
@@ -108,7 +108,7 @@ so for this lab we will lower the threshold:
             <email_alert_level>12</email_alert_level>
         </alerts>
 
-#. Restart Wazuh manager.
+#. Restart the Wazuh manager.
 
    a. For Systemd:
 
@@ -169,10 +169,10 @@ Generate a log flood on linux-agent
    screen at a rate well above our 50 EPS limit.
 
 
-See what happened according to Wazuh dashboard
-----------------------------------------------
+See what happened according to the Wazuh dashboard
+--------------------------------------------------
 
-#. Query Wazuh dashboard for "firehose".  Click on **[Add]** next to "full_log" for readability.
+#. Query the Wazuh dashboard for "firehose".  Click on **[Add]** next to "full_log" for readability.
    Change the scale from "Auto" to "Second".
 
    .. thumbnail:: ../images/learning-wazuh/labs/flood-1.png
@@ -194,7 +194,7 @@ See what happened according to Wazuh dashboard
     :width: 100%
 
 
-#. Query Wazuh dashboard for "agent_flooding".  Click **[Add]** additionally next to "rule.description" and "data.level" for readability.
+#. Query the Wazuh dashboard for "agent_flooding".  Click **[Add]** additionally next to "rule.description" and "data.level" for readability.
 
    .. thumbnail:: ../images/learning-wazuh/labs/flood-2.png
     :title: Flood

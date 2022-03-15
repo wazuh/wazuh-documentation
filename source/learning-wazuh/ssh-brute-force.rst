@@ -14,7 +14,7 @@ You will see how Wazuh detects and alerts on each login failure, and how a highe
 is produced when enough login failures from the same source IP address are detected in the same time window.
 
 You will also inspect the actual rules that fire as well as the enriched alert records
-that subsequently can be seen in Wazuh dashboard.
+that subsequently can be seen in the Wazuh dashboard.
 
 Attack
 ------
@@ -56,8 +56,8 @@ The really important alert output file Wazuh writes to is ``/var/ossec/logs/aler
 
 It consists of single-line JSON records containing much more detail than what the ``alerts.log`` file shows.
 
-These JSON records are conveyed by Filebeat to Wazuh indexer while enriching them so they may be inserted
-into the appropriate Wazuh indexer index.From there they can then be visualized with Wazuh dashboard.
+These JSON records are conveyed by Filebeat to the Wazuh indexer while enriching them so they may be inserted
+into the appropriate Wazuh indexer index. From there they can then be visualized with the Wazuh dashboard.
 
 Here is a beautified example of the JSON record in ``alerts.json`` that corresponds to the same alert above in ``alerts.log``.
 
@@ -146,12 +146,12 @@ Here is a beautified example of the JSON record in ``alerts.json`` that correspo
       "location": "/var/log/auth.log"
     }
 
-Moving on to Wazuh dashboard
-----------------------------
+Moving on to the Wazuh dashboard
+--------------------------------
 
-It is good to know about the log files, but Wazuh dashboard is usually the best tool for looking at and analyzing Wazuh alerts.
+It is good to know about the log files, but the Wazuh dashboard is usually the best tool for looking at and analyzing Wazuh alerts.
 
-Log in to Wazuh dashboard and click on the ``Discover`` icon on the left vertical menu.
+Log in to the Wazuh dashboard and click on the ``Discover`` icon on the left vertical menu.
 
 In the "*Search..*." field, enter the word "*blimey*" and hit the search button on the right (the magnifying glass).
 
@@ -315,7 +315,7 @@ You should see an analysis of the event and the resulting rule **5710** match li
 
     When wazuh-logtest indicates ``**Alert to be generated.`` it means that an alert *would* be generated if the tested event were
     to occur outside of the wazuh-logtest environment.  The wazuh-logtest tool will never cause records to be written to alerts.log or
-    alerts.json, and thus you will never see anything in Wazuh dashboard caused by an wazuh-logtest test.
+    alerts.json, and thus you will never see anything in the Wazuh dashboard caused by an wazuh-logtest test.
 
 Paste that log record in a number of times.  On the 8th time, you should see a rule **5712** match instead:
 

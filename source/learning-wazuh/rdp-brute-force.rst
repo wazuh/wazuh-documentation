@@ -19,11 +19,11 @@ Using a Windows Remote Desktop client, attempt to log in as user "*george*" to y
 eight times in a fairly small time window.
 
 
-See the resulting alerts in Wazuh dashboard
--------------------------------------------
+See the resulting alerts in the Wazuh dashboard
+-----------------------------------------------
 
 
-1. On Wazuh dashboard, go to **[Security events]**, search for "*george*" and then click on **[Discover]** on the top right corner.
+1. On the Wazuh dashboard, go to **[Security events]**, search for "*george*" and then click on **[Discover]** on the top right corner.
 
 2. On ``Discover``, you can personalize how to visualize the alerts. If you look at the menu on the left, click on the button next to ``Available fields``, introduce the field you are looking for in ``Field name`` and click on **[add]**. We will be using the 4 fields stated below.
 

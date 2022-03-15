@@ -24,7 +24,7 @@ In this lab, we will see how ``syscollector`` is configured by default to run on
 the Wazuh Manager and on the agents. We will also configure ``vulnerability-detector``
 on the Wazuh Manager to periodically scan the collected inventory data for known
 vulnerable packages.
-We will observe relevant log messages and vulnerability alerts in Wazuh dashboard including
+We will observe relevant log messages and vulnerability alerts in the Wazuh dashboard including
 a dashboard dedicated to this.  We will also interact with the Wazuh API to more
 deeply mine the inventory data, and even take a look at the databases where it is
 stored.
@@ -194,10 +194,10 @@ and try ``grep vulnerability-detector: /var/ossec/logs/ossec.log`` on the manage
 
 
 
-See the alerts in Wazuh dashboard
----------------------------------
+See the alerts in the Wazuh dashboard
+-------------------------------------
 
-Search Wazuh dashboard for ``vulnerability-detector``, selecting some of the more helpful
+Search the Wazuh dashboard for ``vulnerability-detector``, selecting some of the more helpful
 fields for viewing like below:
 
 .. thumbnail:: ../images/learning-wazuh/labs/vuln-found-list.png
@@ -216,7 +216,7 @@ Expand one of the records to see all the information available:
 
 Note all the available fields and remember that the different components of Wazuh
 may be configured to act differently depending on the fields of each alert, as
-well as the ability to create visualizations and filtering search results in Wazuh dashboard.
+well as the ability to create visualizations and filtering search results in the Wazuh dashboard.
 
 .. note::
 

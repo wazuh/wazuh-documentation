@@ -79,14 +79,14 @@ Testing FIM
 -----------
 
 At this point, add, modify, and delete files in these two test directories on the Windows agent,
-and watch your search results in Wazuh dashboard for the query text "*apple orange*" (without quotes), to
+and watch your search results in the Wazuh dashboard for the query text "*apple orange*" (without quotes), to
 find syscheck events as they appear.  Notice that alerts about changes in ``C:\apple\`` show up promptly,
 while alerts about changes in ``C:\orange\`` are not reported until the next periodic (5 minute) syscheck scan.
 You can force a periodic syscheck scan sooner by restarting the Windows agent, but still expect to wait a
 minute or so before the scan actually runs.
 
 .. note::
-    When multiple terms are searched for in Wazuh dashboard (like "apple orange") without being separated
+    When multiple terms are searched for in the Wazuh dashboard (like "apple orange") without being separated
     by a capitalized "AND", an "OR" relationship is assumed, resulting in a search for all records
     matching either of the terms included.
 
@@ -125,7 +125,7 @@ and then on the **Integrity monitoring** dashboard, which would look similar to 
     :width: 100%
 
 .. note::
-    The default time windows in Wazuh dashboard is only "Last 15 minutes" which may be too small to
+    The default time windows in the Wazuh dashboard is only "Last 15 minutes" which may be too small to
     encompass your activities in this lab.  Click on the time window value and change it to
     something broader if needed.
 
