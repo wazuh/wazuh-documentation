@@ -6,33 +6,33 @@
 ----------------------------------------------------------------------------- */
 
 .no-latest-notice-wrapper {
-  padding-left: 30px;
-  padding-right: 15px;
   position: fixed;
-  height: $noLatestNoticeHeightXl;
+  height: $no-latest-notice-height-xl;
+  padding-right: 15px;
+  padding-left: 30px;
   @include media-only(xl, xxl) {
-    left: $leftSidebarWidthNarrow;
-    right: $rightSidebarWidthNarrow;
+    right: $right-sidebar-width-narrow;
+    left: $left-sidebar-width-narrow;
   }
   @include media-min(xxl) {
-    left: $leftSidebarWidth;
-    right: $rightSidebarWidth;
+    right: $right-sidebar-width;
+    left: $left-sidebar-width;
   }
-  
+
   .no-latest-notice {
-    margin: .6em 0;
-    padding: 0 20px 1px;
     display: inline-block;
+    padding: 0 20px 1px;
+    margin: .6em 0;
     border-left: 5px solid;
-    
+
     .no-latest-title {
-      display: inline-block;
       position: relative;
-      font-weight: 600;
+      display: inline-block;
       padding: 4px 15px 4px 0;
+      font-weight: 600;
       line-height: 32px;
     }
-  
+
     .no-latest-text-wrapper {
       padding: 4px 15px 4px 0;
       line-height: 32px;
@@ -41,30 +41,28 @@
 }
 
 .no-latest-docs {
-  
   &.document {
-    
     #central-column {
-      padding-top: calc(#{$breadcrumbsHeightXl} + #{$noLatestNoticeHeightXl});
+      padding-top: calc(#{$breadcrumbs-height-xl} + #{$no-latest-notice-height-xl});
       * {
-        scroll-margin-top: calc(#{$headerHeightXl} + #{$breadcrumbsHeightXl} + #{$noLatestNoticeHeightXl});
+        scroll-margin-top: calc(#{$header-height-xl} + #{$breadcrumbs-height-xl} + #{$no-latest-notice-height-xl});
       }
     }
-    
+
     [role="main"] {
-      min-height: calc(100vh - #{$headerHeightXl} - #{$breadcrumbsHeightXl} - #{$footerHeight} - #{$noLatestNoticeHeightXl});
+      min-height: calc(100vh - #{$header-height-xl} - #{$breadcrumbs-height-xl} - #{$footer-height} - #{$no-latest-notice-height-xl});
     }
-    
+
     .no-latest-notice-wrapper {
-      top: calc(#{$headerHeightXl} + #{$breadcrumbsHeightXl});
+      top: calc(#{$header-height-xl} + #{$breadcrumbs-height-xl});
     }
   }
   &.search {
     .no-latest-notice-wrapper {
-      top: calc(#{$headerHeightXl});
+      top: calc(#{$header-height-xl});
     }
     #central-column {
-      padding-top: $noLatestNoticeHeightXl;
+      padding-top: $no-latest-notice-height-xl;
     }
   }
 }
@@ -72,12 +70,12 @@
 /* Light theme -------------------------------------------------------------- */
 body {
   .no-latest-notice-wrapper {
-    background-color: $light_ColorBaseSpace;
+    background-color: $light-color-base-space;
     .no-latest-notice {
-      border-left-color: $light_ColorWarning;
-      background-color: $light_ColorAdmonitionBackground;
+      background-color: $light-color-admonition-background;
+      border-left-color: $light-color-warning;
       .no-latest-title {
-        color: $light_ColorWarningDark;
+        color: $light-color-warning-dark;
       }
     }
   }
@@ -87,12 +85,12 @@ body {
 
 .dark-theme {
   .no-latest-notice-wrapper {
-    background-color: $dark_ColorBaseSpace;
+    background-color: $dark-color-base-space;
     .no-latest-notice {
-      border-left-color: $dark_ColorWarning;
-      background-color: $dark_ColorAdmonitionBackground;
+      background-color: $dark-color-admonition-background;
+      border-left-color: $dark-color-warning;
       .no-latest-title {
-        color: $dark_ColorWarningDark;
+        color: $dark-color-warning-dark;
       }
     }
   }

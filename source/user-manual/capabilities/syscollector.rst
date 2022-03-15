@@ -453,7 +453,7 @@ As an example, this rule will be triggered when the interface ``eth0`` of an age
 
 When the alerts are triggered they will be displayed in the Wazuh dashboard this way:
 
-    .. thumbnail:: ../../images/manual/internal-capabilities/syscollector_alerts.png
+    .. thumbnail:: ../../images/manual/internal-capabilities/syscollector-alerts.png
       :title: Information from syscollector for "port" value.
       :align: center
       :width: 80%

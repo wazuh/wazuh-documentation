@@ -28,18 +28,11 @@ h1 {
   .search-summary {
     font-weight: 500;
   }
-  
-  #toggle-results {
-    text-decoration: none;
-    &:focus {
-      font-weight: 500;
-    }
-  }
-  
+
   .search {
     padding-left: 0;
     list-style: none;
-    
+
     .breadcrumbs {
       padding: 10px 0 5px;
     }
@@ -49,11 +42,11 @@ h1 {
         text-decoration: none;
       }
     }
-    
+
     li {
       padding: 20px 0 30px;
     }
-    
+
     .result-link {
       font-size: 22px;
       text-decoration: none;
@@ -67,10 +60,17 @@ h1 {
         display: inline-block;
       }
     }
-    
+
     .hidden-result {
       display: none;
     }
+  }
+}
+
+#toggle-results {
+  text-decoration: none;
+  &:focus {
+    font-weight: 500;
   }
 }
 
@@ -79,37 +79,37 @@ h1 {
 .search {
   #search-results {
     .query-term {
-      color: $light_ColorShadedText;
+      color: $light-color-shaded-text;
     }
     .search-summary {
-      color: $light_ColorShadedText;
-    }
-    #toggle-results {
-      color: $light_ColorPrimary;
-      &:hover,
-      &:focus {
-        color: $light_ColorPrimaryLighter;
-      }
+      color: $light-color-shaded-text;
     }
     .search {
       .breadcrumb-separator,
       .breadcrumb-link {
-        color: $light_ColorShadedText;
+        color: $light-color-shaded-text;
         &:hover,
         &:focus {
-          color: $light_ColorPrimaryLighter;
+          color: $light-color-primary-lighter;
         }
       }
       .result-link {
-        color: $light_ColorPrimary;
+        color: $light-color-primary;
         &:hover,
         &:focus {
-          color: $light_ColorPrimaryLighter;
+          color: $light-color-primary-lighter;
         }
       }
       .context .highlighted {
-        background-color: $light_ColorGlobalTocHighlight;
+        background-color: $light-color-global-toc-highlight;
       }
+    }
+  }
+  #toggle-results {
+    color: $light-color-primary;
+    &:hover,
+    &:focus {
+      color: $light-color-primary-lighter;
     }
   }
 }
@@ -119,38 +119,38 @@ h1 {
 .dark-theme {
   #search-results {
     .query-term {
-      color: $dark_ColorShadedText;
+      color: $dark-color-shaded-text;
     }
     .search-summary {
-      color: $dark_ColorShadedText;
-    }
-    #toggle-results {
-      color: $dark_ColorPrimary;
-      &:hover,
-      &:focus {
-        color: $dark_ColorPrimaryLighter;
-      }
+      color: $dark-color-shaded-text;
     }
     .search {
       .breadcrumb-separator,
       .breadcrumb-link {
-        color: $dark_ColorShadedText;
+        color: $dark-color-shaded-text;
         &:hover,
         &:focus {
-          color: $dark_ColorPrimaryLighter;
+          color: $dark-color-primary-lighter;
         }
       }
       .result-link {
-        color: $dark_ColorPrimary;
+        color: $dark-color-primary;
         &:hover,
         &:focus {
-          color: $dark_ColorPrimaryLighter;
+          color: $dark-color-primary-lighter;
         }
       }
       .context .highlighted {
-        background-color: $dark_ColorShadow;
-        color: $dark_ColorHighlightInlineText;
+        color: $dark-color-highlight-inline-text;
+        background-color: $dark-color-shadow;
       }
+    }
+  }
+  #toggle-results {
+    color: $dark-color-primary;
+    &:hover,
+    &:focus {
+      color: $dark-color-primary-lighter;
     }
   }
 }

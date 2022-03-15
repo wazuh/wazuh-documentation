@@ -79,14 +79,16 @@
   <view id="circle-check-dt" viewBox="200 40 28 28"/>
   <view id="circle-exclamation-blue-lt" viewBox="240 0 28 28"/>
   <view id="circle-exclamation-orange" viewBox="240 40 28 28"/>
-  <view id="circle-exclamation-red" viewBox="240 80 28 28"/>
+  <view id="circle-exclamation-red-lt" viewBox="240 80 28 28"/>
   <view id="circle-exclamation-blue-dt" viewBox="240 120 28 28"/>
+  <view id="circle-exclamation-red-dt" viewBox="240 160 28 28"/>
   <view id="circle-bell-lt" viewBox="280 0 28 28"/>
   <view id="circle-bell-dt" viewBox="280 40 28 28"/>
-  <view id="circle-x" viewBox="320 0 28 28"/>
+  <view id="circle-x-lt" viewBox="320 0 28 28"/>
+  <view id="circle-x-dt" viewBox="320 40 28 28"/>
   <view id="circle-bulb" viewBox="360 0 28 28"/>
   <g>
-    <use xlink:href="#search" fill="#3585f9"/>
+    <use xlink:href="#search" fill="#256bd1"/>
   </g>
   <g transform="translate(0, 40)">
     <use xlink:href="#search" fill="#499cfe"/>
@@ -151,6 +153,9 @@
   <g transform="translate(240, 120)">
     <use xlink:href="#exclamation-circle" fill="#499cfe"/>
   </g>
+  <g transform="translate(240, 160)">
+    <use xlink:href="#exclamation-circle" fill="#f86b63"/>
+  </g>
   <g transform="translate(280, 0)">
     <circle cx="14" cy="14" r="14" fill="#256BD1" mask="url(#bell-mask)"/>
   </g>
@@ -159,6 +164,9 @@
   </g>
   <g transform="translate(320, 0)">
     <circle cx="14" cy="14" r="14" fill="#BD271E" mask="url(#x-mask)"/>
+  </g>
+  <g transform="translate(320, 40)">
+    <circle cx="14" cy="14" r="14" fill="#f86b63" mask="url(#x-mask)"/>
   </g>
   <g transform="translate(360, 0)">
     <circle cx="14" cy="14" r="14" fill="#207D82" mask="url(#bulb-mask)"/>

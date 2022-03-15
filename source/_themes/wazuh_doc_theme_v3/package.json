@@ -5,33 +5,47 @@
   "main": "index.html",
   "watch": {
     "build": {
-      "patterns": ["src/js-source", "src/scss"],
+      "patterns": [
+        "src/js-source",
+        "src/scss"
+      ],
       "extensions": "js,scss"
     },
     "build-all": {
-      "patterns": ["src/js-source", "src/scss"],
+      "patterns": [
+        "src/js-source",
+        "src/scss"
+      ],
       "extensions": "js,scss"
     },
     "css:build": {
-      "patterns": ["src/scss"],
+      "patterns": [
+        "src/scss"
+      ],
       "extensions": "scss"
     },
     "css:build-all": {
-      "patterns": ["src/scss"],
+      "patterns": [
+        "src/scss"
+      ],
       "extensions": "scss"
     },
     "js:build": {
-      "patterns": ["src/js-source"],
+      "patterns": [
+        "src/js-source"
+      ],
       "extensions": "js"
     },
     "js:build-all": {
-      "patterns": ["src/js-source"],
+      "patterns": [
+        "src/js-source"
+      ],
       "extensions": "js"
     }
   },
   "scripts": {
-    "css:lint": "stylelint --config config/.stylelintrc --syntax scss \"src/scss/**/*.scss\" --cache --cache-location \"build/.stylelintcache/\"",
-    "css:lint:fix": "stylelint --config config/.stylelintrc --syntax scss \"src/scss/**/*.scss\" --fix --cache --cache-location \"build/.stylelintcache/\"",
+    "css:lint": "stylelint --config config/.stylelintrc \"src/scss/**/*.scss\" --cache --cache-location \"build/.stylelintcache/\"",
+    "css:lint:fix": "stylelint --config config/.stylelintrc \"src/scss/**/*.scss\" --fix --cache --cache-location \"build/.stylelintcache/\"",
     "css:compile:google-fonts": "node-sass --output-style expanded --precision 6 src/scss/google-fonts.scss src/css/google-fonts.css",
     "css:compile:bootstrap": "node-sass --output-style expanded --source-map true --source-map-contents true --precision 6 src/scss/libs/bootstrap/bootstrap.scss src/css/bootstrap.css",
     "css:compile:moved-content": "node-sass --output-style expanded --source-map true --source-map-contents true --precision 6 src/scss/pages/moved-content.scss src/css/moved-content.css",
@@ -116,18 +130,18 @@
     "eol-converter-cli": "^1.0.8",
     "eslint": "^7.32.0",
     "eslint-config-google": "^0.14.0",
-    "node-sass": "^6.0.1",
+    "node-sass": "^7.0.0",
     "npm-run-all": "^4.1.5",
     "npm-watch": "^0.11.0",
     "popper.js": "^1.16.1",
     "postcss": "^8.3.8",
     "postcss-cli": "^9.0.1",
     "rollup": "^2.58.0",
-    "stylelint": "^13.13.1",
-    "stylelint-config-recommended-scss": "^4.3.0",
-    "stylelint-config-standard": "^22.0.0",
-    "stylelint-order": "^4.1.0",
-    "stylelint-scss": "^3.21.0",
+    "stylelint": "^14.5.0",
+    "stylelint-config-recommended-scss": "^5.0.2",
+    "stylelint-config-standard-scss": "^3.0.0",
+    "stylelint-order": "^5.0.0",
+    "stylelint-scss": "^4.1.0",
     "uglify-js": "^3.14.2"
   }
 }

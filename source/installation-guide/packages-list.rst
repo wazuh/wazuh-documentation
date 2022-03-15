@@ -8,40 +8,31 @@
 Packages list
 =============
 
-This download page contains packages required for the Wazuh installation with the Wazuh version |WAZUH_LATEST|  :
+This download page contains packages required for the Wazuh installation with the Wazuh version |WAZUH_LATEST|:
 
 - `Wazuh manager and Wazuh agent`_
 
-   - `AIX`_
    - `Linux`_
-   - `HP-UX`_
+   - `Windows`_
    - `macOS`_
    - `Solaris`_
-   - `Windows`_
-- `MSU`_
+   - `AIX`_
+   - `HP-UX`_
+   
+- `Wazuh indexer`_
+- `Wazuh dashboard`_
 - `Wazuh Kibana plugin`_
 - `Wazuh Splunk app`_
+- `Filebeat`_
 - `Virtual machine`_
 - `Amazon Machine Image`_
-- `Open Distro for Elasticsearch`_
-
-   - `Elasticsearch`_
-   - `Kibana`_
-   - `Filebeat`_
+- `MSU`_
+- `Open distro for Elasticsearch`_
 
 .. _Wazuh_manager_agent_packages_list:
 
 Wazuh manager and Wazuh agent
 -----------------------------
-
-AIX
-^^^
-+-----------------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Version         | Architecture | Package                                                                                                                                                                                                                                     |
-+=================+==============+=============================================================================================================================================================================================================================================+
-| 6.1 or greater  |    PowerPC   | `wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_AIX|.aix.ppc.rpm <https://packages.wazuh.com/|CURRENT_MAJOR|/aix/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_AIX|.aix.ppc.rpm>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_AIX|.aix.ppc.rpm.sha512>`__)                          |
-+-----------------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
 
 Linux
 ^^^^^
@@ -63,7 +54,7 @@ Linux
 |                       |                   |    armhf     | `wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_ARMHF|.armv7hl.rpm <|RPM_AGENT|-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_ARMHF|.armv7hl.rpm>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_ARMHF|.armv7hl.rpm.sha512>`__)                           |
 +-----------------------+-------------------+--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                       |                   |    i386      | `wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_I386|.i386.rpm <|RPM_AGENT|-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_I386|.i386.rpm>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_I386|.i386.rpm.sha512>`__)                                    |
-+ CentOS                +  6 or greater     +--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++ CentOS                +  6 or later       +--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                       |                   |              | `wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm <|RPM_AGENT|-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm.sha512>`__)                              |
 +                       +                   +    x86_64    +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                       |                   |              | `wazuh-manager-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_MANAGER_X86|.x86_64.rpm <|RPM_MANAGER|-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_MANAGER_X86|.x86_64.rpm>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-manager-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_MANAGER_X86|.x86_64.rpm.sha512>`__)                        |
@@ -79,7 +70,7 @@ Linux
 |                       |                   |    x86_64    | `wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86_EL5|.el5.x86_64.rpm <https://packages.wazuh.com/|CURRENT_MAJOR|/yum5/x86_64/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86_EL5|.el5.x86_64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86_EL5|.el5.x86_64.rpm.sha512>`__)         |
 +-----------------------+-------------------+--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                       |                   |    i386      | `wazuh-agent_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_I386|_i386.deb <|DEB_AGENT|_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_I386|_i386.deb>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_I386|_i386.deb.sha512>`__)            |
-+ Debian                +  7 or greater     +--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++ Debian                +  7 or later       +--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                       |                   |              | `wazuh-agent_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_X86|_amd64.deb <|DEB_AGENT|_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_X86|_amd64.deb>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_X86|_amd64.deb.sha512>`__)         |
 +                       +                   +    x86_64    +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                       |                   |              | `wazuh-manager_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_MANAGER_X86|_amd64.deb <|DEB_MANAGER|_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_MANAGER_X86|_amd64.deb>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-manager_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_MANAGER_X86|_amd64.deb.sha512>`__) |
@@ -91,7 +82,7 @@ Linux
 |                       |                   |    armhf     | `wazuh-agent_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_ARMHF|_armhf.deb <|DEB_AGENT|_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_ARMHF|_armhf.deb>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_ARMHF|_armhf.deb.sha512>`__)         |
 +-----------------------+-------------------+--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                       |                   |    i386      | `wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_I386|.i386.rpm <|RPM_AGENT|-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_I386|.i386.rpm>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_I386|.i386.rpm.sha512>`__)                                    |
-+ Fedora                +  22 or greater    +--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++ Fedora                +  22 or later      +--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                       |                   |              | `wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm <|RPM_AGENT|-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm.sha512>`__)                              |
 +                       +                   +    x86_64    +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                       |                   |              | `wazuh-manager-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_MANAGER_X86|.x86_64.rpm <|RPM_MANAGER|-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_MANAGER_X86|.x86_64.rpm>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-manager-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_MANAGER_X86|.x86_64.rpm.sha512>`__)                        |
@@ -103,7 +94,7 @@ Linux
 |                       |                   |    armhf     | `wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_ARMHF|.armv7hl.rpm <|RPM_AGENT|-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_ARMHF|.armv7hl.rpm>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_ARMHF|.armv7hl.rpm.sha512>`__)                           |
 +-----------------------+-------------------+--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                       |                   |    i386      | `wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_I386|.i386.rpm <|RPM_AGENT|-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_I386|.i386.rpm>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_I386|.i386.rpm.sha512>`__)                                    |
-+ OpenSUSE              +  42 or greater    +--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++ OpenSUSE              +  42 or later      +--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                       |                   |              | `wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm <|RPM_AGENT|-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm.sha512>`__)                              |
 +                       +                   +    x86_64    +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                       |                   |              | `wazuh-manager-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_MANAGER_X86|.x86_64.rpm <|RPM_MANAGER|-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_MANAGER_X86|.x86_64.rpm>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-manager-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_MANAGER_X86|.x86_64.rpm.sha512>`__)                        |
@@ -115,7 +106,7 @@ Linux
 |                       |                   |    armhf     | `wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_ARMHF|.armv7hl.rpm <|RPM_AGENT|-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_ARMHF|.armv7hl.rpm>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_ARMHF|.armv7hl.rpm.sha512>`__)                           |
 +-----------------------+-------------------+--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                       |                   |    i386      | `wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_I386|.i386.rpm <|RPM_AGENT|-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_I386|.i386.rpm>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_I386|.i386.rpm.sha512>`__)                                    |
-+ Oracle Linux          +  6 or greater     +--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++ Oracle Linux          +  6 or later       +--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                       |                   |              | `wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm <|RPM_AGENT|-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm.sha512>`__)                              |
 +                       +                   +    x86_64    +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                       |                   |              | `wazuh-manager-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_MANAGER_X86|.x86_64.rpm <|RPM_MANAGER|-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_MANAGER_X86|.x86_64.rpm>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-manager-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_MANAGER_X86|.x86_64.rpm.sha512>`__)                        |
@@ -131,7 +122,7 @@ Linux
 |                       |                   |    x86_64    | `wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86_EL5|.el5.x86_64.rpm <https://packages.wazuh.com/|CURRENT_MAJOR|/yum5/x86_64/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86_EL5|.el5.x86_64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86_EL5|.el5.x86_64.rpm.sha512>`__)         |
 +-----------------------+-------------------+--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                       |                   |    i386      | `wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_I386|.i386.rpm <|RPM_AGENT|-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_I386|.i386.rpm>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_I386|.i386.rpm.sha512>`__)                                    |
-+ Red Hat               +  6 or greater     +--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++ Red Hat               +  6 or later       +--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Enterprise Linux      |                   |              | `wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm <|RPM_AGENT|-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm.sha512>`__)                              |
 +                       +                   +    x86_64    +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                       |                   |              | `wazuh-manager-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_MANAGER_X86|.x86_64.rpm <|RPM_MANAGER|-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_MANAGER_X86|.x86_64.rpm>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-manager-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_MANAGER_X86|.x86_64.rpm.sha512>`__)                        |
@@ -163,7 +154,7 @@ Linux
 |                       |                   |    x86_64    | `wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86_EL5|.el5.x86_64.rpm <https://packages.wazuh.com/|CURRENT_MAJOR|/yum5/x86_64/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86_EL5|.el5.x86_64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86_EL5|.el5.x86_64.rpm.sha512>`__)         |
 +-----------------------+-------------------+--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                       |                   |    i386      | `wazuh-agent_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_I386|_i386.deb <|DEB_AGENT|_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_I386|_i386.deb>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_I386|_i386.deb.sha512>`__)            |
-+ Ubuntu                +  12 or greater    +--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++ Ubuntu                +  12 or later      +--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                       |                   |              | `wazuh-agent_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_X86|_amd64.deb <|DEB_AGENT|_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_X86|_amd64.deb>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_X86|_amd64.deb.sha512>`__)         |
 +                       +                   +    x86_64    +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                       |                   |              | `wazuh-manager_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_MANAGER_X86|_amd64.deb <|DEB_MANAGER|_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_MANAGER_X86|_amd64.deb>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-manager_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_MANAGER_X86|_amd64.deb.sha512>`__) |
@@ -185,13 +176,14 @@ Linux
 |                       |                   |    armhf     | `wazuh-agent_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_ARMHF|_armhf.deb <|DEB_AGENT|_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_ARMHF|_armhf.deb>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_ARMHF|_armhf.deb.sha512>`__)         |
 +-----------------------+-------------------+--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-HP-UX
-^^^^^
-+-----------------+--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Version         | Architecture | Package                                                                                                                                                                                                                                      |
-+=================+==============+==============================================================================================================================================================================================================================================+
-|  11.31          |   Itanium    | `wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar <https://packages.wazuh.com/|CURRENT_MAJOR|/hp-ux/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar.sha512>`__)    |
-+-----------------+--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+Windows
+^^^^^^^
+
++-----------------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Version         | Architecture | Package                                                                                                                                                                                                                                     |
++=================+==============+=============================================================================================================================================================================================================================================+
+|  XP or later    |   32/64bits  | `wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi <https://packages.wazuh.com/|CURRENT_MAJOR|/windows/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi.sha512>`__)                                              |
++-----------------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 macOS
 ^^^^^
@@ -215,23 +207,45 @@ Solaris
 |         |     SPARC    | `wazuh-agent_v|WAZUH_LATEST|-sol11-sparc.p5p <https://packages.wazuh.com/|CURRENT_MAJOR|/solaris/sparc/11/wazuh-agent_v|WAZUH_LATEST|-sol11-sparc.p5p>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh-agent_v|WAZUH_LATEST|-sol11-sparc.p5p.sha512>`__)    |
 +---------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-Windows
-^^^^^^^
-
+AIX
+^^^
 +-----------------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Version         | Architecture | Package                                                                                                                                                                                                                                     |
 +=================+==============+=============================================================================================================================================================================================================================================+
-|  XP or greater  |   32/64bits  | `wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi <https://packages.wazuh.com/|CURRENT_MAJOR|/windows/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi.sha512>`__)                                              |
+| 6 or later      |    PowerPC   | `wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_AIX|.aix.ppc.rpm <https://packages.wazuh.com/|CURRENT_MAJOR|/aix/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_AIX|.aix.ppc.rpm>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_AIX|.aix.ppc.rpm.sha512>`__)                          |
 +-----------------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-MSU
-^^^
+HP-UX
+^^^^^
++-----------------+--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Version         | Architecture | Package                                                                                                                                                                                                                                      |
++=================+==============+==============================================================================================================================================================================================================================================+
+|  11.31          |   Itanium    | `wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar <https://packages.wazuh.com/|CURRENT_MAJOR|/hp-ux/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar.sha512>`__)    |
++-----------------+--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-+-------------------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Version           | Architecture | Package                                                                                                                                                                                                                               |
-+===================+==============+=======================================================================================================================================================================================================================================+
-|  4.0.0 or greater |   32/64bits  | `msu-updates.json.gz <https://feed.wazuh.com/vulnerability-detector/windows/msu-updates.json.gz>`_ (`sha256 <https://feed.wazuh.com/vulnerability-detector/windows/msu-updates.meta>`__)                                              |
-+-------------------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+Wazuh indexer
+-------------
+
++--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Package type | Package                                                                                                                                                                                                                                                                                                      |
++==============+==============================================================================================================================================================================================================================================================================================================+
+|     RPM      | `opendistroforelasticsearch-|OPEN_DISTRO_LATEST|.rpm <https://packages.wazuh.com/4.x/yum/opendistroforelasticsearch-|OPEN_DISTRO_LATEST|-linux-x64.rpm>`_ (`sha512 <https://packages.wazuh.com/4.x/checksums/opendistro/|OPEN_DISTRO_LATEST|/opendistroforelasticsearch-|OPEN_DISTRO_LATEST|-linux-x64.rpm.sha512>`__)                                               |
++--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|     DEB      | `opendistroforelasticsearch-|OPEN_DISTRO_LATEST|.deb <https://packages.wazuh.com/4.x/apt/pool/main/o/opendistroforelasticsearch/opendistroforelasticsearch_|OPEN_DISTRO_LATEST|-1_amd64.deb>`_ (`sha512 <https://packages.wazuh.com/4.x/checksums/opendistro/|OPEN_DISTRO_LATEST|/opendistroforelasticsearch_|OPEN_DISTRO_LATEST|-1_amd64.deb.sha512>`__)            |
++--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
+Wazuh dashboard
+---------------
+
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Package type | Package                                                                                                                                                                                                                                                                                                                                                     |
++==============+=============================================================================================================================================================================================================================================================================================================================================================+
+|     RPM      | `opendistroforelasticsearch-kibana-|OPEN_DISTRO_LATEST|.rpm <https://packages.wazuh.com/4.x/yum/opendistroforelasticsearch-kibana-|OPEN_DISTRO_LATEST|-linux-x64.rpm>`_ (`sha512 <https://packages.wazuh.com/4.x/checksums/opendistro/|OPEN_DISTRO_LATEST|/opendistroforelasticsearch-kibana-|OPEN_DISTRO_LATEST|-linux-x64.rpm.sha512>`__)                                                                         |
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|     DEB      | `opendistroforelasticsearch-kibana-|OPEN_DISTRO_LATEST|.deb <https://packages.wazuh.com/4.x/apt/pool/main/o/opendistroforelasticsearch-kibana/opendistroforelasticsearch-kibana_|OPEN_DISTRO_LATEST|_amd64.deb>`_ (`sha512 <https://packages.wazuh.com/4.x/checksums/opendistro/|OPEN_DISTRO_LATEST|/opendistroforelasticsearch-kibana_|OPEN_DISTRO_LATEST|_amd64.deb.sha512>`__)                                   |
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Wazuh Kibana plugin
 -------------------
@@ -241,14 +255,11 @@ Wazuh Kibana plugin
 +===========================+=====================+===============+=============================================================================================================================================================================================================================================================+
 |   |ELASTICSEARCH_LATEST|                  |  |OPEN_DISTRO_LATEST|             |     |WAZUH_LATEST|     | `wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|-1.zip>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|-1.zip.sha512>`__)                                      |  
 +---------------------------+---------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   7.11.2                  |                     |     |WAZUH_LATEST|     | `wazuh_kibana-|WAZUH_LATEST|_7.11.2.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_7.11.2-1.zip>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_7.11.2-1.zip.sha512>`__)                                      |   
+|   7.16.3                  |                     |     |WAZUH_LATEST|     | `wazuh_kibana-|WAZUH_LATEST|_7.11.2.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_7.16.3-1.zip>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_7.16.3-1.zip.sha512>`__)                                      |   
 +---------------------------+---------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   7.12.1                  |                     |     |WAZUH_LATEST|     | `wazuh_kibana-|WAZUH_LATEST|_7.12.1.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_7.12.1-1.zip>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_7.12.1-1.zip.sha512>`__)                                      |   
+|   7.17.0                  |                     |     |WAZUH_LATEST|     | `wazuh_kibana-|WAZUH_LATEST|_7.12.1.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_7.17.0-1.zip>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_7.17.0-1.zip.sha512>`__)                                      |   
 +---------------------------+---------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   7.13.4                  |                     |     |WAZUH_LATEST|     | `wazuh_kibana-|WAZUH_LATEST|_7.13.4.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_7.13.4-1.zip>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_7.13.4-1.zip.sha512>`__)                                      |   
-+---------------------------+---------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   7.14.2                  |                     |     |WAZUH_LATEST|     | `wazuh_kibana-|WAZUH_LATEST|_7.14.2.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_7.14.2-1.zip>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_7.14.2-1.zip.sha512>`__)                                      |   
-+---------------------------+---------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
 
 For a complete list of the available versions, see the `Wazuh Kibana plugin compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/tree/v4.2.5-7.10.2#wazuh---kibana---open-distro-version-compatibility-matrix>`_. 
 
@@ -263,6 +274,17 @@ Wazuh Splunk app
 |    |SPLUNK_LATEST|                  |     |WAZUH_SPLUNK_LATEST|           | `wazuh_splunk-|WAZUH_SPLUNK_LATEST|_|SPLUNK_LATEST|.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_|SPLUNK_LATEST|-1.tar.gz>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_SPLUNK_LATEST|/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_|SPLUNK_LATEST|-1.tar.gz.sha512>`__)                                                |
 +---------------------------+---------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
+
+Filebeat
+---------------
+
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Package type | Package                                                                                                                                                                                                                                         |
++==============+=================================================================================================================================================================================================================================================+
+|     RPM      | `filebeat-oss-|ELASTICSEARCH_LATEST|-x86_64.rpm <https://packages.wazuh.com/4.x/yum/filebeat-oss-|ELASTICSEARCH_LATEST|-x86_64.rpm>`_ (`sha512 <https://packages.wazuh.com/4.x/checksums/elasticsearch/|ELASTICSEARCH_LATEST|/filebeat-oss-|ELASTICSEARCH_LATEST|-x86_64.rpm.sha512>`__)                        |
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|     DEB      | `filebeat-oss-|ELASTICSEARCH_LATEST|-amd64.deb <https://packages.wazuh.com/4.x/apt/pool/main/f/filebeat/filebeat-oss-|ELASTICSEARCH_LATEST|-amd64.deb>`_ (`sha512 <https://packages.wazuh.com/4.x/checksums/elasticsearch/|ELASTICSEARCH_LATEST|/filebeat-oss-|ELASTICSEARCH_LATEST|-amd64.deb.sha512>`__)      |
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Virtual machine
 ---------------
@@ -283,8 +305,18 @@ Amazon Machine Image
 +--------------------+--------------+------------------+----------------------+------------------------------------+
 
 
-Open Distro for Elasticsearch
-------------------------------
+MSU
+---
+
++-------------------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Version           | Architecture | Package                                                                                                                                                                                                                               |
++===================+==============+=======================================================================================================================================================================================================================================+
+|  4.0.0 or later   |   32/64bits  | `msu-updates.json.gz <https://feed.wazuh.com/vulnerability-detector/windows/msu-updates.json.gz>`_ (`sha256 <https://feed.wazuh.com/vulnerability-detector/windows/msu-updates.meta>`__)                                              |
++-------------------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
+Open distro for Elasticsearch
+-----------------------------
 
 Elasticsearch
 ^^^^^^^^^^^^^
@@ -308,14 +340,3 @@ Kibana
 +--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |     DEB      | `opendistroforelasticsearch-kibana-|OPEN_DISTRO_LATEST|.deb <https://packages.wazuh.com/4.x/apt/pool/main/o/opendistroforelasticsearch-kibana/opendistroforelasticsearch-kibana_|OPEN_DISTRO_LATEST|_amd64.deb>`_ (`sha512 <https://packages.wazuh.com/4.x/checksums/opendistro/|OPEN_DISTRO_LATEST|/opendistroforelasticsearch-kibana_|OPEN_DISTRO_LATEST|_amd64.deb.sha512>`__)                                   |
 +--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-Filebeat
-^^^^^^^^
-
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Package type | Package                                                                                                                                                                                                                                         |
-+==============+=================================================================================================================================================================================================================================================+
-|     RPM      | `filebeat-oss-|ELASTICSEARCH_LATEST|-x86_64.rpm <https://packages.wazuh.com/4.x/yum/filebeat-oss-|ELASTICSEARCH_LATEST|-x86_64.rpm>`_ (`sha512 <https://packages.wazuh.com/4.x/checksums/elasticsearch/|ELASTICSEARCH_LATEST|/filebeat-oss-|ELASTICSEARCH_LATEST|-x86_64.rpm.sha512>`__)                        |
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|     DEB      | `filebeat-oss-|ELASTICSEARCH_LATEST|-amd64.deb <https://packages.wazuh.com/4.x/apt/pool/main/f/filebeat/filebeat-oss-|ELASTICSEARCH_LATEST|-amd64.deb>`_ (`sha512 <https://packages.wazuh.com/4.x/checksums/elasticsearch/|ELASTICSEARCH_LATEST|/filebeat-oss-|ELASTICSEARCH_LATEST|-amd64.deb.sha512>`__)      |
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+

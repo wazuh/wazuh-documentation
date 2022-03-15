@@ -37,7 +37,7 @@ This section explains the creation of an application that will use the Azure Log
 
 In the **Azure Active Directory** panel, select the option **App registrations**. Then, select **New registration**.
 
-.. thumbnail:: ../../../images/azure/graph1.png
+.. thumbnail:: ../../../images/azure/graph-1.png
     :title: Log Analytics App
     :align: center
     :width: 100%
@@ -47,40 +47,40 @@ Giving permissions to the application
 
 1. Go to the **Overview** section and save the **Application (client) ID** for later authentication.
 
-.. thumbnail:: ../../../images/azure/graph2.png
+.. thumbnail:: ../../../images/azure/graph-2.png
     :title: AAD
     :align: center
     :width: 75%
 
 2. Go to the **API permissions** section and select the **Add a permission** option.
 
-.. thumbnail:: ../../../images/azure/graph3.png
+.. thumbnail:: ../../../images/azure/graph-3.png
     :title: AAD
     :align: center
     :width: 100%
 
 3. Select the API by searching for "Microsoft Graph".
 
-.. thumbnail:: ../../../images/azure/graph4.png
+.. thumbnail:: ../../../images/azure/graph-4.png
     :title: AAD
     :align: center
     :width: 100%
 
 1. Select the permissions in **Applications permissions** that adapt to our infrastructure. In this case, **AuditLog** permissions will be granted. Then, click **Add permissions**.
 
-.. thumbnail:: ../../../images/azure/graph5.png
+.. thumbnail:: ../../../images/azure/graph-5.png
     :title: AAD
     :align: center
     :width: 100%
 
 5. Grant admin consent for the tenant domain used for the permission added in the previous step. This must be done by an admin user.
 
-.. thumbnail:: ../../../images/azure/graph6.png
+.. thumbnail:: ../../../images/azure/graph-6.png
     :title: AAD
     :align: center
     :width: 50%
 
-.. thumbnail:: ../../../images/azure/graph7.png
+.. thumbnail:: ../../../images/azure/graph-7.png
     :title: AAD
     :align: center
     :width: 50%
@@ -90,12 +90,12 @@ Obtaining the application key for authentication
 
 Select **Certificates & secrets** and fill in the **Description** and **Expires** fields. Copy the **value** once the key is saved. This is required to authenticate the application in order to use the Log Analytics API.
 
-.. thumbnail:: ../../../images/azure/la_create_key.png
+.. thumbnail:: ../../../images/azure/log-analytics-create-key.png
     :title: Log Analytics App
     :align: center
     :width: 100%
 
-.. thumbnail:: ../../../images/azure/la_key_created.png
+.. thumbnail:: ../../../images/azure/log-analytics-key-created.png
     :title: Log Analytics App
     :align: center
     :width: 100%
@@ -169,7 +169,7 @@ Create a new user
 
 Create a new user in Azure. If the creation is successful, a log will be written to reflect it. This log can be retrieved using the ``auditLogs/directoryAudits`` query.
 
-.. thumbnail:: ../../../images/azure/new_user.png
+.. thumbnail:: ../../../images/azure/new-user.png
     :title: AAD
     :align: center
     :width: 100%
@@ -179,7 +179,7 @@ Azure portal visualization
 
 The resulting log from the user creation can be checked in the **Audit logs** section of Azure Active Directory.
 
-.. thumbnail:: ../../../images/azure/portal_services.png
+.. thumbnail:: ../../../images/azure/portal-services.png
     :title: AAD
     :align: center
     :width: 100%
@@ -189,12 +189,12 @@ Wazuh dashboard visualization
 
 Once the integration is running, the results will be available in the Wazuh dashboard.
 
-.. thumbnail:: ../../../images/azure/kibana_services1.png
+.. thumbnail:: ../../../images/azure/kibana-services-1.png
     :title: AAD
     :align: center
     :width: 100%
 
-.. thumbnail:: ../../../images/azure/kibana_services2.png
+.. thumbnail:: ../../../images/azure/kibana-services-2.png
     :title: AAD
     :align: center
     :width: 100%

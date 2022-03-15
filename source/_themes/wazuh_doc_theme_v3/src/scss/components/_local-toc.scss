@@ -13,15 +13,15 @@
 
   .toc-title {
     display: inline-block;
-    margin-top: 20px;
     height: 30px;
+    margin-top: 20px;
     font-size: 18px;
     font-weight: 600;
     text-transform: uppercase;
   }
 
   > ul {
-    height: calc(100vh - #{$headerHeightXl} - #{$breadcrumbsHeightXl} - 40px - 30px - 30px - #{$footerHeight});
+    height: calc(100vh - #{$header-height-xl} - #{$breadcrumbs-height-xl} - 40px - 30px - 30px - #{$footer-height});
     overflow-y: auto;
   }
 
@@ -31,11 +31,11 @@
     list-style: none;
 
     a {
-      font-size: 14px;
-      border-left: 2px solid;
-      line-height: 24px;
       padding-top: 4px;
       padding-bottom: 4px;
+      font-size: 14px;
+      line-height: 24px;
+      border-left: 2px solid;
 
       &:hover,
       &:focus {
@@ -57,25 +57,25 @@
 body {
   #local-toc {
     .navbar-nav {
-      background-color: $light_ColorBaseSpace;
+      background-color: $light-color-base-space;
     }
     .toc-title {
-      color: $light_ColorMainText;
+      color: $light-color-main-text;
     }
     ul {
       a {
-        border-left-color: $light_ColorBaseSpace;
+        border-left-color: $light-color-base-space;
         &:hover,
         &:focus {
-          color: $light_ColorPrimaryLighter;
+          color: $light-color-primary-lighter;
         }
         &:active {
-          color: $light_ColorPrimary;
+          color: $light-color-primary;
         }
       }
       .active {
-        color: $light_ColorPrimary;
-        border-left-color: $light_ColorPrimary;
+        color: $light-color-primary;
+        border-left-color: $light-color-primary;
       }
     }
   }
@@ -86,25 +86,25 @@ body {
 .dark-theme {
   #local-toc {
     .navbar-nav {
-      background-color: $dark_ColorBaseSpace;
+      background-color: $dark-color-base-space;
     }
     .toc-title {
-      color: $dark_ColorMainText;
+      color: $dark-color-main-text;
     }
     ul {
       a {
-        border-left-color: $dark_ColorBaseSpace;
+        border-left-color: $dark-color-base-space;
         &:hover,
         &:focus {
-          color: $dark_ColorPrimaryLighter;
+          color: $dark-color-primary-lighter;
         }
         &:active {
-          color: $dark_ColorPrimary;
+          color: $dark-color-primary;
         }
       }
       .active {
-        color: $dark_ColorPrimary;
-        border-left-color: $dark_ColorPrimary;
+        color: $dark-color-primary;
+        border-left-color: $dark-color-primary;
       }
     }
   }

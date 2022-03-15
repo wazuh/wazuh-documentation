@@ -9,22 +9,22 @@
 body {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   padding: 50px 15px;
   font-family: Manrope, sans-serif;
-  color: $light_ColorMainText;
+  color: $light-color-main-text;
   text-align: center;
 }
 
 h1 {
+  margin-right: auto;
+  margin-left: auto;
   font-family: Manrope, sans-serif;
   font-size: 26px;
   font-weight: 500;
   line-height: 1.2;
-  color: $light_ColorMainText;
-  margin-left: auto;
-  margin-right: auto;
+  color: $light-color-main-text;
 }
 
 #spinner-wrapper {
@@ -41,9 +41,9 @@ h1 {
   display: block;
   width: 65px;
   height: 65px;
-  border-top: 4px solid $light_ColorPrimary;
-  border-right: 4px solid $light_ColorPrimary;
-  border-bottom: 4px solid $light_ColorPrimary;
+  border-top: 4px solid $light-color-primary;
+  border-right: 4px solid $light-color-primary;
+  border-bottom: 4px solid $light-color-primary;
   border-left: 4px solid transparent;
   border-radius: 50%;
   animation: spin 1s linear infinite;
@@ -56,7 +56,7 @@ h1 {
   width: 4px;
   height: 4px;
   content: "";
-  background-color: $light_ColorPrimary;
+  background-color: $light-color-primary;
   border-radius: 50%;
 }
 
@@ -67,7 +67,7 @@ h1 {
   width: 4px;
   height: 4px;
   content: "";
-  background-color: $light_ColorPrimary;
+  background-color: $light-color-primary;
   border-radius: 50%;
 }
 
@@ -79,17 +79,17 @@ h1 {
 
 .home-btn {
   display: inline-block;
-  background-color: $light_ColorAccent;
-  border: 2px solid $light_ColorAccent;
-  color: $light_ColorMainText;
-  border-radius: $roundedCorners;
-  padding: 10px 20px;
   min-width: 200px;
+  padding: 10px 20px;
   margin: 30px auto;
+  color: $light-color-main-text;
   text-decoration: none;
+  background-color: $light-color-accent;
+  border: 2px solid $light-color-accent;
+  border-radius: $rounded-corners;
   &:hover,
   &:focus {
-    background-color: $light_ColorBaseSpace;
-    color: $light_ColorMainText;
+    color: $light-color-main-text;
+    background-color: $light-color-base-space;
   }
 }

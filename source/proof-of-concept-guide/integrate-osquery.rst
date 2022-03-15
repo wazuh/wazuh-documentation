@@ -100,7 +100,7 @@ You can visualize the alert data in the Wazuh dashboard. To do this, go to the *
 
 * ``rule.groups:osquery``
 
-.. thumbnail:: ../images/poc/Osquery_integration.png
+.. thumbnail:: ../images/poc/Osquery-integration.png
           :title: Osquery integration
           :align: center
           :wrap_image: No

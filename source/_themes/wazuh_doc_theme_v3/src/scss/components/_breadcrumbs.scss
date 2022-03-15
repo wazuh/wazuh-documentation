@@ -6,31 +6,31 @@
 
 .breadcrumb-wrapper {
   position: fixed;
-  top: $headerHeightXl;
+  top: $header-height-xl;
+  z-index: 99;
   display: flex;
   flex-direction: row;
-  min-height: $breadcrumbsHeightXl;
-  padding: 5px 15px 5px 30px;
-  z-index: 99;
   width: 100%;
+  min-height: $breadcrumbs-height-xl;
+  padding: 5px 15px 5px 30px;
   @include media-max(sm){
-    overflow: auto;
     position: static;
+    overflow: auto;
   }
   @include media-max(xl){
-    top: calc(#{$headerHeightXs} + #{$secondaryMobileBar});
-    padding-left: 15px;
+    top: calc(#{$header-height-xs} + #{$secondary-mobile-bar});
     align-items: center;
+    padding-left: 15px;
   }
   @include media-min(xl){
     align-items: flex-end;
-    max-height: $breadcrumbsHeightXl * 1.5;  
+    max-height: $breadcrumbs-height-xl * 1.5;
   }
   @include media-only(xl, xxl) {
-    width: calc(100% - #{$leftSidebarWidthNarrow} - #{$rightSidebarWidthNarrow});
+    width: calc(100% - #{$left-sidebar-width-narrow} - #{$right-sidebar-width-narrow});
   }
   @include media-min(xxl) {
-    width: calc(100% - #{$leftSidebarWidth} - #{$rightSidebarWidth});
+    width: calc(100% - #{$left-sidebar-width} - #{$right-sidebar-width});
   }
 }
 
@@ -49,7 +49,7 @@
   @include media-only(xl, wzh-xl){
     font-size: 14px;
   }
-  
+
   li {
     display: inline;
   }
@@ -58,22 +58,22 @@
 .breadcrumb-separator::after {
   display: inline-block;
   margin: 0 7px;
-  content: "/";
   font-size: 1.1rem;
+  content: "/";
 }
 
 /* Light theme -------------------------------------------------------------- */
 
 body {
   .breadcrumb-wrapper {
-    background-color: $light_ColorBaseSpace;
+    background-color: $light-color-base-space;
   }
   #breadcrumbs {
-    color: $light_ColorMainText;
-    background-color: $light_ColorBaseSpace;
+    color: $light-color-main-text;
+    background-color: $light-color-base-space;
   }
   .breadcrumb-separator::after {
-    color: $light_ColorMainText;
+    color: $light-color-main-text;
   }
 }
 
@@ -81,13 +81,13 @@ body {
 
 .dark-theme {
   .breadcrumb-wrapper {
-    background-color: $dark_ColorBaseSpace;
+    background-color: $dark-color-base-space;
   }
   #breadcrumbs {
-    color: $dark_ColorMainText;
-    background-color: $dark_ColorBaseSpace;
+    color: $dark-color-main-text;
+    background-color: $dark-color-base-space;
   }
   .breadcrumb-separator::after {
-    color: $dark_ColorMainText;
+    color: $dark-color-main-text;
   }
 }

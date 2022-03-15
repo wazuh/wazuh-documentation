@@ -33,7 +33,7 @@ In order to use this authentication method, a user allowed to use authorization 
                 }
         }
 
-.. thumbnail:: ../../../images/rbac/auth_context_login.png
+.. thumbnail:: ../../../images/rbac/auth-context-login.png
     :align: center
     :width: 100%
 
@@ -44,7 +44,7 @@ A role is a set of policies, therefore, the user's final permissions are the set
 
 A rule is an element that will be checked against the authorization context provided by the user, based on this check the user is granted with the appropriate permissions. Therefore, the internal structure of the relationships is like this:
 
-.. thumbnail:: ../../../images/rbac/auth_context_rule.png
+.. thumbnail:: ../../../images/rbac/auth-context-rule.png
     :align: center
     :width: 100%
 
@@ -222,7 +222,7 @@ Example 1
             }]
           }
 
-.. thumbnail:: ../../../images/rbac/example1_rule.png
+.. thumbnail:: ../../../images/rbac/rule-example-1.png
     :align: center
     :width: 100%
 
@@ -320,7 +320,7 @@ Example 2
             ]
         }
 
-.. thumbnail:: ../../../images/rbac/example2_rule.png
+.. thumbnail:: ../../../images/rbac/rule-example-2.png
     :align: center
     :width: 100%
 

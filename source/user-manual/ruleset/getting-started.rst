@@ -2,7 +2,7 @@
 .. meta::
   :description: Wazuh supports more than 3000 rules that accomplish a variety of technologies. Check them out here. 
   
-.. _ruleset_getting_started:
+.. _ruleset_getting-started:
 
 Getting started
 =================

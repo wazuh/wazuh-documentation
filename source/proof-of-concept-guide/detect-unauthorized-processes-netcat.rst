@@ -72,7 +72,7 @@ You can visualize the alert data in the Wazuh dashboard. To do this, go to the *
 
 - ``rule.id:(533 OR 100051)``
 
-.. thumbnail:: ../images/poc/Detecting_unauthorized_processes.png
+.. thumbnail:: ../images/poc/Detecting-unauthorized-processes.png
           :title: Detecting unauthorized processes - Netcat
           :align: center
           :wrap_image: No

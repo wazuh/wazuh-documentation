@@ -3,7 +3,7 @@
 .. meta::
   :description: Learn more about how to get started with Wazuh Cloud Service. Explore the potential of Wazuh Cloud with your 14-day free trial.
 
-.. _cloud_getting_started:
+.. _cloud_getting-started:
 
 Getting started
 ===============

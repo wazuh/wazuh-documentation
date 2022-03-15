@@ -78,7 +78,7 @@ You can visualize the alert data in the Wazuh dashboard. To do this, go to the *
 
 - ``rule.groups: "amazon"``
 
-.. thumbnail:: ../images/poc/Amazon_AWS_infrastructure_monitoring.png
+.. thumbnail:: ../images/poc/Amazon-AWS-infrastructure-monitoring.png
           :title: Amazon AWS infrastructure monitoring
           :align: center
           :wrap_image: No

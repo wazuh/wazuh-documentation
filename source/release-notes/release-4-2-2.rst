@@ -30,7 +30,7 @@ Wazuh Kibana plugin
 
 - `#3503 <https://github.com/wazuh/wazuh-kibana-app/pull/3503>`_ Wazuh adds a new functionality that allows users to change the logotype settings of the Wazuh Kibana plugin. From the **Logo Customization** section of the **Configuration** page, users can customize the logos of the app easily and to their liking. Setting options include customization of **Logo App**, **Logo Sidebar**, **Logo Health Check**, and **Logo Reports**. 
 
-.. thumbnail:: ../images/release-notes/4.2.2/wui-logo-customization1.png
+.. thumbnail:: ../images/release-notes/4.2.2/wui-logo-customization.png
    :alt: Logo customization settings
    :align: center
    :wrap_image: No
@@ -43,7 +43,7 @@ Wazuh Splunk app
 
 
 
-.. thumbnail:: ../images/release-notes/4.2.2/splunk-quicksettings.png
+.. thumbnail:: ../images/release-notes/4.2.2/splunk-quick-settings.png
    :alt: Quick settings menu
    :align: center
    :wrap_image: No

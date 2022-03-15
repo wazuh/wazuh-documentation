@@ -124,17 +124,17 @@ In this case, all the logs above are alerts, so we will see an instance of the l
 
 The Wazuh dashboard shows the full information about the alert:
 
-.. thumbnail:: ../images/pci/policy_monitoring_1.png
+.. thumbnail:: ../images/pci/policy-monitoring-1.png
     :title: Alert visualization on the Wazuh dashboard
     :align: center
     :width: 100%
 
-.. thumbnail:: ../images/pci/policy_monitoring_2.png
+.. thumbnail:: ../images/pci/policy-monitoring-2.png
     :title: Wazuh PCI DSS dashboard showing PCI DSS 2. alerts
     :align: center
     :width: 100%
 
-.. thumbnail:: ../images/pci/p_monitoring_pci.png
+.. thumbnail:: ../images/pci/policy-monitoring-3.png
     :title: Wazuh App PCI DSS section showing PCI DSS 2. alerts
     :align: center
     :width: 100%

@@ -10,32 +10,31 @@ footer {
   @include media-min(xl){
     position: absolute;
     right: 0;
-    height: $footerHeight;
-    padding: 15px 0 15px 30px;
     display: flex;
     align-items: center;
-    
-    @include media-only(xl, xxl) {
-      left: $leftSidebarWidthNarrow;
-    }
-    @include media-min(xxl) {
-      left: $leftSidebarWidth;
-    }
+    height: $footer-height;
+    padding: 15px 0 15px 30px;
   }
-  
+  @include media-only(xl, xxl) {
+    left: $left-sidebar-width-narrow;
+  }
+  @include media-min(xxl) {
+    left: $left-sidebar-width;
+  }
+
   & > .container {
     @include media-max(xl) {
       flex-direction: column;
     }
   }
-  
+
   .desktop-footer {
     @include media-min(xl){
       width: 100%;
     }
     .social-links {
-      padding: 15px 0;
       display: flex;
+      padding: 15px 0;
       @include media-min(sm){
         justify-content: flex-end;
       }
@@ -50,13 +49,13 @@ footer {
       padding: 15px;
     }
   }
-  
+
   .website-links {
     margin-bottom: 3rem;
     ul {
-      list-style: none;
       padding-left: 0;
       margin-bottom: 0;
+      list-style: none;
     }
     a {
       &:hover,
@@ -84,25 +83,51 @@ footer {
   }
 }
 
+.index footer {
+  & > div {
+    @include media-max(sm){
+      width: calc(100% - 50px);
+      margin-right: auto;
+      margin-left: 0;
+    }
+  }
+  .desktop-footer.row {
+    @include media-max(xl) {
+      flex-direction: column;
+    }
+  }
+  .social-links {
+    @include media-max(xl) {
+      justify-content: flex-start;
+      order: 0;
+    }
+    .nav-link {
+      @include media-max(sm) {
+        padding: 0 11px;
+      }
+    }
+  }
+}
+
 /* Light theme -------------------------------------------------------------- */
 
 body {
   footer {
-    background: $light_ColorFooter;
-    
+    background: $light-color-footer;
+
     .nav-link {
-      color: $light_ColorMainText;
+      color: $light-color-main-text;
 
       &:hover {
-        color: $light_ColorPrimaryLighter;
+        color: $light-color-primary-lighter;
       }
     }
     .website-links {
       a {
-        color: $light_ColorMainText;
+        color: $light-color-main-text;
         &:hover,
         &:focus {
-          color: $light_ColorPrimaryLighter;
+          color: $light-color-primary-lighter;
         }
       }
     }
@@ -113,21 +138,21 @@ body {
 
 .dark-theme {
   footer {
-    background: $dark_ColorFooter;
-    
+    background: $dark-color-footer;
+
     .nav-link {
-      color: $dark_ColorMainText;
+      color: $dark-color-main-text;
 
       &:hover {
-        color: $dark_ColorPrimaryLighter;
+        color: $dark-color-primary-lighter;
       }
     }
     .website-links {
       a {
-        color: $dark_ColorMainText;
+        color: $dark-color-main-text;
         &:hover,
         &:focus {
-          color: $dark_ColorPrimaryLighter;
+          color: $dark-color-primary-lighter;
         }
       }
     }

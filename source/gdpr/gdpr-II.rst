@@ -110,17 +110,17 @@ As you can see, syscheck alerts are tagged with gdpr_II_5.1.f.
 	New inode: 19690
 
 
-.. thumbnail:: ../images/gdpr/fim_1.png
+.. thumbnail:: ../images/gdpr/fim-1.png
     :title: Alert visualization at the Wazuh dashboard
     :align: center
     :width: 100%
 
-.. thumbnail:: ../images/gdpr/fim_2.png
+.. thumbnail:: ../images/gdpr/fim-2.png
     :title: Filtering alerts by GDPR and file path
     :align: center
     :width: 100%
 
-.. thumbnail:: ../images/gdpr/fim_3.png
+.. thumbnail:: ../images/gdpr/fim-3.png
     :title: Filtering alerts by GDPR on Wazuh App
     :align: center
     :width: 100%

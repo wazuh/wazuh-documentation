@@ -18,7 +18,7 @@ Wazuh dashboard.
 Integrity and alerting flow is depicted in the
 :ref:`sequence diagram <sca_sequence_diagram>` below.
 
-.. figure:: ../../../images/sca/sca_sequence_diagram.svg
+.. figure:: ../../../images/sca/sca-sequence-diagram.png
   :alt: SCA integrity and alerting flow
   :name: sca_sequence_diagram
   :align: center

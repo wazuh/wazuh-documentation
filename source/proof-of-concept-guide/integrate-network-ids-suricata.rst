@@ -81,7 +81,7 @@ You can visualize the alert data in the Wazuh dashboard. To do this, go to the *
 
 - ``rule.groups:suricata``
 
-.. thumbnail:: ../images/poc/Network_IDS_integration.png
+.. thumbnail:: ../images/poc/Network-IDS-integration.png
           :title: Network IDS integration - Suricata
           :align: center
           :wrap_image: No

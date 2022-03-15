@@ -8,13 +8,13 @@
 .navbar-nav {
   .nav-link {
     padding: 0 10px;
-    font-size: 18px;
+    font-size: 17px;
     &:hover,
     &:focus {
       text-decoration: none;
     }
     &:active {
-      font-weight: 500;
+      font-weight: 400;
     }
     &.dropdown-toggle {
       padding-right: 27px;
@@ -22,20 +22,20 @@
         text-decoration: none;
 
         &::after {
-          transform: rotateX(180deg);
           transition: transform ease-in .1s;
+          transform: rotateX(180deg);
         }
       }
       &::after {
-        content: '';
+        position: absolute;
+        right: 8px;
+        bottom: .5rem;
         display: inline-block;
         width: 13px;
         height: 8px;
-        background-size: contain;
+        content: "";
         background-position: center;
-        position: absolute;
-        right: 8px;
-        bottom: .7rem;
+        background-size: contain;
         border: none;
         transition: transform ease-in .1s;
       }
@@ -45,7 +45,7 @@
     min-width: 100%;
     padding: 15px;
     margin-top: 20px;
-    border: 0;
+    border: 1px solid;
     border-radius: 10px;
     &::before {
       position: absolute;
@@ -53,11 +53,14 @@
       width: 18px;
       height: 18px;
       content: "";
-      clip-path: inset(-15px 0 0 -15px);
+      border-top: 1px solid;
+      border-left: 1px solid;
       transform: rotate(45deg);
+      clip-path: inset(-15px 0 0 -15px);
     }
     .dropdown-item {
-      padding: .25rem .75rem;
+      padding: .9rem .75rem;
+      font-size: 17px;
     }
   }
 }
@@ -66,37 +69,37 @@
 
 body {
   .navbar-nav {
-    background-color: $light_ColorBaseSpace;
+    background-color: $light-color-base-space;
     .nav-link {
-      color: $light_ColorMainText;
+      color: $light-color-main-text;
       &:hover,
       &:focus {
-        color: $light_ColorPrimary;
+        color: $light-color-primary;
       }
       &.dropdown-toggle {
         &[aria-expanded="true"],
         &:hover {
           &::after {
-            background: url('#{$icoPath}svg-icons.svg#menu-chevron-blue-lt');
+            background: url("#{$ico-path}svg-icons.svg#menu-chevron-blue-lt");
           }
         }
         &::after {
-          background: url('#{$icoPath}svg-icons.svg#menu-chevron-default-lt');
+          background: url("#{$ico-path}svg-icons.svg#menu-chevron-default-lt");
         }
       }
     }
     .dropdown-menu {
-      background-color: $light_ColorBaseSpace;
-      box-shadow: 0 -2px 8px rgba($light_ColorShadow, .2);
+      background-color: $light-color-base-space;
+      border-color: $light-color-primary-lighter;
       &::before {
-        background-color: $light_ColorBaseSpace;
-        box-shadow: 0 -2px 8px rgba($light_ColorShadow, .2);
+        background-color: $light-color-base-space;
+        border-color: $light-color-primary-lighter;
       }
       .dropdown-item {
-        color: $light_ColorMainText;
+        color: $light-color-main-text;
         &:hover {
-          background-color: $light_ColorBaseSpace;
-          color: $light_ColorPrimary;
+          color: $light-color-primary;
+          background-color: $light-color-base-space;
         }
       }
     }
@@ -106,40 +109,40 @@ body {
 /* Dark- theme -------------------------------------------------------------- */
 
 .dark-theme {
-    .navbar-nav {
-      background-color: $dark_ColorIndexHeaderBackground;
-      .nav-link {
-        color: $dark_ColorMainText;
-        &:hover,
-        &:focus {
-          color: $dark_ColorPrimary;
-        }
-        &.dropdown-toggle {
-          &[aria-expanded="true"],
-          &:hover {
-            &::after {
-              background: url('#{$icoPath}svg-icons.svg#menu-chevron-blue-dt');
-            }
-          }
+  .navbar-nav {
+    background-color: $dark-color-index-header-background;
+    .nav-link {
+      color: $dark-color-main-text;
+      &:hover,
+      &:focus {
+        color: $dark-color-primary;
+      }
+      &.dropdown-toggle {
+        &[aria-expanded="true"],
+        &:hover {
           &::after {
-            background: url('#{$icoPath}svg-icons.svg#menu-chevron-default-dt');
+            background: url("#{$ico-path}svg-icons.svg#menu-chevron-blue-dt");
           }
         }
-      }
-      .dropdown-menu {
-        background-color: $dark_ColorIndexHeaderBackground;
-        box-shadow: 0 -2px 8px rgba($dark_ColorShadow, .35);
-        &::before {
-          background-color: $dark_ColorIndexHeaderBackground;
-          box-shadow: 0 -2px 8px rgba($dark_ColorShadow, .35);
-        }
-        .dropdown-item {
-          color: $dark_ColorMainText;
-          &:hover {
-            background-color: $dark_ColorIndexHeaderBackground;
-            color: $dark_ColorPrimary;
-          }
+        &::after {
+          background: url("#{$ico-path}svg-icons.svg#menu-chevron-default-dt");
         }
       }
-    }  
+    }
+    .dropdown-menu {
+      background-color: $dark-color-index-header-background;
+      border-color: $dark-color-primary-lighter;
+      &::before {
+        background-color: $dark-color-index-header-background;
+        border-color: $dark-color-primary-lighter;
+      }
+      .dropdown-item {
+        color: $dark-color-main-text;
+        &:hover {
+          color: $dark-color-primary;
+          background-color: $dark-color-index-header-background;
+        }
+      }
+    }
+  }
 }

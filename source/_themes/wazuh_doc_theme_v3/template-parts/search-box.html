@@ -1,7 +1,9 @@
 <div class="search-box" role="search">
   <form method="get" class="search-form" action="{{ pathto('search') }}" id="search-form">
-    <input type="text" class="form-control" name="q" placeholder="Quick search"></input>
-    <button type="submit" class="btn-search"></button>
+    <label class="sr-only" for="search-input">Search term</label>
+    <input id="search-input" type="text" class="form-control" name="q" placeholder="Search"></input>
+    <span id="search-btn-label" class="sr-only">Search now!</span>
+    <button aria-labelledby="search-btn-label" type="submit" class="btn-search"></button>
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>

@@ -6,8 +6,8 @@
 ----------------------------------------------------------------------------- */
 
 #central-column .step-card {
-  border-radius: $roundedCorners;
   padding: 30px;
+  border-radius: $rounded-corners;
   @include media-max(sm){
     padding: 10px;
   }
@@ -23,13 +23,13 @@
   .rubric.h4,
   .rubric.h5,
   .rubric.h6 {
-    margin-top: 0;
-    padding-bottom: 5px;
-    border-bottom: 1px solid;
     display: inline-block;
     width: 100%;
+    padding-bottom: 5px;
+    margin-top: 0;
+    border-bottom: 1px solid;
   }
-  
+
   &.section {
     margin-top: 0;
     &::before {
@@ -45,7 +45,7 @@
 
 body {
   #central-column .step-card {
-    background-color: $light_ColorSidebarSpace;
+    background-color: $light-color-step-card-background;
     h1,
     h2,
     h3,
@@ -58,8 +58,8 @@ body {
     .rubric.h4,
     .rubric.h5,
     .rubric.h6 {
-      color: $light_ColorPrimary;
-      border-color: $light_ColorBorderDeeper;
+      color: $light-color-primary;
+      border-color: $light-color-border-deeper;
     }
   }
 }
@@ -68,7 +68,7 @@ body {
 
 .dark-theme {
   #central-column .step-card {
-    background-color: $dark_ColorSidebarSpace;
+    background-color: $dark-color-step-card-background;
     h1,
     h2,
     h3,
@@ -81,7 +81,7 @@ body {
     .rubric.h4,
     .rubric.h5,
     .rubric.h6 {
-      color: $dark_ColorPrimary;
+      color: $dark-color-primary;
     }
   }
 }

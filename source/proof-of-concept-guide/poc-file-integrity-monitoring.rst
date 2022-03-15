@@ -52,7 +52,7 @@ You can visualize the alert data in the Wazuh dashboard. To do this, go to the *
 
 - ``syscheck.path: "{path_to_the_modified_file}"``
 
-.. thumbnail:: ../images/poc/File_integrity_monitoring.png
+.. thumbnail:: ../images/poc/File-integrity-monitoring.png
           :title: File integrity monitoring
           :align: center
           :wrap_image: No
