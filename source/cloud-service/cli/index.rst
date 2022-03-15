@@ -37,7 +37,7 @@ Installation
   .. code-block:: none
     :class: output
 
-    Wazuh Cloud CLI - "version": "1.0.0"
+    Wazuh Cloud CLI - "version": "1.0.1"
 
 
 Configuration
