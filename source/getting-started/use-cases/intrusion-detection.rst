@@ -122,43 +122,23 @@ In order to gather the data, the Wazuh agent runs periodic scans (the time inter
 
 Example of hardware inventory, network interfaces, open ports, and network settings:
 
-<<<<<<< HEAD:source/getting-started/use-cases/intrusion_detection.rst
-.. thumbnail:: ../../images/getting_started/use_case_inventory_1.png
-    :title: Network interfaces
-    :align: center
-    :wrap_image: No
-
-.. thumbnail:: ../../images/getting_started/use_case_inventory_2.png
-    :title: Network settings
-=======
 .. thumbnail:: /images/getting-started/use-case-inventory-1.png
     :align: center
     :wrap_image: No
 
 .. thumbnail:: /images/getting-started/use-case-inventory-2.png
->>>>>>> origin/4.3-rc:source/getting-started/use-cases/intrusion-detection.rst
     :align: center
     :wrap_image: No
 
 Example of software inventory:
 
-<<<<<<< HEAD:source/getting-started/use-cases/intrusion_detection.rst
-.. thumbnail:: ../../images/getting_started/use_case_inventory_3.png
-    :title: Software inventory  
-=======
 .. thumbnail:: /images/getting-started/use-case-inventory-3.png
->>>>>>> origin/4.3-rc:source/getting-started/use-cases/intrusion-detection.rst
     :align: center
     :wrap_image: No
 
 Example of running processes:
 
-<<<<<<< HEAD:source/getting-started/use-cases/intrusion_detection.rst
-.. thumbnail:: ../../images/getting_started/use_case_inventory_4.png
-    :title: Running processes
-=======
 .. thumbnail:: /images/getting-started/use-case-inventory-4.png
->>>>>>> origin/4.3-rc:source/getting-started/use-cases/intrusion-detection.rst
     :align: center
     :wrap_image: No
 
