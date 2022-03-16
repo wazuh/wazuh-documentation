@@ -11,6 +11,7 @@ All-in-one deployment
 This section guides through the installation and configuration of the Wazuh server and Elastic Stack on the same host. This type of deployment is appropriate for testing and small production environments.
 
    .. thumbnail:: ../../../images/installation/all-in-one-deployment.png
+     :title: All-in-one deployment
      :align: center
      :width: 100%
 
