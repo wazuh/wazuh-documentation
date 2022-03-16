@@ -60,7 +60,7 @@ Configure your environment as follows to test the POC.
         </service>
       </wodle>
 
-#. Restart Wazuh manager to apply changes.
+#. Restart the Wazuh manager to apply changes.
   
     .. code-block:: console
 
@@ -74,7 +74,7 @@ No action is required. Alerts are automatically generated from AWS logs when usi
 Query the alerts
 ----------------
 
-You can visualize the alert data in the Wazuh Kibana plugin. To do this, go to the **Security events** module and add the filters in the search bar to query the alerts.
+You can visualize the alert data in the Wazuh dashboard. To do this, go to the **Security events** module and add the filters in the search bar to query the alerts.
 
 - ``rule.groups: "amazon"``
 

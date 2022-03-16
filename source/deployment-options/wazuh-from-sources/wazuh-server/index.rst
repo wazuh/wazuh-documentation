@@ -11,8 +11,8 @@ Installing Wazuh server from sources
 The Wazuh server collects and analyzes data from deployed agents. It runs the Wazuh manager, the Wazuh API and Filebeat. Alternatively, the Wazuh manager package compatible versions can be checked or downloaded directly :ref:`here <packages>`.
 
 
-Installing Wazuh manager
-~~~~~~~~~~~~~~~~~~~~~~~~
+Installing the Wazuh manager
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. note:: CMake 3.12.4 is the minimal library version required to build the Wazuh server solution.
 
@@ -236,7 +236,7 @@ Filebeat is a data shipping tool that is installed on the Wazuh server to secure
 Uninstall
 ~~~~~~~~~
 
-To uninstall Wazuh manager, set WAZUH_HOME with the current installation path:
+To uninstall the Wazuh manager, set WAZUH_HOME with the current installation path:
 
     .. code-block:: console
 

@@ -244,7 +244,7 @@ This event can be filtered field by field in case an alert is desired to trigger
         <options>no_full_log</options>
     </rule>
 
-Finally, once the event is generated, the rule from above will be matched and therefore, trigger the next alert shown at the Kibana app:
+Finally, once the event is generated, the rule from above will be matched and therefore, trigger the next alert shown at the Wazuh dashboard:
 
 .. thumbnail:: ../../../images/manual/log-analysis/kibana-eventchannel-alert.png
     :title: Log analysis flow

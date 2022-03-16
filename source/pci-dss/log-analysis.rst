@@ -155,14 +155,14 @@ Since we have JSON output enabled, we can also see the alert in ``alerts.json``:
       "location": "/var/log/secure"
     }
 
-Kibana displays information in an organized way, allowing filtering by different types of alert fields, including compliance controls. We have also developed a couple of PCI DSS dashboards for convenient viewing of relevant alerts.
+The Wazuh dashboard displays information in an organized way, allowing filtering by different types of alert fields, including compliance controls. We have also developed a couple of PCI DSS dashboards for convenient viewing of relevant alerts.
 
 .. thumbnail:: ../images/pci/log-analysis-1.png
-    :title: Alert visualization at Kibana discover
+    :title: Alert visualization at the Wazuh dashboard
     :align: center
     :width: 100%
 
 .. thumbnail:: ../images/pci/log-analysis-2.png
-    :title: Wazuh PCI DSS dashboard for Kibana
+    :title: PCI DSS the Wazuh dashboard module
     :align: center
     :width: 100%

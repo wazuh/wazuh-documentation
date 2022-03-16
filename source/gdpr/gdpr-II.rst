@@ -111,7 +111,7 @@ As you can see, syscheck alerts are tagged with gdpr_II_5.1.f.
 
 
 .. thumbnail:: ../images/gdpr/fim-1.png
-    :title: Alert visualization at Kibana Discover
+    :title: Alert visualization at the Wazuh dashboard
     :align: center
     :width: 100%
 

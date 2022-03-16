@@ -181,7 +181,7 @@ Filebeat
 .. _wazuh_ansible_reference_manager:
 
 Wazuh Manager
-===================
+=============
 
 **wazuh_manager_fqdn:**
 
@@ -966,7 +966,7 @@ Wazuh Manager
 
 **wazuh_agent_configs:**
 
-  This store the different settings and profiles for centralized agent configuration via Wazuh Manager.
+  This store the different settings and profiles for centralized agent configuration via the Wazuh manager.
 
   *Example:*
 

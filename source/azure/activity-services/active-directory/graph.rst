@@ -184,10 +184,10 @@ The resulting log from the user creation can be checked in the **Audit logs** se
     :align: center
     :width: 100%
 
-Kibana visualization
-^^^^^^^^^^^^^^^^^^^^
+Wazuh dashboard visualization
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Once the integration is running, the results will be available in the Wazuh UI.
+Once the integration is running, the results will be available in the Wazuh dashboard.
 
 .. thumbnail:: ../../../images/azure/kibana-services-1.png
     :title: AAD

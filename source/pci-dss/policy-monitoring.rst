@@ -122,10 +122,10 @@ In this case, all the logs above are alerts, so we will see an instance of the l
       "location": "rootcheck"
     }
 
-Kibana shows the full information about the alert:
+The Wazuh dashboard shows the full information about the alert:
 
 .. thumbnail:: ../images/pci/policy-monitoring-1.png
-    :title: Alert visualization on Kibana Discover
+    :title: Alert visualization on the Wazuh dashboard
     :align: center
     :width: 100%
 

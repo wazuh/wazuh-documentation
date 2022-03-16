@@ -3,9 +3,9 @@
 .. _ansible-wazuh-manager:
 
 Wazuh Manager
---------------
+-------------
 
-This role will install and configure Wazuh Manager and Wazuh API, there are several variables you can use to customize the installation or configuration, for example:
+This role will install and configure the Wazuh manager and Wazuh API, there are several variables you can use to customize the installation or configuration, for example:
 
 - **wazuh_manager_config_overlay:** enables configuring the manager by overlaying sections of configs on top of defaults (default: ``true``)
 - **wazuh_manager_json_output:** enabling or not JSON output (default: ``yes``)
@@ -104,6 +104,6 @@ Next, run the playbook:
 
   $ ansible-playbook wazuh-manager.yml -e@vars-production.yml
 
-The example above will install Wazuh Manager and Filebeat, Filebeat will be configured to forward data to ``10.1.1.11:9200`` as Elasticsearch node, also it will set various ``agentless`` hosts configurations including their credentials, the Wazuh API and the ``authd`` will be configured as well.
+The example above will install the Wazuh manager and Filebeat, Filebeat will be configured to forward data to ``10.1.1.11:9200`` as Elasticsearch node, also it will set various ``agentless`` hosts configurations including their credentials, the Wazuh API and the ``authd`` will be configured as well.
 
 Please review the :ref:`references <wazuh_ansible_reference_manager>` section to see all variables available for this role.
