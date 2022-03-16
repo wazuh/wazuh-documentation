@@ -198,7 +198,7 @@
     }
 
     th {
-      padding: 8px;
+      padding: 8px 15px;
       font-size: 18px;
       font-weight: 600;
     }
@@ -211,10 +211,10 @@
       position: relative;
 
       th {
-        padding: 8px;
+        padding: 8px 15px;
       }
       td {
-        padding: 8px;
+        padding: 8px 15px;
       }
       p,
       ul {
@@ -227,26 +227,21 @@
   table {
 
     &.docutils:not(.list-rows) {
-      display: block;
       max-width: 100%;
-      margin: -1px 0;
       overflow-x: auto;
-      overflow-y: hidden;
       border-spacing: 0;
       border-collapse: separate;
-      transform: scale(1.005);
-
-      colgroup {
-        display: grid;
+      border: 1px solid;
+      .table-responsive {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
       }
-
-      caption {
-        display: flex;
-      }
-
-      td,
-      th {
-        border: 1px solid;
+      
+      tbody {
+        td, th {
+          border: 1px solid $light-color-table-border;
+        }
       }
 
       th > div,
@@ -277,9 +272,6 @@
         }
         td,
         th {
-          padding-top: 0;
-          padding-bottom: 0;
-          padding-left: 1rem;
           vertical-align: baseline;
           border: none;
         }
@@ -422,10 +414,6 @@ body {
       }
       /* stylelint-disable selector-max-compound-selectors */
       tbody {
-        > :nth-of-type(even) td,
-        > :nth-of-type(even) th {
-          background-color: $light-color-base-space;
-        }
         th {
           background-color: $light-color-base-space;
           border-color: $light-color-table-border;
@@ -435,6 +423,16 @@ body {
         }
       }
       /* stylelint-enable selector-max-compound-selectors */
+      &:not(.release-notes) {
+        tbody {
+          tr:nth-child(even) {
+            td,
+            th {
+              background-color: $light-color-table-alt-background;
+            }
+          }
+        }
+      }
     }
 
     table.docutils:not(.list-rows) {
@@ -451,12 +449,6 @@ body {
     }
     .footnote.brackets {
       border-color: rgba(0, 0, 0, 10%);/* stylelint-disable-line color-function-notation */
-    }
-  }
-  .table-wrapper {
-    background: $light-color-table-border;
-    &.w-header {
-      background-image: linear-gradient(to bottom, $light-color-primary 18%, $light-color-table-border 33%, $light-color-table-border 100%);
     }
   }
 }
@@ -498,10 +490,6 @@ body {
       }
       /* stylelint-disable selector-max-compound-selectors */
       tbody {
-        > :nth-of-type(even) td,
-        > :nth-of-type(even) th {
-          background-color: $dark-color-base-space;
-        }
         th {
           background-color: $dark-color-base-space;
           border-color: $dark-color-table-border;
@@ -510,12 +498,21 @@ body {
           border-color: $dark-color-table-border;
         }
       }
-      /* stylelint-enable selector-max-compound-selectors */
+      /* stylelint-enable selector-max-compound-selectors */      
+      &:not(.release-notes) {
+        tbody {
+          tr:nth-child(even) {
+            td,
+            th {
+              background-color: $dark-color-table-alt-background;
+            }
+          }
+        }
+      }
     }
 
     table.docutils:not(.list-rows) {
       border-color: $dark-color-table-border;
-
       &.release-notes {
         tr {
           & > td:first-child,
@@ -527,13 +524,6 @@ body {
     }
     .footnote.brackets {
       border-color: rgba(255, 255, 255, 10%);/* stylelint-disable-line color-function-notation */
-    }
-  }
-
-  .table-wrapper {
-    background-color: $dark-color-table-border;
-    &.w-header {
-      background-image: linear-gradient(to bottom, $dark-color-primary 18%, $dark-color-table-border 33%, $dark-color-table-border 100%);
     }
   }
 }

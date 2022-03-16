@@ -185,28 +185,25 @@ if ( $('.document') ) {
   });
 
   /* Table adjustments----------------------- ------------------------------- */
-  $('table.docutils:not(.list-rows)').each(function() {
-    /* Table wrapper and table with header */
-    if ( !$(this).hasClass('release-notes') ) {
-      if ( $(this).find('thead').length > 0 ) {
-        $(this).wrap('<div class="table-wrapper w-header"/>');
-      } else {
-        $(this).wrap('<div class="table-wrapper"/>');
-      }
-    }
+  /* Turn tables into responsive table */
+  reponsiveTables();
 
-    /* Table with caption */
-    const caption = $(this).find('caption');
-    if ( caption.length > 0 ) {
-      const parent = $(this).closest('.table-wrapper');
-      if ( parent.length > 0 ) {
-        parent.append(caption);
+  /**
+   * Adds the class table-responsive to tables in #main-content wider than their container.
+   */
+  function reponsiveTables() {
+    $('table.docutils:not(.list-rows)').removeClass('table-responsive');
+    $('table.docutils:not(.list-rows)').each(function() {
+      if ($(this).width() > $('main > div:first-of-type').width()) {
+        $(this).addClass('table-responsive');
       }
-    }
-  });
+    });
+  }
 
   /* Avoid table as layout (accessibility issue) */
   $('table.docutils.list-rows').each(function() {
     $(this).attr('role', 'presentation');
   });
+
+  $(window).on('resize', reponsiveTables);
 }
