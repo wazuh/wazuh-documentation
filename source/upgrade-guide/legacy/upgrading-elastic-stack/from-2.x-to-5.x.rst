@@ -78,13 +78,13 @@ In order to display the Wazuh alerts data, configure the Kibana index pattern:
 
 #. Go to the *Settings* tab and configure a new wildcard:
 
-    .. thumbnail:: ../../../images/installation/kibana-elk2-set.png
+    .. thumbnail:: ../../../images/installation/kibana-elk-settings.png
       :align: center
       :width: 100%
 
 #. Set the ``wazuh-*`` as an index pattern and choose the ``timestamp`` as a time field. Then, click on the ``create`` button:
 
-    .. thumbnail:: ../../../images/installation/kibana-elk2.png
+    .. thumbnail:: ../../../images/installation/kibana-elk-2.png
       :align: center
       :width: 100%
 

@@ -21,7 +21,7 @@ The Wazuh agents are able to collect interesting system information and store it
     - `Windows updates`_
 - `Compatibility matrix`_
 - `Using Syscollector information to trigger alerts`_
-    - `New searchable fields for Kibana`_
+    - `New searchable fields for the Wazuh dashboard`_
 - `Use case: Visualize system inventory in the Wazuh App`_
 
 How it works
@@ -451,17 +451,17 @@ As an example, this rule will be triggered when the interface ``eth0`` of an age
 
     The tag ``<if_sid>221</if_sid>`` is necessary because the events from Syscollector are muted by default with that rule.
 
-When the alerts are triggered they will be displayed in Kibana this way:
+When the alerts are triggered they will be displayed in the Wazuh dashboard this way:
 
-    .. thumbnail:: ../../images/manual/internal-capabilities/syscollector_alerts.png
+    .. thumbnail:: ../../images/manual/internal-capabilities/syscollector-alerts.png
       :title: Information from syscollector for "port" value.
       :align: center
       :width: 80%
 
-New searchable fields for Kibana
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+New searchable fields for the Wazuh dashboard
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In Elasticsearch the fields will be saved as ``data.type.value``. For example, for **Hardware** type, the ``cpu_name`` field can be found as ``data.hardware.cpu_name``
+In the Wazuh indexer the fields will be saved as ``data.type.value``. For example, for **Hardware** type, the ``cpu_name`` field can be found as ``data.hardware.cpu_name``
 
 +----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
 | **Type**             | **Fields**                                                                                                           | **Example**                      |

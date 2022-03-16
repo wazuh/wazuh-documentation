@@ -3,7 +3,7 @@
 .. meta::
   :description: This guide provides the basic information needed to get started with the Wazuh API, including some practical use cases. 
   
-.. _api_getting_started:
+.. _api_getting-started:
 
 Getting started
 ===============

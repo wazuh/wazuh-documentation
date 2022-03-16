@@ -26,7 +26,7 @@ Recommended option to configure policies. You have to activate the following opt
 1) Object Access -> File System
 2) Object Access -> Handle Manipulation
 
-.. thumbnail:: ../../../images/whodata/audit_policies.PNG
+.. thumbnail:: ../../../images/whodata/audit-policies.png
     :title: Audit policies configuration
     :align: center
     :width: 60%
@@ -39,7 +39,7 @@ your host is Windows Vista or Windows Server 2008. To do this, edit the followin
 
 Security Settings -> Local Policies -> Audit Policy -> Audit object access
 
-.. thumbnail:: ../../../images/whodata/audit_policies_old_method.PNG
+.. thumbnail:: ../../../images/whodata/audit-policies-old-method.png
     :title: Audit policies configuration (old method)
     :align: center
     :width: 60%

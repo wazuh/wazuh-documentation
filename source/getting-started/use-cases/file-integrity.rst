@@ -101,19 +101,24 @@ In the *Integrity monitoring* module in the Wazuh dashboard, users can view all 
 
 
     
- .. thumbnail:: /images/getting_started/use-cases/wazuh-use-cases-fim1.png
+ .. thumbnail:: /images/getting-started/use-cases/wazuh-use-cases-fim1.png
      :title: Integrity monitoring dashboard
      :align: center
      :wrap_image: No
 
- .. thumbnail:: /images/getting_started/use-cases/wazuh-use-cases-fim2.png
+ .. thumbnail:: /images/getting-started/use-cases/wazuh-use-cases-fim2.png
      :title: Integrity monitoring
      :align: center 
      :wrap_image: No
 
+<<<<<<< HEAD
  .. thumbnail:: /images/getting_started/use-cases/wazuh-use-cases-fim3.png
      :title: Integrity monitoring inventory
      :wrap_image: No
+=======
+ .. thumbnail:: /images/getting-started/use-cases/wazuh-use-cases-fim3.png
+      :title: Integrity monitoring inventory
+>>>>>>> origin/4.3-rc
 
 
 More information on how Wazuh monitors file integrity can be found in the :ref:`user manual <manual_file_integrity>`.

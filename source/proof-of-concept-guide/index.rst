@@ -15,12 +15,11 @@ Prerequisites
 
 You need to have these components already installed and running to test the POCs.
 
-  * Wazuh manager and Filebeat
-  * Elasticsearch, Kibana, and the Wazuh Kibana plugin
+  * The Wazuh central components: server, indexer, and dashboard
   * A Wazuh agent running on a CentOS 8 system
   * A Wazuh agent running on a Windows system
 
-For an easy installation and setup of the Wazuh manager and Elastic Stack, we recommend downloading our ready-to-use :ref:`OVA <virtual_machine>`, launching an EC2 Instance with our :ref:`AMI <amazon-machine-images>`, or using our :ref:`unattended installation script <unattended_all_in_one>`.
+For an easy installation and setup of the Wazuh central components, we recommend downloading our ready-to-use :ref:`OVA <virtual_machine>`, launching an EC2 Instance with our :ref:`AMI <amazon-machine-images>`, or using our :ref:`unattended installation script <unattended_all_in_one>`.
 
 For more information on how to install the Wazuh components, see the :ref:`Installation guide <installation_guide>`. Note that a Wazuh agent cannot be installed on the same machine as the Wazuh manager.
 

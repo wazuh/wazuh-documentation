@@ -112,13 +112,25 @@ Configuring Filebeat
 
       .. code-block:: console
 
-        # curl -so /etc/filebeat/filebeat.yml https://packages-dev.wazuh.com/resources/4.3/config/filebeat/filebeat.yml
+        # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-packages/4.3/documentation-templates/wazuh/filebeat/filebeat.yml
         
         
-  #. Edit the file ``/etc/filebeat/filebeat.yml``.
+  #. Edit the ``/etc/filebeat/filebeat.yml`` configuration file.
 
       .. include:: /_templates/installations/filebeat/opensearch/configure_filebeat.rst
 
+  #. Create a secrets keystore:
+
+      .. code-block:: console
+     
+        # filebeat keystore create
+
+  #. Add the username and password using the following commands:
+      
+      .. code-block:: console
+
+        # echo admin | filebeat keystore add username --stdin --force
+        # echo admin | filebeat keystore add password --stdin --force    
 
   #. Download the alerts template for the Wazuh indexer.
 

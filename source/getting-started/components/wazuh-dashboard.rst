@@ -28,7 +28,7 @@ Moreover, the application is flexible and allows users to create their own visua
             <div class="row">
                <div class="col-12 col-lg-6">
 
-.. thumbnail::  ../../images/getting_started/module_info_management.png 
+.. thumbnail::  /images/getting-started/module_info_management.png 
     :align: center
     :title: Modules directory
 
@@ -38,7 +38,7 @@ Moreover, the application is flexible and allows users to create their own visua
    <div class="col-12 col-lg-6">
 
 
-.. thumbnail::  ../../images/getting_started/module_policy.png 
+.. thumbnail::  /images/getting-started/module_policy.png 
     :align: center
     :title: Modules directory
 
@@ -52,7 +52,7 @@ Moreover, the application is flexible and allows users to create their own visua
    <div class="row">
       <div class="col-12 col-lg-6">
 
-.. thumbnail::  ../../images/getting_started/module_threat_detection.png 
+.. thumbnail::  /images/getting-started/module_threat_detection.png 
     :align: center
     :title: Modules directory
 
@@ -61,7 +61,7 @@ Moreover, the application is flexible and allows users to create their own visua
    </div> 
       <div class="col-12 col-lg-6">
 
-.. thumbnail::  ../../images/getting_started/module_compliance.png 
+.. thumbnail::  /images/getting-started/module_compliance.png 
     :align: center
     :title: Modules directory
 
@@ -85,7 +85,7 @@ Additionally, agent groups and centralized configuration can be managed and edit
 
 
 
-.. thumbnail::  ../../images/getting_started/dashboard_screenshot_agent.png 
+.. thumbnail::  /images/getting-started/dashboard_screenshot_agent.png 
       :align: center
       :title: Agent dashboard overview
 
@@ -103,11 +103,11 @@ Data analysis visualization gives you full visibility into your cluster infrastr
     :columns: 2
 
 
-    - .. thumbnail::  ../../images/getting_started/dashboard_administration.png 
+    - .. thumbnail::  /images/getting-started/dashboard_administration.png 
         :align: center
         :title: Administration
 
-    - .. thumbnail::  ../../images/getting_started/dashboard_status.png 
+    - .. thumbnail::  /images/getting-started/dashboard_status.png 
         :align: center
         :title: Status and reports
 
@@ -119,7 +119,7 @@ Users can easily access developer tools integrated directly into the Wazuh dashb
 
 The Ruleset Test tool provides an input box for reading sample logs and an output box to visualize the test results. This feature of the Wazuh dashboard allows you to test sample logs directly on the web user interface and see how the ruleset reacts to specific log messages.
 
-.. thumbnail::  ../../images/getting_started/dashboard_ruleset_test.png 
+.. thumbnail::  /images/getting-started/dashboard_ruleset_test.png 
       :align: center
       :title: Ruleset test
 
@@ -131,12 +131,11 @@ The Wazuh dashboard also includes an API Console for users to interact with the 
     :columns: 2
 
 
-    - .. thumbnail::  ../../images/getting_started/dashboard_API_console1.png 
+    - .. thumbnail::  /images/getting-started/dashboard_API_console1.png 
             :align: center
             :title: API Console
 
 
-    - .. thumbnail::  ../../images/getting_started/dashboard_API_console2.png 
+    - .. thumbnail::  /images/getting-started/dashboard_API_console2.png 
             :align: center
             :title: API Console
-

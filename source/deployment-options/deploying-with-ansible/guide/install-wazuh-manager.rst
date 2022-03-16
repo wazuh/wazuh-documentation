@@ -5,8 +5,8 @@
 	
 .. _wazuh_ansible_wazuh_manager:
 
-Install Wazuh Manager
-=====================
+Install the Wazuh manager
+=========================
 
 Once the Ansible repository has been cloned, we proceed to install the Wazuh server, that is, we will install a Wazuh manager, Wazuh API and Filebeat.
 
@@ -100,7 +100,7 @@ And we can see the preconfigured playbooks we have.
 	├── wazuh-opendistro-kibana.yml
 	└── wazuh-opendistro.yml
 
-Using the **Wazuh Manager** role, we will install and configure Wazuh Manager and Wazuh API. There are several variables we can use to customize the installation or configuration. To consult the default configuration go to this :ref:`section <wazuh_ansible_reference>`.
+Using the **Wazuh manager** role, we will install and configure the Wazuh manager and Wazuh API. There are several variables we can use to customize the installation or configuration. To consult the default configuration go to this :ref:`section <wazuh_ansible_reference>`.
 
 If we want to change the default configuration we can change the ``/etc/ansible/roles/wazuh-ansible/roles/wazuh/ansible-wazuh-manager/defaults/main.yml`` file directly or we can create another YAML file only with the content we want to change the configuration. If we would like to do this, we can find more information at :ref:`Wazuh Manager <ansible-wazuh-manager>` role, where we can also see how to change the default configuration of agentless and Wazuh API.
 

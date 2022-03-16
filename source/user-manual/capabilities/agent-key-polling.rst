@@ -24,7 +24,7 @@ To do this, it is necessary to create a binary or script in any language that ca
 
 Below you can see the flow diagram:
 
-.. thumbnail:: ../../images/manual/keypolling/key-polling-flow.png
+.. thumbnail:: ../../images/manual/key-polling/key-polling-flow.png
   :title: Agent key polling module flow diagram
   :align: center
   :width: 100%
@@ -49,7 +49,7 @@ When polling by IP address, the manager will retrieve the agent key by querying 
 
   ./agent_key_pull.py ip 192.168.1.100
 
-.. thumbnail:: ../../images/manual/keypolling/keypolling1.png
+.. thumbnail:: ../../images/manual/key-polling/key-polling-1.png
   :title: No socket method: one program call per request.
   :align: center
   :width: 100%
@@ -61,7 +61,7 @@ When the ``socket`` tag is specified the module will send the parameters through
 
 The format in which the program will receive the data is ``option:value``, where option can be ``id`` or ``ip`` depending on the polling type.
 
-.. thumbnail:: ../../images/manual/keypolling/keypolling0.png
+.. thumbnail:: ../../images/manual/key-polling/key-polling-0.png
   :title: Method with socket: requests directly to the socket.
   :align: center
   :width: 100%
