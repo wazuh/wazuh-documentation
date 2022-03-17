@@ -176,11 +176,18 @@ Running the script provides a result similar to the following:
     Getting agents status summary:
     {
        "data": {
-          "active": 1,
-          "disconnected": 0,
-          "never_connected": 0,
-          "pending": 0,
-          "total": 1
+           "connection": {
+               "active": 1,
+               "disconnected": 0,
+               "never_connected": 0,
+               "pending": 0,
+               "total": 1
+           },
+           "configuration": {
+               "synced": 1,
+               "not_synced": 0,
+               "total": 1
+           }
        },
        "error": 0
     }
@@ -206,7 +213,7 @@ Running the script provides a result similar to the following:
 
     echo -e "\n\nGetting /agents/summary/os:\n"
 
-    curl -k -X GET "https://localhost:55000/agents/summary/status?pretty=true" -H  "Authorization: Bearer $TOKEN"
+    curl -k -X GET "https://localhost:55000/agents/summary/os?pretty=true" -H  "Authorization: Bearer $TOKEN"
 
     echo -e "\n\nEnd of the script.\n"
 
