@@ -196,29 +196,29 @@ The following is an example of how a centralized configuration can be done.
 
 4. Confirm that the agent received the configuration:
 
-    The ``agent_groups`` tool or the Wazuh API endpoint :api-ref:`GET /agents/{agent_id}/group/is_sync <operation/api.controllers.agent_controller.get_sync_agent>` can show whether the group is synchronized in the agent:
+    The ``agent_groups`` tool or the Wazuh API endpoint :api-ref:`GET /agents <operation/api.controllers.agent_controller.get_agents>` can show whether the group configuration is synchronized in the agent or not:
 
     .. code-block:: console
 
-        # curl -k -X GET "https://localhost:55000/agents/001/group/is_sync?pretty=true" -H  "Authorization: Bearer $TOKEN"
+        # curl -k -X GET "https://localhost:55000/agents?agents_list=001&select=group_config_status&pretty=true" -H  "Authorization: Bearer $TOKEN"
 
     .. code-block:: json
         :class: output
 
         {
-            "error": 0,
-            "data": {
-                "affected_items": [
-                    {
-                        "id": "001",
-                        "synced": true
-                    }
-                ],
-                "total_affected_items": 1,
-                "total_failed_items": 0,
-                "failed_items": []
-            },
-            "message": "Sync info was returned for all selected agents"
+           "data": {
+              "affected_items": [
+                 {
+                    "group_config_status": "synced",
+                    "id": "001"
+                 }
+              ],
+              "total_affected_items": 1,
+              "total_failed_items": 0,
+              "failed_items": []
+           },
+           "message": "All selected agents information was returned",
+           "error": 0
         }
 
     .. code-block:: console
