@@ -44,16 +44,16 @@
   }
 
   .align-center {
-    display: inherit;
+    display: table;
     margin-right: auto;
     margin-left: auto;
   }
   .align-left {
-    display: inherit;
+    display: table;
     margin-right: auto;
   }
   .align-right {
-    display: inherit;
+    display: table;
     margin-left: auto;
   }
 
@@ -281,6 +281,11 @@
           margin-top: 1rem;
           margin-bottom: 1rem;
         }
+      }
+      
+      /* Disable Sphinx's default col width calcualtions */
+      &:not(.colwidths-given) col {
+        width: auto !important;
       }
     }
 
