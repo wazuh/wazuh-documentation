@@ -12,7 +12,7 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13.2 to Wazuh 
 
 .. note:: Root user privileges are required to execute all the commands described below.
 
-#. Disable shard allocation: during upgrade we do not want any shard movement as the cluster will be taken down.
+#. Disable shard allocation: during upgrade we do not want any shard movement as the cluster will be taken down. In the commands below ``127.0.0.1`` IP address is used. If Elasticsearch is bound to a specific IP address, replace ``127.0.0.1`` with your Elasticsearch IP address. Replace ``<username>:<password>`` with your Elasticsearch username and password. 
 
    .. code-block:: console
 
@@ -86,7 +86,7 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13.2 to Wazuh 
        cp /etc/elasticsearch/certs/admin-key.pem /etc/wazuh-indexer/certs/admin-key.pem
        cp /etc/elasticsearch/certs/root-ca.pem /etc/wazuh-indexer/certs/root-ca.pem
        chown wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/certs/*
-       chmod 0600  /etc/wazuh-indexer/certs/* 
+       chmod 0600 /etc/wazuh-indexer/certs/* 
 
 
 #. Move your data. 
@@ -99,56 +99,33 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13.2 to Wazuh 
       chown wazuh-indexer:wazuh-indexer -R /var/log/wazuh-indexer/
       chown wazuh-indexer:wazuh-indexer -R /var/lib/wazuh-indexer/
 
-#. Edit ``/etc/wazuh-indexer/opensearch.yml``      
+#. Port your settings from ``/etc/elasticsearch/elasticsearch.yml`` to ``/etc/wazuh-indexer/opensearch.yml``. Most settings use the same names. At a minimum, specify ``cluster.name``, ``node.name``, ``discovery.seed_hosts``, and ``cluster.initial_master_nodes``.
 
-   .. code-block:: yaml
-      :emphasize-lines: 2,4,19,20,22,23,31,35
+    #. Replace the certificates names ``demo-indexer.pem`` and ``demo-indexer-key.pem`` with ``wazuh-indexer.pem`` and ``wazuh-indexer-key.pem`` respectively.
 
-       network.host: "0.0.0.0"
-       node.name: "node-1"
-       cluster.initial_master_nodes:
-       - "node-1"
-       #- "node-2"
-       #- "node-3"
-       cluster.name: "wazuh-cluster"
-       #discovery.seed_hosts:
-       #  - "node-1-ip"
-       #  - "node-2-ip"
-       #  - "node-3-ip"
-       node.max_local_storage_nodes: "3"
-       path.data: /var/lib/wazuh-indexer
-       path.logs: /var/log/wazuh-indexer
-       
-       
-       plugins.security.ssl.http.pemcert_filepath: /etc/wazuh-indexer/certs/wazuh-indexer.pem
-       plugins.security.ssl.http.pemkey_filepath: /etc/wazuh-indexer/certs/wazuh-indexer-key.pem
-       plugins.security.ssl.http.pemtrustedcas_filepath: /etc/wazuh-indexer/certs/root-ca.pem
-       plugins.security.ssl.transport.pemcert_filepath: /etc/wazuh-indexer/certs/wazuh-indexer.pem
-       plugins.security.ssl.transport.pemkey_filepath: /etc/wazuh-indexer/certs/wazuh-indexer-key.pem
-       plugins.security.ssl.transport.pemtrustedcas_filepath: /etc/wazuh-indexer/certs/root-ca.pem
-       plugins.security.ssl.http.enabled: true
-       plugins.security.ssl.transport.enforce_hostname_verification: false
-       plugins.security.ssl.transport.resolve_hostname: false
-       
-       plugins.security.audit.type: internal_opensearch
-       plugins.security.authcz.admin_dn:
-       - "CN=admin,OU=Docu,O=Wazuh,L=California,C=US"
-       plugins.security.check_snapshot_restore_write_privileges: true
-       plugins.security.enable_snapshot_restore_privilege: true
-       plugins.security.nodes_dn:
-       - "CN=node-1,OU=Docu,O=Wazuh,L=California,C=US"
-       #- "CN=node-2,OU=Docu,O=Wazuh,L=California,C=US"
-       #- "CN=node-3,OU=Docu,O=Wazuh,L=California,C=US"
-       plugins.security.restapi.roles_enabled:
-       - "all_access"
-       - "security_rest_api_access"
-       
-       plugins.security.system_indices.enabled: true
-       plugins.security.system_indices.indices: [".opendistro-alerting-config", ".opendistro-alerting-alert*", ".opendistro-anomaly-results*", ".opendistro-anomaly-detector*", ".opendistro-anomaly-checkpoints", ".opendistro-anomaly-detection-state", ".opendistro-reports-*", ".opendistro-notifications-*", ".opendistro-notebooks", ".opensearch-observability", ".opendistro-asynchronous-search-response*", ".replication-metadata-store"]
-       
-       ### Option to allow Filebeat-oss 7.10.2 to work ###
-       compatibility.override_main_response_version: true
+       .. code-block:: yaml
+         :emphasize-lines: 1,2,4,5
+         
+          plugins.security.ssl.http.pemcert_filepath: /etc/wazuh-indexer/certs/wazuh-indexer.pem
+          plugins.security.ssl.http.pemkey_filepath: /etc/wazuh-indexer/certs/wazuh-indexer-key.pem
+          plugins.security.ssl.http.pemtrustedcas_filepath: /etc/wazuh-indexer/certs/root-ca.pem
+          plugins.security.ssl.transport.pemcert_filepath: /etc/wazuh-indexer/certs/wazuh-indexer.pem
+          plugins.security.ssl.transport.pemkey_filepath: /etc/wazuh-indexer/certs/wazuh-indexer-key.pem
+          plugins.security.ssl.transport.pemtrustedcas_filepath: /etc/wazuh-indexer/certs/root-ca.pem
+          plugins.security.ssl.http.enabled: true
+          plugins.security.ssl.transport.enforce_hostname_verification: false
+          plugins.security.ssl.transport.resolve_hostname: false
 
+    #. Edit the certificate information. If you are using the default Wazuh certificates, change the Organizational Unit (OU) from ``Wazuh`` to ``Docu``.  
+      
+       .. code-block:: yaml
+         :emphasize-lines: 2
+ 
+          plugins.security.nodes_dn:
+          - "CN=node-1,OU=Docu,O=Wazuh,L=California,C=US"
+          #- "CN=node-2,OU=Wazuh,O=Wazuh,L=California,C=US"
+          #- "CN=node-3,OU=Wazuh,O=Wazuh,L=California,C=US"      
+   
 #. Start and enable the Wazuh indexer.
 
    .. include:: /_templates/installations/indexer/common/enable_indexer.rst
@@ -238,6 +215,6 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13.2 to Wazuh 
 
 
 
-You did it! Your cluster is now upgraded via a Restart Upgrade. 
+Your cluster is now upgraded via a Restart Upgrade. If you want to migrate to Wazuh dashboard, see the :doc:`wazuh-indexer` section.
 
 
