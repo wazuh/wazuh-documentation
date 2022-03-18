@@ -47,6 +47,10 @@
   .no-margins {
     margin: 0;
   }
+  
+  img {
+    border: 30px solid $color-img-border;
+  }
 
   strong {
     font-weight: 600;
