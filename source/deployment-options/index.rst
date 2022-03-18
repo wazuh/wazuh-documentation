@@ -81,7 +81,7 @@ If the Wazuh central components are already installed in your environment, selec
       <a class="link-boxes-link" href="/installation-guide/wazuh-agent/wazuh-agent-package-windows.html">
         <p class="link-boxes-label">Windows</p>
 
-.. image:: /images/installation/windows_icon.png
+.. image:: /images/installation/windows-logo.png
       :align: center
 
 .. raw:: html
@@ -92,7 +92,7 @@ If the Wazuh central components are already installed in your environment, selec
       <a class="link-boxes-link" href="/installation-guide/wazuh-agent/wazuh-agent-package-macos.html">
         <p class="link-boxes-label">macOS</p>
 
-.. image:: /images/installation/macOS_logo.png
+.. image:: /images/installation/macOS-logo.png
       :align: center
 
 .. raw:: html
@@ -161,9 +161,9 @@ These alternatives guide you to install the Wazuh central components along with 
     amazon-machine-images/amazon-machine-images
     docker/index 
     deploying-with-kubernetes/index
-    deploying-with-ansible/index
-    deploying-with-puppet/index
     offline-installation
     wazuh-from-sources/index
     elastic-stack/index
     splunk/index
+    deploying-with-ansible/index
+    deploying-with-puppet/index

@@ -166,7 +166,7 @@ The first line ``hosts:`` indicates the machines where the commands below will b
 
 The ``roles:`` section indicates the roles that will be executed on the hosts mentioned above. Specifically, we are going to install the role of wazuh-agent.
 
-We can also see a list of variables ``wazuh_managers:`` for the connection with Wazuh manager. This list overwrites the default configuration.
+We can also see a list of variables ``wazuh_managers:`` for the connection with the Wazuh manager. This list overwrites the default configuration.
 
 Finally we see another list of variables ``wazuh_agent_authd`` for the agent registration, which also overwrites the default configuration.
 

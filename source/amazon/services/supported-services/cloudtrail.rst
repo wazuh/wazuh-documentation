@@ -120,7 +120,7 @@ Below are some use cases for Wazuh rules built for EC2.
 Run a new instance in EC2
 +++++++++++++++++++++++++
 
-When an user runs a new instance in EC2, an AWS event is generated. As previously mentioned, the log message is collected by the Wazuh agent, and forwarded to the manager for analysis. The following alert will be shown in Kibana, it shows data such as instance type, the user who created it or creation date:
+When an user runs a new instance in EC2, an AWS event is generated. As previously mentioned, the log message is collected by the Wazuh agent, and forwarded to the manager for analysis. The following alert will be shown in the Wazuh dashboard, it shows data such as instance type, the user who created it or creation date:
 
 .. thumbnail:: ../../../images/aws/aws-ec2-1.png
   :align: center
@@ -135,7 +135,7 @@ When an user tries to run an instance **without relevant permissions**, then the
 Start instances in EC2
 ++++++++++++++++++++++
 
-When an instance in EC2 is started, the following alert will be shown on Kibana, it shows information such as the instance id and the user who started it:
+When an instance in EC2 is started, the following alert will be shown on the Wazuh dashboard, it shows information such as the instance id and the user who started it:
 
 .. thumbnail:: ../../../images/aws/aws-ec2-3.png
   :align: center
@@ -165,7 +165,7 @@ If an user tries to stop instances **without relevant permissions**, the followi
 Create Security Groups in EC2
 +++++++++++++++++++++++++++++
 
-When a new security group is created, the following alert is shown on Kibana. It shows information such as the user who created it and information about the security group:
+When a new security group is created, the following alert is shown on the Wazuh dashboard. It shows information such as the user who created it and information about the security group:
 
 .. thumbnail:: ../../../images/aws/aws-ec2-7.png
   :align: center
@@ -199,7 +199,7 @@ Below are some use cases for Wazuh alerts built used for IAM events.
 Create user account
 +++++++++++++++++++
 
-When we create a new user account in IAM, an AWS event is generated. As previously mentioned, the log message is collected by the Wazuh agent, and forwarded to the manager for analysis. When an user account is created, the following alert will appear on Kibana. You can see the username of the created user and who created it:
+When we create a new user account in IAM, an AWS event is generated. As previously mentioned, the log message is collected by the Wazuh agent, and forwarded to the manager for analysis. When an user account is created, the following alert will appear on the Wazuh dashboard. You can see the username of the created user and who created it:
 
 .. thumbnail:: ../../../images/aws/aws-login-1.png
   :align: center
@@ -208,7 +208,7 @@ When we create a new user account in IAM, an AWS event is generated. As previous
 Create user account without permissions
 +++++++++++++++++++++++++++++++++++++++
 
-If an unauthorized user attempts to create new users, the following alert will be shown in kibana. It will show you which user has tried to create an user account and the username it tried to create:
+If an unauthorized user attempts to create new users, the following alert will be shown in the Wazuh dashboard. It will show you which user has tried to create an user account and the username it tried to create:
 
 .. thumbnail:: ../../../images/aws/aws-login-2.png
   :align: center
@@ -217,7 +217,7 @@ If an unauthorized user attempts to create new users, the following alert will b
 User login failed
 +++++++++++++++++
 
-When an user tries to log in with an invalid password, the following alert will be shown in Kibana. There will be shown data such as the user who tried to login or the browser it was using:
+When an user tries to log in with an invalid password, the following alert will be shown in the Wazuh dashboard. There will be shown data such as the user who tried to login or the browser it was using:
 
 .. thumbnail:: ../../../images/aws/aws-login-3.png
   :align: center
@@ -235,13 +235,13 @@ When more than 4 authentication failures occur in a **360** second time window, 
 Login success
 +++++++++++++
 
-After a successful login, the following event will be shown in Kibana. It shows the user who logged in, the browser it used and many other useful information:
+After a successful login, the following event will be shown in the Wazuh dashboard. It shows the user who logged in, the browser it used and many other useful information:
 
 .. thumbnail:: ../../../images/aws/aws-login-5.png
   :align: center
   :width: 70%
 
-And here are the Kibana dashboards for IAM events:
+And here are the Wazuh dashboard charts for IAM events:
 
 +----------------------------------------------------------+------------------------------------------------------------+
 | Pie Chart                                                | Stacked Groups                                             |

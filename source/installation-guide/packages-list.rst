@@ -19,8 +19,8 @@ This download page contains packages required for the Wazuh installation with th
    - `AIX`_
    - `HP-UX`_
    
-- `Elasticsearch`_
-- `Kibana`_
+- `Wazuh indexer`_
+- `Wazuh dashboard`_
 - `Wazuh Kibana plugin`_
 - `Wazuh Splunk app`_
 - `Filebeat`_
@@ -211,7 +211,7 @@ AIX
 +-----------------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Version         | Architecture | Package                                                                                                                                                                                                                                     |
 +=================+==============+=============================================================================================================================================================================================================================================+
-| 5.3 or later    |    PowerPC   | `wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_AIX|.aix.ppc.rpm <https://packages.wazuh.com/|CURRENT_MAJOR|/aix/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_AIX|.aix.ppc.rpm>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_AIX|.aix.ppc.rpm.sha512>`__)                          |
+| 6 or later      |    PowerPC   | `wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_AIX|.aix.ppc.rpm <https://packages.wazuh.com/|CURRENT_MAJOR|/aix/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_AIX|.aix.ppc.rpm>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_AIX|.aix.ppc.rpm.sha512>`__)                          |
 +-----------------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 HP-UX
@@ -223,28 +223,37 @@ HP-UX
 +-----------------+--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
-Elasticsearch
+Wazuh indexer
 -------------
 
-+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Package type | Package                                                                                                                                                                                                                                                                                                      |
-+==============+==============================================================================================================================================================================================================================================================================================================+
-|     RPM      | `opendistroforelasticsearch-|OPEN_DISTRO_LATEST|.rpm <https://packages.wazuh.com/4.x/yum/opendistroforelasticsearch-|OPEN_DISTRO_LATEST|-linux-x64.rpm>`_ (`sha512 <https://packages.wazuh.com/4.x/checksums/opendistro/|OPEN_DISTRO_LATEST|/opendistroforelasticsearch-|OPEN_DISTRO_LATEST|-linux-x64.rpm.sha512>`__)                                               |
-+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|     DEB      | `opendistroforelasticsearch-|OPEN_DISTRO_LATEST|.deb <https://packages.wazuh.com/4.x/apt/pool/main/o/opendistroforelasticsearch/opendistroforelasticsearch_|OPEN_DISTRO_LATEST|-1_amd64.deb>`_ (`sha512 <https://packages.wazuh.com/4.x/checksums/opendistro/|OPEN_DISTRO_LATEST|/opendistroforelasticsearch_|OPEN_DISTRO_LATEST|-1_amd64.deb.sha512>`__)            |
-+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+.. |IndexerRPM| replace:: `wazuh-indexer-|WAZUH_INDEXER_CURRENT|-|WAZUH_INDEXER_CURRENT_REV|.|WAZUH_INDEXER_x64_RPM|.rpm <https://packages.wazuh.com/4.x/yum/wazuh-indexer-|WAZUH_INDEXER_CURRENT|-|WAZUH_INDEXER_CURRENT_REV|.|WAZUH_INDEXER_x64_RPM|.rpm>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_INDEXER_CURRENT|/wazuh-indexer-|WAZUH_INDEXER_CURRENT|-|WAZUH_INDEXER_CURRENT_REV|.|WAZUH_INDEXER_x64_RPM|.rpm.sha512>`__)
+
+.. |IndexerDEB| replace:: `wazuh-indexer_|WAZUH_INDEXER_CURRENT|-|WAZUH_INDEXER_CURRENT_REV|_|WAZUH_INDEXER_x64_DEB|.deb <https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-indexer/wazuh-indexer_|WAZUH_INDEXER_CURRENT|-|WAZUH_INDEXER_CURRENT_REV|_|WAZUH_INDEXER_x64_DEB|.deb>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_INDEXER_CURRENT|/wazuh-indexer_|WAZUH_INDEXER_CURRENT|-|WAZUH_INDEXER_CURRENT_REV|_|WAZUH_INDEXER_x64_DEB|.deb.sha512>`__)
 
 
-Kibana
++--------------+------------------+
+| Package type | Package          |
++==============+==================+
+|     RPM      | |IndexerRPM|     |
++--------------+------------------+
+|     DEB      | |IndexerDEB|     |
++--------------+------------------+
+
+
+Wazuh dashboard
 ---------------
 
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Package type | Package                                                                                                                                                                                                                                                                                                                                                     |
-+==============+=============================================================================================================================================================================================================================================================================================================================================================+
-|     RPM      | `opendistroforelasticsearch-kibana-|OPEN_DISTRO_LATEST|.rpm <https://packages.wazuh.com/4.x/yum/opendistroforelasticsearch-kibana-|OPEN_DISTRO_LATEST|-linux-x64.rpm>`_ (`sha512 <https://packages.wazuh.com/4.x/checksums/opendistro/|OPEN_DISTRO_LATEST|/opendistroforelasticsearch-kibana-|OPEN_DISTRO_LATEST|-linux-x64.rpm.sha512>`__)                                                                         |
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|     DEB      | `opendistroforelasticsearch-kibana-|OPEN_DISTRO_LATEST|.deb <https://packages.wazuh.com/4.x/apt/pool/main/o/opendistroforelasticsearch-kibana/opendistroforelasticsearch-kibana_|OPEN_DISTRO_LATEST|_amd64.deb>`_ (`sha512 <https://packages.wazuh.com/4.x/checksums/opendistro/|OPEN_DISTRO_LATEST|/opendistroforelasticsearch-kibana_|OPEN_DISTRO_LATEST|_amd64.deb.sha512>`__)                                   |
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+.. |DashboardRPM| replace:: `wazuh-dashboard-|WAZUH_DASHBOARD_CURRENT|-|WAZUH_DASHBOARD_CURRENT_REV|.|WAZUH_DASHBOARD_x64_RPM|.rpm <https://packages.wazuh.com/4.x/yum/wazuh-dashboard-|WAZUH_DASHBOARD_CURRENT|-|WAZUH_DASHBOARD_CURRENT_REV|.|WAZUH_DASHBOARD_x64_RPM|.rpm>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_DASHBOARD_CURRENT|/wazuh-dashboard-|WAZUH_DASHBOARD_CURRENT|-|WAZUH_DASHBOARD_CURRENT_REV|.|WAZUH_DASHBOARD_x64_RPM|.rpm.sha512>`__)
+
+.. |DashboardDEB| replace:: `wazuh-dashboard_|WAZUH_DASHBOARD_CURRENT|-|WAZUH_DASHBOARD_CURRENT_REV|_|WAZUH_DASHBOARD_x64_DEB|.deb <https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-dashboard/wazuh-dashboard_|WAZUH_DASHBOARD_CURRENT|-|WAZUH_DASHBOARD_CURRENT_REV|_|WAZUH_DASHBOARD_x64_DEB|.deb>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_DASHBOARD_CURRENT|/wazuh-dashboard_|WAZUH_DASHBOARD_CURRENT|-|WAZUH_DASHBOARD_CURRENT_REV|_|WAZUH_DASHBOARD_x64_DEB|.deb.sha512>`__)
+
++--------------+------------------+
+| Package type | Package          |
++==============+==================+
+|     RPM      | |DashboardRPM|   |
++--------------+------------------+
+|     DEB      | |DashboardDEB|   |
++--------------+------------------+
 
 Wazuh Kibana plugin
 -------------------
@@ -254,14 +263,11 @@ Wazuh Kibana plugin
 +===========================+=====================+===============+=============================================================================================================================================================================================================================================================+
 |   |ELASTICSEARCH_LATEST|                  |  |OPEN_DISTRO_LATEST|             |     |WAZUH_LATEST|     | `wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|-1.zip>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|-1.zip.sha512>`__)                                      |  
 +---------------------------+---------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   7.11.2                  |                     |     |WAZUH_LATEST|     | `wazuh_kibana-|WAZUH_LATEST|_7.11.2.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_7.11.2-1.zip>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_7.11.2-1.zip.sha512>`__)                                      |   
+|   7.16.3                  |                     |     |WAZUH_LATEST|     | `wazuh_kibana-|WAZUH_LATEST|_7.11.2.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_7.16.3-1.zip>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_7.16.3-1.zip.sha512>`__)                                      |   
 +---------------------------+---------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   7.12.1                  |                     |     |WAZUH_LATEST|     | `wazuh_kibana-|WAZUH_LATEST|_7.12.1.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_7.12.1-1.zip>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_7.12.1-1.zip.sha512>`__)                                      |   
+|   7.17.0                  |                     |     |WAZUH_LATEST|     | `wazuh_kibana-|WAZUH_LATEST|_7.12.1.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_7.17.0-1.zip>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_7.17.0-1.zip.sha512>`__)                                      |   
 +---------------------------+---------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   7.13.4                  |                     |     |WAZUH_LATEST|     | `wazuh_kibana-|WAZUH_LATEST|_7.13.4.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_7.13.4-1.zip>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_7.13.4-1.zip.sha512>`__)                                      |   
-+---------------------------+---------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   7.14.2                  |                     |     |WAZUH_LATEST|     | `wazuh_kibana-|WAZUH_LATEST|_7.14.2.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_7.14.2-1.zip>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_7.14.2-1.zip.sha512>`__)                                      |   
-+---------------------------+---------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
 
 For a complete list of the available versions, see the `Wazuh Kibana plugin compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/tree/v4.2.5-7.10.2#wazuh---kibana---open-distro-version-compatibility-matrix>`_. 
 

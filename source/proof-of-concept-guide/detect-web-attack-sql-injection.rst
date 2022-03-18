@@ -40,12 +40,12 @@ Steps to generate the alerts
 Query the alerts
 ----------------
 
-You can visualize the alert data in the Wazuh Kibana plugin. To do this, go to the **Security events** module and add the filters in the search bar to query the alerts.
+You can visualize the alert data in the Wazuh dashboard. To do this, go to the **Security events** module and add the filters in the search bar to query the alerts.
 
 * ``rule.id:31103``
 
 
-.. thumbnail:: ../images/poc/Detecting_an_SQL_Injection_attack.png
+.. thumbnail:: ../images/poc/Detecting-an-SQL-Injection-attack.png
           :title: Detecting an SQL Injection attack
           :align: center
           :wrap_image: No

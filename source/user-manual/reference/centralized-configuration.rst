@@ -296,7 +296,7 @@ Whether for any reason you don't want to apply the shared configuration in a spe
 Download configuration files from remote location
 -------------------------------------------------
 
-Wazuh manager has the capability to download configuration files like ``merged.mg`` as well as other files to be merged for the groups that you want to.
+The Wazuh manager has the capability to download configuration files like ``merged.mg`` as well as other files to be merged for the groups that you want to.
 
 To use this feature, we need to put a yaml file named ``files.yml`` under the directory ``/var/ossec/etc/shared/``. When the **manager** starts, it will read and parse the file.
 

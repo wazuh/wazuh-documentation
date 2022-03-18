@@ -8,7 +8,7 @@ How it works
 
 The below image illustrates how events flow through the Wazuh environment.
 
-.. thumbnail:: ../../../images/manual/log_analysis/log-analysis-flow.png
+.. thumbnail:: ../../../images/manual/log-analysis/log-analysis-flow.png
     :title: Log analysis flow
     :align: center
     :width: 100%

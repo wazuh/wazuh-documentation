@@ -104,7 +104,7 @@ Now, we attempt to connect to the agent by SSH several times using an invalid us
 
 After 8 attempts, we can see in the manager how the rule is fired:
 
-.. thumbnail:: ../../../../images/manual/automatic-remediation/5712_sshd_brute_force.png
+.. thumbnail:: ../../../../images/manual/automatic-remediation/5712-sshd-brute-force.png
   :title: Rule 5712 - SSHD brute force trying to get access to the system
   :align: center
   :width: 100%
@@ -138,7 +138,7 @@ Every agent has a log file at ``/var/ossec/logs/active-responses.log`` where the
 
 When the active response is triggered we can see the corresponding alert: 
 
-.. thumbnail:: ../../../../images/manual/automatic-remediation/561_host_blocked_by_firewall_drop.png
+.. thumbnail:: ../../../../images/manual/automatic-remediation/561-host-blocked-by-firewall-drop.png
   :title: Rule 561 - host blocked by firewall drop 
   :align: center
   :width: 100%

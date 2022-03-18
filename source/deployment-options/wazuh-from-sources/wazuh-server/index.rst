@@ -11,8 +11,8 @@ Installing Wazuh server from sources
 The Wazuh server collects and analyzes data from deployed agents. It runs the Wazuh manager, the Wazuh API and Filebeat. Alternatively, the Wazuh manager package compatible versions can be checked or downloaded directly :ref:`here <packages>`.
 
 
-Installing Wazuh manager
-~~~~~~~~~~~~~~~~~~~~~~~~
+Installing the Wazuh manager
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. note:: CMake 3.12.4 is the minimal library version required to build the Wazuh server solution.
 
@@ -50,8 +50,9 @@ Installing Wazuh manager
 
           .. code-block:: console
 
-            # yum install make cmake gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool openssl-devel cmake
-            # rpm -i $(rpm -q libstdc++-devel --queryformat "http://mirror.centos.org/centos/8/PowerTools/x86_64/os/Packages/libstdc++-static-%{VERSION}-%{RELEASE}.%{arch}.rpm\n")
+            # yum install make gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool openssl-devel cmake yum-utils -y
+            # yum-config-manager --enable powertools
+            # yum install libstdc++-static -y
 
 
           **Optional** CMake 3.18 installation from sources
@@ -70,10 +71,10 @@ Installing Wazuh manager
 
     .. code-block:: console
 
-      # apt-get install python gcc g++ make libc6-dev curl policycoreutils automake autoconf libtool
+      # apt-get install python gcc g++ make libc6-dev curl policycoreutils automake autoconf libtool cmake
 
 
-    CMake 3.18 installation
+    **Optional** CMake 3.18 installation
 
     .. code-block:: console
 
@@ -117,20 +118,41 @@ To install the required dependencies to build the python interpreter, follow the
 
   .. group-tab:: Yum
 
-    .. code-block:: console
+    .. tabs::
 
-        # yum install epel-release yum-utils -y
-        # yum-builddep python34 -y
+    	.. tab:: CentOS 6/7
 
+  	    .. code-block:: console
+
+      		# yum install epel-release yum-utils -y
+      		# yum-builddep python34 -y
+
+    	.. tab:: CentOS 8
+
+  	    .. code-block:: console
+
+      		# yum-builddep python3 -y
 
   .. group-tab:: APT
 
+    .. tabs::
 
-    .. code-block:: console
+      .. tab:: Ubuntu
 
-        # sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
-        # apt-get update
-        # apt-get build-dep python3.9 -y
+      	.. code-block:: console
+
+      	    # sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
+      	    # apt-get update
+      	    # apt-get build-dep python3.9 -y
+
+      .. tab:: Debian
+
+      	.. code-block:: console
+
+      	    # apt-get install lsb-release -y
+            # echo "deb-src http://deb.debian.org/debian $(lsb_release -cs) main" >> /etc/apt/sources.list
+      	    # apt-get update
+      	    # apt-get build-dep python3.9 -y
 
 
   .. group-tab:: ZYpp
@@ -138,9 +160,12 @@ To install the required dependencies to build the python interpreter, follow the
 
     .. code-block:: console
 
-          # zypper install epel-release yum-utils -y
-          # zypper-builddep python34 -y
+        # zypper install epel-release yum-utils -y
+        # zypper-builddep python34 -y
 
+  .. group-tab:: Pacman
+
+        Arch-Linux-based operating systems do not require any additional steps.
 
 
 .. note:: The Python version from the previous command may change depending on the OS used to build the binaries. More information in `Install dependencies <https://devguide.python.org/setup/#install-dependencies>`_.
@@ -211,7 +236,7 @@ Filebeat is a data shipping tool that is installed on the Wazuh server to secure
 Uninstall
 ~~~~~~~~~
 
-To uninstall Wazuh manager, set WAZUH_HOME with the current installation path:
+To uninstall the Wazuh manager, set WAZUH_HOME with the current installation path:
 
     .. code-block:: console
 

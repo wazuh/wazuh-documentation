@@ -5,7 +5,7 @@
 Roles
 =====
 
-You can use these roles to deploy Elastic Stack components, Wazuh Manager and Wazuh Agents, first clone our `GitHub repository <https://github.com/wazuh/wazuh-ansible>`_ directly to your Ansible roles folder:
+You can use these roles to deploy Elastic Stack components, the Wazuh manager and Wazuh Agents, first clone our `GitHub repository <https://github.com/wazuh/wazuh-ansible>`_ directly to your Ansible roles folder:
 
   .. code-block:: yaml
 

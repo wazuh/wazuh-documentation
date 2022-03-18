@@ -100,7 +100,7 @@ Expand the output to see an example of an alert generated when an AWS security g
 
 Example of AWS dashboard:
 
-.. thumbnail:: /images/getting_started/use-cases/wazuh-use-cases-cloud-geo.png
+.. thumbnail:: /images/getting-started/use-cases/wazuh-use-cases-cloud-geo.png
    :title: AWS dashboard
    :align: center
    :width: 100%
