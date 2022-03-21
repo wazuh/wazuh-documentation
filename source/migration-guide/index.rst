@@ -7,10 +7,8 @@ Migration guide
 
 
 .. toctree::
-   :hidden:
    :maxdepth: 2
 
    wazuh-indexer
    wazuh-dashboard
    migrating-from-ossec/index
-   
