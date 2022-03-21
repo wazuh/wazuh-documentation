@@ -48,6 +48,10 @@
     margin: 0;
   }
 
+  img {
+    border: 20px solid $color-img-border;
+  }
+
   strong {
     font-weight: 600;
   }
