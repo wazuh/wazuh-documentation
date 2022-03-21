@@ -215,6 +215,6 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13.2 to Wazuh 
 
 
 
-Your cluster is now upgraded via a Restart Upgrade. If you want to migrate to Wazuh dashboard, see the :doc:`wazuh-indexer` section.
+Your cluster is now upgraded via a Restart Upgrade. If you want to migrate to Wazuh dashboard, see the :doc:`wazuh-dashboard` section.
 
 
