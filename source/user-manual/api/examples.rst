@@ -114,7 +114,6 @@ Code:
 
     import json
     from base64 import b64encode
-    from enum import Enum
 
     import requests  # To install requests, use: pip install requests
     import urllib3
@@ -132,17 +131,9 @@ Code:
     urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
-    # Functions
-    class RequestMethodWrapper(Enum):
-        GET = requests.get
-        POST = requests.post
-        PUT = requests.put
-        DELETE = requests.delete
-
-
     def get_response(request_method, url, headers, verify=False, body={}):
         """Get API result"""
-        request_result = getattr(RequestMethodWrapper, request_method)(url, headers=headers, verify=verify, data=body)
+        request_result = getattr(requests, request_method.lower())(url, headers=headers, verify=verify, data=body)
 
         if request_result.status_code == 200:
             return json.loads(request_result.content.decode())
