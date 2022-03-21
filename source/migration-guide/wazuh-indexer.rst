@@ -12,11 +12,11 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13.2 to Wazuh 
 
 .. note:: Root user privileges are required to execute all the commands described below.
 
-#. Disable shard allocation: during upgrade we do not want any shard movement as the cluster will be taken down. In the commands below ``127.0.0.1`` IP address is used. If Elasticsearch is bound to a specific IP address, replace ``127.0.0.1`` with your Elasticsearch IP address. Replace ``<username>:<password>`` with your Elasticsearch username and password. 
+#. Disable shard allocation to prevent Elasticsearch from replicating shards as you shut down nodes.
 
    .. code-block:: console
 
-     curl -X PUT "https://127.0.0.1:9200/_cluster/settings"  -u <username>:<password> -k -H 'Content-Type: application/json' -d'
+     curl -X PUT "https://<elasticsearch_IP>:9200/_cluster/settings"  -u <username>:<password> -k -H 'Content-Type: application/json' -d'
      {
        "persistent": {
          "cluster.routing.allocation.enable": "primaries"
@@ -24,17 +24,22 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13.2 to Wazuh 
      }
      '
 
-#. Stop indexing, and perform a flush: as the cluster will be taken down, indexing/searching should be stopped and _flush can be used to permanently store information into the index which will prevent any data loss during upgrade.
+#. Stop indexing, and perform a flush: indexing/searching should be stopped and _flush can be used to permanently store information into the index which will prevent any data loss during upgrade.
 
    .. code-block:: console
 
-     curl -X POST "https://127.0.0.1:9200/_flush/synced" -u <username>:<password> -k
+        # systemctl stop filebeat
 
-#. Shutdown all the nodes.
 
    .. code-block:: console
 
-     # systemctl stop elasticsearch filebeat
+        curl -X POST "https://<elasticsearch_IP>:9200/_flush/synced" -u <username>:<password> -k
+
+#. Shutdown a single node: first data nodes and later master nodes.
+
+   .. code-block:: console
+
+     # systemctl stop elasticsearch
 
 #. Add Wazuh repository. (dev)
 
@@ -119,18 +124,24 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13.2 to Wazuh 
     #. Edit the certificate information. If you are using the default Wazuh certificates, change the Organizational Unit (OU) from ``Wazuh`` to ``Docu``.  
       
        .. code-block:: yaml
-         :emphasize-lines: 2
+         :emphasize-lines: 2,6
  
-          plugins.security.nodes_dn:
-          - "CN=node-1,OU=Docu,O=Wazuh,L=California,C=US"
-          #- "CN=node-2,OU=Wazuh,O=Wazuh,L=California,C=US"
-          #- "CN=node-3,OU=Wazuh,O=Wazuh,L=California,C=US"      
-   
+         plugins.security.authcz.admin_dn:
+         - "CN=admin,OU=Docu,O=Wazuh,L=California,C=US"
+         plugins.security.check_snapshot_restore_write_privileges: true
+         plugins.security.enable_snapshot_restore_privilege: true
+         plugins.security.nodes_dn:
+         - "CN=node-1,OU=Docu,O=Wazuh,L=California,C=US"
+         #- "CN=node-2,OU=Wazuh,O=Wazuh,L=California,C=US"
+         #- "CN=node-3,OU=Wazuh,O=Wazuh,L=California,C=US"      
+            
 #. Start and enable the Wazuh indexer.
 
    .. include:: /_templates/installations/indexer/common/enable_indexer.rst
 
-#. Restart Filebeat.   
+#. Repeat steps 3-9 until all the nodes are upgraded (data nodes first and then master nodes). 
+
+#. After all nodes are using the new version, restart Filebeat.   
 
    .. tabs::
    
@@ -171,20 +182,17 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13.2 to Wazuh 
             talk to server... OK
             version: 7.10.2
 
-
-#. Verify that the existing cluster is still green and healthy.
-
-#. Start each upgraded node: if the cluster has dedicated master nodes, start them first, and make sure the master is elected before data nodes are started. You can monitor the health of the cluster as follows.
+#. You can monitor the health of the cluster as follows.
 
    .. code-block:: console
 
-     curl -X GET "https://127.0.0.1:9200/_cluster/health" -u <username>:<password> -k
+     curl -X GET "https://<elasticsearch_IP>:9200/_cluster/health" -u <username>:<password> -k
 
-#. Re-enable shard allocation:
+#. Re-enable shard allocation: once all the data nodes are upgraded you can re-enable the shard allocation.
 
    .. code-block:: console
 
-      curl -X PUT "https://127.0.0.1:9200/_cluster/settings"  -u <username>:<password> -k -H 'Content-Type: application/json' -d'
+      curl -X PUT "https://<elasticsearch_IP>:9200/_cluster/settings"  -u <username>:<password> -k -H 'Content-Type: application/json' -d'
       {
         "persistent": {
           "cluster.routing.allocation.enable": null
@@ -195,7 +203,7 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13.2 to Wazuh 
 #. Verify that the indexed data in Open Distro is now searchable and indexable in Wazuh indexer.
 
 
-#. Uninstall Open Distro for Elasticsearch.
+#. Uninstall Open Distro for Elasticsearch on all nodes.
 
 
    .. tabs::
