@@ -130,16 +130,18 @@ Code:
     # Disable insecure https warnings (for self-signed SSL certificates)
     urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-
-    def get_response(request_method, url, headers, verify=False, body={}):
+    # Functions
+    def get_response(request_method, url, headers, verify=False, body=None):
         """Get API result"""
+        if body is None:
+            body = {}
+
         request_result = getattr(requests, request_method.lower())(url, headers=headers, verify=verify, data=body)
 
         if request_result.status_code == 200:
             return json.loads(request_result.content.decode())
         else:
             raise Exception(f"Error obtaining response: {request_result.json()}")
-
 
     # Variables
     base_url = f"{protocol}://{host}:{port}"
