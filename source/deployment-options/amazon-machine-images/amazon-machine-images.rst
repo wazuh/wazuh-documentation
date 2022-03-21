@@ -34,19 +34,19 @@ There are two alternatives for deploying a Wazuh instance. You can launch the `W
 Deploy a predefined instance
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Go to `Wazuh All-In-One Deployment <https://aws.amazon.com/marketplace/pp/prodview-eju4flv5eqmgq?ref=hmpg_recommendations_widget>`_ in the AWS Marketplace, then click `Continue to Subscribe`.
+#. Go to `Wazuh All-In-One Deployment <https://aws.amazon.com/marketplace/pp/prodview-eju4flv5eqmgq?ref=hmpg_recommendations_widget>`_ in the AWS Marketplace, then click **Continue to Subscribe**.
 
-#. Review the information and accept the terms for the software. Click `Continue to Configuration` to confirm subscribing to our Server product.
+#. Review the information and accept the terms for the software. Click **Continue to Configuration** to confirm subscribing to our Server product.
 
-#. Select a `Software Version` and the `Region` where the instance will be deployed. Then, click `Continue to Launch`.
+#. Select a **Software Version** and the **Region** where the instance will be deployed. Then, click **Continue to Launch**.
 
 #. Review your configuration making sure that all settings are correct before launching the software. Adapt the default configuration values to your needs.
 
-    #. When selecting the `EC2 Instance Type`, we recommend that you use an instance type ``c5.2xlarge`` or similar. Check the :ref:`minimum and recommended requirements <installation_requirements>` for this type of instance.
+    #. When selecting the **EC2 Instance Type**, we recommend that you use an instance type ``c5.2xlarge`` or similar. Check the :ref:`minimum and recommended requirements <installation_requirements>` for this type of instance.
   
-    #. When selecting the Security Group, it must be one with the right :ref:`configuration <default_ports>` for your Wazuh instance to guarantee the correct operation. You can create a new security group by choosing `Create new based on seller settings`. This new group will have the right configuration by default.
+    #. When selecting the Security Group, it must be one with the right :ref:`configuration <default_ports>` for your Wazuh instance to guarantee the correct operation. You can create a new security group by choosing **Create new based on seller settings**. This new group will have the right configuration by default.
 
-#. Click `Launch` to generate the instance.
+#. Click **Launch** to generate the instance.
 
 Once your instance is successfully launched and a few minutes have elapsed, you can :ref:`access the Wazuh dashboard <ami_wazuh_ui>`.
 
@@ -54,33 +54,27 @@ Once your instance is successfully launched and a few minutes have elapsed, you 
 Deploy and configure the instance manually
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Select `Launch instance` from your `AWS Management Console <https://aws.amazon.com/console/>`_ dashboard.
+#. Select **Launch instance** from your `AWS Management Console <https://aws.amazon.com/console/>`_ dashboard.
 
-#. Find Wazuh All-In-One Deployment by Wazuh Inc., and click `Select` to subscribe.
+#. Find Wazuh All-In-One Deployment by Wazuh Inc., and click **Select** to subscribe.
 
-#. Review the Server product characteristics, then click `Continue`. This allows subscribing to our Server product.
+#. Review the Server product characteristics, then click **Continue**. This allows subscribing to our Server product.
 
-#. Select the instance type according to your needs, then click `Next: Configure Instance Details`.
+#. Select the instance type according to your needs, then click **Next: Configure Instance Details**. We recommend that you use an instance type ``c5.2xlarge`` or similar. Check the :ref:`minimum and recommended requirements <installation_requirements>` for this type of instance.
 
-    #. We recommend that you use an instance type ``c5.2xlarge`` or similar. Check the :ref:`minimum and recommended requirements <installation_requirements>` for this type of instance.
+#. Configure your instance as needed, then click **Next: Add Storage**.
 
-#. Configure your instance as needed, then click `Next: Add Storage`.
+#. Set the storage capacity of your instance under the **Size (GiB)** column, then click **Next: Add Tags**. We recommend 100 GiB or more.
 
-#. Set the storage capacity of your instance under the `Size (GiB)` column, then click `Next: Add Tags`.
+#. Add as many tags as you need, then click **Next: Configure Security Group**.
 
-    #. We recommend 100 GiB or more.
+#. Check that the ports and protocols are the :ref:`ports and protocols <default_ports>` for Wazuh. Check the security measures for your instance. This will establish the Security Group (SG). Then, click **Review and Launch**.
 
-#. Add as many tags as you need, then click `Next: Configure Security Group`.
+#. Review the instance configuration and click **Launch**.
 
-#. Check that the ports and protocols are the :ref:`ports and protocols <default_ports>` for Wazuh. Check the security measures for your instance. This will establish the Security Group (SG). Then, click `Review and Launch`.
-
-#. Review the instance configuration and click `Launch`.
-
-#. Select one of three configuration alternatives available about key pair settings: `Choose an existing key pair`, `Create a new key pair`, `Proceed without a key pair`.
-
-    #. You need to choose an existing key pair or create a new one to access the instance with SSH.
+#. Select one of three configuration alternatives available about key pair settings: **Choose an existing key pair**, **Create a new key pair**, **Proceed without a key pair**. You need to choose an existing key pair or create a new one to access the instance with SSH.
     
-#. Click `Launch instances` to complete the process and deploy your instance.
+#. Click **Launch instances** to complete the process and deploy your instance.
 
 Once your instance is fully configured and ready after a few minutes since launch, you can :ref:`access the Wazuh dashboard <ami_wazuh_ui>`.
 
