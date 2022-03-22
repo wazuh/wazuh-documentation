@@ -61,7 +61,7 @@ and create a subnet with the *Name* and *IPv4 CIDR block* below.
 Make sure to associate it with your "Wazuh Lab" VPC.  Then click on **[Create]**.
 
 
-.. thumbnail:: ../../images/learning-wazuh/build-lab/new-subnet.png
+.. thumbnail:: ../../images/learning-wazuh/build-lab/new-subnet-1.png
     :title: New subnet
     :align: center
     :width: 75%
@@ -84,7 +84,7 @@ Click on the `Internet Gateways
 
 Name it as below and click on **[Create]**.
 
-.. thumbnail:: ../../images/learning-wazuh/build-lab/create-gateway.png
+.. thumbnail:: ../../images/learning-wazuh/build-lab/create-gateway-1.png
     :title: Create gateway
     :align: center
     :width: 75%
@@ -120,7 +120,7 @@ from the list.  Click on **[Save routes]** and then on **[Close]**.
 
 The results should look like this (exact igw- id will be different):
 
-.. thumbnail:: ../../images/learning-wazuh/build-lab/route-table.png
+.. thumbnail:: ../../images/learning-wazuh/build-lab/route-table-1.png
     :title: Route table
     :align: center
     :width: 75%
@@ -146,7 +146,7 @@ link  in your `VPC Dashboard <https://console.aws.amazon.com/vpc/home?#vpcs:>`_
 and then on **[Create Security Group]**.  Create a security group as shown
 below and click on **[Create]**.
 
-.. thumbnail:: ../../images/learning-wazuh/build-lab/sec-group-win.png
+.. thumbnail:: ../../images/learning-wazuh/build-lab/sec-group-win-1.png
     :title: Sec Group Win
     :align: center
     :width: 75%
@@ -166,7 +166,7 @@ Linux Security Group
 Click again on **[Create Security Group]**.  Create a security group like below,
 then click on **[Create]** and on **[Close]**.
 
-.. thumbnail:: ../../images/learning-wazuh/build-lab/sec-group-lin.png
+.. thumbnail:: ../../images/learning-wazuh/build-lab/sec-group-lin-1.png
     :title: Sec Group Lin
     :align: center
     :width: 75%

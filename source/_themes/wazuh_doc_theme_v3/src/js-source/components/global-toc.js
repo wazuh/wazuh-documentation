@@ -10,7 +10,6 @@ if ( $('#global-toc').length > 0 ) {
   $('#global-toc .toctree-l1 a').each(function(e) {
     if ($(this).siblings('ul').length) {
       $(this).closest('li').addClass('toc-toggle');
-      console.log($(this).closest('li').hasClass('.show'));
       $(this).append($('<button class="toc-toggle-btn"><span class="sr-only">Expand submenu</span></button>'));
     }
   });

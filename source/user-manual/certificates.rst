@@ -14,7 +14,7 @@ There are three kinds of certificates needed for the installation
 
 - ``root-ca``: This certificate is the one in charge of signing the rest of the certificates.
 
-- ``node``: The node certificates are the ones needed for every Elasticsearch node. They must include the node IP address.
+- ``node``: The node certificates are the ones needed for every Wazuh indexer node. They must include the node IP address.
 
 - ``admin``: The admin certificate is a client certificate with special privileges needed for management and security-related tasks.
 

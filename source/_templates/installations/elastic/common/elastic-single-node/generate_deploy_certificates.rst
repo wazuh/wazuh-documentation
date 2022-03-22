@@ -42,28 +42,26 @@
 
    .. code-block:: console
 
-     # node_name=elasticsearch-node-name
+     # NODE_NAME=elasticsearch-node-name
 
    .. code-block:: console
      
      # mkdir /etc/elasticsearch/certs/
-     # mv ~/certs/$node_name* /etc/elasticsearch/certs/
+     # mv ~/certs/$NODE_NAME* /etc/elasticsearch/certs/
      # mv ~/certs/admin* /etc/elasticsearch/certs/
      # cp ~/certs/root-ca* /etc/elasticsearch/certs/
-     # mv /etc/elasticsearch/certs/$node_name.pem /etc/elasticsearch/certs/elasticsearch.pem
-     # mv /etc/elasticsearch/certs/$node_name-key.pem /etc/elasticsearch/certs/elasticsearch-key.pem
+     # mv /etc/elasticsearch/certs/$NODE_NAME.pem /etc/elasticsearch/certs/elasticsearch.pem
+     # mv /etc/elasticsearch/certs/$NODE_NAME-key.pem /etc/elasticsearch/certs/elasticsearch-key.pem
 
 
 #. Compress all the necessary files to be sent to all the instances:
 
    .. code-block:: console
 
-     # cd ~/certs/  
-     # tar -cvf certs.tar *
-     # mv ~/certs/certs.tar ~/
+     # tar -cvf ~/certs.tar -C ~/certs/ .
 
 #. Copy ``certs.tar`` to all the servers of the distributed deployment. This can be done by using, for example, ``scp``. 
 
-#. If Kibana will be installed on this node, keep the certificates file. Otherwise, if the file is already copied to all the instances of the distributed deployment, remove it to increase security  ``rm -f certs.tar``.
+#. If Kibana will be installed on this node, keep the certificates file. Otherwise, if the file is already copied to all the instances of the distributed deployment, remove it to increase security  ``rm -f ~/certs.tar``.
 
 .. End of include file

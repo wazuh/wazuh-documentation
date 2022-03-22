@@ -111,7 +111,7 @@ Deploying a Wazuh cluster
     +---------------------------------------------------------------------+------------------------------------------------+
     | Type                                                                | Description                                    |
     +=====================================================================+================================================+
-    | :ref:`Wazuh single node cluster<wazuh_server_single_node_filebeat>` | Install Filebeat on Wazuh single node cluster. |
+    | :ref:`Wazuh single node cluster<wazuh_server_multi_node_filebeat>`  | Install Filebeat on Wazuh single node cluster. |
     +---------------------------------------------------------------------+------------------------------------------------+
     | :ref:`Wazuh multi node cluster<wazuh_server_multi_node_filebeat>`   | Install Filebeat on Wazuh multi node cluster.  |
     +---------------------------------------------------------------------+------------------------------------------------+

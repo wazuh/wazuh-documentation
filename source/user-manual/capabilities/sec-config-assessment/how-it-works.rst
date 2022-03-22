@@ -13,12 +13,12 @@ Each agent has its own local database where it stores the current state of each 
 or *not-applicable*, allowing agents to only send the differences detected between scans. If there has been no
 change, only the scan ``summary`` event will be sent, thus avoiding unnecessary network traffic while keeping
 the manager up to date. The manager will then use those updates to issue alerts that will be shown in the
-Kibana App.
+Wazuh dashboard.
 
 Integrity and alerting flow is depicted in the
 :ref:`sequence diagram <sca_sequence_diagram>` below.
 
-.. figure:: ../../../images/sca/sca_sequence_diagram.svg
+.. figure:: ../../../images/sca/sca-sequence-diagram.png
   :alt: SCA integrity and alerting flow
   :name: sca_sequence_diagram
   :align: center

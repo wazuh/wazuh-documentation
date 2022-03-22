@@ -76,7 +76,7 @@ Highlights
       :align: center
       :title: New Ruleset test tool
 
-.. thumbnail::  ../images/release-notes/4.2.0/rules_ruleset_test.png
+.. thumbnail::  ../images/release-notes/4.2.0/ruleset-test-window.png
       :align: center
       :title: Ruleset test window 
 
@@ -96,11 +96,11 @@ Highlights
 
       Wazuh adds a new Stats section that improves the visibility you have over agents’ statistics. You can access this feature by clicking **Stats** in the action ribbon on the Agent data overview page. This improvement allows you to visualize information fetched by the new API endpoint ``/agents/{agent_id}/stats/logcollector`` in the Wazuh user interface.
 
-.. thumbnail::  ../images/release-notes/4.2.0/new_stats_access.png
+.. thumbnail::  ../images/release-notes/4.2.0/new-stats-access.png
       :align: center
       :title: New Stats button on the Agent data overview page
 
-.. thumbnail::  ../images/release-notes/4.2.0/agent_stats_section.png
+.. thumbnail::  ../images/release-notes/4.2.0/agent-stats-section.png
       :align: center
       :title: Agent's new Stats section
 
@@ -108,7 +108,7 @@ Highlights
 
       Wazuh now gives you enhanced insight into the CVE that are affecting an agent. The newly added **Inventory** tab in the Vulnerabilities module allows you to visualize information such as package name, package version, package architecture, and the CVE ID that affects the package, and more. You can also access the vulnerability data flyout to expand on the specifics of each vulnerability entry detailed in the Inventory.   
 
-.. thumbnail::  ../images/release-notes/4.2.0/vuln_inventory_detail.png
+.. thumbnail::  ../images/release-notes/4.2.0/vuln-inventory-detail.png
       :align: center
       :title: Agent’s new vulnerability inventory  
 
