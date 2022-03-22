@@ -10,7 +10,7 @@ Wazuh agent
 
 The Wazuh agent is multi-platform and runs on the hosts that the user wants to monitor. It communicates with the Wazuh manager, sending data in near real time through an encrypted and authenticated channel.
 
-The agent was developed considering the need to monitor a wide variety of different endpoints without impacting their performance. Therefore, it is supported on the most popular operating systems and only requires about 0.1 GB of RAM.
+The agent was developed considering the need to monitor a wide variety of different endpoints without impacting their performance. It requires 35 MB of RAM on average. Therefore, it is supported on the most popular operating systems.
 
 The wazuh agent provides :ref:`key features <agents_modules>` to enhance your system’s security. 
 

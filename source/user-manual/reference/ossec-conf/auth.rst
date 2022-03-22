@@ -257,7 +257,7 @@ Default configuration
 
   <auth>
     <disabled>no</disabled>
-    <remote_enrollment>yes<remote_enrollment>
+    <remote_enrollment>yes</remote_enrollment>
     <port>1515</port>
     <use_source_ip>no</use_source_ip>
     <force>
