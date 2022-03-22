@@ -31,7 +31,7 @@ The :ref:`Wazuh agent <wazuh_agent>` continuously sends events to the :ref:`Wazu
 
 The Wazuh messages protocol uses AES encryption by default, with 128 bits per block and 256-bit keys. Blowfish encryption is optional.
 
-.. note:: Read the `Benefits of using AES in Wazuh communications <https://wazuh.com/blog/benefits-of-using-aes-in-our-communications>`_ document for more information.
+.. note:: Read the `Benefits of using AES in the Wazuh communications <https://wazuh.com/blog/benefits-of-using-aes-in-our-communications>`_ document for more information.
 
 Wazuh components communication
 ------------------------------
