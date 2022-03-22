@@ -84,7 +84,9 @@ The image below shows a schema of how a master node and a worker node interact w
 .. thumbnail:: ../images/manual/cluster/cluster-flow.png
     :title: Wazuh cluster workflow
     :align: center
+    :width: 80%
 
+    
 Threads
 ^^^^^^^
 The following tasks can be found in the cluster, depending on the type of node they are running on:
