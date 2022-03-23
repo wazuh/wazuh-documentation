@@ -30,35 +30,32 @@ These certificates are created with the following additional information:
 
 - ``CN``: Name of the node
 
-To create the certificates, the instances.yml file must be configured replacing the ``<node-name>`` and ``<node-IP>`` values by the corresponding values:
+To create the certificates, the config.yml file must be configured replacing the ``<node-name>`` and ``<node-IP>`` values by the corresponding values:
 
     .. code-block:: yaml
 
-        # Elasticsearch nodes
-        elasticsearch-nodes:
-        - name: <node-name>
-            ip:
-            - node-IP
-        
+        # Wazuh indexer nodes
+        indexer:
+            name: <node-name>
+            ip: node-IP
+
         # Wazuh server nodes
-        wazuh-servers:
-        - name: <node-name>
-            ip:
-            - node-IP      
-        
-        # Kibana node
-        kibana:
-        - name: <node-name>
-            ip:
-            - node-IP        
+        server:
+            name: <node-name>
+            ip: node-IP
+
+        # Wazuh dashboard nodes
+        dashboard:
+            name: <node-name>
+            ip: node-IP
 
 Each node certificate will be named after the ``<node-name>``. The ``<node-IP>`` can be either an IP address or a DNS name.
 
-After configuring the ``instances.yml``, the script can be run:
+After configuring the ``config.yml``, the script can be run:
 
     .. code-block:: console
 
-        # bash ~/wazuh-cert-tool.sh
+        # bash ~/wazuh-cert-tool.sh -A
 
 After running the script, the directory ~/certs will be created and will have the following content:
 
@@ -67,11 +64,11 @@ After running the script, the directory ~/certs will be created and will have th
         certs/
         ├── admin-key.pem
         ├── admin.pem
-        ├── filebeat-key.pem
-        ├── filebeat.pem
-        ├── kibana-key.pem
-        ├── kibana.pem
-        ├── node-1-key.pem
-        ├── node-1.pem
+        ├── dashboard-key.pem
+        ├── dashboard.pem
+        ├── indexer-key.pem
+        ├── indexer.pem
         ├── root-ca.key
-        └── root-ca.pem
+        ├── root-ca.pem
+        ├── server-key.pem
+        └── server.pem

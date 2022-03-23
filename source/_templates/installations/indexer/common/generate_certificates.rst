@@ -42,7 +42,7 @@
 
    .. code-block:: console
 
-     #  bash ./wazuh-cert-tool.sh
+     #  bash ./wazuh-cert-tool.sh -A
 
 #. Compress all the necessary files.
 
