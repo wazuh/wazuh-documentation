@@ -33,9 +33,9 @@ const versions = [
 /*
 redirectSameRelease['x.y'] = {
   '/old/path/that/was/removed.html':
-    'new/path/replacing/the/old/one.html',
+    '/new/path/replacing/the/old/one.html',
   '/another-old/path/that/was/removed.html':
-    'another-new/path/replacing/the/old/one.html',
+    '/another-new/path/replacing/the/old/one.html',
 };
 */
 
