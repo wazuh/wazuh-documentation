@@ -102,7 +102,7 @@ Repeat this process on each Wazuh indexer node and proceed with initializing the
 -------------------------
 
 
-The final stage of the process for installing Wazuh indexer cluster consists in running the security admin script. 
+The final stage of the process for installing the Wazuh indexer cluster consists in running the security admin script. 
 
 Run the unattended script with option ``-s`` to load the new certificates information and start the cluster. 
 
