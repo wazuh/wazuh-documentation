@@ -76,7 +76,7 @@ Installing Wazuh
 
    .. code-block:: console
 
-     # curl -sO https://s3.us-west-1.amazonaws.com/packages-dev.wazuh.com/resources/4.3/wazuh_install.sh && sudo bash ./wazuh_install.sh -a
+     $ curl -sO https://packages-dev.wazuh.com/|WAZUH_LATEST_MINOR|/wazuh-install.sh && sudo bash ./wazuh-install.sh -a
 
    After executing the installer, the output shows the access credentials and a message that confirms that the installation was successful.
    
