@@ -11,7 +11,7 @@ Getting started with Wazuh
 
 Wazuh is a free and open source security platform that unifies XDR and SIEM capabilities. It protects workloads across on-premises, virtualized, containerized, and cloud-based environments. 
 
-With Wazuh, you get a high-performance host-based intrusion detection system (HIDS) that helps organizations and individuals to protect their data assets against security threats. It is widely used by thousands of organizations worldwide, from small businesses to large enterprises.
+Wazuh helps organizations and individuals to protect their data assets against security threats. It is widely used by thousands of organizations worldwide, from small businesses to large enterprises.
 
 Check this Getting Started for an overview of the Wazuh platform :ref:`components <components>`, :ref:`architecture <architecture>`, and common :ref:`use cases <use_cases>`. 
 
