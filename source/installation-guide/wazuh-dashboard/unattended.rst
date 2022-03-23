@@ -20,7 +20,7 @@ You can install and configure the Wazuh dashboard using an automated script.
 
     .. code-block:: console
 
-      # curl -sO https://s3.us-west-1.amazonaws.com/packages-dev.wazuh.com/resources/4.3/wazuh_install.sh
+      # curl -sO https://packages-dev.wazuh.com/|WAZUH_LATEST_MINOR|/wazuh-install.sh
 
 
 
@@ -28,7 +28,7 @@ You can install and configure the Wazuh dashboard using an automated script.
    
     .. code-block:: console
 
-      # bash ./wazuh_install.sh -wd dashboard
+      # bash ./wazuh-install.sh -wd dashboard
 
     
 
