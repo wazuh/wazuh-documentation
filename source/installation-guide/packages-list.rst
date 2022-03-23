@@ -274,13 +274,25 @@ For a complete list of the available versions, see the `Wazuh Kibana plugin comp
 Wazuh Splunk app
 ----------------
 
-+---------------------------+---------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|  Splunk version           |   Wazuh version     | Package                                                                                                                                                                                                                                                                     |
-+===========================+=====================+===============+=============================================================================================================================================================================================================================================================+
-|    8.1.4                  |     |WAZUH_SPLUNK_LATEST|           | `wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.4.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.4-1.tar.gz>`_ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_LATEST|/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.4-1.tar.gz.sha512>`__)                                                |
-+---------------------------+---------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|    |SPLUNK_LATEST|                  |     |WAZUH_SPLUNK_LATEST|           | `wazuh_splunk-|WAZUH_SPLUNK_LATEST|_|SPLUNK_LATEST|.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_|SPLUNK_LATEST|-1.tar.gz>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_SPLUNK_LATEST|/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_|SPLUNK_LATEST|-1.tar.gz.sha512>`__)                                                |
-+---------------------------+---------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+.. |SPLUNK_8.1.4_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.4.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.4-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_LATEST|/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.4-1.tar.gz.sha512>`__)
+
+.. |SPLUNK_8.2.2_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.2.2.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.2.2-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_LATEST|/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.2.2-1.tar.gz.sha512>`__)
+
+.. |SPLUNK_LATEST_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_LATEST|_|SPLUNK_LATEST|.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_|SPLUNK_LATEST|-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_SPLUNK_LATEST|/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_|SPLUNK_LATEST|-1.tar.gz.sha512>`__)
+
+.. |var_SPLUNK_LATEST| replace:: |SPLUNK_LATEST|
+
+.. |var_WAZUH_SPLUNK_LATEST| replace:: |WAZUH_SPLUNK_LATEST|
+
++----------------------+----------------------------+---------------------+
+| Splunk version       | Wazuh version              | Package             |
++======================+============================+=====================+
+| 8.1.4                | |var_WAZUH_SPLUNK_LATEST|  | |SPLUNK_8.1.4_PKG|  |
++----------------------+----------------------------+---------------------+
+| 8.2.2                | |var_WAZUH_SPLUNK_LATEST|  | |SPLUNK_8.2.2_PKG|  |
++----------------------+----------------------------+---------------------+
+| |var_SPLUNK_LATEST|  | |var_WAZUH_SPLUNK_LATEST|  | |SPLUNK_LATEST_PKG| |
++----------------------+----------------------------+---------------------+
 
 
 Filebeat
