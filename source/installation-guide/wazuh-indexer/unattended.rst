@@ -33,8 +33,8 @@ Indicate your deployment configuration, create the SSL certificates to encrypt c
 
       .. code-block:: console
 
-          # curl -sO https://s3.us-west-1.amazonaws.com/packages-dev.wazuh.com/resources/4.3/wazuh_install.sh
-          # curl -sO https://s3.us-west-1.amazonaws.com/packages-dev.wazuh.com/resources/4.3/config.yml
+          # curl -sO https://packages-dev.wazuh.com/|WAZUH_LATEST_MINOR|/wazuh-install.sh
+          # curl -sO https://packages-dev.wazuh.com/|WAZUH_LATEST_MINOR|/config.yml
        
 #. Edit ``./config.yml`` and replace the node names and IP values with the corresponding names and IP addresses. You need to do this for all the Wazuh server, the Wazuh indexer, and the Wazuh dashboard nodes. Add as many node fields as needed.
 
@@ -69,7 +69,7 @@ Indicate your deployment configuration, create the SSL certificates to encrypt c
 
       .. code-block:: console
 
-        # bash ./wazuh_install.sh -c
+        # bash ./wazuh-install.sh -c
 
 
 #.  Copy the ``configurations.tar`` file to all the servers of the distributed deployment, including the Wazuh server, the Wazuh indexer, and the Wazuh dashboard nodes. This can be done by using, for example, ``scp``.
@@ -85,14 +85,14 @@ Install and configure the Wazuh indexer nodes. Make sure that a copy of ``config
 
       .. code-block:: console
 
-        # curl -sO https://s3.us-west-1.amazonaws.com/packages-dev.wazuh.com/resources/4.3/wazuh_install.sh
+        # curl -sO https://packages-dev.wazuh.com/|WAZUH_LATEST_MINOR|/wazuh-install.sh
 
 
 #. Run the script with the option ``-wi`` and the node name to install and configure the Wazuh indexer. The node name must be the same used in ``config.yml`` for the initial configuration, for example, ``node-1``.
 
       .. code-block:: console
 
-        # bash ./wazuh_install.sh -wi node-1 
+        # bash ./wazuh-install.sh -wi node-1 
 
 
 Repeat this process on each Wazuh indexer node and proceed with initializing the cluster.             
@@ -108,7 +108,7 @@ Run the unattended script with option ``-s`` to load the new certificates inform
 
   .. code-block:: console
 
-    # bash ./wazuh_install.sh -s
+    # bash ./wazuh-install.sh -s
 
 
 Next steps
