@@ -334,11 +334,15 @@ Virtual machine
 Amazon Machine Image
 --------------------
 
-+--------------------+--------------+------------------+----------------------+------------------------------------+
-| Distribution       | Architecture | VM Format        | Version              | Package                            |
-+====================+==============+==================+======================+====================================+
-|   Amazon Linux 2   |    64bits    |      AWS AMI     |  |WAZUH_LATEST_AMI|               | Wazuh  |WAZUH_LATEST_AMI|                       |
-+--------------------+--------------+------------------+----------------------+------------------------------------+
+.. |AMI_PRODUCT_PAGE| replace:: `Wazuh All-In-One Deployment <https://aws.amazon.com/marketplace/pp/prodview-eju4flv5eqmgq>`__
+
+.. |var_WAZUH_LATEST_AMI| replace:: |WAZUH_LATEST_AMI|
+
++------------------+--------------+-------------+------------------------+---------------------+
+| Distribution     | Architecture | VM Format   | Latest version         | Product page        |
++==================+==============+=============+========================+=====================+
+| Amazon Linux 2   | 64-bit       | AWS AMI     | |var_WAZUH_LATEST_AMI| | |AMI_PRODUCT_PAGE|  |
++------------------+--------------+-------------+------------------------+---------------------+
 
 
 MSU
