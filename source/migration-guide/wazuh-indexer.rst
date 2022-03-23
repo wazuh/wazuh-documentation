@@ -8,7 +8,7 @@
 Migrating to Wazuh indexer 
 ==========================
 
-Follow this guide to migrate from Open Distro for Elasticsearch 1.13.2 to Wazuh indexer. 
+Follow this guide to migrate from Open Distro for Elasticsearch 1.13 to Wazuh indexer. 
 
 .. note:: Root user privileges are required to execute all the commands described below.
 
@@ -26,9 +26,19 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13.2 to Wazuh 
 
 #. Stop indexing, and perform a flush: indexing/searching should be stopped and _flush can be used to permanently store information into the index which will prevent any data loss during upgrade.
 
-   .. code-block:: console
-
-        # systemctl stop filebeat
+   .. tabs::
+   
+    .. group-tab:: Systemd
+   
+     .. code-block:: console
+   
+      # systemctl stop filebeat
+   
+    .. group-tab:: SysV init
+   
+     .. code-block:: console
+   
+      # service filebeat stop  
 
 
    .. code-block:: console
@@ -37,11 +47,21 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13.2 to Wazuh 
 
 #. Shutdown a single node: first data nodes and later master nodes.
 
-   .. code-block:: console
+   .. tabs::
+   
+    .. group-tab:: Systemd
+   
+     .. code-block:: console
+   
+      # systemctl stop elasticsearch
+   
+    .. group-tab:: SysV init
+   
+     .. code-block:: console
+   
+      # service elasticsearch stop 
 
-     # systemctl stop elasticsearch
-
-#. Add Wazuh repository. (dev)
+#. Add the Wazuh repository.
 
     .. tabs::
 
@@ -61,7 +81,7 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13.2 to Wazuh 
 
 
 
-#. Install Wazuh indexer. 
+#. Install the Wazuh indexer. 
 
     .. tabs::
 
@@ -69,7 +89,7 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13.2 to Wazuh 
 
           .. code-block:: console
 
-            # yum install -y wazuh-indexer
+            # yum install wazuh-indexer -y
 
 
 
@@ -77,10 +97,10 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13.2 to Wazuh 
 
           .. code-block:: console
 
-            # apt install wazuh-indexer
+            # apt install wazuh-indexer -y
 
 
-#. Remove demo certificates, copy your old certificates to the new location and give them the right ownership and permissions.   
+#. Remove the demo certificates, copy your old certificates to the new location and give them the right ownership and permissions.   
 
    .. code-block:: console
 
@@ -94,7 +114,7 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13.2 to Wazuh 
        chmod 0600 /etc/wazuh-indexer/certs/* 
 
 
-#. Move your data. 
+#. Move or copy your data to the new directories and give them the right ownership and permissions. 
 
    .. code-block:: console
 
@@ -106,7 +126,7 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13.2 to Wazuh 
 
 #. Port your settings from ``/etc/elasticsearch/elasticsearch.yml`` to ``/etc/wazuh-indexer/opensearch.yml``. Most settings use the same names. At a minimum, specify ``cluster.name``, ``node.name``, ``discovery.seed_hosts``, and ``cluster.initial_master_nodes``.
 
-    #. Replace the certificates names ``demo-indexer.pem`` and ``demo-indexer-key.pem`` with ``wazuh-indexer.pem`` and ``wazuh-indexer-key.pem`` respectively.
+    a. Replace the certificates names ``demo-indexer.pem`` and ``demo-indexer-key.pem`` with ``wazuh-indexer.pem`` and ``wazuh-indexer-key.pem`` respectively.
 
        .. code-block:: yaml
          :emphasize-lines: 1,2,4,5
@@ -121,7 +141,7 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13.2 to Wazuh 
           plugins.security.ssl.transport.enforce_hostname_verification: false
           plugins.security.ssl.transport.resolve_hostname: false
 
-    #. Edit the certificate information. If you are using the default Wazuh certificates, change the Organizational Unit (OU) from ``Wazuh`` to ``Docu``.  
+    b. Edit the certificate information. If you are using the default Wazuh certificates, change the Organizational Unit (OU) from ``Wazuh`` to ``Docu``.  
       
        .. code-block:: yaml
          :emphasize-lines: 2,6
@@ -135,13 +155,13 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13.2 to Wazuh 
          #- "CN=node-2,OU=Wazuh,O=Wazuh,L=California,C=US"
          #- "CN=node-3,OU=Wazuh,O=Wazuh,L=California,C=US"      
             
-#. Start and enable the Wazuh indexer.
+#. Enable and start the Wazuh indexer.
 
    .. include:: /_templates/installations/indexer/common/enable_indexer.rst
 
 #. Repeat steps 3-9 until all the nodes are upgraded (data nodes first and then master nodes). 
 
-#. After all nodes are using the new version, restart Filebeat.   
+#. After all nodes are updated, restart Filebeat.   
 
    .. tabs::
    
@@ -158,7 +178,7 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13.2 to Wazuh 
       # service filebeat restart  
 
 
-#. Run the following command to verify that Filebeat is successfully configured.
+#. Run the following command to verify that the communication between Filebeat and the Wazuh indexer nodes is working as expected. 
 
      .. code-block:: console
 
@@ -188,7 +208,7 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13.2 to Wazuh 
 
      curl -X GET "https://<elasticsearch_IP>:9200/_cluster/health" -u <username>:<password> -k
 
-#. Re-enable shard allocation: once all the data nodes are upgraded you can re-enable the shard allocation.
+#. Re-enable shard allocation.
 
    .. code-block:: console
 
@@ -223,6 +243,6 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13.2 to Wazuh 
 
 
 
-Your cluster is now upgraded via a Restart Upgrade. If you want to migrate to Wazuh dashboard, see the :doc:`wazuh-dashboard` section.
+Your cluster is now updated. If you want to migrate to Wazuh dashboard, see the :doc:`wazuh-dashboard` section.
 
 
