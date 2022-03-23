@@ -47,7 +47,7 @@ Wazuh can be installed on a 64-bit Linux operating system. Wazuh supports the fo
 Hardware recommendations
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh indexer can be installed as a single-node or as a multi-node cluster.
+The Wazuh indexer can be installed as a single-node or as a multi-node cluster.
 
 - Hardware recommendations for each node
                           
