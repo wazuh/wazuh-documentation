@@ -48,10 +48,10 @@
 
    .. code-block:: console
 
-     # tar -cvf ./certs.tar -C ./certs/ .
-     # rm -r ./certs
+     # tar -cvf ./wazuh-certificates.tar -C ./wazuh-certificates/ .
+     # rm -r ./wazuh-certificates
 
 
-#. Copy ``certs.tar`` to all the nodes, including Wazuh indexer, Wazuh server, and Wazuh dashboard nodes. This can be done by using ``scp``. 
+#. Copy ``wazuh-certificates.tar`` to all the nodes, including Wazuh indexer, Wazuh server, and Wazuh dashboard nodes. This can be done by using ``scp``. 
 
 .. End of include file

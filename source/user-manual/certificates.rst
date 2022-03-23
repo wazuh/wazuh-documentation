@@ -57,11 +57,11 @@ After configuring the ``config.yml``, the script can be run:
 
         # bash ~/wazuh-cert-tool.sh -A
 
-After running the script, the directory ~/certs will be created and will have the following content:
+After running the script, the directory ~/wazuh-certificates will be created and will have the following content:
 
     .. code-block:: none
 
-        certs/
+        wazuh-certificates/
         ├── admin-key.pem
         ├── admin.pem
         ├── dashboard-key.pem
