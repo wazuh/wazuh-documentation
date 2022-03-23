@@ -5,7 +5,7 @@
 
    .. code-block:: console
  
-     # curl -so ~/wazuh-cert-tool.sh https://packages.wazuh.com/resources/4.2/open-distro/tools/certificate-utility/wazuh-cert-tool.sh
+     # curl -so ~/wazuh-cert-tool.sh https://packages-dev.wazuh.com/4.3/wazuh-cert-tool.sh
      # curl -so ~/instances.yml https://packages.wazuh.com/resources/4.2/open-distro/tools/certificate-utility/instances.yml
 
 #. Edit ``~/instances.yml`` and replace the values ``<node-name>`` and ``node-IP``  with the corresponding names and IP addresses. Add as many nodes fields as needed:
