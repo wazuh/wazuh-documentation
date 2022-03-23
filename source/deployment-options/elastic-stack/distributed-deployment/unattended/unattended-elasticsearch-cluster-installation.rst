@@ -47,7 +47,7 @@ Download the script and the configuration file. After downloading them, configur
       .. code-block:: console
 
           # curl -so ~/elastic-stack-installation.sh https://packages.wazuh.com/resources/|WAZUH_LATEST_MINOR|/elastic-stack/unattended-installation/distributed/elastic-stack-installation.sh 
-          # curl -so ~/config.yml https://packages.wazuh.com/resources/|WAZUH_LATEST_MINOR|/elastic-stack/unattended-installation/distributed/templates/config.yml
+          # curl -so ~/config.yml https://packages-dev.wazuh.com/|WAZUH_LATEST_MINOR|/config.yml
 
     **Configure the installation** 
       

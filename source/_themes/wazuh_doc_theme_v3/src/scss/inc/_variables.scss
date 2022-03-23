@@ -31,6 +31,7 @@ $light-color-shaded-text: #545f73 !default; // header-links
 $light-color-highlight-inline-text: #7c3db2 !default;
 $light-color-highlight-background: #e2eefe !default;
 $light-color-table-border: #dce8f8 !default;
+$light-color-table-alt-background: #f8fafd !default;
 $light-color-code-block-background: #f4f6fa !default;
 $light-color-code-block-border: #e2eefe !default;
 $light-color-output-title-background: #fafcff !default;
@@ -73,6 +74,7 @@ $dark-color-shaded-text-lighter: #9a9fb1 !default; // header-links
 $dark-color-highlight-inline-text: #ebd0fc !default;
 $dark-color-highlight-background: #242424 !default;
 $dark-color-table-border: #b7c6d7 !default;
+$dark-color-table-alt-background: #130F0F !default;
 $dark-color-code-block-background: #25252c !default;
 $dark-color-code-block-border: transparent !default;
 $dark-color-output-title-background: #191919 !default;
@@ -100,6 +102,9 @@ $dark-color-code-number: #6ca2f0 !default;
 $dark-color-code-string: #f6b7f6 !default;
 $dark-color-code-function: #499cfe !default;
 $dark-color-code-variable: #b677dc !default;
+
+// Others
+$color-img-border: #f0f2f6 !default;
 
 /* -- Theme elements fixed dimensions ------------------------------------------------------------------------------------ */
 

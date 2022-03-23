@@ -99,11 +99,11 @@ Repeat this stage of the installation process for every Wazuh indexer node in yo
     <div class="accordion-section open">
 
 
-#. Run the Wazuh indexer ``indexerSecurityInitializer.sh`` script on any Wazuh indexer node to load the new certificates information and start the cluster. 
+#. Run the Wazuh indexer ``indexer-security-init.sh`` script on any Wazuh indexer node to load the new certificates information and start the cluster. 
     
     .. code-block:: console
 
-      # /usr/share/wazuh-indexer/bin/indexerSecurityInitializer.sh
+      # /usr/share/wazuh-indexer/bin/indexer-security-init.sh
 
       
 Testing the cluster installation
