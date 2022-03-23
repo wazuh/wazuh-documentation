@@ -258,15 +258,31 @@ Wazuh dashboard
 Wazuh Kibana plugin
 -------------------
 
-+---------------------------+---------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|  Kibana Version           | Open Distro Version | Wazuh version | Package                                                                                                                                                                                                                                                     |
-+===========================+=====================+===============+=============================================================================================================================================================================================================================================================+
-|   |ELASTICSEARCH_LATEST|                  |  |OPEN_DISTRO_LATEST|             |     |WAZUH_LATEST|     | `wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|-1.zip>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|-1.zip.sha512>`__)                                      |  
-+---------------------------+---------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   7.16.3                  |                     |     |WAZUH_LATEST|     | `wazuh_kibana-|WAZUH_LATEST|_7.11.2.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_7.16.3-1.zip>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_7.16.3-1.zip.sha512>`__)                                      |   
-+---------------------------+---------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   7.17.0                  |                     |     |WAZUH_LATEST|     | `wazuh_kibana-|WAZUH_LATEST|_7.12.1.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_7.17.0-1.zip>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_7.17.0-1.zip.sha512>`__)                                      |   
-+---------------------------+---------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+.. |WAZUH_KIBANA_ES_LATEST| replace:: `wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|-1.zip>`__ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|-1.zip.sha512>`__)
+
+.. |WAZUH_KIBANA_7.14.2| replace:: `wazuh_kibana-|WAZUH_LATEST|_7.14.2.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_7.14.2-1.zip>`__ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_7.14.2-1.zip.sha512>`__)
+
+.. |WAZUH_KIBANA_7.16.3| replace:: `wazuh_kibana-|WAZUH_LATEST|_7.16.3.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_7.16.3-1.zip>`__ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_7.16.3-1.zip.sha512>`__)
+
+.. |WAZUH_KIBANA_7.17.0| replace:: `wazuh_kibana-|WAZUH_LATEST|_7.17.0.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_7.17.0-1.zip>`__ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_7.17.0-1.zip.sha512>`__)
+
+.. |var_ELASTICSEARCH_LATEST| replace:: |ELASTICSEARCH_LATEST|
+
+.. |var_OPEN_DISTRO_LATEST| replace:: |OPEN_DISTRO_LATEST|
+
+.. |var_WAZUH_LATEST| replace:: |WAZUH_LATEST|
+
++----------------------------+--------------------------+---------------------+--------------------------+
+| Kibana Version             | Open Distro Version      | Wazuh version       | Package                  |
++============================+==========================+=====================+==========================+
+| |var_ELASTICSEARCH_LATEST| | |var_OPEN_DISTRO_LATEST| | |var_WAZUH_LATEST|  | |WAZUH_KIBANA_ES_LATEST| |
++----------------------------+--------------------------+---------------------+--------------------------+
+| 7.14.2                     |                          | |var_WAZUH_LATEST|  | |WAZUH_KIBANA_7.14.2|    |
++----------------------------+--------------------------+---------------------+--------------------------+
+| 7.16.3                     |                          | |var_WAZUH_LATEST|  | |WAZUH_KIBANA_7.16.3|    |
++----------------------------+--------------------------+---------------------+--------------------------+
+| 7.17.0                     |                          | |var_WAZUH_LATEST|  | |WAZUH_KIBANA_7.17.0|    |
++----------------------------+--------------------------+---------------------+--------------------------+
 
 
 For a complete list of the available versions, see the `Wazuh Kibana plugin compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/tree/v4.2.5-7.10.2#wazuh---kibana---open-distro-version-compatibility-matrix>`_. 
