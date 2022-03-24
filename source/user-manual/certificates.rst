@@ -8,7 +8,7 @@
 Certificates deployment
 =======================
 
-In the :ref:`installation guide <installation_guide>`, the Wazuh cert tool has been used to create certificates, but any other certificates creation method, for example using `OpenSSL <https://www.openssl.org/>`_, can be used.
+In the :ref:`installation guide <installation_guide>`, the Wazuh cert tool has been used to create certificates, but any other certificates creation method, for example using `OpenSSL <https://www.openssl.org/>`_, can be used. This tool can be downloaded here: `wazuh-certs-tool.sh <https://packages-dev.wazuh.com/4.3/wazuh-certs-tool.sh>`_.
 
 There are three kinds of certificates needed for the installation
 
@@ -49,7 +49,7 @@ To create the certificates, the config.yml file must be configured replacing the
             name: <node-name>
             ip: node-IP
 
-Each node certificate will be named after the ``<node-name>``. The ``<node-IP>`` can be either an IP address or a DNS name.
+Each node certificate will be named after the ``<node-name>``. The ``<node-IP>`` can be either an IP address or a DNS name. The ``config.yml`` template can be found here: `config.yml <https://packages-dev.wazuh.com/4.3/config.yml>`_.
 
 After configuring the ``config.yml``, the script can be run:
 
@@ -70,5 +70,25 @@ After running the script, the directory ~/wazuh-certificates will be created and
         ├── indexer.pem
         ├── root-ca.key
         ├── root-ca.pem
+        ├── server-key.pem
+        └── server.pem
+
+Additionally, this script allows to use of a pre-existent rootCA certificate by indicating the ``root-ca`` certificate and key as follow:
+
+    .. code-block:: console
+
+        # bash ~/wazuh-certs-tool.sh -A /path/to/root-ca.pem /path/to/root-ca.key
+
+After running the script, the directory ~/wazuh-certificates will be created and will have the following content:
+
+    .. code-block:: none
+
+        wazuh-certificates/
+        ├── admin-key.pem
+        ├── admin.pem
+        ├── dashboard-key.pem
+        ├── dashboard.pem
+        ├── indexer-key.pem
+        ├── indexer.pem
         ├── server-key.pem
         └── server.pem
