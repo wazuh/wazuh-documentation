@@ -55,7 +55,7 @@ After configuring the ``config.yml``, the script can be run:
 
     .. code-block:: console
 
-        # bash ~/wazuh-cert-tool.sh -A
+        # bash ~/wazuh-certs-tool.sh -A
 
 After running the script, the directory ~/wazuh-certificates will be created and will have the following content:
 

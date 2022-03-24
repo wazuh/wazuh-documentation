@@ -95,18 +95,18 @@ Installing Elasticsearch
       cp ./opendistro_files/elasticsearch/roles.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/ &&\
       cp ./opendistro_files/elasticsearch/roles_mapping.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/ &&\
       cp ./opendistro_files/elasticsearch/internal_users.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/ &&\
-      cp ./opendistro_files/elasticsearch/wazuh-cert-tool.sh ~ &&\
+      cp ./opendistro_files/elasticsearch/wazuh-certs-tool.sh ~ &&\
       cp ./opendistro_files/elasticsearch/instances.yml ~
 
 #. Remove the demo certificates.
 
     .. include:: /_templates/installations/elastic/common/remove_demo_certs.rst
 
-#. Run *wazuh-cert-tool.sh* to create the new certificates.
+#. Run *wazuh-certs-tool.sh* to create the new certificates.
 
     .. code-block:: console
     
-      # bash ~/wazuh-cert-tool.sh
+      # bash ~/wazuh-certs-tool.sh
 
 #. Move the certificates to the appropriate location.
 
