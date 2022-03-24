@@ -8,9 +8,11 @@
 Certificates deployment
 =======================
 
-In the :ref:`installation guide <installation_guide>`, the Wazuh cert tool has been used to create certificates, but any other certificates creation method, for example using `OpenSSL <https://www.openssl.org/>`_, can be used. This tool can be downloaded here: `wazuh-certs-tool.sh <https://packages-dev.wazuh.com/4.3/wazuh-certs-tool.sh>`_.
+In the :ref:`installation guide <installation_guide>`, the Wazuh certs tool has been used to create certificates, but any other certificates creation method, for example using `OpenSSL <https://www.openssl.org/>`_, can be used. 
 
-There are three kinds of certificates needed for the installation
+The Wazuh certs tool can be downloaded here: `wazuh-certs-tool.sh <https://packages-dev.wazuh.com/4.3/wazuh-certs-tool.sh>`_.
+
+There are three kinds of certificates needed for the installation:
 
 - ``root-ca``: This certificate is the one in charge of signing the rest of the certificates.
 
@@ -26,38 +28,47 @@ These certificates are created with the following additional information:
 
 - ``O``: Wazuh
 
-- ``OU``: Docu
+- ``OU``: Wazuh
 
 - ``CN``: Name of the node
 
-To create the certificates, the config.yml file must be configured replacing the ``<node-name>`` and ``<node-IP>`` values by the corresponding values:
+
+To create the certificates, edit the ``config.yml`` file and replace the node names and IP values with the corresponding names and IP addresses. The ``<node-ip>`` can be either an IP address or a DNS name. The ``config.yml`` template can be found here: `config.yml <https://packages-dev.wazuh.com/4.3/config.yml>`_. 
 
     .. code-block:: yaml
 
-        # Wazuh indexer nodes
-        indexer:
-            name: <node-name>
-            ip: node-IP
+       nodes:
+         # Wazuh indexer nodes
+         indexer:
+           name: node-1
+           ip: <indexer-node-ip>
+           # name: node-2
+           # ip: <indexer-node-ip>
+           # name: node-3
+           # ip: <indexer-node-ip>
+       
+         # Wazuh server nodes
+         # Use node_type only with more than one Wazuh manager
+         server:
+           name: wazuh-1
+           ip: <wazuh-manager-ip>
+           # node_type: master
+           # name: wazuh-2
+           # ip: <wazuh-manager-ip>
+           # node_type: worker
+       
+         # Wazuh dashboard nodes
+         dashboard:
+           name: dashboard
+           ip: <dashboard-node-ip>
 
-        # Wazuh server nodes
-        server:
-            name: <node-name>
-            ip: node-IP
-
-        # Wazuh dashboard nodes
-        dashboard:
-            name: <node-name>
-            ip: node-IP
-
-Each node certificate will be named after the ``<node-name>``. The ``<node-IP>`` can be either an IP address or a DNS name. The ``config.yml`` template can be found here: `config.yml <https://packages-dev.wazuh.com/4.3/config.yml>`_.
-
-After configuring the ``config.yml``, the script can be run:
+After configuring the ``config.yml``, run the script with option ``-A`` to create all the certificates. 
 
     .. code-block:: console
 
-        # bash ~/wazuh-certs-tool.sh -A
+        # bash wazuh-certs-tool.sh -A
 
-After running the script, the directory ~/wazuh-certificates will be created and will have the following content:
+After running the script, the directory ``wazuh-certificates`` will be created and will have the following content:
 
     .. code-block:: none
 
@@ -73,13 +84,13 @@ After running the script, the directory ~/wazuh-certificates will be created and
         ├── server-key.pem
         └── server.pem
 
-Additionally, this script allows to use of a pre-existent rootCA certificate by indicating the ``root-ca`` certificate and key as follow:
+Additionally, this script allows the use of a pre-existent rootCA certificate. To create all the certificates using a pre-existent rootCA certificate, use option ``-A`` and indicate the ``root-ca`` certificate and key as follows:
 
     .. code-block:: console
 
-        # bash ~/wazuh-certs-tool.sh -A /path/to/root-ca.pem /path/to/root-ca.key
+        # bash wazuh-certs-tool.sh -A /path/to/root-ca.pem /path/to/root-ca.key
 
-After running the script, the directory ~/wazuh-certificates will be created and will have the following content:
+After running the script, the directory ``wazuh-certificates`` will be created and will have the following content:
 
     .. code-block:: none
 
