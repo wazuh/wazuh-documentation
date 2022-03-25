@@ -21,7 +21,7 @@ Wazuh 4.3.0 includes numerous new additions, such as some improvements in the Wa
       :title: Packages inventory
 
 
-New integrations to collect auditing logs from Office 365 and GitHub are added to the agent in this new version. A base Module Panel view with Office 365 setup is introduced, and the Wazuh dashboard now includes events from Office 365. Moreover, Wazuh now supports Logcollector with native macOS logs (Unified Logging System), AWS S3 Server Access logs, and Google Cloud Storage buckets and access logs.
+New integrations to collect auditing logs from Office 365 and GitHub are added to the agent in this new version. A side panel component that displays information about the active module of the Office 365 setup is introduced, and the Wazuh dashboard now includes events from Office 365. Moreover, Wazuh now supports Logcollector with native macOS logs (Unified Logging System), AWS S3 Server Access logs, and Google Cloud Storage buckets and access logs.
 
 .. hlist::
     :columns: 2
@@ -31,7 +31,7 @@ New integrations to collect auditing logs from Office 365 and GitHub are added t
 
 
 
-The RESTful API presents some amazing changes. Its availability has been enhanced thanks to the API now using multiple processes. The performance of several API endpoints is also improved, which is especially palpable in large environments. Additionally, the agent batch is upgraded with an increased limit of agents per request and a new set of filters. 
+The RESTful API availability has been enhanced thanks to the API now using multiple processes. The performance of several API endpoints is also improved, which is especially palpable in large environments. Additionally, the agent batch is upgraded with an increased limit of agents per request and a new set of filters. 
 
 .. thumbnail::  ../images/release-notes/4.3.0/agent-batch-upgraded.png 
       :align: center
@@ -286,7 +286,7 @@ Wazuh Kibana plugin
 - `#3506 <https://github.com/wazuh/wazuh-kibana-app/pull/3506>`_ A new hook for getting value suggestions is added.
 - `#3531 <https://github.com/wazuh/wazuh-kibana-app/pull/3531>`_ Dynamic simple filters and simple GitHub filters fields are added.
 - `#3524 <https://github.com/wazuh/wazuh-kibana-app/pull/3524>`_ Configuration viewer for Module Office 365 is added on the Configuration section of the Management menu.
-- `#3518 <https://github.com/wazuh/wazuh-kibana-app/pull/3518>`_ Base Module Panel view with Office 365 setup is added.
+- `#3518 <https://github.com/wazuh/wazuh-kibana-app/pull/3518>`_ A side panel component that displays information about the active module of the Office 365 setup is introduced.
 - `#3533 <https://github.com/wazuh/wazuh-kibana-app/pull/3533>`_ Specifics and custom filters for Office 365 search bar are added.
 - `#3544 <https://github.com/wazuh/wazuh-kibana-app/pull/3544>`_ Pagination and filter are added to drilldown tables at the Office pannel.
 - `#3568 <https://github.com/wazuh/wazuh-kibana-app/pull/3568>`_ Simple filters change between panel and drilldown panel.
