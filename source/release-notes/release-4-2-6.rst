@@ -13,8 +13,8 @@ Resolved issues
 
 This release resolves known issues. 
 
-Agent
-^^^^^
+Manager
+^^^^^^^
 
 ==============================================================    =============
 Reference                                                         Description
