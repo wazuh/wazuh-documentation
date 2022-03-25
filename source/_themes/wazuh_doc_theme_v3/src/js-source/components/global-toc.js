@@ -71,7 +71,7 @@ if ( $('#global-toc').length > 0 ) {
   /* Empty Nodes ------------------------------------------------------------ */
 
   if ( emptyTocNodes ) {
-    markTocNodesWithClass(emptyTocNodes, 'empty-toc-node');
+    markTocNodesWithClass(emptyTocNodes, 'empty-toc-node', '#global-toc');
   }
 
   /* Behavior of the empty nodes: toggle */
@@ -84,7 +84,7 @@ if ( $('#global-toc').length > 0 ) {
 
   /* Nodes to open in a new tab --------------------------------------------- */
   if ( useApiRedoc ) {
-    markTocNodesWithClass(newTabNodes, 'js-new-tab');
+    markTocNodesWithClass(newTabNodes, 'js-new-tab', '');
     $('.js-new-tab').attr('target', '_blank');
   }
 
