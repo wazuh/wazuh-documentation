@@ -13,12 +13,12 @@ The Wazuh security platform provides threat detection, configuration compliance,
 
 - **Endpoint level**: monitoring cloud instances or virtual machines using the lightweight :ref:`Wazuh security agent <wazuh_agent>`.
 
-- **Cloud infrastructure level**: monitoring cloud services and activity by collecting and analyzing data from the provider API. Amazon AWS, Microsoft Azure, Office 365, Google Cloud Platform and GitHub are supported.
+- **Cloud infrastructure level**: monitoring cloud services and activity by collecting and analyzing data from the provider API. Amazon AWS, Microsoft Azure, Office 365, Google Cloud Platform, and GitHub are supported.
 
 Amazon Web Services
 -------------------
 
-The :ref:`Wazuh agent <wazuh_agent>` also provides a module to monitor and secure your AWS cloud infrastructure. This module collects AWS services log data from S3 buckets, and forwards collected log messages to the :ref:`Wazuh server <wazuh_server>`, where events are analyzed using out-of-the-box Wazuh rules for AWS. 
+The :ref:`Wazuh agent <wazuh_agent>` also provides a module to monitor and secure your AWS cloud infrastructure. This module collects AWS services log data from S3 buckets and forwards collected log messages to the :ref:`Wazuh server <wazuh_server>`, where events are analyzed using out-of-the-box Wazuh rules for AWS. 
 
 The following list describes the AWS services that Wazuh is capable of monitoring:
 
@@ -113,9 +113,9 @@ Microsoft Azure
 
 The :ref:`Wazuh agent <wazuh_agent>` module for Microsoft Azure makes it easy to pull Azure platform logs. In particular, it is designed to obtain data from the following services:
 
-- :ref:`Log Analytics API <azure_log_analytics>`: The Log Analytics API is a core component of the Azure Monitor service, which is used to aggregate and analyze log data. The sources of such data are cloud applications, operating systems and Azure resources. The Wazuh module for Azure is capable of querying the Log Analytics API, pulling the logs that are collected by the Azure monitor service.
+- :ref:`Log Analytics API <azure_log_analytics>`: The Log Analytics API is a core component of the Azure Monitor service, which is used to aggregate and analyze log data. The sources of such data are cloud applications, operating systems, and Azure resources. The Wazuh module for Azure is capable of querying the Log Analytics API, pulling the logs that are collected by the Azure monitor service.
 
-- :ref:`Blob Storage API <azure_storage>`: Logs from Azure services are optionally pushed to Azure Blob Storage. Specifically, it is possible to configure an Azure service to export logs to a container in a storage account created for that purpose. Afterwards, the Wazuh agent will download those logs via its integration with the Blob Storage API.
+- :ref:`Blob Storage API <azure_storage>`: Logs from Azure services are optionally pushed to Azure Blob Storage. Specifically, it is possible to configure an Azure service to export logs to a container in a storage account created for that purpose. Afterward, the Wazuh agent will download those logs via its integration with the Blob Storage API.
 
 - :ref:`Active Directory Graph API <azure_graph>`: The Azure Active Directory Graph API provides access to AZURE AD through REST API endpoints. It is used by Wazuh to monitor Active Directory events (e.g. creation of a new user, update of a user's properties, disable of a user's account, etc.)
 

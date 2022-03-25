@@ -60,9 +60,9 @@
     Values to be replaced:
   
     - ``node.name``: This value must be the Wazuh indexer node name you are configuring, as defined in the ``config.yml`` file.
-    - ``cluster.initial_master_nodes`` list: This value must be the name of your Wazuh indexer master node, as it is defined in ``config.yml``. If you are configuring Wazuh indexer in a multi-node distribution, you can add more master-elegible indexer nodes to this list. Uncomment the commented lines and  similarly replace ``node-2`` and ``node-3`` with your Wazuh indexer master nodes names. 
+    - ``cluster.initial_master_nodes`` list: This value must be the name of your Wazuh indexer master node, as it is defined in ``config.yml``. If you are configuring the Wazuh indexer in a multi-node distribution, you can add more master-eligible indexer nodes to this list. Uncomment the commented lines and  similarly replace ``node-2`` and ``node-3`` with your Wazuh indexer master nodes names. 
     - ``cluster.name``: This value is your Wazuh indexer cluster name and can be replaced with your own single-node or multi-node Wazuh indexer cluster name.
-    - ``plugins.security.nodes_dn``: Replace the common name (CN) by your node name used in ``config.yml``. Uncomment the commented lines for ``node-2`` and ``node-3`` if necessary.
+    - ``plugins.security.nodes_dn``: Replace the common name (CN) with your node name used in ``config.yml``. Uncomment the commented lines for ``node-2`` and ``node-3`` if necessary.
     - ``plugins.security.ssl``: Replace ``demo-indexer.pem`` with ``wazuh-indexer.pem`` and ``demo-indexer-key.pem`` with ``wazuh-indexer-key.pem``. 
 
 .. End of include file
