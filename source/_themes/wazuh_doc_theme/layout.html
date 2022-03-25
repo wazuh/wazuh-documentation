@@ -63,7 +63,9 @@
 <meta name="twitter:title" content="{{ pagetitle|e + titlesuffix }}" />
 <meta name="twitter:description" content="User manual, installation and configuration guides. Learn how to get the most out of the Wazuh platform." />
 <meta name="twitter:image" content="{{ theme_wazuh_doc_url + '/current/_static/images/wazuh-docs-card.png' }}" />
-{% if not is_latest_release %}
+{% if is_latest_release %}
+<meta name="robots" content="index" />
+{% else %}
 <meta name="robots" content="noindex" />
 {% endif %}
 
