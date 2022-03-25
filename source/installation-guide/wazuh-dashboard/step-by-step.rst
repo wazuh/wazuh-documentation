@@ -98,7 +98,7 @@ Deploying certificates
 ^^^^^^^^^^^^^^^^^^^^^^
 
   .. note::
-    Make sure that a copy of ``certs.tar``, created in the previous stage of the installation process, is placed in your working directory.
+    Make sure that a copy of ``wazuh-certificates.tar``, created in the previous stage of the installation process, is placed in your working directory.
 
   .. include:: /_templates/installations/dashboard/deploy_certificates.rst
 
