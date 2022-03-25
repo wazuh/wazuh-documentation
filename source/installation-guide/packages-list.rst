@@ -260,8 +260,6 @@ Wazuh Kibana plugin
 
 .. |WAZUH_KIBANA_ES_LATEST| replace:: `wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|-1.zip>`__ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|-1.zip.sha512>`__)
 
-.. |WAZUH_KIBANA_7.14.2| replace:: `wazuh_kibana-|WAZUH_LATEST|_7.14.2.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_7.14.2-1.zip>`__ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_7.14.2-1.zip.sha512>`__)
-
 .. |WAZUH_KIBANA_7.16.3| replace:: `wazuh_kibana-|WAZUH_LATEST|_7.16.3.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_7.16.3-1.zip>`__ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_7.16.3-1.zip.sha512>`__)
 
 .. |WAZUH_KIBANA_7.17.0| replace:: `wazuh_kibana-|WAZUH_LATEST|_7.17.0.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_7.17.0-1.zip>`__ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_7.17.0-1.zip.sha512>`__)
@@ -276,8 +274,6 @@ Wazuh Kibana plugin
 | Kibana Version             | Open Distro Version      | Wazuh version       | Package                  |
 +============================+==========================+=====================+==========================+
 | |var_ELASTICSEARCH_LATEST| | |var_OPEN_DISTRO_LATEST| | |var_WAZUH_LATEST|  | |WAZUH_KIBANA_ES_LATEST| |
-+----------------------------+--------------------------+---------------------+--------------------------+
-| 7.14.2                     |                          | |var_WAZUH_LATEST|  | |WAZUH_KIBANA_7.14.2|    |
 +----------------------------+--------------------------+---------------------+--------------------------+
 | 7.16.3                     |                          | |var_WAZUH_LATEST|  | |WAZUH_KIBANA_7.16.3|    |
 +----------------------------+--------------------------+---------------------+--------------------------+
