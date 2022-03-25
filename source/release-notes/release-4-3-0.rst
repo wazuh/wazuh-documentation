@@ -393,7 +393,6 @@ Reference                                                         Description
 `#11440 <https://github.com/wazuh/wazuh/pull/11440>`_             Fixed false positives in Vulnerability Detector when scanning OVAl for Ubuntu Xenial and Bionic.
 `#11835 <https://github.com/wazuh/wazuh/pull/11835>`_             Fixed an argument injection hazard in the Pagerduty integration script.
 `#11863 <https://github.com/wazuh/wazuh/pull/11863>`_             Fixed memory leaks in the feed parser at Vulnerability Detector. Architecture data member from the RHEL 5 feed. RHSA items containing no CVEs. Unused RHSA data member when parsing Debian feeds.
-`#11974 <https://github.com/wazuh/wazuh/pull/11974>`_             Fixed an integer overflow hazard in ``wazuh-remoted`` that caused it to drop incoming data after receiving 2^31 messages.
 ==============================================================    =============
 
 
