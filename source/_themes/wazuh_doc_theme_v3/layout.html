@@ -219,6 +219,9 @@
   {% block body %} {% endblock %}
   {%- block after_footer %}
     <script id="documentation_options" data-url_root="{{ pathto('', 1) }}" src="{{ pathto('_static/js/documentation_options.js', 1) }}"></script>
+    <script>
+      const emptyTocNodes = JSON.parse('{{ empty_toc_nodes }}');
+    </script>
   {{- js() }}
   {% endblock after_footer -%}
   {%- if pagename not in special_pages -%}
