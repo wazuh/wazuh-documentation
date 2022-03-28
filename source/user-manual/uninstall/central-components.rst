@@ -18,10 +18,10 @@ If you want to uninstall one specific central component, you need to follow the 
 
 .. note:: Root user privileges are required to execute all the commands described below.
 
-.. _uninstall_manager:
+.. _uninstall_server:
 
-Uninstall the Wazuh manager
----------------------------
+Uninstall the Wazuh server
+--------------------------
 
 #. Remove the Wazuh repository and the Wauh manager package.
 
@@ -47,13 +47,6 @@ Uninstall the Wazuh manager
 
       # rm -rf /var/ossec/
       # rm -rf /etc/systemd/system/multi-user.target.wants/wazuh-manager.service
-
-
-.. _uninstall_filebeat:
-      
-Uninstall Filebeat
-------------------
-
 
 #. Remove the Filebeat package.
 
