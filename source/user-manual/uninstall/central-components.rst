@@ -6,7 +6,7 @@
 Uninstalling the Wazuh central components
 =========================================
 
-You can uninstall all the Wazuh central components using the Wazuh installer. Run it with the option ``-u | --uninstall`` as follows.
+You can uninstall all the Wazuh central components using the Wazuh installer. Run the Wazuh installer with the option ``-u`` or ``--uninstall`` as follows:
 
     .. code-block:: console
 
@@ -17,6 +17,8 @@ This will remove Wazuh indexer, Wazuh server, and Wazuh dashboard from your clus
 If you want to uninstall one specific central component, you need to follow the instructions below.
 
 .. note:: Root user privileges are required to execute all the commands described below.
+
+.. _uninstall_manager:
 
 Uninstall the Wazuh manager
 ---------------------------
@@ -39,18 +41,21 @@ Uninstall the Wazuh manager
           # rm /etc/apt/sources.list.d/wazuh.list
           # apt remove --purge wazuh-manager -y
 
-#. Remove related installation files.
+#. Clean the Wazuh manager installation.
 
     .. code-block:: console
 
       # rm -rf /var/ossec/
+      # rm -rf /etc/systemd/system/multi-user.target.wants/wazuh-manager.service
 
 
+.. _uninstall_filebeat:
+      
 Uninstall Filebeat
 ------------------
 
 
-#. Remove Filebeat package.
+#. Remove the Filebeat package.
 
     .. tabs::
 
@@ -66,13 +71,16 @@ Uninstall Filebeat
       
           # apt remove --purge filebeat -y
 
-#. Remove related installation files.
+#. Clean the Filebeat installation.
 
     .. code:: console
     
       # rm -rf /var/lib/filebeat/
       # rm -rf /usr/share/filebeat/
       # rm -rf /etc/filebeat/
+      # rm -rf /var/log/filebeat/
+      # rm -rf /etc/systemd/system/multi-user.target.wants/filebeat.service
+
 
 .. _uninstall_indexer:
 
@@ -95,13 +103,18 @@ Uninstall the Wazuh indexer
 
           # apt remove --purge wazuh-indexer -y
           
-#. Remove related installation files.
+#. Clean the Wazuh indexer installation.
 
     .. code:: console
     
       # rm -rf /var/lib/wazuh-indexer/
       # rm -rf /usr/share/wazuh-indexer/
       # rm -rf /etc/wazuh-indexer/
+      # rm -rf /var/log/wazuh-indexer/
+      # rm -rf /securityadmin_demo.sh
+      # rm -rf /etc/systemd/system/opensearch.service.wants/
+      # rm -rf /etc/systemd/system/multi-user.target.wants/opensearch.service
+      # rm -rf /lib/firewalld/services/opensearch.xml
 
 .. _uninstall_dashboard:
 
@@ -124,7 +137,7 @@ Uninstall the Wazuh dashboard
 
           # apt remove --purge wazuh-dashboard -y
           
-#. Remove related installation files.
+#. Clean the Wazuh dashboard installation.
 
     .. code:: console
     
@@ -132,3 +145,6 @@ Uninstall the Wazuh dashboard
       # rm -rf /usr/share/wazuh-dashboard/
       # rm -rf /etc/wazuh-dashboard/
       # rm -rf /run/wazuh-dashboard/
+      # rm -rf /etc/systemd/system/multi-user.target.wants/wazuh-dashboard.service
+      # rm -rf /etc/systemd/system/wazuh-dashboard.service
+      # rm -rf /lib/firewalld/services/dashboard.xml

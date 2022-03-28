@@ -234,4 +234,4 @@ Next steps
 
 The Wazuh server installation is now complete and you can proceed with :doc:`../wazuh-dashboard/step-by-step`.
 
-If you want to uninstall the Wazuh server, see the :doc:`/user-manual/uninstall/central-components` section.
+If you want to uninstall the Wazuh server, see the :ref:`uninstall_manager` and :ref:`uninstall_filebeat` sections.
