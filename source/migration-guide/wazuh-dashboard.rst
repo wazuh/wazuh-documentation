@@ -95,7 +95,6 @@ Follow this guide to migrate from Open Distro for Elasticsearch Kibana 1.13 to W
           server.ssl.key: "/etc/wazuh-dashboard/certs/wazuh-dashboard-key.pem"
           server.ssl.certificate: "/etc/wazuh-dashboard/certs/wazuh-dashboard.pem"
           opensearch.ssl.certificateAuthorities: ["/etc/wazuh-dashboard/certs/root-ca.pem"]
-          logging.dest: "/var/log/wazuh-dashboard/wazuh-dashboard.log"
           uiSettings.overrides.defaultRoute: /app/wazuh?security_tenant=global
 
 #. Add your password for the ``kibanaserver`` user in the Wazuh dashboard keystore. You may find your old password in ``/etc/kibana/kibana.yml``. 
