@@ -8,6 +8,23 @@
 
 This section lists the changes in version 4.2.6. Every update of the Wazuh solution is cumulative and includes all enhancements and fixes from previous releases.
 
+What's new
+----------
+
+This release includes new features or enhancements.
+
+Wazuh Kibana plugin
+^^^^^^^^^^^^^^^^^^^
+
+- Wazuh Kibana plugin is now compatible with Wazuh 4.2.6.
+
+Wazuh Splunk app
+^^^^^^^^^^^^^^^^
+
+- Wazuh Splunk app is now compatible with Wazuh 4.2.6.
+
+
+
 Resolved issues
 ---------------
 
@@ -29,5 +46,5 @@ Changelogs
 More details about these changes are provided in the changelog of each component:
 
 - `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v4.2.6/CHANGELOG.md>`_
-- `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v4.2.5-7.10.2/CHANGELOG.md>`_
-- `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v4.2.5-8.1.4/CHANGELOG.md>`_
+- `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v4.2.6-7.10.2/CHANGELOG.md>`_
+- `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v4.2.6-8.2.2/CHANGELOG.md>`_
