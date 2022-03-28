@@ -3,7 +3,7 @@
 #. Edit ``/etc/wazuh-indexer/opensearch.yml``.
 
     .. code-block:: yaml
-      :emphasize-lines: 2,4,7,24,25,27,28,40
+      :emphasize-lines: 2,4,7,33
 
        network.host: "0.0.0.0"
        node.name: "node-1"
@@ -20,19 +20,12 @@
        path.data: /var/lib/wazuh-indexer
        path.logs: /var/log/wazuh-indexer
        
-       
-       ###############################################################################
-       #                                                                             #
-       #         WARNING: Demo certificates set up in this file.                     #
-       #                  Please change on production cluster!                       #
-       #                                                                             #
-       ###############################################################################
-       
-       plugins.security.ssl.http.pemcert_filepath: /etc/wazuh-indexer/certs/demo-indexer.pem
-       plugins.security.ssl.http.pemkey_filepath: /etc/wazuh-indexer/certs/demo-indexer-key.pem
+              
+       plugins.security.ssl.http.pemcert_filepath: /etc/wazuh-indexer/certs/indexer.pem
+       plugins.security.ssl.http.pemkey_filepath: /etc/wazuh-indexer/certs/indexer-key.pem
        plugins.security.ssl.http.pemtrustedcas_filepath: /etc/wazuh-indexer/certs/root-ca.pem
-       plugins.security.ssl.transport.pemcert_filepath: /etc/wazuh-indexer/certs/demo-indexer.pem
-       plugins.security.ssl.transport.pemkey_filepath: /etc/wazuh-indexer/certs/demo-indexer-key.pem
+       plugins.security.ssl.transport.pemcert_filepath: /etc/wazuh-indexer/certs/indexer.pem
+       plugins.security.ssl.transport.pemkey_filepath: /etc/wazuh-indexer/certs/indexer-key.pem
        plugins.security.ssl.transport.pemtrustedcas_filepath: /etc/wazuh-indexer/certs/root-ca.pem
        plugins.security.ssl.http.enabled: true
        plugins.security.ssl.transport.enforce_hostname_verification: false
@@ -63,6 +56,5 @@
     - ``cluster.initial_master_nodes`` list: This value must be the name of your Wazuh indexer master node, as it is defined in ``config.yml``. If you are configuring the Wazuh indexer in a multi-node distribution, you can add more master-eligible indexer nodes to this list. Uncomment the commented lines and  similarly replace ``node-2`` and ``node-3`` with your Wazuh indexer master nodes names. 
     - ``cluster.name``: This value is your Wazuh indexer cluster name and can be replaced with your own single-node or multi-node Wazuh indexer cluster name.
     - ``plugins.security.nodes_dn``: Replace the common name (CN) with your node name used in ``config.yml``. Uncomment the commented lines for ``node-2`` and ``node-3`` if necessary.
-    - ``plugins.security.ssl``: Replace ``demo-indexer.pem`` with ``wazuh-indexer.pem`` and ``demo-indexer-key.pem`` with ``wazuh-indexer-key.pem``. 
 
 .. End of include file

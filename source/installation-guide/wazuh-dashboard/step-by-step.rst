@@ -81,8 +81,8 @@ Configuring the Wazuh dashboard
           opensearch_security.multitenancy.enabled: true
           opensearch_security.readonly_mode.roles: ["kibana_read_only"]
           server.ssl.enabled: true
-          server.ssl.key: "/etc/wazuh-dashboard/certs/demo-dashboard-key.pem"
-          server.ssl.certificate: "/etc/wazuh-dashboard/certs/demo-dashboard.pem"
+          server.ssl.key: "/etc/wazuh-dashboard/certs/dashboard-key.pem"
+          server.ssl.certificate: "/etc/wazuh-dashboard/certs/dashboard.pem"
           opensearch.ssl.certificateAuthorities: ["/etc/wazuh-dashboard/certs/root-ca.pem"]
           logging.dest: "/var/log/wazuh-dashboard/wazuh-dashboard.log"
           uiSettings.overrides.defaultRoute: /app/wazuh?security_tenant=global
