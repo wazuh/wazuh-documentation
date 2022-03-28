@@ -8,7 +8,7 @@
 Packages list
 =============
 
-This download page contains packages required for the Wazuh installation with the Wazuh version |WAZUH_LATEST|  :
+This download page contains packages required for the Wazuh installation:
 
 - `Wazuh manager and Wazuh agent`_
 
@@ -39,7 +39,7 @@ AIX
 +-----------------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Version         | Architecture | Package                                                                                                                                                                                                                                     |
 +=================+==============+=============================================================================================================================================================================================================================================+
-| 6.1 or greater  |    PowerPC   | `wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_AIX|.aix.ppc.rpm <https://packages.wazuh.com/|CURRENT_MAJOR|/aix/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_AIX|.aix.ppc.rpm>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_AIX|.aix.ppc.rpm.sha512>`__)                          |
+| 6.1 or greater  |    PowerPC   | `wazuh-agent-|WAZUH_LATEST_AIX|-|WAZUH_REVISION_AIX|.aix.ppc.rpm <https://packages.wazuh.com/|CURRENT_MAJOR|/aix/wazuh-agent-|WAZUH_LATEST_AIX|-|WAZUH_REVISION_AIX|.aix.ppc.rpm>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST_AIX|/wazuh-agent-|WAZUH_LATEST_AIX|-|WAZUH_REVISION_AIX|.aix.ppc.rpm.sha512>`__)                          |
 +-----------------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -250,7 +250,7 @@ Wazuh Kibana plugin
 |   7.14.2                  |                     |     |WAZUH_LATEST|     | `wazuh_kibana-|WAZUH_LATEST|_7.14.2.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_7.14.2-1.zip>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_7.14.2-1.zip.sha512>`__)                                      |   
 +---------------------------+---------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-For a complete list of the available versions, see the `Wazuh Kibana plugin compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/tree/v4.2.5-7.10.2#wazuh---kibana---open-distro-version-compatibility-matrix>`_. 
+For a complete list of the available versions, see the `Wazuh Kibana plugin compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/tree/v4.2.6-7.10.2#wazuh---kibana---open-distro-version-compatibility-matrix>`_. 
 
 Wazuh Splunk app
 ----------------
