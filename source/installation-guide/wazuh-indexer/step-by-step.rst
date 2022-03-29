@@ -109,7 +109,7 @@ Repeat this stage of the installation process for every Wazuh indexer node in yo
 Testing the cluster installation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-  #. Run the following commands to confirm that the installation is successful.
+  #. Replace ``<WAZUH_INDEXER_IP>`` and run the following commands to confirm that the installation is successful.
 
       .. code-block:: console
 
@@ -136,7 +136,7 @@ Testing the cluster installation
           }
           
 
-  #. Run the following command to check if the cluster is working correctly.
+  #. Replace ``<WAZUH_INDEXER_IP>`` and run the following command to check if the cluster is working correctly. 
   
       .. code-block:: console
 
