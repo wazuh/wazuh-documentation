@@ -6,7 +6,9 @@
 Uninstalling the Wazuh central components
 =========================================
 
-You can uninstall all the Wazuh central components using the Wazuh installer. Run the Wazuh installer with the option ``-u`` or ``--uninstall`` as follows:
+You can uninstall all the Wazuh central components using the Wazuh installer.
+
+Run the Wazuh installer with the option ``-u`` or ``--uninstall`` as follows:
 
     .. code-block:: console
 
@@ -18,12 +20,12 @@ If you want to uninstall one specific central component, you need to follow the 
 
 .. note:: Root user privileges are required to execute all the commands described below.
 
-.. _uninstall_server:
+.. _uninstall_dashboard:
 
-Uninstall the Wazuh server
---------------------------
+Uninstall the Wazuh dashboard
+-----------------------------
 
-#. Remove the Wazuh repository and the Wauh manager package.
+#. Remove the Wazuh repository if not done already.
 
     .. tabs::
 
@@ -32,89 +34,14 @@ Uninstall the Wazuh server
         .. code-block:: console
           
           # rm /etc/yum.repos.d/wazuh.repo
-          # yum remove wazuh-manager -y
 
       .. group-tab:: APT
 
         .. code-block:: console
         
           # rm /etc/apt/sources.list.d/wazuh.list
-          # apt remove --purge wazuh-manager -y
 
-#. Clean the Wazuh manager installation.
-
-    .. code-block:: console
-
-      # rm -rf /var/ossec/
-      # rm -rf /etc/systemd/system/multi-user.target.wants/wazuh-manager.service
-
-#. Remove the Filebeat package.
-
-    .. tabs::
-
-      .. group-tab:: Yum
-
-        .. code:: console
-        
-          # yum remove filebeat -y
-
-      .. group-tab:: APT
-
-        .. code:: console
-      
-          # apt remove --purge filebeat -y
-
-#. Clean the Filebeat installation.
-
-    .. code:: console
-    
-      # rm -rf /var/lib/filebeat/
-      # rm -rf /usr/share/filebeat/
-      # rm -rf /etc/filebeat/
-      # rm -rf /var/log/filebeat/
-      # rm -rf /etc/systemd/system/multi-user.target.wants/filebeat.service
-
-
-.. _uninstall_indexer:
-
-Uninstall the Wazuh indexer
----------------------------
-
-#. Remove the Wazuh indexer package.
-
-    .. tabs::
-
-      .. group-tab:: Yum
-
-        .. code:: console
-        
-          # yum remove wazuh-indexer -y
-
-      .. group-tab:: APT
-
-        .. code:: console
-
-          # apt remove --purge wazuh-indexer -y
-          
-#. Clean the Wazuh indexer installation.
-
-    .. code:: console
-    
-      # rm -rf /var/lib/wazuh-indexer/
-      # rm -rf /usr/share/wazuh-indexer/
-      # rm -rf /etc/wazuh-indexer/
-      # rm -rf /var/log/wazuh-indexer/
-      # rm -rf /securityadmin_demo.sh
-      # rm -rf /etc/systemd/system/opensearch.service.wants/
-      # rm -rf /etc/systemd/system/multi-user.target.wants/opensearch.service
-      # rm -rf /lib/firewalld/services/opensearch.xml
-
-.. _uninstall_dashboard:
-
-Uninstall the Wazuh dashboard
------------------------------
-
-#. Remove the Wazuh dashboard package.
+#. Clean the Wazuh dashboard installation.
 
     .. tabs::
 
@@ -123,21 +50,112 @@ Uninstall the Wazuh dashboard
         .. code:: console
         
           # yum remove wazuh-dashboard -y
+          # rm -rf /var/lib/wazuh-dashboard/
+          # rm -rf /usr/share/wazuh-dashboard/
+          # rm -rf /etc/wazuh-dashboard/
 
       .. group-tab:: APT
 
         .. code:: console
 
           # apt remove --purge wazuh-dashboard -y
-          
-#. Clean the Wazuh dashboard installation.
 
-    .. code:: console
-    
-      # rm -rf /var/lib/wazuh-dashboard/
-      # rm -rf /usr/share/wazuh-dashboard/
-      # rm -rf /etc/wazuh-dashboard/
-      # rm -rf /run/wazuh-dashboard/
-      # rm -rf /etc/systemd/system/multi-user.target.wants/wazuh-dashboard.service
-      # rm -rf /etc/systemd/system/wazuh-dashboard.service
-      # rm -rf /lib/firewalld/services/dashboard.xml
+.. _uninstall_server:
+
+Uninstall the Wazuh server
+--------------------------
+
+#. Remove the Wazuh repository if not done already.
+
+    .. tabs::
+
+      .. group-tab:: Yum
+
+        .. code-block:: console
+          
+          # rm /etc/yum.repos.d/wazuh.repo
+
+      .. group-tab:: APT
+
+        .. code-block:: console
+        
+          # rm /etc/apt/sources.list.d/wazuh.list
+
+#. Clean the Wazuh manager installation.
+
+    .. tabs::
+
+      .. group-tab:: Yum
+
+        .. code-block:: console
+          
+          # yum remove wazuh-manager -y
+          # rm -rf /var/ossec/
+
+      .. group-tab:: APT
+
+        .. code-block:: console
+        
+          # apt remove --purge wazuh-manager -y
+
+#. Clean the Filebeat installation.
+
+    .. tabs::
+
+      .. group-tab:: Yum
+
+        .. code:: console
+        
+          # yum remove filebeat -y
+          # rm -rf /var/lib/filebeat/
+          # rm -rf /usr/share/filebeat/
+          # rm -rf /etc/filebeat/
+
+      .. group-tab:: APT
+
+        .. code:: console
+      
+          # apt remove --purge filebeat -y
+
+
+.. _uninstall_indexer:
+
+Uninstall the Wazuh indexer
+---------------------------
+
+#. Remove the Wazuh repository if not done already.
+
+    .. tabs::
+
+      .. group-tab:: Yum
+
+        .. code-block:: console
+          
+          # rm /etc/yum.repos.d/wazuh.repo
+
+      .. group-tab:: APT
+
+        .. code-block:: console
+        
+          # rm /etc/apt/sources.list.d/wazuh.list
+
+#. Clean the Wazuh indexer installation.
+
+    .. tabs::
+
+      .. group-tab:: Yum
+
+        .. code:: console
+        
+          # yum remove wazuh-indexer -y
+          # rm -rf /var/lib/wazuh-indexer/
+          # rm -rf /usr/share/wazuh-indexer/
+          # rm -rf /etc/wazuh-indexer/
+
+      .. group-tab:: APT
+
+        .. code:: console
+
+          # apt remove --purge wazuh-indexer -y
+          
+#. Remove the ``wazuh-certs-tool.sh`` and ``config.yml`` files downloaded previously.
