@@ -25,7 +25,7 @@ Adding the Wazuh repository
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
   .. note::
-    If you are installing Wazuh server on the same host as the Wazuh indexer, you may skip these steps as you may have added the Wazuh repository already.
+    If you are installing the Wazuh server on the same host as the Wazuh indexer, you may skip these steps as you may have added the Wazuh repository already.
 
   ..
     Add the Wazuh repository to download the official Wazuh packages. As an alternative, you can download the Wazuh packages directly from :doc:`../packages-list`.
@@ -112,7 +112,7 @@ Configuring Filebeat
 
       .. code-block:: console
 
-        # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-packages/4.3/documentation-templates/wazuh/filebeat/filebeat.yml
+        # curl -so /etc/filebeat/filebeat.yml https://packages-dev.wazuh.com/4.3/tpl/wazuh/filebeat/filebeat.yml
         
         
   #. Edit the ``/etc/filebeat/filebeat.yml`` configuration file.
@@ -147,7 +147,7 @@ Deploying certificates
 ^^^^^^^^^^^^^^^^^^^^^^
 
   .. note::
-    Make sure that a copy of ``certs.tar``, created during the Wazuh indexer installation, is placed in your working directory.
+    Make sure that a copy of ``wazuh-certificates.tar``, created during the Wazuh indexer installation, is placed in your working directory.
 
   #. Replace ``<server-node-name>`` with your Wazuh server node certificate name, the same used in ``config.yml`` when creating the certificates. Then, move the certificates to their corresponding location.
 

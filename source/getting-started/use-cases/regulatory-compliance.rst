@@ -34,7 +34,7 @@ Wazuh rules also include mapping with the MITRE ATT&CK framework, which is used 
     <group>access_denied,pci_dss_6.5.8,pci_dss_10.2.4,gdpr_IV_35.7.d,hipaa_164.312.b,nist_800_53_SA.11,nist_800_53_AU.14,nist_800_53_AC.7,tsc_CC6.6,tsc_CC7.1,tsc_CC6.1,tsc_CC6.8,tsc_CC7.2,tsc_CC7.3,</group>
   </rule>
 
-Expand the output to see an example alert for rule ``Apache: Attempt to access forbidden directory index.``.
+Expand the output to see an example alert for rule ``Apache: Attempt to access forbidden directory index``.
 
 .. code-block:: json
   :emphasize-lines: 18,29,32,35,40,44

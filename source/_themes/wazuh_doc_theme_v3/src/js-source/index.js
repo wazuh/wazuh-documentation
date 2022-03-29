@@ -31,6 +31,21 @@ if ( $('.index') ) {
     }
   }
 
+  /* Disable empty TOC nodes links */
+  if ( emptyTocNodes ) {
+    for (let i = 0; i < emptyTocNodes.length; i++) {
+      const foundNodes = $('a[href="' + emptyTocNodes[i] + '.html"]');
+      if ( foundNodes.length > 0) {
+        const linkText = foundNodes.text();
+        const parent = foundNodes.parent();
+        if ( parent.hasClass('toctree-l1') ) {
+          foundNodes.remove();
+          parent.prepend('<span class="section-title" data-href="' + emptyTocNodes[i] + '.html">' + linkText + '</span>');
+        }
+      }
+    }
+  }
+
   /* Add click event functionality for dropdown toggle button to uncollapse the index blocks */
   $(document).delegate('.toctree-l1 .toggle', 'click', function(e) {
     e.preventDefault();

@@ -65,20 +65,20 @@ Indicate your deployment configuration, create the SSL certificates to encrypt c
              name: dashboard
              ip: <dashboard-node-ip>
 
-#. Run the script with the option ``-c`` to generate the SSL certificates. 
+#. Run the script with the option ``-g`` to generate the  Wazuh cluster key, certificates, and passwords necessary for installation. 
 
       .. code-block:: console
 
-        # bash ./wazuh-install.sh -c
+        # bash ./wazuh-install.sh -g
 
 
-#.  Copy the ``configurations.tar`` file to all the servers of the distributed deployment, including the Wazuh server, the Wazuh indexer, and the Wazuh dashboard nodes. This can be done by using, for example, ``scp``.
+#.  Copy the ``wazuh-install-files.tar`` file to all the servers of the distributed deployment, including the Wazuh server, the Wazuh indexer, and the Wazuh dashboard nodes. This can be done by using, for example, ``scp``.
 
 
 2. Wazuh indexer nodes installation
 ------------------------------------
 
-Install and configure the Wazuh indexer nodes. Make sure that a copy of ``configurations.tar``, created during the previous step, is placed in your working directory.
+Install and configure the Wazuh indexer nodes. Make sure that a copy of ``wazuh-install-files.tar``, created during the previous step, is placed in your working directory.
 
 
 #. Download the script.
@@ -102,9 +102,9 @@ Repeat this process on each Wazuh indexer node and proceed with initializing the
 -------------------------
 
 
-The final stage of the process for installing Wazuh indexer cluster consists in running the security admin script. 
+The final stage of the process for installing the Wazuh indexer cluster consists in running the security admin script. 
 
-Run the unattended script with option ``-s`` to load the new certificates information and start the cluster. 
+Run the unattended script with option ``-s`` on any Wazuh indexer node to load the new certificates information and start the cluster. 
 
   .. code-block:: console
 
