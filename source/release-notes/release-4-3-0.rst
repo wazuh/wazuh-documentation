@@ -168,6 +168,8 @@ Agent
 - `#10838 <https://github.com/wazuh/wazuh/pull/10838>`_ Standardized the use of the ``only_logs_after`` parameter in the external integration modules.
 - `#10900 <https://github.com/wazuh/wazuh/pull/10900>`_ The oscap module files are removed as it was already deprecated in version 4.0.0.
 - `#12150 <https://github.com/wazuh/wazuh/pull/12150>`_ Updated DockerListener integration shebang to python3 for Wazuh agents.
+- `#12779 <https://github.com/wazuh/wazuh/pull/12779>`_ The ico and jpg files have been updated with the new Wazuh logo for the Windows installer.
+
 
 RESTful API
 ^^^^^^^^^^^
@@ -193,6 +195,8 @@ RESTful API
 - `#10947 <https://github.com/wazuh/wazuh/pull/10947>`_ Show agent-info permissions flag is added when using cluster_control and in the ``GET /cluster/healthcheck`` API endpoint.
 - `#11931 <https://github.com/wazuh/wazuh/pull/11931>`_ Save agents' ossec.log if an API integration test fails.
 - `#12085 <https://github.com/wazuh/wazuh/pull/12085>`_ Added POST /security/user/authenticate/run_as endpoint to API bruteforce blocking system.
+- `#12638 <https://github.com/wazuh/wazuh/pull/12638>`_ A new API endpoint is added to obtain summaries of agent vulnerabilities' inventory items.
+- `#12727 <https://github.com/wazuh/wazuh/pull/12727>`_ The new fields external_references, condition, title, published, and updated are added to GET /vulnerability/{agent_id} API endpoint.
 - `#7490 <https://github.com/wazuh/wazuh/pull/7490>`_ The SSL protocol configuration parameter is renamed.
 - `#8827 <https://github.com/wazuh/wazuh/pull/8827>`_ The API spec examples and JSON body examples are reviewed and updated.
 - The performance of several API endpoints is improved. This is specially appreciable in environments with a big number of agents:
@@ -370,7 +374,7 @@ Reference                                                         Description
 `#7625 <https://github.com/wazuh/wazuh/pull/7625>`_               A timing problem is fixed in the manager that might prevent Analysisd from sending Active responses to agents.
 `#8210 <https://github.com/wazuh/wazuh/pull/8210>`_               A bug in Analysisd that did not apply field lookup in rules that overwrite other ones is fixed.
 `#8902 <https://github.com/wazuh/wazuh/pull/8902>`_               The manager is now prevented from leaving dangling agent database files.
-`#8254 <https://github.com/wazuh/wazuh/pull/8254>`_               The remediation message for error code 6004 was updated.
+`#8254 <https://github.com/wazuh/wazuh/pull/8254>`_               The remediation message for error code 6004 is updated.
 `#8157 <https://github.com/wazuh/wazuh/pull/8157>`_               A bug when deleting non-existing users or roles in the security SDK is now fixed.
 `#8418 <https://github.com/wazuh/wazuh/pull/8418>`_               A bug with ``agent.conf`` file permissions when creating an agent group is now fixed.
 `#8422 <https://github.com/wazuh/wazuh/pull/8422>`_               Wrong exceptions with wdb pagination mechanism are fixed.
@@ -398,9 +402,9 @@ Reference                                                         Description
 `#11282 <https://github.com/wazuh/wazuh/pull/11282>`_             A bug when using a limit parameter higher than the total number of objects in the wazuh-db queries is fixed.
 `#11440 <https://github.com/wazuh/wazuh/pull/11440>`_             A false positive for MySQL in Vulnerability Detector is prevented.
 `#11448 <https://github.com/wazuh/wazuh/pull/11448>`_             The segmentation fault when the wrong configuration is set is fixed.
-`#11440 <https://github.com/wazuh/wazuh/pull/11440>`_             Fixed false positives in Vulnerability Detector when scanning OVAl for Ubuntu Xenial and Bionic.
-`#11835 <https://github.com/wazuh/wazuh/pull/11835>`_             Fixed an argument injection hazard in the Pagerduty integration script.
-`#11863 <https://github.com/wazuh/wazuh/pull/11863>`_             Fixed memory leaks in the feed parser at Vulnerability Detector. Architecture data member from the RHEL 5 feed. RHSA items containing no CVEs. Unused RHSA data member when parsing Debian feeds.
+`#11440 <https://github.com/wazuh/wazuh/pull/11440>`_             A false positives in Vulnerability Detector is fixed when scanning OVAl for Ubuntu Xenial and Bionic.
+`#11835 <https://github.com/wazuh/wazuh/pull/11835>`_             An argument injection hazard is fixed in the Pagerduty integration script.
+`#11863 <https://github.com/wazuh/wazuh/pull/11863>`_             Memory leaks in the feed parser at Vulnerability Detector are fixed. Architecture data member from the RHEL 5 feed. RHSA items containing no CVEs. Unused RHSA data member when parsing Debian feeds.
 `#12368 <https://github.com/wazuh/wazuh/pull/12368>`_             Now, Authd ignore the pipe signal if Wazuh DB gets closed.
 `#12415 <https://github.com/wazuh/wazuh/pull/12415>`_             A buffer handling bug is fixed in Remoted that left the syslog TCP server stuck. 
 `#12644 <https://github.com/wazuh/wazuh/pull/12644>`_             A memory leak in Vulnerability Detector is fixed when discarding kernel packages.
@@ -447,9 +451,11 @@ Reference                                                         Description
 `#11296 <https://github.com/wazuh/wazuh/pull/11296>`_             Azure Storage credentials validation bug is fixed.
 `#11455 <https://github.com/wazuh/wazuh/pull/11455>`_             The read of the hostname in the installation process for openSUSE is fixed.
 `#11425 <https://github.com/wazuh/wazuh/pull/11425>`_             The graceful shutdown when the agent loses connection is fixed.
-`#11736 <https://github.com/wazuh/wazuh/pull/11736>`_             Fixed error "Unable to set server IP address" on the Windows agent. 
-`#11608 <https://github.com/wazuh/wazuh/pull/11608>`_             Fixed reparse option in the AWS VPCFlow and Config integrations.
-`#11644 <https://github.com/wazuh/wazuh/pull/11644>`_             Removed unnecessary calls to the AWS API made by the VPCFlow and Config integration modules.
+`#11736 <https://github.com/wazuh/wazuh/pull/11736>`_             The error "Unable to set server IP address" is fixed on the Windows agent. 
+`#11608 <https://github.com/wazuh/wazuh/pull/11608>`_             The reparse option is fixed in the AWS VPCFlow and Config integrations.
+`#12324 <https://github.com/wazuh/wazuh/pull/12324>`_             The way the AWS Config integration parses the dates used to search in the database for previous records was fixed.
+`#12676 <https://github.com/wazuh/wazuh/pull/12676>`_             Now, Logcollector audit format parse logs with a custom name_format. 
+`#12704 <https://github.com/wazuh/wazuh/pull/12704>`_             An issue with the Agent bootstrap is fixed, it might lead to a startup timeout when it cannot resolve a manager hostname.
 ==============================================================    =============
 
 
@@ -483,8 +489,8 @@ Reference                                                         Description
 `#10656 <https://github.com/wazuh/wazuh/pull/10656>`_             The agent endpoints q parameter to allow more operators when filtering by groups is fixed.
 `#10830 <https://github.com/wazuh/wazuh/pull/10830>`_             The API integration tests related to rule, decoder, and task endpoints are fixed.
 `#11411 <https://github.com/wazuh/wazuh/pull/11411>`_             Exceptions handling when starting the Wazuh API service is improved.
-`#11598 <https://github.com/wazuh/wazuh/pull/11598>`_             Fixed race condition while creating RBAC database. 
-`#12102 <https://github.com/wazuh/wazuh/pull/12102>`_             Fixed API integration tests failures caused by race conditions. 
+`#11598 <https://github.com/wazuh/wazuh/pull/11598>`_             The race condition while creating RBAC database is fixed. 
+`#12102 <https://github.com/wazuh/wazuh/pull/12102>`_             The API integration tests failures caused by race conditions is fixed. 
 ==============================================================    =============
 
 
@@ -494,10 +500,10 @@ Ruleset
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#11117 <https://github.com/wazuh/wazuh/pull/11117>`_             Fixed bad character on rules 60908 and 60884 - win-application rules.
-`#11369 <https://github.com/wazuh/wazuh/pull/11369>`_             Fixed Microsoft logs rules.
-`#11405 <https://github.com/wazuh/wazuh/pull/11405>`_             Fixed PHP rules for MITRE and groups. 
-`#11214 <https://github.com/wazuh/wazuh/pull/11214>`_             Fixed rules id for Microsoft Windows PowerShell.
+`#11117 <https://github.com/wazuh/wazuh/pull/11117>`_             Bad character are fixed on rules 60908 and 60884 - win-application rules.
+`#11369 <https://github.com/wazuh/wazuh/pull/11369>`_             Microsoft logs rules are fixed.
+`#11405 <https://github.com/wazuh/wazuh/pull/11405>`_             PHP rules for MITRE and groups are fixed. 
+`#11214 <https://github.com/wazuh/wazuh/pull/11214>`_             Rules id for Microsoft Windows PowerShell are fixed.
 ==============================================================    =============
 
 Wazuh Kibana plugin
@@ -551,7 +557,7 @@ Reference                                                         Description
 `#3741 <https://github.com/wazuh/wazuh-kibana-app/pull/3741>`_    The regex lookahead and lookbehind for safari are fixed.
 `#3744 <https://github.com/wazuh/wazuh-kibana-app/pull/3744>`_    Vulnerabilities Inventory flyout details filters are fixed.
 `#3604 <https://github.com/wazuh/wazuh-kibana-app/pull/3604>`_    Removed API selector toggle from Settings menu since it performed no useful function.
-`#3748 <https://github.com/wazuh/wazuh-kibana-app/pull/3748>`_    Fixed Dashboard PDF report error when switching pinned agent state. 
+`#3748 <https://github.com/wazuh/wazuh-kibana-app/pull/3748>`_    Dashboard PDF report error when switching pinned agent state is fixed. 
 `#3753 <https://github.com/wazuh/wazuh-kibana-app/pull/3753>`_    The rendering of the command to deploy new Windows agent not working in some Kibana versions now works correctly.
 `#3772 <https://github.com/wazuh/wazuh-kibana-app/pull/3772>`_    Action buttons no longer overlay with the request text in Tools/API Console. 
 `#3774 <https://github.com/wazuh/wazuh-kibana-app/issues/3774>`_  A bug in `Rule ID` value in reporting tables related to top results is now fixed. 
@@ -576,7 +582,7 @@ Reference                                                         Description
 `#1223 <https://github.com/wazuh/wazuh-splunk/pull/1223>`_        An error when agents view is re-initialized is now fixed.
 `#1230 <https://github.com/wazuh/wazuh-splunk/pull/1230>`_        This issue is fixed and you can now see actions after adding first API.
 `#1232 <https://github.com/wazuh/wazuh-splunk/pull/1232>`_        The Agent status chart data is shown correctly.
-`#1237 <https://github.com/wazuh/wazuh-splunk/pull/1237>`_        Fixed the Agent status graph so that it shows the correct amount of agents. 
+`#1237 <https://github.com/wazuh/wazuh-splunk/pull/1237>`_        The Agent status graph is fixed to show the correct amount of agents.
 ==============================================================    =============
 
 
@@ -589,7 +595,7 @@ Reference                                                         Description
 `#9168 <https://github.com/wazuh/wazuh/pull/9168>`_               Error detection in the CURL helper library is fixed.
 `#10899 <https://github.com/wazuh/wazuh/pull/10899>`_             External Berkeley DB library support for GCC 11 is fixed.
 `#11086 <https://github.com/wazuh/wazuh/pull/11086>`_             An installation error due to missing OS minor version on CentOS Stream is fixed.
-`#11455 <https://github.com/wazuh/wazuh/pull/11455>`_             Fixed an installation error due to missing command hostname on OpenSUSE Tumbleweed.
+`#11455 <https://github.com/wazuh/wazuh/pull/11455>`_             An installation error due to a missing command hostname on OpenSUSE Tumbleweed is fixed.
 ==============================================================    =============
 
 
