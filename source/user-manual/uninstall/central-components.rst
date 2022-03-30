@@ -157,5 +157,3 @@ Uninstall the Wazuh indexer
         .. code:: console
 
           # apt remove --purge wazuh-indexer -y
-          
-#. Remove the ``wazuh-certs-tool.sh`` and ``config.yml`` files downloaded previously.
