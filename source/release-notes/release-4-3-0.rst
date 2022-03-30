@@ -345,7 +345,7 @@ Wazuh Splunk app
 - `#1186 <https://github.com/wazuh/wazuh-splunk/pull/1186>`_ Wazuh rebranding.
 - `#1172 <https://github.com/wazuh/wazuh-splunk/pull/1172>`_ Deprecated authd options is updated.
 - `#1236 <https://github.com/wazuh/wazuh-splunk/pull/1236>`_ Refactored branding color styles to improve maintainability.  
-
+- `#1243 <https://github.com/wazuh/wazuh-splunk/pull/1243>`_ Wazuh API's name is changed to its alias in the quick settings selector. 
 
 Other
 ^^^^^
@@ -596,6 +596,12 @@ Reference                                                         Description
 `#1230 <https://github.com/wazuh/wazuh-splunk/pull/1230>`_        This issue is fixed and you can now see actions after adding first API.
 `#1232 <https://github.com/wazuh/wazuh-splunk/pull/1232>`_        The Agent status chart data is shown correctly.
 `#1237 <https://github.com/wazuh/wazuh-splunk/pull/1237>`_        The Agent status graph is fixed to show the correct amount of agents.
+`#1258 <https://github.com/wazuh/wazuh-splunk/pull/1258>`_        Fix the sorting on the Groups table columns.
+`#1260 <https://github.com/wazuh/wazuh-splunk/pull/1260>`_        Non-sortable columns are fixed on the Security section tables.
+`#1271 <https://github.com/wazuh/wazuh-splunk/pull/1271>`_        Group report disabled configuration parameter error is fixed.
+`#1266 <https://github.com/wazuh/wazuh-splunk/pull/1266>`_        Import CDB list file is fixed.
+`#1282 <https://github.com/wazuh/wazuh-splunk/pull/1282>`_        Header menu height style issue is fixed.
+`#1283 <https://github.com/wazuh/wazuh-splunk/pull/1283>`_        An error is fixed on the search string used on the Alerts Summary table in the Overview > Vulnerability section, causing the table to show no data.
 ==============================================================    =============
 
 
