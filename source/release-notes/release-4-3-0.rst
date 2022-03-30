@@ -564,6 +564,19 @@ Reference                                                         Description
 `#3787 <https://github.com/wazuh/wazuh-kibana-app/pull/3787>`_    An issue with github/office365 multi-select filters suggested values is now fixed.
 `#3790 <https://github.com/wazuh/wazuh-kibana-app/pull/3790>`_    We fixed an issue related to updating the aggregation data of the Panel section when changing the time filter 
 `#3804 <https://github.com/wazuh/wazuh-kibana-app/pull/3804>`_    We removed the button to remove an agent for a group in the agents' table when it is the default group.
+`#3776 <https://github.com/wazuh/wazuh-kibana-app/pull/3776>`_    Adding single agent to group is fixed.
+`#3777 <https://github.com/wazuh/wazuh-kibana-app/pull/3777>`_    The implicit filters from the search bar can be removables is fixed.
+`#3778 <https://github.com/wazuh/wazuh-kibana-app/pull/3778>`_    Office365/Github module the side panel tab is fixed.
+`#3780 <https://github.com/wazuh/wazuh-kibana-app/pull/3780>`_    No wrap text in MITRE ATT&CK intelligence table is fixed.
+`#3781 <https://github.com/wazuh/wazuh-kibana-app/pull/3781>`_    Visualization tooltip position is fixed.
+`#3787 <https://github.com/wazuh/wazuh-kibana-app/pull/3787>`_    github/office365 multi-select filters suggested values is fixed.
+`#3796 <https://github.com/wazuh/wazuh-kibana-app/pull/3796>`_    The styles on the evolution card is fixed.
+`#3831 <https://github.com/wazuh/wazuh-kibana-app/pull/3831>`_    Internal user no longer needs permission to make x-pack detection request.
+`#3845 <https://github.com/wazuh/wazuh-kibana-app/pull/3845>`_    Agents details card style is fixed.
+`#3854 <https://github.com/wazuh/wazuh-kibana-app/pull/3854>`_    Agents evolutions card is fixed.
+`#3866 <https://github.com/wazuh/wazuh-kibana-app/pull/3866>`_    Routing redirection in events documents discover links is fixed.
+`#3868 <https://github.com/wazuh/wazuh-kibana-app/pull/3868>`_    Health-check is fixed.
+`#3901 <https://github.com/wazuh/wazuh-kibana-app/pull/3901>`_    The table of Vulnerabilities/Inventory doesn't reload when changing the selected agent is fixed.
 ================================================================  =============
 
 
