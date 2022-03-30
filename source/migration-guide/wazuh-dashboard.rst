@@ -67,15 +67,17 @@ Follow this guide to migrate from Open Distro for Elasticsearch Kibana 1.13 to W
 
     ..  note:: Make sure that your Wazuh manager is updated to the lastest version. 
 
-#. Remove the demo certificates, copy your old certificates to the new location and give them the right ownership.    
+#. Create the ``/etc/wazuh-dashboard/certs`` directory, copy your old certificates to the new location and give them the right ownership and permissions.    
 
    .. code-block:: console
 
-     rm -f /etc/wazuh-dashboard/certs/*
-     cp /etc/kibana/certs/kibana.pem /etc/wazuh-dashboard/certs/wazuh-dashboard.pem
-     cp /etc/kibana/certs/kibana-key.pem /etc/wazuh-dashboard/certs/wazuh-dashboard-key.pem
-     cp /etc/kibana/certs/root-ca.pem /etc/wazuh-dashboard/certs/root-ca.pem
-     chown -R wazuh-dashboard:wazuh-dashboard /etc/wazuh-dashboard/certs/*
+     # mkdir /etc/wazuh-dashboard/certs
+     # cp /etc/kibana/certs/kibana.pem /etc/wazuh-dashboard/certs/dashboard.pem
+     # cp /etc/kibana/certs/kibana-key.pem /etc/wazuh-dashboard/certs/dashboard-key.pem
+     # cp /etc/kibana/certs/root-ca.pem /etc/wazuh-dashboard/certs/root-ca.pem
+     # chown -R wazuh-dashboard:wazuh-dashboard /etc/wazuh-dashboard/
+     # chmod -R 500 /etc/wazuh-dashboard/certs
+     # chown wazuh-dashboard:wazuh-dashboard /etc/wazuh-dashboard/certs/*
 
 #. Port your settings from ``/etc/kibana/kibana.yml`` to the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file.
 

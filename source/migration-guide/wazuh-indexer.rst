@@ -100,48 +100,34 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13 to Wazuh in
             # apt install wazuh-indexer -y
 
 
-#. Remove the demo certificates, copy your old certificates to the new location and give them the right ownership and permissions.   
+#. Create the ``/etc/wazuh-indexer/certs`` directory, copy your old certificates to the new location and give them the right ownership and permissions.   
 
    .. code-block:: console
 
-       rm -f /etc/wazuh-indexer/certs/*
-       cp /etc/elasticsearch/certs/elasticsearch-key.pem /etc/wazuh-indexer/certs/wazuh-indexer-key.pem
-       cp /etc/elasticsearch/certs/elasticsearch.pem /etc/wazuh-indexer/certs/wazuh-indexer.pem
-       cp /etc/elasticsearch/certs/admin.pem /etc/wazuh-indexer/certs/admin.pem
-       cp /etc/elasticsearch/certs/admin-key.pem /etc/wazuh-indexer/certs/admin-key.pem
-       cp /etc/elasticsearch/certs/root-ca.pem /etc/wazuh-indexer/certs/root-ca.pem
-       chown wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/certs/*
-       chmod 0600 /etc/wazuh-indexer/certs/* 
+       # mkdir /etc/wazuh-indexer/certs
+       # cp /etc/elasticsearch/certs/elasticsearch-key.pem /etc/wazuh-indexer/certs/indexer-key.pem
+       # cp /etc/elasticsearch/certs/elasticsearch.pem /etc/wazuh-indexer/certs/indexer.pem
+       # cp /etc/elasticsearch/certs/admin.pem /etc/wazuh-indexer/certs/admin.pem
+       # cp /etc/elasticsearch/certs/admin-key.pem /etc/wazuh-indexer/certs/admin-key.pem
+       # cp /etc/elasticsearch/certs/root-ca.pem /etc/wazuh-indexer/certs/root-ca.pem
+       # chown -R wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/certs/
+       # chmod 500 /etc/wazuh-indexer/certs/
+       # chmod 400 /etc/wazuh-indexer/certs/*
 
 
-#. Move or copy your data to the new directories and give them the right ownership and permissions. 
+#. Move or copy your data to the new directories and give them the right ownership. 
 
    .. code-block:: console
 
-      rm -rf /var/lib/wazuh-indexer/ /var/log/wazuh-indexer/
-      mv /var/lib/elasticsearch/ /var/lib/wazuh-indexer/
-      mv /var/log/elasticsearch/ /var/log/wazuh-indexer/
-      chown wazuh-indexer:wazuh-indexer -R /var/log/wazuh-indexer/
-      chown wazuh-indexer:wazuh-indexer -R /var/lib/wazuh-indexer/
+      # rm -rf /var/lib/wazuh-indexer/ /var/log/wazuh-indexer/
+      # mv /var/lib/elasticsearch/ /var/lib/wazuh-indexer/
+      # mv /var/log/elasticsearch/ /var/log/wazuh-indexer/
+      # chown wazuh-indexer:wazuh-indexer -R /var/log/wazuh-indexer/
+      # chown wazuh-indexer:wazuh-indexer -R /var/lib/wazuh-indexer/
 
 #. Port your settings from ``/etc/elasticsearch/elasticsearch.yml`` to ``/etc/wazuh-indexer/opensearch.yml``. Most settings use the same names. At a minimum, specify ``cluster.name``, ``node.name``, ``discovery.seed_hosts``, and ``cluster.initial_master_nodes``.
 
-    a. Replace the certificates names ``demo-indexer.pem`` and ``demo-indexer-key.pem`` with ``wazuh-indexer.pem`` and ``wazuh-indexer-key.pem`` respectively.
-
-       .. code-block:: yaml
-         :emphasize-lines: 1,2,4,5
-         
-          plugins.security.ssl.http.pemcert_filepath: /etc/wazuh-indexer/certs/wazuh-indexer.pem
-          plugins.security.ssl.http.pemkey_filepath: /etc/wazuh-indexer/certs/wazuh-indexer-key.pem
-          plugins.security.ssl.http.pemtrustedcas_filepath: /etc/wazuh-indexer/certs/root-ca.pem
-          plugins.security.ssl.transport.pemcert_filepath: /etc/wazuh-indexer/certs/wazuh-indexer.pem
-          plugins.security.ssl.transport.pemkey_filepath: /etc/wazuh-indexer/certs/wazuh-indexer-key.pem
-          plugins.security.ssl.transport.pemtrustedcas_filepath: /etc/wazuh-indexer/certs/root-ca.pem
-          plugins.security.ssl.http.enabled: true
-          plugins.security.ssl.transport.enforce_hostname_verification: false
-          plugins.security.ssl.transport.resolve_hostname: false
-
-    b. Edit the certificate information. If you are using the default Wazuh certificates, change the Organizational Unit (OU) from ``Wazuh`` to ``Docu``.  
+    a. Edit the certificate information. If you are using the default Wazuh certificates, change the Organizational Unit (OU) from ``Wazuh`` to ``Docu``.  
       
        .. code-block:: yaml
          :emphasize-lines: 2,6
