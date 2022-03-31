@@ -15,8 +15,7 @@ Data visualization, mining, and analysis
 
 Wazuh provides out-of-the-box dashboards, allowing you to seamlessly navigate through the user interface. Users can quickly visualize security events, detected vulnerable applications, file integrity monitoring data, configuration assessment results, cloud infrastructure monitoring events, and regulatory compliance data, such as PCI DSS, GDPR, CIS, HIPAA, and NIST 800-53 standards.  Users are able to explore the alerts at the Wazuh cluster level and on a specific agent.
 
-Moreover, the application is flexible and allows users to create their own visualizations and dashboards. With Wazuh, customizing data visualization according to the environment needs gets users enhanced visibility of their infrastructure.
-
+Moreover, the application is flexible and allows users to create their own visualizations and dashboards. With Wazuh data visualization customization, users get enhanced infrastructure visibility according to the environment's needs.
 
 
 .. raw:: html
@@ -94,7 +93,7 @@ Additionally, agent groups and centralized configuration can be managed and edit
 Management of Wazuh infrastructure
 ----------------------------------
 
-The Wazuh dashboard provides you with a directory dedicated to administrating and monitoring your infrastructure. From there, you can manage and configure your Wazuh cluster rules and decoders, and CDB lists. 
+The Wazuh dashboard provides a directory dedicated to monitoring and administering your infrastructure. You can manage and configure your Wazuh cluster rules and decoders, and CDB lists. 
 
 Data analysis visualization gives you full visibility into your cluster infrastructure for fast threat detection and remediation. Users can check the status, logs, and statistics of Wazuh clusters and create their own downloadable reports using predefined templates, or personalize their own if required. Wazuh provides the tools for comprehensive and efficient security analytics.
 
