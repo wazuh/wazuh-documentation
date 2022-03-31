@@ -8,51 +8,48 @@
 Amazon Machine Images (AMI)
 ===========================
 
-Wazuh provides a pre-built Amazon Machine Image (AMI). An AMI is a preconfigured template that is ready to use for creating a virtual computing environment within the Amazon Elastic Compute Cloud (Amazon EC2). It packages the operating system and additional software for your server.
+Wazuh provides a pre-built Amazon Machine Image (AMI). An AMI is a pre-configured template that is ready to use for creating a virtual computing environment within the Amazon Elastic Compute Cloud (Amazon EC2). The latest Wazuh AMI packages Amazon Linux 2 and the following central components for your Wazuh server.
 
-Specifications of Wazuh latest AMI:
-
-- Amazon Linux 2
 - Wazuh manager |WAZUH_LATEST_AMI|
-- Wazuh indexer |WAZUH_LATEST_AMI|
 - Filebeat-OSS |FILEBEAT_LATEST_AMI|
+- Wazuh indexer |WAZUH_LATEST_AMI|
 - Wazuh dashboard |WAZUH_LATEST_AMI|
 
 
 Deployment alternatives
 -----------------------
 
-There are two alternatives for deploying a Wazuh instance. You can launch the `Wazuh All-In-One Deployment AMI <https://aws.amazon.com/marketplace/pp/B09J56274H>`_ directly from the AWS Marketplace or you can configure and deploy the instance manually.
+There are two alternatives for deploying a Wazuh instance. You can launch the `Wazuh All-In-One Deployment AMI <https://aws.amazon.com/marketplace/pp/B09J56274H>`_ directly from the AWS Marketplace or you can configure and deploy a custom instance using the AWS Management Console.
 
-- `Deploy a predefined instance`_
-- `Deploy and configure the instance manually`_
+- `Launch an instance from the AWS Marketplace`_
+- `Deploy a custom instance using the AWS Management Console`_
 
 .. note::
   Our `Wazuh Consulting Service <https://aws.amazon.com/marketplace/pp/prodview-ve4mgmhukgmzi>`_ is also available in the AWS Marketplace. Check the Professional Service packages that Wazuh has to offer.
 
 
-Deploy a predefined instance
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Launch an instance from the AWS Marketplace
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 #. Go to `Wazuh All-In-One Deployment <https://aws.amazon.com/marketplace/pp/prodview-eju4flv5eqmgq?ref=hmpg_recommendations_widget>`_ in the AWS Marketplace, then click **Continue to Subscribe**.
 
 #. Review the information and accept the terms for the software. Click **Continue to Configuration** to confirm subscribing to our Server product.
 
-#. Select a **Software Version** and the **Region** where the instance will be deployed. Then, click **Continue to Launch**.
+#. Select a **Software Version** and the **Region** where the instance is going to be deployed. Then, click **Continue to Launch**.
 
 #. Review your configuration making sure that all settings are correct before launching the software. Adapt the default configuration values to your needs.
 
     #. When selecting the **EC2 Instance Type**, we recommend that you use an instance type ``c5.2xlarge`` or similar. Check the :ref:`minimum and recommended requirements <installation_requirements>` for this type of instance.
   
-    #. When selecting the Security Group, it must be one with the right :ref:`configuration <default_ports>` for your Wazuh instance to guarantee the correct operation. You can create a new security group by choosing **Create new based on seller settings**. This new group will have the right configuration by default.
+    #. When selecting the **Security Group**, it must be one with the appropriate :ref:`settings for your Wazuh instance <default_ports>` to guarantee the correct operation. You can create a new security group by choosing **Create new based on seller settings**. This new group will have the appropriate settings by default.
 
 #. Click **Launch** to generate the instance.
 
 Once your instance is successfully launched and a few minutes have elapsed, you can :ref:`access the Wazuh dashboard <ami_wazuh_ui>`.
 
 
-Deploy and configure the instance manually
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Deploy a custom instance using the AWS Management Console
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 #. Select **Launch instance** from your `AWS Management Console <https://aws.amazon.com/console/>`_ dashboard.
 
@@ -99,7 +96,7 @@ To learn more about configuring Wazuh, see the :ref:`User manual <user_manual>`.
 Access the Wazuh dashboard
 --------------------------
 
-When the instance is launched, the passwords of the users are automatically changed to the ID of the instance created from the AMI. In this way, access to the interface is guaranteed only to the creator of it. This process can take an average of five minutes depending on the type of instance. Both the SSH access and the Wazuh dashboard are disabled during this process.
+When the instance is launched, the passwords of the users are automatically changed to the ID of the instance. In this way, access to the interface is guaranteed only to the creator of it. This process can take an average of five minutes depending on the type of instance. Both the SSH access and the Wazuh dashboard access are disabled during this process.
 
 Once the instance is running and the process to initialize passwords is complete, you can access the Wazuh dashboard with your credentials.
 
@@ -121,6 +118,7 @@ Security considerations about SSH
   .. code-block:: console
 
       # ssh -i "<KEY_PAIR_NAME>" wazuh-user@<YOUR_INSTANCE_IP>
+- Access during the initial password change process is disabled to prevent potential problems. This process may take a few minutes to complete. Any access attempt before completion will show ``wazuh-user@<INSTANCE_IP>: Permission denied (publickey,gssapi-keyex,gssapi-with-mic)``.
 
 
 Next steps
