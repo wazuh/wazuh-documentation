@@ -5,7 +5,7 @@
 Installing the Wazuh server in step-by-step mode
 ================================================
 
-Install and configure the Wazuh server as a single-node or multi-node cluster following step-by-step instructions. The Wazuh server is in charge of analyzing the data received from the agents and triggering alerts when threats or anomalies are detected. This central component includes the Wazuh manager and Filebeat. The Wazuh manager collects and analyzes data from the deployed Wazuh agents. Filebeat securely forwards alerts and archived events to the Wazuh indexer.
+Install and configure the Wazuh server as a single-node or multi-node cluster following step-by-step instructions. The Wazuh server is a central component that includes the Wazuh manager and Filebeat. The Wazuh manager collects and analyzes data from the deployed Wazuh agents. It triggers alerts when threats or anomalies are detected. Filebeat securely forwards alerts and archived events to the Wazuh indexer.
 
 The installation process is divided into two stages.  
 
@@ -119,13 +119,13 @@ Configuring Filebeat
 
       .. include:: /_templates/installations/filebeat/opensearch/configure_filebeat.rst
 
-  #. Create a secrets keystore:
+  #. Create a Filebeat keystore to securely store authentication credentials.
 
       .. code-block:: console
      
         # filebeat keystore create
 
-  #. Add the username and password using the following commands:
+  #. Add the username and password to the secrets keystore.
       
       .. code-block:: console
 
@@ -137,7 +137,7 @@ Configuring Filebeat
       .. include:: /_templates/installations/filebeat/opensearch/load_filebeat_template.rst
 
 
-  #. Download the Wazuh module.
+  #. Install the Wazuh module for Filebeat.
 
       .. code-block:: console
 
