@@ -6,9 +6,9 @@
 Uninstalling the Wazuh central components
 =========================================
 
-You can uninstall all the Wazuh central components using the Wazuh installer.
+You can uninstall all the Wazuh central components using the `Wazuh installation assistant <https://packages-dev.wazuh.com/|WAZUH_LATEST_MINOR|/wazuh-install.sh>`_.
 
-Run the Wazuh installer with the option ``-u`` or ``--uninstall`` as follows:
+Run the assistant with the option ``-u`` or ``--uninstall`` as follows:
 
     .. code-block:: console
 
@@ -16,7 +16,7 @@ Run the Wazuh installer with the option ``-u`` or ``--uninstall`` as follows:
 
 This will remove Wazuh indexer, Wazuh server, and Wazuh dashboard from your cluster node.
 
-If you want to uninstall one specific central component, you need to follow the instructions below.
+If you want to uninstall one specific central component, follow the instructions below.
 
 .. note:: Root user privileges are required to execute all the commands described below.
 
@@ -25,23 +25,7 @@ If you want to uninstall one specific central component, you need to follow the 
 Uninstall the Wazuh dashboard
 -----------------------------
 
-#. Remove the Wazuh repository if not done already.
-
-    .. tabs::
-
-      .. group-tab:: Yum
-
-        .. code-block:: console
-          
-          # rm /etc/yum.repos.d/wazuh.repo
-
-      .. group-tab:: APT
-
-        .. code-block:: console
-        
-          # rm /etc/apt/sources.list.d/wazuh.list
-
-#. Clean the Wazuh dashboard installation.
+#. Remove the Wazuh dashboard installation.
 
     .. tabs::
 
@@ -65,23 +49,7 @@ Uninstall the Wazuh dashboard
 Uninstall the Wazuh server
 --------------------------
 
-#. Remove the Wazuh repository if not done already.
-
-    .. tabs::
-
-      .. group-tab:: Yum
-
-        .. code-block:: console
-          
-          # rm /etc/yum.repos.d/wazuh.repo
-
-      .. group-tab:: APT
-
-        .. code-block:: console
-        
-          # rm /etc/apt/sources.list.d/wazuh.list
-
-#. Clean the Wazuh manager installation.
+#. Remove the Wazuh manager installation.
 
     .. tabs::
 
@@ -98,7 +66,7 @@ Uninstall the Wazuh server
         
           # apt remove --purge wazuh-manager -y
 
-#. Clean the Filebeat installation.
+#. Remove the Filebeat installation.
 
     .. tabs::
 
@@ -123,23 +91,7 @@ Uninstall the Wazuh server
 Uninstall the Wazuh indexer
 ---------------------------
 
-#. Remove the Wazuh repository if not done already.
-
-    .. tabs::
-
-      .. group-tab:: Yum
-
-        .. code-block:: console
-          
-          # rm /etc/yum.repos.d/wazuh.repo
-
-      .. group-tab:: APT
-
-        .. code-block:: console
-        
-          # rm /etc/apt/sources.list.d/wazuh.list
-
-#. Clean the Wazuh indexer installation.
+#. Remove the Wazuh indexer installation.
 
     .. tabs::
 
