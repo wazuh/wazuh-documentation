@@ -62,7 +62,27 @@ if ( $('.document').length > 0 ) {
 
   /* Avoid selecting $ and # present in the code blocks --------------------- */
   $('.highlight').each(function() {
+    const regex = /\s+$/g;
     const blockCode = $(this);
+
+    /* Process prompts: gp elements */
+    const gpElements = blockCode.find('.gp');
+    gpElements.each(function() {
+      const gp = $(this);
+      const gpText = gp.text();
+      let gpSpaces = gpText.match(regex);
+
+      let gpSpaceToText = '';
+      if (gpSpaces) {
+        gpSpaces = gpSpaces[0].length -1;
+      }
+      for (let i = 0; i < gpSpaces; i++) {
+        gpSpaceToText += '&nbsp;';
+      }
+      $( '<span>' + gpSpaceToText + '</span>' ).insertAfter(gp);
+      gp.html(gp.html().replace(regex, ' '));
+    });
+
     const data = blockCode.html();
     const codeType = getCodeBlockType(blockCode.parent());
     if ( jQuery.inArray(codeType, ['none', 'bash']) === -1 ) {
