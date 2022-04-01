@@ -453,7 +453,7 @@ custom_replacements = {
     "|WAZUH_LATEST_OVA|" : "4.2.6",
     "|WAZUH_LATEST_AMI|" : "4.2.6",
     "|WAZUH_LATEST_DOCKER|" : "4.2.6",
-    "|WAZUH_LATEST_AIX|" : "4.2.5",
+    "|WAZUH_LATEST_AIX|" : "4.2.6",
     "|WAZUH_LATEST_MINOR_AIX|" : "4.2",
     "|OPEN_DISTRO_LATEST|" : "1.13.2",
     "|ELASTICSEARCH_LATEST|" : "7.10.2",
