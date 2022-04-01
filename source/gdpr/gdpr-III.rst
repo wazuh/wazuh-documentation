@@ -21,14 +21,14 @@ Temporary access restrictions (Syscheck) is possible with Wazuh by checking that
 Use cases
 ^^^^^^^^^
 
-We have the ability to control access to data through Syscheck and control that there are no accesses to such data using time intervals with the Kibana application.
+We have the ability to control access to data through Syscheck and control that there are no accesses to such data using time intervals with the Wazuh dashboard.
 
-.. thumbnail:: ../images/gdpr/time_alert.png
+.. thumbnail:: ../images/gdpr/time-alert.png
     :title: Filtering alerts by Syscheck alert
     :align: center
     :width: 100%
 
-.. thumbnail:: ../images/gdpr/time_no_alert.png
+.. thumbnail:: ../images/gdpr/time-no-alert.png
     :title: Filtering alerts by Syscheck no alert
     :align: center
     :width: 100%

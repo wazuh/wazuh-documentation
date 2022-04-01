@@ -1,0 +1,71 @@
+{#-
+    wazuh_doc_theme_v3/template-parts/header.html
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    General header to be included within every page of Wazuh Documentation.
+-#}
+
+<header id="header" class="fixed-top">
+  <nav class="d-xl-flex align-items-center justify-content-between"> 
+    <div class="mobile-primary-header navbar navbar-expand-xl d-flex">
+      {% include "template-parts/brand.html" %}
+      <div class="toggle-buttons d-flex d-xl-none">
+        <button class="navbar-toggler search-toggler" type="button" data-toggle="collapse" data-target="#search-box-wrapper" aria-controls="search-box-wrapper" aria-expanded="false" aria-label="Toggle search bar">
+          <span class="search-toggler-icon"></span>
+        </button>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#global-toc" aria-controls="global-toc" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+    </div>
+    
+    <div class="mobile-secondary-header">
+      <ul class="navbar-nav ml-auto d-none d-xl-flex flex-row">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ theme_wazuh_web_url + '/product/' }}" target="_blank" rel="noreferrer noopener">Product</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ theme_wazuh_web_url + '/cloud/' }}" target="_blank" rel="noreferrer noopener">Cloud</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ theme_wazuh_web_url + '/professional-services/' }}" target="_blank" rel="noreferrer noopener">Services</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ theme_wazuh_web_url + '/partners/' }}" target="_blank" rel="noreferrer noopener">Partners</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown-resources" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Resources</a>
+          <ul class="dropdown-menu" aria-labelledby="dropdown-resources">
+            <li class="nav-item">
+              <a class="dropdown-item" href="{{ theme_wazuh_web_url + '/blog/' }}" target="_blank" rel="noreferrer noopener">Blog</a>
+            </li>
+            <li class="nav-item">
+              <a class="dropdown-item" href="{{ theme_wazuh_web_url + '/faq/' }}" target="_blank" rel="noreferrer noopener">FAQ</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown-company" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Company</a>
+          <ul class="dropdown-menu" aria-labelledby="dropdown-company">
+            <li class="nav-item">
+              <a class="dropdown-item" href="{{ theme_wazuh_web_url + '/our-customers/' }}" target="_blank" rel="noreferrer noopener">Our customers</a>
+            </li>
+            <li class="nav-item">
+              <a class="dropdown-item" href="{{ theme_wazuh_web_url + '/about-us/' }}" target="_blank" rel="noreferrer noopener">About us</a>
+            </li>
+            <li class="nav-item">
+              <a class="dropdown-item" href="{{ theme_wazuh_web_url + '/our-team/' }}" target="_blank" rel="noreferrer noopener">Our team</a>
+            </li>
+            <li class="nav-item">
+              <a class="dropdown-item" href="{{ theme_wazuh_web_url + '/newsroom/' }}" target="_blank" rel="noreferrer noopener">Newsroom</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+        
+      {% if theme_display_version_selector %}
+      {% include "template-parts/version-selector.html" %}
+      {% endif %}
+    </div>
+  </nav>
+</header>

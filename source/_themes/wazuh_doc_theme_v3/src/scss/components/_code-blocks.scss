@@ -1,0 +1,454 @@
+/* -----------------------------------------------------------------------------
+  Component: Code-blocks
+
+  Style for the code-blocks and adjustment of the pygments.
+----------------------------------------------------------------------------- */
+
+main {
+  code,
+  kbd,
+  pre,
+  samp {
+    font-family: "Fira Mono", monospace;
+  }
+}
+
+.literal-block-wrapper.docutils.container {
+  max-width: 100%;
+  padding-right: 0;
+  padding-left: 0;
+
+  .code-block-caption {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 48px;
+    padding: 5px 10px;
+    margin-top: 1rem;
+    border-radius: $rounded-corners $rounded-corners 0 0;
+
+    .headerlink {
+      line-height: 1;
+      text-decoration: none;
+
+      &::after {
+        display: inline-block;
+        width: 1rem;
+        height: 1rem;
+        font: 400 .95rem/1 FontAwesome, sans-serif;
+        text-align: right;
+        vertical-align: middle;
+        content: "\f0c1";
+        opacity: 0;
+        transition: opacity ease-in .1s;
+      }
+    }
+
+    &:hover {
+      .headerlink::after {
+        opacity: 1;
+        transition: opacity ease-in .1s;
+      }
+    }
+  }
+
+  tbody tr td {
+    padding: 0;
+    border: none;
+  }
+
+  [class*="highlight-"] {
+    margin-top: 0;
+  }
+}
+
+[class*="highlight-"] {
+  position: relative;
+  max-width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  overflow-y: hidden;
+  border: 1px solid;
+  transition: max-height .2s;
+
+  &.output {
+    max-height: 100vh;
+    border-radius: $rounded-corners;
+
+    .output-title {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 40px;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: $rounded-corners $rounded-corners 0 0;
+
+      &::before {
+        width: 40px;
+        height: 40px;
+        content: "";
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 18px 18px;
+        transition: transform .1s;
+      }
+    }
+    .linenodiv {
+      top: 60px;
+    }
+    &.collapsed {
+      max-height: 40px;
+      transition: max-height .2s;
+
+      .output-title {
+        border-radius: $rounded-corners;
+        transition: border-radius .05s .2s;
+        &::before {
+          transition: transform .1s;
+          transform: rotateZ(-90deg);
+        }
+      }
+    }
+    &.expanded {
+      max-height: unset;
+    }
+  }
+
+  .highlighttable {
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 0;
+    table-layout: fixed;
+
+    .highlight {
+      position: unset;
+      max-width: 100%;
+      padding-right: 0;
+      padding-bottom: 20px;
+      padding-left: 0;
+      overflow: auto; /* Fix to remove occasional vertical scroll in Safari */
+    }
+    .code {
+      background-color: transparent;
+    }
+  }
+
+  &:hover {
+    .copy-to-clipboard {
+      opacity: 1;
+    }
+  }
+
+  .copy-to-clipboard {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    z-index: 10;
+    padding: 8px;
+    font: 400 14px/1 FontAwesome, sans-serif;
+    cursor: pointer;
+    border: 0;
+    border-radius: $rounded-corners;
+    opacity: 0;
+    transition: all .2s ease;
+
+    &:focus {
+      opacity: 1;
+    }
+
+    &.copied {
+      opacity: 1;
+    }
+
+    span {
+      display: none;
+      font-family: Manrope, sans-serif;
+      font-size: .9rem;
+    }
+  }
+
+  .no-select {
+    user-select: none;
+  }
+
+  td.code {
+    pre {
+      z-index: 6;
+      padding: 0 20px;
+      overflow: visible;
+    }
+  }
+
+  .linenodiv {
+    position: absolute;
+    top: 20px;
+    z-index: 30;
+    display: inline-flex;
+    justify-content: center;
+    width: 50px;
+    line-height: 24px;
+    user-select: none;
+    border-right: 1px solid;
+  }
+
+  .linenos {
+    width: 48px;
+    background-color: transparent;
+  }
+
+  .highlight {
+    position: relative;
+    z-index: 0;
+    display: flex;
+    padding: 20px 0 0;
+    overflow-x: auto;
+    font-family: "Fira Mono", monospace;
+    line-height: 24px;
+
+    pre {
+      position: unset;
+      padding: 0 20px 20px;
+      margin: 0;
+    }
+
+    .hll {
+      display: block;
+
+      &::before {
+        position: absolute;
+        right: 0;
+        left: -50px;
+        z-index: -1;
+        display: block;
+        height: 24px;
+        content: "";
+      }
+
+      > span {
+        position: relative;
+        z-index: 25;
+      }
+
+    }
+
+    /*
+    .gp,
+    .o,
+    .ow,
+    .p,
+    .p.p-Indicator,
+    .nn,
+    .l.l-Scalar.l-Scalar-Plain {}
+    */
+    .k,
+    .kn {
+      font-weight: 500;
+    }
+  }
+}
+
+/* Light theme -------------------------------------------------------------- */
+
+body {
+  .literal-block-wrapper.docutils.container {
+    .code-block-caption {
+      background-color: $light-color-output-title-background;
+      .headerlink {
+        &::after {
+          color: $light-color-shaded-text;
+        }
+      }
+    }
+  }
+  [class*="highlight-"] {
+    border-color: $light-color-code-block-border;
+    &.output {
+      background-color: $light-color-code-block-background;
+      .output-title {
+        background-color: $light-color-output-title-background;
+        &::before {
+          background-image: url("#{$ico-path}svg-icons.svg#chevron-blue-lt");
+        }
+      }
+    }
+    .highlighttable {
+      background-color: $light-color-code-block-background;
+      .linenos {
+        background-color: transparent;
+      }
+    }
+    .copy-to-clipboard {
+      color: $light-color-main-text;
+      background-color: $light-color-sidebar-space;
+      &:hover {
+        color: $light-color-base-space;
+        background-color: $light-color-primary-lighter;
+      }
+      &.copied {
+        color: $light-color-base-space;
+        background-color: $light-color-primary;
+      }
+    }
+    .linenodiv {
+      border-right-color: $light-color-table-border;
+      pre {
+        color: $light-color-shaded-text;
+      }
+    }
+    .highlight {
+      color: $light-color-code-default;
+      background-color: $light-color-code-block-background;
+      .hll::before {
+        background-color: $light-color-highlight-background;
+      }
+      .k,
+      .kn {
+        color: $light-color-code-keyword;
+      }
+      .c,
+      .c1,
+      .cp,
+      .ch,
+      .go {
+        color: $light-color-code-comment;
+      }
+
+      .m,
+      .mi {
+        color: $light-color-code-number;
+      }
+
+      .s,
+      .s1,
+      .s2,
+      .sb,
+      .se,
+      .sh,
+      .si,
+      .heredoc,
+      .heredoc span {
+        color: $light-color-code-string;
+      }
+
+      .vm,
+      .n,
+      .nb,
+      .bp,
+      .nf {
+        color: $light-color-code-function;
+      }
+
+      .nt,
+      .na,
+      .no {
+        color: $light-color-code-variable;
+      }
+    }
+  }
+}
+
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme {
+  .literal-block-wrapper.docutils.container {
+    .code-block-caption {
+      background-color: $dark-color-sidebar-space;
+      .headerlink {
+        &::after {
+          color: $dark-color-shaded-text;
+        }
+      }
+    }
+  }
+  [class*="highlight-"] {
+    border-color: $dark-color-code-block-border;
+    &.output {
+      background-color: $dark-color-code-block-background;
+      .output-title {
+        color: $dark-color-main-text;
+        background-color: $dark-color-output-title-background;
+        &::before {
+          background-image: url("#{$ico-path}svg-icons.svg#chevron-blue-dt");
+        }
+      }
+    }
+    .highlighttable {
+      background-color: $dark-color-code-block-background;
+      .linenos {
+        background-color: transparent;
+      }
+    }
+    .copy-to-clipboard {
+      color: $dark-color-main-text;
+      background-color: $dark-color-sidebar-space;
+      &:hover {
+        color: $dark-color-base-space;
+        background-color: $dark-color-primary-lighter;
+      }
+      &.copied {
+        color: $dark-color-base-space;
+        background-color: $dark-color-primary;
+      }
+    }
+    .linenodiv {
+      border-right-color: $dark-color-table-border;
+      pre {
+        color: $dark-color-shaded-text;
+      }
+    }
+    .highlight {
+      background-color: $dark-color-code-block-background;
+      pre {
+        color: $dark-color-code-default;
+      }
+      .hll {
+        &::before {
+          background-color: $dark-color-output-title-background;
+        }
+      }
+      .k,
+      .kn {
+        color: $dark-color-code-keyword;
+      }
+      .c,
+      .c1,
+      .cp,
+      .ch,
+      .go {
+        color: $dark-color-code-comment;
+      }
+
+      .m,
+      .mi {
+        color: $dark-color-code-number;
+      }
+
+      .s,
+      .s1,
+      .s2,
+      .sb,
+      .se,
+      .sh,
+      .si,
+      .heredoc,
+      .heredoc span {
+        color: $dark-color-code-string;
+      }
+
+      .vm,
+      .n,
+      .nb,
+      .bp,
+      .nf {
+        color: $dark-color-code-function;
+      }
+
+      .nt,
+      .na,
+      .no {
+        color: $dark-color-code-variable;
+      }
+    }
+  }
+}

@@ -272,7 +272,7 @@ To map the user with Wazuh, follow these steps:
       - **Resource identifier**: Write the name of the agents group, for example, ``Team_A``, and click **Add**. You can add as many resources as needed. 
       - **Select an effect**: Select ``Allow``.  
        
-       .. thumbnail:: ../../images/kibana-app/rbac/create_policy.png
+       .. thumbnail:: ../../images/kibana-app/rbac/create-policy.png
           :title: Creating a custom policy 
           :align: center
           :width: 100%
@@ -283,7 +283,7 @@ To map the user with Wazuh, follow these steps:
       - **Role name**: Assign a name to the new role. 
       - **Policies**: Select the policy created previously. 
     
-       .. thumbnail:: ../../images/kibana-app/rbac/create_role.png
+       .. thumbnail:: ../../images/kibana-app/rbac/create-role.png
           :title: Creating a custom role 
           :align: center
           :width: 100%
@@ -296,7 +296,7 @@ To map the user with Wazuh, follow these steps:
       - **Roles**: Select the role created previously. 
       - **Internal users**: Select the internal user created previously.
 
-       .. thumbnail:: ../../images/kibana-app/rbac/create_new_role_mapping.png
+       .. thumbnail:: ../../images/kibana-app/rbac/create-new-role-mapping.png
           :title: Creating a new role mapping 
           :align: center
           :width: 100%
@@ -308,7 +308,7 @@ To map the user with Wazuh, follow these steps:
 You have now created a new internal user and mapped it to manage a Wazuh agents group. Authenticate with the new user and open the Wazuh Kibana plugin, see that only ``Team_A`` agents' alerts and information are displayed.  
 
 
-.. thumbnail:: ../../images/kibana-app/rbac/team_A_agents.png
+.. thumbnail:: ../../images/kibana-app/rbac/team_A-agents.png
     :title: New user's environment - Only information regarding Team_A agents is displayed 
     :align: center
     :width: 100%

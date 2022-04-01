@@ -103,7 +103,7 @@ The following guides describe how to migrate your existing OSSEC installation to
    Server, OSSEC 2.8.3 or higher, Wazuh 3.x, :ref:`Upgrade OSSEC server <ossec_server>`
    Agent, OSSEC 2.8.3 or higher, Wazuh 3.x, :ref:`Upgrade OSSEC agent <ossec_agent>`
 
-The migration of Elastic Stack, in the case that you already have it installed, is beyond the scope of Wazuh documentation. We recommend you visit our guides for :ref:`Installing Elastic Stack <elasticsearch_cluster>`.
+The migration of Elastic Stack, in the case that you already have it installed, is beyond the scope of Wazuh documentation. We recommend you visit our guides for :ref:`Installing Elastic Stack <wazuh_indexer_installation>`.
 
 .. note::
     OSSEC agents are compatible with the Wazuh server. You can even have different versions of Wazuh and OSSEC agents reporting to a centralized Wazuh server. Having said that, it is recommended to keep both server and agents updated to the latest version. For interactive help, our `mailing list <https://groups.google.com/d/forum/wazuh>`_ is available. You can subscribe by sending an email to ``wazuh+subscribe@googlegroups.com``.

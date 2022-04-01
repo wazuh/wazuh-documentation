@@ -1,6 +1,6 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-.. _cloud_getting_started_starting_faq:
+.. _cloud_getting-started_starting_faq:
 
 Cloud service FAQ
 =================
@@ -51,7 +51,7 @@ Is it PCI DDS compliant?
 
 Yes, the Wazuh Cloud platform is validated as PCI DSS Level 1 Service Provider compliant.
 
-.. _cloud_getting_started_support:
+.. _cloud_getting-started_support:
 
 How can I get support?
 ----------------------

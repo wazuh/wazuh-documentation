@@ -1,0 +1,546 @@
+/* -----------------------------------------------------------------------------
+  Index page
+----------------------------------------------------------------------------- */
+
+@import "../inc/variables";
+@import "../inc/mixins";
+@import "../inc/root";
+
+@import "../components/brand";
+@import "../components/mode-switch";
+@import "../components/search-box";
+@import "../parts/footer";
+
+body {
+  margin-top: $index-header-height-xl;
+}
+
+.navbar {
+  margin: 0 auto 27px;
+  .navbar-brand {
+    padding: 0;
+    margin: 0;
+    img {
+      height: 35px;
+    }
+  }
+}
+
+.search-box {
+  .search-form {
+    height: 46px;
+    .btn-search {
+      width: 44px;
+      height: 44px;
+      background-size: 41px 41px;
+    }
+  }
+}
+
+main {
+  min-height: calc(100vh - #{$index-header-height-xl} - #{$footer-height});
+  padding-top: 60px;
+  padding-right: 0;
+  padding-left: 0;
+
+  h1 {
+    width: 0;
+    height: 0;
+    overflow: hidden;
+  }
+
+  .toctree-wrapper {
+    ul {
+      padding: 0;
+      list-style: none;
+    }
+    > ul {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      @include media-max(sm){
+        width: calc(100% - 20px);
+      }
+
+      .toctree-l1 {
+        position: relative;
+        width: calc(33.333% - #{$index-icon-size + 10});
+        min-height: 133px;
+        margin-bottom: 60px;
+        margin-left: #{$index-icon-size + 10};
+        @include media-max(lg){
+          margin-left: #{$index-icon-size - 10};
+        }
+        @include media-max(md) {
+          width: calc(100% - #{$index-icon-size + 10});
+        }
+        @include media-only(md, xl) {
+          width: calc(50% - #{$index-icon-size + 10});
+        }
+
+        &.collapsible {
+          .toggle {
+            left: -3px;
+            display: inline-block;
+            padding: 10px 0;
+            font-size: 18px;
+            font-weight: 600;
+            
+            &::before {
+              display: inline-block;
+              width: 48px;
+              height: 22px;
+              content: "More";
+            }
+
+            &::after {
+              display: inline-block;
+              width: 24px;
+              height: 12px;
+              margin-left: 3px;
+              content: "";
+              background-repeat: no-repeat;
+              background-position: center;
+              background-size: 20px 15px;
+              transform: rotateX(180deg);
+            }
+          }
+
+          &.collapsed {
+            ul {
+              position: relative;
+            }
+            .toggle::after {
+              transform: rotateX(0);
+            }
+
+            .toctree-l2:nth-of-type(n + #{$index-max-show-items + 1}) {
+              display: none;
+            }
+          }
+        }
+
+        a {
+          position: relative;
+          left: -3px;
+          display: inline-block;
+          padding-left: 15px;
+          font-weight: 500;
+          line-height: 32px;
+          border-left: 3px solid;
+
+          &:hover {
+            text-decoration: none;
+          }
+        }
+
+        > a {
+          padding-bottom: 15px;
+          font-size: 22px;
+          font-weight: 600;
+          line-height: 22px;
+          @include media-max(xl){
+            font-size: 20px;
+          }
+        }
+      }
+      .toctree-l2 {
+        position: relative;
+      }
+    }
+  }
+}
+
+.loading .toctree-l1 {
+  height: 133px;
+  overflow-y: hidden;
+}
+
+#header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: $index-header-height-xl;
+
+  .form-control {
+    box-shadow: none;
+  }
+
+  .navbar-brand {
+    font-size: 22px;
+
+    .logo-link.web {
+      padding-bottom: 0;
+      margin-right: 10px;
+    }
+    .logo-link.docs {
+      line-height: 50px;
+    }
+  }
+
+  .search-box {
+    max-width: 850px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+#right-sidebar {
+  position: fixed;
+  top: $index-header-height-xl;
+  right: 0;
+  width: calc((100% - 1140px) / 2);
+  min-width: 160px;
+  padding-top: 15px;
+  @include media-max(sm){
+    min-width: 115px;
+  }
+}
+
+.index {
+  .container {
+    @include media-min(xxl){
+      max-width: 1400px;
+    }
+  }
+
+  #quickstart {
+    position: fixed;
+    top: calc(#{$index-header-height-xs} + 90px);
+    right: 0;
+    z-index: 200;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 188px;
+    border-radius: $rounded-corners;
+    @include media-max(sm){
+      width: 50px;
+    }
+    & > a {
+      position: absolute;
+      display: inline-flex;
+      align-items: center;
+      width: 188px;
+      height: 70px;
+      padding-left: 70px;
+      font-size: 20px;
+      font-weight: 400;
+      transform: rotate(-90deg);
+      @include media-max(sm){
+        height: 50px;
+      }
+      &:hover {
+        text-decoration: none;
+      }
+    }
+    &::after {
+      position: absolute;
+      bottom: 10px;
+      z-index: 1;
+      display: block;
+      width: 50px;
+      height: 50px;
+      pointer-events: none;
+      content: "";
+      background-repeat: no-repeat;
+      background-position: right center;
+      background-size: 50px 50px;
+      @include media-max(sm){
+        width: 40px;
+        height: 40px;
+        background-size: 40px 40px;
+      }
+    }
+    &:hover {
+      &::after {
+        width: 52px;
+        height: 52px;
+        background-size: 52px 52px;
+      }
+    }
+  }
+  .toctree-l1 > a.reference::before {
+    position: absolute;
+    top: -7px;
+    left: -75px;
+    display: block;
+    width: 70px;
+    height: 70px;
+    pointer-events: none;
+    content: "";
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: 70px 70px;
+    @include media-max(lg){
+      left: -55px;
+      width: 50px;
+      height: 50px;
+      background-size: 50px 50px;
+    }
+  }
+  footer {
+    position: static;
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
+/* Light theme -------------------------------------------------------------- */
+
+body { /* stylelint-disable-line  no-duplicate-selectors */
+  color: $light-color-main-text;
+  background: $light-color-code-block-background;
+
+  #quickstart a {
+    color: #fff;
+  }
+
+  .toctree-wrapper {
+    > ul {
+      .toctree-l1 {
+        &.collapsible {
+          .toggle {
+            color: $light-color-primary;
+            border: none;
+            &::after {
+              background-image: url("#{$ico-path}svg-icons.svg#chevron-blue-lt");
+            }
+          }
+        }
+        a {
+          color: $light-color-main-text;
+          border-left-color: $light-color-primary;
+          &:hover {
+            color: $light-color-primary-lighter;
+          }
+        }
+      }
+    }
+  }
+
+  #header {
+    background: $light-color-index-header-background;
+    .search-box {
+      background: $light-color-index-header-background;
+    }
+    .form-control {
+      background: $light-color-index-header-background;
+    }
+  }
+
+  /* Getting started */
+  [href$="getting-started/index.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#getting-started-lt");
+  }
+
+  /* Quickstart */
+  [href="quickstart.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#quickstart-lt");
+  }
+
+  /* Installation guide */
+  [href$="installation-guide/index.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#installation-guide-lt");
+  }
+
+  /* Installation alternatives */
+  [href$="deployment-options/index.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#installation-alternatives-lt");
+  }
+
+  /* Upgrade guide */
+  [href$="upgrade-guide/index.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#upgrade-guide-lt");
+  }
+
+  /* User manual */
+  [href$="user-manual/index.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#user-manual-lt");
+  }
+
+  /* Cloud service */
+  [href$="cloud-service/index.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#cloud-service-lt");
+  }
+
+  /* Containers */
+  [href$="containers.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#containers-lt");
+  }
+
+  /* Container security */
+  [href$="container-security/index.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#containers-lt");
+  }
+
+  /* Deployment */
+  [href$="deployment.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#deployment-lt");
+  }
+
+  /* Compliance */
+  [href$="compliance.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#compliance-lt");
+  }
+
+  /* Cloud security */
+  [href$="monitoring.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#cloud-security-lt");
+  }
+
+  /* Proof of Concept guide */
+  [href$="proof-of-concept-guide/index.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#poc-guide-lt");
+  }
+
+  /* Release notes */
+  [href$="release-notes/index.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#release-notes-lt");
+  }
+
+  /* Migration guide */
+  [href$="migration-guide/index.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#migration-guide-lt");
+  }
+
+  &.index #quickstart {
+    background-color: $light-color-primary;
+    &::after {
+      background-image: url("#{$ico-path}index-icons.svg#quickstart");
+    }
+  }
+}
+
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme {
+  color: $dark-color-main-text;
+  background: $dark-color-base-space;
+
+  #quickstart {
+    &::after {
+      filter: invert(1);
+    }
+    a {
+      color: #000;
+    }
+  }
+
+  .toctree-wrapper {
+    > ul {
+      .toctree-l1 {
+        &.collapsible {
+          .toggle {
+            color: $dark-color-primary;
+            border-left-color: $dark-color-base-space;
+            &::after {
+              background-image: url("#{$ico-path}svg-icons.svg#chevron-blue-dt");
+            }
+          }
+        }
+        a {
+          color: $dark-color-main-text;
+          border-left-color: $dark-color-highlight-inline-text;
+          &:hover {
+            color: $dark-color-primary-lighter;
+          }
+        }
+      }
+    }
+  }
+
+  #header {
+    background: $dark-color-index-header-background;
+    .search-box {
+      background: $dark-color-index-header-background;
+    }
+    .form-control {
+      background: $dark-color-index-header-background;
+    }
+  }
+
+  /* Getting started */
+  [href$="getting-started/index.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#getting-started-dt");
+  }
+
+  /* Quickstart */
+  [href="quickstart.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#quickstart-dt");
+  }
+
+  /* Installation guide */
+  [href$="installation-guide/index.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#installation-guide-dt");
+  }
+
+  /* Installation alternatives */
+  [href$="deployment-options/index.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#installation-alternatives-dt");
+  }
+
+  /* Upgrade guide */
+  [href$="upgrade-guide/index.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#upgrade-guide-dt");
+  }
+
+  /* User manual */
+  [href$="user-manual/index.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#user-manual-dt");
+  }
+
+  /* Cloud service */
+  [href$="cloud-service/index.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#cloud-service-dt");
+  }
+
+  /* Containers */
+  [href$="containers.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#containers-dt");
+  }
+
+  /* Container security */
+  [href$="container-security/index.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#containers-dt");
+  }
+
+  /* Deployment */
+  [href$="deployment.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#deployment-dt");
+  }
+
+  /* Compliance */
+  [href$="compliance.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#compliance-dt");
+  }
+
+  /* Cloud security */
+  [href$="monitoring.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#cloud-security-dt");
+  }
+
+  /* Proof of Concept guide */
+  [href$="proof-of-concept-guide/index.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#poc-guide-dt");
+  }
+
+  /* Release notes */
+  [href$="release-notes/index.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#release-notes-dt");
+  }
+  
+  /* Migration guide */
+  [href$="migration-guide/index.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#migration-guide-dt");
+  }
+
+  &.index #quickstart {
+    background-color: $dark-color-primary;
+    &::after {
+      background-image: url("#{$ico-path}index-icons.svg#quickstart");
+    }
+  }
+}

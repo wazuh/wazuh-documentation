@@ -94,17 +94,17 @@ As you can see, syscheck alerts are tagged with the requirement 11.5.
     ---
     > User1 = card5
 
-.. thumbnail:: ../images/pci/fim_1.png
-    :title: Alert visualization at Kibana Discover
+.. thumbnail:: ../images/pci/fim-1.png
+    :title: Alert visualization at the Wazuh dashboard
     :align: center
     :width: 100%
 
-.. thumbnail:: ../images/pci/fim_2.png
+.. thumbnail:: ../images/pci/fim-2.png
     :title: Filtering alerts by PCI DSS and file path
     :align: center
     :width: 100%
 
-.. thumbnail:: ../images/pci/fim_pci.png
+.. thumbnail:: ../images/pci/fim-pci.png
     :title: Filtering alerts by PCI DSS on Wazuh App
     :align: center
     :width: 100%

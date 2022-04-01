@@ -88,7 +88,7 @@ There are several ways to monitor the Azure instances:
   - **Monitoring the instances activity through Azure APIs.** This includes data about all resource operations (creation, update, and deletion), Azure notifications about the instances, suspicious file executions, health checks, autoscaling events, and so on.
   - **Monitoring the Azure Active Directory service.** Monitoring management actions such as creation, update or deletion of users. It's possible to receive alerts on the Wazuh manager when some of these events occur on the Azure infrastructure.
 
-.. thumbnail:: ../images/release-notes/3.7.0/azure_integration_diagram.png
+.. thumbnail:: ../images/release-notes/3.7.0/azure-integration-diagram.png
   :title: Azure module diagram
   :align: center
   :width: 80%
@@ -104,7 +104,7 @@ In addition to this, and as always, the Wazuh agent can be used to monitor more 
 
 In this example, the Docker command ``docker pause apache`` will stop the container ``apache`` and will trigger an alert, as seen on the screenshot below from the Wazuh app for Kibana:
 
-.. thumbnail:: ../images/release-notes/3.7.0/alert_docker_example.png
+.. thumbnail:: ../images/release-notes/3.7.0/alert-docker-example.png
     :title: Docker module alert on Kibana's Discover tab
     :align: center
     :width: 100%

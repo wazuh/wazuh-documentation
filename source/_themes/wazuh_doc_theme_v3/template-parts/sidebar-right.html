@@ -1,0 +1,14 @@
+<div id="right-sidebar" class="sidebar">
+  <div class="sidebar-container">
+    {% include "template-parts/light-dark-switch.html" %}
+    {%- if pagename != 'index' -%}
+      {% include "template-parts/edit-repo.html" %}
+      {% if display_toc %}
+    <nav id="local-toc" class="navbar d-none d-xl-block">
+      <span class="toc-title">On this page</span>
+      {{ toc.replace('<ul>', '<ul class="navbar-nav">').replace('<li>', '<li class="nav-item">').replace('reference internal', 'reference internal nav-link') }}
+    </nav>
+      {% endif %}
+    {% endif %}
+  </div>
+</div>

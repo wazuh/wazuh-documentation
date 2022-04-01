@@ -9,11 +9,11 @@
 Configuration assessment
 ========================
 
-Automated Security Configuration Assessment (SCA) is an essential capability to improve the enterprise security posture and to reduce its attack surface. The Wazuh SCA module helps maintain a standard configuration through the monitored endpoints. This is done via pre-defined checks based on the Center of Internet Security (CIS) hardening guides.
+Automated Security Configuration Assessment (SCA) is an essential capability to improve the enterprise security posture and reduce its attack surface. The Wazuh SCA module helps maintain a standard configuration through the monitored endpoints. This is done via predefined checks based on the Center of Internet Security (CIS) hardening guides.
 
-When the SCA module is enabled, the :ref:`Wazuh agent <wazuh_agent>` performs scans periodically, reporting misconfigurations in the monitored system. Those scans assess the configuration of the system by means of policy files, which contain a set of checks to be run. For example, an SCA check could inspect the filesystem configuration, look for the presence of a software update or security patch, see that the local firewall is enabled, identify unnecessary running services, or verify the users' password policy.
+When the SCA module is enabled, the :ref:`Wazuh agent <wazuh_agent>` performs scans periodically, reporting misconfigurations in the monitored system. Those scans assess the system's configuration through policy files containing a set of checks to be run. For example, an SCA check can inspect the filesystem configuration, look for the presence of a software update or security patch, see that the local firewall is enabled, identify unnecessary running services, or verify the users' password policy.
 
-Policies for the SCA scans are written in YAML format, allowing users to quickly understand them. Using SCA syntax, users can extend the existing policies to fit their needs or write new ones. Each policy contains a set of checks, and each check has one or more rules. For example, a rule can be used to look for the existence of a file, a directory, a Windows registry key, or a running process, among others. It is also possible to execute a command and check its output against a regular expression.
+Policies for the SCA scans are written in YAML format, allowing users to understand them quickly. Using SCA syntax, users can extend the existing policies to fit their needs or write new ones. Each policy contains a set of checks, and each check has one or more rules. For example, a rule can be used to look for the existence of a file, a directory, a Windows registry key, or a running process, among others. It is also possible to execute a command and check its output against a regular expression.
 
 Linux SCA rule example:
 
@@ -71,8 +71,19 @@ macOS SCA rule example:
 
 Below is an example of the results of a configuration assessment evaluation. These can be obtained through the web user interface or directly through the Wazuh RESTful API.
 
-.. thumbnail:: ../../images/getting_started/use_case_sca.png
+.. thumbnail:: /images/getting-started/use-cases/wazuh-use-cases-sca01.png
+   :title: Security configuration assessment inventory dashboard
    :align: center
-   :wrap_image: No
 
-More information about security configuration assessment can be found at the :ref:`user manual <manual_sec_config_assessment>`.
+.. hlist::
+    :columns: 2
+
+    - .. thumbnail:: /images/getting-started/use-cases/wazuh-use-cases-sca2.png
+        :title: Security configuration assessment inventory
+        :align: center
+    
+    - .. thumbnail:: /images/getting-started/use-cases/wazuh-use-cases-sca3.png
+        :title: Security configuration assessment inventory events
+        :align: center
+          
+More information about security configuration assessment can be found in the :ref:`user manual <manual_sec_config_assessment>`.

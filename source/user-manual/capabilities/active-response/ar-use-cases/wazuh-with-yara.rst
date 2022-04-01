@@ -433,7 +433,7 @@ The YARA rules above generate these alerts when executed through the Wazuh activ
   	"location": "/var/ossec/logs/active-responses.log"
   }
 
-You can also create custom dashboards in Kibana for this integration:
+You can also create custom dashboards in the Wazuh dashboard for this integration:
 
 .. thumbnail:: ../../../../images/manual/automatic-remediation/YARA-Wazuh-ui-dashboard.png
   :title: YARA dashboard

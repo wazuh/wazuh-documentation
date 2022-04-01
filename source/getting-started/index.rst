@@ -3,56 +3,48 @@
 .. meta::
   :description: Get started with Wazuh. Learn about our open source community of developers, the Wazuh components, architecture, and deployment.
   
-.. _getting_started:
-
-Getting started
-===============
+.. _getting-started:
 
 
-Wazuh is a free and open source platform used for threat prevention, detection, and response. It protects workloads across on-premises, virtualized, containerized and cloud-based environments. Wazuh is widely used by thousands of organizations around the world, from small businesses to large enterprises.
+Getting started with Wazuh
+==========================
 
-Wazuh solution consists of an :ref:`endpoint security agent <wazuh_agent>`, deployed to the monitored systems, and a :ref:`management server <wazuh_server>`, which collects and analyzes data gathered by the agents. Besides, Wazuh has been fully integrated with the :ref:`Elastic Stack <elastic_stack>`, providing a search engine and data visualization tool that allows users to navigate through their security alerts.
+Wazuh is a free and open source security platform that unifies XDR and SIEM capabilities. It protects workloads across on-premises, virtualized, containerized, and cloud-based environments. 
+
+With Wazuh, you get a high-performance host-based intrusion detection system (HIDS) that helps organizations and individuals to protect their data assets against security threats. It is widely used by thousands of organizations worldwide, from small businesses to large enterprises.
+
+Check this Getting Started for an overview of the Wazuh platform :ref:`components <components>`, :ref:`architecture <architecture>`, and common :ref:`use cases <use_cases>`. 
 
 Community and support
 ---------------------
 
 .. include:: ../_templates/community.rst
 
-Screenshots
+
+How to install Wazuh
+--------------------
+
+The Wazuh solution is composed of three :ref:`central platform components <components>` and a single universal :ref:`agent <installation_agents>`. For installing Wazuh in your infrastructure, you can check the following sections of our documentation:
+
+- The :ref:`Quickstart <quickstart>` is an automated way of installing Wazuh in just a few minutes.  
+- The :ref:`Installation guide <installation_guide>` provides instructions on how to install each central component.
+
+
+Wazuh Cloud
 -----------
 
-.. list-table::
-   :width: 100%
-   :widths: 50 50
+The `Wazuh Cloud <https://wazuh.com/cloud/>`_ is our software as a service (SaaS) solution. We provide a `14-day free trial <https://console.cloud.wazuh.com/sign-up?landing=trial>`_ for you to create a cloud environment and get the best out of our SaaS solution. Check the :ref:`Cloud service <cloud_service>` documentation for more information.
 
-   * - .. thumbnail:: ../images/getting_started/screenshot_01_security_analytics.png
-          :title: Security analytics
-     - .. thumbnail:: ../images/getting_started/screenshot_02_intrusion_detection.png
-          :title: Intrusion detection
-   * - .. thumbnail:: ../images/getting_started/screenshot_03_log_data_analysis.png
-          :title: Log data analysis
-     - .. thumbnail:: ../images/getting_started/screenshot_04_file_integrity_monitoring.png
-          :title: File integrity monitoring
-   * - .. thumbnail:: ../images/getting_started/screenshot_05_vulnerability_detection.png
-          :title: Vulnerability detection
-     - .. thumbnail:: ../images/getting_started/screenshot_06_configuration_assessment.png
-          :title: Configuration assessment
-   * - .. thumbnail:: ../images/getting_started/screenshot_07_incident_response.png
-          :title: Incident response
-     - .. thumbnail:: ../images/getting_started/screenshot_08_regulatory_compliance.png
-          :title: Regulatory compliance
-   * - .. thumbnail:: ../images/getting_started/screenshot_09_cloud_security.png
-          :title: Cloud security
-     - .. thumbnail:: ../images/getting_started/screenshot_10_containers_security.png
-          :title: Containers security
+More resources
+---------------
 
-Table of contents
------------------
+- :ref:`Installation alternatives <deployment>`
+- :ref:`Product capabilities <capabilities>`
+- :ref:`Proof of Concept guide <poc_guide>`
 
-This document provides an overview of the Wazuh platform components and architecture. It also includes a brief description of some of the most common use cases of the solution.
 
 .. toctree::
-   :maxdepth: 1
+   :hidden:
 
    components/index
    architecture

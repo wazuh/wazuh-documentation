@@ -25,6 +25,7 @@ Options
 - `disabled`_
 - `remote_enrollment`_
 - `port`_
+- `ipv6`_
 - `use_source_ip`_
 - `force`_
 - `purge`_
@@ -73,6 +74,19 @@ Defines the TCP port number for listening to connections.
 +--------------------+---------------------+
 
 .. _auth_use_source_ip:
+
+ipv6
+^^^^^^^^^^^
+
+.. versionadded:: 4.4.0
+
+Enables IPv6 support.
+
++--------------------+------------------+
+| **Default value**  | no               |
++--------------------+------------------+
+| **Allowed values** | yes, no          |
++--------------------+------------------+
 
 use_source_ip
 ^^^^^^^^^^^^^
@@ -251,7 +265,7 @@ Sets the list of ciphers for network communication using SSL.
 | **Default value**  | HIGH:!ADH:!EXP:!MD5:!RC4:!3DES:!CAMELLIA:@STRENGTH |
 +--------------------+----------------------------------------------------+
 
-The format of this parameter is described in `SSL ciphers <https://www.openssl.org/docs/man1.1.0/apps/ciphers.html>`_.
+The format of this parameter is described in `SSL ciphers <https://www.openssl.org/docs/man1.1.1/man1/ciphers.html>`_.
 
 key_request
 ^^^^^^^^^^^
@@ -356,7 +370,7 @@ Default configuration
 
   <auth>
     <disabled>no</disabled>
-    <remote_enrollment>yes<remote_enrollment>
+    <remote_enrollment>yes</remote_enrollment>
     <port>1515</port>
     <use_source_ip>no</use_source_ip>
     <force>

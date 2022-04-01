@@ -1,0 +1,160 @@
+/* -----------------------------------------------------------------------------
+  PART: Footer
+
+  Style for the footer under the column containing the element main and the
+  right sidebar.
+----------------------------------------------------------------------------- */
+
+footer {
+  padding: 26px 15px;
+  @include media-min(xl){
+    position: absolute;
+    right: 0;
+    display: flex;
+    align-items: center;
+    height: $footer-height;
+    padding: 15px 0 15px 30px;
+  }
+  @include media-only(xl, xxl) {
+    left: $left-sidebar-width-narrow;
+  }
+  @include media-min(xxl) {
+    left: $left-sidebar-width;
+  }
+
+  & > .container {
+    @include media-max(xl) {
+      flex-direction: column;
+    }
+  }
+
+  .desktop-footer {
+    @include media-min(xl){
+      width: 100%;
+    }
+    .social-links {
+      display: flex;
+      padding: 15px 0;
+      @include media-min(sm){
+        justify-content: flex-end;
+      }
+      i {
+        font-size: 23px;
+        @include media-min(sm){
+          font-size: 1rem;
+        }
+      }
+    }
+    .copyright {
+      padding: 15px;
+    }
+  }
+
+  .website-links {
+    margin-bottom: 3rem;
+    ul {
+      padding-left: 0;
+      margin-bottom: 0;
+      list-style: none;
+    }
+    a {
+      &:hover,
+      &:focus {
+        font-weight: 500;
+      }
+    }
+  }
+  .footer-section {
+    line-height: 32px;
+    .footer-title {
+      margin-top: 28px;
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+  }
+
+  ul {
+    padding-left: 15px;
+    margin: 0;
+  }
+
+  .nav-link {
+    padding: 0 15px;
+  }
+}
+
+.index footer {
+  & > div {
+    @include media-max(sm){
+      width: calc(100% - 50px);
+      margin-right: auto;
+      margin-left: 0;
+    }
+  }
+  .desktop-footer.row {
+    @include media-max(xl) {
+      flex-direction: column;
+    }
+  }
+  .social-links {
+    @include media-max(xl) {
+      justify-content: flex-start;
+      order: 0;
+    }
+    .nav-link {
+      @include media-max(sm) {
+        padding: 0 11px;
+      }
+    }
+  }
+}
+
+/* Light theme -------------------------------------------------------------- */
+
+body {
+  footer {
+    background: $light-color-footer;
+
+    .nav-link {
+      color: $light-color-main-text;
+
+      &:hover {
+        color: $light-color-primary-lighter;
+      }
+    }
+    .website-links {
+      a {
+        color: $light-color-main-text;
+        &:hover,
+        &:focus {
+          color: $light-color-primary-lighter;
+        }
+      }
+    }
+  }
+}
+
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme {
+  footer {
+    background: $dark-color-footer;
+
+    .nav-link {
+      color: $dark-color-main-text;
+
+      &:hover {
+        color: $dark-color-primary-lighter;
+      }
+    }
+    .website-links {
+      a {
+        color: $dark-color-main-text;
+        &:hover,
+        &:focus {
+          color: $dark-color-primary-lighter;
+        }
+      }
+    }
+  }
+}
