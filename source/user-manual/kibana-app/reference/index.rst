@@ -12,7 +12,5 @@ This part of the user manual will cover the configuration files used by the Wazu
     .. toctree::
         :maxdepth: 1
 
-        config-file
         elasticsearch
-        configure-indices
-	custom-dashboard
+        custom-dashboard
