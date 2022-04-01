@@ -8,3 +8,4 @@
         elastic-tuning
         troubleshooting
         configure-indices
+        elasticsearch
