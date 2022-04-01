@@ -7,7 +7,7 @@
 Installing the Wazuh dashboard in step-by-step mode
 ===================================================
 
-Install and configure the Wazuh dashboard following step-by-step instructions. The Wazuh dashboard is a flexible and intuitive web interface for mining and visualizing the Wazuh server alerts and archived events.
+Install and configure the Wazuh dashboard following step-by-step instructions. The Wazuh dashboard is a web interface for mining and visualizing the Wazuh server alerts and archived events.
 
 .. note:: Root user privileges are required to run the commands described below.
 
@@ -147,4 +147,4 @@ All the Wazuh central components are successfully installed.
 
 The Wazuh environment is now ready and you can proceed with installing the Wazuh agent on the endpoints to be monitored. To perform this action, see the :ref:`Wazuh agent <installation_agents>` section.
 
-If you want to uninstall the Wazuh dashboard, see the :ref:`uninstalling <uninstall_kibana>` section. 
+If you want to uninstall the Wazuh dashboard, see :ref:`uninstall_dashboard`.

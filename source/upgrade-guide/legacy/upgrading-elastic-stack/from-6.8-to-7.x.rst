@@ -71,19 +71,19 @@ Upgrading Elasticsearch
 
     .. code-block:: console
 
-      $ curl -X PUT "localhost:9200/_cluster/settings" -H 'Content-Type: application/json' -d'
-      {
-        "persistent": {
-          "cluster.routing.allocation.enable": "primaries"
-        }
-      }
-      '
+      # curl -X PUT "localhost:9200/_cluster/settings" -H 'Content-Type: application/json' -d'
+      # {
+      #   "persistent": {
+      #     "cluster.routing.allocation.enable": "primaries"
+      #   }
+      # }
+      # '
 
 #. Stop non-essential indexing and perform a synced flush (optional):
 
     .. code-block:: console
 
-      $ curl -X POST "localhost:9200/_flush/synced"
+      # curl -X POST "localhost:9200/_flush/synced"
 
 #. Shut down a single node:
 
@@ -135,25 +135,25 @@ Upgrading Elasticsearch
 
     .. code-block:: console
 
-      $ curl -X GET "localhost:9200/_cat/nodes"
+      # curl -X GET "localhost:9200/_cat/nodes"
 
 #. Reenable shard allocation:
 
     .. code-block:: console
 
-      $ curl -X PUT "localhost:9200/_cluster/settings" -H 'Content-Type: application/json' -d'
-      {
-        "persistent": {
-          "cluster.routing.allocation.enable": null
-        }
-      }
-      '
+      # curl -X PUT "localhost:9200/_cluster/settings" -H 'Content-Type: application/json' -d'
+      # {
+      #   "persistent": {
+      #     "cluster.routing.allocation.enable": null
+      #   }
+      # }
+      # '
 
 #. Before upgrading the next node, wait for the cluster to finish shard allocation:
 
     .. code-block:: console
 
-      $ curl -X GET "localhost:9200/_cat/health?v"
+      # curl -X GET "localhost:9200/_cat/health?v"
 
 #. Repeat the steps for every Elasticsearch node.
 
@@ -170,20 +170,20 @@ An example of how to run the request using the index ``wazuh-alerts-3.x-2019.05.
 
 .. code-block:: console
 
-  $ curl -X POST "localhost:9200/wazuh-alerts-3.x-2019.05.16/wazuh/_update_by_query?wait_for_completion=true" -H 'Content-Type: application/json' -d'
-  {
-    "query": {
-      "bool": {
-        "must_not": {
-          "exists": {
-            "field": "timestamp"
-          }
-        }
-      }
-    },
-    "script": "ctx._source.timestamp = ctx._source[\"@timestamp\"]"
-  }
-  '
+  # curl -X POST "localhost:9200/wazuh-alerts-3.x-2019.05.16/wazuh/_update_by_query?wait_for_completion=true" -H 'Content-Type: application/json' -d'
+  # {
+  #   "query": {
+  #     "bool": {
+  #       "must_not": {
+  #         "exists": {
+  #           "field": "timestamp"
+  #         }
+  #       }
+  #     }
+  #   },
+  #   "script": "ctx._source.timestamp = ctx._source[\"@timestamp\"]"
+  # }
+  # '
 
 The request must be executed for all previous indices which need to be migrated. Modify the date parameter according to the index name.
 

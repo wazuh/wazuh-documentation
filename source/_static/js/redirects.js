@@ -81,6 +81,7 @@ newUrls['4.3'] = [
   '/office365/monitoring-office365-activity.html',
   '/user-manual/reference/ossec-conf/office365-module.html',
   '/user-manual/capabilities/log-data-collection/how-to-collect-macoslogs.html',
+  '/user-manual/uninstall/central-components.html',
   '/azure/activity-services/index.html',
   '/azure/activity-services/active-directory/index.html',
   '/azure/activity-services/active-directory/graph.html',

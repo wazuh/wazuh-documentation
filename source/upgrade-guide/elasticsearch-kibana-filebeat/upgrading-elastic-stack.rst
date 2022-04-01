@@ -83,19 +83,19 @@ In the commands below ``127.0.0.1`` IP address is used. If Elasticsearch is boun
 
     .. code-block:: console
 
-      $ curl -X PUT "https://127.0.0.1:9200/_cluster/settings"  -u <username>:<password> -k -H 'Content-Type: application/json' -d'
-      {
-        "persistent": {
-          "cluster.routing.allocation.enable": "primaries"
-        }
-      }
-      '
+      # curl -X PUT "https://127.0.0.1:9200/_cluster/settings"  -u <username>:<password> -k -H 'Content-Type: application/json' -d'
+      # {
+      #   "persistent": {
+      #     "cluster.routing.allocation.enable": "primaries"
+      #   }
+      # }
+      # '
 
 #. Stop non-essential indexing and perform a synced flush:
 
     .. code-block:: console
 
-      $ curl -X POST "https://127.0.0.1:9200/_flush/synced" -u <username>:<password> -k
+      # curl -X POST "https://127.0.0.1:9200/_flush/synced" -u <username>:<password> -k
 
 #. Shut down a single node:
 
@@ -134,25 +134,25 @@ In the commands below ``127.0.0.1`` IP address is used. If Elasticsearch is boun
 
     .. code-block:: console
 
-      $ curl -X GET "https://127.0.0.1:9200/_cat/nodes" -u <username>:<password> -k
+      # curl -X GET "https://127.0.0.1:9200/_cat/nodes" -u <username>:<password> -k
 
 #. Reenable shard allocation:
 
     .. code-block:: console
 
-      $ curl -X PUT "https://127.0.0.1:9200/_cluster/settings" -u <username>:<password> -k -H 'Content-Type: application/json' -d'
-      {
-        "persistent": {
-          "cluster.routing.allocation.enable": "all"
-        }
-      }
-      '
+      # curl -X PUT "https://127.0.0.1:9200/_cluster/settings" -u <username>:<password> -k -H 'Content-Type: application/json' -d'
+      # {
+      #   "persistent": {
+      #     "cluster.routing.allocation.enable": "all"
+      #   }
+      # }
+      # '
 
 #. Before upgrading the next node, wait for the cluster to finish shard allocation:
 
     .. code-block:: console
 
-      $ curl -X GET "https://127.0.0.1:9200/_cat/health?v" -u <username>:<password> -k
+      # curl -X GET "https://127.0.0.1:9200/_cat/health?v" -u <username>:<password> -k
 
 #. Repeat the steps for every Elasticsearch node.
 

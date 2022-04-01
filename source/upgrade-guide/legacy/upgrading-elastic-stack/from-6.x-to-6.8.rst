@@ -49,19 +49,19 @@ Upgrading Elasticsearch
 
     .. code-block:: console
 
-      $ curl -X PUT "localhost:9200/_cluster/settings" -H 'Content-Type: application/json' -d'
-      {
-        "persistent": {
-          "cluster.routing.allocation.enable": "primaries"
-        }
-      }
-      '
+      # curl -X PUT "localhost:9200/_cluster/settings" -H 'Content-Type: application/json' -d'
+      # {
+      #   "persistent": {
+      #     "cluster.routing.allocation.enable": "primaries"
+      #   }
+      # }
+      # '
 
 #. Stop non-essential indexing and perform a synced flush (optional):
 
     .. code-block:: console
 
-      $ curl -X POST "localhost:9200/_flush/synced"
+      # curl -X POST "localhost:9200/_flush/synced"
 
 #. Shut down a single node:
 
@@ -103,25 +103,25 @@ Upgrading Elasticsearch
 
     .. code-block:: console
 
-      $ curl -X GET "localhost:9200/_cat/nodes"
+      # curl -X GET "localhost:9200/_cat/nodes"
 
 #. Reenable shard allocation:
 
     .. code-block:: console
 
-      $ curl -X PUT "localhost:9200/_cluster/settings" -H 'Content-Type: application/json' -d'
-      {
-        "persistent": {
-          "cluster.routing.allocation.enable": null
-        }
-      }
-      '
+      # curl -X PUT "localhost:9200/_cluster/settings" -H 'Content-Type: application/json' -d'
+      # {
+      #   "persistent": {
+      #     "cluster.routing.allocation.enable": null
+      #   }
+      # }
+      # '
 
 #. Before upgrading the next node, wait for the cluster to finish shard allocation:
 
     .. code-block:: console
 
-      $ curl -X GET "localhost:9200/_cat/health?v"
+      # curl -X GET "localhost:9200/_cat/health?v"
 
 #. Repeat the steps for every Elasticsearch node.
 

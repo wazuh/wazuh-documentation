@@ -1,5 +1,11 @@
 .. Copyright (C) 2015-2022 Wazuh, Inc.
 
+#. Install the following package if missing.
+
+    .. code-block:: console
+
+      # apt install gnupg
+
 #. Install the GPG key.
 
     .. code-block:: console
