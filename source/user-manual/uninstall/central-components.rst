@@ -14,7 +14,7 @@ Run the assistant with the option ``-u`` or ``--uninstall`` as follows:
 
       $ sudo bash wazuh-install.sh --uninstall
 
-This will remove Wazuh indexer, Wazuh server, and Wazuh dashboard from your cluster node.
+This will remove the Wazuh indexer, the Wazuh server, and the Wazuh dashboard.
 
 If you want to uninstall one specific central component, follow the instructions below.
 
