@@ -72,8 +72,7 @@ function markTocNodesWithClass(nodeList, className, fromNodeSelector) {
     const regex = new RegExp(markedNode, 'g');
     $(fromNodeSelector+' a').each(function() {
       const href = $(this).prop('href').split('#')[0];
-      const isCurrent = href === location.href.split('#')[0] ? true : false;
-      if (regex.test(href) || isCurrent) {
+      if (regex.test(href)) {
         $(this).addClass(className);
       }
     });

@@ -7,7 +7,7 @@
 Installing the Wazuh dashboard in step-by-step mode
 ===================================================
 
-Install and configure the Wazuh dashboard following step-by-step instructions. The Wazuh dashboard is a flexible and intuitive web interface for mining and visualizing the Wazuh server alerts and archived events.
+Install and configure the Wazuh dashboard following step-by-step instructions. The Wazuh dashboard is a web interface for mining and visualizing the Wazuh server alerts and archived events.
 
 .. note:: Root user privileges are required to run the commands described below.
 
