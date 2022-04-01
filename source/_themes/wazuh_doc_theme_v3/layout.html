@@ -128,9 +128,12 @@
 <html lang="{{ language }}">
   <head>
     {% block head -%}
-    {%- if not is_latest_release -%}
-    <meta name="robots" content="noindex">
-    {%- endif %}
+    {% set is_orphan = meta and meta.orphan is defined %}
+    {% if is_latest_release and  pagename != 'moved-content' and pagename != 'not_found' and pagename != 'search' and not is_orphan %}
+    <meta name="robots" content="index" />
+    {% else %}
+    <meta name="robots" content="noindex" />
+    {% endif %}
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="UTF-8">
     <meta name="author" content="Wazuh">
