@@ -142,6 +142,6 @@ To execute commands in the Wazuh manager container you may execute a shell:
 
 .. code-block:: console
 
-  docker run -it wazuh-opendistro bash
+  # docker run -it wazuh-opendistro bash
 
 Remember any change made on this shell will persist as long as you have the data volumes configured correctly.
