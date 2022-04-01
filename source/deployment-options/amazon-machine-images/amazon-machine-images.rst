@@ -8,7 +8,7 @@
 Amazon Machine Images (AMI)
 ===========================
 
-Wazuh provides a pre-built Amazon Machine Image (AMI). An AMI is a pre-configured template that is ready to use for creating a virtual computing environment within the Amazon Elastic Compute Cloud (Amazon EC2). The latest Wazuh AMI packages Amazon Linux 2 and the following central components for your Wazuh server.
+Wazuh provides a pre-built Amazon Machine Image (AMI). An AMI is a pre-configured template that is ready to use for creating a virtual computing environment within the Amazon Elastic Compute Cloud (Amazon EC2). The latest Wazuh AMI packages together Amazon Linux 2 with the following central components for your Wazuh server:
 
 - Wazuh manager |WAZUH_LATEST_AMI|
 - Filebeat-OSS |FILEBEAT_LATEST_AMI|
@@ -19,10 +19,10 @@ Wazuh provides a pre-built Amazon Machine Image (AMI). An AMI is a pre-configure
 Deployment alternatives
 -----------------------
 
-There are two alternatives for deploying a Wazuh instance. You can launch the `Wazuh All-In-One Deployment AMI <https://aws.amazon.com/marketplace/pp/B09J56274H>`_ directly from the AWS Marketplace or you can configure and deploy a custom instance using the AWS Management Console.
+There are two alternatives for deploying a Wazuh instance. You can launch the `Wazuh All-In-One Deployment AMI <https://aws.amazon.com/marketplace/pp/B09J56274H>`_ directly from the AWS Marketplace or you can configure and deploy an instance using the AWS Management Console.
 
 - `Launch an instance from the AWS Marketplace`_
-- `Deploy a custom instance using the AWS Management Console`_
+- `Deploy an instance using the AWS Management Console`_
 
 .. note::
   Our `Wazuh Consulting Service <https://aws.amazon.com/marketplace/pp/prodview-ve4mgmhukgmzi>`_ is also available in the AWS Marketplace. Check the Professional Service packages that Wazuh has to offer.
@@ -48,8 +48,8 @@ Launch an instance from the AWS Marketplace
 Once your instance is successfully launched and a few minutes have elapsed, you can :ref:`access the Wazuh dashboard <ami_wazuh_ui>`.
 
 
-Deploy a custom instance using the AWS Management Console
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Deploy an instance using the AWS Management Console
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 #. Select **Launch instance** from your `AWS Management Console <https://aws.amazon.com/console/>`_ dashboard.
 
