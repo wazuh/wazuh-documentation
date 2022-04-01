@@ -2,9 +2,9 @@
   Index page
 ----------------------------------------------------------------------------- */
 
-if ( $('.index') ) {
-  const maxShowItems = 3;
+const maxShowItems = 3;
 
+if ( $('.index') ) {
   $('.loading').removeClass('loading');
 
   /* Move Quickstart */
