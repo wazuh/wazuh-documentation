@@ -681,9 +681,11 @@ def finish_and_clean(app, exception):
                 os.remove(app.srcdir + '/_static/' + mini_asset)
 
 def collect_compiled_pagename(app, pagename, templatename, context, doctree):
-    ''' Runs once per page, storing the pagename (full page path) extracted from the context '''
+    ''' Runs once per page, storing the pagename (full page path) extracted from the context
+        It store the path of all compiled documents except the orphans and the ones in exclude_doc'''
     if templatename == "page.html" and pagename not in exclude_doc:
-        list_compiled_html.append(context['pagename']+'.html')
+        if not context['meta'] or ( context['meta']['orphan'] ):
+            list_compiled_html.append(context['pagename']+'.html')
     else:
         pass
 
