@@ -74,7 +74,7 @@ removedUrls['x.y'] = [
 /* Pages added in 4.4 */
 
 newUrls['4.4'] = [
-  '/user-manual/registering/key-request.html',
+  '/user-manual/agents/key-request.html',
 ]
 
 /* Pages removed in 4.4 */
@@ -87,7 +87,7 @@ redirections.push(
     {
       'target': ['4.3=>4.4', '4.4=>4.3'],
       '4.3': '/user-manual/capabilities/agent-key-polling.html',
-      '4.4': '/user-manual/registering/key-request.html',
+      '4.4': '/user-manual/agents/key-request.html',
     },
 );
 
