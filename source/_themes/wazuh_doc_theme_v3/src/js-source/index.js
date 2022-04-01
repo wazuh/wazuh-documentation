@@ -2,10 +2,15 @@
   Index page
 ----------------------------------------------------------------------------- */
 
-if ( $('.index') ) {
-  const maxShowItems = 3;
+const maxShowItems = 3;
 
+if ( $('.index') ) {
   $('.loading').removeClass('loading');
+
+  /* Changes in release notes */
+  const arrowMore = document.createElement('i');
+  arrowMore.setAttribute('class', 'fas fa-long-arrow-alt-right');
+  $('.toctree-wrapper:last-of-type .toctree-l1:last-of-type .toctree-l2:first-of-type > a').text('More').append(arrowMore);
 
   /* Move Quickstart */
   $('[href="quickstart.html"]').first().unwrap().wrap('<div id="quickstart"></div>');
