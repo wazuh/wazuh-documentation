@@ -187,7 +187,7 @@ Installing Wazuh agent from sources
         # find /etc/systemd/system -name "wazuh*" | xargs rm -f
         # systemctl daemon-reload
 
-    Remove users:
+    Remove user and group:
 
     .. code-block:: console
 
@@ -352,7 +352,7 @@ Installing Wazuh agent from sources
 
      # rm -rf /Library/StartupItems/OSSEC
 
-    Remove users:
+    Remove user and group:
 
     .. code-block:: console
 
@@ -468,7 +468,7 @@ Installing Wazuh agent from sources
 
      # find /etc/rc.d -name "*wazuh*" | xargs rm -f
 
-    Remove users:
+    Remove user and group:
 
     .. code-block:: console
 
@@ -587,7 +587,7 @@ Installing Wazuh agent from sources
 
      # find /sbin/{init.d,rc*.d} -name "*wazuh*" | xargs rm -f
 
-    Remove users:
+    Remove user and group:
 
     .. code-block:: console
 
@@ -773,7 +773,7 @@ Installing Wazuh agent from sources
 
          # find /sbin/{init.d,rc*.d} -name "*wazuh*" | xargs rm -f
 
-        Remove users:
+        Remove user and group:
 
         .. code-block:: console
 
@@ -913,7 +913,7 @@ Installing Wazuh agent from sources
 
          # find /sbin/{init.d,rc*.d} -name "*wazuh*" | xargs rm -f
 
-        Remove users:
+        Remove user and group:
 
         .. code-block:: console
 

@@ -276,7 +276,7 @@ Delete the service:
         # find /etc/systemd/system -name "wazuh*" | xargs rm -f
         # systemctl daemon-reload
 
-Remove users:
+Remove user and group:
 
   .. code-block:: console
 
