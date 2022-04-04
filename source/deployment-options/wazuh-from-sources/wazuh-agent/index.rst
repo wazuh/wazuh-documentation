@@ -48,8 +48,9 @@ Installing Wazuh agent from sources
 
             .. code-block:: console
 
-              # yum install make gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool openssl-devel cmake
-              # rpm -i $(rpm -q libstdc++-devel --queryformat "http://mirror.centos.org/centos/8/PowerTools/x86_64/os/Packages/libstdc++-static-%{VERSION}-%{RELEASE}.%{arch}.rpm\n")
+              # yum install make gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool openssl-devel yum-utils cmake -y
+              # yum-config-manager --enable powertools
+              # yum install libstdc++-static -y
 
             **Optional** CMake 3.18 installation from sources
 
@@ -66,7 +67,7 @@ Installing Wazuh agent from sources
 
         .. code-block:: console
 
-         # apt-get install python gcc g++ make libc6-dev curl policycoreutils automake autoconf libtool
+         # apt-get install python gcc g++ make libc6-dev curl policycoreutils automake autoconf libtool libssl-dev
 
 
         CMake 3.18 installation
@@ -84,7 +85,7 @@ Installing Wazuh agent from sources
 
         .. code-block:: console
 
-         # zypper install make gcc gcc-c++ policycoreutils-python automake autoconf libtool
+         # zypper install make gcc gcc-c++ policycoreutils-python automake autoconf libtool curl libopenssl-devel
 
         CMake 3.18 installation
 
