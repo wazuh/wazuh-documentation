@@ -8,9 +8,9 @@
 Log data analysis
 =================
 
-In many cases, evidence of an attack can be found in the log messages of devices, systems, and applications. Automated log management and analysis accelerate threat detection. Wazuh assists users with this by aggregating and analyzing log data automatically. 
+In many cases, evidence of an attack can be found in the log messages of devices, systems, and applications. Wazuh assists users by using automated log management and analysis to accelerate threat detection. 
 
-The :ref:`Wazuh agent <wazuh_agent>`, running on the monitored endpoint, is usually the one in charge of reading operating system and application log messages, forwarding those to the :ref:`Wazuh server <wazuh_server>`, where the analysis takes place. The server can also receive data via syslog from network devices or applications when no agent is deployed.
+The :ref:`Wazuh agent <wazuh_agent>`, running on the monitored endpoint, is in charge of reading operating system and application log messages, forwarding those to the :ref:`Wazuh server <wazuh_server>`, where the analysis takes place. The server can also receive data via syslog from network devices or applications when no agent is deployed.
 
 Wazuh uses *decoders* to identify the source application of the log message. Then, it analyzes the data using application-specific *rules*. This is an example of a rule used to detect SSH authentication failure events:
 
@@ -27,7 +27,7 @@ Wazuh uses *decoders* to identify the source application of the log message. The
     <group>authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,gpg13_7.1,gdpr_IV_35.7.d,gdpr_IV_32.2,hipaa_164.312.b,nist_800_53_AU.14,nist_800_53_AC.7,tsc_CC6.1,tsc_CC6.8,tsc_CC7.2,tsc_CC7.3,</group>
   </rule>
 
-Rules include a ``match`` field, used to define the pattern the rule looks for. They also have a ``level`` field that specifies the priority of the resulting alerts. Besides, rules enrich events with technique identifiers from the MITRE ATT&CK framework, and with mapping to regulatory compliance controls.
+Rules include a ``match`` field used to define the pattern that the rule search. They also have a ``level`` field that specifies the priority of the resulting alerts. Besides, rules enrich events with technique identifiers from the MITRE ATT&CK framework and regulatory compliance controls.
 
 The manager generates an alert every time an event, collected by one of the agents or via syslog, matches a rule with a priority level higher than a predefined threshold (``3`` by default).
 
