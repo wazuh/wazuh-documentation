@@ -19,7 +19,7 @@ Wazuh provides the following mechanisms to monitor Docker hosts or Kubernetes no
 
 - **Wazuh agent deployment to Docker hosts and Kubernetes nodes:** For a self-managed infrastructure, the deployment of the :ref:`Wazuh agent <wazuh_agent>` provides a comprehensive set of security capabilities, such as malware detection, file integrity monitoring, configuration assessment, log data analysis, vulnerability detection, and active responses.
 
-- **Integration with hosted infrastructure providers:** In this case, the Wazuh modules for cloud security monitoring download the managed service audit logs for security analysis. Wazuh integrates with hosted infrastructure providers such as Google GKE, Amazon EKS, and more. 
+- **Integration with hosted infrastructure providers:** In this case, the Wazuh modules for cloud security monitoring download the managed service audit logs for security analysis. Wazuh integrates with hosted infrastructure providers such as Google GKE, Amazon EKS, etc. 
 
 .. thumbnail:: /images/getting-started/use-cases/wazuh-use-cases-docker.png
   :title: Docker events
@@ -134,9 +134,9 @@ Example of security alerts at a container level:
    :width: 100%
    :widths: 50 50
 
-   * - New process created in a container
+   * - A new process created in a container
      - File integrity monitoring alerts
-   * - New application installed in a container
+   * - A new application installed in a container
      - Vulnerability detected in a container
    * - Log analysis alert (for example, Nginx event)
-     - Hardening check failed in a container
+     - The hardening check failed in a container
