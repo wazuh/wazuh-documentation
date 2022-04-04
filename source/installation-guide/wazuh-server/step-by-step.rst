@@ -117,7 +117,9 @@ Configuring Filebeat
         
   #. Edit the ``/etc/filebeat/filebeat.yml`` configuration file.
 
-      .. include:: /_templates/installations/filebeat/opensearch/configure_filebeat.rst
+     .. note:: If you are installing all the Wazuh central components on the same host, there is no need to edit the Filebeat configuration file.
+
+     .. include:: /_templates/installations/filebeat/opensearch/configure_filebeat.rst
 
   #. Create a Filebeat keystore to securely store authentication credentials.
 
