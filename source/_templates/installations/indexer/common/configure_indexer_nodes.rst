@@ -1,60 +1,35 @@
 .. Copyright (C) 2015-2022 Wazuh, Inc.
 
-#. Edit ``/etc/wazuh-indexer/opensearch.yml``.
 
-    .. code-block:: yaml
-      :emphasize-lines: 2,4,7,33
+#. Edit ``/etc/wazuh-indexer/opensearch.yml`` and replace the following values: 
 
-       network.host: "0.0.0.0"
-       node.name: "node-1"
-       cluster.initial_master_nodes:
-       - "node-1"
-       #- "node-2"
-       #- "node-3"
-       cluster.name: "wazuh-cluster"
-       #discovery.seed_hosts:
-       #  - "node-1-ip"
-       #  - "node-2-ip"
-       #  - "node-3-ip"
-       node.max_local_storage_nodes: "3"
-       path.data: /var/lib/wazuh-indexer
-       path.logs: /var/log/wazuh-indexer
-       
-              
-       plugins.security.ssl.http.pemcert_filepath: /etc/wazuh-indexer/certs/indexer.pem
-       plugins.security.ssl.http.pemkey_filepath: /etc/wazuh-indexer/certs/indexer-key.pem
-       plugins.security.ssl.http.pemtrustedcas_filepath: /etc/wazuh-indexer/certs/root-ca.pem
-       plugins.security.ssl.transport.pemcert_filepath: /etc/wazuh-indexer/certs/indexer.pem
-       plugins.security.ssl.transport.pemkey_filepath: /etc/wazuh-indexer/certs/indexer-key.pem
-       plugins.security.ssl.transport.pemtrustedcas_filepath: /etc/wazuh-indexer/certs/root-ca.pem
-       plugins.security.ssl.http.enabled: true
-       plugins.security.ssl.transport.enforce_hostname_verification: false
-       plugins.security.ssl.transport.resolve_hostname: false
-       
-       plugins.security.audit.type: internal_opensearch
-       plugins.security.authcz.admin_dn:
-       - "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
-       plugins.security.check_snapshot_restore_write_privileges: true
-       plugins.security.enable_snapshot_restore_privilege: true
-       plugins.security.nodes_dn:
-       - "CN=node-1,OU=Wazuh,O=Wazuh,L=California,C=US"
-       #- "CN=node-2,OU=Wazuh,O=Wazuh,L=California,C=US"
-       #- "CN=node-3,OU=Wazuh,O=Wazuh,L=California,C=US"
-       plugins.security.restapi.roles_enabled:
-       - "all_access"
-       - "security_rest_api_access"
-       
-       plugins.security.system_indices.enabled: true
-       plugins.security.system_indices.indices: [".opendistro-alerting-config", ".opendistro-alerting-alert*", ".opendistro-anomaly-results*", ".opendistro-anomaly-detector*", ".opendistro-anomaly-checkpoints", ".opendistro-anomaly-detection-state", ".opendistro-reports-*", ".opendistro-notifications-*", ".opendistro-notebooks", ".opensearch-observability", ".opendistro-asynchronous-search-response*", ".replication-metadata-store"]
-       
-       ### Option to allow Filebeat-oss 7.10.2 to work ###
-       compatibility.override_main_response_version: true
+    
+  - ``network.host:`` Set the address of this Wazuh indexer node, which can be either an IP address or a hostname. The node will bind to this address and will also use it as its publish address.
 
-    Values to be replaced:
+  - ``node.name``: Set your Wazuh indexer node name as defined in the ``config.yml`` file.
+
+  - ``cluster.initial_master_nodes``: List the names of the Wazuh indexer initial master nodes. The names should be the same defined in the ``config.yml``. 
   
-    - ``node.name``: This value must be the Wazuh indexer node name you are configuring, as defined in the ``config.yml`` file.
-    - ``cluster.initial_master_nodes`` list: This value must be the name of your Wazuh indexer master node, as it is defined in ``config.yml``. If you are configuring the Wazuh indexer in a multi-node distribution, you can add more master-eligible indexer nodes to this list. Uncomment the commented lines and  similarly replace ``node-2`` and ``node-3`` with your Wazuh indexer master nodes names. 
-    - ``cluster.name``: This value is your Wazuh indexer cluster name and can be replaced with your own single-node or multi-node Wazuh indexer cluster name.
-    - ``plugins.security.nodes_dn``: Replace the common name (CN) with your node name used in ``config.yml``. Uncomment the commented lines for ``node-2`` and ``node-3`` if necessary.
+    If you are configuring a Wazuh indexer multi-node cluster, you can add more master-eligible indexer nodes to this list. Uncomment the ``node-2`` and ``node-3`` lines and add more lines if necessary. 
+
+  - ``discovery.seed_hosts:`` Provide a list of the addresses of the master-eligible nodes in the cluster. Each address can be either an IP address or a hostname. If you are configuring a Wazuh indexer multi-node cluster, uncomment this setting and add your master node addresses. 
+
+      .. code-block:: yaml
+
+       discovery.seed_hosts:
+         - "10.0.0.1"
+         - "10.0.0.2"
+         - "10.0.0.3"
+  
+  - ``plugins.security.nodes_dn``: Include all the Wazuh indexer nodes in your cluster. If necessary, uncomment the lines for ``node-2`` and ``node-3`` and add more lines. If you are using custom nodes names, replace the common name (CN) with your node names as defined in ``config.yml``
+
+      .. code-block:: yaml
+        :emphasize-lines: 2
+
+        plugins.security.nodes_dn:
+        - "CN=node-1,OU=Wazuh,O=Wazuh,L=California,C=US"
+        - "CN=node-2,OU=Wazuh,O=Wazuh,L=California,C=US"
+        - "CN=node-3,OU=Wazuh,O=Wazuh,L=California,C=US"
+
 
 .. End of include file
