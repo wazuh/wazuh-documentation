@@ -1,6 +1,6 @@
 
 .. meta::
-  :description: This POC shows how Wazuh provides out-of-the-box rules capable of identifying brute-force attacks by correlating multiple authentication failure events. Learn more in this section.
+  :description: This PoC shows how Wazuh provides out-of-the-box rules capable of identifying brute-force attacks by correlating multiple authentication failure events. Learn more in this section.
 
 .. _poc_detect_bruteforce:
 
@@ -15,29 +15,29 @@ To see an example use case where you configure an active response to block the I
 Configuration
 -------------
 
-Configure your environment as follows to test the POC.
+Configure your environment as follows to test the PoC.
 
 - Make sure you have SSH installed and enabled in a system chosen to play as an attacker.
 
-- Install Hydra on an external Linux system to execute brute-force attacks. 
+- Install Hydra on an external Linux system to execute brute-force attacks.
 
     .. code-block:: XML
 
-        yum install -y hydra
+        apt install hydra -y
 
 Steps to generate the alerts
 ----------------------------
 
-#. Replace ``<centos.agent.endpoint>`` for Linux and ``<win.agent.endpoint>`` for Windows with the appropriate destination in the following commands and run multiple failed authentication failure attempts against the monitored endpoints.
+#. Replace ``<ubuntu.agent.endpoint>`` for Linux and ``<win.agent.endpoint>`` for Windows with the appropriate destination in the following commands and run multiple failed authentication failure attempts against the monitored endpoints.
 
     - For the monitored Linux endpoint:
 
         .. code-block:: console
 
-            # hydra -l badguy -p wrong_password <centos.agent.endpoint> ssh
+            # hydra -l badguy -p wrong_password <ubuntu.agent.endpoint> ssh
 
     - For the monitored Windows endpoint:
-  
+
         .. code-block:: console
 
             # hydra -l Administrator -p wrong_password <win.agent.endpoint> rdp
@@ -57,7 +57,7 @@ You can visualize the alert data in the Wazuh dashboard. To do this, go to the *
           :wrap_image: No
 
 
-- Windows: ``rule.id:(60122 OR 60137)``
+- Windows: ``rule.id:(60122 OR 60137 OR 60204)``
 
 .. thumbnail:: ../images/poc/Detecting-a-brute-force-attack-2.png
           :title: Detecting a brute-force attack on Windows
