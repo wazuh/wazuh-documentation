@@ -71,7 +71,7 @@ Installing the Wazuh manager
 
     .. code-block:: console
 
-      # apt-get install python gcc g++ make libc6-dev curl policycoreutils automake autoconf libtool cmake
+      # apt-get install python gcc g++ make libc6-dev curl policycoreutils automake autoconf libtool cmake libssl-dev
 
 
     **Optional** CMake 3.18 installation
@@ -88,7 +88,7 @@ Installing the Wazuh manager
 
     .. code-block:: console
 
-        # zypper install make cmake gcc gcc-c++ policycoreutils-python automake autoconf libtool
+        # zypper install make cmake gcc gcc-c++ policycoreutils-python automake autoconf libtool curl libopenssl-devel
 
     CMake 3.18 installation
 
