@@ -148,4 +148,4 @@ Next steps
 
 The Wazuh indexer is now successfully installed on your single-node or multi-node cluster and you can proceed with installing the Wazuh server. To perform this action, see the :doc:`../wazuh-server/step-by-step` section.
 
-If you want to uninstall the Wazuh indexer, see the :ref:`Uninstalling <uninstall_elasticsearch>` section.
+If you want to uninstall the Wazuh indexer, see :ref:`uninstall_indexer`.
