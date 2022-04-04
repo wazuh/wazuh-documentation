@@ -74,6 +74,6 @@ Expand the output to see an example of an alert generated when a hidden process 
     "timestamp": "2020-07-12T18:07:00-0800"
   }
 
-More information on how Wazuh detects rootkits can be found in the :ref:`user manual <manual_anomaly_detection>`.
+You can find more information on how Wazuh detects rootkits in the :ref:`user manual <manual_anomaly_detection>`.
 
 
