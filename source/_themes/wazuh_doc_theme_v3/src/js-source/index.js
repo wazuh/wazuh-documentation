@@ -8,10 +8,9 @@ if ( $('.index') ) {
   $('.loading').removeClass('loading');
 
   /* Move Quickstart */
-  $('[href="quickstart.html"]').first().unwrap().wrap('<div id="quickstart"></div>');
-  if ( $('#quickstart').length ) {
-    $('.inner-body').prepend($('#quickstart'));
-  }
+  const quickstart = $('[href="quickstart.html"]').parent();
+  quickstart.attr('id', 'quickstart');
+  quickstart.parent().prepend(quickstart);
 
   /* Hide specific subtrees from the index */
   const nodesToHide = [
@@ -50,14 +49,14 @@ if ( $('.index') ) {
   $(document).delegate('.toctree-l1 .toggle', 'click', function(e) {
     e.preventDefault();
     const indexBlock = $(e.target).closest('.collapsible');
-    if ( indexBlock.hasClass('collapsed') ) {
-      /* Toggle uncollapse */
+    const isCollapsed = indexBlock.hasClass('collapsed');
+    $('.collapsible').addClass('collapsed');
+    $('.collapsed .toggle').attr('aria-label', `Expand section`);
+
+    /* Toggle uncollapse */
+    if ( isCollapsed ) {
       indexBlock.removeClass('collapsed');
       indexBlock.find('.toggle').attr('aria-label', `Collapse section`);
-    } else {
-      /* Toggle collapse */
-      indexBlock.addClass('collapsed');
-      indexBlock.find('.toggle').attr('aria-label', `Expand section`);
     }
   });
 
