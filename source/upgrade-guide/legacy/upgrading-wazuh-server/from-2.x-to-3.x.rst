@@ -7,7 +7,7 @@ Upgrading the Wazuh server from 2.x to 3.x
 
 The following steps show how to upgrade from Wazuh 2.x to Wazuh 3.x, which implies upgrading from Elastic Stack 5.x to 7.x.
 
-To upgrade the Wazuh server choose the the appropriate tab for the desired package manager:
+To upgrade the Wazuh server, choose the appropriate tab for the desired package manager:
 
 #. Add the new repository for Wazuh 3.x:
 

@@ -511,4 +511,4 @@ It is recommended to disable the Wazuh repository to prevent an upgrade to the n
 Next step
 ---------
 
-The next step consists of :ref:`upgrading the Wazuh agents<upgrading_wazuh_agent>`.
+The next step consists in :ref:`upgrading the Wazuh agents<upgrading_wazuh_agent>`.
