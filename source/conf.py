@@ -449,7 +449,7 @@ custom_replacements = {
     "|CURRENT_MAJOR|" : "4.x",
     "|WAZUH_LATEST|" : "4.3.0",
     "|WAZUH_LATEST_MINOR|" : "4.3",
-    "|WAZUH_PACKAGES_BRANCH|" : "4.2",
+    "|WAZUH_PACKAGES_BRANCH|" : "4.3",
     "|WAZUH_INDEXER_CURRENT|" : "4.3.0",
     "|WAZUH_INDEXER_CURRENT_REV|" : "1",
     "|WAZUH_INDEXER_x64_RPM|" : "x86_64",
