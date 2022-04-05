@@ -324,7 +324,7 @@ Example 2
         }
 
 .. thumbnail:: ../../../images/rbac/rule-example-2.png
-    :title: Rule example 2
+    :title: Example rule 2
     :align: center
     :width: 80%
 
