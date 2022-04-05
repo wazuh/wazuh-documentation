@@ -8,7 +8,7 @@
 Integration with external APIs
 ==============================
 
-The **Integrator** daemon allows Wazuh to connect to external APIs and alerting tools such as Slack, PagerDuty and VirusTotal.
+The **Integrator** daemon allows Wazuh to connect to external APIs and alerting tools such as Slack, PagerDuty, and VirusTotal.
 
 Configuration
 -------------
@@ -48,7 +48,7 @@ The full configuration reference for the Integrator daemon can be found :ref:`he
 Slack
 -----
 
-This integration allows to receive alerts into a Slack channel thanks to the `Incoming Webhooks <https://api.slack.com/incoming-webhooks>`_, a simple way to post messages from 3rd-party apps (in this case, Wazuh).
+This integration allows receiving alerts into a Slack channel thanks to the `Incoming Webhooks <https://api.slack.com/incoming-webhooks>`_, a simple way to post messages from 3rd-party apps (in this case, Wazuh).
 
 This is an example configuration for the Slack integration:
 
@@ -63,7 +63,7 @@ This is an example configuration for the Slack integration:
 PagerDuty
 ---------
 
-`PagerDuty <https://www.pagerduty.com/>`_ is a SaaS incident response platform suitable for IT departments. This integration allows to create a service using its official API in order to receive Wazuh alerts on the Incidents Dashboard.
+`PagerDuty <https://www.pagerduty.com/>`_ is a SaaS incident response platform suitable for IT departments. This integration allows creating a service using its official API in order to receive Wazuh alerts on the Incidents Dashboard.
 
 This is an example configuration for the PagerDuty integration:
 
@@ -100,7 +100,7 @@ This is an example configuration for the VirusTotal integration:
 Custom integration
 ------------------
 
-Integrator tool is able to connect wazuh with other external software. Read the `How to integrate external software using Integrator <https://wazuh.com/blog/how-to-integrate-external-software-using-integrator//>`_ document for more information.
+The integrator tool is able to connect wazuh with other external software. Read the `How to integrate external software using Integrator <https://wazuh.com/blog/how-to-integrate-external-software-using-integrator//>`_ document for more information.
 
 This is an example configuration for a custom integration:
 
