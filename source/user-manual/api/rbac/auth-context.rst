@@ -225,7 +225,7 @@ Example 1
           }
 
 .. thumbnail:: ../../../images/rbac/rule-example-1.png
-    :title: Rule example 1
+    :title: Example rule 1
     :align: center
     :width: 80%
 
