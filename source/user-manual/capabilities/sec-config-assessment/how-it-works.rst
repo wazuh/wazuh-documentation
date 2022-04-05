@@ -15,17 +15,15 @@ change, only the scan ``summary`` event will be sent, thus avoiding unnecessary 
 the manager up to date. The manager will then use those updates to issue alerts that will be shown in the
 Wazuh dashboard.
 
-Integrity and alerting flow is depicted in the
-:ref:`sequence diagram <sca_sequence_diagram>` below.
+Integrity and alerting flow is depicted in the sequence diagram below:
 
-.. figure:: ../../../images/sca/sca-sequence-diagram.png
-  :alt: SCA integrity and alerting flow
-  :name: sca_sequence_diagram
-  :align: center
-  :figwidth: 75%
+  .. thumbnail:: ../../../images/sca/sca-sequence-diagram.png
+     :title: SCA integrity and alerting flow
+     :align: center
+     :width: 80%
 
 Scan Results
-------------------------------
+------------
 
 Any given check event has three possible results (``passed``, ``failed``, and ``not applicable``). This result
 is determined by the set of rules and the rule result aggregator of the check.
