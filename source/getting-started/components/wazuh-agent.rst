@@ -18,11 +18,10 @@ The Wazuh agent has a modular architecture. Each component is in charge of its o
 
 The diagram below represents the agent architecture and components:
 
-.. thumbnail:: /images/getting-started/architecture-agent.png
-   :alt: Wazuh agent architecture
-   :align: center
-   :wrap_image: No
-
+.. thumbnail:: /images/getting-started/architecture-agent.png 
+    :title: Wazuh agent architecture
+    :align: center
+    :width: 80% 
 
 .. _agents_modules: 
 
@@ -43,14 +42,15 @@ All agent modules are configurable and perform different security tasks. This mo
 
 - **Malware detection:** Using a non-signature-based approach, this component is capable of detecting anomalies and the possible presence of rootkits. Also, it looks for hidden processes, hidden files, and hidden ports while monitoring system calls. 
 
-- **Active response:** This module runs automatic actions when threats are detected, triggering responses to block a network connection, stop a running process, or delete a malicious file. Users can also create custom responses when necessary and customize, for example, responses for running a binary in a sandbox, capturing a network connection traffic, and scanning a file with an antivirus.
+- **Active response:** This module runs automatic actions when threats are detected, triggering responses to block a network connection, stop a running process, or delete a malicious file. Users can also create custom responses when necessary, and customize, for example, responses for running a binary in a sandbox, capturing a network connection traffic, and scanning a file with an antivirus.
 
 - **Container security monitoring:** This agent module is integrated with the Docker Engine API in order to monitor changes in a containerized environment. For example, it detects changes to container images, network configuration, or data volumes. Besides, it alerts on containers running in privileged mode and on users executing commands in a running container.
 
 - **Cloud security monitoring:** This component monitors cloud providers such as Amazon AWS, GitHub, Microsoft Azure, Office 365, or Google GCP. It natively communicates with their APIs. It is capable of detecting changes to the cloud infrastructure (e.g. a new user is created, a security group is modified, a cloud instance is stopped, etc.), and collecting cloud services log data (e.g. AWS Cloudtrail, AWS Macie, AWS GuardDuty, Azure Active Directory, etc.)
 
-Communication with Wazuh server
--------------------------------
+
+Communication with the Wazuh server
+-----------------------------------
 
 The Wazuh agent communicates with the :ref:`Wazuh server <wazuh_server>` in order to ship collected data and security-related events. Besides, the agent sends operational data, reporting its configuration and status. Once connected, the agent can be upgraded, monitored, and configured remotely from the Wazuh server.
 

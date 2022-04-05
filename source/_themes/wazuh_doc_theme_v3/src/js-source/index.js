@@ -2,10 +2,15 @@
   Index page
 ----------------------------------------------------------------------------- */
 
-if ( $('.index') ) {
-  const maxShowItems = 3;
+const maxShowItems = 3;
 
+if ( $('.index') ) {
   $('.loading').removeClass('loading');
+
+  /* Changes in release notes */
+  const arrowMore = document.createElement('i');
+  arrowMore.setAttribute('class', 'fas fa-long-arrow-alt-right');
+  $('.toctree-wrapper:last-of-type .toctree-l1:last-of-type .toctree-l2:first-of-type > a').text('More').append(arrowMore);
 
   /* Move Quickstart */
   $('[href="quickstart.html"]').first().unwrap().wrap('<div id="quickstart"></div>');
@@ -28,6 +33,21 @@ if ( $('.index') ) {
   function hideSectionsFromIndex(nodesToHide) {
     for ( let i = 0; i < nodesToHide.length; i++ ) {
       $('.index [href="' + nodesToHide[i] + '"]').parent().remove();
+    }
+  }
+
+  /* Disable empty TOC nodes links */
+  if ( emptyTocNodes ) {
+    for (let i = 0; i < emptyTocNodes.length; i++) {
+      const foundNodes = $('a[href="' + emptyTocNodes[i] + '.html"]');
+      if ( foundNodes.length > 0) {
+        const linkText = foundNodes.text();
+        const parent = foundNodes.parent();
+        if ( parent.hasClass('toctree-l1') ) {
+          foundNodes.remove();
+          parent.prepend('<span class="section-title" data-href="' + emptyTocNodes[i] + '.html">' + linkText + '</span>');
+        }
+      }
     }
   }
 

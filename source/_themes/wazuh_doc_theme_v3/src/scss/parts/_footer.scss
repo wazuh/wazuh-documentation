@@ -6,7 +6,7 @@
 ----------------------------------------------------------------------------- */
 
 footer {
-  padding: 26px 15px;
+  padding: 50px 15px 26px;
   @include media-min(xl){
     position: absolute;
     right: 0;
@@ -67,6 +67,8 @@ footer {
   .footer-section {
     line-height: 32px;
     .footer-title {
+      font-size: 17px;
+      text-transform: uppercase;
       margin-top: 28px;
       margin-bottom: 5px;
       font-weight: 600;

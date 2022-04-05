@@ -1,5 +1,7 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
+:orphan:
+
 .. _azure_monitoring_dependencies:
 
 

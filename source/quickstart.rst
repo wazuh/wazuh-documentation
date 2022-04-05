@@ -14,7 +14,7 @@ Wazuh is a security platform that provides unified XDR and SIEM protection for e
 
 Wazuh is free and open source. Its components abide by the `GNU General Public License, version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_, and the `Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_ (ALv2).
 
-This document shows you how to install and configure the central components in just a few minutes. All the components are installed on the same host using the Wazuh unattended installer. Alternatively, you can check our :ref:`Installation guide <installation_guide>` to learn how to install and configure each component in cluster configurations.
+This quickstart shows you how to install the Wazuh central components on the same host using our installation assistant. For more details and other installation options, you can check our :ref:`Installation guide <installation_guide>`.
 
 .. _installation_requirements:
 
@@ -72,16 +72,17 @@ Wazuh can be installed on a 64-bit Linux operating system. Wazuh supports the fo
 Installing Wazuh
 ----------------
 
-#. Download and run the Wazuh unattended installer. 
+#. Download and run the Wazuh installation assistant. 
 
    .. code-block:: console
 
-     # curl -sO https://s3.us-west-1.amazonaws.com/packages-dev.wazuh.com/resources/4.3/wazuh_install.sh && sudo bash ./wazuh_install.sh -a
+     $ curl -sO https://packages-dev.wazuh.com/|WAZUH_LATEST_MINOR|/wazuh-install.sh && sudo bash ./wazuh-install.sh -a
+
 
    After executing the installer, the output shows the access credentials and a message that confirms that the installation was successful.
-   
+
    .. code-block:: console
-     :emphasize-lines: 4
+     :emphasize-lines: 4          
      
      INFO: Passwords changed.
      INFO: Starting Wazuh dashboard (this may take a while).

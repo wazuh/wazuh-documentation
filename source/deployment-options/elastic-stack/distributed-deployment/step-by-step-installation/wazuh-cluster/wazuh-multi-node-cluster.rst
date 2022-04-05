@@ -160,7 +160,7 @@ Filebeat installation and configuration
 
     .. code-block:: console
 
-      # curl -so /etc/filebeat/filebeat.yml https://packages.wazuh.com/resources/|WAZUH_LATEST_MINOR|/elastic-stack/filebeat/7.x/filebeat.yml
+      # curl -so /etc/filebeat/filebeat.yml https://packages-dev.wazuh.com/|WAZUH_LATEST_MINOR|/tpl/elastic-basic/filebeat.yml
 
 #. Download the alerts template for Elasticsearch:
 
@@ -218,7 +218,7 @@ Disabling repositories
 
 
 
-To uninstall Wazuh and Filebeat, visit the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_open_distro>`.
+To uninstall Wazuh and Filebeat, visit the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_basic>`.
 
 Next steps
 ----------

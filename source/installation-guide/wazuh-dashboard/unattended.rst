@@ -20,15 +20,17 @@ You can install and configure the Wazuh dashboard using an automated script.
 
     .. code-block:: console
 
-      # curl -sO https://s3.us-west-1.amazonaws.com/packages-dev.wazuh.com/resources/4.3/wazuh_install.sh
+      # curl -sO https://packages-dev.wazuh.com/|WAZUH_LATEST_MINOR|/wazuh-install.sh
 
 
 
 #. Run the script with the option ``-wd`` and the node name to install and configure the Wazuh dashboard. The node name must be the same used in ``config.yml`` for the initial configuration, for example, ``dashboard``.
    
-    .. code-block:: console
+   .. note:: Make sure that a copy of ``wazuh-install-files.tar``, created during the Wazuh indexer installation, is placed in your working directory.
 
-      # bash ./wazuh_install.sh -wd dashboard
+   .. code-block:: console
+
+      # bash ./wazuh-install.sh -wd dashboard
 
     
 

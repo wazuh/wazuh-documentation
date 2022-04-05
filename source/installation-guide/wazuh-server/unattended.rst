@@ -18,11 +18,11 @@ Install the Wazuh server as a single-node or multi-node cluster according to you
 
    .. code-block:: console
    
-       # curl -sO https://s3.us-west-1.amazonaws.com/packages-dev.wazuh.com/resources/4.3/wazuh_install.sh
+       # curl -sO https://packages-dev.wazuh.com/|WAZUH_LATEST_MINOR|/wazuh-install.sh
 
 #. Run the script with the option ``-ws`` followed by the node name to install the Wazuh server. The node name must be the same used in ``config.yml`` for the initial configuration, for example, ``wazuh-master``.
  
-   .. note:: Make sure that a copy of ``configurations.tar``, created during the Wazuh indexer installation, is placed in your working directory.
+   .. note:: Make sure that a copy of ``wazuh-install-files.tar``, created during the Wazuh indexer installation, is placed in your working directory.
 
    .. code-block:: console
   

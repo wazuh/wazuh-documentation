@@ -128,9 +128,12 @@
 <html lang="{{ language }}">
   <head>
     {% block head -%}
-    {%- if not is_latest_release -%}
-    <meta name="robots" content="noindex">
-    {%- endif %}
+    {% set is_orphan = meta and meta.orphan is defined %}
+    {% if is_latest_release and  pagename != 'moved-content' and pagename != 'not_found' and pagename != 'search' and not is_orphan %}
+    <meta name="robots" content="index" />
+    {% else %}
+    <meta name="robots" content="noindex" />
+    {% endif %}
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="UTF-8">
     <meta name="author" content="Wazuh">
@@ -215,10 +218,13 @@
     {%- set body_class = body_class + ' no-latest-docs' -%}
   {% endif -%}
 
-  <body class="{{ body_class }}" data-spy="scroll" data-target="#local-toc" data-offset="200">
+  <body class="{{ body_class }}"  data-path="{{ pagename }}" data-spy="scroll" data-target="#local-toc" data-offset="200">
   {% block body %} {% endblock %}
   {%- block after_footer %}
     <script id="documentation_options" data-url_root="{{ pathto('', 1) }}" src="{{ pathto('_static/js/documentation_options.js', 1) }}"></script>
+    <script>
+      const emptyTocNodes = JSON.parse('{{ empty_toc_nodes }}');
+    </script>
   {{- js() }}
   {% endblock after_footer -%}
   {%- if pagename not in special_pages -%}

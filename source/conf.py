@@ -14,6 +14,7 @@ import re
 import shlex
 import datetime
 import time
+import json
 from requests.utils import requote_uri
 
 # If extensions (or modules to document with autodoc) are in another directory,
@@ -448,7 +449,7 @@ custom_replacements = {
     "|CURRENT_MAJOR|" : "4.x",
     "|WAZUH_LATEST|" : "4.3.0",
     "|WAZUH_LATEST_MINOR|" : "4.3",
-    "|WAZUH_PACKAGES_BRANCH|" : "4.2",
+    "|WAZUH_PACKAGES_BRANCH|" : "4.3",
     "|WAZUH_INDEXER_CURRENT|" : "4.3.0",
     "|WAZUH_INDEXER_CURRENT_REV|" : "1",
     "|WAZUH_INDEXER_x64_RPM|" : "x86_64",
@@ -463,6 +464,8 @@ custom_replacements = {
     "|WAZUH_LATEST_OVA|" : "4.2.5",
     "|WAZUH_LATEST_AMI|" : "4.2.5",
     "|WAZUH_LATEST_DOCKER|" : "4.2.5",
+    "|WAZUH_LATEST_AIX|" : "4.2.6",
+    "|WAZUH_LATEST_MINOR_AIX|" : "4.2",
     "|OPEN_DISTRO_LATEST|" : "1.13.2",
     "|ELASTICSEARCH_LATEST|" : "7.10.2",
     "|ELASTICSEARCH_LATEST_OVA|" : "7.10.2",
@@ -476,7 +479,7 @@ custom_replacements = {
     "|OPENDISTRO_LATEST_AMI|" : "1.13.2",
     "|OPENDISTRO_LATEST_KUBERNETES|" : "1.13.2",
     "|DOCKER_COMPOSE_VERSION|" : "1.28.3",
-    "|SPLUNK_LATEST|" : "8.2.2",
+    "|SPLUNK_LATEST|" : "8.2.4",
     "|WAZUH_SPLUNK_LATEST|" : "4.3.0",
     "|ELASTIC_6_LATEST|" : "6.8.8",
     "|WAZUH_REVISION_YUM_AGENT_I386|" : "1",
@@ -520,6 +523,33 @@ custom_replacements = {
     "|ELASTICSEARCH_ELK_LATEST_PUPPET|" : "7.10.2",
     "|ELASTICSEARCH_ELK_LATEST_DOCKER|" : "7.10.2",
 }
+
+# -- Customizations ---------------------------------------------------------
+# 
+# ## emptyTocNodes ##
+emptyTocNodes = json.dumps([
+    'amazon/configuration/index',
+    'compliance',
+    'containers',
+    'deployment',
+    'development/index',
+    'docker-monitor/index',
+    'installation-guide/elasticsearch-cluster/index',
+    'installation-guide/wazuh-cluster/index',
+    'installation-guide/upgrading/legacy/index',
+    'installation-guide/packages-list/linux/linux-index',
+    'installation-guide/packages-list/solaris/solaris-index',
+    'monitoring',
+    'user-manual/index',
+    'user-manual/agents/index',
+    'user-manual/agents/remove-agents/index',
+    'user-manual/agents/listing/index',
+    'user-manual/kibana-app/reference/index',
+    'user-manual/ruleset/ruleset-xml-syntax/index',
+    'installation-guide/distributed-deployment/step-by-step-installation/elasticsearch-cluster/index',
+    'installation-guide/distributed-deployment/step-by-step-installation/wazuh-cluster/index',
+    'user-manual/capabilities/active-response/ar-use-cases/index',
+])
 
 # -- Setup -------------------------------------------------------------------
 
@@ -689,9 +719,11 @@ def finish_and_clean(app, exception):
                 os.remove(app.srcdir + '/_static/' + mini_asset)
 
 def collect_compiled_pagename(app, pagename, templatename, context, doctree):
-    ''' Runs once per page, storing the pagename (full page path) extracted from the context '''
+    ''' Runs once per page, storing the pagename (full page path) extracted from the context
+        It store the path of all compiled documents except the orphans and the ones in exclude_doc'''
     if templatename == "page.html" and pagename not in exclude_doc:
-        list_compiled_html.append(context['pagename']+'.html')
+        if not context['meta'] or ( context['meta']['orphan'] ):
+            list_compiled_html.append(context['pagename']+'.html')
     else:
         pass
 
@@ -738,6 +770,7 @@ html_context = {
     "production": production,
     "apiURL": apiURL,
     "compilation_ts": compilation_time,
+    "empty_toc_nodes": emptyTocNodes,
     "is_latest_release": is_latest_release
 }
 sphinx_tabs_nowarn = True

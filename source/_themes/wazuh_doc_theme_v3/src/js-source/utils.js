@@ -56,3 +56,25 @@ function compareVersion(version1, version2) {
   }
   return result;
 }
+
+/**
+  * Marks with a give class all nodes in a list.
+  * Function mainly used to mark the empty nodes (documents that contain only a toctree, without real content).
+  * Note: this might be improved in the future using a new builder or extension.
+  * @param {array} nodeList List of nodes that needs to be marked with the class.
+  * @param {string} className Class to be applied to the nodes.
+  * @param {string} fromNodeSelector Selector of the element from which the marking must be done.
+  *                                  Empty string to mark all matching nodes in the whole DOM.
+  */
+function markTocNodesWithClass(nodeList, className, fromNodeSelector) {
+  nodeList.forEach(function(tocNode) {
+    markedNode = '.+\/' + tocNode + '.html';
+    const regex = new RegExp(markedNode, 'g');
+    $(fromNodeSelector+' a').each(function() {
+      const href = $(this).prop('href').split('#')[0];
+      if (regex.test(href)) {
+        $(this).addClass(className);
+      }
+    });
+  });
+}
