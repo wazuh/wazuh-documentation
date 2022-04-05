@@ -74,6 +74,9 @@ removedUrls['x.y'] = [
 /* Pages added in 4.3 */
 
 newUrls['4.3'] = [
+  '/release-notes/index-2x.html',
+  '/release-notes/index-3x.html',
+  '/release-notes/index-4x.html',
   '/github/index.html',
   '/github/monitoring-github-activity.html',
   '/user-manual/reference/ossec-conf/github-module.html',
@@ -299,6 +302,21 @@ removedUrls['4.3'] = [
 
 
 redirections.push(
+  {
+    'target': ['4.3=>4.2'],
+    '4.2': '/release-notes/index.html',
+    '4.3': '/release-notes/index-2x.html',
+  },
+  {
+    'target': ['4.3=>4.2'],
+    '4.2': '/release-notes/index.html',
+    '4.3': '/release-notes/index-3x.html',
+  },
+  {
+    'target': ['4.3=>4.2'],
+    '4.2': '/release-notes/index.html',
+    '4.3': '/release-notes/index-4x.html',
+  },
   {
     'target': ['4.2=>4.3'],
     '4.2': '/getting-started/use-cases/system-inventory.html',
