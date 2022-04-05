@@ -72,6 +72,7 @@ if ( $('#global-toc').length > 0 ) {
 
   if ( emptyTocNodes ) {
     markTocNodesWithClass(emptyTocNodes, 'empty-toc-node', '#global-toc');
+    $('#global-toc .current-toc-node').addClass('empty-toc-node');
   }
 
   /* Behavior of the empty nodes: toggle */

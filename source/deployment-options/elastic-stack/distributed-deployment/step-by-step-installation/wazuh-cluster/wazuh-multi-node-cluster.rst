@@ -218,7 +218,7 @@ Disabling repositories
 
 
 
-To uninstall Wazuh and Filebeat, visit the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_open_distro>`.
+To uninstall Wazuh and Filebeat, visit the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_basic>`.
 
 Next steps
 ----------
