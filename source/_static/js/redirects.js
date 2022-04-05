@@ -304,17 +304,17 @@ removedUrls['4.3'] = [
 redirections.push(
   {
     'target': ['4.3=>4.2'],
-    '4.2': '//release-notes/index.html',
+    '4.2': '/release-notes/index.html',
     '4.3': '/release-notes/index-2x.html',
   },
   {
     'target': ['4.3=>4.2'],
-    '4.2': '//release-notes/index.html',
+    '4.2': '/release-notes/index.html',
     '4.3': '/release-notes/index-3x.html',
   },
   {
     'target': ['4.3=>4.2'],
-    '4.2': '//release-notes/index.html',
+    '4.2': '/release-notes/index.html',
     '4.3': '/release-notes/index-4x.html',
   },
   {
