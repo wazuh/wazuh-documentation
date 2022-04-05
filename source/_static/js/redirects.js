@@ -790,6 +790,8 @@ redirectSameRelease['4.2'] = {
     '/release-notes/release-4-2-0.html',
   '/user-manual/registering/agent-enrollment.html':  
     '/user-manual/agent-enrollment/via-agent-configuration/index.html',
+  '/azure/dependencies.html':  
+    '/azure/index.html',
 };
 
 /* Pages added in 4.2 */
@@ -966,6 +968,7 @@ newUrls['4.2'] = [
   '/release-notes/release-4-2-3.html',
   '/release-notes/release-4-2-4.html',
   '/release-notes/release-4-2-5.html',
+  '/release-notes/release-4-2-6.html',
   '/user-manual/api/securing-api.html',
   '/user-manual/configuring-cluster/cluster-management.html',
   '/user-manual/manager/manual-email-report/smtp-authentication.html',
