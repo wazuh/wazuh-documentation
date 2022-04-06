@@ -81,15 +81,15 @@ In the commands below ``127.0.0.1`` IP address is used. If Elasticsearch is boun
 
 #. Disable shard allocation:
 
-    .. code-block:: console
+    .. code-block:: bash
 
-      # curl -X PUT "https://127.0.0.1:9200/_cluster/settings"  -u <username>:<password> -k -H 'Content-Type: application/json' -d'
-      # {
-      #   "persistent": {
-      #     "cluster.routing.allocation.enable": "primaries"
-      #   }
-      # }
-      # '
+      curl -X PUT "https://127.0.0.1:9200/_cluster/settings"  -u <username>:<password> -k -H 'Content-Type: application/json' -d'
+      {
+        "persistent": {
+          "cluster.routing.allocation.enable": "primaries"
+        }
+      }
+      '
 
 #. Stop non-essential indexing and perform a synced flush:
 
@@ -138,15 +138,15 @@ In the commands below ``127.0.0.1`` IP address is used. If Elasticsearch is boun
 
 #. Reenable shard allocation:
 
-    .. code-block:: console
+    .. code-block:: bash
 
-      # curl -X PUT "https://127.0.0.1:9200/_cluster/settings" -u <username>:<password> -k -H 'Content-Type: application/json' -d'
-      # {
-      #   "persistent": {
-      #     "cluster.routing.allocation.enable": "all"
-      #   }
-      # }
-      # '
+      curl -X PUT "https://127.0.0.1:9200/_cluster/settings" -u <username>:<password> -k -H 'Content-Type: application/json' -d'
+      {
+        "persistent": {
+          "cluster.routing.allocation.enable": "all"
+        }
+      }
+      '
 
 #. Before upgrading the next node, wait for the cluster to finish shard allocation:
 

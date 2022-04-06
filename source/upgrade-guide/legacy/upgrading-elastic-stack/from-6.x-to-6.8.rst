@@ -47,15 +47,15 @@ Upgrading Elasticsearch
 
 #. Disable shard allocation:
 
-    .. code-block:: console
+    .. code-block:: bash
 
-      # curl -X PUT "localhost:9200/_cluster/settings" -H 'Content-Type: application/json' -d'
-      # {
-      #   "persistent": {
-      #     "cluster.routing.allocation.enable": "primaries"
-      #   }
-      # }
-      # '
+      curl -X PUT "localhost:9200/_cluster/settings" -H 'Content-Type: application/json' -d'
+      {
+        "persistent": {
+          "cluster.routing.allocation.enable": "primaries"
+        }
+      }
+      '
 
 #. Stop non-essential indexing and perform a synced flush (optional):
 
@@ -107,15 +107,15 @@ Upgrading Elasticsearch
 
 #. Reenable shard allocation:
 
-    .. code-block:: console
+    .. code-block:: bash
 
-      # curl -X PUT "localhost:9200/_cluster/settings" -H 'Content-Type: application/json' -d'
-      # {
-      #   "persistent": {
-      #     "cluster.routing.allocation.enable": null
-      #   }
-      # }
-      # '
+      curl -X PUT "localhost:9200/_cluster/settings" -H 'Content-Type: application/json' -d'
+      {
+        "persistent": {
+          "cluster.routing.allocation.enable": null
+        }
+      }
+      '
 
 #. Before upgrading the next node, wait for the cluster to finish shard allocation:
 

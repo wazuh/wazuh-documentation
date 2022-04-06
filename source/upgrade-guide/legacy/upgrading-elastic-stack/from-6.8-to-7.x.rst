@@ -69,15 +69,15 @@ Upgrading Elasticsearch
 
 #. Disable shard allocation:
 
-    .. code-block:: console
+    .. code-block:: bash
 
-      # curl -X PUT "localhost:9200/_cluster/settings" -H 'Content-Type: application/json' -d'
-      # {
-      #   "persistent": {
-      #     "cluster.routing.allocation.enable": "primaries"
-      #   }
-      # }
-      # '
+      curl -X PUT "localhost:9200/_cluster/settings" -H 'Content-Type: application/json' -d'
+      {
+        "persistent": {
+           "cluster.routing.allocation.enable": "primaries"
+        }
+      }
+      '
 
 #. Stop non-essential indexing and perform a synced flush (optional):
 
@@ -139,15 +139,15 @@ Upgrading Elasticsearch
 
 #. Reenable shard allocation:
 
-    .. code-block:: console
+    .. code-block:: bash
 
-      # curl -X PUT "localhost:9200/_cluster/settings" -H 'Content-Type: application/json' -d'
-      # {
-      #   "persistent": {
-      #     "cluster.routing.allocation.enable": null
-      #   }
-      # }
-      # '
+      curl -X PUT "localhost:9200/_cluster/settings" -H 'Content-Type: application/json' -d'
+      {
+        "persistent": {
+          "cluster.routing.allocation.enable": null
+        }
+      }
+      '
 
 #. Before upgrading the next node, wait for the cluster to finish shard allocation:
 
@@ -168,22 +168,22 @@ Run the request below for each Wazuh index created before the Elastic 7.x upgrad
 
 An example of how to run the request using the index ``wazuh-alerts-3.x-2019.05.16`` looks as follows:
 
-.. code-block:: console
+.. code-block:: bash
 
-  # curl -X POST "localhost:9200/wazuh-alerts-3.x-2019.05.16/wazuh/_update_by_query?wait_for_completion=true" -H 'Content-Type: application/json' -d'
-  # {
-  #   "query": {
-  #     "bool": {
-  #       "must_not": {
-  #         "exists": {
-  #           "field": "timestamp"
-  #         }
-  #       }
-  #     }
-  #   },
-  #   "script": "ctx._source.timestamp = ctx._source[\"@timestamp\"]"
-  # }
-  # '
+  curl -X POST "localhost:9200/wazuh-alerts-3.x-2019.05.16/wazuh/_update_by_query?wait_for_completion=true" -H 'Content-Type: application/json' -d'
+  {
+    "query": {
+      "bool": {
+        "must_not": {
+          "exists": {
+            "field": "timestamp"
+          }
+        }
+      }
+    },
+    "script": "ctx._source.timestamp = ctx._source[\"@timestamp\"]"
+  }
+  '
 
 The request must be executed for all previous indices which need to be migrated. Modify the date parameter according to the index name.
 
