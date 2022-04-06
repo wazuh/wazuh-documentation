@@ -21,7 +21,7 @@ Before you check the agent's connection with the manager, first ensure the agent
     </client>
   </ossec_config>
 
-This will set 10.0.0.10 as the Wazuh server. Once this is done, you will need restart the Agent:
+This will set 10.0.0.10 as the Wazuh server. Once this is done, you will need to restart the Agent:
 
   a. For Systemd:
 
@@ -41,12 +41,12 @@ After you register the agent and it has successfully connected, you can see a li
 
   # /var/ossec/bin/agent_control -lc
 
-You can also check to see if an agent connected correctly by verifying if the TCP connection to the manager is established:
+You can also check to see if an agent is connected correctly by verifying if the TCP connection to the manager is established:
 
 .. code-block:: console
 
   # netstat -vatunp|grep wazuh-agentd
 
-The result should match the agent and manager IP addresses.
+The result should match the agent and manager's IP addresses.
 
 In the :doc:`agent_control section <../reference/tools/agent-control>`, you can find information about the status of the agents that are registered with the manager.

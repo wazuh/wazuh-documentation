@@ -8,7 +8,7 @@
 Upgrading agent
 ===============
 
-The following is a description of the upgrade procedure by means of a use case.
+The following is a description of the upgrade procedure using a use case.
 
 Upgrading an agent remotely can be performed at the command line and through the Wazuh API.
 
@@ -113,7 +113,7 @@ Using the RESTful API
 
     When upgrading more than 3000 agents at the same time, it's highly recommended to use the parameter `wait_for_complete` set to `true` to avoid a possible API timeout.
 
-    This number of agents from which `wait_for_complete=true` is recommended, has been set after testing the endpoint in a Wazuh environment whose manager was installed in a host with specifications: 2.5 GHz AMD EPYC 7000 series processor and 4 GiB of memory. Using an agents list with size less than or equal to 3000 and a host with same or higher specs guarantees this endpoint to return a response before the API timeout.
+    This number of agents from which `wait_for_complete=true` is recommended, has been set after testing the endpoint in a Wazuh environment whose manager was installed in a host with specifications: 2.5 GHz AMD EPYC 7000 series processor and 4 GiB of memory. Using an agents list with a size less than or equal to 3000 and a host with the same or higher specs guarantees this endpoint to return a response before the API timeout.
 
     .. code-block:: console
 
