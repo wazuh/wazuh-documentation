@@ -74,6 +74,9 @@ removedUrls['x.y'] = [
 /* Pages added in 4.3 */
 
 newUrls['4.3'] = [
+  '/release-notes/index-2x.html',
+  '/release-notes/index-3x.html',
+  '/release-notes/index-4x.html',
   '/github/index.html',
   '/github/monitoring-github-activity.html',
   '/user-manual/reference/ossec-conf/github-module.html',
@@ -299,6 +302,21 @@ removedUrls['4.3'] = [
 
 
 redirections.push(
+  {
+    'target': ['4.3=>4.2'],
+    '4.2': '/release-notes/index.html',
+    '4.3': '/release-notes/index-2x.html',
+  },
+  {
+    'target': ['4.3=>4.2'],
+    '4.2': '/release-notes/index.html',
+    '4.3': '/release-notes/index-3x.html',
+  },
+  {
+    'target': ['4.3=>4.2'],
+    '4.2': '/release-notes/index.html',
+    '4.3': '/release-notes/index-4x.html',
+  },
   {
     'target': ['4.2=>4.3'],
     '4.2': '/getting-started/use-cases/system-inventory.html',
@@ -790,6 +808,8 @@ redirectSameRelease['4.2'] = {
     '/release-notes/release-4-2-0.html',
   '/user-manual/registering/agent-enrollment.html':  
     '/user-manual/agent-enrollment/via-agent-configuration/index.html',
+  '/azure/dependencies.html':  
+    '/azure/index.html',
 };
 
 /* Pages added in 4.2 */
@@ -966,6 +986,7 @@ newUrls['4.2'] = [
   '/release-notes/release-4-2-3.html',
   '/release-notes/release-4-2-4.html',
   '/release-notes/release-4-2-5.html',
+  '/release-notes/release-4-2-6.html',
   '/user-manual/api/securing-api.html',
   '/user-manual/configuring-cluster/cluster-management.html',
   '/user-manual/manager/manual-email-report/smtp-authentication.html',
