@@ -73,9 +73,9 @@ Docker Compose 1.6 or newer is required. Follow these steps to install it:
 
     For example:
 
-    .. code-block:: bash
+    .. code-block:: console
 
-      sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+      $ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
 3. Test the installation to ensure everything went properly:
 

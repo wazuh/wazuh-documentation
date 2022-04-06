@@ -15,14 +15,14 @@ Backup your files
 
 To avoid losing any configuration data, or the agent key, we will stop the OSSEC agent and make a copy of the directory where it lives. But first, lets check if we have enough space to create a copy of ``/var/ossec``:
 
-.. code-block:: bash
+.. code-block:: console
 
    $ sudo du -h /var/ossec | tail -n1
    $ sudo df -h /var
 
 Now we copy all files to a separated backup directory:
 
-.. code-block:: bash
+.. code-block:: console
 
    $ sudo /var/ossec/bin/ossec-control stop
    $ sudo cp -rp /var/ossec /var/ossec_backup
@@ -38,21 +38,21 @@ Remove your current installation
      - How to remove OSSEC
 
    * - Deb packages
-     - .. code-block:: bash
+     - .. code-block:: console
 
           $ sudo apt-get remove ossec-hids-agent --purge
           $ sudo rm -f /etc/ossec-init.conf
           $ sudo rm -rf /var/ossec
 
    * - RPM packages
-     - .. code-block:: bash
+     - .. code-block:: console
 
           $ sudo yum remove ossec-hids-agent
           $ sudo rm -f /etc/ossec-init.conf
           $ sudo rm -rf /var/ossec
 
    * - From sources
-     - .. code-block:: bash
+     - .. code-block:: console
 
           $ sudo rm -f /etc/ossec-init.conf
           $ sudo rm -rf /var/ossec
@@ -69,13 +69,13 @@ Before restoring our previous settings please note that some configuration optio
 
 The first step is to stop the agent processes:
 
-.. code-block:: bash
+.. code-block:: console
 
    $ systemctl stop wazuh-agent
 
 Now we will restore the following files:
 
-.. code-block:: bash
+.. code-block:: console
 
    $ cp -p /var/ossec_backup/etc/ossec.conf /var/ossec/etc/ossec.conf.orig
    $ cp -p /var/ossec_backup/etc/local_internal_options.conf /var/ossec/etc/local_internal_options.conf
@@ -92,6 +92,6 @@ There have been some syntax changes, and new settings, incorporated to ``ossec.c
 
 Finally we can start the agent again. Please check ``/var/ossec/logs/ossec.log`` file to ensure there are no errors or warnings related to the settings migration.
 
-.. code-block:: bash
+.. code-block:: console
 
    $ systemctl start wazuh-agent
