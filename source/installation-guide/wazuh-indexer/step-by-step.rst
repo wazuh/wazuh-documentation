@@ -71,8 +71,6 @@ Installing the Wazuh indexer
 Configuring the Wazuh indexer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-  .. note:: Skip this step if you are installing all the Wazuh central components on the same host and using the default ``node-1`` name for the node.
-
   .. include:: /_templates/installations/indexer/common/configure_indexer_nodes.rst
 
 
