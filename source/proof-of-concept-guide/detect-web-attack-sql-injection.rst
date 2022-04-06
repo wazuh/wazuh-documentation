@@ -30,7 +30,7 @@ Optionally, you can install Suricata in the Ubuntu 20 endpoint and configure it 
 
 #. Modify the FilesMatch directive at ``/etc/apache2/apache2.conf`` as follow:
 
-    .. code-block:: XML
+    .. code-block:: none
 
       <FilesMatch ".ht*">
         Require all denied

@@ -83,6 +83,23 @@
   .upperroman {
     list-style-type: upper-roman;
   }
+  
+  /* Special case for nested autonumbered lists,
+  though this will affect all types of lists */
+  :not(li) {
+    > .arabic > li > .arabic {
+      list-style-type: lower-alpha;
+      > li > .arabic {
+        list-style-type: lower-roman;
+        > li > .arabic {
+          list-style-type: upper-alpha;
+          > li > .arabic {
+            list-style-type: upper-roman;
+          }
+        }
+      }
+    }
+  }
 
   caption {
     padding: 8px;

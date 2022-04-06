@@ -53,7 +53,7 @@
   <view id="poc-guide-dt" viewBox="1980 220 200 200"/>
   <view id="release-notes-lt" viewBox="2200 0 200 200"/>
   <view id="release-notes-dt" viewBox="2200 220 200 200"/>
-  <view id="quickstar-lt" viewBox="2420 0 200 200"/>
+  <view id="quickstart-lt" viewBox="2420 0 200 200"/>
   <view id="quickstart-dt" viewBox="2420 220 200 200"/>
   <view id="quickstart" viewBox="2420 440 200 200"/>
   <view id="installation-alternatives-lt" viewBox="2640 0 200 200"/>

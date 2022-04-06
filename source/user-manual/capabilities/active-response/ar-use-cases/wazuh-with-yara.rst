@@ -210,6 +210,7 @@ The script configured to run as part of the active response settings defined on 
 
 .. note:: Make sure that you have `jq <https://stedolan.github.io/jq/>`_ installed, and that the ``yara.sh`` file ownership is ``root:wazuh`` and the permissions are ``750``.
 
+
 The script receives these paths:
 
 - The file path contained in the alert that triggered the active response in the ``parameters.alert.syscheck.path`` object.

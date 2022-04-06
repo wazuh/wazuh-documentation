@@ -12,7 +12,7 @@ Index
 .. toctree::
    :titlesonly:
    :includehidden:
-   :maxdepth: 2
+   :maxdepth: 3
 
    Getting started <getting-started/index>
    quickstart
