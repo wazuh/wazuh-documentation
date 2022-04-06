@@ -43,7 +43,7 @@ The following steps serve as a guide on how to configure a macOS endpoint agent 
                 </enrollment>
             </client>
       
-      These agent enrollment parameters are optional and they provide the agent with specific information that should be used during enrollment. Some common enrollment parameters are below:
+      These agent enrollment parameters are optional, and they provide the agent with specific information that should be used during enrollment. Some common enrollment parameters are below:
    
       - ``<agent_name>EXAMPLE_NAME</agent_name>``: This specifies the name the endpoint should be enrolled as. When this is not specified, it defaults to the endpoint hostname.
       

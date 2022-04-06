@@ -9,7 +9,7 @@
 Manager identity verification
 =============================
 
-This method uses SSL certificates to verify the identity of the Wazuh manager before an agent sends the enrollment request. The manager verification and the agent verification are independent of each other, and however, it is possible to use a combination of both.
+This method uses SSL certificates to verify the identity of the Wazuh manager before an agent sends the enrollment request. The manager verification and the agent verification are independent of each other. However, it is possible to use a combination of both.
 
 In this document, you will find the following information:
 
@@ -125,7 +125,7 @@ Manager configuration
 Linux/Unix endpoint
 ^^^^^^^^^^^^^^^^^^^
 
-The following steps serve as a guide on how to enroll a Linux/Unix endpoint by using certificates to verify the manager identity:
+The following steps serve as a guide on how to enroll a Linux/Unix endpoint by using certificates to verify the manager's identity:
 
 #. Ensure that the root certificate authority ``rootCA.pem`` file has been copied to the endpoint.
 #. As a root user, modify the Wazuh agent configuration file located at ``/var/ossec/etc/ossec.conf`` and include the following:
@@ -187,7 +187,7 @@ The following steps serve as a guide on how to enroll a Linux/Unix endpoint by u
 Windows endpoint
 ^^^^^^^^^^^^^^^^
 
-The following steps serve as a guide on how to enroll a Windows endpoint by using certificates to verify the manager identity:
+The following steps serve as a guide on how to enroll a Windows endpoint by using certificates to verify the manager's identity:
 
 The Wazuh agent installation directory depends on the architecture of the host.
 
@@ -246,7 +246,7 @@ The Wazuh agent installation directory depends on the architecture of the host.
 macOS endpoint
 ^^^^^^^^^^^^^^
 
-The following steps serve as a guide on how to enroll a macOS endpoint by using certificates to verify the manager identity:
+The following steps serve as a guide on how to enroll a macOS endpoint by using certificates to verify the manager's identity:
 
 #. Ensure that the root certificate authority ``rootCA.pem`` file has been copied to the endpoint.
 
