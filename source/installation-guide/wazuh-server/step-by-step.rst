@@ -127,7 +127,7 @@ Configuring Filebeat
      
         # filebeat keystore create
 
-  #. Add the username and password to the secrets keystore.
+  #. Add the username and password ``admin``:``admin`` to the secrets keystore.
       
       .. code-block:: console
 
