@@ -74,7 +74,7 @@ Upgrading Elasticsearch
       curl -X PUT "localhost:9200/_cluster/settings" -H 'Content-Type: application/json' -d'
       {
         "persistent": {
-           "cluster.routing.allocation.enable": "primaries"
+          "cluster.routing.allocation.enable": "primaries"
         }
       }
       '
