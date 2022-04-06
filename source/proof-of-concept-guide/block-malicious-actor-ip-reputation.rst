@@ -63,7 +63,7 @@ Configure your environment as follows to test the POC.
 
     .. code-block:: console
 
-        # chown ossec:ossec /var/ossec/etc/lists/blacklist-alienvault
+        # chown wazuh:wazuh /var/ossec/etc/lists/blacklist-alienvault
         # chmod 660 /var/ossec/etc/lists/blacklist-alienvault
 
 #. Add a custom rule to trigger the active response. This can be done in the ``/var/ossec/etc/rules/local_rules.xml`` file at the Wazuh manager.

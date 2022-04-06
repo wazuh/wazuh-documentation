@@ -208,7 +208,7 @@ The script configured to run as part of the active response settings defined on 
   exit 1;
   
   
-.. note:: Make sure that you have `jq <https://stedolan.github.io/jq/>`_ installed, and that the ``yara.sh`` file ownership is ``root:ossec`` and the permissions are ``750``.
+.. note:: Make sure that you have `jq <https://stedolan.github.io/jq/>`_ installed, and that the ``yara.sh`` file ownership is ``root:wazuh`` and the permissions are ``750``.
   
 The script receives these paths:
   
