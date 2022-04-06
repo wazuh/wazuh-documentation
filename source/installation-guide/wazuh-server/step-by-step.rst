@@ -115,9 +115,7 @@ Configuring Filebeat
         # curl -so /etc/filebeat/filebeat.yml https://packages-dev.wazuh.com/4.3/tpl/wazuh/filebeat/filebeat.yml
         
         
-  #. Edit the ``/etc/filebeat/filebeat.yml`` configuration file.
-
-     .. note:: If you are installing all the Wazuh central components on the same host, there is no need to edit the Filebeat configuration file.
+  #. Edit the ``/etc/filebeat/filebeat.yml`` configuration file and replace the following value:
 
      .. include:: /_templates/installations/filebeat/opensearch/configure_filebeat.rst
 
