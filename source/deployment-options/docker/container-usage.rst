@@ -96,7 +96,8 @@ Multiple volumes are required to ensure persistence on a Wazuh container, the fo
 
 These volumes can be listed with ``docker volume ls``:
 
-.. code-block:: bash
+.. code-block:: none
+   :class: output
 
     DRIVER              VOLUME NAME
     local               wazuh-docker_filebeat_etc
@@ -139,8 +140,8 @@ Custom commands and scripts
 
 To execute commands in the Wazuh manager container you may execute a shell:
 
-.. code-block:: bash
+.. code-block:: console
 
-  docker run -it wazuh-opendistro bash
+  # docker run -it wazuh-opendistro bash
 
 Remember any change made on this shell will persist as long as you have the data volumes configured correctly.

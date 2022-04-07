@@ -126,9 +126,9 @@ The IP address ``127.0.0.1`` is used in the commands below. If Elasticsearch is 
 
 #. Stop non-essential indexing and perform a synced flush:
 
-    .. code-block:: bash
+    .. code-block:: console
 
-      curl -X POST "https://127.0.0.1:9200/_flush/synced" -u <username>:<password> -k
+      # curl -X POST "https://127.0.0.1:9200/_flush/synced" -u <username>:<password> -k
 
 #. Shut down a single node:
 
@@ -185,9 +185,9 @@ The IP address ``127.0.0.1`` is used in the commands below. If Elasticsearch is 
 
 #. Start the newly-upgraded node and confirm that it joins the cluster by checking the log file or by submitting a ``_cat/nodes`` request:
 
-    .. code-block:: bash
+    .. code-block:: console
 
-      curl -X GET "https://127.0.0.1:9200/_cat/nodes" -u <username>:<password> -k
+      # curl -X GET "https://127.0.0.1:9200/_cat/nodes" -u <username>:<password> -k
 
 #. Reenable shard allocation:
 
@@ -203,9 +203,9 @@ The IP address ``127.0.0.1`` is used in the commands below. If Elasticsearch is 
 
 #. Before upgrading the next node, wait for the cluster to finish shard allocation:
 
-    .. code-block:: bash
+    .. code-block:: console
 
-      curl -X GET "https://127.0.0.1:9200/_cat/health?v" -u <username>:<password> -k
+      # curl -X GET "https://127.0.0.1:9200/_cat/health?v" -u <username>:<password> -k
 
 #. Repeat the steps for every Elasticsearch node.
 

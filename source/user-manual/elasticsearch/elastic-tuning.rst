@@ -242,7 +242,7 @@ Elasticsearch malfunctions when the system is swapping memory. It is crucial for
 
           Edit the proper file ``/etc/sysconfig/elasticsearch`` for RPM or ``/etc/default/elasticsearch`` for Debian:
 
-          .. code-block:: bash
+          .. code-block:: pkgconfig
 
             MAX_LOCKED_MEMORY=unlimited
 
