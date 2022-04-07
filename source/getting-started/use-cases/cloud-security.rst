@@ -101,10 +101,10 @@ Expand the output to see an example of an alert generated when an AWS security g
 Example of AWS dashboard:
 
 .. thumbnail:: /images/getting-started/use-cases/wazuh-use-cases-cloud-geo.png
-   :title: AWS dashboard
-   :align: center
-   :width: 100%
-   :wrap_image: No
+    :title: AWS dashboard
+    :align: center
+    :width: 80%
+    :wrap_image: No
 
 You can find more information on how to use Wazuh to monitor AWS in our :ref:`documentation <amazon>`.
 

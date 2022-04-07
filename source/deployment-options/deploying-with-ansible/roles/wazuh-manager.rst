@@ -100,7 +100,7 @@ And the ``authd`` service password could be set in the file ``ansible-wazuh-mana
 
 Next, run the playbook:
 
-.. code-block:: bash
+.. code-block:: console
 
   $ ansible-playbook wazuh-manager.yml -e@vars-production.yml
 

@@ -24,7 +24,7 @@ Wazuh provides the following mechanisms to monitor Docker hosts or Kubernetes no
 .. thumbnail:: /images/getting-started/use-cases/wazuh-use-cases-docker.png
   :title: Docker events
   :align: center
-  :width: 100%
+  :width: 80%
   :wrap_image: No
  
 Example of security alerts at an infrastructure level:

@@ -13,7 +13,7 @@ Check which files are exported to the volume
 
 Our Kubernetes deployment uses our Wazuh images from Docker. If we look at the following code extracted from the Wazuh configuration using Docker we can see which directories and files are used in the upgrade.
 
-.. code-block:: bash
+.. code-block:: none
 
     /var/ossec/api/configuration
     /var/ossec/etc

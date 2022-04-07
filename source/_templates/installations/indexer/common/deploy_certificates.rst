@@ -11,12 +11,12 @@
      
      # mkdir /etc/wazuh-indexer/certs
      # tar -xf ./wazuh-certificates.tar -C /etc/wazuh-indexer/certs/ ./$NODE_NAME.pem ./$NODE_NAME-key.pem ./admin.pem ./admin-key.pem ./root-ca.pem
-     # mv /etc/wazuh-indexer/certs/$NODE_NAME.pem /etc/wazuh-indexer/certs/indexer.pem
-     # mv /etc/wazuh-indexer/certs/$NODE_NAME-key.pem /etc/wazuh-indexer/certs/indexer-key.pem
-     # chown -R wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/certs/
-     # chmod 750 /etc/wazuh-indexer/certs/
-     # chmod 600 /etc/wazuh-indexer/certs/*
+     # mv -n /etc/wazuh-indexer/certs/$NODE_NAME.pem /etc/wazuh-indexer/certs/indexer.pem
+     # mv -n /etc/wazuh-indexer/certs/$NODE_NAME-key.pem /etc/wazuh-indexer/certs/indexer-key.pem
+     # chmod 500 /etc/wazuh-indexer/certs
+     # chmod 400 /etc/wazuh-indexer/certs/*
+     # chown -R wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/certs
     
-#. **Recommended action** - If deploying Wazuh as a multi-node cluster and no other Wazuh components are going to be installed on this node, remove ``wazuh-certificates.tar`` running ``rm -f ./wazuh-certificates.tar`` to increase security.
+#. **Recommended action** - If no other Wazuh components are going to be installed on this node, remove ``wazuh-certificates.tar`` running ``rm -f ./wazuh-certificates.tar`` to increase security.
 
 .. End of include file

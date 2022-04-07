@@ -69,17 +69,17 @@ Installation on Windows
 
     a. Using command line:
 
-      .. code-block:: bash
+      .. code-block:: doscon
 
-        msiexec /qn /norestart /i puppet-agent-<VERSION>-x64.msi
+        > msiexec /qn /norestart /i puppet-agent-<VERSION>-x64.msi
 
       Optionally, you can specify ``/l*v install.txt`` to log the installation’s progress to a file.
 
       You can also set several MSI properties to pre-configure Puppet as you install it. For example:
 
-      .. code-block:: bash
+      .. code-block:: doscon
 
-        msiexec /qn /norestart /i puppet-agent-<VERSION>-x64.msi PUPPET_MASTER_SERVER=puppet.example.com
+        > msiexec /qn /norestart /i puppet-agent-<VERSION>-x64.msi PUPPET_MASTER_SERVER=puppet.example.com
 
     b. Using the Windows GUI:
 

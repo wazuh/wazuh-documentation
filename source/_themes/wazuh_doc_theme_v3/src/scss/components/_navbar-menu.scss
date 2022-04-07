@@ -12,6 +12,10 @@
     &:hover,
     &:focus {
       text-decoration: none;
+      outline: none;
+    }
+    a:focus-visible {
+      text-decoration: underline;
     }
     &:active {
       font-weight: 400;

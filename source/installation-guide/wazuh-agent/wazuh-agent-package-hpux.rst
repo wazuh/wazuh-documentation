@@ -14,12 +14,12 @@ The installed agent runs on the host you want to monitor and communicates with t
 
 #. To start the installation process, download the `HP-UX installer <https://packages.wazuh.com/|CURRENT_MAJOR|/hp-ux/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar>`_. 
 
-#. Create the ``ossec`` user and group.
+#. Create the ``wazuh`` user and group.
    
    .. code-block:: console
    
-       # groupadd ossec
-       # useradd -G ossec ossec
+       # groupadd wazuh
+       # useradd -G wazuh wazuh
    
 #. Unzip the package in ``/``.
 

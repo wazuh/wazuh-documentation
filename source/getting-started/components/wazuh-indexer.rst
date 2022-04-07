@@ -15,9 +15,9 @@ The Wazuh indexer stores data as JSON documents. Each document correlates a set 
 An index is a collection of documents that are related to each other. The documents stored in the Wazuh indexer are distributed across different containers known as shards. By distributing the documents across multiple shards and distributing those shards across multiple nodes, the Wazuh indexer can ensure redundancy. This protects your system against hardware failures and increases query capacity as nodes are added to a cluster. 
 
 .. thumbnail:: /images/getting-started/Wazuh-indexer.png
-    :alt: Wazuh indexer cluster
+    :title: Wazuh indexer cluster
     :align: center
-
+    :width: 80%
 
 The Wazuh indexer uses an “inverted index” data structure designed to allow quick full-text searches. An inverted index lists every unique word that appears in any document and identifies all the documents that contain each particular word. The Wazuh indexer stores documents during the indexing process and builds an inverted index to make the document data searchable in near real-time. Indexing is initiated with the Wazuh indexer API, through which you can add or update a JSON document in a specific index.
 

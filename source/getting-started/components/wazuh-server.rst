@@ -22,9 +22,9 @@ The Wazuh server runs the analysis engine, the Wazuh RESTful API, the agents reg
 The diagram below represents the server architecture and components:
 
 .. thumbnail:: /images/getting-started/architecture-server.png
-   :alt: Wazuh server architecture
-   :align: center
-   :wrap_image: No
+    :title: Wazuh server architecture
+    :align: center
+    :width: 80%
 
 
 Server components
