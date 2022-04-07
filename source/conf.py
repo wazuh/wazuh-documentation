@@ -14,10 +14,12 @@ compat.make_admonition = BaseAdmonition
 
 import sys
 import os
+import glob
 import re
 import shlex
 import datetime
 import time
+import json
 from requests.utils import requote_uri
 
 # If extensions (or modules to document with autodoc) are in another directory,
@@ -348,6 +350,8 @@ wazuh_images_config = {
     'show_caption': True
 }
 
+html_scaled_image_link = False
+
 # -- Options for intersphinx extension ---------------------------------------
 
 # Example configuration for intersphinx: refer to the Python standard library.
@@ -426,6 +430,32 @@ def minification(current_path):
         if minify:
             with open(min_file, 'w') as f2:
                 f2.write(output)
+
+# -- Customizations ---------------------------------------------------------
+
+## emptyTocNodes ##
+emptyTocNodes = json.dumps([
+    'amazon/configuration/index',
+    'compliance',
+    'containers',
+    'deployment',
+    'development/index',
+    'docker-monitor/index',
+    'installation-guide/elasticsearch-cluster/index',
+    'installation-guide/wazuh-cluster/index',
+    'installation-guide/upgrading/legacy/index',
+    'installation-guide/packages-list/linux/linux-index',
+    'installation-guide/packages-list/solaris/solaris-index',
+    'monitoring',
+    'user-manual/index',
+    'user-manual/agents/index',
+    'user-manual/agents/remove-agents/index',
+    'user-manual/agents/listing/index',
+    'user-manual/kibana-app/reference/index',
+    'user-manual/ruleset/ruleset-xml-syntax/index',
+    'installation-guide/distributed-deployment/step-by-step-installation/elasticsearch-cluster/index',
+    'installation-guide/distributed-deployment/step-by-step-installation/wazuh-cluster/index',
+])
 
 # -- Setup -------------------------------------------------------------------
 
@@ -585,7 +615,7 @@ list_compiled_html = []
 
 def finish_and_clean(app, exception):
     ''' Performs the final tasks after the compilation '''
-
+    
     # Create additional files such as the `.doclist` and the sitemap
     creating_file_list(app, exception)
     
@@ -595,6 +625,31 @@ def finish_and_clean(app, exception):
             mini_asset = '.min.'.join(asset.split('.'))
             if os.path.exists(app.srcdir + '/_static/' + mini_asset):
                 os.remove(app.srcdir + '/_static/' + mini_asset)
+
+    if html_theme == 'wazuh_doc_theme_v3':
+        # Remove map files and sourcMapping line in production
+        if production:
+            mapFiles = glob.glob(app.outdir + '/_static/*/min/*.map')
+            assetsFiles = glob.glob(app.outdir + '/_static/js/min/*.min.js') + glob.glob(app.outdir + '/_static/css/min/*.min.css')
+            # Remove map files
+            for mapFilePath in mapFiles:
+                try:
+                    os.remove(mapFilePath)
+                except:
+                    print("Error while deleting file : ", mapFilePath)
+            
+            # Remove the source mapping URLs
+            for assetsFilePath in assetsFiles:
+                try:
+                    with open(assetsFilePath, "r") as f:
+                        lines = f.readlines()
+                    with open(assetsFilePath, "w") as f:
+                        for line in lines:
+                            line = re.sub("//# sourceMappingURL=.*\.map", "", line)
+                            line = re.sub("/\*# sourceMappingURL=.*\.map \*/", "", line)
+                            f.write(line)
+                except:
+                    print("Error while removing source mapping from file: ", assetsFilePath)
 
 def collect_compiled_pagename(app, pagename, templatename, context, doctree):
     ''' Runs once per page, storing the pagename (full page path) extracted from the context '''
@@ -646,6 +701,7 @@ html_context = {
     "production": production,
     "apiURL": '',
     "compilation_ts": compilation_time,
+    "empty_toc_nodes": emptyTocNodes,
     "is_latest_release": is_latest_release
 }
 
