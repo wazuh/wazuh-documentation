@@ -24,7 +24,7 @@ Ansible does most of the work via SSH, SSH share their authentication mechanisms
 
 You can use the above args as follows:
 
-.. code-block:: bash
+.. code-block:: console
 
   $ ansible -m setup all -u foo -k -b -K
 
@@ -40,7 +40,7 @@ Using SSH key-pairing
 
 You can setup an SSH key-pairing to provide a silent auth mechanism, first create an OpenSSH key-pair:
 
-.. code-block:: bash
+.. code-block:: console
 
   $ ssh-keygen
 
@@ -61,7 +61,7 @@ After creating the Control machine key, you need to install the public key into 
 
 Set the correct permissions:
 
-.. code-block:: bash
+.. code-block:: console
 
   $ chmod 600 .ssh/authorized_keys
 
@@ -70,7 +70,7 @@ Add hosts to control
 
 Adding hosts is easy, just put the hostname or IP Address on ``/etc/ansible/hosts``.
 
-.. code-block:: bash
+.. code-block:: console
 
   $ cat /etc/ansible/hosts
 
@@ -82,7 +82,7 @@ Adding hosts is easy, just put the hostname or IP Address on ``/etc/ansible/host
 
 Also, you can group hosts. This could be useful to execute tasks and roles to several hosts at once:
 
-.. code-block:: bash
+.. code-block:: console
 
   $ cat /etc/ansible/hosts
 
@@ -100,7 +100,7 @@ Test connection
 
 This will attempt a connection with the remote hosts using ``ping`` module.
 
-.. code-block:: bash
+.. code-block:: console
 
   $ ansible all -m ping
 
