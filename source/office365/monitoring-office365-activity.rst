@@ -91,13 +91,13 @@ Wazuh configuration
 
 Next, we will see the options we have to configure for the Wazuh integration.
 
-Proceed to configure the ``office365`` module in the Wazuh manager. Through the following configuration, Wazuh is ready to search for logs created by Office 365 audit-log. In this case, we will search only the type of ``Audit.SharePoint`` events within an interval of ``10m``. Those logs will be only those that were created after the module was started:
+Proceed to configure the ``office365`` module in the Wazuh manager or in the Wazuh agent. Through the following configuration, Wazuh is ready to search for logs created by Office 365 audit-log. In this case, we will search only the type of ``Audit.SharePoint`` events within an interval of ``1m``. Those logs will be only those that were created after the module was started:
 
 .. code-block:: xml
 
     <office365>
         <enabled>yes</enabled>
-        <interval>10m</interval>
+        <interval>1m</interval>
         <curl_max_size>1M</curl_max_size>
         <only_future_events>yes</only_future_events>
         <api_auth>
