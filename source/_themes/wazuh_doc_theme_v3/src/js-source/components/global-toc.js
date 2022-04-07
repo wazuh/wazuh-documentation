@@ -89,27 +89,27 @@ if ( $('#global-toc').length > 0 ) {
     $('.js-new-tab').attr('target', '_blank');
   }
 
-  /* Nodes with hidden subtrees --------------------------------------------- */
+  /* Nodes with hidden subtrees (pre 4.3) ----------------------------------- */
   /* list of nodes (by title) which will not show their subtree */
-  // const hideSubtreeNodes = [
-  //   'Install Wazuh manager on Linux',
-  //   'Install Wazuh agent on Linux',
-  // ].map(function(item) {
-  //   return item.toLowerCase();
-  // });
+  const hideSubtreeNodes = [
+    'Install Wazuh manager on Linux',
+    'Install Wazuh agent on Linux',
+  ].map(function(item) {
+    return item.toLowerCase();
+  });
 
-  // hideSubtree(hideSubtreeNodes);
+  hideSubtree(hideSubtreeNodes);
 
   /**
   * Hides from the global toctree the subtree of particular nodes specified in a list.
   * @param {array} nodeList List of nodes whose subtree should not be shown in the global toctree.
   */
-  // function hideSubtree(nodeList) {
-  //   $('#global-toc a').each(function() {
-  //     if (jQuery.inArray($(this).text().toLowerCase(), nodeList) !== -1) {
-  //       $(this).siblings().hide();
-  //       $(this).children('button').hide();
-  //     }
-  //   });
-  // }
+  function hideSubtree(nodeList) {
+    $('#global-toc a').each(function() {
+      if (jQuery.inArray($(this).text().toLowerCase(), nodeList) !== -1) {
+        $(this).siblings().hide();
+        $(this).children('button').hide();
+      }
+    });
+  }
 }
