@@ -13,7 +13,7 @@ This central component is a flexible and intuitive web interface for mining, ana
 
 Users can quickly visualize security events, detect vulnerable applications, file integrity monitoring data, configuration assessment results, cloud infrastructure monitoring events, and regulatory compliance, such as PCI DSS, GDPR, CIS, HIPAA, and NIST 800-53 standards. If you want to learn more about Wazuh components, see the :doc:`Getting started <../../getting-started/components/index>` section.
 
-Check the requirements below and choose an installation method to start installing Wazuh dashboard.
+Check the requirements below and choose an installation method to start installing the Wazuh dashboard.
 
 - :ref:`Unattended installation <wazuh_dashboard_unattended_installation>`: You install this component by running a script that automates the installation and configuration process. 
 
@@ -49,7 +49,7 @@ Wazuh can be installed on a 64-bit Linux operating system. Wazuh supports the fo
 Hardware requirements
 ^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh dashboard can be installed on a dedicated node or along with Wazuh indexer.
+The Wazuh dashboard can be installed on a dedicated node or along with the Wazuh indexer.
 
 - Hardware recommendations
                           

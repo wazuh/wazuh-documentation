@@ -1,11 +1,11 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
 
-#. Download the ``wazuh-cert-tool.sh`` to create the certificates:
+#. Download the ``wazuh-certs-tool.sh`` to create the certificates:
 
    .. code-block:: console
  
-     # curl -so ~/wazuh-cert-tool.sh https://packages-dev.wazuh.com/4.3/wazuh-cert-tool.sh
+     # curl -so ~/wazuh-certs-tool.sh https://packages-dev.wazuh.com/4.3/wazuh-certs-tool.sh
      # curl -so ~/instances.yml https://packages.wazuh.com/resources/4.2/open-distro/tools/certificate-utility/instances.yml
 
 #. Edit ``~/instances.yml`` and replace the values ``<node-name>`` and ``node-IP``  with the corresponding names and IP addresses. Add as many nodes fields as needed:
@@ -32,11 +32,11 @@
    
    To learn more about how to create and configure the certificates, see the :ref:`Certificates deployment <user_manual_certificates>` section.
 
-#. Run the ``wazuh-cert-tool.sh`` to create the certificates:
+#. Run the ``wazuh-certs-tool.sh`` to create the certificates:
 
    .. code-block:: console
 
-     #  bash ~/wazuh-cert-tool.sh
+     #  bash ~/wazuh-certs-tool.sh
 
 #. Replace ``elasticsearch-node-name`` with your Elasticsearch node name, the same used in ``instances.yml`` to create the certificates, and move the certificates to their corresponding location:
 

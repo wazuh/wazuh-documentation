@@ -95,18 +95,18 @@ Installing Elasticsearch
       cp ./opendistro_files/elasticsearch/roles.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/ &&\
       cp ./opendistro_files/elasticsearch/roles_mapping.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/ &&\
       cp ./opendistro_files/elasticsearch/internal_users.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/ &&\
-      cp ./opendistro_files/elasticsearch/wazuh-cert-tool.sh ~ &&\
+      cp ./opendistro_files/elasticsearch/wazuh-certs-tool.sh ~ &&\
       cp ./opendistro_files/elasticsearch/instances.yml ~
 
 #. Remove the demo certificates.
 
     .. include:: /_templates/installations/elastic/common/remove_demo_certs.rst
 
-#. Run *wazuh-cert-tool.sh* to create the new certificates.
+#. Run *wazuh-certs-tool.sh* to create the new certificates.
 
     .. code-block:: console
     
-      # bash ~/wazuh-cert-tool.sh
+      # bash ~/wazuh-certs-tool.sh
 
 #. Move the certificates to the appropriate location.
 
@@ -349,7 +349,7 @@ Upon the first access to Kibana, the browser shows a warning message stating tha
   * It is highly recommended to change the default passwords of Elasticsearch for the users' passwords. To perform this action, see the :ref:`Change users' password <change_elastic_pass>` section.
   * It is also recommended to customize the file ``/etc/elasticsearch/jvm.options`` to improve the performance of Elasticsearch. Learn more about this process in the :ref:`memory_locking` section.
 
-To uninstall all the components of the all-in-one installation, see the :ref:`Uninstalling Wazuh <user_manual_uninstall_wazuh_installation_open_distro>` section.
+To uninstall all the components of the all-in-one installation, see the :doc:`/user-manual/uninstall/central-components` section.
 
 Next steps
 ----------

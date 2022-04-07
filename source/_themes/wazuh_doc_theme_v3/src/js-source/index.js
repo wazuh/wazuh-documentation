@@ -2,16 +2,20 @@
   Index page
 ----------------------------------------------------------------------------- */
 
-if ( $('.index') ) {
-  const maxShowItems = 3;
+const maxShowItems = 3;
 
+if ( $('.index') ) {
   $('.loading').removeClass('loading');
 
+  /* Changes in release notes */
+  const arrowMore = document.createElement('i');
+  arrowMore.setAttribute('class', 'fas fa-long-arrow-alt-right');
+  $('.toctree-wrapper:last-of-type .toctree-l1:last-of-type .toctree-l2:first-of-type > a').text('More').append(arrowMore);
+
   /* Move Quickstart */
-  $('[href="quickstart.html"]').first().unwrap().wrap('<div id="quickstart"></div>');
-  if ( $('#quickstart').length ) {
-    $('.inner-body').prepend($('#quickstart'));
-  }
+  const quickstart = $('[href="quickstart.html"]').parent();
+  quickstart.attr('id', 'quickstart');
+  quickstart.parent().prepend(quickstart);
 
   /* Hide specific subtrees from the index */
   const nodesToHide = [
@@ -31,18 +35,33 @@ if ( $('.index') ) {
     }
   }
 
+  /* Disable empty TOC nodes links */
+  if ( emptyTocNodes ) {
+    for (let i = 0; i < emptyTocNodes.length; i++) {
+      const foundNodes = $('a[href="' + emptyTocNodes[i] + '.html"]');
+      if ( foundNodes.length > 0) {
+        const linkText = foundNodes.text();
+        const parent = foundNodes.parent();
+        if ( parent.hasClass('toctree-l1') ) {
+          foundNodes.remove();
+          parent.prepend('<span class="section-title" data-href="' + emptyTocNodes[i] + '.html">' + linkText + '</span>');
+        }
+      }
+    }
+  }
+
   /* Add click event functionality for dropdown toggle button to uncollapse the index blocks */
   $(document).delegate('.toctree-l1 .toggle', 'click', function(e) {
     e.preventDefault();
     const indexBlock = $(e.target).closest('.collapsible');
-    if ( indexBlock.hasClass('collapsed') ) {
-      /* Toggle uncollapse */
+    const isCollapsed = indexBlock.hasClass('collapsed');
+    $('.collapsible').addClass('collapsed');
+    $('.collapsed .toggle').attr('aria-label', `Expand section`);
+
+    /* Toggle uncollapse */
+    if ( isCollapsed ) {
       indexBlock.removeClass('collapsed');
       indexBlock.find('.toggle').attr('aria-label', `Collapse section`);
-    } else {
-      /* Toggle collapse */
-      indexBlock.addClass('collapsed');
-      indexBlock.find('.toggle').attr('aria-label', `Expand section`);
     }
   });
 

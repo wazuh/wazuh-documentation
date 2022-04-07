@@ -8,7 +8,7 @@
 Wazuh dashboard
 ===============
 
-Wazuh dashboard is a flexible and intuitive web interface for mining, analyzing, and visualizing data. It is also used for the management and monitoring of the Wazuh infrastructure. From the Wazuh dashboard, identity and access management can be controlled by creating and managing users and assigning roles as needed. 
+The Wazuh dashboard is a flexible and intuitive web interface for mining, analyzing, and visualizing data. It is also used for the management and monitoring of the Wazuh infrastructure. From the Wazuh dashboard, identity and access management can be controlled by creating and managing users and assigning roles as needed. 
 
 Data visualization, mining, and analysis
 ----------------------------------------

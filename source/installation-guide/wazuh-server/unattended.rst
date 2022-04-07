@@ -22,7 +22,7 @@ Install the Wazuh server as a single-node or multi-node cluster according to you
 
 #. Run the script with the option ``-ws`` followed by the node name to install the Wazuh server. The node name must be the same used in ``config.yml`` for the initial configuration, for example, ``wazuh-master``.
  
-   .. note:: Make sure that a copy of ``configurations.tar``, created during the Wazuh indexer installation, is placed in your working directory.
+   .. note:: Make sure that a copy of ``wazuh-install-files.tar``, created during the Wazuh indexer installation, is placed in your working directory.
 
    .. code-block:: console
   

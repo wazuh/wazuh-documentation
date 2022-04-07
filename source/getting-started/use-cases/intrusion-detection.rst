@@ -11,7 +11,7 @@
 Intrusion detection
 ===================
 
-Wazuh owns a highly effective array of tools to perform intrusion detection within user's systems. This set of tools include :ref:`File Integrity Monitoring (FIM) <file_integrity>`, :ref:`Log data analysis <log_analysis>`, :ref:`rootkits detection <rootkits_detection>`, and :ref:`system inventory <system_inventory>` which are useful to identify suspicious anomalies within files, processes, and ports.
+Wazuh owns a highly effective array of tools to perform intrusion detection within users’ systems. This set of tools includes :ref:`File Integrity Monitoring (FIM) <file_integrity>`, :ref:`Log data analysis <log_analysis>`, :ref:`rootkits detection <rootkits_detection>`, and :ref:`system inventory <system_inventory>` which are useful to identify suspicious anomalies within files, processes, and ports.
 
 Intrusion detection is sometimes called anomaly detection and refers to finding unexpected patterns that differ from the expected behavior of a system. Within intrusion detection, users can find a set of relevant techniques to guarantee higher levels of security. 
 

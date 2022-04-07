@@ -22,9 +22,9 @@ The Wazuh server runs the analysis engine, the Wazuh RESTful API, the agents reg
 The diagram below represents the server architecture and components:
 
 .. thumbnail:: /images/getting-started/architecture-server.png
-   :alt: Wazuh server architecture
-   :align: center
-   :wrap_image: No
+    :title: Wazuh server architecture
+    :align: center
+    :width: 80%
 
 
 Server components
@@ -40,4 +40,4 @@ Server components
 
 - **Wazuh cluster daemon:** This service is used to scale Wazuh servers horizontally, deploying them as a cluster. This kind of configuration, in combination with a network load balancer, provides high availability and load balancing. The Wazuh cluster daemon is what Wazuh servers use to communicate with each other and to keep synchronized.
 
-- **Filebeat:** It is used to send events and alerts to Wazuh indexer. It reads the output of the Wazuh analysis engine and ships events in real time. It also provides load balancing when connected to a multi-node Wazuh indexer cluster.
+- **Filebeat:** It is used to send events and alerts to the Wazuh indexer. It reads the output of the Wazuh analysis engine and ships events in real time. It also provides load balancing when connected to a multi-node Wazuh indexer cluster.

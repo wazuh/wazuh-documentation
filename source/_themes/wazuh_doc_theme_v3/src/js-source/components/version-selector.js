@@ -98,7 +98,8 @@ jQuery(function($) {
   /**
     * Shows a warning message to the user if current doc version is not the latest version.
     * Note: For this to work, it requires the documentation version variable (in file conf.py)
-    * and the array of versions (in this script) to be updated.
+    * and the array of versions (in redirects.js) to be updated. Also, don't forget to set
+    * `is_latest_release = False` in conf.py
     * @param {Object} redirHistory Contains the corresponding path of the current page in every release.
     */
   function checkLatestDocs(redirHistory) {
@@ -106,8 +107,6 @@ jQuery(function($) {
     const latestVersion = versions[0];
     let page = '';
     if ( thisVersion !== latestVersion ) {
-      const pageElement = document.querySelector('#page');
-      pageElement.classList.add('no-latest-docs');
       /* Updates link to the latest version with the correct path */
       page = document.location.pathname;
       if ( page[page.length-1] == '/') {
@@ -124,7 +123,9 @@ jQuery(function($) {
       if ( documentHistory.hasOwnProperty(latestVersion) ) {
         targetURL = targetURL + redirHistory[latestVersion];
       }
-      link.setAttribute('href', targetURL);
+      if ( link ) {
+        link.setAttribute('href', targetURL);
+      }
     }
   }
 

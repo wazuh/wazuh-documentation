@@ -43,7 +43,7 @@ The agent runs on the host you want to monitor and communicates with the Wazuh m
 
                 NET START WazuhSvc
 
-             Once started, the Wazuh agent will start the enrollment process and register to the manager.
+             Once started, the Wazuh agent will start the enrollment process and register with the manager.
 
               .. note:: Alternatively, if you want to install an agent without registering it, omit the deployment variables. To learn more about the different registration methods, see the :ref:`Wazuh agent enrollment <agent_enrollment>` section.
                

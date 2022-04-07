@@ -16,10 +16,10 @@ For production environments, it is recommended to deploy the Wazuh server and Wa
 
 The diagram below represents a Wazuh deployment architecture. It shows the solution components and how :ref:`Wazuh server <wazuh_server>` and :doc:`Wazuh indexer <components/wazuh-indexer>` nodes can be configured as clusters, providing load balancing and high availability.
 
-.. thumbnail:: /images/getting-started/deployment.png
-    :alt: Wazuh deployment
+.. thumbnail:: /images/getting-started/deployment.png    
+    :title: Wazuh deployment
     :align: center
-    :wrap_image: No
+    :width: 80%
 
 Wazuh agent - Wazuh server communication
 ----------------------------------------
@@ -31,7 +31,7 @@ The :ref:`Wazuh agent <wazuh_agent>` continuously sends events to the :ref:`Wazu
 
 The Wazuh messages protocol uses AES encryption by default, with 128 bits per block and 256-bit keys. Blowfish encryption is optional.
 
-.. note:: Read the `Benefits of using AES in Wazuh communications <https://wazuh.com/blog/benefits-of-using-aes-in-our-communications>`_ document for more information.
+.. note:: Read the `Benefits of using AES in the Wazuh communications <https://wazuh.com/blog/benefits-of-using-aes-in-our-communications>`_ document for more information.
 
 Wazuh components communication
 ------------------------------
@@ -77,6 +77,10 @@ Both alerts and non-alert events are stored in files on the Wazuh server, in add
 .. code-block:: bash
 
   root@wazuh-manager:/var/ossec/logs/archives/2020/Jan# ls -l
+
+.. code-block:: none
+  :class: output
+  
   total 176
   -rw-r----- 1 wazuh wazuh 234350 Jan  2 00:00 ossec-archive-01.json.gz
   -rw-r----- 1 wazuh wazuh    350 Jan  2 00:00 ossec-archive-01.json.sum
