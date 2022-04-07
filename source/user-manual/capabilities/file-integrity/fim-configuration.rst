@@ -108,7 +108,7 @@ This functionality uses Linux Audit subsystem and the Microsoft Windows SACL, so
   </syscheck>
 
 
-.. warning:: There is a known bug that affects versions 2.8.5 and 2.8.4 of ``audit`` that shows a directory as ``null`` when it has been moved adding a ``/`` at the end of the directory. This bug will ca use that no alerts related to this directory will be shown until a new event related to this directory is triggered when ``whodata`` is enabled.
+.. warning:: There is a known bug that affects versions 2.8.5 and 2.8.4 of ``audit`` that shows a directory as ``null`` when it has been moved adding a ``/`` at the end of the directory. This bug will cause that no alerts related to this directory will be shown until a new event related to this directory is triggered when ``whodata`` is enabled.
 
 How to tune audit to deal with a huge amount of who-data events at the same time
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
