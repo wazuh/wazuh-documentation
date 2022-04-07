@@ -17,7 +17,7 @@ This section describes the checks performed by Wazuh to find the anomalies cause
 
 File integrity monitoring
 ----------------------------
-Malware can replace files, directories and commands on it's host system.  Performing file integrity checks on the main directories of a system allows for the detection of these actions. More information :ref:`File Integrity Monitoring Section <manual_file_integrity>`
+Malware can replace files, directories, and commands on the host system. Performing file integrity, users can check on the selected directories of a system to detect these actions. More information :ref:`File Integrity Monitoring Section <manual_file_integrity>`
 
 Example:
 
@@ -57,7 +57,7 @@ Malware can use hidden ports to communicate with the attacker. **Rootcheck** che
 Check unusual files and permissions
 -----------------------------------
 
-Wazuh scans the entire file system looking for unusual files and permissions. Files owned by root with write permissions for other user accounts like *suid* files, hidden directories and files, are all inspected.
+Wazuh scans the entire file system looking for unusual files and permissions. Files owned by root with write permissions for other user accounts like *suid* files, hidden directories, and files are all inspected.
 
 Check hidden files using system calls
 -------------------------------------
@@ -90,7 +90,7 @@ The */dev* directory should only contain device-specific files. Any additional f
 
 Example:
 
-  If you create a hidden file on ``/dev``, Wazuh should alert because there is a hidden file in a directory that should only contain device-specific files. The following is the alert generated in that case:
+  If you create a hidden file on ``/dev``, Wazuh should alert you because there is a hidden file in a directory that should only contain device-specific files. The following is the alert generated in that case:
 
   .. code-block:: none
     :class: output
@@ -108,4 +108,4 @@ Wazuh scans for any network interfaces on the system with *promiscuous mode* ena
 
 Rootkit checks
 --------------
-**Rootcheck** performs several checks using its own database of rootkit signatures: *rootkit_files.txt*, *rootkit_trojans.txt* and *win_malware_rcl.txt*. Unfortunately, these signatures are out of date.
+**Rootcheck** performs several checks using its database of rootkit signatures: *rootkit_files.txt*, *rootkit_trojans.txt* and *win_malware_rcl.txt*. Unfortunately, these signatures are out of date.

@@ -12,7 +12,7 @@ How it works
 ^^^^^^^^^^^^
 
 The who-data monitoring functionality uses the Microsoft Windows auditing subsystem to get the related information about who made modifications in a monitored directory.
-These changes produce audit events that are processed by *syscheck* and reported to the manager. This feature is only compatible with systems greater than Windows Vista.
+These changes produce audit events processed by *syscheck* and reported to the manager. This feature is only compatible with systems greater than Windows Vista.
 
 Configuration
 ^^^^^^^^^^^^^
