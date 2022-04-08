@@ -18,7 +18,7 @@ The **CIS-CAT wodle** has been developed for the purpose of integrating CIS benc
 What is CIS-CAT
 ---------------
 
-CIS (Center for Internet Security) is an entity dedicated to safeguard private and public organizations against cyber threats. This entity provides CIS benchmarks guidelines, which are a recognized global standard and best practices for securing IT systems and data against cyberattacks.
+CIS (Center for Internet Security) is an entity dedicated to safeguarding private and public organizations against cyber threats. This entity provides CIS benchmarks guidelines, which are a recognized global standard and best practices for securing IT systems and data against cyberattacks.
 
 In addition, CIS-CAT Pro is a "cross-platform Java app" tool developed for scanning target systems and generating a report comparing the system settings to the CIS benchmarks. There are more than 80 CIS benchmarks that cover nearly all OSs, providing different profiles depending on the specific need.
 
@@ -30,7 +30,7 @@ How it works
 
 The CIS-CAT Wazuh module integrates CIS benchmark assessments into Wazuh agents and reports the results of each scan in the form of an alert.
 
-CIS-CAT Pro is written in Java, so it requires a Java Runtime Environment in order to execute it. Currently, the JRE versions supported in CIS-CAT are JRE 6, 7, 8. Follow these steps to install the OpenJDK platform:
+CIS-CAT Pro is written in Java, so it requires a Java Runtime Environment in order to execute it. Currently, the JRE versions supported in CIS-CAT are JRE 6, 7, and 8. Follow these steps to install the OpenJDK platform:
 
 a) For CentOS/RHEL/Fedora:
 
@@ -61,7 +61,7 @@ c) For Windows:
     - Open up the Command Prompt and type ``java -version`` to check the newly installed version.
 
 .. note::
-  If the version 8 of the Java Runtime Environment is not available for your operating system, use the version 7 or 6 instead.
+  If version 8 of the Java Runtime Environment is not available for your operating system, use version 7 or 6 instead.
 
 For running this integration, the CIS-CAT tool must reside on the local agent that runs the scans. However, the JRE can be located on a removable disk or network drive for the purpose of sharing between multiple agents.
 
@@ -71,7 +71,7 @@ In addition, in Unix systems, the CIS-CAT script may need to be granted execute 
 
     # chmod +x CIS-CAT.sh
 
-Once you have the requirements for running CIS evaluations, you can configure the wodle to check for specific benchmarks at a your chosen interval. The scan results from these checks are sent to the manager and can be included in the visualizations.
+Once you have the requirements for running CIS evaluations, you can configure the wodle to check for specific benchmarks at your chosen interval. The scan results from these checks are sent to the manager and can be included in the visualizations.
 
 Use case: Running a CIS evaluation
 ----------------------------------
@@ -122,7 +122,7 @@ The following is an example of how to deploy the CIS-CAT integration:
 
     Make sure the paths are correct for the location of your Java and the CIS-CAT tool. For both cases, you could specify the full path, or a relative path to the Wazuh installation folder. Also, consider the following tips when configuring the ``content`` section:
 
-    - The location of the selected benchmark file have to be indicated by the full path, or by a relative path to the CIS-CAT installation folder.
+    - The location of the selected benchmark file has to be indicated by the full path or by a relative path to the CIS-CAT installation folder.
     - If no profile is specified, the first one, which is usually the most permissive, will be selected.
 
 2. After restarting the Wazuh agent, the benchmark checks will be executed at the specified interval, triggering alerts as shown below.
@@ -150,7 +150,7 @@ Information about the executed scan and report overview
    cis.notchecked: 36
    cis.score: 53%
 
-Since Wazuh v3.5.0, the report summary is stored in the agents DB with the purpose to query it by the Wazuh API. This allows to know about the last scan every time the user wants to.
+Since Wazuh v3.5.0, the report summary is stored in the agent DB to query it by the Wazuh API. This allows knowing about the last scan every time the user wants to.
 
 Information about a specific result
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -179,7 +179,7 @@ New scheduling options have been added for the CIS-CAT module which allows the u
 
 As it is described in the :doc:`CIS-CAT section <../../../reference/ossec-conf/wodle-ciscat>` of the reference documentation, there are available some new options that we could mix to reach the desired behavior.
 
-The following sample blocks of the wodle configuration show the new possibilities to schedule when the module is launched. All of these options are independent to the ``scan-on-start`` option, which runs the scan
+The following sample blocks of the wodle configuration show the new possibilities to schedule when the module is launched. All of these options are independent of the ``scan-on-start`` option, which runs the scan
 always when the service is started.
 
 Scheduling executions by an interval since the start of the service
