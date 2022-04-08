@@ -295,6 +295,7 @@ removedUrls['4.3'] = [
   '/installation-guide/wazuh-agent/deployment-variables/deployment-variables-windows.html',
   '/user-manual/overview.html',
   '/virtual-machine/virtual-machine.html',
+  '/user-manual/kibana-app/index.html',
 ];
 
 
