@@ -141,12 +141,11 @@ This thread is in charge of synchronizing master's integrity information among a
 
     * Missing: Files that are present in the master node but missing in the worker. They must be created in the worker.
     * Extra: Files that are present in the worker node but missing in the master. They must be removed in the worker node as well.
-    * Extra valid: Extra files that, instead of being removed in the worker, must be created in the master. This is a special type of file created for agent-group files. These files can be created in worker nodes when an agent is re-registered and was previously assigned to a group.
     * Shared: Files that are present in both master and worker but have a different checksum. They must be updated in the worker node.
 
    Then the master prepares a zip package with a JSON containing all this information and the required files the worker needs to update.
 
-4. Once the worker receives the package, it updates the necessary files and then it sends the master the required extra valid files.
+4. Once the worker receives the package, it updates the necessary files.
 
 If there is no data to synchronize or there has been an error reading data from the worker, the worker is always notified about it.
 
@@ -183,7 +182,7 @@ This thread is in charge of synchronizing information of agents' groups assignme
 3. Workers stop sending information to the master (:ref:`Agent groups sync <agent-groups-sync>`) about any agent-group they have received in this task.
 4. The worker compares the checksum of its database with the checksum of the master's.
 5. If the checksum has been different for 10 consecutive times, the worker notifies the master.
-6. If notified, the master sends to the worker all the agent-groups information.
+6. When notified, the master sends to the worker all the agent-groups information.
 7. The worker overwrites its database with the agent-groups information it has received from the master.
 
 Local agent-groups thread
@@ -271,26 +270,24 @@ This communication protocol is used by all cluster nodes to synchronize the nece
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
 | Message           | Received in | Arguments             | Description                                                                                     |
 +===================+=============+=======================+=================================================================================================+
-| ``hello``         | Master      | - Node name<str>,     | First message sent by a worker to the master on its first connection.                           |
-|                   |             | - Cluster name<str>,  |                                                                                                 |
-|                   |             | - Node type<str>,     |                                                                                                 |
+| ``hello``         | Master      | - Node name<str>      | First message sent by a worker to the master on its first connection.                           |
+|                   |             | - Cluster name<str>   |                                                                                                 |
+|                   |             | - Node type<str>      |                                                                                                 |
 |                   |             | - Wazuh version<str>  |                                                                                                 |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
-| ``syn_i_w_m_p``,  | Master      | None                  | - Ask permission to start synchronization protocol. Message characters define the action to do: |
+| ``syn_i_w_m_p``   | Master      | None                  | - Ask permission to start synchronization protocol. Message characters define the action to do: |
 |                   |             |                       | - I (integrity), A (agent-info).                                                                |
 | ``syn_a_w_m_p``   |             |                       | - W (worker), M (master), P (permission).                                                       |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
-| ``syn_i_w_m``,    | Master      | - None or             | - Start synchronization protocol. Message characters define the action to do:                   |
-| ``syn_e_w_m``,    |             |   String ID<str>      | - I (integrity), E (extra valid), A (agent-info).                                               |
+| ``syn_i_w_m``     | Master      | - None or             | - Start synchronization protocol. Message characters define the action to do:                   |
+|                   |             |   String ID<str>      | - I (integrity), A (agent-info).                                                                |
 | ``syn_a_w_m``     |             |                       | - W (worker), M (master).                                                                       |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
-| ``syn_i_w_m_e``,  | Master      | None                  | - End synchronization protocol. Message characters define the action to do:                     |
-| ``syn_e_w_m_e``   |             |                       | - I (integrity), E (extra valid).                                                               |
-|                   |             |                       | - W (worker), M (master), E(end).                                                               |
+| ``syn_i_w_m_e``   | Master      | None                  | - End synchronization protocol. Message characters define the action to do:                     |
+|                   |             |                       | - I (integrity), W (worker), M (master), E(end)                                                 |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
-| ``syn_i_w_m_r``,  | Master      | None                  | - Notify an error during synchronization. Message characters define the action to do:           |
-|                   |             |                       | - I (integrity).                                                                                |
-|                   |             |                       | - W (worker), M (master), R(error).                                                             |
+| ``syn_i_w_m_r``   | Master      | None                  | - Notify an error during synchronization. Message characters define the action to do:           |
+|                   |             |                       | - I (integrity), W (worker), M (master), R(error).                                              |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
 | ``sendsync``      | Master      | - Arguments<Dict>     | Receive a message from a worker node destined for the specified daemon of the master node.      |
 |                   |             |                       |                                                                                                 |
@@ -428,10 +425,7 @@ Master node
 ###########
 * **Local integrity thread**: Calculates the hash of all the files to be synchronized. This requires high CPU usage.
 * **Agent info thread**: A section of this task sends all the agents' information to the wazuh-db. The communication is done in small chunks so as not to saturate the service socket. This turned this task into a somewhat slow process and not a good candidate for asyncio.
-* **Integrity thread**:
-
-   * **Compress files**: Compressing files is fully synchronous and can block the parent cluster process.
-   * **Process extra-valid files**: The workers send the extra-valid files to the master. Processing these files is prone to interleaving and can be very slow when using asyncio.
+* **Integrity thread**: Compressing files, which is done inside this task, is fully synchronous and can block the parent cluster process.
 
 Worker nodes
 ############
@@ -460,7 +454,7 @@ Let's review the integrity synchronization process to see how asyncio tasks are 
 * **4**: The worker notifies the master that the integrity file has already been sent. In that moment, the master wakes the previously created task up and compares the worker files with its own. In this example the master finds out the worker integrity is outdated.
 * **5**: The master starts a sync integrity process with the worker using the ``syn_m_c`` command. The worker creates a task to process the received integrity from the master but the task is sleeping since it's not been received yet. This is the same process the worker has done with the master but changing directions.
 * **6**: The master sends all information to the worker using the sending file process.
-* **7**: The master notifies the worker that the integrity information has already been sent using the ``syn_m_c_e`` command. The worker wakes the previously created task up to process and update the required files. In this example, no extra valid files were required by the master so the worker doesn't send any more requests to the master and the synchronization process ends.
+* **7**: The master notifies the worker that the integrity information has already been sent using the ``syn_m_c_e`` command. The worker wakes the previously created task up to process and update the required files.
 
 To sum up, asynchronous tasks are created only when the received request needs to wait for some data to be available (for example, synchronization tasks waiting for the zip file from the other peer). If the request can be solved instantly, no asynchronous tasks are created for it.
 
