@@ -780,6 +780,11 @@ redirections.push(
     '4.2': '/docker-monitor/monitoring-docker-server.html',
     '4.3': '/container-security/docker-monitor/monitoring-docker-server.html',
   },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/user-manual/kibana-app/features/query-configuration.html',
+    '4.3': '/user-manual/query-configuration/index.html',
+  }
 );
 
 /* *** RELEASE 4.2 ****/
