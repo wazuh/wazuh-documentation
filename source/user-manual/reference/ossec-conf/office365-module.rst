@@ -215,7 +215,7 @@ Example of configuration
 
     <office365>
         <enabled>yes</enabled>
-        <interval>10m</interval>
+        <interval>1m</interval>
         <curl_max_size>1M</curl_max_size>
         <only_future_events>yes</only_future_events>
         <api_auth>
@@ -236,7 +236,7 @@ Example of multiple tenants
 
     <office365>
         <enabled>yes</enabled>
-        <interval>10m</interval>
+        <interval>1m</interval>
         <curl_max_size>1M</curl_max_size>
         <only_future_events>yes</only_future_events>
         <api_auth>
