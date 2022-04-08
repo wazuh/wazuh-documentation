@@ -340,7 +340,7 @@ Content check operator results can be negated by adding a ``!`` before then, for
     f:/etc/ssh_config -> !r:PermitRootLogin
 
 .. warning::
-    Be careful when negating content operators as that will make then evaluate as  **passed** for **anything** that does not match with the check specified.
+    Be careful when negating content operators as that will make them evaluate as **passed** for **anything** that does not match with the check specified.
     For example rule ```f:/etc/ssh_config -> !r:PermitRootLogin``` will be evaluated as **passed** if it finds **any line** that does not contain ``PermitRootLogin``.
 
 Content check operators can be chained using the operator ``&&`` (AND) as follows:
@@ -372,7 +372,7 @@ Rule syntax for files
 :::::::::::::::::::::::::::::::::::
 
 - Check that a file exists: ``f:/path/to/file``
-- Check that a file does not exists: ``not f:/path/to/file``
+- Check that a file does not exist: ``not f:/path/to/file``
 - Check file contains (whole line literal match): ``f:/path/to/file -> content``
 - Check file contents against regex: ``f:/path/to/file -> r:REGEX``
 - Check a numeric value: ``f:/path/to/file -> n:REGEX(\d+) compare <= Number``
