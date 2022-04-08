@@ -784,9 +784,16 @@ redirections.push(
     'target': ['4.2=>4.3'],
     '4.2': '/user-manual/kibana-app/features/query-configuration.html',
     '4.3': '/user-manual/query-configuration/index.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/user-manual/kibana-app/features/settings.html',
+    '4.3': '/user-manual/settings/index.html',
   }
 );
 
+
+/user-manual/kibana-app/features/settings.html
 /* *** RELEASE 4.2 ****/
 
 /* Pages changed within the same release */
