@@ -7,7 +7,7 @@ How to configure SCA
 .. contents:: Table of Contents
    :depth: 10
 
-Upon installation, agents will include the policies appropriates for their particular Operating System.
+Upon installation, agents will include the appropriate policies for their particular Operating System.
 For the full list of **Officially supported policy files** see table :ref:`available_sca_policies`.
 These policies are included with the Wazuh Manager installation so that they can be easily enabled.
 
@@ -25,7 +25,7 @@ ruleset folder:
 
 .. warning::
     The contents of the aforementioned **default ruleset folders are neither kept across installations nor updates**.
-    If you wish to modify or add new policies, place then under an alternative folder.
+    If you wish to modify or add new policies, place them under an alternative folder.
 
 To enable a policy file that's outside the Wazuh installation folder, add a line like
 
@@ -39,9 +39,9 @@ You can also specify a relative path to the Wazuh installation directory.
 
     <policy>etc/shared/policy_file_to_enable.yml</policy>
 
-There are two ways to disable policies, the simplest one is by renaming the policy file by adding ``.disabled``
+There are two ways to disable policies. The simplest one is renaming the policy file by adding ``.disabled``
 (or anything different from `.yaml` or `.yml`) after their YAML extension. The second is to disable them from
-the `ossec.conf` by adding a line such as
+the `ossec.conf` by adding a line such as the following:
 
 .. code-block:: xml
 

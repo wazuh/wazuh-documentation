@@ -71,7 +71,7 @@ detailed in the :ref:`sca_policy_file_sections` table.
   If the **requirements** aren't satisfied for a specific policy file, the scan for that file won't start.
 
 
-Each section has their own fields as described in tables
+Each section has its fields as described in the tables
 :ref:`sca_policy_file_policy_section`,
 :ref:`sca_policy_file_requirements_section`,
 :ref:`sca_policy_file_variables_section`,
@@ -144,7 +144,7 @@ There is no limit on the number of variables to add within a rule.
 Checks
 ^^^^^^^^^
 Checks are the core of an SCA policy, as they describe the checks to be performed in the system.
-Each check is comprised by several fields as described in table :ref:`sca_policy_file_checks_section`.
+Each check is comprised by several fields as described in the table :ref:`sca_policy_file_checks_section`.
 
 
 .. _sca_policy_file_checks_section:
@@ -178,14 +178,13 @@ the evaluation of its rules.
 Condition
 ~~~~~~~~~~~~~~~~~~~
 
-The condition field specifies how rule results are aggregated in order to calculate the final value of a check,
-there are three options:
+The condition field specifies how rule results are aggregated in order to calculate the final value of a check. There are three options:
 
-- ``all``: the check will be evaluated as **passed** if **all** of its rules are satisfied, and as **failed** as soon as one evaluates to **failed**,
+- ``all``: the check will be evaluated as **passed** if **all** of its rules are satisfied and as **failed** as soon as one evaluates to **failed**,
 
 - ``any``: the check will be evaluated as **passed** as soon as **any** of its rules is satisfied,
 
-- ``none``: the check will be evaluated as **passed** if **none** of its rules are satisfied, and as **failed** as soon as one evaluates to **passed**.
+- ``none``: the check will be evaluated as **passed** if **none** of its rules are satisfied and as **failed** as soon as one evaluates to **passed**.
 
 Special mention deserves how rules evaluated as **non-applicable** are treated by the aforementioned aggregators.
 
@@ -224,12 +223,12 @@ Special mention deserves how rules evaluated as **non-applicable** are treated b
 Rules
 ~~~~~~~~~~~~~~~~~~~
 
-Rules can check for existence of files, directories, registry keys and values, running processes, and recursively
-test for existence of files inside directories. When it comes to content checking, they are able to check for file
+Rules can check for the existence of files, directories, registry keys and values, running processes, and recursively
+test for the existence of files inside directories. When it comes to content checking, they are able to check for file
 contents, recursively check for the contents of files inside directories, command output and registry value data.
 
-Abstractly, rules start by a location (and a `type` of location), that will be the target of the test,
-followed by the actual the test specification. Such tests fall into two categories: existence and content checks.
+Abstractly, rules start with a location (and a `type` of location), that will be the target of the test,
+followed by the actual test specification. Such tests fall into two categories: existence and content checks.
 
 .. General rule syntax
    ###################
