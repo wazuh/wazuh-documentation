@@ -797,11 +797,6 @@ redirections.push(
   },
   {
     'target': ['4.2=>4.3'],
-    '4.2': '',
-    '4.3': '/user-manual/manager/rbac/index.html',
-  },
-  {
-    'target': ['4.2=>4.3'],
     '4.2': '/user-manual/kibana-app/wazuh-rbac.html',
     '4.3': '/user-manual/manager/rbac/index.html',
   },
@@ -810,10 +805,23 @@ redirections.push(
     '4.2': '/user-manual/kibana-app/reference/elasticsearch.html',
     '4.3': '/user-manual/elasticsearch/elastic-tuning/elasticsearch.html',
   },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/user-manual/elasticsearch/elastic-tuning.html',
+    '4.3': '/user-manual/elasticsearch/elastic-tuning/elastic-tuning.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/user-manual/kibana-app/troubleshooting.html',
+    '4.3': '/user-manual/elasticsearch/elastic-tuning/troubleshooting.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/user-manual/kibana-app/reference/config-file.html',
+    '4.3': '/user-manual/reference/config-file.html',
+  },
 );
 
-
-/user-manual/elasticsearch/elastic-tuning/elasticsearch.html
 /* *** RELEASE 4.2 ****/
 
 /* Pages changed within the same release */
