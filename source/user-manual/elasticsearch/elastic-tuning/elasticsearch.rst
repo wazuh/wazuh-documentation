@@ -1,6 +1,6 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
-.. _elasticsearch:
+
 
 Elasticsearch indices
 =====================
