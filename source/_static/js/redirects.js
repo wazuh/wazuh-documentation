@@ -795,8 +795,25 @@ redirections.push(
     '4.2': '/user-manual/kibana-app/reference/',
     '4.3': '/user-manual/reference/index.html',
   },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '',
+    '4.3': '/user-manual/manager/rbac/index.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/user-manual/kibana-app/wazuh-rbac.html',
+    '4.3': '/user-manual/manager/rbac/index.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/user-manual/kibana-app/reference/elasticsearch.html',
+    '4.3': '/user-manual/elasticsearch/elastic-tuning/elasticsearch.html',
+  },
 );
 
+
+/user-manual/elasticsearch/elastic-tuning/elasticsearch.html
 /* *** RELEASE 4.2 ****/
 
 /* Pages changed within the same release */
