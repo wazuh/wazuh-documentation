@@ -124,8 +124,6 @@ Integrity thread
         - :doc:`User defined rules, decoders <../ruleset/custom>` and :doc:`CDB lists <../ruleset/cdb-list>`.
         - :doc:`Groups files <../agents/grouping-agents>`.
 
-    Usually, the master is responsible for sending group assignments, but just in case a new agent starts reporting in a worker node, the worker will send the new agent's group assignment to the master.
-
 Local integrity thread
 ~~~~~~~~~~~~~~~~~~~~~~
 
