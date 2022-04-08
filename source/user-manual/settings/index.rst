@@ -28,15 +28,6 @@ Wazuh provides multiple integrations and capabilities to monitor and analyze you
   :align: center
   :width: 100%
 
-Index pattern
--------------
-
-The index pattern functionality is completely described at the :ref:`kibana_index_pattern` section.
-
-.. thumbnail:: ../../images/kibana-app/features/settings/pattern.png
-  :align: center
-  :width: 100%
-
 Configuration
 -------------
 
