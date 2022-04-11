@@ -34,8 +34,9 @@ In order to use this authentication method, a user allowed to use authorization 
         }
 
 .. thumbnail:: ../../../images/rbac/auth-context-login.png
+    :title: Authorization context login method
     :align: center
-    :width: 100%
+    :width: 80%
 
 Rules and roles
 ---------------
@@ -45,8 +46,9 @@ A role is a set of policies, therefore, the user's final permissions are the set
 A rule is an element that will be checked against the authorization context provided by the user, based on this check the user is granted with the appropriate permissions. Therefore, the internal structure of the relationships is like this:
 
 .. thumbnail:: ../../../images/rbac/auth-context-rule.png
+    :title: Rules and roles
     :align: center
-    :width: 100%
+    :width: 80%
 
 Rule structure
 --------------
@@ -223,8 +225,9 @@ Example 1
           }
 
 .. thumbnail:: ../../../images/rbac/rule-example-1.png
+    :title: Example rule 1
     :align: center
-    :width: 100%
+    :width: 80%
 
 - To achieve this, the user uses the following authorization context:
 
@@ -321,8 +324,9 @@ Example 2
         }
 
 .. thumbnail:: ../../../images/rbac/rule-example-2.png
+    :title: Example rule 2
     :align: center
-    :width: 100%
+    :width: 80%
 
 - To achieve this match, the user sends the following authorization context:
 

@@ -25,7 +25,7 @@ Below you can see a list of these components:
 .. thumbnail:: /images/getting-started/use-cases/wazuh-use-cases-security-analytics.png
   :title: Wazuh security analytics dashboard
   :align: center
-  :width: 100%
+  :width: 80%
   :wrap_image: No
   
 Security analytics tools give users the visibility needed to perform thread prevention actions. The :ref:`FIM <file_integrity>` module is a good example because it detects changes that could compromise data and creates alerts based on them. Then, the agent can be configured to trigger an active response in reply to these alerts.

@@ -20,8 +20,9 @@ Using a forwarding proxy
 It is possible to access your environment using an NGINX forwarding proxy.
 
 .. thumbnail:: ../../images/cloud-service/nginx-scheme.png
+    :title: Using an NGINX forwarding proxy
     :align: center
-    :width: 100%
+    :width: 80%
 
 
 To achieve this configuration, follow these steps:

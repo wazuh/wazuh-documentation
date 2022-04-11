@@ -433,9 +433,9 @@ Following this alternative, you use the PyInstaller tool to convert the Python s
 
 #. Go to ``C:\Program Files (x86)\ossec-agent\active-response\bin\`` and run the following command to create the .exe.
 
-    .. code-block:: bash
+    .. code-block:: doscon
 
-        pyinstaller -F custom-ar.py
+        > pyinstaller -F custom-ar.py
 
 #. Move the ``custom-ar.exe`` file to ``C:\Program Files (x86)\ossec-agent\active-response\bin\``.
 
@@ -458,7 +458,7 @@ In this case, the AR script calls ``launcher.cmd`` which works as a bridge calli
 
 #. Create a ``launcher.cmd`` file into ``C:\Program Files (x86)\ossec-agent\active-response\bin\`` with the following content:
 
-    .. code-block:: console
+    .. code-block:: batch
 
         @echo off
 
