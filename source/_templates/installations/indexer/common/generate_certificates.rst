@@ -14,27 +14,27 @@
          nodes:
            # Wazuh indexer nodes
            indexer:
-             name: node-1
-             ip: <indexer-node-ip>
-             # name: node-2
-             # ip: <indexer-node-ip>
-             # name: node-3
-             # ip: <indexer-node-ip>
+             - name: node-1
+               ip: <indexer-node-ip>
+             # - name: node-2
+             #   ip: <indexer-node-ip>
+             # - name: node-3
+             #   ip: <indexer-node-ip>
          
            # Wazuh server nodes
            # Use node_type only with more than one Wazuh manager
            server:
-             name: wazuh-1
-             ip: <wazuh-manager-ip>
+             - name: wazuh-1
+               ip: <wazuh-manager-ip>
              # node_type: master
-             # name: wazuh-2
-             # ip: <wazuh-manager-ip>
+             # - name: wazuh-2
+             #   ip: <wazuh-manager-ip>
              # node_type: worker
          
            # Wazuh dashboard node
            dashboard:
-             name: dashboard
-             ip: <dashboard-node-ip>
+             - name: dashboard
+               ip: <dashboard-node-ip>
            
       To learn more about how to create and configure the certificates, see the :doc:`/user-manual/certificates` section.
 
