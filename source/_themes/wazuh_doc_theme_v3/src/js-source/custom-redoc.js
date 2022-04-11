@@ -14,37 +14,6 @@ function init() {
         /* When redoc is finally loaded */
         /* Show custom header */
         document.querySelector('.loading').classList.remove('loading');
-
-        /* Change toggle-menu button */
-        // const removed = document.querySelector('.sc-gqPbQI.imibLw');
-        // const btn = removed.parentNode;
-        // const icon = document.createElement('i');
-        // icon.classList.add('x');
-        // btn.removeChild(removed);
-        // btn.classList.add('btn-close');
-        // btn.classList.add('collapsed');
-        // btn.appendChild(icon);
-        // 
-        // btn.addEventListener('click', function() {
-        //   if (this.classList.contains('collapsed')) {
-        //     this.classList.remove('collapsed');
-        //   } else {
-        //     this.classList.add('collapsed');
-        //   }
-        // });
-        // 
-        // checkMenu(btn);
-        // document.addEventListener('scroll', function() {
-        //   const docHeight = document.body.clientHeight;
-        //   const docWidth = document.body.clientWidth;
-        //   const botomPos = window.innerHeight+window.scrollY;
-        //   const menu = document.querySelector('.menu-content');
-        //   if ( docHeight - 30 <= botomPos && docWidth > 800 ) {
-        //     menu.classList.add('reached-bottom');
-        //   } else {
-        //     menu.classList.remove('reached-bottom');
-        //   }
-        // });
       }
     }
   };
