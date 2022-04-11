@@ -535,6 +535,7 @@ emptyTocNodes = json.dumps([
     'deployment',
     'development/index',
     'docker-monitor/index',
+    'migration-guide/index',
     'installation-guide/elasticsearch-cluster/index',
     'installation-guide/wazuh-cluster/index',
     'installation-guide/upgrading/legacy/index',
