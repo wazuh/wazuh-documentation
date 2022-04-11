@@ -365,7 +365,7 @@ For more information on Log Analytics query's language, check the `Azure documen
 +--------------------+-----------------------------------+
 | **Default value**  | N/A                               |
 +--------------------+-----------------------------------+
-| **Allowed values** | Any String without double quotes. |
+| **Allowed values** | Any String without double quotes  |
 +--------------------+-----------------------------------+
 
 log_analytics\\request\\workspace
