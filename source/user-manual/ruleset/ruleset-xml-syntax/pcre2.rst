@@ -8,10 +8,10 @@ Perl-compatible Regular Expressions
 .. versionadded:: 4.1.0
 
 Log collecting and processing is one of the most important features in Wazuh,
-allowing to know the status in real-time of Wazuh agent operating system and
+allowing users to know the status in real-time of the Wazuh agent operating system and
 their running applications. Incorporation of PCRE regex support along with
-already existent OSRegex and OSMatch regex will open up a range of possibilities,
-and at the same time, enchances log comprehension and interpretation.
+already existent OSRegex and OSMatch regex will open up a range of possibilities
+and, at the same time, enhances log comprehension and interpretation.
 
 
 This section briefly the features of this type of regex, its enablement
@@ -42,8 +42,7 @@ Example: ``(\d{1,3}\.?){4}`` it is shorter and equivalent to ``\d{1,3}\.?\d{1,3}
 Case sensitivity
 ----------------
 
-Compared to `OSRegex <regex.html#regex-os-regex-syntax>`_ and `OSMatch <regex.html#regex-os-regex-syntax>`_
-that are case insensitive, PCRE regex are case sensitive by default. This can be changed by using ``(?i)``.
+Compared to `OSRegex <regex.html#regex-os-regex-syntax>`_ and `OSMatch <regex.html#regex-os-regex-syntax>`_, which are case insensitive, PCRE regex are case sensitive by default. This can be changed by using ``(?i)``.
 Example: `post` will match ``(?i)POST|GET|PUT`` regex but not ``POST|GET|PUT``.
 
 Groups within groups
@@ -76,7 +75,7 @@ Character classes (character set)
 
 In addition to the types of characters like ``\w`` to match a `word` character  or ``\d`` to match the decimal digit,
 a custom set of characters can be specified with ``[]``.
-Ranges of letters and numbers can also be specified, for example, ``[A-zA-Z0-5]`` includes the numbers
+Ranges of letters and numbers can also be specified. For example, ``[A-zA-Z0-5]`` includes the numbers
 from 0 to 5 and the entire alphabet in upper and lower case letters.
 Example: The next regex ``\d+[-\/]\d+[-\/]\d+`` will match any datetime despite separation character used.
 
@@ -85,9 +84,8 @@ Configuring PCRE
 ================
 
 PCRE can be enabled in rules and decodes using the ``type="pcre2"`` attribute,
-that also will allow to set other regex like ``type="osregex"`` and ``type="osmatch"`` for
-`OSRegex <regex.html#regex-os-regex-syntax>`_ and `OSMatch <regex.html#regex-os-regex-syntax>`_
-respectively depending the case.
+which also will allow to set other regex like ``type="osregex"`` and ``type="osmatch"`` for
+`OSRegex <regex.html#regex-os-regex-syntax>`_ and `OSMatch <regex.html#regex-os-regex-syntax>`_, respectively, depending on the case.
 
 Decoders
 --------
@@ -135,7 +133,7 @@ Use case: Accurate PAM user alerts
 ==================================
 
 The *Linux Pluggable Authentication Modules(PAM)* is a key component that brings authentication support for applications
-and services in UNIX-like systems, where most of them are case sensitive.
+and services in UNIX-like systems, most of which are case sensitive.
 By default, some false positive alerts related to usernames may be generated,
 i.e users `FOO` and `foo` are not differentiated by the rules.
 This can be avoided by using PCRE case sensitivity, so they are handled as different users.

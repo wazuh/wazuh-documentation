@@ -7,7 +7,7 @@
 Getting started
 =================
 
-The default number of rules and decoders is limited. For this reason, we centralize, test and maintain decoders and rules submitted by open source contributors. We also create new rules and rootchecks periodically and add them to this repository so they can be used by the user community. Some examples are the new rules for Netscaler and Puppet.
+The default number of rules and decoders is limited. For this reason, we centralize, test, and maintain decoders and rules submitted by open source contributors. We also create new rules and rootchecks periodically and add them to this repository so they can be used by the user community. Some examples are the new rules for Netscaler and Puppet.
 
 Currently, Wazuh supports more than 3k rules that accomplish technologies such:
 

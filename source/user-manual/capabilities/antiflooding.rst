@@ -194,7 +194,7 @@ When the bucket is in this status, **no events are dropped**.
 Anti-flooding in agent modules
 ------------------------------
 
-To avoid agent buffer saturation followed by event loss, the event production rates of Wazuh agent daemons that could cause this saturation has been limited.
+To avoid agent buffer saturation followed by event loss, the event production rates of the Wazuh agent daemons that could cause this saturation has been limited.
 
 - Logcollector: If a log file is written faster that logcollector can read it, this can negatively impact the proper functioning of the agent. For this reason, the agent will restrict itself to reading no more than a configurable maximum number of lines from the same file per read cycle.
 

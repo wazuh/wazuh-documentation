@@ -77,7 +77,7 @@ Manager configuration
 
             - ``C`` is the country where the organization making this request is domiciled.
             - ``CN`` is the common name on the certificate. This should be the Wazuh manager IP address or its DNS name. This field is not optional. In this case, the Wazuh manager DNS are wazuh and wazuh.com.
-            - ``subjectAltName`` is optional and specifies the alternate subject names that can be used for the server. Note that to allow the enrollment of Wazuh agents with a SAN certificate, this should be included.
+            - ``subjectAltName`` is optional and specifies the alternate subject names that can be used for the server. Note that to allow the enrollment of the Wazuh agents with a SAN certificate, this should be included.
 
     #. Create a certificate signing request (CSR) on the Wazuh manager with the following command:
     
