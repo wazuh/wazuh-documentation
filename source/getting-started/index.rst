@@ -63,7 +63,7 @@ Screenshots
    * - .. thumbnail:: ../images/getting-started/screenshot-09-Wazuh-Cloud-Security.png
           :title: Cloud security
      - .. thumbnail:: ../images/getting-started/screenshot-10-Wazuh-Containers-Security.png
-          :title: Containers security
+          :title: Container security
 
 
 More resources
