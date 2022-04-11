@@ -14,7 +14,7 @@ FAQ
 How can I collect logs via syslog using agentless?
 --------------------------------------------------
 
-The agentless capability allows you to monitor devices or systems with no agent via SSH, by providing the capability to run commands on the device. Wazuh includes several built-in commands that allow you to detect any output, difference between outputs as well as verifying the integrity of files in the agentless device.
+The agentless capability allows you to monitor devices or systems with no agent via SSH, by providing the capability to run commands on the device. Wazuh includes several built-in commands that allow you to detect any output, difference between outputs, and verify the integrity of files in the agentless device.
 
 To collect logs you can configure your device to forward logs using syslog and configure Wazuh to receive them using :ref:`remote syslog <remote_syslog>`. 
 
