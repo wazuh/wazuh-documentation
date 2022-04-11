@@ -59,7 +59,7 @@ Recommended changes to securize Wazuh API
     The default password can be changed using the following Wazuh API request: :api-ref:`PUT /security/users/{user_id} <operation/api.controllers.security_controller.update_user>`
 
     .. note::
-      The password for users must have a minimum length of 8 characters and also use at least one uppercase and one lowercase letter, a number, and a symbol.
+      The password for users must contain between 8 and 64 characters. It must also use at least one uppercase and one lowercase letter, a number, and a symbol.
 
     After changing the password, there is no need to restart the Wazuh API but a new :api-ref:`authentication <operation/api.controllers.security_controller.login_user>` will be required for the affected users.
 
