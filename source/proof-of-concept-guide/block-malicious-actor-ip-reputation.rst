@@ -14,7 +14,11 @@ Prerequisites
 
 - You need an Apache server running on the monitored Ubuntu 20 system.
 
-- Configure the Wazuh Ubuntu 20 host to monitor the Apache access logs in the ``/var/ossec/etc/ossec.conf`` configuration file.
+
+Wazuh agent configuration
+-------------------------
+
+#. Configure the Wazuh Ubuntu 20 host to monitor the Apache access logs in the ``/var/ossec/etc/ossec.conf`` configuration file.
 
     .. code-block:: XML
 
@@ -29,8 +33,8 @@ Prerequisites
 
         # systemctl restart wazuh-agent
 
-Configuration
--------------
+Wazuh manager configuration
+---------------------------
 
 Configure your environment as follows to test the PoC.
 
@@ -85,9 +89,10 @@ Configure your environment as follows to test the PoC.
         </group>
 
 
-#. Add the appropriate active response settings to the  ``ruleset`` section of the  ``/var/ossec/etc/ossec.conf`` file at the Wazuh manager.
+#. Add the ``etc/lists/blacklist-alienvault`` list to the ``ruleset`` section of the  ``/var/ossec/etc/ossec.conf`` file at the Wazuh manager, and configure the active response stanza as shown. 
 
     .. code-block:: XML
+      :emphasize-lines: 8
 
         <ossec_config>
             <ruleset>
@@ -101,12 +106,6 @@ Configure your environment as follows to test the PoC.
                 <decoder_dir>etc/decoders</decoder_dir>
                 <rule_dir>etc/rules</rule_dir>
             </ruleset>
-
-            <command>
-                <name>firewall-drop</name>
-                <executable>firewall-drop</executable>
-                <timeout_allowed>yes</timeout_allowed>
-            </command>
 
             <active-response>
                 <command>firewall-drop</command>
