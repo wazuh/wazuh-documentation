@@ -12,7 +12,7 @@ The Wazuh architecture is based on :ref:`agents <wazuh_agent>`, running on the m
 
 The Wazuh indexer cluster is a collection of one or more nodes that communicate with each other to perform read and write operations on indexes. Small Wazuh deployments, which do not require processing large amounts of data, can easily be handled by a single-node cluster. Multi-node clusters are recommended when there are many monitored endpoints, when a large volume of data is anticipated, or when high availability is required.
 
-For production environments, it is recommended to deploy the Wazuh server and Wazuh indexer to different hosts. In this scenario, Filebeat is used to securely forward Wazuh alerts or archived events to the Wazuh indexer cluster (single-node or multi-node) using TLS encryption.
+For production environments, it is recommended to deploy the Wazuh server and Wazuh indexer to different hosts. In this scenario, Filebeat is used to securely forward Wazuh alerts and archived events to the Wazuh indexer cluster (single-node or multi-node) using TLS encryption.
 
 The diagram below represents a Wazuh deployment architecture. It shows the solution components and how the :ref:`Wazuh server <wazuh_server>` and the :doc:`Wazuh indexer <components/wazuh-indexer>` nodes can be configured as clusters, providing load balancing and high availability.
 
