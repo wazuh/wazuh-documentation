@@ -15,7 +15,11 @@ Configuration
 
 Configure your environment as follows to test the PoC.
 
-#. Run ``systemctl status auditd.service`` to check that the Linux Auditing System is installed and running on your Ubuntu 20 endpoint.
+#. Run the following command to check that the Linux Auditing System is installed and running on your Ubuntu 20 endpoint.
+
+    .. code-block:: console
+
+      # systemctl status auditd.service
 
 #. If auditd is not installed, you can install it with the following command:
 
@@ -32,6 +36,12 @@ Configure your environment as follows to test the PoC.
         <location>/var/log/audit/audit.log</location>
       </localfile>
 
+#. Restart the Wazuh agent to apply changes.
+
+    .. code-block:: console
+
+        # systemctl restart wazuh-agent      
+
 #. Get your current euid in the Ubuntu 20 endpoint. This is needed to monitor the actions of your user. Root user monitoring is not recommended for this test, as it can be quite noisy.
 
     .. code-block:: console
@@ -42,8 +52,8 @@ Configure your environment as follows to test the PoC.
 
     .. code-block:: XML
 
-       -a exit,always -F euid=your_user_id -F arch=b32 -S execve -k audit-wazuh-c
-       -a exit,always -F euid=your_user_id -F arch=b64 -S execve -k audit-wazuh-c
+       -a exit,always -F euid=<your_user_id> -F arch=b32 -S execve -k audit-wazuh-c
+       -a exit,always -F euid=<your_user_id> -F arch=b64 -S execve -k audit-wazuh-c
 
 #. Optionally, you can delete old rules.
 
