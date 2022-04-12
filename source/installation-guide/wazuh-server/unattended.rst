@@ -26,7 +26,7 @@ Install the Wazuh server as a single-node or multi-node cluster according to you
 
    .. code-block:: console
   
-       # bash ./unattended_installation.sh -ws wazuh-master
+       # bash ./wazuh-install.sh -ws wazuh-1
 
 
 Your Wazuh server is now successfully installed. 
