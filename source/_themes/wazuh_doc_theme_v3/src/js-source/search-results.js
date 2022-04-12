@@ -131,7 +131,7 @@ if ( $('.search') ) {
       tocNodeLink = $(this).find('>a');
       breadcrumbList.push({
         url: tocNodeLink.attr('href'),
-        text: tocNodeLink.text(),
+        text: tocNodeLink.contents()[0].nodeValue,
       });
     });
 

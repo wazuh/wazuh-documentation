@@ -35,6 +35,37 @@ Wazuh Cloud
 
 The `Wazuh Cloud <https://wazuh.com/cloud/>`_ is our software as a service (SaaS) solution. We provide a `14-day free trial <https://console.cloud.wazuh.com/sign-up?landing=trial>`_ for you to create a cloud environment and get the best out of our SaaS solution. Check the :ref:`Cloud service <cloud_service>` documentation for more information.
 
+
+
+Screenshots
+-----------
+
+.. list-table::
+   :width: 100%
+   :widths: 50 50
+
+   * - .. thumbnail:: ../images/getting-started/screenshot-01-Wazuh-Security-Analytics.png
+          :title: Security analytics
+     - .. thumbnail:: ../images/getting-started/screenshot-02-Wazuh-Intrusion-Detection.png
+          :title: Intrusion detection
+   * - .. thumbnail:: ../images/getting-started/screenshot-03-Wazuh-Log-Data-Analysis.png
+          :title: Log data analysis
+     - .. thumbnail:: ../images/getting-started/screenshot-04-Wazuh-File-Integrity-Monitoring.png
+          :title: File integrity monitoring
+   * - .. thumbnail:: ../images/getting-started/screenshot-05-Wazuh-Vulnerability-Detection.png
+          :title: Vulnerability detection
+     - .. thumbnail:: ../images/getting-started/screenshot-06-Wazuh-Configuration-Assessment.png
+          :title: Configuration assessment
+   * - .. thumbnail:: ../images/getting-started/screenshot-07-Wazuh-Incident-Response.png
+          :title: Incident response
+     - .. thumbnail:: ../images/getting-started/screenshot-08-Wazuh-Regulatory-Compliance.png
+          :title: Regulatory compliance
+   * - .. thumbnail:: ../images/getting-started/screenshot-09-Wazuh-Cloud-Security.png
+          :title: Cloud security
+     - .. thumbnail:: ../images/getting-started/screenshot-10-Wazuh-Containers-Security.png
+          :title: Container security
+
+
 More resources
 ---------------
 
