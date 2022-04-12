@@ -8,7 +8,7 @@
 Regulatory compliance
 =====================
 
-The Wazuh platform is often used to meet the technical aspects of regulatory compliance standards. Wazuh uses its SIEM capabilities to centralize, analyze, and enrich security data and provide security controls, such as intrusion detection, configuration assessment, log analysis, and vulnerability detection, to meet compliance requirements.
+Wazuh uses its SIEM capabilities to centralize, analyze and enrich security data. In addition, it provides security controls, such as intrusion detection, configuration assessment, log analysis, and vulnerability detection, to meet the technical aspects of regulatory compliance standards.
 
 The Wazuh rules are carefully mapped against compliance requirements to provide regulatory compliance support. This way, when an alert is generated (a rule condition has been matched), it automatically includes compliance information. Here is the list of currently supported standards:
 
