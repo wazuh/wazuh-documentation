@@ -120,6 +120,7 @@ newUrls['4.3'] = [
   '/getting-started/components/wazuh-dashboard.html',
   '/getting-started/components/wazuh-indexer.html',
   '/getting-started/use-cases/incident-response.html', 
+  '/getting-started/use_cases/container_security.html',
   '/installation-guide/wazuh-indexer/index.html',
   '/installation-guide/wazuh-indexer/unattended.html',
   '/installation-guide/wazuh-indexer/step-by-step.html',

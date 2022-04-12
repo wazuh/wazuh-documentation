@@ -29,7 +29,7 @@ Below you can find examples of some of the most common use cases of the Wazuh so
      - :ref:`system_inventory`
    * - :ref:`vulnerability_detection`
      - :ref:`cloud_security`
-   * - :ref:`containers_security`
+   * - :ref:`container_security`
      - :ref:`regulatory_compliance`
 
 
@@ -44,5 +44,5 @@ Below you can find examples of some of the most common use cases of the Wazuh so
    system-inventory
    vulnerability-detection
    cloud-security
-   containers-security
+   container-security
    regulatory-compliance
