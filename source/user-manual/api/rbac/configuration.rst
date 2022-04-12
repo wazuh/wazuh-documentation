@@ -12,9 +12,9 @@ Configuration
 
 Set RBAC mode
 -------------
-As explained in the :ref:`How it works <api_rbac_how_it_works>` section, it is possible to modify the RBAC mode and change it to ``white`` or ``black``. This can be done using the :api-ref:`PUT /security/config <operation/api.controllers.security_controller.put_security_config>` Wazuh API endpoint, it can also be restored to default using :api-ref:`DELETE /security/config <operation/api.controllers.security_controller.delete_security_config>`.
+As explained in the :ref:`How it works <api_rbac_how_it_works>` section, it is possible to modify the RBAC mode and change it to ``white`` or ``black``. This can be done using the :api-ref:`PUT /security/config <operation/api.controllers.security_controller.put_security_config>` Wazuh API endpoint. It can also be restored to default using :api-ref:`DELETE /security/config <operation/api.controllers.security_controller.delete_security_config>`.
 
-Here is an example of how to change RBAC mode using a cURL command. It is recommended to export the token to a variable as explained in :ref:`Getting started <api_getting-started>` section . Replace ``DESIRED_RBAC_MODE`` with the mode to enable (``white`` or ``black``):
+Here is an example of how to change RBAC mode using a curl command. It is recommended to export the token to a variable as explained in :ref:`Getting started <api_getting-started>` section. Replace ``DESIRED_RBAC_MODE`` with the mode to enable (``white`` or ``black``):
 
 .. code-block:: console
 
@@ -33,9 +33,9 @@ Here is an example of how to change RBAC mode using a cURL command. It is recomm
 
 Create a new policy
 -------------------
-**Policies** are used to specify which actions can be taken on the given resources. To create a new policy use the :api-ref:`POST /security/policies <operation/api.controllers.security_controller.add_policy>` endpoint.
+**Policies** are used to specify which actions can be taken on the given resources. To create a new policy, use the :api-ref:`POST /security/policies <operation/api.controllers.security_controller.add_policy>` endpoint.
 
-As an example, in order to grant access to the agents of a given customer to the "Sales-team", a policy that specifies what actions and on which agents these actions can be carried out must be created. The required policy can be defined like the following one:
+As an example, in order to grant access to the agents of a given customer to the "Sales-team", a policy that specifies what actions and on which agents these actions can be carried out must be created. The required policy can be defined as the following one:
 
 .. code-block:: json
 
@@ -96,7 +96,7 @@ The Wazuh API response will be something similar to this. The highlighted ID sho
       "error": 0
     }
 
-This will create a policy with permission to read information related to agents with ids ``001``, ``002``, ``003`` and ``004``. Additional policies can be created as long as they are not duplicated. Any policy could be modified at any given time if needed, so for example new agents could be added to an existing policy.
+This will create a policy with permission to read information related to agents with ids ``001``, ``002``, ``003`` and ``004``. Additional policies can be created as long as they are not duplicated. Any policy could be modified at any given time if needed. For example, new agents could be added to an existing policy.
 
 .. note::
     The policy ID, along with the other useful information, can be accessed at any time using the :api-ref:`GET /security/policies <operation/api.controllers.security_controller.get_policies>` endpoint. For a complete list of resources and actions, please visit :ref:`RBAC reference <api_rbac_reference>` page.
@@ -166,7 +166,7 @@ This information needs to be specified in order to create a new user. As an exam
 
 There is a parameter called ``allow_run_as`` on the highlighted line. If set to *true*, roles can be assigned to the user based on the information of an authorization context. Visit this section to find more detailed information about :ref:`Authorization Context <authorization_context_method>`.
 
-The output would look like below:
+The output would look like the example below:
 
 .. code-block:: json
     :class: output
@@ -225,7 +225,7 @@ Security rules are used to check if their content is inside an auth_context. If 
 
 Assign policies to roles
 ------------------------
-To assign **policies** to a certain role use the :api-ref:`POST /security/roles/{role_id}/policies <operation/api.controllers.security_controller.set_role_policy>` endpoint. The assigment can be done by simply indicating the ID of the **role** and the ID of each policy. Remember that it is possible for a role to have multiple policies assigned to it. Also a given policy can be assigned to multiple roles.
+To assign **policies** to a certain role use the :api-ref:`POST /security/roles/{role_id}/policies <operation/api.controllers.security_controller.set_role_policy>` endpoint. The assignment can be done by simply indicating the ID of the **role** and the ID of each policy. Remember that it is possible for a role to have multiple policies assigned to it. Also a given policy can be assigned to multiple roles.
 
 .. note::
     This endpoint has a parameter called **position** used to determine the order in which the different policies should be applied, as policies might have conflicting permissions. For more information, check out the section :ref:`Priority of roles and policies <rbac_priority>`.
@@ -265,10 +265,10 @@ Now it is possible to modify the permissions of the whole "sales-team" group by 
 
 
 Assign rules to roles
-------------------------
-To assign **rules** to a certain role, use the :api-ref:`POST /security/roles/{role_id}/rules <operation/api.controllers.security_controller.set_role_rule>` endpoint. The assigment can be done by simply indicating the ID of the **role** and the ID of each rule. It is possible for a role to have multiple rules assigned to it. Also a given rule can be assigned to multiple roles.
+---------------------
+To assign **rules** to a certain role, use the :api-ref:`POST /security/roles/{role_id}/rules <operation/api.controllers.security_controller.set_role_rule>` endpoint. The assignment can be done by simply indicating the ID of the **role** and the ID of each rule. It is possible for a role to have multiple rules assigned to it. Also, a given rule can be assigned to multiple roles.
 
-To assign any rule, it is necessary both the ID of the rule and the ID of the role. For example, we cab add the "wui_opendistro_admin" rule which ID is ``2`` to the "sales-team" role having the *role_id* (``100``). Here is the request:
+To assign any rule, it is necessary to indicate both the rule's ID and the role's ID. For example, we can add the "wui_opendistro_admin" rule which ID is ``2`` to the "sales-team" role having the *role_id* (``100``). Here is the request:
 
 .. code-block:: console
 
@@ -342,7 +342,7 @@ The user "sales-member-1" now belongs to the "sales-team" role, so it could perf
 
 Priority of roles and policies
 ------------------------------
-When the same role has two or more contradictory policies assigned or the same user belongs to two or more contradictory roles, the resulting permission will be determined by the priority of the policies. Let's take a look to the following example:
+When the same role has two or more contradictory policies assigned or the same user belongs to two or more contradictory roles, the resulting permission will be determined by the priority of the policies. Let's take a look at the following example:
 
 .. code-block:: yaml
     :emphasize-lines: 7,13
@@ -361,9 +361,9 @@ When the same role has two or more contradictory policies assigned or the same u
                 agent:id:001
             effect: deny
 
-In this case, the role "example_role" is linked to the ``policy0`` which allows agent ``001`` to be read, but it is also linked to ``policy1``, which prohibits it, as seen in the highlighted lines. In this situation, the most recently added policy is applied to the role. That means the one that appears last when listing the policies of a role using the :api-ref:`GET /security/roles <operation/api.controllers.security_controller.get_roles>` endpoint will be applied and for this example the user won't have permission to read agent ``001``. The same happens if a user is assigned to several roles. The last role applied to a user is the one that determines the behavior in case of contradiction. The ``GET /security/users`` endpoint can be used to list the users and its assigned roles.
+In this case, the role "example_role" is linked to the ``policy0``, which allows agent ``001`` to be read, but it is also linked to ``policy1``, which prohibits it, as seen in the highlighted lines. In this situation, the most recently added policy is applied to the role. That means the one that appears last when listing the policies of a role using the :api-ref:`GET /security/roles <operation/api.controllers.security_controller.get_roles>` endpoint will be applied, and for this example, the user won't have permission to read agent ``001``. The same happens if a user is assigned to several roles. The last role applied to a user is the one that determines the behavior in case of contradiction. The ``GET /security/users`` endpoint can be used to list the users and their assigned roles.
 
-It is possible to specify in which position of the list (starting at 0) a policy or a role is assigned by using the ``position`` parameter when adding a new relationship between a policy and a role or between a role and a user. Thanks to this, it is possible to add a new policy and place it in a different position of the list, so if this new policy contradicts another one that is placed later, the later one will be the policy to have their effects applied. Following this example, if the ``position`` parameter were used when adding the ``policy1`` to ``example_role`` and it was set to ``0``, then ``policy1`` would be added to ``example_role`` in the first position of the list and the user would have access to agent ``001`` as in this case ``policy0`` would be the last policy of the list. Here is the resulting list for this case:
+It is possible to specify in which position of the list (starting at 0) a policy or a role is assigned by using the ``position`` parameter when adding a new relationship between a policy and a role or between a role and a user. Thanks to this, it is possible to add a new policy and place it in a different position on the list, so if this new policy contradicts another one that is placed later, the latter one will be the policy to have its effects applied. Following this example, if the ``position`` parameter were used when adding the ``policy1`` to ``example_role`` and it was set to ``0``, then ``policy1`` would be added to ``example_role`` in the first position of the list, and the user would have access to agent ``001`` as in this case ``policy0`` would be the last policy of the list. Here is the resulting list for this case:
 
 .. code-block:: yaml
     :emphasize-lines: 7,13
