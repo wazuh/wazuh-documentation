@@ -27,7 +27,7 @@ Wazuh uses *decoders* to identify the source application of the log message. The
     <group>authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,gpg13_7.1,gdpr_IV_35.7.d,gdpr_IV_32.2,hipaa_164.312.b,nist_800_53_AU.14,nist_800_53_AC.7,tsc_CC6.1,tsc_CC6.8,tsc_CC7.2,tsc_CC7.3,</group>
   </rule>
 
-Rules include a ``match`` field used to define the pattern that the rule search. They also have a ``level`` field that specifies the priority of the resulting alerts. Besides, rules enrich events with technique identifiers from the MITRE ATT&CK framework and regulatory compliance controls.
+Rules include a ``match`` field used to define the pattern that the rule looks for. They also have a ``level`` field that specifies the priority of the resulting alerts. Besides, rules enrich events with technique identifiers from the MITRE ATT&CK framework and mappings to regulatory compliance controls.
 
 The manager generates an alert every time an event, collected by one of the agents or via syslog, matches a rule with a priority level higher than a predefined threshold (``3`` by default).
 
