@@ -136,7 +136,7 @@ Example of security alerts at a container level:
 
    * - New process created in a container
      - File integrity monitoring alerts
-   * - A new application installed in a container
+   * - New application installed in a container
      - Vulnerability detected in a container
    * - Log analysis alert (for example, Nginx event)
      - The hardening check failed in a container
