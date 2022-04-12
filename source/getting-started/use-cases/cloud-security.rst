@@ -228,7 +228,7 @@ The following example shows an alert when a ``Communication site`` is modified i
         "location":"office365"
     }
 
-You can find more information on how to use Wazuh to monitor GitHub in our :ref:`documentation <office365>`.
+You can find more information on how to use Wazuh to monitor Office 365 in our :ref:`documentation <office365>`.
 
 Google Cloud Platform
 ---------------------
