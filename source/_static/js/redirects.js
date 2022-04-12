@@ -300,7 +300,7 @@ removedUrls['4.3'] = [
 
 redirections.push(
   {
-    'target': ['4.3=>4.2'],
+    'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/getting-started/use-cases/containers-security.html',
     '4.3': '/getting-started/use-cases/container-security.html',
     },
