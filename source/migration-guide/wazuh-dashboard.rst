@@ -1,7 +1,7 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
-  :description: Follow this guide to migrate from Open Distro for Elasticsearch Kibana 1.13 to the Wazuh dashboard.
+  :description: Follow this guide to migrate from Open Distro for Elasticsearch Kibana to the Wazuh dashboard.
   
 .. _migration_guide_dashboard:
 

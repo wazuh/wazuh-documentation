@@ -128,7 +128,11 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13 to the Wazu
       # chown wazuh-indexer:wazuh-indexer -R /var/log/wazuh-indexer/
       # chown wazuh-indexer:wazuh-indexer -R /var/lib/wazuh-indexer/
 
-#. Port your settings from ``/etc/elasticsearch/elasticsearch.yml`` to ``/etc/wazuh-indexer/opensearch.yml``. Most settings use the same names. At a minimum, specify ``cluster.name``, ``node.name``, ``discovery.seed_hosts``, and ``cluster.initial_master_nodes``.
+#. Port your settings from ``/etc/elasticsearch/elasticsearch.yml`` to ``/etc/wazuh-indexer/opensearch.yml``. Most settings use the same names.
+
+   Take into account the following considerations: 
+
+   #. At a minimum, specify ``cluster.name``, ``node.name``, ``discovery.seed_hosts``, and ``cluster.initial_master_nodes``.
 
    #. There is no need to edit the ``path.data`` and the ``path.logs`` settings as the old data has been moved to the default Wazuh indexer paths in the previous step.
 
