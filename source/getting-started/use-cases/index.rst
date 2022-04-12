@@ -13,7 +13,7 @@ The Wazuh platform helps organizations and individuals protect their data assets
 Wazuh is the ideal security solution for users of IaaS (Amazon AWS, Azure, or Google Cloud) to monitor virtual machines and cloud instances. This is done at a system level utilizing the :ref:`Wazuh security agent <wazuh_agent>` and pulling data directly from the cloud provider API at an infrastructure level.
 
 
-Wazuh is employed to protect containerized environments by providing cloud-native runtime security. This feature integrates the Docker engine API and Kubernetes API. The Wazuh security agent can run on the Docker host providing a complete set of threat detection and response capabilities for better protection.
+Wazuh is employed to protect containerized environments by providing cloud-native runtime security. This feature integrates the Docker engine API and the Kubernetes API. The Wazuh security agent can run on the Docker host providing a complete set of threat detection and response capabilities for better protection.
 
 Below you can find examples of some of the most common use cases of the Wazuh solution.
 
