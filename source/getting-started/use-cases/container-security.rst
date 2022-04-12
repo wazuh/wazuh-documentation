@@ -139,4 +139,4 @@ Example of security alerts at a container level:
    * - New application installed in a container
      - Vulnerability detected in a container
    * - Log analysis alert (for example, Nginx event)
-     - The hardening check failed in a container
+     - Hardening check failed in a container
