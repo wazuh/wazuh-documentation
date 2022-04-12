@@ -134,7 +134,7 @@ Example of security alerts at a container level:
    :width: 100%
    :widths: 50 50
 
-   * - A new process created in a container
+   * - New process created in a container
      - File integrity monitoring alerts
    * - A new application installed in a container
      - Vulnerability detected in a container
