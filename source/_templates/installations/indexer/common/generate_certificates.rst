@@ -49,7 +49,7 @@
    .. code-block:: console
 
      # tar -cvf ./wazuh-certificates.tar -C ./wazuh-certificates/ .
-     # rm -r ./wazuh-certificates
+     # rm -rf ./wazuh-certificates
 
 
 #. Copy ``wazuh-certificates.tar`` to all the nodes, including Wazuh indexer, Wazuh server, and Wazuh dashboard nodes. This can be done by using ``scp``. 
