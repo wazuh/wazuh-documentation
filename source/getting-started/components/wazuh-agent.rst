@@ -44,7 +44,7 @@ All agent modules are configurable and perform different security tasks. This mo
 
 - **Active response:** This module runs automatic actions when threats are detected, triggering responses to block a network connection, stop a running process, or delete a malicious file. Users can also create custom responses when necessary, and customize, for example, responses for running a binary in a sandbox, capturing a network connection traffic, and scanning a file with an antivirus.
 
-- **Container security monitoring:** This agent module is integrated with the Docker Engine API to monitor changes in a containerized environment. For example, it detects changes to container images, network configuration, or data volumes. Besides, it alerts containers running in privileged mode and on users executing commands in a running container.
+- **Container security monitoring:** This agent module is integrated with the Docker Engine API to monitor changes in a containerized environment. For example, it detects changes to container images, network configuration, or data volumes. Besides, it alerts about containers running in privileged mode and about users executing commands in a running container.
 
 - **Cloud security monitoring:** This component monitors cloud providers such as Amazon AWS, GitHub, Microsoft Azure, Office 365, or Google GCP. It natively communicates with its APIs. It is capable of detecting changes to the cloud infrastructure (e.g., a new user is created, a security group is modified, a cloud instance is stopped, etc.) and collecting cloud services log data (e.g., AWS Cloudtrail, AWS Macie, AWS GuardDuty, Azure Active Directory, etc.)
 
