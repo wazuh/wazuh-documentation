@@ -92,7 +92,7 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13 to the Wazu
 
           .. code-block:: console
 
-            # yum install wazuh-indexer -y
+            # yum -y install wazuh-indexer
 
 
 
@@ -100,10 +100,10 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13 to the Wazu
 
           .. code-block:: console
 
-            # apt install wazuh-indexer -y
+            # apt -y install wazuh-indexer
 
 
-#. Create the ``/etc/wazuh-indexer/certs`` directory, copy your old certificates to the new location and give them the right ownership and permissions. Note that for some Elasticsearch nodes, the ``admin.pem`` and ``admin-key.pem`` certificates may not be present.   
+#. Create the ``/etc/wazuh-indexer/certs`` directory, copy your old certificates to the new location and change ownership and permissions. Note that the ``admin.pem`` and ``admin-key.pem`` certificates do not exist on every Elasticsearch node.
 
    .. code-block:: console
 
@@ -118,7 +118,7 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13 to the Wazu
        # chmod 400 /etc/wazuh-indexer/certs/*
 
 
-#. Move or copy your data to the new directories and give them the right ownership. 
+#. Move or copy your data to the new directories and change ownership. 
 
    .. code-block:: console
 
@@ -134,11 +134,11 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13 to the Wazu
 
    #. At a minimum, specify ``cluster.name``, ``node.name``, ``discovery.seed_hosts``, and ``cluster.initial_master_nodes``.
 
-   #. There is no need to edit the ``path.data`` and the ``path.logs`` settings as the old data has been moved to the default Wazuh indexer paths in the previous step.
+   #. Editing the ``path.data`` and the ``path.logs`` settings is not needed. The old data has been moved to the default Wazuh indexer paths in the previous step.
 
-   #. There is no need to edit the certificates' names and paths as the old certificates have been moved and renamed in a previous step.  
+   #. Editing the certificates names and paths is not needed. The old certificates have been moved and renamed in a previous step.  
    
-   #. If you are using the default Wazuh certificates, change the Organizational Unit (OU) from ``Wazuh`` to ``Docu``.  
+   #. If you were using the default Wazuh certificates, change the Organizational Unit (OU) from ``Wazuh`` to ``Docu``.  
       
        .. code-block:: yaml
          :emphasize-lines: 2,6
@@ -156,9 +156,9 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13 to the Wazu
 
    .. include:: /_templates/installations/indexer/common/enable_indexer.rst
 
-#. For multi-node deployments, repeat steps 4-10 until all the nodes are upgraded. 
+#. For multi-node deployments, repeat steps 4–10 until the upgrade is performed on all the nodes. 
 
-#. After all the nodes are updated, restart Filebeat.   
+#. Once all the nodes have been been upgraded, restart Filebeat.   
 
    .. tabs::
    
@@ -244,5 +244,3 @@ Next steps
 ----------
 
 Your cluster is now updated. If you want to migrate from Kibana to the Wazuh dashboard, see the :doc:`wazuh-dashboard` section.
-
-

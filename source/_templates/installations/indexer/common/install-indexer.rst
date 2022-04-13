@@ -8,7 +8,7 @@
 
                 .. code-block:: console
 
-                    # yum install -y wazuh-indexer
+                    # yum -y install wazuh-indexer
 
 
 

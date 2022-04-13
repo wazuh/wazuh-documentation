@@ -68,7 +68,7 @@ Follow this guide to migrate from Open Distro for Elasticsearch Kibana 1.13 to t
 
     ..  note:: Make sure that your Wazuh manager is updated to the latest version. 
 
-#. Create the ``/etc/wazuh-dashboard/certs`` directory, copy your old certificates to the new location and give them the right ownership and permissions.    
+#. Create the ``/etc/wazuh-dashboard/certs`` directory, copy your old certificates to the new location and change ownership and permissions.    
 
    .. code-block:: console
 
@@ -100,13 +100,13 @@ Follow this guide to migrate from Open Distro for Elasticsearch Kibana 1.13 to t
           opensearch.ssl.certificateAuthorities: ["/etc/wazuh-dashboard/certs/root-ca.pem"]
           uiSettings.overrides.defaultRoute: /app/wazuh?security_tenant=global
 
-#. Add your password for the ``kibanaserver`` user in the Wazuh dashboard keystore. You may find your old password in the ``/etc/kibana/kibana.yml`` configuration file. Execute the command below and follow the instructions. 
+#. Add the password of the ``kibanaserver`` user to the Wazuh dashboard keystore.  Execute the command below and follow the instructions. You may find your old password in the ``/etc/kibana/kibana.yml`` configuration file. 
 
     .. code-block:: console
 
       /usr/share/wazuh-dashboard/bin/opensearch-dashboards-keystore --allow-root add opensearch.password    
    
-    (Optional) If you wish to change the default user, you may use the following command. Remember to change the password accordingly. 
+    **Optional action** -  To change the default user, run the following command. You will need to change the password accordingly. 
 
     .. code-block:: console
 
@@ -118,7 +118,7 @@ Follow this guide to migrate from Open Distro for Elasticsearch Kibana 1.13 to t
       .. include:: /_templates/installations/dashboard/enable_dashboard.rst            
 
 
-#.  Port your settings from ``/usr/share/kibana/data/wazuh/config/wazuh.yml`` to ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml``. Copy the content from ``/usr/share/kibana/data/wazuh/downloads/`` (Optional).
+#.  Port your settings from ``/usr/share/kibana/data/wazuh/config/wazuh.yml`` to ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml``. It is recommended to copy the content from ``/usr/share/kibana/data/wazuh/downloads/`` as well.
 
 
 #. Uninstall Kibana.
@@ -137,8 +137,3 @@ Follow this guide to migrate from Open Distro for Elasticsearch Kibana 1.13 to t
     
     
         .. include:: /_templates/installations/elastic/deb/uninstall_kibana.rst
-
-
-
-
-

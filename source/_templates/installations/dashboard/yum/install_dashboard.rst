@@ -2,6 +2,6 @@
 
 .. code-block:: console
 
-  # yum install wazuh-dashboard -y
+  # yum -y install wazuh-dashboard
 
 .. End of include file
