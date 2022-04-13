@@ -26,8 +26,16 @@ Configuration
         <location>/var/log/apache2/access.log</location>
       </localfile>
 
-Optionally, you can install Suricata in the Ubuntu 20 endpoint and configure it to monitor the endpoint's network traffic.
+    Optionally, you can install Suricata in the Ubuntu 20 endpoint and configure it to monitor the endpoint's network traffic.
+  
 
+#. Restart the Wazuh agent to apply the configuration changes.
+
+    .. code-block:: console
+
+        # systemctl restart wazuh-agent
+
+  
 #. Modify the FilesMatch directive at ``/etc/apache2/apache2.conf`` as follow:
 
     .. code-block:: none
