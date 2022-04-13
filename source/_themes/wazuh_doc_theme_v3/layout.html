@@ -217,6 +217,10 @@
   {%- if not is_latest_release %}
     {%- set body_class = body_class + ' no-latest-docs' -%}
   {% endif -%}
+  
+  {%- if theme_is_pre_v3 %}
+    {%- set body_class = body_class + ' pre-v3' -%}
+  {% endif -%}
 
   <body class="{{ body_class }}"  data-path="{{ pagename }}" data-spy="scroll" data-target="#local-toc" data-offset="200">
   {% block body %} {% endblock %}
