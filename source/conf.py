@@ -31,7 +31,7 @@ author = u'Wazuh, Inc.'
 copyright = u'&copy; ' + str(datetime.datetime.now().year) + u' &middot; Wazuh Inc.'
 
 # The short X.Y version
-version = '4.2'
+version = '4.3'
 is_latest_release = True
 
 # The full version, including alpha/beta/rc tags
