@@ -60,7 +60,7 @@ Configure your environment as follows to test the PoC.
         </service>
       </wodle>
 
-#. Restart the Wazuh manager to apply changes.
+#. Restart the Wazuh manager to apply the changes.
 
     .. code-block:: console
 

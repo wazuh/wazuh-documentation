@@ -36,7 +36,7 @@ Configure your environment as follows to test the PoC.
         <location>/var/log/audit/audit.log</location>
       </localfile>
 
-#. Restart the Wazuh agent to apply changes.
+#. Restart the Wazuh agent to apply the changes.
 
     .. code-block:: console
 

@@ -27,7 +27,7 @@ Wazuh agent configuration
             <location>/var/log/apache2/access.log</location>
         </localfile>
 
-#. Restart the Wazuh agent to apply changes.
+#. Restart the Wazuh agent to apply the changes.
 
     .. code-block:: console
 
