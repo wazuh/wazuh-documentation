@@ -36,7 +36,7 @@ Server components
 
 - **Analysis engine:** This is the server component that performs the data analysis. It employs decoders to identify the information processing type (Windows events, SSHD logs, web server logs, and others). These decoders also extract relevant data elements from the log messages, such as source IP address, event ID, or username. Then, by using rules, the engine identifies specific patterns in the decoded events that could trigger alerts and possibly even call for automated countermeasures, like banning an IP address on the firewall, for example.
 
-- **Wazuh RESTful API:** This service provides an interface to interact with the Wazuh infrastructure. It is used to manage configuration settings of agents and servers, monitor the infrastructure status and overall health, to manage and edit Wazuh decoders and rules, and query about the state of the monitored endpoints. The Wazuh dashboard also uses it.
+- **Wazuh RESTful API:** This service provides an interface to interact with the Wazuh infrastructure. It is used to manage configuration settings of agents and servers, monitor the infrastructure status and overall health, manage and edit Wazuh decoders and rules, and query about the state of the monitored endpoints. The Wazuh dashboard also uses it.
 
 - **Wazuh cluster daemon:** This service is used to scale Wazuh servers horizontally, deploying them as a cluster. This kind of configuration, combined with a network load balancer, provides high availability and load balancing. The Wazuh cluster daemon is what Wazuh servers use to communicate with each other and to keep synchronized.
 
