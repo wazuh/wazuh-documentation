@@ -85,7 +85,7 @@ Options
 +----------------------------------------+----------------------------------------------+
 | `log_analytics\\request\\tag`_         | Any string                                   |
 +----------------------------------------+----------------------------------------------+
-| `log_analytics\\request\\query`_       | Any string                                   |
+| `log_analytics\\request\\query`_       | Any string without double quotes             |
 +----------------------------------------+----------------------------------------------+
 | `log_analytics\\request\\workspace`_   | Any string                                   |
 +----------------------------------------+----------------------------------------------+
@@ -327,7 +327,7 @@ request options
 +=========================================+==============================================+
 | `log_analytics\\request\\tag`_          | Any string                                   |
 +-----------------------------------------+----------------------------------------------+
-| `log_analytics\\request\\query`_        | Any string                                   |
+| `log_analytics\\request\\query`_        | Any string without double quotes             |
 +-----------------------------------------+----------------------------------------------+
 | `log_analytics\\request\\workspace`_    | Any string                                   |
 +-----------------------------------------+----------------------------------------------+
@@ -350,13 +350,23 @@ Defines a tag that we will add to the query. This entry is optional and can be u
 log_analytics\\request\\query
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This is the query made to the Azure Log Analytics API. This option is ready to use any query that we can make in the Log Analytics portal. For more information on the language, check the `Azure documentation <https://docs.microsoft.com/en-us/azure/azure-monitor/logs/get-started-queries>`_.
+This is the query made to the Azure Log Analytics API. This option is compatible with any valid query accepted by the Log Analytics portal, as long as it does not contains double quotes (``"``). If you need to use double quotes, you must replace them with single ones (``'``) or escape them by using the backslash character (``\"``).
 
-+--------------------+--------------------+
-| **Default value**  | N/A                |
-+--------------------+--------------------+
-| **Allowed values** | Any String         |
-+--------------------+--------------------+
+Here are some examples of valid queries:
+
+.. code-block:: xml
+
+    AuditLogs | where OperationVersion contains '1'
+    AuditLogs | where OperationVersion contains \"1\"
+
+
+For more information on Log Analytics query's language, check the `Azure documentation <https://docs.microsoft.com/en-us/azure/azure-monitor/logs/get-started-queries>`_.
+
++--------------------+-----------------------------------+
+| **Default value**  | N/A                               |
++--------------------+-----------------------------------+
+| **Allowed values** | Any String without double quotes  |
++--------------------+-----------------------------------+
 
 log_analytics\\request\\workspace
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

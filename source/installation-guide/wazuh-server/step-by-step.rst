@@ -115,9 +115,9 @@ Configuring Filebeat
         # curl -so /etc/filebeat/filebeat.yml https://packages-dev.wazuh.com/4.3/tpl/wazuh/filebeat/filebeat.yml
         
         
-  #. Edit the ``/etc/filebeat/filebeat.yml`` configuration file.
+  #. Edit the ``/etc/filebeat/filebeat.yml`` configuration file and replace the following value:
 
-      .. include:: /_templates/installations/filebeat/opensearch/configure_filebeat.rst
+     .. include:: /_templates/installations/filebeat/opensearch/configure_filebeat.rst
 
   #. Create a Filebeat keystore to securely store authentication credentials.
 
@@ -125,7 +125,7 @@ Configuring Filebeat
      
         # filebeat keystore create
 
-  #. Add the username and password to the secrets keystore.
+  #. Add the username and password ``admin``:``admin`` to the secrets keystore.
       
       .. code-block:: console
 

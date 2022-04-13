@@ -10,6 +10,7 @@
 
 import sys
 import os
+import glob
 import re
 import shlex
 import datetime
@@ -718,6 +719,31 @@ def finish_and_clean(app, exception):
             if os.path.exists(app.srcdir + '/_static/' + mini_asset):
                 os.remove(app.srcdir + '/_static/' + mini_asset)
 
+    if html_theme == 'wazuh_doc_theme_v3':
+        # Remove map files and sourcMapping line in production
+        if production:
+            mapFiles = glob.glob(app.outdir + '/_static/*/min/*.map')
+            assetsFiles = glob.glob(app.outdir + '/_static/js/min/*.min.js') + glob.glob(app.outdir + '/_static/css/min/*.min.css')
+            # Remove map files
+            for mapFilePath in mapFiles:
+                try:
+                    os.remove(mapFilePath)
+                except:
+                    print("Error while deleting file : ", mapFilePath)
+            
+            # Remove the source mapping URLs
+            for assetsFilePath in assetsFiles:
+                try:
+                    with open(assetsFilePath, "r") as f:
+                        lines = f.readlines()
+                    with open(assetsFilePath, "w") as f:
+                        for line in lines:
+                            line = re.sub("//# sourceMappingURL=.*\.map", "", line)
+                            line = re.sub("/\*# sourceMappingURL=.*\.map \*/", "", line)
+                            f.write(line)
+                except:
+                    print("Error while removing source mapping from file: ", assetsFilePath)
+                    
 def collect_compiled_pagename(app, pagename, templatename, context, doctree):
     ''' Runs once per page, storing the pagename (full page path) extracted from the context
         It store the path of all compiled documents except the orphans and the ones in exclude_doc'''

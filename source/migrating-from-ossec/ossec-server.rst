@@ -13,14 +13,14 @@ Backup your files
 
 To avoid losing any configuration data, or agent keys, we will stop the OSSEC server and make a copy of the directory where it lives. But first, lets check if we have enough space to create a copy of ``/var/ossec``:
 
-.. code-block:: bash
+.. code-block:: console
 
    $ sudo du -h /var/ossec | tail -n1
    $ sudo df -h /var
 
 Now we copy all files to a separated backup directory:
 
-.. code-block:: bash
+.. code-block:: console
 
    $ sudo /var/ossec/bin/ossec-control stop
    $ sudo cp -rp /var/ossec /var/ossec_backup
@@ -36,21 +36,21 @@ Remove your current installation
      - How to remove OSSEC
 
    * - Deb packages
-     - .. code-block:: bash
+     - .. code-block:: console
 
           $ sudo apt-get remove ossec-hids --purge
           $ sudo rm -f /etc/ossec-init.conf
           $ sudo rm -rf /var/ossec
 
    * - RPM packages
-     - .. code-block:: bash
+     - .. code-block:: console
 
           $ sudo yum remove ossec-hids
           $ sudo rm -f /etc/ossec-init.conf
           $ sudo rm -rf /var/ossec
 
    * - From sources
-     - .. code-block:: bash
+     - .. code-block:: console
 
           $ sudo rm -f /etc/ossec-init.conf
           $ sudo rm -rf /var/ossec
@@ -67,13 +67,13 @@ Before restoring our previous settings please note that some configuration optio
 
 The first step is to stop the manager processes:
 
-.. code-block:: bash
+.. code-block:: console
 
    $ sudo systemctl stop wazuh-manager
 
 Now we will restore the following files:
 
-.. code-block:: bash
+.. code-block:: console
 
    $ cp -p /var/ossec_backup/agentless/.passlist /var/ossec/agentless/
    $ cp -p /var/ossec_backup/etc/client.keys /var/ossec/etc/
@@ -88,7 +88,7 @@ There have been some syntax changes, and new settings, incorporated to ``ossec.c
 
 Optionally the following files can be restored to preserve alert log files and syscheck/rootcheck databases:
 
-.. code-block:: bash
+.. code-block:: console
 
    $ cp -rp /var/ossec_backup/logs/archives/* /var/ossec/logs/archives
    $ cp -rp /var/ossec_backup/logs/alerts/* /var/ossec/logs/alerts
@@ -97,6 +97,6 @@ Optionally the following files can be restored to preserve alert log files and s
 
 Finally we can start the services again. Please check ``/var/ossec/logs/ossec.log`` file to ensure there are no errors or warnings related to the settings migration.
 
-.. code-block:: bash
+.. code-block:: console
 
    $ sudo systemctl start wazuh-manager

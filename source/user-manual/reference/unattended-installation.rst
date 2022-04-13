@@ -79,7 +79,7 @@ Agent
 
 Example:
 
-.. code-block:: bash
+.. code-block:: pkgconfig
 
     USER_LANGUAGE="en"
     USER_NO_STOP="y"
@@ -118,7 +118,7 @@ Manager/local
 
 Example:
 
-.. code-block:: bash
+.. code-block:: pkgconfig
 
     USER_LANGUAGE="en"
     USER_NO_STOP="y"

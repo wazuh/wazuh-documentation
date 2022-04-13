@@ -19,7 +19,6 @@ if ( $('.index') ) {
 
   /* Hide specific subtrees from the index */
   const nodesToHide = [
-    'style-guide/index.html',
     'learning-wazuh/index.html',
     'development/index.html',
     'migrating-from-ossec/index.html',
