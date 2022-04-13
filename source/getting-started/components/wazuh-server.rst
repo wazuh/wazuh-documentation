@@ -30,7 +30,7 @@ The diagram below represents the server architecture and components:
 Server components
 ^^^^^^^^^^^^^^^^^
 
-- **Agents registration service:**  It is used to register new agents by provisioning and distributing pre-shared authentication unique keys to each agent. This process runs as a network service and supports authentication via TLS/SSL certificates or by providing a fixed password.
+- **Agents registration service:** It is used to register new agents. It provisions and distributes in advance unique authentication keys to each agent. The process runs as a network service and supports authentication via TLS/SSL certificates or by providing a fixed password.
 
 - **Agents connection service:** This service receives data from the agents. It uses the keys shared in advance to validate each agent identity and encrypt the communications between the Wazuh agent and the Wazuh server. Additionally, this service provides centralized configuration management, enabling you to push new agent settings remotely.
 
