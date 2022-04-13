@@ -17,7 +17,7 @@ This article describes how to enable core dump generation and how to use a debug
 Some operating systems perform a core dump upon a process crash by default, others do not. This article covers how to
 enable and disable core dump generation on the supported platforms [1]_.
 
-.. [1] As the time of writing, the Wazuh compilation outputs separate debugging symbols only for Windows, MacOS and Linux.
+.. [1] As the time of writing, the Wazuh compilation outputs separate debugging symbols only for Windows, macOS, and Linux.
 
 macOS
 *****
@@ -29,9 +29,9 @@ allowed to generate.
 To enable core dump generation for Wazuh, the service needs to be relaunched from a shell, this is because resource
 limits are propagated to child processes, so if we set the core limit to a certain value on a shell, then all
 processes spawned by it (for example by invoking a command) will inherit the resource limits. Normally, all Wazuh
-processes have launchd as parent process, which will only propagate the default system-wide resource limits.
+processes have launchd as their parent process, which will only propagate the default system-wide resource limits.
 
-First, stop the service::
+Run the following commands as root. First, stop the service::
 
   # /Library/Ossec/bin/wazuh-control stop
 
@@ -58,7 +58,7 @@ Post-mortem crash analysis: an example
 In this section, you will cause a crash intentionally and then use ``lldb`` to view the process state at the moment of
 failure.
 
-First, we edit any of the executables so that it deliberately does an invalid memory access. In this case, we can use
+First, we edit any of the executables so that it deliberately accesses an invalid memory address. In this case, we can use
 ``wazuh-syscheckd``. Edit the ``src/syscheckd/main.c`` file so that at the beginning of the ``main()`` function it
 performs a write to address 123. Like this::
 
@@ -70,22 +70,23 @@ performs a write to address 123. Like this::
     // [...]
   }
 
-Compile it as usual (change directory to ``src/`` first)::
+Run the following commands as root. Compile it as usual (change directory to ``src/`` first)::
 
-  $ make TARGET=agent
+  # make TARGET=agent
 
-Run the executable as root::
+Run the executable::
 
   # ./wazuh-syscheckd
 
 You will see something like::
-    [1]    67868 segmentation fault (core dumped)  ./wazuh-syscheckd
+
+  [1]    67868 segmentation fault (core dumped)  ./wazuh-syscheckd
 
 And then a core dump file will be created. In this case, it's ``/cores/core.67868``.
 
 Now you can fire up the ``lldb`` debugger (making sure the working directory contains the ``wazuh-syscheckd`` executable)::
 
-  $ lldb
+  # lldb
 
 Once the lldb prompt is showing, enter the following command (use the right path for the core dump that was created for
 the ``--core`` path)::
@@ -146,11 +147,9 @@ Debugging symbols are created separately by default. This means binary files (ex
 have no debugging symbols in them and .dSYM bundle folders are created inside the ``src/symbols`` directory.
 
 For example, after compiling, you get ``src/wazuh-syscheckd`` and ``src/symbols/wazuh-syscheckd.dSYM``. The ``lldb``
-debugger should automatically find the matching dSYM bundle, as long as it is findable by macOS's Spotlight.
-
-However, the path to the dSYM bundle can be manually specified by using the ``add-dsym``::
+debugger should automatically find the matching dSYM bundle, as long as it is findable by macOS's Spotlight. However, the path to the dSYM bundle can be manually specified by using the ``add-dsym``::
 
   add-dsym <path to dSYM bundle>
 
-Lastly, a core dump can also be analyzed if we have debugging symbols embedded into the binaries (i.e. when you use the
+Lastly, a core dump can also be analyzed if we have debugging symbols embedded into the binaries (i.e., when you use the
 ``DISABLE_STRIP_SYMBOLS=1`` make flag).
