@@ -14,8 +14,8 @@ The communication between the Wazuh UI and the Wazuh API is encrypted with HTTPS
   It is highly recommended to change the default passwords and to use your own certificate since the one created by the Wazuh API is self-signed.
 
 
-Recommended changes to securize Wazuh API
------------------------------------------
+Recommended changes to secure the Wazuh API
+-------------------------------------------
 
 #. Modify HTTPS parameters:
 
