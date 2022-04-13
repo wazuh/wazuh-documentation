@@ -86,4 +86,5 @@ Below is an example of the results of a configuration assessment evaluation. The
         :title: Security configuration assessment inventory events
         :align: center
           
-More information about security configuration assessment can be found in the :ref:`user manual <manual_sec_config_assessment>`.
+You can find more information about security configuration assessment in the :ref:`user manual <manual_sec_config_assessment>`.
+

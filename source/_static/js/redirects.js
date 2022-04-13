@@ -119,9 +119,8 @@ newUrls['4.3'] = [
   '/quickstart.html',
   '/getting-started/components/wazuh-dashboard.html',
   '/getting-started/components/wazuh-indexer.html',
-  '/getting-started/use-cases/intrusion-detection.html',
-  '/getting-started/use-cases/incident-response.html',
-  '/getting-started/use-cases/security-analytics.html',
+  '/getting-started/use-cases/incident-response.html', 
+  '/getting-started/use_cases/container_security.html',
   '/installation-guide/wazuh-indexer/index.html',
   '/installation-guide/wazuh-indexer/unattended.html',
   '/installation-guide/wazuh-indexer/step-by-step.html',
@@ -244,8 +243,6 @@ removedUrls['4.3'] = [
   '/docker/wazuh-container.html',
   '/getting-started/components/elastic-stack.html',
   '/getting-started/use-cases/active-response.html',
-  '/getting-started/use-cases/rootkits-detection.html',
-  '/getting-started/use-cases/system-inventory.html',
   '/installation-guide/more-installation-alternatives/elastic-stack/all-in-one-deployment/all-in-one.html',
   '/installation-guide/more-installation-alternatives/elastic-stack/all-in-one-deployment/index.html',
   '/installation-guide/more-installation-alternatives/elastic-stack/all-in-one-deployment/unattended-installation.html',
@@ -302,6 +299,11 @@ removedUrls['4.3'] = [
 
 
 redirections.push(
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': '/getting-started/use-cases/containers-security.html',
+    '4.3': '/getting-started/use-cases/container-security.html',
+  },
   {
     'target': ['4.3=>4.2'],
     '4.2': '/release-notes/index.html',
