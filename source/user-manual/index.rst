@@ -27,6 +27,5 @@ Welcome to the Wazuh user manual. Use it as your Wazuh reference library once yo
         reference/index
         elasticsearch/index
         uninstall/index
-        query-configuration/index
         settings/index
         
