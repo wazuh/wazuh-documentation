@@ -194,7 +194,7 @@ This block configures the internal options in the Office365 REST API.
 subscriptions\\subscription
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This section configure the content types from where collect audit logs, following are described some examples of the subscription types able to configure:
+This section configures the content types from which to collect audit logs. These are the subscription types that can be configured:
 
 - Audit.AzureActiveDirectory: User identity management.
 - Audit.Exchange: Mail and calendaring server.
