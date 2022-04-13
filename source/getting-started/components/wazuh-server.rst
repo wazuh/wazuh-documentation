@@ -8,7 +8,7 @@
 Wazuh server
 ============
 
-The Wazuh server component analyzes the data received from the :ref:`agents <wazuh_agent>`,  triggering alerts when threats or anomalies are detected. It is also used to manage the agents configuration remotely and monitor their status.
+The Wazuh server component analyzes the data received from the :ref:`agents <wazuh_agent>`, triggering alerts when threats or anomalies are detected. It is also used to manage the agents configuration remotely and monitor their status.
 
 The Wazuh server uses threat intelligence sources to improve its detection capabilities. It also enriches alert data by using the `MITRE ATT&CK <https://attack.mitre.org//>`_ framework and regulatory compliance requirements such as PCI DSS, GDPR, HIPAA, CIS, and NIST 800-53, providing helpful context for threat detection.
 
