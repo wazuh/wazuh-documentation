@@ -17,7 +17,7 @@ This operation lists the content currently available for retrieval for the speci
 
 .. code-block:: none
 
-    GET https://manage.office.com/api/v1.0/{client_id}/activity/feed/subscriptions/content?contentType={content_type}&startTime={start_time}&endTime={end_time}
+    GET https://manage.office.com/api/v1.0/{tenant_id}/activity/feed/subscriptions/content?contentType={content_type}&startTime={start_time}&endTime={end_time}
 
 **Retrieving content:**
 
@@ -38,7 +38,7 @@ For **Wazuh** to successfully connect to the **Office365 API**, an authenticatio
 
 To authenticate with the Microsoft identity platform endpoint you need to register an app in your `Microsoft Azure portal app registrations <https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationsListBlade>`_  section. Once there click on ``New registration``:
 
-.. thumbnail:: ../images/office365/azure-app-new-registration.png
+.. thumbnail:: ../images/office365/0-azure-app-new-registration.png
     :title: Register your app
     :align: center
     :width: 100%
@@ -50,21 +50,27 @@ Fill in the name of your app, choose the desired account type and click on the `
     :align: center
     :width: 100%
 
-The app is now registered and you can see information about it in its overview section:
+The app is now registered and you can see information about it in its overview section, at this point we can get the ``client`` and ``tenant`` IDs:
 
 .. thumbnail:: ../images/office365/2-azure-wazuh-app-overview.png
     :title: Register your app
     :align: center
     :width: 100%
 
-At this point we can get the ``tenant`` and ``client`` IDs:
-
 2. Certificates & secrets
 
-You can generate a password to use during the authentication process. Go to ``Certificates & secrets`` and click on ``New client secret``:
+You can generate a password to use during the authentication process. Go to ``Certificates & secrets`` and click on ``New client secret``,
+then the name and the expiration date of the ``New client secret`` are requested:
 
 .. thumbnail:: ../images/office365/3-azure-wazuh-app-create-password.png
     :title: Certificates & secrets
+    :align: center
+    :width: 100%
+
+Copy and save the value section.
+
+.. thumbnail:: ../images/office365/3-azure-wazuh-app-create-password-copy-value.png
+    :title: Copy secrets value
     :align: center
     :width: 100%
 
@@ -74,17 +80,25 @@ You can generate a password to use during the authentication process. Go to ``Ce
 
 The application needs specific API permissions to be able to request the Office 365 activity events. In this case, you are looking for permissions related to the ``https://manage.office.com`` resource.
 
-To configure the application permissions go to the ``API permissions`` page, choose ``Add a permission``, then select the Office 365 Management APIs and click on ``Application permissions``:
+To configure the application permissions go to the ``API permissions`` page, choose ``Add a permission``, then select the Office 365 Management APIs and click on ``Application permissions``.
+
+You need to add the following permissions under the ``ActivityFeed`` group:
+
+``ActivityFeed.Read``. Read activity data for your organization.
+``ActivityFeed.ReadDlp``. Read DLP policy events including detected sensitive data.
 
 .. thumbnail:: ../images/office365/4-azure-wazuh-app-configure-permissions.png
     :title: API permissions
     :align: center
     :width: 100%
 
-You need to add the following permissions under the ``ActivityFeed`` group:
+.. note:: Admin consent is required to API permission changes.
 
-``ActivityFeed.Read``. Read activity data for your organization.
-``ActivityFeed.ReadDlp``. Read DLP policy events including detected sensitive data.
+.. thumbnail:: ../images/office365/4-azure-wazuh-app-configure-permissions-admin-consent.png
+    :title: API permissions admin consent
+    :align: center
+    :width: 100%
+
 
 Wazuh configuration
 ^^^^^^^^^^^^^^^^^^^
