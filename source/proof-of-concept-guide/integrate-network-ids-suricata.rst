@@ -16,7 +16,7 @@ Configuration
 
 Configure your environment as follows to test the PoC.
 
-#. Install Suricata (tested with version 5.0.8) on the Ubuntu 20 monitored endpoint. This requires EPEL repository that depends on your operating system version. This process can take over 10 minutes.
+#. Install Suricata (tested with version 5.0.8) on the Ubuntu 20 monitored endpoint. This process can take over 10 minutes.
 
     .. code-block:: XML
 
