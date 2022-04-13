@@ -92,7 +92,7 @@ Additionally, agent groups and centralized configuration can be managed and edit
 Management of Wazuh infrastructure
 ----------------------------------
 
-The Wazuh dashboard provides a directory dedicated to monitoring and administering your infrastructure. You can manage and configure your Wazuh cluster rules, decoders, and CDB lists. 
+The Wazuh dashboard provides a directory dedicated to monitoring and administrating your infrastructure. You can manage and configure your Wazuh cluster rules, decoders, and CDB lists. 
 
 Data analysis visualization gives you full visibility into your cluster infrastructure for fast threat detection and remediation. Users can check the status, logs, and statistics of Wazuh clusters and create their own downloadable reports using predefined templates, or personalize their own if required. Wazuh provides the tools for comprehensive and efficient security analytics.
 
