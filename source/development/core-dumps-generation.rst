@@ -138,3 +138,19 @@ level used when compiling)::
   (int) r = <variable not available>
   (const char *) group = <no location, value may have been optimized out>
   (int *) a = <no location, value may have been optimized out>
+
+Note about debugging symbols
+--------------------------------------
+
+Debugging symbols are created separately by default. This means binary files (executables and .dylib shared libraries)
+have no debugging symbols in them and .dSYM bundle folders are created inside the ``src/symbols`` directory.
+
+For example, after compiling, you get ``src/wazuh-syscheckd`` and ``src/symbols/wazuh-syscheckd.dSYM``. The ``lldb``
+debugger should automatically find the matching dSYM bundle, as long as it is findable by macOS's Spotlight.
+
+However, the path to the dSYM bundle can be manually specified by using the ``add-dsym``::
+
+  add-dsym <path to dSYM bundle>
+
+Lastly, a core dump can also be analyzed if we have debugging symbols embedded into the binaries (i.e. when you use the
+``DISABLE_STRIP_SYMBOLS=1`` make flag).
