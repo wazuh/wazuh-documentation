@@ -32,7 +32,7 @@ Server components
 
 - **Agents registration service:**  It is used to register new agents by provisioning and distributing pre-shared authentication unique keys to each agent. This process runs as a network service and supports authentication via TLS/SSL certificates or by providing a fixed password.
 
-- **Agents connection service:** This service receives data from the agents. It uses the pre-shared keys to validate each agent’s identity and encrypt the communications between the agent and the Wazuh server. Additionally, this service provides centralized configuration management, enabling you to push new agent settings remotely.
+- **Agents connection service:** This service receives data from the agents. It uses the keys shared in advance to validate each agent identity and encrypt the communications between the Wazuh agent and the Wazuh server. Additionally, this service provides centralized configuration management, enabling you to push new agent settings remotely.
 
 - **Analysis engine:** This is the server component that performs the data analysis. It employs decoders to identify the information processing type (Windows events, SSHD logs, web server logs, and others). These decoders also extract relevant data elements from the log messages, such as source IP address, event ID, or username. Then, by using rules, the engine identifies specific patterns in the decoded events that could trigger alerts and possibly even call for automated countermeasures, like banning an IP address on the firewall, for example.
 
