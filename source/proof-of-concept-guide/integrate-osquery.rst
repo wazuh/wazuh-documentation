@@ -1,5 +1,5 @@
 .. meta::
-  :description: Wazuh agent can be integrated with Osquery, making it easy to capture additional information from the endpoint. Learn more about this in this POC.
+  :description: Wazuh agent can be integrated with Osquery, making it easy to capture additional information from the endpoint. Learn more about this in this PoC.
 
 
 .. _poc_integrate_osquery:
@@ -14,15 +14,16 @@ More information about using Osquery with Wazuh can be found in the :ref:`Osquer
 Configuration
 -------------
 
-Configure your environment as follows to test the POC.
+Configure your environment as follows to test the PoC.
 
-#. Install Osquery on the monitored CentOS 8 endpoint.
+#. Install Osquery on the monitored Ubuntu 20 endpoint.
 
     .. code-block:: console
 
-        # yum install -y https://pkg.osquery.io/rpm/osquery-4.5.1-1.linux.x86_64.rpm
+        # wget https://pkg.osquery.io/deb/osquery_4.5.1_1.linux.amd64.deb
+        # apt install ./osquery_4.5.1_1.linux.amd64.deb -y
 
-#. Add this content block to the Osquery configuration file ``/etc/osquery/osquery.conf``.
+#. Add this content block to the Osquery configuration file ``/etc/osquery/osquery.conf``
 
     .. code-block:: JSON
 
@@ -60,8 +61,8 @@ Configure your environment as follows to test the POC.
             }
         }
 
-#. Edit ``/var/ossec/etc/ossec.conf`` on the monitored CentOS 8 endpoint and enable the Osquery wodle. 
-  
+#. Edit ``/var/ossec/etc/ossec.conf`` on the monitored Ubuntu 20 endpoint and enable the Osquery wodle.
+
     .. code-block:: XML
 
         <ossec_config>
@@ -75,17 +76,17 @@ Configure your environment as follows to test the POC.
             </wodle>
         </ossec_config>
 
-#. Start Osqueryd service. 
+#. Start Osqueryd service.
 
     .. code-block:: console
 
         # systemctl start osqueryd
 
 
-#. Restart the Wazuh agent to apply changes.
-  
+#. Restart the Wazuh agent to apply the changes.
+
     .. code-block:: console
-    
+
         # systemctl restart wazuh-agent
 
 Steps to generate the alerts

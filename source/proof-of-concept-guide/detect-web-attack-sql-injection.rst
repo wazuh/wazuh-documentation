@@ -1,5 +1,5 @@
 .. meta::
-  :description: Wazuh is capable of detecting an SQL Injection attack from web server logs showing common SQL patterns of attack in a monitored endpoint. Learn more about this in this POC.
+  :description: Wazuh is capable of detecting an SQL Injection attack from web server logs showing common SQL patterns of attack in a monitored endpoint. Learn more about this in this PoC.
 
 .. _poc_detect_web_attack_sql_injection:
 
@@ -12,30 +12,47 @@ Wazuh is able to detect an `SQL Injection attack <https://portswigger.net/web-se
 Prerequisites
 -------------
 
-- You need an Apache server running on the monitored CentOS 8 system.
+- You need an Apache server running on the monitored Ubuntu 20 system.
 
 Configuration
 -------------
 
-#. Add the following lines to ``/var/ossec/etc/ossec.conf`` at the Wazuh CentOS 8 host. This sets the Linux agent to monitor the access logs of your Apache server.
+#. Add the following lines to ``/var/ossec/etc/ossec.conf`` at the Wazuh Ubuntu 20 host. This sets the Linux agent to monitor the access logs of your Apache server.
 
     .. code-block:: XML
 
-        <localfile>
+      <localfile>
         <log_format>apache</log_format>
-        <location>/var/log/httpd/access_log</location>
-        </localfile>
+        <location>/var/log/apache2/access.log</location>
+      </localfile>
 
-Optionally, you can install Suricata in the CentOS 8 endpoint and configure it to monitor the endpoint's network traffic.
+    Optionally, you can install Suricata in the Ubuntu 20 endpoint and configure it to monitor the endpoint's network traffic.
+  
+
+#. Restart the Wazuh agent to apply the configuration changes.
+
+    .. code-block:: console
+
+        # systemctl restart wazuh-agent
+
+  
+#. Modify the FilesMatch directive at ``/etc/apache2/apache2.conf`` as follow:
+
+    .. code-block:: none
+
+      <FilesMatch ".ht*">
+        Require all denied
+      </FilesMatch>
+
 
 Steps to generate the alerts
 ----------------------------
 
-#. Replace ``<your_web_server_address>`` with the appropriate value and execute the following command from a system external to your CentOS 8 endpoint (the attacker).
+#. Replace ``<your_web_server_address>`` with the appropriate value and execute the following command from a system external to your Ubuntu 20 endpoint (the attacker).
 
     .. code-block:: console
 
-        # curl -XGET "http://replace_by_your_web_server_address/?id=SELECT+*+FROM+users";
+      # curl -XGET "http://replace_by_your_ubuntu_web_server_address/?id=SELECT+*+FROM+users";
 
 Query the alerts
 ----------------

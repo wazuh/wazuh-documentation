@@ -113,4 +113,4 @@ In the *Integrity monitoring* module in the Wazuh dashboard, users can view all 
       :title: Integrity monitoring inventory
 
 
-More information on how Wazuh monitors file integrity can be found in the :ref:`user manual <manual_file_integrity>`.
+You can find more information on how Wazuh monitors file integrity in the :ref:`user manual <manual_file_integrity>`.
