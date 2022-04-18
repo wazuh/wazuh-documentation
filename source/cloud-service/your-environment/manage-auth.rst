@@ -48,7 +48,7 @@ Follow these steps to create an internal user and map it to its appropriate role
    #. Click **Create Role mapping** and complete the empty fields with the following parameters:
    
       - **Role mapping name**: Assign a name to the role mapping.
-      - **Roles**: Select the Wazuh roles you want to use to map the user.
+      - **Roles**: Select the Wazuh roles that you want to map the user with.
       - **Internal users**: Select the internal user created previously.
   
    #. Click **Save role mapping** to save and map the user with Wazuh.
