@@ -33,7 +33,7 @@ Cloud service FAQ
 What is Wazuh Cloud?
 --------------------
 
-Wazuh Cloud hosts and manages all the Wazuh components in one integrated platform. You need to access your environment and deploy the Wazuh agent to your endpoints. Wazuh provides protection with *Security Information and Event Management* (SIEM) and *Endpoint Detection and Response* (EDR).
+Wazuh Cloud hosts and manages all the Wazuh components in one integrated platform, you simply need to access your environment and deploy the Wazuh agent to your endpoints. Wazuh provides protection with *Security Information and Event Management* (SIEM) and *Endpoint Detection and Response* (EDR).
 
 
 Can I try it for free?
