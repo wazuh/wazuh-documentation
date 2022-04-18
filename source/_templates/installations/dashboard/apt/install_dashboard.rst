@@ -2,6 +2,6 @@
 
 .. code-block:: console
 
-  # apt-get install wazuh-dashboard
+  # apt -y install wazuh-dashboard
 
 .. End of include file

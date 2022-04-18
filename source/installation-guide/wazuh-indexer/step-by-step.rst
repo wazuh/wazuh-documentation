@@ -69,7 +69,7 @@ Installing the Wazuh indexer
   .. include:: /_templates/installations/indexer/common/install-indexer.rst
 
 Configuring the Wazuh indexer
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
   .. include:: /_templates/installations/indexer/common/configure_indexer_nodes.rst
 

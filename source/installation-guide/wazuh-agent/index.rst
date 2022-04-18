@@ -25,8 +25,8 @@ The wazuh agent provides :ref:`key features <agents_modules>` to enhance your sy
    * - System inventory 
      - Malware detection
    * - Active response
-     - Containers security monitoring
-   * - Cloud security monitoring
+     - Container security
+   * - Cloud security
      -
 
 To install a Wazuh agent, select your operating system and follow the instructions.
