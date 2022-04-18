@@ -1,22 +1,17 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015–2022 Wazuh, Inc.
 
-.. meta:: :description: Learn how to install the Wazuh dashboard in unattended mode, a flexible and intuitive web interface for mining and visualizing the events and archives. 
+.. meta:: :description: Learn how to install the Wazuh dashboard using the Wazuh installation assistant. The Wazuh dashboard is a flexible and intuitive web interface for mining and visualizing security events and archives. 
 
 
-.. _wazuh_dashboard_unattended_installation:
+Installing the Wazuh dashboard using the assistant
+==================================================
 
-Installing the Wazuh dashboard in unattended mode
-=================================================
-
-Install and configure the Wazuh dashboard, a flexible and intuitive web interface for mining and visualizing the events and archives.
+Install and configure the Wazuh dashboard with the aid of the Wazuh installation assistant. Wazuh dashboard is a flexible and intuitive web interface for mining and visualizing the security events and archives.
 
 Wazuh dashboard installation
 -----------------------------
 
-You can install and configure the Wazuh dashboard using an automated script. 
-
-
-#. Download the script. This step can be skipped if you have already installed Wazuh indexer on the same server.
+#. Download the Wazuh installation assistant. This step can be skipped if you have already installed Wazuh indexer on the same server.
 
     .. code-block:: console
 
@@ -24,7 +19,7 @@ You can install and configure the Wazuh dashboard using an automated script.
 
 
 
-#. Run the script with the option ``-wd`` and the node name to install and configure the Wazuh dashboard. The node name must be the same used in ``config.yml`` for the initial configuration, for example, ``dashboard``.
+#. Run the assistant with the option ``-wd`` and the node name to install and configure the Wazuh dashboard. The node name must be the same used in ``config.yml`` for the initial configuration, for example, ``dashboard``.
    
    .. note:: Make sure that a copy of ``wazuh-install-files.tar``, created during the Wazuh indexer installation, is placed in your working directory.
 

@@ -1,7 +1,5 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
-.. _wazuh_dashboard_installation:
-
 .. meta::
   :description: Wazuh is a free, open source, and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response and compliance.
 
@@ -15,9 +13,9 @@ Users can quickly visualize security events, detect vulnerable applications, fil
 
 Check the requirements below and choose an installation method to start installing the Wazuh dashboard.
 
-- :ref:`Unattended installation <wazuh_dashboard_unattended_installation>`: You install this component by running a script that automates the installation and configuration process. 
+- :doc:`Wazuh installation assistant <unattended>`: Install this component by running an assistant that automates the installation and configuration process. 
 
-- :ref:`Step-by-step installation <wazuh_dashboard_step_by_step>`: Install this component manually following detailed step-by-step instructions.
+- :doc:`Step-by-step installation <step-by-step>`: Install this component following detailed step-by-step instructions.
 
 
 .. thumbnail:: /images/installation/Wazuh-Dashboard-Installation-3.png
@@ -68,5 +66,5 @@ The Wazuh dashboard can be installed on a dedicated node or along with the Wazuh
     :hidden:
     :maxdepth: 1
 
-    Unattended installation <unattended>
+    Wazuh installation assistant <unattended>
     Step-by-step installation <step-by-step>

@@ -4,7 +4,7 @@
 
 
 .. meta::
-  :description: Install and configure Wazuh, the open source security platform, in just a few minutes using the unattended installation script. 
+  :description: Install and configure Wazuh, the open source security platform, in just a few minutes using the Wazuh installation assistant. 
 
 
 Quickstart
@@ -79,7 +79,7 @@ Installing Wazuh
      $ curl -sO https://packages-dev.wazuh.com/|WAZUH_LATEST_MINOR|/wazuh-install.sh && sudo bash ./wazuh-install.sh -a
 
 
-   After executing the installer, the output shows the access credentials and a message that confirms that the installation was successful.
+   After executing the assistant, the output shows the access credentials and a message that confirms that the installation was successful.
 
    .. code-block:: console
      :emphasize-lines: 4          
@@ -101,7 +101,7 @@ Installing Wazuh
    When you access the Wazuh dashboard for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. This is expected and the user has the option to accept the certificate as an exception or, alternatively, configure the system to use a certificate from a trusted authority. 
 
  
-If you want to uninstall the Wazuh central components, run the Wazuh unattended installer using the option ``-u`` or ``--uninstall``.
+If you want to uninstall the Wazuh central components, run the Wazuh installation assistant using the option ``-u`` or ``--uninstall``.
 
 Next steps
 ----------
