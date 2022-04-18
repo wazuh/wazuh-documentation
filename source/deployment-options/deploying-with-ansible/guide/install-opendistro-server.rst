@@ -559,9 +559,10 @@ We can check the status of our new services in our Open Distro for Elasticsearch
 	   Loaded: loaded (/etc/systemd/system/kibana.service; enabled; vendor preset: enabled)
 	   Active: active (running) since Thu 2018-09-13 16:53:32 CEST; 4min 58s ago
 
-Once the Wazuh API is registered we can access it through our Kibana portal.
+Once the Wazuh API is registered we can access it through The Wazuh dashboard.
 
 .. thumbnail:: ../../../images/ansible/wazuh-dashboard-main.png
+    :title: Wazuh dashboard portal
     :align: center
-    :width: 100%
+    :width: 80%
 
