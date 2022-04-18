@@ -786,7 +786,7 @@ Some information about the manager can be retrieved using the Wazuh API. Configu
     }
 
 
-You can even dump the manager's current configuration with the request below (response shortened for brevity):
+You can even dump the manager current configuration with the request below (response shortened for brevity):
 
 .. code-block:: console
 

@@ -17,7 +17,7 @@ Installing Wazuh agent from sources
 
     .. note:: CMake 3.12.4 is the minimal library version required to build the Wazuh agent solution.
 
-    1. Install development tools and compilers. In Linux, this can easily be done using your distribution's package manager:
+    1. Install development tools and compilers. In Linux, this can easily be done using your distribution package manager:
 
      .. tabs::
 

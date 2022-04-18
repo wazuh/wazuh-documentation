@@ -268,7 +268,7 @@ Assign rules to roles
 ---------------------
 To assign **rules** to a certain role, use the :api-ref:`POST /security/roles/{role_id}/rules <operation/api.controllers.security_controller.set_role_rule>` endpoint. The assignment can be done by simply indicating the ID of the **role** and the ID of each rule. It is possible for a role to have multiple rules assigned to it. Also, a given rule can be assigned to multiple roles.
 
-To assign any rule, it is necessary to indicate both the rule's ID and the role's ID. For example, we can add the "wui_opendistro_admin" rule which ID is ``2`` to the "sales-team" role having the *role_id* (``100``). Here is the request:
+To assign any rule, it is necessary to indicate both the rule ID and the role ID. For example, we can add the "wui_opendistro_admin" rule which ID is ``2`` to the "sales-team" role having the *role_id* (``100``). Here is the request:
 
 .. code-block:: console
 

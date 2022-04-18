@@ -8,7 +8,7 @@
 Checking connection with Manager
 ================================
 
-Before you check the agent's connection with the manager, first ensure the agent is pointing to the manager's IP address. This is set in ``ossec.conf`` using the ``<client>`` XML tag. For more on this, see :ref:`Client reference <reference_ossec_client>`.
+Before you check the agent's connection with the manager, first ensure the agent is pointing to the manager IP address. This is set in ``ossec.conf`` using the ``<client>`` XML tag. For more on this, see :ref:`Client reference <reference_ossec_client>`.
 
 .. code-block:: xml
 
@@ -47,6 +47,6 @@ You can also check to see if an agent is connected correctly by verifying if the
 
   # netstat -vatunp|grep wazuh-agentd
 
-The result should match the agent and manager's IP addresses.
+The result should match the agent and manager IP addresses.
 
 In the :doc:`agent_control section <../reference/tools/agent-control>`, you can find information about the status of the agents that are registered with the manager.

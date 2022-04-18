@@ -48,7 +48,7 @@ The file ``ar.conf`` (active response status) will always be sent to agents even
 
 The agent will store the shared files in ``/var/ossec/etc/shared``, not in a group folder.
 
-Below are the files that would be found in this folder on an agent assigned to the **debian** group.  Notice that these files are pushed to the agent from the manager's ``/var/ossec/etc/shared/debian`` folder.
+Below are the files that would be found in this folder on an agent assigned to the **debian** group.  Notice that these files are pushed to the agent from the manager ``/var/ossec/etc/shared/debian`` folder.
 
 +-----------------------------------------------------+-----------------------------------------------------+
 | **Manager**                                         | **Agent (Group: 'debian')**                         |

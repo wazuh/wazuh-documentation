@@ -125,7 +125,7 @@ Manager configuration
 Linux/Unix endpoint
 ^^^^^^^^^^^^^^^^^^^
 
-The following steps serve as a guide on how to enroll a Linux/Unix endpoint by using certificates to verify the manager's identity:
+The following steps serve as a guide on how to enroll a Linux/Unix endpoint by using certificates to verify the manager identity:
 
 #. Ensure that the root certificate authority ``rootCA.pem`` file has been copied to the endpoint.
 #. As a root user, modify the Wazuh agent configuration file located at ``/var/ossec/etc/ossec.conf`` and include the following:
@@ -187,7 +187,7 @@ The following steps serve as a guide on how to enroll a Linux/Unix endpoint by u
 Windows endpoint
 ^^^^^^^^^^^^^^^^
 
-The following steps serve as a guide on how to enroll a Windows endpoint by using certificates to verify the manager's identity:
+The following steps serve as a guide on how to enroll a Windows endpoint by using certificates to verify the manager identity:
 
 The Wazuh agent installation directory depends on the architecture of the host.
 
@@ -246,7 +246,7 @@ The Wazuh agent installation directory depends on the architecture of the host.
 macOS endpoint
 ^^^^^^^^^^^^^^
 
-The following steps serve as a guide on how to enroll a macOS endpoint by using certificates to verify the manager's identity:
+The following steps serve as a guide on how to enroll a macOS endpoint by using certificates to verify the manager identity:
 
 #. Ensure that the root certificate authority ``rootCA.pem`` file has been copied to the endpoint.
 

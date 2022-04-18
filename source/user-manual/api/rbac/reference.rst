@@ -739,7 +739,7 @@ Grant read access to all agents related functionalities.
 
 ciscat_read
 ^^^^^^^^^^^^^^^
-Allow reading agent’s ciscat results information.
+Allow reading the agent ciscat results information.
 
 .. code-block:: yaml
 
@@ -954,7 +954,7 @@ Allow reading all rule files in the system.
 
 sca_read
 ^^^^^^^^^^^^^^^
-Allow reading agent’s sca information.
+Allow reading the agent sca information.
 
 .. code-block:: yaml
 

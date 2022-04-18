@@ -26,7 +26,7 @@ Requirements
 Linux WPK
 ^^^^^^^^^
 
-Install the development tools and compilers. In Linux, this can easily be done using your distribution's package manager:
+Install the development tools and compilers. In Linux, this can easily be done using your distribution package manager:
 
 a) For RPM-based distributions:
 
@@ -100,7 +100,7 @@ Definitions:
 Windows WPK
 ^^^^^^^^^^^
 
-Install the development tools and compilers. In Linux, this can easily be done using your distribution's package manager:
+Install the development tools and compilers. In Linux, this can easily be done using your distribution package manager:
 
 For RPM-based distributions:
 
@@ -151,7 +151,7 @@ Definitions:
 macOS WPK
 ^^^^^^^^^
 
-Install development tools and compilers. In Linux, this can easily be done using your distribution's package manager:
+Install development tools and compilers. In Linux, this can easily be done using your distribution package manager:
 
 For RPM-based distributions:
 

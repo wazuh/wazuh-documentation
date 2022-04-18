@@ -21,7 +21,7 @@ To collect logs you can configure your device to forward logs using syslog and c
 If I add an agentless device will it show as an agent?
 ------------------------------------------------------
 
-Agentless devices do not appear as individual agents themselves, their logs are registered with the manager's agent name and ``ID 000``.  Agentless devices don't affect the total agent count. 
+Agentless devices do not appear as individual agents themselves, their logs are registered with the manager agent name and ``ID 000``.  Agentless devices don't affect the total agent count. 
 
 You may filter agentless logs by searching for ``location:agentless`` and each specific host can be identified by the ``agentless.host`` field.
 

@@ -41,7 +41,7 @@ Agent side
 disabled
 ^^^^^^^^
 
-Toggles the active-response capability on and off. Setting this option to ``yes`` on an agent will disable active-response for that agent only while setting it in the manager's ``ossec.conf`` file will disable active-response on the manager and all agents.
+Toggles the active-response capability on and off. Setting this option to ``yes`` on an agent will disable active-response for that agent only while setting it in the manager ``ossec.conf`` file will disable active-response on the manager and all agents.
 
 .. note::
 
