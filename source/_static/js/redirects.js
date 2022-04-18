@@ -74,6 +74,12 @@ removedUrls['x.y'] = [
 /* Pages added in 4.3 */
 
 newUrls['4.3'] = [
+  '/migration-guide/index.html',
+  '/migration-guide/wazuh-indexer.html',
+  '/migration-guide/wazuh-dashboard.html',
+  '/migration-guide/migrating-from-ossec/index.html',
+  '/migration-guide/migrating-from-ossec/ossec-server.html',
+  '/migration-guide/migrating-from-ossec/ossec-agent.html',
   '/release-notes/index-2x.html',
   '/release-notes/index-3x.html',
   '/release-notes/index-4x.html',
@@ -295,12 +301,29 @@ removedUrls['4.3'] = [
   '/installation-guide/wazuh-agent/deployment-variables/deployment-variables-windows.html',
   '/user-manual/overview.html',
   '/virtual-machine/virtual-machine.html',
+  '/migrating-from-ossec/index.html',
+  '/migrating-from-ossec/ossec-server.html',
+  '/migrating-from-ossec/ossec-agent.html',
 ];
 
 
 redirections.push(
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': '/migrating-from-ossec/index.html',
+    '4.3': '/migration-guide/migrating-from-ossec/index.html',
+  },
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': '/migrating-from-ossec/ossec-server.html',
+    '4.3': '/migration-guide/migrating-from-ossec/ossec-server.html',
+  },
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': '/migrating-from-ossec/ossec-agent.html',
+    '4.3': '/migration-guide/migrating-from-ossec/ossec-agent.html',
+  },
+  {
     '4.2': '/getting-started/use-cases/containers-security.html',
     '4.3': '/getting-started/use-cases/container-security.html',
   },
