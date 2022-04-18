@@ -1,0 +1,199 @@
+/* -----------------------------------------------------------------------------
+  Pre wazuh_doc_theme_v3
+
+  This style adjustments will be applied only to release that were launched 
+  before the implementation of the Sphinx theme wazuh_doc_theme_v3. These style 
+  rules are meant to fix possible style errors after appliying this new theme 
+  without having to modify all RST files in previous release branches.
+
+----------------------------------------------------------------------------- */
+
+.pre-v3 {
+  #central-column {
+    dl dd {
+      padding-left: 0;
+    }
+    blockquote {
+      padding-left: 1.7rem;
+      blockquote {
+        margin-bottom: 0;
+        padding-left: 0;
+      }
+      ul,
+      dl {
+        padding-left: 0;
+      }
+    }
+    ol blockquote {
+      padding-left: 0;
+    }
+    ol ol, ol ul, ul ol, ul ul {
+      padding-left: 1.1rem;
+    }
+    ol + blockquote {
+      padding-left: 2.5rem;
+    }
+    ol ol {
+      list-style-type: lower-alpha;
+    }
+    .admonition {
+      &.attention,
+      &.caution,
+      &.danger,
+      &.error,
+      &.hint,
+      &.important,
+      &.note,
+      &.tip,
+      &.warning {
+        &:not(.long) {
+          padding-top: 0;
+          padding-bottom: 0;
+          p {
+            display: block;
+          }
+          .admonition-title {
+            padding-left: 38px;
+            &::after {
+              position: absolute;
+              top: 18px;
+              left: 0;
+              display: inline-block;
+              width: 1.5rem;
+              height: 1.5rem;
+              vertical-align: middle;
+              content: "";
+            }
+          }
+        }
+        & > blockquote {
+          margin: 0;
+          padding-left: 0;
+        }
+      }
+    }
+    .deployment-types {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-gap: 3rem;
+      margin: 2rem auto;
+      
+      @include media-min(sm){
+        width: 80%;
+        grid-template-columns: 35% 65%;
+      }
+      
+      #distributed .detailed {
+        @include media-min(sm){
+          height: 27rem !important;
+        }
+      }
+      
+      .item-deployment {
+        border: 1px solid $light-color-primary;
+        border-radius: $rounded-corners;
+        padding: 1rem;
+        position: relative;
+        
+        h3 {
+          text-align: center;
+          width: 100%;
+          padding: 0.5rem;
+        }
+        
+        .detailed {
+          position: absolute;
+          z-index: 99;
+          width: 100% !important;
+          opacity: 0;  
+          border: none;
+          max-width: 100%;
+          top: 4em;
+          left: 0;
+        }
+      }
+    }
+    .agent-os {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      margin: 2rem auto;
+      grid-gap: 1rem;
+      @include media-min(lg) {
+        grid-template-columns: repeat(6, 1fr);
+      }
+      .item-agent {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        a {
+          border: 2px solid $light-color-border-deeper;
+          background-color: #fff;
+          border-radius: $rounded-corners;
+          overflow: hidden;
+          padding: 0;
+          position: relative;
+          min-width: 70px;
+          max-width: 150px;
+          height: 100%;
+          width: 100%;
+          p {
+            color: #fff;
+            font-weight: bold;
+            text-align: center;
+            margin: 0;
+            position: absolute;
+            width: 100%;
+            opacity: 0;
+          }
+          img {
+            margin: 0 auto;
+            max-width: 100%;
+            border: none;
+            padding: 0;
+          }
+          &:hover {
+            border-color: $light-color-primary;
+            background-color: $light-color-primary;
+            p {
+              opacity: 1;
+            }
+            img {
+              opacity: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+  [role=main] img,
+  #wazuh-light-box .wlb-image-wrapper img {
+    background: white;
+    padding: 1rem;
+  }
+  .wazuh-image-wrapper {
+    max-width: 860px;
+  }
+  .wazuh-image {
+    width: auto!important;
+  }
+
+  &.dark-theme {
+    #central-column {
+      .deployment-types {
+        .item-deployment {
+          border: 1px solid $dark-color-primary;
+        }
+      }
+      .agent-os {
+        .item-agent a {
+          border: 2px solid $dark-color-border-deeper;
+          &:hover {
+            border-color: $dark-color-primary;
+            background-color: $dark-color-primary;
+          }
+        }
+      }
+    }
+  }
+}

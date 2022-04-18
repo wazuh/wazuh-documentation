@@ -132,6 +132,16 @@ html_theme_options = {
     'collapse_navigation': False, # Only for Wazuh documentation theme v2.0v
 }
 
+if html_theme == 'wazuh_doc_theme_v3':
+    # Check if the release was before the new the theme
+    # Note v3_release represents the release that was 'current' when the theme
+    # wazuh_doc_theme_v3 was published in production, that is, 4.3
+    v3_release = [4,3]
+    current_release = list(map(int, version.split('.')))
+    is_pre_v3 = current_release[0] < v3_release[0] or (
+                current_release[0] == v3_release[0] and
+                current_release[1] < v3_release[1])
+    html_theme_options['is_pre_v3'] = is_pre_v3
 
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = ['_themes']
@@ -526,8 +536,8 @@ custom_replacements = {
 }
 
 # -- Customizations ---------------------------------------------------------
-# 
-# ## emptyTocNodes ##
+
+## emptyTocNodes ##
 emptyTocNodes = json.dumps([
     'amazon/configuration/index',
     'compliance',
