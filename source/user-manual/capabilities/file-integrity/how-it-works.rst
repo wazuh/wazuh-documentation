@@ -59,15 +59,6 @@ File integrity monitoring results for the whole environment can be observed in t
   :align: center
   :width: 100%
 
-.. thumbnail:: ../../../images/manual/fim/fim-kibana-overview-2.png
-  :title: Wazuh dashboard: Fim overview2
-  :align: center
-  :width: 100%
-
-.. thumbnail:: ../../../images/manual/fim/fim-kibana-overview-3.png
-  :title: Wazuh dashboard: Fim overview3
-  :align: center
-  :width: 100%
 
 Due to the changes made on the newest FIM, only the Wazuh agents which are in version starting from 3.12 will use new functionality. All the Wazuh agents below that version will keep reporting syscheck scan results as in the older versions. If the Wazuh agent is upgraded to the v3.12 and keeps its old configuration, will still use the new FIM module and the default synchronization settings.
 
