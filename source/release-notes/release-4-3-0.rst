@@ -410,6 +410,7 @@ Reference                                                         Description
 `#12644 <https://github.com/wazuh/wazuh/pull/12644>`_             A memory leak in Vulnerability Detector is fixed when discarding kernel packages.
 `#12655 <https://github.com/wazuh/wazuh/pull/12655>`_             A memory leak at wazuh-logtest-legacy  is fixed when matching a level-0 rule.
 `#12489 <https://github.com/wazuh/wazuh/pull/12489>`_             Now the cluster is disabled by default when the "disabled" tag is not included.
+`#13067 <https://github.com/wazuh/wazuh/pull/13067>`_             A bug in the Vulnerability Detector CPE helper that may lead to produce false positives about Firefox ESR is fixed.
 ==============================================================    =============
 
 
@@ -456,6 +457,7 @@ Reference                                                         Description
 `#12324 <https://github.com/wazuh/wazuh/pull/12324>`_             The way the AWS Config integration parses the dates used to search in the database for previous records was fixed.
 `#12676 <https://github.com/wazuh/wazuh/pull/12676>`_             Now, Logcollector audit format parse logs with a custom name_format. 
 `#12704 <https://github.com/wazuh/wazuh/pull/12704>`_             An issue with the Agent bootstrap is fixed, it might lead to a startup timeout when it cannot resolve a manager hostname.
+`#13088 <https://github.com/wazuh/wazuh/pull/13088>`_             A bug in the agent's leaky bucket throughput regulator that could leave it stuck if the time is advanced on Windows is fixed.
 ==============================================================    =============
 
 
