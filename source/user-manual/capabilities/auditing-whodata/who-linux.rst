@@ -12,7 +12,7 @@ How it works
 ^^^^^^^^^^^^
 
 The who-data monitoring functionality uses the Linux Audit subsystem to get the information about who made the changes in a monitored directory.
-These changes produce audit events processed by *syscheck* and reported to the manager.
+These changes produce audit events that are processed by *syscheck* and reported to the manager.
 
 Configuration
 ^^^^^^^^^^^^^
