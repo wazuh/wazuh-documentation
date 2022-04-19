@@ -145,7 +145,7 @@ Follow these steps to upgrade Elastic Stack to version 5.x:
 
 #. Remove deprecated settings from the Elasticsearch configuration files:
 
-    Removing deprecated settings on Elasticsearch will avoid errors and conflicts after the upgrade. To do this, add the following lines in the ``/etc/elasticsearch/elasticsearch.yml`` configuration file:
+    Removing deprecated settings on Elasticsearch will avoid errors and conflicts after the upgrade. To do this, comment the following lines in the ``/etc/elasticsearch/elasticsearch.yml`` configuration file:
 
       .. code-block:: yaml
 
