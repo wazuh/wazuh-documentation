@@ -52,4 +52,4 @@ Every folder must contain a file named ``versions`` that lists each version repr
     v3.0.0 df5397c8c4a1b29c42726dfa821330fa1bac7058
 
 
-This repository structure is necessary for the manager to check the agent OS, version and architecture and look for the correct upgrade package. For example, for an agent installed on Centos 7 x86_64, the manager will look for the latest package in *our_wpk_repo/centos/7/x86_64/*.
+This repository structure is necessary for the manager to check the agent OS, version, and architecture and look for the correct upgrade package. For example, for an agent installed on Centos 7 x86_64, the manager will look for the latest package in *our_wpk_repo/centos/7/x86_64/*.

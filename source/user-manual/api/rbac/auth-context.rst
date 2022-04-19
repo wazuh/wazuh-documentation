@@ -41,9 +41,9 @@ In order to use this authentication method, a user allowed to use authorization 
 Rules and roles
 ---------------
 
-A role is a set of policies, therefore, the user's final permissions are the set of all policies associated with all user roles. Roles, besides the relationship with policies, also have a relationship with rules. This last relationship will only apply to users who have the authentication enabled through the authorization contexts.
+A role is a set of policies. Therefore, the user's final permissions are the set of all policies associated with all user roles. Roles, besides the relationship with policies, also have a relationship with rules. This last relationship will only apply to users who have the authentication enabled through the authorization contexts.
 
-A rule is an element that will be checked against the authorization context provided by the user, based on this check the user is granted with the appropriate permissions. Therefore, the internal structure of the relationships is like this:
+A rule is an element that will be checked against the authorization context provided by the user. Based on this check, the user is granted the appropriate permissions. Therefore, the internal structure of the relationships is like this:
 
 .. thumbnail:: ../../../images/rbac/auth-context-rule.png
     :title: Rules and roles
@@ -53,7 +53,7 @@ A rule is an element that will be checked against the authorization context prov
 Rule structure
 --------------
 
-A rule is a set of logical and search operations that will be applied to the incoming authorization context. This way, when the Wazuh API attends an authentication request through an authorization context, all the rules will be checked against the authorization context and the user will be given the roles associated to the rules whose result is affirmative.
+A rule is a set of logical and search operations that will be applied to the incoming authorization context. This way, when the Wazuh API attends an authentication request through an authorization context, all the rules will be checked against the authorization context, and the user will be given the roles associated with the rules whose result is affirmative.
 
 To explain each of the operations of the rules, let's use this authorization context as an example. It will be matched to each of the examples:
 
@@ -72,7 +72,7 @@ Search operations
 
 The search operations in the rules are used to search in the authorization context for a specific object or string.
 
-- **MATCH**: This operation will search in the authorization context the structure indicated inside MATCH. An **exact match** is not necessary. I.e, in the following case it will try to search for  ``auth`` key and within it, an ``office`` key whose value must contain the number ``20``:
+- **MATCH**: This operation will search in the authorization context the structure indicated inside MATCH. An **exact match** is not necessary. I.e, in the following case it will try to search for  ``auth`` key and, within it, an ``office`` key whose value must contain the number ``20``:
 
 .. code-block:: json
 
@@ -96,7 +96,7 @@ The search operations in the rules are used to search in the authorization conte
             }
         }
 
-- **FIND**: This operation is a recursive MATCH at all levels of the authorization context. In the MATCH case, the structure is searched at the root of the authorization context. In the FIND case, the structure will be searched at all depth levels. In the following example it is unneeded to specify the key ``auth`` because the FIND operation will search the key ``office`` inside all the authorization context:
+- **FIND**: This operation is a recursive MATCH at all levels of the authorization context. In the MATCH case, the structure is searched at the root of the authorization context. In the FIND case, the structure will be searched at all depth levels. In the following example it is unneeded to specify the key ``auth`` because the FIND operation will search the key ``office`` inside all the authorization contexts:
 
 .. code-block:: json
 

@@ -179,7 +179,7 @@ Set the logging level for the Wazuh Kibana plugin log files.
 hideManagerAlerts
 ^^^^^^^^^^^^^^^^^
 
-Hide the manager's alerts in the dashboard visualizations.
+Hide the manager alerts in the dashboard visualizations.
 
 +--------------------+------------+
 | **Default value**  | false      |

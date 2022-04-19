@@ -41,11 +41,11 @@ Agent side
 disabled
 ^^^^^^^^
 
-Toggles the active-response capability on and off. Setting this option to ``yes`` on an agent will disable active-response for that agent only, while setting it in the manager's ``ossec.conf`` file will disable active-response on the manager and all agents.
+Toggles the active-response capability on and off. Setting this option to ``yes`` on an agent will disable active-response for that agent only while setting it in the manager ``ossec.conf`` file will disable active-response on the manager and all agents.
 
 .. note::
 
-    This option is available on server, local, and agent installations.
+    This option is available on the server, local, and agent installations.
 
 +--------------------+------------+
 | **Default value**  | no         |
@@ -169,7 +169,7 @@ Sets timeouts in minutes for repeat offenders. This is a comma-separated list of
 +--------------------+-----------------------------+
 
 .. warning::
-    This option must be configured directly in the **ossec.conf** file of the agent (currently not supported by agents running on Windows), even when using a manager/agent setup with centralized configuration of other settings via **agent.conf**. Apart from that, it has to be defined in the upper ``<active-response>`` section found in the configuration file.
+    This option must be configured directly in the **ossec.conf** file of the agent (currently not supported by agents running on Windows), even when using a manager/agent setup with a centralized configuration of other settings via **agent.conf**. Apart from that, it has to be defined in the upper ``<active-response>`` section found in the configuration file.
 
 Sample Configuration
 --------------------

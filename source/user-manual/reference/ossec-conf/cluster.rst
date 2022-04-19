@@ -81,7 +81,7 @@ key
 Defines the key used to encrypt the communication between the nodes. This key must be 32 characters long. Refer to the :ref:`configuring-cluster` for information on how to generate a key.
 
 .. note::
-	This key must be the same for all of the nodes of the cluster.
+	This key must be the same for all of the cluster nodes.
 
 +--------------------+---------------------------------------------+
 | **Default value**  | n/a                                         |

@@ -8,9 +8,9 @@
 Upgrade guide
 =============
 
-This guide describes the upgrade process of the Wazuh server, Open Distro for Elasticsearch, Elastic Stack, and the Wazuh agents. The upgrading from a legacy version section is for those users who need to upgrade the Wazuh installation from a version prior to 3.0.
+This guide describes the upgrade process of the Wazuh server, Open Distro for Elasticsearch, Elastic Stack, and the Wazuh agents. The upgrading from a legacy version section is for those users who need to upgrade the Wazuh installation from a version before 3.0.
 
-In case of having any doubt about operating system compatibility, as well as the compatibility between the different Wazuh components, please check the compatibility matrix section. 
+If you have any doubt about operating system compatibility and the compatibility between the different Wazuh components, please check the compatibility matrix section.
 
 
     .. toctree::

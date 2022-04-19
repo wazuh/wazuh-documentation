@@ -302,7 +302,7 @@ Anomaly detection refers to the action of finding patterns in the system that do
 
 We may be aware of application or system errors, misconfigurations, attempted and/or successful malicious activity, policy violations and a variety of other operational and security issues through Wazuh rules. Using Automated logs analysis Wazuh agents read operating system and application logs, and securely forward them to a central manager for rule-based analysis and storage.
 
-It is worth highlighting the ability to detect vulnerabilities. Now agents are able to natively collect a list of installed applications, sending it periodically to the manager (where it is stored in local sqlite databases, one per agent). In addition, the manager builds a global vulnerabilities database, using public OVAL CVE repositories, using it later to cross correlate this information with agent’s applications inventory data.
+It is worth highlighting the ability to detect vulnerabilities. Now agents are able to natively collect a list of installed applications, sending it periodically to the manager (where it is stored in local sqlite databases, one per agent). In addition, the manager builds a global vulnerabilities database, using public OVAL CVE repositories, using it later to cross correlate this information with the agent applications inventory data.
 
 Here is an example of Wazuh rules tagged gdpr_IV_32.2:
 

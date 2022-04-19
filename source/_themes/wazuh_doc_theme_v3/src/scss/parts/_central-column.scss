@@ -17,6 +17,11 @@
     margin-top: -1rem;
     content: "";
   }
+
+  > dl {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
 }
 
 #central-column * {
@@ -66,6 +71,11 @@
     p {
       margin-top: 0;
     }
+  }
+  
+  ol,
+  ul {
+    padding-left: 35px;
   }
 
   .arabic {

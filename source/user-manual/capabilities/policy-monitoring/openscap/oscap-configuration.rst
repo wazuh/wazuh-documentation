@@ -40,7 +40,7 @@ Evaluate PCI-DSS compliance on RHEL7
 ------------------------------------
 This section describes how to evaluate the Payment Card Industry Data Security Standard (PCI-DSS) compliance on Red Hat Enterprise Linux 7 agents.
 
-**Step 1: Configure agents**
+**Step 1: Configure the agents**
 
 Each agent must be properly identified in order to know which policy and profile to execute. To do this, configure ``<config-profile>`` with the desired identifier.
 
@@ -87,7 +87,7 @@ When the agents receive this configuration, they will restart to apply the chang
 
 **Step 3: See alerts**
 
-When the evaluation is complete you will see the results as OSSEC alerts:
+When the evaluation is complete, you will see the results as OSSEC alerts:
 
 ``/var/ossec/logs/alerts/alerts.log``
 
@@ -128,9 +128,9 @@ Finally, you can explore all results using the OpenSCAP module.
 
 Auditing Security Vulnerabilities of Red Hat Products
 -----------------------------------------------------
-The Red Hat Security Response Team provides OVAL definitions for all vulnerabilities (identified by CVE name) that affect Red Hat Enterprise Linux 3, 4, 5, 6 and 7. This enables users to perform a vulnerability scan and diagnose whether a system is vulnerable or not.
+The Red Hat Security Response Team provides OVAL definitions for all vulnerabilities (identified by CVE name) that affect Red Hat Enterprise Linux 3, 4, 5, 6, and 7. This enables users to perform a vulnerability scan and diagnose whether a system is vulnerable or not.
 
-**Step 1: Configure agents**
+**Step 1: Configure the agents**
 
 Each agent must be properly identified in order to know which policy and profile to execute. To do this, configure ``<config-profile>`` with the desired identifier.
 
@@ -155,9 +155,9 @@ After this, restart the agents to apply the configuration.
 
 If you prefer, you can restart a specific agent with option ``-u <id>``.
 
-**Step 2: Configure manager**
+**Step 2: Configure the manager**
 
-We want to execute the RedHat security policy only on Red Hat 7 agents.
+We only want to execute the RedHat security policy on Red Hat 7 agents.
 
 To do this, modify the ``/var/ossec/etc/shared/default/agent.conf`` file in the manager (assuming that the agent is on the ``default`` group):
 
@@ -175,7 +175,7 @@ When the agents receive this configuration, they will restart to apply the chang
 
 **Step 3: See alerts**
 
-When the evaluation is completed you will see the results as OSSEC alerts:
+When the evaluation is completed, you will see the results as OSSEC alerts:
 
 ``/var/ossec/logs/alerts/alerts.log``
 

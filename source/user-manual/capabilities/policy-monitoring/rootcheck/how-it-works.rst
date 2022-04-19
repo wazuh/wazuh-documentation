@@ -6,7 +6,7 @@
 How it works
 ============
 
-*Rootcheck* allows to define policies in order to check if the agents meet the requirement specified.
+*Rootcheck* allows defining policies to check if the agents meet the specified requirement.
 
 .. thumbnail:: ../../../../images/manual/policy-compliance/rootcheck-compliance.png
   :title: Rootcheck policies
@@ -15,11 +15,11 @@ How it works
 
 The *rootcheck* engine can perform the following checks:
 
-- check if a process is running
-- check if a file is present
-- check if the content of a file contains a pattern, or if a Windows registry key contains a string or is simply present.
+- Check if a process is running
+- Check if a file is present
+- Check if the content of a file contains a pattern or if a Windows registry key contains a string or is simply present.
 
-Using these checks, the following policies have been developed:
+The policies below have been developed using the checks above:
 
 +--------------------------+--------------------------------------------------------------------+
 | Policy                   | Description                                                        |

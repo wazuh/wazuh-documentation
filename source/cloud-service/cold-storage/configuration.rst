@@ -20,4 +20,4 @@ There is no limit on the amount of data stored in the cold storage, but the time
 
 .. note::
 
-  Files with ``.log`` extension are never sent to cold storage.
+  Files with a ``.log`` extension are never sent to cold storage.

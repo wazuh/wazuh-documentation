@@ -9,7 +9,7 @@ wazuh-remoted.state
 
 The statistical file for **wazuh-remoted** is located at ``/var/ossec/var/run/wazuh-remoted.state``.
 
-This file provides information about the remote daemon as the queue size, discarded messages, number of remote connections and other useful information.
+This file provides information about the remote daemon as the queue size, discarded messages, number of remote connections, and other useful information.
 
 By default, this file is updated every 5 seconds. This interval can be changed by modifying the ``remoted.state_interval`` value from the :ref:`internal configuration <reference_internal_options>` file.
 

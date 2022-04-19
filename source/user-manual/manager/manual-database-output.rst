@@ -63,12 +63,12 @@ Execute the following command before **step 3** from the installation guide:
 
 To indicate what kind of database users will use, users need the ``DATABASE`` flag. The allowed values are *mysql* or *pgsql*.
 
-The compilation process might take some time. After finishing this process, please continue with the sources installation guide. Now Wazuh will be installed with database support, but we must enable manually the feature after configuring it.
+The compilation process might take some time. After finishing this process, please continue with the sources' installation guide. Now Wazuh will be installed with database support, but we must enable manually the feature after configuring it.
 
 Database configuration
 ----------------------
 
-Now that we have Wazuh installed with database support, we need to set up the database server. We'll create a new database, set up the database user and add the schema (located in the ``src/os_dbd`` directory of the source code) with the following commands, according to your database system:
+Now that we have Wazuh installed with database support, we need to set up the database server. We'll create a new database, set up the database user, and add the schema (located in the ``src/os_dbd`` directory of the source code) with the following commands, according to your database system:
 
 **For MySQL:**
 
