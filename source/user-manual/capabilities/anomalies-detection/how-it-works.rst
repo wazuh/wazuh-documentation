@@ -57,7 +57,7 @@ Malware can use hidden ports to communicate with the attacker. **Rootcheck** che
 Check unusual files and permissions
 -----------------------------------
 
-Wazuh scans the entire file system looking for unusual files and permissions. Files owned by root with write permissions for other user accounts like *suid* files, hidden directories, and files are all inspected.
+Wazuh scans the entire file system looking for unusual files and permissions. Files owned by root with write permissions for other user accounts like *suid* files, hidden directories and files, are all inspected.
 
 Check hidden files using system calls
 -------------------------------------
