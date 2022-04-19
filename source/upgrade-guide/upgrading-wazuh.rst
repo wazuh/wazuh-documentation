@@ -123,10 +123,13 @@ To upgrade the Wazuh manager, choose your package manager and follow the instruc
 Next steps
 ----------
 
-The Wazuh manager is now successfully upgraded. To check if your version of Elastic Stack is compatible with the new Wazuh version, check our :ref:`compatibility matrix <wazuh_kibana_compatibility_matrix>`. 
+The Wazuh manager is now successfully upgraded. 
+
+- To migrate from Open Distro for Elasticsearch 1.13 to the Wazuh indexer, see the :doc:`/migration-guide/wazuh-indexer` section.
 
 - To upgrade Elastic Stack, follow the instructions in the :ref:`Upgrading Elasticsearch, Kibana and Filebeat<upgrade_elasticsearch_filebeat_kibana>` section.
-- If you are going to keep the same version of Elastic Stack, unfold the next section and follow the instructions to replace the Wazuh Kibana plugin.  
+
+- If you are going to keep the same version of Elastic Stack, unfold the next section and follow the instructions to replace the Wazuh Kibana plugin.  To check if your version of Elastic Stack is compatible with the new Wazuh version, check our :ref:`compatibility matrix <wazuh_kibana_compatibility_matrix>`. 
     
 Upgrade the Wazuh Kibana plugin
 -------------------------------
