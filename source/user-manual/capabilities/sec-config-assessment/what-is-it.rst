@@ -37,8 +37,8 @@ already have their CIS and PCI-DSS controls mapped. See an :ref:`example<check_o
     - id: 3064
       title: "Ensure IPv6 default deny firewall policy"
       description: "A default deny all policy on connections ensures that any unconfigured network usage will be rejected."
-      rationale: "With a default accept policy, the firewall will accept any packet that is not configured to be denied. It is easier to white list acceptable usage than to black list unacceptable usage."
-      remediation: "Run the following commands to implement a default DROP policy: # ip6tables -P INPUT DROP # ip6tables -P OUTPUT DROP # ip6tables -P FORWARD DROP. Notes: Changing firewall settings while connected over the network can result in being locked out of the system. Remediation will only affect the active system firewall, be sure to configure the default policy in your firewall management to apply on boot as well."
+      rationale: "With a default accept policy the firewall will accept any packet that is not configured to be denied. It is easier to white list acceptable usage than to black list unacceptable usage."
+      remediation: "Run the following commands to implement a default DROP policy: # ip6tables -P INPUT DROP # ip6tables -P OUTPUT DROP # ip6tables -P FORWARD DROP. Notes: Changing firewall settings while connected over network can result in being locked out of the system. Remediation will only affect the active system firewall, be sure to configure the default policy in your firewall management to apply on boot as well."
       compliance:
         - cis: ["3.5.2.1"]
         - cis_csc: ["9.4"]
@@ -63,7 +63,7 @@ potential event flooding.
     ** Alert 1568287462.156390: mail  - sca,gdpr_IV_35.7.d
     2019 Sep 12 13:24:22 (debian9-56) 10.0.0.56->sca
     Rule: 19007 (level 7) -> 'CIS benchmark for Debian/Linux 9 L1: Ensure IPv6 default deny firewall policy'
-    {"type":"check","id":1802673953,"policy":"CIS benchmark for Debian/Linux 9 L1","policy_id":"cis_debian9_L1","check":{"id":3064,"title":"Ensure IPv6 default deny firewall policy","description":"A default deny all policy on connections ensures that any unconfigured network usage will be rejected.","rationale":"With a default accept policy the firewall will accept any packet that is not configured to be denied. It is easier to white list acceptable usage than to black list unacceptable usage.","remediation":"Run the following commands to implement a default DROP policy: # ip6tables -P INPUT DROP # ip6tables -P OUTPUT DROP # ip6tables -P FORWARD DROP. Notes: Changing firewall settings while connected over the network can result in being locked out of the system. Remediation will only affect the active system firewall, be sure to configure the default policy in your firewall management to apply on boot as well.","compliance":{"cis":"3.5.2.1","cis_csc":"9.4"},"rules":["c:ip6tables -L -> r:^Chain INPUT && r:policy DROP","c:ip6tables -L -> r:^Chain FORWARD && r:policy DROP","c:ip6tables -L -> r:^Chain OUTPUT && r:policy DROP"],"command":"ip6tables -L","result":"failed"}}
+    {"type":"check","id":1802673953,"policy":"CIS benchmark for Debian/Linux 9 L1","policy_id":"cis_debian9_L1","check":{"id":3064,"title":"Ensure IPv6 default deny firewall policy","description":"A default deny all policy on connections ensures that any unconfigured network usage will be rejected.","rationale":"With a default accept policy the firewall will accept any packet that is not configured to be denied. It is easier to white list acceptable usage than to black list unacceptable usage.","remediation":"Run the following commands to implement a default DROP policy: # ip6tables -P INPUT DROP # ip6tables -P OUTPUT DROP # ip6tables -P FORWARD DROP. Notes: Changing firewall settings while connected over network can result in being locked out of the system. Remediation will only affect the active system firewall, be sure to configure the default policy in your firewall management to apply on boot as well.","compliance":{"cis":"3.5.2.1","cis_csc":"9.4"},"rules":["c:ip6tables -L -> r:^Chain INPUT && r:policy DROP","c:ip6tables -L -> r:^Chain FORWARD && r:policy DROP","c:ip6tables -L -> r:^Chain OUTPUT && r:policy DROP"],"command":"ip6tables -L","result":"failed"}}
     sca.type: check
     sca.scan_id: 1802673953
     sca.policy: CIS benchmark for Debian/Linux 9 L1
@@ -71,7 +71,7 @@ potential event flooding.
     sca.check.title: Ensure IPv6 default deny firewall policy
     sca.check.description: A default deny all policy on connections ensures that any unconfigured network usage will be rejected.
     sca.check.rationale: With a default accept policy the firewall will accept any packet that is not configured to be denied. It is easier to white list acceptable usage than to black list unacceptable usage.
-    sca.check.remediation: Run the following commands to implement a default DROP policy: # ip6tables -P INPUT DROP # ip6tables -P OUTPUT DROP # ip6tables -P FORWARD DROP. Notes: Changing firewall settings while connected over the network can result in being locked out of the system. Remediation will only affect the active system firewall, be sure to configure the default policy in your firewall management to apply on boot as well.
+    sca.check.remediation: Run the following commands to implement a default DROP policy: # ip6tables -P INPUT DROP # ip6tables -P OUTPUT DROP # ip6tables -P FORWARD DROP. Notes: Changing firewall settings while connected over network can result in being locked out of the system. Remediation will only affect the active system firewall, be sure to configure the default policy in your firewall management to apply on boot as well.
     sca.check.compliance.cis: 3.5.2.1
     sca.check.compliance.cis_csc: 9.4
     sca.check.command: ["ip6tables -L"]
@@ -91,3 +91,4 @@ In addition, each result can be expanded to display additional information.
     :title: SCA check list
     :align: center
     :width: 100%
+    
