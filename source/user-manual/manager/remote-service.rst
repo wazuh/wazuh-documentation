@@ -15,7 +15,7 @@ Configuration
 
 All of the configurations of the Remote Service are done via the ``ossec.conf`` file using the ``<remote>`` XML tag. The available options are detailed in :ref:`Remote config <reference_ossec_remote>`.
 
-You can change the IP   address used to listen the service with the following configuration:
+You can change the IP address used to listen the service with the following configuration:
 
 ::
 
