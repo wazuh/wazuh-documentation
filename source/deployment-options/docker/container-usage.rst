@@ -12,8 +12,9 @@ After installing the Wazuh-Docker containers, there are several tasks that you c
 
 - `Access to services and containers`_
 - `Wazuh service data volumes`_
-- `Storage volume for Elastic Stack components`_
+- `Storage volume for Wazuh indexer and dashboard`_
 - `Custom commands and scripts`_
+
 
 Access to services and containers
 ---------------------------------
