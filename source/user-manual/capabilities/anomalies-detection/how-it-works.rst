@@ -17,7 +17,7 @@ This section describes the checks performed by Wazuh to find the anomalies cause
 
 File integrity monitoring
 ----------------------------
-Malware can replace files, directories, and commands on the host system. Performing file integrity, users can check on the selected directories of a system to detect these actions. More information :ref:`File Integrity Monitoring Section <manual_file_integrity>`
+Malware can replace files, directories, and commands on the host system. Performing file integrity monitoring, users can check on the selected directories of a system to detect these actions. More information :ref:`File Integrity Monitoring Section <manual_file_integrity>`
 
 Example:
 
