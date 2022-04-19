@@ -21,6 +21,5 @@ In the :doc:`/deployment-options/docker/docker-installation` section, you will s
 
    docker-installation
    wazuh-container
-   container-usage
-   upgrade-guide
+   container-usage   
    faq-wazuh-container
