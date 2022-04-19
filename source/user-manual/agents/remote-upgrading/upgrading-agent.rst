@@ -8,7 +8,7 @@
 Upgrading agent
 ===============
 
-The following is a description of the upgrade procedure using a use case.
+The following is a description of the upgrade procedure through a use case.
 
 Upgrading an agent remotely can be performed at the command line and through the Wazuh API.
 
