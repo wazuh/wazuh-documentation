@@ -31,12 +31,12 @@ Wazuh dashboard installation
 
 #. Access the Wazuh web interface with your credentials. 
 
-     - URL: *https://<server_ip>*
+     - URL: *https://<SERVER_IP>*
      - **Username**: *admin*
-     - **Password**: *<admin_password>*
+     - **Password**: *<ADMIN_PASSWORD>*
   
 
-    When you access the Wazuh dashboard for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or, for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser. Alternatively, a certificate from a trusted authority can be configured. 
+    When you access the Wazuh dashboard for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser. For increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser instead. Alternatively, a certificate from a trusted authority can be configured. 
 
 
 Next steps
@@ -44,7 +44,7 @@ Next steps
 
 All the Wazuh central components are successfully installed.
 
-.. thumbnail:: ../../images/installation/Wazuh-Installation-workflow-complete.png
+.. thumbnail:: /images/installation/Wazuh-Installation-workflow-complete.png
     :alt: Wazuh installation workflow
     :align: center
     :width: 100%
