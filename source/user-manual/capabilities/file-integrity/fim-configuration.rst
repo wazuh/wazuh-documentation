@@ -412,7 +412,7 @@ Setting ``process_priority`` value higher than the default, will give syscheck l
     <process_priority>19</process_priority>
   </syscheck>
 
-Setting ``process_priority`` value lower than the default, will give syscheck higher priority, more CPU resources and make it run faster. In the example below the priority value for syscheck process is set to minimum:
+Setting ``process_priority`` value lower than the default, will give syscheck higher priority, more CPU resources and make it run faster. In the example below the nice value for syscheck process is set to minimum:
 
 .. code-block:: xml
 
