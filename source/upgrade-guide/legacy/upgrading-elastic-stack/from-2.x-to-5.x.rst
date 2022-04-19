@@ -5,7 +5,7 @@
 Upgrading Elastic Stack from 2.x to 5.x
 =======================================
 
-Although Wazuh 2.x is compatible with both Elastic Stack 2.x and 5.x, it is recommended that version 5.x be installed since the Wazuh Kibana plugin is not compatible with Elastic Stack 2.x.
+Although Wazuh 2.x is compatible with both Elastic Stack 2.x and 5.x, it is recommended to install version 5.x since the Wazuh Kibana plugin is not compatible with Elastic Stack 2.x.
 
 Choose one from the following scenarios:
 
