@@ -168,7 +168,7 @@ Single-node Deployment
           config/wazuh_indexer_ssl_certs/root-ca.pem
 
  
-3. Check that there is a ``docker-compose.yml`` file. Start Wazuh using docker-compose:
+3. Check that there is a ``docker-compose.yml`` file. Start Wazuh using ``docker-compose``:
 
    a) Foreground::
 
@@ -190,12 +190,12 @@ Multi-node deployment
 
 1. Clone the Wazuh repository to your system:
 
-   .. code-block:: console
+    .. code-block:: console
 
-     $ git clone https://github.com/wazuh/wazuh-docker.git -b 4.3 --depth=1
+      $ git clone https://github.com/wazuh/wazuh-docker.git -b 4.3 --depth=1
 
    
-Then enter into the `multi-node` directory, all the commands described below are executed within this directory. For :ref:`additional security <customize-default-users>`, the default password for the Wazuh Indexer admin user can be changed.
+  Then enter into the ``multi-node`` directory, all the commands described below are executed within this directory. For :ref:`additional security <customize-default-users>`, the default password for the Wazuh Indexer admin user can be changed.
 
 
 2. Secure traffic between the deployment nodes using certificates:
@@ -204,7 +204,7 @@ Then enter into the `multi-node` directory, all the commands described below are
 
    a. Generate self-signed certificates for each node of the cluster:
 
-      We have created a Docker image to automate certificate generation using the Wazuh certs gen tool. Then, modify the file config/wazuh_indexer_ssl_certs/certs.yml and execute the following command to obtain the desired certificates:
+      We have created a Docker image to automate certificate generation using the Wazuh certs gen tool. Then, modify the file ``config/wazuh_indexer_ssl_certs/certs.yml`` and execute the following command to obtain the desired certificates:
       
         .. code-block:: console
 
@@ -252,7 +252,7 @@ Then enter into the `multi-node` directory, all the commands described below are
             config/wazuh_indexer_ssl_certs/root-ca.pem
  
 
-3. Check that there is a ``docker-compose.yml`` file. Start Wazuh using docker-compose:
+3. Check that there is a ``docker-compose.yml`` file. Start Wazuh using ``docker-compose``:
 
    a) Foreground::
 

@@ -30,12 +30,17 @@ For Linux/Unix machines, Docker requires a 64-bit operating system running kerne
 
 2. Run the Docker installation script:
 
-  a) On Ubuntu/Debian machines::
+  - On Ubuntu/Debian machines:
+
+  .. code-block:: console
 
       # curl -sSL https://get.docker.com/ | sh
 
-  b) On CentOS machines::
-      
+
+  - On CentOS machines:
+
+  .. code-block:: console  
+
       # dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
       # dnf install docker-ce --nobest -y
 
