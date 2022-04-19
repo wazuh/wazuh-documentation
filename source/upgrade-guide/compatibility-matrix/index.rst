@@ -150,7 +150,7 @@ The Splunk app for Wazuh requires compatibility between two different components
 +---------------------------------+---------------------------+
 | Splunk App version              |       Splunk version      |
 +---------------------------------+---------------------------+
-|              |WAZUH_SPLUNK_LATEST|              |     8.1.4, |SPLUNK_LATEST|          |
+|              |WAZUH_SPLUNK_LATEST|              |     8.1.4, 8.2.2, |SPLUNK_LATEST|   |
 +---------------------------------+---------------------------+
 
 You can find more information on the `Wazuh app repository <https://github.com/wazuh/wazuh-splunk#installation>`_, where you can check a more detailed compatibility matrix between the Wazuh app for Splunk and Splunk versions.
