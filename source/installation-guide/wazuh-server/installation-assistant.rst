@@ -29,11 +29,11 @@ Wazuh server cluster installation
 
 Your Wazuh server is now successfully installed. 
 
-- If you want a Wazuh server single-node cluster, everything is set and you can proceed directly with :doc:`../wazuh-dashboard/unattended`.
+- If you want a Wazuh server single-node cluster, everything is set and you can proceed directly with :doc:`../wazuh-dashboard/installation-assistant`.
       
 - If you want a Wazuh server multi-node cluster, repeat this process on every Wazuh server node.
 
 Next steps
 ----------
   
-The Wazuh server installation is now complete and you can proceed with installing the Wazuh dashboard. To perform this action, see the :doc:`../wazuh-dashboard/unattended` section.  
+The Wazuh server installation is now complete and you can proceed with installing the Wazuh dashboard. To perform this action, see the :doc:`../wazuh-dashboard/installation-assistant` section.  
