@@ -22,6 +22,9 @@ enable and disable core dump generation on the supported platforms [1]_.
 macOS
 *****
 
+Enabling core dump generation
+-----------------------------
+
 To enable core dumps in macOS, you need to change the resource limits of a process using `ulimit`.  In this case, the
 resource limit you need to change is the "cores" one, which represents the maximal size of core dumps our process is
 allowed to generate.
@@ -42,6 +45,14 @@ Then, use ``ulimit`` to set the max core dump size to unlimited::
 Keep in mind that doing this will result in every command run from within this shell session will have no limit on the
 size of core dumps.
 
+There is a system setting that defines the path where core dumps will be stored. It is usually ``/cores/`` but we can
+check this with::
+
+  # sysctl kern.corefile
+
+The default output of this command will be "/cores/core.%P" which means core dumps will comply to this formatting rule.
+We will assume this is the case for the rest of this article.
+
 Next, make sure the ``/cores`` folder exists::
 
   # mkdir -p /cores
@@ -55,28 +66,16 @@ Now Wazuh should be running with its resourced limits altered and should create 
 
 Post-mortem crash analysis: an example
 --------------------------------------
-In this section, you will cause a crash intentionally and then use ``lldb`` to view the process state at the moment of
-failure.
-
-First, we edit any of the executables so that it deliberately accesses an invalid memory address. In this case, we can use
-``wazuh-syscheckd``. Edit the ``src/syscheckd/main.c`` file so that at the beginning of the ``main()`` function it
-performs a write to address 123. Like this::
-
-  int main() {
-    // variables initialization
-    // rest of the code
-    int *a = 123;
-    *a = 0;
-    // [...]
-  }
-
-Run the following commands as root. Compile it as usual (change directory to ``src/`` first)::
-
-  # make TARGET=agent
+In this section, we will send a signal to a Wazuh process that processes usually receive when they fail. Then, we will
+use ``lldb`` to view the process state at the moment of failure. We will use the segmentation fault (SIGSEGV or 11) signal.
 
 Run the executable::
 
   # ./wazuh-syscheckd
+
+Then use `killall` to send a SIGSEGV signal to our process::
+
+  # killall -SEGV wazuh-syscheckd
 
 You will see something like::
 
@@ -143,13 +142,15 @@ level used when compiling)::
 Note about debugging symbols
 --------------------------------------
 
-Debugging symbols are created separately by default. This means binary files (executables and .dylib shared libraries)
+Debugging symbols are created separately by default and are available to download at our :ref:`packages list<wazuh_agent_package_macos>`. This means binary files (executables and .dylib shared libraries)
 have no debugging symbols in them and .dSYM bundle folders are created inside the ``src/symbols`` directory.
 
 For example, after compiling, you get ``src/wazuh-syscheckd`` and ``src/symbols/wazuh-syscheckd.dSYM``. The ``lldb``
-debugger should automatically find the matching dSYM bundle, as long as it is findable by macOS's Spotlight. However, the path to the dSYM bundle can be manually specified by using the ``add-dsym``::
+debugger should automatically find the matching dSYM bundle, as long as it is findable by macOS's Spotlight [2]_. However, the path to the dSYM bundle can be manually specified by using the ``add-dsym``::
 
   add-dsym <path to dSYM bundle>
 
 Lastly, a core dump can also be analyzed if we have debugging symbols embedded into the binaries (i.e., when you use the
 ``DISABLE_STRIP_SYMBOLS=1`` make flag).
+
+.. [2] When compiling, binaries and dSYM bundles are created with a matching UUID identifier, this – and search methods including Spotlight – is what allows ``lldb`` to automatically match them.
