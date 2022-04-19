@@ -148,7 +148,7 @@ The decoder declaration using that new feature would be the following:
         <plugin_decoder offset="after_prematch">JSON_Decoder</plugin_decoder>
     </decoder>
 
-The JSON decoder will extract the fields contained in the JSON event as dynamic fields, taking into account the end of the prematch text. The output of the *wazuh-logtest* is the following:
+The JSON decoder will extract the fields contained in the JSON event as dynamic fields, taking into account from the end of the prematch text. The output of the *wazuh-logtest* is the following:
 
 .. code-block:: none
     :class: output
