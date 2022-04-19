@@ -59,7 +59,7 @@ The rules are classified in multiple levels, from the lowest (0) to the maximum 
 +-------+----------------------------------+--------------------------------------------------------------------------------------------------------------------+
 | 13    | Unusual error (high importance)  | Most of the times it matches a common attack pattern.                                                              |
 +-------+----------------------------------+--------------------------------------------------------------------------------------------------------------------+
-| 14    | High importance security event   | These of the times done with correlation and it indicates an attack.                                               |
+| 14    | High importance security event   | Most of the times done with correlation and it indicates an attack.                                                |
 +-------+----------------------------------+--------------------------------------------------------------------------------------------------------------------+
 | 15    | Severe attack                    | No chances of false positives. Immediate attention is necessary.                                                   |
 +-------+----------------------------------+--------------------------------------------------------------------------------------------------------------------+
