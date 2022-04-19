@@ -404,7 +404,7 @@ Configuring syscheck process priority
 
 To adjust syscheck CPU usage on the monitored system, the :ref:`process_priority <reference_ossec_syscheck_process_priority>` option can be used. It sets the nice value for syscheck process. The default ``process_priority`` is set to 10.
 
-Setting ``process_priority`` value higher than the default, will give syscheck lower priority, less CPU resources and make it run slower. In the example below the priority value for syscheck process is set to maximum:
+Setting ``process_priority`` value higher than the default, will give syscheck lower priority, less CPU resources and make it run slower. In the example below the nice value for syscheck process is set to maximum:
 
 .. code-block:: xml
 
