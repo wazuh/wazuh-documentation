@@ -59,16 +59,6 @@ File integrity monitoring results for the whole environment can be observed in t
   :align: center
   :width: 100%
 
-.. thumbnail:: ../../../images/manual/fim/fim-kibana-overview-2.png
-  :title: Wazuh dashboard: Fim overview2
-  :align: center
-  :width: 100%
-
-.. thumbnail:: ../../../images/manual/fim/fim-kibana-overview-3.png
-  :title: Wazuh dashboard: Fim overview3
-  :align: center
-  :width: 100%
-
 Due to the changes made on the newest FIM, only the Wazuh agents in versions starting from 3.12 will use the new functionality. The Wazuh agents below that version will keep reporting syscheck scan results as in the older versions. If the Wazuh agent is upgraded to v3.12 and keeps its old configuration, will still use the new FIM module and the default synchronization settings.
 
 After the Wazuh agent service restart, the FIM database is cleared. Changes in the monitored directories done while the service is not running will not be reported to the Wazuh manager. The same will happen to the changes that occur after the last scan and before the restart. The synchronization will not take place on the directories that are not monitored with the ``realtime`` or with the ``whodata``.

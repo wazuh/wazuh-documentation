@@ -18,7 +18,7 @@ Configuration
 
 
 Basic usage
-------------------------------------------------------------------
+-----------
 
 To configure the options for OpenSCAP go to :ref:`ossec.conf <reference_ossec_conf>`, or for more details about specific options, see the :ref:`OpenSCAP section <wodle_openscap>`.
 
@@ -112,6 +112,7 @@ When the evaluation is complete, you will see the results as OSSEC alerts:
 Note that each field is extracted to facilitate searches and analysis.
 
 .. thumbnail:: ../../../../images/wodles-oscap/pci-oscap.png
+    :title: PCI OpenSCAP
     :align: center
     :width: 100%
 
@@ -120,6 +121,7 @@ Note that each field is extracted to facilitate searches and analysis.
 Finally, you can explore all results using the OpenSCAP module.
 
 .. thumbnail:: ../../../../images/wodles-oscap/pci-dashboard.png
+    :title: OpenSCAP module
     :align: center
     :width: 100%
 
@@ -202,10 +204,12 @@ When the evaluation is completed, you will see the results as OSSEC alerts:
 Note that each field is extracted to facilitate searches and analysis.
 
 .. thumbnail:: ../../../../images/wodles-oscap/oscap-example.png
+    :title: OpenSCAP example
     :align: center
     :width: 100%
 
 .. thumbnail:: ../../../../images/wodles-oscap/oscap-overview.png
+    :title: OpenSCAP overview
     :align: center
     :width: 100%
 
@@ -215,11 +219,12 @@ Note that each field is extracted to facilitate searches and analysis.
 Finally, you can explore all scan results using the OpenSCAP module.
 
 .. thumbnail:: ../../../../images/wodles-oscap/oscap-dashboard.png
+    :title: OpenSCAP dashboard
     :align: center
     :width: 100%
 
 Overwriting the timeout
-------------------------------------------------------------------
+-----------------------
 
 It is possible to overwrite the timeout for a specific evaluation:
 
@@ -238,7 +243,8 @@ It is possible to overwrite the timeout for a specific evaluation:
     </wodle>
 
 Using profiles
-------------------------------------------------------------------
+--------------
+
 We can limit the evaluation to only specific profiles of a policy:
 
 ..  code-block:: xml
@@ -255,7 +261,7 @@ We can limit the evaluation to only specific profiles of a policy:
     </wodle>
 
 Using CPE dictionary
-------------------------------------------------------------------
+--------------------
 
 You can also optionally specify the CPE dictionary file, which is used to determine which checks are relevant to specific platforms.
 
@@ -272,7 +278,8 @@ You can also optionally specify the CPE dictionary file, which is used to determ
     </wodle>
 
 Using IDs
-------------------------------------------------------------------
+---------
+
 You can select a specific ID of the datastream file:
 
 ..  code-block:: xml
