@@ -26,7 +26,7 @@ Due to this fact, an incorrect configuration in an agent may generate enough eve
 
 - Realtime FIM (Syscheck) of a directory with files that keep changing:
 
-Events are generated every time a file under Syscheck-monitored directory changes. If Syscheck monitors a directory that changes constantly, it will generate a large volume of events. In addition, if the monitored directory contains any file to which Wazuh writes when it generates an event, like ``/var/ossec/queue/``, it will cause an infinite loop.
+Events are generated every time a file under a Syscheck-monitored directory changes. If Syscheck monitors a directory that changes constantly, it will generate a large volume of events. In addition, if the monitored directory contains any file to which Wazuh writes when it generates an event, like ``/var/ossec/queue/``, it will cause an infinite loop.
 
 - Windows Filtering Platform:
 
