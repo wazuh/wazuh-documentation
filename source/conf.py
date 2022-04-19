@@ -510,8 +510,12 @@ custom_replacements = {
     "|CHECKSUMS_URL|" : "https://packages.wazuh.com/4.x/checksums/wazuh/",
     "|RPM_AGENT|" : "https://packages.wazuh.com/4.x/yum/wazuh-agent",
     "|RPM_MANAGER|" : "https://packages.wazuh.com/4.x/yum/wazuh-manager",
+    "|RPM_AGENT_DEBUG_SYMBOLS|" : "https://packages.wazuh.com/4.x/yum/wazuh-agent-debuginfo",
+    "|RPM_MANAGER_DEBUG_SYMBOLS|" : "https://packages.wazuh.com/4.x/yum/wazuh-manager-debuginfo",
     "|DEB_AGENT|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent",
     "|DEB_MANAGER|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-manager/wazuh-manager",
+    "|DEB_MANAGER_DEBUG_SYMBOLS|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-manager/wazuh-manager-dbg",
+    "|DEB_AGENT_DEBUG_SYMBOLS|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent-dbg",
     "|DEB_API|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-api/wazuh-api",
     # Variables for Elastic's Elasticsearch
     "|ELASTICSEARCH_ELK_LATEST|" : "7.17.0",
