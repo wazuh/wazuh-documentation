@@ -55,7 +55,7 @@ $ossec_auth_force_insert
 
 
 $ossec_auth_force_time
-  When forcing to remove old agents with the same name or IP address, this options specify that the deletion will be performed only if the agent’s keepalive has more than the defined number of seconds.
+  When forcing to remove old agents with the same name or IP address, this options specify that the deletion will be performed only if the agent keepalive has more than the defined number of seconds.
 
   `Default 0`
 

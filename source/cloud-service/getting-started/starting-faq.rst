@@ -39,7 +39,7 @@ Wazuh Cloud hosts and manages all the Wazuh components in one integrated platfor
 Can I try it for free?
 ----------------------
 
-Yes, Wazuh provides a free trial for you to create a cloud environment and access the Wazuh Cloud. You can :ref:`sign up for a 14-day free trial <cloud_sign_up>` and no credit card information is required to complete this process.
+Yes, Wazuh provides a free trial for you to create a cloud environment and access the Wazuh Cloud. You can :ref:`sign up for a 14-day free trial <cloud_sign_up>`, and no credit card information is required to complete this process.
 
 Will I be charged when my trial is over?
 ----------------------------------------
@@ -71,12 +71,12 @@ The tier is the size limitation, in bytes, of the hot storage.
 What happens if the tier limit is reached?
 ------------------------------------------
 
-When the tier limit is reached, the oldest events are removed from your index. These data is available in cold storage for you to access them. To learn more about data logging and storage, see the :ref:`Cold storage <cloud_your_environment_accessing_cold_storage>` section.
+The oldest events are removed from your index when the tier limit is reached. This data is available in cold storage for you to access. See the :ref:`Cold storage <cloud_your_environment_accessing_cold_storage>` section to learn more about data logging and storage.
 
 Can I cancel at any time?
 -------------------------
 
-Yes, you can cancel at any time with no penalty. You can keep using your environment until the end of your :ref:`current billing cycle <cloud_billing_history>` and no future charges are incurred after this period.
+Yes, you can cancel at any time with no penalty. You can keep using your environment until the end of your :ref:`current billing cycle <cloud_billing_history>`, and no future charges are incurred after this period.
 
 How can I get help?
 -------------------

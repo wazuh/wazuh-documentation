@@ -102,13 +102,13 @@ Highlights
       :align: center
       :title: Agent's new Stats section
 
-- `#3069 <https://github.com/wazuh/wazuh-kibana-app/pull/3069>`_ Agent’s new vulnerability inventory:
+- `#3069 <https://github.com/wazuh/wazuh-kibana-app/pull/3069>`_ Agent new vulnerability inventory:
 
       Wazuh now gives you enhanced insight into the CVE that are affecting an agent. The newly added **Inventory** tab in the Vulnerabilities module allows you to visualize information such as package name, package version, package architecture, and the CVE ID that affects the package, and more. You can also access the vulnerability data flyout to expand on the specifics of each vulnerability entry detailed in the Inventory.   
 
 .. thumbnail::  ../images/release-notes/4.2.0/vuln-inventory-detail.png
       :align: center
-      :title: Agent’s new vulnerability inventory  
+      :title: Agent new vulnerability inventory  
 
 .. raw:: html
 
@@ -307,7 +307,7 @@ This release includes new features or enhancements.
 
 - `#1434 <https://github.com/wazuh/wazuh-kibana-app/issues/1434>`_ A new **Ruleset Test** tool is added under the Tools menu and in the action bar of the Edit Rules and Edit Decoders sections. You can now test sample logs directly on the Wazuh user interface and see how the ruleset reacts to specific log messages.
 - `#1434 <https://github.com/wazuh/wazuh-kibana-app/issues/1434>`_ **Dev Tools** feature is now moved under the new Tools menu and it is renamed as **API Console**.
-- `#3056 <https://github.com/wazuh/wazuh-kibana-app/pull/3056>`_ Wazuh adds a new **Stats** section on the Agent data overview page that allows you to see agent’s information retrieved by ``/agents/{agent_id}/stats/logcollector`` API endpoint.
+- `#3056 <https://github.com/wazuh/wazuh-kibana-app/pull/3056>`_ Wazuh adds a new **Stats** section on the Agent data overview page that allows you to see the agent information retrieved by ``/agents/{agent_id}/stats/logcollector`` API endpoint.
 - `#3069 <https://github.com/wazuh/wazuh-kibana-app/pull/3069>`_ A new vulnerability inventory is now added to the Vulnerability module, allowing you to see data on the CVE that affect your monitored agents.
 - `#2925 <https://github.com/wazuh/wazuh-kibana-app/issues/2925>`_ In the Security events module, the **Rows per page** option of the **Explore agent** section is now configurable. 
 - `#3051 <https://github.com/wazuh/wazuh-kibana-app/pull/3051>`_ New reminder message and restart button are now displayed in the Rules, Decoders, and CDB lists sections of the management menu for you to restart the cluster or management after importing a file.

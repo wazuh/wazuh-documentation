@@ -79,7 +79,7 @@ To upgrade the Wazuh manager, choose your package manager and follow the instruc
 
 .. note::
 
-  The configuration file of the Wazuh manager will not be replaced in the updates if it has been modified, so the settings of the new capabilities will have to be added manually. More information can be found at the :ref:`User manual <user_manual>`.
+  The configuration file of the Wazuh manager will not be replaced in the updates if it has been modified, so the settings of the new capabilities will have to be added manually. More information can be found in the :ref:`User manual <user_manual>`.
 
   If Wazuh runs in a multi-node cluster, it is necessary to update all Wazuh managers to the same version. Otherwise, Wazuh nodes will not join the cluster.
 

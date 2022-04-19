@@ -36,7 +36,7 @@ Follow these steps to update the Wazuh server 1.x  to the Wazuh server 2.x.
 
     Once the package is installed, review the ``/var/ossec/etc/ossec.conf`` configuration file since it will be overwritten. The previous version can be found at the ``ossec.conf.rpmorig`` file or the ``ossec.conf.deborig`` file. It is recommended to compare the new file with its old version and import previous settings where needed.
 
-    A backup of the custom rules and decoders will be saved at ``/var/ossec/etc/backup_ruleset``. The custom ruleset has to be reapplied. It is recommended to use the ``/var/ossec/etc/decoders`` folder and the ``/var/ossec/etc/rules`` folder for custom rules and decoders as these directories will not be overwritten by future upgrades.
+    A backup of the custom rules and decoders will be saved at ``/var/ossec/etc/backup_ruleset``. The custom ruleset has to be reapplied. It is recommended to use the ``/var/ossec/etc/decoders`` folder and the ``/var/ossec/etc/rules`` folder for custom rules and decoders, as these directories will not be overwritten by future upgrades.
 
 #. Execute the following command to verify the Wazuh server's version:
 

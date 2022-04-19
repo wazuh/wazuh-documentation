@@ -8,7 +8,7 @@
 Deployment variables
 ====================
 
-To simplify the process of installing, registering and configuring a Wazuh agent, the installers can use deployment variables that allow the configuration provisioning. 
+To simplify the process of installing, registering, and configuring a Wazuh agent, the installers can use deployment variables that allow the configuration provisioning. 
 
 Select your operating system to learn how to make an automatic deployment using these variables.
 

@@ -35,7 +35,7 @@ Agents can be configured remotely by using the ``agent.conf`` file. The followin
 Agent groups
 ------------
 
-Agents can be grouped together in order to send them unique centralized configuration that is group specific. Each agent can belong to more than one group and unless otherwise configured, all agents belong to a group called ``default``.
+Agents can be grouped together in order to send them a unique centralized configuration that is group specific. Each agent can belong to more than one group, and unless otherwise configured, all agents belong to a group called ``default``.
 
 .. note::
     Check the :doc:`agent_groups manual <./tools/agent-groups>` to learn how to add groups and assign agents to them.
@@ -48,7 +48,7 @@ The file ``ar.conf`` (active response status) will always be sent to agents even
 
 The agent will store the shared files in ``/var/ossec/etc/shared``, not in a group folder.
 
-Below are the files that would be found in this folder on an agent assigned to the **debian** group.  Notice that these files are pushed to the agent from the manager's ``/var/ossec/etc/shared/debian`` folder.
+Below are the files that would be found in this folder on an agent assigned to the **debian** group.  Notice that these files are pushed to the agent from the manager ``/var/ossec/etc/shared/debian`` folder.
 
 +-----------------------------------------------------+-----------------------------------------------------+
 | **Manager**                                         | **Agent (Group: 'debian')**                         |
@@ -327,7 +327,7 @@ Here we can distinct the two main blocks: ``groups`` and ``agents``.
 
 1. In the ``groups`` block we define the group name from which we want to download the files.
 
-    - If the group doesn't exists, it will be created.
+    - If the group doesn't exist, it will be created.
     - If a file has the name ``merged.mg``, only this file will be downloaded. Then it will be validated.
     - The ``poll`` label indicates the download rate in seconds of the specified files.
 

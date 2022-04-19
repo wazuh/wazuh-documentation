@@ -18,7 +18,7 @@ Eventchannel data processing has been improved since Wazuh version 3.8, keeping 
 
 This information is gathered by the Windows agent, including the event description, the ``system`` standard fields and the specific ``eventdata`` information from the event. Once an event is sent to the manager, it is processed and translated to JSON format, which leads to an easier way of querying and filtering the event fields.
 
-Eventlog uses as well the Windows API to obtain events from Windows logs and return the information in a specific format.
+Eventlog uses the Windows API to obtain events from Windows logs and return the information in a specific format.
 
 #. `Windows Eventlog vs Windows Eventchannel`_
 #. `Monitor the Windows Event Log with Wazuh`_
@@ -29,13 +29,13 @@ Eventlog uses as well the Windows API to obtain events from Windows logs and ret
 Windows Eventlog vs Windows Eventchannel
 ----------------------------------------
 
-Eventlog is supported on every Windows version and can monitor any logs except for particular Applications and Services Logs, this means that the information that can be retrieved is reduced to System, Application and Security channels.
+Eventlog is supported on every Windows version and can monitor any logs except for particular Applications and Services Logs, this means that the information that can be retrieved is reduced to System, Application, and Security channels.
 
 On the other hand, Eventchannel is maintained since Windows Vista and can monitor the Application and Services logs along with the basic Windows logs. In addition, the use of queries to filter by any field is supported for this log format.
 
-With the new changes made in the ``eventchannel`` log format for versions higher than v3.8.0, the number of fields decoded has increased. In addition, the Windows ruleset has been updated, extended and reorganized according to the source channel.
+With the new changes made in the ``eventchannel`` log format for versions higher than v3.8.0, the number of fields decoded has increased. In addition, the Windows ruleset has been updated, extended, and reorganized according to the source channel.
 
-Furthermore, this modifications facilitate the process of rules creation as well as the alert triggering since the event is now gathered in JSON format.
+Furthermore, these modifications facilitate the process of rules creation as well as the alert triggering since the event is now gathered in JSON format.
 
 Monitor the Windows Event Log with Wazuh
 ----------------------------------------
@@ -49,7 +49,7 @@ To monitor a Windows event log, it is necessary to provide the format as "eventl
       <log_format>eventlog</log_format>
   </localfile>
 
-These logs are obtained through Windows API calls and sent to the manager where they will be alerted if they match any rule.
+These logs are obtained through Windows API calls and sent to the manager, where they will be alerted if they match any rule.
 
 Monitor the Windows Event Channel with Wazuh
 --------------------------------------------
@@ -71,22 +71,22 @@ Windows event channels can be monitored by placing their name at the location fi
 
 .. note::
 
-    Eventchannel is supported on Windows versions equal or more recent than Vista.
+    Eventchannel is supported on Windows versions equal to or more recent than Vista.
 
 Available channels and providers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Table below shows available channels and providers to monitor included in the Wazuh ruleset:
+The table below shows available channels and providers to monitor included in the Wazuh ruleset:
 
 +-------------------------------+--------------------------------------------------------------+------------------------------------+--------------------------------------------------------------------------------+
 | Source                        | Channel location                                             | Provider name                      | Description                                                                    |
 +===============================+==============================================================+====================================+================================================================================+
 | Application                   | Application                                                  | Any                                | This log retrieves every event related to system applications management and   |
-|                               |                                                              |                                    | is one of the main Windows administrative channels along with Security and     |
+|                               |                                                              |                                    | is one of the main Windows administrative channels along with Security, and    |
 |                               |                                                              |                                    | System.                                                                        |
 +-------------------------------+--------------------------------------------------------------+------------------------------------+--------------------------------------------------------------------------------+
 | Security                      | Security                                                     | Any                                | This channel gathers information related to users and groups creation, login,  |
-|                               |                                                              |                                    | logoff and audit policy modifications.                                         |
+|                               |                                                              |                                    | logoff, and audit policy modifications.                                        |
 +-------------------------------+--------------------------------------------------------------+------------------------------------+--------------------------------------------------------------------------------+
 | System                        | System                                                       | Any                                | The System channel collects events associated with kernel and service control. |
 +-------------------------------+--------------------------------------------------------------+------------------------------------+--------------------------------------------------------------------------------+
@@ -94,15 +94,15 @@ Table below shows available channels and providers to monitor included in the Wa
 |                               |                                                              |                                    | connection and file changes.                                                   |
 +-------------------------------+--------------------------------------------------------------+------------------------------------+--------------------------------------------------------------------------------+
 | Windows Defender              | Microsoft-Windows-Windows Defender/Operational               | Microsoft-Windows-Windows Defender | The Windows Defender log file shows information about the scans passed,        |
-|                               |                                                              |                                    | malware detection and actions taken against them.                              |
+|                               |                                                              |                                    | malware detection, and actions taken against them.                             |
 +-------------------------------+--------------------------------------------------------------+------------------------------------+--------------------------------------------------------------------------------+
-| McAfee                        | Application                                                  | McLogEvent                         | This source shows McAfee scan results, virus detection and actions taken       |
+| McAfee                        | Application                                                  | McLogEvent                         | This source shows McAfee scan results, virus detection, and actions taken      |
 |                               |                                                              |                                    | against them.                                                                  |
 +-------------------------------+--------------------------------------------------------------+------------------------------------+--------------------------------------------------------------------------------+
 | EventLog                      | System                                                       | Eventlog                           | This source retrieves information about audit and Windows logs.                |
 +-------------------------------+--------------------------------------------------------------+------------------------------------+--------------------------------------------------------------------------------+
 | Microsoft Security            | System                                                       | Microsoft Antimalware              | This software gives information about real-time protection for the system,     |
-| Essentials                    |                                                              |                                    | malware-detection scans and antivirus settings.                                |
+| Essentials                    |                                                              |                                    | malware-detection scans, and antivirus settings.                               |
 +-------------------------------+--------------------------------------------------------------+------------------------------------+--------------------------------------------------------------------------------+
 | Remote Access                 | File Replication Service                                     | Any                                | Other channels (they are grouped in a generic Windows rule file).              |
 +-------------------------------+--------------------------------------------------------------+                                    |                                                                                |
@@ -110,19 +110,19 @@ Table below shows available channels and providers to monitor included in the Wa
 |                               | Microsoft-Windows-TerminalServices-RemoteConnectionManager   |                                    |                                                                                |
 +-------------------------------+--------------------------------------------------------------+------------------------------------+--------------------------------------------------------------------------------+
 
-When monitoring a channel, events from different providers can be gathered. At the ruleset this is taken into account to monitor logs from McAfee, Eventlog or Security Essentials.
+When monitoring a channel, events from different providers can be gathered. In the ruleset, this is taken into account to monitor logs from McAfee, Eventlog or Security Essentials.
 
 Windows ruleset redesign
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-In order to ease the addition of new rules, the eventchannel ruleset has been classified according to the channel from which events belong. This will ensure an easier way of maintaining the ruleset organized and find the better place for custom rules. To accomplish this, several modifications have been added:
+In order to ease the addition of new rules, the eventchannel ruleset has been classified according to the channel from which events belong. This will ensure an easier way of maintaining the ruleset organized and finding a better place for custom rules. To accomplish this, several modifications have been added:
 
 - Each eventchannel file contains a specific channel's rules.
 - A base file includes every parent rule filtering by the specific channels monitored.
-- Rules have been updated and improved to match the new JSON events, showing relevant information at the rule's description and facilitating the way of filtering them.
-- New channel's rules have been added. By default, the monitored channels are System, Security and Application, these channels have their own file now and include a fair set of rules.
-- Every file has their own rule ID range in order to get it organized. There are a hundred IDs set for the base rules and five hundred for each channel file.
-- In case some rules can't be classified easily or there are so few belonging to a specific channel, they are included at a generic Windows rule file.
+- Rules have been updated and improved to match the new JSON events, showing relevant information in the rule's description and facilitating the way of filtering them.
+- New channel rules have been added. By default, the monitored channels are System, Security, and Application. These channels have their own file now and include a fair set of rules.
+- Every file has its rule ID range to get it organized. There are a hundred IDs set for the base rules and five hundred for each channel file.
+- If some rules can’t be classified easily, or there are so few belonging to a specific channel, they are included in a generic Windows rule file.
 
 To have a complete view of which events are equivalent to the old ones from ``eventlog`` and the previous version of ``eventchannel``, this table classifies every rule according to the source in which they were recorded, including their range of rule IDs and the file where they are described.
 
@@ -205,7 +205,7 @@ The installation log will be collected at the Application channel. To monitor lo
       <log_format>eventchannel</log_format>
     </localfile>
 
-The next step is to install a new application. Once it is installed, the Wazuh manager will build the next JSON event related with the installation process:
+The next step is to install a new application. Once it is installed, the Wazuh manager will build the next JSON event related to the installation process:
 
 .. code-block:: json
     :class: output
@@ -244,7 +244,7 @@ This event can be filtered field by field in case an alert is desired to trigger
         <options>no_full_log</options>
     </rule>
 
-Finally, once the event is generated, the rule from above will be matched and therefore, trigger the next alert shown at the Wazuh dashboard:
+Finally, once the event is generated, the rule from above will be matched and, therefore, trigger the next alert shown on the Wazuh dashboard:
 
 .. thumbnail:: ../../../images/manual/log-analysis/kibana-eventchannel-alert.png
     :title: Log analysis flow
@@ -270,7 +270,7 @@ Some events from different channels are shown below with the associated provider
 Filtering events from Windows Event Channel with queries
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Events from the Windows Event channel can be filtered as below. In this example, only events which levels are less or equal to "3" are checked.
+Events from the Windows Event channel can be filtered as below. Only events whose levels are less or equal to “3” are checked in this example.
 
 .. code-block:: xml
 
