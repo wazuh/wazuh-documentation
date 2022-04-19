@@ -118,10 +118,10 @@ The compatibility between the Wazuh agent and the Wazuh manager is guaranteed wh
 
 .. _wazuh_kibana_compatibility_matrix:    
 
-Wazuh and Wazuh Kibana plugin
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Wazuh and the Wazuh Kibana plugin
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Wazuh app for Kibana requires compatibility between two different components:
+The Wazuh Kibana plugin requires compatibility between two different components:
 
   - With the **Wazuh manager**, it requires the same ``major.minor`` version.
   - With the **Elastic Stack**, it is only compatible with the exact same version.
@@ -131,13 +131,9 @@ The Wazuh app for Kibana requires compatibility between two different components
 +-----------------------------------+----------------------------------------+---------------------------+
 |              |WAZUH_LATEST|                | |ELASTICSEARCH_LATEST|                                 | |OPEN_DISTRO_LATEST|                    |
 +-----------------------------------+----------------------------------------+---------------------------+
-|              |WAZUH_LATEST|                | 7.11.2                                 |                           |
+|              |WAZUH_LATEST|                | 7.16.3                                 |                           |
 +-----------------------------------+----------------------------------------+---------------------------+
-|              |WAZUH_LATEST|                | 7.12.1                                 |                           |
-+-----------------------------------+----------------------------------------+---------------------------+
-|              4.2.6                | 7.13.0, 7.13.1, 7.13.2, 7.13.3, 7.13.4 |                           |
-+-----------------------------------+----------------------------------------+---------------------------+
-|              4.2.6                | 7.14.0, 7.14.1, 7.14.2                 |                           |
+|              |WAZUH_LATEST|                | 7.17.0                                 |                           |
 +-----------------------------------+----------------------------------------+---------------------------+
 
 
