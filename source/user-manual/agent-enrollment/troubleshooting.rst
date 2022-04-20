@@ -19,7 +19,7 @@ The location of the agent log file is dependent on the operating system:
 - For a macOS endpoint, the log file is located at ``/Library/Ossec/logs/ossec.log``
 
 
-In the list below you can access the different cases included in this troubleshooting section:
+In the list below, you can access the different cases included in this troubleshooting section:
 
 - :ref:`troubleshooting-testing-communication`
 - :ref:`troubleshooting-authentication-error`
@@ -33,8 +33,8 @@ In the list below you can access the different cases included in this troublesho
 .. _troubleshooting-testing-communication:
 
 
-Testing communication with Wazuh manager
-----------------------------------------
+Testing communication with the Wazuh manager
+--------------------------------------------
 
 There are situations where the agents cannot be enrolled nor connection established to the manager because the necessary ports on the manager are not reachable.
 

@@ -6,7 +6,7 @@ Decoders Syntax
 ===============
 
 The decoders extract the information from the received events.
-When an event is received, the decoders separate the information in blocks to prepare them for their subsequent analysis.
+When an event is received, the decoders separate the information into blocks to prepare them for subsequent analysis.
 
 Overview
 --------
@@ -20,19 +20,19 @@ There are many options to configure in decoders:
 +------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
 | `parent`_              | Any decoder's name                                            | It will reference a parent decoder and the current one will become a child decoder.             |
 +------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
-| `accumulate`_          | None                                                          | It allows to track events over multiple log messages.                                           |
+| `accumulate`_          | None                                                          | It allows tracking events over multiple log messages.                                           |
 +------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
 | `program_name`_        | Any `regex <regex.html#regex-os-regex-syntax>`_,              | It defines the name of the program associated with the decoder.                                 |
 |                        | `sregex <regex.html#sregex-os-match-syntax>`_ or              |                                                                                                 |
 |                        | `pcre2 <regex.html#pcre2-syntax>`_ expression.                |                                                                                                 |
 +------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
-| `prematch`_            | Any `regex <regex.html#regex-os-regex-syntax>`_ or            | It will look for a match in the log, in case it does, the decoder will be used.                 |
+| `prematch`_            | Any `regex <regex.html#regex-os-regex-syntax>`_ or            | It will look for a match in the log. In case it does, the decoder will be used.                 |
 |                        | `pcre2 <regex.html#pcre2-syntax>`_ expression.                |                                                                                                 |
 +------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
 | :ref:`regex_decoders`  | Any `regex <regex.html#regex-os-regex-syntax>`_ or            | The decoder will use this option to find fields of interest and extract them.                   |
 |                        | `pcre2 <regex.html#pcre2-syntax>`_ expression.                |                                                                                                 |
 +------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
-| `order`_               | See `order table <decoders.html#order>`_                      | The values that :ref:`regex_decoders` will extract, will be stored in these groups.             |
+| `order`_               | See `order table <decoders.html#order>`_                      | The values that :ref:`regex_decoders` will extract will be stored in these groups.              |
 +------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
 | `fts`_                 | See `fts table <decoders.html#fts>`_                          | First time seen.                                                                                |
 +------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
@@ -81,7 +81,7 @@ To understand the inner workings of a decoder, it will be easier through example
 
 At the beginning of the example is the full log of an event. The log firstly goes through a pre-decoding phase, where general information will be extracted if possible.
 
-Afterwards, the decoder will begin the extraction of information from the log that is left. In this example, the decoder only analyzes: ``Connection closed by 192.168.1.33``.
+Afterward, the decoder will begin extracting information from the log that is left. In this example, the decoder only analyzes: ``Connection closed by 192.168.1.33``.
 
 Before making a custom decoder, the first step should always be running the event log through :ref:`wazuh-logtest <wazuh-logtest>` to know where to start.
 
@@ -89,7 +89,7 @@ Before making a custom decoder, the first step should always be running the even
 Options
 -------
 
-There is many options to configure the decoders:
+There are many options to configure the decoders:
 
 - `decoder`_
 - `parent`_
@@ -210,7 +210,7 @@ Define that the decoder is related with the ``test``, ``TEST`` or equivalent (ca
 prematch
 ^^^^^^^^^
 
-It attempts to find a match within the log for the string defined. It is used as a condition to enter the decoder, if it finds a match, the current decoder will be used and the search for a decoder will stop and only its child decoders will be able to match. It is important to be as specific as possible to avoid matching with wrong events.
+It attempts to find a match within the log for the string defined; if it finds a match, the current decoder will be used, the search for a decoder will stop, and only its child decoders will be able to match. It is important to be as specific as possible to avoid matching with wrong events.
 
 +--------------------+--------------------------------------------------------------------+
 | **Default Value**  | n/a                                                                |
@@ -224,7 +224,7 @@ The attributes below are optional.
 +-------------+----------------------------------------------------+----------------+---------------+
 | Attribute   |              Description                           | Value range    | Default value |
 +=============+====================================================+================+===============+
-| **offset**  | allows to discard some of the content of the entry | after_regex    |               |
+| **offset**  | allows discarding some of the content of the entry | after_regex    |               |
 |             |                                                    +----------------+               |
 |             |                                                    | after_parent   |               |
 +-------------+----------------------------------------------------+----------------+---------------+
@@ -261,7 +261,7 @@ An example is this regex that matches any numeral:
 |                    | `pcre2 <regex.html#pcre2-syntax>`_ expression.                     |
 +--------------------+--------------------------------------------------------------------+
 
-When using the ``regex`` label it is mandatory to define an ``order`` label as well. Besides, ``regex`` label requires a ``prematch`` or a ``program_name`` label defined on the same decoder or a ``parent`` with a ``prematch`` or a ``program_name defined`` label defined on it.
+When using the ``regex`` label, it is mandatory to define an ``order`` label as well. Besides, ``regex`` label requires a ``prematch`` or a ``program_name`` label defined on the same decoder or a ``parent`` with a ``prematch`` or a ``program_name defined`` label defined on it.
 
 The attributes below are optional.
 
@@ -274,7 +274,7 @@ The attributes below are optional.
 |             |                                                    +----------------+               |
 |             |                                                    | after_prematch |               |
 +-------------+----------------------------------------------------+----------------+---------------+
-| **type**    | allows to set regular expression type              |   osregex      |    osregex    |
+| **type**    | allows setting regular expression type             |   osregex      |    osregex    |
 |             |                                                    +----------------+               |
 |             |                                                    |   pcre2        |               |
 +-------------+----------------------------------------------------+----------------+---------------+
@@ -282,7 +282,7 @@ The attributes below are optional.
 If ``regex`` label is declared multiple times within the decoder, the following rules apply:
 
 - The resulting value is their concatenation.
-- The resulting value of ``type`` attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
+- The resulting value of the ``type`` attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
 
 Example:
 
@@ -331,9 +331,9 @@ It defines what the parenthesis groups contain and the order in which they were 
 +                    +------------+-------------------------------------------------------+
 |                    | url        | Url of the event                                      |
 +                    +------------+-------------------------------------------------------+
-|                    | action     | Event action (deny, drop, accept, etc)                |
+|                    | action     | Event action (deny, drop, accept, etc.)               |
 +                    +------------+-------------------------------------------------------+
-|                    | status     | Event status (success, failure, etc)                  |
+|                    | status     | Event status (success, failure, etc.)                 |
 +                    +------------+-------------------------------------------------------+
 |                    | data       | Data                                                  |
 +                    +------------+-------------------------------------------------------+
@@ -350,7 +350,7 @@ It is used to designate a decoder as one in which the first time it matches the 
 +--------------------+--------------------------------------------------------------------+
 | **Default Value**  | n/a                                                                |
 +--------------------+------------+-------------------------------------------------------+
-| **Allowed values** | location   | Where the log came from                               |
+| **Allowed values** | location   | Where does the log come from                          |
 +                    +------------+-------------------------------------------------------+
 |                    | srcuser    | Extracts the source username                          |
 +                    +------------+-------------------------------------------------------+
@@ -374,9 +374,9 @@ It is used to designate a decoder as one in which the first time it matches the 
 +                    +------------+-------------------------------------------------------+
 |                    | url        | Url of the event                                      |
 +                    +------------+-------------------------------------------------------+
-|                    | action     | Event action (deny, drop, accept, etc)                |
+|                    | action     | Event action (deny, drop, accept, etc.)               |
 +                    +------------+-------------------------------------------------------+
-|                    | status     | Event status (success, failure, etc)                  |
+|                    | status     | Event status (success, failure, etc.)                 |
 +                    +------------+-------------------------------------------------------+
 |                    | data       | Data                                                  |
 +                    +------------+-------------------------------------------------------+
@@ -426,7 +426,7 @@ Use a specific plugin decoder to decode the incoming fields. It is useful for pa
 |                    | JSON_Decoder                                                       |
 +--------------------+--------------------------------------------------------------------+
 
-The attribute below is optional, it allows to start the decode process after a particular point of the log.
+The attribute below is optional; it allows to start the decode process after a particular point of the log.
 
 +--------------------+--------------------+
 | Attribute          | Value              |
@@ -457,7 +457,7 @@ Specifies how to treat the `NULL` fields coming from the JSON events. Only for t
 +--------------------+-------------------------------------------------------------------------+
 | **Default Value**  | string                                                                  |
 +--------------------+-------------------------------------------------------------------------+
-| **Allowed values** | string (It shows the NULL value as string)                              |
+| **Allowed values** | string (It shows the NULL value as a string)                            |
 +                    +-------------------------------------------------------------------------+
 |                    | discard (It discards NULL fields and doesn't store them into the alert) |
 +--------------------+-------------------------------------------------------------------------+

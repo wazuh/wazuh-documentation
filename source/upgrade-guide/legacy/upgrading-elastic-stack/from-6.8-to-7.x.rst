@@ -5,9 +5,9 @@
 Upgrading Elastic Stack from 6.8 to 7.x
 =======================================
 
-This section guides through the upgrade process of Elastic Stack components including Elasticsearch, Filebeat and Kibana for the Elastic distribution.
+This section guides through the upgrade process of Elastic Stack components, including Elasticsearch, Filebeat, and Kibana for the Elastic distribution.
 
-Coming new in Elastic 7.x, there is an architecture change introduced in the Wazuh installation. Logstash is no longer required and Filebeat will send the events directly to the Elasticsearch. In addition, Elasticsearch 7.x has Java embedded, so unless the user decides to use Logstash, Java is no longer required.
+Coming new in Elastic 7.x, there is an architecture change introduced in the Wazuh installation. Logstash is no longer required, and Filebeat will send the events directly to Elasticsearch. In addition, Elasticsearch 7.x has Java embedded, so unless the user decides to use Logstash, Java is no longer required.
 
 
 Preparing the Elastic Stack
@@ -81,9 +81,9 @@ Upgrading Elasticsearch
 
 #. Stop non-essential indexing and perform a synced flush (optional):
 
-    .. code-block:: bash
+    .. code-block:: console
 
-      curl -X POST "localhost:9200/_flush/synced"
+      # curl -X POST "localhost:9200/_flush/synced"
 
 #. Shut down a single node:
 
@@ -115,7 +115,7 @@ Upgrading Elasticsearch
 
           # zypper update elasticsearch-|ELASTICSEARCH_LATEST|
 
-#. Starting with Elasticsearch 7.0, master nodes require a configuration setting with the list of the cluster master nodes. The following settings must be added in the configuration of the Elasticsearch master node (``elasticsearch.yml``):
+#. Starting with Elasticsearch 7.0, master nodes require a configuration setting with the list of the cluster master nodes. The following settings must be added to the configuration of the Elasticsearch master node (``elasticsearch.yml``):
 
     .. code-block:: yaml
 
@@ -133,9 +133,9 @@ Upgrading Elasticsearch
 
 #. Start the newly-upgraded node and confirm that it joins the cluster by checking the log file or by submitting a ``_cat/nodes`` request:
 
-    .. code-block:: bash
+    .. code-block:: console
 
-      curl -X GET "localhost:9200/_cat/nodes"
+      # curl -X GET "localhost:9200/_cat/nodes"
 
 #. Reenable shard allocation:
 
@@ -151,18 +151,18 @@ Upgrading Elasticsearch
 
 #. Before upgrading the next node, wait for the cluster to finish shard allocation:
 
-    .. code-block:: bash
+    .. code-block:: console
 
-      curl -X GET "localhost:9200/_cat/health?v"
+      # curl -X GET "localhost:9200/_cat/health?v"
 
 #. Repeat the steps for every Elasticsearch node.
 
 Field migration: From @timestamp to timestamp
 ----------------------------------------------
 
-In the previous Elasticsearch versions, the Elastic documents were indexed using the ``@timestamp`` field as the reference field for time-based indices. Starting in Elastic 7.x, this field has become a reserved field and it is no longer manipulable. The Wazuh time-based indices use the ``timestamp`` field instead.
+In the previous Elasticsearch versions, the Elastic documents were indexed using the ``@timestamp`` field as the reference field for time-based indices. Starting in Elastic 7.x, this field has become a reserved field and is no longer manipulable. The Wazuh time-based indices use the ``timestamp`` field instead.
 
-Due to this change, the previous alerts will not be visible in the Wazuh indices and update must be performed to all previous indices in order to complete the upgrade.
+Due to this change, the previous alerts will not be visible in the Wazuh indices, and an update must be performed to all previous indices in order to complete the upgrade.
 
 Run the request below for each Wazuh index created before the Elastic 7.x upgrade. It will add the ``timestamp`` field for all the index documents.
 

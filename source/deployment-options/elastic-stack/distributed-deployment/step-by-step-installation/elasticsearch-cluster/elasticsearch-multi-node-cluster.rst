@@ -20,7 +20,7 @@ Installing Elasticsearch
 
 The installation process for a multi-node cluster will be explained in three parts. The first one refers to the configuration of the initial node, in which the certificates that will be deployed to the subsequent nodes are generated. 
 
-The second part will explain how to configure the remaining nodes of the cluster. Finally, the third part provides instructions for initializing the Elasticsearch cluster and verifying that everything is working properly.  
+The second part will explain how to configure the remaining cluster nodes. Finally, the third part provides instructions for initializing the Elasticsearch cluster and verifying that everything is working properly.  
 
 
 **Initial node**

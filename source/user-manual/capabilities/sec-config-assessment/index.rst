@@ -16,10 +16,10 @@
 Security Configuration Assessment
 =================================
 
-There are multiple Wazuh integrations that perform configuration assessment scans (see :ref:`Policy monitoring section <manual_policy_monitoring>`) including CIS-CAT and more recently the Security Configuration Assessment (SCA). The SCA was created by the Wazuh development team to overcome limitations that were inherent to the other integrations, to name a few:
+There are multiple Wazuh integrations that perform configuration assessment scans (see :ref:`Policy monitoring section <manual_policy_monitoring>`), including CIS-CAT, and more recently the Security Configuration Assessment (SCA). The SCA was created by the Wazuh development team to overcome limitations that were inherent to the other integrations, to name a few:
 
-- The CIS-CAT tool is proprietary software which requires an external license for its use.
-- The *Rootcheck* module depends on the *Syscheck* daemon and its policies feeds are often outdated.
+- The CIS-CAT tool is proprietary software that requires an external license for its use.
+- The *Rootcheck* module depends on the *Syscheck* daemon, and its policies feeds are often outdated.
 
 The Security Configuration Assessment (SCA) module aims to provide the user with the best possible experience when performing scans about hardening and configuration policies. Some of its key features include:
 

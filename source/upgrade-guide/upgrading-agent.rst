@@ -136,9 +136,10 @@ To perform the upgrade locally, follow the instructions for the operating system
 
     a) Using the GUI installer. Open the installer and follow the instructions to upgrade the Wazuh agent:
 
-        .. image:: ../images/installation/windows.png
+        .. thumbnail:: ../images/installation/windows.png
+          :title: Windows agent
           :align: left
-
+          :width: 100%
 
     b) Using the command line. To upgrade the Wazuh agent from the command line, run the installer using Windows PowerShell or the command prompt. The ``/q`` argument is used for unattended installations:
 

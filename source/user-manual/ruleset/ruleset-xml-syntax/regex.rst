@@ -115,7 +115,7 @@ PCRE2 syntax
 
 **Perl Compatible Regular Expressions (PCRE)** tries to match Perl syntax and semantics as closely as it can.
 
-It provides features like recursive patterns, look-ahead and look-behind assertions, non-capturing groups, non-greedy quantifiers, extended syntax for characters and character classes, and many other. For more details please refer to the `PCRE Syntax documentation <https://www.pcre.org/current/doc/html/pcre2syntax.html>`_.
+It provides features like recursive patterns, look-ahead and look-behind assertions, non-capturing groups, non-greedy quantifiers, extended syntax for characters and character classes, and many other. For more details, please refer to the `PCRE Syntax documentation <https://www.pcre.org/current/doc/html/pcre2syntax.html>`_.
 
 .. topic:: Supported expressions
 

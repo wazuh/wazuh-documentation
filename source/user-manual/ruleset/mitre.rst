@@ -17,7 +17,7 @@ This feature allows the user to customize the alert information to include speci
 Configuration example
 ---------------------
 
-MITRE ATT&CK assigns each attack technique an ID, which can be consulted on this `link <https://attack.mitre.org>`_. These techniques are grouped by tactics (Defense Evasion, Privilege Escalation, etc.) although some of them belong to more than one tactic. 
+MITRE ATT&CK assigns each attack technique an ID, which can be consulted on this `link <https://attack.mitre.org>`_. These techniques are grouped by tactics (Defense Evasion, Privilege Escalation, etc.), although some belong to more than one tactic. 
 
 The ID `T1110 <https://attack.mitre.org/techniques/T1110/>`_ is related to the brute force attack. This technique fits in well with the following rule 100002, which detects a force brute attack and generates an alert. Below is an example of how to extend this MITRE ATT&CK technique to that rule.
 
@@ -45,7 +45,7 @@ Add the following lines to /var/ossec/etc/rules/local_rules.xml:
 
   </group>
 
-Restart Wazuh and you will have finished configuring the rule. 
+Restart Wazuh, and you will have finished configuring the rule. 
 
 If you want to configure a rule using two o more techniques, you can do it as follows:
 
@@ -66,7 +66,7 @@ A possible event to generate an alert from rule 100002 is:
 
   Dec 10 01:02:02 host sshd[1234]: Failed none for root from 1.1.1.1 port 1066 ssh2
 
-When 8 events like this are received by the decoder, the alert will be created. To check it, run this command:
+When eight events like this are received by the decoder, the alert will be created. To check it, run this command:
 
 .. code-block:: console
 
@@ -134,7 +134,7 @@ MITRE information appears inside rule information, as we are seeing. The alert d
 Moving on to the Wazuh dashboard
 --------------------------------
 
-We will check the alert is shown correctly on the Wazuh dashboard. Open it and add a filter as shown in the figure.
+We will check the alert is shown correctly on the Wazuh dashboard. Open it and add a filter, as shown in the figure.
 
 .. thumbnail:: ../../images/manual/mitre/mitre-1.png
     :title: mitre

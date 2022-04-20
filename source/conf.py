@@ -10,6 +10,7 @@
 
 import sys
 import os
+import glob
 import re
 import shlex
 import datetime
@@ -131,6 +132,16 @@ html_theme_options = {
     'collapse_navigation': False, # Only for Wazuh documentation theme v2.0v
 }
 
+if html_theme == 'wazuh_doc_theme_v3':
+    # Check if the release was before the new the theme
+    # Note v3_release represents the release that was 'current' when the theme
+    # wazuh_doc_theme_v3 was published in production, that is, 4.3
+    v3_release = [4,3]
+    current_release = list(map(int, version.split('.')))
+    is_pre_v3 = current_release[0] < v3_release[0] or (
+                current_release[0] == v3_release[0] and
+                current_release[1] < v3_release[1])
+    html_theme_options['is_pre_v3'] = is_pre_v3
 
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = ['_themes']
@@ -482,6 +493,8 @@ custom_replacements = {
     "|SPLUNK_LATEST|" : "8.2.4",
     "|WAZUH_SPLUNK_LATEST|" : "4.3.0",
     "|ELASTIC_6_LATEST|" : "6.8.8",
+    "|WAZUH_REVISION_DEB_AGENT_PPC|" : "1",
+    "|WAZUH_REVISION_YUM_AGENT_PPC|" : "1",
     "|WAZUH_REVISION_YUM_AGENT_I386|" : "1",
     "|WAZUH_REVISION_YUM_MANAGER_I386|" : "1",
     "|WAZUH_REVISION_YUM_AGENT_X86|" : "1",
@@ -525,8 +538,8 @@ custom_replacements = {
 }
 
 # -- Customizations ---------------------------------------------------------
-# 
-# ## emptyTocNodes ##
+
+## emptyTocNodes ##
 emptyTocNodes = json.dumps([
     'amazon/configuration/index',
     'compliance',
@@ -534,6 +547,7 @@ emptyTocNodes = json.dumps([
     'deployment',
     'development/index',
     'docker-monitor/index',
+    'migration-guide/index',
     'installation-guide/elasticsearch-cluster/index',
     'installation-guide/wazuh-cluster/index',
     'installation-guide/upgrading/legacy/index',
@@ -559,10 +573,10 @@ def setup(app):
 
     current_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), theme_assets_path)
     static_path_str = os.path.join(os.path.dirname(os.path.realpath(__file__)), html_static_path[0])
-    
+
     if not os.path.exists(app.srcdir + '/' + html_static_path[0] + '/'):
         os.mkdir(app.srcdir + '/' + html_static_path[0] + '/')
-    
+
     if html_theme == 'wazuh_doc_theme_v3':
         # CSS files
         app.add_css_file("css/min/bootstrap.min.css?ver=%s" % os.stat(
@@ -577,7 +591,7 @@ def setup(app):
             os.path.join(current_path, "static/js/min/bootstrap.bundle.min.js")).st_mtime)
         app.add_js_file("js/underscore.js?ver=%s" % os.stat(
             os.path.join(current_path, "static/js/underscore.js")).st_mtime)
-    
+
     if html_theme == 'wazuh_doc_theme':
         minification(current_path)
 
@@ -636,7 +650,7 @@ def manage_assets(app, pagename, templatename, context, doctree):
         "redoc-standalone": static + "js/redoc.standalone.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/redoc.standalone.js")).st_mtime,
         "moved-content": static + "js/min/moved-content.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/moved-content.min.js")).st_mtime
     }
-    
+
     # The template function
     def get_css_by_page(pagename):
         css_map = {
@@ -648,7 +662,7 @@ def manage_assets(app, pagename, templatename, context, doctree):
             'not_found': "css/min/not-found.min.css?ver=%s" % os.stat(os.path.join(theme_dir, "static/css/min/not-found.min.css")).st_mtime
         }
         default = "css/min/wazuh-documentation.min.css?ver=%s" % os.stat(os.path.join(theme_dir, "static/css/min/wazuh-documentation.min.css")).st_mtime
-        
+
         if pagename in css_map.keys():
             return css_map[pagename]
         else:
@@ -693,7 +707,7 @@ def manage_assets(app, pagename, templatename, context, doctree):
             # tabs (extension)
             # lightbox (extension)
         ]
-        
+
         if pagename in js_map.keys():
             return js_map[pagename]
         else:
@@ -710,7 +724,7 @@ def finish_and_clean(app, exception):
     ''' Performs the final tasks after the compilation '''
     # Create additional files such as the `.doclist` and the sitemap
     creating_file_list(app, exception)
-    
+
     if html_theme == 'wazuh_doc_theme':
         # Remove extra minified files
         for asset in extra_assets:
@@ -718,6 +732,31 @@ def finish_and_clean(app, exception):
             if os.path.exists(app.srcdir + '/_static/' + mini_asset):
                 os.remove(app.srcdir + '/_static/' + mini_asset)
 
+    if html_theme == 'wazuh_doc_theme_v3':
+        # Remove map files and sourcMapping line in production
+        if production:
+            mapFiles = glob.glob(app.outdir + '/_static/*/min/*.map')
+            assetsFiles = glob.glob(app.outdir + '/_static/js/min/*.min.js') + glob.glob(app.outdir + '/_static/css/min/*.min.css')
+            # Remove map files
+            for mapFilePath in mapFiles:
+                try:
+                    os.remove(mapFilePath)
+                except:
+                    print("Error while deleting file : ", mapFilePath)
+            
+            # Remove the source mapping URLs
+            for assetsFilePath in assetsFiles:
+                try:
+                    with open(assetsFilePath, "r") as f:
+                        lines = f.readlines()
+                    with open(assetsFilePath, "w") as f:
+                        for line in lines:
+                            line = re.sub("//# sourceMappingURL=.*\.map", "", line)
+                            line = re.sub("/\*# sourceMappingURL=.*\.map \*/", "", line)
+                            f.write(line)
+                except:
+                    print("Error while removing source mapping from file: ", assetsFilePath)
+                    
 def collect_compiled_pagename(app, pagename, templatename, context, doctree):
     ''' Runs once per page, storing the pagename (full page path) extracted from the context
         It store the path of all compiled documents except the orphans and the ones in exclude_doc'''

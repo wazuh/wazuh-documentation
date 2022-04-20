@@ -7,7 +7,7 @@
 RESTful API
 ===========
 
-The Wazuh API is an open source RESTful API that allows interaction with the Wazuh manager from a web browser, a command line tool such as cURL or any script or program able to make web requests. The Wazuh UI relies on the Wazuh API and the ultimate goal of Wazuh is to accommodate complete remote management of its infrastructure via the Wazuh UI. Use the Wazuh API to easily perform everyday actions such as adding an agent, restarting the manager(s) or agent(s), or looking up syscheck details.
+The Wazuh API is an open source RESTful API that allows interaction with the Wazuh manager from a web browser, a command-line tool such as cURL, or any script or program able to make web requests. The Wazuh UI relies on the Wazuh API and the ultimate goal of Wazuh is to accommodate complete remote management of its infrastructure via the Wazuh UI. Use the Wazuh API to easily perform everyday actions such as adding an agent, restarting the manager(s) or agent(s), or looking up syscheck details.
 
 Here is a list of the Wazuh API capabilities:
 

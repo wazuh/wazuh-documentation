@@ -8,7 +8,7 @@
 Checking connection with Manager
 ================================
 
-Before you check the agent's connection with the manager, first ensure the agent is pointing to the manager's IP address. This is set in ``ossec.conf`` using the ``<client>`` XML tag. For more on this, see :ref:`Client reference <reference_ossec_client>`.
+Before you check the agent's connection with the manager, first ensure the agent is pointing to the manager IP address. This is set in ``ossec.conf`` using the ``<client>`` XML tag. For more on this, see :ref:`Client reference <reference_ossec_client>`.
 
 .. code-block:: xml
 
@@ -21,7 +21,7 @@ Before you check the agent's connection with the manager, first ensure the agent
     </client>
   </ossec_config>
 
-This will set 10.0.0.10 as the Wazuh server. Once this is done, you will need restart the Agent:
+This will set 10.0.0.10 as the Wazuh server. Once this is done, you will need to restart the Agent:
 
   a. For Systemd:
 
@@ -41,7 +41,7 @@ After you register the agent and it has successfully connected, you can see a li
 
   # /var/ossec/bin/agent_control -lc
 
-You can also check to see if an agent connected correctly by verifying if the TCP connection to the manager is established:
+You can also check to see if an agent is connected correctly by verifying if the TCP connection to the manager is established:
 
 .. code-block:: console
 

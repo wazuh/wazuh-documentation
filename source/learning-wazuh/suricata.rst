@@ -146,7 +146,7 @@ Linux agents need an additional ``<localfile>`` config section like this:
             <location>/var/log/suricata/eve.json</location>
         </localfile>
 
-Instead of adding the above directly to ``ossec.conf`` on each Linux agent, this time let's use Wazuh manager's centralized agent
+Instead of adding the above directly to ``ossec.conf`` on each Linux agent, this time let's use the Wazuh manager centralized agent
 configuration facility.  This is a powerful feature that makes it feasible to manage the varied configurations of a diverse fleet of systems running
 Wazuh agent.  Search the online documentation for "Centralized Configuration" for the full details about this.  In short, groups of agents share common
 configuration content served up to them by the Wazuh manager.  Agents automatically pick up and apply changes made to this content on the manager, and merge

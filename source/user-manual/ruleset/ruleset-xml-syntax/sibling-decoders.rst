@@ -9,12 +9,12 @@ Our development team and the Wazuh community at large are constantly `contributi
 Even more, depending on each environment, users will have different needs and preferences. For these reasons and more it is key that the security software you use is as flexible and easy to configure as possible.
 
 Sibling Decoders can be considered a decoder building strategy that can be of great help for those looking into building their own custom decoders. As different logs come with different needs and sometimes extracting all the information can be challenging, especially when dealing with dynamically structured logs.
-The main purpose is to provide tools capable of decoding as much information as possible the easiest way possible.
+The main purpose is to provide tools capable of decoding as much information as possible in the easiest way possible.
 
 Wazuh's log analysis
 ^^^^^^^^^^^^^^^^^^^^
 
-Firstly, it is of the utmost importance to understand how logs are analyzed by Wazuh's ``analysisd``. Wazuh collects log messages from the vast amount of sources relevant to an environment's security. Then, for every message that is ingested, the ruleset is analyzed using a very simple and resource-efficient logic that allows the Wazuh manager to handle large amounts of log data requiring little resources.
+Firstly, it is of the utmost importance to understand how logs are analyzed by Wazuh's ``analysisd``. Wazuh collects log messages from a vast amount of sources relevant to an environment's security. Then, for every message ingested, the ruleset is analyzed using a very simple and resource-efficient logic that allows the Wazuh manager to handle large amounts of log data requiring few resources.
 
 
 The log will be sequentially checked one by one by the decoders that don't have a parent. When it meets the condition of any one of them the process is repeated with the decoders that have this decoder as a ``<parent>``. It is important to understand, that once a decoder is matched, it will stop looking through the ruleset and will only focus on its children if it has any.

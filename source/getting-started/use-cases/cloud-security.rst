@@ -9,7 +9,7 @@
 Cloud security
 ==============
 
-The Wazuh security platform provides threat detection, configuration compliance, and continuous monitoring for multicloud and hybrid environments. It protects cloud workloads by monitoring the infrastructure at two different levels:
+The Wazuh security platform provides threat detection, configuration compliance, and continuous monitoring for multicloud and hybrid environments. It protects cloud workloads by monitoring the infrastructure at two levels:
 
 - **Endpoint level**: monitoring cloud instances or virtual machines using the lightweight :ref:`Wazuh security agent <wazuh_agent>`.
 
@@ -20,13 +20,13 @@ Amazon Web Services
 
 The :ref:`Wazuh agent <wazuh_agent>` also provides a module to monitor and secure your AWS cloud infrastructure. This module collects AWS services log data from S3 buckets and forwards collected log messages to the :ref:`Wazuh server <wazuh_server>`, where events are analyzed using out-of-the-box Wazuh rules for AWS. 
 
-The following list describes the AWS services that Wazuh is capable of monitoring:
+The following list describes the AWS services that Wazuh can monitor:
 
 - :ref:`Amazon Guardduty <amazon_guardduty>`: threat detection service that continuously monitors for malicious activity and unauthorized behavior to protect your AWS accounts, workloads, and data stored in Amazon S3.
 
 - :ref:`Amazon Inspector <amazon_inspector>`: automated security assessment service that helps improve the security and compliance of applications deployed on AWS.
 
-- :ref:`Amazon Key Management Service (KMS) <amazon_kms>`: used to create and manage cryptographic keys, and to control their use across a wide range of AWS services and in your applications.
+- :ref:`Amazon Key Management Service (KMS) <amazon_kms>`: used to create and manage cryptographic keys and control their use across a wide range of AWS services and in your applications.
 
 - :ref:`Amazon Macie <amazon_macie>`: fully managed data security and data privacy service. It automatically detects unencrypted S3 buckets, publicly accessible buckets, and buckets shared with external AWS accounts.
 
@@ -106,7 +106,8 @@ Example of AWS dashboard:
     :width: 80%
     :wrap_image: No
 
-More information on how Wazuh monitors AWS can be found in our :ref:`documentation <amazon>`.
+You can find more information on how to use Wazuh to monitor AWS in our :ref:`documentation <amazon>`.
+
 
 Microsoft Azure
 ---------------
@@ -159,7 +160,7 @@ Expand the output to see an example of a rule that Azure alerts.
     "timestamp": "2020-05-25T15:45:51.432+0000"
   }
 
-More information about how to use Wazuh to monitor Microsoft Azure can be found in our :ref:`documentation <azure>`.
+You can find more information on how to use Wazuh to monitor Microsoft Azure in our :ref:`documentation <azure>`.
 
 Office 365
 ----------
@@ -227,7 +228,7 @@ The following example shows an alert when a ``Communication site`` is modified i
         "location":"office365"
     }
 
-More information on how to use Wazuh to monitor GitHub can be found in our :ref:`documentation <office365>`.
+You can find more information on how to use Wazuh to monitor Office 365 in our :ref:`documentation <office365>`.
 
 Google Cloud Platform
 ---------------------
@@ -300,7 +301,7 @@ Expand the output to see an example of an alert generated when a known bad actor
     "timestamp": "2020-08-17T17:09:25.832+0000"
   }
 
-More information on how to use Wazuh to monitor the Google cloud platform can be found in our :ref:`documentation <gcp>`. 
+You can find more information on how to use Wazuh to monitor the Google cloud platform in our :ref:`documentation <gcp>`. 
 
 GitHub
 ------
@@ -349,4 +350,4 @@ The following example shows an alert generated when GitHub creates a Dependabot 
     "location":"github"
   }
 
-More information on how to use Wazuh to monitor GitHub can be found in our :ref:`documentation <github>`.
+You can find more information on how to use Wazuh to monitor GitHub in our :ref:`documentation <github>`.

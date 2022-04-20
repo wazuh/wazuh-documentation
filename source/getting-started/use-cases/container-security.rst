@@ -1,12 +1,12 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
-  :description: Wazuh is used to monitor containers security and protect containers workloads at both the infrastructure and container level. Learn more here. 
+  :description: Wazuh is used to monitor container security and protect containers workloads at both the infrastructure and container level. Learn more here. 
   
-.. _containers_security:
+.. _container_security:
 
-Containers security
-===================
+Container security
+==================
 
 Wazuh is used to monitor for signs of security incidents across containers, alerting in real time. Wazuh protects container workloads at two different levels: infrastructure and container level.
 
@@ -19,7 +19,7 @@ Wazuh provides the following mechanisms to monitor Docker hosts or Kubernetes no
 
 - **Wazuh agent deployment to Docker hosts and Kubernetes nodes:** For a self-managed infrastructure, the deployment of the :ref:`Wazuh agent <wazuh_agent>` provides a comprehensive set of security capabilities, such as malware detection, file integrity monitoring, configuration assessment, log data analysis, vulnerability detection, and active responses.
 
-- **Integration with hosted infrastructure providers:** In this case, the Wazuh modules for cloud security monitoring download the managed service audit logs for security analysis. Wazuh integrates with hosted infrastructure providers such as Google GKE, Amazon EKS, and more. 
+- **Integration with hosted infrastructure providers:** In this case, the Wazuh modules for cloud security monitoring download the managed service audit logs for security analysis. Wazuh integrates with hosted infrastructure providers such as Google GKE, Amazon EKS, etc. 
 
 .. thumbnail:: /images/getting-started/use-cases/wazuh-use-cases-docker.png
   :title: Docker events

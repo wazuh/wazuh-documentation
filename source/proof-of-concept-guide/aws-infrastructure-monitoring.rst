@@ -1,13 +1,13 @@
 
 .. meta::
-  :description: This POC shows how the Wazuh module for AWS (aws-s3) enables log data gathering from different AWS sources. Learn more about it in our documentation.
+  :description: This PoC shows how the Wazuh module for AWS (aws-s3) enables log data gathering from different AWS sources. Learn more about it in our documentation.
 
 .. _poc_aws_monitoring:
 
 Amazon AWS infrastructure monitoring
 ====================================
 
-This POC shows how the Wazuh module for AWS (aws-s3) enables log data gathering from different AWS sources. 
+This PoC shows how the Wazuh module for AWS (aws-s3) enables log data gathering from different AWS sources.
 
 To learn more about monitoring AWS resources, see the :ref:`Using Wazuh to monitor AWS <amazon>`  section of the documentation.
 
@@ -15,7 +15,7 @@ To learn more about monitoring AWS resources, see the :ref:`Using Wazuh to monit
 Configuration
 -------------
 
-Configure your environment as follows to test the POC.
+Configure your environment as follows to test the PoC.
 
 #. Enable ``aws-s3`` wodle in the ``/var/ossec/etc/ossec.conf`` configuration file at the Wazuh manager.
 
@@ -28,27 +28,27 @@ Configure your environment as follows to test the POC.
         <run_on_start>yes</run_on_start>
         <skip_on_error>no</skip_on_error>
         <bucket type="cloudtrail">
-            <name>wazuh-cloudtrail</name>
+            <name>${replace_by_your_cloudtrail_bucket_name}</name>
             <access_key>${replace_by_your_AwsAccessKey}</access_key>
             <secret_key>${replace_by_your_AwsSecretKey}</secret_key>
             <only_logs_after>2021-AUG-01</only_logs_after>
         </bucket>
         <bucket type="guardduty">
-            <name>wazuh-aws-wodle</name>
+            <name>${replace_by_your_guarduty_bucket_name}</name>
             <path>guardduty</path>
             <access_key>${replace_by_your_AwsAccessKey}</access_key>
             <secret_key>${replace_by_your_AwsSecretKey}</secret_key>
             <only_logs_after>2021-AUG-01</only_logs_after>
         </bucket>
         <bucket type="custom">
-            <name>wazuh-aws-wodle</name>
+            <name>${replace_by_your_bucket_name}</name>
             <path>macie</path>
             <access_key>${replace_by_your_AwsAccessKey}</access_key>
             <secret_key>${replace_by_your_AwsSecretKey}</secret_key>
             <only_logs_after>2021-AUG-01</only_logs_after>
         </bucket>
         <bucket type="vpcflow">
-            <name>wazuh-aws-wodle</name>
+            <name>${replace_by_your_bucket_name}</name>
             <path>vpc</path>
             <access_key>${replace_by_your_AwsAccessKey}</access_key>
             <secret_key>${replace_by_your_AwsSecretKey}</secret_key>
@@ -60,8 +60,8 @@ Configure your environment as follows to test the POC.
         </service>
       </wodle>
 
-#. Restart the Wazuh manager to apply changes.
-  
+#. Restart the Wazuh manager to apply the changes.
+
     .. code-block:: console
 
         # systemctl restart wazuh-manager

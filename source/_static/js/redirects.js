@@ -74,6 +74,12 @@ removedUrls['x.y'] = [
 /* Pages added in 4.3 */
 
 newUrls['4.3'] = [
+  '/migration-guide/index.html',
+  '/migration-guide/wazuh-indexer.html',
+  '/migration-guide/wazuh-dashboard.html',
+  '/migration-guide/migrating-from-ossec/index.html',
+  '/migration-guide/migrating-from-ossec/ossec-server.html',
+  '/migration-guide/migrating-from-ossec/ossec-agent.html',
   '/release-notes/index-2x.html',
   '/release-notes/index-3x.html',
   '/release-notes/index-4x.html',
@@ -119,17 +125,16 @@ newUrls['4.3'] = [
   '/quickstart.html',
   '/getting-started/components/wazuh-dashboard.html',
   '/getting-started/components/wazuh-indexer.html',
-  '/getting-started/use-cases/intrusion-detection.html',
-  '/getting-started/use-cases/incident-response.html',
-  '/getting-started/use-cases/security-analytics.html',
+  '/getting-started/use-cases/incident-response.html', 
+  '/getting-started/use_cases/container_security.html',
   '/installation-guide/wazuh-indexer/index.html',
-  '/installation-guide/wazuh-indexer/unattended.html',
+  '/installation-guide/wazuh-indexer/installation-assistant.html',
   '/installation-guide/wazuh-indexer/step-by-step.html',
   '/installation-guide/wazuh-dashboard/index.html',
-  '/installation-guide/wazuh-dashboard/unattended.html',
+  '/installation-guide/wazuh-dashboard/installation-assistant.html',
   '/installation-guide/wazuh-dashboard/step-by-step.html',
   '/installation-guide/wazuh-server/index.html',
-  '/installation-guide/wazuh-server/unattended.html',
+  '/installation-guide/wazuh-server/installation-assistant.html',
   '/installation-guide/wazuh-server/step-by-step.html',
   '/deployment-options/index.html',
   '/deployment-options/wazuh-from-sources/index.html',
@@ -244,8 +249,6 @@ removedUrls['4.3'] = [
   '/docker/wazuh-container.html',
   '/getting-started/components/elastic-stack.html',
   '/getting-started/use-cases/active-response.html',
-  '/getting-started/use-cases/rootkits-detection.html',
-  '/getting-started/use-cases/system-inventory.html',
   '/installation-guide/more-installation-alternatives/elastic-stack/all-in-one-deployment/all-in-one.html',
   '/installation-guide/more-installation-alternatives/elastic-stack/all-in-one-deployment/index.html',
   '/installation-guide/more-installation-alternatives/elastic-stack/all-in-one-deployment/unattended-installation.html',
@@ -298,10 +301,32 @@ removedUrls['4.3'] = [
   '/installation-guide/wazuh-agent/deployment-variables/deployment-variables-windows.html',
   '/user-manual/overview.html',
   '/virtual-machine/virtual-machine.html',
+  '/migrating-from-ossec/index.html',
+  '/migrating-from-ossec/ossec-server.html',
+  '/migrating-from-ossec/ossec-agent.html',
 ];
 
 
 redirections.push(
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': '/migrating-from-ossec/index.html',
+    '4.3': '/migration-guide/migrating-from-ossec/index.html',
+  },
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': '/migrating-from-ossec/ossec-server.html',
+    '4.3': '/migration-guide/migrating-from-ossec/ossec-server.html',
+  },
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': '/migrating-from-ossec/ossec-agent.html',
+    '4.3': '/migration-guide/migrating-from-ossec/ossec-agent.html',
+  },
+  {
+    '4.2': '/getting-started/use-cases/containers-security.html',
+    '4.3': '/getting-started/use-cases/container-security.html',
+  },
   {
     'target': ['4.3=>4.2'],
     '4.2': '/release-notes/index.html',
@@ -328,7 +353,7 @@ redirections.push(
     '4.3': '/installation-guide/index.html',
   },
   {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
+    'target': ['4.2=>4.3'],
     '4.2': '/deployment.html',
     '4.3': '/deployment-options/index.html',
   },
@@ -390,7 +415,7 @@ redirections.push(
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/installation-guide/open-distro/distributed-deployment/unattended/unattended-elasticsearch-cluster-installation.html',
-    '4.3': '/installation-guide/wazuh-indexer/unattended.html',
+    '4.3': '/installation-guide/wazuh-indexer/installation-assistant.html',
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
@@ -400,7 +425,7 @@ redirections.push(
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/installation-guide/open-distro/distributed-deployment/unattended/unattended-wazuh-cluster-installation.html',
-    '4.3': '/installation-guide/wazuh-server/unattended.html',
+    '4.3': '/installation-guide/wazuh-server/installation-assistant.html',
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
@@ -408,9 +433,9 @@ redirections.push(
     '4.3': '/installation-guide/wazuh-server/step-by-step.html',
   },
   {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': 'installation-guide/open-distro/distributed-deployment/unattended/unattended-elasticsearch-cluster-installation.html',
-    '4.3': '/installation-guide/wazuh-dashboard/unattended.html',
+    'target': ['4.3=>4.2'],
+    '4.2': '/installation-guide/open-distro/distributed-deployment/unattended/unattended-elasticsearch-cluster-installation.html',
+    '4.3': '/installation-guide/wazuh-dashboard/installation-assistant.html',
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
