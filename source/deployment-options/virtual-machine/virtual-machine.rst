@@ -8,13 +8,13 @@
 Virtual Machine (OVA)
 =====================
 
-Wazuh provides a pre-built virtual machine image in Open Virtual Appliance (OVA) format. This can be directly imported to VirtualBox or other OVA compatible virtualization systems. Take into account that this VM only runs on 64-bit systems. It does not provide high availability and scalability out of the box, however these can be implemented by using `distributed deployment <basic_distributed_index>`_.
+Wazuh provides a pre-built virtual machine image in Open Virtual Appliance (OVA) format. This can be directly imported to VirtualBox or other OVA compatible virtualization systems. Take into account that this VM only runs on 64-bit systems. It does not provide high availability and scalability out of the box. However, these can be implemented by using `distributed deployment <basic_distributed_index>`_.
 
 
-Download the `virtual appliance (OVA) <https://packages.wazuh.com/|CURRENT_MAJOR|/vm/wazuh-|WAZUH_LATEST_OVA|_|OPEN_DISTRO_LATEST|.ova>`_ which contains the following components:
+Download the `virtual appliance (OVA) <https://packages.wazuh.com/|CURRENT_MAJOR|/vm/wazuh-|WAZUH_LATEST_OVA|_|OPEN_DISTRO_LATEST|.ova>`_, which contains the following components:
 
     - CentOS 7
-    - Wazuh manager |WAZUH_LATEST_OVA|
+    - Wazuh manager |WAZUH_LATEST|
     - Wazuh indexer |WAZUH_INDEXER_CURRENT|
     - Filebeat-OSS |ELASTICSEARCH_LATEST_OVA|
     - Wazuh dashboard |WAZUH_DASHBOARD_CURRENT|
@@ -23,11 +23,11 @@ Download the `virtual appliance (OVA) <https://packages.wazuh.com/|CURRENT_MAJOR
 Hardware requirements
 ^^^^^^^^^^^^^^^^^^^^^
 
-The following requirements have to be in place before the Wazuh VM can be imported on a host operating system:
+The following requirements have to be in place before the Wazuh VM can be imported into a host operating system:
 
-- The host operating system has to be 64-bit system. 
+- The host operating system has to be a 64-bit system. 
 - Hardware virtualization has to be enabled on the firmware of the host.
-- Virtualization platform such as VirtualBox should be installed on the host system.
+- A virtualization platform, such as VirtualBox, should be installed on the host system.
 
 Out of the box, the Wazuh VM is configured with the following specifications:
 
@@ -53,7 +53,7 @@ First, import the OVA to the virtualization platform and start the machine. When
       password: wazuh
 
 
-When a virtual machine is accessed via SSH, root user login via SSH is disabled. Therefore, SSH login is only possible using the following system user:
+When a virtual machine is accessed via SSH, the root user login via SSH is disabled. Therefore, SSH login is only possible using the following system user:
 
   .. code-block:: none
 
@@ -63,7 +63,6 @@ When a virtual machine is accessed via SSH, root user login via SSH is disabled.
 
 Access the Wazuh dashboard
 --------------------------
-
 
 Shortly after starting the VM, the Wazuh dashboard can be accessed from the web interface by using the following credentials:
 
@@ -84,7 +83,7 @@ You can find <wazuh_server_ip>  by typing the following command in the VM:
 Configuration files
 -------------------
 
-All components included in this virtual image are configured to work out-of-the-box, without the need to modify any settings. However, all components can be fully customized. These are the configuration files locations:
+All components included in this virtual image are configured to work out of the box without the need to modify any settings. However, all components can be fully customized. These are the configuration files locations:
 
   - Wazuh manager: ``/var/ossec/etc/ossec.conf``
   - Wazuh indexer: ``/etc/wazuh-indexer/opensearch.yml``
@@ -95,10 +94,10 @@ All components included in this virtual image are configured to work out-of-the-
 VirtualBox time configuration
 -----------------------------
 
-In case of using VirtualBox, once the virtual machine is imported it may run into issues caused by time skew when VirtualBox synchronizes the time of the guest machine. To avoid this situation, enable the ``Hardware Clock in UTC Time`` option in the ``System`` tab of the virtual machine configuration.
+In the case of using VirtualBox, once the virtual machine is imported, it may run into issues caused by time skew when VirtualBox synchronizes the time of the guest machine. To avoid this situation, enable the ``Hardware Clock in UTC Time`` option in the ``System`` tab of the virtual machine configuration.
 
 .. note::
-  By default, the network interface type is bridge. The VM will attempt to obtain an IP address from the network DHCP server. Alternatively, a static IP address can be set by configuring the appropriate network files in the CentOS operating system on which the VM is based.
+  By default, the network interface type is a bridge. The VM will attempt to obtain an IP address from the network DHCP server. Alternatively, a static IP address can be set by configuring the appropriate network files in the CentOS operating system on which the VM is based.
 
 
 Once the virtual machine is imported and running, the next step is to :ref:`deploy the Wazuh agents <installation_agents>` on the systems to be monitored.
