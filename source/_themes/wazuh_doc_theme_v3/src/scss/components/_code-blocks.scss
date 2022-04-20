@@ -262,6 +262,9 @@ body {
       }
     }
   }
+  .admonition [class*="highlight-"] {
+    border-color: $light-color-border-deeper;
+  }
   [class*="highlight-"] {
     border-color: $light-color-code-block-border;
     &.output {

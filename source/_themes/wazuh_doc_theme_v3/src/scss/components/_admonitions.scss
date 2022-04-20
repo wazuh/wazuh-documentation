@@ -64,7 +64,7 @@
 body {
   #central-column .admonition {
     color: $light-color-main-text;
-    background-color: $light-color-admonition-background;
+    background-color: rgba($light-color-shaded-text, 0.05);
     border-color: $light-color-shaded-text;
     .admonition-title {
       color: $light-color-shaded-text;
@@ -72,6 +72,7 @@ body {
 
     &.note {
       border-color: $light-color-primary-lighter;
+      background-color: rgba($light-color-primary-lighter, 0.05);
       .admonition-title {
         color: $light-color-primary;
 
@@ -83,6 +84,7 @@ body {
 
     &.warning {
       border-color: $light-color-warning;
+      background-color: rgba($light-color-warning, 0.05);
       .admonition-title {
         color: $light-color-warning-dark;
 
@@ -93,7 +95,8 @@ body {
     }
 
     &.attention {
-      border-color: $light-color-primary;
+      border-color: $light-color-primary-lighter;
+      background-color: rgba($light-color-primary-lighter, 0.05);
       .admonition-title {
         color: $light-color-primary;
 
@@ -105,6 +108,7 @@ body {
 
     &.caution {
       border-color: $light-color-warning;
+      background-color: rgba($light-color-warning, 0.05);
       .admonition-title {
         color: $light-color-warning-dark;
 
@@ -116,6 +120,7 @@ body {
 
     &.danger {
       border-color: $light-color-danger-dark;
+      background-color: rgba($light-color-danger-dark, 0.05);
       .admonition-title {
         color: $light-color-danger-dark;
 
@@ -127,6 +132,7 @@ body {
 
     &.error {
       border-color: $light-color-danger-dark;
+      background-color: rgba($light-color-danger-dark, 0.05);
       .admonition-title {
         color: $light-color-danger-dark;
 
@@ -138,6 +144,7 @@ body {
 
     &.hint {
       border-color: $light-color-success-dark;
+      background-color: rgba($light-color-success-dark, 0.05);
       .admonition-title {
         color: $light-color-success-dark;
 
@@ -148,7 +155,8 @@ body {
     }
 
     &.important {
-      border-color: $light-color-primary;
+      border-color: $light-color-primary-lighter;
+      background-color: rgba($light-color-primary-lighter, 0.05);
       .admonition-title {
         color: $light-color-primary;
 
@@ -160,6 +168,7 @@ body {
 
     &.tip {
       border-color: $light-color-success-dark;
+      background-color: rgba($light-color-success-dark, 0.05);
       .admonition-title {
         color: $light-color-success-dark;
 
@@ -176,14 +185,15 @@ body {
 .dark-theme {
   #central-column .admonition {
     color: $dark-color-main-text;
-    background-color: $dark-color-admonition-background;
+    background-color: rgba($dark-color-shaded-text, 0.1);
     border-color: $dark-color-shaded-text;
     .admonition-title {
       color: $dark-color-shaded-text;
     }
 
     &.note {
-      border-color: $dark-color-primary-lighter;
+      border-color: $dark-color-primary;
+      background-color: rgba($dark-color-primary, 0.1);
       .admonition-title {
         color: $dark-color-primary;
 
@@ -194,7 +204,8 @@ body {
     }
 
     &.warning {
-      border-color: $dark-color-warning-dark;
+      border-color: $dark-color-warning;
+      background-color: rgba($dark-color-warning, 0.1);
       .admonition-title {
         color: $dark-color-warning;
 
@@ -206,6 +217,7 @@ body {
 
     &.attention {
       border-color: $dark-color-primary;
+      background-color: rgba($dark-color-primary, 0.1);
       .admonition-title {
         color: $dark-color-primary;
 
@@ -216,7 +228,8 @@ body {
     }
 
     &.caution {
-      border-color: $dark-color-warning-dark;
+      border-color: $dark-color-warning;
+      background-color: rgba($dark-color-warning, 0.1);
       .admonition-title {
         color: $dark-color-warning;
 
@@ -228,6 +241,7 @@ body {
 
     &.danger {
       border-color: $dark-color-danger-dark;
+      background-color: rgba($dark-color-danger-dark, 0.1);
       .admonition-title {
         color: $dark-color-danger;
 
@@ -239,6 +253,7 @@ body {
 
     &.error {
       border-color: $dark-color-danger-dark;
+      background-color: rgba($dark-color-danger-dark, 0.1);
       .admonition-title {
         color: $dark-color-danger;
 
@@ -250,6 +265,7 @@ body {
 
     &.hint {
       border-color: $dark-color-success-dark;
+      background-color: rgba($dark-color-success-dark, 0.1);
       .admonition-title {
         color: $dark-color-success;
 
@@ -261,6 +277,7 @@ body {
 
     &.important {
       border-color: $dark-color-primary;
+      background-color: rgba($dark-color-primary, 0.1);
       .admonition-title {
         color: $dark-color-primary;
 
@@ -272,6 +289,7 @@ body {
 
     &.tip {
       border-color: $dark-color-success-dark;
+      background-color: rgba($dark-color-success-dark, 0.1);
       .admonition-title {
         color: $dark-color-success;
 
