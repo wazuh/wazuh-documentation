@@ -68,12 +68,9 @@ Post-mortem crash analysis: an example
 --------------------------------------
 In this section, we will send a signal to a Wazuh process that processes usually receive when they fail. Then, we will
 use ``lldb`` to view the process state at the moment of failure. We will use the segmentation fault (SIGSEGV or 11) signal.
+Make sure to have enabled core dump generation, explained in the previous section.
 
-Run the executable::
-
-  # ./wazuh-syscheckd
-
-Then use `killall` to send a SIGSEGV signal to our process::
+Use `killall` to send a SIGSEGV signal to our process::
 
   # killall -SEGV wazuh-syscheckd
 
@@ -106,7 +103,7 @@ Print the backtrace with ``bt``::
     * frame #0: 0x000000010a203034 wazuh-syscheckd`main + 4
       frame #1: 0x000000010f4fd51e dyld`start + 462
 
-Switch to thread 1 using ``t 1``::
+Switch to thread 1 using ``t 1`` (the source code shown here is just an example of a real intentional segmentation fault)::
 
   (lldb) t 1
   * thread #1
@@ -118,7 +115,6 @@ Switch to thread 1 using ``t 1``::
     53  
     54       /* Set the name */
     55       OS_SetName(ARGV0);
-  ``
 
 Print the value of local variables with ``frame variable`` (some variables might be missing depending on the optimization
 level used when compiling)::
@@ -140,9 +136,9 @@ level used when compiling)::
   (int *) a = <no location, value may have been optimized out>
 
 Note about debugging symbols
---------------------------------------
+----------------------------
 
-Debugging symbols are created separately by default and are available to download at our :ref:`packages list<wazuh_agent_package_macos>`. This means binary files (executables and .dylib shared libraries)
+Debugging symbols are created separately by default and are available to download at our :ref:`debug packages list<macos-dbg-symbols-packages>`. This means binary files (executables and .dylib shared libraries)
 have no debugging symbols in them and .dSYM bundle folders are created inside the ``src/symbols`` directory.
 
 For example, after compiling, you get ``src/wazuh-syscheckd`` and ``src/symbols/wazuh-syscheckd.dSYM``. The ``lldb``
