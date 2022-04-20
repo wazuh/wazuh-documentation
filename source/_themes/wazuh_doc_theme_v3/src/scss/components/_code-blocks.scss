@@ -365,6 +365,9 @@ body {
       }
     }
   }
+  .admonition [class*="highlight-"] {
+    border-color: $dark-color-code-block-background;
+  }
   [class*="highlight-"] {
     border-color: $dark-color-code-block-border;
     &.output {
