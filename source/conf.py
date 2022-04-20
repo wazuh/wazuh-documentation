@@ -743,7 +743,7 @@ def finish_and_clean(app, exception):
                     os.remove(mapFilePath)
                 except:
                     print("Error while deleting file : ", mapFilePath)
-
+            
             # Remove the source mapping URLs
             for assetsFilePath in assetsFiles:
                 try:
@@ -756,7 +756,7 @@ def finish_and_clean(app, exception):
                             f.write(line)
                 except:
                     print("Error while removing source mapping from file: ", assetsFilePath)
-
+                    
 def collect_compiled_pagename(app, pagename, templatename, context, doctree):
     ''' Runs once per page, storing the pagename (full page path) extracted from the context
         It store the path of all compiled documents except the orphans and the ones in exclude_doc'''
