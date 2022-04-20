@@ -20,7 +20,7 @@ What is CIS-CAT
 
 CIS (Center for Internet Security) is an entity dedicated to safeguarding private and public organizations against cyber threats. This entity provides CIS benchmarks guidelines, which are a recognized global standard and best practices for securing IT systems and data against cyberattacks.
 
-In addition, CIS-CAT Pro is a "cross-platform Java app" tool developed for scanning target systems and generating a report comparing the system settings to the CIS benchmarks. There are more than 80 CIS benchmarks that cover nearly all OSs, providing different profiles depending on the specific need.
+In addition, CIS-CAT Pro is a "cross-platform Java app" tool developed for scanning target systems and generating a report comparing the system settings to the CIS benchmarks. There are more than 80 CIS benchmarks that cover nearly all OSs, providing different profiles depending on the specific need. CIS-CAT Pro includes `CIS-CAT Pro v3 <https://workbench.cisecurity.org/files/2255>`_ and `CIS-CAT Pro v4 <https://workbench.cisecurity.org/files/2151>`_. Now Wazuh supports both CIS-CAT Pro v3 and v4, see `Use case: Running a CIS evaluation`_ for more details.
 
 How it works
 ------------
@@ -65,11 +65,17 @@ c) For Windows:
 
 For running this integration, the CIS-CAT tool must reside on the local agent that runs the scans. However, the JRE can be located on a removable disk or network drive for the purpose of sharing between multiple agents.
 
-In addition, in Unix systems, the CIS-CAT script may need to be granted execute permissions. To do this, run the following command from the CIS-CAT directory:
+In addition, in Unix systems, the CIS-CAT script may need to be granted execute permissions. To do this, run the following command from the CIS-CAT Pro v3 directory:
 
 .. code-block:: console
 
     # chmod +x CIS-CAT.sh
+
+or run the following command from the CIS-CAT Pro v4 directory:
+
+.. code-block:: console
+
+    # chmod +x Assessor-CLI.sh
 
 Once you have the requirements for running CIS evaluations, you can configure the wodle to check for specific benchmarks at your chosen interval. The scan results from these checks are sent to the manager and can be included in the visualizations.
 
@@ -78,47 +84,95 @@ Use case: Running a CIS evaluation
 
 The following is an example of how to deploy the CIS-CAT integration:
 
+.. note::
+   You can choose CIS-CAT v3 (``CIS-CAT.sh`` on a UNIX environment or ``CIS-CAT.BAT`` on a Windows environment) or v4 (``Assessor-CLI.sh`` on a UNIX environment or ``Assessor-CLI.bat`` on a Windows environment) according to the ``ciscat_binary`` configuration. If you don't set the ``ciscat_binary`` configuration, Wazuh will choose CIS-CAT v3 by default.
+
 1. In the configuration file, ``ossec.conf``, set up a section as follows:
 
     1.1 If you are using a UNIX environment:
+        1.1.1 If you are using a UNIX environment with CIS-CAT Pro v3:
 
-    .. code-block:: xml
+        .. code-block:: xml
 
-      <wodle name="cis-cat">
+          <wodle name="cis-cat">
 
-        <disabled>no</disabled>
-        <timeout>1800</timeout>
-        <interval>1d</interval>
-        <scan-on-start>yes</scan-on-start>
+            <disabled>no</disabled>
+            <timeout>1800</timeout>
+            <interval>1d</interval>
+            <scan-on-start>yes</scan-on-start>
 
-        <java_path>/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/bin</java_path>
-        <ciscat_path>wodles/ciscat</ciscat_path>
+            <java_path>/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/bin</java_path>
+            <ciscat_path>wodles/ciscat</ciscat_path>
+            <ciscat_binary>CIS-CAT.sh</ciscat_binary>
 
-        <content type="xccdf" path="benchmarks/CIS_Ubuntu_Linux_16.04_LTS_Benchmark_v1.0.0-xccdf.xml">
-          <profile>xccdf_org.cisecurity.benchmarks_profile_Level_2_-_Server</profile>
-        </content>
+            <content type="xccdf" path="benchmarks/CIS_Ubuntu_Linux_16.04_LTS_Benchmark_v1.0.0-xccdf.xml">
+               <profile>xccdf_org.cisecurity.benchmarks_profile_Level_2_-_Server</profile>
+            </content>
 
-      </wodle>
+          </wodle>
 
+        1.1.2 If you are using a UNIX environment with CIS-CAT Pro v4:
+
+        .. code-block:: xml
+
+          <wodle name="cis-cat">
+
+            <disabled>no</disabled>
+            <timeout>1800</timeout>
+            <interval>1d</interval>
+            <scan-on-start>yes</scan-on-start>
+
+            <java_path>/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/bin</java_path>
+            <ciscat_path>wodles/ciscat</ciscat_path>
+            <ciscat_binary>Assessor-CLI.sh</ciscat_binary>
+
+            <content type="xccdf" path="benchmarks/CIS_Ubuntu_Linux_16.04_LTS_Benchmark_v1.0.0-xccdf.xml">
+               <profile>"Level 2 - Server"</profile>
+            </content>
+
+          </wodle>
 
     1.2 If you are using a Windows environment:
+        1.2.1 If you are using a Windows environment with CIS-CAT Pro v3:
 
-    .. code-block:: xml
+        .. code-block:: xml
 
-      <wodle name="cis-cat">
-        <disabled>no</disabled>
-        <timeout>1800</timeout>
-        <interval>1d</interval>
-        <scan-on-start>yes</scan-on-start>
+          <wodle name="cis-cat">
+            <disabled>no</disabled>
+            <timeout>1800</timeout>
+            <interval>1d</interval>
+            <scan-on-start>yes</scan-on-start>
 
-        <java_path>\\server\jre\bin</java_path>
-        <ciscat_path>C:\cis-cat</ciscat_path>
+            <java_path>\\server\jre\bin</java_path>
+            <ciscat_path>C:\cis-cat</ciscat_path>
+            <ciscat_binary>CIS-CAT.BAT</ciscat_binary>
 
-        <content type="xccdf" path="benchmarks\your_windows_benchmark_file_xccdf.xml">
-          <profile>xccdf_org.cisecurity.benchmarks_profile_Level_2_-_Server</profile>
-        </content>
+            <content type="xccdf" path="benchmarks\your_windows_benchmark_file_xccdf.xml">
+               <profile>xccdf_org.cisecurity.benchmarks_profile_Level_2_-_Server</profile>
+            </content>
 
-      </wodle>
+          </wodle>
+
+
+        1.2.2 If you are using a Windows environment with CIS-CAT Pro v4:
+
+        .. code-block:: xml
+
+          <wodle name="cis-cat">
+            <disabled>no</disabled>
+            <timeout>1800</timeout>
+            <interval>1d</interval>
+            <scan-on-start>yes</scan-on-start>
+
+            <java_path>\\server\jre\bin</java_path>
+            <ciscat_path>C:\cis-cat</ciscat_path>
+            <ciscat_binary>Assessor-CLI.bat</ciscat_binary>
+
+            <content type="xccdf" path="benchmarks\your_windows_benchmark_file_xccdf.xml">
+               <profile>"Level 2 - Server"</profile>
+            </content>
+
+          </wodle>
 
     Make sure the paths are correct for the location of your Java and the CIS-CAT tool. For both cases, you could specify the full path, or a relative path to the Wazuh installation folder. Also, consider the following tips when configuring the ``content`` section:
 

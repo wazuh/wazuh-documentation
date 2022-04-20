@@ -27,22 +27,25 @@ Main options
 - `timeout`_
 - `java_path`_
 - `ciscat_path`_
+- `ciscat_binary`_
 - `content`_
 
 
-+----------------------+-----------------------------+
-| Main options         | Allowed values              |
-+======================+=============================+
-| `disabled`_          | yes, no                     |
-+----------------------+-----------------------------+
-| `timeout`_           | A positive number (seconds) |
-+----------------------+-----------------------------+
-| `java_path`_         | Any valid path              |
-+----------------------+-----------------------------+
-| `ciscat_path`_       | Any valid path              |
-+----------------------+-----------------------------+
-| `content`_           | N/A                         |
-+----------------------+-----------------------------+
++----------------------+------------------------------------------------------------+
+| Main options         | Allowed values                                             |
++======================+============================================================+
+| `disabled`_          | yes, no                                                    |
++----------------------+------------------------------------------------------------+
+| `timeout`_           | A positive number (seconds)                                |
++----------------------+------------------------------------------------------------+
+| `java_path`_         | Any valid path                                             |
++----------------------+------------------------------------------------------------+
+| `ciscat_path`_       | Any valid path                                             |
++----------------------+------------------------------------------------------------+
+| `ciscat_binary`_     | CIS-CAT.sh, CIS-CAT.BAT, Assessor-CLI.sh, Assessor-CLI.bat |
++----------------------+------------------------------------------------------------+
+| `content`_           | N/A                                                        |
++----------------------+------------------------------------------------------------+
 
 Scheduling options
 ^^^^^^^^^^^^^^^^^^
@@ -118,6 +121,17 @@ Define where CIS-CAT is located.
 +--------------------+----------------------------+
 | **Allowed values** | Any valid path.            |
 +--------------------+----------------------------+
+
+ciscat_binary
+^^^^^^^^^^^^^^
+
+Define which CIS-CAT Binary is selected.
+
++----------------------+------------------------------------------------------------+
+| **Default value**    | CIS-CAT.sh (UNIX)  or  CIS-CAT.BAT (Windows)               |
++----------------------+------------------------------------------------------------+
+| **Allowed value**    | CIS-CAT.sh, CIS-CAT.BAT, Assessor-CLI.sh, Assessor-CLI.bat |
++----------------------+------------------------------------------------------------+
 
 content
 ^^^^^^^
@@ -237,6 +251,7 @@ Example of configuration
 
     <java_path>/usr/bin</java_path>
     <ciscat_path>wodles/ciscat</ciscat_path>
+    <ciscat_binary>CIS-CAT.sh</ciscat_binary>
 
     <content type="xccdf" path="benchmarks/CIS_Ubuntu_Linux_16.04_LTS_Benchmark_v1.0.0-xccdf.xml">
       <profile>xccdf_org.cisecurity.benchmarks_profile_Level_2_-_Server</profile>
