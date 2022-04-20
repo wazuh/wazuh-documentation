@@ -8,7 +8,7 @@
 Wazuh Docker utilities
 ======================
 
-After installing the Wazuh-Docker containers, there are several tasks that you can do to benefit the most from your Wazuh installation.
+After installing the Wazuh-Docker containers, there are several tasks that you can do to benefit the most from your Wazuh installation such as the listed below:
 
 - `Access to services and containers`_
 - `Wazuh service data volumes`_
@@ -26,7 +26,7 @@ Access to services and containers
 
 #. Agents may be enrolled by following the standard enrollment process and using the Docker host address as the manager address. For more information see: :ref:`Wazuh agent enrollment <agent_enrollment>`
 
-#. We can list the containers we have created by executing ``docker-compose ps`` in the directory that contains the ``docker-compose.yml`` file:
+#. You can list the containers you have created by executing ``docker-compose ps`` in the directory that contains the ``docker-compose.yml`` file:
 
     .. code-block:: console
 
@@ -42,7 +42,7 @@ Access to services and containers
       wazuh-docker_wazuh_1           /init                            Up      0.0.0.0:1514->1514/tcp, 0.0.0.0:1515->1515/tcp, 1516/tcp, 0.0.0.0:514->514/udp, 0.0.0.0:55000->55000/tcp
 
 
-#. We can access the command line of each container by executing ``docker-compose exec <service name> /bin/bash`` from the directory where the ``docker-compose.yml`` file is located:
+#. You can access the command line of each container by executing ``docker-compose exec <service name> /bin/bash`` from the directory where the ``docker-compose.yml`` file is located:
 
     .. code-block:: console
 
