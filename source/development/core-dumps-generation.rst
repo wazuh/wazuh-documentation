@@ -56,6 +56,7 @@ We will assume this is the case for the rest of this article.
 Next, make sure the ``/cores`` folder exists::
 
   # mkdir -p /cores
+  # chmod 755 /cores
 
 Restart the services::
 
@@ -138,15 +139,22 @@ level used when compiling)::
 Note about debugging symbols
 ----------------------------
 
-Debugging symbols are created separately by default and are available to download at our :ref:`debug packages list<macos-dbg-symbols-packages>`. This means binary files (executables and .dylib shared libraries)
-have no debugging symbols in them and .dSYM bundle folders are created inside the ``src/symbols`` directory.
+Debugging symbols are created separately by default and are available to download at our
+:ref:`debug packages list<macos-dbg-symbols-packages>`. This means binary files (executables and .dylib shared libraries)
+have no debugging symbols in them and .dSYM bundle folders are created inside the ``<wazuh_repo>/src/symbols`` directory
+when building Wazuh from sources.
 
 For example, after compiling, you get ``src/wazuh-syscheckd`` and ``src/symbols/wazuh-syscheckd.dSYM``. The ``lldb``
-debugger should automatically find the matching dSYM bundle, as long as it is findable by macOS's Spotlight [2]_. However, the path to the dSYM bundle can be manually specified by using the ``add-dsym``::
+debugger should automatically find the matching dSYM bundle, as long as it is findable by macOS's Spotlight [2]_. 
+However, the path to the dSYM bundle can be manually specified by using the ``add-dsym``::
 
-  add-dsym <path to dSYM bundle>
+  (lldb) add-dsym <path to dSYM bundle>
+
+The dSYM bundle that can be manually specified can be either downloaded or built when compiling Wazuh from sources.
+However, note that you will get a warning if the identifier for the symbols and the debugging target don't match.
+It is up to the developer to decide whether the warning can be ignored or not.
 
 Lastly, a core dump can also be analyzed if we have debugging symbols embedded into the binaries (i.e., when you use the
-``DISABLE_STRIP_SYMBOLS=1`` make flag).
+``DISABLE_STRIP_SYMBOLS=1`` make flag). More info about building Wazuh can be found :ref:`here<wazuh_makefile>`.
 
 .. [2] When compiling, binaries and dSYM bundles are created with a matching UUID identifier, this – and search methods including Spotlight – is what allows ``lldb`` to automatically match them.
