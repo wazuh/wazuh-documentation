@@ -32,7 +32,7 @@ allowed to generate.
 To enable core dump generation for Wazuh, the service needs to be relaunched from a shell, this is because resource
 limits are propagated to child processes, so if we set the core limit to a certain value on a shell, then all
 processes spawned by it (for example by invoking a command) will inherit the resource limits. Normally, all Wazuh
-processes have launchd as their parent process, which will only propagate the default system-wide resource limits.
+processes have ``launchd`` as their parent process, which will only propagate the default system-wide resource limits.
 
 Run the following commands as root. First, stop the service::
 
@@ -50,7 +50,7 @@ check this with::
 
   # sysctl kern.corefile
 
-The default output of this command will be "/cores/core.%P" which means core dumps will comply to this formatting rule.
+The default output of this command will be ``/cores/core.%P`` which means core dumps will comply to this formatting rule.
 We will assume this is the case for the rest of this article.
 
 Next, make sure the ``/cores`` folder exists::
