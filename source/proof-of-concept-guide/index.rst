@@ -19,7 +19,7 @@ You need to have these components already installed and running to test the PoCs
   * A Wazuh agent running on a Ubuntu 20 LTS system
   * A Wazuh agent running on a Windows system
 
-For an easy installation and setup of the Wazuh central components, we recommend downloading our ready-to-use :ref:`OVA <virtual_machine>`, launching an EC2 Instance with our :ref:`AMI <amazon-machine-images>`, or using our :ref:`Wazuh installation assistant <unattended_all_in_one>`.
+For an easy installation and setup of the Wazuh central components, we recommend downloading our ready-to-use :ref:`OVA <virtual_machine>`, launching an EC2 Instance with our :ref:`AMI <amazon-machine-images>`, or using our :doc:`Wazuh installation assistant </quickstart>`.
 
 For more information on how to install the Wazuh components, see the :ref:`Installation guide <installation_guide>`. Note that a Wazuh agent cannot be installed on the same machine as the Wazuh manager.
 
