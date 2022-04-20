@@ -8,12 +8,12 @@
 Wazuh Docker deployment
 =======================
 
-- `Requirements`_
-- `Usage`_
-- `Exposed ports`_
+Below you can find the `requirements`_, the different types of `usage`_ and finally, the `exposed ports`_.
 
 Requirements
 ------------
+
+Here are listed the requirements for a Wazuh Docker deployment:
 
 - `Container memory`_
 - `Increase max_map_count on your host (Linux)`_
@@ -112,12 +112,12 @@ Single-node Deployment
 
 1. Clone the Wazuh repository to your system:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    $ git clone https://github.com/wazuh/wazuh-docker.git -b 4.3 --depth=1
+      $ git clone https://github.com/wazuh/wazuh-docker.git -b 4.3 --depth=1
 
 
-  Then enter into the ``single-node`` directory, all the commands described below are executed within this directory. For :ref:`additional security <customize-default-users>`, the default password for the Wazuh Indexer admin user can be changed.
+    Then enter into the ``single-node`` directory, all the commands described below are executed within this directory. For :ref:`additional security <customize-default-users>`, the default password for the Wazuh Indexer admin user can be changed.
 
 
 2. Secure traffic between the deployment nodes using certificates:
@@ -127,7 +127,7 @@ Single-node Deployment
 
     a. Generate self-signed certificates for each node of the cluster:
     
-        We have created a Docker image to automate certificate generation using the Wazuh certs gen tool. Then, modify the file ``config/wazuh_indexer_ssl_certs/certs.yml`` and execute the following command to obtain the desired certificates:
+        A Docker image is available to automate certificate generation using the Wazuh certs gen tool. Just modify the file ``config/wazuh_indexer_ssl_certs/certs.yml`` and execute the following command to obtain the desired certificates:
       
         .. code-block:: console
       
@@ -204,11 +204,11 @@ Multi-node deployment
 
    a. Generate self-signed certificates for each node of the cluster:
 
-      We have created a Docker image to automate certificate generation using the Wazuh certs gen tool. Then, modify the file ``config/wazuh_indexer_ssl_certs/certs.yml`` and execute the following command to obtain the desired certificates:
-      
-        .. code-block:: console
+      A Docker image is available to automate certificate generation using the Wazuh certs gen tool. Just modify the file ``config/wazuh_indexer_ssl_certs/certs.yml`` and execute the following command to obtain the desired certificates:
+        
+          .. code-block:: console
 
-          $ docker-compose -f generate-indexer-certs.yml run --rm generator
+            $ docker-compose -f generate-indexer-certs.yml run --rm generator
 
 
       This will save the certificates into the config/wazuh_indexer_ssl_certs directory.

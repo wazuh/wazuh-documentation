@@ -30,39 +30,53 @@ For Linux/Unix machines, Docker requires a 64-bit operating system running kerne
 
 2. Run the Docker installation script:
 
-  - On Ubuntu/Debian machines:
-
-  .. code-block:: console
-
-      # curl -sSL https://get.docker.com/ | sh
+    .. tabs::
 
 
-  - On CentOS machines:
+      .. group-tab:: Yum
 
-  .. code-block:: console  
 
-      # dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
-      # dnf install docker-ce --nobest -y
+        .. code-block:: console  
+
+          # dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
+          # dnf install docker-ce --nobest -y
+
+
+      .. group-tab:: APT
+
+        
+        .. code-block:: console
+
+          # curl -sSL https://get.docker.com/ | sh
 
 
 3. Start the Docker service:
 
-  a) For Systemd::
+    .. tabs::
 
-      $ systemctl start docker
 
-  b) For SysV Init::
+      .. group-tab:: Systemd
 
-      $ service docker start
+
+        .. code-block:: console
+
+          # $ systemctl start docker
+
+
+      .. group-tab:: SysV Init
+
+        .. code-block:: console
+
+          # service docker start
 
 
   .. note::
      If you would like to use Docker as a non-root user, you should now consider adding your user to the ``docker`` group with something like the following command (remember that you’ll have to log out and log back in for this to take effect):
 
 
-  .. code-block:: console
+      .. code-block:: console
 
-    # usermod -aG docker your-user
+        # usermod -aG docker your-user
 
 
 Docker compose
