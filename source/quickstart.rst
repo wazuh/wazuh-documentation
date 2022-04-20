@@ -67,8 +67,6 @@ Wazuh can be installed on a 64-bit Linux operating system. Wazuh supports the fo
      - Ubuntu 16.04, 18.04, 20.04
  
 
-.. _unattended_all_in_one:
-
 Installing Wazuh
 ----------------
 
