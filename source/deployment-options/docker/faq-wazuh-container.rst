@@ -43,10 +43,10 @@ Then map your configuration file inside the container in the ``docker-compose.ym
         - docker_wazuh
 
 
-How can I store Wazuh indexer data?
------------------------------------
+How can I store the Wazuh indexer data?
+---------------------------------------
 
-The data stored in Wazuh indexer will persist after container reboots but not after container removal.
+The data stored in the Wazuh indexer will persist after container reboots but not after container removal.
 
 By default, the single-node and multi-node deployments already have volumes configured. For example, see ``wazuh1.indexer`` volume in the multi-node ``docker-compose.yml`` file:
 
@@ -58,5 +58,5 @@ By default, the single-node and multi-node deployments already have volumes conf
       - wazuh-indexer-data-1:/var/lib/wazuh-indexer
 
 
-This will store Wazuh indexer data inside ``wazuh-indexer-data-1`` volume in the Docker host local file system.
+This will store the Wazuh indexer data inside ``wazuh-indexer-data-1`` volume in the Docker host local file system.
 

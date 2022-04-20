@@ -19,12 +19,12 @@ After installing the Wazuh-Docker containers, there are several tasks that you c
 Access to services and containers
 ---------------------------------
 
-#. You may access the Kibana UI at the Docker host's IP address, for example: ``https://localhost``, if you are in the Docker host.
+#. You may access the Kibana UI at the Docker host's IP address, for example, ``https://localhost``, if you are in the Docker host.
 
    .. note::
      In case you use a self-signed certificate, your browser will warn that it cannot verify its authenticity.
 
-#. Agents may be enrolled by following the standard enrollment process and using the Docker host address as the manager address. For more information see: :ref:`Wazuh agent enrollment <agent_enrollment>`
+#. Agents may be enrolled by following the standard enrollment process and using the Docker host address as the manager address. For more information, see :ref:`Wazuh agent enrollment <agent_enrollment>`.
 
 #. You can list the containers you have created by executing ``docker-compose ps`` in the directory that contains the ``docker-compose.yml`` file:
 
@@ -55,7 +55,7 @@ Wazuh service data volumes
 
 Wazuh configuration and log files can be configured to exist outside of their container. This will allow these files to persist after containers are removed and to provision custom configuration files to your containers.
 
-Multiple volumes are required to ensure persistence on a Wazuh container, the following is an example of a ``docker-compose.yml`` with those defined:
+Multiple volumes are required to ensure persistence on a Wazuh container. The following is an example of a ``docker-compose.yml`` with those defined:
 
 .. code-block:: yaml
 

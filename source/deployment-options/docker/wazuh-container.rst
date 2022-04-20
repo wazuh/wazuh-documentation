@@ -23,12 +23,12 @@ Here are listed the requirements for a Wazuh Docker deployment:
 Container memory
 ^^^^^^^^^^^^^^^^
 
-It is recommended to configure the Docker host preferences to give at least 6GB of memory for the host that created the containers. This is because, depending on the deployment and usage, Wazuh indexer memory consumption can vary. Therefore, allocate the recommended memory for a complete stack deployment to work properly.
+It is recommended to configure the Docker host preferences to give at least 6GB of memory for the host that created the containers. This is because, depending on the deployment and usage, the Wazuh indexer memory consumption can vary. Therefore, allocate the recommended memory for a complete stack deployment to work properly.
 
 Increase max_map_count on your host (Linux)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh Indexer needs to be able to create many memory-mapped areas. So the kernel has to be set to give a process at least 262,144 memory-mapped areas.
+The Wazuh Indexer needs to be able to create many memory-mapped areas. So the kernel has to be set to give a process at least 262,144 memory-mapped areas.
 
 #. You need to increase ``max_map_count`` on your Docker host:
 
@@ -41,13 +41,13 @@ Wazuh Indexer needs to be able to create many memory-mapped areas. So the kernel
 
     .. warning::
 
-      If you don’t set the ``max_map_count`` on your host, Wazuh indexer will probably NOT work.
+      If you don’t set the ``max_map_count`` on your host, the Wazuh indexer will probably NOT work.
 
 
 Increase max_map_count on your host (Windows)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh Indexer needs to be able to create many memory-mapped areas. So the kernel has to be set to give a process at least 262,144 memory-mapped areas.
+The Wazuh Indexer needs to be able to create many memory-mapped areas. So the kernel has to be set to give a process at least 262,144 memory-mapped areas.
 
 #. You need to increase ``max_map_count`` on your Docker host:
 
@@ -82,14 +82,14 @@ Wazuh Indexer needs to be able to create many memory-mapped areas. So the kernel
 
       .. warning::
 
-        If the **max_map_count** is not set on the host, Wazuh indexer will probably NOT work.
+        If the **max_map_count** is not set on the host, the Wazuh indexer will probably NOT work.
 
 
 
 Docker for OSX
 ^^^^^^^^^^^^^^
 
-In Docker for OSX, there is a default memory limit of 2GB, so in order to run ``docker-compose up`` successfully, it is necessary to change default memory settings from 2GB to at least 6GB. This is because, depending on the deployment and usage, Wazuh indexer memory consumption can vary. 
+In Docker for OSX, there is a default memory limit of 2GB, so in order to run ``docker-compose up`` successfully, it is necessary to change default memory settings from 2GB to at least 6GB. This is because, depending on the deployment and usage, the Wazuh indexer memory consumption can vary. 
 
 To do so, click on the Docker icon in the menu bar, then on “Preferences…”, go to the “Advanced” tab, and set 6GB of memory. Finally, click on “Apply & Restart” and run docker-compose up.
 
@@ -180,7 +180,7 @@ Single-node Deployment
 
 
 .. note::
-   The Wazuh dashboard container will run multiple queries to the Wazuh indexer API using curl, to learn when Wazuh indexer is up. It is expected to see several ``Failed to connect to Wazuh indexer port 9200`` log messages or “Wazuh dashboard server is not ready yet”, until Wazuh indexer is started. Then the setup process will continue normally, it takes about 1 minute for the Wazuh Indexer to start up. The default Wazuh indexer credentials are in the ``docker-compose.yml`` file.
+   The Wazuh dashboard container will run multiple queries to the Wazuh indexer API using curl, to learn when Wazuh indexer is up. It is expected to see several ``Failed to connect to Wazuh indexer port 9200`` log messages or “Wazuh dashboard server is not ready yet”, until the Wazuh indexer is started. Then the setup process will continue normally, it takes about 1 minute for the Wazuh Indexer to start up. The default Wazuh indexer credentials are in the ``docker-compose.yml`` file.
 
 
 .. _multi-node-deployment:
@@ -263,7 +263,7 @@ Multi-node deployment
       $ docker-compose up -d
 
 .. note::
-  The Wazuh dashboard container will run multiple queries to the Wazuh indexer API using curl, to learn when Wazuh indexer is up. It is expected to see several ``Failed to connect to Wazuh indexer port 9200`` log messages or “Wazuh dashboard server is not ready yet”, until Wazuh indexer is started. Then the setup process will continue normally, it takes about 1 minute for the Wazuh Indexer to start up. The default Wazuh indexer credentials are in the ``docker-compose.yml`` file.
+  The Wazuh dashboard container will run multiple queries to the Wazuh indexer API using curl, to learn when the Wazuh indexer is up. It is expected to see several ``Failed to connect to Wazuh indexer port 9200`` log messages or “Wazuh dashboard server is not ready yet”, until the Wazuh indexer is started. Then the setup process will continue normally, it takes about 1 minute for the Wazuh Indexer to start up. The default Wazuh indexer credentials are in the ``docker-compose.yml`` file.
 
 
 .. _customize-default-users:
