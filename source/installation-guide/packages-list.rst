@@ -19,7 +19,7 @@ This download page contains packages required for the Wazuh installation:
    - `Solaris`_
    - `AIX`_
    - `HP-UX`_
-   
+
 - `Wazuh indexer`_
 - `Wazuh dashboard`_
 - `Wazuh Kibana plugin`_
@@ -53,8 +53,10 @@ Linux
 +                       +                   +--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                       |                   |    armhf     | `wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_ARMHF|.armv7hl.rpm <|RPM_AGENT|-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_ARMHF|.armv7hl.rpm>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_ARMHF|.armv7hl.rpm.sha512>`__)                           |
 +-----------------------+-------------------+--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|                       |  7 or later       |    powerpc   | `wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_PPC|.ppc64le.rpm <|RPM_AGENT|-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_PPC|.ppc64le.rpm>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_PPC|.ppc64le.rpm.sha512>`__)                           |
++ CentOS                +-------------------+--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                       |                   |    i386      | `wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_I386|.i386.rpm <|RPM_AGENT|-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_I386|.i386.rpm>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_I386|.i386.rpm.sha512>`__)                                    |
-+ CentOS                +  6 or later       +--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++                       +  6 or later       +--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                       |                   |              | `wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm <|RPM_AGENT|-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm.sha512>`__)                              |
 +                       +                   +    x86_64    +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                       |                   |              | `wazuh-manager-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_MANAGER_X86|.x86_64.rpm <|RPM_MANAGER|-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_MANAGER_X86|.x86_64.rpm>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-manager-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_MANAGER_X86|.x86_64.rpm.sha512>`__)                        |
@@ -69,8 +71,10 @@ Linux
 +                       +  5                +--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                       |                   |    x86_64    | `wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86_EL5|.el5.x86_64.rpm <https://packages.wazuh.com/|CURRENT_MAJOR|/yum5/x86_64/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86_EL5|.el5.x86_64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86_EL5|.el5.x86_64.rpm.sha512>`__)         |
 +-----------------------+-------------------+--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|                       |  9 or later       |    powerpc   | `wazuh-agent_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_PPC|_ppc64el.deb <|DEB_AGENT|_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_PPC|_ppc64el.deb>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_PPC|_ppc64el.deb.sha512>`__)   |
++ Debian                +-------------------+--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                       |                   |    i386      | `wazuh-agent_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_I386|_i386.deb <|DEB_AGENT|_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_I386|_i386.deb>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_I386|_i386.deb.sha512>`__)            |
-+ Debian                +  7 or later       +--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++                       +  7 or later       +--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                       |                   |              | `wazuh-agent_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_X86|_amd64.deb <|DEB_AGENT|_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_X86|_amd64.deb>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_X86|_amd64.deb.sha512>`__)         |
 +                       +                   +    x86_64    +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                       |                   |              | `wazuh-manager_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_MANAGER_X86|_amd64.deb <|DEB_MANAGER|_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_MANAGER_X86|_amd64.deb>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-manager_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_MANAGER_X86|_amd64.deb.sha512>`__) |
@@ -282,7 +286,7 @@ Wazuh Kibana plugin
 +----------------------------+--------------------------+---------------------+--------------------------+
 
 
-For a complete list of the available versions, see the `Wazuh Kibana plugin compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/tree/v4.2.5-7.10.2#wazuh---kibana---open-distro-version-compatibility-matrix>`_. 
+For a complete list of the available versions, see the `Wazuh Kibana plugin compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/tree/v4.2.5-7.10.2#wazuh---kibana---open-distro-version-compatibility-matrix>`_.
 
 Wazuh Splunk app
 ----------------
@@ -323,7 +327,7 @@ Virtual machine
 ---------------
 
 +--------------+--------------+--------------+---------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Distribution | Architecture | VM Format    | Version | Package                                                                                                                                                                                            |                                                                                                                                                 
+| Distribution | Architecture | VM Format    | Version | Package                                                                                                                                                                                            |
 +==============+==============+==============+=========+====================================================================================================================================================================================================+
 |   CentOS 7   |    64bits    |      OVA     |  |WAZUH_LATEST_OVA|  | `wazuh-|WAZUH_LATEST_OVA|_|OPEN_DISTRO_LATEST|.ova <https://packages.wazuh.com/|CURRENT_MAJOR|/vm/wazuh-|WAZUH_LATEST_OVA|_|OPEN_DISTRO_LATEST|.ova>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST_OVA|/wazuh-|WAZUH_LATEST_OVA|_|OPEN_DISTRO_LATEST|.ova.sha512>`__)             |
 +--------------+--------------+--------------+---------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
