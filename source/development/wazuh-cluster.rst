@@ -86,7 +86,7 @@ The image below shows a schema of how a master node and a worker node interact w
     :align: center
     :width: 80%
 
-    
+
 Threads
 ^^^^^^^
 The following tasks can be found in the cluster, depending on the type of node they are running on:
@@ -127,9 +127,9 @@ This thread is in charge of synchronizing master's integrity information among a
 
     * Path
     * Modification time
-    * MD5 checksum
+    * Blake2b checksum
     * Whether the file is a merged file or not. And if it's merged:
-    
+
         * The merge type
         * The filename
 
@@ -513,8 +513,8 @@ If the log error message isn't clarifying enough, the traceback can be logged se
     2019/04/10 15:50:37 wazuh-clusterd: ERROR: [Cluster] [Main] Could not get checksum of file client.keys: [Errno 13] Permission denied: '/var/ossec/etc/client.keys'
     Traceback (most recent call last):
     File "/var/ossec/framework/python/lib/python3.9/site-packages/wazuh-|WAZUH_LATEST|-py3.7.egg/wazuh/core/cluster/cluster.py", line 217, in walk_dir
-        entry_metadata['md5'] = md5(os.path.join(common.ossec_path, full_path))
-    File "/var/ossec/framework/python/lib/python3.9/site-packages/wazuh-|WAZUH_LATEST|-py3.7.egg/wazuh/core/utils.py", line 555, in md5
+        entry_metadata['blake2b'] = blake2b(os.path.join(common.ossec_path, full_path))
+    File "/var/ossec/framework/python/lib/python3.9/site-packages/wazuh-|WAZUH_LATEST|-py3.7.egg/wazuh/core/utils.py", line 555, in blake2b
         with open(fname, "rb") as f:
     PermissionError: [Errno 13] Permission denied: '/var/ossec/etc/client.keys'
 
