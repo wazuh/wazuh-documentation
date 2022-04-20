@@ -76,7 +76,7 @@ Indicate your deployment configuration, create the SSL certificates to encrypt c
 2. Wazuh indexer nodes installation
 ------------------------------------
 
-Install and configure the Wazuh indexer nodes. Make sure that a copy of ``wazuh-install-files.tar``, created during the previous step, is placed in your working directory.
+Install and configure the Wazuh indexer nodes. 
 
 
 #. Download the Wazuh installation assistant.
@@ -87,6 +87,8 @@ Install and configure the Wazuh indexer nodes. Make sure that a copy of ``wazuh-
 
 
 #. Run the assistant with the option ``-wi`` and the node name to install and configure the Wazuh indexer. The node name must be the same used in ``config.yml`` for the initial configuration, for example, ``node-1``.
+      
+      .. note:: Make sure that a copy of ``wazuh-install-files.tar``, created during the initial configuration step, is placed in your working directory.
 
       .. code-block:: console
 

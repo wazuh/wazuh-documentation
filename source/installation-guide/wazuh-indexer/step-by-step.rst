@@ -2,7 +2,7 @@
 
 .. meta:: :description: Wazuh indexer is a highly scalable full-text search engine. Install the Wazuh indexer in a single-node or multi-node configuration according to your environment needs. 
 
-Installing the Wazuh indexer step by step
+Installing the Wazuh indexer step-by-step
 =========================================
 
 Install and configure the Wazuh indexer as a single-node or multi-node cluster following step-by-step instructions. Wazuh indexer is a highly scalable full-text search engine and offers advanced security, alerting, index management, deep performance analysis, and several other features.
