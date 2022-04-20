@@ -128,13 +128,13 @@ newUrls['4.3'] = [
   '/getting-started/use-cases/incident-response.html', 
   '/getting-started/use_cases/container_security.html',
   '/installation-guide/wazuh-indexer/index.html',
-  '/installation-guide/wazuh-indexer/unattended.html',
+  '/installation-guide/wazuh-indexer/installation-assistant.html',
   '/installation-guide/wazuh-indexer/step-by-step.html',
   '/installation-guide/wazuh-dashboard/index.html',
-  '/installation-guide/wazuh-dashboard/unattended.html',
+  '/installation-guide/wazuh-dashboard/installation-assistant.html',
   '/installation-guide/wazuh-dashboard/step-by-step.html',
   '/installation-guide/wazuh-server/index.html',
-  '/installation-guide/wazuh-server/unattended.html',
+  '/installation-guide/wazuh-server/installation-assistant.html',
   '/installation-guide/wazuh-server/step-by-step.html',
   '/deployment-options/index.html',
   '/deployment-options/wazuh-from-sources/index.html',
@@ -353,7 +353,7 @@ redirections.push(
     '4.3': '/installation-guide/index.html',
   },
   {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
+    'target': ['4.2=>4.3'],
     '4.2': '/deployment.html',
     '4.3': '/deployment-options/index.html',
   },
@@ -415,7 +415,7 @@ redirections.push(
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/installation-guide/open-distro/distributed-deployment/unattended/unattended-elasticsearch-cluster-installation.html',
-    '4.3': '/installation-guide/wazuh-indexer/unattended.html',
+    '4.3': '/installation-guide/wazuh-indexer/installation-assistant.html',
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
@@ -425,7 +425,7 @@ redirections.push(
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/installation-guide/open-distro/distributed-deployment/unattended/unattended-wazuh-cluster-installation.html',
-    '4.3': '/installation-guide/wazuh-server/unattended.html',
+    '4.3': '/installation-guide/wazuh-server/installation-assistant.html',
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
@@ -433,9 +433,9 @@ redirections.push(
     '4.3': '/installation-guide/wazuh-server/step-by-step.html',
   },
   {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': 'installation-guide/open-distro/distributed-deployment/unattended/unattended-elasticsearch-cluster-installation.html',
-    '4.3': '/installation-guide/wazuh-dashboard/unattended.html',
+    'target': ['4.3=>4.2'],
+    '4.2': '/installation-guide/open-distro/distributed-deployment/unattended/unattended-elasticsearch-cluster-installation.html',
+    '4.3': '/installation-guide/wazuh-dashboard/installation-assistant.html',
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
