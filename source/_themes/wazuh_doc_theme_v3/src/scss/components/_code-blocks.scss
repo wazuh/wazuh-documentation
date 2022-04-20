@@ -262,6 +262,9 @@ body {
       }
     }
   }
+  .admonition [class*="highlight-"] {
+    border-color: $light-color-border-deeper;
+  }
   [class*="highlight-"] {
     border-color: $light-color-code-block-border;
     &.output {
@@ -361,6 +364,9 @@ body {
         }
       }
     }
+  }
+  .admonition [class*="highlight-"] {
+    border-color: $dark-color-code-block-background;
   }
   [class*="highlight-"] {
     border-color: $dark-color-code-block-border;
