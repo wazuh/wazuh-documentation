@@ -8,7 +8,7 @@ Step-by-step installation
 
 The following sections provide information about how to install each involved component. During the Elasticsearch cluster installation, the certificates necessary to secure the communication will be created, so it is recommended to start by installing Elasticsearch.
 
-Every component described below will be installed on a dedicated host, except Kibana, that can be installed either on a dedicated host or along with Elasticsearch.
+Every component described below will be installed on a dedicated host, except Kibana, which can be installed either on a dedicated host or along with Elasticsearch.
 
 - **Elasticsearch cluster**
     

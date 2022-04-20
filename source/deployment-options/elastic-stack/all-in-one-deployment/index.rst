@@ -17,13 +17,11 @@ This section guides through the installation and configuration of the Wazuh serv
 
 The following components will be installed:
 
-- The Wazuh server, including the Wazuh manager as a single-node cluster and the Wazuh API.
+- The Wazuh server, including the Wazuh manager as a single-node cluster, and the Wazuh API.
 
-- Elastic Stack, including Elasticsearch as a single-node cluster, Filebeat, and Kibana including the Wazuh Kibana plugin.
+- Elastic Stack, including Elasticsearch as a single-node cluster, Filebeat, and Kibana, including the Wazuh Kibana plugin.
 
-The communication will be encrypted using certificates. To guarantee the expected performance of the Wazuh components the host must meet the hardware requirements described in the :ref:`requirements <installation_requirements>` section.
-
-The user can choose between step-by-step installation, a manual way of carrying out the process, or unattended installation, an automated way using a script:
+The communication will be encrypted using certificates. To guarantee the expected performance of the Wazuh components the host must meet the hardware requirements described in the :ref:`requirements <installation_requirements>` section. The user can follow the installation steps guide to install all required components.
 
 
 .. toctree::

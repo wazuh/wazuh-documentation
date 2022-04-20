@@ -5,15 +5,17 @@
 
 .. _basic_all_in_one:
 
-Step-by-step installation
-=========================
+Installation Steps
+==================
 This document guides through an installation of the Wazuh server and Elastic Stack components in an all-in-one configuration. This guide provides instructions to configure the official repositories to do the installations, alternatively, all the available packages can be found :ref:`here <packages>`. 
 
 .. note:: Root user privileges are required to execute all the commands described below.
 
-Prerequisites
--------------
-Some extra packages are needed for the installation, such us ``curl`` or ``unzip``, that will be used in further steps: 
+
+Installing Prerequisites
+------------------------
+
+Some extra packages are needed for the installation, such us ``curl`` or ``unzip``, that will be used in further steps. However, this step can be skipped if ``curl`` and ``unzip`` are already installed on the server. 
 
 .. include:: ../../../_templates/installations/basic/before_installation_all_in_one.rst
 
@@ -113,6 +115,7 @@ Certificates creation and deployment
 
 To check that the installation was made successfully, run the following command replacing ``<elastic_password>`` by the password generated on the previous step for ``elastic`` user:
 
+
 .. code-block:: console
   
   # curl -XGET https://localhost:9200 -u elastic:<elastic_password> -k
@@ -150,6 +153,7 @@ Installing Wazuh server
 -----------------------
 
 The Wazuh server collects and analyzes data from deployed agents. It runs the Wazuh manager, the Wazuh API and Filebeat. The first step to set up Wazuh is to add the Wazuh repository to the server. Alternatively, the Wazuh manager package can be downloaded directly and compatible versions can be checked :ref:`here <packages>`.
+
 
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -251,7 +255,7 @@ Filebeat installation and configuration
 
       # curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.1.tar.gz | tar -xvz -C /usr/share/filebeat/module
 
-#. Edit the file ``/etc/filebeat/filebeat.yml``:
+#. Edit the file ``/etc/filebeat/filebeat.yml`` and add the following line:
 
     .. include:: ../../../_templates/installations/basic/elastic/common/configure_filebeat_aio.rst
 
@@ -260,9 +264,10 @@ Filebeat installation and configuration
 
     .. code-block:: console
 
-      # cp -r /etc/elasticsearch/certs/ca/ /etc/filebeat/certs/
-      # cp /etc/elasticsearch/certs/elasticsearch.crt /etc/filebeat/certs/filebeat.crt
-      # cp /etc/elasticsearch/certs/elasticsearch.key /etc/filebeat/certs/filebeat.key
+        # cp -r /etc/elasticsearch/certs/ca/ /etc/filebeat/certs/
+        # cp /etc/elasticsearch/certs/elasticsearch.crt /etc/filebeat/certs/filebeat.crt
+        # cp /etc/elasticsearch/certs/elasticsearch.key /etc/filebeat/certs/filebeat.key
+
       
 
 #. Enable and start the Filebeat service:
@@ -276,8 +281,30 @@ To ensure that Filebeat has been successfully installed, run the following comma
       # filebeat test output
 
 
+This command should have an output like this:
+
+.. code-block:: console
+  :class: output
+
+      elasticsearch: https://127.0.0.1:9200...
+        parse url... OK
+        connection...
+        parse host... OK
+        dns lookup... OK
+        addresses: 127.0.0.1
+        dial up... OK
+        TLS...
+        security: server's certificate chain verification is enabled
+        handshake... OK
+        TLS version: TLSv1.3
+        dial up... OK
+        talk to server... OK
+        version: 7.17.0
+
+
 Kibana installation and configuration
 -------------------------------------
+
 Kibana is a flexible and intuitive web interface for mining and visualizing the events and archives stored in Elasticsearch.
 
 #. Install the Kibana package:

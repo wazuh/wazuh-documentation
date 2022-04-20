@@ -18,8 +18,10 @@ Installing Elasticsearch
 
 Elasticsearch is a highly scalable full-text search and analytics engine. 
 
-Prerequisites
--------------
+
+Installing Prerequisites
+------------------------
+
 Some extra packages are needed for the installation, such us ``curl`` or ``unzip``, that will be used in further steps: 
 
 .. include:: ../../../../../_templates/installations/basic/before_installation_elastic.rst
@@ -70,7 +72,7 @@ Elasticsearch installation and configuration
 Certificates creation and deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. This step implies the selection of the Wazuh cluster mode. Choose between ``Wazuh single-node cluster``, if having only one Wazuh server, and ``Wazuh multi-node cluster`` in case of having two or more Wazuh servers.
+#. The number of wazuh servers to be implemented will determine the next step. Select ``Wazuh single-node cluster``, if there is only one Wazuh server, and ``Wazuh multi-node cluster`` in case there are two or more Wazuh servers..
 
     .. include:: ../../../../../_templates/installations/basic/elastic/common/elastic-single-node/generate_deploy_certificates.rst
 
