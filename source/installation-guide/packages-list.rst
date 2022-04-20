@@ -326,9 +326,10 @@ MSU
 Wazuh debug symbols
 -------------------
 
+.. _linux-dbg-symbols-packages:
+
 Linux debug symbols
 ^^^^^^^^^^^^^^^^^^^
-
 
 +---------------+------------------------------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Package type  |                 OS                 | Architecture | Packages                                                                                                                                                                                                                                                           |
@@ -349,7 +350,7 @@ Linux debug symbols
 +               +                                    +--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |               |               SUSE                 |     armhf    | `wazuh-agent-debuginfo-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_ARMHF|.armv7hl.rpm <|RPM_AGENT_DEBUG_SYMBOLS|-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_ARMHF|.armv7hl.rpm>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent-debuginfo-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_ARMHF|.armv7hl.rpm.sha512>`__)                   |
 +               +                                    +--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|               |                                    |    PowerPC   | `wazuh-agent-debuginfo-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_PPC64|.ppc64le.rpm <|RPM_AGENT_DEBUG_SYMBOLS|-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_PPC64|.ppc64le.rpm>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent-debuginfo-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_PPC64|.ppc64le.rpm.sha512>`__)                   |
+|               |                                    |    powerpc   | `wazuh-agent-debuginfo-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_PPC64|.ppc64le.rpm <|RPM_AGENT_DEBUG_SYMBOLS|-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_PPC64|.ppc64le.rpm>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent-debuginfo-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_PPC64|.ppc64le.rpm.sha512>`__)                   |
 +---------------+------------------------------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |               |                                    |              | `wazuh-agent-dbg_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_X86|_amd64.deb <|DEB_AGENT_DEBUG_SYMBOLS|_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_X86|_amd64.deb>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent-dbg_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_X86|_amd64.deb.sha512>`__)                   |
 +               +                                    +    x86_64    +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -363,9 +364,10 @@ Linux debug symbols
 +               +                                    +--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |               |            Raspbian OS             |     armhf    | `wazuh-agent-dbg_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_ARMHF|_armhf.deb <|DEB_AGENT_DEBUG_SYMBOLS|_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_ARMHF|_armhf.deb>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent-dbg_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_ARMHF|_armhf.deb.sha512>`__)                   |
 +               +                                    +--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|               |                                    |   Power PC   | `wazuh-agent-dbg_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_PPC64|_ppc64el.deb <|DEB_AGENT_DEBUG_SYMBOLS|_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_PPC64|_ppc64el.deb>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent-dbg_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_PPC64|_ppc64el.deb.sha512>`__)             |
+|               |                                    |    powerpc   | `wazuh-agent-dbg_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_PPC64|_ppc64el.deb <|DEB_AGENT_DEBUG_SYMBOLS|_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_PPC64|_ppc64el.deb>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent-dbg_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_PPC64|_ppc64el.deb.sha512>`__)             |
 +---------------+------------------------------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
+.. _win-dbg-symbols-packages:
 
 Windows debug symbols
 ^^^^^^^^^^^^^^^^^^^^^
@@ -376,6 +378,7 @@ Windows debug symbols
 | XP or greater |   32/64bits  | `wazuh-agent-windows-x86_64-debug-info-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/windows/wazuh-agent-windows-x86_64-debug-info-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.zip>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh-agent-windows-x86_64-debug-info-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.zip.sha512>`__)     |
 +---------------+--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
+.. _macos-dbg-symbols-packages:
 
 macOS debug symbols
 ^^^^^^^^^^^^^^^^^^^
