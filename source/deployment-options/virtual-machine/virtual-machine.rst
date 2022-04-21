@@ -86,10 +86,16 @@ Configuration files
 All components included in this virtual image are configured to work out of the box without the need to modify any settings. However, all components can be fully customized. These are the configuration files locations:
 
   - Wazuh manager: ``/var/ossec/etc/ossec.conf``
-  - Wazuh indexer: ``/etc/wazuh-indexer/opensearch.yml``
-  - Filebeat-OSS: ``/etc/filebeat/filebeat.yml``
-  - Wazuh dashboard: ``/etc/wazuh-dashboard/opensearch_dashboards.yml``
 
+  - Wazuh indexer: ``/etc/wazuh-indexer/opensearch.yml``
+  
+  - Filebeat-OSS: ``/etc/filebeat/filebeat.yml``
+  
+  - Wazuh dashboard: 
+
+     - ``/etc/wazuh-dashboard/opensearch_dashboards.yml``
+     
+     - ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml``
 
 VirtualBox time configuration
 -----------------------------
