@@ -111,12 +111,15 @@
 {#- Add specific files -#}
   {% set specific_js_files = get_js_by_page(pagename) %}
 
-
 {% set script_files = theme_script_files + specific_js_files + extensions_script_files %}
 
 {#- Insert the script tags -#}
 {%- for scriptfile in script_files -%}
+    {%- if "redirects.min.js" in scriptfile and not theme_local_redirects_file %}
+    <script src="{{ url_root + '../current/' + scriptfile }}"></script>
+    {%- else -%}
     <script src="{{ pathto(scriptfile, 1) }}"></script>
+    {%- endif -%}
 {% endfor -%}
 {%- endmacro -%}
 

@@ -1,7 +1,8 @@
-{%- set titlesuffix = " · "|safe + docstitle|e %}
-{%- set pagetitle = "API reference" %}
-
 {%- extends "!wazuh_doc_theme_v3/template-parts/body.html" -%}
+
+{%- block htmltitle -%}
+<title>API reference{{ titlesuffix }}</title>
+{% endblock htmltitle -%}
 
 {% block body %}
 <div class="loading">

@@ -89,7 +89,15 @@ if "%1" == "html-prod" (
 	%SPHINXBUILD% -b html %ALLSPHINXOPTS% %BUILDDIR%/html -t production
 	if errorlevel 1 exit /b 1
 	echo.
-	echo.Build finished. The HTML pages are in %BUILDDIR%/html.
+	echo.Build finished. The HTML pages are in %BUILDDIR%/html "(production mode)"
+	goto end
+)
+
+if "%1" == "html-dev" (
+	%SPHINXBUILD% -b html %ALLSPHINXOPTS% %BUILDDIR%/html -t dev
+	if errorlevel 1 exit /b 1
+	echo.
+	echo.Build finished. The HTML pages are in %BUILDDIR%/html "(dev mode)"
 	goto end
 )
 
