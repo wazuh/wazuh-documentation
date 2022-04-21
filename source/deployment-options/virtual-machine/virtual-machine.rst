@@ -8,7 +8,7 @@
 Virtual Machine (OVA)
 =====================
 
-Wazuh provides a pre-built virtual machine image in Open Virtual Appliance (OVA) format. This can be directly imported to VirtualBox or other OVA compatible virtualization systems. Take into account that this VM only runs on 64-bit systems. It does not provide high availability and scalability out of the box. However, these can be implemented by using `distributed deployment <basic_distributed_index>`_.
+Wazuh provides a pre-built virtual machine image in Open Virtual Appliance (OVA) format. This can be directly imported to VirtualBox or other OVA compatible virtualization systems. Take into account that this VM only runs on 64-bit systems. It does not provide high availability and scalability out of the box. However, these can be implemented by using :doc:`distributed deployment </installation-guide/index>`.
 
 
 Download the `virtual appliance (OVA) <https://packages.wazuh.com/|CURRENT_MAJOR|/vm/wazuh-|WAZUH_LATEST_OVA|_|OPEN_DISTRO_LATEST|.ova>`_, which contains the following components:
@@ -73,7 +73,7 @@ Shortly after starting the VM, the Wazuh dashboard can be accessed from the web 
      password: admin
 
 
-You can find <wazuh_server_ip>  by typing the following command in the VM:
+You can find ``<wazuh_server_ip>``  by typing the following command in the VM:
 
   .. code-block:: none
 
