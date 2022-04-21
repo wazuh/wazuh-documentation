@@ -1,0 +1,146 @@
+/* -----------------------------------------------------------------------------
+  PART: CENTRAL COLUMN
+
+  Style for the central column containing the element main in all documents.
+----------------------------------------------------------------------------- */
+
+/* Fixes the anchor */
+.section {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+
+  &::before {
+    position: relative;
+    display: block;
+    width: 0;
+    height: 1rem;
+    margin-top: -1rem;
+    content: "";
+  }
+
+  > dl {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+}
+
+#central-column * {
+  @include media-max(sm){
+    scroll-margin-top: calc(#{$header-height-xs} + #{$secondary-mobile-bar});
+  }
+  @include media-only(sm, xl){
+    scroll-margin-top: calc(#{$header-height-xs} + #{$secondary-mobile-bar} + #{$breadcrumbs-height-xs});
+  }
+  @include media-min(xl){
+    scroll-margin-top: calc(#{$header-height-xl} + #{$breadcrumbs-height-xl});
+  }
+}
+
+#central-column {
+  width: 100%;
+  @include media-only(xl, xxl) {
+    padding-right: $right-sidebar-width-narrow;
+    padding-left: $left-sidebar-width-narrow;
+  }
+  @include media-min(xxl) {
+    padding-right: $right-sidebar-width;
+    padding-left: $left-sidebar-width;
+  }
+}
+
+[role="main"] {
+  .no-margins {
+    margin: 0;
+  }
+
+  img {
+    border: 20px solid $color-img-border;
+  }
+
+  strong {
+    font-weight: 600;
+  }
+
+  code {
+    display: inline-block;
+    padding: 1px 2px;
+    font-family: "Fira Mono", monospace;
+  }
+
+  .figure {
+    p {
+      margin-top: 0;
+    }
+  }
+  
+  ol,
+  ul {
+    padding-left: 35px;
+  }
+
+  .arabic {
+    list-style-type: decimal;
+  }
+  .loweralpha {
+    list-style-type: lower-alpha;
+  }
+  .lowerroman {
+    list-style-type: lower-roman;
+  }
+  .upperalpha {
+    list-style-type: upper-alpha;
+  }
+  .upperroman {
+    list-style-type: upper-roman;
+  }
+  
+  /* Special case for nested autonumbered lists,
+  though this will affect all types of lists */
+  :not(li) {
+    > .arabic > li > .arabic {
+      list-style-type: lower-alpha;
+      > li > .arabic {
+        list-style-type: lower-roman;
+        > li > .arabic {
+          list-style-type: upper-alpha;
+          > li > .arabic {
+            list-style-type: upper-roman;
+          }
+        }
+      }
+    }
+  }
+
+  caption {
+    padding: 8px;
+    border: 1px solid;
+    border-top: none;
+    border-radius: 0 0 $rounded-corners $rounded-corners;
+  }
+}
+
+/* Light theme -------------------------------------------------------------- */
+
+body {
+  [role="main"] {
+    caption {
+      border-color: $light-color-table-border;
+    }
+    .caption-text {
+      color: $light-color-shaded-text;
+    }
+  }
+}
+
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme {
+  [role="main"] {
+    caption {
+      border-color: $dark-color-table-border;
+    }
+    .caption-text {
+      color: $dark-color-shaded-text-lighter;
+    }
+  }
+}

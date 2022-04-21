@@ -16,6 +16,7 @@ import shlex
 import datetime
 import time
 import json
+from jsmin import jsmin
 from requests.utils import requote_uri
 
 # If extensions (or modules to document with autodoc) are in another directory,
@@ -32,7 +33,7 @@ copyright = u'&copy; ' + str(datetime.datetime.now().year) + u' &middot; Wazuh I
 
 # The short X.Y version
 version = '4.2'
-is_latest_release = True
+is_latest_release = False
 
 # The full version, including alpha/beta/rc tags
 # Important: use a valid branch (4.0) or, preferably, tag name (v4.0.0)
@@ -121,7 +122,7 @@ pygments_style = 'sphinx'
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'wazuh_doc_theme'
+html_theme = 'wazuh_doc_theme_v3'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -129,19 +130,25 @@ html_theme = 'wazuh_doc_theme'
 html_theme_options = {
     'wazuh_web_url': 'https://wazuh.com',
     'wazuh_doc_url': 'https://documentation.wazuh.com',
-    'collapse_navigation': False, # Only for Wazuh documentation theme v2.0v
+    'collapse_navigation': False, # Only for Wazuh documentation theme v2.0
 }
 
 if html_theme == 'wazuh_doc_theme_v3':
     # Check if the release was before the new the theme
     # Note v3_release represents the release that was 'current' when the theme
-    # wazuh_doc_theme_v3 was published in production, that is, 4.3
+    # wazuh_doc_theme_v3 was published, that is, 4.3
     v3_release = [4,3]
     current_release = list(map(int, version.split('.')))
     is_pre_v3 = current_release[0] < v3_release[0] or (
                 current_release[0] == v3_release[0] and
                 current_release[1] < v3_release[1])
     html_theme_options['is_pre_v3'] = is_pre_v3
+    
+    # Check if the URL for the redirects.min.js must be local or from current
+    # redirects.min.js should be loaded from the local folder if:
+    # * the release is "current" (is_latest_release = True) or
+    # * is a normal compilation (not for production)
+    html_theme_options['local_redirects_file'] = is_latest_release or not (tags.has("production") or tags.has("dev"))
 
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = ['_themes']
@@ -626,9 +633,12 @@ def insert_inline_style(app, pagename, templatename, context, doctree):
 def manage_assets(app, pagename, templatename, context, doctree):
     theme_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), theme_assets_path)
     static = '_static/'
+    conditional_redirects = static + "js/min/redirects.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/redirects.min.js")).st_mtime
+    if tags.has("production") or tags.has("dev"):
+        conditional_redirects = static + "js/min/redirects.min.js?ver=%s" % str(time.time())
     # Full list of non-common javascript files
     individual_js_files = {
-        "redirects": static + "js/min/redirects.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/redirects.min.js")).st_mtime,
+        "redirects": conditional_redirects,
         "wazuh-documentation": static + "js/min/wazuh-documentation.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/wazuh-documentation.min.js")).st_mtime,
         "index": static + "js/min/index.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/index.min.js")).st_mtime,
         "index-redirect": static + "js/min/index-redirect.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/index-redirect.min.js")).st_mtime,

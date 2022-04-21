@@ -72,11 +72,32 @@ if errorlevel 9009 (
 
 :sphinx_ok
 
+if "%1" == "theme" (
+	cd source/_themes/wazuh_doc_theme_v3 && npm run build-all
+	if errorlevel 1 (
+		echo.
+		echo.Error. The theme assets could not be updated.
+	) else (
+		echo.
+		echo.Build finished. The main theme assets has been updated.
+	)
+	cd ../../..
+	goto end
+)
+
 if "%1" == "html-prod" (
 	%SPHINXBUILD% -b html %ALLSPHINXOPTS% %BUILDDIR%/html -t production
 	if errorlevel 1 exit /b 1
 	echo.
-	echo.Build finished. The HTML pages are in %BUILDDIR%/html.
+	echo.Build finished. The HTML pages are in %BUILDDIR%/html "(production mode)"
+	goto end
+)
+
+if "%1" == "html-dev" (
+	%SPHINXBUILD% -b html %ALLSPHINXOPTS% %BUILDDIR%/html -t dev
+	if errorlevel 1 exit /b 1
+	echo.
+	echo.Build finished. The HTML pages are in %BUILDDIR%/html "(dev mode)"
 	goto end
 )
 

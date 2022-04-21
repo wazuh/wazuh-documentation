@@ -1,0 +1,117 @@
+/* -----------------------------------------------------------------------------
+  Component: Version notice
+
+  Style for the component that notifies that the documentation visited is not
+  the latest one.
+----------------------------------------------------------------------------- */
+
+.no-latest-notice-wrapper {
+  position: fixed;
+  z-index: 100;
+  width: 100%;
+  min-height: $no-latest-notice-height-xl;
+  padding-right: 15px;
+  padding-left: 30px;
+  @include media-max(xl) {
+    padding-left: 15px;
+  }
+  @include media-only(xl, xxl) {
+    right: $right-sidebar-width-narrow;
+    left: $left-sidebar-width-narrow;
+    width: calc(100% - #{$right-sidebar-width-narrow} - #{$left-sidebar-width-narrow});
+  }
+  @include media-min(xxl) {
+    right: $right-sidebar-width;
+    left: $left-sidebar-width;
+    width: calc(100% - #{$right-sidebar-width} - #{$left-sidebar-width});
+  }
+
+  .no-latest-notice {
+    display: inline-block;
+    width: 100%;
+    padding: 5px 20px;
+    margin: .6em 0;
+    border-left: 5px solid;
+    @include media-max(sm) {
+      font-size: 14px;
+    }
+
+    .no-latest-title {
+      position: relative;
+      display: inline-block;
+      padding: 4px 15px 4px 0;
+      font-weight: 600;
+      line-height: 24px;
+      @include media-max(sm) {
+        line-height: 16px;
+      }
+    }
+
+    .no-latest-text-wrapper {
+      padding: 4px 15px 4px 0;
+      line-height: 24px;
+      @include media-max(sm) {
+        line-height: 16px;
+      }
+    }
+  }
+}
+
+.no-latest-docs {
+  &.document {
+    #central-column {
+      padding-top: calc(#{$breadcrumbs-height-xl} + #{$no-latest-notice-height-xl});
+      * {
+        scroll-margin-top: calc(#{$header-height-xl} + #{$breadcrumbs-height-xl} + #{$no-latest-notice-height-xl});
+      }
+    }
+
+    [role="main"] {
+      min-height: calc(100vh - #{$header-height-xl} - #{$breadcrumbs-height-xl} - #{$footer-height} - #{$no-latest-notice-height-xl});
+    }
+
+    .no-latest-notice-wrapper {
+      top: calc(#{$header-height-xl} + #{$breadcrumbs-height-xl});
+      @include media-max(sm){
+        top: calc(#{$header-height-xs} + #{$secondary-mobile-bar});
+      }
+    }
+  }
+  &.search {
+    .no-latest-notice-wrapper {
+      top: calc(#{$header-height-xl});
+    }
+    #central-column {
+      padding-top: $no-latest-notice-height-xl;
+    }
+  }
+}
+
+/* Light theme -------------------------------------------------------------- */
+body {
+  .no-latest-notice-wrapper {
+    background-color: $light-color-base-space;
+    .no-latest-notice {
+      background-color: rgba($light-color-warning, .05);
+      border-left-color: $light-color-warning;
+      .no-latest-title {
+        color: $light-color-warning-dark;
+      }
+    }
+  }
+}
+
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme {
+  .no-latest-notice-wrapper {
+    background-color: $dark-color-base-space;
+    .no-latest-notice {
+      background-color: rgba($dark-color-warning-dark, .2);
+      border-left-color: $dark-color-warning-dark;
+      .no-latest-title {
+        color: $dark-color-warning;
+      }
+    }
+  }
+}

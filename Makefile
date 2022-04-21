@@ -52,10 +52,22 @@ help:
 clean:
 	rm -rf $(BUILDDIR)/*
 
+theme:
+	@cd source/_themes/wazuh_doc_theme_v3 && npm run build-all
+	@echo 
+	@echo Build finished. The main theme assets has been updated.
+	@cd ../../..
+	@echo
+
 html-prod:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html -t production
 	@echo
-	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
+	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html. (production mode)"
+
+html-dev:
+	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html -t dev
+	@echo
+	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html. (dev mode)"
 
 html:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
