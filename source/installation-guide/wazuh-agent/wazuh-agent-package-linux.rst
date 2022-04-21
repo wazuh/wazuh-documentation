@@ -138,5 +138,6 @@ To uninstall the agent, select your package manager and run the following comman
       .. include:: ../../_templates/installations/wazuh/zypp/uninstall_wazuh_agent.rst
 
 
+  .. include:: ../../_templates/installations/wazuh/common/disable_wazuh_agent_service.rst
 
 The Wazuh agent is now completely removed from your Linux system.

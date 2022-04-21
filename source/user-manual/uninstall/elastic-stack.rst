@@ -34,6 +34,9 @@ Uninstall the Wazuh manager
 
     .. include:: ../../_templates/installations/basic/wazuh/zypp/uninstall_wazuh_manager_api.rst
 
+
+.. include:: ../../_templates/installations/wazuh/common/disable_wazuh_manager_service.rst
+
 .. _basic_uninstall_filebeat:
 
 Uninstall Filebeat
