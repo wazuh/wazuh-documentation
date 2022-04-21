@@ -1,3 +1,4 @@
 Sphinx==3.2.0
 sphinx_tabs==1.2.1
 docutils==0.16
+jsmin==3.0.1
