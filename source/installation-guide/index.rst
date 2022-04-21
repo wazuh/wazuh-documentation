@@ -9,27 +9,33 @@
 Installation guide
 ==================
 
-Wazuh is a security platform that provides unified XDR and SIEM protection for endpoints and cloud workloads. The solution is composed of a single universal agent and three central components: the Wazuh server, the Wazuh indexer, and the Wazuh dashboard. For more information, check the :doc:`Getting Started </getting-started/index>` documentation. 
+Wazuh is a security platform that provides unified XDR and SIEM protection for endpoints and cloud workloads. The solution is composed of a single universal agent and three central components: the Wazuh server, the Wazuh indexer, and the Wazuh dashboard. In this installation guide you will learn how to install Wazuh in your infrastructure. For more information, check the :doc:`Getting Started </getting-started/index>` documentation. 
 
 Wazuh is free and open source. Its components abide by the `GNU General Public License, version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_, and the `Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_ (ALv2). 
 
-In this installation guide, you will learn how to install Wazuh in your infrastructure. We also offer `Wazuh Cloud <https://wazuh.com/cloud/>`_, our software as a service (SaaS) solution. Check the :ref:`Cloud service <cloud_service>` documentation for more information.
+`Wazuh Cloud <https://wazuh.com/cloud/>`_ is our software as a service (SaaS) solution.  For more information, check the :ref:`Cloud service <cloud_service>` documentation.
 
 
 Installing the Wazuh central components
 ---------------------------------------
 
-You can choose between two installation methods for each Wazuh central component. Both options provide you with instructions to install the central components on a single host or on separate hosts. You can also check our :ref:`Quickstart <quickstart>` to get started with Wazuh in just a few minutes.
+In some cases, you may anticipate that it is enough to process the volume of security data with one host.  For example, when protecting a small number of endpoints and cloud workloads or when having a server with enough resources available. In this case, you can install the three Wazuh central components together in a single host configuration. For higher computing demands and when high availability is required, you can install Wazuh in a distributed configuration. In these cases, the central components can be installed on separate nodes. Furthermore, the Wazuh indexer and the Wazuh server can be deployed  in a cluster configuration, each component distributed through multiple nodes.
 
-The Wazuh indexer and Wazuh server can be installed on a single host or be distributed in cluster configurations. To check the requirements and start installing the first of the Wazuh central components, go to the :doc:`Wazuh indexer <wazuh-indexer/index>` section.
+To install each Wazuh central component you can choose between two methods.
 
-This is the installation workflow you will follow:
+-   Wazuh installation assistant. You set the deployment configuration and run the Wazuh installation assistant. The assistant takes care of the installation steps.
+-   Step-by-step installation. You follow a guide with specific instructions for every installation step without the automated assistance.
 
-.. thumbnail:: ../images/installation/Wazuh-Installation-workflow.png
-  :title: Wazuh installation workflow
-  :align: center
-  :width: 100%
+This is the installation workflow you will follow for this:
 
+.. thumbnail:: /images/installation/Wazuh-Installation-workflow.png
+    :title: Wazuh installation workflow
+    :align: center
+    :width: 100%
+
+To check the requirements and start installing the first of the Wazuh central components, go to the :doc:`Wazuh indexer <wazuh-indexer/index>` section.
+
+You can also check our :ref:`Quickstart <quickstart>` to get started with Wazuh in just a few minutes.
 
 Installing the Wazuh agent
 --------------------------
