@@ -1,306 +1,179 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015–2022 Wazuh, Inc.
 
 .. meta::
-  :description: Ansible is an open source platform designed for automating tasks. Learn more about the variable references in this section of the Wazuh documentation.
+  :Description: Ansible is an open source platform designed for automating tasks. Learn more about the variable references in this section of the Wazuh documentation.
   
-.. _wazuh_ansible_reference:
-
 Variables references
 --------------------
 
-.. _wazuh_ansible_reference_elasticsearch:
+.. _wazuh_ansible_reference_indexer:
 
-Elasticsearch / Opendistro
-==========================
+Wazuh indexer
+=============
 
-**elasticsearch_cluster_name**
+| **Variable**: ``indexer_cluster_name``
+| **Description**: Name of the Indexer cluster.
+| **Default value**: ``wazuh``
+|
+| **Variable**: ``indexer_node_name``
+| **Description**: Name of the Indexer node.
+| **Default value**: ``node-1``
+|
+| **Variable**: ``indexer_http_port``
+| **Description**: Indexer listening port.
+| **Default value**: 9200
+|
+| **Variable**: ``indexer_network_host``
+| **Description**: Indexer listening IP address.
+| **Default value**: ``127.0.0.1``
+|
+| **Variable**: ``indexer_jvm_xms``
+| **Description**: JVM heap size.
+| **Default value**: ``null``
 
-  Name of the Elasticsearch cluster
+.. _wazuh_ansible_reference_dashboard:
 
-  *Default wazuh*
+Wazuh dashboard
+===============
 
-**elasticsearch_node_name**
-
-  Name of the Elasticsearch node
-
-  *Default node-1*
-
-**elasticsearch_http_port**
-
-  ElasticSearch listening port
-
-  *Default 9200*
-
-**elasticsearch_network_host**
-
-  ElasticSearch, listening IP address
-
-  *Default 127.0.0.1*
-
-**elasticsearch_jvm_xms**
-
-  JVM heap size
-
-  *Default null*
-
-**elastic_stack_version**
-
-  Version of Elasticsearch to install
-
-  *Default |ELASTICSEARCH_LATEST_ANSIBLE|*
-
-**elasticsearch_shards**
-
-  Set number of shards for indices
-
-  *Default 5*
-
-**elasticsearch_replicas**
-
-  Set number of shards for indices
-
-  *Default 1*
-
-**elasticsearch_install_java**
-
-  When it's present will install Oracle Java.
-
-  *Default yes*
-
-.. _wazuh_ansible_reference_kibana:
-
-Kibana
-======
-
-**elasticsearch_http_port**
-
-  Elasticsearch node port.
-
-  *Default 9200*
-
-**elasticsearch_network_host**
-
-  IP address or hostname of Elasticsearch node.
-
-  *Default 127.0.0.1*
-
-**kibana_server_host**
-
-  Listening IP address of Kibana.
-
-  *Default 0.0.0.0*
-
-**kibana_server_port**
-
-  Listening port of Kibana.
-
-  *Default 5601*
-
-**elastic_stack_version**
-
-  Version of Kibana to install
-
-  *Default |ELASTICSEARCH_LATEST_ANSIBLE|*
-
-**wazuh_version**
-
-  Wazuh APP compatible version to install
-
-  *Default |WAZUH_LATEST_ANSIBLE|*
-
-**elasticsearch_network_host**
-
-  IP address or hostname of Elasticsearch node.
-
-  *Default 127.0.0.1*
-
-**elasticsearch_http_port**
-
-  Port of Elasticsearch node.
-
-  *Default 9200*
-
-**elasticsearch_shards**
-
-  Set number of shards for indices
-
-  *Default 5*
-
-**elasticsearch_replicas**
-
-  Set number of shards for indices
-
-  *Default 1*
+| **Variable**: ``indexer_http_port``
+| **Description**: Indexer node port.
+| **Default value**: ``9200``
+|
+| **Variable**: ``indexer_network_host``
+| **Description**: IP address or hostname of Indexer node.
+| **Default value**: ``127.0.0.1``
+|
+| **Variable**: ``dashboard_server_host``
+| **Description**: Listening IP address of the Wazuh dashboard.
+| **Default value**: ``0.0.0.0``
+|
+| **Variable**: ``dashboard_server_port``
+| **Description**: Listening port of the Wazuh dashboard.
+| **Default value**: ``5601``
+|
+| **Variable**: ``wazuh_version``
+| **Description**: Wazuh APP compatible version to install.
+| **Default value**: ``|WAZUH_LATEST_ANSIBLE|``
+|
+| **Variable**: ``indexer_network_host``
+| **Description**: IP address or hostname of Elasticsearch node.
+| **Default value**: ``127.0.0.1``
+|
+| **Variable**: ``indexer_http_port``
+| **Description**: Port of Elasticsearch node.
+| **Default value**: ``9200``
 
 .. _wazuh_ansible_reference_filebeat:
 
 Filebeat
 ========
 
-**filebeat_version:**
+| **Variable**: ``filebeat_version``
+| **Description**: Filebeat version to install.
+| **Default value**: ``7.10.2``
+|
+| **Variable**: ``filebeat_create_config``
+| **Description**: Generate or not Filebeat config.
+| **Default value**: ``true``
+|
+| **Variable**: ``filebeat_output_indexer_hosts``
+| **Description**: Indexer node(s) to send output.
+| **Example**:
 
-  Filebeat version to install.
+.. code-block:: yaml
 
-  *Default |ELASTICSEARCH_LATEST_ANSIBLE|*
-
-**filebeat_create_config:**
-
-  Generate or not Filebeat config.
-
-  *Default true*
-
-**filebeat_output_elasticsearch_enabled:**
-
-  Send output to Elasticsearch node(s).
-
-  *Default false*
-
-**filebeat_output_elasticsearch_hosts:**
-
-  Elasticsearch node(s) to send output.
-
-  *Example:* ::
-
-    filebeat_output_elasticsearch_hosts:
+    filebeat_output_indexer_hosts:
     - "localhost:9200"
     - "10.1.1.10:9200"
 
-**filebeat_ssl_dir:**
-
-  Set the folder containing SSL certs.
-
-  *Default /etc/pki/root*
-
-
-**filebeat_ssl_key_file:**
-
-  Set certificate key filename.
-
-  *Default null*
+|
+| **Variable**: ``filebeat_ssl_dir``
+| **Description**: Set the folder containing SSL certs.
+| **Default value**: ``/etc/pki/root``
 
 .. _wazuh_ansible_reference_manager:
 
 Wazuh Manager
 =============
 
-**wazuh_manager_fqdn:**
+| **Variable**: ``wazuh_manager_fqdn``
+| **Description**: Set Wazuh Manager fqdn hostname.
+| **Default value**: ``wazuh-manager``
+|
+| **Variable**: ``wazuh_manager_config_overlay``
+| **Description**: Indicates if the role(s) should perform a ``hash_behaviour=merge`` at role runtime, similar to role-distributed ansible.cfg. This provides support for a partially defined wazuh_manager_config while also moving on from the `deprecated hash_behaviour <https://docs.ansible.com/ansible/latest/reference_appendices/config.html#default-hash-behaviour>`_.
+| **Default value**: ``true``
+|
+| **Variable**: ``wazuh_manager_json_output``
+| **Description**: Configures the :ref:`jsonout_output <reference_ossec_global>` section in  ``ossec.conf``. This is a string, not a bool.
+| **Default value**: ``yes``
+|
+| **Variable**: ``wazuh_manager_alerts_log``
+| **Description**: Configures the :ref:`alerts_log <reference_ossec_global>` section in ``ossec.conf``. This is a string, not a bool.
+| **Default value**: ``yes``
+|
+| **Variable**: ``wazuh_manager_logall``
+| **Description**: Configures the :ref:`logall <reference_ossec_global>` section in ``ossec.conf``. This is a string, not a bool.
+| **Default value**: ``yes``
+|
+| **Variable**: ``wazuh_manager_email_notification``
+| **Description**: Configures the :ref:`email_notification <reference_ossec_global>` section in ``ossec.conf``. This is a string, not a bool.
+| **Default value**: ``yes``
+|
+| **Variable**: ``wazuh_manager_mailto``
+| **Description**: Configures the :ref:`email_to <reference_ossec_global>` items in ``ossec.conf``.
+| **Default value**: ``[‘admin@example.net’]``
+|
+| **Variable**: ``wazuh_manager_email_smtp_server``
+| **Description**: Configures the :ref:`smtp_server <reference_ossec_global>` section in ``ossec.conf``.
+| **Default value**: ``smtp.example.wazuh.com``
+|
+| **Variable**: ``wazuh_manager_email_from``
+| **Description**: Configures the :ref:`email_from <reference_ossec_global>` section in ``ossec.conf``.
+| **Default value**: ``wazuh@example.wazuh.com``
+|
+| **Variable**: ``wazuh_manager_email_maxperhour``
+| **Description**: Configures the :ref:`email_maxperhour <reference_ossec_global>` section in ``ossec.conf``.
+| **Default value**: ``12``
+|
+| **Variable**: ``wazuh_manager_email_queue_size``
+| **Description**: Configures the :ref:`queue_size <reference_ossec_remote>` section from ``ossec.conf``.
+| **Default value**: ``131072``
+|
+| **Variable**: ``wazuh_manager_email_log_source``
+| **Description**: Configures the :ref:`email_log_source <reference_ossec_global>` section from ``ossec.conf``.
+| **Default value**: ``alerts.log``
+|
+| **Variable**: ``wazuh_manager_globals``
+| **Description**: Configures the :ref:`white_list <reference_ossec_global>` section from ``ossec.conf``.
+| **Default values**:
 
-  Set Wazuh Manager fqdn hostname.
-
-  *Default wazuh-manager*
-
-**wazuh_manager_config_overlay**
-
-  Indicates if role should perform a `hash_behaviour=merge` at role runtime, similar to role-distributed ansible.cfg.
-  This provides support for a partially defined *wazuh_manager_config* while also moving on from `deprecated hash_behaviour <https://docs.ansible.com/ansible/latest/reference_appendices/config.html#default-hash-behaviour>`_
-
-  *Default true*
-
-**wazuh_manager_json_output**
-
-  Configures the :ref:`jsonout_output<reference_ossec_global>` section from ``ossec.conf``. This is a string, not a bool.
-
-  *Default yes*
-
-**wazuh_manager_alerts_log**
-
-  Configures the :ref:`alerts_log<reference_ossec_global>` section from ``ossec.conf``. This is a string, not a bool.
-
-  *Default yes*
-
-**wazuh_manager_logall**
-
-  Configures the :ref:`logall<reference_ossec_global>` section from ``ossec.conf``. This is a string, not a bool.
-
-  *Default yes*
-
-**wazuh_manager_email_notification**
-
-  Configures the :ref:`email_notification<reference_ossec_global>` section from ``ossec.conf``. This is a string, not a bool.
-
-  *Default yes*
-
-**wazuh_manager_mailto**
-
-  Configures the :ref:`email_to<reference_ossec_global>` items from ``ossec.conf``.
-
-  *Default ['admin@example.net']*
-
-
-**wazuh_manager_email_smtp_server**
-
-  Configures the :ref:`smtp_server<reference_ossec_global>` section from ``ossec.conf``.
-
-  *Default smtp.example.wazuh.com*
-
-
-**wazuh_manager_email_from**
-
-  Configures the :ref:`email_from<reference_ossec_global>` section from ``ossec.conf``.
-
-  *Default wazuh@example.wazuh.com*
-
-
-**wazuh_manager_email_maxperhour**
-
-  Configures the :ref:`email_maxperhour<reference_ossec_global>` section from ``ossec.conf``.
-
-  *Default 12*
-
-**wazuh_manager_email_queue_size**
-
-  Configures the :ref:`queue_size<reference_ossec_remote>` section from ``ossec.conf``.
-
-  *Default 131072*
-
-**wazuh_manager_email_log_source**
-
-  Configures the :ref:`email_log_source<reference_ossec_global>` section from ``ossec.conf``.
-
-  *Default alerts.log*
-
-**wazuh_manager_globals**
-
-  Configures the :ref:`white_list<reference_ossec_global>` section from ``ossec.conf``.
-
-  *Default:*
-
-  .. code-block:: yaml
+.. code-block:: yaml
 
     wazuh_manager_globals:
       - '127.0.0.1'
       - '^localhost.localdomain$'
       - '127.0.0.53'
 
+|
+| **Variable**: ``wazuh_manager_log_level``
+| **Description**: Configures the :ref:`log_alert_level <reference_ossec_alerts>` section from ``ossec.conf``.
+| **Default value**: ``3``
+|
+| **Variable**: ``wazuh_manager_email_level``
+| **Description**: Configures the :ref:`email_alert_level <reference_ossec_alerts>` section from ``ossec.conf``.
+| **Default value**: ``12``
+|
+| **Variable**: ``wazuh_manager_log_format``
+| **Description**: Configures :ref:`log_format<reference_ossec_logging>` inside logging section from ``ossec.conf``.
+| **Default value**: ``plain``
+|
+| **Variable**: ``wazuh_manager_extra_emails``
+| **Description**: Configures one or more :ref:`email_alerts <reference_ossec_email_alerts>` sections from ``ossec.conf``.
+| **Default values**:
 
-**wazuh_manager_log_level**
-
-  Configures the :ref:`log_alert_level<reference_ossec_alerts>` section from ``ossec.conf``.
-
-  *Default 3*
-
-
-**wazuh_manager_email_level**
-
-  Configures the :ref:`email_alert_level<reference_ossec_alerts>` section from ``ossec.conf``.
-
-  *Default 12*
-
-
-**wazuh_manager_log_format**
-
-  Configures :ref:`log_format<reference_ossec_logging>` inside logging section from ``ossec.conf``.
-
-  *Default plain*
-
-
-**wazuh_manager_extra_emails**
-
-  Configures one or more :ref:`email_alerts<reference_ossec_email_alerts>` sections from ``ossec.conf``.
-
-  *Default:*
-
-  .. code-block:: yaml
+.. code-block:: yaml
 
     wazuh_manager_extra_emails:
       - enable: false
@@ -313,14 +186,12 @@ Wazuh Manager
         do_not_group: false
         rule_id: null
 
+|
+| **Variable**: ``wazuh_manager_connection``
+| **Description**: Configures one or more :ref:`remote <reference_ossec_remote>` sections from ``ossec.conf``.
+| **Default values**:
 
-**wazuh_manager_connection**
-
-  Configures one or more :ref:`remote<reference_ossec_remote>` sections from ``ossec.conf``.
-
-  *Default:*
-
-  .. code-block:: yaml
+.. code-block:: yaml
 
     wazuh_manager_connection:
       - type: 'secure'
@@ -328,13 +199,12 @@ Wazuh Manager
         protocol: 'tcp'
         queue_size: 131072
 
-**wazuh_manager_reports**
+|
+| **Variable**: ``wazuh_manager_reports``
+| **Description**: Configures one or more :ref:`reports <reference_ossec_reports>` sections from ``ossec.conf``.
+| **Default values**:
 
-  Configures one or more :ref:`reports<reference_ossec_reports>` sections from ``ossec.conf``.
-
-  *Default:*
-
-  .. code-block:: yaml
+.. code-block:: yaml
 
     wazuh_manager_reports:
       - enable: false
@@ -349,24 +219,22 @@ Wazuh Manager
         user: null
         showlogs: null
 
-**wazuh_manager_rootcheck**
+|
+| **Variable**: ``wazuh_manager_rootcheck``
+| **Description**: Configures the :ref:`rootcheck <reference_ossec_rootcheck>` section from ``ossec.conf``.
+| **Default value**:
 
-  Configures the :ref:`rootcheck<reference_ossec_rootcheck>` section from ``ossec.conf``.
-
-  *Default:*
-
-  .. code-block:: yaml
+.. code-block:: yaml
 
     wazuh_manager_rootcheck:
       frequency: 43200
 
-**wazuh_manager_openscap**
+|
+| **Variable**: ``wazuh_manager_openscap``
+| **Description**: Configures the :ref:`wodle <wodle_openscap>` item named ``open-scap`` from ``ossec.conf``.
+| **Default values**:
 
-  Configures the :ref:`wodle<wodle_openscap>` item named ``open-scap`` from ``ossec.conf``.
-
-  *Default:*
-
-  .. code-block:: yaml
+.. code-block:: yaml
 
     wazuh_manager_openscap:
       disable: 'yes'
@@ -374,31 +242,28 @@ Wazuh Manager
       interval: '1d'
       scan_on_start: 'yes'
 
+|
+| **Variable**: ``wazuh_manager_ciscat``
+| **Description**: Configures the :ref:`wodle <wodle_ciscat>` item named ``cis-cat`` from ``ossec.conf``.
+| **Default value**:
 
-**wazuh_manager_ciscat**
+.. code-block:: yaml
 
-  Configures the :ref:`wodle<wodle_ciscat>` item named ``cis-cat`` from ``ossec.conf``.
+    wazuh_manager_ciscat:
+      disable: 'yes'
+      install_java: 'yes'
+      timeout: 1800
+      interval: '1d'
+      scan_on_start: 'yes'
+      java_path: '/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/bin'
+      ciscat_path: 'wodles/ciscat'
 
-  *Default:*
+|
+| **Variable**: ``wazuh_manager_osquery``
+| **Description**: Configures the :ref:`wodle<wodle-osquery>` item named ``osquery`` from ``ossec.conf``.
+| **Default values**:
 
-  .. code-block:: yaml
-
-     wazuh_manager_ciscat:
-       disable: 'yes'
-       install_java: 'yes'
-       timeout: 1800
-       interval: '1d'
-       scan_on_start: 'yes'
-       java_path: '/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/bin'
-       ciscat_path: 'wodles/ciscat'
-
-**wazuh_manager_osquery**
-
-  Configures the :ref:`wodle<wodle-osquery>` item named ``osquery`` from ``ossec.conf``.
-
-  *Default:*
-
-  .. code-block:: yaml
+.. code-block:: yaml
 
     wazuh_manager_osquery:
       disable: 'yes'
@@ -407,13 +272,12 @@ Wazuh Manager
       config_path: '/etc/osquery/osquery.conf'
       ad_labels: 'yes'
 
-**wazuh_manager_syscollector**
+|
+| **Variable**: ``wazuh_manager_syscollector``
+| **Description**: Configures the :ref:`wodle <wodle-syscollector>` item named ``syscollector`` from ``ossec.conf``.
+| **Default values**:
 
-  Configures the :ref:`wodle<wodle-syscollector>` item named ``syscollector`` from ``ossec.conf``.
-
-  *Default:*
-
-  .. code-block:: yaml
+.. code-block:: yaml
 
     wazuh_manager_syscollector:
       disable: 'no'
@@ -426,13 +290,12 @@ Wazuh Manager
       ports_no: 'yes'
       processes: 'yes'
 
-**wazuh_manager_monitor_aws**
+|
+| **Variable**: ``wazuh_manager_monitor_aws``
+| **Description**: Configures the :ref:`wodle <wodle_s3>` item named ``aws-s3`` from ``ossec.conf``.
+| **Default values**:  
 
-  Configures the :ref:`wodle<wodle_s3>` item named ``aws-s3`` from ``ossec.conf``.
-
-  *Default:*
-
-  .. code-block:: yaml
+.. code-block:: yaml
 
     wazuh_manager_monitor_aws:
       disabled: 'yes'
@@ -447,13 +310,12 @@ Wazuh Manager
           access_key: null
           secret_key: null
 
-**wazuh_manager_sca**
+|
+| **Variable**: ``wazuh_manager_sca``
+| **Description**: Configures the :ref:`sca <reference_sec_config_assessment>` section from ``ossec.conf``.
+| **Default values**:
 
-  Configures the :ref:`sca<reference_sec_config_assessment>` section from ``ossec.conf``.
-
-  *Default:*
-
-  .. code-block:: yaml
+.. code-block:: yaml
 
     wazuh_manager_sca:
       enabled: 'yes'
@@ -464,13 +326,12 @@ Wazuh Manager
       wday: ''
       time: ''
 
-**wazuh_manager_vulnerability_detector**
+|
+| **Variable**: ``wazuh_manager_vulnerability_detector``
+| **Description**: Configures the :ref:`vulnerability-detector <vuln_detector>` section from ``ossec.conf``.
+| **Default values**:
 
-  Configures the :ref:`vulnerability-detector<vuln_detector>` section from ``ossec.conf``.
-
-  *Default:*
-
-  .. code-block:: yaml
+.. code-block:: yaml
 
     wazuh_manager_vulnerability_detector:
       enabled: 'no'
@@ -502,13 +363,12 @@ Wazuh Manager
           update_interval: '1h'
           name: '"nvd"'
 
-**wazuh_manager_syscheck**
+|
+| **Variable**: ``wazuh_manager_syscheck``
+| **Description**: Configures the :ref:`syscheck <reference_ossec_syscheck>` section from ``ossec.conf``.
+| **Default values**:
 
-  Configures the :ref:`syscheck<reference_ossec_syscheck>` section from ``ossec.conf``.
-
-  *Default:*
-
-  .. code-block:: yaml
+.. code-block:: yaml
 
     wazuh_manager_syscheck:
       disable: 'no'
@@ -552,13 +412,12 @@ Wazuh Manager
       sync_max_interval: '1h'
       sync_max_eps: 10
 
-**wazuh_manager_commands**
+|
+| **Variable**: ``wazuh_manager_commands``
+| **Description**: Configures the :ref:`command <reference_ossec_commands>` section from ``ossec.conf``.
+| **Default values**:
 
-  Configures the :ref:`command<reference_ossec_commands>` section from ``ossec.conf``.
-
-  *Default:*
-
-  .. code-block:: yaml
+.. code-block:: yaml
 
     wazuh_manager_commands:
       - name: 'disable-account'
@@ -585,13 +444,12 @@ Wazuh Manager
         executable: 'netsh-win-2016.cmd'
         timeout_allowed: 'yes'
 
-**wazuh_manager_localfiles**
+|
+| **Variable**: ``wazuh_manager_localfiles``
+| **Description**: Configures the :ref:`localfile <reference_ossec_localfile>` section from ``ossec.conf`` for each platform.
+| **Default values**:
 
-  Configures the :ref:`localfile<reference_ossec_localfile>` section from ``ossec.conf`` for each platform.
-
-  *Default:*
-
-  .. code-block:: yaml
+.. code-block:: yaml
 
     wazuh_manager_localfiles:
       common:
@@ -626,26 +484,24 @@ Wazuh Manager
         - format: 'audit'
           location: '/var/log/audit/audit.log'
 
-**wazuh_manager_syslog_outputs**
+|
+| **Variable**: ``wazuh_manager_syslog_outputs``
+| **Description**: Configures the :ref:`syslog_output <reference_ossec_syslog_output>` section from ``ossec.conf``.
+| **Default values**:
 
-  Configures the :ref:`syslog_output<reference_ossec_syslog_output>` section from ``ossec.conf``.
-
-  *Default:*
-
-  .. code-block:: yaml
+.. code-block:: yaml
 
     wazuh_manager_syslog_outputs:
       - server: null
         port: null
         format: null
 
-**wazuh_manager_integrations**
+|
+| **Variable**: ``wazuh_manager_integrations``
+| **Description**: Configures the :ref:`integration <reference_ossec_integration>` section from ``ossec.conf``.
+| **Default values**:
 
-  Configures the :ref:`integration<reference_ossec_integration>` section from ``ossec.conf``.
-
-  *Default:*
-
-  .. code-block:: yaml
+.. code-block:: yaml
 
     wazuh_manager_integrations:
       # slack
@@ -659,13 +515,12 @@ Wazuh Manager
         api_key: '<api_key>'
         alert_level: 12
 
-**wazuh_manager_labels**
+|
+| **Variable**: ``wazuh_manager_labels``
+| **Description**: Configures the :ref:`labels <reference_ossec_labels>` section from ``ossec.conf``.
+| **Default values**:
 
-  Configures the :ref:`labels<reference_ossec_labels>` section from ``ossec.conf``.
-
-  *Default:*
-
-  .. code-block:: yaml
+.. code-block:: yaml
 
     wazuh_manager_labels:
       enable: false
@@ -673,13 +528,12 @@ Wazuh Manager
         - key: Env
           value: Production
 
-**wazuh_manager_ruleset**
+|
+| **Variable**: ``wazuh_manager_ruleset``
+| **Description**: Configures the :ref:`ruleset <reference_ossec_rules>` section from ``ossec.conf``.
+| **Default values**:
 
-  Configures the :ref:`ruleset<reference_ossec_rules>` section from ``ossec.conf``.
-
-  *Default:*
-
-  .. code-block:: yaml
+.. code-block:: yaml
 
     wazuh_manager_ruleset:
       rules_path: 'custom_ruleset/rules/'
@@ -689,25 +543,22 @@ Wazuh Manager
         - 'security-eventchannel'
         - 'amazon/aws-eventnames'
 
-**wazuh_manager_rule_exclude**
+|
+| **Variable**: ``wazuh_manager_rule_exclude``
+| **Description**: Configures the :ref:`rule_exclude <reference_ossec_rules>` section from ``ossec.conf``.
+| **Default values**:
 
-  Configures the :ref:`rule_exclude<reference_ossec_rules>` section from ``ossec.conf``.
-
-  *Default:*
-
-  .. code-block:: yaml
+.. code-block:: yaml
 
     wazuh_manager_rule_exclude:
       - '0215-policy_rules.xml'
 
+|
+| **Variable**: ``wazuh_manager_authd``
+| **Description**: Configures the :ref:`auth <reference_ossec_auth>` section from ``ossec.conf``.
+| **Default values**:
 
-**wazuh_manager_authd**
-
-  Configures the :ref:`auth<reference_ossec_auth>` section from ``ossec.conf``.
-
-  *Default:*
-
-  .. code-block:: yaml
+.. code-block:: yaml
 
     wazuh_manager_authd:
       enable: true
@@ -725,13 +576,12 @@ Wazuh Manager
       ssl_manager_key: 'sslmanager.key'
       ssl_auto_negotiate: 'no'
 
-**wazuh_manager_cluster**
+|
+| **Variable**: ``wazuh_manager_cluster``
+| Configures the :ref:`cluster <reference_ossec_cluster>` section from ``ossec.conf``.
+| **Default values**:
 
-  Configures the :ref:`cluster<reference_ossec_cluster>` section from ``ossec.conf``.
-
-  *Default:*
-
-  .. code-block:: yaml
+.. code-block:: yaml
 
     wazuh_manager_cluster:
       disable: 'yes'
@@ -745,13 +595,12 @@ Wazuh Manager
         - 'manager'
       hidden: 'no'
 
-**wazuh_manager_api**
+|
+| **Variable**: ``wazuh_manager_api``
+| **Description**: Configures the :ref:`Wazuh API <api_configuration>` file called ``api.yaml``.
+| **Default values**:
 
-  Configures the :ref:`Wazuh API<api_configuration>` file called ``api.yaml``.
-
-  *Default:*
-
-  .. code-block:: yaml
+.. code-block:: yaml
 
     wazuh_manager_api:
       bind_addr: 0.0.0.0
@@ -775,29 +624,27 @@ Wazuh Manager
       drop_privileges: yes
       experimental_features: no
 
-**wazuh_api_user:**
+|
+| **Variable**: ``wazuh_api_user``
+| **Description**: Wazuh API credentials.
+| **Example**:
 
-  Wazuh API credentials.
-
-  *Example:*
-
-  .. code-block:: yaml
+.. code-block:: yaml
 
     wazuh_api_user:
     - foo:$apr1$/axqZYWQ$Xo/nz/IG3PdwV82EnfYKh/
     - bar:$apr1$hXE97ag.$8m0koHByattiGKUKPUgcZ1
 
-.. warning:: We recommend the use of `Ansible Vault <https://docs.ansible.com/ansible/latest/user_guide/vault.html>`_ to protect Wazuh, agentless and authd credentials.
+.. warning::
 
+    We recommend the use of `Ansible Vault <https://docs.ansible.com/ansible/latest/user_guide/vault.html>`_ to protect Wazuh agentless and authd credentials..
 
-**wazuh_manager_config:**
+|
+| **Variable**: ``wazuh_manager_config``
+| **Description**: Stores the Wazuh Manager configuration. This variable is provided for backwards compatibility. Newer deployments should use the newly introduced variables described above.
+| **Example**:
 
-  Stores the Wazuh Manager configuration. This variable is provided for backwards compatibility.
-  Newer deployments should use the newly introduced variables described above.
-
-  *Example:*
-
-  .. code-block:: yaml
+.. code-block:: yaml
 
     wazuh_manager_config:
       json_output: 'yes'
@@ -964,74 +811,72 @@ Wazuh Manager
           port: null
           format: null
 
-**wazuh_agent_configs:**
+|
+| **Variable**: ``wazuh_agent_configs``
+| **Description**: This store the different settings and profiles for centralized agent configuration via Wazuh Manager.
+| **Example**:
 
-  This store the different settings and profiles for centralized agent configuration via the Wazuh manager.
+.. code-block:: yaml
 
-  *Example:*
+    - type: os
+      type_value: Linux
+      syscheck:
+        frequency: 43200
+        scan_on_start: 'yes'
+        auto_ignore: 'no'
+        alert_new_files: 'yes'
+        ignore:
+        - /etc/mtab
+        - /etc/mnttab
+        - /etc/hosts.deny
+        - /etc/mail/statistics
+        - /etc/svc/volatile
+        no_diff:
+          - /etc/ssl/private.key
+        directories:
+          - dirs: /etc,/usr/bin,/usr/sbin
+            checks: 'check_all="yes"'
+          - dirs: /bin,/sbin
+            checks: 'check_all="yes"'
+      rootcheck:
+        frequency: 43200
+        cis_distribution_filename: null
+      localfiles:
+        - format: 'syslog'
+          location: '/var/log/messages'
+        - format: 'syslog'
+          location: '/var/log/secure'
+        - format: 'syslog'
+          location: '/var/log/maillog'
+        - format: 'apache'
+          location: '/var/log/httpd/error_log'
+        - format: 'apache'
+          location: '/var/log/httpd/access_log'
+        - format: 'apache'
+          location: '/var/ossec/logs/active-responses.log'
+    - type: os
+      type_value: Windows
+      syscheck:
+        frequency: 43200
+        scan_on_start: 'yes'
+        auto_ignore: 'no'
+        alert_new_files: 'yes'
+        windows_registry:
+          - key: 'HKEY_LOCAL_MACHINE\Software\Classes\batfile'
+            arch: 'both'
+          - key: 'HKEY_LOCAL_MACHINE\Software\Classes\Folder'
+      localfiles:
+        - format: 'Security'
+          location: 'eventchannel'
+        - format: 'System'
+          location: 'eventlog'
 
-  .. code-block:: yaml
+|
+| **Variable**: ``cdb_lists``
+| **Description**: Configure CDB lists used by the Wazuh Manager.
+| **Example**:
 
-      - type: os
-        type_value: Linux
-        syscheck:
-          frequency: 43200
-          scan_on_start: 'yes'
-          auto_ignore: 'no'
-          alert_new_files: 'yes'
-          ignore:
-          - /etc/mtab
-          - /etc/mnttab
-          - /etc/hosts.deny
-          - /etc/mail/statistics
-          - /etc/svc/volatile
-          no_diff:
-            - /etc/ssl/private.key
-          directories:
-            - dirs: /etc,/usr/bin,/usr/sbin
-              checks: 'check_all="yes"'
-            - dirs: /bin,/sbin
-              checks: 'check_all="yes"'
-        rootcheck:
-          frequency: 43200
-          cis_distribution_filename: null
-        localfiles:
-          - format: 'syslog'
-            location: '/var/log/messages'
-          - format: 'syslog'
-            location: '/var/log/secure'
-          - format: 'syslog'
-            location: '/var/log/maillog'
-          - format: 'apache'
-            location: '/var/log/httpd/error_log'
-          - format: 'apache'
-            location: '/var/log/httpd/access_log'
-          - format: 'apache'
-            location: '/var/ossec/logs/active-responses.log'
-      - type: os
-        type_value: Windows
-        syscheck:
-          frequency: 43200
-          scan_on_start: 'yes'
-          auto_ignore: 'no'
-          alert_new_files: 'yes'
-          windows_registry:
-            - key: 'HKEY_LOCAL_MACHINE\Software\Classes\batfile'
-              arch: 'both'
-            - key: 'HKEY_LOCAL_MACHINE\Software\Classes\Folder'
-        localfiles:
-          - format: 'Security'
-            location: 'eventchannel'
-          - format: 'System'
-            location: 'eventlog'
-
-**cdb_lists:**
-
-  Configure CDB lists used by the Wazuh Manager (located at ``ansible-wazuh-manager/vars/cdb_lists.yml``).
-
-  *Example:*
-
-  .. code-block:: yaml
+.. code-block:: yaml
 
     cdb_lists:
     - name: 'audit-keys'
@@ -1042,17 +887,18 @@ Wazuh Manager
         audit-wazuh-x:execute
         audit-wazuh-c:command
 
-.. warning:: We recommend the use of `Ansible Vault <https://docs.ansible.com/ansible/latest/user_guide/vault.html>`_ to protect Wazuh, agentless and authd credentials.
+.. warning::
 
-**agentless_creeds:**
+    We recommend the use of `Ansible Vault <https://docs.ansible.com/ansible/latest/user_guide/vault.html>`_ to protect Wazuh agentless and authd credentials.
 
-  Credentials and host(s) to be used by agentless feature.
+|
+| **Variable**: ``agentless_creds``
+| **Description**: Credentials and host(s) to be used by agentless feature.
+| **Example**:
 
-  *Example:*
+.. code-block:: yaml
 
-  .. code-block:: yaml
-
-    agentless_creeds:
+    agentless_creds:
       - type: ssh_integrity_check_linux
         frequency: 3600
         host: root@example.net
@@ -1060,110 +906,91 @@ Wazuh Manager
         arguments: '/bin /etc/ /sbin'
         passwd: qwerty
 
-.. warning:: We recommend the use of `Ansible Vault <https://docs.ansible.com/ansible/latest/user_guide/vault.html>`_ to protect Wazuh, agentless and authd credentials.
+.. warning::
 
+    We recommend the use of `Ansible Vault <https://docs.ansible.com/ansible/latest/user_guide/vault.html>`_ to protect Wazuh agentless and authd credentials.
 
-**authd_pass:**
+|
+| **Variable**: ``authd_pass``
+| **Description**: Wazuh authd service password.
+| **Example**:
 
-  Wazuh authd service password.
-
-  *Example:*
-
-  .. code-block:: yaml
+.. code-block:: yaml
 
     authd_pass: foobar
+
 
 .. _wazuh_ansible_reference_agent:
 
 Wazuh Agent
 ===========
 
-**wazuh_managers:**
+| **Variable**: ``wazuh_managers``
+| **Description**: Set Wazuh Manager servers IP address, protocol, and port to be used by the agent. If a specific manager is used for registration, we can  indicate which one it is  by adding register set to true. If the register option is missing, the first manager on the list will be used for registration.
+| **Example**:
 
-  Set Wazuh Manager servers IP address, protocol, and port to be used by the agent.
-  Regarding which Manager is used for registration, we can optionally indicate which one to use for registration by adding `register` set to `true`.
-  If the `register` option is missing, first Manager on the list will be used for registration.
+.. code-block:: yaml
 
-  *Example:*
+    wazuh_managers:
+    - address: 172.16.24.56
+      protocol: udp
+    - address: 192.168.10.15
+      port: 1514
+      protocol: tcp
+      register: yes
 
-  .. code-block:: yaml
+|
+| **Variable**: ``wazuh_agent_nolog_sensible``:
+| **Description**: This variable indicates if the `nolog option <https://docs.ansible.com/ansible/latest/reference_appendices/logging.html>`_ should be added to tasks which output sensitive information (like tokens).
+| **Default value**: ``true``
+|
+| **Variable**: ``wazuh_agent_api_validate``
+| **Description**: After registering the agent through the REST API, validate that registration is correct.
+| **Default value**: ``true``
+|
+| **Variable**: ``wazuh_agent_address``
+| **Description**: Establish which IP address we want to associate with this agent. It can be an address or “any” This variable will supersede wazuh_agent_nat.
+| **Default value**: ``ansible_default_ipv4.address``
+|
+| **Variable**: ``wazuh_profile``
+| **Description**: Configure what profiles this agent will have.
+| **Default value**: ``null``
+| Multiple profiles can be included, separated by a comma and a space, for example:
 
-      wazuh_managers:
-      - address: 172.16.24.56
-        protocol: udp
-      - address: 192.168.10.15
-        port: 1514
-        protocol: tcp
-        register: yes
+.. code-block:: yaml
 
-**wazuh_agent_nolog_sensible:**
+    wazuh_profile: "centos7, centos7-web"
 
-  This variable indicates if we should add `nolog option <https://docs.ansible.com/ansible/latest/reference_appendices/logging.html>`_ to tasks which output sensible information (like tokens).
+|
+| **Variable**: ``wazuh_agent_authd``
+| **Description**: Set the agent-authd facility. This will enable or not the automatic agent registration, you could set various options in accordance of the authd service configured in the Wazuh Manager. This Ansible role will use the address defined on ``registration_address`` as the authd registration server.
+| **Example**:
 
-  *Default true*
+    .. code-block:: yaml
 
+        wazuh_agent_authd:
+          registration_address: 10.1.1.12
+          enable: false
+          port: 1515
+          ssl_agent_ca: null
+          ssl_agent_cert: null
+          ssl_agent_key: null
+          ssl_auto_negotiate: 'no'
 
-**wazuh_agent_api_validate:**
+|
+| **Variable**: ``wazuh_notify_time``
+| **Description**: Set the ``<notify_time>`` option in the agent.
+| **Default value**: ``null``
+|
+| **Variable**: ``wazuh_time_reconnect``
+| **Description**: Set ``<time-reconnect>`` option in the agent.
+| **Default value**: ``null``
+|
+| **Variable**: ``wazuh_winagent_config``
+| **Description**: Set the Wazuh Agent installation regarding Windows hosts.
+| **Example**:
 
-  After registering the agent through the REST API, validate that registration is correct.
-
-  *Default true*
-
-  Multiple profiles can be included, separated by a comma and a space, for example:
-
-
-**wazuh_agent_address:**
-
-  Establish which IP address we want to associate with this agent. It can be an address or "any"
-  This variable will supersede `wazuh_agent_nat`.
-
-  *Default ansible_default_ipv4.address*
-
-
-**wazuh_profile:**
-
-  Configure what profiles this agent will have.
-
-  *Default null*
-
-  Multiple profiles can be included, separated by a comma and a space, for example:
-
-  .. code-block:: yaml
-
-      wazuh_profile: "centos7, centos7-web"
-
-**wazuh_agent_authd:**
-
-  Set the agent-authd facility. This will enable or not the automatic agent registration, you could set various options in accordance of the authd service configured in the Wazuh Manager. This Ansible role will use the address defined on ``registration_address`` as the authd registration server.
-
-  .. code-block:: yaml
-
-    wazuh_agent_authd:
-      registration_address: 10.1.1.12
-      enable: false
-      port: 1515
-      ssl_agent_ca: null
-      ssl_agent_cert: null
-      ssl_agent_key: null
-      ssl_auto_negotiate: 'no'
-
-**wazuh_notify_time**
-
-  Set the <notify_time> option in the agent.
-
-  *Default null*
-
-**wazuh_time_reconnect**
-
-  Set <time-reconnect> option in the agent.
-
-  *Default null*
-
-**wazuh_winagent_config**
-
-  Set the Wazuh Agent installation regarding Windows hosts.
-
-  .. code-block:: yaml
+.. code-block:: yaml
 
     install_dir: 'C:\wazuh-agent\'
     version: '2.1.1'
@@ -1171,13 +998,12 @@ Wazuh Agent
     repo: https://packages.wazuh.com/windows/
     md5: fd9a3ce30cd6f9f553a1bc71e74a6c9f
 
-**wazuh_agent_enrollment**
+|
+| **Variable**: ``wazuh_agent_enrollment``
+| **Description**: Configures the :ref:`enrollment <reference_ossec_client>` section in the agent ``ossec.conf``.
+| **Example**:
 
-  Configures the :ref:`enrollment<reference_ossec_client>` section from agent ``ossec.conf``.
-
-  *Example:*
-
-  .. code-block:: yaml
+.. code-block:: yaml
 
     wazuh_agent_enrollment:
       enabled: ''
@@ -1195,33 +1021,34 @@ Wazuh Agent
       delay_after_enrollment: 20
       use_source_ip: 'no'
 
-**wazuh_agent_client_buffer**
+|
+| **Variable**: ``wazuh_agent_client_buffer``
+| **Description**: Configures the :ref:`client_buffer <reference_client_buffer>` section from agent ``ossec.conf``.
+| **Example**:
 
-  Configures the :ref:`client_buffer<reference_client_buffer>` section from agent ``ossec.conf``.
-
-  .. code-block:: yaml
+.. code-block:: yaml
 
     wazuh_agent_client_buffer:
       disable: 'no'
       queue_size: '5000'
       events_per_sec: '500'
 
-**wazuh_agent_rootcheck**
+|
+| **Variable**: ``wazuh_agent_rootcheck``
+| **Description**: Configures the :ref:`rootcheck <reference_ossec_rootcheck>` section from agent ``ossec.conf``.
+| **Example**:
 
-  Configures the :ref:`rootcheck<reference_ossec_rootcheck>` section from agent ``ossec.conf``.
-
-  .. code-block:: yaml
+.. code-block:: yaml
 
     wazuh_agent_rootcheck:
       frequency: 43200
 
-**wazuh_agent_openscap**
+|
+| **Variable**: ``wazuh_agent_openscap``
+| **Description**: Configures the :ref:`wodle <wodle_openscap>` item named ``open-scap`` from ``ossec.conf``.
+| **Default values**:
 
-  Configures the :ref:`wodle<wodle_openscap>` item named ``open-scap`` from ``ossec.conf``.
-
-  *Default:*
-
-  .. code-block:: yaml
+.. code-block:: yaml
 
     wazuh_agent_openscap:
       disable: 'yes'
@@ -1229,14 +1056,12 @@ Wazuh Agent
       interval: '1d'
       scan_on_start: 'yes'
 
+|
+| **Variable**: ``wazuh_agent_cis_cat``
+| **Description**: Configures the :ref:`wodle <wodle_ciscat>` item named ``cis-cat`` from ``ossec.conf``.
+| **Default values**:
 
-**wazuh_agent_cis_cat**
-
-  Configures the :ref:`wodle<wodle_ciscat>` item named ``cis-cat`` from ``ossec.conf``.
-
-  *Default:*
-
-  .. code-block:: yaml
+.. code-block:: yaml
 
     wazuh_agent_cis_cat:
       disable: 'yes'
@@ -1249,14 +1074,12 @@ Wazuh Agent
       ciscat_path: 'wodles/ciscat'
       ciscat_path_win: 'C:\cis-cat'
 
+|
+| **Variable**: ``wazuh_agent_osquery``
+| **Description**: Configures the :ref:`wodle<wodle-osquery>` item named ``osquery`` from ``ossec.conf``.
+| **Default values**:
 
-**wazuh_agent_osquery**
-
-  Configures the :ref:`wodle<wodle-osquery>` item named ``osquery`` from ``ossec.conf``.
-
-  *Default:*
-
-  .. code-block:: yaml
+.. code-block:: yaml
 
     wazuh_agent_osquery:
       disable: 'yes'
@@ -1268,14 +1091,12 @@ Wazuh Agent
       config_path_win: 'C:\Program Files\osquery\osquery.conf'
       add_labels: 'yes'
 
+|
+| **Variable**: ``wazuh_agent_syscollector``
+| **Description**: Configures the :ref:`wodle <wodle-syscollector>` item named ``syscollector`` from ``ossec.conf``.
+| **Default values**:
 
-**wazuh_agent_syscollector**
-
-  Configures the :ref:`wodle<wodle-syscollector>` item named ``syscollector`` from ``ossec.conf``.
-
-  *Default:*
-
-  .. code-block:: yaml
+.. code-block:: yaml
 
     wazuh_agent_syscollector:
       disable: 'no'
@@ -1288,13 +1109,12 @@ Wazuh Agent
       ports_no: 'yes'
       processes: 'yes'
 
-**wazuh_agent_sca**
+|
+| **Variable**: ``wazuh_agent_sca``
+| **Description**: Configures the :ref:`sca <reference_sec_config_assessment>` section from ``ossec.conf``.
+| **Default values**:
 
-  Configures the :ref:`sca<reference_sec_config_assessment>` section from ``ossec.conf``.
-
-  *Default:*
-
-  .. code-block:: yaml
+.. code-block:: yaml
 
     wazuh_agent_sca:
       enabled: 'yes'
@@ -1305,13 +1125,12 @@ Wazuh Agent
       wday: ''
       time: ''
 
-**wazuh_agent_syscheck**
+|
+| **Variable**: ``wazuh_agent_syscheck``
+| **Description**: Configures the :ref:`syscheck <reference_ossec_syscheck>` section from ``ossec.conf``.
+| **Default values**:
 
-  Configures the :ref:`syscheck<reference_ossec_syscheck>` section from ``ossec.conf``.
-
-  *Default:*
-
-  .. code-block:: yaml
+.. code-block:: yaml
 
     wazuh_agent_syscheck:
       frequency: 43200
@@ -1347,87 +1166,13 @@ Wazuh Agent
         - '.log$|.htm$|.jpg$|.png$|.chm$|.pnf$|.evtx$'
       no_diff:
         - /etc/ssl/private.key
-      directories:
-        - dirs: /etc,/usr/bin,/usr/sbin
-          checks: ''
-        - dirs: /bin,/sbin,/boot
-          checks: ''
-      win_directories:
-        - dirs: '%WINDIR%'
-          checks: 'recursion_level="0" restrict="regedit.exe$|system.ini$|win.ini$"'
-        - dirs: '%WINDIR%\SysNative'
-          checks: >-
-            recursion_level="0" restrict="at.exe$|attrib.exe$|cacls.exe$|cmd.exe$|eventcreate.exe$|ftp.exe$|lsass.exe$|
-            net.exe$|net1.exe$|netsh.exe$|reg.exe$|regedt32.exe|regsvr32.exe|runas.exe|sc.exe|schtasks.exe|sethc.exe|subst.exe$"
-        - dirs: '%WINDIR%\SysNative\drivers\etc%'
-          checks: 'recursion_level="0"'
-        - dirs: '%WINDIR%\SysNative\wbem'
-          checks: 'recursion_level="0" restrict="WMIC.exe$"'
-        - dirs: '%WINDIR%\SysNative\WindowsPowerShell\v1.0'
-          checks: 'recursion_level="0" restrict="powershell.exe$"'
-        - dirs: '%WINDIR%\SysNative'
-          checks: 'recursion_level="0" restrict="winrm.vbs$"'
-        - dirs: '%WINDIR%\System32'
-          checks: >-
-            recursion_level="0" restrict="at.exe$|attrib.exe$|cacls.exe$|cmd.exe$|eventcreate.exe$|ftp.exe$|lsass.exe$|net.exe$|net1.exe$|
-            netsh.exe$|reg.exe$|regedit.exe$|regedt32.exe$|regsvr32.exe$|runas.exe$|sc.exe$|schtasks.exe$|sethc.exe$|subst.exe$"
-        - dirs: '%WINDIR%\System32\drivers\etc'
-          checks: 'recursion_level="0"'
-        - dirs: '%WINDIR%\System32\wbem'
-          checks: 'recursion_level="0" restrict="WMIC.exe$"'
-        - dirs: '%WINDIR%\System32\WindowsPowerShell\v1.0'
-          checks: 'recursion_level="0" restrict="powershell.exe$"'
-        - dirs: '%WINDIR%\System32'
-          checks: 'recursion_level="0" restrict="winrm.vbs$"'
-        - dirs: '%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Startup'
-          checks: 'realtime="yes"'
-      windows_registry:
-        - key: 'HKEY_LOCAL_MACHINE\Software\Classes\batfile'
-        - key: 'HKEY_LOCAL_MACHINE\Software\Classes\cmdfile'
-        - key: 'HKEY_LOCAL_MACHINE\Software\Classes\comfile'
-        - key: 'HKEY_LOCAL_MACHINE\Software\Classes\exefile'
-        - key: 'HKEY_LOCAL_MACHINE\Software\Classes\piffile'
-        - key: 'HKEY_LOCAL_MACHINE\Software\Classes\AllFilesystemObjects'
-        - key: 'HKEY_LOCAL_MACHINE\Software\Classes\Directory'
-        - key: 'HKEY_LOCAL_MACHINE\Software\Classes\Folder'
-        - key: 'HKEY_LOCAL_MACHINE\Software\Classes\Protocols'
-          arch: "both"
-        - key: 'HKEY_LOCAL_MACHINE\Software\Policies'
-          arch: "both"
-        - key: 'HKEY_LOCAL_MACHINE\Security'
-        - key: 'HKEY_LOCAL_MACHINE\Software\Microsoft\Internet Explorer'
-          arch: "both"
-        - key: 'HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services'
-        - key: 'HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\KnownDLLs'
-        - key: 'HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\SecurePipeServers\winreg'
-        - key: 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run'
-          arch: "both"
-        - key: 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunOnce'
-          arch: "both"
-        - key: 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunOnceEx'
-        - key: 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\URL'
-          arch: "both"
-        - key: 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies'
-          arch: "both"
-        - key: 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Windows'
-          arch: "both"
-        - key: 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon'
-          arch: "both"
-        - key: 'HKEY_LOCAL_MACHINE\Software\Microsoft\Active Setup\Installed Components'
-          arch: "both"
-      windows_registry_ignore:
-        - key: 'HKEY_LOCAL_MACHINE\Security\Policy\Secrets'
-        - key: 'HKEY_LOCAL_MACHINE\Security\SAM\Domains\Account\Users'
-        - key: '\Enum$'
-          type: "sregex"
 
-**wazuh_agent_localfiles**
+|
+| **Variable**: ``wazuh_agent_localfiles``
+| **Description**: Configures the :ref:`localfile <reference_ossec_localfile>` section from ``ossec.conf``.
+| **Default values**:
 
-  Configures the :ref:`localfile<reference_ossec_localfile>` section from ``ossec.conf``.
-
-  *Default:*
-
-  .. code-block:: yaml
+.. code-block:: yaml
 
     wazuh_agent_localfiles:
       debian:
@@ -1472,13 +1217,12 @@ Wazuh Agent
         - format: 'syslog'
           location: 'active-response\active-responses.log'
 
-**wazuh_agent_labels**
+|
+| **Variable**: ``wazuh_agent_labels``
+| **Description**: Configures the :ref:`labels <reference_ossec_labels>` section from ``ossec.conf``.
+| **Default values**:
 
-  Configures the :ref:`labels<reference_ossec_labels>` section from ``ossec.conf``.
-
-  *Default:*
-
-  .. code-block:: yaml
+.. code-block:: yaml
 
     wazuh_agent_labels:
       enable: false
@@ -1486,13 +1230,12 @@ Wazuh Agent
         - key: Env
           value: Production
 
-**wazuh_agent_active_response**
+|
+| **Variable**: ``wazuh_agent_active_response``
+| **Description**: Configures the :ref:`active-response <reference_ossec_active_response>` section from ``ossec.conf``.
+| **Default values**:
 
-  Configures the :ref:`active-response<reference_ossec_active_response>` section from ``ossec.conf``.
-
-  *Default:*
-
-  .. code-block:: yaml
+.. code-block:: yaml
 
     wazuh_agent_active_response:
       ar_disabled: 'no'
@@ -1500,20 +1243,16 @@ Wazuh Agent
       ca_store_win: 'wpk_root.pem'
       ca_verification: 'yes'
 
-**wazuh_agent_log_format**
+|
+| **Variable**: ``wazuh_agent_log_format``
+| **Description**: Configures the :ref:`log_format <reference_ossec_logging>` section from ``ossec.conf``.
+| **Default value**: ``plain``
+|
+| **Variable**: ``wazuh_agent_config``
+| **Description**: Wazuh Agent related configuration. This variable is provided for backwards compatibility. Newer deployments should use the newly introduced variables described above.
+| **Example**:
 
-  Configures the :ref:`log_format<reference_ossec_logging>` section from ``ossec.conf``.
-
-  *Default: plain*
-
-**wazuh_agent_config:**
-
-  Wazuh Agent related configuration. This variable is provided for backwards compatibility.
-  Newer deployments should use the newly introduced variables described above.
-
-  *Example:*
-
-  .. code-block:: yaml
+.. code-block:: yaml
 
     wazuh_agent_config:
       log_format: 'plain'
@@ -1549,46 +1288,17 @@ Wazuh Agent
           - key: 'HKEY_LOCAL_MACHINE\Software\Classes\Folder'
       rootcheck:
         frequency: 43200
-      openscap:
-        disable: 'yes'
-        timeout: 1800
-        interval: '1d'
-        scan_on_start: 'yes'
-      cis_cat:
-        disable: 'yes'
-        install_java: 'yes'
-        timeout: 1800
-        interval: '1d'
-        scan_on_start: 'yes'
-        java_path: '/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/bin'
-        ciscat_path: '/var/ossec/wodles/ciscat'
-        content:
-          - type: 'xccdf'
-            path: 'benchmarks/CIS_Ubuntu_Linux_16.04_LTS_Benchmark_v1.0.0-xccdf.xml'
-            profile: 'xccdf_org.cisecurity.benchmarks_profile_Level_1_-_Server'
-      localfiles:
-        - format: 'syslog'
-          location: '/var/log/messages'
-        - format: 'syslog'
-          location: '/var/log/secure'
-        - format: 'command'
-          command: 'df -P'
-          frequency: '360'
-        - format: 'full_command'
-          command: 'netstat -tln | grep -v 127.0.0.1 | sort'
-          frequency: '360'
-        - format: 'full_command'
-          command: 'last -n 20'
-          frequency: '360'
 
-  .. warning:: We recommend the use of `Ansible Vault <https://docs.ansible.com/ansible/latest/user_guide/vault.html>`_ to protect authd credentials.
+|
 
-**authd_pass:**
+.. Warning::
+  
+    We recommend the use of `Ansible Vault <https://docs.ansible.com/ansible/latest/user_guide/vault.html>`_ to protect authd credentials.
 
-  Wazuh authd credentials for agent registration.
+| **Variable**: ``authd_pass``
+| **Description**: Wazuh authd credentials for agent registration.
+| **Example**:
 
-  *Example:*
-
-  .. code-block:: yaml
+.. code-block:: yaml
 
     authd_pass: foobar

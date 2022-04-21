@@ -470,6 +470,7 @@ custom_replacements = {
     "|WAZUH_DASHBOARD_x64_RPM|" : "x86_64",
     "|WAZUH_DASHBOARD_x64_DEB|" : "amd64",
     "|WAZUH_LATEST_ANSIBLE|" : "4.2.5",
+    "|WAZUH_LATEST_MINOR_ANSIBLE|" : "4.3",
     "|WAZUH_LATEST_KUBERNETES|" : "4.2.5",
     "|WAZUH_LATEST_PUPPET|" : "4.2.5",
     "|WAZUH_LATEST_OVA|" : "4.2.5",
