@@ -3,8 +3,6 @@
 .. meta::
   :description: Install and configure Wazuh, the open source security platform, in just a few minutes using the Wazuh installation assistant. 
 
-.. _quickstart:
-
 Quickstart
 ==========
 
@@ -64,7 +62,7 @@ Installing Wazuh
         $ curl -sO https://packages-dev.wazuh.com/|WAZUH_LATEST_MINOR|/wazuh-install.sh && sudo bash ./wazuh-install.sh -a
 
 
-    Once the assistant finishes the installation, the output shows the access credentials and a message that confirms that the installation was successful.
+    Once the assistant finishes the installation, the output shows the access credentials, where to find them, and a message that confirms that the installation was successful.
 
     .. code-block:: none
         :emphasize-lines: 4          
@@ -73,6 +71,7 @@ Installing Wazuh
         INFO: You can access the web interface https://<wazuh-dashboard-ip>.
             User: admin
             Password: <ADMIN_PASSWORD>
+        INFO: The password can be seen in the file /var/log/wazuh-install.log
         INFO: Installation finished.
 
     You now have installed and configured Wazuh.
