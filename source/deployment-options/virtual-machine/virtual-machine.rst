@@ -41,7 +41,7 @@ Out of the box, the Wazuh VM is configured with the following specifications:
 Import and access the virtual machine
 -------------------------------------
 
-First, import the OVA to the virtualization platform and start the machine. When the virtual machine is accessed through the virtualization platform, either of the following system users can be used to login:
+First, import the OVA to the virtualization platform and start the machine. When the virtual machine is accessed through the virtualization platform, either of the following system users can be used to log in:
  
 
   .. code-block:: none
