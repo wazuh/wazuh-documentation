@@ -56,6 +56,7 @@ jQuery(function($) {
 
   /* Versions main constants */
   const thisVersion = DOCUMENTATION_OPTIONS.VERSION;
+  const listOfVersions = typeof(versions) === 'undefined' ? [] : versions;
 
   /* Adds the current version to the selector button */
   checkCurrentVersion();
@@ -73,7 +74,7 @@ jQuery(function($) {
   const documentInReleases = Object.keys(documentHistory);
   let canonicalRelease = documentInReleases[documentInReleases.length-1];
   const canonicalPath = documentHistory[canonicalRelease];
-  if ( canonicalRelease == versions[0] ) {
+  if ( canonicalRelease == listOfVersions[0] ) {
     canonicalRelease = 'current';
   }
 
@@ -92,7 +93,11 @@ jQuery(function($) {
   function checkCurrentVersion() {
     const selectVersionCurrent = $('#version-selector .current');
     const thisVersion = DOCUMENTATION_OPTIONS.VERSION;
-    selectVersionCurrent.html('Version ' + thisVersion + (thisVersion == versions[0] ? ' (current)' : ''));
+    if ( listOfVersions.length > 0 ) {
+      selectVersionCurrent.html('Version ' + thisVersion + (thisVersion == listOfVersions[0] ? ' (current)' : ''));
+    } else {
+      selectVersionCurrent.html('Version ' + thisVersion);
+    }
   }
 
   /**
@@ -104,7 +109,7 @@ jQuery(function($) {
     */
   function checkLatestDocs(redirHistory) {
     const thisVersion = DOCUMENTATION_OPTIONS.VERSION;
-    const latestVersion = versions[0];
+    const latestVersion = listOfVersions[0];
     let page = '';
     if ( thisVersion !== latestVersion ) {
       /* Updates link to the latest version with the correct path */
@@ -142,6 +147,10 @@ jQuery(function($) {
     let page = '';
     let param = '';
 
+    if ( listOfVersions.length == 0 ) {
+      return {};
+    }
+
     page = hasHttpProtocol ? fullUrl.split(document.location.host)[1] : fullUrl.split('/html')[1];
     page = page[page.length-1] == '/' ? page+'index.html' : page;
     if ( page.indexOf(thisVersion) != -1 ) {
@@ -157,7 +166,7 @@ jQuery(function($) {
     let href;
     let tooltip;
     let ver;
-    let versionsCopy = versions;
+    let versionsCopy = listOfVersions;
     /* Normalize URLs in arrays */
     for (let i = 0; i < versionsCopy.length; i++) {
       if ( newUrls[versionsCopy[i]] ) {
@@ -185,7 +194,7 @@ jQuery(function($) {
     versionsCopy = versionsCopy.reverse();
 
     /* Print the correct links in the selector */
-    for (let i = 0; i < versions.length; i++) {
+    for (let i = 0; i < listOfVersions.length; i++) {
       href = '';
       tooltip = '';
       ver = versionsCopy[i];
@@ -196,13 +205,13 @@ jQuery(function($) {
           href = '/'+ver+redirHistory[ver]+param;
         }
       } else {
-        tooltip = 'class="disabled" data-toggle="tooltip" data-placement="left" title="This page is not available in version ' + versions[i] + ((versions[0] == thisVersion && thisVersion == versions[i]) ? ' (current)' : '') +'"';
+        tooltip = 'class="disabled" data-toggle="tooltip" data-placement="left" title="This page is not available in version ' + listOfVersions[i] + ((listOfVersions[0] == thisVersion && thisVersion == listOfVersions[i]) ? ' (current)' : '') +'"';
       }
       if ( !hasHttpProtocol && href.length > 0 ) {
         href = 'https://documentation.wazuh.com' + href;
       }
-      ele += '<li><a href="' + href + '" '+ tooltip +'> Version '+versions[i] + ((versions[0] == thisVersion && thisVersion == versions[i]) ? ' (current)' : '') +'</a></li>';
-      if (ver == versions[0]) {
+      ele += '<li><a href="' + href + '" '+ tooltip +'> Version '+listOfVersions[i] + ((listOfVersions[0] == thisVersion && thisVersion == listOfVersions[i]) ? ' (current)' : '') +'</a></li>';
+      if (ver == listOfVersions[0]) {
         $('.no-latest-notice .link-latest').attr('href', href);
       }
     }
@@ -242,7 +251,7 @@ jQuery(function($) {
 
   /**
    * Get the redirections history about a URL
-   * @param {array} versions A list with all the releases
+   * @param {array} listOfVersions A list with all the releases
    * @param {string} verCurrent The current version
    * @param {string} page The current page URL
    * @param {array} newUrls A list with all the new URL
@@ -250,15 +259,15 @@ jQuery(function($) {
    * @param {array} removedUrls A list with all the URL removed
    * @return {array} A list with the correct URL
    */
-  function getRedirectionHistory(versions, verCurrent, page, newUrls, redirections, removedUrls) {
+  function getRedirectionHistory(listOfVersions, verCurrent, page, newUrls, redirections, removedUrls) {
     const rtn = [];
     const historyArray = [];
     historyArray[verCurrent] = page;
     let cellTemp = [];
-    versions = versions.reverse();
-    const verCurrentNum = getReleaseNum(verCurrent, versions);
+    listOfVersions = listOfVersions.reverse();
+    const verCurrentNum = getReleaseNum(verCurrent, listOfVersions);
     let direction = 'toBoth';
-    if (verCurrentNum == versions.length) {
+    if (verCurrentNum == listOfVersions.length) {
       direction = 'toBottom';
     }
     if (verCurrentNum == 0) {
@@ -276,7 +285,7 @@ jQuery(function($) {
     while (cellTemp.length) {
       const analyzeUrl = cellTemp.pop();
       let infoUrl = getInfoRedirectUrl(analyzeUrl['page'], redirections);
-      let logic = getLogicRedirects(analyzeUrl, infoUrl, versions);
+      let logic = getLogicRedirects(analyzeUrl, infoUrl, listOfVersions);
       if (logic.length == 0) {
         const pageHashArray = analyzeUrl['page'].split('#');
         if ( pageHashArray.length > 1 ) {
@@ -285,14 +294,14 @@ jQuery(function($) {
             analyzeUrl['page'] = pageHashArray[0];
           }
         }
-        logic = getLogicRedirects(analyzeUrl, infoUrl, versions);
+        logic = getLogicRedirects(analyzeUrl, infoUrl, listOfVersions);
       }
       while (logic.length) {
         const forLogic = logic.pop();
         const p = forLogic['url'];
         const v = forLogic['release'];
         const d = forLogic['direction'];
-        const vn = getReleaseNum(forLogic['release'], versions);
+        const vn = getReleaseNum(forLogic['release'], listOfVersions);
         const urlNew = {
           'page': p,
           'version': v,
@@ -309,8 +318,8 @@ jQuery(function($) {
       count++;
     }
 
-    historyArray1 = fillUrls('toBottom', historyArray, verCurrentNum, versions);
-    historyArray2 = fillUrls('toTop', historyArray, verCurrentNum, versions);
+    historyArray1 = fillUrls('toBottom', historyArray, verCurrentNum, listOfVersions);
+    historyArray2 = fillUrls('toTop', historyArray, verCurrentNum, listOfVersions);
 
     for (x in historyArray1) {
       if ({}.hasOwnProperty.call(historyArray1, x)) {
@@ -323,12 +332,12 @@ jQuery(function($) {
       }
     }
 
-    const pageCreated = getInfoNewsUrl(rtn[versions[0]], newUrls);
+    const pageCreated = getInfoNewsUrl(rtn[listOfVersions[0]], newUrls);
     if (pageCreated !== false) {
-      const pageCreatedNum = getReleaseNum(pageCreated['release'], versions);
+      const pageCreatedNum = getReleaseNum(pageCreated['release'], listOfVersions);
       for (r in rtn) {
         if ({}.hasOwnProperty.call(rtn, r)) {
-          const rNum = getReleaseNum(r, versions);
+          const rNum = getReleaseNum(r, listOfVersions);
           if (parseInt(rNum) < parseInt(pageCreatedNum)) {
             delete rtn[r];
           }
@@ -336,12 +345,12 @@ jQuery(function($) {
       }
     }
 
-    const pageRemoved = getInfoRemovedUrl(rtn[versions[versions.length-1]], removedUrls);
+    const pageRemoved = getInfoRemovedUrl(rtn[listOfVersions[listOfVersions.length-1]], removedUrls);
     if (pageRemoved !== false) {
-      const pageRemovedNum = getReleaseNum(pageRemoved['release'], versions);
+      const pageRemovedNum = getReleaseNum(pageRemoved['release'], listOfVersions);
       for (r in rtn) {
         if ({}.hasOwnProperty.call(rtn, r)) {
-          const rNum = getReleaseNum(r, versions);
+          const rNum = getReleaseNum(r, listOfVersions);
           if (parseInt(rNum) >= parseInt(pageRemovedNum)) {
             delete rtn[r];
           }
@@ -355,13 +364,13 @@ jQuery(function($) {
   /**
    * Get the release key number
    * @param {string} key The release number
-   * @param {array} versions A list with all the releases
+   * @param {array} listOfVersions A list with all the releases
    * @return {number} The key number
    */
-  function getReleaseNum(key, versions) {
+  function getReleaseNum(key, listOfVersions) {
     let verKey = -1;
-    for (i in versions) {
-      if (key == versions[i]) {
+    for (i in listOfVersions) {
+      if (key == listOfVersions[i]) {
         verKey = i;
       }
     }
@@ -444,10 +453,10 @@ jQuery(function($) {
    * Get the logic of the redirects
    * @param {array} analyzeUrl Info about the current URL
    * @param {array} infoUrl A list with the redirections related with the page URL
-   * @param {array} versions A list with all the releases
+   * @param {array} listOfVersions A list with all the releases
    * @return {array} A list with the URL related with the redirections of the current URL
    */
-  function getLogicRedirects(analyzeUrl, infoUrl, versions) {
+  function getLogicRedirects(analyzeUrl, infoUrl, listOfVersions) {
     const relatedUrl = [];
     const infoUrlRedirects = infoUrl;
     while (infoUrlRedirects.length) {
@@ -455,8 +464,8 @@ jQuery(function($) {
       for (forTarget in redirect['target']) {
         if ({}.hasOwnProperty.call(redirect['target'], forTarget)) {
           const target = redirect['target'][forTarget].split('=>');
-          const originNum = parseInt(getReleaseNum(target[0], versions));
-          const targetNum = parseInt(getReleaseNum(target[1], versions));
+          const originNum = parseInt(getReleaseNum(target[0], listOfVersions));
+          const targetNum = parseInt(getReleaseNum(target[1], listOfVersions));
           if (analyzeUrl['page'] == redirect[target[0]]) {
             /* To top */
             if (
@@ -498,42 +507,42 @@ jQuery(function($) {
    * @param {string} direction Indicate the direction to analize the URL array
    * @param {array} historyArray A array with the URL found
    * @param {number} verCurrentNum The number of the current release
-   * @param {array} versions A list with all the releases
+   * @param {array} listOfVersions A list with all the releases
    * @return {array} A array with all the URL found
    */
-  function fillUrls(direction, historyArray, verCurrentNum, versions) {
+  function fillUrls(direction, historyArray, verCurrentNum, listOfVersions) {
     const historyArrayTemp = [];
-    for (forVersions in versions) {
-      if ({}.hasOwnProperty.call(versions, forVersions)) {
+    for (forVersions in listOfVersions) {
+      if ({}.hasOwnProperty.call(listOfVersions, forVersions)) {
         forVersions = parseInt(forVersions);
 
         if (direction == 'toBottom') {
           if (forVersions < verCurrentNum) {
-            if (historyArray[versions[forVersions]] == null) {
+            if (historyArray[listOfVersions[forVersions]] == null) {
               /* If the checked version is smaller than the larger version */
-              if (forVersions != versions.length-1) {
-                const next = findNextUrl(forVersions, versions, historyArray);
+              if (forVersions != listOfVersions.length-1) {
+                const next = findNextUrl(forVersions, listOfVersions, historyArray);
                 if (next != -1) {
-                  historyArrayTemp[versions[forVersions]] = historyArray[versions[next]];
+                  historyArrayTemp[listOfVersions[forVersions]] = historyArray[listOfVersions[next]];
                 }
               }
             } else {
-              historyArrayTemp[versions[forVersions]] = historyArray[versions[forVersions]];
+              historyArrayTemp[listOfVersions[forVersions]] = historyArray[listOfVersions[forVersions]];
             }
           }
         }
         if (direction == 'toTop') {
           if (forVersions >= verCurrentNum) {
-            if (historyArray[versions[forVersions]] == null) {
+            if (historyArray[listOfVersions[forVersions]] == null) {
               /* If the tested version is larger than the first version */
               if (forVersions != 0) {
-                const prev = findPrevUrl(forVersions, versions, historyArrayTemp);
+                const prev = findPrevUrl(forVersions, listOfVersions, historyArrayTemp);
                 if (prev != -1) {
-                  historyArrayTemp[versions[forVersions]] = historyArrayTemp[versions[prev]];
+                  historyArrayTemp[listOfVersions[forVersions]] = historyArrayTemp[listOfVersions[prev]];
                 }
               }
             } else {
-              historyArrayTemp[versions[forVersions]] = historyArray[versions[forVersions]];
+              historyArrayTemp[listOfVersions[forVersions]] = historyArray[listOfVersions[forVersions]];
             }
           }
         }
@@ -545,17 +554,17 @@ jQuery(function($) {
   /**
    * Find the following URL
    * @param {number} num The key number of the current release
-   * @param {number} versions A list with all the releases
+   * @param {number} listOfVersions A list with all the releases
    * @param {number} historyArray A list with the URL found
    * @return {number} The key number of the next release
    */
-  function findNextUrl(num, versions, historyArray) {
+  function findNextUrl(num, listOfVersions, historyArray) {
     let found = -1;
-    for (i in versions) {
-      if ({}.hasOwnProperty.call(versions, i)) {
+    for (i in listOfVersions) {
+      if ({}.hasOwnProperty.call(listOfVersions, i)) {
         i = parseInt(i);
         if (i > num) {
-          if (historyArray[versions[i]] != null && found == -1) {
+          if (historyArray[listOfVersions[i]] != null && found == -1) {
             found = i;
           }
         }
@@ -567,17 +576,17 @@ jQuery(function($) {
   /**
    * Find the previous URL
    * @param {number} num The key number of the current release
-   * @param {number} versions A list with all the releases
+   * @param {number} listOfVersions A list with all the releases
    * @param {number} historyArrayTemp A list with the URL found
    * @return {number} The key number of the previous release
    */
-  function findPrevUrl(num, versions, historyArrayTemp) {
+  function findPrevUrl(num, listOfVersions, historyArrayTemp) {
     let found = -1;
-    for (i in versions) {
-      if ({}.hasOwnProperty.call(versions, i)) {
+    for (i in listOfVersions) {
+      if ({}.hasOwnProperty.call(listOfVersions, i)) {
         i = parseInt(i);
         if (i >= num) {
-          if (historyArrayTemp[versions[i-1]] != null && found == -1) {
+          if (historyArrayTemp[listOfVersions[i-1]] != null && found == -1) {
             found = i-1;
           }
         }

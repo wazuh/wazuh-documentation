@@ -16,6 +16,7 @@ import shlex
 import datetime
 import time
 import json
+from jsmin import jsmin
 from requests.utils import requote_uri
 
 # If extensions (or modules to document with autodoc) are in another directory,
@@ -578,6 +579,15 @@ def setup(app):
         os.mkdir(app.srcdir + '/' + html_static_path[0] + '/')
 
     if html_theme == 'wazuh_doc_theme_v3':
+        
+        # Minify redirects.js
+        with open(os.path.join(static_path_str, "js/redirects.js")) as redirects_file:
+            minified = jsmin(redirects_file.read())
+            
+            # Create redirects.min.js file
+            with open(os.path.join(current_path, "static/js/min/redirects.min.js"), 'w') as redirects_min_file:
+                redirects_min_file.write(minified)
+        
         # CSS files
         app.add_css_file("css/min/bootstrap.min.css?ver=%s" % os.stat(
             os.path.join(current_path, "static/css/min/bootstrap.min.css")).st_mtime)

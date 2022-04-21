@@ -72,19 +72,6 @@ if errorlevel 9009 (
 
 :sphinx_ok
 
-if "%1" == "redirects" (
-	cd source/_themes/wazuh_doc_theme_v3 && npm run js:build:redirects
-	if errorlevel 1 (
-		echo.
-		echo.Error. The file "redirects.min.js" could not be updated.
-	) else (
-		echo.
-		echo.Build finished. The file "redirects.min.js" has been updated.
-	)
-	cd ../../..
-	goto end
-)
-
 if "%1" == "theme" (
 	cd source/_themes/wazuh_doc_theme_v3 && npm run build-all
 	if errorlevel 1 (
