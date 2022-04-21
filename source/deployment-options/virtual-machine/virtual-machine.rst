@@ -21,7 +21,7 @@ Download the `virtual appliance (OVA) <https://packages.wazuh.com/|CURRENT_MAJOR
 
 
 Hardware requirements
-^^^^^^^^^^^^^^^^^^^^^
+---------------------
 
 The following requirements have to be in place before the Wazuh VM can be imported into a host operating system:
 
@@ -94,7 +94,7 @@ All components included in this virtual image are configured to work out of the 
   - Wazuh dashboard: 
 
      - ``/etc/wazuh-dashboard/opensearch_dashboards.yml``
-     
+
      - ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml``
 
 VirtualBox time configuration
