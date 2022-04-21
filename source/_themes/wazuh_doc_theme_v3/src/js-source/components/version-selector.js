@@ -155,6 +155,11 @@ jQuery(function($) {
     page = page[page.length-1] == '/' ? page+'index.html' : page;
     if ( page.indexOf(thisVersion) != -1 ) {
       page = page.split('/'+thisVersion)[1];
+      if ( page[page.length-1] !== '/') {
+        page = page.split('/');
+        page[0] = '';
+        page = page.join('/');
+      }
     } else if ( page.indexOf('current') != -1 ) {
       page = page.split('/current')[1];
     }
