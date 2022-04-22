@@ -70,7 +70,7 @@ The Wazuh Indexer needs to be able to create many memory-mapped areas. So the ke
 
       .. code-block:: console
 
-        # sysctl -w vm.max_map_count=262144
+        sysctl -w vm.max_map_count=262144
 
     2.3. Make the script runnable:
 
@@ -82,7 +82,7 @@ The Wazuh Indexer needs to be able to create many memory-mapped areas. So the ke
 
       .. warning::
 
-        If the **max_map_count** is not set on the host, the Wazuh indexer will probably NOT work.
+        If the ``max_map_count`` is not set on the host, the Wazuh indexer will probably NOT work properly.
 
 
 
@@ -91,7 +91,7 @@ Docker for OSX
 
 In Docker for OSX, there is a default memory limit of 2GB, so in order to run ``docker-compose up`` successfully, it is necessary to change default memory settings from 2GB to at least 6GB. This is because, depending on the deployment and usage, the Wazuh indexer memory consumption can vary. 
 
-To do so, click on the Docker icon in the menu bar, then on “Preferences…”, go to the “Advanced” tab, and set 6GB of memory. Finally, click on “Apply & Restart” and run docker-compose up.
+To do so, click on the Docker icon in the menu bar, then on **Preferences**, go to the **Advanced** tab, and set 6GB of memory. Finally, click on **Apply & Restart** and run docker-compose up.
 
 
 Usage
@@ -125,17 +125,17 @@ Single-node Deployment
 
    To secure communications between the nodes, you need to provide a group of certificates for each node in the stack. There are two alternatives to provide these certificates:
 
-    a. Generate self-signed certificates for each node of the cluster:
+    a. Generate self-signed certificates for each node of the cluster.
     
-        A Docker image is available to automate certificate generation using the Wazuh certs gen tool. Just modify the file ``config/wazuh_indexer_ssl_certs/certs.yml`` and execute the following command to obtain the desired certificates:
+        A Docker image is available to automate certificate generation using the Wazuh certs tool. Just modify the file ``config/wazuh_indexer_ssl_certs/certs.yml`` and execute the following command to obtain the desired certificates:
       
         .. code-block:: console
       
           docker-compose -f generate-indexer-certs.yml run --rm generator
 
-        This will save the certificates into the config/wazuh_indexer_ssl_certs directory.
+        This will save the certificates into the ``config/wazuh_indexer_ssl_certs`` directory.
 
-    b. Provide own certificates for each node:
+    b. Provide your own certificates for each node.
 
         In the case of having your own certificates, they must be provisioned as follows:
 
@@ -202,18 +202,18 @@ Multi-node deployment
 
    To secure communications between the nodes, you need to provide a group of certificates for each node in the stack. There are two alternatives to provide these certificates:
 
-   a. Generate self-signed certificates for each node of the cluster:
+   a. Generate self-signed certificates for each node of the cluster.
 
-      A Docker image is available to automate certificate generation using the Wazuh certs gen tool. Just modify the file ``config/wazuh_indexer_ssl_certs/certs.yml`` and execute the following command to obtain the desired certificates:
+      A Docker image is available to automate certificate generation using the Wazuh certs tool. Just modify the file ``config/wazuh_indexer_ssl_certs/certs.yml`` and execute the following command to obtain the desired certificates:
         
           .. code-block:: console
 
             $ docker-compose -f generate-indexer-certs.yml run --rm generator
 
 
-      This will save the certificates into the config/wazuh_indexer_ssl_certs directory.
+      This will save the certificates into the ``config/wazuh_indexer_ssl_certs`` directory.
 
-   b. Provide own certificates for each node:
+   b. Provide your own certificates for each node. 
 
       In the case of having your own certificates, they must be provisioned as follows:
       
@@ -271,14 +271,14 @@ Multi-node deployment
 Customize default users
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-You can customize users on the Wazuh indexer container by mounting your own `internal_users.yml`. The default password for the Wazuh indexer admin user can be changed to provide additional security:
+You can customize users on the Wazuh indexer container by mounting your own ``internal_users.yml``. The default password for the Wazuh indexer `admin` user can be changed to provide additional security:
 
 .. code-block:: console
 
    - ./config/wazuh-indexer/internal_users.yml:/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/internal_users.yml
 
 
-It is possible to generate a hash using the same Docker image, type in a secure password when prompted and replace the hash in `internal_users.yml`:
+It is possible to generate a hash using the same Docker image, type in a secure password when prompted and replace the hash in ``internal_users.yml``:
 
 .. code-block:: console
 

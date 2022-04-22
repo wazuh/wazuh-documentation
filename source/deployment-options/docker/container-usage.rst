@@ -8,21 +8,17 @@
 Wazuh Docker utilities
 ======================
 
-After installing the Wazuh-Docker containers, there are several tasks that you can do to benefit the most from your Wazuh installation such as the listed below:
+After installing the Wazuh-Docker containers, there are several tasks that you can do to benefit the most from your Wazuh installation.
 
-- `Access to services and containers`_
-- `Wazuh service data volumes`_
-- `Storage volume for Wazuh indexer and dashboard`_
-- `Custom commands and scripts`_
 
 
 Access to services and containers
 ---------------------------------
 
-#. You may access the Kibana UI at the Docker host's IP address, for example, ``https://localhost``, if you are in the Docker host.
+#. You may access the Wazuh dashboard UI at the Docker host's IP address, for example, ``https://localhost``, if you are in the Docker host.
 
    .. note::
-     In case you use a self-signed certificate, your browser will warn that it cannot verify its authenticity.
+     In case you use a self-signed certificate, your browser will warn you that it cannot verify its authenticity.
 
 #. Agents may be enrolled by following the standard enrollment process and using the Docker host address as the manager address. For more information, see :ref:`Wazuh agent enrollment <agent_enrollment>`.
 
@@ -35,12 +31,12 @@ Access to services and containers
     .. code-block:: none
       :class: output
 
-                  Name                          Command               State                                                    Ports
-      --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-      wazuh-docker_elasticsearch_1   /usr/local/bin/docker-entr ...   Up      0.0.0.0:9200->9200/tcp, 9300/tcp, 9600/tcp, 9650/tcp
-      wazuh-docker_kibana_1          /bin/sh -c ./entrypoint.sh       Up      0.0.0.0:443->5601/tcp
-      wazuh-docker_wazuh_1           /init                            Up      0.0.0.0:1514->1514/tcp, 0.0.0.0:1515->1515/tcp, 1516/tcp, 0.0.0.0:514->514/udp, 0.0.0.0:55000->55000/tcp
-
+              Name                           Command               State                                                         Ports
+       ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+       single-node_wazuh.dashboard_1   /entrypoint.sh                   Up      0.0.0.0:443->443/tcp,:::443->443/tcp
+       single-node_wazuh.indexer_1     /entrypoint.sh opensearchw ...   Up      0.0.0.0:9200->9200/tcp,:::9200->9200/tcp
+       single-node_wazuh.manager_1     /init                            Up      0.0.0.0:1514->1514/tcp,:::1514->1514/tcp, 0.0.0.0:1515->1515/tcp,:::1515->1515/tcp, 1516/tcp,
+                                                                                0.0.0.0:514->514/udp,:::514->514/udp, 0.0.0.0:55000->55000/tcp,:::55000->55000/tcp
 
 #. You can access the command line of each container by executing ``docker-compose exec <service name> /bin/bash`` from the directory where the ``docker-compose.yml`` file is located:
 

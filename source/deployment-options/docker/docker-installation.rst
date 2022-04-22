@@ -33,7 +33,7 @@ For Linux/Unix machines, Docker requires a 64-bit operating system running kerne
     .. tabs::
 
 
-      .. group-tab:: Yum
+      .. group-tab:: On CentOS machines
 
 
         .. code-block:: console  
@@ -42,7 +42,7 @@ For Linux/Unix machines, Docker requires a 64-bit operating system running kerne
           # dnf install docker-ce --nobest -y
 
 
-      .. group-tab:: APT
+      .. group-tab:: On Ubuntu/Debian machines
 
         
         .. code-block:: console
@@ -60,7 +60,7 @@ For Linux/Unix machines, Docker requires a 64-bit operating system running kerne
 
         .. code-block:: console
 
-          # $ systemctl start docker
+          # systemctl start docker
 
 
       .. group-tab:: SysV Init
@@ -98,7 +98,7 @@ Docker Compose 1.29 or newer is required. Follow these steps to install it:
 
 
     .. note::
-      If the command *docker-compose* fails after installation, check your path. You can also create a symbolic link to /usr/bin or any other directory in your path.
+      If the command ``docker-compose`` fails after installation, check your path. You can also create a symbolic link to ``/usr/bin`` or any other directory in your path.
 
     For example:
 
