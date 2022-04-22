@@ -15,7 +15,7 @@ This document guides through an installation of the Wazuh server and Elastic Sta
 Installing prerequisites
 ------------------------
 
-Some extra packages are needed for the installation, such us ``curl`` or ``unzip``, that will be used in further steps. However, this step can be skipped if ``curl`` and ``unzip`` are already installed on the server. 
+Some extra packages are needed for the installation, such as ``curl`` or ``unzip``, which will be used in further steps. However, this step can be skipped if ``curl`` and ``unzip`` are already installed on the server. 
 
 .. include:: ../../../_templates/installations/basic/before_installation_all_in_one.rst
 

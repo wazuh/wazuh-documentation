@@ -17,7 +17,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 Prerequisites
 ~~~~~~~~~~~~~
 
-Some extra packages are needed for the installation, such us ``curl`` or ``unzip``, that will be used in further steps: 
+Some extra packages are needed for the installation, such as ``curl`` or ``unzip``, that will be used in further steps: 
 
 .. include:: ../../../../../_templates/installations/basic/before_installation_elastic.rst
 
