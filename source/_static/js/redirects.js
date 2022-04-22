@@ -179,15 +179,16 @@ newUrls['4.3'] = [
   '/deployment-options/deploying-with-ansible/index.html',
   '/deployment-options/deploying-with-ansible/setup-remote-systems.html',
   '/deployment-options/deploying-with-ansible/roles/index.html',
-  '/deployment-options/deploying-with-ansible/roles/wazuh-opendistro.html',
+  '/deployment-options/deploying-with-ansible/roles/wazuh-indexer.html',
   '/deployment-options/deploying-with-ansible/roles/wazuh-agent.html',
   '/deployment-options/deploying-with-ansible/roles/wazuh-manager.html',
-  '/deployment-options/deploying-with-ansible/roles/wazuh-kibana.html',
+  '/deployment-options/deploying-with-ansible/roles/wazuh-dashboard.html',
   '/deployment-options/deploying-with-ansible/roles/wazuh-filebeat.html',
   '/deployment-options/deploying-with-ansible/guide/install-ansible.html',
-  '/deployment-options/deploying-with-ansible/guide/install-opendistro-server.html',
+  '/deployment-options/deploying-with-ansible/guide/install-indexer-dashboard.html',
   '/deployment-options/deploying-with-ansible/guide/install-wazuh-agent.html',
   '/deployment-options/deploying-with-ansible/guide/install-wazuh-manager.html',
+  '/deployment-options/deploying-with-ansible/guide/install-wazuh-cluster.html',
   '/deployment-options/deploying-with-ansible/installation-guide.html',
   '/deployment-options/deploying-with-ansible/reference.html',
   '/deployment-options/deploying-with-puppet/index.html',
@@ -560,7 +561,7 @@ redirections.push(
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/deploying-with-ansible/guide/install-opendistro-server.html',
-    '4.3': '/deployment-options/deploying-with-ansible/guide/install-opendistro-server.html',
+    '4.3': '/deployment-options/deploying-with-ansible/guide/install-indexer-dashboard.html',
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
@@ -590,12 +591,12 @@ redirections.push(
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/deploying-with-ansible/roles/wazuh-opendistro.html',
-    '4.3': '/deployment-options/deploying-with-ansible/roles/wazuh-opendistro.html',
+    '4.3': '/deployment-options/deploying-with-ansible/roles/wazuh-indexer.html',
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/deploying-with-ansible/roles/wazuh-kibana.html',
-    '4.3': '/deployment-options/deploying-with-ansible/roles/wazuh-kibana.html',
+    '4.3': '/deployment-options/deploying-with-ansible/roles/wazuh-dashboard.html',
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
