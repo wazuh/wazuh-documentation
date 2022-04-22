@@ -18,7 +18,7 @@ This download page contains packages required for the Wazuh installation with th
    - `Solaris`_
    - `AIX`_
    - `HP-UX`_
-   
+
 - `Wazuh indexer`_
 - `Wazuh dashboard`_
 - `Wazuh Kibana plugin`_
@@ -27,6 +27,7 @@ This download page contains packages required for the Wazuh installation with th
 - `Virtual machine`_
 - `Amazon Machine Image`_
 - `MSU`_
+- `Wazuh debug symbols`_
 
 .. _Wazuh_manager_agent_packages_list:
 
@@ -321,3 +322,70 @@ MSU
 +===================+==============+=======================================================================================================================================================================================================================================+
 |  4.0.0 or later   |   32/64bits  | `msu-updates.json.gz <https://feed.wazuh.com/vulnerability-detector/windows/msu-updates.json.gz>`_ (`sha256 <https://feed.wazuh.com/vulnerability-detector/windows/msu-updates.meta>`__)                                              |
 +-------------------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+Wazuh debug symbols
+-------------------
+
+.. _linux-dbg-symbols-packages:
+
+Linux debug symbols
+^^^^^^^^^^^^^^^^^^^
+
++---------------+------------------------------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Package type  |                 OS                 | Architecture | Packages                                                                                                                                                                                                                                                           |
++===============+====================================+==============+====================================================================================================================================================================================================================================================================+
+|               |  CentOS 5, SUSE 11, Oracle Linux 5 |    x86_64    | `wazuh-agent-debuginfo-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86_EL5|.el5.x86_64.rpm <https://packages.wazuh.com/|CURRENT_MAJOR|/yum5/x86_64/wazuh-agent-debuginfo-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86_EL5|.el5.x86_64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent-debuginfo-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86_EL5|.el5.x86_64.rpm.sha512>`__) |
++               +                                    +--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|               |     Red Hat Enterprise Linux 5     |     i386     | `wazuh-agent-debuginfo-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_I386_EL5|.el5.i386.rpm <https://packages.wazuh.com/|CURRENT_MAJOR|/yum5/i386/wazuh-agent-debuginfo-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_I386_EL5|.el5.i386.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent-debuginfo-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_I386_EL5|.el5.i386.rpm.sha512>`__)         |
++               +------------------------------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|               |           Amazon Linux             |              | `wazuh-agent-debuginfo-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm <|RPM_AGENT_DEBUG_SYMBOLS|-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent-debuginfo-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm.sha512>`__)                      |
++               +                                    +    x86_64    +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|               |            CentOS, Fedora          |              | `wazuh-manager-debuginfo-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_MANAGER_X86|.x86_64.rpm <|RPM_MANAGER_DEBUG_SYMBOLS|-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_MANAGER_X86|.x86_64.rpm>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-manager-debuginfo-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_MANAGER_X86|.x86_64.rpm.sha512>`__)                |
++               +                                    +--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|               |             OpenSUSE               |     i386     | `wazuh-agent-debuginfo-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_I386|.i386.rpm <|RPM_AGENT_DEBUG_SYMBOLS|-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_I386|.i386.rpm>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent-debuginfo-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_I386|.i386.rpm.sha512>`__)                            |
++      RPM      +                                    +--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|               |           Oracle Linux             |              | `wazuh-agent-debuginfo-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_AARCH64|.aarch64.rpm <|RPM_AGENT_DEBUG_SYMBOLS|-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_AARCH64|.aarch64.rpm>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent-debuginfo-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_AARCH64|.aarch64.rpm.sha512>`__)                   |
++               +                                    +    aarch64   +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|               |       Red Hat Enterprise Linux     |              | `wazuh-manager-debuginfo-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_MANAGER_AARCH64|.aarch64.rpm <|RPM_MANAGER_DEBUG_SYMBOLS|-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_MANAGER_AARCH64|.aarch64.rpm>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-manager-debuginfo-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_MANAGER_AARCH64|.aarch64.rpm.sha512>`__)             |
++               +                                    +--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|               |               SUSE                 |     armhf    | `wazuh-agent-debuginfo-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_ARMHF|.armv7hl.rpm <|RPM_AGENT_DEBUG_SYMBOLS|-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_ARMHF|.armv7hl.rpm>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent-debuginfo-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_ARMHF|.armv7hl.rpm.sha512>`__)                   |
++               +                                    +--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|               |                                    |    powerpc   | `wazuh-agent-debuginfo-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_PPC64|.ppc64le.rpm <|RPM_AGENT_DEBUG_SYMBOLS|-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_PPC64|.ppc64le.rpm>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent-debuginfo-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_PPC64|.ppc64le.rpm.sha512>`__)                   |
++---------------+------------------------------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|               |                                    |              | `wazuh-agent-dbg_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_X86|_amd64.deb <|DEB_AGENT_DEBUG_SYMBOLS|_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_X86|_amd64.deb>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent-dbg_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_X86|_amd64.deb.sha512>`__)                   |
++               +                                    +    x86_64    +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|               |              Debian                |              | `wazuh-manager-dbg_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_MANAGER_X86|_amd64.deb <|DEB_MANAGER_DEBUG_SYMBOLS|_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_MANAGER_X86|_amd64.deb>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-manager-dbg_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_MANAGER_X86|_amd64.deb.sha512>`__)           |
++               +                                    +--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|               |                                    |     i386     | `wazuh-agent-dbg_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_I386|_i386.deb <|DEB_AGENT_DEBUG_SYMBOLS|_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_I386|_i386.deb>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent-dbg_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_I386|_i386.deb.sha512>`__)                      |
++      DEB      +                                    +--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|               |              Ubuntu                |              | `wazuh-agent-dbg_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_AARCH64|_arm64.deb <|DEB_AGENT_DEBUG_SYMBOLS|_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_AARCH64|_arm64.deb>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent-dbg_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_AARCH64|_arm64.deb.sha512>`__)                   |
++               +                                    +    aarch64   +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|               |                                    |              | `wazuh-manager-dbg_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_MANAGER_AARCH64|_arm64.deb <|DEB_MANAGER_DEBUG_SYMBOLS|_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_MANAGER_AARCH64|_arm64.deb>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-manager-dbg_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_MANAGER_AARCH64|_arm64.deb.sha512>`__)           |
++               +                                    +--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|               |            Raspbian OS             |     armhf    | `wazuh-agent-dbg_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_ARMHF|_armhf.deb <|DEB_AGENT_DEBUG_SYMBOLS|_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_ARMHF|_armhf.deb>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent-dbg_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_ARMHF|_armhf.deb.sha512>`__)                   |
++               +                                    +--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|               |                                    |    powerpc   | `wazuh-agent-dbg_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_PPC64|_ppc64el.deb <|DEB_AGENT_DEBUG_SYMBOLS|_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_PPC64|_ppc64el.deb>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent-dbg_|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_PPC64|_ppc64el.deb.sha512>`__)             |
++---------------+------------------------------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+.. _win-dbg-symbols-packages:
+
+Windows debug symbols
+^^^^^^^^^^^^^^^^^^^^^
+
++---------------+--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|    Version    | Architecture | Package                                                                                                                                                                                                                                                                          |
++===============+==============+==================================================================================================================================================================================================================================================================================+
+| XP or greater |   32/64bits  | `wazuh-agent-windows-x86_64-debug-info-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/windows/wazuh-agent-windows-x86_64-debug-info-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.zip>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh-agent-windows-x86_64-debug-info-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.zip.sha512>`__)     |
++---------------+--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+.. _macos-dbg-symbols-packages:
+
+macOS debug symbols
+^^^^^^^^^^^^^^^^^^^
+
++--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Architecture | Package                                                                                                                                                                                                                                                                         |
++==============+=================================================================================================================================================================================================================================================================================+
+|    64bits    | `wazuh-agent-macos-amd64-debug-info-|WAZUH_LATEST|-|WAZUH_REVISION_OSX|.tar.gz <https://packages.wazuh.com/|CURRENT_MAJOR|/macos/wazuh-agent-macos-amd64-debug-info-|WAZUH_LATEST|-|WAZUH_REVISION_OSX|.tar.gz>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh-agent-macos-amd64-debug-info-|WAZUH_LATEST|-|WAZUH_REVISION_OSX|.tar.gz.sha512>`__)      |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
