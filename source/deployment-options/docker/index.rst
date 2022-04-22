@@ -12,7 +12,7 @@ This section details the process of installing Wazuh on Docker.
 
 You can install Wazuh using the Docker images such as ``wazuh/wazuh-manager``, ``wazuh/wazuh-indexer`` and ``wazuh/wazuh-dashboard``. All these Wazuh Docker images are found in the `Docker hub <https://hub.docker.com/u/wazuh>`_.
 
-In the :doc:`/deployment-options/docker/docker-installation` section, you will see how to install Docker. You can also learn how to install Wazuh on Docker in the :doc:`/deployment-options/docker/wazuh-container`. Read the :doc:`/deployment-options/docker/container-usage` section to learn how to access the services and containers, manage data volumes, and execute a shell. Finally, you can find answers to some frequent questions in the :doc:`/deployment-options/docker/faq-wazuh-container`.
+In the :doc:`/deployment-options/docker/docker-installation` section, you will see how to install Docker. You can learn how to install Wazuh on Docker in the :doc:`/deployment-options/docker/wazuh-container`. Read the :doc:`/deployment-options/docker/container-usage` section to learn how to access the services and containers, manage data volumes, and execute a shell. Finally, you can find answers to some frequent questions in the :doc:`/deployment-options/docker/faq-wazuh-container`.
 
 
 .. toctree::
