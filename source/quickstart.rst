@@ -85,7 +85,7 @@ When you access the Wazuh dashboard for the first time, the browser shows a warn
  
 .. note::
   
-    If you want to uninstall the Wazuh central components, run the Wazuh unattended installer using the option ``-u`` or ``–-uninstall``.
+    If you want to uninstall the Wazuh central components, run the Wazuh installation assistant using the option ``-u`` or ``–-uninstall``.
 
 Next steps
 ----------
