@@ -1,6 +1,6 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
-.. _kibana_config_file:
+.. _wazuh_dashboard_config_file:
 
 UI Configuration file
 =====================

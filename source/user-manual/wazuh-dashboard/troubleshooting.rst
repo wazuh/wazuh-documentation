@@ -3,7 +3,7 @@
 .. meta::
   :description: This section of the Wazuh documentation lists the common installation or usage issues with the Wazuh Kibana plugin and how to resolve them. 
   
-.. _kibana_troubleshooting:
+.. _wazuh_dashboard_troubleshooting:
 
 Troubleshooting
 ===============
@@ -168,12 +168,12 @@ Starting Wazuh 4.0 the Wazuh API username variable changed from ``user`` to ``us
         run_as: false
 
 
-Wazuh Kibana plugin page goes blank
+Wazuh Dashboard page goes blank
 -----------------------------------
 
-Sometimes, after an upgrade, the Wazuh Kibana plugin page goes blank. This is due to some issues with the cache memory of the browser.
+Sometimes, after an upgrade, the Wazuh Dashboard page goes blank. This is due to some issues with the cache memory of the browser.
 
-.. thumbnail:: ../../../images/kibana-app/troubleshooting/page-goes-blank.png
+.. thumbnail:: ../../images/kibana-app/troubleshooting/page-goes-blank.png
 
     :title: Page goes blank
     :align: left
@@ -189,7 +189,7 @@ To fix this you need to:
 
 Sometimes, after an upgrade, the Wazuh Kibana plugin displays the "Conflict with the Wazuh app version" error. This is due to some issues with the cache memory of the browser.
 
-.. thumbnail:: ../../../images/kibana-app/troubleshooting/conflict-wazuh-app-version.png
+.. thumbnail:: ../../images/kibana-app/troubleshooting/conflict-wazuh-app-version.png
     :title: Conflict wazuh app version
     :align: left
     :width: 100%
