@@ -3,8 +3,8 @@
 .. meta::
     :description: Learn more about the step-by-step installation of Wazuh and the installation of Elasticsearch cluster, Wazuh cluster and Kibana. Get started with Wazuh. 
     
-Step-by-step installation
-=========================
+Distributed deployment
+======================
 
 The following sections provide information about how to install each involved component. During the Elasticsearch cluster installation, the certificates necessary to secure the communication will be created, so it is recommended to start by installing Elasticsearch.
 

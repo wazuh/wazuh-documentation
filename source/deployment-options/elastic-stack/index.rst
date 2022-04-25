@@ -15,7 +15,11 @@ Deployment types
 
 The installation guide is divided into two independent sections: all-in-one deployment and distributed deployment, according to the chosen configuration. The installation requirements for Wazuh and Elastic Stack are similar to those described in the :ref:`requirements <installation_requirements>` section.
 
-- **All-in-one deployment**: Wazuh and Elastic Stack are installed in the same host. This type of deployment is appropriate for testing and small working environments. 
+
+All-in-one deployment
+^^^^^^^^^^^^^^^^^^^^^
+  
+Wazuh and Elastic Stack are installed in the same host. This type of deployment is appropriate for testing and small working environments. 
 
       .. thumbnail:: ../../images/installation/all-in-one-deployment.png
         :title: All-in-one deployment
@@ -28,10 +32,14 @@ The installation guide is divided into two independent sections: all-in-one depl
 
     - Elastic Stack, including Elasticsearch as a single-node cluster, Filebeat, and Kibana, including the Wazuh Kibana plugin.
 
-    The communication will be encrypted using certificates. To guarantee the expected performance of the Wazuh components, the host must meet the hardware requirements described in the :ref:`requirements <installation_requirements>` section. The user can follow the installation steps guide to install all required components.
+    The communication will be encrypted using certificates, and the user can follow the installation steps guide to install all required components.
 
 
-- **Distributed deployment**: Each component is installed in a separate host as a single-node or multi-node cluster. This type of deployment allows high availability and scalability of the product and is convenient for large working environments.
+
+Distributed deployment
+^^^^^^^^^^^^^^^^^^^^^^
+
+Each component is installed in a separate host as a single-node or multi-node cluster. This type of deployment allows high availability and scalability of the product and is convenient for large working environments.
 
     Kibana can be installed on the same server as the Elasticsearch node, or on a separate one. This type of deployment is appropriate for production environments as it provides high availability and scalability of the services.
 
@@ -46,7 +54,7 @@ The installation guide is divided into two independent sections: all-in-one depl
 
     - Elastic Stack as a single-node cluster or as a multi-node cluster, and Kibana, including the Wazuh Kibana plugin, on the same host as Elasticsearch node or on a separate one.
 
-    The communication will be encrypted using certificates. To guarantee the expected performance of the Wazuh components, all hosts must meet the hardware requirements described in the :ref:`requirements <installation_requirements>` section. The user can follow the installation steps guide to install all required components.
+    The communication will be encrypted using certificates, and the user can follow the installation steps guide to install all required components.
 
 
 
