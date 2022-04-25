@@ -17,4 +17,5 @@ Welcome to the Wazuh Dashboard. Use it as your Wazuh reference library once you 
 
         rbac
         settings
+        config-file
         
