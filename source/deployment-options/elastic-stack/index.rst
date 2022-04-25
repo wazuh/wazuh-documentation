@@ -61,7 +61,7 @@ Each component is installed in a separate host as a single-node or multi-node cl
 Start deploying Wazuh server and Elastic Stack
 ----------------------------------------------
 
-- :doc:`All-in-one deployment <../elastic-stack/all-in-one-deployment/all-in-one>`
+- :doc:`All-in-one deployment <../elastic-stack/all-in-one-deployment/index>`
   
 - :doc:`Distributed deployment <../elastic-stack/distributed-deployment/step-by-step-installation/index>`
 
@@ -70,5 +70,5 @@ Start deploying Wazuh server and Elastic Stack
     :hidden:
     :maxdepth: 2
 
-    all-in-one-deployment/all-in-one
+    all-in-one-deployment/index
     distributed-deployment/index
