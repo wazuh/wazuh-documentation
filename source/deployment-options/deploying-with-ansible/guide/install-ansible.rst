@@ -3,8 +3,6 @@
 .. meta::
    :description: Learn how to install the Ansible server in this section of the Wazuh documentation. Check out this step-by-step guide. 
    
-.. _wazuh_ansible_installation:
-
 Install Ansible
 ===============
 
@@ -68,20 +66,22 @@ For Debian and Ubuntu we will use the Ansible PPA repository. The steps are as f
 
 #.  Setup ansible repository:
 
-    #.  For Ubuntu:
+    .. tabs::
 
-        .. code-block:: console
+        .. tab:: Ubuntu
 
-            # apt-add-repository -y ppa:ansible/ansible
-            # apt-get update
+            .. code-block:: console
 
-    #.  For Debian:
+                # apt-add-repository -y ppa:ansible/ansible
+                # apt-get update
 
-        .. code-block:: console
+        .. tab:: Debian
 
-            # echo "deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main" | sudo tee -a /etc/apt/sources.list.d/ansible-debian.list
-            # apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
-            # apt-get update
+            .. code-block:: console
+
+                # echo "deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main" | sudo tee -a /etc/apt/sources.list.d/ansible-debian.list
+                # apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
+                # apt-get update
 
 #.  Finally, install ansible:
 
@@ -142,31 +142,35 @@ Our Ansible server will need to connect to the other endpoints. Let’s see how 
 
     #.  On the remote system, install openssh-server if it is not installed.
 
-        - CentOS/RHEL/Fedora
+        .. tabs::
+          
+            .. group-tab:: CentOS/RHEL/Fedora
 
-            .. code-block:: console
+                .. code-block:: console
 
-                # yum install openssh-server
+                    # yum install openssh-server
 
-        - Ubuntu/Debian
+            .. group-tab:: Ubuntu/Debian
 
-            .. code-block:: console
+                .. code-block:: console
 
-                # apt-get install openssh-server
+                    # apt-get install openssh-server
 
     #.  Start the SSH service.
 
-        - For Systemd:
+        .. tabs::
 
-            .. code-block:: console
+            .. group-tab:: Systemd
 
-                # systemctl start sshd
+                .. code-block:: console
 
-        - For SysV Init:
+                    # systemctl start sshd
 
-            .. code-block:: console
+            .. group-tab:: SysV Init:
 
-                # service sshd start
+                .. code-block:: console
+
+                    # service sshd start
 
     #.  Move to the $HOME directory of the remote system.
 
@@ -216,17 +220,19 @@ Our Ansible server will need to connect to the other endpoints. Let’s see how 
 
     #.  Restart the ssh service.
 
-        - For Systemd:
+        .. tabs::
 
-            .. code-block:: console
+            .. group-tab:: Systemd
 
-                # systemctl restart sshd
+                .. code-block:: console
 
-        - For SysV Init:
+                    # systemctl restart sshd
 
-            .. code-block:: console
+            .. group-tab:: SysV Init:
 
-                # service sshd restart
+                .. code-block:: console
+
+                    # service sshd restart
 
     #.  Verify authentication with public key works.We test from the Ansible server.
 
