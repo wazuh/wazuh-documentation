@@ -71,4 +71,4 @@ Start deploying Wazuh server and Elastic Stack
     :maxdepth: 2
 
     all-in-one-deployment/index
-    distributed-deployment/index
+    distributed-deployment/step-by-step-installation/index
