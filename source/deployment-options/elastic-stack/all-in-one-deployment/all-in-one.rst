@@ -5,8 +5,9 @@
 
 .. _basic_all_in_one:
 
-Installation Steps
-==================
+Step-by-step installation
+=========================
+
 This document guides through an installation of the Wazuh server and Elastic Stack components in an all-in-one configuration. This guide provides instructions to configure the official repositories to do the installations, alternatively, all the available packages can be found :ref:`here <packages>`. 
 
 .. note:: Root user privileges are required to execute all the commands described below.

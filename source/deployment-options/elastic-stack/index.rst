@@ -17,14 +17,50 @@ The installation guide is divided into two independent sections: all-in-one depl
 
 - **All-in-one deployment**: Wazuh and Elastic Stack are installed in the same host. This type of deployment is appropriate for testing and small working environments. 
 
+      .. thumbnail:: ../../images/installation/all-in-one-deployment.png
+        :title: All-in-one deployment
+        :align: center
+        :width: 80%
+
+    The following components will be installed:
+
+    - The Wazuh server, including the Wazuh manager as a single-node cluster, and the Wazuh API.
+
+    - Elastic Stack, including Elasticsearch as a single-node cluster, Filebeat, and Kibana, including the Wazuh Kibana plugin.
+
+    The communication will be encrypted using certificates. To guarantee the expected performance of the Wazuh components, the host must meet the hardware requirements described in the :ref:`requirements <installation_requirements>` section. The user can follow the installation steps guide to install all required components.
+
+
 - **Distributed deployment**: Each component is installed in a separate host as a single-node or multi-node cluster. This type of deployment allows high availability and scalability of the product and is convenient for large working environments.
+
+    Kibana can be installed on the same server as the Elasticsearch node, or on a separate one. This type of deployment is appropriate for production environments as it provides high availability and scalability of the services.
+
+      .. thumbnail:: ../../images/installation/distributed-no-title.png
+        :title: Distributed deployment
+        :align: center
+        :width: 80%
+
+    The following components will be installed:
+
+    - The Wazuh server, including the Wazuh manager as a single-node cluster or as a multi-node cluster, the Wazuh API, and Filebeat.
+
+    - Elastic Stack as a single-node cluster or as a multi-node cluster, and Kibana, including the Wazuh Kibana plugin, on the same host as Elasticsearch node or on a separate one.
+
+    The communication will be encrypted using certificates. To guarantee the expected performance of the Wazuh components, all hosts must meet the hardware requirements described in the :ref:`requirements <installation_requirements>` section. The user can follow the installation steps guide to install all required components.
+
 
 
 Start deploying Wazuh server and Elastic Stack
 ----------------------------------------------
 
+- :doc:`All-in-one deployment <../elastic-stack/all-in-one-deployment/all-in-one>`
+  
+- :doc:`Distributed deployment <../elastic-stack/distributed-deployment/step-by-step-installation/index>`
+
+
 .. toctree::
+    :hidden:
     :maxdepth: 2
 
-    all-in-one-deployment/index
+    all-in-one-deployment/all-in-one
     distributed-deployment/index

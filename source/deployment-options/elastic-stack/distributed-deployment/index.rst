@@ -28,5 +28,4 @@ The communication will be encrypted using certificates. To guarantee the expecte
 .. toctree::
     :maxdepth: 1
 
-    unattended/index
     step-by-step-installation/index
