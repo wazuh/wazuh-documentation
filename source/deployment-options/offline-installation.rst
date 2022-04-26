@@ -1,12 +1,12 @@
 .. Copyright (C) 2015–2022 Wazuh, Inc.
 
 .. meta::
-  :description: Discover the offline step-by-step process to install Wazuh in an all-in-one deployment without connection to the Internet.
+  :description: Discover the offline step-by-step process to install the Wazuh central components without connection to the Internet.
 
 Offline installation
 ====================
 
-You can install Wazuh even when there is no connection to the Internet. Installing the solution offline involves downloading the Wazuh components to later install them on a system with no Internet connection. Although in this section the Wazuh server, the indexer, and the dashboard are installed and configured on the same host in an all-in-one deployment, each component can also be installed on a separate host as a distributed deployment, depending on your environment needs. For more information, check the :ref:`Requirements <installation_requirements>` section.
+You can install Wazuh even when there is no connection to the Internet. Installing the solution offline involves downloading the Wazuh central components to later install them on a system with no Internet connection. The Wazuh server, the Wazuh indexer and the Wazuh dashboard can be installed and configured on the same host in an all-in-one deployment, or each component can be installed on a separate host as a distributed deployment, depending on your environment needs. For more information about the hardware requirements and the recommended operating systems, check the :ref:`Requirements <installation_requirements>` section.
 
 .. note::
 
@@ -40,7 +40,7 @@ Download the packages and configuration files
         
             # curl -sO https://packages-dev.wazuh.com/|WAZUH_LATEST_MINOR|/config.yml
             
-        Edit config.yml and replace ``<indexer-node-ip>``, ``<wazuh-manager-ip>``, and ``<dashboard-node-ip>`` with ``127.0.0.1``.
+        Edit ``config.yml`` and replace ``<indexer-node-ip>``, ``<wazuh-manager-ip>``, and ``<dashboard-node-ip>`` with ``127.0.0.1``.
         
     -   Multi-node cluster
         
@@ -50,9 +50,9 @@ Download the packages and configuration files
         
             # curl -sO https://packages-dev.wazuh.com/|WAZUH_LATEST_MINOR|/config.yml
             
-        Edit config.yml and replace ``<indexer-node-ip>``, ``<wazuh-manager-ip>``, and ``<dashboard-node-ip>`` with the IP address of the hosts of each component.
+        Edit ``config.yml`` and replace ``<indexer-node-ip>``, ``<wazuh-manager-ip>``, and ``<dashboard-node-ip>`` with the IP address of the host of each component.
 
-#.  Create the certificates and move them to the wazuh-offline/ directory.
+#.  Create the certificates and move them to the ``wazuh-offline/`` directory.
 
     .. code-block:: console
     
@@ -101,12 +101,12 @@ Installing the Wazuh manager
 
     .. include:: /_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
 
-#.  Run the following command to verify the Wazuh manager status is active.
+#.  Run the following command to verify that the Wazuh manager status is active.
 
     .. include:: /_templates/installations/wazuh/common/check_wazuh_manager.rst    
 
-Installing Wazuh indexer
-~~~~~~~~~~~~~~~~~~~~~~~~
+Installing the  Wazuh indexer
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #.  Run the following command to install the Wazuh indexer.
 
@@ -124,7 +124,7 @@ Installing Wazuh indexer
         
                 # dpkg -i ./wazuh-offline/wazuh-packages/wazuh-indexer*.deb
 
-#.  Move the production certificates to the /etc/wazuh-indexer/certs/ directory.
+#.  Move the production certificates to the ``/etc/wazuh-indexer/certs/`` directory.
 
     .. code-block:: console
     
@@ -149,7 +149,7 @@ Installing Wazuh indexer
 
     .. include:: /_templates/installations/indexer/common/enable_indexer.rst
 
-#.  Use indexer-security-init.sh script to load the new certificates information and start the cluster:
+#.  Use ``indexer-security-init.sh`` script to load the new certificates information and start the cluster:
 
     .. code-block:: console
 
@@ -320,8 +320,8 @@ Filebeat must be installed and configured on the same server as the Wazuh manage
         }
 
 
-Installing Wazuh dashboard
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Installing the Wazuh dashboard
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #.  Run the following command to install the Wazuh dashboard.
 
@@ -359,14 +359,14 @@ Installing Wazuh dashboard
     -   **Username**: admin
     -   **Password**: admin
 
-Upon the first access to the Wazuh dashboard, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or, for increased security, the root-ca.pem file previously generated can be imported to the certificate manager of the browser. Alternatively, a certificate from a trusted authority can be configured.
+Upon the first access to the Wazuh dashboard, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or, for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser. Alternatively, a certificate from a trusted authority can be configured.
 
 .. note::
   
     -   It is highly recommended to change the default passwords of Wazuh indexer for the users’ passwords. To perform this action, see the :ref:`Change users' password <change_elastic_pass>` section.
     -   It is also recommended to customize the file ``/etc/wazuh-indexer/jvm.options`` to improve the performance of Wazuh indexer. Learn more about this process in the :ref:`memory_locking` section.
 
-To uninstall all the components of the all-in-one installation, see the :doc:`/user-manual/uninstall/central-components` section.
+To uninstall all the Wazuh central components, see the :doc:`/user-manual/uninstall/central-components` section.
 
 Next steps
 ----------
