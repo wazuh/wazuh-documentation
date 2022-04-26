@@ -584,14 +584,14 @@ Reference                                                         Description
 `#3866 <https://github.com/wazuh/wazuh-kibana-app/pull/3866>`_    Routing redirection in events documents discover links is fixed.
 `#3868 <https://github.com/wazuh/wazuh-kibana-app/pull/3868>`_    Health-check is fixed.
 `#3901 <https://github.com/wazuh/wazuh-kibana-app/pull/3901>`_    The table of Vulnerabilities/Inventory doesn't reload when changing the selected agent is fixed.
-`#3901 <https://github.com/wazuh/wazuh-kibana-app/pull/3901>`_    Fixed backslash breaking exported JSON result.
-`#3937 <https://github.com/wazuh/wazuh-kibana-app/pull/3937>`_    Fixed the Events view multiple "The index pattern was refreshed successfully" toast.
-`#3942 <https://github.com/wazuh/wazuh-kibana-app/pull/3942>`_    Fixed a rendering problem in the map visualizations.
+`#3901 <https://github.com/wazuh/wazuh-kibana-app/pull/3901>`_    The issue with the table in Modules/Vulnerabilities/Inventory that doesn't refresh when changing the selected agent is fixed.
+`#3937 <https://github.com/wazuh/wazuh-kibana-app/pull/3937>`_    An asynchronism issue when multiple fields are missing in the Events view rows details is solved.
+`#3942 <https://github.com/wazuh/wazuh-kibana-app/pull/3942>`_    A rendering problem in the map visualizations is fixed.
 `#3877 <https://github.com/wazuh/wazuh-kibana-app/pull/3877>`_    Parse error when using # character not at the beginning of the line.
-`#3944 <https://github.com/wazuh/wazuh-kibana-app/pull/3944>`_    Fixed the rule.mitre.id cell enhancement that doesn't support values with sub techniques.
-`#3947 <https://github.com/wazuh/wazuh-kibana-app/pull/3947>`_    Fixed error not working the alerts displayed when changin the selected time in some flyouts.
-`#3957 <https://github.com/wazuh/wazuh-kibana-app/pull/3957>`_    Fixed the user can not logout when the Kibana server has a basepath configurated.
-`#3991 <https://github.com/wazuh/wazuh-kibana-app/pull/3991>`_    Fixed fatal cron-job error when Wazuh API is down.
+`#3944 <https://github.com/wazuh/wazuh-kibana-app/pull/3944>`_    The rule.mitre.id cell enhancement that doesn't support values with sub techniques is solved.
+`#3947 <https://github.com/wazuh/wazuh-kibana-app/pull/3947>`_    An error when changin the selected time in some flyouts is fixed.
+`#3957 <https://github.com/wazuh/wazuh-kibana-app/pull/3957>`_    An issue related to the user can log out when the Kibana server has a basepath configurated is solved.
+`#3991 <https://github.com/wazuh/wazuh-kibana-app/pull/3991>`_    A fatal cron-job error when Wazuh API is down is fixed.
 ================================================================  =============
 
 
