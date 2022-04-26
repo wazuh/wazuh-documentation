@@ -51,8 +51,7 @@ Follow these steps to create an internal user, create a new role mapping, and gi
   
    #. Click **Save role mapping** to save and map the user with Wazuh as *administrator*. 
 
-   For the role mapping to take effect, make sure that ``run_as`` is set to ``true`` in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file. Restart the Kibana service and clear your browser cache and cookies.
-
+   For the role mapping to take effect, make sure that ``run_as`` is set to ``true`` in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file. Restart the Wazuh dashboard service and clear your browser cache and cookies.
 
 Creating and setting a Wazuh read-only user
 -------------------------------------------
