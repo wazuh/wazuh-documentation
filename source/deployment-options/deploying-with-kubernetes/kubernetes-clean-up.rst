@@ -29,7 +29,7 @@ To delete your Wazuh cluster just execute the following command from this reposi
 
 This will remove every resource defined on the ``kustomization.yml`` file.
 
-1. Remove the persistent volumes.
+2. Remove the persistent volumes.
 
     .. code-block:: console
 
