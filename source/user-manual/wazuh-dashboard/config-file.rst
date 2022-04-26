@@ -17,7 +17,6 @@ The configuration file reference is organized by sections:
     - `timeout`_
     - `ip.selector`_
     - `ip.ignore`_
-    - `xpack.rbac.enabled`_
     - `admin`_
     - `logs.level`_
     - `hideManagerAlerts`_
@@ -142,17 +141,6 @@ Disable certain index pattern names from being available in index pattern select
 +--------------------+---------------------------------------------+
 | **Allowed values** | Array of strings. Eg: ["wazuh-archives-\*"] |
 +--------------------+---------------------------------------------+
-
-xpack.rbac.enabled
-^^^^^^^^^^^^^^^^^^
-
-Enable or disable X-Pack RBAC security capabilities when using the app.
-
-+--------------------+------------+
-| **Default value**  | true       |
-+--------------------+------------+
-| **Allowed values** | true,false |
-+--------------------+------------+
 
 admin
 ^^^^^
