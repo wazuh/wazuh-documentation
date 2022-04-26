@@ -222,12 +222,13 @@ Verifying the deployment
         :class: output
 
         NAME                  TYPE           CLUSTER-IP       EXTERNAL-IP        PORT(S)                          AGE
-        elasticsearch         ClusterIP      xxx.yy.zzz.24    <none>             9200/TCP                         12m
-        kibana                ClusterIP      xxx.yy.zzz.76    <none>             5601/TCP                         11m
+        indexer               ClusterIP      xxx.yy.zzz.24    <none>             9200/TCP                         12m
+        dashboard             ClusterIP      xxx.yy.zzz.76    <none>             5601/TCP                         11m
         wazuh                 LoadBalancer   xxx.yy.zzz.209   internal-a7a8...   1515:32623/TCP,55000:30283/TCP   9m
         wazuh-cluster         ClusterIP      None             <none>             1516/TCP                         9m
-        wazuh-elasticsearch   ClusterIP      None             <none>             9300/TCP                         12m
+        Wazuh-indexer         ClusterIP      None             <none>             9300/TCP                         12m
         wazuh-workers         LoadBalancer   xxx.yy.zzz.26    internal-a7f9...   1514:31593/TCP                   9m
+
 
 **Deployments**
 
@@ -239,7 +240,7 @@ Verifying the deployment
         :class: output
 
         NAME             DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-        wazuh-kibana     1         1         1            1           11m
+        wazuh-dashboard  1         1         1            1           11m
 
 **Statefulset**
 
@@ -266,7 +267,7 @@ Verifying the deployment
 
         NAME                              READY     STATUS    RESTARTS   AGE
         wazuh-indexer-0                   1/1       Running   0          15m
-        wazuh-kibana-f4d9c7944-httsd      1/1       Running   0          14m
+        wazuh-dashboard-f4d9c7944-httsd   1/1       Running   0          14m
         wazuh-manager-master-0            1/1       Running   0          12m
         wazuh-manager-worker-0-0          1/1       Running   0          11m
         wazuh-manager-worker-1-0          1/1       Running   0          11m
@@ -285,8 +286,8 @@ In case you created domain names for the services, you should be able to access 
     .. code-block:: none
         :class: output
 
-         NAME                  TYPE           CLUSTER-IP       EXTERNAL-IP                                                    PORT(S)                          AGE       SELECTOR
-         dashboard             LoadBalancer   xxx.xx.xxx.xxx   internal-xxx-yyy.us-east-1.elb.amazonaws.com                   80:31831/TCP,443:30974/TCP       15m       app=wazuh-dashboard
+         NAME                  TYPE           CLUSTER-IP       EXTERNAL-IP                      PORT(S)                          AGE       SELECTOR
+         dashboard             LoadBalancer   xxx.xx.xxx.xxx   xxx.xx.xxx.xxx                   80:31831/TCP,443:30974/TCP       15m       app=wazuh-dashboard
 
 
 **Optional**: On a local cluster deployment where the external IP address is not accessible, you can use port-forward:
@@ -297,8 +298,8 @@ In case you created domain names for the services, you should be able to access 
 
   
 The Wazuh dashboard will be accessible on ``https://localhost:8443``.
-The default credentials are ``admin:admin``.
 
+The default credentials are ``admin:admin``.
 
 
 Agents
