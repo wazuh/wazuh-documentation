@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015–2022 Wazuh, Inc.
 
 .. meta::
   :description: In order to configure Wazuh so it outputs alerts to a database, users must compile Wazuh with the database type desired. Learn more about this process here.
@@ -52,7 +52,7 @@ Prerequisites
 Installation
 ------------
 
-As previously mentioned, the database output can be enabled when compiling Wazuh with the database type to use. On the :ref:`sources installation guide <wazuh_server_source_installation>`, users must pre-compile the source code before running the ``install.sh`` script.
+As previously mentioned, the database output can be enabled when compiling Wazuh with the database type to use. On the :doc:`sources installation guide </deployment-options/wazuh-from-sources/wazuh-server/index>`, users must pre-compile the source code before running the ``install.sh`` script.
 
 Execute the following command before **step 3** from the installation guide:
 
