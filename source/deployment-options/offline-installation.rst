@@ -105,7 +105,7 @@ Installing the Wazuh manager
 
     .. include:: /_templates/installations/wazuh/common/check_wazuh_manager.rst    
 
-Installing the  Wazuh indexer
+Installing the Wazuh indexer
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #.  Run the following command to install the Wazuh indexer.
