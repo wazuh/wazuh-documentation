@@ -68,7 +68,7 @@ Uninstall the Wazuh server
 
 #. Disable Wazuh manager service
 
-    .. include:: ../../_templates/installations/wazuh/common/disable_wazuh_agent_service.rst
+    .. include:: ../../_templates/installations/wazuh/common/disable_wazuh_manager_service.rst
 
 #. Remove the Filebeat installation.
 
