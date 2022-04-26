@@ -15,4 +15,7 @@ The Wazuh manager is the system that analyzes the data received from all registe
     .. toctree::
         :maxdepth: 2
 
-        elastic-tuning/index
+        elastic-tuning
+        troubleshooting
+        configure-indices
+        elasticsearch
