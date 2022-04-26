@@ -640,5 +640,5 @@ Changelogs
 More details about these changes are provided in the changelog of each component:
 
 - `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v4.3.0-rc5/CHANGELOG.md>`_
-- `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v4.3.0-7.17.0/CHANGELOG.md>`_
+- `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v4.3.0-7.17.3/CHANGELOG.md>`_
 - `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v4.3.0-8.2.4/CHANGELOG.md>`_
