@@ -685,12 +685,12 @@ redirections.push(
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/installation-guide/more-installation-alternatives/elastic-stack/all-in-one-deployment/unattended-installation.html',
-    '4.3': '/deployment-options/elastic-stack/all-in-one-deployment/unattended-installation.html',
+    '4.3': '/deployment-options/elastic-stack/all-in-one-deployment/index.html',
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/installation-guide/more-installation-alternatives/elastic-stack/all-in-one-deployment/all-in-one.html',
-    '4.3': '/deployment-options/elastic-stack/all-in-one-deployment/all-in-one.html',
+    '4.3': '/deployment-options/elastic-stack/all-in-one-deployment/index.html',
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
@@ -700,17 +700,17 @@ redirections.push(
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/installation-guide/more-installation-alternatives/elastic-stack/distributed-deployment/unattended/index.html',
-    '4.3': '/deployment-options/elastic-stack/distributed-deployment/unattended/index.html',
+    '4.3': '/deployment-options/elastic-stack/distributed-deployment/index.html',
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/installation-guide/more-installation-alternatives/elastic-stack/distributed-deployment/unattended/unattended-elasticsearch-cluster-installation.html',
-    '4.3': '/deployment-options/elastic-stack/distributed-deployment/unattended/unattended-elasticsearch-cluster-installation.html',
+    '4.3': '/deployment-options/elastic-stack/distributed-deployment/index.html',
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/installation-guide/more-installation-alternatives/elastic-stack/distributed-deployment/unattended/unattended-wazuh-cluster-installation.html',
-    '4.3': '/deployment-options/elastic-stack/distributed-deployment/unattended/unattended-wazuh-cluster-installation.html',
+    '4.3': '/deployment-options/elastic-stack/distributed-deployment/index.html',
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
