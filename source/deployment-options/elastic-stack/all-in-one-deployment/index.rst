@@ -131,7 +131,7 @@ This command should have an output like this:
      "cluster_name" : "elasticsearch",
      "cluster_uuid" : "38phzvsUQDezIl5eMwgCYw",
      "version" : {
-       "number" : "7.17.0",
+       "number" : "7.17.3",
        "build_flavor" : "default",
        "build_type" : "deb",
        "build_hash" : "bee86328705acaa9a6daede7140defd4d9ec56bd",
@@ -300,7 +300,7 @@ This command should have an output like this:
         TLS version: TLSv1.3
         dial up... OK
         talk to server... OK
-        version: 7.17.0
+        version: 7.17.3
 
 
 Kibana installation and configuration
