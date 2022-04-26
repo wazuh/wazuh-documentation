@@ -22,7 +22,7 @@ Prerequisites
 Download the packages and configuration files
 ---------------------------------------------
 
-#.  Replace ``<deb|rpm>`` in the following command with your choice of package format and run it from a Linux system with Internet connection. This action executes a script that downloads all required files for the offline installation on x86_64 architectures. You can add the ``--list-only`` option to only get a list of files to be downloaded.
+#.  Replace ``<deb|rpm>`` in the following command with your choice of package format and run it from a Linux system with Internet connection. This action executes a script that downloads all required files for the offline installation on x86_64 architectures.
 
     .. code-block:: console
       
