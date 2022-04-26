@@ -10,6 +10,9 @@
   @include media-min(xl) {
     padding-bottom: 8px;
   }
+  & + .edit-repo {
+    border-top: 1px solid $light-color-border-details;
+  }
 
   > span:first-child {
     margin-left: 4px;

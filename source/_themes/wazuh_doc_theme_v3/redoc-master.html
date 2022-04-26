@@ -1,7 +1,8 @@
-{%- set titlesuffix = " · "|safe + docstitle|e %}
-{%- set pagetitle = "API reference" %}
-
 {%- extends "!wazuh_doc_theme_v3/template-parts/body.html" -%}
+
+{%- block htmltitle -%}
+<title>API reference{{ titlesuffix }}</title>
+{% endblock htmltitle -%}
 
 {% block body %}
 <div class="loading">
@@ -24,7 +25,9 @@
       {% endblock latest %}
       <div class="header-left">
         {% include "template-parts/brand.html" %}
+        {% if theme_include_mode|tobool %}
         {% include "template-parts/light-dark-switch.html" %}
+        {% endif %}
       </div>
       {% if theme_display_version_selector %}
       <div class="header-right">
