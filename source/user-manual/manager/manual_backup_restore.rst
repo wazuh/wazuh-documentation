@@ -13,7 +13,7 @@ Wazuh-DB will restore the last backup available in case of failure during the up
 Manual restore process
 ----------------------
 
-The first step is to turn of Wazuh manager:
+The first step is to turn off Wazuh manager:
 
   a. For Systemd:
 
