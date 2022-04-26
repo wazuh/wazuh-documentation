@@ -64,7 +64,7 @@ Defines the list of APIs to connect with your Wazuh managers.
         - <id>:
             url: http(s)://<url>
             port: <port>
-            user: <username>
+            username: <username>
             password: <password>
 
 .. note::
@@ -79,13 +79,16 @@ This is an example of a multi-host configuration:
         - wazuh_prod:
             url: https://wazuh.com
             port: 55000
-            user: foo
+            username: wazuh-wui
             password: secret_password
+            run_as: false
         - wazuh_test:
             url: https://localhost
             port: 55000
-            user: foo
-            password: bar
+            username: wazuh-wui
+            password: wazuh-wui
+            run_as: false
+
 
 pattern
 ^^^^^^^
