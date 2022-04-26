@@ -601,7 +601,7 @@ Wazuh Splunk app
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#91137 <https://github.com/wazuh/wazuh-splunk/pull/1137>`_       Long agent names no longer overflow in the overview page.
+`#1137 <https://github.com/wazuh/wazuh-splunk/pull/1137>`_        Long agent names no longer overflow in the overview page.
 `#1138 <https://github.com/wazuh/wazuh-splunk/pull/1138>`_        An issue that accurred when saving rules or decoders files is now fixed.
 `#1141 <https://github.com/wazuh/wazuh-splunk/pull/1141>`_        An issue with unnecessary table requests when resizing browser window is fixed.
 `#1215 <https://github.com/wazuh/wazuh-splunk/pull/1215>`_        Agent counters are now centered correctly.
