@@ -2,8 +2,8 @@
 
 .. _wazuh_dashboard_config_file:
 
-UI Configuration file
-=====================
+Configuration file
+==================
 
 The Wazuh Dashboard includes a configuration file (located at ``/usr/share/kibana/data/wazuh/config/wazuh.yml``) where you can define custom values for several options. This section describes all the settings available in this file.
 
