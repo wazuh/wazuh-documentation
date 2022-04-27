@@ -97,7 +97,7 @@
     "js:build:page:api-reference": "node config/uglifyjs-group.js FILE=api-reference",
     "js:build:page:search": "node config/uglifyjs-group.js FILE=search-results",
     "js:build:page:not-found": "node config/uglifyjs-group.js FILE=not-found",
-    "js:build": "run-s js:build:page:* js:build:light-dark-mode-inline",
+    "js:build": "run-s js:build:page:* js:build:redirects js:build:light-dark-mode-inline",
     "js:build-all": "run-S js:build js:build:bootstrap js:build:moved-content js:build:index-redirect",
     "js:clean": "rimraf \"src/js/**/*.js\" && rimraf \"src/js/**/*.js.map\"",
     "build": "run-s js:build css:build",
