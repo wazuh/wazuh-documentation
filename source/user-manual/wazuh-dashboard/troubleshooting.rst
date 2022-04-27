@@ -10,32 +10,6 @@ Troubleshooting
 
 This section collects common installation or usage issues on the Wazuh Kibana plugin, and some basic steps to solve them.
 
-No template found for the selected index pattern
-------------------------------------------------
-
-Elasticsearch needs a specific template to store Wazuh alerts, otherwise visualizations won't load properly. You can insert the correct template using the following command:
-
-.. code-block:: console
-
-  # curl https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/elasticsearch/7.x/wazuh-template.json | curl -X PUT "https://localhost:9200/_template/wazuh" -H 'Content-Type: application/json' -d @- -u <elasticsearch_user>:<elasticsearch_password> -k
-
-.. code-block:: json
-  :class: output
-
-  {"acknowledged":true}
-
-If this error occurs after an **upgrade from a 3.x version** the solution is to remove the ``wazuh-alerts-3.x-*`` index pattern. Since Wazuh 4.x, the index pattern is ``wazuh-alerts-*``, and you need to remove the old pattern for the new one to take its place.
-
-.. code-block:: console
-   
-   # curl 'https://<kibana_ip>:<kibana_port>/api/saved_objects/index-pattern/wazuh-alerts-3.x-*' -X DELETE  -H 'Content-Type: application/json' -H 'kbn-version: 7.10.2' -k -u <elasticsearch_user>:<elasticsearch_password>
-
-
-If you have a custom index pattern, make sure to replace it accordingly.
-
-**Very important:** Clean the browser’s cache and cookies.
-
-
 Wazuh API seems to be down
 --------------------------
 
@@ -83,7 +57,7 @@ The first step is to check if there are alerts in Wazuh indexer.
 
 .. code-block:: console
 
-  # curl https://<ELASTICSEARCH_IP>:9200/_cat/indices/wazuh-alerts-* -u <elasticsearch_user>:<elasticsearch_password> -k
+  # curl https://<WAZUH_INDEXER_IP>:9200/_cat/indices/wazuh-alerts-* -u <wazuh_indexer_user>:<wazuh_indexer_password> -k
 
 .. code-block:: none
     :class: output
@@ -132,23 +106,6 @@ Starting Wazuh 4.0 the Wazuh API username variable changed from ``user`` to ``us
         username: wazuh-wui
         password: wazuh-wui
         run_as: false
-
-
-Wazuh dashboard page goes blank
------------------------------------
-
-Sometimes, after an upgrade, the Wazuh dashboard page goes blank. This is due to some issues with the cache memory of the browser.
-
-.. thumbnail:: ../../images/kibana-app/troubleshooting/page-goes-blank.png
-
-    :title: Page goes blank
-    :align: left
-    :width: 100%
-
-
-To fix this you need to:
-
-  .. include:: ../../_templates/common/clear_cache.rst
 
 None of the above solutions are fixing my problem
 -------------------------------------------------
