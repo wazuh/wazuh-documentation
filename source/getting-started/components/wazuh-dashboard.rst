@@ -113,16 +113,15 @@ Data analysis visualization gives you complete visibility into your system infra
 Dev tools
 ---------
 
-Users can easily access developer tools integrated directly into the Wazuh dashboard. 
+Users can access developer tools integrated directly into the Wazuh dashboard. The Ruleset Test tool provides an input box for reading sample logs and an output box to examine the test results. This feature of the Wazuh dashboard allows users to test sample logs directly on the web user interface and see how the ruleset reacts to specific log messages.
 
-The Ruleset Test tool provides an input box for reading sample logs and an output box to visualize the test results. This feature of the Wazuh dashboard allows you to test sample logs directly on the web user interface and see how the ruleset reacts to specific log messages.
 
 .. thumbnail::  /images/getting-started/dashboard_ruleset_test.png 
       :align: center
       :title: Ruleset test
 
 
-The Wazuh dashboard also includes an API Console for users to interact with the Wazuh API. This API accommodates complete remote management of the Wazuh infrastructure. You can easily perform everyday actions from the API Console, such as adding agents, restarting components, creating roles, or looking up syscheck details.
+The Wazuh dashboard also includes an API Console for users to interact with the Wazuh API. This API provides complete remote management of the Wazuh infrastructure. You can perform different actions from the API Console, such as adding, configuring agents, or restarting components.
 
 
 .. hlist::
