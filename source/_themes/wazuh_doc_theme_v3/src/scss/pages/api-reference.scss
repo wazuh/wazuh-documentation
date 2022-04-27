@@ -82,6 +82,9 @@ header {
     width: $left-redoc-sidebar-width;
     padding: 7px 40px;
     pointer-events: all;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
     @media screen and (min-width: 50rem){
       padding: 10px 15px;
     }

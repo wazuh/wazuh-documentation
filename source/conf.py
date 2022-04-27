@@ -142,6 +142,9 @@ if html_theme == 'wazuh_doc_theme_v3':
                 current_release[0] == v3_release[0] and
                 current_release[1] < v3_release[1])
     html_theme_options['is_pre_v3'] = is_pre_v3
+    
+    # Allow dark mode is set to false by default
+    # html_theme_options['include_mode'] = False
 
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = ['_themes']
