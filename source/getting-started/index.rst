@@ -27,7 +27,7 @@ How to install Wazuh
 The Wazuh solution is composed of three :ref:`central platform components <components>` and a single universal :ref:`agent <installation_agents>`. For installing Wazuh in your infrastructure, you can check the following sections of our documentation:
 
 - The :doc:`Quickstart </quickstart>` is an automated way of installing Wazuh in just a few minutes.  
-- The :doc:`Installation guide </installation-guide/index>` provides instructions on how to install each central component.
+- The :doc:`Installation guide </installation-guide/index>` provides instructions on how to install each central component and how to deploy the Wazuh agents.
 
 
 Wazuh Cloud
