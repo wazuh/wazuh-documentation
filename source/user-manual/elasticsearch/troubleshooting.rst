@@ -72,13 +72,16 @@ If you have a custom index pattern, make sure to replace it accordingly.
 "Index pattern was refreshed" toast keeps popping up
 ----------------------------------------------------
 
-.. thumbnail:: ../../images/kibana-app/troubleshooting/index-pattern-was-refreshed.png
+If "Index pattern was refreshed" message keeps popping up in a module dashboard, it means Wazuh alerts index-pattern doesn't have some of the fields some visualizations needs. Therefore the visualization creates those fields it needs in the alerts index-pattern. In case the template that the index-pattern uses is not the latest version, this message can pop up because there are no alerts using these fields. To solve this please update the index-pattern template using the following command:
 
-    :title: Index pattern was refreshed
-    :align: left
-    :width: 100%
+.. code-block:: console
 
-This message means wazuh-alerts index-pattern doesn't have some of the fields some visualizations needs, therefore the visualization creates those fields it needs in the index-pattern. In case wazuh-template is not the latest, this message can pop up because there are no alerts using these fields. To solve this please update wazuh-template using the following command:
+  # curl https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/elasticsearch/7.x/wazuh-template.json | curl -X PUT "https://localhost:9200/_template/wazuh" -H 'Content-Type: application/json' -d @- -u <elasticsearch_user>:<elasticsearch_password> -k
+
+.. code-block:: json
+  :class: output
+
+  {"acknowledged":true}
 
 Wazuh API seems to be down
 --------------------------
