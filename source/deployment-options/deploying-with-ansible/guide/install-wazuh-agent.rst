@@ -9,15 +9,15 @@ Install Wazuh Agent
 We can install the Wazuh agent on endpoints using the roles and playbooks available in the Wazuh Ansible repository. The Ansible server must have access to the endpoints where the agents are to be installed.
 
 .. contents::
-    :local:
-    :depth: 1
-    :backlinks: none
+   :local:
+   :depth: 1
+   :backlinks: none
 
 .. note::
 
-		- 	SSH key-pairing should already be configured between the ansible deployment server and the endpoints.
-		- 	The endpoints where the agent will be deployed to will be added to the Ansible hosts file under the ``[wazuh-agents]`` hosts group.
-		- 	This playbook does not support deploying Wazuh agents to Windows and MacOS endpoints.
+	- 	SSH key-pairing should already be configured between the ansible deployment server and the endpoints.
+	- 	The endpoints where the agent will be deployed to will be added to the Ansible hosts file under the ``[wazuh-agents]`` hosts group.
+	- 	This playbook does not support deploying Wazuh agents to Windows and MacOS endpoints.
 
 1 - Accessing the wazuh-ansible directory
 -----------------------------------------
@@ -26,91 +26,90 @@ We access the contents of the directory on the Ansible server where we have clon
 
 .. code-block:: console
 
-		# cd /etc/ansible/roles/wazuh-ansible/
-		# tree roles -d
-
+	# cd /etc/ansible/roles/wazuh-ansible/
+	# tree roles -d
 
 .. code-block:: none
-		:class: output
+	:class: output
 
-		roles
-		├── ansible-galaxy
-		│   └── meta
-		└── wazuh
-		    ├── ansible-filebeat-oss
-		    │   ├── defaults
-		    │   ├── handlers
-		    │   ├── meta
-		    │   ├── tasks
-		    │   └── templates
-		    ├── ansible-wazuh-agent
-		    │   ├── defaults
-		    │   ├── handlers
-		    │   ├── meta
-		    │   ├── tasks
-		    │   └── templates
-		    ├── ansible-wazuh-manager
-		    │   ├── defaults
-		    │   ├── files
-		    │   │   └── custom_ruleset
-		    │   │       ├── decoders
-		    │   │       └── rules
-		    │   ├── handlers
-		    │   ├── meta
-		    │   ├── tasks
-		    │   ├── templates
-		    │   └── vars
-		    ├── wazuh-dashboard
-		    │   ├── defaults
-		    │   ├── handlers
-		    │   ├── tasks
-		    │   ├── templates
-		    │   └── vars
-		    └── wazuh-indexer
-		        ├── defaults
-		        ├── handlers
-		        ├── meta
-		        ├── tasks
-		        └── templates
+	roles
+	├── ansible-galaxy
+	│   └── meta
+	└── wazuh
+	    ├── ansible-filebeat-oss
+	    │   ├── defaults
+	    │   ├── handlers
+	    │   ├── meta
+	    │   ├── tasks
+	    │   └── templates
+	    ├── ansible-wazuh-agent
+	    │   ├── defaults
+	    │   ├── handlers
+	    │   ├── meta
+	    │   ├── tasks
+	    │   └── templates
+	    ├── ansible-wazuh-manager
+	    │   ├── defaults
+	    │   ├── files
+	    │   │   └── custom_ruleset
+	    │   │       ├── decoders
+	    │   │       └── rules
+	    │   ├── handlers
+	    │   ├── meta
+	    │   ├── tasks
+	    │   ├── templates
+	    │   └── vars
+	    ├── wazuh-dashboard
+	    │   ├── defaults
+	    │   ├── handlers
+	    │   ├── tasks
+	    │   ├── templates
+	    │   └── vars
+	    └── wazuh-indexer
+	        ├── defaults
+	        ├── handlers
+	        ├── meta
+	        ├── tasks
+	        └── templates
 
 And we can see the preconfigured playbooks we have by running the command below:
 
 .. code-block:: console
 
-		# tree playbooks/
+	# tree playbooks/
 
 .. code-block:: none
-		:class: output
+	:class: output
 
-		playbooks
-		├── ansible.cfg
-		├── wazuh-agent.yml
-		├── wazuh-dashboard.yml
-		├── wazuh-indexer.yml
-		├── wazuh-manager-oss.yml
-		├── wazuh-production-ready.yml
-		└── wazuh-single.yml
+	playbooks
+	├── ansible.cfg
+	├── wazuh-agent.yml
+	├── wazuh-dashboard.yml
+	├── wazuh-indexer.yml
+	├── wazuh-manager-oss.yml
+	├── wazuh-production-ready.yml
+	└── wazuh-single.yml
 
 For the agent deployment, we are going to use the role of wazuh-agent, which contains the necessary commands to install an agent and register it in our Wazuh environment. Below is the content of the YAML file ``/etc/ansible/roles/wazuh-ansible/playbooks/wazuh-agent.yml`` we are going to run for a complete installation of the Wazuh agent.
 
 .. code-block:: yaml
 
-		---
-		- hosts: <your wazuh agents hosts>
-		  become: yes
-		  become_user: root
-		  roles:
-		    - ../roles/wazuh/ansible-wazuh-agent
-		  vars:
-		    wazuh_managers:
-		      - address: <your manager IP>
-		        port: 1514
-		        protocol: tcp
-		        api_port: 55000
-		        api_proto: 'http'
-		        api_user: ansible
-		        max_retries: 5
-		        retry_interval: 5
+	---
+	- hosts: <your wazuh agents hosts>
+	  become: yes
+	  become_user: root
+	  roles:
+	    - ../roles/wazuh/ansible-wazuh-agent
+	  vars:
+	    wazuh_managers:
+	      - address: <your manager IP>
+	        port: 1514
+	        protocol: tcp
+	        api_port: 55000
+	        api_proto: 'http'
+	        api_user: ansible
+	        max_retries: 5
+	        retry_interval: 5
 
 Let’s take a closer look at the content.
 
@@ -134,22 +133,22 @@ Our resulting file is:
 
 .. code-block:: yaml
 
-		---
-		- hosts: wazuh-agents
-		  become: yes
-		  become_user: root
-		  roles:
-		    - ../roles/wazuh/ansible-wazuh-agent
-		  vars:
-		    wazuh_managers:
-		      - address: 192.168.33.31
-		        port: 1514
-		        protocol: tcp
-		        api_port: 55000
-		        api_proto: 'http'
-		        api_user: ansible
-		        max_retries: 5
-		        retry_interval: 5
+	---
+	- hosts: wazuh-agents
+	  become: yes
+	  become_user: root
+	  roles:
+	    - ../roles/wazuh/ansible-wazuh-agent
+	  vars:
+	    wazuh_managers:
+	      - address: 192.168.33.31
+	        port: 1514
+	        protocol: tcp
+	        api_port: 55000
+	        api_proto: 'http'
+	        api_user: ansible
+	        max_retries: 5
+	        retry_interval: 5
 
 3 - Running the playbook
 ------------------------
@@ -160,29 +159,29 @@ Now, we are ready to run the playbook and start the installation. However, some 
 
 		.. code-block:: console
 
-				# ansible-playbook wazuh-agent.yml
+			# ansible-playbook wazuh-agent.yml
 
-#. 	Once the deployment completes, we can check the status of the Wazuh agent on the endpoints.
+#. Once the deployment completes, we can check the status of the Wazuh agent on the endpoints.
 
-		.. code-block:: console
+	.. code-block:: console
 
-				# systemctl status wazuh-agent
+		# systemctl status wazuh-agent
 
-		We can also view agent information from the Wazuh server.
+	We can also view agent information from the Wazuh server.
 
-		.. code-block:: console
+	.. code-block:: console
 
-				# /var/ossec/bin/agent_control -l
+		# /var/ossec/bin/agent_control -l
 
 ..
 		We can see the agent connection in the Wazuh dashboard.
 
 		.. thumbnail:: ../../../images/ansible/ansible-agent2.png
-		    :title: Ansible agent 1
-		    :align: center
-		    :width: 80%
+		   :title: Ansible agent 1
+		   :align: center
+		   :width: 80%
 
 		.. thumbnail:: ../../../images/ansible/ansible-agent.png
-		    :title: Ansible agent 2
-		    :align: center
-		    :width: 80%
+		   :title: Ansible agent 2
+		   :align: center
+		   :width: 80%
