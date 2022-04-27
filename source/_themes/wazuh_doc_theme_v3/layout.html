@@ -135,7 +135,11 @@
 {%- if not theme_include_mode|tobool -%}
   {%- set mode = 'class="light-theme"' -%}
 {%- else -%}
-  {%- set mode = '' -%}
+  {%- if not theme_include_mode_switch|tobool -%}
+    {%- set mode = 'class="auto-theme"' -%}
+  {%- else -%}
+    {%- set mode = '' -%}
+  {%- endif -%}
 {%- endif -%}
 <html lang="{{ language }}"{{mode}}>
   <head>
@@ -173,15 +177,15 @@
     {% endblock htmltitle -%}
 
     {%- block preload -%}
-    <style media="screen">
-      body {
+    <style media="prefers-color-scheme: light">
+      html, body {
         color: black;
-        background-color: transparent;
+        background-color: #fff;
       }
     </style>  
     <style media="prefers-color-scheme: dark">
-      body {
-        color: white;
+      html, body {
+        background-color: #2b303a!important;
       }
     </style>
     {% if theme_include_mode|tobool %}

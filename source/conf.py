@@ -145,6 +145,8 @@ if html_theme == 'wazuh_doc_theme_v3':
     
     # Allow dark mode is set to false by default
     html_theme_options['include_mode'] = True
+    # Allow switching between modes is set to false by default
+    # html_theme_options['include_mode_switch'] = True
 
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = ['_themes']

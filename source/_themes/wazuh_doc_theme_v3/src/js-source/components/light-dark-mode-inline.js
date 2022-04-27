@@ -8,7 +8,7 @@
  */
 
 const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-const currentTheme = localStorage.getItem('theme');
+const currentTheme = document.documentElement.classList.contains('auto-theme') ? '' : localStorage.getItem('theme');
 
 if (currentTheme == 'dark') {
   document.documentElement.classList.toggle('dark-theme');
