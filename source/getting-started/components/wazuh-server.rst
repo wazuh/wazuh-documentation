@@ -32,7 +32,7 @@ Server components
 
 The Wazuh server comprises several components listed below that have different functions, such as enrolling new agents, validating each agent's identity, and encrypting the communications between the Wazuh agent and the Wazuh server
 
-- **Agent enrollment service:** It is used to enroll new agents. This service provision and distribute unique authentication keys to each agent. The process runs as a network service and supports authentication via TLS/SSL certificates or by providing a fixed password.
+- **Agent enrollment service:** It is used to enroll new agents. This service provides and distributes unique authentication keys to each agent. The process runs as a network service and supports authentication via TLS/SSL certificates or by providing a fixed password.
 
 - **Agent connection service:** This service receives data from the agents. It uses the keys shared by the enrollment service to validate each agent identity and encrypt the communications between the Wazuh agent and the Wazuh server. Additionally, this service provides centralized configuration management, enabling you to push new agent settings remotely.
 
