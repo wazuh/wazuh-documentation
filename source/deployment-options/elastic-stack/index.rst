@@ -63,7 +63,7 @@ Choose a deployment type to start installing and configuring Wazuh and Elastic S
 
 - :doc:`All-in-one deployment <../elastic-stack/all-in-one-deployment/index>`
   
-- :doc:`Distributed deployment <../elastic-stack/distributed-deployment/step-by-step-installation/index>`
+- :doc:`Distributed deployment <../elastic-stack/distributed-deployment/index>`
 
 
 .. toctree::
@@ -71,4 +71,4 @@ Choose a deployment type to start installing and configuring Wazuh and Elastic S
     :maxdepth: 2
 
     all-in-one-deployment/index
-    distributed-deployment/step-by-step-installation/index
+    distributed-deployment/index
