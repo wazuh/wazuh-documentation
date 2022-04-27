@@ -153,7 +153,6 @@ newUrls['4.3'] = [
   '/deployment-options/deploying-with-kubernetes/kubernetes-clean-up.html',
   '/deployment-options/deploying-with-kubernetes/kubernetes-upgrade.html',
   '/deployment-options/deploying-with-kubernetes/kubernetes-conf.html',
-  '/deployment-options/deploying-with-kubernetes/kubernetes-local-env.html',
   '/deployment-options/docker/index.html',
   '/deployment-options/docker/faq-wazuh-container.html',
   '/deployment-options/docker/container-usage.html',
@@ -534,7 +533,7 @@ redirections.push(
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/deploying-with-kubernetes/kubernetes-local-env.html',
-    '4.3': '/deployment-options/deploying-with-kubernetes/kubernetes-local-env.html',
+    '4.3': '/deployment-options/deploying-with-kubernetes/index.html',
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
