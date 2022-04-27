@@ -69,6 +69,16 @@ If you have a custom index pattern, make sure to replace it accordingly.
 
 **Very important:** Clean the browser’s cache and cookies.
 
+"Index pattern was refreshed" toast keeps popping up
+----------------------------------------------------
+
+.. thumbnail:: ../../images/kibana-app/troubleshooting/index-pattern-was-refreshed.png
+
+    :title: Index pattern was refreshed
+    :align: left
+    :width: 100%
+
+This message means wazuh-alerts index-pattern doesn't have some of the fields some visualizations needs, therefore the visualization creates those fields it needs in the index-pattern. In case wazuh-template is not the latest, this message can pop up because there are no alerts using these fields. To solve this please update wazuh-template using the following command:
 
 Wazuh API seems to be down
 --------------------------
@@ -173,7 +183,7 @@ Wazuh Kibana plugin page goes blank
 
 Sometimes, after an upgrade, the Wazuh Kibana plugin page goes blank. This is due to some issues with the cache memory of the browser.
 
-.. thumbnail:: ../../../images/kibana-app/troubleshooting/page-goes-blank.png
+.. thumbnail:: ../../images/kibana-app/troubleshooting/page-goes-blank.png
 
     :title: Page goes blank
     :align: left
@@ -189,7 +199,7 @@ To fix this you need to:
 
 Sometimes, after an upgrade, the Wazuh Kibana plugin displays the "Conflict with the Wazuh app version" error. This is due to some issues with the cache memory of the browser.
 
-.. thumbnail:: ../../../images/kibana-app/troubleshooting/conflict-wazuh-app-version.png
+.. thumbnail:: ../../images/kibana-app/troubleshooting/conflict-wazuh-app-version.png
     :title: Conflict wazuh app version
     :align: left
     :width: 100%
