@@ -5,8 +5,8 @@
   
 .. _kibana_troubleshooting:
 
-Troubleshooting
-===============
+Kibana Troubleshooting
+======================
 
 This section collects common installation or usage issues on the Wazuh Kibana plugin, and some basic steps to solve them.
 
