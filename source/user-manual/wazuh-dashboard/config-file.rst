@@ -5,7 +5,7 @@
 UI Configuration file
 =====================
 
-The Wazuh Dashboard includes a configuration file (located at ``/usr/share/wazuh-dashboard/config/wazuh_dashboard.yml``) where you can define custom values for several options. This section describes all the settings available in this file.
+The Wazuh Dashboard includes a configuration file (located at ``/usr/share/kibana/data/wazuh/config/wazuh.yml``) where you can define custom values for several options. This section describes all the settings available in this file.
 
 The configuration file shows the default values for all of the possible options. You can edit the file, uncomment any of them and apply the desired values. You can also edit these settings from the Wazuh Dashboard in *Settings > Configuration*.
 
