@@ -8,52 +8,6 @@ Elasticsearch indices
 Once you've installed the Wazuh Kibana plugin some new indices will be generated in Elasticsearch. Let's see a more in deep view about them.
 The user shouldn't take care about them and shouldn't modify them unless the Wazuh team suggest it.
 
-The ``.wazuh`` index
---------------------
-
-This index is used by the Wazuh Kibana plugin to store Wazuh API credentials and useful information about the Wazuh manager currently being used.
-The next document example shows you how we store a Wazuh API entry. This index could grow up if you add more Wazuh API entries.
-
-.. code-block:: json
-
-    {
-        "api_user" : "foo",
-        "api_password" : "YmFy",
-        "url" : "http://localhost",
-        "api_port" : "55000",
-        "insecure" : "true",
-        "component" : "API",
-        "cluster_info" : {
-            "manager" : "osboxes",
-            "cluster" : "Disabled",
-            "status" : "disabled"
-        },
-        "extensions" : {
-        "audit" : true,
-        "pci" : false,
-        "gdpr" : true,
-        "oscap" : true,
-        "aws" : false,
-        "virustotal" : false
-        }
-    }
-
-
-The ``.wazuh-version`` index
-----------------------------
-
-This index has only one document and it includes useful information and it's being used by internal Wazuh Kibana plugin purposes. It includes information such as your current version or your installation date. The next example shows you how we store that information.
-
-.. code-block:: json
-
-    {
-        "name" : "Wazuh app",
-        "app-version" : "3.2.2",
-        "revision" : "0390",
-        "installationDate" : "2018-04-27T08:56:16.088Z",
-        "lastRestart" : "2018-05-22T07:13:30.327Z"
-    }
-
 The ``.kibana`` index
 ---------------------
 
