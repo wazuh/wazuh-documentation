@@ -134,10 +134,10 @@ Starting Wazuh 4.0 the Wazuh API username variable changed from ``user`` to ``us
         run_as: false
 
 
-Wazuh Dashboard page goes blank
+Wazuh dashboard page goes blank
 -----------------------------------
 
-Sometimes, after an upgrade, the Wazuh Dashboard page goes blank. This is due to some issues with the cache memory of the browser.
+Sometimes, after an upgrade, the Wazuh dashboard page goes blank. This is due to some issues with the cache memory of the browser.
 
 .. thumbnail:: ../../images/kibana-app/troubleshooting/page-goes-blank.png
 

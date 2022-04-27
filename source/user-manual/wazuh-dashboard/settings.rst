@@ -1,7 +1,7 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
-  :description: The Wazuh Dashboard gives you a quick view of your agents, alerts, and cluster. Learn how to configure its features in this section. 
+  :description: The Wazuh dashboard gives you a quick view of your agents, alerts, and cluster. Learn how to configure its features in this section. 
   
 .. _wazuh_dashboard_settings:
 

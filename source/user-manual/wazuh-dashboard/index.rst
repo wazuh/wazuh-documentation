@@ -8,7 +8,7 @@
 Wazuh dashboard
 ===============
 
-Welcome to the Wazuh Dashboard. Use it as your Wazuh reference library once you have a basic Wazuh installation in place. In the same way that the main components of Wazuh are a fork of the renowned OSSEC HIDS project, so this user manual has been derived from the `OSSEC documentation <http://ossec.github.io/docs/>`_. Kudos to the OSSEC team for their huge contribution to the IT security community.
+Welcome to the Wazuh dashboard. Use it as your Wazuh reference library once you have a basic Wazuh installation in place. In the same way that the main components of Wazuh are a fork of the renowned OSSEC HIDS project, so this user manual has been derived from the `OSSEC documentation <http://ossec.github.io/docs/>`_. Kudos to the OSSEC team for their huge contribution to the IT security community.
 
 .. topic:: Contents
 

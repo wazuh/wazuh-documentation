@@ -142,7 +142,7 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
 
 If the pattern is not present in Kibana UI, you may create a new one using the same name used on the Elasticsearch template, and make sure to use ``timestamp`` as the Time Filter field name.
 
-You can also open the Pattern section on the Wazuh Dashboard, and make sure that the new one is selected.
+You can also open the Pattern section on the Wazuh dashboard, and make sure that the new one is selected.
 
 .. warning::
   If you already have indices created with the previous name, they won't be changed. You can still change to the previous index pattern to see them, or you can perform a `reindexation <https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-reindex.html>`_ to rename the existing indices.
