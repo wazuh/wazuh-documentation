@@ -8,7 +8,7 @@
 Settings
 ========
 
-The *Settings* page allows you to configure and customize your Wazuh dashboard app experience. This section is automatically opened the first time you open the app in order to configure your first Wazuh dashboard API credentials, so the app can work properly. 
+The *Settings* page allows you to configure and customize your Wazuh dashboard app experience.
 
 API
 ---
