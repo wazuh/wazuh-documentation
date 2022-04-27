@@ -10,40 +10,6 @@ Troubleshooting
 
 This section collects common installation or usage issues on the Wazuh Kibana plugin, and some basic steps to solve them.
 
-"Incorrect Kibana version in plugin [wazuh]" when installing the Wazuh Kibana plugin
-------------------------------------------------------------------------------------
-
-To install the Wazuh Kibana plugin successfully, it needs to be compatible with the Kibana and Wazuh versions.
-
-Kibana version can be checked by executing the following command:
-
-.. code-block:: console
-
- # cat /usr/share/kibana/package.json | grep version
-
-An example output of the command looks as follows:
-
-.. code-block:: console
-  :class: output
-
-  "version": "7.10.2",
-
-
-The Wazuh version can be checked by executing the following command:
-
-.. code-block:: console
-
- # /var/ossec/bin/wazuh-control info | grep WAZUH_VERSION
-
-An example output of the command looks as follows:
-
-.. code-block:: console
-  :class: output
-
-  WAZUH_VERSION="v|WAZUH_LATEST|"
-
-Using the Kibana version and the Wazuh version, you can find the correct plugin in `compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/#wazuh---kibana---open-distro-version-compatibility-matrix>`_.
-
 No template found for the selected index pattern
 ------------------------------------------------
 
@@ -110,10 +76,10 @@ If the Wazuh API is running, try to fetch data using the CLI from the Kibana ser
 
 
 
-I do not see alerts in the Wazuh Kibana plugin
-----------------------------------------------
+I do not see alerts in the Wazuh dashboard
+------------------------------------------
 
-The first step is to check if there are alerts in Elasticsearch.
+The first step is to check if there are alerts in Wazuh indexer.
 
 .. code-block:: console
 
@@ -124,7 +90,7 @@ The first step is to check if there are alerts in Elasticsearch.
 
      green open wazuh-alerts-4.x-2021.03.03 xwFPX7nFQxGy-O5aBA3LFQ 3 0 340 0 672.6kb 672.6kb
 
-If you do not see any Wazuh related index, it means you have no alerts stored in Elasticsearch.
+If you do not see any Wazuh related index, it means you have no alerts stored in Wazuh indexer.
 
 To ensure that Filebeat is correctly configured, run the following command:
 
@@ -155,7 +121,7 @@ To ensure that Filebeat is correctly configured, run the following command:
 Could not connect to API with id: default: 3003 - Missing param: API USERNAME
 -----------------------------------------------------------------------------
 
-Starting Wazuh 4.0 the Wazuh API username variable changed from ``user`` to ``username``. It's necessary to change the credentials (foo:bar are no longer accepted) as well as the name of the variable in the ``/usr/share/kibana/data/wazuh/config/wazuh.yml`` configuration file. For example, the configuration can be: 
+Starting Wazuh 4.0 the Wazuh API username variable changed from ``user`` to ``username``. It's necessary to change the credentials (foo:bar are no longer accepted) as well as the name of the variable in the ``/usr/share/wazuh-dashboard/config/wazuh_dashboard.yml`` configuration file. For example, the configuration can be: 
 
 .. code-block:: console
    
@@ -184,20 +150,6 @@ To fix this you need to:
 
   .. include:: ../../_templates/common/clear_cache.rst
 
-"Conflict with the Wazuh app version" error is displayed
---------------------------------------------------------
-
-Sometimes, after an upgrade, the Wazuh Kibana plugin displays the "Conflict with the Wazuh app version" error. This is due to some issues with the cache memory of the browser.
-
-.. thumbnail:: ../../images/kibana-app/troubleshooting/conflict-wazuh-app-version.png
-    :title: Conflict wazuh app version
-    :align: left
-    :width: 100%
-
-To fix this you need to:
-
-  .. include:: ../../_templates/common/clear_cache.rst
-
 None of the above solutions are fixing my problem
 -------------------------------------------------
 
@@ -216,13 +168,13 @@ All the components we use have their own log files, you can check them and look 
     .. warning::
       By default, Kibana doesn't store logs on a file. You can change this by configuring ``logging.dest`` setting in the ``kibana.yml`` configuration file. Check the `Kibana documentation <https://www.elastic.co/guide/en/kibana/current/settings.html>`_ for more details.
 
-2. Check the Wazuh Kibana plugin log file:
+2. Check the Wazuh dashboard log file:
 
     .. code-block:: console
 
       # cat /usr/share/kibana/data/wazuh/logs/wazuhapp.log | grep -i -E "error|warn"
 
-3. Check the Wazuh manager log file:
+3. Check the Wazuh dashboard manager log file:
 
     .. code-block:: console
 
