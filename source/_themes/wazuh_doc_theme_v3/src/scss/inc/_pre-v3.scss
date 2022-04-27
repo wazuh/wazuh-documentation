@@ -153,8 +153,6 @@
             padding: 0;
           }
           &:hover {
-            border-color: $light-color-primary;
-            background-color: $light-color-primary;
             p {
               opacity: 1;
             }
@@ -177,21 +175,44 @@
   .wazuh-image {
     width: auto!important;
   }
+}
 
-  &.dark-theme {
-    #central-column {
-      .deployment-types {
-        .item-deployment {
-          border: 1px solid $dark-color-primary;
+/* Light theme -------------------------------------------------------------- */
+
+.light-theme .pre-v3 {
+  #central-column {
+    .deployment-types {
+      .item-deployment {
+        border: 1px solid $light-color-primary;
+      }
+    }
+    .agent-os {
+      .item-agent a {
+        border: 2px solid $light-color-border-deeper;
+        &:hover {
+          border-color:  $light-color-primary;
+          background-color:  $light-color-primary;
         }
       }
-      .agent-os {
-        .item-agent a {
-          border: 2px solid $dark-color-border-deeper;
-          &:hover {
-            border-color: $dark-color-primary;
-            background-color: $dark-color-primary;
-          }
+    }
+  }
+}
+
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme .pre-v3 {
+  #central-column {
+    .deployment-types {
+      .item-deployment {
+        border: 1px solid $dark-color-primary;
+      }
+    }
+    .agent-os {
+      .item-agent a {
+        border: 2px solid $dark-color-border-deeper;
+        &:hover {
+          border-color: $dark-color-primary;
+          background-color: $dark-color-primary;
         }
       }
     }

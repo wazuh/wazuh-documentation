@@ -684,8 +684,7 @@ redoc[spec-url] .beRszf {
 
 /* Light theme -------------------------------------------------------------- */
 
-
-body {
+.light-theme body {
   color: $light-color-main-text;
   .no-latest-notice-wrapper {
     background-color: $light-color-base-space;
@@ -879,9 +878,15 @@ body {
     tr.last + tr > .gtEarq {
       border-left-color: transparent;
     }
-    tr.last > .eAybih,
-    tr.last > .jMEzIu {
-      background-image: linear-gradient($light-color-primary-lighter 0%, $light-color-primary-lighter 29px, transparent 29px, transparent 100%);
+    tr.last {
+      & > .eAybih,
+      & > .jMEzIu {
+        background-image: linear-gradient($light-color-primary-lighter 0%, $light-color-primary-lighter 29px, transparent 29px, transparent 100%);
+      }
+      &:first-of-type > .eAybih,
+      &:first-of-type > .jMEzIu {
+        background-image: none;
+      }
     }
     .bcLONg::before,
     .bcLONg::after {
@@ -1086,13 +1091,21 @@ body {
       }
     }
 
-    // Central and right conten columns
+    // Central and right content columns
     .api-content {
       h1,
       h2,
       h3,
       h4 {
         color: $light-color-main-text-extra;
+      }
+      .celZWI {
+        h1,
+        h2,
+        h3,
+        h4 {
+          color: $dark-color-main-text;
+        }
       }
     }
 
@@ -1101,7 +1114,7 @@ body {
 
 /* Dark- theme -------------------------------------------------------------- */
 
-.dark-theme {
+.dark-theme body {
   color: $dark-color-main-text;
   .no-latest-notice-wrapper {
     background-color: $dark-color-base-space;
