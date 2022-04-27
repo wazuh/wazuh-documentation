@@ -86,7 +86,7 @@ Once Elasticsearch is installed it has to be configured by downloading and editi
 Certificates creation and deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#.  The number of wazuh servers to be implemented will determine the next step. Choose ``Wazuh single-node cluster``, if there is only one Wazuh server, or ``Wazuh multi-node cluster`` in case there are two or more Wazuh servers.
+#.  The number of Wazuh servers to be implemented will determine the next step. Choose ``Wazuh single-node cluster``, if there is only one Wazuh server, or ``Wazuh multi-node cluster`` in case there are two or more Wazuh servers.
 
     .. include:: ../../../../../_templates/installations/basic/elastic/common/elastic-multi-node/generate_certificates.rst
 
