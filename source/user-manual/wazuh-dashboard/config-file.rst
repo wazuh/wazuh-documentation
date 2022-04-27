@@ -5,7 +5,7 @@
 UI Configuration file
 =====================
 
-The Wazuh Dashboard includes a configuration file (located at ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml``) where you can define custom values for several options. This section describes all the settings available in this file.
+The Wazuh Dashboard includes a configuration file (located at ``/usr/share/wazuh-dashboard/config/wazuh_dashboard.yml``) where you can define custom values for several options. This section describes all the settings available in this file.
 
 The configuration file shows the default values for all of the possible options. You can edit the file, uncomment any of them and apply the desired values. You can also edit these settings from the Wazuh Dashboard in *Settings > Configuration*.
 
@@ -391,7 +391,7 @@ Advanced index options
 
 .. warning::
 
-    These options are only valid if they're modified before starting the Kibana service for the very first time.
+    These options are only valid if they're modified before starting Wazuh dashboard for the very first time.
 
     You can read more about configuring the shards and replicas in :ref:`elastic_tuning`.
 
