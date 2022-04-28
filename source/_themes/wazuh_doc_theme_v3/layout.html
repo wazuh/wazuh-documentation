@@ -217,12 +217,10 @@
     {% endblock css %}
     
     {#- FAVICON -#}
-    {%- if favicon %}
-    <link rel="mask-icon" href="{{ pathto('_static/images/favicon.svg', 1) }}" color="#000000">
-    <link rel="icon" href="{{ pathto('_static/images/favicon.png', 1) }}" media="(prefers-color-scheme:no-preference)" type="image/png"/>
-    <link rel="icon" href="{{ pathto('_static/images/dark-favicon.png', 1) }}" media="(prefers-color-scheme:dark)" type="image/png"/>
-    <link rel="icon" href="{{ pathto('_static/images/favicon.png', 1) }}" media="(prefers-color-scheme:light)" type="image/png"/>
-    {% endif -%}
+    <link rel="mask-icon" href="{{ pathto('_static/images/favicon.svg', 1) }}?ver=3" color="#000000">
+    <link rel="icon" href="{{ pathto('_static/images/favicon.png', 1) }}?ver=3" media="(prefers-color-scheme:no-preference)" type="image/png"/>
+    <link rel="icon" href="{{ pathto('_static/images/dark-favicon.png', 1) }}?ver=3" media="(prefers-color-scheme:dark)" type="image/png"/>
+    <link rel="icon" href="{{ pathto('_static/images/favicon.png', 1) }}?ver=3" media="(prefers-color-scheme:light)" type="image/png"/>
 
     {%- if production -%}
     {%- block ga -%}
