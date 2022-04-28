@@ -5,17 +5,33 @@
 Installing Puppet master
 ========================
 
-In this section it is explained how to install *puppet-master*. Follow this link to check the `official installation guide <https://puppet.com/docs/puppetserver/latest/install_from_packages.html>`_.
+IThis section explains how to install *puppet-master*. Follow this link to check the `official installation guide <https://puppet.com/docs/puppetserver/latest/install_from_packages.html>`_.
+
+If you do not have DNS configured, you must use your hosts file for name resolution. 
+Edit the ``/etc/hosts`` file and add the following:
+
+  .. code-block:: console
+
+      [puppet master ip] puppet puppet-master
+      [puppet agent ip] puppet-agent
+
 
 Installation on CentOS/RHEL/Fedora
 ----------------------------------
 
-Install the Puppet yum repository and then the "puppetserver" package. See this `index <https://yum.puppetlabs.com/>`_ to find the correct rpm file needed to install the puppet repo for your Linux distribution. For example, to install Puppet 5 for CentOS 7 or RHEL 7, do the following:
+Install the Puppet yum repository and then the “puppetserver” package. See this `index <https://yum.puppetlabs.com/>`_ to find the correct rpm file needed to install the puppet repo for your Linux distribution. For example, to install Puppet 7 for CentOS 7 or RHEL 7, do the following:
 
   .. code-block:: console
 
-    # rpm -ivh https://yum.puppetlabs.com/puppet5/puppet5-release-el-7.noarch.rpm
+    # sudo rpm -Uvh https://yum.puppet.com/puppet7-release-el-8.noarch.rpm
     # yum -y install puppetserver
+
+
+Create a symbolic link between the installed binary file and your default binary file:
+
+  .. code-block:: console
+
+    # ln -s /opt/puppetlabs/bin/puppet /bin
 
 
 Installation on Debian/Ubuntu
@@ -40,20 +56,24 @@ Install ``curl``, ``apt-transport-https`` and ``lsb-release``:
     # apt-get update
     # apt-get install curl apt-transport-https lsb-release
 
-Get the appropriate Puppet apt repository, and then the "puppetserver" package. See https://apt.puppetlabs.com to find the correct deb file to install the Puppet 5 repo for your Linux distribution.
+
+Install the appropriate Puppet apt repository, and then the “puppetserver” package. See https://apt.puppetlabs.com to find the correct deb file to install the Puppet 7 repo for your Linux distribution.
 
   .. code-block:: console
 
-    # wget https://apt.puppetlabs.com/puppet5-release-xenial.deb
-    # dpkg -i puppet5-release-xenial.deb
+    # wget https://apt.puppet.com/puppet7-release-focal.deb
+    # sudo dpkg -i puppet7-release-focal.deb
     # apt update
     # apt-get install -y puppetserver
+
 
 Create a symbolic link between the installed binary file and your default binary file:
 
   .. code-block:: console
 
     # ln -s /opt/puppetlabs/bin/puppet /bin
+    # ln -s /opt/puppetlabs/server/bin/puppetserver /bin
+
 
 Memory Allocation
 -----------------
@@ -72,9 +92,11 @@ Edit the ``/etc/puppetlabs/puppet/puppet.conf`` file, adding this line to the ``
 
   ::
 
-    dns_alt_names = puppet,puppet.example.com
+    dns_alt_names = puppet,puppet-master
+
 
 .. note:: If you find ``templatedir=$confdir/templates`` in the config file, delete that line.  It has been deprecated.
+
 
 Then, restart your Puppet Server to apply changes:
 
