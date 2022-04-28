@@ -11,58 +11,62 @@ Installation on CentOS/RHEL 7/Fedora
 
 .. code-block:: console
 
-   # rpm -Uvh https://yum.postgresql.org/9.4/redhat/rhel-latest-x86_64/pgdg-centos94-9.4-2.noarch.rpm
-   # yum install puppetdb-termini.noarch puppetdb postgresql94-server postgresql94 postgresql94-contrib.x86_64
-   # /usr/pgsql-9.4/bin/postgresql94-setup initdb
-   # systemctl start postgresql-9.4
-   # systemctl enable postgresql-9.4
+   # yum install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+   # yum -qy module disable postgresql
+   # yum install -y postgresql11-server puppetdb-termini.noarch puppetdb postgresql11 postgresql11-contrib.x86_64
+   # /usr/pgsql-11/bin/postgresql-11-setup initdb
+   # systemctl start postgresql-11
+   # systemctl enable postgresql-11
+
 
 Installation on Debian/Ubuntu
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: console
 
-  # sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
-  # wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
-  # apt-get update
-  # apt-get install puppetdb-termini puppetdb postgresql-9.4 postgresql-contrib-9.4
+   # sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+   # wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+   # apt-get update
+   # apt-get install puppetdb-termini puppetdb postgresql-11 postgresql-contrib-11
+   # systemctl start postgresql
+   # systemctl enable postgresql
+
 
 Configuration
 ^^^^^^^^^^^^^
 
-For CentOS/RHEL/Fedora only, the next step is to edit ``/var/lib/pgsql/9.4/data/pg_hba.conf`` and modify the METHOD to be ``md5`` in these two lines:
+For CentOS/RHEL/Fedora only, the next step is to edit ``/var/lib/pgsql/11/data/pg_hba.conf`` and modify the METHOD to be ``md5`` in these two lines:
 
 .. code-block:: pkgconfig
 
-  # IPv4 local connections:
-  host    all             all             127.0.0.1/32            md5
-  # IPv6 local connections:
-  host    all             all             ::1/128                 md5
+      # IPv4 local connections:
+      host    all             all             127.0.0.1/32            md5
+      # IPv6 local connections:
+      host    all             all             ::1/128                 md5
 
 Restart service after change configuration:
 
 .. code-block:: console
 
-   # systemctl restart postgresql-9.4
+   # systemctl restart postgresql-11
 
 Create a PostgreSQL user and database:
 
 .. code-block:: console
-
+   
    # su - postgres
    $ createuser -DRSP puppetdb
    $ createdb -O puppetdb puppetdb
-   $ exit
 
-The user is created with no permission to create databases (-D), or roles (-R) and does not have superuser privileges (-S). It will prompt for a password (-P). Let’s assume a password of "yourpassword"” has been used. The database is created and owned (-O) by the puppetdb user.
 
-Create the extension pg_trgm is the RegExp-optimized index extension:
+The user is created with no permission to create databases (-D), or roles (-R) and does not have superuser privileges (-S). It will prompt for a password (-P). Let’s assume a password of “yourpassword”” has been used. The database is created and owned (-O) by the puppetdb user.
+
+Create the pg_trgm(RegExp-optimized index) extension:
 
 .. code-block:: console
 
-   # su - postgres
    $ psql puppetdb -c 'create extension pg_trgm'
-   $ exit
+   $ exit 
 
 Test database access:
 
@@ -74,9 +78,10 @@ Test database access:
    :class: output
 
    Password for user puppetdb:
-   psql (9.4.11)
+   psql (11.15)
    Type "help" for help.
    puppetdb=> \q
+
 
 Configure ``/etc/puppetlabs/puppetdb/conf.d/database.ini``: ::
 
@@ -88,10 +93,12 @@ Configure ``/etc/puppetlabs/puppetdb/conf.d/database.ini``: ::
    password = yourpassword
    log-slow-statements = 10
 
+
 Create ``/etc/puppetlabs/puppet/puppetdb.conf``: ::
 
    [main]
-   server_urls = https://puppetdb.example.com:8081
+   server_urls = https://<puppet-master-hostname>:8081
+
 
 Create ``/etc/puppetlabs/puppet/routes.yaml``: ::
 
@@ -101,11 +108,13 @@ Create ``/etc/puppetlabs/puppet/routes.yaml``: ::
        terminus: puppetdb
        cache: yaml
 
+
 Finally, update ``/etc/puppetlabs/puppet/puppet.conf``: ::
 
    [master]
     storeconfigs = true
     storeconfigs_backend = puppetdb
+
 
 Start puppetdb service:
 
@@ -113,10 +122,12 @@ Start puppetdb service:
 
    # systemctl start puppetdb
 
+
 Once these steps are completed, restart your Puppet Server and run ``puppet agent --test``:
 
 .. code-block:: console
 
    # puppet agent --test
+
 
 Now PuppetDB is working.
