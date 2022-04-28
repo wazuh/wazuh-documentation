@@ -28,6 +28,7 @@ They are auto-generated and they store the Wazuh agents statuses periodically. T
 The ``wazuh-statistics-`` indices
 ---------------------------------
 This index is used to view Wazuh usage statistics.
+It is filled with information collected by the dashboard making requests to the api and information on the status of Wazuh and its components are displayed
 
 More information
 ----------------

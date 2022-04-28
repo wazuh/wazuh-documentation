@@ -110,29 +110,42 @@ Starting Wazuh 4.0 the Wazuh API username variable changed from ``user`` to ``us
 None of the above solutions are fixing my problem
 -------------------------------------------------
 
-All the components we use have their own log files, you can check them and look for error and warning messages.
+We have a welcoming community which can help you with most of the problems you might have regarding Wazuh deployment and usage. <<link a la comunudad>>
 
-1. Check the Elastic Stack log files:
+Also, you can contact us opening issues in our GitHub repositories under the `organization <https://wazuh.com/community>`.
 
-    .. code-block:: console
+We will  be interested in the log files of your deployment. You can check them out on each component:
 
-      # cat /var/log/elasticsearch/<elasticsearch-cluster-name>.log | grep -i -E "error|warn"
-      # cat /var/log/filebeat/filebeat | grep -i -E "error|warn"
+Check the following log files:
+
+      - Wazuh indexer:
+
+      .. code-block:: console
+
+          # cat /var/log/wazuh-indexer/opensearch.log | grep -i -E "error|warn"
+
+      - Wazuh manager:
+
+      .. code-block:: console
+
+          # cat /var/log/filebeat/filebeat | grep -i -E "error|warn"
+
+          # cat /var/ossec/logs/ossec.log | grep -i -E "error|warn"
+
+      - Wazuh dashboard:
+
+      .. code-block:: console
+
+          # journalctl -u wazuh-dashboard
+
+          # cat /usr/share/wazuh-dashboard/data/wazuh/logs/wazuhapp.log | grep -i -E "error|warn"
 
     .. note::
-      The Elastic Stack uses the ``/var/log`` folder to store logs by default. This setting can be customized following the documentation for `Elasticsearch <https://www.elastic.co/guide/en/elasticsearch/reference/current/logging.html>`_ or `Filebeat <https://www.elastic.co/guide/en/beats/filebeat/current/configuration-logging.html>`_.
+      The Wazuh indexer uses the ``/var/log`` folder to store logs by default.
 
     .. warning::
-      By default, Kibana doesn't store logs on a file. You can change this by configuring ``logging.dest`` setting in the ``kibana.yml`` configuration file. Check the `Kibana documentation <https://www.elastic.co/guide/en/kibana/current/settings.html>`_ for more details.
+      By default, Wazuh dashboard doesn't store logs on a file. You can change this by configuring ``logging.dest`` setting in the ``opensearch-dashboard.yml`` configuration file.
 
-2. Check the Wazuh dashboard log file:
 
-    .. code-block:: console
 
-      # cat /usr/share/kibana/data/wazuh/logs/wazuhapp.log | grep -i -E "error|warn"
-
-3. Check the Wazuh dashboard manager log file:
-
-    .. code-block:: console
-
-      # cat /var/ossec/logs/ossec.log | grep -i -E "error|warn"
+    
