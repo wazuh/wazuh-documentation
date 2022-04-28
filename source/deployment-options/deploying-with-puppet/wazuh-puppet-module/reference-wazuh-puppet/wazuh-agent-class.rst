@@ -147,7 +147,7 @@ $wazuh_enrollment_auto_method
 $wazuh_delay_after_enrollment
   Specifies the time agents should wait after a successful registration.
 
-   Related parameter :doc:`delay_after_enrollment <https://documentation.wazuh.com/current/user-manual/reference/ossec-conf/client.html#delay-after-enrollment>`
+   Related parameter :ref:`delay_after_enrollment <enrollment_delay_after_enrollment>`
         
   `Default undef`
   `Type String`
@@ -472,119 +472,130 @@ Syscheck variables
 ------------------
 
 $configure_syscheck
-  Enables syscheck section render on this host.
+  Enables syscheck section rendering on this host. If this variable is not set to ‘true’ the complete `syscheck` tag will not be added to `ossec.conf`.
 
   `Default true`
+  `Type Boolean`
 
 $ossec_syscheck_disabled
   Disable syscheck on this host.
 
   `Default no`
+  `Type String`
 
 $ossec_syscheck_frequency
-  Enables syscheck section render on this host.
+  Enables syscheck section rendering on this host.
 
-  `Default true`
+  `Default 43200`
+  `Type String`
 
 $ossec_syscheck_scan_on_start
   Specifies if syscheck scans immediately when started.
 
   `Default yes`
+  `Type String`
 
 $ossec_syscheck_auto_ignore
   Specifies whether or not syscheck will ignore files that change too many times (manager only).
 
   `Default undef`
+  `Type String`
 
 $ossec_syscheck_directories_1
-  List of directories to be monitored. The directories should be comma-separated
+  List of directories to be monitored. The directories should be comma-separated.
 
   `Default '/etc,/usr/bin,/usr/sbin'`
+  `Type String`
 
 $ossec_syscheck_realtime_directories_1
   This will enable real-time/continuous monitoring on directories listed on `ossec_syscheck_directories_1`. Real time only works with directories, not individual files.
 
   `Default no`
+  `Type String`
 
 $ossec_syscheck_whodata_directories_1
   This will enable who-data monitoring on directories listed on `ossec_syscheck_directories_1`.
 
   `Default no`
-
-$ossec_syscheck_report_changes_directories_1
-  Report file changes. This is limited to text files at this time.
-
-  `Default no`
+  `Type String`
 
 $ossec_syscheck_directories_2
-  List of directories to be monitored. The directories should be comma-separated
+  List of directories to be monitored. The directories should be comma-separated.
 
   `Default '/etc,/usr/bin,/usr/sbin'`
+  `Type String`
 
 $ossec_syscheck_realtime_directories_2
   This will enable real-time/continuous monitoring on directories listed on `ossec_syscheck_directories_2`. Real time only works with directories, not individual files.
 
   `Default no`
+  `Type String`
 
 $ossec_syscheck_whodata_directories_2
   This will enable who-data monitoring on directories listed on `ossec_syscheck_directories_2`.
 
   `Default no`
+  `Type String`
 
 $ossec_syscheck_report_changes_directories_2
   Report file changes. This is limited to text files at this time.
 
   `Default no`
+  `Type String`
 
 $ossec_syscheck_ignore_list
-  List of files or directories to be ignored. Ignored files and directories are still scanned, but the results are not reported.
+  List of files or directories to be ignored. Ignored files and directories are still being scanned, but the results are not reported.
 
-  `Default ['/etc/mtab','/etc/hosts.deny','/etc/mail/statistics','/etc/random-seed','/etc/random.seed','/etc/adjtime','/etc/httpd/logs','/etc/utmpx','/etc/wtmpx','/etc/cups/certs','/etc/dumpdates','/etc/svc/volatile','/sys/kernel/security','/sys/kernel/debug','/dev/core',]`
+  `[‘/etc/mtab’,’/etc/hosts.deny’,’/etc/mail/statistics’,’/etc/random-seed’,’/etc/random.seed’,’/etc/adjtime’,’/etc/httpd/logs’,’/etc/utmpx’,’/etc/wtmpx’,’/etc/cups/certs’,’/etc/dumpdates’,’/etc/svc/volatile’,’/sys/kernel/security’,’/sys/kernel/debug’,’/dev/core’,]`
+  `Type String`
 
 $ossec_syscheck_ignore_type_1
   Simple regex pattern to filter out files.
 
   `Default '^/proc'`
+  `Type String`
 
 $ossec_syscheck_ignore_type_2
   Another simple regex pattern to filter out files.
 
   `Default '.log$|.swp$'`
-
-$ossec_syscheck_max_eps
-  Sets the maximum event reporting throughput. Events are messages that will produce an alert.
-
-  `Default 100`
+  `Type String`
 
 $ossec_syscheck_process_priority
   Sets the nice value for Syscheck process.
 
   `Default 10`
+  `Type String`
 
 $ossec_syscheck_synchronization_enabled
   Specifies whether there will be periodic inventory synchronizations or not.
 
   `Default yes`
+  `Type String`
 
 $ossec_syscheck_synchronization_interval
   Specifies the initial number of seconds between every inventory synchronization. If synchronization fails the value will be duplicated until it reaches the value of `max_interval`.
 
   `Default 5m`
+  `Type String`
 
 $ossec_syscheck_synchronization_max_eps
   Sets the maximum synchronization message throughput.
 
   `Default 10`
+  `Type String`
 
 $ossec_syscheck_synchronization_max_interval
   Specifies the maximum number of seconds between every inventory synchronization.
 
   `Default 1h`
+  `Type String`
 
 $ossec_syscheck_skip_nfs
   Specifies if syscheck should scan network mounted filesystems. This option works on Linux and FreeBSD systems. Currently, `skip_nfs` will exclude checking files on CIFS or NFS mounts.
 
   `Default yes`
+  `Type String`
 
 .. _ref_agent_vars_wodle_openscap:
 
@@ -592,29 +603,34 @@ Wodle OpenSCAP
 --------------
 
 $configure_wodle_openscap
-  Enables Wodle OpenSCAP section render on this host.
+  Enables the Wodle OpenSCAP section rendering on this host.  If this variable is not set to true the complete *open-scap wodle* tag will not be added to *ossec.conf*.
 
   `Default true`
+  `Type Boolean`
 
 $wodle_openscap_disabled
   Disables the OpenSCAP wodle.
 
   `Default yes`
+  `Type String`
 
 $wodle_openscap_timeout
   Timeout for each evaluation.
 
   `Default 1800`
+  `Type String`
 
 $wodle_openscap_interval
   Interval between OpenSCAP executions.
 
   `Default 1d`
+  `Type String`
 
 $wodle_openscap_scan_on_start
   Run evaluation immediately when service is started.
 
   `Default yes`
+  `Type String`
 
 .. _ref_agent_vars_wodle_ciscat:
 
@@ -622,39 +638,46 @@ Wodle CIS-CAT
 -------------
 
 $configure_wodle_cis_cat
-  Enables Wodle CIS-CAT section render on this host.
+  Enables Wodle CIS-CAT section render on this host. If this variable is not set to true the complete *cis-cat wodle* tag will not be added to *ossec.conf*.
 
   `Default true`
+  `Type Boolean`
 
 $wodle_ciscat_disabled
   Disables the CIS-CAT wodle.
 
   `Default yes`
+  `Type String`
 
 $wodle_ciscat_timeout
   Timeout for each evaluation. In case the execution takes longer that the specified timeout, it stops.
 
   `Default 1800`
+  `Type String`
 
 $wodle_ciscat_interval
   Interval between CIS-CAT executions.
 
   `Default 1d`
+  `Type String`
 
 $wodle_ciscat_scan_on_start
   Run evaluation immediately when service is started.
 
   `Default yes`
+  `Type String`
 
 $wodle_ciscat_java_path
   Define where Java is located. If this parameter is not set, the wodle will search for the Java location in the default environment variable `$PATH`.
 
   `Default 'wodles/java'`
+  `Type String`
 
 $wodle_ciscat_ciscat_path
   Define where CIS-CAT is located.
 
   `Default 'wodles/ciscat'`
+  `Type String`
 
 .. _ref_agent_vars_wodle_osquery:
 
@@ -662,34 +685,40 @@ Wodle osquery variables
 -----------------------
 
 $configure_wodle_osquery
-  Enables Wodle osquery section render on this host.
+  Enables the Wodle osquery section rendering on this host. If this variable is not set to ‘true’, the complete *osquery wodle tag* will not be added to *ossec.conf*.
 
   `Default true`
+  `Type String`
 
 $wodle_osquery_disabled
   Disable the osquery wodle.
 
   `Default yes`
+  `Type String`
 
 $wodle_osquery_run_daemon
-  Makes the module run osqueryd as a subprocess or lets the module monitor the results log without running Osquery.
+  Make the module run osqueryd as a subprocess or let the module monitor the results log without running Osquery.
 
   `Default yes`
+  `Type String`
 
 $wodle_osquery_log_path
   Full path to the results log written by Osquery.
 
   `Default '/var/log/osquery/osqueryd.results.log'`
+  `Type String`
 
 $wodle_osquery_config_path
   Path to the Osquery configuration file. This path can be relative to the folder where the Wazuh agent is running.
 
   `Default '/etc/osquery/osquery.conf'`
+  `Type String`
 
 $wodle_osquery_add_labels
   Add the agent labels defined as decorators.
 
   `Default yes`
+  `Type String`
 
 .. _ref_agent_vars_wodle_syscollector:
 
@@ -700,46 +729,55 @@ $wodle_syscollector_disabled
   Disable the Syscollector wodle.
 
   `Default no`
+  `Type String`
 
 $wodle_syscollector_interval
   Time between system scans.
 
   `Default 1h`
+  `Type String`
 
 $wodle_syscollector_scan_on_start
   Run a system scan immediately when service is started.
 
   `Default yes`
+  `Type String`
 
 $wodle_syscollector_hardware
   Enables the hardware scan.
 
   `Default yes`
+  `Type String`
 
 $wodle_syscollector_os
   Enables the OS scan.
 
   `Default yes`
+  `Type String`
 
 $wodle_syscollector_network
   Enables the network scan.
 
   `Default yes`
+  `Type String`
 
 $wodle_syscollector_packages
   Enables the packages scan.
 
   `Default yes`
+  `Type String`
 
 $wodle_syscollector_ports
   Enables the ports scan.
 
   `Default yes`
+  `Type String`
 
 $wodle_syscollector_processes
   Enables the processes scan.
 
   `Default yes`
+  `Type String`
 
 .. _ref_agent_vars_misc:
 
@@ -749,58 +787,43 @@ Misc Variables
 $agent_package_name
   Define package name defined in `params_agent.pp`
 
+  `Default wazuh-agent`
+  `Type String`
+
 $agent_package_version
   Define package version
 
-  `Default 4.0.0-1`
-
-$ossec_service_provider
-  This option associates Operative System Family
-
-  `Default []`
+  `Default 4.3.0-1`
+  `Type String`
 
 $selinux
   Whether to install a SELinux policy to allow rotation of OSSEC logs.
 
   `Default false`
+  `Type Boolean`
 
 $agent_name
   Configure agent name.
 
-  `Default $::hostname`
+  `Default undef`
+  `Type String`
 
 $manage_repo
   Install Wazuh through Wazuh repositories.
 
   `Default true`
+  `Type Boolean`
 
 $manage_client_keys
   Manage client keys option.
 
-  `Default export`
+  `Default yes`
+  `Type String`
 
 $agent_auth_password
   Define password for agent-auth
 
   `Default undef`
+  `Type String`
 
 .. _ref_agent_addlog:
-
-function wazuh::addlog
-----------------------
-
-$log_name
-  Configure Wazuh log name
-
-$agent_log
-  Path to log file.
-
-  `Default false`
-
-$logfile
-  Path to log file.
-
-$logtype
-  The OSSEC log_format of the file.
-
-  `Default syslog`
