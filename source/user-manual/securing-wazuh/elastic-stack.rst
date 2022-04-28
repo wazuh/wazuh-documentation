@@ -5,8 +5,8 @@
 
 .. _user_manual_secure_elasticsearch:
 
-Secure Elasticsearch
-=====================
+Change Elasticsearch passwords
+==================================
 
 
     During the installation of Elasticsearch, the passwords for the different users were automatically generated. These passwords can be changed afterward using API requests. Replace the following variables and execute the corresponding API call: 

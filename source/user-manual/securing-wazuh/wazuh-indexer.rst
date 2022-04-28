@@ -5,8 +5,8 @@
 
 .. _user_manual_secure_wazuh_indexer:
 
-Secure Wazuh indexer
-=====================
+Change Wazuh indexer passwords
+==============================
 
 In this section we will show you how to change the passwords of Wazuh indexer to secure your installation.
 

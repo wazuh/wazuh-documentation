@@ -5,8 +5,8 @@
 
 .. _user_manual_secure_opendistro:
 
-Secure Opendistro for Elasticsearch
-===================================
+Change Opendistro for Elasticsearch passwords 
+=============================================
 
 In this section we will show you how to change the passwords of Opendistro for Elasticsearch to secure your installation.
 
