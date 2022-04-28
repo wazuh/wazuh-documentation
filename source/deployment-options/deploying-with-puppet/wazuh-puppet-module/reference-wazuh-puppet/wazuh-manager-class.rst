@@ -8,6 +8,7 @@ Wazuh manager class
 ``class wazuh::manager``
 ------------------------
 
+This contains variables that can be used to configure the Wazuh manager.
 
 .. _ref_server_vars_alerts:
 
@@ -15,15 +16,18 @@ Alerts
 ------
 
 $ossec_alert_level
-  Sets the minimum severity level for alerts that will be stored to alerts.log and/or alerts.json.
+  Sets the minimum severity level for alerts that will be stored in alerts.log and/or alerts.json.
 
   `Default 3`
 
+  `Type Integer`
+
 $ossec_email_alert_level
-  Threshold defining minimum severity for a rule to fire an email alert.
-  Some rules circumvent this threshold (``alert_email`` option).
+  Threshold defining minimum severity for a rule to fire an email alert. Some rules circumvent this threshold (``alert_email`` option).
 
   `Default 12`
+
+  `Type Integer`
 
 .. _ref_server_vars_authd:
 
@@ -35,65 +39,70 @@ $ossec_auth_disabled
 
   `Default no`
 
+  `Type String`
 
 $ossec_auth_port
   Defines the TCP port number for listening to connections.
 
   `Default 1515`
 
+  `Type Integer`
 
 $ossec_auth_use_source_ip
   Toggles the use of the client’s source IP address or the use of “any” to add an agent.
 
   `Default yes`
 
-
-$ossec_auth_force_insert
-  Toggles whether or not to force the insertion of an agent if there is a duplicate name or IP address. This will remove the old agent with same name or IP address.
-
-  `Default yes`
-
-
-$ossec_auth_force_time
-  When forcing to remove old agents with the same name or IP address, this options specify that the deletion will be performed only if the agent keepalive has more than the defined number of seconds.
-
-  `Default 0`
-
+  `Type String`
 
 $ossec_auth_purgue
   Toggles the deletion of client keys on or off when agents are removed.
 
   `Default yes`
 
+  `Type String`
+
 $ossec_auth_use_password
   Toggles shared password authentication on or off.
 
   `Default no`
+
+  `Type String`
 
 $ossec_auth_ciphers
   Sets the list of ciphers for network communication using SSL.
 
   `Default 'HIGH:!ADH:!EXP:!MD5:!RC4:!3DES:!CAMELLIA:@STRENGTH'`
 
+  `Type String`
+
 $ossec_auth_ssl_verify_host
   Toggles source host verification on and off when a CA certificate is specified. This means that the client source IP address will be validated using the Common Name field.
 
   `Default no`
 
+  `Type String`
+
 $ossec_auth_ssl_manager_cert
   Specifies the full path to the server SSL certificate.
 
-  `Default yes`
+  `Default /var/ossec/etc/sslmanager.cert`
+
+  `Type String`
 
 $ossec_auth_ssl_manager_key
   Specifies the full path to the server’s SSL key.
 
-  `Default yes`
+  `Default /var/ossec/etc/sslmanager.key`
+
+  `Type String`
 
 $ossec_auth_ssl_auto_negotiate
   Toggles whether or not to auto select the SSL/TLS method.
 
   `Default yes`
+
+  `Type String`
 
 
 .. _ref_server_vars_cluster:
@@ -106,45 +115,63 @@ $ossec_cluster_name
 
   `Default wazuh`
 
+  `Type String`
+
 $ossec_cluster_node_name
   Specifies the name of the current node of the cluster.
 
   `Default node01`
+
+  `Type String`
 
 $ossec_cluster_node_type
   Specifies the role of the node.
 
   `Default master`
 
+  `Type String`
+
 $ossec_cluster_key
   Defines the key used to encrypt the communication between the nodes. This key must be 32 characters long.
 
   `Default KEY`
+
+  `Type String`
 
 $ossec_cluster_port
   Specifies the port to use for the cluster communications.
 
   `Default 1516`
 
+  `Type String`
+
 $ossec_cluster_bind_addr
   Specifies which IP address will communicate with the cluster when the node has multiple network interfaces.
 
   `Default 0.0.0.0`
+
+  `Type String`
 
 $ossec_cluster_nodes
   Lists all master nodes in the cluster using the `<node>` tag for each one.
 
   `Default ['NODE_IP']`
 
+  `Type String`
+
 $ossec_cluster_hidden
-  Toggles whether or not to show information about the cluster that generated an alert. If this is set to `yes`, information about the cluster that generated the event won’t be included in the alert.
+  Toggles whether or not to show information about the cluster that generated an alert. If this is set to `yes`, information about the cluster that generated the event won’t be included in the alert..
 
   `Default no`
+
+  `Type String`
 
 $ossec_cluster_disabled
   Toggles whether the cluster is enabled or not. If this value is set to `yes`, the cluster won’t start.
 
   `Default yes`
+
+  `Type String`
 
 
 .. _ref_server_vars_global:
@@ -153,12 +180,20 @@ Global variables
 ----------------
 
 $ossec_emailnotification
-  Whether or not to send email notifications.
+  Whether or not to send email notifications.  If this variable is not set to `true`, the email tags will not be added to `ossec.conf`.
 
-  `Default yes`
+  `Default false`
+
+  `Type Boolean`
 
 $ossec_emailto
     Email to address. ``['user1@mycompany.com','user2@mycompany.com']``
+
+  `Default ['recipient@example.wazuh.com']`
+  
+  `Type List`
+
+   Depends on **ossec_emailnotification**
 
 $ossec_smtp_server
   SMTP mail server.

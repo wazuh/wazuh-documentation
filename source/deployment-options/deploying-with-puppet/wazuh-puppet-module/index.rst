@@ -156,5 +156,6 @@ Reference Wazuh puppet
  .. toctree::
     :maxdepth: 1
 
-    reference-wazuh-puppet/wazuh-agent-class
     reference-wazuh-puppet/wazuh-manager-class
+    reference-wazuh-puppet/wazuh-agent-class
+    
