@@ -39,7 +39,7 @@ Wazuh can be installed on a 64-bit Linux operating system. Wazuh supports the fo
     * - Amazon Linux 2
       - CentOS 7, 8
     * - Red Hat Enterprise Linux 7, 8
-      - Ubuntu 16.04, 18.04, 20.04, 22.04
+      - Ubuntu 16.04, 18.04, 20.04
 
 Hardware recommendations
 ^^^^^^^^^^^^^^^^^^^^^^^^

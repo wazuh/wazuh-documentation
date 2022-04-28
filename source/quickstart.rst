@@ -50,7 +50,7 @@ Wazuh central components can be installed on a 64-bit Linux operating system. Wa
     * - Amazon Linux 2
       - CentOS 7, 8
     * - Red Hat Enterprise Linux 7, 8
-      - Ubuntu 16.04, 18.04, 20.04, 22.04
+      - Ubuntu 16.04, 18.04, 20.04
 
 Installing Wazuh
 ----------------
