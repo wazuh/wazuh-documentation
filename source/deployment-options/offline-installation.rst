@@ -6,7 +6,9 @@
 Offline installation
 ====================
 
-You can install Wazuh even when there is no connection to the Internet. Installing the solution offline involves downloading the Wazuh central components to later install them on a system with no Internet connection. The Wazuh server, the Wazuh indexer and the Wazuh dashboard can be installed and configured on the same host in an all-in-one deployment, or each component can be installed on a separate host as a distributed deployment, depending on your environment needs. For more information about the hardware requirements and the recommended operating systems, check the :ref:`Requirements <installation_requirements>` section.
+You can install Wazuh even when there is no connection to the Internet. Installing the solution offline involves downloading the Wazuh central components to later install them on a system with no Internet connection. The Wazuh server, the Wazuh indexer and the Wazuh dashboard can be installed and configured on the same host in an all-in-one deployment, or each component can be installed on a separate host as a distributed deployment, depending on your environment needs. 
+
+For more information about the hardware requirements and the recommended operating systems, check the :ref:`Requirements <installation_requirements>` section.
 
 .. note::
 
@@ -42,17 +44,18 @@ Download the packages and configuration files
             
         Edit ``config.yml`` and replace ``<indexer-node-ip>``, ``<wazuh-manager-ip>``, and ``<dashboard-node-ip>`` with ``127.0.0.1``.
         
-    -   Multi-node cluster
+    -   Distributed deployment
         
-        If you are performing a multi-node deployment, do the following:
+        If you are performing a distributed deployment, do the following:
         
         .. code-block:: console
         
             # curl -sO https://packages-dev.wazuh.com/|WAZUH_LATEST_MINOR|/config.yml
             
-        Edit ``config.yml`` and replace ``<indexer-node-ip>``, ``<wazuh-manager-ip>``, and ``<dashboard-node-ip>`` with the IP address of the host of each component.
+        Edit ``config.yml`` and replace the node names and IP values with the corresponding names and IP addresses. You need to do this for all the Wazuh server, the Wazuh indexer, and the Wazuh dashboard nodes. Add as many node fields as needed.
 
-#.  Create the certificates and move them to the ``wazuh-offline/`` directory.
+
+#.  Run the ``./wazuh-certs-tool.sh`` to create the certificates. For a multi-node cluster, these certificates need to be later deployed to all Wazuh instances in your cluster.
 
     .. code-block:: console
     
@@ -60,7 +63,7 @@ Download the packages and configuration files
         # chmod 744 wazuh-certs-tool.sh
         # ./wazuh-certs-tool.sh --all            
 
-#.  Copy or move ``wazuh-offline.tar.gz`` file and ``./wazuh-certificates/`` folder to a folder accessible to the host from where the offline installation will be carried out.
+#. Copy or move ``wazuh-offline.tar.gz`` file and ``./wazuh-certificates/`` folder to a folder accessible to the host(s) from where the offline installation will be carried out. This can be done by using ``scp``.
 
 
 Install Wazuh components from local files
@@ -70,11 +73,130 @@ Install Wazuh components from local files
 
     In the host where the installation is taking place, make sure to change the working directory to the folder where the downloaded installation files were placed.
 
-In the working directory where you placed ``wazuh-offline.tar.gz`` and ``./wazuh-certificates/``, execute the following to decompress the installation files:
+In the working directory where you placed ``wazuh-offline.tar.gz`` and ``./wazuh-certificates/``, execute the following command to decompress the installation files:
 
 .. code-block:: console
 
     # tar xf wazuh-offline.tar.gz
+
+Installing the Wazuh indexer
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#.  Run the following command to install the Wazuh indexer.
+
+    .. tabs::
+
+        .. group-tab:: RPM
+
+            .. code-block:: console
+        
+                # rpm -ivh ./wazuh-offline/wazuh-packages/wazuh-indexer*.rpm
+
+        .. group-tab:: DEB
+
+            .. code-block:: console
+        
+                # dpkg -i ./wazuh-offline/wazuh-packages/wazuh-indexer*.deb
+
+#.  Run the following commands replacing ``<indexer-node-name>`` with the name of the Wazuh indexer node you are configuring as defined in ``config.yml``. For example ``node-1``. This is to deploy the SSL certificates to encrypt communications between the Wazuh central components.
+
+    .. code-block:: console
+
+        # NODE_NAME=<indexer-node-name>
+
+    .. code-block:: console
+    
+        # mkdir /etc/wazuh-indexer/certs
+        # mv -n wazuh-certificates/$NODE_NAME.pem /etc/wazuh-indexer/certs/indexer.pem
+        # mv -n wazuh-certificates/$NODE_NAME-key.pem /etc/wazuh-indexer/certs/indexer-key.pem
+        # mv wazuh-certificates/admin-key.pem /etc/wazuh-indexer/certs/
+        # mv wazuh-certificates/admin.pem /etc/wazuh-indexer/certs/
+        # cp wazuh-certificates/root-ca.pem /etc/wazuh-indexer/certs/
+        # chmod 500 /etc/wazuh-indexer/certs
+        # chmod 400 /etc/wazuh-indexer/certs/*
+        # chown -R wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/certs
+
+
+#. Edit ``/etc/wazuh-indexer/opensearch.yml`` and replace the following values: 
+
+    
+   #. ``network.host``:  Sets the address of this node for both HTTP and transport traffic. The node will bind to this address and will also use it as its publish address. Accepts an IP address or a hostname. 
+   
+      Use the same node address set in ``config.yml`` to create the SSL certificates. 
+
+   #. ``node.name``: Name of the Wazuh indexer node as defined in the ``config.yml`` file. For example, ``node-1``.
+
+   #. ``cluster.initial_master_nodes``: List of the names of the master-eligible nodes. These names are defined in the ``config.yml`` file. Uncomment the ``node-2`` and ``node-3`` lines, change the names, or add more lines, according to your ``config.yml`` definitions.
+
+      .. code-block:: yaml
+
+        cluster.initial_master_nodes:
+        - "node-1"
+        - "node-2"
+        - "node-3"
+
+   #. ``discovery.seed_hosts:`` List of the addresses of the master-eligible nodes. Each element can be either an IP address or a hostname. 
+      You may leave this setting commented if your are the configuring the Wazuh indexer as a single-node. For multi-node configurations, uncomment this setting and set your master-eligible nodes addresses. 
+
+       .. code-block:: yaml
+
+        discovery.seed_hosts:
+          - "10.0.0.1"
+          - "10.0.0.2"
+          - "10.0.0.3"
+  
+   #. ``plugins.security.nodes_dn``: List of the Distinguished Names of the certificates of all the Wazuh indexer cluster nodes. Uncomment the lines for ``node-2`` and ``node-3`` and change the common names (CN) and values according to your settings and your ``config.yml`` definitions.
+
+      .. code-block:: yaml
+
+        plugins.security.nodes_dn:
+        - "CN=node-1,OU=Wazuh,O=Wazuh,L=California,C=US"
+        - "CN=node-2,OU=Wazuh,O=Wazuh,L=California,C=US"
+        - "CN=node-3,OU=Wazuh,O=Wazuh,L=California,C=US"
+
+#.  Enable and start the Wazuh indexer service.
+
+    .. include:: /_templates/installations/indexer/common/enable_indexer.rst
+
+#. For multi-node clusters, repeat the previous steps on every Wazuh indexer node. Then proceed to the cluster initialization stage.
+
+#.  When all Wazuh indexer nodes are running, run the Wazuh indexer ``indexer-security-init.sh`` script on any Wazuh indexer node to load the new certificates information and start the cluster:
+
+    .. code-block:: console
+
+        # /usr/share/wazuh-indexer/bin/indexer-security-init.sh
+  
+#.  Run the following command to check that the installation is successful.
+
+    .. code-block:: console
+
+        # curl -XGET https://localhost:9200 -u admin:admin -k
+
+    Expand the output to see an example response.
+
+    .. code-block:: none
+        :class: output collapsed
+
+        {
+          "name" : "node-1",
+          "cluster_name" : "wazuh-cluster",
+          "cluster_uuid" : "nRWvWcQsTpuC_PQU9pB3-g",
+          "version" : {
+            "number" : "7.10.2",
+            "build_type" : "rpm",
+            "build_hash" : "e505b10357c03ae8d26d675172402f2f2144ef0f",
+            "build_date" : "2022-01-14T03:38:06.881862Z",
+            "build_snapshot" : false,
+            "lucene_version" : "8.10.1",
+            "minimum_wire_compatibility_version" : "6.8.0",
+            "minimum_index_compatibility_version" : "6.0.0-beta1"
+          },
+          "tagline" : "The OpenSearch Project: https://opensearch.org/"
+        }
+
+
+Installing the Wazuh server
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Installing the Wazuh manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -105,83 +227,6 @@ Installing the Wazuh manager
 
     .. include:: /_templates/installations/wazuh/common/check_wazuh_manager.rst    
 
-Installing the Wazuh indexer
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-#.  Run the following command to install the Wazuh indexer.
-
-    .. tabs::
-
-        .. group-tab:: RPM
-
-            .. code-block:: console
-        
-                # rpm -ivh ./wazuh-offline/wazuh-packages/wazuh-indexer*.rpm
-
-        .. group-tab:: DEB
-
-            .. code-block:: console
-        
-                # dpkg -i ./wazuh-offline/wazuh-packages/wazuh-indexer*.deb
-
-#.  Move the production certificates to the ``/etc/wazuh-indexer/certs/`` directory.
-
-    .. code-block:: console
-    
-        # mkdir /etc/wazuh-indexer/certs
-        # mv wazuh-certificates/admin-key.pem /etc/wazuh-indexer/certs/
-        # mv wazuh-certificates/admin.pem /etc/wazuh-indexer/certs/
-        # mv wazuh-certificates/node-1-key.pem /etc/wazuh-indexer/certs/
-        # mv wazuh-certificates/node-1.pem /etc/wazuh-indexer/certs/
-        # cp wazuh-certificates/root-ca.pem /etc/wazuh-indexer/certs/
-        # chown -R wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/certs/
-
-#.  Edit the indexer configuration file ``/etc/wazuh-indexer/opensearch.yml`` and change the certificate names to match the name of the new certificates as shown in the following lines:
-
-    .. code-block:: yaml
-
-        plugins.security.ssl.http.pemcert_filepath: /etc/wazuh-indexer/certs/node-1.pem
-        plugins.security.ssl.http.pemkey_filepath: /etc/wazuh-indexer/certs/node-1-key.pem
-        plugins.security.ssl.transport.pemcert_filepath: /etc/wazuh-indexer/certs/node-1.pem
-        plugins.security.ssl.transport.pemkey_filepath: /etc/wazuh-indexer/certs/node-1-key.pem
-
-#.  Enable and start the Wazuh indexer service.
-
-    .. include:: /_templates/installations/indexer/common/enable_indexer.rst
-
-#.  Use ``indexer-security-init.sh`` script to load the new certificates information and start the cluster:
-
-    .. code-block:: console
-
-        # /usr/share/wazuh-indexer/bin/indexer-security-init.sh
-  
-#.  Run the following command to check that the installation is successful.
-
-    .. code-block:: console
-
-        # curl -XGET https://localhost:9200 -u admin:admin -k
-
-    Expand the output to see an example response.
-
-    .. code-block:: none
-        :class: output accordion-output
-
-        {
-          "name" : "node-1",
-          "cluster_name" : "wazuh-cluster",
-          "cluster_uuid" : "nRWvWcQsTpuC_PQU9pB3-g",
-          "version" : {
-            "number" : "7.10.2",
-            "build_type" : "rpm",
-            "build_hash" : "e505b10357c03ae8d26d675172402f2f2144ef0f",
-            "build_date" : "2022-01-14T03:38:06.881862Z",
-            "build_snapshot" : false,
-            "lucene_version" : "8.10.1",
-            "minimum_wire_compatibility_version" : "6.8.0",
-            "minimum_index_compatibility_version" : "6.0.0-beta1"
-          },
-          "tagline" : "The OpenSearch Project: https://opensearch.org/"
-        }
 
 Installing Filebeat
 ~~~~~~~~~~~~~~~~~~~
@@ -212,7 +257,7 @@ Filebeat must be installed and configured on the same server as the Wazuh manage
         cp ./wazuh-offline/wazuh-files/wazuh-template.json /etc/filebeat/ &&\
         chmod go+r /etc/filebeat/wazuh-template.json
 
-#.  Edit ``/etc/filebeat/wazuh-template.json`` and change to ``"1"`` the value for ``"index.number_of_shards"`` for  a single-node installation. This value can be changed based on the user requirement when performing a multi-node installation.
+#.  Edit ``/etc/filebeat/wazuh-template.json`` and change to ``"1"`` the value for ``"index.number_of_shards"`` for  a single-node installation. This value can be changed based on the user requirement when performing a distributed installation.
 
     .. code-block:: none
         :emphasize-lines: 5
@@ -241,15 +286,18 @@ Filebeat must be installed and configured on the same server as the Wazuh manage
             username: admin
             password: admin
             
-    -   Multi-node cluster
+    -   Distributed deployment
     
-        Change the value of ``hosts`` to the IP address of the Wazuh indexer. Also change the value of ``username`` and ``password`` to the configured credentials. The default username and password is ``admin``.
+        Change the value of ``hosts`` to the IP address of the Wazuh indexer node. In case of having more than one Wazuh indexer node, you can separate the addresses using commas. For example, ``hosts: ["10.0.0.1:9200", "10.0.0.2:9200", "10.0.0.3:9200"]``. Ensure to replace the ``<indexer-node-*-ip>`` with the addresses or hostnames of the Wazuh indexer nodes specified in ``config.yml``.
+
+        Also change the value of ``username`` and ``password`` to the configured credentials. The default username and password is ``admin``.
         
         .. code-block:: yaml
+           :emphasize-lines: 3
         
             # Wazuh - Filebeat configuration file
             output.elasticsearch:
-            hosts: ["<wazuh_indexer_IP>:9200"]
+            hosts: ["<indexer-node-1-ip>:9200", "<indexer-node-2-ip>:9200", "<indexer-node-3-ip>:9200"]
             username: admin
             password: admin
 
@@ -259,14 +307,22 @@ Filebeat must be installed and configured on the same server as the Wazuh manage
     
         # tar -xzf ./wazuh-offline/wazuh-files/wazuh-filebeat-0.1.tar.gz -C /usr/share/filebeat/module
 
-#.  Copy the Wazuh indexer certificates into ``/etc/wazuh-indexer/certs/filebeat``.
+#.  Replace ``<server-node-name>`` with your Wazuh server node certificate name, the same used in ``config.yml`` when creating the certificates. Then, move the certificates to their corresponding location.
+
+     .. code-block:: console
+        
+        # NODE_NAME=<server-node-name>
 
     .. code-block:: console
 
         # mkdir /etc/filebeat/certs
-        # mv wazuh-certificates/wazuh-1-key.pem /etc/filebeat/certs/filebeat-key.pem
-        # mv wazuh-certificates/wazuh-1.pem /etc/filebeat/certs/filebeat.pem
+        # mv -n wazuh-certificates/$NODE_NAME.pem /etc/filebeat/certs/filebeat.pem
+        # mv -n wazuh-certificates/$NODE_NAME-key.pem /etc/filebeat/certs/filebeat-key.pem
         # cp wazuh-certificates/root-ca.pem /etc/filebeat/certs/
+        # chmod 500 /etc/filebeat/certs
+        # chmod 400 /etc/filebeat/certs/*
+        # chown -R root:root /etc/filebeat/certs
+
 
 #.  Enable and start the Filebeat service.
 
@@ -281,7 +337,7 @@ Filebeat must be installed and configured on the same server as the Wazuh manage
     Expand the output to see an example response.
 
     .. code-block:: none
-        :class: output accordion-output
+        :class: output collapsed
 
         elasticsearch: https://127.0.0.1:9200...
           parse url... OK
@@ -307,7 +363,7 @@ Filebeat must be installed and configured on the same server as the Wazuh manage
     Expand the output to see an example response.
     
     .. code-block:: none
-        :class: output accordion-output
+        :class: output collapsed
 
         {
           "wazuh" : {
@@ -320,8 +376,50 @@ Filebeat must be installed and configured on the same server as the Wazuh manage
         }
 
 
+Your Wazuh server node is now successfully installed. Repeat the steps of this installation process stage for every Wazuh server node in your cluster, expand the **Wazuh cluster configuration for multi-node deployment** section below, and carry on then with configuring the Wazuh cluster. If you want a Wazuh server single-node cluster, everything is set and you can proceed directly with the Wazuh dashboard installation.
+  
+Wazuh cluster configuration for multi-node deployment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. raw:: html
+
+  <div class="accordion-section">
+
+After completing the installation of the Wazuh server on every node, you need to configure one server node only as the master and the rest as workers.
+
+
+Configuring the Wazuh server master node
+""""""""""""""""""""""""""""""""""""""""
+
+  #. Edit the following settings in the ``/var/ossec/etc/ossec.conf`` configuration file.
+
+      .. include:: /_templates/installations/manager/configure_wazuh_master_node.rst
+
+  #. Restart the Wazuh manager. 
+
+      .. include:: /_templates/installations/manager/restart_wazuh_manager.rst
+
+    
+Configuring the Wazuh server worker nodes
+"""""""""""""""""""""""""""""""""""""""""
+
+  #. .. include:: /_templates/installations/manager/configure_wazuh_worker_node.rst
+
+  #. Restart the Wazuh manager. 
+
+      .. include:: /_templates/installations/manager/restart_wazuh_manager.rst
+
+  Repeat these configuration steps for every Wazuh server worker node in your cluster.
+
+Testing Wazuh server cluster
+""""""""""""""""""""""""""""
+
+  .. include:: /_templates/installations/manager/check_wazuh_cluster.rst
+
+
+
 Installing the Wazuh dashboard
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 #.  Run the following command to install the Wazuh dashboard.
 
@@ -339,19 +437,51 @@ Installing the Wazuh dashboard
        
                 # dpkg -i ./wazuh-offline/wazuh-packages/wazuh-dashboard*.deb
 
-#.  Copy the dashboard certificates into ``/etc/wazuh-dashboard/certs``.
+#.  Replace ``<dashboard-node-name>`` with your Wazuh dashboard node name, the same used in ``config.yml`` to create the certificates, and move the certificates to their corresponding location.
 
     .. code-block:: console
-     
+
+        # NODE_NAME=<dashboard-node-name>
+
+    .. code-block:: console
+
         # mkdir /etc/wazuh-dashboard/certs
-        # mv wazuh-certificates/dashboard-key.pem /etc/wazuh-dashboard/certs/
-        # mv wazuh-certificates/dashboard.pem /etc/wazuh-dashboard/certs/
+        # mv -n wazuh-certificates/$NODE_NAME.pem /etc/wazuh-dashboard/certs/dashboard.pem
+        # mv -n wazuh-certificates/$NODE_NAME-key.pem /etc/wazuh-dashboard/certs/dashboard-key.pem
         # cp wazuh-certificates/root-ca.pem /etc/wazuh-dashboard/certs/
-        # chown -R wazuh-dashboard:wazuh-dashboard /etc/wazuh-dashboard/certs/
+        # chmod 500 /etc/wazuh-dashboard/certs
+        # chmod 400 /etc/wazuh-dashboard/certs/*
+        # chown -R wazuh-dashboard:wazuh-dashboard /etc/wazuh-dashboard/certs
+
+#. Edit the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file and replace the following values:
+
+   #. ``server.host``: This setting specifies the host of the back end server. To allow remote users to connect, set the value to the IP address or DNS name of the Kibana server.  The value ``0.0.0.0`` will accept all the available IP addresses of the host.
+
+   #. ``opensearch.hosts``: The URLs of the Wazuh indexer instances to use for all your queries. Wazuh dashboard can be configured to connect to multiple Wazuh indexer nodes in the same cluster. The addresses of the nodes can be separated by commas. For example,  ``["https://10.0.0.2:9200", "https://10.0.0.3:9200","https://10.0.0.4:9200"]``
+
+        .. code-block:: yaml
+          :emphasize-lines: 1,3
+
+             server.host: 0.0.0.0
+             server.port: 443
+             opensearch.hosts: https://localhost:9200
+             opensearch.ssl.verificationMode: certificate
 
 #.  Enable and start Wazuh dashboard.
 
     .. include:: /_templates/installations/dashboard/enable_dashboard.rst
+
+#. **Only for distributed deployments**:  Edit the file ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` and replace the ``url`` value with the IP address or hostname of the Wazuh server master node.
+          
+            .. code-block:: yaml
+            
+              hosts:
+                - default:
+                  url: https://localhost
+                  port: 55000
+                  username: wazuh-wui
+                  password: wazuh-wui
+                  run_as: false
 
 #.  Access the web interface. 
 
