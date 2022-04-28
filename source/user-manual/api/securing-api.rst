@@ -64,7 +64,7 @@ Recommended changes to securize Wazuh API
     After changing the password, there is no need to restart the Wazuh API but a new :api-ref:`authentication <operation/api.controllers.security_controller.login_user>` will be required for the affected users.
 
     .. warning::
-      Changing the **wazuh-wui** user password will affect the Wazuh UI. You will have to update the ``/usr/share/kibana/data/wazuh/config/wazuh.yml`` configuration file accordingly with the new credentials. To learn more, see the :ref:`Wazuh Kibana plugin configuration file section <kibana_config_file>`.
+      Changing the **wazuh-wui** user password will affect the Wazuh UI. You will have to update the ``/usr/share/kibana/data/wazuh/config/wazuh.yml`` configuration file accordingly with the new credentials. To learn more, see the Wazuh Kibana plugin configuration file section.
 
 #. Change the default host and port:
 
