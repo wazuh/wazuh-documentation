@@ -34,14 +34,17 @@ Out of the box, the Wazuh VM is configured with the following specifications:
   +-----------+------+--------------+--------------+----------------+
   |    Component     |   RAM (GB)   | Storage (GB) |   CPU (cores)  |
   +==================+==============+==============+================+
-  | Wazuh v4.3.0 OVA |      4       |     40       |       4        |
+  | Wazuh v4.3.0 OVA |      8       |     50       |       4        |
   +-----------+------+--------------+--------------+----------------+
+
+However, this hardware configuration can be modified depending on the number of protected endpoints and indexed alert data. More information about requirements can be found :doc:`here </quickstart>`. 
 
 
 Import and access the virtual machine
 -------------------------------------
 
-First, import the OVA to the virtualization platform and start the machine. When the virtual machine is accessed through the virtualization platform, either of the following system users can be used to log in:
+First, import the OVA to the virtualization platform and start the machine. 
+When the virtual machine is accessed through the virtualization platform, either of the following system users can be used to log in:
  
 
   .. code-block:: none
@@ -83,7 +86,7 @@ You can find ``<wazuh_server_ip>``  by typing the following command in the VM:
 Configuration files
 -------------------
 
-All components included in this virtual image are configured to work out of the box without the need to modify any settings. However, all components can be fully customized. These are the configuration files locations:
+All components included in this virtual image are configured to work out-of-the-box, without the need to modify any settings. However, all components can be fully customized. These are the configuration files locations:
 
   - Wazuh manager: ``/var/ossec/etc/ossec.conf``
 
@@ -91,11 +94,8 @@ All components included in this virtual image are configured to work out of the 
   
   - Filebeat-OSS: ``/etc/filebeat/filebeat.yml``
   
-  - Wazuh dashboard: 
+  - Wazuh dashboard: ``/etc/wazuh-dashboard/opensearch_dashboards.yml``
 
-     - ``/etc/wazuh-dashboard/opensearch_dashboards.yml``
-
-     - ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml``
 
 VirtualBox time configuration
 -----------------------------
@@ -103,7 +103,7 @@ VirtualBox time configuration
 In the case of using VirtualBox, once the virtual machine is imported, it may run into issues caused by time skew when VirtualBox synchronizes the time of the guest machine. To avoid this situation, enable the ``Hardware Clock in UTC Time`` option in the ``System`` tab of the virtual machine configuration.
 
 .. note::
-  By default, the network interface type is a bridge. The VM will attempt to obtain an IP address from the network DHCP server. Alternatively, a static IP address can be set by configuring the appropriate network files in the CentOS operating system on which the VM is based.
+  By default, the network interface type is set to Bridged Adapter. The VM will attempt to obtain an IP address from the network DHCP server. Alternatively, a static IP address can be set by configuring the appropriate network files in the CentOS operating system on which the VM is based.
 
 
 Once the virtual machine is imported and running, the next step is to :ref:`deploy the Wazuh agents <installation_agents>` on the systems to be monitored.
