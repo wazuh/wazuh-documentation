@@ -190,7 +190,7 @@ $ossec_emailto
     Email to address. ``['user1@mycompany.com','user2@mycompany.com']``
 
   `Default ['recipient@example.wazuh.com']`
-  
+
   `Type List`
 
    Depends on **ossec_emailnotification**
@@ -198,20 +198,38 @@ $ossec_emailto
 $ossec_smtp_server
   SMTP mail server.
 
+  `Default smtp.example.wazuh.com`
+  
+  `Type String`
+
+   Depends on **ossec_emailnotification**
+
 $ossec_emailfrom
   Email from address.
 
-  `Default ossec@${domain}`
+  `Default ossecm@example.wazuh.com`
+  
+  `Type String`
+
+   Depends on **ossec_emailnotification**
 
 $ossec_email_maxperhour
   Global Configuration with the maximum number of emails per hour.
 
   `Default 12`
 
+  `Type Integer`
+
+   Depends on **ossec_emailnotification**
+
 $ossec_email_log_source
   This selects the alert file to be read from.
 
   `Default 'alerts.log'`
+
+  `Type String`
+  
+   Depends on **ossec_emailnotification**
 
 $ossec_email_idsname
   Define email ID name
@@ -221,32 +239,55 @@ $ossec_email_idsname
 $ossec_white_list
   Allow white-listing of IP addresses.
 
-  `Default []`
+  `Default['127.0.0.1','localhost.localdomain$','10.0.0.2']`
+
+  `Type List`
 
 $ossec_remote_connection
   Specifies a type of incoming connection to accept: secure or syslog.
 
   `Default secure`
 
+  `Type String`
+
 $ossec_remote_port
   Specifies the port to use to listen for events.
 
   `Default 1514`
+
+  `Type Integer`
 
 $ossec_remote_protocol
   Specifies the protocol to use. It is available for secure connections and syslog events.
 
   `Default tcp`
 
+  `Type String`
+
 $ossec_remote_local_ip
   Local IP address to use to listen for connections.
 
   `Default undef`
 
+  `Type String`
+
+$ossec_remote_allowed_ips
+IP address that is allowed to send syslog messages to the server.
+
+  `Default undef`
+
+  `Type String`
+
+   Needed if **ossec_remote_connection** is set to syslog
+
 $ossec_remote_queue_size
   Sets the capacity of the remote daemon queue in number of agent events.
 
   `Default 131072`
+
+  `Type String`
+
+  Added if **ossec_remote_connection** is set to secure
 
 .. _ref_server_vars_localfile:
 
@@ -256,7 +297,7 @@ Localfile variables
 $ossec_local_files
   Files list for log analysis
 
-  This files are listed in params_manager.pp in section $default_local_files
+  These files are listed in params_manager.pp in section $default_local_files.
 
 
 .. _ref_server_vars_rootcheck:
@@ -269,139 +310,302 @@ $configure_rootcheck
 
   `Default true`
 
+  `Type Boolean`
+
 $ossec_rootcheck_disabled
   Disable rootcheck on this host (Linux).
 
   `Default no`
+
+  `Type String`
 
 $ossec_rootcheck_check_files
   Enable rootcheck checkfiles option.
 
   `Default yes`
 
+  `Type String`
+
 $ossec_rootcheck_check_trojans
   Enable rootcheck checktrojans option.
 
   `Default yes`
+
+  `Type String`
 
 $ossec_rootcheck_check_dev
   Enable rootcheck checkdev option.
 
   `Default yes`
 
+  `Type String`
+
 $ossec_rootcheck_check_sys
   Enable rootcheck checksys option.
 
   `Default yes`
+
+  `Type String`
 
 $ossec_rootcheck_check_pids
   Enable rootcheck checkpids option.
 
   `Default yes`
 
+  `Type String`
+
 $ossec_rootcheck_check_ports
   Enable rootcheck checkports option.
 
   `Default yes`
+
+  `Type String`
 
 $ossec_rootcheck_check_if
   Enable rootcheck checkif option.
 
   `Default yes`
 
+  `Type String`
+
 $ossec_rootcheck_frequency
   How often the rootcheck scan will run (in seconds).
 
-  `Default 43200`
+  `Default 36000`
+
+  `Type String`
 
 $ossec_rootcheck_ignore_list
   List of files or directories to be ignored. These files and directories will be ignored during scans.
 
   `Default []`
 
+  `Type String`
+
 $ossec_rootcheck_rootkit_files
   Change the location of the rootkit files database.
 
   `Default 'etc/shared/rootkit_files.txt'`
+
+  `Type String`
 
 $ossec_rootcheck_rootkit_trojans
   Change the location of the rootkit trojans database.
 
   `Default 'etc/shared/rootkit_trojans.txt'`
 
+  `Type String`
+
 $ossec_rootcheck_skip_nfs
   Enable or disable the scanning of network mounted filesystems (Works on Linux and FreeBSD). Currently, skip_nfs will exclude checking files on CIFS or NFS mounts.
 
   `Default yes`
+
+  `Type String`
 
 $ossec_rootcheck_system_audit
   Specifies the path to an audit definition file for Unix-like systems.
 
   `Default []`
 
+  `Type String`
+
 $ossec_rootcheck_windows_disabled
   Disables rootcheck if host has Windows OS.
 
   `Default no`
+
+  `Type String`
 
 $ossec_rootcheck_windows_windows_apps
   Specifies the path to a Windows application definition file.
 
   `Default './shared/win_applications_rcl.txt'`
 
+  `Type String`
+
 $ossec_rootcheck_windows_windows_malware
   Specifies the path to a Windows malware definitions file.
 
   `Default './shared/win_malware_rcl.txt'`
 
+  `Type String`
+
 
 .. _ref_server_vars_syscheck:
+
+
+SCA variables
+-------------
+
+$configure_sca
+  Enables SCA section rendering on this host.
+
+ `Default true`
+
+ `Type boolean`
+
+$sca_amazon_enabled
+  Enable SCA on this host (Amazon Linux 2).
+
+  `Default yes`
+
+  `Depends on configure_sca and apply_template_os`
+
+$sca_amazon_scan_on_start
+  The SCA module will perform the scan immediately when it is started (Amazon Linux 2).
+
+  `Default yes`
+    
+  `Depends on configure_sca and apply_template_os`
+ 
+$sca_amazon_interval
+  Interval between module executions.
+
+  `Default 12h`
+
+  `Depends on configure_sca and apply_template_os`
+
+$sca_amazon_skip_nfs
+  Enable or disable the scanning of network mounted filesystems (Works on Linux and FreeBSD). Currently, skip_nfs will exclude checking files on CIFS or NFS mounts.
+
+  `Default yes`
+
+  `Depends on configure_sca and apply_template_os`
+
+$sca_amazon_policies
+  A list of policies to run assessments can be included in this section.
+
+  `Default []`
+
+  `Depends on configure_sca and apply_template_os`  
+
+$sca_rhel_enabled
+  Enable SCA on this host (RHEL).
+
+  `Default true`
+
+  `Type Boolean`
+
+  `Depends on configure_sca and apply_template_os`
+
+$sca_rhel_scan_on_start
+  The SCA module will perform the scan immediately when started (RHEL).
+
+  `Default yes`
+
+  `Type String`
+
+  `Depends on configure_sca and apply_template_os`
+ 
+$sca_rhel_interval
+  Interval between module executions.
+
+  `Default 12h`
+
+  `Depends on configure_sca and apply_template_os`
+
+$sca_rhel_skip_nfs
+  Enable or disable the scanning of network mounted filesystems (Works on Linux and FreeBSD). Currently, skip_nfs will exclude checking files on CIFS or NFS mounts.
+  
+  `Default yes`
+  
+  `Depends on configure_sca and apply_template_os`
+
+$sca_rhel_policies
+  A list of policies to run assessments can be included in this section.
+
+  `Default []`
+
+  `Depends on configure_sca and apply_template_os`
+
+$sca_else_enabled
+  Enable SCA on this host (Linux).
+
+  `Default yes`
+
+$sca_else_scan_on_start
+  The SCA module will perform the scan immediately when started (Linux).
+
+  `Default yes`
+
+  `Depends on configure_sca and apply_template_os`
+
+$sca_else_interval
+  Interval between module executions.
+
+  `Default 12h`
+
+  `Depends on configure_sca and apply_template_os`
+
+$sca_else_skip_nfs
+  Enable or disable the scanning of network mounted filesystems (Works on Linux and FreeBSD). Currently, skip_nfs will exclude checking files on CIFS or NFS mounts.
+  
+  `Default yes`
+
+  `Depends on configure_sca and apply_template_os`
+
+$sca_else_policies
+  A list of policies to run assessments can be included in this section.
+
+  `Default []`
+
+  `Depends on configure_sca and apply_template_os`
 
 Syscheck variables
 ------------------
 
 $configure_syscheck
-  Enables syscheck section render on this host.
+  Enables syscheck section rendering on this host. If this variable is not set to *true* the complete syscheck tag will not be added to *ossec.conf*.
 
   `Default true`
+
+  `Type Boolean`
 
 $ossec_syscheck_disabled
   Disable syscheck on this host.
 
   `Default no`
 
+  `Type String`
+
 $ossec_syscheck_frequency
   Enables syscheck section render on this host.
 
-  `Default true`
+  `Default 43200`
+
+  `Type String`
 
 $ossec_syscheck_scan_on_start
   Specifies if syscheck scans immediately when started.
 
   `Default yes`
+  
+  `Type String`
 
 $ossec_syscheck_auto_ignore
   Specifies whether or not syscheck will ignore files that change too many times (manager only).
 
   `Default undef`
 
+  `Type String`
+
 $ossec_syscheck_directories_1
   List of directories to be monitored. The directories should be comma-separated
 
   `Default '/etc,/usr/bin,/usr/sbin'`
+
+  `Type String`
 
 $ossec_syscheck_realtime_directories_1
   This will enable real-time/continuous monitoring on directories listed on `ossec_syscheck_directories_1`. Real time only works with directories, not individual files.
 
   `Default no`
 
+  `Type String`
+
 $ossec_syscheck_whodata_directories_1
   This will enable who-data monitoring on directories listed on `ossec_syscheck_directories_1`.
-
-  `Default no`
-
-$ossec_syscheck_report_changes_directories_1
-  Report file changes. This is limited to text files at this time.
 
   `Default no`
 
@@ -410,70 +614,93 @@ $ossec_syscheck_directories_2
 
   `Default '/etc,/usr/bin,/usr/sbin'`
 
+  `Type String`
+
 $ossec_syscheck_realtime_directories_2
   This will enable real-time/continuous monitoring on directories listed on `ossec_syscheck_directories_2`. Real time only works with directories, not individual files.
 
   `Default no`
+
+  `Type String`
 
 $ossec_syscheck_whodata_directories_2
   This will enable who-data monitoring on directories listed on `ossec_syscheck_directories_2`.
 
   `Default no`
 
+  `Type String`
+
 $ossec_syscheck_report_changes_directories_2
   Report file changes. This is limited to text files at this time.
 
   `Default no`
+
+  `Type String`
 
 $ossec_syscheck_ignore_list
   List of files or directories to be ignored. Ignored files and directories are still scanned, but the results are not reported.
 
   `Default ['/etc/mtab','/etc/hosts.deny','/etc/mail/statistics','/etc/random-seed','/etc/random.seed','/etc/adjtime','/etc/httpd/logs','/etc/utmpx','/etc/wtmpx','/etc/cups/certs','/etc/dumpdates','/etc/svc/volatile','/sys/kernel/security','/sys/kernel/debug','/dev/core',]`
 
+  `Type List`
+
 $ossec_syscheck_ignore_type_1
   Simple regex pattern to filter out files.
 
   `Default '^/proc'`
+
+  `Type String`
 
 $ossec_syscheck_ignore_type_2
   Another simple regex pattern to filter out files.
 
   `Default '.log$|.swp$'`
 
-$ossec_syscheck_max_eps
-  Sets the maximum event reporting throughput. Events are messages that will produce an alert.
-
-  `Default 100`
+  `Type String`
 
 $ossec_syscheck_process_priority
   Sets the nice value for Syscheck process.
 
   `Default 10`
 
+  `Type String`
+
 $ossec_syscheck_synchronization_enabled
   Specifies whether there will be periodic inventory synchronizations or not.
 
   `Default yes`
+
+  `Type String`
 
 $ossec_syscheck_synchronization_interval
   Specifies the initial number of seconds between every inventory synchronization. If synchronization fails the value will be duplicated until it reaches the value of `max_interval`.
 
   `Default 5m`
 
+  `Type String`
+
 $ossec_syscheck_synchronization_max_eps
   Sets the maximum synchronization message throughput.
 
   `Default 10`
+
+  `Type String`
 
 $ossec_syscheck_synchronization_max_interval
   Specifies the maximum number of seconds between every inventory synchronization.
 
   `Default 1h`
 
+  `Type String`
+
 $ossec_syscheck_skip_nfs
   Specifies if syscheck should scan network mounted filesystems. This option works on Linux and FreeBSD systems. Currently, `skip_nfs` will exclude checking files on CIFS or NFS mounts.
 
   `Default yes`
+
+  `Type String`
+
+
 
 .. _ref_server_vars_syslog_output:
 
