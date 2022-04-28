@@ -2,8 +2,8 @@
 
 .. _kibana_configure_indices:
 
-Configure indices
-====================
+Indices configuration
+=====================
 
 This section describes the process of configuring the name of the indices that Elasticsearch generates to store the Wazuh alerts and use them for visualizations on the Wazuh Kibana plugin.
 
