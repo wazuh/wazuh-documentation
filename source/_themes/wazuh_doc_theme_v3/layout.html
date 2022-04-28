@@ -218,7 +218,9 @@
     
     {#- FAVICON -#}
     {%- if favicon %}
-    <link rel="shortcut icon" href="{{ pathto('_static/images/' + favicon, 1) }}"/>
+    <link rel="icon" href="{{ pathto('_static/images/' + favicon, 1) }}" media="(prefers-color-scheme:no-preference)"/>
+    <link rel="icon" href="{{ pathto('_static/images/dark-' + favicon, 1) }}" media="(prefers-color-scheme:dark)"/>
+    <link rel="icon" href="{{ pathto('_static/images/' + favicon, 1) }}" media="(prefers-color-scheme:light)"/>
     {% endif -%}
 
     {%- if production -%}
