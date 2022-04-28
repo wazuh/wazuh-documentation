@@ -270,7 +270,7 @@ The number of replicas can be changed dynamically using the Elasticsearch API. I
     }
   }'
 
-More information about configuring shards and replicas can be found in the :ref:`Wazuh dashboard configuration section <kibana_config_file>`.
+More information about configuring shards and replicas can be found in the Wazuh dashboard configuration section.
 
 Reference:
 
