@@ -277,21 +277,34 @@ This communication protocol is used by all cluster nodes to synchronize the nece
 |                   |             | - Node type<str>      |                                                                                                 |
 |                   |             | - Wazuh version<str>  |                                                                                                 |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
-| ``syn_i_w_m_p``   | Master      | None                  | - Ask permission to start synchronization protocol. Message characters define the action to do: |
-|                   |             |                       | - I (integrity), A (agent-info).                                                                |
-| ``syn_a_w_m_p``   |             |                       | - W (worker), M (master), P (permission).                                                       |
+| ``syn_i_w_m_p``   | Master      | None                  | Ask permission to start synchronization protocol. Message characters define the action to do:   |
+| ``syn_g_w_m_p``   |             |                       |                                                                                                 |
+| ``syn_a_w_m_p``   |             |                       | - I (integrity), G (agent-groups sync), A (agent-info).                                         |
+|                   |             |                       | - W (worker), M (master), P (permission).                                                       |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
-| ``syn_i_w_m``     | Master      | - None or             | - Start synchronization protocol. Message characters define the action to do:                   |
-|                   |             |   String ID<str>      | - I (integrity), A (agent-info).                                                                |
-| ``syn_a_w_m``     |             |                       | - W (worker), M (master).                                                                       |
+| ``syn_i_w_m``     | Master      | None or String ID<str>| Start synchronization protocol. Message characters define the action to do:                     |
+| ``syn_g_w_m``     |             |                       |                                                                                                 |
+| ``syn_a_w_m``     |             |                       | - I (integrity), G (agent-groups sync), A (agent-info).                                         |
+|                   |             |                       | - W (worker), M (master).                                                                       |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
-| ``syn_i_w_m_e``   | Master      | None                  | - End synchronization protocol. Message characters define the action to do:                     |
-|                   |             |                       | - I (integrity), W (worker), M (master), E(end)                                                 |
+| ``syn_i_w_m_e``   | Master      | None or String ID<str>| End synchronization protocol. Message characters define the action to do:                       |
+| ``syn_w_g_e``     |             |                       |                                                                                                 |
+| ``syn_wgc_e``     |             |                       | - I (integrity), G (agent-groups send), C (agent-groups send full).                             |
+|                   |             |                       | - W (worker), M (master), E(end)                                                                |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
-| ``syn_i_w_m_r``   | Master      | None                  | - Notify an error during synchronization. Message characters define the action to do:           |
-|                   |             |                       | - I (integrity), W (worker), M (master), R(error).                                              |
+| ``syn_g_m_w``     | Worker      | Agent-groups          | Start synchronization protocol. Message characters define the action to do:                     |
+| ``syn_g_m_w_c``   |             | data<dict>            |                                                                                                 |
+|                   |             |                       | - G (agent-groups recv), C (agent-groups recv full).                                            |
+|                   |             |                       | - W (worker), M (master).                                                                       |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
-| ``sendsync``      | Master      | - Arguments<Dict>     | Receive a message from a worker node destined for the specified daemon of the master node.      |
+| ``syn_i_w_m_r``   | Master      | Error msg<str>        | Notify an error during synchronization. Message characters define the action to do:             |
+| ``syn_w_g_err``   |             |                       |                                                                                                 |
+| ``syn_wgc_err``   |             |                       | - I (integrity), G (agent-groups send), C (agent-groups send full).                             |
+|                   |             |                       | - W (worker), M (master), R/ERR (error).                                                        |
++-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
+| ``syn_m_g_err``   | Worker      | Error msg<str>        | Notify an error during agent-groups recv synchronization.                                       |
++-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
+| ``sendsync``      | Master      | Arguments<Dict>       | Receive a message from a worker node destined for the specified daemon of the master node.      |
 |                   |             |                       |                                                                                                 |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
 | ``sendsyn_res``   | Worker      | - Request ID<str>     | Notify the ``sendsync`` response is available.                                                  |
@@ -300,11 +313,11 @@ This communication protocol is used by all cluster nodes to synchronize the nece
 | ``sendsyn_err``   | Both        | - Local client ID<str>| Notify errors in the ``sendsync`` communication.                                                |
 |                   |             | - Error message<str>  |                                                                                                 |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
-| ``get_nodes``     | Master      | - Arguments<Dict>     | Request sent from ``cluster_control -l`` from worker nodes.                                     |
+| ``get_nodes``     | Master      | Arguments<Dict>       | Request sent from ``cluster_control -l`` from worker nodes.                                     |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
-| ``get_health``    | Master      | - Arguments<Dict>     | Request sent from ``cluster_control -i`` from worker nodes.                                     |
+| ``get_health``    | Master      | Arguments<Dict>       | Request sent from ``cluster_control -i`` from worker nodes.                                     |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
-| ``dapi_clus``     | Master      | - Arguments<Dict>     | Receive an API call related to cluster information: Get nodes information or healthcheck.       |
+| ``dapi_clus``     | Master      | Arguments<Dict>       | Receive an API call related to cluster information: Get nodes information or healthcheck.       |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
 | ``dapi``          | Both        | - Sender node<str>    | Receive a distributed API request. If the API call has been forwarded multiple times,           |
 |                   |             | - Arguments<Dict>     | the sender node contains multiple names separated by a ``*`` character.                         |
@@ -324,10 +337,10 @@ This communication protocol is used by all cluster nodes to synchronize the nece
 |                   |             | - Filename<str>       | If master had issues sending/processing/receiving worker integrity an error message will be     |
 |                   |             |                       | sent instead of the task name and filename.                                                     |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
-| ``syn_m_a_e``     | Worker      | - Arguments<Dict>     | Master has finished updating agent-info. Number of updated chunks and chunks with               |
+| ``syn_m_a_e``     | Worker      | Arguments<Dict>       | Master has finished updating agent-info. Number of updated chunks and chunks with               |
 |                   |             |                       | errors (if any) will be sent.                                                                   |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
-| ``syn_m_a_err``   | Worker      | - Error msg<str>      | Notify an error during agent-info synchronization.                                              |
+| ``syn_m_a_err``   | Worker      | Error msg<str>        | Notify an error during agent-info synchronization.                                              |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
 
 
