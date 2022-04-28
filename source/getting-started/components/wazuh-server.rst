@@ -30,7 +30,7 @@ The diagram below represents the server architecture and components:
 Server components
 ^^^^^^^^^^^^^^^^^
 
-The Wazuh server comprises several components listed below that have different functions, such as enrolling new agents, validating each agent's identity, and encrypting the communications between the Wazuh agent and the Wazuh server
+The Wazuh server comprises several components listed below that have different functions, such as enrolling new agents, validating each agent identity, and encrypting the communications between the Wazuh agent and the Wazuh server
 
 - **Agent enrollment service:** It is used to enroll new agents. This service provides and distributes unique authentication keys to each agent. The process runs as a network service and supports authentication via TLS/SSL certificates or by providing a fixed password.
 
