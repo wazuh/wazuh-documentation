@@ -95,8 +95,11 @@ All components included in this virtual image are configured to work out-of-the-
   
   - Filebeat-OSS: ``/etc/filebeat/filebeat.yml``
   
-  - Wazuh dashboard: ``/etc/wazuh-dashboard/opensearch_dashboards.yml``
+  - Wazuh dashboard: 
 
+     - ``/etc/wazuh-dashboard/opensearch_dashboards.yml``
+
+     - ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml``
 
 VirtualBox time configuration
 -----------------------------
@@ -116,4 +119,3 @@ Upgrading the VM
 The virtual machine can be upgraded as a traditional installation:
 
   - :ref:`Upgrading the Wazuh manager <upgrading_wazuh_server>`
-  - :ref:`Upgrading Open Distro for Elasticsearch <upgrading_open_distro>`
