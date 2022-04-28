@@ -43,7 +43,8 @@ However, this hardware configuration can be modified depending on the number of 
 Import and access the virtual machine
 -------------------------------------
 
-First, import the OVA to the virtualization platform and start the machine. 
+First, import the OVA to the virtualization platform and start the machine.
+
 When the virtual machine is accessed through the virtualization platform, either of the following system users can be used to log in:
  
 
@@ -100,7 +101,7 @@ All components included in this virtual image are configured to work out-of-the-
 VirtualBox time configuration
 -----------------------------
 
-In the case of using VirtualBox, once the virtual machine is imported, it may run into issues caused by time skew when VirtualBox synchronizes the time of the guest machine. To avoid this situation, enable the ``Hardware Clock in UTC Time`` option in the ``System`` tab of the virtual machine configuration.
+In case of using VirtualBox, once the virtual machine is imported it may run into issues caused by time skew when VirtualBox synchronizes the time of the guest machine. To avoid this situation, enable the ``Hardware Clock in UTC Time`` option in the ``System`` tab of the virtual machine configuration.
 
 .. note::
   By default, the network interface type is set to Bridged Adapter. The VM will attempt to obtain an IP address from the network DHCP server. Alternatively, a static IP address can be set by configuring the appropriate network files in the CentOS operating system on which the VM is based.
@@ -115,4 +116,4 @@ Upgrading the VM
 The virtual machine can be upgraded as a traditional installation:
 
   - :ref:`Upgrading the Wazuh manager <upgrading_wazuh_server>`
-  - :ref:`Migrating to the Wazuh indexer <migration_guide_indexer>`
+  - :ref:`Upgrading Open Distro for Elasticsearch <upgrading_open_distro>`
