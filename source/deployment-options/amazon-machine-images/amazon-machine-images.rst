@@ -3,10 +3,12 @@
 .. meta::
   :description: The pre-built Wazuh Amazon Machine Image includes all Wazuh components ready-to-use. Test all Wazuh capabilities with our AMI.  
 
-.. _amazon-machine-images:
-
 Amazon Machine Images (AMI)
 ===========================
+
+.. warning::
+
+   The AMI for Wazuh 4.3 is in the process of being published. It will be available soon in the AWS Marketplace.
 
 Wazuh provides a pre-built Amazon Machine Image (AMI). An AMI is a pre-configured template that is ready to use for creating a virtual computing environment within the Amazon Elastic Compute Cloud (Amazon EC2). The latest Wazuh AMI packages together Amazon Linux 2 with the following central components for your Wazuh server:
 
@@ -39,7 +41,7 @@ Launch an instance from the AWS Marketplace
 
 #. Review your configuration making sure that all settings are correct before launching the software. Adapt the default configuration values to your needs.
 
-    #. When selecting the **EC2 Instance Type**, we recommend that you use an instance type ``c5.2xlarge`` or similar. Check the :ref:`minimum and recommended requirements <installation_requirements>` for this type of instance.
+    #. When selecting the **EC2 Instance Type**, we recommend that you use an instance type ``c5.2xlarge``.
   
     #. When selecting the **Security Group**, it must be one with the appropriate :ref:`settings for your Wazuh instance <default_ports>` to guarantee the correct operation. You can create a new security group by choosing **Create new based on seller settings**. This new group will have the appropriate settings by default.
 
@@ -57,7 +59,7 @@ Deploy an instance using the AWS Management Console
 
 #. Review the Server product characteristics, then click **Continue**. This allows subscribing to our Server product.
 
-#. Select the instance type according to your needs, then click **Next: Configure Instance Details**. We recommend that you use an instance type ``c5.2xlarge`` or similar. Check the :ref:`minimum and recommended requirements <installation_requirements>` for this type of instance.
+#. Select the instance type according to your needs, then click **Next: Configure Instance Details**. We recommend that you use an instance type ``c5.2xlarge``.
 
 #. Configure your instance as needed, then click **Next: Add Storage**.
 
@@ -132,4 +134,3 @@ Upgrading the Wazuh server
 The Wazuh server in the instance can be upgraded as a traditional installation.
 
   - :ref:`Upgrading the Wazuh manager <upgrading_wazuh_server>`
-  - Upgrading the Wazuh indexer, Filebeat-OSS, and the Wazuh dashboard
