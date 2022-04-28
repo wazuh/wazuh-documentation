@@ -8,54 +8,35 @@ Wazuh agent class
 ``class wazuh::agent``
 ----------------------
 
+This contains variables that can be used to configure the Wazuh agent.
+
 .. _ref_agent_vars_ar:
 
 Active-Response variables
 -------------------------
 $configure_active_response
-  Enables rootcheck section render on this host.
+  Enables activeresponse on this host.
 
   `Default true`
+  `Type Boolean`
 
 $active_response_disabled
   Toggles the active-response capability on and off.
 
   `Default no`
+  `Type String`
 
 $active_response_ca_verification
-  This option enables or disables the WPK validation using the root CA certificate. If this parameter is set to `no` the agent will accept any WPK package coming from the manager.
+  This option enables or disables the WPK validation using the root CA certificate. If this parameter is set to no, the agent will accept any WPK package coming from the manager.
 
   `Default yes`
-
-$active_response_location
-  Indicates which system(s) the command should be executed on.
-
-  `Default undef`
-
-$active_response_level
-  Defines a minimum severity level required for the command to be executed.
-
-  `Default undef`
-
-$active_response_agent_id
-  Specifies the ID of the agent on which to execute the active response command (used when defined-agent is set).
-
-  `Default undef`
-
-$active_response_rules_id
-  Defines the rule group that a rule must belong to one for the command to be executed.
-
-  `Default []`
-
-$active_response_timeout
-  Specifies how long in seconds before the reverse command is executed. When `repeated_offenders` is used, `timeout` only applies to the first offense.
-
-  `Default undef`
+  `Type String`
 
 $active_response_repeated_offenders
   Sets timeouts in minutes for repeat offenders. This is a list of increasing timeouts that can contain a maximum of 5 entries.
 
   `Default []`
+
 
 .. _ref_agent_vars_enroll:
 
@@ -63,79 +44,123 @@ Agent enrollment variables
 --------------------------
 
 $wazuh_enrollment_enabled
-  Enables/disables agent enrollment.
+  Enables/disables agent enrollment. If this variable is not set to ‘yes’ the complete enrollment tag will not be added to `ossec.conf`.
 
   `Default undef`
+  `Type String`
 
 $wazuh_enrollment_manager_address
   Hostname or IP address of the manager where the agent will be enrolled.
 
   `Default undef`
+  `Type String`
 
 $wazuh_enrollment_port
   Specifies the port on the manager to send enrollment request.
 
   `Default undef`
+  `Type String`
+   
+   Depends on **wazuh_enrollment_enabled**
 
 $wazuh_enrollment_agent_name
   Agent name that will be used for enrollment.
 
   `Default undef`
+  `Type String`
+  
+   Depends on **wazuh_enrollment_enabled**
+
 
 $wazuh_enrollment_groups
   Groups name to which the agent belongs.
 
   `Default undef`
+  `Type String`
+  
+   Depends on **wazuh_enrollment_enabled**
 
 $wazuh_enrollment_agent_address
-  Force IP address from the agent. If this is not set manager will extract source IP address from enrollment message.
+  Force IP address from the agent. If this is not set, the manager will extract the source IP address from the enrollment message.
 
   `Default undef`
+  `Type String`
+  
+   Depends on **wazuh_enrollment_enabled**
 
 $wazuh_enrollment_ssl_cipher
   Override SSL used ciphers.
 
   `Default undef`
+  `Type String`
+  
+   Depends on **wazuh_enrollment_enabled**
 
 $wazuh_enrollment_server_ca_path
   Used for manager verification. If no CA certificate is set server will not be verified.
 
   `Default undef`
+  `Type String`
+  
+   Depends on **wazuh_enrollment_enabled**
 
 $wazuh_enrollment_agent_cert_path
   Required when agent verification is enabled in the manager.
 
   `Default undef`
+  `Type String`
+  
+   Depends on **wazuh_enrollment_enabled**
 
 $wazuh_enrollment_agent_key_path
   Required when agent verification is enabled in the manager.
 
   `Default undef`
+  `Type String`
+  
+   Depends on **wazuh_enrollment_enabled**
 
 $wazuh_enrollment_auth_pass
   Enrollment password.
 
   `Default undef`
+  `Type String`
+  
+   Depends on **wazuh_enrollment_enabled**
 
 $wazuh_enrollment_auth_pass_path
   Required when enrollment is using password verification.
 
   `Default '/var/ossec/etc/authd.pass'`
+  `Type String`
+  
+   Depends on **wazuh_enrollment_enabled**
 
 $wazuh_enrollment_auto_method
   Auto negotiates the most secure common SSL/TLS method with the manager, use “yes” for auto negotiate or “no” for TLS v1.2 only.
 
   `Default undef`
+  `Type String`
+  
+   Depends on **wazuh_enrollment_enabled**
 
 $wazuh_delay_after_enrollment
-  Time that agentd should wait after a successful registration.
+  Specifies the time agents should wait after a successful registration.
 
+   Related parameter :doc:`delay_after_enrollment <https://documentation.wazuh.com/current/user-manual/reference/ossec-conf/client.html#delay-after-enrollment>`
+        
   `Default undef`
+  `Type String`
+  
+   Depends on **wazuh_enrollment_enabled**
 
 $wazuh_enrollment_use_source_ip
   Force manager to compute IP address from agent message.
 
   `Default undef`
+  `Type String`
+  
+   Depends on **wazuh_enrollment_enabled**
 
 .. _ref_agent_vars_client:
 
@@ -145,49 +170,62 @@ Client variables
 $wazuh_reporting_endpoint
   Specifies the IP address or the hostname of the Wazuh manager to report.
 
+  `Default undef`
+  `Type String`
+  
 $wazuh_register_endpoint
-  Specifies the IP address or the hostname of the Wazuh manager to register against.
+  Specifies the IP address or the hostname of the Wazuh manager to register against. It is used to run the **agent-auth** tool.
+
+  `Type String`
 
 $ossec_port
   Specifies the port to send events to the manager. This must match the associated listening port configured on the Wazuh manager.
 
   `Default 1514`
+  `Type String`
 
 $ossec_protocol
   Specifies the protocol to use when connecting to the manager.
 
   `Default tcp`
-
+  `Type String`
+  
 $wazuh_max_retries
   Number of connection retries.
 
   `Default 5`
-
+  `Type String`
+  
 $wazuh_retry_interval
   Time interval between connection attempts (seconds).
 
   `Default 5`
-
+  `Type String`
+  
 $ossec_notify_time
   Specifies the time in seconds between agent check-ins to the manager.
 
   `Default 10`
-
+  `Type String`
+  
 $ossec_time_reconnect
   Specifies the time in seconds before a reconnection is attempted. This should be set to a higher number than the `notify_time` parameter.
 
   `Default 60`
+  `Type String`
 
 $ossec_auto_restart
   Toggles on and off the automatic restart of agents when a new valid configuration is received from the manager.
 
   `Default yes`
+  `Type String`
 
 $ossec_crypto_method
   Choose the encryption of the messages that the agent sends to the manager.
 
   `Default aes`
-
+  `Type String`
+  
 $client_buffer_queue_size
   Sets the capacity of the agent buffer in number of events.
 
@@ -197,9 +235,8 @@ $client_buffer_events_per_second
   Specifies the number of events that can be sent to the manager per second.
 
   `Default 500`
+  `Type String`
 
-$ossec_config_profiles
-  Specify the agent.conf profile(s) to be used by the agent.
 
 .. _ref_agent_vars_localfile:
 
@@ -209,7 +246,9 @@ Localfile variables
 $ossec_local_files
   Files list for log analysis
 
-  This files are listed in params_agent.pp in section $default_local_files
+  These files are listed in params_agent.pp in section $default_local_files. If a change is needed it should be modified in the params_agent.pp.
+
+  Default depends on the OS family.
 
 .. _ref_agent_vars_rootcheck:
 
@@ -220,81 +259,97 @@ $configure_rootcheck
   Enables rootcheck section render on this host.
 
   `Default true`
+  `Type Boolean`
 
 $ossec_rootcheck_disabled
   Disable rootcheck on this host (Linux).
 
   `Default no`
+  `Type String`
 
 $ossec_rootcheck_check_files
   Enable rootcheck checkfiles option.
 
   `Default yes`
+  `Type String`
 
 $ossec_rootcheck_check_trojans
   Enable rootcheck checktrojans option.
 
   `Default yes`
+  `Type String`
 
 $ossec_rootcheck_check_dev
   Enable rootcheck checkdev option.
 
   `Default yes`
+  `Type String`
 
 $ossec_rootcheck_check_sys
   Enable rootcheck checksys option.
 
   `Default yes`
+  `Type String`
 
 $ossec_rootcheck_check_pids
   Enable rootcheck checkpids option.
 
   `Default yes`
+  `Type String`
 
 $ossec_rootcheck_check_ports
   Enable rootcheck checkports option.
 
   `Default yes`
+  `Type String`
 
 $ossec_rootcheck_check_if
   Enable rootcheck checkif option.
 
   `Default yes`
+  `Type String`
 
 $ossec_rootcheck_frequency
   How often the rootcheck scan will run (in seconds).
 
   `Default 36000`
+  `Type String`
 
 $ossec_rootcheck_ignore_list
   List of files or directories to be ignored. These files and directories will be ignored during scans.
 
   `Default []`
+  `Type List`
 
 $ossec_rootcheck_rootkit_files
   Change the location of the rootkit files database.
 
-  `Default 'etc/shared/rootkit_files.txt'`
+  `Default '/var/ossec/etc/shared/rootkit_files.txt'`
+  `Type String`
 
 $ossec_rootcheck_rootkit_trojans
   Change the location of the rootkit trojans database.
 
   `Default 'etc/shared/rootkit_trojans.txt'`
+  `Type String`
 
 $ossec_rootcheck_skip_nfs
   Enable or disable the scanning of network mounted filesystems (Works on Linux and FreeBSD). Currently, skip_nfs will exclude checking files on CIFS or NFS mounts.
 
   `Default yes`
+  `Type String`
 
 $ossec_rootcheck_system_audit
   Specifies the path to an audit definition file for Unix-like systems.
 
   `Default []`
+  `Type List`
 
 $ossec_rootcheck_windows_disabled
   Disables rootcheck if host has Windows OS.
 
   `Default no`
+  `Type String`
 
 $ossec_rootcheck_windows_windows_apps
   Specifies the path to a Windows application definition file.
@@ -304,7 +359,9 @@ $ossec_rootcheck_windows_windows_apps
 $ossec_rootcheck_windows_windows_malware
   Specifies the path to a Windows malware definitions file.
 
-  `Default './shared/win_malware_rcl.txt'`
+  `Default './shared/win_applications_rcl.txt'`
+  `Type String`
+
 
 .. _ref_agent_vars_sca:
 
@@ -315,61 +372,69 @@ $configure_sca
   Enables SCA section render on this host.
 
   `Default true`
-
-$configure_sca
-  Enables sca section render on this host.
-
-  `Default true`
+  `Type boolean`
 
 $sca_amazon_enabled
   Enable SCA on this host (Amazon Linux 2).
 
   `Default yes`
+  `Depends on configure_sca and apply_template_os`
 
 $sca_amazon_scan_on_start
   The SCA module will perform the scan immediately when started (Amazon Linux 2).
 
   `Default yes`
+  `Depends on configure_sca and apply_template_os`
 
 $sca_amazon_interval
   Interval between module executions.
 
   `Default 12h`
+  `Depends on configure_sca and apply_template_os`
 
 $sca_amazon_skip_nfs
-  Enable or disable the scanning of network mounted filesystems (Works on Linux and FreeBSD). Currently, `skip_nfs` will exclude checking files on CIFS or NFS mounts.
+  Enable or disable the scanning of network mounted filesystems (Works on Linux and FreeBSD). Currently, skip_nfs will exclude checking files on CIFS or NFS mounts.
 
   `Default yes`
+  `Depends on configure_sca and apply_template_os`
 
 $sca_amazon_policies
   A list of policies to run assessments can be included in this section.
 
   `Default []`
+  `Depends on configure_sca and apply_template_os`
 
 $sca_rhel_enabled
   Enable SCA on this host (RHEL).
 
-  `Default yes`
+  `Default true`
+  `Type Boolean`
+  `Depends on configure_sca and apply_template_os`
 
 $sca_rhel_scan_on_start
   The SCA module will perform the scan immediately when started (RHEL).
 
   `Default yes`
+  `Type String`
+  `Depends on configure_sca and apply_template_os`
 
 $sca_rhel_interval
   Interval between module executions.
 
   `Default 12h`
+  `Depends on configure_sca and apply_template_os`
 
 $sca_rhel_skip_nfs
-  Enable or disable the scanning of network mounted filesystems (Works on Linux and FreeBSD). Currently, `skip_nfs` will exclude checking files on CIFS or NFS mounts.
+  Enable or disable the scanning of network mounted filesystems (Works on Linux and FreeBSD). Currently, skip_nfs will exclude checking files on CIFS or NFS mounts.
 
   `Default yes`
+  `Depends on configure_sca and apply_template_os`
 
 $sca_rhel_policies
   A list of policies to run assessments can be included in this section.
 
   `Default []`
+  `Depends on configure_sca and apply_template_os`
 
 $sca_else_enabled
   Enable SCA on this host (Linux).
@@ -380,21 +445,26 @@ $sca_else_scan_on_start
   The SCA module will perform the scan immediately when started (Linux).
 
   `Default yes`
+  `Depends on configure_sca and apply_template_os`
 
 $sca_else_interval
   Interval between module executions.
 
   `Default 12h`
+  `Depends on configure_sca and apply_template_os`
 
 $sca_else_skip_nfs
   Enable or disable the scanning of network mounted filesystems (Works on Linux and FreeBSD). Currently, `skip_nfs` will exclude checking files on CIFS or NFS mounts.
 
   `Default yes`
+  `Depends on configure_sca and apply_template_os`
 
 $sca_else_policies
   A list of policies to run assessments can be included in this section.
 
   `Default []`
+  `Depends on configure_sca and apply_template_os`
+
 
 .. _ref_agent_vars_syscheck:
 
