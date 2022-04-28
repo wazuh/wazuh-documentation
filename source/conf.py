@@ -144,7 +144,9 @@ if html_theme == 'wazuh_doc_theme_v3':
     html_theme_options['is_pre_v3'] = is_pre_v3
     
     # Allow dark mode is set to false by default
-    # html_theme_options['include_mode'] = False
+    html_theme_options['include_mode'] = True
+    # Allow switching between modes is set to false by default
+    # html_theme_options['include_mode_switch'] = True
 
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = ['_themes']
@@ -625,6 +627,7 @@ def setup(app):
     app.connect('html-page-context', collect_compiled_pagename)
     app.connect('html-page-context', insert_inline_style)
     if html_theme == 'wazuh_doc_theme_v3':
+        app.connect('html-page-context', insert_inline_js)
         app.connect('html-page-context', manage_assets)
     app.connect('build-finished', finish_and_clean)
 
@@ -636,6 +639,20 @@ def insert_inline_style(app, pagename, templatename, context, doctree):
     with open(google_fonts_path, 'r') as reader:
         google_fonts = reader.read()
         context['inline_fonts'] = google_fonts
+
+def insert_inline_js(app, pagename, templatename, context, doctree):
+    ''' Runs once per page, inserting the content of minified javascript snippets into the context '''
+    path = os.path.join(os.path.dirname(os.path.realpath(__file__)), theme_assets_path, 'static', 'js', 'inline')
+    js_scripts = ['light-dark-mode-inline']
+    inline_scripts = []
+    
+    for script in js_scripts:
+        script_path = os.path.join(path, script + '.min.js')
+    
+        # Inline scripts
+        with open(script_path, 'r') as reader:
+            inline_scripts.append(reader.read())
+    context['inline_scripts'] = inline_scripts
 
 def manage_assets(app, pagename, templatename, context, doctree):
     theme_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), theme_assets_path)

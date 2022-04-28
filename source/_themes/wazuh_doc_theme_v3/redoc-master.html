@@ -25,7 +25,7 @@
       {% endblock latest %}
       <div class="header-left">
         {% include "template-parts/brand.html" %}
-        {% if theme_include_mode|tobool %}
+        {% if theme_include_mode|tobool and theme_include_mode_switch|tobool %}
         {% include "template-parts/light-dark-switch.html" %}
         {% endif %}
       </div>
