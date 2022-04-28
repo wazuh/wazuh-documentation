@@ -219,9 +219,9 @@
     {#- FAVICON -#}
     {%- if favicon %}
     <link rel="mask-icon" href="{{ pathto('_static/images/favicon.svg', 1) }}" color="#000000">
-    <link rel="icon" href="{{ pathto('_static/images/' + favicon, 1) }}" media="(prefers-color-scheme:no-preference)"/>
-    <link rel="icon" href="{{ pathto('_static/images/dark-' + favicon, 1) }}" media="(prefers-color-scheme:dark)"/>
-    <link rel="icon" href="{{ pathto('_static/images/' + favicon, 1) }}" media="(prefers-color-scheme:light)"/>
+    <link rel="icon" href="{{ pathto('_static/images/favicon.png', 1) }}" media="(prefers-color-scheme:no-preference)" type="image/png"/>
+    <link rel="icon" href="{{ pathto('_static/images/dark-favicon.png', 1) }}" media="(prefers-color-scheme:dark)" type="image/png"/>
+    <link rel="icon" href="{{ pathto('_static/images/favicon.png', 1) }}" media="(prefers-color-scheme:light)" type="image/png"/>
     {% endif -%}
 
     {%- if production -%}
