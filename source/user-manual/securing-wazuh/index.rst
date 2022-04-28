@@ -14,6 +14,7 @@ This document will give instructions to secure your Wazuh deployments.
         :maxdepth: 1
 
         wazuh-indexer
-        ../api/securing-api
         opendistro
         elastic-stack
+
+Here you can find how to secure the :doc:`Wazuh API <../api/securing-api>`.

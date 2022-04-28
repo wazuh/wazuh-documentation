@@ -14,7 +14,7 @@ We  provide a script to simplify the process of changing passwords, start by dow
 
   .. code-block:: console
   
-    # curl -so wazuh-passwords-tool.sh https://packages-dev.wazuh.com/|WAZUH_LATEST_MINOR|/wazuh-opendistro-passwords-tool.sh
+    # curl -so wazuh-opendistro-passwords-tool https://packages-dev.wazuh.com/|WAZUH_LATEST_MINOR|/wazuh-opendistro-passwords-tool.sh
 
 The script allows changing the password for either a single user or all the users present on the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. It also offers the option to change the password of more than one user at once, getting them from a formatted file. All the available options to run the script are:
 
@@ -43,7 +43,7 @@ Change password for single user
 
   .. code-block:: console
   
-    # bash wazuh-passwords-tool.sh -u admin -p mypassword
+    # bash wazuh-opendistro-passwords-tool -u admin -p mypassword
 
 This is the output of the script:
 
@@ -64,7 +64,7 @@ To generate and change passwords for all users, run the script with the ``-a`` o
 
 .. code-block:: console
 
-  # bash wazuh-passwords-tool.sh -a
+  # bash wazuh-opendistro-passwords-tool -a
 
 This is the output of the script:
 
