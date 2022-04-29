@@ -17,22 +17,25 @@
   }
 
   .link-boxes-item {
-    position: relative;
-    box-sizing: border-box;
-    min-width: 70px;
-    max-width: 150px;
-    padding: 0;
-    overflow: hidden;
-    border: 2px solid;
-    border-radius: 10px;
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
     img {
       display: inline-block;
       margin-bottom: 0;
       margin-top: 0;
+      border: none;
     }
 
     a {
+      position: relative;
+      box-sizing: border-box;
+      min-width: 70px;
+      max-width: 150px;
+      padding: 0;
+      overflow: hidden;
+      border: 2px solid;
+      border-radius: $rounded-corners;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -67,9 +70,9 @@
 
 /* Light theme -------------------------------------------------------------- */
 
-body {
+.light-theme {
   .link-boxes-group {
-    .link-boxes-item {
+    .link-boxes-item a {
       border-color: $light-color-border-deeper;
       &:hover {
         border-color: $light-color-primary;
@@ -86,7 +89,7 @@ body {
 
 .dark-theme {
   .link-boxes-group {
-    .link-boxes-item {
+    .link-boxes-item a {
       background-color: #fff;
       border-color: $dark-color-border-deeper;
       &:hover {

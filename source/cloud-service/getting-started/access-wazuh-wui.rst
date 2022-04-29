@@ -30,4 +30,4 @@ If you have any questions about the Wazuh Cloud, see the :ref:`Cloud service FAQ
 Next steps
 ----------
 
-Your Wazuh Cloud environment is ready and you can install a Wazuh agent on every endpoint to be monitored. To learn how to install agents, check :ref:`Register agents <cloud_register_agents>` section.
+Your Wazuh Cloud environment is ready, and you can install a Wazuh agent on every endpoint to be monitored. To learn how to install agents, check the :ref:`Register agents <cloud_register_agents>` section.

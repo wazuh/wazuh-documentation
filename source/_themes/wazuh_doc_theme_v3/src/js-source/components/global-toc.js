@@ -69,32 +69,11 @@ if ( $('#global-toc').length > 0 ) {
   }
 
   /* Empty Nodes ------------------------------------------------------------ */
-  /* List of empty nodes, containing only a toctree */
-  const emptyTocNodes = [
-    'amazon/configuration/index',
-    'compliance',
-    'containers',
-    'deployment',
-    'development/index',
-    'docker-monitor/index',
-    'installation-guide/elasticsearch-cluster/index',
-    'installation-guide/wazuh-cluster/index',
-    'installation-guide/upgrading/legacy/index',
-    'installation-guide/packages-list/linux/linux-index',
-    'installation-guide/packages-list/solaris/solaris-index',
-    'monitoring',
-    'user-manual/index',
-    'user-manual/agents/index',
-    'user-manual/agents/remove-agents/index',
-    'user-manual/agents/listing/index',
-    'user-manual/kibana-app/reference/index',
-    'user-manual/ruleset/ruleset-xml-syntax/index',
-    'installation-guide/distributed-deployment/step-by-step-installation/elasticsearch-cluster/index',
-    'installation-guide/distributed-deployment/step-by-step-installation/wazuh-cluster/index',
-    'user-manual/capabilities/active-response/ar-use-cases/index',
-  ];
 
-  markTocNodesWithClass(emptyTocNodes, 'empty-toc-node');
+  if ( emptyTocNodes ) {
+    markTocNodesWithClass(emptyTocNodes, 'empty-toc-node', '#global-toc');
+    $('#global-toc .current-toc-node').addClass('empty-toc-node');
+  }
 
   /* Behavior of the empty nodes: toggle */
   $('#global-toc .empty-toc-node').each(function() {
@@ -106,56 +85,31 @@ if ( $('#global-toc').length > 0 ) {
 
   /* Nodes to open in a new tab --------------------------------------------- */
   if ( useApiRedoc ) {
-    markTocNodesWithClass(newTabNodes, 'js-new-tab');
+    markTocNodesWithClass(newTabNodes, 'js-new-tab', '');
     $('.js-new-tab').attr('target', '_blank');
   }
 
-  /* Nodes with hidden subtrees --------------------------------------------- */
+  /* Nodes with hidden subtrees (pre 4.3) ----------------------------------- */
   /* list of nodes (by title) which will not show their subtree */
-  // const hideSubtreeNodes = [
-  //   'Install Wazuh manager on Linux',
-  //   'Install Wazuh agent on Linux',
-  // ].map(function(item) {
-  //   return item.toLowerCase();
-  // });
+  const hideSubtreeNodes = [
+    'Install Wazuh manager on Linux',
+    'Install Wazuh agent on Linux',
+  ].map(function(item) {
+    return item.toLowerCase();
+  });
 
-  // hideSubtree(hideSubtreeNodes);
+  hideSubtree(hideSubtreeNodes);
 
   /**
   * Hides from the global toctree the subtree of particular nodes specified in a list.
   * @param {array} nodeList List of nodes whose subtree should not be shown in the global toctree.
   */
-  // function hideSubtree(nodeList) {
-  //   $('#global-toc a').each(function() {
-  //     if (jQuery.inArray($(this).text().toLowerCase(), nodeList) !== -1) {
-  //       $(this).siblings().hide();
-  //       $(this).children('button').hide();
-  //     }
-  //   });
-  // }
-
-  /* Globa TOC utility functions -------------------------------------------- */
-  /**
-   * Gives the class stored in className to all nodes from nodeList that are present in the toctree.
-   * Function mainly used to mark the empty nodes (documents that contain only a toctree, without real content).
-   * Note: this might be improved in the future using a new builder or extension.
-   * @param {array} nodeList List of nodes in the toctree that needs to be marked with the class.
-   * @param {string} className Class to be applied to the nodes.
-   */
-  function markTocNodesWithClass(nodeList, className) {
-    let regex;
-    // const curLocation = location.href.split('#')[0];
-    nodeList.forEach(function(tocNode) {
-      markedNode = '.+\/' + tocNode + '.html';
-      regex = new RegExp(markedNode, 'g');
-      $('#global-toc a').each(function() {
-        const href = $(this).prop('href').split('#')[0];
-        // const isCurrent = (href === curLocation);
-        /* The selected menu link in the globaltoc acts as the toggle button, showing on and off its subtree */
-        if (regex.test(href)) {
-          $(this).addClass(className);
-        }
-      });
+  function hideSubtree(nodeList) {
+    $('#global-toc a').each(function() {
+      if (jQuery.inArray($(this).text().toLowerCase(), nodeList) !== -1) {
+        $(this).siblings().hide();
+        $(this).children('button').hide();
+      }
     });
   }
 }

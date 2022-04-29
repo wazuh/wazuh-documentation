@@ -17,6 +17,11 @@
     margin-top: -1rem;
     content: "";
   }
+
+  > dl {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
 }
 
 #central-column * {
@@ -48,6 +53,10 @@
     margin: 0;
   }
 
+  img {
+    border: 10px solid $color-img-border;
+  }
+
   strong {
     font-weight: 600;
   }
@@ -62,6 +71,11 @@
     p {
       margin-top: 0;
     }
+  }
+  
+  ol,
+  ul {
+    padding-left: 35px;
   }
 
   .arabic {
@@ -79,6 +93,23 @@
   .upperroman {
     list-style-type: upper-roman;
   }
+  
+  /* Special case for nested autonumbered lists,
+  though this will affect all types of lists */
+  :not(li) {
+    > .arabic > li > .arabic {
+      list-style-type: lower-alpha;
+      > li > .arabic {
+        list-style-type: lower-roman;
+        > li > .arabic {
+          list-style-type: upper-alpha;
+          > li > .arabic {
+            list-style-type: upper-roman;
+          }
+        }
+      }
+    }
+  }
 
   caption {
     padding: 8px;
@@ -90,7 +121,7 @@
 
 /* Light theme -------------------------------------------------------------- */
 
-body {
+.light-theme {
   [role="main"] {
     caption {
       border-color: $light-color-table-border;

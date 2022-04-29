@@ -15,6 +15,7 @@
 @import "../components/lightbox";
 @import "../components/link-boxes";
 @import "../components/previous-next";
+@import "pre-v3";
 
 #central-column {
   padding-top: $breadcrumbs-height-xl;
@@ -55,6 +56,13 @@
   .align-right {
     display: table;
     margin-left: auto;
+  }
+
+  .topic-title {
+    font-weight: 600;
+    font-size: 20px;
+    margin-top: 2em;
+    margin-bottom: 0.5em;
   }
 
   dl {
@@ -251,8 +259,8 @@
 
       p,
       ul {
-        margin-top: .5rem;
-        margin-bottom: .5rem;
+        margin-top: .3rem;
+        margin-bottom: .3rem;
       }
 
       &.release-notes {
@@ -383,7 +391,7 @@
 
 /* Light theme -------------------------------------------------------------- */
 
-body {
+.light-theme {
   [role="main"] {
     .headerlink {
       &::after {

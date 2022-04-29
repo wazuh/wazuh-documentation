@@ -8,7 +8,7 @@
 Regulatory compliance
 =====================
 
-The Wazuh platform is often used to meet the technical aspects of regulatory compliance standards. Wazuh not only uses its SIEM capabilities to centralize, analyze and enrich security data, but also provides the necessary security controls, such as intrusion detection, configuration assessment, log analysis, and vulnerability detection to meet compliance requirements.
+Wazuh uses its SIEM capabilities to centralize, analyze and enrich security data. In addition, it provides security controls, such as intrusion detection, configuration assessment, log analysis, and vulnerability detection, to meet the technical aspects of regulatory compliance standards.
 
 The Wazuh rules are carefully mapped against compliance requirements to provide regulatory compliance support. This way, when an alert is generated (a rule condition has been matched), it automatically includes compliance information. Here is the list of currently supported standards:
 
@@ -34,7 +34,7 @@ Wazuh rules also include mapping with the MITRE ATT&CK framework, which is used 
     <group>access_denied,pci_dss_6.5.8,pci_dss_10.2.4,gdpr_IV_35.7.d,hipaa_164.312.b,nist_800_53_SA.11,nist_800_53_AU.14,nist_800_53_AC.7,tsc_CC6.6,tsc_CC7.1,tsc_CC6.1,tsc_CC6.8,tsc_CC7.2,tsc_CC7.3,</group>
   </rule>
 
-Expand the output to see an example alert for rule ``Apache: Attempt to access forbidden directory index.``.
+Expand the output to see an example alert for rule ``Apache: Attempt to access forbidden directory index``.
 
 .. code-block:: json
   :emphasize-lines: 18,29,32,35,40,44
@@ -112,7 +112,7 @@ Example of regulatory compliance dashboards:
     :title: NIST 800-53 compliance
     :align: center
 
-More information on how Wazuh helps meet compliance requirements can be found at:
+You can find more information on how Wazuh helps meet compliance requirements at:
 
 - :ref:`Using Wazuh for PCI DSS <pci_dss>`
 - :ref:`Using Wazuh for GDPR <gdpr>`

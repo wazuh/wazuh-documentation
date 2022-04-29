@@ -50,10 +50,10 @@ Below, you will find some examples of how to build a Wazuh virtual machine.
 
   # ./generate_ova.sh
 
-This will generate a Virtual machine with Wazuh manager |WAZUH_LATEST| and ELK |ELASTICSEARCH_LATEST| installed using production packages.
+This will generate a Virtual machine with the Wazuh manager |WAZUH_LATEST| and ELK |ELASTICSEARCH_LATEST| installed using production packages.
 
 .. code-block:: console
 
   # ./generate_ova.sh -r dev
 
-This will generate a Virtual machine with Wazuh manager |WAZUH_LATEST| and ELK |ELASTICSEARCH_LATEST| installed using development packages.
+This will generate a Virtual machine with the Wazuh manager |WAZUH_LATEST| and ELK |ELASTICSEARCH_LATEST| installed using development packages.

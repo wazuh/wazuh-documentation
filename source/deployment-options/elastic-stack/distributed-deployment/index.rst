@@ -1,33 +1,34 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about the distributed installation and configuration of the Wazuh server and Elastic Stack in this section of the Wazuh documentation. 
-  
-.. _basic_distributed_index:
-
+    :description: Learn more about the step-by-step installation of Wazuh and the installation of Elasticsearch cluster, Wazuh cluster and Kibana. Get started with Wazuh. 
+    
 Distributed deployment
 ======================
 
-This section guides through the distributed installation and configuration of the Wazuh server and Elastic Stack. The components will be installed on separate hosts. Kibana can be installed on the same server as the Elasticsearch node, or on a separate one. This type of deployment is appropriate for production environments as it provides the high availability and scalability of the services.
+The following sections provide information about how to install each involved component. During the Elasticsearch cluster installation, the certificates necessary to secure the communication will be created, so it is recommended to start by installing Elasticsearch.
 
-   .. thumbnail:: ../../../images/installation/distributed-no-title.png
-     :align: center
-     :width: 100%
+Every component described below will be installed on a dedicated host, except Kibana, which can be installed either on a dedicated host or along with Elasticsearch.
 
-The following components will be installed:
+- **Elasticsearch cluster**
+    
+    - :ref:`Elasticsearch single-node cluster <basic_elasticsearch_single_node_cluster>`
+    - :ref:`Elasticsearch multi-node cluster <basic_elasticsearch_multi_node_cluster>`
 
-- The Wazuh server, including the Wazuh manager as a single-node cluster or as a multi-node cluster, the Wazuh API, and Filebeat.
+- **Wazuh cluster**
 
-- Elastic Stack as a single-node cluster or as a multi-node cluster, and Kibana, including the Wazuh Kibana plugin, on the same host as Elasticsearch node or on a separate one.
+    - :ref:`Wazuh single-node cluster <basic_wazuh_single_node_cluster>`
+    - :ref:`Wazuh multi-node cluster <basic_wazuh_multi_node_cluster>`
 
+- **Kibana**
 
-The communication will be encrypted using certificates. To guarantee the expected performance of the Wazuh components all hosts must meet the hardware requirements described in the :ref:`requirements <installation_requirements>` section.
-
-The user can choose between step-by-step installation, a manual way of carrying out the process, or unattended installation, an automated way using a script:
+    - :ref:`Kibana installation <basic_kibana>`
 
 
 .. toctree::
-    :maxdepth: 1
+    :maxdepth: 2
+    :hidden:
 
-    unattended/index
-    step-by-step-installation/index
+    elasticsearch-cluster/index
+    wazuh-cluster/index
+    kibana/index

@@ -24,13 +24,13 @@ After the installation, the Wazuh manager and the Wazuh agent have defined a :re
 #. `Configuring where the database is to be stored`_
 #. `Configuring synchronization`_
 
-Syscheck component is configured both in the Wazuh manager's and in the Wazuh agent's :ref:`ossec.conf <reference_ossec_conf>` file. This capability can be also configured remotely using centralized configuration and the :ref:`agent.conf <reference_agent_conf>` file.
+Syscheck component is configured both in the Wazuh manager and in the Wazuh agent :ref:`ossec.conf <reference_ossec_conf>` file. This capability can be also configured remotely using centralized configuration and the :ref:`agent.conf <reference_agent_conf>` file.
 The list of all syscheck configuration options is available in the :ref:`syscheck <reference_ossec_syscheck>` section.
 
 Configuring syscheck - basic usage
 ----------------------------------
 
-To configure syscheck, a list of files and directories must be identified. The ``check_all`` attribute of the :ref:`directories <reference_ossec_syscheck_directories>` option allows checks of the file size, permissions, owner, last modification date, inode and all the hash sums (MD5, SHA1 and SHA256).
+To configure syscheck, a list of files and directories must be identified. The ``check_all`` attribute of the :ref:`directories <reference_ossec_syscheck_directories>` option allows checks of the file size, permissions, owner, last modification date, inode, and all the hash sums (MD5, SHA1, and SHA256).
 By default, syscheck scans selected directories, whose list depends on the :ref:`default configuration <reference_ossec_syscheck_default_configuration>` for the host's operating system.
 
 .. note::
@@ -98,7 +98,7 @@ Real-time monitoring is configured with the ``realtime`` attribute of the :ref:`
 Configuring who-data monitoring
 -------------------------------
 
-Who-data monitoring is configured with the ``whodata`` attribute of the :ref:`directories <reference_ossec_syscheck_directories>` option. This attribute replaces the ``realtime`` attribute, which means that ``whodata`` implies real-time monitoring but adding the who-data information.
+Who-data monitoring is configured with the ``whodata`` attribute of the :ref:`directories <reference_ossec_syscheck_directories>` option. This attribute replaces the ``realtime`` attribute, which means that ``whodata`` implies real-time monitoring but adds the who-data information.
 This functionality uses Linux Audit subsystem and the Microsoft Windows SACL, so additional configurations might be necessary. Check the :ref:`auditing who-data <auditing-whodata>` entry to get further information:
 
 .. code-block:: xml
@@ -108,7 +108,7 @@ This functionality uses Linux Audit subsystem and the Microsoft Windows SACL, so
   </syscheck>
 
 
-.. warning:: There is a known bug that affects to the versions 2.8.5 and 2.8.4 of ``audit`` that shows a directory as ``null`` when it has been moved adding a ``/`` at the end of the directory. This bug will cause that no alerts related with this directory will be shown until a new event related to this directory is triggered when ``whodata`` is enabled.
+.. warning:: There is a known bug that affects versions 2.8.5 and 2.8.4 of ``audit`` that shows a directory as ``null`` when it has been moved adding a ``/`` at the end of the directory. This bug will cause that no alerts related to this directory will be shown until a new event related to this directory is triggered when ``whodata`` is enabled.
 
 How to tune audit to deal with a huge amount of who-data events at the same time
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -185,7 +185,7 @@ To configure the Windows registries, it is necessary to create a list of those r
 Configuring reporting file and registry value changes
 -----------------------------------------------------
 
-To report the exact content that has been changed in a text file or in a Windows registry value, syscheck can be configured with the ``report_changes`` attribute of the :ref:`directories <reference_ossec_syscheck_directories>` or the :ref:`registries <reference_ossec_syscheck_windows_registry>` options. ``Report_changes`` should be used with caution as Wazuh copies every single monitored file to a private location.
+To report the exact content changed in a text file or a Windows registry value, syscheck can be configured with the ``report_changes`` attribute of the :ref:`directories <reference_ossec_syscheck_directories>` or the :ref:`registries <reference_ossec_syscheck_windows_registry>` options. ``Report_changes`` should be used with caution as Wazuh copies every single monitored file to a private location.
 
 In this example, by enabling the ``report_changes``, the alerts will show the changed content for all the text files in a listed directory and its subdirectories or for all values of a monitored Windows registry:
 
@@ -389,7 +389,7 @@ Using the following directory structure and ``recursion_level="3"``:
                   └── level_5
                       └── file_5.txt
 
-The alerts will be genarated for all files up to ``folder_test/level_1/level_2/level_3/`` but not for any files in the directory deeper than ``level_3``.
+The alerts will be generated for all files up to ``folder_test/level_1/level_2/level_3/`` but not for any files in the directory deeper than ``level_3``.
 
 To disable the recursion and generate the alerts only for the files in the monitored folder, the ``recursion_level`` value has to be set to 0.
 
@@ -402,7 +402,7 @@ To disable the recursion and generate the alerts only for the files in the monit
 Configuring syscheck process priority
 -------------------------------------
 
-To adjust syscheck CPU usage on the monitored system the :ref:`process_priority <reference_ossec_syscheck_process_priority>` option can be used. It sets the nice value for syscheck process. The default ``process_priority`` is set to 10.
+To adjust syscheck CPU usage on the monitored system, the :ref:`process_priority <reference_ossec_syscheck_process_priority>` option can be used. It sets the nice value for syscheck process. The default ``process_priority`` is set to 10.
 
 Setting ``process_priority`` value higher than the default, will give syscheck lower priority, less CPU resources and make it run slower. In the example below the nice value for syscheck process is set to maximum:
 
@@ -463,4 +463,4 @@ Configuring synchronization
     </synchronization>
   </syscheck>
 
-If the Wazuh agent is upgraded to the v3.12 and keeps its old configuration, the synchronization section will not be present in the ``ossec.conf`` file but the Wazuh agent will still use the default synchronization settings as shown above.
+If the Wazuh agent is upgraded to v3.12 and keeps its old configuration, the synchronization section will not be present in the ``ossec.conf`` file but the Wazuh agent will still use the default synchronization settings as shown above.

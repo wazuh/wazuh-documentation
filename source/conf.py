@@ -10,10 +10,12 @@
 
 import sys
 import os
+import glob
 import re
 import shlex
 import datetime
 import time
+import json
 from requests.utils import requote_uri
 
 # If extensions (or modules to document with autodoc) are in another directory,
@@ -130,6 +132,21 @@ html_theme_options = {
     'collapse_navigation': False, # Only for Wazuh documentation theme v2.0v
 }
 
+if html_theme == 'wazuh_doc_theme_v3':
+    # Check if the release was before the new the theme
+    # Note v3_release represents the release that was 'current' when the theme
+    # wazuh_doc_theme_v3 was published in production, that is, 4.3
+    v3_release = [4,3]
+    current_release = list(map(int, version.split('.')))
+    is_pre_v3 = current_release[0] < v3_release[0] or (
+                current_release[0] == v3_release[0] and
+                current_release[1] < v3_release[1])
+    html_theme_options['is_pre_v3'] = is_pre_v3
+    
+    # Allow dark mode is set to false by default
+    html_theme_options['include_mode'] = True
+    # Allow switching between modes is set to false by default
+    # html_theme_options['include_mode_switch'] = True
 
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = ['_themes']
@@ -448,7 +465,7 @@ custom_replacements = {
     "|CURRENT_MAJOR|" : "4.x",
     "|WAZUH_LATEST|" : "4.3.0",
     "|WAZUH_LATEST_MINOR|" : "4.3",
-    "|WAZUH_PACKAGES_BRANCH|" : "4.2",
+    "|WAZUH_PACKAGES_BRANCH|" : "4.3",
     "|WAZUH_INDEXER_CURRENT|" : "4.3.0",
     "|WAZUH_INDEXER_CURRENT_REV|" : "1",
     "|WAZUH_INDEXER_x64_RPM|" : "x86_64",
@@ -463,6 +480,8 @@ custom_replacements = {
     "|WAZUH_LATEST_OVA|" : "4.2.5",
     "|WAZUH_LATEST_AMI|" : "4.3.0",
     "|WAZUH_LATEST_DOCKER|" : "4.2.5",
+    "|WAZUH_LATEST_AIX|" : "4.2.6",
+    "|WAZUH_LATEST_MINOR_AIX|" : "4.2",
     "|OPEN_DISTRO_LATEST|" : "1.13.2",
     "|ELASTICSEARCH_LATEST|" : "7.10.2",
     "|ELASTICSEARCH_LATEST_OVA|" : "7.10.2",
@@ -476,9 +495,11 @@ custom_replacements = {
     "|OPENDISTRO_LATEST_AMI|" : "1.13.2",
     "|OPENDISTRO_LATEST_KUBERNETES|" : "1.13.2",
     "|DOCKER_COMPOSE_VERSION|" : "1.28.3",
-    "|SPLUNK_LATEST|" : "8.2.2",
+    "|SPLUNK_LATEST|" : "8.2.4",
     "|WAZUH_SPLUNK_LATEST|" : "4.3.0",
     "|ELASTIC_6_LATEST|" : "6.8.8",
+    "|WAZUH_REVISION_DEB_AGENT_PPC|" : "1",
+    "|WAZUH_REVISION_YUM_AGENT_PPC|" : "1",
     "|WAZUH_REVISION_YUM_AGENT_I386|" : "1",
     "|WAZUH_REVISION_YUM_MANAGER_I386|" : "1",
     "|WAZUH_REVISION_YUM_AGENT_X86|" : "1",
@@ -514,12 +535,40 @@ custom_replacements = {
     "|DEB_MANAGER|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-manager/wazuh-manager",
     "|DEB_API|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-api/wazuh-api",
     # Variables for Elastic's Elasticsearch
-    "|ELASTICSEARCH_ELK_LATEST|" : "7.17.0",
+    "|ELASTICSEARCH_ELK_LATEST|" : "7.17.3",
     "|ELASTICSEARCH_ELK_LATEST_ANSIBLE|" : "7.10.2",
     "|ELASTICSEARCH_ELK_LATEST_KUBERNETES|" : "7.10.2",
     "|ELASTICSEARCH_ELK_LATEST_PUPPET|" : "7.10.2",
     "|ELASTICSEARCH_ELK_LATEST_DOCKER|" : "7.10.2",
 }
+
+# -- Customizations ---------------------------------------------------------
+
+## emptyTocNodes ##
+emptyTocNodes = json.dumps([
+    'amazon/configuration/index',
+    'compliance',
+    'containers',
+    'deployment',
+    'development/index',
+    'docker-monitor/index',
+    'migration-guide/index',
+    'installation-guide/elasticsearch-cluster/index',
+    'installation-guide/wazuh-cluster/index',
+    'installation-guide/upgrading/legacy/index',
+    'installation-guide/packages-list/linux/linux-index',
+    'installation-guide/packages-list/solaris/solaris-index',
+    'monitoring',
+    'user-manual/index',
+    'user-manual/agents/index',
+    'user-manual/agents/remove-agents/index',
+    'user-manual/agents/listing/index',
+    'user-manual/kibana-app/reference/index',
+    'user-manual/ruleset/ruleset-xml-syntax/index',
+    'installation-guide/distributed-deployment/step-by-step-installation/elasticsearch-cluster/index',
+    'installation-guide/distributed-deployment/step-by-step-installation/wazuh-cluster/index',
+    'user-manual/capabilities/active-response/ar-use-cases/index',
+])
 
 # -- Setup -------------------------------------------------------------------
 
@@ -529,10 +578,10 @@ def setup(app):
 
     current_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), theme_assets_path)
     static_path_str = os.path.join(os.path.dirname(os.path.realpath(__file__)), html_static_path[0])
-    
+
     if not os.path.exists(app.srcdir + '/' + html_static_path[0] + '/'):
         os.mkdir(app.srcdir + '/' + html_static_path[0] + '/')
-    
+
     if html_theme == 'wazuh_doc_theme_v3':
         # CSS files
         app.add_css_file("css/min/bootstrap.min.css?ver=%s" % os.stat(
@@ -547,7 +596,7 @@ def setup(app):
             os.path.join(current_path, "static/js/min/bootstrap.bundle.min.js")).st_mtime)
         app.add_js_file("js/underscore.js?ver=%s" % os.stat(
             os.path.join(current_path, "static/js/underscore.js")).st_mtime)
-    
+
     if html_theme == 'wazuh_doc_theme':
         minification(current_path)
 
@@ -578,6 +627,7 @@ def setup(app):
     app.connect('html-page-context', collect_compiled_pagename)
     app.connect('html-page-context', insert_inline_style)
     if html_theme == 'wazuh_doc_theme_v3':
+        app.connect('html-page-context', insert_inline_js)
         app.connect('html-page-context', manage_assets)
     app.connect('build-finished', finish_and_clean)
 
@@ -589,6 +639,20 @@ def insert_inline_style(app, pagename, templatename, context, doctree):
     with open(google_fonts_path, 'r') as reader:
         google_fonts = reader.read()
         context['inline_fonts'] = google_fonts
+
+def insert_inline_js(app, pagename, templatename, context, doctree):
+    ''' Runs once per page, inserting the content of minified javascript snippets into the context '''
+    path = os.path.join(os.path.dirname(os.path.realpath(__file__)), theme_assets_path, 'static', 'js', 'inline')
+    js_scripts = ['light-dark-mode-inline']
+    inline_scripts = []
+    
+    for script in js_scripts:
+        script_path = os.path.join(path, script + '.min.js')
+    
+        # Inline scripts
+        with open(script_path, 'r') as reader:
+            inline_scripts.append(reader.read())
+    context['inline_scripts'] = inline_scripts
 
 def manage_assets(app, pagename, templatename, context, doctree):
     theme_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), theme_assets_path)
@@ -606,7 +670,7 @@ def manage_assets(app, pagename, templatename, context, doctree):
         "redoc-standalone": static + "js/redoc.standalone.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/redoc.standalone.js")).st_mtime,
         "moved-content": static + "js/min/moved-content.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/moved-content.min.js")).st_mtime
     }
-    
+
     # The template function
     def get_css_by_page(pagename):
         css_map = {
@@ -618,7 +682,7 @@ def manage_assets(app, pagename, templatename, context, doctree):
             'not_found': "css/min/not-found.min.css?ver=%s" % os.stat(os.path.join(theme_dir, "static/css/min/not-found.min.css")).st_mtime
         }
         default = "css/min/wazuh-documentation.min.css?ver=%s" % os.stat(os.path.join(theme_dir, "static/css/min/wazuh-documentation.min.css")).st_mtime
-        
+
         if pagename in css_map.keys():
             return css_map[pagename]
         else:
@@ -663,7 +727,7 @@ def manage_assets(app, pagename, templatename, context, doctree):
             # tabs (extension)
             # lightbox (extension)
         ]
-        
+
         if pagename in js_map.keys():
             return js_map[pagename]
         else:
@@ -680,7 +744,7 @@ def finish_and_clean(app, exception):
     ''' Performs the final tasks after the compilation '''
     # Create additional files such as the `.doclist` and the sitemap
     creating_file_list(app, exception)
-    
+
     if html_theme == 'wazuh_doc_theme':
         # Remove extra minified files
         for asset in extra_assets:
@@ -688,10 +752,37 @@ def finish_and_clean(app, exception):
             if os.path.exists(app.srcdir + '/_static/' + mini_asset):
                 os.remove(app.srcdir + '/_static/' + mini_asset)
 
+    if html_theme == 'wazuh_doc_theme_v3':
+        # Remove map files and sourcMapping line in production
+        if production:
+            mapFiles = glob.glob(app.outdir + '/_static/*/min/*.map')
+            assetsFiles = glob.glob(app.outdir + '/_static/js/min/*.min.js') + glob.glob(app.outdir + '/_static/css/min/*.min.css')
+            # Remove map files
+            for mapFilePath in mapFiles:
+                try:
+                    os.remove(mapFilePath)
+                except:
+                    print("Error while deleting file : ", mapFilePath)
+            
+            # Remove the source mapping URLs
+            for assetsFilePath in assetsFiles:
+                try:
+                    with open(assetsFilePath, "r") as f:
+                        lines = f.readlines()
+                    with open(assetsFilePath, "w") as f:
+                        for line in lines:
+                            line = re.sub("//# sourceMappingURL=.*\.map", "", line)
+                            line = re.sub("/\*# sourceMappingURL=.*\.map \*/", "", line)
+                            f.write(line)
+                except:
+                    print("Error while removing source mapping from file: ", assetsFilePath)
+                    
 def collect_compiled_pagename(app, pagename, templatename, context, doctree):
-    ''' Runs once per page, storing the pagename (full page path) extracted from the context '''
+    ''' Runs once per page, storing the pagename (full page path) extracted from the context
+        It store the path of all compiled documents except the orphans and the ones in exclude_doc'''
     if templatename == "page.html" and pagename not in exclude_doc:
-        list_compiled_html.append(context['pagename']+'.html')
+        if not context['meta'] or ( context['meta']['orphan'] ):
+            list_compiled_html.append(context['pagename']+'.html')
     else:
         pass
 
@@ -738,6 +829,7 @@ html_context = {
     "production": production,
     "apiURL": apiURL,
     "compilation_ts": compilation_time,
+    "empty_toc_nodes": emptyTocNodes,
     "is_latest_release": is_latest_release
 }
 sphinx_tabs_nowarn = True

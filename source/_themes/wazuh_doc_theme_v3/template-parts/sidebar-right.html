@@ -1,6 +1,8 @@
 <div id="right-sidebar" class="sidebar">
   <div class="sidebar-container">
+    {% if theme_include_mode|tobool and theme_include_mode_switch|tobool %}
     {% include "template-parts/light-dark-switch.html" %}
+    {% endif %}
     {%- if pagename != 'index' -%}
       {% include "template-parts/edit-repo.html" %}
       {% if display_toc %}

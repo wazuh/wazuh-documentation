@@ -136,9 +136,10 @@ To perform the upgrade locally, follow the instructions for the operating system
 
     a) Using the GUI installer. Open the installer and follow the instructions to upgrade the Wazuh agent:
 
-        .. image:: ../images/installation/windows.png
+        .. thumbnail:: ../images/installation/windows.png
+          :title: Windows agent
           :align: left
-
+          :width: 100%
 
     b) Using the command line. To upgrade the Wazuh agent from the command line, run the installer using Windows PowerShell or the command prompt. The ``/q`` argument is used for unattended installations:
 
@@ -167,11 +168,11 @@ To perform the upgrade locally, follow the instructions for the operating system
 
   .. group-tab:: AIX
 
-    The Wazuh agent upgrading process for AIX systems requires to download the latest `AIX installer <https://packages.wazuh.com/|CURRENT_MAJOR|/aix/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_AIX|.aix.ppc.rpm>`_ and run the following command:
+    The Wazuh agent upgrading process for AIX systems requires to download the latest `AIX installer <https://packages.wazuh.com/|CURRENT_MAJOR|/aix/wazuh-agent-|WAZUH_LATEST_AIX|-|WAZUH_REVISION_AIX|.aix.ppc.rpm>`_ and run the following command:
 
     .. code-block:: console
 
-      # rpm -U wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_AIX|.aix.ppc.rpm
+      # rpm -U wazuh-agent-|WAZUH_LATEST_AIX|-|WAZUH_REVISION_AIX|.aix.ppc.rpm
 
 
 

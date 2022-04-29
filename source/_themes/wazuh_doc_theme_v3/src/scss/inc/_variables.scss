@@ -42,11 +42,11 @@ $light-color-accent: #fedd0b !default;
 $light-color-focus-shade: #657c97 !default;
 $light-color-shadow: #000 !default;
 $light-color-global-toc-highlight: #dcebff !default;
-$light-color-danger: #f86b63 !default;
+$light-color-danger: #bd271e !default;
 $light-color-danger-dark: #bd271e !default;
-$light-color-warning: #f97d37 !default;
+$light-color-warning: #ff7a2f !default;
 $light-color-warning-dark: #b35621 !default;
-$light-color-success: #0899a2 !default;
+$light-color-success: #207d82 !default;
 $light-color-success-dark: #207d82 !default;
 $light-color-admonition-background: #f9fcff !default;
 
@@ -87,10 +87,10 @@ $dark-color-focus-shade: #98a2b3 !default;
 $dark-color-shadow: #000 !default;
 $dark-color-global-toc-highlight: #dcebff !default;
 $dark-color-danger: #f86b63 !default;
-$dark-color-danger-dark: #bd271e !default;
-$dark-color-warning: #f97d37 !default;
+$dark-color-danger-dark: #f86b63 !default;
+$dark-color-warning: #ff7a2f !default;
 $dark-color-warning-dark: #b35621 !default;
-$dark-color-success: #0899a2 !default;
+$dark-color-success: #207d82 !default;
 $dark-color-success-dark: #207d82 !default;
 $dark-color-admonition-background: #242424 !default;
 
@@ -102,6 +102,9 @@ $dark-color-code-number: #6ca2f0 !default;
 $dark-color-code-string: #f6b7f6 !default;
 $dark-color-code-function: #499cfe !default;
 $dark-color-code-variable: #b677dc !default;
+
+// Others
+$color-img-border: #f0f2f6 !default;
 
 /* -- Theme elements fixed dimensions ------------------------------------------------------------------------------------ */
 

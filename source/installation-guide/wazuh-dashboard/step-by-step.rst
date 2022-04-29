@@ -4,10 +4,10 @@
 
 .. _wazuh_dashboard_step_by_step:
 
-Installing the Wazuh dashboard in step-by-step mode
-===================================================
+Installing the Wazuh dashboard step by step
+===========================================
 
-Install and configure the Wazuh dashboard following step-by-step instructions. The Wazuh dashboard is a flexible and intuitive web interface for mining and visualizing the Wazuh server alerts and archived events.
+Install and configure the Wazuh dashboard following step-by-step instructions. The Wazuh dashboard is a web interface for mining and visualizing the Wazuh server alerts and archived events.
 
 .. note:: Root user privileges are required to run the commands described below.
 
@@ -23,7 +23,7 @@ Adding the Wazuh repository
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
   .. note::
-    If you are installing Wazuh dashboard on the same host as the Wazuh indexer or the Wazuh server, you may skip these steps as you may have added the Wazuh repository already.
+    If you are installing the Wazuh dashboard on the same host as the Wazuh indexer or the Wazuh server, you may skip these steps as you may have added the Wazuh repository already.
 
   .. tabs::
   
@@ -66,39 +66,28 @@ Installing the Wazuh dashboard
 Configuring the Wazuh dashboard
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-  #. Edit the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file.
+  #. Edit the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file and replace the following values:
 
-    .. code-block:: yaml
-      :emphasize-lines: 1,3
+     #. ``server.host``: This setting specifies the host of the back end server. To allow remote users to connect, set the value to the IP address or DNS name of the Kibana server.  The value ``0.0.0.0`` will accept all the available IP addresses of the host.
 
-          server.host: 0.0.0.0
-          server.port: 443
-          opensearch.hosts: https://localhost:9200
-          opensearch.ssl.verificationMode: certificate
-          #opensearch.username: 
-          #opensearch.password: 
-          opensearch.requestHeadersWhitelist: ["securitytenant","Authorization"]
-          opensearch_security.multitenancy.enabled: true
-          opensearch_security.readonly_mode.roles: ["kibana_read_only"]
-          server.ssl.enabled: true
-          server.ssl.key: "/etc/wazuh-dashboard/certs/demo-dashboard-key.pem"
-          server.ssl.certificate: "/etc/wazuh-dashboard/certs/demo-dashboard.pem"
-          opensearch.ssl.certificateAuthorities: ["/etc/wazuh-dashboard/certs/root-ca.pem"]
-          logging.dest: "/var/log/wazuh-dashboard/wazuh-dashboard.log"
-          uiSettings.overrides.defaultRoute: /app/wazuh?security_tenant=global
+     #. ``opensearch.hosts``: The URLs of the Wazuh indexer instances to use for all your queries. Wazuh dashboard can be configured to connect to multiple Wazuh indexer nodes in the same cluster. The addresses of the nodes can be separated by commas. For example,  ``["https://10.0.0.2:9200", "https://10.0.0.3:9200","https://10.0.0.4:9200"]``
+
+        .. code-block:: yaml
+          :emphasize-lines: 1,3
+
+             server.host: 0.0.0.0
+             server.port: 443
+             opensearch.hosts: https://localhost:9200
+             opensearch.ssl.verificationMode: certificate
 
 
-
-    - By default, the Wazuh dashboard only listens on the loopback interface (localhost), which means that it can be only accessed from the same host. To access the Wazuh dashboard from the outside it may be configured to listen on its network IP by replacing ``server.host`` with Wazuh dashboard host IP address. The value ``0.0.0.0`` will accept all the available IP addresses of the host.
-
-    - ``opensearch.hosts``: the host's IP. In case of having more than one Wazuh indexer node, the Wazuh dashboard can be configured to connect to multiple Wazuh indexer nodes in the same cluster. The IPs of the nodes can be separated with commas. Eg. ``["https://10.0.0.2:9200", "https://10.0.0.3:9200","https://10.0.0.4:9200"]``
 
 
 Deploying certificates
 ^^^^^^^^^^^^^^^^^^^^^^
 
   .. note::
-    Make sure that a copy of ``certs.tar``, created in the previous stage of the installation process, is placed in your working directory.
+    Make sure that a copy of ``wazuh-certificates.tar``, created in the previous stage of the installation process, is placed in your working directory.
 
   .. include:: /_templates/installations/dashboard/deploy_certificates.rst
 
@@ -113,7 +102,7 @@ Starting the Wazuh dashboard service
       
       **Only for distributed deployments**  
       
-          Edit the file ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` and replace the ``url`` value with the Wazuh server IP address or hostname.
+          Edit the file ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` and replace the ``url`` value with the IP address or hostname of the Wazuh server master node.
           
             .. code-block:: yaml
             
@@ -148,4 +137,4 @@ All the Wazuh central components are successfully installed.
 
 The Wazuh environment is now ready and you can proceed with installing the Wazuh agent on the endpoints to be monitored. To perform this action, see the :ref:`Wazuh agent <installation_agents>` section.
 
-If you want to uninstall the Wazuh dashboard, see the :ref:`uninstalling <uninstall_kibana>` section. 
+If you want to uninstall the Wazuh dashboard, see :ref:`uninstall_dashboard`.

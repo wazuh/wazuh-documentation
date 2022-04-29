@@ -5,7 +5,7 @@
 Contribute to the ruleset
 ===========================
 
-If you have created new rules, decoders or rootchecks and you would like to contribute to our repository, please fork our `GitHub repository <https://github.com/wazuh/wazuh>`_ and submit a pull request.
+If you have created new rules, decoders, or rootchecks and you would like to contribute to our repository, please fork our `GitHub repository <https://github.com/wazuh/wazuh>`_ and submit a pull request.
 
 If you are not familiar with GitHub, you can also share them through our `mailing list <https://groups.google.com/d/forum/wazuh>`_, to which you can subscribe by sending an email to ``wazuh+subscribe@googlegroups.com``. Also, do not hesitate to request new rules or rootchecks that you would like to see running in Wazuh.  Our team will do our best to make it happen.
 

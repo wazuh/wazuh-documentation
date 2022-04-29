@@ -62,9 +62,30 @@ if ( $('.document').length > 0 ) {
 
   /* Avoid selecting $ and # present in the code blocks --------------------- */
   $('.highlight').each(function() {
+    const regex = /\s+$/g;
     const blockCode = $(this);
+
+    /* Process prompts: gp elements */
+    const gpElements = blockCode.find('.gp');
+    gpElements.each(function() {
+      const gp = $(this);
+      const gpText = gp.text();
+      let gpSpaces = gpText.match(regex);
+
+      let gpSpaceToText = '';
+      if (gpSpaces) {
+        gpSpaces = gpSpaces[0].length -1;
+      }
+      for (let i = 0; i < gpSpaces; i++) {
+        gpSpaceToText += '&nbsp;';
+      }
+      $( '<span>' + gpSpaceToText + '</span>' ).insertAfter(gp);
+      gp.html(gp.html().replace(regex, ' '));
+    });
+
     const data = blockCode.html();
-    if (!blockCode.parent().hasClass('highlight-none')) {
+    const codeType = getCodeBlockType(blockCode.parent());
+    if ( jQuery.inArray(codeType, ['none', 'bash']) === -1 ) {
       const heredocs = findHeredocs(data);
       const find = data.match(/(?:\$\s|\#)/g);
       if (find != null) {
@@ -79,8 +100,6 @@ if ( $('.document').length > 0 ) {
           } else if (heredocfinish) {
             line = line+'</span>';
           } else if (!heredoc) {
-            line = line.replace('<span class="gp">#</span> ', '<span class="gp no-select"># </span>');
-            line = line.replace('<span class="gp">$</span> ', '<span class="gp no-select">$ </span>');
             line = line.replace(/(?:\$\s)/g, '<span class="no-select">$ </span>');
           }
           content.push(line);
@@ -124,10 +143,14 @@ if ( $('.document').length > 0 ) {
    * @return {string} filter code block text
    */
   function filterCodeBlock(code, parent) {
-    let data = code.text();
+    const codeClone = code.clone(true);
+    codeClone.find('.gp').empty();
+    let data = codeClone.text();
     const heredocs = findHeredocs(code);
+    const codeType = getCodeBlockType(parent);
+
     data = String(data);
-    if ( !parent.hasClass('highlight-none') ) {
+    if ( jQuery.inArray(codeType, ['none', 'bash']) === -1 ) {
       /* Remove elipsis */
       data = data.replace(/(^|\n)\s*(\.\s{0,1}){3}\s*($|\n)/g, '\n');
       /* Remove prompts with square brakets */
@@ -148,17 +171,12 @@ if ( $('.document').length > 0 ) {
       /* Remove additional line breaks */
       data = data.replace(/\n{2,}$/g, '\n');
       /* Remove prompts with the symbol # only when they cannot be considered comments */
-      if (!parent.hasClass('highlight-yaml')
-        && !parent.hasClass('highlight-python')
-        && !parent.hasClass('highlight-perl')
-        && !parent.hasClass('highlight-powershell')
-        && !parent.is($('[class*="conf"]'))) {
-        const isBash = parent.hasClass('highlight-bash');
-        const isConsole = parent.hasClass('highlight-console');
+      if ( jQuery.inArray(codeType, ['yaml', 'python', 'perl', 'powershell']) === -1
+        && !parent.is($('[class*="conf"]')) ) {
         if (/<<[^<]/.test(data)) {
-          data = replacePromptOnHeredoc(data, heredocs, isConsole, isBash);
+          data = replacePromptOnHeredoc(data, heredocs, codeType);
         } else {
-          data = filterPrompt(data, isConsole, isBash);
+          data = filterPrompt(data, codeType);
         }
       }
     }
@@ -204,16 +222,15 @@ if ( $('.document').length > 0 ) {
   /**
    * Filters some of the prompt lines within a code-block depending on the type
    * @param {string} data The text of the code-block that must be filtered
-   * @param {boolean} isConsole True if the type of the code-block is 'console'
-   * @param {boolean} isBash True if the type of the code-block is 'bash'
+   * @param {string} codeType Contains the type/language of the code block
    * @return {string} The text of the code-block already filtered
    */
-  function filterPrompt(data, isConsole = false, isBash = false) {
-    if (!isBash) {
+  function filterPrompt(data, codeType) {
+    if ( codeType != 'bash') {
       /* Remove prompts with the symbol # only when they cannot be considered comments */
       data = data.replace(/(?:\#\s)/g, '');
     }
-    if (isConsole || isBash) {
+    if ( jQuery.inArray(codeType, ['console']) > -1 ) {
       /* Remove comment lines (starging with //) */
       data = data.replace(/(^|\n)\/\/.+/g, '');
       /* Remove additional line breaks in command lines to avoid accidental enter inputs */
@@ -222,21 +239,36 @@ if ( $('.document').length > 0 ) {
     return data;
   }
 
+  /** Get the type of code block
+   * @param {object} codeBlock jQuery object containing the whole code-block
+   * @return {string} Type or language of the code-block
+   */
+  function getCodeBlockType(codeBlock) {
+    let codeType = '';
+    const codeBlockClasses = codeBlock.get(0).classList;
+    for (let i = 0; i < codeBlockClasses.length; i++) {
+      if ( codeBlockClasses[i].indexOf('highlight-') !== -1 ) {
+        codeType = codeBlockClasses[i].split('highlight-')[1];
+        return codeType;
+      }
+    }
+    return codeType;
+  }
+
   /**
    * Uses the information on heredocs in order to avoid parsing heredoc content
    * @param {string} code The text of the code-block that must be filtered
    * @param {array} heredocs Information on the heredocs found in this particular code-block
-   * @param {boolean} isConsole True if the type of the code-block is 'console'
-   * @param {boolean} isBash True if the type of the code-block is 'bash'
+   * @param {string} codeType Contains the type/language of the code block
    * @return {string} The text of the code-block already filtered buet with the heredocs still intact
    */
-  function replacePromptOnHeredoc(code, heredocs, isConsole = false, isBash = false) {
+  function replacePromptOnHeredoc(code, heredocs, codeType) {
     const parsed = [];
     const lines = code.split('\n');
     lines.forEach(function(line, i) {
       const heredoc = heredocs.find( ({start, finish}) => start <= i && finish >= i );
       if ( !heredoc ) {
-        line = filterPrompt(line, isConsole, isBash);
+        line = filterPrompt(line, codeType);
       }
       parsed.push(line);
     });

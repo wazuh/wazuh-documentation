@@ -18,11 +18,10 @@ The Wazuh agent has a modular architecture. Each component is in charge of its o
 
 The diagram below represents the agent architecture and components:
 
-.. thumbnail:: /images/getting-started/architecture-agent.png
-   :alt: Wazuh agent architecture
-   :align: center
-   :wrap_image: No
-
+.. thumbnail:: /images/getting-started/architecture-agent.png 
+    :title: Wazuh agent architecture
+    :align: center
+    :width: 80% 
 
 .. _agents_modules: 
 
@@ -33,27 +32,29 @@ All agent modules are configurable and perform different security tasks. This mo
 
 - **Log collector:** This agent component can read flat log files and Windows events, collecting operating system and application log messages. It supports XPath filters for Windows events and recognizes multi-line formats like Linux Audit logs. It can also enrich JSON events with additional metadata.
 
-- **Command execution:** Agents run authorized commands periodically, collecting their output and reporting it back to the Wazuh server for further analysis. You can also use this module for other purposes such as to monitor hard disk space left and get a list of last logged-in users.
+- **Command execution:** Agents run authorized commands periodically, collecting their output and reporting it back to the Wazuh server for further analysis. You can also use this module for other purposes, such as monitoring hard disk space left and getting a list of the last logged-in users.
 
-- **File integrity monitoring (FIM):** This module monitors the file system, reporting when files are created, deleted, or modified. It also keeps track of changes in file attributes, permissions, ownership, and content. When an event occurs, it captures *who*, *what*, and *when* details in real time. Additionally, the FIM module builds and maintains a database with the state of the monitored files, allowing queries to be run remotely.
+- **File integrity monitoring (FIM):** This module monitors the file system, reporting when files are created, deleted, or modified. It also keeps track of changes in file attributes, permissions, ownership, and content. When an event occurs, it captures who, what, and when details in real time. Additionally, the FIM module builds and maintains a database with the state of the monitored files, allowing queries to be run remotely.
 
 - **Security configuration assessment (SCA):** This component provides continuous configuration assessment, utilizing out-of-the-box checks based on the Center of Internet Security (CIS) benchmarks. Users can also create their own SCA checks to monitor and enforce their security policies.
 
 - **System inventory:** This agent module periodically runs scans, collecting inventory data such as operating system version, network interfaces, running processes, installed applications, and a list of open ports. Scan results are stored in local SQLite databases that can be queried remotely.
 
-- **Malware detection:** Using a non-signature-based approach, this component is capable of detecting anomalies and the possible presence of rootkits. Also, it looks for hidden processes, hidden files, and hidden ports while monitoring system calls. 
+- **Malware detection:** Using a non-signature-based approach, this component can detect anomalies and the possible presence of rootkits. Also, it looks for hidden processes, hidden files, and hidden ports while monitoring system calls. 
 
-- **Active response:** This module runs automatic actions when threats are detected, triggering responses to block a network connection, stop a running process, or delete a malicious file. Users can also create custom responses when necessary and customize, for example, responses for running a binary in a sandbox, capturing a network connection traffic, and scanning a file with an antivirus.
+- **Active response:** This module runs automatic actions when threats are detected, triggering responses to block a network connection, stop a running process, or delete a malicious file. Users can also create custom responses when necessary, and customize, for example, responses for running a binary in a sandbox, capturing a network connection traffic, and scanning a file with an antivirus.
 
-- **Container security monitoring:** This agent module is integrated with the Docker Engine API in order to monitor changes in a containerized environment. For example, it detects changes to container images, network configuration, or data volumes. Besides, it alerts on containers running in privileged mode and on users executing commands in a running container.
+- **Container security monitoring:** This agent module is integrated with the Docker Engine API to monitor changes in a containerized environment. For example, it detects changes to container images, network configuration, or data volumes. Besides, it alerts about containers running in privileged mode and about users executing commands in a running container.
 
-- **Cloud security monitoring:** This component monitors cloud providers such as Amazon AWS, GitHub, Microsoft Azure, Office 365, or Google GCP. It natively communicates with their APIs. It is capable of detecting changes to the cloud infrastructure (e.g. a new user is created, a security group is modified, a cloud instance is stopped, etc.), and collecting cloud services log data (e.g. AWS Cloudtrail, AWS Macie, AWS GuardDuty, Azure Active Directory, etc.)
+- **Cloud security monitoring:** This component monitors cloud providers such as Amazon AWS, GitHub, Microsoft Azure, Office 365, or Google GCP. It natively communicates with their APIs. It is capable of detecting changes to the cloud infrastructure (e.g., a new user is created, a security group is modified, a cloud instance is stopped, etc.) and collecting cloud services log data (e.g., AWS Cloudtrail, AWS Macie, AWS GuardDuty, Azure Active Directory, etc.)
 
-Communication with Wazuh server
--------------------------------
 
-The Wazuh agent communicates with the :ref:`Wazuh server <wazuh_server>` in order to ship collected data and security-related events. Besides, the agent sends operational data, reporting its configuration and status. Once connected, the agent can be upgraded, monitored, and configured remotely from the Wazuh server.
+Communication with the Wazuh server
+-----------------------------------
 
-The communication of the agent with the server takes place through a secure channel (TCP or UDP), providing data encryption and compression in real time. Additionally, it includes flow control mechanisms to avoid flooding, queueing events when necessary and protecting the network bandwidth.
+The Wazuh agent communicates with the :ref:`Wazuh server <wazuh_server>` to ship collected data and security-related events. Besides, the agent sends operational data, reporting its configuration and status. Once connected, the agent can be upgraded, monitored, and configured remotely from the Wazuh server.
 
-You need to register the agent before connecting it to the server for the first time. This process provisions the agent with a unique pre-shared key that is used for authentication and data encryption. 
+The communication of the agent with the server takes place through a secure channel (TCP or UDP), providing data encryption and compression in real time. Additionally, it includes flow control mechanisms to avoid flooding, queueing events when necessary, and protecting the network bandwidth.
+
+You need to register the agent before connecting it to the server for the first time. This process provisions the agent with a unique key used for authentication and data encryption.
+ 

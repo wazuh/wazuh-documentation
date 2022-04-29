@@ -159,7 +159,12 @@ th .line {
 
 /* Light theme -------------------------------------------------------------- */
 
-body { /* stylelint-disable-line no-duplicate-selectors */
+body {
+  color: $light-color-main-text;
+  background-color: $light-color-base-space;
+}
+
+.light-theme body { /* stylelint-disable-line no-duplicate-selectors */
   color: $light-color-main-text;
   background-color: $light-color-base-space;
   a {
@@ -178,7 +183,14 @@ body { /* stylelint-disable-line no-duplicate-selectors */
 
 /* Dark- theme -------------------------------------------------------------- */
 
-.dark-theme {
+@media (prefers-color-scheme: dark) {
+  body {
+    color: $dark-color-main-text;
+    background-color: $dark-color-base-space;
+  }
+}
+
+.dark-theme body {
   color: $dark-color-main-text;
   background-color: $dark-color-base-space;
   a {

@@ -58,6 +58,9 @@
     <g id="circle-check">
       <path d="M14 0C6.2807 0 0 6.2807 0 14C0 21.7193 6.2807 28 14 28C21.7193 28 28 21.7193 28 14C28 6.2807 21.7193 0 14 0ZM21.8246 10.3158L12.8772 19.193C12.3509 19.7193 11.5088 19.7544 10.9474 19.2281L6.21053 14.9123C5.64912 14.386 5.61403 13.5088 6.10526 12.9474C6.63158 12.386 7.50877 12.3509 8.07018 12.8772L11.8246 16.3158L19.8246 8.31579C20.386 7.75439 21.2632 7.75439 21.8246 8.31579C22.386 8.87719 22.386 9.75439 21.8246 10.3158Z"/>
     </g>
+    <g id="right-arrow">
+      <path d="M16.1925 9.68748H1.44444C0.888325 9.68748 0.4375 10.0932 0.4375 10.5937C0.4375 11.0942 0.888325 11.5 1.44444 11.5H16.1925L8.7681 18.9243C8.41419 19.2782 8.41419 19.8521 8.7681 20.206C9.12201 20.5599 9.69582 20.5599 10.0497 20.206L17.7395 12.5162C18.2075 12.0482 18.4692 11.4521 18.5246 10.8407C18.5493 10.7622 18.5625 10.6794 18.5625 10.5937C18.5625 10.5081 18.5493 10.4253 18.5246 10.3467C18.4692 9.73541 18.2075 9.13927 17.7395 8.67129L10.0497 0.981499C9.69582 0.627586 9.12201 0.627586 8.7681 0.981499C8.41419 1.33541 8.41419 1.90922 8.7681 2.26313L16.1925 9.68748Z"/>
+    </g>
   </defs>
   <view id="search-lt" viewBox="8 7 28 28"/>
   <view id="search-dt" viewBox="8 47 28 28"/>
@@ -87,6 +90,8 @@
   <view id="circle-x-lt" viewBox="320 0 28 28"/>
   <view id="circle-x-dt" viewBox="320 40 28 28"/>
   <view id="circle-bulb" viewBox="360 0 28 28"/>
+  <view id="right-arrow-lt" viewBox="400 0 19 21"/>
+  <view id="right-arrow-dt" viewBox="400 40 19 21"/>
   <g>
     <use xlink:href="#search" fill="#256bd1"/>
   </g>
@@ -136,13 +141,13 @@
     <use xlink:href="#moon" fill="white"/>
   </g>
   <g transform="translate(200, 0)">
-    <use xlink:href="#circle-check" fill="#256BD1"/>
+    <use xlink:href="#circle-check" fill="#3585f9"/>
   </g>
   <g transform="translate(200, 40)">
     <use xlink:href="#circle-check" fill="#499cfe"/>
   </g>
   <g transform="translate(240, 0)">
-    <use xlink:href="#exclamation-circle" fill="#256BD1"/>
+    <use xlink:href="#exclamation-circle" fill="#3585f9"/>
   </g>
   <g transform="translate(240, 40)">
     <use xlink:href="#exclamation-circle" fill="#ff7a2f"/>
@@ -157,7 +162,7 @@
     <use xlink:href="#exclamation-circle" fill="#f86b63"/>
   </g>
   <g transform="translate(280, 0)">
-    <circle cx="14" cy="14" r="14" fill="#256BD1" mask="url(#bell-mask)"/>
+    <circle cx="14" cy="14" r="14" fill="#3585f9" mask="url(#bell-mask)"/>
   </g>
   <g transform="translate(280, 40)">
     <circle cx="14" cy="14" r="14" fill="#499cfe" mask="url(#bell-mask)"/>
@@ -170,5 +175,11 @@
   </g>
   <g transform="translate(360, 0)">
     <circle cx="14" cy="14" r="14" fill="#207D82" mask="url(#bulb-mask)"/>
+  </g>
+  <g transform="translate(400, 0)">
+    <use xlink:href="#right-arrow" fill="black"/>
+  </g>
+  <g transform="translate(400, 40)">
+    <use xlink:href="#right-arrow" fill="white"/>
   </g>
 </svg>

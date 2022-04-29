@@ -6,9 +6,9 @@
 .. _ruleset_testing:
 
 Testing decoders and rules
-===============================
+==========================
 
-The tool *wazuh-logtest* allow us to test how an event is decoded and if an alert is generated.
+The tool *wazuh-logtest* allows us to test how an event is decoded and if an alert is generated.
 
 Run the tool */var/ossec/bin/wazuh-logtest* and paste the following log::
 
@@ -58,4 +58,4 @@ Run the tool */var/ossec/bin/wazuh-logtest* and paste the following log::
 
 .. warning::
 
-    The decoder name showed in *Phase 2* will be the name of the parent decoder.
+    The decoder name shown in *Phase 2* will be the name of the parent decoder.

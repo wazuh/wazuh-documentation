@@ -8,9 +8,11 @@
 Certificates deployment
 =======================
 
-In the :ref:`installation guide <installation_guide>`, the Wazuh cert tool has been used to create certificates, but any other certificates creation method, for example using `OpenSSL <https://www.openssl.org/>`_, can be used.
+In the :ref:`installation guide <installation_guide>`, the Wazuh certs tool has been used to create certificates, but any other certificates creation method, for example using `OpenSSL <https://www.openssl.org/>`_, can be used. 
 
-There are three kinds of certificates needed for the installation
+The Wazuh certs tool can be downloaded here: `wazuh-certs-tool.sh <https://packages-dev.wazuh.com/4.3/wazuh-certs-tool.sh>`_.
+
+There are three kinds of certificates needed for the installation:
 
 - ``root-ca``: This certificate is the one in charge of signing the rest of the certificates.
 
@@ -26,52 +28,78 @@ These certificates are created with the following additional information:
 
 - ``O``: Wazuh
 
-- ``OU``: Docu
+- ``OU``: Wazuh
 
 - ``CN``: Name of the node
 
-To create the certificates, the instances.yml file must be configured replacing the ``<node-name>`` and ``<node-IP>`` values by the corresponding values:
+
+To create the certificates, edit the ``config.yml`` file and replace the node names and IP values with the corresponding names and IP addresses. The ``<node-ip>`` can be either an IP address or a DNS name. The ``config.yml`` template can be found here: `config.yml <https://packages-dev.wazuh.com/4.3/config.yml>`_. 
 
     .. code-block:: yaml
 
-        # Elasticsearch nodes
-        elasticsearch-nodes:
-        - name: <node-name>
-            ip:
-            - node-IP
-        
-        # Wazuh server nodes
-        wazuh-servers:
-        - name: <node-name>
-            ip:
-            - node-IP      
-        
-        # Kibana node
-        kibana:
-        - name: <node-name>
-            ip:
-            - node-IP        
+       nodes:
+         # Wazuh indexer nodes
+         indexer:
+           - name: node-1
+             ip: <indexer-node-ip>
+           # - name: node-2
+           #   ip: <indexer-node-ip>
+           # - name: node-3
+           #   ip: <indexer-node-ip>
+       
+         # Wazuh server nodes
+         # Use node_type only with more than one Wazuh manager
+         server:
+           - name: wazuh-1
+             ip: <wazuh-manager-ip>
+           # node_type: master
+           # - name: wazuh-2
+           #   ip: <wazuh-manager-ip>
+           # node_type: worker
+       
+         # Wazuh dashboard nodes
+         dashboard:
+           - name: dashboard
+             ip: <dashboard-node-ip>
 
-Each node certificate will be named after the ``<node-name>``. The ``<node-IP>`` can be either an IP address or a DNS name.
-
-After configuring the ``instances.yml``, the script can be run:
+After configuring the ``config.yml``, run the script with option ``-A`` to create all the certificates. 
 
     .. code-block:: console
 
-        # bash ~/wazuh-cert-tool.sh
+        # bash wazuh-certs-tool.sh -A
 
-After running the script, the directory ~/certs will be created and will have the following content:
+After running the script, the directory ``wazuh-certificates`` will be created and will have the following content:
 
     .. code-block:: none
 
-        certs/
+        wazuh-certificates/
         ├── admin-key.pem
         ├── admin.pem
-        ├── filebeat-key.pem
-        ├── filebeat.pem
-        ├── kibana-key.pem
-        ├── kibana.pem
-        ├── node-1-key.pem
-        ├── node-1.pem
+        ├── dashboard-key.pem
+        ├── dashboard.pem
+        ├── indexer-key.pem
+        ├── indexer.pem
         ├── root-ca.key
-        └── root-ca.pem
+        ├── root-ca.pem
+        ├── server-key.pem
+        └── server.pem
+
+Additionally, this script allows the use of a pre-existent rootCA certificate. To create all the certificates using a pre-existent rootCA certificate, use option ``-A`` and indicate the ``root-ca`` certificate and key as follows:
+
+    .. code-block:: console
+
+        # bash wazuh-certs-tool.sh -A /path/to/root-ca.pem /path/to/root-ca.key
+
+After running the script, the directory ``wazuh-certificates`` will be created and will have the following content:
+
+    .. code-block:: none
+
+        wazuh-certificates/
+        ├── admin-key.pem
+        ├── admin.pem
+        ├── dashboard-key.pem
+        ├── dashboard.pem
+        ├── indexer-key.pem
+        ├── indexer.pem
+        ├── server-key.pem
+        └── server.pem

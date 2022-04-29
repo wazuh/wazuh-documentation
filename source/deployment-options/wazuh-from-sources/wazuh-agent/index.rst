@@ -17,7 +17,7 @@ Installing Wazuh agent from sources
 
     .. note:: CMake 3.12.4 is the minimal library version required to build the Wazuh agent solution.
 
-    1. Install development tools and compilers. In Linux this can easily be done using your distribution's package manager:
+    1. Install development tools and compilers. In Linux, this can easily be done using your distribution package manager:
 
      .. tabs::
 
@@ -48,8 +48,9 @@ Installing Wazuh agent from sources
 
             .. code-block:: console
 
-              # yum install make gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool openssl-devel cmake
-              # rpm -i $(rpm -q libstdc++-devel --queryformat "http://mirror.centos.org/centos/8/PowerTools/x86_64/os/Packages/libstdc++-static-%{VERSION}-%{RELEASE}.%{arch}.rpm\n")
+              # yum install make gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool openssl-devel yum-utils cmake -y
+              # yum-config-manager --enable powertools
+              # yum install libstdc++-static -y
 
             **Optional** CMake 3.18 installation from sources
 
@@ -66,7 +67,7 @@ Installing Wazuh agent from sources
 
         .. code-block:: console
 
-         # apt-get install python gcc g++ make libc6-dev curl policycoreutils automake autoconf libtool
+         # apt-get install python gcc g++ make libc6-dev curl policycoreutils automake autoconf libtool libssl-dev
 
 
         CMake 3.18 installation
@@ -84,7 +85,7 @@ Installing Wazuh agent from sources
 
         .. code-block:: console
 
-         # zypper install make gcc gcc-c++ policycoreutils-python automake autoconf libtool
+         # zypper install make gcc gcc-c++ policycoreutils-python automake autoconf libtool curl libopenssl-devel
 
         CMake 3.18 installation
 
@@ -187,7 +188,7 @@ Installing Wazuh agent from sources
         # find /etc/systemd/system -name "wazuh*" | xargs rm -f
         # systemctl daemon-reload
 
-    Remove users:
+    Remove user and group:
 
     .. code-block:: console
 
@@ -352,7 +353,7 @@ Installing Wazuh agent from sources
 
      # rm -rf /Library/StartupItems/OSSEC
 
-    Remove users:
+    Remove user and group:
 
     .. code-block:: console
 
@@ -396,7 +397,7 @@ Installing Wazuh agent from sources
 
      .. code-block:: console
 
-        # wget -O wazuh.tar.gz --no-check-certificate https://api.github.com/repos/wazuh/wazuh/tarball/v|WAZUH_LATEST| && gunzip -c wazuh.tar.gz | tar -xvf -
+        # wget -O wazuh.tar.gz --no-check-certificate https://api.github.com/repos/wazuh/wazuh/tarball/v|WAZUH_LATEST_AIX| && gunzip -c wazuh.tar.gz | tar -xvf -
 
      .. note:: If you can't download the repository this way, then you should copy it through the scp utility.
 
@@ -405,7 +406,7 @@ Installing Wazuh agent from sources
      .. code-block:: console
 
         # cd wazuh-*
-        # gmake -C src deps RESOURCES_URL=https://packages.wazuh.com/deps/|WAZUH_LATEST_MINOR|
+        # gmake -C src deps RESOURCES_URL=https://packages.wazuh.com/deps/|WAZUH_LATEST_MINOR_AIX|
         # gmake -C src TARGET=agent USE_SELINUX=no PREFIX=/var/ossec
 
     4. Run the ``install.sh`` script. This will run a wizard that will guide you through the installation process using the Wazuh sources:
@@ -468,7 +469,7 @@ Installing Wazuh agent from sources
 
      # find /etc/rc.d -name "*wazuh*" | xargs rm -f
 
-    Remove users:
+    Remove user and group:
 
     .. code-block:: console
 
@@ -587,7 +588,7 @@ Installing Wazuh agent from sources
 
      # find /sbin/{init.d,rc*.d} -name "*wazuh*" | xargs rm -f
 
-    Remove users:
+    Remove user and group:
 
     .. code-block:: console
 
@@ -773,7 +774,7 @@ Installing Wazuh agent from sources
 
          # find /sbin/{init.d,rc*.d} -name "*wazuh*" | xargs rm -f
 
-        Remove users:
+        Remove user and group:
 
         .. code-block:: console
 
@@ -913,7 +914,7 @@ Installing Wazuh agent from sources
 
          # find /sbin/{init.d,rc*.d} -name "*wazuh*" | xargs rm -f
 
-        Remove users:
+        Remove user and group:
 
         .. code-block:: console
 

@@ -1,5 +1,5 @@
 What is SCA
-=================================
+===========
 
 .. meta::
   :description: Learn more about the Security Configuration Assessment capability of Wazuh: what is SCA, overview of an SCA check, and how to interpret SCA scan results. 
@@ -11,9 +11,8 @@ One of the most certain ways to secure hosts is by reducing their vulnerability 
 known as hardening, and configuration assessment is an effective way to determine opportunities where hosts could
 have their attack surface reduced, and here is where SCA comes into play.
 
-SCA performs scans in order to discover exposures or misconfigurations in monitored hosts. Those scans assess the
-configuration of the hosts by means of policy files, that contains rules to be tested against the actual
-configuration of host.
+SCA performs scans to discover exposures or misconfigurations in monitored hosts. Those scans assess the configuration of the hosts using policy files that contain rules to be tested against the actual configuration of the host.
+
 For example, SCA could assess whether it is necessary to change password related configuration, remove unnecessary
 software, disable unnecessary services, or audit the TCP/IP stack configuration.
 
@@ -23,11 +22,11 @@ Furthermore, Wazuh is distributed with a set of policies, most of them based on 
 standard for host hardening.
 
 Overview of an SCA check
-----------------------------------
+------------------------
 
 Each check comprises some metadata information, a description of the purpose of the check, and its logical description
 (fields **condition** and **rules**). On its metadata, it can contain an optional **compliance** field used to specify
-if the check is relevant to any compliance specifications, and to which. Most of Wazuh policies, especially CIS policies,
+if the check is relevant to any compliance specifications, and to which. Most Wazuh policies, especially CIS policies,
 already have their CIS and PCI-DSS controls mapped. See an :ref:`example<check_overview>` below.
 
 
@@ -92,3 +91,4 @@ In addition, each result can be expanded to display additional information.
     :title: SCA check list
     :align: center
     :width: 100%
+    
