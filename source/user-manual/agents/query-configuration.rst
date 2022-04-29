@@ -5,7 +5,7 @@
 Query configuration
 ===================
 
-The actual configuration of an agent, or the manager can be queried on demand by clicking on the *Agents* tab or the *Management* tab. From here you will be able to fetch the active configuration in real time.
+The actual configuration of an agent, or the manager can be queried on demand by clicking on the **Agents** tab or the **Management** tab. From here you will be able to fetch the active configuration in real time.
 
 .. thumbnail:: ../../images/kibana-app/features/query-configuration/configuration-section.png
   :align: center
