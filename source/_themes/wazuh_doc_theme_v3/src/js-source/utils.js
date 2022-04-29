@@ -23,6 +23,10 @@ $(document).ready(function() {
   });
 });
 
+if ( typeof(versions) === 'undefined' ) {
+  const versions = [];
+}
+
 /* Using ReDoc ============================================================== */
 const minVersionRedoc = '4.0';
 const useApiRedoc = (compareVersion(DOCUMENTATION_OPTIONS.VERSION, minVersionRedoc) >= 0);
