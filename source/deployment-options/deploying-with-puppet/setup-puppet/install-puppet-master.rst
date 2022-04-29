@@ -19,7 +19,7 @@ Edit the ``/etc/hosts`` file and add the following:
 Installation on CentOS/RHEL/Fedora
 ----------------------------------
 
-Install the Puppet yum repository and then the “puppetserver” package. See this `index <https://yum.puppetlabs.com/>`_ to find the correct rpm file needed to install the puppet repo for your Linux distribution. For example, to install Puppet 7 for CentOS 7 or RHEL 7, do the following:
+Install the Puppet yum repository and then the “puppetserver” package. See this `index <https://yum.puppetlabs.com/>`_ to find the correct rpm file needed to install the puppet repo for your Linux distribution. For example, to install Puppet 7 for CentOS 8 or RHEL 8, do the following:
 
   .. code-block:: console
 
@@ -62,7 +62,7 @@ Install the appropriate Puppet apt repository, and then the “puppetserver” p
   .. code-block:: console
 
     # wget https://apt.puppet.com/puppet7-release-focal.deb
-    # sudo dpkg -i puppet7-release-focal.deb
+    # dpkg -i puppet7-release-focal.deb
     # apt update
     # apt-get install -y puppetserver
 
@@ -83,7 +83,7 @@ By default, Puppet Server will be configured to use 2GB of RAM. However, if you 
   * ``/etc/sysconfig/puppetserver`` -- CentOS/RHEL/Fedora
   * ``/etc/default/puppetserver`` -- Debian/Ubuntu
 
-Replace 2g with the amount of memory you want to allocate to Puppet Server. For example, to allocate 1GB of memory, use ``JAVA_ARGS="-Xms1g -Xmx1g"``; for 512MB, use ``JAVA_ARGS="-Xms512m -Xmx512m"``.
+Replace 2g in the ``JAVA_ARGS`` variable with the amount of memory you want to allocate to Puppet Server. For example, to allocate 1GB of memory, use ``JAVA_ARGS="-Xms1g -Xmx1g"``; for 512MB, use ``JAVA_ARGS="-Xms512m -Xmx512m"``.
 
 Configuration
 -------------
@@ -98,7 +98,14 @@ Edit the ``/etc/puppetlabs/puppet/puppet.conf`` file, adding this line to the ``
 .. note:: If you find ``templatedir=$confdir/templates`` in the config file, delete that line.  It has been deprecated.
 
 
-Then, restart your Puppet Server to apply changes:
+For Ubuntu/Debian machines, in case puppetserver does not start. Edit the puppetserver file, ``/etc/default/puppetserver``. Modify the following line to change the memory size to 1G or 512MB:
+
+.. code-block:: console
+
+   JAVA_ARGS="-Xms512m -Xmx512m -Djruby.logger.class=com.puppetlabs.jruby_utils.jruby.Slf4jLogger"
+
+
+Then, start your Puppet Server:
 
   a) For Systemd:
 

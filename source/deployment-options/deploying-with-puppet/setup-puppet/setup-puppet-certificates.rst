@@ -17,22 +17,23 @@ To generate and sign a certificate, follow the next steps:
 
     .. code-block:: console
 
-       # puppet cert list
+       # puppetserver ca list
 
     It should output a list with your node hostname.
 
-3. Approve the certificate, replacing ``puppet-master`` with your agent node name:
+3. Approve the certificate, replacing ``pending-agent-node`` with your agent’s node name:
 
     .. code-block:: console
 
-        # sudo puppetserver ca sign --certname puppet-master
+        # puppetserver ca sign --certname pending-agent-node
 
 
-     All certificates can be approved with this:
+All certificates can be approved with this:
 
     .. code-block:: console
 
-         # sudo puppetserver ca sign --all
+         # puppetserver ca sign --all
+
 
 4. Back on the Puppet agent node, run in the puppet agent again:
 

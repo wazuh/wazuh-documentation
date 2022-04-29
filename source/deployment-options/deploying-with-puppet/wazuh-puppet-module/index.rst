@@ -42,9 +42,9 @@ This module installs and configures Wazuh agent and manager.
 Install a stack  via Puppet
 ---------------------------
 
-A stack comprising a Wazuh manager, Wazuh dashboard, Wazuh indexer and Filebeat can be deployed using this manifest. See Wazuh manager session for variables that can be used to configure the manager before deployment.
+A stack of Wazuh manager, Wazuh dashboard, Wazuh indexer and Filebeat can be deployed using this manifest. See the Wazuh manager section for variables that can be used to configure the manager before deployment.
 
-Here is an example of a manifest ``stack.pp``, using the manager, indexer, filebeat and dashboard classes:
+Create a stack.pp file at ``/etc/puppetlabs/code/environments/production/manifests/`` and put the contents below. ``puppet-agent-node refers`` to the hostname or IP of the puppet agent:
 
 .. code-block:: console
 
@@ -59,19 +59,19 @@ Here is an example of a manifest ``stack.pp``, using the manager, indexer, fileb
     }
    }
 
-Place the file at ``/etc/puppetlabs/code/environments/production/manifests/`` in your Puppet master and it will be executed in the specified node after the ``runinterval`` time set in ``puppet.conf``. However, if you want to run it first, try the following command on the Puppet agent.
+Place the file at ``/etc/puppetlabs/code/environments/production/manifests/`` in your Puppet master and it will be executed in the specified node after the ``runinterval`` time set in ``puppet.conf``. However, if you want to run the manifest immediately on a specific node, run the following command on the node:
 
   .. code-block:: console
 
     # puppet agent -t
 
 
-Install agent via Puppet
-------------------------
+Install Wazuh agent via Puppet
+------------------------------
 
 The agent is configured by installing the ``wazuh::agent`` class.
 
-Here is an example of a manifest ``wazuh-agent.pp`` (please replace with your IP address)
+Here is an example of a manifest ``wazuh-agent.pp`` (please replace  ``MANAGER_IP`` with your manager IP address).
 
   .. code-block:: puppet
 

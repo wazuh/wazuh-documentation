@@ -63,7 +63,7 @@ Install the appropriate Puppet apt repository, and then the “puppet-agent” p
 .. code-block:: console
 
     # wget https://apt.puppet.com/puppet7-release-focal.deb
-    # sudo dpkg -i puppet7-release-focal.deb
+    # dpkg -i puppet7-release-focal.deb
     # apt update
     # apt-get install -y puppet-agent
 
