@@ -23,7 +23,7 @@ Creating and setting a Wazuh admin user
 
 Follow these steps to create an internal user, create a new role mapping, and give administrator permissions to the user.
 
-#. Log into Kibana as administrator.
+#. Log into Wazuh dashboard as administrator.
 
 #. Click the upper-left menu icon to open the options, select **Security** and then **Internal users** to open the internal users page.
 
@@ -42,7 +42,7 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 #. To map the user with Wazuh, follow these steps:
 
    #. Click the upper-left menu icon to open the available options and click **Wazuh**.   
-   #. Click **Wazuh** to open the Wazuh Kibana plugin menu, select **Security** and then **Roles mapping** to open the page.
+   #. Click **Wazuh** to open the Wazuh dashboard menu, select **Security** and then **Roles mapping** to open the page.
    #. Click **Create Role mapping** and complete the empty fields with the following parameters:
    
       - **Role mapping name**: Assign a name to the role mapping.
@@ -51,15 +51,14 @@ Follow these steps to create an internal user, create a new role mapping, and gi
   
    #. Click **Save role mapping** to save and map the user with Wazuh as *administrator*. 
 
-   For the role mapping to take effect, make sure that ``run_as`` is set to ``true`` in the ``/usr/share/kibana/data/wazuh/config/wazuh.yml`` configuration file. Restart the Kibana service and clear your browser cache and cookies.
-
+   For the role mapping to take effect, make sure that ``run_as`` is set to ``true`` in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file. Restart the Wazuh dashboard service and clear your browser cache and cookies.
 
 Creating and setting a Wazuh read-only user
 -------------------------------------------
 
 Follow these steps to create an internal user, create a new role mapping, and give read-only permissions to the user.
 
-#. Log into Kibana as administrator.
+#. Log into Wazuh dashboard as administrator.
 
 #. Click the upper-left menu icon to open the options, select **Security** and then **Internal users** to open the internal users page.
 
@@ -99,7 +98,7 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
    #. Click **Save role mapping** to save and map the user with Wazuh as *read-only*. 
 
-   For the role mapping to take effect, make sure that ``run_as`` is set to ``true`` in the ``/usr/share/kibana/data/wazuh/config/wazuh.yml`` configuration file. Restart the Kibana service and clear your browser cache and cookies.
+   For the role mapping to take effect, make sure that ``run_as`` is set to ``true`` in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file. Restart the Wazuh dashboard service and clear your browser cache and cookies.
 
 
 Creating an internal user and mapping it to Wazuh
@@ -107,7 +106,7 @@ Creating an internal user and mapping it to Wazuh
 
 Follow these steps to create an internal user and map it to a role of your choice. 
 
-#. Log into Kibana as administrator.
+#. Log into Wazuh dashboard as administrator.
 
 #. Click the upper-left menu icon to open the options, select **Security** and then **Internal users** to open the internal users page.
 
@@ -122,7 +121,7 @@ Follow these steps to create an internal user and map it to a role of your choic
 #. To map the user with Wazuh, follow these steps:
 
    #. Click the upper-left menu icon to open the available options and click **Wazuh**.   
-   #. Click **Wazuh** to open the Wazuh Kibana plugin menu, select **Security** and then **Roles mapping** to open the page.
+   #. Click **Wazuh** to open the Wazuh dashboard menu, select **Security** and then **Roles mapping** to open the page.
    #. Click **Create Role mapping** and complete the empty fields with the following parameters:
    
       - **Role mapping name**: Assign a name to the role mapping.
@@ -133,7 +132,7 @@ Follow these steps to create an internal user and map it to a role of your choic
   
    #. Click **Save role mapping** to save and map the user with Wazuh.
 
-   For the role mapping to take effect, make sure that ``run_as`` is set to ``true`` in the ``/usr/share/kibana/data/wazuh/config/wazuh.yml`` configuration file. Restart the Kibana service and clear your browser cache and cookies.
+   For the role mapping to take effect, make sure that ``run_as`` is set to ``true`` in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file. Restart the Wazuh dashboard service and clear your browser cache and cookies.
 
 
 .. _wazuh-rbac-use-case-agents-group:
@@ -163,9 +162,9 @@ Adding an agents group label
 
 To prepare the environment, add a label in the ``Team_A`` centralized configuration ``agent.conf``. To learn more, see :ref:`Agent labels <labels>`.
 
-#. Log into Kibana as administrator.
+#. Log into Wazuh dashboard as administrator.
 
-#. Click **Wazuh** to open the Wazuh Kibana plugin menu, select **Management** and then **Groups** to open the page.
+#. Click **Wazuh** to open the Wazuh dashboard menu, select **Management** and then **Groups** to open the page.
 
 #. Select your group, for example, ``Team_A``.
 
@@ -263,7 +262,7 @@ Mapping with Wazuh
 To map the user with Wazuh, follow these steps:
 
 #. Click the upper-left menu icon to open the available options and click **Wazuh**.
-#. Click **Wazuh** to open the Wazuh Kibana plugin menu, select **Security** and then **Policies** to open the policies page.
+#. Click **Wazuh** to open the Wazuh dashboard menu, select **Security** and then **Policies** to open the policies page.
 #. Click **Create policy** and complete the empty fields with the requested information.
    
       - **Policy name**: Assign a name to the new policy. 
@@ -303,9 +302,9 @@ To map the user with Wazuh, follow these steps:
   
 #. Click **Save role mapping** to finish the action. 
 
-  For the role mapping to take effect, make sure that ``run_as`` is set to ``true`` in the ``/usr/share/kibana/data/wazuh/config/wazuh.yml`` configuration file. Restart the Kibana service and clear your browser cache and cookies.
+  For the role mapping to take effect, make sure that ``run_as`` is set to ``true`` in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file. Restart the Wazuh dashboard service and clear your browser cache and cookies.
 
-You have now created a new internal user and mapped it to manage a Wazuh agents group. Authenticate with the new user and open the Wazuh Kibana plugin, see that only ``Team_A`` agents' alerts and information are displayed.  
+You have now created a new internal user and mapped it to manage a Wazuh agents group. Authenticate with the new user and open the Wazuh dashboard, see that only ``Team_A`` agents' alerts and information are displayed.  
 
 
 .. thumbnail:: ../../images/kibana-app/rbac/team_A-agents.png

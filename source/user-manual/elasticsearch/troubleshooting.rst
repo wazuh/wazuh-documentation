@@ -5,8 +5,8 @@
   
 .. _kibana_troubleshooting:
 
-Troubleshooting
-===============
+Wazuh Kibana plugin troubleshooting
+===================================
 
 This section collects common installation or usage issues on the Wazuh Kibana plugin, and some basic steps to solve them.
 
@@ -69,6 +69,19 @@ If you have a custom index pattern, make sure to replace it accordingly.
 
 **Very important:** Clean the browser’s cache and cookies.
 
+"Index pattern was refreshed" toast keeps popping up
+----------------------------------------------------
+
+If "Index pattern was refreshed" message keeps popping up in a module dashboard, it means Wazuh alerts index-pattern doesn't have some of the fields some visualization needs. Therefore the visualization creates those fields it needs in the alerts index-pattern. In case the template that the index-pattern uses is not the latest version, this message can pop up because there are no alerts using these fields. To solve this, please update the index-pattern template using the following command:
+
+.. code-block:: console
+
+  # curl https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/elasticsearch/7.x/wazuh-template.json | curl -X PUT "https://localhost:9200/_template/wazuh" -H 'Content-Type: application/json' -d @- -u <elasticsearch_user>:<elasticsearch_password> -k
+
+.. code-block:: json
+  :class: output
+
+  {"acknowledged":true}
 
 Wazuh API seems to be down
 --------------------------
@@ -174,6 +187,7 @@ Wazuh Kibana plugin page goes blank
 Sometimes, after an upgrade, the Wazuh Kibana plugin page goes blank. This is due to some issues with the cache memory of the browser.
 
 .. thumbnail:: ../../images/kibana-app/troubleshooting/page-goes-blank.png
+
     :title: Page goes blank
     :align: left
     :width: 100%

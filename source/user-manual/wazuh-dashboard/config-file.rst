@@ -1,13 +1,13 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
-.. _kibana_config_file:
+.. _wazuh_dashboard_config_file:
 
 Configuration file
 ==================
 
-The Wazuh Kibana plugin includes a configuration file (located at ``/usr/share/kibana/data/wazuh/config/wazuh.yml``) where you can define custom values for several options. This section describes all the settings available in this file.
+The Wazuh dashboard includes a configuration file (located at ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml``) where you can define custom values for several options. This section describes all the settings available in this file.
 
-The configuration file shows the default values for all of the possible options. You can edit the file, uncomment any of them and apply the desired values. You can also edit these settings from the Wazuh Kibana plugin in *Settings > Configuration*.
+The configuration file shows the default values for all of the possible options. You can edit the file, uncomment any of them and apply the desired values. You can also edit these settings from the Wazuh dashboard in *Settings > Configuration*.
 
 The configuration file reference is organized by sections:
 
@@ -17,7 +17,6 @@ The configuration file reference is organized by sections:
     - `timeout`_
     - `ip.selector`_
     - `ip.ignore`_
-    - `xpack.rbac.enabled`_
     - `admin`_
     - `logs.level`_
     - `hideManagerAlerts`_
@@ -65,7 +64,7 @@ Defines the list of APIs to connect with your Wazuh managers.
         - <id>:
             url: http(s)://<url>
             port: <port>
-            user: <username>
+            username: <username>
             password: <password>
 
 .. note::
@@ -80,13 +79,16 @@ This is an example of a multi-host configuration:
         - wazuh_prod:
             url: https://wazuh.com
             port: 55000
-            user: foo
+            username: wazuh-wui
             password: secret_password
+            run_as: false
         - wazuh_test:
             url: https://localhost
             port: 55000
-            user: foo
-            password: bar
+            username: wazuh-wui
+            password: wazuh-wui
+            run_as: false
+
 
 pattern
 ^^^^^^^
@@ -135,7 +137,7 @@ Defines if the user is allowed to change the selected index pattern directly fro
 ip.ignore
 ^^^^^^^^^
 
-Disable certain index pattern names from being available in index pattern selector from the Wazuh Kibana plugin. An empty list (the default value) won't ignore any valid index pattern.
+Disable certain index pattern names from being available in index pattern selector from the Wazuh dashboard. An empty list (the default value) won't ignore any valid index pattern.
 
 +--------------------+---------------------------------------------+
 | **Default value**  | []                                          |
@@ -143,21 +145,10 @@ Disable certain index pattern names from being available in index pattern select
 | **Allowed values** | Array of strings. Eg: ["wazuh-archives-\*"] |
 +--------------------+---------------------------------------------+
 
-xpack.rbac.enabled
-^^^^^^^^^^^^^^^^^^
-
-Enable or disable X-Pack RBAC security capabilities when using the app.
-
-+--------------------+------------+
-| **Default value**  | true       |
-+--------------------+------------+
-| **Allowed values** | true,false |
-+--------------------+------------+
-
 admin
 ^^^^^
 
-Enable or disable administrator requests to the Wazuh API when using the app. This makes ``PUT``, ``POST`` and ``DELETE`` requests available on the :ref:`Dev tools <kibana_dev_tools>` tab.
+Enable or disable administrator requests to the Wazuh API when using the app. This makes ``PUT``, ``POST`` and ``DELETE`` requests available on the Dev tools tab.
 
 +--------------------+------------+
 | **Default value**  | true       |
@@ -168,7 +159,7 @@ Enable or disable administrator requests to the Wazuh API when using the app. Th
 logs.level
 ^^^^^^^^^^
 
-Set the logging level for the Wazuh Kibana plugin log files.
+Set the logging level for the Wazuh dashboard log files.
 
 +--------------------+------------+
 | **Default value**  | info       |
@@ -400,7 +391,7 @@ Advanced index options
 
 .. warning::
 
-    These options are only valid if they're modified before starting the Kibana service for the very first time.
+    These options are only valid if they're modified before starting Wazuh dashboard for the very first time.
 
     You can read more about configuring the shards and replicas in :ref:`elastic_tuning`.
 
