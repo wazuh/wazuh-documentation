@@ -313,7 +313,7 @@ removedUrls['4.3'] = [
   '/user-manual/kibana-app/features/settings.html',
   '/user-manual/kibana-app/features/index-pattern.html',
   '/user-manual/kibana-app/reference/custom-dashboard.html',
-  '/user-manual/kibana-app/reference/reference.html',
+  '/user-manual/kibana-app/reference/index.html',
   '/virtual-machine/virtual-machine.html',
   '/migrating-from-ossec/index.html',
   '/migrating-from-ossec/ossec-server.html',
@@ -848,13 +848,8 @@ redirections.push(
   },
   {
     'target': ['4.2=>4.3'],
-    '4.2': '/user-manual/kibana-app/reference/',
-    '4.3': '/user-manual/reference/index.html',
-  },
-  {
-    'target': ['4.2=>4.3'],
     '4.2': '/user-manual/kibana-app/wazuh-rbac.html',
-    '4.3': '/user-manual/wazuh-dashboard/rbac/index.html',
+    '4.3': '/user-manual/wazuh-dashboard/rbac.html',
   },
   {
     'target': ['4.2=>4.3'],
