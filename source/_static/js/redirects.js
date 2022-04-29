@@ -304,6 +304,16 @@ removedUrls['4.3'] = [
   '/installation-guide/wazuh-agent/deployment-variables/deployment-variables-windows.html',
   '/user-manual/overview.html',
   '/user-manual/kibana-app/index.html',
+  '/user-manual/kibana-app/features/app-overview.html',
+  '/user-manual/kibana-app/features/dev-tools.html',
+  '/user-manual/kibana-app/features/download-csv.html',
+  '/user-manual/kibana-app/features/index.html',
+  '/user-manual/kibana-app/features/reporting.html',
+  '/user-manual/kibana-app/features/ruleset.html',
+  '/user-manual/kibana-app/features/settings.html',
+  '/user-manual/kibana-app/features/index-pattern.html',
+  '/user-manual/kibana-app/reference/custom-dashboard.html',
+  '/user-manual/kibana-app/reference/reference.html',
   '/virtual-machine/virtual-machine.html',
   '/migrating-from-ossec/index.html',
   '/migrating-from-ossec/ossec-server.html',
@@ -829,12 +839,12 @@ redirections.push(
   {
     'target': ['4.2=>4.3'],
     '4.2': '/user-manual/kibana-app/features/query-configuration.html',
-    '4.3': '/user-manual/query-configuration/index.html',
+    '4.3': '/user-manual/agents/query-configuration.html',
   },
   {
     'target': ['4.2=>4.3'],
     '4.2': '/user-manual/kibana-app/features/settings.html',
-    '4.3': '/user-manual/settings/index.html',
+    '4.3': '/user-manual/wazuh-dashboard/settings.html',
   },
   {
     'target': ['4.2=>4.3'],
@@ -844,27 +854,27 @@ redirections.push(
   {
     'target': ['4.2=>4.3'],
     '4.2': '/user-manual/kibana-app/wazuh-rbac.html',
-    '4.3': '/user-manual/manager/rbac/index.html',
+    '4.3': '/user-manual/wazuh-dashboard/rbac/index.html',
   },
   {
     'target': ['4.2=>4.3'],
     '4.2': '/user-manual/kibana-app/reference/elasticsearch.html',
-    '4.3': '/user-manual/elasticsearch/elastic-tuning/elasticsearch.html',
-  },
-  {
-    'target': ['4.2=>4.3'],
-    '4.2': '/user-manual/elasticsearch/elastic-tuning.html',
-    '4.3': '/user-manual/elasticsearch/elastic-tuning/elastic-tuning.html',
+    '4.3': '/user-manual/elasticsearch/elasticsearch.html',
   },
   {
     'target': ['4.2=>4.3'],
     '4.2': '/user-manual/kibana-app/troubleshooting.html',
-    '4.3': '/user-manual/elasticsearch/elastic-tuning/troubleshooting.html',
+    '4.3': '/user-manual/elasticsearch/troubleshooting.html',
   },
   {
     'target': ['4.2=>4.3'],
     '4.2': '/user-manual/kibana-app/reference/config-file.html',
-    '4.3': '/user-manual/reference/config-file.html',
+    '4.3': '/user-manual/wazuh-dashboard/config-file.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/user-manual/kibana-app/reference/configure-indices.html',
+    '4.3': '/user-manual/elasticsearch/configure-indices.html',
   },
 );
 
