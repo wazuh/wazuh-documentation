@@ -110,9 +110,9 @@ Starting Wazuh 4.0 the Wazuh API username variable changed from ``user`` to ``us
 None of the above solutions are fixing my problem
 -------------------------------------------------
 
-We have a welcoming community which can help you with most of the problems you might have regarding Wazuh deployment and usage. `<https://wazuh.com/community>`
+We have a welcoming community which can help you with most of the problems you might have regarding Wazuh deployment and usage. `<https://wazuh.com/community>`_.
 
-Also, you can contact us opening issues in our GitHub repositories under the `organization <https://wazuh.com/community>`.
+Also, you can contact us opening issues in our GitHub repositories under the `organization <https://wazuh.com/community>`_.
 
 We will  be interested in the log files of your deployment. You can check them out on each component:
 
