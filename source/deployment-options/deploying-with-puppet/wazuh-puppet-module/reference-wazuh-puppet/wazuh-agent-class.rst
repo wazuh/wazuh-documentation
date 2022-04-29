@@ -425,35 +425,35 @@ $sca_amazon_enabled
 
   `Default yes`
 
-  `Depends on configure_sca and apply_template_os`
+   Depends on **configure_sca and apply_template_os**
 
 $sca_amazon_scan_on_start
   The SCA module will perform the scan immediately when started (Amazon Linux 2).
 
   `Default yes`
 
-  `Depends on configure_sca and apply_template_os`
+   Depends on **configure_sca and apply_template_os**
 
 $sca_amazon_interval
   Interval between module executions.
 
   `Default 12h`
 
-  `Depends on configure_sca and apply_template_os`
+   Depends on **configure_sca and apply_template_os**
 
 $sca_amazon_skip_nfs
   Enable or disable the scanning of network mounted filesystems (Works on Linux and FreeBSD). Currently, skip_nfs will exclude checking files on CIFS or NFS mounts.
 
   `Default yes`
 
-  `Depends on configure_sca and apply_template_os`
+   Depends on **configure_sca and apply_template_os**
 
 $sca_amazon_policies
   A list of policies to run assessments can be included in this section.
 
   `Default []`
 
-  `Depends on configure_sca and apply_template_os`
+   Depends on **configure_sca and apply_template_os**
 
 $sca_rhel_enabled
   Enable SCA on this host (RHEL).
@@ -462,7 +462,7 @@ $sca_rhel_enabled
 
   `Type Boolean`
 
-  `Depends on configure_sca and apply_template_os`
+   Depends on **configure_sca and apply_template_os**
 
 $sca_rhel_scan_on_start
   The SCA module will perform the scan immediately when started (RHEL).
@@ -471,28 +471,28 @@ $sca_rhel_scan_on_start
 
   `Type String`
 
-  `Depends on configure_sca and apply_template_os`
+   Depends on **configure_sca and apply_template_os**
 
 $sca_rhel_interval
   Interval between module executions.
 
   `Default 12h`
 
-  `Depends on configure_sca and apply_template_os`
+   Depends on **configure_sca and apply_template_os**
 
 $sca_rhel_skip_nfs
   Enable or disable the scanning of network mounted filesystems (Works on Linux and FreeBSD). Currently, skip_nfs will exclude checking files on CIFS or NFS mounts.
 
   `Default yes`
 
-  `Depends on configure_sca and apply_template_os`
+   Depends on **configure_sca and apply_template_os**
 
 $sca_rhel_policies
   A list of policies to run assessments can be included in this section.
 
   `Default []`
 
-  `Depends on configure_sca and apply_template_os`
+   Depends on **configure_sca and apply_template_os**
 
 $sca_else_enabled
   Enable SCA on this host (Linux).
@@ -504,28 +504,28 @@ $sca_else_scan_on_start
 
   `Default yes`
 
-  `Depends on configure_sca and apply_template_os`
+   Depends on **configure_sca and apply_template_os**
 
 $sca_else_interval
   Interval between module executions.
 
   `Default 12h`
 
-  `Depends on configure_sca and apply_template_os`
+   Depends on **configure_sca and apply_template_os**
 
 $sca_else_skip_nfs
   Enable or disable the scanning of network mounted filesystems (Works on Linux and FreeBSD). Currently, `skip_nfs` will exclude checking files on CIFS or NFS mounts.
 
   `Default yes`
 
-  `Depends on configure_sca and apply_template_os`
+   Depends on **configure_sca and apply_template_os**
 
 $sca_else_policies
   A list of policies to run assessments can be included in this section.
 
   `Default []`
 
-  `Depends on configure_sca and apply_template_os`
+   Depends on **configure_sca and apply_template_os**
 
 
 .. _ref_agent_vars_syscheck:
