@@ -217,9 +217,11 @@
     {% endblock css %}
     
     {#- FAVICON -#}
-    {%- if favicon %}
-    <link rel="shortcut icon" href="{{ pathto('_static/images/' + favicon, 1) }}"/>
-    {% endif -%}
+    <link rel="mask-icon" href="{{ pathto('_static/images/favicon.svg', 1) }}" color="#000000">
+    <link rel="icon" href="{{ pathto('_static/images/favicon.png', 1) }}" media="(prefers-color-scheme:no-preference)" sizes="any" type="image/png"/>
+    <link rel="icon" href="{{ pathto('_static/images/dark-favicon.png', 1) }}" media="(prefers-color-scheme:dark)" sizes="any" type="image/png"/>
+    <link rel="icon" href="{{ pathto('_static/images/favicon.png', 1) }}" media="(prefers-color-scheme:light)" sizes="any" type="image/png"/>
+    <link rel="apple-touch-icon" href="{{ pathto('_static/images/favicon.svg', 1) }}">
 
     {%- if production -%}
     {%- block ga -%}
