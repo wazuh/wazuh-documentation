@@ -8,7 +8,7 @@
 Incident response
 =================
 
-:ref:`Wazuh agent <wazuh_agent>` automates the response to threats by running actions when these are detected. The agent has the ability to block network connections, stop running processes, and delete malicious files, among other actions. In addition, it can also run customized scripts developed by the user, such as Python, Bash, or PowerShell.
+:ref:`Wazuh agent <wazuh_agent>` automates the response to threats by running actions when these are detected. The agent has the ability to block network connections, stop running processes, and delete malicious files, among other actions. In addition, it can also run customized scripts developed by the user with Python, Bash, or PowerShell.
 
 To use this feature, users define the conditions that trigger the scripted actions, which usually involve threat detection and assessment. For example, a user can use log analysis rules to detect an intrusion attempt and an IP address reputation database to assess the threat by looking for the source IP address of the attempted connection.
 
@@ -53,7 +53,7 @@ In this case, rule ``100100`` is used to look for alerts where the source IP add
       <description>IP address found in AlienVault reputation database.</description>
     </rule>
 
-Below is a screenshot with two Wazuh alerts: one that is triggered when a web attack is detected trying to exploit a PHP server vulnerability, and one that informs that the malicious actor has been blocked.
+Below you can find a screenshot with two Wazuh alerts: one that is triggered when a web attack is detected trying to exploit a PHP server vulnerability, and one that informs that the malicious actor has been blocked.
 
 .. thumbnail:: ../../images/getting-started/use-case-active-response.png
     :title: Active response
@@ -62,4 +62,4 @@ Below is a screenshot with two Wazuh alerts: one that is triggered when a web at
     :wrap_image: No
     
     
-More information on how Wazuh protects systems using the active response feature can be found in the :ref:`user manual <automatic_remediation>`.
+You can find more information on how Wazuh protects systems using the active response feature in the :ref:`user manual <automatic_remediation>`.

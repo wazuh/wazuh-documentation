@@ -19,7 +19,7 @@ The flow of an agent being enrolled via API is as follows:
    #. The user sends an API request with the authorization token to the Wazuh manager. This request enrolls the agent and gets the agent key.
    #. On the agent endpoint, the user imports the key to the agent.
    #. The user configures the Wazuh manager IP address on the agent.
-   #. The user restarts the agent and the connection to the manager is established.
+   #. The user restarts the agent and then the connection to the manager is established.
 
 
 In this document, you will find the following information:

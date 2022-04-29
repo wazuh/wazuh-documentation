@@ -18,7 +18,7 @@ Configuration
 Basic usage
 -----------
 
-Command monitoring is configured in the :ref:`localfile section<reference_ossec_localfile>` of :ref:`ossec.conf <reference_ossec_conf>`. It can be also be centrally configured in :ref:`agent.conf<reference_agent_conf>`.
+Command monitoring is configured in the :ref:`localfile section<reference_ossec_localfile>` of :ref:`ossec.conf <reference_ossec_conf>`. It can also be centrally configured in :ref:`agent.conf<reference_agent_conf>`.
 
 Monitor running Windows processes
 ---------------------------------
@@ -63,7 +63,7 @@ Example with notepad.exe as the important process to monitor:
         <group>process_monitor,</group>
       </rule>
 
-    The first rule (100010) will generate an alert ("Important process not running"), unless it is overridden by its child rule (100011) that matches `notepad.exe` in the command output.  You may add as many child rules as needed to enumerate all of the important processes you want to monitor.  You can also adapt this example to monitor Linux processes by changing the ``<command>`` from ``tasklist`` to a Linux command that lists processes, like ``ps -auxw``.
+    The first rule (100010) will generate an alert ("Important process not running") unless it is overridden by its child rule (100011) that matches `notepad.exe` in the command output.  You may add as many child rules as needed to enumerate all of the important processes you want to monitor.  You can also adapt this example to monitor Linux processes by changing the ``<command>`` from ``tasklist`` to a Linux command that lists processes, like ``ps -auxw``.
 
 Disk space utilization
 ----------------------
@@ -165,7 +165,7 @@ Configure your agent to monitor the USBSTOR registry entry by adding the followi
     </localfile>
   </agent_config>
 
-Next create a custom rule:
+Next, create a custom rule:
 
 .. code-block:: xml
 

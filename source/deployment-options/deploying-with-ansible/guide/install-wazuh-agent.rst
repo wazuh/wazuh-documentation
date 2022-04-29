@@ -273,15 +273,18 @@ We can check the status of our new services in our Wazuh agent.
 	   Loaded: loaded (/etc/systemd/system/wazuh-agent.service; enabled; vendor preset: disabled)
 	   Active: active (running) since lun 2018-09-17 11:26:16 CEST; 3min 28s ago
 
-We can see the agent connection in Kibana.
+We can see the agent connection in the Wazuh dashboard.
 
 .. thumbnail:: ../../../images/ansible/ansible-agent2.png
+    :title: Ansible agent 1
     :align: center
-    :width: 100%
+    :width: 80%
 
 .. thumbnail:: ../../../images/ansible/ansible-agent.png
+    :title: Ansible agent 2
     :align: center
-    :width: 100%
+    :width: 80%
+
 
 We can also view agent information from the Wazuh-server.
 

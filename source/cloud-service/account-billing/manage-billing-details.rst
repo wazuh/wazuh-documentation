@@ -12,7 +12,7 @@ If you want to continue using your environment beyond the trial period, you need
 
 .. note::
 
-  A trial environment is converted to a paid environment when the trial expires. If you do not add your credit card information before the expiration date, your environment is deleted and all data is permanently erased. Make sure to add your credit card before the end of the trial period.
+  A trial environment is converted to a paid environment when the trial expires. If you do not add your credit card information before the expiration date, your environment is deleted, and all data is permanently erased. Make sure to add your credit card before the end of the trial period.
 
 Add your billing details
 ------------------------
@@ -29,7 +29,7 @@ To add the billing details:
 
 5. Click **Save** to confirm the payment method.
 
-You can stop upcoming charges by :ref:`canceling your environments <cloud_stop_charges>`. Take into account that the cancellation cannot be undone and all data is completely deleted.
+You can stop upcoming charges by :ref:`canceling your environments <cloud_stop_charges>`. Please take into account that the cancellation cannot be undone once you do it and that all your data will be completely deleted.
 
 Remove your billing details
 ---------------------------
@@ -38,13 +38,13 @@ Billing details can only be removed when there are no active paid environments. 
 
 - There are no environments.
 - The only active environment is in a trial period.
-- All the environments have been cancelled.
+- All the environments have been canceled.
 
 In order to remove your billing information:
 
 1. Log in to the `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_.
 
-2. Go to the **Account** section, select **Billing** and select **Payment method**.
+2. Go to the **Account** section, select **Billing**, and select **Payment method**.
 
 3. In Payment method, select **Delete**. This button will be disabled if there is an active paid environment.
 

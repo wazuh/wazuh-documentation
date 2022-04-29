@@ -37,13 +37,13 @@ If the ``socket`` tag is not specified in the configuration block, the key polli
 - Poll agent by ID
 - Poll agent by IP
 
-When polling by ID, the manager will retrieve the agent key by querying its ID, so the input parameters that the program will receive are for example:
+When polling by ID, the manager will retrieve the agent key by querying its ID. So the input parameters that the program will receive are as the following:
 
 ::
 
   ./agent_key_pull.py id 001
 
-When polling by IP address, the manager will retrieve the agent key by querying his IP address, so the input parameters that the program will receive are for example:
+When polling by IP address, the manager will retrieve the agent key by querying his IP address, so the input parameters that the program will receive are as the following:
 
 ::
 
@@ -57,7 +57,7 @@ When polling by IP address, the manager will retrieve the agent key by querying 
 .. note::
   Keep in mind that the above examples represent how Wazuh will call your program.
 
-When the ``socket`` tag is specified the module will send the parameters through the specified socket and read the response. The performance improvement over executing the program as it is explained above is significant.
+When the ``socket`` tag is specified the module will send the parameters through the specified socket and read the response. The performance improvement over executing the program, as it is explained above, is significant.
 
 The format in which the program will receive the data is ``option:value``, where option can be ``id`` or ``ip`` depending on the polling type.
 

@@ -141,13 +141,13 @@
     <use xlink:href="#moon" fill="white"/>
   </g>
   <g transform="translate(200, 0)">
-    <use xlink:href="#circle-check" fill="#256BD1"/>
+    <use xlink:href="#circle-check" fill="#3585f9"/>
   </g>
   <g transform="translate(200, 40)">
     <use xlink:href="#circle-check" fill="#499cfe"/>
   </g>
   <g transform="translate(240, 0)">
-    <use xlink:href="#exclamation-circle" fill="#256BD1"/>
+    <use xlink:href="#exclamation-circle" fill="#3585f9"/>
   </g>
   <g transform="translate(240, 40)">
     <use xlink:href="#exclamation-circle" fill="#ff7a2f"/>
@@ -162,7 +162,7 @@
     <use xlink:href="#exclamation-circle" fill="#f86b63"/>
   </g>
   <g transform="translate(280, 0)">
-    <circle cx="14" cy="14" r="14" fill="#256BD1" mask="url(#bell-mask)"/>
+    <circle cx="14" cy="14" r="14" fill="#3585f9" mask="url(#bell-mask)"/>
   </g>
   <g transform="translate(280, 40)">
     <circle cx="14" cy="14" r="14" fill="#499cfe" mask="url(#bell-mask)"/>

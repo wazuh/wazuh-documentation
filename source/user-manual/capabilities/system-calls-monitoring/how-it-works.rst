@@ -15,7 +15,7 @@ Audit uses a set of rules to define what is to be captured in the log files. The
 
 - **File system rules**, also known as file watches, allow the auditing of access to a particular file or a directory.
 
-- **System call rules** allow logging of system calls that specified programs makes.
+- **System call rules** allow logging of system calls that specified programs make.
 
 Audit rules can be specified interactively with the *auditctl* command-line utility, but to make changes persistent, edit */etc/audit/audit.rules*.
 
@@ -52,7 +52,7 @@ where:
 +----------------------+------------------------------------------------------------------------------------------------------------------------+
 | **-w <path>**        | Specify what file or directory to audit with <path>                                                                    |
 +----------------------+------------------------------------------------------------------------------------------------------------------------+
-| **-p <permissions>** | <permissions> are the permissions that are to auditing, including the following:                                       |
+| **-p <permissions>** | <permissions> are the permissions that are for auditing, including the following:                                      |
 +                      +---------------------------------------------------+-----------+--------------------------------------------------------+
 |                      | Values                                            | r         | read access to a file or a directory.                  |
 +                      +                                                   +-----------+--------------------------------------------------------+

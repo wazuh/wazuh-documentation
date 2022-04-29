@@ -23,7 +23,7 @@ An **active response** is a script that is configured to execute when a specific
 Where are active response actions executed?
 -------------------------------------------
 
-Each active response specifies where its associated command will be executed: on the agent that triggered the alert, on the manager, on another specified agent or on all agents, which also includes the manager(s). The ``location`` options are: 
+Each active response specifies where its associated command will be executed: on the agent that triggered the alert, on the manager, on another specified agent, or on all agents, which also includes the manager(s). The ``location`` options are: 
 
 - ``Local``. It runs the script on the agent that generated the alert.
 
@@ -60,7 +60,7 @@ Active responses are configured in the manager by modifying the :ref:`ossec.conf
 
 2. Define the **active response**
 
-	The active response configuration defines when and where a command is going to be executed. A command will be triggered when a specific rule with a specific id, severity level or source matches the active response criteria.  This configuration will further define where the action of the command will be initiated, meaning in which environment (agent, manager, local, or everywhere).
+	The active response configuration defines when and where a command is going to be executed. A command will be triggered when a specific rule with a specific id, severity level, or source matches the active response criteria.  This configuration will further define where the action of the command will be initiated, meaning in which environment (agent, manager, local, or everywhere).
 
 	Example::
 

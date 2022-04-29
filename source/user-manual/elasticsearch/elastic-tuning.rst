@@ -148,15 +148,15 @@ Elasticsearch offers the possibility to split an index into multiple segments ca
 
 - Distribute and parallelize operations across shards, increasing the performance and throughput.
 
-In addition, Elasticsearch allows the user to make one or more copies of the index shards in what are called replica shards, or replicas for short. Replication is important for two main reasons
+In addition, Elasticsearch allows the user to make one or more copies of the index shards in what are called replica shards, or replicas for short. Replication is important for two main reasons.
 
 - It provides high availability in case a shard or node fails.
 
-- It allows search volume and throughput to scale, since searches can be executed on all replicas in parallel.
+- It allows search volume and throughput to scale since searches can be executed on all replicas in parallel.
 
 .. warning::
 
-  The number of shards and replicas can be defined per index at the time of their creation. Once the index is created, the number of replicas must be changed dynamically, whereas the number of fragments cannot be changed afterwards. 
+  The number of shards and replicas can be defined per index at the time of their creation. Once the index is created, the number of replicas must be changed dynamically, whereas the number of fragments cannot be changed afterward. 
 
 How many shards should an index have?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -213,7 +213,7 @@ To change these settings, the Elasticsearch's template will have to be edited. I
 
     .. warning::
 
-      The value "order" is set to "1", otherwise Filebeat will overwrite the existing template. Multiple matching templates with the same order value will result in a non-deterministic merging order.
+      The value "order" is set to "1". Otherwise, Filebeat will overwrite the existing template. Multiple matching templates with the same order value will result in a non-deterministic merging order.
 
 #. Load the template:
 

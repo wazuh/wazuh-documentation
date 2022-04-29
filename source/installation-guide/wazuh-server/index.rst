@@ -1,7 +1,5 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
-.. _wazuh_server_installation:
-
 .. meta::
   :description: Wazuh is a free, open source, and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response and compliance.
 
@@ -15,9 +13,9 @@ You can install the Wazuh server on a single host. Alternatively, you can instal
 
 Check the requirements below and choose an installation method to start installing the Wazuh server.
 
-- :ref:`Unattended installation <wazuh_server_unattended>`: You install this component by running a script that automates the installation and configuration process.
+- :doc:`Wazuh installation assistant <installation-assistant>`: Install this component by running an assistant that automates the installation and configuration process.
  
-- :doc:`Step-by-step installation <./step-by-step>`: Install this component manually following detailed step-by-step instructions.
+- :doc:`Step-by-step installation <step-by-step>`: Install this component following detailed step-by-step instructions.
 
 
 .. thumbnail:: /images/installation/Wazuh-Server-Installation-2.png
@@ -37,15 +35,13 @@ Recommended operating systems
 
 Wazuh can be installed on a 64-bit Linux operating system. Wazuh supports the following operating system versions:
 
-
 .. list-table::
-   :width: 100%
+    :width: 100%
    
-   * - Amazon Linux 2
-     - CentOS 7, 8
-   * - Red Hat Enterprise Linux 7, 8
-     - Ubuntu 16.04, 18.04, 20.04
-
+    * - Amazon Linux 2
+      - CentOS 7, 8
+    * - Red Hat Enterprise Linux 7, 8
+      - Ubuntu 16.04, 18.04, 20.04
 
 Hardware requirements
 ^^^^^^^^^^^^^^^^^^^^^
@@ -59,7 +55,7 @@ The Wazuh server can be installed as a single-node or as a multi-node cluster.
   +-------------------------+----------+--------------+--------------+----------------+
   | Component               |  RAM (GB)|  CPU (cores) |  RAM (GB)    |   CPU (cores)  |
   +=========================+==========+==============+==============+================+
-  | Wazuh server            |     2    |     2        |      8       |       4        |
+  | Wazuh server            |     2    |     2        |      4       |       8        |
   +-------------------------+----------+--------------+--------------+----------------+
 
 
@@ -99,5 +95,5 @@ These two variables should be zero if the environment is working properly. If it
     :hidden:
     :maxdepth: 1
 
-    Unattended installation <unattended>
+    Wazuh installation assistant <installation-assistant>
     Step-by-step installation <step-by-step>
