@@ -153,6 +153,7 @@ newUrls['4.3'] = [
   '/deployment-options/deploying-with-kubernetes/kubernetes-clean-up.html',
   '/deployment-options/deploying-with-kubernetes/kubernetes-upgrade.html',
   '/deployment-options/deploying-with-kubernetes/kubernetes-conf.html',
+  '/deployment-options/deploying-with-kubernetes/kubernetes-deployment.html',
   '/deployment-options/docker/index.html',
   '/deployment-options/docker/faq-wazuh-container.html',
   '/deployment-options/docker/container-usage.html',

@@ -17,5 +17,6 @@ In this section of the documentation, you will see how to clone the `Wazuh Kuber
    :hidden:
 
    kubernetes-conf
+   kubernetes-deployment
    kubernetes-upgrade
    kubernetes-clean-up
