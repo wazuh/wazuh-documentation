@@ -43,6 +43,8 @@ The Wazuh server uses Filebeat to send alert and event data to the Wazuh indexer
 The Wazuh dashboard queries the Wazuh RESTful API (by default listening on port 55000/TCP on the Wazuh server) to display configuration and status-related information of the :ref:`Wazuh server <wazuh_server>` and :ref:`agents <wazuh_agent>`. It can also modify agents or server configuration settings through API calls. This communication is encrypted with TLS and authenticated with a username and password.
 
 
+.. _default_ports:
+  
 Default ports
 -------------
 
