@@ -72,7 +72,7 @@ If you have a custom index pattern, make sure to replace it accordingly.
 "Index pattern was refreshed" toast keeps popping up
 ----------------------------------------------------
 
-If "Index pattern was refreshed" message keeps popping up in a module dashboard, it means Wazuh alerts index-pattern doesn't have some of the fields some visualizations needs. Therefore the visualization creates those fields it needs in the alerts index-pattern. In case the template that the index-pattern uses is not the latest version, this message can pop up because there are no alerts using these fields. To solve this please update the index-pattern template using the following command:
+If "Index pattern was refreshed" message keeps popping up in a module dashboard, it means Wazuh alerts index-pattern doesn't have some of the fields some visualization needs. Therefore the visualization creates those fields it needs in the alerts index-pattern. In case the template that the index-pattern uses is not the latest version, this message can pop up because there are no alerts using these fields. To solve this, please update the index-pattern template using the following command:
 
 .. code-block:: console
 
