@@ -251,7 +251,7 @@ main {
 
 /* Light theme -------------------------------------------------------------- */
 
-body {
+.light-theme {
   .literal-block-wrapper.docutils.container {
     .code-block-caption {
       background-color: $light-color-output-title-background;
@@ -261,6 +261,9 @@ body {
         }
       }
     }
+  }
+  .admonition [class*="highlight-"] {
+    border-color: $light-color-border-deeper;
   }
   [class*="highlight-"] {
     border-color: $light-color-code-block-border;
@@ -361,6 +364,9 @@ body {
         }
       }
     }
+  }
+  .admonition [class*="highlight-"] {
+    border-color: $dark-color-code-block-background;
   }
   [class*="highlight-"] {
     border-color: $dark-color-code-block-border;

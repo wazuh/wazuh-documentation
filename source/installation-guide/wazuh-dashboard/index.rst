@@ -34,15 +34,13 @@ Recommended operating systems
 
 Wazuh can be installed on a 64-bit Linux operating system. Wazuh supports the following operating system versions:
 
-
 .. list-table::
-   :width: 100%
+    :width: 100%
    
-   * - Amazon Linux 2
-     - CentOS 7, 8
-   * - Red Hat Enterprise Linux 7, 8
-     - Ubuntu 16.04, 18.04, 20.04
-
+    * - Amazon Linux 2
+      - CentOS 7, 8
+    * - Red Hat Enterprise Linux 7, 8
+      - Ubuntu 16.04, 18.04, 20.04
 
 Hardware requirements
 ^^^^^^^^^^^^^^^^^^^^^
@@ -56,7 +54,7 @@ The Wazuh dashboard can be installed on a dedicated node or along with the Wazuh
   +-------------------------+----------+--------------+--------------+----------------+
   | Component               |  RAM (GB)|  CPU (cores) |  RAM (GB)    |   CPU (cores)  |
   +=========================+==========+==============+==============+================+
-  | Wazuh dashboard         |     4    |     2        |     16       |       8        |
+  | Wazuh dashboard         |     4    |     2        |     8        |       4        |
   +-------------------------+----------+--------------+--------------+----------------+
 
 

@@ -3,116 +3,111 @@
 .. meta::
   :description: The pre-built Wazuh Amazon Machine Image includes all Wazuh components ready-to-use. Test all Wazuh capabilities with our AMI.  
 
-.. _amazon-machine-images:
-
 Amazon Machine Images (AMI)
 ===========================
 
-Wazuh provides a pre-built Amazon Machine Image that you can directly launch using our AMI in the AWS Marketplace or, as an alternative, you can configure and deploy the instance manually. Additionally, our `Wazuh Consulting Service <https://aws.amazon.com/marketplace/pp/prodview-ve4mgmhukgmzi>`_ is also available in the AWS Marketplace for you to check the Professional Service packages Wazuh has to offer. 
+.. warning::
 
-Specifications of the latest AMI:
+   The AMI for Wazuh 4.3 is in the process of being published. It will be available soon in the AWS Marketplace.
 
-    - Amazon Linux 2
-    - Wazuh manager |WAZUH_LATEST_AMI|
-    - Open Distro for Elasticsearch |OPENDISTRO_LATEST_AMI|
-    - Filebeat-OSS |FILEBEAT_LATEST_AMI|
-    - Kibana |KIBANA_VERSION_AMI|
-    - Wazuh Kibana plugin |WAZUH_LATEST_AMI|-|OPENDISTRO_LATEST_AMI|
+Wazuh provides a pre-built Amazon Machine Image (AMI). An AMI is a pre-configured template that is ready to use for creating a virtual computing environment within the Amazon Elastic Compute Cloud (Amazon EC2). The latest Wazuh AMI packages together Amazon Linux 2 with the following central components for your Wazuh server:
+
+- Wazuh manager |WAZUH_LATEST_AMI|
+- Filebeat-OSS |FILEBEAT_LATEST_AMI|
+- Wazuh indexer |WAZUH_LATEST_AMI|
+- Wazuh dashboard |WAZUH_LATEST_AMI|
 
 
 Deployment alternatives
 -----------------------
 
-There are two different options for deploying the Wazuh All-In-One Deployment instance.
+There are two alternatives for deploying a Wazuh instance. You can launch the `Wazuh All-In-One Deployment AMI <https://aws.amazon.com/marketplace/pp/B09J56274H>`_ directly from the AWS Marketplace or you can configure and deploy an instance using the AWS Management Console.
 
-- `Deploy a predefined instance`_
-- `Deploy and configure the instance manually`_
+- `Launch an instance from the AWS Marketplace`_
+- `Deploy an instance using the AWS Management Console`_
+
+.. note::
+  Our `Wazuh Consulting Service <https://aws.amazon.com/marketplace/pp/prodview-ve4mgmhukgmzi>`_ is also available in the AWS Marketplace. Check the Professional Service packages that Wazuh has to offer.
 
 
-Deploy a predefined instance
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Launch an instance from the AWS Marketplace
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Subscribe to our Server product:
+#. Go to `Wazuh All-In-One Deployment <https://aws.amazon.com/marketplace/pp/prodview-eju4flv5eqmgq?ref=hmpg_recommendations_widget>`_ in the AWS Marketplace, then click **Continue to Subscribe**.
 
-    #. Go to `Wazuh All-In-One Deployment <https://aws.amazon.com/marketplace/pp/prodview-eju4flv5eqmgq?ref=hmpg_recommendations_widget>`_, then click  **Continue to Subscribe**. 
-    #. Review the information and accept the terms for this software, then click **Continue to Configuration** to confirm the action.
-   
- 
-#. Configure the software by selecting a **Software Version** and the **Region** where the instance will be deployed. Once configured, click **Continue to Launch**.
+#. Review the information and accept the terms for the software. Click **Continue to Configuration** to confirm subscribing to our Server product.
 
-#. Review your configuration before launching the software and make sure that all default settings are correct. When selecting the **EC2 Instance Type**, we recommend that you use an instance type ``c5.2xlarge`` or similar, and check the `minimum and recommended requirements <https://documentation.wazuh.com/current/installation-guide/requirements.html#all-in-one-deployment>`_ for this type of instance. 
+#. Select a **Software Version** and the **Region** where the instance is going to be deployed. Then, click **Continue to Launch**.
 
-#. Click **Launch** to generate the instance. 
+#. Review your configuration making sure that all settings are correct before launching the software. Adapt the default configuration values to your needs.
 
-Your instance is successfully launched and you can now :ref:`access the Wazuh web interface <ami_wazuh_ui>`.
+    #. When selecting the **EC2 Instance Type**, we recommend that you use an instance type ``c5.2xlarge``.
+  
+    #. When selecting the **Security Group**, it must be one with the appropriate :ref:`settings for your Wazuh instance <default_ports>` to guarantee the correct operation. You can create a new security group by choosing **Create new based on seller settings**. This new group will have the appropriate settings by default.
 
-Deploy and configure the instance manually
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#. Click **Launch** to generate the instance.
 
-#. Subscribe to our Server product:
+Once your instance is successfully launched and a few minutes have elapsed, you can :ref:`access the Wazuh dashboard <ami_wazuh_ui>`.
 
-    #. From your `AWS Management Console <https://aws.amazon.com/console/>`_ dashboard, select **Launch instance**.  
-    #. Search for *Wazuh All-In-One Deployment* by `Wazuh Inc. <https://aws.amazon.com/marketplace/seller-profile?id=4c3cda83-f4cf-4afd-9f48-18ffe4f4fe69>`_, and click **Select** to subscribe. 
-   
-#. Review the Server Product characteristics, then click **Continue**.
 
-#. Select the instance type according to your needs, then click **Next: Configure Instance Details**. We recommend that you use an instance type ``c5.2xlarge`` or similar, and check the `minimum and recommended requirements <https://documentation.wazuh.com/current/installation-guide/requirements.html#all-in-one-deployment>`_ for this type of instance. 
+Deploy an instance using the AWS Management Console
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#. Select **Launch instance** from your `AWS Management Console <https://aws.amazon.com/console/>`_ dashboard.
+
+#. Find Wazuh All-In-One Deployment by Wazuh Inc., and click **Select** to subscribe.
+
+#. Review the Server product characteristics, then click **Continue**. This allows subscribing to our Server product.
+
+#. Select the instance type according to your needs, then click **Next: Configure Instance Details**. We recommend that you use an instance type ``c5.2xlarge``.
 
 #. Configure your instance as needed, then click **Next: Add Storage**.
 
-#. Set the storage capacity of your instance under the **Size (GiB)** column, then click **Next: Add Tags**. We recommend 100GiB or more.
+#. Set the storage capacity of your instance under the **Size (GiB)** column, then click **Next: Add Tags**. We recommend 100 GiB or more.
 
 #. Add as many tags as you need, then click **Next: Configure Security Group**.
 
-#. Establish a Segurity Group (SG). To do this, make sure you check the `protocols and ports <https://documentation.wazuh.com/current/getting-started/architecture.html#required-ports>`_ necessary for its correct operation and the security measures for your instance. Once the SG is configured, click **Review and Launch**.
+#. Check that the ports and protocols are the :ref:`ports and protocols <default_ports>` for Wazuh. Check the security measures for your instance. This will establish the Security Group (SG). Then, click **Review and Launch**.
 
 #. Review the instance configuration and click **Launch**.
 
-#. Configure key pair settings: 
+#. Select one of three configuration alternatives available regarding the key pair settings: **Choose an existing key pair**, **Create a new key pair**, **Proceed without a key pair**. You need to choose an existing key pair or create a new one to access the instance with SSH.
+    
+#. Click **Launch instances** to complete the process and deploy your instance.
 
-    #. Select one of the three configuration options available. 
-
-        - Choose an existing key pair
-        - Create a new key pair
-        - Proceed without a key pair
-
-
-       You need to select a key pair to access the instance with SSH. If you proceed without a key pair, the instance is only available through *EC2 Instance Connect*.
-
-    #. To complete the process and deploy your instance, click **Launch instances**.
-
-Your instance is fully configured and ready. You can now :ref:`access the Wazuh web interface <ami_wazuh_ui>`.
+Once your instance is fully configured and ready after a few minutes since launch, you can :ref:`access the Wazuh dashboard <ami_wazuh_ui>`.
 
 
 Configuration files
 -------------------
 
-All components included in this AMI are configured to work out-of-the-box without the need to modify any settings. However, all components can be fully customized. These are the configuration files locations:
+All components included in this AMI are configured to work out-of-the-box without the need to modify any settings. However, all components can be fully customized. The configuration files locations are the following.
 
-    - Wazuh manager: ``/var/ossec/etc/ossec.conf``
-    - Open Distro for Elasticsearch: ``/etc/elasticsearch/elasticsearch.yml``
-    - Filebeat-OSS: ``/etc/filebeat/filebeat.yml``
-    - Kibana: ``/etc/kibana/kibana.yml``
-    - Wazuh Kibana plugin: ``/usr/share/kibana/data/wazuh/config/wazuh.yml``
+- Wazuh manager: ``/var/ossec/etc/ossec.conf``
+- Wazuh indexer: ``/etc/wazuh-indexer/opensearch.yml``
+- Filebeat-OSS: ``/etc/filebeat/filebeat.yml``
+- Wazuh dashboard:
 
+    - ``/etc/wazuh-dashboard/opensearch_dashboards.yml``
+    - ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml``
 
-To learn more about the Wazuh configuration options for its components, see the :ref:`User manual <user_manual>`.
+To learn more about configuring Wazuh, see the :ref:`User manual <user_manual>`.
 
 .. _ami_wazuh_ui:
 
-Access the Wazuh web interface
-------------------------------
+Access the Wazuh dashboard
+--------------------------
 
-Once the instance is running, you can access the web interface with your credentials.
+When the instance is launched, the passwords of the users are automatically changed to the ID of the instance. In this way, access to the interface is guaranteed only to the creator of it. This process can take an average of five minutes depending on the type of instance. Both the SSH access and the Wazuh dashboard access are disabled during this process.
 
+Once the instance is running and the process to initialize passwords is complete, you can access the Wazuh dashboard with your credentials.
 
-- URL: *https://<instance_ip>*
-- **Username**: *wazuh*
-- **Password**: *<your_instance_id>*
+- URL: *https://<YOUR_INSTANCE_IP>*
+- **Username**: *admin*
+- **Password**: *<YOUR_INSTANCE_ID>*
 
-Keep in mind that after launching the instance, the passwords of the users are changed to the ID of the instance created from the AMI. In this way, access to the interface is guaranteed only to the creator of it. This process can take an average of 5 minutes depending on the type of instance and both the SSH access and the Kibana web interface are disabled during the process. 
-
-.. note:: It is highly recommended to change the default passwords of Elasticsearch for the users’ passwords in the first SSH access. To perform this action, see the :ref:`Elasticsearch tuning <elastic_tuning>` section.
+.. warning::
+  It is highly recommended to change the default users passwords in the first SSH access. To perform this action, see the :ref:`Change users' password <change_elastic_pass>` section.
 
 
 Security considerations about SSH
@@ -124,7 +119,8 @@ Security considerations about SSH
 
   .. code-block:: console
 
-      # ssh -i "key_pair_name" wazuh-user@instance_ip
+      # ssh -i "<KEY_PAIR_NAME>" wazuh-user@<YOUR_INSTANCE_IP>
+- Access during the initial password change process is disabled to prevent potential problems. This process may take a few minutes to complete. Any access attempt before completion will show ``wazuh-user@<INSTANCE_IP>: Permission denied (publickey,gssapi-keyex,gssapi-with-mic)``.
 
 
 Next steps
@@ -138,4 +134,3 @@ Upgrading the Wazuh server
 The Wazuh server in the instance can be upgraded as a traditional installation.
 
   - :ref:`Upgrading the Wazuh manager <upgrading_wazuh_server>`
-  - :ref:`Upgrading Open Distro for Elasticsearch, Filebeat-OSS, and Kibana <upgrading_open_distro>`
