@@ -71,7 +71,7 @@ Deploy an instance using the AWS Management Console
 
 #. Review the instance configuration and click **Launch**.
 
-#. Select one of three configuration alternatives available about key pair settings: **Choose an existing key pair**, **Create a new key pair**, **Proceed without a key pair**. You need to choose an existing key pair or create a new one to access the instance with SSH.
+#. Select one of three configuration alternatives available regarding the key pair settings: **Choose an existing key pair**, **Create a new key pair**, **Proceed without a key pair**. You need to choose an existing key pair or create a new one to access the instance with SSH.
     
 #. Click **Launch instances** to complete the process and deploy your instance.
 
