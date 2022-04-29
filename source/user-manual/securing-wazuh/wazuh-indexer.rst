@@ -5,10 +5,10 @@
 
 .. _user_manual_secure_wazuh_indexer:
 
-Change Wazuh indexer passwords
-==============================
+Change the Wazuh indexer passwords
+==================================
 
-In this section we will show you how to change the passwords of Wazuh indexer to secure your installation.
+In this section we will show you how to change the passwords of the Wazuh indexer users to secure your installation.
 
 We  provide a script to simplify the process of changing passwords, start by downloading it:
 
@@ -48,8 +48,10 @@ All the available options to run the script are:
 | -h / --help                                  | Shows help                                                                                                  |
 +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
 
+Change the password for single user
+-----------------------------------
 
-Change password for single user
+To change the password for a single user, run the script with the ``-u`` option. You may indicate the new password with option ``-p``. If no password is specified, the script will generate a random one. 
 
   .. code-block:: console
   
@@ -62,6 +64,9 @@ This is the output of the script:
 
     28/04/2022 10:17:50 INFO: Generating password hash
     28/04/2022 10:17:55 WARNING: Password changed. Remember to update the password in /etc/filebeat/filebeat.yml and /etc/wazuh-dashboard/opensearch_dashboards.yml if necessary and restart the services.
+
+Change the passwords for all users
+----------------------------------
 
 To generate and change passwords for all users, run the script with the ``-a`` option:
 
@@ -83,6 +88,9 @@ This is the output of the script:
     28/04/2022 10:25:31 INFO: The password for user wazuh_admin is WrWzM8egHJY2CfxngapAeSchA3yq3X3t
     28/04/2022 10:25:31 INFO: The password for user wazuh_user is oCwLLG88wb7x5OpnxOPjclVpqWgq9s7W
     28/04/2022 10:25:31 WARNING: Passwords changed. Remember to update the password in /etc/filebeat/filebeat.yml and /etc/wazuh-dashboard/opensearch_dashboards.yml if necessary and restart the services.
+
+Change the passwords using a formatted file
+--------------------------------------------
 
 To use a formatted file to indicate the passwords, run the script with the ``-f`` option followed by the file path. Use the following pattern to indicate the users and passwords in the formatted file: 
 

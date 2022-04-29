@@ -5,15 +5,15 @@
 
 .. _user_manual_secure_elasticsearch:
 
-Change Elasticsearch passwords
+Change the Elasticsearch passwords
 ==================================
 
 
-    During the installation of Elasticsearch, the passwords for the different users were automatically generated. These passwords can be changed afterward using API requests. Replace the following variables and execute the corresponding API call: 
+    During the installation of Wazuh with Elastic Stack basic license, the passwords for the different users were automatically generated. These passwords can be changed afterward using API requests. Replace the following variables and execute the corresponding API call: 
 
       - ``<elasticsearch_ip>``: The IP address of the Elasticsearch node.
       - ``<username>``: The name of the user whose password is going to be changed.
-      - ``<user_password>``: Current user's password. 
+      - ``<user_password>``: Current user password. 
       - ``<new_password>``: The new password that will be assigned to the ``<username>`` user.
 
     .. code-block:: console
@@ -24,7 +24,7 @@ Change Elasticsearch passwords
       # }
       # '
 
-    If the call was successful it returns an empty JSON structure ``{ }``.  
+    If the call is successful, it returns an empty JSON structure ``{ }``.  
     
     The password may need to be updated in ``/etc/filebeat/filebeat.yml`` and ``/etc/kibana/kibana.yml``. 
     

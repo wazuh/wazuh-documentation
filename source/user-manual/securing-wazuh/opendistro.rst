@@ -5,10 +5,10 @@
 
 .. _user_manual_secure_opendistro:
 
-Change Opendistro for Elasticsearch passwords 
-=============================================
+Change the Open Distro for Elasticsearch passwords 
+==================================================
 
-In this section we will show you how to change the passwords of Opendistro for Elasticsearch to secure your installation.
+In this section we will show you how to change the passwords of the Open Distro for Elasticsearch users to secure your installation.
 
 We  provide a script to simplify the process of changing passwords, start by downloading it:
 
@@ -39,10 +39,13 @@ The script allows changing the password for either a single user or all the user
 | -h / --help                                  | Shows help                                                                                                  |
 +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
 
-Change password for single user
+Change the password for single user
+-----------------------------------
 
-  .. code-block:: console
+To change the password for a single user, run the script with the ``-u`` option. You may indicate the new password with option ``-p``. If no password is specified, the script will generate a random one. 
   
+  .. code-block:: console
+
     # bash wazuh-opendistro-passwords-tool -u admin -p mypassword
 
 This is the output of the script:
@@ -59,8 +62,11 @@ This is the output of the script:
     Password changed. Remember to update the password in /etc/filebeat/filebeat.yml and /etc/kibana/kibana.yml if necessary and restart the services.
 
 
-To generate and change passwords for all users, run the script with the ``-a`` option:
 
+Change the passwords for all users
+----------------------------------
+
+To generate and change the passwords for all users, run the script with the ``-a`` option:
 
 .. code-block:: console
 
@@ -93,6 +99,10 @@ This is the output of the script:
     The password for snapshotrestore is rd35bCchP3Uf-0w77VCEJzHF7WEP3fNw
 
     Passwords changed. Remember to update the password in /etc/filebeat/filebeat.yml and /etc/kibana/kibana.yml if necessary and restart the services.
+
+
+Change the passwords using a formatted file
+--------------------------------------------
 
 To use a formatted file to indicate the passwords, run the script with the ``-f`` option followed by the file path. Use the following pattern to indicate the users and passwords in the formatted file: 
 

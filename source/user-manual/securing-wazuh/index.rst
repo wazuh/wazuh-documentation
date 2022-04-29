@@ -8,7 +8,7 @@
 Securing Wazuh
 ===============
 
-This document will give instructions to secure your Wazuh deployments. 
+This document includes instructions to secure your Wazuh deployments. To change the internal users passwords, select an option according to your Wazuh installation and follow the instructions. 
 
     .. toctree::
         :maxdepth: 1
@@ -17,4 +17,4 @@ This document will give instructions to secure your Wazuh deployments.
         opendistro
         elastic-stack
 
-Here you can find how to secure the :doc:`Wazuh API <../api/securing-api>`.
+To secure the Wazuh API, see the :doc:`Securing the Wazuh API <../api/securing-api>` document.
