@@ -56,7 +56,7 @@ The agent runs on the host you want to monitor and communicates with the Wazuh m
 
                     .. thumbnail:: ../../images/installation/windows-agent.png
                         :align: center
-                        :width: 50%
+                        :width: 100%
             
               The installation process is now complete and the Wazuh agent is successfully installed on your Windows system. The next step is to register and configure the agent to communicate with the Wazuh manager. To perform this action, see the :ref:`Wazuh agent enrollment <agent_enrollment>` section.                 
  

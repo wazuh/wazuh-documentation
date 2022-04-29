@@ -127,8 +127,25 @@
     <style type="text/css">{{ inline_fonts }}</style>
 {%- endmacro -%}
 
+{%- macro inline_js() -%}
+  {%- for inline_script_file in inline_scripts -%}
+    <script>
+    {{ inline_script_file }}
+    </script>
+  {% endfor -%}
+{%- endmacro -%}
+
 <!DOCTYPE html>
-<html lang="{{ language }}">
+{%- if not theme_include_mode|tobool -%}
+  {%- set mode = 'class="light-theme"' -%}
+{%- else -%}
+  {%- if not theme_include_mode_switch|tobool -%}
+    {%- set mode = 'class="auto-theme"' -%}
+  {%- else -%}
+    {%- set mode = '' -%}
+  {%- endif -%}
+{%- endif -%}
+<html lang="{{ language }}"{{mode}}>
   <head>
     {% block head -%}
     {% set is_orphan = meta and meta.orphan is defined %}
@@ -141,7 +158,9 @@
     <meta charset="UTF-8">
     <meta name="author" content="Wazuh">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% if theme_include_mode|tobool %}
     <meta name="color-scheme" content="dark light">
+    {% endif %}
     
     {%- block social_cards -%}
     <meta property="og:image" content="{{ theme_wazuh_doc_url + '/current/_static/images/wazuh-docs-card.png' }}">
@@ -162,8 +181,23 @@
     {% endblock htmltitle -%}
 
     {%- block preload -%}
+    <style media="prefers-color-scheme: light">
+      html, body {
+        color: black;
+        background-color: #fff;
+      }
+    </style>  
+    <style media="prefers-color-scheme: dark">
+      html, body {
+        background-color: #2b303a!important;
+      }
+    </style>
+    {% if theme_include_mode|tobool %}
+      {{- inline_js() }}
+    {%- endif %}
     {{- fonts() }}
     <link rel="preload" href="{{ url_root }}_static/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ url_root }}_static/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
     {% endblock preload -%}
     
     {%- block linktags %}

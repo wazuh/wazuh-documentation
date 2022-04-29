@@ -6,33 +6,40 @@
 Uninstalling Wazuh with Open Distro for Elasticsearch
 =====================================================
 
-This document will give instructions to uninstall each Wazuh component. 
-
+This document includes instructions to uninstall the Wazuh components. 
+ 
 Uninstall the Wazuh manager
 ---------------------------
 
-.. tabs::
+#. Remove the Wazuh manager installation.
+
+   .. tabs::
+   
+   
+     .. group-tab:: Yum
+   
+   
+       .. include:: ../../_templates/installations/wazuh/yum/uninstall_wazuh_manager_api.rst
+   
+   
+   
+     .. group-tab:: APT
+   
+   
+       .. include:: ../../_templates/installations/wazuh/deb/uninstall_wazuh_manager_api.rst
+   
+   
+   
+     .. group-tab:: ZYpp
+   
+   
+       .. include:: ../../_templates/installations/wazuh/zypp/uninstall_wazuh_manager_api.rst
 
 
-  .. group-tab:: Yum
 
+#. Disable the Wazuh manager service.
 
-    .. include:: ../../_templates/installations/wazuh/yum/uninstall_wazuh_manager_api.rst
-
-
-
-  .. group-tab:: APT
-
-
-    .. include:: ../../_templates/installations/wazuh/deb/uninstall_wazuh_manager_api.rst
-
-
-
-  .. group-tab:: ZYpp
-
-
-    .. include:: ../../_templates/installations/wazuh/zypp/uninstall_wazuh_manager_api.rst
-
+   .. include:: ../../_templates/installations/wazuh/common/disable_wazuh_manager_service.rst
 
 Uninstall Filebeat
 ---------------------
