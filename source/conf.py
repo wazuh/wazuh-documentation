@@ -16,7 +16,12 @@ import shlex
 import datetime
 import time
 import json
-from jsmin import jsmin
+import atexit
+try:
+    from jsmin import jsmin
+except ImportError:
+    atexit.register(print,"\nThe module jsmin is not available. Please, make sure you install all the required modules listed in requirements.txt.")
+    sys.exit()
 from requests.utils import requote_uri
 
 # If extensions (or modules to document with autodoc) are in another directory,
