@@ -8,7 +8,7 @@
 Wazuh dashboard
 ===============
 
-Welcome to the Wazuh dashboard. Use it as your Wazuh reference library once you have a basic Wazuh installation in place. In the same way that the main components of Wazuh are a fork of the renowned OSSEC HIDS project, so this user manual has been derived from the `OSSEC documentation <http://ossec.github.io/docs/>`_. Kudos to the OSSEC team for their huge contribution to the IT security community.
+The Wazuh dashboard is a powerful web user interface for data visualization and analysis. It includes out-of-the-box dashboards for security events, regulatory compliance (e.g., PCI DSS, GDPR, CIS, HIPAA, NIST 800-53), detected vulnerable applications, file integrity monitoring data, configuration assessment results, cloud infrastructure monitoring events, and others. It is also used to manage Wazuh configuration and to monitor its status.
 
 .. topic:: Contents
 

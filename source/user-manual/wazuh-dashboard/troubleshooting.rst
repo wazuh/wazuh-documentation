@@ -1,14 +1,14 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
-  :description: This section of the Wazuh documentation lists the common installation or usage issues with the Wazuh Kibana plugin and how to resolve them. 
+  :description: This section of the Wazuh documentation lists the common installation or usage issues with the Wazuh dashboard and how to resolve them. 
   
 .. _wazuh_dashboard_troubleshooting:
 
 Troubleshooting
 ===============
 
-This section collects common installation or usage issues on the Wazuh Kibana plugin, and some basic steps to solve them.
+This section collects common installation or usage issues on the Wazuh dashboard, and some basic steps to solve them.
 
 Wazuh API seems to be down
 --------------------------
@@ -34,7 +34,7 @@ This issue means that your Wazuh API might be unavailable. Check the status of t
       # service wazuh-manager status
 
 
-If the Wazuh API is running, try to fetch data using the CLI from the Kibana server:
+If the Wazuh API is running, try to fetch data using the CLI from the Wazuh dashboard server:
 
 .. code-block:: console
 
@@ -95,7 +95,7 @@ To ensure that Filebeat is correctly configured, run the following command:
 Could not connect to API with id: default: 3003 - Missing param: API USERNAME
 -----------------------------------------------------------------------------
 
-Starting Wazuh 4.0 the Wazuh API username variable changed from ``user`` to ``username``. It's necessary to change the credentials (foo:bar are no longer accepted) as well as the name of the variable in the ``/usr/share/wazuh-dashboard/config/wazuh_dashboard.yml`` configuration file. For example, the configuration can be: 
+Starting Wazuh 4.0 the Wazuh API username variable changed from ``user`` to ``username``. It's necessary to change the credentials (foo:bar are no longer accepted) as well as the name of the variable in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file. For example, the configuration can be: 
 
 .. code-block:: console
    
@@ -110,9 +110,9 @@ Starting Wazuh 4.0 the Wazuh API username variable changed from ``user`` to ``us
 None of the above solutions are fixing my problem
 -------------------------------------------------
 
-We have a welcoming community which can help you with most of the problems you might have regarding Wazuh deployment and usage. `<https://wazuh.com/community>`_.
+We have a welcoming community which can help you with most of the problems you might have regarding Wazuh deployment and usage `<https://wazuh.com/community>`_.
 
-Also, you can contact us opening issues in our GitHub repositories under the `organization <https://wazuh.com/community>`_.
+Also, you can contact us opening issues in our GitHub repositories under the `organization <https://github.com/wazuh>`_.
 
 We will  be interested in the log files of your deployment. You can check them out on each component:
 
@@ -122,7 +122,7 @@ Check the following log files:
 
       .. code-block:: console
 
-          # cat /var/log/wazuh-indexer/opensearch.log | grep -i -E "error|warn"
+          # cat /var/log/wazuh-indexer/wazuh-cluster.log | grep -i -E "error|warn"
 
       - Wazuh manager:
 
@@ -144,7 +144,7 @@ Check the following log files:
       The Wazuh indexer uses the ``/var/log`` folder to store logs by default.
 
     .. warning::
-      By default, Wazuh dashboard doesn't store logs on a file. You can change this by configuring ``logging.dest`` setting in the ``opensearch-dashboard.yml`` configuration file.
+      By default, Wazuh dashboard doesn't store logs on a file. You can change this by configuring ``logging.dest`` setting in the ``opensearch_dashboard.yml`` configuration file.
 
 
 

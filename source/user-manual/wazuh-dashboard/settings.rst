@@ -8,7 +8,7 @@
 Settings
 ========
 
-The *Settings* page allows you to configure and customize your Wazuh dashboard app experience.
+The *Settings* page allows you to configure and customize your Wazuh dashboard experience.
 
 API
 ---
@@ -19,10 +19,10 @@ In this section, you can list all your inserted API credentials. The star icon i
   :align: center
   :width: 100%
 
-Extensions
-----------
+Modules
+-------
 
-Wazuh dashboard provides multiple integrations and capabilities to monitor and analyze your hosts. If you're using some of them, you can enable multiple extensions on the app to visualize tailored dashboards, which provide rich and useful information. Some of these extensions are disabled by default because you have to previously enable them on your manager configuration in order to generate alerts.
+Wazuh dashboard provides multiple integrations and capabilities to monitor and analyze your hosts. You can enable multiple modules to visualize tailored dashboards, which provide rich and useful information. Some of these extensions are disabled by default because you have to previously enable them on your manager configuration in order to generate alerts.
 
 .. thumbnail:: ../../images/kibana-app/features/settings/extensions.png
   :align: center
@@ -31,7 +31,7 @@ Wazuh dashboard provides multiple integrations and capabilities to monitor and a
 Configuration
 -------------
 
-You can take a quick look to the full Wazuh dashboard app configuration file here. The documentation for the ``wazuh.yml`` file can be found on the config section.
+You can take a quick look to the Wazuh dashboard configuration file here. The documentation for the ``wazuh.yml`` file can be found on the config section.
 
 .. thumbnail:: ../../images/kibana-app/features/settings/configuration.png
   :align: center
@@ -40,7 +40,7 @@ You can take a quick look to the full Wazuh dashboard app configuration file her
 Logs
 ----
 
-The Wazuh dashboard app stores log information on the ``/usr/share/wazuh-dashboard/data/wazuh/logs/wazuhapp.log`` file. These logs can be helpful for troubleshooting purposes. The *Logs* section allows you to check the last 20 log messages along with its date and severity level.
+The Wazuh dashboard stores log information on the ``/usr/share/wazuh-dashboard/data/wazuh/logs/wazuhapp.log`` file. These logs can be helpful for troubleshooting purposes. 
 
 .. thumbnail:: ../../images/kibana-app/features/settings/logs.png
   :align: center
@@ -49,7 +49,7 @@ The Wazuh dashboard app stores log information on the ``/usr/share/wazuh-dashboa
 About
 -----
 
-This section provides information about your currently installed Wazuh dashboard app package, such as version, revision, and installation date. If you want to discover what's new on each app release, you can go to our `Changelog file <https://github.com/wazuh/wazuh-kibana-app/blob/master/CHANGELOG.md>`_ to check it out.
+This section provides information about your currently installed Wazuh dashboard package, such as version, revision, and installation date. If you want to discover what's new on each release, you can go to our `Changelog file <https://github.com/wazuh/wazuh-kibana-app/blob/master/CHANGELOG.md>`_ to check it out.
 
 .. thumbnail:: ../../images/kibana-app/features/settings/about.png
   :align: center
