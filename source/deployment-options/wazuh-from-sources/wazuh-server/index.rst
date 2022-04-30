@@ -6,7 +6,7 @@
 Installing Wazuh server from sources
 ====================================
 
-The Wazuh server collects and analyzes data received from deployed agents. It runs the Wazuh manager, the Wazuh API and Filebeat. Alternatively, the Wazuh manager package and compatible agent  packages can be checked or downloaded :doc:`here </installation-guide/packages-list>`.
+The Wazuh server collects and analyzes data received from deployed agents. It runs the Wazuh manager, the Wazuh API, and Filebeat. Alternatively, the Wazuh manager package and compatible agent  packages can be checked or downloaded :doc:`here </installation-guide/packages-list>`.
 
 Installing dependencies
 -----------------------
@@ -82,7 +82,7 @@ Installing dependencies
         
             # pacman --noconfirm -Syu curl gcc make sudo wget expect gnupg perl-base perl fakeroot python brotli automake autoconf libtool gawk libsigsegv nodejs base-devel inetutils cmake
 
-Optional. Install the following dependencies only when compiling the CPython from sources. Since v4.2.0, ``make deps TARGET=server`` will download a portable version of CPython ready to be installed. Nevertheless, you can download the CPython sources adding the ``PYTHON_SOURCE`` flag when running ``make deps``.
+Optional. Install the following dependencies only when compiling the CPython from sources. Since v4.2.0, ``make deps TARGET=server`` will download a portable version of CPython ready to be installed. Nevertheless, you can download the CPython sources by adding the ``PYTHON_SOURCE`` flag when running ``make deps``.
 
 To install the required dependencies to build the python interpreter, follow these steps:
 
@@ -155,7 +155,7 @@ Installing Wazuh manager
 
     .. warning::
       
-        Be extremely careful not to select a critical installation directory if you choose a different path than the default. If the directory already exist the installer will ask to delete the directory or proceed by installing Wazuh inside it.
+        Be extremely careful not to select a critical installation directory if you choose a different path than the default. If the directory already exists, the installer will ask to delete the directory or proceed by installing Wazuh inside it.
 
 #.  The installer asks if you want to start Wazuh at the end of the installation. If you choose not to, you can start it later with:
 
