@@ -127,20 +127,20 @@ More details on  default configuration variables can be found in the :doc:`varia
 2 - Preparing to run the playbook
 ---------------------------------
 
-We can create a similar YAML file or modify the one we already have to adapt it to our configuration. We will use the IP address of the machine where we are going to install the Wazuh manager in the hosts section and and the IP address of the machine where we installed the Wazuh indexer service to the ``filebeat_output_indexer_hosts`` field.
+We can create a similar YAML file or modify the one we already have to adapt it to our configuration. In this case, we are going to modify the wazuh-manager-oss.yml file and include the IP address of the machine where we are going to install the Wazuh manager in the hosts section and the IP address of the machine where we installed the Wazuh indexer service to the ``filebeat_output_indexer_hosts`` field.
 
 Our resulting file is:
 
 .. code-block:: yaml
 
 	---
-	- hosts: all-in-one
+	- hosts: all_in_one
 	  roles:
 	    - role: ../roles/wazuh/ansible-wazuh-manager
 	    - role: ../roles/wazuh/ansible-filebeat-oss
 	      filebeat_node_name: node-1
 	      filebeat_output_indexer_hosts:
-	      - "192.168.33.31:9200"
+	      - "127.0.0.1:9200"
 
 3 - Running the playbook
 ------------------------
@@ -149,9 +149,11 @@ Now, we are ready to run the playbook and start the installation. However, some 
 
 #. Let’s run the playbook.
 
+	Switch to the playbooks folder on the Ansible server and proceed to run the command below:
+	
 	.. code-block:: console
 
-		# ansible-playbook wazuh-manager-oss.yml
+		# ansible-playbook wazuh-manager-oss.yml -b -K
 
 #. We can check the status of the new services on our Wazuh server.
 

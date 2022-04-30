@@ -55,7 +55,7 @@ After creating the Ansible server key-pair, you need to add the public key to al
 
    .. code-block:: console
 
-      $ cd
+      $ cd ~
         
 #. Check for the ``.ssh`` directory. If it does not exist, create the ``.ssh`` directory and assign the appropriate permissions to it:
 

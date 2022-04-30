@@ -175,7 +175,7 @@ Our Ansible server will need to connect to the other endpoints. Let’s see how 
 
       .. code-block:: console
 
-         $ cd
+         $ cd ~
 
    #. Check for the ``.ssh`` directory. If it does not exist, create the ``.ssh`` directory and assign the appropriate permissions to it:
 
@@ -210,7 +210,7 @@ Our Ansible server will need to connect to the other endpoints. Let’s see how 
 
    .. code-block:: console
 
-      $ sudo vi /etc/ssh/sshd_config
+      # vi /etc/ssh/sshd_config
 
    #. Check that the following lines are uncommented:
 
@@ -246,13 +246,13 @@ Testing the Ansible connection to remote endpoints
 
 #. Add endpoints for management by Ansible.
 
-   This is done by including the hostname or IP Address in ``/etc/ansible/hosts`` on our Ansible server. In this case, we we intend to use the Ansible playbooks to deploy the Wazuh indexer, dashboard and manager on one server (all-in-one deployment). The IP address of the server is ``192.168.33.31`` and the user is ``centos``.
+   This is done by including the hostname or IP Address in ``/etc/ansible/hosts`` on our Ansible server. In this case, we intend to use the Ansible playbooks to deploy the Wazuh indexer, dashboard and manager on one server (all-in-one deployment). The IP address of the server is ``192.168.33.31`` and the user is ``centos``.
    
    We proceed to add the following entry to the ``/etc/ansible/hosts`` file:
 
    .. code-block:: none
 
-      [all-in-one]
+      [all_in_one]
       192.168.33.31 ansible_ssh_user=centos
 
    .. note::
@@ -266,7 +266,7 @@ Testing the Ansible connection to remote endpoints
 
    .. code-block:: console
 
-      ansible@ansible:~$ ansible all -m ping
+      # ansible all -m ping
 
    The expected output is:
 

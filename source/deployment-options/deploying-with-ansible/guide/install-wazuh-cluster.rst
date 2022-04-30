@@ -348,6 +348,7 @@ Let’s take a closer look at the content.
 -  The ``ansible_host`` variable should contain the public IP address/FQDN for each node.
 -  The ``private_ip`` variable should contain the private IP address/FQDN used for the internal cluster communications.
 -  If the environment is located in a local subnet, ``ansible_host`` and ``private_ip`` variables should match.
+-  The ansible_ssh variable specifies the ssh user for the nodes.
 
 3 - Running the playbook
 ------------------------
@@ -356,9 +357,11 @@ Now, we are ready to run the playbook and start the installation. However, some 
 
 #. Let's run the playbook.
 
+   Switch to the playbooks folder on the Ansible server and proceed to run the command below:
+
    .. code-block:: console
 
-      # ansible-playbook wazuh-production-ready.yml
+      # ansible-playbook wazuh-production-ready.yml -b -K
 
 #. We can check the status of the new services on our respective nodes.
 
@@ -388,7 +391,7 @@ Now, we are ready to run the playbook and start the installation. However, some 
 
 .. note::
 	
-	- 	The Wazuh dashboard can be accessed by visiting ``https://<wazuh_server_IP>:5601``
+	- 	The Wazuh dashboard can be accessed by visiting ``https://<dashboard_server_IP>``
 
 	- 	The default credentials for Wazuh deployed using ansible is:
 

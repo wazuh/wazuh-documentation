@@ -150,14 +150,18 @@ More details on default configuration variables can be found in the :doc:`variab
 
 We can configure the indexer and dashboard files and execute them individually, or create a single file that executes the installation of the services in our all in one Wazuh server. In this case, we choose to use a single file to execute the installation.
 
+Create the file wazuh-indexer-and-dashboard.yml in the playbooks directory.
+
 .. code-block:: console
 
-   # cat playbooks/wazuh-indexer-and-dashboard.yml
+   # touch playbooks/wazuh-indexer-and-dashboard.yml
+
+Fill it with the content below:
 
 .. code-block:: yaml
    :class: output
 
-   - hosts: all-in-one
+   - hosts: all_in_one
      roles:
        - role: ../roles/wazuh/wazuh-indexer
          perform_installation: false
@@ -172,7 +176,9 @@ We can configure the indexer and dashboard files and execute them individually, 
      tags:
        - generate-certs
 
-   - hosts: wazuhindexer
+   - hosts: all_in_one
+     become: yes
+     become_user: root
      roles:
        - role: ../roles/wazuh/wazuh-indexer
        - role: ../roles/wazuh/wazuh-dashboard
@@ -196,9 +202,11 @@ Now, It seems that we are ready to run the playbook and start the installation. 
 
 #. Let's run the playbook.
 
+   Switch to the playbooks folder on the Ansible server and proceed to run the command below:
+
    .. code-block:: console
 
-      # ansible-playbook wazuh-indexer-and-dashboard.yml
+      # ansible-playbook wazuh-indexer-and-dashboard.yml -b -K
 
 #. We can check the status of our new services on our Wazuh indexer and dashboard server.
 

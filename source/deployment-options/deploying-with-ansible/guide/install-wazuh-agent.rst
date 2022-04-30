@@ -127,7 +127,14 @@ More details on default configuration variables can be found in the :doc:`variab
 2 - Preparing to run the playbook
 ---------------------------------
 
-We can create a similar YAML file or modify the one we already have to adapt it to our configuration. We will use the host group of the endpoints where we are going to install the Wazuh agent in the hosts section in this case, it is ``wazuh-agents``. We will also add the IP address of the Wazuh server to the ``wazuh_managers:`` section.
+We can create a similar YAML file or modify the one we already have to adapt it to our configuration. We will use the host group of the endpoints where we are going to install the Wazuh agent in the hosts section. In this case, it is ``wazuh-agents``. The hosts file will look like this:
+
+.. code-block:: yaml
+
+	[wazuh-agents]
+	192.168.33.31 ansible_ssh_user=centos
+
+We will also add the IP address of the Wazuh server to the ``wazuh_managers:`` section.
 
 Our resulting file is:
 
@@ -157,9 +164,11 @@ Now, we are ready to run the playbook and start the installation. However, some 
 
 #.	Let’s run the playbook.
 
-		.. code-block:: console
+	Switch to the playbooks folder on the Ansible server and proceed to run the command below:
 
-			# ansible-playbook wazuh-agent.yml
+	.. code-block:: console
+
+		# ansible-playbook wazuh-agent.yml -b -K
 
 #. Once the deployment completes, we can check the status of the Wazuh agent on the endpoints.
 
