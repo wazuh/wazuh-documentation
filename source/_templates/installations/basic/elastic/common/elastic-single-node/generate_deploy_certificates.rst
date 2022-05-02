@@ -22,7 +22,7 @@
         - "10.0.0.4"    
       EOF
 
-    Every ``name`` section corresponds to one host in the Wazuh - Elastic Stack environment. In this example, the file describes:
+    Every ``name`` section corresponds to one host in the Wazuh Server - Elastic Stack environment. In this example, the file describes:
 
     - An ``elasticsearch`` instance with IP address ``10.0.0.2``.
     - A ``filebeat`` instance with IP address ``10.0.0.3`` corresponding to a single-node Wazuh cluster.
@@ -65,7 +65,7 @@
         - "10.0.0.5"  
       EOF
 
-    Every ``name`` section corresponds to one host in the Wazuh - Elastic Stack environment. In this example, the file describes:
+    Every ``name`` section corresponds to one host in the Wazuh Server - Elastic Stack environment. In this example, the file describes:
 
     - An ``elasticsearch`` instance with IP ``10.0.0.2``. It is an Elasticsearch single-node cluster.
     - Two ``filebeat`` instances, the #1 and #2 with their respective IPs ``10.0.0.3`` and ``10.0.0.4``. These correspond to two Wazuh cluster nodes. In case of configuring a Wazuh multi-node cluster with three or more nodes, more ``name`` sections with their respective names and IPs can be defined.
