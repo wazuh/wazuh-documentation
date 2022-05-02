@@ -40,7 +40,7 @@ The required certificates are imported via secretGenerator on the ``kustomizatio
                 - certs/indexer_cluster/filebeat.pem
                 - certs/indexer_cluster/filebeat-key.pem
             - name: dashboard-certs
-            files:
+              files:
                 - certs/dashboard_http/cert.pem
                 - certs/dashboard_http/key.pem
                 - certs/indexer_cluster/root-ca.pem
