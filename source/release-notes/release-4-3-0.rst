@@ -367,14 +367,14 @@ Other
 Packages
 ^^^^^^^^
 - `#1496 <https://github.com/wazuh/wazuh-packages/pull/1496>`_ Hide passwords in log file.
-- `#1500 <https://github.com/wazuh/wazuh-packages/pull/1500>`_ Fix dashboard ip messages.
+- `#1500 <https://github.com/wazuh/wazuh-packages/pull/1500>`_ Fix dashboard IP messages.
 - `#1499 <https://github.com/wazuh/wazuh-packages/pull/1499>`_ Improved APT locked message and retry time.
-- `#1497 <https://github.com/wazuh/wazuh-packages/pull/1497>`_ Fix unhandled promise for dashboard.
+- `#1497 <https://github.com/wazuh/wazuh-packages/pull/1497>`_ Fix unhandled promise for the dashboard.
 - `#1494 <https://github.com/wazuh/wazuh-packages/pull/1494>`_ Update ova motd message 4.3.
 - `#1471 <https://github.com/wazuh/wazuh-packages/pull/1471>`_ Remove service disable from RPM and Debian packages.
-- `#1471 <https://github.com/wazuh/wazuh-packages/pull/1471>`_ Disabled multitenancy by default in dashboard and changed the app default route.
-- `#1434 <https://github.com/wazuh/wazuh-packages/pull/1434>`_ Set as warning the unhandled promises in wazuh dashboard.
-- `#1395 <https://github.com/wazuh/wazuh-packages/pull/1395>`_ Remove ip message from OVA.
+- `#1471 <https://github.com/wazuh/wazuh-packages/pull/1471>`_ Disabled multitenancy by default in the dashboard and changed the app default route.
+- `#1434 <https://github.com/wazuh/wazuh-packages/pull/1434>`_ Set as warning the unhandled promises in the Wazuh dashboard.
+- `#1395 <https://github.com/wazuh/wazuh-packages/pull/1395>`_ Remove IP message from OVA.
 - `#1390 <https://github.com/wazuh/wazuh-packages/pull/1390>`_ Remove demo certificates from indexer and dashboard packages.
 - `#1307 <https://github.com/wazuh/wazuh-packages/pull/1307>`_ Add centos8 vault repository due to EOL.
 - `#1302 <https://github.com/wazuh/wazuh-packages/pull/1302>`_ Fix user deletion warning RPM manager.
@@ -391,23 +391,23 @@ Packages
 - `#1023 <https://github.com/wazuh/wazuh-packages/pull/1023>`_ Add ossec user and group during compilation.
 - `#1261 <https://github.com/wazuh/wazuh-packages/pull/1261>`_ Merge Wazuh Dashboard v3 #.
 - `#1256 <https://github.com/wazuh/wazuh-packages/pull/1256>`_ Fix certs permissions in RPM.
-- `#1208 <https://github.com/wazuh/wazuh-packages/pull/1208>`_ [Kibana app] Support pluginPlatform.version property in the app manifest.
+- `#1208 <https://github.com/wazuh/wazuh-packages/pull/1208>`_ Kibana app now supports pluginPlatform.version property in the app manifest.
 - `#1162 <https://github.com/wazuh/wazuh-packages/pull/1162>`_ Fix certificates creation using parameters 4.3.
-- `#1193 <https://github.com/wazuh/wazuh-packages/pull/1193>`_ Fix archlinux package generation parameters 4.3.
+- `#1193 <https://github.com/wazuh/wazuh-packages/pull/1193>`_ Fix Archlinux package generation parameters 4.3.
 - `#1132 <https://github.com/wazuh/wazuh-packages/pull/1132>`_ Add new 2.17.1 log4j mitigation version 4.3.
 - `#1123 <https://github.com/wazuh/wazuh-packages/pull/1123>`_ Fix client keys Ownership for 3.7.x and previous versions.
 - `#1106 <https://github.com/wazuh/wazuh-packages/pull/1106>`_ Added new log4j remediation 4.3.
-- `#1112 <https://github.com/wazuh/wazuh-packages/pull/1112>`_ Fix linux wpk generation 4.3.
+- `#1112 <https://github.com/wazuh/wazuh-packages/pull/1112>`_ Fix Linux wpk generation 4.3.
 - `#1096 <https://github.com/wazuh/wazuh-packages/pull/1096>`_ Add log4j mitigation 4.3.
 - `#1086 <https://github.com/wazuh/wazuh-packages/pull/1086>`_ Increase admin.pem cert expiration date 4.3.
 - `#1078 <https://github.com/wazuh/wazuh-packages/pull/1078>`_ Remove wazuh user from unattended/OVA/AMI 4.3.
-- `#1074 <https://github.com/wazuh/wazuh-packages/pull/1074>`_ Fix groupdel ossec error in upgrade to 4.3.0.
+- `#1074 <https://github.com/wazuh/wazuh-packages/pull/1074>`_ Fix groupdel ossec error during upgrade to 4.3.0.
 - `#1067 <https://github.com/wazuh/wazuh-packages/pull/1067>`_ Fix curl kibana.yml 4.3.
 - `#1060 <https://github.com/wazuh/wazuh-packages/pull/1060>`_ Remove restore-permissions.sh from Debian Packages.
-- `#1048 <https://github.com/wazuh/wazuh-packages/pull/1048>`_ Bump unattended 4.3.0 #1048
+- `#1048 <https://github.com/wazuh/wazuh-packages/pull/1048>`_ Bump unattended 4.3.0.
 - `#1012 <https://github.com/wazuh/wazuh-packages/pull/1012>`_ Removed cd usages in unattended installer and fixed uninstaller 4.3.
 - `#1023 <https://github.com/wazuh/wazuh-packages/pull/1023>`_ Add ossec user and group during compilation.
-- `#1020 <https://github.com/wazuh/wazuh-packages/pull/1020>`_ Removed warning and added text in wazuh-passwords-tool.sh final message 4.3.
+- `#1020 <https://github.com/wazuh/wazuh-packages/pull/1020>`_ Removed warning and added text in ``wazuh-passwords-tool.sh`` final message 4.3.
 
 
 Resolved issues
