@@ -14,7 +14,9 @@ This section lists the changes in version 4.3.0. Every update of the Wazuh solut
 Highlights
 ----------
 
-Wazuh 4.3.0 includes numerous new additions, such as some improvements in the Wazuh manager. Now, the agent is able to collect the installed packages inventory on Amazon Linux and Arch Linux, giving support to Vulnerability Detector for reporting vulnerability exposures. In addition, the Vulnerability Detector now manages a vulnerability inventory and produces alerts during the first agents scan and when a new vulnerability is either found or solved.
+Wazuh 4.3.0 includes numerous new additions. The agent can now collect the installed packages inventory on Amazon Linux and Arch Linux. New integrations to collect auditing logs from Office 365 and GitHub are added to the agent in this new version. The RESTful API availability has been enhanced thanks to the API now using multiple processes. The 4.3.0 cluster now uses numerous processes to improve its performance. Finally, this new version brings new components, such as the Wazuh Indexer and Wazuh dashboard. Below you will find more information about each of these new features.
+
+Now, the agent is able to collect the installed packages inventory on Amazon Linux and Arch Linux, giving support to Vulnerability Detector for reporting vulnerability exposures. In addition, the Vulnerability Detector now manages a vulnerability inventory and produces alerts during the first agents scan and when a new vulnerability is either found or solved.
 
 .. thumbnail::  ../images/release-notes/4.3.0/packages-inventory.png    
       :title: Packages inventory
@@ -27,7 +29,6 @@ New integrations to collect auditing logs from Office 365 and GitHub are added t
 
     - .. thumbnail:: ../images/release-notes/4.3.0/Management-Configuration.png
     - .. thumbnail:: ../images/release-notes/4.3.0/Office-365-General.png
-
 
 
 The RESTful API availability has been enhanced thanks to the API now using multiple processes. The performance of several API endpoints is also improved, which is especially palpable in large environments. Additionally, the agent batch is upgraded with an increased limit of agents per request and a new set of filters. 
