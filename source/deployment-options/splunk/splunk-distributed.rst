@@ -1,133 +1,310 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015–2022 Wazuh, Inc.
 
-.. meta:: :description: Splunk for Wazuh installation guide
+.. meta::
+   :description: Splunk for Wazuh installation guide
 
-.. _splunk_distributed:
+Install Splunk in a multi-instance cluster
+==========================================
 
-Installing & Configuring Splunk Cluster
-=======================================
+This document will guide the users through the installation process for a multi-tier server, recommended for larger environments with huge amounts of data (in this case, Wazuh alerts) and users.
 
-This document will guide the users through the installation process for a multitier server, recommended for larger environments with huge amounts of data (in this case, Wazuh alerts) and users.
+Prerequisites
+-------------
+
+#. A Wazuh manager cluster.
+#. A Splunk cluster.
 
 .. note::
-  Many of the commands described below need to be executed with root user privileges.
+
+   Many of the commands described below need to be executed with root user privileges.
 
 .. note::
-  To know how to deploy a Splunk cluster, visit the `Official Splunk Documentation. <https://docs.splunk.com/Documentation/Splunk/7.2.3/Indexer/Aboutclusters>`_
+
+   To deploy a Splunk cluster, visit the `Official Splunk Documentation <https://docs.splunk.com/Documentation/Splunk/7.2.3/Indexer/Aboutclusters>`__.
 
 .. warning::
-  By following this guide,users will learn how to install and configure **Wazuh** in an already created Splunk Cluster, so all the configuration related with Splunk is in their **Official Documentation**, and its assumed that an Splunk installation and configuration has been already done.
 
+   By following this guide, users will learn how to install and configure **Wazuh** in an already created Splunk cluster.  All Splunk related configuration is in their `Official Documentation <https://docs.splunk.com/Documentation/Splunk/7.2.3/Indexer/Aboutclusters>`__, and it is assumed that a Splunk cluster installation and configuration has been already done.
 
-This is the structure of a basic Splunk Cluster, that's formed by the next elements:
+The structure of a basic Splunk Cluster is formed by the following elements:
 
-- The **search head** instances will be in charge of all the searching functionality, and they will look for data on the search peers' indexes. These instances won't have any indexes at all. The **Wazuh App** will be installed in these instances.
-- The **search peer** instances (or indexers) collect all the Wazuh data and stores it in the form of indexes. These instances are connected to the search heads so they can consult the peer's indexes.
-- The **forwarder** runs on the Wazuh manager instance, it reads local data and sends it to the indexer.
-- The **deployer** instance installs and configures the Wazuh App into every **search head** instance at the same time.
+-  The **search head** instances will be in charge of all the searching functionality, and they will look for data on the search peers’ indexes. These instances won’t have any indexes at all. The Wazuh App will be installed in these instances.
+-  The **search peer** instances (or indexers) collect all the Wazuh data and store it in the form of indexes. These instances are connected to the search heads so they can consult the peer’s indexes.
+-  The **forwarder** runs on the Wazuh manager instance, it reads local data and sends it to the indexer.
+-  The **deployer** instance installs and configures the Wazuh App into every **search head** instance at the same time.
 
-.. thumbnail:: ../../images/splunk-cluster/splunk-cluster.png
-    :title: Splunk Cluster with Wazuh installed architecture.
-    :align: center
-    :width: 80%
+.. thumbnail:: /images/splunk-cluster/8.png
+   :align: center
+   :width: 80%
 
-Install Splunk Enterprise instances
------------------------------------
+Install and configure Splunk enterprise indexer instances
+---------------------------------------------------------
 
-Each instance can be installed on different hosts following the same steps described below:
+Each instance can be configured on different hosts following the steps described below:
 
-1. Download Splunk v|SPLUNK_LATEST| package from `its official website <https://www.splunk.com/en_us/download/partners/splunk-enterprise.html>`_.
+#. Ensure Splunk is already installed in ``/opt/splunk`` and start the service:
 
-    .. note::
-      Splunk is not open source software and it requires a registered user and license in order to work. Users can also use a free trial license.
-
-2. Install the Splunk v|SPLUNK_LATEST| package:
-
-    a) For RPM based distributions:
-
-      .. code-block:: console
-
-        # yum install splunk-enterprise-package.rpm
-
-    b) For Debian/Ubuntu distributions:
-
-      .. code-block:: console
-
-        # dpkg --install splunk-enterprise-package.deb
-
-3. Ensure Splunk v|SPLUNK_LATEST| is installed in ``/opt/splunk`` and start the service:
-
-    .. code-block:: console
+   .. code-block:: console
 
       # /opt/splunk/bin/splunk start
 
-    .. note::
-      You will be prompted for a name and password for the administrator user.
+   .. note::
 
-    After this step the Splunk Web service will be listening to port 8000. You can browse ``http://<your-instance-ip>:8000`` in order to access the Web GUI.
+      You will be prompted for a username and password for the administrator user.
 
-4. Optional. Additionally, if the Splunk service is required to start at boot time, execute the following *command*.
+   After this step the Splunk Web service will be listening to port 8000. You can browse ``http://<your-instance-ip>:8000`` in order to access the Web GUI.
 
-    .. code-block:: console
+#. Open Splunk in your preferred browser.
+
+#. Navigate to Settings > Data > Forwarding and receiving.
+
+   .. thumbnail:: /images/splunk-cluster/9.png
+      :align: left
+      :width: 100%
+
+#. Select “Configure receiving”
+
+   .. thumbnail:: /images/splunk-cluster/10.png
+      :align: left
+      :width: 80%
+
+#. Add an unused port as a new receiving port and save it.
+
+   .. thumbnail:: /images/splunk-cluster/11.png
+      :align: left
+      :width: 80%
+
+#. Restart the Splunk service
+
+   .. code-block::
+      
+      # /opt/splunk/bin/splunk restart
+
+#. Optional. Additionally, if the Splunk service is required to start at boot time, execute the following command.
+
+   .. code-block:: console
 
       # /opt/splunk/bin/splunk enable boot-start
 
-Configuring the Splunk instances
---------------------------------
+Configuring the Splunk indexer instances
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Indexers:
-+++++++++
+In the **Splunk master instance**, users will make the configuration that will be pushed to the rest of the indexers.
 
-In the **master instance** users will make the configuration that will be pushed to the rest of the indexers.
+#. Create the files inputs.conf:
 
-For this configuration is necessary to create the following two files and paste them into the following blocks of code respectively:
+   .. code-block:: console
 
-.. code-block:: console
+      # touch /opt/splunk/etc/master-apps/_cluster/local/inputs.conf
 
-  # touch /opt/splunk/etc/master-apps/_cluster/local/inputs.conf
+#. Paste the following block of code in inputs.conf
 
-.. code-block:: xml
+   .. code-block:: xml
 
-  [splunktcp://9997]
-  connection_host = ip
+      [splunktcp://<INDEXER_PORT>]
+      connection_host = ip
+
+   -  ``INDEXER_PORT`` is the receiving port of the Splunk indexer earlier configured in receiving.
+
+#. To create and configure the indexes.conf file, execute the following command:
+
+   .. tabs::
+      
+      .. group-tab:: Splunk 8.1.4
+
+         .. code-block:: console
+
+            # curl -so /opt/splunk/etc/master-apps/_cluster/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_LATEST|-8.1.4/setup/indexer/indexes.conf
+
+      .. group-tab:: Splunk 8.2.2
+
+         .. code-block:: console
+
+            # curl -so /opt/splunk/etc/master-apps/_cluster/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_LATEST|-8.2.2/setup/indexer/indexes.conf
+
+      .. group-tab:: Splunk 8.2.4
+
+         .. code-block:: console
+
+            # curl -so /opt/splunk/etc/master-apps/_cluster/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_LATEST|-8.2.4/setup/indexer/indexes.conf
+
+#. Apply the cluster bundle:
+
+   .. code-block:: console
+   
+      # /opt/splunk/bin/splunk apply cluster-bundle
+      
+#. Restart the Splunk Service:
+
+   .. code-block:: console
+
+      # /opt/splunk/bin/splunk restart
+
+Install and configure Splunk forwarder instances
+------------------------------------------------
+
+A Splunk forwarder is required in order to send alerts to the Splunk indexers. Depending on the type of architecture that you’re installing, the Splunk forwarder is configured differently.
+
+#. Download the Splunk forwarder package from `the official website <https://www.splunk.com/en_us/download/universal-forwarder.html>`__. The Wazuh app for Splunk and its compatible Splunk components can be found :ref:`here <wazuh_and_splunk_app>`
+
+#. Install the Splunk forwarder package on all the Wazuh manager nodes:
+
+   .. tabs::
+
+      .. group-tab:: Yum
+
+         .. code-block:: console
+
+            # yum install splunkforwarder-package.rpm
+
+      .. group-tab:: APT
+
+         .. code-block:: console
+
+            # dpkg --install splunkforwarder-package.deb
 
 
-Now, to create and configure the *indexes.conf* file, execute the following *command*:
+Configuring the Splunk forwarder instances
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. code-block:: console
+The following files will be configured on all forwarder instances:
 
-  # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_SPLUNK_LATEST|-|SPLUNK_LATEST|/setup/indexer/indexes.conf
+-  **inputs.conf**: This file specifies the options for reading alerts from the alerts.json file.
+-  **outputs.conf**: This file is for pointing events to indexers. It can be a single indexer or a cluster of indexers. If it is a cluster of indexers, load balancing has to be configured for the forwarders.
+-  **props.conf**: This file provides format and transforming options on the fields of the data to be indexed.
 
-This is the content of that file:
+Creating the configuration files
+""""""""""""""""""""""""""""""""
 
-.. code-block:: xml
+#. Download and insert the ``inputs.conf`` template:
 
-  [wazuh]
-  coldPath = $SPLUNK_DB/wazuh/colddb
-  enableDataIntegrityControl = 1
-  enableTsidxReduction = 1
-  homePath = $SPLUNK_DB/wazuh/db
-  maxTotalDataSizeMB = 512000
-  thawedPath = $SPLUNK_DB/wazuh/thaweddb
-  timePeriodInSecBeforeTsidxReduction = 15552000
-  tsidxReductionCheckPeriodInSec =
+   .. tabs::
 
-Now, restart the Splunk Service:
+      .. group-tab:: For Splunk 8.1.4
+        
+         .. code-block:: console
+            
+            # curl -so /opt/splunkforwarder/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_LATEST|-8.1.4/setup/forwarder/inputs.conf
+                
+      .. group-tab:: For Splunk 8.2.2
+        
+         .. code-block:: console
+            
+            # curl -so /opt/splunkforwarder/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_LATEST|-8.2.2/setup/forwarder/inputs.conf
+                
+      .. group-tab:: For Splunk 8.2.4
+        
+         .. code-block:: console
+            
+            # curl -so /opt/splunkforwarder/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_LATEST|-8.2.4/setup/forwarder/inputs.conf
 
-.. code-block:: console
+#. Set the Wazuh manager hostname:
 
-  # /opt/splunk/bin/splunk restart
+   .. code-block:: console
+
+      # sed -i "s:MANAGER_HOSTNAME:$(hostname):g" /opt/splunkforwarder/etc/system/local/inputs.conf
+      
+#. Create **outputs.conf**:
+
+   .. code-block:: console
+   
+      # touch /opt/splunkforwarder/etc/system/local/outputs.conf
+
+#. Fill **outputs.conf** with the code block below:
+
+   .. code-block:: yaml
+   
+      [indexer_discovery:cluster1]
+      pass4SymmKey = changeme
+      master_uri = https://<master_ip>:<port>
+
+      [tcpout:cluster1_tcp]
+      indexerDiscovery = cluster1
+
+      [tcpout]
+      defaultGroup = cluster1_tcp
+
+   Where:
+   
+   | ``<master_ip>`` references the indexer master IP address.
+   |
+   | ``<port>`` references the indexers master management port.
+   |
+   | ``changeme`` references the security key used with communication between the cluster master and the forwarders..
+   |
+   | ``cluster1`` references the <name> set in the indexerDiscovery attribute in the [tcpout:<target_group>] stanza.
+   |
+   | In the [tcpout:<target_group>] stanza, set the indexerDiscovery attribute, instead of the server attribute that you would use to specify the receiving peer nodes if you were not enabling indexer discovery. With indexer discovery, the forwarders get their list of receiving peer nodes from the master, not from the server attribute. If both attributes are set, indexerDiscovery takes precedence.
+   
+#. Download and insert the ``props.conf`` template:
+
+   .. tabs::
+
+      .. group-tab:: For Splunk 8.1.4
+        
+         .. code-block:: console
+            
+            # curl -so /opt/splunkforwarder/etc/system/local/props.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_LATEST|-8.1.4/setup/forwarder/props.conf
+                
+      .. group-tab:: For Splunk 8.2.2
+        
+         .. code-block:: console
+            
+            # curl -so /opt/splunkforwarder/etc/system/local/props.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_LATEST|-8.2.2/setup/forwarder/props.conf
+                
+      .. group-tab:: For Splunk 8.2.4
+        
+         .. code-block:: console
+            
+            # curl -so /opt/splunkforwarder/etc/system/local/props.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_LATEST|-8.2.4/setup/forwarder/props.conf
+
+#. To save all the changes, start the Splunk forwarder:
+
+   .. code-block::
+      
+      # /opt/splunkforwarder/bin/splunk start
+      
+   .. note::
+      
+      This command will make a Splunk General Terms appear that will have to be accepted, and then, will ask for a series of information such as:
+
+      -  Administrator name
+      -  Password
 
 .. note::
+   
+   You can check the state of the cluster executing from the cluster master node: 
+   
+   .. code-block:: console
+   
+      # /opt/splunk/bin/splunk show cluster-bundle-status
 
-  Check the state of the cluster executing:
+Set up data forwarding
+""""""""""""""""""""""
 
-  .. code-block:: console
+#. Point each Splunk forwarder output to a Splunk indexer with the following command:
 
-    # /opt/splunk/bin/splunk show cluster-bundle-status
+   .. code-block::
+      
+      # /opt/splunkforwarder/bin/splunk add forward-server <INDEXER_IP>:<INDEXER_PORT>
+      
+   -  ``INDEXER_IP`` is the IP address of the Splunk indexer cluster master.
+   -  ``INDEXER_PORT`` is the port of the Splunk indexer earlier configured in receiving.
+   
+   .. note::
+      
+      This command will ask for a series of information such as:
+      
+      -  Splunk username (created previously)
+      -  Password of Splunk username
 
+#. Start the Splunk forwarder service:
 
-Next step is installing the :ref:`Wazuh App <splunk_app>` into the search heads instances to start using the services.
+   .. code-block::
+      
+      # /opt/splunkforwarder/bin/splunk start
+      
+The next step is installing the :doc:`Wazuh App <splunk-app>` in the search heads instances and configuring them to use the Splunk services.
 
-- You can find useful Splunk CLI commands in the `official documentation <http://docs.splunk.com/Documentation/Splunk/|SPLUNK_LATEST|/Admin/CLIadmincommands>`_ .
-- To learn more about the Splunk distributed search, check out `this article <http://docs.splunk.com/Documentation/Splunk/|SPLUNK_LATEST|/DistSearch/Whatisdistributedsearch>`_ from the official documentation.
+   -  You can find useful Splunk CLI commands in the `official documentation <http://docs.splunk.com/Documentation/Splunk/8.2.2/Admin/CLIadmincommands>`__.
+   -  To learn more about the Splunk distributed search, check out `this article <http://docs.splunk.com/Documentation/Splunk/8.2.2/DistSearch/Whatisdistributedsearch>`__ from the official documentation.
