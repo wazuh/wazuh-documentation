@@ -344,7 +344,7 @@ Wazuh Splunk app
 
 - Support for Wazuh 4.3.0
 - `#1166 <https://github.com/wazuh/wazuh-splunk/pull/1166>`_ Alias field is added to API to facilitate distinguishing between different managers  
-- `#1126 <https://github.com/wazuh/wazuh-splunk/pull/1226>`_ Ensure backwards compatibility 
+- `#1126 <https://github.com/wazuh/wazuh-splunk/pull/1226>`__ Ensure backwards compatibility 
 - `#1148 <https://github.com/wazuh/wazuh-splunk/issues/1148>`_ A Security Section is added to manage security related configurations 
 - `#1171 <https://github.com/wazuh/wazuh-splunk/pull/1171>`_ Crud Policies is added on security section.
 - `#1168 <https://github.com/wazuh/wazuh-splunk/pull/1168>`_ Crud Roles is added on security section. 
@@ -391,7 +391,7 @@ Packages
 - `#1292 <https://github.com/wazuh/wazuh-packages/pull/1292>`_ Fix issue where Solaris 11 was not executed in clean installations.
 - `#1280 <https://github.com/wazuh/wazuh-packages/pull/1280>`_ Fix error where Wazuh could continue running after uninstalling.
 - `#1274 <https://github.com/wazuh/wazuh-packages/pull/1274>`_ Fix AIX partition size.
-- `#1147 <https://github.com/wazuh/wazuh-packages/pull/1147>`_ Fix Solaris 11 upgrade from previous packages.
+- `#1147 <https://github.com/wazuh/wazuh-packages/pull/1147>`__ Fix Solaris 11 upgrade from previous packages.
 - `#1126 <https://github.com/wazuh/wazuh-packages/pull/1126>`_ Add new GCloud integration files to Solaris 11.
 - `#689 <https://github.com/wazuh/wazuh-packages/pull/689>`_ Update SPECS.
 - `#888 <https://github.com/wazuh/wazuh-packages/pull/888>`_ Fix an error in CentOS 5 building.
