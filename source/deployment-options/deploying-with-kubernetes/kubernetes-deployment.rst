@@ -29,7 +29,7 @@ The required certificates are imported via secretGenerator on the ``kustomizatio
 
         secretGenerator:
             - name: indexer-certs
-            files:
+              files:
                 - certs/indexer_cluster/root-ca.pem
                 - certs/indexer_cluster/node.pem
                 - certs/indexer_cluster/node-key.pem
