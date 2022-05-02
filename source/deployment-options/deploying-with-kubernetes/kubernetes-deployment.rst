@@ -69,7 +69,7 @@ Apply all manifests using kustomize
 
 There are two variants of the manifest: ``eks`` and ``local-env``. The eks manifest should be used if you are using the EKS cluster while the local-env manifest should be used for other cluster types.
 
-It is possible to adjust resources for the cluster by editing patches on ``envs/eks/`` or ``envs/local-env/`` depending on which manifest you want to deploy. You can tune cpu, memory as well as storage for persistent volumes of each of the cluster objects. This could be undone by removing these patches from the ``kustomization.yaml`` or alter the patches themselves with different values.
+It is possible to adjust resources for the cluster by editing patches on ``envs/eks/`` or ``envs/local-env/`` depending on which manifest you want to deploy. You can tune CPU, memory as well as storage for persistent volumes of each of the cluster objects. This could be undone by removing these patches from the ``kustomization.yaml`` or alter the patches themselves with different values.
 
 We can deploy the cluster with a single command by using the customization file:
 
