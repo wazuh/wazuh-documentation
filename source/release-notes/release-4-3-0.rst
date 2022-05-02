@@ -60,8 +60,9 @@ An assisted installer is available to users, allowing any type of installation, 
       :title: This new version brings the new Wazuh dashboard
     
 
-Finally, we want to mention another Wazuh 4.3.0 significant new feature. It is related to a new Intelligence tab added to the MITRE ATT&CK module. This tab provides further information about MITRE resources such as groups, mitigations, tactics, and techniques using the new Wazuh API endpoints. Additionally, the Framework tab is adapted to the new Wazuh API endpoints.
+We want to mention another Wazuh 4.3.0 significant new feature. It is related to a new Intelligence tab added to the MITRE ATT&CK module. This tab provides further information about MITRE resources such as groups, mitigations, tactics, and techniques using the new Wazuh API endpoints. Additionally, the Framework tab is adapted to the new Wazuh API endpoints.
 
+Finally, is important to remark that we maintain support for all installation alternatives. Indeed we maintain and extend this support by adding more recent versions.
 
 
 What's new
