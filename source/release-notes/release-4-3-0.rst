@@ -14,7 +14,7 @@ This section lists the changes in version 4.3.0. Every update of the Wazuh solut
 Highlights
 ----------
 
-Wazuh 4.3.0 includes numerous new additions, such as some improvements in the Wazuh manager. Now, the agent is able to collect the installed packages inventory on Amazon Linux and Arch Linux, giving support to Vulnerability Detector for reporting vulnerability exposures. It is an important point because these Linux distributions are proliferating fastly. In addition, the Vulnerability Detector now manages a vulnerability inventory and produces alerts when a new vulnerability is either found or solved.
+Wazuh 4.3.0 includes numerous new additions, such as some improvements in the Wazuh manager. Now, the agent is able to collect the installed packages inventory on Amazon Linux and Arch Linux, giving support to Vulnerability Detector for reporting vulnerability exposures. In addition, the Vulnerability Detector now manages a vulnerability inventory and produces alerts during the first agents scan and when a new vulnerability is either found or solved.
 
 .. thumbnail::  ../images/release-notes/4.3.0/packages-inventory.png    
       :title: Packages inventory
