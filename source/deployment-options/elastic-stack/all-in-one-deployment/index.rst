@@ -56,19 +56,23 @@ Elasticsearch installation and configuration
 
       .. group-tab:: Yum
 
+         .. code-block:: console
 
-        .. include:: ../../../_templates/installations/basic/elastic/yum/install_elasticsearch.rst
-
+           # yum install elasticsearch-7.17.3
 
 
       .. group-tab:: APT
 
+         .. code-block:: console
 
-        .. include:: ../../../_templates/installations/basic/elastic/deb/install_elasticsearch.rst
+           # apt-get install elasticsearch=7.17.3
 
 
+#. Download the configuration file ``/etc/elasticsearch/elasticsearch.yml`` as follows:
 
-#. .. include:: ../../../_templates/installations/basic/elastic/common/elastic-single-node/configure_elasticsearch_aio.rst
+   .. code-block:: console
+
+     # curl -so /etc/elasticsearch/elasticsearch.yml https://packages.wazuh.com/4.3/tpl/elastic-basic/elasticsearch_all_in_one.yml
 
 
 Certificates creation and deployment
@@ -158,8 +162,7 @@ Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. tabs::
-
-
+  
 
   .. group-tab:: Yum
 
@@ -288,15 +291,15 @@ This command should have an output like this:
       elasticsearch: https://127.0.0.1:9200...
         parse url... OK
         connection...
-        parse host... OK
-        dns lookup... OK
-        addresses: 127.0.0.1
-        dial up... OK
+          parse host... OK
+          dns lookup... OK
+          addresses: 127.0.0.1
+          dial up... OK
         TLS...
-        security: server's certificate chain verification is enabled
-        handshake... OK
-        TLS version: TLSv1.3
-        dial up... OK
+          security: server's certificate chain verification is enabled
+          handshake... OK
+          TLS version: TLSv1.3
+          dial up... OK
         talk to server... OK
         version: 7.17.3
 

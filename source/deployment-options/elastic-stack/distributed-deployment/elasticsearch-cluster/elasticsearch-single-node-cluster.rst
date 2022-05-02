@@ -69,6 +69,7 @@ Elasticsearch installation and configuration
 
 #. .. include:: /_templates/installations/basic/elastic/common/elastic-single-node/configure_elasticsearch.rst
 
+
 Certificates creation and deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
