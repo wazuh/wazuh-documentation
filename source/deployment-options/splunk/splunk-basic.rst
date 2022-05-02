@@ -72,7 +72,7 @@ This component receives the data flow streamed by a forwarder and stores it in a
 
                # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_LATEST|-8.2.4/setup/indexer/indexes.conf
 
-   #. Create ``ìnputs.conf``:
+   #. Create ``inputs.conf``:
     
       .. tabs::
           
@@ -166,11 +166,6 @@ Depending on the type of architecture that you’re installing, the Splunk forwa
 
             # dpkg --install splunkforwarder-package.deb
 
-      .. group-tab:: ZYpp
-
-         .. code-block:: console
-
-            # zypper install splunkforwarder-package.rpm
 
 Configuration
 ^^^^^^^^^^^^^
@@ -253,7 +248,7 @@ Creating the configuration files
 Set up data forwarding
 """"""""""""""""""""""
 
-#. Point the Splunk forwarder output to Wazuh’s Splunk indexer with the following command:
+#. Point the Splunk forwarder output to Wazuh Splunk indexer with the following command:
 
    .. code-block:: console
 

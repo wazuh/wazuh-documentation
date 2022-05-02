@@ -163,11 +163,6 @@ A Splunk forwarder is required in order to send alerts to the Splunk indexers. D
 
             # dpkg --install splunkforwarder-package.deb
 
-      .. group-tab:: ZYpp
-
-         .. code-block:: console
-
-            # zypper install splunkforwarder-package.rpm
 
 Configuring the Splunk forwarder instances
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

@@ -5,11 +5,11 @@
 Create and map internal users (RBAC)
 ====================================
 
-Wazuh Role-based access control (RBAC) allows access to Wazuh resources based on the roles and policies assigned to the users. It is an easy-to-use administration system that enables to manage users’ or entities’ permissions to the system resources. To learn more, see the :doc:`Role-Based Access Control </user-manual/api/rbac/index>` section.
+Wazuh Role-based access control (RBAC) allows access to Wazuh resources based on the roles and policies assigned to the users. It is an easy-to-use administration system that enables to manage users’ or entities’ permissions to the system resources. 
 
 .. note::
 
-   Role-based access control can also be configured by REST API requests. To learn more about using the Wazuh API to configure RBAC, see our documentation `here <>`.
+   Role-based access control can also be configured by REST API requests. To learn more about using the Wazuh API to configure RBAC, see our documentation :doc:`here </user-manual/api/rbac/index>`.
 
 In the following sections, we learn how to create internal users and map them with Wazuh in the Wazuh app for Splunk.
 
@@ -35,6 +35,7 @@ Before any user role mapping can be done, the Wazuh API connection inside the Sp
    .. note::
     
       -  If the **Run as** option is not checked when adding he wazuh-wui API credentials, RBAC cannot be configured.
+      -  Ensure that the “wazuh” user API credentials have already been added to the API configuration.
       -  You can get more information about how to set up the credentials at :doc:`Securing the Wazuh API </user-manual/api/securing-api>` section.
     
    .. thumbnail:: /images/splunk-app/24.png

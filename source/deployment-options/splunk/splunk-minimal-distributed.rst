@@ -47,13 +47,6 @@ Before installing the Splunk indexer, some extra packages must be installed on t
       
          # apt install curl apt-transport-https lsb-release gnupg
    
-   .. group-tab:: ZYpp
-      
-      Install all the required utilities:
-      
-      .. code-block:: console
-      
-         # zypper install curl
 
 .. warning::
    
@@ -199,11 +192,6 @@ Depending on the type of architecture that you’re installing, the Splunk forwa
 
             # dpkg --install splunkforwarder-package.deb
 
-      .. group-tab:: ZYpp
-
-         .. code-block:: console
-
-            # zypper install splunkforwarder-package.rpm
 
 Configuration
 ^^^^^^^^^^^^^
