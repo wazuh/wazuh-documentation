@@ -4,8 +4,8 @@
 
    .. code-block:: console
 
-    # curl -sO https://packages.wazuh.com/4.3/wazuh-certs-tool.sh
-    # curl -sO https://packages.wazuh.com/4.3/config.yml
+    # curl -sO https://packages.wazuh.com/|WAZUH_LATEST_MINOR|/wazuh-certs-tool.sh
+    # curl -sO https://packages.wazuh.com/|WAZUH_LATEST_MINOR|/config.yml
 
 #. Edit ``./config.yml`` and replace the node names and IP values with the corresponding names and IP addresses. You need to do this for all the Wazuh server, the Wazuh indexer, and the Wazuh dashboard nodes. Add as many node fields as needed.
 
