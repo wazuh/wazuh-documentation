@@ -131,7 +131,7 @@ Filebeat installation and configuration
 
     .. code-block:: console
 
-      # curl -so /etc/filebeat/filebeat.yml https://packages-dev.wazuh.com/|WAZUH_LATEST_MINOR|/tpl/elastic-basic/filebeat.yml
+      # curl -so /etc/filebeat/filebeat.yml https://packages.wazuh.com/|WAZUH_LATEST_MINOR|/tpl/elastic-basic/filebeat.yml
 
 #. Download the alerts template for Elasticsearch:
 
