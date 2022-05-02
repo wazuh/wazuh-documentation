@@ -114,20 +114,26 @@ In the **Splunk master instance**, users will make the configuration that will b
 
          .. code-block:: console
 
-            # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_LATEST|-8.1.4/setup/indexer/indexes.conf
+            # curl -so /opt/splunk/etc/master-apps/_cluster/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_LATEST|-8.1.4/setup/indexer/indexes.conf
 
       .. group-tab:: Splunk 8.2.2
 
          .. code-block:: console
 
-            # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_LATEST|-8.2.2/setup/indexer/indexes.conf
+            # curl -so /opt/splunk/etc/master-apps/_cluster/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_LATEST|-8.2.2/setup/indexer/indexes.conf
 
       .. group-tab:: Splunk 8.2.4
 
          .. code-block:: console
 
-            # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_LATEST|-8.2.4/setup/indexer/indexes.conf
+            # curl -so /opt/splunk/etc/master-apps/_cluster/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_LATEST|-8.2.4/setup/indexer/indexes.conf
 
+#. Apply the cluster bundle:
+
+   .. code-block:: console
+   
+      # /opt/splunk/bin/splunk apply cluster-bundle
+      
 #. Restart the Splunk Service:
 
    .. code-block:: console
@@ -257,12 +263,19 @@ Creating the configuration files
             
             # curl -so /opt/splunkforwarder/etc/system/local/props.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_LATEST|-8.2.4/setup/forwarder/props.conf
 
-#. To save all the changes, restart splunk:
+#. To save all the changes, start the Splunk forwarder:
 
    .. code-block::
       
-      # /opt/splunkforwarder/bin/splunk restart
+      # /opt/splunkforwarder/bin/splunk start
       
+   .. note::
+      
+      This command will make a Splunk General Terms appear that will have to be accepted, and then, will ask for a series of information such as:
+
+      -  Administrator name
+      -  Password
+
 .. note::
    
    You can check the state of the cluster executing from the cluster master node: 
@@ -280,7 +293,7 @@ Set up data forwarding
       
       # /opt/splunkforwarder/bin/splunk add forward-server <INDEXER_IP>:<INDEXER_PORT>
       
-   -  ``INDEXER_IP`` is the IP address of the Splunk indexer.
+   -  ``INDEXER_IP`` is the IP address of the Splunk indexer cluster master.
    -  ``INDEXER_PORT`` is the port of the Splunk indexer earlier configured in receiving.
    
    .. note::
@@ -289,8 +302,6 @@ Set up data forwarding
       
       -  Splunk username (created previously)
       -  Password of Splunk username
-
-   If the forwarders are load balanced, the ``INDEXER_IP`` is the load balanced IP address of the Splunk indexer cluster.
 
 #. Start the Splunk forwarder service:
 

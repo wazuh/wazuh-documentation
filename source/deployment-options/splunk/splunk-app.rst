@@ -255,8 +255,9 @@ Install the Wazuh app for Splunk on the ``deployer`` machine and follow the step
 
    .. note::
 
-      -   The ``indexerDiscovery`` attribute is used for setting the connection to peer nodes. More information about the ``indexerDiscovery`` attribute can be found `here <https://docs.splunk.com/Documentation/Splunk/7.1.3/Indexer/indexerdiscovery>`__.
-      -   ``<master_ip>`` references the indexers master IP address.
+      -  The ``indexerDiscovery`` attribute is used for setting the connection to peer nodes. More information about the ``indexerDiscovery`` attribute can be found `here <https://docs.splunk.com/Documentation/Splunk/7.1.3/Indexer/indexerdiscovery>`__.
+      -  ``<master_ip>`` references the indexers master IP address.
+      -  ``changeme`` references the security key used with communication between the cluster master and the forwarders.
 
    .. warning::
 
@@ -267,6 +268,11 @@ Install the Wazuh app for Splunk on the ``deployer`` machine and follow the step
    .. code-block:: console
 
       # /opt/splunk/bin/splunk apply shcluster-bundle -target https://<NODE_IP>:<management_port> -auth <user>:<password>
+   
+   Where:
+
+   | ``<NODE_IP>`` references the search head captain IP address.
+   | ``<port>`` references the search head captain management port.
 
    Now, we should have the ``/opt/splunk/etc/apps/SplunkAppForWazuh`` in every ``search head``.
 

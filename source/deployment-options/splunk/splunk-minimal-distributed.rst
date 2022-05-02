@@ -24,8 +24,8 @@ These are the two main components in this type of multi-tier server:
 Prerequisites
 -------------
 
-#. A single node Wazuh manager server. This is where the Splunk forwarder will be run.
 #. A Splunk server. This will run the Splunk indexer and Wazuh app for Splunk.
+#. A single node Wazuh manager server. This is where the Splunk forwarder will be run.
 
 Before installing the Splunk indexer, some extra packages must be installed on the indexer node:
 
@@ -299,7 +299,7 @@ Set up data forwarding
    
    After installing the Splunk forwarder, incoming data should appear in the designated Indexer.
 
-#. Optional. If you additionally want the Splunk forwarder service to start at boot time, please execute the following command:
+#. Optional. If you want the Splunk forwarder service to start at boot time, please execute the following command:
    
    .. code-block:: console
    
