@@ -7,15 +7,49 @@
 Docker installation
 ===================
 
-The first thing you need to do is install Docker and Docker compose if you don't have them already.
+The first thing you need to do is to set up a system with the requirements needed to run Docker and Docker compose. Then install Docker and Docker compose if you don’t have them already.
 
+- `Requirements`_
 - `Docker engine`_
 - `Docker compose`_
+
+
+Requirements
+------------
+
+- `Container memory`_
+- `Increase max_map_count on your host (Linux)`_
+
+
+Container memory
+----------------
+
+It is recommended to configure the Docker host preferences to give at least 6GB of memory for the host that creates the containers. This is because, depending on the deployment and usage, Wazuh indexer memory consumption can vary. Therefore, allocate the recommended memory for a complete stack deployment to work properly.
+
+Increase max_map_count on your host (Linux)
+-------------------------------------------
+
+Wazuh Indexer needs to be able to create many memory-mapped areas. So the kernel has to be set to give a process at least 262,144 memory-mapped areas.
+
+1. You need to increase ``max_map_count`` on your Docker host:
+
+.. code-block:: console
+
+   $ sysctl -w vm.max_map_count=262144
+
+
+2. To set this value permanently, update the ``vm.max_map_count`` setting in ``/etc/sysctl.conf``. To verify after rebooting, run ``“sysctl vm.max_map_count”``.
+
+
+   .. warning::
+
+      If you don’t set the ``max_map_count`` on your host, Wazuh indexer will NOT work properly.
+
 
 Docker engine
 -------------
 
-For Linux/Unix machines, Docker requires a 64-bit operating system running kernel version 3.10 or higher.
+For Linux/Unix machines, Docker requires an amd64 architecture system running kernel version 3.10 or higher.
 
 1. Check your current kernel version. Open a terminal and use ``uname -r`` to display your kernel version:
 
@@ -35,19 +69,18 @@ For Linux/Unix machines, Docker requires a 64-bit operating system running kerne
 
       .. group-tab:: On CentOS machines
 
-
         .. code-block:: console  
 
           # dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
           # dnf install docker-ce --nobest -y
 
 
-      .. group-tab:: On Ubuntu/Debian machines
-
+      .. group-tab:: On Amazon Linux 2 machines
         
         .. code-block:: console
 
-          # curl -sSL https://get.docker.com/ | sh
+          # sudo yum update -y
+          # sudo yum install docker
 
 
 3. Start the Docker service:
