@@ -363,6 +363,53 @@ Other
 - `#11436 <https://github.com/wazuh/wazuh/pull/11436>`_ External Werkzeug library dependency is upgraded to version 2.0.2.
 - `#11436 <https://github.com/wazuh/wazuh/pull/11436>`_ Embedded Python is upgraded to version 3.9.9.
 
+
+Packages
+^^^^^^^^
+- `#1496 <https://github.com/wazuh/wazuh-packages/pull/1496>`_ Hide passwords in log file.
+- `#1500 <https://github.com/wazuh/wazuh-packages/pull/1500>`_ Fix dashboard ip messages.
+- `#1499 <https://github.com/wazuh/wazuh-packages/pull/1499>`_ Improved APT locked message and retry time.
+- `#1497 <https://github.com/wazuh/wazuh-packages/pull/1497>`_ Fix unhandled promise for dashboard.
+- `#1494 <https://github.com/wazuh/wazuh-packages/pull/1494>`_ Update ova motd message 4.3.
+- `#1471 <https://github.com/wazuh/wazuh-packages/pull/1471>`_ Remove service disable from RPM and Debian packages.
+- `#1471 <https://github.com/wazuh/wazuh-packages/pull/1471>`_ Disabled multitenancy by default in dashboard and changed the app default route.
+- `#1434 <https://github.com/wazuh/wazuh-packages/pull/1434>`_ Set as warning the unhandled promises in wazuh dashboard.
+- `#1395 <https://github.com/wazuh/wazuh-packages/pull/1395>`_ Remove ip message from OVA.
+- `#1390 <https://github.com/wazuh/wazuh-packages/pull/1390>`_ Remove demo certificates from indexer and dashboard packages.
+- `#1307 <https://github.com/wazuh/wazuh-packages/pull/1307>`_ Add centos8 vault repository due to EOL.
+- `#1302 <https://github.com/wazuh/wazuh-packages/pull/1302>`_ Fix user deletion warning RPM manager.
+- `#1292 <https://github.com/wazuh/wazuh-packages/pull/1292>`_ Fix issue where Solaris 11 was not executed in clean installations.
+- `#1280 <https://github.com/wazuh/wazuh-packages/pull/1280>`_ Fix error where Wazuh could continue running after uninstalling.
+- `#1274 <https://github.com/wazuh/wazuh-packages/pull/1274>`_ Fix AIX partition size.
+- `#1147 <https://github.com/wazuh/wazuh-packages/pull/1147>`_ Fix Solaris 11 upgrade from previous packages.
+- `#1126 <https://github.com/wazuh/wazuh-packages/pull/1126>`_ Add new GCloud integration files to Solaris 11.
+- `#689 <https://github.com/wazuh/wazuh-packages/pull/689>`_ Update SPECS.
+- `#888 <https://github.com/wazuh/wazuh-packages/pull/888>`_ Fix find error in CentOS 5 building.
+- `#944 <https://github.com/wazuh/wazuh-packages/pull/944>`_ Add new SCA files to Solaris 11.
+- `#915 <https://github.com/wazuh/wazuh-packages/pull/915>`_ Improved support for ppc64le on CentOS and Debian.
+- `#1005 <https://github.com/wazuh/wazuh-packages/pull/1005>`_ Fix error with wazuh user in Debian packages.
+- `#1023 <https://github.com/wazuh/wazuh-packages/pull/1023>`_ Add ossec user and group during compilation.
+- `#1261 <https://github.com/wazuh/wazuh-packages/pull/1261>`_ Merge Wazuh Dashboard v3 #.
+- `#1256 <https://github.com/wazuh/wazuh-packages/pull/1256>`_ Fix certs permissions in RPM.
+- `#1208 <https://github.com/wazuh/wazuh-packages/pull/1208>`_ [Kibana app] Support pluginPlatform.version property in the app manifest.
+- `#1162 <https://github.com/wazuh/wazuh-packages/pull/1162>`_ Fix certificates creation using parameters 4.3.
+- `#1193 <https://github.com/wazuh/wazuh-packages/pull/1193>`_ Fix archlinux package generation parameters 4.3.
+- `#1132 <https://github.com/wazuh/wazuh-packages/pull/1132>`_ Add new 2.17.1 log4j mitigation version 4.3.
+- `#1123 <https://github.com/wazuh/wazuh-packages/pull/1123>`_ Fix client keys Ownership for 3.7.x and previous versions.
+- `#1106 <https://github.com/wazuh/wazuh-packages/pull/1106>`_ Added new log4j remediation 4.3.
+- `#1112 <https://github.com/wazuh/wazuh-packages/pull/1112>`_ Fix linux wpk generation 4.3.
+- `#1096 <https://github.com/wazuh/wazuh-packages/pull/1096>`_ Add log4j mitigation 4.3.
+- `#1086 <https://github.com/wazuh/wazuh-packages/pull/1086>`_ Increase admin.pem cert expiration date 4.3.
+- `#1078 <https://github.com/wazuh/wazuh-packages/pull/1078>`_ Remove wazuh user from unattended/OVA/AMI 4.3.
+- `#1074 <https://github.com/wazuh/wazuh-packages/pull/1074>`_ Fix groupdel ossec error in upgrade to 4.3.0.
+- `#1067 <https://github.com/wazuh/wazuh-packages/pull/1067>`_ Fix curl kibana.yml 4.3.
+- `#1060 <https://github.com/wazuh/wazuh-packages/pull/1060>`_ Remove restore-permissions.sh from Debian Packages.
+- `#1048 <https://github.com/wazuh/wazuh-packages/pull/1048>`_ Bump unattended 4.3.0 #1048
+- `#1012 <https://github.com/wazuh/wazuh-packages/pull/1012>`_ Removed cd usages in unattended installer and fixed uninstaller 4.3.
+- `#1023 <https://github.com/wazuh/wazuh-packages/pull/1023>`_ Add ossec user and group during compilation.
+- `#1020 <https://github.com/wazuh/wazuh-packages/pull/1020>`_ Removed warning and added text in wazuh-passwords-tool.sh final message 4.3.
+
+
 Resolved issues
 ---------------
 
@@ -642,3 +689,4 @@ More details about these changes are provided in the changelog of each component
 - `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v4.3.0-rc5/CHANGELOG.md>`_
 - `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v4.3.0-7.17.3/CHANGELOG.md>`_
 - `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v4.3.0-8.2.4/CHANGELOG.md>`_
+- `wazuh/wazuh-packages <https://github.com/wazuh/wazuh-packages/blob/4.3/CHANGELOG.md>`_
