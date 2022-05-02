@@ -29,7 +29,7 @@ Overview
 StatefulSet and deployment controllers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-as a *Deployment*, a *StatefulSet* manages Pods that are based on an identical container specification, but it maintains an identity attached to each of its pods. These pods are created from the same specification, but they are not interchangeable: each one has a persistent identifier maintained across any rescheduling.
+As a *Deployment*, a *StatefulSet* manages Pods that are based on an identical container specification, but it maintains an identity attached to each of its pods. These pods are created from the same specification, but they are not interchangeable: each one has a persistent identifier maintained across any rescheduling.
 
 It is useful for stateful applications like databases that save the data to persistent storage. The states of each Wazuh manager, as well as Wazuh indexer should be maintained, so we declare them using StatefulSet to ensure that they maintain their states in every startup.
 
