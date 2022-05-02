@@ -98,7 +98,7 @@ Services
 +----------------------+-------------------------------------------------------------------------------------+
 | indexer              | This is the Wazuh indexer API used by Wazuh dashboard to read/write alerts.         |
 +----------------------+-------------------------------------------------------------------------------------+
-| dashboard            | Wazuh dashboard service. https://wazuh.your-domain.com:443                          |
+| dashboard            | Wazuh dashboard service. \https://wazuh.your-domain.com:443                         |
 +----------------------+-------------------------------------------------------------------------------------+
 
 **Wazuh**
