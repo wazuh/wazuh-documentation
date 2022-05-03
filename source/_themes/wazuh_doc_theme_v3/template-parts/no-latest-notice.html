@@ -1,0 +1,12 @@
+{%- set nav_version = version %}
+{% if current_version %}
+  {%- set nav_version = current_version %}
+{% endif %}
+{% if nav_version and not is_latest_release %}
+<div class="no-latest-notice-wrapper">
+  <div class="no-latest-notice">
+    <span class="no-latest-title">Attention</span>
+    <span class="no-latest-text-wrapper"> This documentation does not apply to the most recent version of Wazuh. Check out the docs for <a class="link-latest" href="#">the latest version</a>.</span>
+  </div>
+</div>
+{% endif %}
