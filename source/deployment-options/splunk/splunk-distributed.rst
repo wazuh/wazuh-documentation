@@ -150,22 +150,22 @@ A Splunk forwarder is required in order to send alerts to the Splunk indexers. D
 
 #. Download the Splunk package from `its official website <https://www.splunk.com/en_us/download/partners/splunk-enterprise.html>`__. The versions of Splunk compatible with Wazuh and the Wazuh app for Splunk can be found :ref:`here <wazuh_and_splunk_app>`.
 
-.. note::
+   .. note::
 
-      - Splunk is not open source software and it requires a registered user and license in order to work. You can also use a free trial license.
+         - Splunk is not open source software and it requires a registered user and license in order to work. You can also use a free trial license.
 
-      - This guide will install and configure Splunk 8.2.6. If you intend to configure a different version of Splunk with Wazuh, change the Splunk version number in the requests for the configuration files and Wazuh app for Splunk. For example, if you intend to configure Splunk 8.2.2:
+         - This guide will install and configure Splunk 8.2.6. If you intend to configure a different version of Splunk with Wazuh, change the Splunk version number in the requests for the configuration files and Wazuh app for Splunk. For example, if you intend to configure Splunk 8.2.2:
 
-         .. code-block:: console
+            .. code-block:: console
 
-            # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v4.3.0-8.2.6/setup/indexer/indexes.conf
+               # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v4.3.0-8.2.6/setup/indexer/indexes.conf
 
 
-         Becomes
+            Becomes
 
-         .. code-block:: console
-            
-            # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v4.3.0-8.2.2/setup/indexer/indexes.conf
+            .. code-block:: console
+               
+               # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v4.3.0-8.2.2/setup/indexer/indexes.conf
 
 
 #. Install the Splunk forwarder package on all the Wazuh manager nodes:
@@ -256,12 +256,16 @@ Creating the configuration files
       
       # /opt/splunkforwarder/bin/splunk start
       
-   .. note::
-      
-      This command will make a Splunk General Terms appear that will have to be accepted, and then, will ask for a series of information such as:
 
-      -  Administrator name
-      -  Password
+
+.. note::
+   
+   This command will make a Splunk General Terms appear that will have to be accepted, and then, will ask for a series of information such as:
+
+   -  Administrator name
+   -  Password
+
+
 
 .. note::
    
@@ -270,6 +274,8 @@ Creating the configuration files
    .. code-block:: console
    
       # /opt/splunk/bin/splunk show cluster-bundle-status
+
+
 
 Set up data forwarding
 """"""""""""""""""""""
