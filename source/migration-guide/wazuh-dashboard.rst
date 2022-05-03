@@ -122,6 +122,7 @@ To guarantee a correct operation of Wazuh, make sure to also migrate from Open D
 
 #.  Port your settings from ``/usr/share/kibana/data/wazuh/config/wazuh.yml`` to ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml``. It is recommended to copy the content from ``/usr/share/kibana/data/wazuh/downloads/`` as well.
 
+#. Access the Wazuh web interface at ``https://<dashboard_ip>`` with your credentials and make sure that everything is working as expected. 
 
 #. Uninstall Kibana.
 
