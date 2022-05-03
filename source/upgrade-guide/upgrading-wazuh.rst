@@ -83,7 +83,7 @@ To upgrade the Wazuh manager, choose your package manager and follow the instruc
 
           .. code-block:: console
 
-              # apt-get install wazuh-manager
+              # apt-get install wazuh-manager=|WAZUH_LATEST|-|WAZUH_REVISION_DEB_MANAGER_X86|
 
 
 
