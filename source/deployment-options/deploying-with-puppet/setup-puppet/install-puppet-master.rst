@@ -5,7 +5,7 @@
 Installing Puppet master
 ========================
 
-IThis section explains how to install *puppet-master*. Follow this link to check the `official installation guide <https://puppet.com/docs/puppetserver/latest/install_from_packages.html>`_.
+This section explains how to install *puppet-master*. Follow this link to check the `official installation guide <https://puppet.com/docs/puppetserver/latest/install_from_packages.html>`_.
 
 If you do not have DNS configured, you must use your hosts file for name resolution. 
 Edit the ``/etc/hosts`` file and add the following:
