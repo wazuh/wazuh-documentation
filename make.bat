@@ -19,6 +19,8 @@ if "%1" == "help" (
 	:help
 	echo.Please use `make ^<target^>` where ^<target^> is one of
 	echo.  html-prod  to make standalone HTML files, including GA code. Production only
+	echo.  html-dev   to make standalone HTML files, without GA code. Development only
+	echo.  html-quick to make standalone HTML files using parallel processing
 	echo.  html       to make standalone HTML files
 	echo.  dirhtml    to make HTML files named index.html in directories
 	echo.  singlehtml to make a single large HTML file
@@ -98,6 +100,14 @@ if "%1" == "html-dev" (
 	if errorlevel 1 exit /b 1
 	echo.
 	echo.Build finished. The HTML pages are in %BUILDDIR%/html "(dev mode)"
+	goto end
+)
+
+if "%1" == "html-quick" (
+	%SPHINXBUILD% -j auto -b html %ALLSPHINXOPTS% %BUILDDIR%/html
+	if errorlevel 1 exit /b 1
+	echo.
+	echo.Build finished. The HTML pages are in %BUILDDIR%/html.
 	goto end
 )
 

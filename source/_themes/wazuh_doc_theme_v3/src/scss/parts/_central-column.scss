@@ -54,7 +54,7 @@
   }
 
   img {
-    border: 20px solid $color-img-border;
+    border: 10px solid $color-img-border;
   }
 
   strong {
@@ -121,7 +121,7 @@
 
 /* Light theme -------------------------------------------------------------- */
 
-body {
+.light-theme {
   [role="main"] {
     caption {
       border-color: $light-color-table-border;
