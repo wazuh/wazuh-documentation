@@ -46,7 +46,7 @@ This component receives the data flow streamed by a forwarder and stores it in a
 
             .. code-block:: console
                
-               # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v4.3.0-8.2.2/setup/indexer/indexes.conf
+               # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_SPLUNK_LATEST|-8.2.2/setup/indexer/indexes.conf
 
 
 
@@ -151,7 +151,7 @@ Depending on the type of architecture that you’re installing, the Splunk forwa
 
             .. code-block:: console
                
-               # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v4.3.0-8.2.2/setup/indexer/indexes.conf
+               # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_SPLUNK_LATEST|-8.2.2/setup/indexer/indexes.conf
 
 #. Install the Splunk forwarder package on the Wazuh manager:
 

@@ -55,7 +55,7 @@ Install and configure Splunk enterprise indexer instances
 
          .. code-block:: console
             
-            # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v4.3.0-8.2.2/setup/indexer/indexes.conf
+            # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_SPLUNK_LATEST|-8.2.2/setup/indexer/indexes.conf
 
 
 Each instance can be configured on different hosts following the steps described below:
@@ -165,7 +165,7 @@ A Splunk forwarder is required in order to send alerts to the Splunk indexers. D
 
             .. code-block:: console
                
-               # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v4.3.0-8.2.2/setup/indexer/indexes.conf
+               # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_SPLUNK_LATEST|-8.2.2/setup/indexer/indexes.conf
 
 
 #. Install the Splunk forwarder package on all the Wazuh manager nodes:
