@@ -9,7 +9,8 @@ This document will guide you through the installation process for an all-in-one 
 
 .. note::
 
-   Many of the commands described below need to be executed with root user privileges.
+   Most of the commands described below need to be executed with root user privileges.
+
 
 These are the two main components in this type of multi-tier server:
 
