@@ -101,7 +101,7 @@ Reference Wazuh puppet
 |                                                                 |                                                                 |                                             |
 |                                                                 | :ref:`Cluster <ref_server_vars_cluster>`                        | :ref:`activeresponse <ref_server_ar>`       |
 |                                                                 |                                                                 |                                             |
-|                                                                 | :ref:`Global <ref_server_vars_global>`                          | :ref:`addlog <ref_server_addlog>`           |
+|                                                                 | :ref:`Global <ref_server_vars_global>`                          |                                             |
 |                                                                 |                                                                 |                                             |
 |                                                                 | :ref:`Localfile <ref_server_vars_localfile>`                    |                                             |
 |                                                                 |                                                                 |                                             |
@@ -125,7 +125,7 @@ Reference Wazuh puppet
 |                                                                 |                                                                 |                                             |
 |                                                                 | :ref:`Misc <ref_server_vars_misc>`                              |                                             |
 +-----------------------------------------------------------------+-----------------------------------------------------------------+---------------------------------------------+
-| :ref:`Wazuh agent class <reference_wazuh_agent_class>`          | :ref:`Active response <ref_agent_vars_ar>`                      | :ref:`addlog <ref_agent_addlog>`            |
+| :ref:`Wazuh agent class <reference_wazuh_agent_class>`          | :ref:`Active response <ref_agent_vars_ar>`                      |                                             |
 |                                                                 |                                                                 |                                             |
 |                                                                 | :ref:`Agent enrollment <ref_agent_vars_enroll>`                 |                                             |
 |                                                                 |                                                                 |                                             |

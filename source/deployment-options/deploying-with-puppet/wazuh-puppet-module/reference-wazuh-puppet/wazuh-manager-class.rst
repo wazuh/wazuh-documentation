@@ -160,7 +160,7 @@ $ossec_cluster_nodes
   `Type String`
 
 $ossec_cluster_hidden
-  Toggles whether or not to show information about the cluster that generated an alert. If this is set to `yes`, information about the cluster that generated the event won’t be included in the alert..
+  Toggles whether or not to show information about the cluster that generated an alert. If this is set to `yes`, information about the cluster that generated the event won’t be included in the alert.
 
   `Default no`
 
@@ -410,147 +410,6 @@ $ossec_rootcheck_system_audit
 
   `Type String`
 
-$ossec_rootcheck_windows_disabled
-  Disables rootcheck if host has Windows OS.
-
-  `Default no`
-
-  `Type String`
-
-$ossec_rootcheck_windows_windows_apps
-  Specifies the path to a Windows application definition file.
-
-  `Default './shared/win_applications_rcl.txt'`
-
-  `Type String`
-
-$ossec_rootcheck_windows_windows_malware
-  Specifies the path to a Windows malware definitions file.
-
-  `Default './shared/win_malware_rcl.txt'`
-
-  `Type String`
-
-
-.. _ref_server_vars_syscheck:
-
-
-SCA variables
--------------
-
-$configure_sca
-  Enables SCA section rendering on this host.
-
- `Default true`
-
- `Type boolean`
-
-$sca_amazon_enabled
-  Enable SCA on this host (Amazon Linux 2).
-
-  `Default yes`
-
-   Depends on **configure_sca and apply_template_os**
-
-$sca_amazon_scan_on_start
-  The SCA module will perform the scan immediately when it is started (Amazon Linux 2).
-
-  `Default yes`
-    
-   Depends on **configure_sca and apply_template_os**
- 
-$sca_amazon_interval
-  Interval between module executions.
-
-  `Default 12h`
-
-   Depends on **configure_sca and apply_template_os**
-
-$sca_amazon_skip_nfs
-  Enable or disable the scanning of network mounted filesystems (Works on Linux and FreeBSD). Currently, skip_nfs will exclude checking files on CIFS or NFS mounts.
-
-  `Default yes`
-
-   Depends on **configure_sca and apply_template_os**
-
-$sca_amazon_policies
-  A list of policies to run assessments can be included in this section.
-
-  `Default []`
-
-   Depends on **configure_sca and apply_template_os**
-
-$sca_rhel_enabled
-  Enable SCA on this host (RHEL).
-
-  `Default true`
-
-  `Type Boolean`
-
-   Depends on **configure_sca and apply_template_os**
-
-$sca_rhel_scan_on_start
-  The SCA module will perform the scan immediately when started (RHEL).
-
-  `Default yes`
-
-  `Type String`
-
-   Depends on **configure_sca and apply_template_os**
- 
-$sca_rhel_interval
-  Interval between module executions.
-
-  `Default 12h`
-
-   Depends on **configure_sca and apply_template_os**
-
-$sca_rhel_skip_nfs
-  Enable or disable the scanning of network mounted filesystems (Works on Linux and FreeBSD). Currently, skip_nfs will exclude checking files on CIFS or NFS mounts.
-  
-  `Default yes`
-  
-   Depends on **configure_sca and apply_template_os**
-
-$sca_rhel_policies
-  A list of policies to run assessments can be included in this section.
-
-  `Default []`
-
-   Depends on **configure_sca and apply_template_os**
-
-$sca_else_enabled
-  Enable SCA on this host (Linux).
-
-  `Default yes`
-
-$sca_else_scan_on_start
-  The SCA module will perform the scan immediately when started (Linux).
-
-  `Default yes`
-
-   Depends on **configure_sca and apply_template_os**
-
-$sca_else_interval
-  Interval between module executions.
-
-  `Default 12h`
-
-   Depends on **configure_sca and apply_template_os**
-
-$sca_else_skip_nfs
-  Enable or disable the scanning of network mounted filesystems (Works on Linux and FreeBSD). Currently, skip_nfs will exclude checking files on CIFS or NFS mounts.
-  
-  `Default yes`
-
-   Depends on **configure_sca and apply_template_os**
-
-$sca_else_policies
-  A list of policies to run assessments can be included in this section.
-
-  `Default []`
-
-   Depends on **configure_sca and apply_template_os**
 
 Syscheck variables
 ------------------
@@ -656,6 +515,13 @@ $ossec_syscheck_ignore_type_2
 
   `Default '.log$|.swp$'`
 
+  `Type String`
+
+$ossec_syscheck_max_eps
+  Sets the maximum event reporting throughput. Events are messages that will produce an alert.
+  
+  `Default 100`
+  
   `Type String`
 
 $ossec_syscheck_process_priority
