@@ -63,8 +63,8 @@ This is the output of the script:
     :class: output 
 
     28/04/2022 10:17:50 INFO: Generating password hash
-    28/04/2022 10:17:55 WARNING: Password changed. Remember to update the password in /etc/filebeat/filebeat.yml and /etc/wazuh-dashboard/opensearch_dashboards.yml if necessary and restart the services.
-
+    28/04/2022 10:17:55 WARNING: Passwords changed. Remember to update the password in the Wazuh dashboard and Filebeat nodes if necessary, and restart the services.
+    
 Change the passwords for all users
 ----------------------------------
 
