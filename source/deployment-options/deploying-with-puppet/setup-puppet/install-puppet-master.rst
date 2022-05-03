@@ -54,7 +54,7 @@ Install ``curl``, ``apt-transport-https`` and ``lsb-release``:
   .. code-block:: console
 
     # apt-get update
-    # apt-get install curl apt-transport-https lsb-release
+    # apt-get install curl apt-transport-https lsb-release wget
 
 
 Install the appropriate Puppet apt repository, and then the “puppetserver” package. See https://apt.puppetlabs.com to find the correct deb file to install the Puppet 7 repo for your Linux distribution.
@@ -88,11 +88,18 @@ Replace 2g in the ``JAVA_ARGS`` variable with the amount of memory you want to a
 Configuration
 -------------
 
-Edit the ``/etc/puppetlabs/puppet/puppet.conf`` file, adding this line to the ``[main]`` section (create the section if it does not exist), and replacing ``puppet.example.com`` with your own FQDN:
+Edit the ``/etc/puppetlabs/puppet/puppet.conf`` file, adding this line to the ``[main]`` section (create the section if it does not exist), and replacing ``puppet,puppet-master`` with your own FQDN:
 
   ::
 
     dns_alt_names = puppet,puppet-master
+
+Also add the [server] section with the following content in the ``/etc/puppetlabs/puppet/puppet.conf`` file replacing ``puppet-master`` with your own FQDN:
+
+  ::
+
+    [main]
+    server = puppet-master
 
 
 .. note:: If you find ``templatedir=$confdir/templates`` in the config file, delete that line.  It has been deprecated.
@@ -113,6 +120,7 @@ Then, start your Puppet Server:
 
       # systemctl start puppetserver
       # systemctl enable puppetserver
+      # systemctl status puppetserver
 
   b) For SysV Init:
 

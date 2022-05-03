@@ -56,7 +56,8 @@ Install ``curl``, ``apt-transport-https`` and ``lsb-release``:
 .. code-block:: console
 
     # apt-get update
-    # apt-get install curl apt-transport-https lsb-release
+    # apt-get install curl apt-transport-https lsb-release wget
+
 
 Install the appropriate Puppet apt repository, and then the “puppet-agent” package. See https://apt.puppetlabs.com to find the correct deb file to install the puppet repo for your Linux distribution.
 
@@ -108,10 +109,14 @@ Installation on Windows
 Agent Configuration
 ^^^^^^^^^^^^^^^^^^^
 
-Add the server value to the ``[main]`` section of the node ``/etc/puppetlabs/puppet/puppet.conf`` (Linux) or  ``C:\ProgramData\PuppetLabs\puppet\etc\puppet.conf`` (Windows) file, replacing ``puppet.example.com`` with your Puppet Server’s FQDN::
+Add the server value to the ``[main]`` section of the node ``/etc/puppetlabs/puppet/puppet.conf`` (Linux) or  ``C:\ProgramData\PuppetLabs\puppet\etc\puppet.conf`` (Windows) file, replacing ``puppet.example.com`` with your Puppet server FQDN::
 
    [main]
    server = puppet-master.com
+   
+
+.. note:: The Puppet server FQDN should be resolved by the Puppet agent host.
+
 
 Restart and check the status of Puppet service:
 
