@@ -26,8 +26,9 @@ Container memory
 
 It is recommended to configure the Docker host preferences to give at least 6GB of memory for the host that creates the containers. This is because, depending on the deployment and usage, Wazuh indexer memory consumption can vary. Therefore, allocate the recommended memory for a complete stack deployment to work properly.
 
+
 Increase max_map_count on your host (Linux)
--------------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Wazuh Indexer needs to be able to create many memory-mapped areas. So the kernel has to be set to give a process at least 262,144 memory-mapped areas.
 
@@ -65,6 +66,12 @@ For Linux/Unix machines, Docker requires an amd64 architecture system running ke
 2. Run the Docker installation script:
 
     .. tabs::
+
+      .. group-tab:: On Ubuntu/Debian machines
+
+        .. code-block:: console  
+
+          # curl -sSL https://get.docker.com/ | sh
 
 
       .. group-tab:: On CentOS machines
