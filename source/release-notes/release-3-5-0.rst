@@ -89,4 +89,4 @@ Wazuh app for Kibana
 - More design improvements for the Welcome tab on some app sections.
 - More bug fixes, code refactoring and performance improvements.
 
-In addition to this, the documentation now has a :ref:`dedicated section <kibana_app>` for the Wazuh app, where you can learn more about its capabilities, how to configure it and install the X-Pack Security plugin.
+In addition to this, the documentation now has a dedicated section for the Wazuh app, where you can learn more about its capabilities, how to configure it and install the X-Pack Security plugin.

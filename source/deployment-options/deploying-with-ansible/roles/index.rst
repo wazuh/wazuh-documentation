@@ -1,26 +1,24 @@
-.. Copyright (C) 2022 Wazuh, Inc.
-
-.. _ansible_wazuh_roles:
+.. Copyright (C) 2015–2022 Wazuh, Inc.
 
 Roles
 =====
 
-You can use these roles to deploy Elastic Stack components, the Wazuh manager and Wazuh Agents, first clone our `GitHub repository <https://github.com/wazuh/wazuh-ansible>`_ directly to your Ansible roles folder:
+You can use our preconfigured roles to deploy Wazuh indexer and dashboard components, Wazuh Manager and Wazuh Agents. First, clone our `GitHub repository <https://github.com/wazuh/wazuh-ansible>`_ directly to your Ansible roles folder:
 
-  .. code-block:: yaml
+.. code-block:: console
 
-    $ cd /etc/ansible/roles
-    $ git clone --branch v|WAZUH_LATEST_ANSIBLE| https://github.com/wazuh/wazuh-ansible.git
+   # cd /etc/ansible/roles
+   # git clone --branch v|WAZUH_LATEST_MINOR_ANSIBLE| https://github.com/wazuh/wazuh-ansible.git
 
-Below we explain briefly how to use these roles, please check out `Ansible Playbooks <http://docs.ansible.com/ansible/playbooks.html>`_ for more information.
+Below we briefly explain how to use these roles. Please check out the `Ansible Playbook Documentation <http://docs.ansible.com/ansible/playbooks.html>`_ for more information on Ansible roles.
 
 .. topic:: Contents
 
-    .. toctree::
-        :maxdepth: 2
+   .. toctree::
+      :maxdepth: 2
 
-        wazuh-manager
-        wazuh-filebeat
-        wazuh-opendistro
-        wazuh-kibana
-        wazuh-agent
+      wazuh-indexer
+      wazuh-dashboard
+      wazuh-filebeat
+      wazuh-manager
+      wazuh-agent

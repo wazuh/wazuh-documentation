@@ -7,6 +7,7 @@ Wazuh Puppet module
 
 This `module <https://github.com/wazuh/wazuh-puppet>`_ has been authored by Nicolas Zin and updated by Jonathan Gazeley and Michael Porter. Wazuh has forked it with the purpose of maintaining it. Thank you to the authors for the contribution.
 
+
 Install Wazuh module
 --------------------
 
@@ -19,99 +20,70 @@ Download and install the Wazuh module from Puppet Forge:
   .. code-block:: none
     :class: output
 
-    Notice: Preparing to install into /etc/puppet/modules ...
-    Notice: Downloading from https://forgeapi.puppetlabs.com ...
+    Notice: Preparing to install into /etc/puppetlabs/code/environments/production/modules ...
+    Notice: Downloading from https://forgeapi.puppet.com ...
     Notice: Installing -- do not interrupt ...
-    /etc/puppet/modules
-    └─┬ wazuh-wazuh (v|WAZUH_LATEST_PUPPET|)
+    /etc/puppetlabs/code/environments/production/modules
+    └─┬ wazuh-wazuh (v4.3.0)
       ├── puppet-nodejs (v7.0.1)
-      ├── puppet-selinux (v3.2.0)
-      ├── puppetlabs-apt (v7.7.0)
-      ├── puppetlabs-concat (v6.3.0)
-      ├── puppetlabs-firewall (v2.7.0)
-      ├── puppetlabs-powershell (v2.3.0)
-      └── puppetlabs-stdlib (v6.5.0)
+      ├── puppet-selinux (v3.4.1)
+      ├── puppetlabs-apt (v7.7.1)
+      ├─┬ puppetlabs-concat (v6.4.0)
+      │ └── puppetlabs-translate (v2.2.0)
+      ├── puppetlabs-firewall (v2.8.1)
+      ├─┬ puppetlabs-powershell (v4.1.0)
+      │ └── puppetlabs-pwshlib (v0.10.1)
+      └── puppetlabs-stdlib (v6.6.0)
 
 
 This module installs and configures Wazuh agent and manager.
 
-Install manager via Puppet
+
+Install a stack via Puppet
 --------------------------
 
-The manager is configured by installing the ``wazuh::manager`` class, and optionally using:
+A stack of Wazuh manager, Wazuh dashboard, Wazuh indexer and Filebeat can be deployed using this manifest. See the Wazuh manager section for variables that can be used to configure the manager before deployment.
 
- - ``wazuh::command``: to define active response command (like ``firewall-drop``).
- - ``wazuh::activeresponse``: to link rules to active response commands.
- - ``wazuh::addlog``: to define additional log files to monitor.
+Create a stack.pp file at ``/etc/puppetlabs/code/environments/production/manifests/`` and put the contents below. ``puppet-agent-node`` refers to the hostname or IP of the puppet agent:
 
-.. warning::
+.. code-block:: console
 
-  On Debian-based operating systems, we will have to add the following section to the ``/etc/puppetlabs/code/environments/production/modules/wazuh/manifests/repo.pp`` file for proper execution:
-
-  ``server => 'pgp.mit.edu'``. Line 9 to 12, do not forget the ``,`` after source entry.
-
-  .. code-block:: puppet
-
-    apt::key { 'wazuh':
-        id     => '0DCFCA5547B19D2A6099506096B3EE5F29111145',
-        source => 'https://packages.wazuh.com/key/GPG-KEY-WAZUH',
-        server => 'pgp.mit.edu'
-      }
-
-Here is an example of a manifest ``wazuh-manager.pp``
-
-  .. code-block:: puppet
-
-    node "server.yourhost.com" {
-      class { 'wazuh::manager':
-        ossec_smtp_server => 'localhost',
-        ossec_emailto => ['user@mycompany.com'],
-      }
-
-      wazuh::command { 'firewallblock':
-        command_name       => 'firewall-drop',
-        command_executable => 'firewall-drop'
-      }
-
-      wazuh::activeresponse { 'blockWebattack':
-          command_name => 'firewall-drop',
-          ar_level     => 9,
-          ar_agent_id  => 123,
-          ar_rules_id  => [31153,31151],
-          ar_repeated_offenders => '30,60,120'
-      }
-
-      wazuh::addlog { 'monitorLogFile':
-        logfile => '/var/log/secure',
-        logtype => 'syslog'
-      }
+   node "puppet-agent-node" {
+    class { 'wazuh::manager':
     }
+    class { 'wazuh::indexer':
+    }
+    class { 'wazuh::filebeat_oss':
+    }
+    class { 'wazuh::dashboard':
+    }
+   }
 
-Place the file at ``/etc/puppetlabs/code/environments/production/manifests/`` in your Puppet master and it will be executed in the specified node after the *runinterval* time set in puppet.conf. However, if you want to run it first, try the following command in the Puppet agent.
+Place the file at ``/etc/puppetlabs/code/environments/production/manifests/`` in your Puppet master and it will be executed in the specified node after the ``runinterval`` time set in ``puppet.conf``. However, if you want to run the manifest immediately on a specific node, run the following command on the node:
 
   .. code-block:: console
 
     # puppet agent -t
 
-Install agent via Puppet
-------------------------
+
+Install Wazuh agent via Puppet
+------------------------------
 
 The agent is configured by installing the ``wazuh::agent`` class.
 
-Here is an example of a manifest ``wazuh-agent.pp`` (please replace with your IP address)
+Here is an example of a manifest ``wazuh-agent.pp`` (please replace  ``MANAGER_IP`` with your manager IP address).
 
   .. code-block:: puppet
 
-    node "client.yourhost.com" {
+   node "puppet-agent.com" {
+     class { "wazuh::agent":
+       wazuh_register_endpoint => "<MANAGER_IP>",
+       wazuh_reporting_endpoint => "<MANAGER_IP>"
+     }
+   }
 
-      class { "wazuh::agent":
-        wazuh_register_endpoint => "192.168.209.166",
-        wazuh_reporting_endpoint => "192.168.209.167"
-      }
 
-    }
-
-Place the file at ``/etc/puppetlabs/code/environments/production/manifests/`` in your Puppet master and it will be executed in the specified node after the *runinterval* time set in puppet.conf. However, if you want to run it first, try the following command in the Puppet agent.
+Place the file at ``/etc/puppetlabs/code/environments/production/manifests/`` in your Puppet master and it will be executed in the specified node after the ``runinterval`` time set in ``puppet.conf``. However, if you want to run it first, try the following command in the Puppet agent.
 
   .. code-block:: console
 
@@ -129,7 +101,7 @@ Reference Wazuh puppet
 |                                                                 |                                                                 |                                             |
 |                                                                 | :ref:`Cluster <ref_server_vars_cluster>`                        | :ref:`activeresponse <ref_server_ar>`       |
 |                                                                 |                                                                 |                                             |
-|                                                                 | :ref:`Global <ref_server_vars_global>`                          | :ref:`addlog <ref_server_addlog>`           |
+|                                                                 | :ref:`Global <ref_server_vars_global>`                          |                                             |
 |                                                                 |                                                                 |                                             |
 |                                                                 | :ref:`Localfile <ref_server_vars_localfile>`                    |                                             |
 |                                                                 |                                                                 |                                             |
@@ -153,7 +125,7 @@ Reference Wazuh puppet
 |                                                                 |                                                                 |                                             |
 |                                                                 | :ref:`Misc <ref_server_vars_misc>`                              |                                             |
 +-----------------------------------------------------------------+-----------------------------------------------------------------+---------------------------------------------+
-| :ref:`Wazuh agent class <reference_wazuh_agent_class>`          | :ref:`Active response <ref_agent_vars_ar>`                      | :ref:`addlog <ref_agent_addlog>`            |
+| :ref:`Wazuh agent class <reference_wazuh_agent_class>`          | :ref:`Active response <ref_agent_vars_ar>`                      |                                             |
 |                                                                 |                                                                 |                                             |
 |                                                                 | :ref:`Agent enrollment <ref_agent_vars_enroll>`                 |                                             |
 |                                                                 |                                                                 |                                             |
@@ -184,5 +156,6 @@ Reference Wazuh puppet
  .. toctree::
     :maxdepth: 1
 
-    reference-wazuh-puppet/wazuh-agent-class
     reference-wazuh-puppet/wazuh-manager-class
+    reference-wazuh-puppet/wazuh-agent-class
+    

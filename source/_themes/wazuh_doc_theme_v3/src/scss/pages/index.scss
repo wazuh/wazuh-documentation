@@ -338,7 +338,7 @@ main {
 
 /* Light theme -------------------------------------------------------------- */
 
-body { /* stylelint-disable-line  no-duplicate-selectors */
+.light-theme body { /* stylelint-disable-line  no-duplicate-selectors */
   color: $light-color-main-text;
   background: $light-color-code-block-background;
   .toctree-wrapper {
@@ -493,7 +493,7 @@ body { /* stylelint-disable-line  no-duplicate-selectors */
 
 /* Dark- theme -------------------------------------------------------------- */
 
-.dark-theme {
+.dark-theme body {
   color: $dark-color-main-text;
   background: $dark-color-base-space;
   .toctree-wrapper {

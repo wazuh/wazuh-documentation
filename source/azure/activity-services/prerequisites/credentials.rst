@@ -63,7 +63,7 @@ The tags to use are different depending on the type of service or activity to be
 
     <storage>
         <account_name>exampleaccountname</account_name>
-        <application_key>w22...91x</application_key>
+        <account_key>w22...91x</account_key>
     </storage>
 
 
