@@ -56,13 +56,6 @@ Wazuh dashboard
 | **Description**: Wazuh APP compatible version to install.
 | **Default value**: ``|WAZUH_LATEST_ANSIBLE|``
 |
-| **Variable**: ``indexer_network_host``
-| **Description**: IP address or hostname of Elasticsearch node.
-| **Default value**: ``127.0.0.1``
-|
-| **Variable**: ``indexer_http_port``
-| **Description**: Port of Elasticsearch node.
-| **Default value**: ``9200``
 
 .. _wazuh_ansible_reference_filebeat:
 
