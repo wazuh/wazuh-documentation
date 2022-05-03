@@ -1,0 +1,302 @@
+/* -----------------------------------------------------------------------------
+  Component: Admonitions
+
+  Style for the different admonitions: note, warning, etc.
+----------------------------------------------------------------------------- */
+
+#central-column .admonition {
+  padding: 0 20px 1px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border-left: 5px solid;
+
+  &:not(.long){
+    padding-top: 15px;
+    padding-bottom: 15px;
+    p {
+      display: inline;
+      padding-bottom: 1rem;
+      margin-bottom: 0;
+    }
+  }
+
+  &.long {
+    .admonition-title {
+      &::after {
+        position: absolute;
+        top: 18px;
+        left: 0;
+        display: inline-block;
+        width: 1.5rem;
+        height: 1.5rem;
+        vertical-align: middle;
+        content: "";
+      }
+    }
+
+    &.note,
+    &.warning,
+    &.attention,
+    &.caution,
+    &.danger,
+    &.error,
+    &.hint,
+    &.important,
+    &.tip {
+      .admonition-title {
+        padding-left: 38px;
+      }
+    }
+  }
+
+  .admonition-title {
+    position: relative;
+    padding: 16px 5px 16px 0;
+    margin-bottom: 0;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 28px;
+  }
+}
+
+/* Light theme -------------------------------------------------------------- */
+
+.light-theme {
+  #central-column .admonition {
+    color: $light-color-main-text;
+    background-color: rgba($light-color-shaded-text, 0.05);
+    border-color: $light-color-shaded-text;
+    .admonition-title {
+      color: $light-color-shaded-text;
+    }
+
+    &.note {
+      border-color: $light-color-primary-lighter;
+      background-color: rgba($light-color-primary-lighter, 0.05);
+      .admonition-title {
+        color: $light-color-primary;
+
+        &::after {
+          background: url("#{$ico-path}svg-icons.svg#circle-check-lt");
+        }
+      }
+    }
+
+    &.warning {
+      border-color: $light-color-warning;
+      background-color: rgba($light-color-warning, 0.05);
+      .admonition-title {
+        color: $light-color-warning-dark;
+
+        &::after {
+          background: url("#{$ico-path}svg-icons.svg#circle-exclamation-orange");
+        }
+      }
+    }
+
+    &.attention {
+      border-color: $light-color-primary-lighter;
+      background-color: rgba($light-color-primary-lighter, 0.05);
+      .admonition-title {
+        color: $light-color-primary;
+
+        &::after {
+          background: url("#{$ico-path}svg-icons.svg#circle-bell-lt");
+        }
+      }
+    }
+
+    &.caution {
+      border-color: $light-color-warning;
+      background-color: rgba($light-color-warning, 0.05);
+      .admonition-title {
+        color: $light-color-warning-dark;
+
+        &::after {
+          background: url("#{$ico-path}svg-icons.svg#circle-exclamation-orange");
+        }
+      }
+    }
+
+    &.danger {
+      border-color: $light-color-danger-dark;
+      background-color: rgba($light-color-danger-dark, 0.05);
+      .admonition-title {
+        color: $light-color-danger-dark;
+
+        &::after {
+          background: url("#{$ico-path}svg-icons.svg#circle-exclamation-red-lt");
+        }
+      }
+    }
+
+    &.error {
+      border-color: $light-color-danger-dark;
+      background-color: rgba($light-color-danger-dark, 0.05);
+      .admonition-title {
+        color: $light-color-danger-dark;
+
+        &::after {
+          background: url("#{$ico-path}svg-icons.svg#circle-x-lt");
+        }
+      }
+    }
+
+    &.hint {
+      border-color: $light-color-success-dark;
+      background-color: rgba($light-color-success-dark, 0.05);
+      .admonition-title {
+        color: $light-color-success-dark;
+
+        &::after {
+          background: url("#{$ico-path}svg-icons.svg#circle-bulb");
+        }
+      }
+    }
+
+    &.important {
+      border-color: $light-color-primary-lighter;
+      background-color: rgba($light-color-primary-lighter, 0.05);
+      .admonition-title {
+        color: $light-color-primary;
+
+        &::after {
+          background: url("#{$ico-path}svg-icons.svg#circle-exclamation-blue-lt");
+        }
+      }
+    }
+
+    &.tip {
+      border-color: $light-color-success-dark;
+      background-color: rgba($light-color-success-dark, 0.05);
+      .admonition-title {
+        color: $light-color-success-dark;
+
+        &::after {
+          background: url("#{$ico-path}svg-icons.svg#circle-bulb");
+        }
+      }
+    }
+  }
+}
+
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme {
+  #central-column .admonition {
+    color: $dark-color-main-text;
+    background-color: rgba($dark-color-shaded-text, 0.1);
+    border-color: $dark-color-shaded-text;
+    .admonition-title {
+      color: $dark-color-shaded-text;
+    }
+
+    &.note {
+      border-color: $dark-color-primary;
+      background-color: rgba($dark-color-primary, 0.1);
+      .admonition-title {
+        color: $dark-color-primary;
+
+        &::after {
+          background: url("#{$ico-path}svg-icons.svg#circle-check-dt");
+        }
+      }
+    }
+
+    &.warning {
+      border-color: $dark-color-warning;
+      background-color: rgba($dark-color-warning, 0.1);
+      .admonition-title {
+        color: $dark-color-warning;
+
+        &::after {
+          background: url("#{$ico-path}svg-icons.svg#circle-exclamation-orange");
+        }
+      }
+    }
+
+    &.attention {
+      border-color: $dark-color-primary;
+      background-color: rgba($dark-color-primary, 0.1);
+      .admonition-title {
+        color: $dark-color-primary;
+
+        &::after {
+          background: url("#{$ico-path}svg-icons.svg#circle-bell-dt");
+        }
+      }
+    }
+
+    &.caution {
+      border-color: $dark-color-warning;
+      background-color: rgba($dark-color-warning, 0.1);
+      .admonition-title {
+        color: $dark-color-warning;
+
+        &::after {
+          background: url("#{$ico-path}svg-icons.svg#circle-exclamation-orange");
+        }
+      }
+    }
+
+    &.danger {
+      border-color: $dark-color-danger-dark;
+      background-color: rgba($dark-color-danger-dark, 0.1);
+      .admonition-title {
+        color: $dark-color-danger;
+
+        &::after {
+          background: url("#{$ico-path}svg-icons.svg#circle-exclamation-red-dt");
+        }
+      }
+    }
+
+    &.error {
+      border-color: $dark-color-danger-dark;
+      background-color: rgba($dark-color-danger-dark, 0.1);
+      .admonition-title {
+        color: $dark-color-danger;
+
+        &::after {
+          background: url("#{$ico-path}svg-icons.svg#circle-x-dt");
+        }
+      }
+    }
+
+    &.hint {
+      border-color: $dark-color-success-dark;
+      background-color: rgba($dark-color-success-dark, 0.1);
+      .admonition-title {
+        color: $dark-color-success;
+
+        &::after {
+          background: url("#{$ico-path}svg-icons.svg#circle-bulb");
+        }
+      }
+    }
+
+    &.important {
+      border-color: $dark-color-primary;
+      background-color: rgba($dark-color-primary, 0.1);
+      .admonition-title {
+        color: $dark-color-primary;
+
+        &::after {
+          background: url("#{$ico-path}svg-icons.svg#circle-exclamation-blue-dt");
+        }
+      }
+    }
+
+    &.tip {
+      border-color: $dark-color-success-dark;
+      background-color: rgba($dark-color-success-dark, 0.1);
+      .admonition-title {
+        color: $dark-color-success;
+
+        &::after {
+          background: url("#{$ico-path}svg-icons.svg#circle-bulb");
+        }
+      }
+    }
+  }
+}

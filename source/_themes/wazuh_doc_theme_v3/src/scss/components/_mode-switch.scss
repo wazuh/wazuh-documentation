@@ -1,0 +1,111 @@
+/* -----------------------------------------------------------------------------
+  Component: Mode switch
+
+  Style for the component that switches the theme style to light or dark mmode.
+----------------------------------------------------------------------------- */
+
+#light-dark-switch {
+  display: flex;
+  flex-direction: row;
+  @include media-min(xl) {
+    padding-bottom: 8px;
+  }
+  & + .edit-repo {
+    border-top: 1px solid $light-color-border-details;
+  }
+
+  > span:first-child {
+    margin-left: 4px;
+  }
+
+  .text {
+    @include media-max(sm) {
+      display: none;
+    }
+  }
+
+  .switch-icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    margin-left: 5px;
+    background-position: center;
+    background-size: contain;
+  }
+}
+
+#mode-switch {
+  position: relative;
+  top: 1px;
+  box-sizing: content-box;
+  display: flex;
+  flex-direction: row;
+  width: 26px;
+  height: 16px;
+  padding: 0;
+  margin: 0 5px;
+  border: 1px solid;
+  border-radius: 25px;
+
+  &.dark {
+    justify-content: flex-end;
+    span {
+      top: 0;
+      left: calc(100% - 16px);
+    }
+  }
+
+  span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    content: "";
+    background-color: #fff;
+    border-radius: 50%;
+    transition: left ease-in .075s;
+  }
+}
+
+/* Light theme -------------------------------------------------------------- */
+
+.light-theme {
+  #light-dark-switch {
+    color: $light-color-main-text;
+    .switch-icon {
+      &.icon-sun {
+        background: url("#{$ico-path}svg-icons.svg#sun-lt");
+      }
+      &.icon-moon {
+        background: url("#{$ico-path}svg-icons.svg#moon-lt");
+      }
+    }
+  }
+  #mode-switch {
+    background-color: $light-color-primary;
+    border-color: $light-color-primary;
+  }
+}
+
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme {
+  #light-dark-switch {
+    color: $dark-color-main-text;
+    .switch-icon {
+      &.icon-sun {
+        background: url("#{$ico-path}svg-icons.svg#sun-dt");
+      }
+      &.icon-moon {
+        background: url("#{$ico-path}svg-icons.svg#moon-dt");
+      }
+    }
+  }
+  #mode-switch {
+    background-color: $dark-color-primary;
+    border-color: $dark-color-primary;
+  }
+}
