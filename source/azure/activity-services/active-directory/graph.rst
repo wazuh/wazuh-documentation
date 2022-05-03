@@ -109,15 +109,15 @@ azure-logs module configuration
 
 Proceed with configuring the ``azure-logs`` module in the local configuration (``ossec.conf``). The **key and ID of the application** saved during the previous steps will be used here. In this case, both fields were saved in a **file** for authentication.
 
-Here is an example of how to get the audit log of the Azure Active Directory using Microsoft Graph. This example configuration includes a representative ``tag`` and is scheduled for every Monday at 02:00, using an offset of one day, which means only the log data from the last day is be parsed:
+Here is an example of how to get the audit log of the Azure Active Directory using Microsoft Graph. This example configuration includes a representative ``tag`` and is scheduled for every Monday at 02:00, using an offset of one day, which means only the log data from the last day is parsed:
 
 .. code-block:: xml
 
     <wodle name="azure-logs">
 
         <disabled>no</disabled>
-        <wday>Friday</wday>
-        <time>12:00</time>
+        <wday>Monday</wday>
+        <time>2:00</time>
         <run_on_start>no</run_on_start>
 
         <graph>
@@ -149,7 +149,7 @@ Check the :ref:`azure-logs <wodle_azure_logs>` module reference for more informa
 Microsoft Graph use case
 ------------------------
 
-Here is an example of monitoring the Azure ADD activity using the configuration described above.
+Here is an example of monitoring the Azure AD activity using the configuration described above.
 
 Wazuh Rules
 ^^^^^^^^^^^
