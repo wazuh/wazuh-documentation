@@ -1,0 +1,86 @@
+/* -----------------------------------------------------------------------------
+  PART: RIGHT SIDEBAR
+
+  Style for the left sidebar, which contains the local TOC.
+----------------------------------------------------------------------------- */
+
+@import "../components/mode-switch";
+@import "../components/local-toc";
+
+#right-sidebar {
+  position: fixed;
+  right: 0;
+  @include media-max(xl) {
+    top: $header-height-xs;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    height: $secondary-mobile-bar;
+    padding-right: 15px;
+  }
+  @include media-min(xl) {
+    top: $header-height-xl;
+    flex-shrink: 0;
+    flex-grow: 0;
+    height: calc(100vh - #{$header-height-xl} - #{$footer-height});
+  }
+
+  @include media-only(xl, xxl) {
+    flex-basis: $right-sidebar-width-narrow;
+    width: $right-sidebar-width-narrow;
+  }
+  @include media-min(xxl) {
+    flex-basis: $right-sidebar-width;
+    width: $right-sidebar-width;
+  }
+
+  .sidebar-container {
+    @include media-min(xl) {
+      position: fixed;
+      top: $header-height-xl;
+      right: 0;
+      bottom: $footer-height;
+      width: calc((#{$left-sidebar-width} / 2) + 30px);
+      padding: 30px 16px;
+      margin-left: auto;
+      overflow: hidden;
+    }
+
+    .edit-repo {
+      width: 100%;
+      height: 40px;
+      padding: 8px 8px 8px 4px;
+
+      a {
+        .icon {
+          margin-left: 10px;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
+
+/* Light theme -------------------------------------------------------------- */
+
+.light-theme {
+  #right-sidebar {
+    .sidebar-container {
+      @include media-min(xl) {
+        background-color: $light-color-base-space;
+      }
+    }
+  }
+}
+
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme {
+  #right-sidebar {
+    .sidebar-container {
+      @include media-min(xl) {
+        background-color: $dark-color-base-space;
+      }
+    }
+  }
+}

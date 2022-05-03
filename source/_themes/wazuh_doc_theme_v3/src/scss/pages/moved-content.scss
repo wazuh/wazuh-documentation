@@ -1,0 +1,127 @@
+/* -----------------------------------------------------------------------------
+  Moved content page (redirect for not not-found)
+----------------------------------------------------------------------------- */
+
+@import "../inc/variables";
+@import "../inc/mixins";
+@import "../inc/root";
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 15px;
+  font-family: Manrope, sans-serif;
+  color: $light-color-main-text;
+  text-align: center;
+}
+
+h1 {
+  margin-right: auto;
+  margin-left: auto;
+  font-family: Manrope, sans-serif;
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.2;
+  color: $light-color-main-text;
+}
+
+#spinner-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  margin: 15px auto;
+}
+
+#spinner {
+  position: relative;
+  display: block;
+  width: 65px;
+  height: 65px;
+  border-top: 4px solid $light-color-primary;
+  border-right: 4px solid $light-color-primary;
+  border-bottom: 4px solid $light-color-primary;
+  border-left: 4px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+#spinner::before {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: 4px;
+  height: 4px;
+  content: "";
+  background-color: $light-color-primary;
+  border-radius: 50%;
+}
+
+#spinner::after {
+  position: absolute;
+  bottom: 6px;
+  left: 6px;
+  width: 4px;
+  height: 4px;
+  content: "";
+  background-color: $light-color-primary;
+  border-radius: 50%;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.home-btn {
+  display: inline-block;
+  min-width: 200px;
+  padding: 10px 20px;
+  margin: 30px auto;
+  color: $light-color-main-text;
+  text-decoration: none;
+  background-color: $light-color-accent;
+  border: 2px solid $light-color-accent;
+  border-radius: $rounded-corners;
+  &:hover,
+  &:focus {
+    color: $light-color-main-text;
+    background-color: $light-color-base-space;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    color: $dark-color-main-text;
+  }
+  h1 {
+    color: $dark-color-main-text;
+  }
+  #spinner {
+    border-top: 4px solid $dark-color-primary;
+    border-right: 4px solid $dark-color-primary;
+    border-bottom: 4px solid $dark-color-primary;
+  }
+  
+  #spinner::before {
+    background-color: $dark-color-primary;
+  }
+  
+  #spinner::after {
+    background-color: $dark-color-primary;
+  }
+  
+  .home-btn {
+    background-color: $dark-color-accent;
+    border: 2px solid $dark-color-accent;
+    &:hover,
+    &:focus {
+      color: $dark-color-main-text;
+      background-color: $dark-color-base-space;
+    }
+  }
+}
