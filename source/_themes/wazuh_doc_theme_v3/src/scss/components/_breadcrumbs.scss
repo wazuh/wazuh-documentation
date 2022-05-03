@@ -1,0 +1,93 @@
+/* -----------------------------------------------------------------------------
+  Component: Breadcrumbs
+
+  Style for the breadcrumbs present in the content area.
+----------------------------------------------------------------------------- */
+
+.breadcrumb-wrapper {
+  position: fixed;
+  top: $header-height-xl;
+  z-index: 99;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  min-height: $breadcrumbs-height-xl;
+  padding: 5px 15px 5px 30px;
+  @include media-max(sm){
+    position: static;
+    overflow: auto;
+  }
+  @include media-max(xl){
+    top: calc(#{$header-height-xs} + #{$secondary-mobile-bar});
+    align-items: center;
+    padding-left: 15px;
+  }
+  @include media-min(xl){
+    align-items: flex-end;
+    max-height: $breadcrumbs-height-xl * 1.5;
+  }
+  @include media-only(xl, xxl) {
+    width: calc(100% - #{$left-sidebar-width-narrow} - #{$right-sidebar-width-narrow});
+  }
+  @include media-min(xxl) {
+    width: calc(100% - #{$left-sidebar-width} - #{$right-sidebar-width});
+  }
+}
+
+#breadcrumbs {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  @include media-max(sm){
+    display: block;
+  }
+  @include media-max(sm){
+    font-size: 14px;
+  }
+  @include media-only(xl, wzh-xl){
+    font-size: 14px;
+  }
+
+  li {
+    display: inline;
+  }
+}
+
+.breadcrumb-separator::after {
+  display: inline-block;
+  margin: 0 7px;
+  font-size: 1.1rem;
+  content: "/";
+}
+
+/* Light theme -------------------------------------------------------------- */
+
+.light-theme {
+  .breadcrumb-wrapper {
+    background-color: $light-color-base-space;
+  }
+  #breadcrumbs {
+    color: $light-color-main-text;
+    background-color: $light-color-base-space;
+  }
+  .breadcrumb-separator::after {
+    color: $light-color-main-text;
+  }
+}
+
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme {
+  .breadcrumb-wrapper {
+    background-color: $dark-color-base-space;
+  }
+  #breadcrumbs {
+    color: $dark-color-main-text;
+    background-color: $dark-color-base-space;
+  }
+  .breadcrumb-separator::after {
+    color: $dark-color-main-text;
+  }
+}

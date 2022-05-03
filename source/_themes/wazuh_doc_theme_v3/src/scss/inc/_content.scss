@@ -1,0 +1,542 @@
+/* -----------------------------------------------------------------------------
+  Defaults for content (inc)
+
+  General complete style specifically required for the content, including
+  lists, tables, etc. that is not necessarily need in all pages.
+----------------------------------------------------------------------------- */
+
+@import "../components/accordions";
+@import "../components/admonitions";
+@import "../components/version-notes";
+@import "../components/step-cards";
+@import "../components/breadcrumbs";
+@import "../components/code-blocks";
+@import "../components/customized-tabs";
+@import "../components/lightbox";
+@import "../components/link-boxes";
+@import "../components/previous-next";
+@import "pre-v3";
+
+#central-column {
+  padding-top: $breadcrumbs-height-xl;
+  @include media-max(sm){
+    padding-top: 0;
+  }
+
+  .container {
+    &[class*="align-"] {
+      display: block;
+      max-width: 100%;
+      padding: 0;
+    }
+    &.align-left {
+      text-align: left;
+    }
+    &.align-center {
+      text-align: center;
+    }
+    &.align-right {
+      text-align: right;
+    }
+    &.spaced > * {
+      display: inline-block;
+      margin: 5px;
+    }
+  }
+
+  .align-center {
+    display: table;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .align-left {
+    display: table;
+    margin-right: auto;
+  }
+  .align-right {
+    display: table;
+    margin-left: auto;
+  }
+
+  .topic-title {
+    font-weight: 600;
+    font-size: 20px;
+    margin-top: 2em;
+    margin-bottom: 0.5em;
+  }
+
+  dl {
+    dt {
+      padding: .2rem .5rem .2rem 0;
+    }
+    dd {
+      padding: .5rem .5rem .2rem 40px;
+      margin-bottom: .2rem;
+    }
+    &.footnote {
+      dt {
+        width: 2em;
+        padding: 0;
+        font-weight: 400;
+        &::after {
+          content: ".";
+        }
+      }
+      dd {
+        width: calc(100% - 2em);
+        padding: 0 0 0 6px;
+      }
+    }
+  }
+}
+
+[role="main"] {
+  @include media-min(xl){
+    min-height: calc(100vh - #{$header-height-xl} - #{$breadcrumbs-height-xl} - #{$footer-height});
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    .headerlink {
+      display: inline-block;
+      line-height: 1;
+      text-decoration: none;
+
+      &::after {
+        display: inline-block;
+        width: 1rem;
+        height: 1rem;
+        padding-left: 10px;
+        font: normal 700 normal .95rem/1 FontAwesome, sans-serif;
+        text-align: right;
+        vertical-align: middle;
+        content: "\f0c1";
+        opacity: 0;
+        transition: opacity ease-in .1s;
+      }
+    }
+
+    &:hover {
+      .headerlink::after {
+        opacity: 1;
+        transition: opacity ease-in .1s;
+      }
+    }
+  }
+
+  code.literal {
+    padding: 5px 7px 3px;
+    line-height: 1rem;
+  }
+
+  .toctree-wrapper {
+    padding-top: 1rem;
+    ul {
+      padding-left: 28px;
+      @include media-max(sm){
+        padding-left: 20px;
+      }
+
+      li a {
+        display: inline-block;
+        padding-top: .2rem;
+        padding-bottom: .6rem;
+        line-height: 32px;
+      }
+    }
+  }
+
+  .align-cells-top {
+    th,
+    td {
+      vertical-align: top !important;/* stylelint-disable-line declaration-no-important */
+    }
+  }
+  .align-cells-middle {
+    th,
+    td {
+      vertical-align: middle !important;/* stylelint-disable-line declaration-no-important */
+    }
+  }
+  .align-cells-bottom {
+    th,
+    td {
+      vertical-align: bottom !important;/* stylelint-disable-line declaration-no-important */
+    }
+  }
+  .align-data-top {
+    td {
+      vertical-align: top !important;/* stylelint-disable-line declaration-no-important */
+    }
+  }
+  .align-data-middle {
+    td {
+      vertical-align: middle !important;/* stylelint-disable-line declaration-no-important */
+    }
+  }
+  .align-data-bottom {
+    td {
+      vertical-align: bottom !important;/* stylelint-disable-line declaration-no-important */
+    }
+  }
+  .align-header-top {
+    th {
+      vertical-align: top !important;/* stylelint-disable-line declaration-no-important */
+    }
+  }
+  .align-header-middle {
+    th {
+      vertical-align: middle !important;/* stylelint-disable-line declaration-no-important */
+    }
+  }
+  .align-header-bottom {
+    th {
+      vertical-align: bottom !important;/* stylelint-disable-line declaration-no-important */
+    }
+  }
+
+  .docutils:not(.list-rows) {
+    thead {
+      position: relative;
+      z-index: 10;
+    }
+
+    th {
+      padding: 8px 15px;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .stub:not(.head) {
+      font-size: 16px;
+    }
+
+    tbody {
+      position: relative;
+
+      th {
+        padding: 8px 15px;
+      }
+      td {
+        padding: 8px 15px;
+      }
+      p,
+      ul {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+      }
+    }
+  }
+
+  table {
+
+    &.docutils:not(.list-rows) {
+      max-width: 100%;
+      overflow-x: auto;
+      border-spacing: 0;
+      border-collapse: separate;
+      border: 1px solid;
+      .table-responsive {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+      }
+      
+      tbody {
+        td, th {
+          border: 1px solid $light-color-table-border;
+        }
+      }
+
+      th > div,
+      th > p {
+        white-space: nowrap;
+      }
+
+      p,
+      ul {
+        margin-top: .3rem;
+        margin-bottom: .3rem;
+      }
+
+      &.release-notes {
+        border-spacing: 0 2rem;
+        border: none;
+        border-radius: unset;
+        &::after {
+          content: none;
+        }
+
+        tr {
+          & > td:first-child,
+          & > th:first-child {
+            padding-left: 0;
+            border-right: 1px solid;
+          }
+        }
+        td,
+        th {
+          vertical-align: baseline;
+          border: none;
+        }
+
+        p,
+        ul {
+          margin-top: 1rem;
+          margin-bottom: 1rem;
+        }
+      }
+      
+      /* Disable Sphinx's default col width calcualtions */
+      &:not(.colwidths-given) col {
+        width: auto !important;
+      }
+    }
+
+    &.hlist {
+      display: block;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      overflow-x: auto;
+
+      & > tbody > tr > td {
+        vertical-align: top;
+        /* stylelint-disable selector-max-combinators,  selector-max-compound-selectors, selector-max-type */
+        & > ul {
+          padding: 0 15px 0 0;
+          margin: 0;
+          list-style: none;
+
+          & > li > ul {
+            list-style: disc;
+
+            & > li > ul {
+              list-style: circle;
+
+              & > li > ul {
+                list-style: square;
+              }
+            }
+          }
+        }
+        &:last-child {
+          & > ul {
+            padding: 0;
+          }
+        }
+        /* stylelint-enable selector-max-combinators,  selector-max-compound-selectors, selector-max-type */
+      }
+    }
+  }
+
+  .table-wrapper {
+    display: inline-block;
+    max-width: 100%;
+    height: fit-content;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    border: 1px solid transparent;
+    border-radius: $rounded-corners;
+    &.w-header {
+      background-repeat: no-repeat;
+      background-size: 100%;
+    }
+    > caption {
+      display: block; 
+      border: none;
+    }
+  }
+
+  .footnote-reference {
+    font-size: .7em;
+    text-decoration: underline;
+    vertical-align: super;
+    &::before {
+      content: "[";
+    }
+    &.footnote-reference::after {
+      content: "]";
+    }
+  }
+  .footnote.brackets {
+    position: relative;
+    display: flex;
+    flex-flow: row wrap;
+    padding-top: 50px;
+    line-height: 32px;
+    border-top: 1px solid;
+    &::before {
+      position: absolute;
+      top: 10px;
+      font-size: 20px;
+      font-weight: 600;
+      content: "Footnotes";
+    }
+    .label .brackets {
+      display: inline-block;
+      margin-top: .5rem;
+      margin-bottom: .5rem;
+    }
+    p {
+      margin-top: .5rem;
+      margin-bottom: .5rem;
+    }
+  }
+}
+
+/* Light theme -------------------------------------------------------------- */
+
+.light-theme {
+  [role="main"] {
+    .headerlink {
+      &::after {
+        color: $light-color-shaded-text;
+      }
+    }
+    code {
+      color: $light-color-highlight-inline-text;
+      background-color: $light-color-highlight-background;
+    }
+    td,
+    th,
+    caption {
+      background-color: $light-color-base-space;
+    }
+
+    .docutils:not(.list-rows) {
+      thead {
+        background-color: $light-color-primary;
+
+        th {
+          background-color: $light-color-primary;
+        }
+      }
+
+      th {
+        color: $light-color-base-space;
+        border-color: $light-color-primary;
+      }
+
+      .stub:not(.head) {
+        color: $light-color-main-text;
+      }
+      /* stylelint-disable selector-max-compound-selectors */
+      tbody {
+        th {
+          background-color: $light-color-base-space;
+          border-color: $light-color-table-border;
+        }
+        td {
+          border-color: $light-color-table-border;
+        }
+      }
+      /* stylelint-enable selector-max-compound-selectors */
+      &:not(.release-notes) {
+        tbody {
+          tr:nth-child(even) {
+            td,
+            th {
+              background-color: $light-color-table-alt-background;
+            }
+          }
+        }
+      }
+    }
+
+    table.docutils:not(.list-rows) {
+      border-color: $light-color-table-border;
+
+      &.release-notes {
+        tr {
+          & > td:first-child,
+          & > th:first-child {
+            border-color: $light-color-table-border;
+          }
+        }
+      }
+    }
+    .footnote.brackets {
+      border-color: rgba(0, 0, 0, 10%);/* stylelint-disable-line color-function-notation */
+    }
+  }
+}
+
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme {
+  [role="main"] {
+    .headerlink {
+      &::after {
+        color: $dark-color-shaded-text;
+      }
+    }
+    code {
+      color: $dark-color-highlight-inline-text;
+      background-color: $dark-color-highlight-background;
+    }
+    td,
+    th,
+    caption {
+      background-color: $dark-color-base-space;
+    }
+    .docutils:not(.list-rows) {
+      thead {
+        background-color: $dark-color-primary;
+
+        th {
+          background-color: $dark-color-primary;
+        }
+      }
+
+      th {
+        color: $dark-color-base-space;
+        border-color: $dark-color-primary;
+      }
+
+      .stub:not(.head) {
+        color: $dark-color-main-text;
+      }
+      /* stylelint-disable selector-max-compound-selectors */
+      tbody {
+        th {
+          background-color: $dark-color-base-space;
+          border-color: $dark-color-table-border;
+        }
+        td {
+          border-color: $dark-color-table-border;
+        }
+      }
+      /* stylelint-enable selector-max-compound-selectors */      
+      &:not(.release-notes) {
+        tbody {
+          tr:nth-child(even) {
+            td,
+            th {
+              background-color: $dark-color-table-alt-background;
+            }
+          }
+        }
+      }
+    }
+
+    table.docutils:not(.list-rows) {
+      border-color: $dark-color-table-border;
+      &.release-notes {
+        tr {
+          & > td:first-child,
+          & > th:first-child {
+            border-color: $dark-color-table-border;
+          }
+        }
+      }
+    }
+    .footnote.brackets {
+      border-color: rgba(255, 255, 255, 10%);/* stylelint-disable-line color-function-notation */
+    }
+  }
+}

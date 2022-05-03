@@ -1,0 +1,88 @@
+/* -----------------------------------------------------------------------------
+  Component: Previous and Next navigation buttons
+
+  Style for the Previous and Next navigation buttons present in the content area.
+----------------------------------------------------------------------------- */
+
+.navigation-buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 20px;
+  padding-bottom: 15px;
+  margin-top: 2.5rem;
+  border-top: 1px solid;
+
+  a {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 500;
+
+    &:hover {
+      text-decoration: none;
+    }
+
+    &:first-of-type {
+      padding-right: 15px;
+    }
+
+    &:last-of-type {
+      padding-left: 15px;
+    }
+  }
+
+  .chevron {
+    flex-shrink: 0;
+    width: 25px;
+    height: 25px;
+    background-position: center;
+    background-size: 22px 22px;
+
+    &.left {
+      margin-right: 5px;
+      transform: rotate(90deg);
+    }
+
+    &.right {
+      margin-left: 5px;
+      transform: rotate(-90deg);
+    }
+  }
+}
+
+/* Light theme -------------------------------------------------------------- */
+
+.light-theme {
+  .navigation-buttons {
+    border-top-color: $light-color-border-details;
+    a:hover {
+      color: $light-color-primary-lighter;
+      .chevron {
+        background-image: url("#{$ico-path}svg-icons.svg#chevron-blue-light-lt");
+      }
+    }
+    .chevron {
+      background-image: url("#{$ico-path}svg-icons.svg#chevron-blue-lt");
+    }
+  }
+}
+
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme {
+  .navigation-buttons {
+    border-top-color: $dark-color-border-details;
+    a:hover {
+      color: $dark-color-primary-lighter;
+      .chevron {
+        background-image: url("#{$ico-path}svg-icons.svg#chevron-blue-light-dt");
+      }
+    }
+    .chevron {
+      background-image: url("#{$ico-path}svg-icons.svg#chevron-blue-dt");
+    }
+  }
+}

@@ -18,7 +18,7 @@ except ImportError:
 STATICS_DIR_NAME = '_static'
 
 DEFAULT_CONFIG = dict(
-    default_image_width='100%',
+    default_image_width='auto',
     default_image_height='auto',
     default_show_title=False,
     requests_kwargs={},
@@ -112,7 +112,8 @@ class WazuhImagesDirective(SphinxDirective):
             wazuh_image_node['title'] = ''
         
         wazuh_image_node['show_caption'] = show_caption
-        wazuh_image_node['size'] = (width, height)
+        wazuh_image_node['width'] = width
+        wazuh_image_node['height'] = height
         wazuh_image_node['classes'] += classes
         wazuh_image_node['alt'] = alt
         wazuh_image_node['tabindex'] = 0
@@ -271,7 +272,7 @@ def setup(app):
     app.connect('env-updated', manage_static_files)
 
     return {
-        'version': '0.1',
+        'version': '0.2',
         'parallel_read_safe': True,
         'parallel_write_safe': True,
     }
