@@ -10,6 +10,8 @@ Migrating to the Wazuh dashboard
 
 Follow this guide to migrate from Open Distro for Elasticsearch Kibana 1.13 to the Wazuh dashboard. These instructions are intended for a standard Wazuh installation, you may need to make some changes to adapt them to your environment.
 
+To guarantee a correct operation of Wazuh, make sure to also migrate from Open Distro for Elasticsearch to the Wazuh indexer. To learn more, see the :doc:`Migrating to the Wazuh indexer </migration-guide/wazuh-indexer>` documentation. 
+
 
 .. note:: Root user privileges are required to execute all the commands described below.
 
