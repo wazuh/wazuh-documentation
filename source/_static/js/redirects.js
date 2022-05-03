@@ -195,7 +195,6 @@ newUrls['4.3'] = [
   '/deployment-options/deploying-with-puppet/index.html',
   '/deployment-options/deploying-with-puppet/setup-puppet/index.html',
   '/deployment-options/deploying-with-puppet/wazuh-puppet-module/index.html',
-  '/deployment-options/deploying-with-puppet/setup-puppet/install-puppet-db.html',
   '/deployment-options/deploying-with-puppet/setup-puppet/install-puppet-agent.html',
   '/deployment-options/deploying-with-puppet/setup-puppet/install-puppet-master.html',
   '/deployment-options/deploying-with-puppet/setup-puppet/setup-puppet-certificates.html',
@@ -648,7 +647,7 @@ redirections.push(
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/deploying-with-puppet/setup-puppet/install-puppet-db.html',
-    '4.3': '/deployment-options/deploying-with-puppet/setup-puppet/install-puppet-db.html',
+    '4.3': '/deployment-options/deploying-with-puppet/setup-puppet/index.html',
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
