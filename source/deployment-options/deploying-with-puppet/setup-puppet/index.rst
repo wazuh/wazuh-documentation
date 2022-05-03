@@ -21,6 +21,5 @@ Before we get started with Puppet, confirm that the following network requiremen
         :maxdepth: 1
 
         install-puppet-master.rst
-        install-puppet-agent.rst
-        install-puppet-db.rst
+        install-puppet-agent.rst        
         setup-puppet-certificates.rst

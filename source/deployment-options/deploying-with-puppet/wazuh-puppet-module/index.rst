@@ -39,12 +39,12 @@ Download and install the Wazuh module from Puppet Forge:
 This module installs and configures Wazuh agent and manager.
 
 
-Install a stack  via Puppet
----------------------------
+Install a stack via Puppet
+--------------------------
 
 A stack of Wazuh manager, Wazuh dashboard, Wazuh indexer and Filebeat can be deployed using this manifest. See the Wazuh manager section for variables that can be used to configure the manager before deployment.
 
-Create a stack.pp file at ``/etc/puppetlabs/code/environments/production/manifests/`` and put the contents below. ``puppet-agent-node refers`` to the hostname or IP of the puppet agent:
+Create a stack.pp file at ``/etc/puppetlabs/code/environments/production/manifests/`` and put the contents below. ``puppet-agent-node`` refers to the hostname or IP of the puppet agent:
 
 .. code-block:: console
 
