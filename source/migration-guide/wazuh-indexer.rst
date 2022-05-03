@@ -243,4 +243,4 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13 to the Wazu
 Next steps
 ----------
 
-Your cluster is now updated. If you want to migrate from Kibana to the Wazuh dashboard, see the :doc:`wazuh-dashboard` section.
+Your cluster is now updated. To guarantee a correct operation of Wazuh, make sure to also migrate from Kibana to the Wazuh dashboard.  To learn more, see the :doc:`wazuh-dashboard` section.
