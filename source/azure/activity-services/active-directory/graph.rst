@@ -78,12 +78,12 @@ Giving permissions to the application
 .. thumbnail:: ../../../images/azure/graph-6.png
     :title: AAD
     :align: center
-    :width: 50%
+    :width: 100%
 
 .. thumbnail:: ../../../images/azure/graph-7.png
     :title: AAD
     :align: center
-    :width: 50%
+    :width: 100%
 
 Obtaining the application key for authentication
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
