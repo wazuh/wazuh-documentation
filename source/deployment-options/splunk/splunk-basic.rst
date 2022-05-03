@@ -39,7 +39,7 @@ This component receives the data flow streamed by a forwarder and stores it in a
 
             .. code-block:: console
 
-               # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v4.3.0-8.2.6/setup/indexer/indexes.conf
+               # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_SPLUNK_LATEST|-|SPLUNK_LATEST|/setup/indexer/indexes.conf
 
 
             Becomes
@@ -70,14 +70,14 @@ This component receives the data flow streamed by a forwarder and stores it in a
 
       .. code-block:: console
 
-         # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v4.3.0-8.2.6/setup/indexer/indexes.conf
+         # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_SPLUNK_LATEST|-|SPLUNK_LATEST|/setup/indexer/indexes.conf
 
 
    #. Create ``inputs.conf``:
 
       .. code-block:: console
 
-         # curl -so /opt/splunk/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v4.3.0-8.2.6/setup/indexer/inputs.conf  
+         # curl -so /opt/splunk/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_SPLUNK_LATEST|-|SPLUNK_LATEST|/setup/indexer/inputs.conf  
           
 
 #. Ensure Splunk is installed in ``/opt/splunk`` and start the service:
@@ -144,7 +144,7 @@ Depending on the type of architecture that you’re installing, the Splunk forwa
 
             .. code-block:: console
 
-               # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v4.3.0-8.2.6/setup/indexer/indexes.conf
+               # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_SPLUNK_LATEST|-|SPLUNK_LATEST|/setup/indexer/indexes.conf
 
 
             Becomes
@@ -185,14 +185,14 @@ Creating the configuration files
         
    .. code-block:: console
       
-      # curl -so /opt/splunkforwarder/etc/system/local/props.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v4.3.0-8.2.6/setup/forwarder/props.conf          
+      # curl -so /opt/splunkforwarder/etc/system/local/props.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_SPLUNK_LATEST|-|SPLUNK_LATEST|/setup/forwarder/props.conf          
  
 
 #. Download and insert the ``inputs.conf`` template:
 
    .. code-block:: console
       
-      # curl -so /opt/splunkforwarder/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v4.3.0-8.2.6/setup/forwarder/inputs.conf
+      # curl -so /opt/splunkforwarder/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_SPLUNK_LATEST|-|SPLUNK_LATEST|/setup/forwarder/inputs.conf
                 
 
 #. Set the Wazuh manager hostname:

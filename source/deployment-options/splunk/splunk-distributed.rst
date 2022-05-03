@@ -48,7 +48,7 @@ Install and configure Splunk enterprise indexer instances
 
          .. code-block:: console
 
-            # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v4.3.0-8.2.6/setup/indexer/indexes.conf
+            # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_SPLUNK_LATEST|-|SPLUNK_LATEST|/setup/indexer/indexes.conf
 
 
          Becomes
@@ -128,7 +128,7 @@ In the **Splunk master instance**, users will make the configuration that will b
 
    .. code-block:: console
 
-      # curl -so /opt/splunk/etc/master-apps/_cluster/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v4.3.0-8.2.6/setup/indexer/indexes.conf  
+      # curl -so /opt/splunk/etc/master-apps/_cluster/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_SPLUNK_LATEST|-|SPLUNK_LATEST|/setup/indexer/indexes.conf  
 
 
 #. Apply the cluster bundle:
@@ -158,7 +158,7 @@ A Splunk forwarder is required in order to send alerts to the Splunk indexers. D
 
             .. code-block:: console
 
-               # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v4.3.0-8.2.6/setup/indexer/indexes.conf
+               # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_SPLUNK_LATEST|-|SPLUNK_LATEST|/setup/indexer/indexes.conf
 
 
             Becomes
@@ -202,7 +202,7 @@ Creating the configuration files
 
    .. code-block:: console
       
-      # curl -so /opt/splunkforwarder/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v4.3.0-8.2.6/setup/forwarder/inputs.conf                           
+      # curl -so /opt/splunkforwarder/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_SPLUNK_LATEST|-|SPLUNK_LATEST|/setup/forwarder/inputs.conf                           
 
 #. Set the Wazuh manager hostname:
 
@@ -247,7 +247,7 @@ Creating the configuration files
         
    .. code-block:: console
       
-      # curl -so /opt/splunkforwarder/etc/system/local/props.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v4.3.0-8.2.6/setup/forwarder/props.conf          
+      # curl -so /opt/splunkforwarder/etc/system/local/props.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_SPLUNK_LATEST|-|SPLUNK_LATEST|/setup/forwarder/props.conf          
  
 
 #. To save all the changes, start the Splunk forwarder:
