@@ -24,6 +24,8 @@ I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) source
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
 	@echo "  html-prod  to make standalone HTML files, including GA code. Production only"
+	@echo "  html-dev   to make standalone HTML files, without GA code. Development only"
+	@echo "  html-quick to make standalone HTML files using parallel processing"
 	@echo "  html       to make standalone HTML files"
 	@echo "  dirhtml    to make HTML files named index.html in directories"
 	@echo "  singlehtml to make a single large HTML file"
@@ -52,11 +54,28 @@ help:
 clean:
 	rm -rf $(BUILDDIR)/*
 
+theme:
+	@cd source/_themes/wazuh_doc_theme_v3 && npm run build-all
+	@echo 
+	@echo Build finished. The main theme assets has been updated.
+	@cd ../../..
+	@echo
+
 html-prod:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html -t production
 	@echo
-	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
+	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html. (production mode)"
 
+html-dev:
+	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html -t dev
+	@echo
+	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html. (dev mode)"
+
+html-quick:
+	$(SPHINXBUILD) -j auto -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
+	@echo
+	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
+	
 html:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo
