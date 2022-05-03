@@ -21,7 +21,7 @@ Install the Wazuh app for Splunk in an all-in-one architecture
 
 .. note::      
 
-      - This guide will install and configure the Wazuh app for Splunk 8.2.6. If you intend to configure a different version of Splunk with the Wazuh app, change the Splunk version number in the requests for the configuration files and Wazuh app for Splunk. For example, if you intend to configure Splunk 8.2.2:
+      - This guide will install and configure the Wazuh app for Splunk |SPLUNK_LATEST|. If you intend to configure a different version of Splunk with the Wazuh app, change the Splunk version number in the requests for the configuration files and Wazuh app for Splunk. For example, if you intend to configure Splunk 8.2.2:
 
          .. code-block:: console
 
@@ -109,7 +109,7 @@ Install the Wazuh app for Splunk in a minimal distributed architecture
 
 .. note::      
 
-      - This guide will install and configure the Wazuh app for Splunk 8.2.6. If you intend to configure a different version of Splunk with the Wazuh app, change the Splunk version number in the requests for the configuration files and Wazuh app for Splunk. For example, if you intend to configure Splunk 8.2.2:
+      - This guide will install and configure the Wazuh app for Splunk |SPLUNK_LATEST|. If you intend to configure a different version of Splunk with the Wazuh app, change the Splunk version number in the requests for the configuration files and Wazuh app for Splunk. For example, if you intend to configure Splunk 8.2.2:
 
          .. code-block:: console
 
@@ -193,9 +193,9 @@ Install the Wazuh app for Splunk in a multi-instance cluster
 
    - We can install the Wazuh app for Splunk in each search-head manually, but in cases where there are many search-heads, it is more convenient to install it automatically. For this purpose, the ``deployer`` will be used. The deployer is an endpoint that installs the Wazuh app for Splunk in every search-head automatically.
     
-   - The official Splunk documentation for deploying a search head cluster is `here <https://docs.splunk.com/Documentation/Splunk/8.2.6/Deploy/SHCwithindexers>`__.
+   - The official Splunk documentation for deploying a search head cluster is `here <https://docs.splunk.com/Documentation/Splunk/|SPLUNK_LATEST|/Deploy/SHCwithindexers>`__.
 
-   - This guide will install and configure the Wazuh app for Splunk 8.2.6. If you intend to configure a different version of Splunk with the Wazuh app, change the Splunk version number in the requests for the configuration files and Wazuh app for Splunk. For example, if you intend to configure Splunk 8.2.2:
+   - This guide will install and configure the Wazuh app for Splunk |SPLUNK_LATEST|. If you intend to configure a different version of Splunk with the Wazuh app, change the Splunk version number in the requests for the configuration files and Wazuh app for Splunk. For example, if you intend to configure Splunk 8.2.2:
 
          .. code-block:: console
 
