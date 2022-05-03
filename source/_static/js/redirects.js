@@ -74,6 +74,7 @@ removedUrls['x.y'] = [
 /* Pages added in 4.3 */
 
 newUrls['4.3'] = [
+  '/user-manual/wazuh-dashboard/multi-tenancy.html'
   '/user-manual/securing-wazuh/index.html',
   '/user-manual/securing-wazuh/wazuh-indexer.html',
   '/user-manual/securing-wazuh/opendistro.html',
@@ -146,12 +147,15 @@ newUrls['4.3'] = [
   '/deployment-options/wazuh-from-sources/wazuh-server/index.html',
   '/deployment-options/offline-installation.html',
   '/deployment-options/splunk/index.html',
+  '/deployment-options/splunk/splunk-install.html',
   '/deployment-options/splunk/splunk-wazuh.html',
+  '/deployment-options/splunk/splunk-minimal-distributed.html',
   '/deployment-options/splunk/splunk-distributed.html',
   '/deployment-options/splunk/splunk-app.html',
   '/deployment-options/splunk/splunk-basic.html',
   '/deployment-options/splunk/splunk-reverse-proxy.html',
   '/deployment-options/splunk/splunk-polling.html',
+  '/deployment-options/splunk/splunk-rbac.html',
   '/deployment-options/virtual-machine/virtual-machine.html',
   '/deployment-options/deploying-with-kubernetes/index.html',
   '/deployment-options/deploying-with-kubernetes/kubernetes-clean-up.html',
@@ -303,6 +307,17 @@ removedUrls['4.3'] = [
   '/installation-guide/wazuh-agent/deployment-variables/deployment-variables-macos.html',
   '/installation-guide/wazuh-agent/deployment-variables/deployment-variables-windows.html',
   '/user-manual/overview.html',
+  '/user-manual/kibana-app/index.html',
+  '/user-manual/kibana-app/features/app-overview.html',
+  '/user-manual/kibana-app/features/dev-tools.html',
+  '/user-manual/kibana-app/features/download-csv.html',
+  '/user-manual/kibana-app/features/index.html',
+  '/user-manual/kibana-app/features/reporting.html',
+  '/user-manual/kibana-app/features/ruleset.html',
+  '/user-manual/kibana-app/features/settings.html',
+  '/user-manual/kibana-app/features/index-pattern.html',
+  '/user-manual/kibana-app/reference/custom-dashboard.html',
+  '/user-manual/kibana-app/reference/index.html',
   '/virtual-machine/virtual-machine.html',
   '/migrating-from-ossec/index.html',
   '/migrating-from-ossec/ossec-server.html',
@@ -824,6 +839,41 @@ redirections.push(
     'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/docker-monitor/monitoring-docker-server.html',
     '4.3': '/container-security/docker-monitor/monitoring-docker-server.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/user-manual/kibana-app/features/query-configuration.html',
+    '4.3': '/user-manual/agents/query-configuration.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/user-manual/kibana-app/features/settings.html',
+    '4.3': '/user-manual/wazuh-dashboard/settings.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/user-manual/kibana-app/wazuh-rbac.html',
+    '4.3': '/user-manual/wazuh-dashboard/rbac.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/user-manual/kibana-app/reference/elasticsearch.html',
+    '4.3': '/user-manual/elasticsearch/elasticsearch.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/user-manual/kibana-app/troubleshooting.html',
+    '4.3': '/user-manual/elasticsearch/troubleshooting.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/user-manual/kibana-app/reference/config-file.html',
+    '4.3': '/user-manual/wazuh-dashboard/config-file.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/user-manual/kibana-app/reference/configure-indices.html',
+    '4.3': '/user-manual/elasticsearch/configure-indices.html',
   },
 );
 

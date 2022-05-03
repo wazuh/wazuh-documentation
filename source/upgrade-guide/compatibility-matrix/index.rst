@@ -41,6 +41,8 @@ The following Elastic Stack and Open Distro for Elasticsearch versions are compa
 
 You can find more information on the `Wazuh Kibana plugin repository <https://github.com/wazuh/wazuh-kibana-app#installation>`__.
 
+.. _wazuh_and_splunk_app:
+
 Splunk and the Wazuh Splunk app
 -------------------------------
 
