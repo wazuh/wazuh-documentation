@@ -19,27 +19,28 @@ Wazuh app for Splunk offers a UI to visualize Wazuh alerts and Wazuh API data. W
 Install the Wazuh app for Splunk in an all-in-one architecture
 --------------------------------------------------------------
 
-#. Download the latest Wazuh app for Splunk to the all-in-one server:
+.. note::      
 
-   .. tabs::
-      
-      .. group-tab:: Splunk 8.1.4
-        
+      - This guide will install and configure the Wazuh app for Splunk |SPLUNK_LATEST|. If you intend to configure a different version of Splunk with the Wazuh app, change the Splunk version number in the requests for the configuration files and Wazuh app for Splunk. For example, if you intend to configure Splunk 8.2.2:
+
          .. code-block:: console
-            
-            # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.4-1.tar.gz
-            
-      .. group-tab:: Splunk 8.2.2
-        
+
+            #  # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_|SPLUNK_LATEST|-1.tar.gz
+
+
+         Becomes
+
          .. code-block:: console
             
             # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.2.2-1.tar.gz
-            
-      .. group-tab:: Splunk 8.2.4
-        
-         .. code-block:: console
-            
-            # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.2.4-1.tar.gz
+
+
+#. Download the latest Wazuh app for Splunk to the all-in-one server:
+
+         .. code-block:: console      
+
+            # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_|SPLUNK_LATEST|-1.tar.gz
+
 
 #. Install the Wazuh app for Splunk:
 
@@ -106,27 +107,27 @@ Install the Wazuh app for Splunk in an all-in-one architecture
 Install the Wazuh app for Splunk in a minimal distributed architecture
 ----------------------------------------------------------------------
 
-#. Download the latest Wazuh app for Splunk to the indexer node:
+.. note::      
 
-   .. tabs::
-    
-      .. group-tab:: Splunk 8.1.4
-        
+      - This guide will install and configure the Wazuh app for Splunk |SPLUNK_LATEST|. If you intend to configure a different version of Splunk with the Wazuh app, change the Splunk version number in the requests for the configuration files and Wazuh app for Splunk. For example, if you intend to configure Splunk 8.2.2:
+
          .. code-block:: console
-            
-            # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.4-1.tar.gz
-                
-      .. group-tab:: Splunk 8.2.2
-        
+
+
+
+         Becomes
+
          .. code-block:: console
             
             # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.2.2-1.tar.gz
-                
-      .. group-tab:: Splunk Splunk 8.2.4
-        
+
+
+#. Download the latest Wazuh app for Splunk to the indexer node:
+
          .. code-block:: console
             
-            # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.2.4-1.tar.gz
+            # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_|SPLUNK_LATEST|-1.tar.gz
+
 
 #. Install the Wazuh app for Splunk:
 
@@ -188,33 +189,33 @@ Install the Wazuh app for Splunk in a multi-instance cluster
 
 .. note::
 
-   We can install the Wazuh app for Splunk in each search-head manually, but in cases where there are many search-heads, it is more convenient to install it automatically. For this purpose, the ``deployer`` will be used. The deployer is an endpoint that installs the Wazuh app for Splunk in every search-head automatically.
+   -  We can install the Wazuh app for Splunk in each search-head manually, but in cases where there are many search-heads, it is more convenient to install it automatically. For this purpose, the ``deployer`` will be used. The deployer is an endpoint that installs the Wazuh app for Splunk in every search-head automatically.
     
-   The official Splunk documentation for deploying a search head cluster is `here <https://docs.splunk.com/Documentation/Splunk/8.2.6/Deploy/SHCwithindexers>`__.
+   -  The official Splunk documentation for deploying a search head cluster is `here <https://docs.splunk.com/Documentation/Splunk/|SPLUNK_LATEST|/Deploy/SHCwithindexers>`__.
+
+   -  This guide will install and configure the Wazuh app for Splunk |SPLUNK_LATEST|. If you intend to configure a different version of Splunk with the Wazuh app, change the Splunk version number in the requests for the configuration files and Wazuh app for Splunk. For example, if you intend to configure Splunk 8.2.2:
+
+         .. code-block:: console
+
+            # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_|SPLUNK_LATEST|-1.tar.gz
+
+
+         Becomes
+
+         .. code-block:: console
+            
+            # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.2.2-1.tar.gz
+
 
 Install the Wazuh app for Splunk on the ``deployer`` machine and follow the steps below:
 
 #. Download the latest Wazuh app for Splunk to the deployer node:
 
-   .. tabs::
-
-      .. group-tab:: Splunk 8.1.4
-
          .. code-block:: console
+            
+            # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_|SPLUNK_LATEST|-1.tar.gz
 
-            # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.4-1.tar.gz
 
-      .. group-tab:: Splunk 8.2.2
-
-         .. code-block:: console
-
-            # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.2.2-1.tar.gz
-
-      .. group-tab:: Splunk Splunk 8.2.4
-
-         .. code-block:: console
-
-            # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.2.4-1.tar.gz
 
 #. Install the Wazuh app for Splunk on the deployer:
 
@@ -330,3 +331,22 @@ Update the Wazuh app for Splunk
    .. code-block:: console
 
       # /opt/splunk/bin/splunk apply shcluster-bundle -force true -target https://<NODE_IP>:<management_port> -auth <user>:<password> -f
+
+
+
+Troubleshooting the Wazuh app for Splunk installation errors
+------------------------------------------------------------
+
+In some situations, after installing the Wazuh app for Splunk, the API input boxes do not show. Follow the steps below to fix this behavior:
+
+#. Check the permissions on ``/opt/splunk/var/lib/splunk/kvstore/mongo/splunk.key``:
+
+   .. code-block:: console
+
+      # ls -lhs /opt/splunk/var/lib/splunk/kvstore/mongo/splunk.key
+
+#. If the permissions are not set to ``400``, update them:
+
+   .. code-block:: console
+
+      # chmod -R 400 /opt/splunk/var/lib/splunk/kvstore/mongo/splunk.key
