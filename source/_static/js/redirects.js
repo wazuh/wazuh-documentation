@@ -532,7 +532,7 @@ redirections.push(
     '4.3': '/deployment-options/deploying-with-kubernetes/kubernetes-clean-up.html',
   },
   {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
+    'target': ['4.2=>4.3'],
     '4.2': '/deploying-with-kubernetes/kubernetes-local-env.html',
     '4.3': '/deployment-options/deploying-with-kubernetes/index.html',
   },
