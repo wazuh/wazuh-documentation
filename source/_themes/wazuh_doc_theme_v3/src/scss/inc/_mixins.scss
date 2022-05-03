@@ -1,0 +1,61 @@
+/* -----------------------------------------------------------------------------
+  Mixins & functions (inc)
+----------------------------------------------------------------------------- */
+
+/* -- Device screens mixins ---------------------------------------------------------------------------- */
+
+/* stylelint-disable scss/no-global-function-names */
+@mixin media-min($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    $breakpoint-value: map-get($breakpoints, $breakpoint);
+    @media (min-width: $breakpoint-value) {
+      @content;
+    }
+  }
+}
+
+@mixin media-max($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    $breakpoint-value: map-get($breakpoints, $breakpoint);
+    @media (max-width: ($breakpoint-value - 1)) {
+      @content;
+    }
+  }
+}
+
+@mixin media-only($lower, $upper) {
+  @if map-has-key($breakpoints, $lower) and map-has-key($breakpoints, $upper) {
+    $lower-breakpoint: map-get($breakpoints, $lower);
+    $upper-breakpoint: map-get($breakpoints, $upper);
+    @media (min-width: $lower-breakpoint) and (max-width: ($upper-breakpoint - 1)) {
+      @content;
+    }
+  }
+}
+/* stylelint-enable scss/no-global-function-names */
+
+/* -- Sidebar ---------------------------------------------------------------------------- */
+
+@mixin global-toc-nested-padding($min, $max, $delta, $default) {
+  @for $level from $min through $max {
+    ul {
+      .toctree-l#{$level} > a {
+        padding-left: $delta * ($level - 1);
+        &.current-toc-node::before {
+          left: $delta * ($level - 1) - $default;
+        }
+      }
+    }
+  }
+}
+
+@mixin local-toc-nested-padding($min, $max, $delta, $default) {
+  $elements: "& > ul > li > ul > li";
+  @for $level from $min through $max {
+    #{$elements} {
+      padding-left: $delta;
+    }
+
+    $elements: $elements + " > ul > li";
+  }
+}
