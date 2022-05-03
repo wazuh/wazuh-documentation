@@ -25,7 +25,7 @@ Install the Wazuh app for Splunk in an all-in-one architecture
 
          .. code-block:: console
 
-            # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.2.6-1.tar.gz
+            #  # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_|SPLUNK_LATEST|-1.tar.gz
 
 
          Becomes
@@ -39,7 +39,7 @@ Install the Wazuh app for Splunk in an all-in-one architecture
 
          .. code-block:: console      
 
-            # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.2.6-1.tar.gz
+            # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_|SPLUNK_LATEST|-1.tar.gz
 
 
 #. Install the Wazuh app for Splunk:
@@ -113,7 +113,6 @@ Install the Wazuh app for Splunk in a minimal distributed architecture
 
          .. code-block:: console
 
-            # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.2.6-1.tar.gz
 
 
          Becomes
@@ -127,7 +126,7 @@ Install the Wazuh app for Splunk in a minimal distributed architecture
 
          .. code-block:: console
             
-            # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.2.6-1.tar.gz
+            # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_|SPLUNK_LATEST|-1.tar.gz
 
 
 #. Install the Wazuh app for Splunk:
@@ -200,7 +199,7 @@ Install the Wazuh app for Splunk in a multi-instance cluster
 
          .. code-block:: console
 
-            # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.2.6-1.tar.gz
+            # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_|SPLUNK_LATEST|-1.tar.gz
 
 
          Becomes
@@ -216,7 +215,7 @@ Install the Wazuh app for Splunk on the ``deployer`` machine and follow the step
 
          .. code-block:: console
             
-            # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.2.6-1.tar.gz
+            # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_|SPLUNK_LATEST|-1.tar.gz
 
 
 
