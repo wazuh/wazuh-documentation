@@ -29,8 +29,8 @@ The second part will explain how to configure the remaining cluster nodes. Final
 The following instructions are meant to be performed on the **first** Elasticsearch node to be configured.  
 
 
-Prerequisites
-~~~~~~~~~~~~~
+Installing Prerequisites
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /_templates/installations/basic/before_installation_elastic.rst
 
