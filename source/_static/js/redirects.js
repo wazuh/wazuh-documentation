@@ -74,7 +74,7 @@ removedUrls['x.y'] = [
 /* Pages added in 4.3 */
 
 newUrls['4.3'] = [
-  '/user-manual/wazuh-dashboard/multi-tenancy.html'
+  '/user-manual/wazuh-dashboard/multi-tenancy.html',
   '/user-manual/securing-wazuh/index.html',
   '/user-manual/securing-wazuh/wazuh-indexer.html',
   '/user-manual/securing-wazuh/opendistro.html',
