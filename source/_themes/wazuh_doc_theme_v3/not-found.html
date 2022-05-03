@@ -1,0 +1,24 @@
+{#
+    wazuh_doc_theme_v3/not-found.html
+    ~~~~~~~~~~~~~~~~~
+-#}
+
+{%- extends "!wazuh_doc_theme_v3/template-parts/body.html" -%}
+
+{% block body %}
+{{ super() }}
+{% endblock %}
+
+{%- block main_column -%}
+<div id="central-column">  
+  {# Main content #}
+  <main role="main">
+    <div class="error-background"></div>
+    <div class="error-message">
+      <h1>Oops! Something went wrong.</h1>
+      <p>The page you requested could not be found.</p>
+      <a class="btn" href="{{ pathto(master_doc) }}">Return home</a>
+    </div>
+  </main>
+</div>
+{%- endblock main_column -%}
