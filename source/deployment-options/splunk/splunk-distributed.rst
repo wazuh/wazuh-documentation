@@ -16,7 +16,7 @@ Prerequisites
 
 .. note::
 
-   Many of the commands described below need to be executed with root user privileges.
+   Most of the commands described below need to be executed with root user privileges.
 
 .. note::
 
@@ -39,6 +39,24 @@ The structure of a basic Splunk Cluster is formed by the following elements:
 
 Install and configure Splunk enterprise indexer instances
 ---------------------------------------------------------
+
+.. note::
+
+      - Splunk is not open source software and it requires a registered user and license in order to work. You can also use a free trial license.
+
+      - This guide will install and configure Splunk 8.2.6. If you intend to configure a different version of Splunk with Wazuh, change the Splunk version number in the requests for the configuration files and Wazuh app for Splunk. For example, if you intend to configure Splunk 8.2.2:
+
+         .. code-block:: console
+
+            # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v4.3.0-8.2.6/setup/indexer/indexes.conf
+
+
+         Becomes
+
+         .. code-block:: console
+            
+            # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v4.3.0-8.2.2/setup/indexer/indexes.conf
+
 
 Each instance can be configured on different hosts following the steps described below:
 

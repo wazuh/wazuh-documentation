@@ -29,11 +29,26 @@ Install and configure Splunk indexer
 
 This component receives the data flow streamed by a forwarder and stores it in a Splunk index.
 
-#. Download the Splunk package from `its official website <https://www.splunk.com/en_us/download/partners/splunk-enterprise.html>`_. The Wazuh app for Splunk and its compatibility matrix with Splunk components can be found :ref:`here <wazuh_and_splunk_app>`.
+#. Download the Splunk package from `its official website <https://www.splunk.com/en_us/download/partners/splunk-enterprise.html>`_. The versions of Splunk compatible with Wazuh and the Wazuh app for Splunk can be found :ref:`here <wazuh_and_splunk_app>`.
 
-   .. note::
+.. note::
 
-      Splunk is not open source software and it requires a registered user and license in order to work. You can also use a free trial license.
+      - Splunk is not open source software and it requires a registered user and license in order to work. You can also use a free trial license.
+
+      - This guide will install and configure Splunk 8.2.6. If you intend to configure a different version of Splunk with Wazuh, change the Splunk version number in the requests for the configuration files and Wazuh app for Splunk. For example, if you intend to configure Splunk 8.2.2:
+
+         .. code-block:: console
+
+            # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v4.3.0-8.2.6/setup/indexer/indexes.conf
+
+
+         Becomes
+
+         .. code-block:: console
+            
+            # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v4.3.0-8.2.2/setup/indexer/indexes.conf
+
+
 
 #. Install the Splunk package:
 
@@ -53,47 +68,17 @@ This component receives the data flow streamed by a forwarder and stores it in a
 
    #. Create ``indexes.conf``:
 
-      .. tabs::
-          
-         .. group-tab:: Splunk 8.1.4
-            
-            .. code-block:: console
+      .. code-block:: console
 
-               # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_LATEST|-8.2.2/setup/indexer/indexes.conf
-          
-         .. group-tab:: Splunk 8.2.2
-            
-            .. code-block:: console
+         # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v4.3.0-8.2.6/setup/indexer/indexes.conf
 
-               # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_LATEST|-8.2.2/setup/indexer/indexes.conf
-                    
-         .. group-tab:: Splunk 8.2.4
-            
-            .. code-block:: console
-
-               # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_LATEST|-8.2.4/setup/indexer/indexes.conf
 
    #. Create ``inputs.conf``:
-    
-      .. tabs::
+
+      .. code-block:: console
+
+         # curl -so /opt/splunk/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v4.3.0-8.2.6/setup/indexer/inputs.conf  
           
-         .. group-tab:: Splunk 8.1.4
-            
-            .. code-block:: console
-
-               # curl -so /opt/splunk/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_LATEST|-8.1.4/setup/indexer/inputs.conf
-          
-         .. group-tab:: Splunk 8.2.2
-            
-            .. code-block:: console
-
-               # curl -so /opt/splunk/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_LATEST|-8.2.2/setup/indexer/inputs.conf
-                    
-         .. group-tab:: Splunk 8.2.4
-            
-            .. code-block:: console
-
-               # curl -so /opt/splunk/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_LATEST|-8.2.4/setup/indexer/inputs.conf
 
 #. Ensure Splunk is installed in ``/opt/splunk`` and start the service:
 
@@ -149,7 +134,24 @@ A Splunk forwarder is required in order to send alerts to the Splunk indexer.
 
 Depending on the type of architecture that you’re installing, the Splunk forwarder is configured differently.
 
-#. Download Splunk Forwarder package from `the official website <https://www.splunk.com/en_us/download/universal-forwarder.html>`_. The Wazuh app for Splunk and its compatibility matrix with Splunk components can be found :ref:`here <wazuh_and_splunk_app>`.
+#. Download the Splunk forwarder package from `the official website <https://www.splunk.com/en_us/download/universal-forwarder.html>`_. The versions of Splunk forwarder compatible with Wazuh and the Wazuh app for Splunk can be found :ref:`here <wazuh_and_splunk_app>`.
+
+.. note::
+
+      - Splunk is not open source software and it requires a registered user and license in order to work. You can also use a free trial license.
+
+      - This guide will install and configure Splunk 8.2.6. If you intend to configure a different version of Splunk with Wazuh, change the Splunk version number in the requests for the configuration files and Wazuh app for Splunk. For example, if you intend to configure Splunk 8.2.2:
+
+         .. code-block:: console
+
+            # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v4.3.0-8.2.6/setup/indexer/indexes.conf
+
+
+         Becomes
+
+         .. code-block:: console
+            
+            # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v4.3.0-8.2.2/setup/indexer/indexes.conf
 
 #. Install the Splunk forwarder package on the Wazuh manager:
 
@@ -180,48 +182,18 @@ Creating the configuration files
 """"""""""""""""""""""""""""""""
 
 #. Download and insert the ``props.conf`` template:
-
-   .. tabs::
-    
-      .. group-tab:: For Splunk 8.1.4
         
-         .. code-block:: console
-            
-            # curl -so /opt/splunkforwarder/etc/system/local/props.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_LATEST|-8.1.4/setup/forwarder/props.conf
-                
-      .. group-tab:: For Splunk 8.2.2
-        
-         .. code-block:: console
-            
-            # curl -so /opt/splunkforwarder/etc/system/local/props.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_LATEST|-8.2.2/setup/forwarder/props.conf
-                
-      .. group-tab:: For Splunk 8.2.4
-        
-         .. code-block:: console
-            
-            # curl -so /opt/splunkforwarder/etc/system/local/props.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_LATEST|-8.2.4/setup/forwarder/props.conf
+   .. code-block:: console
+      
+      # curl -so /opt/splunkforwarder/etc/system/local/props.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v4.3.0-8.2.6/setup/forwarder/props.conf          
+ 
 
 #. Download and insert the ``inputs.conf`` template:
 
-   .. tabs::
-
-      .. group-tab:: For Splunk 8.1.4
-        
-         .. code-block:: console
-            
-            # curl -so /opt/splunkforwarder/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_LATEST|-8.1.4/setup/forwarder/inputs.conf
+   .. code-block:: console
+      
+      # curl -so /opt/splunkforwarder/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v4.3.0-8.2.6/setup/forwarder/inputs.conf
                 
-      .. group-tab:: For Splunk 8.2.2
-        
-         .. code-block:: console
-            
-            # curl -so /opt/splunkforwarder/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_LATEST|-8.2.2/setup/forwarder/inputs.conf
-                
-      .. group-tab:: For Splunk 8.2.4
-        
-         .. code-block:: console
-            
-            # curl -so /opt/splunkforwarder/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_LATEST|-8.2.4/setup/forwarder/inputs.conf
 
 #. Set the Wazuh manager hostname:
 
