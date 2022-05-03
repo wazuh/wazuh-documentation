@@ -84,7 +84,7 @@ And we can see the preconfigured playbooks we have by running the command below.
 	├── wazuh-production-ready.yml
 	└── wazuh-single.yml
 
-Using the ansible-wazuh-manager and ansible-filebeat-oss roles, we will install and configure the Wazuh manager, and filebeat components.
+Using the ansible-wazuh-manager and ansible-filebeat-oss roles, we will install and configure the Wazuh manager, and Filebeat components.
 
 Let’s see below, the content of the YAML file ``/etc/ansible/roles/wazuh-ansible/playbooks/wazuh-manager-oss.yml`` that we are going to run for a complete installation of the server.
 

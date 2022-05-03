@@ -233,7 +233,7 @@ Our Ansible server will need to connect to the other endpoints. Let’s see how 
 
                # service sshd restart
 
-   #. Verify authentication with public key works.We test from the Ansible server.
+   #. Verify that the authentication with the public key works. Test from the Ansible server.
 
       .. code-block:: console
 
@@ -256,13 +256,15 @@ Testing the Ansible connection to remote endpoints
       192.168.33.31 ansible_ssh_user=centos
 
    .. note::
+     :class: long
 
-      Python 3 usage: In some systems, such as Ubuntu 18, we may have problems with the use of Python interpreter due to its version and the default path where Ansible checks for it. If this happens, we must add  the following line to the ansible host file:
+      Python 3 usage: In some systems, such as Ubuntu 18, we may have problems with the use of Python interpreter due to its version and the default path where Ansible checks for it. If this happens, we must add  the following line to the Ansible host file:
 
       ``<endpoint_IP> ansible_ssh_user=<ssh_user>``
+
       ``ansible_python_interpreter=/usr/bin/python3``
 
-#. Attempt a connection with the remote endpoints using ping module.
+#. Attempt a connection with the remote endpoints using the ping module.
 
    .. code-block:: console
 
