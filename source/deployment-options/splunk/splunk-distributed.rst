@@ -126,25 +126,10 @@ In the **Splunk master instance**, users will make the configuration that will b
 
 #. To create and configure the indexes.conf file, execute the following command:
 
-   .. tabs::
-      
-      .. group-tab:: Splunk 8.1.4
+   .. code-block:: console
 
-         .. code-block:: console
+      # curl -so /opt/splunk/etc/master-apps/_cluster/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v4.3.0-8.2.6/setup/indexer/indexes.conf  
 
-            # curl -so /opt/splunk/etc/master-apps/_cluster/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_LATEST|-8.1.4/setup/indexer/indexes.conf
-
-      .. group-tab:: Splunk 8.2.2
-
-         .. code-block:: console
-
-            # curl -so /opt/splunk/etc/master-apps/_cluster/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_LATEST|-8.2.2/setup/indexer/indexes.conf
-
-      .. group-tab:: Splunk 8.2.4
-
-         .. code-block:: console
-
-            # curl -so /opt/splunk/etc/master-apps/_cluster/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_LATEST|-8.2.4/setup/indexer/indexes.conf
 
 #. Apply the cluster bundle:
 
@@ -163,7 +148,25 @@ Install and configure Splunk forwarder instances
 
 A Splunk forwarder is required in order to send alerts to the Splunk indexers. Depending on the type of architecture that you’re installing, the Splunk forwarder is configured differently.
 
-#. Download the Splunk forwarder package from `the official website <https://www.splunk.com/en_us/download/universal-forwarder.html>`__. The Wazuh app for Splunk and its compatible Splunk components can be found :ref:`here <wazuh_and_splunk_app>`
+#. Download the Splunk package from `its official website <https://www.splunk.com/en_us/download/partners/splunk-enterprise.html>`__. The versions of Splunk compatible with Wazuh and the Wazuh app for Splunk can be found :ref:`here <wazuh_and_splunk_app>`.
+
+.. note::
+
+      - Splunk is not open source software and it requires a registered user and license in order to work. You can also use a free trial license.
+
+      - This guide will install and configure Splunk 8.2.6. If you intend to configure a different version of Splunk with Wazuh, change the Splunk version number in the requests for the configuration files and Wazuh app for Splunk. For example, if you intend to configure Splunk 8.2.2:
+
+         .. code-block:: console
+
+            # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v4.3.0-8.2.6/setup/indexer/indexes.conf
+
+
+         Becomes
+
+         .. code-block:: console
+            
+            # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v4.3.0-8.2.2/setup/indexer/indexes.conf
+
 
 #. Install the Splunk forwarder package on all the Wazuh manager nodes:
 
@@ -191,30 +194,15 @@ The following files will be configured on all forwarder instances:
 -  **outputs.conf**: This file is for pointing events to indexers. It can be a single indexer or a cluster of indexers. If it is a cluster of indexers, load balancing has to be configured for the forwarders.
 -  **props.conf**: This file provides format and transforming options on the fields of the data to be indexed.
 
+
 Creating the configuration files
 """"""""""""""""""""""""""""""""
 
 #. Download and insert the ``inputs.conf`` template:
 
-   .. tabs::
-
-      .. group-tab:: For Splunk 8.1.4
-        
-         .. code-block:: console
-            
-            # curl -so /opt/splunkforwarder/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_LATEST|-8.1.4/setup/forwarder/inputs.conf
-                
-      .. group-tab:: For Splunk 8.2.2
-        
-         .. code-block:: console
-            
-            # curl -so /opt/splunkforwarder/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_LATEST|-8.2.2/setup/forwarder/inputs.conf
-                
-      .. group-tab:: For Splunk 8.2.4
-        
-         .. code-block:: console
-            
-            # curl -so /opt/splunkforwarder/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_LATEST|-8.2.4/setup/forwarder/inputs.conf
+   .. code-block:: console
+      
+      # curl -so /opt/splunkforwarder/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v4.3.0-8.2.6/setup/forwarder/inputs.conf                           
 
 #. Set the Wazuh manager hostname:
 
@@ -254,27 +242,13 @@ Creating the configuration files
    |
    | In the [tcpout:<target_group>] stanza, set the indexerDiscovery attribute, instead of the server attribute that you would use to specify the receiving peer nodes if you were not enabling indexer discovery. With indexer discovery, the forwarders get their list of receiving peer nodes from the master, not from the server attribute. If both attributes are set, indexerDiscovery takes precedence.
    
+
 #. Download and insert the ``props.conf`` template:
-
-   .. tabs::
-
-      .. group-tab:: For Splunk 8.1.4
         
-         .. code-block:: console
-            
-            # curl -so /opt/splunkforwarder/etc/system/local/props.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_LATEST|-8.1.4/setup/forwarder/props.conf
-                
-      .. group-tab:: For Splunk 8.2.2
-        
-         .. code-block:: console
-            
-            # curl -so /opt/splunkforwarder/etc/system/local/props.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_LATEST|-8.2.2/setup/forwarder/props.conf
-                
-      .. group-tab:: For Splunk 8.2.4
-        
-         .. code-block:: console
-            
-            # curl -so /opt/splunkforwarder/etc/system/local/props.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_LATEST|-8.2.4/setup/forwarder/props.conf
+   .. code-block:: console
+      
+      # curl -so /opt/splunkforwarder/etc/system/local/props.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v4.3.0-8.2.6/setup/forwarder/props.conf          
+ 
 
 #. To save all the changes, start the Splunk forwarder:
 
