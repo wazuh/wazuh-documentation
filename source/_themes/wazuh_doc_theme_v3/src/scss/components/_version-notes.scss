@@ -1,0 +1,50 @@
+/* -----------------------------------------------------------------------------
+  Component: Version changes notes
+
+  Style for the elements "New in version ...", "Deprecated since version ...", etc.
+----------------------------------------------------------------------------- */
+
+main {
+  .versionmodified {
+    position: relative;
+    display: inline-block;
+    padding-left: 38px;
+    font-weight: 600;
+
+    &::before {
+      position: absolute;
+      top: 3px;
+      left: 0;
+      display: block;
+      width: 24px;
+      height: 24px;
+      content: "";
+    }
+    &.changed::before {
+      background: url("#{$ico-path}svg-icons.svg#circle-exclamation-orange");
+    }
+    &.deprecated::before {
+      background: url("#{$ico-path}svg-icons.svg#circle-exclamation-orange");
+    }
+  }
+}
+
+/* Light theme -------------------------------------------------------------- */
+
+.light-theme {
+  .versionmodified {
+    &.added::before {
+      background: url("#{$ico-path}svg-icons.svg#circle-exclamation-blue-lt");
+    }
+  }
+}
+
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme {
+  .versionmodified {
+    &.added::before {
+      background: url("#{$ico-path}svg-icons.svg#circle-exclamation-blue-dt");
+    }
+  }
+}
