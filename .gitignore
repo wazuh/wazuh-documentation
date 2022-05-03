@@ -18,5 +18,6 @@ source/_themes/wazuh_doc_theme_v3/src/js/*.js
 source/_themes/wazuh_doc_theme_v3/src/js/*.js.map
 source/_themes/wazuh_doc_theme_v3/static/css/min/*.css.map
 source/_themes/wazuh_doc_theme_v3/static/js/min/*.js.map
+source/_themes/wazuh_doc_theme_v3/static/js/min/redirects.min.js
 source/_static/css/*.min.css
 source/_static/js/*.min.js
