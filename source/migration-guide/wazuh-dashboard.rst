@@ -66,7 +66,7 @@ Follow this guide to migrate from Open Distro for Elasticsearch Kibana 1.13 to t
               .. include:: /_templates/installations/dashboard/apt/install_dashboard.rst
 
 
-    ..  note:: Make sure that your Wazuh manager is updated to the latest version. 
+    ..  note:: Make sure that your Wazuh manager is updated to the latest version. To learn more, see the :doc:`Upgrading the Wazuh manager </upgrade-guide/upgrading-wazuh>` documentation. 
 
 #. Create the ``/etc/wazuh-dashboard/certs`` directory, copy your old certificates to the new location and change ownership and permissions.    
 
