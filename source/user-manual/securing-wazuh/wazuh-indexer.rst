@@ -87,7 +87,7 @@ This is the output of the script:
     28/04/2022 10:25:31 INFO: The password for user snapshotrestore is U5MZg6WeXNUP9NPPophRoMtA9GQNEvdR
     28/04/2022 10:25:31 INFO: The password for user wazuh_admin is WrWzM8egHJY2CfxngapAeSchA3yq3X3t
     28/04/2022 10:25:31 INFO: The password for user wazuh_user is oCwLLG88wb7x5OpnxOPjclVpqWgq9s7W
-    28/04/2022 10:25:31 WARNING: Passwords changed. Remember to update the password in /etc/filebeat/filebeat.yml and /etc/wazuh-dashboard/opensearch_dashboards.yml if necessary and restart the services.
+    28/04/2022 10:25:31 WARNING: Passwords changed. Remember to update the password in the Wazuh dashboard and Filebeat nodes if necessary, and restart the services.
 
 Change the passwords using a formatted file
 --------------------------------------------
