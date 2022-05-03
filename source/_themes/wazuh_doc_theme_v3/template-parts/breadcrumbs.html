@@ -1,0 +1,7 @@
+    <ul id="breadcrumbs" role="navigation" aria-label="breadcrumbs navigation">
+      <li><a href="{{ pathto(master_doc) }}">{{ _('Documentation') }}</a> <span class="breadcrumb-separator" aria-hidden="true"></span></li>
+      {%- for doc in parents -%}
+      <li><a href="{{ doc.link|e }}">{{ doc.title }}</a><span class="breadcrumb-separator" aria-hidden="true"></span></li>
+      {%- endfor -%}
+      <li>{{ title }}</li>
+    </ul>
