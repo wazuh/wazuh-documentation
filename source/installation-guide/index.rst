@@ -35,7 +35,7 @@ This is the installation workflow you will follow for this:
 
 To check the requirements and start installing the first of the Wazuh central components, go to the :doc:`Wazuh indexer <wazuh-indexer/index>` section.
 
-You can also check our :ref:`Quickstart <quickstart>` to get started with Wazuh in just a few minutes.
+You can also check our :doc:`Quickstart </quickstart>` to get started with Wazuh in just a few minutes.
 
 Installing the Wazuh agent
 --------------------------
