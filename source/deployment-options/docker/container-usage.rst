@@ -10,7 +10,11 @@ Wazuh Docker utilities
 
 After installing the Wazuh-Docker containers, there are several tasks that you can do to benefit the most from your Wazuh installation.
 
-
+.. contents::
+   :local:
+   :depth: 1
+   :backlinks: none
+   
 
 Access to services and containers
 ---------------------------------
