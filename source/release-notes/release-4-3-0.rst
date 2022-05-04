@@ -14,9 +14,11 @@ This section lists the changes in version 4.3.0. Every update of the Wazuh solut
 Highlights
 ----------
 
-Wazuh 4.3.0 includes many new additions, such as a remarkable enhancement with the new Wazuh indexer and Wazuh dashboard that improve the user experience and facilitate the configuration of the whole platform. 
 
-Wazuh 4.3.0 improves platform performance and adds new integrations such as the following: 
+
+Wazuh 4.3.0 includes many new additions, such as a remarkable enhancement with the new :doc:`Wazuh indexer </getting-started/components/wazuh-indexer>` and :doc:`Wazuh dashboard </getting-started/components/wazuh-dashboard>` that improve the user experience and facilitate the management of the whole platform. 
+
+Wazuh 4.3.0 enhances platform performance and adds new integrations such as the following: 
 
 - Vulnerability Detector support for Amazon Linux and Arch Linux
 - New agents integrations with logs from Office 365
@@ -25,12 +27,11 @@ Wazuh 4.3.0 improves platform performance and adds new integrations such as the 
 
 Below you will find more information about each of these new features.
 
-With Wazuh 4.3.0, two new installers called the Wazuh indexer, and the Wazuh dashboard are available to users to facilitate installation, upgrades, and configuration. The wazuh indexer is a customized OpenSearch distribution with configurations and tools needed to run out of the box for Wazuh. The Wazuh dashboard is a customized OpenSearch dashboards distribution with the Wazuh plugin embedded, plus new configurations and customizations for Wazuh.
+With Wazuh 4.3.0, two new installers called the Wazuh indexer, and the Wazuh dashboard are available to users to facilitate installation, upgrades, and configuration. The wazuh indexer is a customized OpenSearch distribution with configurations and tools needed to run out of the box for Wazuh. The Wazuh dashboard is a customized OpenSearch dashboards distribution with the Wazuh plugin embedded, plus new configurations and customizations.
 
 This new dashboard is a flexible and intuitive web interface for mining, analyzing, and visualizing data. It provides out-of-the-box dashboards, allowing users to navigate the interface that now presents a renewed design with a new palette of colors. The versioning equivalent to the Wazuh manager will allow upgrades without the risk of incompatibilities.
 
-An installation assistant ``wazuh-install.sh`` is available to users, allowing any type of installation, whether on a single node, multinode, multicluster, etc, by simply defining a ``yml`` file, with everything connected and secured, including random passwords and generated certificates. In addition, Debian and RPM packages for ppc64le architectures are made available to users.
-
+An installation assistant ``wazuh-install.sh`` is available to users, allowing any type of installation, whether on a single node, multinode, multicluster, etc. This is possible by simply defining a ``yml`` file, with everything connected and secured, including random passwords and generated certificates. In addition, Debian and RPM packages for ppc64le architectures are made available to users.
 
 .. thumbnail::  ../images/release-notes/4.3.0/Wazuh-dashboard.png 
       :align: center
