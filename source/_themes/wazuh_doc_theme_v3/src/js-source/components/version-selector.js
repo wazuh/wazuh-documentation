@@ -210,12 +210,12 @@ jQuery(function($) {
           href = '/'+ver+redirHistory[ver]+param;
         }
       } else {
-        tooltip = 'class="disabled" data-toggle="tooltip" data-placement="left" title="This page is not available in version ' + listOfVersions[i] + ((listOfVersions[0] == thisVersion && thisVersion == listOfVersions[i]) ? ' (current)' : '') +'"';
+        tooltip = 'class="disabled" data-toggle="tooltip" data-placement="left" title="This page is not available in version ' + listOfVersions[i] + ((i == 0) ? ' (current)' : '') +'"';
       }
       if ( !hasHttpProtocol && href.length > 0 ) {
         href = 'https://documentation.wazuh.com' + href;
       }
-      ele += '<li><a href="' + href + '" '+ tooltip +'> Version '+listOfVersions[i] + ((listOfVersions[0] == thisVersion && thisVersion == listOfVersions[i]) ? ' (current)' : '') +'</a></li>';
+      ele += '<li><a href="' + href + '" '+ tooltip +'> Version '+listOfVersions[i] + ((i == 0) ? ' (current)' : '') +'</a></li>';
       if (ver == listOfVersions[0]) {
         $('.no-latest-notice .link-latest').attr('href', href);
       }
