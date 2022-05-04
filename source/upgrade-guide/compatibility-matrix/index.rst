@@ -6,16 +6,18 @@
 Compatibility matrix
 ====================
 
-The Wazuh manager works with Wazuh agents and other Wazuh components such as the Wazuh indexer and the Wazuh dashboard. It can work with Elastic and Splunk as well. In any case, when upgrading Wazuh there are specific compatibility requirements to take into consideration.
+When upgrading Wazuh there are specific compatibility requirements to take into consideration.
 
 Wazuh central components and agents
 -----------------------------------
 
 The Wazuh central components must share the same version numbers down to the patch category for the correct operation. For example:
 
--  Wazuh manager |WAZUH_LATEST|, Wazuh indexer |WAZUH_LATEST|, and Wazuh dashboard |WAZUH_LATEST|
+-  Wazuh manager |WAZUH_LATEST|, Wazuh indexer |WAZUH_LATEST|, and Wazuh dashboard |WAZUH_LATEST|. 
 
-However, Wazuh agents can lag behind. This means the Wazuh manager version must always be **newer than or equal to**  the Wazuh agents versions. For example:
+- The Wazuh indexer |WAZUH_LATEST| is compatible with Filebeat-OSS 7.10.2. 
+
+The Wazuh manager version must always be **newer than or equal to**  the Wazuh agents versions. For example:
 
 -  Wazuh manager |WAZUH_LATEST| and Wazuh agent 4.2.6
 -  Wazuh manager |WAZUH_LATEST| and Wazuh agent |WAZUH_LATEST|
