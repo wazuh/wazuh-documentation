@@ -15,7 +15,7 @@ Wazuh dashboard installation
 
     .. code-block:: console
 
-      # curl -sO https://packages-dev.wazuh.com/|WAZUH_LATEST_MINOR|/wazuh-install.sh
+      # curl -sO https://packages.wazuh.com/|WAZUH_LATEST_MINOR|/wazuh-install.sh
 
 
 
