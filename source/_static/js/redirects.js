@@ -74,6 +74,17 @@ removedUrls['x.y'] = [
 /* Pages added in 4.3 */
 
 newUrls['4.3'] = [
+  '/getting-started/use-cases/container-security.html',
+  '/user-manual/agents/query-configuration.html',
+  '/user-manual/elasticsearch/configure-indices.html',
+  '/user-manual/elasticsearch/elasticsearch.html',
+  '/user-manual/elasticsearch/index.html',
+  '/user-manual/elasticsearch/troubleshooting.html',
+  '/user-manual/wazuh-dashboard/settings.html',
+  '/user-manual/wazuh-dashboard/config-file.html',
+  '/user-manual/wazuh-dashboard/index.html',
+  '/user-manual/wazuh-dashboard/rbac.html',
+  '/user-manual/wazuh-dashboard/troubleshooting.html',
   '/user-manual/wazuh-dashboard/multi-tenancy.html',
   '/user-manual/securing-wazuh/index.html',
   '/user-manual/securing-wazuh/wazuh-indexer.html',
@@ -342,6 +353,7 @@ redirections.push(
     '4.3': '/migration-guide/migrating-from-ossec/ossec-agent.html',
   },
   {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/getting-started/use-cases/containers-security.html',
     '4.3': '/getting-started/use-cases/container-security.html',
   },
@@ -384,11 +396,6 @@ redirections.push(
     'target': ['4.3=>4.2'],
     '4.2': '/getting-started/use-cases/index.html',
     '4.3': '/getting-started/use-cases/security-analytics.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/getting-started/use-cases/rootkits-detection.html',
-    '4.3': '/getting-started/use-cases/intrusion-detection.html',
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
@@ -519,11 +526,6 @@ redirections.push(
     'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/docker/container-usage.html',
     '4.3': '/deployment-options/docker/container-usage.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/docker/upgrade-guide.html',
-    '4.3': '/deployment-options/docker/upgrade-guide.html',
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
