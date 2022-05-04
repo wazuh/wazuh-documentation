@@ -7,7 +7,7 @@
 
 .no-latest-notice-wrapper {
   position: fixed;
-  z-index: 100;
+  z-index: 98;
   width: 100%;
   min-height: $no-latest-notice-height-xl;
   padding-right: 15px;
@@ -74,6 +74,9 @@
       top: calc(#{$header-height-xl} + #{$breadcrumbs-height-xl});
       @include media-max(sm){
         top: calc(#{$header-height-xs} + #{$secondary-mobile-bar});
+      }
+      @include media-only(sm, xl){
+        top: calc(#{$header-height-xs} + #{$secondary-mobile-bar} + #{$breadcrumbs-height-xl});
       }
     }
   }
