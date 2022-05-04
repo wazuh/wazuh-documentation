@@ -1,7 +1,7 @@
 .. Copyright (C) 2015–2022 Wazuh, Inc.
 
 .. meta::
-  :description: Install and configure Wazuh, the open source security platform, in just a few minutes using the Wazuh installation assistant. 
+  :description: Install and configure Wazuh, the open source security platform, in just a few minutes using the Wazuh installation assistant.
 
 Quickstart
 ==========
@@ -46,7 +46,7 @@ Wazuh central components can be installed on a 64-bit Linux operating system. Wa
 
 .. list-table::
     :width: 100%
-   
+
     * - Amazon Linux 2
       - CentOS 7, 8
     * - Red Hat Enterprise Linux 7, 8
@@ -55,7 +55,7 @@ Wazuh central components can be installed on a 64-bit Linux operating system. Wa
 Installing Wazuh
 ----------------
 
-#.  Download and run the Wazuh installation assistant. 
+#.  Download and run the Wazuh installation assistant.
 
     .. code-block:: console
 
@@ -65,10 +65,10 @@ Installing Wazuh
     Once the assistant finishes the installation, the output shows the access credentials, where to find them, and a message that confirms that the installation was successful.
 
     .. code-block:: none
-        :emphasize-lines: 4          
-     
+        :emphasize-lines: 4
+
         INFO: --- Summary ---
-        INFO: You can access the web interface https://<wazuh-dashboard-ip>.
+        INFO: You can access the web interface https://<wazuh-dashboard-ip>
             User: admin
             Password: <ADMIN_PASSWORD>
         INFO: The password can be seen in the file /var/log/wazuh-install.log
@@ -82,9 +82,9 @@ Installing Wazuh
     -   Password: <ADMIN_PASSWORD>
 
 When you access the Wazuh dashboard for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. This is expected and the user has the option to accept the certificate as an exception or, alternatively, configure the system to use a certificate from a trusted authority.
- 
+
 .. note::
-  
+
     If you want to uninstall the Wazuh central components, run the Wazuh installation assistant using the option ``-u`` or ``–-uninstall``.
 
 Next steps
