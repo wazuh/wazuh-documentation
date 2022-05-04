@@ -1,7 +1,7 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
-  :description: The pre-built Wazuh Amazon Machine Image includes all Wazuh components ready-to-use. Test all Wazuh capabilities with our AMI.  
+  :description: The pre-built Wazuh Amazon Machine Image includes all Wazuh components ready-to-use. Test all Wazuh capabilities with our AMI.
 
 Amazon Machine Images (AMI)
 ===========================
@@ -41,8 +41,8 @@ Launch an instance from the AWS Marketplace
 
 #. Review your configuration making sure that all settings are correct before launching the software. Adapt the default configuration values to your needs.
 
-    #. When selecting the **EC2 Instance Type**, we recommend that you use an instance type ``c5.2xlarge``.
-  
+    #. When selecting the **EC2 Instance Type**, we recommend that you use an instance type ``c5a.xlarge``.
+
     #. When selecting the **Security Group**, it must be one with the appropriate :ref:`settings for your Wazuh instance <default_ports>` to guarantee the correct operation. You can create a new security group by choosing **Create new based on seller settings**. This new group will have the appropriate settings by default.
 
 #. Click **Launch** to generate the instance.
@@ -59,7 +59,7 @@ Deploy an instance using the AWS Management Console
 
 #. Review the Server product characteristics, then click **Continue**. This allows subscribing to our Server product.
 
-#. Select the instance type according to your needs, then click **Next: Configure Instance Details**. We recommend that you use an instance type ``c5.2xlarge``.
+#. Select the instance type according to your needs, then click **Next: Configure Instance Details**. We recommend that you use an instance type ``c5a.xlarge``.
 
 #. Configure your instance as needed, then click **Next: Add Storage**.
 
@@ -72,7 +72,7 @@ Deploy an instance using the AWS Management Console
 #. Review the instance configuration and click **Launch**.
 
 #. Select one of three configuration alternatives available regarding the key pair settings: **Choose an existing key pair**, **Create a new key pair**, **Proceed without a key pair**. You need to choose an existing key pair or create a new one to access the instance with SSH.
-    
+
 #. Click **Launch instances** to complete the process and deploy your instance.
 
 Once your instance is fully configured and ready after a few minutes since launch, you can :ref:`access the Wazuh dashboard <ami_wazuh_ui>`.
