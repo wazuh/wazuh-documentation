@@ -2,7 +2,7 @@
 
 .. code-block:: console
 
-  # curl -so /etc/kibana/kibana.yml https://packages.wazuh.com/|WAZUH_LATEST_MINOR|/tpl/elastic-basic/kibana_all_in_one.yml
+  # curl -so /etc/kibana/kibana.yml https://packages.wazuh.com/4.3/tpl/elastic-basic/kibana_all_in_one.yml
 
 Edit the ``/etc/kibana/kibana.yml`` file:
 
