@@ -1,55 +1,52 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015–2022 Wazuh, Inc.
 
 .. meta::
   :description: Automated Security Configuration Assessment is an essential capability to improve the enterprise security posture and to reduce its attack surface. 
-
-
-.. _configuration_assessment:
 
 Configuration assessment
 ========================
 
 Automated Security Configuration Assessment (SCA) is an essential capability to improve the enterprise security posture and reduce its attack surface. The Wazuh SCA module helps maintain a standard configuration through the monitored endpoints. This is done via predefined checks based on the Center of Internet Security (CIS) hardening guides.
 
-When the SCA module is enabled, the :ref:`Wazuh agent <wazuh_agent>` performs scans periodically, reporting misconfigurations in the monitored system. Those scans assess the system's configuration through policy files containing a set of checks to be run. For example, an SCA check can inspect the filesystem configuration, look for the presence of a software update or security patch, see that the local firewall is enabled, identify unnecessary running services, or verify the users' password policy.
+When the SCA module is enabled, the :doc:`Wazuh agent <../components/wazuh-agent>` performs scans periodically, reporting misconfigurations in the monitored system. Those scans assess the configuration of the system through policy files containing a set of checks to be run. For example, an SCA check can inspect the filesystem configuration, look for the presence of a software update or security patch, see that the local firewall is enabled, identify unnecessary running services, or verify the users’ password policy.
 
 Policies for the SCA scans are written in YAML format, allowing users to understand them quickly. Using SCA syntax, users can extend the existing policies to fit their needs or write new ones. Each policy contains a set of checks, and each check has one or more rules. For example, a rule can be used to look for the existence of a file, a directory, a Windows registry key, or a running process, among others. It is also possible to execute a command and check its output against a regular expression.
 
 Linux SCA rule example:
 
 .. code-block:: yaml
-  :emphasize-lines: 2
+   :emphasize-lines: 2
 
-  - id: 5546
-    title: "Ensure IP address forwarding is disabled"
-    description: "The net.ipv4.ip_forward flag is used to tell the system whether it can forward packets or not."
-    rationale: "Setting the flag to 0 ensures that a system with multiple interfaces (for example, a hard proxy), will never be able to forward packets, and therefore, never serve as a router."
-    remediation: "Set the following parameter in /etc/sysctl.conf or a /etc/sysctl.d/* file: net.ipv4.ip_forward = 0 and set the active kernel parameters."
-    compliance:
-      - cis: ["3.1.1"]
-      - cis_csc: ["3", "11"]
-      - pci_dss: ["2.2.4"]
-      - nist_800_53: ["CM.1"]
-    condition: all
-    rules:
-      - 'c:sysctl net.ipv4.ip_forward -> r:^net.ipv4.ip_forward\s*=\s*0$'
-      - 'c:grep -Rh net\.ipv4\.ip_forward /etc/sysctl.conf /etc/sysctl.d -> r:^net.ipv4.ip_forward\s*=\s*0$'
+   - id: 5546
+     title: "Ensure IP address forwarding is disabled"
+     description: "The net.ipv4.ip_forward flag is used to tell the system whether it can forward packets or not."
+     rationale: "Setting the flag to 0 ensures that a system with multiple interfaces (for example, a hard proxy), will never be able to forward packets, and therefore, never serve as a router."
+     remediation: "Set the following parameter in /etc/sysctl.conf or a /etc/sysctl.d/* file: net.ipv4.ip_forward = 0 and set the active kernel parameters."
+     compliance:
+       - cis: ["3.1.1"]
+       - cis_csc: ["3", "11"]
+       - pci_dss: ["2.2.4"]
+       - nist_800_53: ["CM.1"]
+     condition: all
+     rules:
+       - 'c:sysctl net.ipv4.ip_forward -> r:^net.ipv4.ip_forward\s*=\s*0$'
+       - 'c:grep -Rh net\.ipv4\.ip_forward /etc/sysctl.conf /etc/sysctl.d -> r:^net.ipv4.ip_forward\s*=\s*0$'
 
 Windows SCA rule example:
 
 .. code-block:: yaml
-  :emphasize-lines: 2
+   :emphasize-lines: 2
 
-  - id: 14038
-    title: "Ensure Microsoft Firewall is enabled"
-    compliance:
-      - pci_dss: ["10.6.1", "1.4"]
-      - hipaa: ["164.312.b", "164.312.a.1"]
-      - nist_800_53: ["AU.6", "SC.7"]
-      - tsc: ["CC6.1", "CC6.8", "CC7.2", "CC7.3", "CC6.7"]
-    condition: all
-    rules:
-      - 'r:HKEY_LOCAL_MACHINE\software\policies\microsoft\windowsfirewall\domainprofile -> enablefirewall -> 1'
+   - id: 14038
+     title: "Ensure Microsoft Firewall is enabled"
+     compliance:
+       - pci_dss: ["10.6.1", "1.4"]
+       - hipaa: ["164.312.b", "164.312.a.1"]
+       - nist_800_53: ["AU.6", "SC.7"]
+       - tsc: ["CC6.1", "CC6.8", "CC7.2", "CC7.3", "CC6.7"]
+     condition: all
+     rules:
+       - 'r:HKEY_LOCAL_MACHINE\software\policies\microsoft\windowsfirewall\domainprofile -> enablefirewall -> 1'
 
 macOS SCA rule example:
 
@@ -74,17 +71,16 @@ Below is an example of the results of a configuration assessment evaluation. The
 .. thumbnail:: /images/getting-started/use-cases/wazuh-use-cases-sca01.png
    :title: Security configuration assessment inventory dashboard
    :align: center
+   :width: 80%
 
-.. hlist::
-    :columns: 2
+.. thumbnail:: /images/getting-started/use-cases/wazuh-use-cases-sca2.png
+   :title: Security configuration assessment inventory
+   :align: center
+   :width: 80%
 
-    - .. thumbnail:: /images/getting-started/use-cases/wazuh-use-cases-sca2.png
-        :title: Security configuration assessment inventory
-        :align: center
-    
-    - .. thumbnail:: /images/getting-started/use-cases/wazuh-use-cases-sca3.png
-        :title: Security configuration assessment inventory events
-        :align: center
+.. thumbnail:: /images/getting-started/use-cases/wazuh-use-cases-sca3.png
+   :title: Security configuration assessment inventory events
+   :align: center
+   :width: 80%
           
 You can find more information about security configuration assessment in the :ref:`user manual <manual_sec_config_assessment>`.
-
