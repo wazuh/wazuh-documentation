@@ -16,9 +16,7 @@ Highlights
 
 Wazuh 4.3.0 includes numerous new features. This new version brings new components, such as the Wazuh Indexer and the Wazuh dashboard. The agent can now collect the installed packages inventory on Amazon Linux and Arch Linux. New integrations to collect auditing logs from Office 365 and GitHub are added to the agent in this new version. The RESTful API availability has been enhanced thanks to the API now using multiple processes. Finally, the 4.3.0 cluster now uses numerous processes to improve its performance. Below you will find more information about each of these new features.
 
-With Wazuh 4.3.0, two new installers called the Wazuh indexer, and the Wazuh dashboard are available to users to facilitate installation, upgrades, and configuration. Due to the log4j2 vulnerability and the fact that the Open Distro project is no longer under active development, it was decided to create the Wazuh indexer and the Wazuh dashboard.
-
-The wazuh indexer is a customized Opensearch distribution with configurations and tools needed to run out of the box for Wazuh. The Wazuh dashboard is a customized Opensearch Dashboard distribution with the Wazuh plugin embedded, plus new configurations and customizations for Wazuh. 
+With Wazuh 4.3.0, two new installers called the Wazuh indexer, and the Wazuh dashboard are available to users to facilitate installation, upgrades, and configuration. The wazuh indexer is a customized Opensearch distribution with configurations and tools needed to run out of the box for Wazuh. The Wazuh dashboard is a customized Opensearch Dashboard distribution with the Wazuh plugin embedded, plus new configurations and customizations for Wazuh. 
 
 This new dashboard is a flexible and intuitive web interface for mining, analyzing, and visualizing data. It provides out-of-the-box dashboards, allowing users to navigate the interface that now presents a renewed design with a new palette of colors.
 The versioning equivalent to the Wazuh manager will allow upgrades without the risk of incompatibilities as with Elasticsearch and Opendistro. 
@@ -64,7 +62,7 @@ Wazuh v4.3.0 brings significant changes to the cluster, which now uses multiple 
 
 We want to mention another Wazuh 4.3.0 significant new feature. It is related to a new Intelligence tab added to the MITRE ATT&CK module. This tab provides further information about MITRE resources such as groups, mitigations, tactics, and techniques using the new Wazuh API endpoints. Additionally, the Framework tab is adapted to the new Wazuh API endpoints.
 
-Finally, is important to remark that we maintain support for all installation alternatives. Indeed we maintain and extend this support by adding more recent versions.
+Finally, it is important to remark that we maintain support for all installation alternatives. Indeed we maintain and extend this support by adding more recent versions.
 
 
 What's new
