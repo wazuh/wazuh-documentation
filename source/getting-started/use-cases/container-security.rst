@@ -1,10 +1,8 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015–2022 Wazuh, Inc.
 
 .. meta::
   :description: Wazuh is used to monitor container security and protect containers workloads at both the infrastructure and container level. Learn more here. 
   
-.. _container_security:
-
 Container security
 ==================
 
@@ -15,17 +13,11 @@ Infrastructure level
 
 Wazuh provides the following mechanisms to monitor Docker hosts or Kubernetes nodes:
 
-- **Integration with Docker engine and Kubernetes APIs:** In this scenario, the Wazuh module for Docker acts as a subscriber. It listens for Docker or Kubernetes events, alerting when an anomaly or security incident is detected.
+-  **Integration with Docker engine and Kubernetes APIs:** In this scenario, the Wazuh module for Docker acts as a subscriber. It listens for Docker or Kubernetes events, alerting when an anomaly or security incident is detected.
 
-- **Wazuh agent deployment to Docker hosts and Kubernetes nodes:** For a self-managed infrastructure, the deployment of the :ref:`Wazuh agent <wazuh_agent>` provides a comprehensive set of security capabilities, such as malware detection, file integrity monitoring, configuration assessment, log data analysis, vulnerability detection, and active responses.
+-  **Wazuh agent deployment to Docker hosts and Kubernetes nodes:** For a self-managed infrastructure, the deployment of the :doc:`Wazuh agent <../components/wazuh-agent>` provides a comprehensive set of security capabilities, such as malware detection, file integrity monitoring, configuration assessment, log data analysis, vulnerability detection, and active responses.
 
-- **Integration with hosted infrastructure providers:** In this case, the Wazuh modules for cloud security monitoring download the managed service audit logs for security analysis. Wazuh integrates with hosted infrastructure providers such as Google GKE, Amazon EKS, etc. 
-
-.. thumbnail:: /images/getting-started/use-cases/wazuh-use-cases-docker.png
-  :title: Docker events
-  :align: center
-  :width: 80%
-  :wrap_image: No
+-  **Integration with hosted infrastructure providers:** In this case, the Wazuh modules for cloud security monitoring download the managed service audit logs for security analysis. Wazuh integrates with hosted infrastructure providers such as Google GKE, Amazon EKS, etc.
  
 Example of security alerts at an infrastructure level:
 
@@ -42,91 +34,99 @@ Example of security alerts at an infrastructure level:
    * - A new application is installed on the Docker host
      - Vulnerabilities are detected on the Docker host
 
-Expand the output to see an example of an alert generated when a Docker container is created.
+Example of an alert generated when a Docker container is created:
 
 .. code-block:: json
-  :emphasize-lines: 9,12,14
-  :class: output accordion-output
+   :emphasize-lines: 9,12,14
+   :class: output
 
-  {
-    "agent": {
-        "id": "006",
-        "ip": "10.0.1.214",
-        "name": "RHEL7"
-    },
-    "data": {
-        "docker": {
-            "Action": "create",
-            "Actor": {
-                "Attributes": {
+   {
+     "agent": {
+         "id": "006",
+         "ip": "10.0.1.214",
+         "name": "RHEL7"
+     },
+     "data": {
+         "docker": {
+             "Action": "create",
+             "Actor": {
+                 "Attributes": {
                     "image": "nginx",
                     "maintainer": "NGINX Docker Maintainers <docker-maint@nginx.com>",
                     "name": "nginx_container"
-                },
-                "ID": "e9730949586a38d8ab25990234fb8ccba428e3ec1c8bfbf12fe08ed279aaf11d"
-            },
-            "Type": "container",
-            "from": "nginx",
-            "id": "e9730949586a38d8ab25990234fb8ccba428e3ec1c8bfbf12fe08ed279aaf11d",
-            "scope": "local",
-            "status": "create",
-            "time": "1599186260",
-            "timeNano": "1599186260265422592.000000"
-        }
-    },
-    "rule": {
-        "description": "Docker: Container nginx_container created",
-        "level": 3,
-        "id": "87901"
-    },
-    "timestamp": "2020-09-04T02:24:20.266+0000"
-  } 
+                 },
+                 "ID": "e9730949586a38d8ab25990234fb8ccba428e3ec1c8bfbf12fe08ed279aaf11d"
+             },
+             "Type": "container",
+             "from": "nginx",
+             "id": "e9730949586a38d8ab25990234fb8ccba428e3ec1c8bfbf12fe08ed279aaf11d",
+             "scope": "local",
+             "status": "create",
+             "time": "1599186260",
+             "timeNano": "1599186260265422592.000000"
+         }
+     },
+     "rule": {
+         "description": "Docker: Container nginx_container created",
+         "level": 3,
+         "id": "87901"
+     },
+     "timestamp": "2020-09-04T02:24:20.266+0000"
+   }
 
-Expand the output to see an example of an alert generated when a command is executed inside a container.
+Example of an alert generated when a command is executed inside a container:
 
 .. code-block:: json
-  :emphasize-lines: 9,15
-  :class: output accordion-output
+   :emphasize-lines: 9,15
+   :class: output
 
-  {
-    "agent": {
-        "id": "006",
-        "ip": "10.0.1.214",
-        "name": "RHEL7"
-    },
-    "data": {
-        "docker": {
-            "Action": "exec_start: cat /etc/passwd",
-            "Actor": {
-                "Attributes": {
-                    "execID": "363d220ce7a34c521707477d14b7700e4fb26987f9f4e27bc558788ce66570b4",
-                    "image": "nginx",
-                    "maintainer": "NGINX Docker Maintainers <docker-maint@nginx.com>",
-                    "name": "nginx_container"
-                },
-                "ID": "e9730949586a38d8ab25990234fb8ccba428e3ec1c8bfbf12fe08ed279aaf11d"
-            },
-            "Type": "container",
-            "from": "nginx",
-            "id": "e9730949586a38d8ab25990234fb8ccba428e3ec1c8bfbf12fe08ed279aaf11d",
-            "scope": "local",
-            "status": "exec_start: cat /etc/passwd",
-            "time": "1599186799",
-            "timeNano": "1599186799425748992.000000"
-        }
-    },
-    "rule": {
-        "description": "Docker: Command launched in container nginx_container",
-        "level": 3,
-        "id": "87907"
-    },
-    "timestamp": "2020-09-04T02:33:19.431+0000"
-  }
+   {
+     "agent": {
+         "id": "006",
+         "ip": "10.0.1.214",
+         "name": "RHEL7"
+     },
+     "data": {
+         "docker": {
+             "Action": "exec_start: cat /etc/passwd",
+             "Actor": {
+                 "Attributes": {
+                     "execID": "363d220ce7a34c521707477d14b7700e4fb26987f9f4e27bc558788ce66570b4",
+                     "image": "nginx",
+                     "maintainer": "NGINX Docker Maintainers <docker-maint@nginx.com>",
+                     "name": "nginx_container"
+                 },
+                 "ID": "e9730949586a38d8ab25990234fb8ccba428e3ec1c8bfbf12fe08ed279aaf11d"
+             },
+             "Type": "container",
+             "from": "nginx",
+             "id": "e9730949586a38d8ab25990234fb8ccba428e3ec1c8bfbf12fe08ed279aaf11d",
+             "scope": "local",
+             "status": "exec_start: cat /etc/passwd",
+             "time": "1599186799",
+             "timeNano": "1599186799425748992.000000"
+         }
+     },
+     "rule": {
+         "description": "Docker: Command launched in container nginx_container",
+         "level": 3,
+         "id": "87907"
+     },
+     "timestamp": "2020-09-04T02:33:19.431+0000"
+   }
+
+Example of Docker alerts in the web user interface:
+
+.. thumbnail:: /images/getting-started/use-cases/wazuh-use-cases-docker.png
+   :title: Docker events
+   :align: center
+   :width: 80%
+   :wrap_image: No
 
 Container level
 ---------------
   
-In order to get visibility at a container level, you can deploy the :ref:`Wazuh agent <wazuh_agent>` to a Kubernetes DaemonSet container. This kind of deployment ensures that the Wazuh agent runs in all nodes of your Kubernetes cluster. Besides, other Kubernetes Pods are able to send data, like application log messages, to the DaemonSet container, so the agent can process it and forward it to the :ref:`Wazuh server <wazuh_server>` for security analysis.
+In order to get visibility at a container level, you can deploy the :doc:`Wazuh agent <../components/wazuh-agent>` to a Kubernetes DaemonSet container. This kind of deployment ensures that the Wazuh agent runs in all nodes of your Kubernetes cluster. Besides, other Kubernetes Pods are able to send data, like application log messages, to the DaemonSet container, so the agent can read it and forward it to the :doc:`Wazuh server <../components/wazuh-server>` for security analysis.
   
 Example of security alerts at a container level:
 

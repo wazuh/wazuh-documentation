@@ -141,7 +141,6 @@ newUrls['4.3'] = [
   '/quickstart.html',
   '/getting-started/components/wazuh-dashboard.html',
   '/getting-started/components/wazuh-indexer.html',
-  '/getting-started/use-cases/incident-response.html', 
   '/getting-started/use_cases/container_security.html',
   '/installation-guide/wazuh-indexer/index.html',
   '/installation-guide/wazuh-indexer/installation-assistant.html',
@@ -266,7 +265,6 @@ removedUrls['4.3'] = [
   '/docker/upgrade-guide.html',
   '/docker/wazuh-container.html',
   '/getting-started/components/elastic-stack.html',
-  '/getting-started/use-cases/active-response.html',
   '/installation-guide/more-installation-alternatives/elastic-stack/all-in-one-deployment/all-in-one.html',
   '/installation-guide/more-installation-alternatives/elastic-stack/all-in-one-deployment/index.html',
   '/installation-guide/more-installation-alternatives/elastic-stack/all-in-one-deployment/unattended-installation.html',
@@ -396,11 +394,6 @@ redirections.push(
     'target': ['4.3=>4.2'],
     '4.2': '/getting-started/use-cases/index.html',
     '4.3': '/getting-started/use-cases/security-analytics.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/getting-started/use-cases/active-response.html',
-    '4.3': '/getting-started/use-cases/incident-response.html',
   },
   {
     'target': ['4.3=>4.2'],
