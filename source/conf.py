@@ -477,7 +477,7 @@ custom_replacements = {
     "|WAZUH_LATEST_DOCKER|" : "4.2.5",
     "|WAZUH_LATEST_AIX|" : "4.2.6",
     "|WAZUH_LATEST_MINOR_AIX|" : "4.2",
-    "|WAZUH_LATEST_FROM_SOURCES|" : "4.3.0-rc6",
+    "|WAZUH_LATEST_FROM_SOURCES|" : "4.3.0",
     "|WAZUH_LATEST_MINOR_FROM_SOURCES|" : "4.3",
     "|WAZUH_LATEST_WIN_FROM_SOURCES|" : "4.3.0",
     "|WAZUH_LATEST_WIN_REV_FROM_SOURCES|" : "1",
