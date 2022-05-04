@@ -195,7 +195,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
         .. note::
         
-            The following procedure has been tested on Ubuntu 20.04 and may work with other Debian/Ubuntu versions as well. It is recommended to use MinGW 9
+            The following procedure has been tested on Ubuntu 20.04 and may work with other Debian/Ubuntu versions as well. It is recommended to use MinGW 9.
 
         #.  Set up the Ubuntu build environment. Install these dependencies to build the Windows Wazuh agent installer on Ubuntu:
 
@@ -236,7 +236,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
                 # cd ../.. && zip -r wazuh.zip wazuh-|WAZUH_LATEST_FROM_SOURCES|
 
-        #.  Decompress the repository on the Windows machine, run the wazuh-installer-build-msi.bat script from the win32 folder.
+        #.  Decompress the repository on the Windows machine, run the ``wazuh-installer-build-msi.bat`` script from the win32 folder.
 
             .. code-block:: doscon
 
@@ -310,7 +310,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
             .. note::
             
-                Note that with the variable USER_DIR, it has been indicated that the agent installation path is ``/Library/Ossec``
+                Note that with the variable ``USER_DIR``, it has been indicated that the agent installation path is ``/Library/Ossec``
 
             If you have previously compiled for another platform, you must clean the build using the Makefile in ``src``:
 
@@ -337,7 +337,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
             <h2>Uninstall</h2>
 
-        To uninstall Wazuh agent, set WAZUH_HOME with the current installation path:
+        To uninstall Wazuh agent, set ``WAZUH_HOME`` with the current installation path:
 
         .. code-block:: console
 
@@ -376,7 +376,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
     .. group-tab:: AIX
 
-        AIX 6.1 TL4 or greater is the supported version for the following installation procedure
+        AIX 6.1 TL4 or greater is the supported version for the following installation procedure. 
 
         .. note::
 
@@ -390,7 +390,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
                     # rpm -Uvh --nodeps http://packages-dev.wazuh.com/deps/aix/wget-1.19-1.aix6.1.ppc.rpm
 
-            #.  Download the following script
+            #.  Download the following script.
 
                 .. code-block:: console
 
@@ -400,7 +400,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
                 
                     If you can’t download the script this way, then you should download it using another machine and copy it to the AIX machine via the scp utility.
 
-            #.  Download bash and libiconv
+            #.  Download bash and libiconv.
             
                 .. code-block:: console
                 
@@ -467,7 +467,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
             .. note::
             
-                Note that the above commands have been executed for the default installation path /var/ossec. If you have installed the agent in another path, you will have to modify the path of those commands.
+                Note that the above commands have been executed for the default installation path ``/var/ossec``. If you have installed the agent in another path, you will have to modify the path of those commands.
 
         Now that the agent is installed, the next step is to enroll the agent with the Wazuh server. For more information about this process, please visit :doc:`user manual </user-manual/agent-enrollment/via-agent-configuration/index>`.
 
@@ -475,7 +475,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
             <h2>Uninstall</h2>
 
-        To uninstall Wazuh agent, set WAZUH_HOME with the current installation path:
+        To uninstall Wazuh agent, set ``WAZUH_HOME`` with the current installation path:
 
             .. code-block:: console
 
@@ -604,7 +604,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
             <h2>Uninstall</h2>
 
-        To uninstall Wazuh agent, set WAZUH_HOME with the current installation path:
+        To uninstall Wazuh agent, set ``WAZUH_HOME`` with the current installation path:
 
         .. code-block:: console
 
@@ -711,7 +711,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
                             # cd .. && rm -rf cmake-3.18.3
                             # ln -sf /usr/local/bin/cmake /usr/bin/cmake
 
-                    #.  Download and install perl 5.10.1
+                    #.  Download and install perl 5.10.1.
                     
                         .. code-block:: console
                         
@@ -723,7 +723,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
                             # gmake install -d -s
                             # cd ..
                     
-                    #.  Remove the old version of perl and replace it with perl 5.10.1
+                    #.  Remove the old version of perl and replace it with perl 5.10.1.
                     
                         .. code-block:: console
                         
@@ -732,7 +732,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
                             # mv /usr/bin/perl5.10.1 /usr/bin/perl
                             # rm -rf perl-5.10.1*
 
-                #.  Download the latest version of wazuh.
+                #.  Download the latest version of Wazuh.
 
                     .. code-block:: console
 
@@ -767,7 +767,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
                             USE_BIG_ENDIAN=yes
                             # cd ..
 
-                #.  Patch solaris 10 sh files to change the shebang
+                #.  Patch solaris 10 sh files to change the shebang.
 
                     .. code-block:: console
 
@@ -806,7 +806,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
                     <h3>Uninstall</h3>
 
-                To uninstall Wazuh agent, set WAZUH_HOME with the current installation path:
+                To uninstall Wazuh agent, set ``WAZUH_HOME`` with the current installation path:
 
                 .. code-block:: console
 
@@ -859,7 +859,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
                             # export PATH="${PATH}:/usr/sfw/bin:/opt/csw/bin:/opt/ccs/bin"
                             # pkgutil -y -U
 
-                    #.  Install python 2.7
+                    #.  Install python 2.7. 
 
                         .. code-block:: console
 
@@ -936,9 +936,6 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
                         During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``. When choosing a different path than the default, if the directory already exists, the installer will ask to delete the directory or proceed by installing Wazuh inside it. You can also run an :doc:`unattended installation </user-manual/reference/unattended-installation>`.
                     
-                    .. note::
-                    
-                        Since Wazuh 3.5 it is necessary to have an Internet connection when following this process.
 
                 #.  The script will ask about what kind of installation you want. Type ``agent`` in order to install a Wazuh agent:
 
