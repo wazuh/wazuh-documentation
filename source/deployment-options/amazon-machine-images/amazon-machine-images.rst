@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015–2022 Wazuh, Inc.
 
 .. meta::
   :description: The pre-built Wazuh Amazon Machine Image includes all Wazuh components ready-to-use. Test all Wazuh capabilities with our AMI.  
@@ -41,7 +41,7 @@ Launch an instance from the AWS Marketplace
 
 #. Review your configuration making sure that all settings are correct before launching the software. Adapt the default configuration values to your needs.
 
-    #. When selecting the **EC2 Instance Type**, we recommend that you use an instance type ``c5.2xlarge``.
+    #. When selecting the **EC2 Instance Type**, we recommend that you use an instance type ``c5a.xlarge``.
   
     #. When selecting the **Security Group**, it must be one with the appropriate :ref:`settings for your Wazuh instance <default_ports>` to guarantee the correct operation. You can create a new security group by choosing **Create new based on seller settings**. This new group will have the appropriate settings by default.
 
@@ -59,11 +59,11 @@ Deploy an instance using the AWS Management Console
 
 #. Review the Server product characteristics, then click **Continue**. This allows subscribing to our Server product.
 
-#. Select the instance type according to your needs, then click **Next: Configure Instance Details**. We recommend that you use an instance type ``c5.2xlarge``.
+#. Select the instance type according to your needs, then click **Next: Configure Instance Details**. We recommend that you use an instance type ``c5a.xlarge``.
 
 #. Configure your instance as needed, then click **Next: Add Storage**.
 
-#. Set the storage capacity of your instance under the **Size (GiB)** column, then click **Next: Add Tags**. We recommend 100 GiB or more.
+#. Set the storage capacity of your instance under the **Size (GiB)** column, then click **Next: Add Tags**. We recommend 100 GiB GP3 or more.
 
 #. Add as many tags as you need, then click **Next: Configure Security Group**.
 
