@@ -284,14 +284,14 @@ To perform the upgrade locally, follow the instructions for the operating system
             # cp /var/ossec/etc/client.keys ~/client.keys.bk
 
 
-      #. Delete ossec user and group.
+      #. Delete ossec user and group:
 
           .. code-block:: console
 
             # groupdel ossec
             # userdel ossec
 
-      #. Create the wazuh user and group
+      #. Create the wazuh user and group:
 
           .. code-block:: console
 
