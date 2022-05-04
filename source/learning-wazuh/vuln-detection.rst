@@ -1,8 +1,8 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about how to perform the offline update of the Wazuh Vulnerability Detector in this section of our documentation. 
-  
+  :description: Learn more about how to perform the offline update of the Wazuh Vulnerability Detector in this section of our documentation.
+
 .. _learning_wazuh_vuln_detection:
 
 Track down vulnerable applications
@@ -96,6 +96,7 @@ In the ``/var/ossec/etc/ossec.conf`` file of the Wazuh manager, scroll down to t
         <os>xenial</os>
         <os>bionic</os>
         <os>focal</os>
+        <os>jammy</os>
         <update_interval>1h</update_interval>
       </provider>
       <provider name="debian">
