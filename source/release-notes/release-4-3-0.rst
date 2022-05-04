@@ -212,6 +212,7 @@ RESTful API
 - `#12085 <https://github.com/wazuh/wazuh/pull/12085>`_ POST /security/user/authenticate/run_as endpoint is added to API bruteforce blocking system.
 - `#12638 <https://github.com/wazuh/wazuh/pull/12638>`_ A new API endpoint is added to obtain summaries of agent vulnerabilities' inventory items.
 - `#12727 <https://github.com/wazuh/wazuh/pull/12727>`_ The new fields external_references, condition, title, published, and updated are added to GET /vulnerability/{agent_id} API endpoint.
+- `#13262 <https://github.com/wazuh/wazuh/pull/13262>`_ The possibility to include strings in brackets in values of the q parameter is added.
 - `#7490 <https://github.com/wazuh/wazuh/pull/7490>`_ The SSL protocol configuration parameter is renamed.
 - `#8827 <https://github.com/wazuh/wazuh/pull/8827>`_ The API spec examples and JSON body examples are reviewed and updated.
 - The performance of several API endpoints is improved. This is especially appreciable in environments with a big number of agents:
@@ -295,7 +296,7 @@ Ruleset
 - `#8751 <https://github.com/wazuh/wazuh/pull/8751>`_ SCA policy for CentOS 8 is updated.
 - `#11263 <https://github.com/wazuh/wazuh/pull/11263>`_ SonicWall decoder values are fixed.
 - `#11388 <https://github.com/wazuh/wazuh/pull/11388>`_ SSHD ruleset is updated.
-
+- `#8552 <https://github.com/wazuh/wazuh/pull/8552>`_ From file 0580-win-security_rules.xml, rules with id 60198 and 60199 are moved to file 0585-win-application_rules.xml, with rule ids 61071 and 61072 respectively.
 
 Wazuh Kibana plugin
 ^^^^^^^^^^^^^^^^^^^
