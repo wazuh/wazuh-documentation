@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015–2022 Wazuh, Inc.
 
 .. meta::
   :description: The pre-built Wazuh Amazon Machine Image includes all Wazuh components ready-to-use. Test all Wazuh capabilities with our AMI.
@@ -63,7 +63,7 @@ Deploy an instance using the AWS Management Console
 
 #. Configure your instance as needed, then click **Next: Add Storage**.
 
-#. Set the storage capacity of your instance under the **Size (GiB)** column, then click **Next: Add Tags**. We recommend 100 GiB or more.
+#. Set the storage capacity of your instance under the **Size (GiB)** column, then click **Next: Add Tags**. We recommend 100 GiB GP3 or more.
 
 #. Add as many tags as you need, then click **Next: Configure Security Group**.
 

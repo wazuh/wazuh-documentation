@@ -31,11 +31,11 @@ The following requirements have to be in place before the Wazuh VM can be import
 
 Out of the box, the Wazuh VM is configured with the following specifications:
 
-  +-----------+------+--------------+--------------+----------------+
-  |    Component     |   RAM (GB)   | Storage (GB) |   CPU (cores)  |
-  +==================+==============+==============+================+
-  | Wazuh v4.3.0 OVA |      8       |     50       |       4        |
-  +-----------+------+--------------+--------------+----------------+
+  +------------------+----------------+--------------+--------------+
+  |    Component     |   CPU (cores)  |   RAM (GB)   | Storage (GB) |
+  +==================+================+==============+==============+
+  | Wazuh v4.3.0 OVA |       4        |      8       |     50       |
+  +------------------+----------------+--------------+--------------+
 
 However, this hardware configuration can be modified depending on the number of protected endpoints and indexed alert data. More information about requirements can be found :doc:`here </quickstart>`. 
 
@@ -45,25 +45,14 @@ Import and access the virtual machine
 
 First, import the OVA to the virtualization platform and start the machine.
 
-When the virtual machine is accessed through the virtualization platform, either of the following system users can be used to log in:
+Use the following user and password to access the virtual machine. You can use the virtualization platform or access it via SSH.
  
-
-  .. code-block:: none
-
-      user: root
-      password: wazuh
-
-      user: wazuh-user
-      password: wazuh
-
-
-When a virtual machine is accessed via SSH, the root user login via SSH is disabled. Therefore, SSH login is only possible using the following system user:
-
   .. code-block:: none
 
       user: wazuh-user
       password: wazuh
 
+The password for ``root`` user is ``wazuh``. However, accessing the virtual machine via SSH is only possible using the system user. SSH login with the root user is disabled.
 
 Access the Wazuh dashboard
 --------------------------

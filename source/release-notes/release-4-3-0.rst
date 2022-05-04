@@ -14,17 +14,24 @@ This section lists the changes in version 4.3.0. Every update of the Wazuh solut
 Highlights
 ----------
 
-Wazuh 4.3.0 includes numerous new features. This new version brings new components, such as the Wazuh Indexer and the Wazuh dashboard. The agent can now collect the installed packages inventory on Amazon Linux and Arch Linux. New integrations to collect auditing logs from Office 365 and GitHub are added to the agent in this new version. The RESTful API availability has been enhanced thanks to the API now using multiple processes. Finally, the 4.3.0 cluster now uses numerous processes to improve its performance. Below you will find more information about each of these new features.
 
-With Wazuh 4.3.0, two new installers called the Wazuh indexer, and the Wazuh dashboard are available to users to facilitate installation, upgrades, and configuration. Due to the log4j2 vulnerability and the fact that the Open Distro project is no longer under active development, it was decided to create the Wazuh indexer and the Wazuh dashboard.
 
-The wazuh indexer is a customized Opensearch distribution with configurations and tools needed to run out of the box for Wazuh. The Wazuh dashboard is a customized Opensearch Dashboard distribution with the Wazuh plugin embedded, plus new configurations and customizations for Wazuh. 
+Wazuh 4.3.0 includes many new additions, such as a remarkable enhancement with the new :doc:`Wazuh indexer </getting-started/components/wazuh-indexer>` and :doc:`Wazuh dashboard </getting-started/components/wazuh-dashboard>` that improve the user experience and facilitate the management of the whole platform. 
 
-This new dashboard is a flexible and intuitive web interface for mining, analyzing, and visualizing data. It provides out-of-the-box dashboards, allowing users to navigate the interface that now presents a renewed design with a new palette of colors.
-The versioning equivalent to the Wazuh manager will allow upgrades without the risk of incompatibilities as with Elasticsearch and Opendistro. 
- 
-An assisted installer is available to users, allowing any type of installation, whether on a single node, multinode, multicluster, etc. By simply defining a ``yml`` file, with everything connected and secured, including random passwords and generated certificates. In addition, Debian and RPM packages for ppc64le architectures are made available to users.
+Wazuh 4.3.0 enhances platform performance and adds new integrations such as the following: 
 
+- Vulnerability Detector support for Amazon Linux and Arch Linux
+- New agents integrations with logs from Office 365
+- The RESTful API presents some innovative changes
+- Now the cluster uses multiple processes for improved performance
+
+Below you will find more information about each of these new features.
+
+With Wazuh 4.3.0, two new installers called the Wazuh indexer, and the Wazuh dashboard are available to users to facilitate installation, upgrades, and configuration. The Wazuh indexer is a customized OpenSearch distribution with configurations and tools needed to run out of the box for Wazuh. The Wazuh dashboard is a customized OpenSearch dashboards distribution with the Wazuh plugin embedded, plus new configurations and customizations.
+
+The new Wazuh dashboard is a flexible and intuitive web interface for mining, analyzing, and visualizing data. It provides out-of-the-box dashboards, allowing users to navigate the interface that now presents a renewed design with a new palette of colors. The versioning equivalent to the Wazuh manager will allow upgrades without the risk of incompatibilities.
+
+An installation assistant ``wazuh-install.sh`` is available to users, allowing any type of installation, whether on a single node, multinode, multicluster, etc. This is possible by simply defining a ``yml`` file, with everything connected and secured, including random passwords and generated certificates. In addition, Debian and RPM packages for ppc64le architectures are made available to users.
 
 .. thumbnail::  ../images/release-notes/4.3.0/Wazuh-dashboard.png 
       :align: center
@@ -54,7 +61,6 @@ The RESTful API availability has been enhanced thanks to the API now using multi
       :title: The agent batch is upgraded
 
 
-
 Wazuh v4.3.0 brings significant changes to the cluster, which now uses multiple processes to improve the performance. The results in the table below show a significant improvement for the cluster in this new version. The cluster tasks are performed 423% faster than in the previous version, approximately five times faster, while the RAM consumption decreased to a third. This performance is especially appreciable during the setup phase, where the cluster load is at its highest.
 
 .. thumbnail::  ../images/release-notes/4.3.0/cluster-tasks.png 
@@ -64,7 +70,7 @@ Wazuh v4.3.0 brings significant changes to the cluster, which now uses multiple 
 
 We want to mention another Wazuh 4.3.0 significant new feature. It is related to a new Intelligence tab added to the MITRE ATT&CK module. This tab provides further information about MITRE resources such as groups, mitigations, tactics, and techniques using the new Wazuh API endpoints. Additionally, the Framework tab is adapted to the new Wazuh API endpoints.
 
-Finally, is important to remark that we maintain support for all installation alternatives. Indeed we maintain and extend this support by adding more recent versions.
+Finally, it is important to remark that we maintain support for all installation alternatives. Indeed we maintain and extend this support by adding more recent versions.
 
 
 What's new
@@ -207,6 +213,7 @@ RESTful API
 - `#12085 <https://github.com/wazuh/wazuh/pull/12085>`_ POST /security/user/authenticate/run_as endpoint is added to API bruteforce blocking system.
 - `#12638 <https://github.com/wazuh/wazuh/pull/12638>`_ A new API endpoint is added to obtain summaries of agent vulnerabilities' inventory items.
 - `#12727 <https://github.com/wazuh/wazuh/pull/12727>`_ The new fields external_references, condition, title, published, and updated are added to GET /vulnerability/{agent_id} API endpoint.
+- `#13262 <https://github.com/wazuh/wazuh/pull/13262>`_ The possibility to include strings in brackets in values of the q parameter is added.
 - `#7490 <https://github.com/wazuh/wazuh/pull/7490>`_ The SSL protocol configuration parameter is renamed.
 - `#8827 <https://github.com/wazuh/wazuh/pull/8827>`_ The API spec examples and JSON body examples are reviewed and updated.
 - The performance of several API endpoints is improved. This is especially appreciable in environments with a big number of agents:
@@ -290,7 +297,7 @@ Ruleset
 - `#8751 <https://github.com/wazuh/wazuh/pull/8751>`_ SCA policy for CentOS 8 is updated.
 - `#11263 <https://github.com/wazuh/wazuh/pull/11263>`_ SonicWall decoder values are fixed.
 - `#11388 <https://github.com/wazuh/wazuh/pull/11388>`_ SSHD ruleset is updated.
-
+- `#8552 <https://github.com/wazuh/wazuh/pull/8552>`_ From file 0580-win-security_rules.xml, rules with id 60198 and 60199 are moved to file 0585-win-application_rules.xml, with rule ids 61071 and 61072 respectively.
 
 Wazuh Kibana plugin
 ^^^^^^^^^^^^^^^^^^^
@@ -315,6 +322,12 @@ Wazuh Kibana plugin
 - `#3742 <https://github.com/wazuh/wazuh-kibana-app/pull/3742>`_ A new workflow is added for creating wazuh packages.
 - `#3783 <https://github.com/wazuh/wazuh-kibana-app/pull/3783>`_ ``template`` and ``fields`` checks in the health check run correctly according to the app configuration.
 - `#3804 <https://github.com/wazuh/wazuh-kibana-app/pull/3804>`_ A toast message let's you know when there is an error creating a new group.
+- `#3846 <https://github.com/wazuh/wazuh-kibana-app/pull/3846>`_ A step to start the agent is added to the deploy new Windowns agent guide.
+- `#3893 <https://github.com/wazuh/wazuh-kibana-app/pull/3893>`_ 3 new panels are added to Vulnerabilities/Inventory.
+- `#3893 <https://github.com/wazuh/wazuh-kibana-app/pull/3893>`_ A new fields of Vulnerabilities is added to the details flyout.
+- `#3924 <https://github.com/wazuh/wazuh-kibana-app/pull/3924>`_ Missing fields used in visualizations are added to the known fiels related to alerts.
+- `#3946 <https://github.com/wazuh/wazuh-kibana-app/pull/3946>`_ A troubleshooting link is added to "index pattern was refreshed" toast.
+- `#4041 <https://github.com/wazuh/wazuh-kibana-app/pull/4041>`_ More number options are added to the tables widget in Modules -> "Mitre".
 - `#3121 <https://github.com/wazuh/wazuh-kibana-app/pull/3121>`_ Ossec to wazuh is changed in all sample-data files.
 - `#3279 <https://github.com/wazuh/wazuh-kibana-app/pull/3279>`_ Empty fields are modified in FIM tables and ``syscheck.value_name`` in discovery now shows an empty tag for visual clarity.
 - `#3346 <https://github.com/wazuh/wazuh-kibana-app/pull/3346>`_ The MITRE tactics and techniques resources are adapted to use the API endpoints.
@@ -406,7 +419,7 @@ Packages
 - `#1193 <https://github.com/wazuh/wazuh-packages/pull/1193>`_ Fix Archlinux package generation parameters 4.3.
 - `#1132 <https://github.com/wazuh/wazuh-packages/pull/1132>`_ Add new 2.17.1 log4j mitigation version 4.3.
 - `#1123 <https://github.com/wazuh/wazuh-packages/pull/1123>`_ Fix client keys Ownership for 3.7.x and previous versions.
-- `#1106 <https://github.com/wazuh/wazuh-packages/pull/1106>`_ Added new log4j remediation 4.3.
+- `#1106 <https://github.com/wazuh/wazuh-packages/pull/1106>`_ A new log4j remediation 4.3 is added.
 - `#1112 <https://github.com/wazuh/wazuh-packages/pull/1112>`_ Fix Linux ``wpk`` generation 4.3.
 - `#1096 <https://github.com/wazuh/wazuh-packages/pull/1096>`_ Add log4j mitigation 4.3.
 - `#1086 <https://github.com/wazuh/wazuh-packages/pull/1086>`_ Increase admin.pem cert expiration date 4.3.
@@ -696,7 +709,7 @@ Changelogs
 
 More details about these changes are provided in the changelog of each component:
 
-- `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v4.3.0-rc5/CHANGELOG.md>`_
-- `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v4.3.0-7.17.3/CHANGELOG.md>`_
-- `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v4.3.0-8.2.4/CHANGELOG.md>`_
+- `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v4.3.0-rc7/CHANGELOG.md>`_
+- `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v4.3.0-7.17.3-rc8/CHANGELOG.md>`_
+- `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v4.3.0-8.2.6/CHANGELOG.md>`_
 - `wazuh/wazuh-packages <https://github.com/wazuh/wazuh-packages/blob/4.3/CHANGELOG.md>`_
