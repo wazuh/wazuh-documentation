@@ -123,6 +123,11 @@ Starting the Wazuh dashboard service
 
     When you access the Wazuh dashboard for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or, for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser. Alternatively, a certificate from a trusted authority can be configured. 
 
+    
+.. note::
+
+   -  It is highly recommended to change the default passwords of Wazuh indexer for the users passwords. To perform this action, see the :doc:`/user-manual/securing-wazuh/wazuh-indexer` section.
+   -  It is also recommended to customize the file ``/etc/wazuh-indexer/jvm.options`` to improve the performance of Wazuh indexer. Learn more about this process in the :ref:`memory_locking` section.
 
 Next steps
 ----------

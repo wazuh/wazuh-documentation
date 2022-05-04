@@ -107,7 +107,8 @@ Once the instance is running and the process to initialize passwords is complete
 - **Password**: *<YOUR_INSTANCE_ID>*
 
 .. warning::
-  It is highly recommended to change the default users passwords in the first SSH access. To perform this action, see the :ref:`Change users' password <change_elastic_pass>` section.
+   
+   It is highly recommended to change the default users passwords in the first SSH access. To perform this action, see the :doc:`/user-manual/securing-wazuh/wazuh-indexer` section.
 
 
 Security considerations about SSH

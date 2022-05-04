@@ -13,8 +13,6 @@ This guide summarizes the relevant settings that enable Elasticsearch optimizati
 - `Memory locking`_
 - `Shards and replicas`_
 
-.. _change_elastic_pass:
-
 .. _memory_locking:
 
 Memory locking
