@@ -114,7 +114,7 @@ The :doc:`Wazuh agent <../components/wazuh-agent>` module for Microsoft Azure ma
 
 - :ref:`Blob Storage API <azure_storage>`: Logs from Azure services are optionally pushed to Azure Blob Storage. Specifically, it is possible to configure an Azure service to export logs to a container in a storage account created for that purpose. Afterward, the Wazuh agent will download those logs via its integration with the Blob Storage API.
 
-- :ref:`Active Directory Graph API <azure_graph>`: The Azure Active Directory Graph API provides access to AZURE AD through REST API endpoints. It is used by Wazuh to monitor Active Directory events (e.g., creation of a new user, update of user properties, disable of user accounts, etc.)
+- :ref:`Active Directory Graph API <azure_graph>`: The Azure Active Directory Graph API provides access to AZURE AD through REST API endpoints. It is used by Wazuh to monitor Active Directory events (e.g., creation of a new user, update of user properties, disable of user accounts, etc.).
 
 See below an example of an Azure alert:
 
