@@ -322,6 +322,12 @@ Wazuh Kibana plugin
 - `#3742 <https://github.com/wazuh/wazuh-kibana-app/pull/3742>`_ A new workflow is added for creating wazuh packages.
 - `#3783 <https://github.com/wazuh/wazuh-kibana-app/pull/3783>`_ ``template`` and ``fields`` checks in the health check run correctly according to the app configuration.
 - `#3804 <https://github.com/wazuh/wazuh-kibana-app/pull/3804>`_ A toast message let's you know when there is an error creating a new group.
+- `#3846 <https://github.com/wazuh/wazuh-kibana-app/pull/3846>`_ A step to start the agent is added to the deploy new Windowns agent guide.
+- `#3893 <https://github.com/wazuh/wazuh-kibana-app/pull/3893>`_ 3 new panels are added to Vulnerabilities/Inventory.
+- `#3893 <https://github.com/wazuh/wazuh-kibana-app/pull/3893>`_ A new fields of Vulnerabilities is added to the details flyout.
+- `#3924 <https://github.com/wazuh/wazuh-kibana-app/pull/3924>`_ Missing fields used in visualizations are added to the known fiels related to alerts.
+- `#3946 <https://github.com/wazuh/wazuh-kibana-app/pull/3946>`_ A troubleshooting link is added to "index pattern was refreshed" toast.
+- `#4041 <https://github.com/wazuh/wazuh-kibana-app/pull/4041>`_ More number options are added to the tables widget in Modules -> "Mitre".
 - `#3121 <https://github.com/wazuh/wazuh-kibana-app/pull/3121>`_ Ossec to wazuh is changed in all sample-data files.
 - `#3279 <https://github.com/wazuh/wazuh-kibana-app/pull/3279>`_ Empty fields are modified in FIM tables and ``syscheck.value_name`` in discovery now shows an empty tag for visual clarity.
 - `#3346 <https://github.com/wazuh/wazuh-kibana-app/pull/3346>`_ The MITRE tactics and techniques resources are adapted to use the API endpoints.
@@ -413,7 +419,7 @@ Packages
 - `#1193 <https://github.com/wazuh/wazuh-packages/pull/1193>`_ Fix Archlinux package generation parameters 4.3.
 - `#1132 <https://github.com/wazuh/wazuh-packages/pull/1132>`_ Add new 2.17.1 log4j mitigation version 4.3.
 - `#1123 <https://github.com/wazuh/wazuh-packages/pull/1123>`_ Fix client keys Ownership for 3.7.x and previous versions.
-- `#1106 <https://github.com/wazuh/wazuh-packages/pull/1106>`_ Added new log4j remediation 4.3.
+- `#1106 <https://github.com/wazuh/wazuh-packages/pull/1106>`_ A new log4j remediation 4.3 is added.
 - `#1112 <https://github.com/wazuh/wazuh-packages/pull/1112>`_ Fix Linux ``wpk`` generation 4.3.
 - `#1096 <https://github.com/wazuh/wazuh-packages/pull/1096>`_ Add log4j mitigation 4.3.
 - `#1086 <https://github.com/wazuh/wazuh-packages/pull/1086>`_ Increase admin.pem cert expiration date 4.3.
