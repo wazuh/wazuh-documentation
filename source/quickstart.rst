@@ -68,10 +68,9 @@ Installing Wazuh
         :emphasize-lines: 4          
      
         INFO: --- Summary ---
-        INFO: You can access the web interface https://<wazuh-dashboard-ip>.
+        INFO: You can access the web interface https://<wazuh-dashboard-ip>
             User: admin
             Password: <ADMIN_PASSWORD>
-        INFO: The password can be seen in the file /var/log/wazuh-install.log
         INFO: Installation finished.
 
     You now have installed and configured Wazuh.
