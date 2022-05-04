@@ -29,7 +29,7 @@ With Wazuh 4.3.0, two new installers called the Wazuh indexer, and the Wazuh das
 
 This new dashboard is a flexible and intuitive web interface for mining, analyzing, and visualizing data. It provides out-of-the-box dashboards, allowing users to navigate the interface that now presents a renewed design with a new palette of colors. The versioning equivalent to the Wazuh manager will allow upgrades without the risk of incompatibilities.
 
-An installation assistant ``wazuh-install.sh`` is available to users, allowing any type of installation, whether on a single node, multinode, multicluster, etc. By simply defining a ``yml`` file, with everything connected and secured, including random passwords and generated certificates. In addition, Debian and RPM packages for ppc64le architectures are made available to users.
+An installation assistant ``wazuh-install.sh`` is available to users, allowing any type of installation, whether on a single node, multinode, multicluster, etc, by simply defining a ``yml`` file, with everything connected and secured, including random passwords and generated certificates. In addition, Debian and RPM packages for ppc64le architectures are made available to users.
 
 
 .. thumbnail::  ../images/release-notes/4.3.0/Wazuh-dashboard.png 
@@ -701,7 +701,7 @@ Changelogs
 
 More details about these changes are provided in the changelog of each component:
 
-- `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v4.3.0-rc5/CHANGELOG.md>`_
-- `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v4.3.0-7.17.3/CHANGELOG.md>`_
-- `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v4.3.0-8.2.4/CHANGELOG.md>`_
+- `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v4.3.0-rc7/CHANGELOG.md>`_
+- `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v4.3.0-7.17.3-rc8/CHANGELOG.md>`_
+- `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v4.3.0-8.2.6/CHANGELOG.md>`_
 - `wazuh/wazuh-packages <https://github.com/wazuh/wazuh-packages/blob/4.3/CHANGELOG.md>`_
