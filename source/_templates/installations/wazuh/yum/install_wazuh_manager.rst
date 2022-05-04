@@ -2,6 +2,6 @@
 
 .. code-block:: console
 
-  # yum install wazuh-manager-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_MANAGER_X86|
+  # yum install wazuh-manager-4.2.6-1
 
 .. End of include file
