@@ -15,15 +15,16 @@ Highlights
 ----------
 
 
-
 Wazuh 4.3.0 includes many new additions, such as a remarkable enhancement with the new :doc:`Wazuh indexer </getting-started/components/wazuh-indexer>` and :doc:`Wazuh dashboard </getting-started/components/wazuh-dashboard>` that improve the user experience and facilitate the management of the whole platform. 
 
-Wazuh 4.3.0 enhances platform performance and adds new integrations such as the following: 
+New version 4.3.0 enhances the performance of the Wazuh solution and adds new integrations such as the following: 
 
 - Vulnerability Detector support for Amazon Linux and Arch Linux
-- New agents integrations with logs from Office 365
-- The RESTful API presents some innovative changes
-- Now the cluster uses multiple processes for improved performance
+- New agents integrations with logs from Office 365 and GitHub
+- Improved RESTful API availability thanks to the API now using multiple processes
+- Now the Wazuh manager cluster uses multiple processes for improved performance
+- Wazuh now supports Logcollector with native macOS logs (Unified Logging System)
+- AWS S3 Server Access logs, Google Cloud Storage buckets, and access logs are now supported too
 
 Below you will find more information about each of these new features.
 
@@ -31,7 +32,7 @@ With Wazuh 4.3.0, two new installers called the Wazuh indexer, and the Wazuh das
 
 The new Wazuh dashboard is a flexible and intuitive web interface for mining, analyzing, and visualizing data. It provides out-of-the-box dashboards, allowing users to navigate the interface that now presents a renewed design with a new palette of colors. The versioning equivalent to the Wazuh manager will allow upgrades without the risk of incompatibilities.
 
-An installation assistant ``wazuh-install.sh`` is available to users, allowing any type of installation, whether on a single node, multinode, multicluster, etc. This is possible by simply defining a ``yml`` file, with everything connected and secured, including random passwords and generated certificates. In addition, Debian and RPM packages for ppc64le architectures are made available to users.
+An installation assistant ``wazuh-install.sh`` is available to users, allowing any type of installation, whether on an all-in-one, single node, or multi-node. This is possible by simply defining a configuration file, with everything connected and secured, including random passwords and generated certificates. In addition, Debian and RPM packages for ppc64le architectures are made available to users.
 
 .. thumbnail::  ../images/release-notes/4.3.0/Wazuh-dashboard.png 
       :align: center
