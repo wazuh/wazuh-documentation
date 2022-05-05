@@ -1,0 +1,22 @@
+<div id="left-sidebar" class="sidebar">
+  <div class="sidebar-container">
+    <div id="search-box-wrapper" class="collapse navbar-collapse">
+      {% include "template-parts/search-box.html" %}
+    </div>
+    {% block menu_toc -%}
+    <nav id="global-toc" class="collapse navbar-collapse">
+      {% set toctree = toctree(maxdepth=theme_globaltoc_depth|toint, collapse=theme_collapse_navigation|tobool, includehidden=theme_include_hidden|tobool) -%}
+      {% if toctree -%}
+      {% set toctree = toctree.replace('toctree-l1 current', 'toctree-l1 current show') -%}
+      {% set toctree = toctree.replace('toctree-l2 current', 'toctree-l2 current show') -%}
+      {% set toctree = toctree.replace('toctree-l3 current', 'toctree-l3 current show') -%}
+      {% set toctree = toctree.replace('toctree-l4 current', 'toctree-l4 current show') -%}
+      {% set toctree = toctree.replace('toctree-l5 current', 'toctree-l5 current show') -%}
+      {% set toctree = toctree.replace('toctree-l6 current', 'toctree-l6 current show') -%}
+      {% set toctree = toctree.replace('reference internal" href="#"', 'reference internal current-toc-node" href="#"') -%}
+      {{- toctree -}}
+      {%- endif -%}
+    </nav>
+    {%- endblock menu_toc %}
+  </div>
+</div>
