@@ -26,15 +26,19 @@ Hardware requirements highly depend on the number of protected endpoints and clo
 
 Following this quickstart implies deploying the Wazuh server, the Wazuh indexer, and the Wazuh dashboard on the same host. This is usually enough for monitoring up to 100 endpoints and for 90 days of queryable/indexed alert data. The table below shows the recommended hardware for a quickstart deployment:
 
-+-------------+---------+---------+-----------------------+
-| **Agents**  | **CPU** | **RAM** | **Storage (90 days)** |
-+=============+=========+=========+=======================+
-| **1–25**    | 4 vCPU  | 8 GiB   | 50 GB                 |
-+-------------+---------+---------+-----------------------+
-| **25–50**   | 8 vCPU  | 8 GiB   | 100 GB                |
-+-------------+---------+---------+-----------------------+
-| **50–100**  | 8 vCPU  | 8 GiB   | 200 GB                |
-+-------------+---------+---------+-----------------------+
+.. table::   
+  :align: center  
+
+  +-------------+---------+---------+-----------------------+
+  | **Agents**  | **CPU** | **RAM** | **Storage (90 days)** |
+  +=============+=========+=========+=======================+
+  | **1–25**    | 4 vCPU  | 8 GiB   | 50 GB                 |
+  +-------------+---------+---------+-----------------------+
+  | **25–50**   | 8 vCPU  | 8 GiB   | 100 GB                |
+  +-------------+---------+---------+-----------------------+
+  | **50–100**  | 8 vCPU  | 8 GiB   | 200 GB                |
+  +-------------+---------+---------+-----------------------+
+
 
 For larger environments we recommend a distributed deployment. Multi-node cluster configuration is available for the Wazuh server and for the Wazuh indexer, providing high availability and load balancing.
 
