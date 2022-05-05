@@ -682,7 +682,7 @@ Reference                                                         Description
 `#1230 <https://github.com/wazuh/wazuh-splunk/pull/1230>`_        This issue is fixed and you can now see actions after adding the first API.
 `#1232 <https://github.com/wazuh/wazuh-splunk/pull/1232>`_        The Agent status chart data is shown correctly.
 `#1237 <https://github.com/wazuh/wazuh-splunk/pull/1237>`_        The Agent status graph is fixed to show the correct amount of agents.
-`#1258 <https://github.com/wazuh/wazuh-splunk/pull/1258>`_        Fix the sorting on the Groups table columns.
+`#1258 <https://github.com/wazuh/wazuh-splunk/pull/1258>`_        The sorting on the Groups table columns is fixed.
 `#1260 <https://github.com/wazuh/wazuh-splunk/pull/1260>`_        Non-sortable columns are fixed on the Security section tables.
 `#1271 <https://github.com/wazuh/wazuh-splunk/pull/1271>`_        Group report disabled configuration parameter error is fixed.
 `#1266 <https://github.com/wazuh/wazuh-splunk/pull/1266>`_        Import CDB list file is fixed.
