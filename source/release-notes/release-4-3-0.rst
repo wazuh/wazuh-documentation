@@ -32,7 +32,7 @@ With Wazuh 4.3.0, two new installers called the Wazuh indexer, and the Wazuh das
 
 The new Wazuh dashboard is a flexible and intuitive web interface for mining, analyzing, and visualizing data. It provides out-of-the-box dashboards, allowing users to navigate the interface that now presents a renewed design with a new palette of colors. The versioning equivalent to the Wazuh manager will allow upgrades without the risk of incompatibilities.
 
-An installation assistant ``wazuh-install.sh`` is available to users, allowing any type of installation, whether on an all-in-one, single node, or multi-node. This is possible by simply defining a configuration file, with everything connected and secured, including random passwords and generated certificates. In addition, Debian and RPM packages for ppc64le architectures are made available to users.
+An installation assistant ``wazuh-install.sh`` is available to users, allowing any type of installation, whether an all-in-one, single node, or multi-node. This is possible by simply defining a configuration file, with everything connected and secured, including random passwords and generated certificates. In addition, Debian and RPM packages for ppc64le architectures are made available to users.
 
 .. thumbnail::  ../images/release-notes/4.3.0/Wazuh-dashboard.png 
       :align: center
