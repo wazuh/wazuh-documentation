@@ -1,0 +1,13 @@
+{#
+    wazuh_doc_theme_v3/page.html
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    
+    Content template to show the index content or the regular page content templates depending on the page name.
+
+-#}
+
+{%- if pagename == 'index' -%}
+  {%- include 'index.html' -%}
+{%- else -%}
+  {%- include 'template-parts/body.html' -%}
+{% endif -%}
