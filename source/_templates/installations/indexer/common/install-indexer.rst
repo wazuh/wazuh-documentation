@@ -16,6 +16,6 @@
 
                 .. code-block:: console
 
-                    # apt install wazuh-indexer
+                    # apt -y install wazuh-indexer
 
 .. End of include file
