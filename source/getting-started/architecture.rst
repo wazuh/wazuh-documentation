@@ -60,7 +60,7 @@ Several services are used for the communication of Wazuh components. Below is th
 +                 +-----------+----------------+------------------------------------------------+
 |                 | 514       | UDP (default)  | Wazuh Syslog collector (disabled by default)   |
 +                 +-----------+----------------+------------------------------------------------+
-|                 | 514       | TCP (Optional) | Wazuh Syslog collector (disabled by default)   |
+|                 | 514       | TCP (optional) | Wazuh Syslog collector (disabled by default)   |
 +                 +-----------+----------------+------------------------------------------------+
 |                 | 55000     | TCP            | Wazuh server RESTful API                       |
 +-----------------+-----------+----------------+------------------------------------------------+
@@ -74,7 +74,7 @@ Several services are used for the communication of Wazuh components. Below is th
 Archival data storage
 ---------------------
 
-Both alerts and non-alert events are stored in files on the Wazuh server, in addition to being sent to the Wazuh indexer. These files can be written in JSON format ``.json``, or plain text format ``.log``. These files are daily compressed and signed using MD5, SHA1, and SHA256 checksums. The directory and filename structure is as follows:
+Both alerts and non-alert events are stored in files on the Wazuh server, in addition to being sent to the Wazuh indexer. These files can be written in JSON format (``.json``), or plain text format (``.log``). These files are daily compressed and signed using MD5, SHA1, and SHA256 checksums. The directory and filename structure is as follows:
 
 .. code-block:: bash
 
