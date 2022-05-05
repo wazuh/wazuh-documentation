@@ -218,7 +218,7 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13 to the Wazu
       }
       '
 
-#. Verify that the indexed data in Open Distro is now searchable and indexable in the Wazuh indexer.
+#. Verify that the indexed data in Open Distro is now searchable and indexable in the Wazuh indexer. You may enter the web interface, search for old data and verify that new alerts are coming in. 
 
 
 #. Uninstall Open Distro for Elasticsearch on all nodes.
