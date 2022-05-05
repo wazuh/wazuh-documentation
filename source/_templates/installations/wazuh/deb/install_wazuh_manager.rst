@@ -2,6 +2,6 @@
 
 .. code-block:: console
 
-  # apt-get install wazuh-manager
+  # apt-get install wazuh-manager=4.2.6-1
 
 .. End of include file

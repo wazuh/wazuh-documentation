@@ -48,7 +48,7 @@ Install and start the Wazuh agent software
   .. code-block:: console
 
     # WAZUH_MANAGER="172.30.0.10" WAZUH_REGISTRATION_PASSWORD="please123" \
-    WAZUH_PROTOCOL="tcp" yum -y install wazuh-agent
+    WAZUH_PROTOCOL="tcp" yum -y install wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86|
     # systemctl start wazuh-agent
 
 Verify the agent has properly connected:

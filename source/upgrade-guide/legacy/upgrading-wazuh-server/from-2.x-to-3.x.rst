@@ -57,14 +57,14 @@ To upgrade the Wazuh server choose the the appropriate tab for the desired packa
 
         .. code-block:: console
 
-          # yum install wazuh-manager wazuh-api
+          # yum install wazuh-manager-3.13.3-1 wazuh-api
 
       .. group-tab:: APT
 
         .. code-block:: console
 
           # apt-get update
-          # apt-get install wazuh-manager wazuh-api
+          # apt-get install wazuh-manager=3.13.3-1 wazuh-api
 
       .. group-tab:: ZYpp
 
