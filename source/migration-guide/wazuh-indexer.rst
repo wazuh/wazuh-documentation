@@ -16,7 +16,7 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13 to the Wazu
 
    .. code-block:: console
 
-     curl -X PUT "https://<elasticsearch_IP>:9200/_cluster/settings"  -u <username>:<password> -k -H 'Content-Type: application/json' -d'
+     curl -X PUT "https://<elasticsearch_IP>:9200/_cluster/settings" -u <username>:<password> -k -H 'Content-Type: application/json' -d'
      {
        "persistent": {
          "cluster.routing.allocation.enable": "primaries"
@@ -210,7 +210,7 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13 to the Wazu
 
    .. code-block:: console
 
-      curl -X PUT "https://<Wazuh_indexer_IP>:9200/_cluster/settings"  -u <username>:<password> -k -H 'Content-Type: application/json' -d'
+      curl -X PUT "https://<Wazuh_indexer_IP>:9200/_cluster/settings" -u <username>:<password> -k -H 'Content-Type: application/json' -d'
       {
         "persistent": {
           "cluster.routing.allocation.enable": null
