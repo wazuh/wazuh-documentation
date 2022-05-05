@@ -93,37 +93,75 @@ This component receives the data flow streamed by a forwarder and stores it in a
       -  Administrator name
       -  Password
 
-#. Open Splunk in your preferred browser.
+.. tabs::
 
-#. Navigate to Settings > Data > Forwarding and receiving.
+  .. group-tab:: Data forwarding with SSL
 
-   .. thumbnail:: /images/splunk-app/1.png
-      :align: left
-      :width: 100%
+      #. Edit /opt/splunk/etc/system/local/inputs.conf and add the block below:
 
-#. Select “Configure receiving”
+         .. code-block:: console
+            
+            [SSL]
+            serverCert = $SPLUNK_HOME/etc/auth/server.pem
+            sslPassword = password
 
-   .. thumbnail:: /images/splunk-app/2.png
-      :align: left
-      :width: 100%
 
-#. Add an unused port as a new receiving port and save it.
+         Where:
 
-   .. thumbnail:: /images/splunk-app/3.png
-      :align: left
-      :width: 100%
+         - ``serverCert`` is the path to the Splunk default server certificate. 
+         - ``$SPLUNK_HOME`` is the Splunk installation directory. The default directory is ``/opt/splunk``.
+         - ``sslPassword`` is the password of the certificate. The default is “password”.
 
-#. Restart the Splunk service.
 
-   .. code-block:: console
-    
-      # /opt/splunk/bin/splunk restart
+      #. Restart the Splunk service:
 
-#. Optional. If you additionally want the Splunk service to start at boot time, please execute the following command:
+         .. code-block:: console
 
-   .. code-block:: console
+             # /opt/splunk/bin/splunk restart
 
-      # /opt/splunk/bin/splunk enable boot-start
+
+      #. Optional: If you additionally want the Splunk service to start at boot time, please execute the following command:	
+
+         .. code-block:: console
+
+             # /opt/splunk/bin/splunk enable boot-start
+
+
+  .. group-tab:: Data forwarding without SSL
+
+
+      #. Open Splunk in your preferred browser.
+
+      #. Navigate to **Settings > Data > Forwarding and receiving**.
+
+         .. thumbnail:: /images/splunk-app/1.png
+            :align: left
+            :width: 100%
+
+      #. Select “Configure receiving”
+
+         .. thumbnail:: /images/splunk-app/2.png
+            :align: left
+            :width: 100%
+
+      #. Add an unused port as a new receiving port and save it.
+
+         .. thumbnail:: /images/splunk-app/3.png
+            :align: left
+            :width: 100%
+
+      #. Restart the Splunk service.
+
+         .. code-block:: console
+          
+            # /opt/splunk/bin/splunk restart
+
+      #. Optional. If you additionally want the Splunk service to start at boot time, please execute the following command:
+
+         .. code-block:: console
+
+            # /opt/splunk/bin/splunk enable boot-start
+
 
 .. _splunk_forwarder:
 
