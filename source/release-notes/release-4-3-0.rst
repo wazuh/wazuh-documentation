@@ -417,7 +417,7 @@ Packages
 - `#1256 <https://github.com/wazuh/wazuh-packages/pull/1256>`_ The certs permissions in RPM is fixed.
 - `#1208 <https://github.com/wazuh/wazuh-packages/pull/1208>`_ Kibana app now supports ``pluginPlatform.version`` property in the app manifest.
 - `#1162 <https://github.com/wazuh/wazuh-packages/pull/1162>`_ The certificates creation using parameters 4.3 is fixed.
-- `#1193 <https://github.com/wazuh/wazuh-packages/pull/1193>`_ The Archlinux package generation parameters 4.3 is fixed.
+- `#1193 <https://github.com/wazuh/wazuh-packages/pull/1193>`_ The Archlinux package generation parameters 4.3 are fixed.
 - `#1132 <https://github.com/wazuh/wazuh-packages/pull/1132>`_ Add new 2.17.1 log4j mitigation version 4.3.
 - `#1123 <https://github.com/wazuh/wazuh-packages/pull/1123>`_ The client keys Ownership for 3.7.x and previous versions is fixed.
 - `#1106 <https://github.com/wazuh/wazuh-packages/pull/1106>`_ A new log4j remediation 4.3 is added.
