@@ -1,0 +1,54 @@
+{%- extends "!wazuh_doc_theme_v3/template-parts/body.html" -%}
+
+{%- block htmltitle -%}
+<title>API reference{{ titlesuffix }}</title>
+{% endblock htmltitle -%}
+
+{% block body %}
+<div class="loading">
+{{ super() }}
+  <footer id="footer-redoc">
+    <div class="powered-by-badge">
+      Powered by
+      <a href="https://github.com/Rebilly/ReDoc" target="_blank" title="Swagger-generated API Reference Documentation">
+        <strong>ReDoc</strong>
+      </a>
+    </div>
+  </footer>
+</div>
+{% endblock %}
+
+{%- block header %}
+    <header>
+      {%- block latest %}
+        {% include "template-parts/no-latest-notice.html" %}
+      {% endblock latest %}
+      <div class="header-left">
+        {% include "template-parts/brand.html" %}
+        {% if theme_include_mode|tobool and theme_include_mode_switch|tobool %}
+        {% include "template-parts/light-dark-switch.html" %}
+        {% endif %}
+      </div>
+      {% if theme_display_version_selector %}
+      <div class="header-right">
+        {% include "template-parts/version-selector.html" %}
+      </div>
+      {% endif %}
+    </header>
+{% endblock header -%}
+
+{% block sidebar1 -%}{% endblock sidebar1 -%}
+{% block sidebar2 -%}{% endblock sidebar2 -%}
+{%- block footer %}{% endblock footer -%}
+{%- block light_box_display %}{% endblock light_box_display -%}
+
+{%- block main_column -%}
+<div id="central-column">
+  
+  {# Main content #}
+  <main role="main">
+    {%- block redoc %}
+    {% endblock redoc %}
+  </main>
+</div>
+{%- endblock main_column -%}

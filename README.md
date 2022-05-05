@@ -25,6 +25,7 @@ You can also join our [users mailing list](https://groups.google.com/d/forum/waz
 - [Python](https://www.python.org/) 3.6+
 - [Sphinx](http://www.sphinx-doc.org/) 3.2.0
 - [sphinx-tabs](https://github.com/djungelorm/sphinx-tabs) 1.2.1
+- [jsmin](https://github.com/tikitu/jsmin) 3.0.1
 
 ## Copyright & License
 
