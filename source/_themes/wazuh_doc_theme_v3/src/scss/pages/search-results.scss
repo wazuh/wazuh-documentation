@@ -1,0 +1,156 @@
+/* -----------------------------------------------------------------------------
+  Search Results page
+----------------------------------------------------------------------------- */
+
+@import "../inc/variables";
+@import "../inc/mixins";
+@import "../inc/root";
+
+@import "../parts/header";
+@import "../parts/footer";
+@import "../parts/left-sidebar";
+@import "../parts/central-column";
+@import "../parts/right-sidebar";
+
+@import "../components/breadcrumbs";
+@import "../components/version-notice";
+
+main {
+  padding-top: 10px;
+  padding-bottom: 30px;
+}
+
+h1 {
+  font-size: 22px;
+}
+
+#search-results {
+  .search-summary {
+    font-weight: 500;
+  }
+
+  .search {
+    padding-left: 0;
+    list-style: none;
+
+    .breadcrumbs {
+      padding: 10px 0 5px;
+    }
+    .breadcrumb-separator,
+    .breadcrumb-link {
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    li {
+      padding: 20px 0 30px;
+    }
+
+    .result-link {
+      font-size: 22px;
+      text-decoration: none;
+      &:focus {
+        font-weight: 500;
+      }
+    }
+    .context {
+      margin: 1rem 0;
+      .highlighted {
+        display: inline-block;
+      }
+    }
+
+    .hidden-result {
+      display: none;
+    }
+  }
+}
+
+#toggle-results {
+  text-decoration: none;
+  &:focus {
+    font-weight: 500;
+  }
+}
+
+/* Light theme -------------------------------------------------------------- */
+
+.light-theme .search {
+  #search-results {
+    .query-term {
+      color: $light-color-shaded-text;
+    }
+    .search-summary {
+      color: $light-color-shaded-text;
+    }
+    .search {
+      .breadcrumb-separator,
+      .breadcrumb-link {
+        color: $light-color-shaded-text;
+        &:hover,
+        &:focus {
+          color: $light-color-primary-lighter;
+        }
+      }
+      .result-link {
+        color: $light-color-primary;
+        &:hover,
+        &:focus {
+          color: $light-color-primary-lighter;
+        }
+      }
+      .context .highlighted {
+        background-color: $light-color-global-toc-highlight;
+      }
+    }
+  }
+  #toggle-results {
+    color: $light-color-primary;
+    &:hover,
+    &:focus {
+      color: $light-color-primary-lighter;
+    }
+  }
+}
+
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme .search {
+  #search-results {
+    .query-term {
+      color: $dark-color-shaded-text;
+    }
+    .search-summary {
+      color: $dark-color-shaded-text;
+    }
+    .search {
+      .breadcrumb-separator,
+      .breadcrumb-link {
+        color: $dark-color-shaded-text;
+        &:hover,
+        &:focus {
+          color: $dark-color-primary-lighter;
+        }
+      }
+      .result-link {
+        color: $dark-color-primary;
+        &:hover,
+        &:focus {
+          color: $dark-color-primary-lighter;
+        }
+      }
+      .context .highlighted {
+        color: $dark-color-highlight-inline-text;
+        background-color: $dark-color-shadow;
+      }
+    }
+  }
+  #toggle-results {
+    color: $dark-color-primary;
+    &:hover,
+    &:focus {
+      color: $dark-color-primary-lighter;
+    }
+  }
+}
