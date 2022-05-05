@@ -17,7 +17,7 @@ Highlights
 
 Wazuh 4.3.0 includes many new additions, such as a remarkable enhancement with the new :doc:`Wazuh indexer </getting-started/components/wazuh-indexer>` and :doc:`Wazuh dashboard </getting-started/components/wazuh-dashboard>` that improve the user experience and facilitate the management of the whole platform. 
 
-New version 4.3.0 enhances the performance of the Wazuh solution and adds new integrations such as the following: 
+Version 4.3.0 enhances the performance of the Wazuh solution and adds new integrations such as the following: 
 
 - Vulnerability Detector support for Amazon Linux and Arch Linux
 - New agents integrations with logs from Office 365 and GitHub
