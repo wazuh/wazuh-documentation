@@ -20,22 +20,22 @@ As an example, Wazuh provides out-of-the-box dashboards for regulatory complianc
 
    -  .. thumbnail::  /images/getting-started/module_info_management.png 
          :align: center
-         :width: 90% 
+         :width: 100% 
          :title: Modules information management
 
    -  .. thumbnail::  /images/getting-started/module_policy.png 
          :align: center
-         :width: 90% 
+         :width: 100% 
          :title: Modules policy
 
    -  .. thumbnail::  /images/getting-started/module_threat_detection.png 
          :align: center
-         :width: 90% 
+         :width: 100% 
          :title: Module threat detection
 
    -  .. thumbnail::  /images/getting-started/module_compliance.png 
          :align: center
-         :width: 90% 
+         :width: 100% 
          :title: Module compliance
 
 Agents monitoring and configuration
@@ -58,12 +58,12 @@ The Wazuh dashboard provides a user interface dedicated to manage your Wazuh dep
 
    -  .. thumbnail::  /images/getting-started/dashboard_administration.png 
          :align: center
-         :width: 90% 
+         :width: 100% 
          :title: Administration
 
    -  .. thumbnail::  /images/getting-started/dashboard_status.png 
          :align: center
-         :width: 90% 
+         :width: 100% 
          :title: Status and reports
 
 Developer tools
@@ -83,10 +83,10 @@ The Wazuh dashboard also includes an API Console for users to interact with the 
 
     -  .. thumbnail::  /images/getting-started/dashboard_API_console1.png 
           :align: center
-          :width: 90% 
+          :width: 100% 
           :title: API Console
 
     -  .. thumbnail::  /images/getting-started/dashboard_API_console2.png 
           :align: center
-          :width: 90% 
+          :width: 100% 
           :title: API Console
