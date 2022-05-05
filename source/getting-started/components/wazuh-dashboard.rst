@@ -15,25 +15,28 @@ The web interface helps users navigate through the different types of data colle
 
 As an example, Wazuh provides out-of-the-box dashboards for regulatory compliance such as PCI DSS, GDPR, HIPAA, and NIST 800-53. It also provides an interface to navigate through the MITRE ATT&CK framework and related alerts.
 
-.. thumbnail::  /images/getting-started/module_info_management.png 
-   :align: center
-   :width: 80% 
-   :title: Modules directory
+.. hlist::
+   :columns: 2
 
-.. thumbnail::  /images/getting-started/module_policy.png 
-   :align: center
-   :width: 80% 
-   :title: Modules directory
+   -  .. thumbnail::  /images/getting-started/module_info_management.png 
+         :align: center
+         :width: 100% 
+         :title: Modules information management
 
-.. thumbnail::  /images/getting-started/module_threat_detection.png 
-   :align: center
-   :width: 80% 
-   :title: Modules directory
+   -  .. thumbnail::  /images/getting-started/module_policy.png 
+         :align: center
+         :width: 100% 
+         :title: Modules policy
 
-.. thumbnail::  /images/getting-started/module_compliance.png 
-   :align: center
-   :width: 80% 
-   :title: Modules directory
+   -  .. thumbnail::  /images/getting-started/module_threat_detection.png 
+         :align: center
+         :width: 100% 
+         :title: Module threat detection
+
+   -  .. thumbnail::  /images/getting-started/module_compliance.png 
+         :align: center
+         :width: 100% 
+         :title: Module compliance
 
 Agents monitoring and configuration
 -----------------------------------
@@ -50,15 +53,18 @@ Platform management
 
 The Wazuh dashboard provides a user interface dedicated to manage your Wazuh deployment. This includes monitoring the status, logs, and statistics of the different Wazuh components. It also includes configuring the Wazuh server, and creating custom rules and decoders for log analysis and threat detection.
 
-.. thumbnail::  /images/getting-started/dashboard_administration.png 
-   :align: center
-   :width: 80% 
-   :title: Administration
+.. hlist::
+   :columns: 2
 
-.. thumbnail::  /images/getting-started/dashboard_status.png 
-   :align: center
-   :width: 80% 
-   :title: Status and reports
+   -  .. thumbnail::  /images/getting-started/dashboard_administration.png 
+         :align: center
+         :width: 100% 
+         :title: Administration
+
+   -  .. thumbnail::  /images/getting-started/dashboard_status.png 
+         :align: center
+         :width: 100% 
+         :title: Status and reports
 
 Developer tools
 ---------------
@@ -66,20 +72,21 @@ Developer tools
 The Wazuh dashboard includes a Ruleset Test tool that can process log messages to check how it is decoded and if it matches a threat detection rule or not. This feature is especially useful when custom decoders and rules have been created and the user wants to test them.
 
 .. thumbnail::  /images/getting-started/dashboard_ruleset_test.png 
-      :align: center
-      :title: Ruleset test
+   :align: center
+   :width: 80% 
+   :title: Ruleset test
 
 The Wazuh dashboard also includes an API Console for users to interact with the Wazuh API. This can be used to manage the Wazuh deployment (e.g., managing server or agent configurations, monitor status and log messages, adding or removing agents, etc.).
 
 .. hlist::
     :columns: 2
 
+    -  .. thumbnail::  /images/getting-started/dashboard_API_console1.png 
+          :align: center
+          :width: 100% 
+          :title: API Console
 
-    - .. thumbnail::  /images/getting-started/dashboard_API_console1.png 
-            :align: center
-            :title: API Console
-
-
-    - .. thumbnail::  /images/getting-started/dashboard_API_console2.png 
-            :align: center
-            :title: API Console
+    -  .. thumbnail::  /images/getting-started/dashboard_API_console2.png 
+          :align: center
+          :width: 100% 
+          :title: API Console
