@@ -6,10 +6,6 @@
 Amazon Machine Images (AMI)
 ===========================
 
-.. warning::
-
-   The AMI for Wazuh 4.3 is in the process of being published. It will be available soon in the AWS Marketplace.
-
 Wazuh provides a pre-built Amazon Machine Image (AMI). An AMI is a pre-configured template that is ready to use for creating a virtual computing environment within the Amazon Elastic Compute Cloud (Amazon EC2). The latest Wazuh AMI packages together Amazon Linux 2 with the following central components for your Wazuh server:
 
 - Wazuh manager |WAZUH_LATEST_AMI|
