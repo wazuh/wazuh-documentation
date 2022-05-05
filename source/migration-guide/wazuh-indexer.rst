@@ -204,7 +204,7 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13 to the Wazu
 
    .. code-block:: console
 
-     curl -X GET "https://<Wazuh_indexer_IP>:9200/_cluster/health" -u <username>:<password> -k
+     curl -X GET "https://<Wazuh_indexer_IP>:9200/_cluster/health?pretty" -u <username>:<password> -k
 
 #. Re-enable shard allocation.
 
