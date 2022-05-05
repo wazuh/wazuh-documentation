@@ -20,7 +20,7 @@ Wazuh 4.3.0 includes many new additions, such as a remarkable enhancement with t
 Version 4.3.0 enhances the performance of the Wazuh solution and adds new integrations such as the following: 
 
 - Vulnerability Detector support for Amazon Linux and Arch Linux
-- New agents integrations with logs from Office 365 and GitHub
+- New agent integrations with logs from Office 365 and GitHub
 - Improved RESTful API availability thanks to the API now using multiple processes
 - Now the Wazuh manager cluster uses multiple processes for improved performance
 - Wazuh now supports Logcollector with native macOS logs (Unified Logging System)
