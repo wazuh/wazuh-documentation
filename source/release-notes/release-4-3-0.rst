@@ -391,7 +391,7 @@ Other
 Packages
 ^^^^^^^^
 - `#1496 <https://github.com/wazuh/wazuh-packages/pull/1496>`_ Hide passwords in log file.
-- `#1500 <https://github.com/wazuh/wazuh-packages/pull/1500>`_ The dashboard IP messages is fixed.
+- `#1500 <https://github.com/wazuh/wazuh-packages/pull/1500>`_ The dashboard IP messages are fixed.
 - `#1499 <https://github.com/wazuh/wazuh-packages/pull/1499>`_ Improved APT locked message and retry time.
 - `#1497 <https://github.com/wazuh/wazuh-packages/pull/1497>`_ Unhandled promise for the dashboard is fixed.
 - `#1494 <https://github.com/wazuh/wazuh-packages/pull/1494>`_ Update ova ``motd`` message 4.3.
