@@ -126,8 +126,8 @@ Starting the Wazuh dashboard service
     
 .. note::
 
-   -  It is highly recommended to change the default passwords of Wazuh indexer for the users passwords. To perform this action, see the :doc:`/user-manual/securing-wazuh/wazuh-indexer` section.
-   -  It is also recommended to customize the file ``/etc/wazuh-indexer/jvm.options`` to improve the performance of Wazuh indexer. Learn more about this process in the :ref:`memory_locking` section.
+   It is highly recommended to change the default Wazuh indexer passwords. To perform this action, see the :doc:`/user-manual/securing-wazuh/wazuh-indexer` section.
+
 
 Next steps
 ----------
