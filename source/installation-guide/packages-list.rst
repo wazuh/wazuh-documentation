@@ -326,6 +326,10 @@ For Wazuh Splunk app |WAZUH_SPLUNK_LATEST|:
 
 .. |SPLUNK_8.1.7_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.7.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.7-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_LATEST|/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.7-1.tar.gz.sha512>`__)
 
+.. |SPLUNK_8.1.7.1_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.7.1.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.7.1-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_LATEST|/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.7.1-1.tar.gz.sha512>`__)
+
+.. |SPLUNK_8.1.7.2_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.7.2.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.7.2-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_LATEST|/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.7.2-1.tar.gz.sha512>`__)
+
 .. |SPLUNK_8.1.8_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.8.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.8-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_LATEST|/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.8-1.tar.gz.sha512>`__)
 
 .. |SPLUNK_8.1.9_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.9.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.9-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_LATEST|/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.9-1.tar.gz.sha512>`__)
@@ -346,43 +350,47 @@ For Wazuh Splunk app |WAZUH_SPLUNK_LATEST|:
 
 .. |SPLUNK_8.2.6_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.2.6.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.2.6-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_LATEST|/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.2.6-1.tar.gz.sha512>`__)
 
-+----------------------+---------------------+
-| Splunk version       | Package             |
-+======================+=====================+
-| 8.1.1                | |SPLUNK_8.1.1_PKG|  |
-+----------------------+---------------------+
-| 8.1.2                | |SPLUNK_8.1.2_PKG|  |
-+----------------------+---------------------+
-| 8.1.3                | |SPLUNK_8.1.3_PKG|  |
-+----------------------+---------------------+
-| 8.1.4                | |SPLUNK_8.1.4_PKG|  |
-+----------------------+---------------------+
-| 8.1.5                | |SPLUNK_8.1.5_PKG|  |
-+----------------------+---------------------+
-| 8.1.6                | |SPLUNK_8.1.6_PKG|  |
-+----------------------+---------------------+
-| 8.1.7                | |SPLUNK_8.1.7_PKG|  |
-+----------------------+---------------------+
-| 8.1.8                | |SPLUNK_8.1.8_PKG|  |
-+----------------------+---------------------+
-| 8.1.9                | |SPLUNK_8.1.9_PKG|  |
-+----------------------+---------------------+
-| 8.1.10               | |SPLUNK_8.1.10_PKG| |
-+----------------------+---------------------+
-| 8.2.0                | |SPLUNK_8.2.0_PKG|  |
-+----------------------+---------------------+
-| 8.2.1                | |SPLUNK_8.2.1_PKG|  |
-+----------------------+---------------------+
-| 8.2.2                | |SPLUNK_8.2.2_PKG|  |
-+----------------------+---------------------+
-| 8.2.3                | |SPLUNK_8.2.3_PKG|  |
-+----------------------+---------------------+
-| 8.2.4                | |SPLUNK_8.2.4_PKG|  |
-+----------------------+---------------------+
-| 8.2.5                | |SPLUNK_8.2.5_PKG|  |
-+----------------------+---------------------+
-| 8.2.6                | |SPLUNK_8.2.6_PKG|  |
-+----------------------+---------------------+
++----------------------+----------------------+
+| Splunk version       | Package              |
++======================+======================+
+| 8.1.1                | |SPLUNK_8.1.1_PKG|   |
++----------------------+----------------------+
+| 8.1.2                | |SPLUNK_8.1.2_PKG|   |
++----------------------+----------------------+
+| 8.1.3                | |SPLUNK_8.1.3_PKG|   |
++----------------------+----------------------+
+| 8.1.4                | |SPLUNK_8.1.4_PKG|   |
++----------------------+----------------------+
+| 8.1.5                | |SPLUNK_8.1.5_PKG|   |
++----------------------+----------------------+
+| 8.1.6                | |SPLUNK_8.1.6_PKG|   |
++----------------------+----------------------+
+| 8.1.7                | |SPLUNK_8.1.7_PKG|   |
++----------------------+----------------------+
+| 8.1.7.1              | |SPLUNK_8.1.7.1_PKG| |
++----------------------+----------------------+
+| 8.1.7.2              | |SPLUNK_8.1.7.2_PKG| |
++----------------------+----------------------+
+| 8.1.8                | |SPLUNK_8.1.8_PKG|   |
++----------------------+----------------------+
+| 8.1.9                | |SPLUNK_8.1.9_PKG|   |
++----------------------+----------------------+
+| 8.1.10               | |SPLUNK_8.1.10_PKG|  |
++----------------------+----------------------+
+| 8.2.0                | |SPLUNK_8.2.0_PKG|   |
++----------------------+----------------------+
+| 8.2.1                | |SPLUNK_8.2.1_PKG|   |
++----------------------+----------------------+
+| 8.2.2                | |SPLUNK_8.2.2_PKG|   |
++----------------------+----------------------+
+| 8.2.3                | |SPLUNK_8.2.3_PKG|   |
++----------------------+----------------------+
+| 8.2.4                | |SPLUNK_8.2.4_PKG|   |
++----------------------+----------------------+
+| 8.2.5                | |SPLUNK_8.2.5_PKG|   |
++----------------------+----------------------+
+| 8.2.6                | |SPLUNK_8.2.6_PKG|   |
++----------------------+----------------------+
 
 Filebeat
 ---------------
