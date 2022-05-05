@@ -28,7 +28,7 @@ Download the packages and configuration files
 
     .. code-block:: console
       
-        # curl -sO https://packages-dev.wazuh.com/|WAZUH_LATEST_MINOR|/wazuh-install.sh
+        # curl -sO https://packages.wazuh.com/|WAZUH_LATEST_MINOR|/wazuh-install.sh
         # chmod 744 wazuh-install.sh
         # ./wazuh-install.sh -dw <deb|rpm>
           
@@ -40,7 +40,7 @@ Download the packages and configuration files
         
         .. code-block:: console
         
-            # curl -sO https://packages-dev.wazuh.com/|WAZUH_LATEST_MINOR|/config.yml
+            # curl -sO https://packages.wazuh.com/|WAZUH_LATEST_MINOR|/config.yml
             
         Edit ``config.yml`` and replace ``<indexer-node-ip>``, ``<wazuh-manager-ip>``, and ``<dashboard-node-ip>`` with ``127.0.0.1``.
         
@@ -50,7 +50,7 @@ Download the packages and configuration files
         
         .. code-block:: console
         
-            # curl -sO https://packages-dev.wazuh.com/|WAZUH_LATEST_MINOR|/config.yml
+            # curl -sO https://packages.wazuh.com/|WAZUH_LATEST_MINOR|/config.yml
             
         Edit ``config.yml`` and replace the node names and IP values with the corresponding names and IP addresses. You need to do this for all the Wazuh server, the Wazuh indexer, and the Wazuh dashboard nodes. Add as many node fields as needed.
 
@@ -59,7 +59,7 @@ Download the packages and configuration files
 
     .. code-block:: console
     
-        # curl -sO https://packages-dev.wazuh.com/|WAZUH_LATEST_MINOR|/wazuh-certs-tool.sh
+        # curl -sO https://packages.wazuh.com/|WAZUH_LATEST_MINOR|/wazuh-certs-tool.sh
         # chmod 744 wazuh-certs-tool.sh
         # ./wazuh-certs-tool.sh --all            
 
@@ -493,8 +493,7 @@ Upon the first access to the Wazuh dashboard, the browser shows a warning messag
 
 .. note::
   
-    -   It is highly recommended to change the default passwords of Wazuh indexer for the users’ passwords. To perform this action, see the :ref:`Change users' password <change_elastic_pass>` section.
-    -   It is also recommended to customize the file ``/etc/wazuh-indexer/jvm.options`` to improve the performance of Wazuh indexer. Learn more about this process in the :ref:`memory_locking` section.
+   It is highly recommended to change the default Wazuh indexer passwords. To perform this action, see the :doc:`/user-manual/securing-wazuh/wazuh-indexer` section.
 
 To uninstall all the Wazuh central components, see the :doc:`/user-manual/uninstall/central-components` section.
 

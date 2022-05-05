@@ -38,7 +38,7 @@ Then map your configuration file inside the container in the ``docker-compose.ym
         - "9200:9200"
         - "9300:9300"
       environment:
-        ES_JAVA_OPTS: "-Xms1g -Xmx1g"
+        ES_JAVA_OPTS: "-Xms6g -Xmx6g"
       networks:
         - docker_wazuh
 

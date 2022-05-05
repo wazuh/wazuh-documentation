@@ -6,7 +6,7 @@
 Uninstalling the Wazuh central components
 =========================================
 
-You can uninstall all the Wazuh central components using the `Wazuh installation assistant <https://packages-dev.wazuh.com/|WAZUH_LATEST_MINOR|/wazuh-install.sh>`_.
+You can uninstall all the Wazuh central components using the `Wazuh installation assistant <https://packages.wazuh.com/|WAZUH_LATEST_MINOR|/wazuh-install.sh>`_.
 
 Run the assistant with the option ``-u`` or ``--uninstall`` as follows:
 

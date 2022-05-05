@@ -67,7 +67,7 @@ If the Wazuh central components are already installed in your environment, selec
 
   <div class="link-boxes-group">
     <div class="link-boxes-item">
-      <a class="link-boxes-link" href="/installation-guide/wazuh-agent/wazuh-agent-package-linux.html">
+      <a class="link-boxes-link" href="../installation-guide/wazuh-agent/wazuh-agent-package-linux.html">
         <p class="link-boxes-label">Linux</p>
 
 .. image:: /images/installation/linux.png
@@ -78,7 +78,7 @@ If the Wazuh central components are already installed in your environment, selec
       </a>
     </div>
     <div class="link-boxes-item">
-      <a class="link-boxes-link" href="/installation-guide/wazuh-agent/wazuh-agent-package-windows.html">
+      <a class="link-boxes-link" href="../installation-guide/wazuh-agent/wazuh-agent-package-windows.html">
         <p class="link-boxes-label">Windows</p>
 
 .. image:: /images/installation/windows-logo.png
@@ -89,7 +89,7 @@ If the Wazuh central components are already installed in your environment, selec
       </a>
     </div>
     <div class="link-boxes-item">
-      <a class="link-boxes-link" href="/installation-guide/wazuh-agent/wazuh-agent-package-macos.html">
+      <a class="link-boxes-link" href="../installation-guide/wazuh-agent/wazuh-agent-package-macos.html">
         <p class="link-boxes-label">macOS</p>
 
 .. image:: /images/installation/macOS-logo.png
@@ -100,7 +100,7 @@ If the Wazuh central components are already installed in your environment, selec
       </a>
     </div>
     <div class="link-boxes-item">
-      <a class="link-boxes-link" href="/installation-guide/wazuh-agent/wazuh-agent-package-solaris.html">
+      <a class="link-boxes-link" href="../installation-guide/wazuh-agent/wazuh-agent-package-solaris.html">
         <p class="link-boxes-label">Solaris</p>
 
 .. image:: /images/installation/solaris.png
@@ -111,7 +111,7 @@ If the Wazuh central components are already installed in your environment, selec
       </a>
     </div>
     <div class="link-boxes-item">
-      <a class="link-boxes-link" href="/installation-guide/wazuh-agent/wazuh-agent-package-aix.html">
+      <a class="link-boxes-link" href="../installation-guide/wazuh-agent/wazuh-agent-package-aix.html">
         <p class="link-boxes-label">AIX</p>
 
 .. image:: /images/installation/AIX.png
@@ -122,7 +122,7 @@ If the Wazuh central components are already installed in your environment, selec
       </a>
     </div>
     <div class="link-boxes-item">
-      <a class="link-boxes-link" href="/installation-guide/wazuh-agent/wazuh-agent-package-hpux.html">
+      <a class="link-boxes-link" href="../installation-guide/wazuh-agent/wazuh-agent-package-hpux.html">
         <p class="link-boxes-label">HP-UX</p>
 
 .. image:: /images/installation/hpux.png

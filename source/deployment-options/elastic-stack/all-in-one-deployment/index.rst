@@ -56,19 +56,23 @@ Elasticsearch installation and configuration
 
       .. group-tab:: Yum
 
+         .. code-block:: console
 
-        .. include:: ../../../_templates/installations/basic/elastic/yum/install_elasticsearch.rst
-
+           # yum install elasticsearch-7.17.3
 
 
       .. group-tab:: APT
 
+         .. code-block:: console
 
-        .. include:: ../../../_templates/installations/basic/elastic/deb/install_elasticsearch.rst
+           # apt-get install elasticsearch=7.17.3
 
 
+#. Download the configuration file ``/etc/elasticsearch/elasticsearch.yml`` as follows:
 
-#. .. include:: ../../../_templates/installations/basic/elastic/common/elastic-single-node/configure_elasticsearch_aio.rst
+   .. code-block:: console
+
+     # curl -so /etc/elasticsearch/elasticsearch.yml https://packages.wazuh.com/4.3/tpl/elastic-basic/elasticsearch_all_in_one.yml
 
 
 Certificates creation and deployment
@@ -78,7 +82,7 @@ Certificates creation and deployment
 
     .. code-block:: console
 
-        # curl -so /usr/share/elasticsearch/instances.yml https://packages-dev.wazuh.com/|WAZUH_LATEST_MINOR|/tpl/elastic-basic/instances_aio.yml
+        # curl -so /usr/share/elasticsearch/instances.yml https://packages.wazuh.com/|WAZUH_LATEST_MINOR|/tpl/elastic-basic/instances_aio.yml
     
     
     In the following steps, a file that contains a folder named after the instance defined here will be created. This folder will contain the certificates and the keys necessary to communicate with the Elasticsearch node using SSL.
@@ -126,24 +130,24 @@ This command should have an output like this:
 .. code-block:: console
   :class: output
   
-   {
-     "name" : "elasticsearch",
-     "cluster_name" : "elasticsearch",
-     "cluster_uuid" : "Q2JvBlWeQuioqjWPFezhsQ",
-     "version" : {
-       "number" : "7.17.3",
-       "build_flavor" : "default",
-       "build_type" : "rpm",
-       "build_hash" : "5ad023604c8d7416c9eb6c0eadb62b14e766caff",
-       "build_date" : "2022-04-19T08:11:19.070913226Z",
-       "build_snapshot" : false,
-       "lucene_version" : "8.11.1",
-       "minimum_wire_compatibility_version" : "6.8.0",
-       "minimum_index_compatibility_version" : "6.0.0-beta1"
-     },
-     "tagline" : "You Know, for Search"
-   }  
-  
+  {
+    "name" : "elasticsearch",
+    "cluster_name" : "elasticsearch",
+    "cluster_uuid" : "upF9h1afQN2TfHtt0h3Kuw",
+    "version" : {
+      "number" : "7.17.3",
+      "build_flavor" : "default",
+      "build_type" : "rpm",
+      "build_hash" : "6bc13727ce758c0e943c3c21653b3da82f627f75",
+      "build_date" : "2021-09-15T10:18:09.722761972Z",
+      "build_snapshot" : false,
+      "lucene_version" : "8.9.0",
+      "minimum_wire_compatibility_version" : "6.8.0",
+      "minimum_index_compatibility_version" : "6.0.0-beta1"
+    },
+    "tagline" : "You Know, for Search"
+  }
+
   
 
 .. _basic_all_in_one_wazuh:
@@ -158,8 +162,7 @@ Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. tabs::
-
-
+  
 
   .. group-tab:: Yum
 
@@ -239,7 +242,7 @@ Filebeat installation and configuration
 
     .. code-block:: console
 
-      # curl -so /etc/filebeat/filebeat.yml https://packages-dev.wazuh.com/|WAZUH_LATEST_MINOR|/tpl/elastic-basic/filebeat_all_in_one.yml
+      # curl -so /etc/filebeat/filebeat.yml https://packages.wazuh.com/|WAZUH_LATEST_MINOR|/tpl/elastic-basic/filebeat_all_in_one.yml
 
 #. Download the alerts template for Elasticsearch:
 
@@ -288,15 +291,15 @@ This command should have an output like this:
       elasticsearch: https://127.0.0.1:9200...
         parse url... OK
         connection...
-        parse host... OK
-        dns lookup... OK
-        addresses: 127.0.0.1
-        dial up... OK
+          parse host... OK
+          dns lookup... OK
+          addresses: 127.0.0.1
+          dial up... OK
         TLS...
-        security: server's certificate chain verification is enabled
-        handshake... OK
-        TLS version: TLSv1.3
-        dial up... OK
+          security: server's certificate chain verification is enabled
+          handshake... OK
+          TLS version: TLSv1.3
+          dial up... OK
         talk to server... OK
         version: 7.17.3
 

@@ -14,7 +14,7 @@ We  provide a script to simplify the process of changing passwords, start by dow
 
   .. code-block:: console
   
-    # curl -so wazuh-passwords-tool.sh https://packages-dev.wazuh.com/|WAZUH_LATEST_MINOR|/wazuh-passwords-tool.sh
+    # curl -so wazuh-passwords-tool.sh https://packages.wazuh.com/|WAZUH_LATEST_MINOR|/wazuh-passwords-tool.sh
 
 The script allows changing the password for either a single user or all the users present on the ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/internal_users.yml`` file. It also offers the option to change the password of more than one user at once, getting them from a formatted file.
 
@@ -63,8 +63,8 @@ This is the output of the script:
     :class: output 
 
     28/04/2022 10:17:50 INFO: Generating password hash
-    28/04/2022 10:17:55 WARNING: Password changed. Remember to update the password in /etc/filebeat/filebeat.yml and /etc/wazuh-dashboard/opensearch_dashboards.yml if necessary and restart the services.
-
+    28/04/2022 10:17:55 WARNING: Passwords changed. Remember to update the password in the Wazuh dashboard and Filebeat nodes if necessary, and restart the services.
+    
 Change the passwords for all users
 ----------------------------------
 
@@ -87,7 +87,7 @@ This is the output of the script:
     28/04/2022 10:25:31 INFO: The password for user snapshotrestore is U5MZg6WeXNUP9NPPophRoMtA9GQNEvdR
     28/04/2022 10:25:31 INFO: The password for user wazuh_admin is WrWzM8egHJY2CfxngapAeSchA3yq3X3t
     28/04/2022 10:25:31 INFO: The password for user wazuh_user is oCwLLG88wb7x5OpnxOPjclVpqWgq9s7W
-    28/04/2022 10:25:31 WARNING: Passwords changed. Remember to update the password in /etc/filebeat/filebeat.yml and /etc/wazuh-dashboard/opensearch_dashboards.yml if necessary and restart the services.
+    28/04/2022 10:25:31 WARNING: Passwords changed. Remember to update the password in the Wazuh dashboard and Filebeat nodes if necessary, and restart the services.
 
 Change the passwords using a formatted file
 --------------------------------------------
