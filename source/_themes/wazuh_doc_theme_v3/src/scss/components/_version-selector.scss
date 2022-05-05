@@ -1,0 +1,181 @@
+/* -----------------------------------------------------------------------------
+  Component: Version selector
+
+  Style for the release version selector.
+----------------------------------------------------------------------------- */
+
+header {
+  .tooltip {
+    font-family: Manrope, sans-serif;
+  }
+}
+
+#version-selector {
+
+  &.show {
+    .dropdown-toggle::after {
+      transform: rotate(180deg);
+    }
+  }
+
+  .dropdown-btn {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: calc((#{$left-sidebar-width} + 32px) / 2);
+    height: 40px;
+    border: 2px solid;
+    border-radius: $rounded-corners;
+    transition: color 0s;
+    @include media-max(sm) {
+      font-size: 14px;
+    }
+    @include media-max(xl) {
+      width: auto;
+      padding: 0;
+      border: none;
+    }
+    &:focus  {
+      box-shadow: none;
+    }
+    span {
+      @include media-max(xl) {
+        padding-right: 5px;
+      }
+    }
+  }
+  .dropdown-menu {
+    top: 52px;
+    box-sizing: border-box;
+    width: 100%;
+    border: 2px solid;
+    border-radius: 10px;
+    @include media-max(sm) {
+      font-size: 14px;
+    }
+
+    @include media-max(xl) {
+      left: -5px !important;/* stylelint-disable-line declaration-no-important */
+      min-width: 185px;
+      max-height: calc(100vh - 70px - 56px);
+      padding: 10px 0;
+      overflow-y: auto;
+      border: none;
+    }
+
+    > li > a {
+      display: inline-block;
+      width: 100%;
+      padding: .4rem .75rem;
+      text-decoration: none;
+
+      &:hover,
+      &:focus {
+        font-weight: 500;
+      }
+
+      &.disabled {
+        font-weight: 500;
+
+        &:hover,
+        &:focus {
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}
+
+/* Light theme -------------------------------------------------------------- */
+
+.light-theme {
+  header {
+    .tooltip {
+      .arrow::before {
+        border-left-color: $light-color-highlight-background;
+      }
+      .tooltip-inner {
+        color: $light-color-main-text;
+        background-color: $light-color-highlight-background;
+      }
+    }
+  }
+
+  #version-selector {
+    .dropdown-btn {
+      color: $light-color-main-text;
+      @include media-min(xl) {
+        background-color: $light-color-base-space;
+        border-color: $light-color-accent;
+      }
+      &[aria-expanded="false"]:focus {
+        box-shadow: inset 0 0 2px 2px rgba($light-color-focus-shade, .2);
+      }
+    }
+    .dropdown-menu {
+      background-color: $light-color-sidebar-space;
+      @include media-min(xl) {
+        background-color: $light-color-base-space;
+        border-color: $light-color-accent;
+      }
+      > li > a {
+        color: $light-color-main-text;
+        &:hover,
+        &:focus {
+          background-color: $light-color-highlight-background;
+        }
+        &.disabled {
+          color: $light-color-border-deeper;
+        }
+      }
+    }
+  }
+}
+
+/* Dark- theme -------------------------------------------------------------- */
+
+.dark-theme {
+  header {
+    .tooltip {
+      .arrow::before {
+        border-left-color: $dark-color-highlight-background;
+      }
+      .tooltip-inner {
+        color: $dark-color-main-text;
+        background-color: $dark-color-highlight-background;
+      }
+    }
+  }
+
+  #version-selector {
+    .dropdown-btn {
+      color: $dark-color-main-text;
+      background-color: $dark-color-sidebar-space;
+      @include media-min(xl) {
+        background-color: $dark-color-base-space;
+        border-color: $dark-color-accent;
+      }
+      &[aria-expanded="false"]:focus {
+        box-shadow: inset 0 0 2px 2px rgba($dark-color-focus-shade, .5);
+      }
+    }
+    .dropdown-menu {
+      background-color: $dark-color-sidebar-space;
+      @include media-min(xl) {
+        background-color: $dark-color-base-space;
+        border-color: $dark-color-accent;
+      }
+      > li > a {
+        color: $dark-color-main-text;
+        &:hover,
+        &:focus {
+          background-color: $dark-color-highlight-background;
+        }
+        &.disabled {
+          color: $dark-color-input-placeholder;
+        }
+      }
+    }
+  }
+}
