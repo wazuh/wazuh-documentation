@@ -46,7 +46,7 @@ Where:
     - **-x upgrade.sh** is the name of the upgrading script contained in the package.
 
 .. note::
-  If you are going to upgrade a Windows agent, you must use upgrade.bat instead of upgrade.sh
+   To upgrade a Windows agent, you must use ``upgrade.bat`` instead of ``upgrade.sh``.
 
 Output example:
 
