@@ -193,19 +193,23 @@ Enabling core dump generation
 -----------------------------
 Linux kernel allow multiple possibilities to handle coredumps files
 
-- Naming of core dump files: create dumps using default `core.pid` or templetized core dumps filenames using subtitutions.
+- Naming of core dump files: create dumps using default ``core.pid`` or templetized core dumps filenames using subtitutions.
 - Piping core dumps to a program: execute a program with certain arguments and send the dump using pipe mechanism
 - Mix of them (Since Linux 5.3): multi-dump generation by pipe-separating output specification
 
 Due the fact that GNU/Linux distributions might use different approaches, fist step is to determinate whats is being used and therefore apply some modifications to be able to capture Wazuh coredumps.
 
-Current core dump configuration can be retrieved by reading `/proc/sys/kernel/core_pattern` file, and bring information how core dumps are being handled
+Current core dump configuration can be retrieved by reading ``/proc/sys/kernel/core_pattern`` file, and bring information how core dumps are being handled
 
 - Core dumps are being handled by Apport. See
 
   .. code-block:: console
 
     # cat /proc/sys/kernel/core_pattern
+
+  .. code-block:: none
+    :class: output
+
     |/usr/share/apport/apport %p %s %c %d %P %E
 
 - Core dumps are being handled by systemd-coredump
@@ -213,6 +217,10 @@ Current core dump configuration can be retrieved by reading `/proc/sys/kernel/co
   .. code-block:: console
 
     # cat /proc/sys/kernel/core_pattern
+
+  .. code-block:: none
+    :class: output
+
     |/usr/lib/systemd/systemd-coredump %P %u %g %s %t %c %h
 
 - Templetized core dumps filenames are created
@@ -220,13 +228,21 @@ Current core dump configuration can be retrieved by reading `/proc/sys/kernel/co
   .. code-block:: console
 
     # cat /proc/sys/kernel/core_pattern
-    /tmp/core.%p
+
+  .. code-block:: none
+    :class: output
+
+    core
 
 - Core dumps are currently disabled.
 
   .. code-block:: console
 
     # cat /proc/sys/kernel/core_pattern
+
+  .. code-block:: none
+    :class: output
+
     |/bin/false
 
 To know more about Kernel core dump managment see `core man <http://man7.org/linux/man-pages/man5/core.5.html>`_.
@@ -250,20 +266,30 @@ To know more about systemd-coredump see `systemd-coredump man <https://www.freed
 Apport core dump handler
 ++++++++++++++++++++++++
 
-Default on: Fedora, Arch Linux, centOS 8.
+Default on: Ubuntu
 
-Apport crash files are located in `/var/crash` directory and consist of a package that, not only contains the core dump file, but also process' environment information about the event.
-In order to obtain the specific core dump, the crash report can be unpacked by using `apport-unpack``
+Apport crash files are located in ``/var/crash`` directory and consist of a package that, not only contains the core dump file, but also process' environment information about the event.
+In order to obtain the specific core dump, the crash report can be unpacked by using ``apport-unpack``
 
   .. code-block:: console
 
     # cd /var/crash
     # apport-unpack <dump-filename>.crash <outputdir>
     # file <outputdir>/Coredump
-    CoreDump: ELF 64-bit LSB core file, x86-64, version 1 (SYSV), SVR4-style, from '/var/ossec/bin/wazuh-logcollector', real uid: 0, effective uid: 0, real gid: 0, effective gid: 0, execfn: '/var/ossec/bin/wazuh-logcollector', platform: 'x86_64'
 
-`<dump-filename>` must be replaced by Apport crash file, that is the full path of the file where slashes (`/`) were replaced by underscores (`_`), plus an incremental counter.
-  For example, first `wazuh-logcollector`` crash will create a report named `_var_ossec_bin_wazuh-logcollector.0.crash`
+  .. code-block:: none
+    :class: output
+
+      CoreDump: ELF 64-bit LSB core file, x86-64, version 1 (SYSV), SVR4-style, from '/var/ossec/bin/wazuh-logcollector', real uid: 0, effective uid: 0, real gid: 0, effective gid: 0, execfn: '/var/ossec/bin/wazuh-logcollector', platform: 'x86_64'
+
+Apport service should be also started to capture coredumps
+
+.. code-block:: console
+
+    # systemd start apport.service
+
+`<dump-filename>` must be replaced by Apport crash file, that is the full path of the file where slashes (``/``) were replaced by underscores (``_``), plus an incremental counter.
+  For example, first ``wazuh-logcollector`` crash will create a report named `_var_ossec_bin_wazuh-logcollector.0.crash`
 
 To know more about Apport see `Apport Wiki <https://wiki.ubuntu.com/Apport>`_.
 
@@ -277,8 +303,19 @@ Several distributions use the simpler and direct mechanism: create the dump on c
 .. code-block:: console
 
     # cat /proc/sys/kernel/core_pattern
+
+.. code-block:: none
+    :class: output
+
     /tmp/core.%p
+
+.. code-block:: console
+
     # file /tmp/core.<pid>
+
+.. code-block:: none
+    :class: output
+
     CoreDump: ELF 64-bit LSB core file, x86-64, version 1 (SYSV), SVR4-style, from '/var/ossec/bin/wazuh-logcollector', real uid: 0, effective uid: 0, real gid: 0, effective gid: 0, execfn: '/var/ossec/bin/wazuh-logcollector', platform: 'x86_64'
 
 
@@ -288,15 +325,26 @@ Wazuh core dump configuration
 Linux kernel limit the core dump size by default, but need to be extended to obtain a full backtrace.
 Systemd allow us to extend Wazuh service configurations and set this up.
 
-.. code-block:: console
+.. tabs::
 
-    # mkdir -p /etc/systemd/system/wazuh-<installation>.service.d/
-    # cat > /etc/systemd/system/wazuh-<installation>.service.d/limit_core.conf << EOF
-    [Service]
-    LimitCore=infinity
-    EOF
-    # systemctl daemon-reload
-    # systemctl restart wazuh-<installation>
+  .. group-tab:: Agent
+
+    .. code-block:: console
+
+        # mkdir -p /etc/systemd/system/wazuh-agent.service.d/
+        # echo -e "[Service]\nLimitCore=infinity"  > /etc/systemd/system/wazuh-agent.service.d/limit_core.conf
+        # systemctl daemon-reload
+        # systemctl restart wazuh-agent
+
+  .. group-tab:: Manager
+
+    .. code-block:: console
+
+        # mkdir -p /etc/systemd/system/wazuh-manager.service.d/
+        # echo -e "[Service]\nLimitCore=infinity"  > /etc/systemd/system/wazuh-manager.service.d/limit_core.conf
+        # systemctl daemon-reload
+        # systemctl restart wazuh-manager
+
 
 Wazuh symbols installation
 --------------------------
@@ -305,29 +353,59 @@ Debug symbol files will allow the interpretation in a human-readeable way of cor
 
 .. tabs::
 
-  .. group-tab:: Yum
+  .. group-tab:: Agent
 
-    .. code-block:: console
+    .. tabs::
 
-      # yum install wazuh-<installation>-debuginfo
+      .. tab:: Yum
 
-  .. group-tab:: APT
+        .. code-block:: console
 
-    .. code-block:: console
+          # yum install wazuh-agent-debuginfo
 
-      # apt-get install wazuh-<installation>-dbg
+      .. tab:: APT
 
-  .. group-tab:: Zypper
+        .. code-block:: console
 
-    .. code-block:: console
+          # apt-get install wazuh-agent-dbg
 
-      # zypper install wazuh-<installation>-debuginfo
+      .. tab:: Zypper
 
-  .. group-tab:: Installation from sources
+        .. code-block:: console
 
-    Symbols files will be installed by default on ``<INSTALLDIR>/.symbols`` directory.
+          # zypper install wazuh-agent-debuginfo
 
-  .. group-tab:: WPK installation
+      .. tab:: Installation from sources
 
-    Symbols files are listed :ref:`here<wpk-list>`.
+        Symbols files will be installed by default on ``<INSTALLDIR>/.symbols`` directory.
 
+      .. tab:: WPK installation
+
+        Symbols files are listed :ref:`here<wpk-list>`.
+
+  .. group-tab:: Manager
+
+    .. tabs::
+
+      .. tab:: Yum
+
+        .. code-block:: console
+
+          # yum install wazuh-manager-debuginfo
+
+      .. tab:: APT
+
+        .. code-block:: console
+
+          # apt-get install wazuh-manager-dbg
+
+      .. tab:: Zypper
+
+        .. code-block:: console
+
+          # zypper install wazuh-manager-debuginfo
+
+      .. tab:: Installation from sources
+
+        Symbols files will be installed by default on ``<INSTALLDIR>/.symbols`` directory.
+  
