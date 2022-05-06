@@ -93,11 +93,14 @@ This component receives the data flow streamed by a forwarder and stores it in a
       -  Administrator name
       -  Password
 
+Set up data forwarding
+^^^^^^^^^^^^^^^^^^^^^^
+
 .. tabs::
 
   .. group-tab:: Data forwarding with SSL
 
-      #. Edit /opt/splunk/etc/system/local/inputs.conf and add the block below:
+      #. Edit ``/opt/splunk/etc/system/local/inputs.conf`` and add the block below:
 
          .. code-block:: console
             
@@ -120,7 +123,7 @@ This component receives the data flow streamed by a forwarder and stores it in a
              # /opt/splunk/bin/splunk restart
 
 
-      #. Optional: If you additionally want the Splunk service to start at boot time, please execute the following command:	
+      #. **Optional**. If you additionally want the Splunk service to start at boot time, please execute the following command:	
 
          .. code-block:: console
 
@@ -156,7 +159,7 @@ This component receives the data flow streamed by a forwarder and stores it in a
           
             # /opt/splunk/bin/splunk restart
 
-      #. Optional. If you additionally want the Splunk service to start at boot time, please execute the following command:
+      #. **Optional**. If you additionally want the Splunk service to start at boot time, please execute the following command:
 
          .. code-block:: console
 
@@ -270,7 +273,7 @@ Set up data forwarding
                [tcpout-server://<INDEXER_IP>:9997]
 
             
-            - INDEXER_IP is the IP address of the Splunk indexer.
+         - ``INDEXER_IP`` is the IP address of the Splunk indexer.
 
       #. Start the Splunk forwarder service:
 
@@ -284,7 +287,7 @@ Set up data forwarding
 
             This command will make a Splunk forwarder General Terms appear that will have to be accepted, and then, will ask for a series of information such as:
             
-            - dministrator name
+            - Administrator name
             - Password
 
 
@@ -294,12 +297,12 @@ Set up data forwarding
 
          After installing the Splunk forwarder, incoming data should appear in the designated Indexer.
 
-      #.  Optional. If you want the Splunk forwarder service to start at boot time, please execute the following command:
+      #.  **Optional**. If you want the Splunk forwarder service to start at boot time, please execute the following command:
 
-         .. code-block:: console
-
-            # /opt/splunkforwarder/bin/splunk enable boot-start
-
+          .. code-block:: console
+ 
+             # /opt/splunkforwarder/bin/splunk enable boot-start
+ 
 
   .. group-tab:: Data forwarding without SSL
 
