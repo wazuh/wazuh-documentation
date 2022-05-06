@@ -270,7 +270,7 @@ Set up data forwarding
                [tcpout-server://<INDEXER_IP>:9997]
 
             
-            - INDEXER_IP is the IP address of the Splunk indexer.
+         - INDEXER_IP is the IP address of the Splunk indexer.
 
       #. Start the Splunk forwarder service:
 
@@ -352,6 +352,7 @@ Set up data forwarding
 
 
 Now that you’ve finished installing Splunk using the all-in-one architecture, you can proceed with the next step and :doc:`install the Wazuh app for Splunk <splunk-app>`.
+
 
 
 Additional links
