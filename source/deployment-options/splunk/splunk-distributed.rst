@@ -72,7 +72,6 @@ Ensure Splunk is already installed in ``/opt/splunk`` and start the service:
 
    After this step the Splunk Web service will be listening to port 8000. You can browse ``http://<your-instance-ip>:8000`` in order to access the Web GUI.
 
-
 Configuring the Splunk indexer instances
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -211,7 +210,6 @@ Creating the configuration files
 
       [tcpout]
       defaultGroup = cluster1_tcp
-
 
    Where:
    
