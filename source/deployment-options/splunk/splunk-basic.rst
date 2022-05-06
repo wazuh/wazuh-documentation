@@ -93,37 +93,78 @@ This component receives the data flow streamed by a forwarder and stores it in a
       -  Administrator name
       -  Password
 
-#. Open Splunk in your preferred browser.
+Set up data forwarding
+^^^^^^^^^^^^^^^^^^^^^^
 
-#. Navigate to Settings > Data > Forwarding and receiving.
+.. tabs::
 
-   .. thumbnail:: /images/splunk-app/1.png
-      :align: left
-      :width: 100%
+  .. group-tab:: Data forwarding with SSL
 
-#. Select “Configure receiving”
+      #. Edit ``/opt/splunk/etc/system/local/inputs.conf`` and add the block below:
 
-   .. thumbnail:: /images/splunk-app/2.png
-      :align: left
-      :width: 100%
+         .. code-block:: console
+            
+            [SSL]
+            serverCert = $SPLUNK_HOME/etc/auth/server.pem
+            sslPassword = password
 
-#. Add an unused port as a new receiving port and save it.
 
-   .. thumbnail:: /images/splunk-app/3.png
-      :align: left
-      :width: 100%
+         Where:
 
-#. Restart the Splunk service.
+         - ``serverCert`` is the path to the Splunk default server certificate. 
+         - ``$SPLUNK_HOME`` is the Splunk installation directory. The default directory is ``/opt/splunk``.
+         - ``sslPassword`` is the password of the certificate. The default is “password”.
 
-   .. code-block:: console
-    
-      # /opt/splunk/bin/splunk restart
 
-#. Optional. If you additionally want the Splunk service to start at boot time, please execute the following command:
+      #. Restart the Splunk service:
 
-   .. code-block:: console
+         .. code-block:: console
 
-      # /opt/splunk/bin/splunk enable boot-start
+             # /opt/splunk/bin/splunk restart
+
+
+      #. **Optional**. If you additionally want the Splunk service to start at boot time, please execute the following command:	
+
+         .. code-block:: console
+
+             # /opt/splunk/bin/splunk enable boot-start
+
+
+  .. group-tab:: Data forwarding without SSL
+
+
+      #. Open Splunk in your preferred browser.
+
+      #. Navigate to **Settings > Data > Forwarding and receiving**.
+
+         .. thumbnail:: /images/splunk-app/1.png
+            :align: left
+            :width: 100%
+
+      #. Select “Configure receiving”
+
+         .. thumbnail:: /images/splunk-app/2.png
+            :align: left
+            :width: 100%
+
+      #. Add an unused port as a new receiving port and save it.
+
+         .. thumbnail:: /images/splunk-app/3.png
+            :align: left
+            :width: 100%
+
+      #. Restart the Splunk service.
+
+         .. code-block:: console
+          
+            # /opt/splunk/bin/splunk restart
+
+      #. **Optional**. If you additionally want the Splunk service to start at boot time, please execute the following command:
+
+         .. code-block:: console
+
+            # /opt/splunk/bin/splunk enable boot-start
+
 
 .. _splunk_forwarder:
 
@@ -163,6 +204,7 @@ Depending on the type of architecture that you’re installing, the Splunk forwa
 
             # yum install splunkforwarder-package.rpm
 
+
       .. group-tab:: APT
 
          .. code-block:: console
@@ -201,56 +243,119 @@ Creating the configuration files
 
       # sed -i "s:MANAGER_HOSTNAME:$(hostname):g" /opt/splunkforwarder/etc/system/local/inputs.conf
 
-#. Start the Splunk forwarder:
-
-   .. code-block:: console
-
-      # /opt/splunkforwarder/bin/splunk start
-        
-   .. note::
-    
-      This command will make a Splunk forwarder General Terms appear that will have to be accepted, and then, will ask for a series of information such as:
-
-      -  Administrator name
-      -  Password
-    
-   .. warning::
-    
-      If you get an error message about the port ``8089`` already being in use, you will be prompted to  change it to use a different one.
 
 Set up data forwarding
 """"""""""""""""""""""
 
-#. Point the Splunk forwarder output to Wazuh Splunk indexer with the following command:
+.. tabs::
 
-   .. code-block:: console
+  .. group-tab:: Data forwarding with SSL
 
-      # /opt/splunkforwarder/bin/splunk add forward-server <INDEXER_IP>:<INDEXER_PORT>
-        
-   This command will prompt for the Splunk indexer username and password.
+      #. Create the file outputs.conf:
 
-      -  ``INDEXER_IP`` is the IP address of the Splunk Indexer.
-      -  ``INDEXER_PORT`` is the port of the Splunk indexer earlier configured in receiving. The default value is 9997.
+         .. code-block:: console
+            
+            # touch /opt/splunkforwarder/etc/system/local/outputs.conf
 
-#. Restart the Splunk Forwarder service:
+      #. Fill it with the content below:
 
-   .. code-block:: console
+         .. code-block:: console
+         
+               [tcpout]
+               defaultGroup = default-autolb-group
 
-      # /opt/splunkforwarder/bin/splunk restart
+               [tcpout:default-autolb-group]
+               server = <INDEXER_IP>:9997
+               clientCert = /opt/splunkforwarder/etc/auth/server.pem
+               sslRootCAPath = /opt/splunkforwarder/etc/auth/ca.pem
+               sslPassword = password
 
-   .. warning::
+               [tcpout-server://<INDEXER_IP>:9997]
 
-      If you get an error message about the port ``8089`` already being in use, you can change it to use a different one.
+            
+         - ``INDEXER_IP`` is the IP address of the Splunk indexer.
 
-   After installing the Splunk Forwarder, incoming data should appear in the designated Indexer.
+      #. Start the Splunk forwarder service:
 
-#. Optional. If you additionally want the Splunk forwarder service to start at boot time, please execute the following command:
+         .. code-block:: console
+         
+               # /opt/splunkforwarder/bin/splunk start
 
-   .. code-block:: console
 
-      # /opt/splunkforwarder/bin/splunk enable boot-start
+
+         .. note::
+
+            This command will make a Splunk forwarder General Terms appear that will have to be accepted, and then, will ask for a series of information such as:
+            
+            - Administrator name
+            - Password
+
+
+         .. Warning::
+      
+             If you get an error message about the port 8089 already being in use, you can change it to use a different one.
+
+         After installing the Splunk forwarder, incoming data should appear in the designated Indexer.
+
+      #.  **Optional**. If you want the Splunk forwarder service to start at boot time, please execute the following command:
+
+          .. code-block:: console
+ 
+             # /opt/splunkforwarder/bin/splunk enable boot-start
+ 
+
+  .. group-tab:: Data forwarding without SSL
+
+
+      #. Start the Splunk forwarder:
+
+            .. code-block:: console
+
+               # /opt/splunkforwarder/bin/splunk start
+               
+            .. note::
+            
+               This command will make a Splunk forwarder General Terms appear that will have to be accepted, and then, will ask for a series of information such as:
+
+               -  Administrator name
+               -  Password
+            
+            .. warning::
+            
+               If you get an error message about the port ``8089`` already being in use, you will be prompted to  change it to use a different one.
+
+      #. Point the Splunk forwarder output to Wazuh Splunk indexer with the following command:
+
+            .. code-block:: console
+
+               # /opt/splunkforwarder/bin/splunk add forward-server <INDEXER_IP>:<INDEXER_PORT>
+               
+            This command will prompt for the Splunk indexer username and password.
+
+               -  ``INDEXER_IP`` is the IP address of the Splunk Indexer.
+               -  ``INDEXER_PORT`` is the port of the Splunk indexer earlier configured in receiving. The default value is 9997.
+
+      #. Restart the Splunk Forwarder service:
+
+            .. code-block:: console
+
+               # /opt/splunkforwarder/bin/splunk restart
+
+            .. warning::
+
+               If you get an error message about the port ``8089`` already being in use, you can change it to use a different one.
+
+            After installing the Splunk Forwarder, incoming data should appear in the designated Indexer.
+
+      #. Optional. If you additionally want the Splunk forwarder service to start at boot time, please execute the following command:
+
+            .. code-block:: console
+
+               # /opt/splunkforwarder/bin/splunk enable boot-start
+
 
 Now that you’ve finished installing Splunk using the all-in-one architecture, you can proceed with the next step and :doc:`install the Wazuh app for Splunk <splunk-app>`.
+
 
 Additional links
 ----------------
