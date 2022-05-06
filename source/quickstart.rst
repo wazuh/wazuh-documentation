@@ -66,7 +66,7 @@ Installing Wazuh
         $ curl -sO https://packages.wazuh.com/|WAZUH_LATEST_MINOR|/wazuh-install.sh && sudo bash ./wazuh-install.sh -a
 
 
-    Once the assistant finishes the installation, the output shows the access credentials, where to find them, and a message that confirms that the installation was successful.
+    Once the assistant finishes the installation, the output shows the access credentials and a message that confirms that the installation was successful.
 
     .. code-block:: none
         :emphasize-lines: 4          
