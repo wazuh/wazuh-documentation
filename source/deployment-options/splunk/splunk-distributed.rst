@@ -60,7 +60,7 @@ Install and configure Splunk enterprise indexer instances
 
 Each instance can be configured on different hosts following the steps described below:
 
-#. Ensure Splunk is already installed in ``/opt/splunk`` and start the service:
+Ensure Splunk is already installed in ``/opt/splunk`` and start the service:
 
    .. code-block:: console
 
@@ -72,37 +72,6 @@ Each instance can be configured on different hosts following the steps described
 
    After this step the Splunk Web service will be listening to port 8000. You can browse ``http://<your-instance-ip>:8000`` in order to access the Web GUI.
 
-#. Open Splunk in your preferred browser.
-
-#. Navigate to Settings > Data > Forwarding and receiving.
-
-   .. thumbnail:: /images/splunk-cluster/9.png
-      :align: left
-      :width: 100%
-
-#. Select “Configure receiving”
-
-   .. thumbnail:: /images/splunk-cluster/10.png
-      :align: left
-      :width: 80%
-
-#. Add an unused port as a new receiving port and save it.
-
-   .. thumbnail:: /images/splunk-cluster/11.png
-      :align: left
-      :width: 80%
-
-#. Restart the Splunk service
-
-   .. code-block::
-      
-      # /opt/splunk/bin/splunk restart
-
-#. Optional. Additionally, if the Splunk service is required to start at boot time, execute the following command.
-
-   .. code-block:: console
-
-      # /opt/splunk/bin/splunk enable boot-start
 
 Configuring the Splunk indexer instances
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -121,8 +90,18 @@ In the **Splunk master instance**, users will make the configuration that will b
 
       [splunktcp://<INDEXER_PORT>]
       connection_host = ip
+      disabled = 0
+
+      [SSL]
+      serverCert = $SPLUNK_HOME/etc/auth/server.pem
+      sslPassword = password
+
 
    -  ``INDEXER_PORT`` is the receiving port of the Splunk indexer earlier configured in receiving.
+   -  ``serverCert`` is the path to the Splunk default server certificate.
+   -  ``$SPLUNK_HOME`` is the Splunk installation directory. The default directory is /opt/splunk.
+   -  ``sslPassword`` is the password of the certificate. The default password is “password”.
+
 
 #. To create and configure the indexes.conf file, execute the following command:
 
@@ -226,9 +205,13 @@ Creating the configuration files
 
       [tcpout:cluster1_tcp]
       indexerDiscovery = cluster1
+      clientCert = /opt/splunkforwarder/etc/auth/server.pem
+      sslRootCAPath = /opt/splunkforwarder/etc/auth/ca.pem
+      sslPassword = password
 
       [tcpout]
       defaultGroup = cluster1_tcp
+
 
    Where:
    
