@@ -62,15 +62,15 @@ Each instance can be configured on different hosts following the steps described
 
 Ensure Splunk is already installed in ``/opt/splunk`` and start the service:
 
-   .. code-block:: console
+.. code-block:: console
 
-      # /opt/splunk/bin/splunk start
+   # /opt/splunk/bin/splunk start
 
-   .. note::
+.. note::
 
-      You will be prompted for a username and password for the administrator user.
+   You will be prompted for a username and password for the administrator user.
 
-   After this step the Splunk Web service will be listening to port 8000. You can browse ``http://<your-instance-ip>:8000`` in order to access the Web GUI.
+After this step the Splunk Web service will be listening to port 8000. You can browse ``http://<your-instance-ip>:8000`` in order to access the Web GUI.
 
 Configuring the Splunk indexer instances
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

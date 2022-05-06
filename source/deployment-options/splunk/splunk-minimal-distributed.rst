@@ -343,7 +343,6 @@ Set up data forwarding
 
 Now that you’ve finished installing Splunk using the minimal Splunk distributed architecture, you can proceed with the next step and :doc:`install the Wazuh app for Splunk <splunk-app>`.
 
-
 Additional links
 ----------------
 
