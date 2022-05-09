@@ -38,6 +38,10 @@ Wazuh dashboard installation
 
     When you access the Wazuh dashboard for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser. For increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser instead. Alternatively, a certificate from a trusted authority can be configured. 
 
+.. note:: 
+
+   It is recommended to change the default Wazuh API passwords. See the :doc:`Securing the Wazuh API </user-manual/api/securing-api>` section.
+
 
 Next steps
 ----------
