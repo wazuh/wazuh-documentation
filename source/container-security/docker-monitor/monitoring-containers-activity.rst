@@ -18,7 +18,7 @@ Configuration
     In the following examples, the configuration is done in the *Docker host* that collects the events sent from the *Docker containers*. This may be either a server with a Wazuh Agent or Manager installed.
 
 
-In order to use the Docker listener module, you need to enable the ``wodle`` in the ``/var/ossec/etc/agent.conf`` file of the server running docker, or this can also be done through :doc:`Centralized Configuration <../user-manual/reference/centralized-configuration>`. This starts a new thread to listen to Docker events.
+In order to use the Docker listener module, you need to enable the ``wodle`` in the ``/var/ossec/etc/agent.conf`` file of the server running docker, or this can also be done through :doc:`Centralized Configuration </user-manual/reference/centralized-configuration>`. This starts a new thread to listen to Docker events.
 
 .. code-block:: xml
 
