@@ -87,20 +87,20 @@ To guarantee a correct operation of Wazuh, make sure to also migrate from Open D
     .. code-block:: yaml
       :emphasize-lines: 1,3
 
-          server.host: 0.0.0.0
-          server.port: 443
-          opensearch.hosts: https://localhost:9200
-          opensearch.ssl.verificationMode: certificate
-          #opensearch.username: 
-          #opensearch.password: 
-          opensearch.requestHeadersWhitelist: ["securitytenant","Authorization"]
-          opensearch_security.multitenancy.enabled: true
-          opensearch_security.readonly_mode.roles: ["kibana_read_only"]
-          server.ssl.enabled: true
-          server.ssl.key: "/etc/wazuh-dashboard/certs/wazuh-dashboard-key.pem"
-          server.ssl.certificate: "/etc/wazuh-dashboard/certs/wazuh-dashboard.pem"
-          opensearch.ssl.certificateAuthorities: ["/etc/wazuh-dashboard/certs/root-ca.pem"]
-          uiSettings.overrides.defaultRoute: /app/wazuh?security_tenant=global
+      server.host: 0.0.0.0
+      server.port: 443
+      opensearch.hosts: https://localhost:9200
+      opensearch.ssl.verificationMode: certificate
+      #opensearch.username:
+      #opensearch.password:
+      opensearch.requestHeadersWhitelist: ["securitytenant","Authorization"]
+      opensearch_security.multitenancy.enabled: false
+      opensearch_security.readonly_mode.roles: ["kibana_read_only"]
+      server.ssl.enabled: true
+      server.ssl.key: "/etc/wazuh-dashboard/certs/dashboard-key.pem"
+      server.ssl.certificate: "/etc/wazuh-dashboard/certs/dashboard.pem"
+      opensearch.ssl.certificateAuthorities: ["/etc/wazuh-dashboard/certs/root-ca.pem"]
+      uiSettings.overrides.defaultRoute: /app/wazuh
 
 #. Add the password of the ``kibanaserver`` user to the Wazuh dashboard keystore.  Execute the command below and follow the instructions. You may find your old password in the ``/etc/kibana/kibana.yml`` configuration file. 
 

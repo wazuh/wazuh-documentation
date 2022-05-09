@@ -66,7 +66,7 @@ Installing Wazuh
         $ curl -sO https://packages.wazuh.com/|WAZUH_LATEST_MINOR|/wazuh-install.sh && sudo bash ./wazuh-install.sh -a
 
 
-    Once the assistant finishes the installation, the output shows the access credentials, where to find them, and a message that confirms that the installation was successful.
+    Once the assistant finishes the installation, the output shows the access credentials and a message that confirms that the installation was successful.
 
     .. code-block:: none
         :emphasize-lines: 4          
@@ -85,10 +85,12 @@ Installing Wazuh
     -   Password: <ADMIN_PASSWORD>
 
 When you access the Wazuh dashboard for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. This is expected and the user has the option to accept the certificate as an exception or, alternatively, configure the system to use a certificate from a trusted authority.
- 
-.. note::
-  
-    If you want to uninstall the Wazuh central components, run the Wazuh installation assistant using the option ``-u`` or ``–-uninstall``.
+
+.. note:: 
+
+   It is recommended to change the default Wazuh API passwords. See the :doc:`Securing the Wazuh API </user-manual/api/securing-api>` section.
+
+If you want to uninstall the Wazuh central components, run the Wazuh installation assistant using the option ``-u`` or ``–-uninstall``.
 
 Next steps
 ----------

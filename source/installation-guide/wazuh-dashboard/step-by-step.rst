@@ -126,7 +126,7 @@ Starting the Wazuh dashboard service
     
 .. note::
 
-   It is highly recommended to change the default Wazuh indexer passwords. To perform this action, see the :doc:`/user-manual/securing-wazuh/wazuh-indexer` section.
+   It is highly recommended to change the default Wazuh passwords. To perform this action, see the :doc:`/user-manual/securing-wazuh/wazuh-indexer` and the :doc:`Securing the Wazuh API </user-manual/api/securing-api>` sections. 
 
 
 Next steps
