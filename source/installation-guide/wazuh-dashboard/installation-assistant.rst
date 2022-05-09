@@ -40,7 +40,7 @@ Wazuh dashboard installation
 
 .. note:: 
 
-   It is highly recommended to change the default Wazuh API passwords. See the :doc:`Securing the Wazuh API </user-manual/api/securing-api>` section.
+   It is recommended to change the default Wazuh API passwords. See the :doc:`Securing the Wazuh API </user-manual/api/securing-api>` section.
 
 
 Next steps
