@@ -10,7 +10,7 @@ FAQ
 #. `What happens when trying to use an invalid logtest token?`_
 #. `In a Wazuh Cluster, where are the logs processed?`_
 #. `What events are recognized by the Wazuh-Logtest solution?`_
-#. `How is the behavior of the firedtimes counter?`_
+#. `What is the behavior of the firedtimes counter?`_
 
 What happens when trying to start a new session if the maximum session limit has already been reached?
 ------------------------------------------------------------------------------------------------------
@@ -18,7 +18,7 @@ If reached the maximum number of sessions and initialized a new session, then th
 
 What happens when trying to use an invalid logtest token?
 ---------------------------------------------------------
-Logtest will detect when the token is not valid, process the log and return the result along with identify of the new session.
+Logtest will detect when the token is not valid, process the log, and return the result identifying the new session.
 
 When is a session closed?
 -------------------------
@@ -33,9 +33,9 @@ The master node processes the request.
 
 What events are recognized by the Wazuh-Logtest solution?
 ---------------------------------------------------------
-Currently Wazuh-Logtest solution check rules and decoders with syslog and json event format.
+Currently Wazuh-Logtest solution check rules and decoders with syslog and JSON event format.
 
-How is the behavior of the firedtimes counter?
-----------------------------------------------
+What is the behavior of the firedtimes counter?
+-----------------------------------------------
 The `firedtimes` counter is used to determine if the rule reached the required frequency to generate the alert.
 Unlike :ref:`wazuh-analysisd <wazuh-analysisd>`, the counter is not reset every hour, it stays throughout the session.

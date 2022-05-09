@@ -18,7 +18,7 @@ Configuration
 
 
 Basic usage
-------------------------------------------------------------------
+-----------
 
 To configure the options for OpenSCAP go to :ref:`agent.conf <reference_client_conf>`, or for more details about specific options, see the :ref:`OpenSCAP section <wodle_openscap>`.
 
@@ -40,7 +40,7 @@ Evaluate PCI-DSS compliance on RHEL7
 ------------------------------------
 This section describes how to evaluate the Payment Card Industry Data Security Standard (PCI-DSS) compliance on Red Hat Enterprise Linux 7 agents.
 
-**Step 1: Configure agents**
+**Step 1: Configure the agents**
 
 Each agent must be properly identified in order to know which policy and profile to execute. To do this, configure ``<config-profile>`` with the desired identifier.
 
@@ -87,7 +87,7 @@ When the agents receive this configuration, they will restart to apply the chang
 
 **Step 3: See alerts**
 
-When the evaluation is complete you will see the results as OSSEC alerts:
+When the evaluation is complete, you will see the results as OSSEC alerts:
 
 ``/var/ossec/logs/alerts/alerts.log``
 
@@ -107,28 +107,30 @@ When the evaluation is complete you will see the results as OSSEC alerts:
   Rule: 81542 (level 4) -> 'OpenSCAP Report overview: Score less than 80'
   oscap: msg: "report-overview", id: "47T7_Qd08gm4y8TSoD53", policy: "ssg-rhel7-ds.xml", profile: "xccdf_org.ssgproject.content_profile_pci-dss", score: "56.835060" / "100.000000", severity of failed rules: "high": "1", "medium": "9", "low": "34", "n/a": "0".
 
-``Kibana``
+``Wazuh dashboard``
 
 Note that each field is extracted to facilitate searches and analysis.
 
 .. thumbnail:: ../../../../images/wodles-oscap/pci-oscap.png
+    :title: PCI OpenSCAP
     :align: center
     :width: 100%
 
 **Step 4: Dashboards**
 
-Finally, you can explore all results using the OpenSCAP dashboards for Kibana.
+Finally, you can explore all results using the OpenSCAP module.
 
 .. thumbnail:: ../../../../images/wodles-oscap/pci-dashboard.png
+    :title: OpenSCAP module
     :align: center
     :width: 100%
 
 
 Auditing Security Vulnerabilities of Red Hat Products
 -----------------------------------------------------
-The Red Hat Security Response Team provides OVAL definitions for all vulnerabilities (identified by CVE name) that affect Red Hat Enterprise Linux 3, 4, 5, 6 and 7. This enables users to perform a vulnerability scan and diagnose whether a system is vulnerable or not.
+The Red Hat Security Response Team provides OVAL definitions for all vulnerabilities (identified by CVE name) that affect Red Hat Enterprise Linux 3, 4, 5, 6, and 7. This enables users to perform a vulnerability scan and diagnose whether a system is vulnerable or not.
 
-**Step 1: Configure agents**
+**Step 1: Configure the agents**
 
 Each agent must be properly identified in order to know which policy and profile to execute. To do this, configure ``<config-profile>`` with the desired identifier.
 
@@ -153,9 +155,9 @@ After this, restart the agents to apply the configuration.
 
 If you prefer, you can restart a specific agent with option ``-u <id>``.
 
-**Step 2: Configure manager**
+**Step 2: Configure the manager**
 
-We want to execute the RedHat security policy only on Red Hat 7 agents.
+We only want to execute the RedHat security policy on Red Hat 7 agents.
 
 To do this, modify the ``/var/ossec/etc/shared/default/shared.conf`` file in the manager (assuming that the agent is on the ``default`` group):
 
@@ -173,7 +175,7 @@ When the agents receive this configuration, they will restart to apply the chang
 
 **Step 3: See alerts**
 
-When the evaluation is completed you will see the results as OSSEC alerts:
+When the evaluation is completed, you will see the results as OSSEC alerts:
 
 ``/var/ossec/logs/alerts/alerts.log``
 
@@ -197,29 +199,32 @@ When the evaluation is completed you will see the results as OSSEC alerts:
   oscap: msg: "report-overview", id: "I0iLEGFi4iTkxjnL9LWQ", policy: "com.redhat.rhsa-RHEL7.ds.xml", profile: "no-profiles", score: "92.617447" / "100.000000", severity of failed rules: "high": "8", "medium": "14", "low": "0", "n/a": "0".
 
 
-``Kibana``
+``Wazuh dashboard``
 
 Note that each field is extracted to facilitate searches and analysis.
 
-.. thumbnail:: ../../../../images/wodles-oscap/oscap_example.png
+.. thumbnail:: ../../../../images/wodles-oscap/oscap-example.png
+    :title: OpenSCAP example
     :align: center
     :width: 100%
 
-.. thumbnail:: ../../../../images/wodles-oscap/overview.png
+.. thumbnail:: ../../../../images/wodles-oscap/oscap-overview.png
+    :title: OpenSCAP overview
     :align: center
     :width: 100%
 
 
 **Step 4: Dashboards**
 
-Finally, you can explore all scan results using the OpenSCAP dashboards for Kibana.
+Finally, you can explore all scan results using the OpenSCAP module.
 
-.. thumbnail:: ../../../../images/wodles-oscap/dashboard.png
+.. thumbnail:: ../../../../images/wodles-oscap/oscap-dashboard.png
+    :title: OpenSCAP dashboard
     :align: center
     :width: 100%
 
 Overwriting the timeout
-------------------------------------------------------------------
+-----------------------
 
 It is possible to overwrite the timeout for a specific evaluation:
 
@@ -238,7 +243,8 @@ It is possible to overwrite the timeout for a specific evaluation:
     </wodle>
 
 Using profiles
-------------------------------------------------------------------
+--------------
+
 We can limit the evaluation to only specific profiles of a policy:
 
 ..  code-block:: xml
@@ -255,7 +261,7 @@ We can limit the evaluation to only specific profiles of a policy:
     </wodle>
 
 Using CPE dictionary
-------------------------------------------------------------------
+--------------------
 
 You can also optionally specify the CPE dictionary file, which is used to determine which checks are relevant to specific platforms.
 
@@ -272,7 +278,8 @@ You can also optionally specify the CPE dictionary file, which is used to determ
     </wodle>
 
 Using IDs
-------------------------------------------------------------------
+---------
+
 You can select a specific ID of the datastream file:
 
 ..  code-block:: xml

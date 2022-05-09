@@ -54,7 +54,7 @@ Every time the collector starts, it searches for sessions that have been idle lo
 The following illustration shows how the collector runs on T0, T1, T2 ... At the moment the session generates its
 last request, between T0 and T1, its timeout is between T1 and T2, then on T2 the collector closes the session.
 
-.. thumbnail:: ../images/manual/wazuh-logtest/logtest_session_collector.png
+.. thumbnail:: ../images/manual/wazuh-logtest/logtest-session-collector.png
   :title: Idle session collector
   :align: center
   :width: 100%

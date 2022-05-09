@@ -17,7 +17,7 @@ A *custom active response* is a personalized script configured to be executed wh
 Stateless active responses
 --------------------------
 
-Stateless active responses have the simplest configuration of both types of ARs and are configured as one-time actions without an event to revert the original effect. The process entails passing the full alert to the AR via ``STDIN`` within a JSON object and each AR is responsible for extracting the information necessary for its execution.
+Stateless active responses have the simplest configuration of both types of ARs and are configured as one-time actions without an event to revert the original effect. The process entails passing the full alert to the AR via ``STDIN`` within a JSON object, and each AR is responsible for extracting the information necessary for its execution.
 
 The JSON message format is as follows:
 
@@ -108,7 +108,7 @@ This is an example of the message with the full alert that is passed to the ``fi
 Stateful active responses
 -------------------------
 
-A stateful AR undoes its original action after the period of time specified in the active response. That is to say, the stateful AR performs the basic actions of a stateless AR to later undo the process based on the command configuration. As part of the timeout behavior, when the received command is ``add``, the AR must execute this operation.
+A stateful AR undoes its original action after the period of time specified in the active response. In other words, the stateful AR performs the basic actions of a stateless AR to later undo the process based on the command configuration. As part of the timeout behavior, when the received command is ``add``, the AR must execute this operation.
 
 - Read ``STDIN`` to get the alert.
 
@@ -148,7 +148,7 @@ The control message format is as follows:
         }
     }
 
-The response message is a follows:
+The response message is as follows:
 
 .. code-block:: json
 
@@ -164,26 +164,26 @@ The response message is a follows:
 
 .. warning::
 
-    When the ``STDIN`` reading occurs, it must be read up to the newline character (``\n``). In the same way, when writing to ``STDOUT``, the newline character must be added at the end, otherwise, a deadlock may occur.
+    When the ``STDIN`` reading occurs, it must be read up to the newline character (``\n``). In the same way, when writing to ``STDOUT``, the newline character must be added at the end. Otherwise, a deadlock may occur.
 
 Customizing the behavior of an AR Python script
 -----------------------------------------------
 
-This section provides an example AR Python script which can be used as a template to develop your own custom AR.
+This section provides an example AR Python script, which can be used as a template to develop your own custom AR.
 
-It is possible to customize the behavior of the script by modifying 3 sections:
+It is possible to customize the behavior of the script by modifying three sections:
 
 - **Start/end custom key**: Select the necessary parameters to use from the alert. For example, select ``srcip`` to block the IP address or ``processname`` to stop the process.
 
 - **Start/end custom action Add**: Execute the main action. For example, call the system function: ``pkill <processname>``.
 
-- **Start/end custom action Delete**: Execute the secondary action, which is usually a recovery section after a time period. For example, wait a period of time to unblock an IP address after the main action blocked it.
+- **Start/end custom action Delete**: Execute the secondary action, which is usually a recovery section after a time period. For example, wait a period of time to unblock an IP address after the main action has blocked it.
 
 
 Stateless AR configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Stateless ARs, as one-time actions, require the following settings to be configured.
+Stateless ARs, as one-time actions, requires the following settings to be configured.
 
 - Set custom key
 
@@ -433,9 +433,9 @@ Following this alternative, you use the PyInstaller tool to convert the Python s
 
 #. Go to ``C:\Program Files (x86)\ossec-agent\active-response\bin\`` and run the following command to create the .exe.
 
-    .. code-block:: bash
+    .. code-block:: doscon
 
-        pyinstaller -F custom-ar.py
+        > pyinstaller -F custom-ar.py
 
 #. Move the ``custom-ar.exe`` file to ``C:\Program Files (x86)\ossec-agent\active-response\bin\``.
 
@@ -458,7 +458,7 @@ In this case, the AR script calls ``launcher.cmd`` which works as a bridge calli
 
 #. Create a ``launcher.cmd`` file into ``C:\Program Files (x86)\ossec-agent\active-response\bin\`` with the following content:
 
-    .. code-block:: console
+    .. code-block:: batch
 
         @echo off
 

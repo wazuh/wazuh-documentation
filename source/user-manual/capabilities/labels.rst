@@ -8,7 +8,7 @@
 Agent labels
 ============
 
-This feature allows the user to customize the alert information from agents to include specific information related to the agent generating the alert.  This can prove useful when addressing or reviewing alerts. In addition, in large environments this capability can be used to identify groups of agents by any common characteristic like their time zone, for example.
+This feature allows the user to customize the alert information from agents to include specific information related to the agent generating the alert.  This can prove useful when addressing or reviewing alerts. In addition, in large environments, this capability can be used to identify groups of agents by any common characteristic like their time zone, for example.
 
 - `How it works`_
 - `Use case`_
@@ -22,7 +22,7 @@ Information on how to configure labels can be found in the :doc:`Labels section 
 
 Agent labels can also be centralized using the ``shared.conf`` file, such labels can be set for specific agents at the manager level. When there is pre-existing label that is the same as one the user has defined in ``agent.conf`` or ``shared.conf``, the second one will override the first.
 
-For more information about on how to centralize agent configuration, see the :doc:`Centralized configuration <../reference/centralized-configuration>` section.
+For more information about centralizing agent configuration, see the :doc:`Centralized configuration <../reference/centralized-configuration>` section.
 
 Addition configuration information is available in the :doc:`Internal configuration <../reference/internal-options>` section. This includes information on ``analysisd.label_cache_maxage`` and ``analysisd.show_hidden_labels``.
 

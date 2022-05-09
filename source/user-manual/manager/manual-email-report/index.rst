@@ -123,7 +123,7 @@ This is configured as follows:
 
 This will send an email to ``you@example.com`` when the rules trigger on the ``server1``.
 
-The ``event_location`` field can be configured to monitor a specific log, hostname or network (IP).
+The ``event_location`` field can be configured to monitor a specific log, hostname, or network (IP).
 
 Email based on rules ID
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -188,7 +188,7 @@ This configuration will send:
 Force forwarding an alert by email
 ----------------------------------
 
-It's also possible to force an email alert on rule declaration that is below the configured minimum level. In order to do so, you need to use one of the below :ref:`options<rules_options>`.
+It’s also possible to force an email alert on a rule declaration below the configured minimum level. To do so, you need to use one of the below :ref:`options<rules_options>`.
 
 The possible values for this option are:
 

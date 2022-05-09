@@ -6,10 +6,10 @@
 .. _ruleset_dynamic-fields:
 
 Dynamic fields
-===============
+==============
 
 Traditional decoders
----------------------
+--------------------
 
 An important step for the detection and processing of threats is the extraction of information from each event received.  Wazuh uses decoders to identify event types and then extract the most relevant fields, thus enriching events and allowing them to be more deeply analyzed and indexed.
 

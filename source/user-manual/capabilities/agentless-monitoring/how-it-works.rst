@@ -27,7 +27,7 @@ Public key authentication can be used with the following command:
 
 .. code-block:: console
 
-  # sudo -u ossec ssh-keygen
+  # sudo -u wazuh ssh-keygen
 
 Once created, the public key must be copied into the remote device.
 

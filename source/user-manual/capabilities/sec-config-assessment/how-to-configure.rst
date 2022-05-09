@@ -3,11 +3,11 @@ How to configure SCA
 
 .. meta::
     :description: Check out this section of our documentation to learn more about how to configure Security Configuration Assessment in Wazuh.
-    
+
 .. contents:: Table of Contents
    :depth: 10
 
-Upon installation, agents will include the policies appropriates for their particular Operating System.
+Upon installation, agents will include the appropriate policies for their particular Operating System.
 For the full list of **Officially supported policy files** see table :ref:`available_sca_policies`.
 These policies are included with the Wazuh Manager installation so that they can be easily enabled.
 
@@ -25,7 +25,7 @@ ruleset folder:
 
 .. warning::
     The contents of the aforementioned **default ruleset folders are neither kept across installations nor updates**.
-    If you wish to modify or add new policies, place then under an alternative folder.
+    If you wish to modify or add new policies, place them under an alternative folder.
 
 To enable a policy file that's outside the Wazuh installation folder, add a line like
 
@@ -41,7 +41,7 @@ You can also specify a relative path to the Wazuh installation directory.
 
 There are two ways to disable policies, the simplest one is to rename the policy file by adding ``.disabled``
 (or anything different from `.yaml` or `.yml`) after their YAML extension. The second is to disable them from
-the `agent.conf` by adding a line such as
+the `agent.conf` by adding a line such as the following:
 
 .. code-block:: xml
 
@@ -58,16 +58,16 @@ the Wazuh manager has the ability to push files and configurations to connected 
 This feature can be used to push policy files to the Wazuh agents in defined groups. By default, every Wazuh agent belongs
 to the ``default`` group, which is used here as an example:
 
-#. Edit the Wazuh agent’s ``local_internal_options.conf`` file to allow the execution of commands in SCA policies sent from the Wazuh manager:
+#. Edit the Wazuh agent ``local_internal_options.conf`` file to allow the execution of commands in SCA policies sent from the Wazuh manager:
 
      .. code-block:: console
 
         # echo "sca.remote_commands=1" >> /var/ossec/etc/local_internal_options.conf
 
-#. Place a new policy file in the Wazuh manager's ``/var/ossec/etc/shared/default`` folder. This file must be owned by the user ``wazuh``.
+#. Place a new policy file in the Wazuh manager ``/var/ossec/etc/shared/default`` folder. This file must be owned by the user ``wazuh``.
 
 
-#. Add the configuration block to the Wazuh manager's ``etc/shared/default/shared.conf`` file to push the new policy file to the Wazuh agent:
+#. Add the configuration block to the Wazuh manager ``etc/shared/default/shared.conf`` file to push the new policy file to the Wazuh agent:
 
      .. code-block:: xml
 
@@ -87,7 +87,7 @@ The ``<sca>`` block will be merged with the ``<sca>`` block on the Wazuh agent s
     :name: available_sca_policies
 
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | Policy                      | Name                                                       | Target OS                     |
+    | Policy                      | Name                                                       | Target                        |
     +=============================+============================================================+===============================+
     | cis_win2012r2               |  CIS Benchmark for Windows 2012 R2                         | Windows Server 2012 R2        |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
@@ -105,35 +105,57 @@ The ``<sca>`` block will be merged with the ``<sca>`` block on the Wazuh agent s
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_centos8_linux           |  CIS Benchmark for CentOS 8                                | CentOS 8                      |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_rhel5_linux             |  CIS Benchmark for Red Hat Enterprise Linux 5              | Red Hat Systems               |
+    | cis_rhel5_linux             |  CIS Benchmark for Red Hat Enterprise Linux 5              | Red Hat Enterprise Linux 5    |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_rhel6_linux             |  CIS Benchmark for Red Hat Enterprise Linux 6              | Red Hat Systems               |
+    | cis_rhel6_linux             |  CIS Benchmark for Red Hat Enterprise Linux 6              | Red Hat Enterprise Linux 6    |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_rhel7_linux             |  CIS Benchmark for Red Hat Enterprise Linux 7              | Red Hat Systems               |
+    | cis_rhel7_linux             |  CIS Benchmark for Red Hat Enterprise Linux 7              | Red Hat Enterprise Linux 7    |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_rhel8_linux             |  CIS Benchmark for Red Hat Enterprise Linux 8              | Red Hat Systems               |
+    | cis_rhel8_linux             |  CIS Benchmark for Red Hat Enterprise Linux 8              | Red Hat Enterprise Linux 8    |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_debian7                 |  CIS Benchmark for Debian/Linux 7                          | Debian 7 / Ubuntu 12          |
+    | cis_debian7                 |  CIS Benchmark for Debian/Linux 7                          | Debian 7                      |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_debian8                 |  CIS Benchmark for Debian/Linux 8                          | Debian 8 / Ubuntu 14          |
+    | cis_debian8                 |  CIS Benchmark for Debian/Linux 8                          | Debian 8                      |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_debian9                 |  CIS Benchmark for Debian/Linux 9                          | Debian 9 / Ubuntu 16          |
+    | cis_debian9                 |  CIS Benchmark for Debian/Linux 9                          | Debian 9                      |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_debian10                |  CIS Benchmark for Debian/Linux 10                         | Debian 10 / Ubuntu 18         |
+    | cis_debian10                |  CIS Benchmark for Debian/Linux 10                         | Debian 10                     |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_ubuntu14-04             |  CIS Checks for Ubuntu Linux 14.04 LTS                     | Ubuntu 14.04                  |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_ubuntu16-04             |  CIS Checks for Ubuntu Linux 16.04 LTS                     | Ubuntu 16.04                  |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_ubuntu18-04             |  CIS Checks for Ubuntu Linux 18.04 LTS                     | Ubuntu 18.04                  |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_ubuntu20-04             |  CIS Checks for Ubuntu Linux 20.04 LTS                     | Ubuntu 20.04                  |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_sles11_linux            |  CIS SUSE Linux Enterprise 11 Benchmark                    | SUSE 11                       |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_sles12_linux            |  CIS SUSE Linux Enterprise 12 Benchmark                    | SUSE 12                       |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_sles15_linux            |  CIS Checks for SUSE SLES 15                               | SUSE 15                       |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_amazon_linux_1          |  CIS Checks for Amazon Linux 1                             | Amazon Linux 1                |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_amazon_linux_2          |  CIS Checks for Amazon Linux 2                             | Amazon Linux 2                |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_solaris11               |  CIS Benchmark for Oracle Solaris 11                       | Solaris 11                    |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_solaris11.4             |  CIS Checks for Oracle Solaris 11.4                        | Solaris 11.4                  |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | sca_unix_audit              |  Benchmark for Linux auditing                              | Unix based OS                 |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_apple_macOS_10.11       |  CIS Apple macOS 10.11 Benchmark                           | OS X 10.11 (El Capitan)       |
+    | cis_apple_macOS_10.11       |  CIS Apple macOS 10.11 Benchmark                           | macOS 10.11 (El Capitan)      |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_apple_macOS_10.12       |  CIS Apple macOS 10.12 Benchmark                           | macOS 10.12 (Sierra)          |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_apple_macOS_10.13       |  CIS Apple macOS 10.13 Benchmark                           | macOS 10.13 (High Sierra)     |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_apple_macOS_10.14       |  CIS Checks for macOS 10.14                                | macOS 10.14 (Mojave)          |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_apple_macOS_10.15       |  CIS Checks for macOS 10.15                                | macOS 10.15 (Catalina)        |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_apple_macOS_11.1        |  CIS Checks for macOS 11.x                                 | macOS 11.x (Big Sur)          |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | web_vulnerabilities         |  System audit for web-related vulnerabilities              | N/A                           |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
@@ -147,7 +169,19 @@ The ``<sca>`` block will be merged with the ``<sca>`` block on the Wazuh agent s
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_sqlserver2014           |  CIS Microsoft SQL Server 2014                             | Microsoft SQL Server 2014     |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_sqlserver_2016          |  CIS Microsoft SQL Server 2016                             | Microsoft SQL Server 2016     |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_sqlserver2017           |  CIS Microsoft SQL Server 2017                             | Microsoft SQL Server 2017     |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_sqlserver2019           |  CIS Microsoft SQL Server 2019                             | Microsoft SQL Server 2019     |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_iis_10                  |  CIS Checks for Microsoft IIS 10                           | Microsoft IIS 10              |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_mongodb_36              |  CIS Checks for MongoDB                                    | MongoDB 3.6                   |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_nginx_1                 |  CIS Benchmark for NGINX                                   | NGINX 1.14.0                  |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_oracle_database_19c     |  CIS Checks for Oracle Database 19c                        | Oracle Database 19c           |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_postgre-sql-13          |  CIS Checks for PostgreSQL 13                              | PostgreSQL 13                 |
     +-----------------------------+------------------------------------------------------------+-------------------------------+

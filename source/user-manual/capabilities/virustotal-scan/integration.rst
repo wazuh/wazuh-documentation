@@ -10,9 +10,9 @@ How it works
 
 This integration utilizes the VirusTotal API to detect malicious content within the files monitored by **File Integrity Monitoring**. This integration functions as described below:
 
-1. FIM looks for any file addition, change or deletion on the monitored folders. This module stores the hash of this files and triggers alerts when any changes are made.
+1. FIM looks for any file addition, change, or deletion on the monitored folders. This module stores the hash of these files and triggers alerts when any changes are made.
 
-2. When the VirusTotal integration is enabled, it is triggered when a FIM alert occurs. From this alert, the module extracts the hash field of the file.
+2. When the VirusTotal integration is enabled, it is triggered when an FIM alert occurs. From this alert, the module extracts the hash field of the file.
 
 3. The module then makes an HTTP POST request to the VirusTotal database using the VirusTotal API for comparison between the extracted hash and the information contained in the database.
 
@@ -99,7 +99,7 @@ After restarting, FIM will apply the new configuration and the specified folder 
 From this alert, the integrator daemon extracts the hash fields, sending the request to VirusTotal for comparison.
 
 .. note::
-  Find more information about how to use **File Integrity Monitoring** for normal or real-time directory scans on :ref:`its manual <manual_file_integrity>`.
+  Find more information about how to use **File Integrity Monitoring** for normal or real-time directory scans in :ref:`its manual <manual_file_integrity>`.
 
 VirusTotal integration alerts
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

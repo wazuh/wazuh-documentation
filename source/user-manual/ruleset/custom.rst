@@ -123,7 +123,7 @@ You can also modify the standard decoders.
 .. warning::
     Changes in any decoder file in the ``/var/ossec/ruleset/decoders`` folder will be lost in the update process. Use the following procedure to preserve your changes.
 
-Unfortunately, there is no facility for overwriting decoders in the way described for rules above. However, we can perform changes in any decoder file as follows:
+Unfortunately, there is no facility for overwriting decoders in the way described in the rules above. However, we can perform changes in any decoder file as follows:
 
 If we want to change something in the decoder file ``0310-ssh_decoders.xml``, we will do the following:
 
@@ -150,4 +150,4 @@ If we want to change something in the decoder file ``0310-ssh_decoders.xml``, we
 3. Perform the changes in the file ``/var/ossec/etc/decoders/0310-ssh_decoders.xml``.
 
     .. warning::
-        Note that at this point, if updates to the public Wazuh Ruleset include changes to 0310-ssh_decoders.xml, they will not apply to you since you are no longer loading that decoder file from the standard location that gets updates.  At some point you may have to manually migrate your customized material from 0310-ssh_decoders.xml to a newer copy of that file.  Consider internally documenting your changes in 0310-ssh_decoders.xml so that they are easy to find if they have to be migrated later.
+        Note that at this point, if updates to the public Wazuh Ruleset include changes to 0310-ssh_decoders.xml, they will not apply to you since you are no longer loading that decoder file from the standard location that gets updates.  At some point, you may have to manually migrate your customized material from 0310-ssh_decoders.xml to a newer copy of that file.  Consider internally documenting your changes in 0310-ssh_decoders.xml so that they are easy to find if they have to be migrated later.

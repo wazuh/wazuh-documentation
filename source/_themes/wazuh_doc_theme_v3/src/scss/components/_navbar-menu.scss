@@ -12,6 +12,10 @@
     &:hover,
     &:focus {
       text-decoration: none;
+      outline: none;
+    }
+    a:focus-visible {
+      text-decoration: underline;
     }
     &:active {
       font-weight: 400;
@@ -67,7 +71,7 @@
 
 /* Light theme -------------------------------------------------------------- */
 
-body {
+.light-theme {
   .navbar-nav {
     background-color: $light-color-base-space;
     .nav-link {

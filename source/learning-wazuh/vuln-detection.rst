@@ -1,8 +1,8 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about how to perform the offline update of the Wazuh Vulnerability Detector in this section of our documentation. 
-  
+  :description: Learn more about how to perform the offline update of the Wazuh Vulnerability Detector in this section of our documentation.
+
 .. _learning_wazuh_vuln_detection:
 
 Track down vulnerable applications
@@ -24,7 +24,7 @@ In this lab, we will see how ``syscollector`` is configured by default to run on
 the Wazuh Manager and on the agents. We will also configure ``vulnerability-detector``
 on the Wazuh Manager to periodically scan the collected inventory data for known
 vulnerable packages.
-We will observe relevant log messages and vulnerability alerts in Kibana including
+We will observe relevant log messages and vulnerability alerts in the Wazuh dashboard including
 a dashboard dedicated to this.  We will also interact with the Wazuh API to more
 deeply mine the inventory data, and even take a look at the databases where it is
 stored.
@@ -96,6 +96,7 @@ In the ``/var/ossec/etc/manager.conf`` file of the Wazuh manager, scroll down to
         <os>xenial</os>
         <os>bionic</os>
         <os>focal</os>
+        <os>jammy</os>
         <update_interval>1h</update_interval>
       </provider>
       <provider name="debian">
@@ -194,13 +195,13 @@ and try ``grep vulnerability-detector: /var/ossec/logs/wazuh.log`` on the manage
 
 
 
-See the alerts in Kibana
-------------------------
+See the alerts in the Wazuh dashboard
+-------------------------------------
 
-Search Kibana for ``vulnerability-detector``, selecting some of the more helpful
+Search the Wazuh dashboard for ``vulnerability-detector``, selecting some of the more helpful
 fields for viewing like below:
 
-.. thumbnail:: ../images/learning-wazuh/labs/vuln-found-list.png
+.. thumbnail:: ../images/learning-wazuh/labs/vulnerabilities-found-list.png
     :title: Found Vulnerabilities
     :align: center
     :width: 100%
@@ -208,7 +209,7 @@ fields for viewing like below:
 
 Expand one of the records to see all the information available:
 
-.. thumbnail:: ../images/learning-wazuh/labs/vuln-found.png
+.. thumbnail:: ../images/learning-wazuh/labs/vulnerability-found.png
     :title: Vulnerability event
     :align: center
     :width: 100%
@@ -216,7 +217,7 @@ Expand one of the records to see all the information available:
 
 Note all the available fields and remember that the different components of Wazuh
 may be configured to act differently depending on the fields of each alert, as
-well as the ability to create visualizations and filtering search results in Kibana.
+well as the ability to create visualizations and filtering search results in the Wazuh dashboard.
 
 .. note::
 
@@ -228,7 +229,7 @@ well as the ability to create visualizations and filtering search results in Kib
 Look deeper with the Wazuh API
 ------------------------------
 
-Up to now we have only seen the Wazuh API enable the Wazuh Kibana plugin to
+Up to now we have only seen the Wazuh API enable the Wazuh dashboard to
 interface directly with the Wazuh manager.  However, you can also access the
 Wazuh API directly from your own scripts or from the command line with curl.  This is
 especially helpful here to obtain environment-wide package information.
@@ -497,17 +498,17 @@ The ``sys_`` table are populated by ``syscollector``.
 
         ...
 
-Wazuh Kibana Plugin
--------------------
+Wazuh dashboard
+---------------
 
 While the Wazuh API and SQLite databases let you get at the nitty-gritty data,
 usually the most beautiful place to see your vulnerability detection results
-is in the Wazuh Kibana plugin itself.  Both in the **Overview** section as well as
+is in the Wazuh dashboard.  Both in the **Overview** section as well as
 when you have drilled down into a specific agent, you can open the **Vulnerabilities**
 tab to see a nice dashboard of this information:
 
 
-.. thumbnail:: ../images/learning-wazuh/labs/vuln-dash.png
+.. thumbnail:: ../images/learning-wazuh/labs/vulnerabilities-dashboard.png
     :title: Flood
     :align: left
     :width: 100%

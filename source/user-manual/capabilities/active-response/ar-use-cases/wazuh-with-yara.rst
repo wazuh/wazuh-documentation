@@ -6,7 +6,7 @@ How to integrate Wazuh with YARA
 ================================
 
 .. meta::
-  :description: Learn how to integrate Wazuh with YARA, a versatile Open Source pattern-matching tool aimed to detect malware samples based on rule descriptions.
+  :description: Learn how to integrate Wazuh with YARA, a versatile Open Source pattern-matching tool that aims to detect malware samples based on rule descriptions.
 
 Wazuh can integrate with YARA in different ways. YARA is a versatile Open Source pattern-matching tool aimed to detect malware samples based on rule descriptions, although it is not limited to that use case alone.
 
@@ -100,15 +100,15 @@ Create a decoder file, for example, ``/var/ossec/etc/decoders/yara_decoders.xml`
   </decoder>
 
 
-Similarly create a rule file, ``/var/ossec/etc/rules/yara_rules.xml``, with the following content:
+Similarly, create a rule file, ``/var/ossec/etc/rules/yara_rules.xml``, with the following content:
 
 .. code-block:: none
 
-  <!-- 
-   - YARA rules 
-   - Created by Wazuh, Inc. 
-   - Copyright (C) 2015-2022, Wazuh Inc. 
-   - This program is a free software; you can redistribute it and/or modify it under the terms of GPLv2. 
+  <!--
+   - YARA rules
+   - Created by Wazuh, Inc.
+   - Copyright (C) 2015-2022, Wazuh Inc.
+   - This program is a free software; you can redistribute it and/or modify it under the terms of GPLv2.
   -->
 
    <group name="yara,">
@@ -207,14 +207,13 @@ The script configured to run as part of the active response settings defined on 
 
   exit 1;
 
-
-.. note:: Make sure that you have `jq <https://stedolan.github.io/jq/>`_ installed, and that the ``yara.sh`` file ownership is ``root:ossec`` and the permissions are ``750``.
+.. note:: Make sure that you have `jq <https://stedolan.github.io/jq/>`_ installed, and that the ``yara.sh`` file ownership is ``root:wazuh``, and the permissions are ``750``.
 
 The script receives these paths:
 
 - The file path contained in the alert that triggered the active response in the ``parameters.alert.syscheck.path`` object.
 
-- ``-yara_path``. Path to the folder where the Yara executable is located; by default this is usually ``/usr/local/bin``.
+- ``-yara_path``. Path to the folder where the Yara executable is located. By default, this is usually ``/usr/local/bin``.
 
 - ``-yara_rules``. File path to the Yara rules file used for the scan.
 
@@ -258,7 +257,7 @@ You can read here a `thorough analysis of this malware <https://www.intezer.com/
 Deployment script
 ^^^^^^^^^^^^^^^^^
 
-It is typically a bash script that tries to download the malware itself by connecting to an SFTP server. This script even updates the malware if the host was already compromised.
+It is typically a bash script that tries to download the malware itself by connecting to an SFTP server. This script even updates the malware if the host is already compromised.
 
 The main IoCs to look for in this component are the IP addresses and files that it copies to the system:
 
@@ -433,7 +432,7 @@ The YARA rules above generate these alerts when executed through the Wazuh activ
   	"location": "/var/ossec/logs/active-responses.log"
   }
 
-You can also create custom dashboards in Kibana for this integration:
+You can also create custom dashboards in the Wazuh dashboard for this integration:
 
 .. thumbnail:: ../../../../images/manual/automatic-remediation/YARA-Wazuh-ui-dashboard.png
   :title: YARA dashboard

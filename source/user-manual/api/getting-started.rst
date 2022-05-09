@@ -3,7 +3,7 @@
 .. meta::
   :description: This guide provides the basic information needed to get started with the Wazuh API, including some practical use cases. 
   
-.. _api_getting_started:
+.. _api_getting-started:
 
 Getting started
 ===============
@@ -13,7 +13,7 @@ This guide provides the basic information needed to start using the Wazuh API.
 Starting and stopping the Wazuh API
 -----------------------------------
 
-The Wazuh API will be installed along the Wazuh manager by default. To control or check the **wazuh-api** use the **wazuh-manager** service with the ``systemctl`` or ``service`` command:
+The Wazuh API will be installed along with the Wazuh manager by default. To control or check the **wazuh-api**, use the **wazuh-manager** service with the ``systemctl`` or ``service`` command:
 
 **Systemd systems**
 
@@ -29,16 +29,16 @@ The Wazuh API will be installed along the Wazuh manager by default. To control o
 
 .. note::
     The -k parameter applied to API requests is used to avoid the server connection verification by using server certificates. If these are valid, this parameter can be removed.
-    To configure the certificates use the following guide :ref:`Securing API <securing_api>`.
+    To configure the certificates, use the following guide :ref:`Securing API <securing_api>`.
 
 .. _api_log_in:
 
 Logging into the Wazuh API
 --------------------------
 
-Wazuh API endpoints require authentication in order to be used. Therefore, all calls must include a JSON Web Token. JWT is an open standard (RFC 7519) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object. Follow the steps below to log in using :api-ref:`GET /security/user/authenticate <operation/api.controllers.security_controller.login_user>` and obtain a token in order to run any endpoint:
+Wazuh API endpoints requires authentication in order to be used. Therefore, all calls must include a JSON Web Token. JWT is an open standard (RFC 7519) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object. Follow the steps below to log in using :api-ref:`GET /security/user/authenticate <operation/api.controllers.security_controller.login_user>` and obtain a token in order to run any endpoint:
 
-#. Use the cURL command to log in, the Wazuh API will provide a JWT token upon success. Replace <user> and <password> with yours. By default, the user is ``wazuh`` and the password is ``wazuh``. If ``SSL`` (HTTPS) is enabled in the API and it is using the default **self-signed certificates**, it will be necessary to add the parameter ``-k``. Use the ``raw`` option to get the token in a plain text format. Querying the login endpoint with ``raw=true`` is recommended when using cURL commands as tokens could be long and difficult to handle otherwise. Exporting the token to an environment variable will ease the use of API requests after login.
+#. Use the cURL command to log in. The Wazuh API will provide a JWT token upon success. Replace <user> and <password> with yours. By default, the user is ``wazuh``, and the password is ``wazuh``. If ``SSL`` (HTTPS) is enabled in the API and it is using the default **self-signed certificates**, it will be necessary to add the parameter ``-k``. Use the ``raw`` option to get the token in a plain text format. Querying the login endpoint with ``raw=true`` is recommended when using cURL commands as tokens could be long and difficult to handle. Exporting the token to an environment variable will ease the use of API requests after login.
 
     Export the token to an environment variable to use it in authorization header of future API requests:
 
@@ -272,12 +272,12 @@ Here are some of the basic concepts related to making API requests and understan
     | ``http://localhost:55000/<ENDPOINT>``           | The API URL to use if you are running the command on the manager itself. It will be ``http`` or ``https`` depending on whether SSL is activated in the API or not. |
     | ``https://localhost:55000/<ENDPOINT>``          |                                                                                                                                                                    |
     +-------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | ``-H "Authorization: Bearer <YOUR_JWT_TOKEN>"`` | Include extra header in the request to specify JWT token.                                                                                                          |
+    | ``-H "Authorization: Bearer <YOUR_JWT_TOKEN>"`` | Include an extra header in the request to specify JWT token.                                                                                                       |
     +-------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     | ``-k``                                          | Suppress SSL certificate errors (only if you use the default self-signed certificates).                                                                            |
     +-------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-- All responses are in *JSON format* and most of them follow this structure:
+- All responses are in *JSON format*, and most of them follow this structure:
 
     +---------+----------------------+----------------------------------------------------------------------------------------------------------------+
     | Field   | Optional Sub-fields  | Description                                                                                                    |
@@ -786,7 +786,7 @@ Some information about the manager can be retrieved using the Wazuh API. Configu
     }
 
 
-You can even dump the manager's current configuration with the request below (response shortened for brevity):
+You can even dump the manager current configuration with the request below (response shortened for brevity):
 
 .. code-block:: console
 

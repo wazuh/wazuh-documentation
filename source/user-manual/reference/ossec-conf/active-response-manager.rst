@@ -35,7 +35,7 @@ Toggles the active-response capability on and off. Setting this option to ``yes`
 
 .. note::
 
-    This option is available on server, local, and agent installations.
+    This option is available on the server, local, and agent installations.
 
 +--------------------+------------+
 | **Default value**  | no         |
@@ -145,6 +145,21 @@ Specifies how long in seconds before the reverse command is executed.  When ``re
 +--------------------+-----------------------------+
 | **Allowed values** | A positive number (seconds) |
 +--------------------+-----------------------------+
+
+
+repeated_offenders
+^^^^^^^^^^^^^^^^^^
+
+Sets timeouts in minutes for repeat offenders. This is a comma-separated list of increasing timeouts that can contain a maximum of 5 entries.
+
++--------------------+-----------------------------+
+| **Default value**  | n/a                         |
++--------------------+-----------------------------+
+| **Allowed values** | A positive number (minutes) |
++--------------------+-----------------------------+
+
+.. warning::
+    This option must be configured directly in the **ossec.conf** file of the agent (currently not supported by agents running on Windows), even when using a manager/agent setup with a centralized configuration of other settings via **agent.conf**. Apart from that, it has to be defined in the upper ``<active-response>`` section found in the configuration file.
 
 Sample Configuration
 --------------------

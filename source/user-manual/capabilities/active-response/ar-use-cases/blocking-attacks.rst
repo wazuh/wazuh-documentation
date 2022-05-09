@@ -19,12 +19,12 @@ First of all, we need to know when to execute the response. We can use one of t
 - Rule group: The response will be executed on any event in the defined group.
 - Level: The response will be executed on any event with this level or higher.
 
-In this use case, we want to prevent ``SSH brute force attacks`` so when the rule ``5712 - SSHD brute force trying to get access to the system`` is triggered, it will execute the proper active response to block the IP address of the attacker.
+In this use case, we want to prevent ``SSH brute force attacks``, so when the rule ``5712 - SSHD brute force trying to get access to the system`` is triggered, it will execute the proper active response to block the IP address of the attacker.
 
 Defining the command
 --------------------
 
-We know when the active response will be executed, now we have to define what it will do. You can create your own script to block an IP, or any other action, but Wazuh comes with a set of common scripts used in active response. These scripts are in ``/var/ossec/active-response/bin/``. We are going to use the ``firewall-drop`` script that works with common Linux/Unix operating systems and it allows blocking of a malicious IP address using the local firewall.
+We know when the active response will be executed. Now, we have to define what it will do. You can create your own script to block an IP, or any other action, but Wazuh comes with a set of common scripts used in active response. These scripts are in ``/var/ossec/active-response/bin/``. We are going to use the ``firewall-drop`` script that works with common Linux/Unix operating systems and it allows blocking of a malicious IP address using the local firewall.
 
 Define the command in the ``manager.conf`` file of your Wazuh manager:
 
@@ -104,7 +104,7 @@ Now, we attempt to connect to the agent by SSH several times using an invalid us
 
 After 8 attempts, we can see in the manager how the rule is fired:
 
-.. thumbnail:: ../../../../images/manual/automatic-remediation/5712_sshd_brute_force.png
+.. thumbnail:: ../../../../images/manual/automatic-remediation/5712-sshd-brute-force.png
   :title: Rule 5712 - SSHD brute force trying to get access to the system
   :align: center
   :width: 100%
@@ -136,10 +136,10 @@ Every agent has a log file at ``/var/ossec/logs/active-responses.log`` where the
     </localfile>
   </ossec_config>
 
-When the active response is triggered we can see the corresponding alert:
+When the active response is triggered, we can see the corresponding alert: 
 
-.. thumbnail:: ../../../../images/manual/automatic-remediation/561_host_blocked_by_firewall_drop.png
-  :title: Rule 561 - host blocked by firewall drop
+.. thumbnail:: ../../../../images/manual/automatic-remediation/561-host-blocked-by-firewall-drop.png
+  :title: Rule 561 - host blocked by firewall drop 
   :align: center
   :width: 100%
 
@@ -171,6 +171,6 @@ We set up a blocking time of 30 minutes for our active response, but in case you
     <repeated_offenders>60,120,180</repeated_offenders>
   </active-response>
 
-The first time that the active response is triggered, it will block the IP address for 30 minutes, the second time for 60 minutes, the third time for 120 minutes, and finally the fourth time for 180 minutes.
+The first time that the active response is triggered, it will block the IP address for 30 minutes, the second time for 60 minutes, the third time for 120 minutes, and the fourth time for 180 minutes.
 
-Thanks to active response you can perform actions responding to several scenarios and restricting malicious activities and blocking attacks. Be aware any automated response has an implicit risk, so define your responses carefully.
+Thanks to active response, you can perform actions responding to several scenarios and restricting malicious activities, and blocking attacks. Be aware any automated response has an implicit risk, so define your responses carefully.

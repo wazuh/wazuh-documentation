@@ -18,7 +18,7 @@ Configure the cluster node by editing the following settings in the ``/var/ossec
     <disabled>no</disabled>
   </cluster>
 
-Parameters and descriptions:
+Parameters to be configured:
 
 +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |:ref:`name <cluster_name>`           | Name of the cluster.                                                                                                                                                                                                                                 |

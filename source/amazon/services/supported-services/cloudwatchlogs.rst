@@ -22,7 +22,7 @@ AWS CloudWatch Logs
 AWS configuration
 -----------------
 
-AWS CloudWatch logs can be accessed by configuring CloudWatch to store them into a bucket or by using the CloudWatch Logs Agent. The AWS API allows Wazuh to retrieve those logs, analyze them, and raise alerts if applicable.
+AWS CloudWatch logs can be accessed by using the Wazuh CloudWatch Logs integration. The AWS API allows Wazuh to retrieve those logs, analyze them, and raise alerts if applicable.
 
 
 Wazuh configuration

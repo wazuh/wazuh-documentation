@@ -4,17 +4,13 @@
 
     .. group-tab:: Yum
 
-        Install Open Distro for Elasticsearch:
-
             .. code-block:: console
 
-                # yum install opendistroforelasticsearch
+                # yum install -y opendistroforelasticsearch
 
 
 
     .. group-tab:: APT
-
-        Install Elasticsearch OSS and Open Distro for Elasticsearch:
 
             .. code-block:: console
 
@@ -23,8 +19,6 @@
 
 
     .. group-tab:: ZYpp
-
-        Install Open Distro for Elasticsearch:
 
             .. code-block:: console
 

@@ -31,7 +31,6 @@ The final compiled and minified assets are included in the repository, however, 
 These are the steps to make basic modifications to the theme assets:
 
 1. In a new branch, make the required changes to the SCSS files within the folder (or subfolders of) `source/_themes/wazuh_doc_theme_v3/src/scss/` or the JS files within `source/_themes/wazuh_doc_theme_v3/src/js-source/`.
-  **Note**: On of the files that needs to be frequently updated is the array of redirects, located in `source/_themes/wazuh_doc_theme_v3/src/js-source/redirect.js`.
 
 2. Rebuild the assets once the change is done. There are several scripts to do this, but they all are run in the same way: `npm run <script>`. These are some options:
   
@@ -83,24 +82,6 @@ These are the steps to make basic modifications to the theme assets:
 
 3. Commit all the changes in the theme files, including the source files in `source/_themes/wazuh_doc_theme_v3/src/scss/` and `source/_themes/wazuh_doc_theme_v3/src/js-source/`, but also the resulting files in `source/_themes/wazuh_doc_theme_v3/static/css/` and `source/_themes/wazuh_doc_theme_v3/static/js/`.
 
-### Updating only the redirects
-
-As the file **redirects.js** is a file that needs to be updated frequently, there is also a make target to directly minify only this file. Therefore, **redirects.min.js** can be updated with one of this options:
-
-a. Go to `source/_themes/wazuh_doc_theme_v3/` and run:
-
-   ```
-   npm run js:build:redirects
-   ```
-  
-or
-  
-b. In the folder containing the Makefile, run:
-
-   ```
-   make redirects
-   ```
-
 ## NPM script reference
 
 This is the list of all npm scripts that has been included in `source/_themes/wazuh_doc_theme_v3/package.json`.
@@ -129,7 +110,6 @@ This is the list of all npm scripts that has been included in `source/_themes/wa
 
 `js:build:bootstrap`: Compiles and minifies the Bootstrap and Popper scripts files into `bootstrap.bundle.min.js`.
 `js:build:moved-content`: Compiles and minifies the code in charge of the redirect to current into `moved-content.min.js`. This is an alias for `js:minify:moved-content`.
-`js:build:redirects`: Compiles and minifies the script containing the arrays for the redirects and saves the results to `redirects.min.js`. This is an alias for `js:minify:redirects`
 `js:build:index-redirect`: Compiles and minifies the code in charge of the redirect to current/index when the release of the branch is not the latest. It is saved into `index-redirect.min.js`. This is an lias for `js:minify:index-redirect`.
 `js:build:page:default`: Compiles and minifies the code required in all the normal documentation content pages into `wazuh-documentation.min.js`.
 `js:build:page:index`: Compiles and minifies the scripts required for the index page into `index.min.js`.
@@ -137,7 +117,7 @@ This is the list of all npm scripts that has been included in `source/_themes/wa
 `js:build:page:search`: Compiles and minifies the scripts required for the search page and the search functionality and saves them into `search-results.min.js`.
 `js:build:page:not-found`: Compiles and minifies the scripts required for the not-found page into `not-found.min.js`.
 `js:build-all`: Compiles and minifies all the JavaScript files of the theme. This runs sequentially the scripts `js:build`, `js:build:bootstrap`, `js:build:moved-contentl` and `js:build:index-redirect`.
-`js:build`: Compiles and minifies the main JavaScript files of the theme. It excludes Bootstrap JS files, moved-content and index-redirect, but includes the script containing he redirects. This runs sequentially the scripts `js:build:page:default`, `js:build:page:index`, `js:build:page:api-reference`, `js:build:page:search`, `js:build:page:not-found` and `js:build:redirects`.
+`js:build`: Compiles and minifies the main JavaScript files of the theme. It excludes Bootstrap JS files, moved-content and index-redirect. This runs sequentially the scripts `js:build:page:default`, `js:build:page:index`, `js:build:page:api-reference`, `js:build:page:search` and `js:build:page:not-found`.
 
 
 ### Scripts required for the build process (in-betweens)
@@ -181,7 +161,6 @@ This is the list of all npm scripts that has been included in `source/_themes/wa
 
 These scripts minifies the JavaScript files that needs to stay separated:
 
-`js:minify:redirects`: Minifies the script containing the arrays for the redirects and saves the results to `redirects.min.js`.
 `js:minify:moved-content`: Minifies the code in charge of the redirect to current into `moved-content.min.js`.
 `js:minify:index-redirect`: Minifies the code in charge of the redirect to current/index when the release of the branch is not the latest. It is saved into `index-redirect.min.js`.
 

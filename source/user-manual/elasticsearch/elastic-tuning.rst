@@ -8,197 +8,10 @@
 Elasticsearch tuning
 ====================
 
-This guide summarizes the relevant settings that enable Elasticsearch optimization.
+This guide summarizes the relevant settings that enable Elasticsearch optimization. To change the default passwords, see the :doc:`/user-manual/securing-wazuh/index` section. 
 
-- `Change users' password`_
 - `Memory locking`_
 - `Shards and replicas`_
-
-.. _change_elastic_pass:
-
-Change users' password
-----------------------
-
-Changing the default passwords of Elasticsearch is highly recommended in order to improve security.
-
-.. tabs::
-
-  .. group-tab:: Open Distro for Elasticsearch
-
-    The following script allows changing the password for a given user. In this example it is used the user ``admin``:
-
-    - Download the script:
-    
-      .. code-block:: console
-      
-        # curl -so wazuh-passwords-tool.sh https://packages.wazuh.com/resources/4.2/open-distro/tools/wazuh-passwords-tool.sh
-
-    - Run the script:
-
-      .. code-block:: console
-      
-        # bash wazuh-passwords-tool.sh -u admin -p mypassword
-
-    This is the output of the script:
-
-      .. code-block:: none
-        :class: output 
-
-        Creating backup...
-        Backup created
-        Generating hash
-        Hash generated
-        Loading changes...
-        Done
-        Password changed. Remember to update the password in /etc/filebeat/filebeat.yml and /etc/kibana/kibana.yml if necessary and restart the services.
-
-
-    The script allows changing the password for either a single user or all the users present on the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. It also offers the option to change the password of more than one user at once, getting them from a formatted file. All the available options to run the script are:
-
-    +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
-    | Options                                      | Purpose                                                                                                     |
-    +==============================================+=============================================================================================================+
-    | -a / --change-all                            | Generates random passwords, changes all the Open Distro user passwords and prints them on screen            |
-    +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
-    | -p / --password <password>                   | Indicates the new password, must be used with option ``-u``                                                 |
-    +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+    
-    | -u / --user <user>                           | Indicates the name of the user whose password will be changed.                                              |
-    |                                              | If no password specified it will generate a random one                                                      |
-    +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
-    | -c / --cert <route-admin-certificate>        | Indicates route to the admin certificate                                                                    |
-    +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
-    | -k / --certkey <route-admin-certificate-key> | Indicates route to the admin certificate key                                                                |
-    +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
-    | -v / --verbose                               | Shows the complete script execution output                                                                  |
-    +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
-    | -f / --file <password_file.yml>              | Indicates route to file where new passwords are given                                                       |
-    +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
-    | -h / --help                                  | Shows help                                                                                                  |
-    +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
-
-    To generate and change passwords for all users, run the script with the ``-a`` option:
-
-    - Run the script:
-
-      .. code-block:: console
-      
-        # bash wazuh-passwords-tool.sh -a
-
-    This is the output of the script:
-
-      .. code-block:: none
-        :class: output 
-
-        Generating random passwords
-        Done
-        Creating backup...
-        Backup created
-        Generating hashes
-        Hashes generated
-        Loading changes...
-        Done
-
-        The password for admin is Re6dEMVUcB_c6rEDf_C_nkBCZkwFKtZL
-
-        The password for kibanaserver is 4KLxLHor69cq2i1jFXmSUjBTVjG2yhU9
-
-        The password for kibanaro is zCd-SrihVwzfRxj5qPrwlSgmZJP9RsMA
-
-        The password for logstash is OmbPImuV5fv11R6XYAG92cUjaDy9PkdH
-
-        The password for readall is F2vglVGFJHXohwqEW5G4Tfjsiz-qqkTU
-
-        The password for snapshotrestore is rd35bCchP3Uf-0w77VCEJzHF7WEP3fNw
-
-        Passwords changed. Remember to update the password in /etc/filebeat/filebeat.yml and /etc/kibana/kibana.yml if necessary and restart the services.
-
-    To use a formatted file to indicate the passwords, run the script with the ``-f`` option followed by the file path. Use the following pattern to indicate the users and passwords in the formatted file: 
-
-      .. code-block:: none
-
-        User: 
-            name: wazuh
-            password: <password_wazuh>
-
-        User: 
-            name: kibanaserver
-            password: <password_kibanaserver>
-
-    If the ``-a`` option is used in combination with the ``-f`` option, all users not included in the file are given a random password.
-
-      - For example, if the script is run with the following options:
-
-        .. code-block:: console
-          
-          # bash wazuh-passwords-tool.sh -a -f passwords.yml
-      
-      - And the content of ``passwords.yml`` is:
-
-        .. code-block:: none
-
-          User:
-              name:kibanaserver
-              password:kibanaserverpass
-          User:
-              name:admin
-              password:adminpass
-        
-      - The output would be:
-
-        .. code-block:: none
-          :class: output
-
-          Generating random passwords
-          Done
-          Creating backup...
-          Backup created
-          Generating hashes
-          Hashes generated
-          Loading changes...
-          Done
-
-          The password for admin is adminpass
-
-          The password for kibanaserver is kibanaserverpass
-
-          The password for kibanaro is zCd-SrihVwzfRxj5qPrwlSgmZJP9RsMA
-
-          The password for logstash is OmbPImuV5fv11R6XYAG92cUjaDy9PkdH
-
-          The password for readall is F2vglVGFJHXohwqEW5G4Tfjsiz-qqkTU
-
-          The password for snapshotrestore is rd35bCchP3Uf-0w77VCEJzHF7WEP3fNw
-
-          Passwords changed. Remember to update the password in /etc/filebeat/filebeat.yml and /etc/kibana/kibana.yml if necessary and restart the services.
-
-
-  
-
-    .. note:: The password may need to be updated in both ``/etc/filebeat/filebeat.yml`` and ``/etc/kibana/kibana.yml``. After changing the configuration files, remember to restart the corresponding services.
-
-  
-
-  .. group-tab:: Elastic Stack basic license
-
-    During the installation of Elasticsearch, the passwords for the different users were automatically generated. These passwords can be changed afterwards using API requests. Replace the following variables and execute the corresponding API call: 
-
-      - ``<elasticsearch_ip>``: The IP address of the Elasticsearch node.
-      - ``<username>``: The name of the user whose password is going to be changed.
-      - ``<user_password>``: Current user's password. 
-      - ``<new_password>``: The new password that will be assigned to the ``<username>`` user.
-
-    .. code-block:: console
- 
-      # curl -k -X POST -u <username>:<user_password> "https://<elasticsearch_ip>:9200/_security/user/<username>/_password?pretty" -H 'Content-Type: application/json' -d '
-      # {
-      #   "password" : "<new_password>"
-      # }
-      # '
-
-    If the call was successful it returns an empty JSON structure ``{ }``.  
-    
-    .. note:: The password may need to be updated in ``/etc/filebeat/filebeat.yml`` and ``/etc/kibana/kibana.yml``. 
-    
 
 .. _memory_locking:
 
@@ -242,7 +55,7 @@ Elasticsearch malfunctions when the system is swapping memory. It is crucial for
 
           Edit the proper file ``/etc/sysconfig/elasticsearch`` for RPM or ``/etc/default/elasticsearch`` for Debian:
 
-          .. code-block:: bash
+          .. code-block:: pkgconfig
 
             MAX_LOCKED_MEMORY=unlimited
 
@@ -333,15 +146,15 @@ Elasticsearch offers the possibility to split an index into multiple segments ca
 
 - Distribute and parallelize operations across shards, increasing the performance and throughput.
 
-In addition, Elasticsearch allows the user to make one or more copies of the index shards in what are called replica shards, or replicas for short. Replication is important for two main reasons
+In addition, Elasticsearch allows the user to make one or more copies of the index shards in what are called replica shards, or replicas for short. Replication is important for two main reasons.
 
 - It provides high availability in case a shard or node fails.
 
-- It allows search volume and throughput to scale, since searches can be executed on all replicas in parallel.
+- It allows search volume and throughput to scale since searches can be executed on all replicas in parallel.
 
 .. warning::
 
-  The number of shards and replicas can be defined per index at the time of their creation. Once the index is created, the number of replicas must be changed dynamically, whereas the number of fragments cannot be changed afterwards. 
+  The number of shards and replicas can be defined per index at the time of their creation. Once the index is created, the number of replicas must be changed dynamically, whereas the number of fragments cannot be changed afterward. 
 
 How many shards should an index have?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -398,7 +211,7 @@ To change these settings, the Elasticsearch's template will have to be edited. I
 
     .. warning::
 
-      The value "order" is set to "1", otherwise Filebeat will overwrite the existing template. Multiple matching templates with the same order value will result in a non-deterministic merging order.
+      The value "order" is set to "1". Otherwise, Filebeat will overwrite the existing template. Multiple matching templates with the same order value will result in a non-deterministic merging order.
 
 #. Load the template:
 
@@ -455,7 +268,6 @@ The number of replicas can be changed dynamically using the Elasticsearch API. I
     }
   }'
 
-More information about configuring shards and replicas can be found in the :ref:`Kibana configuration section <kibana_config_file>`.
 
 Reference:
 

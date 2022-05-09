@@ -2581,10 +2581,6 @@ p.admonition-title::before,
 
 .output p.admonition-title::before {
   content: '\f138';
-}
-
-.output p.admonition-title::before {
-  content: '\f138';
   transform: rotate(90deg);
   transition: transform .2s;
   width: auto;

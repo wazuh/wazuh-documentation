@@ -23,7 +23,7 @@ As shown in the example above, the following parameters have to be edited:
 +-------------------------------------+------------------------------------------------------------------------------------------------------+
 | :ref:`node_name <cluster_node_name>`| Each node of the cluster must have a unique name.                                                    |
 +-------------------------------------+------------------------------------------------------------------------------------------------------+
-| :ref:`node_type <cluster_node_type>`| Has to be set as ``worker``.                                                                         |
+| :ref:`node_type <cluster_node_type>`| Has to be set as a ``worker``.                                                                       |
 +-------------------------------------+------------------------------------------------------------------------------------------------------+
 | :ref:`key <cluster_key>`            | The key created previously for the ``master`` node. It has to be the same for all the nodes.         |
 +-------------------------------------+------------------------------------------------------------------------------------------------------+

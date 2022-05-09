@@ -6,7 +6,7 @@
 Cluster management
 ===================
 
-The **cluster_control** tool allows you to obtain real-time information about the cluster health, connected nodes and the agents reporting to the cluster. This information can also be obtained using the Wazuh API :api-ref:`cluster endpoints <tag/Cluster>`.
+The **cluster_control** tool allows you to obtain real-time information about the cluster health, connected nodes, and the agents reporting to the cluster. This information can also be obtained using the Wazuh API :api-ref:`cluster endpoints <tag/Cluster>`.
 
 For example, the following snippet shows the connected nodes in the cluster:
 
@@ -67,7 +67,7 @@ If you want to see more examples and check all its options, refer to :doc:`the c
 Upgrading from older versions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If you already have a cluster installation from a **version older or equal to 3.2.2**, you should do some changes in your cluster configuration:
+If you already have a cluster installation from a **version older or equal to 3.2.2**, you should do some changes to your cluster configuration:
 
     * Remove ``<interval>`` section.
     * Remove worker nodes from ``<nodes>`` section. Only the master node is allowed.

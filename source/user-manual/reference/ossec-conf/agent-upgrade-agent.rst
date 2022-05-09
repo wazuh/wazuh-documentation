@@ -29,7 +29,7 @@ Options
 - `notification_wait_max`_
 - `ca_verification`_
 
-.. note:: On the agent side, this module can be disabled and doing so will block remote upgrading of that agent.
+.. note:: On the agent side, this module can be disabled, and doing so will block remote upgrading of that agent.
 
 
 enabled
@@ -54,7 +54,7 @@ Initial time that the agent will wait to retry sending the upgrade confirmation 
 +--------------------+--------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | 5m                                                                                                                       |
 +--------------------+--------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values** | A positive number that should contain a suffix character indicating a time unit: s (seconds), m (minutes) or h (hours).  |
+| **Allowed values** | A positive number that should contain a suffix character indicating a time unit: s (seconds), m (minutes), or h (hours). |
 +--------------------+--------------------------------------------------------------------------------------------------------------------------+
 | **Required**       | no                                                                                                                       |
 +--------------------+--------------------------------------------------------------------------------------------------------------------------+

@@ -126,7 +126,7 @@ Available flags
 |                       +------------------+-----------------------------------------------------------------------------------------------------+
 |                       | Allowed values   | Any valid absolute path.                                                                            |
 +-----------------------+------------------+-----------------------------------------------------------------------------------------------------+
-| **ONEWAY**            | Disables manager's ACK towards the agent. It allows connecting agents without a backward connection from the manager.  |
+| **ONEWAY**            | Disables the manager ACK towards the agent. It allows connecting agents without a backward connection from the manager.|
 |                       +------------------+-----------------------------------------------------------------------------------------------------+
 |                       | Default value    | n/a                                                                                                 |
 |                       +------------------+-----------------------------------------------------------------------------------------------------+

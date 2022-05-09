@@ -106,4 +106,4 @@ Once the socket is defined, it's possible to add the destination socket for each
     </localfile>
 
 .. warning::
-    To keep the output to the default socket we need to specify it using 'agent' as target. Otherwise the output will be redirected only to the specified targets.
+    To keep the output to the default socket we need to specify it using 'agent' as the target. Otherwise, the output will be redirected only to the specified targets.

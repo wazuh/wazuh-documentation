@@ -117,7 +117,7 @@ A VPC alert contains data such as dest and source IP address, dst and source por
 
 These alerts can be easily analyzed using visualizations like the following one:
 
-.. thumbnail:: ../../../images/aws/vpc_flow_dataviz.png
+.. thumbnail:: ../../../images/aws/vpc-flow-data-visualization.png
   :align: center
   :width: 70%
 

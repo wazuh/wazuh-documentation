@@ -49,7 +49,7 @@ Install the Wazuh manager software and start its service:
     # yum -y install wazuh-manager
     # systemctl start wazuh-manager
 
-Configure Wazuh manager to allow self registration of new agents with authentication:
+Configure the Wazuh manager to allow self registration of new agents with authentication:
 
   .. code-block:: console
 
@@ -60,7 +60,7 @@ Configure Wazuh manager to allow self registration of new agents with authentica
 
 The password echoed to ``/var/ossec/etc/authd.pass`` is the one agents will use for self-registration. 
 
-Restart Wazuh manager and confirm the agent listener and the self-registration
+Restart the Wazuh manager and confirm the agent listener and the self-registration
 listener are in place:
 
     .. code-block:: console

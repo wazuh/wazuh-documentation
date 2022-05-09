@@ -26,11 +26,11 @@ Due to this fact, an incorrect configuration in an agent may generate enough eve
 
 - Realtime FIM (Syscheck) of a directory with files that keep changing:
 
-Events are generated every time a file under a Syscheck-monitored directory changes. If Syscheck monitors a directory which changes constantly, it will generate a large volume of events. In addition, if the monitored directory contains any file to which Wazuh writes when it generates an event, like ``/var/ossec/queue/``, it will cause an infinite loop.
+Events are generated every time a file under a Syscheck-monitored directory changes. If Syscheck monitors a directory that changes constantly, it will generate a large volume of events. In addition, if the monitored directory contains any file to which Wazuh writes when it generates an event, like ``/var/ossec/queue/``, it will cause an infinite loop.
 
 - Windows Filtering Platform:
 
-A Windows firewall event (ID 5156) is generated each time an outbound network connection is allowed. When this event is enabled in Windows, and Wazuh is configured to monitor all Windows Security Log events the result is an infinite loop.  When the agent connects its manager, it generates a Windows firewall event that in turn causes the agent to connect again to its manager.
+A Windows firewall event (ID 5156) is generated each time an outbound network connection is allowed. When this event is enabled in Windows, and Wazuh is configured to monitor all Windows Security Log events the result is an infinite loop.  When the agent connects to its manager, it generates a Windows firewall event that causes the agent to connect again to its manager.
 
 - Applications that retry on errors with no rate limiting:
 
@@ -60,7 +60,7 @@ As mentioned above, the leaky bucket is a congestion control located in agents a
 
 There are several levels of control for the bucket with the aim of being aware of the buffer status and being able to foresee and address a potential flooding situation.
 
-- Warning alert: The first control will trigger an alert on the manager when the occupied capacity of the buffer has reached a certain threshold. By default it is set at 90 percent.
+- Warning alert: The first control will trigger an alert on the manager when the occupied capacity of the buffer has reached a certain threshold. By default, it is set at 90 percent.
 
 - Full alert: After the first control, if the buffer gets filled, another alert will be triggered on the manager. This new alert is more serious than a warning alert because **a full bucket will drop incoming events**.
 
@@ -75,7 +75,7 @@ Measured configuration
 
 In the ``<client_buffer>`` section of :doc:`Local configuration <../reference/ossec-conf/index-agent>`, it is possible to disable the buffer, configure the size of the buffer (in number of events), and configure its throughput limit measured in EPS, or event-per-second.
 
-- Disable buffer: This parameter disables the use of the leaky bucket, resulting in no restriction on the rate of events transmitted by the agent to the manger.  This is how previous versions of the agent were set up.
+- Disable buffer: This parameter disables the use of the leaky bucket, resulting in no restriction on the rate of events transmitted by the agent to the manager.  This is how previous versions of the agent were set up.
 
 - Queue size: The queue size is the maximum number of events that can be held in the leaky bucket at one time.  It should be configured according to the expected rate at which an agent may generate events. This value is set to 5000 events by default, which is a generous buffer size for most environments.
 
@@ -95,7 +95,7 @@ Use case: Leaky bucket
 
 In this section, it will be shown how the leaky bucket acts when faced with an extreme situation. For this purpose, the following graphic shows different phases of the buffer's usage when it is receiving more events than expected, and how it acts step by step to manage the situation.
 
-.. thumbnail:: /images/manual/internal-capabilities/graphic_with_flood.png
+.. thumbnail:: /images/manual/internal-capabilities/graphic-with-flood.png
     :title: buffer usage with flooding
     :align: center
     :width: 80%
@@ -145,12 +145,12 @@ At this point, two possible things could happen:
 
     This graphic illustrates this situation.
 
-    .. thumbnail:: /images/manual/internal-capabilities/graphic_without_flooding.png
+    .. thumbnail:: /images/manual/internal-capabilities/graphic-without-flooding.png
         :title: buffer usage without flooding
         :align: center
         :width: 70%
 
-2. The use of the buffer stays above the ``warning level`` until the specified ``tolerance time`` has elapsed.  Now, it appears that the buffer may not come back to a normal status by itself. For that reason, a more severe ``Flooding status`` alert is triggered on the manager.
+2. The use of the buffer stays above the ``warning level`` until the specified ``tolerance time`` has elapsed.  Now, the buffer may not come back to normal status by itself. For that reason, a more severe ``Flooding status`` alert is triggered on the manager.
 
 Flooding status (red area)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -175,7 +175,7 @@ This alert has the following appearance:
 Returning to normal status
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The right area of the graphic shows how the buffer returns to a normal status after it hits 100%. This could happen because a module ceases generating excessive events either because something has completed or because the offending module was shut down manually.
+The right area of the graphic shows how the buffer returns to normal status after it hits 100%. This could happen because a module ceases generating excessive events either because something has been completed or the offending module was shut down manually.
 
 In order to let the manager know when an agent is working properly again, another alert is triggered when the use of a maxed-out buffer's decreases to less than the ``normal level`` (70% by default). The alert looks like this:
 
@@ -194,11 +194,10 @@ When the bucket is in this status, **no events are dropped**.
 Anti-flooding in agent modules
 ------------------------------
 
-In order to avoid agent buffer saturation followed by event loss, the event production rates of Wazuh agent daemons that could cause this saturation have been limited.
+To avoid agent buffer saturation followed by event loss, the event production rates of the Wazuh agent daemons that could cause this saturation have been limited.
 
 - Logcollector: If a log file is written faster that logcollector can read it, this can negatively impact the proper functioning of the agent. For this reason, the agent will restrict itself to reading no more than a configurable maximum number of lines from the same file per read cycle.
 
 - CIS-CAT and Syscollector wodles: These modules previously did send the entire set of scan results as soon as a scan would complete. They now send the scan information to the manager at a regulated speed in order to prevent the buffer from being collapsed.
 
-These are advanced configurations located at :doc:`Internal configuration <../reference/internal-options>`. The variables defined for this purpose are called ``logcollector.max_lines`` and
-``wazuh_modules.max_eps`` and much care should be given when changing these values.
+These are advanced configurations located at :doc:`Internal configuration <../reference/internal-options>`. The variables defined for this purpose are called ``logcollector.max_lines``, ``wazuh_modules.max_eps``, and much care should be given when changing these values.

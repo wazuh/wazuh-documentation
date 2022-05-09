@@ -25,7 +25,7 @@ You can change the IP address used to listen the service with the following conf
     </remote>
   </wazuh_config>
 
-This will set the manager to listen on IP address to 10.0.0.10.
+This will set the manager to listen on IP address ``10.0.0.10``.
 
 When you change any value in the ``manager.conf`` file, you must restart the service for these changes to take effect.
 

@@ -67,8 +67,8 @@ The following fields are received in FIM alerts when who-data is enabled:
 |                              |                                                                                                                    |
 | **audit.user.name**          |                                                                                                                    |
 +------------------------------+--------------------------------------------------------------------------------------------------------------------+
-| **(Audit) Login user**       | Contains the Audit user ID and name, they correspond respectivey to the login UID and login name.                  |
-+------------------------------+ This ID is assigned to a user upon login and is inherited by every process even when the user's identity changes.  +
+| **(Audit) Login user**       | Contains the Audit user ID and name. They correspond respectively to the login UID and login name.                 |
++------------------------------+ This ID is assigned to a user upon login and is inherited by every process, even when the user's identity changes. +
 | **audit.login_user.id**      |                                                                                                                    |
 |                              |                                                                                                                    |
 | **audit.login_user.name**    |                                                                                                                    |
@@ -99,7 +99,7 @@ The following fields are received in FIM alerts when who-data is enabled:
 Alert examples
 ^^^^^^^^^^^^^^
 
-In the following example we can see how the user *Smith* added a new IP address to the file ``/etc/hosts.allow`` using the *nano* editor with **sudo** privileges:
+In the following example, we can see how the user *Smith* added a new IP address to the file ``/etc/hosts.allow`` using the *nano* editor with **sudo** privileges:
 
 
 Alert in log format:

@@ -51,7 +51,7 @@ The sample configuration will monitor the ``/bin``, ``/etc`` and ``/sbin`` direc
 Generic Diff
 ------------
 
-In this configuration the ``ls -la /etc`` and ``cat /etc/passwd`` commands will execute every 20000 seconds. An alert will be triggered if the output of the commands changes.
+In this configuration, the ``ls -la /etc`` and ``cat /etc/passwd`` commands will execute every 20000 seconds. An alert will be triggered if the output of the commands changes.
 
 .. code-block:: xml
 
