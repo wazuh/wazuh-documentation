@@ -985,6 +985,11 @@ $wazuh_api_logs_level
   
   `Type String`
 
+$wazuh_api_logs_format
+  Set the format of the Wazuh API logs.
+
+  `Default plain`
+
 $wazuh_api_cors_enabled
   Enable or disable the use of CORS in the Wazuh API.
 
