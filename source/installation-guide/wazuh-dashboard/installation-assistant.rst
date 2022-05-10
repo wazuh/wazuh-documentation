@@ -19,13 +19,13 @@ Wazuh dashboard installation
 
 
 
-#. Run the assistant with the option ``-wd`` and the node name to install and configure the Wazuh dashboard. The node name must be the same used in ``config.yml`` for the initial configuration, for example, ``dashboard``.
+#. Run the assistant with the option ``--wazuh-dashboard`` and the node name to install and configure the Wazuh dashboard. The node name must be the same used in ``config.yml`` for the initial configuration, for example, ``dashboard``.
    
    .. note:: Make sure that a copy of ``wazuh-install-files.tar``, created during the Wazuh indexer installation, is placed in your working directory.
 
    .. code-block:: console
 
-      # bash ./wazuh-install.sh -wd dashboard
+      # bash wazuh-install.sh --wazuh-dashboard dashboard
 
     
 
