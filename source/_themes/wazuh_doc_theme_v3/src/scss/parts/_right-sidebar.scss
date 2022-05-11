@@ -50,7 +50,6 @@
       width: 100%;
       height: 40px;
       padding: 8px 8px 8px 4px;
-      border-top: 1px solid $light-color-border-details;
 
       a {
         .icon {
@@ -64,7 +63,7 @@
 
 /* Light theme -------------------------------------------------------------- */
 
-body {
+.light-theme {
   #right-sidebar {
     .sidebar-container {
       @include media-min(xl) {

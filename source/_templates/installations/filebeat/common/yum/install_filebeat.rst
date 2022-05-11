@@ -2,7 +2,7 @@
 
 .. code-block:: console
    
-  # yum install -y filebeat
+  # yum -y install filebeat
   
 
 .. End of include file

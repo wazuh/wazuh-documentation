@@ -7,7 +7,7 @@
 
 .no-latest-notice-wrapper {
   position: fixed;
-  z-index: 100;
+  z-index: 98;
   width: 100%;
   min-height: $no-latest-notice-height-xl;
   padding-right: 15px;
@@ -75,6 +75,9 @@
       @include media-max(sm){
         top: calc(#{$header-height-xs} + #{$secondary-mobile-bar});
       }
+      @include media-only(sm, xl){
+        top: calc(#{$header-height-xs} + #{$secondary-mobile-bar} + #{$breadcrumbs-height-xl});
+      }
     }
   }
   &.search {
@@ -88,7 +91,7 @@
 }
 
 /* Light theme -------------------------------------------------------------- */
-body {
+.light-theme {
   .no-latest-notice-wrapper {
     background-color: $light-color-base-space;
     .no-latest-notice {

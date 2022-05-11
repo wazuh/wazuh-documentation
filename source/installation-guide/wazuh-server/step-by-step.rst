@@ -112,7 +112,7 @@ Configuring Filebeat
 
       .. code-block:: console
 
-        # curl -so /etc/filebeat/filebeat.yml https://packages-dev.wazuh.com/4.3/tpl/wazuh/filebeat/filebeat.yml
+        # curl -so /etc/filebeat/filebeat.yml https://packages.wazuh.com/|WAZUH_LATEST_MINOR|/tpl/wazuh/filebeat/filebeat.yml
         
         
   #. Edit the ``/etc/filebeat/filebeat.yml`` configuration file and replace the following value:

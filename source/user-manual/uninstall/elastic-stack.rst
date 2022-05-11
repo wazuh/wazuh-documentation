@@ -5,34 +5,42 @@
 Uninstalling Wazuh with Elastic Stack
 ======================================
 
-This document will give instructions to uninstall each Wazuh component. 
+This document includes instructions to uninstall the Wazuh components. 
 
 .. _basic_uninstall_manager:
 
 Uninstall the Wazuh manager
 ---------------------------
 
-.. tabs::
+#. Remove the Wazuh manager installation.
+
+   .. tabs::
+   
+   
+     .. group-tab:: Yum
+   
+   
+       .. include:: ../../_templates/installations/basic/wazuh/yum/uninstall_wazuh_manager_api.rst
+   
+   
+   
+     .. group-tab:: APT
+   
+   
+       .. include:: ../../_templates/installations/basic/wazuh/deb/uninstall_wazuh_manager_api.rst
+   
+   
+   
+     .. group-tab:: ZYpp
+   
+   
+       .. include:: ../../_templates/installations/basic/wazuh/zypp/uninstall_wazuh_manager_api.rst
 
 
-  .. group-tab:: Yum
 
+#. Disable the Wazuh manager service.
 
-    .. include:: ../../_templates/installations/basic/wazuh/yum/uninstall_wazuh_manager_api.rst
-
-
-
-  .. group-tab:: APT
-
-
-    .. include:: ../../_templates/installations/basic/wazuh/deb/uninstall_wazuh_manager_api.rst
-
-
-
-  .. group-tab:: ZYpp
-
-
-    .. include:: ../../_templates/installations/basic/wazuh/zypp/uninstall_wazuh_manager_api.rst
+   .. include:: ../../_templates/installations/wazuh/common/disable_wazuh_manager_service.rst
 
 .. _basic_uninstall_filebeat:
 

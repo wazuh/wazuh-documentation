@@ -93,3 +93,35 @@ h1 {
     background-color: $light-color-base-space;
   }
 }
+
+@media (prefers-color-scheme: dark) {
+  body {
+    color: $dark-color-main-text;
+  }
+  h1 {
+    color: $dark-color-main-text;
+  }
+  #spinner {
+    border-top: 4px solid $dark-color-primary;
+    border-right: 4px solid $dark-color-primary;
+    border-bottom: 4px solid $dark-color-primary;
+  }
+  
+  #spinner::before {
+    background-color: $dark-color-primary;
+  }
+  
+  #spinner::after {
+    background-color: $dark-color-primary;
+  }
+  
+  .home-btn {
+    background-color: $dark-color-accent;
+    border: 2px solid $dark-color-accent;
+    &:hover,
+    &:focus {
+      color: $dark-color-main-text;
+      background-color: $dark-color-base-space;
+    }
+  }
+}

@@ -19,7 +19,7 @@ Recommended changes to secure the Wazuh API
 
 #. Modify HTTPS parameters:
 
-    The Wazuh API has HTTPS enabled by default. In case there is no available certificate in ``WAZUH_PATH/api/configuration/ssl``, the Wazuh API will generate the private key and a self-signed certificate. If that is the case, the following lines will appear in ``WAZUH_PATH/logs/api.log``:
+    The Wazuh API has HTTPS enabled by default. In case there is no available certificate in ``WAZUH_PATH/api/configuration/ssl``, the Wazuh API will generate the private key and a self-signed certificate. If that is the case and the API log format is set as ``plain``, the following lines will appear in ``WAZUH_PATH/logs/api.log``:
 
     .. code-block:: console
 
@@ -64,7 +64,7 @@ Recommended changes to secure the Wazuh API
     After changing the password, there is no need to restart the Wazuh API but a new :api-ref:`authentication <operation/api.controllers.security_controller.login_user>` will be required for the affected users.
 
     .. warning::
-      Changing the **wazuh-wui** user password will affect the Wazuh UI. You will have to update the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file accordingly with the new credentials. To learn more, see the :ref:`Wazuh Kibana plugin configuration file section <kibana_config_file>`.
+      Changing the **wazuh-wui** user password will affect the Wazuh UI. You will have to update the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file accordingly with the new credentials. To learn more, see the :doc:`Wazuh dashboard configuration file </user-manual/wazuh-dashboard/config-file>` document.
 
 #. Change the default host and port:
 
