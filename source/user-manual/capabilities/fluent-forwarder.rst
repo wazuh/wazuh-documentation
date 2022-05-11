@@ -19,7 +19,7 @@ How it works
 This module allows the forwarding of the received messages from a dedicated UDP socket to a Fluentd server.
 The Fluentd server could be located on the same local machine or a remote machine.
 
-.. thumbnail:: ../../images/fluent-forward/wazuh_fluentd.png
+.. thumbnail:: ../../images/fluent-forward/wazuh-fluentd.png
   :title: Wazuh fluent forwarder flow diagram
   :align: center
   :width: 100%

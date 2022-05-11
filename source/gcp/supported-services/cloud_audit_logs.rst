@@ -13,7 +13,7 @@ Google Cloud maintains three `audit logs <https://cloud.google.com/monitoring/ap
     :align: center
     :width: 100%
 
-These logs can be filtered on Kibana by ``logName``:
+These logs can be filtered on the Wazuh dashboard by ``logName``:
 
 .. thumbnail:: ../../images/gcp/kibana-gcp-log-filter.png
     :align: center

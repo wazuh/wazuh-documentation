@@ -259,20 +259,17 @@ This sets the memory size for the event correlation engine.
 white_list
 ^^^^^^^^^^
 
-This specifies an IPv4 address, netblock, or hostname for which Active Responses will not be triggered. Only one of those
-values may be specified for each ``<while_list>`` tag, but several values may be used by including multiple
-``<white_list>`` tags. This configuration is compared against the extracted **srcip** field in the alert.
+This specifies an IPv4/IPv6 address, netblock, or hostname that will not trigger an active response. Only one of those values may be specified for each ``<while_list>`` tag, but several values may be used by including multiple ``<white_list>`` tags. This configuration is compared against the extracted **srcip** field in the alert.
 
-+--------------------+---------------------------------------------------------------+
-| **Default value**  | n/a                                                           |
-+--------------------+---------------------------------------------------------------+
-| **Allowed values** | Any IPv4 address, netblock (i.e.: 192.168.0.0/16) or hostname |
-+--------------------+---------------------------------------------------------------+
++--------------------+--------------------------------------------------------------------+
+| **Default value**  | n/a                                                                |
++--------------------+--------------------------------------------------------------------+
+| **Allowed values** | Any IPv4/IPv6 address, netblock (i.e.: 192.168.0.0/16) or hostname |
++--------------------+--------------------------------------------------------------------+
 
 .. note::
 
-  This option is only valid in server and local installs. IPv4-mapped IPv6 addresses will be compared against any configured
-  IPv4 or netblock.
+  This option is only valid in server and local installs.
 
 host_information
 ^^^^^^^^^^^^^^^^

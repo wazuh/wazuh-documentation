@@ -11,7 +11,7 @@ Using Azure Storage
 
 `Azure Storage <https://docs.microsoft.com/en-us/azure/storage/common/storage-introduction>`_ refers to Microsoft Azure cloud storage solution, a service that provides a massively scalable object store for data objects, a messaging store for reliable messaging, a file system service for the cloud, and a NoSQL store.
 
-.. thumbnail:: ../../../images/azure/storage_activity_log.png
+.. thumbnail:: ../../../images/azure/storage-activity-log.png
     :title: Storage
     :align: center
     :width: 50%
@@ -26,21 +26,21 @@ Configuring the Activity log export
 
 1. To export the logs, search for the **Activity log** service. It can be found by typing "Activity" in the search engine. From there, access the **Audit Logs** section and click on **Export Data Settings**.
 
-.. thumbnail:: ../../../images/azure/storage_activity1.png
+.. thumbnail:: ../../../images/azure/storage-activity-1.png
     :title: Storage
     :align: center
     :width: 50%
 
 2. Click on **Add diagnostic setting**.
 
-.. thumbnail:: ../../../images/azure/storage_activity2.png
+.. thumbnail:: ../../../images/azure/storage-activity-2.png
     :title: Storage
     :align: center
     :width: 50%
 
 3. Check the **AuditLogs** box and the **Archive to storage account**, selecting the name of the subscription and the Storage account to export the logs.
 
-.. thumbnail:: ../../../images/azure/storage_activity3.png
+.. thumbnail:: ../../../images/azure/storage-activity-3.png
     :title: Storage
     :align: center
     :width: 50%
@@ -56,12 +56,12 @@ Creating a user
 
 An easy way to test this configuration is to create a new user in Azure Active Directory. A few minutes after the creation of the user, a new log will be available in a container named **insights-logs-auditlogs** inside the Storage account specified when configuring the Activity log export.
 
-.. thumbnail:: ../../../images/azure/storage_new_user1.png
+.. thumbnail:: ../../../images/azure/storage-new-user-1.png
     :title: Storage
     :align: center
     :width: 100%
 
-.. thumbnail:: ../../../images/azure/storage_new_user2.png
+.. thumbnail:: ../../../images/azure/storage-new-user-2.png
     :title: Storage
     :align: center
     :width: 100%
@@ -71,7 +71,7 @@ Wazuh configuration
 
 Proceed to configure the ``azure-logs`` module in the local configuration (``ossec.conf``). It is important to set the **account_name** and **account_key** of the Storage account to authenticate. This information can be found in the **Access keys** section of **Storage accounts**. Check the :ref:`credentials <azure_credentials>` reference for more information about the different authentication options available.
 
-.. thumbnail:: ../../../images/azure/account_credentials.png
+.. thumbnail:: ../../../images/azure/account-credentials.png
     :title: Storage
     :align: center
     :width: 50%
@@ -127,7 +127,7 @@ Alert visualization
 
 Once the Wazuh configuration is set and the ``azure-logs`` module is running using the previous configuration, the event from the user creation example exported to Storage will be processed. The results can be check in Wazuh UI. 
 
-.. thumbnail:: ../../../images/azure/storage_kibana.png
+.. thumbnail:: ../../../images/azure/storage-kibana.png
     :title: Storage
     :align: center
     :width: 100%

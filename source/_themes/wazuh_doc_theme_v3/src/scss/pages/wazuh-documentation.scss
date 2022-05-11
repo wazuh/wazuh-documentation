@@ -1,0 +1,16 @@
+/* -----------------------------------------------------------------------------
+  Default documentation page
+----------------------------------------------------------------------------- */
+
+@import "../inc/variables";
+@import "../inc/mixins";
+@import "../inc/root";
+@import "../inc/content";
+
+@import "../parts/header";
+@import "../parts/footer";
+@import "../parts/left-sidebar";
+@import "../parts/central-column";
+@import "../parts/right-sidebar";
+
+@import "../components/version-notice";

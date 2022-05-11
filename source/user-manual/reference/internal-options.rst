@@ -1,8 +1,8 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
-  :description: In this section of the Wazuh documentation, you will find all the information related to the internal configuration of Wazuh. 
-  
+  :description: In this section of the Wazuh documentation, you will find all the information related to the internal configuration of Wazuh.
+
 .. _reference_internal_options:
 
 Internal configuration
@@ -80,7 +80,7 @@ Agent
 +                           +                +----------------------------------------------------------------------------------+
 |                           |                | Any other integer between 1 and 86400                                            |
 +---------------------------+----------------+----------------------------------------------------------------------------------+
-| **agent.debug**           | Description    | Run the unix agent’s processes in debug mode.                                    |
+| **agent.debug**           | Description    | Run the unix agent processes in debug mode.                                      |
 +                           +----------------+----------------------------------------------------------------------------------+
 |                           | Default value  | 0                                                                                |
 +                           +----------------+----------------------------------------------------------------------------------+
@@ -96,7 +96,7 @@ Agent
 +                           +----------------+----------------------------------------------------------------------------------+
 |                           | Allowed value  | 0: Remote configuration is disabled.                                             |
 +                           +                +----------------------------------------------------------------------------------+
-|                           |                | 1: Remote configuration is enable.                                               |
+|                           |                | 1: Remote configuration is enabled.                                              |
 +---------------------------+----------------+----------------------------------------------------------------------------------+
 
 .. _ossec_internal_analysisd:
@@ -154,13 +154,13 @@ Analysisd
 +                                                         +---------------+---------------------------------------------------------------------+
 |                                                         | Allowed value | Any integer between 32 and 1024.                                    |
 +---------------------------------------------------------+---------------+---------------------------------------------------------------------+
-|     **analysisd.geoip_jsonout**                         | Description   | Toggle to turn on or off output of GeoIP data in JSON alerts.       |
+|     **analysisd.geoip_jsonout**                         | Description   | Toggle to turn on or off the output of GeoIP data in JSON alerts.   |
 +                                                         +---------------+---------------------------------------------------------------------+
 |                                                         | Default value | 0                                                                   |
 +                                                         +---------------+---------------------------------------------------------------------+
 |                                                         | Allowed value | 0, 1                                                                |
 +---------------------------------------------------------+---------------+---------------------------------------------------------------------+
-|  **analysisd.label_cache_maxage**                       | Description   | Number of in seconds without reload labels in cache from agents.    |
+|  **analysisd.label_cache_maxage**                       | Description   | Number of in seconds without reloading labels in cache from agents. |
 +                                                         +---------------+---------------------------------------------------------------------+
 |                                                         | Default value | 10                                                                  |
 +                                                         +---------------+---------------------------------------------------------------------+
@@ -805,14 +805,6 @@ Remoted
 +                                   +---------------+--------------------------------------------------------------+
 |                                   | Allowed values| 0, 1                                                         |
 +-----------------------------------+---------------+--------------------------------------------------------------+
-| **remoted.group_data_flush**      | Description   | Interval between multigroup residual file cleanups.          |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Default value | 86400                                                        |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed values| 0: Disable residual file cleanups                            |
-+                                   +               +--------------------------------------------------------------+
-|                                   |               | Any other integer between 1 and 2592000                      |
-+-----------------------------------+---------------+--------------------------------------------------------------+
 | **remoted.receive_chunk**         | Description   | | Reception buffer size for TCP (bytes).                     |
 |                                   |               | | Amount of data that Remoted can receive per operation.     |
 +                                   +---------------+--------------------------------------------------------------+
@@ -1070,12 +1062,6 @@ Wazuh Command
 Wazuh-db
 --------
 
-+------------------------------------+---------------+-------------------------------------------------------------------------------------+
-|      **wazuh_db.sock_queue_size**  | Description   | Maximum number of pending connections                                               |
-|                                    +---------------+-------------------------------------------------------------------------------------+
-|                                    | Default value | 128                                                                                 |
-|                                    +---------------+-------------------------------------------------------------------------------------+
-|                                    | Allowed value | Any integer between 1 and 1024                                                      |
 +------------------------------------+---------------+-------------------------------------------------------------------------------------+
 |      **wazuh_db.worker_pool_size** | Description   | Number of worker threads                                                            |
 |                                    +---------------+-------------------------------------------------------------------------------------+

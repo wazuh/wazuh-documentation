@@ -109,8 +109,11 @@ To upgrade the Wazuh agent choose the appropriate tab for the desired operating 
 
           Open the installer and follow the instructions to upgrade the Wazuh agent:
 
-            .. image:: ../../../images/installation/windows.png
-              :align: center
+            .. thumbnail:: ../../../images/installation/windows.png    
+              :title: Windows agent
+              :align: left
+              :width: 100%
+
 
         - Using the command line:
 

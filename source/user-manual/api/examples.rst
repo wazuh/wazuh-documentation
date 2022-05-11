@@ -13,7 +13,7 @@ Examples
 CURL
 ^^^^
 
-cURL is a command-line tool for sending http/https requests and commands. It is pre-installed on many Linux and Mac systems and can be used to interact with the Wazuh API. Please note that before executing any endpoint, a JWT token will be needed. In the following examples the ``raw`` option has been used in order to obtain the token and save it in an environment variable (``$TOKEN``). For information about getting the JWT token visit :ref:`Getting started <api_log_in>`.
+cURL is a command-line tool for sending http/https requests and commands. It is pre-installed on many Linux and Mac systems and can be used to interact with the Wazuh API. Please note that before executing any endpoint, a JWT token will be needed. In the following examples, the ``raw`` option has been used in order to obtain the token and save it in an environment variable (``$TOKEN``). For information about getting the JWT token visit :ref:`Getting started <api_log_in>`.
 
 **GET**
 

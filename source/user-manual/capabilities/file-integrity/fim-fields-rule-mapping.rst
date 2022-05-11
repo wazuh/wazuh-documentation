@@ -340,7 +340,7 @@ In the next example, the rule silence the deletion of files by the windows explo
   }
 
 
-The last rule aims to silence any alert coming from a file created with touch command and the following restrictions: the
+The last rule aims to silence any alert coming from a file created with the touch command and the following restrictions: the
 father directory of the file is /specialdir, the group id and effective uid of the user adding the file are 0, the audit_uid
 of the user is 1000 and his audit name is vagrant.
 
