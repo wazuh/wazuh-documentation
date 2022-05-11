@@ -86,7 +86,7 @@ The image below shows a schema of how a master node and a worker node interact w
     :align: center
     :width: 80%
 
-    
+
 Threads
 ^^^^^^^
 The following tasks can be found in the cluster, depending on the type of node they are running on:
@@ -127,9 +127,9 @@ This thread is in charge of synchronizing master's integrity information among a
 
     * Path
     * Modification time
-    * MD5 checksum
+    * Blake2b checksum
     * Whether the file is a merged file or not. And if it's merged:
-    
+
         * The merge type
         * The filename
 
@@ -140,11 +140,11 @@ This thread is in charge of synchronizing master's integrity information among a
     * Extra valid: Extra files that, instead of being removed in the worker, must be created in the master. This is a special type of file created for agent-group files. These files can be created in worker nodes when an agent is re-registered and was previously assigned to a group.
     * Shared: Files that are present in both master and worker but have a different checksum. They must be updated in the worker node.
 
-   Then the master prepares a zip package with a JSON containing all this information and the required files the worker needs to update.
+   Then the master prepares a zip package with a JSON containing all this information and the required files the worker needs to update. The maximum zip size is specified in the ``max_zip_size`` variable of the `cluster.json <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/framework/wazuh/core/cluster/cluster.json>`_ file. In case it is exceeded, the remaining files will be synced in the next iteration of Integrity.
 
 4. Once the worker receives the package, it updates the necessary files and then it sends the master the required extra valid files.
 
-If there is no data to synchronize or there has been an error reading data from the worker, the worker is always notified about it.
+If there is no data to synchronize or there has been an error reading data from the worker, the worker is always notified about it. Also, if a timeout error occurs while the worker is waiting to receive the zip, the master will cancel the current task and reduce the zip size limit. The limit will gradually increase again if no new timeout errors occur.
 
 Agent info thread
 ~~~~~~~~~~~~~~~~~
@@ -513,8 +513,8 @@ If the log error message isn't clarifying enough, the traceback can be logged se
     2019/04/10 15:50:37 wazuh-clusterd: ERROR: [Cluster] [Main] Could not get checksum of file client.keys: [Errno 13] Permission denied: '/var/ossec/etc/client.keys'
     Traceback (most recent call last):
     File "/var/ossec/framework/python/lib/python3.9/site-packages/wazuh-|WAZUH_LATEST|-py3.7.egg/wazuh/core/cluster/cluster.py", line 217, in walk_dir
-        entry_metadata['md5'] = md5(os.path.join(common.ossec_path, full_path))
-    File "/var/ossec/framework/python/lib/python3.9/site-packages/wazuh-|WAZUH_LATEST|-py3.7.egg/wazuh/core/utils.py", line 555, in md5
+        entry_metadata['blake2b'] = blake2b(os.path.join(common.ossec_path, full_path))
+    File "/var/ossec/framework/python/lib/python3.9/site-packages/wazuh-|WAZUH_LATEST|-py3.7.egg/wazuh/core/utils.py", line 555, in blake2b
         with open(fname, "rb") as f:
     PermissionError: [Errno 13] Permission denied: '/var/ossec/etc/client.keys'
 

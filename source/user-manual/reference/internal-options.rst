@@ -1019,6 +1019,8 @@ Once these settings have been adjusted, the file must be saved followed by a res
 |                                               | Allowed value | Any integer between 0 and 2147483647.                                               |
 +-----------------------------------------------+---------------+-------------------------------------------------------------------------------------+
 
+.. _wazuh_modules_options:
+
 Wazuh Modules
 -------------
 

@@ -2,6 +2,6 @@
 
 .. code-block:: console
 
-    # apt-get install filebeat
+    # apt -y install filebeat
 
 .. End of include file

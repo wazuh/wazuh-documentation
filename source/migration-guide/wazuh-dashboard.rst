@@ -10,6 +10,8 @@ Migrating to the Wazuh dashboard
 
 Follow this guide to migrate from Open Distro for Elasticsearch Kibana 1.13 to the Wazuh dashboard. These instructions are intended for a standard Wazuh installation, you may need to make some changes to adapt them to your environment.
 
+To guarantee a correct operation of Wazuh, make sure to also migrate from Open Distro for Elasticsearch to the Wazuh indexer. To learn more, see the :doc:`Migrating to the Wazuh indexer </migration-guide/wazuh-indexer>` documentation. 
+
 
 .. note:: Root user privileges are required to execute all the commands described below.
 
@@ -66,7 +68,7 @@ Follow this guide to migrate from Open Distro for Elasticsearch Kibana 1.13 to t
               .. include:: /_templates/installations/dashboard/apt/install_dashboard.rst
 
 
-    ..  note:: Make sure that your Wazuh manager is updated to the latest version. 
+    ..  note:: Make sure that your Wazuh manager is updated to the latest version. To learn more, see the :doc:`Upgrading the Wazuh manager </upgrade-guide/upgrading-wazuh>` documentation. 
 
 #. Create the ``/etc/wazuh-dashboard/certs`` directory, copy your old certificates to the new location and change ownership and permissions.    
 
@@ -85,20 +87,20 @@ Follow this guide to migrate from Open Distro for Elasticsearch Kibana 1.13 to t
     .. code-block:: yaml
       :emphasize-lines: 1,3
 
-          server.host: 0.0.0.0
-          server.port: 443
-          opensearch.hosts: https://localhost:9200
-          opensearch.ssl.verificationMode: certificate
-          #opensearch.username: 
-          #opensearch.password: 
-          opensearch.requestHeadersWhitelist: ["securitytenant","Authorization"]
-          opensearch_security.multitenancy.enabled: true
-          opensearch_security.readonly_mode.roles: ["kibana_read_only"]
-          server.ssl.enabled: true
-          server.ssl.key: "/etc/wazuh-dashboard/certs/wazuh-dashboard-key.pem"
-          server.ssl.certificate: "/etc/wazuh-dashboard/certs/wazuh-dashboard.pem"
-          opensearch.ssl.certificateAuthorities: ["/etc/wazuh-dashboard/certs/root-ca.pem"]
-          uiSettings.overrides.defaultRoute: /app/wazuh?security_tenant=global
+      server.host: 0.0.0.0
+      server.port: 443
+      opensearch.hosts: https://localhost:9200
+      opensearch.ssl.verificationMode: certificate
+      #opensearch.username:
+      #opensearch.password:
+      opensearch.requestHeadersWhitelist: ["securitytenant","Authorization"]
+      opensearch_security.multitenancy.enabled: false
+      opensearch_security.readonly_mode.roles: ["kibana_read_only"]
+      server.ssl.enabled: true
+      server.ssl.key: "/etc/wazuh-dashboard/certs/dashboard-key.pem"
+      server.ssl.certificate: "/etc/wazuh-dashboard/certs/dashboard.pem"
+      opensearch.ssl.certificateAuthorities: ["/etc/wazuh-dashboard/certs/root-ca.pem"]
+      uiSettings.overrides.defaultRoute: /app/wazuh
 
 #. Add the password of the ``kibanaserver`` user to the Wazuh dashboard keystore.  Execute the command below and follow the instructions. You may find your old password in the ``/etc/kibana/kibana.yml`` configuration file. 
 
@@ -120,6 +122,7 @@ Follow this guide to migrate from Open Distro for Elasticsearch Kibana 1.13 to t
 
 #.  Port your settings from ``/usr/share/kibana/data/wazuh/config/wazuh.yml`` to ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml``. It is recommended to copy the content from ``/usr/share/kibana/data/wazuh/downloads/`` as well.
 
+#. Access the Wazuh web interface at ``https://<dashboard_ip>`` with your credentials and make sure that everything is working as expected. 
 
 #. Uninstall Kibana.
 

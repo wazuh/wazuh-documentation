@@ -76,7 +76,7 @@ h1 {
 
 /* Light theme -------------------------------------------------------------- */
 
-.search {
+.light-theme .search {
   #search-results {
     .query-term {
       color: $light-color-shaded-text;
@@ -116,7 +116,7 @@ h1 {
 
 /* Dark- theme -------------------------------------------------------------- */
 
-.dark-theme {
+.dark-theme .search {
   #search-results {
     .query-term {
       color: $dark-color-shaded-text;

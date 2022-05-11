@@ -40,6 +40,7 @@ Here are all the available settings for the ``api.yaml`` configuration file. For
 
      logs:
         level: "info"
+        format: "plain"
 
      cors:
         enabled: no
@@ -232,6 +233,10 @@ logs
 | path                      | Any text string.                                                                       | logs/api.log  | .. deprecated:: 4.3.0                           |
 |                           |                                                                                        |               |                                                 |            
 |                           |                                                                                        |               | Path where the Wazuh API logs will be saved.    |
++---------------------------+----------------------------------------------------------------------------------------+---------------+-------------------------------------------------+
+| format                    | plain, json or both (plain,json)                                                       | plain         | .. versionadded:: 4.4.0                         |
+|                           |                                                                                        |               |                                                 |
+|                           |                                                                                        |               | Set the format of the Wazuh API logs.           |
 +---------------------------+----------------------------------------------------------------------------------------+---------------+-------------------------------------------------+
 
 cors

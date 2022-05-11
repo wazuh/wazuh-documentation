@@ -31,7 +31,7 @@ main {
 
 /* Light theme -------------------------------------------------------------- */
 
-body {
+.light-theme {
   .versionmodified {
     &.added::before {
       background: url("#{$ico-path}svg-icons.svg#circle-exclamation-blue-lt");

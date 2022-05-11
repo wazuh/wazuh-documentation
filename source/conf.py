@@ -16,6 +16,12 @@ import shlex
 import datetime
 import time
 import json
+import atexit
+try:
+    from jsmin import jsmin
+except ImportError:
+    atexit.register(print,"\nThe module jsmin is not available. Please, make sure you install all the required modules listed in requirements.txt.")
+    sys.exit()
 from requests.utils import requote_uri
 
 # If extensions (or modules to document with autodoc) are in another directory,
@@ -135,13 +141,24 @@ html_theme_options = {
 if html_theme == 'wazuh_doc_theme_v3':
     # Check if the release was before the new the theme
     # Note v3_release represents the release that was 'current' when the theme
-    # wazuh_doc_theme_v3 was published in production, that is, 4.3
+    # wazuh_doc_theme_v3 was published, that is, 4.3
     v3_release = [4,3]
     current_release = list(map(int, version.split('.')))
     is_pre_v3 = current_release[0] < v3_release[0] or (
                 current_release[0] == v3_release[0] and
                 current_release[1] < v3_release[1])
     html_theme_options['is_pre_v3'] = is_pre_v3
+    
+    # Allow dark mode is set to false by default
+    html_theme_options['include_mode'] = True
+    # Allow switching between modes is set to false by default
+    # html_theme_options['include_mode_switch'] = True
+
+    # Check if the URL for the redirects.min.js must be local or from current
+    # redirects.min.js should be loaded from the local folder if:
+    # * the release is "current" (is_latest_release = True) or
+    # * is a normal compilation (not for production)
+    html_theme_options['local_redirects_file'] = is_latest_release or not (tags.has("production") or tags.has("dev"))
 
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = ['_themes']
@@ -466,17 +483,23 @@ custom_replacements = {
     "|WAZUH_INDEXER_x64_RPM|" : "x86_64",
     "|WAZUH_INDEXER_x64_DEB|" : "amd64",
     "|WAZUH_DASHBOARD_CURRENT|" : "4.3.0",
-    "|WAZUH_DASHBOARD_CURRENT_REV|" : "1",
+    "|WAZUH_DASHBOARD_CURRENT_REV_RPM|" : "2",
+    "|WAZUH_DASHBOARD_CURRENT_REV_DEB|" : "1",
     "|WAZUH_DASHBOARD_x64_RPM|" : "x86_64",
     "|WAZUH_DASHBOARD_x64_DEB|" : "amd64",
-    "|WAZUH_LATEST_ANSIBLE|" : "4.2.5",
-    "|WAZUH_LATEST_KUBERNETES|" : "4.2.5",
-    "|WAZUH_LATEST_PUPPET|" : "4.2.5",
-    "|WAZUH_LATEST_OVA|" : "4.2.5",
-    "|WAZUH_LATEST_AMI|" : "4.2.5",
-    "|WAZUH_LATEST_DOCKER|" : "4.2.5",
-    "|WAZUH_LATEST_AIX|" : "4.2.6",
-    "|WAZUH_LATEST_MINOR_AIX|" : "4.2",
+    "|WAZUH_LATEST_ANSIBLE|" : "4.3.0",
+    "|WAZUH_LATEST_MINOR_ANSIBLE|" : "4.3",
+    "|WAZUH_LATEST_KUBERNETES|" : "4.3.0",
+    "|WAZUH_LATEST_PUPPET|" : "4.3.0",
+    "|WAZUH_LATEST_OVA|" : "4.3.0",
+    "|WAZUH_LATEST_AMI|" : "4.3.0",
+    "|WAZUH_LATEST_DOCKER|" : "4.3.0",
+    "|WAZUH_LATEST_AIX|" : "4.3.0",
+    "|WAZUH_LATEST_MINOR_AIX|" : "4.3",
+    "|WAZUH_LATEST_FROM_SOURCES|" : "4.3.0",
+    "|WAZUH_LATEST_MINOR_FROM_SOURCES|" : "4.3",
+    "|WAZUH_LATEST_WIN_FROM_SOURCES|" : "4.3.0",
+    "|WAZUH_LATEST_WIN_REV_FROM_SOURCES|" : "1",
     "|OPEN_DISTRO_LATEST|" : "1.13.2",
     "|ELASTICSEARCH_LATEST|" : "7.10.2",
     "|ELASTICSEARCH_LATEST_OVA|" : "7.10.2",
@@ -490,7 +513,7 @@ custom_replacements = {
     "|OPENDISTRO_LATEST_AMI|" : "1.13.2",
     "|OPENDISTRO_LATEST_KUBERNETES|" : "1.13.2",
     "|DOCKER_COMPOSE_VERSION|" : "1.28.3",
-    "|SPLUNK_LATEST|" : "8.2.4",
+    "|SPLUNK_LATEST|" : "8.2.6",
     "|WAZUH_SPLUNK_LATEST|" : "4.3.0",
     "|ELASTIC_6_LATEST|" : "6.8.8",
     "|WAZUH_REVISION_DEB_AGENT_PPC|" : "1",
@@ -530,7 +553,7 @@ custom_replacements = {
     "|DEB_MANAGER|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-manager/wazuh-manager",
     "|DEB_API|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-api/wazuh-api",
     # Variables for Elastic's Elasticsearch
-    "|ELASTICSEARCH_ELK_LATEST|" : "7.17.0",
+    "|ELASTICSEARCH_ELK_LATEST|" : "7.17.3",
     "|ELASTICSEARCH_ELK_LATEST_ANSIBLE|" : "7.10.2",
     "|ELASTICSEARCH_ELK_LATEST_KUBERNETES|" : "7.10.2",
     "|ELASTICSEARCH_ELK_LATEST_PUPPET|" : "7.10.2",
@@ -578,6 +601,15 @@ def setup(app):
         os.mkdir(app.srcdir + '/' + html_static_path[0] + '/')
 
     if html_theme == 'wazuh_doc_theme_v3':
+        
+        # Minify redirects.js
+        with open(os.path.join(static_path_str, "js/redirects.js")) as redirects_file:
+            minified = jsmin(redirects_file.read())
+            
+            # Create redirects.min.js file
+            with open(os.path.join(current_path, "static/js/min/redirects.min.js"), 'w') as redirects_min_file:
+                redirects_min_file.write(minified)
+        
         # CSS files
         app.add_css_file("css/min/bootstrap.min.css?ver=%s" % os.stat(
             os.path.join(current_path, "static/css/min/bootstrap.min.css")).st_mtime)
@@ -622,6 +654,7 @@ def setup(app):
     app.connect('html-page-context', collect_compiled_pagename)
     app.connect('html-page-context', insert_inline_style)
     if html_theme == 'wazuh_doc_theme_v3':
+        app.connect('html-page-context', insert_inline_js)
         app.connect('html-page-context', manage_assets)
     app.connect('build-finished', finish_and_clean)
 
@@ -634,12 +667,29 @@ def insert_inline_style(app, pagename, templatename, context, doctree):
         google_fonts = reader.read()
         context['inline_fonts'] = google_fonts
 
+def insert_inline_js(app, pagename, templatename, context, doctree):
+    ''' Runs once per page, inserting the content of minified javascript snippets into the context '''
+    path = os.path.join(os.path.dirname(os.path.realpath(__file__)), theme_assets_path, 'static', 'js', 'inline')
+    js_scripts = ['light-dark-mode-inline']
+    inline_scripts = []
+    
+    for script in js_scripts:
+        script_path = os.path.join(path, script + '.min.js')
+    
+        # Inline scripts
+        with open(script_path, 'r') as reader:
+            inline_scripts.append(reader.read())
+    context['inline_scripts'] = inline_scripts
+
 def manage_assets(app, pagename, templatename, context, doctree):
     theme_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), theme_assets_path)
     static = '_static/'
+    conditional_redirects = static + "js/min/redirects.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/redirects.min.js")).st_mtime
+    if tags.has("production") or tags.has("dev"):
+        conditional_redirects = static + "js/min/redirects.min.js?ver=%s" % str(time.time())
     # Full list of non-common javascript files
     individual_js_files = {
-        "redirects": static + "js/min/redirects.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/redirects.min.js")).st_mtime,
+        "redirects": conditional_redirects,
         "wazuh-documentation": static + "js/min/wazuh-documentation.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/wazuh-documentation.min.js")).st_mtime,
         "index": static + "js/min/index.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/index.min.js")).st_mtime,
         "index-redirect": static + "js/min/index-redirect.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/index-redirect.min.js")).st_mtime,

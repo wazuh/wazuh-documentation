@@ -152,7 +152,7 @@ disabled
 Toggles whether the cluster is enabled or not. If this value is set to **yes**, the cluster won't start.
 
 +--------------------+-----------------------------------------+
-| **Default value**  | yes                                     |
+| **Default value**  | no                                      |
 +--------------------+-----------------------------------------+
 | **Allowed values** | yes, no                                 |
 +--------------------+-----------------------------------------+
@@ -174,4 +174,5 @@ Sample configuration
         <node>master</node>
       </nodes>
       <hidden>no</hidden>
+      <disabled>no</disabled>
     </cluster>

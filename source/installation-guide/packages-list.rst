@@ -248,9 +248,9 @@ Wazuh indexer
 Wazuh dashboard
 ---------------
 
-.. |DashboardRPM| replace:: `wazuh-dashboard-|WAZUH_DASHBOARD_CURRENT|-|WAZUH_DASHBOARD_CURRENT_REV|.|WAZUH_DASHBOARD_x64_RPM|.rpm <https://packages.wazuh.com/4.x/yum/wazuh-dashboard-|WAZUH_DASHBOARD_CURRENT|-|WAZUH_DASHBOARD_CURRENT_REV|.|WAZUH_DASHBOARD_x64_RPM|.rpm>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_DASHBOARD_CURRENT|/wazuh-dashboard-|WAZUH_DASHBOARD_CURRENT|-|WAZUH_DASHBOARD_CURRENT_REV|.|WAZUH_DASHBOARD_x64_RPM|.rpm.sha512>`__)
+.. |DashboardRPM| replace:: `wazuh-dashboard-|WAZUH_DASHBOARD_CURRENT|-|WAZUH_DASHBOARD_CURRENT_REV_RPM|.|WAZUH_DASHBOARD_x64_RPM|.rpm <https://packages.wazuh.com/4.x/yum/wazuh-dashboard-|WAZUH_DASHBOARD_CURRENT|-|WAZUH_DASHBOARD_CURRENT_REV_RPM|.|WAZUH_DASHBOARD_x64_RPM|.rpm>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_DASHBOARD_CURRENT|/wazuh-dashboard-|WAZUH_DASHBOARD_CURRENT|-|WAZUH_DASHBOARD_CURRENT_REV_RPM|.|WAZUH_DASHBOARD_x64_RPM|.rpm.sha512>`__)
 
-.. |DashboardDEB| replace:: `wazuh-dashboard_|WAZUH_DASHBOARD_CURRENT|-|WAZUH_DASHBOARD_CURRENT_REV|_|WAZUH_DASHBOARD_x64_DEB|.deb <https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-dashboard/wazuh-dashboard_|WAZUH_DASHBOARD_CURRENT|-|WAZUH_DASHBOARD_CURRENT_REV|_|WAZUH_DASHBOARD_x64_DEB|.deb>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_DASHBOARD_CURRENT|/wazuh-dashboard_|WAZUH_DASHBOARD_CURRENT|-|WAZUH_DASHBOARD_CURRENT_REV|_|WAZUH_DASHBOARD_x64_DEB|.deb.sha512>`__)
+.. |DashboardDEB| replace:: `wazuh-dashboard_|WAZUH_DASHBOARD_CURRENT|-|WAZUH_DASHBOARD_CURRENT_REV_DEB|_|WAZUH_DASHBOARD_x64_DEB|.deb <https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-dashboard/wazuh-dashboard_|WAZUH_DASHBOARD_CURRENT|-|WAZUH_DASHBOARD_CURRENT_REV_DEB|_|WAZUH_DASHBOARD_x64_DEB|.deb>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_DASHBOARD_CURRENT|/wazuh-dashboard_|WAZUH_DASHBOARD_CURRENT|-|WAZUH_DASHBOARD_CURRENT_REV_DEB|_|WAZUH_DASHBOARD_x64_DEB|.deb.sha512>`__)
 
 +--------------+------------------+
 | Package type | Package          |
@@ -263,54 +263,134 @@ Wazuh dashboard
 Wazuh Kibana plugin
 -------------------
 
-.. |WAZUH_KIBANA_ES_LATEST| replace:: `wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|-1.zip>`__ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|-1.zip.sha512>`__)
+For Wazuh |WAZUH_LATEST|:
+
+.. |WAZUH_KIBANA_7.10.2| replace:: `wazuh_kibana-|WAZUH_LATEST|_7.10.2.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_7.10.2-1.zip>`__ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_7.10.2-1.zip.sha512>`__)
+
+.. |WAZUH_KIBANA_7.16.0| replace:: `wazuh_kibana-|WAZUH_LATEST|_7.16.0.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_7.16.0-1.zip>`__ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_7.16.0-1.zip.sha512>`__)
+
+.. |WAZUH_KIBANA_7.16.1| replace:: `wazuh_kibana-|WAZUH_LATEST|_7.16.1.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_7.16.1-1.zip>`__ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_7.16.1-1.zip.sha512>`__)
+
+.. |WAZUH_KIBANA_7.16.2| replace:: `wazuh_kibana-|WAZUH_LATEST|_7.16.2.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_7.16.2-1.zip>`__ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_7.16.2-1.zip.sha512>`__)
 
 .. |WAZUH_KIBANA_7.16.3| replace:: `wazuh_kibana-|WAZUH_LATEST|_7.16.3.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_7.16.3-1.zip>`__ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_7.16.3-1.zip.sha512>`__)
 
 .. |WAZUH_KIBANA_7.17.0| replace:: `wazuh_kibana-|WAZUH_LATEST|_7.17.0.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_7.17.0-1.zip>`__ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_7.17.0-1.zip.sha512>`__)
 
-.. |var_ELASTICSEARCH_LATEST| replace:: |ELASTICSEARCH_LATEST|
+.. |WAZUH_KIBANA_7.17.1| replace:: `wazuh_kibana-|WAZUH_LATEST|_7.17.1.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_7.17.1-1.zip>`__ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_7.17.1-1.zip.sha512>`__)
 
-.. |var_OPEN_DISTRO_LATEST| replace:: |OPEN_DISTRO_LATEST|
+.. |WAZUH_KIBANA_7.17.2| replace:: `wazuh_kibana-|WAZUH_LATEST|_7.17.2.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_7.17.2-1.zip>`__ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_7.17.2-1.zip.sha512>`__)
 
-.. |var_WAZUH_LATEST| replace:: |WAZUH_LATEST|
+.. |WAZUH_KIBANA_7.17.3| replace:: `wazuh_kibana-|WAZUH_LATEST|_7.17.3.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_7.17.3-1.zip>`__ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_7.17.3-1.zip.sha512>`__)
 
-+----------------------------+--------------------------+---------------------+--------------------------+
-| Kibana Version             | Open Distro Version      | Wazuh version       | Package                  |
-+============================+==========================+=====================+==========================+
-| |var_ELASTICSEARCH_LATEST| | |var_OPEN_DISTRO_LATEST| | |var_WAZUH_LATEST|  | |WAZUH_KIBANA_ES_LATEST| |
-+----------------------------+--------------------------+---------------------+--------------------------+
-| 7.16.3                     |                          | |var_WAZUH_LATEST|  | |WAZUH_KIBANA_7.16.3|    |
-+----------------------------+--------------------------+---------------------+--------------------------+
-| 7.17.0                     |                          | |var_WAZUH_LATEST|  | |WAZUH_KIBANA_7.17.0|    |
-+----------------------------+--------------------------+---------------------+--------------------------+
-
++------------------+-----------------------+--------------------------+
+| Kibana Version   | Open Distro Version   | Package                  |
++==================+=======================+==========================+
+| 7.10.2           | 1.13.2                | |WAZUH_KIBANA_7.10.2|    |
++------------------+-----------------------+--------------------------+
+| 7.16.0           |                       | |WAZUH_KIBANA_7.16.0|    |
++------------------+-----------------------+--------------------------+
+| 7.16.1           |                       | |WAZUH_KIBANA_7.16.1|    |
++------------------+-----------------------+--------------------------+
+| 7.16.2           |                       | |WAZUH_KIBANA_7.16.2|    |
++------------------+-----------------------+--------------------------+
+| 7.16.3           |                       | |WAZUH_KIBANA_7.16.3|    |
++------------------+-----------------------+--------------------------+
+| 7.17.0           |                       | |WAZUH_KIBANA_7.17.0|    |
++------------------+-----------------------+--------------------------+
+| 7.17.1           |                       | |WAZUH_KIBANA_7.17.1|    |
++------------------+-----------------------+--------------------------+
+| 7.17.2           |                       | |WAZUH_KIBANA_7.17.2|    |
++------------------+-----------------------+--------------------------+
+| 7.17.3           |                       | |WAZUH_KIBANA_7.17.3|    |
++------------------+-----------------------+--------------------------+
 
 For a complete list of the available versions, see the `Wazuh Kibana plugin compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/tree/v4.2.5-7.10.2#wazuh---kibana---open-distro-version-compatibility-matrix>`_.
 
 Wazuh Splunk app
 ----------------
 
+For Wazuh Splunk app |WAZUH_SPLUNK_LATEST|:
+
+.. |SPLUNK_8.1.1_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.1.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.1-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_LATEST|/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.1-1.tar.gz.sha512>`__)
+
+.. |SPLUNK_8.1.2_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.2.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.2-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_LATEST|/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.2-1.tar.gz.sha512>`__)
+
+.. |SPLUNK_8.1.3_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.3.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.3-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_LATEST|/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.3-1.tar.gz.sha512>`__)
+
 .. |SPLUNK_8.1.4_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.4.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.4-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_LATEST|/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.4-1.tar.gz.sha512>`__)
+
+.. |SPLUNK_8.1.5_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.5.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.5-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_LATEST|/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.5-1.tar.gz.sha512>`__)
+
+.. |SPLUNK_8.1.6_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.6.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.6-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_LATEST|/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.6-1.tar.gz.sha512>`__)
+
+.. |SPLUNK_8.1.7_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.7.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.7-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_LATEST|/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.7-1.tar.gz.sha512>`__)
+
+.. |SPLUNK_8.1.7.1_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.7.1.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.7.1-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_LATEST|/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.7.1-1.tar.gz.sha512>`__)
+
+.. |SPLUNK_8.1.7.2_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.7.2.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.7.2-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_LATEST|/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.7.2-1.tar.gz.sha512>`__)
+
+.. |SPLUNK_8.1.8_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.8.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.8-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_LATEST|/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.8-1.tar.gz.sha512>`__)
+
+.. |SPLUNK_8.1.9_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.9.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.9-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_LATEST|/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.9-1.tar.gz.sha512>`__)
+
+.. |SPLUNK_8.1.10_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.10.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.10-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_LATEST|/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.1.10-1.tar.gz.sha512>`__)
+
+.. |SPLUNK_8.2.0_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.2.0.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.2.0-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_LATEST|/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.2.0-1.tar.gz.sha512>`__)
+
+.. |SPLUNK_8.2.1_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.2.1.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.2.1-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_LATEST|/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.2.1-1.tar.gz.sha512>`__)
 
 .. |SPLUNK_8.2.2_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.2.2.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.2.2-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_LATEST|/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.2.2-1.tar.gz.sha512>`__)
 
-.. |SPLUNK_LATEST_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_LATEST|_|SPLUNK_LATEST|.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_|SPLUNK_LATEST|-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_SPLUNK_LATEST|/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_|SPLUNK_LATEST|-1.tar.gz.sha512>`__)
+.. |SPLUNK_8.2.3_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.2.3.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.2.3-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_LATEST|/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.2.3-1.tar.gz.sha512>`__)
 
-.. |var_SPLUNK_LATEST| replace:: |SPLUNK_LATEST|
+.. |SPLUNK_8.2.4_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.2.4.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.2.4-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_LATEST|/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.2.4-1.tar.gz.sha512>`__)
 
-.. |var_WAZUH_SPLUNK_LATEST| replace:: |WAZUH_SPLUNK_LATEST|
+.. |SPLUNK_8.2.5_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.2.5.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.2.5-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_LATEST|/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.2.5-1.tar.gz.sha512>`__)
 
-+----------------------+----------------------------+---------------------+
-| Splunk version       | Wazuh version              | Package             |
-+======================+============================+=====================+
-| 8.1.4                | |var_WAZUH_SPLUNK_LATEST|  | |SPLUNK_8.1.4_PKG|  |
-+----------------------+----------------------------+---------------------+
-| 8.2.2                | |var_WAZUH_SPLUNK_LATEST|  | |SPLUNK_8.2.2_PKG|  |
-+----------------------+----------------------------+---------------------+
-| |var_SPLUNK_LATEST|  | |var_WAZUH_SPLUNK_LATEST|  | |SPLUNK_LATEST_PKG| |
-+----------------------+----------------------------+---------------------+
+.. |SPLUNK_8.2.6_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.2.6.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.2.6-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_LATEST|/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.2.6-1.tar.gz.sha512>`__)
 
++----------------------+----------------------+
+| Splunk version       | Package              |
++======================+======================+
+| 8.1.1                | |SPLUNK_8.1.1_PKG|   |
++----------------------+----------------------+
+| 8.1.2                | |SPLUNK_8.1.2_PKG|   |
++----------------------+----------------------+
+| 8.1.3                | |SPLUNK_8.1.3_PKG|   |
++----------------------+----------------------+
+| 8.1.4                | |SPLUNK_8.1.4_PKG|   |
++----------------------+----------------------+
+| 8.1.5                | |SPLUNK_8.1.5_PKG|   |
++----------------------+----------------------+
+| 8.1.6                | |SPLUNK_8.1.6_PKG|   |
++----------------------+----------------------+
+| 8.1.7                | |SPLUNK_8.1.7_PKG|   |
++----------------------+----------------------+
+| 8.1.7.1              | |SPLUNK_8.1.7.1_PKG| |
++----------------------+----------------------+
+| 8.1.7.2              | |SPLUNK_8.1.7.2_PKG| |
++----------------------+----------------------+
+| 8.1.8                | |SPLUNK_8.1.8_PKG|   |
++----------------------+----------------------+
+| 8.1.9                | |SPLUNK_8.1.9_PKG|   |
++----------------------+----------------------+
+| 8.1.10               | |SPLUNK_8.1.10_PKG|  |
++----------------------+----------------------+
+| 8.2.0                | |SPLUNK_8.2.0_PKG|   |
++----------------------+----------------------+
+| 8.2.1                | |SPLUNK_8.2.1_PKG|   |
++----------------------+----------------------+
+| 8.2.2                | |SPLUNK_8.2.2_PKG|   |
++----------------------+----------------------+
+| 8.2.3                | |SPLUNK_8.2.3_PKG|   |
++----------------------+----------------------+
+| 8.2.4                | |SPLUNK_8.2.4_PKG|   |
++----------------------+----------------------+
+| 8.2.5                | |SPLUNK_8.2.5_PKG|   |
++----------------------+----------------------+
+| 8.2.6                | |SPLUNK_8.2.6_PKG|   |
++----------------------+----------------------+
 
 Filebeat
 ---------------
@@ -329,7 +409,7 @@ Virtual machine
 +--------------+--------------+--------------+---------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Distribution | Architecture | VM Format    | Version | Package                                                                                                                                                                                            |
 +==============+==============+==============+=========+====================================================================================================================================================================================================+
-|   CentOS 7   |    64bits    |      OVA     |  |WAZUH_LATEST_OVA|  | `wazuh-|WAZUH_LATEST_OVA|_|OPEN_DISTRO_LATEST|.ova <https://packages.wazuh.com/|CURRENT_MAJOR|/vm/wazuh-|WAZUH_LATEST_OVA|_|OPEN_DISTRO_LATEST|.ova>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST_OVA|/wazuh-|WAZUH_LATEST_OVA|_|OPEN_DISTRO_LATEST|.ova.sha512>`__)             |
+|   CentOS 7   |    64bits    |      OVA     |  |WAZUH_LATEST_OVA|  | `wazuh-|WAZUH_LATEST_OVA|.ova <https://packages.wazuh.com/|CURRENT_MAJOR|/vm/wazuh-|WAZUH_LATEST_OVA|.ova>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST_OVA|/wazuh-|WAZUH_LATEST_OVA|.ova.sha512>`__)                                  |
 +--------------+--------------+--------------+---------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Amazon Machine Image

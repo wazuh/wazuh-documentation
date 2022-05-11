@@ -1,8 +1,8 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
-    :description: A Wazuh cluster is a group of Wazuh managers that work together to enhance the availability and scalability of the service. Learn more about it here. 
-    
+    :description: A Wazuh cluster is a group of Wazuh managers that work together to enhance the availability and scalability of the service. Learn more about it here.
+
 .. _wazuh-cluster-introduction:
 
 Basics
@@ -109,4 +109,4 @@ Integrity thread
 File Integrity Thread
 ~~~~~~~~~~~~~~~~~~~~~
 
-    The integrity of each file is calculated using its MD5 checksum and its modification time. To avoid calculating the integrity with each worker connection, the integrity is calculated in a different thread, called *File integrity thread*, in the master node every so often.
+    The integrity of each file is calculated using its Blake2b checksum and its modification time. To avoid calculating the integrity with each worker connection, the integrity is calculated in a different thread, called *File integrity thread*, in the master node every so often.
