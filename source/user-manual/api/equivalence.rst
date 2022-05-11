@@ -27,7 +27,7 @@ Migrating users
 -----------------
 
 The Wazuh API users are not migrated when upgrading the Wazuh API from 3.X to 4.X and newer versions. It is not recommended to migrate the users since there are numerous security changes to the Wazuh API.
-However, it is easy to create new users and assign the administrator role to them with the following API requests (substitute <username> and <password>):
+However, it is easy to create new users and assign them the administrator role with the following API requests (substitute <username> and <password>):
 
 **Create new user** (:api-ref:`POST /security/users <operation/api.controllers.security_controller.create_user>`)
 
