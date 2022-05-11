@@ -53,7 +53,7 @@ logging
 
 .. deprecated:: 4.4
 
-This option has no effect. The module now uses the :ref:`wazuh_modules debug level<wazuh_modules_options>` to set its logging level.
+This option has no effect. The module now uses the :ref:`wazuh_modules.debug <wazuh_modules_options>` level to set its logging level.
 
 
 bucket type

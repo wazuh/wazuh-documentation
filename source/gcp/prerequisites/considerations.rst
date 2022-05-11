@@ -26,7 +26,7 @@ Any date in the file's name is ignored and only the creation date is used to det
 Logging level
 -------------
 
-To switch between different logging levels for debugging and troubleshooting purposes, the Google Cloud integration uses the :ref:`wazuh_modules debug level<wazuh_modules_options>` to set its verbosity level.
+To switch between different logging levels for debugging and troubleshooting purposes, the Google Cloud integration uses the :ref:`wazuh_modules.debug <wazuh_modules_options>` level to set its verbosity level.
 
 
 Configuring multiple Google Cloud Storage bucket
