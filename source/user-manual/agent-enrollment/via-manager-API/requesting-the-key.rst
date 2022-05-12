@@ -26,7 +26,7 @@ From Linux/Unix and macOS
 
    .. code-block:: console
 
-     # TOKEN=$(curl -u <user>:<password> -k -X GET "https://<MANAGER_IP>:55000/security/user/authenticate?raw=true")
+     # TOKEN=$(curl -u <user>:<password> -k -X POST "https://<MANAGER_IP>:55000/security/user/authenticate?raw=true")
 
    Run the command ``echo $TOKEN`` to confirm that the token was successfully generated. You should get an output like this:
 
@@ -100,7 +100,7 @@ The following steps serve as a guide on how to send agent enrollment requests fr
 
    .. code-block:: console
 
-    # Invoke-WebRequest -UseBasicParsing -Headers @{Authorization=("Basic {0}" -f $base64AuthInfo)} -Method GET -Uri https://<MANAGER_IP>:55000/security/user/authenticate | Select-Object -Expand Content
+    # Invoke-WebRequest -UseBasicParsing -Headers @{Authorization=("Basic {0}" -f $base64AuthInfo)} -Method POST -Uri https://<MANAGER_IP>:55000/security/user/authenticate | Select-Object -Expand Content
    
    The output looks like this: 
  
