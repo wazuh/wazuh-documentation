@@ -32,7 +32,7 @@ Single-node Deployment
 
     .. code-block:: console
 
-      $ git clone https://github.com/wazuh/wazuh-docker.git -b |WAZUH_LATEST_MINOR| --depth=1
+      $ git clone https://github.com/wazuh/wazuh-docker.git -b v|WAZUH_LATEST_DOCKER| --depth=1
 
 
     Then enter into the ``single-node`` directory, all the commands described below are executed within this directory. For :ref:`additional security <customize-default-users>`, the default password for the Wazuh indexer administrator user can be changed.
@@ -114,7 +114,7 @@ Multi-node deployment
 
     .. code-block:: console
 
-      $ git clone https://github.com/wazuh/wazuh-docker.git -b |WAZUH_LATEST_MINOR| --depth=1
+      $ git clone https://github.com/wazuh/wazuh-docker.git -b v|WAZUH_LATEST_DOCKER| --depth=1
 
    
   Then enter into the ``multi-node`` directory, all the commands described below are executed within this directory. For :ref:`additional security <customize-default-users>`, the default password for the Wazuh Indexer admin user can be changed.
@@ -199,7 +199,7 @@ The Wazuh manager, indexer, and dashboard images can be modified and built local
 
 .. code-block:: console
   
-   $ git clone https://github.com/wazuh/wazuh-docker.git -b |WAZUH_LATEST_MINOR| --depth=1
+   $ git clone https://github.com/wazuh/wazuh-docker.git -b v|WAZUH_LATEST_DOCKER| --depth=1
 
 
 2. Enter into the ``build-docker-images`` directory and build the Wazuh manager, indexer, and dashboard images:
