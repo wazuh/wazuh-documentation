@@ -191,15 +191,15 @@ GNU/Linux
 *********
 Enabling core dump generation
 -----------------------------
-Linux kernel allow multiple possibilities to handle coredumps files
+Linux kernel allows multiple possibilities to handle core dumps files
 
-- Naming of core dump files: create dumps using default ``core.pid`` or templetized core dumps filenames using subtitutions.
-- Piping core dumps to a program: execute a program with certain arguments and send the dump using pipe mechanism
-- Mix of them (Since Linux 5.3): multi-dump generation by pipe-separating output specification
+- Naming of core dump files: create dumps using default ``core.pid`` or templatized core dumps filenames using substitutions.
+- Piping core dumps to a program: execute a program with certain arguments and send the dump using pipe mechanism.
+- Mix of them (Since Linux 5.3): multi-dump generation by pipe-separating output specification.
 
-Due the fact that GNU/Linux distributions might use different approaches, fist step is to determinate whats is being used and therefore apply some modifications to be able to capture Wazuh coredumps.
+Since GNU/Linux distributions might use different approaches, the first step is to determine what is being used and therefore apply some modifications to be able to capture Wazuh coredumps.
 
-Current core dump configuration can be retrieved by reading ``/proc/sys/kernel/core_pattern`` file, and bring information how core dumps are being handled
+Current core dump configuration can be retrieved by reading ``/proc/sys/kernel/core_pattern`` file, and bringing information how core dumps are being handled
 
 - Core dumps are being handled by Apport. See
 
@@ -245,16 +245,16 @@ Current core dump configuration can be retrieved by reading ``/proc/sys/kernel/c
 
     |/bin/false
 
-To know more about Kernel core dump managment see `core man <http://man7.org/linux/man-pages/man5/core.5.html>`_.
+To know more about Kernel core dump management see `core man <http://man7.org/linux/man-pages/man5/core.5.html>`_.
 
 Systemd-coredump handler
 ++++++++++++++++++++++++
 
 Default on: Fedora, Arch Linux, centOS 8.
 
-Systemd has a unified journal that allow to track, compress and log core dumps on the system.
+Systemd has a unified journal that allows to track, compress and log core dumps on the system.
 
-To get the core dump of interest, we must know the `<PID>` of the dead process to to obtain it using ``coredumpctl``.
+To get the core dump of interest, we must know the `<PID>` of the dead process to obtain it using ``coredumpctl``.
 
   .. code-block:: console
 
@@ -269,7 +269,7 @@ Apport core dump handler
 Default on: Ubuntu
 
 Apport crash files are located in ``/var/crash`` directory and consist of a package that, not only contains the core dump file, but also process' environment information about the event.
-In order to obtain the specific core dump, the crash report can be unpacked by using ``apport-unpack``
+To obtain the specific core dump, the crash report can be unpacked by using ``apport-unpack``
 
   .. code-block:: console
 
@@ -288,8 +288,8 @@ Apport service should be also started to capture coredumps
 
     # systemd start apport.service
 
-`<dump-filename>` must be replaced by Apport crash file, that is the full path of the file where slashes (``/``) were replaced by underscores (``_``), plus an incremental counter.
-  For example, first ``wazuh-logcollector`` crash will create a report named `_var_ossec_bin_wazuh-logcollector.0.crash`
+``<dump-filename>`` must be replaced by Apport crash file, that is the full path of the file where slashes (``/``) were replaced by underscores (``_``), plus an incremental counter.
+For example, first ``wazuh-logcollector`` crash will create a report named `_var_ossec_bin_wazuh-logcollector.0.crash`
 
 To know more about Apport see `Apport Wiki <https://wiki.ubuntu.com/Apport>`_.
 
@@ -298,7 +298,7 @@ Direct core dump creation
 
 Default on: centOS (5,6,7), OpenSuse.
 
-Several distributions use the simpler and direct mechanism: create the dump on certain directory with a specific name pattern.
+Several distributions use the simpler and direct mechanism: create the dump on a certain directory with a specific name pattern.
 
 .. code-block:: console
 
@@ -322,8 +322,8 @@ Several distributions use the simpler and direct mechanism: create the dump on c
 Wazuh core dump configuration
 +++++++++++++++++++++++++++++
 
-Linux kernel limit the core dump size by default, but need to be extended to obtain a full backtrace.
-Systemd allow us to extend Wazuh service configurations and set this up.
+Linux kernel limits the core dump size by default but needs to be extended to obtain a full backtrace.
+Systemd allows us to extend Wazuh service configurations and set this up.
 
 .. tabs::
 
@@ -349,7 +349,7 @@ Systemd allow us to extend Wazuh service configurations and set this up.
 Wazuh symbols installation
 --------------------------
 
-Debug symbol files will allow the interpretation in a human-readeable way of core dumps. Will be installed in `<INSTALLDIR>/.symbols` directory by default.
+Debug symbol files will allow the interpretation in a human-readeable way of core dumps. Will be installed in ``<INSTALLDIR>/.symbols`` directory by default.
 
 .. tabs::
 
@@ -408,4 +408,4 @@ Debug symbol files will allow the interpretation in a human-readeable way of cor
       .. tab:: Installation from sources
 
         Symbols files will be installed by default on ``<INSTALLDIR>/.symbols`` directory.
-  
+
