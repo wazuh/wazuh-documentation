@@ -1,5 +1,8 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+  :description: AWS Trusted Advisor is a service that helps users reduce cost by optimizing their AWS environment. Learn how to configure and monitor it with Wazuh.
+
 .. _amazon_trusted_advisor:
 
 AWS Trusted Advisor
@@ -91,6 +94,13 @@ Amazon configuration
       :width: 70%
 
 #. Once the rule is created, data will start to be sent to the previously created S3 bucket. Remember to first enable the service you want to monitor, otherwise you won't get any data.
+
+Policy configuration
+++++++++++++++++++++
+
+.. include:: /_templates/cloud/amazon/create_policy.rst
+.. include:: /_templates/cloud/amazon/bucket_policies.rst
+.. include:: /_templates/cloud/amazon/attach_policy.rst
 
 Wazuh configuration
 -------------------

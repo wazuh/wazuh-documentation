@@ -1,7 +1,8 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
-   :description: Wazuh can monitor and analyze the security issues found by AWS Inspector Classic. Learn how to configure and use the AWS Inspector Classic integration in this section.
+  :description: Amazon Inspector Classic is an automated security assessments service that improves the security of applications deployed on AWS. Learn how to configure and monitor its findings with Wazuh.
+
 
 .. _amazon_inspector:
 
@@ -9,6 +10,7 @@ Amazon Inspector Classic
 ========================
 
 `Amazon Inspector Classic <https://docs.aws.amazon.com/inspector/v1/userguide/inspector_introduction.html>`_ is an automated security assessment service that helps improve the security and compliance of applications deployed on AWS. Amazon Inspector Classic automatically assesses applications for exposure, vulnerabilities, and deviations from best practices. After performing an assessment, Amazon Inspector Classic produces a detailed list of security findings prioritized by level of severity. These findings can be reviewed directly or as part of detailed assessment reports which are available via the Amazon Inspector console or API.
+
 
 .. note::
    Wazuh does not yet support the `new Amazon Inspector module <https://aws.amazon.com/inspector/>`_, but it has support for the `Amazon Inspector Classic service <https://docs.aws.amazon.com/inspector/v1/userguide/inspector_introduction.html>`_.
@@ -67,6 +69,32 @@ Amazon configuration
     .. thumbnail:: ../../../images/aws/aws-inspector-review.png
 	:align: center
 	:width: 100%
+
+Policy configuration
+^^^^^^^^^^^^^^^^^^^^
+
+.. include:: /_templates/cloud/amazon/create_policy.rst
+
+.. include:: /_templates/cloud/amazon/read_only_policy_description.rst
+
+.. code-block:: json
+
+    {
+	"Version": "2012-10-17",
+	"Statement": [
+	    {
+		"Sid": "VisualEditor0",
+		"Effect": "Allow",
+		"Action": [
+		    "inspector:ListFindings",
+		    "inspector:DescribeFindings"
+		],
+		"Resource": "*"
+	    }
+	]
+    }
+
+.. include:: /_templates/cloud/amazon/attach_policy.rst
 
 Wazuh configuration
 -------------------
