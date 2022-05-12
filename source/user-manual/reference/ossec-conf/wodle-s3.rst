@@ -165,7 +165,7 @@ The available types are:  ``cloudtrail``, ``guardduty``, ``vpcflow``, ``config``
 +========================================+=============================================================+===============================================+
 | :ref:`bucket_name`                     | Any valid bucket name                                       | Mandatory                                     |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
-| :ref:`bucket_aws_account_id`           | Comma list of AWS Accounts                                  | Optional (only works with CloudTrail buckets) |
+| :ref:`bucket_aws_account_id`           | Comma-separated list of AWS Accounts                        | Optional (only works with CloudTrail buckets) |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`bucket_account_alias`            | Any string                                                  | Optional                                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
@@ -186,7 +186,7 @@ The available types are:  ``cloudtrail``, ``guardduty``, ``vpcflow``, ``config``
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`only_logs_aws_buckets`           | Date (YYYY-MMM-DDD, for example 2018-AUG-21)                | Optional                                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
-| :ref:`bucket_regions`                  | Comma list of AWS regions                                   | Optional (only works with CloudTrail buckets) |
+| :ref:`bucket_regions`                  | Comma-separated list of AWS regions                         | Optional (only works with CloudTrail buckets) |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`bucket_aws_organization_id`      | Name of AWS organization                                    | Optional (only works with CloudTrail buckets) |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
@@ -217,11 +217,11 @@ aws_account_id
 
 The AWS Account ID for the bucket logs. Only works with CloudTrail buckets.
 
-+--------------------+-------------------------------------------+
-| **Default value**  | All accounts                              |
-+--------------------+-------------------------------------------+
-| **Allowed values** | Comma list of 12 digit AWS Account ID     |
-+--------------------+-------------------------------------------+
++--------------------+--------------------------------------------------+
+| **Default value**  | All accounts                                     |
++--------------------+--------------------------------------------------+
+| **Allowed values** | Comma-separated list of 12 digit AWS Account IDs |
++--------------------+--------------------------------------------------+
 
 
 .. _bucket_account_alias:
@@ -346,12 +346,12 @@ A valid date, in YYYY-MMM-DD format. Only logs from that date onwards will be pa
 regions
 ^^^^^^^
 
-A comma-delimited list of regions to limit parsing of logs. Only works with CloudTrail buckets.
+A comma-separated list of regions to limit parsing of logs. Only works with CloudTrail buckets.
 
 +--------------------+----------------------------------------+
 | **Default value**  | All regions                            |
 +--------------------+----------------------------------------+
-| **Allowed values** | Comma-delimited list of valid regions  |
+| **Allowed values** | Comma-separated list of valid regions  |
 +--------------------+----------------------------------------+
 
 .. _bucket_aws_organization_id:
@@ -441,11 +441,11 @@ The available types are: ``cloudwatchlogs``, and ``inspector``.
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | Options                                | Allowed values                                              | Mandatory/Optional                            |
 +========================================+=============================================================+===============================================+
-| :ref:`service_aws_account_id`          | Comma-delimited list of 12 digit AWS Account ID             | Optional                                      |
+| :ref:`service_aws_account_id`          | Comma-separated list of 12 digit AWS Account IDs            | Optional                                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`service_aws_account_alias`       | Any string                                                  | Optional                                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
-| :ref:`service_aws_log_groups`          | Comma-delimited list of valid log group names               | Mandatory for CloudWatch Logs                 |
+| :ref:`service_aws_log_groups`          | Comma-separated list of valid log group names               | Mandatory for CloudWatch Logs                 |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`service_access_key`              | Any alphanumerical key                                      | Optional                                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
@@ -460,7 +460,7 @@ The available types are: ``cloudwatchlogs``, and ``inspector``.
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`service_only_logs_after`         | Valid date in YYYY-MMM-DD format                            | Optional                                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
-| :ref:`service_regions`                 | Comma-delimited list of valid regions                       | Optional                                      |
+| :ref:`service_regions`                 | Comma-separated list of valid regions                       | Optional                                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`service_remove_log_streams`      | yes, no                                                     | Optional                                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
@@ -479,7 +479,7 @@ The AWS Account ID for accessing the service.
 +--------------------+-----------------------------------------------------+
 | **Default value**  | All accounts                                        |
 +--------------------+-----------------------------------------------------+
-| **Allowed values** | Comma-delimited list of 12 digit AWS Account ID     |
+| **Allowed values** | Comma-separated list of 12 digit AWS Account IDs    |
 +--------------------+-----------------------------------------------------+
 
 .. _service_aws_account_alias:
@@ -515,12 +515,12 @@ aws_log_groups
 
 .. versionadded:: 4.0.0
 
-A comma-delimited list of log group names from where the logs should be extracted. This option is mandatory for CloudWatch Logs, and only works with that service.
+A comma-separated list of log group names from where the logs should be extracted. This option is mandatory for CloudWatch Logs, and only works with that service.
 
 +--------------------+------------------------------------------------+
 | **Default value**  | N/A                                            |
 +--------------------+------------------------------------------------+
-| **Allowed values** | Comma-delimited list of valid log group names  |
+| **Allowed values** | Comma-separated list of valid log group names  |
 +--------------------+------------------------------------------------+
 
 .. _service_secret_key:
@@ -597,12 +597,12 @@ regions
 
 .. versionadded:: 4.0.0
 
-A comma-delimited list of regions to limit parsing of logs.
+A comma-separated list of regions to limit parsing of logs.
 
 +--------------------+----------------------------------------+
 | **Default value**  | All regions                            |
 +--------------------+----------------------------------------+
-| **Allowed values** | Comma-delimited list of valid regions  |
+| **Allowed values** | Comma-separated list of valid regions  |
 +--------------------+----------------------------------------+
 
 .. _service_remove_log_streams:

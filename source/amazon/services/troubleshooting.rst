@@ -12,7 +12,7 @@ Troubleshooting
 Checking if the module is running
 ---------------------------------
 
-When the module runs it writes its output to the ``ossec.log`` file. This log file can be found in ``WAZUH_PATH/logs/ossec.log`` or under ``Wazuh`` > ``Management`` > ``Logs`` if using the Wazuh UI.
+When the module runs it writes its output in the ``ossec.log`` file. This log file can be found in ``WAZUH_PATH/logs/ossec.log`` or under **Wazuh** > **Management** > **Logs** if using the Wazuh UI.
 
 It is possible to check if the module is running without issues by looking in the ``ossec.log`` file. These are the messages that are displayed in the ``ossec.log``, depending on how the module has been configured:
 
@@ -46,7 +46,7 @@ It is possible to check if the module is running without issues by looking in th
 Enabling debug mode
 -------------------
 
-It is possible to obtain additional information about the module's execution by enabling the debug mode. This is used to see ``INFO``or ``DEBUG`` messages. There are three different debug levels available:
+It is possible to obtain additional information about the module's execution by enabling the debug mode. This is used to see ``INFO`` or ``DEBUG`` messages. There are three different debug levels available:
 
 - **Debug level 0**: Only ``ERROR`` and ``WARNING`` messages are written in the ``ossec.log`` file. This is the default value.
 
@@ -64,7 +64,7 @@ Follow these steps to enable debug mode:
         wazuh_modules.debug=2
 
 
-#. Restart the Wazuh service
+#. Restart the Wazuh service. 
 
 .. include:: ../../_templates/common/restart_manager_or_agent.rst
 
@@ -84,7 +84,7 @@ To understand how the :ref:`reference_ossec_global_logall_json` parameter works 
 #. The content of these logs is sent to the analysis engine in the form of an ``Event``.
 #. The analysis engine evaluates these events and compares them with the different rules available. If the event matches any of the rules an alert is generated, which is what ultimately is shown in the Wazuh UI.
 
-With this in mind, it is possible to make use of the :ref:`reference_ossec_global_logall_json`. When this option is activated, Wazuh stores into ``WAZUH_PATH/logs/archives/archives.json`` file every event sent to the analysis engine whether they tripped a rule or not. By checking this file it is possible to determine if the AWS events are being sent to the analysis engine and therefore working properly.
+With this in mind, it is possible to make use of the :ref:`reference_ossec_global_logall_json` option. When this option is activated, Wazuh stores into the ``WAZUH_PATH/logs/archives/archives.json`` file every event sent to the analysis engine whether they tripped a rule or not. By checking this file, it is possible to determine if the AWS events are being sent to the analysis engine and therefore the module is working as expected.
 
 .. Note::
         Don't forget to disable the :ref:`reference_ossec_global_logall_json` parameter once the troubleshooting has finished. Leaving it enabled could result in high disk space consumption.
@@ -96,7 +96,7 @@ Common problems and solutions
 Unable to locate credentials
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The module does not work and the following error messages appears in the ``ossec.log``:
+The module does not work and the following error messages appear in the ``ossec.log``:
 
     .. code-block:: none
         :class: output
@@ -112,7 +112,7 @@ No authentication method was provided within the configuration of the module. Ch
 Invalid credentials to access S3 Bucket
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The module does not work and the following error messages appears in the ``ossec.log``:
+The module does not work and the following error messages appear in the ``ossec.log``:
 
     .. code-block:: none
         :class: output
@@ -128,7 +128,7 @@ Make sure the credentials provided grant access to the requested S3 bucket and t
 The config profile could not be found
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The module does not work and the following error messages appears in the ``ossec.log``:
+The module does not work and the following error messages appear in the ``ossec.log``:
 
     .. code-block:: none
         :class: output
@@ -144,7 +144,7 @@ Make sure the profile value specified in the configuration matches with an exist
 The security token included in the request is invalid
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The module does not work and the following error messages appears in the ``ossec.log``:
+The module does not work and the following error messages appear in the ``ossec.log``:
 
     .. code-block:: none
         :class: output
@@ -164,13 +164,13 @@ The module is running but no alerts are displayed in the Wazuh UI.
 
 **Solution**
 
-First of all, make sure there are ``ERROR`` or ``WARNING`` messages in the ``ossec.log`` file by :ref:`enabling debug mode <aws_debug_mode>`. If the module is running as expected but no alerts are being generated it could mean there is no reason for alerts to be raised in first place. Check the following to verify this:
+First of all, review ``ERROR`` or ``WARNING`` messages in the ``ossec.log`` file by :ref:`enabling debug mode <aws_debug_mode>`. If the module is running as expected but no alerts are being generated it could mean there is no reason for alerts to be raised in first place. Check the following to verify this:
 
-- **Make sure there is data available for the given date**
+- **Make sure there is data available for the given date**.
 
         When running, the module requests AWS for the logs corresponding to the date indicated using the :ref:`only_logs_aws_buckets` parameter. If this parameter is not specified, it will try to obtain the logs corresponding to the day of execution. Make sure you are specifying a value for :ref:`only_logs_aws_buckets` and that there is data available for that particular date. Check the :ref:`amazon_considerations` page to learn more about how to properly filter the logs using the ``only_logs_after`` parameter.
 
-- **Check if the events are being sent to the analysis engine:**
+- **Check if the events are being sent to the analysis engine**.
 
         A common scenario is that no alerts are being generated because the events are not matching any of the available rules. Take a look to the :ref:`aws_events_processed` section to learn how to check if the AWS logs are being sent to the analysis engine.
 
@@ -184,13 +184,13 @@ The module is running without any error or warning messages, but no alerts from 
 
 A common scenario is that no alerts are being generated because the events are not matching any of the available rules. Take a look to the :ref:`aws_events_processed` section to learn how to check if the AWS logs are being sent to the analysis engine.
 
-Take into account that Wazuh does not provide default rules for the different logs that can be found in CloudWatch Logs, since they can have any type of format and come from any source. Because of this, if a user wants to make use of this integration to be able to process any custom log they will most likely have to configure their own rules for them. Take a look at the :ref:`ruleset_custom` section to learn more about this topic.
+Take into account that Wazuh does not provide default rules for the different logs that can be found in CloudWatch Logs, since they can have any type of format and come from any source. Because of this, if a user wants to make use of this integration to process any custom log they will most likely have to configure their own rules for them. Take a look at the :ref:`ruleset_custom` section to learn more about this topic.
 
 
 Interval overtaken message is present in the ossec.log
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The ``Interval overtaken`` message is present in the ossec.log
+The ``Interval overtaken`` message is present in the ``ossec.log`` file. 
 
 **Solution**
 
