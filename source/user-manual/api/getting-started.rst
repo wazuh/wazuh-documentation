@@ -36,7 +36,7 @@ The Wazuh API will be installed along with the Wazuh manager by default. To cont
 Logging into the Wazuh API
 --------------------------
 
-Wazuh API endpoints requires authentication in order to be used. Therefore, all calls must include a JSON Web Token. JWT is an open standard (RFC 7519) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object. Follow the steps below to log in using :api-ref:`GET /security/user/authenticate <operation/api.controllers.security_controller.login_user>` and obtain a token in order to run any endpoint:
+Wazuh API endpoints require authentication in order to be used. Therefore, all calls must include a JSON Web Token. JWT is an open standard (RFC 7519) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object. Follow the steps below to log in using :api-ref:`POST /security/user/authenticate <operation/api.controllers.security_controller.login_user>` and obtain a token in order to run any endpoint:
 
 #. Use the cURL command to log in. The Wazuh API will provide a JWT token upon success. Replace <user> and <password> with yours. By default, the user is ``wazuh``, and the password is ``wazuh``. If ``SSL`` (HTTPS) is enabled in the API and it is using the default **self-signed certificates**, it will be necessary to add the parameter ``-k``. Use the ``raw`` option to get the token in a plain text format. Querying the login endpoint with ``raw=true`` is recommended when using cURL commands as tokens could be long and difficult to handle. Exporting the token to an environment variable will ease the use of API requests after login.
 
@@ -44,7 +44,7 @@ Wazuh API endpoints requires authentication in order to be used. Therefore, all 
 
     .. code-block:: console
 
-        # TOKEN=$(curl -u <user>:<password> -k -X GET "https://localhost:55000/security/user/authenticate?raw=true")
+        # TOKEN=$(curl -u <user>:<password> -k -X POST "https://localhost:55000/security/user/authenticate?raw=true")
 
     By default (``raw=false``), the token is obtained in an ``application/json`` format. If using this option, copy the token found in ``<YOUR_JWT_TOKEN>`` without the quotes.
 
@@ -125,7 +125,7 @@ The following scripts provide API login examples using default (`false`) or plai
                      'Authorization': f'Basic {b64encode(basic_auth).decode()}'}
 
     print("\nLogin request ...\n")
-    response = requests.get(login_url, headers=login_headers, verify=False)
+    response = requests.post(login_url, headers=login_headers, verify=False)
     token = json.loads(response.content.decode())['data']['token']
     print(token)
 
@@ -196,7 +196,7 @@ Running the script provides a result similar to the following:
 
     echo -e "\n- Getting token...\n"
 
-    TOKEN=$(curl -u wazuh:wazuh -k -X GET "https://localhost:55000/security/user/authenticate?raw=true")
+    TOKEN=$(curl -u wazuh:wazuh -k -X POST "https://localhost:55000/security/user/authenticate?raw=true")
 
     echo -e "\n- API calls with TOKEN environment variable ...\n"
 
@@ -416,7 +416,7 @@ Here are some of the basic concepts related to making API requests and understan
 
 - Responses containing collections of data will return a maximum of 500 elements by default. The *offset* and *limit* parameters may be used to iterate through large collections. The *limit* parameter accepts up to 100000 items, although it is recommended not to exceed the default value (500 items). Doing so can lead to unexpected behaviors (timeouts, large responses, etc.). Use with caution.
 - All responses have an HTTP status code: 2xx (success), 4xx (client error), 5xx (server error), etc.
-- All requests (except ``GET /security/user/authenticate`` and ``POST /security/user/authenticate/run_as``) accept the parameter ``pretty`` to convert the JSON response to a more human-readable format.
+- All requests (except ``POST /security/user/authenticate`` and ``POST /security/user/authenticate/run_as``) accept the parameter ``pretty`` to convert the JSON response to a more human-readable format.
 - The Wazuh API log is stored on the manager at ``WAZUH_PATH/logs`` directory as ``api.log`` or ``api.json`` depending on the chosen log format (the verbosity level can be changed in the Wazuh API configuration file). The Wazuh API logs are rotated daily. Rotated logs are stored in ``WAZUH_PATH/logs/api/<year>/<month>`` and compressed using ``gzip``.
 - All Wazuh API requests will be aborted if no response is received after a certain amount of time. The parameter ``wait_for_complete`` can be used to disable this timeout. This is useful for calls that could take more time than expected, such as :api-ref:`PUT /agents/upgrade <operation/api.controllers.agent_controller.put_upgrade_agents>`.
 
