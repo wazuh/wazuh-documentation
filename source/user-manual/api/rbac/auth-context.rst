@@ -56,8 +56,16 @@ API logs when using the :ref:`basic login method <api_log_in>`:
 .. code-block:: none
         :class: output
 
-        2022/02/02 08:59:19 INFO: wazuh 127.0.0.1 "GET /security/user/authenticate" with parameters {"raw": "true"} and body {} done in 0.253s: 200
+        2022/02/02 08:59:19 INFO: wazuh 127.0.0.1 "POST /security/user/authenticate" with parameters {"raw": "true"} and body {} done in 0.253s: 200
         2022/02/02 08:59:23 INFO: wazuh 127.0.0.1 "GET /" with parameters {} and body {} done in 0.039s: 200
+
+If the JSON log format is enabled, the following will be logged when using the authorization context login method:
+
+.. code-block:: none
+        :class: output
+
+        {"timestamp": "2022/02/10 11:23:14", "levelname": "INFO", "data": {"type": "request", "payload": {"user": "wazuh", "hash_auth_context": "66a28efb5f8db2e93da2b5fb107bec35", "ip": "127.0.0.1", "http_method": "POST", "uri": "POST /security/user/authenticate/run_as", "parameters": {"raw": "true"}, "body": {"name": "Initial_auth", "auth": {"name": "Bill", "office": ["20", "21", "30"]}}, "time": "0.352s", "status_code": 200}}}
+        {"timestamp": "2022/02/10 11:23:18", "levelname": "INFO", "data": {"type": "request", "payload": {"user": "wazuh", "hash_auth_context": "66a28efb5f8db2e93da2b5fb107bec35", "ip": "127.0.0.1", "http_method": "GET", "uri": "GET /", "parameters": {}, "body": {}, "time": "0.159", "status_code": 200}}}
 
 
 Rules and roles
