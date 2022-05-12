@@ -91,15 +91,23 @@ redirections.push(
       '4.4': '/amazon/services/supported-services/elastic-load-balancing/clb.html',
     }
 );
-*/
 
 /* Pages added in 4.4 */
 
 newUrls['4.4'] = [
   '/amazon/services/supported-services/elastic-load-balancing/index.html',
+  '/amazon/services/supported-services/elastic-load-balancing/alb.html',
+  '/amazon/services/supported-services/elastic-load-balancing/nlb.html',
+  '/amazon/services/supported-services/elastic-load-balancing/clb.html',
 ];
 
-/* *** RELEASE 4.3 ****/
+removedUrls['4.4'] = [
+  '/amazon/services/supported-services/alb.html',
+  '/amazon/services/supported-services/nlb.html',
+  '/amazon/services/supported-services/clb.html',
+];
+
+  /* *** RELEASE 4.3 ****/
 
 /* Pages added in 4.3 */
 
