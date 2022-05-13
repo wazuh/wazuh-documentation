@@ -203,7 +203,7 @@ Wazuh configuration
 
         # service wazuh-agent restart
 
-The :ref:`AWS S3 module <wodle_s3>` configuration can be accessed and modified from **Wazuh** > **Management** > **Configuration** > **Cloud security monitoring** once added it in the :ref:`Local configuration <reference_ossec_conf>`.
+The :ref:`AWS S3 module <wodle_s3>` configuration can be reviewed from **Wazuh** > **Management** > **Configuration** > **Cloud security monitoring** once added in the :ref:`Local configuration <reference_ossec_conf>`.
 
     .. thumbnail:: ../../../images/aws/trusted-ui-3.png
       :align: center
