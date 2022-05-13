@@ -193,13 +193,13 @@ Enabling core dump generation
 -----------------------------
 Linux kernel allows multiple possibilities to handle core dumps files
 
-- Naming of core dump files: create dumps using default ``core.pid`` or templatized core dumps filenames using substitutions.
+- Naming of core dump files: create dumps using default ``core.pid`` or templetized core dumps filenames using substitutions.
 - Piping core dumps to a program: execute a program with certain arguments and send the dump using pipe mechanism.
 - Mix of them (Since Linux 5.3): multi-dump generation by pipe-separating output specification.
 
-Since GNU/Linux distributions might use different approaches, the first step is to determine what is being used and therefore apply some modifications to be able to capture Wazuh coredumps.
+Since GNU/Linux distributions might use different approaches, the first step is to determine what is being used and therefore apply some modifications to be able to capture Wazuh core dumps.
 
-Current core dump configuration can be retrieved by reading ``/proc/sys/kernel/core_pattern`` file, and bringing information how core dumps are being handled
+Current core dump configuration can be retrieved by reading ``/proc/sys/kernel/core_pattern`` file, and bringing information on how core dumps are being handled
 
 - Core dumps are being handled by Apport. See
 
@@ -282,14 +282,14 @@ To obtain the specific core dump, the crash report can be unpacked by using ``ap
 
       CoreDump: ELF 64-bit LSB core file, x86-64, version 1 (SYSV), SVR4-style, from '/var/ossec/bin/wazuh-logcollector', real uid: 0, effective uid: 0, real gid: 0, effective gid: 0, execfn: '/var/ossec/bin/wazuh-logcollector', platform: 'x86_64'
 
-Apport service should be also started to capture coredumps
+``<dump-filename>`` must be replaced by Apport crash file, that is the full path of the file where slashes (``/``) were replaced by underscores (``_``), plus an incremental counter.
+For example, first ``wazuh-logcollector`` crash will create a report named `_var_ossec_bin_wazuh-logcollector.0.crash`
+
+Apport service should be also started to capture core dumps
 
 .. code-block:: console
 
     # systemd start apport.service
-
-``<dump-filename>`` must be replaced by Apport crash file, that is the full path of the file where slashes (``/``) were replaced by underscores (``_``), plus an incremental counter.
-For example, first ``wazuh-logcollector`` crash will create a report named `_var_ossec_bin_wazuh-logcollector.0.crash`
 
 To know more about Apport see `Apport Wiki <https://wiki.ubuntu.com/Apport>`_.
 
