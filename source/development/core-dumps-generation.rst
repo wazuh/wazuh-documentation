@@ -158,3 +158,31 @@ Lastly, a core dump can also be analyzed if we have debugging symbols embedded i
 ``DISABLE_STRIP_SYMBOLS=1`` make flag). More info about building Wazuh can be found :ref:`here<wazuh_makefile>`.
 
 .. [2] When compiling, binaries and dSYM bundles are created with a matching UUID identifier, this – and search methods including Spotlight – is what allows ``lldb`` to automatically match them.
+
+Windows
+*******
+
+Windows use PDB as format for symbols files. Wazuh agent PDBs are compressed and can be found :ref:`here<win-dbg-symbols-packages>`.
+
+Wazuh agent dumps generation is enabled by default during installation for Windows versions newer than Windows Server 2008 and Windows Vista with Service Pack 1 due Windows Error Reporting support.
+Dumps will be created on ``<INSTALLDIR>\dumps`` folder.
+
+
+To know more about Windows dumps enabling see `Collecting User-Mode Dumps
+<https://docs.microsoft.com/en-us/windows/win32/wer/collecting-user-mode-dumps>`_.
+
+
+Post-mortem analysis
+--------------------
+
+Core dumps could be analyzed using WinDbg following the next steps:
+
+#. Select crash dump by picking ``<INSTALLDIR>\dumps\<process-name>.<process-PID>`` on `File > Open Crash Dump` menu.
+#. Download Wazuh Windows symbols, uncompress ZIP file and select it on `File > Symbol File Path`, appending ``;srv*`` to also load Windows symbols.
+#. [Optional] Download Wazuh source code and add its path on `File > Source File Path`.
+
+The last step is to run the analysis of the core dump
+
+   .. code-block:: console
+
+    !analyze -v
