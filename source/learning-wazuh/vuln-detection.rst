@@ -122,6 +122,7 @@ In the ``/var/ossec/etc/ossec.conf`` file of the Wazuh manager, scroll down to t
         <enabled>no</enabled>
         <os>amazon-linux</os>
         <os>amazon-linux-2</os>
+        <os>amazon-linux-2022</os>
         <update_interval>1h</update_interval>
       </provider>
       <provider name="msu">
