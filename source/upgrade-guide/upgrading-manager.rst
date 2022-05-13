@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015–2022 Wazuh, Inc.
 
 .. meta::
   :description: Learn how to upgrade the Wazuh manager to the latest version available in this section of the Wazuh documentation. 
@@ -125,6 +125,8 @@ Next steps
 
 The Wazuh manager is now successfully upgraded. 
 
+- To upgrade the Wazuh indexer and the Wazuh dashboard, follow the instructions in :doc:`upgrading-indexer-dashboard`.
+
 - To migrate from Open Distro for Elasticsearch 1.13 to the Wazuh indexer, see the :doc:`/migration-guide/wazuh-indexer` section.
 
 - To upgrade Elastic Stack, follow the instructions in the :ref:`Upgrading Elasticsearch, Kibana and Filebeat<upgrade_elasticsearch_filebeat_kibana>` section.
@@ -176,7 +178,3 @@ Upgrade the Wazuh Kibana plugin
 #. Clear the browser’s cache and cookies.
 
    
-
-
-
-

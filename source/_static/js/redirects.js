@@ -90,6 +90,8 @@ newUrls['4.3'] = [
   '/user-manual/securing-wazuh/wazuh-indexer.html',
   '/user-manual/securing-wazuh/opendistro.html',
   '/user-manual/securing-wazuh/elastic-stack.html',
+  '/upgrade-guide/upgrading-manager.rst',
+  '/upgrade-guide/upgrading-indexer-dashboard.rst',
   '/migration-guide/index.html',
   '/migration-guide/wazuh-indexer.html',
   '/migration-guide/wazuh-dashboard.html',
@@ -328,6 +330,7 @@ removedUrls['4.3'] = [
   '/user-manual/kibana-app/reference/custom-dashboard.html',
   '/user-manual/kibana-app/reference/index.html',
   '/virtual-machine/virtual-machine.html',
+  '/upgrade-guide/upgrading-wazuh.html',
   '/migrating-from-ossec/index.html',
   '/migrating-from-ossec/ossec-server.html',
   '/migrating-from-ossec/ossec-agent.html',
@@ -335,6 +338,12 @@ removedUrls['4.3'] = [
 
 
 redirections.push(
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': '/upgrade-guide/upgrading-wazuh.rst',
+    '4.3': '/upgrade-guide/upgrading-manager.rst',
+  },
+
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/migrating-from-ossec/index.html',
