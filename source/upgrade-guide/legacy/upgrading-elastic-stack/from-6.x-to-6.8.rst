@@ -5,7 +5,7 @@
 Upgrading Elastic Stack from 6.x to 6.8
 =======================================
 
-This section guides through the upgrade process of the Elastic Stack components including Elasticsearch, Logstash, Filebeat and Kibana for the Elastic distribution.
+This section guides through the upgrade process of the Elastic Stack components, including Elasticsearch, Logstash, Filebeat, and Kibana for the Elastic distribution.
 
 Preparing the Elastic Stack
 ---------------------------
@@ -59,9 +59,9 @@ Upgrading Elasticsearch
 
 #. Stop non-essential indexing and perform a synced flush (optional):
 
-    .. code-block:: bash
+    .. code-block:: console
 
-      curl -X POST "localhost:9200/_flush/synced"
+      # curl -X POST "localhost:9200/_flush/synced"
 
 #. Shut down a single node:
 
@@ -101,9 +101,9 @@ Upgrading Elasticsearch
 
 #. Start the newly-upgraded node and confirm that it joins the cluster by checking the log file or by submitting a ``_cat/nodes`` request:
 
-    .. code-block:: bash
+    .. code-block:: console
 
-      curl -X GET "localhost:9200/_cat/nodes"
+      # curl -X GET "localhost:9200/_cat/nodes"
 
 #. Reenable shard allocation:
 
@@ -119,9 +119,9 @@ Upgrading Elasticsearch
 
 #. Before upgrading the next node, wait for the cluster to finish shard allocation:
 
-    .. code-block:: bash
+    .. code-block:: console
 
-      curl -X GET "localhost:9200/_cat/health?v"
+      # curl -X GET "localhost:9200/_cat/health?v"
 
 #. Repeat the steps for every Elasticsearch node.
 

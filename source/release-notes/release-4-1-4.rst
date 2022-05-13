@@ -26,7 +26,7 @@ This release resolves known issues.
 ======================================================  =============
 Reference                                                Description
 ======================================================  =============
-`#8017 <https://github.com/wazuh/wazuh/pull/8017>`_     Issue with Wazuh manager worker nodes reconnection after restarting the Wazuh master node is fixed. Workers now successfully reconnect to the master node after it is restarted. 
+`#8017 <https://github.com/wazuh/wazuh/pull/8017>`_     Issue with the Wazuh manager worker nodes reconnection after restarting the Wazuh master node is fixed. Workers now successfully reconnect to the master node after it is restarted. 
 ======================================================  =============
 
 Wazuh Kibana plugin

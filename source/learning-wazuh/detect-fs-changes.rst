@@ -79,14 +79,14 @@ Testing FIM
 -----------
 
 At this point, add, modify, and delete files in these two test directories on the Windows agent,
-and watch your search results in Kibana for the query text "*apple orange*" (without quotes), to
+and watch your search results in the Wazuh dashboard for the query text "*apple orange*" (without quotes), to
 find syscheck events as they appear.  Notice that alerts about changes in ``C:\apple\`` show up promptly,
 while alerts about changes in ``C:\orange\`` are not reported until the next periodic (5 minute) syscheck scan.
 You can force a periodic syscheck scan sooner by restarting the Windows agent, but still expect to wait a
 minute or so before the scan actually runs.
 
 .. note::
-    When multiple terms are searched for in Kibana (like "apple orange") without being separated
+    When multiple terms are searched for in the Wazuh dashboard (like "apple orange") without being separated
     by a capitalized "AND", an "OR" relationship is assumed, resulting in a search for all records
     matching either of the terms included.
 
@@ -110,10 +110,10 @@ Also notice the many other file attribute changes accounted for.
     :align: center
     :width: 100%
 
-FIM events in the Wazuh Kibana plugin
--------------------------------------
+FIM events in the Wazuh dashboard
+---------------------------------
 
-Of course, the nicest way to look over file changes is via the Wazuh Kibana plugin.
+Of course, the nicest way to look over file changes is via the Wazuh dashboard.
 You can get an overview of FIM events for all agents by clicking on the Wazuh plugin icon,
 and then on the **Integrity monitoring** dashboard.  To focus in on just the FIM
 events for *windows-agent*, click on Wazuh, then on the **Agents** tab, then on the record of your *windows-agent*,
@@ -125,7 +125,7 @@ and then on the **Integrity monitoring** dashboard, which would look similar to 
     :width: 100%
 
 .. note::
-    The default time windows in Kibana is only "Last 15 minutes" which may be too small to
+    The default time windows in the Wazuh dashboard is only "Last 15 minutes" which may be too small to
     encompass your activities in this lab.  Click on the time window value and change it to
     something broader if needed.
 

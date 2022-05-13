@@ -1,87 +1,91 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015–2022 Wazuh, Inc.
 
 .. meta::
   :description: Check out these use cases of Log Data Analysis, a Wazuh capability that allows you to review, interpret and understand logs.
   
-.. _log_analysis:
-
 Log data analysis
 =================
 
-Automated log management and analysis accelerate threat detection. In many cases, evidence of an attack can be found in the log messages of devices, systems and applications. Wazuh can be used to automatically aggregate and analyze log data.
+In many cases, evidence of an attack can be found in the log messages of devices, systems, and applications. Wazuh assists users by automating log management and analysis to accelerate threat detection.
 
-The :ref:`Wazuh agent <wazuh_agent>`, running on the monitored endpoint, is usually the one in charge of reading operating system and application log messages, forwarding those to the :ref:`Wazuh server <wazuh_server>`, where the analysis takes place. When no agent is deployed, the server can also receive data via syslog from network devices or applications.
+The :doc:`Wazuh agent <../components/wazuh-agent>`, running on the monitored endpoint, is in charge of reading operating system and application log messages, forwarding those to the :doc:`Wazuh server <../components/wazuh-server>`, where the analysis takes place. The server can also receive data via Syslog from network devices or applications when no agent is deployed.
 
-Wazuh uses *decoders* to identify the source application of the log message. Then, it analyzes the data using application-specific *rules*. This is an example of a rule used to detect SSH authentication failure events:
+Wazuh uses decoders to identify the source application of the log message. Then, it analyzes the data using application-specific rules. This is an example of a rule used to detect SSH authentication failure events:
 
 .. code-block:: xml
-  :emphasize-lines: 3
+   :emphasize-lines: 3
 
-  <rule id="5716" level="5">
-    <if_sid>5700</if_sid>
-    <match>^Failed|^error: PAM: Authentication</match>
-    <description>SSHD authentication failed.</description>
-    <mitre>
-      <id>T1110</id>
-    </mitre>
-    <group>authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,gpg13_7.1,gdpr_IV_35.7.d,gdpr_IV_32.2,hipaa_164.312.b,nist_800_53_AU.14,nist_800_53_AC.7,tsc_CC6.1,tsc_CC6.8,tsc_CC7.2,tsc_CC7.3,</group>
-  </rule>
+   <rule id="5716" level="5">
+     <if_sid>5700</if_sid>
+     <match>^Failed|^error: PAM: Authentication</match>                            
+     <description>SSHD authentication failed.</description>
+     <mitre>
+       <id>T1110</id>
+     </mitre>
+     <group>pci_dss_10.2.4,pci_dss_10.2.5,</group>
+   </rule>
 
-Rules include a ``match`` field, used to define the pattern the rule is going to be looking for. They also have a ``level`` field that specifies the priority of the  resulting alerts. Besides, rules do enrich events with technique identifiers from the Mitre ATT&CK framework, and with mapping to regulatory compliance controls.
+Rules include a ``match`` field used to define the pattern that the rule looks for. They also have a ``level`` field that specifies the priority of the resulting alerts. Besides, rules enrich events with technique identifiers from the MITRE ATT&CK framework and mappings to regulatory compliance controls.
 
-The manager will generate an alert every time an event, collected by one of the agents or via syslog, matches a rule with a priority level higher than a predefined threshold (``3`` by default).
+The manager generates an alert every time an event, collected by one of the agents or received via Syslog, matches a rule with a priority level higher than a predefined threshold (``3`` by default).
 
-Here is an example found in ``/var/ossec/logs/alerts/alerts.json`` (some fields have been removed for reasons of brevity):
+See below an example alert found in ``/var/ossec/logs/alerts/alerts.json``. Some fields have been removed for reasons of brevity:
 
 .. code-block:: json
-  :emphasize-lines: 16,24
-  :class: output
+   :emphasize-lines: 16,24
+   :class: output
 
-  {
-    "agent": {
-        "id": "005",
-        "ip": "10.0.1.175",
-        "name": "Centos"
-    },
-    "predecoder": {
-        "hostname": "ip-10-0-1-175",
-        "program_name": "sshd",
-        "timestamp": "Jul 12 15:32:41"
-    },
-    "decoder": {
-        "name": "sshd",
-        "parent": "sshd"
-    },
-    "full_log": "Jul 12 15:32:41 ip-10-0-1-175 sshd[21746]: Failed password for root from 61.177.172.13 port 61658 ssh2",
-    "location": "/var/log/secure",
-    "data": {
-        "dstuser": "root",
-        "srcip": "61.177.172.13",
-        "srcport": "61658"
-    },
-    "rule": {
-        "description": "sshd: authentication failed.",
-        "id": "5716",
-        "level": 5,
-        "mitre": {
-            "id": [
-                "T1110"
-            ],
-            "tactic": [
-                "Credential Access"
-            ],
-            "technique": [
-                "Brute Force"
-            ]
-        },
-    },
-    "timestamp": "2020-07-12T15:32:41.756+0000"
-  }
+   {
+     "agent": {
+         "id": "005",
+         "ip": "10.0.1.175",
+         "name": "Centos"
+     },
+     "predecoder": {
+         "hostname": "ip-10-0-1-175",
+         "program_name": "sshd",
+         "timestamp": "Jul 12 15:32:41"
+     },
+     "decoder": {
+         "name": "sshd",
+         "parent": "sshd"
+     },
+     "full_log": "Jul 12 15:32:41 ip-10-0-1-175 sshd[21746]: Failed password for root from 61.177.172.13 port 61658 ssh2",
+     "location": "/var/log/secure",
+     "data": {
+         "dstuser": "root",
+         "srcip": "61.177.172.13",
+         "srcport": "61658"
+     },
+     "rule": {
+         "description": "sshd: authentication failed.",
+         "id": "5716",
+         "level": 5,
+         "mitre": {
+             "id": [
+                 "T1110"
+             ],
+             "tactic": [
+                 "Credential Access"
+             ],
+             "technique": [
+                 "Brute Force"
+             ]
+         },
+     },
+     "timestamp": "2020-07-12T15:32:41.756+0000"
+   }
 
-Once generated by the :ref:`Wazuh server <wazuh_server>`, the alerts are sent to the :ref:`Elastic Stack <elastic_stack>` component where they are enriched with Geolocation information, stored and indexed. Kibana can then be used to search, analyze, and visualize the data. Below is an alert as displayed in the interface:
+Once generated by the :doc:`Wazuh server <../components/wazuh-server>`, the alerts are sent to the :doc:`Wazuh indexer <../components/wazuh-indexer>` component where they are enriched with geolocation information, stored and indexed. The Wazuh dashboard can then be used to search, analyze, and visualize the data. Below is an example screenshot of the interface:
 
-.. thumbnail:: ../../images/getting_started/use_case_log_analysis.png
+.. thumbnail:: /images/getting-started/use-cases/wazuh-use-cases-log-data-analysis1.png
+   :title: Security events dashboard
    :align: center
-   :wrap_image: No
+   :width: 80%
+
+.. thumbnail:: /images/getting-started/use-cases/wazuh-use-cases-log-data-analysis2.png
+   :title: Security events
+   :align: center
+   :width: 80%
 
 Wazuh provides a default ruleset, updated periodically, with over 3,000 rules for different systems and applications. In addition, Wazuh allows the creation of custom rules. Find more information in the :ref:`user manual <manual_log_analysis>`.

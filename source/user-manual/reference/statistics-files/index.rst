@@ -5,7 +5,7 @@
 Statistics files
 ================
 
-The **statistics files** are documents that show real-time information about the Wazuh environment as the processed events, received messages and the state of the remote connections.
+The **statistics files** are documents that show real-time information about the Wazuh environment as the processed events, received messages, and the state of the remote connections.
 
 Agents statistical files:
 

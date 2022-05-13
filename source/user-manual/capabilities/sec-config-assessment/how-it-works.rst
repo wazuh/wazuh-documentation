@@ -13,19 +13,17 @@ Each agent has its own local database where it stores the current state of each 
 or *not-applicable*, allowing agents to only send the differences detected between scans. If there has been no
 change, only the scan ``summary`` event will be sent, thus avoiding unnecessary network traffic while keeping
 the manager up to date. The manager will then use those updates to issue alerts that will be shown in the
-Kibana App.
+Wazuh dashboard.
 
-Integrity and alerting flow is depicted in the
-:ref:`sequence diagram <sca_sequence_diagram>` below.
+Integrity and alerting flow are depicted in the sequence diagram below:
 
-.. figure:: ../../../images/sca/sca_sequence_diagram.svg
-  :alt: SCA integrity and alerting flow
-  :name: sca_sequence_diagram
-  :align: center
-  :figwidth: 75%
+  .. thumbnail:: ../../../images/sca/sca-sequence-diagram.png
+     :title: SCA integrity and alerting flow
+     :align: center
+     :width: 80%
 
 Scan Results
-------------------------------
+------------
 
 Any given check event has three possible results (``passed``, ``failed``, and ``not applicable``). This result
 is determined by the set of rules and the rule result aggregator of the check.
@@ -106,7 +104,7 @@ In a nutshell, whenever the hash of a policy file changes, the recovery steps pe
 
 #. The manager flushes its stored data for that policy.
 #. The agent sends the scan results for that policy.
-#. The manager updates its database, and fires alerts for the new scan results.
+#. The manager updates its database and fires alerts for the new scan results.
 
 .. note::
 
@@ -140,5 +138,4 @@ For those databases, the corresponding SHA256 hashes are:
     Agent:   1642AB1DC478052AC3556B5E700CD82ADB69728008301882B9CBEE0696FF2C84
     Manager: B43037CA28D95A69B6F9E03FCD826D2B253A6BB1B6AD28C4AE57A3A766ACE610
 
-Given that the two hashes do not match, the manager will request the agent for its latest scan data,
-and refresh its database with the newly received status information.
+Given that the two hashes do not match, the manager will request the agent for its latest scan data and refresh its database with the newly received status information.

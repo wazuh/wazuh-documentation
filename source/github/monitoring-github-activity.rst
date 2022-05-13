@@ -38,13 +38,13 @@ Wazuh configuration
 
 Next, we will see the options we have to configure for the Wazuh integration.
 
-Proceed to configure the ``github`` module in the Wazuh manager. We will use the data that we took previously as the **organization name** and the **PATs**. Through the following configuration, Wazuh is ready to search for logs created by GitHub audit-log. In this case, we will search only the type of ``git`` events within an interval of ``10m``. Those logs will be only those that were created after the module was started:
+Proceed to configure the ``github`` module in the Wazuh manager or in the Wazuh agent. We will use the data that we took previously as the **organization name** and the **PATs**. Through the following configuration, Wazuh is ready to search for logs created by GitHub audit-log. In this case, we will search only the type of ``git`` events within an interval of ``1m``. Those logs will be only those that were created after the module was started:
 
 .. code-block:: xml
 
     <github>
         <enabled>yes</enabled>
-        <interval>10m</interval>
+        <interval>1m</interval>
         <time_delay>1s</time_delay>
         <curl_max_size>1M</curl_max_size>
         <only_future_events>yes</only_future_events>

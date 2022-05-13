@@ -1,5 +1,5 @@
 .. meta::
-  :description: Wazuh can be integrated with Suricata, a NIDS that can detect threats by monitoring network traffic. Learn more about this in this POC.
+  :description: Wazuh can be integrated with Suricata, a NIDS that can detect threats by monitoring network traffic. Learn more about this in this PoC.
 
 .. _poc_ids_integration_suricata:
 
@@ -14,23 +14,23 @@ To see an example use case of a NIDS integration with Wazuh, go to the :ref:`Cat
 Configuration
 -------------
 
-Configure your environment as follows to test the POC.
+Configure your environment as follows to test the PoC.
 
-#. Install Suricata (tested with version 5.0.7) on the CentOS 8 monitored endpoint. This requires EPEL repository that depends on your operating system version.
+#. Install Suricata (tested with version 5.0.8) on the Ubuntu 20 monitored endpoint. This process can take over 10 minutes.
 
     .. code-block:: XML
 
-        yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
-        yum -y install suricata-5.0.7
+        add-apt-repository ppa:oisf/suricata-5.0
+        apt-get update
+        apt-get install suricata -y
 
 #. Download and extract Emerging rules.
 
     .. code-block:: console
 
         cd /tmp/
-        curl -LO https://rules.emergingthreats.net/open/suricata-5.0.7/emerging.rules.tar.gz
+        curl -LO https://rules.emergingthreats.net/open/suricata-5.0.8/emerging.rules.tar.gz
         tar -xvzf emerging.rules.tar.gz && mv rules/*.rules /etc/suricata/rules/
-        chown suricata:suricata /etc/suricata/rules/*.rules
         chmod 640 /etc/suricata/rules/*.rules
 
 #. Modify Suricata settings in the ``/etc/suricata/suricata.yaml`` file.
@@ -53,7 +53,7 @@ Configure your environment as follows to test the POC.
         systemctl daemon-reload
         systemctl start suricata
 
-#. Configure the Wazuh agent to read Suricata logs file. The following settings need to be added to the ``/var/ossec/etc/ossec.conf`` file of the monitored CentOS 8 endpoint.
+#. Configure the Wazuh agent to read Suricata logs file. The following settings need to be added to the ``/var/ossec/etc/ossec.conf`` file of the monitored Ubuntu 20 endpoint.
 
     .. code-block:: XML
 
@@ -62,7 +62,7 @@ Configure your environment as follows to test the POC.
             <location>/var/log/suricata/eve.json</location>
         </localfile>
 
-#. Restart the Wazuh agent to apply the changes. 
+#. Restart the Wazuh agent to apply the changes.
 
     .. code-block:: console
 
@@ -72,16 +72,16 @@ Configure your environment as follows to test the POC.
 Steps to generate the alerts
 ----------------------------
 
-No action is required. Wazuh automatically parses data from ``/var/log/suricata/eve.json`` and generates related alerts.
+No action is required. Wazuh automatically parses data from ``/var/log/suricata/eve.json`` and generates related alerts. If desired, when rules are loaded and interface entered in promiscuous (sniffing mode), you can ping your manager to generate an alert from suricata.
 
 Query the alerts
 ----------------
 
-You can visualize the alert data in the Wazuh Kibana plugin. To do this, go to the **Security events** module and add the filters in the search bar to query the alerts.
+You can visualize the alert data in the Wazuh dashboard. To do this, go to the **Security events** module and add the filters in the search bar to query the alerts.
 
 - ``rule.groups:suricata``
 
-.. thumbnail:: ../images/poc/Network_IDS_integration.png
+.. thumbnail:: ../images/poc/Network-IDS-integration.png
           :title: Network IDS integration - Suricata
           :align: center
           :wrap_image: No
@@ -90,5 +90,5 @@ Troubleshooting
 ---------------
 
 * Error concerning network interface in Suricata log file ``/var/log/suricata/suricata.log``.
-  
+
 To solve this issue, check the name of your network interface and configure it accordingly in the files ``/etc/sysconfig/suricata`` and ``/etc/suricata/suricata.yaml``.

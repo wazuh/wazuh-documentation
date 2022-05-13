@@ -19,7 +19,7 @@ Basic usage
 Manager
 ^^^^^^^
 
-Audit generates numerous events and it is hard to distinguish if those events correspond to a *write access*, *read access*, *execute access*, *attribute change*, or *system call rule*, using Wazuh decoders and rules. This is why we use the *key* argument in audit rules to facilitate the processing of events by Wazuh. As previously explained, each audit rule has the option to add a descriptive *key* value to identify what rule generated a particular audit log entry. We will use a CDB list to determine the types of audit rule that has fire. This list will have the following syntax: ::
+Audit generates numerous events, and it is hard to distinguish if those events correspond to a *write access*, *read access*, *execute access*, *attribute change*, or *system call rule*, using Wazuh decoders and rules. This is why we use the *key* argument in audit rules to facilitate the processing of events by Wazuh. As previously explained, each audit rule has the option to add a descriptive *key* value to identify what rule generated a particular audit log entry. We will use a CDB list to determine the types of audit rules fired. This list will have the following syntax: ::
 
     key_name:value
 
@@ -92,7 +92,7 @@ Wazuh must be aware of the events detected by Audit. So, it is needs to be confi
 Restarting Wazuh
 ~~~~~~~~~~~~~~~~
 
-Finally, we must restart Wazuh agent in order to apply the changes:
+Finally, we must restart the Wazuh agent in order to apply the changes:
 
 a. For Systemd:
 
@@ -513,7 +513,7 @@ However, you may find this level of detail inadequate, in which case you can use
 
 If you have created a rule to monitor root actions, like in the previous use case, every action with *sudo* will be logged, but the **auid** field will inconveniently be 0 (root user) instead of that of the actual user who initiated the escalated action.  You generally want to know who originally initiated a command, regardless of if it was escalated or not.
 
-In order to keep the track of the user after sudo, it is necessary to configure *PAM*.
+To keep track of the user after sudo, it is necessary to configure *PAM*.
 
 .. warning::
     Be very careful with PAM configuration, as a bad configuration could make your system inaccessible.

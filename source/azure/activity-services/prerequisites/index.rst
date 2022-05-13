@@ -7,13 +7,12 @@
 Prerequisites
 =============
 
-This module requires dependencies as well as the right credentials to access to the services. 
+This module requires the right credentials to access to the services. 
 
 .. topic:: Contents
 
     .. toctree::
        :maxdepth: 2
 
-       dependencies
        credentials
        considerations

@@ -5,8 +5,8 @@
 
 .. _aws_cloudwatchlogs:
 
-AWS CloudWatch Logs
-===================
+Amazon CloudWatch Logs
+======================
 
 .. versionadded:: 4.0.0
 
@@ -22,7 +22,61 @@ AWS CloudWatch Logs
 AWS configuration
 -----------------
 
-AWS CloudWatch logs can be accessed by configuring CloudWatch to store them into a bucket or by using the CloudWatch Logs Agent. The AWS API allows Wazuh to retrieve those logs, analyze them, and raise alerts if applicable.
+AWS CloudWatch logs can be accessed by using the Wazuh CloudWatch Logs integration. The AWS API allows Wazuh to retrieve those logs, analyze them, and raise alerts if applicable.
+
+Policy configuration
+^^^^^^^^^^^^^^^^^^^^
+
+.. include:: /_templates/cloud/amazon/create_policy.rst
+
+.. include:: /_templates/cloud/amazon/read_only_policy_description.rst
+
+.. code-block:: json
+
+    {
+	"Version": "2012-10-17",
+	"Statement": [
+	    {
+		"Sid": "VisualEditor0",
+		"Effect": "Allow",
+		"Action": "logs:DescribeLogStreams",
+		"Resource": "arn:aws:logs:region:account_ID:log-group:log_group_name:*"
+	    },
+	    {
+		"Sid": "VisualEditor1",
+		"Effect": "Allow",
+		"Action": "logs:GetLogEvents",
+		"Resource": "arn:aws:logs:region:account_ID:log-group:log_group_name:log-stream:log_stream_name"
+	    }
+	]
+    }
+
+.. include:: /_templates/cloud/amazon/delete_policy_description.rst
+
+.. code-block:: json
+
+    {
+	"Version": "2012-10-17",
+	"Statement": [
+	    {
+		"Sid": "VisualEditor0",
+		"Effect": "Allow",
+		"Action": "logs:DescribeLogStreams",
+		"Resource": "arn:aws:logs:region:account_ID:log-group:log_group_name:*"
+	    },
+	    {
+		"Sid": "VisualEditor1",
+		"Effect": "Allow",
+		"Action": [
+		    "logs:GetLogEvents",
+		    "logs:DeleteLogStream"
+		],
+		"Resource": "arn:aws:logs:region:account_ID:log-group:log_group_name:log-stream:*"
+	    }
+	]
+    }
+
+.. include:: /_templates/cloud/amazon/attach_policy.rst
 
 
 Wazuh configuration

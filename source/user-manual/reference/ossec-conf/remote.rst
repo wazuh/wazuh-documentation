@@ -110,19 +110,13 @@ Local ip address to use to listen for connections.
 ipv6
 ^^^^^^^^^^^
 
-Whether the local IP address is IPv6
+Enables IPv6 support.
 
 +--------------------+------------------+
 | **Default value**  | no               |
 +--------------------+------------------+
 | **Allowed values** | yes, no          |
 +--------------------+------------------+
-
-.. note::
-
-  At the moment it's not possible to set both *local_ip* and *ipv6*.
-
-  IPv6 is not available for secure connections.
 
 queue_size
 ^^^^^^^^^^^^

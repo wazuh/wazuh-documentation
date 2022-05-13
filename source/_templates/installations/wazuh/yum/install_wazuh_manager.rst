@@ -2,6 +2,6 @@
 
 .. code-block:: console
 
-  # yum install wazuh-manager
+  # yum -y install wazuh-manager
 
 .. End of include file
