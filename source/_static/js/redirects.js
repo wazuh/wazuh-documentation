@@ -90,8 +90,8 @@ newUrls['4.3'] = [
   '/user-manual/securing-wazuh/wazuh-indexer.html',
   '/user-manual/securing-wazuh/opendistro.html',
   '/user-manual/securing-wazuh/elastic-stack.html',
-  '/upgrade-guide/upgrading-manager.rst',
-  '/upgrade-guide/upgrading-indexer-dashboard.rst',
+  '/upgrade-guide/central-components/upgrading-manager.rst',
+  '/upgrade-guide/central-components/upgrading-indexer-dashboard.rst',
   '/migration-guide/index.html',
   '/migration-guide/wazuh-indexer.html',
   '/migration-guide/wazuh-dashboard.html',
@@ -341,7 +341,7 @@ redirections.push(
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/upgrade-guide/upgrading-wazuh.rst',
-    '4.3': '/upgrade-guide/upgrading-manager.rst',
+    '4.3': '/upgrade-guide/central-components/upgrading-manager.rst',
   },
 
   {

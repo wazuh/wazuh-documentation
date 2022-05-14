@@ -4,8 +4,8 @@
   
 .. _upgrading_elastic_stack:
 
-Upgrading Elastic Stack basic license
-=====================================
+Elastic Stack basic license
+===========================
 
 This section guides through the upgrade process of Elasticsearch, Filebeat, and Kibana for *Elastic* distribution. 
 

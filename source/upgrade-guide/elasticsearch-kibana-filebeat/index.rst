@@ -5,8 +5,8 @@
   
 .. _upgrade_elasticsearch_filebeat_kibana:
 
-Upgrade Elasticsearch, Filebeat and Kibana
-==========================================
+Elasticsearch, Filebeat and Kibana
+==================================
 
 Depending on your installation, choose between Open Distro for Elasticsearch or Elastic Stack basic license, and follow the instructions to upgrade to the latest compatible version.
 
