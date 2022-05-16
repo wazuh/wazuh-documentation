@@ -20,7 +20,7 @@ Google Cloud provides four types of `audit logs <https://cloud.google.com/loggin
 
 * **Policy Denied** audit logs are recorded when a Google Cloud service denies access to a user or service account because of a security policy violation.
 
-Wazuh is able to collect and analyze these log types using the :ref:`GCP Pub/Sub integration <pubsub>`.
+Wazuh can collect and analyze these log types using the :ref:`GCP Pub/Sub integration <pubsub>`.
 
 Configure Google audit logs collection
 --------------------------------------

@@ -14,7 +14,7 @@ Configure Google DNS logs collection
 
 To collect the DNS queries made to the Google DNS service it is necessary to enable DNS logging. To do that, follow the `Google Cloud DNS logging guide <https://cloud.google.com/dns/docs/monitoring>`_.
 
-Once DNS Cloud logging is configured, the generated logs must be ingested into a Pub/Sub topic so that Wazuh is able to collect them using the :ref:`Pub/Sub integration <pubsub>`. To achieve that, it is necessary to define a custom log router.
+Once DNS Cloud logging is configured, the generated logs must be ingested into a Pub/Sub topic so that Wazuh can collect them using the :ref:`Pub/Sub integration <pubsub>`. To achieve that, it is necessary to define a custom log router.
 
 #. Visit the `Google Cloud Logging section  <https://console.cloud.google.com/logs/router>`_ and click on **CREATE SINK**.
 
