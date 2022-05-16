@@ -27,19 +27,19 @@ Configure Google audit logs collection
 
 To enable Google audit logs collection, it is necessary to first ingest the audit logs into a Pub/Sub topic defining a custom log router. 
 
-#. Visit the `Google Cloud Logging section  <https://console.cloud.google.com/logs/router>`_ and click on ``CREATE SINK``.
+#. Visit the `Google Cloud Logging section  <https://console.cloud.google.com/logs/router>`_ and click on **CREATE SINK**.
 
     .. thumbnail:: ../../images/gcp/gcp-create-sink-button.png
 	:align: center
 	:width: 100%
 
-#. Provide a descriptive name for the sink and click on ``NEXT``.
+#. Provide a descriptive name for the sink and click on **NEXT**.
 
     .. thumbnail:: ../../images/gcp/gcp-sink-name.png
 	:align: center
 	:width: 80%
 
-#. Once the name for the sink is chosen, it is necessary to select the sink destination. As sink service, choose ``Cloud Pub/Sub topic``, and then create or choose a topic to be used as destination. Then click on ``NEXT``.
+#. Once the name for the sink is chosen, it is necessary to select the sink destination. As sink service, choose **Cloud Pub/Sub topic**, and then create or choose a topic to be used as destination. Then click on **NEXT**.
 
     .. thumbnail:: ../../images/gcp/gcp-sink-destination.png
 	:align: center
@@ -51,7 +51,7 @@ To enable Google audit logs collection, it is necessary to first ingest the audi
 
 	logName=~("projects/.*/logs/cloudaudit.googleapis.com%2F(activity|data_access|system_event|policy)")
 
-#. If it is not necessary to filter any logs out of the sink, click on ``CREATE SINK``.
+#. If it is not necessary to filter any logs out of the sink, click on **CREATE SINK**.
 
     .. thumbnail:: ../../images/gcp/gcp-create-sink.png
 	:align: center
@@ -69,13 +69,13 @@ After configuring the GCP Pub/Sub module to fetch the audit logs from Google Clo
 	:align: center
 	:width: 80%
 
-Google Cloud logs can be filtered on Kibana by the ``data.gcp.logName`` field:
+Google Cloud logs can be filtered on Kibana by the **data.gcp.logName** field:
 
     .. thumbnail:: ../../images/gcp/gcp-kibana-log-filter.png
 	:align: center
 	:width: 80%
 
-After selecting the ``Exists in`` button, only Google Cloud-related events will appear in the Kibana dashboard.
+After selecting the **Exists in** button, only Google Cloud-related events will appear in the Kibana dashboard.
 
     .. thumbnail:: ../../images/gcp/gcp-kibana-filtered-logs.png
 	:align: center

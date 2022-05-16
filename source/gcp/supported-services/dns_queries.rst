@@ -16,19 +16,19 @@ To collect the DNS queries made to the Google DNS service it is necessary to ena
 
 Once DNS Cloud logging is configured, the generated logs must be ingested into a Pub/Sub topic so that Wazuh is able to collect them using the :ref:`Pub/Sub integration <pubsub>`. To achieve that, it is necessary to define a custom log router.
 
-#. Visit the `Google Cloud Logging section  <https://console.cloud.google.com/logs/router>`_ and click on ``CREATE SINK``.
+#. Visit the `Google Cloud Logging section  <https://console.cloud.google.com/logs/router>`_ and click on **CREATE SINK**.
 
     .. thumbnail:: ../../images/gcp/gcp-create-sink-button.png
 	:align: center
 	:width: 100%
 
-#. Provide a descriptive name for the sink and click on ``NEXT``.
+#. Provide a descriptive name for the sink and click on **NEXT**.
 
     .. thumbnail:: ../../images/gcp/gcp-sink-dns-name.png
 	:align: center
 	:width: 80%
 
-#. Once the name for the sink is chosen, it is necessary to select the sink destination. As sink service, choose **Cloud Pub/Sub topic**, and then create or choose a topic to be used as destination. Then click on ``NEXT``.
+#. Once the name for the sink is chosen, it is necessary to select the sink destination. As sink service, choose **Cloud Pub/Sub topic**, and then create or choose a topic to be used as destination. Then click on **NEXT**.
 
     .. thumbnail:: ../../images/gcp/gcp-sink-dns-destination.png
 	:align: center
@@ -41,7 +41,7 @@ Once DNS Cloud logging is configured, the generated logs must be ingested into a
 	resource.type = "dns_query"
 
 
-#. If it is not necessary to filter any logs out of the sink, click on ``CREATE SINK``.
+#. If it is not necessary to filter any logs out of the sink, click on **CREATE SINK**.
 
     .. thumbnail:: ../../images/gcp/gcp-create-sink-dns.png
 	:align: center
@@ -58,13 +58,13 @@ After configuring the GCP Pub/Sub module to fetch the DNS logs from Google Cloud
     :align: center
     :width: 80%
 
-Google Cloud logs can be filtered on Kibana by the ``data.gcp.logName`` field:
+Google Cloud logs can be filtered on Kibana by the **data.gcp.logName** field:
 
 .. thumbnail:: ../../images/gcp/gcp-kibana-dns-log-filter.png
     :align: center
     :width: 80%
 
-After selecting the ``Exists in`` button, only Google Cloud-related events will appear in the Kibana dashboard.
+After selecting the **Exists in** button, only Google Cloud-related events will appear in the Kibana dashboard.
 
 .. thumbnail:: ../../images/gcp/gcp-kibana-dns-filtered-logs.png
     :align: center
