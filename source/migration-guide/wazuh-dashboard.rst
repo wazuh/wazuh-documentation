@@ -70,7 +70,7 @@ To guarantee a correct operation of Wazuh, make sure to also migrate from Open D
 
    .. note::
 
-      Make sure that your Wazuh manager is updated to the latest version. To learn more, see the :doc:`Upgrading the Wazuh manager </upgrade-guide/central-components/upgrading-manager>` documentation. 
+      Make sure that your Wazuh manager is updated to the latest version. To learn more, see :ref:`upgrading_wazuh_server`. 
 
 #. Create the ``/etc/wazuh-dashboard/certs`` directory, copy your old certificates to the new location and change ownership and permissions.    
 
