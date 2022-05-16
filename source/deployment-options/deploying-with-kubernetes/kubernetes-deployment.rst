@@ -188,7 +188,7 @@ In case you created domain names for the services, you should be able to access 
   
 The Wazuh dashboard will be accessible on ``https://localhost:8443``.
 
-The default credentials are ``admin:admin``.
+The default credentials are ``admin:SecretPassword``.
 
 
 Agents
