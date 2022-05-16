@@ -21,7 +21,7 @@ The Wazuh agents are able to collect interesting system information and store it
     - `Windows updates`_
 - `Compatibility matrix`_
 - `Using Syscollector information to trigger alerts`_
-    - `New searchable fields for Kibana`_
+    - `New searchable fields for the Wazuh dashboard`_
 - `Use case: Visualize system inventory in the Wazuh App`_
 
 How it works
@@ -29,10 +29,9 @@ How it works
 
 As mentioned above, the main purpose of this module is to gather the most relevant information from the monitored system.
 
-Once the agent starts, `Syscollector` runs periodically scans of defined targets (hardware, OS, packages, etc.), forwarding the new collected data to the manager, which updates the appropriate tables of the database.
+Once the agent starts, `Syscollector` runs periodically scans of defined targets (hardware, OS, packages, etc.), forwarding the newly collected data to the manager, which updates the appropriate tables of the database.
 
-The agent's inventory is gathered for different goals. The entire inventory can be found at the `inventory` tab of the Wazuh APP for each agent, by querying the Wazuh API to retrieve the data from the DB. Also the `Dev tools` tab is available,
-with this feature the Wazuh API can be directly queried about the different scans being able to filter by any desired field.
+The agent's inventory is gathered for different goals. The entire inventory can be found at the `inventory` tab of the Wazuh APP for each agent, by querying the Wazuh API to retrieve the data from the DB. Also, the `Dev tools` tab is available. With this feature, the Wazuh API can be directly queried about the different scans being able to filter by any desired field.
 
 In addition, the packages and hotfixes inventory is used as feed for the :doc:`Vulnerability detector module<./vulnerability-detection/index>`.
 
@@ -41,7 +40,7 @@ Available scans
 
 The collected information from Wazuh agents is stored in different SQLite tables. Here the content of each available table is described.
 
-At present, this module is available for Linux, Windows, MacOS, OpenBS and FreeBSD. See the `compatibility matrix`_ for more information.
+This module is available for Linux, Windows, macOS, OpenBSD, and FreeBSD. See the compatibility matrix for more information.
 
 .. _syscollector_hardware:
 
@@ -173,8 +172,7 @@ The current packages inventory of each Wazuh agent. On Linux systems, retrieved 
 Network interfaces
 ^^^^^^^^^^^^^^^^^^
 
-The network interfaces scan retrieves information about the existing network interface of a system (up and down interfaces) as well as their routing configuration,
-it is composed of three tables to ensure that the information is as structured as possible.
+The network interfaces scan retrieves information about the existing network interface of a system (up and down interfaces) as well as their routing configuration. It is composed of three tables to ensure that the information is as structured as possible.
 
 - `sys_netiface` table
 
@@ -321,71 +319,71 @@ Processes
 
 List the current processes running in a system host.
 
-+-----------------+----------------------------------------+---------------------------------------------------+-------------------+
-| Field           | Description                            | Example                                           | Available         |
-+=================+========================================+===================================================+===================+
-| **scan_id**     | Scan identifier                        | 215303769                                         | All               |
-+-----------------+----------------------------------------+---------------------------------------------------+-------------------+
-| **scan_time**   | Scan date                              | 2018/08/03 12:57:58                               | All               |
-+-----------------+----------------------------------------+---------------------------------------------------+-------------------+
-| **pid**         | PID of the process                     | 603                                               | All               |
-+-----------------+----------------------------------------+---------------------------------------------------+-------------------+
-| **name**        | Name of the process                    | rsyslogd                                          | All               |
-+-----------------+----------------------------------------+---------------------------------------------------+-------------------+
-| **state**       | State of the process                   | S                                                 | Linux/macOS       |
-+-----------------+----------------------------------------+---------------------------------------------------+-------------------+
-| **ppid**        | PPID of the process                    | 1                                                 | All               |
-+-----------------+----------------------------------------+---------------------------------------------------+-------------------+
-| **utime**       | Time spent executing user code         | 157                                               | Linux             |
-+-----------------+----------------------------------------+---------------------------------------------------+-------------------+
-| **stime**       | Time spent executing system code       | 221                                               | All               |
-+-----------------+----------------------------------------+---------------------------------------------------+-------------------+
-| **cmd**         | Command executed                       | /usr/sbin/rsyslogd                                | Linux/Windows     |
-+-----------------+----------------------------------------+---------------------------------------------------+-------------------+
-| **argvs**       | Arguments of the process               | -n                                                | Linux             |
-+-----------------+----------------------------------------+---------------------------------------------------+-------------------+
-| **euser**       | Effective user                         | root                                              | Linux/macOS       |
-+-----------------+----------------------------------------+---------------------------------------------------+-------------------+
-| **ruser**       | Real user                              | root                                              | Linux/macOS       |
-+-----------------+----------------------------------------+---------------------------------------------------+-------------------+
-| **suser**       | Saved-set user                         | root                                              | Linux             |
-+-----------------+----------------------------------------+---------------------------------------------------+-------------------+
-| **egroup**      | Effective group                        | root                                              | Linux             |
-+-----------------+----------------------------------------+---------------------------------------------------+-------------------+
-| **rgroup**      | Real group                             | root                                              | Linux/macOS       |
-+-----------------+----------------------------------------+---------------------------------------------------+-------------------+
-| **sgroup**      | Saved-set group                        | root                                              | Linux             |
-+-----------------+----------------------------------------+---------------------------------------------------+-------------------+
-| **fgroup**      | Filesystem group name                  | root                                              | Linux             |
-+-----------------+----------------------------------------+---------------------------------------------------+-------------------+
-| **priority**    | Kernel scheduling priority             | 20                                                | All               |
-+-----------------+----------------------------------------+---------------------------------------------------+-------------------+
-| **nice**        | Nice value of the process              | 0                                                 | Linux/macOS       |
-+-----------------+----------------------------------------+---------------------------------------------------+-------------------+
-| **size**        | Size of the process                    | 53030                                             | All               |
-+-----------------+----------------------------------------+---------------------------------------------------+-------------------+
-| **vm_size**     | Total VM size (KB)                     | 212120                                            | All               |
-+-----------------+----------------------------------------+---------------------------------------------------+-------------------+
-| **resident**    | Residen size of the process in bytes   | 902                                               | Linux             |
-+-----------------+----------------------------------------+---------------------------------------------------+-------------------+
-| **share**       | Shared memory                          | 814                                               | Linux             |
-+-----------------+----------------------------------------+---------------------------------------------------+-------------------+
-| **start_time**  | Time when the process started          | 1893                                              | Linux             |
-+-----------------+----------------------------------------+---------------------------------------------------+-------------------+
-| **pgrp**        | Process group                          | 603                                               | Linux             |
-+-----------------+----------------------------------------+---------------------------------------------------+-------------------+
-| **session**     | Session of the process                 | 603                                               | All               |
-+-----------------+----------------------------------------+---------------------------------------------------+-------------------+
-| **nlwp**        | Number of light weight processes       | 3                                                 | All               |
-+-----------------+----------------------------------------+---------------------------------------------------+-------------------+
-| **tgid**        | Thread Group ID                        | 603                                               | Linux             |
-+-----------------+----------------------------------------+---------------------------------------------------+-------------------+
-| **tty**         | Number of TTY of the process           | 0                                                 | Linux             |
-+-----------------+----------------------------------------+---------------------------------------------------+-------------------+
-| **processor**   | Number of the processor                | 0                                                 | Linux             |
-+-----------------+----------------------------------------+---------------------------------------------------+-------------------+
-| **checksum**    | Integrity synchronization value        | 78503709147600c8e0023cf2b9995772280eee30          | All               |
-+-----------------+----------------------------------------+---------------------------------------------------+-------------------+
++-----------------+----------------------------------------+---------------------------------------------------+---------------------+
+| Field           | Description                            | Example                                           | Available           |
++=================+========================================+===================================================+=====================+
+| **scan_id**     | Scan identifier                        | 215303769                                         | All                 |
++-----------------+----------------------------------------+---------------------------------------------------+---------------------+
+| **scan_time**   | Scan date                              | 2018/08/03 12:57:58                               | All                 |
++-----------------+----------------------------------------+---------------------------------------------------+---------------------+
+| **pid**         | PID of the process                     | 603                                               | All                 |
++-----------------+----------------------------------------+---------------------------------------------------+---------------------+
+| **name**        | Name of the process                    | rsyslogd                                          | All                 |
++-----------------+----------------------------------------+---------------------------------------------------+---------------------+
+| **state**       | State of the process                   | S                                                 | Linux/macOS         |
++-----------------+----------------------------------------+---------------------------------------------------+---------------------+
+| **ppid**        | PPID of the process                    | 1                                                 | All                 |
++-----------------+----------------------------------------+---------------------------------------------------+---------------------+
+| **utime**       | Time spent executing user code         | 157                                               | Linux               |
++-----------------+----------------------------------------+---------------------------------------------------+---------------------+
+| **stime**       | Time spent executing system code       | 221                                               | All                 |
++-----------------+----------------------------------------+---------------------------------------------------+---------------------+
+| **cmd**         | Command executed                       | /usr/sbin/rsyslogd                                | Linux/Windows       |
++-----------------+----------------------------------------+---------------------------------------------------+---------------------+
+| **argvs**       | Arguments of the process               | -n                                                | Linux               |
++-----------------+----------------------------------------+---------------------------------------------------+---------------------+
+| **euser**       | Effective user                         | root                                              | Linux/macOS         |
++-----------------+----------------------------------------+---------------------------------------------------+---------------------+
+| **ruser**       | Real user                              | root                                              | Linux/macOS         |
++-----------------+----------------------------------------+---------------------------------------------------+---------------------+
+| **suser**       | Saved-set user                         | root                                              | Linux               |
++-----------------+----------------------------------------+---------------------------------------------------+---------------------+
+| **egroup**      | Effective group                        | root                                              | Linux               |
++-----------------+----------------------------------------+---------------------------------------------------+---------------------+
+| **rgroup**      | Real group                             | root                                              | Linux/macOS         |
++-----------------+----------------------------------------+---------------------------------------------------+---------------------+
+| **sgroup**      | Saved-set group                        | root                                              | Linux               |
++-----------------+----------------------------------------+---------------------------------------------------+---------------------+
+| **fgroup**      | Filesystem group name                  | root                                              | Linux               |
++-----------------+----------------------------------------+---------------------------------------------------+---------------------+
+| **priority**    | Kernel scheduling priority             | 20                                                | All                 |
++-----------------+----------------------------------------+---------------------------------------------------+---------------------+
+| **nice**        | Nice value of the process              | 0                                                 | Linux/macOS         |
++-----------------+----------------------------------------+---------------------------------------------------+---------------------+
+| **size**        | Size of the process                    | 53030                                             | All                 |
++-----------------+----------------------------------------+---------------------------------------------------+---------------------+
+| **vm_size**     | Total VM size (KB)                     | 212120                                            | All                 |
++-----------------+----------------------------------------+---------------------------------------------------+---------------------+
+| **resident**    | Residen size of the process in bytes   | 902                                               | Linux               |
++-----------------+----------------------------------------+---------------------------------------------------+---------------------+
+| **share**       | Shared memory                          | 814                                               | Linux               |
++-----------------+----------------------------------------+---------------------------------------------------+---------------------+
+| **start_time**  | Start time in seconds since UNIX epoch | 1318381200                                        | Linux/Windows/macOS |
++-----------------+----------------------------------------+---------------------------------------------------+---------------------+
+| **pgrp**        | Process group                          | 603                                               | Linux               |
++-----------------+----------------------------------------+---------------------------------------------------+---------------------+
+| **session**     | Session of the process                 | 603                                               | All                 |
++-----------------+----------------------------------------+---------------------------------------------------+---------------------+
+| **nlwp**        | Number of light weight processes       | 3                                                 | All                 |
++-----------------+----------------------------------------+---------------------------------------------------+---------------------+
+| **tgid**        | Thread Group ID                        | 603                                               | Linux               |
++-----------------+----------------------------------------+---------------------------------------------------+---------------------+
+| **tty**         | Number of TTY of the process           | 0                                                 | Linux               |
++-----------------+----------------------------------------+---------------------------------------------------+---------------------+
+| **processor**   | Number of the processor                | 0                                                 | Linux               |
++-----------------+----------------------------------------+---------------------------------------------------+---------------------+
+| **checksum**    | Integrity synchronization value        | 78503709147600c8e0023cf2b9995772280eee30          | All                 |
++-----------------+----------------------------------------+---------------------------------------------------+---------------------+
 
 .. _syscollector_hotfixes:
 
@@ -451,17 +449,17 @@ As an example, this rule will be triggered when the interface ``eth0`` of an age
 
     The tag ``<if_sid>221</if_sid>`` is necessary because the events from Syscollector are muted by default with that rule.
 
-When the alerts are triggered they will be displayed in Kibana this way:
+When the alerts are triggered they will be displayed in the Wazuh dashboard this way:
 
-    .. thumbnail:: ../../images/manual/internal-capabilities/syscollector_alerts.png
+    .. thumbnail:: ../../images/manual/internal-capabilities/syscollector-alerts.png
       :title: Information from syscollector for "port" value.
       :align: center
       :width: 80%
 
-New searchable fields for Kibana
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+New searchable fields for the Wazuh dashboard
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In Elasticsearch the fields will be saved as ``data.type.value``. For example, for **Hardware** type, the ``cpu_name`` field can be found as ``data.hardware.cpu_name``
+In the Wazuh indexer the fields will be saved as ``data.type.value``. For example, for **Hardware** type, the ``cpu_name`` field can be found as ``data.hardware.cpu_name``
 
 +----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
 | **Type**             | **Fields**                                                                                                           | **Example**                      |

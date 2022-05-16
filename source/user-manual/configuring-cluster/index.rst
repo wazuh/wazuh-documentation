@@ -21,12 +21,12 @@ Deploying a Wazuh cluster
 
 .. topic:: Cluster nodes configuration
 
-    The Wazuh cluster is made up by manager type nodes. Only one of them will take the master role, the others will take the worker role. For both node types, the configuration file ``/var/ossec/etc/ossec.conf`` contains the cluster configuration values.
+    The Wazuh cluster is made up of manager type nodes. Only one of them will take the master role, the others will take the worker role. For both node types, the configuration file ``/var/ossec/etc/ossec.conf`` contains the cluster configuration values.
     Within the labels ``<cluster>...</cluster>`` the following configuration values can be set:
 
         - :ref:`name <cluster_name>`: Name that will be assigned to the cluster
         - :ref:`node_name <cluster_node_name>`: Name of the current node
-        - :ref:`key <cluster_key>`: The key must be 32 characters long and should be the same for all of the nodes of the cluster. You may use the following command to generate a random one:
+        - :ref:`key <cluster_key>`: The key must be 32 characters long and should be the same for all of the cluster nodes. You may use the following command to generate a random one:
 
             .. code-block:: console
 
@@ -104,14 +104,14 @@ Deploying a Wazuh cluster
 .. topic:: Forwarder installation
 
     - The apps must be configured to point to the master's API.
-    - All manager nodes need an event forwarder in order to send data to Elasticsearch or Splunk. Install **Filebeat** if you're using the **Elastic Stack** or **Splunk forwarder** if you're using **Splunk**. This is only necessary if the node is in a separated instance from Elasticsearch or Splunk.
+    - All manager nodes need an event forwarder in order to send data to Elasticsearch or Splunk. Install **Filebeat** if you're using the **Elastic Stack** or **Splunk forwarder** if you're using **Splunk**. This is only necessary if the node is in a separate instance from Elasticsearch or Splunk.
 
     **Installing Filebeat:**
 
     +---------------------------------------------------------------------+------------------------------------------------+
     | Type                                                                | Description                                    |
     +=====================================================================+================================================+
-    | :ref:`Wazuh single node cluster<wazuh_server_single_node_filebeat>` | Install Filebeat on Wazuh single node cluster. |
+    | :ref:`Wazuh single node cluster<wazuh_server_multi_node_filebeat>`  | Install Filebeat on Wazuh single node cluster. |
     +---------------------------------------------------------------------+------------------------------------------------+
     | :ref:`Wazuh multi node cluster<wazuh_server_multi_node_filebeat>`   | Install Filebeat on Wazuh multi node cluster.  |
     +---------------------------------------------------------------------+------------------------------------------------+
@@ -131,7 +131,7 @@ Deploying a Wazuh cluster
 .. topic:: Pointing agents to the cluster nodes
 
     Finally, the configuration of the agents has to be modified in order to report to the cluster.
-    In this case the agent 001 will report to the worker01-node node. To achieve this we must modify the information contained in the labels ``<client><server>`` in the file ``/var/ossec/etc/ossec.conf``, where we will place the IP address of the node we want to report to, in our case it would look like this:
+    In this case, agent 001 will report to the worker01-node node. To achieve this, we must modify the information contained in the labels ``<client><server>`` in the file ``/var/ossec/etc/ossec.conf``, where we will place the IP address of the node we want to report to, in our case, it would look like this:
 
         .. code-block:: xml
 
@@ -148,7 +148,7 @@ Deploying a Wazuh cluster
 
             # systemctl restart wazuh-agent
 
-    The second agent will report to the master-node node, for this we will place the IP address of our master in the agent configuration, as we have seen in the previous case:
+    The second agent will report to the master-node node. For this, we will place the IP address of our master in the agent configuration, as we have seen in the previous case:
 
         .. code-block:: xml
 
@@ -182,4 +182,4 @@ Deploying a Wazuh cluster
 
     .. note::
 
-        We recommend using a :ref:`load balancer <load_balancer>` for registering and connecting the agents. This way the agents will be able to be registered and report to the nodes in a distributed way, and it will be the load balancer who assigns which worker they will report to. Using this option we can better distribute the load and in case of a fall in some worker node, its agents will **reconnect** to another one.
+        We recommend using a :ref:`load balancer <load_balancer>` for registering and connecting the agents. This way, the agents will be able to be registered and report to the nodes in a distributed way, and it will be the load balancer who assigns which worker they will report to. Using this option we can better distribute the load, and in case of a fall in some worker node, its agents will **reconnect** to another one.

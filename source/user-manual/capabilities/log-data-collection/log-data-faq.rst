@@ -11,7 +11,7 @@ FAQ
 #. `How does this help me with regulatory compliance?`_
 #. `What is the CPU usage like on the agents?`_
 #. `From where can Wazuh get log messages?`_
-#. `Can I send firewall, vpn, authentication logs to Wazuh?`_
+#. `Can I send firewall, vpn, and authentication logs to Wazuh?`_
 #. `What information should Wazuh extract from my logs?`_
 #. `Can I ignore events that are not important?`_
 
@@ -33,7 +33,7 @@ Archived logs are not automatically deleted by default. However, you can choose 
 How does this help me with regulatory compliance?
 -------------------------------------------------
 
-Log analysis is a requirement for: :ref:`PCI DSS Compliance <pci_dss_log_analysis>`,  HIPAA Compliance, FISMA Compliance and SOX Compliance.
+Log analysis is a requirement for: :ref:`PCI DSS Compliance <pci_dss_log_analysis>`,  HIPAA Compliance, FISMA Compliance, and SOX Compliance.
 
 What is the CPU usage like on the agents?
 -----------------------------------------
@@ -43,10 +43,10 @@ The memory and CPU requirements of the Wazuh agent are insignificant since its p
 From where can Wazuh get log messages?
 --------------------------------------
 
-Wazuh can read log messages from text log files, Windows event logs and event channels, and via remote syslog.  Logs are monitored in real time.
+Wazuh can read log messages from text log files, Windows event logs, event channels, and via remote syslog.  Logs are monitored in real time.
 
-Can I send firewall, VPN, authentication logs to Wazuh?
--------------------------------------------------------
+Can I send firewall, VPN, and authentication logs to Wazuh?
+-----------------------------------------------------------
 
 Yes. Wazuh has the capability to receive and process logs from devices that send logs using the syslog protocol. You can create custom decoders and rules for your device-specific logs.
 

@@ -9,7 +9,7 @@ wazuh-agentd.state
 
 The statistical file for **wazuh-agentd** is located at ``/var/ossec/var/run/wazuh-agentd.state``.
 
-This file provides information about the agent as the number of generated events, last connection, agent status and some other useful information.
+This file provides information about the agent as the number of generated events, last connection, agent status, and some other useful information.
 
 By default, this file is updated every 5 seconds. This interval can be changed by modifying the ``agent.state_interval`` value from the :ref:`internal configuration <reference_internal_options>` file.
 

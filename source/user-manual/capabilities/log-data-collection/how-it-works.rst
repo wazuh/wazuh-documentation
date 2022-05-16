@@ -8,7 +8,7 @@ How it works
 
 The below image illustrates how events flow through the Wazuh environment.
 
-.. thumbnail:: ../../../images/manual/log_analysis/log-analysis-flow.png
+.. thumbnail:: ../../../images/manual/log-analysis/log-analysis-flow.png
     :title: Log analysis flow
     :align: center
     :width: 100%
@@ -88,7 +88,7 @@ Wazuh can monitor logs from the macOS Unified Logging System.
 Remote syslog
 ^^^^^^^^^^^^^
 
-In order to integrate network devices such as routers, firewalls, etc, the log analysis component can be configured to receive log events through syslog. To do that we have two methods available:
+In order to integrate network devices such as routers, firewalls, etc, the log analysis component can be configured to receive log events through syslog. To do that, we have two methods available:
 
 One option is for Wazuh to receive syslog logs by a custom port:
 
@@ -108,7 +108,7 @@ One option is for Wazuh to receive syslog logs by a custom port:
 - ``<protocol>tcp</protocol>`` defines the protocol to listen the port. It can be UDP or TCP.
 - ``<allowed-ips>192.168.2.0/24</allowed-ips>`` defines the network or IP address from which syslog messages will be accepted.
 
-The other option store the logs in a plaintext file and monitor that file with Wazuh. If a ``/etc/rsyslog.conf`` configuration file is being used and we have defined where to store the syslog logs we can monitor them in Wazuh ``ossec.conf`` using a ``<localfile>`` block with ``syslog`` as the log format.
+The other option stores the logs in a plaintext file and monitors that file with Wazuh. If a ``/etc/rsyslog.conf`` configuration file is being used and we have defined where to store the syslog logs we can monitor them in Wazuh ``ossec.conf`` using a ``<localfile>`` block with ``syslog`` as the log format.
 
 .. code-block:: xml
 

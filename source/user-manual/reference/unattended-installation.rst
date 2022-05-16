@@ -4,7 +4,7 @@
 
 Unattended Installation
 =======================
-The unattended installation saves time deploying agents, allowing the user to predefine several installation variables instead of waiting for them to be prompted. This can be made modifying the ``preloaded-vars.conf`` file and uncommenting the configuration lines that you want to automate during the installation process.
+The unattended installation saves time deploying agents, allowing the user to predefine several installation variables instead of waiting for them to be prompted. This can be made by modifying the ``preloaded-vars.conf`` file and uncommenting the configuration lines that you want to automate during the installation process.
 
 - `Global`_
 - `Agent`_
@@ -74,12 +74,12 @@ Agent
 +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **USER_AGENT_SERVER_NAME**         | Specifies the hostname of the Wazuh server.                                                                                                               |
 +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **USER_AGENT_CONFIG_PROFILE**      | Specifies the agent's config profile name. This is used to create a configuration profiles for this particular profile name.                              |
+| **USER_AGENT_CONFIG_PROFILE**      | Specifies the agent's config profile name. This is used to create configuration profiles for this particular profile name.                                |
 +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Example:
 
-.. code-block:: bash
+.. code-block:: pkgconfig
 
     USER_LANGUAGE="en"
     USER_NO_STOP="y"
@@ -118,7 +118,7 @@ Manager/local
 
 Example:
 
-.. code-block:: bash
+.. code-block:: pkgconfig
 
     USER_LANGUAGE="en"
     USER_NO_STOP="y"

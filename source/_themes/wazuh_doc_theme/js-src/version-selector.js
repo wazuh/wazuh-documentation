@@ -77,6 +77,20 @@ jQuery(function($) {
     {name: '2.1', url: '/2.1'},
   ];
 
+  /* Code to redirect within the same release folder */
+  const currentPath = '/'+$('body').data('path')+'.html' || '';
+  let rootLocation = window.location.href;
+  if (rootLocation[rootLocation.length - 1] == '/') {
+    rootLocation = rootLocation + 'index.html';
+  }
+  rootLocation = rootLocation.split(currentPath)[0];
+  if ( redirectSameRelease && Object.keys(redirectSameRelease).length > 0 ) {
+    const newPath = redirectSameRelease[currentVersion][currentPath];
+    if ( newPath ) {
+      window.location.replace(rootLocation + newPath);
+    }
+  }
+
   /* Adds the current version to the selector button */
   checkCurrentVersion();
 

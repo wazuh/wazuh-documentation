@@ -1,9 +1,12 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+  :description: Amazon VPC is a service that allows users to launch AWS resources in a logically isolated section of the AWS Cloud. Learn how to configure and monitor its changes with Wazuh.
+
 .. _amazon_vpc:
 
-Amazon VPC
-==========
+Amazon Virtual Private Cloud (VPC)
+==================================
 
 `Amazon Virtual Private Cloud <https://aws.amazon.com/vpc/?nc1=h_ls>`_ (Amazon VPC) lets users provision a logically isolated section of the AWS Cloud where they can launch AWS resources in a virtual network that they define. Users have complete control over their virtual networking environment, including selection of their own IP address range, creation of subnets, and configuration of route tables and network gateways. Users can use both IPv4 and IPv6 in their VPC for secure and easy access to resources and applications.
 
@@ -29,6 +32,24 @@ Amazon configuration
     .. thumbnail:: ../../../images/aws/aws-create-vpc-3.png
       :align: center
       :width: 70%
+
+Policy configuration
+^^^^^^^^^^^^^^^^^^^^
+
+.. include:: /_templates/cloud/amazon/create_policy.rst
+.. include:: /_templates/cloud/amazon/bucket_policies.rst
+.. include:: /_templates/cloud/amazon/attach_policy.rst
+    
+To allow an AWS user to execute the VPC integration, it must also have a policy like the following attached:
+
+    .. code-block:: json
+
+      {
+        "Sid": "VisualEditor0",
+        "Effect": "Allow",
+        "Action": "ec2:DescribeFlowLogs",
+        "Resource": "*"
+      }
 
 
 Wazuh configuration
@@ -117,22 +138,8 @@ A VPC alert contains data such as dest and source IP address, dst and source por
 
 These alerts can be easily analyzed using visualizations like the following one:
 
-.. thumbnail:: ../../../images/aws/vpc_flow_dataviz.png
+.. thumbnail:: ../../../images/aws/vpc-flow-data-visualization.png
   :align: center
   :width: 70%
 
 On that visualization users can look for peaks in their network, once they found a peak they can filter, the alerts generated on that time and check which IP addresses were communicating. Since IP address is a field used in many AWS alerts, they'll probably found other alerts and find out what happened.
-
-.. note::
-  If while configuring the permissions policy we're asked for special permissions, we need to add the next block into the policy file:
-
-  Navigate to Services > VPC > Policies > Policy file.
-
-    .. code-block:: xml
-
-      {
-        "Sid": "VisualEditor0",
-        "Effect": "Allow",
-        "Action": "ec2:DescribeFlowLogs",
-        "Resource": "*"
-      }

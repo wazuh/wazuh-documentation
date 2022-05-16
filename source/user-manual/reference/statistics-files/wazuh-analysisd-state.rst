@@ -9,7 +9,7 @@ wazuh-analysisd.state
 
 The statistical file for **wazuh-analysisd** is located at ``/var/ossec/var/run/wazuh-analysisd.state``.
 
-It can be useful when benchmarking our Wazuh manager analysis engine in high loaded environments.
+It can be useful when benchmarking our Wazuh manager analysis engine in highly loaded environments.
 
 By default, this file is updated every 5 seconds. This interval can be changed by modifying the ``analysisd.state_interval`` value from the :ref:`internal configuration <reference_internal_options>` file.
 

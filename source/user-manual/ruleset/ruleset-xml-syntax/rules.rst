@@ -8,9 +8,9 @@
 Rules Syntax
 ============
 
-The Wazuh Ruleset combined with any customs rules is used to analyze incoming events and generate alerts when appropriate. The Ruleset is constant expansion and enhancement thanks to the collaborative effort of our developers and our growing community.
+The Wazuh Ruleset combined with any customs rules is used to analyze incoming events and generate alerts when appropriate. The Ruleset is in constant expansion and enhancement thanks to the collaborative effort of our developers and our growing community.
 
-Our aim is to provide the best guidance possible for anyone who may be looking into developing their own custom rules and remember you can always `contribute <../contribute.html>`_ to our community.
+Our aim is to provide the best guidance possible for anyone who may be looking into developing their own custom rules. Remember that you can always `contribute <../contribute.html>`_ to our community.
 
 
 Overview
@@ -45,7 +45,7 @@ The **xml labels** used to configure ``rules`` are listed here.
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `data`_                 | Any `regular expression <regex.html>`_.                       | It will compare a regular expression representing a data with a value decoded as  ``data``.          |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `extra_data`_           | Any `regular expression <regex.html>`_.                       | It will compare a regular expression representing a extra data with a value decoded                  |
+| `extra_data`_           | Any `regular expression <regex.html>`_.                       | It will compare a regular expression representing an extra data with a value decoded                 |
 |                         |                                                               | as ``extra_data``.                                                                                   |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `user`_                 | Any `regular expression <regex.html>`_.                       | It will compare a regular expression representing a user with a value decoded as ``user``.           |
@@ -241,7 +241,7 @@ The rule is created with ID: ``3151`` and it will trigger a level 10 alert if th
 
 match
 ^^^^^
-Used as a requisite to trigger the rule, will search for a match in the log event.
+Used as a requisite to trigger the rule. It will search for a match in the log event.
 
 +--------------------+---------------------------------------------------------------+
 | **Default Value**  | n/a                                                           |
@@ -289,7 +289,7 @@ If ``match`` label is declared multiple times within the rule, the following rul
 regex
 ^^^^^
 
-Used as a requisite to trigger the rule, will search for a match in the log event.
+Used as a requisite to trigger the rule. It will search for a match in the log event.
 
 +--------------------+---------------------------------------------------------------+
 | **Default Value**  | n/a                                                           |
@@ -2117,7 +2117,7 @@ BAD_WORDS
 
 <var name="BAD_WORDS">error|warning|failure</var>
 
-``BAD_WORDS`` is a very used use case of ``<var>`` option.
+``BAD_WORDS`` is a very used use case of the ``<var>`` option.
 
 It is used to include many words in the same variable. Later, this variable can be matched into the decoders to check if any of those words are in a caught event.
 

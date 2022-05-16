@@ -1,14 +1,12 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015–2022 Wazuh, Inc.
 
 .. meta::
-    :description: The Wazuh agent system inventory module collects hardware and software information from the monitored system. Learn more about this capability here.
-    
-.. _system_inventory:
+  :description: Learn more about the rootkit component of Wazuh. The Wazuh agent periodically scans the monitored system to detect rootkits both at the kernel and the user space level.  
 
 System inventory
-================
+----------------
 
-The :ref:`Wazuh agent <wazuh_agent>` system inventory module collects hardware and software information from the monitored system. This capability helps to identify assets and evaluate the efficacy of patch management.
+The :doc:`Wazuh agent <../components/wazuh-agent>` system inventory module collects hardware and software information from the monitored system. This tool helps to identify assets and evaluate the efficacy of patch management.
 
 The collected inventory data, for each of the monitored endpoints, can be queried via the Wazuh RESTful API and from the web user interface. This includes memory usage, disk space, CPU specs, network interfaces, open ports, running processes, and a list of installed applications.
 
@@ -16,20 +14,20 @@ In order to gather the data, the Wazuh agent runs periodic scans (the time inter
 
 Example of hardware inventory, network interfaces, open ports, and network settings:
 
-.. thumbnail:: ../../images/getting_started/use_case_inventory_1.png
-    :align: center
-    :wrap_image: No
+.. thumbnail:: /images/getting-started/use-case-inventory-1.png
+   :align: center
+   :wrap_image: No
 
 Example of software inventory:
 
-.. thumbnail:: ../../images/getting_started/use_case_inventory_2.png
+.. thumbnail:: /images/getting-started/use-case-inventory-3.png
     :align: center
     :wrap_image: No
 
 Example of running processes:
 
-.. thumbnail:: ../../images/getting_started/use_case_inventory_3.png
+.. thumbnail:: /images/getting-started/use-case-inventory-4.png
     :align: center
     :wrap_image: No
 
-More information about the Wazuh system inventory module can be found at the :ref:`user manual <syscollector>`.
+You can find more information about the Wazuh system inventory module in the :ref:`user manual <syscollector>`.

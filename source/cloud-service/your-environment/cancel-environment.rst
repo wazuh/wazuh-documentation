@@ -18,6 +18,6 @@ To cancel your environment:
 
 .. warning::
 
-  The cancellation cannot be undone and all data is completely deleted with this action.
+  The cancellation cannot be undone, and all data is completely deleted with this action.
 
 

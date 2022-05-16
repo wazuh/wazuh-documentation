@@ -19,6 +19,5 @@ This section provides instructions for monitoring **Microsoft Azure** infrastruc
     .. toctree::
        :maxdepth: 2
 
-       dependencies
        monitoring-instances
        activity-services/index

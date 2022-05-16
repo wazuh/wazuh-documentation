@@ -18,7 +18,7 @@ Upgrade the Wazuh manager
 
 To upgrade the Wazuh manager, choose your package manager and follow the instructions. 
 
-#. Add the Wazuh repository:
+#. Add the Wazuh repository. You can skip this step if the repository is already present and enabled on your server. 
 
 
     .. tabs::
@@ -44,27 +44,8 @@ To upgrade the Wazuh manager, choose your package manager and follow the instruc
         .. include:: ../_templates/installations/wazuh/zypp/add_repository.rst    
 
 
-#. Stop the Wazuh manager:
 
-    .. tabs::
-
- 
-      .. group-tab:: Systemd
-
-
-        .. code-block:: console
-
-          # systemctl stop wazuh-manager
-
-
-      .. group-tab:: SysV Init
-
-        .. code-block:: console
-
-          # service wazuh-manager stop
-
-
-#. Upgrade the Wazuh manager to the latest version:
+#. Upgrade the Wazuh manager to the latest version.
 
 
     .. tabs::
@@ -95,15 +76,10 @@ To upgrade the Wazuh manager, choose your package manager and follow the instruc
               # zypper update wazuh-manager
     
 
-#. Restart the Wazuh manager:
-    
-   .. include:: ../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
-
-
 
 .. note::
 
-  The configuration file of the Wazuh manager will not be replaced in the updates if it has been modified, so the settings of the new capabilities will have to be added manually. More information can be found at the :ref:`User manual <user_manual>`.
+  The configuration file of the Wazuh manager ``/var/ossec/etc/ossec.conf`` will not be replaced in the updates if it has been modified, so the settings of the new capabilities will have to be added manually. More information can be found in the :ref:`User manual <user_manual>`.
 
   If Wazuh runs in a multi-node cluster, it is necessary to update all Wazuh managers to the same version. Otherwise, Wazuh nodes will not join the cluster.
 
@@ -147,10 +123,13 @@ To upgrade the Wazuh manager, choose your package manager and follow the instruc
 Next steps
 ----------
 
-The Wazuh manager is now successfully upgraded. To check if your version of Elastic Stack is compatible with the new Wazuh version, check our :ref:`compatibility matrix <wazuh_kibana_compatibility_matrix>`. 
+The Wazuh manager is now successfully upgraded. 
+
+- To migrate from Open Distro for Elasticsearch 1.13 to the Wazuh indexer, see the :doc:`/migration-guide/wazuh-indexer` section.
 
 - To upgrade Elastic Stack, follow the instructions in the :ref:`Upgrading Elasticsearch, Kibana and Filebeat<upgrade_elasticsearch_filebeat_kibana>` section.
-- If you are going to keep the same version of Elastic Stack, unfold the next section and follow the instructions to replace the Wazuh Kibana plugin.  
+
+- If you are going to keep the same version of Elastic Stack, unfold the next section and follow the instructions to replace the Wazuh Kibana plugin.  To check if your version of Elastic Stack is compatible with the new Wazuh version, check our :ref:`compatibility matrix <wazuh_kibana_compatibility_matrix>`. 
     
 Upgrade the Wazuh Kibana plugin
 -------------------------------

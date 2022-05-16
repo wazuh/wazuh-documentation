@@ -76,7 +76,7 @@ Enabled the Office365 wodle.
 only_future_events
 ^^^^^^^^^^^^^^^^^^
 
-Set it to **yes** to collect events generated since Wazuh manager was started.
+Set it to **yes** to collect events generated since the Wazuh manager was started.
 
 By default, when Wazuh starts it will only read all log content from Office365 since the manager started.
 
@@ -194,7 +194,7 @@ This block configures the internal options in the Office365 REST API.
 subscriptions\\subscription
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The event types to include:
+This section configures the content types from which to collect audit logs. These are the subscription types that can be configured:
 
 - Audit.AzureActiveDirectory: User identity management.
 - Audit.Exchange: Mail and calendaring server.
@@ -215,7 +215,7 @@ Example of configuration
 
     <office365>
         <enabled>yes</enabled>
-        <interval>10m</interval>
+        <interval>1m</interval>
         <curl_max_size>1M</curl_max_size>
         <only_future_events>yes</only_future_events>
         <api_auth>
@@ -236,7 +236,7 @@ Example of multiple tenants
 
     <office365>
         <enabled>yes</enabled>
-        <interval>10m</interval>
+        <interval>1m</interval>
         <curl_max_size>1M</curl_max_size>
         <only_future_events>yes</only_future_events>
         <api_auth>

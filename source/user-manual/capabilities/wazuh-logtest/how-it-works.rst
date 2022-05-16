@@ -78,7 +78,7 @@ The output of Wazuh-logtest from the above record is as follows:
                     tsc: '['CC6.1', 'CC6.8', 'CC7.2', 'CC7.3']'
             **Alert to be generated.
 
-This indicates that rule 5710 level 5 matches and an alert is generated.
+This indicates that rule 5710 level 5 matches, and an alert is generated.
 If the log is pasted 8 times, in the filtering phase (rules) the 'firedtime' counter will increase until it reaches 8.
 Then rule 5712 matches level 10 is triggered by the frequency of rule 5710 and an alert is generated:
 
@@ -141,13 +141,13 @@ For the use of Wazuh-Logtest from the API there are 2 endpoints detailed below:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Wazuh API endpoints require authentication in order to be used. Therefore, all calls must include a JSON Web Token.
-Use the cURL command to log in, the Wazuh API will provide a JWT token upon success.
+Use the cURL command to log in. The Wazuh API will provide a JWT token upon success.
 
-Replace `<user>` and `<password>` with yours. By default, the user is `wazuh` and the password is `wazuh`.
+Replace `<user>` and `<password>` with yours. By default, the user is `wazuh`, and the password is `wazuh`.
 
     .. code-block:: none
 
-        TOKEN=$(curl -u <user>:<password> -k -X GET "https://localhost:55000/security/user/authenticate?raw=true")
+        TOKEN=$(curl -u <user>:<password> -k -X POST "https://localhost:55000/security/user/authenticate?raw=true")
 
 Check that everything works correctly
 
@@ -174,7 +174,7 @@ Check that everything works correctly
 2. First request for Logtest
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The first time a processing request is sent it has no token, since there is no active session, then a processing
+The first time a processing request is sent it has no token. Since there is no active session, a processing
 log request is sent to Logtest in Analysisd.
 
 The following sample data is used for request
@@ -191,7 +191,7 @@ The following sample data is used for request
     | token        | Logtest Session id (optional)|                                                                                          |
     +--------------+------------------------------+------------------------------------------------------------------------------------------+
 
-The data sent to Logtest endpoint must be in JSON format and the request can be stored in a variable.
+The data sent to Logtest endpoint must be in JSON format, and the request can be stored in a variable.
 
     .. code-block:: none
 
@@ -303,7 +303,7 @@ Then the request is send to logtest
             }
         }
 
-As in :ref:`wazuh-logtest tool <wazuh-logtest>` this indicates that rule 5710 level 5 matches and an alert is generated.
+As in :ref:`wazuh-logtest tool <wazuh-logtest>`, this indicates that rule 5710 level 5 matches, and an alert is generated.
 The messages field gives information that a session was initialized with the ``95375d4c`` token.
 This token should be added to the next requests to keep the session, including its event history, rules and
 docoders loaded. If the token field is not added to the next request, a new session will be initialized,
@@ -315,7 +315,7 @@ reloading the rules and decoders.
 
 If the session token is added to the request and it is sent 7 more times, in the ``rule`` object inside
 the output field, the 'firedtime' counter will increase until it reaches 8.
-Then rule 5712 matches level 10 is triggered by the frequency of rule 5710 and an alert is generated:
+Then rule 5712 matches level 10 is triggered by the frequency of rule 5710, and an alert is generated:
 
      .. code-block:: none
 

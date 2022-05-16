@@ -25,7 +25,7 @@ Windows Agent), do the following:
 - Access `Elastic IP addresses <https://console.aws.amazon.com/ec2/home#Addresses>`_ from your `EC2 Dashboard <https://console.aws.amazon.com/ec2/v2/home>`_.
 - Click on **[Allocate new address]**, choose "VPC", "Amazon pool", click on **[Allocate]** and on **[Close]**.
 
-.. thumbnail:: ../../images/learning-wazuh/build-lab/alloc_address.png
+.. thumbnail:: ../../images/learning-wazuh/build-lab/allocate-new-address.png
         :title: Address allocation
         :align: center
         :width: 75%
@@ -89,7 +89,7 @@ Use PuTTYgen to convert your key file into a form Putty can authenticate with
     - Under *Host Name* put the Elastic IP address associated with the Linux EC2 instance.
     - Under *Saved Session* put the instance name (i.e. Wazuh Server)
 
-    .. thumbnail:: ../../images/learning-wazuh/build-lab/putty.png
+    .. thumbnail:: ../../images/learning-wazuh/build-lab/putty-1.png
         :title: PuTTY
         :align: center
         :width: 50%
