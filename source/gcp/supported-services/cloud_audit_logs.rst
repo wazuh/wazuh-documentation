@@ -60,22 +60,22 @@ To enable Google audit logs collection, it is necessary to first ingest the audi
 Once this process is finished, you can configure the :ref:`Wazuh GCP Pub/Sub integration <pubsub>` to process the audit logs of the selected resources as usual.
 
 
-Kibana dashboard visualization
-------------------------------
+Wazuh dashboard visualization
+-----------------------------
 
-After configuring the GCP Pub/Sub module to fetch the audit logs from Google Cloud, it is possible to visualize the alerts generated in the Kibana dashboard.
+After configuring the GCP Pub/Sub module to fetch the audit logs from Google Cloud, it is possible to visualize the alerts generated in the Wazuh dashboard.
 
     .. thumbnail:: ../../images/gcp/gcp-overview.png
 	:align: center
 	:width: 80%
 
-Google Cloud logs can be filtered on Kibana by the **data.gcp.logName** field:
+Google Cloud logs can be filtered by the **data.gcp.logName** field:
 
     .. thumbnail:: ../../images/gcp/gcp-kibana-log-filter.png
 	:align: center
 	:width: 80%
 
-After selecting the **Exists in** button, only Google Cloud-related events will appear in the Kibana dashboard.
+After selecting the **Exists in** button, only Google Cloud-related events will appear in the Wazuh dashboard.
 
     .. thumbnail:: ../../images/gcp/gcp-kibana-filtered-logs.png
 	:align: center
