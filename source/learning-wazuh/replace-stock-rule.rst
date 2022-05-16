@@ -72,6 +72,9 @@ Using the Wazuh dashboard
           </rule>
         </group>
 
+    .. note::
+        In this case, the `if_sid` label is not overwritten to maintain the correct operation of the rules. Same behavior applies to `if_group`, `if_level`, `if_matched_sid`, and `if_matched_group`.
+
 Notice how the web interface will automatically display an error if the xml syntax is not completely correct.
 
 6. Press **Save file**, confirm and then click on **Restart now**.
@@ -119,22 +122,26 @@ Using the Command Line Interface
 
         <rule id="5716" level="7" overwrite="yes">
 
-6. You could customize anything about the rule as long as you keep the rule id the same and include
-   the *overwrite* tag.  If you change the rule id then the original rule will not be overwritten and
-   it may interfere with your customized version.  If you leave the rule id the same but forget to add
+6. You could customize anything about the rule as long as you keep the rule ID the same and include
+   the *overwrite* tag. If you change the rule ID then the original rule will not be overwritten and
+   it may interfere with your customized version.  If you leave the rule ID the same but forget to add
    the overwrite tag, then the Wazuh manager will fail the next time it is restarted and throw an error about
-   a duplicate rule id.
+   a duplicate rule ID.
 
-7. Save your changes to ``local_rules.xml``.
+7. It is also necessary to know that the `if_sid`, `if_group`, `if_level`, `if_matched_sid`, and `if_matched_group`
+   labels are not taken into account when overwriting a rule to maintain consistency between loaded rules. If any of these
+   are encountered, the original value prevails.
 
-8. Run ``wazuh-logtest`` to test your customized rule and paste in this event that should trigger it:
+8. Save your changes to ``local_rules.xml``.
+
+9. Run ``wazuh-logtest`` to test your customized rule and paste in this event that should trigger it:
 
     .. code-block:: none
         :class: output
 
         Oct 23 17:27:17 agent sshd[8221]: Failed password for root from ::1 port 60164 ssh2
 
-9. Observe your customized alert level near the end of the output:
+10. Observe your customized alert level near the end of the output:
 
     .. code-block:: none
         :class: output
