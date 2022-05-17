@@ -269,9 +269,6 @@ To perform the upgrade locally, follow the instructions for the operating system
 
       The Wazuh agent upgrading process for HP-UX systems requires to download the latest `HP-UX installer <https://packages.wazuh.com/|CURRENT_MAJOR|/hp-ux/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar>`_.
 
-      .. note::
-        Steps 3 and 4 are only required if the agent is upgraded from a version lower than 4.3.0 to a version greater than or equal to 4.3.0. Otherwise, the user and group must not be modified.
-
       #. Stop the Wazuh agent:
 
           .. code-block:: console
@@ -287,19 +284,21 @@ To perform the upgrade locally, follow the instructions for the operating system
             # cp /var/ossec/etc/client.keys ~/client.keys.bk
 
 
-      #. Delete ossec user and group:
+      #. **Only for upgrades from version 4.2.6 or lower**:  
+      
+         #. Delete ossec user and group:
 
-          .. code-block:: console
+            .. code-block:: console
 
-            # groupdel ossec
-            # userdel ossec
+              # groupdel ossec
+              # userdel ossec
 
-      #. Create the wazuh user and group:
+         #. Create the wazuh user and group:
 
-          .. code-block:: console
+            .. code-block:: console
 
-            # groupadd wazuh
-            # useradd -G wazuh wazuh
+              # groupadd wazuh
+              # useradd -G wazuh wazuh
 
       #. Deploy the Wazuh agent files:
 
