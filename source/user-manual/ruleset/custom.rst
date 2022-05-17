@@ -115,7 +115,7 @@ If we want to change the level value of the SSH rule ``5710`` from 5 to 10, we w
       </rule>
 
 .. warning::
-    Currently, it is not possible to overwrite the `if_sid`, `if_group`, `if_level`, `if_matched_sid`, and `if_matched_group` labels to maintain consistency between loaded rules. These tags are ignored when they are in an overwrite rule, keeping the original values.
+    To maintain consistency between loaded rules, currently it is not possible to overwrite the ``if_sid``, ``if_group``, ``if_level``, ``if_matched_sid``, and ``if_matched_group`` labels. These tags are ignored when they are in an overwrite rule, keeping the original values.
 
 
 Changing an existing decoder

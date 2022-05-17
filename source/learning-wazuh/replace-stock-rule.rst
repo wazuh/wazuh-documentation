@@ -73,7 +73,7 @@ Using the Wazuh dashboard
         </group>
 
     .. note::
-        In this case, the `if_sid` label is not overwritten to maintain the correct operation of the rules. Same behavior applies to `if_group`, `if_level`, `if_matched_sid`, and `if_matched_group`.
+        In this case, the ``if_sid`` label is not overwritten to maintain the correct operation of the rules. Same behavior applies to ``if_group``, ``if_level``, ``if_matched_sid``, and ``if_matched_group``.
 
 Notice how the web interface will automatically display an error if the xml syntax is not completely correct.
 
@@ -128,7 +128,7 @@ Using the Command Line Interface
    the overwrite tag, then the Wazuh manager will fail the next time it is restarted and throw an error about
    a duplicate rule ID.
 
-7. It is also necessary to know that the `if_sid`, `if_group`, `if_level`, `if_matched_sid`, and `if_matched_group`
+7. It is also necessary to know that the ``if_sid``, ``if_group``, ``if_level``, ``if_matched_sid``, and ``if_matched_group``
    labels are not taken into account when overwriting a rule to maintain consistency between loaded rules. If any of these
    are encountered, the original value prevails.
 
