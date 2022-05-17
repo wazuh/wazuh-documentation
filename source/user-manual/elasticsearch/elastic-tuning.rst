@@ -107,7 +107,7 @@ After starting Elasticsearch, run the following request to verify that the setti
 
 .. code-block:: console
 
-    # curl "http://localhost:9200/_nodes?filter_path=**.mlockall&pretty"
+    # curl -k -u admin:{admin_password} "https://localhost:9200/_nodes?filter_path=**.mlockall&pretty"
 
 .. code-block:: json
     :class: output
