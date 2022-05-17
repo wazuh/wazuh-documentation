@@ -23,7 +23,7 @@ Download our wazuh-packages repository from GitHub and go to the wpk directory.
 
 .. code-block:: console
 
- $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/wpk && git checkout |WAZUH_PACKAGES_BRANCH|
+ $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/wpk && git checkout v|WAZUH_LATEST|
 
 Execute the ``generate_wpk_package.sh`` script, with the different options you desire. This script will build a Docker image with all the necessary tools to create the WPK and run a container that will build it:
 

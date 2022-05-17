@@ -19,7 +19,7 @@ Download our wazuh-packages repository from GitHub and go to the ``hpux`` direct
 
 .. code-block:: console
 
- $ curl -L https://github.com/wazuh/wazuh-packages/tarball/|WAZUH_PACKAGES_BRANCH| | tar zx
+ $ curl -L https://github.com/wazuh/wazuh-packages/tarball/v|WAZUH_LATEST| | tar zx
  $ cd wazuh-wazuh-packages-*
  $ cd hp-ux
 
