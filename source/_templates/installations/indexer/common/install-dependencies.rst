@@ -14,6 +14,6 @@
 
                   .. code-block:: console
 
-                      # apt install debconf adduser procps apt-transport-https
+                      # apt install debconf adduser procps
 
 .. End of include file

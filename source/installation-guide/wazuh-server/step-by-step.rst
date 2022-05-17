@@ -21,11 +21,6 @@ The installation process is divided into two stages.
 
   <div class="accordion-section open">
 
-Installing package dependencies
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. include:: /_templates/installations/manager/install-dependencies.rst
-
 Adding the Wazuh repository
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
