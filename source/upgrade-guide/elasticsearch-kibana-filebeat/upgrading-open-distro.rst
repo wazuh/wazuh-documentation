@@ -39,8 +39,8 @@ Preparing the upgrade
 
 #. Repeat the previous step for every Wazuh node.
 
-Upgrading the Wazuh server
---------------------------
+Upgrading the Wazuh manager
+---------------------------
 
 #. Upgrade the Wazuh manager to the latest version.
 
