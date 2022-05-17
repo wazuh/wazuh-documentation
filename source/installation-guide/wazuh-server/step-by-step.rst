@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta:: :description: The Wazuh server is in charge of analyzing the data received from the Wazuh agents. Install the Wazuh server in a single-node or multi-node configuration according to your environment needs.
 
@@ -20,6 +20,11 @@ The installation process is divided into two stages.
 .. raw:: html
 
   <div class="accordion-section open">
+
+Installing package dependencies
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. include:: /_templates/installations/manager/install-dependencies.rst
 
 Adding the Wazuh repository
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^

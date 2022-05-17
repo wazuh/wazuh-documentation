@@ -1,4 +1,4 @@
-.. Copyright (C) 2015-2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 #. Install the following packages if missing.
 
@@ -14,6 +14,6 @@
 
                   .. code-block:: console
 
-                      # apt install debhelper tar curl libcap2-bin #debhelper version 9 or later
+                      # apt install debhelper tar curl libcap2-bin apt-transport-https #debhelper version 9 or later
 
 .. End of include file

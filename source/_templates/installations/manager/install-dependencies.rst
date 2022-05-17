@@ -6,14 +6,12 @@
 
           .. group-tab:: Yum
 
-                  .. code-block:: console
-
-                      # yum install coreutils initscripts chkconfig
+                  No packages installation required
 
           .. group-tab:: APT
 
                   .. code-block:: console
 
-                      # apt install debconf adduser procps apt-transport-https
+                      # apt install apt-transport-https
 
 .. End of include file
