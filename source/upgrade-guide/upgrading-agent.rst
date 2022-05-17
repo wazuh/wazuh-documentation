@@ -269,6 +269,9 @@ To perform the upgrade locally, follow the instructions for the operating system
 
       The Wazuh agent upgrading process for HP-UX systems requires to download the latest `HP-UX installer <https://packages.wazuh.com/|CURRENT_MAJOR|/hp-ux/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar>`_.
 
+      .. note::
+        Steps 3 and 4 are only required if the agent is upgraded from a version lower than 4.3.0 to a version greater than or equal to 4.3.0. Otherwise, the user and group must not be modified.
+
       #. Stop the Wazuh agent:
 
           .. code-block:: console
