@@ -40,7 +40,7 @@ Agent side
 - `notification_wait_max`_
 - `ca_verification`_
 
-.. note:: On the agent side, this module can be disabled and doing so will block remote upgrading of that agent.
+.. note:: On the agent side, this module can be disabled, and doing so will block remote upgrading of that agent.
 
 
 chunk_size
@@ -74,7 +74,7 @@ Repository where the WPK files will be downloaded.
 max_threads
 ^^^^^^^^^^^
 
-Maximum number of threads to process upgrades in parallel. Value 0 means number of CPU cores.
+Maximum number of threads to process upgrades in parallel. Value 0 means the number of CPU cores.
 
 +--------------------+-------------------------------+
 | **Default value**  | 8                             |
@@ -107,7 +107,7 @@ Initial time that the agent will wait to retry sending the upgrade confirmation 
 +--------------------+--------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | 5m                                                                                                                       |
 +--------------------+--------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values** | A positive number that should contain a suffix character indicating a time unit: s (seconds), m (minutes) or h (hours).  |
+| **Allowed values** | A positive number that should contain a suffix character indicating a time unit: s (seconds), m (minutes), or h (hours). |
 +--------------------+--------------------------------------------------------------------------------------------------------------------------+
 | **Required**       | no                                                                                                                       |
 +--------------------+--------------------------------------------------------------------------------------------------------------------------+

@@ -3,41 +3,43 @@
 .. meta::
   :description: In this section of the Wazuh documentation, you will find the instructions to uninstall each Wazuh component. Learn more here. 
   
-.. _user_manual_uninstall_wazuh_installation_open_distro:
-
 Uninstalling Wazuh with Open Distro for Elasticsearch
 =====================================================
 
-This document will give instructions to uninstall each Wazuh component. 
-
-.. _uninstall_manager:
-
+This document includes instructions to uninstall the Wazuh components. 
+ 
 Uninstall the Wazuh manager
 ---------------------------
 
-.. tabs::
+#. Remove the Wazuh manager installation.
+
+   .. tabs::
+   
+   
+     .. group-tab:: Yum
+   
+   
+       .. include:: ../../_templates/installations/wazuh/yum/uninstall_wazuh_manager_api.rst
+   
+   
+   
+     .. group-tab:: APT
+   
+   
+       .. include:: ../../_templates/installations/wazuh/deb/uninstall_wazuh_manager_api.rst
+   
+   
+   
+     .. group-tab:: ZYpp
+   
+   
+       .. include:: ../../_templates/installations/wazuh/zypp/uninstall_wazuh_manager_api.rst
 
 
-  .. group-tab:: Yum
 
+#. Disable the Wazuh manager service.
 
-    .. include:: ../../_templates/installations/wazuh/yum/uninstall_wazuh_manager_api.rst
-
-
-
-  .. group-tab:: APT
-
-
-    .. include:: ../../_templates/installations/wazuh/deb/uninstall_wazuh_manager_api.rst
-
-
-
-  .. group-tab:: ZYpp
-
-
-    .. include:: ../../_templates/installations/wazuh/zypp/uninstall_wazuh_manager_api.rst
-
-.. _uninstall_filebeat:
+   .. include:: ../../_templates/installations/wazuh/common/disable_wazuh_manager_service.rst
 
 Uninstall Filebeat
 ---------------------
@@ -67,8 +69,6 @@ Uninstall Filebeat
     .. include:: ../../_templates/installations/elastic/deb/uninstall_filebeat.rst
 
 
-.. _uninstall_elasticsearch:
-
 Uninstall Elasticsearch
 -----------------------
 
@@ -95,12 +95,6 @@ Uninstall Elasticsearch
 
     .. include:: ../../_templates/installations/elastic/zypp/uninstall_elasticsearch.rst
 
-   
-
-
-
-
-.. _uninstall_kibana:
 
 Uninstall Kibana
 ----------------
@@ -126,7 +120,3 @@ Uninstall Kibana
 
 
     .. include:: ../../_templates/installations/elastic/zypp/uninstall_kibana.rst   
-
-
-
-

@@ -2,10 +2,10 @@
 
 .. meta:: :description: The Wazuh server is in charge of analyzing the data received from the Wazuh agents. Install the Wazuh server in a single-node or multi-node configuration according to your environment needs.
 
-Installing the Wazuh server in step-by-step mode
-================================================
+Installing the Wazuh server step by step
+========================================
 
-Install and configure the Wazuh server as a single-node or multi-node cluster following step-by-step instructions. The Wazuh server is in charge of analyzing the data received from the agents and triggering alerts when threats or anomalies are detected. This central component includes the Wazuh manager and Filebeat. The Wazuh manager collects and analyzes data from the deployed Wazuh agents. Filebeat securely forwards alerts and archived events to the Wazuh indexer.
+Install and configure the Wazuh server as a single-node or multi-node cluster following step-by-step instructions. The Wazuh server is a central component that includes the Wazuh manager and Filebeat. The Wazuh manager collects and analyzes data from the deployed Wazuh agents. It triggers alerts when threats or anomalies are detected. Filebeat securely forwards alerts and archived events to the Wazuh indexer.
 
 The installation process is divided into two stages.  
 
@@ -25,7 +25,7 @@ Adding the Wazuh repository
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
   .. note::
-    If you are installing Wazuh server on the same host as the Wazuh indexer, you may skip these steps as you may have added the Wazuh repository already.
+    If you are installing the Wazuh server on the same host as the Wazuh indexer, you may skip these steps as you may have added the Wazuh repository already.
 
   ..
     Add the Wazuh repository to download the official Wazuh packages. As an alternative, you can download the Wazuh packages directly from :doc:`../packages-list`.
@@ -112,20 +112,20 @@ Configuring Filebeat
 
       .. code-block:: console
 
-        # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-packages/4.3/documentation-templates/wazuh/filebeat/filebeat.yml
+        # curl -so /etc/filebeat/filebeat.yml https://packages.wazuh.com/|WAZUH_LATEST_MINOR|/tpl/wazuh/filebeat/filebeat.yml
         
         
-  #. Edit the ``/etc/filebeat/filebeat.yml`` configuration file.
+  #. Edit the ``/etc/filebeat/filebeat.yml`` configuration file and replace the following value:
 
-      .. include:: /_templates/installations/filebeat/opensearch/configure_filebeat.rst
+     .. include:: /_templates/installations/filebeat/opensearch/configure_filebeat.rst
 
-  #. Create a secrets keystore:
+  #. Create a Filebeat keystore to securely store authentication credentials.
 
       .. code-block:: console
      
         # filebeat keystore create
 
-  #. Add the username and password using the following commands:
+  #. Add the username and password ``admin``:``admin`` to the secrets keystore.
       
       .. code-block:: console
 
@@ -137,7 +137,7 @@ Configuring Filebeat
       .. include:: /_templates/installations/filebeat/opensearch/load_filebeat_template.rst
 
 
-  #. Download the Wazuh module.
+  #. Install the Wazuh module for Filebeat.
 
       .. code-block:: console
 
@@ -147,7 +147,7 @@ Deploying certificates
 ^^^^^^^^^^^^^^^^^^^^^^
 
   .. note::
-    Make sure that a copy of ``certs.tar``, created during the Wazuh indexer installation, is placed in your working directory.
+    Make sure that a copy of ``wazuh-certificates.tar``, created during the Wazuh indexer installation, is placed in your working directory.
 
   #. Replace ``<server-node-name>`` with your Wazuh server node certificate name, the same used in ``config.yml`` when creating the certificates. Then, move the certificates to their corresponding location.
 
@@ -234,4 +234,4 @@ Next steps
 
 The Wazuh server installation is now complete and you can proceed with :doc:`../wazuh-dashboard/step-by-step`.
 
-If you want to uninstall the Wazuh server, see the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_open_distro>`.
+If you want to uninstall the Wazuh server, see :ref:`uninstall_server`.

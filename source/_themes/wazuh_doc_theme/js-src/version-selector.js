@@ -84,7 +84,7 @@ jQuery(function($) {
     rootLocation = rootLocation + 'index.html';
   }
   rootLocation = rootLocation.split(currentPath)[0];
-  if ( redirectSameRelease ) {
+  if ( redirectSameRelease && Object.keys(redirectSameRelease).length > 0 ) {
     const newPath = redirectSameRelease[currentVersion][currentPath];
     if ( newPath ) {
       window.location.replace(rootLocation + newPath);

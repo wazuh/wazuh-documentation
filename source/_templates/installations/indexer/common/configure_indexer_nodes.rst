@@ -1,68 +1,42 @@
 .. Copyright (C) 2015-2022 Wazuh, Inc.
 
-#. Edit ``/etc/wazuh-indexer/opensearch.yml``.
 
-    .. code-block:: yaml
-      :emphasize-lines: 2,4,7,24,25,27,28,40
+#. Edit ``/etc/wazuh-indexer/opensearch.yml`` and replace the following values: 
 
-       network.host: "0.0.0.0"
-       node.name: "node-1"
-       cluster.initial_master_nodes:
-       - "node-1"
-       #- "node-2"
-       #- "node-3"
-       cluster.name: "wazuh-cluster"
-       #discovery.seed_hosts:
-       #  - "node-1-ip"
-       #  - "node-2-ip"
-       #  - "node-3-ip"
-       node.max_local_storage_nodes: "3"
-       path.data: /var/lib/wazuh-indexer
-       path.logs: /var/log/wazuh-indexer
-       
-       
-       ###############################################################################
-       #                                                                             #
-       #         WARNING: Demo certificates set up in this file.                     #
-       #                  Please change on production cluster!                       #
-       #                                                                             #
-       ###############################################################################
-       
-       plugins.security.ssl.http.pemcert_filepath: /etc/wazuh-indexer/certs/demo-indexer.pem
-       plugins.security.ssl.http.pemkey_filepath: /etc/wazuh-indexer/certs/demo-indexer-key.pem
-       plugins.security.ssl.http.pemtrustedcas_filepath: /etc/wazuh-indexer/certs/root-ca.pem
-       plugins.security.ssl.transport.pemcert_filepath: /etc/wazuh-indexer/certs/demo-indexer.pem
-       plugins.security.ssl.transport.pemkey_filepath: /etc/wazuh-indexer/certs/demo-indexer-key.pem
-       plugins.security.ssl.transport.pemtrustedcas_filepath: /etc/wazuh-indexer/certs/root-ca.pem
-       plugins.security.ssl.http.enabled: true
-       plugins.security.ssl.transport.enforce_hostname_verification: false
-       plugins.security.ssl.transport.resolve_hostname: false
-       
-       plugins.security.audit.type: internal_opensearch
-       plugins.security.authcz.admin_dn:
-       - "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
-       plugins.security.check_snapshot_restore_write_privileges: true
-       plugins.security.enable_snapshot_restore_privilege: true
-       plugins.security.nodes_dn:
-       - "CN=node-1,OU=Wazuh,O=Wazuh,L=California,C=US"
-       #- "CN=node-2,OU=Wazuh,O=Wazuh,L=California,C=US"
-       #- "CN=node-3,OU=Wazuh,O=Wazuh,L=California,C=US"
-       plugins.security.restapi.roles_enabled:
-       - "all_access"
-       - "security_rest_api_access"
-       
-       plugins.security.system_indices.enabled: true
-       plugins.security.system_indices.indices: [".opendistro-alerting-config", ".opendistro-alerting-alert*", ".opendistro-anomaly-results*", ".opendistro-anomaly-detector*", ".opendistro-anomaly-checkpoints", ".opendistro-anomaly-detection-state", ".opendistro-reports-*", ".opendistro-notifications-*", ".opendistro-notebooks", ".opensearch-observability", ".opendistro-asynchronous-search-response*", ".replication-metadata-store"]
-       
-       ### Option to allow Filebeat-oss 7.10.2 to work ###
-       compatibility.override_main_response_version: true
+    
+   #. ``network.host``:  Sets the address of this node for both HTTP and transport traffic. The node will bind to this address and will also use it as its publish address. Accepts an IP address or a hostname. 
+   
+      Use the same node address set in ``config.yml`` to create the SSL certificates. 
 
-    Values to be replaced:
+   #. ``node.name``: Name of the Wazuh indexer node as defined in the ``config.yml`` file. For example, ``node-1``.
+
+   #. ``cluster.initial_master_nodes``: List of the names of the master-eligible nodes. These names are defined in the ``config.yml`` file. Uncomment the ``node-2`` and ``node-3`` lines, change the names, or add more lines, according to your ``config.yml`` definitions.
+
+      .. code-block:: yaml
+
+        cluster.initial_master_nodes:
+        - "node-1"
+        - "node-2"
+        - "node-3"
+
+   #. ``discovery.seed_hosts:`` List of the addresses of the master-eligible nodes. Each element can be either an IP address or a hostname. 
+      You may leave this setting commented if your are the configuring the Wazuh indexer as a single-node. For multi-node configurations, uncomment this setting and set your master-eligible nodes addresses. 
+
+       .. code-block:: yaml
+
+        discovery.seed_hosts:
+          - "10.0.0.1"
+          - "10.0.0.2"
+          - "10.0.0.3"
   
-    - ``node.name``: This value must be the Wazuh indexer node name you are configuring, as defined in the ``config.yml`` file.
-    - ``cluster.initial_master_nodes`` list: This value must be the name of your Wazuh indexer master node, as it is defined in ``config.yml``. If you are configuring Wazuh indexer in a multi-node distribution, you can add more master-elegible indexer nodes to this list. Uncomment the commented lines and  similarly replace ``node-2`` and ``node-3`` with your Wazuh indexer master nodes names. 
-    - ``cluster.name``: This value is your Wazuh indexer cluster name and can be replaced with your own single-node or multi-node Wazuh indexer cluster name.
-    - ``plugins.security.nodes_dn``: Replace the common name (CN) by your node name used in ``config.yml``. Uncomment the commented lines for ``node-2`` and ``node-3`` if necessary.
-    - ``plugins.security.ssl``: Replace ``demo-indexer.pem`` with ``wazuh-indexer.pem`` and ``demo-indexer-key.pem`` with ``wazuh-indexer-key.pem``. 
+   #. ``plugins.security.nodes_dn``: List of the Distinguished Names of the certificates of all the Wazuh indexer cluster nodes. Uncomment the lines for ``node-2`` and ``node-3`` and change the common names (CN) and values according to your settings and your ``config.yml`` definitions.
+
+      .. code-block:: yaml
+
+        plugins.security.nodes_dn:
+        - "CN=node-1,OU=Wazuh,O=Wazuh,L=California,C=US"
+        - "CN=node-2,OU=Wazuh,O=Wazuh,L=California,C=US"
+        - "CN=node-3,OU=Wazuh,O=Wazuh,L=California,C=US"
+
 
 .. End of include file

@@ -10,7 +10,7 @@ Cold storage
 
 Wazuh provides two types of storage for your indexed data: hot storage and cold storage.
 
-Wazuh ingests and indexes the events sent by the agents, making the data searchable and analyzable on the Wazuh WUI. This information is available in hot storage and limited by the :ref:`tier <cloud_glossary_tier>`. At the same time, data is sent to cold storage, with a delay of a maximum of 30 minutes since it is first processed by Wazuh. The cold storage is an AWS S3 bucket to store your logs for longer periods of time and meet compliance requirements. Also, you can reindex the data to other environments for investigations.
+Wazuh ingests and indexes the events sent by the agents, making the data searchable and analyzable on the Wazuh WUI. This information is available in hot storage and is limited by the :ref:`tier <cloud_glossary_tier>`. At the same time, data is sent to cold storage, with a delay of a maximum of 30 minutes since it is first processed by Wazuh. The cold storage is an AWS S3 bucket to store your logs for longer periods of time and meet compliance requirements. Also, you can reindex the data to other environments for investigations.
 
 This is an example of how Wazuh manages the storing of data:
 

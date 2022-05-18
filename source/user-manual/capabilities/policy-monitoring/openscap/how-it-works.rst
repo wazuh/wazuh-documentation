@@ -40,12 +40,12 @@ This wodle is executed on the agent, so each agent must meet the following requi
           # apt-get install libopenscap8 xsltproc
 
     Python 2.6+
-    Python is a core part of this wodle. Currently all Linux distributions come with python, so it should not be an inconvenience.
+    Python is a core part of this wodle. Currently, all Linux distributions come with python, so it should not be an inconvenience.
 
 Default policies
 ----------------
 
-These are the Security Policy includes by default on Wazuh:
+These are the Security Policy included by default on Wazuh:
 
 +----------+---------+------------------------+-----------------+-------------------------+
 | SO       | Version | File name              | Main profiles   | Vulnerability assessment|
@@ -83,7 +83,7 @@ Wodle flow
   :align: center
   :width: 100%
 
-The agent will run *openscap-scanner* periodically according to the configuration. Each result of the scan will be sent to the Manager and it will generate an alert if the status of the result is fail. It is possible to tuning the rules to send the pass result too.
+The agent will run *openscap-scanner* periodically according to the configuration. Each result of the scan will be sent to the Manager, and it will generate an alert if the status of the result is failed. It is possible to tune the rules to send the pass result too.
 
 .. code-block:: json
     :class: output

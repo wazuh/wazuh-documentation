@@ -11,7 +11,7 @@ Installation guide
 
 Wazuh is a security platform that provides unified XDR and SIEM protection for endpoints and cloud workloads. The solution is composed of a single universal agent and three central components: the Wazuh server, the Wazuh indexer, and the Wazuh dashboard. For more information, check the :doc:`Getting Started </getting-started/index>` documentation. 
 
-Wazuh is free and open source. Its components abide by the `GNU General Public License, version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_ and the `Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_ (ALv2). 
+Wazuh is free and open source. Its components abide by the `GNU General Public License, version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_, and the `Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_ (ALv2). 
 
 In this installation guide, you will learn how to install Wazuh in your infrastructure. We also offer `Wazuh Cloud <https://wazuh.com/cloud/>`_, our software as a service (SaaS) solution. Check the :ref:`Cloud service <cloud_service>` documentation for more information.
 
@@ -19,7 +19,7 @@ In this installation guide, you will learn how to install Wazuh in your infrastr
 Installing the Wazuh central components
 ---------------------------------------
 
-You can choose between two installation methods for each Wazuh central component. Both options provide you with instructions to install the central components on a single host or on separate hosts. You can also check our :ref:`Quickstart <quickstart>` to get started with Wazuh in just a few minutes.
+You can choose between two installation methods for each Wazuh central component. Both options provide you with instructions to install the central components on a single host or on separate hosts. You can also check our :doc:`Quickstart </quickstart>` to get started with Wazuh in just a few minutes.
 
 The Wazuh indexer and Wazuh server can be installed on a single host or be distributed in cluster configurations. To check the requirements and start installing the first of the Wazuh central components, go to the :doc:`Wazuh indexer <wazuh-indexer/index>` section.
 

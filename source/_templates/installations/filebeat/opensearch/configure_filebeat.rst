@@ -1,31 +1,18 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
-- Replace ``<elasticsearch_ip>`` with the IP address or the hostname of the Wazuh indexer server.
+#. ``hosts``: The list of Wazuh indexer nodes to connect to, you can use either IP addresses or hostnames. By default, the host is set to localhost ``hosts: ["127.0.0.1:9200"]``. Replace your Wazuh indexer address accordingly. 
+  
+    In case of having more than one Wazuh indexer node, you can separate the addresses using commas. For example, ``hosts: ["10.0.0.1:9200", "10.0.0.2:9200", "10.0.0.3:9200"]`` 
 
     .. code-block:: yaml
       :emphasize-lines: 3
 
        # Wazuh - Filebeat configuration file
        output.elasticsearch:
-         hosts: ["<elasticsearch_ip>:9200"]
-         protocol: https
-         username: ${username}
-         password: ${password}
-         ssl.certificate_authorities:
-           - /etc/filebeat/certs/root-ca.pem
-         ssl.certificate: "/etc/filebeat/certs/filebeat.pem"
-         ssl.key: "/etc/filebeat/certs/filebeat-key.pem"
-       setup.template.json.enabled: true
-       setup.template.json.path: '/etc/filebeat/wazuh-template.json'
-       setup.template.json.name: 'wazuh'
-       setup.ilm.overwrite: true
-       setup.ilm.enabled: false
-       
-       filebeat.modules:
-         - module: wazuh
-           alerts:
-             enabled: true
-           archives:
-             enabled: false
+       hosts: ["10.0.0.1:9200"]
+       protocol: https
+       username: ${username}
+       password: ${password}
+         
 
 .. End of include file

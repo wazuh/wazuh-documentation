@@ -82,6 +82,9 @@ header {
     width: $left-redoc-sidebar-width;
     padding: 7px 40px;
     pointer-events: all;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
     @media screen and (min-width: 50rem){
       padding: 10px 15px;
     }
@@ -326,7 +329,7 @@ redoc[spec-url] .beRszf {
   .token {
     font-family: "Fira mono", monospace;
     font-size: 14px;
-    &.property,
+    &.property, 
     &.property.string, 
     &.tag,
     &.number,
@@ -681,8 +684,7 @@ redoc[spec-url] .beRszf {
 
 /* Light theme -------------------------------------------------------------- */
 
-
-body {
+.light-theme body {
   color: $light-color-main-text;
   .no-latest-notice-wrapper {
     background-color: $light-color-base-space;
@@ -876,9 +878,15 @@ body {
     tr.last + tr > .gtEarq {
       border-left-color: transparent;
     }
-    tr.last > .eAybih,
-    tr.last > .jMEzIu {
-      background-image: linear-gradient($light-color-primary-lighter 0%, $light-color-primary-lighter 29px, transparent 29px, transparent 100%);
+    tr.last {
+      & > .eAybih,
+      & > .jMEzIu {
+        background-image: linear-gradient($light-color-primary-lighter 0%, $light-color-primary-lighter 29px, transparent 29px, transparent 100%);
+      }
+      &:first-of-type > .eAybih,
+      &:first-of-type > .jMEzIu {
+        background-image: none;
+      }
     }
     .bcLONg::before,
     .bcLONg::after {
@@ -1083,13 +1091,21 @@ body {
       }
     }
 
-    // Central and right conten columns
+    // Central and right content columns
     .api-content {
       h1,
       h2,
       h3,
       h4 {
         color: $light-color-main-text-extra;
+      }
+      .celZWI {
+        h1,
+        h2,
+        h3,
+        h4 {
+          color: $dark-color-main-text;
+        }
       }
     }
 
@@ -1098,7 +1114,7 @@ body {
 
 /* Dark- theme -------------------------------------------------------------- */
 
-.dark-theme {
+.dark-theme body {
   color: $dark-color-main-text;
   .no-latest-notice-wrapper {
     background-color: $dark-color-base-space;
@@ -1264,27 +1280,6 @@ body {
       color: $dark-color-primary-lighter;
     }
 
-    // Properties connecting line
-    // Doesn't change
-    // tr:first-of-type > .eAybih,
-    // tr:first-of-type > .jMEzIu {
-    //   background-image: linear-gradient(transparent 0%, transparent 28px, $light-color-primary-lighter 28px, $light-color-primary-lighter 100%);
-    // }
-    // .eAybih,
-    // .gtEarq {
-    //   border-left-color: $light-color-primary-lighter;
-    // }
-    // tr.last + tr > .gtEarq {
-    //   border-left-color: transparent;
-    // }
-    // tr.last > .eAybih,
-    // tr.last > .jMEzIu {
-    //   background-image: linear-gradient($light-color-primary-lighter 0%, $light-color-primary-lighter 29px, transparent 29px, transparent 100%);
-    // }
-    // .bcLONg::before,
-    // .bcLONg::after {
-    //   background-color: $light-color-primary-lighter;
-    // }
     // Array of <Type>
     .sc-TOsTZ.fKyGWc {
       color: $light-color-border-details;
@@ -1324,10 +1319,6 @@ body {
     }
 
     // Parameters values and descriptions
-    // Doesn't change
-    // .kGwPhO {
-    //   border-bottom-color: $light-color-redoc-type-border;
-    // }
     .edBCth {
       color: $light-color-input-placeholder;
     }
@@ -1337,28 +1328,6 @@ body {
       background-color: $dark-color-redoc-base-space;
     }
 
-    // Responses (central column): 200, 400, etc
-    // Doesn't change
-    // .sc-ibxdXY {
-    //   &.gxJjxJ {
-    //     background-color: rgba($light-color-success-dark, .2);
-    //     strong {
-    //       color: $light-color-success-dark;
-    //     }
-    //     svg polygon {
-    //       fill: $light-color-success-dark;
-    //     }
-    //   }
-    //   &.dUFXgZ {
-    //     background-color: rgba($light-color-danger-dark, .2);
-    //     strong {
-    //       color: $light-color-danger-dark;
-    //     }
-    //     svg polygon {
-    //       fill: $light-color-danger-dark;
-    //     }
-    //   }
-    // }
     // Inline code value
     .bMfIUD {
       color: $dark-color-main-text;
@@ -1366,65 +1335,6 @@ body {
       border-color: $dark-color-redoc-table-heading;
     }
 
-    // Samples tabs (in dark background part)
-    // Doesn't change
-    // .dOwpAS {
-    //   .react-tabs__tab-list {
-    //     & > [role="tab"].react-tabs__tab--selected {
-    //       color: $light-color-main-text;
-    //       background-color: $light-color-base-space;
-    //     }
-    //     [role="tab"] {
-    //       color: $dark-color-main-text;
-    //       background-color: $dark-color-code-block-background;
-    //       &.tab-success:before {
-    //         box-shadow: 0 0 3px 0 $dark-color-success-dark;
-    //         background-color: $light-color-success-dark;
-    //       }
-    //       &.tab-error:before {
-    //         box-shadow: 0 0 3px 0 $dark-color-danger;
-    //         background-color: $dark-color-danger;
-    //       }
-    //       &.tab-redirect:before {
-    //         box-shadow: 0 0 3px 0 $dark-color-warning;
-    //         background-color: $dark-color-warning;
-    //       }
-    //       &.tab-info:before {
-    //         box-shadow: 0 0 3px 0 $dark-color-primary;
-    //         background-color: $dark-color-primary;
-    //       }
-    //     }
-    //   }
-    //   // Samples tab content
-    //   & > .react-tabs__tab-panel {
-    //     background-color: $dark-color-code-block-background;
-    //   }
-    // }
-    // Code block area container
-    // Doesn't change
-    // .sc-gisBJw.gwfZGU {
-    //   // Code block content
-    //   .jCgylq {
-    //     background-color: $dark-color-code-block-background;
-    //     code {
-    //       background-color: $dark-color-code-block-background;
-    //     }
-    //     a {
-    //       color: $dark-color-primary;
-    //       &:hover,
-    //       &:focus {
-    //         color: $dark-color-primary-lighter;
-    //       }
-    //     }
-    //     .hoverable {
-    //       color: $dark-color-main-text;
-    //     }
-    //     // Code blocks tokens
-    //     .token {
-    //       color: $dark-color-main-text;
-    //     }
-    //   }
-    // }
     // Download button
     a.sc-hEsumM.jrowNk {
       color: $dark-color-main-text;

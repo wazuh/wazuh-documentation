@@ -1,7 +1,7 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about Wazuh AWS module configuration. In this section of the Wazuh documentation, you can find multiple ways to configure AWS credentials.
+  :description: Learn about the different ways to configure your AWS credentials when monitoring AWS services with Wazuh.
   
 .. _amazon_credentials:
 
@@ -21,7 +21,7 @@ There are multiple ways to configure the AWS credentials:
 Create an IAM User
 ------------------
 
-Wazuh will need a user with permissions to pull log data from the S3 bucket. The easiest way to accomplish this is by creating a new IAM user for your account. We will only allow it to read data from the bucket.
+Wazuh requires a user with permissions to pull log data from the different services. The easiest way to accomplish this is by creating a new IAM user in the AWS account.
 
 1. Create new user:
 
@@ -33,54 +33,7 @@ Wazuh will need a user with permissions to pull log data from the S3 bucket. The
 
     Click on "Next: Permissions" to continue.
 
-2. Create policy:
-
-    We will attach this policy later to the user we are creating.
-
-    .. thumbnail:: ../../../images/aws/aws-create-policy.png
-      :align: center
-      :width: 70%
-
-    Check that your new policy looks like this:
-
-    .. thumbnail:: ../../../images/aws/aws-summary-policy.png
-      :align: center
-      :width: 70%
-
-    Raw output for the example policy:
-
-    .. code-block:: json
-      :class: output
-
-      {
-        "Version": "2012-10-17",
-        "Statement": [
-          {
-            "Sid": "VisualEditor0",
-            "Effect": "Allow",
-            "Action": [
-              "s3:GetObject",
-              "s3:ListBucket",
-              "s3:DeleteObject"
-            ],
-            "Resource": [
-              "arn:aws:s3:::wazuh-cloudtrail",
-              "arn:aws:s3:::wazuh-cloudtrail/*"
-            ]
-          }
-        ]
-      }
-
-    .. note::
-      The s3:DeleteObject action is only required if the logs will be removed from the S3 bucket by the ``aws-s3`` module.
-
-3. Attach policy:
-
-    .. thumbnail:: ../../../images/aws/aws-attach-policy.png
-      :align: center
-      :width: 70%
-
-4. Confirm user creation and get credentials:
+2. Confirm user creation and get credentials:
 
     .. thumbnail:: ../../../images/aws/aws-summary-user.png
       :align: center
@@ -88,10 +41,14 @@ Wazuh will need a user with permissions to pull log data from the S3 bucket. The
 
 Save the credentials, you will use them later to configure the module.
 
+Depending on the service that will be monitored, the Wazuh user will need a different set of permissions. The permissions required for each service are explained on the page of each service listed in the :ref:`supported services <amazon_supported_services>` section.
+
 Authenticating options
 ----------------------
 
 Credentials can be loaded from different locations, you can either specify the credentials as they are in the previous block of configuration, assume an IAM role, or load them from other `Boto3 supported locations <http://boto3.readthedocs.io/en/latest/guide/configuration.html#configuring-credentials>`_.
+
+.. _aws_profile:
 
 Profiles
 ^^^^^^^^
@@ -135,7 +92,7 @@ IAM Roles
 .. warning::
   This authentication method requires some credentials to be previously added to the configuration using any other authentication method.
 
-IAM Roles can also be used to access the S3 bucket. Follow these steps to create one:
+IAM Roles can also be used to interact with the different AWS services. This section shows how to create a sample IAM role with read-only permissions to pull data from a bucket:
 
 1. Go to Services > Security, Identity & Compliance > IAM.
 

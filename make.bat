@@ -19,6 +19,8 @@ if "%1" == "help" (
 	:help
 	echo.Please use `make ^<target^>` where ^<target^> is one of
 	echo.  html-prod  to make standalone HTML files, including GA code. Production only
+	echo.  html-dev   to make standalone HTML files, without GA code. Development only
+	echo.  html-quick to make standalone HTML files using parallel processing
 	echo.  html       to make standalone HTML files
 	echo.  dirhtml    to make HTML files named index.html in directories
 	echo.  singlehtml to make a single large HTML file
@@ -72,19 +74,6 @@ if errorlevel 9009 (
 
 :sphinx_ok
 
-if "%1" == "redirects" (
-	cd source/_themes/wazuh_doc_theme_v3 && npm run js:build:redirects
-	if errorlevel 1 (
-		echo.
-		echo.Error. The file "redirects.min.js" could not be updated.
-	) else (
-		echo.
-		echo.Build finished. The file "redirects.min.js" has been updated.
-	)
-	cd ../../..
-	goto end
-)
-
 if "%1" == "theme" (
 	cd source/_themes/wazuh_doc_theme_v3 && npm run build-all
 	if errorlevel 1 (
@@ -100,6 +89,22 @@ if "%1" == "theme" (
 
 if "%1" == "html-prod" (
 	%SPHINXBUILD% -b html %ALLSPHINXOPTS% %BUILDDIR%/html -t production
+	if errorlevel 1 exit /b 1
+	echo.
+	echo.Build finished. The HTML pages are in %BUILDDIR%/html "(production mode)"
+	goto end
+)
+
+if "%1" == "html-dev" (
+	%SPHINXBUILD% -b html %ALLSPHINXOPTS% %BUILDDIR%/html -t dev
+	if errorlevel 1 exit /b 1
+	echo.
+	echo.Build finished. The HTML pages are in %BUILDDIR%/html "(dev mode)"
+	goto end
+)
+
+if "%1" == "html-quick" (
+	%SPHINXBUILD% -j auto -b html %ALLSPHINXOPTS% %BUILDDIR%/html
 	if errorlevel 1 exit /b 1
 	echo.
 	echo.Build finished. The HTML pages are in %BUILDDIR%/html.

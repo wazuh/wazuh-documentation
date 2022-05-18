@@ -13,8 +13,7 @@ Before we get started with Puppet, confirm that the following network requiremen
 - **Firewall open ports**: The Puppet master must be reachable on TCP port 8140.
 
 .. note::
-    This guide has been made using Puppet version 5.1.
-    Although, Wazuh supports Puppet versions from 5.0 to 6.0.
+    This guide has been made using Puppet version 7.16. Root user privileges are required to execute all the commands described below.
 
 .. topic:: Contents
 
@@ -22,6 +21,5 @@ Before we get started with Puppet, confirm that the following network requiremen
         :maxdepth: 1
 
         install-puppet-master.rst
-        install-puppet-agent.rst
-        install-puppet-db.rst
+        install-puppet-agent.rst        
         setup-puppet-certificates.rst

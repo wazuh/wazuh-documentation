@@ -20,6 +20,8 @@ const commonJS = [
 // List of javascript files per page
 const pageSpecificJS = {
   "wazuh-documentation": [
+    SRC_PATH + "components/in-release-redirections.js",
+    SRC_PATH + "components/admonitions.js",
     SRC_PATH + "components/accordions.js",
     SRC_PATH + "components/doctools.js",
     SRC_PATH + "components/version-selector.js",

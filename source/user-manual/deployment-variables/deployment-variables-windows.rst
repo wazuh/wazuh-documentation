@@ -8,21 +8,21 @@
 Deployment variables for Windows
 ================================
 
-For an agent to be fully deployed and connected to the Wazuh server it needs to be installed, registered and configured. To make the process simple, the installers can use variables that allow the configuration provisioning.
+For an agent to be fully deployed and connected to the Wazuh server, it needs to be installed, registered, and configured. The installers can use variables that allow configuration provisioning to make the process simple.
 
-Below you can find a table describing the variables used by Wazuh installers on Windows, and a few examples on how to use them.
+Below you can find a table describing the variables used by Wazuh installers on Windows and a few examples of how to use them.
 
 
 +----------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Option                           | Description                                                                                                                                                                                          |
 +==================================+======================================================================================================================================================================================================+
-|   WAZUH_MANAGER                  |  Specifies the manager IP address or hostname. In case you want to specify multiple managers, you can add them separated by commas. See :ref:`address <server_address>`.                             |
+|   WAZUH_MANAGER                  |  Specifies the manager IP address or hostname. If you want to specify multiple managers, you can add them separated by commas. See :ref:`address <server_address>`.                                  |
 +----------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   WAZUH_MANAGER_PORT             |  Specifies the manager’s connection port. See :ref:`port <server_port>`.                                                                                                                             |
+|   WAZUH_MANAGER_PORT             |  Specifies the manager connection port. See :ref:`port <server_port>`.                                                                                                                               |
 +----------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   WAZUH_PROTOCOL                 |  Sets the communication protocol between the manager and the agent. Accepts UDP and TCP. Default is TCP. See :ref:`protocol <server_protocol>`.                                                      |
+|   WAZUH_PROTOCOL                 |  Sets the communication protocol between the manager and the agent. Accepts UDP and TCP. The default is TCP. See :ref:`protocol <server_protocol>`.                                                  |
 +----------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   WAZUH_REGISTRATION_SERVER      |  Specifies the Wazuh registration server, used for the agent registration. See :ref:`manager_address <enrollment_manager_address>`. If empty, the value set in ``WAZUH_MANAGER`` will be used.       |
+|   WAZUH_REGISTRATION_SERVER      |  Specifies the Wazuh registration server used for the agent registration. See :ref:`manager_address <enrollment_manager_address>`. If empty, the value set in ``WAZUH_MANAGER`` will be used.        |
 +----------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |   WAZUH_REGISTRATION_PORT        |  Specifies the port used by the Wazuh registration server. See :ref:`port <enrollment_manager_port>`.                                                                                                |
 +----------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -59,7 +59,7 @@ Registration with password and assigning a group::
 
     wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi /q WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_REGISTRATION_PASSWORD="TopSecret" WAZUH_AGENT_GROUP="my-group"
 
-Registration with relative path to CA. It will be searched at your `APPLICATIONFOLDER` folder::
+Registration with relative path to CA. It will be searched at your Wazuh installation folder::
 
     wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi /q WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="W2019" WAZUH_REGISTRATION_CA="rootCA.pem"
 
@@ -70,7 +70,7 @@ Absolute paths to CA, certificate or key that contain spaces can be written as s
 The number "2" means that the file will be searched at the second occurrence of the "Progra" word, thus, the key and certificate would be searched at the folder "C:\\Program Files (x86)". In case this number was "1", it would be searched at "Program Files".
 
 .. note::
-    To verify agents via SSL, it's necessary to use both WAZUH_REGISTRATION_KEY and WAZUH_REGISTRATION_CERTIFICATE options. See the :ref:`verify hosts with SSL <enrollment_additional_security>` section.
+    It's necessary to use both WAZUH_REGISTRATION_KEY and WAZUH_REGISTRATION_CERTIFICATE options to verify agents via SSL. See the :ref:`verify hosts with SSL <enrollment_additional_security>` section.
 
 Registration with protocol::
 

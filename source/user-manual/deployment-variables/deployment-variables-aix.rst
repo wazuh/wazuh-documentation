@@ -8,20 +8,20 @@
 Deployment variables for AIX
 ============================
 
-For an agent to be fully deployed and connected to the Wazuh server it needs to be installed, registered and configured. To make the process simple, the installers can use variables that allow the configuration provisioning.
+For an agent to be fully deployed and connected to the Wazuh server, it needs to be installed, registered, and configured. The installers can use variables that allow configuration provisioning to make the process simple.
 
-Below you can find a table describing the variables used by Wazuh installers, and a few examples on how to use them.
+Below you can find a table describing the variables used by Wazuh installers and a few examples of how to use them.
 
 .. note:: To be able to use these deployment variables, you need to use the bash shell.
 
 +----------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Option                           | Description                                                                                                                                                                                          |
 +==================================+======================================================================================================================================================================================================+
-|   WAZUH_MANAGER                  |  Specifies the manager IP address or hostname. In case you want to specify multiple managers, you can add them separated by commas. See :ref:`address <server_address>`.                             |
+|   WAZUH_MANAGER                  |  Specifies the manager IP address or hostname. If you want to specify multiple managers, you can add them separated by commas. See :ref:`address <server_address>`.                                  |
 +----------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   WAZUH_MANAGER_PORT             |  Specifies the manager’s connection port. See :ref:`port <server_port>`.                                                                                                                             |
+|   WAZUH_MANAGER_PORT             |  Specifies the manager connection port. See :ref:`port <server_port>`.                                                                                                                               |
 +----------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   WAZUH_PROTOCOL                 |  Sets the communication protocol between the manager and the agent. Accepts UDP and TCP. Default is TCP. See :ref:`protocol <server_protocol>`.                                                      |
+|   WAZUH_PROTOCOL                 |  Sets the communication protocol between the manager and the agent. Accepts UDP and TCP. The default is TCP. See :ref:`protocol <server_protocol>`.                                                  |
 +----------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |   WAZUH_REGISTRATION_SERVER      |  Specifies the Wazuh registration server, used for the agent registration. See :ref:`manager_address <enrollment_manager_address>`. If empty, the value set in ``WAZUH_MANAGER`` will be used.       |
 +----------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -53,41 +53,41 @@ Examples:
 .. code-block:: console
 
      # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_PASSWORD="TopSecret" \
-          WAZUH_AGENT_NAME="aix-agent" rpm -i wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_AIX|.aix.ppc.rpm
+          WAZUH_AGENT_NAME="aix-agent" rpm -i wazuh-agent-|WAZUH_LATEST_AIX|-|WAZUH_REVISION_AIX|.aix.ppc.rpm
 
 * Registration with password and assigning a group:
 
 .. code-block:: console
 
      # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_REGISTRATION_PASSWORD="TopSecret" \
-          WAZUH_AGENT_GROUP="my-group" rpm -i wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_AIX|.aix.ppc.rpm
+          WAZUH_AGENT_GROUP="my-group" rpm -i wazuh-agent-|WAZUH_LATEST_AIX|-|WAZUH_REVISION_AIX|.aix.ppc.rpm
 
 * Registration with relative path to CA. It will be searched at your Wazuh installation folder:
 
 .. code-block:: console
 
      # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="aix-agent" \
-          WAZUH_REGISTRATION_CA="rootCA.pem" rpm -i wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_AIX|.aix.ppc.rpm
+          WAZUH_REGISTRATION_CA="rootCA.pem" rpm -i wazuh-agent-|WAZUH_LATEST_AIX|-|WAZUH_REVISION_AIX|.aix.ppc.rpm
 
 * Registration with protocol:
 
 .. code-block:: console
 
      # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="aix-agent" \
-          WAZUH_PROTOCOL="tcp" rpm -i wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_AIX|.aix.ppc.rpm
+          WAZUH_PROTOCOL="tcp" rpm -i wazuh-agent-|WAZUH_LATEST_AIX|-|WAZUH_REVISION_AIX|.aix.ppc.rpm
 
 * Registration and adding multiple address:
 
 .. code-block:: console
 
      # WAZUH_MANAGER="10.0.0.2,10.0.0.3" WAZUH_REGISTRATION_SERVER="10.0.0.2" \
-          WAZUH_AGENT_NAME="aix-agent" rpm -i wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_AIX|.aix.ppc.rpm
+          WAZUH_AGENT_NAME="aix-agent" rpm -i wazuh-agent-|WAZUH_LATEST_AIX|-|WAZUH_REVISION_AIX|.aix.ppc.rpm
 
 * Absolute paths to CA, certificate or key that contain spaces can be written as shown below:
 
 .. code-block:: console
 
      # WAZUH_MANAGER "10.0.0.2" WAZUH_REGISTRATION_SERVER "10.0.0.2" WAZUH_REGISTRATION_KEY "/var/ossec/etc/sslagent.key" \
-          WAZUH_REGISTRATION_CERTIFICATE "/var/ossec/etc/sslagent.cert" rpm -i wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_AIX|.aix.ppc.rpm
+          WAZUH_REGISTRATION_CERTIFICATE "/var/ossec/etc/sslagent.cert" rpm -i wazuh-agent-|WAZUH_LATEST_AIX|-|WAZUH_REVISION_AIX|.aix.ppc.rpm
 
-.. note:: To verify agents identity with the registration server, it's necessary to use both KEY and PEM options. See the :ref:`Registration Service with host verification - Agent verification with host validation <enrollment_additional_security>` section.
+.. note:: It’s necessary to use both KEY and PEM options to verify agents' identities with the registration server. See the :ref:`Registration Service with host verification - Agent verification with host validation <enrollment_additional_security>` section.

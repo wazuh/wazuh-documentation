@@ -5,6 +5,7 @@ const redirectSameRelease = [];
 
 /* Note: new release versions must always be inserted in the first position of the array "versions" */
 const versions = [
+  '4.4',
   '4.3',
   '4.2',
   '4.1',
@@ -33,9 +34,9 @@ const versions = [
 /*
 redirectSameRelease['x.y'] = {
   '/old/path/that/was/removed.html':
-    'new/path/replacing/the/old/one.html',
+    '/new/path/replacing/the/old/one.html',
   '/another-old/path/that/was/removed.html':
-    'another-new/path/replacing/the/old/one.html',
+    '/another-new/path/replacing/the/old/one.html',
 };
 */
 
@@ -71,31 +72,80 @@ removedUrls['x.y'] = [
 
 /* *** RELEASE 4.4 ****/
 
-/* Pages added in 4.4 */
-
-newUrls['4.4'] = [
-  '/user-manual/agents/key-request.html',
-]
-
-/* Pages removed in 4.4 */
-
-removedUrls['4.4'] = [
-  '/user-manual/capabilities/agent-key-polling.html',
-]
+/* Redirections from 4.3 to 4.4  */
 
 redirections.push(
     {
       'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/amazon/services/supported-services/alb.html',
+      '4.4': '/amazon/services/supported-services/elastic-load-balancing/alb.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/amazon/services/supported-services/nlb.html',
+      '4.4': '/amazon/services/supported-services/elastic-load-balancing/nlb.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/amazon/services/supported-services/clb.html',
+      '4.4': '/amazon/services/supported-services/elastic-load-balancing/clb.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
       '4.3': '/user-manual/capabilities/agent-key-polling.html',
       '4.4': '/user-manual/agents/key-request.html',
-    },
+    }
 );
 
-/* *** RELEASE 4.3 ****/
+/* Pages added in 4.4 */
+
+newUrls['4.4'] = [
+  '/amazon/services/supported-services/elastic-load-balancing/index.html',
+  '/amazon/services/supported-services/elastic-load-balancing/alb.html',
+  '/amazon/services/supported-services/elastic-load-balancing/nlb.html',
+  '/amazon/services/supported-services/elastic-load-balancing/clb.html',
+  '/user-manual/agents/key-request.html',
+];
+
+/* Pages removed in 4.4 */
+
+removedUrls['4.4'] = [
+  '/amazon/services/supported-services/alb.html',
+  '/amazon/services/supported-services/nlb.html',
+  '/amazon/services/supported-services/clb.html',
+  '/user-manual/capabilities/agent-key-polling.html',
+];
+
+  /* *** RELEASE 4.3 ****/
 
 /* Pages added in 4.3 */
 
 newUrls['4.3'] = [
+  '/getting-started/use-cases/container-security.html',
+  '/user-manual/agents/query-configuration.html',
+  '/user-manual/elasticsearch/configure-indices.html',
+  '/user-manual/elasticsearch/elasticsearch.html',
+  '/user-manual/elasticsearch/index.html',
+  '/user-manual/elasticsearch/troubleshooting.html',
+  '/user-manual/wazuh-dashboard/settings.html',
+  '/user-manual/wazuh-dashboard/config-file.html',
+  '/user-manual/wazuh-dashboard/index.html',
+  '/user-manual/wazuh-dashboard/rbac.html',
+  '/user-manual/wazuh-dashboard/troubleshooting.html',
+  '/user-manual/wazuh-dashboard/multi-tenancy.html',
+  '/user-manual/securing-wazuh/index.html',
+  '/user-manual/securing-wazuh/wazuh-indexer.html',
+  '/user-manual/securing-wazuh/opendistro.html',
+  '/user-manual/securing-wazuh/elastic-stack.html',
+  '/migration-guide/index.html',
+  '/migration-guide/wazuh-indexer.html',
+  '/migration-guide/wazuh-dashboard.html',
+  '/migration-guide/migrating-from-ossec/index.html',
+  '/migration-guide/migrating-from-ossec/ossec-server.html',
+  '/migration-guide/migrating-from-ossec/ossec-agent.html',
+  '/release-notes/index-2x.html',
+  '/release-notes/index-3x.html',
+  '/release-notes/index-4x.html',
   '/github/index.html',
   '/github/monitoring-github-activity.html',
   '/user-manual/reference/ossec-conf/github-module.html',
@@ -103,6 +153,7 @@ newUrls['4.3'] = [
   '/office365/monitoring-office365-activity.html',
   '/user-manual/reference/ossec-conf/office365-module.html',
   '/user-manual/capabilities/log-data-collection/how-to-collect-macoslogs.html',
+  '/user-manual/uninstall/central-components.html',
   '/azure/activity-services/index.html',
   '/azure/activity-services/active-directory/index.html',
   '/azure/activity-services/active-directory/graph.html',
@@ -137,17 +188,15 @@ newUrls['4.3'] = [
   '/quickstart.html',
   '/getting-started/components/wazuh-dashboard.html',
   '/getting-started/components/wazuh-indexer.html',
-  '/getting-started/use-cases/intrusion-detection.html',
-  '/getting-started/use-cases/incident-response.html',
-  '/getting-started/use-cases/security-analytics.html',
+  '/getting-started/use_cases/container_security.html',
   '/installation-guide/wazuh-indexer/index.html',
-  '/installation-guide/wazuh-indexer/unattended.html',
+  '/installation-guide/wazuh-indexer/installation-assistant.html',
   '/installation-guide/wazuh-indexer/step-by-step.html',
   '/installation-guide/wazuh-dashboard/index.html',
-  '/installation-guide/wazuh-dashboard/unattended.html',
+  '/installation-guide/wazuh-dashboard/installation-assistant.html',
   '/installation-guide/wazuh-dashboard/step-by-step.html',
   '/installation-guide/wazuh-server/index.html',
-  '/installation-guide/wazuh-server/unattended.html',
+  '/installation-guide/wazuh-server/installation-assistant.html',
   '/installation-guide/wazuh-server/step-by-step.html',
   '/deployment-options/index.html',
   '/deployment-options/wazuh-from-sources/index.html',
@@ -155,58 +204,55 @@ newUrls['4.3'] = [
   '/deployment-options/wazuh-from-sources/wazuh-server/index.html',
   '/deployment-options/offline-installation.html',
   '/deployment-options/splunk/index.html',
+  '/deployment-options/splunk/splunk-install.html',
   '/deployment-options/splunk/splunk-wazuh.html',
+  '/deployment-options/splunk/splunk-minimal-distributed.html',
   '/deployment-options/splunk/splunk-distributed.html',
   '/deployment-options/splunk/splunk-app.html',
   '/deployment-options/splunk/splunk-basic.html',
   '/deployment-options/splunk/splunk-reverse-proxy.html',
   '/deployment-options/splunk/splunk-polling.html',
+  '/deployment-options/splunk/splunk-rbac.html',
   '/deployment-options/virtual-machine/virtual-machine.html',
   '/deployment-options/deploying-with-kubernetes/index.html',
   '/deployment-options/deploying-with-kubernetes/kubernetes-clean-up.html',
   '/deployment-options/deploying-with-kubernetes/kubernetes-upgrade.html',
   '/deployment-options/deploying-with-kubernetes/kubernetes-conf.html',
-  '/deployment-options/deploying-with-kubernetes/kubernetes-local-env.html',
+  '/deployment-options/deploying-with-kubernetes/kubernetes-deployment.html',
   '/deployment-options/docker/index.html',
   '/deployment-options/docker/faq-wazuh-container.html',
   '/deployment-options/docker/container-usage.html',
   '/deployment-options/docker/wazuh-container.html',
   '/deployment-options/docker/docker-installation.html',
-  '/deployment-options/docker/upgrade-guide.html',
   '/deployment-options/elastic-stack/index.html',
   '/deployment-options/elastic-stack/distributed-deployment/index.html',
-  '/deployment-options/elastic-stack/distributed-deployment/step-by-step-installation/index.html',
-  '/deployment-options/elastic-stack/distributed-deployment/step-by-step-installation/elasticsearch-cluster/index.html',
-  '/deployment-options/elastic-stack/distributed-deployment/step-by-step-installation/elasticsearch-cluster/elasticsearch-single-node-cluster.html',
-  '/deployment-options/elastic-stack/distributed-deployment/step-by-step-installation/elasticsearch-cluster/elasticsearch-multi-node-cluster.html',
-  '/deployment-options/elastic-stack/distributed-deployment/step-by-step-installation/wazuh-cluster/index.html',
-  '/deployment-options/elastic-stack/distributed-deployment/step-by-step-installation/wazuh-cluster/wazuh-single-node-cluster.html',
-  '/deployment-options/elastic-stack/distributed-deployment/step-by-step-installation/wazuh-cluster/wazuh-multi-node-cluster.html',
-  '/deployment-options/elastic-stack/distributed-deployment/step-by-step-installation/kibana/index.html',
-  '/deployment-options/elastic-stack/distributed-deployment/unattended/index.html',
-  '/deployment-options/elastic-stack/distributed-deployment/unattended/unattended-wazuh-cluster-installation.html',
-  '/deployment-options/elastic-stack/distributed-deployment/unattended/unattended-elasticsearch-cluster-installation.html',
+  '/deployment-options/elastic-stack/distributed-deployment/index.html',
+  '/deployment-options/elastic-stack/distributed-deployment/elasticsearch-cluster/index.html',
+  '/deployment-options/elastic-stack/distributed-deployment/elasticsearch-cluster/elasticsearch-single-node-cluster.html',
+  '/deployment-options/elastic-stack/distributed-deployment/elasticsearch-cluster/elasticsearch-multi-node-cluster.html',
+  '/deployment-options/elastic-stack/distributed-deployment/wazuh-cluster/index.html',
+  '/deployment-options/elastic-stack/distributed-deployment/wazuh-cluster/wazuh-single-node-cluster.html',
+  '/deployment-options/elastic-stack/distributed-deployment/wazuh-cluster/wazuh-multi-node-cluster.html',
+  '/deployment-options/elastic-stack/distributed-deployment/kibana/index.html',
   '/deployment-options/elastic-stack/all-in-one-deployment/index.html',
-  '/deployment-options/elastic-stack/all-in-one-deployment/unattended-installation.html',
-  '/deployment-options/elastic-stack/all-in-one-deployment/all-in-one.html',
   '/deployment-options/deploying-with-ansible/index.html',
   '/deployment-options/deploying-with-ansible/setup-remote-systems.html',
   '/deployment-options/deploying-with-ansible/roles/index.html',
-  '/deployment-options/deploying-with-ansible/roles/wazuh-opendistro.html',
+  '/deployment-options/deploying-with-ansible/roles/wazuh-indexer.html',
   '/deployment-options/deploying-with-ansible/roles/wazuh-agent.html',
   '/deployment-options/deploying-with-ansible/roles/wazuh-manager.html',
-  '/deployment-options/deploying-with-ansible/roles/wazuh-kibana.html',
+  '/deployment-options/deploying-with-ansible/roles/wazuh-dashboard.html',
   '/deployment-options/deploying-with-ansible/roles/wazuh-filebeat.html',
   '/deployment-options/deploying-with-ansible/guide/install-ansible.html',
-  '/deployment-options/deploying-with-ansible/guide/install-opendistro-server.html',
+  '/deployment-options/deploying-with-ansible/guide/install-indexer-dashboard.html',
   '/deployment-options/deploying-with-ansible/guide/install-wazuh-agent.html',
   '/deployment-options/deploying-with-ansible/guide/install-wazuh-manager.html',
+  '/deployment-options/deploying-with-ansible/guide/install-wazuh-cluster.html',
   '/deployment-options/deploying-with-ansible/installation-guide.html',
   '/deployment-options/deploying-with-ansible/reference.html',
   '/deployment-options/deploying-with-puppet/index.html',
   '/deployment-options/deploying-with-puppet/setup-puppet/index.html',
   '/deployment-options/deploying-with-puppet/wazuh-puppet-module/index.html',
-  '/deployment-options/deploying-with-puppet/setup-puppet/install-puppet-db.html',
   '/deployment-options/deploying-with-puppet/setup-puppet/install-puppet-agent.html',
   '/deployment-options/deploying-with-puppet/setup-puppet/install-puppet-master.html',
   '/deployment-options/deploying-with-puppet/setup-puppet/setup-puppet-certificates.html',
@@ -250,6 +296,11 @@ removedUrls['4.3'] = [
   '/deploying-with-puppet/wazuh-puppet-module/reference-wazuh-puppet/wazuh-agent-class.html',
   '/deploying-with-puppet/wazuh-puppet-module/reference-wazuh-puppet/wazuh-manager-class.html',
   '/deployment.html',
+  '/deployment-options/elastic-stack/all-in-one-deployment/all-in-one.html',
+  '/deployment-options/elastic-stack/all-in-one-deployment/unattended-installation.html',
+  '/deployment-options/elastic-stack/distributed-deployment/unattended/index.html',
+  '/deployment-options/elastic-stack/distributed-deployment/unattended/unattended-elasticsearch-cluster-installation.html',
+  '/deployment-options/elastic-stack/distributed-deployment/unattended/unattended-wazuh-cluster-installation.html',
   '/docker/container-usage.html',
   '/docker/docker-installation.html',
   '/docker/faq-wazuh-container.html',
@@ -261,9 +312,6 @@ removedUrls['4.3'] = [
   '/docker/upgrade-guide.html',
   '/docker/wazuh-container.html',
   '/getting-started/components/elastic-stack.html',
-  '/getting-started/use-cases/active-response.html',
-  '/getting-started/use-cases/rootkits-detection.html',
-  '/getting-started/use-cases/system-inventory.html',
   '/installation-guide/more-installation-alternatives/elastic-stack/all-in-one-deployment/all-in-one.html',
   '/installation-guide/more-installation-alternatives/elastic-stack/all-in-one-deployment/index.html',
   '/installation-guide/more-installation-alternatives/elastic-stack/all-in-one-deployment/unattended-installation.html',
@@ -315,11 +363,60 @@ removedUrls['4.3'] = [
   '/installation-guide/wazuh-agent/deployment-variables/deployment-variables-macos.html',
   '/installation-guide/wazuh-agent/deployment-variables/deployment-variables-windows.html',
   '/user-manual/overview.html',
+  '/user-manual/kibana-app/index.html',
+  '/user-manual/kibana-app/features/app-overview.html',
+  '/user-manual/kibana-app/features/dev-tools.html',
+  '/user-manual/kibana-app/features/download-csv.html',
+  '/user-manual/kibana-app/features/index.html',
+  '/user-manual/kibana-app/features/reporting.html',
+  '/user-manual/kibana-app/features/ruleset.html',
+  '/user-manual/kibana-app/features/settings.html',
+  '/user-manual/kibana-app/features/index-pattern.html',
+  '/user-manual/kibana-app/reference/custom-dashboard.html',
+  '/user-manual/kibana-app/reference/index.html',
   '/virtual-machine/virtual-machine.html',
+  '/migrating-from-ossec/index.html',
+  '/migrating-from-ossec/ossec-server.html',
+  '/migrating-from-ossec/ossec-agent.html',
 ];
 
 
 redirections.push(
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': '/migrating-from-ossec/index.html',
+    '4.3': '/migration-guide/migrating-from-ossec/index.html',
+  },
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': '/migrating-from-ossec/ossec-server.html',
+    '4.3': '/migration-guide/migrating-from-ossec/ossec-server.html',
+  },
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': '/migrating-from-ossec/ossec-agent.html',
+    '4.3': '/migration-guide/migrating-from-ossec/ossec-agent.html',
+  },
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': '/getting-started/use-cases/containers-security.html',
+    '4.3': '/getting-started/use-cases/container-security.html',
+  },
+  {
+    'target': ['4.3=>4.2'],
+    '4.2': '/release-notes/index.html',
+    '4.3': '/release-notes/index-2x.html',
+  },
+  {
+    'target': ['4.3=>4.2'],
+    '4.2': '/release-notes/index.html',
+    '4.3': '/release-notes/index-3x.html',
+  },
+  {
+    'target': ['4.3=>4.2'],
+    '4.2': '/release-notes/index.html',
+    '4.3': '/release-notes/index-4x.html',
+  },
   {
     'target': ['4.2=>4.3'],
     '4.2': '/getting-started/use-cases/system-inventory.html',
@@ -331,7 +428,7 @@ redirections.push(
     '4.3': '/installation-guide/index.html',
   },
   {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
+    'target': ['4.2=>4.3'],
     '4.2': '/deployment.html',
     '4.3': '/deployment-options/index.html',
   },
@@ -344,16 +441,6 @@ redirections.push(
     'target': ['4.3=>4.2'],
     '4.2': '/getting-started/use-cases/index.html',
     '4.3': '/getting-started/use-cases/security-analytics.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/getting-started/use-cases/rootkits-detection.html',
-    '4.3': '/getting-started/use-cases/intrusion-detection.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/getting-started/use-cases/active-response.html',
-    '4.3': '/getting-started/use-cases/incident-response.html',
   },
   {
     'target': ['4.3=>4.2'],
@@ -393,7 +480,7 @@ redirections.push(
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/installation-guide/open-distro/distributed-deployment/unattended/unattended-elasticsearch-cluster-installation.html',
-    '4.3': '/installation-guide/wazuh-indexer/unattended.html',
+    '4.3': '/installation-guide/wazuh-indexer/installation-assistant.html',
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
@@ -403,7 +490,7 @@ redirections.push(
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/installation-guide/open-distro/distributed-deployment/unattended/unattended-wazuh-cluster-installation.html',
-    '4.3': '/installation-guide/wazuh-server/unattended.html',
+    '4.3': '/installation-guide/wazuh-server/installation-assistant.html',
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
@@ -411,9 +498,9 @@ redirections.push(
     '4.3': '/installation-guide/wazuh-server/step-by-step.html',
   },
   {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': 'installation-guide/open-distro/distributed-deployment/unattended/unattended-elasticsearch-cluster-installation.html',
-    '4.3': '/installation-guide/wazuh-dashboard/unattended.html',
+    'target': ['4.3=>4.2'],
+    '4.2': '/installation-guide/open-distro/distributed-deployment/unattended/unattended-elasticsearch-cluster-installation.html',
+    '4.3': '/installation-guide/wazuh-dashboard/installation-assistant.html',
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
@@ -482,11 +569,6 @@ redirections.push(
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': '/docker/upgrade-guide.html',
-    '4.3': '/deployment-options/docker/upgrade-guide.html',
-  },
-  {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/docker/faq-wazuh-container.html',
     '4.3': '/deployment-options/docker/faq-wazuh-container.html',
   },
@@ -511,9 +593,9 @@ redirections.push(
     '4.3': '/deployment-options/deploying-with-kubernetes/kubernetes-clean-up.html',
   },
   {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
+    'target': ['4.2=>4.3'],
     '4.2': '/deploying-with-kubernetes/kubernetes-local-env.html',
-    '4.3': '/deployment-options/deploying-with-kubernetes/kubernetes-local-env.html',
+    '4.3': '/deployment-options/deploying-with-kubernetes/index.html',
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
@@ -538,7 +620,7 @@ redirections.push(
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/deploying-with-ansible/guide/install-opendistro-server.html',
-    '4.3': '/deployment-options/deploying-with-ansible/guide/install-opendistro-server.html',
+    '4.3': '/deployment-options/deploying-with-ansible/guide/install-indexer-dashboard.html',
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
@@ -568,12 +650,12 @@ redirections.push(
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/deploying-with-ansible/roles/wazuh-opendistro.html',
-    '4.3': '/deployment-options/deploying-with-ansible/roles/wazuh-opendistro.html',
+    '4.3': '/deployment-options/deploying-with-ansible/roles/wazuh-indexer.html',
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/deploying-with-ansible/roles/wazuh-kibana.html',
-    '4.3': '/deployment-options/deploying-with-ansible/roles/wazuh-kibana.html',
+    '4.3': '/deployment-options/deploying-with-ansible/roles/wazuh-dashboard.html',
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
@@ -608,7 +690,7 @@ redirections.push(
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/deploying-with-puppet/setup-puppet/install-puppet-db.html',
-    '4.3': '/deployment-options/deploying-with-puppet/setup-puppet/install-puppet-db.html',
+    '4.3': '/deployment-options/deploying-with-puppet/setup-puppet/index.html',
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
@@ -656,79 +738,79 @@ redirections.push(
     '4.3': '/deployment-options/elastic-stack/index.html',
   },
   {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
+    'target': ['4.2=>4.3'],
     '4.2': '/installation-guide/more-installation-alternatives/elastic-stack/all-in-one-deployment/index.html',
     '4.3': '/deployment-options/elastic-stack/all-in-one-deployment/index.html',
   },
   {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
+    'target': ['4.2=>4.3'],
     '4.2': '/installation-guide/more-installation-alternatives/elastic-stack/all-in-one-deployment/unattended-installation.html',
-    '4.3': '/deployment-options/elastic-stack/all-in-one-deployment/unattended-installation.html',
+    '4.3': '/deployment-options/elastic-stack/all-in-one-deployment/index.html',
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/installation-guide/more-installation-alternatives/elastic-stack/all-in-one-deployment/all-in-one.html',
-    '4.3': '/deployment-options/elastic-stack/all-in-one-deployment/all-in-one.html',
+    '4.3': '/deployment-options/elastic-stack/all-in-one-deployment/index.html',
   },
   {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
+    'target': ['4.2=>4.3'],
     '4.2': '/installation-guide/more-installation-alternatives/elastic-stack/distributed-deployment/index.html',
     '4.3': '/deployment-options/elastic-stack/distributed-deployment/index.html',
   },
   {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
+    'target': ['4.2=>4.3'],
     '4.2': '/installation-guide/more-installation-alternatives/elastic-stack/distributed-deployment/unattended/index.html',
-    '4.3': '/deployment-options/elastic-stack/distributed-deployment/unattended/index.html',
+    '4.3': '/deployment-options/elastic-stack/distributed-deployment/index.html',
   },
   {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
+    'target': ['4.2=>4.3'],
     '4.2': '/installation-guide/more-installation-alternatives/elastic-stack/distributed-deployment/unattended/unattended-elasticsearch-cluster-installation.html',
-    '4.3': '/deployment-options/elastic-stack/distributed-deployment/unattended/unattended-elasticsearch-cluster-installation.html',
+    '4.3': '/deployment-options/elastic-stack/distributed-deployment/index.html',
   },
   {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
+    'target': ['4.2=>4.3'],
     '4.2': '/installation-guide/more-installation-alternatives/elastic-stack/distributed-deployment/unattended/unattended-wazuh-cluster-installation.html',
-    '4.3': '/deployment-options/elastic-stack/distributed-deployment/unattended/unattended-wazuh-cluster-installation.html',
+    '4.3': '/deployment-options/elastic-stack/distributed-deployment/index.html',
   },
   {
-    'target': ['4.2=>4.3', '4.3=>4.2'],
+    'target': ['4.2=>4.3'],
     '4.2': '/installation-guide/more-installation-alternatives/elastic-stack/distributed-deployment/step-by-step-installation/index.html',
-    '4.3': '/deployment-options/elastic-stack/distributed-deployment/step-by-step-installation/index.html',
+    '4.3': '/deployment-options/elastic-stack/distributed-deployment/index.html',
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/installation-guide/more-installation-alternatives/elastic-stack/distributed-deployment/step-by-step-installation/elasticsearch-cluster/index.html',
-    '4.3': '/deployment-options/elastic-stack/distributed-deployment/step-by-step-installation/elasticsearch-cluster/index.html',
+    '4.3': '/deployment-options/elastic-stack/distributed-deployment/elasticsearch-cluster/index.html',
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/installation-guide/more-installation-alternatives/elastic-stack/distributed-deployment/step-by-step-installation/elasticsearch-cluster/elasticsearch-single-node-cluster.html',
-    '4.3': '/deployment-options/elastic-stack/distributed-deployment/step-by-step-installation/elasticsearch-cluster/elasticsearch-single-node-cluster.html',
+    '4.3': '/deployment-options/elastic-stack/distributed-deployment/elasticsearch-cluster/elasticsearch-single-node-cluster.html',
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/installation-guide/more-installation-alternatives/elastic-stack/distributed-deployment/step-by-step-installation/elasticsearch-cluster/elasticsearch-multi-node-cluster.html',
-    '4.3': '/deployment-options/elastic-stack/distributed-deployment/step-by-step-installation/elasticsearch-cluster/elasticsearch-multi-node-cluster.html',
+    '4.3': '/deployment-options/elastic-stack/distributed-deployment/elasticsearch-cluster/elasticsearch-multi-node-cluster.html',
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/installation-guide/more-installation-alternatives/elastic-stack/distributed-deployment/step-by-step-installation/wazuh-cluster/index.html',
-    '4.3': '/deployment-options/elastic-stack/distributed-deployment/step-by-step-installation/wazuh-cluster/index.html',
+    '4.3': '/deployment-options/elastic-stack/distributed-deployment/wazuh-cluster/index.html',
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/installation-guide/more-installation-alternatives/elastic-stack/distributed-deployment/step-by-step-installation/wazuh-cluster/wazuh-single-node-cluster.html',
-    '4.3': '/deployment-options/elastic-stack/distributed-deployment/step-by-step-installation/wazuh-cluster/wazuh-single-node-cluster.html',
+    '4.3': '/deployment-options/elastic-stack/distributed-deployment/wazuh-cluster/wazuh-single-node-cluster.html',
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/installation-guide/more-installation-alternatives/elastic-stack/distributed-deployment/step-by-step-installation/wazuh-cluster/wazuh-multi-node-cluster.html',
-    '4.3': '/deployment-options/elastic-stack/distributed-deployment/step-by-step-installation/wazuh-cluster/wazuh-multi-node-cluster.html',
+    '4.3': '/deployment-options/elastic-stack/distributed-deployment/wazuh-cluster/wazuh-multi-node-cluster.html',
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/installation-guide/more-installation-alternatives/elastic-stack/distributed-deployment/step-by-step-installation/kibana/index.html',
-    '4.3': '/deployment-options/elastic-stack/distributed-deployment/step-by-step-installation/kibana/index.html',
+    '4.3': '/deployment-options/elastic-stack/distributed-deployment/kibana/index.html',
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
@@ -800,6 +882,41 @@ redirections.push(
     '4.2': '/docker-monitor/monitoring-docker-server.html',
     '4.3': '/container-security/docker-monitor/monitoring-docker-server.html',
   },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/user-manual/kibana-app/features/query-configuration.html',
+    '4.3': '/user-manual/agents/query-configuration.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/user-manual/kibana-app/features/settings.html',
+    '4.3': '/user-manual/wazuh-dashboard/settings.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/user-manual/kibana-app/wazuh-rbac.html',
+    '4.3': '/user-manual/wazuh-dashboard/rbac.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/user-manual/kibana-app/reference/elasticsearch.html',
+    '4.3': '/user-manual/elasticsearch/elasticsearch.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/user-manual/kibana-app/troubleshooting.html',
+    '4.3': '/user-manual/elasticsearch/troubleshooting.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/user-manual/kibana-app/reference/config-file.html',
+    '4.3': '/user-manual/wazuh-dashboard/config-file.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/user-manual/kibana-app/reference/configure-indices.html',
+    '4.3': '/user-manual/elasticsearch/configure-indices.html',
+  },
 );
 
 /* *** RELEASE 4.2 ****/
@@ -811,6 +928,8 @@ redirectSameRelease['4.2'] = {
     '/release-notes/release-4-2-0.html',
   '/user-manual/registering/agent-enrollment.html':  
     '/user-manual/agent-enrollment/via-agent-configuration/index.html',
+  '/azure/dependencies.html':  
+    '/azure/index.html',
 };
 
 /* Pages added in 4.2 */
@@ -987,6 +1106,7 @@ newUrls['4.2'] = [
   '/release-notes/release-4-2-3.html',
   '/release-notes/release-4-2-4.html',
   '/release-notes/release-4-2-5.html',
+  '/release-notes/release-4-2-6.html',
   '/user-manual/api/securing-api.html',
   '/user-manual/configuring-cluster/cluster-management.html',
   '/user-manual/manager/manual-email-report/smtp-authentication.html',
