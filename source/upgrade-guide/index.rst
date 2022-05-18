@@ -8,9 +8,9 @@ Upgrade guide
 
 This guide gives instructions to upgrade your Wazuh installation.
 
--  :doc:`Upgrade Wazuh central components <upgrading-central-components>`
--  :doc:`Upgrade Wazuh and Open Distro for Elasticsearch <elasticsearch-kibana-filebeat/upgrading-open-distro>`
--  :doc:`Upgrade Wazuh and Elastic Stack basic license <elasticsearch-kibana-filebeat/upgrading-elastic-stack>`
+-  :doc:`Upgrade Wazuh server, Wazuh indexer and Wazuh dashboard <upgrading-central-components>`
+-  :doc:`Upgrade Wazuh server and Open Distro for Elasticsearch <elasticsearch-kibana-filebeat/upgrading-open-distro>`
+-  :doc:`Upgrade Wazuh server and Elastic Stack basic license <elasticsearch-kibana-filebeat/upgrading-elastic-stack>`
 -  :doc:`Upgrade Wazuh agents <upgrading-agent>`
 
 The :doc:`compatibility-matrix/index` section explains compatibility requirements between components.
