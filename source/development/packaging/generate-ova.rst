@@ -17,7 +17,7 @@ Requirements
  * `Git <https://git-scm.com/book/en/v2/Getting-Started-Installing-Git>`_
  * `Python <https://www.python.org/download/releases/2.7/>`_
 
-Download our wazuh-packages repository from GitHub and go to the ova directory of the |WAZUH_PACKAGES_BRANCH| branch.
+Download our wazuh-packages repository from GitHub and go to the ova directory.
 
 .. code-block:: console
 

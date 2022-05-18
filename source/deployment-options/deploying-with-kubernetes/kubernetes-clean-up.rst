@@ -53,4 +53,4 @@ This will remove every resource defined on the ``kustomization.yml`` file.
 
 
 .. warning::
-    Do not forget to delete the volumes manually in AWS.
+    Do not forget to delete the volumes manually where necessary.
