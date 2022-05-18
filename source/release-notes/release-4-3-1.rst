@@ -45,10 +45,10 @@ Manager
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#13439 <https://github.com/wazuh/wazuh/pull/13439>`_             Fixed a crash when overwrite rules are triggered. 
-`#13439 <https://github.com/wazuh/wazuh/pull/13439>`_             Fixed a memory leak when loading overwrite rules. 
-`#13439 <https://github.com/wazuh/wazuh/pull/13439>`_             Fixed the use of relationship labels in overwrite rules. 
-`#13430 <https://github.com/wazuh/wazuh/pull/13430>`_             Fixed regex used to transform into datetime in the logtest framework function. 
+`#13439 <https://github.com/wazuh/wazuh/pull/13439>`_             A crash when overwritten rules are triggered is fixed.  
+`#13439 <https://github.com/wazuh/wazuh/pull/13439>`_             A memory leak when loading overwritten rules is fixed. 
+`#13439 <https://github.com/wazuh/wazuh/pull/13439>`_             The use of relationship labels in overwritten rules is now fixed. 
+`#13430 <https://github.com/wazuh/wazuh/pull/13430>`_             The regex used to transform into datetime in the logtest framework function is fixed. 
 ==============================================================    =============
 
 
@@ -58,9 +58,17 @@ RESTful API
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#13178 <https://github.com/wazuh/wazuh/pull/13178>`_             Fixed API response when using sort in Agent upgrade related endpoints. 
+`#13178 <https://github.com/wazuh/wazuh/pull/13178>`_             The API response when using sort in Agent upgrade related endpoints is now fixed. 
 ==============================================================    =============
 
+Ruleset
+^^^^^^^
+
+===============================================================    =============
+Reference                                                          Description
+===============================================================    =============
+`#13409 <https://github.com/wazuh/wazuh/pull/13409>`_              Fixed rule 92656, added field condition ``win.eventdata.logonType`` equals 10 to avoid false positives.
+===============================================================    =============
 
 
 Wazuh dashboard
@@ -69,7 +77,7 @@ Wazuh dashboard
 ===============================================================    =============
 Reference                                                          Description
 ===============================================================    =============
-`#4141 <https://github.com/wazuh/wazuh-kibana-app/pull/4141>`_     Fixed the falsy values are displayed as not defined and enhanced the output of `Ruleset Test` 
+`#4141 <https://github.com/wazuh/wazuh-kibana-app/pull/4141>`_     Enhanced the output of the Ruleset Test tool. An error that caused falsy values to be displayed as undefined is now fixed. 
 ===============================================================    =============
 
 
@@ -79,8 +87,8 @@ Wazuh Splunk app
 ===============================================================    =============
 Reference                                                          Description
 ===============================================================    =============
-`#1320 <https://github.com/wazuh/wazuh-splunk/pull/1320>`_         Fixed the render condition of a toast message related to the forwarder when there is no data of agents and the agent deployment guide is displayed in the `Agents` section. 
-`#1318 <https://github.com/wazuh/wazuh-splunk/pull/1318>`_         Fixed the access to `Management/Configuration` due to missing permissions when the manager cluster is disabled 
+`#1320 <https://github.com/wazuh/wazuh-splunk/pull/1320>`_         Fixed the render condition of a toast message related to the forwarder when there is no data of agents and the agent deployment guide is displayed in the **Agents** section. 
+`#1318 <https://github.com/wazuh/wazuh-splunk/pull/1318>`_         The access to **Management/Configuration** due to missing permissions when the manager cluster is disabled is now fixed. 
 ===============================================================    =============
 
 Changelogs
