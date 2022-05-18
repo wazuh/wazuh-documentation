@@ -74,6 +74,7 @@ removedUrls['x.y'] = [
 /* Pages added in 4.3 */
 
 newUrls['4.3'] = [
+  '/release-notes/release-4-3-1.html',
   '/getting-started/use-cases/container-security.html',
   '/user-manual/agents/query-configuration.html',
   '/user-manual/elasticsearch/configure-indices.html',
