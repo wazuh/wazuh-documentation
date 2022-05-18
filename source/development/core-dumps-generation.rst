@@ -25,7 +25,7 @@ macOS
 Enabling core dump generation
 -----------------------------
 
-To enable core dumps in macOS, you need to change the resource limits of a process using `ulimit`.  In this case, the
+To enable core dumps on macOS, you need to change the resource limits of a process using `ulimit`.  In this case, the
 resource limit you need to change is the "cores" one, which represents the maximum size of core dumps our process is
 allowed to generate.
 
@@ -139,7 +139,7 @@ level used when compiling)::
 Note about debugging symbols
 ----------------------------
 
-Debugging symbols are created separately by default and they are available to download at our
+Debugging symbols are created separately by default, and they are available to download at our
 :ref:`debug packages list<macos-dbg-symbols-packages>`. This means binary files (executables and .dylib shared libraries)
 have no debugging symbols in them and .dSYM bundle folders are created inside the ``<wazuh_repo>/src/symbols`` directory
 when building Wazuh from sources.
