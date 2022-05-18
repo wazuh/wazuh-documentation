@@ -169,6 +169,14 @@ When upgrading a multi-node Wazuh manager cluster, run the upgrade in every node
 
             # apt-get install wazuh-manager
 
+
+#. Download the Wazuh module for Filebeat:
+
+    .. code-block:: console
+
+      # curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.1.tar.gz | sudo tar -xvz -C /usr/share/filebeat/module   
+               
+
 #. Download the alerts template:
 
     .. code-block:: console
