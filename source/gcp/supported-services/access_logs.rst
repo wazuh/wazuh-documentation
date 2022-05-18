@@ -26,7 +26,6 @@ Example of configuration
  <gcp-bucket>
     <run_on_start>yes</run_on_start>
     <interval>1m</interval>
-    <logging>debug</logging>
     <bucket type="access_logs">
         <name>wazuh-test-bucket</name>
         <credentials_file>credentials.json</credentials_file>

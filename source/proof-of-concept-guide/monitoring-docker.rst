@@ -1,6 +1,6 @@
 .. meta::
-  :description: The Wazuh module for Docker can be used to identify security incidents across containers, alerting in real time. Learn more about this in this POC.
-  
+  :description: The Wazuh module for Docker can be used to identify security incidents across containers, alerting in real time. Learn more about this in this PoC.
+
 .. _poc_monitoring_docker:
 
 Monitoring Docker
@@ -14,18 +14,18 @@ See the :ref:`Monitoring container activity <docker-monitor-index>` section of t
 Configuration
 -------------
 
-Configure your environment as follows to test the POC.
+Configure your environment as follows to test the PoC.
 
-#. Configure the Docker listener in the ``/var/ossec/etc/ossec.conf`` configuration file at the CentOS 8 endpoint.
+#. Configure the Docker listener in the ``/var/ossec/etc/ossec.conf`` configuration file at the Ubuntu 20 endpoint.
 
     .. code-block:: XML
 
         <ossec_config>
             <wodle name="docker-listener">
-            <interval>10m</interval>
-            <attempts>5</attempts>
-            <run_on_start>yes</run_on_start>
-            <disabled>no</disabled>
+                <interval>10m</interval>
+                <attempts>5</attempts>
+                <run_on_start>yes</run_on_start>
+                <disabled>no</disabled>
             </wodle>
         </ossec_config>
 
@@ -55,12 +55,12 @@ Steps to generate the alerts
 Query the alerts
 ----------------
 
-You can visualize the alert data in the Wazuh Kibana plugin. To do this, go to the **Security events** module and add the filters in the search bar to query the alerts.
+You can visualize the alert data in the Wazuh dashboard. To do this, go to the **Security events** module and add the filters in the search bar to query the alerts.
 
 * ``rule.groups: "docker"``
 * Additionally, the ``data.docker.Action`` field states which action was performed.
 
-.. thumbnail:: ../images/poc/Monitoring_Docker.png
+.. thumbnail:: ../images/poc/Monitoring-Docker.png
           :title: Monitoring Docker
           :align: center
           :wrap_image: No
@@ -68,23 +68,22 @@ You can visualize the alert data in the Wazuh Kibana plugin. To do this, go to t
 Troubleshooting
 ---------------
 
-* Error in the agent log file ``/var/ossec/logs/ossec.log``: 
+* Error in the agent log file ``/var/ossec/logs/ossec.log``:
 
-    ``wazuh-modulesd:docker-listener: ERROR: /usr/bin/env: ‘python’: No such file or directory`` 
+    ``wazuh-modulesd:docker-listener: ERROR: /usr/bin/env: ‘python’: No such file or directory``
 
 This can be solved by creating a symbolic link.
 
     .. code-block:: console
-        
+
         # ln -s /usr/bin/python3 /usr/bin/python
 
-* Error in the agent log file ``/var/ossec/logs/ossec.log``: 
+* Error in the agent log file ``/var/ossec/logs/ossec.log``:
 
-    ``wazuh-modulesd:docker-listener: ERROR: 'docker' module needs to be installed. Execute 'pip install docker' to do it.`` 
+    ``wazuh-modulesd:docker-listener: ERROR: 'docker' module needs to be installed. Execute 'pip install docker' to do it.``
 
 This can be solved by running the following command.
-    
-    .. code-block:: console
-        
-        # pip3 install docker
 
+    .. code-block:: console
+
+        # pip3 install docker

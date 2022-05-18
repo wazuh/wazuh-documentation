@@ -12,19 +12,20 @@ Index
 .. toctree::
    :titlesonly:
    :includehidden:
-   :maxdepth: 2
+   :maxdepth: 3
 
-   getting-started/index
+   Getting started <getting-started/index>
+   quickstart
    installation-guide/index
+   deployment-options/index
    upgrade-guide/index
+   migration-guide/index
+   Wazuh Cloud service <cloud-service/index>
    user-manual/index
-   Wazuh cloud service <cloud-service/index>
-   development/index
-   containers
-   deployment
-   compliance
    monitoring
-   migrating-from-ossec/index
+   container-security/index
+   development/index
+   compliance
    learning-wazuh/index
    proof-of-concept-guide/index
    release-notes/index

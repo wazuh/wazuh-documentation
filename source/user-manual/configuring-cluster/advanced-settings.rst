@@ -6,21 +6,21 @@
 .. _cluster_agents_connections:
 
 Agents connections
-======================
+==================
 
-    In this section we are going to explore other ways to configure our cluster. We'll see that besides the basic way described in our :ref:`Getting started <gt-cluster>`, we have the options to use a load balancer or a failover mode.
+    In this section, we are going to explore other ways to configure our cluster. We'll see that besides the basic way described in our :ref:`Getting started <gt-cluster>`, we have the options to use a load balancer or a failover mode.
 
     .. note::
 
-        We recommend using the **load balancer** option. This way the agents will be able to report to the nodes in a distributed way and it will be the load balancer who assigns which worker they report to. Using this option we can better distribute the load and in case of a fall in some worker node, its agents will **reconnect** to another one.
+        We recommend using the **load balancer** option. This way, the agents will be able to report to the nodes in a distributed way and it will be the load balancer who assigns which worker they report to. Using this option, we can better distribute the load, and in case of a fall in some worker node, its agents will **reconnect** to another one.
 
 
 .. _load_balancer:
 
 Pointing agents to the cluster with a load balancer
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-    A **load balancer** is a service that distributes the workloads across multiple resources.
+    A **load balancer** is a service that distributes workloads across multiple resources.
     In Wazuh's case, users want to use a load balancer to catch all the agent events and distribute them between the different workers in the cluster.
     The correct way to use it is to point every agent to send the events to the *load balancer*:
 
@@ -52,14 +52,14 @@ Pointing agents to the cluster with a load balancer
 
     3. Include in the ``Load Balancer`` the IP address of every instance of the cluster we want to deliver events.
 
-        - This configuration will depend of the load balancer service chosen.
+        - This configuration will depend on the load balancer service chosen.
 
-        - Here is a short configuration guide of a **load balancer** using Nginx:
+        - Here is a short configuration guide for a **load balancer** using Nginx:
 
         1. Install Nginx in the *load balancer instance*:
 
             - Download the packages from the `Official Page. <http://nginx.org/en/linux_packages.html>`_
-            - Follow the steps related on that guide to install the packages.
+            - Follow the steps related to that guide to install the packages.
 
         2. Configure the instance as a *load balancer*:
 
@@ -98,7 +98,7 @@ Pointing agents to the cluster with a load balancer
 
 
 Pointing agents to the cluster (Failover mode)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     We can set to the agents a list of nodes of manager type (workers/master). In case of a disconnection, the agent will connect to another node in order to keep reporting.
     To configure this mode the first thing we must do is configure our cluster as indicated in our :ref:`getting started <gt-cluster>`, with the number of workers nodes we want. Once this is done, we will go directly to configure the agents in the following way.
@@ -111,8 +111,8 @@ Pointing agents to the cluster (Failover mode)
             worker01: 172.0.0.4
             worker02: 172.0.0.5
 
-    We want all our agents to report to worker01 node, our worker02 node will be a backup node in case the worker01 node is not available.
-    To do this we must modify the configuration file of our agents ``/var/ossec/etc/ossec.conf``, within this we have a block ``<server>...</server>``, we will have to create as many blocks **server** as backup nodes we have and want to assign it to the agent:
+    We want all our agents to report to the worker01 node, our worker02 node will be a backup node in case the worker01 node is not available.
+    To do this we must modify the configuration file of our agents ``/var/ossec/etc/ossec.conf``. Within this, we have a block ``<server>...</server>``, we will have to create as many blocks **server** as backup nodes we have and want to assign it to the agent:
 
     .. code-block:: xml
 

@@ -137,7 +137,7 @@ After following these steps, we can see the below logs on ``/var/ossec/log/ossec
 
         wazuh-agentd: INFO: (1410): Reading authentication keys file.
         wazuh-agentd: INFO: Using notify time: 10 and max time to reconnect: 60
-        wazuh-agentd: INFO: Version detected -> Linux |ubuntu |5.3.0-28-generic |#30~18.04.1-Ubuntu SMP Fri Jan 17 06:14:09 UTC 2020 |x86_64 [Ubuntu|ubuntu: 18.04.4 LTS (Bionic Beaver)] - Wazuh v4.2.5
+        wazuh-agentd: INFO: Version detected -> Linux |ubuntu |5.3.0-28-generic |#30~18.04.1-Ubuntu SMP Fri Jan 17 06:14:09 UTC 2020 |x86_64 [Ubuntu|ubuntu: 18.04.4 LTS (Bionic Beaver)] - Wazuh v4.2.6
         wazuh-agentd: INFO: Started (pid: 8082).
         wazuh-agentd: INFO: Server IP Address: 192.168.119.131
         wazuh-agentd: INFO: Requesting a key from server: 192.168.119.131
@@ -160,7 +160,7 @@ The agent can be found on the manager side and appears with ``active`` status af
 
 .. code-block:: console
 
-    # TOKEN=$(curl -u wazuh:wazuh -k -X GET "https://localhost:55000/security/user/authenticate?raw=true")
+    # TOKEN=$(curl -u wazuh:wazuh -k -X POST "https://localhost:55000/security/user/authenticate?raw=true")
     # curl -k -X GET "https://localhost:55000/agents?pretty=true&offset=1&limit=2&select=status%2Cid%2Cmanager%2Cname%2Cnode_name%2Cversion&status=active" -H "Authorization: Bearer $TOKEN"
 
 .. code-block:: none
@@ -173,7 +173,7 @@ The agent can be found on the manager side and appears with ``active`` status af
                     "name": "TEST_AGENT_1",
                     "status": "active",
                     "node_name": "node01",
-                    "version": "Wazuh v4.2.5",
+                    "version": "Wazuh v4.2.6",
                     "manager": "ubuntu",
                     "id": "001"
                 }

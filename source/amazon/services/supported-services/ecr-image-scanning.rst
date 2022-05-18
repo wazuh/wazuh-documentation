@@ -38,7 +38,7 @@ How to create the CloudFormation Stack
 
 3. Create a new stack using the template from step 1.
 
-.. thumbnail:: ../../../images/aws/aws_create_stack.png
+.. thumbnail:: ../../../images/aws/aws-create-stack.png
     :title: Create new stack
     :align: center
     :width: 100%
@@ -47,7 +47,7 @@ How to create the CloudFormation Stack
 
 5. Wait until "CREATE_COMPLETE" status is reached. The stack containing the AWS Lambda is now ready to be used.
 
-.. thumbnail:: ../../../images/aws/aws_create_completed.png
+.. thumbnail:: ../../../images/aws/aws-create-completed.png
     :title: Stack creation completed
     :align: center
     :width: 100%
@@ -55,12 +55,12 @@ How to create the CloudFormation Stack
 
 Once the stack configuration is completed, the Lambda can be tested by manually triggering an image scan. The scan results in the creation of a CloudWatch log group called ``/aws/ecr/image-scan-findings/<name of the ECR repository>`` containing the scan results. For every new scan the corresponding log streams are created inside the log group.
 
-.. thumbnail:: ../../../images/aws/aws_findings1.png
+.. thumbnail:: ../../../images/aws/aws-findings-1.png
     :title: Stack creation completed
     :align: center
     :width: 100%
 
-.. thumbnail:: ../../../images/aws/aws_findings2.png
+.. thumbnail:: ../../../images/aws/aws-findings-2.png
     :title: Stack creation completed
     :align: center
     :width: 100%

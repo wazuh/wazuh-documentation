@@ -13,6 +13,7 @@ This document will give instructions to uninstall each Wazuh component.
     .. toctree::
         :maxdepth: 1
 
+        central-components
         open-distro       
         elastic-stack
 

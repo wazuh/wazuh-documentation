@@ -9,7 +9,7 @@
 Using password authentication
 =============================
 
-This method requires a password during the enrollment process to ensure that agents enrolled to the Wazuh manager are authenticated.
+This method requires a password during the enrollment process to ensure that agents enrolled with the Wazuh manager are authenticated.
 
 Below you can find the steps on how to configure password authentication into different endpoint agents:
 
@@ -39,7 +39,7 @@ Before an agent can be enrolled to the Wazuh manager using the password authenti
 
 #. Create a password to be used for agent enrollment. This can be achieved in two ways:
 
-   - **Recommended** - By creating the file ``/var/ossec/etc/authd.pass`` on the manager and including your own password there. We recommended this method for creating the agent enrollment password. This can be done by running the line below in the terminal and subsequently restarting the Wazuh manager.
+   - **Recommended** - By creating the file ``/var/ossec/etc/authd.pass`` on the manager and including your own password there. We recommend this method for creating the agent enrollment password. This can be done by running the line below in the terminal and subsequently restarting the Wazuh manager.
 
      .. code-block:: console
 

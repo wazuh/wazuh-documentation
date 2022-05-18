@@ -1,18 +1,18 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
-#. Install the necessary packages for the installation:
+#. Install the necessary packages for the installation.
 
     .. code-block:: console
 
-      # yum install curl unzip wget
+      # yum install -y curl unzip wget
 
-#. Import the GPG key:
+#. Import the GPG key.
 
     .. code-block:: console
 
       # rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH
 
-#. Add the repository:
+#. Add the repository.
 
     .. code-block:: console
 

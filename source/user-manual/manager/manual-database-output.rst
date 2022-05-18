@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015–2022 Wazuh, Inc.
 
 .. meta::
   :description: In order to configure Wazuh so it outputs alerts to a database, users must compile Wazuh with the database type desired. Learn more about this process here.
@@ -52,7 +52,7 @@ Prerequisites
 Installation
 ------------
 
-As previously mentioned, the database output can be enabled when compiling Wazuh with the database type to use. On the :ref:`sources installation guide <wazuh_server_source_installation>`, users must pre-compile the source code before running the ``install.sh`` script.
+As previously mentioned, the database output can be enabled when compiling Wazuh with the database type to use. On the :doc:`sources installation guide </deployment-options/wazuh-from-sources/wazuh-server/index>`, users must pre-compile the source code before running the ``install.sh`` script.
 
 Execute the following command before **step 3** from the installation guide:
 
@@ -63,12 +63,12 @@ Execute the following command before **step 3** from the installation guide:
 
 To indicate what kind of database users will use, users need the ``DATABASE`` flag. The allowed values are *mysql* or *pgsql*.
 
-The compilation process might take some time. After finishing this process, please continue with the sources installation guide. Now Wazuh will be installed with database support, but we must enable manually the feature after configuring it.
+The compilation process might take some time. After finishing this process, please continue with the sources' installation guide. Now Wazuh will be installed with database support, but we must enable manually the feature after configuring it.
 
 Database configuration
 ----------------------
 
-Now that we have Wazuh installed with database support, we need to set up the database server. We'll create a new database, set up the database user and add the schema (located in the ``src/os_dbd`` directory of the source code) with the following commands, according to your database system:
+Now that we have Wazuh installed with database support, we need to set up the database server. We'll create a new database, set up the database user, and add the schema (located in the ``src/os_dbd`` directory of the source code) with the following commands, according to your database system:
 
 **For MySQL:**
 

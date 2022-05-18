@@ -9,7 +9,7 @@
 Agent identity verification
 ===========================
 
-This method uses SSL certificates to verify that an agent is authorized to enroll in the Wazuh manager. The manager verification and the agent verification are independent of each other, and however, it is possible to use a combination of both.
+This method uses SSL certificates to verify that an agent is authorized to enroll in the Wazuh manager. The manager verification and the agent verification are independent of each other. However, it is possible to use a combination of both.
 
 In this document, you will find the following information:
 
@@ -124,7 +124,7 @@ The following steps serve as a guide on how to enroll a Linux/Unix endpoint by u
 #. As a root user, modify the Wazuh agent configuration file located at ``/var/ossec/etc/ossec.conf`` and include the following:
 
     #. The Wazuh manager IP address or DNS name in the ``<client><server><address>`` section.
-    #. The local path to the agent certificate and the agent key in the ``<client><enrollment>`` section.
+    #. The local path to the agent certificate and the agent key are in the ``<client><enrollment>`` section.
 
 
     .. code-block:: xml
@@ -189,7 +189,7 @@ The Wazuh agent installation directory depends on the architecture of the host.
 #. As a root user, modify the Wazuh agent configuration file located at ``“C:\Program Files (x86)\ossec-agent\ossec.conf”`` and include the following:
 
     #. The Wazuh manager IP address or DNS name in the ``<client><server><address>`` section.
-    #. The local path to the agent certificate and the agent key in the ``<client><enrollment>`` section.
+    #. The local path to the agent certificate and the agent key are in the ``<client><enrollment>`` section.
 
    .. code-block:: xml
        :emphasize-lines: 3, 7     
@@ -242,7 +242,7 @@ The following steps serve as a guide on how to enroll a macOS endpoint by using 
 #. As a root user, modify the Wazuh agent configuration file located at ``/Library/Ossec/etc/ossec.conf`` and include the following:
 
     #. The Wazuh manager IP address or DNS name in the ``<client><server><address>`` section.
-    #. The local path to the agent certificate and agent key in the ``<client><enrollment>`` section.
+    #. The local path to the agent certificate and agent key are in the ``<client><enrollment>`` section.
 
 
    .. code-block:: xml

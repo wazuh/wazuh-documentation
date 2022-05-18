@@ -10,7 +10,7 @@ Monitoring security policies
 
 Policy monitoring is the process of verifying that all systems conform to a set of predefined rules regarding configuration settings and approved application usage.
 
-Wazuh uses three components to perform this task: *Rootcheck*, *OpenSCAP* and *CIS-CAT*.
+Wazuh uses three components to perform this task: *Rootcheck*, *OpenSCAP*, and *CIS-CAT*.
 
 .. topic:: Contents
 

@@ -1,7 +1,7 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 .. meta::
   :description: Learn more about how to configure the collection of log data from files, Windows events, and from the output of commands with Wazuh. 
-  
+
 .. _reference_ossec_localfile:
 
 localfile
@@ -174,7 +174,7 @@ The attributes below are optional.
 +-------------+---------------------------------------+--------------+---------------+
 
 .. warning::
-  If collecting logs with ``<log_format>`` set as ``macos``, then ``max-size`` is ignored. 
+  If collecting logs with ``<log_format>`` set as ``macos``, then ``max-size`` is ignored.
 
 .. note::
   If the log rotates while ``wazuh-logcollector`` is stopped and ``only-future-events`` is set to ``no``, it will start reading from the beginning of the log. 
@@ -376,7 +376,7 @@ Set the format of the log to be read. **field is required**
 
 .. warning::
 
-    Only one configuration block with ``log_format`` set as ``macos`` is allowed.
+    Only one configuration block with ``log_format`` set as ``macos`` is allowed. If more blocks are added, the last one will be used.
 
 .. warning::
 
