@@ -323,41 +323,41 @@ The ``groups`` block is used to define the group name from which we want to down
     - If a file has the name ``merged.mg``, only this file will be downloaded. Then it will be validated.
     - The ``poll`` label indicates the download rate in seconds of the specified files.
 
-    This configuration can be changed on the fly. The **manager** will reload the file and parse it again so there is no need to restart the **manager** every time.
+This configuration can be changed on the fly. The **manager** will reload the file and parse it again so there is no need to restart the **manager** every time.
 
-    The information about the parsing is shown on the ``/var/ossec/logs/ossec.log`` file. For example:
+The information about the parsing is shown on the ``/var/ossec/logs/ossec.log`` file. For example:
 
-    - Parsing is successful:
+-  Parsing is successful:
 
-    .. code-block:: none
-        :class: output
+   .. code-block:: none
+      :class: output
 
-        INFO: Successfully parsed of yaml file: /etc/shared/files.yml
+      INFO: Successfully parsed of yaml file: /etc/shared/files.yml
 
-    - File has been changed:
+-  File has been changed:
 
-    .. code-block:: none
-        :class: output
+   .. code-block:: none
+      :class: output
 
-        INFO: File '/etc/shared/files.yml' changed. Reloading data
+      INFO: File '/etc/shared/files.yml' changed. Reloading data
 
-    - Parsing failed due to bad token:
+-  Parsing failed due to bad token:
 
-    .. code-block:: none
-        :class: output
+   .. code-block:: none
+      :class: output
 
-        INFO: Parsing file '/etc/shared/files.yml': unexpected identifier: 'group'
+      INFO: Parsing file '/etc/shared/files.yml': unexpected identifier: 'group'
 
-    - Download of file failed:
+-  Download of file failed:
 
-    .. code-block:: none
-        :class: output
+   .. code-block:: none
+      :class: output
 
-        ERROR: Failed to download file from url: https://example.com/merged.mg
+      ERROR: Failed to download file from url: https://example.com/merged.mg
 
-    - Downloaded ``merged.mg`` file is corrupted or not valid:
+-  Downloaded ``merged.mg`` file is corrupted or not valid:
 
-    .. code-block:: none
-        :class: output
+   .. code-block:: none
+      :class: output
 
-        ERROR: The downloaded file '/var/download/merged.mg' is corrupted.
+      ERROR: The downloaded file '/var/download/merged.mg' is corrupted.
