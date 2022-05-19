@@ -305,7 +305,7 @@ For Wazuh |WAZUH_LATEST|:
 | 7.17.3           |                       | |WAZUH_KIBANA_7.17.3|    |
 +------------------+-----------------------+--------------------------+
 
-For a complete list of the available versions, see the `Wazuh Kibana plugin compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/tree/v4.2.5-7.10.2#wazuh---kibana---open-distro-version-compatibility-matrix>`_.
+For a complete list of the available versions, see the `Wazuh Kibana plugin compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/wiki/Compatibility>`_.
 
 Wazuh Splunk app
 ----------------
