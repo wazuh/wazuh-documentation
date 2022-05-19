@@ -123,16 +123,131 @@ Starting the Wazuh dashboard service
 
     When you access the Wazuh dashboard for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or, for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser. Alternatively, a certificate from a trusted authority can be configured. 
 
-    
-.. note::
 
-   It is highly recommended to change the default Wazuh passwords. To perform this action, see the :doc:`/user-manual/securing-wazuh/wazuh-indexer` and the :doc:`Securing the Wazuh API </user-manual/api/securing-api>` sections. 
+Securing your Wazuh installation
+--------------------------------
+
+Change the default credentials to protect your Wazuh solution. 
+
+Change the default Wazuh API credentials
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Change the default password of the admin users: `wazuh` and `wazuh-wui`. Note that the commands below use localhost, set your Wazuh manager IP address if necessary. 
+
+#. Get an authorization TOKEN. 
+
+   .. code-block:: console
+
+      # TOKEN=$(curl -u wazuh-wui:wazuh-wui -k -X GET "https://localhost:55000/security/user/authenticate?raw=true")
+
+#. Change the `wazuh` user credentials (ID 1). Select a password between 8 and 64 characters long, it should contain at least one uppercase and one lowercase letter, a number, and a symbol. See :api-ref:`PUT /security/users/{user_id} <operation/api.controllers.security_controller.update_user>` to learn more. 
+
+   .. code-block:: console
+
+      curl -k -X PUT "https://localhost:55000/security/users/1" -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/json' -d' 
+      {
+        "password": "SuperS3cretPassword!"
+      }'
+
+   .. code-block:: console
+      :class: output
+
+      {"data": {"affected_items": [{"id": 1, "username": "wazuh", "allow_run_as": true, "roles": [1]}], "total_affected_items": 1, "total_failed_items": 0, "failed_items": []}, "message": "User was successfully updated", "error": 0}  
+    
+        
+#. Change the `wazuh-wui` user credentials (ID 2). 
+
+   .. code-block:: console
+
+      curl -k -X PUT "https://localhost:55000/security/users/2" -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/json' -d' 
+      {
+        "password": "SuperS3cretPassword!"
+      }'
+
+   .. code-block:: console
+     :class: output   
+
+      {"data": {"affected_items": [{"id": 2, "username": "wazuh-wui", "allow_run_as": true, "roles": [1]}], "total_affected_items": 1, "total_failed_items": 0, "failed_items": []}, "message": "User was successfully updated", "error": 0}
+
+   See the :doc:`Securing the Wazuh API </user-manual/api/securing-api>` section for additional security configurations. 
+
+   .. note:: Remember to store these passwords securely. 
+
+#. In your `Wazuh dashboard` server, update ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` with your new password.  
+
+   .. code-block:: yaml
+     :emphasize-lines: 6
+    
+      hosts:
+        - default:
+          url: https://localhost
+          port: 55000
+          username: wazuh-wui
+          password: SuperS3cretPassword!
+          run_as: false 
+
+#. Restart the Wazuh dashboard.
+
+   .. include:: /_templates/common/restart_dashboard.rst
+
+
+
+Change the default Wazuh indexer credentials
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Run the following command on any Wazuh indexer node to change all the default Wazuh indexer passwords. 
+
+#. Use the Wazuh password tool to change all the internal users passwords. 
+
+   .. code-block:: console
+  
+     # /usr/share/wazuh-indexer/plugins/opensearch-security/tools/wazuh-passwords-tool.sh --change-all
+  
+   .. code-block:: console
+     :class: output
+
+     INFO: The password for user admin is o5XWBs044S5PJ1edYgw4R4MOM7r00Hjm
+     INFO: The password for user kibanaserver is mqhbijWWw8vVyuOBDtFQvqoLYwMdrcXP
+     INFO: The password for user kibanaro is jTbFvrCSQ4LaLmcNtcFOzVUvCL24nYtN
+     INFO: The password for user logstash is bmtERx0schYGoANyGiWnyed6044CYGQv
+     INFO: The password for user readall is j9JOe7nEhKZhjyfUWVXhI2FNaM5A7eT6
+     INFO: The password for user snapshotrestore is tYyAqG9U72RURf0svrvJ8rtiVEzqjdmg
+     INFO: The password for user wazuh_admin is NHJMpiJkeBgjwNSJnoPV1KD9XMD7a98N
+     INFO: The password for user wazuh_user is N364F1kSkgKfUkVPzRxnCKwszaDVLqu0
+     WARNING: Passwords changed. Remember to update the password in the Wazuh dashboard and Filebeat nodes if necessary, and restart the services.
+
+   .. note:: Remember to store these passwords securely. 
+
+If you have an all-in-one deployment, the ``wazuh-passwords-tool.sh`` automatically updates the credentials in your Filebeat and Wazuh dashboard keystores. For a distributed deployment, you need to update them manually following the steps below. 
+
+**Only for distributed deployments**
+
+#. On your `Wazuh server`, update the `admin` password in the Filebeat keystore. Replace ``<admin-password>`` with the random password generated in the previous step and run the following command:  
+      
+    .. code-block:: console
+
+      # echo <admin-password> | filebeat keystore add password --stdin --force
+
+#. Restart Filebeat.
+
+   .. include:: /_templates/common/restart_filebeat.rst
+
+#. On your `Wazuh dashboard` server, update the `kibanaserver` password in the Wazuh dashboard keystore. Replace ``<kibanaserver-password>`` with the random password generated in the previous step and run the following command:   
+
+      .. code-block:: console
+
+        # echo <kibanaserver-password> | /usr/share/wazuh-dashboard/bin/opensearch-dashboards-keystore --allow-root add -f --stdin opensearch.password         
+
+#. Restart the Wazuh dashboard. 
+
+   .. include:: /_templates/common/restart_dashboard.rst
+
 
 
 Next steps
 ----------
 
-All the Wazuh central components are successfully installed.
+All the Wazuh central components are successfully installed and secured.
 
 .. thumbnail:: ../../images/installation/Wazuh-Installation-workflow-complete.png
     :alt: Wazuh installation workflow
