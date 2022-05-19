@@ -517,7 +517,13 @@
           tr:nth-child(even) {
             td,
             th {
-              background-color: $dark-color-table-alt-background;
+              background-color: $dark-color-table-row-even;
+            }
+          }
+          tr:nth-child(odd) {
+            td,
+            th {
+              background-color: $dark-color-table-row-odd;
             }
           }
         }
