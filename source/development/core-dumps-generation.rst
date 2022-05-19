@@ -430,7 +430,12 @@ They will be installed in ``<INSTALLDIR>/.symbols`` directory by default.
 
       .. tab:: Installation from sources
 
-        Symbols files will be installed by default on ``<INSTALLDIR>/.symbols`` directory.
+        It is necessary, in addition to the steps mentioned in :ref:`this guide<wazuh_agent_source_installation>`,
+        to set the variable ``USER_DEBUG_SYMBOLS="y"``.
+
+        .. code-block:: console
+
+          # USER_DEBUG_SYMBOLS="y" ./install.sh
 
       .. tab:: WPK installation
 
@@ -460,7 +465,12 @@ They will be installed in ``<INSTALLDIR>/.symbols`` directory by default.
 
       .. tab:: Installation from sources
 
-        Symbols files will be installed by default on ``<INSTALLDIR>/.symbols`` directory.
+        It is necessary, in addition to the steps mentioned in :ref:`this guide<wazuh_server_source_installation>`,
+        to set the variable ``USER_DEBUG_SYMBOLS="y"``.
+
+        .. code-block:: console
+
+          # USER_DEBUG_SYMBOLS="y" ./install.sh
 
 
 Debugging and post-mortem crash analysis
