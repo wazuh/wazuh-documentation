@@ -2,7 +2,7 @@
 
 .. meta::
   :description: Core dump generation and analysis
-  
+
 .. _dev-core-dumps-generation:
 
 
@@ -17,7 +17,7 @@ This article describes how to enable core dump generation and how to use a debug
 Some operating systems perform a core dump upon a process crash by default, others do not. This article covers how to
 enable and disable core dump generation on the supported platforms [1]_.
 
-.. [1] As the time of writing, the Wazuh compilation outputs separate debugging symbols only for Windows, macOS, and Linux.
+.. [1] At the time of writing, the Wazuh compilation outputs separate debugging symbols only for Windows, macOS, and Linux.
 
 macOS
 *****
@@ -25,8 +25,8 @@ macOS
 Enabling core dump generation
 -----------------------------
 
-To enable core dumps in macOS, you need to change the resource limits of a process using `ulimit`.  In this case, the
-resource limit you need to change is the "cores" one, which represents the maximal size of core dumps our process is
+To enable core dumps on macOS, you need to change the resource limits of a process using `ulimit`.  In this case, the
+resource limit you need to change is the "cores" one, which represents the maximum size of core dumps our process is
 allowed to generate.
 
 To enable core dump generation for Wazuh, the service needs to be relaunched from a shell, this is because resource
@@ -62,14 +62,14 @@ Restart the services::
 
   # /Library/Ossec/bin/wazuh-control start
 
-Now Wazuh should be running with its resourced limits altered and should create a core dump if the process crashes.
+Now Wazuh should be running with the limits of its resources altered and should create a core dump if the process crashes.
 
 
 Post-mortem crash analysis: an example
 --------------------------------------
 In this section, we will send a signal to a Wazuh process that processes usually receive when they fail. Then, we will
 use ``lldb`` to view the process state at the moment of failure. We will use the segmentation fault (SIGSEGV or 11) signal.
-Make sure to have enabled core dump generation, explained in the previous section.
+Make sure to have enabled core dump generation, as explained in the previous section.
 
 Use `killall` to send a SIGSEGV signal to our process::
 
@@ -139,13 +139,13 @@ level used when compiling)::
 Note about debugging symbols
 ----------------------------
 
-Debugging symbols are created separately by default and are available to download at our
+Debugging symbols are created separately by default, and they are available to download at our
 :ref:`debug packages list<macos-dbg-symbols-packages>`. This means binary files (executables and .dylib shared libraries)
 have no debugging symbols in them and .dSYM bundle folders are created inside the ``<wazuh_repo>/src/symbols`` directory
 when building Wazuh from sources.
 
 For example, after compiling, you get ``src/wazuh-syscheckd`` and ``src/symbols/wazuh-syscheckd.dSYM``. The ``lldb``
-debugger should automatically find the matching dSYM bundle, as long as it is findable by macOS's Spotlight [2]_. 
+debugger should automatically find the matching dSYM bundle, as long as it is findable by macOS's Spotlight [2]_.
 However, the path to the dSYM bundle can be manually specified by using the ``add-dsym``::
 
   (lldb) add-dsym <path to dSYM bundle>
@@ -186,3 +186,292 @@ The last step is to run the analysis of the core dump
    .. code-block:: console
 
     !analyze -v
+
+GNU/Linux
+*********
+Enabling core dump generation
+-----------------------------
+Linux kernel allows multiple possibilities to handle core dumps files
+
+- Naming of core dump files: create dumps using default ``core.pid`` or templetized core dumps filenames using substitutions.
+- Piping core dumps to a program: execute a program with certain arguments and send the dump using pipe mechanism.
+- Mix of them (Since Linux 5.3): multi-dump generation by pipe-separating output specification.
+
+Since GNU/Linux distributions might use different approaches, the first step is to determine
+what is being used and therefore apply some modifications to be able to capture Wazuh core dumps.
+
+Current core dump configuration can be retrieved by reading ``/proc/sys/kernel/core_pattern`` file,
+and bringing information on how core dumps are being handled
+
+- Core dumps are being handled by Apport.
+
+  .. code-block:: console
+
+    # cat /proc/sys/kernel/core_pattern
+
+  .. code-block:: none
+    :class: output
+
+    |/usr/share/apport/apport %p %s %c %d %P %E
+
+- Core dumps are being handled by ``systemd-coredump``
+
+  .. code-block:: console
+
+    # cat /proc/sys/kernel/core_pattern
+
+  .. code-block:: none
+    :class: output
+
+    |/usr/lib/systemd/systemd-coredump %P %u %g %s %t %c %h
+
+- Templetized core dumps filenames are created
+
+  .. code-block:: console
+
+    # cat /proc/sys/kernel/core_pattern
+
+  .. code-block:: none
+    :class: output
+
+    core
+
+- Core dumps are currently disabled.
+
+  .. code-block:: console
+
+    # cat /proc/sys/kernel/core_pattern
+
+  .. code-block:: none
+    :class: output
+
+    |/bin/false
+
+  In this case, a templetized core dump can be enabled by setting ``core_pattern``
+
+  .. code-block:: console
+
+    # echo core > /proc/sys/kernel/core_pattern
+
+
+To know more about Kernel core dump management see `core man <http://man7.org/linux/man-pages/man5/core.5.html>`_.
+
+Systemd-coredump handler
+++++++++++++++++++++++++
+
+Default on: Fedora, Arch Linux, centOS 8.
+
+Systemd has a unified journal that allows to track, compress and log core dumps on the system.
+
+To get the core dump of interest, we must know the `<PID>` of the dead process to obtain it using ``coredumpctl``.
+
+  .. code-block:: console
+
+    # coredumpctl info <PID>
+    # coredumpctl dump <PID> --output core.<PID>
+
+Core dump brief information can be obtained using ``file`` command
+
+  .. code-block:: console
+
+    # file core.<PID>
+
+  .. code-block:: none
+    :class: output
+
+    core.8524: ELF 64-bit LSB core file, x86-64, version 1 (SYSV), SVR4-style, from '/var/ossec/bin/wazuh-logcollector',
+      real uid: 0, effective uid: 0, real gid: 0, effective gid: 0, execfn: '/var/ossec/bin/wazuh-logcollector', platform: 'x86_64'
+
+To know more about ``systemd-coredump`` see
+`systemd-coredump man <https://www.freedesktop.org/software/systemd/man/systemd-coredump.html>`_.
+
+Apport core dump handler
+++++++++++++++++++++++++
+
+Default on: Ubuntu
+
+Apport service should be also started to capture core dumps
+
+.. code-block:: console
+
+    # systemd start apport.service
+
+Crash files are located in ``/var/crash`` directory and consist of a package that, not only contains the core dump file
+but also process environment information about the event.
+
+To obtain the specific core dump, the crash report can be unpacked by using ``apport-unpack``
+
+  .. code-block:: console
+
+    # cd /var/crash
+    # apport-unpack <dump-filename>.crash <outputdir>
+
+``<dump-filename>`` must be replaced by Apport crash file, that is the full path of the file where slashes (``/``)
+were replaced by underscores (``_``), plus an incremental counter.
+
+For example, first ``wazuh-logcollector`` crash will create a report named ``_var_ossec_bin_wazuh-logcollector.0.crash``
+
+Core dump brief information can be obtained using ``file`` command
+
+  .. code-block:: console
+
+    # file /var/crash/<outputdir>/Coredump
+
+  .. code-block:: none
+    :class: output
+
+    CoreDump: ELF 64-bit LSB core file, x86-64, version 1 (SYSV), SVR4-style, from '/var/ossec/bin/wazuh-logcollector',
+      real uid: 0, effective uid: 0, real gid: 0, effective gid: 0, execfn: '/var/ossec/bin/wazuh-logcollector', platform: 'x86_64'
+
+
+
+To know more about Apport see `Apport Wiki <https://wiki.ubuntu.com/Apport>`_.
+
+Templetized core dumps
+++++++++++++++++++++++
+
+Default on: centOS (5,6,7), OpenSuse.
+
+Several distributions use the simpler and direct mechanism: create the dump on a certain directory with a specific name pattern.
+
+.. code-block:: console
+
+    # cat /proc/sys/kernel/core_pattern
+
+.. code-block:: none
+    :class: output
+
+    core
+
+.. note::
+  If ``/proc/sys/kernel/core_pattern`` does not contain an absolute path, it will be located in the binary working directory
+  that is ``INSTALLDIR`` for Wazuh processes.
+
+.. code-block:: none
+    :class: output
+
+    /tmp/core.%p
+
+This configuration will create a core dump file in ``/tmp`` directory with the name ``core.<PID>``.
+
+.. note::
+  Core dump generation could also depend on ``/proc/sys/fs/suid_dumpable`` and ``/proc/sys/kernel/core_uses_pid``.
+  See `core man <http://man7.org/linux/man-pages/man5/core.5.html>`_ for more information.
+
+Core dump brief information can be obtained using ``file`` command
+
+.. code-block:: console
+
+    # file /var/ossec/core
+
+.. code-block:: none
+    :class: output
+
+    /var/ossec/core: ELF 64-bit LSB core file, x86-64, version 1 (SYSV), SVR4-style, from '/var/ossec/bin/wazuh-logcollector',
+      real uid: 0, effective uid: 0, real gid: 0, effective gid: 0, execfn: '/var/ossec/bin/wazuh-logcollector', platform: 'x86_64'
+
+
+Wazuh core dump configuration
+-----------------------------
+
+Linux kernel limits the core dump size by default but needs to be extended to obtain a full backtrace.
+Systemd allows us to extend Wazuh service configurations and set this up.
+
+.. tabs::
+
+  .. group-tab:: Agent
+
+    .. code-block:: console
+
+        # mkdir -p /etc/systemd/system/wazuh-agent.service.d/
+        # echo -e "[Service]\nLimitCORE=infinity"  > /etc/systemd/system/wazuh-agent.service.d/limit_core.conf
+        # systemctl daemon-reload
+        # systemctl restart wazuh-agent
+
+  .. group-tab:: Manager
+
+    .. code-block:: console
+
+        # mkdir -p /etc/systemd/system/wazuh-manager.service.d/
+        # echo -e "[Service]\nLimitCORE=infinity"  > /etc/systemd/system/wazuh-manager.service.d/limit_core.conf
+        # systemctl daemon-reload
+        # systemctl restart wazuh-manager
+
+
+Wazuh symbols installation
+--------------------------
+
+Debug symbol files will allow the interpretation in a human-readeable way of core dumps.
+They will be installed in ``<INSTALLDIR>/.symbols`` directory by default.
+
+.. tabs::
+
+  .. group-tab:: Agent
+
+    .. tabs::
+
+      .. tab:: Yum
+
+        .. code-block:: console
+
+          # yum install wazuh-agent-debuginfo
+
+      .. tab:: APT
+
+        .. code-block:: console
+
+          # apt-get install wazuh-agent-dbg
+
+      .. tab:: Zypper
+
+        .. code-block:: console
+
+          # zypper install wazuh-agent-debuginfo
+
+      .. tab:: Installation from sources
+
+        Symbols files will be installed by default on ``<INSTALLDIR>/.symbols`` directory.
+
+      .. tab:: WPK installation
+
+        Symbols files are listed :ref:`here<wpk-list>`.
+
+  .. group-tab:: Manager
+
+    .. tabs::
+
+      .. tab:: Yum
+
+        .. code-block:: console
+
+          # yum install wazuh-manager-debuginfo
+
+      .. tab:: APT
+
+        .. code-block:: console
+
+          # apt-get install wazuh-manager-dbg
+
+      .. tab:: Zypper
+
+        .. code-block:: console
+
+          # zypper install wazuh-manager-debuginfo
+
+      .. tab:: Installation from sources
+
+        Symbols files will be installed by default on ``<INSTALLDIR>/.symbols`` directory.
+
+
+Debugging and post-mortem crash analysis
+----------------------------------------
+
+GNU Debugger (GDB) can be used to debug Wazuh processes and core dump analysis as well.
+
+.. code-block:: console
+
+  # gdb --exec=<executable-file> --core=<coredump-file>
+
+Symbols files will be automatically detected and loaded.
+
+To know more about GDB see `Debugging with GDB <https://sourceware.org/gdb/onlinedocs/gdb/>`_.
