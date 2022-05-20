@@ -22,7 +22,7 @@ The Wazuh agents are able to collect interesting system information and store it
 - `Compatibility matrix`_
 - `Using Syscollector information to trigger alerts`_
     - `New searchable fields for the Wazuh dashboard`_
-- `Use case: Visualize system inventory in the Wazuh App`_
+- `Use case: Visualize system inventory in the Wazuh dashboard`_
 
 How it works
 ------------
@@ -31,7 +31,7 @@ As mentioned above, the main purpose of this module is to gather the most releva
 
 Once the agent starts, `Syscollector` runs periodically scans of defined targets (hardware, OS, packages, etc.), forwarding the newly collected data to the manager, which updates the appropriate tables of the database.
 
-The agent's inventory is gathered for different goals. The entire inventory can be found at the `inventory` tab of the Wazuh APP for each agent, by querying the Wazuh API to retrieve the data from the DB. Also, the `Dev tools` tab is available. With this feature, the Wazuh API can be directly queried about the different scans being able to filter by any desired field.
+The agent inventory is gathered for different goals. The entire inventory can be found at the `inventory` tab of the Wazuh dashboard for each agent, by querying the Wazuh API to retrieve the data from the DB. Also, the `Dev tools` tab is available. With this feature, the Wazuh API can be directly queried about the different scans being able to filter by any desired field.
 
 In addition, the packages and hotfixes inventory is used as feed for the :doc:`Vulnerability detector module<./vulnerability-detection/index>`.
 
@@ -399,13 +399,15 @@ The following table shows the operating systems that this module currently suppo
 Using Syscollector information to trigger alerts
 ------------------------------------------------
 
-.. note:: This capability is not available in Wazuh 4.2 and 4.3 but it does in greater versions.
+.. warning::
+   
+   This functionality is not currently supported. It will be available starting with version 4.4.
 
 Since Wazuh 3.9 version, ``Syscollector`` module information can be used to trigger alerts and show that information in the alerts' description.
 
 To allow this configuration, in a rule declaration set the ``<decoded_as>`` field as **syscollector**.
 
-As an example, the following set of custom rules will be triggered when a port is being opened, modified or just closed.
+As an example, the rules in the following set of custom rules trigger when a port is opened, modified or closed.
 
 .. code-block:: xml
 
@@ -437,15 +439,16 @@ As an example, the following set of custom rules will be triggered when a port i
 
     The tag ``<if_sid>221</if_sid>`` is necessary because the events from Syscollector are muted by default with that rule.
 
-When the alerts are triggered (for ports opening operation) they will be displayed in Kibana as follow:
+The alert for a port opening operation is displayed in the Wazuh dashboard as follows:
 
-    .. thumbnail:: ../../images/manual/internal-capabilities/syscollector_port_inserted_alert.png
+    .. thumbnail:: /images/manual/internal-capabilities/syscollector-port-inserted-alert.png
       :title: Information from syscollector for "port" value.
       :align: center
       :width: 100%
 
-.. note:: The alerts will be triggered **after the second syscollector scan** (when a delta of information is being detected). The first scan
-          will not generate alerts.
+.. note::
+   
+   The initial scan does not generate alerts. The alerts are triggered **after the second Syscollector scan**, when an information difference (delta) is detected.
 
 New searchable fields for the Wazuh dashboard
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -472,8 +475,8 @@ In the Wazuh indexer the fields will be saved as ``data.type.value``. For exampl
 | **Hotfix**           | hotfix                                                                                                                 | data.hotfix                      |
 +----------------------+------------------------------------------------------------------------------------------------------------------------+----------------------------------+
 
-Use case: Visualize system inventory in the Wazuh app
------------------------------------------------------
+Use case: Visualize system inventory in the Wazuh dashboard
+-----------------------------------------------------------
 
 The Syscollector module is enabled by default in all compatible systems including all the available scans. Here we can see the default configuration block:
 
@@ -585,14 +588,14 @@ The current inventory can be consulted in different ways. Let's see an example q
   0|2021/10/18 22:53:03|tcp|0.0.0.0|445|0.0.0.0|0|0|0|0|listening|4|System|481fa26d857363b78f4f3f586816a2bca324560a|120ef3368b130c7432e4ee29d7ae502fb6767d10
   0|2021/10/18 22:53:06|tcp6|::|445|::|0|0|0|0|listening|4|System|effa4fd964755442c367e0912108801fb70d253d|cf372ca01c25d7a8fe58b1d9d104771364e3d281
 
-Moreover, the same information can be consulted on the Wazuh app, which includes an `Inventory Data` tab for each agent.
+Moreover, the same information can be consulted on the Wazuh dashboard, which includes an `Inventory Data` tab for each agent.
 
 .. thumbnail:: ../../images/manual/inventory.png
     :title: Inventory tab
     :align: center
     :width: 100%
 
-The *Dev tools* tab is also available to query the Wazuh API directly from the Wazuh app as shown below:
+The *Dev tools* tab is also available to query the Wazuh API directly from the Wazuh dashboard as shown below:
 
 .. thumbnail:: ../../images/manual/devtools-syscollector.png
     :title: Dev tools tab
