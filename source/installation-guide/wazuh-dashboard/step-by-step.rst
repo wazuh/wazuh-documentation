@@ -134,7 +134,7 @@ Change the default Wazuh API credentials
 
 Change the default password of the admin users: `wazuh` and `wazuh-wui`. Note that the commands below use localhost, set your Wazuh manager IP address if necessary. 
 
-#. Get an authorization TOKEN. 
+#. Get an authorization token. 
 
    .. code-block:: console
 
