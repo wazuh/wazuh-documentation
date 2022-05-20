@@ -127,7 +127,10 @@ Starting the Wazuh dashboard service
 Securing your Wazuh installation
 --------------------------------
 
-Change the default credentials to protect your Wazuh solution. 
+
+You have now installed and configured all the Wazuh central components. We recommend changing the default credentials to protect your infrastructure from possible attacks. 
+
+Follow the instructions below to change the passwords for both the Wazuh API and the Wazuh indexer users.  
 
 Change the default Wazuh API credentials
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -171,8 +174,6 @@ Change the default password of the admin users: `wazuh` and `wazuh-wui`. Note th
 
    See the :doc:`Securing the Wazuh API </user-manual/api/securing-api>` section for additional security configurations. 
 
-   .. note:: Remember to store these passwords securely. 
-
 #. In your `Wazuh dashboard` server, update ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` with your new password.  
 
    .. code-block:: yaml
@@ -195,53 +196,73 @@ Change the default password of the admin users: `wazuh` and `wazuh-wui`. Note th
 Change the default Wazuh indexer credentials
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Run the following command on any Wazuh indexer node to change all the default Wazuh indexer passwords. 
+Select your deployment type and follow the instructions to change the default Wazuh indexer passwords. 
 
-#. Use the Wazuh password tool to change all the internal users passwords. 
 
-   .. code-block:: console
-  
-     # /usr/share/wazuh-indexer/plugins/opensearch-security/tools/wazuh-passwords-tool.sh --change-all
-  
-   .. code-block:: console
-     :class: output
+.. tabs::
 
-     INFO: The password for user admin is o5XWBs044S5PJ1edYgw4R4MOM7r00Hjm
-     INFO: The password for user kibanaserver is mqhbijWWw8vVyuOBDtFQvqoLYwMdrcXP
-     INFO: The password for user kibanaro is jTbFvrCSQ4LaLmcNtcFOzVUvCL24nYtN
-     INFO: The password for user logstash is bmtERx0schYGoANyGiWnyed6044CYGQv
-     INFO: The password for user readall is j9JOe7nEhKZhjyfUWVXhI2FNaM5A7eT6
-     INFO: The password for user snapshotrestore is tYyAqG9U72RURf0svrvJ8rtiVEzqjdmg
-     INFO: The password for user wazuh_admin is NHJMpiJkeBgjwNSJnoPV1KD9XMD7a98N
-     INFO: The password for user wazuh_user is N364F1kSkgKfUkVPzRxnCKwszaDVLqu0
-     WARNING: Passwords changed. Remember to update the password in the Wazuh dashboard and Filebeat nodes if necessary, and restart the services.
+   .. group-tab:: All-in-one deployment
 
-   .. note:: Remember to store these passwords securely. 
-
-If you have an all-in-one deployment, the ``wazuh-passwords-tool.sh`` automatically updates the credentials in your Filebeat and Wazuh dashboard keystores. For a distributed deployment, you need to update them manually following the steps below. 
-
-**Only for distributed deployments**
-
-#. On your `Wazuh server`, update the `admin` password in the Filebeat keystore. Replace ``<admin-password>`` with the random password generated in the previous step and run the following command:  
+       #. Use the Wazuh password tool to change all the internal users passwords. 
       
-    .. code-block:: console
+          .. code-block:: console
+         
+            # /usr/share/wazuh-indexer/plugins/opensearch-security/tools/wazuh-passwords-tool.sh --change-all
+         
+          .. code-block:: console
+            :class: output
+       
+            INFO: The password for user admin is o5XWBs044S5PJ1edYgw4R4MOM7r00Hjm
+            INFO: The password for user kibanaserver is mqhbijWWw8vVyuOBDtFQvqoLYwMdrcXP
+            INFO: The password for user kibanaro is jTbFvrCSQ4LaLmcNtcFOzVUvCL24nYtN
+            INFO: The password for user logstash is bmtERx0schYGoANyGiWnyed6044CYGQv
+            INFO: The password for user readall is j9JOe7nEhKZhjyfUWVXhI2FNaM5A7eT6
+            INFO: The password for user snapshotrestore is tYyAqG9U72RURf0svrvJ8rtiVEzqjdmg
+            INFO: The password for user wazuh_admin is NHJMpiJkeBgjwNSJnoPV1KD9XMD7a98N
+            INFO: The password for user wazuh_user is N364F1kSkgKfUkVPzRxnCKwszaDVLqu0
+            WARNING: Passwords changed. Remember to update the password in the Wazuh dashboard and Filebeat nodes if necessary, and restart the services.
+       
+    
+   .. group-tab:: Distributed deployment
 
-      # echo <admin-password> | filebeat keystore add password --stdin --force
+       #. Use the Wazuh password tool on `any Wazuh indexer node` to change all the internal users passwords. 
 
-#. Restart Filebeat.
+          .. code-block:: console
+  
+             # /usr/share/wazuh-indexer/plugins/opensearch-security/tools/wazuh-passwords-tool.sh --change-all
+  
+          .. code-block:: console
+            :class: output
 
-   .. include:: /_templates/common/restart_filebeat.rst
+             INFO: The password for user admin is o5XWBs044S5PJ1edYgw4R4MOM7r00Hjm
+             INFO: The password for user kibanaserver is mqhbijWWw8vVyuOBDtFQvqoLYwMdrcXP
+             INFO: The password for user kibanaro is jTbFvrCSQ4LaLmcNtcFOzVUvCL24nYtN
+             INFO: The password for user logstash is bmtERx0schYGoANyGiWnyed6044CYGQv
+             INFO: The password for user readall is j9JOe7nEhKZhjyfUWVXhI2FNaM5A7eT6
+             INFO: The password for user snapshotrestore is tYyAqG9U72RURf0svrvJ8rtiVEzqjdmg
+             INFO: The password for user wazuh_admin is NHJMpiJkeBgjwNSJnoPV1KD9XMD7a98N
+             INFO: The password for user wazuh_user is N364F1kSkgKfUkVPzRxnCKwszaDVLqu0
+             WARNING: Passwords changed. Remember to update the password in the Wazuh dashboard and Filebeat nodes if necessary, and restart the services.
 
-#. On your `Wazuh dashboard` server, update the `kibanaserver` password in the Wazuh dashboard keystore. Replace ``<kibanaserver-password>`` with the random password generated in the previous step and run the following command:   
+       #. On your `Wazuh servers`, update the `admin` password in the Filebeat keystore. Replace ``<admin-password>`` with the random password generated in the previous step and run the following command:  
+      
+          .. code-block:: console
 
-      .. code-block:: console
+             # echo <admin-password> | filebeat keystore add password --stdin --force
 
-        # echo <kibanaserver-password> | /usr/share/wazuh-dashboard/bin/opensearch-dashboards-keystore --allow-root add -f --stdin opensearch.password         
+       #. Restart Filebeat.
 
-#. Restart the Wazuh dashboard. 
+          .. include:: /_templates/common/restart_filebeat.rst
 
-   .. include:: /_templates/common/restart_dashboard.rst
+       #. On your `Wazuh dashboard` server, update the `kibanaserver` password in the Wazuh dashboard keystore. Replace ``<kibanaserver-password>`` with the random password generated in the previous step and run the following command:   
 
+          .. code-block:: console
+
+             # echo <kibanaserver-password> | /usr/share/wazuh-dashboard/bin/opensearch-dashboards-keystore --allow-root add -f --stdin opensearch.password         
+
+       #. Restart the Wazuh dashboard. 
+
+          .. include:: /_templates/common/restart_dashboard.rst
 
 
 Next steps
