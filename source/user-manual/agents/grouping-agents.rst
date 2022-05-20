@@ -1,8 +1,8 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
-    :description: Learn more about the agent management in Wazuh. In this section, we will show you how to group agents and how to manage multiple groups. 
-    
+    :description: Learn more about the agent management in Wazuh. In this section, we will show you how to group agents and how to manage multiple groups.
+
 .. _grouping-agents:
 
 Grouping agents
@@ -25,6 +25,8 @@ Below are the steps to assign agents to a group with a specific configuration:
    .. note:: The group must be created and configured before assigning agents.
 
    .. note:: This behavior corresponds to ``v3.7.0`` and later.
+
+   .. note :: The group name can only contain upper/lower case letters, numbers, dots, underscores, and hyphens.
 
 
    .. code-block:: console

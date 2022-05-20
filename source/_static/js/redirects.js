@@ -99,6 +99,8 @@ newUrls['4.4'] = [
   '/amazon/services/supported-services/elastic-load-balancing/alb.html',
   '/amazon/services/supported-services/elastic-load-balancing/nlb.html',
   '/amazon/services/supported-services/elastic-load-balancing/clb.html',
+  '/user-manual/manager/manual-backup-restore.html',
+  '/user-manual/reference/ossec-conf/wazuh-db-config.html',
 ];
 
 removedUrls['4.4'] = [
