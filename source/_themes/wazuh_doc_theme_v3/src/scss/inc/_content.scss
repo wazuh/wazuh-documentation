@@ -57,6 +57,14 @@
     display: table;
     margin-left: auto;
   }
+  
+  .table-responsive {
+    &.align-left,
+    &.align-center,
+    &.align-right {
+      display: block;
+    }
+  }
 
   .topic-title {
     font-weight: 600;
