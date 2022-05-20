@@ -95,6 +95,13 @@ Amazon configuration
 
 #. Once the rule is created, data will start to be sent to the previously created S3 bucket. Remember to first enable the service you want to monitor, otherwise you won't get any data.
 
+Policy configuration
+^^^^^^^^^^^^^^^^^^^^
+
+.. include:: /_templates/cloud/amazon/create_policy.rst
+.. include:: /_templates/cloud/amazon/bucket_policies.rst
+.. include:: /_templates/cloud/amazon/attach_policy.rst
+
 Wazuh configuration
 -------------------
 
@@ -147,8 +154,8 @@ Wazuh configuration
 
         # service wazuh-agent restart
 
-GuarDuty use cases
-------------------
+GuardDuty use cases
+-------------------
 
 - `Brute force attacks`_
 - `EC2 API Calls made from unsual network`_
@@ -161,7 +168,7 @@ Below are some use cases for Wazuh rules built for EC2.
 Brute force attacks
 ^^^^^^^^^^^^^^^^^^^
 
-If an instance has any open port which is receiving a brute force attack, the following alert will be shown on Kibana. It shows information about the attacked host, about the attacker and which port is being attacked:
+If an instance has any open port which is receiving a brute force attack, the following alert will be shown on the Wazuh dashboard. It shows information about the attacked host, about the attacker and which port is being attacked:
 
 .. thumbnail:: ../../../images/aws/aws-ec2-guardduty.png
   :align: center
@@ -170,7 +177,7 @@ If an instance has any open port which is receiving a brute force attack, the fo
 EC2 API Calls made from unsual network
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If an API call is made from an unsual network, the following alert will be shown on Kibana. It shows the location of the unusual network, the user who did the API calls and which API calls it did:
+If an API call is made from an unsual network, the following alert will be shown on the Wazuh dashboard. It shows the location of the unusual network, the user who did the API calls and which API calls it did:
 
 .. thumbnail:: ../../../images/aws/aws-ec2-guardduty2.png
   :align: center
@@ -179,7 +186,7 @@ If an API call is made from an unsual network, the following alert will be shown
 Compromised EC2 instance
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-If there is any indicator of a compromised EC2 instance, an alert will be shown on Kibana explaining what's happening. Some example of alerts are shown below:
+If there is any indicator of a compromised EC2 instance, an alert will be shown on the Wazuh dashboard explaining what's happening. Some example of alerts are shown below:
 
 .. thumbnail:: ../../../images/aws/aws-ec2-guardduty3.png
   :align: center
@@ -199,7 +206,7 @@ To sum up, the following screenshot shows some alerts generated for a compromise
   :align: center
   :width: 70%
 
-And here are the Kibana dashboards for EC2 events:
+And here are the Wazuh dashboard charts for EC2 events:
 
 +----------------------------------------------------------+------------------------------------------------------------+
 | Pie Chart                                                | Stacked Groups                                             |

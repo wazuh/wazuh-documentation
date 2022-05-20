@@ -404,6 +404,10 @@ header .menuweb-bar .menu-item a {
   padding-right: 1em;
 }
 
+#troubleshooting ul ul {
+  margin-bottom: 0;
+}
+
 #capabilities > p {
   margin-bottom: 1rem;
 }
@@ -2573,10 +2577,6 @@ p.admonition-title::before,
 .note p.admonition-title::before,
 .admonition-generic-admonition p.admonition-title::before {
   content: '\f06a';
-}
-
-.output p.admonition-title::before {
-  content: '\f138';
 }
 
 .output p.admonition-title::before {

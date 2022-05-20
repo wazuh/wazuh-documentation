@@ -73,7 +73,7 @@ Enabled the GitHub wodle.
 only_future_events
 ^^^^^^^^^^^^^^^^^^
 
-Set it to **yes** to collect events generated since Wazuh manager was started.
+Set it to **yes** to collect events generated since the Wazuh manager was started.
 
 By default, when Wazuh starts it will only read all log content from GitHub since the manager started.
 
@@ -97,7 +97,7 @@ Interval between Wazuh wodle executions.
 time_delay
 ^^^^^^^^^^
 
-Each scan will monitor until that delay backwards, by default it is 1 second.
+Specifies the delay time of the scan respect to the current time, by default it is 1 second.
 
 +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | 1s                                                                                                                                      |
@@ -192,8 +192,8 @@ Example of configuration
 .. code-block:: xml
 
     <github>
-        <enabled>no</enabled>
-        <interval>10m</interval>
+        <enabled>yes</enabled>
+        <interval>1m</interval>
         <time_delay>1s</time_delay>
         <curl_max_size>1M</curl_max_size>
         <only_future_events>yes</only_future_events>
@@ -212,8 +212,8 @@ Example of multiple organizations
 .. code-block:: xml
 
     <github>
-        <enabled>no</enabled>
-        <interval>1h</interval>
+        <enabled>yes</enabled>
+        <interval>1m</interval>
         <time_delay>10s</time_delay>
         <curl_max_size>1M</curl_max_size>
         <only_future_events>no</only_future_events>

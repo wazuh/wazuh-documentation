@@ -57,7 +57,7 @@ When the tier limit is reached, the oldest events are removed from your index. T
 Can I move data from cold to hot storage?
 -----------------------------------------
 
-It is possible to download the data from the cold storage and reindex it into your local environments but, at this moment, it is not possible to reindex it in your cloud environment.
+It is possible to download the data from the cold storage and reindex it into your local environments, but at this moment it is not possible to reindex it in your cloud environment.
 
 What if I need to change the size of my tier?
 ---------------------------------------------

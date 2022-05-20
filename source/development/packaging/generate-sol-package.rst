@@ -14,11 +14,11 @@ Requirements
 
  * Git
 
-Download our wazuh-packages repository from GitHub and go to the ``solaris`` directory of the |WAZUH_PACKAGES_BRANCH| branch.
+Download our wazuh-packages repository from GitHub and go to the ``solaris`` directory.
 
 .. code-block:: console
 
-  $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/solaris && git checkout |WAZUH_PACKAGES_BRANCH|
+  $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/solaris && git checkout v|WAZUH_LATEST|
 
 Choose the version of solaris you want to build the package for and go to that directory.
 
@@ -32,7 +32,7 @@ Run the ``generate_wazuh_packages.sh`` script to build the package. Here you can
  :class: output
 
  Usage: ./generate_wazuh_packages.sh [OPTIONS]
- 
+
     -b, --branch <branch>               Select Git branch or tag.
     -e, --environment                   Install all the packages necessaries to build the pkg package.
     -s, --store  <pkg_directory>        Directory to store the resulting pkg package. By default, an output folder will be created.
@@ -110,7 +110,7 @@ Clone our wazuh-packages repository from GitHub and switch to your target branch
 
     .. code-block:: console
 
-      $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/solaris && git checkout |WAZUH_PACKAGES_BRANCH|
+      $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/solaris && git checkout v|WAZUH_LATEST|
       $ cp solaris10 package_generation/src/
       $ cd package_generation
 
@@ -118,7 +118,7 @@ Clone our wazuh-packages repository from GitHub and switch to your target branch
 
     .. code-block:: console
 
-      $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/solaris && git checkout |WAZUH_PACKAGES_BRANCH|
+      $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/solaris && git checkout v|WAZUH_LATEST|
       $ cp solaris11 package_generation/src/
       $ cd package_generation
 

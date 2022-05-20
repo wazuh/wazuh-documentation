@@ -13,11 +13,11 @@ FAQ
 
 How often does rootcheck run?
 -----------------------------
-The rootcheck scan frequency is configurable with :ref:`frequency <reference_ossec_rootcheck_frequency>`. By default it runs every 12 hours.
+The rootcheck scan frequency is configurable with :ref:`frequency <reference_ossec_rootcheck_frequency>`. By default, it runs every 12 hours.
 
 How does rootcheck know the rootkit files to look for?
 ------------------------------------------------------
-The rootcheck engine has databases of rootkit signatures: *rootkit_files.txt*, *rootkit_trojans.txt* and *win_malware_rcl.txt*. Unfortunately, the signatures are out of date.
+The rootcheck engine has databases of rootkit signatures: *rootkit_files.txt*, *rootkit_trojans.txt*, and *win_malware_rcl.txt*. Unfortunately, the signatures are out of date.
 
 Does rootcheck inspect running processes?
 -----------------------------------------

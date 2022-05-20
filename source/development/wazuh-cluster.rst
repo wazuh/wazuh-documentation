@@ -35,7 +35,7 @@ Architecture overview
 
 The following diagram shows a typical Wazuh cluster architecture:
 
-.. thumbnail:: ../images/manual/cluster/cluster_infrastructure.png
+.. thumbnail:: ../images/manual/cluster/cluster-infrastructure.png
     :title: Wazuh cluster infrastructure
     :align: center
     :width: 80%
@@ -81,9 +81,11 @@ Workflow
 
 The image below shows a schema of how a master node and a worker node interact with each other in the synchronization process. Every dotted square represents a synchronization task and they all work in parallel:
 
-.. thumbnail:: ../images/manual/cluster/cluster_flow.png
+.. thumbnail:: ../images/manual/cluster/cluster-flow.png
     :title: Wazuh cluster workflow
     :align: center
+    :width: 80%
+
 
 Threads
 ^^^^^^^
@@ -97,8 +99,14 @@ The following tasks can be found in the cluster, depending on the type of node t
 | Integrity sync                 |        |
 +--------------------------------+        |
 | Agent info sync                |        |
++--------------------------------+        |
+| Agent groups sync              |        |
 +--------------------------------+--------+
 | Keep alive - Check workers     | Master |
++--------------------------------+        |
+| Agent groups send              |        |
++--------------------------------+        |
+| Local agent-groups             |        |
 +--------------------------------+        |
 | Local integrity                |        |
 +--------------------------------+        |
@@ -125,9 +133,9 @@ This thread is in charge of synchronizing master's integrity information among a
 
     * Path
     * Modification time
-    * MD5 checksum
+    * Blake2b checksum
     * Whether the file is a merged file or not. And if it's merged:
-    
+
         * The merge type
         * The filename
 
@@ -135,14 +143,15 @@ This thread is in charge of synchronizing master's integrity information among a
 
     * Missing: Files that are present in the master node but missing in the worker. They must be created in the worker.
     * Extra: Files that are present in the worker node but missing in the master. They must be removed in the worker node as well.
-    * Extra valid: Extra files that, instead of being removed in the worker, must be created in the master. This is a special type of file created for agent-group files. These files can be created in worker nodes when an agent is re-registered and was previously assigned to a group.
     * Shared: Files that are present in both master and worker but have a different checksum. They must be updated in the worker node.
 
-   Then the master prepares a zip package with a JSON containing all this information and the required files the worker needs to update.
+   Then the master prepares a zip package with a JSON containing all this information and the required files the worker needs to update. The maximum zip size is specified in the ``max_zip_size`` variable of the `cluster.json <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/framework/wazuh/core/cluster/cluster.json>`_ file. In case it is exceeded, the remaining files will be synced in the next iteration of Integrity.
 
-4. Once the worker receives the package, it updates the necessary files and then it sends the master the required extra valid files.
+4. Once the worker receives the package, it updates the necessary files.
 
-If there is no data to synchronize or there has been an error reading data from the worker, the worker is always notified about it.
+If there is no data to synchronize or there has been an error reading data from the worker, the worker is always notified about it. Also, if a timeout error occurs while the worker is waiting to receive the zip, the master will cancel the current task and reduce the zip size limit. The limit will gradually increase again if no new timeout errors occur.
+
+.. _agent-info:
 
 Agent info thread
 ~~~~~~~~~~~~~~~~~
@@ -155,6 +164,33 @@ This thread is in charge of synchronizing the agent's last keepalives and operat
 4. The master sends the received information to its local wazuh-db service, where it is updated.
 
 If there is an error during the update process of one of the chunks in the master's database, the worker is notified.
+
+.. _agent-groups-sync:
+
+Agent groups sync thread
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+This thread is in charge of sending information about agents' groups assignment (abbr. agent-groups) from each worker to the master. The communication is started by the worker and it follows the exact same stages as :ref:`agent-info <agent-info>`.
+
+However, unlike in :ref:`agent-info <agent-info>`, the same information is sent over and over again to the master. This happens until the master node stores it in its database and sends it back to all workers (including the worker it came from). This prevents losing any agent-group if an unsuccessful communication occurs. Once the worker receives the agent-groups information from the master, it will never send it to the master again.
+
+Agent groups send thread
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+This thread is in charge of synchronizing information of agents' groups assignment (abbr. agent-groups) in the master to all the workers. The aim is that every agent-group received in the master ends up in the database of all the worker nodes. The communication is started by the master node (behaving like a broadcast) and it follows these stages:
+
+1. When there is new agent-groups information, the master sends a JSON string with it to each worker. This is done only once per node.
+2. The workers send the received information to their local :ref:`wazuh-db <wazuh-db>` service, where it is updated.
+3. Workers stop sending information to the master (:ref:`Agent groups sync <agent-groups-sync>`) about any agent-group they have received in this task.
+4. The worker compares the checksum of its database with the checksum of the master's.
+5. If the checksum has been different for 10 consecutive times, the worker notifies the master.
+6. When notified, the master sends to the worker all the agent-groups information.
+7. The worker overwrites its database with the agent-groups information it has received from the master.
+
+Local agent-groups thread
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This thread is only executed by the master. It periodically asks to its local :ref:`wazuh-db <wazuh-db>` service new information (since the last time this task was run) of agent-groups. The task is not repeated until such information is sent to all worker nodes.
 
 Local integrity thread
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -182,7 +218,7 @@ The cluster is built on top of `asyncio.Protocol <https://docs.python.org/3/libr
 
 The wazuh cluster protocol is defined on top of this framework. The following diagram shows all Python classes defined based on ``asyncio.Protocol``:
 
-.. thumbnail:: ../images/development/cluster_protocol_handler.png
+.. thumbnail:: ../images/development/cluster-protocol-handler.png
     :title: Wazuh cluster protocol class inheritance
     :align: center
     :width: 80%
@@ -191,12 +227,12 @@ The higher classes on the diagram (``wazuh.core.cluster.common.Handler``, ``wazu
 
 There are abstract server and client classes to handle multiple connections from multiple clients and connecting to the server. This way, all the logic to connect to a server or handling multiple clients can be shared between all types of servers and clients in the cluster. These classes are shown in the diagrams below:
 
-.. thumbnail:: ../images/development/cluster_clients.png
+.. thumbnail:: ../images/development/cluster-clients.png
     :title: Wazuh cluster protocol class inheritance
     :align: center
     :width: 80%
 
-.. thumbnail:: ../images/development/cluster_servers.png
+.. thumbnail:: ../images/development/cluster-servers.png
     :title: Wazuh cluster protocol class inheritance
     :align: center
     :width: 80%
@@ -213,7 +249,7 @@ Protocol definition
 
 The communication protocol used in all communications (both cluster and API) is defined in the ``wazuh.core.cluster.common.Handler``. Each message in the protocol has the following structure:
 
-.. thumbnail:: ../images/development/structure_message_protocol.png
+.. thumbnail:: ../images/development/structure-message-protocol.png
     :title: Structure for each message in the protocol
     :align: center
     :width: 80%
@@ -236,28 +272,39 @@ This communication protocol is used by all cluster nodes to synchronize the nece
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
 | Message           | Received in | Arguments             | Description                                                                                     |
 +===================+=============+=======================+=================================================================================================+
-| ``hello``         | Master      | - Node name<str>,     | First message sent by a worker to the master on its first connection.                           |
-|                   |             | - Cluster name<str>,  |                                                                                                 |
-|                   |             | - Node type<str>,     |                                                                                                 |
+| ``hello``         | Master      | - Node name<str>      | First message sent by a worker to the master on its first connection.                           |
+|                   |             | - Cluster name<str>   |                                                                                                 |
+|                   |             | - Node type<str>      |                                                                                                 |
 |                   |             | - Wazuh version<str>  |                                                                                                 |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
-| ``syn_i_w_m_p``,  | Master      | None                  | - Ask permission to start synchronization protocol. Message characters define the action to do: |
-|                   |             |                       | - I (integrity), A (agent-info).                                                                |
-| ``syn_a_w_m_p``   |             |                       | - W (worker), M (master), P (permission).                                                       |
+| ``syn_i_w_m_p``   | Master      | None                  | Ask permission to start synchronization protocol. Message characters define the action to do:   |
+| ``syn_g_w_m_p``   |             |                       |                                                                                                 |
+| ``syn_a_w_m_p``   |             |                       | - I (integrity), G (agent-groups sync), A (agent-info).                                         |
+|                   |             |                       | - W (worker), M (master), P (permission).                                                       |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
-| ``syn_i_w_m``,    | Master      | - None or             | - Start synchronization protocol. Message characters define the action to do:                   |
-| ``syn_e_w_m``,    |             |   String ID<str>      | - I (integrity), E (extra valid), A (agent-info).                                               |
-| ``syn_a_w_m``     |             |                       | - W (worker), M (master).                                                                       |
+| ``syn_i_w_m``     | Master      | None or String ID<str>| Start synchronization protocol. Message characters define the action to do:                     |
+| ``syn_g_w_m``     |             |                       |                                                                                                 |
+| ``syn_a_w_m``     |             |                       | - I (integrity), G (agent-groups sync), A (agent-info).                                         |
+|                   |             |                       | - W (worker), M (master).                                                                       |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
-| ``syn_i_w_m_e``,  | Master      | None                  | - End synchronization protocol. Message characters define the action to do:                     |
-| ``syn_e_w_m_e``   |             |                       | - I (integrity), E (extra valid).                                                               |
-|                   |             |                       | - W (worker), M (master), E(end).                                                               |
+| ``syn_i_w_m_e``   | Master      | None or String ID<str>| End synchronization protocol. Message characters define the action to do:                       |
+| ``syn_w_g_e``     |             |                       |                                                                                                 |
+| ``syn_wgc_e``     |             |                       | - I (integrity), G (agent-groups send), C (agent-groups send full).                             |
+|                   |             |                       | - W (worker), M (master), E(end)                                                                |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
-| ``syn_i_w_m_r``,  | Master      | None                  | - Notify an error during synchronization. Message characters define the action to do:           |
-|                   |             |                       | - I (integrity).                                                                                |
-|                   |             |                       | - W (worker), M (master), R(error).                                                             |
+| ``syn_g_m_w``     | Worker      | Agent-groups          | Start synchronization protocol. Message characters define the action to do:                     |
+| ``syn_g_m_w_c``   |             | data<dict>            |                                                                                                 |
+|                   |             |                       | - G (agent-groups recv), C (agent-groups recv full).                                            |
+|                   |             |                       | - W (worker), M (master).                                                                       |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
-| ``sendsync``      | Master      | - Arguments<Dict>     | Receive a message from a worker node destined for the specified daemon of the master node.      |
+| ``syn_i_w_m_r``   | Master      | Error msg<str>        | Notify an error during synchronization. Message characters define the action to do:             |
+| ``syn_w_g_err``   |             |                       |                                                                                                 |
+| ``syn_wgc_err``   |             |                       | - I (integrity), G (agent-groups send), C (agent-groups send full).                             |
+|                   |             |                       | - W (worker), M (master), R/ERR (error).                                                        |
++-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
+| ``syn_m_g_err``   | Worker      | Error msg<str>        | Notify an error during agent-groups recv synchronization.                                       |
++-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
+| ``sendsync``      | Master      | Arguments<Dict>       | Receive a message from a worker node destined for the specified daemon of the master node.      |
 |                   |             |                       |                                                                                                 |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
 | ``sendsyn_res``   | Worker      | - Request ID<str>     | Notify the ``sendsync`` response is available.                                                  |
@@ -266,11 +313,11 @@ This communication protocol is used by all cluster nodes to synchronize the nece
 | ``sendsyn_err``   | Both        | - Local client ID<str>| Notify errors in the ``sendsync`` communication.                                                |
 |                   |             | - Error message<str>  |                                                                                                 |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
-| ``get_nodes``     | Master      | - Arguments<Dict>     | Request sent from ``cluster_control -l`` from worker nodes.                                     |
+| ``get_nodes``     | Master      | Arguments<Dict>       | Request sent from ``cluster_control -l`` from worker nodes.                                     |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
-| ``get_health``    | Master      | - Arguments<Dict>     | Request sent from ``cluster_control -i`` from worker nodes.                                     |
+| ``get_health``    | Master      | Arguments<Dict>       | Request sent from ``cluster_control -i`` from worker nodes.                                     |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
-| ``dapi_clus``     | Master      | - Arguments<Dict>     | Receive an API call related to cluster information: Get nodes information or healthcheck.       |
+| ``dapi_clus``     | Master      | Arguments<Dict>       | Receive an API call related to cluster information: Get nodes information or healthcheck.       |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
 | ``dapi``          | Both        | - Sender node<str>    | Receive a distributed API request. If the API call has been forwarded multiple times,           |
 |                   |             | - Arguments<Dict>     | the sender node contains multiple names separated by a ``*`` character.                         |
@@ -290,10 +337,10 @@ This communication protocol is used by all cluster nodes to synchronize the nece
 |                   |             | - Filename<str>       | If master had issues sending/processing/receiving worker integrity an error message will be     |
 |                   |             |                       | sent instead of the task name and filename.                                                     |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
-| ``syn_m_a_e``     | Worker      | - Arguments<Dict>     | Master has finished updating agent-info. Number of updated chunks and chunks with               |
+| ``syn_m_a_e``     | Worker      | Arguments<Dict>       | Master has finished updating agent-info. Number of updated chunks and chunks with               |
 |                   |             |                       | errors (if any) will be sent.                                                                   |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
-| ``syn_m_a_err``   | Worker      | - Error msg<str>      | Notify an error during agent-info synchronization.                                              |
+| ``syn_m_a_err``   | Worker      | Error msg<str>        | Notify an error during agent-info synchronization.                                              |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
 
 
@@ -372,7 +419,7 @@ In addition to those already mentioned, there are more tasks that are created wh
 
 One of those tasks, which is defined as a class, is the task created to receive and process a file from the other peer. This class is instantiated when a synchronization process is started and it is destroyed once the synchronization process ends. It creates an asynchronous task that waits until the necessary files to do the synchronization process are received. This asynchronous task has a `callback <https://docs.python.org/3/library/asyncio-task.html#asyncio.Task.add_done_callback>`_ that checks if there was an error during the synchronization process.
 
-.. thumbnail:: ../images/development/receive_file_task_cluster.png
+.. thumbnail:: ../images/development/receive-file-task-cluster.png
     :title: Receive file class inheritance
     :align: center
     :width: 80%
@@ -393,10 +440,7 @@ Master node
 ###########
 * **Local integrity thread**: Calculates the hash of all the files to be synchronized. This requires high CPU usage.
 * **Agent info thread**: A section of this task sends all the agents' information to the wazuh-db. The communication is done in small chunks so as not to saturate the service socket. This turned this task into a somewhat slow process and not a good candidate for asyncio.
-* **Integrity thread**:
-
-   * **Compress files**: Compressing files is fully synchronous and can block the parent cluster process.
-   * **Process extra-valid files**: The workers send the extra-valid files to the master. Processing these files is prone to interleaving and can be very slow when using asyncio.
+* **Integrity thread**: Compressing files, which is done inside this task, is fully synchronous and can block the parent cluster process.
 
 Worker nodes
 ############
@@ -408,16 +452,22 @@ Worker nodes
 
 Below is an example diagram of how the process pool is used in the master node:
 
-.. image:: ../images/development/cluster_process_pool.png
-  :align: center
+.. thumbnail:: ../images/development/cluster-process-pool.png
+    :title: Cluster process pool
+    :align: center
+    :width: 80%
+
 
 Integrity synchronization process
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Let's review the integrity synchronization process to see how asyncio tasks are created to process data from the peer. The following diagram shows the whole process of synchronizing integrity:
 
-.. image:: ../images/development/sync_integrity_diagram.png
-  :align: center
+.. thumbnail:: ../images/development/sync-integrity-diagram.png
+    :title: Sync integrity diagram
+    :align: center
+    :width: 80%
+
 
 * **1**: The worker's ``sync_integrity`` task wakes up after sleeping during *interval* seconds (which is defined in the `cluster.json <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/framework/wazuh/core/cluster/cluster.json>`_ file). The first thing it does is checking whether the previous synchronization process is finished or not using the ``syn_i_w_m_p`` command. The master replies with a boolean value specifying that the previous synchronization process is finished and, therefore, the worker can start a new one.
 * **2**: The worker starts the synchronization process using ``syn_i_w_m`` command. When the master receives the command, it creates an asyncio task to process the received integrity from the worker node. But since no file has been received yet, the task keeps waiting until the worker sends the file. The master sends the worker the task ID so the worker can notify the master to wake it up once the file has been sent.
@@ -425,7 +475,7 @@ Let's review the integrity synchronization process to see how asyncio tasks are 
 * **4**: The worker notifies the master that the integrity file has already been sent. In that moment, the master wakes the previously created task up and compares the worker files with its own. In this example the master finds out the worker integrity is outdated.
 * **5**: The master starts a sync integrity process with the worker using the ``syn_m_c`` command. The worker creates a task to process the received integrity from the master but the task is sleeping since it's not been received yet. This is the same process the worker has done with the master but changing directions.
 * **6**: The master sends all information to the worker using the sending file process.
-* **7**: The master notifies the worker that the integrity information has already been sent using the ``syn_m_c_e`` command. The worker wakes the previously created task up to process and update the required files. In this example, no extra valid files were required by the master so the worker doesn't send any more requests to the master and the synchronization process ends.
+* **7**: The master notifies the worker that the integrity information has already been sent using the ``syn_m_c_e`` command. The worker wakes the previously created task up to process and update the required files.
 
 To sum up, asynchronous tasks are created only when the received request needs to wait for some data to be available (for example, synchronization tasks waiting for the zip file from the other peer). If the request can be solved instantly, no asynchronous tasks are created for it.
 
@@ -442,8 +492,10 @@ The type association with every endpoint can be found here: `API controllers <ht
 
 Imagine a cluster with two nodes, where there is an agent reporting to the worker node with id *020*. The following diagram shows the process of requesting ``GET/syscollector/020/os`` API endpoint:
 
-.. image:: ../images/development/distributed_dapi_worker.png
-  :align: center
+.. thumbnail:: ../images/development/distributed-dapi-worker.png
+    :title: Distributed API requests
+    :align: center
+    :width: 80%
 
 * **1**: The user does an API request. The API server receives the connection and calls ``distribute_function``. Since the requested endpoint is ``distributed_master`` the worker realizes it can't solve the request locally and proceeds to forward the request to the master node.
 * **2**: The API server doesn't have direct contact with the cluster master node. So the API process forwards the request to a Unix socket the cluster has to receive API requests locally. This Unix server is running inside the cluster process, so it can send requests to the master node. In order to identify the API request when the master sends a response back, the local server adds an ID (``local_client1`` in the example).
@@ -503,8 +555,8 @@ If the log error message isn't clarifying enough, the traceback can be logged se
     2019/04/10 15:50:37 wazuh-clusterd: ERROR: [Cluster] [Main] Could not get checksum of file client.keys: [Errno 13] Permission denied: '/var/ossec/etc/client.keys'
     Traceback (most recent call last):
     File "/var/ossec/framework/python/lib/python3.9/site-packages/wazuh-|WAZUH_LATEST|-py3.7.egg/wazuh/core/cluster/cluster.py", line 217, in walk_dir
-        entry_metadata['md5'] = md5(os.path.join(common.ossec_path, full_path))
-    File "/var/ossec/framework/python/lib/python3.9/site-packages/wazuh-|WAZUH_LATEST|-py3.7.egg/wazuh/core/utils.py", line 555, in md5
+        entry_metadata['blake2b'] = blake2b(os.path.join(common.ossec_path, full_path))
+    File "/var/ossec/framework/python/lib/python3.9/site-packages/wazuh-|WAZUH_LATEST|-py3.7.egg/wazuh/core/utils.py", line 555, in blake2b
         with open(fname, "rb") as f:
     PermissionError: [Errno 13] Permission denied: '/var/ossec/etc/client.keys'
 

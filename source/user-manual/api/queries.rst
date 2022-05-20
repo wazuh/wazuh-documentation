@@ -15,7 +15,7 @@ Advance filtering is possible using the Wazuh API's queries. Queries are specifi
     * ``>``: bigger.
     * ``~``: like as.
     * ``()``: grouping operators
-* **Value**: Value to filter filter by.
+* **Value**: Value to filter by.
 * **Separator**: Operator to join multiple "queries":
     * ``,``: represents an ``OR``.
     * ``;``: represents an ``AND``.

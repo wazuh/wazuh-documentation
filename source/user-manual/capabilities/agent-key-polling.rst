@@ -24,7 +24,7 @@ To do this, it is necessary to create a binary or script in any language that ca
 
 Below you can see the flow diagram:
 
-.. thumbnail:: ../../images/manual/keypolling/key-polling-flow.png
+.. thumbnail:: ../../images/manual/key-polling/key-polling-flow.png
   :title: Agent key polling module flow diagram
   :align: center
   :width: 100%
@@ -37,19 +37,19 @@ If the ``socket`` tag is not specified in the configuration block, the key polli
 - Poll agent by ID
 - Poll agent by IP
 
-When polling by ID, the manager will retrieve the agent key by querying its ID, so the input parameters that the program will receive are for example:
+When polling by ID, the manager will retrieve the agent key by querying its ID. So the input parameters that the program will receive are as the following:
 
 ::
 
   ./agent_key_pull.py id 001
 
-When polling by IP address, the manager will retrieve the agent key by querying his IP address, so the input parameters that the program will receive are for example:
+When polling by IP address, the manager will retrieve the agent key by querying his IP address, so the input parameters that the program will receive are as the following:
 
 ::
 
   ./agent_key_pull.py ip 192.168.1.100
 
-.. thumbnail:: ../../images/manual/keypolling/keypolling1.png
+.. thumbnail:: ../../images/manual/key-polling/key-polling-1.png
   :title: No socket method: one program call per request.
   :align: center
   :width: 100%
@@ -57,11 +57,11 @@ When polling by IP address, the manager will retrieve the agent key by querying 
 .. note::
   Keep in mind that the above examples represent how Wazuh will call your program.
 
-When the ``socket`` tag is specified the module will send the parameters through the specified socket and read the response. The performance improvement over executing the program as it is explained above is significant.
+When the ``socket`` tag is specified the module will send the parameters through the specified socket and read the response. The performance improvement over executing the program, as it is explained above, is significant.
 
 The format in which the program will receive the data is ``option:value``, where option can be ``id`` or ``ip`` depending on the polling type.
 
-.. thumbnail:: ../../images/manual/keypolling/keypolling0.png
+.. thumbnail:: ../../images/manual/key-polling/key-polling-0.png
   :title: Method with socket: requests directly to the socket.
   :align: center
   :width: 100%

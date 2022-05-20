@@ -1,117 +1,173 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: This section of the Wazuh documentation guides through the upgrade process of Elasticsearch, Filebeat, and Kibana for Open Distro for Elasticsearch distribution.
+   :description: This section of the Wazuh documentation guides through the upgrade process of the Wazuh server with Elasticsearch and Kibana for Open Distro for Elasticsearch distribution.
   
 .. _upgrading_open_distro:
 
-Upgrading Open Distro for Elasticsearch
+Wazuh and Open Distro for Elasticsearch
 =======================================
 
-This section guides through the upgrade process of Elasticsearch, Filebeat and Kibana for *Open Distro for Elasticsearch* distribution. 
+This section guides through the upgrade process of the Wazuh server, Elasticsearch, and Kibana for the *Open Distro for Elasticsearch* distribution. 
 
-.. note:: Root user privileges are required to execute all the commands described below.
+.. note::
+   
+   Root user privileges are required to execute all the commands described below.
 
-Preparing Open Distro for Elasticsearch
+Preparing the upgrade
+---------------------
+
+#. Add the Wazuh repository. You can skip this step if the repository is already present and enabled on the node. 
+
+   .. tabs::
+
+
+     .. group-tab:: Yum
+
+
+       .. include:: /_templates/installations/common/yum/add-repository.rst
+
+
+
+     .. group-tab:: APT
+
+
+       .. include:: /_templates/installations/common/deb/add-repository.rst
+
+
+
+
+#. Repeat the previous step for every Wazuh node.
+
+Upgrading the Wazuh manager
+---------------------------
+
+#. Upgrade the Wazuh manager to the latest version.
+
+   -  When upgrading a multi-node Wazuh manager cluster, run the upgrade in every node to make all the Wazuh manager nodes join the cluster. Start with the master node to reduce server downtime.
+
+   .. note::
+
+      If the ``/var/ossec/etc/ossec.conf`` configuration file was modified, it will not be replaced by the upgrade. You will therefore have to add the settings of the new capabilities manually. More information can be found in :doc:`/user-manual/index`.
+
+   .. tabs::
+
+      .. group-tab:: Yum
+
+         .. code-block:: console
+
+            # yum upgrade wazuh-manager
+
+      .. group-tab:: APT
+
+         .. code-block:: console
+
+            # apt-get install wazuh-manager
+
+#. Repeat the previous steps for every Wazuh manager node.
+
+Upgrading Open Distro for Elasticsearch
 ---------------------------------------
+
+Preparations
+^^^^^^^^^^^^
 
 #. Stop the services:
 
     .. include:: ../../_templates/installations/basic/elastic/common/stop_kibana_filebeat.rst
 
 
-#. Prepare the repositories. Wazuh now hosts the Open Distro packages. In order to prevent accidental upgrades, it is recommended to disable the Open Distro repository. Besides, if Elastic repository was added, it is also recommended to disable it:
+#. Prepare the repositories. Wazuh now hosts the Open Distro packages. In order to prevent accidental upgrades, it is recommended to disable the Open Distro repository. Besides, if the Elastic repository was added, it is also recommended to disable it:
 
-  2.1. Disable the Open Distro for Elasticsearch repository:
+   #. Disable the Open Distro for Elasticsearch repository:
+ 
+        .. tabs::
+    
+          .. group-tab:: Yum
+    
+            .. code-block:: console
+    
+              # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/opendistroforelasticsearch-artifacts.repo
+    
+          .. group-tab:: APT
+    
+            .. code-block:: console
+    
+              # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/opendistroforelasticsearch.list
+              # apt-get update
+    
+          .. group-tab:: ZYpp
+    
+            .. code-block:: console
+    
+                  # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/opendistroforelasticsearch-artifacts.repo  
+ 
+   #. (Optional) Disable the Elastic Stack basic license repository:
 
-    .. tabs::
+         .. tabs::
+     
+           .. group-tab:: Yum
+     
+             .. code-block:: console
+     
+               # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/elastic.repo
+     
+           .. group-tab:: APT
+     
+             .. code-block:: console
+     
+               # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/elastic-7.x.list
+               # apt-get update
+     
+             Alternatively, the user can set the package state to ``hold``, which will stop updates. It will be still possible to upgrade it manually using ``apt-get install``:
+     
+             .. code-block:: console
+     
+               # echo "elasticsearch hold" | sudo dpkg --set-selections
+               # echo "filebeat hold" | sudo dpkg --set-selections
+               # echo "kibana hold" | sudo dpkg --set-selections
+     
+           .. group-tab:: ZYpp
+     
+             .. code-block:: console
+     
+                   # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/elastic.repo
 
-      .. group-tab:: Yum
+   #. Add the Wazuh ``4.x`` repository:
 
-        .. code-block:: console
-
-          # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/opendistroforelasticsearch-artifacts.repo
-
-      .. group-tab:: APT
-
-        .. code-block:: console
-
-          # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/opendistroforelasticsearch.list
-          # apt-get update
-
-      .. group-tab:: ZYpp
-
-        .. code-block:: console
-
-              # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/opendistroforelasticsearch-artifacts.repo  
-
-  2.2. (Optional) Disable the Elastic Stack basic license repository:
-
-    .. tabs::
-
-      .. group-tab:: Yum
-
-        .. code-block:: console
-
-          # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/elastic.repo
-
-      .. group-tab:: APT
-
-        .. code-block:: console
-
-          # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/elastic-7.x.list
-          # apt-get update
-
-        Alternatively, the user can set the package state to ``hold``, which will stop updates. It will be still possible to upgrade it manually using ``apt-get install``:
-
-        .. code-block:: console
-
-          # echo "elasticsearch hold" | sudo dpkg --set-selections
-          # echo "filebeat hold" | sudo dpkg --set-selections
-          # echo "kibana hold" | sudo dpkg --set-selections
-
-      .. group-tab:: ZYpp
-
-        .. code-block:: console
-
-              # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/elastic.repo
-
-  2.3. Add the Wazuh ``4.x`` repository:
-
-    .. tabs::
-
-      .. group-tab:: Yum
-
-        .. include:: ../../_templates/installations/basic/wazuh/yum/add_repository_aio.rst
-
-        3. Clean the YUM cache:
-
-          .. code-block:: console
-
-            # yum clean all 
-
-      .. group-tab:: APT
-
-        .. include:: ../../_templates/installations/basic/wazuh/deb/add_repository_aio.rst
-
-      
-
-      .. group-tab:: ZYpp
-
-        .. include:: ../../_templates/installations/basic/wazuh/zypp/add_repository_aio.rst
-
-
+      .. tabs::
+  
+        .. group-tab:: Yum
+  
+          .. include:: ../../_templates/installations/basic/wazuh/yum/add_repository_aio.rst
+  
+          3. Clean the YUM cache:
+  
+            .. code-block:: console
+  
+              # yum clean all 
+  
+        .. group-tab:: APT
+  
+          .. include:: ../../_templates/installations/basic/wazuh/deb/add_repository_aio.rst
+  
+        
+  
+        .. group-tab:: ZYpp
+  
+          .. include:: ../../_templates/installations/basic/wazuh/zypp/add_repository_aio.rst
 
 
 
 
-Upgrading Elasticsearch
------------------------
 
-This guide explains how to perform a rolling upgrade, which allows you to shut down one node at a time for minimal disruption of service.
-The cluster remains available throughout the process.
 
-In the commands below ``127.0.0.1`` IP address is used. If Elasticsearch is bound to a specific IP address, replace ``127.0.0.1`` with your Elasticsearch IP address. If using ``http``, the option ``-k`` must be omitted and if not using user/password authentication, ``-u`` must be omitted.
+Upgrade
+^^^^^^^
+
+This guide explains how to perform a rolling upgrade, which allows you to shut down one node at a time for minimal disruption of service.The cluster remains available throughout the process.
+
+The IP address ``127.0.0.1`` is used in the commands below. If Elasticsearch is bound to a specific IP address, replace ``127.0.0.1`` with your Elasticsearch IP address. If using ``http``, the option ``-k`` must be omitted, and if not using user/password authentication, ``-u`` must be omitted.
 
 #. Disable shard allocation:
 
@@ -127,9 +183,9 @@ In the commands below ``127.0.0.1`` IP address is used. If Elasticsearch is boun
 
 #. Stop non-essential indexing and perform a synced flush:
 
-    .. code-block:: bash
+    .. code-block:: console
 
-      curl -X POST "https://127.0.0.1:9200/_flush/synced" -u <username>:<password> -k
+      # curl -X POST "https://127.0.0.1:9200/_flush/synced" -u <username>:<password> -k
 
 #. Shut down a single node:
 
@@ -170,14 +226,25 @@ In the commands below ``127.0.0.1`` IP address is used. If Elasticsearch is boun
 
 #. Restart the service:
 
+    .. warning::
+    
+      Add the following configuration to mitigate Apache Log4j2 Remote Code Execution (RCE) vulnerability - CVE-2021-44228 - ESA-2021-31.
+      
+      .. code-block:: console
+    
+        # mkdir -p /etc/elasticsearch/jvm.options.d
+        # echo '-Dlog4j2.formatMsgNoLookups=true' > /etc/elasticsearch/jvm.options.d/disabledlog4j.options
+        # chmod 2750 /etc/elasticsearch/jvm.options.d/disabledlog4j.options
+        # chown root:elasticsearch /etc/elasticsearch/jvm.options.d/disabledlog4j.options
+
     .. include:: ../../_templates/installations/basic/elastic/common/enable_elasticsearch.rst
 
 
 #. Start the newly-upgraded node and confirm that it joins the cluster by checking the log file or by submitting a ``_cat/nodes`` request:
 
-    .. code-block:: bash
+    .. code-block:: console
 
-      curl -X GET "https://127.0.0.1:9200/_cat/nodes" -u <username>:<password> -k
+      # curl -X GET "https://127.0.0.1:9200/_cat/nodes" -u <username>:<password> -k
 
 #. Reenable shard allocation:
 
@@ -193,9 +260,9 @@ In the commands below ``127.0.0.1`` IP address is used. If Elasticsearch is boun
 
 #. Before upgrading the next node, wait for the cluster to finish shard allocation:
 
-    .. code-block:: bash
+    .. code-block:: console
 
-      curl -X GET "https://127.0.0.1:9200/_cat/health?v" -u <username>:<password> -k
+      # curl -X GET "https://127.0.0.1:9200/_cat/health?v" -u <username>:<password> -k
 
 #. Repeat the steps for every Elasticsearch node.
 
@@ -253,7 +320,7 @@ Upgrading Filebeat
             output.elasticsearch:
               hosts: ["<elasticsearch_ip>:9200"]
 
-          Replace ``elasticsearch_ip`` with the IP address or the hostname of the Elasticsearch server.
+          Replace ``<elasticsearch_ip>`` with the IP address or the hostname of the Elasticsearch server.
 
         .. group-tab:: Elasticsearch multi-node
 
@@ -462,7 +529,7 @@ Upgrading Kibana
     .. include:: ../../_templates/installations/basic/elastic/common/enable_kibana.rst
 
 
-#. **(For upgrades from 3.x versions)** Once Kibana is accesible, remove the ``wazuh-alerts-3.x-*`` index pattern. Since Wazuh 4.0 it has been replaced by ``wazuh-alerts-*`` , it is necessary to remove the old pattern in order for the new one to take its place.
+#. **(For upgrades from 3.x versions)** Once Kibana is accessible, remove the ``wazuh-alerts-3.x-*`` index pattern. Since Wazuh 4.0 it has been replaced by ``wazuh-alerts-*`` , it is necessary to remove the old pattern in order for the new one to take its place.
 
     .. code-block:: console
 
@@ -473,10 +540,11 @@ Upgrading Kibana
 #. Clear the browser's cache and cookies.
 
 
-Disabling the repository
-^^^^^^^^^^^^^^^^^^^^^^^^
-It is recommended to disable the Wazuh repository to prevent an upgrade to a newest Elastic Stack version due to the possibility of undoing changes with the Wazuh Kibana plugin:
+Finishing the upgrade
+---------------------
 
+#. **Recommended action** - Disable the Wazuh repository when finished upgrading the Wazuh installation in the node to prevent  an upgrade to the newest Elastic Stack version due to the possibility of undoing changes with the Wazuh Kibana plugin.
+  
       .. tabs::
 
         .. group-tab:: Yum
@@ -498,7 +566,7 @@ It is recommended to disable the Wazuh repository to prevent an upgrade to a new
 
             # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/wazuh.repo
 
-Next step
----------
+Next steps
+----------
 
-The next step consists on :ref:`upgrading the Wazuh agents<upgrading_wazuh_agent>`.
+The next step consists in :ref:`upgrading the Wazuh agents<upgrading_wazuh_agent>`.

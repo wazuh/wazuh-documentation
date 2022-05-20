@@ -21,7 +21,7 @@ The Wazuh agents are able to collect interesting system information and store it
     - `Windows updates`_
 - `Compatibility matrix`_
 - `Using Syscollector information to trigger alerts`_
-    - `New searchable fields for Kibana`_
+    - `New searchable fields for the Wazuh dashboard`_
 - `Use case: Visualize system inventory in the Wazuh App`_
 
 How it works
@@ -29,10 +29,9 @@ How it works
 
 As mentioned above, the main purpose of this module is to gather the most relevant information from the monitored system.
 
-Once the agent starts, `Syscollector` runs periodically scans of defined targets (hardware, OS, packages, etc.), forwarding the new collected data to the manager, which updates the appropriate tables of the database.
+Once the agent starts, `Syscollector` runs periodically scans of defined targets (hardware, OS, packages, etc.), forwarding the newly collected data to the manager, which updates the appropriate tables of the database.
 
-The agent's inventory is gathered for different goals. The entire inventory can be found at the `inventory` tab of the Wazuh APP for each agent, by querying the Wazuh API to retrieve the data from the DB. Also the `Dev tools` tab is available,
-with this feature the Wazuh API can be directly queried about the different scans being able to filter by any desired field.
+The agent's inventory is gathered for different goals. The entire inventory can be found at the `inventory` tab of the Wazuh APP for each agent, by querying the Wazuh API to retrieve the data from the DB. Also, the `Dev tools` tab is available. With this feature, the Wazuh API can be directly queried about the different scans being able to filter by any desired field.
 
 In addition, the packages and hotfixes inventory is used as feed for the :doc:`Vulnerability detector module<./vulnerability-detection/index>`.
 
@@ -41,7 +40,7 @@ Available scans
 
 The collected information from Wazuh agents is stored in different SQLite tables. Here the content of each available table is described.
 
-At present, this module is available for Linux, Windows, MacOS, OpenBS and FreeBSD. See the `compatibility matrix`_ for more information.
+This module is available for Linux, Windows, macOS, OpenBSD, and FreeBSD. See the compatibility matrix for more information.
 
 .. _syscollector_hardware:
 
@@ -164,8 +163,7 @@ The current packages inventory of each Wazuh agent. On Linux systems, retrieved 
 Network interfaces
 ^^^^^^^^^^^^^^^^^^
 
-The network interfaces scan retrieves information about the existing network interface of a system (up and down interfaces) as well as their routing configuration,
-it is composed of three tables to ensure that the information is as structured as possible.
+The network interfaces scan retrieves information about the existing network interface of a system (up and down interfaces) as well as their routing configuration. It is composed of three tables to ensure that the information is as structured as possible.
 
 - `sys_netiface` table
 
@@ -449,10 +447,10 @@ When the alerts are triggered (for ports opening operation) they will be display
 .. note:: The alerts will be triggered **after the second syscollector scan** (when a delta of information is being detected). The first scan
           will not generate alerts.
 
-New searchable fields for Kibana
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+New searchable fields for the Wazuh dashboard
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In Elasticsearch the fields will be saved as ``data.type.value``. For example, for **Hardware** type, the ``cpu_name`` field can be found as ``data.hardware.cpu_name``
+In the Wazuh indexer the fields will be saved as ``data.type.value``. For example, for **Hardware** type, the ``cpu_name`` field can be found as ``data.hardware.cpu_name``
 
 +----------------------+------------------------------------------------------------------------------------------------------------------------+----------------------------------+
 | **Type**             | **Fields**                                                                                                             | **Example**                      |

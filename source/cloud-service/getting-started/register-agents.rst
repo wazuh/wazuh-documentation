@@ -24,4 +24,4 @@ Follow these steps to register an agent:
    Agents must use **TCP** to communicate with your environment.
   
 
-If you have any questions about the Wazuh Cloud, see the :ref:`Cloud service FAQ <cloud_getting_started_starting_faq>`.
+If you have any questions about the Wazuh Cloud, see the :ref:`Cloud service FAQ <cloud_getting-started_starting_faq>`.

@@ -1,8 +1,8 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
-  :description: Wazuh provides an automated way of building our Wazuh Kibana plugin packages. Check out this step-by-step guide and learn how to create this package. 
-  
+  :description: Wazuh provides an automated way of building our Wazuh Kibana plugin packages. Check out this step-by-step guide and learn how to create this package.
+
 .. _create-kibana-app:
 
 Wazuh Kibana plugin
@@ -22,7 +22,7 @@ Download our wazuh-packages repository from GitHub and go to the wazuhapp direct
 
 .. code-block:: console
 
-  $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/wazuhapp && git checkout |WAZUH_PACKAGES_BRANCH|
+  $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/wazuhapp/kibana && git checkout v|WAZUH_LATEST|
 
 Execute the ``generate_wazuh_app.sh`` script, with the different options you desire. This script will build a Docker image with all the necessary tools to create the Wazuh Kibana plugin package and run a container that will build it:
 
@@ -34,7 +34,7 @@ Execute the ``generate_wazuh_app.sh`` script, with the different options you des
   :class: output
 
   Usage: ./generate_wazuh_app.sh [OPTIONS]
-  
+
       -b, --branch <branch>     [Required] Select Git branch or tag.
       -s, --store <path>        [Optional] Set the destination path of package, by defauly /tmp/wazuh-app.
       -r, --revision <rev>      [Optional] Package revision that append to version e.g. x.x.x-rev

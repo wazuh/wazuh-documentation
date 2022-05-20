@@ -76,8 +76,8 @@ Run the Wazuh agent Manager and confirm it is running and connected to the Wazuh
         2019/11/22 12:05:23 wazuh-agent: INFO: (4102): Connected to the server (172.30.0.10:1514/tcp).
 
 
-Observe that Wazuh manager is aware of all the connected agents.
-----------------------------------------------------------------
+Observe that the Wazuh manager is aware of all the connected agents.
+--------------------------------------------------------------------
 
 Switch over to your Wazuh Server SSH window and run these commands, looking for
 your self-registered agents.

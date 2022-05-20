@@ -114,6 +114,9 @@ If we want to change the level value of the SSH rule ``5710`` from 5 to 10, we w
         <group>invalid_login,authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,pci_dss_10.6.1,gpg13_7.1,gdpr_IV_35.7.d,gdpr_IV_32.2,hipaa_164.312.b,nist_800_53_AU.14,nist_800_53_AC.7,nist_800_53_AU.6,tsc_CC6.1,tsc_CC6.8,tsc_CC7.2,tsc_CC7.3,</group>
       </rule>
 
+.. warning::
+    To maintain consistency between loaded rules, currently it is not possible to overwrite the ``if_sid``, ``if_group``, ``if_level``, ``if_matched_sid``, and ``if_matched_group`` labels. These tags are ignored when they are in an overwrite rule, keeping the original values.
+
 
 Changing an existing decoder
 -----------------------------
@@ -123,7 +126,7 @@ You can also modify the standard decoders.
 .. warning::
     Changes in any decoder file in the ``/var/ossec/ruleset/decoders`` folder will be lost in the update process. Use the following procedure to preserve your changes.
 
-Unfortunately, there is no facility for overwriting decoders in the way described for rules above. However, we can perform changes in any decoder file as follows:
+Unfortunately, there is no facility for overwriting decoders in the way described in the rules above. However, we can perform changes in any decoder file as follows:
 
 If we want to change something in the decoder file ``0310-ssh_decoders.xml``, we will do the following:
 
@@ -150,4 +153,4 @@ If we want to change something in the decoder file ``0310-ssh_decoders.xml``, we
 3. Perform the changes in the file ``/var/ossec/etc/decoders/0310-ssh_decoders.xml``.
 
     .. warning::
-        Note that at this point, if updates to the public Wazuh Ruleset include changes to 0310-ssh_decoders.xml, they will not apply to you since you are no longer loading that decoder file from the standard location that gets updates.  At some point you may have to manually migrate your customized material from 0310-ssh_decoders.xml to a newer copy of that file.  Consider internally documenting your changes in 0310-ssh_decoders.xml so that they are easy to find if they have to be migrated later.
+        Note that at this point, if updates to the public Wazuh Ruleset include changes to 0310-ssh_decoders.xml, they will not apply to you since you are no longer loading that decoder file from the standard location that gets updates.  At some point, you may have to manually migrate your customized material from 0310-ssh_decoders.xml to a newer copy of that file.  Consider internally documenting your changes in 0310-ssh_decoders.xml so that they are easy to find if they have to be migrated later.

@@ -17,7 +17,7 @@ Requirements
  * `Git <https://git-scm.com/book/en/v2/Getting-Started-Installing-Git>`_
  * `Python <https://www.python.org/download/releases/2.7/>`_
 
-Download our wazuh-packages repository from GitHub and go to the ova directory of the |WAZUH_PACKAGES_BRANCH| branch.
+Download our wazuh-packages repository from GitHub and go to the ova directory.
 
 .. code-block:: console
 
@@ -27,7 +27,7 @@ Execute the ``generate_ova.sh`` script, with the different options you desire.
 
 .. code-block:: console
 
-  $ ./generate_wazuh_packages.sh -h
+  $ ./generate_ova.sh -h
 
 .. code-block:: none
   :class: output
@@ -50,10 +50,10 @@ Below, you will find some examples of how to build a Wazuh virtual machine.
 
   # ./generate_ova.sh
 
-This will generate a Virtual machine with Wazuh manager |WAZUH_LATEST| and ELK |ELASTICSEARCH_LATEST| installed using production packages.
+This will generate a Virtual machine with the Wazuh manager |WAZUH_LATEST| and ELK |ELASTICSEARCH_LATEST| installed using production packages.
 
 .. code-block:: console
 
   # ./generate_ova.sh -r dev
 
-This will generate a Virtual machine with Wazuh manager |WAZUH_LATEST| and ELK |ELASTICSEARCH_LATEST| installed using development packages.
+This will generate a Virtual machine with the Wazuh manager |WAZUH_LATEST| and ELK |ELASTICSEARCH_LATEST| installed using development packages.

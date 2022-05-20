@@ -1,11 +1,11 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
-#. Download the `Wazuh agent for Solaris 10 i386 <https://packages.wazuh.com/4.x/solaris/i386/10/wazuh-agent_v4.2.5-sol10-i386.pkg>`_ package. 
+#. Download the `Wazuh agent for Solaris 10 i386 <https://packages.wazuh.com/4.x/solaris/i386/10/wazuh-agent_v4.3.1-sol10-i386.pkg>`_ package. 
 
 #. To complete the process, install the agent.
 
    .. code-block:: console
 
-     # pkgadd -d wazuh-agent_v4.2.5-sol10-i386.pkg
+     # pkgadd -d wazuh-agent_v4.3.1-sol10-i386.pkg
 
 .. End of include file

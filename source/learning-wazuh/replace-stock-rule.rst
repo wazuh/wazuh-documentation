@@ -18,10 +18,10 @@ In order to change a default rule, then the ``overwrite="yes"`` option must be u
 In this lab you will raise the severity level of a specific rule in the Wazuh Ruleset.
 This can be achieved using the Web Interface or directly editing the files on the Wazuh Manager.
 
-Using the Kibana Wazuh plugin
------------------------------
+Using the Wazuh dashboard
+-------------------------
 
-1. Open the Wazuh User Interface in Kibana, go into the Management Tab and select the Ruleset
+1. Open the Wazuh dashboard, go into the Management Tab and select the Ruleset
 
 .. thumbnail:: ../images/learning-wazuh/labs/rules-1.png
     :title: Management
@@ -72,6 +72,9 @@ Using the Kibana Wazuh plugin
           </rule>
         </group>
 
+    .. note::
+        In this case, the ``if_sid`` label is not overwritten to maintain the correct operation of the rules. Same behavior applies to ``if_group``, ``if_level``, ``if_matched_sid``, and ``if_matched_group``.
+
 Notice how the web interface will automatically display an error if the xml syntax is not completely correct.
 
 6. Press **Save file**, confirm and then click on **Restart now**.
@@ -83,7 +86,7 @@ Notice how the web interface will automatically display an error if the xml synt
 
 
 7. After this is done attempt to log in to the **linux-agent** using SSH and incorrect credentials.
-   Then look for the event on Kibana by searching for **5716** and you will see the the level of the
+   Then look for the event on the Wazuh dashboard by searching for **5716** and you will see the the level of the
    alert for the most recent event will be **7**:
 
 .. thumbnail:: ../images/learning-wazuh/labs/rules-5.png
@@ -119,22 +122,26 @@ Using the Command Line Interface
 
         <rule id="5716" level="7" overwrite="yes">
 
-6. You could customize anything about the rule as long as you keep the rule id the same and include
-   the *overwrite* tag.  If you change the rule id then the original rule will not be overwritten and
-   it may interfere with your customized version.  If you leave the rule id the same but forget to add
-   the overwrite tag, then Wazuh manager will fail the next time it is restarted and throw an error about
-   a duplicate rule id.
+6. You could customize anything about the rule as long as you keep the rule ID the same and include
+   the *overwrite* tag. If you change the rule ID then the original rule will not be overwritten and
+   it may interfere with your customized version.  If you leave the rule ID the same but forget to add
+   the overwrite tag, then the Wazuh manager will fail the next time it is restarted and throw an error about
+   a duplicate rule ID.
 
-7. Save your changes to ``local_rules.xml``.
+7. It is also necessary to know that the ``if_sid``, ``if_group``, ``if_level``, ``if_matched_sid``, and ``if_matched_group``
+   labels are not taken into account when overwriting a rule to maintain consistency between loaded rules. If any of these
+   are encountered, the original value prevails.
 
-8. Run ``wazuh-logtest`` to test your customized rule and paste in this event that should trigger it:
+8. Save your changes to ``local_rules.xml``.
+
+9. Run ``wazuh-logtest`` to test your customized rule and paste in this event that should trigger it:
 
     .. code-block:: none
         :class: output
 
         Oct 23 17:27:17 agent sshd[8221]: Failed password for root from ::1 port 60164 ssh2
 
-9. Observe your customized alert level near the end of the output:
+10. Observe your customized alert level near the end of the output:
 
     .. code-block:: none
         :class: output
@@ -147,6 +154,6 @@ Using the Command Line Interface
 
 .. note::
     The Wazuh manager only reads in the rules when started or restarted, so any real events like above
-    would not be affected by your customized rule until you restart Wazuh manager.  The ``wazuh-logtest``
-    tool does not require Wazuh manager to be restarted to notice your latest rule changes, which provides
+    would not be affected by your customized rule until you restart the Wazuh manager.  The ``wazuh-logtest``
+    tool does not require the Wazuh manager to be restarted to notice your latest rule changes, which provides
     you with a convenient way to test your rule changes before making them take effect on real events.
