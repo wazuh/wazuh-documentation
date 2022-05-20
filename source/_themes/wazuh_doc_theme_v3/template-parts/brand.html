@@ -1,6 +1,15 @@
   <div class="navbar-brand">
-    <img class="logo-light" src="{{ pathto('_static/images/wazuh-docs-logo.png', 1) }}" width="211" height="28" alt="">
-    <img class="logo-dark" src="{{ pathto('_static/images/wazuh-docs-logo-white.png', 1) }}" width="211" height="28" alt="">
-    <a class="logo-link web" href="{{ theme_wazuh_web_url }}" target="_blank" rel="noreferrer noopener"><span class="sr-only">Wazuh home</span></a>
-    <a class="logo-link docs" href="{{ pathto(master_doc) }}" alt="Wazuh documentation"><span class="sr-only">Wazuh documentation index</span></a>
+  {% if pagename == 'index' %}
+    <div class="logo-link docs">
+  {% else %}
+    <a class="logo-link docs" href="{{ pathto(master_doc) }}">
+  {% endif %}
+      <span class="sr-only">Wazuh documentation index</span>
+      <img class="logo-light" src="{{ pathto('_static/images/wazuh-docs-logo.png', 1) }}" width="211" height="28" alt="Wazuh documentation index">
+      <img class="logo-dark" src="{{ pathto('_static/images/wazuh-docs-logo-white.png', 1) }}" width="211" height="28" alt="">
+  {% if pagename == 'index' %}
+    </div>
+  {% else %}
+    </a>
+  {% endif %}
   </div>
