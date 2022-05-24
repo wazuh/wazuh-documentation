@@ -31,7 +31,7 @@ As mentioned above, the main purpose of this module is to gather the most releva
 
 Once the agent starts, `Syscollector` runs periodically scans of defined targets (hardware, OS, packages, etc.), forwarding the newly collected data to the manager, which updates the appropriate tables of the database.
 
-The agent inventory is gathered for different goals. The entire inventory can be found at the `inventory` tab of the Wazuh dashboard for each agent, by querying the Wazuh API to retrieve the data from the DB. Also, the `Dev tools` tab is available. With this feature, the Wazuh API can be directly queried about the different scans being able to filter by any desired field.
+The agent inventory is gathered for different goals. The entire inventory can be found at the `inventory` tab of the Wazuh dashboard for each agent. Also, the `Dev tools` tab is available. With this feature, the Wazuh API can be directly queried about the different scans being able to filter by any desired field.
 
 In addition, the packages and hotfixes inventory is used as feed for the :doc:`Vulnerability detector module<./vulnerability-detection/index>`.
 
