@@ -234,8 +234,12 @@ Example:
       <same_source_ip />
       <description>sendmail: Sender domain has bogus MX record. </description>
       <description>It should not be sending e-mail.</description>
-      <group>multiple_spam,pci_dss_11.4,gdpr_IV_35.7.d,nist_800_53_SI.4,</group>
-    </rule>
+      <mitre>
+        <id>T1114</id>
+        <id>T1499</id>
+      </mitre>
+      <group>multiple_spam,pci_dss_11.4,gdpr_IV_35.7.d,nist_800_53_SI.4,tsc_CC6.1,tsc_CC6.8,tsc_CC7.2,tsc_CC7.3,</group>
+    </rule>    
 
 The rule is created with ID: ``3151`` and it will trigger a level 10 alert if the rule ``3102`` has matched 8 times in the last 120 seconds.
 
