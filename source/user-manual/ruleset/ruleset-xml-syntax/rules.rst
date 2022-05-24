@@ -1426,6 +1426,9 @@ This option is used in conjunction with ``frequency`` and ``timeframe``.
 | **Example of use** | <same_srcip /> |
 +--------------------+----------------+
 
+Deprecated label ``same_source_ip`` works like an alias for ``same_scrip``. 
+
+
 different_srcip
 ^^^^^^^^^^^^^^^
 
