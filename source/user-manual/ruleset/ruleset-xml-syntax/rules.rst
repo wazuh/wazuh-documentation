@@ -1344,10 +1344,14 @@ Example:
 
       <rule id="30316" level="10" frequency="10" timeframe="120">
         <if_matched_sid>30315</if_matched_sid>
-        <same_srcip />
+        <same_source_ip />
         <description>Apache: Multiple Invalid URI requests from same source.</description>
-        <group>invalid_request,pci_dss_10.2.4,pci_dss_11.4,gdpr_IV_35.7.d,hipaa_164.312.b,nist_800_53_AU.14,nist_800_53_AC.7,nist_800_53_SI.4,</group>
+        <mitre>
+          <id>T1499</id>
+        </mitre>
+        <group>gdpr_IV_35.7.d,hipaa_164.312.b,invalid_request,nist_800_53_AU.14,nist_800_53_AC.7,nist_800_53_SI.4,pci_dss_10.2.4,pci_dss_11.4,tsc_CC6.1,tsc_CC6.8,tsc_CC7.2,tsc_CC7.3,</group>
       </rule>
+
 
 The rule is triggered when rule 30315 has been triggered 10 times in 120 seconds and if the requests were made by the same ``srcip``.
 
