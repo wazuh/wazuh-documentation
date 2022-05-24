@@ -187,8 +187,13 @@ The last step is to run the analysis of the core dump
 
     !analyze -v
 
+.. _dev-linux-core-dumps:
+
 GNU/Linux
 *********
+
+.. _dev-linux-core-dumps-generation:
+
 Enabling core dump generation
 -----------------------------
 Linux kernel allows multiple possibilities to handle core dumps files
@@ -370,6 +375,7 @@ Core dump brief information can be obtained using ``file`` command
     /var/ossec/core: ELF 64-bit LSB core file, x86-64, version 1 (SYSV), SVR4-style, from '/var/ossec/bin/wazuh-logcollector',
       real uid: 0, effective uid: 0, real gid: 0, effective gid: 0, execfn: '/var/ossec/bin/wazuh-logcollector', platform: 'x86_64'
 
+.. _dev-linux-core-dumps-config:
 
 Wazuh core dump configuration
 -----------------------------
@@ -397,6 +403,7 @@ Systemd allows us to extend Wazuh service configurations and set this up.
         # systemctl daemon-reload
         # systemctl restart wazuh-manager
 
+.. _dev-linux-core-dumps-symbols:
 
 Wazuh symbols installation
 --------------------------
@@ -472,6 +479,7 @@ They will be installed in ``<INSTALLDIR>/.symbols`` directory by default.
 
           # USER_DEBUG_SYMBOLS="y" ./install.sh
 
+.. _dev-linux-core-dumps-dbg:
 
 Debugging and post-mortem crash analysis
 ----------------------------------------
@@ -485,3 +493,19 @@ GNU Debugger (GDB) can be used to debug Wazuh processes and core dump analysis a
 Symbols files will be automatically detected and loaded.
 
 To know more about GDB see `Debugging with GDB <https://sourceware.org/gdb/onlinedocs/gdb/>`_.
+
+Docker containers
+-----------------
+
+Processes that run inside a Docker container are formerly handled by the host Linux Kernel, so
+the core dump handling mechanism will be the one used in the host OS as well.
+Discovering this mechanism is described :ref:`here<dev-linux-core-dumps-generation>`.
+
+Core dumps file analysis depends on putting together, in the same Docker container, the next elements:
+
+- Faulty binary: any Wazuh installed process that seems to have problems.
+- Core dump file: will be created in the host filesystem and should be accessible by the container using any available mechanism, like shared volumes.
+- Wazuh symbols: packages providing symbols can be found :ref:`here<linux-dbg-symbols-packages>` and depend on the container package manager (``rpm`` or ``deb``).
+- GNU Debugger (``gdb``): used to find out where the problem is.
+
+Once conditions were met, ``gdb`` should be run in the container in a similar way as described in :ref:`Debugging and post-mortem crash analysis<dev-linux-core-dumps-dbg>`.
