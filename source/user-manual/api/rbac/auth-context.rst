@@ -41,7 +41,7 @@ In order to use this authentication method, a user allowed to use authorization 
 API log for authorization context login method
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-As it is explained in the last section, authorization context allows any authorized user to obtain extra permissions. To identify that a user has extra permissions due to an authorization context login, the API logs include an identifier after the string representing the username. This ID is unique and it corresponds to the authorization context used.
+As explained in the last section, authorization context allows any authorized user to obtain extra permissions. To identify that a user has extra permissions due to an authorization context login, the API logs include an identifier after the string representing the username. This ID is unique and it corresponds to the authorization context used.
 
 API logs when using the authorization context login method:
 
