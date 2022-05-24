@@ -1341,21 +1341,19 @@ This option is used in conjunction with ``frequency`` and ``timeframe``.
 .. note::
   Rules at level 0 are discarded immediately and will not be used with the if_matched_rules. The level must be at least 1, but the <no_log> option can be added to the rule to make sure it does not get logged.
 
-
 Example:
 
-  .. code-block:: xml
+.. code-block:: xml
 
-      <rule id="30316" level="10" frequency="10" timeframe="120">
-        <if_matched_sid>30315</if_matched_sid>
-        <same_source_ip />
-        <description>Apache: Multiple Invalid URI requests from same source.</description>
-        <mitre>
-          <id>T1499</id>
-        </mitre>
-        <group>gdpr_IV_35.7.d,hipaa_164.312.b,invalid_request,nist_800_53_AU.14,nist_800_53_AC.7,nist_800_53_SI.4,pci_dss_10.2.4,pci_dss_11.4,tsc_CC6.1,tsc_CC6.8,tsc_CC7.2,tsc_CC7.3,</group>
-      </rule>
-
+   <rule id="30316" level="10" frequency="10" timeframe="120">
+     <if_matched_sid>30315</if_matched_sid>
+     <same_source_ip />
+     <description>Apache: Multiple Invalid URI requests from same source.</description>
+     <mitre>
+       <id>T1499</id>
+     </mitre>
+     <group>gdpr_IV_35.7.d,hipaa_164.312.b,invalid_request,nist_800_53_AU.14,nist_800_53_AC.7,nist_800_53_SI.4,pci_dss_10.2.4,pci_dss_11.4,tsc_CC6.1,tsc_CC6.8,tsc_CC7.2,tsc_CC7.3,</group>
+   </rule>
 
 The rule is triggered when rule 30315 has been triggered 10 times in 120 seconds and if the requests were made by the same ``srcip``.
 
@@ -1426,8 +1424,7 @@ This option is used in conjunction with ``frequency`` and ``timeframe``.
 | **Example of use** | <same_srcip /> |
 +--------------------+----------------+
 
-Deprecated label ``same_source_ip`` works like an alias for ``same_scrip``. 
-
+Deprecated label ``same_source_ip`` works like an alias for ``same_srcip``. 
 
 different_srcip
 ^^^^^^^^^^^^^^^
@@ -1438,6 +1435,8 @@ This option is used in conjunction with ``frequency`` and ``timeframe``.
 +--------------------+----------------------+
 | **Example of use** | <different_srcip />  |
 +--------------------+----------------------+
+
+Deprecated label ``not_same_source_ip`` works like an alias for ``different_srcip``. 
 
 same_dstip
 ^^^^^^^^^^
