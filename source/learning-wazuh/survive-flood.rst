@@ -110,17 +110,7 @@ so for this lab we will lower the threshold:
 
 #. Restart the Wazuh manager.
 
-   a. For Systemd:
-
-      .. code-block:: console
-
-        # systemctl restart wazuh-manager
-
-   b. For SysV Init:
-
-      .. code-block:: console
-
-        # service wazuh-manager restart
+   .. include:: /_templates/common/restart_manager.rst
 
 Generate a log flood on linux-agent
 -----------------------------------
@@ -245,17 +235,7 @@ Return settings back to normal
 
 #. Restart the Wazuh manager:
 
-   a. For Systemd:
-
-      .. code-block:: console
-
-       # systemctl restart wazuh-manager
-
-   b. For SysV Init:
-
-      .. code-block:: console
-
-       # service wazuh-manager restart
+   .. include:: /_templates/common/restart_manager.rst
 
 
 Congratulations on completing this lab. You survived the log flood!

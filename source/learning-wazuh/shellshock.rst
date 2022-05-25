@@ -181,17 +181,7 @@ with this:
 
 and then restart the Wazuh manager:
 
-  a. For Systemd:
-
-    .. code-block:: console
-
-      # systemctl restart wazuh-manager
-
-  b. For SysV Init:
-
-    .. code-block:: console
-
-      # service wazuh-manager restart
+   .. include:: /_templates/common/restart_manager.rst
 
 Run the same curl probe just like last time:
 

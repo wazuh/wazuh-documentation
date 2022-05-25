@@ -142,17 +142,7 @@ how to configure it can be found in the
 
 Restart the Wazuh manager.
 
-a. For Systemd:
-
-  .. code-block:: console
-
-    # systemctl restart wazuh-manager
-
-b. For SysV Init:
-
-  .. code-block:: console
-
-    # service wazuh-manager restart
+   .. include:: /_templates/common/restart_manager.rst
 
 
 .. note::

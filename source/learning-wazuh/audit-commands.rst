@@ -252,19 +252,7 @@ will use to give us special alerts when executed.
 
 #. Restart the Wazuh manager:
 
-    a. For Systemd:
-
-       .. code-block:: console
-
-        # systemctl restart wazuh-manager
-
-    b. For SysV Init:
-
-       .. code-block:: console
-
-        # service wazuh-manager restart
-
-
+   .. include:: /_templates/common/restart_manager.rst
 
 
 #. On the linux computer monitored agent, install and run ``tcpdump`` to trip
@@ -323,17 +311,7 @@ alarmed we should be about a given program being run.
 
 #. Restart the Wazuh manager:
 
-   a. For Systemd:
-
-      .. code-block:: console
-
-        # systemctl restart wazuh-manager
-
-   b. For SysV Init:
-
-      .. code-block:: console
-
-        # service wazuh-manager restart
+   .. include:: /_templates/common/restart_manager.rst
 
 #. On the monitored linux agent install and run a "red" program (netcat):
 
@@ -372,17 +350,7 @@ such an exception.
 
 #. Restart the Wazuh manager:
 
-   a. For Systemd:
-
-      .. code-block:: console
-
-        # systemctl restart wazuh-manager
-
-   b. For SysV Init:
-
-      .. code-block:: console
-
-        # service wazuh-manager restart
+   .. include:: /_templates/common/restart_manager.rst
 
 #. In you linux-agent, test the rule by pinging both 8.8.8.8 and 8.8.4.4.
 
