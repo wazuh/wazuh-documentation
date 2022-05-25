@@ -127,7 +127,7 @@ The following steps serve as a guide on how to enroll a Linux/Unix endpoint with
 
          -rw-r--r-- 1 root wazuh 18 Jan 11 13:03 /var/ossec/etc/authd.pass
 
-#. Add the Wazuh manager IP address or DNS name in the ``<client><server><address>`` section of the manager configuration file ``/var/ossec/etc/ossec.conf``.
+#. Add the Wazuh manager IP address or DNS name in the ``<client><server><address>`` section of the agent configuration file ``/var/ossec/etc/ossec.conf``.
 
    .. code-block:: xml
      :emphasize-lines: 3
