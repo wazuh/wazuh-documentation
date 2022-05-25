@@ -164,7 +164,7 @@ For better readability, hover over each of these field names on the left and cli
 Now you see a nice summary of recent events mentioning "*blimey*".
 
     .. thumbnail:: ../images/learning-wazuh/labs/brute-1.png
-        :title: brute
+        :title: Wazuh dashboard Discover
         :align: center
         :width: 80%
 
@@ -173,7 +173,7 @@ Take a closer look at the full details of the first alert that occurred (bottom 
 Notice there is even more information here than in the original JSON record, due to enrichment by `Filebeat`, most notably including GeoLocation fields that are based on the "attacker's" IP address if this was done over an external IP address.
 
 .. thumbnail:: ../images/learning-wazuh/labs/brute-2.png
-    :title: brute
+    :title: Rule 5710: "sshd: Attempt to login using a non-existent user" 
     :align: center
     :width: 80%
 
@@ -192,25 +192,26 @@ To better understand this alert, let's look up rule **5710** (from the ``rule.id
         <match>illegal user|invalid user</match>
         <description>sshd: Attempt to login using a non-existent user</description>
         <mitre>
-          <id>T1110</id>
+          <id>T1110.001</id>
+          <id>T1021.004</id>
+          <id>T1078</id>
         </mitre>
-        <group>invalid_login,authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,pci_dss_10.6.1,gpg13_7.1,gdpr_IV_35.7.d,gdpr_IV_32.2,hipaa_164.312.b,nist_800_53_AU.14,nist_800_53_AC.7,nist_800_53_AU.6,tsc_CC6.1,tsc_CC6.8,tsc_CC7.2,tsc_CC7.3,</group>
+        <group>authentication_failed,gdpr_IV_35.7.d,gdpr_IV_32.2,gpg13_7.1,hipaa_164.312.b,invalid_login,nist_800_53_AU.14,nist_800_53_AC.7,nist_800_53_AU.6,pci_dss_10.2.4,pci_dss_10.2.5,pci_dss_10.6.1,tsc_CC6.1,tsc_CC6.8,tsc_CC7.2,tsc_CC7.3,</group>
       </rule>
 
-The rule **5710** looks for matching text "*illegal user*" or "*invalid user*" to appear in any log event that has already triggered its parent rule **5700**.
-
-Parent rule **5700** simply detects all sshd events and has a number of child rules that are used to fire on specific sshd event patterns, just like rule **5710** does.
+      
+The rule **5710** looks for matching text "*illegal user*" or "*invalid user*" to appear in any log event that has already triggered its parent rule **5700**. Rule **5700** simply detects all sshd events and has a number of child rules that are used to fire on specific sshd event patterns, just like rule **5710** does. 
 
 Because these rules deal with individual events with no correlation across separate events, they are called ``atomic rules``.
 
 However, after we repeated our SSH logon failure a number of times, another rule fired.
 
-If you scroll back up in the Wazuh dashboard and look for an event with the following description: "*sshd: brute force trying to get access to the system*" which should be the first or nearly the first entry in your results. If not, you will need to repeat the `attack <ssh-brute-force.html#attack>`_ making sure you do it 8 times in less than 2 minutes.
+If you scroll back up in the Wazuh dashboard and look for an event with the following description: "*sshd: brute force trying to get access to the system. Non existent user.*" which should be the first or nearly the first entry in your results. If not, repeat the `attack <ssh-brute-force.html#attack>`_ making sure you do it 8 times in less than 2 minutes.
 
 Expand that record to take a closer look.
 
 .. thumbnail:: ../images/learning-wazuh/labs/brute-3.png
-    :title: brute
+    :title: Rule 5712: "sshd: brute force trying to get access to the system. Non existent user."
     :align: center
     :width: 80%
 
@@ -226,127 +227,122 @@ Let's look into this new rule **5712** and see why was it triggered.
     /var/ossec/ruleset/rules/0095-sshd_rules.xml
       <rule id="5712" level="10" frequency="8" timeframe="120" ignore="60">
         <if_matched_sid>5710</if_matched_sid>
-        <description>sshd: brute force trying to get access to </description>
-        <description>the system.</description>
+        <same_source_ip />
+        <description>sshd: brute force trying to get access to the system. Non existent user.</description>
         <mitre>
           <id>T1110</id>
         </mitre>
-        <same_source_ip />
-        <group>authentication_failures,pci_dss_11.4,pci_dss_10.2.4,pci_dss_10.2.5,gdpr_IV_35.7.d,gdpr_IV_32.2,hipaa_164.312.b,nist_800_53_SI.4,nist_800_53_AU.14,nist_800_53_AC.7,tsc_CC6.1,tsc_CC6.8,tsc_CC7.2,tsc_CC7.3,</group>
+        <group>authentication_failures,gdpr_IV_35.7.d,gdpr_IV_32.2,hipaa_164.312.b,nist_800_53_SI.4,nist_800_53_AU.14,nist_800_53_AC.7,pci_dss_11.4,pci_dss_10.2.4,pci_dss_10.2.5,tsc_CC6.1,tsc_CC6.8,tsc_CC7.2,tsc_CC7.3,</group>
       </rule>
 
-The rule **5712** is a special kind of child rule to rule **5710**.
 
-It is only triggered if its parent rule, **5710**, fires on events involving the same source IP address at least eight times in a **120** second period.
 
-The severity level of this rule is higher (10) than the previous one (only 5) because a cluster of SSH login failure attempts from the same source is commonly a sign of a brute force attack.
+The rule **5712** is a special kind of child rule to rule **5710**. It is only triggered if its parent rule, **5710**, fires on events involving the same source IP address at least eight times in a **120** second period.
 
-This kind of rule is correlating multiple events over time and is thus called a ``composite rule``.
+The severity level of this rule is higher (10) than the previous one (only 5) because a cluster of SSH login failure attempts from the same source is commonly a sign of a brute force attack. This kind of rule is correlating multiple events over time and is thus called a ``composite rule``.
 
 Testing the rules with wazuh-logtest
 ------------------------------------
 
-The ``wazuh-logtest`` tool is very helpful for finding out from the command line what log entries would
-fire what rules and why, without actually generating real alerts in your system.
-
-It is an essential tool for developing, tuning, and debugging rules.
+The ``wazuh-logtest`` tool is very helpful for finding out from the command line what log entries would fire what rules and why, without actually generating real alerts in your system. It is an essential tool for developing, tuning, and debugging rules.
 
 The actual log line generated by sshd when we tried to log in via ssh as "*blimey*" looks like this:
 
 .. code-block:: none
-    :class: output
 
-    Oct 15 21:07:56 linux-agent sshd[29205]: Invalid user blimey from 18.18.18.18 port 48928
+   May 23 08:43:31 linux-agent sshd[4662]: Invalid user blimey from 18.18.18.18 port 49636
 
-On wazuh-manager, run the wazuh-logtest command and then paste in the above line and press <Enter>.
+On the Wazuh manager, run the ``wazuh-logtest`` command, paste the sshd log and press <Enter>.
 
 .. code-block:: none
 
-    [root@wazuh-manager centos]# /var/ossec/bin/wazuh-logtest
+   # /var/ossec/bin/wazuh-logtest
 
 You should see an analysis of the event and the resulting rule **5710** match like this:
 
 .. code-block:: none
-    :class: output
+  :class: output
 
-    Type one log per line
-
-    Oct 15 21:07:56 linux-agent sshd[29205]: Invalid user blimey from 18.18.18.18 port 48928
-
-    **Phase 1: Completed pre-decoding.
-            full event: 'Oct 15 21:07:56 linux-agent sshd[29205]: Invalid user blimey from 18.18.18.18 port 48928'
-            timestamp: 'Oct 15 21:07:56'
-            hostname: 'linux-agent'
-            program_name: 'sshd'
-
-    **Phase 2: Completed decoding.
-            name: 'sshd'
-            parent: 'sshd'
-            srcip: '18.18.18.18'
-            srcport: '48928'
-            srcuser: 'blimey'
-
-    **Phase 3: Completed filtering (rules).
-            id: '5710'
-            level: '5'
-            description: 'sshd: Attempt to login using a non-existent user'
-            groups: '['syslog', 'sshd', 'invalid_login', 'authentication_failed']'
-            firedtimes: '1'
-            gdpr: '['IV_35.7.d', 'IV_32.2']'
-            gpg13: '['7.1']'
-            hipaa: '['164.312.b']'
-            mail: 'False'
-            mitre.id: '['T1110']'
-            mitre.tactic: '['Credential Access']'
-            mitre.technique: '['Brute Force']'
-            nist_800_53: '['AU.14', 'AC.7', 'AU.6']'
-            pci_dss: '['10.2.4', '10.2.5', '10.6.1']'
-            tsc: '['CC6.1', 'CC6.8', 'CC7.2', 'CC7.3']'
-    **Alert to be generated.
+   Type one log per line
+   
+   May 23 08:43:31 linux-agent sshd[4662]: Invalid user blimey from 18.18.18.18 port 49636
+   
+   **Phase 1: Completed pre-decoding.
+   	full event: 'May 23 08:43:31 linux-agent sshd[4662]: Invalid user blimey from 18.18.18.18 port 49636'
+   	timestamp: 'May 23 08:43:31'
+   	hostname: 'linux-agent'
+   	program_name: 'sshd'
+   
+   **Phase 2: Completed decoding.
+   	name: 'sshd'
+   	parent: 'sshd'
+   	srcip: '18.18.18.18'
+   	srcport: '49636'
+   	srcuser: 'blimey'
+   
+   **Phase 3: Completed filtering (rules).
+   	id: '5710'
+   	level: '5'
+   	description: 'sshd: Attempt to login using a non-existent user'
+   	groups: '['syslog', 'sshd', 'authentication_failed', 'invalid_login']'
+   	firedtimes: '1'
+   	gdpr: '['IV_35.7.d', 'IV_32.2']'
+   	gpg13: '['7.1']'
+   	hipaa: '['164.312.b']'
+   	mail: 'False'
+   	mitre.id: '['T1110.001', 'T1021.004', 'T1078']'
+   	mitre.tactic: '['Credential Access', 'Lateral Movement', 'Defense Evasion', 'Persistence', 'Privilege Escalation', 'Initial Access']'
+   	mitre.technique: '['Password Guessing', 'SSH', 'Valid Accounts']'
+   	nist_800_53: '['AU.14', 'AC.7', 'AU.6']'
+   	pci_dss: '['10.2.4', '10.2.5', '10.6.1']'
+   	tsc: '['CC6.1', 'CC6.8', 'CC7.2', 'CC7.3']'
+   **Alert to be generated.
+   
 
 .. note::
 
     When wazuh-logtest indicates ``**Alert to be generated.`` it means that an alert *would* be generated if the tested event were
-    to occur outside of the wazuh-logtest environment.  The wazuh-logtest tool will never cause records to be written to alerts.log or
-    alerts.json, and thus you will never see anything in the Wazuh dashboard caused by an wazuh-logtest test.
+    to occur outside of the wazuh-logtest environment.  The wazuh-logtest tool will never cause records to be written to ``alerts.log`` or
+    ``alerts.json``, and thus you will never see anything in the Wazuh dashboard caused by an wazuh-logtest test.
 
 Paste that log record in a number of times.  On the 8th time, you should see a rule **5712** match instead:
 
 .. code-block:: none
-    :class: output
+  :class: output
 
-    **Phase 1: Completed pre-decoding.
-            full event: 'Oct 15 21:07:56 linux-agent sshd[29205]: Invalid user blimey from 18.18.18.18 port 48928'
-            timestamp: 'Oct 15 21:07:56'
-            hostname: 'linux-agent'
-            program_name: 'sshd'
+   **Phase 1: Completed pre-decoding.
+   	full event: 'May 23 08:43:31 linux-agent sshd[4662]: Invalid user blimey from 18.18.18.18 port 49636'
+   	timestamp: 'May 23 08:43:31'
+   	hostname: 'linux-agent'
+   	program_name: 'sshd'
+   
+   **Phase 2: Completed decoding.
+   	name: 'sshd'
+   	parent: 'sshd'
+   	srcip: '18.18.18.18'
+   	srcport: '49636'
+   	srcuser: 'blimey'
+   
+   **Phase 3: Completed filtering (rules).
+   	id: '5712'
+   	level: '10'
+   	description: 'sshd: brute force trying to get access to the system. Non existent user.'
+   	groups: '['syslog', 'sshd', 'authentication_failures']'
+   	firedtimes: '1'
+   	frequency: '8'
+   	gdpr: '['IV_35.7.d', 'IV_32.2']'
+   	hipaa: '['164.312.b']'
+   	mail: 'False'
+   	mitre.id: '['T1110']'
+   	mitre.tactic: '['Credential Access']'
+   	mitre.technique: '['Brute Force']'
+   	nist_800_53: '['SI.4', 'AU.14', 'AC.7']'
+   	pci_dss: '['11.4', '10.2.4', '10.2.5']'
+   	tsc: '['CC6.1', 'CC6.8', 'CC7.2', 'CC7.3']'
+   **Alert to be generated.
 
-    **Phase 2: Completed decoding.
-            name: 'sshd'
-            parent: 'sshd'
-            srcip: '18.18.18.18'
-            srcport: '48928'
-            srcuser: 'blimey'
 
-    **Phase 3: Completed filtering (rules).
-            id: '5712'
-            level: '10'
-            description: 'sshd: brute force trying to get access to the system.'
-            groups: '['syslog', 'sshd', 'authentication_failures']'
-            firedtimes: '1'
-            frequency: '8'
-            gdpr: '['IV_35.7.d', 'IV_32.2']'
-            hipaa: '['164.312.b']'
-            mail: 'False'
-            mitre.id: '['T1110']'
-            mitre.tactic: '['Credential Access']'
-            mitre.technique: '['Brute Force']'
-            nist_800_53: '['SI.4', 'AU.14', 'AC.7']'
-            pci_dss: '['11.4', '10.2.4', '10.2.5']'
-            tsc: '['CC6.1', 'CC6.8', 'CC7.2', 'CC7.3']'
-    **Alert to be generated.
-
-Press Control+C to exit wazuh-logtest.
+Press Control+C to exit ``wazuh-logtest``.
 
 Congratulations on the completion of your first **Learning Wazuh** lab!
 
