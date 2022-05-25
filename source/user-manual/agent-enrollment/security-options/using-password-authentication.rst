@@ -39,7 +39,9 @@ Before an agent can be enrolled to the Wazuh manager using the password authenti
 
 #. Create a password to be used for agent enrollment. This can be achieved in two ways:
 
-   #. **Recommended** - By creating the file ``/var/ossec/etc/authd.pass`` on the manager and including your own password there. We recommend this method for creating the agent enrollment password. This can be done by running the line below in the terminal and subsequently restarting the Wazuh manager.
+   #. **Recommended** - By creating the file ``/var/ossec/etc/authd.pass`` on the manager and including your own password there. 
+
+      We recommend this method for creating the agent enrollment password. This can be done by running the line below in the terminal and subsequently restarting the Wazuh manager.
 
       .. code-block:: console
 
@@ -65,16 +67,14 @@ Before an agent can be enrolled to the Wazuh manager using the password authenti
 
       After this, restart the Wazuh service for the changes to take effect.
 
-         .. code-block:: console
-
-            # systemctl restart wazuh-manager
+         .. include:: /_templates/common/restart_manager.rst
 
 
-   #. By allowing the enrollment service to set a random password. Having added the ``<use_password>yes</use_password>`` configuration to the Wazuh manager, proceed to restart the manager.
+   #. By allowing the enrollment service to set a random password. 
+   
+      Having added the ``<use_password>yes</use_password>`` configuration to the Wazuh manager, proceed to restart the manager.
 
-      .. code-block:: console
-
-         # systemctl restart wazuh-manager
+      .. include:: /_templates/common/restart_manager.rst
       
       This will cause the enrollment service to generate a random password. This password can then be found in ``/var/ossec/logs/ossec.log``. Run the following command to get the agent enrollment password.
 
