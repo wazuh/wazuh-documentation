@@ -5,60 +5,43 @@
 Detect an RDP brute force attack
 ================================
 
-Here you will wage a small RDP brute force attack against your Windows Agent instance.
-
-You will see how Wazuh detects and alerts on each login failure, and how a higher severity
+Here you will wage a small RDP brute force attack against your Windows Agent instance. You will see how Wazuh detects and alerts on each login failure, and how a higher severity
 alert is produced when enough login failures are seen.
-
-Lastly you will take a closer look at the decoders and rules involved in the detection of your "attack".
 
 Perform the attack
 ------------------
 
-Using a Windows Remote Desktop client, attempt to log in as user "*george*" to your Windows Agent instance
-eight times in a fairly small time window.
+Using a Windows Remote Desktop client, attempt to log in as user "george" to your Windows Agent instance eight times in a fairly small time window.
 
 
 See the resulting alerts in the Wazuh dashboard
 -----------------------------------------------
 
 
-1. On the Wazuh dashboard, go to **[Security events]**, search for "*george*" and then click on **[Discover]** on the top right corner.
+#. On the Wazuh dashboard, go to **Wazuh** > **Modules** > **Security events** and search for "george".
 
-2. On ``Discover``, you can personalize how to visualize the alerts. If you look at the menu on the left, click on the button next to ``Available fields``, introduce the field you are looking for in ``Field name`` and click on **[add]**. We will be using the 4 fields stated below.
+#. You can personalize how to visualize the alerts. You can add fields like `data.win.eventdata.targetUserName` and `data.win.eventdata.ipAddress` by searching for them on the left column and clicking on the add button. 
 
+#. Inspect the events which will look similar to this:
 
-  - rule.description
-  - rule.id
-  - data.win.eventdata.targetUserName
-  - data.win.eventdata.ipAddress
-
-
+   .. thumbnail:: ../images/learning-wazuh/labs/win-brute.png
+      :align: center
+      :width: 80%
 
 
-3. Inspect the events which will look similar to this:
-
-  .. thumbnail:: ../images/learning-wazuh/labs/win-brute.png
-    :align: left
-    :width: 100%
-
-
-4. Notice how the lower level "*Windows: Logon Failure*" alert is triggered several times,
-   followed by the higher level "Multiple Windows Logon Failures" alert.
-   This process may repeat itself depending on the total number of logon failures seen.
+#. Notice how the lower level "Logon failure - Unknown user or bad password." alert is triggered several times, followed by the higher level "Multiple Windows Logon Failures" alert. This process may repeat itself depending on the total number of logon failures seen.
 
 
 
 Where could things proceed from here?
 -------------------------------------
 
-The generation of the "Multiple Windows Logon Failures" does not have to be the end of the story for this log event.
-Other things that could additionally or alternatively take place might be:
+The generation of the "Multiple Windows Logon Failures" does not have to be the end of the story for this log event. Other things that could additionally or alternatively take place might be:
 
-1. An email, Slack, or PagerDuty message could be generated about this alert.
+#. An email, Slack, or PagerDuty message could be generated about this alert.
 
-2. A high severity local rule of your own making, child of rule 60204, could fire if the attacked account name specifically matches your secret Windows admin account name.
+#. A high severity local rule of your own making, child of rule 60204, could fire if the attacked account name specifically matches your secret Windows admin account name.
 
-3. An active response could be triggered causing windows-agent to null-route the attacking IP address.
+#. An active response could be triggered causing the windows-agent to null-route the attacking IP address.
 
-This concludes the RDP brute force attack lab.  We hope you enjoyed it!
+This concludes the RDP brute force attack lab. We hope you enjoyed it!
