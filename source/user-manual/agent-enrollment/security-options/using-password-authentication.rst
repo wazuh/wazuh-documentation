@@ -41,52 +41,42 @@ Before an agent can be enrolled to the Wazuh manager using the password authenti
 
    #. **Recommended** - By creating the file ``/var/ossec/etc/authd.pass`` on the manager and including your own password there. 
 
-      We recommend this method for creating the agent enrollment password. This can be done by running the line below in the terminal and subsequently restarting the Wazuh manager.
+      #. Replace ``<custom_password>`` with your chosen agent enrollment password and run the following command: 
 
-      .. code-block:: console
+         .. code-block:: console
 
-         # echo "<custom_password>" > /var/ossec/etc/authd.pass
+            # echo "<custom_password>" > /var/ossec/etc/authd.pass
 
-      Note that you have to replace ``<custom_password>`` with your own agent enrollment password.
 
-      File permissions for the authd.pass file should be set to 644 and the owner should be root. The permissions and ownership can be configured by running the commands below:
+      #. Change the ``authd.pass`` file permissions and ownership: 
 
          .. code-block:: console
 
             # chmod 644 /var/ossec/etc/authd.pass
             # chown root:wazuh /var/ossec/etc/authd.pass
 
-
-      The output below shows the recommended file owner and permissions.
-
-         .. code-block:: xml
-           :class: output
-
-            -rw-r--r-- 1 root wazuh 9 Jan 11 12:50 /var/ossec/etc/authd.pass
-
-
-      After this, restart the Wazuh service for the changes to take effect.
+      #. Restart the Wazuh service for the changes to take effect.
 
          .. include:: /_templates/common/restart_manager.rst
 
 
    #. By allowing the enrollment service to set a random password. 
    
-      Having added the ``<use_password>yes</use_password>`` configuration to the Wazuh manager, proceed to restart the manager.
+      #. Restart the manager so the enrollment service will generate a random password. This password will be stored in ``/var/ossec/logs/ossec.log``. 
 
-      .. include:: /_templates/common/restart_manager.rst
+         .. include:: /_templates/common/restart_manager.rst
       
-      This will cause the enrollment service to generate a random password. This password can then be found in ``/var/ossec/logs/ossec.log``. Run the following command to get the agent enrollment password.
+      #. Run the following command to get the agent enrollment password: 
 
-      .. code-block:: console
+         .. code-block:: console
 
-         # grep "Random password" /var/ossec/logs/ossec.log
+            # grep "Random password" /var/ossec/logs/ossec.log
 
   
-      .. code-block:: xml
-        :class: output   
+         .. code-block:: xml
+            :class: output   
 
-         2022/01/11 12:41:35 wazuh-authd: INFO: Accepting connections on port 1515. Random password chosen for agent authentication: 6258b4eb21550e4f182a08c10d94585e
+            2022/01/11 12:41:35 wazuh-authd: INFO: Accepting connections on port 1515. Random password chosen for agent authentication: 6258b4eb21550e4f182a08c10d94585e
 
 
 .. note::
@@ -123,14 +113,14 @@ The following steps serve as a guide on how to enroll a Linux/Unix endpoint with
       The output below shows the recommended file owner and permissions.
 
       .. code-block:: xml
-        :class: output 
+         :class: output 
 
          -rw-r--r-- 1 root wazuh 18 Jan 11 13:03 /var/ossec/etc/authd.pass
 
 #. Add the Wazuh manager IP address or DNS name in the ``<client><server><address>`` section of the agent configuration file ``/var/ossec/etc/ossec.conf``.
 
    .. code-block:: xml
-     :emphasize-lines: 3
+      :emphasize-lines: 3
 
       <client>
          <server>
@@ -197,7 +187,7 @@ The Wazuh agent installation directory depends on the architecture of the host.
 #. Add the Wazuh manager IP address or DNS name in the ``<client><server><address>`` section of ``C:\Program Files (x86)\ossec-agent\ossec.conf``:
 
    .. code-block:: xml
-     :emphasize-lines: 3
+      :emphasize-lines: 3
 
       <client>
          <server>
@@ -259,14 +249,14 @@ The following steps serve as a guide on how to enroll a macOS endpoint with pass
       The output below shows the recommended file owner and permissions:
 
       .. code-block:: xml
-        :class: output 
+         :class: output 
 
          -rw-r--r-- 1 root wazuh 18 Jan 11 13:03 /Library/Ossec/etc/authd.pass
 
 #. Add the Wazuh manager IP address or DNS name in the ``<client><server><address>`` section of ``/Library/Ossec/etc/ossec.conf``:
 
    .. code-block:: xml
-     :emphasize-lines: 3      
+      :emphasize-lines: 3      
 
       <client>
         <server>
