@@ -1,10 +1,12 @@
+.. Copyright (C) 2022 Wazuh, Inc.
+
+.. meta::
+  :description: Check cloud-related terms in this glossary to expand your knowledge and get the most out of the Wazuh Cloud service. 
+
 .. _cloud_service_glossary:
 
 Glossary
 ========
-
-.. meta::
-  :description: Check cloud-related terms in this glossary to expand your knowledge and get the most out of the Wazuh Cloud service. 
 
 Here is a list of terms related to Wazuh Cloud.
   

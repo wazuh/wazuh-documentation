@@ -1,4 +1,7 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2022 Wazuh, Inc.
+
+.. meta::
+  :description: Wazuh Cloud supports API key-based authentication. Learn how to obtain and revoke an API key directly from the Wazuh Cloud Console.
 
 .. _cloud_account_apis_authentication:
 
@@ -6,9 +9,6 @@
 
 Authentication
 ==============
-
-.. meta::
-  :description: Wazuh Cloud supports API key-based authentication. Learn how to obtain and revoke an API key directly from the Wazuh Cloud Console.
 
 Wazuh Cloud supports only API key-based authentication.
 
