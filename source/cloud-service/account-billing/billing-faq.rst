@@ -1,12 +1,12 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
+.. meta::
+  :description: Get answers to the most frequently asked questions about billing in this FAQ. Explore the potential of Wazuh Cloud and the Wazuh Cloud Console.
+
 .. _cloud_account_billing_faq:
 
 Billing FAQ
 ===========
-
-.. meta::
-  :description: Get answers to the most frequently asked questions about billing in this FAQ. Explore the potential of Wazuh Cloud and the Wazuh Cloud Console.
 
 - `When is my credit card charged?`_
 
