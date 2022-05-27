@@ -21,6 +21,7 @@ Welcome to the Wazuh user manual. Use it as your Wazuh reference library once yo
         agent-enrollment/index
         agents/index
         configuring-cluster/index
+        wazuh-indexer-tuning
         capabilities/index
         ruleset/index
         api/index
