@@ -1,9 +1,11 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
-.. _azure_monitoring_instances:
-
 .. meta::
   :description: Discover the numerous ways that Wazuh provides to monitor your Microsoft Azure instances.
+
+
+.. _azure_monitoring_instances:
+
 
 Monitoring instances
 ====================

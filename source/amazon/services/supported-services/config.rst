@@ -1,5 +1,8 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+  :description: AWS Config is a service that allows users to evaluate the configurations of their AWS resources.
+
 .. _amazon_config:
 
 AWS Config
