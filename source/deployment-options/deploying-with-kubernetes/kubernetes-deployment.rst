@@ -1,4 +1,5 @@
 .. Copyright (C) 2022 Wazuh, Inc.
+
 .. meta::
   :description: Learn more about Kubernetes deployment with Wazuh. 
 

@@ -2,6 +2,7 @@
 
 .. meta::
   :description: Check out the Wazuh documentation to learn how to create a WPK package. Wazuh provides an automated way of building WPK packages using docker.
+
 .. _create-wpk:
 
 WPK
