@@ -124,12 +124,116 @@ To prevent any Wazuh indexer memory from being swapped out, configure the Wazuh 
 
       Unable to lock JVM Memory
 
-..
-   References:
+Shards and replicas
+-------------------
 
-     - `Memory lock check <https://www.elastic.co/guide/en/elasticsearch/reference/current/_memory_lock_check.html>`_.
-     - `bootstrap.memory_lock <https://www.elastic.co/guide/en/elasticsearch/reference/current/important-settings.html#bootstrap.memory_lock>`_.
-     - `Enable bootstrap.memory_lock <https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-configuration-memory.html#mlockall>`_.
-     - `Heap: Sizing and Swapping <https://www.elastic.co/guide/en/elasticsearch/guide/current/heap-sizing.html>`_.
-     - `Limiting memory usage <https://www.elastic.co/guide/en/elasticsearch/guide/current/_limiting_memory_usage.html#_limiting_memory_usage>`_.
+The Wazuh indexer offers the possibility to split an index into multiple segments called shards. Each shard is in itself a fully functional and independent "index" that can be hosted on any node in the cluster. The splitting is important for two main reasons:
 
+-  Horizontal scalation.
+-  Distribute and parallelize operations across shards, increasing the performance and throughput.
+
+In addition, the Wazuh indexer allows the user to make one or more copies of the index shards in what are called replica shards, or replicas for short. Replication is important for two main reasons:
+
+-  Provides high availability in case a shard or a node fails.
+-  Allows the search volume and the throughput to scale since searches can be executed on all replicas in parallel.
+
+**Number of shards for an index**
+
+Before creating the first index, consider carefully how many shards will be needed. It is not possible to change the number of shards without re-indexing.
+
+The number of shards for optimal performance depends on the number of nodes in the Wazuh indexer cluster. As a general rule, the number of shards must be the same as the number of nodes. For example, a cluster with three nodes should have three shards, while a cluster with one node would only need one.
+
+**Number of replicas for an index**
+
+The number of replicas depends on the available storage for the indices. Here is an example of how a Wazuh indexer cluster with three nodes and three shards could be set up.
+
+-  No replica: Each node has one shard. If one node goes down, an incomplete index of only two shards is available.
+-  One replica: Each node has one shard and one replica. If one node goes down, a full index is still available.
+-  Two replicas: Each node has the full index with one shard and two replicas. With this setup, the cluster continues operating even if two nodes go down. Although this seems to be the best solution, it increases the storage requirements.
+
+Setting the number of shards
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. warning::
+
+   The number of shards and replicas gets defined per index at the time of index creation. Once the index is created, although the number of replicas can be changed dynamically, the number of shards cannot be changed without `re-indexing <https://opensearch.org/docs/latest/opensearch/reindex-data/>`__.
+
+The default installation of the Wazuh indexer creates each index with three primary shards and no replicas. To change this, the new settings must be loaded on a template using the Wazuh indexer API.
+
+In the following example, we configure shards and replicas for a single-node Wazuh indexer cluster.
+
+#. Download the Wazuh indexer template.
+
+   .. code-block:: console
+
+      # curl https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/wazuh-indexer/7.x/wazuh-template.json -o w-indexer-template.json
+
+#. Edit ``w-indexer-template.json`` in order to set one shard. Set ``order`` to ``1`` to avoid Filebeat overwriting the existing template. Multiple matching templates with the same order result in a nondeterministic merging order.
+
+   .. code-block:: none
+      :class: output
+
+      {
+        "order": 1,
+        "index_patterns": [
+          "wazuh-alerts-4.x-*",
+          "wazuh-archives-4.x-*"
+        ],
+        "settings": {
+          "index.refresh_interval": "5s",
+          "index.number_of_shards": "1",
+          "index.number_of_replicas": "0",
+          "index.auto_expand_replicas": "0-1",
+          "index.mapping.total_fields.limit": 10000,
+          ...
+
+#. Load the new settings.
+
+   .. code-block:: console
+
+      # curl -X PUT "https://localhost:9200/_template/wazuh-custom" -H 'Content-Type: application/json' -d @w-indexer-template.json -k -u <ADMIN_USER>:<ADMIN_USER_PASSWORD>
+
+   .. code-block:: json
+      :class: output
+
+      {"acknowledged":true}
+
+#. Confirm that the configuration was successfully updated.
+
+   .. code-block:: console
+
+      # curl "https://localhost:9200/_template/wazuh-custom?pretty&filter_path=wazuh-custom.settings" -k -u <ADMIN_USER>:<ADMIN_USER_PASSWORD>
+
+   .. code-block:: none
+      :class: output
+
+      {
+        "wazuh-custom" : {
+          "settings" : {
+            "index" : {
+              "mapping" : {
+                "total_fields" : {
+                  "limit" : "10000"
+                }
+              },
+              "refresh_interval" : "5s",
+              "number_of_shards" : "1",
+              "auto_expand_replicas" : "0-1",
+              "number_of_replicas" : "0",
+              ...
+
+If the index had already been created, it must be `re-indexed <https://opensearch.org/docs/latest/opensearch/reindex-data/>`__.
+ 
+Changing the number of replicas
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The number of replicas can be changed dynamically using the Wazuh indexer API. In a single-node cluster, the number of replicas should be set to zero.
+
+.. code-block:: bash
+
+   curl -k -u <ADMIN_USER>:<ADMIN_USER_PASSWORD> -X PUT "https://localhost:9200/wazuh-alerts-\*/_settings?pretty" -H 'Content-Type: application/json' -d'
+   {
+     "settings" : {
+       "number_of_replicas" : 0
+     }
+   }'
