@@ -14,15 +14,6 @@ This section lists the changes in version 4.3.2. Every update of the Wazuh solut
 What's new
 ----------
 
-This release includes new features or enhancements.
-
-
-Wazuh dashboard
-^^^^^^^^^^^^^^^
-
-- Wazuh dashboard is now compatible with Wazuh 4.3.2.
-
-
 Wazuh Splunk app
 ^^^^^^^^^^^^^^^^
 
@@ -32,7 +23,7 @@ Wazuh Splunk app
 Resolved issues
 ---------------
 
-This release resolves known issues. 
+This release resolves a known issue. 
 
 Manager
 ^^^^^^^
