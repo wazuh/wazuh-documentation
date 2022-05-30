@@ -63,11 +63,11 @@ To prevent any Wazuh indexer memory from being swapped out, configure the Wazuh 
             -  For RPM, ``/etc/sysconfig/wazuh-indexer``
             -  For Debian, ``/etc/default/wazuh-indexer``
 
-#. Edit ``/etc/wazuh-indexer/jvm.options`` and change the JVM flags. Set the Wazuh indexer heap size to limit the memory usage.
+#. Edit ``/etc/wazuh-indexer/jvm.options`` and change the JVM flags. Set a Wazuh indexer heap size value to limit the memory usage.
 
    -  JVM heap limits prevent the ``OutOfMemory`` exception if the Wazuh indexer tried to allocate more memory than available due to the configuration in the previous step.
 
-   -  **Recommended value**: Half of system RAM. For example, set the size as follows for a 8 GB of RAM system.
+   -  **Recommended value**: Half of system RAM. For example, set the size as follows for a system with 8 GB of RAM.
 
       .. code-block:: yaml
 
@@ -124,6 +124,8 @@ To prevent any Wazuh indexer memory from being swapped out, configure the Wazuh 
 
       Unable to lock JVM Memory
 
+.. _shards_and_replicas:
+
 Shards and replicas
 -------------------
 
@@ -137,13 +139,15 @@ In addition, the Wazuh indexer allows the user to make one or more copies of the
 -  Provides high availability in case a shard or a node fails.
 -  Allows the search volume and the throughput to scale since searches can be executed on all replicas in parallel.
 
-**Number of shards for an index**
+.. rubric:: Number of shards for an index
+   :class: h4
 
 Before creating the first index, consider carefully how many shards will be needed. It is not possible to change the number of shards without re-indexing.
 
 The number of shards for optimal performance depends on the number of nodes in the Wazuh indexer cluster. As a general rule, the number of shards must be the same as the number of nodes. For example, a cluster with three nodes should have three shards, while a cluster with one node would only need one.
 
-**Number of replicas for an index**
+.. rubric:: Number of replicas for an index
+   :class: h4
 
 The number of replicas depends on the available storage for the indices. Here is an example of how a Wazuh indexer cluster with three nodes and three shards could be set up.
 
@@ -166,12 +170,13 @@ In the following example, we configure shards and replicas for a single-node Waz
 
    .. code-block:: console
 
-      # curl https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/wazuh-indexer/7.x/wazuh-template.json -o w-indexer-template.json
+      # curl https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/elasticsearch/7.x/wazuh-template.json -o w-indexer-template.json
 
-#. Edit ``w-indexer-template.json`` in order to set one shard. Set ``order`` to ``1`` to avoid Filebeat overwriting the existing template. Multiple matching templates with the same order result in a nondeterministic merging order.
+#. Edit ``w-indexer-template.json`` in order to set ``index.number_of_shards`` to ``1``. To avoid Filebeat overwriting the existing template, set ``order`` to ``1``. Multiple matching templates with the same order result in a nondeterministic merging order.
 
    .. code-block:: none
       :class: output
+      :emphasize-lines: 2,9
 
       {
         "order": 1,
@@ -206,6 +211,7 @@ In the following example, we configure shards and replicas for a single-node Waz
 
    .. code-block:: none
       :class: output
+      :emphasize-lines: 11
 
       {
         "wazuh-custom" : {
@@ -227,7 +233,7 @@ If the index had already been created, it must be `re-indexed <https://opensearc
 Changing the number of replicas
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The number of replicas can be changed dynamically using the Wazuh indexer API. In a single-node cluster, the number of replicas should be set to zero.
+The number of replicas can be changed dynamically using the Wazuh indexer API. In a single-node cluster, the number of replicas should be set to zero. This is accomplished by running the following command.
 
 .. code-block:: bash
 
