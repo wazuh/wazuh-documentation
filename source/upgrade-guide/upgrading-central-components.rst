@@ -149,11 +149,9 @@ Upgrading the Wazuh server
 
 When upgrading a multi-node Wazuh manager cluster, run the upgrade in every node to make all the Wazuh manager nodes join the cluster. Start with the master node to reduce server downtime.
 
+   .. note:: In upgrades from Wazuh 4.2.x or lower, the ``ossec`` system user and group are replaced by the ``wazuh`` system user and group. Before upgrading, make sure that there are not conflicts with this new user and group. 
+
 #. Upgrade the Wazuh manager to the latest version.
-
-   .. note::
-
-      If the ``/var/ossec/etc/ossec.conf`` configuration file was modified, it will not be replaced by the upgrade. You will therefore have to add the settings of the new capabilities manually. More information can be found in :doc:`/user-manual/index`.
 
    .. tabs::
 
@@ -168,6 +166,10 @@ When upgrading a multi-node Wazuh manager cluster, run the upgrade in every node
          .. code-block:: console
 
             # apt-get install wazuh-manager
+
+   .. note::
+
+      If the ``/var/ossec/etc/ossec.conf`` configuration file was modified, it will not be replaced by the upgrade. You will therefore have to add the settings of the new capabilities manually. More information can be found in :doc:`/user-manual/index`.
 
 
 #. Download the Wazuh module for Filebeat:
