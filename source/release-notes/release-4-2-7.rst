@@ -36,7 +36,7 @@ Manager
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#13616 <https://github.com/wazuh/wazuh/pull/13616>`_             This release resolves the segmentation fault reported at `#13612 <https://github.com/wazuh/wazuh/issues/13612>`_, when reporting a vulnerability whose CWE reference is null (according to the NVD feed). This problem happens when scanning agents running on Windows.
+`#13617 <https://github.com/wazuh/wazuh/pull/13617>`_             This release resolves Fixed a crash in Vuln Detector when scanning agents running on Windows (backport from 4.3.2).
 ==============================================================    =============
 
 
