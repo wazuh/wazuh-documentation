@@ -37,15 +37,15 @@ Before an agent can be enrolled to the Wazuh manager using the password authenti
        </auth>
  
 
-#. Create a password to be used for agent enrollment. This can be achieved in two ways:
+#. Set a password to be used with agent enrollment. This can be achieved in two ways:
 
-   #. **Recommended** - By creating the file ``/var/ossec/etc/authd.pass`` on the manager and including your own password there. 
+   #. **Recommended** - Setting your own password. This is done by creating the file ``/var/ossec/etc/authd.pass`` on the manager with your password.
 
-      #. Replace ``<custom_password>`` with your chosen agent enrollment password and run the following command: 
+      #. Replace ``<CUSTOM_PASSWORD>`` with your chosen agent enrollment password and run the following command: 
 
          .. code-block:: console
 
-            # echo "<custom_password>" > /var/ossec/etc/authd.pass
+            # echo "<CUSTOM_PASSWORD>" > /var/ossec/etc/authd.pass
 
 
       #. Change the ``authd.pass`` file permissions and ownership.
@@ -60,9 +60,9 @@ Before an agent can be enrolled to the Wazuh manager using the password authenti
          .. include:: /_templates/common/restart_manager.rst
 
 
-   #. By allowing the enrollment service to set a random password. Note that a new random password will be generated each time the service is restarted. 
+   #. Allowing the enrollment service to set a random password. A new random password is generated each time the Wazuh manager service is restarted. 
    
-      #. Restart the manager so the enrollment service will generate a random password. This password will be stored in ``/var/ossec/logs/ossec.log``. 
+      #. Restart the manager so the enrollment service generates a random password. This password is stored in ``/var/ossec/logs/ossec.log``. 
 
          .. include:: /_templates/common/restart_manager.rst
       
@@ -98,10 +98,10 @@ The following steps serve as a guide on how to enroll a Linux/Unix endpoint with
 
    .. code-block:: console
 
-      # echo "<custom_password>" > /var/ossec/etc/authd.pass
+      # echo "<CUSTOM_PASSWORD>" > /var/ossec/etc/authd.pass
 
 
-   #. You have to replace ``<custom_password>`` with the agents enrollment password created on the manager.
+   #. You have to replace ``<CUSTOM_PASSWORD>`` with the agents enrollment password created on the manager.
    #. File permissions for the ``authd.pass`` file should be set to 644 and the owner should be ``root``. The permissions and ownership can be configured by running the commands below:
 
       .. code-block:: console
@@ -180,9 +180,9 @@ The Wazuh agent installation directory depends on the architecture of the host.
 
    .. code-block:: console
       
-      # echo “<custom_password>” > "C:\Program Files (x86)\ossec-agent\authd.pass"
+      # echo “<CUSTOM_PASSWORD>” > "C:\Program Files (x86)\ossec-agent\authd.pass"
 
-   Note that you have to replace ``<custom_password>`` with the agents enrollment password created on the manager.
+   Note that you have to replace ``<CUSTOM_PASSWORD>`` with the agents enrollment password created on the manager.
 
 #. Add the Wazuh manager IP address or DNS name in the ``<client><server><address>`` section of ``C:\Program Files (x86)\ossec-agent\ossec.conf``:
 
@@ -236,9 +236,9 @@ The following steps serve as a guide on how to enroll a macOS endpoint with pass
 
    .. code-block:: console
 
-      # echo "<custom_password>" > /Library/Ossec/etc/authd.pass
+      # echo "<CUSTOM_PASSWORD>" > /Library/Ossec/etc/authd.pass
 
-   #. You have to replace ``<custom_password>`` with the agents enrollment password created on the manager.
+   #. You have to replace ``<CUSTOM_PASSWORD>`` with the agents enrollment password created on the manager.
    #. File permissions for the ``authd.pass`` file should be set to 644 and the owner should be root. The permissions and ownership can be configured by running the commands below:
 
       .. code-block:: console 
