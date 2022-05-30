@@ -43,12 +43,6 @@ if (!Scorer) {
   };
 }
 
-if (!splitQuery) {
-  function splitQuery(query) {
-    return query.split(/\s+/);
-  }
-}
-
 /**
  * Search Module
  */

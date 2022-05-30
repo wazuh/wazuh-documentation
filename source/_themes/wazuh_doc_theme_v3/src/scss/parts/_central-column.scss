@@ -117,6 +117,10 @@
     border-top: none;
     border-radius: 0 0 $rounded-corners $rounded-corners;
   }
+  
+  .highlighted {
+    display: inline-block;
+  }
 }
 
 /* Light theme -------------------------------------------------------------- */
@@ -128,6 +132,9 @@
     }
     .caption-text {
       color: $light-color-shaded-text;
+    }
+    .highlighted {
+      background-color: $light-color-global-toc-highlight;
     }
   }
 }
@@ -141,6 +148,10 @@
     }
     .caption-text {
       color: $dark-color-shaded-text-lighter;
+    }
+    .highlighted {
+      color: $dark-color-highlight-inline-text;
+      background-color: $dark-color-shadow;
     }
   }
 }
