@@ -35,7 +35,7 @@ To upgrade the Wazuh agent choose the appropriate tab for the desired operating 
 
         .. code-block:: console
 
-          # yum install wazuh-agent-3.13.3-1
+          # yum install wazuh-agent-3.13.4-1
 
         It is recommended to disable the Wazuh repository in order to avoid undesired upgrades and compatibility issues as the Wazuh agent should always be in the same or lower version than the Wazuh manager:
 
@@ -56,7 +56,7 @@ To upgrade the Wazuh agent choose the appropriate tab for the desired operating 
         .. code-block:: console
 
           # apt-get update
-          # apt-get install wazuh-agent=3.13.3-1
+          # apt-get install wazuh-agent=3.13.4-1
 
         It is recommended to disable the Wazuh repository in order to avoid undesired upgrades and compatibility issues as the Wazuh agent should always be in the same or lower version than the Wazuh manager:
 
