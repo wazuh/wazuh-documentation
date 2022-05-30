@@ -48,7 +48,7 @@ Before an agent can be enrolled to the Wazuh manager using the password authenti
             # echo "<custom_password>" > /var/ossec/etc/authd.pass
 
 
-      #. Change the ``authd.pass`` file permissions and ownership: 
+      #. Change the ``authd.pass`` file permissions and ownership.
 
          .. code-block:: console
 
@@ -60,7 +60,7 @@ Before an agent can be enrolled to the Wazuh manager using the password authenti
          .. include:: /_templates/common/restart_manager.rst
 
 
-   #. By allowing the enrollment service to set a random password. 
+   #. By allowing the enrollment service to set a random password. Note that a new random password will be generated each time the service is restarted. 
    
       #. Restart the manager so the enrollment service will generate a random password. This password will be stored in ``/var/ossec/logs/ossec.log``. 
 
