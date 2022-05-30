@@ -19,7 +19,7 @@ The Wazuh central components must share the same version numbers down to the pat
 
 The Wazuh manager version must always be **newer than or equal to**  the Wazuh agents versions. For example:
 
--  Wazuh manager |WAZUH_LATEST| and Wazuh agent 4.2.6
+-  Wazuh manager |WAZUH_LATEST| and Wazuh agent 4.2.7
 -  Wazuh manager |WAZUH_LATEST| and Wazuh agent |WAZUH_LATEST|
 
 The Wazuh manager is also compatible with OSSEC agents but not all capabilities are available with them. 
