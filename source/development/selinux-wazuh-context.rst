@@ -1,13 +1,12 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-   :description: The client.keys file stores the data used to authenticate secure agents. For more information, check this section of the Wazuh documentation.
+   :description: Learn how to use Security-Enhanced Linux (SELinux) with Wazuh to define access controls for the applications, processes, and files on a system.
 
 .. _selinux-wazuh-context:
 
 SELinux Wazuh context
 ======================
-
 
 Security-Enhanced Linux (SELinux) defines access controls for the applications, processes, and files on a system.
 
