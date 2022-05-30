@@ -236,7 +236,6 @@ newUrls['4.2'] = [
   '/release-notes/release-3-13-1.html',
   '/release-notes/release-3-13-2.html',
   '/release-notes/release-3-13-3.html',
-  '/release-notes/release-3-13-4.html',
   '/release-notes/release-4-0-0.html',
   '/release-notes/release-4-0-1.html',
   '/release-notes/release-4-0-2.html',
@@ -2170,6 +2169,7 @@ redirections.push(
 );
 
 newUrls['3.13'] = [
+  '/release-notes/release-3-13-4.html',
   '/release-notes/release_3_13_3.html',
   '/release-notes/release_3_13_2.html',
   '/getting-started/use_cases/index.html',
