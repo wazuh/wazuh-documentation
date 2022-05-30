@@ -14,7 +14,7 @@ This section lists the changes in version 3.13.4. More details about these chang
 Wazuh core
 ----------
 
-- This release resolves a crash in Vuln Detector when scanning agents running on Windows (backport from 4.3.2).
+- A crash in Vulnerability Detector when scanning agents running on Windows is now fixed (backport from 4.3.2).
 
 
 Wazuh Kibana app
