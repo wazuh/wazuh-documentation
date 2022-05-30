@@ -43,7 +43,7 @@ is_latest_release = False
 # The full version, including alpha/beta/rc tags
 # Important: use a valid branch (4.0) or, preferably, tag name (v4.0.0)
 release = '4.2'
-api_tag = 'v4.2.6'
+api_tag = 'v4.2.7'
 apiURL = 'https://raw.githubusercontent.com/wazuh/wazuh/'+api_tag+'/api/api/spec/spec.yaml'
 
 # -- General configuration ------------------------------------------------
@@ -475,16 +475,16 @@ def customReplacements(app, docname, source):
 
 custom_replacements = {
     "|CURRENT_MAJOR|" : "4.x",
-    "|WAZUH_LATEST|" : "4.2.6",
+    "|WAZUH_LATEST|" : "4.2.7",
     "|WAZUH_LATEST_MINOR|" : "4.2",
     "|WAZUH_PACKAGES_BRANCH|" : "4.2",
-    "|WAZUH_LATEST_ANSIBLE|" : "4.2.6",
-    "|WAZUH_LATEST_KUBERNETES|" : "4.2.6",
-    "|WAZUH_LATEST_PUPPET|" : "4.2.6",
+    "|WAZUH_LATEST_ANSIBLE|" : "4.2.7",
+    "|WAZUH_LATEST_KUBERNETES|" : "4.2.7",
+    "|WAZUH_LATEST_PUPPET|" : "4.2.7",
     "|WAZUH_LATEST_OVA|" : "4.2.6",
-    "|WAZUH_LATEST_AMI|" : "4.2.6",
-    "|WAZUH_LATEST_DOCKER|" : "4.2.6",
-    "|WAZUH_LATEST_AIX|" : "4.2.6",
+    "|WAZUH_LATEST_AMI|" : "4.2.7",
+    "|WAZUH_LATEST_DOCKER|" : "4.2.7",
+    "|WAZUH_LATEST_AIX|" : "4.2.7",
     "|WAZUH_LATEST_MINOR_AIX|" : "4.2",
     "|OPEN_DISTRO_LATEST|" : "1.13.2",
     "|ELASTICSEARCH_LATEST|" : "7.10.2",
@@ -500,7 +500,7 @@ custom_replacements = {
     "|OPENDISTRO_LATEST_KUBERNETES|" : "1.13.2",
     "|DOCKER_COMPOSE_VERSION|" : "1.28.3",
     "|SPLUNK_LATEST|" : "8.2.2",
-    "|WAZUH_SPLUNK_LATEST|" : "4.2.6",
+    "|WAZUH_SPLUNK_LATEST|" : "4.2.7",
     "|ELASTIC_6_LATEST|" : "6.8.8",
     "|WAZUH_REVISION_YUM_AGENT_I386|" : "1",
     "|WAZUH_REVISION_YUM_MANAGER_I386|" : "1",

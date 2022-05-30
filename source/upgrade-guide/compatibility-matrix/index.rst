@@ -135,13 +135,13 @@ The Wazuh app for Kibana requires compatibility between two different components
 +-----------------------------------+----------------------------------------+---------------------------+
 |              |WAZUH_LATEST|                | 7.12.1                                 |                           |
 +-----------------------------------+----------------------------------------+---------------------------+
-|              4.2.6                | 7.13.0, 7.13.1, 7.13.2, 7.13.3, 7.13.4 |                           |
+|              4.2.7                | 7.13.0, 7.13.1, 7.13.2, 7.13.3, 7.13.4 |                           |
 +-----------------------------------+----------------------------------------+---------------------------+
-|              4.2.6                | 7.14.0, 7.14.1, 7.14.2                 |                           |
+|              4.2.7                | 7.14.0, 7.14.1, 7.14.2                 |                           |
 +-----------------------------------+----------------------------------------+---------------------------+
 
 
-You can find more information on the `Wazuh app for Kibana repository <https://github.com/wazuh/wazuh-kibana-app#installation>`_, where you can check a more detailed compatibility matrix between the Wazuh app and Elastic Stack versions.
+You can find more information on the `Wazuh app for Kibana repository <https://github.com/wazuh/wazuh-kibana-app/wiki/Compatibility>`_, where you can check a more detailed compatibility matrix between the Wazuh app and Elastic Stack versions.
 
 Wazuh and Splunk app
 ^^^^^^^^^^^^^^^^^^^^

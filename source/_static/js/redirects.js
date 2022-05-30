@@ -254,6 +254,7 @@ newUrls['4.2'] = [
   '/release-notes/release-4-2-4.html',
   '/release-notes/release-4-2-5.html',
   '/release-notes/release-4-2-6.html',
+  '/release-notes/release-4-2-7.html',
   '/user-manual/api/securing-api.html',
   '/user-manual/configuring-cluster/cluster-management.html',
   '/user-manual/manager/manual-email-report/smtp-authentication.html',
@@ -2169,6 +2170,7 @@ redirections.push(
 );
 
 newUrls['3.13'] = [
+  '/release-notes/release-3-13-4.html',
   '/release-notes/release_3_13_3.html',
   '/release-notes/release_3_13_2.html',
   '/getting-started/use_cases/index.html',
