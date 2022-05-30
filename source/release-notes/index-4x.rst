@@ -11,7 +11,8 @@ This section summarizes the most important features of each Wazuh 4.x release.
 
     .. toctree::
         :maxdepth: 2
-        
+
+        release-4-3-2        
         release-4-3-1
         release-4-3-0
         release-4-2-6
