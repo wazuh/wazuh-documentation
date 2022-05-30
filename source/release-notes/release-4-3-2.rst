@@ -40,7 +40,7 @@ Manager
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#13617 <https://github.com/wazuh/wazuh/pull/13617>`_             This release resolves Fixed a crash in Vuln Detector when scanning agents running on Windows (backport from 4.3.2).
+`#13617 <https://github.com/wazuh/wazuh/pull/13617>`_             This release resolves a crash in Vuln Detector when scanning agents running on Windows (backport from 4.3.2).
 ==============================================================    =============
 
 
