@@ -1,5 +1,8 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+  :description: Learn more about the OpenSCAP wodle, an integration of OpenSCAP with Wazuh HIDS, in this FAQs section of our documentation. 
+  
 .. _oscap-faq:
 
 FAQ
