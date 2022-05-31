@@ -485,7 +485,7 @@ custom_replacements = {
     "|ELASTICSEARCH_LATEST_DOCKER|" : "7.8.0",
     "|SPLUNK_LATEST|" : "8.0.4",
     "|ELASTIC_6_LATEST|" : "6.8.8",
-    "|WAZUH_LATEST_AIX|" : "3.13.4",
+    "|WAZUH_LATEST_AIX|" : "3.13.2",
     "|WAZUH_REVISION_AIX|" : "1",
     "|WAZUH_REVISION_YUM_AGENT_I386|" : "1",
     "|WAZUH_REVISION_YUM_MANAGER_I386|" : "1",
