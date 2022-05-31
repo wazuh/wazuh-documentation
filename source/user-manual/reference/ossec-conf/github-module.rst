@@ -101,10 +101,10 @@ Specifies the delay time of the scan respect to the current time, by default it 
 
 .. note::
 
-    This parameter represent how close to current time the module will collect events, as smaller is the value, closer to real time the collection will be, the issue is sometimes github app inserts events from some seconds ago, and github delay increase the chance to lose events. it's recommended to use values over 30 seconds.
+    This parameter represents how close to the current time the module will collect events, the smaller the value, the closer to real time the collection will be. The problem is that sometimes the GitHub delay increases the chance of missing events. It is recommended to use values greater than 30 seconds.
 
 +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-| **Default value**  | 1s                                                                                                                                      |
+| **Default value**  | 30s                                                                                                                                     |
 +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
 | **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days) |
 +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
