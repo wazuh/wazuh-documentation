@@ -20,11 +20,12 @@ body {
   .navbar-brand {
     padding: 0;
     margin: 0;
-    img {
-      height: 35px;
-    }
     .logo-link {
-      height: 34px;
+      height: 36px;
+      svg {
+        height: 36px;
+        width: auto;
+      }
     }
   }
 }
@@ -381,6 +382,9 @@ main {
     .form-control {
       background: $light-color-index-header-background;
     }
+    svg {
+      fill: $light-color-main-text-extra;
+    }
   }
 
   /* Getting started */
@@ -535,6 +539,9 @@ main {
     }
     .form-control {
       background: $dark-color-index-header-background;
+    }
+    svg {
+      fill: $dark-color-main-text;
     }
   }
 
