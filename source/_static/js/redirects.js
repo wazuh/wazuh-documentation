@@ -75,6 +75,7 @@ removedUrls['x.y'] = [
 
 newUrls['4.3'] = [
   '/release-notes/release-4-3-1.html',
+  '/release-notes/release-4-3-2.html',
   '/getting-started/use-cases/container-security.html',
   '/user-manual/agents/query-configuration.html',
   '/user-manual/elasticsearch/configure-indices.html',
@@ -1074,6 +1075,7 @@ newUrls['4.2'] = [
   '/release-notes/release-4-2-4.html',
   '/release-notes/release-4-2-5.html',
   '/release-notes/release-4-2-6.html',
+  '/release-notes/release-4-2-7.html',
   '/user-manual/api/securing-api.html',
   '/user-manual/configuring-cluster/cluster-management.html',
   '/user-manual/manager/manual-email-report/smtp-authentication.html',
