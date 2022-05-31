@@ -134,7 +134,7 @@
       color: $light-color-shaded-text;
     }
     .highlighted {
-      background-color: $light-color-global-toc-highlight;
+      background-color: $light-color-search-highlight-background;
     }
   }
 }
@@ -150,8 +150,8 @@
       color: $dark-color-shaded-text-lighter;
     }
     .highlighted {
-      color: $dark-color-highlight-inline-text;
-      background-color: $dark-color-shadow;
+      color: $dark-color-main-text;
+      background-color: $dark-color-search-highlight-background;
     }
   }
 }
