@@ -34,7 +34,7 @@ Out of the box, the Wazuh VM is configured with the following specifications:
   +------------------+----------------+--------------+--------------+
   |    Component     |   CPU (cores)  |   RAM (GB)   | Storage (GB) |
   +==================+================+==============+==============+
-  | Wazuh v4.3.2 OVA |       4        |      8       |     50       |
+  | Wazuh v4.3.3 OVA |       4        |      8       |     50       |
   +------------------+----------------+--------------+--------------+
 
 However, this hardware configuration can be modified depending on the number of protected endpoints and indexed alert data. More information about requirements can be found :doc:`here </quickstart>`. 
