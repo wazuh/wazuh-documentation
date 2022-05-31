@@ -134,14 +134,18 @@ The Wazuh app for Kibana requires compatibility between two different products:
 +   **API and Wazuh App version**   +     **Elastic Stack version**      +
 |                                   |                                    |
 +-----------------------------------+------------------------------------+
-|              3.13.4               | 7.8.0, 7.8.1, 7.9.0, 7.9.1, |ELASTICSEARCH_LATEST|  |
+|              3.13.4               | 7.8.0, 7.9.1, |ELASTICSEARCH_LATEST|                |
++-----------------------------------+------------------------------------+
+|              3.13.3               | 7.8.0, |ELASTICSEARCH_LATEST|                       |
++-----------------------------------+------------------------------------+
+|              3.13.2               | 7.8.0, 7.9.1                       |
 +-----------------------------------+------------------------------------+
 |              3.13.1               | 7.8.0, 7.8.1, 7.9.0, 7.9.1         |
 +-----------------------------------+------------------------------------+
 |              3.13.0               | 7.7.0, 7.7.1, 7.8.0                |
 +-----------------------------------+------------------------------------+
 
-You can find more information on the `Wazuh app for Kibana repository <https://github.com/wazuh/wazuh-kibana-app#installation>`_, where you can check a more detailed compatibility matrix between the Wazuh app and Elastic Stack versions.
+You can find more information on the `Wazuh app for Kibana repository <https://github.com/wazuh/wazuh-kibana-app/wiki/Compatibility>`_, where you can check a more detailed compatibility matrix between the Wazuh app and Elastic Stack versions.
 
 API and Splunk app
 ^^^^^^^^^^^^^^^^^^
@@ -156,7 +160,11 @@ The Splunk app for Wazuh requires compatibility between two different products:
 + **API and Splunk App version**  +    **Splunk version**     +
 |                                 |                           |
 +---------------------------------+---------------------------+
-|              3.13.4             |     7.3.5, |SPLUNK_LATEST|          |
+|              3.13.4             |     |SPLUNK_LATEST|                 |
++---------------------------------+---------------------------+
+|              3.13.3             |     |SPLUNK_LATEST|                 |     
++---------------------------------+---------------------------+
+|              3.13.2             |     7.3.5, |SPLUNK_LATEST|          |
 +---------------------------------+---------------------------+
 |              3.13.1             |     7.3.5, |SPLUNK_LATEST|          |
 +---------------------------------+---------------------------+
@@ -164,4 +172,4 @@ The Splunk app for Wazuh requires compatibility between two different products:
 +---------------------------------+---------------------------+
 
 
-You can find more information on the `Wazuh app repository <https://github.com/wazuh/wazuh-splunk#installation>`_, where you can check a more detailed compatibility matrix between the Wazuh app for Splunk and Splunk versions.
+You can find more information on the `Wazuh app repository <https://github.com/wazuh/wazuh-splunk/wiki/Compatibility>`_, where you can check a more detailed compatibility matrix between the Wazuh app for Splunk and Splunk versions.
