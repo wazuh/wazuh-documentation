@@ -35,8 +35,8 @@ This release resolves known issues.
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#13642 <https://github.com/wazuh/wazuh/pull/13642>`_             Prevent `Agentd` from resetting its configuration on client block re-definition.
-`#13651 <https://github.com/wazuh/wazuh/pull/13651>`_             Avoid creating duplicated client tags during deployment. 
+`#13642 <https://github.com/wazuh/wazuh/pull/13642>`_             Prevent `Agentd` from resetting its configuration on ``<client>`` block re-definition.
+`#13651 <https://github.com/wazuh/wazuh/pull/13651>`_             Avoid creating duplicated ``<client>`` configuration blocks during deployment. 
 ==============================================================    =============
 
 
