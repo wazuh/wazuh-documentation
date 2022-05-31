@@ -1,5 +1,8 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+  :description: Learn how the wazuh-clusterd program manages the Wazuh cluster communications between the managers belonging to the cluster and synchronizes all files.
+
 .. _clusterd:
 
 wazuh-clusterd

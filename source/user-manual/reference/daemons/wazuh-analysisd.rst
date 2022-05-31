@@ -1,5 +1,8 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+  :description: Learn how the ``wazuh-analysisd`` program receives the log messages and compares them to the rules.
+
 .. _wazuh-analysisd:
 
 wazuh-analysisd

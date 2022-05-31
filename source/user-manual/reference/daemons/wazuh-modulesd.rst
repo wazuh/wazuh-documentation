@@ -1,8 +1,9 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
-.. _wazuh-modulesd:
 .. meta::
   :description: The wazuh-modulesd program manages some Wazuh modules. Learn more about it in this section.
+
+.. _wazuh-modulesd:
 
 wazuh-modulesd
 ==============

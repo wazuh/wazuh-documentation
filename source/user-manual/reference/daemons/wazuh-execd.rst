@@ -1,5 +1,8 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+  :description: Learn how the wazuh-execd program runs active responses by initiating the configured scripts.
+
 .. _wazuh-execd:
 
 wazuh-execd

@@ -1,5 +1,8 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+  :description: Learn how the wazuh-csyslogd program forwards alerts via syslog.
+
 .. _wazuh-csyslogd:
 
 wazuh-csyslogd

@@ -1,5 +1,8 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+  :description: Know the Wazuh Daemons that perform different actions like communicating with the server or making integrity checks on systems.
+
 .. _daemons:
 
 Daemons
