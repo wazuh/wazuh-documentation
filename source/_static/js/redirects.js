@@ -76,6 +76,7 @@ removedUrls['x.y'] = [
 newUrls['4.3'] = [
   '/release-notes/release-4-3-1.html',
   '/release-notes/release-4-3-2.html',
+  '/release-notes/release-4-3-3.html',
   '/getting-started/use-cases/container-security.html',
   '/user-manual/agents/query-configuration.html',
   '/user-manual/elasticsearch/configure-indices.html',
