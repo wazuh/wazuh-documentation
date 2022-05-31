@@ -404,6 +404,7 @@ removedUrls['4.2'] = [
   '/release-notes/release_3_13_1.html',
   '/release-notes/release_3_13_2.html',
   '/release-notes/release_3_13_3.html',
+  '/release-notes/release_3_13_4.html',
   '/release-notes/release_4_0_0.html',
   '/release-notes/release_4_0_1.html',
   '/release-notes/release_4_0_2.html',
