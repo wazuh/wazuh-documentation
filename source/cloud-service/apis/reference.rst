@@ -1,7 +1,8 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
-  :description: Chek out the Wazuh Public API Reference here. 
+  :description: Check out the Wazuh Public API Reference in this section of the Wazuh documentation.
+
 
 .. _cloud_account_apis_reference:
 

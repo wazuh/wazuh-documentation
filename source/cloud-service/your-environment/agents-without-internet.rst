@@ -1,7 +1,7 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about how to connect agents without Internet access. Wazuh provides different approaches to securely connect your private network to your environment.
+  :description: Wazuh provides different approaches to connecting your private network securely. Learn more about how to connect agents without Internet here.
 
 .. _cloud_your_environment_agents_without_internet:
 

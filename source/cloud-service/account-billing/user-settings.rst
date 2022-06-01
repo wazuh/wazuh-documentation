@@ -1,7 +1,7 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
 .. meta::
-  :description: Check out how to edit your user settings on the Wazuh Cloud Console: update your email address, change your password, enable multi-factor authentication, and more. 
+  :description: Check out how to edit your user settings on the Wazuh Cloud Console. Learn more about it in this section of the documentation. 
 
 .. _cloud_user_settings:
 
