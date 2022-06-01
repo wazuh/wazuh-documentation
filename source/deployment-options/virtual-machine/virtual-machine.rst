@@ -31,11 +31,13 @@ The following requirements have to be in place before the Wazuh VM can be import
 
 Out of the box, the Wazuh VM is configured with the following specifications:
 
-  +------------------+----------------+--------------+--------------+
-  |    Component     |   CPU (cores)  |   RAM (GB)   | Storage (GB) |
-  +==================+================+==============+==============+
-  | Wazuh v4.3.3 OVA |       4        |      8       |     50       |
-  +------------------+----------------+--------------+--------------+
+.. |OVA_COMPONENT| replace:: Wazuh v|WAZUH_LATEST_OVA| OVA
+
++------------------+----------------+--------------+--------------+
+|    Component     |   CPU (cores)  |   RAM (GB)   | Storage (GB) |
++==================+================+==============+==============+
+| |OVA_COMPONENT|  |       4        |      8       |     50       |
++------------------+----------------+--------------+--------------+
 
 However, this hardware configuration can be modified depending on the number of protected endpoints and indexed alert data. More information about requirements can be found :doc:`here </quickstart>`. 
 
