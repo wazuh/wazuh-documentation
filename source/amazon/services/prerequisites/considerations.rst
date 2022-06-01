@@ -1,7 +1,7 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
-  :description: In this section, we show you some considerations that must be taken into account when configuring the Wazuh module for AWS.
+  :description: Learn about some considerations that must be taken into account when configuring the Wazuh module for AWS.
   
 .. _amazon_considerations:
 
@@ -72,7 +72,7 @@ Below there is an example of different services configuration:
       <only_logs_after>2018-JAN-01</only_logs_after>
     </service>
 
-    <!-- GuarDuty, 'production' profile -->
+    <!-- GuardDuty, 'production' profile -->
     <bucket type="guardduty">
       <name>wazuh-aws-wodle</name>
       <path>guardduty</path>

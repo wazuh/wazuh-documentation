@@ -1,7 +1,7 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about how to monitor AWS based services with Wazuh. In this section, you will learn more about installing dependencies. 
+  :description: Learn about the required dependencies for using the AWS integration in a Wazuh agent.
   
 .. _amazon_dependencies:
 
@@ -56,7 +56,7 @@ It is recommended to use a pip version greater than or equal to 19.3 to ease the
 Boto3
 -----
 
-`Boto3 <https://boto3.readthedocs.io/>`_ is the official package supported by Amazon to manage AWS resources. It will be used to download the log messages from the S3 Bucket or the log groups for the CloudWatch Logs service integration. The module is compatible with boto3 from ``1.13.1`` to ``1.17.76``. Future boto3 releases should maintain compatibility although it cannot be guaranteed.
+`Boto3 <https://boto3.readthedocs.io/>`_ is the official package supported by Amazon to manage AWS resources. It is used to download the log messages from the different AWS services supported by Wazuh. The module is compatible with boto3 from ``1.13.1`` to ``1.17.76``. Future boto3 releases should maintain compatibility although it cannot be guaranteed.
 
 To install boto3, execute the following command:
 

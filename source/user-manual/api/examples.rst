@@ -131,9 +131,12 @@ Code:
     urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
     # Functions
-    def get_response(url, headers, verify=False):
+    def get_response(request_method, url, headers, verify=False, body=None):
         """Get API result"""
-        request_result = requests.get(url, headers=headers, verify=verify)
+        if body is None:
+            body = {}
+
+        request_result = getattr(requests, request_method.lower())(url, headers=headers, verify=verify, data=body)
 
         if request_result.status_code == 200:
             return json.loads(request_result.content.decode())
@@ -144,11 +147,14 @@ Code:
     base_url = f"{protocol}://{host}:{port}"
     login_url = f"{base_url}/security/user/authenticate"
     basic_auth = f"{user}:{password}".encode()
-    headers = {'Authorization': f'Basic {b64encode(basic_auth).decode()}'}
-    headers['Authorization'] = f'Bearer {get_response(login_url, headers)["data"]["token"]}'
+    headers = {
+               'Authorization': f'Basic {b64encode(basic_auth).decode()}',
+               'Content-Type': 'application/json'
+               }
+    headers['Authorization'] = f'Bearer {get_response("POST", login_url, headers)["data"]["token"]}'
 
-    #Request
-    response = get_response(base_url + endpoint, headers)
+    # Request
+    response = get_response("GET", url=base_url + endpoint, headers=headers)
 
     # WORK WITH THE RESPONSE AS YOU LIKE
     print(json.dumps(response, indent=4, sort_keys=True))

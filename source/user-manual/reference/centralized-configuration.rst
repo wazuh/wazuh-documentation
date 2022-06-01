@@ -196,29 +196,29 @@ The following is an example of how a centralized configuration can be done.
 
 4. Confirm that the agent received the configuration:
 
-    The ``agent_groups`` tool or the Wazuh API endpoint :api-ref:`GET /agents/{agent_id}/group/is_sync <operation/api.controllers.agent_controller.get_sync_agent>` can show whether the group is synchronized in the agent:
+    The ``agent_groups`` tool or the Wazuh API endpoint :api-ref:`GET /agents <operation/api.controllers.agent_controller.get_agents>` can show whether the group configuration is synchronized in the agent or not:
 
     .. code-block:: console
 
-        # curl -k -X GET "https://localhost:55000/agents/001/group/is_sync?pretty=true" -H  "Authorization: Bearer $TOKEN"
+        # curl -k -X GET "https://localhost:55000/agents?agents_list=001&select=group_config_status&pretty=true" -H  "Authorization: Bearer $TOKEN"
 
     .. code-block:: json
         :class: output
 
         {
-            "error": 0,
-            "data": {
-                "affected_items": [
-                    {
-                        "id": "001",
-                        "synced": true
-                    }
-                ],
-                "total_affected_items": 1,
-                "total_failed_items": 0,
-                "failed_items": []
-            },
-            "message": "Sync info was returned for all selected agents"
+           "data": {
+              "affected_items": [
+                 {
+                    "group_config_status": "synced",
+                    "id": "001"
+                 }
+              ],
+              "total_affected_items": 1,
+              "total_failed_items": 0,
+              "failed_items": []
+           },
+           "message": "All selected agents information was returned",
+           "error": 0
         }
 
     .. code-block:: console
@@ -317,57 +317,47 @@ The ``files.yml`` has the following structure as shown in the following example:
                 shared.conf: https://example.com/shared.conf
             poll: 200
 
-    agents:
-        001: my_group_1
-        002: my_group_2
-        003: another_group
-
-Here we can distinct the two main blocks: ``groups`` and ``agents``.
-
-
-1. In the ``groups`` block we define the group name from which we want to download the files.
+The ``groups`` block is used to define the group name from which we want to download the files.
 
     - If the group doesn't exist, it will be created.
     - If a file has the name ``merged.mg``, only this file will be downloaded. Then it will be validated.
     - The ``poll`` label indicates the download rate in seconds of the specified files.
 
-2. In the ``agents`` block, we define for each agent the group to which we want it to belong.
+This configuration can be changed on the fly. The **manager** will reload the file and parse it again so there is no need to restart the **manager** every time.
 
-    This configuration can be changed on the fly. The **manager** will reload the file and parse it again so there is no need to restart the **manager** every time.
+The information about the parsing is shown on the ``/var/ossec/logs/wazuh.log`` file. For example:
 
-    The information about the parsing is shown on the ``/var/ossec/logs/wazuh.log`` file. For example:
+-  Parsing is successful:
 
-    - Parsing is successful:
+   .. code-block:: none
+      :class: output
 
-    .. code-block:: none
-        :class: output
+      INFO: Successfully parsed of yaml file: /etc/shared/files.yml
 
-        INFO: Successfully parsed of yaml file: /etc/shared/files.yml
+-  File has been changed:
 
-    - File has been changed:
+   .. code-block:: none
+      :class: output
 
-    .. code-block:: none
-        :class: output
+      INFO: File '/etc/shared/files.yml' changed. Reloading data
 
-        INFO: File '/etc/shared/files.yml' changed. Reloading data
+-  Parsing failed due to bad token:
 
-    - Parsing failed due to bad token:
+   .. code-block:: none
+      :class: output
 
-    .. code-block:: none
-        :class: output
+      INFO: Parsing file '/etc/shared/files.yml': unexpected identifier: 'group'
 
-        INFO: Parsing file '/etc/shared/files.yml': unexpected identifier: 'group'
+-  Download of file failed:
 
-    - Download of file failed:
+   .. code-block:: none
+      :class: output
 
-    .. code-block:: none
-        :class: output
+      ERROR: Failed to download file from url: https://example.com/merged.mg
 
-        ERROR: Failed to download file from url: https://example.com/merged.mg
+-  Downloaded ``merged.mg`` file is corrupted or not valid:
 
-    - Downloaded ``merged.mg`` file is corrupted or not valid:
+   .. code-block:: none
+      :class: output
 
-    .. code-block:: none
-        :class: output
-
-        ERROR: The downloaded file '/var/download/merged.mg' is corrupted.
+      ERROR: The downloaded file '/var/download/merged.mg' is corrupted.

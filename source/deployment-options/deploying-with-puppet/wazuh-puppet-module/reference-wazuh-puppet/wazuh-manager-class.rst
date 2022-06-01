@@ -985,6 +985,11 @@ $wazuh_api_logs_level
   
   `Type String`
 
+$wazuh_api_logs_format
+  Set the format of the Wazuh API logs.
+
+  `Default plain`
+
 $wazuh_api_cors_enabled
   Enable or disable the use of CORS in the Wazuh API.
 
@@ -1319,7 +1324,7 @@ Misc Variables
 $server_package_version
   Modified client.pp and server.pp to accept package versions as a parameter.
 
-  `Default 4.3.0-1`
+  `Default 4.3.3-1`
 
   `Type String`
 

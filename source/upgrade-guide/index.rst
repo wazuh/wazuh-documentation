@@ -1,23 +1,29 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Find out more about the process of upgrading the Wazuh server, Open Distro for Elasticsearch, Elastic Stack, and Wazuh agents in this section.
+   :description: Find out more about the process of upgrading the Wazuh central components, Open Distro for Elasticsearch, Elastic Stack, and Wazuh agents in this section.
   
-.. _upgrade_guide:
-
 Upgrade guide
 =============
 
-This guide describes the upgrade process of the Wazuh server, Open Distro for Elasticsearch, Elastic Stack, and the Wazuh agents. The upgrading from a legacy version section is for those users who need to upgrade the Wazuh installation from a version before 3.0.
+This guide gives instructions to upgrade your Wazuh installation.
 
-If you have any doubt about operating system compatibility and the compatibility between the different Wazuh components, please check the compatibility matrix section.
+-  :doc:`Upgrade Wazuh server, Wazuh indexer and Wazuh dashboard <upgrading-central-components>`
+-  :doc:`Upgrade Wazuh server and Open Distro for Elasticsearch <elasticsearch-kibana-filebeat/upgrading-open-distro>`
+-  :doc:`Upgrade Wazuh server and Elastic Stack basic license <elasticsearch-kibana-filebeat/upgrading-elastic-stack>`
+-  :doc:`Upgrade Wazuh agents <upgrading-agent>`
 
+The :doc:`compatibility-matrix/index` section explains compatibility requirements between components.
 
-    .. toctree::
-        :maxdepth: 1
+:doc:`legacy/index` describes the upgrading process from Wazuh 1.x and 2.x.
 
-        upgrading-wazuh
-        elasticsearch-kibana-filebeat/index
-        upgrading-agent
-        legacy/index
-        compatibility-matrix/index
+.. toctree::
+   :maxdepth: 1
+   :hidden:
+
+   upgrading-central-components
+   elasticsearch-kibana-filebeat/upgrading-open-distro
+   elasticsearch-kibana-filebeat/upgrading-elastic-stack
+   upgrading-agent
+   legacy/index
+   compatibility-matrix/index

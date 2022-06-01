@@ -88,6 +88,8 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +-----------------------------------------------------------------+
 | :doc:`vulnerability-detector <vuln-detector>`                   |
 +-----------------------------------------------------------------+
+| :doc:`wazuh_db <wazuh-db-config>`                               |
++-----------------------------------------------------------------+
 | :doc:`wodle name="agent-key-polling" <wodle-agent-key-polling>` |
 +-----------------------------------------------------------------+
 | :doc:`wodle name="aws-s3" <wodle-s3>`                           |
@@ -156,3 +158,5 @@ All of the above sections must be located within the top-level ``<wazuh_config>`
    wodle-s3
    wodle-syscollector
    gcp-bucket
+   wazuh-db-config
+   verifying-configuration

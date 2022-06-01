@@ -52,6 +52,7 @@ Installing dependencies
       
         .. code-block:: console
         
+            # apt-get update
             # apt-get install python gcc g++ make libc6-dev curl policycoreutils automake autoconf libtool libssl-dev
             
         CMake 3.18 installation
@@ -99,9 +100,9 @@ To install the required dependencies to build the python interpreter, follow the
     
         .. code-block:: console
         
-            # echo "deb-src http://deb.debian.org/debian $(lsb_release -cs) main" >> /etc/apt/sources.list
+            # echo "deb-src http://archive.ubuntu.com/ubuntu $(lsb_release -cs) main" >> /etc/apt/sources.list
             # apt-get update
-            # apt-get build-dep python3.5 -y
+            # apt-get build-dep python3 -y
 
     .. group-tab:: ZYpp
     
