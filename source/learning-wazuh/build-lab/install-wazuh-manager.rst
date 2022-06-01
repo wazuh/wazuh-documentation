@@ -128,7 +128,7 @@ and archived events to the Elasticsearch service.
 
   .. code-block:: console
 
-    # curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.1.tar.gz | sudo tar -xvz -C /usr/share/filebeat/module
+    # curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.2.tar.gz | sudo tar -xvz -C /usr/share/filebeat/module
 
 6. Edit and set the specific IP address of your Elasticsearch instance into the Filebeat config:
 

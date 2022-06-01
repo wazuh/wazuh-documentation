@@ -1324,7 +1324,7 @@ Misc Variables
 $server_package_version
   Modified client.pp and server.pp to accept package versions as a parameter.
 
-  `Default 4.3.1-1`
+  `Default 4.3.3-1`
 
   `Type String`
 

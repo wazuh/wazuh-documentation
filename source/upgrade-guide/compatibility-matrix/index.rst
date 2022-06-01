@@ -19,7 +19,7 @@ The Wazuh central components must share the same version numbers down to the pat
 
 The Wazuh manager version must always be **newer than or equal to**  the Wazuh agents versions. For example:
 
--  Wazuh manager |WAZUH_LATEST| and Wazuh agent 4.2.6
+-  Wazuh manager |WAZUH_LATEST| and Wazuh agent 4.2.7
 -  Wazuh manager |WAZUH_LATEST| and Wazuh agent |WAZUH_LATEST|
 
 The Wazuh manager is also compatible with OSSEC agents but not all capabilities are available with them. 
@@ -41,7 +41,7 @@ The following Elastic Stack and Open Distro for Elasticsearch versions are compa
 | 7.17.0–7.17.3            |                           |
 +--------------------------+---------------------------+
 
-You can find more information on the `Wazuh Kibana plugin repository <https://github.com/wazuh/wazuh-kibana-app#installation>`__.
+You can find more information on the `Wazuh Kibana plugin repository <https://github.com/wazuh/wazuh-kibana-app/wiki/Compatibility>`_.
 
 .. _wazuh_and_splunk_app:
 

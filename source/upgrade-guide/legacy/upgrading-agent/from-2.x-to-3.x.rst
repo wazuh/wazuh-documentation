@@ -103,7 +103,7 @@ To upgrade the Wazuh agent choose the appropriate tab for the desired operating 
 
       .. group-tab:: Windows
 
-        The Wazuh agent upgrade process for Windows systems requires to download the latest available installer from the :ref:`packages list <packages>`. There are two ways of using it, both require ``administrator rights``:
+        The Wazuh agent upgrade process for Windows systems requires to download the latest available installer from the :doc:`packages list </installation-guide/packages-list>`. There are two ways of using it, both require ``administrator rights``:
 
         - Using the GUI installer:
 
