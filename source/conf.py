@@ -492,7 +492,7 @@ custom_replacements = {
     "|WAZUH_LATEST_MINOR_ANSIBLE|" : "4.3",
     "|WAZUH_LATEST_KUBERNETES|" : "4.3.3",
     "|WAZUH_LATEST_PUPPET|" : "4.3.3",
-    "|WAZUH_LATEST_OVA|" : "4.3.2",
+    "|WAZUH_LATEST_OVA|" : "4.3.3",
     "|WAZUH_LATEST_AMI|" : "4.3.2",
     "|WAZUH_LATEST_DOCKER|" : "4.3.3",
     "|WAZUH_LATEST_AIX|" : "4.3.3",
