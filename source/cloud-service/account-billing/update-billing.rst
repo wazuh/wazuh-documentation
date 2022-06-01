@@ -1,7 +1,7 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
 .. meta::
-  :description: Check how to update billing and operational contacts through the Wazuh Cloud Console in this section.
+  :description: Check how to update billing and operational contacts through the Wazuh Cloud Console. Learn more about it in this section of the documentation.
 
 .. _cloud_account_billing_update_billing:
 

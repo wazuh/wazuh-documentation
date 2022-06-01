@@ -1,7 +1,7 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
 .. meta::
-  :description: Learn how to add your billing details to your Wazuh Cloud account. This step is required if you wish to continue using your environment after the free trial. 
+  :description: Learn how to add your billing details to your Wazuh Cloud account in this section of the documentation. 
 
 
 .. _cloud_account_billing_details:
