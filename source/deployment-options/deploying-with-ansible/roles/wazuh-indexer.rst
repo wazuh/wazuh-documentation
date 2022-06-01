@@ -1,7 +1,7 @@
 .. Copyright (C) 2015–2022 Wazuh, Inc.
 
 .. meta::
-   :description: Learn how to use a preconfigured role to install the Wazuh indexer and customize the installation with different variables.
+   :description: Learn how to use a preconfigured role to install the Wazuh indexer and customize the installation with different variables in this section.
 
 Wazuh indexer
 -------------

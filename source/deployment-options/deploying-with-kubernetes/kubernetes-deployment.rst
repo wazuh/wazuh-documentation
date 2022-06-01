@@ -1,7 +1,7 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about Kubernetes deployment with Wazuh. 
+  :description: Learn more about Kubernetes deployment with Wazuh in this section of the Wazuh documentation. 
 
 .. _kubernetes_deployment:
 
