@@ -1,7 +1,7 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
-  :description: The wazuh-remoted.state file provides information about the remote daemon as the queue size, discarded messages, and other useful information.
+  :description: Learn how the wazuh-remoted.state file provides information about the remote daemon as the queue size, discarded messages, and other useful information.
 
 .. _wazuh_remoted_state_file:
 

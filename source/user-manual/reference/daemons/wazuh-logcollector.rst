@@ -1,7 +1,7 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
-  :description: Learn about the wazuh-logcollector program that monitors configured files and commands for new log messages.
+  :description: Learn about the wazuh-logcollector program that monitors configured files and commands for new log messages in this section of the documentation.
 
 .. _wazuh-logcollector:
 

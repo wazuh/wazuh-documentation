@@ -1,7 +1,7 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
-  :description: The wazuh-reportd program creates reports from Wazuh alerts. Learn more about it in this section.
+  :description: The wazuh-reportd program creates reports from Wazuh alerts. Learn more about it in this section of the documentation.
 
 .. _wazuh-reportd:
 
