@@ -48,7 +48,7 @@ Upgrading the Wazuh manager
 
 When upgrading a multi-node Wazuh manager cluster, run the upgrade in every node to make all the Wazuh manager nodes join the cluster. Start with the master node to reduce server downtime.
 
-.. note:: In upgrades from Wazuh 4.2.x or lower, the ``ossec`` system user and group are replaced by the ``wazuh`` system user and group. Before upgrading, make sure that there are not conflicts with this new user and group.
+.. note:: Upgrading from Wazuh 4.2.x or lower creates the ``wazuh`` operating system user and group to replace ``ossec``. To avoid upgrade conflicts, make sure that the ``wazuh`` user and group are not present in your operating system. 
 
 #. Upgrade the Wazuh manager to the latest version.
 
