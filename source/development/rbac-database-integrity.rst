@@ -23,6 +23,14 @@ Here is an abridged list of steps performed during the database upgrade process:
 
 1. A new RBAC database file is created and the default Wazuh RBAC resources for the installed version are added to it.
 2. Every user-created RBAC resource is migrated from the old database to the new one, maintaining its ID, name and so on.
-3. In case a user-created RBAC resource has the same name as a default Wazuh RBAC resource, the default one is kept and the user-created one is not added to the new RBAC database file. For the RBAC Policies the same applies to their policy body (compose of its actions, resources and effects), as they must be unique.
-4. Any relationships between user-created resources and default ones, such as relationships between roles and policies or roles and users, are updated to use the default resource instead, so the functionality is kept.
+3. In case a user-created RBAC resource coincides with one of the new default Wazuh RBAC resources:
+    3.1. If a user-created **user** has the same **name** as a default user, both are considered the same. The user-created user is renamed to its name + '_user'.
+    3.2. If a user-created **role** has the same **name** as a default role, both are considered the same. The user-created role is renamed to its name + '_user'.
+    3.3. If a user-created **rule** has the same **name** and **body** as a default rule, both are considered the same. The user-created rule relationships are migrated to the new default rule.
+    3.4. If a user-created **policy** has the same **name** and **body** as a default policy, both are considered the same. The user-created policy relationships are migrated to the new default policy.
+4. Any relationships between RBAC user-created resources are added to the new database.
+4. Any relationships between RBAC user-created resources and default ones are updated:
+    4.1. If the default resource does not exist in the new version, the relationships between user-created resources and the deleted resource are removed.
+    4.2. If the default resource has a different ID in the new version, the relationships between user-created resources and the default resource are updated to match the new ID and keep the old functionality.
+    4.3. In any other case, the relationships between user-created resources and the default resources are kept.
 5. The old RBAC database file is replaced by the new one.
