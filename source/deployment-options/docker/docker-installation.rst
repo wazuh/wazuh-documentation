@@ -13,6 +13,9 @@ The first thing you need to do is to set up a system with the requirements neede
 - `Docker engine`_
 - `Docker compose`_
 
+.. note::
+   
+   Root user privileges required to execute all the commands described below.
 
 Requirements
 ------------
@@ -78,16 +81,17 @@ For Linux/Unix machines, Docker requires an amd64 architecture system running ke
 
         .. code-block:: console  
 
-          # dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
-          # dnf install docker-ce --nobest -y
+          # yum install -y yum-utils
+          # yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+          # yum install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
 
       .. group-tab:: On Amazon Linux 2 machines
         
         .. code-block:: console
 
-          # sudo yum update -y
-          # sudo yum install docker
+          # yum update -y
+          # yum install docker
 
 
 3. Start the Docker service:
@@ -144,7 +148,7 @@ Docker Compose 1.29 or newer is required. Follow these steps to install it:
 
     .. code-block:: console
 
-      $ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+       # ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
 
 3. Test the installation to ensure everything went properly:
@@ -157,5 +161,3 @@ Docker Compose 1.29 or newer is required. Follow these steps to install it:
       :class: output
 
       docker-compose version 1.29.2, build 5becea4c
-
-

@@ -19,7 +19,7 @@ Download our wazuh-packages repository from GitHub and go to the rpms directory.
 
 .. code-block:: console
 
- $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/rpms && git checkout |WAZUH_PACKAGES_BRANCH|
+ $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/rpms && git checkout v|WAZUH_LATEST|
 
 Execute the ``generate_rpm_package.sh`` script, with the different options you desire. This script will build a Docker image with all the necessary tools to create the RPM and run a container that will build it:
 
@@ -31,7 +31,7 @@ Execute the ``generate_rpm_package.sh`` script, with the different options you d
   :class: output
 
   Usage: ./generate_rpm_package.sh [OPTIONS]
-  
+
       -b, --branch <branch>        [Required] Select Git branch or tag.
       --packages-branch <branch>   [Required] Select Git branch or tag from wazuh-packages repository.
       -t, --target <target>        [Required] Target package to build [manager/api/agent].
@@ -54,18 +54,18 @@ Below, you will find some examples of how to build an RPM package.
 
 .. code-block:: console
 
-  # ./generate_rpm_package.sh -b v|WAZUH_LATEST| --packages-branch |WAZUH_PACKAGES_BRANCH| -s /tmp -t manager -a x86_64 -r my_rev.
+  # ./generate_rpm_package.sh -b v|WAZUH_LATEST| --packages-branch v|WAZUH_LATEST| -s /tmp -t manager -a x86_64 -r my_rev.
 
 This will generate a |WAZUH_LATEST| Wazuh manager RPM package with revision ``my_rev`` for ``x86_64`` systems.
 
 .. code-block:: console
 
-  # ./generate_rpm_package.sh -b v|WAZUH_LATEST| --packages-branch |WAZUH_PACKAGES_BRANCH| -s /tmp -t api -a i386 -r my_rev
+  # ./generate_rpm_package.sh -b v|WAZUH_LATEST| --packages-branch v|WAZUH_LATEST| -s /tmp -t api -a i386 -r my_rev
 
 This will generate a |WAZUH_LATEST| Wazuh api RPM package with revision ``my_rev`` for ``i386`` systems and store it in ``/tmp``.
 
 .. code-block:: console
 
-  # ./generate_rpm_package.sh -b v|WAZUH_LATEST| --packages-branch |WAZUH_PACKAGES_BRANCH| -t agent -a x86_64 -p /opt/ossec
+  # ./generate_rpm_package.sh -b v|WAZUH_LATEST| --packages-branch v|WAZUH_LATEST| -t agent -a x86_64 -p /opt/ossec
 
 This will generate a |WAZUH_LATEST| Wazuh agent RPM package with ``/opt/ossec`` as installation directory for ``x86_64`` systems.
