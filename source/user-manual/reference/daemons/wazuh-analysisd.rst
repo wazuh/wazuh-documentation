@@ -1,7 +1,7 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
-  :description: Learn how the ``wazuh-analysisd`` program receives the log messages and compares them to the rules.
+  :description: Learn how the ``wazuh-analysisd`` program receives the log messages and compares them to the rules in this section of the documentation.
 
 .. _wazuh-analysisd:
 

@@ -1,7 +1,7 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
-  :description: Learn how the ``wazuh-authd`` program can automatically add a Wazuh agent to a Wazuh manager and provide the key to the agent.
+  :description: Learn how the ``wazuh-authd`` program can automatically add a Wazuh agent to a Wazuh manager and provide the key to the agent in this section.
 
 .. _wazuh-authd:
 

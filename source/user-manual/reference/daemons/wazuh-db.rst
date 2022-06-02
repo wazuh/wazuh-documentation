@@ -1,7 +1,7 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
-  :description: Learn how the Wazuh core uses list-based databases to store information related to agent keys, and FIM/Rootcheck event data.
+  :description: Learn how the Wazuh core uses list-based databases to store information related to agent keys, and FIM/Rootcheck event data in this section.
 
 .. _wazuh-db:
 
