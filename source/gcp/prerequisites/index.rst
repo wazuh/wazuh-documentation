@@ -1,7 +1,7 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
-  :description: Learn how to install and configure the Wazuh module to monitor Google Cloud services.
+  :description: Learn how to install and configure the Wazuh module to monitor Google Cloud services in this section of the Wazuh documentation.
 
 .. _gcp_prerequisites:
 
