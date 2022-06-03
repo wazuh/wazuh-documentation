@@ -19,14 +19,14 @@ This release includes new features or enhancements.
 Manager
 ^^^^^^^
 
-`#13437 <https://github.com/wazuh/wazuh/pull/13437>`_ Integratord now tries to read alerts indefinitely, instead of performing 3 attempts.
-`#13626 <https://github.com/wazuh/wazuh/pull/13626>`_ Adds a timeout for remote queries made by the Office 365, GitHub, and Agent Update modules.
+- `#13437 <https://github.com/wazuh/wazuh/pull/13437>`_ Integratord now tries to read alerts indefinitely, instead of performing 3 attempts.
+- `#13626 <https://github.com/wazuh/wazuh/pull/13626>`_ A timeout for remote queries made by the Office 365, GitHub, and Agent Update modules is added.
 
 
 Wazuh Kibana plugin
 ^^^^^^^^^^^^^^^^^^^
 
-`#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_ `#4188 <https://github.com/wazuh/wazuh-kibana-app/pull/4188>`_ Added the pending agent status to some sections that was missing.
+- `#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_ `#4188 <https://github.com/wazuh/wazuh-kibana-app/pull/4188>`_ The ``pending`` agent status is added to some sections that was missing.
 
 
 Wazuh Splunk app
@@ -46,12 +46,12 @@ Manager
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#13621 <https://github.com/wazuh/wazuh/pull/13621>`_             Fixed bug in agent_groups CLI when removing agent groups.
-`#13459 <https://github.com/wazuh/wazuh/pull/13459>`_             Fixed linux compilation errors with GCC 12.
-`#13604 <https://github.com/wazuh/wazuh/pull/13604>`_             Fixed a crash in wazuh-analysisd when overwriting a rule with a configured active response.
-`#13666 <https://github.com/wazuh/wazuh/pull/13666>`_             Fixed a crash in wazuh-db when it cannot open a database file.
-`#13566 <https://github.com/wazuh/wazuh/pull/13566>`_             Fixed the vulnerability feed parsing mechanism, now truncates excessively long values (This problem was detected during Ubuntu Bionic feed update).
-`#13679 <https://github.com/wazuh/wazuh/pull/13679>`_             Fixed a crash in wazuh-maild when parsing an alert with no full log and containing arrays of non-strings.
+`#13621 <https://github.com/wazuh/wazuh/pull/13621>`_             A bug in ``agent_groups`` CLI when removing agent groups is fixed.
+`#13459 <https://github.com/wazuh/wazuh/pull/13459>`_             Linux compilation errors with GCC 12 is fixed.
+`#13604 <https://github.com/wazuh/wazuh/pull/13604>`_             A crash in wazuh-analysisd when overwriting a rule with a configured active response is fixed.
+`#13666 <https://github.com/wazuh/wazuh/pull/13666>`_             A crash in wazuh-db when it cannot open a database file is fixed. 
+`#13566 <https://github.com/wazuh/wazuh/pull/13566>`_             The vulnerability feed parsing mechanism, now truncates excessively long values is fixed (This problem was detected during Ubuntu Bionic feed update).
+`#13679 <https://github.com/wazuh/wazuh/pull/13679>`_             A crash in wazuh-maild when parsing an alert with no full log and containing arrays of non-strings is fixed.
 ==============================================================    =============
 
 
@@ -61,7 +61,7 @@ RESTful API
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#13550 <https://github.com/wazuh/wazuh/pull/13550>`_             Updated default timeouts for GET /mitre/software and GET /mitre/techniques to avoid timing out in slow environments.
+`#13550 <https://github.com/wazuh/wazuh/pull/13550>`_             The default timeouts for ``GET /mitre/software`` and ``GET /mitre/techniques`` is updated to avoid timing out in slow environments.
 ==============================================================    =============
 
 Ruleset
@@ -70,7 +70,7 @@ Ruleset
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#13560 <https://github.com/wazuh/wazuh/pull/13560>`_             Fixed the prematch criteria of sshd-disconnect decoder.
+`#13560 <https://github.com/wazuh/wazuh/pull/13560>`_             The prematch criteria of ``sshd-disconnect`` decoder is fixed.
 ==============================================================    =============
 
 
@@ -80,15 +80,15 @@ Wazuh dashboard
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_    Replaced the visualization of Status panel in Agents.
-`#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_    Replaced the visualization of policy in Modules/Security configuration assessment/Inventory.
-`#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_    Consistency in the colors and labels used for the agent status.
-`#4169 <https://github.com/wazuh/wazuh-kibana-app/pull/4169>`_    Replaced how the full and partial scan dates are displayed in the Details panel of Vulnerabilities/Inventory.
-`#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_    Fixed that the platform visualizations didn't use some definitions related to the UI on Kibana 7.10.2.
-`#4167 <https://github.com/wazuh/wazuh-kibana-app/pull/4167>`_    Fixed a toast message with a successful process appeared when removing an agent of a group in Management/Groups and the agent appears in the agent list after refreshing the table.
-`#4176 <https://github.com/wazuh/wazuh-kibana-app/pull/4176>`_    Fixed import of an empty rule or decoder file.
-`#4180 <https://github.com/wazuh/wazuh-kibana-app/pull/4180>`_    Fixed overwriting of rule and decoder imports.
-`#4157 <https://github.com/wazuh/wazuh-kibana-app/pull/4157>`_    Maintain the filters when clicking on the Visualize button of a document field from <Module>/Events and redirects to the lens plugin.
+`#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_    The visualization of ``Status`` panel in Agents is replaced.
+`#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_    The visualization of policy in ``Modules/Security configuration assessment/Inventory`` is replaced.
+`#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_    Consistency is improved in the colors and labels used for the agent status.
+`#4169 <https://github.com/wazuh/wazuh-kibana-app/pull/4169>`_    How the full and partial scan dates are displayed in the ``Details`` panel of ``Vulnerabilities/Inventory`` is replaced.
+`#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_    When the platform visualizations didn't use some definitions related to the UI on Kibana 7.10.2 is now fixed.
+`#4167 <https://github.com/wazuh/wazuh-kibana-app/pull/4167>`_    A toast message with a successful process appeared when removing an agent of a group in ``Management/Groups`` and the agent appears in the agent list after refreshing the table is fixed.
+`#4176 <https://github.com/wazuh/wazuh-kibana-app/pull/4176>`_    The import of an empty rule or decoder file is fixed.
+`#4180 <https://github.com/wazuh/wazuh-kibana-app/pull/4180>`_    The overwriting of rule and decoder imports is now fixed.
+`#4157 <https://github.com/wazuh/wazuh-kibana-app/pull/4157>`_    Wazuh now maintains the filters when clicking on the Visualize button of a document field from <Module>/Events and redirects to the lens plugin.
 ==============================================================    =============
 
 
