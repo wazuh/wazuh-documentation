@@ -26,7 +26,7 @@ Manager
 Wazuh Kibana plugin
 ^^^^^^^^^^^^^^^^^^^
 
-- `#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_ `#4188 <https://github.com/wazuh/wazuh-kibana-app/pull/4188>`_ The ``pending`` agent status is added to some sections that was missing.
+- `#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_ `#4188 <https://github.com/wazuh/wazuh-kibana-app/pull/4188>`_ The ``pending`` agent status is added to some sections that were missing.
 
 
 Wazuh Splunk app
@@ -47,10 +47,10 @@ Manager
 Reference                                                         Description
 ==============================================================    =============
 `#13621 <https://github.com/wazuh/wazuh/pull/13621>`_             A bug in ``agent_groups`` CLI when removing agent groups is fixed.
-`#13459 <https://github.com/wazuh/wazuh/pull/13459>`_             Linux compilation errors with GCC 12 is fixed.
+`#13459 <https://github.com/wazuh/wazuh/pull/13459>`_             Linux compilation errors with GCC 12 are fixed.
 `#13604 <https://github.com/wazuh/wazuh/pull/13604>`_             A crash in wazuh-analysisd when overwriting a rule with a configured active response is fixed.
 `#13666 <https://github.com/wazuh/wazuh/pull/13666>`_             A crash in wazuh-db when it cannot open a database file is fixed. 
-`#13566 <https://github.com/wazuh/wazuh/pull/13566>`_             The vulnerability feed parsing mechanism, now truncates excessively long values is fixed (This problem was detected during Ubuntu Bionic feed update).
+`#13566 <https://github.com/wazuh/wazuh/pull/13566>`_             The vulnerability feed parsing mechanism now truncates excessively long values is fixed (This problem was detected during Ubuntu Bionic feed update).
 `#13679 <https://github.com/wazuh/wazuh/pull/13679>`_             A crash in wazuh-maild when parsing an alert with no full log and containing arrays of non-strings is fixed.
 ==============================================================    =============
 
@@ -61,7 +61,7 @@ RESTful API
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#13550 <https://github.com/wazuh/wazuh/pull/13550>`_             The default timeouts for ``GET /mitre/software`` and ``GET /mitre/techniques`` is updated to avoid timing out in slow environments.
+`#13550 <https://github.com/wazuh/wazuh/pull/13550>`_             The default timeouts for ``GET /mitre/software`` and ``GET /mitre/techniques`` are updated to avoid timing out in slow environments.
 ==============================================================    =============
 
 Ruleset
@@ -88,7 +88,7 @@ Reference                                                         Description
 `#4167 <https://github.com/wazuh/wazuh-kibana-app/pull/4167>`_    A toast message with a successful process appeared when removing an agent of a group in ``Management/Groups`` and the agent appears in the agent list after refreshing the table is fixed.
 `#4176 <https://github.com/wazuh/wazuh-kibana-app/pull/4176>`_    The import of an empty rule or decoder file is fixed.
 `#4180 <https://github.com/wazuh/wazuh-kibana-app/pull/4180>`_    The overwriting of rule and decoder imports is now fixed.
-`#4157 <https://github.com/wazuh/wazuh-kibana-app/pull/4157>`_    Wazuh now maintains the filters when clicking on the Visualize button of a document field from <Module>/Events and redirects to the lens plugin.
+`#4157 <https://github.com/wazuh/wazuh-kibana-app/pull/4157>`_    Wazuh now maintains the filters when clicking on the ``Visualize`` button of a document field from ``<Module>/Events`` and redirects to the ``lens`` plugin.
 ==============================================================    =============
 
 
@@ -98,8 +98,8 @@ Wazuh Splunk app
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#1327 <https://github.com/wazuh/wazuh-splunk/pull/1327>`_        Improved Splunk search-handler event management to avoid forwarder toast error mis-interpretation.
-`#1329 <https://github.com/wazuh/wazuh-splunk/pull/1329>`_        Fixed unhandled expired session when requesting Splunk DB documents.
+`#1327 <https://github.com/wazuh/wazuh-splunk/pull/1327>`_        Splunk search-handler event management is improved to avoid forwarder toast error misinterpretation.
+`#1329 <https://github.com/wazuh/wazuh-splunk/pull/1329>`_        Unhandled expired session when requesting Splunk DB documents is fixed.
 ==============================================================    =============
 
 
