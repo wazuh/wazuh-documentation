@@ -27,11 +27,6 @@ as you focus on one aspect after another of the Wazuh solution.
   .. toctree::
       :maxdepth: 1
 
-      build-vpc
-      launch-ec2-instances
-      access-ec2-instances
-      install-wazuh-manager
-      install-elastic-stack
-      xpack-security-setup
+      install-wazuh-central-components 
       install-linux-agents
       install-windows-agent
