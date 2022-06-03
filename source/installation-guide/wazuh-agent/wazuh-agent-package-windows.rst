@@ -12,7 +12,7 @@ The agent runs on the host you want to monitor and communicates with the Wazuh m
 
 .. note:: To perform the installation, administrator privileges are required.
 
-#. To start the installation process, download the `Windows installer <https://packages.wazuh.com/|CURRENT_MAJOR|/windows/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi>`_. 
+#. To start the installation process, download the `Windows installer <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/windows/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_WINDOWS|.msi>`_. 
 
 #. Select the installation method you want to follow: command line interface (CLI) or graphical user interface (GUI).
 
@@ -26,13 +26,13 @@ The agent runs on the host you want to monitor and communicates with the Wazuh m
 
                .. code-block:: none
 
-                  wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi /q WAZUH_MANAGER="10.0.0.2"
+                  wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_WINDOWS|.msi /q WAZUH_MANAGER="10.0.0.2"
 
              -  Using PowerShell:
 
                 .. code-block:: none
 
-                  .\wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi /q WAZUH_MANAGER="10.0.0.2"
+                  .\wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_WINDOWS|.msi /q WAZUH_MANAGER="10.0.0.2"
 
 
               For additional deployment options such as agent name, agent group, and registration password, see the :ref:`Deployment variables for Windows <deployment_variables_windows>` section.
@@ -71,6 +71,6 @@ To uninstall the agent, the original Windows installer file is required to perfo
 
   .. code-block:: none
   
-      msiexec.exe /x wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi /qn  
+      msiexec.exe /x wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_WINDOWS|.msi /qn  
 
 The Wazuh agent is now completely removed from your Windows system.

@@ -66,7 +66,7 @@ Examples
     Upgrading...
 
     Upgraded agents:
-        Agent 002 upgraded: Wazuh v3.13.2 -> |WAZUH_LATEST|
+        Agent 002 upgraded: Wazuh v3.13.2 -> |WAZUH_CURRENT|
 
 
 * Downgrade agent using a custom repository:

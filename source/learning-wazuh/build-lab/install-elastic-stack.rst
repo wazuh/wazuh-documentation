@@ -129,7 +129,7 @@ events and archives stored in Elasticsearch. More info at `Kibana
   .. code-block:: console
 
     # cd /usr/share/kibana/
-    # sudo -u kibana bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|-1.zip
+    # sudo -u kibana bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_|ELASTICSEARCH_LATEST|-1.zip
    
 
 4. Kibana will only listen on the loopback interface (localhost) by default,

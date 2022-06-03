@@ -32,7 +32,7 @@ Single-node Deployment
 
     .. code-block:: console
 
-      $ git clone https://github.com/wazuh/wazuh-docker.git -b v|WAZUH_LATEST_DOCKER| --depth=1
+      $ git clone https://github.com/wazuh/wazuh-docker.git -b v|WAZUH_CURRENT_DOCKER| --depth=1
 
 
     Then enter into the ``single-node`` directory, all the commands described below are executed within this directory. For :ref:`additional security <customize-default-users>`, the default password for the Wazuh indexer administrator user can be changed.
@@ -138,7 +138,7 @@ Multi-node deployment
 
     .. code-block:: console
 
-      $ git clone https://github.com/wazuh/wazuh-docker.git -b v|WAZUH_LATEST_DOCKER| --depth=1
+      $ git clone https://github.com/wazuh/wazuh-docker.git -b v|WAZUH_CURRENT_DOCKER| --depth=1
 
    
   Then enter into the ``multi-node`` directory, all the commands described below are executed within this directory. For :ref:`additional security <customize-default-users>`, the default password for the Wazuh indexer admin user can be changed.
@@ -247,7 +247,7 @@ The Wazuh manager, indexer, and dashboard images can be modified and built local
 
 .. code-block:: console
   
-   $ git clone https://github.com/wazuh/wazuh-docker.git -b v|WAZUH_LATEST_DOCKER| --depth=1
+   $ git clone https://github.com/wazuh/wazuh-docker.git -b v|WAZUH_CURRENT_DOCKER| --depth=1
 
 
 2. Enter into the ``build-docker-images`` directory and build the Wazuh manager, indexer, and dashboard images:
@@ -273,7 +273,7 @@ It is possible to generate a hash using the same Docker image, type in a secure 
 
 .. code-block:: console
 
-   docker run --rm -ti wazuh/wazuh-indexer:|WAZUH_LATEST| bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/hash.sh
+   docker run --rm -ti wazuh/wazuh-indexer:|WAZUH_CURRENT| bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/hash.sh
 
 
 Exposed ports

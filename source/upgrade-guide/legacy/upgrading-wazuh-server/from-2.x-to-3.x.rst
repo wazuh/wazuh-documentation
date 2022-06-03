@@ -31,7 +31,7 @@ To upgrade the Wazuh server, choose the appropriate tab for the desired package 
 
         .. code-block:: console
 
-          # echo "deb https://packages.wazuh.com/|CURRENT_MAJOR|/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
+          # echo "deb https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
 
       .. group-tab:: ZYpp
 

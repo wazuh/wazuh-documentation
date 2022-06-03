@@ -11,7 +11,7 @@ Clone this repository to deploy the necessary services and pods.
 
     .. code-block:: console
 
-        $ git clone https://github.com/wazuh/wazuh-kubernetes.git -b v|WAZUH_LATEST_KUBERNETES| --depth=1
+        $ git clone https://github.com/wazuh/wazuh-kubernetes.git -b v|WAZUH_CURRENT_KUBERNETES| --depth=1
         $ cd wazuh-kubernetes
 
 
