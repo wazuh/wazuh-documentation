@@ -71,15 +71,15 @@ To build a WPK for Windows, you need to first download an MSI package of the des
 
 .. code-block:: console
 
-  # curl -O https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/windows/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_WINDOWS|.msi
+  # curl -O https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_WINDOWS|/windows/wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi
 
 Below, you will find an example of Windows WPK package building.
 
 .. code-block:: console
 
-  # ./generate_wpk_package.sh -t windows -b v|WAZUH_CURRENT| -d /tmp/wpk -k /tmp/keys -o WindowsAgent.wpk -pn /tmp/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_WINDOWS|.msi
+  # ./generate_wpk_package.sh -t windows -b v|WAZUH_CURRENT_WINDOWS| -d /tmp/wpk -k /tmp/keys -o WindowsAgent.wpk -pn /tmp/wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi
 
-This script builds a Wazuh |WAZUH_CURRENT| Windows WPK package named WindowsAgent.wpk and stores it in ``/tmp/wpk``. This action is done using the previously generated keys that are saved in ``/tmp/keys``.
+This script builds a Wazuh |WAZUH_CURRENT_WINDOWS| Windows WPK package named WindowsAgent.wpk and stores it in ``/tmp/wpk``. This action is done using the previously generated keys that are saved in ``/tmp/keys``.
 
 If the ``-c`` or ``--checksum`` option is used, a file is created containing the SHA512 checksum in the same output path. This location is configurable and you can indicate where you want to store it.
 
@@ -90,15 +90,15 @@ To build a WPK for macOS you need to first download a PKG package of the desired
 
 .. code-block:: console
 
-  # curl -O https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/macos/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_OSX|.pkg
+  # curl -O https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OSX|/macos/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg
 
 Below, you will find an example of macOS WPK package building.
 
 .. code-block:: console
 
-  # ./generate_wpk_package.sh -t macos -b v|WAZUH_CURRENT| -d /tmp/wpk -k /tmp/keys -o macOSAgent.wpk -pn /tmp/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_OSX|.pkg
+  # ./generate_wpk_package.sh -t macos -b v|WAZUH_CURRENT_OSX| -d /tmp/wpk -k /tmp/keys -o macOSAgent.wpk -pn /tmp/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg
 
-This script builds a Wazuh |WAZUH_CURRENT| macOS WPK package named macOSAgent.wpk and stores it in ``/tmp/wpk``. This action is done using the previously generated keys that are saved in ``/tmp/keys``.
+This script builds a Wazuh |WAZUH_CURRENT_OSX| macOS WPK package named macOSAgent.wpk and stores it in ``/tmp/wpk``. This action is done using the previously generated keys that are saved in ``/tmp/keys``.
 
 If the ``-c`` or ``--checksum`` option is used, a file is created containing the SHA512 checksum in the same output path. This location is configurable and you can indicate where you want to store it.
 

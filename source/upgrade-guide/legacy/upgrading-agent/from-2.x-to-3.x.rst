@@ -121,7 +121,7 @@ To upgrade the Wazuh agent choose the appropriate tab for the desired operating 
 
             .. code-block:: console
 
-              # wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_WINDOWS|.msi /q
+              # wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi /q
 
           .. note::
             To learn more about the unattended installation process, please read the :ref:`Windows installation guide <wazuh_agent_package_windows>`.

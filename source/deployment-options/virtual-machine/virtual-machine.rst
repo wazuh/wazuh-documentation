@@ -16,7 +16,7 @@ Download the `virtual appliance (OVA) <https://packages.wazuh.com/|WAZUH_CURRENT
     - CentOS 7
     - Wazuh manager |WAZUH_CURRENT_OVA|
     - Wazuh indexer |WAZUH_CURRENT_OVA|
-    - Filebeat-OSS |ELASTICSEARCH_LATEST_OVA|
+    - Filebeat-OSS |FILEBEAT_LATEST_OVA|
     - Wazuh dashboard |WAZUH_CURRENT_OVA|
 
 

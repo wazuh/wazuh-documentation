@@ -124,7 +124,7 @@ Download the latest version of the wazuh MSI package:
 
 .. code-block:: console
 
-  # curl -Ls https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/windows/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_WINDOWS|.msi --output wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_WINDOWS|.msi
+  # curl -Ls https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_WINDOWS|/windows/wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi --output wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi
 
 Install the root CA if you want to overwrite the root CA with the file you created previously:
 
@@ -175,7 +175,7 @@ Download the latest version of the Wazuh PKG package:
 
 .. code-block:: console
 
-  # curl -Ls https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/macos/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_OSX|.pkg --output wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_OSX|.pkg
+  # curl -Ls https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OSX|/macos/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg --output wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg
 
 Install the root CA if you want to overwrite the root CA with the file you created previously:
 

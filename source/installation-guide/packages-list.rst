@@ -414,13 +414,13 @@ Amazon Machine Image
 
 .. |AMI_PRODUCT_PAGE| replace:: `Wazuh All-In-One Deployment <https://aws.amazon.com/marketplace/pp/prodview-eju4flv5eqmgq>`__
 
-.. |var_WAZUH_LATEST_AMI| replace:: |WAZUH_CURRENT_AMI|
+.. |var_WAZUH_CURRENT_AMI| replace:: |WAZUH_CURRENT_AMI|
 
-+------------------+--------------+-------------+------------------------+---------------------+
-| Distribution     | Architecture | VM Format   | Latest version         | Product page        |
-+==================+==============+=============+========================+=====================+
-| Amazon Linux 2   | 64-bit       | AWS AMI     | |var_WAZUH_LATEST_AMI| | |AMI_PRODUCT_PAGE|  |
-+------------------+--------------+-------------+------------------------+---------------------+
++------------------+--------------+-------------+-------------------------+---------------------+
+| Distribution     | Architecture | VM Format   | Latest version          | Product page        |
++==================+==============+=============+=========================+=====================+
+| Amazon Linux 2   | 64-bit       | AWS AMI     | |var_WAZUH_CURRENT_AMI| | |AMI_PRODUCT_PAGE|  |
++------------------+--------------+-------------+-------------------------+---------------------+
 
 
 MSU

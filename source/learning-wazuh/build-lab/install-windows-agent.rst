@@ -27,7 +27,7 @@ Run the installer to download, install and self-register the Wazuh agent
 
     .. code-block:: console
 
-        Invoke-WebRequest -Uri https://packages.wazuh.com/4.x/windows/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_WINDOWS|.msi -OutFile wazuh-agent.msi; ./wazuh-agent.msi /q WAZUH_MANAGER='172.30.0.10' WAZUH_REGISTRATION_SERVER='172.30.0.10' WAZUH_REGISTRATION_PASSWORD="please123" WAZUH_AGENT_NAME="windows-agent"
+        Invoke-WebRequest -Uri https://packages.wazuh.com/4.x/windows/wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi -OutFile wazuh-agent.msi; ./wazuh-agent.msi /q WAZUH_MANAGER='172.30.0.10' WAZUH_REGISTRATION_SERVER='172.30.0.10' WAZUH_REGISTRATION_PASSWORD="please123" WAZUH_AGENT_NAME="windows-agent"
 
     It should look like this
 

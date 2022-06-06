@@ -15,7 +15,7 @@ The Wazuh central components must share the same version numbers down to the pat
 
 -  Wazuh manager |WAZUH_CURRENT|, Wazuh indexer |WAZUH_CURRENT|, and Wazuh dashboard |WAZUH_CURRENT|. 
 
-- The Wazuh indexer |WAZUH_CURRENT| is compatible with Filebeat-OSS 7.10.2. 
+- The Wazuh indexer |WAZUH_CURRENT| is compatible with Filebeat-OSS |FILEBEAT_LATEST|. 
 
 The Wazuh manager version must always be **newer than or equal to**  the Wazuh agents versions. For example:
 

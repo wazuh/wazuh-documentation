@@ -585,26 +585,14 @@ custom_replacements = {
     #
     # === Elastic
     # --- Filebeat
+    "|FILEBEAT_LATEST|" : "7.10.2",
     "|FILEBEAT_LATEST_AMI|" : "7.10.2",
+    "|FILEBEAT_LATEST_OVA|" : "7.10.2",
     # --- Open Distro for Elasticsearch
     "|OPEN_DISTRO_LATEST|" : "1.13.2",
-    "|OPENDISTRO_LATEST_AMI|" : "1.13.2",
-    "|OPENDISTRO_LATEST_DOCKER|" : "1.13.2",
-    "|OPENDISTRO_LATEST_KUBERNETES|" : "1.13.2",
     # --- Elasticsearch
     "|ELASTICSEARCH_ELK_LATEST|" : "7.17.3",
-    #"|ELASTICSEARCH_ELK_LATEST_DOCKER|" : "7.10.2",
-    #"|ELASTICSEARCH_ELK_LATEST_KUBERNETES|" : "7.10.2",
-    #"|ELASTICSEARCH_ELK_LATEST_ANSIBLE|" : "7.10.2",
-    #"|ELASTICSEARCH_ELK_LATEST_PUPPET|" : "7.10.2",
     "|ELASTICSEARCH_LATEST|" : "7.10.2",
-    "|ELASTICSEARCH_LATEST_OVA|" : "7.10.2",
-    "|ELASTICSEARCH_LATEST_DOCKER|" : "7.10.2",
-    "|ELASTICSEARCH_LATEST_KUBERNETES|" : "7.10.2",
-    "|ELASTICSEARCH_LATEST_ANSIBLE|" : "7.10.2",
-    "|ELASTICSEARCH_LATEST_PUPPET|" : "7.10.2",
-    # --- Kibana
-    "|KIBANA_VERSION_AMI|" : "7.10.2",
     # --- Other Elastic
     "|ELASTIC_6_LATEST|" : "6.8.8",
     #
