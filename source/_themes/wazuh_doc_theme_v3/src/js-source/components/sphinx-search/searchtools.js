@@ -298,7 +298,7 @@ var Search = {
       else {
         Search.stopPulse();
         Search.title.text(query);
-        Search.title.html(_('Search results for: ') + '<span class="query-term">' + Search.title.text() + '</span>');
+        Search.title.html(_('Search results for: ') + '<span class="query-term">' + $u.escape(Search.title.text()) + '</span>');
         if (!resultCount) {
           Search.status.append('<p>No results.</p>');
           Search.status.append('<p>' + _('Please make sure that all words are spelled correctly.') + '</p>');

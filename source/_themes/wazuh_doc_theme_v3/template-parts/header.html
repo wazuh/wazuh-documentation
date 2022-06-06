@@ -20,6 +20,7 @@
     </div>
     
     <div class="mobile-secondary-header version-zone">
+    {% if theme_breadcrumb_root_title == 'Documentation' %}
       <ul class="navbar-nav ml-auto d-none d-xl-flex flex-row">
         <li class="nav-item">
           <a class="nav-link" href="{{ theme_wazuh_web_url + '/product/' }}" target="_blank" rel="noreferrer noopener">Product</a>
@@ -55,9 +56,14 @@
         </li>
       </ul>
         
-      {% if theme_display_version_selector %}
+      {% if theme_include_version_selector %}
       {% include "template-parts/version-selector.html" %}
       {% endif %}
-    </div>
+    {% else %}
+      <div class="d-none d-xl-block">
+        {% include "template-parts/search-box.html" %}
+      </div>
+    {% endif %}
+  </div>
   </nav>
 </header>
