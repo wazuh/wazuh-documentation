@@ -20,7 +20,7 @@ Amazon configuration
     .. note::
       For more information about these options, see `Selecting Which Resources AWS Config Records. <https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html>`_
 
-#. Select an existing S3 Bucket or :ref:`create a new one. <S3_bucket>`
+#. Select an existing S3 Bucket or :doc:`create a new one </amazon/services/prerequisites/S3-bucket>`.
 
     .. thumbnail:: ../../../images/aws/aws-create-config-1.png
       :align: center

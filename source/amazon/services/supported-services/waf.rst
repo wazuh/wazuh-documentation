@@ -11,7 +11,7 @@ Amazon WAF
 Amazon configuration
 --------------------
 
-#. :ref:`Create a new <S3_bucket>` S3 bucket. (If you want to use an already created one, skip this step).
+#. :doc:`Create a new </amazon/services/prerequisites/S3-bucket>` S3 bucket. (If you want to use an already created one, skip this step).
 
 #. Go to Services > Analytics > Kinesis:
 

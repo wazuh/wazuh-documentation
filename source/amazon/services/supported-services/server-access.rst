@@ -11,7 +11,7 @@ S3 Server Access
 Amazon configuration
 --------------------
 
-#. :ref:`Create a new <S3_bucket>` S3 bucket to store the access logs in it. If you want to use an existing one, skip this step.
+#. :doc:`Create a new </amazon/services/prerequisites/S3-bucket>` S3 bucket to store the access logs in it. If you want to use an existing one, skip this step.
 
 #. Go to Services > Storage > S3:
 

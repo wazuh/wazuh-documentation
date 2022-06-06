@@ -10,7 +10,7 @@ Amazon VPC
 Amazon configuration
 --------------------
 
-#. Select an existing S3 Bucket or :ref:`create a new one. <S3_bucket>`
+#. Select an existing S3 Bucket or :doc:`create a new one </amazon/services/prerequisites/S3-bucket>`.
 
 #. Go to Services > Compute > EC2:
 
