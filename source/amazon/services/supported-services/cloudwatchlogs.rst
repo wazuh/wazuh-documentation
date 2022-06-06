@@ -82,4 +82,4 @@ Wazuh configuration
 CloudWatch Logs use cases
 -------------------------
 
-Check the :ref:`Amazon ECR Image scanning <amazon_image_scanning>` section to learn how to use the CloudWatch Logs integration to pull logs from Amazon ECR Image scans.
+Check the :doc:`Amazon ECR Image scanning </amazon/services/supported-services/ecr-image-scanning>` section to learn how to use the CloudWatch Logs integration to pull logs from Amazon ECR Image scans.

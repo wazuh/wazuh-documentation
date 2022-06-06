@@ -276,6 +276,6 @@ All the Wazuh central components are successfully installed and secured.
     :width: 100%
 
 
-The Wazuh environment is now ready and you can proceed with installing the Wazuh agent on the endpoints to be monitored. To perform this action, see the :ref:`Wazuh agent <installation_agents>` section.
+The Wazuh environment is now ready and you can proceed with installing the Wazuh agent on the endpoints to be monitored. To perform this action, see the :doc:`Wazuh agent </installation-guide/wazuh-agent/index>` section.
 
 If you want to uninstall the Wazuh dashboard, see :ref:`uninstall_dashboard`.
