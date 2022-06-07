@@ -165,7 +165,7 @@ Through the following configuration, Wazuh is ready to search for any query acce
 
     </wodle>
 
-Check the reference for more information about the azure module :ref:`here <wodle_azure_logs>`.
+Check the reference for more information about the :doc:`Azure module </user-manual/reference/ossec-conf/wodle-azure-logs>`.
 
 .. warning:: The field ``tenantdomain`` is mandatory. It can be obtain from the **Overview** section in the Azure Active Directory.
 

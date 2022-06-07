@@ -100,7 +100,7 @@ Applying the following configuration, the integration will be executed every day
         </storage>
     </wodle>
 
-Check the :ref:`Azure module <wodle_azure_logs>` reference page to learn more about the parameters available and how to use them.
+Check the :doc:`Azure module </user-manual/reference/ossec-conf/wodle-azure-logs>` reference page to learn more about the parameters available and how to use them.
 
 Wazuh rules
 ^^^^^^^^^^^
