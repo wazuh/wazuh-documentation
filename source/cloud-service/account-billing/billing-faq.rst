@@ -39,17 +39,17 @@ Your credit card information is sent securely to our billing provider, `Stripe <
 Where can I see the next payment for an environment?
 ----------------------------------------------------
 
-Go to :ref:`See your billing cycle and history <cloud_billing_history>` section to learn how to view the billing details of your environments.
+Go to :doc:`See your billing cycle and history </cloud-service/account-billing/billing-history>` section to learn how to view the billing details of your environments.
 
 How do I view previous receipts and billing history?
 ----------------------------------------------------
 
-Go to :ref:`See your billing cycle and history <cloud_billing_history>` section to learn how to download the overview of all invoices issued for your account.
+Go to :doc:`See your billing cycle and history </cloud-service/account-billing/billing-history>` section to learn how to download the overview of all invoices issued for your account.
 
 How can I configure who receives receipts and billing notifications?
 --------------------------------------------------------------------
 
-Go to :ref:`Update billing and operational contacts <cloud_account_billing_update_billing>` section to learn how to configure who receives receipts and billing notifications.
+Go to :doc:`Update billing and operational contacts </cloud-service/account-billing/update-billing>` section to learn how to configure who receives receipts and billing notifications.
 
 
 What are the available payment methods on Wazuh Cloud?
@@ -61,7 +61,7 @@ Credit or debit card payment is supported. To learn more about Wazuh supported c
 Can I get a refund?
 -------------------
 
-Charges are nonrefundable, but if you want to cease using an environment, you can :ref:`cancel your environment <cloud_your_environment_cancel_environment>` anytime. No new charges are incurred beyond the current billing period. For any special considerations regarding a refund, contact us through the **Help** section of the Wazuh Cloud Console.
+Charges are nonrefundable, but if you want to cease using an environment, you can :doc:`cancel your environment </cloud-service/your-environment/cancel-environment>` anytime. No new charges are incurred beyond the current billing period. For any special considerations regarding a refund, contact us through the **Help** section of the Wazuh Cloud Console.
 
 What is included in my Wazuh Cloud environment?
 -----------------------------------------------
