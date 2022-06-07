@@ -42,7 +42,7 @@ is_latest_release = True
 
 # The full version, including alpha/beta/rc tags
 # Important: use a valid branch (4.0) or, preferably, tag name (v4.0.0)
-release = '4.3'
+release = '4.3.3'
 api_tag = 'v4.3.3'
 apiURL = 'https://raw.githubusercontent.com/wazuh/wazuh/'+api_tag+'/api/api/spec/spec.yaml'
 
@@ -484,8 +484,8 @@ custom_replacements = {
     #
     # === Global and Wazuh version (wazuh agent, manager, indexer, and dashboard)
     "|WAZUH_CURRENT_MAJOR|" : "4.x",
-    "|WAZUH_CURRENT_MINOR|" : "4.3",
-    "|WAZUH_CURRENT|" : "4.3.3",
+    "|WAZUH_CURRENT_MINOR|" : version,
+    "|WAZUH_CURRENT|" : release,
     # --- Revision numbers for Wazuh agent and manager packages versions
     # Yum packages revisions
     "|WAZUH_REVISION_YUM_AGENT_I386|" : "1",
@@ -531,50 +531,50 @@ custom_replacements = {
     # === Versions and revisions for other Wazuh deployments
     #"|WAZUH_CURRENT_MAJOR_AMI|" :
     #"|WAZUH_CURRENT_MINOR_AMI|" :
-    "|WAZUH_CURRENT_AMI|" : "4.3.3",
+    "|WAZUH_CURRENT_AMI|" : release,
     "|WAZUH_CURRENT_MAJOR_OVA|" : "4.x",
     #"|WAZUH_CURRENT_MINOR_OVA|" :
-    "|WAZUH_CURRENT_OVA|" : "4.3.3",
+    "|WAZUH_CURRENT_OVA|" : release,
     #"|WAZUH_CURRENT_MAJOR_DOCKER|" :
-    "|WAZUH_CURRENT_MINOR_DOCKER|" : "4.3",
-    "|WAZUH_CURRENT_DOCKER|" : "4.3.3",
+    "|WAZUH_CURRENT_MINOR_DOCKER|" : version,
+    "|WAZUH_CURRENT_DOCKER|" : release,
     #"|WAZUH_CURRENT_MAJOR_KUBERNETES|" :
     #"|WAZUH_CURRENT_MINOR_KUBERNETES|" :
-    "|WAZUH_CURRENT_KUBERNETES|" : "4.3.3",
+    "|WAZUH_CURRENT_KUBERNETES|" : release,
     #"|WAZUH_CURRENT_MAJOR_ANSIBLE|" :
-    "|WAZUH_CURRENT_MINOR_ANSIBLE|" : "4.3",
-    "|WAZUH_CURRENT_ANSIBLE|" : "4.3.3",
+    "|WAZUH_CURRENT_MINOR_ANSIBLE|" : version,
+    "|WAZUH_CURRENT_ANSIBLE|" : release,
     #"|WAZUH_CURRENT_MAJOR_PUPPET|" :
     #"|WAZUH_CURRENT_MINOR_PUPPET|" :
-    "|WAZUH_CURRENT_PUPPET|" : "4.3.3",
+    "|WAZUH_CURRENT_PUPPET|" : release,
     #"|WAZUH_CURRENT_MAJOR_FROM_SOURCES|" :
-    "|WAZUH_CURRENT_MINOR_FROM_SOURCES|" : "4.3",
-    "|WAZUH_CURRENT_FROM_SOURCES|" : "4.3.3",
+    "|WAZUH_CURRENT_MINOR_FROM_SOURCES|" : version,
+    "|WAZUH_CURRENT_FROM_SOURCES|" : release,
     #"|WAZUH_CURRENT_MAJOR_WIN_FROM_SOURCES|" :
     #"|WAZUH_CURRENT_MINOR_WIN_FROM_SOURCES|" :
-    "|WAZUH_CURRENT_WIN_FROM_SOURCES|" : "4.3.3",
+    "|WAZUH_CURRENT_WIN_FROM_SOURCES|" : release,
     "|WAZUH_CURRENT_WIN_FROM_SOURCES_REV|" : "1",
     #
     # === Versions and revisions for packages of specific operating systems
     "|WAZUH_CURRENT_MAJOR_WINDOWS|" : "4.x",
     #"|WAZUH_CURRENT_MINOR_WINDOWS|" :
-    "|WAZUH_CURRENT_WINDOWS|" : "4.3.3",
+    "|WAZUH_CURRENT_WINDOWS|" : release,
     "|WAZUH_REVISION_WINDOWS|" : "1",
     "|WAZUH_CURRENT_MAJOR_OSX|" : "4.x",
     #"|WAZUH_CURRENT_MINOR_OSX|" :
-    "|WAZUH_CURRENT_OSX|" : "4.3.3",
+    "|WAZUH_CURRENT_OSX|" : release,
     "|WAZUH_REVISION_OSX|" : "1",
     "|WAZUH_CURRENT_MAJOR_SOLARIS|" : "4.x",
     #"|WAZUH_CURRENT_MINOR_SOLARIS|" :
-    "|WAZUH_CURRENT_SOLARIS|" : "4.3.3",
+    "|WAZUH_CURRENT_SOLARIS|" : release,
     #"|WAZUH_REVISION_SOLARIS|" : "1",
     "|WAZUH_CURRENT_MAJOR_AIX|" : "4.x",
     #"|WAZUH_CURRENT_MINOR_AIX|" :
-    "|WAZUH_CURRENT_AIX|" : "4.3.3",
+    "|WAZUH_CURRENT_AIX|" : release,
     "|WAZUH_REVISION_AIX|" : "1",
     "|WAZUH_CURRENT_MAJOR_HPUX|" : "4.x",
     #"|WAZUH_CURRENT_MINOR_HPUX|" :
-    "|WAZUH_CURRENT_HPUX|" : "4.3.3",
+    "|WAZUH_CURRENT_HPUX|" : release,
     "|WAZUH_REVISION_HPUX|" : "1",
     #
     # === Elastic
@@ -592,7 +592,7 @@ custom_replacements = {
     #
     # === Splunk
     "|SPLUNK_LATEST|" : "8.2.6",
-    "|WAZUH_SPLUNK_CURRENT|" : "4.3.3",
+    "|WAZUH_SPLUNK_CURRENT|" : release,
 }
 
 # -- Customizations ---------------------------------------------------------
