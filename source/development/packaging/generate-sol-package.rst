@@ -110,7 +110,7 @@ Clone our wazuh-packages repository from GitHub and switch to your target branch
 
     .. code-block:: console
 
-      $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/solaris && git checkout v|WAZUH_CURRENT_SOLARIS|
+      $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/solaris && git checkout v|WAZUH_CURRENT_SOLARIS10|
       $ cp solaris10 package_generation/src/
       $ cd package_generation
 
@@ -118,7 +118,7 @@ Clone our wazuh-packages repository from GitHub and switch to your target branch
 
     .. code-block:: console
 
-      $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/solaris && git checkout v|WAZUH_CURRENT_SOLARIS|
+      $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/solaris && git checkout v|WAZUH_CURRENT_SOLARIS11|
       $ cp solaris11 package_generation/src/
       $ cd package_generation
 
@@ -126,15 +126,15 @@ Below, you will find some examples of how to build a Solaris package using this 
 
 .. code-block:: console
 
-  # vagrant --branch-tag=v|WAZUH_CURRENT_SOLARIS| up solaris10_cmake
+  # vagrant --branch-tag=v|WAZUH_CURRENT_SOLARIS10| up solaris10_cmake
 
-This will generate a |WAZUH_CURRENT_SOLARIS| Wazuh agent package for Solaris 10
+This will generate a |WAZUH_CURRENT_SOLARIS10| Wazuh agent package for Solaris 10
 
 .. code-block:: console
 
-  # vagrant --branch-tag=v|WAZUH_CURRENT_SOLARIS| up solaris11_cmake
+  # vagrant --branch-tag=v|WAZUH_CURRENT_SOLARIS11| up solaris11_cmake
 
-This will generate a |WAZUH_CURRENT_SOLARIS| Wazuh agent package for Solaris 11
+This will generate a |WAZUH_CURRENT_SOLARIS11| Wazuh agent package for Solaris 11
 
 .. code-block:: console
 
