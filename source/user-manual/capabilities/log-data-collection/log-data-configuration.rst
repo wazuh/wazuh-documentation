@@ -17,7 +17,7 @@ Configuration
 Basic usage
 -----------
 
-Log data collection is configured in the :ref:`ossec.conf <reference_ossec_conf>` file primarily in the :ref:`localfile <reference_ossec_localfile>`, :ref:`remote <reference_ossec_remote>` and :ref:`global <reference_ossec_global>` sections. Configuration of log data collection can also be completed in the :ref:`agent.conf <reference_agent_conf>` file to centralize the distribution of these configuration settings to relevant agents.
+Log data collection is configured in the :ref:`ossec.conf <reference_ossec_conf>` file primarily in the :ref:`localfile <reference_ossec_localfile>`, :ref:`remote <reference_ossec_remote>` and :doc:`global </user-manual/reference/ossec-conf/global>` sections. Configuration of log data collection can also be completed in the :ref:`agent.conf <reference_agent_conf>` file to centralize the distribution of these configuration settings to relevant agents.
 
 As in this basic usage example, provide the name of the file to be monitored and the format:
 
