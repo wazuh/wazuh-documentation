@@ -482,7 +482,7 @@ custom_replacements = {
     "|DEB_AGENT_URL|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent",
     "|DEB_MANAGER_URL|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-manager/wazuh-manager",
     #
-    # === Global and Wazuh agent and manager versions
+    # === Global and Wazuh version (wazuh agent, manager, indexer, and dashboard)
     "|WAZUH_CURRENT_MAJOR|" : "4.x",
     "|WAZUH_CURRENT_MINOR|" : "4.3",
     "|WAZUH_CURRENT|" : "4.3.3",
@@ -514,20 +514,14 @@ custom_replacements = {
     "|WAZUH_REVISION_DEB_AGENT_PPC|" : "1",
     #"|WAZUH_REVISION_DEB_MANAGER_PPC|" : 
     #
-    # === Wazuh indexer versions
-    #"|WAZUH_INDEXER_CURRENT_MINOR|" :
-    "|WAZUH_INDEXER_CURRENT|" : "4.3.3",
-    # --- Revisions for Wazuh indexer versions
+    # === Wazuh indexer version revisions
     "|WAZUH_INDEXER_CURRENT_REV|" : "1", # RPM and Deb
     #"|WAZUH_INDEXER_CURRENT_REV_DEB|" :
     # --- Architectures for Wazuh indexer packages
     "|WAZUH_INDEXER_x64_RPM|" : "x86_64",
     "|WAZUH_INDEXER_x64_DEB|" : "amd64",
     #
-    # === Wazuh dashboard versions
-    #"|WAZUH_DASHBOARD_CURRENT_MINOR|" :
-    "|WAZUH_DASHBOARD_CURRENT|" : "4.3.3",
-    # --- Revisions for Wazuh dashboard versions
+    # === Wazuh dashboard version revisions
     "|WAZUH_DASHBOARD_CURRENT_REV_RPM|" : "1",
     "|WAZUH_DASHBOARD_CURRENT_REV_DEB|" : "1",
     # --- Architectures for Wazuh dashboard packages
@@ -591,7 +585,7 @@ custom_replacements = {
     # --- Open Distro for Elasticsearch
     "|OPEN_DISTRO_LATEST|" : "1.13.2",
     # --- Elasticsearch
-    "|ELASTICSEARCH_ELK_LATEST|" : "7.17.3",
+    "|ELASTICSEARCH_ELK_LATEST|" : "7.17.3", # Basic license
     "|ELASTICSEARCH_LATEST|" : "7.10.2",
     # --- Other Elastic
     "|ELASTIC_6_LATEST|" : "6.8.8",
@@ -599,9 +593,6 @@ custom_replacements = {
     # === Splunk
     "|SPLUNK_LATEST|" : "8.2.6",
     "|WAZUH_SPLUNK_CURRENT|" : "4.3.3",
-    #
-    # === Docker
-    "|DOCKER_COMPOSE_VERSION|" : "1.28.3",
 }
 
 # -- Customizations ---------------------------------------------------------
