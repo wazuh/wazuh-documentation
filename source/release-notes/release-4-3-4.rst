@@ -5,6 +5,8 @@
 
 .. _release_4_3_4:
 
+June 8th 2022
+
 4.3.4 Release notes
 ===================
 
@@ -76,6 +78,40 @@ Reference                                                         Description
 
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
+
+==============================================================    =============
+Reference                                                         Description
+==============================================================    =============
+`#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_    The visualization of ``Status`` panel in Agents is replaced.
+`#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_    The visualization of policy in ``Modules/Security configuration assessment/Inventory`` is replaced.
+`#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_    Consistency is improved in the colors and labels used for the agent status.
+`#4169 <https://github.com/wazuh/wazuh-kibana-app/pull/4169>`_    How the full and partial scan dates are displayed in the ``Details`` panel of ``Vulnerabilities/Inventory`` is replaced.
+`#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_    When the platform visualizations didn't use some definitions related to the UI on Kibana 7.10.2 is now fixed.
+`#4167 <https://github.com/wazuh/wazuh-kibana-app/pull/4167>`_    A toast message with a successful process appeared when removing an agent of a group in ``Management/Groups`` and the agent appears in the agent list after refreshing the table is fixed.
+`#4176 <https://github.com/wazuh/wazuh-kibana-app/pull/4176>`_    The import of an empty rule or decoder file is fixed.
+`#4180 <https://github.com/wazuh/wazuh-kibana-app/pull/4180>`_    The overwriting of rule and decoder imports is now fixed.
+==============================================================    =============
+
+
+Wazuh Kibana plugin for Kibana 7.10.2
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+==============================================================    =============
+Reference                                                         Description
+==============================================================    =============
+`#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_    The visualization of ``Status`` panel in Agents is replaced.
+`#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_    The visualization of policy in ``Modules/Security configuration assessment/Inventory`` is replaced.
+`#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_    Consistency is improved in the colors and labels used for the agent status.
+`#4169 <https://github.com/wazuh/wazuh-kibana-app/pull/4169>`_    How the full and partial scan dates are displayed in the ``Details`` panel of ``Vulnerabilities/Inventory`` is replaced.
+`#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_    When the platform visualizations didn't use some definitions related to the UI on Kibana 7.10.2 is now fixed.
+`#4167 <https://github.com/wazuh/wazuh-kibana-app/pull/4167>`_    A toast message with a successful process appeared when removing an agent of a group in ``Management/Groups`` and the agent appears in the agent list after refreshing the table is fixed.
+`#4176 <https://github.com/wazuh/wazuh-kibana-app/pull/4176>`_    The import of an empty rule or decoder file is fixed.
+`#4180 <https://github.com/wazuh/wazuh-kibana-app/pull/4180>`_    The overwriting of rule and decoder imports is now fixed.
+==============================================================    =============
+
+
+Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ==============================================================    =============
 Reference                                                         Description
