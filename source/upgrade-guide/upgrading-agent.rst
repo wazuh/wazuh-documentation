@@ -256,6 +256,8 @@ To perform the upgrade locally, follow the instructions for the operating system
 
           # mv ~/ossec.conf.bk /var/ossec/etc/ossec.conf
           # chown root:wazuh /var/ossec/etc/ossec.conf
+          # mv ~/client.keys.bk /var/ossec/etc/client.keys
+          # chown root:wazuh /var/ossec/etc/client.keys
 
 
     #. Start the wazuh-agent:
