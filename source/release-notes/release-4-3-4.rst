@@ -1,10 +1,9 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2015–2022 Wazuh, Inc.
 
 .. meta::
-      :description: Wazuh 4.3.4 has been released. Check out our release notes to discover the changes and additions of this release.
+  :description: Wazuh 4.3.4 has been released. Check out our release notes to discover the changes and additions of this release.
 
 .. _release_4_3_4:
-
 
 4.3.4 Release notes
 ===================
@@ -19,15 +18,27 @@ What's new
 This release includes new features or enhancements.
 
 
-Manager
-^^^^^^^
+Wazuh manager
+^^^^^^^^^^^^^
 
 - `#13437 <https://github.com/wazuh/wazuh/pull/13437>`_ Integratord now tries to read alerts indefinitely, instead of performing 3 attempts.
 - `#13626 <https://github.com/wazuh/wazuh/pull/13626>`_ A timeout for remote queries made by the Office 365, GitHub, and Agent Update modules is added.
 
 
-Wazuh Kibana plugin
-^^^^^^^^^^^^^^^^^^^
+Wazuh dashboard
+^^^^^^^^^^^^^^^
+
+- `#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_ `#4188 <https://github.com/wazuh/wazuh-kibana-app/pull/4188>`_ The ``pending`` agent status is added to some sections that were missing.
+
+
+Wazuh Kibana plugin for Kibana 7.10.2
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- `#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_ `#4188 <https://github.com/wazuh/wazuh-kibana-app/pull/4188>`_ The ``pending`` agent status is added to some sections that were missing.
+
+
+Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 - `#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_ `#4188 <https://github.com/wazuh/wazuh-kibana-app/pull/4188>`_ The ``pending`` agent status is added to some sections that were missing.
 
@@ -38,13 +49,14 @@ Wazuh Splunk app
 - Wazuh Splunk app is now compatible with Wazuh 4.3.4. 
 
 
+
 Resolved issues
 ---------------
 
 This release resolves known issues. 
 
-Manager
-^^^^^^^
+Wazuh manager
+^^^^^^^^^^^^^
 
 ==============================================================    =============
 Reference                                                         Description
@@ -95,7 +107,7 @@ Reference                                                         Description
 
 
 Wazuh Kibana plugin for Kibana 7.10.2
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ==============================================================    =============
 Reference                                                         Description
@@ -112,7 +124,7 @@ Reference                                                         Description
 
 
 Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ==============================================================    =============
 Reference                                                         Description
