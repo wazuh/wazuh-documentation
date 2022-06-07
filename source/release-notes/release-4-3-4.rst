@@ -138,6 +138,8 @@ Reference                                                         Description
 `#4176 <https://github.com/wazuh/wazuh-kibana-app/pull/4176>`_    The import of an empty rule or decoder file is fixed.
 `#4180 <https://github.com/wazuh/wazuh-kibana-app/pull/4180>`_    The overwriting of rule and decoder imports is now fixed.
 `#4157 <https://github.com/wazuh/wazuh-kibana-app/pull/4157>`_    Wazuh now maintains the filters when clicking on the ``Visualize`` button of a document field from ``<Module>/Events`` and redirects to the ``lens`` plugin.
+`#4198 <https://github.com/wazuh/wazuh-kibana-app/pull/4198>`_    Missing background in the status graph tooltip in agents is fixed.
+`#4219 <https://github.com/wazuh/wazuh-kibana-app/pull/4219>`_    The problem allowing to remove the filters from the module is fixed.
 ==============================================================    =============
 
 
