@@ -69,7 +69,7 @@ An easy way to test this configuration is to create a new user in Azure Active D
 Wazuh configuration
 ^^^^^^^^^^^^^^^^^^^
 
-Proceed to configure the ``azure-logs`` module in the local configuration (``ossec.conf``). It is important to set the **account_name** and **account_key** of the Storage account to authenticate. This information can be found in the **Access keys** section of **Storage accounts**. Check the :ref:`credentials <azure_credentials>` reference for more information about the different authentication options available.
+Proceed to configure the ``azure-logs`` module in the local configuration (``ossec.conf``). It is important to set the **account_name** and **account_key** of the Storage account to authenticate. This information can be found in the **Access keys** section of **Storage accounts**. Check the :doc:`credentials </azure/activity-services/prerequisites/credentials>` reference for more information about the different authentication options available.
 
 .. thumbnail:: ../../../images/azure/account-credentials.png
     :title: Storage

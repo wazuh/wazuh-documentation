@@ -139,7 +139,7 @@ An easy way to test this is to create a new user in Azure Active Directory. A fe
 Wazuh configuration
 ^^^^^^^^^^^^^^^^^^^
 
-Proceed with configuring the ``azure-logs`` module in the local configuration (``ossec.conf``). The **key and ID of the application** saved during the configuration of the application will be used here, as well as **workspace ID**. In this case, both fields were saved in a **file** for authentication. Check the :ref:`credentials <azure_credentials>` reference for more information about this topic.
+Proceed with configuring the ``azure-logs`` module in the local configuration (``ossec.conf``). The **key and ID of the application** saved during the configuration of the application will be used here, as well as **workspace ID**. In this case, both fields were saved in a **file** for authentication. Check the :doc:`credentials </azure/activity-services/prerequisites/credentials>` reference for more information about this topic.
 
 Through the following configuration, Wazuh is ready to search for any query accepted by Azure Log Analytics. This example configuration includes a representative ``tag`` and will be scheduled for every Monday at 02:00, using an offset of one day, which means only the log data from the last day will be parsed:
 
