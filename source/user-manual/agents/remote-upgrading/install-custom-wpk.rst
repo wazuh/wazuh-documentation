@@ -56,4 +56,4 @@ Output example:
     Upgrading...
 
     Upgraded agents:
-        Agent 001 upgraded: Wazuh v4.2.7 -> Wazuh v4.3.4
+        Agent 001 upgraded: Wazuh v4.2.7 -> Wazuh v|WAZUH_LATEST|
