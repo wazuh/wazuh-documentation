@@ -58,14 +58,14 @@ Elasticsearch installation and configuration
 
          .. code-block:: console
 
-           # yum install elasticsearch-7.17.3
+           # yum install elasticsearch-7.17.4
 
 
       .. group-tab:: APT
 
          .. code-block:: console
 
-           # apt-get install elasticsearch=7.17.3
+           # apt-get install elasticsearch=7.17.4
 
 
 #. Download the configuration file ``/etc/elasticsearch/elasticsearch.yml`` as follows:
@@ -301,7 +301,7 @@ This command should have an output like this:
           TLS version: TLSv1.3
           dial up... OK
         talk to server... OK
-        version: 7.17.3
+        version: 7.17.4
 
 
 Kibana installation and configuration
