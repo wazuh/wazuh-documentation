@@ -13,7 +13,7 @@ This guide gives instructions to upgrade your Wazuh installation.
   <div class="link-boxes-group layout-2x2">
     <div class="link-boxes-item">
       <a class="link-boxes-link vertical-content" href="upgrading-central-components.html">
-        <p class="link-boxes-label">Upgrade Wazuh central components</p>
+        <p class="link-boxes-label">Upgrade Wazuh server, Wazuh indexer and Wazuh dashboard</p>
 
 
 .. image:: ../images/upgrade-guide/wazuh.svg
@@ -42,7 +42,7 @@ Wazuh agents
     
     <div class="link-boxes-item">
       <a class="link-boxes-link horizontal-content" href="elasticsearch-kibana-filebeat/upgrading-elastic-stack.html">
-        <p class="link-boxes-label">Upgrade Elastic stack basic license</p>
+        <p class="link-boxes-label">Upgrade Wazuh and Elastic Stack basic license</p>
 
 .. image:: ../images/upgrade-guide/elasticsearch.svg
 
@@ -55,7 +55,7 @@ Elastic stack basic license
     
     <div class="link-boxes-item">
       <a class="link-boxes-link horizontal-content" href="elasticsearch-kibana-filebeat/upgrading-open-distro.html">
-        <p class="link-boxes-label">Upgrade Open Distro for Elasticsearch</p>
+        <p class="link-boxes-label">Upgrade Wazuh and Open Distro for Elasticsearch</p>
 
 .. image:: ../images/upgrade-guide/opendistro.svg
 
