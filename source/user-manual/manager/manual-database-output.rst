@@ -58,7 +58,7 @@ Execute the following command before **step 3** from the installation guide:
 
 .. code-block:: console
 
-  # cd wazuh-*/src
+  # cd wazuh-|WAZUH_LATEST|/src
   # make deps && make TARGET=server DATABASE=<mysql/pgsql>
 
 To indicate what kind of database users will use, users need the ``DATABASE`` flag. The allowed values are *mysql* or *pgsql*.

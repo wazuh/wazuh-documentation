@@ -133,14 +133,14 @@ Installing Wazuh manager
 
     .. code-block:: console
 
-        # cd wazuh-*
+        # cd wazuh-|WAZUH_LATEST_FROM_SOURCES|
         # ./install.sh
 
     If you have previously compiled for another platform, you must clean the build using the Makefile  in ``src``:
 
     .. code-block:: console
 
-        # cd wazuh-*
+        # cd wazuh-|WAZUH_LATEST_FROM_SOURCES|
         # make -C src clean
         # make -C src clean-deps
 
