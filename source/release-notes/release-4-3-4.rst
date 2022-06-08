@@ -27,25 +27,34 @@ Wazuh manager
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
 
-- `#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_ `#4188 <https://github.com/wazuh/wazuh-kibana-app/pull/4188>`_ The ``pending`` agent status is added to some sections that were missing.
-
+- `#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_ `#4188 <https://github.com/wazuh/wazuh-kibana-app/pull/4188>`_ The ``pending`` agent status is added to some sections where it was missing.
+- `#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_    The visualization of ``Status`` panel in Agents is replaced.
+- `#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_    The visualization of policy in ``Modules/Security configuration assessment/Inventory`` is replaced.
+- `#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_  `#4199 <https://github.com/wazuh/wazuh-kibana-app/issues/4199>`_  Consistency is improved in the colors and labels used for the agent status.
+- `#4169 <https://github.com/wazuh/wazuh-kibana-app/pull/4169>`_    How the full and partial scan dates are displayed in the ``Details`` panel of ``Vulnerabilities/Inventory`` is replaced.
 
 Wazuh Kibana plugin for Kibana 7.10.2
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- `#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_ `#4188 <https://github.com/wazuh/wazuh-kibana-app/pull/4188>`_ The ``pending`` agent status is added to some sections that were missing.
-
+- `#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_ `#4188 <https://github.com/wazuh/wazuh-kibana-app/pull/4188>`_ The ``pending`` agent status is added to some sections where it was missing.
+- `#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_    The visualization of ``Status`` panel in Agents is replaced.
+- `#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_    The visualization of policy in ``Modules/Security configuration assessment/Inventory`` is replaced.
+- `#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_   `#4199 <https://github.com/wazuh/wazuh-kibana-app/issues/4199>`_ Consistency is improved in the colors and labels used for the agent status.
+- `#4169 <https://github.com/wazuh/wazuh-kibana-app/pull/4169>`_    How the full and partial scan dates are displayed in the ``Details`` panel of ``Vulnerabilities/Inventory`` is replaced.
 
 Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- `#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_ `#4188 <https://github.com/wazuh/wazuh-kibana-app/pull/4188>`_ The ``pending`` agent status is added to some sections that were missing.
-
+- `#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_ `#4188 <https://github.com/wazuh/wazuh-kibana-app/pull/4188>`_ The ``pending`` agent status is added to some sections where it was missing.
+- `#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_    The visualization of ``Status`` panel in Agents is replaced.
+- `#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_    The visualization of policy in ``Modules/Security configuration assessment/Inventory`` is replaced.
+- `#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_    Consistency is improved in the colors and labels used for the agent status.
+- `#4169 <https://github.com/wazuh/wazuh-kibana-app/pull/4169>`_    How the full and partial scan dates are displayed in the ``Details`` panel of ``Vulnerabilities/Inventory`` is replaced.
 
 Wazuh Splunk app
 ^^^^^^^^^^^^^^^^
 
-- Wazuh Splunk app is now compatible with Wazuh 4.3.4. 
+- `#1327 <https://github.com/wazuh/wazuh-splunk/pull/1327>`_        Splunk search-handler event management is improved to avoid forwarder toast error misinterpretation. 
 
 
 
@@ -64,7 +73,7 @@ Reference                                                         Description
 `#13459 <https://github.com/wazuh/wazuh/pull/13459>`_             Linux compilation errors with GCC 12 are fixed.
 `#13604 <https://github.com/wazuh/wazuh/pull/13604>`_             A crash in wazuh-analysisd when overwriting a rule with a configured active response is fixed.
 `#13666 <https://github.com/wazuh/wazuh/pull/13666>`_             A crash in wazuh-db when it cannot open a database file is fixed. 
-`#13566 <https://github.com/wazuh/wazuh/pull/13566>`_             The vulnerability feed parsing mechanism now truncates excessively long values is fixed (This problem was detected during Ubuntu Bionic feed update).
+`#13566 <https://github.com/wazuh/wazuh/pull/13566>`_             The vulnerability feed parsing mechanism now truncates excessively long values (This problem was detected during Ubuntu Bionic feed update).
 `#13679 <https://github.com/wazuh/wazuh/pull/13679>`_             A crash in wazuh-maild when parsing an alert with no full log and containing arrays of non-strings is fixed.
 ==============================================================    =============
 
@@ -94,10 +103,6 @@ Wazuh dashboard
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_    The visualization of ``Status`` panel in Agents is replaced.
-`#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_    The visualization of policy in ``Modules/Security configuration assessment/Inventory`` is replaced.
-`#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_    Consistency is improved in the colors and labels used for the agent status.
-`#4169 <https://github.com/wazuh/wazuh-kibana-app/pull/4169>`_    How the full and partial scan dates are displayed in the ``Details`` panel of ``Vulnerabilities/Inventory`` is replaced.
 `#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_    When the platform visualizations didn't use some definitions related to the UI on Kibana 7.10.2 is now fixed.
 `#4167 <https://github.com/wazuh/wazuh-kibana-app/pull/4167>`_    A toast message with a successful process appeared when removing an agent of a group in ``Management/Groups`` and the agent appears in the agent list after refreshing the table is fixed.
 `#4176 <https://github.com/wazuh/wazuh-kibana-app/pull/4176>`_    The import of an empty rule or decoder file is fixed.
@@ -111,10 +116,6 @@ Wazuh Kibana plugin for Kibana 7.10.2
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_    The visualization of ``Status`` panel in Agents is replaced.
-`#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_    The visualization of policy in ``Modules/Security configuration assessment/Inventory`` is replaced.
-`#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_    Consistency is improved in the colors and labels used for the agent status.
-`#4169 <https://github.com/wazuh/wazuh-kibana-app/pull/4169>`_    How the full and partial scan dates are displayed in the ``Details`` panel of ``Vulnerabilities/Inventory`` is replaced.
 `#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_    When the platform visualizations didn't use some definitions related to the UI on Kibana 7.10.2 is now fixed.
 `#4167 <https://github.com/wazuh/wazuh-kibana-app/pull/4167>`_    A toast message with a successful process appeared when removing an agent of a group in ``Management/Groups`` and the agent appears in the agent list after refreshing the table is fixed.
 `#4176 <https://github.com/wazuh/wazuh-kibana-app/pull/4176>`_    The import of an empty rule or decoder file is fixed.
@@ -128,10 +129,6 @@ Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_    The visualization of ``Status`` panel in Agents is replaced.
-`#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_    The visualization of policy in ``Modules/Security configuration assessment/Inventory`` is replaced.
-`#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_    Consistency is improved in the colors and labels used for the agent status.
-`#4169 <https://github.com/wazuh/wazuh-kibana-app/pull/4169>`_    How the full and partial scan dates are displayed in the ``Details`` panel of ``Vulnerabilities/Inventory`` is replaced.
 `#4166 <https://github.com/wazuh/wazuh-kibana-app/pull/4166>`_    When the platform visualizations didn't use some definitions related to the UI on Kibana 7.10.2 is now fixed.
 `#4167 <https://github.com/wazuh/wazuh-kibana-app/pull/4167>`_    A toast message with a successful process appeared when removing an agent of a group in ``Management/Groups`` and the agent appears in the agent list after refreshing the table is fixed.
 `#4176 <https://github.com/wazuh/wazuh-kibana-app/pull/4176>`_    The import of an empty rule or decoder file is fixed.
@@ -148,7 +145,6 @@ Wazuh Splunk app
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#1327 <https://github.com/wazuh/wazuh-splunk/pull/1327>`_        Splunk search-handler event management is improved to avoid forwarder toast error misinterpretation.
 `#1329 <https://github.com/wazuh/wazuh-splunk/pull/1329>`_        Unhandled expired session when requesting Splunk DB documents is fixed.
 ==============================================================    =============
 
@@ -160,6 +156,6 @@ More details about these changes are provided in the changelog of each component
 
 - `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v4.3.4/CHANGELOG.md>`_
 - `wazuh/wazuh-dashboard <https://github.com/wazuh/wazuh-kibana-app/blob/v4.3.4-1.2.0-wzd/CHANGELOG.md>`_
-- `wazuh/wazuh-kibana-app 7.10.x <https://github.com/wazuh/wazuh-kibana-app/blob/v4.3.4-7.10.2/CHANGELOG.md>`_
-- `wazuh/wazuh-kibana-app 7.17.x <https://github.com/wazuh/wazuh-kibana-app/blob/v4.3.4-7.17.3/CHANGELOG.md>`_
+- `wazuh/wazuh-kibana-app 7.10.2 <https://github.com/wazuh/wazuh-kibana-app/blob/v4.3.4-7.10.2/CHANGELOG.md>`_
+- `wazuh/wazuh-kibana-app 7.17.x <https://github.com/wazuh/wazuh-kibana-app/blob/v4.3.4-7.17.4/CHANGELOG.md>`_
 - `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v4.3.4-8.2.6/CHANGELOG.md>`_
