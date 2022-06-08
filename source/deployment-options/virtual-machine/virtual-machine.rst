@@ -14,10 +14,10 @@ Wazuh provides a pre-built virtual machine image in Open Virtual Appliance (OVA)
 Download the `virtual appliance (OVA) <https://packages.wazuh.com/|CURRENT_MAJOR|/vm/wazuh-|WAZUH_LATEST_OVA|.ova>`_, which contains the following components:
 
     - CentOS 7
-    - Wazuh manager |WAZUH_LATEST|
-    - Wazuh indexer |WAZUH_INDEXER_CURRENT|
+    - Wazuh manager |WAZUH_LATEST_OVA|
+    - Wazuh indexer |WAZUH_LATEST_OVA|
     - Filebeat-OSS |ELASTICSEARCH_LATEST_OVA|
-    - Wazuh dashboard |WAZUH_DASHBOARD_CURRENT|
+    - Wazuh dashboard |WAZUH_LATEST_OVA|
 
 
 Hardware requirements
