@@ -26,8 +26,8 @@ Hardware requirements highly depend on the number of protected endpoints and clo
 
 Following this quickstart implies deploying the Wazuh server, the Wazuh indexer, and the Wazuh dashboard on the same host. This is usually enough for monitoring up to 100 endpoints and for 90 days of queryable/indexed alert data. The table below shows the recommended hardware for a quickstart deployment:
 
-.. table::   
-  :align: center  
+.. table::
+  :align: center
 
   +-------------+---------+---------+-----------------------+
   | **Agents**  | **CPU** | **RAM** | **Storage (90 days)** |
@@ -50,16 +50,16 @@ Wazuh central components can be installed on a 64-bit Linux operating system. Wa
 
 .. list-table::
     :width: 100%
-   
+
     * - Amazon Linux 2
       - CentOS 7, 8
     * - Red Hat Enterprise Linux 7, 8
-      - Ubuntu 16.04, 18.04, 20.04
+      - Ubuntu 16.04, 18.04, 20.04, 22.04
 
 Installing Wazuh
 ----------------
 
-#.  Download and run the Wazuh installation assistant. 
+#.  Download and run the Wazuh installation assistant.
 
     .. code-block:: console
 
@@ -69,8 +69,8 @@ Installing Wazuh
     Once the assistant finishes the installation, the output shows the access credentials and a message that confirms that the installation was successful.
 
     .. code-block:: none
-        :emphasize-lines: 4          
-     
+        :emphasize-lines: 4
+
         INFO: --- Summary ---
         INFO: You can access the web interface https://<wazuh-dashboard-ip>
             User: admin
@@ -86,7 +86,7 @@ Installing Wazuh
 
 When you access the Wazuh dashboard for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. This is expected and the user has the option to accept the certificate as an exception or, alternatively, configure the system to use a certificate from a trusted authority.
 
-.. note:: 
+.. note::
 
    It is recommended to change the default Wazuh API passwords. See the :doc:`Securing the Wazuh API </user-manual/api/securing-api>` section.
 
