@@ -33,7 +33,7 @@ To install a Wazuh agent, select your operating system and follow the instructio
 
 .. raw:: html
 
-  <div class="link-boxes-group">
+  <div class="link-boxes-group layout-6">
     <div class="link-boxes-item">
       <a class="link-boxes-link" href="./wazuh-agent-package-linux.html">
         <p class="link-boxes-label">Linux</p>
@@ -73,6 +73,7 @@ To install a Wazuh agent, select your operating system and follow the instructio
 
 .. image:: /images/installation/solaris.png
       :align: center
+      :width: 150px
 
 .. raw:: html
 
