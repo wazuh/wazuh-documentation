@@ -440,6 +440,12 @@ main {
   [data-href$="container-security/index.html"]::before {
     background-image: url("#{$ico-path}index-icons.svg#containers-lt");
   }
+  
+  /* Development */
+  [href$="development/index.html"]::before,
+  [data-href$="development/index.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#development-lt");
+  }
 
   /* Deployment */
   [href$="deployment.html"]::before,
@@ -451,6 +457,12 @@ main {
   [href$="compliance.html"]::before,
   [data-href$="compliance.html"]::before {
     background-image: url("#{$ico-path}index-icons.svg#compliance-lt");
+  }
+
+  /* Learning Wazuh */
+  [href$="learning-wazuh/index.html"]::before,
+  [data-href$="learning-wazuh/index.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#learning-lt");
   }
 
   /* Cloud security */
@@ -598,6 +610,12 @@ main {
     background-image: url("#{$ico-path}index-icons.svg#containers-dt");
   }
 
+  /* Development */
+  [href$="development/index.html"]::before,
+  [data-href$="development/index.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#development-dt");
+  }
+
   /* Deployment */
   [href$="deployment.html"]::before,
   [data-href$="deployment.html"]::before {
@@ -608,6 +626,12 @@ main {
   [href$="compliance.html"]::before,
   [data-href$="compliance.html"]::before {
     background-image: url("#{$ico-path}index-icons.svg#compliance-dt");
+  }
+
+  /* Learning Wazuh */
+  [href$="learning-wazuh/index.html"]::before,
+  [data-href$="learning-wazuh/index.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#learning-dt");
   }
 
   /* Cloud security */

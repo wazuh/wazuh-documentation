@@ -69,7 +69,7 @@ Single-node Deployment
                environment:
                  - HTTP_PROXY=YOUR_PROXY_ADDRESS_OR_DNS
         
-        Modify the file ``config/wazuh_indexer_ssl_certs/certs.yml`` and execute the following command to obtain the desired certificates:
+        Modify the file ``config/certs.yml`` and execute the following command to obtain the desired certificates:
       
          .. code-block:: console
          
@@ -174,7 +174,7 @@ Multi-node deployment
              environment:
                - HTTP_PROXY=YOUR_PROXY_ADDRESS_OR_DNS
       
-      Modify the file ``config/wazuh_indexer_ssl_certs/certs.yml`` and execute the following command to obtain the desired certificates:
+      Modify the file ``config/certs.yml`` and execute the following command to obtain the desired certificates:
         
          .. code-block:: console
 

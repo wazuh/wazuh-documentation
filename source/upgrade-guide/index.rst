@@ -8,10 +8,66 @@ Upgrade guide
 
 This guide gives instructions to upgrade your Wazuh installation.
 
--  :doc:`Upgrade Wazuh server, Wazuh indexer and Wazuh dashboard <upgrading-central-components>`
--  :doc:`Upgrade Wazuh server and Open Distro for Elasticsearch <elasticsearch-kibana-filebeat/upgrading-open-distro>`
--  :doc:`Upgrade Wazuh server and Elastic Stack basic license <elasticsearch-kibana-filebeat/upgrading-elastic-stack>`
--  :doc:`Upgrade Wazuh agents <upgrading-agent>`
+.. raw:: html
+
+  <div class="link-boxes-group layout-2x2">
+    <div class="link-boxes-item">
+      <a class="link-boxes-link vertical-content" href="upgrading-central-components.html">
+        <p class="link-boxes-label">Upgrade Wazuh server, Wazuh indexer and Wazuh dashboard</p>
+
+
+.. image:: ../images/upgrade-guide/wazuh.svg
+   :width: 150px
+     
+Wazuh central components
+
+.. raw:: html
+
+      </a>
+    </div>
+  
+    <div class="link-boxes-item">
+      <a class="link-boxes-link vertical-content" href="upgrading-agent.html">
+        <p class="link-boxes-label">Upgrade Wazuh agents</p>
+
+.. image:: ../images/upgrade-guide/agent.svg
+   :width: 110px
+     
+Wazuh agents
+
+.. raw:: html
+
+      </a>
+    </div>
+    
+    <div class="link-boxes-item">
+      <a class="link-boxes-link horizontal-content" href="elasticsearch-kibana-filebeat/upgrading-elastic-stack.html">
+        <p class="link-boxes-label">Upgrade Wazuh and Elastic Stack basic license</p>
+
+.. image:: ../images/upgrade-guide/elasticsearch.svg
+
+Elastic stack basic license
+
+.. raw:: html
+
+      </a>
+    </div>
+    
+    <div class="link-boxes-item">
+      <a class="link-boxes-link horizontal-content" href="elasticsearch-kibana-filebeat/upgrading-open-distro.html">
+        <p class="link-boxes-label">Upgrade Wazuh and Open Distro for Elasticsearch</p>
+
+.. image:: ../images/upgrade-guide/opendistro.svg
+
+Open Distro for Elasticsearch
+
+.. raw:: html
+
+      </a>
+    </div>
+    
+  </div>
+
 
 The :doc:`compatibility-matrix/index` section explains compatibility requirements between components.
 
