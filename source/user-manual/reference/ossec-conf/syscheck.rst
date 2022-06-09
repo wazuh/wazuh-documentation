@@ -766,6 +766,16 @@ Sets the maximum synchronization message throughput.
 | **Allowed values** | Integer number between 0 and 1000000. 0 means disabled. |
 +--------------------+---------------------------------------------------------+
 
+**min_interval**
+
+Defines the minimum interval between two synchronizations. A new sync process is blocked if less than ``min_interval``
+seconds have elapsed since the last sync message was sent by the agent.
++--------------------+--------------------------------------------+
+| **Default value**  | 60                                         |
++--------------------+------------------------------------------- +
+| **Allowed values** | Integer number between 0 and ``interval``. |
++--------------------+--------------------------------------------+
+
 .. _reference_ossec_syscheck_diff:
 
 diff
