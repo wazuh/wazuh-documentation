@@ -57,8 +57,8 @@ needs_sphinx = '1.8'
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.extlinks', # Sphinx built-in extension
-    'wazuh-doc-images',  # Custom extension
-    'sphinx_tabs.tabs'
+    'sphinx_tabs.tabs',
+    'wazuh-doc-images', # Custom extension
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -135,7 +135,10 @@ html_theme = 'wazuh_doc_theme_v3'
 html_theme_options = {
     'wazuh_web_url': 'https://wazuh.com',
     'wazuh_doc_url': 'https://documentation.wazuh.com',
-    'collapse_navigation': False, # Only for Wazuh documentation theme v2.0v
+    'collapse_navigation': False, # Only for Wazuh documentation theme v2.0
+    'include_edit_repo': True,
+    'include_version_selector': True,
+    'breadcrumb_root_title': 'Documentation',
 }
 
 if html_theme == 'wazuh_doc_theme_v3':
@@ -217,13 +220,13 @@ html_additional_pages = {}
 
 html_additional_pages['not_found'] = 'not-found.html'
 
-if version >= '4.0':
+if version >= '4.0' and html_theme_options['breadcrumb_root_title'] == 'Documentation':
     html_additional_pages['user-manual/api/reference'] = 'api-redoc.html'
 
-if version >= '4.2':
+if version >= '4.2' and html_theme_options['breadcrumb_root_title'] == 'Documentation':
     html_additional_pages['cloud-service/apis/reference'] = 'cloud-api-redoc.html'
 
-if is_latest_release == True:
+if is_latest_release == True and html_theme_options['breadcrumb_root_title'] == 'Documentation':
     html_additional_pages['moved-content'] = 'moved-content.html'
 
 # If false, no module index is generated.
@@ -364,7 +367,7 @@ epub_author = author
 epub_publisher = author
 epub_copyright = copyright
 
-# The unique identifier of the text. This can be a ISBN number
+# The unique identifier of the text. This can be an ISBN number
 # or the project homepage.
 #
 # epub_identifier = ''
@@ -476,30 +479,30 @@ def customReplacements(app, docname, source):
 
 custom_replacements = {
     "|CURRENT_MAJOR|" : "4.x",
-    "|WAZUH_LATEST|" : "4.3.3",
+    "|WAZUH_LATEST|" : "4.3.4",
     "|WAZUH_LATEST_MINOR|" : "4.3",
     "|WAZUH_PACKAGES_BRANCH|" : "4.3",
-    "|WAZUH_INDEXER_CURRENT|" : "4.3.3",
+    "|WAZUH_INDEXER_CURRENT|" : "4.3.4",
     "|WAZUH_INDEXER_CURRENT_REV|" : "1",
     "|WAZUH_INDEXER_x64_RPM|" : "x86_64",
     "|WAZUH_INDEXER_x64_DEB|" : "amd64",
-    "|WAZUH_DASHBOARD_CURRENT|" : "4.3.3",
+    "|WAZUH_DASHBOARD_CURRENT|" : "4.3.4",
     "|WAZUH_DASHBOARD_CURRENT_REV_RPM|" : "1",
     "|WAZUH_DASHBOARD_CURRENT_REV_DEB|" : "1",
     "|WAZUH_DASHBOARD_x64_RPM|" : "x86_64",
     "|WAZUH_DASHBOARD_x64_DEB|" : "amd64",
-    "|WAZUH_LATEST_ANSIBLE|" : "4.3.3",
+    "|WAZUH_LATEST_ANSIBLE|" : "4.3.4",
     "|WAZUH_LATEST_MINOR_ANSIBLE|" : "4.3",
-    "|WAZUH_LATEST_KUBERNETES|" : "4.3.3",
-    "|WAZUH_LATEST_PUPPET|" : "4.3.3",
-    "|WAZUH_LATEST_OVA|" : "4.3.2",
-    "|WAZUH_LATEST_AMI|" : "4.3.2",
-    "|WAZUH_LATEST_DOCKER|" : "4.3.3",
-    "|WAZUH_LATEST_AIX|" : "4.3.3",
+    "|WAZUH_LATEST_KUBERNETES|" : "4.3.4",
+    "|WAZUH_LATEST_PUPPET|" : "4.3.4",
+    "|WAZUH_LATEST_OVA|" : "4.3.3",
+    "|WAZUH_LATEST_AMI|" : "4.3.4",
+    "|WAZUH_LATEST_DOCKER|" : "4.3.4",
+    "|WAZUH_LATEST_AIX|" : "4.3.4",
     "|WAZUH_LATEST_MINOR_AIX|" : "4.3",
-    "|WAZUH_LATEST_FROM_SOURCES|" : "4.3.3",
+    "|WAZUH_LATEST_FROM_SOURCES|" : "4.3.4",
     "|WAZUH_LATEST_MINOR_FROM_SOURCES|" : "4.3",
-    "|WAZUH_LATEST_WIN_FROM_SOURCES|" : "4.3.3",
+    "|WAZUH_LATEST_WIN_FROM_SOURCES|" : "4.3.4",
     "|WAZUH_LATEST_WIN_REV_FROM_SOURCES|" : "1",
     "|OPEN_DISTRO_LATEST|" : "1.13.2",
     "|ELASTICSEARCH_LATEST|" : "7.10.2",
@@ -515,7 +518,7 @@ custom_replacements = {
     "|OPENDISTRO_LATEST_KUBERNETES|" : "1.13.2",
     "|DOCKER_COMPOSE_VERSION|" : "1.28.3",
     "|SPLUNK_LATEST|" : "8.2.6",
-    "|WAZUH_SPLUNK_LATEST|" : "4.3.3",
+    "|WAZUH_SPLUNK_LATEST|" : "4.3.4",
     "|ELASTIC_6_LATEST|" : "6.8.8",
     "|WAZUH_REVISION_DEB_AGENT_PPC|" : "1",
     "|WAZUH_REVISION_YUM_AGENT_PPC|" : "1",
@@ -554,7 +557,7 @@ custom_replacements = {
     "|DEB_MANAGER|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-manager/wazuh-manager",
     "|DEB_API|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-api/wazuh-api",
     # Variables for Elastic's Elasticsearch
-    "|ELASTICSEARCH_ELK_LATEST|" : "7.17.3",
+    "|ELASTICSEARCH_ELK_LATEST|" : "7.17.4",
     "|ELASTICSEARCH_ELK_LATEST_ANSIBLE|" : "7.10.2",
     "|ELASTICSEARCH_ELK_LATEST_KUBERNETES|" : "7.10.2",
     "|ELASTICSEARCH_ELK_LATEST_PUPPET|" : "7.10.2",
@@ -604,12 +607,13 @@ def setup(app):
     if html_theme == 'wazuh_doc_theme_v3':
         
         # Minify redirects.js
-        with open(os.path.join(static_path_str, "js/redirects.js")) as redirects_file:
-            minified = jsmin(redirects_file.read())
-            
-            # Create redirects.min.js file
-            with open(os.path.join(current_path, "static/js/min/redirects.min.js"), 'w') as redirects_min_file:
-                redirects_min_file.write(minified)
+        if html_theme_options['include_version_selector'] == True:
+            with open(os.path.join(static_path_str, "js/redirects.js")) as redirects_file:
+                minified = jsmin(redirects_file.read())
+                
+                # Create redirects.min.js file
+                with open(os.path.join(current_path, "static/js/min/redirects.min.js"), 'w') as redirects_min_file:
+                    redirects_min_file.write(minified)
         
         # CSS files
         app.add_css_file("css/min/bootstrap.min.css?ver=%s" % os.stat(
@@ -685,9 +689,12 @@ def insert_inline_js(app, pagename, templatename, context, doctree):
 def manage_assets(app, pagename, templatename, context, doctree):
     theme_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), theme_assets_path)
     static = '_static/'
-    conditional_redirects = static + "js/min/redirects.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/redirects.min.js")).st_mtime
-    if tags.has("production") or tags.has("dev"):
-        conditional_redirects = static + "js/min/redirects.min.js?ver=%s" % str(time.time())
+    if html_theme_options['include_version_selector'] == True:
+        conditional_redirects = static + "js/min/redirects.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/redirects.min.js")).st_mtime
+        if tags.has("production") or tags.has("dev"):
+            conditional_redirects = static + "js/min/redirects.min.js?ver=%s" % str(time.time())
+    else:
+        conditional_redirects = ''
     # Full list of non-common javascript files
     individual_js_files = {
         "redirects": conditional_redirects,
@@ -713,6 +720,9 @@ def manage_assets(app, pagename, templatename, context, doctree):
             'not_found': "css/min/not-found.min.css?ver=%s" % os.stat(os.path.join(theme_dir, "static/css/min/not-found.min.css")).st_mtime
         }
         default = "css/min/wazuh-documentation.min.css?ver=%s" % os.stat(os.path.join(theme_dir, "static/css/min/wazuh-documentation.min.css")).st_mtime
+        
+        if html_theme_options['breadcrumb_root_title'] == 'Training':
+            css_map['index'] = default
 
         if pagename in css_map.keys():
             return css_map[pagename]
@@ -758,6 +768,9 @@ def manage_assets(app, pagename, templatename, context, doctree):
             # tabs (extension)
             # lightbox (extension)
         ]
+        
+        if html_theme_options['breadcrumb_root_title'] == 'Training':
+            js_map['index'] = default
 
         if pagename in js_map.keys():
             return js_map[pagename]
@@ -785,7 +798,7 @@ def finish_and_clean(app, exception):
 
     if html_theme == 'wazuh_doc_theme_v3':
         # Remove map files and sourcMapping line in production
-        if production:
+        if production or html_theme_options['breadcrumb_root_title'] == 'Training':
             mapFiles = glob.glob(app.outdir + '/_static/*/min/*.map')
             assetsFiles = glob.glob(app.outdir + '/_static/js/min/*.min.js') + glob.glob(app.outdir + '/_static/css/min/*.min.css')
             # Remove map files
@@ -810,7 +823,7 @@ def finish_and_clean(app, exception):
                     
 def collect_compiled_pagename(app, pagename, templatename, context, doctree):
     ''' Runs once per page, storing the pagename (full page path) extracted from the context
-        It store the path of all compiled documents except the orphans and the ones in exclude_doc'''
+        It stores the path of all compiled documents except the orphans and the ones in exclude_doc '''
     if templatename == "page.html" and pagename not in exclude_doc:
         if not context['meta'] or ( context['meta']['orphan'] ):
             list_compiled_html.append(context['pagename']+'.html')

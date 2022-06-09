@@ -201,7 +201,7 @@ Solaris
 +=========+==============+=============================================================================================================================================================================================================================================+
 |         |     i386     | `wazuh-agent_v|WAZUH_LATEST|-sol10-i386.pkg <https://packages.wazuh.com/|CURRENT_MAJOR|/solaris/i386/10/wazuh-agent_v|WAZUH_LATEST|-sol10-i386.pkg>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh-agent_v|WAZUH_LATEST|-sol10-i386.pkg.sha512>`__)        |
 +  10     +--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|         |     SPARC    | `wazuh-agent_v4.3.2-sol10-sparc.pkg <https://packages.wazuh.com/|CURRENT_MAJOR|/solaris/sparc/10/wazuh-agent_v4.3.2-sol10-sparc.pkg>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/4.3.2/wazuh-agent_v4.3.2-sol10-sparc.pkg.sha512>`__)    |
+|         |     SPARC    | `wazuh-agent_v|WAZUH_LATEST|-sol10-sparc.pkg <https://packages.wazuh.com/|CURRENT_MAJOR|/solaris/sparc/10/wazuh-agent_v|WAZUH_LATEST|-sol10-sparc.pkg>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh-agent_v|WAZUH_LATEST|-sol10-sparc.pkg.sha512>`__)    |
 +---------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |         |     i386     | `wazuh-agent_v|WAZUH_LATEST|-sol11-i386.p5p <https://packages.wazuh.com/|CURRENT_MAJOR|/solaris/i386/11/wazuh-agent_v|WAZUH_LATEST|-sol11-i386.p5p>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh-agent_v|WAZUH_LATEST|-sol11-i386.p5p.sha512>`__)        |
 +  11     +--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -280,6 +280,8 @@ For Wazuh |WAZUH_LATEST|:
 
 .. |WAZUH_KIBANA_7.17.3| replace:: `wazuh_kibana-|WAZUH_LATEST|_7.17.3.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_7.17.3-1.zip>`__ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_7.17.3-1.zip.sha512>`__)
 
+.. |WAZUH_KIBANA_7.17.4| replace:: `wazuh_kibana-|WAZUH_LATEST|_7.17.4.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_7.17.4-1.zip>`__ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_kibana-|WAZUH_LATEST|_7.17.4-1.zip.sha512>`__)
+
 +------------------+-----------------------+--------------------------+
 | Kibana Version   | Open Distro Version   | Package                  |
 +==================+=======================+==========================+
@@ -300,6 +302,8 @@ For Wazuh |WAZUH_LATEST|:
 | 7.17.2           |                       | |WAZUH_KIBANA_7.17.2|    |
 +------------------+-----------------------+--------------------------+
 | 7.17.3           |                       | |WAZUH_KIBANA_7.17.3|    |
++------------------+-----------------------+--------------------------+
+| 7.17.4           |                       | |WAZUH_KIBANA_7.17.4|    |
 +------------------+-----------------------+--------------------------+
 
 For a complete list of the available versions, see the `Wazuh Kibana plugin compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/wiki/Compatibility>`_.

@@ -14,14 +14,14 @@ The agent runs as a service on the instance, and collects different types of sys
 
 Thanks to the Wazuh agent, there are some capabilities available to monitor the instances:
 
-- :ref:`Log data collection <manual_log_analysis>`
-- :ref:`File integrity monitoring <manual_file_integrity>`
-- :ref:`Anomaly and malware detection <manual_anomaly_detection>`
-- :ref:`Security policy monitoring <manual_policy_monitoring>`
-- :ref:`System inventory <syscollector>`
-- :ref:`Vulnerability detection <vulnerability-detection>`
+- :doc:`Log data collection </user-manual/capabilities/log-data-collection/index>`
+- :doc:`File integrity monitoring </user-manual/capabilities/file-integrity/index>`
+- :doc:`Anomaly and malware detection </user-manual/capabilities/anomalies-detection/index>`
+- :doc:`Security policy monitoring </user-manual/capabilities/policy-monitoring/index>`
+- :doc:`System inventory </user-manual/capabilities/syscollector>`
+- :doc:`Vulnerability detection </user-manual/capabilities/vulnerability-detection/index>`
 
-To learn more about the different Wazuh capabilities, check out :ref:`this section <user_manual>`.
+To learn more about the different Wazuh capabilities, check out :doc:`this section </user-manual/index>`.
 
 .. note::
-  To install the Wazuh agent, follow the instructions available on the :ref:`agent installation guide <installation_agents>`.
+  To install the Wazuh agent, follow the instructions available on the :doc:`agent installation guide </installation-guide/wazuh-agent/index>`.
