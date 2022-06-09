@@ -16,7 +16,7 @@ You can also find here the different settings available for the ``Makefile``. Ea
 Compiling the source code
 -------------------------
 
-When following the official documentation to install the Wazuh :doc:`server </installation-guide/wazuh-server/index>` or :doc:`agent </installation-guide/wazuh-agent/index>` from sources, the user runs the ``install.sh`` script. This will automatically compile the source code before installing it, but some customizations can be made prior to the script execution.
+When following the official documentation to install the Wazuh :doc:`server </deployment-options/wazuh-from-sources/wazuh-server/index>` or the :doc:`agent </deployment-options/wazuh-from-sources/wazuh-agent/index>` from sources, the user runs the ``install.sh`` script. This will automatically compile the source code before installing it, but some customizations can be made prior to the script execution.
 
 To compile the code with ``make``, the working directory must be where the ``MAKEFILE`` resides, in this case, the ``/src`` directory of the installation folder:
 
