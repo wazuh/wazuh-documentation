@@ -55,6 +55,14 @@ Wazuh Splunk app
 - `#1327 <https://github.com/wazuh/wazuh-splunk/pull/1327>`_        Splunk search-handler event management is improved to avoid forwarder toast error misinterpretation. 
 
 
+Packages
+^^^^^^^^
+
+- `#1595 <https://github.com/wazuh/wazuh-packages/pull/1595>`_      Splunk packages builder is simplified. 
+- `#1606 <https://github.com/wazuh/wazuh-packages/pull/1606>`_      The Wazuh logo on the login page is updated. 
+- `#1628 <https://github.com/wazuh/wazuh-packages/pull/1628>`_      Support for Ubuntu 22 is added. 
+- `#1548 <https://github.com/wazuh/wazuh-packages/pull/1548>`_      Installation assistant Wazuh API default password is changed.
+
 
 Resolved issues
 ---------------
@@ -144,6 +152,16 @@ Wazuh Splunk app
 Reference                                                         Description
 ==============================================================    =============
 `#1329 <https://github.com/wazuh/wazuh-splunk/pull/1329>`_        Unhandled expired session when requesting Splunk DB documents is fixed.
+==============================================================    =============
+
+
+Packages
+^^^^^^^^
+
+==============================================================    =============
+Reference                                                         Description
+==============================================================    =============
+`#1613 <https://github.com/wazuh/wazuh-packages/pull/1613>`_      Suse init script installation in agent is fixed. 
 ==============================================================    =============
 
 
