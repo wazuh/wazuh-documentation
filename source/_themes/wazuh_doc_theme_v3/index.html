@@ -6,7 +6,7 @@
     
 -#}
 
-{% if is_latest_release %}
+{% if is_latest_release and theme_breadcrumb_root_title == 'Documentation' %}
 
   {%- extends "!wazuh_doc_theme_v3/template-parts/body.html" -%}
   
@@ -41,8 +41,14 @@
   {%- block light_box_display %}{%- endblock light_box_display -%}  
 
 {%- else -%}
+  {%- if theme_breadcrumb_root_title != 'Documentation' -%}
+    {%- extends "!wazuh_doc_theme_v3/template-parts/body.html" -%}
+    {{ super () }}
+    
+  {%- else -%}
   <body>
     {% set index_redirect_js = get_js_by_page(pagename+'-redirect')[0] %}
     <script src="{{ pathto( index_redirect_js, 1) }}"></script>
   </body>
+  {%- endif %}
 {%- endif %}

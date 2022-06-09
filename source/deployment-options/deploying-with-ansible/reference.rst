@@ -285,7 +285,7 @@ Wazuh Manager
 
 |
 | **Variable**: ``wazuh_manager_monitor_aws``
-| **Description**: Configures the :ref:`wodle <wodle_s3>` item named ``aws-s3`` from ``ossec.conf``.
+| **Description**: Configures the :doc:`AWS S3 module </user-manual/reference/ossec-conf/wodle-s3>` item named ``aws-s3`` from ``ossec.conf``.
 | **Default values**:  
 
 .. code-block:: yaml

@@ -60,7 +60,8 @@ Remove your current installation
 Install Wazuh agent
 -------------------
 
-Now it's time to install the Wazuh agent component. This can be done from sources or from binary packages. Go to our documentation to :ref:`Installing Wazuh agent <installation_agents>` section for detailed instructions on this process.
+Now it's time to install the Wazuh agent component. This can be done from sources or from binary packages. Go to our documentation to :doc:`Wazuh agent </installation-guide/wazuh-agent/index>` section for detailed instructions on this process.
+
 
 Restore configuration
 ---------------------
