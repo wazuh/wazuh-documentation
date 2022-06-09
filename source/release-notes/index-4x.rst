@@ -20,7 +20,7 @@ Wazuh version                                  Release date
 :doc:`4.2.5 </release-notes/release-4-2-5>`    15 November 2021
 :doc:`4.2.4 </release-notes/release-4-2-4>`    20 October 2021
 :doc:`4.2.3 </release-notes/release-4-2-3>`    6 October 2021
-:doc:`4.2.2 </release-notes/release-4-2-2>`    28 September 2022
+:doc:`4.2.2 </release-notes/release-4-2-2>`    28 September 2021
 :doc:`4.2.1 </release-notes/release-4-2-1>`    3 September 2021
 :doc:`4.2.0 </release-notes/release-4-2-0>`    25 August 2021
 :doc:`4.1.5 </release-notes/release-4-1-5>`    22 April 2021
