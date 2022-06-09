@@ -5,8 +5,8 @@
 
 .. _release_4_1_2:
 
-4.1.2 Release notes
-===================
+4.1.2 Release notes - 8 March 2021
+==================================
 
 This section lists the changes in version 4.1.2. More details about these changes are provided in the changelog of each component:
 

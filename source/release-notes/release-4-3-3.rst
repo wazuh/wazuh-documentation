@@ -5,8 +5,8 @@
 
 .. _release_4_3_3:
 
-4.3.3 Release notes
-===================
+4.3.3 Release notes - 1 June 2022
+=================================
 
 This section lists the changes in version 4.3.3. Every update of the Wazuh solution is cumulative and includes all enhancements and fixes from previous releases.
 
