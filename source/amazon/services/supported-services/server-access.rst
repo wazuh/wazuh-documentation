@@ -14,7 +14,7 @@ Amazon S3 Server Access
 Amazon configuration
 --------------------
 
-#. :ref:`Create a new <S3_bucket>` S3 bucket to store the access logs in it. If you want to use an existing one, skip this step.
+#. :doc:`Create a new </amazon/services/prerequisites/S3-bucket>` S3 bucket to store the access logs in it. If you want to use an existing one, skip this step.
 
 #. Go to Services > Storage > S3:
 
@@ -78,7 +78,7 @@ Wazuh configuration
       </wodle>
 
     .. note::
-      Check the :ref:`AWS S3 module <wodle_s3>` reference manual to learn more about each setting.
+      Check the :doc:`AWS S3 module </user-manual/reference/ossec-conf/wodle-s3>` reference manual to learn more about each setting.
 
 #. Restart Wazuh in order to apply the changes:
 
