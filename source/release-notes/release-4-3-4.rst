@@ -4,10 +4,8 @@
   :description: Wazuh 4.3.4 has been released. Check out our release notes to discover the changes and additions of this release.
 
 
-4.3.4 Release notes
-===================
-
-June 8th 2022
+4.3.4 Release notes - 8 June 2022
+=================================
 
 This section lists the changes in version 4.3.4. Every update of the Wazuh solution is cumulative and includes all enhancements and fixes from previous releases.
 
