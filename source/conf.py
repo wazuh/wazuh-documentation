@@ -603,25 +603,6 @@ custom_replacements = {
     "|WAZUH_SPLUNK_CURRENT|" : release,
 }
 
-def custom_values(*vals):
-    def add_values(obj):
-        obj.__doc__ = obj.__doc__.format(*vals)
-        return obj
-    return add_values
-
-@custom_values(version, release)
-def sphinx_replacements():
-    """
-
-    .. |W_CURRENT_MINOR| replace:: {0}
-
-    .. |W_CURRENT| replace:: {1}
-
-    """
-    pass
-
-rst_prolog = sphinx_replacements.__doc__
-
 # -- Customizations ---------------------------------------------------------
 
 ## emptyTocNodes ##
