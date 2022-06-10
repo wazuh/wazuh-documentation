@@ -61,8 +61,7 @@ Packages
 - `#1595 <https://github.com/wazuh/wazuh-packages/pull/1595>`_      Splunk packages builder is simplified. 
 - `#1606 <https://github.com/wazuh/wazuh-packages/pull/1606>`_      The Wazuh logo on the login page is updated. 
 - `#1628 <https://github.com/wazuh/wazuh-packages/pull/1628>`_      Support for Ubuntu 22 is added. 
-- `#1548 <https://github.com/wazuh/wazuh-packages/pull/1548>`_      Installation assistant Wazuh API default password is changed.
-
+- `#1548 <https://github.com/wazuh/wazuh-packages/pull/1548>`_      The installation assistant now changes the Wazuh API default passwords. 
 
 Resolved issues
 ---------------
