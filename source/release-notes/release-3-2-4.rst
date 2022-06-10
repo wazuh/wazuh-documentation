@@ -4,8 +4,8 @@
   :description: Wazuh 3.2.4 has been released. Check out our release notes to discover the changes and additions of this release.
 .. _release_3_2_4:
 
-3.2.4 Release notes
-===================
+3.2.4 Release notes - 1 June 2018
+=================================
 
 This section shows the most relevant improvements and fixes in version 3.2.4. More details about these changes are provided in each component changelog.
 

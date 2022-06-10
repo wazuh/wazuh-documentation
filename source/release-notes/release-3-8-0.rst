@@ -5,8 +5,8 @@
 
 .. _release_3_8_0:
 
-3.8.0 Release notes
-===================
+3.8.0 Release notes - 18 January 2019
+=====================================
 
 This section shows the most relevant improvements and fixes in version 3.8.0. More details about these changes are provided in each component changelog:
 

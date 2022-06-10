@@ -5,8 +5,8 @@
 
 .. _release_3_11_3:
 
-3.11.3 Release notes
-====================
+3.11.3 Release notes - 28 January 2020
+======================================
 
 This section lists the changes in version 3.11.3. More details about these changes are provided in each component changelog:
 
