@@ -55,6 +55,13 @@ Wazuh Splunk app
 - `#1327 <https://github.com/wazuh/wazuh-splunk/pull/1327>`_        Splunk search-handler event management is improved to avoid forwarder toast error misinterpretation. 
 
 
+Packages
+^^^^^^^^
+
+- `#1595 <https://github.com/wazuh/wazuh-packages/pull/1595>`_      Splunk packages builder is simplified. 
+- `#1606 <https://github.com/wazuh/wazuh-packages/pull/1606>`_      The Wazuh logo on the login page is updated. 
+- `#1628 <https://github.com/wazuh/wazuh-packages/pull/1628>`_      Support for Ubuntu 22 is added. 
+- `#1548 <https://github.com/wazuh/wazuh-packages/pull/1548>`_      The installation assistant now changes the Wazuh API default passwords. 
 
 Resolved issues
 ---------------
@@ -147,6 +154,16 @@ Reference                                                         Description
 ==============================================================    =============
 
 
+Packages
+^^^^^^^^
+
+==============================================================    =============
+Reference                                                         Description
+==============================================================    =============
+`#1613 <https://github.com/wazuh/wazuh-packages/pull/1613>`_      Suse init script installation in agent is fixed. 
+==============================================================    =============
+
+
 Changelogs
 ----------
 
@@ -157,3 +174,4 @@ More details about these changes are provided in the changelog of each component
 - `wazuh/wazuh-kibana-app 7.10.2 <https://github.com/wazuh/wazuh-kibana-app/blob/v4.3.4-7.10.2/CHANGELOG.md>`_
 - `wazuh/wazuh-kibana-app 7.17.x <https://github.com/wazuh/wazuh-kibana-app/blob/v4.3.4-7.17.4/CHANGELOG.md>`_
 - `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v4.3.4-8.2.6/CHANGELOG.md>`_
+- `wazuh/wazuh-packages <https://github.com/wazuh/wazuh-packages/releases/tag/v4.3.4>`_
