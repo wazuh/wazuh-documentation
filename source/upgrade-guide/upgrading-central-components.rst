@@ -29,10 +29,10 @@ In the case Wazuh is installed in a multi-node cluster configuration, repeat the
 
 
 
-     .. group-tab:: APT
+     .. group-tab:: APT - Debian 10.x (Buster) / Ubuntu 18.04 (Bionic Beaver) or earlier
 
 
-       .. include:: /_templates/installations/common/deb/add-repository.rst
+       .. include:: /_templates/installations/common/deb/add-repository/10.rst
 
 
 

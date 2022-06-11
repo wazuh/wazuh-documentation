@@ -29,10 +29,10 @@ Add the Wazuh repository to download the official packages.
 
 
 
-  .. group-tab:: APT
+  .. group-tab:: APT - Debian 10.x (Buster) / Ubuntu 18.04 (Bionic Beaver) or earlier
 
 
-    .. include:: ../../_templates/installations/wazuh/deb/add_repository.rst
+    .. include:: ../../_templates/installations/wazuh/deb/add_repository/10.rst
 
 
 

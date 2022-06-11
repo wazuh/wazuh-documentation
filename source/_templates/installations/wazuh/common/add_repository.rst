@@ -21,10 +21,10 @@
             enabled=1
             name=EL-\$releasever - Wazuh
             baseurl=https://packages.wazuh.com/4.x/yum/
-            protect=1 
-            EOF 
+            protect=1
+            EOF
 
-   .. group-tab:: APT
+   .. group-tab:: APT - Debian 10.x (Buster) / Ubuntu 18.04 (Bionic Beaver) or earlier
 
       #. Install the GPG key:
 

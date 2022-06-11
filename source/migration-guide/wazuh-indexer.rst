@@ -76,10 +76,10 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13 to the Wazu
 
 
 
-      .. group-tab:: APT
+      .. group-tab:: APT - Debian 10.x (Buster) / Ubuntu 18.04 (Bionic Beaver) or earlier
 
 
-        .. include:: /_templates/installations/common/deb/add-repository.rst
+        .. include:: /_templates/installations/common/deb/add-repository/10.rst
 
 
 

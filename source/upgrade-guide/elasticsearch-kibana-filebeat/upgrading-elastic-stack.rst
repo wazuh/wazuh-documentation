@@ -33,10 +33,10 @@ Preparing the upgrade
 
 
 
-     .. group-tab:: APT
+     .. group-tab:: APT - Debian 10.x (Buster) / Ubuntu 18.04 (Bionic Beaver) or earlier
 
 
-       .. include:: /_templates/installations/common/deb/add-repository.rst
+       .. include:: /_templates/installations/common/deb/add-repository/10.rst
 
 
 
@@ -95,10 +95,10 @@ Preparations
 
 
 
-      .. group-tab:: APT
+      .. group-tab:: APT - Debian 10.x (Buster) / Ubuntu 18.04 (Bionic Beaver) or earlier
 
 
-        .. include:: ../../_templates/installations/basic/elastic/deb/add_repository.rst
+        .. include:: ../../_templates/installations/basic/elastic/deb/add_repository/10.rst
 
 
 

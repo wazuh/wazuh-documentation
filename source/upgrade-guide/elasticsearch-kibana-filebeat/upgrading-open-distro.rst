@@ -29,10 +29,10 @@ Preparing the upgrade
 
 
 
-     .. group-tab:: APT
+     .. group-tab:: APT - Debian 10.x (Buster) / Ubuntu 18.04 (Bionic Beaver) or earlier
 
 
-       .. include:: /_templates/installations/common/deb/add-repository.rst
+       .. include:: /_templates/installations/common/deb/add-repository/10.rst
 
 
 
@@ -146,15 +146,17 @@ Preparations
           3. Clean the YUM cache:
   
             .. code-block:: console
-  
-              # yum clean all 
-  
-        .. group-tab:: APT
-  
-          .. include:: ../../_templates/installations/basic/wazuh/deb/add_repository_aio.rst
-  
-        
-  
+
+              # yum clean all
+
+
+
+        .. group-tab:: APT - Debian 10.x (Buster) / Ubuntu 18.04 (Bionic Beaver) or earlier
+
+          .. include:: ../../_templates/installations/basic/wazuh/deb/add_repository_aio/10.rst
+
+
+
         .. group-tab:: ZYpp
   
           .. include:: ../../_templates/installations/basic/wazuh/zypp/add_repository_aio.rst

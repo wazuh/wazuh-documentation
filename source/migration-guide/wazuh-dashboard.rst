@@ -44,10 +44,10 @@ To guarantee a correct operation of Wazuh, make sure to also migrate from Open D
 
 
 
-      .. group-tab:: APT
+      .. group-tab:: APT - Debian 10.x (Buster) / Ubuntu 18.04 (Bionic Beaver) or earlier
 
 
-        .. include:: /_templates/installations/common/deb/add-repository.rst
+        .. include:: /_templates/installations/common/deb/add-repository/10.rst
 
 
 

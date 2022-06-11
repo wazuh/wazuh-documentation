@@ -39,10 +39,10 @@ This section describes how to add the Wazuh repository. It will be used for the 
 
 
 
-  .. group-tab:: APT
+  .. group-tab:: APT - Debian 10.x (Buster) / Ubuntu 18.04 (Bionic Beaver) or earlier
 
 
-    .. include:: /_templates/installations/basic/wazuh/deb/add_repository.rst
+    .. include:: /_templates/installations/basic/wazuh/deb/add_repository/10.rst
 
 
 
@@ -126,10 +126,10 @@ Adding the Elastic Stack repository
 
 
 
-  .. group-tab:: APT
+  .. group-tab:: APT - Debian 10.x (Buster) / Ubuntu 18.04 (Bionic Beaver) or earlier
 
 
-    .. include:: /_templates/installations/basic/elastic/deb/add_repository.rst
+    .. include:: /_templates/installations/basic/elastic/deb/add_repository/10.rst
 
 
 

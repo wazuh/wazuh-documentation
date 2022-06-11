@@ -50,10 +50,10 @@ The addition of the Elastic Stack repository must be done in all Elasticsearch c
 
 
 
-  .. group-tab:: APT
+  .. group-tab:: APT - Debian 10.x (Buster) / Ubuntu 18.04 (Bionic Beaver) or earlier
 
 
-    .. include:: /_templates/installations/basic/elastic/deb/add_repository.rst
+    .. include:: /_templates/installations/basic/elastic/deb/add_repository/10.rst
 
 
 
@@ -132,10 +132,10 @@ The addition of the Elastic Stack repository must be done in all Elasticsearch c
 
 
 
-  .. group-tab:: APT
+  .. group-tab:: APT - Debian 10.x (Buster) / Ubuntu 18.04 (Bionic Beaver) or earlier
 
 
-    .. include:: /_templates/installations/basic/elastic/deb/add_repository.rst
+    .. include:: /_templates/installations/basic/elastic/deb/add_repository/10.rst
 
 
 

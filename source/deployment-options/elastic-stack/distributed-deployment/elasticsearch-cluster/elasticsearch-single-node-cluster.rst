@@ -36,13 +36,13 @@ Adding the Elastic Stack repository
 
 
     .. include:: /_templates/installations/basic/elastic/yum/add_repository.rst
-    
 
 
-  .. group-tab:: APT
+
+  .. group-tab:: APT - Debian 10.x (Buster) / Ubuntu 18.04 (Bionic Beaver) or earlier
 
 
-    .. include:: /_templates/installations/basic/elastic/deb/add_repository.rst
+    .. include:: /_templates/installations/basic/elastic/deb/add_repository/10.rst
 
 
 

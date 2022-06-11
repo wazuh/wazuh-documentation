@@ -56,7 +56,7 @@ To perform the upgrade locally, follow the instructions for the operating system
           # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
 
 
-  .. group-tab:: APT
+  .. group-tab:: APT - Debian 10.x (Buster) / Ubuntu 18.04 (Bionic Beaver) or earlier
 
     #. Install the GPG key:
 

@@ -31,16 +31,16 @@ Adding the Wazuh repository
   
   
       .. include:: /_templates/installations/common/yum/add-repository.rst
-  
-  
-  
-    .. group-tab:: APT
-  
-  
-      .. include:: /_templates/installations/common/deb/add-repository.rst
-  
-  
-  
+
+
+
+    .. group-tab:: APT - Debian 10.x (Buster) / Ubuntu 18.04 (Bionic Beaver) or earlier
+
+
+      .. include:: /_templates/installations/common/deb/add-repository/10.rst
+
+
+
 
 Installing the Wazuh dashboard
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

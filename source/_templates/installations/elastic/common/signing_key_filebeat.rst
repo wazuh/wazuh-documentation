@@ -3,7 +3,7 @@
 .. tabs::
 
 
-  .. group-tab:: APT
+  .. group-tab:: APT - Debian 10.x (Buster) / Ubuntu 18.04 (Bionic Beaver) or earlier
 
     .. code-block:: console
 
