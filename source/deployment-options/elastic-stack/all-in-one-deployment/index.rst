@@ -47,6 +47,13 @@ Adding the Elastic Stack repository
 
 
 
+  .. group-tab:: APT - Debian 11.x (Bullseye) / Ubuntu 20.04 (Focal Fossa) or later
+
+
+    .. include:: ../../../_templates/installations/basic/elastic/deb/add_repository/11.rst
+
+
+
 Elasticsearch installation and configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -175,6 +182,13 @@ Adding the Wazuh repository
 
 
     .. include:: ../../../_templates/installations/basic/wazuh/deb/add_repository_aio/10.rst
+
+
+
+  .. group-tab:: APT - Debian 11.x (Bullseye) / Ubuntu 20.04 (Focal Fossa) or later
+
+
+    .. include:: ../../../_templates/installations/basic/wazuh/deb/add_repository_aio/11.rst
 
 
 

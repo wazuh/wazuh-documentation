@@ -40,6 +40,13 @@ Preparing the upgrade
 
 
 
+     .. group-tab:: APT - Debian 11.x (Bullseye) / Ubuntu 20.04 (Focal Fossa) or later
+
+
+       .. include:: /_templates/installations/common/deb/add-repository/11.rst
+
+
+
 
 #. Repeat the previous step for every Wazuh node.
 
@@ -99,6 +106,13 @@ Preparations
 
 
         .. include:: ../../_templates/installations/basic/elastic/deb/add_repository/10.rst
+
+
+
+      .. group-tab:: APT - Debian 11.x (Bullseye) / Ubuntu 20.04 (Focal Fossa) or later
+
+
+        .. include:: ../../_templates/installations/basic/elastic/deb/add_repository/11.rst
 
 
 

@@ -1,0 +1,23 @@
+.. Copyright (C) 2022 Wazuh, Inc.
+
+#. Install the GPG key:
+
+    .. code-block:: console
+
+      # mkdir -p /etc/apt/keyrings
+      # curl -s https://artifacts.elastic.co/GPG-KEY-elasticsearch | gpg --dearmor -o /etc/apt/keyrings/elasticsearch.gpg
+
+
+#. Add the repository:
+
+    .. code-block:: console
+
+      # echo "deb [signed-by=/etc/apt/keyrings/elasticsearch.gpg] https://artifacts.elastic.co/packages/7.x/apt stable main" | tee /etc/apt/sources.list.d/elastic-7.x.list
+
+#. Update the package information:
+
+    .. code-block:: console
+
+      # apt-get update
+
+.. End of include file

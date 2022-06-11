@@ -41,6 +41,13 @@ Adding the Elastic Stack repository
 
 
 
+  .. group-tab:: APT - Debian 11.x (Bullseye) / Ubuntu 20.04 (Focal Fossa) or later
+
+
+    .. include:: /_templates/installations/basic/elastic/deb/add_repository/11.rst
+
+
+
 Kibana installation and configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

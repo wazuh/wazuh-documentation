@@ -83,6 +83,10 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13 to the Wazu
 
 
 
+      .. group-tab:: APT - Debian 11.x (Bullseye) / Ubuntu 20.04 (Focal Fossa) or later
+
+
+        .. include:: /_templates/installations/common/deb/add-repository/11.rst
 
 #. Install the Wazuh indexer. 
 

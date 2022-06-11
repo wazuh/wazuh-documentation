@@ -44,6 +44,13 @@ Adding the Wazuh repository
 
 
 
+  .. group-tab:: APT - Debian 11.x (Bullseye) / Ubuntu 20.04 (Focal Fossa) or later
+
+
+    .. include:: /_templates/installations/basic/wazuh/deb/add_repository/11.rst
+
+
+
 Installing the Wazuh manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -101,6 +108,13 @@ Adding the Elastic Stack repository
 
 
     .. include:: /_templates/installations/basic/elastic/deb/add_repository/10.rst
+
+
+
+  .. group-tab:: APT - Debian 11.x (Bullseye) / Ubuntu 20.04 (Focal Fossa) or later
+
+
+    .. include:: /_templates/installations/basic/elastic/deb/add_repository/11.rst
 
 
 

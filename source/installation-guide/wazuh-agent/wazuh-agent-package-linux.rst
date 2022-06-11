@@ -36,6 +36,13 @@ Add the Wazuh repository to download the official packages.
 
 
 
+  .. group-tab:: APT - Debian 11.x (Bullseye) / Ubuntu 20.04 (Focal Fossa) or later
+
+
+    .. include:: ../../_templates/installations/wazuh/deb/add_repository/11.rst
+
+
+
   .. group-tab:: ZYpp
 
 

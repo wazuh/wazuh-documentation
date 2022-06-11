@@ -36,6 +36,13 @@ In the case Wazuh is installed in a multi-node cluster configuration, repeat the
 
 
 
+     .. group-tab:: APT - Debian 11.x (Bullseye) / Ubuntu 20.04 (Focal Fossa) or later
+
+
+       .. include:: /_templates/installations/common/deb/add-repository/11.rst
+
+
+
 
 #. Stop the Filebeat service and the Wazuh dashboard service if installed in the node.
 

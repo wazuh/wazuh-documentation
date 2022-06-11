@@ -36,6 +36,13 @@ Preparing the upgrade
 
 
 
+     .. group-tab:: APT - Debian 11.x (Bullseye) / Ubuntu 20.04 (Focal Fossa) or later
+
+
+       .. include:: /_templates/installations/common/deb/add-repository/11.rst
+
+
+
 
 #. Repeat the previous step for every Wazuh node.
 
@@ -154,6 +161,12 @@ Preparations
         .. group-tab:: APT - Debian 10.x (Buster) / Ubuntu 18.04 (Bionic Beaver) or earlier
 
           .. include:: ../../_templates/installations/basic/wazuh/deb/add_repository_aio/10.rst
+
+
+
+        .. group-tab:: APT - Debian 11.x (Bullseye) / Ubuntu 20.04 (Focal Fossa) or later
+
+          .. include:: ../../_templates/installations/basic/wazuh/deb/add_repository_aio/11.rst
 
 
 
