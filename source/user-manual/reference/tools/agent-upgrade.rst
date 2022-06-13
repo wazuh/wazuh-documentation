@@ -89,11 +89,11 @@ Examples
        Agent 002 upgraded: Wazuh v4.0.0 -> |WAZUH_LATEST|
 
 
-* Downgrade agent using a custom repository:
+* Upgrade agent using a custom repository:
 
 .. code-block:: console
 
-    # /var/ossec/bin/agent_upgrade -a 002 -dF -v v4.0.0 -r http://mycompany.wpkrepo.com/
+    # /var/ossec/bin/agent_upgrade -a 002 -v v4.0.0 -r http://mycompany.wpkrepo.com/
 
 .. code-block:: none
     :class: output
