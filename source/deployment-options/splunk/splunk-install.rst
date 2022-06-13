@@ -6,9 +6,9 @@
 Install and configure Splunk
 ============================
 
-To use the Wazuh Splunk app, the Splunk components have to be installed and configured. The Splunk installation architecture is dependent on the architecture of the Wazuh manager.
+The Splunk components must be installed and configured to use the Wazuh Splunk app. The Splunk installation architecture is dependent on the architecture of the Wazuh manager.
 
--  :doc:`Install Splunk in an all-in-one architecture <splunk-basic>`: In an **all-in-one architecture**, the forwarder, Splunk enterprise instance, Wazuh app for Splunk and Wazuh manager are installed on one server.
+-  :doc:`Install Splunk in an all-in-one architecture <splunk-basic>`: In an **all-in-one architecture**, the forwarder, Splunk enterprise instance, the Wazuh app for Splunk, and the Wazuh manager are installed on one server.
 -  **Install Splunk in a distributed architecture**: In a **distributed architecture**, the Wazuh manager and Splunk enterprise are installed on different servers. There are two options for using the distributed architecture:
 
    -  :doc:`Install a minimal Splunk distributed architecture <splunk-minimal-distributed>`: In a **minimal distributed architecture**, the forwarder is installed on the same server as the Wazuh manager. The forwarder must point to the **Splunk Enterprise instance** where the Wazuh app was installed.

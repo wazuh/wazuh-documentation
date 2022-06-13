@@ -276,7 +276,7 @@ Set up data forwarding
 
          .. Warning::
       
-            If you get an error message about the port ``8089`` already being in use, you can change it to use a different one.
+            If you get an error message about port ``8089`` already being in use, you can change it to use a different one.
 
          After installing the Splunk forwarder, incoming data should appear in the designated Indexer.
 
@@ -303,7 +303,7 @@ Set up data forwarding
 
          .. warning::
          
-            If you get an error message about the port ``8089`` already being in use, you will be prompted to  change it to use a different one.
+            If you get an error message about port ``8089`` already being in use, you will be prompted to  change it to use a different one.
 
       #. Point the Splunk forwarder output to Wazuh Splunk indexer with the following command:
 
@@ -331,7 +331,7 @@ Set up data forwarding
 
          .. warning::
 
-            If you get an error message about the port ``8089`` already being in use, you can change it to use a different one.
+            If you get an error message about port ``8089`` already being in use, you can change it to use a different one.
 
          After installing the Splunk Forwarder, incoming data should appear in the designated Indexer.
 

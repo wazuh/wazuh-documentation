@@ -24,7 +24,7 @@ Prerequisites
 
 .. warning::
 
-   By following this guide, users will learn how to install and configure **Wazuh** in an already created Splunk cluster.  All Splunk related configuration is in their `Official Documentation <https://docs.splunk.com/Documentation/Splunk/7.2.3/Indexer/Aboutclusters>`__, and it is assumed that a Splunk cluster installation and configuration has been already done.
+   By following this guide, users will learn how to install and configure **Wazuh** in an already created Splunk cluster.  All Splunk related configuration is in their `Official Documentation <https://docs.splunk.com/Documentation/Splunk/7.2.3/Indexer/Aboutclusters>`__, and it is assumed that a Splunk cluster installation and configuration has already been done.
 
 The structure of a basic Splunk Cluster is formed by the following elements:
 
@@ -70,7 +70,7 @@ Ensure Splunk is already installed in ``/opt/splunk`` and start the service:
 
    You will be prompted for a username and password for the administrator user.
 
-After this step the Splunk Web service will be listening to port 8000. You can browse ``http://<your-instance-ip>:8000`` in order to access the Web GUI.
+After this step, the Splunk Web service will be listening to port 8000. You can browse ``http://<your-instance-ip>:8000`` in order to access the Web GUI.
 
 Configuring the Splunk indexer instances
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -170,7 +170,7 @@ The following files will be configured on all forwarder instances:
 
 -  **inputs.conf**: This file specifies the options for reading alerts from the alerts.json file.
 -  **outputs.conf**: This file is for pointing events to indexers. It can be a single indexer or a cluster of indexers. If it is a cluster of indexers, load balancing has to be configured for the forwarders.
--  **props.conf**: This file provides format and transforming options on the fields of the data to be indexed.
+-  **props.conf**: This file provides the format and transforming options on the fields of the data to be indexed.
 
 
 Creating the configuration files
