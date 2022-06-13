@@ -1,8 +1,8 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
-  :description: The ossec.conf file is the main configuration file on the Wazuh manager and plays an important role on the agents. Learn more about the global configuration here. 
-  
+  :description: The ossec.conf file is the main configuration file on the Wazuh manager and plays an important role on the agents. Learn more about the global configuration here.
+
 .. _reference_ossec_global:
 
 global
@@ -48,6 +48,7 @@ Options
 - `max_output_size`_
 - `agents_disconnection_time`_
 - `agents_disconnection_alert_time`_
+- `limits`_
 
 alerts_log
 ^^^^^^^^^^
@@ -488,6 +489,72 @@ Example:
 .. code-block:: xml
 
   <agents_disconnection_alert_time>1h</agents_disconnection_alert_time>
+
+
+limits
+------
+
+This block configures the limits section.
+
+- `limits\\eps`_
+
++----------------------------+
+| Options                    |
++============================+
+| `limits\\eps`_             |
++----------------------------+
+
+
+limits\\eps
+^^^^^^^^^^^
+
+This block configures the events per second limitation functionality.
+
+- `limits\\eps\\maximum`_
+- `limits\\eps\\timeframe`_
+
++----------------------------------------+----------------------------------------------+
+| Options                                | Allowed values                               |
++========================================+==============================================+
+| `limits\\eps\\maximum`_                | A positive number                            |
++----------------------------------------+----------------------------------------------+
+| `limits\\eps\\timeframe`_              | A positive number                            |
++----------------------------------------+----------------------------------------------+
+
+Events per second limits example block:
+
+.. code-block:: xml
+
+    <limits>
+      <eps>
+        <maximum>500</maximum>
+        <timeframe>10</timeframe>
+      </eps>
+    </limits>
+
+limits\\eps\\maximum
+^^^^^^^^^^^^^^^^^^^^
+
+Maximum number of events per second allowed to process by decoders.
+
++--------------------+-----------------------------------------------------------------------+
+| **Default value**  | 0                                                                     |
++--------------------+-----------------------------------------------------------------------+
+| **Allowed values** | A positive number between 0 to 100000, 0 to disable the functionality |
++--------------------+-----------------------------------------------------------------------+
+
+limits\\eps\\timeframe
+^^^^^^^^^^^^^^^^^^^^^^
+
+A positive number expressed in seconds, that indicate the time period where the events per second processed are increased and restored.
+
++--------------------+-------------------------------------+
+| **Default value**  | 10                                  |
++--------------------+-------------------------------------+
+| **Allowed values** | A positive number between 1 to 3600 |
++--------------------+-------------------------------------+
+
+
 
 Default configuration
 ---------------------
