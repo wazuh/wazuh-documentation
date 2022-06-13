@@ -1,5 +1,8 @@
 .. Copyright (C) 2015–2022 Wazuh, Inc.
 
+.. meta::
+   :description: Learn how to use our preconfigured roles to deploy Wazuh indexer and dashboard components, Wazuh Manager and Wazuh Agents.
+
 Roles
 =====
 

@@ -1,7 +1,7 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about how the Log Data Collection capability of Wazuh works: how to collect log files and Windows event logs, how to receive log events through syslog, and more.
+  :description: Here you can see how the Log Data Collection capability of Wazuh works and learn how to collect log files and Windows event logs.
 
 How it works
 ============
