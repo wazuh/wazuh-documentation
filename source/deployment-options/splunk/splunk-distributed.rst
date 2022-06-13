@@ -42,9 +42,9 @@ Install and configure Splunk enterprise indexer instances
 
 .. note::
 
-      - Splunk is not open source software and it requires a registered user and license in order to work. You can also use a free trial license.
+      - Splunk is not open source software, and it requires a registered user and license in order to work. You can also use a free trial license.
 
-      - This guide will install and configure Splunk |SPLUNK_LATEST|. If you intend to configure a different version of Splunk with Wazuh, change the Splunk version number in the requests for the configuration files and Wazuh app for Splunk. For example, if you intend to configure Splunk 8.2.2:
+      - This guide will install and configure Splunk |SPLUNK_LATEST|. If you intend to configure a different version of Splunk with Wazuh, change the Splunk version number in the requests for the configuration files and the Wazuh app for Splunk. For example, if you intend to configure Splunk 8.2.2:
 
          .. code-block:: console
 
@@ -130,9 +130,9 @@ A Splunk forwarder is required in order to send alerts to the Splunk indexers. D
 
    .. note::
 
-         - Splunk is not open source software and it requires a registered user and license in order to work. You can also use a free trial license.
+         - Splunk is not open source software, and it requires a registered user and license in order to work. You can also use a free trial license.
 
-         - This guide will install and configure Splunk |SPLUNK_LATEST|. If you intend to configure a different version of Splunk with Wazuh, change the Splunk version number in the requests for the configuration files and Wazuh app for Splunk. For example, if you intend to configure Splunk 8.2.2:
+         - This guide will install and configure Splunk |SPLUNK_LATEST|. If you intend to configure a different version of Splunk with Wazuh, change the Splunk version number in the requests for the configuration files and the Wazuh app for Splunk. For example, if you intend to configure Splunk 8.2.2:
 
             .. code-block:: console
 
