@@ -3,7 +3,6 @@
 .. meta::
   :description: Learn how to add your billing details to your Wazuh Cloud account in this section of the documentation. 
 
-
 .. _cloud_account_billing_details:
 
 Manage your billing details
