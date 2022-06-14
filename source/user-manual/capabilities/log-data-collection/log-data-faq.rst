@@ -1,5 +1,8 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+  :description: Learn more about the Wazuh Log Data Collection capability in this FAQs section of our documentation.
+
 .. _log-analysis-FAQ:
 
 FAQ

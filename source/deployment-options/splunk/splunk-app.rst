@@ -5,7 +5,7 @@
 Install the Wazuh app for Splunk
 ================================
 
-Wazuh app for Splunk offers a UI to visualize Wazuh alerts and Wazuh API data. Wazuh helps you gain deeper security visibility into your infrastructure by monitoring hosts at an operating system and application level.
+The Wazuh app for Splunk offers a UI to visualize Wazuh alerts and Wazuh API data. Wazuh helps you gain deeper security visibility into your infrastructure by monitoring hosts at an operating system and application level.
 
 .. contents::
    :local:
@@ -21,11 +21,11 @@ Install the Wazuh app for Splunk in an all-in-one architecture
 
 .. note::      
 
-      - This guide will install and configure the Wazuh app for Splunk |SPLUNK_LATEST|. If you intend to configure a different version of Splunk with the Wazuh app, change the Splunk version number in the requests for the configuration files and Wazuh app for Splunk. For example, if you intend to configure Splunk 8.2.2:
+      - This guide will install and configure the Wazuh app for Splunk |SPLUNK_LATEST|. If you intend to configure a different version of Splunk with the Wazuh app, change the Splunk version number in the requests for the configuration files and the Wazuh app for Splunk. For example, if you intend to configure Splunk 8.2.2:
 
          .. code-block:: console
 
-            #  # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_|SPLUNK_LATEST|-1.tar.gz
+            # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_|SPLUNK_LATEST|-1.tar.gz
 
 
          Becomes
@@ -68,11 +68,11 @@ Install the Wazuh app for Splunk in an all-in-one architecture
     
       # /opt/splunkforwarder/bin/splunk restart
 
-#. Open Splunk in your desired browser and login with the username and password created when the Splunk package was installed. Click on the Wazuh app icon.
+#. Open Splunk in your desired browser and log in with the username and password created when the Splunk package was installed. Click on the Wazuh app icon.
 
-#. The app will redirect you to the Settings tab. Fill the form with your Wazuh API credentials. Use the URL and port from your Wazuh API server.
+#. The app will redirect you to the Settings tab. Fill out the form with your Wazuh API credentials. Use the URL and port from your Wazuh API server.
 
-   By default, the Wazuh API port is ``55000``. The default username and password is ``wazuh:wazuh``. Once the API has been added, it is possible to check the connection by pressing the `Check connection` button on each Wazuh API entry. A successful message appears on the bottom right corner if the connection is established.
+   By default, the Wazuh API port is ``55000``. The default username and password is ``wazuh:wazuh``. Once the API has been added, it is possible to check the connection by pressing the `Check connection` button on each Wazuh API entry. A successful message appears at the bottom right corner if the connection is established.
 
    .. note::
     
@@ -82,11 +82,11 @@ Install the Wazuh app for Splunk in an all-in-one architecture
       :align: left
       :width: 100%
 
-   When the Wazuh app for Splunk is installed, the next step is installing and configuring :ref:`Splunk forwarder <splunk_forwarder>`.
+   When the Wazuh app for Splunk is installed, the next step is installing and configuring the :ref:`Splunk forwarder <splunk_forwarder>`.
 
 #. In order to configure the index and source type of the app, go to `Settings/Index` (view image).
 
-   The default values are: ``wazuh`` for the index and ``All`` for the source type.
+   The default values are ``wazuh`` for the index and ``All`` for the source type.
 
    .. note::
       
@@ -96,7 +96,7 @@ Install the Wazuh app for Splunk in an all-in-one architecture
       :align: left
       :width: 100%
 
-   You can also select the API, Index and Source Type using the `Quick settings menu`.
+   You can also select the API, Index, and Source Type using the `Quick settings menu`.
 
 #. Open the “Overview” tab, and you should start seeing alerts and events.
 
@@ -109,10 +109,11 @@ Install the Wazuh app for Splunk in a minimal distributed architecture
 
 .. note::      
 
-      - This guide will install and configure the Wazuh app for Splunk |SPLUNK_LATEST|. If you intend to configure a different version of Splunk with the Wazuh app, change the Splunk version number in the requests for the configuration files and Wazuh app for Splunk. For example, if you intend to configure Splunk 8.2.2:
+      - This guide will install and configure the Wazuh app for Splunk |SPLUNK_LATEST|. If you intend to configure a different version of Splunk with the Wazuh app, change the Splunk version number in the requests for the configuration files and the Wazuh app for Splunk. For example, if you intend to configure Splunk 8.2.2:
 
          .. code-block:: console
 
+            # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_LATEST|_8.2.6-1.tar.gz
 
 
          Becomes
@@ -144,7 +145,7 @@ Install the Wazuh app for Splunk in a minimal distributed architecture
         
          Apps -> Manage apps -> Install app from file
 
-#. Open Splunk in your desired browser and login with the username and password created when the Splunk package was installed. Click on the Wazuh app icon.
+#. Open Splunk in your desired browser and log in with the username and password created when the Splunk package was installed. Click on the Wazuh app icon.
 
 #. The app will redirect you to the Settings tab. If you are not redirected to the Settings tab, select the settings icon, this will take you to the “Settings” page.
 
@@ -152,9 +153,9 @@ Install the Wazuh app for Splunk in a minimal distributed architecture
       :align: left
       :width: 100%
 
-   Fill the form with your Wazuh API credentials. Use the URL and port from your Wazuh API server.
+   Fill out the form with your Wazuh API credentials. Use the URL and port from your Wazuh API server.
         
-   By default, the Wazuh API port is ``55000``. The default username and password is ``wazuh:wazuh``. Once the API has been added, it is possible to check the connection by pressing the Check connection button on each Wazuh API entry. A successful message appears on the bottom right corner if the connection is established.
+   By default, the Wazuh API port is ``55000``. The default username and password is ``wazuh:wazuh``. Once the API has been added, it is possible to check the connection by pressing the Check connection button on each Wazuh API entry. A successful message appears at the bottom right corner if the connection is established.
     
    .. note::
     
@@ -166,7 +167,7 @@ Install the Wazuh app for Splunk in a minimal distributed architecture
 
 #. In order to configure the index and source type of the app, go to Settings/Index (view image).
 
-   The default values are: ``wazuh`` for the index and ``All`` for the source type.
+   The default values are ``wazuh`` for the index and ``All`` for the source type.
 
    .. note::
 
@@ -176,7 +177,7 @@ Install the Wazuh app for Splunk in a minimal distributed architecture
       :align: left
       :width: 100%
         
-   You can also select the API, Index and Source Type using the Quick settings menu.
+   You can also select the API, Index, and Source Type using the Quick settings menu.
     
 #. Open the “Overview” tab, and you should start seeing alerts and events.
 
@@ -193,7 +194,7 @@ Install the Wazuh app for Splunk in a multi-instance cluster
     
    -  The official Splunk documentation for deploying a search head cluster is `here <https://docs.splunk.com/Documentation/Splunk/|SPLUNK_LATEST|/Deploy/SHCwithindexers>`__.
 
-   -  This guide will install and configure the Wazuh app for Splunk |SPLUNK_LATEST|. If you intend to configure a different version of Splunk with the Wazuh app, change the Splunk version number in the requests for the configuration files and Wazuh app for Splunk. For example, if you intend to configure Splunk 8.2.2:
+   -  This guide will install and configure the Wazuh app for Splunk |SPLUNK_LATEST|. If you intend to configure a different version of Splunk with the Wazuh app, change the Splunk version number in the requests for the configuration files and the Wazuh app for Splunk. For example, if you intend to configure Splunk 8.2.2:
 
          .. code-block:: console
 
@@ -277,7 +278,7 @@ Install the Wazuh app for Splunk on the ``deployer`` machine and follow the step
 
    Now, we should have the ``/opt/splunk/etc/apps/SplunkAppForWazuh`` in every ``search head``.
 
-#. Open a Splunk search head instance in your desired browser and login with the username and password created when the Splunk search head package was installed. Click on the Wazuh app icon.
+#. Open a Splunk search head instance in your desired browser and log in with the username and password created when the Splunk search head package was installed. Click on the Wazuh app icon.
 
 #. The app will redirect you to the Settings tab. If you are not redirected to the Settings tab, select the settings icon, this will take you to the “Settings” page.
 
@@ -285,9 +286,9 @@ Install the Wazuh app for Splunk on the ``deployer`` machine and follow the step
       :align: left
       :width: 100%
 
-   Fill the form with your Wazuh API credentials. Use the URL and port from your Wazuh master node.
+   Fill out the form with your Wazuh API credentials. Use the URL and port from your Wazuh master node.
     
-   By default, the Wazuh API port is ``55000``. The default username and password is ``wazuh:wazuh``. Once the API has been added, it is possible to check the connection by pressing the Check connection button on each Wazuh API entry. A successful message appears on the bottom right corner if the connection is established.
+   By default, the Wazuh API port is ``55000``. The default username and password is ``wazuh:wazuh``. Once the API has been added, it is possible to check the connection by pressing the Check connection button on each Wazuh API entry. A successful message appears at the bottom right corner if the connection is established.
 
    .. note::
     
@@ -299,7 +300,7 @@ Install the Wazuh app for Splunk on the ``deployer`` machine and follow the step
         
 #. In order to configure the index and source type of the app, go to Settings/Index (view image).
 
-   The default values are: ``wazuh`` for the index and ``All`` for the source type.
+   The default values are ``wazuh`` for the index and ``All`` for the source type.
     
    .. note::
     
@@ -309,7 +310,7 @@ Install the Wazuh app for Splunk on the ``deployer`` machine and follow the step
       :align: left
       :width: 100%
     
-   You can also select the API, Index and Source Type using the Quick settings menu.
+   You can also select the API, Index, and Source Type using the Quick settings menu.
 
 #. Open the “Overview” tab, and you should start seeing alerts and events.
 

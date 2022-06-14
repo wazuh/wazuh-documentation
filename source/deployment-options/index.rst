@@ -65,7 +65,7 @@ If the Wazuh central components are already installed in your environment, selec
 
 .. raw:: html
 
-  <div class="link-boxes-group">
+  <div class="link-boxes-group layout-6">
     <div class="link-boxes-item">
       <a class="link-boxes-link" href="../installation-guide/wazuh-agent/wazuh-agent-package-linux.html">
         <p class="link-boxes-label">Linux</p>
@@ -105,6 +105,7 @@ If the Wazuh central components are already installed in your environment, selec
 
 .. image:: /images/installation/solaris.png
       :align: center
+      :width: 150px
 
 .. raw:: html
 

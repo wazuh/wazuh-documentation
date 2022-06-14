@@ -4,8 +4,8 @@
   :description: Wazuh 2.1 has been released. Check out our release notes to discover the changes and additions of this release.
 .. _release_2_1:
 
-2.1 Release notes
-===================
+2.1 Release notes - 17 August 2017
+==================================
 
 This section shows the most relevant new features of Wazuh v2.1. You will find more detailed information in our `changelog <https://github.com/wazuh/wazuh/blob/v2.1.0/CHANGELOG.md>`_ file.
 

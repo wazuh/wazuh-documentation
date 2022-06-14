@@ -20,11 +20,12 @@ body {
   .navbar-brand {
     padding: 0;
     margin: 0;
-    img {
-      height: 35px;
-    }
     .logo-link {
-      height: 34px;
+      height: 36px;
+      svg {
+        height: 36px;
+        width: auto;
+      }
     }
   }
 }
@@ -381,6 +382,9 @@ main {
     .form-control {
       background: $light-color-index-header-background;
     }
+    svg {
+      fill: $light-color-main-text-extra;
+    }
   }
 
   /* Getting started */
@@ -436,6 +440,12 @@ main {
   [data-href$="container-security/index.html"]::before {
     background-image: url("#{$ico-path}index-icons.svg#containers-lt");
   }
+  
+  /* Development */
+  [href$="development/index.html"]::before,
+  [data-href$="development/index.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#development-lt");
+  }
 
   /* Deployment */
   [href$="deployment.html"]::before,
@@ -447,6 +457,12 @@ main {
   [href$="compliance.html"]::before,
   [data-href$="compliance.html"]::before {
     background-image: url("#{$ico-path}index-icons.svg#compliance-lt");
+  }
+
+  /* Learning Wazuh */
+  [href$="learning-wazuh/index.html"]::before,
+  [data-href$="learning-wazuh/index.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#learning-lt");
   }
 
   /* Cloud security */
@@ -536,6 +552,9 @@ main {
     .form-control {
       background: $dark-color-index-header-background;
     }
+    svg {
+      fill: $dark-color-main-text;
+    }
   }
 
   /* Getting started */
@@ -591,6 +610,12 @@ main {
     background-image: url("#{$ico-path}index-icons.svg#containers-dt");
   }
 
+  /* Development */
+  [href$="development/index.html"]::before,
+  [data-href$="development/index.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#development-dt");
+  }
+
   /* Deployment */
   [href$="deployment.html"]::before,
   [data-href$="deployment.html"]::before {
@@ -601,6 +626,12 @@ main {
   [href$="compliance.html"]::before,
   [data-href$="compliance.html"]::before {
     background-image: url("#{$ico-path}index-icons.svg#compliance-dt");
+  }
+
+  /* Learning Wazuh */
+  [href$="learning-wazuh/index.html"]::before,
+  [data-href$="learning-wazuh/index.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#learning-dt");
   }
 
   /* Cloud security */
