@@ -136,7 +136,7 @@ Installing the Wazuh indexer
         - "node-3"
 
    #. ``discovery.seed_hosts:`` List of the addresses of the master-eligible nodes. Each element can be either an IP address or a hostname. 
-      You may leave this setting commented if your are configuring the Wazuh indexer as a single-node. For multi-node configurations, uncomment this setting and set your master-eligible nodes addresses. 
+      You may leave this setting commented if you are configuring the Wazuh indexer as a single-node. For multi-node configurations, uncomment this setting and set your master-eligible nodes addresses. 
 
        .. code-block:: yaml
 
