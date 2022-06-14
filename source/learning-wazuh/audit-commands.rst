@@ -8,27 +8,19 @@
 Keep watch for malicious command execution
 ==========================================
 
-Linux systems have a powerful auditing facility called **auditd** which can give
-a very detailed accounting of actions and changes in a system, but by default,
+Linux systems have a powerful auditing facility called `auditd`  which can give a very detailed accounting of actions and changes in a system, but by default,
 no auditd rules are active so we tend to miss out on this detailed history.
-In this lab, we will configure auditd on a Linux machine to account for all commands
-executed by a given user (it should be "centos" if you built the lab following this guide), including commands run by this user
-in a sudo command or after sudo-ing to root.  After causing some audit events
-to be generated, we will look them over in the Wazuh dashboard.
-Then we will set up several custom Wazuh rules to alert on especially suspicious
-command calls, making use of the CDB list lookup capability that allows rules to
-look up decoded field values in various lists and to use the results as part of
-the alert criteria.
 
-The Linux auditd system is an extensive auditing tool, which we will only touch
-on here. Consider reading the :ref:`system_call_monitoring` section to get a
-broader picture of the ways you can take advantage of it.
+In this lab, we will configure auditd on a Linux machine to account for all commands executed by a given user, including commands run by this user
+in a sudo command or after sudo-ing to `root`.  After causing some audit events to be generated, we will look them over in the Wazuh dashboard.
+Then we will set up several custom Wazuh rules to alert on especially suspicious command calls, making use of the CDB list lookup capability that allows rules to look up decoded field values in various lists and to use the results as part of the alert criteria.
+
+The Linux auditd system is an extensive auditing tool, which we will only touch on here. Consider reading the :ref:`system_call_monitoring` section to get a broader picture of the ways you can take advantage of it.
 
 Turn on program call auditing on linux-agent
 --------------------------------------------
 
-#. Having already sudo-ed to root on our linux-agent machine, append the following
-   audit rules to ``/etc/audit/rules.d/audit.rules``
+#. Having already sudo-ed to `root` on our linux-agent machine, append the following audit rules to ``/etc/audit/rules.d/audit.rules``
 
     .. code-block:: console
 
@@ -36,8 +28,7 @@ Turn on program call auditing on linux-agent
         [root@linux-agent centos]# echo "-a exit,always -F auid=1000 -F egid!=994 -F auid!=-1 -F arch=b64 -S execve -k audit-wazuh-c" >> /etc/audit/rules.d/audit.rules
 
 
-   Where ``auid=1000`` represents the user ID. If unsure, you may verify this value
-   by running: ``grep centos /etc/passwd`` (replacing ``centos`` if you have a
+   Where ``auid=1000`` represents the user ID. If unsure, you may verify this value by running: ``grep centos /etc/passwd`` (replacing `centos` if you have a
    different user name).
 
 #. Then reload the rules and confirm they are in place:
@@ -58,7 +49,7 @@ Turn on program call auditing on linux-agent
 Trigger a few audit events
 --------------------------
 
-#. Dropping from **root** back to the unpriviledged user, run a ping.
+#. Dropping from `root` back to the unpriviledged user, run a ping.
 
     .. code-block:: console
 
@@ -83,7 +74,7 @@ Trigger a few audit events
         1 packets transmitted, 1 received, 0% packet loss, time 0ms
         rtt min/avg/max/mdev = 1.093/1.093/1.093/0.000 ms
 
-#. While still **centos**, use sudo to run a privileged commands
+#. While still `centos`, use sudo to run a privileged commands
 
     .. code-block:: console
 
@@ -96,7 +87,7 @@ Trigger a few audit events
         bin:*:17110:0:99999:7:::
         ...
 
-#. Now sudo back to root and run another commands
+#. Now sudo back to `root` and run another commands
 
     .. code-block:: console
 
@@ -105,7 +96,7 @@ Trigger a few audit events
     .. code-block:: none
         :class: output
 
-        Last login: Thu Nov 14 12:27:12 UTC 2019 on pts/0
+        Last login: Tue Jun 14 12:54:52 UTC 2022 on pts/0
 
     .. code-block:: console
 
@@ -126,12 +117,9 @@ Trigger a few audit events
 Look over the audit events
 --------------------------
 
-#. On the monitored linux machine, inspect the content of ``/var/log/audit/audit.log``.
-   Auditd writes events here, but it is not very readable.  Thankfully the Linux Wazuh
-   agents already monitors this file by default.
+#. On the monitored linux machine, inspect the content of ``/var/log/audit/audit.log``. Auditd writes events here, but it is not very readable. Thankfully the Linux Wazuh agents already monitors this file by default.
 
-#. Search the Wazuh dashboard for ``rule.id:80792``.  That will
-   catch all auditd command audit events.
+#. Search the Wazuh dashboard for ``rule.id:80792``.  That will catch all auditd command audit events.
 
 #. Pick the following fields for columnar display:
 
@@ -140,14 +128,9 @@ Look over the audit events
     - data.audit.euid
     - full_log
 
-#. Explore the audit records, finding and examining your unprivileged ping, and
-   your privileged cat and df calls.  They will be mingled with other commands.
+#. Explore the audit records, finding and examining your unprivileged ping, and your privileged ``cat`` and ``df`` calls.  They will be mingled with other commands.
 
-#. The **centos** user has uid 1000.  User **root** has uid 0.  Notice the
-   ``auid`` (audited user identity) always traces back to the **centos** user,
-   even though the ``euid`` effective user identity is sometimes 0 and sometimes
-   1000 depending on whether privileges were escalated.  This allows you to see
-   who actually ran the command with sudo or while sudo-ed to **root**.
+#. The `centos` user has uid 1000.  User `root` has uid 0.  Notice the ``auid`` (audited user identity) always traces back to the `centos` user, even though the ``euid`` effective user identity is sometimes 0 and sometimes 1000 depending on whether privileges were escalated.  This allows you to see who actually ran the command with sudo or while sudo-ed to `root`.
 
 
 Look over the relevant Wazuh rule
@@ -157,18 +140,14 @@ Look over the relevant Wazuh rule
 
     .. code-block:: xml
 
-        <rule id="80792" level="3">
-            <if_sid>80700</if_sid>
-            <list field="audit.key" lookup="match_key_value" check_value="command">etc/lists/audit-keys</list>
-            <description>Audit: Command: $(audit.exe)</description>
-            <group>audit_command,</group>
-        </rule>
-
-    Parent rule 80700 catches all auditd events, while this rule focuses on auditd
-    command events.  Notice how the ``<list>`` line in this rule takes the decoded
-    ``audit.key`` value which all our auditd rules set to "audit-wazuh-c" presently,
-    and looks this up in a CDB list called ``audit-keys`` to see if the ``audit.key``
-    value is listed with a value of "command".
+      <rule id="80789" level="3">
+        <if_sid>80700</if_sid>
+        <list field="audit.key" lookup="match_key_value" check_value="execute">etc/lists/audit-keys</list>
+        <description>Audit: Watch - Execute access: $(audit.file.name).</description>
+        <group>audit_watch_execute,gdpr_IV_30.1.g,</group>
+      </rule>  
+          
+    Parent rule 80700 catches all auditd events, while this rule focuses on auditd command events.  Notice how the ``<list>`` line in this rule takes the decoded ``audit.key`` value which all our auditd rules set to "audit-wazuh-c" presently, and looks this up in a CDB list called ``audit-keys`` to see if the ``audit.key`` value is listed with a value of "command".
 
 #. Look over the key-value pairs in the lookup file.  The file is ``/var/ossec/etc/lists/audit-keys``.
 
@@ -180,13 +159,9 @@ Look over the relevant Wazuh rule
         audit-wazuh-x:execute
         audit-wazuh-c:command
 
-    This CDB list contains keys and values separated colons.  Some lists only
-    contain keys, in which case each key exists on a line of its own and is
-    directly followed by a colon.
+    This CDB list contains keys and values separated colons.  Some lists only contain keys, in which case each key exists on a line of its own and is directly followed by a colon.
 
-#. Notice that in addition to the text file ``/var/ossec/etc/lists/audit-keys``,
-   there is also a binary ``/var/ossec/etc/lists/audit-keys.cdb`` file that
-   Wazuh uses for actual lookups.
+#. Notice that in addition to the text file ``/var/ossec/etc/lists/audit-keys``, there is also a binary ``/var/ossec/etc/lists/audit-keys.cdb`` file that Wazuh uses for actual lookups.
 
 
 Create a list of commands that Wazuh will watch for
@@ -217,11 +192,6 @@ will use to give us special alerts when executed.
         <ruleset>
           <list>etc/lists/suspicious-programs</list>
           ....
-
-
-    .. note::
-
-       Before Wazuh v3.11.0 it was necessary to run `/var/ossec/bin/ossec-makelists` after changing CDB lists. After v3.11.0 the lists are already compiled when the manager is started.
 
 
 #. Now let's add a new rule that uses this list as part of its criteria
