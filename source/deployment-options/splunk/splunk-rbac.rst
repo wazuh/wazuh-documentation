@@ -135,13 +135,13 @@ Mapping roles to users
       :align: left
       :width: 100%   
 
-#. Complete the empty fields with the requested information where:
+#. Complete the empty fields with the requested information:
 
-   Role mapping name: Assign a name to the role mapping.
+   - Role mapping name: Assign a name to the role mapping.
 
-   Roles: The roles to be mapped to a user.
+   - Roles: The roles to be mapped to a user.
 
-   Internal users: The internal users to map a role.
+   - Internal users: The internal users to map a role to.
 
 
    .. thumbnail:: /images/splunk-app/34.png
