@@ -2,19 +2,33 @@
 .. meta::
   :description: Learn more about regular expressions or regex. The Wazuh Ruleset is used to analyze incoming events and generate alerts when appropriate. 
   
-.. _regex_syntax:
-
 Regular Expression Syntax
 =========================
 
-**Regular expressions** or ``regex`` are sequences of characters that define a pattern.
+Regular expressions or regex, are sequences of characters that define a pattern. In the Wazuh ruleset, some of the options used with rules definitions take a regular expression as their value. For example:
 
-There are three types of regular expressions: regex (*OS_Regex*), sregex (*OS_Match*) and PCRE2.
+.. code-block:: xml
+
+   <match>^Installed|^Updated|^Erased</match>
+
+There are three types of regular expressions that are recognized within the Wazuh ruleset.
+
+-  OS_Regex or regex syntax
+-  OS_Match or sregex syntax
+-  PCRE2 syntax
+
+The types ``osregex``, ``osmatch``, and ``pcre2`` can be established  using the ``type`` key. For example:
+
+.. code-block:: xml
+
+   <srcport type="pcre2">^5000[0-7]$</srcport>
+
+``osmatch`` is the type by default for most of the options using regular expressions.
 
 .. _os_regex_syntax:
 
-Regex (OS_Regex) syntax
---------------------------------
+OS_Regex or regex syntax
+------------------------
 
 This is a fast and simple library for regular expressions in C.
 
@@ -35,13 +49,13 @@ This library is designed to be simple while still supporting the most common reg
   +------------+-----------------------------------------+
   | \\p        | ()*+,-.:;<=>?[]!"'#$%&|{}               |
   +------------+-----------------------------------------+
-  | \\W        | Anything not \w                         |
+  | \\W        | Anything not \\w                        |
   +------------+-----------------------------------------+
-  | \\D        | Anything not \d                         |
+  | \\D        | Anything not \\d                        |
   +------------+-----------------------------------------+
-  | \\S        | Anything not \s                         |
+  | \\S        | Anything not \\s                        |
   +------------+-----------------------------------------+
-  | \\\\.      | Anything                                |
+  | \\.        | Anything                                |
   +------------+-----------------------------------------+
 
 
@@ -65,7 +79,7 @@ This library is designed to be simple while still supporting the most common reg
   +-------------+--------------------------------------------------+
   | $           | To specify the end of the text                   |
   +-------------+--------------------------------------------------+
-  | \|          | To create a logical or between multiple patterns |
+  | \|          | To create a logical OR between multiple patterns |
   +-------------+--------------------------------------------------+
 
 
@@ -90,8 +104,8 @@ This library is designed to be simple while still supporting the most common reg
 
 .. _os_sregex_syntax:
 
-Sregex (OS_Match) syntax
------------------------------
+OS_Match or sregex syntax
+-------------------------
 
 This is faster than OS_Regex, but only supports simple string matching and the
 following special characters.
@@ -105,13 +119,13 @@ following special characters.
   +-------------+--------------------------------------------------+
   | $           | To specify the end of the text                   |
   +-------------+--------------------------------------------------+
-  | \|          | To create a logic: or, between multiple patterns |
+  | \|          | To create a logical OR between multiple patterns |
   +-------------+--------------------------------------------------+
   | !           | To negate the expression                         |
   +-------------+--------------------------------------------------+
 
 PCRE2 syntax
------------------------------
+------------
 
 **Perl Compatible Regular Expressions (PCRE)** tries to match Perl syntax and semantics as closely as it can.
 
