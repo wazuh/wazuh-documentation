@@ -5,7 +5,7 @@
 Regular Expression Syntax
 =========================
 
-Regular expressions or regex, are sequences of characters that define a pattern. In the Wazuh ruleset, some of the options used with rules definitions take a regular expression as their value. For example:
+Regular expressions, or regex, are sequences of characters that define a pattern. In the Wazuh ruleset, some of the options used in rules definitions take a regular expression as their value. For example:
 
 .. code-block:: xml
 
@@ -17,13 +17,13 @@ There are three types of regular expressions that are recognized within the Wazu
 -  OS_Match or sregex syntax
 -  PCRE2 syntax
 
-The types ``osregex``, ``osmatch``, and ``pcre2`` can be established  using the ``type`` key. For example:
+The type values ``osregex``, ``osmatch``, and ``pcre2`` can be set  using the ``type`` key. For example:
 
 .. code-block:: xml
 
    <srcport type="pcre2">^5000[0-7]$</srcport>
 
-``osmatch`` is the type by default for most of the options using regular expressions.
+For most of the options using regular expressions, ``osmatch`` is the type used by default. Check the :doc:`/user-manual/ruleset/ruleset-xml-syntax/rules` for more information.
 
 .. _os_regex_syntax:
 
