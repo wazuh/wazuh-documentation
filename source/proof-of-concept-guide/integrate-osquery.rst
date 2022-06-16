@@ -52,12 +52,12 @@ Configure your environment as follows to test the PoC.
         },
 
         "packs": {
-            "osquery-monitoring": "/usr/share/osquery/packs/osquery-monitoring.conf",
-            "incident-response": "/usr/share/osquery/packs/incident-response.conf",
-            "it-compliance": "/usr/share/osquery/packs/it-compliance.conf",
-            "vuln-management": "/usr/share/osquery/packs/vuln-management.conf",
-            "hardware-monitoring": "/usr/share/osquery/packs/hardware-monitoring.conf",
-            "ossec-rootkit": "/usr/share/osquery/packs/ossec-rootkit.conf"
+            "osquery-monitoring": "/opt/osquery/share/osquery/packs/osquery-monitoring.conf",
+            "incident-response": "/opt/osquery/share/osquery/packs/incident-response.conf",
+            "it-compliance": "/opt/osquery/share/osquery/packs/it-compliance.conf",
+            "vuln-management": "/opt/osquery/share/osquery/packs/vuln-management.conf",
+            "hardware-monitoring": "/opt/osquery/share/osquery/packs/hardware-monitoring.conf",
+            "ossec-rootkit": "/opt/osquery/share/osquery/packs/ossec-rootkit.conf"
             }
         }
 
