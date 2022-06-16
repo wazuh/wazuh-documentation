@@ -58,14 +58,14 @@ Elasticsearch installation and configuration
 
          .. code-block:: console
 
-           # yum install elasticsearch-7.17.3
+           # yum install elasticsearch-7.17.4
 
 
       .. group-tab:: APT
 
          .. code-block:: console
 
-           # apt-get install elasticsearch=7.17.3
+           # apt-get install elasticsearch=7.17.4
 
 
 #. Download the configuration file ``/etc/elasticsearch/elasticsearch.yml`` as follows:
@@ -128,25 +128,25 @@ To check that the installation was made successfully, run the following command 
 This command should have an output like this:
 
 .. code-block:: console
-  :class: output
+   :class: output
   
-  {
-    "name" : "elasticsearch",
-    "cluster_name" : "elasticsearch",
-    "cluster_uuid" : "upF9h1afQN2TfHtt0h3Kuw",
-    "version" : {
-      "number" : "7.17.3",
-      "build_flavor" : "default",
-      "build_type" : "rpm",
-      "build_hash" : "6bc13727ce758c0e943c3c21653b3da82f627f75",
-      "build_date" : "2021-09-15T10:18:09.722761972Z",
-      "build_snapshot" : false,
-      "lucene_version" : "8.9.0",
-      "minimum_wire_compatibility_version" : "6.8.0",
-      "minimum_index_compatibility_version" : "6.0.0-beta1"
-    },
-    "tagline" : "You Know, for Search"
-  }
+   {
+     "name" : "elasticsearch",
+     "cluster_name" : "elasticsearch",
+     "cluster_uuid" : "BLpIwJvXQnGCIORGrsAxLA",
+     "version" : {
+       "number" : "7.17.4",
+       "build_flavor" : "default",
+       "build_type" : "rpm",
+       "build_hash" : "79878662c54c886ae89206c685d9f1051a9d6411",
+       "build_date" : "2022-05-18T18:04:20.964345128Z",
+       "build_snapshot" : false,
+       "lucene_version" : "8.11.1",
+       "minimum_wire_compatibility_version" : "6.8.0",
+       "minimum_index_compatibility_version" : "6.0.0-beta1"
+     },
+     "tagline" : "You Know, for Search"
+   }
 
   
 
@@ -255,7 +255,7 @@ Filebeat installation and configuration
 
     .. code-block:: console
 
-      # curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.1.tar.gz | tar -xvz -C /usr/share/filebeat/module
+      # curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.2.tar.gz | tar -xvz -C /usr/share/filebeat/module
 
 #. Edit the file ``/etc/filebeat/filebeat.yml`` and add the following line:
 
@@ -301,7 +301,7 @@ This command should have an output like this:
           TLS version: TLSv1.3
           dial up... OK
         talk to server... OK
-        version: 7.17.3
+        version: 7.17.4
 
 
 Kibana installation and configuration
@@ -400,4 +400,4 @@ To uninstall all the components of the all in one installation, visit the :ref:`
 Next steps
 ----------
 
-Once the Wazuh environment is ready, a Wazuh agent can be installed on every endpoint to be monitored. The Wazuh agent installation guide is available for most operating systems and can be found :ref:`here<installation_agents>`.
+Once the Wazuh environment is ready, a Wazuh agent can be installed on every endpoint to be monitored. The :doc:`Wazuh agent installation guide </installation-guide/wazuh-agent/index>` is available for most operating systems.

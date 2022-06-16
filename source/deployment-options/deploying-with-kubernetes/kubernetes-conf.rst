@@ -1,4 +1,5 @@
 .. Copyright (C) 2022 Wazuh, Inc.
+
 .. meta::
   :description: Learn more about Kubernetes configuration for Wazuh: prerequisites, overview, how to verify the deployment, and more. 
 

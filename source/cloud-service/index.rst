@@ -1,10 +1,9 @@
-.. Copyright (C) 2020 Wazuh, Inc.
-
-.. _cloud_service:
-
+.. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
-  :description: Wazuh offers cloud-delivered protection. Prevent, detect, and respond to threats in real-time. Learn more about Wazuh Cloud here. 
+  :description: Wazuh offers cloud-delivered protection. Prevent, detect, and respond to threats in real-time. Learn more about Wazuh Cloud in this section. 
+
+.. _cloud_service:
 
 Cloud service
 =============

@@ -1,5 +1,8 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+  :description: AWS Config is a service that allows users to evaluate the configurations of their AWS resources. Learn more about it in this section of the documentation.
+
 .. _amazon_config:
 
 AWS Config
@@ -20,7 +23,7 @@ Amazon configuration
     .. note::
       For more information about these options, see `Selecting Which Resources AWS Config Records. <https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html>`_
 
-#. Select an existing S3 Bucket or :ref:`create a new one. <S3_bucket>`
+#. Select an existing S3 Bucket or :doc:`create a new one </amazon/services/prerequisites/S3-bucket>`.
 
     .. thumbnail:: ../../../images/aws/aws-create-config-1.png
       :align: center
@@ -75,7 +78,7 @@ Wazuh configuration
       </wodle>
 
     .. note::
-      Check the :ref:`AWS S3 module <wodle_s3>` reference manual to learn more about each setting.
+      Check the :doc:`AWS S3 module </user-manual/reference/ossec-conf/wodle-s3>` reference manual to learn more about each setting.
 
 #. Restart Wazuh in order to apply the changes:
 

@@ -62,7 +62,7 @@ Start deploying Wazuh and Elastic Stack
 ---------------------------------------
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
 
     all-in-one-deployment/index
     distributed-deployment/index
