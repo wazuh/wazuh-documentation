@@ -90,7 +90,7 @@ Interval between Wazuh wodle executions.
 
 .. note::
 
-    When Wazuh starts, it will wait for the configured interval before running the first scan, unless the module has already been running before and the only_future_events option is set to no.
+    When Wazuh starts, it waits for the configured time interval before running the first scan, unless the module has already been running before and the ``only_future_events`` option is set to no.
 
 +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | 10m                                                                                                                                     |
