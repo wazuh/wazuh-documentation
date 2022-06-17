@@ -59,6 +59,7 @@ Tools
     wazuh-logtest
     clear-stats
     wazuh-regex
+    rbac-control
     update-ruleset
     verify-agent-conf
     agent-groups
