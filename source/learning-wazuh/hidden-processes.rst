@@ -12,7 +12,8 @@ In this exercise you will safely implement a kernel-mode rootkit on your lab mac
 
 This rootkit is able to hide itself from the kernel module list as well as hide selected processes from being visible to ``ps``.
 
-However, Wazuh will sill detect it using the system calls ``setsid()``, ``getpid()``, and ``kill()``. This makes Wazuh a very effective Linux rootkit detection application by looking for general low-level hiding behavior.
+However, Wazuh will still detect it using the system calls ``setsid()``, ``getpid()``, and ``kill()``. This makes
+Wazuh a very effective Linux rootkit detection application by looking for general low-level hiding behavior.
 
 #. Log on to your Linux Agent instance and become root.
 
