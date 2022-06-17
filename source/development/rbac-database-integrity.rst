@@ -46,3 +46,79 @@ Here is an abridged list of steps performed during the database upgrade process:
    #. In any other case, the relationships between user-created resources and the default resources are kept.
 
 #. The old RBAC database file is replaced by the new one.
+
+Migration examples
+------------------
+
+After upgrading from a Wazuh version with RBAC database version 0 to 1, ``WAZUH_PATH/logs/api.log``:
+
+.. code-block:: none
+    :class: output
+
+    2022/06/17 09:44:04 INFO: Checking RBAC database integrity...
+    2022/06/17 09:44:04 INFO: /var/ossec/api/configuration/security/rbac.db file was detected
+    2022/06/17 09:44:04 INFO: RBAC database migration required. Current version is 0 but it should be 1. Upgrading RBAC database to version 1
+    2022/06/17 09:44:09 INFO: /var/ossec/api/configuration/security/rbac.db database upgraded successfully
+    2022/06/17 09:44:09 INFO: RBAC database integrity check finished successfully
+    2022/06/17 09:44:12 INFO: Listening on 0.0.0.0:55000..
+
+After upgrading from a Wazuh version with RBAC database version 0 to 1, with the old DB having a user that is a default user in the new version:
+
+``WAZUH_PATH/logs/api.log``:
+
+.. code-block:: none
+    :class: output
+
+    2022/06/17 10:00:21 INFO: /var/ossec/api/configuration/security/rbac.db file was detected
+    2022/06/17 10:00:21 INFO: RBAC database migration required. Current version is 0 but it should be 1. Upgrading RBAC database to version 1
+    2022/06/17 10:00:25 WARNING: User 100 (manuel) is part of the new default users. Renaming it to 'manuel_user'
+    2022/06/17 10:00:26 INFO: /var/ossec/api/configuration/security/rbac.db database upgraded successfully
+    2022/06/17 10:00:26 INFO: RBAC database integrity check finished successfully
+    2022/06/17 10:00:29 INFO: Listening on 0.0.0.0:55000..
+
+``GET /security/users`` response:
+
+.. code-block:: json
+    :class: output
+
+    {
+      "data": {
+        "affected_items": [
+          {
+            "id": 1,
+            "username": "wazuh",
+            "allow_run_as": true,
+            "roles": [
+              1
+            ]
+          },
+          {
+            "id": 2,
+            "username": "wazuh-wui",
+            "allow_run_as": true,
+            "roles": [
+              1
+            ]
+          },
+          {
+            "id": 3,
+            "username": "manuel",
+            "allow_run_as": true,
+            "roles": []
+          },
+          {
+            "id": 100,
+            "username": "manuel_user",
+            "allow_run_as": false,
+            "roles": [
+              100
+            ]
+          }
+        ],
+        "total_affected_items": 4,
+        "total_failed_items": 0,
+        "failed_items": []
+      },
+      "message": "All specified users were returned",
+      "error": 0
+    }
