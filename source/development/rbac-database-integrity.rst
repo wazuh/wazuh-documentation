@@ -5,9 +5,9 @@
 RBAC database integrity
 =======================
 
-The RBAC database integrity is checked every time the wazuh-manager service starts to determine if the database should be updated. The integrity check allows us to cover the following cases:
+The RBAC database integrity is checked every time the Wazuh API starts to determine if the database should be updated. The integrity check allows us to cover the following cases:
 
-- Allow the introduction of breaking changes in the RBAC database structure or its default resources in future releases.
+- Upgrade to a Wazuh version with breaking changes in the RBAC database structure or with new default resources.
 - Restore the RBAC database with its default RBAC resources if it was manually deleted, being able to restore the RBAC database to a fresh install state if needed.
 
 .. warning::
@@ -17,13 +17,13 @@ The RBAC database integrity is checked every time the wazuh-manager service star
 How the database upgrade process works
 --------------------------------------
 
-During the RBAC database integrity check, Wazuh compares the RBAC database version with the current Wazuh version installed. If they don't match, the database upgrade process is triggered.
+During the RBAC database integrity check, Wazuh compares its RBAC database version with the installed one. If they don't match, the database upgrade process is triggered.
 
 Here is an abridged list of steps performed during the database upgrade process:
 
 #. A new RBAC database file is created and the default Wazuh RBAC resources for the installed version are added to it.
 
-#. Every user-created RBAC resource is migrated from the old database to the new one, maintaining its ID, name and so on.
+#. Every user-created RBAC resource is migrated from the old database to the new one, maintaining its ID, name and so forth.
 
 #. In case a user-created RBAC resource coincides with one of the new default Wazuh RBAC resource:
 
@@ -71,7 +71,7 @@ After upgrading from a Wazuh version with RBAC database version 0 to 1, with the
 
     2022/06/17 10:00:21 INFO: /var/ossec/api/configuration/security/rbac.db file was detected
     2022/06/17 10:00:21 INFO: RBAC database migration required. Current version is 0 but it should be 1. Upgrading RBAC database to version 1
-    2022/06/17 10:00:25 WARNING: User 100 (manuel) is part of the new default users. Renaming it to 'manuel_user'
+    2022/06/17 10:00:25 WARNING: User 100 (example) is part of the new default users. Renaming it to 'example_user'
     2022/06/17 10:00:26 INFO: /var/ossec/api/configuration/security/rbac.db database upgraded successfully
     2022/06/17 10:00:26 INFO: RBAC database integrity check finished successfully
     2022/06/17 10:00:29 INFO: Listening on 0.0.0.0:55000..
@@ -102,13 +102,13 @@ After upgrading from a Wazuh version with RBAC database version 0 to 1, with the
           },
           {
             "id": 3,
-            "username": "manuel",
+            "username": "example",
             "allow_run_as": true,
             "roles": []
           },
           {
             "id": 100,
-            "username": "manuel_user",
+            "username": "example_user",
             "allow_run_as": false,
             "roles": [
               100

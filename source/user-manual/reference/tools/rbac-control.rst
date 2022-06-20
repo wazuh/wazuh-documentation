@@ -7,22 +7,22 @@ rbac_control
 
 .. versionadded:: 4.5.0
 
-The ``rbac_control`` tool allows changing the default users' password and reseting the RBAC database to its default
+The ``rbac_control`` tool allows managing resources from the Wazuh RBAC database and reseting the DB to its default
 state. For more information about the Wazuh RBAC resources and database, please visit the
 :ref:`How it works <api_rbac_how_it_works>` section.
 
 Usage
 -----
 
-+-----------------------------------------+---------------------------------------------------+
-| Option name                             | Option description                                |
-+=========================================+===================================================+
-| ``-h, --help``                          | Display the help message.                         |
-+-----------------------------------------+---------------------------------------------------+
-| ``change-password``                     | Change the password for each default user.        |
-+-----------------------------------------+---------------------------------------------------+
-| ``factory-reset``                       | Reset the RBAC database to its default state.     |
-+-----------------------------------------+---------------------------------------------------+
++-----------------------------------------+----------------------------------------------------------------------------------------------------------+
+| Option name                             | Option description                                                                                       |
++=========================================+==========================================================================================================+
+| ``-h, --help``                          | Display the help message.                                                                                |
++-----------------------------------------+----------------------------------------------------------------------------------------------------------+
+| ``change-password``                     | Change the password for each default user.                                                               |
++-----------------------------------------+----------------------------------------------------------------------------------------------------------+
+| ``factory-reset``                       | Reset the RBAC database to its default state. Ask for confirmation unless the -f/--force flag is used.   |
++-----------------------------------------+----------------------------------------------------------------------------------------------------------+
 
 Examples
 --------
@@ -88,7 +88,7 @@ Examples
         wazuh: FAILED | Error 5007 - Insecure user password provided
 
 
-``change-password`` example where the password was changed successfully:
+``change-password`` example where the `wazuh` user password was changed successfully (to skip any of the user, leave the new password blank):
 
 .. code-block:: console
 

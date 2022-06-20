@@ -29,7 +29,7 @@ Tools
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`wazuh-regex <wazuh-regex>`                  | Validates a regex expression                                               | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :doc:`rbac_control <rbac-control>`                | Manage default API users' password and reset RBAC DB                       | manager                     |
+| :doc:`rbac_control <rbac-control>`                | Manage API RBAC resources and reset RBAC DB                                | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`update_ruleset <update-ruleset>`            | Update Decoders, Rules and Rootchecks                                      | manager                     |
 |                                                   |                                                                            |                             |
