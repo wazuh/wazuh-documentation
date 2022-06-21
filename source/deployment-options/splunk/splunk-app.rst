@@ -153,7 +153,7 @@ Install the Wazuh app for Splunk in a minimal distributed architecture
       :align: left
       :width: 100%
 
-   Fill the form with your Wazuh API credentials. Use the URL and port from your Wazuh API server.
+   Fill out the form with your Wazuh API credentials. Use the URL and port from your Wazuh API server.
         
    By default, the Wazuh API port is ``55000``. The default username and password is ``wazuh:wazuh``. Once the API has been added, it is possible to check the connection by pressing the Check connection button on each Wazuh API entry. A successful message appears at the bottom right corner if the connection is established.
     
@@ -286,7 +286,7 @@ Install the Wazuh app for Splunk on the ``deployer`` machine and follow the step
       :align: left
       :width: 100%
 
-   Fill the form with your Wazuh API credentials. Use the URL and port from your Wazuh master node.
+   Fill out the form with your Wazuh API credentials. Use the URL and port from your Wazuh master node.
     
    By default, the Wazuh API port is ``55000``. The default username and password is ``wazuh:wazuh``. Once the API has been added, it is possible to check the connection by pressing the Check connection button on each Wazuh API entry. A successful message appears at the bottom right corner if the connection is established.
 

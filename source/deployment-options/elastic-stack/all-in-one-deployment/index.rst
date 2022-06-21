@@ -128,25 +128,25 @@ To check that the installation was made successfully, run the following command 
 This command should have an output like this:
 
 .. code-block:: console
-  :class: output
+   :class: output
   
-  {
-    "name" : "elasticsearch",
-    "cluster_name" : "elasticsearch",
-    "cluster_uuid" : "upF9h1afQN2TfHtt0h3Kuw",
-    "version" : {
-      "number" : "7.17.3",
-      "build_flavor" : "default",
-      "build_type" : "rpm",
-      "build_hash" : "6bc13727ce758c0e943c3c21653b3da82f627f75",
-      "build_date" : "2021-09-15T10:18:09.722761972Z",
-      "build_snapshot" : false,
-      "lucene_version" : "8.9.0",
-      "minimum_wire_compatibility_version" : "6.8.0",
-      "minimum_index_compatibility_version" : "6.0.0-beta1"
-    },
-    "tagline" : "You Know, for Search"
-  }
+   {
+     "name" : "elasticsearch",
+     "cluster_name" : "elasticsearch",
+     "cluster_uuid" : "BLpIwJvXQnGCIORGrsAxLA",
+     "version" : {
+       "number" : "7.17.4",
+       "build_flavor" : "default",
+       "build_type" : "rpm",
+       "build_hash" : "79878662c54c886ae89206c685d9f1051a9d6411",
+       "build_date" : "2022-05-18T18:04:20.964345128Z",
+       "build_snapshot" : false,
+       "lucene_version" : "8.11.1",
+       "minimum_wire_compatibility_version" : "6.8.0",
+       "minimum_index_compatibility_version" : "6.0.0-beta1"
+     },
+     "tagline" : "You Know, for Search"
+   }
 
   
 

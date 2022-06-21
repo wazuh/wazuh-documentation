@@ -5,8 +5,8 @@
 
 .. _release_3_11_4:
 
-3.11.4 Release notes
-====================
+3.11.4 Release notes - 25 February 2020
+=======================================
 
 This section lists the changes in version 3.11.4. More details about these changes are provided in each component changelog:
 
