@@ -37,7 +37,7 @@ see the default configuration and find the syscollector section.
 
 For Linux systems:
 
-  .. code-block:: xml
+   .. code-block:: xml
 
       <!-- System inventory -->
       <wodle name="syscollector">
@@ -50,11 +50,17 @@ For Linux systems:
         <packages>yes</packages>
         <ports all="no">yes</ports>
         <processes>yes</processes>
-      </wodle>
+
+        <!-- Database synchronization settings -->
+        <synchronization>
+          <max_eps>10</max_eps>
+        </synchronization>
+      </wodle>      
 
 For Windows, you should enable the ``hotfixes`` option, to report the Windows updates installed:
 
-  .. code-block:: xml
+   .. code-block:: xml
+      :emphasize-lines: 12
 
       <!-- System inventory -->
       <wodle name="syscollector">
@@ -67,7 +73,12 @@ For Windows, you should enable the ``hotfixes`` option, to report the Windows up
         <packages>yes</packages>
         <ports all="no">yes</ports>
         <processes>yes</processes>
-        <hotfixes>yes</hotfixes>
+        <hotfixes>yes</hotfixes>      
+
+        <!-- Database synchronization settings -->
+        <synchronization>
+          <max_eps>10</max_eps>
+        </synchronization>
       </wodle>
 
 By default, it will collect inventory information for hardware, operating system,
@@ -76,78 +87,85 @@ network interfaces, installed packages, open ports and running processes every h
 Configure ``vulnerability-detector`` on  the Wazuh Manager
 ----------------------------------------------------------
 
-    .. note::
+#. In the ``/var/ossec/etc/ossec.conf`` file of the Wazuh manager, scroll down to the **vulnerability-detector** wodle (Wazuh module) and enable both the service and feeds you may want to use.
 
-      This configuration will only work for Wazuh v3.11 or above.
+   .. code-block:: xml
+      :emphasize-lines: 2, 28, 52 
 
-
-In the ``/var/ossec/etc/ossec.conf`` file of the Wazuh manager, scroll down to the **vulnerability-detector** wodle (Wazuh module) and enable both the service and feeds you may want to use.
-
-  .. code-block:: xml
-
-    <vulnerability-detector>
-      <enabled>yes</enabled>
-      <interval>5m</interval>
-      <min_full_scan_interval>6h</min_full_scan_interval>
-      <run_on_start>yes</run_on_start>
-      <provider name="canonical">
-        <enabled>no</enabled>
-        <os>trusty</os>
-        <os>xenial</os>
-        <os>bionic</os>
-        <os>focal</os>
-        <update_interval>1h</update_interval>
-      </provider>
-      <provider name="debian">
-        <enabled>no</enabled>
-        <os>stretch</os>
-        <os>buster</os>
-        <os>bullseye</os>
-        <update_interval>1h</update_interval>
-      </provider>
-      <provider name="redhat">
+      <vulnerability-detector>
         <enabled>yes</enabled>
-        <os>5</os>
-        <os>6</os>
-        <os>7</os>
-        <os>8</os>
-        <update_interval>1h</update_interval>
-      </provider>
-      <provider name="arch">
-        <enabled>no</enabled>
-        <update_interval>1h</update_interval>
-      </provider>
-      <provider name="alas">
-        <enabled>no</enabled>
-        <os>amazon-linux</os>
-        <os>amazon-linux-2</os>
-        <update_interval>1h</update_interval>
-      </provider>
-      <provider name="msu">
-        <enabled>yes</enabled>
-        <update_interval>1h</update_interval>
-      </provider>
-      <provider name="nvd">
-        <enabled>yes</enabled>
-        <update_from_year>2010</update_from_year>
-        <update_interval>1h</update_interval>
-      </provider>
-    </vulnerability-detector>
+        <interval>5m</interval>
+        <min_full_scan_interval>6h</min_full_scan_interval>
+        <run_on_start>yes</run_on_start>
+    
+        <!-- Ubuntu OS vulnerabilities -->
+        <provider name="canonical">
+          <enabled>no</enabled>
+          <os>trusty</os>
+          <os>xenial</os>
+          <os>bionic</os>
+          <os>focal</os>
+          <update_interval>1h</update_interval>
+        </provider>
+    
+        <!-- Debian OS vulnerabilities -->
+        <provider name="debian">
+          <enabled>no</enabled>
+          <os>stretch</os>
+          <os>buster</os>
+          <os>bullseye</os>
+          <update_interval>1h</update_interval>
+        </provider>
+    
+        <!-- RedHat OS vulnerabilities -->
+        <provider name="redhat">
+          <enabled>yes</enabled>
+          <os>5</os>
+          <os>6</os>
+          <os>7</os>
+          <os>8</os>
+          <update_interval>1h</update_interval>
+        </provider>
+    
+        <!-- Amazon Linux OS vulnerabilities -->
+        <provider name="alas">
+          <enabled>no</enabled>
+          <os>amazon-linux</os>
+          <os>amazon-linux-2</os>
+          <update_interval>1h</update_interval>
+        </provider>
+    
+        <!-- Arch OS vulnerabilities -->
+        <provider name="arch">
+          <enabled>no</enabled>
+          <update_interval>1h</update_interval>
+        </provider>
+    
+        <!-- Windows OS vulnerabilities -->
+        <provider name="msu">
+          <enabled>yes</enabled>
+          <update_interval>1h</update_interval>
+        </provider>
+    
+        <!-- Aggregate vulnerabilities -->
+        <provider name="nvd">
+          <enabled>yes</enabled>
+          <update_from_year>2010</update_from_year>
+          <update_interval>1h</update_interval>
+        </provider>
+    
+      </vulnerability-detector>
 
-In the example above we have enabled the feeds for RedHat, which will allow us
-to monitor CentOS systems, and NVD, the National Vulnerability Database, which
-will allow us to monitor Windows systems. More information on this module and
-how to configure it can be found in the
-:ref:`Vulnerability Detection Section <vulnerability-detection>` of the documentation.
+   In the example above we have enabled the feeds for RedHat, which will allow us to monitor CentOS systems, and NVD, the National Vulnerability Database, which will allow us to monitor Windows systems. More information on this module and how to configure it can be found in the :ref:`Vulnerability Detection Section <vulnerability-detection>` of the documentation.
 
-Restart the Wazuh manager.
+#. Restart the Wazuh manager.
 
    .. include:: /_templates/common/restart_manager.rst
 
 
 .. note::
 
-  The first time the Vulnerability database is updated can take longer to finish.
+   Updating the Vulnerability database for the first time may take a while. 
 
 
 Look at the logs
@@ -155,30 +173,50 @@ Look at the logs
 
 The ``vulnerability-detector`` module generates logs on the manager, and ``syscollector`` does as well on the manager and agents.
 
-Try ``grep syscollector: /var/ossec/logs/ossec.log`` on the manager and on an agent:
+#. Try ``grep syscollector: /var/ossec/logs/ossec.log`` on the manager and on an agent:
 
-  .. code-block:: none
+   .. code-block:: none
+
+      # grep syscollector: /var/ossec/logs/ossec.log
+
+   .. code-block:: none
       :class: output
 
-      2019/11/14 19:21:21 wazuh-modulesd:syscollector: INFO: Module started.
-      2019/11/14 19:21:22 wazuh-modulesd:syscollector: INFO: Starting evaluation.
-      2019/11/14 19:21:29 wazuh-modulesd:syscollector: INFO: Evaluation finished.
+      2022/06/21 07:26:35 wazuh-modulesd:syscollector: INFO: Module started.
+      2022/06/21 07:26:35 wazuh-modulesd:syscollector: INFO: Starting evaluation.
+      2022/06/21 07:26:36 wazuh-modulesd:syscollector: INFO: Evaluation finished.
 
-and try ``grep vulnerability-detector: /var/ossec/logs/ossec.log`` on the manager
 
-  .. code-block:: none
+#. Try ``grep vulnerability-detector: /var/ossec/logs/ossec.log`` on the Wazuh manager:
 
-      [root@wazuh-manager ~]# grep vulnerability-detector: /var/ossec/logs/ossec.log
+   .. code-block:: none
 
-  .. code-block:: none
+      # grep vulnerability-detector: /var/ossec/logs/ossec.log
+
+   .. code-block:: none
       :class: output
 
-      2020/01/31 17:26:27 wazuh-modulesd:vulnerability-detector: INFO: (5461): Starting Red Hat Enterprise Linux database update.
-      2020/01/31 17:26:46 wazuh-modulesd:vulnerability-detector: INFO: (5494): The update of the Red Hat Enterprise Linux feed finished successfully.
-      2020/01/31 17:26:48 wazuh-modulesd:vulnerability-detector: INFO: (5461): Starting National Vulnerability Database database update.
-      2020/01/31 17:46:06 wazuh-modulesd:vulnerability-detector: INFO: (5494): The update of the National Vulnerability Database feed finished successfully.
-      2020/01/31 17:46:06 wazuh-modulesd:vulnerability-detector: INFO: (5452): Starting vulnerability scanning.
-      2020/01/31 17:46:19 wazuh-modulesd:vulnerability-detector: INFO: (5453): Vulnerability scanning finished.
+      2022/06/21 07:26:35 wazuh-modulesd:vulnerability-detector: INFO: (5400): Starting 'Red Hat Enterprise Linux 5' database update.
+      2022/06/21 07:26:43 wazuh-modulesd:vulnerability-detector: INFO: (5430): The update of the 'Red Hat Enterprise Linux 5' feed finished successfully.
+      2022/06/21 07:26:43 wazuh-modulesd:vulnerability-detector: INFO: (5400): Starting 'Red Hat Enterprise Linux 6' database update.
+      2022/06/21 07:26:59 wazuh-modulesd:vulnerability-detector: INFO: (5430): The update of the 'Red Hat Enterprise Linux 6' feed finished successfully.
+      2022/06/21 07:26:59 wazuh-modulesd:vulnerability-detector: INFO: (5400): Starting 'Red Hat Enterprise Linux 7' database update.
+      2022/06/21 07:27:15 wazuh-modulesd:vulnerability-detector: INFO: (5430): The update of the 'Red Hat Enterprise Linux 7' feed finished successfully.
+      2022/06/21 07:27:15 wazuh-modulesd:vulnerability-detector: INFO: (5400): Starting 'Red Hat Enterprise Linux 8' database update.
+      2022/06/21 07:27:30 wazuh-modulesd:vulnerability-detector: INFO: (5430): The update of the 'Red Hat Enterprise Linux 8' feed finished successfully.
+      2022/06/21 07:27:30 wazuh-modulesd:vulnerability-detector: INFO: (5400): Starting 'JSON Red Hat Enterprise Linux' database update.
+      2022/06/21 07:29:28 wazuh-modulesd:vulnerability-detector: INFO: (5430): The update of the 'JSON Red Hat Enterprise Linux' feed finished successfully.
+      2022/06/21 07:29:28 wazuh-modulesd:vulnerability-detector: INFO: (5400): Starting 'National Vulnerability Database' database update.
+      2022/06/21 07:47:27 wazuh-modulesd:vulnerability-detector: INFO: (5430): The update of the 'National Vulnerability Database' feed finished successfully.
+      2022/06/21 07:47:27 wazuh-modulesd:vulnerability-detector: INFO: (5400): Starting 'Microsoft Security Update' database update.
+      2022/06/21 07:47:31 wazuh-modulesd:vulnerability-detector: INFO: (5430): The update of the 'Microsoft Security Update' feed finished successfully.
+      2022/06/21 07:47:31 wazuh-modulesd:vulnerability-detector: INFO: (5431): Starting vulnerability scan.
+      2022/06/21 07:47:31 wazuh-modulesd:vulnerability-detector: INFO: (5450): Analyzing agent '000' vulnerabilities.
+      2022/06/21 07:52:30 wazuh-modulesd:vulnerability-detector: INFO: (5471): Finished vulnerability assessment for agent '000'
+      2022/06/21 07:52:30 wazuh-modulesd:vulnerability-detector: INFO: (5450): Analyzing agent '001' vulnerabilities.
+      2022/06/21 07:59:35 wazuh-modulesd:vulnerability-detector: INFO: (5471): Finished vulnerability assessment for agent '001'
+      2022/06/21 07:59:35 wazuh-modulesd:vulnerability-detector: INFO: (5472): Vulnerability scan finished.
+
 
 
 
@@ -193,7 +231,7 @@ fields for viewing like below:
 .. thumbnail:: ../images/learning-wazuh/labs/vulnerabilities-found-list.png
     :title: Found Vulnerabilities
     :align: center
-    :width: 100%
+    :width: 80%
 
 
 Expand one of the records to see all the information available:
@@ -201,7 +239,7 @@ Expand one of the records to see all the information available:
 .. thumbnail:: ../images/learning-wazuh/labs/vulnerability-found.png
     :title: Vulnerability event
     :align: center
-    :width: 100%
+    :width: 80%
 
 
 Note all the available fields and remember that the different components of Wazuh
@@ -227,185 +265,175 @@ To see that, as well as other information collected by ``syscollector``, you can
 query the Wazuh API :api-ref:`syscollector endpoints<tag/Syscollector>`.  Not only are software packages inventoried, but basic
 hardware and operating system data is also tracked.
 
-1. Run ``agent_control -l`` on the Wazuh Manager to list your agents as you will
+#. Run ``agent_control -l`` on the Wazuh Manager to list your agents as you will
    need to query the Wazuh API by agent id number:
 
-  .. code-block:: none
-    :class: output
+   .. code-block:: none
+      :class: output
 
-      [root@wazuh-manager centos]# agent_control -l
+      # agent_control -l
 
-  .. code-block:: none
+   .. code-block:: none
       :class: output
 
       Wazuh agent_control. List of available agents:
        ID: 000, Name: wazuh-manager (server), IP: 127.0.0.1, Active/Local
-       ID: 001, Name: elastic-server, IP: 172.30.0.20, Active
-       ID: 002, Name: linux-agent, IP: 172.30.0.30, Active
-       ID: 003, Name: windows-agent, IP: 172.30.0.40, Active
+       ID: 001, Name: linux-agent, IP: 172.30.0.30, Active
+       ID: 002, Name: windows-agent, IP: 172.30.0.40, Active
 
 
+#. From the Wazuh Manager, query the Wazuh API for scanned hardware data about agent 002 using endpoint :api-ref:`GET /syscollector/{agent_id}/hardware <operation/api.controllers.syscollector_controller.get_hardware_info>`:
 
-2. From the Wazuh Manager, query the Wazuh API for scanned hardware data about agent 003 using endpoint :api-ref:`GET /syscollector/{agent_id}/hardware <operation/api.controllers.syscollector_controller.get_hardware_info>`:
+   .. code-block:: console
 
-  .. code-block:: console
-
-    # curl -k -X GET "https://localhost:55000/syscollector/003/hardware?pretty=true" -H "Authorization: Bearer $TOKEN"
+      # curl -k -X GET "https://localhost:55000/syscollector/002/hardware?pretty=true" -H "Authorization: Bearer $TOKEN"
 
 
-The result should look like this:
+   The result should look like this:
 
-  .. code-block:: json
+   .. code-block:: json
       :class: output
 
-        {
-            "data": {
-                "affected_items": [
-                    {
-                        "cpu": {
-                            "cores": 1,
-                            "mhz": 2400,
-                            "name": "Intel(R) Xeon(R) CPU E5-2676 v3 @ 2.40GHz",
-                        },
-                        "ram": {"free": 1121708, "total": 2096752, "usage": 46},
-                        "scan": {"id": 1265621549, "time": "2019/12/24 13:43:33"},
-                        "board_serial": "unknown",
-                        "agent_id": "003",
-                    }
-                ],
-                "total_affected_items": 1,
-                "total_failed_items": 0,
-                "failed_items": [],
-                },
-            "message": "All specified syscollector information was returned",
-            "error": 0,
-        }
+      {
+         "data": {
+            "affected_items": [
+               {
+                  "cpu": {
+                     "cores": 3,
+                     "mhz": 2304,
+                     "name": "Intel(R) Core(TM) i7-10510U CPU @ 1.80GHz"
+                  },
+                  "ram": {
+                     "free": 6287324,
+                     "total": 8379956,
+                     "usage": 24
+                  },
+                  "scan": {
+                     "id": 0,
+                     "time": "2022-06-21T13:09:15Z"
+                  },
+                  "board_serial": "0",
+                  "agent_id": "002"
+               }
+            ],
+            "total_affected_items": 1,
+            "total_failed_items": 0,
+            "failed_items": []
+         },
+         "message": "All specified syscollector information was returned",
+         "error": 0
+      }
 
 
-3. Next, query the Wazuh API for scanned OS data about agent 003 using endpoint :api-ref:`GET /syscollector/{agent_id}/os <operation/api.controllers.syscollector_controller.get_os_info>`:
+#. Next, query the Wazuh API for scanned OS data about agent 002 using endpoint :api-ref:`GET /syscollector/{agent_id}/os <operation/api.controllers.syscollector_controller.get_os_info>`:
 
-  .. code-block:: console
+   .. code-block:: console
 
-    # curl -k -X GET "https://localhost:55000/syscollector/003/os?pretty=true" -H "Authorization: Bearer $TOKEN"
+      # curl -k -X GET "https://localhost:55000/syscollector/002/os?pretty=true" -H "Authorization: Bearer $TOKEN"
 
 
-The result should look like this:
+   The result should look like this:
 
-  .. code-block:: json
+   .. code-block:: json
       :class: output
 
-        {
-            "data": {
-                "affected_items": [
-                    {
-                        "os": {
-                            "build": "14393",
-                            "major": "10",
-                            "minor": "0",
-                            "name": "Microsoft Windows Server 2016 Datacenter",
-                            "version": "10.0.14393",
-                        },
-                        "scan": {"id": 1230696232, "time": "2019/12/24 14:43:33"},
-                        "architecture": "x86_64",
-                        "version": "6.2",
-                        "hostname": "EC2AMAZ-KMLTB1V",
-                        "agent_id": "003",
-                    }
-                ],
-                "total_affected_items": 1,
-                "total_failed_items": 0,
-                "failed_items": [],
-            },
-            "message": "All specified syscollector information was returned",
-            "error": 0,
-        }
+      {
+         "data": {
+            "affected_items": [
+               {
+                  "os": {
+                     "build": "19044",
+                     "display_version": "21H2",
+                     "major": "10",
+                     "minor": "0",
+                     "name": "Microsoft Windows 10 Home",
+                     "version": "10.0.19044"
+                  },
+                  "scan": {
+                     "id": 0,
+                     "time": "2022-06-21T13:09:15Z"
+                  },
+                  "architecture": "x86_64",
+                  "os_release": "2009",
+                  "hostname": "DESKTOP-9J68DDH",
+                  "agent_id": "002"
+               }
+            ],
+            "total_affected_items": 1,
+            "total_failed_items": 0,
+            "failed_items": []
+         },
+         "message": "All specified syscollector information was returned",
+         "error": 0
+      }
 
 
-
-4. You can also use the experimental capabilities of the API to list information
+#. You can also use the experimental capabilities of the API to list information
    of all agents in the environment. In order to do so it is necessary to enable
-   this capability in ``WAZUH_PATH/configuration/api.yaml``. A complete API configuration
+   this capability in ``/var/ossec/api/configuration/api.yaml``. A complete API configuration
    guide can be found :ref:`here <api_configuration>`.
 
 
 
-5. Restart the Wazuh API using the ``wazuh-manager`` service:
+#. Restart the Wazuh API using the ``wazuh-manager`` service:
 
-  a. For Systemd:
+   .. include:: /_templates/common/restart_manager.rst
 
-    .. code-block:: console
+#. Let's list the versions of curl on all of our Linux systems:
 
-      # systemctl restart wazuh-manager
+   .. code-block:: console
 
-  b. For SysV Init:
-
-    .. code-block:: console
-
-      # service wazuh-manager restart
+      # curl -k -X GET "https://localhost:55000/experimental/syscollector/packages?pretty=true&name=curl" -H "Authorization: Bearer $TOKEN"
 
 
-6. Let's list the versions of curl on all of our Linux systems:
+   The result should look like this:
 
-  .. code-block:: console
+   .. code-block:: json
+      :class: output
 
-    # curl -k -X GET "https://localhost:55000/experimental/syscollector/packages?pretty=true&name=curl" -H "Authorization: Bearer $TOKEN"
+      {
+         "data": {
+            "affected_items": [
+               {
+                  "scan": {
+                     "id": 0,
+                     "time": "2022-05-23T08:22:56Z"
+                  },
+                  "section": "Applications/Internet",
+                  "format": "rpm",
+                  "description": "A utility for getting files from remote servers (FTP, HTTP, and others)",
+                  "install_time": "1588284371",
+                  "version": "7.29.0-57.el7",
+                  "size": 540404,
+                  "vendor": "CentOS",
+                  "architecture": "x86_64",
+                  "name": "curl",
+                  "agent_id": "000"
+               },
+               {
+                  "scan": {
+                     "id": 0,
+                     "time": "2022-06-14T13:47:43Z"
+                  },
+                  "section": "Applications/Internet",
+                  "format": "rpm",
+                  "description": "A utility for getting files from remote servers (FTP, HTTP, and others)",
+                  "install_time": "1588284371",
+                  "version": "7.29.0-57.el7",
+                  "size": 540404,
+                  "vendor": "CentOS",
+                  "architecture": "x86_64",
+                  "name": "curl",
+                  "agent_id": "001"
+               }
+            ],
+            "total_affected_items": 2,
+            "total_failed_items": 0,
+            "failed_items": []
+         },
+        "message": "All specified syscollector information was returned",
+        "error": 0
 
-
-The result should look like this:
-
-  .. code-block:: json
-        :class: output
-
-        {
-            "data": {
-                "affected_items": [
-                    {
-                        "scan": {"id": 4551322, "time": "2019/12/24 14:37:55"},
-                        "vendor": "CentOS",
-                        "size": 527,
-                        "section": "Applications/Internet",
-                        "install_time": "2019/01/28 20:53:16",
-                        "format": "rpm",
-                        "version": "7.29.0-51.el7",
-                        "name": "curl",
-                        "architecture": "x86_64",
-                        "description": "A utility for getting files from remote servers (FTP, HTTP, and others)",
-                        "agent_id": "000",
-                    },
-                    {
-                        "scan": {"id": 833988275, "time": "2019/12/24 14:43:40"},
-                        "vendor": "CentOS",
-                        "size": 527,
-                        "section": "Applications/Internet",
-                        "install_time": "2019/01/28 20:53:16",
-                        "format": "rpm",
-                        "version": "7.29.0-51.el7",
-                        "name": "curl",
-                        "architecture": "x86_64",
-                        "description": "A utility for getting files from remote servers (FTP, HTTP, and others)",
-                        "agent_id": "001",
-                    },
-                    {
-                        "scan": {"id": 1281439567, "time": "2019/12/24 14:43:41"},
-                        "vendor": "CentOS",
-                        "size": 527,
-                        "section": "Applications/Internet",
-                        "install_time": "2019/12/18 16:08:20",
-                        "format": "rpm",
-                        "version": "7.29.0-54.el7_7.1",
-                        "name": "curl",
-                        "architecture": "x86_64",
-                        "description": "A utility for getting files from remote servers (FTP, HTTP, and others)",
-                        "agent_id": "002",
-                    },
-                ],
-                "total_affected_items": 3,
-                "total_failed_items": 0,
-                "failed_items": [],
-            },
-            "message": "All specified syscollector information was returned",
-            "error": 0,
-        }
 
 
 
