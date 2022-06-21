@@ -5,8 +5,8 @@
 
 .. _release_3_8_2:
 
-3.8.2 Release notes
-===================
+3.8.2 Release notes - 31 January 2019
+=====================================
 
 This section shows the most relevant fixes in version 3.8.2. A complete list of changes is provided in the `change log <https://github.com/wazuh/wazuh/blob/v3.8.2/CHANGELOG.md>`_.
 

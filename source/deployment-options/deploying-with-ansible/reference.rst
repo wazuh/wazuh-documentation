@@ -99,35 +99,35 @@ Wazuh Manager
 | **Default value**: ``true``
 |
 | **Variable**: ``wazuh_manager_json_output``
-| **Description**: Configures the :ref:`jsonout_output <reference_ossec_global>` section in  ``ossec.conf``. This is a string, not a bool.
+| **Description**: Configures the :doc:`jsonout_output </user-manual/reference/ossec-conf/global>` section in  ``ossec.conf``. This is a string, not a bool.
 | **Default value**: ``yes``
 |
 | **Variable**: ``wazuh_manager_alerts_log``
-| **Description**: Configures the :ref:`alerts_log <reference_ossec_global>` section in ``ossec.conf``. This is a string, not a bool.
+| **Description**: Configures the :doc:`alerts_log </user-manual/reference/ossec-conf/global>` section in ``ossec.conf``. This is a string, not a bool.
 | **Default value**: ``yes``
 |
 | **Variable**: ``wazuh_manager_logall``
-| **Description**: Configures the :ref:`logall <reference_ossec_global>` section in ``ossec.conf``. This is a string, not a bool.
+| **Description**: Configures the :doc:`logall </user-manual/reference/ossec-conf/global>` section in ``ossec.conf``. This is a string, not a bool.
 | **Default value**: ``yes``
 |
 | **Variable**: ``wazuh_manager_email_notification``
-| **Description**: Configures the :ref:`email_notification <reference_ossec_global>` section in ``ossec.conf``. This is a string, not a bool.
+| **Description**: Configures the :doc:`email_notification </user-manual/reference/ossec-conf/global>` section in ``ossec.conf``. This is a string, not a bool.
 | **Default value**: ``yes``
 |
 | **Variable**: ``wazuh_manager_mailto``
-| **Description**: Configures the :ref:`email_to <reference_ossec_global>` items in ``ossec.conf``.
+| **Description**: Configures the :doc:`email_to </user-manual/reference/ossec-conf/global>` items in ``ossec.conf``.
 | **Default value**: ``[‘admin@example.net’]``
 |
 | **Variable**: ``wazuh_manager_email_smtp_server``
-| **Description**: Configures the :ref:`smtp_server <reference_ossec_global>` section in ``ossec.conf``.
+| **Description**: Configures the :doc:`smtp_server </user-manual/reference/ossec-conf/global>` section in ``ossec.conf``.
 | **Default value**: ``smtp.example.wazuh.com``
 |
 | **Variable**: ``wazuh_manager_email_from``
-| **Description**: Configures the :ref:`email_from <reference_ossec_global>` section in ``ossec.conf``.
+| **Description**: Configures the :doc:`email_from </user-manual/reference/ossec-conf/global>` section in ``ossec.conf``.
 | **Default value**: ``wazuh@example.wazuh.com``
 |
 | **Variable**: ``wazuh_manager_email_maxperhour``
-| **Description**: Configures the :ref:`email_maxperhour <reference_ossec_global>` section in ``ossec.conf``.
+| **Description**: Configures the :doc:`email_maxperhour </user-manual/reference/ossec-conf/global>` section in ``ossec.conf``.
 | **Default value**: ``12``
 |
 | **Variable**: ``wazuh_manager_email_queue_size``
@@ -135,11 +135,11 @@ Wazuh Manager
 | **Default value**: ``131072``
 |
 | **Variable**: ``wazuh_manager_email_log_source``
-| **Description**: Configures the :ref:`email_log_source <reference_ossec_global>` section from ``ossec.conf``.
+| **Description**: Configures the :doc:`email_log_source </user-manual/reference/ossec-conf/global>` section from ``ossec.conf``.
 | **Default value**: ``alerts.log``
 |
 | **Variable**: ``wazuh_manager_globals``
-| **Description**: Configures the :ref:`white_list <reference_ossec_global>` section from ``ossec.conf``.
+| **Description**: Configures the :doc:`white_list </user-manual/reference/ossec-conf/global>` section from ``ossec.conf``.
 | **Default values**:
 
 .. code-block:: yaml
@@ -285,7 +285,7 @@ Wazuh Manager
 
 |
 | **Variable**: ``wazuh_manager_monitor_aws``
-| **Description**: Configures the :ref:`wodle <wodle_s3>` item named ``aws-s3`` from ``ossec.conf``.
+| **Description**: Configures the :doc:`AWS S3 module </user-manual/reference/ossec-conf/wodle-s3>` item named ``aws-s3`` from ``ossec.conf``.
 | **Default values**:  
 
 .. code-block:: yaml

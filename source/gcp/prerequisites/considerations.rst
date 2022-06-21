@@ -1,5 +1,8 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+  :description: The Wazuh GCP module allows you to fetch logs from Google Pub/Sub and Google Storage. Learn how to configure the Wazuh GCP module in this section.
+
 .. _gcp_considerations:
 
 Considerations for configuration

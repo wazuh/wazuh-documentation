@@ -1,7 +1,7 @@
 .. Copyright (C) 2015–2022 Wazuh, Inc.
 
 .. meta::
-  :description: The pre-built Wazuh Amazon Machine Image includes all Wazuh components ready-to-use. Test all Wazuh capabilities with our AMI.  
+  :description: The pre-built Wazuh Amazon Machine Image includes all Wazuh components ready to use. Learn more about it in this section of the documentation.
 
 Amazon Machine Images (AMI)
 ===========================
@@ -87,7 +87,7 @@ All components included in this AMI are configured to work out-of-the-box withou
     - ``/etc/wazuh-dashboard/opensearch_dashboards.yml``
     - ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml``
 
-To learn more about configuring Wazuh, see the :ref:`User manual <user_manual>`.
+To learn more about configuring Wazuh, see the :doc:`User manual </user-manual/index>`.
 
 .. _ami_wazuh_ui:
 
@@ -123,7 +123,7 @@ Security considerations about SSH
 Next steps
 ----------
 
-The Wazuh AMI is now ready and you can proceed with :ref:`deploying the Wazuh agents <installation_agents>` on the systems to be monitored.
+The Wazuh AMI is now ready and you can proceed with :doc:`deploying the Wazuh agents </installation-guide/wazuh-agent/index>` on the systems to be monitored.
 
 Upgrading the Wazuh server
 --------------------------

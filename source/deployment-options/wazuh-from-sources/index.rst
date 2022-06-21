@@ -5,7 +5,7 @@
     
 Installation from sources
 =========================
-The Wazuh server and agent can be installed via sources as an alternative to the installation from packages.
+The Wazuh manager and agent can be installed via sources as an alternative to the installation from packages.
 
 .. toctree::
     :maxdepth: 1

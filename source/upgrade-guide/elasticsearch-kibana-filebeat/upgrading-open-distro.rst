@@ -42,13 +42,11 @@ Preparing the upgrade
 Upgrading the Wazuh manager
 ---------------------------
 
+When upgrading a multi-node Wazuh manager cluster, run the upgrade in every node to make all the Wazuh manager nodes join the cluster. Start with the master node to reduce server downtime.
+
+.. note:: Upgrading from Wazuh 4.2.x or lower creates the ``wazuh`` operating system user and group to replace ``ossec``. To avoid upgrade conflicts, make sure that the ``wazuh`` user and group are not present in your operating system.  
+
 #. Upgrade the Wazuh manager to the latest version.
-
-   -  When upgrading a multi-node Wazuh manager cluster, run the upgrade in every node to make all the Wazuh manager nodes join the cluster. Start with the master node to reduce server downtime.
-
-   .. note::
-
-      If the ``/var/ossec/etc/ossec.conf`` configuration file was modified, it will not be replaced by the upgrade. You will therefore have to add the settings of the new capabilities manually. More information can be found in :doc:`/user-manual/index`.
 
    .. tabs::
 
@@ -63,6 +61,10 @@ Upgrading the Wazuh manager
          .. code-block:: console
 
             # apt-get install wazuh-manager
+
+   .. note::
+
+      If the ``/var/ossec/etc/ossec.conf`` configuration file was modified, it will not be replaced by the upgrade. You will therefore have to add the settings of the new capabilities manually. More information can be found in :doc:`/user-manual/index`.        
 
 #. Repeat the previous steps for every Wazuh manager node.
 
@@ -340,9 +342,9 @@ Upgrading Filebeat
 
 #. Upload the new Wazuh template to Elasticsearch. This step can be omitted in Wazuh single-node installations:
 
-  .. code-block:: console
+   .. code-block:: console
 
-    # filebeat setup --index-management -E output.logstash.enabled=false    
+      # filebeat setup --index-management -E output.logstash.enabled=false    
 
 Upgrading Kibana
 ----------------

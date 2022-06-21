@@ -50,7 +50,7 @@ In order to configure Wazuh to send email alerts, the email settings must be con
       ...
   </ossec_config>
 
-To see all of the available email configuration options, go to the :ref:`global section <reference_ossec_global>`.
+To see all of the available email configuration options, go to the :doc:`global section </user-manual/reference/ossec-conf/global>`.
 
 Once the above has been configured, the ``email_alert_level`` needs to be set to the minimum alert level that will trigger an email. By default, this level is set to 12.
 

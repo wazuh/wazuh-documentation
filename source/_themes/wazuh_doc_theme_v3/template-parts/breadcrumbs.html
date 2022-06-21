@@ -1,5 +1,13 @@
     <ul id="breadcrumbs" role="navigation" aria-label="breadcrumbs navigation">
-      <li><a href="{{ pathto(master_doc) }}">{{ _('Documentation') }}</a> <span class="breadcrumb-separator" aria-hidden="true"></span></li>
+      <li>
+        <a href="{{ pathto(master_doc) }}">
+        {% if theme_breadcrumb_root_title == 'Training'%}
+          {{ _(theme_breadcrumb_root_title) }}
+        {% else %}
+          {{ _('Documentation') }}
+        {% endif %}
+        </a> <span class="breadcrumb-separator" aria-hidden="true"></span>
+      </li>
       {%- for doc in parents -%}
       <li><a href="{{ doc.link|e }}">{{ doc.title }}</a><span class="breadcrumb-separator" aria-hidden="true"></span></li>
       {%- endfor -%}

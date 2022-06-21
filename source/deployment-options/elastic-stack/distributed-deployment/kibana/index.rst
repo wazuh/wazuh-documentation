@@ -155,4 +155,4 @@ To uninstall Kibana, visit the :ref:`uninstalling section <basic_uninstall_kiban
 Next steps
 ~~~~~~~~~~
 
-Once the Wazuh - Elastic Stack environment is ready, a Wazuh agent can be installed on every endpoint to be monitored. The Wazuh installation guide is available for most operating systems and it can be found :ref:`here<installation_agents>`.
+Once the Wazuh - Elastic Stack environment is ready, a Wazuh agent can be installed on every endpoint to be monitored. The :doc:`Wazuh agent installation guide </installation-guide/wazuh-agent/index>` is available for most operating systems.
