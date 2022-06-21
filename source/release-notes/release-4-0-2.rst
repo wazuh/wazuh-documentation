@@ -5,8 +5,8 @@
 
 .. _release_4_0_2:
 
-4.0.2 Release notes
-===================
+4.0.2 Release notes - 24 November 2020
+======================================
 
 This section lists the changes in version 4.0.2. More details about these changes are provided in the changelog of each component:
 

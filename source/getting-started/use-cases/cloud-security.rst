@@ -103,7 +103,7 @@ Example of AWS dashboard:
    :width: 80%
    :wrap_image: No
 
-You can find more information on how to use Wazuh to monitor AWS in our :ref:`documentation <amazon>`.
+You can find more information on how to use Wazuh to monitor AWS in our :doc:`documentation </amazon/index>`.
 
 Microsoft Azure
 ---------------

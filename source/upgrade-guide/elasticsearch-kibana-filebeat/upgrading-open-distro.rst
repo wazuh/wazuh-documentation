@@ -48,8 +48,6 @@ When upgrading a multi-node Wazuh manager cluster, run the upgrade in every node
 
 #. Upgrade the Wazuh manager to the latest version.
 
-  
-
    .. tabs::
 
       .. group-tab:: Yum
@@ -64,7 +62,7 @@ When upgrading a multi-node Wazuh manager cluster, run the upgrade in every node
 
             # apt-get install wazuh-manager
 
-    .. note::
+   .. note::
 
       If the ``/var/ossec/etc/ossec.conf`` configuration file was modified, it will not be replaced by the upgrade. You will therefore have to add the settings of the new capabilities manually. More information can be found in :doc:`/user-manual/index`.        
 
@@ -344,9 +342,9 @@ Upgrading Filebeat
 
 #. Upload the new Wazuh template to Elasticsearch. This step can be omitted in Wazuh single-node installations:
 
-  .. code-block:: console
+   .. code-block:: console
 
-    # filebeat setup --index-management -E output.logstash.enabled=false    
+      # filebeat setup --index-management -E output.logstash.enabled=false    
 
 Upgrading Kibana
 ----------------

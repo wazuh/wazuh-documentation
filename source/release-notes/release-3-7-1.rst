@@ -4,8 +4,8 @@
   :description: Wazuh 3.7.1 has been released. Check out our release notes to discover the changes and additions of this release.
 .. _release_3_7_1:
 
-3.7.1 Release notes
-===================
+3.7.1 Release notes - 5 December 2018
+=====================================
 
 This section shows the most relevant improvements and fixes in version 3.7.1. More details about these changes are provided in each component changelog:
 

@@ -1,8 +1,9 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
-.. _wazuh-modulesd:
 .. meta::
-  :description: The wazuh-modulesd program manages some Wazuh modules. Learn more about it in this section.
+  :description: The wazuh-modulesd program manages some of the Wazuh modules. Learn more about it in this section of the documentation.
+
+.. _wazuh-modulesd:
 
 wazuh-modulesd
 ==============
@@ -34,7 +35,7 @@ The wazuh-modulesd program manages the Wazuh modules described below.
 
 .. topic:: AWS S3 wodle
 
-  The AWS S3 wodle allows you to gather and parse logs from multiple AWS services, such as Guard Duty, Macie, VPC Flow, etc. See the :ref:`AWS S3 <amazon>` section for more information on this functionality.
+  The AWS S3 wodle allows you to gather and parse logs from multiple AWS services, such as Guard Duty, Macie, VPC Flow, etc. See the :doc:`AWS S3 </amazon/index>` section for more information on this functionality.
 
 .. topic:: GitHub wodle
 

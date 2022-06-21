@@ -5,8 +5,8 @@
 
 .. _release_3_11_0:
 
-3.11.0 Release notes
-====================
+3.11.0 Release notes - 23 December 2019
+=======================================
 
 This section shows the most relevant improvements and fixes in version 3.11.0. More details about these changes are provided in each component changelog:
 

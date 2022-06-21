@@ -8,7 +8,7 @@
 Monitoring Azure Active Directory
 =================================
 
-`Azure Active Directory <https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-whatis>`_ is the identity and directory management service that combines basic directory services, application access management, and identity protection in a single solution. The Wazuh ``azure-logs`` module requires dependencies to work as well as the right credentials to access the logs. Take a look at the :ref:`prerequisites <azure_prerequisites>` section before proceeding. 
+`Azure Active Directory <https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-whatis>`_ is the identity and directory management service that combines basic directory services, application access management, and identity protection in a single solution. The Wazuh ``azure-logs`` module requires dependencies to work as well as the right credentials to access the logs. Take a look at the :doc:`prerequisites </azure/activity-services/prerequisites/index>` section before proceeding. 
 
 .. thumbnail:: ../../../images/azure/aad-graph-intro.png
     :title: AAD

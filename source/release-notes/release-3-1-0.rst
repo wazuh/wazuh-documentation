@@ -4,8 +4,8 @@
   :description: Wazuh 3.1.0 has been released. Check out our release notes to discover the changes and additions of this release.
 .. _release_3_1_0:
 
-3.1.0 Release notes
-===================
+3.1.0 Release notes - 22 December 2017
+======================================
 
 This section shows the most relevant new features of Wazuh v3.1.0. You will find more detailed information in our `changelog <https://github.com/wazuh/wazuh/blob/v3.1.0/CHANGELOG.md>`_ file.
 

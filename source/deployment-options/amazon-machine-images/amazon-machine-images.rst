@@ -1,7 +1,7 @@
 .. Copyright (C) 2015–2022 Wazuh, Inc.
 
 .. meta::
-  :description: The pre-built Wazuh Amazon Machine Image includes all Wazuh components ready-to-use. Test all Wazuh capabilities with our AMI.  
+  :description: The pre-built Wazuh Amazon Machine Image includes all Wazuh components ready to use. Learn more about it in this section of the documentation.
 
 Amazon Machine Images (AMI)
 ===========================
@@ -87,7 +87,7 @@ All components included in this AMI are configured to work out-of-the-box withou
     - ``/etc/wazuh-dashboard/opensearch_dashboards.yml``
     - ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml``
 
-To learn more about configuring Wazuh, see the :ref:`User manual <user_manual>`.
+To learn more about configuring Wazuh, see the :doc:`User manual </user-manual/index>`.
 
 .. _ami_wazuh_ui:
 
