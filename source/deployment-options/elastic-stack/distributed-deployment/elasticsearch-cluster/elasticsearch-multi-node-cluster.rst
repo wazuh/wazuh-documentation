@@ -10,7 +10,7 @@ Elasticsearch multi-node cluster
 
 Elasticsearch is a highly scalable full-text search and analytics engine. This document will explain how to install the Elastic Stack components in a multi-node cluster.
 
-For resilience in case Elasticsearch nodes become unavailable, it is recommended to have an odd number of master eligible nodes, please take this into consideration when deciding the configuration of your Elasticsearch cluster. 
+For resilience, in case Elasticsearch nodes become unavailable, it is recommended to have an odd number of master eligible nodes, please take this into consideration when deciding the configuration of your Elasticsearch cluster. 
 
 .. note:: Root user privileges are necessary to execute all the commands described below.
 
@@ -38,7 +38,7 @@ Installing Prerequisites
 Adding the Elastic Stack repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The addition of Elastic Stack repository must be done in all Elasticsearch cluster nodes.
+The addition of the Elastic Stack repository must be done in all Elasticsearch cluster nodes.
 
 .. tabs::
 
@@ -78,7 +78,7 @@ Install the Elasticsearch package:
 
 
 
-Once Elasticsearch is installed it has to be configured by downloading and editing the file ``/etc/elasticsearch/elasticsearch.yml`` as follows:
+Once Elasticsearch is installed, it has to be configured by downloading and editing the file ``/etc/elasticsearch/elasticsearch.yml`` as follows:
 
 .. include:: /_templates/installations/basic/elastic/common/elastic-multi-node/configure_elasticsearch_initial_node.rst
 
@@ -86,7 +86,7 @@ Once Elasticsearch is installed it has to be configured by downloading and editi
 Certificates creation and deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#.  The number of Wazuh servers to be implemented will determine the next step. Choose ``Wazuh single-node cluster``, if there is only one Wazuh server, or ``Wazuh multi-node cluster`` in case there are two or more Wazuh servers.
+#.  The number of Wazuh servers to be implemented will determine the next step. Choose ``Wazuh single-node cluster``, if there is only one Wazuh server, or ``Wazuh multi-node cluster`` in case, there are two or more Wazuh servers.
 
     .. include:: /_templates/installations/basic/elastic/common/elastic-multi-node/generate_certificates.rst
 
@@ -97,7 +97,7 @@ Certificates creation and deployment
     .. include:: /_templates/installations/basic/elastic/common/elastic-multi-node/deploy_certificates_initial_node.rst
 
 
-#. If Kibana will be installed in this node, keep the certificates file. Otherwise, if the file has been copied already to all the instances of the distributed deployment, remove it to increase security  ``rm -f ~/certs.zip``. 
+#. If Kibana is installed in this node, keep the certificates file. Otherwise, if the file has been copied already to all the instances of the distributed deployment, remove it to increase security  ``rm -f ~/certs.zip``. 
 
 
 #. Enable and start the Elasticsearch service:
@@ -120,7 +120,7 @@ Prerequisites
 Adding the Elastic Stack repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The addition of Elastic Stack repository must be done in all Elasticsearch cluster nodes.
+The addition of the Elastic Stack repository must be done in all Elasticsearch cluster nodes.
 
 .. tabs::
 
@@ -160,7 +160,7 @@ Elasticsearch installation and configuration
 
 
 
- Once Elasticsearch is installed it has to be configured by downloading and editing the file ``/etc/elasticsearch/elasticsearch.yml`` as follows:
+ Once Elasticsearch is installed, it has to be configured by downloading and editing the file ``/etc/elasticsearch/elasticsearch.yml`` as follows:
 
 .. include:: /_templates/installations/basic/elastic/common/elastic-multi-node/configure_elasticsearch_subsequent_nodes.rst
 
@@ -172,7 +172,7 @@ Certificates deployment
 
     .. include:: /_templates/installations/basic/elastic/common/elastic-multi-node/deploy_certificates_subsequent_nodes.rst
 
-#. If Kibana will be installed in this node, keep the certificates file. Otherwise, remove it to increase security ``rm -f ~/certs.zip``.  
+#. If Kibana is installed in this node, keep the certificates file. Otherwise, remove it to increase security ``rm -f ~/certs.zip``.  
 
 #.  Enable and start the Elasticsearch service:
 

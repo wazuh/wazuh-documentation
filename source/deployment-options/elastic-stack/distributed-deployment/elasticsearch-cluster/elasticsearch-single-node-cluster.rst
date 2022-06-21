@@ -73,7 +73,7 @@ Elasticsearch installation and configuration
 Certificates creation and deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. The number of Wazuh servers to be implemented will determine the next step. Select ``Wazuh single-node cluster``, if there is only one Wazuh server, or ``Wazuh multi-node cluster`` in case there are two or more Wazuh servers.
+#. The number of Wazuh servers to be implemented will determine the next step. Select ``Wazuh single-node cluster``, if there is only one Wazuh server, or ``Wazuh multi-node cluster`` in case, there are two or more Wazuh servers.
 
     .. include:: /_templates/installations/basic/elastic/common/elastic-single-node/generate_deploy_certificates.rst
 
@@ -91,7 +91,7 @@ Certificates creation and deployment
       # chmod 400 /etc/elasticsearch/certs/ca/ca.* /etc/elasticsearch/certs/elasticsearch.*
       # rm -rf ~/certs/
 
-#. If Kibana will be installed in this node, keep the certificates file. Otherwise, if the file has been copied already to all the instances of the distributed deployment, remove it to increase security  ``rm -f ~/certs.zip``.
+#. If Kibana is installed in this node, keep the certificates file. Otherwise, if the file has been copied already to all the instances of the distributed deployment, remove it to increase security  ``rm -f ~/certs.zip``.
 
 #. Enable and start the Elasticsearch service:
 

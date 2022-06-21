@@ -14,7 +14,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
         .. note::
         
-            All the commands described below need to be executed with root user privileges. Since Wazuh 3.5 it is necessary to have an Internet connection when following this process.
+            All the commands described below need to be executed with root user privileges. Since Wazuh 3.5, it is necessary to have an Internet connection when following this process.
 
         .. note::
         
@@ -388,7 +388,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
         .. note::
 
-            All the commands described below need to be executed with root user privileges. Since Wazuh 3.5 it is necessary to have an Internet connection when following this process.
+            All the commands described below need to be executed with root user privileges. Since Wazuh 3.5, it is necessary to have an Internet connection when following this process.
 
         #.  Install development tools and compilers.
 
@@ -527,7 +527,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
         .. note::
         
-            All the commands described below need to be executed with root user privileges. Since Wazuh 3.5 it is necessary to have an Internet connection when following this process.
+            All the commands described below need to be executed with root user privileges. Since Wazuh 3.5, it is necessary to have an Internet connection when following this process.
 
         #.  Install development tools and compilers.
 
@@ -668,7 +668,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
                 .. note::
                 
-                    All the commands described below need to be executed with root user privileges. Since Wazuh 3.5 it is necessary to have an Internet connection when following this process.
+                    All the commands described below need to be executed with root user privileges. Since Wazuh 3.5, it is necessary to have an Internet connection when following this process.
 
                 #.  Install development tools and compilers.
 
@@ -864,7 +864,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
                 .. note::
                 
-                    All the commands described below need to be executed with root user privileges. Since Wazuh 3.5 it is necessary to have an Internet connection when following this process.
+                    All the commands described below need to be executed with root user privileges. Since Wazuh 3.5, it is necessary to have an Internet connection when following this process.
 
                 #.  Install development tools and build the needed compilers.
 
