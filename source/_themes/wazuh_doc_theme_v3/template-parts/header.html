@@ -20,6 +20,7 @@
     </div>
     
     <div class="mobile-secondary-header version-zone">
+    {% if theme_breadcrumb_root_title == 'Documentation' %}
       <ul class="navbar-nav ml-auto d-none d-xl-flex flex-row">
         <li class="nav-item">
           <a class="nav-link" href="{{ theme_wazuh_web_url + '/product/' }}" target="_blank" rel="noreferrer noopener">Product</a>
@@ -33,16 +34,8 @@
         <li class="nav-item">
           <a class="nav-link" href="{{ theme_wazuh_web_url + '/partners/' }}" target="_blank" rel="noreferrer noopener">Partners</a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="dropdown-resources" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Resources</a>
-          <ul class="dropdown-menu" aria-labelledby="dropdown-resources">
-            <li class="nav-item">
-              <a class="dropdown-item" href="{{ theme_wazuh_web_url + '/blog/' }}" target="_blank" rel="noreferrer noopener">Blog</a>
-            </li>
-            <li class="nav-item">
-              <a class="dropdown-item" href="{{ theme_wazuh_web_url + '/faq/' }}" target="_blank" rel="noreferrer noopener">FAQ</a>
-            </li>
-          </ul>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ theme_wazuh_web_url + '/blog/' }}" target="_blank" rel="noreferrer noopener">Blog</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="dropdown-company" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Company</a>
@@ -63,9 +56,14 @@
         </li>
       </ul>
         
-      {% if theme_display_version_selector %}
+      {% if theme_include_version_selector %}
       {% include "template-parts/version-selector.html" %}
       {% endif %}
-    </div>
+    {% else %}
+      <div class="d-none d-xl-block">
+        {% include "template-parts/search-box.html" %}
+      </div>
+    {% endif %}
+  </div>
   </nav>
 </header>

@@ -4,8 +4,8 @@
 
 .. _upgrading_wazuh_agent:
 
-Upgrading the Wazuh agent
-=========================
+Wazuh agent
+===========
 
 The following steps show how to upgrade the Wazuh agent to the latest available version. Since Wazuh 3.x, it is possible to upgrade the Wazuh agents either remotely from the Wazuh manager or locally. Upgrading the Wazuh agents remotely is possible by using the ``agent_upgrade`` tool or the Wazuh API. More information about the process can be found in the :ref:`Remote agent upgrade<upgrading-agent>` section.
 
@@ -220,7 +220,7 @@ To perform the upgrade locally, follow the instructions for the operating system
           # /var/ossec/bin/wazuh-control stop
 
 
-    #. Backup the ``ossec.conf`` configuration file:
+    #. Backup the ``ossec.conf`` and ``client.keys`` files:
 
         .. code-block:: console
 
@@ -250,12 +250,14 @@ To perform the upgrade locally, follow the instructions for the operating system
               # pkgadd -d wazuh-agent_v|WAZUH_LATEST|-sol10-sparc.pkg wazuh-agent
 
 
-    #. Restore the ``ossec.conf`` configuration file:
+    #. Restore the ``ossec.conf`` and ``client.keys`` files:
 
         .. code-block:: console
 
           # mv ~/ossec.conf.bk /var/ossec/etc/ossec.conf
           # chown root:wazuh /var/ossec/etc/ossec.conf
+          # mv ~/client.keys.bk /var/ossec/etc/client.keys
+          # chown root:wazuh /var/ossec/etc/client.keys
 
 
     #. Start the wazuh-agent:
@@ -284,19 +286,21 @@ To perform the upgrade locally, follow the instructions for the operating system
             # cp /var/ossec/etc/client.keys ~/client.keys.bk
 
 
-      #. Delete ossec user and group:
+      #. **Only for upgrades from version 4.2.7 or lower**:  
+      
+         #. Delete ossec user and group:
 
-          .. code-block:: console
+            .. code-block:: console
 
-            # groupdel ossec
-            # userdel ossec
+              # groupdel ossec
+              # userdel ossec
 
-      #. Create the wazuh user and group:
+         #. Create the wazuh user and group:
 
-          .. code-block:: console
+            .. code-block:: console
 
-            # groupadd wazuh
-            # useradd -G wazuh wazuh
+              # groupadd wazuh
+              # useradd -G wazuh wazuh
 
       #. Deploy the Wazuh agent files:
 

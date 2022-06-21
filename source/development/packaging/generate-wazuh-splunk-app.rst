@@ -19,7 +19,7 @@ Download our wazuh-packages repository from GitHub and go to the splunkapp direc
 
 .. code-block:: console
 
-  $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/splunkapp && git checkout |WAZUH_PACKAGES_BRANCH|
+  $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/splunkapp && git checkout v|WAZUH_LATEST|
 
 Execute the ``generate_wazuh_splunk_app.sh`` script, with the different options you desire. This script will build a Docker image with all the necessary tools to create the Wazuh Splunk App package and run a container that will build it:
 
@@ -31,7 +31,7 @@ Execute the ``generate_wazuh_splunk_app.sh`` script, with the different options 
   :class: output
 
   Usage: ./generate_wazuh_splunk_app.sh [OPTIONS]
-  
+
       -b, --branch <branch>     [Required] Select Git branch or tag.
       -s, --store <directory>   [Optional] Destination directory by default /home/vagrant/wazuh-wazuh-packages-26460eb/splunkapp/output
       -r, --revision            [Optional] Package revision that append to version e.g. x.x.x-y.y.y_rev

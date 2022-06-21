@@ -1,8 +1,8 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
-  :description: Find out more about Wazuh server administration and its configurations in this section of our documentation. 
-  
+  :description: Find out more about Wazuh server administration and its configurations in this section of our documentation.
+
 .. _user_manual_manager:
 
 Wazuh server administration
@@ -22,3 +22,4 @@ The Wazuh manager is the system that analyzes the data received from all registe
         manual-database-output
         automatic-reports
         manual-email-report/index
+        manual-backup-restore

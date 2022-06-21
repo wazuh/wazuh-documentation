@@ -24,7 +24,7 @@ Amazon Kinesis configuration
 
 Create an Amazon Kinesis Data Firehose delivery stream to be able to store the Trusted Advisor logs into the desired S3 bucket so Wazuh can process them.
 
-#. :ref:`Create a new <S3_bucket>` S3 bucket. If you want to use an already existing one, skip this step.
+#. :doc:`Create a new </amazon/services/prerequisites/S3-bucket>` S3 bucket. If you want to use an already existing one, skip this step.
 
 #. Search for **Kinesis** in the search bar at the top of the page or go to **Services** > **Analytics** > **Kinesis**:
 
@@ -155,7 +155,7 @@ Wazuh configuration
       :align: center
       :width: 80%
 
-#. Add the following :ref:`AWS S3 module <wodle_s3>` configuration to the file, replacing ``wazuh-aws-wodle`` with the name of the S3 bucket:
+#. Add the following :doc:`AWS S3 module </user-manual/reference/ossec-conf/wodle-s3>` configuration to the file, replacing ``wazuh-aws-wodle`` with the name of the S3 bucket:
 
     .. code-block:: xml
 

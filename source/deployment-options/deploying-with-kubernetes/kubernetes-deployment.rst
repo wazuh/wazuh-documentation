@@ -188,7 +188,7 @@ In case you created domain names for the services, you should be able to access 
   
 The Wazuh dashboard will be accessible on ``https://localhost:8443``.
 
-The default credentials are ``admin:admin``.
+The default credentials are ``admin:SecretPassword``.
 
 
 Agents
@@ -196,7 +196,7 @@ Agents
 
 Wazuh agents are designed to monitor hosts. To start using them:
 
-#. :ref:`Install the agent <installation_agents>`.
+#. :doc:`Install the agent </installation-guide/wazuh-agent/index>`.
 #. Enroll the agent by modifying the file ``/var/ossec/etc/ossec.conf``. Change the “transport protocol” to TCP and replace the ``MANAGER_IP`` with the external IP address of the service pointing to port 1514 or with the hostname provided by the cloud provider
 
 To learn more about registering agents, see the :ref:`Wazuh agent enrollment <agent_enrollment>` section of the documentation.

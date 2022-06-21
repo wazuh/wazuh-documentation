@@ -123,7 +123,7 @@ Security considerations about SSH
 Next steps
 ----------
 
-The Wazuh AMI is now ready and you can proceed with :ref:`deploying the Wazuh agents <installation_agents>` on the systems to be monitored.
+The Wazuh AMI is now ready and you can proceed with :doc:`deploying the Wazuh agents </installation-guide/wazuh-agent/index>` on the systems to be monitored.
 
 Upgrading the Wazuh server
 --------------------------

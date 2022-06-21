@@ -19,4 +19,4 @@ The Wazuh agent is multiplatform and provides the following capabilities:
 - Rootkit and malware detection
 - Security policy monitoring
 
-.. note:: You can find instructions to install the Wazuh agent on different Operating Systems in :ref:`this section <installation_agents>`.
+.. note:: You can find instructions to install the Wazuh agent on different Operating Systems in :doc:`this section </installation-guide/wazuh-agent/index>`.

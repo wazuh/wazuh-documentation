@@ -1,21 +1,83 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
+
 .. meta::
-  :description: Check out more about how to upgrade the Elastic Stack basic license: preparing and upgrading Elastic Stack, upgrading Filebeat and Kibana, and next steps. 
+   :description: Check out more about how to upgrade the Wazuh server and the Elastic Stack basic license: preparing and upgrading Elastic Stack, upgrading Filebeat and Kibana, and next steps. 
   
 .. _upgrading_elastic_stack:
 
-Upgrading Elastic Stack basic license
+Wazuh and Elastic Stack basic license
 =====================================
 
-This section guides through the upgrade process of Elasticsearch, Filebeat, and Kibana for *Elastic* distribution. 
+This section guides through the upgrade process of the Wazuh server, Elasticsearch, and Kibana for the *Elastic Stack basic license* distribution. 
 
 .. note::
-  This guide is meant for upgrades from 7.x to 7.y. The upgrade instructions for Elastic Stack versions prior to 7.0 can be found in the :ref:`Upgrading Elastic Stack from a legacy version <upgrading_elastic_stack_legacy>` section.
+   
+   This guide is meant for upgrades from 7.x to 7.y. The upgrade instructions for Elastic Stack versions prior to 7.0 can be found in the :ref:`Upgrading Elastic Stack from a legacy version <upgrading_elastic_stack_legacy>` section.
 
-.. note:: Root user privileges are required to execute all the commands described below.
+.. note::
+   
+   Root user privileges are required to execute all the commands described below.
 
-Preparing Elastic Stack
+Preparing the upgrade
+---------------------
+
+#. Add the Wazuh repository. You can skip this step if the repository is already present and enabled on the node. 
+
+   .. tabs::
+
+
+     .. group-tab:: Yum
+
+
+       .. include:: /_templates/installations/common/yum/add-repository.rst
+
+
+
+     .. group-tab:: APT
+
+
+       .. include:: /_templates/installations/common/deb/add-repository.rst
+
+
+
+
+#. Repeat the previous step for every Wazuh node.
+
+Upgrading the Wazuh manager
+---------------------------
+
+When upgrading a multi-node Wazuh manager cluster, run the upgrade in every node to make all the Wazuh manager nodes join the cluster. Start with the master node to reduce server downtime.
+
+.. note:: Upgrading from Wazuh 4.2.x or lower creates the ``wazuh`` operating system user and group to replace ``ossec``. To avoid upgrade conflicts, make sure that the ``wazuh`` user and group are not present in your operating system. 
+
+#. Upgrade the Wazuh manager to the latest version.
+
+
+   .. tabs::
+
+      .. group-tab:: Yum
+
+         .. code-block:: console
+
+            # yum upgrade wazuh-manager
+
+      .. group-tab:: APT
+
+         .. code-block:: console
+
+            # apt-get install wazuh-manager
+
+    .. note::
+
+      If the ``/var/ossec/etc/ossec.conf`` configuration file was modified, it will not be replaced by the upgrade. You will therefore have to add the settings of the new capabilities manually. More information can be found in :doc:`/user-manual/index`.      
+
+#. Repeat the previous steps for every Wazuh manager node.
+
+Upgrading Elastic Stack
 -----------------------
+
+Preparations
+^^^^^^^^^^^^
 
 #. Stop the services:
 
@@ -71,8 +133,8 @@ Preparing Elastic Stack
         # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/wazuh.repo
 
 
-Upgrading Elasticsearch
------------------------
+Upgrade
+^^^^^^^
 
 This guide explains how to perform a rolling upgrade, which allows you to shut down one node at a time for minimal disruption of service.
 The cluster remains available throughout the process.
@@ -200,7 +262,7 @@ The following steps need to be run in the Wazuh server or servers in the case of
 
     .. code-block:: console
 
-      # curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.1.tar.gz | sudo tar -xvz -C /usr/share/filebeat/module
+      # curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.2.tar.gz | sudo tar -xvz -C /usr/share/filebeat/module
 
 
 #. Edit the ``/etc/filebeat/filebeat.yml`` configuration file. Replace ``YOUR_ELASTIC_SERVER_IP`` with the IP address or the hostname of the Elasticsearch server. For example:
@@ -431,12 +493,11 @@ Upgrading Kibana
 
 
 
-Disabling the repository
-^^^^^^^^^^^^^^^^^^^^^^^^
+Finishing the upgrade
+---------------------
 
-It is recommended to disable the Elastic repository to prevent an upgrade to the newest Elastic Stack version due to the possibility of undoing changes with the Wazuh Kibana plugin:
-
-
+#. **Recommended action** - Disable the Wazuh repository when finished upgrading the Wazuh installation in the node to prevent an upgrade to the newest Elastic Stack version due to the possibility of undoing changes with the Wazuh Kibana plugin.
+  
       .. tabs::
 
         .. group-tab:: Yum
@@ -466,7 +527,7 @@ It is recommended to disable the Elastic repository to prevent an upgrade to the
 
             # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/elastic.repo
 
-Next step
----------
+Next steps
+----------
 
 The next step consists in :ref:`upgrading the Wazuh agents<upgrading_wazuh_agent>`.
