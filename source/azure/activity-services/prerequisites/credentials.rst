@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Learn what you need to provide access credentials to the Wazuh Azure module so it can successfully connect to Azure in this section of the Wazuh documentation.
+
 .. _azure_credentials:
 
 Authentication options
@@ -33,7 +36,7 @@ The fields expected to be present in the credentials file will change depending 
   account_name = exampleaccountname
   account_key = wr+...jOQ
 
-Take a look at the :ref:`azure-logs wodle<wodle_azure_logs>` section from ``ossec.conf`` reference page for more information about these parameters.
+Take a look at the :doc:`azure-logs wodle </user-manual/reference/ossec-conf/wodle-azure-logs>` section from ``ossec.conf`` reference page for more information about these parameters.
 
 
 Inserting the credentials into the configuration
@@ -67,4 +70,4 @@ The tags to use are different depending on the type of service or activity to be
     </storage>
 
 
-Take a look at the :ref:`azure-logs wodle<wodle_azure_logs>` entry from the ``ossec.conf`` reference page for more information about the parameters.
+Take a look at the :doc:`azure-logs wodle </user-manual/reference/ossec-conf/wodle-azure-logs>` entry from the ``ossec.conf`` reference page for more information about the parameters.

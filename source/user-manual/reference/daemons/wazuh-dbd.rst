@@ -1,5 +1,8 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+  :description: Learn about the ``wazuh-dbd`` program that inserts the alert logs into a database in this section.
+
 .. _wazuh-dbd:
 
 wazuh-dbd

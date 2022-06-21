@@ -1,12 +1,14 @@
 .. Copyright (C) 2015–2022 Wazuh, Inc.
 
 .. meta::
-  :description: Check out how to install the Wazuh server from sources in this section of our documentation. 
+   :description: Check out how to install the Wazuh manager from sources in this section of our documentation. 
 
-Installing Wazuh server from sources
-====================================
+Installing the Wazuh manager from sources
+=========================================
 
-The Wazuh server collects and analyzes data received from deployed agents. It runs the Wazuh manager, the Wazuh API, and Filebeat. Alternatively, the Wazuh manager package and compatible agent  packages can be checked or downloaded :doc:`here </installation-guide/packages-list>`.
+The Wazuh server collects and analyzes data received from deployed agents. It runs the Wazuh manager, the Wazuh API, and Filebeat.
+
+The Wazuh manager package and compatible agent packages can be checked or downloaded from the :doc:`/installation-guide/packages-list` section.
 
 Installing dependencies
 -----------------------
@@ -116,8 +118,8 @@ To install the required dependencies to build the python interpreter, follow the
     The Python version from the previous command may change depending on the OS used to build the binaries. More information in `Install dependencies <https://devguide.python.org/setup/#install-dependencies>`_.
 
 
-Installing Wazuh manager
-------------------------
+Installing the Wazuh manager
+----------------------------
 
 #.  Download and extract the latest version:
 
@@ -133,14 +135,14 @@ Installing Wazuh manager
 
     .. code-block:: console
 
-        # cd wazuh-*
+        # cd wazuh-|WAZUH_LATEST_FROM_SOURCES|
         # ./install.sh
 
     If you have previously compiled for another platform, you must clean the build using the Makefile  in ``src``:
 
     .. code-block:: console
 
-        # cd wazuh-*
+        # cd wazuh-|WAZUH_LATEST_FROM_SOURCES|
         # make -C src clean
         # make -C src clean-deps
 
@@ -178,7 +180,7 @@ Installing Wazuh manager
 Installing other Wazuh components
 ---------------------------------
 
-Once the Wazuh manager is installed, you may install Filebeat, the Wazuh indexer and the Wazuh dashboard using :doc:`packages </installation-guide/packages-list>`.
+Once the Wazuh manager is installed from sources, you may install the Wazuh indexer, Filebeat, and the Wazuh dashboard following the :doc:`Installation guide </installation-guide/index>`.
 
 Uninstall
 ---------

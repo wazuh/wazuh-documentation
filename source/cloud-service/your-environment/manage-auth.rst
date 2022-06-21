@@ -1,9 +1,9 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-.. _cloud_your_environment_manage_wui_access:
-
 .. meta::
   :description: Learn how to manage access to your Wazuh WUI: authentication and authorization, how to create and set a Wazuh admin user, and more. 
+
+.. _cloud_your_environment_manage_wui_access:
 
 Authentication and authorization
 ================================

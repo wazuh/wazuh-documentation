@@ -3,7 +3,6 @@
 .. meta::
    :description: Check out this installation guide to create an environment consisting of a Wazuh server, an Elastic Stack server, and a Wazuh agent. 
   
-  
 .. _wazuh_ansible_guide:
 
 Installation Guide

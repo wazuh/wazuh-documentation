@@ -5,8 +5,8 @@
 
 .. _release_3_12_0:
 
-3.12.0 Release notes
-====================
+3.12.0 Release notes - 24 March 2020
+====================================
 
 This section lists the changes in version 3.12.0. More details about these changes are provided in each component changelog:
 

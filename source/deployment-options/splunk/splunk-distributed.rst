@@ -24,7 +24,7 @@ Prerequisites
 
 .. warning::
 
-   By following this guide, users will learn how to install and configure **Wazuh** in an already created Splunk cluster.  All Splunk related configuration is in their `Official Documentation <https://docs.splunk.com/Documentation/Splunk/7.2.3/Indexer/Aboutclusters>`__, and it is assumed that a Splunk cluster installation and configuration has been already done.
+   By following this guide, users will learn how to install and configure **Wazuh** in an already created Splunk cluster.  All Splunk related configuration is in their `Official Documentation <https://docs.splunk.com/Documentation/Splunk/7.2.3/Indexer/Aboutclusters>`__, and it is assumed that a Splunk cluster installation and configuration has already been done.
 
 The structure of a basic Splunk Cluster is formed by the following elements:
 
@@ -42,9 +42,9 @@ Install and configure Splunk enterprise indexer instances
 
 .. note::
 
-      - Splunk is not open source software and it requires a registered user and license in order to work. You can also use a free trial license.
+      - Splunk is not open source software, and it requires a registered user and license in order to work. You can also use a free trial license.
 
-      - This guide will install and configure Splunk |SPLUNK_LATEST|. If you intend to configure a different version of Splunk with Wazuh, change the Splunk version number in the requests for the configuration files and Wazuh app for Splunk. For example, if you intend to configure Splunk 8.2.2:
+      - This guide will install and configure Splunk |SPLUNK_LATEST|. If you intend to configure a different version of Splunk with Wazuh, change the Splunk version number in the requests for the configuration files and the Wazuh app for Splunk. For example, if you intend to configure Splunk 8.2.2:
 
          .. code-block:: console
 
@@ -70,7 +70,7 @@ Ensure Splunk is already installed in ``/opt/splunk`` and start the service:
 
    You will be prompted for a username and password for the administrator user.
 
-After this step the Splunk Web service will be listening to port 8000. You can browse ``http://<your-instance-ip>:8000`` in order to access the Web GUI.
+After this step, the Splunk Web service will be listening to port 8000. You can browse ``http://<your-instance-ip>:8000`` in order to access the Web GUI.
 
 Configuring the Splunk indexer instances
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -130,9 +130,9 @@ A Splunk forwarder is required in order to send alerts to the Splunk indexers. D
 
    .. note::
 
-         - Splunk is not open source software and it requires a registered user and license in order to work. You can also use a free trial license.
+         - Splunk is not open source software, and it requires a registered user and license in order to work. You can also use a free trial license.
 
-         - This guide will install and configure Splunk |SPLUNK_LATEST|. If you intend to configure a different version of Splunk with Wazuh, change the Splunk version number in the requests for the configuration files and Wazuh app for Splunk. For example, if you intend to configure Splunk 8.2.2:
+         - This guide will install and configure Splunk |SPLUNK_LATEST|. If you intend to configure a different version of Splunk with Wazuh, change the Splunk version number in the requests for the configuration files and the Wazuh app for Splunk. For example, if you intend to configure Splunk 8.2.2:
 
             .. code-block:: console
 
@@ -170,7 +170,7 @@ The following files will be configured on all forwarder instances:
 
 -  **inputs.conf**: This file specifies the options for reading alerts from the alerts.json file.
 -  **outputs.conf**: This file is for pointing events to indexers. It can be a single indexer or a cluster of indexers. If it is a cluster of indexers, load balancing has to be configured for the forwarders.
--  **props.conf**: This file provides format and transforming options on the fields of the data to be indexed.
+-  **props.conf**: This file provides the format and transforming options on the fields of the data to be indexed.
 
 
 Creating the configuration files

@@ -1,4 +1,5 @@
 .. Copyright (C) 2021 Wazuh, Inc.
+
 .. meta::
   :description: The Wazuh GCP Pub/Sub module allows you to collect firewall logs from your Google Virtual Machines. Learn more about the module's usage in this section.
 
