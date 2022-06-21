@@ -651,8 +651,6 @@ Example:
 db_entry_limit
 --------------
 
-.. versionadded:: 4.5
-
 Specifies a limit on the number of entries that will be monitored by FIM. Entries created when the database has reached the limit will be ignored.
 In Windows agents, the monitored files and registries are handled by different limits.
 
@@ -668,8 +666,6 @@ In Windows agents, the monitored files and registries are handled by different l
 
 **enabled**
 
-.. versionadded:: 4.5
-
 Specifies whether there will be a limit on the number of monitored entries.
 
 +--------------------+---------------------------------------+
@@ -681,8 +677,6 @@ Specifies whether there will be a limit on the number of monitored entries.
 
 **files**
 
-.. versionadded:: 4.5
-
 Specifies the maximun number of files to be monitored.
 
 +--------------------+------------------------------------------+
@@ -693,8 +687,6 @@ Specifies the maximun number of files to be monitored.
 
 
 **registries**
-
-.. versionadded:: 4.5
 
 Specifies the maximun number of registry values to be monitored.
 
@@ -747,13 +739,23 @@ this parameter is ignored.
 
 **interval**
 
-Specifies the initial number of seconds between every inventory synchronization. If synchronization fails
-the value will be duplicated until it reaches the value of ``max_interval``.
+Specifies the elapsed time between every inventory synchronization.
 
 +--------------------+----------------------------------------------------------------------+
-| **Default value**  | 300 s                                                                |
+| **Default value**  | 5 m                                                                |
 +--------------------+----------------------------------------------------------------------+
 | **Allowed values** | Any number greater than or equal to 0. Allowed sufixes (s, m, h, d). |
++--------------------+----------------------------------------------------------------------+
+
+**min_interval**
+
+Defines the minimum interval between two synchronizations. A new sync process is blocked if less than ``min_interval``
+seconds have elapsed since the last sync message was sent by the agent.
+
++--------------------+----------------------------------------------------------------------+
+| **Default value**  | 1 m                                                                  |
++--------------------+----------------------------------------------------------------------+
+| **Allowed values** | Any number between 0 and ``interval``. Allowed sufixes (s, m, h, d). |
 +--------------------+----------------------------------------------------------------------+
 
 **max_eps**
@@ -765,16 +767,6 @@ Sets the maximum synchronization message throughput.
 +--------------------+---------------------------------------------------------+
 | **Allowed values** | Integer number between 0 and 1000000. 0 means disabled. |
 +--------------------+---------------------------------------------------------+
-
-**min_interval**
-
-Defines the minimum interval between two synchronizations. A new sync process is blocked if less than ``min_interval``
-seconds have elapsed since the last sync message was sent by the agent.
-+--------------------+--------------------------------------------+
-| **Default value**  | 60                                         |
-+--------------------+------------------------------------------- +
-| **Allowed values** | Integer number between 0 and ``interval``. |
-+--------------------+--------------------------------------------+
 
 .. _reference_ossec_syscheck_diff:
 
@@ -1221,7 +1213,6 @@ Default syscheck configuration:
     <synchronization>
       <enabled>yes</enabled>
       <interval>5m</interval>
-      <max_interval>1h</max_interval>
       <max_eps>10</max_eps>
     </synchronization>
    </syscheck>
@@ -1268,7 +1259,6 @@ Default syscheck configuration:
     <synchronization>
       <enabled>yes</enabled>
       <interval>5m</interval>
-      <max_interval>1h</max_interval>
       <max_eps>10</max_eps>
     </synchronization>
    </syscheck>
@@ -1346,7 +1336,6 @@ Default syscheck configuration:
     <synchronization>
       <enabled>yes</enabled>
       <interval>5m</interval>
-      <max_interval>1h</max_interval>
       <max_eps>10</max_eps>
     </synchronization>
    </syscheck>
@@ -1395,7 +1384,6 @@ Default syscheck configuration:
     <synchronization>
       <enabled>yes</enabled>
       <interval>5m</interval>
-      <max_interval>1h</max_interval>
       <max_eps>10</max_eps>
     </synchronization>
    </syscheck>
