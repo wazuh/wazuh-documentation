@@ -23,16 +23,16 @@ The type values ``osregex``, ``osmatch``, and ``pcre2`` can be set  using the ``
 
    <srcport type="pcre2">^5000[0-7]$</srcport>
 
-For most of the options using regular expressions, ``osmatch`` is the type used by default. Check the :doc:`/user-manual/ruleset/ruleset-xml-syntax/rules` for more information.
+For most of the options using regular expressions, ``osmatch`` is the type used by default. Check the :doc:`/user-manual/ruleset/ruleset-xml-syntax/rules` section for more information on this.
+
+Regular expressions treat most characters as literals. This means they match only themselves. For example, a matches "a". Particular expressions with specific matching rules are explained below for each supported syntax.
 
 .. _os_regex_syntax:
 
 OS_Regex or regex syntax
 ------------------------
 
-This is a fast and simple library for regular expressions in C.
-
-This library is designed to be simple while still supporting the most common regular expressions.
+This is a library for regular expressions in C language. It is designed to be simple while still supporting the most common regular expressions.
 
 .. topic:: Supported expressions
 
@@ -107,8 +107,7 @@ This library is designed to be simple while still supporting the most common reg
 OS_Match or sregex syntax
 -------------------------
 
-This is faster than OS_Regex, but only supports simple string matching and the
-following special characters.
+This is faster than OS_Regex, but only supports simple string matching and the following special characters.
 
 .. topic:: Special characters
 
