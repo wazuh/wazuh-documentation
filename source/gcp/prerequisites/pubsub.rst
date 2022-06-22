@@ -48,4 +48,4 @@ Log activities should appear under the **Logs Router** section. Cloud Audit logs
     :align: center
     :width: 100%
 
-After you set everything up, you should see activity in the ``Log Viewer`` section. Follow the `link <https://cloud.google.com/pubsub/docs/quickstart-py-mac#set_up_your_project_and_topic_and_subscriptions>`__ if you need help to setup Cloud Pub/Sub topic and subscription.
+After you set everything up, you should see activity in the ``Log Viewer`` section. Follow the `link <https://cloud.google.com/pubsub/docs/quickstart-py-mac#set_up_your_project_and_topic_and_subscriptions>`__ if you need help to set up Cloud Pub/Sub topic and subscription.

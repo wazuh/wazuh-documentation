@@ -630,11 +630,11 @@ Wazuh Manager
 
 .. warning::
 
-    We recommend the use of `Ansible Vault <https://docs.ansible.com/ansible/latest/user_guide/vault.html>`_ to protect Wazuh agentless and authd credentials..
+    We recommend the use of `Ansible Vault <https://docs.ansible.com/ansible/latest/user_guide/vault.html>`_ to protect Wazuh agentless and authd credentials.
 
 |
 | **Variable**: ``wazuh_manager_config``
-| **Description**: Stores the Wazuh Manager configuration. This variable is provided for backwards compatibility. Newer deployments should use the newly introduced variables described above.
+| **Description**: Stores the Wazuh Manager configuration. This variable is provided for backward compatibility. Newer deployments should use the newly introduced variables described above.
 | **Example**:
 
 .. code-block:: yaml
@@ -806,7 +806,7 @@ Wazuh Manager
 
 |
 | **Variable**: ``wazuh_agent_configs``
-| **Description**: This store the different settings and profiles for centralized agent configuration via Wazuh Manager.
+| **Description**: This stores the different settings and profiles for centralized agent configuration via Wazuh Manager.
 | **Example**:
 
 .. code-block:: yaml
@@ -919,7 +919,7 @@ Wazuh Agent
 ===========
 
 | **Variable**: ``wazuh_managers``
-| **Description**: Set Wazuh Manager servers IP address, protocol, and port to be used by the agent. If a specific manager is used for registration, we can  indicate which one it is  by adding register set to true. If the register option is missing, the first manager on the list will be used for registration.
+| **Description**: Set the Wazuh Manager servers IP address, protocol, and port to be used by the agent. If a specific manager is used for registration, we can  indicate which one it is  by adding a register set to true. If the register option is missing, the first manager on the list will be used for registration.
 | **Example**:
 
 .. code-block:: yaml
@@ -956,7 +956,7 @@ Wazuh Agent
 
 |
 | **Variable**: ``wazuh_agent_authd``
-| **Description**: Set the agent-authd facility. This will enable or not the automatic agent registration, you could set various options in accordance of the authd service configured in the Wazuh Manager. This Ansible role will use the address defined on ``registration_address`` as the authd registration server.
+| **Description**: Set the agent-authd facility. This will enable or not the automatic agent registration, you could set various options in accordance with the authd service configured in the Wazuh Manager. This Ansible role will use the address defined on ``registration_address`` as the authd registration server.
 | **Example**:
 
     .. code-block:: yaml
@@ -1242,7 +1242,7 @@ Wazuh Agent
 | **Default value**: ``plain``
 |
 | **Variable**: ``wazuh_agent_config``
-| **Description**: Wazuh Agent related configuration. This variable is provided for backwards compatibility. Newer deployments should use the newly introduced variables described above.
+| **Description**: Wazuh Agent related configuration. This variable is provided for backward compatibility. Newer deployments should use the newly introduced variables described above.
 | **Example**:
 
 .. code-block:: yaml

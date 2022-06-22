@@ -10,7 +10,7 @@ This role is intended to deploy the Wazuh indexer to a specified node. The follo
 
 -  ``indexer_network_hosts``: This defines the listening IP address (default: ``127.0.0.1``).
 -  ``indexer_http_port``: This defines the listening port (default: ``9200``).
--  ``indexer_jvm_xms``: This specifies amount of memory to be used for java (default: ``null``).
+-  ``indexer_jvm_xms``: This specifies the amount of memory to be used for java (default: ``null``).
 
 To use the role in a playbook, a YAML file ``wazuh-indexer.yml`` can be created with the contents below:
 
