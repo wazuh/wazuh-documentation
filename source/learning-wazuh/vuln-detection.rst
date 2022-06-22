@@ -8,7 +8,7 @@
 Track down vulnerable applications
 ==================================
 
-Of the many software packages installed on your environment's computers,
+Of the many software packages installed on your environment computers,
 which ones have known vulnerabilities that might impact your security posture?
 Wazuh helps you answer this question with the ``syscollector`` and
 ``vulnerability-detector`` modules.
@@ -22,7 +22,7 @@ packages with the relevant CVE database and generates alerts on matches.
 
 In this lab, we will see how ``syscollector`` is configured by default to run on
 the Wazuh Manager and on the agents. We will also configure ``vulnerability-detector``
-on the Wazuh Manager to periodically scan the collected inventory data for known
+on the Wazuh manager to periodically scan the collected inventory data for known
 vulnerable packages.
 We will observe relevant log messages and vulnerability alerts in the Wazuh dashboard including
 a dashboard dedicated to this.  We will also interact with the Wazuh API to more
@@ -32,10 +32,10 @@ stored.
 Configure ``syscollector`` for all the agents
 ---------------------------------------------
 
-In the ``/var/ossec/etc/ossec.conf`` file of the Wazuh manager and agents
-see the default configuration and find the syscollector section.
+In the ``/var/ossec/etc/ossec.conf`` file of the Wazuh manager and agents, 
+see the default configuration and find the ``syscollector`` section.
 
-For Linux systems:
+- For Linux systems:
 
    .. code-block:: xml
 
@@ -57,7 +57,7 @@ For Linux systems:
         </synchronization>
       </wodle>      
 
-For Windows, you should enable the ``hotfixes`` option, to report the Windows updates installed:
+- For Windows, you should enable the ``hotfixes`` option, to report the Windows updates installed:
 
    .. code-block:: xml
       :emphasize-lines: 12
@@ -87,10 +87,10 @@ network interfaces, installed packages, open ports and running processes every h
 Configure ``vulnerability-detector`` on  the Wazuh Manager
 ----------------------------------------------------------
 
-#. In the ``/var/ossec/etc/ossec.conf`` file of the Wazuh manager, scroll down to the **vulnerability-detector** wodle (Wazuh module) and enable both the service and feeds you may want to use.
+#. In the ``/var/ossec/etc/ossec.conf`` file of the Wazuh manager, scroll down to the ``vulnerability-detector`` wodle (Wazuh module) and enable both the service and feeds you may want to use.
 
    .. code-block:: xml
-      :emphasize-lines: 2, 28, 52 
+      :emphasize-lines: 2, 28, 52, 58 
 
       <vulnerability-detector>
         <enabled>yes</enabled>
@@ -156,7 +156,7 @@ Configure ``vulnerability-detector`` on  the Wazuh Manager
     
       </vulnerability-detector>
 
-   In the example above we have enabled the feeds for RedHat, which will allow us to monitor CentOS systems, and NVD, the National Vulnerability Database, which will allow us to monitor Windows systems. More information on this module and how to configure it can be found in the :ref:`Vulnerability Detection Section <vulnerability-detection>` of the documentation.
+   In the example above we have enabled the feeds for RedHat, which will allow us to monitor CentOS systems, the National Vulnerability Database (NVD), and the Microsoft Security Update which will allow us to monitor Windows systems. More information on this module and how to configure it can be found in the :ref:`Vulnerability Detection Section <vulnerability-detection>` of the documentation.
 
 #. Restart the Wazuh manager.
 
@@ -225,8 +225,7 @@ The ``vulnerability-detector`` module generates logs on the manager, and ``sysco
 See the alerts in the Wazuh dashboard
 -------------------------------------
 
-Search the Wazuh dashboard for ``vulnerability-detector``, selecting some of the more helpful
-fields for viewing like below:
+Search the Wazuh dashboard for "vulnerability-detector", selecting some of the more helpful fields for viewing the alerts. 
 
 .. thumbnail:: ../images/learning-wazuh/labs/vulnerabilities-found-list.png
     :title: Found Vulnerabilities
@@ -244,22 +243,19 @@ Expand one of the records to see all the information available:
 
 Note all the available fields and remember that the different components of Wazuh
 may be configured to act differently depending on the fields of each alert, as
-well as the ability to create visualizations and filtering search results in the Wazuh dashboard.
+well as the ability to create visualizations and filter search results in the Wazuh dashboard.
 
 .. note::
 
    When the field ``data.vulnerability.state`` has the value "Fixed", this
    indicates that the vulnerability has been corrected in future versions of
-   the software. However the vulnerability is still present in the version
+   the software. However, the vulnerability is still present in the version
    installed in your system.
 
 Look deeper with the Wazuh API
 ------------------------------
 
-Up to now we have only seen the Wazuh API enable the Wazuh dashboard to
-interface directly with the Wazuh manager.  However, you can also access the
-Wazuh API directly from your own scripts or from the command line with curl.  This is
-especially helpful here to obtain environment-wide package information.
+You can access the Wazuh API directly from your own scripts or from the command line with curl.  This is especially helpful here to obtain environment-wide package information.
 The actual inventory data is kept in agent-specific databases on the Wazuh manager.
 To see that, as well as other information collected by ``syscollector``, you can
 query the Wazuh API :api-ref:`syscollector endpoints<tag/Syscollector>`.  Not only are software packages inventoried, but basic
@@ -282,7 +278,13 @@ hardware and operating system data is also tracked.
        ID: 002, Name: windows-agent, IP: 172.30.0.40, Active
 
 
-#. From the Wazuh Manager, query the Wazuh API for scanned hardware data about agent 002 using endpoint :api-ref:`GET /syscollector/{agent_id}/hardware <operation/api.controllers.syscollector_controller.get_hardware_info>`:
+#. From the Wazuh Manager, request a token and export it to an environment variable to use it in the authorization header of future API requests. Replace ``<user>:<password>`` with your Wazuh API credentials. 
+
+   .. code-block:: none
+      
+      TOKEN=$(curl -u <user>:<password> -k -X GET "https://localhost:55000/security/user/authenticate?raw=true")
+
+#. Query the Wazuh API for scanned hardware data about agent 002 using endpoint :api-ref:`GET /syscollector/{agent_id}/hardware <operation/api.controllers.syscollector_controller.get_hardware_info>`:
 
    .. code-block:: console
 
@@ -447,88 +449,84 @@ hardware and operating system data is also tracked.
 A quick peek at the actual agent databases
 ------------------------------------------
 
-Agent-specific databases on the Wazuh manager store, among other things,
-the ``syscollector`` scan results for each agent.
+Agent-specific databases on the Wazuh manager store, among other things, the ``syscollector`` scan results for each agent.
 
-1. On the Wazuh Manager, list the tables in an agent's SQLite database:
+#. On the Wazuh Manager, list the tables in an agent SQLite database.
 
-  .. code-block:: console
+   .. code-block:: console
 
-      [root@wazuh-manager centos]# sqlite3 /var/ossec/queue/db/002.db .tables
+      # sqlite3 /var/ossec/queue/db/001.db .tables
 
-  .. code-block:: none
+   .. code-block:: none
       :class: output
 
-      ciscat_results        sca_policy            sys_netproto
-      fim_entry             sca_scan_info         sys_osinfo
-      metadata              scan_info             sys_ports
-      pm_event              sys_hotfixes          sys_processes
-      sca_check             sys_hwinfo            sys_programs
-      sca_check_compliance  sys_netaddr           vuln_metadata
-      sca_check_rules       sys_netiface
+      ciscat_results        sca_scan_info         sys_osinfo          
+      fim_entry             scan_info             sys_ports           
+      metadata              sync_info             sys_processes       
+      pm_event              sys_hotfixes          sys_programs        
+      sca_check             sys_hwinfo            vuln_cves           
+      sca_check_compliance  sys_netaddr           vuln_metadata       
+      sca_check_rules       sys_netiface        
+      sca_policy            sys_netproto   
 
 
+   The ``sys_`` tables are populated by ``syscollector``.
 
-The ``sys_`` table are populated by ``syscollector``.
+#. Query the OS information table.
 
-2. Query the OS information table
+   .. code-block:: console
 
-  .. code-block:: console
-
-      [root@wazuh-manager centos]# sqlite3 /var/ossec/queue/db/002.db 'select * from sys_osinfo;' -header
+      # sqlite3 /var/ossec/queue/db/001.db 'select * from sys_osinfo;' -header
 
 
-  .. code-block:: none
+   .. code-block:: none
       :class: output
 
-      scan_id|scan_time|hostname|architecture|os_name|os_version|os_codename|os_major|os_minor|os_build|os_platform|sysname|release|version|os_release
-      1059274052|2019/12/24 14:43:41|linux-agent|x86_64|CentOS Linux|7.7||7|7||centos|Linux|3.10.0-1062.9.1.el7.x86_64|#1 SMP Fri Dec 6 15:49:49 UTC 2019|
+      scan_id|scan_time|hostname|architecture|os_name|os_version|os_codename|os_major|os_minor|os_patch|os_build|os_platform|sysname|release|version|os_release|checksum|os_display_version|triaged|reference
+      0|2022/06/21 19:42:16|linux-agent|x86_64|Centos Linux|7.8.2003|Core|7|8|2003||centos|Linux|3.10.0-1127.el7.x86_64|#1 SMP Tue Mar 31 23:36:51 UTC 2020||1655840535487993960||1|016166771307639663d0dce9b36315c60c608ae0
 
 
+#. Do a quick dump of the software packages.
 
-3. Do a quick dump of the software packages.
+   .. code-block:: console
 
-  .. code-block:: console
+      # sqlite3 /var/ossec/queue/db/001.db "select name,version,description from sys_programs;" -header
 
-      [root@wazuh-manager centos]# sqlite3 /var/ossec/queue/db/002.db "select name,version,description from sys_programs;" -header
-
-
-  .. code-block:: none
+   .. code-block:: none
       :class: output
 
       name|version|description
-      kbd-legacy|1.15.5-15.el7|Legacy data for kbd package
-      fontconfig|2.13.0-4.3.el7|Font configuration and customization library
-      centos-indexhtml|7-9.el7.centos|Browser default start page for CentOS
-      pth|2.0.7-23.el7|The GNU Portable Threads library
-      ncurses|5.9-14.20130511.el7_4|Ncurses support utilities
-      libX11|1.6.7-2.el7|Core X11 protocol client library
-      gpgme|1.3.2-5.el7|GnuPG Made Easy - high level crypto API
-      filesystem|3.2-25.el7|The basic directory layout for a Linux system
-      nginx-filesystem|1:1.16.1-1.el7|The basic directory layout for the Nginx server
-      libestr|0.1.9-2.el7|String handling essentials library
-      nginx-mod-http-xslt-filter|1:1.16.1-1.el7|Nginx XSLT module
-      kbd-misc|1.15.5-15.el7|Data for kbd package
-      tcpdump|14:4.9.2-4.el7_7.1|A network traffic monitoring tool
-      libsepol|2.5-10.el7|SELinux binary policy manipulation library
-      epel-release|7-12|Extra Packages for Enterprise Linux repository configuration
+      dracut|033-572.el7|Initramfs generator using udev
+      openssl|1:1.0.2k-25.el7_9|Utilities from the general purpose cryptography library with TLS implementation
+      libnetfilter_conntrack|1.0.6-1.el7_3|Netfilter conntrack userspace library
+      sudo|1.8.23-10.el7_9.2|Allows restricted root access for specified users
+      kernel-headers|3.10.0-1160.66.1.el7|Header files for the Linux kernel for use by glibc
+      binutils|2.27-44.base.el7_9.1|A GNU collection of binary utilities
+      perl-constant|1.27-2.el7|Perl pragma to declare constants
+      perl-libs|4:5.16.3-299.el7_9|The libraries for the perl runtime
+      pytalloc|2.1.16-1.el7|Developer tools for the Talloc library
+      libmount|2.23.2-65.el7_9.1|Device mounting library
+      nmap-ncat|2:6.40-19.el7|Nmap's Netcat replacement
+      expat|2.1.0-14.el7_9|An XML parser library
+      grub2-common|1:2.02-0.87.0.1.el7.centos.9|grub2 common layout
+      dbus-glib|0.100-7.el7|GLib bindings for D-Bus
+      libtdb|1.3.18-1.el7|The tdb library
+      libtirpc|0.2.4-0.16.el7|Transport Independent RPC Library
 
-        ...
+
+      ...
 
 Wazuh dashboard
 ---------------
 
 While the Wazuh API and SQLite databases let you get at the nitty-gritty data,
 usually the most beautiful place to see your vulnerability detection results
-is in the Wazuh dashboard.  Both in the **Overview** section as well as
-when you have drilled down into a specific agent, you can open the **Vulnerabilities**
-tab to see a nice dashboard of this information:
-
+is in the Wazuh dashboard.  In the **Vulnerabilities** dashboard, you can select an agent to see a dashboard with the most relevant vulnerabilities information.
 
 .. thumbnail:: ../images/learning-wazuh/labs/vulnerabilities-dashboard.png
-    :title: Flood
-    :align: left
-    :width: 100%
+    :title: Vulnerabilities dashboard
+    :align: center
+    :width: 80%
 
 
 Optional exercise
@@ -541,4 +539,4 @@ use a key/value CDB listing pairs of agent names and software package names that
 you want to especially keep an eye on.  For example, you might want an escalated
 alert about high-level CVE matches on the "apache" software package on your
 Internet-facing web servers but not for other internal servers.
-The possibilities are endless...
+The possibilities are endless.
