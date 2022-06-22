@@ -21,8 +21,8 @@
             enabled=1
             name=EL-\$releasever - Wazuh
             baseurl=https://packages.wazuh.com/4.x/yum/
-            protect=1 
-            EOF 
+            protect=1
+            EOF
 
    .. group-tab:: APT
 
@@ -30,7 +30,7 @@
 
          .. code-block:: console
 
-            # curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -
+            # curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | gpg --no-default-keyring --keyring gnupg-ring:/etc/apt/trusted.gpg.d/GPG-KEY-WAZUH.gpg --import && chmod 644 /etc/apt/trusted.gpg.d/GPG-KEY-WAZUH.gpg
 
       #. Add the repository:
 
@@ -45,5 +45,5 @@
             # apt-get update
 
 
-      
+
 .. End of include file

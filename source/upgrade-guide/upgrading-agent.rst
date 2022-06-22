@@ -62,7 +62,7 @@ To perform the upgrade locally, follow the instructions for the operating system
 
        .. code-block:: console
 
-         # curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -
+         # curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | gpg --no-default-keyring --keyring gnupg-ring:/etc/apt/trusted.gpg.d/GPG-KEY-WAZUH.gpg --import && chmod 644 /etc/apt/trusted.gpg.d/GPG-KEY-WAZUH.gpg
 
     #. Add the repository:
 
@@ -286,8 +286,8 @@ To perform the upgrade locally, follow the instructions for the operating system
             # cp /var/ossec/etc/client.keys ~/client.keys.bk
 
 
-      #. **Only for upgrades from version 4.2.7 or lower**:  
-      
+      #. **Only for upgrades from version 4.2.7 or lower**:
+
          #. Delete ossec user and group:
 
             .. code-block:: console
