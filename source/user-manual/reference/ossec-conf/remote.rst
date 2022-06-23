@@ -127,7 +127,7 @@ Whether the local IP address is IPv6
 queue_size
 ^^^^^^^^^^^^
 
-Sets the capacity of the remote daemon queue in number of agent events.
+Sets the capacity of the remote daemon queue in the number of agent events.
 
 +--------------------+----------------------------------+
 | **Default value**  | 131072                           |

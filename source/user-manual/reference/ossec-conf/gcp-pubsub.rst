@@ -142,7 +142,7 @@ Trigger the pulling in case of an agent start or restart.
 interval
 ^^^^^^^^
 
-Interval between module executions.
+The interval between module executions.
 
 +--------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | 1h                                                                                                                                                             |

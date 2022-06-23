@@ -11,7 +11,7 @@ We assume that you have already installed the ``apt`` or ``yum`` Puppet reposito
 
 If you do not have DNS configured, you must use your hosts file for name resolution.
 
-Edit the ``/etc/hosts`` file, add the IP address and hostname of the Puppet master and agent :
+Edit the ``/etc/hosts`` file, and add the IP address and hostname of the Puppet master and agent:
 
 .. code-block:: console
 
@@ -59,7 +59,7 @@ Install ``curl``, ``apt-transport-https`` and ``lsb-release``:
     # apt-get install curl apt-transport-https lsb-release wget
 
 
-Install the appropriate Puppet apt repository, and then the “puppet-agent” package. See https://apt.puppetlabs.com to find the correct deb file to install the puppet repo for your Linux distribution.
+Install the appropriate Puppet apt repository, and then the “puppet-agent” package. See https://apt.puppetlabs.com to find the correct deb file and install the puppet repo for your Linux distribution.
 
 .. code-block:: console
 
@@ -81,7 +81,7 @@ Installation on Windows
 
 1. Download the Windows `puppet-agent <https://downloads.puppetlabs.com/windows/puppet5/puppet-agent-5.1.0-x86.msi>`_ package.
 
-    This package bundle all of Puppet's prerequisites.
+    This package bundles all of Puppet's prerequisites.
 
     .. note::
       This is the package for a Puppet 7.16 version agent. If another package is needed, go to the `official directory <https://downloads.puppetlabs.com/windows/puppet7/>`_ where all packages are available for download.
@@ -118,7 +118,7 @@ Add the server value to the ``[main]`` section of the node ``/etc/puppetlabs/pup
 .. note:: The Puppet server FQDN should be resolved by the Puppet agent host.
 
 
-Restart and check the status of Puppet service:
+Restart and check the status of the Puppet service:
 
 .. code-block:: console
 
