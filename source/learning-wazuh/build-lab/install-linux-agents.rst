@@ -8,7 +8,7 @@
 Install the Wazuh agent on a Linux system
 =========================================
 
-Use the following procedure separately on your `Linux Agent` to install, register and configure it to connect to the Wazuh manager.
+Use the following procedure separately on your `Linux Agent` to install, register and configure it to connect to the Wazuh manager. We recommend using `CentOS 7`` as the instructions throughout this Lab have been designed and tested for this operating system. 
 
 .. note:: To execute all the commands, root user privileges are required.
 

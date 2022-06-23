@@ -58,26 +58,27 @@ Installing Wazuh
 
 When you access the Wazuh dashboard for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. This is expected and the user has the option to accept the certificate as an exception or, alternatively, configure the system to use a certificate from a trusted authority.
 
-.. note:: 
-
-   It is recommended to change the default Wazuh API passwords. See the :doc:`Securing the Wazuh API </user-manual/api/securing-api>` section.
 
 
+Configure the Wazuh manager to allow self registration of new agents with authentication
+----------------------------------------------------------------------------------------
 
+#. Run the following commands to enable authentication and set the password for agent registration.  
 
-Configure the Wazuh manager to allow self registration of new agents with authentication:
+   .. code-block:: console
 
-  .. code-block:: console
+      # grep "<use_password>" -B7 -A8 /var/ossec/etc/ossec.conf
+      # sed -i 's/<use_password>no/<use_password>yes/' /var/ossec/etc/ossec.conf
+      # grep "<use_password>" -B7 -A8 /var/ossec/etc/ossec.conf
+      # echo "please123" > /var/ossec/etc/authd.pass 
 
-    # grep "<use_password>" -B7 -A8 /var/ossec/etc/ossec.conf
-    # sed -i 's/<use_password>no/<use_password>yes/' /var/ossec/etc/ossec.conf
-    # grep "<use_password>" -B7 -A8 /var/ossec/etc/ossec.conf
-    # echo "please123" > /var/ossec/etc/authd.pass 
+   The password echoed to ``/var/ossec/etc/authd.pass`` is the one agents will use for self-registration. 
 
-The password echoed to ``/var/ossec/etc/authd.pass`` is the one agents will use for self-registration. 
+#. Restart the Wazuh manager. 
 
-Restart the Wazuh manager and confirm the agent listener and the self-registration
-listener are in place:
+   .. include:: /_templates/common/restart_manager.rst
+
+#. Confirm the agent listener and the self-registration listener are in place:
 
     .. code-block:: console
 
