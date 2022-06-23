@@ -73,7 +73,7 @@ Elasticsearch installation and configuration
 Certificates creation and deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. The number of Wazuh servers to be implemented will determine the next step. Select ``Wazuh single-node cluster``, if there is only one Wazuh server, or ``Wazuh multi-node cluster`` in case, there are two or more Wazuh servers.
+#. The number of Wazuh servers to be implemented will determine the next step. Select ``Wazuh single-node cluster``, if there is only one Wazuh server, or ``Wazuh multi-node cluster`` in case there are two or more Wazuh servers.
 
     .. include:: /_templates/installations/basic/elastic/common/elastic-single-node/generate_deploy_certificates.rst
 
