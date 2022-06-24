@@ -919,7 +919,7 @@ Wazuh Agent
 ===========
 
 | **Variable**: ``wazuh_managers``
-| **Description**: Set the Wazuh Manager servers IP address, protocol, and port to be used by the agent. If a specific manager is used for registration, we can  indicate which one it is  by adding a register set to true. If the register option is missing, the first manager on the list will be used for registration.
+| **Description**: Set the Wazuh Manager servers IP address, protocol, and port to be used by the agent. If a specific manager is used for registration, we can indicate which one it is by adding the register option set to true. If the register option is missing, the first manager on the list will be used for registration.
 | **Example**:
 
 .. code-block:: yaml
