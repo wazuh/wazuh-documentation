@@ -59,7 +59,7 @@ Install ``curl``, ``apt-transport-https`` and ``lsb-release``:
     # apt-get install curl apt-transport-https lsb-release wget
 
 
-Install the appropriate Puppet apt repository, and then the “puppet-agent” package. See https://apt.puppetlabs.com to find the correct deb file and install the puppet repo for your Linux distribution.
+Install the appropriate Puppet apt repository, and then the “puppet-agent” package. See https://apt.puppetlabs.com to find the correct deb file to install the puppet repo for your Linux distribution.
 
 .. code-block:: console
 
