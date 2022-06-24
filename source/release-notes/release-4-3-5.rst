@@ -18,6 +18,24 @@ This release includes new features or enhancements.
 
 Wazuh manager
 ^^^^^^^^^^^^^
+- `#13915 <https://github.com/wazuh/wazuh/pull/13915>`_ Improved the Vulnerability Detector's log when the agent's OS data is unavailable.
+
+
+Wazuh agent
+^^^^^^^^^^^
+- `#13749 <https://github.com/wazuh/wazuh/pull/13749>`_ Extended package data support in Syscollector for modern RPM agents.
+- `#13898 <https://github.com/wazuh/wazuh/pull/13898>`_ Improved verbosity of the GitHub module logs.
+
+
+Ruleset
+^^^^^^^
+- `#13567 <https://github.com/wazuh/wazuh/pull/13567>`_ Removed deprecated MITRE tags in rules.
+
+
+Other
+^^^^^
+- `#13811 <https://github.com/wazuh/wazuh/pull/13811>`_ Fixed ``test_agent_PUT_endpoints.tavern.yaml`` API integration test failure in numbered branches.
+- `#13790 <https://github.com/wazuh/wazuh/pull/13790>`_ Upgraded external click and clickclick python dependencies to 8.1.3 and 20.10.2 respectively.
 
 
 Wazuh dashboard
@@ -70,7 +88,23 @@ Wazuh manager
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#0000 <https://github.com/wazuh/wazuh/pull/0000>`_               0000 
+`#13662 <https://github.com/wazuh/wazuh/pull/13662>`_             The upgrade module's response message has been fixed not to include null values.
+`#13863 <https://github.com/wazuh/wazuh/pull/13863>`_             Fixed a string truncation warning log in wazuh-authd when enabling password authentication.
+`#13587 <https://github.com/wazuh/wazuh/pull/13587>`_             Fixed a memory leak in wazuh-analysisd when overwriting a rule multiple times.
+`#13907 <https://github.com/wazuh/wazuh/pull/13907>`_             Prevented wazuh-agentd and client-auth from performing enrollment if the agent fails to validate the manager's certificate.
+`#13694 <https://github.com/wazuh/wazuh/pull/13694>`_             Fixed manager's compilation when enabling GeoIP support.
+`#13883 <https://github.com/wazuh/wazuh/pull/13883>`_             Fixed a crash in wazuh-modulesd when getting stopped while downloading a Vulnerability Detector feed.z
+==============================================================    =============
+
+
+Wazuh agent
+^^^^^^^^^^^
+
+==============================================================    =============
+Reference                                                         Description
+==============================================================    =============
+`#13606 <https://github.com/wazuh/wazuh/pull/13606>`_             Fixed agent auto-restart on shared configuration changes when running on containerized environments.
+`#13880 <https://github.com/wazuh/wazuh/pull/13880>`_             Fixed an issue when attempting to run the DockerListener integration using Python 3.6 and having the Docker service stopped.
 ==============================================================    =============
 
 
@@ -80,7 +114,7 @@ RESTful API
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#0001 <https://github.com/wazuh/wazuh/pull/0000>`_               0000
+`#13867 <https://github.com/wazuh/wazuh/pull/13867>`_             Updated tag parameter of ``GET /manager/logs`` and ``GET /cluster/{node_id}/logs`` endpoints to accept any string.
 ==============================================================    =============
 
 Ruleset
@@ -89,7 +123,9 @@ Ruleset
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#0002 <https://github.com/wazuh/wazuh/pull/0000>`_               0000 
+`#13597 <https://github.com/wazuh/wazuh/pull/13597>`_             Solved Eventchannel testing and improved reporting capabilities of the runtest tool.
+`#13781 <https://github.com/wazuh/wazuh/pull/13781>`_             Modified Amazon Linux 2 SCA policy to resolve a typo on control 1.1.22 and ``EMPTY_LINE`` conditions.
+`#13950 <https://github.com/wazuh/wazuh/pull/13950>`_             Modified Amazon Linux 2 SCA policy to resolve the rule and condition on control 1.5.2. 
 ==============================================================    =============
 
 
@@ -167,7 +203,7 @@ Changelogs
 
 More details about these changes are provided in the changelog of each component:
 
-- `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v4.3.5/CHANGELOG.md>`_
+- `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v4.3.5-rc1/CHANGELOG.md>`_
 - `wazuh/wazuh-dashboard <https://github.com/wazuh/wazuh-kibana-app/blob/v4.3.5-1.2.0-wzd/CHANGELOG.md>`_
 - `wazuh/wazuh-kibana-app 7.10.2 <https://github.com/wazuh/wazuh-kibana-app/blob/v4.3.5-7.10.2/CHANGELOG.md>`_
 - `wazuh/wazuh-kibana-app 7.17.x <https://github.com/wazuh/wazuh-kibana-app/blob/v4.3.5-7.17.4/CHANGELOG.md>`_
