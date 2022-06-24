@@ -16,7 +16,7 @@ We can install the Wazuh agent on endpoints using the roles and playbooks availa
 .. note::
 
 	- 	SSH key-pairing should already be configured between the ansible deployment server and the endpoints.
-	- 	The endpoints where the agent will be deployed and added to the Ansible hosts file under the ``[wazuh-agents]`` hosts group.
+	- 	Add the endpoints where the agent will be deployed in the Ansible hosts file under the ``[wazuh-agents]`` hosts group.
 	- 	This playbook does not support deploying Wazuh agents to Windows and macOS endpoints.
 
 1 - Accessing the wazuh-ansible directory
