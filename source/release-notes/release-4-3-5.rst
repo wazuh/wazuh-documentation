@@ -13,7 +13,7 @@ This section lists the changes in version 4.3.5. Every update of the Wazuh solut
 What's new
 ----------
 
-This release includes new features or enhancements.
+This release includes new features or enhancements as the following:
 
 
 Wazuh manager
@@ -72,15 +72,12 @@ Wazuh Splunk app
 - `#1276 <https://github.com/wazuh/wazuh-splunk/pull/1276>`_ Added a disabled state to the Apply changes button on the Agents group editor when no changes on the group are made.
 
 
-Packages
-^^^^^^^^
-
-
 
 Resolved issues
 ---------------
 
-This release resolves known issues. 
+This release resolves known issues as the following: 
+
 
 Wazuh manager
 ^^^^^^^^^^^^^
@@ -116,6 +113,7 @@ Reference                                                         Description
 ==============================================================    =============
 `#13867 <https://github.com/wazuh/wazuh/pull/13867>`_             Updated tag parameter of ``GET /manager/logs`` and ``GET /cluster/{node_id}/logs`` endpoints to accept any string.
 ==============================================================    =============
+
 
 Ruleset
 ^^^^^^^
@@ -187,15 +185,6 @@ Reference                                                         Description
 `#1343 <https://github.com/wazuh/wazuh-splunk/pull/1343>`_        The Alerts view from the MITRE section has been hardened in case of errors during the requests to the API (for example timeouts).
 ==============================================================    =============
 
-
-Packages
-^^^^^^^^
-
-==============================================================    =============
-Reference                                                         Description
-==============================================================    =============
-`#0004 <https://github.com/wazuh/wazuh-packages/pull/0000>`_      0000 
-==============================================================    =============
 
 
 Changelogs
