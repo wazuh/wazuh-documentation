@@ -35,7 +35,7 @@ Launch an instance from the AWS Marketplace
 
 #. Select a **Software Version** and the **Region** where the instance is going to be deployed. Then, click **Continue to Launch**.
 
-#. Review your configuration making sure that all settings are correct before launching the software. Adapt the default configuration values to your needs.
+#. Review your configuration, making sure that all settings are correct before launching the software. Adapt the default configuration values to your needs.
 
     #. When selecting the **EC2 Instance Type**, we recommend that you use an instance type ``c5a.xlarge``.
   
@@ -94,7 +94,7 @@ To learn more about configuring Wazuh, see the :doc:`User manual </user-manual/i
 Access the Wazuh dashboard
 --------------------------
 
-When the instance is launched, the passwords of the users are automatically changed to the ID of the instance. In this way, access to the interface is guaranteed only to the creator of it. This process can take an average of five minutes depending on the type of instance. Both the SSH access and the Wazuh dashboard access are disabled during this process.
+When the instance is launched, the passwords of the users are automatically changed to the ID of the instance. In this way, access to the interface is guaranteed only to the creator of it. This process can take an average of five minutes, depending on the type of instance. Both the SSH access and the Wazuh dashboard access are disabled during this process.
 
 Once the instance is running and the process to initialize passwords is complete, you can access the Wazuh dashboard with your credentials.
 

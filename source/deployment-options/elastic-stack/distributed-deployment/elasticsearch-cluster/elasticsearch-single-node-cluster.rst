@@ -91,7 +91,7 @@ Certificates creation and deployment
       # chmod 400 /etc/elasticsearch/certs/ca/ca.* /etc/elasticsearch/certs/elasticsearch.*
       # rm -rf ~/certs/
 
-#. If Kibana will be installed in this node, keep the certificates file. Otherwise, if the file has been copied already to all the instances of the distributed deployment, remove it to increase security  ``rm -f ~/certs.zip``.
+#. If you are going to install Kibana in this node, keep the certificates file. Otherwise, if the file has been copied already to all the instances of the distributed deployment, remove it to increase security  ``rm -f ~/certs.zip``.
 
 #. Enable and start the Elasticsearch service:
 

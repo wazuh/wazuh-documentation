@@ -103,7 +103,7 @@ Attaching a volume for the storage of Wazuh indexer data is also possible. By de
 Custom commands and scripts
 ---------------------------
 
-To execute commands in the Wazuh manager container you may execute a shell:
+To execute commands in the Wazuh manager container, you may execute a shell:
 
   .. code-block:: console
 

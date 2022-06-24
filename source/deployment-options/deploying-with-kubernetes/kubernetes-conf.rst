@@ -6,7 +6,7 @@
 .. _kubernetes_conf:
 
 Kubernetes configuration
-========================
+========================   
 
 Pre-requisites
 --------------
@@ -32,13 +32,13 @@ StatefulSet and deployment controllers
 
 As a *Deployment*, a *StatefulSet* manages Pods that are based on an identical container specification, but it maintains an identity attached to each of its pods. These pods are created from the same specification, but they are not interchangeable: each one has a persistent identifier maintained across any rescheduling.
 
-It is useful for stateful applications like databases that save the data to persistent storage. The states of each Wazuh manager, as well as Wazuh indexer should be maintained, so we declare them using StatefulSet to ensure that they maintain their states in every startup.
+It is useful for stateful applications like databases that save the data to persistent storage. The states of each Wazuh manager and each Wazuh indexer should be maintained, so we declare them using StatefulSet to ensure that they maintain their states in every startup.
 
 Deployments are intended for stateless use and are quite lightweight, and seem to be appropriate for the Wazuh dashboard, where it is not necessary to maintain the states.
 
 Persistent volumes (PV) are pieces of storage in the provisioned cluster. It is a resource in the cluster just like a node is a cluster resource. Persistent volumes are volume plugins like Volumes but have a lifecycle independent of any individual pod that uses the PV. This API object captures the details of the implementation of the storage, be that NFS, iSCSI, or a cloud-provider-specific storage system.
 
-Here, we use persistent volumes to store data from both Wazuh manager and Wazuh indexer.
+Here, we use persistent volumes to store data from both the Wazuh manager and the Wazuh indexer.
 
 Read more about persistent volumes `here <https://kubernetes.io/docs/concepts/storage/persistent-volumes/>`_.
 
@@ -97,7 +97,7 @@ Services
 +======================+=====================================================================================+
 | wazuh-indexer        | Communication for Wazuh indexer nodes.                                              |
 +----------------------+-------------------------------------------------------------------------------------+
-| indexer              | This is the Wazuh indexer API used by Wazuh dashboard to read/write alerts.         |
+| indexer              | This is the Wazuh indexer API used by the Wazuh dashboard to read/write alerts.     |
 +----------------------+-------------------------------------------------------------------------------------+
 | dashboard            | Wazuh dashboard service. \https://wazuh.your-domain.com:443                         |
 +----------------------+-------------------------------------------------------------------------------------+

@@ -128,7 +128,7 @@ Enables the network scan.
 packages
 ^^^^^^^^
 
-Enables the packages scan.
+Enables the scan of the packages.
 
 +--------------------+---------+
 | **Default value**  | yes     |
@@ -158,7 +158,7 @@ With option **all='no'** it will only scan listening ports.
 processes
 ^^^^^^^^^
 
-Enables the processes scan.
+Enables the scan of the processes.
 
 +--------------------+---------+
 | **Default value**  | yes     |
