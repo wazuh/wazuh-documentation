@@ -34,7 +34,7 @@ Ruleset
 
 Other
 ^^^^^
-- `#13811 <https://github.com/wazuh/wazuh/pull/13811>`_ The``test_agent_PUT_endpoints.tavern.yaml`` API integration test failure in numbered branches is fixed.
+- `#13811 <https://github.com/wazuh/wazuh/pull/13811>`_ The ``test_agent_PUT_endpoints.tavern.yaml`` API integration test failure in numbered branches is fixed.
 - `#13790 <https://github.com/wazuh/wazuh/pull/13790>`_ The external click and clickclick python dependencies to 8.1.3 and 20.10.2 respectively are upgraded.
 
 
