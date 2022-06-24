@@ -281,7 +281,7 @@ $ossec_remote_allowed_ips
    Needed if **ossec_remote_connection** is set to syslog
 
 $ossec_remote_queue_size
-  Sets the capacity of the remote daemon queue in the number of agent events.
+  Sets the capacity of the remote daemon queue in number of agent events.
 
   `Default 131072`
 
