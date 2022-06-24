@@ -172,7 +172,7 @@ Certificates deployment
 
     .. include:: /_templates/installations/basic/elastic/common/elastic-multi-node/deploy_certificates_subsequent_nodes.rst
 
-#. If Kibana is installed in this node, keep the certificates file. Otherwise, remove it to increase security ``rm -f ~/certs.zip``.  
+#. If you are going to install Kibana in this node, keep the certificates file. Otherwise, remove it to increase security ``rm -f ~/certs.zip``. 
 
 #.  Enable and start the Elasticsearch service:
 
