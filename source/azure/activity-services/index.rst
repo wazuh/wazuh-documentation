@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Discover how Wazuh can help you to monitor your Microsoft Azure activity and services in this section of our documentation.

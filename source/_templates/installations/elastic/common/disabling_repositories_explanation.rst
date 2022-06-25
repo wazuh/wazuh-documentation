@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 In the installation guide, we described how to install and configure Wazuh and also how to install and configure Elastic Stack for its use with Wazuh. At Wazuh we have complete control of when a new Wazuh version is going to be released, but we don't have control over when a new Elasticsearch version is going to be released.
 

@@ -1,4 +1,4 @@
-.. Copyright (C) 2015–2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Find the packages required for Wazuh installation on this page. Available for AIX, Linux, HP-UX, macOS, Solaris, and Windows.

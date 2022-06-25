@@ -1,4 +1,4 @@
-.. Copyright (C) 2015–2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Discover the offline step-by-step process to install the Wazuh central components without connection to the Internet.

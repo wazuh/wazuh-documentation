@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Learn how to configure Amazon ECR Image scanning to export the scan results to CloudWatch Logs.

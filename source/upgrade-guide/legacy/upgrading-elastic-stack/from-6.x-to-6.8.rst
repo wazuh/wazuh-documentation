@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. _upgrading_elastic_stack_6.x_6.8:
 

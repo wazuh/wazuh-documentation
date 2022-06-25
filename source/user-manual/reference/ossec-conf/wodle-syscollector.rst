@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
 	:description: Check out this section about the local configuration of Wazuh and learn about the configuration options of the syscollector wodle.

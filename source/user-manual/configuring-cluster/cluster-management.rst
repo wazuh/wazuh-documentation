@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: The cluster_control tool allows you to get real-time information about the health of the cluster. Learn more about deploying a Wazuh cluster in this section.

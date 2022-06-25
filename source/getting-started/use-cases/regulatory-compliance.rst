@@ -1,4 +1,4 @@
-.. Copyright (C) 2015–2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
     :description: The Wazuh platform is often used to meet the technical aspects of regulatory compliance standards. Learn more about this Wazuh capability here. 

@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: You can list and see basic information about registered agents in the Agent tab. Learn more about it in this section of the documentation. 

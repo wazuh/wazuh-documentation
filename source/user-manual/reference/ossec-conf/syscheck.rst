@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: The ossec.conf file is the main configuration file on the Wazuh manager and it also plays an important role on the agents. Learn more about it here. 

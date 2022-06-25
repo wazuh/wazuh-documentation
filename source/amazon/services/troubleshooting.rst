@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Frequently asked questions about the Wazuh module for Amazon. Learn more about it in this section of the documentation.

@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Learn about the variables that facilitate the deployment of the Wazuh agent on macOS in this section of our documentation.

@@ -1,4 +1,4 @@
-.. Copyright (C) 2015–2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
    :description: Learn how to use a preconfigured role to install and configure the Wazuh Agent on different hosts in this section of the Wazuh documentation.

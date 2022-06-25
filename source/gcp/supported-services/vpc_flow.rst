@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: The Wazuh GCP Pub/Sub module allows you to process Google VPC Flow Logs. Learn more about the module's usage in this section.

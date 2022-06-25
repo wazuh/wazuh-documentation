@@ -1,4 +1,4 @@
-.. Copyright (C) 2015–2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
    :description: Check out this installation guide to create an environment consisting of a Wazuh server, an Elastic Stack server, and a Wazuh agent. 

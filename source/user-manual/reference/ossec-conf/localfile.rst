@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 .. meta::
   :description: Learn more about how to configure the collection of log data from files, Windows events, and from the output of commands with Wazuh. 
 
