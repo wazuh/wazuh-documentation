@@ -11,7 +11,7 @@ Install the Wazuh central components
 
 Wazuh is a security platform that provides unified XDR and SIEM protection for endpoints and cloud workloads. The solution is composed of a single universal agent and three central components: the Wazuh server, the Wazuh indexer, and the Wazuh dashboard. Check the :doc:`Getting Started </getting-started/index>` documentation to learn more. 
 
-To set your Learning Wazuh environment, you can install the Wazuh central components using our installation assistant, you may download our ready-to-use :ref:`OVA <virtual_machine>` or you can launch an EC2 Instance with our :doc:`AMI </deployment-options/amazon-machine-images/amazon-machine-images>`. You can check our :ref:`Installation guide <installation_guide>` for more details and other installation options.
+To set your Learning Wazuh environment, you can install the Wazuh central components using our installation assistant, you may download our ready-to-use :ref:`OVA <virtual_machine>` or you can launch an EC2 Instance with our :doc:`AMI </deployment-options/amazon-machine-images/amazon-machine-images>`. Check our :ref:`Installation guide <installation_guide>` for more details and other installation options.
 
 
 Install Wazuh using the Wazuh installation assistant
@@ -25,7 +25,7 @@ Hardware requirements highly depend on the number of protected endpoints and clo
 
 Wazuh central components can be installed on a 64-bit Linux operating system, the recommended operating systems are:
  
-Red Hat Enterprise Linux 7, 8; CentOS 7, 8; Amazon Linux 2; Ubuntu 16.04, 18.04, 20.04. 
+Red Hat Enterprise Linux 7, 8; CentOS 7, 8; Amazon Linux 2; Ubuntu 16.04, 18.04, 20.04, 22.04. 
 
 
 Installing Wazuh

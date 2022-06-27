@@ -8,7 +8,7 @@
 Prepare your Wazuh Lab Environment
 ==================================
 
-Follow this guide to set your Lab Environment. First install the Wazuh central components: the Wazuh server, the Wazuh indexer, and the Wazuh dashboard. To learn more, see the :doc:`/getting-started/components/index` documentation. 
+Follow this guide to set your Lab Environment. First, install the Wazuh central components: the Wazuh server, the Wazuh indexer, and the Wazuh dashboard. To learn more, see the :doc:`/getting-started/components/index` documentation. 
 
 Then install a Wazuh agent on the endpoints to be monitored, a Linux and a Windows system. 
 

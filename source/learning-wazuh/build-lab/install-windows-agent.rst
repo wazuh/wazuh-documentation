@@ -8,6 +8,8 @@
 Install the Windows Wazuh agent
 ===============================
 
+Use the following procedure to install, register and configure a Wazuh agent on a Windows system.
+
 Run the installer to download, install and self-register the Wazuh agent
 ------------------------------------------------------------------------
 
@@ -15,7 +17,7 @@ Run the installer to download, install and self-register the Wazuh agent
 
 #. Log into your Windows Agent instance.
 
-#. Click the **Search Windows** icon (magnifying glass in bottom left of screen).  Type: "PowerShell" and right click on Windows PowerShell.
+#. Click the **Search Windows** icon (magnifying glass in the bottom left of screen).  Type: "PowerShell" and right-click on Windows PowerShell.
 
     .. thumbnail:: ../../images/learning-wazuh/build-lab/pshell-1.png
         :title: powershell
@@ -52,7 +54,7 @@ Create a shortcut to the Wazuh agent Manager tool on the taskbar
         :align: center
         :width: 80%
 
-#. Right click the **win32ui** file and select **Pin to the taskbar**.
+#. Right-click the **win32ui** file and select **Pin to the taskbar**.
 
 
 Run the Wazuh agent Manager and confirm it is running and connected to the Wazuh manager
