@@ -532,8 +532,7 @@ is in the Wazuh dashboard.  In the **Vulnerabilities** dashboard, you can select
 Optional exercise
 -----------------
 
-You could create a CDB for escalating alerts about your own custom set of high
-priority CVEs.  Write a child rule of Wazuh rule 23501 that looks for a match in
+You could create a CDB for escalating alerts about your own custom set of high-priority CVEs.  Write a child rule of Wazuh rule 23501 that looks for a match in
 this CDB and generates alerts of a high severity like 12.  Consider how you might
 use a key/value CDB listing pairs of agent names and software package names that
 you want to especially keep an eye on.  For example, you might want an escalated

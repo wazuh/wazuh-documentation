@@ -8,7 +8,7 @@
 Catch suspicious network traffic
 ================================
 
-Suricata a NIDS solution, which is open source and can be quickly deployed either on dedicated hardware for
+Suricata is a NIDS solution, which is open source and can be quickly deployed either on dedicated hardware for
 monitoring one or more transit points on your network, or directly on existing Unix-like hosts to monitor just their own network
 traffic.  Because Suricata is capable of generating JSON logs of NIDS events, it can be easily integrated with Wazuh.
 
@@ -128,7 +128,7 @@ Get the Suricata JSON data to Wazuh
 -----------------------------------
 
 Suricata is configured to write alerts to ``/var/log/suricata/eve.json`` which Wazuh does not monitor by default.  Your
-Linux agent need an additional ``<localfile>`` config section like this:
+Linux agent needs an additional ``<localfile>`` config section like this:
 
 .. code-block:: xml
 
@@ -303,7 +303,7 @@ Spice things up with a little GeoIP
 You may have noticed that there were no Geolocation fields in the Wazuh dashboard records for Suricata events.  In Wazuh default configuration, Geolocation is only performed on fields ``data.srcip``, ``data.win.eventdata.ipAddress`` and ``data.aws.sourceIPAddress`` , while with Suricata events we would need to act on fields
 ``data.src_ip`` and ``data.dest_ip``.  We are going to change our configuration to show more information from ``data.src_ip``:
 
-#. On the Wazuh manager, edit ``/usr/share/filebeat/module/wazuh/alerts/ingest/pipeline.json`` adding the new IP address field inside ``processors``, along the other Geolocation fields:
+#. On the Wazuh manager, edit ``/usr/share/filebeat/module/wazuh/alerts/ingest/pipeline.json`` adding the new IP address field inside ``processors``, along with the other Geolocation fields:
 
     .. code-block:: json
 
@@ -342,7 +342,7 @@ You may have noticed that there were no Geolocation fields in the Wazuh dashboar
 If you have time, you could also...
 -----------------------------------
 
-#. Build a CDB list of the the signature_id values of Suricata rules that call for immediate attention.  Maybe these would be special NIDS events you would want to get SMS alerted about in real time.  Create a custom child rule to 86601 that looks for matches in your CDB and has a high severity level like 12.
+#. Build a CDB list of the the signature_id values of Suricata rules that call for immediate attention.  Maybe these would be special NIDS events you would want to get SMS alerted about in real-time.  Create a custom child rule to 86601 that looks for matches in your CDB and has a high severity level like 12.
 
 #. Build another CDB list of signature_id values of rules you choose to classify as "noise" and want to suppress entirely.  Then make another child rule with a severity level of 0.
 

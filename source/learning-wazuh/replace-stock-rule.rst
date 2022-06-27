@@ -11,7 +11,7 @@ The `Wazuh Ruleset <https://github.com/wazuh/wazuh/tree/|WAZUH_LATEST_MINOR|/rul
 
 Custom changes to the ruleset must be done within files in the  ``/var/ossec/etc/rules/`` folder. To change a default rule, then the ``overwrite="yes"`` option must be used when declaring the rule.
 
-In this lab you will raise the severity level of a specific rule in the Wazuh Ruleset. This can be achieved using the web interface or directly editing the files on the Wazuh Manager.
+In this lab, you will raise the severity level of a specific rule in the Wazuh Ruleset. This can be achieved using the web interface or directly editing the files on the Wazuh Manager.
 
 Using the Wazuh dashboard
 -------------------------
@@ -85,7 +85,7 @@ Using the Wazuh dashboard
        :width: 80%
 
 
-#. Attempt to log in to the **linux-agent** using SSH and incorrect credentials. Then look for the event on the Wazuh dashboard by searching for **5760** and you will see the the level of the alert for the most recent event will be **7**:
+#. Attempt to log in to the **linux-agent** using SSH and incorrect credentials. Then look for the event on the Wazuh dashboard by searching for **5760** and you will see that the level of the alert for the most recent event will be **7**:
 
    .. thumbnail:: ../images/learning-wazuh/labs/rules-5.png
        :title: Rule level has been changed
@@ -160,4 +160,4 @@ Using the Command Line Interface
 
 
 .. note::
-    The Wazuh manager only reads in the rules when started or restarted, so any real events like above would not be affected by your customized rule until you restart the Wazuh manager.  The ``wazuh-logtest`` tool does not require the Wazuh manager to be restarted to notice your latest rule changes, which provides you with a convenient way to test your rule changes before making them take effect on real events.
+    The Wazuh manager only reads the rules when started or restarted, so any real events like the above would not be affected by your customized rule until you restart the Wazuh manager.  The ``wazuh-logtest`` tool does not require the Wazuh manager to be restarted to notice your latest rule changes, which provides you with a convenient way to test your rule changes before making them take effect on real events.

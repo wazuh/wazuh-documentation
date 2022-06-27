@@ -8,7 +8,7 @@
 Detect an SSH brute-force attack
 ================================
 
-Here you will wage a small SSH brute force attack against your Linux Agent instance.
+Here you will wage a small SSH brute force attack against your Linux agent instance.
 
 You will see how Wazuh detects and alerts on each login failure, and how a higher severity alert is produced when enough login failures from the same source IP address are detected in the same time window.
 
@@ -17,7 +17,7 @@ You will also inspect the actual rules that fire as well as the enriched alert r
 Attack
 ------
 
-Using the SSH client of your choice, attempt to login as user "*blimey*" to your Linux Agent instance. For example:
+Using the SSH client of your choice, attempt to login as user "*blimey*" to your Linux agent instance. For example:
 
   .. code-block:: console
 

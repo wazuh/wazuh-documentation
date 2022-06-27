@@ -48,7 +48,7 @@ Turn on program call auditing on linux-agent
 Trigger a few audit events
 --------------------------
 
-#. Dropping from `root` back to the unpriviledged user, run a ping.
+#. Dropping from `root` back to the unprivileged user, run a ping.
 
     .. code-block:: console
 
@@ -73,7 +73,7 @@ Trigger a few audit events
         1 packets transmitted, 1 received, 0% packet loss, time 0ms
         rtt min/avg/max/mdev = 1.093/1.093/1.093/0.000 ms
 
-#. While still `centos`, use sudo to run a privileged commands
+#. While still `centos`, use sudo to run a privileged commands.
 
     .. code-block:: console
 
@@ -86,7 +86,7 @@ Trigger a few audit events
         bin:*:17110:0:99999:7:::
         ...
 
-#. Now sudo back to `root` and run another commands
+#. Now sudo back to `root` and run other commands.
 
     .. code-block:: console
 
@@ -116,7 +116,7 @@ Trigger a few audit events
 Look over the audit events
 --------------------------
 
-#. On the monitored linux machine, inspect the content of ``/var/log/audit/audit.log``. Auditd writes events here, but it is not very readable. Thankfully the Linux Wazuh agents already monitors this file by default.
+#. On the monitored Linux machine, inspect the content of ``/var/log/audit/audit.log``. Auditd writes events here, but it is not very readable. Thankfully the Linux Wazuh agents already monitor this file by default.
 
 #. Search the Wazuh dashboard for ``rule.id:80792``.  That will catch all auditd command audit events.
 

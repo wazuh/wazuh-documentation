@@ -8,14 +8,14 @@
 Expose hiding processes
 =======================
 
-In this exercise you will safely implement a kernel-mode rootkit on your lab machine as a proof-of-concept for Wazuh rootkit detection.
+In this exercise, you will safely implement a kernel-mode rootkit on your lab machine as a proof-of-concept for Wazuh rootkit detection.
 
-This rootkit is able to hide itself from the kernel module list as well as hide selected processes from being visible to ``ps``.
+This rootkit can hide itself from the kernel module list as well as hide selected processes from being visible to ``ps``.
 
 However, Wazuh will still detect it using the system calls ``setsid()``, ``getpid()``, and ``kill()``. This makes
 Wazuh a very effective Linux rootkit detection application by looking for general low-level hiding behavior.
 
-#. Log on to your Linux Agent instance and become root.
+#. Log on to your Linux agent instance and become root.
 
    .. code-block:: console
 
@@ -28,13 +28,13 @@ Wazuh a very effective Linux rootkit detection application by looking for genera
       # yum -y update
       # shutdown -r now
 
-#. Log back into linux-agent and become root again.
+#. Log back into the Linux agent and become root again.
 
    .. code-block:: console
 
       $ sudo su -
 
-#. In your linux-agent ``/var/ossec/etc/local_internal_options.conf`` file, enable debug logging and speed up the rate at which rootcheck commences its first scan for the sake of this lab.
+#. In your Linux agent ``/var/ossec/etc/local_internal_options.conf`` file, enable debug logging and speed up the rate at which rootcheck commences its first scan for the sake of this lab.
 
     .. code-block:: console
 
@@ -102,7 +102,7 @@ Wazuh a very effective Linux rootkit detection application by looking for genera
 
     In the case of Diamorphine, any attempt to send a kill signal ``-63`` to any process whether it exists or not, will toggle whether the Diamorphine kernel module hides itself.
 
-    This rootkit also allows you to hide a selected processes from being seen by the "ps" command for example.
+    This rootkit also allows you to hide selected processes from being seen by the "ps" command for example.
     Run the following commands to see how the rsyslog process is first visible, then send the ``-31`` signal to its pid and observe how the process is no longer visible.
 
     .. code-block:: console
@@ -122,7 +122,7 @@ Wazuh a very effective Linux rootkit detection application by looking for genera
 
     When using these last commands, an empty output is expected.
 
-#. Next configure linux-agent to run rootcheck scans every 5 minutes setting the ``frequency`` option the ``<rootcheck>`` section of your agent's ``/var/ossec/etc/ossec.conf`` file to **300** with the following:
+#. Configure the Linux agent to run rootcheck scans every 5 minutes setting the ``frequency`` option the ``<rootcheck>`` section of your agent ``/var/ossec/etc/ossec.conf`` file to **300** with the following:
 
     .. code-block:: xml
        :emphasize-lines: 13
@@ -152,7 +152,7 @@ Wazuh a very effective Linux rootkit detection application by looking for genera
 
    The next rootcheck scan should run shortly and it will alert about the rsyslogd process which we hid with Diamorphine.
 
-#. Watch ``ossec.log`` on linux-agent for rootcheck activity that should start within 5 minutes of the agent restart.
+#. Watch ``ossec.log`` on the Linux agent for rootcheck activity that should start within 5 minutes of the agent restart.
 
    .. code-block:: console
 
@@ -235,7 +235,7 @@ Wazuh a very effective Linux rootkit detection application by looking for genera
 
 #. Remember, if you run the same ``kill -31`` command as before against rsyslogd, the rsyslogd process will become visible again. The subsequent rootcheck scan would no longer alert about it.
 
-#. Remove the rootkit from linux-agent since we don’t need it any longer.
+#. Remove the rootkit from the Linux agent since we don’t need it any longer.
 
    .. code-block:: console
 
@@ -243,19 +243,19 @@ Wazuh a very effective Linux rootkit detection application by looking for genera
       # kill -63 509
       # rmmod diamorphine
 
-#. Remove the custom internal options on linux-agent's that we used for this lab.
+#. Remove the custom internal options on the Linux agent that we used for this lab.
 
    .. code-block:: console
 
       # rm -f /var/ossec/etc/local_internal_options.conf
 
-#. In the ``<rootcheck>`` section of linux-agent's ``/var/ossec/etc/ossec.conf`` file, disable rootcheck for now.
+#. In the ``<rootcheck>`` section of the Linux agent ``/var/ossec/etc/ossec.conf`` file, disable rootcheck for now.
 
    .. code-block:: xml
 
       <disabled>yes</disabled>
 
-#. Restart the Wazuh agent on linux-agent. 
+#. Restart the Wazuh agent. 
 
    .. include:: /_templates/common/restart_agent.rst
 

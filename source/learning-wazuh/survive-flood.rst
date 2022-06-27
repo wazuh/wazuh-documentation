@@ -13,14 +13,14 @@ A variety of problems like infinite loop conditions, poorly written software, mi
 
 Log flooding can saturate your network bandwidth and/or overtax your Wazuh central components while one gigabyte after another of (often repetitive) log messages are being reanalyzed and churned to disk.
 
-Thankfully the Wazuh agent has a flood protection mechanism to prevent one system from creating disruptions to your network or to your Wazuh services.
-In this lab we will create a small log flood and observe how it is gracefully contained by the Wazuh agent before it departs the system where the logs are produced.  We will also take a look at the leaky bucket queue that Wazuh uses to accomplish this.  Lastly, we will note the alerts that are produced to keep us informed about the onset of, escalation of, and recovery from log flooding events.
+Thankfully the Wazuh agent has a flood protection mechanism to prevent one system from creating disruptions to your network or your Wazuh services.
+In this lab, we will create a small log flood and observe how it is gracefully contained by the Wazuh agent before it departs the system where the logs are produced.  We will also take a look at the leaky bucket queue that Wazuh uses to accomplish this.  Lastly, we will note the alerts that are produced to keep us informed about the onset of, escalation of, and recovery from log flooding events.
 
 
-Configure the Wazuh agent client buffer on linux-agent
-------------------------------------------------------
+Configure the Wazuh agent client buffer on the Linux agent
+----------------------------------------------------------
 
-#. In this lab, we will limit agent log production to 50 events per second (EPS) in order to easily simulate a flooding event. Open ``/var/ossec/etc/ossec.conf`` and find the ``<client_buffer>`` section, and edit within it the  ``<events_per_second>`` value:
+#. In this lab, we will limit agent log production to 50 events per second (EPS) to easily simulate a flooding event. Open ``/var/ossec/etc/ossec.conf`` and find the ``<client_buffer>`` section, and edit within it the  ``<events_per_second>`` value:
 
     .. code-block:: xml
        :emphasize-lines: 5
@@ -51,7 +51,7 @@ Configure the Wazuh agent client buffer on linux-agent
    .. include:: /_templates/common/restart_agent.rst
 
    .. note::
-        The client buffer is explained in detail in the Wazuh User manual :ref:`antiflooding` section.
+        The client buffer is explained in detail in the Wazuh user manual :ref:`antiflooding` section.
         In brief, it allows a Wazuh agent to limit the rate at which it sends log events to the Wazuh manager.
         If events are produced at a rate over the configured EPS limit, then they are stored in a leaky
         bucket queue until the EPS rate slows down enough that the queue contents can be sent along to the
@@ -70,7 +70,7 @@ Configure the Wazuh agent client buffer on linux-agent
 Decrease minimum log alert level
 --------------------------------
 
-We will generate a flood of messages with the word "fatal" so they will trigger generic Wazuh rule ``1002`` which has a low severity level (2).  By default,
+We will generate a flood of messages with the word "fatal" so they will trigger the generic Wazuh rule ``1002`` which has a low severity level (2).  By default,
 the Wazuh manager does not record alerts on rules of severity levels less than 3, so for this lab we will lower the threshold:
 
 #. Edit ``/var/ossec/etc/ossec.conf`` on your Wazuh manager and change ``<log_alert_level>`` from 3 to 1 so that the ``<alerts>`` section looks like the one below.  Now alerts of all severity levels except level 0 will show up in the Wazuh dashboard.
@@ -108,7 +108,7 @@ Generate a log flood on linux-agent
         done
 
     .. note::
-        While we could write records to a log file monitored by Wazuh agent, this script takes an even faster approach of writing records directly to the Wazuh agent internal socket. This is where components like **wazuh-logcollector** streams new log lines from log files.
+        While we could write records to a log file monitored by Wazuh agent, this script takes an even faster approach of writing records directly to the Wazuh agent internal socket. This is where components like **wazuh-logcollector** stream new log lines from log files.
 
         The script uses netcat to do this, but any tool that can write datagrams to a Unix socket will do the job. Sometimes it is desirable to have a script on a Wazuh agent send results directly back to the Wazuh manager while completely bypassing the agent filesystem.
 

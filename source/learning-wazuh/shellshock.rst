@@ -9,14 +9,14 @@
 Detect and react to a Shellshock attack
 =======================================
 
-Shellshock represent a family of vulnerabilities disclosed in late 2014 involving
+Shellshock represents a family of vulnerabilities disclosed in late 2014 involving
 the Linux Bash shell.  These vulnerabilities made it possible to inject shell
 commands via maliciously crafted web requests sent to Linux web servers.  The
 pattern in such web requests is quite distinctive, and any instance of your
 servers being probed with Shellshock requests are fairly
 strong indicators of malicious probing worthy of automated countermeasures.
 
-In this lab you will send a Shellshock probe to a web server monitored by Wazuh.
+In this lab, you will send a Shellshock probe to a web server monitored by Wazuh.
 After looking over the alert that is produced and the rule that produced it, you
 will then set up and test several active response scenarios in which the attacker
 will be automatically firewalled off from the Linux lab systems and null routed
@@ -25,7 +25,7 @@ by the Windows lab system in response to this attack.
 Install a web server and monitor its logs
 -----------------------------------------
 
-#. If you haven't already, install a web server in your linux-agent, for example `nginx`:
+#. If you haven't already, install a web server in your Linux agent, for example, `nginx`:
 
    .. code-block:: console
 
@@ -49,7 +49,7 @@ Install a web server and monitor its logs
             </localfile>
         </ossec_config>
 
-#. Restart the wazuh agent service for this change to take effect:
+#. Restart the Wazuh agent service for this change to take effect:
 
    .. include:: /_templates/common/restart_agent.rst
 
@@ -112,10 +112,10 @@ The Wazuh Active Response capability allows scripted actions to be taken in
 response to specific criteria of Wazuh rules being matched.  By default, AR
 is enabled on all agents and all standard AR commands are defined in ``ossec.conf``
 on the Wazuh manager, but no actual criteria for calling the AR commands is
-included.  No AR commands will actually be triggered until further configuration
+included.  No AR commands will be triggered until further configuration
 is performed on the Wazuh manager.
 
-For the purpose of automated blocking, a very popular command for blocking in
+For automated blocking, a very popular command for blocking in
 Linux is using the iptables firewall, and in Windows the null routing / blackholing, respectively:
 
     .. code-block:: xml
@@ -168,7 +168,7 @@ AR Scenario 1 - Make victim block attacker with iptables
       # curl --insecure $ShellshockTarget -H "User-Agent: () { :; }; /bin/cat /etc/passwd"
 
    The command will quickly download the webpage to ``/dev/null``.  Now repeat the same curl command.
-   This time the command seems to hang, because the agent has added the attacking IP address to its firewall's drop list.  If you have used the agent's IP address instead of ``localhost`` you may confirm this with an iptables command on the attacked server:
+   This time the command seems to hang because the agent has added the attacking IP address to its firewall drop list.  If you have used the agent IP address instead of ``localhost`` you may confirm this with an iptables command on the attacked server:
 
    .. code-block:: console
 
@@ -232,7 +232,7 @@ AR Scenario 2 - Make all Linux lab systems block attacker even if they were not 
 #. In the newly-added ``<active-response>`` section in ``ossec.conf`` on the Wazuh manager, change the ``<location>`` value from `local` to `all` so that all Linux Wazuh agents will block the attacker even when only one of them is targeted.
 
    .. note::
-       The option `all` sends the active response to all agents. If we want it to also run in the manager, we must duplicate th active-response block indicating `server` in the ``location`` field.
+       The option `all` sends the active response to all agents. If we want it to also run in the manager, we must duplicate the active-response block indicating `server` in the ``location`` field.
 
    .. code-block:: xml
       :emphasize-lines: 4, 12
@@ -315,7 +315,7 @@ removed across all agents.
 .. note::
     When the Wazuh agent is restarted on a given system, the intended behavior
     to cancel any stateful active responses that have not yet timed out.
-    On Windows systems if the service is restarted externally (i.e. System reboot)
+    On Windows systems, if the service is restarted externally (i.e. System reboot)
     while an active response null routing block is in place, has the undesirable
     effect of making the block permanent such that it will not be cleared
     automatically.  In that case it it necessary to clear the orphaned null route

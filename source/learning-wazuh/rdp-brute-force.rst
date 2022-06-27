@@ -5,13 +5,13 @@
 Detect an RDP brute force attack
 ================================
 
-Here you will wage a small RDP brute force attack against your Windows Agent instance. You will see how Wazuh detects and alerts on each login failure, and how a higher severity
+Here you will wage a small RDP brute force attack against your Windows agent instance. You will see how Wazuh detects and alerts on each login failure, and how a higher severity
 alert is produced when enough login failures are seen.
 
 Perform the attack
 ------------------
 
-Using a Windows Remote Desktop client, attempt to log in as user "george" to your Windows Agent instance eight times in a fairly small time window.
+Using a Windows Remote Desktop client, attempt to log in as user "george" to your Windows agent instance eight times in a fairly small time window.
 
 
 See the resulting alerts in the Wazuh dashboard
@@ -42,6 +42,6 @@ The generation of the "Multiple Windows Logon Failures" does not have to be the 
 
 #. A high severity local rule of your own making, child of rule 60204, could fire if the attacked account name specifically matches your secret Windows admin account name.
 
-#. An active response could be triggered causing the windows-agent to null-route the attacking IP address.
+#. An active response could be triggered causing the Windows agent to null-route the attacking IP address.
 
 This concludes the RDP brute force attack lab. We hope you enjoyed it!

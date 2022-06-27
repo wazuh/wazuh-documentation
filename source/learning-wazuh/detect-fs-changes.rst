@@ -48,7 +48,7 @@ Run the **Wazuh Agent Manager** (``C:\Program Files (x86)\ossec-agent\win32ui.ex
 
 The above enables syscheck FIM on the *windows-agent*, such that a periodic scan of ``C:\orange`` will take place shortly after the start or restart of the Wazuh agent, and then every 300 seconds thereafter.
 
-The ``C:\apple`` directory will be monitored in real time for file changes, while the ``C:\orange`` directory will only be periodically scanned for changes.  Changes to existing text files in ``C:\apple`` will trigger an alert that includes the details of the actual text that was changed, while changes to ``C:\orange`` files will not include details of actual file content changes.
+The ``C:\apple`` directory will be monitored in real-time for file changes, while the ``C:\orange`` directory will only be periodically scanned for changes.  Changes to existing text files in ``C:\apple`` will trigger an alert that includes the details of the actual text that was changed, while changes to ``C:\orange`` files will not include details of actual file content changes.
 
 .. note::
     In Wazuh configuration files, Windows file and directory paths are always expressed with forward slashes rather than traditional Windows backslashes.  This is because the backslash tends to be interpreted as an escape character by Wazuh.  Wazuh will find your Windows paths just fine even though the slashes look backwards.
@@ -69,7 +69,7 @@ Testing FIM
 
 Add, modify, and delete files in these two test directories on the Windows agent, and watch your search results in the Wazuh dashboard for the query text "*apple orange*" (without quotes), to find syscheck events as they appear.  
 
-Notice that alerts about changes in ``C:\apple\`` show up promptly, while alerts about changes in ``C:\orange\`` are not reported until the next periodic (5 minute) syscheck scan. You can force a periodic syscheck scan sooner by restarting the Windows agent, but still expect to wait a minute or so before the scan actually runs.
+Notice that alerts about changes in ``C:\apple\`` show up promptly, while alerts about changes in ``C:\orange\`` are not reported until the next periodic (5 minute) syscheck scan. You can force a periodic syscheck scan sooner by restarting the Windows agent, but still expect to wait a minute or so before the scan runs.
 
 .. note::
     When multiple terms are searched for in the Wazuh dashboard (like "apple orange") without being separated by a capitalized "AND", an "OR" relationship is assumed, resulting in a search for all records matching either of the terms included.
@@ -104,10 +104,6 @@ You can get an overview of FIM events for all agents by clicking on the Wazuh me
     :align: center
     :width: 80%
 
-.. note::
-    The default time windows in the Wazuh dashboard is only "Last 15 minutes" which may be too small to
-    encompass your activities in this lab.  Click on the time window value and change it to
-    something broader if needed.
 
 A look under the hood of syscheck
 ---------------------------------
