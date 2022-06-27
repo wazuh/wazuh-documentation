@@ -1,7 +1,7 @@
 .. Copyright (C) 2015–2022 Wazuh, Inc.
 
 .. meta::
-  :description: The pre-built Wazuh Amazon Machine Image includes all Wazuh components ready-to-use. Test all Wazuh capabilities with our AMI.  
+  :description: The pre-built Wazuh Amazon Machine Image includes all Wazuh components ready to use. Learn more about it in this section of the documentation.
 
 Amazon Machine Images (AMI)
 ===========================
@@ -35,7 +35,7 @@ Launch an instance from the AWS Marketplace
 
 #. Select a **Software Version** and the **Region** where the instance is going to be deployed. Then, click **Continue to Launch**.
 
-#. Review your configuration making sure that all settings are correct before launching the software. Adapt the default configuration values to your needs.
+#. Review your configuration, making sure that all settings are correct before launching the software. Adapt the default configuration values to your needs.
 
     #. When selecting the **EC2 Instance Type**, we recommend that you use an instance type ``c5a.xlarge``.
   
@@ -87,14 +87,14 @@ All components included in this AMI are configured to work out-of-the-box withou
     - ``/etc/wazuh-dashboard/opensearch_dashboards.yml``
     - ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml``
 
-To learn more about configuring Wazuh, see the :ref:`User manual <user_manual>`.
+To learn more about configuring Wazuh, see the :doc:`User manual </user-manual/index>`.
 
 .. _ami_wazuh_ui:
 
 Access the Wazuh dashboard
 --------------------------
 
-When the instance is launched, the passwords of the users are automatically changed to the ID of the instance. In this way, access to the interface is guaranteed only to the creator of it. This process can take an average of five minutes depending on the type of instance. Both the SSH access and the Wazuh dashboard access are disabled during this process.
+When the instance is launched, the passwords of the users are automatically changed to the ID of the instance. In this way, access to the interface is guaranteed only to the creator of it. This process can take an average of five minutes, depending on the type of instance. Both the SSH access and the Wazuh dashboard access are disabled during this process.
 
 Once the instance is running and the process to initialize passwords is complete, you can access the Wazuh dashboard with your credentials.
 
@@ -123,7 +123,7 @@ Security considerations about SSH
 Next steps
 ----------
 
-The Wazuh AMI is now ready and you can proceed with :ref:`deploying the Wazuh agents <installation_agents>` on the systems to be monitored.
+The Wazuh AMI is now ready and you can proceed with :doc:`deploying the Wazuh agents </installation-guide/wazuh-agent/index>` on the systems to be monitored.
 
 Upgrading the Wazuh server
 --------------------------

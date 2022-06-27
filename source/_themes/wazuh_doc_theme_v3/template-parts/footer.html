@@ -5,6 +5,7 @@
     General footer to be included within every page of Wazuh Documentation.
 -#}
 
+  {% if theme_breadcrumb_root_title == 'Documentation' %}
   <nav class="website-links row d-xl-none">
     <div class="col-12">
       <a class="logo-link web" href="{{ theme_wazuh_web_url }}" target="_blank" rel="noreferrer noopener">
@@ -77,7 +78,9 @@
       </div>
     </div>
   </nav>
+  {% endif %}
   <div class="desktop-footer row">
+    {% if theme_breadcrumb_root_title == 'Documentation' %}
     <ul class="social-links col-12 col-sm-8 col-xl-9 order-sm-2">
       <li class="nav-item d-none d-xl-inline-block"><a class="nav-link" href="{{ theme_wazuh_web_url + '/community/' }}" target="_blank" rel="noreferrer noopener">Community</a></li>
       <li class="nav-item d-none d-xl-inline-block"><a class="nav-link" href="{{ theme_wazuh_web_url + '/contact-us/' }}" target="_blank" rel="noreferrer noopener">Contact us</a></li>
@@ -88,6 +91,7 @@
       <li class="rrss nav-item d-inline-block"><a class="nav-link" title="Join us on Slack" aria-label="Join us on Slack" target="_blank" href="https://join.slack.com/t/wazuh/shared_invite/{{ theme_wazuh_community }}" rel="noreferrer noopener"><i class="fab fa-slack"></i></a></li>
       <li class="rrss nav-item d-inline-block"><a class="nav-link" title="Subscribe to our mailing list" aria-label="Subscribe to our mailing list" target="_blank" href="mailto:wazuh+subscribe@googlegroups.com" rel="noreferrer noopener"><i class="fas fa-user-friends"></i></a></li>
     </ul>
+    {% endif %}
     <div class="copyright col-12 col-sm-4 col-xl-3 order-sm-1">
       {{copyright}}
     </div>

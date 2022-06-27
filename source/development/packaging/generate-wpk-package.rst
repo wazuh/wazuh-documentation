@@ -1,7 +1,8 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
-  :description: Check out the Wazuh documentation to learn how to create a WPK package. Wazuh provides an automated way of building WPK packages using docker.
+  :description: Wazuh provides an automated way of building WPK packages using docker. Learn how to create a WPK package in this section of the Wazuh documentation.
+
 .. _create-wpk:
 
 WPK

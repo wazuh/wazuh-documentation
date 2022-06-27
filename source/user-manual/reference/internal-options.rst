@@ -72,7 +72,7 @@ Agent
 +                           +----------------+----------------------------------------------------------------------------------+
 |                           | Allowed value  | Any integer between 1 and 600.                                                   |
 +---------------------------+----------------+----------------------------------------------------------------------------------+
-| **agent.state_interval**  | Description    | Interval between the updates of the agent status file in seconds.                |
+| **agent.state_interval**  | Description    | The interval between the updates of the agent status file in seconds.            |
 +                           +----------------+----------------------------------------------------------------------------------+
 |                           | Default value  | 5                                                                                |
 +                           +----------------+----------------------------------------------------------------------------------+
@@ -805,7 +805,7 @@ Remoted
 +                                   +---------------+--------------------------------------------------------------+
 |                                   | Allowed values| 0, 1                                                         |
 +-----------------------------------+---------------+--------------------------------------------------------------+
-| **remoted.group_data_flush**      | Description   | Interval between multigroup residual file cleanups.          |
+| **remoted.group_data_flush**      | Description   | The interval between multigroup residual file cleanups.      |
 +                                   +---------------+--------------------------------------------------------------+
 |                                   | Default value | 86400                                                        |
 +                                   +---------------+--------------------------------------------------------------+

@@ -1,5 +1,8 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+  :description: Know the Wazuh Daemons that perform different actions between the different components of the Wazuh platform. Learn more about it in this section.
+
 .. _daemons:
 
 Daemons

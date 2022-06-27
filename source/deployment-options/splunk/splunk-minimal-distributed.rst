@@ -6,7 +6,7 @@
 Install a minimal Splunk distributed architecture
 =================================================
 
-This document will guide you through the installation process for a multi-tier server, .
+This document will guide you through the installation process for a multi-tier server.
 
 .. note::
 
@@ -62,9 +62,9 @@ This component receives the data flow streamed by a forwarder and stores it in a
 
    .. note::
 
-         - Splunk is not open source software and it requires a registered user and license in order to work. You can also use a free trial license.
+         - Splunk is not open source software, and it requires a registered user and license in order to work. You can also use a free trial license.
 
-         - This guide will install and configure Splunk |SPLUNK_LATEST|. If you intend to configure a different version of Splunk with Wazuh, change the Splunk version number in the requests for the configuration files and Wazuh app for Splunk. For example, if you intend to configure Splunk 8.2.2:
+         - This guide will install and configure Splunk |SPLUNK_LATEST|. If you intend to configure a different version of Splunk with Wazuh, change the Splunk version number in the requests for the configuration files and the Wazuh app for Splunk. For example, if you intend to configure Splunk 8.2.2:
 
             .. code-block:: console
 
@@ -164,9 +164,9 @@ Depending on the type of architecture that you’re installing, the Splunk forwa
 
    .. note::
 
-         - Splunk is not open source software and it requires a registered user and license in order to work. You can also use a free trial license.
+         - Splunk is not open source software, and it requires a registered user and license in order to work. You can also use a free trial license.
 
-         - This guide will install and configure Splunk |SPLUNK_LATEST|. If you intend to configure a different version of Splunk with Wazuh, change the Splunk version number in the requests for the configuration files and Wazuh app for Splunk. For example, if you intend to configure Splunk 8.2.2:
+         - This guide will install and configure Splunk |SPLUNK_LATEST|. If you intend to configure a different version of Splunk with Wazuh, change the Splunk version number in the requests for the configuration files and the Wazuh app for Splunk. For example, if you intend to configure Splunk 8.2.2:
 
             .. code-block:: console
 
@@ -276,7 +276,7 @@ Set up data forwarding
 
          .. Warning::
       
-            If you get an error message about the port ``8089`` already being in use, you can change it to use a different one.
+            If you get an error message about port ``8089`` already being in use, you can change it to use a different one.
 
          After installing the Splunk forwarder, incoming data should appear in the designated Indexer.
 
@@ -303,7 +303,7 @@ Set up data forwarding
 
          .. warning::
          
-            If you get an error message about the port ``8089`` already being in use, you will be prompted to  change it to use a different one.
+            If you get an error message about port ``8089`` already being in use, you will be prompted to  change it to use a different one.
 
       #. Point the Splunk forwarder output to Wazuh Splunk indexer with the following command:
 
@@ -331,7 +331,7 @@ Set up data forwarding
 
          .. warning::
 
-            If you get an error message about the port ``8089`` already being in use, you can change it to use a different one.
+            If you get an error message about port ``8089`` already being in use, you can change it to use a different one.
 
          After installing the Splunk Forwarder, incoming data should appear in the designated Indexer.
 

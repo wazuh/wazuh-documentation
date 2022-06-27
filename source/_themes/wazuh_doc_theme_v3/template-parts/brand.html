@@ -1,8 +1,8 @@
   <div class="navbar-brand">
   {% if pagename == 'index' %}
-    <div class="logo-link docs">
+    <div class="logo-link docs d-flex align-items-baseline">
   {% else %}
-    <a class="logo-link docs" href="{{ pathto(master_doc) }}">
+    <a class="logo-link docs d-flex align-items-baseline" href="{{ pathto(master_doc) }}">
   {% endif %}
       <span class="sr-only">Wazuh documentation index</span>
       <svg height="29" width="213.5" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 892.252 121.191">
@@ -64,6 +64,10 @@
           <path d="M879.475,116.446v-9.989h9.989v9.989H879.475z"/>
         </g>
       </svg>
+      {% if theme_breadcrumb_root_title == 'Training'%}
+      {{ theme_breadcrumb_root_title }}
+      {% endif %}
+      
   {% if pagename == 'index' %}
     </div>
   {% else %}

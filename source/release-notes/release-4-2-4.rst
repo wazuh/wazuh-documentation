@@ -3,8 +3,8 @@
 
 .. _release_4_2_4:
 
-4.2.4 Release notes
-===================
+4.2.4 Release notes - 20 October 2021
+=====================================
 
 This section lists the changes in version 4.2.4. Every update of the Wazuh solution is cumulative and includes all enhancements and fixes from previous releases.
 

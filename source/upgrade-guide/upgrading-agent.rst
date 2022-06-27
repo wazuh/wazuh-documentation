@@ -220,7 +220,7 @@ To perform the upgrade locally, follow the instructions for the operating system
           # /var/ossec/bin/wazuh-control stop
 
 
-    #. Backup the ``ossec.conf`` configuration file:
+    #. Backup the ``ossec.conf`` and ``client.keys`` files:
 
         .. code-block:: console
 
@@ -250,12 +250,14 @@ To perform the upgrade locally, follow the instructions for the operating system
               # pkgadd -d wazuh-agent_v|WAZUH_CURRENT_SOLARIS10|-sol10-sparc.pkg wazuh-agent
 
 
-    #. Restore the ``ossec.conf`` configuration file:
+    #. Restore the ``ossec.conf`` and ``client.keys`` files:
 
         .. code-block:: console
 
           # mv ~/ossec.conf.bk /var/ossec/etc/ossec.conf
           # chown root:wazuh /var/ossec/etc/ossec.conf
+          # mv ~/client.keys.bk /var/ossec/etc/client.keys
+          # chown root:wazuh /var/ossec/etc/client.keys
 
 
     #. Start the wazuh-agent:

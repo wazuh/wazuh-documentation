@@ -9,7 +9,7 @@ github
 
 .. note::
 
-    This module only works on Windows, Linux and MacOS. It is recommended to have it enabled only in one agent to avoid repeated logs.
+    This module only works on Windows, Linux and macOS. It is recommended to have it enabled only in one agent to avoid repeated logs.
 
 .. topic:: XML section name
 
@@ -86,7 +86,7 @@ By default, when Wazuh starts it will only read all log content from GitHub sinc
 interval
 ^^^^^^^^
 
-Interval between Wazuh wodle executions.
+The interval between Wazuh wodle executions.
 
 +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | 10m                                                                                                                                     |

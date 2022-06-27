@@ -1,5 +1,8 @@
 .. Copyright (C) 2018 Wazuh, Inc.
 
+.. meta::
+  :description: Learn more about the Fluentd forwarder module that allows the forwarding of the received messages from a dedicated UDP socket to a Fluentd server.
+
 .. _fluent-forwarder:
 
 Fluentd forwarder

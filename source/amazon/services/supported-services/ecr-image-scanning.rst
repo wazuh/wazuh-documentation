@@ -10,7 +10,7 @@ Amazon ECR Image scanning
 
 .. versionadded:: 4.3.0
 
-`Amazon ECR image scanning <https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html>`_ uses the Common Vulnerabilities and Exposures (CVEs) database from the open-source `Clair project <https://github.com/quay/clair>`_ to detect software vulnerabilities in container images and provide a list of scan findings, which can be easily integrated into Wazuh thanks to the :ref:`AWS CloudWatch Logs integration <aws_cloudwatchlogs>`.
+`Amazon ECR image scanning <https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html>`_ uses the Common Vulnerabilities and Exposures (CVEs) database from the open-source `Clair project <https://github.com/quay/clair>`_ to detect software vulnerabilities in container images and provide a list of scan findings, which can be easily integrated into Wazuh thanks to the :doc:`AWS CloudWatch Logs integration </amazon/services/supported-services/cloudwatchlogs>`.
 
 Amazon ECR sends an event to Amazon EventBridge when an image scan is completed. The event itself is only a summary and does not contain the details of the scan findings. However, it is possible to configure a Lambda function to request the scan findings details and store them in CloudWatch Logs. Here is a quick summary of how the workflow looks like:
 
@@ -84,7 +84,7 @@ Wazuh configuration
       </wodle>
 
     .. note::
-      Check the :ref:`AWS CloudWatch Logs integration <aws_cloudwatchlogs>` to learn more about how the CloudWatch Logs integration works.
+      Check the :doc:`AWS CloudWatch Logs integration </amazon/services/supported-services/cloudwatchlogs>` to learn more about how the CloudWatch Logs integration works.
 
 #. Restart Wazuh to apply the configuration changes.
 

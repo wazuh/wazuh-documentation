@@ -52,7 +52,6 @@ When upgrading a multi-node Wazuh manager cluster, run the upgrade in every node
 
 #. Upgrade the Wazuh manager to the latest version.
 
-
    .. tabs::
 
       .. group-tab:: Yum
@@ -67,7 +66,7 @@ When upgrading a multi-node Wazuh manager cluster, run the upgrade in every node
 
             # apt-get install wazuh-manager
 
-    .. note::
+   .. note::
 
       If the ``/var/ossec/etc/ossec.conf`` configuration file was modified, it will not be replaced by the upgrade. You will therefore have to add the settings of the new capabilities manually. More information can be found in :doc:`/user-manual/index`.      
 
@@ -111,28 +110,28 @@ Preparations
 
 #. Before the upgrade process, it is important to ensure that the Wazuh repository is disabled, as it contains Filebeat packages used by Open Distro for Elasticsearch distribution, which might be accidentally installed instead of the Elastic package. In case of having enabled the Wazuh repository, it can be disabled using:
 
-  .. tabs::
-
-    .. group-tab:: Yum
-
-      .. code-block:: console
-
-        # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
-
-    .. group-tab:: APT
-
-      .. code-block:: console
-
-        # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/wazuh.list
-        # apt-get update
-
-    .. group-tab:: ZYpp
-
-      .. code-block:: console
-
-        # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/wazuh.repo
-
-
+    .. tabs::
+ 
+     .. group-tab:: Yum
+ 
+       .. code-block:: console
+ 
+         # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
+ 
+     .. group-tab:: APT
+ 
+       .. code-block:: console
+ 
+         # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/wazuh.list
+         # apt-get update
+ 
+     .. group-tab:: ZYpp
+ 
+       .. code-block:: console
+ 
+         # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/wazuh.repo
+ 
+ 
 Upgrade
 ^^^^^^^
 
@@ -278,9 +277,9 @@ The following steps need to be run in the Wazuh server or servers in the case of
 
 #. Upload the new Wazuh template to Elasticsearch. This step can be omitted in Wazuh single-node installations:
 
-  .. code-block:: console
+   .. code-block:: console
 
-    # filebeat setup --index-management -E output.logstash.enabled=false
+      # filebeat setup --index-management -E output.logstash.enabled=false
 
 
 Upgrading Kibana

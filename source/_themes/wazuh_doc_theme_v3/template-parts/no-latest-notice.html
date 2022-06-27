@@ -1,3 +1,4 @@
+{% if theme_breadcrumb_root_title == 'Documentation' %}
 {%- set nav_version = version %}
 {% if current_version %}
   {%- set nav_version = current_version %}
@@ -9,4 +10,5 @@
     <span class="no-latest-text-wrapper"> This documentation does not apply to the most recent version of Wazuh. Check out the docs for <a class="link-latest" href="#">the latest version</a>.</span>
   </div>
 </div>
+{% endif %}
 {% endif %}

@@ -51,7 +51,7 @@ Currently, Wazuh supports more than 3k rules that accomplish technologies such:
 - Junos
 - Panda Advanced Protection Service (PAPS)
 - CheckPoint Smart-1 Firewalls
-- MacOS SSH
+- macOS SSH
 - Google Cloud Pub/Sub
 
 

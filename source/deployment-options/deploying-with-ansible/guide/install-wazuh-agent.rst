@@ -16,8 +16,8 @@ We can install the Wazuh agent on endpoints using the roles and playbooks availa
 .. note::
 
 	- 	SSH key-pairing should already be configured between the ansible deployment server and the endpoints.
-	- 	The endpoints where the agent will be deployed to will be added to the Ansible hosts file under the ``[wazuh-agents]`` hosts group.
-	- 	This playbook does not support deploying Wazuh agents to Windows and MacOS endpoints.
+	- 	Add the endpoints where the agent will be deployed in the Ansible hosts file under the ``[wazuh-agents]`` hosts group.
+	- 	This playbook does not support deploying Wazuh agents to Windows and macOS endpoints.
 
 1 - Accessing the wazuh-ansible directory
 -----------------------------------------
@@ -120,7 +120,7 @@ Let’s take a closer look at the content.
 There are several variables we can use to customize the installation or configuration. If we want to change the default configuration:
 
 - 	We can change the ``/etc/ansible/roles/wazuh-ansible/roles/wazuh/ansible-wazuh-agent/defaults/main.yml`` file directly.
-- 	Alternatively, we can create another YAML file with the content we want to change in the configuration. If we would like to do this, we can find more information at :doc:`Wazuh agent role <../roles/wazuh-agent>`.
+- 	Alternatively, we can create another YAML file with the content we want to change in the configuration. If we want to do this, we can find more information about the :doc:`Wazuh agent role <../roles/wazuh-agent>`.
 
 More details on default configuration variables can be found in the :doc:`variables references section <../reference>`.
 

@@ -89,7 +89,7 @@ By default, when Wazuh starts it will only read all log content from Office365 s
 interval
 ^^^^^^^^
 
-Interval between Wazuh wodle executions.
+The interval between Wazuh wodle executions.
 
 +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | 10m                                                                                                                                     |
