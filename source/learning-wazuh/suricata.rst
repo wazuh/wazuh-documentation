@@ -46,7 +46,7 @@ Trigger NIDS alerts on your Linux agent
 
     .. code-block:: console
 
-        # curl -sSL https://raw.githubusercontent.com/3CORESec/testmynids.org/master/tmNIDS -o /tmp/tmNIDS && chmod +x /tmp/tmNIDS && /tmp/tmNIDS -1
+        # curl -s http://testmynids.org/uid/index.html
 
 #. On the agent, look at the latest alert in both the standard Suricata alert log and also in the JSON alert log.
 
@@ -211,7 +211,7 @@ configuration facility.  This is a powerful feature that makes it feasible to ma
 See Suricata NIDS events in the Wazuh dashboard
 -----------------------------------------------
 
-#. On your Linux agent, rerun the NIDS-tripping command again: ``/tmp/tmNIDS -1``
+#. On your Linux agent, rerun the NIDS-tripping command again: ``curl -s http://testmynids.org/uid/index.html``
 
 #. Search the Wazuh dashboard for ``rule.id:86601``.  That is the rule that notices Suricata alerts.  Pick these fields for readability:
 
@@ -329,7 +329,7 @@ You may have noticed that there were no Geolocation fields in the Wazuh dashboar
 
     .. code-block:: console
 
-        # /tmp/tmNIDS -1
+        # curl -s http://testmynids.org/uid/index.html
 
 #. Look through the new Suricata events in the Wazuh dashboard, observing they now have source geoip fields populated.  Private IP addresses of course cannot be geolocated.
 
