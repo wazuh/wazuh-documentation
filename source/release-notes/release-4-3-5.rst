@@ -71,6 +71,14 @@ Wazuh Splunk app
 - `#1276 <https://github.com/wazuh/wazuh-splunk/pull/1276>`_ A disabled state to the Apply changes button on the Agents group editor when no changes on the group are made  is added.
 
 
+Packages
+^^^^^^^^
+
+- `#1635 <https://github.com/wazuh/wazuh-packages/pull/1635>`_ The dependencies from the wazuh-indexer package are removed.
+- `#1663 <https://github.com/wazuh/wazuh-packages/pull/1663>`_ How the password tool changes the API passwords and applies the changes to the installation assistant is improved.
+
+
+
 Resolved issues
 ---------------
 
@@ -183,6 +191,16 @@ Reference                                                         Description
 `#1343 <https://github.com/wazuh/wazuh-splunk/pull/1343>`_        The Alerts view from the MITRE section has been hardened in case of errors during the requests to the API (for example timeouts).
 ==============================================================    =============
 
+Packages
+^^^^^^^^
+
+==============================================================    =============
+Reference                                                         Description
+==============================================================    =============
+`#1673 <https://github.com/wazuh/wazuh-packages/pull/1673>`_      The error with the installation of the file init.d to enable Wazuh service in RHEL 9 systems is fixed.
+`#1674 <https://github.com/wazuh/wazuh-packages/pull/1674>`_      The error with the installation of the file init.d to enable Wazuh service in RHEL 9 systems is fixed. 
+`#1675 <https://github.com/wazuh/wazuh-packages/pull/1675>`_      The error with the installation of the file sysv-init to enable Wazuh service in RHEL 9 systems is fixed. 
+==============================================================    =============
 
 
 Changelogs
