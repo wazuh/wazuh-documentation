@@ -114,14 +114,14 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
             .. code-block:: console
 
-                # cd wazuh-|WAZUH_LATEST_FROM_SOURCES|
+                # cd wazuh-|WAZUH_CURRENT_FROM_SOURCES|
                 # ./install.sh
 
             If you have previously compiled for another platform, you must clean the build using the Makefile in ``src``:
 
             .. code-block:: console
 
-                # cd wazuh-|WAZUH_LATEST_FROM_SOURCES|
+                # cd wazuh-|WAZUH_CURRENT_FROM_SOURCES|
                 # make -C src clean
                 # make -C src clean-deps
 
@@ -244,7 +244,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
             .. code-block:: doscon
 
-                > cd wazuh-|WAZUH_LATEST_FROM_SOURCES|\src\win32
+                > cd wazuh-|WAZUH_CURRENT_FROM_SOURCES|\src\win32
                 > .\wazuh-installer-build-msi.bat
 
             If you do not want to sign the installer, you will have to comment or delete the signtool line in the previous script.
@@ -310,7 +310,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
             .. code-block:: console
 
-                # cd wazuh-|WAZUH_LATEST_FROM_SOURCES|
+                # cd wazuh-|WAZUH_CURRENT_FROM_SOURCES|
                 # USER_DIR="/Library/Ossec" ./install.sh
 
             .. note::
@@ -321,7 +321,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
             .. code-block:: console
 
-                # cd wazuh-|WAZUH_LATEST_FROM_SOURCES|
+                # cd wazuh-|WAZUH_CURRENT_FROM_SOURCES|
                 # make -C src clean
                 # make -C src clean-deps
 
@@ -441,7 +441,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
             .. code-block:: console
 
-                # cd wazuh-|WAZUH_LATEST_FROM_SOURCES|
+                # cd wazuh-|WAZUH_CURRENT_FROM_SOURCES|
                 # cd src
                 # gmake clean-deps
                 # gmake clean
@@ -588,7 +588,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
             .. code-block:: console
 
-                # cd wazuh-|WAZUH_LATEST_FROM_SOURCES|
+                # cd wazuh-|WAZUH_CURRENT_FROM_SOURCES|
                 # /usr/local/bin/gmake -C src deps RESOURCES_URL=http://packages.wazuh.com/deps/14 TARGET=agent
                 # /usr/local/bin/gmake -C src TARGET=agent USE_SELINUX=no
 

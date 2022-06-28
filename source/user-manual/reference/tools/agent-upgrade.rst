@@ -85,8 +85,8 @@ Examples
    Upgrading...
 
    Upgraded agents:
-       Agent 001 upgraded: Wazuh v4.2.0 -> |WAZUH_LATEST|
-       Agent 002 upgraded: Wazuh v4.0.0 -> |WAZUH_LATEST|
+       Agent 001 upgraded: Wazuh v4.2.0 -> |WAZUH_CURRENT|
+       Agent 002 upgraded: Wazuh v4.0.0 -> |WAZUH_CURRENT|
 
 
 * Upgrade agent using a custom repository:
