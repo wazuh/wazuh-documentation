@@ -99,7 +99,7 @@ main {
               display: inline-block;
               width: 48px;
               height: 22px;
-              content: "More";
+              content: "Less";
             }
 
             &::after {
@@ -118,6 +118,9 @@ main {
           &.collapsed {
             ul {
               position: relative;
+            }
+            .toggle::before {
+              content: "More";
             }
             .toggle::after {
               transform: rotateX(0);
