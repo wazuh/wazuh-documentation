@@ -32,12 +32,6 @@ Ruleset
 - `#13567 <https://github.com/wazuh/wazuh/pull/13567>`_ Deprecated MITRE tags in rules are removed.
 
 
-Other
-^^^^^
-- `#13811 <https://github.com/wazuh/wazuh/pull/13811>`_ The ``test_agent_PUT_endpoints.tavern.yaml`` API integration test failure in numbered branches is fixed.
-- `#13790 <https://github.com/wazuh/wazuh/pull/13790>`_ The external click and clickclick python dependencies to 8.1.3 and 20.10.2 respectively are upgraded.
-
-
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
 - `#4244 <https://github.com/wazuh/wazuh-kibana-app/pull/4244>`_ When a user goes to test a new rule in Tools -> Ruleset Test, we were getting API messages that were not displayed. Now if there are messages they are displayed on the screen.
@@ -77,6 +71,11 @@ Packages
 - `#1635 <https://github.com/wazuh/wazuh-packages/pull/1635>`_ The dependencies from the wazuh-indexer package are removed.
 - `#1663 <https://github.com/wazuh/wazuh-packages/pull/1663>`_ How the password tool changes the API passwords and applies the changes to the installation assistant is improved.
 
+
+Other
+^^^^^
+- `#13811 <https://github.com/wazuh/wazuh/pull/13811>`_ The ``test_agent_PUT_endpoints.tavern.yaml`` API integration test failure in numbered branches is fixed.
+- `#13790 <https://github.com/wazuh/wazuh/pull/13790>`_ The external click and clickclick python dependencies to 8.1.3 and 20.10.2 respectively are upgraded.
 
 
 Resolved issues
@@ -208,7 +207,7 @@ Changelogs
 
 More details about these changes are provided in the changelog of each component:
 
-- `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v4.3.5-rc1/CHANGELOG.md>`_
+- `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v4.3.5/CHANGELOG.md>`_
 - `wazuh/wazuh-dashboard <https://github.com/wazuh/wazuh-kibana-app/blob/v4.3.5-1.2.0-wzd/CHANGELOG.md>`_
 - `wazuh/wazuh-kibana-app 7.10.2 <https://github.com/wazuh/wazuh-kibana-app/blob/v4.3.5-7.10.2/CHANGELOG.md>`_
 - `wazuh/wazuh-kibana-app 7.17.x <https://github.com/wazuh/wazuh-kibana-app/blob/v4.3.5-7.17.4/CHANGELOG.md>`_
