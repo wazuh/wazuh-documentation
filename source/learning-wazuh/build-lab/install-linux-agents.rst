@@ -29,7 +29,6 @@ Add the Wazuh yum repository
          protect=1
          EOF
 
-
 Install and connect the Wazuh agent to the manager
 --------------------------------------------------
 
@@ -37,12 +36,11 @@ Install and connect the Wazuh agent to the manager
 
    .. code-block:: console
 
-      # WAZUH_MANAGER="172.30.0.10" WAZUH_REGISTRATION_PASSWORD="please123" \
-      yum -y install wazuh-agent
+      # WAZUH_MANAGER="<WAZUH_MANAGER_IP_ADDRESS>" WAZUH_REGISTRATION_PASSWORD="please123" yum -y install wazuh-agent
 
 #. Enable and start the Wazuh agent service.
 
-   .. include:: ../../_templates/installations/wazuh/common/enable_wazuh_agent_service.rst    
+   .. include:: /_templates/installations/wazuh/common/enable_wazuh_agent_service.rst    
 
 #. Verify the agent has properly connected:
 
@@ -58,7 +56,8 @@ Install and connect the Wazuh agent to the manager
       status='connected'
 
 .. note::
-  The ``/var/ossec/var/run/wazuh-agentd.state`` file on Unix-like platforms and the ``C:\Program Files (x86)\ossec-agent\wazuh-agent.state`` file on Windows platforms contain several useful pieces of information about the state of the Wazuh agent connection with the Wazuh manager.  See the file content itself for more information.
+   
+   The ``wazuh-agentd.state`` file contains several useful pieces of information about the state of the Wazuh agent connection with the Wazuh manager.  See the file content itself for more information.
 
 Now disable the Wazuh repository in order to prevent a future unintended upgrade that may cause a version conflict with the current installation.
 
