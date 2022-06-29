@@ -21,7 +21,8 @@ Configuration options for file integrity monitoring:
 - `alert_new_files`_
 - `allow_remote_prefilter_cmd`_
 - `database`_
-- `db_entry_limit`_
+- `file_limit`_
+- `registry_limit`_
 - `diff`_
 - `directories`_
 - `disabled`_
@@ -648,20 +649,18 @@ Example:
 
 
 
-db_entry_limit
+file_limit
 --------------
 
-Specifies a limit on the number of entries that will be monitored by FIM. Entries created when the database has reached the limit will be ignored.
-In Windows agents, the monitored files and registries are handled by different limits.
+Specifies a limit on the number of files that will be monitored by FIM. Files added when the database has reached the limit will be ignored.
 
 .. code-block:: xml
 
-    <!-- Maximum entries in the FIM database -->
-    <db_entry_limit>
+    <!-- Maximum number of files to be monitored -->
+    <file_limit>
       <enabled>yes</enabled>
-      <files>100000</files>
-      <registries>100000</registries>
-    </db_entry_limit>
+      <entries>100000</entries>
+    </file_limit>
 
 
 **enabled**
@@ -675,9 +674,9 @@ Specifies whether there will be a limit on the number of monitored entries.
 +--------------------+---------------------------------------+
 
 
-**files**
+**entries**
 
-Specifies the maximun number of files to be monitored.
+Specifies the maximum number of files to be monitored.
 
 +--------------------+------------------------------------------+
 | **Default value**  | 100000                                   |
@@ -686,9 +685,35 @@ Specifies the maximun number of files to be monitored.
 +--------------------+------------------------------------------+
 
 
-**registries**
+registry_limit
+--------------
 
-Specifies the maximun number of registry values to be monitored.
+Specifies a limit on the number of registry entries that will be monitored by syscheck. Registry values created when the database has reached the limit will be ignored.
+This option only applies to Windows.
+
+.. code-block:: xml
+
+    <!-- Maximum number of registries to be monitored -->
+    <registry_limit>
+      <enabled>yes</enabled>
+      <entries>100000</entries>
+    </registry_limit>
+
+
+**enabled**
+
+Specifies whether there will be a limit on the number of monitored entries.
+
++--------------------+---------------------------------------+
+| **Default value**  | yes                                   |
++--------------------+---------------------------------------+
+| **Allowed values** | yes/no                                |
++--------------------+---------------------------------------+
+
+
+**entries**
+
+Specifies the maximum number of files to be monitored.
 
 +--------------------+------------------------------------------+
 | **Default value**  | 100000                                   |
@@ -742,7 +767,7 @@ this parameter is ignored.
 Specifies the elapsed time between every inventory synchronization.
 
 +--------------------+----------------------------------------------------------------------+
-| **Default value**  | 5 m                                                                |
+| **Default value**  | 5 m                                                                  |
 +--------------------+----------------------------------------------------------------------+
 | **Allowed values** | Any number greater than or equal to 0. Allowed sufixes (s, m, h, d). |
 +--------------------+----------------------------------------------------------------------+
