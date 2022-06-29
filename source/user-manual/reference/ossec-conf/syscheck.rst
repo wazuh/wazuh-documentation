@@ -710,6 +710,10 @@ The database synchronization settings are configured inside this tag.
     <synchronization>
       <enabled>yes</enabled>
       <interval>5m</interval>
+      <max_interval>1h</max_interval>
+      <response_timeout>30</response_timeout>
+      <queue_size>16384</queue_size>
+      <thread_pool>1</thread_pool>
       <max_eps>10</max_eps>
     </synchronization>
 
@@ -739,24 +743,44 @@ this parameter is ignored.
 
 **interval**
 
-Specifies the elapsed time between every inventory synchronization.
+Specifies the initial number of seconds between every inventory synchronization. If synchronization fails the value will be duplicated until it reaches the value of ``max_interval``.
 
 +--------------------+----------------------------------------------------------------------+
-| **Default value**  | 5 m                                                                |
+| **Default value**  | 5 m                                                                  |
 +--------------------+----------------------------------------------------------------------+
 | **Allowed values** | Any number greater than or equal to 0. Allowed sufixes (s, m, h, d). |
 +--------------------+----------------------------------------------------------------------+
 
-**min_interval**
+**response_timeout**
 
-Defines the minimum interval between two synchronizations. A new sync process is blocked if less than ``min_interval``
-seconds have elapsed since the last sync message was sent by the agent.
+Specifies the time elapsed in seconds since the agent sends the message to the manager and receives the response.
+If the response is not received in this interval, the message is marked as unanswered (timed-out) and the agent may start a new synchronization session at the defined interval.
 
 +--------------------+----------------------------------------------------------------------+
-| **Default value**  | 1 m                                                                  |
+| **Default value**  | 30 s                                                                 |
 +--------------------+----------------------------------------------------------------------+
 | **Allowed values** | Any number between 0 and ``interval``. Allowed sufixes (s, m, h, d). |
 +--------------------+----------------------------------------------------------------------+
+
+**queue_size**
+
+Specifies the queue size of the manager synchronization responses.
+
++--------------------+---------------------------------------+
+| **Default value**  | 16384                                 |
++--------------------+---------------------------------------+
+| **Allowed values** | Integer number between 2 and 1000000. |
++--------------------+---------------------------------------+
+
+**thread_pool**
+
+Specifices the number of thread used by the FIM database synchronization.
+
++--------------------+---------------------------------------+
+| **Default value**  | 1                                     |
++--------------------+---------------------------------------+
+| **Allowed values** | Integer number between 1 and 32767.   |
++--------------------+---------------------------------------+
 
 **max_eps**
 
