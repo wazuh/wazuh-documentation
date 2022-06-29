@@ -652,7 +652,7 @@ Example:
 file_limit
 --------------
 
-Specifies a limit on the number of files that will be monitored by syscheck. Files created when the database has reached the limit will be ignored.
+Specifies a limit on the number of files that will be monitored by FIM. Files added when the database has reached the limit will be ignored.
 
 .. code-block:: xml
 
@@ -676,7 +676,7 @@ Specifies whether there will be a limit on the number of monitored entries.
 
 **entries**
 
-Specifies the maximun number of files to be monitored.
+Specifies the maximum number of files to be monitored.
 
 +--------------------+------------------------------------------+
 | **Default value**  | 100000                                   |
@@ -688,7 +688,7 @@ Specifies the maximun number of files to be monitored.
 registry_limit
 --------------
 
-Specifies a limit on the number of registry values that will be monitored by syscheck. Registry values created when the database has reached the limit will be ignored.
+Specifies a limit on the number of registry entries that will be monitored by syscheck. Registry values created when the database has reached the limit will be ignored.
 This option only applies to Windows.
 
 .. code-block:: xml
@@ -713,7 +713,7 @@ Specifies whether there will be a limit on the number of monitored entries.
 
 **entries**
 
-Specifies the maximun number of files to be monitored.
+Specifies the maximum number of files to be monitored.
 
 +--------------------+------------------------------------------+
 | **Default value**  | 100000                                   |
