@@ -12,10 +12,18 @@
 @import "../parts/header";
 @import "../parts/footer";
 
+.index {
+  header .mobile-secondary-header {
+    @include media-max(xl){
+      display: none;
+    }
+  }
+}
+
 body {
-  margin-top: $index-header-height-xl + $header-height-xs;
+  margin-top: $header-height-xs;
   @include media-min(xl){
-    margin-top: $index-header-height-xl + $header-height-xl;
+    margin-top: $header-height-xl;
   }
 }
 
@@ -28,18 +36,14 @@ header .navbar-nav .dropdown-menu {
 }
 
 #large-search-box {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  z-index: 1020;
-  top: $header-height-xs;
+
+  // top: $header-height-xs;
   display: flex;
   flex-direction: column;
   justify-content: center;
   height: $index-header-height-xs;
   @include media-min(xl){
-    top: $header-height-xl;
+    // top: $header-height-xl;
     height: $index-header-height-xl;
   }
   @include media-max(lg){
@@ -569,7 +573,10 @@ main {
     }
   }
   #large-search-box {
-    background: $dark-color-index-header-background;
+    background: $dark-color-sidebar-space;
+    .form-control {
+      background: $dark-color-sidebar-space;
+    }
   }
 
   /* Getting started */
