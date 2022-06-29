@@ -18,11 +18,11 @@ This release includes new features or enhancements as the following:
 
 Wazuh manager
 ^^^^^^^^^^^^^
-- `#13915 <https://github.com/wazuh/wazuh/pull/13915>`_ The Vulnerability Detector log when the agent OS data is unavailable is improved.
+- `#13915 <https://github.com/wazuh/wazuh/pull/13915>`_ The Vulnerability Detector log is improved when the agent OS data is unavailable.
 
 Wazuh agent
 ^^^^^^^^^^^
-- `#13749 <https://github.com/wazuh/wazuh/pull/13749>`_ Package data support in `Syscollector` for modern RPM agents is extended.
+- `#13749 <https://github.com/wazuh/wazuh/pull/13749>`_ Package data support is extended in `Syscollector` for modern RPM agents.
 - `#13898 <https://github.com/wazuh/wazuh/pull/13898>`_ Verbosity of the GitHub module logs is improved.
 
 
@@ -61,7 +61,7 @@ Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
 Wazuh Splunk app
 ^^^^^^^^^^^^^^^^
 - `#1292 <https://github.com/wazuh/wazuh-splunk/pull/1292>`_ The status Pending to the Agents sections is added.
-- `#1276 <https://github.com/wazuh/wazuh-splunk/pull/1276>`_ A disabled state to the Apply changes button on the Agents group editor when no changes on the group are made is added.
+- `#1276 <https://github.com/wazuh/wazuh-splunk/pull/1276>`_ A disabled state to the **Apply changes** button on the Agents group editor is added when no changes on the group are made.
 
 
 Packages
