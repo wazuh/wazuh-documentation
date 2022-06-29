@@ -43,7 +43,7 @@ is_latest_release = True
 # The full version, including alpha/beta/rc tags
 # Important: use a valid branch (4.0) or, preferably, tag name (v4.0.0)
 release = '4.3'
-api_tag = 'v4.3.4'
+api_tag = 'v4.3.5'
 apiURL = 'https://raw.githubusercontent.com/wazuh/wazuh/'+api_tag+'/api/api/spec/spec.yaml'
 
 # -- General configuration ------------------------------------------------
@@ -479,30 +479,30 @@ def customReplacements(app, docname, source):
 
 custom_replacements = {
     "|CURRENT_MAJOR|" : "4.x",
-    "|WAZUH_LATEST|" : "4.3.4",
+    "|WAZUH_LATEST|" : "4.3.5",
     "|WAZUH_LATEST_MINOR|" : "4.3",
     "|WAZUH_PACKAGES_BRANCH|" : "4.3",
-    "|WAZUH_INDEXER_CURRENT|" : "4.3.4",
+    "|WAZUH_INDEXER_CURRENT|" : "4.3.5",
     "|WAZUH_INDEXER_CURRENT_REV|" : "1",
     "|WAZUH_INDEXER_x64_RPM|" : "x86_64",
     "|WAZUH_INDEXER_x64_DEB|" : "amd64",
-    "|WAZUH_DASHBOARD_CURRENT|" : "4.3.4",
+    "|WAZUH_DASHBOARD_CURRENT|" : "4.3.5",
     "|WAZUH_DASHBOARD_CURRENT_REV_RPM|" : "1",
     "|WAZUH_DASHBOARD_CURRENT_REV_DEB|" : "1",
     "|WAZUH_DASHBOARD_x64_RPM|" : "x86_64",
     "|WAZUH_DASHBOARD_x64_DEB|" : "amd64",
-    "|WAZUH_LATEST_ANSIBLE|" : "4.3.4",
+    "|WAZUH_LATEST_ANSIBLE|" : "4.3.5",
     "|WAZUH_LATEST_MINOR_ANSIBLE|" : "4.3",
-    "|WAZUH_LATEST_KUBERNETES|" : "4.3.4",
-    "|WAZUH_LATEST_PUPPET|" : "4.3.4",
-    "|WAZUH_LATEST_OVA|" : "4.3.4",
-    "|WAZUH_LATEST_AMI|" : "4.3.4",
-    "|WAZUH_LATEST_DOCKER|" : "4.3.4",
-    "|WAZUH_LATEST_AIX|" : "4.3.4",
+    "|WAZUH_LATEST_KUBERNETES|" : "4.3.5",
+    "|WAZUH_LATEST_PUPPET|" : "4.3.5",
+    "|WAZUH_LATEST_OVA|" : "4.3.5",
+    "|WAZUH_LATEST_AMI|" : "4.3.5",
+    "|WAZUH_LATEST_DOCKER|" : "4.3.5",
+    "|WAZUH_LATEST_AIX|" : "4.3.5",
     "|WAZUH_LATEST_MINOR_AIX|" : "4.3",
-    "|WAZUH_LATEST_FROM_SOURCES|" : "4.3.4",
+    "|WAZUH_LATEST_FROM_SOURCES|" : "4.3.5",
     "|WAZUH_LATEST_MINOR_FROM_SOURCES|" : "4.3",
-    "|WAZUH_LATEST_WIN_FROM_SOURCES|" : "4.3.4",
+    "|WAZUH_LATEST_WIN_FROM_SOURCES|" : "4.3.5",
     "|WAZUH_LATEST_WIN_REV_FROM_SOURCES|" : "1",
     "|OPEN_DISTRO_LATEST|" : "1.13.2",
     "|ELASTICSEARCH_LATEST|" : "7.10.2",
@@ -518,7 +518,7 @@ custom_replacements = {
     "|OPENDISTRO_LATEST_KUBERNETES|" : "1.13.2",
     "|DOCKER_COMPOSE_VERSION|" : "1.28.3",
     "|SPLUNK_LATEST|" : "8.2.6",
-    "|WAZUH_SPLUNK_LATEST|" : "4.3.4",
+    "|WAZUH_SPLUNK_LATEST|" : "4.3.5",
     "|ELASTIC_6_LATEST|" : "6.8.8",
     "|WAZUH_REVISION_DEB_AGENT_PPC|" : "1",
     "|WAZUH_REVISION_YUM_AGENT_PPC|" : "1",
