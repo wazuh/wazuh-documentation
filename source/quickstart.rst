@@ -86,6 +86,8 @@ Installing Wazuh
 
 When you access the Wazuh dashboard for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. This is expected and the user has the option to accept the certificate as an exception or, alternatively, configure the system to use a certificate from a trusted authority.
 
+You can find the passwords for all the Wazuh indexer and Wazuh API users in the ``passwords.wazuh`` file inside ``wazuh-install-files.tar``.
+
 If you want to uninstall the Wazuh central components, run the Wazuh installation assistant using the option ``-u`` or ``–-uninstall``.
 
 Next steps
