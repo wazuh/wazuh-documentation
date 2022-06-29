@@ -23,13 +23,21 @@ All the available options to run the script are:
 +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
 | Options                                      | Purpose                                                                                                     |
 +==============================================+=============================================================================================================+
-| -a / --change-all                            | Changes all the Wazuh indexer user passwords and prints them on screen.                                     |
+| -a / --change-all                            | Changes all the Wazuh indexer and Wazuh API user passwords and prints them on screen.                       |
+|                                              | To change API passwords -au|--admin-user and -ap|--admin-password are required                              |
 +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
-| -p / --password <password>                   | Indicates the new password, must be used with option -u.                                                    |
-+----------------------------------------------+-------------------------------------------------------------------------------------------------------------+    
+| -A,  --api                                   | Change the Wazuh API password given the current password.                                                   |
+|                                              | Requires -u|--user, and -p|--password, -au|--admin-user and -ap|--admin-password.                           |
++----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
+| -au,--admin-user <adminUser>                 | Admin user for Wazuh API, Required to change Wazuh API passwords.                                           |
++----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
+| -ap, --admin-password <adminPassword>        | Password for Wazuh API admin user, Required to change Wazuh API passwords.                                  |
++----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
 | -u / --user <user>                           | Indicates the name of the user whose password will be changed.                                              |
 |                                              | If no password is specified, it will generate a random one                                                  |
 +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
+| -p / --password <password>                   | Indicates the new password, must be used with option -u.                                                    |
++----------------------------------------------+-------------------------------------------------------------------------------------------------------------+    
 | -c / --cert <route-admin-certificate>        | Indicates route to the admin certificate                                                                    |
 +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
 | -k / --certkey <route-admin-certificate-key> | Indicates route to the admin certificate key                                                                |
@@ -37,11 +45,18 @@ All the available options to run the script are:
 | -v / --verbose                               | Shows the complete script execution output                                                                  |
 +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
 | -f / --file <password_file.yml>              | Changes the passwords for the ones given in the file.                                                       |
-|                                              |   Each user has to have this format.                                                                        |
 |                                              |                                                                                                             |
-|                                              |      # Description                                                                                          |
-|                                              |        username: <user>                                                                                     |
-|                                              |        password: <password>                                                                                 |
+|                                              | Wazuh indexer users must have this format                                                                   |
+|                                              |                                                                                                             |
+|                                              |    # Description                                                                                            |
+|                                              |      indexer_username: <user>                                                                               |
+|                                              |      indexer_password: <password>                                                                           |
+|                                              |                                                                                                             |
+|                                              | Wazuh API users must have this format                                                                       |
+|                                              |                                                                                                             | 
+|                                              |    # Description                                                                                            |
+|                                              |     api_username: <user>                                                                                    |
+|                                              |      api_password: <password>                                                                               |
 +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
 | -gf, --generate-file <passwords.wazuh>       | Generate password file with random passwords for standard users                                             |
 +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
@@ -89,22 +104,32 @@ This is the output of the script:
     28/04/2022 10:25:31 INFO: The password for user wazuh_user is oCwLLG88wb7x5OpnxOPjclVpqWgq9s7W
     28/04/2022 10:25:31 WARNING: Passwords changed. Remember to update the password in the Wazuh dashboard and Filebeat nodes if necessary, and restart the services.
 
+If the options ``-au`` and ``-ap`` are used and Wazuh manager is installed the script will also change the passwords for the API users.
+
 Change the passwords using a formatted file
 --------------------------------------------
 
 To use a formatted file to indicate the passwords, run the script with the ``-f`` option followed by the file path. Use the following pattern to indicate the users and passwords in the formatted file: 
 
+For Wazuh indexer users, the file must have this format:
+
   .. code-block:: none
 
-    User: 
-        name: wazuh
-        password: <password_wazuh>
+    # Description
+      indexer_username: <user>
+      indexer_password: <password>
 
-    User: 
-        name: kibanaserver
-        password: <password_kibanaserver>
+For Wazuh API users, the file must have this format:
+
+  .. code-block:: none
+
+    # Description
+      api_username: <user>
+      api_password: <password>
 
 If the ``-a`` option is used in combination with the ``-f`` option, all users not included in the file are given a random password.
+
+The options ``-au`` and ``-ap`` are necessary to change the passwords for the API users.
 
 In distributed deployments you will need to change the passwords in the nodes running Wazuh dashboard and Filebeat, you can use ``wazuh-passwords-tool.sh`` to do this.
 
