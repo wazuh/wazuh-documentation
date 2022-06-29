@@ -16,7 +16,6 @@ What's new
 
 This release includes new features or enhancements as the following:
 
-
 Wazuh manager
 ^^^^^^^^^^^^^
 - `#13915 <https://github.com/wazuh/wazuh/pull/13915>`_ The Vulnerability Detector's log when the agent's OS data is unavailable is improved.
@@ -34,28 +33,28 @@ Ruleset
 
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
-- `#4244 <https://github.com/wazuh/wazuh-kibana-app/pull/4244>`_ When a user goes to test a new rule in Tools / Ruleset Test, there were API messages that were not displayed. Now, this issue is fixed and the messages are displayed on the screen.
-- `#4261 <https://github.com/wazuh/wazuh-kibana-app/pull/4261>`_ An authorization prompt is added in MITRE > Intelligence.
-- `#4239 <https://github.com/wazuh/wazuh-kibana-app/pull/4239>`_ The reference from Manager is changed to the Wazuh server in the guide to deploying a new agent.
-- `#4267 <https://github.com/wazuh/wazuh-kibana-app/pull/4267>`_ The filtered tags because they were not supported by the API endpoint are removed.
+- `#4244 <https://github.com/wazuh/wazuh-kibana-app/pull/4244>`_ When a user goes to test a new rule in **Tools** / **Ruleset Test**, there were API messages that were not displayed. Now, this issue is fixed and the messages are displayed on the screen.
+- `#4261 <https://github.com/wazuh/wazuh-kibana-app/pull/4261>`_ An authorization prompt is added in **MITRE** > **Intelligence**.
+- `#4239 <https://github.com/wazuh/wazuh-kibana-app/pull/4239>`_ The reference from Manager is changed to the Wazuh server in the **Deploy new agent** guide.
+- `#4267 <https://github.com/wazuh/wazuh-kibana-app/pull/4267>`_ The filtered tags are removed because they were not supported by the API endpoint.
 - `#4254 <https://github.com/wazuh/wazuh-kibana-app/pull/4254>`_ The styles in visualizations are changed.
 
 
 Wazuh Kibana plugin for Kibana 7.10.2
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-- `#4244 <https://github.com/wazuh/wazuh-kibana-app/pull/4244>`_ When a user goes to test a new rule in Tools / Ruleset Test, there were API messages that were not displayed. Now, this issue is fixed and the messages are displayed on the screen.
-- `#4261 <https://github.com/wazuh/wazuh-kibana-app/pull/4261>`_ An authorization prompt is added in MITRE > Intelligence.
-- `#4239 <https://github.com/wazuh/wazuh-kibana-app/pull/4239>`_ The reference from Manager is changed to the Wazuh server in the guide to deploying a new agent.
-- `#4267 <https://github.com/wazuh/wazuh-kibana-app/pull/4267>`_ The filtered tags because they were not supported by the API endpoint are removed.
+- `#4244 <https://github.com/wazuh/wazuh-kibana-app/pull/4244>`_ When a user goes to test a new rule in **Tools** / **Ruleset Test**, there were API messages that were not displayed. Now, this issue is fixed and the messages are displayed on the screen.
+- `#4261 <https://github.com/wazuh/wazuh-kibana-app/pull/4261>`_ An authorization prompt is added in **MITRE** > **Intelligence**.
+- `#4239 <https://github.com/wazuh/wazuh-kibana-app/pull/4239>`_ The reference from Manager is changed to the Wazuh server in the **Deploy new agent** guide. 
+- `#4267 <https://github.com/wazuh/wazuh-kibana-app/pull/4267>`_ The filtered tags are removed because they were not supported by the API endpoint.
 - `#4254 <https://github.com/wazuh/wazuh-kibana-app/pull/4254>`_ The styles in visualizations are changed.
 
 
 Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-- `#4244 <https://github.com/wazuh/wazuh-kibana-app/pull/4244>`_ When a user goes to test a new rule in Tools / Ruleset Test, there were API messages that were not displayed. Now, this issue is fixed and the messages are displayed on the screen.
-- `#4261 <https://github.com/wazuh/wazuh-kibana-app/pull/4261>`_ An authorization prompt is added in MITRE > Intelligence.
-- `#4239 <https://github.com/wazuh/wazuh-kibana-app/pull/4239>`_ The reference from Manager is changed to the Wazuh server in the guide to deploying a new agent.
-- `#4267 <https://github.com/wazuh/wazuh-kibana-app/pull/4267>`_ The filtered tags because they were not supported by the API endpoint are removed.
+- `#4244 <https://github.com/wazuh/wazuh-kibana-app/pull/4244>`_ When a user goes to test a new rule in **Tools** / **Ruleset Test**, there were API messages that were not displayed. Now, this issue is fixed and the messages are displayed on the screen.
+- `#4261 <https://github.com/wazuh/wazuh-kibana-app/pull/4261>`_ An authorization prompt is added in **MITRE** > **Intelligence**.
+- `#4239 <https://github.com/wazuh/wazuh-kibana-app/pull/4239>`_ The reference from Manager is changed to the Wazuh server in the **Deploy new agent** guide.
+- `#4267 <https://github.com/wazuh/wazuh-kibana-app/pull/4267>`_ The filtered tags are removed because they were not supported by the API endpoint.
 - `#4254 <https://github.com/wazuh/wazuh-kibana-app/pull/4254>`_ The styles in visualizations are changed.
 
 
@@ -68,14 +67,14 @@ Wazuh Splunk app
 Packages
 ^^^^^^^^
 
-- `#1635 <https://github.com/wazuh/wazuh-packages/pull/1635>`_ The dependencies from the wazuh-indexer package are removed.
-- `#1663 <https://github.com/wazuh/wazuh-packages/pull/1663>`_ How the password tool changes the API passwords and applies the changes to the installation assistant is improved.
+- `#1635 <https://github.com/wazuh/wazuh-packages/pull/1635>`_ Removed dependencies from the wazuh-indexer package.
+- `#1663 <https://github.com/wazuh/wazuh-packages/pull/1663>`_ Improved how the password tool changes the API passwords. 
 
 
 Other
 ^^^^^
 - `#13811 <https://github.com/wazuh/wazuh/pull/13811>`_ The ``test_agent_PUT_endpoints.tavern.yaml`` API integration test failure in numbered branches is fixed.
-- `#13790 <https://github.com/wazuh/wazuh/pull/13790>`_ The external click and clickclick python dependencies to 8.1.3 and 20.10.2 respectively are upgraded.
+- `#13790 <https://github.com/wazuh/wazuh/pull/13790>`_ The external `click` and `clickclick` Python dependencies are upgraded to 8.1.3 and 20.10.2 respectively.
 
 
 Resolved issues
@@ -116,7 +115,7 @@ RESTful API
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#13867 <https://github.com/wazuh/wazuh/pull/13867>`_             The tag parameter of ``GET /manager/logs`` and ``GET /cluster/{node_id}/logs`` endpoints to accept any string is updated.
+`#13867 <https://github.com/wazuh/wazuh/pull/13867>`_             The ``tag`` parameter of ``GET /manager/logs`` and ``GET /cluster/{node_id}/logs`` endpoints is updated to accept any string.
 ==============================================================    =============
 
 
@@ -126,7 +125,7 @@ Ruleset
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#13597 <https://github.com/wazuh/wazuh/pull/13597>`_             Eventchannel testing and improved reporting capabilities of the runtest tool are solved.
+`#13597 <https://github.com/wazuh/wazuh/pull/13597>`_             Fixed Eventchannel testing and improved reporting capabilities of the runtest tool.
 `#13781 <https://github.com/wazuh/wazuh/pull/13781>`_             The Amazon Linux 2 SCA policy is modified to resolve a typo on control 1.1.22 and ``EMPTY_LINE`` conditions.
 `#13950 <https://github.com/wazuh/wazuh/pull/13950>`_             The Amazon Linux 2 SCA policy is modified to resolve the rule and condition on control 1.5.2. 
 ==============================================================    =============
@@ -197,7 +196,6 @@ Packages
 Reference                                                         Description
 ==============================================================    =============
 `#1673 <https://github.com/wazuh/wazuh-packages/pull/1673>`_      The error with the installation of the file init.d to enable Wazuh service in RHEL 9 systems is fixed.
-`#1674 <https://github.com/wazuh/wazuh-packages/pull/1674>`_      The error with the installation of the file init.d to enable Wazuh service in RHEL 9 systems is fixed. 
 `#1675 <https://github.com/wazuh/wazuh-packages/pull/1675>`_      The error with the installation of the file sysv-init to enable Wazuh service in RHEL 9 systems is fixed. 
 ==============================================================    =============
 
