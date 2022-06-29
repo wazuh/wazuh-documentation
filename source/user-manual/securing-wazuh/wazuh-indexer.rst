@@ -24,43 +24,43 @@ All the available options to run the script are:
 | Options                                      | Purpose                                                                                                     |
 +==============================================+=============================================================================================================+
 | -a / --change-all                            | Changes all the Wazuh indexer and Wazuh API user passwords and prints them on screen.                       |
-|                                              | To change API passwords -au|--admin-user and -ap|--admin-password are required                              |
+|                                              | To change API passwords -au|--admin-user and -ap|--admin-password are required.                             |
 +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
 | -A,  --api                                   | Change the Wazuh API password given the current password.                                                   |
 |                                              | Requires -u|--user, and -p|--password, -au|--admin-user and -ap|--admin-password.                           |
 +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
-| -au,--admin-user <adminUser>                 | Admin user for Wazuh API, Required to change Wazuh API passwords.                                           |
+| -au,--admin-user <adminUser>                 | Admin user for the Wazuh API. Required to change the Wazuh API passwords.                                   |
 +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
-| -ap, --admin-password <adminPassword>        | Password for Wazuh API admin user, Required to change Wazuh API passwords.                                  |
+| -ap, --admin-password <adminPassword>        | Password for the Wazuh API admin user. Required to change the Wazuh API passwords.                          |
 +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
 | -u / --user <user>                           | Indicates the name of the user whose password will be changed.                                              |
-|                                              | If no password is specified, it will generate a random one                                                  |
+|                                              | If no password is specified, it will generate a random one.                                                 |
 +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
 | -p / --password <password>                   | Indicates the new password, must be used with option -u.                                                    |
 +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+    
-| -c / --cert <route-admin-certificate>        | Indicates route to the admin certificate                                                                    |
+| -c / --cert <route-admin-certificate>        | Indicates route to the admin certificate.                                                                   |
 +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
-| -k / --certkey <route-admin-certificate-key> | Indicates route to the admin certificate key                                                                |
+| -k / --certkey <route-admin-certificate-key> | Indicates route to the admin certificate key.                                                               |
 +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
-| -v / --verbose                               | Shows the complete script execution output                                                                  |
+| -v / --verbose                               | Shows the complete script execution output.                                                                 |
 +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
 | -f / --file <password_file.yml>              | Changes the passwords for the ones given in the file.                                                       |
 |                                              |                                                                                                             |
-|                                              | Wazuh indexer users must have this format                                                                   |
+|                                              | Wazuh indexer users must have this format:                                                                  |
 |                                              |                                                                                                             |
 |                                              |    # Description                                                                                            |
 |                                              |      indexer_username: <user>                                                                               |
 |                                              |      indexer_password: <password>                                                                           |
 |                                              |                                                                                                             |
-|                                              | Wazuh API users must have this format                                                                       |
+|                                              | Wazuh API users must have this format:                                                                      |
 |                                              |                                                                                                             | 
 |                                              |    # Description                                                                                            |
 |                                              |     api_username: <user>                                                                                    |
 |                                              |      api_password: <password>                                                                               |
 +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
-| -gf, --generate-file <passwords.wazuh>       | Generate password file with random passwords for standard users                                             |
+| -gf, --generate-file <passwords.wazuh>       | Generate password file with random passwords for standard users.                                            |
 +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
-| -h / --help                                  | Shows help                                                                                                  |
+| -h / --help                                  | Shows help.                                                                                                 |
 +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
 
 Change the password for single user
