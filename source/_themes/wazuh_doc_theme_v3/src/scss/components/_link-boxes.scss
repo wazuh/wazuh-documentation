@@ -13,56 +13,63 @@
   @include media-min(lg) {
   }
   
-  &.layout-2x2 {
+  &.layout-2x2,
+  &.layout-2 {
     .link-boxes-item {
-      width: 50%;
-
-      &:nth-child(2) {
-        padding-right: 0;
-      }
+      width: calc(calc(100% - 15px) / 2 );
       @include media-max(md) {
-        width: 100%
+        width: calc(calc(100% - 15px) / 2 );
       }
-      &:nth-child(n) {
-        @include media-max(md) {
-          padding-right: 0;
-        }
+      @include media-max(sm) {
+        width: 100%;
       }
     }
   }
   
-  &.layout-2 {
+  &.layout-3 {
     .link-boxes-item {
-      width: calc(100% / 2);
-      
+      width: calc(calc(100% - 15px * 2) / 3 );
       @include media-max(md) {
-        width: 100%
+        width: 100%;
       }
-      &:nth-child(n) {
-        @include media-max(md) {
-          padding-right: 0;
-        }
+    }
+  }
+  
+  &.layout-4 {
+    .link-boxes-item {
+      width: calc(calc(100% - 15px * 3) / 4 );
+      @include media-max(md) {
+        width: calc(calc(100% - 15px) / 2 );
+      }
+      @include media-max(sm) {
+        width: 100%;
+      }
+    }
+  }
+  
+  
+  &.layout-5 {
+    .link-boxes-item {
+      width: calc(calc(100% - 15px * 4) / 5 );
+      @include media-max(md) {
+        width: calc(calc(100% - 15px) / 2 );
+      }
+      @include media-max(sm) {
+        width: 100%;
       }
     }
   }
   
   &.layout-6 {
     .link-boxes-item {
-      width: calc(100% / 6);
+      width: calc(calc(100% - 15px * 5) / 6);
       @include media-max(lg) {
-        width: calc(100% / 3);
-      }
-      
-      &:nth-child(3) {
-        @include media-max(lg) {
-          padding-right: 0;
-        }
+        width: calc(calc(100% - 15px * 2) / 3);
       }
     }
   }
 
   .link-boxes-item {
-    padding-right: 15px;
     padding-bottom: 15px;
     display: flex;
     justify-content: center;
