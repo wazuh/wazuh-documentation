@@ -154,7 +154,7 @@ Trigger the module in case the Wazuh service starts or restarts.
 interval
 ^^^^^^^^
 
-Interval between module executions.
+The interval between module executions.
 
 +--------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | 1h                                                                                                                                                             |

@@ -122,6 +122,17 @@ In the ``/var/ossec/etc/manager.conf`` file of the Wazuh manager, scroll down to
         <enabled>no</enabled>
         <os>amazon-linux</os>
         <os>amazon-linux-2</os>
+        <os>amazon-linux-2022</os>
+        <update_interval>1h</update_interval>
+      </provider>
+      <provider name="suse">
+        <enabled>no</enabled>
+        <os>11-server</os>
+        <os>11-desktop</os>
+        <os>12-server</os>
+        <os>12-desktop</os>
+        <os>15-server</os>
+        <os>15-desktop</os>
         <update_interval>1h</update_interval>
       </provider>
       <provider name="msu">

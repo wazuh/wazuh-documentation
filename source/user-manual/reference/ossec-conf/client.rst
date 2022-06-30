@@ -83,7 +83,7 @@ Specifies the protocol to use when connecting to the manager.
 max_retries
 ^^^^^^^^^^^
 
-Number of connection retries.
+The number of connection retries.
 
 +--------------------+--------------------+
 | **Default value**  | 5                  |

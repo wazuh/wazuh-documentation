@@ -5,7 +5,7 @@
 Wazuh Puppet module
 ===================
 
-This `module <https://github.com/wazuh/wazuh-puppet>`_ has been authored by Nicolas Zin and updated by Jonathan Gazeley and Michael Porter. Wazuh has forked it with the purpose of maintaining it. Thank you to the authors for the contribution.
+This `module <https://github.com/wazuh/wazuh-puppet>`_ has been authored by Nicolas Zin and updated by Jonathan Gazeley and Michael Porter. Wazuh has forked it with the purpose of maintaining it. Thank you to the authors for their contribution.
 
 
 Install Wazuh module
@@ -24,7 +24,7 @@ Download and install the Wazuh module from Puppet Forge:
     Notice: Downloading from https://forgeapi.puppet.com ...
     Notice: Installing -- do not interrupt ...
     /etc/puppetlabs/code/environments/production/modules
-    └─┬ wazuh-wazuh (v4.3.4)
+    └─┬ wazuh-wazuh (v4.3.5)
       ├── puppet-nodejs (v7.0.1)
       ├── puppet-selinux (v3.4.1)
       ├── puppetlabs-apt (v7.7.1)

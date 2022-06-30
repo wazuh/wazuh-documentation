@@ -72,7 +72,7 @@ Agent
 +                           +----------------+----------------------------------------------------------------------------------+
 |                           | Allowed value  | Any integer between 1 and 600.                                                   |
 +---------------------------+----------------+----------------------------------------------------------------------------------+
-| **agent.state_interval**  | Description    | Interval between the updates of the agent status file in seconds.                |
+| **agent.state_interval**  | Description    | The interval between the updates of the agent status file in seconds.            |
 +                           +----------------+----------------------------------------------------------------------------------+
 |                           | Default value  | 5                                                                                |
 +                           +----------------+----------------------------------------------------------------------------------+

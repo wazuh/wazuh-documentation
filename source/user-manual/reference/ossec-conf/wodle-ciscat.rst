@@ -172,7 +172,7 @@ Run evaluation immediately when service is started.
 interval
 ^^^^^^^^
 
-Interval between CIS-CAT executions.
+The interval between CIS-CAT executions.
 
 +--------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | 1d                                                                                                                                                             |
