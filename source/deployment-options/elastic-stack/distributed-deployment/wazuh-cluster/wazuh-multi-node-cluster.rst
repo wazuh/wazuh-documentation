@@ -22,12 +22,12 @@ Before installing the Wazuh servers and Filebeat, some extra packages must be in
 Installing Wazuh server
 -----------------------
 
-The Wazuh server collects and analyzes data from deployed agents. It runs the Wazuh manager, the Wazuh API and Filebeat. The first step to set up Wazuh is adding Wazuh's repository to the servers. Alternatively, the Wazuh manager package can be downloaded directly and compatible versions can be checked :doc:`here </installation-guide/packages-list>`.
+The Wazuh server collects and analyzes data from deployed agents. It runs the Wazuh manager, the Wazuh API and Filebeat. The first step in setting up Wazuh is adding Wazuh repository to the servers. Alternatively, the Wazuh manager package can be downloaded directly, and compatible versions can be checked :doc:`here </installation-guide/packages-list>`.
 
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This section describes how to add the Wazuh repository. It will be used for Wazuh manager and Wazuh API installation. These steps must be followed in all the servers that will be part of the Wazuh multi-node cluster.
+This section describes how to add the Wazuh repository. It will be used for the Wazuh manager and Wazuh API installation. These steps must be followed in all the servers that will be part of the Wazuh multi-node cluster.
 
 .. tabs::
 
@@ -49,7 +49,7 @@ This section describes how to add the Wazuh repository. It will be used for Wazu
 Installing the Wazuh manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Install the Wazuh manager package. This step must be applied in all servers that will act as a Wazuh cluster nodes:
+#. Install the Wazuh manager package. This step must be applied in all servers that will act as Wazuh cluster nodes:
 
 .. tabs::
 

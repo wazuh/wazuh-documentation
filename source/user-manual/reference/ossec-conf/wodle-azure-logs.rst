@@ -151,7 +151,7 @@ Disables the Azure-Logs wodle.
 interval
 ^^^^^^^^
 
-Interval between Azure-Logs executions.
+The interval between Azure-Logs executions.
 
 +--------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | 1d                                                                                                                                                             |

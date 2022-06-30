@@ -185,7 +185,7 @@ Once the Wazuh manager is installed from sources, you may install the Wazuh inde
 Uninstall
 ---------
 
-#. To uninstall Wazuh manager, set ``WAZUH_HOME`` with the current installation path:
+#. To uninstall the Wazuh manager, set ``WAZUH_HOME`` with the current installation path:
 
    .. code-block:: console
    
