@@ -14,7 +14,7 @@ This section lists the changes in version 4.3.5. Every update of the Wazuh solut
 What's new
 ----------
 
-This release includes new features or enhancements.
+This release includes new features or enhancements as the following:
 
 Wazuh manager
 ^^^^^^^^^^^^^
@@ -114,6 +114,13 @@ Reference                                                         Description
 ==============================================================    =============
 `#4233 <https://github.com/wazuh/wazuh-kibana-app/pull/4233>`_    The type error when changing screen size in the agent section is fixed.
 `#4235 <https://github.com/wazuh/wazuh-kibana-app/pull/4235>`_    A logged error that appeared when the statistics tasks tried to create an index with the same name, causing the second task to fail on the creation of the index because it already exists is fixed.
+`#4237 <https://github.com/wazuh/wazuh-kibana-app/pull/4237>`_    A UI crash due to a query with syntax errors in Modules/Security events is fixed.
+`#4240 <https://github.com/wazuh/wazuh-kibana-app/pull/4240>`_    An error when generating a module report after changing the selected agent is fixed.
+`#4266 <https://github.com/wazuh/wazuh-kibana-app/pull/4266>`_    An unhandled error when a Wazuh API request failed in the dev tools is fixed.
+`#4264 <https://github.com/wazuh/wazuh-kibana-app/pull/4264>`_    An error related to API not being available when saving the manager configuration and restarting the manager from Management/Configuration/Edit configuration on manager mode is fixed.
+`#4253 <https://github.com/wazuh/wazuh-kibana-app/pull/4253>`_    A UI problem that required scrolling to see the logs in Management/Logs and Settings/Logs is fixed.
+`#4244 <https://github.com/wazuh/wazuh-kibana-app/pull/4244>`_    The error management code to show API errors appropriately in the ruleset test module is fixed.
+`#4261 <https://github.com/wazuh/wazuh-kibana-app/pull/4261>`_    The errors shown to the user when accessing the MITRE section without the appropriate permissions are fixed.
 ==============================================================    =============
 
 
@@ -123,8 +130,8 @@ Wazuh Splunk app
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#1290 <https://github.com/wazuh/wazuh-splunk/pull/1290>`_        Outdated documentation links have been updated.
-`#1343 <https://github.com/wazuh/wazuh-splunk/pull/1343>`_        The Alerts view from the MITRE section has been hardened in case of errors during the requests to the API (for example timeouts).
+`#1292 <https://github.com/wazuh/wazuh-splunk/pull/1292>`_        The agents' status chart to add the pending status is fixed. 
+`#1276 <https://github.com/wazuh/wazuh-splunk/pull/1276>`_        The apply button from the group editor to allow submissions only when there are changes is fixed. 
 ==============================================================    =============
 
 Packages
